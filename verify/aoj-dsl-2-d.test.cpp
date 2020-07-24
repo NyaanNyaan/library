@@ -7,7 +7,7 @@
 void solve() {
   ini(N, Q);
   int I = (1LL << 31) - 1;
-  UpdateSum_LazySegmentTree<int> seg{vi(N,I)};
+  UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N, I)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
