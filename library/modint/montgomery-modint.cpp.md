@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#fb97f878c938d7517d3d9f7de68146e9">modint</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modint/montgomery-modint.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 16:47:00+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 
@@ -44,6 +44,8 @@ layout: default
 ## Required by
 
 * :warning: <a href="../ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
+* :warning: <a href="../verify/yosupo-convolution-ntt-sse42.cpp.html">verify/yosupo-convolution-ntt-sse42.cpp</a>
+* :warning: <a href="../verify/yosupo-convolution-ntt.cpp.html">verify/yosupo-convolution-ntt.cpp</a>
 
 
 ## Code

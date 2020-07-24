@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#921df370d67d5070df2d096914bd2eb0">shorest-path</a>
 * <a href="{{ site.github.repository_url }}/blob/master/shorest-path/dijkstra.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 15:38:36+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 

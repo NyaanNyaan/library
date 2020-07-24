@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#bc957e26ff41470c556ee5d09e96880b">misc</a>
 * <a href="{{ site.github.repository_url }}/blob/master/misc/rng.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 15:38:36+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 

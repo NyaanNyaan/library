@@ -25,20 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: data-structure/dynamic-binary-indexed-tree.cpp
+# :warning: verify/yosupo-convolution-ntt-sse42.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
-* <a href="{{ site.github.repository_url }}/blob/master/data-structure/dynamic-binary-indexed-tree.cpp">View this file on GitHub</a>
+* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-ntt-sse42.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-24 20:19:03+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :warning: <a href="../modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
+* :warning: <a href="../modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
+* :warning: <a href="../ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
 
 
 ## Code
@@ -46,52 +50,24 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#pragma once
-#ifndef Nyaan_template
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+
 #include "../competitive-template.cpp"
-#endif
+#include "../modint/montgomery-modint.cpp"
+#include "../ntt/ntt-sse42.cpp"
 
-// idx_tはlong longまでを想定
-template <typename idx_t, typename data_t>
-struct DynamicFenwickTree {
-  idx_t N;
-  unordered_map<idx_t, data_t> data;
-  DynamicFenwickTree(idx_t size) { N = ++size; }
+constexpr int MOD = 998244353;
+using mint = LazyMontgomeryModInt<MOD>;
+using vm = vector<mint>;
 
-  // iにxを加算
-  void add(idx_t k, data_t x) {
-    for (k++; k < N; k += k & -k) data[k] += x;
-  }
-
-  // [0,i]のsum
-  data_t sum(idx_t k) {
-    if (k < 0) return 0;
-    data_t ret = 0;
-    for (k++; k > 0; k -= k & -k) ret += data[k];
-    return ret;
-  }
-
-  // [a,b]のsum
-  data_t sum(idx_t a, idx_t b) { return sum(b) - sum(a - 1); }
-
-  idx_t lower_bound(data_t w) {
-    if (w <= 0) return 0;
-    idx_t x = 0;
-    for (idx_t k = 1 << (63 - __builtin_clzll((long long)(x))); k > 0; k /= 2) {
-      if (x + k <= N - 1 && data[x + k] < w) {
-        w -= data[x + k];
-        x += k;
-      }
-    }
-    return x;
-  }
-
-  void merge(DynamicFenwickTree<idx_t, data_t>& other) {
-    if (data.size() < other.data.size()) data.swap(other.data);
-    for (auto& x : other.data) data[x.fi] += x.se;
-  }
-};
-
+void solve() {
+  NTT<mint> ntt;
+  ini(N, M);
+  vm a(N),b(M);
+  in(a,b);
+  auto c = ntt.multiply(a,b);
+  out(c);
+}
 ```
 {% endraw %}
 
@@ -103,9 +79,11 @@ Traceback (most recent call last):
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
+    self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: data-structure/dynamic-binary-indexed-tree.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

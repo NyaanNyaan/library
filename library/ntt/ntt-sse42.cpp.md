@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-sse42.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 17:20:49+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 
@@ -45,6 +45,7 @@ layout: default
 ## Required by
 
 * :warning: <a href="arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
+* :warning: <a href="../verify/yosupo-convolution-ntt-sse42.cpp.html">verify/yosupo-convolution-ntt-sse42.cpp</a>
 
 
 ## Code
@@ -124,7 +125,7 @@ struct NTT {
     }
   }
 
-  void ntt(mint *a, int n) {
+  __attribute__((target("sse4.2"))) void ntt(mint *a, int n) {
     int k = n ? __builtin_ctz(n) : 0;
     if (k == 0) return;
     if (k == 1) {
@@ -232,7 +233,8 @@ struct NTT {
     }
   }
 
-  constexpr void intt(mint *a, int n, int normalize = true) {
+  __attribute__((target("sse4.2"))) void intt(mint *a, int n,
+                                              int normalize = true) {
     int k = n ? __builtin_ctz(n) : 0;
     if (k == 0) return;
     if (k == 1) {

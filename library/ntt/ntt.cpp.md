@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 16:47:00+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 
@@ -39,6 +39,11 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Required by
+
+* :warning: <a href="../verify/yosupo-convolution-ntt.cpp.html">verify/yosupo-convolution-ntt.cpp</a>
 
 
 ## Code
@@ -53,8 +58,43 @@ layout: default
 
 template <typename mint>
 struct NTT {
+  static constexpr uint32_t get_pr() {
+    uint32_t mod = mint::get_mod();
+    using u64 = uint64_t;
+    u64 ds[32] = {};
+    int idx = 0;
+    u64 m = mod - 1;
+    for (u64 i = 2; i * i <= m; ++i) {
+      if (m % i == 0) {
+        ds[idx++] = i;
+        while (m % i == 0) m /= i;
+      }
+    }
+    if (m != 1) ds[idx++] = m;
+
+    uint32_t pr = 2;
+    while (1) {
+      int flg = 1;
+      for (int i = 0; i < idx; ++i) {
+        u64 a = pr, b = (mod - 1) / ds[i], r = 1;
+        while (b) {
+          if (b & 1) r = r * a % mod;
+          a = a * a % mod;
+          b >>= 1;
+        }
+        if (r == 1) {
+          flg = 0;
+          break;
+        }
+      }
+      if (flg == 1) break;
+      ++pr;
+    }
+    return pr;
+  };
+
   static constexpr uint32_t mod = mint::get_mod();
-  static constexpr uint32_t pr = get_pr(mod);
+  static constexpr uint32_t pr = get_pr();
   static constexpr int level = __builtin_ctzll(mod - 1);
   mint dw[level], dy[level];
 

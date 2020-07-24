@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segment-tree/range-add-range-min-lazyseg.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 15:38:36+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 

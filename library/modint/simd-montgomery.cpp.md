@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#fb97f878c938d7517d3d9f7de68146e9">modint</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modint/simd-montgomery.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 17:20:49+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 
@@ -45,6 +45,7 @@ layout: default
 
 * :warning: <a href="../ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
 * :warning: <a href="../ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :warning: <a href="../verify/yosupo-convolution-ntt-sse42.cpp.html">verify/yosupo-convolution-ntt-sse42.cpp</a>
 
 
 ## Code
@@ -62,13 +63,13 @@ constexpr int SZ = 1 << 19;
 using u32 = uint32_t;
 using u64 = uint64_t;
 
-__attribute__((always_inline)) __m128i my_mullo_epu32(const __m128i &a,
-                                                      const __m128i &b) {
+__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
+my_mullo_epu32(const __m128i &a, const __m128i &b) {
   return _mm_mullo_epi32(a, b);
 }
 
-__attribute__((always_inline)) __m128i my_mulhi_epu32(const __m128i &a,
-                                                      const __m128i &b) {
+__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
+my_mulhi_epu32(const __m128i &a, const __m128i &b) {
   __m128i a13 = _mm_shuffle_epi32(a, 0xF5);
   __m128i b13 = _mm_shuffle_epi32(b, 0xF5);
   __m128i prod02 = _mm_mul_epu32(a, b);
@@ -78,27 +79,27 @@ __attribute__((always_inline)) __m128i my_mulhi_epu32(const __m128i &a,
   return prod;
 }
 
-__attribute__((always_inline)) __m128i montgomery_mul(const __m128i &a,
-                                                      const __m128i &b,
-                                                      const __m128i &r,
-                                                      const __m128i &m1) {
+__attribute__((target("sse4.2"))) __m128i montgomery_mul(const __m128i &a,
+                                                         const __m128i &b,
+                                                         const __m128i &r,
+                                                         const __m128i &m1) {
   return _mm_sub_epi32(
       _mm_add_epi32(my_mulhi_epu32(a, b), m1),
       my_mulhi_epu32(my_mullo_epu32(my_mullo_epu32(a, b), r), m1));
 }
 
-__attribute__((always_inline)) __m128i montgomery_add(const __m128i &a,
-                                                      const __m128i &b,
-                                                      const __m128i &m2,
-                                                      const __m128i &m0) {
+__attribute__((target("sse4.2"))) __m128i montgomery_add(const __m128i &a,
+                                                         const __m128i &b,
+                                                         const __m128i &m2,
+                                                         const __m128i &m0) {
   __m128i ret = _mm_sub_epi32(_mm_add_epi32(a, b), m2);
   return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0, ret), m2), ret);
 }
 
-__attribute__((always_inline)) __m128i montgomery_sub(const __m128i &a,
-                                                      const __m128i &b,
-                                                      const __m128i &m2,
-                                                      const __m128i &m0) {
+__attribute__((target("sse4.2"))) __m128i montgomery_sub(const __m128i &a,
+                                                         const __m128i &b,
+                                                         const __m128i &m2,
+                                                         const __m128i &m0) {
   __m128i ret = _mm_sub_epi32(a, b);
   return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0, ret), m2), ret);
 }

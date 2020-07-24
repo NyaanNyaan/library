@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/semiring.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 15:02:17+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 

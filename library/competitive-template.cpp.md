@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../index.html#5058f1af8388633f609cadb75a75dc9d">.</a>
 * <a href="{{ site.github.repository_url }}/blob/master/competitive-template.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 12:55:01+09:00
+    - Last commit date: 2020-07-24 20:19:03+09:00
 
 
 
@@ -100,6 +100,8 @@ layout: default
 * :warning: <a href="shorest-path/bellman-ford.cpp.html">shorest-path/bellman-ford.cpp</a>
 * :warning: <a href="shorest-path/dijkstra.cpp.html">shorest-path/dijkstra.cpp</a>
 * :warning: <a href="shorest-path/warshall-floyd.cpp.html">shorest-path/warshall-floyd.cpp</a>
+* :warning: <a href="verify/yosupo-convolution-ntt-sse42.cpp.html">verify/yosupo-convolution-ntt-sse42.cpp</a>
+* :warning: <a href="verify/yosupo-convolution-ntt.cpp.html">verify/yosupo-convolution-ntt.cpp</a>
 
 
 ## Verified with
@@ -181,19 +183,6 @@ inline bool amin(T &x, U y) {
 template <typename T, typename U>
 inline bool amax(T &x, U y) {
   return (x < y) ? (x = y, true) : false;
-}
-template <typename T, typename U>
-T ceil(T a, U b) {
-  return (a + b - 1) / b;
-}
-constexpr long long TEN(int n) {
-  long long ret = 1, x = 10;
-  while (n) {
-    if (n & 1) ret *= x;
-    x *= x;
-    n >>= 1;
-  }
-  return ret;
 }
 template <typename T, typename U>
 ostream &operator<<(ostream &os, const pair<T, U> &p) {
@@ -280,6 +269,23 @@ int ub(const vector<T> &v, const T &a) {
   return upper_bound(begin(v), end(v), a) - begin(v);
 }
 template <typename T>
+int btw(T a, T x, T b) {
+  return a <= x && x < b;
+}
+template <typename T, typename U>
+T ceil(T a, U b) {
+  return (a + b - 1) / b;
+}
+constexpr long long TEN(int n) {
+  long long ret = 1, x = 10;
+  while (n) {
+    if (n & 1) ret *= x;
+    x *= x;
+    n >>= 1;
+  }
+  return ret;
+}
+template <typename T>
 vector<T> mkrui(const vector<T> &v) {
   vector<T> ret(v.size() + 1);
   for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];
@@ -305,12 +311,13 @@ vector<T> mkiota(int N) {
   iota(begin(ret), end(ret), 0);
   return ret;
 }
-template <typename T = int>
-vector<T> mkinv(vector<T> &v) {
-  vector<T> inv(v.size());
+template <typename T>
+vector<int> mkinv(vector<T> &v) {
+  vector<int> inv(v.size());
   for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;
   return inv;
 }
+
 struct IoSetupNya {
   IoSetupNya() {
     cin.tie(nullptr);
@@ -320,8 +327,6 @@ struct IoSetupNya {
   }
 } iosetupnya;
 #pragma endregion
-
-constexpr int MOD = /**/ 998244353;  //*/ 1000000007;
 ```
 {% endraw %}
 
@@ -335,7 +340,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 121: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}
