@@ -100,3 +100,6 @@ struct ArbitraryLazyMontgomeryModInt {
 
   static u32 get_mod() { return mod; }
 };
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;

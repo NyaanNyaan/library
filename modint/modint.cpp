@@ -76,5 +76,3 @@ struct ModInt {
 
   static constexpr int get_mod() { return mod; }
 };
-using mint = ModInt<MOD>;
-using vm = vector<mint>;

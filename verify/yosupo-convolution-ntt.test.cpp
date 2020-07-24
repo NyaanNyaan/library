@@ -11,8 +11,8 @@ using vm = vector<mint>;
 void solve() {
   NTT<mint> ntt;
   ini(N, M);
-  vm a(N),b(M);
-  in(a,b);
-  auto c = ntt.multiply(a,b);
+  vm a(N), b(M);
+  in(a, b);
+  auto c = ntt.multiply(a, b);
   out(c);
 }

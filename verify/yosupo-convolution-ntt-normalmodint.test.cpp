@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
 #include "../competitive-template.cpp"
-#include "../modint/montgomery-modint.cpp"
-#include "../ntt/ntt-sse42.cpp"
+#include "../modint/modint.cpp"
+#include "../ntt/ntt.cpp"
 
 constexpr int MOD = 998244353;
-using mint = LazyMontgomeryModInt<MOD>;
+using mint = ModInt<MOD>;
 using vm = vector<mint>;
 
 void solve() {

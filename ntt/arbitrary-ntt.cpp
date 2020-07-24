@@ -3,9 +3,10 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "../modint/arbitrary-modint.cpp"
+#include "../modint/arbitrary-prime-modint.cpp"
 #include "../modint/montgomery-modint.cpp"
 #include "../modint/simd-montgomery.cpp"
-#include "../modint/arbitrary-modint.cpp"
 #include "./ntt-sse42.cpp"
 
 namespace ArbitraryNTT {
@@ -98,6 +99,20 @@ vector<ArbitraryModInt> multiply(const vector<ArbitraryModInt> &a,
   vector<int> u = multiply(s, t, ArbitraryModInt::get_mod());
   vector<mint> ret(u.size());
   for (int i = 0; i < (int)u.size(); ++i) ret[i].x = u[i];
+  return std::move(ret);
+}
+
+vector<ArbitraryLazyMontgomeryModInt> multiply(
+    const vector<ArbitraryLazyMontgomeryModInt> &a,
+    const vector<ArbitraryLazyMontgomeryModInt> &b) {
+  using mint = ArbitraryLazyMontgomeryModInt;
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply(s, t, mint::get_mod());
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i)
+    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
   return std::move(ret);
 }
 }  // namespace ArbitraryNTT
