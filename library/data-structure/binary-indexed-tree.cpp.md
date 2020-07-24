@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: data-structure/binary-indexed-tree.cpp
+# :heavy_check_mark: data-structure/binary-indexed-tree.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,6 +39,11 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-b-bit.test.cpp.html">verify/aoj-dsl-2-b-bit.test.cpp</a>
 
 
 ## Code
