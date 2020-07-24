@@ -42,12 +42,12 @@ layout: default
 * :warning: <a href="data-structure/2d-cumulative-sum.cpp.html">data-structure/2d-cumulative-sum.cpp</a>
 * :warning: <a href="data-structure/binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
 * :warning: <a href="data-structure/dynamic-binary-indexed-tree.cpp.html">data-structure/dynamic-binary-indexed-tree.cpp</a>
-* :warning: <a href="data-structure/dynamic-union-find.cpp.html">data-structure/dynamic-union-find.cpp</a>
+* :heavy_check_mark: <a href="data-structure/dynamic-union-find.cpp.html">data-structure/dynamic-union-find.cpp</a>
 * :warning: <a href="data-structure/sliding-window-minimum.cpp.html">data-structure/sliding-window-minimum.cpp</a>
 * :warning: <a href="data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
 * :warning: <a href="data-structure/square-decomposition.cpp.html">data-structure/square-decomposition.cpp</a>
-* :warning: <a href="data-structure/union-find-with-potential.cpp.html">data-structure/union-find-with-potential.cpp</a>
-* :warning: <a href="data-structure/union-find.cpp.html">data-structure/union-find.cpp</a>
+* :heavy_check_mark: <a href="data-structure/union-find-with-potential.cpp.html">data-structure/union-find-with-potential.cpp</a>
+* :heavy_check_mark: <a href="data-structure/union-find.cpp.html">data-structure/union-find.cpp</a>
 * :warning: <a href="dp/dsu-on-tree.cpp.html">dp/dsu-on-tree.cpp</a>
 * :warning: <a href="dp/rerooting.cpp.html">dp/rerooting.cpp</a>
 * :warning: <a href="dp/subsequence-dp.cpp.html">dp/subsequence-dp.cpp</a>
@@ -104,6 +104,9 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-1-a-dynamic.test.cpp.html">verify/aoj-dsl-1-a-dynamic.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-1-a.test.cpp.html">verify/aoj-dsl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-1-b.test.cpp.html">verify/aoj-dsl-1-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-a-plus-b.test.cpp.html">verify/yosupo-a-plus-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
