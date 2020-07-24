@@ -3,19 +3,19 @@
 #include "../competitive-template.cpp"
 #endif
 
-template <typename E, E MINF>
-struct AddMax_LazySegmentTree {
+template <typename E>
+struct AddSum_LazySegmentTree {
   int n, height;
-  using T = E;
-  T f(T a, T b) { return max(a, b); };
-  T g(T a, E b) { return a + b; };
+  using T = pair<E, E>;
+  T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
+  T g(T a, E b) { return T(a.first + b * a.second, a.second); };
   E h(E a, E b) { return a + b; };
-  T ti = MINF;
+  T ti = P(0, 0);
   E ei = 0;
   vector<T> dat;
   vector<E> laz;
 
-  AddMax_LazySegmentTree(const vector<E> &v) { build(v); }
+  AddSum_LazySegmentTree(const vector<E> &v) { build(v); }
 
   void init(int n_) {
     n = 1;
@@ -28,7 +28,7 @@ struct AddMax_LazySegmentTree {
   void build(const vector<E> &v) {
     int n_ = v.size();
     init(n_);
-    for (int i = 0; i < n_; i++) dat[n + i] = v[i];
+    for (int i = 0; i < n_; i++) dat[n + i] = T(v[i], 1);
     for (int i = n - 1; i; i--)
       dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);
   }
@@ -70,8 +70,8 @@ struct AddMax_LazySegmentTree {
     recalc(a);
   }
 
-  T query(int a, int b) {
-    if (a >= b) return ti;
+  E query(int a, int b) {
+    if (a >= b) return ti.first;
     thrust(a += n);
     thrust(b += n - 1);
     T vl = ti, vr = ti;
@@ -79,6 +79,6 @@ struct AddMax_LazySegmentTree {
       if (l & 1) vl = f(vl, reflect(l++));
       if (r & 1) vr = f(reflect(--r), vr);
     }
-    return f(vl, vr);
+    return f(vl, vr).first;
   }
 };

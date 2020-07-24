@@ -11,7 +11,7 @@ struct BinaryIndexedTree {
 
   BinaryIndexedTree(int size) {
     N = ++size;
-    data.assign(N, 0);
+    data.assign(N + 3, 0);
     max_2beki = 1;
     while (max_2beki * 2 <= N) max_2beki *= 2;
   }
