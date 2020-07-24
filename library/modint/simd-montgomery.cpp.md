@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: modint/simd-montgomery.cpp
+# :heavy_check_mark: modint/simd-montgomery.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -44,8 +44,12 @@ layout: default
 ## Required by
 
 * :warning: <a href="../ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
-* :warning: <a href="../ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
-* :warning: <a href="../verify/yosupo-convolution-ntt-sse42.cpp.html">verify/yosupo-convolution-ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="../ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-ntt-sse42.test.cpp.html">verify/yosupo-convolution-ntt-sse42.test.cpp</a>
 
 
 ## Code

@@ -79,11 +79,11 @@ layout: default
 * :warning: <a href="modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
 * :warning: <a href="modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
 * :warning: <a href="modint/modint.cpp.html">modint/modint.cpp</a>
-* :warning: <a href="modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
-* :warning: <a href="modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
+* :heavy_check_mark: <a href="modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
+* :heavy_check_mark: <a href="modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
 * :warning: <a href="ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
-* :warning: <a href="ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
-* :warning: <a href="ntt/ntt.cpp.html">ntt/ntt.cpp</a>
+* :heavy_check_mark: <a href="ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="ntt/ntt.cpp.html">ntt/ntt.cpp</a>
 * :warning: <a href="segment-tree/dynamic-li-chao-tree.cpp.html">segment-tree/dynamic-li-chao-tree.cpp</a>
 * :warning: <a href="segment-tree/dynamic-segment-tree.cpp.html">segment-tree/dynamic-segment-tree.cpp</a>
 * :warning: <a href="segment-tree/lazy-segment-tree.cpp.html">segment-tree/lazy-segment-tree.cpp</a>
@@ -100,13 +100,13 @@ layout: default
 * :warning: <a href="shorest-path/bellman-ford.cpp.html">shorest-path/bellman-ford.cpp</a>
 * :warning: <a href="shorest-path/dijkstra.cpp.html">shorest-path/dijkstra.cpp</a>
 * :warning: <a href="shorest-path/warshall-floyd.cpp.html">shorest-path/warshall-floyd.cpp</a>
-* :warning: <a href="verify/yosupo-convolution-ntt-sse42.cpp.html">verify/yosupo-convolution-ntt-sse42.cpp</a>
-* :warning: <a href="verify/yosupo-convolution-ntt.cpp.html">verify/yosupo-convolution-ntt.cpp</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../verify/verify/yosupo-a-plus-b.test.cpp.html">verify/yosupo-a-plus-b.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/yosupo-convolution-ntt-sse42.test.cpp.html">verify/yosupo-convolution-ntt-sse42.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/yosupo-convolution-ntt.test.cpp.html">verify/yosupo-convolution-ntt.test.cpp</a>
 
 
 ## Code

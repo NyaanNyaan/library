@@ -40,9 +40,9 @@ layout: default
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 * :warning: <a href="../modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
-* :warning: <a href="../modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
-* :warning: <a href="../modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
-* :warning: <a href="ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="../modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
+* :heavy_check_mark: <a href="ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
 
 
 ## Code

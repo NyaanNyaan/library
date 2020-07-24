@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: verify/yosupo-convolution-ntt.cpp
+# :heavy_check_mark: verify/yosupo-convolution-ntt.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-ntt.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-ntt.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-24 20:25:54+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :warning: <a href="../modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
-* :warning: <a href="../ntt/ntt.cpp.html">ntt/ntt.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/ntt.cpp.html">ntt/ntt.cpp</a>
 
 
 ## Code

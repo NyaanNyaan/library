@@ -129,8 +129,8 @@ layout: default
 * :warning: <a href="library/modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
 * :warning: <a href="library/modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
 * :warning: <a href="library/modint/modint.cpp.html">modint/modint.cpp</a>
-* :warning: <a href="library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
-* :warning: <a href="library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
+* :heavy_check_mark: <a href="library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
+* :heavy_check_mark: <a href="library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
 
 
 <div id="ccb3669c87b2d028539237c4554e3c0f"></div>
@@ -138,8 +138,8 @@ layout: default
 ### ntt
 
 * :warning: <a href="library/ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
-* :warning: <a href="library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
-* :warning: <a href="library/ntt/ntt.cpp.html">ntt/ntt.cpp</a>
+* :heavy_check_mark: <a href="library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="library/ntt/ntt.cpp.html">ntt/ntt.cpp</a>
 
 
 <div id="cf992883f659a62542b674f4570b728a"></div>
@@ -187,16 +187,10 @@ layout: default
 * :warning: <a href="library/string/suffix-array.cpp.html">string/suffix-array.cpp</a>
 
 
-<div id="e8418d1d706cd73548f9f16f1d55ad6e"></div>
-
-### verify
-
-* :warning: <a href="library/verify/yosupo-convolution-ntt-sse42.cpp.html">verify/yosupo-convolution-ntt-sse42.cpp</a>
-* :warning: <a href="library/verify/yosupo-convolution-ntt.cpp.html">verify/yosupo-convolution-ntt.cpp</a>
-
-
 ## Verify Files
 
 * :heavy_check_mark: <a href="verify/verify/yosupo-a-plus-b.test.cpp.html">verify/yosupo-a-plus-b.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/yosupo-convolution-ntt-sse42.test.cpp.html">verify/yosupo-convolution-ntt-sse42.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/yosupo-convolution-ntt.test.cpp.html">verify/yosupo-convolution-ntt.test.cpp</a>
 
 

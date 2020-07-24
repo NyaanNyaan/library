@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: ntt/ntt.cpp
+# :heavy_check_mark: ntt/ntt.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -41,9 +41,9 @@ layout: default
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
-## Required by
+## Verified with
 
-* :warning: <a href="../verify/yosupo-convolution-ntt.cpp.html">verify/yosupo-convolution-ntt.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-ntt.test.cpp.html">verify/yosupo-convolution-ntt.test.cpp</a>
 
 
 ## Code
