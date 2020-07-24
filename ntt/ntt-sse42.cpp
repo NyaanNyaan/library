@@ -5,6 +5,9 @@
 
 #include "../modint/simd-montgomery.cpp"
 
+uint32_t buf1_[SZ * 2] __attribute__((aligned(64)));
+uint32_t buf2_[SZ * 2] __attribute__((aligned(64)));
+
 template <typename mint>
 struct NTT {
   static constexpr uint32_t get_pr() {
@@ -50,8 +53,8 @@ struct NTT {
 
   NTT() {
     setwy(level);
-    buf1 = reinterpret_cast<mint *>(::b1);
-    buf2 = reinterpret_cast<mint *>(::b2);
+    buf1 = reinterpret_cast<mint *>(::buf1_);
+    buf2 = reinterpret_cast<mint *>(::buf2_);
   }
 
   constexpr void setwy(int k) {
@@ -293,13 +296,12 @@ struct NTT {
   constexpr vector<mint> multiply(const vector<mint> &a,
                                   const vector<mint> &b) {
     int l = a.size() + b.size() - 1;
-    /*
     if (min<int>(a.size(), b.size()) <= 40) {
       vector<mint> s(l);
       for (int i = 0; i < (int)a.size(); ++i)
         for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
       return s;
-    }*/
+    }
     int M = 4;
     while (M < l) M <<= 1;
     for (int i = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;

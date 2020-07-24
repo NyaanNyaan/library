@@ -7,8 +7,6 @@ constexpr int SZ = 1 << 19;
 #include <immintrin.h>
 using u32 = uint32_t;
 using u64 = uint64_t;
-u32 b1[SZ * 2] __attribute__((aligned(64)));
-u32 b2[SZ * 2] __attribute__((aligned(64)));
 
 __attribute__((always_inline)) __m128i my_mullo_epu32(const __m128i &a,
                                                       const __m128i &b) {
