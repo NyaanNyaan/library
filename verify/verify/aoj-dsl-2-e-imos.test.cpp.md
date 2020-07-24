@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-e-imos.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:25:00+09:00
+    - Last commit date: 2020-07-25 05:44:18+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="../../library/data-structure/binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
 
 
 ## Code
@@ -60,9 +60,9 @@ void solve() {
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(s,t,x);
-      s--,t--;
-      bit.imos(s,t,x);
+      ini(s, t, x);
+      s--, t--;
+      bit.imos(s, t, x);
     } else {
       ini(i);
       i--;

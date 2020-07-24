@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: segment-tree/range-add-range-sum-lazyseg.cpp
+# :heavy_check_mark: segment-tree/range-add-range-sum-lazyseg.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -44,7 +44,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-e.test.cpp.html">verify/aoj-dsl-2-e.test.cpp</a>
-* :x: <a href="../../verify/verify/aoj-dsl-2-g.test.cpp.html">verify/aoj-dsl-2-g.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-g.test.cpp.html">verify/aoj-dsl-2-g.test.cpp</a>
 
 
 ## Code

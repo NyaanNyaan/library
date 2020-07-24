@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: data-structure/range-sum-range-add-bit.cpp
+# :heavy_check_mark: data-structure/range-sum-range-add-bit.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,12 +39,12 @@ layout: default
 ## Depends on
 
 * :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
+* :heavy_check_mark: <a href="binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/aoj-dsl-2-g-bit.test.cpp.html">verify/aoj-dsl-2-g-bit.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-g-bit.test.cpp.html">verify/aoj-dsl-2-g-bit.test.cpp</a>
 
 
 ## Code

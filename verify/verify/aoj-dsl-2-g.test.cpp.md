@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify/aoj-dsl-2-g.test.cpp
+# :heavy_check_mark: verify/aoj-dsl-2-g.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-g.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:33:28+09:00
+    - Last commit date: 2020-07-25 05:44:18+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="../../library/segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
+* :heavy_check_mark: <a href="../../library/segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
 
 
 ## Code
@@ -56,7 +56,7 @@ layout: default
 
 void solve() {
   ini(N, Q);
-  AddSum_LazySegmentTree<int> seg({vi(N)});
+  AddSum_LazySegmentTree<ll> seg({vl(N)});
   rep(_, Q) {
     ini(c);
     if (c == 0) {

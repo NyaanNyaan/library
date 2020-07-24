@@ -44,6 +44,7 @@ layout: default
 ## Verified with
 
 * :x: <a href="../../verify/verify/aoj-dsl-2-d.test.cpp.html">verify/aoj-dsl-2-d.test.cpp</a>
+* :x: <a href="../../verify/verify/aoj-dsl-2-i.test.cpp.html">verify/aoj-dsl-2-i.test.cpp</a>
 
 
 ## Code

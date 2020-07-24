@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-d.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:33:28+09:00
+    - Last commit date: 2020-07-25 05:44:18+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D</a>
@@ -56,16 +56,17 @@ layout: default
 
 void solve() {
   ini(N, Q);
-  UpdateSum_LazySegmentTree<int> seg{vi(N)};
+  int I = (1LL << 31) - 1;
+  UpdateSum_LazySegmentTree<int> seg{vi(N,I)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(s,t,x);
+      ini(s, t, x);
       t++;
-      seg.update(s,t,x);
+      seg.update(s, t, x);
     } else {
       ini(i);
-      out(seg.query(i,i+1));
+      out(seg.query(i, i + 1));
     }
   }
 }

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-f-max.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:25:00+09:00
+    - Last commit date: 2020-07-25 05:44:18+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F</a>
@@ -57,17 +57,17 @@ layout: default
 void solve() {
   ini(N, Q);
   constexpr int I = (1LL << 31) - 1;
-  UpdateMax_LazySegmentTree<int,-I> seg(vi(N, -I));
+  UpdateMax_LazySegmentTree<int, -I> seg(vi(N, -I));
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(s,t,x);
+      ini(s, t, x);
       t++;
-      seg.update(s,t,-x);
+      seg.update(s, t, -x);
     } else {
-      ini(s,t);
+      ini(s, t);
       t++;
-      out(-seg.query(s,t));
+      out(-seg.query(s, t));
     }
   }
 }
