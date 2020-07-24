@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 template <typename E, E MINF>
 struct UpdateMax_LazySegmentTree {
   int n, height;

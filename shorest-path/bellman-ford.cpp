@@ -1,3 +1,10 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
+#include "../graph/graph-template.cpp"
+
 // bellman-ford法
 // goalが存在しないとき-> 負閉路が存在するときは空列を返す
 // goalが存在するとき  -> startとgoalの間に負閉路が存在する時に負閉路を返す

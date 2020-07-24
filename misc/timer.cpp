@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 struct Timer {
   chrono::high_resolution_clock::time_point st;
 

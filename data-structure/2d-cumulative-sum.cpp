@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 // Don't Forget to call build() !!!!!
 template <class T>
 struct CumulativeSum2D {

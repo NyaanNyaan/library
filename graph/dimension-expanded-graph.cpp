@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 template <int DIM>
 struct DimensionExpandedGraph {
   using i64 = long long;

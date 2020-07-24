@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 template <typename T, typename E>
 struct Range_Weighted_Add_Range_Sum_SegTree {
   int n, height;

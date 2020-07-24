@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 template <typename G, typename UPDATE, typename QUERY, typename CLEAR,
           typename RESET>
 struct DSUonTree {

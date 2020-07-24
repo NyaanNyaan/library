@@ -1,5 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
 
-// Sparse Table
 template <typename T>
 struct SparseTable {
   vector<vector<T> > table;

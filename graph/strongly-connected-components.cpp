@@ -1,9 +1,13 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 // Strongly Connected Components
 // initialize        ... StronglyConnectedComponents scc(g);
 // build             ... vvi h; scc.build(h);
 // new node of k     ... scc[k]
 // inv of scc[k] = i ... scc.belong(i)
-
 template <typename G>
 struct StronglyConnectedComponents {
   const G &g;

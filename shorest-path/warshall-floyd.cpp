@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 // ワーシャルフロイド法
 template<typename T>
 void warshall_floyd(T& d){

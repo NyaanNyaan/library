@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 // Rerooting
 // f1(c1, c2) ... merge value of child node
 // f2(memo[i] , i) ... return value to parent node

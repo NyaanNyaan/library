@@ -1,3 +1,10 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
+#include "../graph/graph-template.cpp"
+
 // unreachable -> -1 
 template<typename T>
 vector<T> dijkstra(WeightedGraph<T> &g, int start = 0){ 

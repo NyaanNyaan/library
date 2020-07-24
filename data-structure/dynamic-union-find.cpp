@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 struct DynamicUnionFind {
   unordered_map<int, int> m;
   DynamicUnionFind() {}

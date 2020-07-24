@@ -1,3 +1,7 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
 
 template <typename T, T INF>
 struct DynamicLiChaoTree {

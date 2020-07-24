@@ -1,25 +1,12 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
+#include "./timer.cpp"
+#include "./rng.cpp"
+
 namespace Simulated_Annealing {
-
-// timer
-struct Timer {
-  chrono::high_resolution_clock::time_point st;
-
-  Timer() { reset(); }
-
-  void reset() { st = chrono::high_resolution_clock::now(); }
-
-  chrono::milliseconds::rep elapsed() {
-    auto ed = chrono::high_resolution_clock::now();
-    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();
-  }
-};
-
-// random number generator
-unsigned long long rng() {
-  static unsigned long long x_ = 88172645463325252ULL;
-  x_ = x_ ^ (x_ << 7);
-  return x_ = x_ ^ (x_ >> 9);
-}
 
 // exp高速化用のlogテーブル
 // exp(d/T) > rng()  <=>  d > T * log(rng)を使い前計算

@@ -1,3 +1,7 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
 
 struct Mo {
   int width;

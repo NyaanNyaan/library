@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 struct UnionFind {
   vector<int> data;
   UnionFind(int N) : data(N, -1) {}

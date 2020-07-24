@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 template <typename T, typename F, int NODES = 4194304>
 struct DynamicSegmentTree {
   using ll = long long;

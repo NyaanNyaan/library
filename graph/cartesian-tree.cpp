@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 // return value : pair<graph, root>
 template <typename T>
 pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {

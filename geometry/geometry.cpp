@@ -1,3 +1,7 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
 
 using Real = long double;
 using Point = complex<Real>;

@@ -1,7 +1,11 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 // if you want to reserve memory at once,
 // activate below line, and change type of pool properly.
 // #define reserve_pool_at_once
-
 template <typename T>
 struct _Node {
   T data;

@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 // euler tour of node
 struct EulerTour {
   struct UnionFind {
