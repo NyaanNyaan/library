@@ -2,7 +2,7 @@
 
 #include "../competitive-template.cpp"
 
-int main() {
+void solve() {
   ini(a, b);
   out(a + b);
 }
