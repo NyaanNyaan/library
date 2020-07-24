@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="../data-structure/union-find.cpp.html">data-structure/union-find.cpp</a>
 * :warning: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
 

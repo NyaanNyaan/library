@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: competitive-template.cpp
+# :question: competitive-template.cpp
 
 <a href="../index.html">Back to top page</a>
 
@@ -43,6 +43,7 @@ layout: default
 * :heavy_check_mark: <a href="data-structure/binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
 * :warning: <a href="data-structure/dynamic-binary-indexed-tree.cpp.html">data-structure/dynamic-binary-indexed-tree.cpp</a>
 * :heavy_check_mark: <a href="data-structure/dynamic-union-find.cpp.html">data-structure/dynamic-union-find.cpp</a>
+* :warning: <a href="data-structure/range-sum-range-add-bit.cpp.html">data-structure/range-sum-range-add-bit.cpp</a>
 * :warning: <a href="data-structure/sliding-window-minimum.cpp.html">data-structure/sliding-window-minimum.cpp</a>
 * :warning: <a href="data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
 * :warning: <a href="data-structure/square-decomposition.cpp.html">data-structure/square-decomposition.cpp</a>
@@ -91,10 +92,10 @@ layout: default
 * :warning: <a href="segment-tree/persistent-segment-tree.cpp.html">segment-tree/persistent-segment-tree.cpp</a>
 * :warning: <a href="segment-tree/range-add-range-max-lazyseg.cpp.html">segment-tree/range-add-range-max-lazyseg.cpp</a>
 * :warning: <a href="segment-tree/range-add-range-min-lazyseg.cpp.html">segment-tree/range-add-range-min-lazyseg.cpp</a>
-* :warning: <a href="segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
-* :warning: <a href="segment-tree/range-update-range-max-lazyseg.cpp.html">segment-tree/range-update-range-max-lazyseg.cpp</a>
-* :warning: <a href="segment-tree/range-update-range-min-lazyseg.cpp.html">segment-tree/range-update-range-min-lazyseg.cpp</a>
-* :warning: <a href="segment-tree/range-update-range-sum-lazyseg.cpp.html">segment-tree/range-update-range-sum-lazyseg.cpp</a>
+* :heavy_check_mark: <a href="segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
+* :heavy_check_mark: <a href="segment-tree/range-update-range-max-lazyseg.cpp.html">segment-tree/range-update-range-max-lazyseg.cpp</a>
+* :heavy_check_mark: <a href="segment-tree/range-update-range-min-lazyseg.cpp.html">segment-tree/range-update-range-min-lazyseg.cpp</a>
+* :x: <a href="segment-tree/range-update-range-sum-lazyseg.cpp.html">segment-tree/range-update-range-sum-lazyseg.cpp</a>
 * :warning: <a href="segment-tree/range-weighted-add-range-sum-lazyseg.cpp.html">segment-tree/range-weighted-add-range-sum-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
 * :warning: <a href="shorest-path/bellman-ford.cpp.html">shorest-path/bellman-ford.cpp</a>
@@ -110,6 +111,11 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-a-segtree.test.cpp.html">verify/aoj-dsl-2-a-segtree.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-b-bit.test.cpp.html">verify/aoj-dsl-2-b-bit.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-b-segtree.test.cpp.html">verify/aoj-dsl-2-b-segtree.test.cpp</a>
+* :x: <a href="../verify/verify/aoj-dsl-2-d.test.cpp.html">verify/aoj-dsl-2-d.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-e-imos.test.cpp.html">verify/aoj-dsl-2-e-imos.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-e.test.cpp.html">verify/aoj-dsl-2-e.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-f-max.test.cpp.html">verify/aoj-dsl-2-f-max.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-f.test.cpp.html">verify/aoj-dsl-2-f.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-a-plus-b.test.cpp.html">verify/yosupo-a-plus-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>

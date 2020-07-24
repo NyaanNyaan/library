@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: segment-tree/range-update-range-max-lazyseg.cpp
+# :heavy_check_mark: segment-tree/range-update-range-max-lazyseg.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,12 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-f-max.test.cpp.html">verify/aoj-dsl-2-f-max.test.cpp</a>
 
 
 ## Code

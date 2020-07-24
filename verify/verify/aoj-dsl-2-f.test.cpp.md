@@ -25,27 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+# :heavy_check_mark: verify/aoj-dsl-2-f.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 21:03:47+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-f.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 05:25:00+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F</a>
 
 
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="../../library/segment-tree/range-update-range-min-lazyseg.cpp.html">segment-tree/range-update-range-min-lazyseg.cpp</a>
 
 
 ## Code
@@ -53,23 +48,28 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
 
 #include "../competitive-template.cpp"
-#include "../modint/arbitrary-modint.cpp"
-#include "../ntt/arbitrary-ntt.cpp"
-
-int MOD = 1000000007;
-using mint = ArbitraryModInt;
-using vm = vector<mint>;
+#include "../segment-tree/range-update-range-min-lazyseg.cpp"
 
 void solve() {
-  mint::set_mod(MOD);
-  ini(N, M);
-  vm a(N), b(M);
-  in(a, b);
-  auto c = ArbitraryNTT::multiply(a, b);
-  out(c);
+  ini(N, Q);
+  constexpr int I = (1LL << 31) - 1;
+  UpdateMin_LazySegmentTree<int,I> seg(vi(N, I));
+  rep(_, Q) {
+    ini(c);
+    if (c == 0) {
+      ini(s,t,x);
+      t++;
+      seg.update(s,t,x);
+    } else {
+      ini(s,t);
+      t++;
+      out(seg.query(s,t));
+    }
+  }
 }
 ```
 {% endraw %}

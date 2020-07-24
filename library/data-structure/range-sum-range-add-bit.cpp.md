@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segment-tree/segment-tree.cpp
+# :warning: data-structure/range-sum-range-add-bit.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
-* <a href="{{ site.github.repository_url }}/blob/master/segment-tree/segment-tree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+* category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
+* <a href="{{ site.github.repository_url }}/blob/master/data-structure/range-sum-range-add-bit.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 05:25:00+09:00
 
 
 
@@ -39,12 +39,7 @@ layout: default
 ## Depends on
 
 * :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-a-segtree.test.cpp.html">verify/aoj-dsl-2-a-segtree.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-b-segtree.test.cpp.html">verify/aoj-dsl-2-b-segtree.test.cpp</a>
+* :heavy_check_mark: <a href="binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
 
 
 ## Code
@@ -57,69 +52,26 @@ layout: default
 #include "../competitive-template.cpp"
 #endif
 
-template<typename T,typename F>
-struct SegmentTree{
+#include "binary-indexed-tree.cpp"
 
-  int size;
-  vector<T> seg;
-  const F func;
-  const T UNIT;
-  
-  SegmentTree(int N,F func , T UNIT): func(func) , UNIT(UNIT) {
-    size = 1;
-    while(size < N) size <<= 1;
-    seg.assign(2 * size, UNIT);
-  }
+template <typename T>
+struct RangeAddRangeSumBIT {
+  BinaryIndexedTree<T> a, b;
+  RMQandRAQ(int N) : a(N + 1), b(N + 1) {}
 
-  SegmentTree(const vector<T> &v,F func , T UNIT) : func(func) , UNIT(UNIT){
-    int N = (int)v.size();
-    size = 1;
-    while(size < N) size <<= 1;
-    seg.assign(2 * size , UNIT);
-    for(int i = 0; i < N; i++){
-      seg[i + size] = v[i];
-    }
-    build();
+  // [l, r)
+  void add(int l, int r, T x) {
+    a.add(l, x);
+    a.add(r, -x);
+    b.add(l, x * (1 - l));
+    b.add(r, x * (r - 1));
   }
 
-  void set(int k, T x){
-    seg[k + size] = x;
+  // [l, r)
+  T sum(T l, T r) {
+    --r, --l;
+    return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);
   }
-
-  void build(){
-    for(int k = size-1; k > 0; k--){
-      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
-    }
-  }
-  
-  void update(int k, T x){
-    k += size; seg[k] = x;
-    while(k >>= 1){
-      seg[k] = func( seg[2 * k] , seg[2 * k + 1] );
-    }
-  }
-
-  void add(int k , T x){
-    k += size; seg[k] += x;
-    while(k >>= 1){
-      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
-    }
-  }
-  
-  // query to [a, b) 
-  T query(int a, int b){
-    T L = UNIT, R = UNIT;
-    for(a+=size,b+=size; a<b; a>>=1,b>>=1){
-      if(a & 1) L = func(L,seg[a++]);
-      if(b & 1) R = func(seg[--b],R);
-    }
-    return func(L, R);
-  }
-
-  T& operator[](const int &k){
-    return seg[k + size];
-  }
-
 };
 ```
 {% endraw %}
@@ -134,7 +86,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: segment-tree/segment-tree.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: data-structure/range-sum-range-add-bit.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

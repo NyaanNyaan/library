@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="../modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
 * :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
 * :heavy_check_mark: <a href="../modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>

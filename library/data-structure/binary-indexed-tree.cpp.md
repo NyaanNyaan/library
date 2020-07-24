@@ -31,19 +31,25 @@ layout: default
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/binary-indexed-tree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-25 05:25:00+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Required by
+
+* :warning: <a href="range-sum-range-add-bit.cpp.html">data-structure/range-sum-range-add-bit.cpp</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-b-bit.test.cpp.html">verify/aoj-dsl-2-b-bit.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-e-imos.test.cpp.html">verify/aoj-dsl-2-e-imos.test.cpp</a>
 
 
 ## Code
@@ -64,7 +70,7 @@ struct BinaryIndexedTree {
 
   BinaryIndexedTree(int size) {
     N = ++size;
-    data.assign(N, 0);
+    data.assign(N + 3, 0);
     max_2beki = 1;
     while (max_2beki * 2 <= N) max_2beki *= 2;
   }
