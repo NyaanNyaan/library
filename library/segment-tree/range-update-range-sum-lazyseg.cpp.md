@@ -25,26 +25,26 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: segment-tree/range-update-range-sum-lazyseg.cpp
+# :heavy_check_mark: segment-tree/range-update-range-sum-lazyseg.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segment-tree/range-update-range-sum-lazyseg.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:25:00+09:00
+    - Last commit date: 2020-07-25 05:55:10+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/aoj-dsl-2-d.test.cpp.html">verify/aoj-dsl-2-d.test.cpp</a>
-* :x: <a href="../../verify/verify/aoj-dsl-2-i.test.cpp.html">verify/aoj-dsl-2-i.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-d.test.cpp.html">verify/aoj-dsl-2-d.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-2-i.test.cpp.html">verify/aoj-dsl-2-i.test.cpp</a>
 
 
 ## Code
@@ -57,7 +57,7 @@ layout: default
 #include "../competitive-template.cpp"
 #endif
 
-template <typename E>
+template <typename E,E UNUSED_VALUE>
 struct UpdateSum_LazySegmentTree {
   int n, height;
   using T = pair<E, E>;
@@ -65,7 +65,7 @@ struct UpdateSum_LazySegmentTree {
   T g(T a, E b) { return T(b * a.second, a.second); };
   E h(E a, E b) { return b; };
   T ti = P(0, 0);
-  E ei = 0;
+  E ei = UNUSED_VALUE;
   vector<T> dat;
   vector<E> laz;
 

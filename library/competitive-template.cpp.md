@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../assets/css/copy-button.css" />
 
 
-# :question: competitive-template.cpp
+# :heavy_check_mark: competitive-template.cpp
 
 <a href="../index.html">Back to top page</a>
 
@@ -95,7 +95,7 @@ layout: default
 * :heavy_check_mark: <a href="segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="segment-tree/range-update-range-max-lazyseg.cpp.html">segment-tree/range-update-range-max-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="segment-tree/range-update-range-min-lazyseg.cpp.html">segment-tree/range-update-range-min-lazyseg.cpp</a>
-* :x: <a href="segment-tree/range-update-range-sum-lazyseg.cpp.html">segment-tree/range-update-range-sum-lazyseg.cpp</a>
+* :heavy_check_mark: <a href="segment-tree/range-update-range-sum-lazyseg.cpp.html">segment-tree/range-update-range-sum-lazyseg.cpp</a>
 * :warning: <a href="segment-tree/range-weighted-add-range-sum-lazyseg.cpp.html">segment-tree/range-weighted-add-range-sum-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
 * :warning: <a href="shorest-path/bellman-ford.cpp.html">shorest-path/bellman-ford.cpp</a>
@@ -111,7 +111,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-a-segtree.test.cpp.html">verify/aoj-dsl-2-a-segtree.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-b-bit.test.cpp.html">verify/aoj-dsl-2-b-bit.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-b-segtree.test.cpp.html">verify/aoj-dsl-2-b-segtree.test.cpp</a>
-* :x: <a href="../verify/verify/aoj-dsl-2-d.test.cpp.html">verify/aoj-dsl-2-d.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-d.test.cpp.html">verify/aoj-dsl-2-d.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-e-imos.test.cpp.html">verify/aoj-dsl-2-e-imos.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-e.test.cpp.html">verify/aoj-dsl-2-e.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-f-max.test.cpp.html">verify/aoj-dsl-2-f-max.test.cpp</a>
@@ -120,7 +120,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-g.test.cpp.html">verify/aoj-dsl-2-g.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-h-max.test.cpp.html">verify/aoj-dsl-2-h-max.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-h.test.cpp.html">verify/aoj-dsl-2-h.test.cpp</a>
-* :x: <a href="../verify/verify/aoj-dsl-2-i.test.cpp.html">verify/aoj-dsl-2-i.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/aoj-dsl-2-i.test.cpp.html">verify/aoj-dsl-2-i.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-a-plus-b.test.cpp.html">verify/yosupo-a-plus-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
