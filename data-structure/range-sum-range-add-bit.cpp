@@ -8,9 +8,9 @@
 template <typename T>
 struct RangeAddRangeSumBIT {
   BinaryIndexedTree<T> a, b;
-  RMQandRAQ(int N) : a(N + 1), b(N + 1) {}
+  RangeAddRangeSumBIT(int N) : a(N + 1), b(N + 1) {}
 
-  // [l, r)
+  // add x to [l, r)
   void add(int l, int r, T x) {
     a.add(l, x);
     a.add(r, -x);
@@ -18,7 +18,7 @@ struct RangeAddRangeSumBIT {
     b.add(r, x * (r - 1));
   }
 
-  // [l, r)
+  // return sum of [l, r)
   T sum(T l, T r) {
     --r, --l;
     return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);
