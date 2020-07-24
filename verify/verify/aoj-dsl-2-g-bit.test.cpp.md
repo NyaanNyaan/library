@@ -25,22 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/aoj-dsl-2-b-bit.test.cpp
+# :x: verify/aoj-dsl-2-g-bit.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-b-bit.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:25:00+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-g-bit.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 05:33:28+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
 
 
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
 * :question: <a href="../../library/data-structure/binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
+* :x: <a href="../../library/data-structure/range-sum-range-add-bit.cpp.html">data-structure/range-sum-range-add-bit.cpp</a>
 
 
 ## Code
@@ -49,24 +50,24 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
 #include "../competitive-template.cpp"
-#include "../data-structure/binary-indexed-tree.cpp"
+#include "../data-structure/range-sum-range-add-bit.cpp"
 
 void solve() {
   ini(N, Q);
-  BinaryIndexedTree<int> bit(N);
+  RangeAddRangeSumBIT<int> bit(N);
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(i, a);
-      i--;
-      bit.add(i, a);
+      ini(s, t, x);
+      s--;
+      bit.add(s, t, x);
     } else {
-      ini(x, y);
-      x--, y--;
-      out(bit.sum(x, y));
+      ini(s, t);
+      s--;
+      out(bit.sum(s, t));
     }
   }
 }

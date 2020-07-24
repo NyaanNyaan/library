@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: data-structure/range-sum-range-add-bit.cpp
+# :x: data-structure/range-sum-range-add-bit.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/range-sum-range-add-bit.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:25:00+09:00
+    - Last commit date: 2020-07-25 05:33:28+09:00
 
 
 
@@ -39,7 +39,12 @@ layout: default
 ## Depends on
 
 * :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
+* :question: <a href="binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
+
+
+## Verified with
+
+* :x: <a href="../../verify/verify/aoj-dsl-2-g-bit.test.cpp.html">verify/aoj-dsl-2-g-bit.test.cpp</a>
 
 
 ## Code
@@ -57,9 +62,9 @@ layout: default
 template <typename T>
 struct RangeAddRangeSumBIT {
   BinaryIndexedTree<T> a, b;
-  RMQandRAQ(int N) : a(N + 1), b(N + 1) {}
+  RangeAddRangeSumBIT(int N) : a(N + 1), b(N + 1) {}
 
-  // [l, r)
+  // add x to [l, r)
   void add(int l, int r, T x) {
     a.add(l, x);
     a.add(r, -x);
@@ -67,7 +72,7 @@ struct RangeAddRangeSumBIT {
     b.add(r, x * (r - 1));
   }
 
-  // [l, r)
+  // return sum of [l, r)
   T sum(T l, T r) {
     --r, --l;
     return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);
