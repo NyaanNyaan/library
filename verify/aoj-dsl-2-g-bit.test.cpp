@@ -6,7 +6,7 @@
 
 void solve() {
   ini(N, Q);
-  RangeAddRangeSumBIT<int> bit(N);
+  RangeAddRangeSumBIT<ll> bit(N);
   rep(_, Q) {
     ini(c);
     if (c == 0) {

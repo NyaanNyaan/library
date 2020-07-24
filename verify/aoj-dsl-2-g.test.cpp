@@ -6,7 +6,7 @@
 
 void solve() {
   ini(N, Q);
-  AddSum_LazySegmentTree<int> seg({vi(N)});
+  AddSum_LazySegmentTree<ll> seg({vl(N)});
   rep(_, Q) {
     ini(c);
     if (c == 0) {

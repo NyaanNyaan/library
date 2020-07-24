@@ -1,13 +1,12 @@
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
 
 #include "../competitive-template.cpp"
-#include "../segment-tree/range-update-range-min-lazyseg.cpp"
+#include "../segment-tree/range-add-range-min-lazyseg.cpp"
 
 void solve() {
   ini(N, Q);
-  constexpr int I = (1LL << 31) - 1;
-  UpdateMin_LazySegmentTree<int, I> seg(vi(N, I));
+  AddMin_LazySegmentTree<int, inf> seg{vi(N)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {

@@ -1,13 +1,12 @@
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
 
 #include "../competitive-template.cpp"
 #include "../segment-tree/range-update-range-sum-lazyseg.cpp"
 
 void solve() {
   ini(N, Q);
-  int I = (1LL << 31) - 1;
-  UpdateSum_LazySegmentTree<int> seg{vi(N,I)};
+  UpdateSum_LazySegmentTree<int> seg{vi(N)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
@@ -15,8 +14,9 @@ void solve() {
       t++;
       seg.update(s, t, x);
     } else {
-      ini(i);
-      out(seg.query(i, i + 1));
+      ini(s, t);
+      t++;
+      out(seg.query(s, t));
     }
   }
 }

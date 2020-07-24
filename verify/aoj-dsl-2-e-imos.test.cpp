@@ -10,9 +10,9 @@ void solve() {
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(s,t,x);
-      s--,t--;
-      bit.imos(s,t,x);
+      ini(s, t, x);
+      s--, t--;
+      bit.imos(s, t, x);
     } else {
       ini(i);
       i--;

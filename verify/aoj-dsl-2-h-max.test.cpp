@@ -1,13 +1,12 @@
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
 
 #include "../competitive-template.cpp"
-#include "../segment-tree/range-update-range-max-lazyseg.cpp"
+#include "../segment-tree/range-add-range-max-lazyseg.cpp"
 
 void solve() {
   ini(N, Q);
-  constexpr int I = (1LL << 31) - 1;
-  UpdateMax_LazySegmentTree<int, -I> seg(vi(N, -I));
+  AddMax_LazySegmentTree<int, -inf> seg{vi(N)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
