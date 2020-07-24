@@ -1,4 +1,5 @@
 #pragma region kyopro_template
+#define Nyaan
 #include <bits/stdc++.h>
 #define pb push_back
 #define eb emplace_back
