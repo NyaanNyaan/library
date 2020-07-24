@@ -70,7 +70,7 @@ struct NTT {
     }
   }
 
-  void ntt(mint *a, int n) {
+  __attribute__((target("sse4.2"))) void ntt(mint *a, int n) {
     int k = n ? __builtin_ctz(n) : 0;
     if (k == 0) return;
     if (k == 1) {
@@ -178,7 +178,8 @@ struct NTT {
     }
   }
 
-  constexpr void intt(mint *a, int n, int normalize = true) {
+  __attribute__((target("sse4.2"))) void intt(mint *a, int n,
+                                              int normalize = true) {
     int k = n ? __builtin_ctz(n) : 0;
     if (k == 0) return;
     if (k == 1) {
