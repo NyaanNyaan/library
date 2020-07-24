@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: modint/arbitrary-prime-modint.cpp
+# :heavy_check_mark: modint/arbitrary-prime-modint.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#fb97f878c938d7517d3d9f7de68146e9">modint</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modint/arbitrary-prime-modint.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-24 21:03:47+09:00
 
 
 
@@ -39,6 +39,18 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Required by
+
+* :heavy_check_mark: <a href="../ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt.test.cpp.html">verify/yosupo-convolution-arbitraryntt.test.cpp</a>
 
 
 ## Code
@@ -148,6 +160,10 @@ struct ArbitraryLazyMontgomeryModInt {
 
   static u32 get_mod() { return mod; }
 };
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
+
 ```
 {% endraw %}
 

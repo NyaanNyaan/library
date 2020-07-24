@@ -25,23 +25,26 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/yosupo-convolution-ntt-sse42.test.cpp
+# :heavy_check_mark: verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-ntt-sse42.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-24 21:03:47+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
+* see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
 * :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
 * :heavy_check_mark: <a href="../../library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
 * :heavy_check_mark: <a href="../../library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
 
 
@@ -50,22 +53,22 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
 #include "../competitive-template.cpp"
-#include "../modint/montgomery-modint.cpp"
-#include "../ntt/ntt-sse42.cpp"
+#include "../modint/arbitrary-prime-modint.cpp"
+#include "../ntt/arbitrary-ntt.cpp"
 
-constexpr int MOD = 998244353;
-using mint = LazyMontgomeryModInt<MOD>;
+int MOD = 1000000007;
+using mint = ArbitraryLazyMontgomeryModInt;
 using vm = vector<mint>;
 
 void solve() {
-  NTT<mint> ntt;
+  mint::set_mod(MOD);
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ntt.multiply(a, b);
+  auto c = ArbitraryNTT::multiply(a, b);
   out(c);
 }
 ```

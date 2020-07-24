@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: modint/modint.cpp
+# :heavy_check_mark: modint/modint.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#fb97f878c938d7517d3d9f7de68146e9">modint</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modint/modint.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-24 21:03:47+09:00
 
 
 
@@ -39,6 +39,11 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify/yosupo-convolution-ntt-normalmodint.test.cpp</a>
 
 
 ## Code
@@ -124,8 +129,6 @@ struct ModInt {
 
   static constexpr int get_mod() { return mod; }
 };
-using mint = ModInt<MOD>;
-using vm = vector<mint>;
 ```
 {% endraw %}
 

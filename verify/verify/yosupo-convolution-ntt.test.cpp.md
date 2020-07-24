@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-ntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:25:54+09:00
+    - Last commit date: 2020-07-24 21:03:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -62,9 +62,9 @@ using vm = vector<mint>;
 void solve() {
   NTT<mint> ntt;
   ini(N, M);
-  vm a(N),b(M);
-  in(a,b);
-  auto c = ntt.multiply(a,b);
+  vm a(N), b(M);
+  in(a, b);
+  auto c = ntt.multiply(a, b);
   out(c);
 }
 ```

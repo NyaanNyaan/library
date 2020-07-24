@@ -43,12 +43,15 @@ layout: default
 
 ## Required by
 
-* :warning: <a href="../ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
+* :heavy_check_mark: <a href="../ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
 
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt.test.cpp.html">verify/yosupo-convolution-arbitraryntt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-ntt-sse42.test.cpp.html">verify/yosupo-convolution-ntt-sse42.test.cpp</a>
 
 

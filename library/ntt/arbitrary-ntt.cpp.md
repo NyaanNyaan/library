@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: ntt/arbitrary-ntt.cpp
+# :heavy_check_mark: ntt/arbitrary-ntt.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/arbitrary-ntt.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-24 21:03:47+09:00
 
 
 
@@ -39,10 +39,18 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :warning: <a href="../modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
+* :heavy_check_mark: <a href="../modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
+* :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
 * :heavy_check_mark: <a href="../modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
 * :heavy_check_mark: <a href="../modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
 * :heavy_check_mark: <a href="ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt.test.cpp.html">verify/yosupo-convolution-arbitraryntt.test.cpp</a>
 
 
 ## Code
@@ -55,9 +63,10 @@ layout: default
 #include "../competitive-template.cpp"
 #endif
 
+#include "../modint/arbitrary-modint.cpp"
+#include "../modint/arbitrary-prime-modint.cpp"
 #include "../modint/montgomery-modint.cpp"
 #include "../modint/simd-montgomery.cpp"
-#include "../modint/arbitrary-modint.cpp"
 #include "./ntt-sse42.cpp"
 
 namespace ArbitraryNTT {
@@ -150,6 +159,20 @@ vector<ArbitraryModInt> multiply(const vector<ArbitraryModInt> &a,
   vector<int> u = multiply(s, t, ArbitraryModInt::get_mod());
   vector<mint> ret(u.size());
   for (int i = 0; i < (int)u.size(); ++i) ret[i].x = u[i];
+  return std::move(ret);
+}
+
+vector<ArbitraryLazyMontgomeryModInt> multiply(
+    const vector<ArbitraryLazyMontgomeryModInt> &a,
+    const vector<ArbitraryLazyMontgomeryModInt> &b) {
+  using mint = ArbitraryLazyMontgomeryModInt;
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply(s, t, mint::get_mod());
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i)
+    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
   return std::move(ret);
 }
 }  // namespace ArbitraryNTT
