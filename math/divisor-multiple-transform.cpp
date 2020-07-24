@@ -1,3 +1,7 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
 
 struct divisor_transform{
   template <typename T>

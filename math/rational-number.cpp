@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 struct RationalNumber {
   pair<long long, long long> a;
 

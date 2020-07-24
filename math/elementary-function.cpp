@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 long long my_gcd(long long x, long long y) {
   long long z;
   if (x > y) swap(x, y);

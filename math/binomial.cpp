@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 vector<long long> fac,finv,inv;
 void cominit(int MAX) {
   MAX++;

@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 template <class T, int H, int W>
 struct Matrix {
   using Array = array<array<T, W>, H>;
@@ -37,8 +42,7 @@ struct Matrix {
     Matrix C;
     for (int i = 0; i < H; i++)
       for (int j = 0; j < H; j++)
-        for (int k = 0; k < H; k++)
-          C[i][j] = (C[i][j] + A[i][k] * B[k][j]);
+        for (int k = 0; k < H; k++) C[i][j] = (C[i][j] + A[i][k] * B[k][j]);
     A.swap(C.A);
     return (*this);
   }

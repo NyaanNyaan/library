@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 template <size_t N>
 bitset<N> gcd(bitset<N> x, bitset<N> y) {
   int xm = int(N) - 1, ym = int(N) - 1;
