@@ -15,7 +15,7 @@ struct HeavyLightDecomposition {
         depth(g.size(), 0),
         in(g.size(), -1),
         out(g.size(), -1),
-        nxt(g.size(), 0),
+        nxt(g.size(), root),
         par(g.size(), root) {
     dfs_sz(root);
     dfs_hld(root);
