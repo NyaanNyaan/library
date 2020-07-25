@@ -178,7 +178,7 @@ auto Mul = [](U a, U b) -> U { return a + b; };
 /**
 using U = unsigned long long;
 constexpr U ID0 = 0;
-constexpr U ID1 = 0xFFFFFFFFuLL;
+constexpr U ID1 = U(-1);
 auto Add = [](U a, U b) -> U { return a ^ b; };
 auto Mul = [](U a, U b) -> U { return a & b; };
 //*/
