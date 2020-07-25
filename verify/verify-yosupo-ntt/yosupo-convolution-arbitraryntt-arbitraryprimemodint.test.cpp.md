@@ -25,23 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/aoj-dsl-3-d-cartesiantree.test.cpp
+# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-3-d-cartesiantree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 13:28:15+09:00
+* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 13:55:18+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
+* see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
 
 
 ## Code
@@ -49,28 +53,23 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
 #include "../competitive-template.cpp"
-#include "../graph/cartesian-tree.cpp"
-#include "../graph/heavy-light-decomposition.cpp"
+#include "../modint/arbitrary-prime-modint.cpp"
+#include "../ntt/arbitrary-ntt.cpp"
+
+int MOD = 1000000007;
+using mint = ArbitraryLazyMontgomeryModInt;
+using vm = vector<mint>;
+
 void solve() {
-  ini(N, L);
-  vi a(N);
-  in(a);
-  vvi g;
-  int root;
-  tie(g, root) = CartesianTree<int>(a);
-  trc(root);
-  trc(g);
-  HeavyLightDecomposition<vvi> hld(g, root);
-  vi ans(N - L + 1);
-  rep(i, N - L + 1) { 
-    trc(hld.lca(i,i+L-1));
-    ans[i] = a[hld.lca(i, i + L - 1)]; 
-  }
-  out(ans);
+  mint::set_mod(MOD);
+  ini(N, M);
+  vm a(N), b(M);
+  in(a, b);
+  auto c = ArbitraryNTT::multiply(a, b);
+  out(c);
 }
 ```
 {% endraw %}

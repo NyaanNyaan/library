@@ -43,7 +43,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-5-b-bit2d.test.cpp.html">verify/aoj-dsl-5-b-bit2d.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp.html">verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp</a>
 
 
 ## Code

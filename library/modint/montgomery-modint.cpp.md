@@ -48,11 +48,11 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-arbitraryntt.test.cpp.html">verify/yosupo-convolution-arbitraryntt.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-ntt-sse42.test.cpp.html">verify/yosupo-convolution-ntt-sse42.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/yosupo-convolution-ntt.test.cpp.html">verify/yosupo-convolution-ntt.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
 
 
 ## Code

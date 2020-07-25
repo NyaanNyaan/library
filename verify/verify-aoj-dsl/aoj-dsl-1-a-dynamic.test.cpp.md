@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/aoj-dsl-2-f-max.test.cpp
+# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-f-max.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:44:18+09:00
+* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 13:55:18+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/range-update-range-max-lazyseg.cpp.html">segment-tree/range-update-range-max-lazyseg.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/dynamic-union-find.cpp.html">data-structure/dynamic-union-find.cpp</a>
 
 
 ## Code
@@ -49,25 +49,22 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
 
 #include "../competitive-template.cpp"
-#include "../segment-tree/range-update-range-max-lazyseg.cpp"
+#include "../data-structure/dynamic-union-find.cpp"
 
 void solve() {
   ini(N, Q);
-  constexpr int I = (1LL << 31) - 1;
-  UpdateMax_LazySegmentTree<int, -I> seg(vi(N, -I));
+  DynamicUnionFind uf;
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(s, t, x);
-      t++;
-      seg.update(s, t, -x);
+      ini(x, y);
+      uf.unite(x, y);
     } else {
-      ini(s, t);
-      t++;
-      out(-seg.query(s, t));
+      ini(x,y);
+      out(uf.same(x,y));
     }
   }
 }

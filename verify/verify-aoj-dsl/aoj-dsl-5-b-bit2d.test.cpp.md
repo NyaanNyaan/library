@@ -25,23 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/yosupo-convolution-ntt.test.cpp
+# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-ntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 21:03:47+09:00
+* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 13:55:18+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt.cpp.html">ntt/ntt.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/2d-binary-indexed-tree.cpp.html">data-structure/2d-binary-indexed-tree.cpp</a>
 
 
 ## Code
@@ -49,23 +48,23 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
 
 #include "../competitive-template.cpp"
-#include "../modint/montgomery-modint.cpp"
-#include "../ntt/ntt.cpp"
-
-constexpr int MOD = 998244353;
-using mint = LazyMontgomeryModInt<MOD>;
-using vm = vector<mint>;
+#include "../data-structure/2d-binary-indexed-tree.cpp"
 
 void solve() {
-  NTT<mint> ntt;
-  ini(N, M);
-  vm a(N), b(M);
-  in(a, b);
-  auto c = ntt.multiply(a, b);
-  out(c);
+  ini(N);
+  int L = 1000;
+  BinaryIndexedTree2D<int> bit(L + 1, L + 1);
+  rep(i, N) {
+    ini(x1, y1, x2, y2);
+    bit.imos(x1, y1, x2 - 1, y2 - 1, 1);
+  }
+  int ans = 0;
+  rep(i, L) rep(j, L) { amax(ans, bit.sum(i, j)); }
+  out(ans);
 }
 ```
 {% endraw %}

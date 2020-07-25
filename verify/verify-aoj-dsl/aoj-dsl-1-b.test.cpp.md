@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/aoj-dsl-2-b-bit.test.cpp
+# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-1-b.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-b-bit.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:25:00+09:00
+* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-1-b.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 13:55:18+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/union-find-with-potential.cpp.html">data-structure/union-find-with-potential.cpp</a>
 
 
 ## Code
@@ -49,24 +49,25 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B"
 
 #include "../competitive-template.cpp"
-#include "../data-structure/binary-indexed-tree.cpp"
+#include "../data-structure/union-find-with-potential.cpp"
 
 void solve() {
   ini(N, Q);
-  BinaryIndexedTree<int> bit(N);
+  UnionFindWithPotential<int> uf(N);
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(i, a);
-      i--;
-      bit.add(i, a);
+      ini(x, y, z);
+      uf.merge(y, x, z);
     } else {
       ini(x, y);
-      x--, y--;
-      out(bit.sum(x, y));
+      if (!uf.same(x, y))
+        out("?");
+      else
+        out(uf.diff(y, x));
     }
   }
 }

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/yosupo-convolution-ntt-sse42.test.cpp
+# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-ntt-sse42.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 21:03:47+09:00
+* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 13:55:18+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -40,9 +40,8 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/modint.cpp.html">modint/modint.cpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/ntt.cpp.html">ntt/ntt.cpp</a>
 
 
 ## Code
@@ -53,11 +52,11 @@ layout: default
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
 #include "../competitive-template.cpp"
-#include "../modint/montgomery-modint.cpp"
-#include "../ntt/ntt-sse42.cpp"
+#include "../modint/modint.cpp"
+#include "../ntt/ntt.cpp"
 
 constexpr int MOD = 998244353;
-using mint = LazyMontgomeryModInt<MOD>;
+using mint = ModInt<MOD>;
 using vm = vector<mint>;
 
 void solve() {

@@ -25,22 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/aoj-dsl-5-b.test.cpp
+# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-5-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 12:55:33+09:00
+* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 13:55:18+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
+* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/2d-cumulative-sum.cpp.html">data-structure/2d-cumulative-sum.cpp</a>
+* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/ntt.cpp.html">ntt/ntt.cpp</a>
 
 
 ## Code
@@ -48,24 +49,23 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
 #include "../competitive-template.cpp"
-#include "../data-structure/2d-cumulative-sum.cpp"
+#include "../modint/montgomery-modint.cpp"
+#include "../ntt/ntt.cpp"
+
+constexpr int MOD = 998244353;
+using mint = LazyMontgomeryModInt<MOD>;
+using vm = vector<mint>;
 
 void solve() {
-  ini(N);
-  int L = 1000;
-  CumulativeSum2D<int> ruiseki(L, L);
-  rep(i, N) {
-    ini(x1, y1, x2, y2);
-    ruiseki.imos(x1, y1, x2 , y2, 1);
-  }
-  ruiseki.build();
-  int ans = 0;
-  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]); }
-  out(ans);
+  NTT<mint> ntt;
+  ini(N, M);
+  vm a(N), b(M);
+  in(a, b);
+  auto c = ntt.multiply(a, b);
+  out(c);
 }
 ```
 {% endraw %}

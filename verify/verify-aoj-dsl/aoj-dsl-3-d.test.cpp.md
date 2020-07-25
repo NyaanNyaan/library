@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/aoj-dsl-2-g.test.cpp
+# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-3-d.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-g.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:44:18+09:00
+* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-3-d.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 13:55:18+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/sliding-window-minimum.cpp.html">data-structure/sliding-window-minimum.cpp</a>
 
 
 ## Code
@@ -49,26 +49,19 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include "../competitive-template.cpp"
-#include "../segment-tree/range-add-range-sum-lazyseg.cpp"
+#include "../data-structure/sliding-window-minimum.cpp"
 
 void solve() {
-  ini(N, Q);
-  AddSum_LazySegmentTree<ll> seg({vl(N)});
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(s, t, x);
-      s--;
-      seg.update(s, t, x);
-    } else {
-      ini(s, t);
-      s--;
-      out(seg.query(s, t));
-    }
-  }
+  ini(N, L);
+  vi a(N);
+  in(a);
+  auto f = [](int a, int b) { return min(a, b); };
+  auto dat = SlideWindowMinimum<int, decltype(f)>(a, f, L);
+  dat.erase(begin(dat), begin(dat) + L);
+  out(dat);
 }
 ```
 {% endraw %}

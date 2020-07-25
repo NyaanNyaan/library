@@ -48,7 +48,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-1-a.test.cpp.html">verify/aoj-dsl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp.html">verify-aoj-dsl/aoj-dsl-1-a.test.cpp</a>
 
 
 ## Code

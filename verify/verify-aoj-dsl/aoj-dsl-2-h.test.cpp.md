@@ -25,22 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/aoj-dsl-2-b-segtree.test.cpp
+# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-2-h.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-2-b-segtree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 23:26:44+09:00
+* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-h.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 13:55:18+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
+* :heavy_check_mark: <a href="../../library/segment-tree/range-add-range-min-lazyseg.cpp.html">segment-tree/range-add-range-min-lazyseg.cpp</a>
 
 
 ## Code
@@ -49,25 +49,24 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
 
 #include "../competitive-template.cpp"
-#include "../segment-tree/segment-tree.cpp"
+#include "../segment-tree/range-add-range-min-lazyseg.cpp"
 
 void solve() {
   ini(N, Q);
-  auto f = [](int a, int b) { return a + b; };
-  SegmentTree<int, decltype(f)> seg(N, f, 0);
+  AddMin_LazySegmentTree<int, inf> seg{vi(N)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(i, a);
-      i--;
-      seg.add(i, a);
+      ini(s, t, x);
+      t++;
+      seg.update(s, t, x);
     } else {
-      ini(x, y);
-      x--;
-      out(seg.query(x, y));
+      ini(s, t);
+      t++;
+      out(seg.query(s, t));
     }
   }
 }
