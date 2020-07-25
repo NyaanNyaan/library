@@ -25,25 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: data-structure/sparse-table.cpp
+# :heavy_check_mark: verify-yosupo-ds/yosupo-static-rmq.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
-* <a href="{{ site.github.repository_url }}/blob/master/data-structure/sparse-table.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+* category: <a href="../../index.html#bd0671126b1c769555a4a09b2a39dde2">verify-yosupo-ds</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ds/yosupo-static-rmq.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 20:24:29+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/staticrmq">https://judge.yosupo.jp/problem/staticrmq</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
 
 
 ## Code
@@ -51,42 +48,21 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#pragma once
-#ifndef Nyaan_template
+#define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
+
 #include "../competitive-template.cpp"
-#endif
+#include "../data-structure/sparse-table.cpp"
 
-template <typename T>
-struct SparseTable {
-  vector<vector<T> > table;
-  vector<int> log_table;
-
-  inline T f(T a, T b) { return min(a, b); }
-
-  SparseTable(const vector<T> &v) {
-    int b = 0;
-    while ((1 << b) <= (int)v.size()) ++b;
-    table.assign(b, vector<T>(1 << b));
-    for (int i = 0; i < (int)v.size(); i++) {
-      table[0][i] = v[i];
-    }
-    for (int i = 1; i < b; i++) {
-      for (int j = 0; j + (1 << i) <= (1 << b); j++) {
-        table[i][j] = f(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);
-      }
-    }
-    log_table.resize(v.size() + 1);
-    for (int i = 2; i < (int)log_table.size(); i++) {
-      log_table[i] = log_table[i >> 1] + 1;
-    }
+void solve(){
+  ini(N,Q);
+  vl a(N);
+  in(a);
+  SparseTable<ll> sparse(a);
+  rep(i,Q){
+    ini(l,r);
+    out(sparse.query(l,r));
   }
-
-  // [l, r)
-  inline T query(int l, int r) {
-    int b = log_table[r - l];
-    return f(table[b][l], table[b][r - (1 << b)]);
-  }
-};
+}
 ```
 {% endraw %}
 
@@ -98,9 +74,11 @@ Traceback (most recent call last):
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
+    self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: data-structure/sparse-table.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

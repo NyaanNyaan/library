@@ -46,7 +46,7 @@ layout: default
 * :heavy_check_mark: <a href="data-structure/range-sum-range-add-bit.cpp.html">data-structure/range-sum-range-add-bit.cpp</a>
 * :heavy_check_mark: <a href="data-structure/rectangle-sum.cpp.html">data-structure/rectangle-sum.cpp</a>
 * :heavy_check_mark: <a href="data-structure/sliding-window-minimum.cpp.html">data-structure/sliding-window-minimum.cpp</a>
-* :warning: <a href="data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
+* :heavy_check_mark: <a href="data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
 * :warning: <a href="data-structure/square-decomposition.cpp.html">data-structure/square-decomposition.cpp</a>
 * :heavy_check_mark: <a href="data-structure/union-find-with-potential.cpp.html">data-structure/union-find-with-potential.cpp</a>
 * :heavy_check_mark: <a href="data-structure/union-find.cpp.html">data-structure/union-find.cpp</a>
@@ -69,8 +69,8 @@ layout: default
 * :warning: <a href="math/float-binomial.cpp.html">math/float-binomial.cpp</a>
 * :warning: <a href="math/gray-code.cpp.html">math/gray-code.cpp</a>
 * :warning: <a href="math/grundy-number.cpp.html">math/grundy-number.cpp</a>
+* :warning: <a href="math/matrix-fast.cpp.html">math/matrix-fast.cpp</a>
 * :warning: <a href="math/matrix.cpp.html">math/matrix.cpp</a>
-* :warning: <a href="math/matrix_fast.cpp.html">math/matrix_fast.cpp</a>
 * :warning: <a href="math/rational-number.cpp.html">math/rational-number.cpp</a>
 * :warning: <a href="math/semiring.cpp.html">math/semiring.cpp</a>
 * :warning: <a href="misc/compress.cpp.html">misc/compress.cpp</a>
@@ -127,6 +127,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp.html">verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp.html">verify-aoj-dsl/aoj-dsl-5-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>

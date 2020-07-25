@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: math/matrix_fast.cpp
+# :warning: math/matrix-fast.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
-* <a href="{{ site.github.repository_url }}/blob/master/math/matrix_fast.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/math/matrix-fast.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 20:24:29+09:00
 
 
 
@@ -166,7 +166,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: math/matrix_fast.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: math/matrix-fast.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}
