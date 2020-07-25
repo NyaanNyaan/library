@@ -21,11 +21,12 @@
 "verify-aoj-dsl/aoj-dsl-5-b.test.cpp": "2020-07-25 13:55:18 +0900",
 "verify-yosupo-ds/yosupo-rectangle-sum.test.cpp": "2020-07-25 19:38:56 +0900",
 "verify-yosupo-ds/yosupo-static-rmq.test.cpp": "2020-07-25 20:24:29 +0900",
-"verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp": "2020-07-26 06:09:39 +0900",
-"verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp": "2020-07-26 06:09:39 +0900",
-"verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp": "2020-07-26 06:09:39 +0900",
+"verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp": "2020-07-26 06:55:28 +0900",
+"verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp": "2020-07-26 06:55:28 +0900",
+"verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp": "2020-07-26 06:55:28 +0900",
+"verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp": "2020-07-26 06:55:28 +0900",
 "verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp": "2020-07-25 13:55:18 +0900",
-"verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp": "2020-07-26 06:09:39 +0900",
+"verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp": "2020-07-26 06:55:28 +0900",
 "verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp": "2020-07-25 13:55:18 +0900",
 "verify-yosupo-other/yosupo-a-plus-b.test.cpp": "2020-07-25 13:55:18 +0900"
 }
