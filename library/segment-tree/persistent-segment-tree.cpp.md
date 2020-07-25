@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: segment-tree/persistent-segment-tree.cpp
+# :heavy_check_mark: segment-tree/persistent-segment-tree.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segment-tree/persistent-segment-tree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 03:01:38+09:00
+    - Last commit date: 2020-07-25 19:38:56+09:00
 
 
 
@@ -39,6 +39,16 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Required by
+
+* :heavy_check_mark: <a href="../data-structure/rectangle-sum.cpp.html">data-structure/rectangle-sum.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 
 
 ## Code
@@ -64,7 +74,7 @@ struct PersistentSegmentTree {
   Node *pool;
   int pid;
   ll N;
-  const F &f;
+  const F f;
   const T ID;
   Node *nil;
   vector<Node *> roots;

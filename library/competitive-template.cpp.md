@@ -44,6 +44,7 @@ layout: default
 * :warning: <a href="data-structure/dynamic-binary-indexed-tree.cpp.html">data-structure/dynamic-binary-indexed-tree.cpp</a>
 * :heavy_check_mark: <a href="data-structure/dynamic-union-find.cpp.html">data-structure/dynamic-union-find.cpp</a>
 * :heavy_check_mark: <a href="data-structure/range-sum-range-add-bit.cpp.html">data-structure/range-sum-range-add-bit.cpp</a>
+* :heavy_check_mark: <a href="data-structure/rectangle-sum.cpp.html">data-structure/rectangle-sum.cpp</a>
 * :heavy_check_mark: <a href="data-structure/sliding-window-minimum.cpp.html">data-structure/sliding-window-minimum.cpp</a>
 * :warning: <a href="data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
 * :warning: <a href="data-structure/square-decomposition.cpp.html">data-structure/square-decomposition.cpp</a>
@@ -89,7 +90,7 @@ layout: default
 * :warning: <a href="segment-tree/dynamic-segment-tree.cpp.html">segment-tree/dynamic-segment-tree.cpp</a>
 * :warning: <a href="segment-tree/lazy-segment-tree.cpp.html">segment-tree/lazy-segment-tree.cpp</a>
 * :warning: <a href="segment-tree/li-chao-tree.cpp.html">segment-tree/li-chao-tree.cpp</a>
-* :warning: <a href="segment-tree/persistent-segment-tree.cpp.html">segment-tree/persistent-segment-tree.cpp</a>
+* :heavy_check_mark: <a href="segment-tree/persistent-segment-tree.cpp.html">segment-tree/persistent-segment-tree.cpp</a>
 * :heavy_check_mark: <a href="segment-tree/range-add-range-max-lazyseg.cpp.html">segment-tree/range-add-range-max-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="segment-tree/range-add-range-min-lazyseg.cpp.html">segment-tree/range-add-range-min-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
@@ -125,6 +126,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp.html">verify-aoj-dsl/aoj-dsl-3-d.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp.html">verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp.html">verify-aoj-dsl/aoj-dsl-5-b.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
