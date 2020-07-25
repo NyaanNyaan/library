@@ -25,22 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/aoj-dsl-5-b-bit2d.test.cpp
+# :x: verify/aoj-dsl-3-d-cartesiantree.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-5-b-bit2d.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-3-d-cartesiantree.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-25 13:12:15+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
 
 
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/2d-binary-indexed-tree.cpp.html">data-structure/2d-binary-indexed-tree.cpp</a>
+* :x: <a href="../../library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
+* :x: <a href="../../library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
 
 
 ## Code
@@ -49,21 +50,21 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include "../competitive-template.cpp"
-#include "../data-structure/2d-binary-indexed-tree.cpp"
-
+#include "../graph/cartesian-tree.cpp"
+#include "../graph/heavy-light-decomposition.cpp"
 void solve() {
-  ini(N);
-  int L = 1000;
-  BinaryIndexedTree2D<int> bit(L + 1, L + 1);
-  rep(i, N) {
-    ini(x1, y1, x2, y2);
-    bit.imos(x1, y1, x2 - 1, y2 - 1, 1);
-  }
-  int ans = 0;
-  rep(i, L) rep(j, L) { amax(ans, bit.sum(i, j)); }
+  ini(N, L);
+  vi a(N);
+  in(a);
+  vvi g;
+  int root;
+  tie(g, root) = CartesianTree<int>(a);
+  HeavyLightDecomposition<vvi> hld(g);
+  vi ans(N - L + 1);
+  rep(i, N - L + 1) { ans[i] = a[hld.lca(i, i + L - 1)]; }
   out(ans);
 }
 ```

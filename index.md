@@ -45,7 +45,7 @@ layout: default
 
 ### data-structure
 
-* :x: <a href="library/data-structure/2d-binary-indexed-tree.cpp.html">data-structure/2d-binary-indexed-tree.cpp</a>
+* :heavy_check_mark: <a href="library/data-structure/2d-binary-indexed-tree.cpp.html">data-structure/2d-binary-indexed-tree.cpp</a>
 * :heavy_check_mark: <a href="library/data-structure/2d-cumulative-sum.cpp.html">data-structure/2d-cumulative-sum.cpp</a>
 * :heavy_check_mark: <a href="library/data-structure/binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
 * :warning: <a href="library/data-structure/dynamic-binary-indexed-tree.cpp.html">data-structure/dynamic-binary-indexed-tree.cpp</a>
@@ -85,11 +85,11 @@ layout: default
 
 ### graph
 
-* :warning: <a href="library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
+* :x: <a href="library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
 * :warning: <a href="library/graph/dimension-expanded-graph.cpp.html">graph/dimension-expanded-graph.cpp</a>
 * :warning: <a href="library/graph/euler-tour.cpp.html">graph/euler-tour.cpp</a>
 * :warning: <a href="library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :warning: <a href="library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
+* :x: <a href="library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
 * :warning: <a href="library/graph/kruskal.cpp.html">graph/kruskal.cpp</a>
 * :warning: <a href="library/graph/strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
 * :warning: <a href="library/graph/topological-sort.cpp.html">graph/topological-sort.cpp</a>
@@ -206,8 +206,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-h-max.test.cpp.html">verify/aoj-dsl-2-h-max.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-h.test.cpp.html">verify/aoj-dsl-2-h.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-i.test.cpp.html">verify/aoj-dsl-2-i.test.cpp</a>
+* :x: <a href="verify/verify/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/aoj-dsl-3-d-cartesiantree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-3-d.test.cpp.html">verify/aoj-dsl-3-d.test.cpp</a>
-* :x: <a href="verify/verify/aoj-dsl-5-b-bit2d.test.cpp.html">verify/aoj-dsl-5-b-bit2d.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/aoj-dsl-5-b-bit2d.test.cpp.html">verify/aoj-dsl-5-b-bit2d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-5-b.test.cpp.html">verify/aoj-dsl-5-b.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yosupo-a-plus-b.test.cpp.html">verify/yosupo-a-plus-b.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>

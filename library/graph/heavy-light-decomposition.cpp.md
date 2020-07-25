@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: graph/heavy-light-decomposition.cpp
+# :x: graph/heavy-light-decomposition.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,6 +39,11 @@ layout: default
 ## Depends on
 
 * :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Verified with
+
+* :x: <a href="../../verify/verify/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/aoj-dsl-3-d-cartesiantree.test.cpp</a>
 
 
 ## Code
