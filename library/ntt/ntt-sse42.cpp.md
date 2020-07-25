@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-sse42.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-26 06:09:39+09:00
 
 
 
@@ -67,6 +67,7 @@ layout: default
 
 #include "../modint/simd-montgomery.cpp"
 
+constexpr int SZ = 1 << 19;
 uint32_t buf1_[SZ * 2] __attribute__((aligned(64)));
 uint32_t buf2_[SZ * 2] __attribute__((aligned(64)));
 
@@ -185,19 +186,19 @@ struct NTT {
               __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
               __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
               __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P2 = montgomery_add(T0, T2, m2, m0);
-              __m128i T1P3 = montgomery_add(T1, T3, m2, m0);
-              __m128i T0M2 = montgomery_sub(T0, T2, m2, m0);
+              __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
+              __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
+              __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
               __m128i T1M3 =
-                  montgomery_mul(montgomery_sub(T1, T3, m2, m0), Imag, r, m1);
+                  montgomery_mul_128(montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
-                               montgomery_add(T0P2, T1P3, m2, m0));
+                               montgomery_add_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j1),
-                               montgomery_sub(T0P2, T1P3, m2, m0));
+                               montgomery_sub_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j2),
-                               montgomery_add(T0M2, T1M3, m2, m0));
+                               montgomery_add_128(T0M2, T1M3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j3),
-                               montgomery_sub(T0M2, T1M3, m2, m0));
+                               montgomery_sub_128(T0M2, T1M3, m2, m0));
             }
           } else {
             ww = xx * xx, wx = ww * xx;
@@ -214,22 +215,22 @@ struct NTT {
               __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
               __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
               __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              T1 = montgomery_mul(T1, XX, r, m1);
-              T2 = montgomery_mul(T2, WW, r, m1);
-              T3 = montgomery_mul(T3, WX, r, m1);
-              __m128i T0P2 = montgomery_add(T0, T2, m2, m0);
-              __m128i T1P3 = montgomery_add(T1, T3, m2, m0);
-              __m128i T0M2 = montgomery_sub(T0, T2, m2, m0);
+              T1 = montgomery_mul_128(T1, XX, r, m1);
+              T2 = montgomery_mul_128(T2, WW, r, m1);
+              T3 = montgomery_mul_128(T3, WX, r, m1);
+              __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
+              __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
+              __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
               __m128i T1M3 =
-                  montgomery_mul(montgomery_sub(T1, T3, m2, m0), Imag, r, m1);
+                  montgomery_mul_128(montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
-                               montgomery_add(T0P2, T1P3, m2, m0));
+                               montgomery_add_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j1),
-                               montgomery_sub(T0P2, T1P3, m2, m0));
+                               montgomery_sub_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j2),
-                               montgomery_add(T0M2, T1M3, m2, m0));
+                               montgomery_add_128(T0M2, T1M3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j3),
-                               montgomery_sub(T0M2, T1M3, m2, m0));
+                               montgomery_sub_128(T0M2, T1M3, m2, m0));
             }
           }
           xx *= dw[__builtin_ctz((jh += 4))];
@@ -287,19 +288,19 @@ struct NTT {
               __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
               __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
               __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P1 = montgomery_add(T0, T1, m2, m0);
-              __m128i T2P3 = montgomery_add(T2, T3, m2, m0);
-              __m128i T0M1 = montgomery_sub(T0, T1, m2, m0);
+              __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
+              __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
+              __m128i T0M1 = montgomery_sub_128(T0, T1, m2, m0);
               __m128i T2M3 =
-                  montgomery_mul(montgomery_sub(T2, T3, m2, m0), Imag, r, m1);
+                  montgomery_mul_128(montgomery_sub_128(T2, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
-                               montgomery_add(T0P1, T2P3, m2, m0));
+                               montgomery_add_128(T0P1, T2P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j2),
-                               montgomery_sub(T0P1, T2P3, m2, m0));
+                               montgomery_sub_128(T0P1, T2P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j1),
-                               montgomery_add(T0M1, T2M3, m2, m0));
+                               montgomery_add_128(T0M1, T2M3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j3),
-                               montgomery_sub(T0M1, T2M3, m2, m0));
+                               montgomery_sub_128(T0M1, T2M3, m2, m0));
             }
           } else {
             ww = xx * xx, yy = xx * imag;
@@ -316,23 +317,23 @@ struct NTT {
               __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
               __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
               __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P1 = montgomery_add(T0, T1, m2, m0);
-              __m128i T2P3 = montgomery_add(T2, T3, m2, m0);
+              __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
+              __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
               __m128i T0M1 =
-                  montgomery_mul(montgomery_sub(T0, T1, m2, m0), XX, r, m1);
+                  montgomery_mul_128(montgomery_sub_128(T0, T1, m2, m0), XX, r, m1);
               __m128i T2M3 =
-                  montgomery_mul(montgomery_sub(T2, T3, m2, m0), YY, r, m1);
+                  montgomery_mul_128(montgomery_sub_128(T2, T3, m2, m0), YY, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
-                               montgomery_add(T0P1, T2P3, m2, m0));
+                               montgomery_add_128(T0P1, T2P3, m2, m0));
               _mm_storeu_si128(
                   (__m128i *)(a + j2),
-                  montgomery_mul(montgomery_sub(T0P1, T2P3, m2, m0), WW, r,
+                  montgomery_mul_128(montgomery_sub_128(T0P1, T2P3, m2, m0), WW, r,
                                  m1));
               _mm_storeu_si128((__m128i *)(a + j1),
-                               montgomery_add(T0M1, T2M3, m2, m0));
+                               montgomery_add_128(T0M1, T2M3, m2, m0));
               _mm_storeu_si128(
                   (__m128i *)(a + j3),
-                  montgomery_mul(montgomery_sub(T0M1, T2M3, m2, m0), WW, r,
+                  montgomery_mul_128(montgomery_sub_128(T0M1, T2M3, m2, m0), WW, r,
                                  m1));
             }
           }
@@ -374,7 +375,7 @@ struct NTT {
     ntt(buf1, M);
     ntt(buf2, M);
     for (int i = 0; i < M; ++i)
-      buf1[i].a = mint::reduce(u64(buf1[i].a) * buf2[i].a);
+      buf1[i].a = mint::reduce(uint64_t(buf1[i].a) * buf2[i].a);
     intt(buf1, M, false);
     vector<mint> s(l);
     mint invm = mint(M).inverse();
