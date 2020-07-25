@@ -8,12 +8,20 @@ template <class T>
 struct CumulativeSum2D {
   vector<vector<T> > data;
 
-  CumulativeSum2D(int H, int W) : data(H + 2, vector<int>(W + 2, 0)) {}
+  CumulativeSum2D(int H, int W) : data(H + 3, vector<int>(W + 3, 0)) {}
 
   void add(int i, int j, T z) {
     ++i, ++j;
     if (i >= (int)data.size() || j >= (int)data[0].size()) return;
     data[i][j] += z;
+  }
+
+  // add [ [i1,j1], [i2,j2] )
+  void imos(int i1, int j1, int i2, int j2, T z) {
+    add(i1, j1, 1);
+    add(i1, j2, -1);
+    add(i2, j1, -1);
+    add(i2, j2, 1);
   }
 
   void build() {

@@ -4,10 +4,12 @@
 #endif
 
 template <typename T>
-struct BIT2D {
+struct BinaryIndexedTree2D {
   int H, W;
   vector<vector<T>> bit;
-  BIT2D(int H, int W) : H(H), W(W) { bit.resize(H + 1, vector<T>(W + 1, 0)); }
+  BinaryIndexedTree2D(int H, int W) : H(H + 1), W(W + 1) {
+    bit.resize(H + 3, vector<T>(W + 3, 0));
+  }
   // 関数の入力のindexは0-originを想定
 
   // (x,y)にwを足す
