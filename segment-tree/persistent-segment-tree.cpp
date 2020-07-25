@@ -16,7 +16,7 @@ struct PersistentSegmentTree {
   Node *pool;
   int pid;
   ll N;
-  const F &f;
+  const F f;
   const T ID;
   Node *nil;
   vector<Node *> roots;
