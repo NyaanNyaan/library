@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: ntt/ntt-sse42.cpp
+# :heavy_check_mark: ntt/ntt-avx2.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-sse42.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-avx2.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-26 06:55:28+09:00
 
 
@@ -42,17 +42,9 @@ layout: default
 * :heavy_check_mark: <a href="../modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
 
 
-## Required by
-
-* :heavy_check_mark: <a href="arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
-
-
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
 
 
 ## Code
@@ -133,7 +125,7 @@ struct NTT {
     }
   }
 
-  __attribute__((target("sse4.2"))) void ntt(mint *a, int n) {
+  __attribute__((target("avx2"))) void ntt(mint *a, int n) {
     int k = n ? __builtin_ctz(n) : 0;
     if (k == 0) return;
     if (k == 1) {
@@ -154,11 +146,6 @@ struct NTT {
     int v = 1 << (k - 2 - (k & 1));
     mint one = mint(1);
     mint imag = dw[1];
-    const __m128i m0 = _mm_set1_epi32(0);
-    const __m128i m1 = _mm_set1_epi32(mod);
-    const __m128i m2 = _mm_set1_epi32(mod + mod);
-    const __m128i r = _mm_set1_epi32(mint::r);
-    const __m128i Imag = _mm_set1_epi32(imag.a);
     while (v) {
       if (v == 1) {
         mint ww = one, xx = one, wx = one;
@@ -172,7 +159,12 @@ struct NTT {
           a[jh + 2] = t0m2 + t1m3, a[jh + 3] = t0m2 - t1m3;
           xx *= dw[__builtin_ctz((jh += 4))];
         }
-      } else {
+      } else if (v == 4) {
+        const __m128i m0 = _mm_set1_epi32(0);
+        const __m128i m1 = _mm_set1_epi32(mod);
+        const __m128i m2 = _mm_set1_epi32(mod + mod);
+        const __m128i r = _mm_set1_epi32(mint::r);
+        const __m128i Imag = _mm_set1_epi32(imag.a);
         mint ww = one, xx = one, wx = one;
         for (int jh = 0; jh < u;) {
           if (jh == 0) {
@@ -189,8 +181,8 @@ struct NTT {
               __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
               __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
               __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
-              __m128i T1M3 =
-                  montgomery_mul_128(montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
+              __m128i T1M3 = montgomery_mul_128(
+                  montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j1),
@@ -221,8 +213,8 @@ struct NTT {
               __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
               __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
               __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
-              __m128i T1M3 =
-                  montgomery_mul_128(montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
+              __m128i T1M3 = montgomery_mul_128(
+                  montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j1),
@@ -235,14 +227,82 @@ struct NTT {
           }
           xx *= dw[__builtin_ctz((jh += 4))];
         }
+      } else {
+        const __m256i m0 = _mm256_set1_epi32(0);
+        const __m256i m1 = _mm256_set1_epi32(mod);
+        const __m256i m2 = _mm256_set1_epi32(mod + mod);
+        const __m256i r = _mm256_set1_epi32(mint::r);
+        const __m256i Imag = _mm256_set1_epi32(imag.a);
+        mint ww = one, xx = one, wx = one;
+        for (int jh = 0; jh < u;) {
+          if (jh == 0) {
+            int j0 = 0;
+            int j1 = v;
+            int j2 = j1 + v;
+            int j3 = j2 + v;
+            int je = v;
+            for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
+              __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              __m256i T0P2 = montgomery_add_256(T0, T2, m2, m0);
+              __m256i T1P3 = montgomery_add_256(T1, T3, m2, m0);
+              __m256i T0M2 = montgomery_sub_256(T0, T2, m2, m0);
+              __m256i T1M3 = montgomery_mul_256(
+                  montgomery_sub_256(T1, T3, m2, m0), Imag, r, m1);
+              _mm256_storeu_si256((__m256i *)(a + j0),
+                                  montgomery_add_256(T0P2, T1P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j1),
+                                  montgomery_sub_256(T0P2, T1P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j2),
+                                  montgomery_add_256(T0M2, T1M3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j3),
+                                  montgomery_sub_256(T0M2, T1M3, m2, m0));
+            }
+          } else {
+            ww = xx * xx, wx = ww * xx;
+            __m256i WW = _mm256_set1_epi32(ww.a);
+            __m256i WX = _mm256_set1_epi32(wx.a);
+            __m256i XX = _mm256_set1_epi32(xx.a);
+            int j0 = jh * v;
+            int j1 = j0 + v;
+            int j2 = j1 + v;
+            int j3 = j2 + v;
+            int je = j1;
+            for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
+              __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              T1 = montgomery_mul_256(T1, XX, r, m1);
+              T2 = montgomery_mul_256(T2, WW, r, m1);
+              T3 = montgomery_mul_256(T3, WX, r, m1);
+              __m256i T0P2 = montgomery_add_256(T0, T2, m2, m0);
+              __m256i T1P3 = montgomery_add_256(T1, T3, m2, m0);
+              __m256i T0M2 = montgomery_sub_256(T0, T2, m2, m0);
+              __m256i T1M3 = montgomery_mul_256(
+                  montgomery_sub_256(T1, T3, m2, m0), Imag, r, m1);
+              _mm256_storeu_si256((__m256i *)(a + j0),
+                                  montgomery_add_256(T0P2, T1P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j1),
+                                  montgomery_sub_256(T0P2, T1P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j2),
+                                  montgomery_add_256(T0M2, T1M3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j3),
+                                  montgomery_sub_256(T0M2, T1M3, m2, m0));
+            }
+          }
+          xx *= dw[__builtin_ctz((jh += 4))];
+        }
       }
       u <<= 2;
       v >>= 2;
     }
   }
 
-  __attribute__((target("sse4.2"))) void intt(mint *a, int n,
-                                              int normalize = true) {
+  __attribute__((target("avx2"))) void intt(mint *a, int n,
+                                            int normalize = true) {
     int k = n ? __builtin_ctz(n) : 0;
     if (k == 0) return;
     if (k == 1) {
@@ -255,11 +315,6 @@ struct NTT {
     int v = 1;
     mint one = mint(1);
     mint imag = dy[1];
-    const __m128i m0 = _mm_set1_epi32(0);
-    const __m128i m1 = _mm_set1_epi32(mod);
-    const __m128i m2 = _mm_set1_epi32(mod + mod);
-    const __m128i r = _mm_set1_epi32(mint::r);
-    const __m128i Imag = _mm_set1_epi32(imag.a);
     while (u) {
       if (v == 1) {
         mint ww = one, xx = one, yy = one;
@@ -274,7 +329,12 @@ struct NTT {
           a[jh + 1] = t0m1 + t2m3, a[jh + 3] = (t0m1 - t2m3) * ww;
           xx *= dy[__builtin_ctz(jh += 4)];
         }
-      } else {
+      } else if (v == 4) {
+        const __m128i m0 = _mm_set1_epi32(0);
+        const __m128i m1 = _mm_set1_epi32(mod);
+        const __m128i m2 = _mm_set1_epi32(mod + mod);
+        const __m128i r = _mm_set1_epi32(mint::r);
+        const __m128i Imag = _mm_set1_epi32(imag.a);
         mint ww = one, xx = one, yy = one;
         u <<= 2;
         for (int jh = 0; jh < u;) {
@@ -291,8 +351,8 @@ struct NTT {
               __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
               __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
               __m128i T0M1 = montgomery_sub_128(T0, T1, m2, m0);
-              __m128i T2M3 =
-                  montgomery_mul_128(montgomery_sub_128(T2, T3, m2, m0), Imag, r, m1);
+              __m128i T2M3 = montgomery_mul_128(
+                  montgomery_sub_128(T2, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P1, T2P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j2),
@@ -319,27 +379,97 @@ struct NTT {
               __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
               __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
               __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
-              __m128i T0M1 =
-                  montgomery_mul_128(montgomery_sub_128(T0, T1, m2, m0), XX, r, m1);
-              __m128i T2M3 =
-                  montgomery_mul_128(montgomery_sub_128(T2, T3, m2, m0), YY, r, m1);
+              __m128i T0M1 = montgomery_mul_128(
+                  montgomery_sub_128(T0, T1, m2, m0), XX, r, m1);
+              __m128i T2M3 = montgomery_mul_128(
+                  montgomery_sub_128(T2, T3, m2, m0), YY, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P1, T2P3, m2, m0));
               _mm_storeu_si128(
                   (__m128i *)(a + j2),
-                  montgomery_mul_128(montgomery_sub_128(T0P1, T2P3, m2, m0), WW, r,
-                                 m1));
+                  montgomery_mul_128(montgomery_sub_128(T0P1, T2P3, m2, m0), WW,
+                                     r, m1));
               _mm_storeu_si128((__m128i *)(a + j1),
                                montgomery_add_128(T0M1, T2M3, m2, m0));
               _mm_storeu_si128(
                   (__m128i *)(a + j3),
-                  montgomery_mul_128(montgomery_sub_128(T0M1, T2M3, m2, m0), WW, r,
-                                 m1));
+                  montgomery_mul_128(montgomery_sub_128(T0M1, T2M3, m2, m0), WW,
+                                     r, m1));
             }
           }
           xx *= dy[__builtin_ctz(jh += 4)];
         }
-      }
+      } else {
+        const __m256i m0 = _mm256_set1_epi32(0);
+        const __m256i m1 = _mm256_set1_epi32(mod);
+        const __m256i m2 = _mm256_set1_epi32(mod + mod);
+        const __m256i r = _mm256_set1_epi32(mint::r);
+        const __m256i Imag = _mm256_set1_epi32(imag.a);
+        mint ww = one, xx = one, yy = one;
+        u <<= 2;
+        for (int jh = 0; jh < u;) {
+          if (jh == 0) {
+            int j0 = 0;
+            int j1 = v;
+            int j2 = v + v;
+            int j3 = j2 + v;
+            for (; j0 < v; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
+              __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);
+              __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);
+              __m256i T0M1 = montgomery_sub_256(T0, T1, m2, m0);
+              __m256i T2M3 = montgomery_mul_256(
+                  montgomery_sub_256(T2, T3, m2, m0), Imag, r, m1);
+              _mm256_storeu_si256((__m256i *)(a + j0),
+                               montgomery_add_256(T0P1, T2P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j2),
+                               montgomery_sub_256(T0P1, T2P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j1),
+                               montgomery_add_256(T0M1, T2M3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j3),
+                               montgomery_sub_256(T0M1, T2M3, m2, m0));
+            }
+          } else {
+            ww = xx * xx, yy = xx * imag;
+            __m256i WW = _mm256_set1_epi32(ww.a);
+            __m256i XX = _mm256_set1_epi32(xx.a);
+            __m256i YY = _mm256_set1_epi32(yy.a);
+            int j0 = jh * v;
+            int j1 = j0 + v;
+            int j2 = j1 + v;
+            int j3 = j2 + v;
+            int je = j1;
+            for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
+              __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);
+              __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);
+              __m256i T0M1 = montgomery_mul_256(
+                  montgomery_sub_256(T0, T1, m2, m0), XX, r, m1);
+              __m256i T2M3 = montgomery_mul_256(
+                  montgomery_sub_256(T2, T3, m2, m0), YY, r, m1);
+              _mm256_storeu_si256((__m256i *)(a + j0),
+                               montgomery_add_256(T0P1, T2P3, m2, m0));
+              _mm256_storeu_si256(
+                  (__m256i *)(a + j2),
+                  montgomery_mul_256(montgomery_sub_256(T0P1, T2P3, m2, m0), WW,
+                                     r, m1));
+              _mm256_storeu_si256((__m256i *)(a + j1),
+                               montgomery_add_256(T0M1, T2M3, m2, m0));
+              _mm256_storeu_si256(
+                  (__m256i *)(a + j3),
+                  montgomery_mul_256(montgomery_sub_256(T0M1, T2M3, m2, m0), WW,
+                                     r, m1));
+            }
+          }
+          xx *= dy[__builtin_ctz(jh += 4)];
+        }
+      } 
       u >>= 4;
       v <<= 2;
     }
@@ -396,7 +526,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ntt/ntt-sse42.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: ntt/ntt-avx2.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

@@ -25,27 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-26 06:55:28+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
+* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
 * :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
 * :heavy_check_mark: <a href="../../library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.cpp.html">ntt/ntt-avx2.cpp</a>
 
 
 ## Code
@@ -53,22 +50,22 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
 #include "../competitive-template.cpp"
-#include "../modint/arbitrary-modint.cpp"
-#include "../ntt/arbitrary-ntt.cpp"
+#include "../modint/montgomery-modint.cpp"
+#include "../ntt/ntt-avx2.cpp"
 
-int MOD = 1000000007;
-using mint = ArbitraryModInt;
+constexpr int MOD = 998244353;
+using mint = LazyMontgomeryModInt<MOD>;
 using vm = vector<mint>;
 
-void solve() {
-  mint::set_mod(MOD);
+__attribute__((target("avx2"))) void solve() {
+  NTT<mint> ntt;
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ArbitraryNTT::multiply(a, b);
+  auto c = ntt.multiply(a, b);
   out(c);
 }
 ```

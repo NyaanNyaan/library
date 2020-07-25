@@ -84,6 +84,7 @@ layout: default
 * :heavy_check_mark: <a href="modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
 * :heavy_check_mark: <a href="modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
 * :heavy_check_mark: <a href="ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
+* :heavy_check_mark: <a href="ntt/ntt-avx2.cpp.html">ntt/ntt-avx2.cpp</a>
 * :heavy_check_mark: <a href="ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
 * :heavy_check_mark: <a href="ntt/ntt.cpp.html">ntt/ntt.cpp</a>
 * :warning: <a href="segment-tree/dynamic-li-chao-tree.cpp.html">segment-tree/dynamic-li-chao-tree.cpp</a>
@@ -131,6 +132,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
