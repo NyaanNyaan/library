@@ -3,7 +3,6 @@
 #include "../competitive-template.cpp"
 #endif
 
-// SZの位置を直す
 #include <immintrin.h>
 
 __attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
