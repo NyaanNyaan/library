@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify/aoj-dsl-3-d-cartesiantree.test.cpp
+# :heavy_check_mark: verify/aoj-dsl-3-d-cartesiantree.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-3-d-cartesiantree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 13:12:15+09:00
+    - Last commit date: 2020-07-25 13:28:15+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :x: <a href="../../library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
-* :x: <a href="../../library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
 
 
 ## Code
@@ -62,9 +62,14 @@ void solve() {
   vvi g;
   int root;
   tie(g, root) = CartesianTree<int>(a);
-  HeavyLightDecomposition<vvi> hld(g);
+  trc(root);
+  trc(g);
+  HeavyLightDecomposition<vvi> hld(g, root);
   vi ans(N - L + 1);
-  rep(i, N - L + 1) { ans[i] = a[hld.lca(i, i + L - 1)]; }
+  rep(i, N - L + 1) { 
+    trc(hld.lca(i,i+L-1));
+    ans[i] = a[hld.lca(i, i + L - 1)]; 
+  }
   out(ans);
 }
 ```

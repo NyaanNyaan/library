@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/gray-code.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-25 13:28:15+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Code
@@ -52,12 +52,8 @@ layout: default
 #endif
 
 vector<int> gray_code(int n) {
-  if (n == 1) return vi{0, 1};
-  vi ret = gray_code(n - 1);
-  vi inv = ret;
-  reverse(all(inv));
-  each(x, inv) x |= 1 << (n - 1);
-  copy(all(inv), back_inserter(ret));
+  vector<int> ret(1 << n);
+  for (int i = 0; i < (int)ret.size(); i++) ret[i] = i ^ (i >> 1);
   return ret;
 };
 ```

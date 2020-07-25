@@ -38,7 +38,7 @@ layout: default
 
 ### .
 
-* :question: <a href="library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="library/competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -85,11 +85,11 @@ layout: default
 
 ### graph
 
-* :x: <a href="library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
+* :heavy_check_mark: <a href="library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
 * :warning: <a href="library/graph/dimension-expanded-graph.cpp.html">graph/dimension-expanded-graph.cpp</a>
 * :warning: <a href="library/graph/euler-tour.cpp.html">graph/euler-tour.cpp</a>
 * :warning: <a href="library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :x: <a href="library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
+* :heavy_check_mark: <a href="library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
 * :warning: <a href="library/graph/kruskal.cpp.html">graph/kruskal.cpp</a>
 * :warning: <a href="library/graph/strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
 * :warning: <a href="library/graph/topological-sort.cpp.html">graph/topological-sort.cpp</a>
@@ -206,7 +206,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-h-max.test.cpp.html">verify/aoj-dsl-2-h-max.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-h.test.cpp.html">verify/aoj-dsl-2-h.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-i.test.cpp.html">verify/aoj-dsl-2-i.test.cpp</a>
-* :x: <a href="verify/verify/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/aoj-dsl-3-d-cartesiantree.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/aoj-dsl-3-d-cartesiantree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-3-d.test.cpp.html">verify/aoj-dsl-3-d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-5-b-bit2d.test.cpp.html">verify/aoj-dsl-5-b-bit2d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-5-b.test.cpp.html">verify/aoj-dsl-5-b.test.cpp</a>

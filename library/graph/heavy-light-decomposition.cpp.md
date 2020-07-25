@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: graph/heavy-light-decomposition.cpp
+# :heavy_check_mark: graph/heavy-light-decomposition.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/heavy-light-decomposition.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-25 13:28:15+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/aoj-dsl-3-d-cartesiantree.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/aoj-dsl-3-d-cartesiantree.test.cpp</a>
 
 
 ## Code
@@ -68,7 +68,7 @@ struct HeavyLightDecomposition {
         depth(g.size(), 0),
         in(g.size(), -1),
         out(g.size(), -1),
-        nxt(g.size(), 0),
+        nxt(g.size(), root),
         par(g.size(), root) {
     dfs_sz(root);
     dfs_hld(root);
