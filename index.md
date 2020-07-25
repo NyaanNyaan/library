@@ -38,20 +38,20 @@ layout: default
 
 ### .
 
-* :heavy_check_mark: <a href="library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="library/competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
 
 ### data-structure
 
-* :warning: <a href="library/data-structure/2d-binary-indexed-tree.cpp.html">data-structure/2d-binary-indexed-tree.cpp</a>
-* :warning: <a href="library/data-structure/2d-cumulative-sum.cpp.html">data-structure/2d-cumulative-sum.cpp</a>
+* :x: <a href="library/data-structure/2d-binary-indexed-tree.cpp.html">data-structure/2d-binary-indexed-tree.cpp</a>
+* :heavy_check_mark: <a href="library/data-structure/2d-cumulative-sum.cpp.html">data-structure/2d-cumulative-sum.cpp</a>
 * :heavy_check_mark: <a href="library/data-structure/binary-indexed-tree.cpp.html">data-structure/binary-indexed-tree.cpp</a>
 * :warning: <a href="library/data-structure/dynamic-binary-indexed-tree.cpp.html">data-structure/dynamic-binary-indexed-tree.cpp</a>
 * :heavy_check_mark: <a href="library/data-structure/dynamic-union-find.cpp.html">data-structure/dynamic-union-find.cpp</a>
 * :heavy_check_mark: <a href="library/data-structure/range-sum-range-add-bit.cpp.html">data-structure/range-sum-range-add-bit.cpp</a>
-* :warning: <a href="library/data-structure/sliding-window-minimum.cpp.html">data-structure/sliding-window-minimum.cpp</a>
+* :heavy_check_mark: <a href="library/data-structure/sliding-window-minimum.cpp.html">data-structure/sliding-window-minimum.cpp</a>
 * :warning: <a href="library/data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
 * :warning: <a href="library/data-structure/square-decomposition.cpp.html">data-structure/square-decomposition.cpp</a>
 * :heavy_check_mark: <a href="library/data-structure/union-find-with-potential.cpp.html">data-structure/union-find-with-potential.cpp</a>
@@ -206,6 +206,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-h-max.test.cpp.html">verify/aoj-dsl-2-h-max.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-h.test.cpp.html">verify/aoj-dsl-2-h.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/aoj-dsl-2-i.test.cpp.html">verify/aoj-dsl-2-i.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/aoj-dsl-3-d.test.cpp.html">verify/aoj-dsl-3-d.test.cpp</a>
+* :x: <a href="verify/verify/aoj-dsl-5-b-bit2d.test.cpp.html">verify/aoj-dsl-5-b-bit2d.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/aoj-dsl-5-b.test.cpp.html">verify/aoj-dsl-5-b.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yosupo-a-plus-b.test.cpp.html">verify/yosupo-a-plus-b.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>

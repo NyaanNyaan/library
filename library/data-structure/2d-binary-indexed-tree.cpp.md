@@ -25,20 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: data-structure/2d-binary-indexed-tree.cpp
+# :x: data-structure/2d-binary-indexed-tree.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/2d-binary-indexed-tree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-25 12:55:33+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Verified with
+
+* :x: <a href="../../verify/verify/aoj-dsl-5-b-bit2d.test.cpp.html">verify/aoj-dsl-5-b-bit2d.test.cpp</a>
 
 
 ## Code
@@ -52,10 +57,12 @@ layout: default
 #endif
 
 template <typename T>
-struct BIT2D {
+struct BinaryIndexedTree2D {
   int H, W;
   vector<vector<T>> bit;
-  BIT2D(int H, int W) : H(H), W(W) { bit.resize(H + 1, vector<T>(W + 1, 0)); }
+  BinaryIndexedTree2D(int H, int W) : H(H + 1), W(W + 1) {
+    bit.resize(H + 3, vector<T>(W + 3, 0));
+  }
   // 関数の入力のindexは0-originを想定
 
   // (x,y)にwを足す

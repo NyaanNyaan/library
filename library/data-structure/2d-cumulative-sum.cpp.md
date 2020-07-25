@@ -25,20 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: data-structure/2d-cumulative-sum.cpp
+# :heavy_check_mark: data-structure/2d-cumulative-sum.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/2d-cumulative-sum.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-25 12:55:33+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/aoj-dsl-5-b.test.cpp.html">verify/aoj-dsl-5-b.test.cpp</a>
 
 
 ## Code
@@ -56,12 +61,20 @@ template <class T>
 struct CumulativeSum2D {
   vector<vector<T> > data;
 
-  CumulativeSum2D(int H, int W) : data(H + 2, vector<int>(W + 2, 0)) {}
+  CumulativeSum2D(int H, int W) : data(H + 3, vector<int>(W + 3, 0)) {}
 
   void add(int i, int j, T z) {
     ++i, ++j;
     if (i >= (int)data.size() || j >= (int)data[0].size()) return;
     data[i][j] += z;
+  }
+
+  // add [ [i1,j1], [i2,j2] )
+  void imos(int i1, int j1, int i2, int j2, T z) {
+    add(i1, j1, 1);
+    add(i1, j2, -1);
+    add(i2, j1, -1);
+    add(i2, j2, 1);
   }
 
   void build() {

@@ -25,27 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+# :heavy_check_mark: verify/aoj-dsl-3-d.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#e8418d1d706cd73548f9f16f1d55ad6e">verify</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 21:03:47+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/aoj-dsl-3-d.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-25 12:55:33+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
 
 
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/arbitrary-modint.cpp.html">modint/arbitrary-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/sliding-window-minimum.cpp.html">data-structure/sliding-window-minimum.cpp</a>
 
 
 ## Code
@@ -53,23 +48,20 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include "../competitive-template.cpp"
-#include "../modint/arbitrary-modint.cpp"
-#include "../ntt/arbitrary-ntt.cpp"
-
-int MOD = 1000000007;
-using mint = ArbitraryModInt;
-using vm = vector<mint>;
+#include "../data-structure/sliding-window-minimum.cpp"
 
 void solve() {
-  mint::set_mod(MOD);
-  ini(N, M);
-  vm a(N), b(M);
-  in(a, b);
-  auto c = ArbitraryNTT::multiply(a, b);
-  out(c);
+  ini(N, L);
+  vi a(N);
+  in(a);
+  auto f = [](int a, int b) { return min(a, b); };
+  auto dat = SlideWindowMinimum<int, decltype(f)>(a, f, L);
+  dat.erase(begin(dat), begin(dat) + L);
+  out(dat);
 }
 ```
 {% endraw %}
