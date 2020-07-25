@@ -4,10 +4,7 @@
 #endif
 
 // SZの位置を直す
-constexpr int SZ = 1 << 19;
 #include <immintrin.h>
-using u32 = uint32_t;
-using u64 = uint64_t;
 
 __attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
 my128_mullo_epu32(const __m128i &a, const __m128i &b) {
@@ -85,8 +82,4 @@ __attribute__((target("avx2"))) __m256i montgomery_sub_256(const __m256i &a,
   __m256i ret = _mm256_sub_epi32(a, b);
   return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret), m2),
                           ret);
-}
-
-int main(){
-  
 }

@@ -5,6 +5,7 @@
 
 #include "../modint/simd-montgomery.cpp"
 
+constexpr int SZ = 1 << 19;
 uint32_t buf1_[SZ * 2] __attribute__((aligned(64)));
 uint32_t buf2_[SZ * 2] __attribute__((aligned(64)));
 
@@ -312,7 +313,7 @@ struct NTT {
     ntt(buf1, M);
     ntt(buf2, M);
     for (int i = 0; i < M; ++i)
-      buf1[i].a = mint::reduce(u64(buf1[i].a) * buf2[i].a);
+      buf1[i].a = mint::reduce(uint64_t(buf1[i].a) * buf2[i].a);
     intt(buf1, M, false);
     vector<mint> s(l);
     mint invm = mint(M).inverse();
