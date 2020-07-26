@@ -104,7 +104,7 @@ layout: default
 * :warning: <a href="tree/dsu-on-tree.cpp.html">tree/dsu-on-tree.cpp</a>
 * :warning: <a href="tree/euler-tour.cpp.html">tree/euler-tour.cpp</a>
 * :heavy_check_mark: <a href="tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
-* :warning: <a href="tree/rerooting.cpp.html">tree/rerooting.cpp</a>
+* :heavy_check_mark: <a href="tree/rerooting.cpp.html">tree/rerooting.cpp</a>
 
 
 ## Verified with
@@ -139,6 +139,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-4-a.test.cpp.html">verify-aoj-grl/aoj-grl-4-a.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-4-b.test.cpp.html">verify-aoj-grl/aoj-grl-4-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-a.test.cpp.html">verify-aoj-grl/aoj-grl-5-a.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-b.test.cpp.html">verify-aoj-grl/aoj-grl-5-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>

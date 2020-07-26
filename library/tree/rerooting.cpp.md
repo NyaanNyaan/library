@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: tree/rerooting.cpp
+# :heavy_check_mark: tree/rerooting.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/rerooting.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 00:00:31+09:00
+    - Last commit date: 2020-07-27 00:33:16+09:00
 
 
 
@@ -40,6 +40,11 @@ layout: default
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-b.test.cpp.html">verify-aoj-grl/aoj-grl-5-b.test.cpp</a>
 
 
 ## Code
@@ -56,7 +61,7 @@ layout: default
 
 // Rerooting
 // f1(c1, c2) ... merge value of child node
-// f2(memo[i] , i) ... return value to parent node
+// f2(memo[i], chd, par) ... return value from child node to parent node
 // memo[i] ... result of subtree rooted i
 // dp[i] ... result of tree rooted i
 template <typename T, typename G, typename F1, typename F2>
@@ -79,7 +84,7 @@ struct Rerooting {
     for (auto &dst : g[cur]) {
       if (dst == par) continue;
       dfs(dst, cur);
-      memo[cur] = f1(memo[cur], f2(memo[dst], dst));
+      memo[cur] = f1(memo[cur], f2(memo[dst], dst, cur));
     }
   }
 
@@ -88,7 +93,7 @@ struct Rerooting {
     vector<T> buf;
     for (auto dst : g[cur]) {
       if (dst == par) continue;
-      buf.push_back(f2(memo[dst], dst));
+      buf.push_back(f2(memo[dst], dst, cur));
     }
     vector<T> head(buf.size() + 1), tail(buf.size() + 1);
     head[0] = tail[buf.size()] = I;
@@ -103,7 +108,7 @@ struct Rerooting {
     int idx = 0;
     for (auto &dst : g[cur]) {
       if (dst == par) continue;
-      efs(dst, cur, f2(f1(pval, f1(head[idx], tail[idx + 1])), cur));
+      efs(dst, cur, f2(f1(pval, f1(head[idx], tail[idx + 1])), cur, dst));
       idx++;
     }
   }
@@ -118,8 +123,8 @@ T I = ;
 auto f1 = [&](T x, T y) -> T {
 
 };
-// return value to parent node
-auto f2 = [&](T x, int i) -> T {
+// return value from child node to parent node
+auto f2 = [&](T x, int chd, int par) -> T {
 
 };
 Rerooting<T, decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);
