@@ -59,8 +59,7 @@ WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
 
 // Input of Edges
 template <typename T>
-Edges<T> esgraph(int N, int M, int is_weighted = true,
-                         bool is_1origin = true) {
+Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
   Edges<T> es;
   for (int _ = 0; _ < M; _++) {
     int x, y;
@@ -79,7 +78,7 @@ Edges<T> esgraph(int N, int M, int is_weighted = true,
 // Input of Adjacency Matrix
 template <typename T>
 vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
-                            bool is_directed = false, bool is_1origin = true) {
+                           bool is_directed = false, bool is_1origin = true) {
   vector<vector<T>> d(N, vector<T>(N, INF));
   for (int _ = 0; _ < M; _++) {
     int x, y;
@@ -94,50 +93,4 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
     if (!is_directed) d[y][x] = c;
   }
   return d;
-}
-
-// Depth of Rooted Tree
-// unvisited nodes : d = -1
-vector<int> Depth(UnweightedGraph &g, int start = 0) {
-  vector<int> d(g.size(), -1);
-  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
-    d[cur] = par == -1 ? 0 : d[par] + 1;
-    each(dst, g[cur]) {
-      if (dst == par) continue;
-      rec(rec, dst, cur);
-    }
-  };
-  dfs(dfs, start);
-  return d;
-}
-
-// Diameter of Tree
-pair<int, int> Diameter(UnweightedGraph &g, int start = 0) {
-  auto d = Depth(g, start);
-  int u = max_element(begin(d), end(d)) - begin(d);
-  d = Depth(g, u);
-  int v = max_element(begin(d), end(d)) - begin(d);
-  return make_pair(u, v);
-}
-
-template <typename G>
-vector<int> path(G &g, int u, int v) {
-  vi ret;
-  int end = 0;
-  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
-    ret.pb(cur);
-    if (cur == v) {
-      end = 1;
-      return;
-    }
-    each(dst, g[cur]) {
-      if (dst == par) continue;
-      rec(rec, dst, cur);
-      if (end) return;
-    }
-    if (end) return;
-    ret.pop_back();
-  };
-  dfs(dfs, u);
-  return ret;
 }
