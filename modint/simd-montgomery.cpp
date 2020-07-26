@@ -21,21 +21,24 @@ my128_mulhi_epu32(const __m128i &a, const __m128i &b) {
   return prod;
 }
 
-__attribute__((target("sse4.2"))) __m128i montgomery_mul_128(
-    const __m128i &a, const __m128i &b, const __m128i &r, const __m128i &m1) {
+__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
+montgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i &r,
+                   const __m128i &m1) {
   return _mm_sub_epi32(
       _mm_add_epi32(my128_mulhi_epu32(a, b), m1),
       my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a, b), r), m1));
 }
 
-__attribute__((target("sse4.2"))) __m128i montgomery_add_128(
-    const __m128i &a, const __m128i &b, const __m128i &m2, const __m128i &m0) {
+__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
+montgomery_add_128(const __m128i &a, const __m128i &b, const __m128i &m2,
+                   const __m128i &m0) {
   __m128i ret = _mm_sub_epi32(_mm_add_epi32(a, b), m2);
   return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0, ret), m2), ret);
 }
 
-__attribute__((target("sse4.2"))) __m128i montgomery_sub_128(
-    const __m128i &a, const __m128i &b, const __m128i &m2, const __m128i &m0) {
+__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
+montgomery_sub_128(const __m128i &a, const __m128i &b, const __m128i &m2,
+                   const __m128i &m0) {
   __m128i ret = _mm_sub_epi32(a, b);
   return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0, ret), m2), ret);
 }
@@ -56,28 +59,25 @@ my256_mulhi_epu32(const __m256i &a, const __m256i &b) {
   return prod;
 }
 
-__attribute__((target("avx2"))) __m256i montgomery_mul_256(const __m256i &a,
-                                                           const __m256i &b,
-                                                           const __m256i &r,
-                                                           const __m256i &m1) {
+__attribute__((target("avx2"))) __attribute__((always_inline)) __m256i
+montgomery_mul_256(const __m256i &a, const __m256i &b, const __m256i &r,
+                   const __m256i &m1) {
   return _mm256_sub_epi32(
       _mm256_add_epi32(my256_mulhi_epu32(a, b), m1),
       my256_mulhi_epu32(my256_mullo_epu32(my256_mullo_epu32(a, b), r), m1));
 }
 
-__attribute__((target("avx2"))) __m256i montgomery_add_256(const __m256i &a,
-                                                           const __m256i &b,
-                                                           const __m256i &m2,
-                                                           const __m256i &m0) {
+__attribute__((target("avx2"))) __attribute__((always_inline)) __m256i
+montgomery_add_256(const __m256i &a, const __m256i &b, const __m256i &m2,
+                   const __m256i &m0) {
   __m256i ret = _mm256_sub_epi32(_mm256_add_epi32(a, b), m2);
   return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret), m2),
                           ret);
 }
 
-__attribute__((target("avx2"))) __m256i montgomery_sub_256(const __m256i &a,
-                                                           const __m256i &b,
-                                                           const __m256i &m2,
-                                                           const __m256i &m0) {
+__attribute__((target("avx2"))) __attribute__((always_inline)) __m256i
+montgomery_sub_256(const __m256i &a, const __m256i &b, const __m256i &m2,
+                   const __m256i &m0) {
   __m256i ret = _mm256_sub_epi32(a, b);
   return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret), m2),
                           ret);
