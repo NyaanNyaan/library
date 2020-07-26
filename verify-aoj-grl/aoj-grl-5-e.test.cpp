@@ -16,17 +16,17 @@ void solve() {
   }
 
   HeavyLightDecomposition<vvi> hld(g);
-  AddSum_LazySegmentTree<int> seg(vi(N, 0));
-  int W = 0;
+  AddSum_LazySegmentTree<ll> seg(vl(N, 0));
+  ll W = 0;
   auto add = [&](int u, int v) { seg.update(u, v, W); };
-  int ans = 0;
+  ll ans = 0;
   auto query = [&](int u, int v) { ans += seg.query(u, v); };
 
   ini(Q);
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(v, w);
+      inl(v, w);
       W = w;
       hld.edge_query(0, v, add);
     } else {
