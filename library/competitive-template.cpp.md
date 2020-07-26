@@ -162,6 +162,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 

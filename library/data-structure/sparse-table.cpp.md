@@ -49,6 +49,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 
