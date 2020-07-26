@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: graph/euler-tour.cpp
+# :warning: tree/euler-tour.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/euler-tour.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 23:51:38+09:00
+* category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
+* <a href="{{ site.github.repository_url }}/blob/master/tree/euler-tour.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-27 00:00:31+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Code
@@ -52,7 +52,7 @@ layout: default
 #include "../competitive-template.cpp"
 #endif
 
-#include "./graph-template.cpp"
+#include "../graph/graph-template.cpp"
 
 // euler tour of node
 struct EulerTour {
@@ -186,7 +186,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: graph/euler-tour.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: tree/euler-tour.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

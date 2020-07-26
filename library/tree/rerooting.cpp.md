@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: dp/rerooting.cpp
+# :warning: tree/rerooting.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#95687afb5d9a2a9fa39038f991640b0c">dp</a>
-* <a href="{{ site.github.repository_url }}/blob/master/dp/rerooting.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+* category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
+* <a href="{{ site.github.repository_url }}/blob/master/tree/rerooting.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-27 00:00:31+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Code
@@ -51,12 +52,13 @@ layout: default
 #include "../competitive-template.cpp"
 #endif
 
+#include "../graph/graph-template.cpp"
+
 // Rerooting
 // f1(c1, c2) ... merge value of child node
 // f2(memo[i] , i) ... return value to parent node
 // memo[i] ... result of subtree rooted i
 // dp[i] ... result of tree rooted i
-
 template <typename T, typename G, typename F1, typename F2>
 struct Rerooting {
   const G &g;
@@ -136,7 +138,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: dp/rerooting.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: tree/rerooting.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

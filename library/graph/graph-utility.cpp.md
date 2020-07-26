@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/graph-utility.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 23:51:38+09:00
+    - Last commit date: 2020-07-27 00:00:31+09:00
 
 
 
@@ -74,6 +74,8 @@ vector<int> Depth(const UnweightedGraph &g, int start = 0) {
   return d;
 }
 
+// Depth of Rooted Weighted Tree
+// unvisited nodes : d = -1
 template <typename T>
 vector<T> Depth(const WeightedGraph<T> &g, int start = 0) {
   vector<T> d(g.size(), -1);
@@ -109,6 +111,7 @@ pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {
   return make_pair(make_pair(u, v), d[v]);
 }
 
+// nodes on the path u-v ( O(N) )
 template <typename G>
 vector<int> path(G &g, int u, int v) {
   vi ret;

@@ -50,16 +50,10 @@ layout: default
 * :warning: <a href="data-structure/square-decomposition.cpp.html">data-structure/square-decomposition.cpp</a>
 * :heavy_check_mark: <a href="data-structure/union-find-with-potential.cpp.html">data-structure/union-find-with-potential.cpp</a>
 * :heavy_check_mark: <a href="data-structure/union-find.cpp.html">data-structure/union-find.cpp</a>
-* :warning: <a href="dp/dsu-on-tree.cpp.html">dp/dsu-on-tree.cpp</a>
-* :warning: <a href="dp/rerooting.cpp.html">dp/rerooting.cpp</a>
-* :warning: <a href="dp/subsequence-dp.cpp.html">dp/subsequence-dp.cpp</a>
 * :warning: <a href="geometry/geometry.cpp.html">geometry/geometry.cpp</a>
-* :heavy_check_mark: <a href="graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
 * :warning: <a href="graph/dimension-expanded-graph.cpp.html">graph/dimension-expanded-graph.cpp</a>
-* :warning: <a href="graph/euler-tour.cpp.html">graph/euler-tour.cpp</a>
 * :heavy_check_mark: <a href="graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 * :heavy_check_mark: <a href="graph/graph-utility.cpp.html">graph/graph-utility.cpp</a>
-* :heavy_check_mark: <a href="graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
 * :heavy_check_mark: <a href="graph/kruskal.cpp.html">graph/kruskal.cpp</a>
 * :heavy_check_mark: <a href="graph/lowlink.cpp.html">graph/lowlink.cpp</a>
 * :heavy_check_mark: <a href="graph/strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
@@ -105,6 +99,12 @@ layout: default
 * :heavy_check_mark: <a href="shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
 * :heavy_check_mark: <a href="shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
 * :heavy_check_mark: <a href="shortest-path/warshall-floyd.cpp.html">shortest-path/warshall-floyd.cpp</a>
+* :warning: <a href="string/subsequence-dp.cpp.html">string/subsequence-dp.cpp</a>
+* :heavy_check_mark: <a href="tree/cartesian-tree.cpp.html">tree/cartesian-tree.cpp</a>
+* :warning: <a href="tree/dsu-on-tree.cpp.html">tree/dsu-on-tree.cpp</a>
+* :warning: <a href="tree/euler-tour.cpp.html">tree/euler-tour.cpp</a>
+* :heavy_check_mark: <a href="tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
+* :warning: <a href="tree/rerooting.cpp.html">tree/rerooting.cpp</a>
 
 
 ## Verified with

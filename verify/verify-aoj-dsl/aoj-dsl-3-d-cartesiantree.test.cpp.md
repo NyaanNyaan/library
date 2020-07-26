@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 23:51:38+09:00
+    - Last commit date: 2020-07-27 00:00:31+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
@@ -40,9 +40,9 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
 * :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
+* :heavy_check_mark: <a href="../../library/tree/cartesian-tree.cpp.html">tree/cartesian-tree.cpp</a>
+* :heavy_check_mark: <a href="../../library/tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
 
 
 ## Code
@@ -54,8 +54,8 @@ layout: default
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include "../competitive-template.cpp"
-#include "../graph/cartesian-tree.cpp"
-#include "../graph/heavy-light-decomposition.cpp"
+#include "../tree/cartesian-tree.cpp"
+#include "../tree/heavy-light-decomposition.cpp"
 
 void solve() {
   ini(N, L);

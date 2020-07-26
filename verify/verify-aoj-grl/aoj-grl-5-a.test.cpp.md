@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-5-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 23:51:38+09:00
+    - Last commit date: 2020-07-27 00:00:31+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_A</a>

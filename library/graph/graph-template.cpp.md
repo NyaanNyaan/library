@@ -43,11 +43,8 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
 * :warning: <a href="dimension-expanded-graph.cpp.html">graph/dimension-expanded-graph.cpp</a>
-* :warning: <a href="euler-tour.cpp.html">graph/euler-tour.cpp</a>
 * :heavy_check_mark: <a href="graph-utility.cpp.html">graph/graph-utility.cpp</a>
-* :heavy_check_mark: <a href="heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
 * :heavy_check_mark: <a href="kruskal.cpp.html">graph/kruskal.cpp</a>
 * :heavy_check_mark: <a href="lowlink.cpp.html">graph/lowlink.cpp</a>
 * :heavy_check_mark: <a href="strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
@@ -55,6 +52,11 @@ layout: default
 * :heavy_check_mark: <a href="../shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
 * :heavy_check_mark: <a href="../shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
 * :heavy_check_mark: <a href="../shortest-path/warshall-floyd.cpp.html">shortest-path/warshall-floyd.cpp</a>
+* :heavy_check_mark: <a href="../tree/cartesian-tree.cpp.html">tree/cartesian-tree.cpp</a>
+* :warning: <a href="../tree/dsu-on-tree.cpp.html">tree/dsu-on-tree.cpp</a>
+* :warning: <a href="../tree/euler-tour.cpp.html">tree/euler-tour.cpp</a>
+* :heavy_check_mark: <a href="../tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
+* :warning: <a href="../tree/rerooting.cpp.html">tree/rerooting.cpp</a>
 
 
 ## Verified with
