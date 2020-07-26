@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/heavy-light-decomposition.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 00:00:31+09:00
+    - Last commit date: 2020-07-27 01:36:08+09:00
 
 
 
@@ -46,7 +46,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
+* :x: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 * :x: <a href="../../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 
 
@@ -119,7 +119,7 @@ struct HeavyLightDecomposition {
     while (1) {
       if (in[u] > in[v]) swap(u, v);
       if (nxt[u] != nxt[v]) {
-        f(in[nxt[v]], in[v] + 1);
+        f(in[nxt[v]] + 1, in[v] + 1);
         v = par[nxt[v]];
       } else {
         if (u != v) f(in[u] + 1, in[v] + 1);

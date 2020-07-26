@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: math/elementary-function.cpp
+# :heavy_check_mark: math/elementary-function.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,6 +39,11 @@ layout: default
 ## Depends on
 
 * :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
 
 
 ## Code

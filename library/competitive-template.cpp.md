@@ -60,7 +60,7 @@ layout: default
 * :heavy_check_mark: <a href="graph/topological-sort.cpp.html">graph/topological-sort.cpp</a>
 * :warning: <a href="math/binomial.cpp.html">math/binomial.cpp</a>
 * :warning: <a href="math/divisor-multiple-transform.cpp.html">math/divisor-multiple-transform.cpp</a>
-* :warning: <a href="math/elementary-function.cpp.html">math/elementary-function.cpp</a>
+* :heavy_check_mark: <a href="math/elementary-function.cpp.html">math/elementary-function.cpp</a>
 * :warning: <a href="math/f2.cpp.html">math/f2.cpp</a>
 * :warning: <a href="math/float-binomial.cpp.html">math/float-binomial.cpp</a>
 * :warning: <a href="math/gray-code.cpp.html">math/gray-code.cpp</a>
@@ -142,8 +142,9 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-a.test.cpp.html">verify-aoj-grl/aoj-grl-5-a.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-b.test.cpp.html">verify-aoj-grl/aoj-grl-5-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
+* :x: <a href="../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 * :x: <a href="../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>

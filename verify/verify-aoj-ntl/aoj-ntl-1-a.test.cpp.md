@@ -25,23 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-grl/aoj-grl-5-c.test.cpp
+# :heavy_check_mark: verify-aoj-ntl/aoj-ntl-1-a.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-5-c.test.cpp">View this file on GitHub</a>
+* category: <a href="../../index.html#bffdd07a318a75234329b02eb9a9745b">verify-aoj-ntl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-ntl/aoj-ntl-1-a.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-27 01:36:08+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A</a>
 
 
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :question: <a href="../../library/tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
+* :heavy_check_mark: <a href="../../library/math/elementary-function.cpp.html">math/elementary-function.cpp</a>
 
 
 ## Code
@@ -50,25 +49,19 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A"
 
 #include "../competitive-template.cpp"
-#include "../tree/heavy-light-decomposition.cpp"
+#include "../math/elementary-function.cpp"
 
 void solve() {
   ini(N);
-  vvi g(N);
-  rep(i,N){
-    ini(n);
-    g[i].resize(n);
-    in(g[i]);
-  }
-  HeavyLightDecomposition<vvi> hld(g);
-  ini(Q);
-  rep(_,Q){
-    ini(u,v);
-    out(hld.lca(u,v));
-  }
+  auto factor = PrimeFactors(N);
+  vi ans;
+  each(p,factor) rep(_,p.second)ans.pb(p.first);
+  cout << N << ":";
+  each(x,ans)cout<< " " << x;
+  cout << endl;
 }
 ```
 {% endraw %}
