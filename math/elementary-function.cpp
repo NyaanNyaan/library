@@ -131,17 +131,26 @@ long long PrimitiveRoot(long long mod) {
   return ret;
 }
 
+// Euler's phi function
+long long phi(long long n) {
+  auto pf = PrimeFactors(n);
+  long long ret = n;
+  for (auto p : pf) {
+    ret /= p.first;
+    ret *= (p.first - 1);
+  }
+  return ret;
+}
+
 // Extended Euclidean algorithm
 // solve : ax + by = gcd(a, b)
-long long extgcd(long long a, long long b, long long &x, long long &y) {
-  if (b == 0) {
-    x = 1;
-    y = 0;
-    return a;
-  }
-  long long d = extgcd(b, a % b, y, x);
+// return : pair(x, y)
+pair<long long, long long> extgcd(long long a, long long b) {
+  if (b == 0) return make_pair(1, 0);
+  long long x, y;
+  tie(y, x) = extgcd(b, a % b);
   y -= a / b * x;
-  return d;
+  return make_pair(x, y);
 }
 
 // Check if n is Square Number
