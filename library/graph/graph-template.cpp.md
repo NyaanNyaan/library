@@ -74,6 +74,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp.html">verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-a.test.cpp.html">verify-aoj-grl/aoj-grl-5-a.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-b.test.cpp.html">verify-aoj-grl/aoj-grl-5-b.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 
 
 ## Code

@@ -45,6 +45,8 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 
 
 ## Code
