@@ -25,33 +25,43 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/graph-template.cpp
+# :question: graph/graph-template.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/graph-template.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-26 22:43:08+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Required by
 
+* :heavy_check_mark: <a href="cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
+* :warning: <a href="dimension-expanded-graph.cpp.html">graph/dimension-expanded-graph.cpp</a>
+* :warning: <a href="euler-tour.cpp.html">graph/euler-tour.cpp</a>
+* :heavy_check_mark: <a href="heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
 * :warning: <a href="kruskal.cpp.html">graph/kruskal.cpp</a>
+* :warning: <a href="strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
+* :warning: <a href="topological-sort.cpp.html">graph/topological-sort.cpp</a>
 * :heavy_check_mark: <a href="../shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
-* :heavy_check_mark: <a href="../shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+* :question: <a href="../shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+* :heavy_check_mark: <a href="../shortest-path/warshall-floyd.cpp.html">shortest-path/warshall-floyd.cpp</a>
 
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-a.test.cpp.html">verify-aoj-grl/aoj-grl-1-a.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-b.test.cpp.html">verify-aoj-grl/aoj-grl-1-b.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-c.test.cpp.html">verify-aoj-grl/aoj-grl-1-c.test.cpp</a>
+* :x: <a href="../../verify/verify-aoj-grl/aoj-grl-2-a.test.cpp.html">verify-aoj-grl/aoj-grl-2-a.test.cpp</a>
 
 
 ## Code
@@ -116,6 +126,45 @@ WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
     if (!is_directed) g[y].eb(y, x, c);
   }
   return g;
+}
+
+// Input of Edges
+template <typename T>
+Edges<T> esgraph(int N, int M, int is_weighted = true,
+                         bool is_1origin = true) {
+  Edges<T> es;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    es.emplace_back(x, y, c);
+  }
+  return es;
+}
+
+// Input of Adjacency Matrix
+template <typename T>
+vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
+                            bool is_directed = false, bool is_1origin = true) {
+  vector<vector<T>> d(N, vector<T>(N, INF));
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    d[x][y] = c;
+    if (!is_directed) d[y][x] = c;
+  }
+  return d;
 }
 
 // Depth of Rooted Tree

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-1-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 20:13:13+09:00
+    - Last commit date: 2020-07-26 22:43:08+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 * :heavy_check_mark: <a href="../../library/shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
 
 
@@ -57,11 +57,7 @@ layout: default
 
 void solve() {
   ini(N, E, S);
-  Edges<int> es;
-  rep(_, E) {
-    ini(u, v, w);
-    es.emplace_back(u, v, w);
-  }
+  auto es = esgraph<int>(N, E, true, false);
   auto d = bellman_ford<int>(N, es, S);
   if (!sz(d)) die("NEGATIVE CYCLE");
   each(x, d) {

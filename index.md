@@ -38,7 +38,7 @@ layout: default
 
 ### .
 
-* :heavy_check_mark: <a href="library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="library/competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -89,7 +89,7 @@ layout: default
 * :heavy_check_mark: <a href="library/graph/cartesian-tree.cpp.html">graph/cartesian-tree.cpp</a>
 * :warning: <a href="library/graph/dimension-expanded-graph.cpp.html">graph/dimension-expanded-graph.cpp</a>
 * :warning: <a href="library/graph/euler-tour.cpp.html">graph/euler-tour.cpp</a>
-* :heavy_check_mark: <a href="library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 * :heavy_check_mark: <a href="library/graph/heavy-light-decomposition.cpp.html">graph/heavy-light-decomposition.cpp</a>
 * :warning: <a href="library/graph/kruskal.cpp.html">graph/kruskal.cpp</a>
 * :warning: <a href="library/graph/strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
@@ -169,7 +169,7 @@ layout: default
 ### shortest-path
 
 * :heavy_check_mark: <a href="library/shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
-* :heavy_check_mark: <a href="library/shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+* :question: <a href="library/shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
 * :heavy_check_mark: <a href="library/shortest-path/warshall-floyd.cpp.html">shortest-path/warshall-floyd.cpp</a>
 
 
@@ -215,6 +215,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-aoj-grl/aoj-grl-1-a.test.cpp.html">verify-aoj-grl/aoj-grl-1-a.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-aoj-grl/aoj-grl-1-b.test.cpp.html">verify-aoj-grl/aoj-grl-1-b.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-aoj-grl/aoj-grl-1-c.test.cpp.html">verify-aoj-grl/aoj-grl-1-c.test.cpp</a>
+* :x: <a href="verify/verify-aoj-grl/aoj-grl-2-a.test.cpp.html">verify-aoj-grl/aoj-grl-2-a.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>

@@ -25,26 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: shortest-path/dijkstra.cpp
+# :question: shortest-path/dijkstra.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#d53d0f39583bbf03056486512d3e44bc">shortest-path</a>
 * <a href="{{ site.github.repository_url }}/blob/master/shortest-path/dijkstra.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 16:37:33+09:00
+    - Last commit date: 2020-07-26 22:43:08+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-a.test.cpp.html">verify-aoj-grl/aoj-grl-1-a.test.cpp</a>
+* :x: <a href="../../verify/verify-aoj-grl/aoj-grl-2-a.test.cpp.html">verify-aoj-grl/aoj-grl-2-a.test.cpp</a>
 
 
 ## Code

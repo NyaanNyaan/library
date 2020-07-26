@@ -31,14 +31,15 @@ layout: default
 
 * category: <a href="../../index.html#d53d0f39583bbf03056486512d3e44bc">shortest-path</a>
 * <a href="{{ site.github.repository_url }}/blob/master/shortest-path/warshall-floyd.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 20:13:13+09:00
+    - Last commit date: 2020-07-26 22:43:08+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Verified with
@@ -55,6 +56,8 @@ layout: default
 #ifndef Nyaan_template
 #include "../competitive-template.cpp"
 #endif
+
+#include "../graph/graph-template.cpp"
 
 // i : d[i][i] < 0 exists -> negative cycle
 template <typename T>

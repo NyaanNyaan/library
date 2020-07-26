@@ -25,22 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-5-b.test.cpp
+# :x: verify-aoj-grl/aoj-grl-2-a.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-5-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 13:55:18+09:00
+* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-2-a.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-26 22:43:08+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A</a>
 
 
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/2d-cumulative-sum.cpp.html">data-structure/2d-cumulative-sum.cpp</a>
+* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../../library/shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
 
 
 ## Code
@@ -49,23 +50,21 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
 
 #include "../competitive-template.cpp"
-#include "../data-structure/2d-cumulative-sum.cpp"
+#include "../shortest-path/dijkstra.cpp"
 
 void solve() {
-  ini(N);
-  int L = 1000;
-  CumulativeSum2D<int> ruiseki(L, L);
-  rep(i, N) {
-    ini(x1, y1, x2, y2);
-    ruiseki.imos(x1, y1, x2 , y2, 1);
+  ini(N, E, S);
+  auto g = wgraph<int>(N, E, true, false);
+  auto d = dijkstra<int>(g, S);
+  each(x, d) {
+    if (x > TEN(9))
+      out("INF");
+    else
+      out(x);
   }
-  ruiseki.build();
-  int ans = 0;
-  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]); }
-  out(ans);
 }
 ```
 {% endraw %}

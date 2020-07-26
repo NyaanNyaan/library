@@ -31,14 +31,15 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/strongly-connected-components.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-26 22:43:08+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Code
@@ -50,6 +51,8 @@ layout: default
 #ifndef Nyaan_template
 #include "../competitive-template.cpp"
 #endif
+
+#include "./graph-template.cpp"
 
 // Strongly Connected Components
 // initialize        ... StronglyConnectedComponents scc(g);

@@ -31,15 +31,15 @@ layout: default
 
 * category: <a href="../../index.html#d53d0f39583bbf03056486512d3e44bc">shortest-path</a>
 * <a href="{{ site.github.repository_url }}/blob/master/shortest-path/bellman-ford.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 16:37:33+09:00
+    - Last commit date: 2020-07-26 22:43:08+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Verified with
