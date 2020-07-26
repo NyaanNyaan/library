@@ -62,7 +62,7 @@ struct HeavyLightDecomposition {
     while (1) {
       if (in[u] > in[v]) swap(u, v);
       if (nxt[u] != nxt[v]) {
-        f(in[nxt[v]], in[v] + 1);
+        f(in[nxt[v]] + 1, in[v] + 1);
         v = par[nxt[v]];
       } else {
         if (u != v) f(in[u] + 1, in[v] + 1);
