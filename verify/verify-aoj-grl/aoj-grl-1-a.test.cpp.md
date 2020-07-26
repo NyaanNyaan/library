@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :question: <a href="../../library/shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
 
 
 ## Code

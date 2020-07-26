@@ -25,21 +25,26 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: graph/strongly-connected-components.cpp
+# :heavy_check_mark: graph/strongly-connected-components.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/strongly-connected-components.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 22:43:08+09:00
+    - Last commit date: 2020-07-26 23:17:10+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-3-c.test.cpp.html">verify-aoj-grl/aoj-grl-3-c.test.cpp</a>
 
 
 ## Code
@@ -55,24 +60,27 @@ layout: default
 #include "./graph-template.cpp"
 
 // Strongly Connected Components
-// initialize        ... StronglyConnectedComponents scc(g);
-// build             ... vvi h; scc.build(h);
+// DAG of SC graph   ... scc.dag (including multiedges)
 // new node of k     ... scc[k]
-// inv of scc[k] = i ... scc.belong(i)
+// inv of scc[k] = i ... scc.blng(i)
 template <typename G>
 struct StronglyConnectedComponents {
+ private:
   const G &g;
   vector<vector<int>> rg;
   vector<int> comp, order;
   vector<char> used;
   vector<vector<int>> blng;
 
-  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) {}
+ public:
+  vector<vector<int>> dag;
+  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }
 
   int operator[](int k) { return comp[k]; }
 
   vector<int> &belong(int i) { return blng[i]; }
 
+ private:
   void dfs(int idx) {
     if (used[idx]) return;
     used[idx] = true;
@@ -86,7 +94,7 @@ struct StronglyConnectedComponents {
     for (int to : rg[idx]) rdfs(to, cnt);
   }
 
-  void build(vector<vector<int>> &t) {
+  void build() {
     for (int i = 0; i < (int)g.size(); i++) dfs(i);
     reverse(begin(order), end(order));
     used.clear();
@@ -108,14 +116,14 @@ struct StronglyConnectedComponents {
     order.clear();
     order.shrink_to_fit();
 
-    t.resize(ptr);
+    dag.resize(ptr);
     blng.resize(ptr);
     for (int i = 0; i < (int)g.size(); i++) {
       blng[comp[i]].push_back(i);
       for (auto &to : g[i]) {
         int x = comp[i], y = comp[to];
         if (x == y) continue;
-        t[x].push_back(y);
+        dag[x].push_back(y);
       }
     }
   }

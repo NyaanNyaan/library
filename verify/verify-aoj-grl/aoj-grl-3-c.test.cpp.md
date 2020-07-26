@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+# :heavy_check_mark: verify-aoj-grl/aoj-grl-3-c.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 13:55:18+09:00
+* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-3-c.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-26 23:17:10+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/modint.cpp.html">modint/modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt.cpp.html">ntt/ntt.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
 
 
 ## Code
@@ -49,23 +49,21 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C"
 
 #include "../competitive-template.cpp"
-#include "../modint/modint.cpp"
-#include "../ntt/ntt.cpp"
-
-constexpr int MOD = 998244353;
-using mint = ModInt<MOD>;
-using vm = vector<mint>;
+#include "../graph/strongly-connected-components.cpp"
 
 void solve() {
-  NTT<mint> ntt;
-  ini(N, M);
-  vm a(N), b(M);
-  in(a, b);
-  auto c = ntt.multiply(a, b);
-  out(c);
+  ini(N,M);
+  auto g=graph(N,M,true,false);
+  StronglyConnectedComponents<vvi> scc(g);
+  ini(Q);
+  rep(_,Q){
+    ini(u,v);
+    out(scc[u] == scc[v]);
+  }
 }
 ```
 {% endraw %}

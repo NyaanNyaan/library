@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify-aoj-grl/aoj-grl-2-a.test.cpp
+# :heavy_check_mark: verify-aoj-grl/aoj-grl-2-a.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-2-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 22:43:08+09:00
+    - Last commit date: 2020-07-26 23:17:10+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A</a>
@@ -39,9 +39,10 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :question: <a href="../../library/shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/union-find.cpp.html">data-structure/union-find.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/kruskal.cpp.html">graph/kruskal.cpp</a>
 
 
 ## Code
@@ -53,18 +54,13 @@ layout: default
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
 
 #include "../competitive-template.cpp"
-#include "../shortest-path/dijkstra.cpp"
+#include "../graph/kruskal.cpp"
 
 void solve() {
-  ini(N, E, S);
-  auto g = wgraph<int>(N, E, true, false);
-  auto d = dijkstra<int>(g, S);
-  each(x, d) {
-    if (x > TEN(9))
-      out("INF");
-    else
-      out(x);
-  }
+  ini(N, E);
+  auto es = esgraph<int>(N, E, true, false);
+  auto mst = kruskal(N, es);
+  out(mst);
 }
 ```
 {% endraw %}

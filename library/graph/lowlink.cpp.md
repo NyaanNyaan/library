@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: shortest-path/bellman-ford.cpp
+# :heavy_check_mark: graph/lowlink.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#d53d0f39583bbf03056486512d3e44bc">shortest-path</a>
-* <a href="{{ site.github.repository_url }}/blob/master/shortest-path/bellman-ford.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 22:43:08+09:00
+* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
+* <a href="{{ site.github.repository_url }}/blob/master/graph/lowlink.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-26 23:17:10+09:00
 
 
 
@@ -39,12 +39,13 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-b.test.cpp.html">verify-aoj-grl/aoj-grl-1-b.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-3-a.test.cpp.html">verify-aoj-grl/aoj-grl-3-a.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-3-b.test.cpp.html">verify-aoj-grl/aoj-grl-3-b.test.cpp</a>
 
 
 ## Code
@@ -57,42 +58,53 @@ layout: default
 #include "../competitive-template.cpp"
 #endif
 
-#include "../graph/graph-template.cpp"
+#include "./graph-template.cpp"
 
-// bellman-ford法
-// goalが存在しないとき-> 負閉路が存在するときは空列を返す
-// goalが存在するとき  -> startとgoalの間に負閉路が存在する時に負閉路を返す
-template<typename T>
-vector<T> bellman_ford(int N, Edges<T>& es , int start = 0 , int goal = -1){
-  T INF = numeric_limits< T >::max() / 2;
-  vector<T> d(N , INF);
-  d[start] = 0;
-  for(int i = 0 ; i < N ; i++){
-    bool update = false;
-    for(auto &e : es){
-      if(d[e.src] == INF) continue;
-      if(d[e.to] > d[e.src] + e.cost){
-        update = true , d[e.to] = d[e.src] + e.cost;
+// LowLink ... enumerate bridge and articulation point
+// bridge ... 橋 articulation point ... 関節点
+template <typename G>
+struct LowLink {
+  int N;
+  const G &g;
+  vector<int> ord, low, articulation;
+  vector<pair<int, int> > bridge;
+  
+  LowLink(const G &g) : g(g) {
+    N = g.size();
+    ord.resize(N, -1);
+    low.resize(N, -1);
+    articulation.reserve(N);
+    bridge.reserve(N);
+    int k = 0;
+    for (int i = 0; i < N; i++) {
+      if (!(~ord[i])) k = dfs(i, k, -1);
+    }
+    articulation.shrink_to_fit();
+    bridge.shrink_to_fit();
+  }
+
+  int dfs(int idx, int k, int par) {
+    low[idx] = (ord[idx] = k++);
+    int cnt = 0;
+    bool is_arti = false;
+    for (auto &to : g[idx]) {
+      if (ord[to] == -1) {
+        cnt++;
+        k = dfs(to, k, idx);
+        low[idx] = min(low[idx], low[to]);
+        is_arti |= (par != -1) && (low[to] >= ord[idx]);
+        if (ord[idx] < low[to]) {
+          bridge.emplace_back(minmax(idx, (int)to));
+        }
+      } else if (to != par) {
+        low[idx] = min(low[idx], ord[to]);
       }
     }
-    if(!update) return d;
+    is_arti |= par == -1 && cnt > 1;
+    if (is_arti) articulation.push_back(idx);
+    return k;
   }
-
-  if(goal == -1) return vector<T>();
-  vector<bool> negative(N , false);
-  for(int i = 0 ; i < N ; i++){
-    for(auto &e : es){
-      if(d[e.src] == INF) continue;
-      if(d[e.to] > d[e.src] + e.cost)
-        negative[e.to] = true , d[e.to] = d[e.src] + e.cost;
-      if(negative[e.src] == true)
-        negative[e.to] = true;
-    }
-  }
-
-  if(negative[goal] == true) return vector<T>();
-  else return d;  
-}
+};
 ```
 {% endraw %}
 
@@ -106,7 +118,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: shortest-path/bellman-ford.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: graph/lowlink.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

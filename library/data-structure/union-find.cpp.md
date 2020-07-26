@@ -38,17 +38,18 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Required by
 
-* :warning: <a href="../graph/kruskal.cpp.html">graph/kruskal.cpp</a>
+* :heavy_check_mark: <a href="../graph/kruskal.cpp.html">graph/kruskal.cpp</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp.html">verify-aoj-dsl/aoj-dsl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-2-a.test.cpp.html">verify-aoj-grl/aoj-grl-2-a.test.cpp</a>
 
 
 ## Code
