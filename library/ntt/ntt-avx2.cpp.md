@@ -42,8 +42,16 @@ layout: default
 * :heavy_check_mark: <a href="../modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
 
 
+## Required by
+
+* :heavy_check_mark: <a href="arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
+
+
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
 
 

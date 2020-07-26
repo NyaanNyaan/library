@@ -164,13 +164,13 @@ layout: default
 * :heavy_check_mark: <a href="library/segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
 
 
-<div id="921df370d67d5070df2d096914bd2eb0"></div>
+<div id="d53d0f39583bbf03056486512d3e44bc"></div>
 
-### shorest-path
+### shortest-path
 
-* :warning: <a href="library/shorest-path/bellman-ford.cpp.html">shorest-path/bellman-ford.cpp</a>
-* :warning: <a href="library/shorest-path/dijkstra.cpp.html">shorest-path/dijkstra.cpp</a>
-* :warning: <a href="library/shorest-path/warshall-floyd.cpp.html">shorest-path/warshall-floyd.cpp</a>
+* :warning: <a href="library/shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
+* :warning: <a href="library/shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+* :warning: <a href="library/shortest-path/warshall-floyd.cpp.html">shortest-path/warshall-floyd.cpp</a>
 
 
 <div id="54de4c5e0ecfc39083b31b56ee36cb19"></div>

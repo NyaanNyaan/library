@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/arbitrary-ntt.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 06:55:28+09:00
+    - Last commit date: 2020-07-26 16:37:33+09:00
 
 
 
@@ -43,7 +43,7 @@ layout: default
 * :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.cpp.html">modint/arbitrary-prime-modint.cpp</a>
 * :heavy_check_mark: <a href="../modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
 * :heavy_check_mark: <a href="../modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
-* :heavy_check_mark: <a href="ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="ntt-avx2.cpp.html">ntt/ntt-avx2.cpp</a>
 
 
 ## Verified with
@@ -67,7 +67,7 @@ layout: default
 #include "../modint/arbitrary-prime-modint.cpp"
 #include "../modint/montgomery-modint.cpp"
 #include "../modint/simd-montgomery.cpp"
-#include "./ntt-sse42.cpp"
+#include "./ntt-avx2.cpp"
 
 namespace ArbitraryNTT {
 constexpr int32_t m0 = 167772161;

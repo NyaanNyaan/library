@@ -100,9 +100,9 @@ layout: default
 * :heavy_check_mark: <a href="segment-tree/range-update-range-sum-lazyseg.cpp.html">segment-tree/range-update-range-sum-lazyseg.cpp</a>
 * :warning: <a href="segment-tree/range-weighted-add-range-sum-lazyseg.cpp.html">segment-tree/range-weighted-add-range-sum-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
-* :warning: <a href="shorest-path/bellman-ford.cpp.html">shorest-path/bellman-ford.cpp</a>
-* :warning: <a href="shorest-path/dijkstra.cpp.html">shorest-path/dijkstra.cpp</a>
-* :warning: <a href="shorest-path/warshall-floyd.cpp.html">shorest-path/warshall-floyd.cpp</a>
+* :warning: <a href="shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
+* :warning: <a href="shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+* :warning: <a href="shortest-path/warshall-floyd.cpp.html">shortest-path/warshall-floyd.cpp</a>
 
 
 ## Verified with

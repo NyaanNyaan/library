@@ -44,8 +44,8 @@ layout: default
 ## Required by
 
 * :warning: <a href="kruskal.cpp.html">graph/kruskal.cpp</a>
-* :warning: <a href="../shorest-path/bellman-ford.cpp.html">shorest-path/bellman-ford.cpp</a>
-* :warning: <a href="../shorest-path/dijkstra.cpp.html">shorest-path/dijkstra.cpp</a>
+* :warning: <a href="../shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
+* :warning: <a href="../shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
 
 
 ## Code

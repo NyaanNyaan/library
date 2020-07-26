@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 06:55:28+09:00
+    - Last commit date: 2020-07-26 16:37:33+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -45,7 +45,7 @@ layout: default
 * :heavy_check_mark: <a href="../../library/modint/montgomery-modint.cpp.html">modint/montgomery-modint.cpp</a>
 * :heavy_check_mark: <a href="../../library/modint/simd-montgomery.cpp.html">modint/simd-montgomery.cpp</a>
 * :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.cpp.html">ntt/arbitrary-ntt.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-sse42.cpp.html">ntt/ntt-sse42.cpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.cpp.html">ntt/ntt-avx2.cpp</a>
 
 
 ## Code

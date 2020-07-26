@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: shorest-path/dijkstra.cpp
+# :warning: shortest-path/dijkstra.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#921df370d67d5070df2d096914bd2eb0">shorest-path</a>
-* <a href="{{ site.github.repository_url }}/blob/master/shorest-path/dijkstra.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+* category: <a href="../../index.html#d53d0f39583bbf03056486512d3e44bc">shortest-path</a>
+* <a href="{{ site.github.repository_url }}/blob/master/shortest-path/dijkstra.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-26 16:37:33+09:00
 
 
 
@@ -90,7 +90,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: shorest-path/dijkstra.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: shortest-path/dijkstra.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}
