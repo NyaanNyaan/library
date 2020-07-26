@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="../../library/data-structure/rectangle-sum.cpp.html">data-structure/rectangle-sum.cpp</a>
 * :heavy_check_mark: <a href="../../library/segment-tree/persistent-segment-tree.cpp.html">segment-tree/persistent-segment-tree.cpp</a>
 

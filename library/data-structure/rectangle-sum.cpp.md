@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="../segment-tree/persistent-segment-tree.cpp.html">segment-tree/persistent-segment-tree.cpp</a>
 
 

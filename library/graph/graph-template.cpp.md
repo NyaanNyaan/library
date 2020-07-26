@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: graph/graph-template.cpp
+# :heavy_check_mark: graph/graph-template.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Required by
@@ -55,7 +55,7 @@ layout: default
 * :heavy_check_mark: <a href="../tree/cartesian-tree.cpp.html">tree/cartesian-tree.cpp</a>
 * :warning: <a href="../tree/dsu-on-tree.cpp.html">tree/dsu-on-tree.cpp</a>
 * :warning: <a href="../tree/euler-tour.cpp.html">tree/euler-tour.cpp</a>
-* :question: <a href="../tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
+* :heavy_check_mark: <a href="../tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
 * :heavy_check_mark: <a href="../tree/rerooting.cpp.html">tree/rerooting.cpp</a>
 
 
@@ -75,8 +75,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-a.test.cpp.html">verify-aoj-grl/aoj-grl-5-a.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-b.test.cpp.html">verify-aoj-grl/aoj-grl-5-b.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
-* :x: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
-* :x: <a href="../../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 
 
 ## Code

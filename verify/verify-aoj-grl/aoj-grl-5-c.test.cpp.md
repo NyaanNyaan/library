@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-5-c.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 01:36:08+09:00
+    - Last commit date: 2020-07-27 01:42:18+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :question: <a href="../../library/tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
 
 
 ## Code
