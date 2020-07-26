@@ -49,6 +49,7 @@
 "verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp": "2020-07-26 19:21:41 +0900",
 "verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp": "2020-07-25 13:55:18 +0900",
 "verify-yosupo-other/yosupo-a-plus-b.test.cpp": "2020-07-25 13:55:18 +0900",
+"verify-yosupo-other/yosupo-number-of-substrings.test.cpp": "2020-07-27 03:24:17 +0900",
 "verify-yosupo-other/yosupo-suffix-array.test.cpp": "2020-07-27 03:06:38 +0900",
 "verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp": "2020-07-27 03:06:38 +0900"
 }
