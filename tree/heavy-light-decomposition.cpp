@@ -3,7 +3,7 @@
 #include "../competitive-template.cpp"
 #endif
 
-#include "./graph-template.cpp"
+#include "../graph/graph-template.cpp"
 
 template <typename G>
 struct HeavyLightDecomposition {

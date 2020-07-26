@@ -20,6 +20,8 @@ vector<int> Depth(const UnweightedGraph &g, int start = 0) {
   return d;
 }
 
+// Depth of Rooted Weighted Tree
+// unvisited nodes : d = -1
 template <typename T>
 vector<T> Depth(const WeightedGraph<T> &g, int start = 0) {
   vector<T> d(g.size(), -1);
@@ -55,6 +57,7 @@ pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {
   return make_pair(make_pair(u, v), d[v]);
 }
 
+// nodes on the path u-v ( O(N) )
 template <typename G>
 vector<int> path(G &g, int u, int v) {
   vi ret;

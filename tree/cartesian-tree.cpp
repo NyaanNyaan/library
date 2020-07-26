@@ -3,7 +3,7 @@
 #include "../competitive-template.cpp"
 #endif
 
-#include "./graph-template.cpp"
+#include "../graph/graph-template.cpp"
 
 // return value : pair<graph, root>
 template <typename T>

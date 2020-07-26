@@ -3,12 +3,13 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "../graph/graph-template.cpp"
+
 // Rerooting
 // f1(c1, c2) ... merge value of child node
 // f2(memo[i] , i) ... return value to parent node
 // memo[i] ... result of subtree rooted i
 // dp[i] ... result of tree rooted i
-
 template <typename T, typename G, typename F1, typename F2>
 struct Rerooting {
   const G &g;

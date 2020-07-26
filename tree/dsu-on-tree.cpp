@@ -3,6 +3,8 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "../graph/graph-template.cpp"
+
 template <typename G, typename UPDATE, typename QUERY, typename CLEAR,
           typename RESET>
 struct DSUonTree {

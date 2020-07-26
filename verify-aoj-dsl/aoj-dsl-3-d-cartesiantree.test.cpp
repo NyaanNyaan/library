@@ -2,8 +2,8 @@
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #include "../competitive-template.cpp"
-#include "../graph/cartesian-tree.cpp"
-#include "../graph/heavy-light-decomposition.cpp"
+#include "../tree/cartesian-tree.cpp"
+#include "../tree/heavy-light-decomposition.cpp"
 
 void solve() {
   ini(N, L);
