@@ -145,6 +145,10 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/elementary-function.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-27 02:01:03+09:00
 
 
 
@@ -44,6 +44,10 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
 
 
 ## Code
@@ -184,17 +188,26 @@ long long PrimitiveRoot(long long mod) {
   return ret;
 }
 
+// Euler's phi function
+long long phi(long long n) {
+  auto pf = PrimeFactors(n);
+  long long ret = n;
+  for (auto p : pf) {
+    ret /= p.first;
+    ret *= (p.first - 1);
+  }
+  return ret;
+}
+
 // Extended Euclidean algorithm
 // solve : ax + by = gcd(a, b)
-long long extgcd(long long a, long long b, long long &x, long long &y) {
-  if (b == 0) {
-    x = 1;
-    y = 0;
-    return a;
-  }
-  long long d = extgcd(b, a % b, y, x);
+// return : pair(x, y)
+pair<long long, long long> extgcd(long long a, long long b) {
+  if (b == 0) return make_pair(1, 0);
+  long long x, y;
+  tie(y, x) = extgcd(b, a % b);
   y -= a / b * x;
-  return d;
+  return make_pair(x, y);
 }
 
 // Check if n is Square Number

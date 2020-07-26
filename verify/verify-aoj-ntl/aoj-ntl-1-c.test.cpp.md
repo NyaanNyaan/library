@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+# :heavy_check_mark: verify-aoj-ntl/aoj-ntl-1-c.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#bffdd07a318a75234329b02eb9a9745b">verify-aoj-ntl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-ntl/aoj-ntl-1-a.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-ntl/aoj-ntl-1-c.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-27 02:01:03+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C</a>
 
 
 ## Depends on
@@ -49,19 +49,19 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C"
 
 #include "../competitive-template.cpp"
 #include "../math/elementary-function.cpp"
 
 void solve() {
   ini(N);
-  auto factor = PrimeFactors(N);
-  vi ans;
-  each(p,factor) rep(_,p.second)ans.pb(p.first);
-  cout << N << ":";
-  each(x,ans)cout<< " " << x;
-  cout << endl;
+  ll ans = 1;
+  rep(i, N) {
+    ini(n);
+    ans = lcm(ans, n);
+  }
+  out(ans);
 }
 ```
 {% endraw %}
