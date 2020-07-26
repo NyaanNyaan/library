@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: graph/topological-sort.cpp
+# :heavy_check_mark: graph/topological-sort.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -40,6 +40,12 @@ layout: default
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-4-a.test.cpp.html">verify-aoj-grl/aoj-grl-4-a.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-4-b.test.cpp.html">verify-aoj-grl/aoj-grl-4-b.test.cpp</a>
 
 
 ## Code

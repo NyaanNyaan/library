@@ -62,7 +62,7 @@ layout: default
 * :heavy_check_mark: <a href="graph/kruskal.cpp.html">graph/kruskal.cpp</a>
 * :heavy_check_mark: <a href="graph/lowlink.cpp.html">graph/lowlink.cpp</a>
 * :heavy_check_mark: <a href="graph/strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
-* :warning: <a href="graph/topological-sort.cpp.html">graph/topological-sort.cpp</a>
+* :heavy_check_mark: <a href="graph/topological-sort.cpp.html">graph/topological-sort.cpp</a>
 * :warning: <a href="math/binomial.cpp.html">math/binomial.cpp</a>
 * :warning: <a href="math/divisor-multiple-transform.cpp.html">math/divisor-multiple-transform.cpp</a>
 * :warning: <a href="math/elementary-function.cpp.html">math/elementary-function.cpp</a>
@@ -135,6 +135,8 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-3-a.test.cpp.html">verify-aoj-grl/aoj-grl-3-a.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-3-b.test.cpp.html">verify-aoj-grl/aoj-grl-3-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-3-c.test.cpp.html">verify-aoj-grl/aoj-grl-3-c.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-4-a.test.cpp.html">verify-aoj-grl/aoj-grl-4-a.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-4-b.test.cpp.html">verify-aoj-grl/aoj-grl-4-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>

@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-grl/aoj-grl-3-c.test.cpp
+# :heavy_check_mark: verify-aoj-grl/aoj-grl-4-b.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-3-c.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-4-b.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-26 23:24:52+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_4_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_4_B</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/topological-sort.cpp.html">graph/topological-sort.cpp</a>
 
 
 ## Code
@@ -50,20 +50,16 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_4_B"
 
 #include "../competitive-template.cpp"
-#include "../graph/strongly-connected-components.cpp"
+#include "../graph/topological-sort.cpp"
 
 void solve() {
   ini(N, M);
   auto g = graph(N, M, true, false);
-  StronglyConnectedComponents<vvi> scc(g);
-  ini(Q);
-  rep(_, Q) {
-    ini(u, v);
-    out(scc[u] == scc[v]);
-  }
+  auto topo = TopologicalSort<vvi>(g);
+  each(n, topo) out(n);
 }
 ```
 {% endraw %}
