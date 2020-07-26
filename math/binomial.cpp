@@ -3,32 +3,44 @@
 #include "../competitive-template.cpp"
 #endif
 
-vector<long long> fac,finv,inv;
-void cominit(int MAX) {
-  MAX++;
-  fac.resize(MAX , 0);
-  finv.resize(MAX , 0);
-  inv.resize(MAX , 0);
-  fac[0] = fac[1] = finv[0] = finv[1] = inv[1] = 1;
-  for (int i = 2; i < MAX; i++){
-    fac[i] = fac[i - 1] * i % MOD;
-    inv[i] = MOD - inv[MOD%i] * (MOD / i) % MOD;
-    finv[i] = finv[i - 1] * inv[i] % MOD;
+template <typename T>
+struct Binomial {
+  vector<T> fac_, finv_, inv_;
+  Binomial(int MAX) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {
+    MAX += 9;
+    fac_[0] = finv_[0] = inv_[0] = 1;
+    for (int i = 1; i <= MAX; i++) fac[i] _ = fac[i - 1] * i;
+    finv_[MAX] = inv_[MAX].inverse();
+    for (int i = MAX - 1; i > 0; i--) inv_[i] = inv_[i + 1] * (i + 1);
+    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];
   }
-}
-// nCk combination 
-inline long long COM(int n,int k){
-  if(n < k || k < 0 || n < 0) return 0;
-  else return fac[n] * (finv[k] * finv[n - k] % MOD) % MOD;
-}
-// nPk permutation
-inline long long PER(int n,int k){
-  if (n < k || k < 0 || n < 0) return 0;
-  else return (fac[n] * finv[n - k]) % MOD;
-}
-// nHk homogeneous polynomial
-inline long long HGP(int n,int k){
-  if(n == 0 && k == 0) return 1; // depending on problem?
-  else if(n < 1 || k < 0) return 0;
-  else return fac[n + k - 1] * (finv[k] * finv[n - 1] % MOD) % MOD;
-}
+
+  inline T fac(int i) { return fac_[i]; }
+  inline T finv(int i) { return finv_[i]; }
+  inline T inv(int i) { return inv_[i]; }
+
+  T C(int n, int r) {
+    if (n < r || r < 0) return T(0);
+    return fac_[n] * finv_[n - r] * finv_[r];
+  }
+
+  T C_naive(int n, int r) {
+    if (n < r || r < 0) return T(0);
+    T ret = 1;
+    for (T i = 1; i <= r; i += T(1)) {
+      ret *= N--;
+      ret *= i.inverse();
+    }
+    return ret;
+  }
+
+  T P(int n, int r) {
+    if (n < r || r < 0) return T(0);
+    return fac_[n] * finv_[n - r];
+  }
+
+  T H(int n, int r) const {
+    if (n < 0 || r < 0) return (0);
+    return r == 0 ? 1 : C(n + r - 1, r);
+  }
+};
