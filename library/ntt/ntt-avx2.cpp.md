@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-avx2.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 14:32:39+09:00
+    - Last commit date: 2020-07-26 19:21:41+09:00
 
 
 
@@ -114,7 +114,7 @@ struct NTT {
   mint dw[level], dy[level];
   mint *buf1, *buf2;
 
-  NTT() {
+  constexpr NTT() {
     setwy(level);
     buf1 = reinterpret_cast<mint *>(::buf1_);
     buf2 = reinterpret_cast<mint *>(::buf2_);
@@ -197,14 +197,14 @@ struct NTT {
             int j3 = j2 + v;
             int je = v;
             for (; j0 < je; j0 += 4, j1 += 4, j2 += 4, j3 += 4) {
-              __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
-              __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
-              __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
-              __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
-              __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
-              __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
-              __m128i T1M3 = montgomery_mul_128(
+              const __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
+              const __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
+              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
+              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
+              const __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
+              const __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
+              const __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
+              const __m128i T1M3 = montgomery_mul_128(
                   montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P2, T1P3, m2, m0));
@@ -217,27 +217,27 @@ struct NTT {
             }
           } else {
             ww = xx * xx, wx = ww * xx;
-            __m128i WW = _mm_set1_epi32(ww.a);
-            __m128i WX = _mm_set1_epi32(wx.a);
-            __m128i XX = _mm_set1_epi32(xx.a);
+            const __m128i WW = _mm_set1_epi32(ww.a);
+            const __m128i WX = _mm_set1_epi32(wx.a);
+            const __m128i XX = _mm_set1_epi32(xx.a);
             int j0 = jh * v;
             int j1 = j0 + v;
             int j2 = j1 + v;
             int j3 = j2 + v;
             int je = j1;
             for (; j0 < je; j0 += 4, j1 += 4, j2 += 4, j3 += 4) {
-              __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
-              __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
-              __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
-              __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              T1 = montgomery_mul_128(T1, XX, r, m1);
-              T2 = montgomery_mul_128(T2, WW, r, m1);
-              T3 = montgomery_mul_128(T3, WX, r, m1);
-              __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
-              __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
-              __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
-              __m128i T1M3 = montgomery_mul_128(
-                  montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
+              const __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
+              const __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
+              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
+              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
+              const __m128i MT1 = montgomery_mul_128(T1, XX, r, m1);
+              const __m128i MT2 = montgomery_mul_128(T2, WW, r, m1);
+              const __m128i MT3 = montgomery_mul_128(T3, WX, r, m1);
+              const __m128i T0P2 = montgomery_add_128(T0, MT2, m2, m0);
+              const __m128i T1P3 = montgomery_add_128(MT1, MT3, m2, m0);
+              const __m128i T0M2 = montgomery_sub_128(T0, MT2, m2, m0);
+              const __m128i T1M3 = montgomery_mul_128(
+                  montgomery_sub_128(MT1, MT3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j1),
@@ -265,14 +265,14 @@ struct NTT {
             int j3 = j2 + v;
             int je = v;
             for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
-              __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
-              __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
-              __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
-              __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
-              __m256i T0P2 = montgomery_add_256(T0, T2, m2, m0);
-              __m256i T1P3 = montgomery_add_256(T1, T3, m2, m0);
-              __m256i T0M2 = montgomery_sub_256(T0, T2, m2, m0);
-              __m256i T1M3 = montgomery_mul_256(
+              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              const __m256i T0P2 = montgomery_add_256(T0, T2, m2, m0);
+              const __m256i T1P3 = montgomery_add_256(T1, T3, m2, m0);
+              const __m256i T0M2 = montgomery_sub_256(T0, T2, m2, m0);
+              const __m256i T1M3 = montgomery_mul_256(
                   montgomery_sub_256(T1, T3, m2, m0), Imag, r, m1);
               _mm256_storeu_si256((__m256i *)(a + j0),
                                   montgomery_add_256(T0P2, T1P3, m2, m0));
@@ -285,27 +285,27 @@ struct NTT {
             }
           } else {
             ww = xx * xx, wx = ww * xx;
-            __m256i WW = _mm256_set1_epi32(ww.a);
-            __m256i WX = _mm256_set1_epi32(wx.a);
-            __m256i XX = _mm256_set1_epi32(xx.a);
+            const __m256i WW = _mm256_set1_epi32(ww.a);
+            const __m256i WX = _mm256_set1_epi32(wx.a);
+            const __m256i XX = _mm256_set1_epi32(xx.a);
             int j0 = jh * v;
             int j1 = j0 + v;
             int j2 = j1 + v;
             int j3 = j2 + v;
             int je = j1;
             for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
-              __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
-              __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
-              __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
-              __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
-              T1 = montgomery_mul_256(T1, XX, r, m1);
-              T2 = montgomery_mul_256(T2, WW, r, m1);
-              T3 = montgomery_mul_256(T3, WX, r, m1);
-              __m256i T0P2 = montgomery_add_256(T0, T2, m2, m0);
-              __m256i T1P3 = montgomery_add_256(T1, T3, m2, m0);
-              __m256i T0M2 = montgomery_sub_256(T0, T2, m2, m0);
-              __m256i T1M3 = montgomery_mul_256(
-                  montgomery_sub_256(T1, T3, m2, m0), Imag, r, m1);
+              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              const __m256i MT1 = montgomery_mul_256(T1, XX, r, m1);
+              const __m256i MT2 = montgomery_mul_256(T2, WW, r, m1);
+              const __m256i MT3 = montgomery_mul_256(T3, WX, r, m1);
+              const __m256i T0P2 = montgomery_add_256(T0, MT2, m2, m0);
+              const __m256i T1P3 = montgomery_add_256(MT1, MT3, m2, m0);
+              const __m256i T0M2 = montgomery_sub_256(T0, MT2, m2, m0);
+              const __m256i T1M3 = montgomery_mul_256(
+                  montgomery_sub_256(MT1, MT3, m2, m0), Imag, r, m1);
               _mm256_storeu_si256((__m256i *)(a + j0),
                                   montgomery_add_256(T0P2, T1P3, m2, m0));
               _mm256_storeu_si256((__m256i *)(a + j1),
@@ -367,14 +367,14 @@ struct NTT {
             int j2 = v + v;
             int j3 = j2 + v;
             for (; j0 < v; j0 += 4, j1 += 4, j2 += 4, j3 += 4) {
-              __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
-              __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
-              __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
-              __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
-              __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
-              __m128i T0M1 = montgomery_sub_128(T0, T1, m2, m0);
-              __m128i T2M3 = montgomery_mul_128(
+              const __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
+              const __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
+              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
+              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
+              const __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
+              const __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
+              const __m128i T0M1 = montgomery_sub_128(T0, T1, m2, m0);
+              const __m128i T2M3 = montgomery_mul_128(
                   montgomery_sub_128(T2, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P1, T2P3, m2, m0));
@@ -387,22 +387,22 @@ struct NTT {
             }
           } else {
             ww = xx * xx, yy = xx * imag;
-            __m128i WW = _mm_set1_epi32(ww.a);
-            __m128i XX = _mm_set1_epi32(xx.a);
-            __m128i YY = _mm_set1_epi32(yy.a);
+            const __m128i WW = _mm_set1_epi32(ww.a);
+            const __m128i XX = _mm_set1_epi32(xx.a);
+            const __m128i YY = _mm_set1_epi32(yy.a);
             int j0 = jh * v;
             int j1 = j0 + v;
             int j2 = j1 + v;
             int j3 = j2 + v;
             int je = j1;
             for (; j0 < je; j0 += 4, j1 += 4, j2 += 4, j3 += 4) {
-              __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
-              __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
-              __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
-              __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
-              __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
-              __m128i T0M1 = montgomery_mul_128(
+              const __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
+              const __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
+              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
+              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
+              const __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
+              const __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
+              const __m128i T0M1 = montgomery_mul_128(
                   montgomery_sub_128(T0, T1, m2, m0), XX, r, m1);
               __m128i T2M3 = montgomery_mul_128(
                   montgomery_sub_128(T2, T3, m2, m0), YY, r, m1);
@@ -437,14 +437,14 @@ struct NTT {
             int j2 = v + v;
             int j3 = j2 + v;
             for (; j0 < v; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
-              __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
-              __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
-              __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
-              __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
-              __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);
-              __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);
-              __m256i T0M1 = montgomery_sub_256(T0, T1, m2, m0);
-              __m256i T2M3 = montgomery_mul_256(
+              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              const __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);
+              const __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);
+              const __m256i T0M1 = montgomery_sub_256(T0, T1, m2, m0);
+              const __m256i T2M3 = montgomery_mul_256(
                   montgomery_sub_256(T2, T3, m2, m0), Imag, r, m1);
               _mm256_storeu_si256((__m256i *)(a + j0),
                                   montgomery_add_256(T0P1, T2P3, m2, m0));
@@ -457,24 +457,24 @@ struct NTT {
             }
           } else {
             ww = xx * xx, yy = xx * imag;
-            __m256i WW = _mm256_set1_epi32(ww.a);
-            __m256i XX = _mm256_set1_epi32(xx.a);
-            __m256i YY = _mm256_set1_epi32(yy.a);
+            const __m256i WW = _mm256_set1_epi32(ww.a);
+            const __m256i XX = _mm256_set1_epi32(xx.a);
+            const __m256i YY = _mm256_set1_epi32(yy.a);
             int j0 = jh * v;
             int j1 = j0 + v;
             int j2 = j1 + v;
             int j3 = j2 + v;
             int je = j1;
             for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
-              __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
-              __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
-              __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
-              __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
-              __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);
-              __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);
-              __m256i T0M1 = montgomery_mul_256(
+              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              const __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);
+              const __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);
+              const __m256i T0M1 = montgomery_mul_256(
                   montgomery_sub_256(T0, T1, m2, m0), XX, r, m1);
-              __m256i T2M3 = montgomery_mul_256(
+              const __m256i T2M3 = montgomery_mul_256(
                   montgomery_sub_256(T2, T3, m2, m0), YY, r, m1);
               _mm256_storeu_si256((__m256i *)(a + j0),
                                   montgomery_add_256(T0P1, T2P3, m2, m0));
@@ -510,8 +510,8 @@ struct NTT {
         int j0 = 0;
         int j1 = v;
         for (; j0 < v; j0 += 8, j1 += 8) {
-          __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
-          __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+          const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+          const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
           __m256i naj = montgomery_add_256(T0, T1, m2, m0);
           __m256i najv = montgomery_sub_256(T0, T1, m2, m0);
           _mm256_storeu_si256((__m256i *)(a + j0), naj);
@@ -562,7 +562,6 @@ struct NTT {
     }
     const __m256i m0 = _mm256_set1_epi32(0);
     const __m256i m1 = _mm256_set1_epi32(mod);
-    const __m256i m1minus1 = _mm256_set1_epi32(mod - 1);
     const __m256i r = _mm256_set1_epi32(mint::r);
     const __m256i N2 = _mm256_set1_epi32(mint::n2);
     for (int i = 0; i < l1; i += 8) {
