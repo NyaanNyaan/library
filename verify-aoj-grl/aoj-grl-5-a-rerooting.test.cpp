@@ -25,8 +25,6 @@ void solve() {
     return T{x.first + es[{chd, par}], 0};
   };
   Rerooting<T, decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);
-  trc(dp.memo);
-  trc(dp.dp);
   int ans = 0;
   each(p, dp.dp) amax(ans, p.first + p.second);
   out(ans);

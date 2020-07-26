@@ -5,7 +5,8 @@
 
 #include "../graph/graph-template.cpp"
 
-// euler tour of node
+// ** NOT RECOMMEND TO USE **
+// euler tour of node 
 struct EulerTour {
   struct UnionFind {
     vector<int> data;
