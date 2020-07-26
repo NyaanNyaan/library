@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: graph/graph-template.cpp
+# :heavy_check_mark: graph/graph-template.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -44,8 +44,14 @@ layout: default
 ## Required by
 
 * :warning: <a href="kruskal.cpp.html">graph/kruskal.cpp</a>
-* :warning: <a href="../shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
-* :warning: <a href="../shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+* :heavy_check_mark: <a href="../shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
+* :heavy_check_mark: <a href="../shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-a.test.cpp.html">verify-aoj-grl/aoj-grl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-b.test.cpp.html">verify-aoj-grl/aoj-grl-1-b.test.cpp</a>
 
 
 ## Code

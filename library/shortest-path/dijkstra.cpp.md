@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: shortest-path/dijkstra.cpp
+# :heavy_check_mark: shortest-path/dijkstra.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,7 +39,12 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :warning: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-a.test.cpp.html">verify-aoj-grl/aoj-grl-1-a.test.cpp</a>
 
 
 ## Code

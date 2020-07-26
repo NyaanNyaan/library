@@ -25,25 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: shortest-path/warshall-floyd.cpp
+# :heavy_check_mark: verify-aoj-grl/aoj-grl-1-b.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#d53d0f39583bbf03056486512d3e44bc">shortest-path</a>
-* <a href="{{ site.github.repository_url }}/blob/master/shortest-path/warshall-floyd.cpp">View this file on GitHub</a>
+* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-1-b.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-26 20:13:13+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-1-c.test.cpp.html">verify-aoj-grl/aoj-grl-1-c.test.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
 
 
 ## Code
@@ -51,19 +49,27 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.cpp"
-#endif
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B"
 
-// i : d[i][i] < 0 exists -> negative cycle
-template <typename T>
-void warshall_floyd(T& d) {
-  int N = sz(d[0]);
-  for (int i = 0; i < N; i++) d[i][i] = 0;
-  for (int k = 0; k < N; k++)
-    for (int i = 0; i < N; i++)
-      for (int j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+#include "../competitive-template.cpp"
+#include "../shortest-path/bellman-ford.cpp"
+
+void solve() {
+  ini(N, E, S);
+  Edges<int> es;
+  rep(_, E) {
+    ini(u, v, w);
+    es.emplace_back(u, v, w);
+  }
+  auto d = bellman_ford<int>(N, es, S);
+  if (!sz(d)) die("NEGATIVE CYCLE");
+  each(x, d) {
+    if (x > TEN(9))
+      out("INF");
+    else
+      out(x);
+  }
 }
 ```
 {% endraw %}
@@ -76,9 +82,11 @@ Traceback (most recent call last):
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
+    self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: shortest-path/warshall-floyd.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}
