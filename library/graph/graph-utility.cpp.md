@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/topological-sort.cpp
+# :heavy_check_mark: graph/graph-utility.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/topological-sort.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/graph/graph-utility.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-26 23:51:38+09:00
 
 
@@ -44,8 +44,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-4-a.test.cpp.html">verify-aoj-grl/aoj-grl-4-a.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-4-b.test.cpp.html">verify-aoj-grl/aoj-grl-4-b.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-a.test.cpp.html">verify-aoj-grl/aoj-grl-5-a.test.cpp</a>
 
 
 ## Code
@@ -60,32 +59,76 @@ layout: default
 
 #include "./graph-template.cpp"
 
-// if the graph is not DAG, return empty vector
-template <typename T>
-vector<int> TopologicalSort(T &g) {
-  int N = g.size();
-  vector<int> marked(N, 0), temp(N, 0), v;
-  auto visit = [&](auto f, int i) -> bool {
-    if (temp[i] == 1) return false;
-    if (marked[i] == 0) {
-      temp[i] = 1;
-      for (auto &e : g[i]) {
-        if (f(f, e) == false) return false;
-      }
-      marked[i] = 1;
-      v.push_back(i);
-      temp[i] = 0;
+// Depth of Rooted Tree
+// unvisited nodes : d = -1
+vector<int> Depth(const UnweightedGraph &g, int start = 0) {
+  vector<int> d(g.size(), -1);
+  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
+    d[cur] = par == -1 ? 0 : d[par] + 1;
+    for (auto &dst : g[cur]) {
+      if (dst == par) continue;
+      rec(rec, dst, cur);
     }
-    return true;
   };
+  dfs(dfs, start);
+  return d;
+}
 
-  for (int i = 0; i < N; i++) {
-    if (marked[i] == 0) {
-      if (visit(visit, i) == false) return vector<int>();
+template <typename T>
+vector<T> Depth(const WeightedGraph<T> &g, int start = 0) {
+  vector<T> d(g.size(), -1);
+  auto dfs = [&](auto rec, int cur, T val, int par = -1) -> void {
+    d[cur] = val;
+    for (auto &dst : g[cur]) {
+      if (dst == par) continue;
+      rec(rec, dst, val + dst.cost, cur);
     }
-  }
-  reverse(v.begin(), v.end());
-  return v;
+  };
+  dfs(dfs, start, 0);
+  return d;
+}
+
+// Diameter of Tree
+// return value : { {u, v}, length }
+pair<pair<int, int>, int> Diameter(const UnweightedGraph &g) {
+  auto d = Depth(g, 0);
+  int u = max_element(begin(d), end(d)) - begin(d);
+  d = Depth(g, u);
+  int v = max_element(begin(d), end(d)) - begin(d);
+  return make_pair(make_pair(u, v), d[v]);
+}
+
+// Diameter of Weighted Tree
+// return value : { {u, v}, length }
+template <typename T>
+pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {
+  auto d = Depth(g, 0);
+  int u = max_element(begin(d), end(d)) - begin(d);
+  d = Depth(g, u);
+  int v = max_element(begin(d), end(d)) - begin(d);
+  return make_pair(make_pair(u, v), d[v]);
+}
+
+template <typename G>
+vector<int> path(G &g, int u, int v) {
+  vi ret;
+  int end = 0;
+  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
+    ret.push_back(cur);
+    if (cur == v) {
+      end = 1;
+      return;
+    }
+    for (int dst : g[cur]) {
+      if (dst == par) continue;
+      rec(rec, dst, cur);
+      if (end) return;
+    }
+    if (end) return;
+    ret.pop_back();
+  };
+  dfs(dfs, u);
+  return ret;
 }
 ```
 {% endraw %}
@@ -100,7 +143,7 @@ Traceback (most recent call last):
     bundler.update(path)
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: graph/topological-sort.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: graph/graph-utility.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

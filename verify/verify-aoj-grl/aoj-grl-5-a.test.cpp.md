@@ -25,27 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/topological-sort.cpp
+# :heavy_check_mark: verify-aoj-grl/aoj-grl-5-a.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/topological-sort.cpp">View this file on GitHub</a>
+* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-5-a.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-26 23:51:38+09:00
 
 
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_A</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-4-a.test.cpp.html">verify-aoj-grl/aoj-grl-4-a.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-4-b.test.cpp.html">verify-aoj-grl/aoj-grl-4-b.test.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-utility.cpp.html">graph/graph-utility.cpp</a>
 
 
 ## Code
@@ -53,39 +49,17 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#pragma once
-#ifndef Nyaan_template
+#define PROBLEM \
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_A"
+
 #include "../competitive-template.cpp"
-#endif
+#include "../graph/graph-utility.cpp"
 
-#include "./graph-template.cpp"
-
-// if the graph is not DAG, return empty vector
-template <typename T>
-vector<int> TopologicalSort(T &g) {
-  int N = g.size();
-  vector<int> marked(N, 0), temp(N, 0), v;
-  auto visit = [&](auto f, int i) -> bool {
-    if (temp[i] == 1) return false;
-    if (marked[i] == 0) {
-      temp[i] = 1;
-      for (auto &e : g[i]) {
-        if (f(f, e) == false) return false;
-      }
-      marked[i] = 1;
-      v.push_back(i);
-      temp[i] = 0;
-    }
-    return true;
-  };
-
-  for (int i = 0; i < N; i++) {
-    if (marked[i] == 0) {
-      if (visit(visit, i) == false) return vector<int>();
-    }
-  }
-  reverse(v.begin(), v.end());
-  return v;
+void solve() {
+  ini(N);
+  auto g = wgraph<int>(N, N-1, false, false);
+  auto diam = Diameter<int>(g);
+  out(diam.second);
 }
 ```
 {% endraw %}
@@ -98,9 +72,11 @@ Traceback (most recent call last):
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
+    self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: graph/topological-sort.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}
