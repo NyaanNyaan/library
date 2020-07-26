@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 * :heavy_check_mark: <a href="../../library/graph/graph-utility.cpp.html">graph/graph-utility.cpp</a>
 
 

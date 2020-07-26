@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
+* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../../library/segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
 
 
 ## Code

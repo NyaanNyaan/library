@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: tree/heavy-light-decomposition.cpp
+# :question: tree/heavy-light-decomposition.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Verified with
@@ -47,6 +47,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
+* :x: <a href="../../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 
 
 ## Code

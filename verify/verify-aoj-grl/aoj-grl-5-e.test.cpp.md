@@ -25,22 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-5-b.test.cpp
+# :x: verify-aoj-grl/aoj-grl-5-e.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-5-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 13:55:18+09:00
+* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-5-e.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-27 01:23:14+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E</a>
 
 
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/2d-cumulative-sum.cpp.html">data-structure/2d-cumulative-sum.cpp</a>
+* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../../library/segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
+* :question: <a href="../../library/segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
+* :question: <a href="../../library/tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
 
 
 ## Code
@@ -49,23 +52,43 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E"
 
 #include "../competitive-template.cpp"
-#include "../data-structure/2d-cumulative-sum.cpp"
+#include "../segment-tree/range-add-range-sum-lazyseg.cpp"
+#include "../segment-tree/segment-tree.cpp"
+#include "../tree/heavy-light-decomposition.cpp"
 
 void solve() {
   ini(N);
-  int L = 1000;
-  CumulativeSum2D<int> ruiseki(L, L);
+  vvi g(N);
   rep(i, N) {
-    ini(x1, y1, x2, y2);
-    ruiseki.imos(x1, y1, x2 , y2, 1);
+    ini(n);
+    g[i].resize(n);
+    in(g[i]);
   }
-  ruiseki.build();
+
+  HeavyLightDecomposition<vvi> hld(g);
+  AddSum_LazySegmentTree<int> seg(vi(N, 0));
+  int W = 0;
+  auto add = [&](int u, int v) { seg.update(u, v, W); };
   int ans = 0;
-  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]); }
-  out(ans);
+  auto query = [&](int u, int v) { ans += seg.query(u, v); };
+
+  ini(Q);
+  rep(_, Q) {
+    ini(c);
+    if (c == 0) {
+      ini(v, w);
+      W = w;
+      hld.edge_query(0, v, add);
+    } else {
+      ini(v);
+      ans = 0;
+      hld.edge_query(0, v, query);
+      out(ans);
+    }
+  }
 }
 ```
 {% endraw %}

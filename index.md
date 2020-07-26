@@ -38,7 +38,7 @@ layout: default
 
 ### .
 
-* :heavy_check_mark: <a href="library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="library/competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -78,7 +78,7 @@ layout: default
 ### graph
 
 * :warning: <a href="library/graph/dimension-expanded-graph.cpp.html">graph/dimension-expanded-graph.cpp</a>
-* :heavy_check_mark: <a href="library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
 * :heavy_check_mark: <a href="library/graph/graph-utility.cpp.html">graph/graph-utility.cpp</a>
 * :heavy_check_mark: <a href="library/graph/kruskal.cpp.html">graph/kruskal.cpp</a>
 * :heavy_check_mark: <a href="library/graph/lowlink.cpp.html">graph/lowlink.cpp</a>
@@ -146,12 +146,12 @@ layout: default
 * :heavy_check_mark: <a href="library/segment-tree/persistent-segment-tree.cpp.html">segment-tree/persistent-segment-tree.cpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-max-lazyseg.cpp.html">segment-tree/range-add-range-max-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-min-lazyseg.cpp.html">segment-tree/range-add-range-min-lazyseg.cpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
+* :question: <a href="library/segment-tree/range-add-range-sum-lazyseg.cpp.html">segment-tree/range-add-range-sum-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-update-range-max-lazyseg.cpp.html">segment-tree/range-update-range-max-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-update-range-min-lazyseg.cpp.html">segment-tree/range-update-range-min-lazyseg.cpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-update-range-sum-lazyseg.cpp.html">segment-tree/range-update-range-sum-lazyseg.cpp</a>
 * :warning: <a href="library/segment-tree/range-weighted-add-range-sum-lazyseg.cpp.html">segment-tree/range-weighted-add-range-sum-lazyseg.cpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
+* :question: <a href="library/segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
 
 
 <div id="d53d0f39583bbf03056486512d3e44bc"></div>
@@ -188,7 +188,7 @@ layout: default
 * :heavy_check_mark: <a href="library/tree/cartesian-tree.cpp.html">tree/cartesian-tree.cpp</a>
 * :warning: <a href="library/tree/dsu-on-tree.cpp.html">tree/dsu-on-tree.cpp</a>
 * :warning: <a href="library/tree/euler-tour.cpp.html">tree/euler-tour.cpp</a>
-* :heavy_check_mark: <a href="library/tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
+* :question: <a href="library/tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
 * :heavy_check_mark: <a href="library/tree/rerooting.cpp.html">tree/rerooting.cpp</a>
 
 
@@ -228,6 +228,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-aoj-grl/aoj-grl-5-b.test.cpp.html">verify-aoj-grl/aoj-grl-5-b.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
+* :x: <a href="verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
