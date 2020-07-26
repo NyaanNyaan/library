@@ -6,24 +6,27 @@
 #include "./graph-template.cpp"
 
 // Strongly Connected Components
-// initialize        ... StronglyConnectedComponents scc(g);
-// build             ... vvi h; scc.build(h);
+// DAG of SC graph   ... scc.dag (including multiedges)
 // new node of k     ... scc[k]
-// inv of scc[k] = i ... scc.belong(i)
+// inv of scc[k] = i ... scc.blng(i)
 template <typename G>
 struct StronglyConnectedComponents {
+ private:
   const G &g;
   vector<vector<int>> rg;
   vector<int> comp, order;
   vector<char> used;
   vector<vector<int>> blng;
 
-  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) {}
+ public:
+  vector<vector<int>> dag;
+  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }
 
   int operator[](int k) { return comp[k]; }
 
   vector<int> &belong(int i) { return blng[i]; }
 
+ private:
   void dfs(int idx) {
     if (used[idx]) return;
     used[idx] = true;
@@ -37,7 +40,7 @@ struct StronglyConnectedComponents {
     for (int to : rg[idx]) rdfs(to, cnt);
   }
 
-  void build(vector<vector<int>> &t) {
+  void build() {
     for (int i = 0; i < (int)g.size(); i++) dfs(i);
     reverse(begin(order), end(order));
     used.clear();
@@ -59,14 +62,14 @@ struct StronglyConnectedComponents {
     order.clear();
     order.shrink_to_fit();
 
-    t.resize(ptr);
+    dag.resize(ptr);
     blng.resize(ptr);
     for (int i = 0; i < (int)g.size(); i++) {
       blng[comp[i]].push_back(i);
       for (auto &to : g[i]) {
         int x = comp[i], y = comp[to];
         if (x == y) continue;
-        t[x].push_back(y);
+        dag[x].push_back(y);
       }
     }
   }

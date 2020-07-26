@@ -2,16 +2,11 @@
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
 
 #include "../competitive-template.cpp"
-#include "../shortest-path/dijkstra.cpp"
+#include "../graph/kruskal.cpp"
 
 void solve() {
-  ini(N, E, S);
-  auto g = wgraph<int>(N, E, true, false);
-  auto d = dijkstra<int>(g, S);
-  each(x, d) {
-    if (x > TEN(9))
-      out("INF");
-    else
-      out(x);
-  }
+  ini(N, E);
+  auto es = esgraph<int>(N, E, true, false);
+  auto mst = kruskal(N, es);
+  out(mst);
 }
