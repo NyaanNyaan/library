@@ -3,6 +3,8 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "./graph-template.cpp"
+
 // Strongly Connected Components
 // initialize        ... StronglyConnectedComponents scc(g);
 // build             ... vvi h; scc.build(h);

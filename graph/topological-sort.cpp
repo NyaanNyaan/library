@@ -3,6 +3,8 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "./graph-template.cpp"
+
 // if the graph is not DAG, return empty vector
 template <typename T>
 vector<int> TopologicalSort(T &g) {

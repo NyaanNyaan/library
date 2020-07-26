@@ -3,6 +3,8 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "../graph/graph-template.cpp"
+
 // i : d[i][i] < 0 exists -> negative cycle
 template <typename T>
 void warshall_floyd(T& d) {

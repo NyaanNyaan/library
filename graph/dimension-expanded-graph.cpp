@@ -3,6 +3,8 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "./graph-template.cpp"
+
 template <int DIM>
 struct DimensionExpandedGraph {
   using i64 = long long;

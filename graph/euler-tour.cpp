@@ -3,6 +3,8 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "./graph-template.cpp"
+
 // euler tour of node
 struct EulerTour {
   struct UnionFind {

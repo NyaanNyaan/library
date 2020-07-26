@@ -57,6 +57,45 @@ WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
   return g;
 }
 
+// Input of Edges
+template <typename T>
+Edges<T> esgraph(int N, int M, int is_weighted = true,
+                         bool is_1origin = true) {
+  Edges<T> es;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    es.emplace_back(x, y, c);
+  }
+  return es;
+}
+
+// Input of Adjacency Matrix
+template <typename T>
+vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
+                            bool is_directed = false, bool is_1origin = true) {
+  vector<vector<T>> d(N, vector<T>(N, INF));
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    d[x][y] = c;
+    if (!is_directed) d[y][x] = c;
+  }
+  return d;
+}
+
 // Depth of Rooted Tree
 // unvisited nodes : d = -1
 vector<int> Depth(UnweightedGraph &g, int start = 0) {

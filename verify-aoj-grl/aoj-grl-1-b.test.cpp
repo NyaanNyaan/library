@@ -6,11 +6,7 @@
 
 void solve() {
   ini(N, E, S);
-  Edges<int> es;
-  rep(_, E) {
-    ini(u, v, w);
-    es.emplace_back(u, v, w);
-  }
+  auto es = esgraph<int>(N, E, true, false);
   auto d = bellman_ford<int>(N, es, S);
   if (!sz(d)) die("NEGATIVE CYCLE");
   each(x, d) {

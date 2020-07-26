@@ -3,6 +3,8 @@
 #include "../competitive-template.cpp"
 #endif
 
+#include "./graph-template.cpp"
+
 // return value : pair<graph, root>
 template <typename T>
 pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {

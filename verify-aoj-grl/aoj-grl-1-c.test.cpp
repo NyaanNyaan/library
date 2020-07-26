@@ -6,17 +6,14 @@
 
 void solve() {
   ini(N, E);
-  vvl d(N, vl(N, infLL));
-  rep(_,E){
-    ini(u,v,w);
-    d[u][v] = w;
-  }
+  auto d = adjgraph<ll>(N, E, infLL, true, true, false);
   warshall_floyd(d);
-  rep(i,N)if(d[i][i]<0)die("NEGATIVE CYCLE");
-  rep(i,N) rep(j,N){
-    if(d[i][j] > TEN(10)) cout << "INF";
-    else cout << d[i][j];
+  rep(i, N) if (d[i][i] < 0) die("NEGATIVE CYCLE");
+  rep(i, N) rep(j, N) {
+    if (d[i][j] > TEN(10))
+      cout << "INF";
+    else
+      cout << d[i][j];
     cout << (j == N - 1 ? "\n" : " ");
   }
-  
 }
