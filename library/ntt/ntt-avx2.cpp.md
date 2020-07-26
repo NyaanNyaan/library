@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-avx2.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-26 06:55:28+09:00
+    - Last commit date: 2020-07-26 14:32:39+09:00
 
 
 
@@ -136,10 +136,25 @@ struct NTT {
     }
     if (k & 1) {
       int v = 1 << (k - 1);
-      for (int j = 0; j < v; ++j) {
-        mint ajv = a[j + v];
-        a[j + v] = a[j] - ajv;
-        a[j] += ajv;
+      if (v < 8) {
+        for (int j = 0; j < v; ++j) {
+          mint ajv = a[j + v];
+          a[j + v] = a[j] - ajv;
+          a[j] += ajv;
+        }
+      } else {
+        const __m256i m0 = _mm256_set1_epi32(0);
+        const __m256i m2 = _mm256_set1_epi32(mod + mod);
+        int j0 = 0;
+        int j1 = v;
+        for (; j0 < v; j0 += 8, j1 += 8) {
+          __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+          __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+          __m256i naj = montgomery_add_256(T0, T1, m2, m0);
+          __m256i najv = montgomery_sub_256(T0, T1, m2, m0);
+          _mm256_storeu_si256((__m256i *)(a + j0), naj);
+          _mm256_storeu_si256((__m256i *)(a + j1), najv);
+        }
       }
     }
     int u = 1 << (2 + (k & 1));
@@ -424,13 +439,13 @@ struct NTT {
               __m256i T2M3 = montgomery_mul_256(
                   montgomery_sub_256(T2, T3, m2, m0), Imag, r, m1);
               _mm256_storeu_si256((__m256i *)(a + j0),
-                               montgomery_add_256(T0P1, T2P3, m2, m0));
+                                  montgomery_add_256(T0P1, T2P3, m2, m0));
               _mm256_storeu_si256((__m256i *)(a + j2),
-                               montgomery_sub_256(T0P1, T2P3, m2, m0));
+                                  montgomery_sub_256(T0P1, T2P3, m2, m0));
               _mm256_storeu_si256((__m256i *)(a + j1),
-                               montgomery_add_256(T0M1, T2M3, m2, m0));
+                                  montgomery_add_256(T0M1, T2M3, m2, m0));
               _mm256_storeu_si256((__m256i *)(a + j3),
-                               montgomery_sub_256(T0M1, T2M3, m2, m0));
+                                  montgomery_sub_256(T0M1, T2M3, m2, m0));
             }
           } else {
             ww = xx * xx, yy = xx * imag;
@@ -454,13 +469,13 @@ struct NTT {
               __m256i T2M3 = montgomery_mul_256(
                   montgomery_sub_256(T2, T3, m2, m0), YY, r, m1);
               _mm256_storeu_si256((__m256i *)(a + j0),
-                               montgomery_add_256(T0P1, T2P3, m2, m0));
+                                  montgomery_add_256(T0P1, T2P3, m2, m0));
               _mm256_storeu_si256(
                   (__m256i *)(a + j2),
                   montgomery_mul_256(montgomery_sub_256(T0P1, T2P3, m2, m0), WW,
                                      r, m1));
               _mm256_storeu_si256((__m256i *)(a + j1),
-                               montgomery_add_256(T0M1, T2M3, m2, m0));
+                                  montgomery_add_256(T0M1, T2M3, m2, m0));
               _mm256_storeu_si256(
                   (__m256i *)(a + j3),
                   montgomery_mul_256(montgomery_sub_256(T0M1, T2M3, m2, m0), WW,
@@ -469,16 +484,31 @@ struct NTT {
           }
           xx *= dy[__builtin_ctz(jh += 4)];
         }
-      } 
+      }
       u >>= 4;
       v <<= 2;
     }
     if (k & 1) {
-      u = 1 << (k - 1);
-      for (int j = 0; j < u; ++j) {
-        mint ajv = a[j] - a[j + u];
-        a[j] += a[j + u];
-        a[j + u] = ajv;
+      v = 1 << (k - 1);
+      if (v < 8) {
+        for (int j = 0; j < v; ++j) {
+          mint ajv = a[j] - a[j + v];
+          a[j] += a[j + v];
+          a[j + v] = ajv;
+        }
+      } else {
+        const __m256i m0 = _mm256_set1_epi32(0);
+        const __m256i m2 = _mm256_set1_epi32(mod + mod);
+        int j0 = 0;
+        int j1 = v;
+        for (; j0 < v; j0 += 8, j1 += 8) {
+          __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+          __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+          __m256i naj = montgomery_add_256(T0, T1, m2, m0);
+          __m256i najv = montgomery_sub_256(T0, T1, m2, m0);
+          _mm256_storeu_si256((__m256i *)(a + j0), naj);
+          _mm256_storeu_si256((__m256i *)(a + j1), najv);
+        }
       }
     }
     if (normalize) {
@@ -487,8 +517,8 @@ struct NTT {
     }
   }
 
-  constexpr vector<mint> multiply(const vector<mint> &a,
-                                  const vector<mint> &b) {
+  __attribute__((target("avx2"))) vector<mint> multiply(const vector<mint> &a,
+                                                        const vector<mint> &b) {
     int l = a.size() + b.size() - 1;
     if (min<int>(a.size(), b.size()) <= 40) {
       vector<mint> s(l);
@@ -511,6 +541,50 @@ struct NTT {
     mint invm = mint(M).inverse();
     for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;
     return s;
+  }
+
+  __attribute__((target("avx2"))) void inplace_multiply(
+      int l1, int l2, int zero_padding = true) {
+    int l = l1 + l2 - 1;
+    int M = 4;
+    while (M < l) M <<= 1;
+    if (zero_padding) {
+      for (int i = l1; i < M; i++) buf1_[i] = 0;
+      for (int i = l2; i < M; i++) buf2_[i] = 0;
+    }
+    const __m256i m0 = _mm256_set1_epi32(0);
+    const __m256i m1 = _mm256_set1_epi32(mod);
+    const __m256i m1minus1 = _mm256_set1_epi32(mod - 1);
+    const __m256i r = _mm256_set1_epi32(mint::r);
+    const __m256i N2 = _mm256_set1_epi32(mint::n2);
+    for (int i = 0; i < l1; i += 8) {
+      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
+      __m256i b = montgomery_mul_256(a, N2, r, m1);
+      _mm256_storeu_si256((__m256i *)(buf1_ + i), b);
+    }
+    for (int i = 0; i < l2; i += 8) {
+      __m256i a = _mm256_loadu_si256((__m256i *)(buf2_ + i));
+      __m256i b = montgomery_mul_256(a, N2, r, m1);
+      _mm256_storeu_si256((__m256i *)(buf2_ + i), b);
+    }
+    ntt(buf1, M);
+    ntt(buf2, M);
+    for (int i = 0; i < M; i += 8) {
+      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
+      __m256i b = _mm256_loadu_si256((__m256i *)(buf2_ + i));
+      __m256i c = montgomery_mul_256(a, b, r, m1);
+      _mm256_storeu_si256((__m256i *)(buf1_ + i), c);
+    }
+    intt(buf1, M, false);
+    const __m256i INVM = _mm256_set1_epi32((mint(M).inverse()).a);
+    for (int i = 0; i < l; i += 8) {
+      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
+      __m256i b = montgomery_mul_256(a, INVM, r, m1);
+      __m256i c = my256_mulhi_epu32(my256_mullo_epu32(b, r), m1);
+      __m256i d = _mm256_and_si256(_mm256_cmpgt_epi32(c, m0), m1);
+      __m256i e = _mm256_sub_epi32(d, c);
+      _mm256_storeu_si256((__m256i *)(buf1_ + i), e);
+    }
   }
 };
 ```
