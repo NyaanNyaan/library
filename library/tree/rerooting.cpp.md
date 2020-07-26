@@ -44,6 +44,7 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp.html">verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-b.test.cpp.html">verify-aoj-grl/aoj-grl-5-b.test.cpp</a>
 
 
