@@ -7,7 +7,7 @@
 #include "../modint/arbitrary-prime-modint.cpp"
 #include "../modint/montgomery-modint.cpp"
 #include "../modint/simd-montgomery.cpp"
-#include "./ntt-sse42.cpp"
+#include "./ntt-avx2.cpp"
 
 namespace ArbitraryNTT {
 constexpr int32_t m0 = 167772161;
