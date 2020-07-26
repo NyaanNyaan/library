@@ -49,6 +49,7 @@ layout: default
 * :heavy_check_mark: <a href="lowlink.cpp.html">graph/lowlink.cpp</a>
 * :heavy_check_mark: <a href="strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
 * :heavy_check_mark: <a href="topological-sort.cpp.html">graph/topological-sort.cpp</a>
+* :warning: <a href="../math/grundy-number.cpp.html">math/grundy-number.cpp</a>
 * :heavy_check_mark: <a href="../shortest-path/bellman-ford.cpp.html">shortest-path/bellman-ford.cpp</a>
 * :heavy_check_mark: <a href="../shortest-path/dijkstra.cpp.html">shortest-path/dijkstra.cpp</a>
 * :heavy_check_mark: <a href="../shortest-path/warshall-floyd.cpp.html">shortest-path/warshall-floyd.cpp</a>

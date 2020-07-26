@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 13:55:18+09:00
+    - Last commit date: 2020-07-27 03:06:38+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/binary-indexed-tree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 05:25:00+09:00
+    - Last commit date: 2020-07-27 03:06:38+09:00
 
 
 
@@ -77,18 +77,18 @@ struct BinaryIndexedTree {
   }
 
   // get sum of [0,k]
-  T sum(int k) {
+  T sum(int k) const {
     if (k < 0) return 0;  // return 0 if k < 0
     T ret = 0;
     for (++k; k > 0; k -= k & -k) ret += data[k];
-    return (ret);
+    return ret;
   }
 
   // getsum of [l,r]
-  inline T sum(int l, int r) { return sum(r) - sum(l - 1); }
+  inline T sum(int l, int r) const { return sum(r) - sum(l - 1); }
 
   // get value of k
-  inline T operator[](int k) { return sum(k) - sum(k - 1); }
+  inline T operator[](int k) const { return sum(k) - sum(k - 1); }
 
   // data[k] += x
   void add(int k, T x) {

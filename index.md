@@ -178,7 +178,7 @@ layout: default
 * :warning: <a href="library/string/rolling-hash.cpp.html">string/rolling-hash.cpp</a>
 * :warning: <a href="library/string/run-length-encoding.cpp.html">string/run-length-encoding.cpp</a>
 * :warning: <a href="library/string/subsequence-dp.cpp.html">string/subsequence-dp.cpp</a>
-* :warning: <a href="library/string/suffix-array.cpp.html">string/suffix-array.cpp</a>
+* :heavy_check_mark: <a href="library/string/suffix-array.cpp.html">string/suffix-array.cpp</a>
 
 
 <div id="c0af77cf8294ff93a5cdb2963ca9f038"></div>
@@ -244,5 +244,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 
 

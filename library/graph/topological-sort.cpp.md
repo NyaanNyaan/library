@@ -42,6 +42,11 @@ layout: default
 * :heavy_check_mark: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
+## Required by
+
+* :warning: <a href="../math/grundy-number.cpp.html">math/grundy-number.cpp</a>
+
+
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-4-a.test.cpp.html">verify-aoj-grl/aoj-grl-4-a.test.cpp</a>

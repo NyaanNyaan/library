@@ -25,20 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: string/run-length-encoding.cpp
+# :heavy_check_mark: verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
-* <a href="{{ site.github.repository_url }}/blob/master/string/run-length-encoding.cpp">View this file on GitHub</a>
+* category: <a href="../../index.html#c893b3744fd88c0c8b5cf4d75eea5b3a">verify-yosupo-other</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-27 03:06:38+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/zalgorithm">https://judge.yosupo.jp/problem/zalgorithm</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
+* :heavy_check_mark: <a href="../../library/string/suffix-array.cpp.html">string/suffix-array.cpp</a>
 
 
 ## Code
@@ -46,42 +49,20 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#pragma once
-#ifndef Nyaan_template
+#define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
+
 #include "../competitive-template.cpp"
-#endif
+#include "../string/suffix-array.cpp"
 
-vector<pair<char, int>> RunLengthEncoding(string& S) {
-  vector<pair<char, int>> ret;
-  char c = -1;
-  int n = 0;
-  for (char x : S) {
-    if (c == x)
-      n++;
-    else {
-      if (n) ret.emplace_back(c, n);
-      c = x, n = 1;
-    }
+void solve(){
+  ins(S);
+  SuffixArray sa(S);
+  LCPArray lcp(sa);
+  StringSearch search(lcp);
+  rep(i,sz(S)){
+    cout << (i?" ":"") << search.ArbitaryLCP(0 , i);
   }
-  if (n) ret.emplace_back(c, n);
-  return ret;
-}
-
-template <typename T>
-vector<pair<T, int>> RunLengthEncoding(vector<T>& S) {
-  vector<pair<T, int>> ret;
-  T c = -1;
-  int n = 0;
-  for (T& x : S) {
-    if (c == x)
-      n++;
-    else {
-      if (n) ret.emplace_back(c, n);
-      c = x, n = 1;
-    }
-  }
-  if (n) ret.emplace_back(c, n);
-  return ret;
+  out();
 }
 ```
 {% endraw %}
@@ -94,9 +75,11 @@ Traceback (most recent call last):
     bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
     bundler.update(path)
+  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 307, in update
+    self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: string/run-length-encoding.cpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}
