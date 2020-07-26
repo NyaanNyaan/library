@@ -8,7 +8,7 @@ template <typename idx_t, typename data_t>
 struct DynamicFenwickTree {
   idx_t N;
   unordered_map<idx_t, data_t> data;
-  DynamicFenwickTree(idx_t size) { N = ++size; }
+  DynamicFenwickTree(idx_t size) { N = size += 3; }
 
   // iにxを加算
   void add(idx_t k, data_t x) {
@@ -25,6 +25,9 @@ struct DynamicFenwickTree {
 
   // [a,b]のsum
   data_t sum(idx_t a, idx_t b) { return sum(b) - sum(a - 1); }
+
+   // get value of k
+  data_t operator[](idx_t k) { return sum(k) - sum(k - 1); }
 
   idx_t lower_bound(data_t w) {
     if (w <= 0) return 0;

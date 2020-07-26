@@ -1,3 +1,7 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
 
 // 使い方
 // 文字列のハッシュ列 Roriha s_rori(S);

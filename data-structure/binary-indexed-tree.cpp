@@ -17,18 +17,18 @@ struct BinaryIndexedTree {
   }
 
   // get sum of [0,k]
-  T sum(int k) {
+  T sum(int k) const {
     if (k < 0) return 0;  // return 0 if k < 0
     T ret = 0;
     for (++k; k > 0; k -= k & -k) ret += data[k];
-    return (ret);
+    return ret;
   }
 
   // getsum of [l,r]
-  inline T sum(int l, int r) { return sum(r) - sum(l - 1); }
+  inline T sum(int l, int r) const { return sum(r) - sum(l - 1); }
 
   // get value of k
-  inline T operator[](int k) { return sum(k) - sum(k - 1); }
+  inline T operator[](int k) const { return sum(k) - sum(k - 1); }
 
   // data[k] += x
   void add(int k, T x) {

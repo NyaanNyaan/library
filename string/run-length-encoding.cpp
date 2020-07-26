@@ -1,3 +1,8 @@
+#pragma once
+#ifndef Nyaan_template
+#include "../competitive-template.cpp"
+#endif
+
 vector<pair<char, int>> RunLengthEncoding(string& S) {
   vector<pair<char, int>> ret;
   char c = -1;
