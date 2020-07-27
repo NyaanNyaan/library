@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -40,8 +40,8 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../../library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :x: <a href="../../library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
+* :heavy_check_mark: <a href="../../library/modint/modint.hpp.html">modint/modint.hpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
 
 
 ## Code

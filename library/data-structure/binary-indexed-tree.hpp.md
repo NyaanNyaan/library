@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: data-structure/binary-indexed-tree.hpp
+# :heavy_check_mark: data-structure/binary-indexed-tree.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -51,7 +51,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
 
 
 ## Code

@@ -40,7 +40,7 @@ layout: default
 
 * :question: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
-* :question: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
 
 
 ## Verified with

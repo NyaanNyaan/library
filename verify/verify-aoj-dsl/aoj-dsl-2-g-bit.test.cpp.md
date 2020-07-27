@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :question: <a href="../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
 * :heavy_check_mark: <a href="../../library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
 
 

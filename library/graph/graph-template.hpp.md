@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: graph/graph-template.hpp
+# :heavy_check_mark: graph/graph-template.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -44,7 +44,7 @@ layout: default
 ## Required by
 
 * :warning: <a href="dimension-expanded-graph.hpp.html">graph/dimension-expanded-graph.hpp</a>
-* :question: <a href="graph-utility.hpp.html">graph/graph-utility.hpp</a>
+* :heavy_check_mark: <a href="graph-utility.hpp.html">graph/graph-utility.hpp</a>
 * :heavy_check_mark: <a href="kruskal.hpp.html">graph/kruskal.hpp</a>
 * :heavy_check_mark: <a href="lowlink.hpp.html">graph/lowlink.hpp</a>
 * :heavy_check_mark: <a href="strongly-connected-components.hpp.html">graph/strongly-connected-components.hpp</a>
@@ -53,7 +53,7 @@ layout: default
 * :heavy_check_mark: <a href="../shortest-path/bellman-ford.hpp.html">shortest-path/bellman-ford.hpp</a>
 * :heavy_check_mark: <a href="../shortest-path/dijkstra.hpp.html">shortest-path/dijkstra.hpp</a>
 * :heavy_check_mark: <a href="../shortest-path/warshall-floyd.hpp.html">shortest-path/warshall-floyd.hpp</a>
-* :question: <a href="../tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
+* :heavy_check_mark: <a href="../tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
 * :warning: <a href="../tree/dsu-on-tree.hpp.html">tree/dsu-on-tree.hpp</a>
 * :warning: <a href="../tree/euler-tour.hpp.html">tree/euler-tour.hpp</a>
 * :heavy_check_mark: <a href="../tree/heavy-light-decomposition.hpp.html">tree/heavy-light-decomposition.hpp</a>
@@ -78,8 +78,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 
 
 ## Code

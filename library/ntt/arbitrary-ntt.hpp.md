@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/arbitrary-ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 03:32:31+09:00
+    - Last commit date: 2020-07-28 04:04:31+09:00
 
 
 
@@ -41,8 +41,8 @@ layout: default
 * :question: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 * :x: <a href="../modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
 * :x: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :x: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :x: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :x: <a href="ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 

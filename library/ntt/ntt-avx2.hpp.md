@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-avx2.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 03:32:31+09:00
+    - Last commit date: 2020-07-28 04:04:31+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Depends on
 
 * :question: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 ## Required by
@@ -592,6 +592,17 @@ struct NTT {
       __m256i e = _mm256_sub_epi32(d, c);
       _mm256_storeu_si256((__m256i *)(buf1_ + i), e);
     }
+  }
+
+  __attribute__((target("avx2"))) void doubling(vector<mint> &a) {
+    int M = (int)a.size();
+    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
+    intt(buf1, M);
+    mint r = 1, zeta = dw[__builtin_ctz((mint::get_mod() - 1) / M)];
+    for (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;
+    ntt(buf1, M);
+    a.resize(2 * M);
+    for (int i = 0; i < M; i++) buf1[M + i].a = buf1.a;
   }
 };
 ```
