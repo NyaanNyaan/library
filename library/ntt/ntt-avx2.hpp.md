@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-avx2.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 04:04:31+09:00
+    - Last commit date: 2020-07-28 04:21:26+09:00
 
 
 
@@ -520,35 +520,9 @@ struct NTT {
       }
     }
     if (normalize) {
-      mint invn = one / mint(n);
+      mint invn = mint(n).inverse();
       for (int i = 0; i < n; i++) a[i] *= invn;
     }
-  }
-
-  __attribute__((target("avx2"))) vector<mint> multiply(const vector<mint> &a,
-                                                        const vector<mint> &b) {
-    int l = a.size() + b.size() - 1;
-    if (min<int>(a.size(), b.size()) <= 40) {
-      vector<mint> s(l);
-      for (int i = 0; i < (int)a.size(); ++i)
-        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
-      return s;
-    }
-    int M = 4;
-    while (M < l) M <<= 1;
-    for (int i = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;
-    for (int i = (int)a.size(); i < M; ++i) buf1[i].a = 0;
-    for (int i = 0; i < (int)b.size(); ++i) buf2[i].a = b[i].a;
-    for (int i = (int)b.size(); i < M; ++i) buf2[i].a = 0;
-    ntt(buf1, M);
-    ntt(buf2, M);
-    for (int i = 0; i < M; ++i)
-      buf1[i].a = mint::reduce(uint64_t(buf1[i].a) * buf2[i].a);
-    intt(buf1, M, false);
-    vector<mint> s(l);
-    mint invm = mint(M).inverse();
-    for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;
-    return s;
   }
 
   __attribute__((target("avx2"))) void inplace_multiply(
@@ -594,7 +568,46 @@ struct NTT {
     }
   }
 
-  __attribute__((target("avx2"))) void doubling(vector<mint> &a) {
+  void ntt(vector<mint> &a) {
+    int M = (int)a.size();
+    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
+    ntt(buf1, M);
+    for (int i = 0; i < M; i++) a[i].a = buf1[i].a;
+  }
+
+  void intt(vector<mint> &a) {
+    int M = (int)a.size();
+    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
+    intt(buf1, M, true);
+    for (int i = 0; i < M; i++) a[i].a = buf1[i].a;
+  }
+
+  vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
+    int l = a.size() + b.size() - 1;
+    if (min<int>(a.size(), b.size()) <= 40) {
+      vector<mint> s(l);
+      for (int i = 0; i < (int)a.size(); ++i)
+        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
+      return s;
+    }
+    int M = 4;
+    while (M < l) M <<= 1;
+    for (int i = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;
+    for (int i = (int)a.size(); i < M; ++i) buf1[i].a = 0;
+    for (int i = 0; i < (int)b.size(); ++i) buf2[i].a = b[i].a;
+    for (int i = (int)b.size(); i < M; ++i) buf2[i].a = 0;
+    ntt(buf1, M);
+    ntt(buf2, M);
+    for (int i = 0; i < M; ++i)
+      buf1[i].a = mint::reduce(uint64_t(buf1[i].a) * buf2[i].a);
+    intt(buf1, M, false);
+    vector<mint> s(l);
+    mint invm = mint(M).inverse();
+    for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;
+    return s;
+  }
+
+  void doubling(vector<mint> &a) {
     int M = (int)a.size();
     for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
     intt(buf1, M);

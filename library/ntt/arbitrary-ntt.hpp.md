@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/arbitrary-ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 04:04:31+09:00
+    - Last commit date: 2020-07-28 04:21:26+09:00
 
 
 
