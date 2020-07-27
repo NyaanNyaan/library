@@ -160,6 +160,12 @@ struct NTT {
 
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
     int l = a.size() + b.size() - 1;
+    if (min<int>(a.size(), b.size()) <= 40) {
+      vector<mint> s(l);
+      for (int i = 0; i < (int)a.size(); ++i)
+        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
+      return s;
+    }
     int k = 2, M = 4;
     while (M < l) M <<= 1, ++k;
     setwy(k);

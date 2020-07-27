@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
+#define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
 #include "../competitive-template.cpp"
 #include "../graph/graph-utility.cpp"
