@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
-#include "../competitive-template.cpp"
-#include "../graph/graph-utility.cpp"
+#include "../competitive-template.hpp"
+#include "../graph/graph-utility.hpp"
 
 void solve() {
   ini(N);

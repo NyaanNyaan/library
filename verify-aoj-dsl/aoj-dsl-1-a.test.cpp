@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
 
-#include "../competitive-template.cpp"
-#include "../data-structure/union-find.cpp"
+#include "../competitive-template.hpp"
+#include "../data-structure/union-find.hpp"
 
 void solve() {
   ini(N, Q);

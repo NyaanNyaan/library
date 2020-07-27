@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
-#include "../competitive-template.cpp"
-#include "../modint/modint.cpp"
-#include "../ntt/ntt.cpp"
+#include "../competitive-template.hpp"
+#include "../modint/modint.hpp"
+#include "../ntt/ntt.hpp"
 
 constexpr int MOD = 998244353;
 using mint = ModInt<MOD>;

@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 
-#include "../competitive-template.cpp"
-#include "../segment-tree/segment-tree.cpp"
+#include "../competitive-template.hpp"
+#include "../segment-tree/segment-tree.hpp"
 
 void solve() {
   ini(N, Q);

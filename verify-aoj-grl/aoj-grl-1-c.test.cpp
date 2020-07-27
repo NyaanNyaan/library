@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C"
 
-#include "../competitive-template.cpp"
-#include "../shortest-path/warshall-floyd.cpp"
+#include "../competitive-template.hpp"
+#include "../shortest-path/warshall-floyd.hpp"
 
 void solve() {
   ini(N, E);

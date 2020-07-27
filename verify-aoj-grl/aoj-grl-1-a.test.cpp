@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
 
-#include "../competitive-template.cpp"
-#include "../shortest-path/dijkstra.cpp"
+#include "../competitive-template.hpp"
+#include "../shortest-path/dijkstra.hpp"
 
 void solve() {
   ini(N, E, S);

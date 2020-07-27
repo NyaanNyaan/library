@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
-#include "../competitive-template.cpp"
-#include "../data-structure/range-sum-range-add-bit.cpp"
+#include "../competitive-template.hpp"
+#include "../data-structure/range-sum-range-add-bit.hpp"
 
 void solve() {
   ini(N, Q);

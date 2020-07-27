@@ -1,10 +1,10 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E"
 
-#include "../competitive-template.cpp"
-#include "../segment-tree/range-add-range-sum-lazyseg.cpp"
-#include "../segment-tree/segment-tree.cpp"
-#include "../tree/heavy-light-decomposition.cpp"
+#include "../competitive-template.hpp"
+#include "../segment-tree/range-add-range-sum-lazyseg.hpp"
+#include "../segment-tree/segment-tree.hpp"
+#include "../tree/heavy-light-decomposition.hpp"
 
 void solve() {
   ini(N);

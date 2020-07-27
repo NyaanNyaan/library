@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 
-#include "../competitive-template.cpp"
-#include "../data-structure/binary-indexed-tree.cpp"
+#include "../competitive-template.hpp"
+#include "../data-structure/binary-indexed-tree.hpp"
 
 void solve() {
   ini(N, Q);

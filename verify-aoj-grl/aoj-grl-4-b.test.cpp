@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_4_B"
 
-#include "../competitive-template.cpp"
-#include "../graph/topological-sort.cpp"
+#include "../competitive-template.hpp"
+#include "../graph/topological-sort.hpp"
 
 void solve() {
   ini(N, M);

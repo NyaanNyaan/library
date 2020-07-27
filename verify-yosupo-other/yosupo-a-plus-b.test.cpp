@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../competitive-template.cpp"
+#include "../competitive-template.hpp"
 
 void solve() {
   ini(a, b);

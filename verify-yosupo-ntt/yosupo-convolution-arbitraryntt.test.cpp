@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
-#include "../competitive-template.cpp"
-#include "../modint/montgomery-modint.cpp"
-#include "../ntt/arbitrary-ntt.cpp"
+#include "../competitive-template.hpp"
+#include "../modint/montgomery-modint.hpp"
+#include "../ntt/arbitrary-ntt.hpp"
 
 constexpr int MOD = 1000000007;
 using mint = LazyMontgomeryModInt<MOD>;

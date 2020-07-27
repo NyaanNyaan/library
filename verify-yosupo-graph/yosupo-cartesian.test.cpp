@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 
-#include "../competitive-template.cpp"
-#include "../tree/cartesian-tree.cpp"
+#include "../competitive-template.hpp"
+#include "../tree/cartesian-tree.hpp"
 
 void solve(){
   ini(N);

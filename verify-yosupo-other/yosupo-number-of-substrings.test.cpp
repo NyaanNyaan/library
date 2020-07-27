@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
 
-#include "../competitive-template.cpp"
-#include "../string/suffix-array.cpp"
+#include "../competitive-template.hpp"
+#include "../string/suffix-array.hpp"
 
 void solve() {
   ins(S);

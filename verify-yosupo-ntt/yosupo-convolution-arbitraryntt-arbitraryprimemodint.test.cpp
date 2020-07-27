@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
-#include "../competitive-template.cpp"
-#include "../modint/arbitrary-prime-modint.cpp"
-#include "../ntt/arbitrary-ntt.cpp"
+#include "../competitive-template.hpp"
+#include "../modint/arbitrary-prime-modint.hpp"
+#include "../ntt/arbitrary-ntt.hpp"
 
 int MOD = 1000000007;
 using mint = ArbitraryLazyMontgomeryModInt;

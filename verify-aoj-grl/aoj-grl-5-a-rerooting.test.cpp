@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_A"
 
-#include "../competitive-template.cpp"
-#include "../tree/rerooting.cpp"
+#include "../competitive-template.hpp"
+#include "../tree/rerooting.hpp"
 
 void solve() {
   ini(N);

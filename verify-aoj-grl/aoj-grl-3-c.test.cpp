@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C"
 
-#include "../competitive-template.cpp"
-#include "../graph/strongly-connected-components.cpp"
+#include "../competitive-template.hpp"
+#include "../graph/strongly-connected-components.hpp"
 
 void solve() {
   ini(N, M);
