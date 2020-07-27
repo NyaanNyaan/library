@@ -531,4 +531,15 @@ struct NTT {
       _mm256_storeu_si256((__m256i *)(buf1_ + i), e);
     }
   }
+
+  __attribute__((target("avx2"))) void doubling(vector<mint> &a) {
+    int M = (int)a.size();
+    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
+    intt(buf1, M);
+    mint r = 1, zeta = dw[__builtin_ctz((mint::get_mod() - 1) / M)];
+    for (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;
+    ntt(buf1, M);
+    a.resize(2 * M);
+    for (int i = 0; i < M; i++) buf1[M + i].a = buf1.a;
+  }
 };
