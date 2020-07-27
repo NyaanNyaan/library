@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-other/yosupo-a-plus-b.test.cpp
+# :x: verify-yosupo-other/yosupo-a-plus-b.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c893b3744fd88c0c8b5cf4d75eea5b3a">verify-yosupo-other</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-other/yosupo-a-plus-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 13:55:18+09:00
+    - Last commit date: 2020-07-28 03:32:31+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/aplusb">https://judge.yosupo.jp/problem/aplusb</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../competitive-template.cpp"
+#include "../competitive-template.hpp"
 
 void solve() {
   ini(a, b);
@@ -70,7 +70,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.hpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

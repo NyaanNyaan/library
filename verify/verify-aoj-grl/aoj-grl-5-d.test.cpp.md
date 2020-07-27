@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-5-d.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 01:42:18+09:00
+    - Last commit date: 2020-07-28 03:32:31+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_D</a>
@@ -39,10 +39,10 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/segment-tree.cpp.html">segment-tree/segment-tree.cpp</a>
-* :heavy_check_mark: <a href="../../library/tree/heavy-light-decomposition.cpp.html">tree/heavy-light-decomposition.cpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../../library/segment-tree/segment-tree.hpp.html">segment-tree/segment-tree.hpp</a>
+* :heavy_check_mark: <a href="../../library/tree/heavy-light-decomposition.hpp.html">tree/heavy-light-decomposition.hpp</a>
 
 
 ## Code
@@ -53,9 +53,9 @@ layout: default
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_D"
 
-#include "../competitive-template.cpp"
-#include "../segment-tree/segment-tree.cpp"
-#include "../tree/heavy-light-decomposition.cpp"
+#include "../competitive-template.hpp"
+#include "../segment-tree/segment-tree.hpp"
+#include "../tree/heavy-light-decomposition.hpp"
 void solve() {
   ini(N);
   vvi g(N);
@@ -100,7 +100,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.hpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

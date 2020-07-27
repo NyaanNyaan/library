@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+# :x: verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 01:24:43+09:00
+    - Last commit date: 2020-07-28 03:32:31+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/modint/modint.cpp.html">modint/modint.cpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt.cpp.html">ntt/ntt.cpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :x: <a href="../../library/modint/modint.hpp.html">modint/modint.hpp</a>
+* :x: <a href="../../library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
 
 
 ## Code
@@ -51,9 +51,9 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
-#include "../competitive-template.cpp"
-#include "../modint/modint.cpp"
-#include "../ntt/ntt.cpp"
+#include "../competitive-template.hpp"
+#include "../modint/modint.hpp"
+#include "../ntt/ntt.hpp"
 
 constexpr int MOD = 998244353;
 using mint = ModInt<MOD>;
@@ -82,7 +82,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.hpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

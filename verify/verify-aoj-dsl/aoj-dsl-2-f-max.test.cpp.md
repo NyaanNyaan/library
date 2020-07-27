@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 13:55:18+09:00
+    - Last commit date: 2020-07-28 03:32:31+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/range-update-range-max-lazyseg.cpp.html">segment-tree/range-update-range-max-lazyseg.cpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../library/segment-tree/range-update-range-max-lazyseg.hpp.html">segment-tree/range-update-range-max-lazyseg.hpp</a>
 
 
 ## Code
@@ -51,8 +51,8 @@ layout: default
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
 
-#include "../competitive-template.cpp"
-#include "../segment-tree/range-update-range-max-lazyseg.cpp"
+#include "../competitive-template.hpp"
+#include "../segment-tree/range-update-range-max-lazyseg.hpp"
 
 void solve() {
   ini(N, Q);
@@ -86,7 +86,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.hpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

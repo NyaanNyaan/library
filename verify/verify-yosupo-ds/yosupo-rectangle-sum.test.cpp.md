@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
+# :x: verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#bd0671126b1c769555a4a09b2a39dde2">verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 19:38:56+09:00
+    - Last commit date: 2020-07-28 03:32:31+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/rectangle_sum">https://judge.yosupo.jp/problem/rectangle_sum</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/rectangle-sum.cpp.html">data-structure/rectangle-sum.cpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/persistent-segment-tree.cpp.html">segment-tree/persistent-segment-tree.cpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :x: <a href="../../library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
+* :x: <a href="../../library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
 
 
 ## Code
@@ -51,8 +51,8 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
 
-#include "../competitive-template.cpp"
-#include "../data-structure/rectangle-sum.cpp"
+#include "../competitive-template.hpp"
+#include "../data-structure/rectangle-sum.hpp"
 
 void solve() {
   ini(N, Q);
@@ -80,7 +80,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.hpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

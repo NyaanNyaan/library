@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ds/yosupo-static-rmq.test.cpp
+# :x: verify-yosupo-ds/yosupo-static-rmq.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#bd0671126b1c769555a4a09b2a39dde2">verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ds/yosupo-static-rmq.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-25 20:24:29+09:00
+    - Last commit date: 2020-07-28 03:32:31+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/staticrmq">https://judge.yosupo.jp/problem/staticrmq</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :x: <a href="../../library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
 
 
 ## Code
@@ -50,8 +50,8 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#include "../competitive-template.cpp"
-#include "../data-structure/sparse-table.cpp"
+#include "../competitive-template.hpp"
+#include "../data-structure/sparse-table.hpp"
 
 void solve(){
   ini(N,Q);
@@ -78,7 +78,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.hpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

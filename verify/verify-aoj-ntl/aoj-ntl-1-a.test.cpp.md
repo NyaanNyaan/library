@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+# :x: verify-aoj-ntl/aoj-ntl-1-a.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#bffdd07a318a75234329b02eb9a9745b">verify-aoj-ntl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-ntl/aoj-ntl-1-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 02:01:03+09:00
+    - Last commit date: 2020-07-28 03:32:31+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/math/elementary-function.cpp.html">math/elementary-function.cpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :x: <a href="../../library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
 
 
 ## Code
@@ -51,8 +51,8 @@ layout: default
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A"
 
-#include "../competitive-template.cpp"
-#include "../math/elementary-function.cpp"
+#include "../competitive-template.hpp"
+#include "../math/elementary-function.hpp"
 
 void solve() {
   ini(N);
@@ -78,7 +78,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.hpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}

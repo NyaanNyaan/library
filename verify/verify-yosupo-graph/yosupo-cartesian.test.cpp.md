@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-graph/yosupo-cartesian.test.cpp
+# :x: verify-yosupo-graph/yosupo-cartesian.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#56f82f6ec3e277fdf7ae8d90e7719cec">verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-graph/yosupo-cartesian.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 03:36:21+09:00
+    - Last commit date: 2020-07-28 03:32:31+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/cartesian_tree">https://judge.yosupo.jp/problem/cartesian_tree</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :heavy_check_mark: <a href="../../library/tree/cartesian-tree.cpp.html">tree/cartesian-tree.cpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :question: <a href="../../library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
 
 
 ## Code
@@ -51,8 +51,8 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 
-#include "../competitive-template.cpp"
-#include "../tree/cartesian-tree.cpp"
+#include "../competitive-template.hpp"
+#include "../tree/cartesian-tree.hpp"
 
 void solve(){
   ini(N);
@@ -81,7 +81,7 @@ Traceback (most recent call last):
     self.update(self._resolve(pathlib.Path(included), included_from=path))
   File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
     raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.cpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
+onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: competitive-template.hpp: line 108: unable to process #include in #if / #ifdef / #ifndef other than include guards
 
 ```
 {% endraw %}
