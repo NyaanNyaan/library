@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-24 20:19:03+09:00
+    - Last commit date: 2020-07-28 01:24:43+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Verified with
@@ -214,6 +214,12 @@ struct NTT {
 
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
     int l = a.size() + b.size() - 1;
+    if (min<int>(a.size(), b.size()) <= 40) {
+      vector<mint> s(l);
+      for (int i = 0; i < (int)a.size(); ++i)
+        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
+      return s;
+    }
     int k = 2, M = 4;
     while (M < l) M <<= 1, ++k;
     setwy(k);

@@ -25,23 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify-yosupo-graph/yosupo-diameter.test.cpp
+# :heavy_check_mark: verify-yosupo-graph/yosupo-diameter.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#56f82f6ec3e277fdf7ae8d90e7719cec">verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-graph/yosupo-diameter.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 13:06:57+09:00
+    - Last commit date: 2020-07-28 01:24:43+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/cartesian_tree">https://judge.yosupo.jp/problem/cartesian_tree</a>
+* see: <a href="https://judge.yosupo.jp/problem/tree_diameter">https://judge.yosupo.jp/problem/tree_diameter</a>
 
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
-* :question: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
-* :question: <a href="../../library/graph/graph-utility.cpp.html">graph/graph-utility.cpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-template.cpp.html">graph/graph-template.cpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-utility.cpp.html">graph/graph-utility.cpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
+#define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
 #include "../competitive-template.cpp"
 #include "../graph/graph-utility.cpp"

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: graph/graph-template.cpp
+# :heavy_check_mark: graph/graph-template.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,13 +38,13 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Required by
 
 * :warning: <a href="dimension-expanded-graph.cpp.html">graph/dimension-expanded-graph.cpp</a>
-* :question: <a href="graph-utility.cpp.html">graph/graph-utility.cpp</a>
+* :heavy_check_mark: <a href="graph-utility.cpp.html">graph/graph-utility.cpp</a>
 * :heavy_check_mark: <a href="kruskal.cpp.html">graph/kruskal.cpp</a>
 * :heavy_check_mark: <a href="lowlink.cpp.html">graph/lowlink.cpp</a>
 * :heavy_check_mark: <a href="strongly-connected-components.cpp.html">graph/strongly-connected-components.cpp</a>
@@ -79,7 +79,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 
 
 ## Code
