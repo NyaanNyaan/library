@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
 
 

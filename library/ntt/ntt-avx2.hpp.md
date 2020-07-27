@@ -25,34 +25,34 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: ntt/ntt-avx2.hpp
+# :heavy_check_mark: ntt/ntt-avx2.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt-avx2.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 04:34:25+09:00
+    - Last commit date: 2020-07-28 04:46:58+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
-* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 ## Required by
 
-* :x: <a href="arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
 
 
 ## Code
@@ -615,7 +615,7 @@ struct NTT {
     for (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;
     ntt(buf1, M);
     a.resize(2 * M);
-    for (int i = 0; i < M; i++) buf1[M + i].a = buf1.a;
+    for (int i = 0; i < M; i++) buf1[M + i].a = buf1[i].a;
   }
 };
 ```

@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 * :warning: <a href="formal-power-series.hpp.html">fps/formal-power-series.hpp</a>
 
 

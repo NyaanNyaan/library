@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 * :warning: <a href="rng.hpp.html">misc/rng.hpp</a>
 * :warning: <a href="timer.hpp.html">misc/timer.hpp</a>
 

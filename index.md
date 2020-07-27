@@ -38,7 +38,7 @@ layout: default
 
 ### .
 
-* :question: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -119,19 +119,19 @@ layout: default
 
 ### modint
 
-* :x: <a href="library/modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
-* :x: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="library/modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
+* :heavy_check_mark: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :question: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 <div id="ccb3669c87b2d028539237c4554e3c0f"></div>
 
 ### ntt
 
-* :x: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :x: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 * :heavy_check_mark: <a href="library/ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
 * :heavy_check_mark: <a href="library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
 
@@ -240,10 +240,10 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
-* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
-* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>

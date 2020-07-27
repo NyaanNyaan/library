@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../assets/css/copy-button.css" />
 
 
-# :question: competitive-template.hpp
+# :heavy_check_mark: competitive-template.hpp
 
 <a href="../index.html">Back to top page</a>
 
@@ -76,13 +76,13 @@ layout: default
 * :warning: <a href="misc/rng.hpp.html">misc/rng.hpp</a>
 * :warning: <a href="misc/simulated-annealing.hpp.html">misc/simulated-annealing.hpp</a>
 * :warning: <a href="misc/timer.hpp.html">misc/timer.hpp</a>
-* :x: <a href="modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
-* :x: <a href="modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
+* :heavy_check_mark: <a href="modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="modint/modint.hpp.html">modint/modint.hpp</a>
-* :question: <a href="modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :x: <a href="ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :x: <a href="ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 * :heavy_check_mark: <a href="ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
 * :heavy_check_mark: <a href="ntt/ntt.hpp.html">ntt/ntt.hpp</a>
 * :warning: <a href="segment-tree/dynamic-li-chao-tree.hpp.html">segment-tree/dynamic-li-chao-tree.hpp</a>
@@ -159,10 +159,10 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>

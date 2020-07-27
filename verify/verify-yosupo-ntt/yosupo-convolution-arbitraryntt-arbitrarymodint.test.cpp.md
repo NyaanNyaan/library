@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 04:34:25+09:00
+    - Last commit date: 2020-07-28 04:46:58+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -39,13 +39,13 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../../library/modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
-* :x: <a href="../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :question: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :x: <a href="../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :x: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../library/modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
+* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
