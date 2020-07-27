@@ -25,26 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/graph-utility.cpp
+# :question: graph/graph-utility.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/graph-utility.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 00:00:31+09:00
+    - Last commit date: 2020-07-27 13:06:57+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-aoj-grl/aoj-grl-5-a.test.cpp.html">verify-aoj-grl/aoj-grl-5-a.test.cpp</a>
+* :x: <a href="../../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 
 
 ## Code
@@ -113,7 +114,7 @@ pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {
 
 // nodes on the path u-v ( O(N) )
 template <typename G>
-vector<int> path(G &g, int u, int v) {
+vector<int> Path(G &g, int u, int v) {
   vi ret;
   int end = 0;
   auto dfs = [&](auto rec, int cur, int par = -1) -> void {

@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
 
 
 ## Required by
@@ -51,6 +51,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
 
 
 ## Code

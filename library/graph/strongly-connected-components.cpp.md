@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
-* :heavy_check_mark: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
+* :question: <a href="../competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="graph-template.cpp.html">graph/graph-template.cpp</a>
 
 
 ## Verified with

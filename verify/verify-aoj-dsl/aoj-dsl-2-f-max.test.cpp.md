@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="../../library/segment-tree/range-update-range-max-lazyseg.cpp.html">segment-tree/range-update-range-max-lazyseg.cpp</a>
 
 

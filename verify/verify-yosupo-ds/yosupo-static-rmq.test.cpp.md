@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
+* :question: <a href="../../library/competitive-template.cpp.html">competitive-template.cpp</a>
 * :heavy_check_mark: <a href="../../library/data-structure/sparse-table.cpp.html">data-structure/sparse-table.cpp</a>
 
 
