@@ -549,7 +549,7 @@ struct NTT {
     int M = (int)a.size();
     for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
     intt(buf1, M);
-    mint r = 1, zeta = dw[__builtin_ctz((mint::get_mod() - 1) / M)];
+    mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));
     for (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;
     ntt(buf1, M);
     a.resize(2 * M);
