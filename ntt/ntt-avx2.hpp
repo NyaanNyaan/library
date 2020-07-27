@@ -553,6 +553,6 @@ struct NTT {
     for (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;
     ntt(buf1, M);
     a.resize(2 * M);
-    for (int i = 0; i < M; i++) buf1[M + i].a = buf1.a;
+    for (int i = 0; i < M; i++) buf1[M + i].a = buf1[i].a;
   }
 };
