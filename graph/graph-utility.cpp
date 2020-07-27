@@ -59,7 +59,7 @@ pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {
 
 // nodes on the path u-v ( O(N) )
 template <typename G>
-vector<int> path(G &g, int u, int v) {
+vector<int> Path(G &g, int u, int v) {
   vi ret;
   int end = 0;
   auto dfs = [&](auto rec, int cur, int par = -1) -> void {
