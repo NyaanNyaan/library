@@ -31,7 +31,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
               FormalPowerSeries<mint> a) {
   int k = Q.size() - 1;
   assert((int)a.size() == k);
-  FormalPowerSeries<mint> P = a * Q;
+  auto P = a * Q;
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }
