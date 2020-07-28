@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-07-28 16:10:28+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -1101,7 +1101,7 @@ struct NTT {
     return s;
   }
 
-  void doubling(vector<mint> &a) {
+  void ntt_doubling(vector<mint> &a) {
     int M = (int)a.size();
     for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
     intt(buf1, M);

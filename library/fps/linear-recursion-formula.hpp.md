@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/linear-recursion-formula.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:44:13+09:00
+    - Last commit date: 2020-07-28 16:10:28+09:00
 
 
 
 
 ## Depends on
 
-* :warning: <a href="formal-power-series.hpp.html">fps/formal-power-series.hpp</a>
+* :warning: <a href="formal-power-series.hpp.html">Formal Power Series <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Code
@@ -55,8 +55,19 @@ using namespace std;
 template <typename mint>
 mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
                             FormalPowerSeries<mint> P) {
-  int k = Q.size() - 1;
+  Q.shrink();
+  mint ret = 0;
+  if(P.size() >= Q.size()){
+    auto R = P / Q;
+    P -= R * Q;
+    if(N < (int)R.size()) ret += R[N];
+  }
+  if((int)P.size() == 0) return ret;
+
+  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1) );
   P.resize(k);
+  Q.resize(k);
+  
   while (N) {
     auto Q2 = Q;
     for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
@@ -273,13 +284,29 @@ struct FormalPowerSeries : vector<mint> {
   // TODO: 作る
   // FPS sqrt(int deg = -1) const {}
 };
+
+/**
+ * @brief Formal Power Series
+ * @docs docs/formal-power-series.md
+ */
 #line 6 "fps/linear-recursion-formula.hpp"
 
 template <typename mint>
 mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
                             FormalPowerSeries<mint> P) {
-  int k = Q.size() - 1;
+  Q.shrink();
+  mint ret = 0;
+  if(P.size() >= Q.size()){
+    auto R = P / Q;
+    P -= R * Q;
+    if(N < (int)R.size()) ret += R[N];
+  }
+  if((int)P.size() == 0) return ret;
+
+  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1) );
   P.resize(k);
+  Q.resize(k);
+  
   while (N) {
     auto Q2 = Q;
     for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];

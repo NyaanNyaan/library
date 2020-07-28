@@ -63,7 +63,7 @@ layout: default
 
 ### fps
 
-* :warning: <a href="library/fps/formal-power-series.hpp.html">fps/formal-power-series.hpp</a>
+* :warning: <a href="library/fps/formal-power-series.hpp.html">Formal Power Series <small>(fps/formal-power-series.hpp)</small></a>
 * :warning: <a href="library/fps/linear-recursion-formula.hpp.html">fps/linear-recursion-formula.hpp</a>
 
 

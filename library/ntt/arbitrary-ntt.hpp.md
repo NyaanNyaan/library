@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/arbitrary-ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-07-28 16:10:28+09:00
 
 
 
@@ -1106,7 +1106,7 @@ struct NTT {
     return s;
   }
 
-  void doubling(vector<mint> &a) {
+  void ntt_doubling(vector<mint> &a) {
     int M = (int)a.size();
     for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
     intt(buf1, M);
