@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: fps/ntt-friendly-fps.hpp
+# :warning: fps/arbitrary-fps.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/fps/ntt-friendly-fps.hpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/fps/arbitrary-fps.hpp">View this file on GitHub</a>
     - Last commit date: 2020-07-28 21:57:06+09:00
 
 
@@ -39,7 +39,9 @@ layout: default
 ## Depends on
 
 * :warning: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
@@ -52,7 +54,7 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "../ntt/ntt-avx2.hpp"
+#include "../ntt/arbitrary-ntt.hpp"
 #include "./formal-power-series.hpp"
 
 template <typename mint>
@@ -62,26 +64,18 @@ FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
     this->clear();
     return *this;
   }
-  static NTT<mint> ntt;
-  static_assert(ntt.level >= 20);
-  auto ret = ntt.multiply(*this, r);
+  auto ret = ArbitraryNTT::multiply(*this, r);
   return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
 }
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::ntt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.ntt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+  exit(1);
 }
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::intt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.intt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+  exit(1);
 }
 
 template <typename mint>
@@ -113,8 +107,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
-                                                     int deg) const {
+FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k, int deg) const {
   const int n = (int)this->size();
   if (deg == -1) deg = n;
   for (int i = 0; i < n; i++) {
@@ -124,7 +117,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
       FormalPowerSeries<mint> ret =
           (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
       ret = (ret << (i * k)).pre(deg);
-      if ((int)ret.size() < deg) ret.resize(deg, mint(0));
+      if (ret.size() < deg) ret.resize(deg, mint(0));
       return ret;
     }
   }
@@ -136,10 +129,107 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "fps/ntt-friendly-fps.hpp"
+#line 2 "fps/arbitrary-fps.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
+#line 3 "ntt/arbitrary-ntt.hpp"
+using namespace std;
+
+#line 3 "modint/montgomery-modint.hpp"
+using namespace std;
+
+template <uint32_t mod>
+struct LazyMontgomeryModInt {
+  using mint = LazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
+
+  static constexpr u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
+  }
+
+  static constexpr u32 r = get_r();
+  static constexpr u32 n2 = -u64(mod) % mod;
+  static_assert(r * mod == 1, "invalid, r * mod != 1");
+  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
+  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
+
+  u32 a;
+
+  constexpr LazyMontgomeryModInt() : a(0) {}
+  constexpr LazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static constexpr u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
+  }
+
+  constexpr mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  constexpr mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  constexpr mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
+    return *this;
+  }
+
+  constexpr mint &operator/=(const mint &b) {
+    *this *= b.inverse();
+    return *this;
+  }
+
+  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
+  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
+  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
+  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
+  constexpr bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr mint operator-() const { return mint() - mint(*this); }
+
+  constexpr mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
+    }
+    return ret;
+  }
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
+
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
+  }
+
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = LazyMontgomeryModInt<mod>(t);
+    return (is);
+  }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
+
+  static constexpr u32 get_mod() { return mod; }
+};
 #line 3 "ntt/ntt-avx2.hpp"
 using namespace std;
 
@@ -781,6 +871,102 @@ struct NTT {
     for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;
   }
 };
+#line 7 "ntt/arbitrary-ntt.hpp"
+
+namespace ArbitraryNTT {
+constexpr int32_t m0 = 167772161;
+constexpr int32_t m1 = 469762049;
+constexpr int32_t m2 = 754974721;
+using mint0 = LazyMontgomeryModInt<m0>;
+using mint1 = LazyMontgomeryModInt<m1>;
+using mint2 = LazyMontgomeryModInt<m2>;
+
+template <int mod>
+vector<LazyMontgomeryModInt<mod>> mul(const vector<int> &a,
+                                      const vector<int> &b) {
+  using submint = LazyMontgomeryModInt<mod>;
+  NTT<submint> ntt;
+  vector<submint> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
+  return ntt.multiply(s, t);
+}
+
+vector<int> multiply(const vector<int> &s, const vector<int> &t, int mod) {
+  auto d0 = mul<m0>(s, t);
+  auto d1 = mul<m1>(s, t);
+  auto d2 = mul<m2>(s, t);
+  int n = d0.size();
+  vector<int> ret(n);
+  using i64 = int64_t;
+  static const int r01 = mint1(m0).inverse().get();
+  static const int r02 = mint2(m0).inverse().get();
+  static const int r12 = mint2(m1).inverse().get();
+  static const int r02r12 = i64(r02) * r12 % m2;
+  static const int w1 = m0 % mod;
+  static const int w2 = i64(w1) * m1 % mod;
+  for (int i = 0; i < n; i++) {
+    i64 n1 = d1[i].get(), n2 = d2[i].get();
+    i64 a = d0[i].get();
+    i64 b = (n1 + m1 - a) * r01 % m1;
+    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    ret[i] = (a + b * w1 + c * w2) % mod;
+  }
+  return ret;
+}
+
+template <typename mint>
+vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply(s, t, mint::get_mod());
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);
+  return ret;
+}
+
+/*
+template <int mod>
+vector<int> multiply(const vector<int> &s, const vector<int> &t) {
+  auto d0 = mul<m0>(s, t);
+  auto d1 = mul<m1>(s, t);
+  auto d2 = mul<m2>(s, t);
+  int n = d0.size();
+  vector<int> res(n);
+  using i64 = int64_t;
+  static const int r01 = mint1(m0).inverse().get();
+  static const int r02 = mint2(m0).inverse().get();
+  static const int r12 = mint2(m1).inverse().get();
+  static const int r02r12 = i64(r02) * r12 % m2;
+  static const int w1 = m0 % mod;
+  static const int w2 = i64(w1) * m1 % mod;
+  for (int i = 0; i < n; i++) {
+    i64 n1 = d1[i].get(), n2 = d2[i].get();
+    i64 a = d0[i].get();
+    i64 b = (n1 + m1 - a) * r01 % m1;
+    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    res[i] = (a + b * w1 + c * w2) % mod;
+  }
+  return std::move(res);
+}
+
+template <int mod>
+vector<LazyMontgomeryModInt<mod>> multiply(
+    const vector<LazyMontgomeryModInt<mod>> &a,
+    const vector<LazyMontgomeryModInt<mod>> &b) {
+  using mint = LazyMontgomeryModInt<mod>;
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply<mod>(s, t);
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i)
+    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
+  return std::move(ret);
+}
+*/
+}  // namespace ArbitraryNTT
 #line 3 "fps/formal-power-series.hpp"
 using namespace std;
 
@@ -912,7 +1098,7 @@ struct FormalPowerSeries : vector<mint> {
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 7 "fps/ntt-friendly-fps.hpp"
+#line 7 "fps/arbitrary-fps.hpp"
 
 template <typename mint>
 FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
@@ -921,26 +1107,18 @@ FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
     this->clear();
     return *this;
   }
-  static NTT<mint> ntt;
-  static_assert(ntt.level >= 20);
-  auto ret = ntt.multiply(*this, r);
+  auto ret = ArbitraryNTT::multiply(*this, r);
   return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
 }
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::ntt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.ntt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+  exit(1);
 }
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::intt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.intt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+  exit(1);
 }
 
 template <typename mint>
@@ -972,8 +1150,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
-                                                     int deg) const {
+FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k, int deg) const {
   const int n = (int)this->size();
   if (deg == -1) deg = n;
   for (int i = 0; i < n; i++) {
@@ -983,7 +1160,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
       FormalPowerSeries<mint> ret =
           (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
       ret = (ret << (i * k)).pre(deg);
-      if ((int)ret.size() < deg) ret.resize(deg, mint(0));
+      if (ret.size() < deg) ret.resize(deg, mint(0));
       return ret;
     }
   }

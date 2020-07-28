@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/formal-power-series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 19:14:39+09:00
+    - Last commit date: 2020-07-28 21:57:06+09:00
 
 
 
@@ -172,6 +172,7 @@ $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 
 ## Required by
 
+* :warning: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :warning: <a href="linear-recursion-formula.hpp.html">fps/linear-recursion-formula.hpp</a>
 * :warning: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 
@@ -215,8 +216,6 @@ struct FormalPowerSeries : vector<mint> {
     shrink();
     return *this;
   }
-
-  FPS &operator*=(const FPS &r);
 
   FPS &operator*=(const mint &v) {
     for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
@@ -268,7 +267,7 @@ struct FormalPowerSeries : vector<mint> {
   }
 
   FPS operator>>(int sz) const {
-    if (this->size() <= sz) return {};
+    if ((int)this->size() <= sz) return {};
     FPS ret(*this);
     ret.erase(ret.begin(), ret.begin() + sz);
     return ret;
@@ -301,6 +300,9 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+  FPS &operator*=(const FPS &r);
+  FPS ntt() const;
+  FPS intt() const;
   FPS inv(int deg = -1) const;
   FPS log(int deg = -1) const;
   FPS exp(int deg = -1) const;
@@ -353,8 +355,6 @@ struct FormalPowerSeries : vector<mint> {
     return *this;
   }
 
-  FPS &operator*=(const FPS &r);
-
   FPS &operator*=(const mint &v) {
     for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
     return *this;
@@ -405,7 +405,7 @@ struct FormalPowerSeries : vector<mint> {
   }
 
   FPS operator>>(int sz) const {
-    if (this->size() <= sz) return {};
+    if ((int)this->size() <= sz) return {};
     FPS ret(*this);
     ret.erase(ret.begin(), ret.begin() + sz);
     return ret;
@@ -438,6 +438,9 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+  FPS &operator*=(const FPS &r);
+  FPS ntt() const;
+  FPS intt() const;
   FPS inv(int deg = -1) const;
   FPS log(int deg = -1) const;
   FPS exp(int deg = -1) const;

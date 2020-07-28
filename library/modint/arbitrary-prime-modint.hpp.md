@@ -36,16 +36,9 @@ layout: default
 
 
 
-## Required by
-
-* :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-
-
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
 
 
 ## Code
