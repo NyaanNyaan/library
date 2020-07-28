@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: fps/linear-recursion-formula.hpp
+# :warning: fps/ntt-friendly-fps.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/fps/linear-recursion-formula.hpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/fps/ntt-friendly-fps.hpp">View this file on GitHub</a>
     - Last commit date: 2020-07-28 18:29:00+09:00
 
 
@@ -50,49 +50,66 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "formal-power-series.hpp"
+#include "./formal-power-series.hpp"
 
 template <typename mint>
-mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
-                            FormalPowerSeries<mint> P) {
-  Q.shrink();
-  mint ret = 0;
-  if(P.size() >= Q.size()){
-    auto R = P / Q;
-    P -= R * Q;
-    if(N < (int)R.size()) ret += R[N];
+FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
+    const FormalPowerSeries<mint>& r) {
+  if (this->empty() || r.empty()) {
+    this->clear();
+    return *this;
   }
-  if((int)P.size() == 0) return ret;
-
-  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1) );
-  P.resize(k);
-  Q.resize(k);
-  
-  while (N) {
-    auto Q2 = Q;
-    for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
-    auto S = P * Q2;
-    auto T = Q * Q2;
-    if (N & 1) {
-      for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    } else {
-      for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    }
-    N >>= 1;
-  }
-  return P[0];
+  static NTT<mint> ntt;
+  static_assert(ntt.level >= 20);
+  auto ret = ntt.multiply(*this, r);
+  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
 }
 
 template <typename mint>
-mint kitamasa(long long N, FormalPowerSeries<mint> Q,
-              FormalPowerSeries<mint> a) {
-  int k = Q.size() - 1;
-  assert((int)a.size() == k);
-  auto P = a * Q;
-  P.resize(Q.size() - 1);
-  return LinearRecursionFormula<mint>(N, Q, P);
+FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg = -1) const {
+  assert((*this)[0] != mint(0));
+  if (deg == -1) deg = (*this).size();
+  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
+  for (int i = 1; i < deg; i <<= 1)
+    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
+  return ret.pre(deg);
+}
+
+template <typename mint>
+FormalPowerSeries<mint> FormalPowerSeries<mint>::log(int deg = -1) const {
+  assert((*this)[0] == mint(1));
+  if (deg == -1) deg = (int)this->size();
+  return (this->diff() * this->inv()).pre(deg - 1).integral();
+}
+
+template <typename mint>
+FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg = -1) const {
+  assert((*this)[0] == mint(0));
+  if (deg == -1) deg = (int)this->size();
+  FormalPowerSeries<mint> ret({mint(1)});
+  for (int i = 1; i < deg; i <<= 1) {
+    ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
+  }
+  return ret.pre(deg);
+}
+
+template <typename mint>
+FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
+                                                     int deg = -1) const {
+  const int n = (int)this->size();
+  if (deg == -1) deg = n;
+  for (int i = 0; i < n; i++) {
+    if ((*this)[i] != mint(0)) {
+      if (i * k > deg) return FormalPowerSeries<mint>(deg, mint(0));
+      mint rev = mint(1) / (*this)[i];
+      FormalPowerSeries<mint> ret =
+          (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
+      ret = (ret << (i * k)).pre(deg);
+      if (ret.size() < deg) ret.resize(deg, mint(0));
+      return ret;
+    }
+  }
+  return *this;
 }
 ```
 {% endraw %}
@@ -100,7 +117,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "fps/linear-recursion-formula.hpp"
+#line 2 "fps/ntt-friendly-fps.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -234,49 +251,66 @@ struct FormalPowerSeries : vector<mint> {
  * @brief Formal Power Series
  * @docs docs/formal-power-series.md
  */
-#line 6 "fps/linear-recursion-formula.hpp"
+#line 6 "fps/ntt-friendly-fps.hpp"
 
 template <typename mint>
-mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
-                            FormalPowerSeries<mint> P) {
-  Q.shrink();
-  mint ret = 0;
-  if(P.size() >= Q.size()){
-    auto R = P / Q;
-    P -= R * Q;
-    if(N < (int)R.size()) ret += R[N];
+FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
+    const FormalPowerSeries<mint>& r) {
+  if (this->empty() || r.empty()) {
+    this->clear();
+    return *this;
   }
-  if((int)P.size() == 0) return ret;
-
-  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1) );
-  P.resize(k);
-  Q.resize(k);
-  
-  while (N) {
-    auto Q2 = Q;
-    for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
-    auto S = P * Q2;
-    auto T = Q * Q2;
-    if (N & 1) {
-      for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    } else {
-      for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    }
-    N >>= 1;
-  }
-  return P[0];
+  static NTT<mint> ntt;
+  static_assert(ntt.level >= 20);
+  auto ret = ntt.multiply(*this, r);
+  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
 }
 
 template <typename mint>
-mint kitamasa(long long N, FormalPowerSeries<mint> Q,
-              FormalPowerSeries<mint> a) {
-  int k = Q.size() - 1;
-  assert((int)a.size() == k);
-  auto P = a * Q;
-  P.resize(Q.size() - 1);
-  return LinearRecursionFormula<mint>(N, Q, P);
+FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg = -1) const {
+  assert((*this)[0] != mint(0));
+  if (deg == -1) deg = (*this).size();
+  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
+  for (int i = 1; i < deg; i <<= 1)
+    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
+  return ret.pre(deg);
+}
+
+template <typename mint>
+FormalPowerSeries<mint> FormalPowerSeries<mint>::log(int deg = -1) const {
+  assert((*this)[0] == mint(1));
+  if (deg == -1) deg = (int)this->size();
+  return (this->diff() * this->inv()).pre(deg - 1).integral();
+}
+
+template <typename mint>
+FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg = -1) const {
+  assert((*this)[0] == mint(0));
+  if (deg == -1) deg = (int)this->size();
+  FormalPowerSeries<mint> ret({mint(1)});
+  for (int i = 1; i < deg; i <<= 1) {
+    ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
+  }
+  return ret.pre(deg);
+}
+
+template <typename mint>
+FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
+                                                     int deg = -1) const {
+  const int n = (int)this->size();
+  if (deg == -1) deg = n;
+  for (int i = 0; i < n; i++) {
+    if ((*this)[i] != mint(0)) {
+      if (i * k > deg) return FormalPowerSeries<mint>(deg, mint(0));
+      mint rev = mint(1) / (*this)[i];
+      FormalPowerSeries<mint> ret =
+          (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
+      ret = (ret << (i * k)).pre(deg);
+      if (ret.size() < deg) ret.resize(deg, mint(0));
+      return ret;
+    }
+  }
+  return *this;
 }
 
 ```

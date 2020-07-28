@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/formal-power-series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 16:10:28+09:00
+    - Last commit date: 2020-07-28 18:29:00+09:00
 
 
 
@@ -171,6 +171,7 @@ $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 ## Required by
 
 * :warning: <a href="linear-recursion-formula.hpp.html">fps/linear-recursion-formula.hpp</a>
+* :warning: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 
 
 ## Code
@@ -182,7 +183,7 @@ $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename mint, bool NTT_friendly = true, bool const_mod = true>
+template <typename mint>
 struct FormalPowerSeries : vector<mint> {
   using vector<mint>::vector;
   using FPS = FormalPowerSeries;
@@ -213,24 +214,7 @@ struct FormalPowerSeries : vector<mint> {
     return *this;
   }
 
-  FPS &operator*=(const FPS &r) {
-    if (this->empty() || r.empty()) {
-      this->clear();
-      return *this;
-    }
-    if constexpr (NTT_friendly) {
-      static NTT<mint> ntt;
-      static_assert(ntt.level > 20);
-      auto ret = ntt.multiply(*this, r);
-      return *this = FPS(ret.begin(), ret.end());
-    } else if constexpr (const_mod) {
-      auto ret = ArbitraryNTT::multiply<mint::get_mod()>(*this, r);
-      return *this = FPS(ret.begin(), ret.end());
-    } else {
-      auto ret = ArbitraryNTT::multiply(*this, r, mint::get_mod());
-      return *this = FPS(ret.begin(), ret.end());
-    }
-  }
+  FPS &operator*=(const FPS &r);
 
   FPS &operator*=(const mint &v) {
     for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
@@ -315,49 +299,11 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
-  FPS inv(int deg = -1) const {
-    assert((*this)[0] != mint(0));
-    if (deg == -1) deg = (*this).size();
-    FPS ret({mint(1) / (*this)[0]});
-    for (int i = 1; i < deg; i <<= 1)
-      ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
-    return ret.pre(deg);
-  }
-
-  FPS log(int deg = -1) const {
-    assert((*this)[0] == mint(1));
-    if (deg == -1) deg = (int)this->size();
-    return (this->diff() * this->inv()).pre(deg - 1).integral();
-  }
-
-  FPS exp(int deg = -1) const {
-    assert((*this)[0] == mint(0));
-    if (deg == -1) deg = (int)this->size();
-    FPS ret({T(1)});
-    for (int i = 1; i < deg; i <<= 1) {
-      ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
-    }
-    return ret.pre(deg);
-  }
-
-  FPS pow(int64_t k, int deg = -1) const {
-    const int n = (int)this->size();
-    if (deg == -1) deg = n;
-    for (int i = 0; i < n; i++) {
-      if ((*this)[i] != mint(0)) {
-        if (i * k > deg) return FPS(deg, mint(0));
-        mint rev = mint(1) / (*this)[i];
-        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
-        ret = (ret << (i * k)).pre(deg);
-        if (ret.size() < deg) ret.resize(deg, mint(0));
-        return ret;
-      }
-    }
-    return *this;
-  }
-
-  // TODO: 作る
-  // FPS sqrt(int deg = -1) const {}
+  FPS inv(int deg = -1) const;
+  FPS log(int deg = -1) const;
+  FPS exp(int deg = -1) const;
+  FPS pow(int64_t k, int deg = -1) const;
+  // FPS sqrt(int deg = -1) const;
 };
 
 /**
@@ -374,7 +320,7 @@ struct FormalPowerSeries : vector<mint> {
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename mint, bool NTT_friendly = true, bool const_mod = true>
+template <typename mint>
 struct FormalPowerSeries : vector<mint> {
   using vector<mint>::vector;
   using FPS = FormalPowerSeries;
@@ -405,24 +351,7 @@ struct FormalPowerSeries : vector<mint> {
     return *this;
   }
 
-  FPS &operator*=(const FPS &r) {
-    if (this->empty() || r.empty()) {
-      this->clear();
-      return *this;
-    }
-    if constexpr (NTT_friendly) {
-      static NTT<mint> ntt;
-      static_assert(ntt.level > 20);
-      auto ret = ntt.multiply(*this, r);
-      return *this = FPS(ret.begin(), ret.end());
-    } else if constexpr (const_mod) {
-      auto ret = ArbitraryNTT::multiply<mint::get_mod()>(*this, r);
-      return *this = FPS(ret.begin(), ret.end());
-    } else {
-      auto ret = ArbitraryNTT::multiply(*this, r, mint::get_mod());
-      return *this = FPS(ret.begin(), ret.end());
-    }
-  }
+  FPS &operator*=(const FPS &r);
 
   FPS &operator*=(const mint &v) {
     for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
@@ -507,49 +436,11 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
-  FPS inv(int deg = -1) const {
-    assert((*this)[0] != mint(0));
-    if (deg == -1) deg = (*this).size();
-    FPS ret({mint(1) / (*this)[0]});
-    for (int i = 1; i < deg; i <<= 1)
-      ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
-    return ret.pre(deg);
-  }
-
-  FPS log(int deg = -1) const {
-    assert((*this)[0] == mint(1));
-    if (deg == -1) deg = (int)this->size();
-    return (this->diff() * this->inv()).pre(deg - 1).integral();
-  }
-
-  FPS exp(int deg = -1) const {
-    assert((*this)[0] == mint(0));
-    if (deg == -1) deg = (int)this->size();
-    FPS ret({T(1)});
-    for (int i = 1; i < deg; i <<= 1) {
-      ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
-    }
-    return ret.pre(deg);
-  }
-
-  FPS pow(int64_t k, int deg = -1) const {
-    const int n = (int)this->size();
-    if (deg == -1) deg = n;
-    for (int i = 0; i < n; i++) {
-      if ((*this)[i] != mint(0)) {
-        if (i * k > deg) return FPS(deg, mint(0));
-        mint rev = mint(1) / (*this)[i];
-        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
-        ret = (ret << (i * k)).pre(deg);
-        if (ret.size() < deg) ret.resize(deg, mint(0));
-        return ret;
-      }
-    }
-    return *this;
-  }
-
-  // TODO: 作る
-  // FPS sqrt(int deg = -1) const {}
+  FPS inv(int deg = -1) const;
+  FPS log(int deg = -1) const;
+  FPS exp(int deg = -1) const;
+  FPS pow(int64_t k, int deg = -1) const;
+  // FPS sqrt(int deg = -1) const;
 };
 
 /**
