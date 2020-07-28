@@ -11,13 +11,6 @@ struct ArbitraryModInt {
       : x(y >= 0 ? y % get_mod() : (get_mod() - (-y) % get_mod()) % get_mod()) {
   }
 
-  static int &get_mod() {
-    static int mod = 0;
-    return mod;
-  }
-
-  static void set_mod(int md) { get_mod() = md; }
-
   ArbitraryModInt &operator+=(const ArbitraryModInt &p) {
     if ((x += p.x) >= get_mod()) x -= get_mod();
     return *this;
@@ -93,4 +86,13 @@ struct ArbitraryModInt {
     a = ArbitraryModInt(t);
     return (is);
   }
+
+  int get() const { return x; }
+
+  static int &get_mod() {
+    static int mod = 0;
+    return mod;
+  }
+
+  static void set_mod(int md) { get_mod() = md; }
 };

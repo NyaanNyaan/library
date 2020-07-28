@@ -12,6 +12,6 @@ void solve() {
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ArbitraryNTT::multiply<MOD>(a, b);
+  auto c = ArbitraryNTT::multiply(a, b);
   out(c);
 }

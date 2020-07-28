@@ -126,6 +126,6 @@ struct FormalPowerSeries : vector<mint> {
 };
 
 /**
- * @brief Formal Power Series
+ * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */

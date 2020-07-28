@@ -72,6 +72,8 @@ struct ModInt {
     a = ModInt<mod>(t);
     return (is);
   }
+  
+  int get() const { return x; }
 
   static constexpr int get_mod() { return mod; }
 };

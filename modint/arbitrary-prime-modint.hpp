@@ -68,11 +68,6 @@ struct ArbitraryLazyMontgomeryModInt {
     return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
   }
   mint operator-() const { return mint() - mint(*this); }
-  
-  u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
 
   mint pow(u64 n) const {
     mint ret(1), mul(*this);
@@ -96,6 +91,11 @@ struct ArbitraryLazyMontgomeryModInt {
   }
 
   mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
 
   static u32 get_mod() { return mod; }
 };

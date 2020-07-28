@@ -63,11 +63,6 @@ struct LazyMontgomeryModInt {
   }
   constexpr mint operator-() const { return mint() - mint(*this); }
 
-  constexpr u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
   constexpr mint pow(u64 n) const {
     mint ret(1), mul(*this);
     while (n > 0) {
@@ -77,6 +72,8 @@ struct LazyMontgomeryModInt {
     }
     return ret;
   }
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
 
   friend ostream &operator<<(ostream &os, const mint &b) {
     return os << b.get();
@@ -88,8 +85,11 @@ struct LazyMontgomeryModInt {
     b = LazyMontgomeryModInt<mod>(t);
     return (is);
   }
-
-  constexpr mint inverse() const { return pow(mod - 2); }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
 
   static constexpr u32 get_mod() { return mod; }
 };
