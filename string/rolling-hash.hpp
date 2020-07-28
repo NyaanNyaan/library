@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 // 使い方
 // 文字列のハッシュ列 Roriha s_rori(S);

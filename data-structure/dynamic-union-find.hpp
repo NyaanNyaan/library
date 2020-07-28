@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 struct DynamicUnionFind {
   unordered_map<int, int> m;

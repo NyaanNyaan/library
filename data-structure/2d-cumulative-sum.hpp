@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 // Don't Forget to call build() !!!!!
 template <class T>

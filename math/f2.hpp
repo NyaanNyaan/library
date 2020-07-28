@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 template <size_t N>
 bitset<N> gcd(bitset<N> x, bitset<N> y) {

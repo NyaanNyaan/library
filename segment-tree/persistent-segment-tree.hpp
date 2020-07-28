@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 template <typename T, typename F, int NODES = 20000000>
 struct PersistentSegmentTree {

@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 template <typename T, typename F, typename G>
 struct semiring {
@@ -157,7 +156,7 @@ struct Mat {
 */
 
 // max-plus semiring
-/**/
+/**
 using U = long long;
 U ID0 = -infLL;
 U ID1 = 0;
@@ -175,7 +174,7 @@ auto Mul = [](U a, U b) -> U { return a + b; };
 //*/
 
 // xor-and semiring
-/**
+/**/
 using U = unsigned long long;
 constexpr U ID0 = 0;
 constexpr U ID1 = U(-1);

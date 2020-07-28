@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 template <typename T>
 struct edge {
@@ -33,8 +32,8 @@ UnweightedGraph graph(int N, int M = -1, bool is_directed = false,
     int x, y;
     cin >> x >> y;
     if (is_1origin) x--, y--;
-    g[x].pb(y);
-    if (!is_directed) g[y].pb(x);
+    g[x].push_back(y);
+    if (!is_directed) g[y].push_back(x);
   }
   return g;
 }

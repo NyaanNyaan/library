@@ -1,5 +1,6 @@
 #pragma region kyopro_template
 #define Nyaan_template
+#include <immintrin.h>
 #include <bits/stdc++.h>
 #define pb push_back
 #define eb emplace_back
@@ -43,7 +44,6 @@
     out(__VA_ARGS__); \
     return;           \
   } while (0)
-
 using namespace std;
 using ll = long long;
 template <class T>
@@ -103,9 +103,7 @@ void out(const T &t, const U &... u) {
   out(u...);
 }
 
-void solve();
 #ifdef NyaanDebug
-#include "NyaanDebug.h"
 #define trc(...)                   \
   do {                             \
     cerr << #__VA_ARGS__ << " = "; \
@@ -122,11 +120,95 @@ void solve();
     each(x, v) { cerr << " " << x << ","; } \
     cerr << "}" << endl;                    \
   } while (0)
+template <typename T>
+void _cout(const T &c) {
+  cerr << c;
+}
+void _cout(const int &c) {
+  if (c == 1001001001)
+    cerr << "inf";
+  else if (c == -1001001001)
+    cerr << "-inf";
+  else
+    cerr << c;
+}
+void _cout(const unsigned int &c) {
+  if (c == 1001001001)
+    cerr << "inf";
+  else
+    cerr << c;
+}
+void _cout(const long long &c) {
+  if (c == 1001001001 || c == (1LL << 61) - 1)
+    cerr << "inf";
+  else if (c == -1001001001 || c == -((1LL << 61) - 1))
+    cerr << "-inf";
+  else
+    cerr << c;
+}
+void _cout(const unsigned long long &c) {
+  if (c == 1001001001 || c == (1LL << 61) - 1)
+    cerr << "inf";
+  else
+    cerr << c;
+}
+template <typename T, typename U>
+void _cout(const pair<T, U> &p) {
+  cerr << "{ ";
+  _cout(p.fi);
+  cerr << ", ";
+  _cout(p.se);
+  cerr << " } ";
+}
+template <typename T>
+void _cout(const vector<T> &v) {
+  int s = v.size();
+  cerr << "{ ";
+  for (int i = 0; i < s; i++) {
+    cerr << (i ? ", " : "");
+    _cout(v[i]);
+  }
+  cerr << " } ";
+}
+template <typename T>
+void _cout(const vector<vector<T>> &v) {
+  cerr << "[ ";
+  for (const auto &x : v) {
+    cerr << endl;
+    _cout(x);
+    cerr << ", ";
+  }
+  cerr << endl << " ] ";
+}
+void dbg_out() { cerr << endl; }
+template <typename T, class... U>
+void dbg_out(const T &t, const U &... u) {
+  _cout(t);
+  if (sizeof...(u)) cerr << ", ";
+  dbg_out(u...);
+}
+template <typename T>
+void array_out(const T &v, int s) {
+  cerr << "{ ";
+  for (int i = 0; i < s; i++) {
+    cerr << (i ? ", " : "");
+    _cout(v[i]);
+  }
+  cerr << " } " << endl;
+}
+template <typename T>
+void array_out(const T &v, int H, int W) {
+  cerr << "[ ";
+  for (int i = 0; i < H; i++) {
+    cerr << (i ? ", " : "");
+    array_out(v[i], W);
+  }
+  cerr << " ] " << endl;
+}
 #else
 #define trc(...)
 #define trca(...)
 #define trcc(...)
-int main() { solve(); }
 #endif
 
 inline int popcnt(unsigned long long a) { return __builtin_popcountll(a); }
@@ -210,4 +292,8 @@ struct IoSetupNya {
     cerr << fixed << setprecision(7);
   }
 } iosetupnya;
+
+void solve();
+int main() { solve(); }
+
 #pragma endregion

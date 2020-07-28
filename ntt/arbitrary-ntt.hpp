@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 #include "../modint/arbitrary-modint.hpp"
 #include "../modint/arbitrary-prime-modint.hpp"

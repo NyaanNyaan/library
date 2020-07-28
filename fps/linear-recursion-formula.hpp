@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 #include "formal-power-series.hpp"
 
@@ -27,11 +26,12 @@ mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
   return P[0];
 }
 
+template <typename mint>
 mint kitamasa(long long N, FormalPowerSeries<mint> Q,
               FormalPowerSeries<mint> a) {
   int k = Q.size() - 1;
   assert((int)a.size() == k);
-  FPS P = a * Q;
+  FormalPowerSeries<mint> P = a * Q;
   P.resize(Q.size() - 1);
-  return LinearRecursionFormula(N, Q, P);
+  return LinearRecursionFormula<mint>(N, Q, P);
 }

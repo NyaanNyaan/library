@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 template <typename mint, bool NTT_friendly = true, bool const_mod = true>
 struct FormalPowerSeries : vector<mint> {

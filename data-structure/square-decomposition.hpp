@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 constexpr int B = 300;
 
@@ -42,7 +41,7 @@ struct block{
 // 取得クエリのマージ関数をf、単位元をUNITとする
 template <typename F> struct Sqd{
   int N;
-  V<block> sq;
+  vector<block> sq;
   F f;
   block::T UNIT;
   Sqd(int N , F f, block::T UNIT) : N(N) , sq(N / B + 1) , f(f) , UNIT(UNIT) {

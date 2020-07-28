@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 #include "./graph-template.hpp"
 
@@ -138,7 +137,7 @@ struct GridGraph : DimensionExpandedGraph<2> {
   operator vector<string> &() { return str; }
 
   template <typename F>
-  void adjacent(P c, F f) {
+  void adjacent(pair<int,int> c, F f) {
     int dx[] = {1, 0, -1, 0, 1, 1, -1, -1};
     int dy[] = {0, 1, 0, -1, 1, -1, 1, -1};
     int i, j;

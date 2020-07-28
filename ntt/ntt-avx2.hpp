@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 #include "../modint/simd-montgomery.hpp"
 
@@ -270,6 +269,10 @@ struct NTT {
       mint a1 = a[1];
       a[1] = a[0] - a[1];
       a[0] = a[0] + a1;
+      if (normalize) {
+        a[0] *= mint(2).inverse();
+        a[1] *= mint(2).inverse();
+      }
       return;
     }
     int u = 1 << (k - 2);
@@ -553,6 +556,6 @@ struct NTT {
     for (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;
     ntt(buf1, M);
     a.resize(2 * M);
-    for (int i = 0; i < M; i++) buf1[M + i].a = buf1[i].a;
+    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;
   }
 };

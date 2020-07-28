@@ -1,7 +1,6 @@
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 vector<vector<int>> CalcNext(const string &S, char offset = 'a', int w = 26) {
   int n = (int)S.size();
