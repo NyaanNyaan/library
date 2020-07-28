@@ -38,7 +38,7 @@ layout: default
 
 ### .
 
-* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -47,13 +47,13 @@ layout: default
 
 * :heavy_check_mark: <a href="library/data-structure/2d-binary-indexed-tree.hpp.html">data-structure/2d-binary-indexed-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/2d-cumulative-sum.hpp.html">data-structure/2d-cumulative-sum.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
+* :question: <a href="library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
 * :warning: <a href="library/data-structure/dynamic-binary-indexed-tree.hpp.html">data-structure/dynamic-binary-indexed-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/dynamic-union-find.hpp.html">data-structure/dynamic-union-find.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
+* :x: <a href="library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sliding-window-minimum.hpp.html">data-structure/sliding-window-minimum.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
+* :x: <a href="library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
 * :warning: <a href="library/data-structure/square-decomposition.hpp.html">data-structure/square-decomposition.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/union-find-with-potential.hpp.html">data-structure/union-find-with-potential.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
@@ -79,8 +79,8 @@ layout: default
 ### graph
 
 * :warning: <a href="library/graph/dimension-expanded-graph.hpp.html">graph/dimension-expanded-graph.hpp</a>
-* :heavy_check_mark: <a href="library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="library/graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
+* :question: <a href="library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :question: <a href="library/graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
 * :heavy_check_mark: <a href="library/graph/kruskal.hpp.html">graph/kruskal.hpp</a>
 * :heavy_check_mark: <a href="library/graph/lowlink.hpp.html">graph/lowlink.hpp</a>
 * :heavy_check_mark: <a href="library/graph/strongly-connected-components.hpp.html">graph/strongly-connected-components.hpp</a>
@@ -93,7 +93,7 @@ layout: default
 
 * :warning: <a href="library/math/binomial.hpp.html">math/binomial.hpp</a>
 * :warning: <a href="library/math/divisor-multiple-transform.hpp.html">math/divisor-multiple-transform.hpp</a>
-* :heavy_check_mark: <a href="library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
+* :question: <a href="library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
 * :warning: <a href="library/math/f2.hpp.html">math/f2.hpp</a>
 * :warning: <a href="library/math/float-binomial.hpp.html">math/float-binomial.hpp</a>
 * :warning: <a href="library/math/gray-code.hpp.html">math/gray-code.hpp</a>
@@ -119,21 +119,21 @@ layout: default
 
 ### modint
 
-* :heavy_check_mark: <a href="library/modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
-* :heavy_check_mark: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :x: <a href="library/modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
+* :x: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :x: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
+* :x: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :x: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 <div id="ccb3669c87b2d028539237c4554e3c0f"></div>
 
 ### ntt
 
-* :heavy_check_mark: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
-* :heavy_check_mark: <a href="library/ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
-* :heavy_check_mark: <a href="library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
+* :x: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :x: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :x: <a href="library/ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
+* :x: <a href="library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
 
 
 <div id="cf992883f659a62542b674f4570b728a"></div>
@@ -144,7 +144,7 @@ layout: default
 * :warning: <a href="library/segment-tree/dynamic-segment-tree.hpp.html">segment-tree/dynamic-segment-tree.hpp</a>
 * :warning: <a href="library/segment-tree/lazy-segment-tree.hpp.html">segment-tree/lazy-segment-tree.hpp</a>
 * :warning: <a href="library/segment-tree/li-chao-tree.hpp.html">segment-tree/li-chao-tree.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
+* :x: <a href="library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-max-lazyseg.hpp.html">segment-tree/range-add-range-max-lazyseg.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-min-lazyseg.hpp.html">segment-tree/range-add-range-min-lazyseg.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-sum-lazyseg.hpp.html">segment-tree/range-add-range-sum-lazyseg.hpp</a>
@@ -179,14 +179,14 @@ layout: default
 * :warning: <a href="library/string/rolling-hash.hpp.html">string/rolling-hash.hpp</a>
 * :warning: <a href="library/string/run-length-encoding.hpp.html">string/run-length-encoding.hpp</a>
 * :warning: <a href="library/string/subsequence-dp.hpp.html">string/subsequence-dp.hpp</a>
-* :heavy_check_mark: <a href="library/string/suffix-array.hpp.html">string/suffix-array.hpp</a>
+* :x: <a href="library/string/suffix-array.hpp.html">string/suffix-array.hpp</a>
 
 
 <div id="c0af77cf8294ff93a5cdb2963ca9f038"></div>
 
 ### tree
 
-* :heavy_check_mark: <a href="library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
+* :question: <a href="library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
 * :warning: <a href="library/tree/dsu-on-tree.hpp.html">tree/dsu-on-tree.hpp</a>
 * :warning: <a href="library/tree/euler-tour.hpp.html">tree/euler-tour.hpp</a>
 * :heavy_check_mark: <a href="library/tree/heavy-light-decomposition.hpp.html">tree/heavy-light-decomposition.hpp</a>
@@ -231,25 +231,25 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
+* :x: <a href="verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
+* :x: <a href="verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
+* :x: <a href="verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
+* :x: <a href="verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
+* :x: <a href="verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 
 

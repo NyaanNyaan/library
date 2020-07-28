@@ -31,14 +31,9 @@ layout: default
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/2d-cumulative-sum.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 03:32:31+09:00
+    - Last commit date: 2020-07-28 11:29:32+09:00
 
 
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 ## Verified with
@@ -52,9 +47,8 @@ layout: default
 {% raw %}
 ```cpp
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 // Don't Forget to call build() !!!!!
 template <class T>
@@ -95,14 +89,43 @@ struct CumulativeSum2D {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
-    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: data-structure/2d-cumulative-sum.hpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+#line 2 "data-structure/2d-cumulative-sum.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+
+// Don't Forget to call build() !!!!!
+template <class T>
+struct CumulativeSum2D {
+  vector<vector<T> > data;
+
+  CumulativeSum2D(int H, int W) : data(H + 3, vector<int>(W + 3, 0)) {}
+
+  void add(int i, int j, T z) {
+    ++i, ++j;
+    if (i >= (int)data.size() || j >= (int)data[0].size()) return;
+    data[i][j] += z;
+  }
+
+  // add [ [i1,j1], [i2,j2] )
+  void imos(int i1, int j1, int i2, int j2, T z) {
+    add(i1, j1, 1);
+    add(i1, j2, -1);
+    add(i2, j1, -1);
+    add(i2, j2, 1);
+  }
+
+  void build() {
+    for (int i = 1; i < (int)data.size(); i++) {
+      for (int j = 1; j < (int)data[i].size(); j++) {
+        data[i][j] += data[i][j - 1] + data[i - 1][j] - data[i - 1][j - 1];
+      }
+    }
+  }
+
+  T query(int i1, int j1, int i2, int j2) {
+    return (data[i2][j2] - data[i1][j2] - data[i2][j1] + data[i1][j1]);
+  }
+};
 
 ```
 {% endraw %}

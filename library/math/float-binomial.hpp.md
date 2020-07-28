@@ -31,14 +31,9 @@ layout: default
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/float-binomial.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 03:32:31+09:00
+    - Last commit date: 2020-07-28 11:29:32+09:00
 
 
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 ## Code
@@ -47,9 +42,8 @@ layout: default
 {% raw %}
 ```cpp
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 struct float_bicom {
   vector<long double> fac;
@@ -75,14 +69,28 @@ struct float_bicom {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
-    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: math/float-binomial.hpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+#line 2 "math/float-binomial.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+
+struct float_bicom {
+  vector<long double> fac;
+  float_bicom(int MAX) {
+    fac.resize(MAX + 1, 0.0);
+    fac[0] = 0.0;
+    for (int i = 1; i <= MAX; i++) {
+      fac[i] = fac[i - 1] + log(i);
+    }
+  }
+  long double C(int n, int k) {
+    if (n < k || k < 0 || n < 0) return 0.0;
+    return exp(fac[n] - fac[n - k] - fac[k]);
+  }
+  long double P(int n, int k) {
+    if (n < k || k < 0 || n < 0) return 0.0;
+    return exp(fac[n] - fac[n - k]);
+  }
+};
 
 ```
 {% endraw %}

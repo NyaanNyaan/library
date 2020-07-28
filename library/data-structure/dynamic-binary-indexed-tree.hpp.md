@@ -31,14 +31,9 @@ layout: default
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/dynamic-binary-indexed-tree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 03:32:31+09:00
+    - Last commit date: 2020-07-28 11:29:32+09:00
 
 
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 ## Code
@@ -47,9 +42,8 @@ layout: default
 {% raw %}
 ```cpp
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 // idx_tはlong longまでを想定
 template <typename idx_t, typename data_t>
@@ -101,14 +95,53 @@ struct DynamicFenwickTree {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
-    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: data-structure/dynamic-binary-indexed-tree.hpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+#line 2 "data-structure/dynamic-binary-indexed-tree.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+
+// idx_tはlong longまでを想定
+template <typename idx_t, typename data_t>
+struct DynamicFenwickTree {
+  idx_t N;
+  unordered_map<idx_t, data_t> data;
+  DynamicFenwickTree(idx_t size) { N = size += 3; }
+
+  // iにxを加算
+  void add(idx_t k, data_t x) {
+    for (k++; k < N; k += k & -k) data[k] += x;
+  }
+
+  // [0,i]のsum
+  data_t sum(idx_t k) {
+    if (k < 0) return 0;
+    data_t ret = 0;
+    for (k++; k > 0; k -= k & -k) ret += data[k];
+    return ret;
+  }
+
+  // [a,b]のsum
+  data_t sum(idx_t a, idx_t b) { return sum(b) - sum(a - 1); }
+
+   // get value of k
+  data_t operator[](idx_t k) { return sum(k) - sum(k - 1); }
+
+  idx_t lower_bound(data_t w) {
+    if (w <= 0) return 0;
+    idx_t x = 0;
+    for (idx_t k = 1 << (63 - __builtin_clzll((long long)(x))); k > 0; k /= 2) {
+      if (x + k <= N - 1 && data[x + k] < w) {
+        w -= data[x + k];
+        x += k;
+      }
+    }
+    return x;
+  }
+
+  void merge(DynamicFenwickTree<idx_t, data_t>& other) {
+    if (data.size() < other.data.size()) data.swap(other.data);
+    for (auto& x : other.data) data[x.fi] += x.se;
+  }
+};
 
 ```
 {% endraw %}

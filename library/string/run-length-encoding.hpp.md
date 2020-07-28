@@ -31,14 +31,9 @@ layout: default
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/run-length-encoding.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 03:32:31+09:00
+    - Last commit date: 2020-07-28 11:29:32+09:00
 
 
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 ## Code
@@ -47,9 +42,8 @@ layout: default
 {% raw %}
 ```cpp
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 vector<pair<char, int>> RunLengthEncoding(string& S) {
   vector<pair<char, int>> ret;
@@ -89,14 +83,42 @@ vector<pair<T, int>> RunLengthEncoding(vector<T>& S) {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
-    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: string/run-length-encoding.hpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+#line 2 "string/run-length-encoding.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<pair<char, int>> RunLengthEncoding(string& S) {
+  vector<pair<char, int>> ret;
+  char c = -1;
+  int n = 0;
+  for (char x : S) {
+    if (c == x)
+      n++;
+    else {
+      if (n) ret.emplace_back(c, n);
+      c = x, n = 1;
+    }
+  }
+  if (n) ret.emplace_back(c, n);
+  return ret;
+}
+
+template <typename T>
+vector<pair<T, int>> RunLengthEncoding(vector<T>& S) {
+  vector<pair<T, int>> ret;
+  T c = -1;
+  int n = 0;
+  for (T& x : S) {
+    if (c == x)
+      n++;
+    else {
+      if (n) ret.emplace_back(c, n);
+      c = x, n = 1;
+    }
+  }
+  if (n) ret.emplace_back(c, n);
+  return ret;
+}
 
 ```
 {% endraw %}

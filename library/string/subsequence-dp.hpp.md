@@ -31,14 +31,9 @@ layout: default
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/subsequence-dp.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 03:32:31+09:00
+    - Last commit date: 2020-07-28 11:29:32+09:00
 
 
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 ## Code
@@ -47,9 +42,8 @@ layout: default
 {% raw %}
 ```cpp
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 vector<vector<int>> CalcNext(const string &S, char offset = 'a', int w = 26) {
   int n = (int)S.size();
@@ -82,14 +76,35 @@ vector<T> SubSequenceDP(const string &S, char offset = 'a', int w = 26) {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
-    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: string/subsequence-dp.hpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+#line 2 "string/subsequence-dp.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> CalcNext(const string &S, char offset = 'a', int w = 26) {
+  int n = (int)S.size();
+  vector<vector<int>> res(n + 1, vector<int>(w, n));
+  for (int i = n - 1; i >= 0; --i) {
+    for (int j = 0; j < w; ++j) res[i][j] = res[i + 1][j];
+    res[i][S[i] - offset] = i;
+  }
+  return res;
+};
+
+template <typename T>
+vector<T> SubSequenceDP(const string &S, char offset = 'a', int w = 26) {
+  auto nxt = CalcNext(S, offset, w);
+  int n = S.size();
+  vector<T> dp(n + 1);
+  dp[0] = 1;
+  for (int i = 0; i < n; i++) {
+    for (int j = 0; j < w; j++) {
+      if (nxt[i][j] >= n) continue;
+      dp[nxt[i][j] + 1] += dp[i];
+    }
+  }
+  dp.erase(begin(dp));
+  return dp;
+}
 
 ```
 {% endraw %}

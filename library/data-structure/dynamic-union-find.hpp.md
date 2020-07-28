@@ -31,14 +31,9 @@ layout: default
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/dynamic-union-find.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 03:32:31+09:00
+    - Last commit date: 2020-07-28 11:29:32+09:00
 
 
-
-
-## Depends on
-
-* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 ## Verified with
@@ -52,9 +47,8 @@ layout: default
 {% raw %}
 ```cpp
 #pragma once
-#ifndef Nyaan_template
-#include "../competitive-template.hpp"
-#endif
+#include <bits/stdc++.h>
+using namespace std;
 
 struct DynamicUnionFind {
   unordered_map<int, int> m;
@@ -92,14 +86,40 @@ struct DynamicUnionFind {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/docs.py", line 349, in write_contents
-    bundled_code = language.bundle(self.file_class.file_path, basedir=pathlib.Path.cwd())
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus.py", line 185, in bundle
-    bundler.update(path)
-  File "/opt/hostedtoolcache/Python/3.8.3/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py", line 306, in update
-    raise BundleErrorAt(path, i + 1, "unable to process #include in #if / #ifdef / #ifndef other than include guards")
-onlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: data-structure/dynamic-union-find.hpp: line 3: unable to process #include in #if / #ifdef / #ifndef other than include guards
+#line 2 "data-structure/dynamic-union-find.hpp"
+#include <bits/stdc++.h>
+using namespace std;
+
+struct DynamicUnionFind {
+  unordered_map<int, int> m;
+  DynamicUnionFind() {}
+
+  int data(int k) {
+    auto itk = m.find(k);
+    return itk == m.end() ? m[k] = -1 : itk->second;
+  }
+  int find(int k) {
+    int datk = data(k);
+    return datk < 0 ? k : m[k] = find(datk);
+  }
+
+  int unite(int x, int y) {
+    if ((x = find(x)) == (y = find(y))) return false;
+    auto itx = m.find(x), ity = m.find(y);
+    if (itx->second > ity->second) {
+      ity->second += itx->second;
+      itx->second = y;
+    } else {
+      itx->second += ity->second;
+      ity->second = x;
+    }
+    return true;
+  }
+
+  int size(int k) { return -data(find(k)); }
+
+  int same(int x, int y) { return find(x) == find(y); }
+};
 
 ```
 {% endraw %}
