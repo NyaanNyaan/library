@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/ntt-friendly-fps.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 21:57:06+09:00
+    - Last commit date: 2020-07-29 04:39:16+09:00
 
 
 
@@ -285,6 +285,7 @@ struct NTT {
     y[k - 1] = w[k - 1].inverse();
     for (int i = k - 2; i > 0; --i)
       w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];
+    dw[0] = dy[0] = w[1] * w[1];
     dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];
     for (int i = 3; i < k; ++i) {
       dw[i] = dw[i - 1] * y[i - 2] * w[i];
@@ -804,14 +805,12 @@ struct FormalPowerSeries : vector<mint> {
   FPS &operator-=(const FPS &r) {
     if (r.size() > this->size()) this->resize(r.size());
     for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-    shrink();
     return *this;
   }
 
   FPS &operator-=(const mint &r) {
     if (this->empty()) this->resize(1);
     (*this)[0] -= r;
-    shrink();
     return *this;
   }
 
@@ -829,7 +828,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { return *this -= *this / r * r; }
+  FPS &operator%=(const FPS &r) { 
+    *this -= *this / r * r; 
+    shrink();
+    return *this;
+  }
+  
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }

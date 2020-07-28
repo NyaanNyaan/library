@@ -39,6 +39,7 @@ layout: default
 ## Required by
 
 * :warning: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :warning: <a href="../fps/kitamasa-ntt.hpp.html">fps/kitamasa-ntt.hpp</a>
 * :warning: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/binomial.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-07-29 04:39:16+09:00
 
 
 
@@ -51,9 +51,9 @@ struct Binomial {
   Binomial(int MAX) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {
     MAX += 9;
     fac_[0] = finv_[0] = inv_[0] = 1;
-    for (int i = 1; i <= MAX; i++) fac[i] _ = fac[i - 1] * i;
-    finv_[MAX] = inv_[MAX].inverse();
-    for (int i = MAX - 1; i > 0; i--) inv_[i] = inv_[i + 1] * (i + 1);
+    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;
+    finv_[MAX] = fac_[MAX].inverse();
+    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);
     for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];
   }
 
@@ -70,7 +70,7 @@ struct Binomial {
     if (n < r || r < 0) return T(0);
     T ret = 1;
     for (T i = 1; i <= r; i += T(1)) {
-      ret *= N--;
+      ret *= n--;
       ret *= i.inverse();
     }
     return ret;
@@ -102,9 +102,9 @@ struct Binomial {
   Binomial(int MAX) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {
     MAX += 9;
     fac_[0] = finv_[0] = inv_[0] = 1;
-    for (int i = 1; i <= MAX; i++) fac[i] _ = fac[i - 1] * i;
-    finv_[MAX] = inv_[MAX].inverse();
-    for (int i = MAX - 1; i > 0; i--) inv_[i] = inv_[i + 1] * (i + 1);
+    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;
+    finv_[MAX] = fac_[MAX].inverse();
+    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);
     for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];
   }
 
@@ -121,7 +121,7 @@ struct Binomial {
     if (n < r || r < 0) return T(0);
     T ret = 1;
     for (T i = 1; i <= r; i += T(1)) {
-      ret *= N--;
+      ret *= n--;
       ret *= i.inverse();
     }
     return ret;

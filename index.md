@@ -65,7 +65,8 @@ layout: default
 
 * :warning: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :warning: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :warning: <a href="library/fps/linear-recursion-formula.hpp.html">fps/linear-recursion-formula.hpp</a>
+* :warning: <a href="library/fps/kitamasa-ntt.hpp.html">fps/kitamasa-ntt.hpp</a>
+* :warning: <a href="library/fps/kitamasa.hpp.html">fps/kitamasa.hpp</a>
 * :warning: <a href="library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 
 

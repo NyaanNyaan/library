@@ -25,26 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+# :warning: fps/kitamasa-ntt.hpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp">View this file on GitHub</a>
+* category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
+* <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa-ntt.hpp">View this file on GitHub</a>
     - Last commit date: 2020-07-29 04:39:16+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :warning: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -52,23 +48,90 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
+#pragma once
+#include <bits/stdc++.h>
+using namespace std;
 
-#include "../competitive-template.hpp"
-#include "../modint/arbitrary-prime-modint.hpp"
-#include "../ntt/arbitrary-ntt.hpp"
+#include "../ntt/ntt-avx2.hpp"
+#include "formal-power-series.hpp"
 
-int MOD = 1000000007;
-using mint = ArbitraryLazyMontgomeryModInt;
-using vm = vector<mint>;
+template <typename mint>
+mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
+                            FormalPowerSeries<mint> P) {
+  NTT<mint> ntt;
+  mint ret = 0;
 
-void solve() {
-  mint::set_mod(MOD);
-  ini(N, M);
-  vm a(N), b(M);
-  in(a, b);
-  auto c = ArbitraryNTT::multiply(a, b);
-  out(c);
+  P.shrink();
+  Q.shrink();
+  if (P.size() >= Q.size()) {
+    auto R = P / Q;
+    P -= R * Q;
+    if (k < (int)R.size()) ret += R[k];
+  }
+  P.shrink();
+  if ((int)P.size() == 0) return ret;
+
+  int N = 1;
+  while (N < (int)Q.size()) N <<= 1;
+
+  vector<mint> F(2 * N), G(2 * N);
+  for (int i = 0; i < (int)P.size(); i++) F[i] = P[i];
+  for (int i = 0; i < (int)Q.size(); i++) G[i] = Q[i];
+  ntt.ntt(F);
+  ntt.ntt(G);
+  vector<mint> S(2 * N), T(2 * N);
+
+  vector<int> btr(N);
+  for (int i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {
+    btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));
+  }
+  mint dw = mint(ntt.pr).inverse().pow((mint::get_mod() - 1) / (2 * N));
+
+  while (k) {
+    mint inv2 = mint(2).inverse();
+    // G(x)G(-x)の偶数次
+    T.resize(N);
+    for (int i = 0; i < N; i++) T[i] = G[(i << 1) | 0] * G[(i << 1) | 1];
+
+    S.resize(N);
+    if (k & 1) {
+      // P(x)Q(-x)の奇数次
+      for (auto &i : btr) {
+        S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] -
+                F[(i << 1) | 1] * G[(i << 1) | 0]) *
+               inv2;
+        inv2 *= dw;
+      }
+    } else {
+      // P(x)Q(-x)の偶数次
+      for (int i = 0; i < N; i++) {
+        S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] +
+                F[(i << 1) | 1] * G[(i << 1) | 0]) *
+               inv2;
+      }
+    }
+
+    swap(F, S);
+    swap(G, T);
+    ntt.ntt_doubling(F);
+    ntt.ntt_doubling(G);
+    k >>= 1;
+  }
+
+  mint f0 = 0;
+  for (auto Fi : F) f0 += Fi;
+  f0 *= mint((int)F.size()).inverse();
+  return ret + f0;
+}
+
+template <typename mint>
+mint kitamasa(long long N, FormalPowerSeries<mint> Q,
+              FormalPowerSeries<mint> a) {
+  int k = Q.size() - 1;
+  assert((int)a.size() == k);
+  FormalPowerSeries<mint> P = a * Q;
+  P.resize(Q.size() - 1);
+  return LinearRecursionFormula<mint>(N, Q, P);
 }
 ```
 {% endraw %}
@@ -76,509 +139,10 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
-
-#line 1 "competitive-template.hpp"
-#pragma region kyopro_template
-#define Nyaan_template
-#include <immintrin.h>
+#line 2 "fps/kitamasa-ntt.hpp"
 #include <bits/stdc++.h>
-#define pb push_back
-#define eb emplace_back
-#define fi first
-#define se second
-#define each(x, v) for (auto &x : v)
-#define all(v) (v).begin(), (v).end()
-#define sz(v) ((int)(v).size())
-#define mem(a, val) memset(a, val, sizeof(a))
-#define ini(...)   \
-  int __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define inl(...)         \
-  long long __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define ins(...)      \
-  string __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define inc(...)    \
-  char __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define in2(s, t)                           \
-  for (int i = 0; i < (int)s.size(); i++) { \
-    in(s[i], t[i]);                         \
-  }
-#define in3(s, t, u)                        \
-  for (int i = 0; i < (int)s.size(); i++) { \
-    in(s[i], t[i], u[i]);                   \
-  }
-#define in4(s, t, u, v)                     \
-  for (int i = 0; i < (int)s.size(); i++) { \
-    in(s[i], t[i], u[i], v[i]);             \
-  }
-#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)
-#define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)
-#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)
-#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)
-#define reg(i, a, b) for (long long i = (a); i < (b); i++)
-#define die(...)      \
-  do {                \
-    out(__VA_ARGS__); \
-    return;           \
-  } while (0)
-using namespace std;
-using ll = long long;
-template <class T>
-using V = vector<T>;
-using vi = vector<int>;
-using vl = vector<long long>;
-using vvi = vector<vector<int>>;
-using vd = V<double>;
-using vs = V<string>;
-using vvl = vector<vector<long long>>;
-using P = pair<long long, long long>;
-using vp = vector<P>;
-using pii = pair<int, int>;
-using vpi = vector<pair<int, int>>;
-constexpr int inf = 1001001001;
-constexpr long long infLL = (1LL << 61) - 1;
-template <typename T, typename U>
-inline bool amin(T &x, U y) {
-  return (y < x) ? (x = y, true) : false;
-}
-template <typename T, typename U>
-inline bool amax(T &x, U y) {
-  return (x < y) ? (x = y, true) : false;
-}
-template <typename T, typename U>
-ostream &operator<<(ostream &os, const pair<T, U> &p) {
-  os << p.first << " " << p.second;
-  return os;
-}
-template <typename T, typename U>
-istream &operator>>(istream &is, pair<T, U> &p) {
-  is >> p.first >> p.second;
-  return is;
-}
-template <typename T>
-ostream &operator<<(ostream &os, const vector<T> &v) {
-  int s = (int)v.size();
-  for (int i = 0; i < s; i++) os << (i ? " " : "") << v[i];
-  return os;
-}
-template <typename T>
-istream &operator>>(istream &is, vector<T> &v) {
-  for (auto &x : v) is >> x;
-  return is;
-}
-void in() {}
-template <typename T, class... U>
-void in(T &t, U &... u) {
-  cin >> t;
-  in(u...);
-}
-void out() { cout << "\n"; }
-template <typename T, class... U>
-void out(const T &t, const U &... u) {
-  cout << t;
-  if (sizeof...(u)) cout << " ";
-  out(u...);
-}
-
-#ifdef NyaanDebug
-#define trc(...)                   \
-  do {                             \
-    cerr << #__VA_ARGS__ << " = "; \
-    dbg_out(__VA_ARGS__);          \
-  } while (0)
-#define trca(v, N)       \
-  do {                   \
-    cerr << #v << " = "; \
-    array_out(v, N);     \
-  } while (0)
-#define trcc(v)                             \
-  do {                                      \
-    cerr << #v << " = {";                   \
-    each(x, v) { cerr << " " << x << ","; } \
-    cerr << "}" << endl;                    \
-  } while (0)
-template <typename T>
-void _cout(const T &c) {
-  cerr << c;
-}
-void _cout(const int &c) {
-  if (c == 1001001001)
-    cerr << "inf";
-  else if (c == -1001001001)
-    cerr << "-inf";
-  else
-    cerr << c;
-}
-void _cout(const unsigned int &c) {
-  if (c == 1001001001)
-    cerr << "inf";
-  else
-    cerr << c;
-}
-void _cout(const long long &c) {
-  if (c == 1001001001 || c == (1LL << 61) - 1)
-    cerr << "inf";
-  else if (c == -1001001001 || c == -((1LL << 61) - 1))
-    cerr << "-inf";
-  else
-    cerr << c;
-}
-void _cout(const unsigned long long &c) {
-  if (c == 1001001001 || c == (1LL << 61) - 1)
-    cerr << "inf";
-  else
-    cerr << c;
-}
-template <typename T, typename U>
-void _cout(const pair<T, U> &p) {
-  cerr << "{ ";
-  _cout(p.fi);
-  cerr << ", ";
-  _cout(p.se);
-  cerr << " } ";
-}
-template <typename T>
-void _cout(const vector<T> &v) {
-  int s = v.size();
-  cerr << "{ ";
-  for (int i = 0; i < s; i++) {
-    cerr << (i ? ", " : "");
-    _cout(v[i]);
-  }
-  cerr << " } ";
-}
-template <typename T>
-void _cout(const vector<vector<T>> &v) {
-  cerr << "[ ";
-  for (const auto &x : v) {
-    cerr << endl;
-    _cout(x);
-    cerr << ", ";
-  }
-  cerr << endl << " ] ";
-}
-void dbg_out() { cerr << endl; }
-template <typename T, class... U>
-void dbg_out(const T &t, const U &... u) {
-  _cout(t);
-  if (sizeof...(u)) cerr << ", ";
-  dbg_out(u...);
-}
-template <typename T>
-void array_out(const T &v, int s) {
-  cerr << "{ ";
-  for (int i = 0; i < s; i++) {
-    cerr << (i ? ", " : "");
-    _cout(v[i]);
-  }
-  cerr << " } " << endl;
-}
-template <typename T>
-void array_out(const T &v, int H, int W) {
-  cerr << "[ ";
-  for (int i = 0; i < H; i++) {
-    cerr << (i ? ", " : "");
-    array_out(v[i], W);
-  }
-  cerr << " ] " << endl;
-}
-#else
-#define trc(...)
-#define trca(...)
-#define trcc(...)
-#endif
-
-inline int popcnt(unsigned long long a) { return __builtin_popcountll(a); }
-inline int lsb(unsigned long long a) { return __builtin_ctzll(a); }
-inline int msb(unsigned long long a) { return 63 - __builtin_clzll(a); }
-template <typename T>
-inline int getbit(T a, int i) {
-  return (a >> i) & 1;
-}
-template <typename T>
-inline void setbit(T &a, int i) {
-  a |= (1LL << i);
-}
-template <typename T>
-inline void delbit(T &a, int i) {
-  a &= ~(1LL << i);
-}
-template <typename T>
-int lb(const vector<T> &v, const T &a) {
-  return lower_bound(begin(v), end(v), a) - begin(v);
-}
-template <typename T>
-int ub(const vector<T> &v, const T &a) {
-  return upper_bound(begin(v), end(v), a) - begin(v);
-}
-template <typename T>
-int btw(T a, T x, T b) {
-  return a <= x && x < b;
-}
-template <typename T, typename U>
-T ceil(T a, U b) {
-  return (a + b - 1) / b;
-}
-constexpr long long TEN(int n) {
-  long long ret = 1, x = 10;
-  while (n) {
-    if (n & 1) ret *= x;
-    x *= x;
-    n >>= 1;
-  }
-  return ret;
-}
-template <typename T>
-vector<T> mkrui(const vector<T> &v) {
-  vector<T> ret(v.size() + 1);
-  for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];
-  return ret;
-};
-template <typename T>
-vector<T> mkuni(const vector<T> &v) {
-  vector<T> ret(v);
-  sort(ret.begin(), ret.end());
-  ret.erase(unique(ret.begin(), ret.end()), ret.end());
-  return ret;
-}
-template <typename F>
-vector<int> mkord(int N, F f) {
-  vector<int> ord(N);
-  iota(begin(ord), end(ord), 0);
-  sort(begin(ord), end(ord), f);
-  return ord;
-}
-template <typename T = int>
-vector<T> mkiota(int N) {
-  vector<T> ret(N);
-  iota(begin(ret), end(ret), 0);
-  return ret;
-}
-template <typename T>
-vector<int> mkinv(vector<T> &v) {
-  vector<int> inv(v.size());
-  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;
-  return inv;
-}
-
-struct IoSetupNya {
-  IoSetupNya() {
-    cin.tie(nullptr);
-    ios::sync_with_stdio(false);
-    cout << fixed << setprecision(15);
-    cerr << fixed << setprecision(7);
-  }
-} iosetupnya;
-
-void solve();
-int main() { solve(); }
-
-#pragma endregion
-#line 3 "modint/arbitrary-prime-modint.hpp"
 using namespace std;
 
-struct ArbitraryLazyMontgomeryModInt {
-  using mint = ArbitraryLazyMontgomeryModInt;
-  using i32 = int32_t;
-  using u32 = uint32_t;
-  using u64 = uint64_t;
-
-  static u32 mod;
-  static u32 r;
-  static u32 n2;
-
-  static u32 get_r() {
-    u32 ret = mod;
-    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
-    return ret;
-  }
-
-  static void set_mod(u32 m) {
-    assert(m < (1 << 30));
-    assert((m & 1) == 1);
-    mod = m;
-    n2 = -u64(m) % m;
-    r = get_r();
-    assert(r * mod == 1);
-  }
-
-  u32 a;
-
-  ArbitraryLazyMontgomeryModInt() : a(0) {}
-  ArbitraryLazyMontgomeryModInt(const int64_t &b)
-      : a(reduce(u64(b % mod + mod) * n2)){};
-
-  static u32 reduce(const u64 &b) {
-    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
-  }
-
-  mint &operator+=(const mint &b) {
-    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  mint &operator-=(const mint &b) {
-    if (i32(a -= b.a) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  mint &operator*=(const mint &b) {
-    a = reduce(u64(a) * b.a);
-    return *this;
-  }
-
-  mint &operator/=(const mint &b) {
-    *this *= b.inverse();
-    return *this;
-  }
-
-  mint operator+(const mint &b) const { return mint(*this) += b; }
-  mint operator-(const mint &b) const { return mint(*this) -= b; }
-  mint operator*(const mint &b) const { return mint(*this) *= b; }
-  mint operator/(const mint &b) const { return mint(*this) /= b; }
-  bool operator==(const mint &b) const {
-    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
-  }
-  bool operator!=(const mint &b) const {
-    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
-  }
-  mint operator-() const { return mint() - mint(*this); }
-
-  mint pow(u64 n) const {
-    mint ret(1), mul(*this);
-    while (n > 0) {
-      if (n & 1) ret *= mul;
-      mul *= mul;
-      n >>= 1;
-    }
-    return ret;
-  }
-
-  friend ostream &operator<<(ostream &os, const mint &b) {
-    return os << b.get();
-  }
-
-  friend istream &operator>>(istream &is, mint &b) {
-    int64_t t;
-    is >> t;
-    b = ArbitraryLazyMontgomeryModInt(t);
-    return (is);
-  }
-
-  mint inverse() const { return pow(mod - 2); }
-
-  u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
-  static u32 get_mod() { return mod; }
-};
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
-#line 3 "ntt/arbitrary-ntt.hpp"
-using namespace std;
-
-#line 3 "modint/montgomery-modint.hpp"
-using namespace std;
-
-template <uint32_t mod>
-struct LazyMontgomeryModInt {
-  using mint = LazyMontgomeryModInt;
-  using i32 = int32_t;
-  using u32 = uint32_t;
-  using u64 = uint64_t;
-
-  static constexpr u32 get_r() {
-    u32 ret = mod;
-    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
-    return ret;
-  }
-
-  static constexpr u32 r = get_r();
-  static constexpr u32 n2 = -u64(mod) % mod;
-  static_assert(r * mod == 1, "invalid, r * mod != 1");
-  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
-  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
-
-  u32 a;
-
-  constexpr LazyMontgomeryModInt() : a(0) {}
-  constexpr LazyMontgomeryModInt(const int64_t &b)
-      : a(reduce(u64(b % mod + mod) * n2)){};
-
-  static constexpr u32 reduce(const u64 &b) {
-    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
-  }
-
-  constexpr mint &operator+=(const mint &b) {
-    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  constexpr mint &operator-=(const mint &b) {
-    if (i32(a -= b.a) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  constexpr mint &operator*=(const mint &b) {
-    a = reduce(u64(a) * b.a);
-    return *this;
-  }
-
-  constexpr mint &operator/=(const mint &b) {
-    *this *= b.inverse();
-    return *this;
-  }
-
-  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
-  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
-  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
-  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
-  constexpr bool operator==(const mint &b) const {
-    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
-  }
-  constexpr bool operator!=(const mint &b) const {
-    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
-  }
-  constexpr mint operator-() const { return mint() - mint(*this); }
-
-  constexpr mint pow(u64 n) const {
-    mint ret(1), mul(*this);
-    while (n > 0) {
-      if (n & 1) ret *= mul;
-      mul *= mul;
-      n >>= 1;
-    }
-    return ret;
-  }
-  
-  constexpr mint inverse() const { return pow(mod - 2); }
-
-  friend ostream &operator<<(ostream &os, const mint &b) {
-    return os << b.get();
-  }
-
-  friend istream &operator>>(istream &is, mint &b) {
-    int64_t t;
-    is >> t;
-    b = LazyMontgomeryModInt<mod>(t);
-    return (is);
-  }
-  
-  constexpr u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
-  static constexpr u32 get_mod() { return mod; }
-};
 #line 3 "ntt/ntt-avx2.hpp"
 using namespace std;
 
@@ -1221,115 +785,219 @@ struct NTT {
     for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;
   }
 };
-#line 7 "ntt/arbitrary-ntt.hpp"
+#line 3 "fps/formal-power-series.hpp"
+using namespace std;
 
-namespace ArbitraryNTT {
-constexpr int32_t m0 = 167772161;
-constexpr int32_t m1 = 469762049;
-constexpr int32_t m2 = 754974721;
-using mint0 = LazyMontgomeryModInt<m0>;
-using mint1 = LazyMontgomeryModInt<m1>;
-using mint2 = LazyMontgomeryModInt<m2>;
+template <typename mint>
+struct FormalPowerSeries : vector<mint> {
+  using vector<mint>::vector;
+  using FPS = FormalPowerSeries;
 
-template <int mod>
-vector<LazyMontgomeryModInt<mod>> mul(const vector<int> &a,
-                                      const vector<int> &b) {
-  using submint = LazyMontgomeryModInt<mod>;
-  NTT<submint> ntt;
-  vector<submint> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
-  return ntt.multiply(s, t);
-}
-
-vector<int> multiply(const vector<int> &s, const vector<int> &t, int mod) {
-  auto d0 = mul<m0>(s, t);
-  auto d1 = mul<m1>(s, t);
-  auto d2 = mul<m2>(s, t);
-  int n = d0.size();
-  vector<int> ret(n);
-  using i64 = int64_t;
-  static const int r01 = mint1(m0).inverse().get();
-  static const int r02 = mint2(m0).inverse().get();
-  static const int r12 = mint2(m1).inverse().get();
-  static const int r02r12 = i64(r02) * r12 % m2;
-  static const int w1 = m0 % mod;
-  static const int w2 = i64(w1) * m1 % mod;
-  for (int i = 0; i < n; i++) {
-    i64 n1 = d1[i].get(), n2 = d2[i].get();
-    i64 a = d0[i].get();
-    i64 b = (n1 + m1 - a) * r01 % m1;
-    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    ret[i] = (a + b * w1 + c * w2) % mod;
+  FPS &operator+=(const FPS &r) {
+    if (r.size() > this->size()) this->resize(r.size());
+    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];
+    return *this;
   }
-  return ret;
+
+  FPS &operator+=(const mint &r) {
+    if (this->empty()) this->resize(1);
+    (*this)[0] += r;
+    return *this;
+  }
+
+  FPS &operator-=(const FPS &r) {
+    if (r.size() > this->size()) this->resize(r.size());
+    for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
+    return *this;
+  }
+
+  FPS &operator-=(const mint &r) {
+    if (this->empty()) this->resize(1);
+    (*this)[0] -= r;
+    return *this;
+  }
+
+  FPS &operator*=(const mint &v) {
+    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
+    return *this;
+  }
+
+  FPS &operator/=(const FPS &r) {
+    if (this->size() < r.size()) {
+      this->clear();
+      return *this;
+    }
+    int n = this->size() - r.size() + 1;
+    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
+  }
+
+  FPS &operator%=(const FPS &r) { 
+    *this -= *this / r * r; 
+    shrink();
+    return *this;
+  }
+  
+  FPS operator+(const FPS &r) const { return FPS(*this) += r; }
+  FPS operator+(const mint &v) const { return FPS(*this) += v; }
+  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
+  FPS operator-(const mint &v) const { return FPS(*this) -= v; }
+  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }
+  FPS operator*(const mint &v) const { return FPS(*this) *= v; }
+  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }
+  FPS operator%(const FPS &r) const { return FPS(*this) %= r; }
+  FPS operator-() const {
+    FPS ret(this->size());
+    for (int i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];
+    return ret;
+  }
+
+  void shrink() {
+    while (this->size() && this->back() == mint(0)) this->pop_back();
+  }
+
+  FPS rev() const {
+    FPS ret(*this);
+    reverse(begin(ret), end(ret));
+    return ret;
+  }
+
+  FPS dot(FPS r) const {
+    FPS ret(min(this->size(), r.size()));
+    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];
+    return ret;
+  }
+
+  FPS pre(int sz) const {
+    return FPS(begin(*this), begin(*this) + min((int)this->size(), sz));
+  }
+
+  FPS operator>>(int sz) const {
+    if ((int)this->size() <= sz) return {};
+    FPS ret(*this);
+    ret.erase(ret.begin(), ret.begin() + sz);
+    return ret;
+  }
+
+  FPS operator<<(int sz) const {
+    FPS ret(*this);
+    ret.insert(ret.begin(), sz, mint(0));
+    return ret;
+  }
+
+  FPS diff() const {
+    const int n = (int)this->size();
+    FPS ret(max(0, n - 1));
+    for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * mint(i);
+    return ret;
+  }
+
+  FPS integral() const {
+    const int n = (int)this->size();
+    FPS ret(n + 1);
+    ret[0] = mint(0);
+    for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / mint(i + 1);
+    return ret;
+  }
+
+  mint eval(mint x) const {
+    mint r = 0, w = 1;
+    for (auto &v : *this) r += w * v, w *= x;
+    return r;
+  }
+
+  FPS &operator*=(const FPS &r);
+  FPS ntt() const;
+  FPS intt() const;
+  FPS inv(int deg = -1) const;
+  FPS log(int deg = -1) const;
+  FPS exp(int deg = -1) const;
+  FPS pow(int64_t k, int deg = -1) const;
+  // FPS sqrt(int deg = -1) const;
+};
+
+/**
+ * @brief 多項式/形式的冪級数ライブラリ
+ * @docs docs/formal-power-series.md
+ */
+#line 7 "fps/kitamasa-ntt.hpp"
+
+template <typename mint>
+mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
+                            FormalPowerSeries<mint> P) {
+  NTT<mint> ntt;
+  mint ret = 0;
+
+  P.shrink();
+  Q.shrink();
+  if (P.size() >= Q.size()) {
+    auto R = P / Q;
+    P -= R * Q;
+    if (k < (int)R.size()) ret += R[k];
+  }
+  P.shrink();
+  if ((int)P.size() == 0) return ret;
+
+  int N = 1;
+  while (N < (int)Q.size()) N <<= 1;
+
+  vector<mint> F(2 * N), G(2 * N);
+  for (int i = 0; i < (int)P.size(); i++) F[i] = P[i];
+  for (int i = 0; i < (int)Q.size(); i++) G[i] = Q[i];
+  ntt.ntt(F);
+  ntt.ntt(G);
+  vector<mint> S(2 * N), T(2 * N);
+
+  vector<int> btr(N);
+  for (int i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {
+    btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));
+  }
+  mint dw = mint(ntt.pr).inverse().pow((mint::get_mod() - 1) / (2 * N));
+
+  while (k) {
+    mint inv2 = mint(2).inverse();
+    // G(x)G(-x)の偶数次
+    T.resize(N);
+    for (int i = 0; i < N; i++) T[i] = G[(i << 1) | 0] * G[(i << 1) | 1];
+
+    S.resize(N);
+    if (k & 1) {
+      // P(x)Q(-x)の奇数次
+      for (auto &i : btr) {
+        S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] -
+                F[(i << 1) | 1] * G[(i << 1) | 0]) *
+               inv2;
+        inv2 *= dw;
+      }
+    } else {
+      // P(x)Q(-x)の偶数次
+      for (int i = 0; i < N; i++) {
+        S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] +
+                F[(i << 1) | 1] * G[(i << 1) | 0]) *
+               inv2;
+      }
+    }
+
+    swap(F, S);
+    swap(G, T);
+    ntt.ntt_doubling(F);
+    ntt.ntt_doubling(G);
+    k >>= 1;
+  }
+
+  mint f0 = 0;
+  for (auto Fi : F) f0 += Fi;
+  f0 *= mint((int)F.size()).inverse();
+  return ret + f0;
 }
 
 template <typename mint>
-vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
-  vector<int> u = multiply(s, t, mint::get_mod());
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);
-  return ret;
-}
-
-/*
-template <int mod>
-vector<int> multiply(const vector<int> &s, const vector<int> &t) {
-  auto d0 = mul<m0>(s, t);
-  auto d1 = mul<m1>(s, t);
-  auto d2 = mul<m2>(s, t);
-  int n = d0.size();
-  vector<int> res(n);
-  using i64 = int64_t;
-  static const int r01 = mint1(m0).inverse().get();
-  static const int r02 = mint2(m0).inverse().get();
-  static const int r12 = mint2(m1).inverse().get();
-  static const int r02r12 = i64(r02) * r12 % m2;
-  static const int w1 = m0 % mod;
-  static const int w2 = i64(w1) * m1 % mod;
-  for (int i = 0; i < n; i++) {
-    i64 n1 = d1[i].get(), n2 = d2[i].get();
-    i64 a = d0[i].get();
-    i64 b = (n1 + m1 - a) * r01 % m1;
-    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    res[i] = (a + b * w1 + c * w2) % mod;
-  }
-  return std::move(res);
-}
-
-template <int mod>
-vector<LazyMontgomeryModInt<mod>> multiply(
-    const vector<LazyMontgomeryModInt<mod>> &a,
-    const vector<LazyMontgomeryModInt<mod>> &b) {
-  using mint = LazyMontgomeryModInt<mod>;
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
-  vector<int> u = multiply<mod>(s, t);
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i)
-    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
-  return std::move(ret);
-}
-*/
-}  // namespace ArbitraryNTT
-#line 6 "verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp"
-
-int MOD = 1000000007;
-using mint = ArbitraryLazyMontgomeryModInt;
-using vm = vector<mint>;
-
-void solve() {
-  mint::set_mod(MOD);
-  ini(N, M);
-  vm a(N), b(M);
-  in(a, b);
-  auto c = ArbitraryNTT::multiply(a, b);
-  out(c);
+mint kitamasa(long long N, FormalPowerSeries<mint> Q,
+              FormalPowerSeries<mint> a) {
+  int k = Q.size() - 1;
+  assert((int)a.size() == k);
+  FormalPowerSeries<mint> P = a * Q;
+  P.resize(Q.size() - 1);
+  return LinearRecursionFormula<mint>(N, Q, P);
 }
 
 ```

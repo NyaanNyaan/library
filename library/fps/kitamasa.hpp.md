@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: fps/linear-recursion-formula.hpp
+# :warning: fps/kitamasa.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/fps/linear-recursion-formula.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 21:57:06+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-29 04:39:16+09:00
 
 
 
@@ -57,17 +57,15 @@ mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
                             FormalPowerSeries<mint> P) {
   Q.shrink();
   mint ret = 0;
-  if(P.size() >= Q.size()){
+  if (P.size() >= Q.size()) {
     auto R = P / Q;
     P -= R * Q;
-    if(N < (int)R.size()) ret += R[N];
+    if (N < (int)R.size()) ret += R[N];
   }
-  if((int)P.size() == 0) return ret;
-
-  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1) );
+  if ((int)P.size() == 0) return ret;
+  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1));
   P.resize(k);
   Q.resize(k);
-  
   while (N) {
     auto Q2 = Q;
     for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
@@ -100,7 +98,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "fps/linear-recursion-formula.hpp"
+#line 2 "fps/kitamasa.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -127,14 +125,12 @@ struct FormalPowerSeries : vector<mint> {
   FPS &operator-=(const FPS &r) {
     if (r.size() > this->size()) this->resize(r.size());
     for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-    shrink();
     return *this;
   }
 
   FPS &operator-=(const mint &r) {
     if (this->empty()) this->resize(1);
     (*this)[0] -= r;
-    shrink();
     return *this;
   }
 
@@ -152,7 +148,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { return *this -= *this / r * r; }
+  FPS &operator%=(const FPS &r) { 
+    *this -= *this / r * r; 
+    shrink();
+    return *this;
+  }
+  
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
@@ -235,24 +236,22 @@ struct FormalPowerSeries : vector<mint> {
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 6 "fps/linear-recursion-formula.hpp"
+#line 6 "fps/kitamasa.hpp"
 
 template <typename mint>
 mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
                             FormalPowerSeries<mint> P) {
   Q.shrink();
   mint ret = 0;
-  if(P.size() >= Q.size()){
+  if (P.size() >= Q.size()) {
     auto R = P / Q;
     P -= R * Q;
-    if(N < (int)R.size()) ret += R[N];
+    if (N < (int)R.size()) ret += R[N];
   }
-  if((int)P.size() == 0) return ret;
-
-  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1) );
+  if ((int)P.size() == 0) return ret;
+  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1));
   P.resize(k);
   Q.resize(k);
-  
   while (N) {
     auto Q2 = Q;
     for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/formal-power-series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 21:57:06+09:00
+    - Last commit date: 2020-07-29 04:39:16+09:00
 
 
 
@@ -173,7 +173,8 @@ $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 ## Required by
 
 * :warning: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :warning: <a href="linear-recursion-formula.hpp.html">fps/linear-recursion-formula.hpp</a>
+* :warning: <a href="kitamasa-ntt.hpp.html">fps/kitamasa-ntt.hpp</a>
+* :warning: <a href="kitamasa.hpp.html">fps/kitamasa.hpp</a>
 * :warning: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 
 
@@ -206,14 +207,12 @@ struct FormalPowerSeries : vector<mint> {
   FPS &operator-=(const FPS &r) {
     if (r.size() > this->size()) this->resize(r.size());
     for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-    shrink();
     return *this;
   }
 
   FPS &operator-=(const mint &r) {
     if (this->empty()) this->resize(1);
     (*this)[0] -= r;
-    shrink();
     return *this;
   }
 
@@ -231,7 +230,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { return *this -= *this / r * r; }
+  FPS &operator%=(const FPS &r) { 
+    *this -= *this / r * r; 
+    shrink();
+    return *this;
+  }
+  
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
@@ -344,14 +348,12 @@ struct FormalPowerSeries : vector<mint> {
   FPS &operator-=(const FPS &r) {
     if (r.size() > this->size()) this->resize(r.size());
     for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-    shrink();
     return *this;
   }
 
   FPS &operator-=(const mint &r) {
     if (this->empty()) this->resize(1);
     (*this)[0] -= r;
-    shrink();
     return *this;
   }
 
@@ -369,7 +371,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { return *this -= *this / r * r; }
+  FPS &operator%=(const FPS &r) { 
+    *this -= *this / r * r; 
+    shrink();
+    return *this;
+  }
+  
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 21:57:06+09:00
+    - Last commit date: 2020-07-29 04:39:16+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -619,6 +619,7 @@ struct NTT {
     y[k - 1] = w[k - 1].inverse();
     for (int i = k - 2; i > 0; --i)
       w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];
+    dw[0] = dy[0] = w[1] * w[1];
     dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];
     for (int i = 3; i < k; ++i) {
       dw[i] = dw[i - 1] * y[i - 2] * w[i];
