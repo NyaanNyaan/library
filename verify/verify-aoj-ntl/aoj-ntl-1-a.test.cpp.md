@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :question: <a href="../../library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
 
 
 ## Code

@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: string/suffix-array.hpp
+# :heavy_check_mark: string/suffix-array.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,14 +38,14 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
+* :heavy_check_mark: <a href="../data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 
 
 ## Code

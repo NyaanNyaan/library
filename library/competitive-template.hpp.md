@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../assets/css/copy-button.css" />
 
 
-# :question: competitive-template.hpp
+# :heavy_check_mark: competitive-template.hpp
 
 <a href="../index.html">Back to top page</a>
 
@@ -74,26 +74,26 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
-* :x: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
-* :x: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
-* :x: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
-* :x: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
-* :x: <a href="../verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 
 
 ## Code

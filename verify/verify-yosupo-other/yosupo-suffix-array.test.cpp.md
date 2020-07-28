@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify-yosupo-other/yosupo-suffix-array.test.cpp
+# :heavy_check_mark: verify-yosupo-other/yosupo-suffix-array.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../../library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
-* :x: <a href="../../library/string/suffix-array.hpp.html">string/suffix-array.hpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
+* :heavy_check_mark: <a href="../../library/string/suffix-array.hpp.html">string/suffix-array.hpp</a>
 
 
 ## Code

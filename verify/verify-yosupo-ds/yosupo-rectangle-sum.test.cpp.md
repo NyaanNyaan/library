@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
+# :heavy_check_mark: verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../../library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
-* :x: <a href="../../library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
+* :heavy_check_mark: <a href="../../library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
 
 
 ## Code

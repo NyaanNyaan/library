@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: math/elementary-function.hpp
+# :heavy_check_mark: math/elementary-function.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,10 +39,10 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
-* :x: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
-* :x: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
-* :x: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
-* :x: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
 
 
 ## Code

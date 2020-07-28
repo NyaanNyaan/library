@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/linear-recursion-formula.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-07-28 11:44:13+09:00
 
 
 
@@ -79,7 +79,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
               FormalPowerSeries<mint> a) {
   int k = Q.size() - 1;
   assert((int)a.size() == k);
-  FormalPowerSeries<mint> P = a * Q;
+  auto P = a * Q;
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }
@@ -302,7 +302,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
               FormalPowerSeries<mint> a) {
   int k = Q.size() - 1;
   assert((int)a.size() == k);
-  FormalPowerSeries<mint> P = a * Q;
+  auto P = a * Q;
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }

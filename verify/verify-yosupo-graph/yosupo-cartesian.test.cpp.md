@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify-yosupo-graph/yosupo-cartesian.test.cpp
+# :heavy_check_mark: verify-yosupo-graph/yosupo-cartesian.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :question: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :question: <a href="../../library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
+* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../../library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
 
 
 ## Code
