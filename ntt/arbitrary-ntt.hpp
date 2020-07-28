@@ -2,10 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "../modint/arbitrary-modint.hpp"
-#include "../modint/arbitrary-prime-modint.hpp"
 #include "../modint/montgomery-modint.hpp"
-#include "../modint/simd-montgomery.hpp"
 #include "./ntt-avx2.hpp"
 
 namespace ArbitraryNTT {

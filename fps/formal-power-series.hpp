@@ -33,8 +33,6 @@ struct FormalPowerSeries : vector<mint> {
     return *this;
   }
 
-  FPS &operator*=(const FPS &r);
-
   FPS &operator*=(const mint &v) {
     for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
     return *this;
@@ -85,7 +83,7 @@ struct FormalPowerSeries : vector<mint> {
   }
 
   FPS operator>>(int sz) const {
-    if (this->size() <= sz) return {};
+    if ((int)this->size() <= sz) return {};
     FPS ret(*this);
     ret.erase(ret.begin(), ret.begin() + sz);
     return ret;
@@ -118,6 +116,9 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+  FPS &operator*=(const FPS &r);
+  FPS ntt() const;
+  FPS intt() const;
   FPS inv(int deg = -1) const;
   FPS log(int deg = -1) const;
   FPS exp(int deg = -1) const;

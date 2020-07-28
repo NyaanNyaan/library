@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "../ntt/ntt-avx2.hpp"
+#include "../ntt/arbitrary-ntt.hpp"
 #include "./formal-power-series.hpp"
 
 template <typename mint>
@@ -12,26 +12,18 @@ FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
     this->clear();
     return *this;
   }
-  static NTT<mint> ntt;
-  static_assert(ntt.level >= 20);
-  auto ret = ntt.multiply(*this, r);
+  auto ret = ArbitraryNTT::multiply(*this, r);
   return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
 }
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::ntt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.ntt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+  exit(1);
 }
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::intt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.intt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+  exit(1);
 }
 
 template <typename mint>
@@ -63,8 +55,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
-                                                     int deg) const {
+FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k, int deg) const {
   const int n = (int)this->size();
   if (deg == -1) deg = n;
   for (int i = 0; i < n; i++) {
@@ -74,7 +65,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
       FormalPowerSeries<mint> ret =
           (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
       ret = (ret << (i * k)).pre(deg);
-      if ((int)ret.size() < deg) ret.resize(deg, mint(0));
+      if (ret.size() < deg) ret.resize(deg, mint(0));
       return ret;
     }
   }
