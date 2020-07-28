@@ -548,7 +548,7 @@ struct NTT {
     return s;
   }
 
-  void doubling(vector<mint> &a) {
+  void ntt_doubling(vector<mint> &a) {
     int M = (int)a.size();
     for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
     intt(buf1, M);

@@ -179,3 +179,8 @@ struct FormalPowerSeries : vector<mint> {
   // TODO: 作る
   // FPS sqrt(int deg = -1) const {}
 };
+
+/**
+ * @brief Formal Power Series
+ * @docs docs/formal-power-series.md
+ */
