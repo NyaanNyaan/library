@@ -63,6 +63,7 @@ struct NTT {
     y[k - 1] = w[k - 1].inverse();
     for (int i = k - 2; i > 0; --i)
       w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];
+    dw[0] = dy[0] = w[1] * w[1];
     dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];
     for (int i = 3; i < k; ++i) {
       dw[i] = dw[i - 1] * y[i - 2] * w[i];

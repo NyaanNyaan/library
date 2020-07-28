@@ -6,3 +6,5 @@ Makefile
 out
 out.cpp
 out.exe
+b.cpp
+test.cpp

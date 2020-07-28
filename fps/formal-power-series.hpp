@@ -22,14 +22,12 @@ struct FormalPowerSeries : vector<mint> {
   FPS &operator-=(const FPS &r) {
     if (r.size() > this->size()) this->resize(r.size());
     for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-    shrink();
     return *this;
   }
 
   FPS &operator-=(const mint &r) {
     if (this->empty()) this->resize(1);
     (*this)[0] -= r;
-    shrink();
     return *this;
   }
 
@@ -47,7 +45,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { return *this -= *this / r * r; }
+  FPS &operator%=(const FPS &r) { 
+    *this -= *this / r * r; 
+    shrink();
+    return *this;
+  }
+  
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
