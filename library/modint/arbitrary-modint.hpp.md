@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#fb97f878c938d7517d3d9f7de68146e9">modint</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modint/arbitrary-modint.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-07-28 19:14:39+09:00
 
 
 
@@ -66,13 +66,6 @@ struct ArbitraryModInt {
       : x(y >= 0 ? y % get_mod() : (get_mod() - (-y) % get_mod()) % get_mod()) {
   }
 
-  static int &get_mod() {
-    static int mod = 0;
-    return mod;
-  }
-
-  static void set_mod(int md) { get_mod() = md; }
-
   ArbitraryModInt &operator+=(const ArbitraryModInt &p) {
     if ((x += p.x) >= get_mod()) x -= get_mod();
     return *this;
@@ -148,6 +141,15 @@ struct ArbitraryModInt {
     a = ArbitraryModInt(t);
     return (is);
   }
+
+  int get() const { return x; }
+
+  static int &get_mod() {
+    static int mod = 0;
+    return mod;
+  }
+
+  static void set_mod(int md) { get_mod() = md; }
 };
 ```
 {% endraw %}
@@ -168,13 +170,6 @@ struct ArbitraryModInt {
       : x(y >= 0 ? y % get_mod() : (get_mod() - (-y) % get_mod()) % get_mod()) {
   }
 
-  static int &get_mod() {
-    static int mod = 0;
-    return mod;
-  }
-
-  static void set_mod(int md) { get_mod() = md; }
-
   ArbitraryModInt &operator+=(const ArbitraryModInt &p) {
     if ((x += p.x) >= get_mod()) x -= get_mod();
     return *this;
@@ -250,6 +245,15 @@ struct ArbitraryModInt {
     a = ArbitraryModInt(t);
     return (is);
   }
+
+  int get() const { return x; }
+
+  static int &get_mod() {
+    static int mod = 0;
+    return mod;
+  }
+
+  static void set_mod(int md) { get_mod() = md; }
 };
 
 ```

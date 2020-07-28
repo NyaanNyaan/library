@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 16:10:28+09:00
+    - Last commit date: 2020-07-28 19:14:39+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -67,7 +67,7 @@ void solve() {
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ArbitraryNTT::multiply<MOD>(a, b);
+  auto c = ArbitraryNTT::multiply(a, b);
   out(c);
 }
 ```
@@ -443,11 +443,6 @@ struct LazyMontgomeryModInt {
   }
   constexpr mint operator-() const { return mint() - mint(*this); }
 
-  constexpr u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
   constexpr mint pow(u64 n) const {
     mint ret(1), mul(*this);
     while (n > 0) {
@@ -457,6 +452,8 @@ struct LazyMontgomeryModInt {
     }
     return ret;
   }
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
 
   friend ostream &operator<<(ostream &os, const mint &b) {
     return os << b.get();
@@ -468,8 +465,11 @@ struct LazyMontgomeryModInt {
     b = LazyMontgomeryModInt<mod>(t);
     return (is);
   }
-
-  constexpr mint inverse() const { return pow(mod - 2); }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
 
   static constexpr u32 get_mod() { return mod; }
 };
@@ -487,13 +487,6 @@ struct ArbitraryModInt {
   ArbitraryModInt(int64_t y)
       : x(y >= 0 ? y % get_mod() : (get_mod() - (-y) % get_mod()) % get_mod()) {
   }
-
-  static int &get_mod() {
-    static int mod = 0;
-    return mod;
-  }
-
-  static void set_mod(int md) { get_mod() = md; }
 
   ArbitraryModInt &operator+=(const ArbitraryModInt &p) {
     if ((x += p.x) >= get_mod()) x -= get_mod();
@@ -570,6 +563,15 @@ struct ArbitraryModInt {
     a = ArbitraryModInt(t);
     return (is);
   }
+
+  int get() const { return x; }
+
+  static int &get_mod() {
+    static int mod = 0;
+    return mod;
+  }
+
+  static void set_mod(int md) { get_mod() = md; }
 };
 #line 3 "modint/arbitrary-prime-modint.hpp"
 using namespace std;
@@ -640,11 +642,6 @@ struct ArbitraryLazyMontgomeryModInt {
     return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
   }
   mint operator-() const { return mint() - mint(*this); }
-  
-  u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
 
   mint pow(u64 n) const {
     mint ret(1), mul(*this);
@@ -668,6 +665,11 @@ struct ArbitraryLazyMontgomeryModInt {
   }
 
   mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
 
   static u32 get_mod() { return mod; }
 };
@@ -1333,16 +1335,15 @@ vector<LazyMontgomeryModInt<mod>> mul(const vector<int> &a,
   vector<submint> s(a.size()), t(b.size());
   for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
   for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
-  return std::move(ntt.multiply(s, t));
+  return ntt.multiply(s, t);
 }
 
-template <int mod>
-vector<int> multiply(const vector<int> &s, const vector<int> &t) {
+vector<int> multiply(const vector<int> &s, const vector<int> &t, int mod) {
   auto d0 = mul<m0>(s, t);
   auto d1 = mul<m1>(s, t);
   auto d2 = mul<m2>(s, t);
   int n = d0.size();
-  vector<int> res(n);
+  vector<int> ret(n);
   using i64 = int64_t;
   static const int r01 = mint1(m0).inverse().get();
   static const int r02 = mint2(m0).inverse().get();
@@ -1355,12 +1356,25 @@ vector<int> multiply(const vector<int> &s, const vector<int> &t) {
     i64 a = d0[i].get();
     i64 b = (n1 + m1 - a) * r01 % m1;
     i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    res[i] = (a + b * w1 + c * w2) % mod;
+    ret[i] = (a + b * w1 + c * w2) % mod;
   }
-  return std::move(res);
+  return ret;
 }
 
-vector<int> multiply(const vector<int> &s, const vector<int> &t, int mod) {
+template <typename mint>
+vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply(s, t, mint::get_mod());
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);
+  return ret;
+}
+
+/*
+template <int mod>
+vector<int> multiply(const vector<int> &s, const vector<int> &t) {
   auto d0 = mul<m0>(s, t);
   auto d1 = mul<m1>(s, t);
   auto d2 = mul<m2>(s, t);
@@ -1397,32 +1411,7 @@ vector<LazyMontgomeryModInt<mod>> multiply(
     ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
   return std::move(ret);
 }
-
-vector<ArbitraryModInt> multiply(const vector<ArbitraryModInt> &a,
-                                 const vector<ArbitraryModInt> &b) {
-  using mint = ArbitraryModInt;
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].x;
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].x;
-  vector<int> u = multiply(s, t, ArbitraryModInt::get_mod());
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i) ret[i].x = u[i];
-  return std::move(ret);
-}
-
-vector<ArbitraryLazyMontgomeryModInt> multiply(
-    const vector<ArbitraryLazyMontgomeryModInt> &a,
-    const vector<ArbitraryLazyMontgomeryModInt> &b) {
-  using mint = ArbitraryLazyMontgomeryModInt;
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
-  vector<int> u = multiply(s, t, mint::get_mod());
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i)
-    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
-  return std::move(ret);
-}
+*/
 }  // namespace ArbitraryNTT
 #line 6 "verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp"
 
@@ -1434,7 +1423,7 @@ void solve() {
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ArbitraryNTT::multiply<MOD>(a, b);
+  auto c = ArbitraryNTT::multiply(a, b);
   out(c);
 }
 

@@ -31,14 +31,14 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/ntt-friendly-fps.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 18:29:00+09:00
+    - Last commit date: 2020-07-28 19:14:39+09:00
 
 
 
 
 ## Depends on
 
-* :warning: <a href="formal-power-series.hpp.html">Formal Power Series <small>(fps/formal-power-series.hpp)</small></a>
+* :warning: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Code
@@ -248,7 +248,7 @@ struct FormalPowerSeries : vector<mint> {
 };
 
 /**
- * @brief Formal Power Series
+ * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
 #line 6 "fps/ntt-friendly-fps.hpp"

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#fb97f878c938d7517d3d9f7de68146e9">modint</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modint/arbitrary-prime-modint.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-07-28 19:14:39+09:00
 
 
 
@@ -123,11 +123,6 @@ struct ArbitraryLazyMontgomeryModInt {
     return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
   }
   mint operator-() const { return mint() - mint(*this); }
-  
-  u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
 
   mint pow(u64 n) const {
     mint ret(1), mul(*this);
@@ -151,6 +146,11 @@ struct ArbitraryLazyMontgomeryModInt {
   }
 
   mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
 
   static u32 get_mod() { return mod; }
 };
@@ -234,11 +234,6 @@ struct ArbitraryLazyMontgomeryModInt {
     return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
   }
   mint operator-() const { return mint() - mint(*this); }
-  
-  u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
 
   mint pow(u64 n) const {
     mint ret(1), mul(*this);
@@ -262,6 +257,11 @@ struct ArbitraryLazyMontgomeryModInt {
   }
 
   mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
 
   static u32 get_mod() { return mod; }
 };

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-07-28 19:14:39+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -441,11 +441,6 @@ struct LazyMontgomeryModInt {
   }
   constexpr mint operator-() const { return mint() - mint(*this); }
 
-  constexpr u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
   constexpr mint pow(u64 n) const {
     mint ret(1), mul(*this);
     while (n > 0) {
@@ -455,6 +450,8 @@ struct LazyMontgomeryModInt {
     }
     return ret;
   }
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
 
   friend ostream &operator<<(ostream &os, const mint &b) {
     return os << b.get();
@@ -466,8 +463,11 @@ struct LazyMontgomeryModInt {
     b = LazyMontgomeryModInt<mod>(t);
     return (is);
   }
-
-  constexpr mint inverse() const { return pow(mod - 2); }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
 
   static constexpr u32 get_mod() { return mod; }
 };

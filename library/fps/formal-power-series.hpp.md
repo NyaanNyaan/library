@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: Formal Power Series <small>(fps/formal-power-series.hpp)</small>
+# :warning: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/formal-power-series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 18:29:00+09:00
+    - Last commit date: 2020-07-28 19:14:39+09:00
 
 
 
@@ -39,6 +39,8 @@ layout: default
 # 形式的冪級数
 ## docsのテスト投稿です！！！
 多項式/形式的冪級数の基本操作をライブラリ化したもの。作りかけ
+
+実装はうしさんのライブラリを大きく参考にしました。感謝…
 
 TODO: ライブラリの設計の見直し
 
@@ -307,7 +309,7 @@ struct FormalPowerSeries : vector<mint> {
 };
 
 /**
- * @brief Formal Power Series
+ * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
 ```
@@ -444,7 +446,7 @@ struct FormalPowerSeries : vector<mint> {
 };
 
 /**
- * @brief Formal Power Series
+ * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
 
