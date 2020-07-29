@@ -119,8 +119,11 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+ private:
   static void *ntt_ptr;
   static void set_fft();
+
+ public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();
