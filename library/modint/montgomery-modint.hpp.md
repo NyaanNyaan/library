@@ -44,6 +44,7 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp.html">verify-yosupo-ds/yosupo-lazysegtree.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp.html">verify-yosupo-fps/yosupo-exp-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify-yosupo-fps/yosupo-exp.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>

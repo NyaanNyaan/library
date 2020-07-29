@@ -54,7 +54,7 @@ $$a_N = [x^N]\frac{P(x)}{Q(x)}$$
 
 になり、これは[リンク先のアルゴリズム](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html)を使って$\mathrm{O}(N \log k \log N)$で計算できる。
 
-さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さ|Q|の畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。
+さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さQの畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。
 
 verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \log k \log N), N=200000,k=10^{18}$
 - [ナイーブな実装](https://atcoder.jp/contests/s8pc-3/submissions/15526069) 1846ms

@@ -146,7 +146,7 @@ layout: default
 
 * :warning: <a href="library/segment-tree/dynamic-li-chao-tree.hpp.html">segment-tree/dynamic-li-chao-tree.hpp</a>
 * :warning: <a href="library/segment-tree/dynamic-segment-tree.hpp.html">segment-tree/dynamic-segment-tree.hpp</a>
-* :warning: <a href="library/segment-tree/lazy-segment-tree.hpp.html">segment-tree/lazy-segment-tree.hpp</a>
+* :heavy_check_mark: <a href="library/segment-tree/lazy-segment-tree.hpp.html">segment-tree/lazy-segment-tree.hpp</a>
 * :warning: <a href="library/segment-tree/li-chao-tree.hpp.html">segment-tree/li-chao-tree.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-max-lazyseg.hpp.html">segment-tree/range-add-range-max-lazyseg.hpp</a>
@@ -239,6 +239,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp.html">verify-yosupo-ds/yosupo-lazysegtree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
