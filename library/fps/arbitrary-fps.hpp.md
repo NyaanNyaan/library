@@ -25,24 +25,30 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: fps/arbitrary-fps.hpp
+# :heavy_check_mark: fps/arbitrary-fps.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/arbitrary-fps.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 19:12:51+09:00
+    - Last commit date: 2020-07-29 23:13:06+09:00
 
 
 
 
 ## Depends on
 
-* :warning: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
 
 
 ## Code
@@ -1078,8 +1084,11 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+ private:
   static void *ntt_ptr;
   static void set_fft();
+
+ public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();

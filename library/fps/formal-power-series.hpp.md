@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
+# :heavy_check_mark: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/formal-power-series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 19:12:51+09:00
+    - Last commit date: 2020-07-29 23:13:06+09:00
 
 
 
@@ -86,8 +86,6 @@ $$\frac{f^R}{g^R} \equiv q^R \mod x^{n-m+1}$$
 ### 微分・積分
 
 $\mathrm{O}(N)$
-
-なお、微分/積分は数列に対するimos法/累積和に対応している。また、形式的冪級数の数式的な操作としては、$1-x$を掛けるのが微分、$\frac{1}{1-x}$を掛けるのが積分に対応している。
 
 ### ダブリング
 
@@ -155,6 +153,8 @@ $g \equiv f^k \mod x^n$となる$g$を求めたい。繰り返し自乗法を用
 
 $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{f}{a_p x^p}\right)^k$を計算して最後に$a_p^kx^{kp}$を掛ければよいため、$f$の定数項が$1$である場合のみ考えればよい。このとき$f^k$は$f^k\equiv e^{(\log f)k}$から計算できる。
 
+## 以下、未実装
+
 ### 平方根
 
 $f$は$t^2=f_0$を満たす$t$が存在する多項式とする。このとき$g \equiv \sqrt{f} \mod x^n$となる$g$を求めたい。
@@ -175,12 +175,25 @@ $g \equiv \cos f, h \equiv \sin f \mod x^n$を求めたい。これは$e^{if}=\c
 
 $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 
+### 階差(imos法)/累積和
+
+数列に対して階差を取る(imos法)、あるいはその逆に累積和を取ることを形式的冪級数の数式的な操作に置き換えると、それぞれ$1-x$を掛ける/割る操作に対応している。計算量$\mathrm{O}(N)$
+
+(ただし、除算のアルゴリズムは$x$の降べき順に値を決定するため、$x$の昇べき順に値を決める累積和とは異なるものである。よって数列を機械的に$1-x$で割ると$0$次の項が変なことになるので要注意。)
+
 ## Required by
 
-* :warning: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :heavy_check_mark: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :warning: <a href="kitamasa-ntt.hpp.html">fps/kitamasa-ntt.hpp</a>
-* :warning: <a href="kitamasa.hpp.html">fps/kitamasa.hpp</a>
+* :heavy_check_mark: <a href="kitamasa.hpp.html">fps/kitamasa.hpp</a>
 * :warning: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :warning: <a href="utility.hpp.html">fps/utility.hpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
 
 
 ## Code
@@ -309,8 +322,11 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+ private:
   static void *ntt_ptr;
   static void set_fft();
+
+ public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();
@@ -457,8 +473,11 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+ private:
   static void *ntt_ptr;
   static void set_fft();
+
+ public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();

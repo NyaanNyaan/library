@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: fps/kitamasa.hpp
+# :warning: fps/utility.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa.hpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/fps/utility.hpp">View this file on GitHub</a>
     - Last commit date: 2020-07-29 23:13:06+09:00
 
 
@@ -41,62 +41,26 @@ layout: default
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
-## Verified with
-
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
-
-
 ## Code
 
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#pragma once
-#include <bits/stdc++.h>
-using namespace std;
-
-#include "formal-power-series.hpp"
+#include "./formal-power-series.hpp"
 
 template <typename mint>
-mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
-                            FormalPowerSeries<mint> P) {
-  Q.shrink();
-  mint ret = 0;
-  if (P.size() >= Q.size()) {
-    auto R = P / Q;
-    P -= R * Q;
-    if (N < (int)R.size()) ret += R[N];
+FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
+  using fps = FormalPowerSeries<mint>;
+  auto comp = [](fps &a, fps &b) { a.size() > b.size(); };
+  priority_queue<fps, vector<fps>, decltype(comp)> Q(comp);
+  while (Q.size() != 1) {
+    fps f1 = Q.top();
+    Q.pop();
+    fps f2 = Q.top();
+    Q.pop();
+    Q.push(f1 * f2);
   }
-  if ((int)P.size() == 0) return ret;
-  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1));
-  P.resize(k);
-  Q.resize(k);
-  while (N) {
-    auto Q2 = Q;
-    for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
-    auto S = P * Q2;
-    auto T = Q * Q2;
-    if (N & 1) {
-      for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    } else {
-      for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    }
-    N >>= 1;
-  }
-  return P[0];
-}
-
-template <typename mint>
-mint kitamasa(long long N, FormalPowerSeries<mint> Q,
-              FormalPowerSeries<mint> a) {
-  int k = Q.size() - 1;
-  assert((int)a.size() == k);
-  auto P = a * Q;
-  P.resize(Q.size() - 1);
-  return LinearRecursionFormula<mint>(N, Q, P);
+  return Q.top();
 }
 ```
 {% endraw %}
@@ -104,11 +68,8 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "fps/kitamasa.hpp"
+#line 2 "fps/formal-power-series.hpp"
 #include <bits/stdc++.h>
-using namespace std;
-
-#line 3 "fps/formal-power-series.hpp"
 using namespace std;
 
 template <typename mint>
@@ -252,47 +213,21 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 6 "fps/kitamasa.hpp"
+#line 2 "fps/utility.hpp"
 
 template <typename mint>
-mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
-                            FormalPowerSeries<mint> P) {
-  Q.shrink();
-  mint ret = 0;
-  if (P.size() >= Q.size()) {
-    auto R = P / Q;
-    P -= R * Q;
-    if (N < (int)R.size()) ret += R[N];
+FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
+  using fps = FormalPowerSeries<mint>;
+  auto comp = [](fps &a, fps &b) { a.size() > b.size(); };
+  priority_queue<fps, vector<fps>, decltype(comp)> Q(comp);
+  while (Q.size() != 1) {
+    fps f1 = Q.top();
+    Q.pop();
+    fps f2 = Q.top();
+    Q.pop();
+    Q.push(f1 * f2);
   }
-  if ((int)P.size() == 0) return ret;
-  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1));
-  P.resize(k);
-  Q.resize(k);
-  while (N) {
-    auto Q2 = Q;
-    for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
-    auto S = P * Q2;
-    auto T = Q * Q2;
-    if (N & 1) {
-      for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    } else {
-      for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    }
-    N >>= 1;
-  }
-  return P[0];
-}
-
-template <typename mint>
-mint kitamasa(long long N, FormalPowerSeries<mint> Q,
-              FormalPowerSeries<mint> a) {
-  int k = Q.size() - 1;
-  assert((int)a.size() == k);
-  auto P = a * Q;
-  P.resize(Q.size() - 1);
-  return LinearRecursionFormula<mint>(N, Q, P);
+  return Q.top();
 }
 
 ```
