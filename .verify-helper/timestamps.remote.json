@@ -54,5 +54,6 @@
 "verify-yosupo-other/yosupo-a-plus-b.test.cpp": "2020-07-28 11:29:32 +0900",
 "verify-yosupo-other/yosupo-number-of-substrings.test.cpp": "2020-07-28 11:29:32 +0900",
 "verify-yosupo-other/yosupo-suffix-array.test.cpp": "2020-07-28 11:29:32 +0900",
-"verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp": "2020-07-28 11:29:32 +0900"
+"verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp": "2020-07-28 11:29:32 +0900",
+"verify-yuki/yuki-helloworld.test.cpp": "2020-07-29 14:58:53 +0900"
 }
