@@ -57,13 +57,6 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::log(int deg) const {
-  assert((*this)[0] == mint(1));
-  if (deg == -1) deg = (int)this->size();
-  return (this->diff() * this->inv()).pre(deg - 1).integral();
-}
-
-template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   assert((*this)[0] == mint(0));
   if (deg == -1) deg = (int)this->size();
@@ -72,22 +65,4 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
     ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
   }
   return ret.pre(deg);
-}
-
-template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k, int deg) const {
-  const int n = (int)this->size();
-  if (deg == -1) deg = n;
-  for (int i = 0; i < n; i++) {
-    if ((*this)[i] != mint(0)) {
-      if (i * k > deg) return FormalPowerSeries<mint>(deg, mint(0));
-      mint rev = mint(1) / (*this)[i];
-      FormalPowerSeries<mint> ret =
-          (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
-      ret = (ret << (i * k)).pre(deg);
-      if ((int)ret.size() < deg) ret.resize(deg, mint(0));
-      return ret;
-    }
-  }
-  return *this;
 }
