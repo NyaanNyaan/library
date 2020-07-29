@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa-ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 14:54:39+09:00
+    - Last commit date: 2020-07-29 19:12:51+09:00
 
 
 
@@ -58,7 +58,6 @@ using namespace std;
 template <typename mint>
 mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
                             FormalPowerSeries<mint> P) {
-  NTT<mint> ntt;
   mint ret = 0;
 
   P.shrink();
@@ -74,54 +73,55 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
   int N = 1;
   while (N < (int)Q.size()) N <<= 1;
 
-  vector<mint> F(2 * N), G(2 * N);
-  for (int i = 0; i < (int)P.size(); i++) F[i] = P[i];
-  for (int i = 0; i < (int)Q.size(); i++) G[i] = Q[i];
-  ntt.ntt(F);
-  ntt.ntt(G);
+  P.resize(2 * N);
+  Q.resize(2 * N);
+  P.ntt();
+  Q.ntt();
   vector<mint> S(2 * N), T(2 * N);
 
   vector<int> btr(N);
   for (int i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {
     btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));
   }
-  mint dw = mint(ntt.pr).inverse().pow((mint::get_mod() - 1) / (2 * N));
+  mint dw = mint(FormalPowerSeries<mint>::ntt_pr())
+                .inverse()
+                .pow((mint::get_mod() - 1) / (2 * N));
 
   while (k) {
     mint inv2 = mint(2).inverse();
-    // even degree of G(x)G(-x)
+
+    // even degree of Q(x)Q(-x)
     T.resize(N);
-    for (int i = 0; i < N; i++) T[i] = G[(i << 1) | 0] * G[(i << 1) | 1];
+    for (int i = 0; i < N; i++) T[i] = Q[(i << 1) | 0] * Q[(i << 1) | 1];
 
     S.resize(N);
     if (k & 1) {
       // odd degree of P(x)Q(-x)
       for (auto &i : btr) {
-        S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] -
-                F[(i << 1) | 1] * G[(i << 1) | 0]) *
+        S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] -
+                P[(i << 1) | 1] * Q[(i << 1) | 0]) *
                inv2;
         inv2 *= dw;
       }
     } else {
       // even degree of P(x)Q(-x)
       for (int i = 0; i < N; i++) {
-        S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] +
-                F[(i << 1) | 1] * G[(i << 1) | 0]) *
+        S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +
+                P[(i << 1) | 1] * Q[(i << 1) | 0]) *
                inv2;
       }
     }
 
-    swap(F, S);
-    swap(G, T);
+    swap(P, S);
+    swap(Q, T);
     k >>= 1;
     if (k < N) break;
-    ntt.ntt_doubling(F);
-    ntt.ntt_doubling(G);
+    P.ntt_doubling();
+    Q.ntt_doubling();
   }
-  ntt.intt(F);
-  ntt.intt(G);
-  using fps = decltype(P);
-  return ret + (fps(begin(F), end(F)) * (fps(begin(G), end(G)).inv()))[k];
+  P.intt();
+  Q.intt();
+  return ret + (P * (Q.inv()))[k];
 }
 
 template <typename mint>
@@ -831,12 +831,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { 
-    *this -= *this / r * r; 
+  FPS &operator%=(const FPS &r) {
+    *this -= *this / r * r;
     shrink();
     return *this;
   }
-  
+
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
@@ -905,16 +905,23 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+  static void *ntt_ptr;
+  static void set_fft();
   FPS &operator*=(const FPS &r);
-  FPS ntt() const;
-  FPS intt() const;
+  void ntt();
+  void intt();
+  void ntt_doubling();
+  static int ntt_pr();
   FPS inv(int deg = -1) const;
   FPS log(int deg = -1) const;
   FPS exp(int deg = -1) const;
   FPS pow(int64_t k, int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
+  // pair<FPS, FPS> circular(int deg = -1) const;
+  // FPS shift(mint a, int deg = -1) const;
 };
-
+template <typename mint>
+void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 /**
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
@@ -924,7 +931,6 @@ struct FormalPowerSeries : vector<mint> {
 template <typename mint>
 mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
                             FormalPowerSeries<mint> P) {
-  NTT<mint> ntt;
   mint ret = 0;
 
   P.shrink();
@@ -940,54 +946,55 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
   int N = 1;
   while (N < (int)Q.size()) N <<= 1;
 
-  vector<mint> F(2 * N), G(2 * N);
-  for (int i = 0; i < (int)P.size(); i++) F[i] = P[i];
-  for (int i = 0; i < (int)Q.size(); i++) G[i] = Q[i];
-  ntt.ntt(F);
-  ntt.ntt(G);
+  P.resize(2 * N);
+  Q.resize(2 * N);
+  P.ntt();
+  Q.ntt();
   vector<mint> S(2 * N), T(2 * N);
 
   vector<int> btr(N);
   for (int i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {
     btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));
   }
-  mint dw = mint(ntt.pr).inverse().pow((mint::get_mod() - 1) / (2 * N));
+  mint dw = mint(FormalPowerSeries<mint>::ntt_pr())
+                .inverse()
+                .pow((mint::get_mod() - 1) / (2 * N));
 
   while (k) {
     mint inv2 = mint(2).inverse();
-    // even degree of G(x)G(-x)
+
+    // even degree of Q(x)Q(-x)
     T.resize(N);
-    for (int i = 0; i < N; i++) T[i] = G[(i << 1) | 0] * G[(i << 1) | 1];
+    for (int i = 0; i < N; i++) T[i] = Q[(i << 1) | 0] * Q[(i << 1) | 1];
 
     S.resize(N);
     if (k & 1) {
       // odd degree of P(x)Q(-x)
       for (auto &i : btr) {
-        S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] -
-                F[(i << 1) | 1] * G[(i << 1) | 0]) *
+        S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] -
+                P[(i << 1) | 1] * Q[(i << 1) | 0]) *
                inv2;
         inv2 *= dw;
       }
     } else {
       // even degree of P(x)Q(-x)
       for (int i = 0; i < N; i++) {
-        S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] +
-                F[(i << 1) | 1] * G[(i << 1) | 0]) *
+        S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +
+                P[(i << 1) | 1] * Q[(i << 1) | 0]) *
                inv2;
       }
     }
 
-    swap(F, S);
-    swap(G, T);
+    swap(P, S);
+    swap(Q, T);
     k >>= 1;
     if (k < N) break;
-    ntt.ntt_doubling(F);
-    ntt.ntt_doubling(G);
+    P.ntt_doubling();
+    Q.ntt_doubling();
   }
-  ntt.intt(F);
-  ntt.intt(G);
-  using fps = decltype(P);
-  return ret + (fps(begin(F), end(F)) * (fps(begin(G), end(G)).inv()))[k];
+  P.intt();
+  Q.intt();
+  return ret + (P * (Q.inv()))[k];
 }
 
 template <typename mint>

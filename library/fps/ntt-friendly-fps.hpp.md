@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/ntt-friendly-fps.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 04:39:16+09:00
+    - Last commit date: 2020-07-29 19:12:51+09:00
 
 
 
@@ -56,32 +56,44 @@ using namespace std;
 #include "./formal-power-series.hpp"
 
 template <typename mint>
+void FormalPowerSeries<mint>::set_fft() {
+  if (!ntt_ptr) ntt_ptr = new NTT<mint>;
+}
+
+template <typename mint>
 FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
     const FormalPowerSeries<mint>& r) {
   if (this->empty() || r.empty()) {
     this->clear();
     return *this;
   }
-  static NTT<mint> ntt;
-  static_assert(ntt.level >= 20);
-  auto ret = ntt.multiply(*this, r);
+  set_fft();
+  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this, r);
   return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::ntt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.ntt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+void FormalPowerSeries<mint>::ntt() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::intt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.intt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+void FormalPowerSeries<mint>::intt() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt_doubling() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);
+}
+
+template <typename mint>
+int FormalPowerSeries<mint>::ntt_pr() {
+  set_fft();
+  return static_cast<NTT<mint>*>(ntt_ptr)->pr;
 }
 
 template <typename mint>
@@ -113,8 +125,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
-                                                     int deg) const {
+FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k, int deg) const {
   const int n = (int)this->size();
   if (deg == -1) deg = n;
   for (int i = 0; i < n; i++) {
@@ -828,12 +839,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { 
-    *this -= *this / r * r; 
+  FPS &operator%=(const FPS &r) {
+    *this -= *this / r * r;
     shrink();
     return *this;
   }
-  
+
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
@@ -902,21 +913,33 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+  static void *ntt_ptr;
+  static void set_fft();
   FPS &operator*=(const FPS &r);
-  FPS ntt() const;
-  FPS intt() const;
+  void ntt();
+  void intt();
+  void ntt_doubling();
+  static int ntt_pr();
   FPS inv(int deg = -1) const;
   FPS log(int deg = -1) const;
   FPS exp(int deg = -1) const;
   FPS pow(int64_t k, int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
+  // pair<FPS, FPS> circular(int deg = -1) const;
+  // FPS shift(mint a, int deg = -1) const;
 };
-
+template <typename mint>
+void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 /**
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
 #line 7 "fps/ntt-friendly-fps.hpp"
+
+template <typename mint>
+void FormalPowerSeries<mint>::set_fft() {
+  if (!ntt_ptr) ntt_ptr = new NTT<mint>;
+}
 
 template <typename mint>
 FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
@@ -925,26 +948,33 @@ FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
     this->clear();
     return *this;
   }
-  static NTT<mint> ntt;
-  static_assert(ntt.level >= 20);
-  auto ret = ntt.multiply(*this, r);
+  set_fft();
+  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this, r);
   return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::ntt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.ntt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+void FormalPowerSeries<mint>::ntt() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::intt() const {
-  static NTT<mint> ntt;
-  vector<mint> ret(this->begin(), this->end());
-  ntt.intt(ret);
-  return FormalPowerSeries<mint>(ret.begin(), ret.end());
+void FormalPowerSeries<mint>::intt() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt_doubling() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);
+}
+
+template <typename mint>
+int FormalPowerSeries<mint>::ntt_pr() {
+  set_fft();
+  return static_cast<NTT<mint>*>(ntt_ptr)->pr;
 }
 
 template <typename mint>
@@ -976,8 +1006,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k,
-                                                     int deg) const {
+FormalPowerSeries<mint> FormalPowerSeries<mint>::pow(int64_t k, int deg) const {
   const int n = (int)this->size();
   if (deg == -1) deg = n;
   for (int i = 0; i < n; i++) {

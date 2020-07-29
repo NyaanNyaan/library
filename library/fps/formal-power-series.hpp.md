@@ -31,18 +31,23 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/formal-power-series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 04:39:16+09:00
+    - Last commit date: 2020-07-29 19:12:51+09:00
 
 
 
 
 # 形式的冪級数
-## docsのテスト投稿です！！！
-多項式/形式的冪級数の基本操作をライブラリ化したもの。作りかけ
+多項式/形式的冪級数の基本操作を行うライブラリ。
 
-実装はうしさんのライブラリを大きく参考にしました。感謝…
+次の3つのファイルから成り、modが$998244353$の時は1番目と2番目を、$1e9+7$の時は1番目と3番目をincludeして使用する。
 
-TODO: ライブラリの設計の見直し
+- `formal-power-series.hpp` $\cdots$ 共通部分のみ実装したもの。
+- `ntt-friendly-fps.hpp` $\cdots$ NTT素数mod用の高速な実装を行ったもの。
+- `arbitrary-fps.hpp` $\cdots$ 任意mod畳み込み用の実装を行ったもの。
+
+実装の一部はうしさんのライブラリを大きく参考にしました。感謝…
+
+TODO: 実装していない関数の実装
 
 TODO: invやexpはNTT$\cdot$INTTを利用した高速化があるので実装する
 
@@ -230,12 +235,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { 
-    *this -= *this / r * r; 
+  FPS &operator%=(const FPS &r) {
+    *this -= *this / r * r;
     shrink();
     return *this;
   }
-  
+
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
@@ -304,16 +309,23 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+  static void *ntt_ptr;
+  static void set_fft();
   FPS &operator*=(const FPS &r);
-  FPS ntt() const;
-  FPS intt() const;
+  void ntt();
+  void intt();
+  void ntt_doubling();
+  static int ntt_pr();
   FPS inv(int deg = -1) const;
   FPS log(int deg = -1) const;
   FPS exp(int deg = -1) const;
   FPS pow(int64_t k, int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
+  // pair<FPS, FPS> circular(int deg = -1) const;
+  // FPS shift(mint a, int deg = -1) const;
 };
-
+template <typename mint>
+void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 /**
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
@@ -371,12 +383,12 @@ struct FormalPowerSeries : vector<mint> {
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
-  FPS &operator%=(const FPS &r) { 
-    *this -= *this / r * r; 
+  FPS &operator%=(const FPS &r) {
+    *this -= *this / r * r;
     shrink();
     return *this;
   }
-  
+
   FPS operator+(const FPS &r) const { return FPS(*this) += r; }
   FPS operator+(const mint &v) const { return FPS(*this) += v; }
   FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
@@ -445,16 +457,23 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+  static void *ntt_ptr;
+  static void set_fft();
   FPS &operator*=(const FPS &r);
-  FPS ntt() const;
-  FPS intt() const;
+  void ntt();
+  void intt();
+  void ntt_doubling();
+  static int ntt_pr();
   FPS inv(int deg = -1) const;
   FPS log(int deg = -1) const;
   FPS exp(int deg = -1) const;
   FPS pow(int64_t k, int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
+  // pair<FPS, FPS> circular(int deg = -1) const;
+  // FPS shift(mint a, int deg = -1) const;
 };
-
+template <typename mint>
+void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 /**
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
