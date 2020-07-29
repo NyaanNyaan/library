@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/utility.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 23:13:06+09:00
+    - Last commit date: 2020-07-29 23:52:38+09:00
 
 
 
@@ -62,6 +62,7 @@ FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
   }
   return Q.top();
 }
+
 ```
 {% endraw %}
 
@@ -189,6 +190,28 @@ struct FormalPowerSeries : vector<mint> {
     return r;
   }
 
+  FPS log(int deg = -1) const {
+    assert((*this)[0] == mint(1));
+    if (deg == -1) deg = (int)this->size();
+    return (this->diff() * this->inv(deg)).pre(deg - 1).integral();
+  }
+
+  FPS pow(int64_t k, int deg = -1) const {
+    const int n = (int)this->size();
+    if (deg == -1) deg = n;
+    for (int i = 0; i < n; i++) {
+      if ((*this)[i] != mint(0)) {
+        if (i * k > deg) return FPS(deg, mint(0));
+        mint rev = mint(1) / (*this)[i];
+        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
+        ret = (ret << (i * k)).pre(deg);
+        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
+        return ret;
+      }
+    }
+    return FPS(deg, mint(0));
+  }
+
  private:
   static void *ntt_ptr;
   static void set_fft();
@@ -200,15 +223,14 @@ struct FormalPowerSeries : vector<mint> {
   void ntt_doubling();
   static int ntt_pr();
   FPS inv(int deg = -1) const;
-  FPS log(int deg = -1) const;
   FPS exp(int deg = -1) const;
-  FPS pow(int64_t k, int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
   // pair<FPS, FPS> circular(int deg = -1) const;
   // FPS shift(mint a, int deg = -1) const;
 };
 template <typename mint>
 void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
+
 /**
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
