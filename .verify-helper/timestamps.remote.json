@@ -39,6 +39,7 @@
 "verify-aoj-ntl/aoj-ntl-1-c.test.cpp": "2020-07-28 11:29:32 +0900",
 "verify-aoj-ntl/aoj-ntl-1-d.test.cpp": "2020-07-28 11:29:32 +0900",
 "verify-aoj-ntl/aoj-ntl-1-e.test.cpp": "2020-07-28 11:29:32 +0900",
+"verify-yosupo-ds/yosupo-lazysegtree.test.cpp": "2020-07-30 03:11:31 +0900",
 "verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp": "2020-07-28 11:29:32 +0900",
 "verify-yosupo-ds/yosupo-rectangle-sum.test.cpp": "2020-07-28 11:29:32 +0900",
 "verify-yosupo-ds/yosupo-static-rmq.test.cpp": "2020-07-28 11:29:32 +0900",
