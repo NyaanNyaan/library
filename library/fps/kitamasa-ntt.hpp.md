@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: fps/kitamasa-ntt.hpp
+# :warning: 線形漸化式の高速計算 <small>(fps/kitamasa-ntt.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa-ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 23:52:38+09:00
+    - Last commit date: 2020-07-30 00:10:07+09:00
 
 
 
@@ -133,6 +133,11 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }
+
+/**
+ * @brief 線形漸化式の高速計算
+ * @docs docs/kitamasa-ntt.md
+ */
 
 ```
 {% endraw %}
@@ -1031,6 +1036,11 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }
+
+/**
+ * @brief 線形漸化式の高速計算
+ * @docs docs/kitamasa-ntt.md
+ */
 
 ```
 {% endraw %}

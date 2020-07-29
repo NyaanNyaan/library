@@ -184,7 +184,7 @@ $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 ## Required by
 
 * :heavy_check_mark: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :warning: <a href="kitamasa-ntt.hpp.html">fps/kitamasa-ntt.hpp</a>
+* :warning: <a href="kitamasa-ntt.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa-ntt.hpp)</small></a>
 * :heavy_check_mark: <a href="kitamasa.hpp.html">fps/kitamasa.hpp</a>
 * :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :warning: <a href="utility.hpp.html">fps/utility.hpp</a>
