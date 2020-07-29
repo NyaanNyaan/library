@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa-ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 04:39:16+09:00
+    - Last commit date: 2020-07-29 14:54:39+09:00
 
 
 
@@ -89,13 +89,13 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
 
   while (k) {
     mint inv2 = mint(2).inverse();
-    // G(x)G(-x)の偶数次
+    // even degree of G(x)G(-x)
     T.resize(N);
     for (int i = 0; i < N; i++) T[i] = G[(i << 1) | 0] * G[(i << 1) | 1];
 
     S.resize(N);
     if (k & 1) {
-      // P(x)Q(-x)の奇数次
+      // odd degree of P(x)Q(-x)
       for (auto &i : btr) {
         S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] -
                 F[(i << 1) | 1] * G[(i << 1) | 0]) *
@@ -103,7 +103,7 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
         inv2 *= dw;
       }
     } else {
-      // P(x)Q(-x)の偶数次
+      // even degree of P(x)Q(-x)
       for (int i = 0; i < N; i++) {
         S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] +
                 F[(i << 1) | 1] * G[(i << 1) | 0]) *
@@ -113,15 +113,15 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
 
     swap(F, S);
     swap(G, T);
+    k >>= 1;
+    if (k < N) break;
     ntt.ntt_doubling(F);
     ntt.ntt_doubling(G);
-    k >>= 1;
   }
-
-  mint f0 = 0;
-  for (auto Fi : F) f0 += Fi;
-  f0 *= mint((int)F.size()).inverse();
-  return ret + f0;
+  ntt.intt(F);
+  ntt.intt(G);
+  using fps = decltype(P);
+  return ret + (fps(begin(F), end(F)) * (fps(begin(G), end(G)).inv()))[k];
 }
 
 template <typename mint>
@@ -955,13 +955,13 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
 
   while (k) {
     mint inv2 = mint(2).inverse();
-    // G(x)G(-x)の偶数次
+    // even degree of G(x)G(-x)
     T.resize(N);
     for (int i = 0; i < N; i++) T[i] = G[(i << 1) | 0] * G[(i << 1) | 1];
 
     S.resize(N);
     if (k & 1) {
-      // P(x)Q(-x)の奇数次
+      // odd degree of P(x)Q(-x)
       for (auto &i : btr) {
         S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] -
                 F[(i << 1) | 1] * G[(i << 1) | 0]) *
@@ -969,7 +969,7 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
         inv2 *= dw;
       }
     } else {
-      // P(x)Q(-x)の偶数次
+      // even degree of P(x)Q(-x)
       for (int i = 0; i < N; i++) {
         S[i] = (F[(i << 1) | 0] * G[(i << 1) | 1] +
                 F[(i << 1) | 1] * G[(i << 1) | 0]) *
@@ -979,15 +979,15 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
 
     swap(F, S);
     swap(G, T);
+    k >>= 1;
+    if (k < N) break;
     ntt.ntt_doubling(F);
     ntt.ntt_doubling(G);
-    k >>= 1;
   }
-
-  mint f0 = 0;
-  for (auto Fi : F) f0 += Fi;
-  f0 *= mint((int)F.size()).inverse();
-  return ret + f0;
+  ntt.intt(F);
+  ntt.intt(G);
+  using fps = decltype(P);
+  return ret + (fps(begin(F), end(F)) * (fps(begin(G), end(G)).inv()))[k];
 }
 
 template <typename mint>
