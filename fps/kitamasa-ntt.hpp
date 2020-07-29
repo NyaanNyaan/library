@@ -83,3 +83,8 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }
+
+/**
+ * @brief 線形漸化式の高速計算
+ * @docs docs/kitamasa-ntt.md
+ */
