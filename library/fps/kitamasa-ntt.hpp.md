@@ -31,9 +31,26 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa-ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-30 00:10:07+09:00
+    - Last commit date: 2020-07-30 00:18:18+09:00
 
 
+
+
+# 線形漸化式の第$N$項を高速に求めるライブラリ
+
+$k$項間漸化式
+$$a_n = c_1a_{n-1}+c_2a_{n-2} \ldots + c_ka_{n-k}$$
+の第$N$項は
+$$Q(x)=1-c_1x-c_2x^2-\ldots -c_kx^k$$
+$$P(x)=Q(x)(a_0+a_1x+a_2x^2+\ldots) \mod x^k$$
+と置いたとき
+$$a_N = [x^N]\frac{P(x)}{Q(x)}$$
+になり、これは[リンク先のアルゴリズム](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html)を使って$\mathrm{O}(N \log k \log N)$で計算できる。
+さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さ|Q|の畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。
+
+verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \log k \log N), N=200000,k=10^{18}$
+- [ナイーブな実装](https://atcoder.jp/contests/s8pc-3/submissions/15526069) 1846ms
+- [高速化した場合](https://atcoder.jp/contests/s8pc-3/submissions/15520531) 631ms
 
 
 ## Depends on
@@ -136,7 +153,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
 
 /**
  * @brief 線形漸化式の高速計算
- * @docs docs/kitamasa-ntt.md
+ * @docs docs/linear-recursive.md
  */
 
 ```
@@ -1039,7 +1056,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
 
 /**
  * @brief 線形漸化式の高速計算
- * @docs docs/kitamasa-ntt.md
+ * @docs docs/linear-recursive.md
  */
 
 ```
