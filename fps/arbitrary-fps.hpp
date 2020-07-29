@@ -17,16 +17,6 @@ FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
 }
 
 template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::ntt() const {
-  exit(1);
-}
-
-template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::intt() const {
-  exit(1);
-}
-
-template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
   if (deg == -1) deg = (*this).size();
