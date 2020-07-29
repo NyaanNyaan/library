@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify-yuki/yuki-helloworld.test.cpp
+# :heavy_check_mark: verify-yuki/yuki-helloworld.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#ea921838279ab5a0e84be169b8c4269e">verify-yuki</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yuki/yuki-helloworld.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 14:54:39+09:00
+    - Last commit date: 2020-07-29 14:58:53+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/no/9000">https://yukicoder.me/problems/no/9000</a>
@@ -46,9 +46,7 @@ layout: default
 
 #include <bits/stdc++.h>
 using namespace std;
-void solve() { 
-  cout << "Hello World!" << endl;
-}
+int main() { cout << "Hello World!" << endl; }
 
 ```
 {% endraw %}
@@ -61,9 +59,7 @@ void solve() {
 
 #include <bits/stdc++.h>
 using namespace std;
-void solve() { 
-  cout << "Hello World!" << endl;
-}
+int main() { cout << "Hello World!" << endl; }
 
 ```
 {% endraw %}

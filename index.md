@@ -254,6 +254,6 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
-* :x: <a href="verify/verify-yuki/yuki-helloworld.test.cpp.html">verify-yuki/yuki-helloworld.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yuki/yuki-helloworld.test.cpp.html">verify-yuki/yuki-helloworld.test.cpp</a>
 
 
