@@ -12,12 +12,14 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
   if (P.size() >= Q.size()) {
     auto R = P / Q;
     P -= R * Q;
+    P.shrink();
     if (k < (int)R.size()) ret += R[k];
   }
   if ((int)P.size() == 0) return ret;
 
   FormalPowerSeries<mint>::set_fft();
   if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {
+    P.resize((int)Q.size() - 1);
     while (k) {
       auto Q2 = Q;
       for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
