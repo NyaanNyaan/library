@@ -64,6 +64,7 @@ layout: default
 ### fps
 
 * :heavy_check_mark: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">fps/differential-equation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :warning: <a href="library/fps/kitamasa-ntt.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa-ntt.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">fps/kitamasa.hpp</a>
@@ -276,6 +277,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-helloworld.test.cpp.html">verify-yuki/yuki-helloworld.test.cpp</a>
 
 
