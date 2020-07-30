@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: math/binomial.hpp
+# :warning: modulo/binomial.hpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
-* <a href="{{ site.github.repository_url }}/blob/master/math/binomial.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 04:39:16+09:00
+* category: <a href="../../index.html#5dcb4a1ea5a35da52691d50c8313c333">modulo</a>
+* <a href="{{ site.github.repository_url }}/blob/master/modulo/binomial.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-30 19:30:32+09:00
 
 
 
@@ -86,13 +86,14 @@ struct Binomial {
     return r == 0 ? 1 : C(n + r - 1, r);
   }
 };
+
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "math/binomial.hpp"
+#line 2 "modulo/binomial.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 

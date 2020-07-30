@@ -95,7 +95,6 @@ layout: default
 
 ### math
 
-* :warning: <a href="library/math/binomial.hpp.html">math/binomial.hpp</a>
 * :warning: <a href="library/math/divisor-multiple-transform.hpp.html">math/divisor-multiple-transform.hpp</a>
 * :heavy_check_mark: <a href="library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
 * :warning: <a href="library/math/f2.hpp.html">math/f2.hpp</a>
@@ -128,6 +127,14 @@ layout: default
 * :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+
+
+<div id="5dcb4a1ea5a35da52691d50c8313c333"></div>
+
+### modulo
+
+* :warning: <a href="library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :heavy_check_mark: <a href="library/modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
 
 
 <div id="ccb3669c87b2d028539237c4554e3c0f"></div>
@@ -253,6 +260,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify-yosupo-math/yosupo-determinant.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>

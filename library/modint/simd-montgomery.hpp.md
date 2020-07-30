@@ -41,6 +41,7 @@ layout: default
 * :heavy_check_mark: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :warning: <a href="../fps/kitamasa-ntt.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa-ntt.hpp)</small></a>
 * :heavy_check_mark: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="../modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
 * :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
@@ -56,6 +57,9 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify-yosupo-fps/yosupo-log.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify-yosupo-math/yosupo-determinant.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
