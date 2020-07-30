@@ -25,31 +25,31 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: fps/ntt-friendly-fps.hpp
+# :question: fps/ntt-friendly-fps.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/ntt-friendly-fps.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 23:52:38+09:00
+    - Last commit date: 2020-07-31 01:45:48+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify-yosupo-fps/yosupo-exp.test.cpp</a>
+* :x: <a href="../../verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify-yosupo-fps/yosupo-exp.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify-yosupo-fps/yosupo-inv.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify-yosupo-fps/yosupo-log.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :x: <a href="../../verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
+* :x: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
 
 
 ## Code
@@ -109,10 +109,23 @@ template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
   if (deg == -1) deg = (*this).size();
-  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
-  for (int i = 1; i < deg; i <<= 1)
-    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
-  return ret.pre(deg);
+  FormalPowerSeries<mint> res(deg);
+  res[0] = {mint(1) / (*this)[0]};
+  for (int d = 1; d < deg; d <<= 1) {
+    FormalPowerSeries<mint> f(2 * d), g(2 * d);
+    for (int j = 0; j < min(deg, 2 * d); j++) f[j] = (*this)[j];
+    for (int j = 0; j < d; j++) g[j] = res[j];
+    f.ntt();
+    g.ntt();
+    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
+    f.intt();
+    for (int j = 0; j < d; j++) f[j] = 0;
+    f.ntt();
+    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
+    f.intt();
+    for (int j = d; j < min(2 * d, deg); j++) res[j] = -f[j];
+  }
+  return res.pre(deg);
 }
 
 template <typename mint>
@@ -990,10 +1003,23 @@ template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
   if (deg == -1) deg = (*this).size();
-  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
-  for (int i = 1; i < deg; i <<= 1)
-    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
-  return ret.pre(deg);
+  FormalPowerSeries<mint> res(deg);
+  res[0] = {mint(1) / (*this)[0]};
+  for (int d = 1; d < deg; d <<= 1) {
+    FormalPowerSeries<mint> f(2 * d), g(2 * d);
+    for (int j = 0; j < min(deg, 2 * d); j++) f[j] = (*this)[j];
+    for (int j = 0; j < d; j++) g[j] = res[j];
+    f.ntt();
+    g.ntt();
+    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
+    f.intt();
+    for (int j = 0; j < d; j++) f[j] = 0;
+    f.ntt();
+    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
+    f.intt();
+    for (int j = d; j < min(2 * d, deg); j++) res[j] = -f[j];
+  }
+  return res.pre(deg);
 }
 
 template <typename mint>

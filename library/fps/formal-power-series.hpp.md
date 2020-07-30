@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
+# :question: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -184,26 +184,26 @@ $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 ## Required by
 
 * :heavy_check_mark: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :heavy_check_mark: <a href="differential-equation.hpp.html">fps/differential-equation.hpp</a>
+* :x: <a href="differential-equation.hpp.html">fps/differential-equation.hpp</a>
 * :warning: <a href="kitamasa-ntt.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa-ntt.hpp)</small></a>
 * :heavy_check_mark: <a href="kitamasa.hpp.html">fps/kitamasa.hpp</a>
-* :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :warning: <a href="utility.hpp.html">fps/utility.hpp</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp.html">verify-yosupo-fps/yosupo-exp-arb.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify-yosupo-fps/yosupo-exp.test.cpp</a>
+* :x: <a href="../../verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify-yosupo-fps/yosupo-exp.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify-yosupo-fps/yosupo-inv.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-log-arb.test.cpp.html">verify-yosupo-fps/yosupo-log-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify-yosupo-fps/yosupo-log.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
+* :x: <a href="../../verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :x: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
 
 
 ## Code

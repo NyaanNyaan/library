@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a29759ffc363d806c691dcb19e6bc303">verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-fps/yosupo-log.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 23:52:38+09:00
+    - Last commit date: 2020-07-31 01:45:48+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/log_of_formal_power_series">https://judge.yosupo.jp/problem/log_of_formal_power_series</a>
@@ -39,12 +39,12 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -1326,10 +1326,23 @@ template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
   if (deg == -1) deg = (*this).size();
-  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
-  for (int i = 1; i < deg; i <<= 1)
-    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
-  return ret.pre(deg);
+  FormalPowerSeries<mint> res(deg);
+  res[0] = {mint(1) / (*this)[0]};
+  for (int d = 1; d < deg; d <<= 1) {
+    FormalPowerSeries<mint> f(2 * d), g(2 * d);
+    for (int j = 0; j < min(deg, 2 * d); j++) f[j] = (*this)[j];
+    for (int j = 0; j < d; j++) g[j] = res[j];
+    f.ntt();
+    g.ntt();
+    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
+    f.intt();
+    for (int j = 0; j < d; j++) f[j] = 0;
+    f.ntt();
+    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
+    f.intt();
+    for (int j = d; j < min(2 * d, deg); j++) res[j] = -f[j];
+  }
+  return res.pre(deg);
 }
 
 template <typename mint>
