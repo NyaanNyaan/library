@@ -69,5 +69,6 @@
 "verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp": "2020-07-28 11:29:32 +0900",
 "verify-yuki/yuki-0214.test.cpp": "2020-07-29 23:52:38 +0900",
 "verify-yuki/yuki-0215.test.cpp": "2020-07-29 23:52:38 +0900",
+"verify-yuki/yuki-0963.test.cpp": "2020-07-31 01:19:37 +0900",
 "verify-yuki/yuki-helloworld.test.cpp": "2020-07-29 14:58:53 +0900"
 }
