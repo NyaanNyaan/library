@@ -49,12 +49,12 @@ int FormalPowerSeries<mint>::ntt_pr() {
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
-  if (deg == -1) deg = (*this).size();
+  if (deg == -1) deg = (int)this->size();
   FormalPowerSeries<mint> res(deg);
   res[0] = {mint(1) / (*this)[0]};
   for (int d = 1; d < deg; d <<= 1) {
     FormalPowerSeries<mint> f(2 * d), g(2 * d);
-    for (int j = 0; j < min(deg, 2 * d); j++) f[j] = (*this)[j];
+    for (int j = 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];
     for (int j = 0; j < d; j++) g[j] = res[j];
     f.ntt();
     g.ntt();

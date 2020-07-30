@@ -6,6 +6,31 @@ using namespace std;
 #include "./formal-power-series.hpp"
 
 template <typename mint>
+void FormalPowerSeries<mint>::set_fft() {
+  ntt_ptr = nullptr;
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt() {
+  exit(1);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::intt() {
+  exit(1);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt_doubling() {
+  exit(1);
+}
+
+template <typename mint>
+int FormalPowerSeries<mint>::ntt_pr() {
+  exit(1);
+}
+
+template <typename mint>
 FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
     const FormalPowerSeries<mint>& r) {
   if (this->empty() || r.empty()) {

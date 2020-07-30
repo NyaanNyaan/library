@@ -141,11 +141,8 @@ struct FormalPowerSeries : vector<mint> {
     return FPS(deg, mint(0));
   }
 
- private:
   static void *ntt_ptr;
   static void set_fft();
-
- public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();
@@ -154,7 +151,7 @@ struct FormalPowerSeries : vector<mint> {
   FPS inv(int deg = -1) const;
   FPS exp(int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
-  // pair<FPS, FPS> circular(int deg = -1) const;
+  pair<FPS, FPS> circular(int deg = -1) const;
   // FPS shift(mint a, int deg = -1) const;
 };
 template <typename mint>
