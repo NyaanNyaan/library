@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 03:05:14+09:00
+    - Last commit date: 2020-07-31 03:21:12+09:00
 
 
 
@@ -91,12 +91,14 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
   if (P.size() >= Q.size()) {
     auto R = P / Q;
     P -= R * Q;
+    P.shrink();
     if (k < (int)R.size()) ret += R[k];
   }
   if ((int)P.size() == 0) return ret;
 
   FormalPowerSeries<mint>::set_fft();
   if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {
+    P.resize((int)Q.size() - 1);
     while (k) {
       auto Q2 = Q;
       for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
@@ -364,12 +366,14 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
   if (P.size() >= Q.size()) {
     auto R = P / Q;
     P -= R * Q;
+    P.shrink();
     if (k < (int)R.size()) ret += R[k];
   }
   if ((int)P.size() == 0) return ret;
 
   FormalPowerSeries<mint>::set_fft();
   if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {
+    P.resize((int)Q.size() - 1);
     while (k) {
       auto Q2 = Q;
       for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
