@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: fps/differential-equation.hpp
+# :heavy_check_mark: fps/differential-equation.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/differential-equation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 01:19:37+09:00
+    - Last commit date: 2020-07-31 03:05:14+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
 
 
 ## Code
@@ -218,11 +218,8 @@ struct FormalPowerSeries : vector<mint> {
     return FPS(deg, mint(0));
   }
 
- private:
   static void *ntt_ptr;
   static void set_fft();
-
- public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();
@@ -231,7 +228,7 @@ struct FormalPowerSeries : vector<mint> {
   FPS inv(int deg = -1) const;
   FPS exp(int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
-  // pair<FPS, FPS> circular(int deg = -1) const;
+  pair<FPS, FPS> circular(int deg = -1) const;
   // FPS shift(mint a, int deg = -1) const;
 };
 template <typename mint>

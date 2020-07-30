@@ -31,18 +31,18 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/arbitrary-fps.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 23:52:38+09:00
+    - Last commit date: 2020-07-31 03:05:14+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :question: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Verified with
@@ -66,6 +66,31 @@ using namespace std;
 
 #include "../ntt/arbitrary-ntt.hpp"
 #include "./formal-power-series.hpp"
+
+template <typename mint>
+void FormalPowerSeries<mint>::set_fft() {
+  ntt_ptr = nullptr;
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt() {
+  exit(1);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::intt() {
+  exit(1);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt_doubling() {
+  exit(1);
+}
+
+template <typename mint>
+int FormalPowerSeries<mint>::ntt_pr() {
+  exit(1);
+}
 
 template <typename mint>
 FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
@@ -1086,11 +1111,8 @@ struct FormalPowerSeries : vector<mint> {
     return FPS(deg, mint(0));
   }
 
- private:
   static void *ntt_ptr;
   static void set_fft();
-
- public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();
@@ -1099,7 +1121,7 @@ struct FormalPowerSeries : vector<mint> {
   FPS inv(int deg = -1) const;
   FPS exp(int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
-  // pair<FPS, FPS> circular(int deg = -1) const;
+  pair<FPS, FPS> circular(int deg = -1) const;
   // FPS shift(mint a, int deg = -1) const;
 };
 template <typename mint>
@@ -1110,6 +1132,31 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @docs docs/formal-power-series.md
  */
 #line 7 "fps/arbitrary-fps.hpp"
+
+template <typename mint>
+void FormalPowerSeries<mint>::set_fft() {
+  ntt_ptr = nullptr;
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt() {
+  exit(1);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::intt() {
+  exit(1);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt_doubling() {
+  exit(1);
+}
+
+template <typename mint>
+int FormalPowerSeries<mint>::ntt_pr() {
+  exit(1);
+}
 
 template <typename mint>
 FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(

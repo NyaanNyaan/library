@@ -25,31 +25,31 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: fps/ntt-friendly-fps.hpp
+# :heavy_check_mark: fps/ntt-friendly-fps.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/ntt-friendly-fps.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 01:45:48+09:00
+    - Last commit date: 2020-07-31 03:05:14+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :question: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify-yosupo-fps/yosupo-exp.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify-yosupo-fps/yosupo-exp.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify-yosupo-fps/yosupo-inv.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify-yosupo-fps/yosupo-log.test.cpp</a>
-* :x: <a href="../../verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
-* :x: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
 
 
 ## Code
@@ -108,12 +108,12 @@ int FormalPowerSeries<mint>::ntt_pr() {
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
-  if (deg == -1) deg = (*this).size();
+  if (deg == -1) deg = (int)this->size();
   FormalPowerSeries<mint> res(deg);
   res[0] = {mint(1) / (*this)[0]};
   for (int d = 1; d < deg; d <<= 1) {
     FormalPowerSeries<mint> f(2 * d), g(2 * d);
-    for (int j = 0; j < min(deg, 2 * d); j++) f[j] = (*this)[j];
+    for (int j = 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];
     for (int j = 0; j < d; j++) g[j] = res[j];
     f.ntt();
     g.ntt();
@@ -933,11 +933,8 @@ struct FormalPowerSeries : vector<mint> {
     return FPS(deg, mint(0));
   }
 
- private:
   static void *ntt_ptr;
   static void set_fft();
-
- public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();
@@ -946,7 +943,7 @@ struct FormalPowerSeries : vector<mint> {
   FPS inv(int deg = -1) const;
   FPS exp(int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
-  // pair<FPS, FPS> circular(int deg = -1) const;
+  pair<FPS, FPS> circular(int deg = -1) const;
   // FPS shift(mint a, int deg = -1) const;
 };
 template <typename mint>
@@ -1002,12 +999,12 @@ int FormalPowerSeries<mint>::ntt_pr() {
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
-  if (deg == -1) deg = (*this).size();
+  if (deg == -1) deg = (int)this->size();
   FormalPowerSeries<mint> res(deg);
   res[0] = {mint(1) / (*this)[0]};
   for (int d = 1; d < deg; d <<= 1) {
     FormalPowerSeries<mint> f(2 * d), g(2 * d);
-    for (int j = 0; j < min(deg, 2 * d); j++) f[j] = (*this)[j];
+    for (int j = 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];
     for (int j = 0; j < d; j++) g[j] = res[j];
     f.ntt();
     g.ntt();

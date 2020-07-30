@@ -25,20 +25,45 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: fps/kitamasa.hpp
+# :heavy_check_mark: 線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 23:52:38+09:00
+    - Last commit date: 2020-07-31 03:05:14+09:00
 
 
+
+
+# 線形漸化式の第$N$項を高速に求めるライブラリ
+
+$k$項間漸化式
+
+$$a_n = c_1a_{n-1}+c_2a_{n-2} \ldots + c_ka_{n-k}$$
+
+の第$N$項は
+
+$$Q(x)=1-c_1x-c_2x^2-\ldots -c_kx^k$$
+
+$$P(x)=Q(x)(a_0+a_1x+a_2x^2+\ldots) \mod x^k$$
+
+と置いたとき
+
+$$a_N = [x^N]\frac{P(x)}{Q(x)}$$
+
+になり、これは[リンク先のアルゴリズム](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html)を使って$\mathrm{O}(N \log k \log N)$で計算できる。
+
+さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さQの畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。
+
+verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \log k \log N), N=200000,k=10^{18}$
+- [ナイーブな実装](https://atcoder.jp/contests/s8pc-3/submissions/15526069) 1846ms
+- [高速化した場合](https://atcoder.jp/contests/s8pc-3/submissions/15520531) 631ms
 
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Verified with
@@ -59,34 +84,87 @@ using namespace std;
 #include "formal-power-series.hpp"
 
 template <typename mint>
-mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
+mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
                             FormalPowerSeries<mint> P) {
   Q.shrink();
   mint ret = 0;
   if (P.size() >= Q.size()) {
     auto R = P / Q;
     P -= R * Q;
-    if (N < (int)R.size()) ret += R[N];
+    if (k < (int)R.size()) ret += R[k];
   }
   if ((int)P.size() == 0) return ret;
-  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1));
-  P.resize(k);
-  Q.resize(k);
-  while (N) {
-    auto Q2 = Q;
-    for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
-    auto S = P * Q2;
-    auto T = Q * Q2;
-    if (N & 1) {
-      for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    } else {
-      for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
+
+  FormalPowerSeries<mint>::set_fft();
+  if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {
+    while (k) {
+      auto Q2 = Q;
+      for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
+      auto S = P * Q2;
+      auto T = Q * Q2;
+      if (k & 1) {
+        for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
+        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
+      } else {
+        for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
+        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
+      }
+      k >>= 1;
     }
-    N >>= 1;
+    return ret + P[0];
+  } else {
+    int N = 1;
+    while (N < (int)Q.size()) N <<= 1;
+
+    P.resize(2 * N);
+    Q.resize(2 * N);
+    P.ntt();
+    Q.ntt();
+    vector<mint> S(2 * N), T(2 * N);
+
+    vector<int> btr(N);
+    for (int i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {
+      btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));
+    }
+    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())
+                  .inverse()
+                  .pow((mint::get_mod() - 1) / (2 * N));
+
+    while (k) {
+      mint inv2 = mint(2).inverse();
+
+      // even degree of Q(x)Q(-x)
+      T.resize(N);
+      for (int i = 0; i < N; i++) T[i] = Q[(i << 1) | 0] * Q[(i << 1) | 1];
+
+      S.resize(N);
+      if (k & 1) {
+        // odd degree of P(x)Q(-x)
+        for (auto &i : btr) {
+          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] -
+                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *
+                 inv2;
+          inv2 *= dw;
+        }
+      } else {
+        // even degree of P(x)Q(-x)
+        for (int i = 0; i < N; i++) {
+          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +
+                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *
+                 inv2;
+        }
+      }
+      swap(P, S);
+      swap(Q, T);
+      k >>= 1;
+      if (k < N) break;
+      P.ntt_doubling();
+      Q.ntt_doubling();
+    }
+    P.intt();
+    Q.intt();
+    return ret + (P * (Q.inv()))[k];
   }
-  return P[0];
 }
 
 template <typename mint>
@@ -98,6 +176,11 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }
+
+/**
+ * @brief 線形漸化式の高速計算
+ * @docs docs/linear-recursive.md
+ */
 
 ```
 {% endraw %}
@@ -251,11 +334,8 @@ struct FormalPowerSeries : vector<mint> {
     return FPS(deg, mint(0));
   }
 
- private:
   static void *ntt_ptr;
   static void set_fft();
-
- public:
   FPS &operator*=(const FPS &r);
   void ntt();
   void intt();
@@ -264,7 +344,7 @@ struct FormalPowerSeries : vector<mint> {
   FPS inv(int deg = -1) const;
   FPS exp(int deg = -1) const;
   // FPS sqrt(int deg = -1) const;
-  // pair<FPS, FPS> circular(int deg = -1) const;
+  pair<FPS, FPS> circular(int deg = -1) const;
   // FPS shift(mint a, int deg = -1) const;
 };
 template <typename mint>
@@ -277,34 +357,87 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 #line 6 "fps/kitamasa.hpp"
 
 template <typename mint>
-mint LinearRecursionFormula(long long N, FormalPowerSeries<mint> Q,
+mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
                             FormalPowerSeries<mint> P) {
   Q.shrink();
   mint ret = 0;
   if (P.size() >= Q.size()) {
     auto R = P / Q;
     P -= R * Q;
-    if (N < (int)R.size()) ret += R[N];
+    if (k < (int)R.size()) ret += R[k];
   }
   if ((int)P.size() == 0) return ret;
-  long long k = 1LL << (32 - __builtin_clz(Q.size() - 1));
-  P.resize(k);
-  Q.resize(k);
-  while (N) {
-    auto Q2 = Q;
-    for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
-    auto S = P * Q2;
-    auto T = Q * Q2;
-    if (N & 1) {
-      for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-    } else {
-      for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-      for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
+
+  FormalPowerSeries<mint>::set_fft();
+  if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {
+    while (k) {
+      auto Q2 = Q;
+      for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
+      auto S = P * Q2;
+      auto T = Q * Q2;
+      if (k & 1) {
+        for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
+        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
+      } else {
+        for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
+        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
+      }
+      k >>= 1;
     }
-    N >>= 1;
+    return ret + P[0];
+  } else {
+    int N = 1;
+    while (N < (int)Q.size()) N <<= 1;
+
+    P.resize(2 * N);
+    Q.resize(2 * N);
+    P.ntt();
+    Q.ntt();
+    vector<mint> S(2 * N), T(2 * N);
+
+    vector<int> btr(N);
+    for (int i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {
+      btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));
+    }
+    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())
+                  .inverse()
+                  .pow((mint::get_mod() - 1) / (2 * N));
+
+    while (k) {
+      mint inv2 = mint(2).inverse();
+
+      // even degree of Q(x)Q(-x)
+      T.resize(N);
+      for (int i = 0; i < N; i++) T[i] = Q[(i << 1) | 0] * Q[(i << 1) | 1];
+
+      S.resize(N);
+      if (k & 1) {
+        // odd degree of P(x)Q(-x)
+        for (auto &i : btr) {
+          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] -
+                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *
+                 inv2;
+          inv2 *= dw;
+        }
+      } else {
+        // even degree of P(x)Q(-x)
+        for (int i = 0; i < N; i++) {
+          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +
+                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *
+                 inv2;
+        }
+      }
+      swap(P, S);
+      swap(Q, T);
+      k >>= 1;
+      if (k < N) break;
+      P.ntt_doubling();
+      Q.ntt_doubling();
+    }
+    P.intt();
+    Q.intt();
+    return ret + (P * (Q.inv()))[k];
   }
-  return P[0];
 }
 
 template <typename mint>
@@ -316,6 +449,11 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }
+
+/**
+ * @brief 線形漸化式の高速計算
+ * @docs docs/linear-recursive.md
+ */
 
 ```
 {% endraw %}
