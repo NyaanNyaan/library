@@ -14,16 +14,16 @@ struct Binomial {
     for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];
   }
 
-  inline T fac(int i) { return fac_[i]; }
-  inline T finv(int i) { return finv_[i]; }
-  inline T inv(int i) { return inv_[i]; }
+  inline T fac(int i) const { return fac_[i]; }
+  inline T finv(int i) const { return finv_[i]; }
+  inline T inv(int i) const { return inv_[i]; }
 
-  T C(int n, int r) {
+  T C(int n, int r) const {
     if (n < r || r < 0) return T(0);
     return fac_[n] * finv_[n - r] * finv_[r];
   }
 
-  T C_naive(int n, int r) {
+  T C_naive(int n, int r) const {
     if (n < r || r < 0) return T(0);
     T ret = 1;
     for (T i = 1; i <= r; i += T(1)) {
@@ -33,7 +33,7 @@ struct Binomial {
     return ret;
   }
 
-  T P(int n, int r) {
+  T P(int n, int r) const {
     if (n < r || r < 0) return T(0);
     return fac_[n] * finv_[n - r];
   }

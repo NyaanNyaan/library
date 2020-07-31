@@ -36,6 +36,7 @@
     "type_traits": "cpp",
     "utility": "cpp",
     "typeindex": "cpp",
-    "valarray": "cpp"
+    "valarray": "cpp",
+    "cmath": "cpp"
   }
 }
