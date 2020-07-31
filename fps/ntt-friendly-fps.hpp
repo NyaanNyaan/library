@@ -71,7 +71,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
-  assert((*this)[0] == mint(0));
+  assert((*this).size() == 0 || (*this)[0] == mint(0));
   if (deg == -1) deg = (int)this->size();
   FormalPowerSeries<mint> ret({mint(1)});
   for (int i = 1; i < deg; i <<= 1) {
