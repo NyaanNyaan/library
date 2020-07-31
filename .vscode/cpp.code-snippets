@@ -74,5 +74,29 @@
       "bfs();"
     ],
     "description": "bfs"
-  }
+  },
+  "solve_function": {
+    "prefix": "_sol",
+    "body": [
+      "void solve(){",
+      "$0",
+      "}"
+    ],
+    "description": "solve_function"
+  },
+  "solve_function_for_multitest": {
+    "prefix": "_solve_for_multitest",
+    "body": [
+      "void q(){",
+      "  $0",
+      "}",
+      "",
+      "void solve(){",
+      "  int T;",
+      "  cin >> T;",
+      "  for(int i = 0 ; i < T ; i++) q();",
+      "}"
+    ],
+    "description": "solve_function_for_multitest"
+  },
 }
