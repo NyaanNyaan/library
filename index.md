@@ -64,7 +64,7 @@ layout: default
 ### fps
 
 * :heavy_check_mark: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :warning: <a href="library/fps/circular.hpp.html">fps/circular.hpp</a>
+* :heavy_check_mark: <a href="library/fps/circular.hpp.html">fps/circular.hpp</a>
 * :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">fps/differential-equation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
@@ -134,7 +134,7 @@ layout: default
 
 ### modulo
 
-* :warning: <a href="library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :heavy_check_mark: <a href="library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
 * :heavy_check_mark: <a href="library/modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
 
 
@@ -277,7 +277,9 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-helloworld.test.cpp.html">verify-yuki/yuki-helloworld.test.cpp</a>
 
 
