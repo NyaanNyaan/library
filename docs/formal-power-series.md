@@ -77,6 +77,8 @@ $$g\equiv2\hat{g}-f\hat{g}^2 \mod x^{2k}$$
 
 を得る。計算量は$T(n)=T(n/2)+\mathrm{O}(N \log N)$を解いて$T(n)=\mathrm{O}(N \log N)$となる。
 
+なお、modがNTT素数の場合は実装を工夫することで定数倍が2倍以上軽くなる。
+
 ### log
 
 $f_0 = 1$を満たす$f$について$g\equiv\log f \mod x^n$となる$g$は
@@ -107,7 +109,9 @@ $\log' \hat{g}=\frac{1}{\hat{g}}$より
 
 $$g\equiv \hat{g}(1-\log \hat{g}+f) \mod x^{2n}$$
 
-となりダブリングで求まる。$\mathrm{O}(N \log N)$ (分割統治+FFTの方が高速に動作する？)
+となりダブリングで求まる。$\mathrm{O}(N \log N)$ 
+
+modがNTT素数の場合は$\mathrm{O}(N \log^2 N)$の分割統治FFTの方が高速に動作するらしい。(未検証)
 
 ### 累乗
 
@@ -115,23 +119,7 @@ $g \equiv f^k \mod x^n$となる$g$を求めたい。繰り返し自乗法を用
 
 $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{f}{a_p x^p}\right)^k$を計算して最後に$a_p^kx^{kp}$を掛ければよいため、$f$の定数項が$1$である場合のみ考えればよい。このとき$f^k$は$f^k\equiv e^{(\log f)k}$から計算できる。
 
-## 以下、未実装
-
-### 平方根
-
-$f$は$t^2=f_0$を満たす$t$が存在する多項式とする。このとき$g \equiv \sqrt{f} \mod x^n$となる$g$を求めたい。
-
-まず、$g \equiv t \mod x$である。次にニュートン法で$g^2 \equiv f$を満たす$g$を求めると、$g=\hat{g} \mod x^k$ のとき 
-
-$$g \equiv \hat{g} - \frac{\hat{g}^2-f}{(\hat{g}^2)'} \mod x^{2k}$$
-
-$$\leftrightarrow g \equiv \frac{1}{2}\left(\hat{g}+\frac{f}{\hat{g}}\right) \mod x^{2k}$$
-
-を得てダブリングで求まる。
-
-### 三角関数
-
-$g \equiv \cos f, h \equiv \sin f \mod x^n$を求めたい。これは$e^{if}=\cos f+i\sin f$から計算できる。($e^{if}$の計算は実部と虚部に分けて行う必要がある。例えば掛け算の時は4回乗算して適切に足し合わせる感じ。)
+## 以下未実装
 
 ### 平行移動
 

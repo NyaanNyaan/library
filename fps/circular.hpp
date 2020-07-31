@@ -85,3 +85,8 @@ pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
   }
   return make_pair(re.pre(deg), im.pre(deg));
 }
+
+/**
+ * @brief 三角関数
+ * @docs docs/fps-circular.md
+ */
