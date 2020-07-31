@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: modulo/binomial.hpp
+# :question: modulo/binomial.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :x: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
 
 
 ## Code

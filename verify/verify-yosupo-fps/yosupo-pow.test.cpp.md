@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a29759ffc363d806c691dcb19e6bc303">verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-fps/yosupo-pow.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 03:05:14+09:00
+    - Last commit date: 2020-07-31 20:35:22+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/pow_of_formal_power_series">https://judge.yosupo.jp/problem/pow_of_formal_power_series</a>
@@ -39,12 +39,12 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -1265,9 +1265,6 @@ struct FormalPowerSeries : vector<mint> {
   static int ntt_pr();
   FPS inv(int deg = -1) const;
   FPS exp(int deg = -1) const;
-  // FPS sqrt(int deg = -1) const;
-  pair<FPS, FPS> circular(int deg = -1) const;
-  // FPS shift(mint a, int deg = -1) const;
 };
 template <typename mint>
 void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
@@ -1344,7 +1341,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
-  assert((*this)[0] == mint(0));
+  assert((*this).size() == 0 || (*this)[0] == mint(0));
   if (deg == -1) deg = (int)this->size();
   FormalPowerSeries<mint> ret({mint(1)});
   for (int i = 1; i < deg; i <<= 1) {

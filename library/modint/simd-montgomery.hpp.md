@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: modint/simd-montgomery.hpp
+# :question: modint/simd-montgomery.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,11 +38,11 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :heavy_check_mark: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :question: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :heavy_check_mark: <a href="../modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
-* :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :question: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
 
 
@@ -67,8 +67,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :x: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :x: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
 
 
 ## Code

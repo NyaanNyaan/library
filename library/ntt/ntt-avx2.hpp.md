@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: ntt/ntt-avx2.hpp
+# :question: ntt/ntt-avx2.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,14 +38,14 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 ## Required by
 
-* :heavy_check_mark: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :heavy_check_mark: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :question: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :question: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 
 
 ## Verified with
@@ -65,8 +65,8 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :x: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :x: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
 
 
 ## Code

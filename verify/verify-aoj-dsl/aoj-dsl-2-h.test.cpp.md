@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../library/segment-tree/range-add-range-min-lazyseg.hpp.html">segment-tree/range-add-range-min-lazyseg.hpp</a>
 
 

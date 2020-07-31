@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 03:21:12+09:00
+    - Last commit date: 2020-07-31 20:35:22+09:00
 
 
 
@@ -63,7 +63,7 @@ verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \l
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Verified with
@@ -345,9 +345,6 @@ struct FormalPowerSeries : vector<mint> {
   static int ntt_pr();
   FPS inv(int deg = -1) const;
   FPS exp(int deg = -1) const;
-  // FPS sqrt(int deg = -1) const;
-  pair<FPS, FPS> circular(int deg = -1) const;
-  // FPS shift(mint a, int deg = -1) const;
 };
 template <typename mint>
 void *FormalPowerSeries<mint>::ntt_ptr = nullptr;

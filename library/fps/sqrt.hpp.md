@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: fps/utility.hpp
+# :warning: fps/sqrt.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/fps/utility.hpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/fps/sqrt.hpp">View this file on GitHub</a>
     - Last commit date: 2020-07-31 20:35:22+09:00
 
 
@@ -39,6 +39,8 @@ layout: default
 ## Depends on
 
 * :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
 
 
 ## Code
@@ -46,23 +48,38 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#include "./formal-power-series.hpp"
+#include "../fps/formal-power-series.hpp"
+#include "../modulo/mod-sqrt.hpp"
 
 template <typename mint>
-FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
-  using fps = FormalPowerSeries<mint>;
-  auto comp = [](fps &a, fps &b) { a.size() > b.size(); };
-  priority_queue<fps, vector<fps>, decltype(comp)> Q(comp);
-  while (Q.size() != 1) {
-    fps f1 = Q.top();
-    Q.pop();
-    fps f2 = Q.top();
-    Q.pop();
-    Q.push(f1 * f2);
+FormalPowerSeries<mint> sqrt(FormalPowerSeries<mint> &f, int deg = -1) {
+  if (deg == -1) deg = (int)f.size();
+  if ((int)f.size() == 0) return FormalPowerSeries<mint>(deg, 0);
+  if (f[0] == mint(0)) {
+    for (int i = 1; i < (int)f.size(); i++) {
+      if (f[i] != mint(0)) {
+        if (i & 1) return {};
+        if (deg - i / 2 <= 0) break;
+        auto ret = sqrt(f >> i, deg - i / 2);
+        if (ret.empty()) return {};
+        ret = ret << (i / 2);
+        if (ret.size() < deg) ret.resize(deg, mint(0));
+        return ret;
+      }
+    }
+    return FormalPowerSeries<mint>(deg, 0);
   }
-  return Q.top();
-}
 
+  int64_t sqr = mod_sqrt(f[0].get(), mint::get_mod());
+  if (sqr == -1) return {};
+  assert(sqr * sqr % mint::get_mod() == f[0].get());
+  FormalPowerSeries<mint> ret = {mint(sqr)};
+  mint inv2 = mint(2).inverse();
+  for (int i = 1; i < deg; i <<= 1) {
+    ret = (ret + f.pre(i << 1) * ret.inv(i << 1)) * inv2;
+  }
+  return ret.pre(deg);
+}
 ```
 {% endraw %}
 
@@ -229,21 +246,170 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 2 "fps/utility.hpp"
+#line 3 "modint/arbitrary-prime-modint.hpp"
+using namespace std;
+
+struct ArbitraryLazyMontgomeryModInt {
+  using mint = ArbitraryLazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
+
+  static u32 mod;
+  static u32 r;
+  static u32 n2;
+
+  static u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
+  }
+
+  static void set_mod(u32 m) {
+    assert(m < (1 << 30));
+    assert((m & 1) == 1);
+    mod = m;
+    n2 = -u64(m) % m;
+    r = get_r();
+    assert(r * mod == 1);
+  }
+
+  u32 a;
+
+  ArbitraryLazyMontgomeryModInt() : a(0) {}
+  ArbitraryLazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
+  }
+
+  mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
+    return *this;
+  }
+
+  mint &operator/=(const mint &b) {
+    *this *= b.inverse();
+    return *this;
+  }
+
+  mint operator+(const mint &b) const { return mint(*this) += b; }
+  mint operator-(const mint &b) const { return mint(*this) -= b; }
+  mint operator*(const mint &b) const { return mint(*this) *= b; }
+  mint operator/(const mint &b) const { return mint(*this) /= b; }
+  bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
+  }
+  bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  mint operator-() const { return mint() - mint(*this); }
+
+  mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
+  }
+
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = ArbitraryLazyMontgomeryModInt(t);
+    return (is);
+  }
+
+  mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
+
+  static u32 get_mod() { return mod; }
+};
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
+#line 2 "modulo/mod-sqrt.hpp"
+
+int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
+  if (a == 0) return 0;
+  if (p == 2) return a;
+  using mint = ArbitraryLazyMontgomeryModInt;
+  mint::set_mod(p);
+  if (mint(a).pow((p - 1) >> 1) != 1) return -1;
+  mint b = 1, one = 1;
+  while (b.pow((p - 1) >> 1) == 1) b += one;
+  int64_t m = p - 1, e = 0;
+  while (m % 2 == 0) m >>= 1, e += 1;
+  mint x = mint(a).pow((m - 1) >> 1);
+  mint y = mint(a) * x * x;
+  x *= a;
+  mint z = mint(b).pow(m);
+  while (y != 1) {
+    int64_t j = 0;
+    mint t = y;
+    while (t != one) {
+      j += 1;
+      t *= t;
+    }
+    z = z.pow(int64_t(1) << (e - j - 1));
+    x *= z;
+    z *= z;
+    y *= z;
+    e = j;
+  }
+  return x.get();
+}
+#line 3 "fps/sqrt.hpp"
 
 template <typename mint>
-FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
-  using fps = FormalPowerSeries<mint>;
-  auto comp = [](fps &a, fps &b) { a.size() > b.size(); };
-  priority_queue<fps, vector<fps>, decltype(comp)> Q(comp);
-  while (Q.size() != 1) {
-    fps f1 = Q.top();
-    Q.pop();
-    fps f2 = Q.top();
-    Q.pop();
-    Q.push(f1 * f2);
+FormalPowerSeries<mint> sqrt(FormalPowerSeries<mint> &f, int deg = -1) {
+  if (deg == -1) deg = (int)f.size();
+  if ((int)f.size() == 0) return FormalPowerSeries<mint>(deg, 0);
+  if (f[0] == mint(0)) {
+    for (int i = 1; i < (int)f.size(); i++) {
+      if (f[i] != mint(0)) {
+        if (i & 1) return {};
+        if (deg - i / 2 <= 0) break;
+        auto ret = sqrt(f >> i, deg - i / 2);
+        if (ret.empty()) return {};
+        ret = ret << (i / 2);
+        if (ret.size() < deg) ret.resize(deg, mint(0));
+        return ret;
+      }
+    }
+    return FormalPowerSeries<mint>(deg, 0);
   }
-  return Q.top();
+
+  int64_t sqr = mod_sqrt(f[0].get(), mint::get_mod());
+  if (sqr == -1) return {};
+  assert(sqr * sqr % mint::get_mod() == f[0].get());
+  FormalPowerSeries<mint> ret = {mint(sqr)};
+  mint inv2 = mint(2).inverse();
+  for (int i = 1; i < deg; i <<= 1) {
+    ret = (ret + f.pre(i << 1) * ret.inv(i << 1)) * inv2;
+  }
+  return ret.pre(deg);
 }
 
 ```

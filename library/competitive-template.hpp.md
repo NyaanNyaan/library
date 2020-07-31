@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: competitive-template.hpp
+# :question: competitive-template.hpp
 
 <a href="../index.html">Back to top page</a>
 
@@ -94,6 +94,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify-yosupo-math/yosupo-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
@@ -109,8 +110,8 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :x: <a href="../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :x: <a href="../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
 
 
 ## Code

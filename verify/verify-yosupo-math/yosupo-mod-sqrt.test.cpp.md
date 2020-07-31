@@ -25,24 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-math/yosupo-determinant.test.cpp
+# :heavy_check_mark: verify-yosupo-math/yosupo-mod-sqrt.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#70efe3d43cb7abfce0f3ff7a853ba068">verify-yosupo-math</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-math/yosupo-determinant.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-30 19:30:32+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-math/yosupo-mod-sqrt.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-07-31 20:35:22+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/matrix_det">https://judge.yosupo.jp/problem/matrix_det</a>
+* see: <a href="https://judge.yosupo.jp/problem/sqrt_mod">https://judge.yosupo.jp/problem/sqrt_mod</a>
 
 
 ## Depends on
 
 * :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :question: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
+* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="../../library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
 
 
 ## Code
@@ -50,19 +49,17 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
+#define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
 
 #include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../modulo/gauss-elimination.hpp"
+#include "../modulo/mod-sqrt.hpp"
 
-using mint = LazyMontgomeryModInt<998244353>;
-using vm = vector<mint>;
 void solve() {
-  ini(N);
-  V<vm> a(N,vm(N));
-  in(a);
-  out(Gauss::determinant(a));
+  ini(T);
+  rep(_, T) {
+    inl(y, p);
+    out(mod_sqrt(y, p));
+  }
 }
 ```
 {% endraw %}
@@ -70,8 +67,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-math/yosupo-determinant.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
+#line 1 "verify-yosupo-math/yosupo-mod-sqrt.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -373,71 +370,77 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "modint/montgomery-modint.hpp"
+#line 3 "modint/arbitrary-prime-modint.hpp"
 using namespace std;
 
-template <uint32_t mod>
-struct LazyMontgomeryModInt {
-  using mint = LazyMontgomeryModInt;
+struct ArbitraryLazyMontgomeryModInt {
+  using mint = ArbitraryLazyMontgomeryModInt;
   using i32 = int32_t;
   using u32 = uint32_t;
   using u64 = uint64_t;
 
-  static constexpr u32 get_r() {
+  static u32 mod;
+  static u32 r;
+  static u32 n2;
+
+  static u32 get_r() {
     u32 ret = mod;
     for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
     return ret;
   }
 
-  static constexpr u32 r = get_r();
-  static constexpr u32 n2 = -u64(mod) % mod;
-  static_assert(r * mod == 1, "invalid, r * mod != 1");
-  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
-  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
+  static void set_mod(u32 m) {
+    assert(m < (1 << 30));
+    assert((m & 1) == 1);
+    mod = m;
+    n2 = -u64(m) % m;
+    r = get_r();
+    assert(r * mod == 1);
+  }
 
   u32 a;
 
-  constexpr LazyMontgomeryModInt() : a(0) {}
-  constexpr LazyMontgomeryModInt(const int64_t &b)
+  ArbitraryLazyMontgomeryModInt() : a(0) {}
+  ArbitraryLazyMontgomeryModInt(const int64_t &b)
       : a(reduce(u64(b % mod + mod) * n2)){};
 
-  static constexpr u32 reduce(const u64 &b) {
+  static u32 reduce(const u64 &b) {
     return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
   }
 
-  constexpr mint &operator+=(const mint &b) {
+  mint &operator+=(const mint &b) {
     if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
     return *this;
   }
 
-  constexpr mint &operator-=(const mint &b) {
+  mint &operator-=(const mint &b) {
     if (i32(a -= b.a) < 0) a += 2 * mod;
     return *this;
   }
 
-  constexpr mint &operator*=(const mint &b) {
+  mint &operator*=(const mint &b) {
     a = reduce(u64(a) * b.a);
     return *this;
   }
 
-  constexpr mint &operator/=(const mint &b) {
+  mint &operator/=(const mint &b) {
     *this *= b.inverse();
     return *this;
   }
 
-  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
-  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
-  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
-  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
-  constexpr bool operator==(const mint &b) const {
+  mint operator+(const mint &b) const { return mint(*this) += b; }
+  mint operator-(const mint &b) const { return mint(*this) -= b; }
+  mint operator*(const mint &b) const { return mint(*this) *= b; }
+  mint operator/(const mint &b) const { return mint(*this) /= b; }
+  bool operator==(const mint &b) const {
     return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
   }
-  constexpr bool operator!=(const mint &b) const {
+  bool operator!=(const mint &b) const {
     return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
   }
-  constexpr mint operator-() const { return mint() - mint(*this); }
+  mint operator-() const { return mint() - mint(*this); }
 
-  constexpr mint pow(u64 n) const {
+  mint pow(u64 n) const {
     mint ret(1), mul(*this);
     while (n > 0) {
       if (n & 1) ret *= mul;
@@ -446,8 +449,6 @@ struct LazyMontgomeryModInt {
     }
     return ret;
   }
-  
-  constexpr mint inverse() const { return pow(mod - 2); }
 
   friend ostream &operator<<(ostream &os, const mint &b) {
     return os << b.get();
@@ -456,233 +457,61 @@ struct LazyMontgomeryModInt {
   friend istream &operator>>(istream &is, mint &b) {
     int64_t t;
     is >> t;
-    b = LazyMontgomeryModInt<mod>(t);
+    b = ArbitraryLazyMontgomeryModInt(t);
     return (is);
   }
-  
-  constexpr u32 get() const {
+
+  mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
     u32 ret = reduce(a);
     return ret >= mod ? ret - mod : ret;
   }
 
-  static constexpr u32 get_mod() { return mod; }
+  static u32 get_mod() { return mod; }
 };
-#line 3 "modulo/gauss-elimination.hpp"
-using namespace std;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
+#line 2 "modulo/mod-sqrt.hpp"
 
-#line 3 "modint/simd-montgomery.hpp"
-using namespace std;
-#line 5 "modint/simd-montgomery.hpp"
-
-__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
-my128_mullo_epu32(const __m128i &a, const __m128i &b) {
-  return _mm_mullo_epi32(a, b);
-}
-
-__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
-my128_mulhi_epu32(const __m128i &a, const __m128i &b) {
-  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);
-  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);
-  __m128i prod02 = _mm_mul_epu32(a, b);
-  __m128i prod13 = _mm_mul_epu32(a13, b13);
-  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),
-                                    _mm_unpackhi_epi32(prod02, prod13));
-  return prod;
-}
-
-__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
-montgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i &r,
-                   const __m128i &m1) {
-  return _mm_sub_epi32(
-      _mm_add_epi32(my128_mulhi_epu32(a, b), m1),
-      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a, b), r), m1));
-}
-
-__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
-montgomery_add_128(const __m128i &a, const __m128i &b, const __m128i &m2,
-                   const __m128i &m0) {
-  __m128i ret = _mm_sub_epi32(_mm_add_epi32(a, b), m2);
-  return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0, ret), m2), ret);
-}
-
-__attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
-montgomery_sub_128(const __m128i &a, const __m128i &b, const __m128i &m2,
-                   const __m128i &m0) {
-  __m128i ret = _mm_sub_epi32(a, b);
-  return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0, ret), m2), ret);
-}
-
-__attribute__((target("avx2"))) __attribute__((always_inline)) __m256i
-my256_mullo_epu32(const __m256i &a, const __m256i &b) {
-  return _mm256_mullo_epi32(a, b);
-}
-
-__attribute__((target("avx2"))) __attribute__((always_inline)) __m256i
-my256_mulhi_epu32(const __m256i &a, const __m256i &b) {
-  __m256i a13 = _mm256_shuffle_epi32(a, 0xF5);
-  __m256i b13 = _mm256_shuffle_epi32(b, 0xF5);
-  __m256i prod02 = _mm256_mul_epu32(a, b);
-  __m256i prod13 = _mm256_mul_epu32(a13, b13);
-  __m256i prod = _mm256_unpackhi_epi64(_mm256_unpacklo_epi32(prod02, prod13),
-                                       _mm256_unpackhi_epi32(prod02, prod13));
-  return prod;
-}
-
-__attribute__((target("avx2"))) __attribute__((always_inline)) __m256i
-montgomery_mul_256(const __m256i &a, const __m256i &b, const __m256i &r,
-                   const __m256i &m1) {
-  return _mm256_sub_epi32(
-      _mm256_add_epi32(my256_mulhi_epu32(a, b), m1),
-      my256_mulhi_epu32(my256_mullo_epu32(my256_mullo_epu32(a, b), r), m1));
-}
-
-__attribute__((target("avx2"))) __attribute__((always_inline)) __m256i
-montgomery_add_256(const __m256i &a, const __m256i &b, const __m256i &m2,
-                   const __m256i &m0) {
-  __m256i ret = _mm256_sub_epi32(_mm256_add_epi32(a, b), m2);
-  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret), m2),
-                          ret);
-}
-
-__attribute__((target("avx2"))) __attribute__((always_inline)) __m256i
-montgomery_sub_256(const __m256i &a, const __m256i &b, const __m256i &m2,
-                   const __m256i &m0) {
-  __m256i ret = _mm256_sub_epi32(a, b);
-  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret), m2),
-                          ret);
-}
-#line 6 "modulo/gauss-elimination.hpp"
-
-namespace Gauss {
-uint32_t a_buf_[4096][4096] __attribute__((aligned(64)));
-
-// return value: (rank, (-1) ^ (number of swap time))
-template <typename mint>
-__attribute__((target("avx2"))) pair<int, int> GaussianElimination(
-    const vector<vector<mint>> &m, int LinearEquation = false) {
-  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);
-  int H = m.size(), W = m[0].size(), rank = 0;
-  int det = 1;
-  for (int i = 0; i < H; i++)
-    for (int j = 0; j < W; j++) a[i][j].a = m[i][j].a;
-
-  __m256i r = _mm256_set1_epi32(mint::r);
-  __m256i m0 = _mm256_set1_epi32(0);
-  __m256i m1 = _mm256_set1_epi32(mint::get_mod());
-  __m256i m2 = _mm256_set1_epi32(mint::get_mod() << 1);
-
-  for (int j = 0; j < (LinearEquation ? (W - 1) : W); j++) {
-    // find basis
-    if (rank == H) break;
-    int idx = -1;
-    for (int i = rank; i < H; i++) {
-      if (a[i][j].get() != 0) idx = i;
-      if (idx != -1) break;
+int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
+  if (a == 0) return 0;
+  if (p == 2) return a;
+  using mint = ArbitraryLazyMontgomeryModInt;
+  mint::set_mod(p);
+  if (mint(a).pow((p - 1) >> 1) != 1) return -1;
+  mint b = 1, one = 1;
+  while (b.pow((p - 1) >> 1) == 1) b += one;
+  int64_t m = p - 1, e = 0;
+  while (m % 2 == 0) m >>= 1, e += 1;
+  mint x = mint(a).pow((m - 1) >> 1);
+  mint y = mint(a) * x * x;
+  x *= a;
+  mint z = mint(b).pow(m);
+  while (y != 1) {
+    int64_t j = 0;
+    mint t = y;
+    while (t != one) {
+      j += 1;
+      t *= t;
     }
-    if (idx == -1) {
-      if (LinearEquation)
-        continue;
-      else
-        return {0, 0};
-    }
-
-    // swap
-    if (rank != idx) {
-      det = -det;
-      for (int l = j; l < W; l++) swap(a[rank][l], a[idx][l]);
-    }
-
-    // normalize
-    if (LinearEquation) {
-      if (a[rank][j].get() != 1) {
-        mint coeff = a[rank][j].inverse();
-        __m256i COEFF = _mm256_set1_epi32(coeff.a);
-        for (int i = j / 8 * 8; i < W; i += 8) {
-          __m256i R = _mm256_load_si256((__m256i *)(a[rank] + i));
-          __m256i RmulC = montgomery_mul_256(R, COEFF, r, m1);
-          _mm256_store_si256((__m256i *)(a[rank] + i), RmulC);
-        }
-      }
-    }
-
-    // elimination
-    for (int k = (LinearEquation ? 0 : rank + 1); k < H; k++) {
-      if (k == rank) continue;
-      if (a[k][rank].get() != 0) {
-        mint coeff = a[k][j] / a[rank][j];
-        __m256i COEFF = _mm256_set1_epi32(coeff.a);
-        for (int i = j / 8 * 8; i < W; i += 8) {
-          __m256i R = _mm256_load_si256((__m256i *)(a[rank] + i));
-          __m256i K = _mm256_load_si256((__m256i *)(a[k] + i));
-          __m256i RmulC = montgomery_mul_256(R, COEFF, r, m1);
-          __m256i KmnsR = montgomery_sub_256(K, RmulC, m2, m0);
-          _mm256_store_si256((__m256i *)(a[k] + i), KmnsR);
-        }
-      }
-    }
-    rank++;
+    z = z.pow(int64_t(1) << (e - j - 1));
+    x *= z;
+    z *= z;
+    y *= z;
+    e = j;
   }
-  return {rank, det};
+  return x.get();
 }
+#line 5 "verify-yosupo-math/yosupo-mod-sqrt.test.cpp"
 
-// calculate determinant
-template <typename mint>
-mint determinant(const vector<vector<mint>> &mat) {
-  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);
-  auto p = GaussianElimination(mat);
-  if (p.first != (int)mat.size()) return mint(0);
-  mint det = p.second;
-  for (int i = 0; i < (int)mat.size(); i++) det *= a[i][i];
-  return det;
-}
-
-// return V<V<mint>>
-// 0 column ... one of solutions
-// 1 ~ (W - rank) column ... bases
-// if not exist, return empty vector
-template <typename mint>
-vector<vector<mint>> LinearEquation(vector<vector<mint>> A, vector<mint> B) {
-  int H = A.size(), W = A[0].size();
-  for (int i = 0; i < H; i++) A[i].push_back(B[i]);
-
-  auto p = GaussianElimination(A, true);
-
-  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);
-  int rank = p.first;
-
-  // check if solutions exist
-  for (int i = rank; i < H; ++i)
-    if (a[i][W] != 0) return vector<vector<mint>>{};
-
-  vector<vector<mint>> res(1, vector<mint>(W));
-  vector<int> pivot(W, -1);
-  for (int i = 0, j = 0; i < rank; ++i) {
-    while (a[i][j] == 0) ++j;
-    res[0][j] = a[i][W], pivot[j] = i;
-  }
-  for (int j = 0; j < W; ++j) {
-    if (pivot[j] == -1) {
-      vector<mint> x(W);
-      x[j] = -1;
-      for (int k = 0; k < j; ++k)
-        if (pivot[k] != -1) x[k] = a[pivot[k]][j];
-      res.push_back(x);
-    }
-  }
-  return res;
-}
-
-}  // namespace Gauss
-using namespace Gauss;
-#line 6 "verify-yosupo-math/yosupo-determinant.test.cpp"
-
-using mint = LazyMontgomeryModInt<998244353>;
-using vm = vector<mint>;
 void solve() {
-  ini(N);
-  V<vm> a(N,vm(N));
-  in(a);
-  out(Gauss::determinant(a));
+  ini(T);
+  rep(_, T) {
+    inl(y, p);
+    out(mod_sqrt(y, p));
+  }
 }
 
 ```
