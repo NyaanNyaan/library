@@ -64,12 +64,12 @@ layout: default
 ### fps
 
 * :heavy_check_mark: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :heavy_check_mark: <a href="library/fps/circular.hpp.html">fps/circular.hpp</a>
+* :heavy_check_mark: <a href="library/fps/circular.hpp.html">三角関数 <small>(fps/circular.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">fps/differential-equation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="library/fps/sqrt.hpp.html">fps/sqrt.hpp</a>
+* :heavy_check_mark: <a href="library/fps/sqrt.hpp.html">平方根 <small>(fps/sqrt.hpp)</small></a>
 * :warning: <a href="library/fps/utility.hpp.html">fps/utility.hpp</a>
 
 
@@ -176,14 +176,6 @@ layout: default
 * :heavy_check_mark: <a href="library/shortest-path/bellman-ford.hpp.html">shortest-path/bellman-ford.hpp</a>
 * :heavy_check_mark: <a href="library/shortest-path/dijkstra.hpp.html">shortest-path/dijkstra.hpp</a>
 * :heavy_check_mark: <a href="library/shortest-path/warshall-floyd.hpp.html">shortest-path/warshall-floyd.hpp</a>
-
-
-<div id="54de4c5e0ecfc39083b31b56ee36cb19"></div>
-
-### snippet
-
-* :warning: <a href="library/snippet/bfs.hpp.html">snippet/bfs.hpp</a>
-* :warning: <a href="library/snippet/dfs.hpp.html">snippet/dfs.hpp</a>
 
 
 <div id="b45cffe084dd3d20d928bee85e7b0f21"></div>

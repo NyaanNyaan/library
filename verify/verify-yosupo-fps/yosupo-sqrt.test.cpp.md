@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#a29759ffc363d806c691dcb19e6bc303">verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-fps/yosupo-sqrt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:49:17+09:00
+    - Last commit date: 2020-07-31 21:16:58+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sqrt_of_formal_power_series">https://judge.yosupo.jp/problem/sqrt_of_formal_power_series</a>
@@ -42,7 +42,7 @@ layout: default
 * :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/sqrt.hpp.html">fps/sqrt.hpp</a>
+* :heavy_check_mark: <a href="../../library/fps/sqrt.hpp.html">平方根 <small>(fps/sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
@@ -1520,6 +1520,11 @@ FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
   }
   return ret.pre(deg);
 }
+
+/**
+ * @brief 平方根
+ * @docs docs/fps-sqrt.md
+ */
 #line 7 "verify-yosupo-fps/yosupo-sqrt.test.cpp"
 
 void solve() {

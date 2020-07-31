@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ea921838279ab5a0e84be169b8c4269e">verify-yuki</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify-yuki/yuki-0963-circular.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:49:17+09:00
+    - Last commit date: 2020-07-31 21:16:58+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/no/963">https://yukicoder.me/problems/no/963</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/circular.hpp.html">fps/circular.hpp</a>
+* :heavy_check_mark: <a href="../../library/fps/circular.hpp.html">三角関数 <small>(fps/circular.hpp)</small></a>
 * :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
@@ -719,6 +719,11 @@ pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
   }
   return make_pair(re.pre(deg), im.pre(deg));
 }
+
+/**
+ * @brief 三角関数
+ * @docs docs/fps-circular.md
+ */
 #line 3 "fps/ntt-friendly-fps.hpp"
 using namespace std;
 

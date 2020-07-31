@@ -38,7 +38,7 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="../fps/sqrt.hpp.html">fps/sqrt.hpp</a>
+* :heavy_check_mark: <a href="../fps/sqrt.hpp.html">平方根 <small>(fps/sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
 
 

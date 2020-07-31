@@ -25,15 +25,32 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: fps/sqrt.hpp
+# :heavy_check_mark: 平方根 <small>(fps/sqrt.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/sqrt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:49:17+09:00
+    - Last commit date: 2020-07-31 21:16:58+09:00
 
 
+
+
+# 形式的冪級数の平方根
+
+$f$は$t^2=f_0$を満たす$t$が存在する多項式とする。このとき$g \equiv \sqrt{f} \mod x^n$となる$g$を求めたい。
+
+まず、$g \equiv t \mod x$である。次にニュートン法で$g^2 \equiv f$を満たす$g$を求めると、$g=\hat{g} \mod x^k$ のとき 
+
+$$g \equiv \hat{g} - \frac{\hat{g}^2-f}{(\hat{g}^2)'} \mod x^{2k}$$
+
+$$\leftrightarrow g \equiv \frac{1}{2}\left(\hat{g}+\frac{f}{\hat{g}}\right) \mod x^{2k}$$
+
+を得てダブリングで求まる。計算量は$\mathrm{O}(N \log N)$。
+
+#### 実装
+
+- `sqrt(f, deg)`: FPSである$f$について$\sqrt f$を求める。
 
 
 ## Depends on
@@ -85,6 +102,12 @@ FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
   }
   return ret.pre(deg);
 }
+
+/**
+ * @brief 平方根
+ * @docs docs/fps-sqrt.md
+ */
+
 ```
 {% endraw %}
 
@@ -416,6 +439,11 @@ FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
   }
   return ret.pre(deg);
 }
+
+/**
+ * @brief 平方根
+ * @docs docs/fps-sqrt.md
+ */
 
 ```
 {% endraw %}
