@@ -69,6 +69,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1145.test.cpp.html">verify-yuki/yuki-1145.test.cpp</a>
 
 
 ## Code

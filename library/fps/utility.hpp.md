@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: fps/utility.hpp
+# :heavy_check_mark: fps/utility.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/utility.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+    - Last commit date: 2020-08-01 00:52:51+09:00
 
 
 
@@ -39,6 +39,11 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1145.test.cpp.html">verify-yuki/yuki-1145.test.cpp</a>
 
 
 ## Code
@@ -51,16 +56,21 @@ layout: default
 template <typename mint>
 FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
   using fps = FormalPowerSeries<mint>;
-  auto comp = [](fps &a, fps &b) { a.size() > b.size(); };
-  priority_queue<fps, vector<fps>, decltype(comp)> Q(comp);
-  while (Q.size() != 1) {
-    fps f1 = Q.top();
-    Q.pop();
-    fps f2 = Q.top();
-    Q.pop();
-    Q.push(f1 * f2);
+  sort(begin(v), end(v), [](fps &a, fps &b) { return a.size() < b.size(); });
+  vector<fps> w;
+  w.reserve(sz(v) / 2 + 1);
+  while ((int)v.size() > 1) {
+    for (int i = 0; i < (int)v.size(); i += 2) {
+      if (i + 1 == (int)v.size()) {
+        w.emplace_back(v.back());
+      } else {
+        w.emplace_back(v[i] * v[i + 1]);
+      }
+    }
+    swap(v, w);
+    w.clear();
   }
-  return Q.top();
+  return v[0];
 }
 
 ```
@@ -234,16 +244,21 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 template <typename mint>
 FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
   using fps = FormalPowerSeries<mint>;
-  auto comp = [](fps &a, fps &b) { a.size() > b.size(); };
-  priority_queue<fps, vector<fps>, decltype(comp)> Q(comp);
-  while (Q.size() != 1) {
-    fps f1 = Q.top();
-    Q.pop();
-    fps f2 = Q.top();
-    Q.pop();
-    Q.push(f1 * f2);
+  sort(begin(v), end(v), [](fps &a, fps &b) { return a.size() < b.size(); });
+  vector<fps> w;
+  w.reserve(sz(v) / 2 + 1);
+  while ((int)v.size() > 1) {
+    for (int i = 0; i < (int)v.size(); i += 2) {
+      if (i + 1 == (int)v.size()) {
+        w.emplace_back(v.back());
+      } else {
+        w.emplace_back(v[i] * v[i + 1]);
+      }
+    }
+    swap(v, w);
+    w.clear();
   }
-  return Q.top();
+  return v[0];
 }
 
 ```

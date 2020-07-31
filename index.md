@@ -70,7 +70,7 @@ layout: default
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :heavy_check_mark: <a href="library/fps/sqrt.hpp.html">平方根 <small>(fps/sqrt.hpp)</small></a>
-* :warning: <a href="library/fps/utility.hpp.html">fps/utility.hpp</a>
+* :heavy_check_mark: <a href="library/fps/utility.hpp.html">fps/utility.hpp</a>
 
 
 <div id="ed7daeb157cd9b31e53896ad3c771a26"></div>
@@ -276,6 +276,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify-yuki/yuki-1145.test.cpp.html">verify-yuki/yuki-1145.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify-yuki/yuki-helloworld.test.cpp.html">verify-yuki/yuki-helloworld.test.cpp</a>
 
 
