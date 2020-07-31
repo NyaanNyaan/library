@@ -1,0 +1,78 @@
+{
+  // Place your snippets for cpp here. Each snippet is defined under a snippet name and has a prefix, body and
+  // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the
+  // same ids are connected.
+  // Example:
+  // "Print to console": {
+  // "prefix": "log",
+  // "body": [
+  // "console.log('$1');",
+  // "$2"
+  // ],
+  // "description": "Log output to console"
+  // }
+  "modint": {
+    "prefix": "_mint",
+    "body": [
+      "#include \"modint/montgomery-modint.hpp\"",
+      "#include \"modulo/binomial.hpp\"",
+      "constexpr int MOD9 = 998244353;",
+      "constexpr int MOD1 = 1000000007;",
+      "using mint = LazyMontgomeryModInt<MOD9>;",
+      "Binomial<mint> C(2002002);"
+    ],
+    "description": "modint"
+  },
+  "fps": {
+    "prefix": "_fps",
+    "body": [
+      "#include \"modint/montgomery-modint.hpp\"",
+      "#include \"modulo/binomial.hpp\"",
+      "#include \"fps/ntt-friendly-fps.hpp\"",
+      "// #include \"fps/arbitrary-fps.hpp\"",
+      "constexpr int MOD9 = 998244353;",
+      "constexpr int MOD1 = 1000000007;",
+      "using mint = LazyMontgomeryModInt<MOD9>;",
+      "Binomial<mint> C(2002002);",
+      "using fps = FormalPowerSeries<mint>;"
+    ],
+    "description": "fps"
+  },
+  "dfs": {
+    "prefix": "_dfs",
+    "body": [
+      "auto ${1:dfs} = [&](auto rec,int cur,int par = -1) -> void{",
+      "  $0  ",
+      "  each(dst , g[cur]){",
+      "    if(dst == par) continue;",
+      "    rec(rec , dst , cur);",
+      "  }",
+      "",
+      "};",
+      "${1:dfs}(${1:dfs} , 0);"
+    ],
+    "description": "dfs"
+  },
+  "bfs": {
+    "prefix": "_bfs",
+    "body": [
+      "auto bfs = [&](int start = 0) {",
+      "  queue<int> Q;",
+      "  Q.push(start);",
+      "  while (!Q.empty()) {",
+      "    int cur = Q.front();",
+      "    Q.pop();",
+      "    for (auto dst : g[cur]) {",
+      "      if (/* already visited */) continue;",
+      "      // write down here",
+      "",
+      "      Q.push(dst);",
+      "    }",
+      "  }",
+      "};",
+      "bfs();"
+    ],
+    "description": "bfs"
+  }
+}
