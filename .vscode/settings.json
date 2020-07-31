@@ -38,5 +38,6 @@
     "typeindex": "cpp",
     "valarray": "cpp",
     "cmath": "cpp"
-  }
+  },
+  "C_Cpp.suggestSnippets": false
 }

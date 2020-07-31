@@ -4,7 +4,8 @@
 
 template <typename mint>
 pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
-    FormalPowerSeries<mint> fre, FormalPowerSeries<mint> fim, int deg = -1) {
+    const FormalPowerSeries<mint> &fre, const FormalPowerSeries<mint> &fim,
+    int deg = -1) {
   using fps = FormalPowerSeries<mint>;
   assert(fre.size() == 0 || fre[0] == mint(0));
   assert(fim.size() == 0 || fim[0] == mint(0));
