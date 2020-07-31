@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
+# :heavy_check_mark: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -183,12 +183,12 @@ $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 
 ## Required by
 
-* :question: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :question: <a href="circular.hpp.html">fps/circular.hpp</a>
-* :x: <a href="differential-equation.hpp.html">fps/differential-equation.hpp</a>
+* :heavy_check_mark: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :heavy_check_mark: <a href="circular.hpp.html">fps/circular.hpp</a>
+* :heavy_check_mark: <a href="differential-equation.hpp.html">fps/differential-equation.hpp</a>
 * :heavy_check_mark: <a href="kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
-* :question: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :warning: <a href="sqrt.hpp.html">fps/sqrt.hpp</a>
+* :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="sqrt.hpp.html">fps/sqrt.hpp</a>
 * :warning: <a href="utility.hpp.html">fps/utility.hpp</a>
 
 
@@ -202,11 +202,12 @@ $g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify-yosupo-fps/yosupo-log.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify-yosupo-fps/yosupo-pow.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0214.test.cpp.html">verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0215.test.cpp.html">verify-yuki/yuki-0215.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
-* :x: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
-* :x: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963.test.cpp.html">verify-yuki/yuki-0963.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
 
 
 ## Code

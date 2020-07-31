@@ -25,27 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: fps/circular.hpp
+# :heavy_check_mark: fps/circular.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/circular.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+    - Last commit date: 2020-07-31 20:49:17+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 
 
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
-* :x: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
 
 
 ## Code
@@ -59,7 +59,8 @@ layout: default
 
 template <typename mint>
 pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
-    FormalPowerSeries<mint> fre, FormalPowerSeries<mint> fim, int deg = -1) {
+    const FormalPowerSeries<mint> &fre, const FormalPowerSeries<mint> &fim,
+    int deg = -1) {
   using fps = FormalPowerSeries<mint>;
   assert(fre.size() == 0 || fre[0] == mint(0));
   assert(fim.size() == 0 || fim[0] == mint(0));
@@ -406,7 +407,8 @@ struct LazyMontgomeryModInt {
 
 template <typename mint>
 pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
-    FormalPowerSeries<mint> fre, FormalPowerSeries<mint> fim, int deg = -1) {
+    const FormalPowerSeries<mint> &fre, const FormalPowerSeries<mint> &fim,
+    int deg = -1) {
   using fps = FormalPowerSeries<mint>;
   assert(fre.size() == 0 || fre[0] == mint(0));
   assert(fim.size() == 0 || fim[0] == mint(0));

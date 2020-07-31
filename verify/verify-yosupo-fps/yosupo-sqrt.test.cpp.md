@@ -25,28 +25,28 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yuki/yuki-1080.test.cpp
+# :heavy_check_mark: verify-yosupo-fps/yosupo-sqrt.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#ea921838279ab5a0e84be169b8c4269e">verify-yuki</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yuki/yuki-1080.test.cpp">View this file on GitHub</a>
+* category: <a href="../../index.html#a29759ffc363d806c691dcb19e6bc303">verify-yosupo-fps</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-fps/yosupo-sqrt.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-07-31 20:49:17+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/no/1080">https://yukicoder.me/problems/no/1080</a>
+* see: <a href="https://judge.yosupo.jp/problem/sqrt_of_formal_power_series">https://judge.yosupo.jp/problem/sqrt_of_formal_power_series</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/circular.hpp.html">fps/circular.hpp</a>
 * :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="../../library/fps/sqrt.hpp.html">fps/sqrt.hpp</a>
+* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="../../library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
 * :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
@@ -55,23 +55,22 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/no/1080"
+#define PROBLEM "https://judge.yosupo.jp/problem/sqrt_of_formal_power_series"
 
 #include "../competitive-template.hpp"
-#include "../fps/arbitrary-fps.hpp"
-#include "../fps/circular.hpp"
 #include "../modint/montgomery-modint.hpp"
-#include "../modulo/binomial.hpp"
+#include "../fps/ntt-friendly-fps.hpp"
+#include "../fps/sqrt.hpp"
 
 void solve() {
-  using mint = LazyMontgomeryModInt<1000000009>;
+  using mint = LazyMontgomeryModInt<998244353>;
   using fps = FormalPowerSeries<mint>;
-  Binomial<mint> C(1001001);
-  ini(K);
-  fps f = (fps{1, 1} * (fps{1, -3, 3, -1}.inv(K + 1))).pre(K + 1) - 1;
-  auto [cos, sin] = circular(f, fps(), K + 1);
-  fps g = (cos + sin) * C.fac(K);
-  rep1(i, K) out(g[i]);
+  ini(N);
+  fps f(N);
+  in(f);
+  auto g = sqrt(f);
+  if(g.empty()) out(-1);
+  else out(g);
 }
 ```
 {% endraw %}
@@ -79,8 +78,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yuki/yuki-1080.test.cpp"
-#define PROBLEM "https://yukicoder.me/problems/no/1080"
+#line 1 "verify-yosupo-fps/yosupo-sqrt.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/sqrt_of_formal_power_series"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -382,12 +381,6 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "fps/arbitrary-fps.hpp"
-using namespace std;
-
-#line 3 "ntt/arbitrary-ntt.hpp"
-using namespace std;
-
 #line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 
@@ -482,6 +475,9 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 get_mod() { return mod; }
 };
+#line 3 "fps/ntt-friendly-fps.hpp"
+using namespace std;
+
 #line 3 "ntt/ntt-avx2.hpp"
 using namespace std;
 
@@ -1124,102 +1120,6 @@ struct NTT {
     for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;
   }
 };
-#line 7 "ntt/arbitrary-ntt.hpp"
-
-namespace ArbitraryNTT {
-constexpr int32_t m0 = 167772161;
-constexpr int32_t m1 = 469762049;
-constexpr int32_t m2 = 754974721;
-using mint0 = LazyMontgomeryModInt<m0>;
-using mint1 = LazyMontgomeryModInt<m1>;
-using mint2 = LazyMontgomeryModInt<m2>;
-
-template <int mod>
-vector<LazyMontgomeryModInt<mod>> mul(const vector<int> &a,
-                                      const vector<int> &b) {
-  using submint = LazyMontgomeryModInt<mod>;
-  NTT<submint> ntt;
-  vector<submint> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
-  return ntt.multiply(s, t);
-}
-
-vector<int> multiply(const vector<int> &s, const vector<int> &t, int mod) {
-  auto d0 = mul<m0>(s, t);
-  auto d1 = mul<m1>(s, t);
-  auto d2 = mul<m2>(s, t);
-  int n = d0.size();
-  vector<int> ret(n);
-  using i64 = int64_t;
-  static const int r01 = mint1(m0).inverse().get();
-  static const int r02 = mint2(m0).inverse().get();
-  static const int r12 = mint2(m1).inverse().get();
-  static const int r02r12 = i64(r02) * r12 % m2;
-  static const int w1 = m0 % mod;
-  static const int w2 = i64(w1) * m1 % mod;
-  for (int i = 0; i < n; i++) {
-    i64 n1 = d1[i].get(), n2 = d2[i].get();
-    i64 a = d0[i].get();
-    i64 b = (n1 + m1 - a) * r01 % m1;
-    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    ret[i] = (a + b * w1 + c * w2) % mod;
-  }
-  return ret;
-}
-
-template <typename mint>
-vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
-  vector<int> u = multiply(s, t, mint::get_mod());
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);
-  return ret;
-}
-
-/*
-template <int mod>
-vector<int> multiply(const vector<int> &s, const vector<int> &t) {
-  auto d0 = mul<m0>(s, t);
-  auto d1 = mul<m1>(s, t);
-  auto d2 = mul<m2>(s, t);
-  int n = d0.size();
-  vector<int> res(n);
-  using i64 = int64_t;
-  static const int r01 = mint1(m0).inverse().get();
-  static const int r02 = mint2(m0).inverse().get();
-  static const int r12 = mint2(m1).inverse().get();
-  static const int r02r12 = i64(r02) * r12 % m2;
-  static const int w1 = m0 % mod;
-  static const int w2 = i64(w1) * m1 % mod;
-  for (int i = 0; i < n; i++) {
-    i64 n1 = d1[i].get(), n2 = d2[i].get();
-    i64 a = d0[i].get();
-    i64 b = (n1 + m1 - a) * r01 % m1;
-    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    res[i] = (a + b * w1 + c * w2) % mod;
-  }
-  return std::move(res);
-}
-
-template <int mod>
-vector<LazyMontgomeryModInt<mod>> multiply(
-    const vector<LazyMontgomeryModInt<mod>> &a,
-    const vector<LazyMontgomeryModInt<mod>> &b) {
-  using mint = LazyMontgomeryModInt<mod>;
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
-  vector<int> u = multiply<mod>(s, t);
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i)
-    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
-  return std::move(ret);
-}
-*/
-}  // namespace ArbitraryNTT
 #line 3 "fps/formal-power-series.hpp"
 using namespace std;
 
@@ -1379,31 +1279,11 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 7 "fps/arbitrary-fps.hpp"
+#line 7 "fps/ntt-friendly-fps.hpp"
 
 template <typename mint>
 void FormalPowerSeries<mint>::set_fft() {
-  ntt_ptr = nullptr;
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt() {
-  exit(1);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::intt() {
-  exit(1);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt_doubling() {
-  exit(1);
-}
-
-template <typename mint>
-int FormalPowerSeries<mint>::ntt_pr() {
-  exit(1);
+  if (!ntt_ptr) ntt_ptr = new NTT<mint>;
 }
 
 template <typename mint>
@@ -1413,18 +1293,56 @@ FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
     this->clear();
     return *this;
   }
-  auto ret = ArbitraryNTT::multiply(*this, r);
+  set_fft();
+  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this, r);
   return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::intt() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt_doubling() {
+  set_fft();
+  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);
+}
+
+template <typename mint>
+int FormalPowerSeries<mint>::ntt_pr() {
+  set_fft();
+  return static_cast<NTT<mint>*>(ntt_ptr)->pr;
 }
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
-  if (deg == -1) deg = (*this).size();
-  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
-  for (int i = 1; i < deg; i <<= 1)
-    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
-  return ret.pre(deg);
+  if (deg == -1) deg = (int)this->size();
+  FormalPowerSeries<mint> res(deg);
+  res[0] = {mint(1) / (*this)[0]};
+  for (int d = 1; d < deg; d <<= 1) {
+    FormalPowerSeries<mint> f(2 * d), g(2 * d);
+    for (int j = 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];
+    for (int j = 0; j < d; j++) g[j] = res[j];
+    f.ntt();
+    g.ntt();
+    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
+    f.intt();
+    for (int j = 0; j < d; j++) f[j] = 0;
+    f.ntt();
+    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
+    f.intt();
+    for (int j = d; j < min(2 * d, deg); j++) res[j] = -f[j];
+  }
+  return res.pre(deg);
 }
 
 template <typename mint>
@@ -1437,148 +1355,182 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   }
   return ret.pre(deg);
 }
-#line 1 "fps/circular.hpp"
-
-#line 4 "fps/circular.hpp"
-
-template <typename mint>
-pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
-    const FormalPowerSeries<mint> &fre, const FormalPowerSeries<mint> &fim,
-    int deg = -1) {
-  using fps = FormalPowerSeries<mint>;
-  assert(fre.size() == 0 || fre[0] == mint(0));
-  assert(fim.size() == 0 || fim[0] == mint(0));
-  if (deg == -1) deg = (int)max(fre.size(), fim.size());
-  fps re({mint(1)}), im({mint(0)});
-
-  fps::set_fft();
-  if (fps::ntt_ptr == nullptr) {
-    for (int i = 1; i < deg; i <<= 1) {
-      fps dre = re.diff();
-      fps dim = im.diff();
-      fps fhypot = (re * re + im * im).inv(i << 1);
-      fps ere = dre * re + dim * im;
-      fps eim = dim * re - dre * im;
-      fps logre = (ere * fhypot).pre((i << 1) - 1).integral();
-      fps logim = (eim * fhypot).pre((i << 1) - 1).integral();
-      fps gre = (-logre) + mint(1) - fim.pre(i << 1);
-      fps gim = (-logim) + fre.pre(i << 1);
-      fps hre = (re * gre - im * gim).pre(i << 1);
-      fps him = (re * gim + im * gre).pre(i << 1);
-      swap(re, hre);
-      swap(im, him);
-    }
-  } else {
-    for (int i = 1; i < deg; i <<= 1) {
-      fps dre = re.diff();
-      fps dim = im.diff();
-      re.resize(i << 1);
-      im.resize(i << 1);
-      dre.resize(i << 1);
-      dim.resize(i << 1);
-      re.ntt();
-      im.ntt();
-      dre.ntt();
-      dim.ntt();
-      fps fhypot(i << 1), ere(i << 1), eim(i << 1);
-      for (int j = 0; j < 2 * i; j++) {
-        fhypot[j] = re[j] * re[j] + im[j] * im[j];
-        ere[j] = dre[j] * re[j] + dim[j] * im[j];
-        eim[j] = dim[j] * re[j] - dre[j] * im[j];
-      }
-      fhypot.intt();
-      fhypot = fhypot.inv(i << 1);
-      fhypot.resize(i << 2);
-      fhypot.ntt();
-      ere.ntt_doubling();
-      eim.ntt_doubling();
-      fps logre(i << 2), logim(i << 2);
-      for (int j = 0; j < 4 * i; j++) {
-        logre[j] = ere[j] * fhypot[j];
-        logim[j] = eim[j] * fhypot[j];
-      }
-      logre.intt();
-      logim.intt();
-      logre = logre.pre((i << 1) - 1).integral();
-      logim = logim.pre((i << 1) - 1).integral();
-      fps gre = (-logre) + mint(1) - fim.pre(i << 1);
-      fps gim = (-logim) + fre.pre(i << 1);
-      gre.resize(i << 2);
-      gim.resize(i << 2);
-      gre.ntt();
-      gim.ntt();
-      re.ntt_doubling();
-      im.ntt_doubling();
-      fps hre(i << 2), him(i << 2);
-      for (int j = 0; j < 4 * i; j++) {
-        hre[j] = re[j] * gre[j] - im[j] * gim[j];
-        him[j] = re[j] * gim[j] + im[j] * gre[j];
-      }
-      hre.intt();
-      him.intt();
-      hre = hre.pre(i << 1);
-      him = him.pre(i << 1);
-      swap(re, hre);
-      swap(im, him);
-    }
-  }
-  return make_pair(re.pre(deg), im.pre(deg));
-}
-#line 3 "modulo/binomial.hpp"
+#line 3 "modint/arbitrary-prime-modint.hpp"
 using namespace std;
 
-template <typename T>
-struct Binomial {
-  vector<T> fac_, finv_, inv_;
-  Binomial(int MAX) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {
-    MAX += 9;
-    fac_[0] = finv_[0] = inv_[0] = 1;
-    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;
-    finv_[MAX] = fac_[MAX].inverse();
-    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);
-    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];
+struct ArbitraryLazyMontgomeryModInt {
+  using mint = ArbitraryLazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
+
+  static u32 mod;
+  static u32 r;
+  static u32 n2;
+
+  static u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
   }
 
-  inline T fac(int i) const { return fac_[i]; }
-  inline T finv(int i) const { return finv_[i]; }
-  inline T inv(int i) const { return inv_[i]; }
-
-  T C(int n, int r) const {
-    if (n < r || r < 0) return T(0);
-    return fac_[n] * finv_[n - r] * finv_[r];
+  static void set_mod(u32 m) {
+    assert(m < (1 << 30));
+    assert((m & 1) == 1);
+    mod = m;
+    n2 = -u64(m) % m;
+    r = get_r();
+    assert(r * mod == 1);
   }
 
-  T C_naive(int n, int r) const {
-    if (n < r || r < 0) return T(0);
-    T ret = 1;
-    for (T i = 1; i <= r; i += T(1)) {
-      ret *= n--;
-      ret *= i.inverse();
+  u32 a;
+
+  ArbitraryLazyMontgomeryModInt() : a(0) {}
+  ArbitraryLazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
+  }
+
+  mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
+    return *this;
+  }
+
+  mint &operator/=(const mint &b) {
+    *this *= b.inverse();
+    return *this;
+  }
+
+  mint operator+(const mint &b) const { return mint(*this) += b; }
+  mint operator-(const mint &b) const { return mint(*this) -= b; }
+  mint operator*(const mint &b) const { return mint(*this) *= b; }
+  mint operator/(const mint &b) const { return mint(*this) /= b; }
+  bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
+  }
+  bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  mint operator-() const { return mint() - mint(*this); }
+
+  mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
     }
     return ret;
   }
 
-  T P(int n, int r) const {
-    if (n < r || r < 0) return T(0);
-    return fac_[n] * finv_[n - r];
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
   }
 
-  T H(int n, int r) const {
-    if (n < 0 || r < 0) return (0);
-    return r == 0 ? 1 : C(n + r - 1, r);
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = ArbitraryLazyMontgomeryModInt(t);
+    return (is);
   }
+
+  mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
+
+  static u32 get_mod() { return mod; }
 };
-#line 8 "verify-yuki/yuki-1080.test.cpp"
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
+#line 2 "modulo/mod-sqrt.hpp"
+
+int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
+  if (a == 0) return 0;
+  if (p == 2) return a;
+  using mint = ArbitraryLazyMontgomeryModInt;
+  mint::set_mod(p);
+  if (mint(a).pow((p - 1) >> 1) != 1) return -1;
+  mint b = 1, one = 1;
+  while (b.pow((p - 1) >> 1) == 1) b += one;
+  int64_t m = p - 1, e = 0;
+  while (m % 2 == 0) m >>= 1, e += 1;
+  mint x = mint(a).pow((m - 1) >> 1);
+  mint y = mint(a) * x * x;
+  x *= a;
+  mint z = mint(b).pow(m);
+  while (y != 1) {
+    int64_t j = 0;
+    mint t = y;
+    while (t != one) {
+      j += 1;
+      t *= t;
+    }
+    z = z.pow(int64_t(1) << (e - j - 1));
+    x *= z;
+    z *= z;
+    y *= z;
+    e = j;
+  }
+  return x.get();
+}
+#line 3 "fps/sqrt.hpp"
+
+template <typename mint>
+FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
+  if (deg == -1) deg = (int)f.size();
+  if ((int)f.size() == 0) return FormalPowerSeries<mint>(deg, 0);
+  if (f[0] == mint(0)) {
+    for (int i = 1; i < (int)f.size(); i++) {
+      if (f[i] != mint(0)) {
+        if (i & 1) return {};
+        if (deg - i / 2 <= 0) break;
+        auto ret = sqrt(f >> i, deg - i / 2);
+        if (ret.empty()) return {};
+        ret = ret << (i / 2);
+        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
+        return ret;
+      }
+    }
+    return FormalPowerSeries<mint>(deg, 0);
+  }
+
+  int64_t sqr = mod_sqrt(f[0].get(), mint::get_mod());
+  if (sqr == -1) return {};
+  assert(sqr * sqr % mint::get_mod() == f[0].get());
+  FormalPowerSeries<mint> ret = {mint(sqr)};
+  mint inv2 = mint(2).inverse();
+  for (int i = 1; i < deg; i <<= 1) {
+    ret = (ret + f.pre(i << 1) * ret.inv(i << 1)) * inv2;
+  }
+  return ret.pre(deg);
+}
+#line 7 "verify-yosupo-fps/yosupo-sqrt.test.cpp"
 
 void solve() {
-  using mint = LazyMontgomeryModInt<1000000009>;
+  using mint = LazyMontgomeryModInt<998244353>;
   using fps = FormalPowerSeries<mint>;
-  Binomial<mint> C(1001001);
-  ini(K);
-  fps f = (fps{1, 1} * (fps{1, -3, 3, -1}.inv(K + 1))).pre(K + 1) - 1;
-  auto [cos, sin] = circular(f, fps(), K + 1);
-  fps g = (cos + sin) * C.fac(K);
-  rep1(i, K) out(g[i]);
+  ini(N);
+  fps f(N);
+  in(f);
+  auto g = sqrt(f);
+  if(g.empty()) out(-1);
+  else out(g);
 }
 
 ```

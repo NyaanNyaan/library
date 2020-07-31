@@ -25,22 +25,27 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: fps/sqrt.hpp
+# :heavy_check_mark: fps/sqrt.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/sqrt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+    - Last commit date: 2020-07-31 20:49:17+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 
 
 ## Code
@@ -52,7 +57,7 @@ layout: default
 #include "../modulo/mod-sqrt.hpp"
 
 template <typename mint>
-FormalPowerSeries<mint> sqrt(FormalPowerSeries<mint> &f, int deg = -1) {
+FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
   if (deg == -1) deg = (int)f.size();
   if ((int)f.size() == 0) return FormalPowerSeries<mint>(deg, 0);
   if (f[0] == mint(0)) {
@@ -63,7 +68,7 @@ FormalPowerSeries<mint> sqrt(FormalPowerSeries<mint> &f, int deg = -1) {
         auto ret = sqrt(f >> i, deg - i / 2);
         if (ret.empty()) return {};
         ret = ret << (i / 2);
-        if (ret.size() < deg) ret.resize(deg, mint(0));
+        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
         return ret;
       }
     }
@@ -383,7 +388,7 @@ int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
 #line 3 "fps/sqrt.hpp"
 
 template <typename mint>
-FormalPowerSeries<mint> sqrt(FormalPowerSeries<mint> &f, int deg = -1) {
+FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
   if (deg == -1) deg = (int)f.size();
   if ((int)f.size() == 0) return FormalPowerSeries<mint>(deg, 0);
   if (f[0] == mint(0)) {
@@ -394,7 +399,7 @@ FormalPowerSeries<mint> sqrt(FormalPowerSeries<mint> &f, int deg = -1) {
         auto ret = sqrt(f >> i, deg - i / 2);
         if (ret.empty()) return {};
         ret = ret << (i / 2);
-        if (ret.size() < deg) ret.resize(deg, mint(0));
+        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
         return ret;
       }
     }

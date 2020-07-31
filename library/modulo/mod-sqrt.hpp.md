@@ -43,11 +43,12 @@ layout: default
 
 ## Required by
 
-* :warning: <a href="../fps/sqrt.hpp.html">fps/sqrt.hpp</a>
+* :heavy_check_mark: <a href="../fps/sqrt.hpp.html">fps/sqrt.hpp</a>
 
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
 
 
