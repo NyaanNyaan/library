@@ -21,27 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#bd0671126b1c769555a4a09b2a39dde2">verify-yosupo-ds</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 15:08:31+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/rectangle_sum">https://judge.yosupo.jp/problem/rectangle_sum</a>
+* see: <a href="https://judge.yosupo.jp/problem/staticrmq">https://judge.yosupo.jp/problem/staticrmq</a>
 
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
 
 
 ## Code
@@ -49,20 +48,19 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
+#define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/rectangle-sum.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/sparse-table.hpp"
 
-void solve() {
-  ini(N, Q);
-  vl xs(N), ys(N), ws(N);
-  in3(xs, ys, ws);
-  auto f = [](ll u, ll v) { return u + v; };
-  RectangleSum<ll, ll, decltype(f)> rect(xs, ys, ws, f);
-  rep(_, Q) {
-    inl(l, d, r, u);
-    out(rect.rect_sum(l, d, r, u));
+void solve(){
+  ini(N,Q);
+  vl a(N);
+  in(a);
+  SparseTable<ll> sparse(a);
+  rep(i,Q){
+    ini(l,r);
+    out(sparse.query(l,r));
   }
 }
 ```
@@ -71,8 +69,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-ds/yosupo-rectangle-sum.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
+#line 1 "verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -374,201 +372,55 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/rectangle-sum.hpp"
+#line 3 "data-structure/sparse-table.hpp"
 using namespace std;
 
-#line 3 "segment-tree/persistent-segment-tree.hpp"
-using namespace std;
+template <typename T>
+struct SparseTable {
+  vector<vector<T> > table;
+  vector<int> log_table;
 
-template <typename T, typename F, int NODES = 20000000>
-struct PersistentSegmentTree {
-  using ll = long long;
-  struct Node {
-    T data;
-    Node *l, *r;
-    Node() {}
-    Node(const T &_data) : data(_data), l(nullptr), r(nullptr) {}
-  };
+  inline T f(T a, T b) { return min(a, b); }
 
-  Node *pool;
-  int pid;
-  ll N;
-  const F f;
-  const T ID;
-  Node *nil;
-  vector<Node *> roots;
-
-  PersistentSegmentTree(const vector<T> &v, const F &f_, const T &ID_)
-      : pid(0), f(f_), ID(ID_), nil(nullptr) {
-    pool = new Node[NODES];
-    nil = my_new(ID);
-    nil->l = nil->r = nil;
-    roots.reserve(262144);
-    roots.push_back(build(v));
-  }
-
-  PersistentSegmentTree(const ll &N_, const F &f_, const T &ID_)
-      : pid(0), N(N_), f(f_), ID(ID_), nil(nullptr) {
-    pool = new Node[NODES];
-    nil = my_new(ID);
-    nil->l = nil->r = nil;
-    roots.reserve(262144);
-    roots.push_back(nil);
-  }
-
-  Node *my_new(const T &data) {
-    pool[pid].data = data;
-    pool[pid].l = pool[pid].r = nil;
-    return &(pool[pid++]);
-  }
-
-  Node *merge(Node *l, Node *r) {
-    pool[pid].data = f(l->data, r->data);
-    pool[pid].l = l;
-    pool[pid].r = r;
-    return &(pool[pid++]);
-  }
-
-  Node *build(const vector<T> &v) {
-    N = (ll)v.size();
-    return build(0, (ll)v.size(), v);
-  }
-
-  Node *build(ll l, ll r, const vector<T> &v) {
-    if (l + 1 == r) return my_new(v[l]);
-    ll m = (l + r) >> 1;
-    return merge(build(l, m, v), build(m, r, v));
-  }
-
- private:
-  Node *update_(ll a, const T &x, Node *n, ll l, ll r) {
-    if (l + 1 == r) return my_new(x);
-    ll m = (l + r) >> 1;
-    if (a < m) return merge(update_(a, x, n->l, l, m), n->r);
-    return merge(n->l, update_(a, x, n->r, m, r));
-  }
-  Node *add_(ll a, const T &x, Node *n, ll l, ll r) {
-    if (l + 1 == r) return my_new(f(x, n->data));
-    ll m = (l + r) >> 1;
-    if (a < m) return merge(add_(a, x, n->l, l, m), n->r);
-    return merge(n->l, add_(a, x, n->r, m, r));
-  }
-  T query_(ll a, ll b, Node *n, ll l, ll r) {
-    if (n == nil) return ID;
-    if (r <= a or b <= l) return ID;
-    if (a <= l and r <= b) return n->data;
-    ll m = (l + r) >> 1;
-    return f(query_(a, b, n->l, l, m), query_(a, b, n->r, m, r));
-  }
-
- public:
-  Node *update(Node *n, ll k, const T &x) {
-    Node *root = update_(k, x, n, 0, N);
-    roots.push_back(root);
-    return root;
-  }
-  Node *update(int t, ll k, const T &x) {
-    Node *root = update_(k, x, roots[t], 0, N);
-    roots.push_back(root);
-    return root;
-  }
-  Node *update(ll k, const T &x) {
-    Node *root = update_(k, x, roots.back(), 0, N);
-    roots.push_back(root);
-    return root;
-  }
-
-  Node *add(Node *n, ll k, const T &x) {
-    Node *root = add_(k, x, n, 0, N);
-    roots.push_back(root);
-    return root;
-  }
-  Node *add(int t, ll k, const T &x) {
-    Node *root = add_(k, x, roots[t], 0, N);
-    roots.push_back(root);
-    return root;
-  }
-  Node *add(ll k, const T &x) {
-    Node *root = add_(k, x, roots.back(), 0, N);
-    roots.push_back(root);
-    return root;
-  }
-
-  T query(Node *n, ll a, ll b) { return query_(a, b, n, 0, N); }
-  T query(int t, ll a, ll b) { return query_(a, b, roots[t], 0, N); }
-  T query(ll a, ll b) { return query_(a, b, roots.back(), 0, N); }
-
-  Node *new_tree() { return nil; }
-};
-#line 6 "data-structure/rectangle-sum.hpp"
-
-template <typename T, typename U, typename F>
-struct RectangleSum {
-  PersistentSegmentTree<U, F> seg;
-  vector<T> xs, ys;
-  vector<U> ws;
-  vector<int> ord;
-
-  RectangleSum(const vector<T> &xs_, const vector<T> &ys_, const vector<U> &ws_,
-               const F &f)
-      : seg({(int)xs_.size() + 1, f, U(0)}) {
-    int N = xs_.size();
-    xs.reserve(N);
-    ys.reserve(N);
-    ws.reserve(N);
-    ord.resize(N);
-    iota(begin(ord), end(ord), 0);
-    sort(begin(ord), end(ord), [&](int i, int j) { return xs_[i] < xs_[j]; });
-    for (auto &i : ord) {
-      xs.push_back(xs_[i]);
-      ys.push_back(ys_[i]);
-      ws.push_back(ws_[i]);
+  SparseTable(const vector<T> &v) {
+    int b = 0;
+    while ((1 << b) <= (int)v.size()) ++b;
+    table.assign(b, vector<T>(1 << b));
+    for (int i = 0; i < (int)v.size(); i++) {
+      table[0][i] = v[i];
     }
-    iota(begin(ord), end(ord), 0);
-    sort(begin(ord), end(ord), [&](int i, int j) { return ys[i] < ys[j]; });
-    vector<T> ys2;
-    ys2.reserve(N);
-    for (auto &i : ord) {
-      seg.add(i, ws[i]);
-      ys2.push_back(ys[i]);
+    for (int i = 1; i < b; i++) {
+      for (int j = 0; j + (1 << i) <= (1 << b); j++) {
+        table[i][j] = f(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);
+      }
     }
-    ys.swap(ys2);
+    log_table.resize(v.size() + 1);
+    for (int i = 2; i < (int)log_table.size(); i++) {
+      log_table[i] = log_table[i >> 1] + 1;
+    }
   }
 
-  // [ [x1, 0], [x2, y] )
-  U rect_sum(T x1, T x2, T y) {
-    int l = lower_bound(begin(xs), end(xs), x1) - begin(xs);
-    int r = lower_bound(begin(xs), end(xs), x2) - begin(xs);
-    int u = lower_bound(begin(ys), end(ys), y) - begin(ys);
-    return seg.query(u, l, r);
-  }
-
-  // [ [x1, y1], [x2, y2] )
-  U rect_sum(T x1, T y1, T x2, T y2) {
-    if (x1 >= x2 || y1 >= y2) return U(0);
-    int l = lower_bound(begin(xs), end(xs), x1) - begin(xs);
-    int r = lower_bound(begin(xs), end(xs), x2) - begin(xs);
-    int d = lower_bound(begin(ys), end(ys), y1) - begin(ys);
-    int u = lower_bound(begin(ys), end(ys), y2) - begin(ys);
-    return seg.query(u, l, r) - seg.query(d, l, r);
+  // [l, r)
+  inline T query(int l, int r) {
+    int b = log_table[r - l];
+    return f(table[b][l], table[b][r - (1 << b)]);
   }
 };
-#line 5 "verify-yosupo-ds/yosupo-rectangle-sum.test.cpp"
+#line 5 "verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp"
 
-void solve() {
-  ini(N, Q);
-  vl xs(N), ys(N), ws(N);
-  in3(xs, ys, ws);
-  auto f = [](ll u, ll v) { return u + v; };
-  RectangleSum<ll, ll, decltype(f)> rect(xs, ys, ws, f);
-  rep(_, Q) {
-    inl(l, d, r, u);
-    out(rect.rect_sum(l, d, r, u));
+void solve(){
+  ini(N,Q);
+  vl a(N);
+  in(a);
+  SparseTable<ll> sparse(a);
+  rep(i,Q){
+    ini(l,r);
+    out(sparse.query(l,r));
   }
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

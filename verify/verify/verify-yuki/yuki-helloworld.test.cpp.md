@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: verify/verify-yuki/yuki-helloworld.test.cpp
+# :heavy_check_mark: verify/verify-yuki/yuki-helloworld.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 

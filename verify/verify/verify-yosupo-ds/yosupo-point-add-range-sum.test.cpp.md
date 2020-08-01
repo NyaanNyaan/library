@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#bd0671126b1c769555a4a09b2a39dde2">verify-yosupo-ds</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 15:08:31+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_add_range_sum">https://judge.yosupo.jp/problem/point_add_range_sum</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
 
 
 ## Code
@@ -50,8 +50,8 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/binary-indexed-tree.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/binary-indexed-tree.hpp"
 
 void solve() {
   ini(N, Q);
@@ -73,7 +73,7 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp"
+#line 1 "verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 
 #line 1 "competitive-template.hpp"
@@ -443,7 +443,7 @@ struct BinaryIndexedTree {
     return x;
   }
 };
-#line 5 "verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp"
+#line 5 "verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp"
 
 void solve() {
   ini(N, Q);
@@ -463,5 +463,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
