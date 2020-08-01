@@ -10,6 +10,6 @@ $$\leftrightarrow g \equiv \frac{1}{2}\left(\hat{g}+\frac{f}{\hat{g}}\right) \mo
 
 を得てダブリングで求まる。計算量は$\mathrm{O}(N \log N)$。
 
-#### 実装
+#### 使い方
 
 - `sqrt(f, deg)`: FPSである$f$について$\sqrt f$を求める。

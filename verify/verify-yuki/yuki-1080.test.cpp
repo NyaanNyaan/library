@@ -1,10 +1,10 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1080"
 
-#include "../competitive-template.hpp"
-#include "../fps/arbitrary-fps.hpp"
-#include "../fps/circular.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../modulo/binomial.hpp"
+#include "../../competitive-template.hpp"
+#include "../../fps/arbitrary-fps.hpp"
+#include "../../fps/fps-circular.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../modulo/binomial.hpp"
 
 void solve() {
   using mint = LazyMontgomeryModInt<1000000009>;

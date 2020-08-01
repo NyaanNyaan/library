@@ -1,9 +1,9 @@
 #define PROBLEM "https://yukicoder.me/problems/no/963"
 
-#include "../competitive-template.hpp"
-#include "../fps/differential-equation.hpp"
-#include "../fps/ntt-friendly-fps.hpp"
-#include "../modint/montgomery-modint.hpp"
+#include "../../competitive-template.hpp"
+#include "../../fps/differential-equation.hpp"
+#include "../../fps/ntt-friendly-fps.hpp"
+#include "../../modint/montgomery-modint.hpp"
 
 using mint = LazyMontgomeryModInt<1012924417>;
 using vm = vector<mint>;

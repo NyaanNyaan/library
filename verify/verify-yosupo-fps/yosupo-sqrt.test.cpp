@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_of_formal_power_series"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../fps/ntt-friendly-fps.hpp"
-#include "../fps/sqrt.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../fps/ntt-friendly-fps.hpp"
+#include "../../fps/fps-sqrt.hpp"
 
 void solve() {
   using mint = LazyMontgomeryModInt<998244353>;

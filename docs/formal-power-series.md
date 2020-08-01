@@ -119,6 +119,14 @@ $g \equiv f^k \mod x^n$となる$g$を求めたい。繰り返し自乗法を用
 
 $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{f}{a_p x^p}\right)^k$を計算して最後に$a_p^kx^{kp}$を掛ければよいため、$f$の定数項が$1$である場合のみ考えればよい。このとき$f^k$は$f^k\equiv e^{(\log f)k}$から計算できる。
 
+### 平方根
+
+[fps/fps-sqrt.hpp](https://nyaannyaan.github.io/library/library/fps/fps-sqrt.hpp.html)にて解説。
+
+### 三角関数
+
+[fps/fps-circular.hpp](https://nyaannyaan.github.io/library/library/fps/fps-circular.hpp.html)にて解説。
+
 ## 以下未実装
 
 ### 平行移動

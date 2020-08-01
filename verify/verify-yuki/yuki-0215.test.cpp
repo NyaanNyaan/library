@@ -1,8 +1,8 @@
 #define PROBLEM "https://yukicoder.me/problems/no/215"
-#include "../competitive-template.hpp"
-#include "../fps/arbitrary-fps.hpp"
-#include "../fps/kitamasa.hpp"
-#include "../modint/montgomery-modint.hpp"
+#include "../../competitive-template.hpp"
+#include "../../fps/arbitrary-fps.hpp"
+#include "../../fps/kitamasa.hpp"
+#include "../../modint/montgomery-modint.hpp"
 
 using mint = LazyMontgomeryModInt<1000000007>;
 using fps = FormalPowerSeries<mint>;

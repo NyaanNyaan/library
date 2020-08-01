@@ -1,9 +1,9 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1145"
 
-#include "../competitive-template.hpp"
-#include "../fps/ntt-friendly-fps.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../fps/utility.hpp"
+#include "../../competitive-template.hpp"
+#include "../../fps/ntt-friendly-fps.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../fps/utility.hpp"
 
 constexpr int MOD9 = 998244353;
 using mint = LazyMontgomeryModInt<MOD9>;
