@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../segment-tree/lazy-segment-tree.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../segment-tree/lazy-segment-tree.hpp"
 
 using mint = LazyMontgomeryModInt<998244353>;
 

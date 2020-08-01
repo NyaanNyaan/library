@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/rectangle-sum.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/rectangle-sum.hpp"
 
 void solve() {
   ini(N, Q);

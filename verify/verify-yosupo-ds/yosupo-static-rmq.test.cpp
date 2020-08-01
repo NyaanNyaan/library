@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/sparse-table.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/sparse-table.hpp"
 
 void solve(){
   ini(N,Q);
