@@ -1,9 +1,9 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
-#include "../competitive-template.hpp"
-#include "../tree/cartesian-tree.hpp"
-#include "../tree/heavy-light-decomposition.hpp"
+#include "../../competitive-template.hpp"
+#include "../../tree/cartesian-tree.hpp"
+#include "../../tree/heavy-light-decomposition.hpp"
 
 void solve() {
   ini(N, L);

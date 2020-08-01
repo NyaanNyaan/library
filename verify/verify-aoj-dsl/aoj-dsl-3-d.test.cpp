@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/sliding-window-minimum.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/sliding-window-minimum.hpp"
 
 void solve() {
   ini(N, L);

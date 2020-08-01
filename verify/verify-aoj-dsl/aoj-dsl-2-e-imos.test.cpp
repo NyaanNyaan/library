@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/binary-indexed-tree.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/binary-indexed-tree.hpp"
 
 void solve() {
   ini(N, Q);

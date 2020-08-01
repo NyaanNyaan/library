@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
 
-#include "../competitive-template.hpp"
-#include "../segment-tree/range-update-range-sum-lazyseg.hpp"
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/range-update-range-sum-lazyseg.hpp"
 
 void solve() {
   ini(N, Q);
