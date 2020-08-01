@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/dynamic-union-find.hpp.html">data-structure/dynamic-union-find.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/2d-cumulative-sum.hpp.html">data-structure/2d-cumulative-sum.hpp</a>
 
 
 ## Code
@@ -49,24 +49,23 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/dynamic-union-find.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/2d-cumulative-sum.hpp"
 
 void solve() {
-  ini(N, Q);
-  DynamicUnionFind uf;
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(x, y);
-      uf.unite(x, y);
-    } else {
-      ini(x,y);
-      out(uf.same(x,y));
-    }
+  ini(N);
+  int L = 1000;
+  CumulativeSum2D<int> ruiseki(L, L);
+  rep(i, N) {
+    ini(x1, y1, x2, y2);
+    ruiseki.imos(x1, y1, x2 , y2, 1);
   }
+  ruiseki.build();
+  int ans = 0;
+  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]); }
+  out(ans);
 }
 ```
 {% endraw %}
@@ -74,9 +73,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -378,58 +377,60 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/dynamic-union-find.hpp"
+#line 3 "data-structure/2d-cumulative-sum.hpp"
 using namespace std;
 
-struct DynamicUnionFind {
-  unordered_map<int, int> m;
-  DynamicUnionFind() {}
+// Don't Forget to call build() !!!!!
+template <class T>
+struct CumulativeSum2D {
+  vector<vector<T> > data;
 
-  int data(int k) {
-    auto itk = m.find(k);
-    return itk == m.end() ? m[k] = -1 : itk->second;
-  }
-  int find(int k) {
-    int datk = data(k);
-    return datk < 0 ? k : m[k] = find(datk);
+  CumulativeSum2D(int H, int W) : data(H + 3, vector<int>(W + 3, 0)) {}
+
+  void add(int i, int j, T z) {
+    ++i, ++j;
+    if (i >= (int)data.size() || j >= (int)data[0].size()) return;
+    data[i][j] += z;
   }
 
-  int unite(int x, int y) {
-    if ((x = find(x)) == (y = find(y))) return false;
-    auto itx = m.find(x), ity = m.find(y);
-    if (itx->second > ity->second) {
-      ity->second += itx->second;
-      itx->second = y;
-    } else {
-      itx->second += ity->second;
-      ity->second = x;
+  // add [ [i1,j1], [i2,j2] )
+  void imos(int i1, int j1, int i2, int j2, T z) {
+    add(i1, j1, 1);
+    add(i1, j2, -1);
+    add(i2, j1, -1);
+    add(i2, j2, 1);
+  }
+
+  void build() {
+    for (int i = 1; i < (int)data.size(); i++) {
+      for (int j = 1; j < (int)data[i].size(); j++) {
+        data[i][j] += data[i][j - 1] + data[i - 1][j] - data[i - 1][j - 1];
+      }
     }
-    return true;
   }
 
-  int size(int k) { return -data(find(k)); }
-
-  int same(int x, int y) { return find(x) == find(y); }
+  T query(int i1, int j1, int i2, int j2) {
+    return (data[i2][j2] - data[i1][j2] - data[i2][j1] + data[i1][j1]);
+  }
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp"
 
 void solve() {
-  ini(N, Q);
-  DynamicUnionFind uf;
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(x, y);
-      uf.unite(x, y);
-    } else {
-      ini(x,y);
-      out(uf.same(x,y));
-    }
+  ini(N);
+  int L = 1000;
+  CumulativeSum2D<int> ruiseki(L, L);
+  rep(i, N) {
+    ini(x1, y1, x2, y2);
+    ruiseki.imos(x1, y1, x2 , y2, 1);
   }
+  ruiseki.build();
+  int ans = 0;
+  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]); }
+  out(ans);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

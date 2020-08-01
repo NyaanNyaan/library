@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/segment-tree.hpp.html">segment-tree/segment-tree.hpp</a>
 
 
 ## Code
@@ -49,24 +49,25 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/binary-indexed-tree.hpp"
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/segment-tree.hpp"
 
 void solve() {
   ini(N, Q);
-  BinaryIndexedTree<int> bit(N);
+  int unit = (1LL << 31) - 1;
+  auto f = [](int a, int b) { return min(a, b); };
+  SegmentTree<int, decltype(f)> seg(N, f, unit);
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(s, t, x);
-      s--, t--;
-      bit.imos(s, t, x);
+      ini(i, a);
+      seg.update(i, a);
     } else {
-      ini(i);
-      i--;
-      out(bit.sum(i));
+      ini(x, y);
+      y++;
+      out(seg.query(x, y));
     }
   }
 }
@@ -76,9 +77,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -380,88 +381,89 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/binary-indexed-tree.hpp"
+#line 3 "segment-tree/segment-tree.hpp"
 using namespace std;
 
-template <typename T>
-struct BinaryIndexedTree {
-  int N;
-  int max_2beki;
-  vector<T> data;
+template<typename T,typename F>
+struct SegmentTree{
 
-  BinaryIndexedTree(int size) {
-    N = ++size;
-    data.assign(N + 3, 0);
-    max_2beki = 1;
-    while (max_2beki * 2 <= N) max_2beki *= 2;
+  int size;
+  vector<T> seg;
+  const F func;
+  const T UNIT;
+  
+  SegmentTree(int N,F func , T UNIT): func(func) , UNIT(UNIT) {
+    size = 1;
+    while(size < N) size <<= 1;
+    seg.assign(2 * size, UNIT);
   }
 
-  // get sum of [0,k]
-  T sum(int k) const {
-    if (k < 0) return 0;  // return 0 if k < 0
-    T ret = 0;
-    for (++k; k > 0; k -= k & -k) ret += data[k];
-    return ret;
-  }
-
-  // getsum of [l,r]
-  inline T sum(int l, int r) const { return sum(r) - sum(l - 1); }
-
-  // get value of k
-  inline T operator[](int k) const { return sum(k) - sum(k - 1); }
-
-  // data[k] += x
-  void add(int k, T x) {
-    for (++k; k < N; k += k & -k) data[k] += x;
-  }
-
-  // range add x to [l,r]
-  void imos(int l, int r, T x) {
-    add(l, x);
-    add(r + 1, -x);
-  }
-
-  // minimize i s.t. sum(i) >= w
-  int lower_bound(T w) {
-    if (w <= 0) return 0;
-    int x = 0;
-    for (int k = max_2beki; k > 0; k /= 2) {
-      if (x + k <= N - 1 && data[x + k] < w) {
-        w -= data[x + k];
-        x += k;
-      }
+  SegmentTree(const vector<T> &v,F func , T UNIT) : func(func) , UNIT(UNIT){
+    int N = (int)v.size();
+    size = 1;
+    while(size < N) size <<= 1;
+    seg.assign(2 * size , UNIT);
+    for(int i = 0; i < N; i++){
+      seg[i + size] = v[i];
     }
-    return x;
+    build();
   }
 
-  // minimize i s.t. sum(i) > w
-  int upper_bound(T w) {
-    if (w < 0) return 0;
-    int x = 0;
-    for (int k = max_2beki; k > 0; k /= 2) {
-      if (x + k <= N - 1 && data[x + k] <= w) {
-        w -= data[x + k];
-        x += k;
-      }
-    }
-    return x;
+  void set(int k, T x){
+    seg[k + size] = x;
   }
+
+  void build(){
+    for(int k = size-1; k > 0; k--){
+      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
+    }
+  }
+  
+  void update(int k, T x){
+    k += size; seg[k] = x;
+    while(k >>= 1){
+      seg[k] = func( seg[2 * k] , seg[2 * k + 1] );
+    }
+  }
+
+  void add(int k , T x){
+    k += size; seg[k] += x;
+    while(k >>= 1){
+      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
+    }
+  }
+  
+  // query to [a, b) 
+  T query(int a, int b){
+    T L = UNIT, R = UNIT;
+    for(a+=size,b+=size; a<b; a>>=1,b>>=1){
+      if(a & 1) L = func(L,seg[a++]);
+      if(b & 1) R = func(seg[--b],R);
+    }
+    return func(L, R);
+  }
+
+  T& operator[](const int &k){
+    return seg[k + size];
+  }
+
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp"
 
 void solve() {
   ini(N, Q);
-  BinaryIndexedTree<int> bit(N);
+  int unit = (1LL << 31) - 1;
+  auto f = [](int a, int b) { return min(a, b); };
+  SegmentTree<int, decltype(f)> seg(N, f, unit);
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(s, t, x);
-      s--, t--;
-      bit.imos(s, t, x);
+      ini(i, a);
+      seg.update(i, a);
     } else {
-      ini(i);
-      i--;
-      out(bit.sum(i));
+      ini(x, y);
+      y++;
+      out(seg.query(x, y));
     }
   }
 }
@@ -469,5 +471,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

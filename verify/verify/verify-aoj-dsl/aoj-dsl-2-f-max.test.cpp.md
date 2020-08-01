@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/segment-tree.hpp.html">segment-tree/segment-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/range-update-range-max-lazyseg.hpp.html">segment-tree/range-update-range-max-lazyseg.hpp</a>
 
 
 ## Code
@@ -49,25 +49,25 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
 
-#include "../competitive-template.hpp"
-#include "../segment-tree/segment-tree.hpp"
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/range-update-range-max-lazyseg.hpp"
 
 void solve() {
   ini(N, Q);
-  auto f = [](int a, int b) { return a + b; };
-  SegmentTree<int, decltype(f)> seg(N, f, 0);
+  constexpr int I = (1LL << 31) - 1;
+  UpdateMax_LazySegmentTree<int, -I> seg(vi(N, -I));
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(i, a);
-      i--;
-      seg.add(i, a);
+      ini(s, t, x);
+      t++;
+      seg.update(s, t, -x);
     } else {
-      ini(x, y);
-      x--;
-      out(seg.query(x, y));
+      ini(s, t);
+      t++;
+      out(-seg.query(s, t));
     }
   }
 }
@@ -77,9 +77,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -381,89 +381,104 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "segment-tree/segment-tree.hpp"
+#line 3 "segment-tree/range-update-range-max-lazyseg.hpp"
 using namespace std;
 
-template<typename T,typename F>
-struct SegmentTree{
+template <typename E, E MINF>
+struct UpdateMax_LazySegmentTree {
+  int n, height;
+  using T = E;
+  T f(T a, T b) { return max(a, b); };
+  T g(T a, E b) { return b; };
+  E h(E a, E b) { return b; };
+  T ti = MINF;
+  E ei = MINF;
+  vector<T> dat;
+  vector<E> laz;
 
-  int size;
-  vector<T> seg;
-  const F func;
-  const T UNIT;
-  
-  SegmentTree(int N,F func , T UNIT): func(func) , UNIT(UNIT) {
-    size = 1;
-    while(size < N) size <<= 1;
-    seg.assign(2 * size, UNIT);
+  UpdateMax_LazySegmentTree(const vector<E> &v) { build(v); }
+
+  void init(int n_) {
+    n = 1;
+    height = 0;
+    while (n < n_) n <<= 1, height++;
+    dat.assign(2 * n, ti);
+    laz.assign(2 * n, ei);
   }
 
-  SegmentTree(const vector<T> &v,F func , T UNIT) : func(func) , UNIT(UNIT){
-    int N = (int)v.size();
-    size = 1;
-    while(size < N) size <<= 1;
-    seg.assign(2 * size , UNIT);
-    for(int i = 0; i < N; i++){
-      seg[i + size] = v[i];
+  void build(const vector<E> &v) {
+    int n_ = v.size();
+    init(n_);
+    for (int i = 0; i < n_; i++) dat[n + i] = v[i];
+    for (int i = n - 1; i; i--)
+      dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);
+  }
+
+  inline T reflect(int k) { return laz[k] == ei ? dat[k] : g(dat[k], laz[k]); }
+
+  inline void propagate(int k) {
+    if (laz[k] == ei) return;
+    laz[(k << 1) | 0] = h(laz[(k << 1) | 0], laz[k]);
+    laz[(k << 1) | 1] = h(laz[(k << 1) | 1], laz[k]);
+    dat[k] = reflect(k);
+    laz[k] = ei;
+  }
+
+  inline void thrust(int k) {
+    for (int i = height; i; i--) propagate(k >> i);
+  }
+
+  inline void recalc(int k) {
+    while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1) | 1));
+  }
+
+  void update(int a, int b, E x) {
+    if (a >= b) return;
+    thrust(a += n);
+    thrust(b += n - 1);
+    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {
+      if (l & 1) laz[l] = h(laz[l], x), l++;
+      if (r & 1) --r, laz[r] = h(laz[r], x);
     }
-    build();
+    recalc(a);
+    recalc(b);
   }
 
-  void set(int k, T x){
-    seg[k + size] = x;
+  void set_val(int a, T x) {
+    thrust(a += n);
+    dat[a] = x;
+    laz[a] = ei;
+    recalc(a);
   }
 
-  void build(){
-    for(int k = size-1; k > 0; k--){
-      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
+  T query(int a, int b) {
+    if (a >= b) return ti;
+    thrust(a += n);
+    thrust(b += n - 1);
+    T vl = ti, vr = ti;
+    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {
+      if (l & 1) vl = f(vl, reflect(l++));
+      if (r & 1) vr = f(reflect(--r), vr);
     }
+    return f(vl, vr);
   }
-  
-  void update(int k, T x){
-    k += size; seg[k] = x;
-    while(k >>= 1){
-      seg[k] = func( seg[2 * k] , seg[2 * k + 1] );
-    }
-  }
-
-  void add(int k , T x){
-    k += size; seg[k] += x;
-    while(k >>= 1){
-      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
-    }
-  }
-  
-  // query to [a, b) 
-  T query(int a, int b){
-    T L = UNIT, R = UNIT;
-    for(a+=size,b+=size; a<b; a>>=1,b>>=1){
-      if(a & 1) L = func(L,seg[a++]);
-      if(b & 1) R = func(seg[--b],R);
-    }
-    return func(L, R);
-  }
-
-  T& operator[](const int &k){
-    return seg[k + size];
-  }
-
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp"
 
 void solve() {
   ini(N, Q);
-  auto f = [](int a, int b) { return a + b; };
-  SegmentTree<int, decltype(f)> seg(N, f, 0);
+  constexpr int I = (1LL << 31) - 1;
+  UpdateMax_LazySegmentTree<int, -I> seg(vi(N, -I));
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(i, a);
-      i--;
-      seg.add(i, a);
+      ini(s, t, x);
+      t++;
+      seg.update(s, t, -x);
     } else {
-      ini(x, y);
-      x--;
-      out(seg.query(x, y));
+      ini(s, t);
+      t++;
+      out(-seg.query(s, t));
     }
   }
 }
@@ -471,5 +486,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

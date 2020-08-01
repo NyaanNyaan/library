@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-1-a.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-1-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/sliding-window-minimum.hpp.html">data-structure/sliding-window-minimum.hpp</a>
 
 
 ## Code
@@ -49,24 +49,19 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/union-find.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/sliding-window-minimum.hpp"
 
 void solve() {
-  ini(N, Q);
-  UnionFind uf(N);
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(x, y);
-      uf.unite(x, y);
-    } else {
-      ini(x,y);
-      out(uf.same(x,y));
-    }
-  }
+  ini(N, L);
+  vi a(N);
+  in(a);
+  auto f = [](int a, int b) { return min(a, b); };
+  auto dat = SlideWindowMinimum<int, decltype(f)>(a, f, L);
+  dat.erase(begin(dat), begin(dat) + L);
+  out(dat);
 }
 ```
 {% endraw %}
@@ -74,9 +69,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-1-a.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -378,46 +373,48 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/union-find.hpp"
+#line 3 "data-structure/sliding-window-minimum.hpp"
 using namespace std;
 
-struct UnionFind {
-  vector<int> data;
-  UnionFind(int N) : data(N, -1) {}
-
-  int find(int k) { return data[k] < 0 ? k : data[k] = find(data[k]); }
-
-  int unite(int x, int y) {
-    if ((x = find(x)) == (y = find(y))) return false;
-    if (data[x] > data[y]) swap(x, y);
-    data[x] += data[y];
-    data[y] = x;
-    return true;
+// return dat | dat[i] := ( answer of range [i - K, i) )
+// T : data type
+// f : compare function
+// K : width of window
+template <typename T, typename F>
+vector<T> SlideWindowMinimum(vector<T> &v, F f, int K) {
+  vector<T> dat;
+  int N = v.size();
+  dat.resize(N + 1);
+  dat[0] = 0;
+  deque<int> q;
+  for (int i = 0; i < K - 1; i++) {
+    while (!q.empty() && (f(v[i], v[q.back()]) == v[i])) q.pop_back();
+    q.push_back(i);
+    dat[i + 1] = v[q.front()];
   }
-
-  int size(int k) { return -data[find(k)]; }
-
-  int same(int x, int y) { return find(x) == find(y); }
-};
-#line 6 "verify-aoj-dsl/aoj-dsl-1-a.test.cpp"
+  for (int i = K; i < N + 1; i++) {
+    T cur = v[i - 1];
+    while (!q.empty() && (f(cur, v[q.back()]) == cur)) q.pop_back();
+    q.push_back(i - 1);
+    dat[i] = v[q.front()];
+    if (q.front() == i - K) q.pop_front();
+  }
+  return dat;
+}
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp"
 
 void solve() {
-  ini(N, Q);
-  UnionFind uf(N);
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(x, y);
-      uf.unite(x, y);
-    } else {
-      ini(x,y);
-      out(uf.same(x,y));
-    }
-  }
+  ini(N, L);
+  vi a(N);
+  in(a);
+  auto f = [](int a, int b) { return min(a, b); };
+  auto dat = SlideWindowMinimum<int, decltype(f)>(a, f, L);
+  dat.erase(begin(dat), begin(dat) + L);
+  out(dat);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

@@ -38,26 +38,26 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp.html">verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp.html">verify-aoj-dsl/aoj-dsl-1-a.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp.html">verify-aoj-dsl/aoj-dsl-1-b.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-d.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-e.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-f.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-g.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-h.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp.html">verify-aoj-dsl/aoj-dsl-2-i.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp.html">verify-aoj-dsl/aoj-dsl-3-d.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp.html">verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp.html">verify-aoj-dsl/aoj-dsl-5-b.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-1-a.test.cpp.html">verify-aoj-grl/aoj-grl-1-a.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-1-b.test.cpp.html">verify-aoj-grl/aoj-grl-1-b.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify-aoj-grl/aoj-grl-1-c.test.cpp.html">verify-aoj-grl/aoj-grl-1-c.test.cpp</a>

@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/segment-tree.hpp.html">segment-tree/segment-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/2d-binary-indexed-tree.hpp.html">data-structure/2d-binary-indexed-tree.hpp</a>
 
 
 ## Code
@@ -49,27 +49,22 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
 
-#include "../competitive-template.hpp"
-#include "../segment-tree/segment-tree.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/2d-binary-indexed-tree.hpp"
 
 void solve() {
-  ini(N, Q);
-  int unit = (1LL << 31) - 1;
-  auto f = [](int a, int b) { return min(a, b); };
-  SegmentTree<int, decltype(f)> seg(N, f, unit);
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(i, a);
-      seg.update(i, a);
-    } else {
-      ini(x, y);
-      y++;
-      out(seg.query(x, y));
-    }
+  ini(N);
+  int L = 1000;
+  BinaryIndexedTree2D<int> bit(L + 1, L + 1);
+  rep(i, N) {
+    ini(x1, y1, x2, y2);
+    bit.imos(x1, y1, x2 - 1, y2 - 1, 1);
   }
+  int ans = 0;
+  rep(i, L) rep(j, L) { amax(ans, bit.sum(i, j)); }
+  out(ans);
 }
 ```
 {% endraw %}
@@ -77,9 +72,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -381,95 +376,78 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "segment-tree/segment-tree.hpp"
+#line 3 "data-structure/2d-binary-indexed-tree.hpp"
 using namespace std;
 
-template<typename T,typename F>
-struct SegmentTree{
-
-  int size;
-  vector<T> seg;
-  const F func;
-  const T UNIT;
-  
-  SegmentTree(int N,F func , T UNIT): func(func) , UNIT(UNIT) {
-    size = 1;
-    while(size < N) size <<= 1;
-    seg.assign(2 * size, UNIT);
+template <typename T>
+struct BinaryIndexedTree2D {
+  int H, W;
+  vector<vector<T>> bit;
+  BinaryIndexedTree2D(int H, int W) : H(H + 1), W(W + 1) {
+    bit.resize(H + 3, vector<T>(W + 3, 0));
   }
+  // 関数の入力のindexは0-originを想定
 
-  SegmentTree(const vector<T> &v,F func , T UNIT) : func(func) , UNIT(UNIT){
-    int N = (int)v.size();
-    size = 1;
-    while(size < N) size <<= 1;
-    seg.assign(2 * size , UNIT);
-    for(int i = 0; i < N; i++){
-      seg[i + size] = v[i];
-    }
-    build();
-  }
-
-  void set(int k, T x){
-    seg[k + size] = x;
-  }
-
-  void build(){
-    for(int k = size-1; k > 0; k--){
-      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
-    }
-  }
-  
-  void update(int k, T x){
-    k += size; seg[k] = x;
-    while(k >>= 1){
-      seg[k] = func( seg[2 * k] , seg[2 * k + 1] );
+  // (x,y)にwを足す
+  // 範囲外の時は足さない
+  void add(int x, int y, T w) {
+    if (x < 0 || x >= H || y < 0 || y >= W) return;
+    for (int a = (++y, ++x); a <= H; a += a & -a) {
+      for (int b = y; b <= W; b += b & -b) {
+        bit[a][b] += w;
+      }
     }
   }
 
-  void add(int k , T x){
-    k += size; seg[k] += x;
-    while(k >>= 1){
-      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
-    }
-  }
-  
-  // query to [a, b) 
-  T query(int a, int b){
-    T L = UNIT, R = UNIT;
-    for(a+=size,b+=size; a<b; a>>=1,b>>=1){
-      if(a & 1) L = func(L,seg[a++]);
-      if(b & 1) R = func(seg[--b],R);
-    }
-    return func(L, R);
+  // imos法で[(x1,y1) , (x2,y2)]にwを足す
+  void imos(int x1, int y1, int x2, int y2, T w) {
+    add(x1, y1, w);
+    add(x1, y2 + 1, -w);
+    add(x2 + 1, y1, -w);
+    add(x2 + 1, y2 + 1, w);
   }
 
-  T& operator[](const int &k){
-    return seg[k + size];
+  //  [(0,0) , (x,y)]の和　閉区間に注意！
+  // x,y<0の時は0 x>=H y>=Wのときはx=H-1,y=W-1とみなす
+  // ( imos法の時は (x,y)の値を返す )
+  T sum(int x, int y) {
+    if (x < 0 || y < 0) return 0;
+    if (x >= H) x = H - 1;
+    if (y >= W) y = W - 1;
+    T ret = 0;
+    for (int a = (++y, ++x); a > 0; a -= a & -a) {
+      for (int b = y; b > 0; b -= b & -b) {
+        ret += bit[a][b];
+      }
+    }
+    return ret;
   }
 
+  // [(x1,y1) , (x2,y2)] の和
+  // x1 > x2, y1 > y2の時はswap
+  T sum(int x1, int y1, int x2, int y2) {
+    if (x1 > x2 || y1 > y2) return T(0);
+    return sum(x2, y2) - sum(x2, y1 - 1) - sum(x1 - 1, y2) +
+           sum(x1 - 1, y1 - 1);
+  }
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp"
 
 void solve() {
-  ini(N, Q);
-  int unit = (1LL << 31) - 1;
-  auto f = [](int a, int b) { return min(a, b); };
-  SegmentTree<int, decltype(f)> seg(N, f, unit);
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(i, a);
-      seg.update(i, a);
-    } else {
-      ini(x, y);
-      y++;
-      out(seg.query(x, y));
-    }
+  ini(N);
+  int L = 1000;
+  BinaryIndexedTree2D<int> bit(L + 1, L + 1);
+  rep(i, N) {
+    ini(x1, y1, x2, y2);
+    bit.imos(x1, y1, x2 - 1, y2 - 1, 1);
   }
+  int ans = 0;
+  rep(i, L) rep(j, L) { amax(ans, bit.sum(i, j)); }
+  out(ans);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/2d-binary-indexed-tree.hpp.html">data-structure/2d-binary-indexed-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/range-add-range-sum-lazyseg.hpp.html">segment-tree/range-add-range-sum-lazyseg.hpp</a>
 
 
 ## Code
@@ -49,22 +49,27 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/2d-binary-indexed-tree.hpp"
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/range-add-range-sum-lazyseg.hpp"
 
 void solve() {
-  ini(N);
-  int L = 1000;
-  BinaryIndexedTree2D<int> bit(L + 1, L + 1);
-  rep(i, N) {
-    ini(x1, y1, x2, y2);
-    bit.imos(x1, y1, x2 - 1, y2 - 1, 1);
+  ini(N, Q);
+  int I = 0;
+  AddSum_LazySegmentTree<int> seg(vi(N, I));
+  rep(_, Q) {
+    ini(c);
+    if (c == 0) {
+      ini(s, t, x);
+      s--;
+      seg.update(s, t, x);
+    } else {
+      ini(i);
+      i--;
+      out(seg.query(i, i + 1));
+    }
   }
-  int ans = 0;
-  rep(i, L) rep(j, L) { amax(ans, bit.sum(i, j)); }
-  out(ans);
 }
 ```
 {% endraw %}
@@ -72,9 +77,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -376,78 +381,110 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/2d-binary-indexed-tree.hpp"
+#line 3 "segment-tree/range-add-range-sum-lazyseg.hpp"
 using namespace std;
 
-template <typename T>
-struct BinaryIndexedTree2D {
-  int H, W;
-  vector<vector<T>> bit;
-  BinaryIndexedTree2D(int H, int W) : H(H + 1), W(W + 1) {
-    bit.resize(H + 3, vector<T>(W + 3, 0));
-  }
-  // 関数の入力のindexは0-originを想定
+template <typename E>
+struct AddSum_LazySegmentTree {
+  int n, height;
+  using T = pair<E, E>;
+  T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
+  T g(T a, E b) { return T(a.first + b * a.second, a.second); };
+  E h(E a, E b) { return a + b; };
+  T ti = P(0, 0);
+  E ei = 0;
+  vector<T> dat;
+  vector<E> laz;
 
-  // (x,y)にwを足す
-  // 範囲外の時は足さない
-  void add(int x, int y, T w) {
-    if (x < 0 || x >= H || y < 0 || y >= W) return;
-    for (int a = (++y, ++x); a <= H; a += a & -a) {
-      for (int b = y; b <= W; b += b & -b) {
-        bit[a][b] += w;
-      }
+  AddSum_LazySegmentTree(const vector<E> &v) { build(v); }
+
+  void init(int n_) {
+    n = 1;
+    height = 0;
+    while (n < n_) n <<= 1, height++;
+    dat.assign(2 * n, ti);
+    laz.assign(2 * n, ei);
+  }
+
+  void build(const vector<E> &v) {
+    int n_ = v.size();
+    init(n_);
+    for (int i = 0; i < n_; i++) dat[n + i] = T(v[i], 1);
+    for (int i = n - 1; i; i--)
+      dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);
+  }
+
+  inline T reflect(int k) { return laz[k] == ei ? dat[k] : g(dat[k], laz[k]); }
+
+  inline void propagate(int k) {
+    if (laz[k] == ei) return;
+    laz[(k << 1) | 0] = h(laz[(k << 1) | 0], laz[k]);
+    laz[(k << 1) | 1] = h(laz[(k << 1) | 1], laz[k]);
+    dat[k] = reflect(k);
+    laz[k] = ei;
+  }
+
+  inline void thrust(int k) {
+    for (int i = height; i; i--) propagate(k >> i);
+  }
+
+  inline void recalc(int k) {
+    while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1) | 1));
+  }
+
+  void update(int a, int b, E x) {
+    if (a >= b) return;
+    thrust(a += n);
+    thrust(b += n - 1);
+    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {
+      if (l & 1) laz[l] = h(laz[l], x), l++;
+      if (r & 1) --r, laz[r] = h(laz[r], x);
     }
+    recalc(a);
+    recalc(b);
   }
 
-  // imos法で[(x1,y1) , (x2,y2)]にwを足す
-  void imos(int x1, int y1, int x2, int y2, T w) {
-    add(x1, y1, w);
-    add(x1, y2 + 1, -w);
-    add(x2 + 1, y1, -w);
-    add(x2 + 1, y2 + 1, w);
+  void set_val(int a, T x) {
+    thrust(a += n);
+    dat[a] = x;
+    laz[a] = ei;
+    recalc(a);
   }
 
-  //  [(0,0) , (x,y)]の和　閉区間に注意！
-  // x,y<0の時は0 x>=H y>=Wのときはx=H-1,y=W-1とみなす
-  // ( imos法の時は (x,y)の値を返す )
-  T sum(int x, int y) {
-    if (x < 0 || y < 0) return 0;
-    if (x >= H) x = H - 1;
-    if (y >= W) y = W - 1;
-    T ret = 0;
-    for (int a = (++y, ++x); a > 0; a -= a & -a) {
-      for (int b = y; b > 0; b -= b & -b) {
-        ret += bit[a][b];
-      }
+  E query(int a, int b) {
+    if (a >= b) return ti.first;
+    thrust(a += n);
+    thrust(b += n - 1);
+    T vl = ti, vr = ti;
+    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {
+      if (l & 1) vl = f(vl, reflect(l++));
+      if (r & 1) vr = f(reflect(--r), vr);
     }
-    return ret;
-  }
-
-  // [(x1,y1) , (x2,y2)] の和
-  // x1 > x2, y1 > y2の時はswap
-  T sum(int x1, int y1, int x2, int y2) {
-    if (x1 > x2 || y1 > y2) return T(0);
-    return sum(x2, y2) - sum(x2, y1 - 1) - sum(x1 - 1, y2) +
-           sum(x1 - 1, y1 - 1);
+    return f(vl, vr).first;
   }
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp"
 
 void solve() {
-  ini(N);
-  int L = 1000;
-  BinaryIndexedTree2D<int> bit(L + 1, L + 1);
-  rep(i, N) {
-    ini(x1, y1, x2, y2);
-    bit.imos(x1, y1, x2 - 1, y2 - 1, 1);
+  ini(N, Q);
+  int I = 0;
+  AddSum_LazySegmentTree<int> seg(vi(N, I));
+  rep(_, Q) {
+    ini(c);
+    if (c == 0) {
+      ini(s, t, x);
+      s--;
+      seg.update(s, t, x);
+    } else {
+      ini(i);
+      i--;
+      out(seg.query(i, i + 1));
+    }
   }
-  int ans = 0;
-  rep(i, L) rep(j, L) { amax(ans, bit.sum(i, j)); }
-  out(ans);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

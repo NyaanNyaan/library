@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/range-update-range-sum-lazyseg.hpp.html">segment-tree/range-update-range-sum-lazyseg.hpp</a>
 
 
 ## Code
@@ -49,24 +49,24 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/binary-indexed-tree.hpp"
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/range-update-range-sum-lazyseg.hpp"
 
 void solve() {
   ini(N, Q);
-  BinaryIndexedTree<int> bit(N);
+  int I = (1LL << 31) - 1;
+  UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N, I)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(i, a);
-      i--;
-      bit.add(i, a);
+      ini(s, t, x);
+      t++;
+      seg.update(s, t, x);
     } else {
-      ini(x, y);
-      x--, y--;
-      out(bit.sum(x, y));
+      ini(i);
+      out(seg.query(i, i + 1));
     }
   }
 }
@@ -76,9 +76,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -380,88 +380,103 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/binary-indexed-tree.hpp"
+#line 3 "segment-tree/range-update-range-sum-lazyseg.hpp"
 using namespace std;
 
-template <typename T>
-struct BinaryIndexedTree {
-  int N;
-  int max_2beki;
-  vector<T> data;
+template <typename E,E UNUSED_VALUE>
+struct UpdateSum_LazySegmentTree {
+  int n, height;
+  using T = pair<E, E>;
+  T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
+  T g(T a, E b) { return T(b * a.second, a.second); };
+  E h(E a, E b) { return b; };
+  T ti = P(0, 0);
+  E ei = UNUSED_VALUE;
+  vector<T> dat;
+  vector<E> laz;
 
-  BinaryIndexedTree(int size) {
-    N = ++size;
-    data.assign(N + 3, 0);
-    max_2beki = 1;
-    while (max_2beki * 2 <= N) max_2beki *= 2;
+  UpdateSum_LazySegmentTree(const vector<E> &v) { build(v); }
+
+  void init(int n_) {
+    n = 1;
+    height = 0;
+    while (n < n_) n <<= 1, height++;
+    dat.assign(2 * n, ti);
+    laz.assign(2 * n, ei);
   }
 
-  // get sum of [0,k]
-  T sum(int k) const {
-    if (k < 0) return 0;  // return 0 if k < 0
-    T ret = 0;
-    for (++k; k > 0; k -= k & -k) ret += data[k];
-    return ret;
+  void build(const vector<E> &v) {
+    int n_ = v.size();
+    init(n_);
+    for (int i = 0; i < n_; i++) dat[n + i] = T(v[i], 1);
+    for (int i = n - 1; i; i--)
+      dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);
   }
 
-  // getsum of [l,r]
-  inline T sum(int l, int r) const { return sum(r) - sum(l - 1); }
+  inline T reflect(int k) { return laz[k] == ei ? dat[k] : g(dat[k], laz[k]); }
 
-  // get value of k
-  inline T operator[](int k) const { return sum(k) - sum(k - 1); }
-
-  // data[k] += x
-  void add(int k, T x) {
-    for (++k; k < N; k += k & -k) data[k] += x;
+  inline void propagate(int k) {
+    if (laz[k] == ei) return;
+    laz[(k << 1) | 0] = h(laz[(k << 1) | 0], laz[k]);
+    laz[(k << 1) | 1] = h(laz[(k << 1) | 1], laz[k]);
+    dat[k] = reflect(k);
+    laz[k] = ei;
   }
 
-  // range add x to [l,r]
-  void imos(int l, int r, T x) {
-    add(l, x);
-    add(r + 1, -x);
+  inline void thrust(int k) {
+    for (int i = height; i; i--) propagate(k >> i);
   }
 
-  // minimize i s.t. sum(i) >= w
-  int lower_bound(T w) {
-    if (w <= 0) return 0;
-    int x = 0;
-    for (int k = max_2beki; k > 0; k /= 2) {
-      if (x + k <= N - 1 && data[x + k] < w) {
-        w -= data[x + k];
-        x += k;
-      }
+  inline void recalc(int k) {
+    while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1) | 1));
+  }
+
+  void update(int a, int b, E x) {
+    if (a >= b) return;
+    thrust(a += n);
+    thrust(b += n - 1);
+    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {
+      if (l & 1) laz[l] = h(laz[l], x), l++;
+      if (r & 1) --r, laz[r] = h(laz[r], x);
     }
-    return x;
+    recalc(a);
+    recalc(b);
   }
 
-  // minimize i s.t. sum(i) > w
-  int upper_bound(T w) {
-    if (w < 0) return 0;
-    int x = 0;
-    for (int k = max_2beki; k > 0; k /= 2) {
-      if (x + k <= N - 1 && data[x + k] <= w) {
-        w -= data[x + k];
-        x += k;
-      }
+  void set_val(int a, T x) {
+    thrust(a += n);
+    dat[a] = x;
+    laz[a] = ei;
+    recalc(a);
+  }
+
+  E query(int a, int b) {
+    if (a >= b) return ti.first;
+    thrust(a += n);
+    thrust(b += n - 1);
+    T vl = ti, vr = ti;
+    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {
+      if (l & 1) vl = f(vl, reflect(l++));
+      if (r & 1) vr = f(reflect(--r), vr);
     }
-    return x;
+    return f(vl, vr).first;
   }
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp"
 
 void solve() {
   ini(N, Q);
-  BinaryIndexedTree<int> bit(N);
+  int I = (1LL << 31) - 1;
+  UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N, I)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
-      ini(i, a);
-      i--;
-      bit.add(i, a);
+      ini(s, t, x);
+      t++;
+      seg.update(s, t, x);
     } else {
-      ini(x, y);
-      x--, y--;
-      out(bit.sum(x, y));
+      ini(i);
+      out(seg.query(i, i + 1));
     }
   }
 }
@@ -469,5 +484,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

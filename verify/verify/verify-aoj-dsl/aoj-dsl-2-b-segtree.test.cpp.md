@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-5-b.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-5-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/2d-cumulative-sum.hpp.html">data-structure/2d-cumulative-sum.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/segment-tree.hpp.html">segment-tree/segment-tree.hpp</a>
 
 
 ## Code
@@ -49,23 +49,27 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/2d-cumulative-sum.hpp"
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/segment-tree.hpp"
 
 void solve() {
-  ini(N);
-  int L = 1000;
-  CumulativeSum2D<int> ruiseki(L, L);
-  rep(i, N) {
-    ini(x1, y1, x2, y2);
-    ruiseki.imos(x1, y1, x2 , y2, 1);
+  ini(N, Q);
+  auto f = [](int a, int b) { return a + b; };
+  SegmentTree<int, decltype(f)> seg(N, f, 0);
+  rep(_, Q) {
+    ini(c);
+    if (c == 0) {
+      ini(i, a);
+      i--;
+      seg.add(i, a);
+    } else {
+      ini(x, y);
+      x--;
+      out(seg.query(x, y));
+    }
   }
-  ruiseki.build();
-  int ans = 0;
-  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]); }
-  out(ans);
 }
 ```
 {% endraw %}
@@ -73,9 +77,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-5-b.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -377,60 +381,95 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/2d-cumulative-sum.hpp"
+#line 3 "segment-tree/segment-tree.hpp"
 using namespace std;
 
-// Don't Forget to call build() !!!!!
-template <class T>
-struct CumulativeSum2D {
-  vector<vector<T> > data;
+template<typename T,typename F>
+struct SegmentTree{
 
-  CumulativeSum2D(int H, int W) : data(H + 3, vector<int>(W + 3, 0)) {}
-
-  void add(int i, int j, T z) {
-    ++i, ++j;
-    if (i >= (int)data.size() || j >= (int)data[0].size()) return;
-    data[i][j] += z;
+  int size;
+  vector<T> seg;
+  const F func;
+  const T UNIT;
+  
+  SegmentTree(int N,F func , T UNIT): func(func) , UNIT(UNIT) {
+    size = 1;
+    while(size < N) size <<= 1;
+    seg.assign(2 * size, UNIT);
   }
 
-  // add [ [i1,j1], [i2,j2] )
-  void imos(int i1, int j1, int i2, int j2, T z) {
-    add(i1, j1, 1);
-    add(i1, j2, -1);
-    add(i2, j1, -1);
-    add(i2, j2, 1);
+  SegmentTree(const vector<T> &v,F func , T UNIT) : func(func) , UNIT(UNIT){
+    int N = (int)v.size();
+    size = 1;
+    while(size < N) size <<= 1;
+    seg.assign(2 * size , UNIT);
+    for(int i = 0; i < N; i++){
+      seg[i + size] = v[i];
+    }
+    build();
   }
 
-  void build() {
-    for (int i = 1; i < (int)data.size(); i++) {
-      for (int j = 1; j < (int)data[i].size(); j++) {
-        data[i][j] += data[i][j - 1] + data[i - 1][j] - data[i - 1][j - 1];
-      }
+  void set(int k, T x){
+    seg[k + size] = x;
+  }
+
+  void build(){
+    for(int k = size-1; k > 0; k--){
+      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
+    }
+  }
+  
+  void update(int k, T x){
+    k += size; seg[k] = x;
+    while(k >>= 1){
+      seg[k] = func( seg[2 * k] , seg[2 * k + 1] );
     }
   }
 
-  T query(int i1, int j1, int i2, int j2) {
-    return (data[i2][j2] - data[i1][j2] - data[i2][j1] + data[i1][j1]);
+  void add(int k , T x){
+    k += size; seg[k] += x;
+    while(k >>= 1){
+      seg[k] = func(seg[2 * k] , seg[2 * k + 1] );
+    }
   }
+  
+  // query to [a, b) 
+  T query(int a, int b){
+    T L = UNIT, R = UNIT;
+    for(a+=size,b+=size; a<b; a>>=1,b>>=1){
+      if(a & 1) L = func(L,seg[a++]);
+      if(b & 1) R = func(seg[--b],R);
+    }
+    return func(L, R);
+  }
+
+  T& operator[](const int &k){
+    return seg[k + size];
+  }
+
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-5-b.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp"
 
 void solve() {
-  ini(N);
-  int L = 1000;
-  CumulativeSum2D<int> ruiseki(L, L);
-  rep(i, N) {
-    ini(x1, y1, x2, y2);
-    ruiseki.imos(x1, y1, x2 , y2, 1);
+  ini(N, Q);
+  auto f = [](int a, int b) { return a + b; };
+  SegmentTree<int, decltype(f)> seg(N, f, 0);
+  rep(_, Q) {
+    ini(c);
+    if (c == 0) {
+      ini(i, a);
+      i--;
+      seg.add(i, a);
+    } else {
+      ini(x, y);
+      x--;
+      out(seg.query(x, y));
+    }
   }
-  ruiseki.build();
-  int ans = 0;
-  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]); }
-  out(ans);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

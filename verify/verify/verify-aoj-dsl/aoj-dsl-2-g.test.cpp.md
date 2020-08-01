@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-2-i.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-i.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/range-update-range-sum-lazyseg.hpp.html">segment-tree/range-update-range-sum-lazyseg.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/range-add-range-sum-lazyseg.hpp.html">segment-tree/range-add-range-sum-lazyseg.hpp</a>
 
 
 ## Code
@@ -49,23 +49,23 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
-#include "../competitive-template.hpp"
-#include "../segment-tree/range-update-range-sum-lazyseg.hpp"
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/range-add-range-sum-lazyseg.hpp"
 
 void solve() {
   ini(N, Q);
-  UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N)};
+  AddSum_LazySegmentTree<ll> seg({vl(N)});
   rep(_, Q) {
     ini(c);
     if (c == 0) {
       ini(s, t, x);
-      t++;
+      s--;
       seg.update(s, t, x);
     } else {
       ini(s, t);
-      t++;
+      s--;
       out(seg.query(s, t));
     }
   }
@@ -76,9 +76,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-2-i.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -380,22 +380,22 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "segment-tree/range-update-range-sum-lazyseg.hpp"
+#line 3 "segment-tree/range-add-range-sum-lazyseg.hpp"
 using namespace std;
 
-template <typename E,E UNUSED_VALUE>
-struct UpdateSum_LazySegmentTree {
+template <typename E>
+struct AddSum_LazySegmentTree {
   int n, height;
   using T = pair<E, E>;
   T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
-  T g(T a, E b) { return T(b * a.second, a.second); };
-  E h(E a, E b) { return b; };
+  T g(T a, E b) { return T(a.first + b * a.second, a.second); };
+  E h(E a, E b) { return a + b; };
   T ti = P(0, 0);
-  E ei = UNUSED_VALUE;
+  E ei = 0;
   vector<T> dat;
   vector<E> laz;
 
-  UpdateSum_LazySegmentTree(const vector<E> &v) { build(v); }
+  AddSum_LazySegmentTree(const vector<E> &v) { build(v); }
 
   void init(int n_) {
     n = 1;
@@ -462,20 +462,20 @@ struct UpdateSum_LazySegmentTree {
     return f(vl, vr).first;
   }
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-2-i.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp"
 
 void solve() {
   ini(N, Q);
-  UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N)};
+  AddSum_LazySegmentTree<ll> seg({vl(N)});
   rep(_, Q) {
     ini(c);
     if (c == 0) {
       ini(s, t, x);
-      t++;
+      s--;
       seg.update(s, t, x);
     } else {
       ini(s, t);
-      t++;
+      s--;
       out(seg.query(s, t));
     }
   }
@@ -484,5 +484,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

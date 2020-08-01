@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
 
 
 ## Code
@@ -52,8 +52,8 @@ layout: default
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
-#include "../competitive-template.hpp"
-#include "../data-structure/range-sum-range-add-bit.hpp"
+#include "../../competitive-template.hpp"
+#include "../../data-structure/range-sum-range-add-bit.hpp"
 
 void solve() {
   ini(N, Q);
@@ -77,7 +77,7 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp"
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
@@ -472,7 +472,7 @@ struct RangeAddRangeSumBIT {
     return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);
   }
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp"
 
 void solve() {
   ini(N, Q);
@@ -494,5 +494,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-dsl/aoj-dsl-2-h.test.cpp
+# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#6908443ecdb9f69dd37649fc02d1f6cf">verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-dsl/aoj-dsl-2-h.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:37:43+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/segment-tree/range-add-range-min-lazyseg.hpp.html">segment-tree/range-add-range-min-lazyseg.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/range-update-range-sum-lazyseg.hpp.html">segment-tree/range-update-range-sum-lazyseg.hpp</a>
 
 
 ## Code
@@ -49,14 +49,14 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
 
-#include "../competitive-template.hpp"
-#include "../segment-tree/range-add-range-min-lazyseg.hpp"
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/range-update-range-sum-lazyseg.hpp"
 
 void solve() {
   ini(N, Q);
-  AddMin_LazySegmentTree<int, inf> seg{vi(N)};
+  UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
@@ -76,9 +76,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-dsl/aoj-dsl-2-h.test.cpp"
+#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -380,22 +380,22 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "segment-tree/range-add-range-min-lazyseg.hpp"
+#line 3 "segment-tree/range-update-range-sum-lazyseg.hpp"
 using namespace std;
 
-template <typename E, E INF>
-struct AddMin_LazySegmentTree {
+template <typename E,E UNUSED_VALUE>
+struct UpdateSum_LazySegmentTree {
   int n, height;
-  using T = E;
-  T f(T a, T b) { return min(a, b); };
-  T g(T a, E b) { return a + b; };
-  E h(E a, E b) { return a + b; };
-  T ti = INF;
-  E ei = 0;
+  using T = pair<E, E>;
+  T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
+  T g(T a, E b) { return T(b * a.second, a.second); };
+  E h(E a, E b) { return b; };
+  T ti = P(0, 0);
+  E ei = UNUSED_VALUE;
   vector<T> dat;
   vector<E> laz;
 
-  AddMin_LazySegmentTree(const vector<E> &v) { build(v); }
+  UpdateSum_LazySegmentTree(const vector<E> &v) { build(v); }
 
   void init(int n_) {
     n = 1;
@@ -408,7 +408,7 @@ struct AddMin_LazySegmentTree {
   void build(const vector<E> &v) {
     int n_ = v.size();
     init(n_);
-    for (int i = 0; i < n_; i++) dat[n + i] = v[i];
+    for (int i = 0; i < n_; i++) dat[n + i] = T(v[i], 1);
     for (int i = n - 1; i; i--)
       dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);
   }
@@ -450,8 +450,8 @@ struct AddMin_LazySegmentTree {
     recalc(a);
   }
 
-  T query(int a, int b) {
-    if (a >= b) return ti;
+  E query(int a, int b) {
+    if (a >= b) return ti.first;
     thrust(a += n);
     thrust(b += n - 1);
     T vl = ti, vr = ti;
@@ -459,14 +459,14 @@ struct AddMin_LazySegmentTree {
       if (l & 1) vl = f(vl, reflect(l++));
       if (r & 1) vr = f(reflect(--r), vr);
     }
-    return f(vl, vr);
+    return f(vl, vr).first;
   }
 };
-#line 6 "verify-aoj-dsl/aoj-dsl-2-h.test.cpp"
+#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp"
 
 void solve() {
   ini(N, Q);
-  AddMin_LazySegmentTree<int, inf> seg{vi(N)};
+  UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N)};
   rep(_, Q) {
     ini(c);
     if (c == 0) {
@@ -484,5 +484,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
