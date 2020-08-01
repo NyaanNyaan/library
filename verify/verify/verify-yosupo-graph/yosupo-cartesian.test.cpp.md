@@ -21,25 +21,27 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-other/yosupo-a-plus-b.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c893b3744fd88c0c8b5cf4d75eea5b3a">verify-yosupo-other</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-other/yosupo-a-plus-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 15:16:50+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/aplusb">https://judge.yosupo.jp/problem/aplusb</a>
+* see: <a href="https://judge.yosupo.jp/problem/cartesian_tree">https://judge.yosupo.jp/problem/cartesian_tree</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
 
 
 ## Code
@@ -47,13 +49,22 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
+#define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 
-#include "../competitive-template.hpp"
+#include "../../competitive-template.hpp"
+#include "../../tree/cartesian-tree.hpp"
 
-void solve() {
-  ini(a, b);
-  out(a + b);
+void solve(){
+  ini(N);
+  vl a(N);
+  in(a);
+  auto [g, root] = CartesianTree<ll>(a);
+  vl ans(N);
+  ans[root] = root;
+  rep(i,N){
+    each(j,g[i]) ans[j] = i;
+  }
+  out(ans);
 }
 ```
 {% endraw %}
@@ -61,8 +72,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-other/yosupo-a-plus-b.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
+#line 1 "verify/verify-yosupo-graph/yosupo-cartesian.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -364,15 +375,148 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 4 "verify-yosupo-other/yosupo-a-plus-b.test.cpp"
+#line 3 "tree/cartesian-tree.hpp"
+using namespace std;
 
-void solve() {
-  ini(a, b);
-  out(a + b);
+#line 3 "graph/graph-template.hpp"
+using namespace std;
+
+template <typename T>
+struct edge {
+  int src, to;
+  T cost;
+
+  edge(int to, T cost) : src(-1), to(to), cost(cost) {}
+  edge(int src, int to, T cost) : src(src), to(to), cost(cost) {}
+
+  edge &operator=(const int &x) {
+    to = x;
+    return *this;
+  }
+
+  operator int() const { return to; }
+};
+template <typename T>
+using Edges = vector<edge<T>>;
+template <typename T>
+using WeightedGraph = vector<Edges<T>>;
+using UnweightedGraph = vector<vector<int>>;
+
+// Input of (Unweighted) Graph
+UnweightedGraph graph(int N, int M = -1, bool is_directed = false,
+                      bool is_1origin = true) {
+  UnweightedGraph g(N);
+  if (M == -1) M = N - 1;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    if (is_1origin) x--, y--;
+    g[x].push_back(y);
+    if (!is_directed) g[y].push_back(x);
+  }
+  return g;
+}
+
+// Input of Weighted Graph
+template <typename T>
+WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
+                        bool is_1origin = true) {
+  WeightedGraph<T> g(N);
+  if (M == -1) M = N - 1;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    cin >> c;
+    if (is_1origin) x--, y--;
+    g[x].eb(x, y, c);
+    if (!is_directed) g[y].eb(y, x, c);
+  }
+  return g;
+}
+
+// Input of Edges
+template <typename T>
+Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
+  Edges<T> es;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    es.emplace_back(x, y, c);
+  }
+  return es;
+}
+
+// Input of Adjacency Matrix
+template <typename T>
+vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
+                           bool is_directed = false, bool is_1origin = true) {
+  vector<vector<T>> d(N, vector<T>(N, INF));
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    d[x][y] = c;
+    if (!is_directed) d[y][x] = c;
+  }
+  return d;
+}
+#line 6 "tree/cartesian-tree.hpp"
+
+// return value : pair<graph, root>
+template <typename T>
+pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {
+  int N = (int)a.size();
+  vector<vector<int>> g(N);
+  vector<int> p(N, -1), st;
+  st.reserve(N);
+  for (int i = 0; i < N; i++) {
+    int prv = -1;
+    while (!st.empty() && a[i] < a[st.back()]) {
+      prv = st.back();
+      st.pop_back();
+    }
+    if (prv != -1) p[prv] = i;
+    if (!st.empty()) p[i] = st.back();
+    st.push_back(i);
+  }
+  int root = -1;
+  for (int i = 0; i < N; i++) {
+    if (p[i] != -1)
+      g[p[i]].push_back(i);
+    else
+      root = i;
+  }
+  return make_pair(g, root);
+}
+#line 5 "verify/verify-yosupo-graph/yosupo-cartesian.test.cpp"
+
+void solve(){
+  ini(N);
+  vl a(N);
+  in(a);
+  auto [g, root] = CartesianTree<ll>(a);
+  vl ans(N);
+  ans[root] = root;
+  rep(i,N){
+    each(j,g[i]) ans[j] = i;
+  }
+  out(ans);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

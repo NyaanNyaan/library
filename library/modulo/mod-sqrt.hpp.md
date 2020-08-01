@@ -49,7 +49,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
 
 
 ## Code

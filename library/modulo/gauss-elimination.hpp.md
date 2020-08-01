@@ -43,9 +43,9 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify-yosupo-math/yosupo-determinant.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-determinant.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify/verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
 
 
 ## Code

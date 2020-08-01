@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-graph/yosupo-diameter.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#56f82f6ec3e277fdf7ae8d90e7719cec">verify-yosupo-graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-graph/yosupo-diameter.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-diameter.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 15:16:50+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/tree_diameter">https://judge.yosupo.jp/problem/tree_diameter</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
 
 
 ## Code
@@ -51,8 +51,8 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
-#include "../competitive-template.hpp"
-#include "../graph/graph-utility.hpp"
+#include "../../competitive-template.hpp"
+#include "../../graph/graph-utility.hpp"
 
 void solve() {
   ini(N);
@@ -68,7 +68,7 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-graph/yosupo-diameter.test.cpp"
+#line 1 "verify/verify-yosupo-graph/yosupo-diameter.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
 #line 1 "competitive-template.hpp"
@@ -544,7 +544,7 @@ vector<int> Path(G &g, int u, int v) {
   dfs(dfs, u);
   return ret;
 }
-#line 5 "verify-yosupo-graph/yosupo-diameter.test.cpp"
+#line 5 "verify/verify-yosupo-graph/yosupo-diameter.test.cpp"
 
 void solve() {
   ini(N);
@@ -558,5 +558,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

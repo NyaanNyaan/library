@@ -21,27 +21,27 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c893b3744fd88c0c8b5cf4d75eea5b3a">verify-yosupo-other</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#d39daa9a5438d03dc407439811d187a2">verify/verify-yosupo-other</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 15:16:50+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/zalgorithm">https://judge.yosupo.jp/problem/zalgorithm</a>
+* see: <a href="https://judge.yosupo.jp/problem/suffixarray">https://judge.yosupo.jp/problem/suffixarray</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
-* :heavy_check_mark: <a href="../../library/string/suffix-array.hpp.html">string/suffix-array.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
+* :heavy_check_mark: <a href="../../../library/string/suffix-array.hpp.html">string/suffix-array.hpp</a>
 
 
 ## Code
@@ -49,20 +49,16 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
+#define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 
-#include "../competitive-template.hpp"
-#include "../string/suffix-array.hpp"
+#include "../../competitive-template.hpp"
+#include "../../string/suffix-array.hpp"
 
-void solve(){
+void solve() {
   ins(S);
   SuffixArray sa(S);
-  LCPArray lcp(sa);
-  StringSearch search(lcp);
-  rep(i,sz(S)){
-    cout << (i?" ":"") << search.ArbitaryLCP(0 , i);
-  }
-  out();
+  sa.sa.erase(begin(sa.sa));
+  out(sa.sa);
 }
 ```
 {% endraw %}
@@ -70,8 +66,8 @@ void solve(){
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/zalgorithm"
+#line 1 "verify/verify-yosupo-other/yosupo-suffix-array.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -596,21 +592,17 @@ struct StringSearch {
 //  SuffixArray sa(S);
 //  LCPArray lcp(sa);
 //  StringSearch search(lcp);
-#line 5 "verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp"
+#line 5 "verify/verify-yosupo-other/yosupo-suffix-array.test.cpp"
 
-void solve(){
+void solve() {
   ins(S);
   SuffixArray sa(S);
-  LCPArray lcp(sa);
-  StringSearch search(lcp);
-  rep(i,sz(S)){
-    cout << (i?" ":"") << search.ArbitaryLCP(0 , i);
-  }
-  out();
+  sa.sa.erase(begin(sa.sa));
+  out(sa.sa);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

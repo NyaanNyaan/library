@@ -44,7 +44,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 
 
 ## Code

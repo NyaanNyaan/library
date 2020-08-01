@@ -21,28 +21,28 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-math/yosupo-determinant.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#70efe3d43cb7abfce0f3ff7a853ba068">verify-yosupo-math</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-math/yosupo-determinant.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-30 19:30:32+09:00
+* category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 15:16:50+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/matrix_det">https://judge.yosupo.jp/problem/matrix_det</a>
+* see: <a href="https://judge.yosupo.jp/problem/sparse_matrix_det">https://judge.yosupo.jp/problem/sparse_matrix_det</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
 
 
 ## Code
@@ -50,18 +50,21 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
+#define PROBLEM "https://judge.yosupo.jp/problem/sparse_matrix_det"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../modulo/gauss-elimination.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../modulo/gauss-elimination.hpp"
 
 using mint = LazyMontgomeryModInt<998244353>;
 using vm = vector<mint>;
 void solve() {
-  ini(N);
+  ini(N,M);
   V<vm> a(N,vm(N));
-  in(a);
+  rep(_,M){
+    inl(x,y,z);
+    a[x][y]=z;
+  }
   out(Gauss::determinant(a));
 }
 ```
@@ -70,8 +73,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-math/yosupo-determinant.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
+#line 1 "verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/sparse_matrix_det"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -674,19 +677,22 @@ vector<vector<mint>> LinearEquation(vector<vector<mint>> A, vector<mint> B) {
 
 }  // namespace Gauss
 using namespace Gauss;
-#line 6 "verify-yosupo-math/yosupo-determinant.test.cpp"
+#line 6 "verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp"
 
 using mint = LazyMontgomeryModInt<998244353>;
 using vm = vector<mint>;
 void solve() {
-  ini(N);
+  ini(N,M);
   V<vm> a(N,vm(N));
-  in(a);
+  rep(_,M){
+    inl(x,y,z);
+    a[x][y]=z;
+  }
   out(Gauss::determinant(a));
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
