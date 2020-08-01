@@ -21,26 +21,27 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-ntl/aoj-ntl-1-c.test.cpp
+# :heavy_check_mark: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#bffdd07a318a75234329b02eb9a9745b">verify-aoj-ntl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-ntl/aoj-ntl-1-c.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-3-c.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:45:41+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/strongly-connected-components.hpp.html">graph/strongly-connected-components.hpp</a>
 
 
 ## Code
@@ -49,19 +50,20 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C"
 
-#include "../competitive-template.hpp"
-#include "../math/elementary-function.hpp"
+#include "../../competitive-template.hpp"
+#include "../../graph/strongly-connected-components.hpp"
 
 void solve() {
-  ini(N);
-  ll ans = 1;
-  rep(i, N) {
-    ini(n);
-    ans = lcm(ans, n);
+  ini(N, M);
+  auto g = graph(N, M, true, false);
+  StronglyConnectedComponents<vvi> scc(g);
+  ini(Q);
+  rep(_, Q) {
+    ini(u, v);
+    out(scc[u] == scc[v]);
   }
-  out(ans);
 }
 ```
 {% endraw %}
@@ -69,9 +71,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-ntl/aoj-ntl-1-c.test.cpp"
+#line 1 "verify/verify-aoj-grl/aoj-grl-3-c.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -373,192 +375,189 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "math/elementary-function.hpp"
+#line 3 "graph/strongly-connected-components.hpp"
 using namespace std;
 
-long long my_gcd(long long x, long long y) {
-  long long z;
-  if (x > y) swap(x, y);
-  while (x) {
-    x = y % (z = x);
-    y = z;
+#line 3 "graph/graph-template.hpp"
+using namespace std;
+
+template <typename T>
+struct edge {
+  int src, to;
+  T cost;
+
+  edge(int to, T cost) : src(-1), to(to), cost(cost) {}
+  edge(int src, int to, T cost) : src(src), to(to), cost(cost) {}
+
+  edge &operator=(const int &x) {
+    to = x;
+    return *this;
   }
-  return y;
-}
-long long my_lcm(long long x, long long y) {
-  return 1LL * x / my_gcd(x, y) * y;
-}
-#define gcd my_gcd
-#define lcm my_lcm
 
-// Prime -> 1 {0, 0, 1, 1, 0, 1, 0, 1, ...}
-vector<int> Primes(int N) {
-  vector<int> A(N + 1, 1);
-  A[0] = A[1] = 0;
-  for (int i = 2; i * i <= N; i++)
-    if (A[i] == 1)
-      for (int j = i << 1; j <= N; j += i) A[j] = 0;
-  return A;
-}
-
-// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}
-vector<long long> PrimeSieve(int N) {
-  vector<int> prime = Primes(N);
-  vector<long long> ret;
-  for (int i = 0; i < (int)prime.size(); i++)
-    if (prime[i] == 1) ret.push_back(i);
-  return ret;
-}
-
-// Factors (using for fast factorization)
-// {0, 0, 1, 1, 2, 1, 2, 1, 2, 3, ...}
-vector<int> Factors(int N) {
-  vector<int> A(N + 1, 1);
-  A[0] = A[1] = 0;
-  for (int i = 2; i * i <= N; i++)
-    if (A[i] == 1)
-      for (int j = i << 1; j <= N; j += i) A[j] = i;
-  return A;
-}
-
-// totient function φ(N)=(1 ~ N , gcd(i,N) = 1)
-// {0, 1, 1, 2, 4, 2, 6, 4, ... }
-vector<int> EulersTotientFunction(int N) {
-  vector<int> ret(N + 1, 0);
-  for (int i = 0; i <= N; i++) ret[i] = i;
-  for (int i = 2; i <= N; i++) {
-    if (ret[i] == i)
-      for (int j = i; j <= N; j += i) ret[j] = ret[j] / i * (i - 1);
-  }
-  return ret;
-}
-
-// Divisor ex) 12 -> {1, 2, 3, 4, 6, 12}
-vector<long long> Divisor(long long N) {
-  vector<long long> v;
-  for (long long i = 1; i * i <= N; i++) {
-    if (N % i == 0) {
-      v.push_back(i);
-      if (i * i != N) v.push_back(N / i);
-    }
-  }
-  return v;
-}
-
-// Factorization
-// ex) 18 -> { (2,1) , (3,2) }
-vector<pair<long long, int> > PrimeFactors(long long N) {
-  vector<pair<long long, int> > ret;
-  for (long long p = 2; p * p <= N; p++)
-    if (N % p == 0) {
-      ret.emplace_back(p, 0);
-      while (N % p == 0) N /= p, ret.back().second++;
-    }
-  if (N >= 2) ret.emplace_back(N, 1);
-  return ret;
-}
-
-// Factorization with Prime Sieve
-// ex) 18 -> { (2,1) , (3,2) }
-vector<pair<long long, int> > PrimeFactors(long long N,
-                                           const vector<long long> &prime) {
-  vector<pair<long long, int> > ret;
-  for (auto &p : prime) {
-    if (p * p > N) break;
-    if (N % p == 0) {
-      ret.emplace_back(p, 0);
-      while (N % p == 0) N /= p, ret.back().second++;
-    }
-  }
-  if (N >= 2) ret.emplace_back(N, 1);
-  return ret;
-}
-
-// modpow for mod < 2 ^ 31
-long long modpow(long long a, long long n, long long mod) {
-  a %= mod;
-  long long ret = 1;
-  while (n > 0) {
-    if (n & 1) ret = ret * a % mod;
-    a = a * a % mod;
-    n >>= 1;
-  }
-  return ret % mod;
+  operator int() const { return to; }
 };
+template <typename T>
+using Edges = vector<edge<T>>;
+template <typename T>
+using WeightedGraph = vector<Edges<T>>;
+using UnweightedGraph = vector<vector<int>>;
 
-// Check if r is Primitive Root
-bool isPrimitiveRoot(long long r, long long mod) {
-  r %= mod;
-  if (r == 0) return false;
-  auto pf = PrimeFactors(mod - 1);
-  for (auto &x : pf) {
-    if (modpow(r, (mod - 1) / x.first, mod) == 1) return false;
+// Input of (Unweighted) Graph
+UnweightedGraph graph(int N, int M = -1, bool is_directed = false,
+                      bool is_1origin = true) {
+  UnweightedGraph g(N);
+  if (M == -1) M = N - 1;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    if (is_1origin) x--, y--;
+    g[x].push_back(y);
+    if (!is_directed) g[y].push_back(x);
   }
-  return true;
+  return g;
 }
 
-// Get Primitive Root
-long long PrimitiveRoot(long long mod) {
-  long long ret = 1;
-  while (isPrimitiveRoot(ret, mod) == false) ret++;
-  return ret;
-}
-
-// Euler's phi function
-long long phi(long long n) {
-  auto pf = PrimeFactors(n);
-  long long ret = n;
-  for (auto p : pf) {
-    ret /= p.first;
-    ret *= (p.first - 1);
+// Input of Weighted Graph
+template <typename T>
+WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
+                        bool is_1origin = true) {
+  WeightedGraph<T> g(N);
+  if (M == -1) M = N - 1;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    cin >> c;
+    if (is_1origin) x--, y--;
+    g[x].eb(x, y, c);
+    if (!is_directed) g[y].eb(y, x, c);
   }
-  return ret;
+  return g;
 }
 
-// Extended Euclidean algorithm
-// solve : ax + by = gcd(a, b)
-// return : pair(x, y)
-pair<long long, long long> extgcd(long long a, long long b) {
-  if (b == 0) return make_pair(1, 0);
-  long long x, y;
-  tie(y, x) = extgcd(b, a % b);
-  y -= a / b * x;
-  return make_pair(x, y);
-}
-
-// Check if n is Square Number
-bool isSquare(long long n) {
-  if (n == 0 || n == 1) return true;
-  long long d = (long long)sqrt(n) - 1;
-  while (d * d < n) ++d;
-  return d * d == n;
-}
-
-// return a number of n's digit
-// zero ... return value if n = 0 (default -> 1)
-int isDigit(long long n, int zero = 1) {
-  if (n == 0) return zero;
-  int ret = 0;
-  while (n) {
-    n /= 10;
-    ret++;
+// Input of Edges
+template <typename T>
+Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
+  Edges<T> es;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    es.emplace_back(x, y, c);
   }
-  return ret;
+  return es;
 }
-#line 6 "verify-aoj-ntl/aoj-ntl-1-c.test.cpp"
+
+// Input of Adjacency Matrix
+template <typename T>
+vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
+                           bool is_directed = false, bool is_1origin = true) {
+  vector<vector<T>> d(N, vector<T>(N, INF));
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    d[x][y] = c;
+    if (!is_directed) d[y][x] = c;
+  }
+  return d;
+}
+#line 6 "graph/strongly-connected-components.hpp"
+
+// Strongly Connected Components
+// DAG of SC graph   ... scc.dag (including multiedges)
+// new node of k     ... scc[k]
+// inv of scc[k] = i ... scc.blng(i)
+template <typename G>
+struct StronglyConnectedComponents {
+ private:
+  const G &g;
+  vector<vector<int>> rg;
+  vector<int> comp, order;
+  vector<char> used;
+  vector<vector<int>> blng;
+
+ public:
+  vector<vector<int>> dag;
+  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }
+
+  int operator[](int k) { return comp[k]; }
+
+  vector<int> &belong(int i) { return blng[i]; }
+
+ private:
+  void dfs(int idx) {
+    if (used[idx]) return;
+    used[idx] = true;
+    for (auto to : g[idx]) dfs(int(to));
+    order.push_back(idx);
+  }
+
+  void rdfs(int idx, int cnt) {
+    if (comp[idx] != -1) return;
+    comp[idx] = cnt;
+    for (int to : rg[idx]) rdfs(to, cnt);
+  }
+
+  void build() {
+    for (int i = 0; i < (int)g.size(); i++) dfs(i);
+    reverse(begin(order), end(order));
+    used.clear();
+    used.shrink_to_fit();
+
+    comp.resize(g.size(), -1);
+
+    rg.resize(g.size());
+    for (int i = 0; i < (int)g.size(); i++) {
+      for (auto e : g[i]) {
+        rg[(int)e].emplace_back(i);
+      }
+    }
+    int ptr = 0;
+    for (int i : order)
+      if (comp[i] == -1) rdfs(i, ptr), ptr++;
+    rg.clear();
+    rg.shrink_to_fit();
+    order.clear();
+    order.shrink_to_fit();
+
+    dag.resize(ptr);
+    blng.resize(ptr);
+    for (int i = 0; i < (int)g.size(); i++) {
+      blng[comp[i]].push_back(i);
+      for (auto &to : g[i]) {
+        int x = comp[i], y = comp[to];
+        if (x == y) continue;
+        dag[x].push_back(y);
+      }
+    }
+  }
+};
+#line 6 "verify/verify-aoj-grl/aoj-grl-3-c.test.cpp"
 
 void solve() {
-  ini(N);
-  ll ans = 1;
-  rep(i, N) {
-    ini(n);
-    ans = lcm(ans, n);
+  ini(N, M);
+  auto g = graph(N, M, true, false);
+  StronglyConnectedComponents<vvi> scc(g);
+  ini(Q);
+  rep(_, Q) {
+    ini(u, v);
+    out(scc[u] == scc[v]);
   }
-  out(ans);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

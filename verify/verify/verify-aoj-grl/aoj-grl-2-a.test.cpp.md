@@ -21,27 +21,28 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-grl/aoj-grl-3-a.test.cpp
+# :heavy_check_mark: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-3-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-2-a.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:45:41+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/graph/lowlink.hpp.html">graph/lowlink.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/kruskal.hpp.html">graph/kruskal.hpp</a>
 
 
 ## Code
@@ -50,28 +51,26 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
 
-#include "../competitive-template.hpp"
-#include "../graph/lowlink.hpp"
+#include "../../competitive-template.hpp"
+#include "../../graph/kruskal.hpp"
 
 void solve() {
   ini(N, E);
-  auto g = graph(N, E, false, false);
-  LowLink<vvi> lowlink(g);
-  sort(all(lowlink.articulation));
-  each(x, lowlink.articulation) out(x);
+  auto es = esgraph<int>(N, E, true, false);
+  auto mst = kruskal(N, es);
+  out(mst);
 }
-
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-grl/aoj-grl-3-a.test.cpp"
+#line 1 "verify/verify-aoj-grl/aoj-grl-2-a.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -373,7 +372,7 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "graph/lowlink.hpp"
+#line 3 "graph/kruskal.hpp"
 using namespace std;
 
 #line 3 "graph/graph-template.hpp"
@@ -470,65 +469,53 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
-#line 6 "graph/lowlink.hpp"
+#line 3 "data-structure/union-find.hpp"
+using namespace std;
 
-// LowLink ... enumerate bridge and articulation point
-// bridge ... 橋 articulation point ... 関節点
-template <typename G>
-struct LowLink {
-  int N;
-  const G &g;
-  vector<int> ord, low, articulation;
-  vector<pair<int, int> > bridge;
-  
-  LowLink(const G &g) : g(g) {
-    N = g.size();
-    ord.resize(N, -1);
-    low.resize(N, -1);
-    articulation.reserve(N);
-    bridge.reserve(N);
-    int k = 0;
-    for (int i = 0; i < N; i++) {
-      if (!(~ord[i])) k = dfs(i, k, -1);
-    }
-    articulation.shrink_to_fit();
-    bridge.shrink_to_fit();
+struct UnionFind {
+  vector<int> data;
+  UnionFind(int N) : data(N, -1) {}
+
+  int find(int k) { return data[k] < 0 ? k : data[k] = find(data[k]); }
+
+  int unite(int x, int y) {
+    if ((x = find(x)) == (y = find(y))) return false;
+    if (data[x] > data[y]) swap(x, y);
+    data[x] += data[y];
+    data[y] = x;
+    return true;
   }
 
-  int dfs(int idx, int k, int par) {
-    low[idx] = (ord[idx] = k++);
-    int cnt = 0;
-    bool is_arti = false;
-    for (auto &to : g[idx]) {
-      if (ord[to] == -1) {
-        cnt++;
-        k = dfs(to, k, idx);
-        low[idx] = min(low[idx], low[to]);
-        is_arti |= (par != -1) && (low[to] >= ord[idx]);
-        if (ord[idx] < low[to]) {
-          bridge.emplace_back(minmax(idx, (int)to));
-        }
-      } else if (to != par) {
-        low[idx] = min(low[idx], ord[to]);
-      }
-    }
-    is_arti |= par == -1 && cnt > 1;
-    if (is_arti) articulation.push_back(idx);
-    return k;
-  }
+  int size(int k) { return -data[find(k)]; }
+
+  int same(int x, int y) { return find(x) == find(y); }
 };
-#line 6 "verify-aoj-grl/aoj-grl-3-a.test.cpp"
+#line 7 "graph/kruskal.hpp"
+
+template <typename T>
+T kruskal(int N, Edges<T> &es) {
+  sort(begin(es), end(es),
+       [&](edge<T> a, edge<T> b) { return a.cost < b.cost; });
+  UnionFind uf(N);
+  T ret = 0;
+  for (edge<T> &e : es) {
+    if (uf.same(e.src, e.to)) continue;
+    ret += e.cost;
+    uf.unite(e.src, e.to);
+  }
+  return ret;
+}
+#line 6 "verify/verify-aoj-grl/aoj-grl-2-a.test.cpp"
 
 void solve() {
   ini(N, E);
-  auto g = graph(N, E, false, false);
-  LowLink<vvi> lowlink(g);
-  sort(all(lowlink.articulation));
-  each(x, lowlink.articulation) out(x);
+  auto es = esgraph<int>(N, E, true, false);
+  auto mst = kruskal(N, es);
+  out(mst);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

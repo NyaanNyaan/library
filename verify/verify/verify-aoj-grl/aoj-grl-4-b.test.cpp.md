@@ -21,27 +21,27 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-grl/aoj-grl-1-a.test.cpp
+# :heavy_check_mark: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-1-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-4-b.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:45:41+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_4_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_4_B</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/shortest-path/dijkstra.hpp.html">shortest-path/dijkstra.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/topological-sort.hpp.html">graph/topological-sort.hpp</a>
 
 
 ## Code
@@ -50,21 +50,16 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_4_B"
 
-#include "../competitive-template.hpp"
-#include "../shortest-path/dijkstra.hpp"
+#include "../../competitive-template.hpp"
+#include "../../graph/topological-sort.hpp"
 
 void solve() {
-  ini(N, E, S);
-  auto g = wgraph<int>(N, E, true, false);
-  auto d = dijkstra<int>(g, S);
-  each(x, d) {
-    if (x > TEN(9))
-      out("INF");
-    else
-      out(x);
-  }
+  ini(N, M);
+  auto g = graph(N, M, true, false);
+  auto topo = TopologicalSort<vvi>(g);
+  each(n, topo) out(n);
 }
 ```
 {% endraw %}
@@ -72,9 +67,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-grl/aoj-grl-1-a.test.cpp"
+#line 1 "verify/verify-aoj-grl/aoj-grl-4-b.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_4_B"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -376,7 +371,7 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "shortest-path/dijkstra.hpp"
+#line 3 "graph/topological-sort.hpp"
 using namespace std;
 
 #line 3 "graph/graph-template.hpp"
@@ -473,47 +468,46 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
-#line 6 "shortest-path/dijkstra.hpp"
+#line 6 "graph/topological-sort.hpp"
 
-// unreachable -> -1 
-template<typename T>
-vector<T> dijkstra(WeightedGraph<T> &g, int start = 0){ 
-  using P = pair<T , int>;
-  int N = (int)g.size();
-  T INF = numeric_limits<T>::max() / 2;
-  vector<T> d(N , INF);
-  priority_queue<P , vector<P> , greater<P> > Q;
-  d[start] = 0;
-  Q.emplace(0 , start);
-  while(!Q.empty()){
-    P p = Q.top(); Q.pop();
-    int cur = p.second;
-    if(d[cur] < p.first) continue;
-    for(auto dst : g[cur]){
-      if( d[cur] + dst.cost < d[dst]){
-        d[dst] = d[cur] + dst.cost;
-        Q.emplace(d[dst] , dst);
+// if the graph is not DAG, return empty vector
+template <typename T>
+vector<int> TopologicalSort(T &g) {
+  int N = g.size();
+  vector<int> marked(N, 0), temp(N, 0), v;
+  auto visit = [&](auto f, int i) -> bool {
+    if (temp[i] == 1) return false;
+    if (marked[i] == 0) {
+      temp[i] = 1;
+      for (auto &e : g[i]) {
+        if (f(f, e) == false) return false;
       }
+      marked[i] = 1;
+      v.push_back(i);
+      temp[i] = 0;
+    }
+    return true;
+  };
+
+  for (int i = 0; i < N; i++) {
+    if (marked[i] == 0) {
+      if (visit(visit, i) == false) return vector<int>();
     }
   }
-  return d;
+  reverse(v.begin(), v.end());
+  return v;
 }
-#line 6 "verify-aoj-grl/aoj-grl-1-a.test.cpp"
+#line 6 "verify/verify-aoj-grl/aoj-grl-4-b.test.cpp"
 
 void solve() {
-  ini(N, E, S);
-  auto g = wgraph<int>(N, E, true, false);
-  auto d = dijkstra<int>(g, S);
-  each(x, d) {
-    if (x > TEN(9))
-      out("INF");
-    else
-      out(x);
-  }
+  ini(N, M);
+  auto g = graph(N, M, true, false);
+  auto topo = TopologicalSort<vvi>(g);
+  each(n, topo) out(n);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

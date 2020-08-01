@@ -38,11 +38,11 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
 
 
 ## Code

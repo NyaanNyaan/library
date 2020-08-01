@@ -21,26 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+# :heavy_check_mark: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#bffdd07a318a75234329b02eb9a9745b">verify-aoj-ntl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-ntl/aoj-ntl-1-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#b501e8320d2b88d7788be7181d2f6d20">verify/verify-aoj-ntl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:45:41+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_E</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
 
 
 ## Code
@@ -49,19 +49,16 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_E"
 
-#include "../competitive-template.hpp"
-#include "../math/elementary-function.hpp"
+#include "../../competitive-template.hpp"
+#include "../../math/elementary-function.hpp"
 
 void solve() {
-  ini(N);
-  auto factor = PrimeFactors(N);
-  vi ans;
-  each(p,factor) rep(_,p.second)ans.pb(p.first);
-  cout << N << ":";
-  each(x,ans)cout<< " " << x;
-  cout << endl;
+  ini(a, b);
+  int x, y;
+  tie(x, y) = extgcd(a, b);
+  out(x, y);
 }
 ```
 {% endraw %}
@@ -69,9 +66,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-ntl/aoj-ntl-1-a.test.cpp"
+#line 1 "verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_E"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -545,20 +542,17 @@ int isDigit(long long n, int zero = 1) {
   }
   return ret;
 }
-#line 6 "verify-aoj-ntl/aoj-ntl-1-a.test.cpp"
+#line 6 "verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp"
 
 void solve() {
-  ini(N);
-  auto factor = PrimeFactors(N);
-  vi ans;
-  each(p,factor) rep(_,p.second)ans.pb(p.first);
-  cout << N << ":";
-  each(x,ans)cout<< " " << x;
-  cout << endl;
+  ini(a, b);
+  int x, y;
+  tie(x, y) = extgcd(a, b);
+  out(x, y);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

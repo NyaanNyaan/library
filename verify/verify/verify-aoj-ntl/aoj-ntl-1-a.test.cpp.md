@@ -21,27 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-grl/aoj-grl-1-b.test.cpp
+# :heavy_check_mark: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-1-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#b501e8320d2b88d7788be7181d2f6d20">verify/verify-aoj-ntl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:45:41+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/shortest-path/bellman-ford.hpp.html">shortest-path/bellman-ford.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
 
 
 ## Code
@@ -50,22 +49,19 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A"
 
-#include "../competitive-template.hpp"
-#include "../shortest-path/bellman-ford.hpp"
+#include "../../competitive-template.hpp"
+#include "../../math/elementary-function.hpp"
 
 void solve() {
-  ini(N, E, S);
-  auto es = esgraph<int>(N, E, true, false);
-  auto d = bellman_ford<int>(N, es, S);
-  if (!sz(d)) die("NEGATIVE CYCLE");
-  each(x, d) {
-    if (x > TEN(9))
-      out("INF");
-    else
-      out(x);
-  }
+  ini(N);
+  auto factor = PrimeFactors(N);
+  vi ans;
+  each(p,factor) rep(_,p.second)ans.pb(p.first);
+  cout << N << ":";
+  each(x,ans)cout<< " " << x;
+  cout << endl;
 }
 ```
 {% endraw %}
@@ -73,9 +69,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-grl/aoj-grl-1-b.test.cpp"
+#line 1 "verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -377,156 +373,192 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "shortest-path/bellman-ford.hpp"
+#line 3 "math/elementary-function.hpp"
 using namespace std;
 
-#line 3 "graph/graph-template.hpp"
-using namespace std;
-
-template <typename T>
-struct edge {
-  int src, to;
-  T cost;
-
-  edge(int to, T cost) : src(-1), to(to), cost(cost) {}
-  edge(int src, int to, T cost) : src(src), to(to), cost(cost) {}
-
-  edge &operator=(const int &x) {
-    to = x;
-    return *this;
+long long my_gcd(long long x, long long y) {
+  long long z;
+  if (x > y) swap(x, y);
+  while (x) {
+    x = y % (z = x);
+    y = z;
   }
+  return y;
+}
+long long my_lcm(long long x, long long y) {
+  return 1LL * x / my_gcd(x, y) * y;
+}
+#define gcd my_gcd
+#define lcm my_lcm
 
-  operator int() const { return to; }
+// Prime -> 1 {0, 0, 1, 1, 0, 1, 0, 1, ...}
+vector<int> Primes(int N) {
+  vector<int> A(N + 1, 1);
+  A[0] = A[1] = 0;
+  for (int i = 2; i * i <= N; i++)
+    if (A[i] == 1)
+      for (int j = i << 1; j <= N; j += i) A[j] = 0;
+  return A;
+}
+
+// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}
+vector<long long> PrimeSieve(int N) {
+  vector<int> prime = Primes(N);
+  vector<long long> ret;
+  for (int i = 0; i < (int)prime.size(); i++)
+    if (prime[i] == 1) ret.push_back(i);
+  return ret;
+}
+
+// Factors (using for fast factorization)
+// {0, 0, 1, 1, 2, 1, 2, 1, 2, 3, ...}
+vector<int> Factors(int N) {
+  vector<int> A(N + 1, 1);
+  A[0] = A[1] = 0;
+  for (int i = 2; i * i <= N; i++)
+    if (A[i] == 1)
+      for (int j = i << 1; j <= N; j += i) A[j] = i;
+  return A;
+}
+
+// totient function φ(N)=(1 ~ N , gcd(i,N) = 1)
+// {0, 1, 1, 2, 4, 2, 6, 4, ... }
+vector<int> EulersTotientFunction(int N) {
+  vector<int> ret(N + 1, 0);
+  for (int i = 0; i <= N; i++) ret[i] = i;
+  for (int i = 2; i <= N; i++) {
+    if (ret[i] == i)
+      for (int j = i; j <= N; j += i) ret[j] = ret[j] / i * (i - 1);
+  }
+  return ret;
+}
+
+// Divisor ex) 12 -> {1, 2, 3, 4, 6, 12}
+vector<long long> Divisor(long long N) {
+  vector<long long> v;
+  for (long long i = 1; i * i <= N; i++) {
+    if (N % i == 0) {
+      v.push_back(i);
+      if (i * i != N) v.push_back(N / i);
+    }
+  }
+  return v;
+}
+
+// Factorization
+// ex) 18 -> { (2,1) , (3,2) }
+vector<pair<long long, int> > PrimeFactors(long long N) {
+  vector<pair<long long, int> > ret;
+  for (long long p = 2; p * p <= N; p++)
+    if (N % p == 0) {
+      ret.emplace_back(p, 0);
+      while (N % p == 0) N /= p, ret.back().second++;
+    }
+  if (N >= 2) ret.emplace_back(N, 1);
+  return ret;
+}
+
+// Factorization with Prime Sieve
+// ex) 18 -> { (2,1) , (3,2) }
+vector<pair<long long, int> > PrimeFactors(long long N,
+                                           const vector<long long> &prime) {
+  vector<pair<long long, int> > ret;
+  for (auto &p : prime) {
+    if (p * p > N) break;
+    if (N % p == 0) {
+      ret.emplace_back(p, 0);
+      while (N % p == 0) N /= p, ret.back().second++;
+    }
+  }
+  if (N >= 2) ret.emplace_back(N, 1);
+  return ret;
+}
+
+// modpow for mod < 2 ^ 31
+long long modpow(long long a, long long n, long long mod) {
+  a %= mod;
+  long long ret = 1;
+  while (n > 0) {
+    if (n & 1) ret = ret * a % mod;
+    a = a * a % mod;
+    n >>= 1;
+  }
+  return ret % mod;
 };
-template <typename T>
-using Edges = vector<edge<T>>;
-template <typename T>
-using WeightedGraph = vector<Edges<T>>;
-using UnweightedGraph = vector<vector<int>>;
 
-// Input of (Unweighted) Graph
-UnweightedGraph graph(int N, int M = -1, bool is_directed = false,
-                      bool is_1origin = true) {
-  UnweightedGraph g(N);
-  if (M == -1) M = N - 1;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    if (is_1origin) x--, y--;
-    g[x].push_back(y);
-    if (!is_directed) g[y].push_back(x);
+// Check if r is Primitive Root
+bool isPrimitiveRoot(long long r, long long mod) {
+  r %= mod;
+  if (r == 0) return false;
+  auto pf = PrimeFactors(mod - 1);
+  for (auto &x : pf) {
+    if (modpow(r, (mod - 1) / x.first, mod) == 1) return false;
   }
-  return g;
+  return true;
 }
 
-// Input of Weighted Graph
-template <typename T>
-WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
-                        bool is_1origin = true) {
-  WeightedGraph<T> g(N);
-  if (M == -1) M = N - 1;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    cin >> c;
-    if (is_1origin) x--, y--;
-    g[x].eb(x, y, c);
-    if (!is_directed) g[y].eb(y, x, c);
-  }
-  return g;
+// Get Primitive Root
+long long PrimitiveRoot(long long mod) {
+  long long ret = 1;
+  while (isPrimitiveRoot(ret, mod) == false) ret++;
+  return ret;
 }
 
-// Input of Edges
-template <typename T>
-Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
-  Edges<T> es;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    if (is_weighted)
-      cin >> c;
-    else
-      c = 1;
-    if (is_1origin) x--, y--;
-    es.emplace_back(x, y, c);
+// Euler's phi function
+long long phi(long long n) {
+  auto pf = PrimeFactors(n);
+  long long ret = n;
+  for (auto p : pf) {
+    ret /= p.first;
+    ret *= (p.first - 1);
   }
-  return es;
+  return ret;
 }
 
-// Input of Adjacency Matrix
-template <typename T>
-vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
-                           bool is_directed = false, bool is_1origin = true) {
-  vector<vector<T>> d(N, vector<T>(N, INF));
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    if (is_weighted)
-      cin >> c;
-    else
-      c = 1;
-    if (is_1origin) x--, y--;
-    d[x][y] = c;
-    if (!is_directed) d[y][x] = c;
-  }
-  return d;
+// Extended Euclidean algorithm
+// solve : ax + by = gcd(a, b)
+// return : pair(x, y)
+pair<long long, long long> extgcd(long long a, long long b) {
+  if (b == 0) return make_pair(1, 0);
+  long long x, y;
+  tie(y, x) = extgcd(b, a % b);
+  y -= a / b * x;
+  return make_pair(x, y);
 }
-#line 6 "shortest-path/bellman-ford.hpp"
 
-// bellman-ford法
-// goalが存在しないとき-> 負閉路が存在するときは空列を返す
-// goalが存在するとき  -> startとgoalの間に負閉路が存在する時に負閉路を返す
-template<typename T>
-vector<T> bellman_ford(int N, Edges<T>& es , int start = 0 , int goal = -1){
-  T INF = numeric_limits< T >::max() / 2;
-  vector<T> d(N , INF);
-  d[start] = 0;
-  for(int i = 0 ; i < N ; i++){
-    bool update = false;
-    for(auto &e : es){
-      if(d[e.src] == INF) continue;
-      if(d[e.to] > d[e.src] + e.cost){
-        update = true , d[e.to] = d[e.src] + e.cost;
-      }
-    }
-    if(!update) return d;
-  }
-
-  if(goal == -1) return vector<T>();
-  vector<bool> negative(N , false);
-  for(int i = 0 ; i < N ; i++){
-    for(auto &e : es){
-      if(d[e.src] == INF) continue;
-      if(d[e.to] > d[e.src] + e.cost)
-        negative[e.to] = true , d[e.to] = d[e.src] + e.cost;
-      if(negative[e.src] == true)
-        negative[e.to] = true;
-    }
-  }
-
-  if(negative[goal] == true) return vector<T>();
-  else return d;  
+// Check if n is Square Number
+bool isSquare(long long n) {
+  if (n == 0 || n == 1) return true;
+  long long d = (long long)sqrt(n) - 1;
+  while (d * d < n) ++d;
+  return d * d == n;
 }
-#line 6 "verify-aoj-grl/aoj-grl-1-b.test.cpp"
+
+// return a number of n's digit
+// zero ... return value if n = 0 (default -> 1)
+int isDigit(long long n, int zero = 1) {
+  if (n == 0) return zero;
+  int ret = 0;
+  while (n) {
+    n /= 10;
+    ret++;
+  }
+  return ret;
+}
+#line 6 "verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp"
 
 void solve() {
-  ini(N, E, S);
-  auto es = esgraph<int>(N, E, true, false);
-  auto d = bellman_ford<int>(N, es, S);
-  if (!sz(d)) die("NEGATIVE CYCLE");
-  each(x, d) {
-    if (x > TEN(9))
-      out("INF");
-    else
-      out(x);
-  }
+  ini(N);
+  auto factor = PrimeFactors(N);
+  vi ans;
+  each(p,factor) rep(_,p.second)ans.pb(p.first);
+  cout << N << ":";
+  each(x,ans)cout<< " " << x;
+  cout << endl;
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

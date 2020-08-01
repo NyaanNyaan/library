@@ -21,28 +21,27 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-aoj-grl/aoj-grl-2-a.test.cpp
+# :heavy_check_mark: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f6d05e39b39a7a0b0203ea25054f4234">verify-aoj-grl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-aoj-grl/aoj-grl-2-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-5-b.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:45:41+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_B</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
-* :heavy_check_mark: <a href="../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/graph/kruskal.hpp.html">graph/kruskal.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/tree/rerooting.hpp.html">tree/rerooting.hpp</a>
 
 
 ## Code
@@ -51,16 +50,27 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_B"
 
-#include "../competitive-template.hpp"
-#include "../graph/kruskal.hpp"
+#include "../../competitive-template.hpp"
+#include "../../tree/rerooting.hpp"
 
 void solve() {
-  ini(N, E);
-  auto es = esgraph<int>(N, E, true, false);
-  auto mst = kruskal(N, es);
-  out(mst);
+  ini(N);
+  auto g = wgraph<int>(N, N - 1, false, false);
+  map<pair<int, int>, int> es;
+  rep(i, N) each(e, g[i]) es[{e.src, e.to}] = e.cost;
+
+  using T = int;
+  // identify element of f1, and answer of leaf
+  T I = 0;
+  // merge value of child node
+  auto f1 = [&](T x, T y) -> T { return max(x, y); };
+  // return value from child node to parent node
+  auto f2 = [&](T x, int chd, int par) -> T { return x + es[{chd, par}]; };
+  Rerooting<T, decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);
+
+  rep(i,N) out(dp.dp[i]);
 }
 ```
 {% endraw %}
@@ -68,9 +78,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-aoj-grl/aoj-grl-2-a.test.cpp"
+#line 1 "verify/verify-aoj-grl/aoj-grl-5-b.test.cpp"
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_B"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -372,7 +382,7 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "graph/kruskal.hpp"
+#line 3 "tree/rerooting.hpp"
 using namespace std;
 
 #line 3 "graph/graph-template.hpp"
@@ -469,53 +479,101 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
-#line 3 "data-structure/union-find.hpp"
-using namespace std;
+#line 6 "tree/rerooting.hpp"
 
-struct UnionFind {
-  vector<int> data;
-  UnionFind(int N) : data(N, -1) {}
+// Rerooting
+// f1(c1, c2) ... merge value of child node
+// f2(memo[i], chd, par) ... return value from child node to parent node
+// memo[i] ... result of subtree rooted i
+// dp[i] ... result of tree rooted i
+template <typename T, typename G, typename F1, typename F2>
+struct Rerooting {
+  const G &g;
+  const F1 f1;
+  const F2 f2;
+  vector<T> memo, dp;
+  T I;
 
-  int find(int k) { return data[k] < 0 ? k : data[k] = find(data[k]); }
-
-  int unite(int x, int y) {
-    if ((x = find(x)) == (y = find(y))) return false;
-    if (data[x] > data[y]) swap(x, y);
-    data[x] += data[y];
-    data[y] = x;
-    return true;
+  Rerooting(const G &g, const F1 f1, const F2 f2, const T &I)
+      : g(g), f1(f1), f2(f2), memo(g.size(), I), dp(g.size(), I), I(I) {
+    dfs(0, -1);
+    efs(0, -1, I);
   }
 
-  int size(int k) { return -data[find(k)]; }
+  const T &operator[](int i) const { return dp[i]; }
 
-  int same(int x, int y) { return find(x) == find(y); }
+  void dfs(int cur, int par) {
+    for (auto &dst : g[cur]) {
+      if (dst == par) continue;
+      dfs(dst, cur);
+      memo[cur] = f1(memo[cur], f2(memo[dst], dst, cur));
+    }
+  }
+
+  void efs(int cur, int par, const T &pval) {
+    // get cumulative sum
+    vector<T> buf;
+    for (auto dst : g[cur]) {
+      if (dst == par) continue;
+      buf.push_back(f2(memo[dst], dst, cur));
+    }
+    vector<T> head(buf.size() + 1), tail(buf.size() + 1);
+    head[0] = tail[buf.size()] = I;
+    for (int i = 0; i < (int)buf.size(); i++) head[i + 1] = f1(head[i], buf[i]);
+    for (int i = (int)buf.size() - 1; i >= 0; i--)
+      tail[i] = f1(tail[i + 1], buf[i]);
+
+    // update
+    dp[cur] = par == -1 ? head.back() : f1(pval, head.back());
+
+    // propagate
+    int idx = 0;
+    for (auto &dst : g[cur]) {
+      if (dst == par) continue;
+      efs(dst, cur, f2(f1(pval, f1(head[idx], tail[idx + 1])), cur, dst));
+      idx++;
+    }
+  }
 };
-#line 7 "graph/kruskal.hpp"
 
-template <typename T>
-T kruskal(int N, Edges<T> &es) {
-  sort(begin(es), end(es),
-       [&](edge<T> a, edge<T> b) { return a.cost < b.cost; });
-  UnionFind uf(N);
-  T ret = 0;
-  for (edge<T> &e : es) {
-    if (uf.same(e.src, e.to)) continue;
-    ret += e.cost;
-    uf.unite(e.src, e.to);
-  }
-  return ret;
-}
-#line 6 "verify-aoj-grl/aoj-grl-2-a.test.cpp"
+/*
+
+using T = ;
+// identify element of f1, and answer of leaf
+T I = ;
+// merge value of child node
+auto f1 = [&](T x, T y) -> T {
+
+};
+// return value from child node to parent node
+auto f2 = [&](T x, int chd, int par) -> T {
+
+};
+Rerooting<T, decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);
+
+*/
+#line 6 "verify/verify-aoj-grl/aoj-grl-5-b.test.cpp"
 
 void solve() {
-  ini(N, E);
-  auto es = esgraph<int>(N, E, true, false);
-  auto mst = kruskal(N, es);
-  out(mst);
+  ini(N);
+  auto g = wgraph<int>(N, N - 1, false, false);
+  map<pair<int, int>, int> es;
+  rep(i, N) each(e, g[i]) es[{e.src, e.to}] = e.cost;
+
+  using T = int;
+  // identify element of f1, and answer of leaf
+  T I = 0;
+  // merge value of child node
+  auto f1 = [&](T x, T y) -> T { return max(x, y); };
+  // return value from child node to parent node
+  auto f2 = [&](T x, int chd, int par) -> T { return x + es[{chd, par}]; };
+  Rerooting<T, decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);
+
+  rep(i,N) out(dp.dp[i]);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
