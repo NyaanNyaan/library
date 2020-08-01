@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/system_of_linear_equations"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../modulo/gauss-elimination.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../modulo/gauss-elimination.hpp"
 
 using mint = LazyMontgomeryModInt<998244353>;
 

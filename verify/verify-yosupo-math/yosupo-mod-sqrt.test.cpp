@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
 
-#include "../competitive-template.hpp"
-#include "../modulo/mod-sqrt.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modulo/mod-sqrt.hpp"
 
 void solve() {
   ini(T);
