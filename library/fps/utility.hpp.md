@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: fps/utility.hpp
+# :x: fps/utility.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1145.test.cpp.html">verify-yuki/yuki-1145.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 
 
 ## Code

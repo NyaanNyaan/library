@@ -21,31 +21,30 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yuki/yuki-0963.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-fps/yosupo-exp.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#ea921838279ab5a0e84be169b8c4269e">verify-yuki</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yuki/yuki-0963.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+* category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-exp.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:57:58+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/no/963">https://yukicoder.me/problems/no/963</a>
+* see: <a href="https://judge.yosupo.jp/problem/exp_of_formal_power_series">https://judge.yosupo.jp/problem/exp_of_formal_power_series</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/differential-equation.hpp.html">fps/differential-equation.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -53,26 +52,19 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/no/963"
+#define PROBLEM "https://judge.yosupo.jp/problem/exp_of_formal_power_series"
 
-#include "../competitive-template.hpp"
-#include "../fps/differential-equation.hpp"
-#include "../fps/ntt-friendly-fps.hpp"
-#include "../modint/montgomery-modint.hpp"
-
-using mint = LazyMontgomeryModInt<1012924417>;
-using vm = vector<mint>;
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../fps/ntt-friendly-fps.hpp"
+using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
 void solve() {
   ini(N);
-  auto g = [](const fps &f, int deg) {
-    return ((f * f + 1) * mint(2).inverse()).pre(deg);
-  };
-  auto gp = [](const fps &f, int deg) { return f.pre(deg); };
-  auto f = DifferentialEquation<mint>(g, gp, 1, N + 1);
-  rep1(i, N) f[N] *= i;
-  out(f[N] * 2);
+  fps a(N);
+  in(a);
+  out(a.exp());
 }
 ```
 {% endraw %}
@@ -80,8 +72,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yuki/yuki-0963.test.cpp"
-#define PROBLEM "https://yukicoder.me/problems/no/963"
+#line 1 "verify/verify-yosupo-fps/yosupo-exp.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/exp_of_formal_power_series"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -383,182 +375,100 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "fps/formal-power-series.hpp"
+#line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 
-template <typename mint>
-struct FormalPowerSeries : vector<mint> {
-  using vector<mint>::vector;
-  using FPS = FormalPowerSeries;
+template <uint32_t mod>
+struct LazyMontgomeryModInt {
+  using mint = LazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
 
-  FPS &operator+=(const FPS &r) {
-    if (r.size() > this->size()) this->resize(r.size());
-    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];
+  static constexpr u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
+  }
+
+  static constexpr u32 r = get_r();
+  static constexpr u32 n2 = -u64(mod) % mod;
+  static_assert(r * mod == 1, "invalid, r * mod != 1");
+  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
+  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
+
+  u32 a;
+
+  constexpr LazyMontgomeryModInt() : a(0) {}
+  constexpr LazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static constexpr u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
+  }
+
+  constexpr mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
     return *this;
   }
 
-  FPS &operator+=(const mint &r) {
-    if (this->empty()) this->resize(1);
-    (*this)[0] += r;
+  constexpr mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
     return *this;
   }
 
-  FPS &operator-=(const FPS &r) {
-    if (r.size() > this->size()) this->resize(r.size());
-    for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
+  constexpr mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
     return *this;
   }
 
-  FPS &operator-=(const mint &r) {
-    if (this->empty()) this->resize(1);
-    (*this)[0] -= r;
+  constexpr mint &operator/=(const mint &b) {
+    *this *= b.inverse();
     return *this;
   }
 
-  FPS &operator*=(const mint &v) {
-    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
-    return *this;
+  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
+  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
+  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
+  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
+  constexpr bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
   }
+  constexpr bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr mint operator-() const { return mint() - mint(*this); }
 
-  FPS &operator/=(const FPS &r) {
-    if (this->size() < r.size()) {
-      this->clear();
-      return *this;
+  constexpr mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
     }
-    int n = this->size() - r.size() + 1;
-    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
-  }
-
-  FPS &operator%=(const FPS &r) {
-    *this -= *this / r * r;
-    shrink();
-    return *this;
-  }
-
-  FPS operator+(const FPS &r) const { return FPS(*this) += r; }
-  FPS operator+(const mint &v) const { return FPS(*this) += v; }
-  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
-  FPS operator-(const mint &v) const { return FPS(*this) -= v; }
-  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }
-  FPS operator*(const mint &v) const { return FPS(*this) *= v; }
-  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }
-  FPS operator%(const FPS &r) const { return FPS(*this) %= r; }
-  FPS operator-() const {
-    FPS ret(this->size());
-    for (int i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];
     return ret;
   }
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
 
-  void shrink() {
-    while (this->size() && this->back() == mint(0)) this->pop_back();
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
   }
 
-  FPS rev() const {
-    FPS ret(*this);
-    reverse(begin(ret), end(ret));
-    return ret;
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = LazyMontgomeryModInt<mod>(t);
+    return (is);
+  }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
   }
 
-  FPS dot(FPS r) const {
-    FPS ret(min(this->size(), r.size()));
-    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];
-    return ret;
-  }
-
-  FPS pre(int sz) const {
-    return FPS(begin(*this), begin(*this) + min((int)this->size(), sz));
-  }
-
-  FPS operator>>(int sz) const {
-    if ((int)this->size() <= sz) return {};
-    FPS ret(*this);
-    ret.erase(ret.begin(), ret.begin() + sz);
-    return ret;
-  }
-
-  FPS operator<<(int sz) const {
-    FPS ret(*this);
-    ret.insert(ret.begin(), sz, mint(0));
-    return ret;
-  }
-
-  FPS diff() const {
-    const int n = (int)this->size();
-    FPS ret(max(0, n - 1));
-    for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * mint(i);
-    return ret;
-  }
-
-  FPS integral() const {
-    const int n = (int)this->size();
-    FPS ret(n + 1);
-    ret[0] = mint(0);
-    for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / mint(i + 1);
-    return ret;
-  }
-
-  mint eval(mint x) const {
-    mint r = 0, w = 1;
-    for (auto &v : *this) r += w * v, w *= x;
-    return r;
-  }
-
-  FPS log(int deg = -1) const {
-    assert((*this)[0] == mint(1));
-    if (deg == -1) deg = (int)this->size();
-    return (this->diff() * this->inv(deg)).pre(deg - 1).integral();
-  }
-
-  FPS pow(int64_t k, int deg = -1) const {
-    const int n = (int)this->size();
-    if (deg == -1) deg = n;
-    for (int i = 0; i < n; i++) {
-      if ((*this)[i] != mint(0)) {
-        if (i * k > deg) return FPS(deg, mint(0));
-        mint rev = mint(1) / (*this)[i];
-        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
-        ret = (ret << (i * k)).pre(deg);
-        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
-        return ret;
-      }
-    }
-    return FPS(deg, mint(0));
-  }
-
-  static void *ntt_ptr;
-  static void set_fft();
-  FPS &operator*=(const FPS &r);
-  void ntt();
-  void intt();
-  void ntt_doubling();
-  static int ntt_pr();
-  FPS inv(int deg = -1) const;
-  FPS exp(int deg = -1) const;
+  static constexpr u32 get_mod() { return mod; }
 };
-template <typename mint>
-void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
-
-/**
- * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
- */
-#line 2 "fps/differential-equation.hpp"
-
-// find f, saitsfying equation f' = g(f) mod x ^ deg
-template <typename mint>
-FormalPowerSeries<mint> DifferentialEquation(
-    function<FormalPowerSeries<mint>(FormalPowerSeries<mint>, int)> g,
-    function<FormalPowerSeries<mint>(FormalPowerSeries<mint>, int)> gprime,
-    mint f0, int deg) {
-  using fps = FormalPowerSeries<mint>;
-  fps f{f0};
-  for (int i = 1; i < deg; i <<= 1) {
-    fps r = (-gprime(f, i << 1)).integral().exp(i << 1);
-    fps h = ((g(f, i << 1) - gprime(f, i << 1) * f) * r).pre(i << 1).integral();
-    f = ((h + f0) * r.inv(i << 1)).pre(i << 1);
-  }
-  return f.pre(deg);
-}
 #line 3 "fps/ntt-friendly-fps.hpp"
 using namespace std;
 
@@ -1204,6 +1114,165 @@ struct NTT {
     for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;
   }
 };
+#line 3 "fps/formal-power-series.hpp"
+using namespace std;
+
+template <typename mint>
+struct FormalPowerSeries : vector<mint> {
+  using vector<mint>::vector;
+  using FPS = FormalPowerSeries;
+
+  FPS &operator+=(const FPS &r) {
+    if (r.size() > this->size()) this->resize(r.size());
+    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];
+    return *this;
+  }
+
+  FPS &operator+=(const mint &r) {
+    if (this->empty()) this->resize(1);
+    (*this)[0] += r;
+    return *this;
+  }
+
+  FPS &operator-=(const FPS &r) {
+    if (r.size() > this->size()) this->resize(r.size());
+    for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
+    return *this;
+  }
+
+  FPS &operator-=(const mint &r) {
+    if (this->empty()) this->resize(1);
+    (*this)[0] -= r;
+    return *this;
+  }
+
+  FPS &operator*=(const mint &v) {
+    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
+    return *this;
+  }
+
+  FPS &operator/=(const FPS &r) {
+    if (this->size() < r.size()) {
+      this->clear();
+      return *this;
+    }
+    int n = this->size() - r.size() + 1;
+    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
+  }
+
+  FPS &operator%=(const FPS &r) {
+    *this -= *this / r * r;
+    shrink();
+    return *this;
+  }
+
+  FPS operator+(const FPS &r) const { return FPS(*this) += r; }
+  FPS operator+(const mint &v) const { return FPS(*this) += v; }
+  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
+  FPS operator-(const mint &v) const { return FPS(*this) -= v; }
+  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }
+  FPS operator*(const mint &v) const { return FPS(*this) *= v; }
+  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }
+  FPS operator%(const FPS &r) const { return FPS(*this) %= r; }
+  FPS operator-() const {
+    FPS ret(this->size());
+    for (int i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];
+    return ret;
+  }
+
+  void shrink() {
+    while (this->size() && this->back() == mint(0)) this->pop_back();
+  }
+
+  FPS rev() const {
+    FPS ret(*this);
+    reverse(begin(ret), end(ret));
+    return ret;
+  }
+
+  FPS dot(FPS r) const {
+    FPS ret(min(this->size(), r.size()));
+    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];
+    return ret;
+  }
+
+  FPS pre(int sz) const {
+    return FPS(begin(*this), begin(*this) + min((int)this->size(), sz));
+  }
+
+  FPS operator>>(int sz) const {
+    if ((int)this->size() <= sz) return {};
+    FPS ret(*this);
+    ret.erase(ret.begin(), ret.begin() + sz);
+    return ret;
+  }
+
+  FPS operator<<(int sz) const {
+    FPS ret(*this);
+    ret.insert(ret.begin(), sz, mint(0));
+    return ret;
+  }
+
+  FPS diff() const {
+    const int n = (int)this->size();
+    FPS ret(max(0, n - 1));
+    for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * mint(i);
+    return ret;
+  }
+
+  FPS integral() const {
+    const int n = (int)this->size();
+    FPS ret(n + 1);
+    ret[0] = mint(0);
+    for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / mint(i + 1);
+    return ret;
+  }
+
+  mint eval(mint x) const {
+    mint r = 0, w = 1;
+    for (auto &v : *this) r += w * v, w *= x;
+    return r;
+  }
+
+  FPS log(int deg = -1) const {
+    assert((*this)[0] == mint(1));
+    if (deg == -1) deg = (int)this->size();
+    return (this->diff() * this->inv(deg)).pre(deg - 1).integral();
+  }
+
+  FPS pow(int64_t k, int deg = -1) const {
+    const int n = (int)this->size();
+    if (deg == -1) deg = n;
+    for (int i = 0; i < n; i++) {
+      if ((*this)[i] != mint(0)) {
+        if (i * k > deg) return FPS(deg, mint(0));
+        mint rev = mint(1) / (*this)[i];
+        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
+        ret = (ret << (i * k)).pre(deg);
+        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
+        return ret;
+      }
+    }
+    return FPS(deg, mint(0));
+  }
+
+  static void *ntt_ptr;
+  static void set_fft();
+  FPS &operator*=(const FPS &r);
+  void ntt();
+  void intt();
+  void ntt_doubling();
+  static int ntt_pr();
+  FPS inv(int deg = -1) const;
+  FPS exp(int deg = -1) const;
+};
+template <typename mint>
+void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
+
+/**
+ * @brief 多項式/形式的冪級数ライブラリ
+ * @docs docs/formal-power-series.md
+ */
 #line 7 "fps/ntt-friendly-fps.hpp"
 
 template <typename mint>
@@ -1280,119 +1349,19 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   }
   return ret.pre(deg);
 }
-#line 3 "modint/montgomery-modint.hpp"
-using namespace std;
-
-template <uint32_t mod>
-struct LazyMontgomeryModInt {
-  using mint = LazyMontgomeryModInt;
-  using i32 = int32_t;
-  using u32 = uint32_t;
-  using u64 = uint64_t;
-
-  static constexpr u32 get_r() {
-    u32 ret = mod;
-    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
-    return ret;
-  }
-
-  static constexpr u32 r = get_r();
-  static constexpr u32 n2 = -u64(mod) % mod;
-  static_assert(r * mod == 1, "invalid, r * mod != 1");
-  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
-  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
-
-  u32 a;
-
-  constexpr LazyMontgomeryModInt() : a(0) {}
-  constexpr LazyMontgomeryModInt(const int64_t &b)
-      : a(reduce(u64(b % mod + mod) * n2)){};
-
-  static constexpr u32 reduce(const u64 &b) {
-    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
-  }
-
-  constexpr mint &operator+=(const mint &b) {
-    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  constexpr mint &operator-=(const mint &b) {
-    if (i32(a -= b.a) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  constexpr mint &operator*=(const mint &b) {
-    a = reduce(u64(a) * b.a);
-    return *this;
-  }
-
-  constexpr mint &operator/=(const mint &b) {
-    *this *= b.inverse();
-    return *this;
-  }
-
-  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
-  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
-  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
-  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
-  constexpr bool operator==(const mint &b) const {
-    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
-  }
-  constexpr bool operator!=(const mint &b) const {
-    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
-  }
-  constexpr mint operator-() const { return mint() - mint(*this); }
-
-  constexpr mint pow(u64 n) const {
-    mint ret(1), mul(*this);
-    while (n > 0) {
-      if (n & 1) ret *= mul;
-      mul *= mul;
-      n >>= 1;
-    }
-    return ret;
-  }
-  
-  constexpr mint inverse() const { return pow(mod - 2); }
-
-  friend ostream &operator<<(ostream &os, const mint &b) {
-    return os << b.get();
-  }
-
-  friend istream &operator>>(istream &is, mint &b) {
-    int64_t t;
-    is >> t;
-    b = LazyMontgomeryModInt<mod>(t);
-    return (is);
-  }
-  
-  constexpr u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
-  static constexpr u32 get_mod() { return mod; }
-};
-#line 7 "verify-yuki/yuki-0963.test.cpp"
-
-using mint = LazyMontgomeryModInt<1012924417>;
-using vm = vector<mint>;
+#line 6 "verify/verify-yosupo-fps/yosupo-exp.test.cpp"
+using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
 void solve() {
   ini(N);
-  auto g = [](const fps &f, int deg) {
-    return ((f * f + 1) * mint(2).inverse()).pre(deg);
-  };
-  auto gp = [](const fps &f, int deg) { return f.pre(deg); };
-  auto f = DifferentialEquation<mint>(g, gp, 1, N + 1);
-  rep1(i, N) f[N] *= i;
-  out(f[N] * 2);
+  fps a(N);
+  in(a);
+  out(a.exp());
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

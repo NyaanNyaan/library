@@ -21,31 +21,33 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yuki/yuki-1145.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#ea921838279ab5a0e84be169b8c4269e">verify-yuki</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yuki/yuki-1145.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 00:52:51+09:00
+* category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:57:58+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/no/1145">https://yukicoder.me/problems/no/1145</a>
+* see: <a href="https://judge.yosupo.jp/problem/sqrt_of_formal_power_series">https://judge.yosupo.jp/problem/sqrt_of_formal_power_series</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/utility.hpp.html">fps/utility.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../../../library/fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
+* :question: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -53,28 +55,22 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/no/1145"
+#define PROBLEM "https://judge.yosupo.jp/problem/sqrt_of_formal_power_series"
 
-#include "../competitive-template.hpp"
-#include "../fps/ntt-friendly-fps.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../fps/utility.hpp"
-
-constexpr int MOD9 = 998244353;
-using mint = LazyMontgomeryModInt<MOD9>;
-using fps = FormalPowerSeries<mint>;
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../fps/ntt-friendly-fps.hpp"
+#include "../../fps/fps-sqrt.hpp"
 
 void solve() {
-  ini(N, M);
-  fps a(N);
-  in(a);
-  V<fps> v;
-  each(x, a) v.emplace_back(fps{1, -x});
-  fps q = Pi(v);
-  fps p = q.diff();
-  fps f = -p * q.inv(M + 1);
-  f.resize(M);
-  out(f);
+  using mint = LazyMontgomeryModInt<998244353>;
+  using fps = FormalPowerSeries<mint>;
+  ini(N);
+  fps f(N);
+  in(f);
+  auto g = sqrt(f);
+  if(g.empty()) out(-1);
+  else out(g);
 }
 ```
 {% endraw %}
@@ -82,8 +78,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yuki/yuki-1145.test.cpp"
-#define PROBLEM "https://yukicoder.me/problems/no/1145"
+#line 1 "verify/verify-yosupo-fps/yosupo-sqrt.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/sqrt_of_formal_power_series"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -385,6 +381,100 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
+#line 3 "modint/montgomery-modint.hpp"
+using namespace std;
+
+template <uint32_t mod>
+struct LazyMontgomeryModInt {
+  using mint = LazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
+
+  static constexpr u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
+  }
+
+  static constexpr u32 r = get_r();
+  static constexpr u32 n2 = -u64(mod) % mod;
+  static_assert(r * mod == 1, "invalid, r * mod != 1");
+  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
+  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
+
+  u32 a;
+
+  constexpr LazyMontgomeryModInt() : a(0) {}
+  constexpr LazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static constexpr u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
+  }
+
+  constexpr mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  constexpr mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  constexpr mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
+    return *this;
+  }
+
+  constexpr mint &operator/=(const mint &b) {
+    *this *= b.inverse();
+    return *this;
+  }
+
+  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
+  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
+  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
+  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
+  constexpr bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr mint operator-() const { return mint() - mint(*this); }
+
+  constexpr mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
+    }
+    return ret;
+  }
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
+
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
+  }
+
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = LazyMontgomeryModInt<mod>(t);
+    return (is);
+  }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
+
+  static constexpr u32 get_mod() { return mod; }
+};
 #line 3 "fps/ntt-friendly-fps.hpp"
 using namespace std;
 
@@ -1265,71 +1355,77 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   }
   return ret.pre(deg);
 }
-#line 3 "modint/montgomery-modint.hpp"
+#line 3 "modint/arbitrary-prime-modint.hpp"
 using namespace std;
 
-template <uint32_t mod>
-struct LazyMontgomeryModInt {
-  using mint = LazyMontgomeryModInt;
+struct ArbitraryLazyMontgomeryModInt {
+  using mint = ArbitraryLazyMontgomeryModInt;
   using i32 = int32_t;
   using u32 = uint32_t;
   using u64 = uint64_t;
 
-  static constexpr u32 get_r() {
+  static u32 mod;
+  static u32 r;
+  static u32 n2;
+
+  static u32 get_r() {
     u32 ret = mod;
     for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
     return ret;
   }
 
-  static constexpr u32 r = get_r();
-  static constexpr u32 n2 = -u64(mod) % mod;
-  static_assert(r * mod == 1, "invalid, r * mod != 1");
-  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
-  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
+  static void set_mod(u32 m) {
+    assert(m < (1 << 30));
+    assert((m & 1) == 1);
+    mod = m;
+    n2 = -u64(m) % m;
+    r = get_r();
+    assert(r * mod == 1);
+  }
 
   u32 a;
 
-  constexpr LazyMontgomeryModInt() : a(0) {}
-  constexpr LazyMontgomeryModInt(const int64_t &b)
+  ArbitraryLazyMontgomeryModInt() : a(0) {}
+  ArbitraryLazyMontgomeryModInt(const int64_t &b)
       : a(reduce(u64(b % mod + mod) * n2)){};
 
-  static constexpr u32 reduce(const u64 &b) {
+  static u32 reduce(const u64 &b) {
     return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
   }
 
-  constexpr mint &operator+=(const mint &b) {
+  mint &operator+=(const mint &b) {
     if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
     return *this;
   }
 
-  constexpr mint &operator-=(const mint &b) {
+  mint &operator-=(const mint &b) {
     if (i32(a -= b.a) < 0) a += 2 * mod;
     return *this;
   }
 
-  constexpr mint &operator*=(const mint &b) {
+  mint &operator*=(const mint &b) {
     a = reduce(u64(a) * b.a);
     return *this;
   }
 
-  constexpr mint &operator/=(const mint &b) {
+  mint &operator/=(const mint &b) {
     *this *= b.inverse();
     return *this;
   }
 
-  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
-  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
-  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
-  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
-  constexpr bool operator==(const mint &b) const {
+  mint operator+(const mint &b) const { return mint(*this) += b; }
+  mint operator-(const mint &b) const { return mint(*this) -= b; }
+  mint operator*(const mint &b) const { return mint(*this) *= b; }
+  mint operator/(const mint &b) const { return mint(*this) /= b; }
+  bool operator==(const mint &b) const {
     return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
   }
-  constexpr bool operator!=(const mint &b) const {
+  bool operator!=(const mint &b) const {
     return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
   }
-  constexpr mint operator-() const { return mint() - mint(*this); }
+  mint operator-() const { return mint() - mint(*this); }
 
-  constexpr mint pow(u64 n) const {
+  mint pow(u64 n) const {
     mint ret(1), mul(*this);
     while (n > 0) {
       if (n & 1) ret *= mul;
@@ -1338,8 +1434,6 @@ struct LazyMontgomeryModInt {
     }
     return ret;
   }
-  
-  constexpr mint inverse() const { return pow(mod - 2); }
 
   friend ostream &operator<<(ostream &os, const mint &b) {
     return os << b.get();
@@ -1348,59 +1442,104 @@ struct LazyMontgomeryModInt {
   friend istream &operator>>(istream &is, mint &b) {
     int64_t t;
     is >> t;
-    b = LazyMontgomeryModInt<mod>(t);
+    b = ArbitraryLazyMontgomeryModInt(t);
     return (is);
   }
-  
-  constexpr u32 get() const {
+
+  mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
     u32 ret = reduce(a);
     return ret >= mod ? ret - mod : ret;
   }
 
-  static constexpr u32 get_mod() { return mod; }
+  static u32 get_mod() { return mod; }
 };
-#line 2 "fps/utility.hpp"
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
+#line 2 "modulo/mod-sqrt.hpp"
+
+int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
+  if (a == 0) return 0;
+  if (p == 2) return a;
+  using mint = ArbitraryLazyMontgomeryModInt;
+  mint::set_mod(p);
+  if (mint(a).pow((p - 1) >> 1) != 1) return -1;
+  mint b = 1, one = 1;
+  while (b.pow((p - 1) >> 1) == 1) b += one;
+  int64_t m = p - 1, e = 0;
+  while (m % 2 == 0) m >>= 1, e += 1;
+  mint x = mint(a).pow((m - 1) >> 1);
+  mint y = mint(a) * x * x;
+  x *= a;
+  mint z = mint(b).pow(m);
+  while (y != 1) {
+    int64_t j = 0;
+    mint t = y;
+    while (t != one) {
+      j += 1;
+      t *= t;
+    }
+    z = z.pow(int64_t(1) << (e - j - 1));
+    x *= z;
+    z *= z;
+    y *= z;
+    e = j;
+  }
+  return x.get();
+}
+#line 3 "fps/fps-sqrt.hpp"
 
 template <typename mint>
-FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
-  using fps = FormalPowerSeries<mint>;
-  sort(begin(v), end(v), [](fps &a, fps &b) { return a.size() < b.size(); });
-  vector<fps> w;
-  w.reserve(sz(v) / 2 + 1);
-  while ((int)v.size() > 1) {
-    for (int i = 0; i < (int)v.size(); i += 2) {
-      if (i + 1 == (int)v.size()) {
-        w.emplace_back(v.back());
-      } else {
-        w.emplace_back(v[i] * v[i + 1]);
+FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
+  if (deg == -1) deg = (int)f.size();
+  if ((int)f.size() == 0) return FormalPowerSeries<mint>(deg, 0);
+  if (f[0] == mint(0)) {
+    for (int i = 1; i < (int)f.size(); i++) {
+      if (f[i] != mint(0)) {
+        if (i & 1) return {};
+        if (deg - i / 2 <= 0) break;
+        auto ret = sqrt(f >> i, deg - i / 2);
+        if (ret.empty()) return {};
+        ret = ret << (i / 2);
+        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
+        return ret;
       }
     }
-    swap(v, w);
-    w.clear();
+    return FormalPowerSeries<mint>(deg, 0);
   }
-  return v[0];
-}
-#line 7 "verify-yuki/yuki-1145.test.cpp"
 
-constexpr int MOD9 = 998244353;
-using mint = LazyMontgomeryModInt<MOD9>;
-using fps = FormalPowerSeries<mint>;
+  int64_t sqr = mod_sqrt(f[0].get(), mint::get_mod());
+  if (sqr == -1) return {};
+  assert(sqr * sqr % mint::get_mod() == f[0].get());
+  FormalPowerSeries<mint> ret = {mint(sqr)};
+  mint inv2 = mint(2).inverse();
+  for (int i = 1; i < deg; i <<= 1) {
+    ret = (ret + f.pre(i << 1) * ret.inv(i << 1)) * inv2;
+  }
+  return ret.pre(deg);
+}
+
+/**
+ * @brief 平方根
+ * @docs docs/fps-sqrt.md
+ */
+#line 7 "verify/verify-yosupo-fps/yosupo-sqrt.test.cpp"
 
 void solve() {
-  ini(N, M);
-  fps a(N);
-  in(a);
-  V<fps> v;
-  each(x, a) v.emplace_back(fps{1, -x});
-  fps q = Pi(v);
-  fps p = q.diff();
-  fps f = -p * q.inv(M + 1);
-  f.resize(M);
-  out(f);
+  using mint = LazyMontgomeryModInt<998244353>;
+  using fps = FormalPowerSeries<mint>;
+  ini(N);
+  fps f(N);
+  in(f);
+  auto g = sqrt(f);
+  if(g.empty()) out(-1);
+  else out(g);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

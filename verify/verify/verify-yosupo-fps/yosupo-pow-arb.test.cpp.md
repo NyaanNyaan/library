@@ -21,32 +21,31 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yuki/yuki-0214.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#ea921838279ab5a0e84be169b8c4269e">verify-yuki</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yuki/yuki-0214.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+* category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:57:58+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/no/214">https://yukicoder.me/problems/no/214</a>
+* see: <a href="https://judge.yosupo.jp/problem/pow_of_formal_power_series">https://judge.yosupo.jp/problem/pow_of_formal_power_series</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../../library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -54,68 +53,19 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/no/214"
-#include "../competitive-template.hpp"
-#include "../fps/arbitrary-fps.hpp"
-#include "../fps/kitamasa.hpp"
-#include "../modint/montgomery-modint.hpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
 
-using mint = LazyMontgomeryModInt<1000000007>;
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../fps/arbitrary-fps.hpp"
+using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
-mint dp[310][5050];
-mint ep[310][5050];
-
 void solve() {
-  inl(N, P, C);
-  vl s{2, 3, 5, 7, 11, 13};
-  vl t{4, 6, 8, 9, 10, 12};
-
-  dp[0][0] = 1;
-  each(x, s) {
-    rep(i, P + 1) rep(j, 5010) ep[i][j] = mint();
-    rep(i, P + 1) rep(j, 5050) {
-      if (dp[i][j] == 0) continue;
-      for (int k = i, l = j; k <= P; k++, l += x) {
-        ep[k][l] += dp[i][j];
-      }
-    }
-    swap(dp, ep);
-  }
-  fps f(5010);
-  rep(i, 5000) f[i] = dp[P][i];
-
-  rep(i, C + 1) rep(j, 5010) dp[i][j] = mint();
-  dp[0][0] = 1;
-  each(x, t) {
-    rep(i, C + 1) rep(j, 5010) ep[i][j] = mint();
-    rep(i, C + 1) rep(j, 5050) {
-      if (dp[i][j] == 0) continue;
-      for (int k = i, l = j; k <= C; k++, l += x) {
-        ep[k][l] += dp[i][j];
-      }
-    }
-    swap(dp, ep);
-  }
-  fps g(5010);
-  rep(i, 5000) g[i] = dp[C][i];
-
-  f.shrink();
-  g.shrink();
-  f = f * g;
-  f.shrink();
-  g = f.rev();
-  rep1(i, sz(g) - 1) g[i] += g[i - 1];
-  g = g.rev();
-
-  f[0] = 1;
-  rep1(i, sz(f) - 1) f[i] = -f[i];
-  g[0] = 0;
-  mint ans1 = LinearRecursionFormula(N, f, g);
-  g %= f;
-  mint ans2 = LinearRecursionFormula(N, f, g);
-  assert(ans1 == ans2);
-  out(ans1);
+  inl(N,M);
+  fps a(N);
+  in(a);
+  out(a.pow(M));
 }
 ```
 {% endraw %}
@@ -123,8 +73,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yuki/yuki-0214.test.cpp"
-#define PROBLEM "https://yukicoder.me/problems/no/214"
+#line 1 "verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
+
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
 #define Nyaan_template
@@ -425,12 +376,6 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "fps/arbitrary-fps.hpp"
-using namespace std;
-
-#line 3 "ntt/arbitrary-ntt.hpp"
-using namespace std;
-
 #line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 
@@ -525,6 +470,12 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 get_mod() { return mod; }
 };
+#line 3 "fps/arbitrary-fps.hpp"
+using namespace std;
+
+#line 3 "ntt/arbitrary-ntt.hpp"
+using namespace std;
+
 #line 3 "ntt/ntt-avx2.hpp"
 using namespace std;
 
@@ -1480,173 +1431,19 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   }
   return ret.pre(deg);
 }
-#line 3 "fps/kitamasa.hpp"
-using namespace std;
-
-#line 6 "fps/kitamasa.hpp"
-
-template <typename mint>
-mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
-                            FormalPowerSeries<mint> P) {
-  Q.shrink();
-  mint ret = 0;
-  if (P.size() >= Q.size()) {
-    auto R = P / Q;
-    P -= R * Q;
-    P.shrink();
-    if (k < (int)R.size()) ret += R[k];
-  }
-  if ((int)P.size() == 0) return ret;
-
-  FormalPowerSeries<mint>::set_fft();
-  if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {
-    P.resize((int)Q.size() - 1);
-    while (k) {
-      auto Q2 = Q;
-      for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
-      auto S = P * Q2;
-      auto T = Q * Q2;
-      if (k & 1) {
-        for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-      } else {
-        for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-      }
-      k >>= 1;
-    }
-    return ret + P[0];
-  } else {
-    int N = 1;
-    while (N < (int)Q.size()) N <<= 1;
-
-    P.resize(2 * N);
-    Q.resize(2 * N);
-    P.ntt();
-    Q.ntt();
-    vector<mint> S(2 * N), T(2 * N);
-
-    vector<int> btr(N);
-    for (int i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {
-      btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));
-    }
-    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())
-                  .inverse()
-                  .pow((mint::get_mod() - 1) / (2 * N));
-
-    while (k) {
-      mint inv2 = mint(2).inverse();
-
-      // even degree of Q(x)Q(-x)
-      T.resize(N);
-      for (int i = 0; i < N; i++) T[i] = Q[(i << 1) | 0] * Q[(i << 1) | 1];
-
-      S.resize(N);
-      if (k & 1) {
-        // odd degree of P(x)Q(-x)
-        for (auto &i : btr) {
-          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] -
-                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *
-                 inv2;
-          inv2 *= dw;
-        }
-      } else {
-        // even degree of P(x)Q(-x)
-        for (int i = 0; i < N; i++) {
-          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +
-                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *
-                 inv2;
-        }
-      }
-      swap(P, S);
-      swap(Q, T);
-      k >>= 1;
-      if (k < N) break;
-      P.ntt_doubling();
-      Q.ntt_doubling();
-    }
-    P.intt();
-    Q.intt();
-    return ret + (P * (Q.inv()))[k];
-  }
-}
-
-template <typename mint>
-mint kitamasa(long long N, FormalPowerSeries<mint> Q,
-              FormalPowerSeries<mint> a) {
-  int k = Q.size() - 1;
-  assert((int)a.size() == k);
-  auto P = a * Q;
-  P.resize(Q.size() - 1);
-  return LinearRecursionFormula<mint>(N, Q, P);
-}
-
-/**
- * @brief 線形漸化式の高速計算
- * @docs docs/linear-recursive.md
- */
-#line 6 "verify-yuki/yuki-0214.test.cpp"
-
-using mint = LazyMontgomeryModInt<1000000007>;
+#line 6 "verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp"
+using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
-mint dp[310][5050];
-mint ep[310][5050];
-
 void solve() {
-  inl(N, P, C);
-  vl s{2, 3, 5, 7, 11, 13};
-  vl t{4, 6, 8, 9, 10, 12};
-
-  dp[0][0] = 1;
-  each(x, s) {
-    rep(i, P + 1) rep(j, 5010) ep[i][j] = mint();
-    rep(i, P + 1) rep(j, 5050) {
-      if (dp[i][j] == 0) continue;
-      for (int k = i, l = j; k <= P; k++, l += x) {
-        ep[k][l] += dp[i][j];
-      }
-    }
-    swap(dp, ep);
-  }
-  fps f(5010);
-  rep(i, 5000) f[i] = dp[P][i];
-
-  rep(i, C + 1) rep(j, 5010) dp[i][j] = mint();
-  dp[0][0] = 1;
-  each(x, t) {
-    rep(i, C + 1) rep(j, 5010) ep[i][j] = mint();
-    rep(i, C + 1) rep(j, 5050) {
-      if (dp[i][j] == 0) continue;
-      for (int k = i, l = j; k <= C; k++, l += x) {
-        ep[k][l] += dp[i][j];
-      }
-    }
-    swap(dp, ep);
-  }
-  fps g(5010);
-  rep(i, 5000) g[i] = dp[C][i];
-
-  f.shrink();
-  g.shrink();
-  f = f * g;
-  f.shrink();
-  g = f.rev();
-  rep1(i, sz(g) - 1) g[i] += g[i - 1];
-  g = g.rev();
-
-  f[0] = 1;
-  rep1(i, sz(f) - 1) f[i] = -f[i];
-  g[0] = 0;
-  mint ans1 = LinearRecursionFormula(N, f, g);
-  g %= f;
-  mint ans2 = LinearRecursionFormula(N, f, g);
-  assert(ans1 == ans2);
-  out(ans1);
+  inl(N,M);
+  fps a(N);
+  in(a);
+  out(a.pow(M));
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

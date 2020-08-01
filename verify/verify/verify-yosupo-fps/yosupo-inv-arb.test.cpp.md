@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-fps/yosupo-inv.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#a29759ffc363d806c691dcb19e6bc303">verify-yosupo-fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-fps/yosupo-inv.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+* category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:57:58+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/inv_of_formal_power_series">https://judge.yosupo.jp/problem/inv_of_formal_power_series</a>
@@ -39,12 +39,13 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../../library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -54,9 +55,9 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../fps/ntt-friendly-fps.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../fps/arbitrary-fps.hpp"
 using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
@@ -72,7 +73,7 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-fps/yosupo-inv.test.cpp"
+#line 1 "verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
 
 #line 1 "competitive-template.hpp"
@@ -469,7 +470,10 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 get_mod() { return mod; }
 };
-#line 3 "fps/ntt-friendly-fps.hpp"
+#line 3 "fps/arbitrary-fps.hpp"
+using namespace std;
+
+#line 3 "ntt/arbitrary-ntt.hpp"
 using namespace std;
 
 #line 3 "ntt/ntt-avx2.hpp"
@@ -1114,6 +1118,102 @@ struct NTT {
     for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;
   }
 };
+#line 7 "ntt/arbitrary-ntt.hpp"
+
+namespace ArbitraryNTT {
+constexpr int32_t m0 = 167772161;
+constexpr int32_t m1 = 469762049;
+constexpr int32_t m2 = 754974721;
+using mint0 = LazyMontgomeryModInt<m0>;
+using mint1 = LazyMontgomeryModInt<m1>;
+using mint2 = LazyMontgomeryModInt<m2>;
+
+template <int mod>
+vector<LazyMontgomeryModInt<mod>> mul(const vector<int> &a,
+                                      const vector<int> &b) {
+  using submint = LazyMontgomeryModInt<mod>;
+  NTT<submint> ntt;
+  vector<submint> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
+  return ntt.multiply(s, t);
+}
+
+vector<int> multiply(const vector<int> &s, const vector<int> &t, int mod) {
+  auto d0 = mul<m0>(s, t);
+  auto d1 = mul<m1>(s, t);
+  auto d2 = mul<m2>(s, t);
+  int n = d0.size();
+  vector<int> ret(n);
+  using i64 = int64_t;
+  static const int r01 = mint1(m0).inverse().get();
+  static const int r02 = mint2(m0).inverse().get();
+  static const int r12 = mint2(m1).inverse().get();
+  static const int r02r12 = i64(r02) * r12 % m2;
+  static const int w1 = m0 % mod;
+  static const int w2 = i64(w1) * m1 % mod;
+  for (int i = 0; i < n; i++) {
+    i64 n1 = d1[i].get(), n2 = d2[i].get();
+    i64 a = d0[i].get();
+    i64 b = (n1 + m1 - a) * r01 % m1;
+    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    ret[i] = (a + b * w1 + c * w2) % mod;
+  }
+  return ret;
+}
+
+template <typename mint>
+vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply(s, t, mint::get_mod());
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);
+  return ret;
+}
+
+/*
+template <int mod>
+vector<int> multiply(const vector<int> &s, const vector<int> &t) {
+  auto d0 = mul<m0>(s, t);
+  auto d1 = mul<m1>(s, t);
+  auto d2 = mul<m2>(s, t);
+  int n = d0.size();
+  vector<int> res(n);
+  using i64 = int64_t;
+  static const int r01 = mint1(m0).inverse().get();
+  static const int r02 = mint2(m0).inverse().get();
+  static const int r12 = mint2(m1).inverse().get();
+  static const int r02r12 = i64(r02) * r12 % m2;
+  static const int w1 = m0 % mod;
+  static const int w2 = i64(w1) * m1 % mod;
+  for (int i = 0; i < n; i++) {
+    i64 n1 = d1[i].get(), n2 = d2[i].get();
+    i64 a = d0[i].get();
+    i64 b = (n1 + m1 - a) * r01 % m1;
+    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    res[i] = (a + b * w1 + c * w2) % mod;
+  }
+  return std::move(res);
+}
+
+template <int mod>
+vector<LazyMontgomeryModInt<mod>> multiply(
+    const vector<LazyMontgomeryModInt<mod>> &a,
+    const vector<LazyMontgomeryModInt<mod>> &b) {
+  using mint = LazyMontgomeryModInt<mod>;
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply<mod>(s, t);
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i)
+    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
+  return std::move(ret);
+}
+*/
+}  // namespace ArbitraryNTT
 #line 3 "fps/formal-power-series.hpp"
 using namespace std;
 
@@ -1273,11 +1373,31 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 7 "fps/ntt-friendly-fps.hpp"
+#line 7 "fps/arbitrary-fps.hpp"
 
 template <typename mint>
 void FormalPowerSeries<mint>::set_fft() {
-  if (!ntt_ptr) ntt_ptr = new NTT<mint>;
+  ntt_ptr = nullptr;
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt() {
+  exit(1);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::intt() {
+  exit(1);
+}
+
+template <typename mint>
+void FormalPowerSeries<mint>::ntt_doubling() {
+  exit(1);
+}
+
+template <typename mint>
+int FormalPowerSeries<mint>::ntt_pr() {
+  exit(1);
 }
 
 template <typename mint>
@@ -1287,56 +1407,18 @@ FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
     this->clear();
     return *this;
   }
-  set_fft();
-  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this, r);
+  auto ret = ArbitraryNTT::multiply(*this, r);
   return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt() {
-  set_fft();
-  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::intt() {
-  set_fft();
-  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt_doubling() {
-  set_fft();
-  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);
-}
-
-template <typename mint>
-int FormalPowerSeries<mint>::ntt_pr() {
-  set_fft();
-  return static_cast<NTT<mint>*>(ntt_ptr)->pr;
 }
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
   assert((*this)[0] != mint(0));
-  if (deg == -1) deg = (int)this->size();
-  FormalPowerSeries<mint> res(deg);
-  res[0] = {mint(1) / (*this)[0]};
-  for (int d = 1; d < deg; d <<= 1) {
-    FormalPowerSeries<mint> f(2 * d), g(2 * d);
-    for (int j = 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];
-    for (int j = 0; j < d; j++) g[j] = res[j];
-    f.ntt();
-    g.ntt();
-    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
-    f.intt();
-    for (int j = 0; j < d; j++) f[j] = 0;
-    f.ntt();
-    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
-    f.intt();
-    for (int j = d; j < min(2 * d, deg); j++) res[j] = -f[j];
-  }
-  return res.pre(deg);
+  if (deg == -1) deg = (*this).size();
+  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
+  for (int i = 1; i < deg; i <<= 1)
+    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
+  return ret.pre(deg);
 }
 
 template <typename mint>
@@ -1349,7 +1431,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   }
   return ret.pre(deg);
 }
-#line 6 "verify-yosupo-fps/yosupo-inv.test.cpp"
+#line 6 "verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp"
 using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
@@ -1363,5 +1445,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

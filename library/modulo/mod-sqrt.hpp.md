@@ -43,12 +43,12 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="../fps/sqrt.hpp.html">平方根 <small>(fps/sqrt.hpp)</small></a>
+* :heavy_check_mark: <a href="../fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
 
 

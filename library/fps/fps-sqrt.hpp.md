@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 平方根 <small>(fps/sqrt.hpp)</small>
+# :heavy_check_mark: 平方根 <small>(fps/fps-sqrt.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/fps/sqrt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 21:16:58+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/fps/fps-sqrt.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:57:58+09:00
 
 
 
@@ -48,21 +48,21 @@ $$\leftrightarrow g \equiv \frac{1}{2}\left(\hat{g}+\frac{f}{\hat{g}}\right) \mo
 
 を得てダブリングで求まる。計算量は$\mathrm{O}(N \log N)$。
 
-#### 実装
+#### 使い方
 
 - `sqrt(f, deg)`: FPSである$f$について$\sqrt f$を求める。
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 
 
 ## Code
@@ -408,7 +408,7 @@ int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   }
   return x.get();
 }
-#line 3 "fps/sqrt.hpp"
+#line 3 "fps/fps-sqrt.hpp"
 
 template <typename mint>
 FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {

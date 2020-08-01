@@ -25,19 +25,18 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 三角関数 <small>(fps/circular.hpp)</small>
+# :x: 三角関数 <small>(fps/fps-circular.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/fps/circular.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 21:16:58+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/fps/fps-circular.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:57:58+09:00
 
 
 
 
 ## fps-三角関数
-
 
 $g \equiv \cos f, h \equiv \sin f \mod x^n$を求めたい。
 
@@ -45,21 +44,21 @@ $g \equiv \cos f, h \equiv \sin f \mod x^n$を求めたい。
 
 なお、計算は実部と虚部に分けて行う必要がある。例えば掛け算の時は4回乗算して適切に足し合わせる。
 
-#### 実装
+#### 使い方
 
 - `circular(fre, fim, deg)` : $Re[f]=fre,Im[f]=fim$であるFPS $f$について$\cos f,\sin f$を求める。
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify-yuki/yuki-1080.test.cpp.html">verify-yuki/yuki-1080.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
 
 
 ## Code
@@ -166,7 +165,7 @@ pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "fps/circular.hpp"
+#line 1 "fps/fps-circular.hpp"
 
 #line 2 "fps/formal-power-series.hpp"
 #include <bits/stdc++.h>
@@ -422,7 +421,7 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 get_mod() { return mod; }
 };
-#line 4 "fps/circular.hpp"
+#line 4 "fps/fps-circular.hpp"
 
 template <typename mint>
 pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(

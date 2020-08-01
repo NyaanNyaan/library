@@ -21,30 +21,30 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-fps/yosupo-pow.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-fps/yosupo-log.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#a29759ffc363d806c691dcb19e6bc303">verify-yosupo-fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-fps/yosupo-pow.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+* category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-log.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-01 13:57:58+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/pow_of_formal_power_series">https://judge.yosupo.jp/problem/pow_of_formal_power_series</a>
+* see: <a href="https://judge.yosupo.jp/problem/log_of_formal_power_series">https://judge.yosupo.jp/problem/log_of_formal_power_series</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -52,19 +52,19 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
+#define PROBLEM "https://judge.yosupo.jp/problem/log_of_formal_power_series"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../fps/ntt-friendly-fps.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../fps/ntt-friendly-fps.hpp"
 using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
 void solve() {
-  inl(N,M);
+  ini(N);
   fps a(N);
   in(a);
-  out(a.pow(M));
+  out(a.log());
 }
 ```
 {% endraw %}
@@ -72,8 +72,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-fps/yosupo-pow.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/pow_of_formal_power_series"
+#line 1 "verify/verify-yosupo-fps/yosupo-log.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/log_of_formal_power_series"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -1349,19 +1349,19 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   }
   return ret.pre(deg);
 }
-#line 6 "verify-yosupo-fps/yosupo-pow.test.cpp"
+#line 6 "verify/verify-yosupo-fps/yosupo-log.test.cpp"
 using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
 void solve() {
-  inl(N,M);
+  ini(N);
   fps a(N);
   in(a);
-  out(a.pow(M));
+  out(a.log());
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
