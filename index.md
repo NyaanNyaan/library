@@ -158,7 +158,7 @@ layout: default
 * :warning: <a href="library/segment-tree/dynamic-segment-tree.hpp.html">segment-tree/dynamic-segment-tree.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/lazy-segment-tree.hpp.html">segment-tree/lazy-segment-tree.hpp</a>
 * :warning: <a href="library/segment-tree/li-chao-tree.hpp.html">segment-tree/li-chao-tree.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
+* :heavy_check_mark: <a href="library/segment-tree/persistent-segment-tree.hpp.html">永続セグメント木 <small>(segment-tree/persistent-segment-tree.hpp)</small></a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-max-lazyseg.hpp.html">segment-tree/range-add-range-max-lazyseg.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-min-lazyseg.hpp.html">segment-tree/range-add-range-min-lazyseg.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/range-add-range-sum-lazyseg.hpp.html">segment-tree/range-add-range-sum-lazyseg.hpp</a>

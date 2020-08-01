@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 15:08:31+09:00
+    - Last commit date: 2020-08-01 16:01:37+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/rectangle_sum">https://judge.yosupo.jp/problem/rectangle_sum</a>
@@ -41,7 +41,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
-* :heavy_check_mark: <a href="../../../library/segment-tree/persistent-segment-tree.hpp.html">segment-tree/persistent-segment-tree.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/persistent-segment-tree.hpp.html">永続セグメント木 <small>(segment-tree/persistent-segment-tree.hpp)</small></a>
 
 
 ## Code
@@ -500,6 +500,11 @@ struct PersistentSegmentTree {
 
   Node *new_tree() { return nil; }
 };
+
+/**
+ * @brief 永続セグメント木
+ * @docs docs/persistent-segtree.md
+ */
 #line 6 "data-structure/rectangle-sum.hpp"
 
 template <typename T, typename U, typename F>

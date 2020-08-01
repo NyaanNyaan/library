@@ -25,16 +25,30 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: segment-tree/persistent-segment-tree.hpp
+# :heavy_check_mark: 永続セグメント木 <small>(segment-tree/persistent-segment-tree.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segment-tree/persistent-segment-tree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-08-01 16:01:37+09:00
 
 
 
+
+# 永続セグメント木
+
+永続セグメント木とはセグメント木を完全永続化したデータ構造である。完全永続化とは、更新をする時に更新前のデータを残したり、最新でないデータを元として更新したりできるようにすることである。
+
+複雑な割にほとんど使わないので忘れないうちに使い方を簡単にメモ。
+
+#### 使い方
+- `PersistentSegmentTree(v, f, ID)`:= 要素を$v$、マージ関数を$f$とする木を作成する。(fはモノイドである必要がある。)
+- `update,add,query`は通常のセグ木と同様だが、使用方法に応じてそれぞれ3種類の関数が存在する。
+  - `update(Node *n, k, x)` := nを根とする木を更新元とする。
+  - `update(int t, k, x)`:= t回目の更新の後の木を更新元とする。
+  - `update(k, x)` := 最新の木を更新元とする。
+- `new_tree()` := 空の木を返す
 
 ## Required by
 
@@ -175,6 +189,12 @@ struct PersistentSegmentTree {
 
   Node *new_tree() { return nil; }
 };
+
+/**
+ * @brief 永続セグメント木
+ * @docs docs/persistent-segtree.md
+ */
+
 ```
 {% endraw %}
 
@@ -305,6 +325,11 @@ struct PersistentSegmentTree {
 
   Node *new_tree() { return nil; }
 };
+
+/**
+ * @brief 永続セグメント木
+ * @docs docs/persistent-segtree.md
+ */
 
 ```
 {% endraw %}
