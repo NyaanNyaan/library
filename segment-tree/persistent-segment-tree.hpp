@@ -122,3 +122,8 @@ struct PersistentSegmentTree {
 
   Node *new_tree() { return nil; }
 };
+
+/**
+ * @brief 永続セグメント木
+ * @docs docs/persistent-segtree.md
+ */
