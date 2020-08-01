@@ -1,8 +1,8 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A"
 
-#include "../competitive-template.hpp"
-#include "../graph/kruskal.hpp"
+#include "../../competitive-template.hpp"
+#include "../../graph/kruskal.hpp"
 
 void solve() {
   ini(N, E);
