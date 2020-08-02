@@ -59,6 +59,7 @@
 "verify/verify-yosupo-fps/yosupo-sqrt.test.cpp": "2020-08-01 13:57:58 +0900",
 "verify/verify-yosupo-graph/yosupo-cartesian.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-graph/yosupo-diameter.test.cpp": "2020-08-01 15:16:50 +0900",
+"verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp": "2020-08-02 18:11:02 +0900",
 "verify/verify-yosupo-math/yosupo-determinant.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-math/yosupo-linear-equation.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp": "2020-08-01 15:16:50 +0900",
