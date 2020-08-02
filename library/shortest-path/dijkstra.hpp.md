@@ -44,6 +44,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify/verify-aoj-grl/aoj-grl-1-a.test.cpp.html">verify/verify-aoj-grl/aoj-grl-1-a.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 
 
 ## Code

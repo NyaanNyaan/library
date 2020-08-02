@@ -47,6 +47,7 @@ layout: default
 * :warning: <a href="../math/grundy-number.hpp.html">math/grundy-number.hpp</a>
 * :heavy_check_mark: <a href="../shortest-path/bellman-ford.hpp.html">shortest-path/bellman-ford.hpp</a>
 * :heavy_check_mark: <a href="../shortest-path/dijkstra.hpp.html">shortest-path/dijkstra.hpp</a>
+* :heavy_check_mark: <a href="../shortest-path/restore-shortest-path.hpp.html">shortest-path/restore-shortest-path.hpp</a>
 * :heavy_check_mark: <a href="../shortest-path/warshall-floyd.hpp.html">shortest-path/warshall-floyd.hpp</a>
 * :heavy_check_mark: <a href="../tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
 * :warning: <a href="../tree/dsu-on-tree.hpp.html">tree/dsu-on-tree.hpp</a>
@@ -77,6 +78,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 
 
 ## Code

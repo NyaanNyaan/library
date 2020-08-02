@@ -176,6 +176,7 @@ layout: default
 
 * :heavy_check_mark: <a href="library/shortest-path/bellman-ford.hpp.html">shortest-path/bellman-ford.hpp</a>
 * :heavy_check_mark: <a href="library/shortest-path/dijkstra.hpp.html">shortest-path/dijkstra.hpp</a>
+* :heavy_check_mark: <a href="library/shortest-path/restore-shortest-path.hpp.html">shortest-path/restore-shortest-path.hpp</a>
 * :heavy_check_mark: <a href="library/shortest-path/warshall-floyd.hpp.html">shortest-path/warshall-floyd.hpp</a>
 
 
@@ -262,6 +263,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify/verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>

@@ -25,31 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/graph-utility.hpp
+# :heavy_check_mark: shortest-path/restore-shortest-path.hpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/graph-utility.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../index.html#d53d0f39583bbf03056486512d3e44bc">shortest-path</a>
+* <a href="{{ site.github.repository_url }}/blob/master/shortest-path/restore-shortest-path.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-02 18:11:02+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
-
-
-## Required by
-
-* :heavy_check_mark: <a href="../shortest-path/restore-shortest-path.hpp.html">shortest-path/restore-shortest-path.hpp</a>
+* :heavy_check_mark: <a href="../graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-grl/aoj-grl-5-a.test.cpp.html">verify/verify-aoj-grl/aoj-grl-5-a.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 
 
@@ -62,80 +56,32 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "./graph-template.hpp"
+#include "../graph/graph-utility.hpp"
 
-// Depth of Rooted Tree
-// unvisited nodes : d = -1
-vector<int> Depth(const UnweightedGraph &g, int start = 0) {
-  vector<int> d(g.size(), -1);
-  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
-    d[cur] = par == -1 ? 0 : d[par] + 1;
-    for (auto &dst : g[cur]) {
-      if (dst == par) continue;
-      rec(rec, dst, cur);
-    }
-  };
-  dfs(dfs, start);
-  return d;
-}
-
-// Depth of Rooted Weighted Tree
-// unvisited nodes : d = -1
+// restore shortest path from S to G
 template <typename T>
-vector<T> Depth(const WeightedGraph<T> &g, int start = 0) {
-  vector<T> d(g.size(), -1);
-  auto dfs = [&](auto rec, int cur, T val, int par = -1) -> void {
-    d[cur] = val;
-    for (auto &dst : g[cur]) {
-      if (dst == par) continue;
-      rec(rec, dst, val + dst.cost, cur);
+vector<int> restore_shortest_path(WeightedGraph<T> &g, vector<T> &d, int S,
+                                  int G) {
+  int N = g.size();
+  WeightedGraph<T> rev(g.size());
+  for (int i = 0; i < N; i++)
+    for (auto &e : g[i]) rev[e.to].emplace_back(e.to, i, e.cost);
+  vector<int> ret;
+  ret.push_back(G);
+  int p = G;
+  T dist = d[G];
+  vector<int> vis(N, 0);
+  vis[G] = 1;
+  do {
+    int nxt = -1;
+    T nval = numeric_limits<T>::max() / 2;
+    for (auto &e : rev[p]) {
+      if (vis[e.to] || d[e.to] + e.cost != dist) continue;
+      if (d[e.to] < nval) nval = d[e.to], nxt = e.to;
     }
-  };
-  dfs(dfs, start, 0);
-  return d;
-}
-
-// Diameter of Tree
-// return value : { {u, v}, length }
-pair<pair<int, int>, int> Diameter(const UnweightedGraph &g) {
-  auto d = Depth(g, 0);
-  int u = max_element(begin(d), end(d)) - begin(d);
-  d = Depth(g, u);
-  int v = max_element(begin(d), end(d)) - begin(d);
-  return make_pair(make_pair(u, v), d[v]);
-}
-
-// Diameter of Weighted Tree
-// return value : { {u, v}, length }
-template <typename T>
-pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {
-  auto d = Depth(g, 0);
-  int u = max_element(begin(d), end(d)) - begin(d);
-  d = Depth(g, u);
-  int v = max_element(begin(d), end(d)) - begin(d);
-  return make_pair(make_pair(u, v), d[v]);
-}
-
-// nodes on the path u-v ( O(N) )
-template <typename G>
-vector<int> Path(G &g, int u, int v) {
-  vi ret;
-  int end = 0;
-  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
-    ret.push_back(cur);
-    if (cur == v) {
-      end = 1;
-      return;
-    }
-    for (int dst : g[cur]) {
-      if (dst == par) continue;
-      rec(rec, dst, cur);
-      if (end) return;
-    }
-    if (end) return;
-    ret.pop_back();
-  };
-  dfs(dfs, u);
+    ret.push_back((vis[nxt] = 1, dist = nval, p = nxt));
+  } while (p != S);
+  reverse(begin(ret), end(ret));
   return ret;
 }
 ```
@@ -144,8 +90,11 @@ vector<int> Path(G &g, int u, int v) {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "graph/graph-utility.hpp"
+#line 2 "shortest-path/restore-shortest-path.hpp"
 #include <bits/stdc++.h>
+using namespace std;
+
+#line 3 "graph/graph-utility.hpp"
 using namespace std;
 
 #line 3 "graph/graph-template.hpp"
@@ -316,6 +265,34 @@ vector<int> Path(G &g, int u, int v) {
     ret.pop_back();
   };
   dfs(dfs, u);
+  return ret;
+}
+#line 6 "shortest-path/restore-shortest-path.hpp"
+
+// restore shortest path from S to G
+template <typename T>
+vector<int> restore_shortest_path(WeightedGraph<T> &g, vector<T> &d, int S,
+                                  int G) {
+  int N = g.size();
+  WeightedGraph<T> rev(g.size());
+  for (int i = 0; i < N; i++)
+    for (auto &e : g[i]) rev[e.to].emplace_back(e.to, i, e.cost);
+  vector<int> ret;
+  ret.push_back(G);
+  int p = G;
+  T dist = d[G];
+  vector<int> vis(N, 0);
+  vis[G] = 1;
+  do {
+    int nxt = -1;
+    T nval = numeric_limits<T>::max() / 2;
+    for (auto &e : rev[p]) {
+      if (vis[e.to] || d[e.to] + e.cost != dist) continue;
+      if (d[e.to] < nval) nval = d[e.to], nxt = e.to;
+    }
+    ret.push_back((vis[nxt] = 1, dist = nval, p = nxt));
+  } while (p != S);
+  reverse(begin(ret), end(ret));
   return ret;
 }
 
