@@ -71,7 +71,7 @@ struct LiChaoTree {
   void update(T a, T b) { inner_update(a, b, 0, _size, 1); }
 
   // 閉区間x in [left , right]に線分y = ax + bを追加するクエリ
-  void update_line_segment(T a, T b, T low, T high) {
+  void update_segment(T a, T b, T low, T high) {
     int left = get_more_idx(low) + _size;
     int right = get_less_idx(high) + _size + 1;
     for (; left < right; left >>= 1, right >>= 1) {

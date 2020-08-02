@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
-#include "../competitive-template.hpp"
-#include "../modint/arbitrary-modint.hpp"
-#include "../ntt/arbitrary-ntt.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/arbitrary-modint.hpp"
+#include "../../ntt/arbitrary-ntt.hpp"
 
 int MOD = 1000000007;
 using mint = ArbitraryModInt;
