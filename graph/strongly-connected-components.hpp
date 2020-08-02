@@ -7,7 +7,7 @@ using namespace std;
 // Strongly Connected Components
 // DAG of SC graph   ... scc.dag (including multiedges)
 // new node of k     ... scc[k]
-// inv of scc[k] = i ... scc.blng(i)
+// inv of scc[k] = i ... scc.belong(i)
 template <typename G>
 struct StronglyConnectedComponents {
  private:
