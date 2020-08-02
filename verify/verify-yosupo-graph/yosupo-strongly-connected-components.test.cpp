@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 
-#include "../competitive-template.hpp"
-#include "../graph/graph-utility.hpp"
-#include "../graph/strongly-connected-components.hpp"
+#include "../../competitive-template.hpp"
+#include "../../graph/graph-utility.hpp"
+#include "../../graph/strongly-connected-components.hpp"
 
 void solve() {
   ini(N, M);
