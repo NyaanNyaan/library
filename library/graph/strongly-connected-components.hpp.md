@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/strongly-connected-components.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-08-02 19:22:09+09:00
 
 
 
@@ -60,7 +60,7 @@ using namespace std;
 // Strongly Connected Components
 // DAG of SC graph   ... scc.dag (including multiedges)
 // new node of k     ... scc[k]
-// inv of scc[k] = i ... scc.blng(i)
+// inv of scc[k] = i ... scc.belong(i)
 template <typename G>
 struct StronglyConnectedComponents {
  private:
@@ -236,7 +236,7 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
 // Strongly Connected Components
 // DAG of SC graph   ... scc.dag (including multiedges)
 // new node of k     ... scc[k]
-// inv of scc[k] = i ... scc.blng(i)
+// inv of scc[k] = i ... scc.belong(i)
 template <typename G>
 struct StronglyConnectedComponents {
  private:

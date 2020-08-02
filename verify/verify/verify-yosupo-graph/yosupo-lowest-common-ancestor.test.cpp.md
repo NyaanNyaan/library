@@ -25,23 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-3-c.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-02 19:22:09+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C</a>
+* see: <a href="https://judge.yosupo.jp/problem/lca">https://judge.yosupo.jp/problem/lca</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/graph/strongly-connected-components.hpp.html">graph/strongly-connected-components.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
+* :heavy_check_mark: <a href="../../../library/tree/heavy-light-decomposition.hpp.html">tree/heavy-light-decomposition.hpp</a>
 
 
 ## Code
@@ -49,20 +50,23 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C"
+#define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
 #include "../../competitive-template.hpp"
-#include "../../graph/strongly-connected-components.hpp"
+#include "../../graph/graph-utility.hpp"
+#include "../../tree/heavy-light-decomposition.hpp"
 
-void solve() {
-  ini(N, M);
-  auto g = graph(N, M, true, false);
-  StronglyConnectedComponents<vvi> scc(g);
-  ini(Q);
-  rep(_, Q) {
-    ini(u, v);
-    out(scc[u] == scc[v]);
+void solve(){
+  ini(N,Q);
+  vvi g(N);
+  rep1(i,N-1){
+    ini(j);
+    g[j].pb(i);
+  }
+  HeavyLightDecomposition<vvi> hld(g);
+  rep(_,Q){
+    ini(u,v);
+    out(hld.lca(u,v));
   }
 }
 ```
@@ -71,9 +75,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-aoj-grl/aoj-grl-3-c.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C"
+#line 1 "verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -375,7 +378,7 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "graph/strongly-connected-components.hpp"
+#line 3 "graph/graph-utility.hpp"
 using namespace std;
 
 #line 3 "graph/graph-template.hpp"
@@ -472,87 +475,198 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
-#line 6 "graph/strongly-connected-components.hpp"
+#line 6 "graph/graph-utility.hpp"
 
-// Strongly Connected Components
-// DAG of SC graph   ... scc.dag (including multiedges)
-// new node of k     ... scc[k]
-// inv of scc[k] = i ... scc.belong(i)
+// Depth of Rooted Tree
+// unvisited nodes : d = -1
+vector<int> Depth(const UnweightedGraph &g, int start = 0) {
+  vector<int> d(g.size(), -1);
+  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
+    d[cur] = par == -1 ? 0 : d[par] + 1;
+    for (auto &dst : g[cur]) {
+      if (dst == par) continue;
+      rec(rec, dst, cur);
+    }
+  };
+  dfs(dfs, start);
+  return d;
+}
+
+// Depth of Rooted Weighted Tree
+// unvisited nodes : d = -1
+template <typename T>
+vector<T> Depth(const WeightedGraph<T> &g, int start = 0) {
+  vector<T> d(g.size(), -1);
+  auto dfs = [&](auto rec, int cur, T val, int par = -1) -> void {
+    d[cur] = val;
+    for (auto &dst : g[cur]) {
+      if (dst == par) continue;
+      rec(rec, dst, val + dst.cost, cur);
+    }
+  };
+  dfs(dfs, start, 0);
+  return d;
+}
+
+// Diameter of Tree
+// return value : { {u, v}, length }
+pair<pair<int, int>, int> Diameter(const UnweightedGraph &g) {
+  auto d = Depth(g, 0);
+  int u = max_element(begin(d), end(d)) - begin(d);
+  d = Depth(g, u);
+  int v = max_element(begin(d), end(d)) - begin(d);
+  return make_pair(make_pair(u, v), d[v]);
+}
+
+// Diameter of Weighted Tree
+// return value : { {u, v}, length }
+template <typename T>
+pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {
+  auto d = Depth(g, 0);
+  int u = max_element(begin(d), end(d)) - begin(d);
+  d = Depth(g, u);
+  int v = max_element(begin(d), end(d)) - begin(d);
+  return make_pair(make_pair(u, v), d[v]);
+}
+
+// nodes on the path u-v ( O(N) )
 template <typename G>
-struct StronglyConnectedComponents {
- private:
-  const G &g;
-  vector<vector<int>> rg;
-  vector<int> comp, order;
-  vector<char> used;
-  vector<vector<int>> blng;
+vector<int> Path(G &g, int u, int v) {
+  vi ret;
+  int end = 0;
+  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
+    ret.push_back(cur);
+    if (cur == v) {
+      end = 1;
+      return;
+    }
+    for (int dst : g[cur]) {
+      if (dst == par) continue;
+      rec(rec, dst, cur);
+      if (end) return;
+    }
+    if (end) return;
+    ret.pop_back();
+  };
+  dfs(dfs, u);
+  return ret;
+}
+#line 3 "tree/heavy-light-decomposition.hpp"
+using namespace std;
 
- public:
-  vector<vector<int>> dag;
-  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }
+#line 6 "tree/heavy-light-decomposition.hpp"
 
-  int operator[](int k) { return comp[k]; }
-
-  vector<int> &belong(int i) { return blng[i]; }
-
- private:
-  void dfs(int idx) {
-    if (used[idx]) return;
-    used[idx] = true;
-    for (auto to : g[idx]) dfs(int(to));
-    order.push_back(idx);
+template <typename G>
+struct HeavyLightDecomposition {
+  G& g;
+  int idx;
+  vector<int> size, depth, in, out, nxt, par;
+  HeavyLightDecomposition(G& g, int root = 0)
+      : g(g),
+        idx(0),
+        size(g.size(), 0),
+        depth(g.size(), 0),
+        in(g.size(), -1),
+        out(g.size(), -1),
+        nxt(g.size(), root),
+        par(g.size(), root) {
+    dfs_sz(root);
+    dfs_hld(root);
   }
 
-  void rdfs(int idx, int cnt) {
-    if (comp[idx] != -1) return;
-    comp[idx] = cnt;
-    for (int to : rg[idx]) rdfs(to, cnt);
+  void build(int root) {
+    dfs_sz(root);
+    dfs_hld(root);
   }
 
-  void build() {
-    for (int i = 0; i < (int)g.size(); i++) dfs(i);
-    reverse(begin(order), end(order));
-    used.clear();
-    used.shrink_to_fit();
-
-    comp.resize(g.size(), -1);
-
-    rg.resize(g.size());
-    for (int i = 0; i < (int)g.size(); i++) {
-      for (auto e : g[i]) {
-        rg[(int)e].emplace_back(i);
+  void dfs_sz(int cur) {
+    size[cur] = 1;
+    for (auto& dst : g[cur]) {
+      if (dst == par[cur]) {
+        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))
+          swap(g[cur][0], g[cur][1]);
+        else
+          continue;
+      }
+      depth[dst] = depth[cur] + 1;
+      par[dst] = cur;
+      dfs_sz(dst);
+      size[cur] += size[dst];
+      if (size[dst] > size[g[cur][0]]) {
+        swap(dst, g[cur][0]);
       }
     }
-    int ptr = 0;
-    for (int i : order)
-      if (comp[i] == -1) rdfs(i, ptr), ptr++;
-    rg.clear();
-    rg.shrink_to_fit();
-    order.clear();
-    order.shrink_to_fit();
+  }
 
-    dag.resize(ptr);
-    blng.resize(ptr);
-    for (int i = 0; i < (int)g.size(); i++) {
-      blng[comp[i]].push_back(i);
-      for (auto &to : g[i]) {
-        int x = comp[i], y = comp[to];
-        if (x == y) continue;
-        dag[x].push_back(y);
+  void dfs_hld(int cur) {
+    in[cur] = idx++;
+    for (auto dst : g[cur]) {
+      if (dst == par[cur]) continue;
+      nxt[dst] = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));
+      dfs_hld(dst);
+    }
+    out[cur] = idx;
+  }
+
+  template <typename F>
+  void edge_query(int u, int v, const F& f) {
+    while (1) {
+      if (in[u] > in[v]) swap(u, v);
+      if (nxt[u] != nxt[v]) {
+        f(in[nxt[v]], in[v] + 1);
+        v = par[nxt[v]];
+      } else {
+        if (u != v) f(in[u] + 1, in[v] + 1);
+        break;
       }
     }
+  }
+
+  template <typename F>
+  void node_query(int u, int v, const F& f) {
+    while (1) {
+      if (in[u] > in[v]) swap(u, v);
+      if (nxt[u] != nxt[v]) {
+        f(in[nxt[v]], in[v] + 1);
+        v = par[nxt[v]];
+      } else {
+        f(in[u], in[v] + 1);
+        break;
+      }
+    }
+  }
+
+  template <typename F>
+  void sub_edge_query(int u, const F& f) {
+    f(in[u] + 1, out[u]);
+  }
+
+  template <typename F>
+  void sub_node_query(int u, const F& f) {
+    f(in[u], out[u]);
+  }
+
+  int lca(int a, int b) {
+    while (nxt[a] != nxt[b]) {
+      if (in[a] < in[b]) swap(a, b);
+      a = par[nxt[a]];
+    }
+    return depth[a] < depth[b] ? a : b;
   }
 };
-#line 6 "verify/verify-aoj-grl/aoj-grl-3-c.test.cpp"
+#line 6 "verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp"
 
-void solve() {
-  ini(N, M);
-  auto g = graph(N, M, true, false);
-  StronglyConnectedComponents<vvi> scc(g);
-  ini(Q);
-  rep(_, Q) {
-    ini(u, v);
-    out(scc[u] == scc[v]);
+void solve(){
+  ini(N,Q);
+  vvi g(N);
+  rep1(i,N-1){
+    ini(j);
+    g[j].pb(i);
+  }
+  HeavyLightDecomposition<vvi> hld(g);
+  rep(_,Q){
+    ini(u,v);
+    out(hld.lca(u,v));
   }
 }
 
