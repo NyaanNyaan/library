@@ -21,30 +21,28 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 04:39:16+09:00
+* category: <a href="../../../index.html#011eb2a53bd4e154f230a822c229c9cb">verify/verify-yosupo-ntt</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-02 17:27:04+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
+* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -52,22 +50,22 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
-#include "../competitive-template.hpp"
-#include "../modint/arbitrary-prime-modint.hpp"
-#include "../ntt/arbitrary-ntt.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../ntt/ntt-avx2.hpp"
 
-int MOD = 1000000007;
-using mint = ArbitraryLazyMontgomeryModInt;
+constexpr int MOD = 998244353;
+using mint = LazyMontgomeryModInt<MOD>;
 using vm = vector<mint>;
 
-void solve() {
-  mint::set_mod(MOD);
+__attribute__((target("avx2"))) void solve() {
+  NTT<mint> ntt;
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ArbitraryNTT::multiply(a, b);
+  auto c = ntt.multiply(a, b);
   out(c);
 }
 ```
@@ -76,8 +74,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
+#line 1 "verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -379,112 +377,6 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "modint/arbitrary-prime-modint.hpp"
-using namespace std;
-
-struct ArbitraryLazyMontgomeryModInt {
-  using mint = ArbitraryLazyMontgomeryModInt;
-  using i32 = int32_t;
-  using u32 = uint32_t;
-  using u64 = uint64_t;
-
-  static u32 mod;
-  static u32 r;
-  static u32 n2;
-
-  static u32 get_r() {
-    u32 ret = mod;
-    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
-    return ret;
-  }
-
-  static void set_mod(u32 m) {
-    assert(m < (1 << 30));
-    assert((m & 1) == 1);
-    mod = m;
-    n2 = -u64(m) % m;
-    r = get_r();
-    assert(r * mod == 1);
-  }
-
-  u32 a;
-
-  ArbitraryLazyMontgomeryModInt() : a(0) {}
-  ArbitraryLazyMontgomeryModInt(const int64_t &b)
-      : a(reduce(u64(b % mod + mod) * n2)){};
-
-  static u32 reduce(const u64 &b) {
-    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
-  }
-
-  mint &operator+=(const mint &b) {
-    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  mint &operator-=(const mint &b) {
-    if (i32(a -= b.a) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  mint &operator*=(const mint &b) {
-    a = reduce(u64(a) * b.a);
-    return *this;
-  }
-
-  mint &operator/=(const mint &b) {
-    *this *= b.inverse();
-    return *this;
-  }
-
-  mint operator+(const mint &b) const { return mint(*this) += b; }
-  mint operator-(const mint &b) const { return mint(*this) -= b; }
-  mint operator*(const mint &b) const { return mint(*this) *= b; }
-  mint operator/(const mint &b) const { return mint(*this) /= b; }
-  bool operator==(const mint &b) const {
-    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
-  }
-  bool operator!=(const mint &b) const {
-    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
-  }
-  mint operator-() const { return mint() - mint(*this); }
-
-  mint pow(u64 n) const {
-    mint ret(1), mul(*this);
-    while (n > 0) {
-      if (n & 1) ret *= mul;
-      mul *= mul;
-      n >>= 1;
-    }
-    return ret;
-  }
-
-  friend ostream &operator<<(ostream &os, const mint &b) {
-    return os << b.get();
-  }
-
-  friend istream &operator>>(istream &is, mint &b) {
-    int64_t t;
-    is >> t;
-    b = ArbitraryLazyMontgomeryModInt(t);
-    return (is);
-  }
-
-  mint inverse() const { return pow(mod - 2); }
-
-  u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
-  static u32 get_mod() { return mod; }
-};
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
-#line 3 "ntt/arbitrary-ntt.hpp"
-using namespace std;
-
 #line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 
@@ -1221,119 +1113,23 @@ struct NTT {
     for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;
   }
 };
-#line 7 "ntt/arbitrary-ntt.hpp"
+#line 6 "verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp"
 
-namespace ArbitraryNTT {
-constexpr int32_t m0 = 167772161;
-constexpr int32_t m1 = 469762049;
-constexpr int32_t m2 = 754974721;
-using mint0 = LazyMontgomeryModInt<m0>;
-using mint1 = LazyMontgomeryModInt<m1>;
-using mint2 = LazyMontgomeryModInt<m2>;
-
-template <int mod>
-vector<LazyMontgomeryModInt<mod>> mul(const vector<int> &a,
-                                      const vector<int> &b) {
-  using submint = LazyMontgomeryModInt<mod>;
-  NTT<submint> ntt;
-  vector<submint> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
-  return ntt.multiply(s, t);
-}
-
-vector<int> multiply(const vector<int> &s, const vector<int> &t, int mod) {
-  auto d0 = mul<m0>(s, t);
-  auto d1 = mul<m1>(s, t);
-  auto d2 = mul<m2>(s, t);
-  int n = d0.size();
-  vector<int> ret(n);
-  using i64 = int64_t;
-  static const int r01 = mint1(m0).inverse().get();
-  static const int r02 = mint2(m0).inverse().get();
-  static const int r12 = mint2(m1).inverse().get();
-  static const int r02r12 = i64(r02) * r12 % m2;
-  static const int w1 = m0 % mod;
-  static const int w2 = i64(w1) * m1 % mod;
-  for (int i = 0; i < n; i++) {
-    i64 n1 = d1[i].get(), n2 = d2[i].get();
-    i64 a = d0[i].get();
-    i64 b = (n1 + m1 - a) * r01 % m1;
-    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    ret[i] = (a + b * w1 + c * w2) % mod;
-  }
-  return ret;
-}
-
-template <typename mint>
-vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
-  vector<int> u = multiply(s, t, mint::get_mod());
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);
-  return ret;
-}
-
-/*
-template <int mod>
-vector<int> multiply(const vector<int> &s, const vector<int> &t) {
-  auto d0 = mul<m0>(s, t);
-  auto d1 = mul<m1>(s, t);
-  auto d2 = mul<m2>(s, t);
-  int n = d0.size();
-  vector<int> res(n);
-  using i64 = int64_t;
-  static const int r01 = mint1(m0).inverse().get();
-  static const int r02 = mint2(m0).inverse().get();
-  static const int r12 = mint2(m1).inverse().get();
-  static const int r02r12 = i64(r02) * r12 % m2;
-  static const int w1 = m0 % mod;
-  static const int w2 = i64(w1) * m1 % mod;
-  for (int i = 0; i < n; i++) {
-    i64 n1 = d1[i].get(), n2 = d2[i].get();
-    i64 a = d0[i].get();
-    i64 b = (n1 + m1 - a) * r01 % m1;
-    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    res[i] = (a + b * w1 + c * w2) % mod;
-  }
-  return std::move(res);
-}
-
-template <int mod>
-vector<LazyMontgomeryModInt<mod>> multiply(
-    const vector<LazyMontgomeryModInt<mod>> &a,
-    const vector<LazyMontgomeryModInt<mod>> &b) {
-  using mint = LazyMontgomeryModInt<mod>;
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
-  vector<int> u = multiply<mod>(s, t);
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i)
-    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
-  return std::move(ret);
-}
-*/
-}  // namespace ArbitraryNTT
-#line 6 "verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp"
-
-int MOD = 1000000007;
-using mint = ArbitraryLazyMontgomeryModInt;
+constexpr int MOD = 998244353;
+using mint = LazyMontgomeryModInt<MOD>;
 using vm = vector<mint>;
 
-void solve() {
-  mint::set_mod(MOD);
+__attribute__((target("avx2"))) void solve() {
+  NTT<mint> ntt;
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ArbitraryNTT::multiply(a, b);
+  auto c = ntt.multiply(a, b);
   out(c);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

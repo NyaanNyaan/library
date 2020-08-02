@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 19:14:39+09:00
+* category: <a href="../../../index.html#011eb2a53bd4e154f230a822c229c9cb">verify/verify-yosupo-ntt</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-02 17:27:04+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
 
 
 ## Code
@@ -51,9 +51,9 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../ntt/ntt.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../ntt/ntt.hpp"
 
 constexpr int MOD = 998244353;
 using mint = LazyMontgomeryModInt<MOD>;
@@ -73,7 +73,7 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp"
+#line 1 "verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
 #line 1 "competitive-template.hpp"
@@ -652,7 +652,7 @@ struct NTT {
     return s;
   }
 };
-#line 6 "verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp"
+#line 6 "verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp"
 
 constexpr int MOD = 998244353;
 using mint = LazyMontgomeryModInt<MOD>;
@@ -670,5 +670,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

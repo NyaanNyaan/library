@@ -21,27 +21,26 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 19:14:39+09:00
+* category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-02 17:27:04+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
+* see: <a href="https://judge.yosupo.jp/problem/segment_add_get_min">https://judge.yosupo.jp/problem/segment_add_get_min</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/segment-tree/li-chao-tree.hpp.html">segment-tree/li-chao-tree.hpp</a>
 
 
 ## Code
@@ -49,23 +48,40 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+#define PROBLEM "https://judge.yosupo.jp/problem/segment_add_get_min"
 
-#include "../competitive-template.hpp"
-#include "../modint/modint.hpp"
-#include "../ntt/ntt.hpp"
-
-constexpr int MOD = 998244353;
-using mint = ModInt<MOD>;
-using vm = vector<mint>;
+#include "../../competitive-template.hpp"
+#include "../../segment-tree/li-chao-tree.hpp"
 
 void solve() {
-  NTT<mint> ntt;
-  ini(N, M);
-  vm a(N), b(M);
-  in(a, b);
-  auto c = ntt.multiply(a, b);
-  out(c);
+  ini(N, Q);
+  vl a(N), b(N), l(N), r(N);
+  in4(l, r, a, b);
+  vl c(Q), d(Q), e(Q), f(Q), g(Q);
+  vl xs;
+  rep(i, Q) {
+    in(c[i]);
+    if (c[i])
+      in(d[i]), xs.pb(d[i]);
+    else
+      in(d[i], e[i], f[i], g[i]);
+  }
+  xs.pb(-inf);
+  xs.pb(inf);
+  LiChaoTree<ll, infLL> lichao(xs);
+  rep(_, N) lichao.update_segment(a[_], b[_], l[_], r[_] - 1);
+
+  rep(i, Q) {
+    if (c[i]) {
+      ll ans = lichao.query(d[i]);
+      if (ans == infLL)
+        out("INFINITY");
+      else
+        out(ans);
+    } else {
+      lichao.update_segment(f[i], g[i], d[i], e[i] - 1);
+    }
+  }
 }
 ```
 {% endraw %}
@@ -73,8 +89,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+#line 1 "verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/segment_add_get_min"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -376,283 +392,141 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "modint/modint.hpp"
+#line 3 "segment-tree/li-chao-tree.hpp"
 using namespace std;
 
-template <int mod>
-struct ModInt {
-  int x;
-
-  ModInt() : x(0) {}
-
-  ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}
-
-  ModInt &operator+=(const ModInt &p) {
-    if ((x += p.x) >= mod) x -= mod;
-    return *this;
-  }
-
-  ModInt &operator-=(const ModInt &p) {
-    if ((x += mod - p.x) >= mod) x -= mod;
-    return *this;
-  }
-
-  ModInt &operator*=(const ModInt &p) {
-    x = (int)(1LL * x * p.x % mod);
-    return *this;
-  }
-
-  ModInt &operator/=(const ModInt &p) {
-    *this *= p.inverse();
-    return *this;
-  }
-
-  ModInt operator-() const { return ModInt(-x); }
-
-  ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }
-
-  ModInt operator-(const ModInt &p) const { return ModInt(*this) -= p; }
-
-  ModInt operator*(const ModInt &p) const { return ModInt(*this) *= p; }
-
-  ModInt operator/(const ModInt &p) const { return ModInt(*this) /= p; }
-
-  bool operator==(const ModInt &p) const { return x == p.x; }
-
-  bool operator!=(const ModInt &p) const { return x != p.x; }
-
-  ModInt inverse() const {
-    int a = x, b = mod, u = 1, v = 0, t;
-    while (b > 0) {
-      t = a / b;
-      swap(a -= t * b, b);
-      swap(u -= t * v, v);
+template <typename T, T INF>
+struct LiChaoTree {
+  struct Line {
+    T slope, intercept;
+    Line(T slope, T intercept) : slope(slope), intercept(intercept) {}
+    inline T get(T x) const { return slope * x + intercept; }
+    inline bool over(const Line &other, const T &x) const {
+      return get(x) < other.get(x);
     }
-    return ModInt(u);
+  };
+
+  // remind セグ木は0-indexedの実装
+  vector<T> xset;
+  vector<Line> seg;
+  int _size;
+
+  // 引数xにはx座標の集合を入れる
+  LiChaoTree(const vector<T> &x) : xset(x) {
+    sort(xset.begin(), xset.end());
+    xset.erase(unique(xset.begin(), xset.end()), xset.end());
+    _size = 1;
+    while (_size < (int)xset.size()) _size <<= 1;
+    while ((int)xset.size() < _size) xset.push_back(xset.back() + 1);
+    seg.assign(2 * _size, Line(0, INF));
   }
 
-  ModInt pow(int64_t n) const {
-    ModInt ret(1), mul(x);
-    while (n > 0) {
-      if (n & 1) ret *= mul;
-      mul *= mul;
-      n >>= 1;
+  // 以上 xset[max]以下であることを仮定
+  int get_more_idx(T k) {
+    return lower_bound(xset.begin(), xset.end(), k) - xset.begin();
+  }
+  // 以下 xset[0]以上であることを仮定
+  int get_less_idx(T k) {
+    int ret = upper_bound(xset.begin(), xset.end(), k) - xset.begin();
+    return max(0, ret - 1);
+  }
+
+  // 内部用
+  void inner_update(T a, T b, int left, int right, int seg_idx) {
+    Line line(a, b);
+    while (1) {
+      int mid = (left + right) >> 1;
+      bool l_over = line.over(seg[seg_idx], xset[left]);
+      bool r_over = line.over(seg[seg_idx], xset[right - 1]);
+      if (l_over == r_over) {
+        if (l_over) swap(seg[seg_idx], line);
+        return;
+      }
+      bool m_over = line.over(seg[seg_idx], xset[mid]);
+      if (m_over) swap(seg[seg_idx], line);
+      if (l_over != m_over)
+        seg_idx = (seg_idx << 1), right = mid;
+      else
+        seg_idx = (seg_idx << 1) | 1, left = mid;
+    }
+  }
+
+  // 内部用
+  void inner_update(T a, T b, int seg_idx) {
+    int left, right;
+    int upper_bit = 31 - __builtin_clz(seg_idx);
+    left = (_size >> upper_bit) * (seg_idx - (1 << upper_bit));
+    right = left + (_size >> upper_bit);
+    inner_update(a, b, left, right, seg_idx);
+  }
+
+  // y = ax + bなる直線を追加
+  void update(T a, T b) { inner_update(a, b, 0, _size, 1); }
+
+  // 閉区間x in [left , right]に線分y = ax + bを追加するクエリ
+  void update_segment(T a, T b, T low, T high) {
+    int left = get_more_idx(low) + _size;
+    int right = get_less_idx(high) + _size + 1;
+    for (; left < right; left >>= 1, right >>= 1) {
+      if (left & 1) inner_update(a, b, left++);
+      if (right & 1) inner_update(a, b, --right);
+    }
+  }
+
+  T inner_query(int x, int segidx) {
+    T ret = seg[segidx].get(x);
+    while (segidx > 1) {
+      segidx = segidx >> 1;
+      ret = min(ret, seg[segidx].get(x));
     }
     return ret;
   }
 
-  friend ostream &operator<<(ostream &os, const ModInt &p) { return os << p.x; }
-
-  friend istream &operator>>(istream &is, ModInt &a) {
-    int64_t t;
-    is >> t;
-    a = ModInt<mod>(t);
-    return (is);
+  // x = xset[k]なる点における最小値クエリ
+  T query_idx(int k) {
+    const T x = xset[k];
+    k += _size;
+    return inner_query(x, k);
   }
-  
-  int get() const { return x; }
 
-  static constexpr int get_mod() { return mod; }
+  // xにおける最小クエリ
+  T query(T x) { return query_idx(get_more_idx(x)); }
 };
-#line 3 "ntt/ntt.hpp"
-using namespace std;
-
-template <typename mint>
-struct NTT {
-  static constexpr uint32_t get_pr() {
-    uint32_t mod = mint::get_mod();
-    using u64 = uint64_t;
-    u64 ds[32] = {};
-    int idx = 0;
-    u64 m = mod - 1;
-    for (u64 i = 2; i * i <= m; ++i) {
-      if (m % i == 0) {
-        ds[idx++] = i;
-        while (m % i == 0) m /= i;
-      }
-    }
-    if (m != 1) ds[idx++] = m;
-
-    uint32_t pr = 2;
-    while (1) {
-      int flg = 1;
-      for (int i = 0; i < idx; ++i) {
-        u64 a = pr, b = (mod - 1) / ds[i], r = 1;
-        while (b) {
-          if (b & 1) r = r * a % mod;
-          a = a * a % mod;
-          b >>= 1;
-        }
-        if (r == 1) {
-          flg = 0;
-          break;
-        }
-      }
-      if (flg == 1) break;
-      ++pr;
-    }
-    return pr;
-  };
-
-  static constexpr uint32_t mod = mint::get_mod();
-  static constexpr uint32_t pr = get_pr();
-  static constexpr int level = __builtin_ctzll(mod - 1);
-  mint dw[level], dy[level];
-
-  void setwy(int k) {
-    mint w[level], y[level];
-    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));
-    y[k - 1] = w[k - 1].inverse();
-    for (int i = k - 2; i > 0; --i)
-      w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];
-    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];
-    for (int i = 3; i < k; ++i) {
-      dw[i] = dw[i - 1] * y[i - 2] * w[i];
-      dy[i] = dy[i - 1] * w[i - 2] * y[i];
-    }
-  }
-
-  void fft4(vector<mint> &a, int k) {
-    if (k & 1) {
-      int v = 1 << (k - 1);
-      for (int j = 0; j < v; ++j) {
-        mint ajv = a[j + v];
-        a[j + v] = a[j] - ajv;
-        a[j] += ajv;
-      }
-    }
-    int u = 1 << (2 + (k & 1));
-    int v = 1 << (k - 2 - (k & 1));
-    mint one = mint(1);
-    mint imag = dw[1];
-    while (v) {
-      // jh = 0
-      {
-        int j0 = 0;
-        int j1 = v;
-        int j2 = j1 + v;
-        int j3 = j2 + v;
-        for (; j0 < v; ++j0, ++j1, ++j2, ++j3) {
-          mint t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];
-          mint t0p2 = t0 + t2, t1p3 = t1 + t3;
-          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;
-          a[j0] = t0p2 + t1p3, a[j1] = t0p2 - t1p3;
-          a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;
-        }
-      }
-      // jh >= 1
-      mint ww = one, xx = one * dw[2], wx = one;
-      for (int jh = 4; jh < u;) {
-        ww = xx * xx, wx = ww * xx;
-        int j0 = jh * v;
-        int je = j0 + v;
-        int j2 = je + v;
-        for (; j0 < je; ++j0, ++j2) {
-          mint t0 = a[j0], t1 = a[j0 + v] * xx, t2 = a[j2] * ww,
-               t3 = a[j2 + v] * wx;
-          mint t0p2 = t0 + t2, t1p3 = t1 + t3;
-          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;
-          a[j0] = t0p2 + t1p3, a[j0 + v] = t0p2 - t1p3;
-          a[j2] = t0m2 + t1m3, a[j2 + v] = t0m2 - t1m3;
-        }
-        xx *= dw[__builtin_ctzll((jh += 4))];
-      }
-      u <<= 2;
-      v >>= 2;
-    }
-  }
-
-  void ifft4(vector<mint> &a, int k) {
-    int u = 1 << (k - 2);
-    int v = 1;
-    mint one = mint(1);
-    mint imag = dy[1];
-    while (u) {
-      // jh = 0
-      {
-        int j0 = 0;
-        int j1 = v;
-        int j2 = v + v;
-        int j3 = j2 + v;
-        for (; j0 < v; ++j0, ++j1, ++j2, ++j3) {
-          mint t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];
-          mint t0p1 = t0 + t1, t2p3 = t2 + t3;
-          mint t0m1 = t0 - t1, t2m3 = (t2 - t3) * imag;
-          a[j0] = t0p1 + t2p3, a[j2] = t0p1 - t2p3;
-          a[j1] = t0m1 + t2m3, a[j3] = t0m1 - t2m3;
-        }
-      }
-      // jh >= 1
-      mint ww = one, xx = one * dy[2], yy = one;
-      u <<= 2;
-      for (int jh = 4; jh < u;) {
-        ww = xx * xx, yy = xx * imag;
-        int j0 = jh * v;
-        int je = j0 + v;
-        int j2 = je + v;
-        for (; j0 < je; ++j0, ++j2) {
-          mint t0 = a[j0], t1 = a[j0 + v], t2 = a[j2], t3 = a[j2 + v];
-          mint t0p1 = t0 + t1, t2p3 = t2 + t3;
-          mint t0m1 = (t0 - t1) * xx, t2m3 = (t2 - t3) * yy;
-          a[j0] = t0p1 + t2p3, a[j2] = (t0p1 - t2p3) * ww;
-          a[j0 + v] = t0m1 + t2m3, a[j2 + v] = (t0m1 - t2m3) * ww;
-        }
-        xx *= dy[__builtin_ctzll(jh += 4)];
-      }
-      u >>= 4;
-      v <<= 2;
-    }
-    if (k & 1) {
-      u = 1 << (k - 1);
-      for (int j = 0; j < u; ++j) {
-        mint ajv = a[j] - a[j + u];
-        a[j] += a[j + u];
-        a[j + u] = ajv;
-      }
-    }
-  }
-
-  vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
-    int l = a.size() + b.size() - 1;
-    if (min<int>(a.size(), b.size()) <= 40) {
-      vector<mint> s(l);
-      for (int i = 0; i < (int)a.size(); ++i)
-        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
-      return s;
-    }
-    int k = 2, M = 4;
-    while (M < l) M <<= 1, ++k;
-    setwy(k);
-    vector<mint> s(M), t(M);
-    for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
-    for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
-    fft4(s, k);
-    fft4(t, k);
-    for (int i = 0; i < M; ++i) s[i] *= t[i];
-    ifft4(s, k);
-    s.resize(l);
-    mint invm = mint(M).inverse();
-    for (int i = 0; i < l; ++i) s[i] *= invm;
-    return s;
-  }
-};
-#line 6 "verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp"
-
-constexpr int MOD = 998244353;
-using mint = ModInt<MOD>;
-using vm = vector<mint>;
+#line 5 "verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp"
 
 void solve() {
-  NTT<mint> ntt;
-  ini(N, M);
-  vm a(N), b(M);
-  in(a, b);
-  auto c = ntt.multiply(a, b);
-  out(c);
+  ini(N, Q);
+  vl a(N), b(N), l(N), r(N);
+  in4(l, r, a, b);
+  vl c(Q), d(Q), e(Q), f(Q), g(Q);
+  vl xs;
+  rep(i, Q) {
+    in(c[i]);
+    if (c[i])
+      in(d[i]), xs.pb(d[i]);
+    else
+      in(d[i], e[i], f[i], g[i]);
+  }
+  xs.pb(-inf);
+  xs.pb(inf);
+  LiChaoTree<ll, infLL> lichao(xs);
+  rep(_, N) lichao.update_segment(a[_], b[_], l[_], r[_] - 1);
+
+  rep(i, Q) {
+    if (c[i]) {
+      ll ans = lichao.query(d[i]);
+      if (ans == infLL)
+        out("INFINITY");
+      else
+        out(ans);
+    } else {
+      lichao.update_segment(f[i], g[i], d[i], e[i] - 1);
+    }
+  }
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

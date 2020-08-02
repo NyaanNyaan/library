@@ -25,15 +25,21 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: segment-tree/li-chao-tree.hpp
+# :heavy_check_mark: segment-tree/li-chao-tree.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segment-tree/li-chao-tree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-08-02 17:27:04+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp</a>
 
 
 ## Code
@@ -114,7 +120,7 @@ struct LiChaoTree {
   void update(T a, T b) { inner_update(a, b, 0, _size, 1); }
 
   // 閉区間x in [left , right]に線分y = ax + bを追加するクエリ
-  void update_line_segment(T a, T b, T low, T high) {
+  void update_segment(T a, T b, T low, T high) {
     int left = get_more_idx(low) + _size;
     int right = get_less_idx(high) + _size + 1;
     for (; left < right; left >>= 1, right >>= 1) {
@@ -221,7 +227,7 @@ struct LiChaoTree {
   void update(T a, T b) { inner_update(a, b, 0, _size, 1); }
 
   // 閉区間x in [left , right]に線分y = ax + bを追加するクエリ
-  void update_line_segment(T a, T b, T low, T high) {
+  void update_segment(T a, T b, T low, T high) {
     int left = get_more_idx(low) + _size;
     int right = get_less_idx(high) + _size + 1;
     for (; left < right; left >>= 1, right >>= 1) {

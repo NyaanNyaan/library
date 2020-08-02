@@ -21,28 +21,29 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 19:14:39+09:00
+* category: <a href="../../../index.html#011eb2a53bd4e154f230a822c229c9cb">verify/verify-yosupo-ntt</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-02 17:27:04+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
+* see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -50,22 +51,21 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../ntt/ntt-sse42.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../ntt/arbitrary-ntt.hpp"
 
-constexpr int MOD = 998244353;
+constexpr int MOD = 1000000007;
 using mint = LazyMontgomeryModInt<MOD>;
 using vm = vector<mint>;
 
 void solve() {
-  NTT<mint> ntt;
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ntt.multiply(a, b);
+  auto c = ArbitraryNTT::multiply(a, b);
   out(c);
 }
 ```
@@ -74,8 +74,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+#line 1 "verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -471,7 +471,10 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 get_mod() { return mod; }
 };
-#line 3 "ntt/ntt-sse42.hpp"
+#line 3 "ntt/arbitrary-ntt.hpp"
+using namespace std;
+
+#line 3 "ntt/ntt-avx2.hpp"
 using namespace std;
 
 #line 3 "modint/simd-montgomery.hpp"
@@ -555,7 +558,7 @@ montgomery_sub_256(const __m256i &a, const __m256i &b, const __m256i &m2,
   return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret), m2),
                           ret);
 }
-#line 6 "ntt/ntt-sse42.hpp"
+#line 6 "ntt/ntt-avx2.hpp"
 
 constexpr int SZ = 1 << 19;
 uint32_t buf1_[SZ * 2] __attribute__((aligned(64)));
@@ -604,7 +607,7 @@ struct NTT {
   mint dw[level], dy[level];
   mint *buf1, *buf2;
 
-  NTT() {
+  constexpr NTT() {
     setwy(level);
     buf1 = reinterpret_cast<mint *>(::buf1_);
     buf2 = reinterpret_cast<mint *>(::buf2_);
@@ -616,6 +619,7 @@ struct NTT {
     y[k - 1] = w[k - 1].inverse();
     for (int i = k - 2; i > 0; --i)
       w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];
+    dw[0] = dy[0] = w[1] * w[1];
     dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];
     for (int i = 3; i < k; ++i) {
       dw[i] = dw[i - 1] * y[i - 2] * w[i];
@@ -623,7 +627,7 @@ struct NTT {
     }
   }
 
-  __attribute__((target("sse4.2"))) void ntt(mint *a, int n) {
+  __attribute__((target("avx2"))) void ntt(mint *a, int n) {
     int k = n ? __builtin_ctz(n) : 0;
     if (k == 0) return;
     if (k == 1) {
@@ -634,21 +638,31 @@ struct NTT {
     }
     if (k & 1) {
       int v = 1 << (k - 1);
-      for (int j = 0; j < v; ++j) {
-        mint ajv = a[j + v];
-        a[j + v] = a[j] - ajv;
-        a[j] += ajv;
+      if (v < 8) {
+        for (int j = 0; j < v; ++j) {
+          mint ajv = a[j + v];
+          a[j + v] = a[j] - ajv;
+          a[j] += ajv;
+        }
+      } else {
+        const __m256i m0 = _mm256_set1_epi32(0);
+        const __m256i m2 = _mm256_set1_epi32(mod + mod);
+        int j0 = 0;
+        int j1 = v;
+        for (; j0 < v; j0 += 8, j1 += 8) {
+          __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+          __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+          __m256i naj = montgomery_add_256(T0, T1, m2, m0);
+          __m256i najv = montgomery_sub_256(T0, T1, m2, m0);
+          _mm256_storeu_si256((__m256i *)(a + j0), naj);
+          _mm256_storeu_si256((__m256i *)(a + j1), najv);
+        }
       }
     }
     int u = 1 << (2 + (k & 1));
     int v = 1 << (k - 2 - (k & 1));
     mint one = mint(1);
     mint imag = dw[1];
-    const __m128i m0 = _mm_set1_epi32(0);
-    const __m128i m1 = _mm_set1_epi32(mod);
-    const __m128i m2 = _mm_set1_epi32(mod + mod);
-    const __m128i r = _mm_set1_epi32(mint::r);
-    const __m128i Imag = _mm_set1_epi32(imag.a);
     while (v) {
       if (v == 1) {
         mint ww = one, xx = one, wx = one;
@@ -662,7 +676,12 @@ struct NTT {
           a[jh + 2] = t0m2 + t1m3, a[jh + 3] = t0m2 - t1m3;
           xx *= dw[__builtin_ctz((jh += 4))];
         }
-      } else {
+      } else if (v == 4) {
+        const __m128i m0 = _mm_set1_epi32(0);
+        const __m128i m1 = _mm_set1_epi32(mod);
+        const __m128i m2 = _mm_set1_epi32(mod + mod);
+        const __m128i r = _mm_set1_epi32(mint::r);
+        const __m128i Imag = _mm_set1_epi32(imag.a);
         mint ww = one, xx = one, wx = one;
         for (int jh = 0; jh < u;) {
           if (jh == 0) {
@@ -672,15 +691,15 @@ struct NTT {
             int j3 = j2 + v;
             int je = v;
             for (; j0 < je; j0 += 4, j1 += 4, j2 += 4, j3 += 4) {
-              __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
-              __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
-              __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
-              __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
-              __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
-              __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
-              __m128i T1M3 =
-                  montgomery_mul_128(montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
+              const __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
+              const __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
+              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
+              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
+              const __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
+              const __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
+              const __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
+              const __m128i T1M3 = montgomery_mul_128(
+                  montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j1),
@@ -692,27 +711,27 @@ struct NTT {
             }
           } else {
             ww = xx * xx, wx = ww * xx;
-            __m128i WW = _mm_set1_epi32(ww.a);
-            __m128i WX = _mm_set1_epi32(wx.a);
-            __m128i XX = _mm_set1_epi32(xx.a);
+            const __m128i WW = _mm_set1_epi32(ww.a);
+            const __m128i WX = _mm_set1_epi32(wx.a);
+            const __m128i XX = _mm_set1_epi32(xx.a);
             int j0 = jh * v;
             int j1 = j0 + v;
             int j2 = j1 + v;
             int j3 = j2 + v;
             int je = j1;
             for (; j0 < je; j0 += 4, j1 += 4, j2 += 4, j3 += 4) {
-              __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
-              __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
-              __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
-              __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              T1 = montgomery_mul_128(T1, XX, r, m1);
-              T2 = montgomery_mul_128(T2, WW, r, m1);
-              T3 = montgomery_mul_128(T3, WX, r, m1);
-              __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);
-              __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);
-              __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);
-              __m128i T1M3 =
-                  montgomery_mul_128(montgomery_sub_128(T1, T3, m2, m0), Imag, r, m1);
+              const __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
+              const __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
+              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
+              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
+              const __m128i MT1 = montgomery_mul_128(T1, XX, r, m1);
+              const __m128i MT2 = montgomery_mul_128(T2, WW, r, m1);
+              const __m128i MT3 = montgomery_mul_128(T3, WX, r, m1);
+              const __m128i T0P2 = montgomery_add_128(T0, MT2, m2, m0);
+              const __m128i T1P3 = montgomery_add_128(MT1, MT3, m2, m0);
+              const __m128i T0M2 = montgomery_sub_128(T0, MT2, m2, m0);
+              const __m128i T1M3 = montgomery_mul_128(
+                  montgomery_sub_128(MT1, MT3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P2, T1P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j1),
@@ -725,31 +744,98 @@ struct NTT {
           }
           xx *= dw[__builtin_ctz((jh += 4))];
         }
+      } else {
+        const __m256i m0 = _mm256_set1_epi32(0);
+        const __m256i m1 = _mm256_set1_epi32(mod);
+        const __m256i m2 = _mm256_set1_epi32(mod + mod);
+        const __m256i r = _mm256_set1_epi32(mint::r);
+        const __m256i Imag = _mm256_set1_epi32(imag.a);
+        mint ww = one, xx = one, wx = one;
+        for (int jh = 0; jh < u;) {
+          if (jh == 0) {
+            int j0 = 0;
+            int j1 = v;
+            int j2 = j1 + v;
+            int j3 = j2 + v;
+            int je = v;
+            for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
+              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              const __m256i T0P2 = montgomery_add_256(T0, T2, m2, m0);
+              const __m256i T1P3 = montgomery_add_256(T1, T3, m2, m0);
+              const __m256i T0M2 = montgomery_sub_256(T0, T2, m2, m0);
+              const __m256i T1M3 = montgomery_mul_256(
+                  montgomery_sub_256(T1, T3, m2, m0), Imag, r, m1);
+              _mm256_storeu_si256((__m256i *)(a + j0),
+                                  montgomery_add_256(T0P2, T1P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j1),
+                                  montgomery_sub_256(T0P2, T1P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j2),
+                                  montgomery_add_256(T0M2, T1M3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j3),
+                                  montgomery_sub_256(T0M2, T1M3, m2, m0));
+            }
+          } else {
+            ww = xx * xx, wx = ww * xx;
+            const __m256i WW = _mm256_set1_epi32(ww.a);
+            const __m256i WX = _mm256_set1_epi32(wx.a);
+            const __m256i XX = _mm256_set1_epi32(xx.a);
+            int j0 = jh * v;
+            int j1 = j0 + v;
+            int j2 = j1 + v;
+            int j3 = j2 + v;
+            int je = j1;
+            for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
+              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              const __m256i MT1 = montgomery_mul_256(T1, XX, r, m1);
+              const __m256i MT2 = montgomery_mul_256(T2, WW, r, m1);
+              const __m256i MT3 = montgomery_mul_256(T3, WX, r, m1);
+              const __m256i T0P2 = montgomery_add_256(T0, MT2, m2, m0);
+              const __m256i T1P3 = montgomery_add_256(MT1, MT3, m2, m0);
+              const __m256i T0M2 = montgomery_sub_256(T0, MT2, m2, m0);
+              const __m256i T1M3 = montgomery_mul_256(
+                  montgomery_sub_256(MT1, MT3, m2, m0), Imag, r, m1);
+              _mm256_storeu_si256((__m256i *)(a + j0),
+                                  montgomery_add_256(T0P2, T1P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j1),
+                                  montgomery_sub_256(T0P2, T1P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j2),
+                                  montgomery_add_256(T0M2, T1M3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j3),
+                                  montgomery_sub_256(T0M2, T1M3, m2, m0));
+            }
+          }
+          xx *= dw[__builtin_ctz((jh += 4))];
+        }
       }
       u <<= 2;
       v >>= 2;
     }
   }
 
-  __attribute__((target("sse4.2"))) void intt(mint *a, int n,
-                                              int normalize = true) {
+  __attribute__((target("avx2"))) void intt(mint *a, int n,
+                                            int normalize = true) {
     int k = n ? __builtin_ctz(n) : 0;
     if (k == 0) return;
     if (k == 1) {
       mint a1 = a[1];
       a[1] = a[0] - a[1];
       a[0] = a[0] + a1;
+      if (normalize) {
+        a[0] *= mint(2).inverse();
+        a[1] *= mint(2).inverse();
+      }
       return;
     }
     int u = 1 << (k - 2);
     int v = 1;
     mint one = mint(1);
     mint imag = dy[1];
-    const __m128i m0 = _mm_set1_epi32(0);
-    const __m128i m1 = _mm_set1_epi32(mod);
-    const __m128i m2 = _mm_set1_epi32(mod + mod);
-    const __m128i r = _mm_set1_epi32(mint::r);
-    const __m128i Imag = _mm_set1_epi32(imag.a);
     while (u) {
       if (v == 1) {
         mint ww = one, xx = one, yy = one;
@@ -764,7 +850,12 @@ struct NTT {
           a[jh + 1] = t0m1 + t2m3, a[jh + 3] = (t0m1 - t2m3) * ww;
           xx *= dy[__builtin_ctz(jh += 4)];
         }
-      } else {
+      } else if (v == 4) {
+        const __m128i m0 = _mm_set1_epi32(0);
+        const __m128i m1 = _mm_set1_epi32(mod);
+        const __m128i m2 = _mm_set1_epi32(mod + mod);
+        const __m128i r = _mm_set1_epi32(mint::r);
+        const __m128i Imag = _mm_set1_epi32(imag.a);
         mint ww = one, xx = one, yy = one;
         u <<= 2;
         for (int jh = 0; jh < u;) {
@@ -774,15 +865,15 @@ struct NTT {
             int j2 = v + v;
             int j3 = j2 + v;
             for (; j0 < v; j0 += 4, j1 += 4, j2 += 4, j3 += 4) {
-              __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
-              __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
-              __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
-              __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
-              __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
-              __m128i T0M1 = montgomery_sub_128(T0, T1, m2, m0);
-              __m128i T2M3 =
-                  montgomery_mul_128(montgomery_sub_128(T2, T3, m2, m0), Imag, r, m1);
+              const __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
+              const __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
+              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
+              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
+              const __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
+              const __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
+              const __m128i T0M1 = montgomery_sub_128(T0, T1, m2, m0);
+              const __m128i T2M3 = montgomery_mul_128(
+                  montgomery_sub_128(T2, T3, m2, m0), Imag, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P1, T2P3, m2, m0));
               _mm_storeu_si128((__m128i *)(a + j2),
@@ -794,37 +885,107 @@ struct NTT {
             }
           } else {
             ww = xx * xx, yy = xx * imag;
-            __m128i WW = _mm_set1_epi32(ww.a);
-            __m128i XX = _mm_set1_epi32(xx.a);
-            __m128i YY = _mm_set1_epi32(yy.a);
+            const __m128i WW = _mm_set1_epi32(ww.a);
+            const __m128i XX = _mm_set1_epi32(xx.a);
+            const __m128i YY = _mm_set1_epi32(yy.a);
             int j0 = jh * v;
             int j1 = j0 + v;
             int j2 = j1 + v;
             int j3 = j2 + v;
             int je = j1;
             for (; j0 < je; j0 += 4, j1 += 4, j2 += 4, j3 += 4) {
-              __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
-              __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
-              __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
-              __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
-              __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
-              __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
-              __m128i T0M1 =
-                  montgomery_mul_128(montgomery_sub_128(T0, T1, m2, m0), XX, r, m1);
-              __m128i T2M3 =
-                  montgomery_mul_128(montgomery_sub_128(T2, T3, m2, m0), YY, r, m1);
+              const __m128i T0 = _mm_loadu_si128((__m128i *)(a + j0));
+              const __m128i T1 = _mm_loadu_si128((__m128i *)(a + j1));
+              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));
+              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));
+              const __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);
+              const __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);
+              const __m128i T0M1 = montgomery_mul_128(
+                  montgomery_sub_128(T0, T1, m2, m0), XX, r, m1);
+              __m128i T2M3 = montgomery_mul_128(
+                  montgomery_sub_128(T2, T3, m2, m0), YY, r, m1);
               _mm_storeu_si128((__m128i *)(a + j0),
                                montgomery_add_128(T0P1, T2P3, m2, m0));
               _mm_storeu_si128(
                   (__m128i *)(a + j2),
-                  montgomery_mul_128(montgomery_sub_128(T0P1, T2P3, m2, m0), WW, r,
-                                 m1));
+                  montgomery_mul_128(montgomery_sub_128(T0P1, T2P3, m2, m0), WW,
+                                     r, m1));
               _mm_storeu_si128((__m128i *)(a + j1),
                                montgomery_add_128(T0M1, T2M3, m2, m0));
               _mm_storeu_si128(
                   (__m128i *)(a + j3),
-                  montgomery_mul_128(montgomery_sub_128(T0M1, T2M3, m2, m0), WW, r,
-                                 m1));
+                  montgomery_mul_128(montgomery_sub_128(T0M1, T2M3, m2, m0), WW,
+                                     r, m1));
+            }
+          }
+          xx *= dy[__builtin_ctz(jh += 4)];
+        }
+      } else {
+        const __m256i m0 = _mm256_set1_epi32(0);
+        const __m256i m1 = _mm256_set1_epi32(mod);
+        const __m256i m2 = _mm256_set1_epi32(mod + mod);
+        const __m256i r = _mm256_set1_epi32(mint::r);
+        const __m256i Imag = _mm256_set1_epi32(imag.a);
+        mint ww = one, xx = one, yy = one;
+        u <<= 2;
+        for (int jh = 0; jh < u;) {
+          if (jh == 0) {
+            int j0 = 0;
+            int j1 = v;
+            int j2 = v + v;
+            int j3 = j2 + v;
+            for (; j0 < v; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
+              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              const __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);
+              const __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);
+              const __m256i T0M1 = montgomery_sub_256(T0, T1, m2, m0);
+              const __m256i T2M3 = montgomery_mul_256(
+                  montgomery_sub_256(T2, T3, m2, m0), Imag, r, m1);
+              _mm256_storeu_si256((__m256i *)(a + j0),
+                                  montgomery_add_256(T0P1, T2P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j2),
+                                  montgomery_sub_256(T0P1, T2P3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j1),
+                                  montgomery_add_256(T0M1, T2M3, m2, m0));
+              _mm256_storeu_si256((__m256i *)(a + j3),
+                                  montgomery_sub_256(T0M1, T2M3, m2, m0));
+            }
+          } else {
+            ww = xx * xx, yy = xx * imag;
+            const __m256i WW = _mm256_set1_epi32(ww.a);
+            const __m256i XX = _mm256_set1_epi32(xx.a);
+            const __m256i YY = _mm256_set1_epi32(yy.a);
+            int j0 = jh * v;
+            int j1 = j0 + v;
+            int j2 = j1 + v;
+            int j3 = j2 + v;
+            int je = j1;
+            for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {
+              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));
+              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));
+              const __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);
+              const __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);
+              const __m256i T0M1 = montgomery_mul_256(
+                  montgomery_sub_256(T0, T1, m2, m0), XX, r, m1);
+              const __m256i T2M3 = montgomery_mul_256(
+                  montgomery_sub_256(T2, T3, m2, m0), YY, r, m1);
+              _mm256_storeu_si256((__m256i *)(a + j0),
+                                  montgomery_add_256(T0P1, T2P3, m2, m0));
+              _mm256_storeu_si256(
+                  (__m256i *)(a + j2),
+                  montgomery_mul_256(montgomery_sub_256(T0P1, T2P3, m2, m0), WW,
+                                     r, m1));
+              _mm256_storeu_si256((__m256i *)(a + j1),
+                                  montgomery_add_256(T0M1, T2M3, m2, m0));
+              _mm256_storeu_si256(
+                  (__m256i *)(a + j3),
+                  montgomery_mul_256(montgomery_sub_256(T0M1, T2M3, m2, m0), WW,
+                                     r, m1));
             }
           }
           xx *= dy[__builtin_ctz(jh += 4)];
@@ -834,21 +995,92 @@ struct NTT {
       v <<= 2;
     }
     if (k & 1) {
-      u = 1 << (k - 1);
-      for (int j = 0; j < u; ++j) {
-        mint ajv = a[j] - a[j + u];
-        a[j] += a[j + u];
-        a[j + u] = ajv;
+      v = 1 << (k - 1);
+      if (v < 8) {
+        for (int j = 0; j < v; ++j) {
+          mint ajv = a[j] - a[j + v];
+          a[j] += a[j + v];
+          a[j + v] = ajv;
+        }
+      } else {
+        const __m256i m0 = _mm256_set1_epi32(0);
+        const __m256i m2 = _mm256_set1_epi32(mod + mod);
+        int j0 = 0;
+        int j1 = v;
+        for (; j0 < v; j0 += 8, j1 += 8) {
+          const __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));
+          const __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));
+          __m256i naj = montgomery_add_256(T0, T1, m2, m0);
+          __m256i najv = montgomery_sub_256(T0, T1, m2, m0);
+          _mm256_storeu_si256((__m256i *)(a + j0), naj);
+          _mm256_storeu_si256((__m256i *)(a + j1), najv);
+        }
       }
     }
     if (normalize) {
-      mint invn = one / mint(n);
+      mint invn = mint(n).inverse();
       for (int i = 0; i < n; i++) a[i] *= invn;
     }
   }
 
-  constexpr vector<mint> multiply(const vector<mint> &a,
-                                  const vector<mint> &b) {
+  __attribute__((target("avx2"))) void inplace_multiply(
+      int l1, int l2, int zero_padding = true) {
+    int l = l1 + l2 - 1;
+    int M = 4;
+    while (M < l) M <<= 1;
+    if (zero_padding) {
+      for (int i = l1; i < M; i++) buf1_[i] = 0;
+      for (int i = l2; i < M; i++) buf2_[i] = 0;
+    }
+    const __m256i m0 = _mm256_set1_epi32(0);
+    const __m256i m1 = _mm256_set1_epi32(mod);
+    const __m256i r = _mm256_set1_epi32(mint::r);
+    const __m256i N2 = _mm256_set1_epi32(mint::n2);
+    for (int i = 0; i < l1; i += 8) {
+      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
+      __m256i b = montgomery_mul_256(a, N2, r, m1);
+      _mm256_storeu_si256((__m256i *)(buf1_ + i), b);
+    }
+    for (int i = 0; i < l2; i += 8) {
+      __m256i a = _mm256_loadu_si256((__m256i *)(buf2_ + i));
+      __m256i b = montgomery_mul_256(a, N2, r, m1);
+      _mm256_storeu_si256((__m256i *)(buf2_ + i), b);
+    }
+    ntt(buf1, M);
+    ntt(buf2, M);
+    for (int i = 0; i < M; i += 8) {
+      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
+      __m256i b = _mm256_loadu_si256((__m256i *)(buf2_ + i));
+      __m256i c = montgomery_mul_256(a, b, r, m1);
+      _mm256_storeu_si256((__m256i *)(buf1_ + i), c);
+    }
+    intt(buf1, M, false);
+    const __m256i INVM = _mm256_set1_epi32((mint(M).inverse()).a);
+    for (int i = 0; i < l; i += 8) {
+      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
+      __m256i b = montgomery_mul_256(a, INVM, r, m1);
+      __m256i c = my256_mulhi_epu32(my256_mullo_epu32(b, r), m1);
+      __m256i d = _mm256_and_si256(_mm256_cmpgt_epi32(c, m0), m1);
+      __m256i e = _mm256_sub_epi32(d, c);
+      _mm256_storeu_si256((__m256i *)(buf1_ + i), e);
+    }
+  }
+
+  void ntt(vector<mint> &a) {
+    int M = (int)a.size();
+    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
+    ntt(buf1, M);
+    for (int i = 0; i < M; i++) a[i].a = buf1[i].a;
+  }
+
+  void intt(vector<mint> &a) {
+    int M = (int)a.size();
+    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
+    intt(buf1, M, true);
+    for (int i = 0; i < M; i++) a[i].a = buf1[i].a;
+  }
+
+  vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
     int l = a.size() + b.size() - 1;
     if (min<int>(a.size(), b.size()) <= 40) {
       vector<mint> s(l);
@@ -872,24 +1104,130 @@ struct NTT {
     for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;
     return s;
   }
-};
-#line 6 "verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp"
 
-constexpr int MOD = 998244353;
+  void ntt_doubling(vector<mint> &a) {
+    int M = (int)a.size();
+    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;
+    intt(buf1, M);
+    mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));
+    for (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;
+    ntt(buf1, M);
+    a.resize(2 * M);
+    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;
+  }
+};
+#line 7 "ntt/arbitrary-ntt.hpp"
+
+namespace ArbitraryNTT {
+constexpr int32_t m0 = 167772161;
+constexpr int32_t m1 = 469762049;
+constexpr int32_t m2 = 754974721;
+using mint0 = LazyMontgomeryModInt<m0>;
+using mint1 = LazyMontgomeryModInt<m1>;
+using mint2 = LazyMontgomeryModInt<m2>;
+
+template <int mod>
+vector<LazyMontgomeryModInt<mod>> mul(const vector<int> &a,
+                                      const vector<int> &b) {
+  using submint = LazyMontgomeryModInt<mod>;
+  NTT<submint> ntt;
+  vector<submint> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
+  return ntt.multiply(s, t);
+}
+
+vector<int> multiply(const vector<int> &s, const vector<int> &t, int mod) {
+  auto d0 = mul<m0>(s, t);
+  auto d1 = mul<m1>(s, t);
+  auto d2 = mul<m2>(s, t);
+  int n = d0.size();
+  vector<int> ret(n);
+  using i64 = int64_t;
+  static const int r01 = mint1(m0).inverse().get();
+  static const int r02 = mint2(m0).inverse().get();
+  static const int r12 = mint2(m1).inverse().get();
+  static const int r02r12 = i64(r02) * r12 % m2;
+  static const int w1 = m0 % mod;
+  static const int w2 = i64(w1) * m1 % mod;
+  for (int i = 0; i < n; i++) {
+    i64 n1 = d1[i].get(), n2 = d2[i].get();
+    i64 a = d0[i].get();
+    i64 b = (n1 + m1 - a) * r01 % m1;
+    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    ret[i] = (a + b * w1 + c * w2) % mod;
+  }
+  return ret;
+}
+
+template <typename mint>
+vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply(s, t, mint::get_mod());
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);
+  return ret;
+}
+
+/*
+template <int mod>
+vector<int> multiply(const vector<int> &s, const vector<int> &t) {
+  auto d0 = mul<m0>(s, t);
+  auto d1 = mul<m1>(s, t);
+  auto d2 = mul<m2>(s, t);
+  int n = d0.size();
+  vector<int> res(n);
+  using i64 = int64_t;
+  static const int r01 = mint1(m0).inverse().get();
+  static const int r02 = mint2(m0).inverse().get();
+  static const int r12 = mint2(m1).inverse().get();
+  static const int r02r12 = i64(r02) * r12 % m2;
+  static const int w1 = m0 % mod;
+  static const int w2 = i64(w1) * m1 % mod;
+  for (int i = 0; i < n; i++) {
+    i64 n1 = d1[i].get(), n2 = d2[i].get();
+    i64 a = d0[i].get();
+    i64 b = (n1 + m1 - a) * r01 % m1;
+    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    res[i] = (a + b * w1 + c * w2) % mod;
+  }
+  return std::move(res);
+}
+
+template <int mod>
+vector<LazyMontgomeryModInt<mod>> multiply(
+    const vector<LazyMontgomeryModInt<mod>> &a,
+    const vector<LazyMontgomeryModInt<mod>> &b) {
+  using mint = LazyMontgomeryModInt<mod>;
+  vector<int> s(a.size()), t(b.size());
+  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
+  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
+  vector<int> u = multiply<mod>(s, t);
+  vector<mint> ret(u.size());
+  for (int i = 0; i < (int)u.size(); ++i)
+    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
+  return std::move(ret);
+}
+*/
+}  // namespace ArbitraryNTT
+#line 6 "verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp"
+
+constexpr int MOD = 1000000007;
 using mint = LazyMontgomeryModInt<MOD>;
 using vm = vector<mint>;
 
 void solve() {
-  NTT<mint> ntt;
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
-  auto c = ntt.multiply(a, b);
+  auto c = ArbitraryNTT::multiply(a, b);
   out(c);
 }
 
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 

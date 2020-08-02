@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
 
 
 ## Code

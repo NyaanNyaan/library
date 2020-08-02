@@ -21,17 +21,17 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c2de173895230134e20c27dd4ec4cad4">verify-yosupo-ntt</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-29 04:39:16+09:00
+* category: <a href="../../../index.html#011eb2a53bd4e154f230a822c229c9cb">verify/verify-yosupo-ntt</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-02 17:27:04+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -39,11 +39,12 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -53,15 +54,16 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
-#include "../competitive-template.hpp"
-#include "../modint/montgomery-modint.hpp"
-#include "../ntt/arbitrary-ntt.hpp"
+#include "../../competitive-template.hpp"
+#include "../../modint/arbitrary-prime-modint.hpp"
+#include "../../ntt/arbitrary-ntt.hpp"
 
-constexpr int MOD = 1000000007;
-using mint = LazyMontgomeryModInt<MOD>;
+int MOD = 1000000007;
+using mint = ArbitraryLazyMontgomeryModInt;
 using vm = vector<mint>;
 
 void solve() {
+  mint::set_mod(MOD);
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
@@ -74,7 +76,7 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp"
+#line 1 "verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
 #line 1 "competitive-template.hpp"
@@ -377,6 +379,112 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
+#line 3 "modint/arbitrary-prime-modint.hpp"
+using namespace std;
+
+struct ArbitraryLazyMontgomeryModInt {
+  using mint = ArbitraryLazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
+
+  static u32 mod;
+  static u32 r;
+  static u32 n2;
+
+  static u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
+  }
+
+  static void set_mod(u32 m) {
+    assert(m < (1 << 30));
+    assert((m & 1) == 1);
+    mod = m;
+    n2 = -u64(m) % m;
+    r = get_r();
+    assert(r * mod == 1);
+  }
+
+  u32 a;
+
+  ArbitraryLazyMontgomeryModInt() : a(0) {}
+  ArbitraryLazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
+  }
+
+  mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
+    return *this;
+  }
+
+  mint &operator/=(const mint &b) {
+    *this *= b.inverse();
+    return *this;
+  }
+
+  mint operator+(const mint &b) const { return mint(*this) += b; }
+  mint operator-(const mint &b) const { return mint(*this) -= b; }
+  mint operator*(const mint &b) const { return mint(*this) *= b; }
+  mint operator/(const mint &b) const { return mint(*this) /= b; }
+  bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
+  }
+  bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  mint operator-() const { return mint() - mint(*this); }
+
+  mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
+    }
+    return ret;
+  }
+
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
+  }
+
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = ArbitraryLazyMontgomeryModInt(t);
+    return (is);
+  }
+
+  mint inverse() const { return pow(mod - 2); }
+
+  u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
+
+  static u32 get_mod() { return mod; }
+};
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
+typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
+#line 3 "ntt/arbitrary-ntt.hpp"
+using namespace std;
+
 #line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 
@@ -471,9 +579,6 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 get_mod() { return mod; }
 };
-#line 3 "ntt/arbitrary-ntt.hpp"
-using namespace std;
-
 #line 3 "ntt/ntt-avx2.hpp"
 using namespace std;
 
@@ -1212,13 +1317,14 @@ vector<LazyMontgomeryModInt<mod>> multiply(
 }
 */
 }  // namespace ArbitraryNTT
-#line 6 "verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp"
+#line 6 "verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp"
 
-constexpr int MOD = 1000000007;
-using mint = LazyMontgomeryModInt<MOD>;
+int MOD = 1000000007;
+using mint = ArbitraryLazyMontgomeryModInt;
 using vm = vector<mint>;
 
 void solve() {
+  mint::set_mod(MOD);
   ini(N, M);
   vm a(N), b(M);
   in(a, b);
@@ -1229,5 +1335,5 @@ void solve() {
 ```
 {% endraw %}
 
-<a href="../../index.html">Back to top page</a>
+<a href="../../../index.html">Back to top page</a>
 
