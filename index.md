@@ -109,6 +109,7 @@ layout: default
 * :warning: <a href="library/math/rational-number.hpp.html">math/rational-number.hpp</a>
 * :warning: <a href="library/math/semiring.hpp.html">math/semiring.hpp</a>
 * :warning: <a href="library/math/walsh-hadamard-transform.hpp.html">math/walsh-hadamard-transform.hpp</a>
+* :warning: <a href="library/math/zeta-mobius-transform.cpp.html">math/zeta-mobius-transform.cpp</a>
 
 
 <div id="bc957e26ff41470c556ee5d09e96880b"></div>
@@ -204,7 +205,6 @@ layout: default
 
 ## Verify Files
 
-* :x: <a href="verify/math/zeta-mobius-transform.test.hpp.html">math/zeta-mobius-transform.test.hpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp</a>
