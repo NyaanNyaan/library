@@ -118,6 +118,8 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0789.test.cpp.html">verify/verify-yuki/yuki-0789.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp.html">verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>

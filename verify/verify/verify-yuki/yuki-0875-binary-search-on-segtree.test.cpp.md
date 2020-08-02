@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
+# :heavy_check_mark: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#4164944468408d7a42ddd5d21630208a">verify/verify-yuki</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-03 00:31:58+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
+* see: <a href="https://yukicoder.me/problems/no/875">https://yukicoder.me/problems/no/875</a>
 
 
 ## Depends on
@@ -48,26 +48,31 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+#define PROBLEM "https://yukicoder.me/problems/no/875"
 
 #include "../../competitive-template.hpp"
 #include "../../segment-tree/segment-tree.hpp"
 
 void solve() {
   ini(N, Q);
-  auto f = [](int a, int b) { return a + b; };
-  SegmentTree<int, decltype(f)> seg(N, f, 0);
+  vi a(N);
+  in(a);
+  auto f = [](int a, int b) { return min(a, b); };
+  SegmentTree<int, decltype(f)> seg(a, f, inf);
   rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(i, a);
-      i--;
-      seg.add(i, a);
+    ini(c, l, r);
+    if (c == 1) {
+      l--, r--;
+      int vl = seg[l];
+      seg.update(l, seg[r]);
+      seg.update(r, vl);
     } else {
-      ini(x, y);
-      x--;
-      out(seg.query(x, y));
+      l--;
+      int mn = seg.query(l, r);
+      int a1 = seg.find_first(l, [&](int n) { return n <= mn; });
+      int a2 = seg.find_last(r, [&](int n) { return n <= mn; });
+      assert(a1 == a2);
+      out(a1 + 1);
     }
   }
 }
@@ -77,9 +82,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
+#line 1 "verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp"
+#define PROBLEM "https://yukicoder.me/problems/no/875"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -493,22 +497,28 @@ struct SegmentTree {
     return -1;
   }
 };
-#line 6 "verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp"
+#line 5 "verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp"
 
 void solve() {
   ini(N, Q);
-  auto f = [](int a, int b) { return a + b; };
-  SegmentTree<int, decltype(f)> seg(N, f, 0);
+  vi a(N);
+  in(a);
+  auto f = [](int a, int b) { return min(a, b); };
+  SegmentTree<int, decltype(f)> seg(a, f, inf);
   rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(i, a);
-      i--;
-      seg.add(i, a);
+    ini(c, l, r);
+    if (c == 1) {
+      l--, r--;
+      int vl = seg[l];
+      seg.update(l, seg[r]);
+      seg.update(r, vl);
     } else {
-      ini(x, y);
-      x--;
-      out(seg.query(x, y));
+      l--;
+      int mn = seg.query(l, r);
+      int a1 = seg.find_first(l, [&](int n) { return n <= mn; });
+      int a2 = seg.find_last(r, [&](int n) { return n <= mn; });
+      assert(a1 == a2);
+      out(a1 + 1);
     }
   }
 }

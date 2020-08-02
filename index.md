@@ -108,6 +108,7 @@ layout: default
 * :warning: <a href="library/math/matrix.hpp.html">math/matrix.hpp</a>
 * :warning: <a href="library/math/rational-number.hpp.html">math/rational-number.hpp</a>
 * :warning: <a href="library/math/semiring.hpp.html">math/semiring.hpp</a>
+* :warning: <a href="library/math/walsh-hadamard-transform.hpp.html">math/walsh-hadamard-transform.hpp</a>
 
 
 <div id="bc957e26ff41470c556ee5d09e96880b"></div>
@@ -156,7 +157,7 @@ layout: default
 ### segment-tree
 
 * :warning: <a href="library/segment-tree/dynamic-li-chao-tree.hpp.html">segment-tree/dynamic-li-chao-tree.hpp</a>
-* :warning: <a href="library/segment-tree/dynamic-segment-tree.hpp.html">segment-tree/dynamic-segment-tree.hpp</a>
+* :heavy_check_mark: <a href="library/segment-tree/dynamic-segment-tree.hpp.html">segment-tree/dynamic-segment-tree.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/lazy-segment-tree.hpp.html">segment-tree/lazy-segment-tree.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/li-chao-tree.hpp.html">segment-tree/li-chao-tree.hpp</a>
 * :heavy_check_mark: <a href="library/segment-tree/persistent-segment-tree.hpp.html">永続セグメント木 <small>(segment-tree/persistent-segment-tree.hpp)</small></a>
@@ -203,6 +204,7 @@ layout: default
 
 ## Verify Files
 
+* :x: <a href="verify/math/zeta-mobius-transform.test.hpp.html">math/zeta-mobius-transform.test.hpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp</a>
@@ -283,6 +285,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0789.test.cpp.html">verify/verify-yuki/yuki-0789.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp.html">verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
