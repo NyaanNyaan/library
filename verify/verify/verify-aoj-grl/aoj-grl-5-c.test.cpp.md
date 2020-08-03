@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-5-c.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:45:41+09:00
+    - Last commit date: 2020-08-03 20:37:40+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C</a>
@@ -545,6 +545,27 @@ struct HeavyLightDecomposition {
     }
   }
 
+  /*
+  // 非可換 monoid query 未verify
+  template <typename F>
+  void uncommutable_edge_query(int u, int v, const F& f) {
+    while (1) {
+      if (nxt[u] != nxt[v]) {
+        if (in[u] > in[v]) {
+          f(in[u], in[nxt[u]] + 1, true);
+          u = par[nxt[u]];
+        } else {
+          f(in[nxt[v]], in[v] + 1, false);
+          v = par[nxt[v]];
+        }
+      } else {
+        if (u != v) f(in[u] + 1, in[v] + 1);
+        break;
+      }
+    }
+  }
+  */
+
   template <typename F>
   void node_query(int u, int v, const F& f) {
     while (1) {
@@ -554,6 +575,25 @@ struct HeavyLightDecomposition {
         v = par[nxt[v]];
       } else {
         f(in[u], in[v] + 1);
+        break;
+      }
+    }
+  }
+
+  // 非可換 monoid query 未verify
+  template <typename F>
+  void uncommutable_node_query(int u, int v, const F& f) {
+    while (1) {
+      if (nxt[u] != nxt[v]) {
+        if (in[u] > in[v]) {
+          f(in[u], in[nxt[u]] + 1, true);
+          u = par[nxt[u]];
+        } else {
+          f(in[nxt[v]], in[v] + 1, false);
+          v = par[nxt[v]];
+        }
+      } else {
+        if (u != v) f(in[u] + 1, in[v] + 1, true);
         break;
       }
     }

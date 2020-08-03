@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: math/zeta-mobius-transform.cpp
+# :warning: math/zeta-mobius-transform.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
-* <a href="{{ site.github.repository_url }}/blob/master/math/zeta-mobius-transform.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-03 00:45:11+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/math/zeta-mobius-transform.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-03 20:37:40+09:00
 
 
 
@@ -99,7 +99,7 @@ void subset_mobius_transform(vector<T>& f) {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "math/zeta-mobius-transform.cpp"
+#line 2 "math/zeta-mobius-transform.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 

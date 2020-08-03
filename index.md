@@ -109,7 +109,7 @@ layout: default
 * :warning: <a href="library/math/rational-number.hpp.html">math/rational-number.hpp</a>
 * :warning: <a href="library/math/semiring.hpp.html">math/semiring.hpp</a>
 * :warning: <a href="library/math/walsh-hadamard-transform.hpp.html">math/walsh-hadamard-transform.hpp</a>
-* :warning: <a href="library/math/zeta-mobius-transform.cpp.html">math/zeta-mobius-transform.cpp</a>
+* :warning: <a href="library/math/zeta-mobius-transform.hpp.html">math/zeta-mobius-transform.hpp</a>
 
 
 <div id="bc957e26ff41470c556ee5d09e96880b"></div>
