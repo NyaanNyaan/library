@@ -74,6 +74,7 @@
 "verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp": "2020-08-02 17:27:04 +0900",
 "verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp": "2020-08-02 17:27:04 +0900",
 "verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp": "2020-08-01 15:16:50 +0900",
+"verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp": "2020-08-04 14:33:46 +0900",
 "verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-other/yosupo-suffix-array.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp": "2020-08-01 15:16:50 +0900",
