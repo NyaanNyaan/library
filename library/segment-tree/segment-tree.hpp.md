@@ -44,6 +44,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify/verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp.html">verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp</a>
 
 

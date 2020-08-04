@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-5-e.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 01:07:13+09:00
+    - Last commit date: 2020-08-05 02:19:06+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E</a>
@@ -759,26 +759,29 @@ struct HeavyLightDecomposition {
     }
   }
 
-  /*
-  // 非可換 monoid query 未verify
+  // TODO : verify
   template <typename F>
   void uncommutable_edge_query(int u, int v, const F& f) {
     while (1) {
       if (nxt[u] != nxt[v]) {
         if (in[u] > in[v]) {
-          f(in[u], in[nxt[u]] + 1, true);
+          f(in[u] + 1, in[nxt[u]], true);
           u = par[nxt[u]];
         } else {
           f(in[nxt[v]], in[v] + 1, false);
           v = par[nxt[v]];
         }
       } else {
-        if (u != v) f(in[u] + 1, in[v] + 1);
+        if (in[u] != in[v]) {
+          if (in[u] > in[v])
+            f(in[u] + 1, in[v] + 1, true);
+          else
+            f(in[u] + 1, in[v] + 1, true);
+        }
         break;
       }
     }
   }
-  */
 
   template <typename F>
   void node_query(int u, int v, const F& f) {
@@ -794,20 +797,22 @@ struct HeavyLightDecomposition {
     }
   }
 
-  // 非可換 monoid query 未verify
   template <typename F>
   void uncommutable_node_query(int u, int v, const F& f) {
     while (1) {
       if (nxt[u] != nxt[v]) {
         if (in[u] > in[v]) {
-          f(in[u], in[nxt[u]] + 1, true);
+          f(in[u] + 1, in[nxt[u]], true);
           u = par[nxt[u]];
         } else {
           f(in[nxt[v]], in[v] + 1, false);
           v = par[nxt[v]];
         }
       } else {
-        f(in[u], in[v] + 1, true);
+        if (in[u] > in[v])
+          f(in[u] + 1, in[v], true);
+        else
+          f(in[u], in[v] + 1, true);
         break;
       }
     }
