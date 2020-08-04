@@ -117,6 +117,7 @@ layout: default
 ### misc
 
 * :warning: <a href="library/misc/compress.hpp.html">misc/compress.hpp</a>
+* :heavy_check_mark: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
 * :warning: <a href="library/misc/mo.hpp.html">misc/mo.hpp</a>
 * :warning: <a href="library/misc/rng.hpp.html">misc/rng.hpp</a>
 * :warning: <a href="library/misc/simulated-annealing.hpp.html">misc/simulated-annealing.hpp</a>
@@ -280,6 +281,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp.html">verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify/verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
