@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-03 20:37:40+09:00
+    - Last commit date: 2020-08-05 01:07:13+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/vertex_add_path_sum">https://judge.yosupo.jp/problem/vertex_add_path_sum</a>
@@ -716,7 +716,7 @@ struct HeavyLightDecomposition {
           v = par[nxt[v]];
         }
       } else {
-        if (u != v) f(in[u] + 1, in[v] + 1, true);
+        f(in[u], in[v] + 1, true);
         break;
       }
     }

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/taylor-shift.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-04 18:24:47+09:00
+    - Last commit date: 2020-08-05 01:10:03+09:00
 
 
 
@@ -72,6 +72,7 @@ $$=\sum_{j=0}^N\frac{x^j}{(N-j)!}\sum_{m=0}^j\frac{a^{j-m}}{(j-m)!}\left((N-m)!f
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#pragma once
 #include "./formal-power-series.hpp"
 #include "../modulo/binomial.hpp"
 
@@ -307,7 +308,7 @@ struct Binomial {
     return r == 0 ? 1 : C(n + r - 1, r);
   }
 };
-#line 3 "fps/taylor-shift.hpp"
+#line 4 "fps/taylor-shift.hpp"
 
 // calculate F(x + a)
 template <typename mint>

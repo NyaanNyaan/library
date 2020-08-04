@@ -38,6 +38,7 @@ layout: default
 
 ## Required by
 
+* :warning: <a href="../fps/famous-series.hpp.html">fps/famous-series.hpp</a>
 * :heavy_check_mark: <a href="../fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 
 

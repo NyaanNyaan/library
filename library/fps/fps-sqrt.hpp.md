@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-sqrt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:57:58+09:00
+    - Last commit date: 2020-08-05 01:10:03+09:00
 
 
 
@@ -70,6 +70,7 @@ $$\leftrightarrow g \equiv \frac{1}{2}\left(\hat{g}+\frac{f}{\hat{g}}\right) \mo
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#pragma once
 #include "../fps/formal-power-series.hpp"
 #include "../modulo/mod-sqrt.hpp"
 
@@ -377,7 +378,7 @@ struct ArbitraryLazyMontgomeryModInt {
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
-#line 2 "modulo/mod-sqrt.hpp"
+#line 3 "modulo/mod-sqrt.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   if (a == 0) return 0;
@@ -408,7 +409,7 @@ int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   }
   return x.get();
 }
-#line 3 "fps/fps-sqrt.hpp"
+#line 4 "fps/fps-sqrt.hpp"
 
 template <typename mint>
 FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {

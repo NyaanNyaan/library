@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5dcb4a1ea5a35da52691d50c8313c333">modulo</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modulo/mod-sqrt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+    - Last commit date: 2020-08-05 01:10:03+09:00
 
 
 
@@ -57,6 +57,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#pragma once
 #include "../modint/arbitrary-prime-modint.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
@@ -199,7 +200,7 @@ struct ArbitraryLazyMontgomeryModInt {
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
-#line 2 "modulo/mod-sqrt.hpp"
+#line 3 "modulo/mod-sqrt.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   if (a == 0) return 0;

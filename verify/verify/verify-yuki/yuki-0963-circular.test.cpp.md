@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#4164944468408d7a42ddd5d21630208a">verify/verify-yuki</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yuki/yuki-0963-circular.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:57:58+09:00
+    - Last commit date: 2020-08-05 01:10:03+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/no/963">https://yukicoder.me/problems/no/963</a>
@@ -379,8 +379,6 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 1 "fps/fps-circular.hpp"
-
 #line 3 "fps/formal-power-series.hpp"
 using namespace std;
 

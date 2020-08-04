@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-5-d.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-03 20:37:40+09:00
+    - Last commit date: 2020-08-05 01:07:13+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_D</a>
@@ -720,7 +720,7 @@ struct HeavyLightDecomposition {
           v = par[nxt[v]];
         }
       } else {
-        if (u != v) f(in[u] + 1, in[v] + 1, true);
+        f(in[u], in[v] + 1, true);
         break;
       }
     }

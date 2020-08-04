@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/differential-equation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+    - Last commit date: 2020-08-05 01:07:13+09:00
 
 
 
@@ -51,6 +51,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#pragma once
 #include "formal-power-series.hpp"
 
 // find f, saitsfying equation f' = g(f) mod x ^ deg
@@ -235,7 +236,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 2 "fps/differential-equation.hpp"
+#line 3 "fps/differential-equation.hpp"
 
 // find f, saitsfying equation f' = g(f) mod x ^ deg
 template <typename mint>

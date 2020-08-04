@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-circular.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:57:58+09:00
+    - Last commit date: 2020-08-05 01:10:03+09:00
 
 
 
@@ -66,7 +66,7 @@ $g \equiv \cos f, h \equiv \sin f \mod x^n$を求めたい。
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-
+#pragma once
 #include "../fps/formal-power-series.hpp"
 #include "../modint/montgomery-modint.hpp"
 
@@ -165,8 +165,6 @@ pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "fps/fps-circular.hpp"
-
 #line 2 "fps/formal-power-series.hpp"
 #include <bits/stdc++.h>
 using namespace std;

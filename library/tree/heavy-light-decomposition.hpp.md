@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/heavy-light-decomposition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-03 20:37:40+09:00
+    - Last commit date: 2020-08-05 01:07:13+09:00
 
 
 
@@ -177,7 +177,7 @@ struct HeavyLightDecomposition {
           v = par[nxt[v]];
         }
       } else {
-        if (u != v) f(in[u] + 1, in[v] + 1, true);
+        f(in[u], in[v] + 1, true);
         break;
       }
     }
@@ -421,7 +421,7 @@ struct HeavyLightDecomposition {
           v = par[nxt[v]];
         }
       } else {
-        if (u != v) f(in[u] + 1, in[v] + 1, true);
+        f(in[u], in[v] + 1, true);
         break;
       }
     }

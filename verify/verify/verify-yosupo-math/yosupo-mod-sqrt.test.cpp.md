@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 15:16:50+09:00
+    - Last commit date: 2020-08-05 01:10:03+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sqrt_mod">https://judge.yosupo.jp/problem/sqrt_mod</a>
@@ -473,7 +473,7 @@ struct ArbitraryLazyMontgomeryModInt {
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
 typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
-#line 2 "modulo/mod-sqrt.hpp"
+#line 3 "modulo/mod-sqrt.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   if (a == 0) return 0;

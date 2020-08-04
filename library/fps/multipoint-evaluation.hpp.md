@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/multipoint-evaluation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-02 00:26:11+09:00
+    - Last commit date: 2020-08-05 01:10:03+09:00
 
 
 
@@ -51,6 +51,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#pragma once
 #include "./formal-power-series.hpp"
 
 template <typename mint>
@@ -318,7 +319,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 2 "fps/multipoint-evaluation.hpp"
+#line 3 "fps/multipoint-evaluation.hpp"
 
 template <typename mint>
 struct ProductTree {
