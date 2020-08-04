@@ -50,6 +50,12 @@ inline void rd(T& x) {
   }
   if (minus) x = -x;
 }
+inline void rd() {}
+template <typename Head, typename... Tail>
+inline void rd(Head& head, Tail&... tail) {
+  rd(head);
+  rd(tail...);
+}
 
 inline void wt(char c) { obuf[por++] = c; }
 template <typename T>

@@ -153,11 +153,13 @@ pair<long long, long long> extgcd(long long a, long long b) {
 }
 
 // Check if n is Square Number
-bool isSquare(long long n) {
-  if (n == 0 || n == 1) return true;
+// true : return d s.t. d * d == n
+// false : return -1
+long long SqrtInt(long long n) {
+  if (n == 0 || n == 1) return n;
   long long d = (long long)sqrt(n) - 1;
   while (d * d < n) ++d;
-  return d * d == n;
+  return (d * d == n) ? d : -1;
 }
 
 // return a number of n's digit
