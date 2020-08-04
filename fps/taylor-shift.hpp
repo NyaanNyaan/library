@@ -17,3 +17,8 @@ FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
   for (int i = 0; i < N; i++) f[i] *= C.finv(i);
   return f;
 }
+
+/**
+ * @brief 平行移動
+ * @docs docs/fps-taylor-shift.md
+ */

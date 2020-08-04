@@ -127,14 +127,12 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 
 [fps/fps-circular.hpp](https://nyaannyaan.github.io/library/library/fps/fps-circular.hpp.html)にて解説。
 
-## 以下未実装
-
 ### 平行移動
 
-$g(x) = f(x+a)$となる$g(x)$を求める。書きかけ
+[fps/taylor-shift.md](https://nyaannyaan.github.io/library/library/fps/taylor-shift.hpp.html)にて解説。
 
 ### 階差(imos法)/累積和
 
 数列に対して階差を取る(imos法)、あるいはその逆に累積和を取ることを形式的冪級数の数式的な操作に置き換えると、それぞれ$1-x$を掛ける/割る操作に対応している。計算量$\mathrm{O}(N)$
 
-(ただし、除算のアルゴリズムは$x$の降べき順に値を決定するため、$x$の昇べき順に値を決める累積和とは異なるものである。よって数列を機械的に$1-x$で割ると$0$次の項が変なことになるので要注意。)
+(ただし、除算のアルゴリズムは$x$の降べき順に値を決定するため、$x$の昇べき順に値を決める累積和とは異なるものである。よって累積和を除算を使って求めようとすると$0$次の項が変なことになるので要注意。)
