@@ -25,15 +25,35 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: fps/taylor-shift.hpp
+# :heavy_check_mark: 平行移動 <small>(fps/taylor-shift.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/taylor-shift.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-04 16:28:18+09:00
+    - Last commit date: 2020-08-04 18:24:47+09:00
 
 
+
+
+### fps-平行移動
+
+$N$次の多項式$f(x)$に対して$g(x) = f(x+a)$となる$g(x)$を求める。
+これは、
+
+$$f(x+a) = \sum_{n=0}^N f_n(x+a)^n$$
+
+$$=\sum_{i=0}^Nx^i\sum_{n=i}^N(a^{n-i}f_n\ _nC_i)$$
+
+$m=N-n,j=N-i$とおいて
+
+$$=\sum_{j=0}^N\frac{x^j}{(N-j)!}\sum_{m=0}^j\frac{a^{j-m}}{(j-m)!}\left((N-m)!f_{N-m}\right)$$
+
+と変形できるので畳み込みに帰着される。
+
+#### 使い方
+
+- `TaylorShift(f, a, C, deg)`: 多項式$f$について$f(x+a)$をdeg次の項まで求める。CにはBinomial構造体を渡す。
 
 
 ## Depends on
@@ -71,6 +91,11 @@ FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
   for (int i = 0; i < N; i++) f[i] *= C.finv(i);
   return f;
 }
+
+/**
+ * @brief 平行移動
+ * @docs docs/fps-taylor-shift.md
+ */
 
 ```
 {% endraw %}
@@ -300,6 +325,11 @@ FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
   for (int i = 0; i < N; i++) f[i] *= C.finv(i);
   return f;
 }
+
+/**
+ * @brief 平行移動
+ * @docs docs/fps-taylor-shift.md
+ */
 
 ```
 {% endraw %}

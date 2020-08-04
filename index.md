@@ -71,7 +71,7 @@ layout: default
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="library/fps/taylor-shift.hpp.html">fps/taylor-shift.hpp</a>
+* :heavy_check_mark: <a href="library/fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/utility.hpp.html">fps/utility.hpp</a>
 
 

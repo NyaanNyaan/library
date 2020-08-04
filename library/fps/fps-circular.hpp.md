@@ -46,7 +46,7 @@ $g \equiv \cos f, h \equiv \sin f \mod x^n$を求めたい。
 
 #### 使い方
 
-- `circular(fre, fim, deg)` : $Re[f]=fre,Im[f]=fim$であるFPS $f$について$\cos f,\sin f$を求める。
+- `circular(fre, fim, deg)` : $Re[f]=fre,Im[f]=fim$であるFPS $f$について$\cos f,\sin f$をdeg次の項まで求める。
 
 
 ## Depends on

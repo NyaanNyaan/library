@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-04 16:28:18+09:00
+    - Last commit date: 2020-08-04 18:24:47+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/polynomial_taylor_shift">https://judge.yosupo.jp/problem/polynomial_taylor_shift</a>
@@ -42,7 +42,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../../library/fps/taylor-shift.hpp.html">fps/taylor-shift.hpp</a>
+* :heavy_check_mark: <a href="../../../library/fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
@@ -1517,6 +1517,11 @@ FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
   for (int i = 0; i < N; i++) f[i] *= C.finv(i);
   return f;
 }
+
+/**
+ * @brief 平行移動
+ * @docs docs/fps-taylor-shift.md
+ */
 #line 9 "verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp"
 
 constexpr int MOD9 = 998244353;

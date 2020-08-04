@@ -38,7 +38,7 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="../fps/taylor-shift.hpp.html">fps/taylor-shift.hpp</a>
+* :heavy_check_mark: <a href="../fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 
 
 ## Verified with

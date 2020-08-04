@@ -36,7 +36,7 @@ layout: default
 
 
 
-# 形式的冪級数の平方根
+# fps-平方根
 
 $f$は$t^2=f_0$を満たす$t$が存在する多項式とする。このとき$g \equiv \sqrt{f} \mod x^n$となる$g$を求めたい。
 
@@ -50,7 +50,7 @@ $$\leftrightarrow g \equiv \frac{1}{2}\left(\hat{g}+\frac{f}{\hat{g}}\right) \mo
 
 #### 使い方
 
-- `sqrt(f, deg)`: FPSである$f$について$\sqrt f$を求める。
+- `sqrt(f, deg)`: FPSである$f$について$\sqrt f$をdeg次の項まで求める。
 
 
 ## Depends on
