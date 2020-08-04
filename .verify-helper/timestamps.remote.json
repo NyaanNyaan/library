@@ -58,6 +58,7 @@
 "verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp": "2020-08-01 13:57:58 +0900",
 "verify/verify-yosupo-fps/yosupo-pow.test.cpp": "2020-08-01 13:57:58 +0900",
 "verify/verify-yosupo-fps/yosupo-sqrt.test.cpp": "2020-08-01 13:57:58 +0900",
+"verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp": "2020-08-04 16:28:18 +0900",
 "verify/verify-yosupo-graph/yosupo-cartesian.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-graph/yosupo-diameter.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp": "2020-08-03 20:37:40 +0900",
