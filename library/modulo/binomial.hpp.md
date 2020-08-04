@@ -36,8 +36,14 @@ layout: default
 
 
 
+## Required by
+
+* :heavy_check_mark: <a href="../fps/taylor-shift.hpp.html">fps/taylor-shift.hpp</a>
+
+
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
 
