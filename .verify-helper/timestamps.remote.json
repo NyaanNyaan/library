@@ -44,6 +44,7 @@
 "verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp": "2020-08-01 15:08:31 +0900",
 "verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp": "2020-08-01 16:01:37 +0900",
 "verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp": "2020-08-02 17:27:04 +0900",
+"verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp": "2020-08-04 15:27:09 +0900",
 "verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp": "2020-08-01 15:08:31 +0900",
 "verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp": "2020-08-03 20:37:40 +0900",
 "verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp": "2020-08-03 20:37:40 +0900",
