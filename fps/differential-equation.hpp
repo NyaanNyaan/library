@@ -1,3 +1,4 @@
+#pragma once
 #include "formal-power-series.hpp"
 
 // find f, saitsfying equation f' = g(f) mod x ^ deg

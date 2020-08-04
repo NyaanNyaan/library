@@ -118,7 +118,7 @@ struct HeavyLightDecomposition {
           v = par[nxt[v]];
         }
       } else {
-        if (u != v) f(in[u] + 1, in[v] + 1, true);
+        f(in[u], in[v] + 1, true);
         break;
       }
     }
