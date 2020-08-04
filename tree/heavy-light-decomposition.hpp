@@ -70,26 +70,29 @@ struct HeavyLightDecomposition {
     }
   }
 
-  /*
-  // 非可換 monoid query 未verify
+  // TODO : verify
   template <typename F>
   void uncommutable_edge_query(int u, int v, const F& f) {
     while (1) {
       if (nxt[u] != nxt[v]) {
         if (in[u] > in[v]) {
-          f(in[u], in[nxt[u]] + 1, true);
+          f(in[u] + 1, in[nxt[u]], true);
           u = par[nxt[u]];
         } else {
           f(in[nxt[v]], in[v] + 1, false);
           v = par[nxt[v]];
         }
       } else {
-        if (u != v) f(in[u] + 1, in[v] + 1);
+        if (in[u] != in[v]) {
+          if (in[u] > in[v])
+            f(in[u] + 1, in[v] + 1, true);
+          else
+            f(in[u] + 1, in[v] + 1, true);
+        }
         break;
       }
     }
   }
-  */
 
   template <typename F>
   void node_query(int u, int v, const F& f) {
@@ -105,20 +108,22 @@ struct HeavyLightDecomposition {
     }
   }
 
-  // 非可換 monoid query 未verify
   template <typename F>
   void uncommutable_node_query(int u, int v, const F& f) {
     while (1) {
       if (nxt[u] != nxt[v]) {
         if (in[u] > in[v]) {
-          f(in[u], in[nxt[u]] + 1, true);
+          f(in[u] + 1, in[nxt[u]], true);
           u = par[nxt[u]];
         } else {
           f(in[nxt[v]], in[v] + 1, false);
           v = par[nxt[v]];
         }
       } else {
-        f(in[u], in[v] + 1, true);
+        if (in[u] > in[v])
+          f(in[u] + 1, in[v], true);
+        else
+          f(in[u], in[v] + 1, true);
         break;
       }
     }
