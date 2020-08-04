@@ -83,6 +83,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>

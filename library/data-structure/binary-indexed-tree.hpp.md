@@ -47,6 +47,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
 
 
 ## Code

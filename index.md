@@ -116,9 +116,9 @@ layout: default
 
 ### misc
 
-* :warning: <a href="library/misc/compress.hpp.html">misc/compress.hpp</a>
+* :heavy_check_mark: <a href="library/misc/compress.hpp.html">misc/compress.hpp</a>
 * :heavy_check_mark: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :warning: <a href="library/misc/mo.hpp.html">misc/mo.hpp</a>
+* :heavy_check_mark: <a href="library/misc/mo.hpp.html">misc/mo.hpp</a>
 * :warning: <a href="library/misc/rng.hpp.html">misc/rng.hpp</a>
 * :warning: <a href="library/misc/simulated-annealing.hpp.html">misc/simulated-annealing.hpp</a>
 * :warning: <a href="library/misc/timer.hpp.html">misc/timer.hpp</a>
@@ -251,6 +251,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>
