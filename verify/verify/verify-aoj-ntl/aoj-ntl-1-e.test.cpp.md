@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#b501e8320d2b88d7788be7181d2f6d20">verify/verify-aoj-ntl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:45:41+09:00
+    - Last commit date: 2020-08-05 03:59:34+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_E">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_E</a>
@@ -524,11 +524,13 @@ pair<long long, long long> extgcd(long long a, long long b) {
 }
 
 // Check if n is Square Number
-bool isSquare(long long n) {
-  if (n == 0 || n == 1) return true;
+// true : return d s.t. d * d == n
+// false : return -1
+long long SqrtInt(long long n) {
+  if (n == 0 || n == 1) return n;
   long long d = (long long)sqrt(n) - 1;
   while (d * d < n) ++d;
-  return d * d == n;
+  return (d * d == n) ? d : -1;
 }
 
 // return a number of n's digit

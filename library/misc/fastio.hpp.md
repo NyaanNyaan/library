@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#bc957e26ff41470c556ee5d09e96880b">misc</a>
 * <a href="{{ site.github.repository_url }}/blob/master/misc/fastio.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-04 14:33:46+09:00
+    - Last commit date: 2020-08-05 03:59:34+09:00
 
 
 
@@ -41,6 +41,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-mod-log.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-log.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp.html">verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp</a>
 
 
@@ -100,6 +101,12 @@ inline void rd(T& x) {
     c = ibuf[pil++];
   }
   if (minus) x = -x;
+}
+inline void rd() {}
+template <typename Head, typename... Tail>
+inline void rd(Head& head, Tail&... tail) {
+  rd(head);
+  rd(tail...);
 }
 
 inline void wt(char c) { obuf[por++] = c; }
@@ -192,6 +199,12 @@ inline void rd(T& x) {
     c = ibuf[pil++];
   }
   if (minus) x = -x;
+}
+inline void rd() {}
+template <typename Head, typename... Tail>
+inline void rd(Head& head, Tail&... tail) {
+  rd(head);
+  rd(tail...);
 }
 
 inline void wt(char c) { obuf[por++] = c; }

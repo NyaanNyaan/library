@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#d39daa9a5438d03dc407439811d187a2">verify/verify-yosupo-other</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-04 14:33:46+09:00
+    - Last commit date: 2020-08-05 03:59:34+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/many_aplusb">https://judge.yosupo.jp/problem/many_aplusb</a>
@@ -423,6 +423,12 @@ inline void rd(T& x) {
     c = ibuf[pil++];
   }
   if (minus) x = -x;
+}
+inline void rd() {}
+template <typename Head, typename... Tail>
+inline void rd(Head& head, Tail&... tail) {
+  rd(head);
+  rd(tail...);
 }
 
 inline void wt(char c) { obuf[por++] = c; }

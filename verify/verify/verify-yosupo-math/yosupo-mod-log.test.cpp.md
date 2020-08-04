@@ -25,22 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#b501e8320d2b88d7788be7181d2f6d20">verify/verify-aoj-ntl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-mod-log.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-05 03:59:34+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C</a>
+* see: <a href="https://judge.yosupo.jp/problem/discrete_logarithm_mod">https://judge.yosupo.jp/problem/discrete_logarithm_mod</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
+* :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulo/mod-log.hpp.html">modulo/mod-log.hpp</a>
 
 
 ## Code
@@ -48,20 +50,21 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C"
+#define PROBLEM "https://judge.yosupo.jp/problem/discrete_logarithm_mod"
 
 #include "../../competitive-template.hpp"
-#include "../../math/elementary-function.hpp"
+#include "../../misc/fastio.hpp"
+#include "../../modulo/mod-log.hpp"
 
 void solve() {
-  ini(N);
-  ll ans = 1;
-  rep(i, N) {
-    ini(n);
-    ans = lcm(ans, n);
+  int T;
+  rd(T);
+  rep(_, T) {
+    ll x, y, m;
+    rd(x, y, m);
+    wt(mod_log(x, y, m));
+    wt('\n');
   }
-  out(ans);
 }
 ```
 {% endraw %}
@@ -69,9 +72,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C"
+#line 1 "verify/verify-yosupo-math/yosupo-mod-log.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/discrete_logarithm_mod"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -373,6 +375,100 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
+#line 3 "misc/fastio.hpp"
+using namespace std;
+
+namespace fastio {
+static constexpr int SZ = 1 << 17;
+char ibuf[SZ], obuf[SZ];
+int pil = 0, pir = 0, por = 0;
+
+struct Pre {
+  char num[40000];
+  constexpr Pre() : num() {
+    for (int i = 0; i < 10000; i++) {
+      int n = i;
+      for (int j = 3; j >= 0; j--) {
+        num[i * 4 + j] = n % 10 + '0';
+        n /= 10;
+      }
+    }
+  }
+} constexpr pre;
+
+inline void load() {
+  memcpy(ibuf, ibuf + pil, pir - pil);
+  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);
+  pil = 0;
+}
+inline void flush() {
+  fwrite(obuf, 1, por, stdout);
+  por = 0;
+}
+
+inline void rd(char& c) { c = ibuf[pil++]; }
+template <typename T>
+inline void rd(T& x) {
+  if (pil + 32 > pir) load();
+  char c;
+  do
+    c = ibuf[pil++];
+  while (c < '-');
+  bool minus = 0;
+  if (c == '-') {
+    minus = 1;
+    c = ibuf[pil++];
+  }
+  x = 0;
+  while (c >= '0') {
+    x = x * 10 + (c & 15);
+    c = ibuf[pil++];
+  }
+  if (minus) x = -x;
+}
+inline void rd() {}
+template <typename Head, typename... Tail>
+inline void rd(Head& head, Tail&... tail) {
+  rd(head);
+  rd(tail...);
+}
+
+inline void wt(char c) { obuf[por++] = c; }
+template <typename T>
+inline void wt(T x) {
+  if (por > SZ - 32) flush();
+  if (!x) {
+    obuf[por++] = '0';
+    return;
+  }
+  if (x < 0) {
+    obuf[por++] = '-';
+    x = -x;
+  }
+  int i = 12;
+  char buf[16];
+  while (x >= 10000) {
+    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);
+    x /= 10000;
+    i -= 4;
+  }
+  int d = x < 100 ? (x < 10 ? 1 : 2) : (x < 1000 ? 3 : 4);
+  memcpy(obuf + por, pre.num + x * 4 + 4 - d, d);
+  por += d;
+  memcpy(obuf + por, buf + i + 4, 12 - i);
+  por += 12 - i;
+}
+
+struct Dummy {
+  Dummy() { atexit(flush); }
+} dummy;
+
+}  // namespace fastio
+using fastio::rd;
+using fastio::wt;
+#line 3 "modulo/mod-log.hpp"
+using namespace std;
+
 #line 3 "math/elementary-function.hpp"
 using namespace std;
 
@@ -547,16 +643,46 @@ int isDigit(long long n, int zero = 1) {
   }
   return ret;
 }
-#line 6 "verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp"
+#line 6 "modulo/mod-log.hpp"
+
+int64_t mod_log(int64_t a, int64_t b, int64_t p) {
+  if ((a %= p) < 0) a += p;
+  if ((b %= p) < 0) b += p;
+  int64_t f, g, r = 1 % p;
+  for (f = 0; (g = __gcd(a, p)) > 1; ++f) {
+    if (b % g) return (r == b) ? f : -1;
+    b /= g;
+    p /= g;
+    (r *= (a / g)) %= p;
+  }
+  if (p == 1) return f;
+  auto ir = extgcd(r, p);
+  (b *= (ir.first + p)) %= p;
+  int64_t k = 0, ak = 1;
+  unordered_map<int64_t, int64_t> baby;
+  for (; k * k < p; ++k) {
+    if (!baby.count(ak)) baby[ak] = k;
+    (ak *= a) %= p;
+  }
+  auto iak = extgcd(ak, p);
+  if(iak.first < 0) iak.first += p;
+  for (int64_t i = 0; i < k; ++i) {
+    if (baby.count(b)) return f + i * k + baby[b];
+    (b *= iak.first) %= p;
+  }
+  return -1;
+}
+#line 6 "verify/verify-yosupo-math/yosupo-mod-log.test.cpp"
 
 void solve() {
-  ini(N);
-  ll ans = 1;
-  rep(i, N) {
-    ini(n);
-    ans = lcm(ans, n);
+  int T;
+  rd(T);
+  rep(_, T) {
+    ll x, y, m;
+    rd(x, y, m);
+    wt(mod_log(x, y, m));
+    wt('\n');
   }
-  out(ans);
 }
 
 ```

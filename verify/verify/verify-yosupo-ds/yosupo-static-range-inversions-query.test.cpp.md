@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-04 15:27:09+09:00
+    - Last commit date: 2020-08-05 03:59:34+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/static_range_inversions_query">https://judge.yosupo.jp/problem/static_range_inversions_query</a>
@@ -550,6 +550,12 @@ inline void rd(T& x) {
     c = ibuf[pil++];
   }
   if (minus) x = -x;
+}
+inline void rd() {}
+template <typename Head, typename... Tail>
+inline void rd(Head& head, Tail&... tail) {
+  rd(head);
+  rd(tail...);
 }
 
 inline void wt(char c) { obuf[por++] = c; }
