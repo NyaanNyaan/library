@@ -1,3 +1,4 @@
+#pragma once
 #include "../fps/formal-power-series.hpp"
 #include "../modulo/mod-sqrt.hpp"
 

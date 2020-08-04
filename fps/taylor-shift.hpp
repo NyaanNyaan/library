@@ -1,3 +1,4 @@
+#pragma once
 #include "./formal-power-series.hpp"
 #include "../modulo/binomial.hpp"
 

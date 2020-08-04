@@ -1,4 +1,4 @@
-
+#pragma once
 #include "../fps/formal-power-series.hpp"
 #include "../modint/montgomery-modint.hpp"
 

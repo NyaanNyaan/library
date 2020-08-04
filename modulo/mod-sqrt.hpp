@@ -1,3 +1,4 @@
+#pragma once
 #include "../modint/arbitrary-prime-modint.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
