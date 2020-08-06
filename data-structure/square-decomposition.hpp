@@ -2,7 +2,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 取得クエリのマージ関数をf、単位元をUNITとする
 template <typename MERGE, typename block, int B>
 struct SquareDecomposition {
   int N;
@@ -14,7 +13,6 @@ struct SquareDecomposition {
     for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
 
-  // 半開区間[ l , r )に対する更新クエリ
   void update(int l, int r, typename block::S x) {
     if (l / B == r / B) {
       sq[l / B].update_part(l % B, r % B, x);
@@ -25,7 +23,6 @@ struct SquareDecomposition {
     }
   }
 
-  // 半開区間[ l , r )に対する取得クエリ
   typename block::T query(int l, int r) {
     if (l / B == r / B) return sq[l / B].query_part(l % B, r % B);
     typename block::T ret = UNIT;

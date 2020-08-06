@@ -17,8 +17,8 @@
 ```cpp=
 struct block {
   // S 作用素の型 T 要素の型
-  using S = affine;
-  using T = affine;
+  using S = ;
+  using T = ;
 
   int i;
 
