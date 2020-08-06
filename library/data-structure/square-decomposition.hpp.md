@@ -25,15 +25,78 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: data-structure/square-decomposition.hpp
+# :heavy_check_mark: 平方分割 <small>(data-structure/square-decomposition.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/square-decomposition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-08-07 01:38:52+09:00
 
 
+
+
+## 平方分割
+
+要素数$N$の列を$\mathrm{O}(\sqrt(N))$個のバケットに分割して管理することで列上のクエリを高速に答えるアルゴリズムを平方分割と呼ぶ。
+
+セグメント木にない特長として、バケット上に重たいデータ構造を乗せることが出来るという点がある。例えば次の二つのクエリに答える問題を考える。
+
+- `add(l,r,x)` : $[a_l,a_r)$に$x$を足す
+- `count[l,r,x)` : $[a_l,a_r)$内にある$x$の個数を数える
+- $1 \leq l < r \leq N=10^5,$クエリ数$Q=10^5,a_i \leq 10^9, x \leq 10^9$
+
+この問題にセグメント木を適用するとノード上に大量のhashmapを乗せることになり計算量が悪化するが、平方分割ならばhashmapの空間計算量が$\mathrm{O}(N)$で抑えられるため$\mathrm{O}((N+Q)\sqrt{N})$で解くことが出来る。(range addは適切に遅延評価すればよい。)
+
+#### 使い方
+
+次のようなblockを作成して本体に乗せると上手く動く。
+
+```cpp=
+struct block {
+  // S 作用素の型 T 要素の型
+  using S = affine;
+  using T = affine;
+
+  int i;
+
+  block() {}
+
+  // i ... 何個目のブロックか
+  // i * B + j ... (jをブロック内のidxとして)全体でのidx
+  int idx(int j) const { return i * B + j; }
+  
+  // 変数とブロックの初期化を忘れない！
+  void init(int _) { 
+    i = _; 
+  }
+
+  void build() {
+
+  }
+
+  void update_all(S x) {
+
+  }
+
+  void update_part(int l, int r, S x) { 
+    
+    build(); 
+  }
+
+  T query_all() {
+
+  }
+
+  T query_part(int l, int r) {
+
+  }
+};
+```
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp.html">verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp</a>
 
 
 ## Code
@@ -45,82 +108,45 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 
-constexpr int B = 300;
-
-struct block{
-
-  // S 更新用 T 取得用
-  using S = long long;
-  using T = long long;
-
-  // 各種変数の初期化を忘れない！！！
-  block(){
-
-  }
-
-  void build(){
-
-  }
-
-  void update_all(S x){
-
-  }
-  
-  void update_part(int l,int r, S x){
-
-    build();
-  }
-
-  T query_all(){
-
-  }
-  
-  T query_part(int l,int r){
-  
-  }
-
-};
-
 // 取得クエリのマージ関数をf、単位元をUNITとする
-template <typename F> struct Sqd{
+template <typename MERGE, typename block, int B>
+struct SquareDecomposition {
   int N;
   vector<block> sq;
-  F f;
-  block::T UNIT;
-  Sqd(int N , F f, block::T UNIT) : N(N) , sq(N / B + 1) , f(f) , UNIT(UNIT) {
-    init();
-    for(auto &x : sq) x.build();
-  }
-
-  void init(){
-
+  MERGE merge;
+  typename block::T UNIT;
+  SquareDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
+      : N(N_), sq(N / B + 1), merge(merge_), UNIT(UNIT_) {
+    for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
 
   // 半開区間[ l , r )に対する更新クエリ
-  void update(int l , int r , block::S x){
-    if(l / B == r / B) {
-      sq[l / B].update_part(l % B , r % B , x);
-    }
-    else {
-      sq[l / B].update_part(l % B , B , x);
-      for(int i = l / B + 1 ; i < r / B ; i++) sq[i].update_all(x);
-      sq[r / B].update_part(0 , r % B , x);
+  void update(int l, int r, typename block::S x) {
+    if (l / B == r / B) {
+      sq[l / B].update_part(l % B, r % B, x);
+    } else {
+      sq[l / B].update_part(l % B, B, x);
+      for (int i = l / B + 1; i < r / B; i++) sq[i].update_all(x);
+      sq[r / B].update_part(0, r % B, x);
     }
   }
 
   // 半開区間[ l , r )に対する取得クエリ
-  block::T query(int l,int r){
-    if(l / B == r / B)
-      return sq[l / B].query_part(l % B , r % B);
-    block::T ret = UNIT;
-    ret = f( ret , sq[l / B].query_part(l % B , B) );
-    for(int i = l / B + 1 ; i < r / B ; i++) 
-      ret = f(ret , sq[i].query_all() );
-    ret = f( ret , sq[r / B].query_part(0 , r % B) );
+  typename block::T query(int l, int r) {
+    if (l / B == r / B) return sq[l / B].query_part(l % B, r % B);
+    typename block::T ret = UNIT;
+    ret = merge(ret, sq[l / B].query_part(l % B, B));
+    for (int i = l / B + 1; i < r / B; i++) ret = merge(ret, sq[i].query_all());
+    ret = merge(ret, sq[r / B].query_part(0, r % B));
     return ret;
   }
-
 };
+
+/**
+ * @brief 平方分割
+ * @docs docs/sqrt-dec.md
+ */
+
 ```
 {% endraw %}
 
@@ -131,82 +157,44 @@ template <typename F> struct Sqd{
 #include <bits/stdc++.h>
 using namespace std;
 
-constexpr int B = 300;
-
-struct block{
-
-  // S 更新用 T 取得用
-  using S = long long;
-  using T = long long;
-
-  // 各種変数の初期化を忘れない！！！
-  block(){
-
-  }
-
-  void build(){
-
-  }
-
-  void update_all(S x){
-
-  }
-  
-  void update_part(int l,int r, S x){
-
-    build();
-  }
-
-  T query_all(){
-
-  }
-  
-  T query_part(int l,int r){
-  
-  }
-
-};
-
 // 取得クエリのマージ関数をf、単位元をUNITとする
-template <typename F> struct Sqd{
+template <typename MERGE, typename block, int B>
+struct SquareDecomposition {
   int N;
   vector<block> sq;
-  F f;
-  block::T UNIT;
-  Sqd(int N , F f, block::T UNIT) : N(N) , sq(N / B + 1) , f(f) , UNIT(UNIT) {
-    init();
-    for(auto &x : sq) x.build();
-  }
-
-  void init(){
-
+  MERGE merge;
+  typename block::T UNIT;
+  SquareDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
+      : N(N_), sq(N / B + 1), merge(merge_), UNIT(UNIT_) {
+    for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
 
   // 半開区間[ l , r )に対する更新クエリ
-  void update(int l , int r , block::S x){
-    if(l / B == r / B) {
-      sq[l / B].update_part(l % B , r % B , x);
-    }
-    else {
-      sq[l / B].update_part(l % B , B , x);
-      for(int i = l / B + 1 ; i < r / B ; i++) sq[i].update_all(x);
-      sq[r / B].update_part(0 , r % B , x);
+  void update(int l, int r, typename block::S x) {
+    if (l / B == r / B) {
+      sq[l / B].update_part(l % B, r % B, x);
+    } else {
+      sq[l / B].update_part(l % B, B, x);
+      for (int i = l / B + 1; i < r / B; i++) sq[i].update_all(x);
+      sq[r / B].update_part(0, r % B, x);
     }
   }
 
   // 半開区間[ l , r )に対する取得クエリ
-  block::T query(int l,int r){
-    if(l / B == r / B)
-      return sq[l / B].query_part(l % B , r % B);
-    block::T ret = UNIT;
-    ret = f( ret , sq[l / B].query_part(l % B , B) );
-    for(int i = l / B + 1 ; i < r / B ; i++) 
-      ret = f(ret , sq[i].query_all() );
-    ret = f( ret , sq[r / B].query_part(0 , r % B) );
+  typename block::T query(int l, int r) {
+    if (l / B == r / B) return sq[l / B].query_part(l % B, r % B);
+    typename block::T ret = UNIT;
+    ret = merge(ret, sq[l / B].query_part(l % B, B));
+    for (int i = l / B + 1; i < r / B; i++) ret = merge(ret, sq[i].query_all());
+    ret = merge(ret, sq[r / B].query_part(0, r % B));
     return ret;
   }
-
 };
+
+/**
+ * @brief 平方分割
+ * @docs docs/sqrt-dec.md
+ */
 
 ```
 {% endraw %}

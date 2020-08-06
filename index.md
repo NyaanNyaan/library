@@ -56,7 +56,7 @@ layout: default
 * :heavy_check_mark: <a href="library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sliding-window-minimum.hpp.html">data-structure/sliding-window-minimum.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
-* :warning: <a href="library/data-structure/square-decomposition.hpp.html">data-structure/square-decomposition.hpp</a>
+* :heavy_check_mark: <a href="library/data-structure/square-decomposition.hpp.html">平方分割 <small>(data-structure/square-decomposition.hpp)</small></a>
 * :heavy_check_mark: <a href="library/data-structure/union-find-with-potential.hpp.html">data-structure/union-find-with-potential.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
 
@@ -255,6 +255,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp.html">verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp.html">verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
