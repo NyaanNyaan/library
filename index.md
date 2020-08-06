@@ -51,6 +51,7 @@ layout: default
 * :heavy_check_mark: <a href="library/data-structure/binary-trie.hpp.html">Binary Trie <small>(data-structure/binary-trie.hpp)</small></a>
 * :warning: <a href="library/data-structure/dynamic-binary-indexed-tree.hpp.html">data-structure/dynamic-binary-indexed-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/dynamic-union-find.hpp.html">data-structure/dynamic-union-find.hpp</a>
+* :warning: <a href="library/data-structure/randomized-binary-search-tree.hpp.html">data-structure/randomized-binary-search-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sliding-window-minimum.hpp.html">data-structure/sliding-window-minimum.hpp</a>
