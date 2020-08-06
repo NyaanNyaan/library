@@ -78,6 +78,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp.html">verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp.html">verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>

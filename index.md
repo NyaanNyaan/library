@@ -48,6 +48,7 @@ layout: default
 * :heavy_check_mark: <a href="library/data-structure/2d-binary-indexed-tree.hpp.html">data-structure/2d-binary-indexed-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/2d-cumulative-sum.hpp.html">data-structure/2d-cumulative-sum.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
+* :heavy_check_mark: <a href="library/data-structure/binary-trie.hpp.html">Binary Trie <small>(data-structure/binary-trie.hpp)</small></a>
 * :warning: <a href="library/data-structure/dynamic-binary-indexed-tree.hpp.html">data-structure/dynamic-binary-indexed-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/dynamic-union-find.hpp.html">data-structure/dynamic-union-find.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
@@ -249,6 +250,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp.html">verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp.html">verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
