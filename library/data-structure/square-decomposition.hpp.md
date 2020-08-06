@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/square-decomposition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-07 01:38:52+09:00
+    - Last commit date: 2020-08-07 01:46:09+09:00
 
 
 
@@ -55,8 +55,8 @@ layout: default
 ```cpp=
 struct block {
   // S 作用素の型 T 要素の型
-  using S = affine;
-  using T = affine;
+  using S = ;
+  using T = ;
 
   int i;
 
@@ -108,7 +108,6 @@ struct block {
 #include <bits/stdc++.h>
 using namespace std;
 
-// 取得クエリのマージ関数をf、単位元をUNITとする
 template <typename MERGE, typename block, int B>
 struct SquareDecomposition {
   int N;
@@ -120,7 +119,6 @@ struct SquareDecomposition {
     for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
 
-  // 半開区間[ l , r )に対する更新クエリ
   void update(int l, int r, typename block::S x) {
     if (l / B == r / B) {
       sq[l / B].update_part(l % B, r % B, x);
@@ -131,7 +129,6 @@ struct SquareDecomposition {
     }
   }
 
-  // 半開区間[ l , r )に対する取得クエリ
   typename block::T query(int l, int r) {
     if (l / B == r / B) return sq[l / B].query_part(l % B, r % B);
     typename block::T ret = UNIT;
@@ -157,7 +154,6 @@ struct SquareDecomposition {
 #include <bits/stdc++.h>
 using namespace std;
 
-// 取得クエリのマージ関数をf、単位元をUNITとする
 template <typename MERGE, typename block, int B>
 struct SquareDecomposition {
   int N;
@@ -169,7 +165,6 @@ struct SquareDecomposition {
     for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
 
-  // 半開区間[ l , r )に対する更新クエリ
   void update(int l, int r, typename block::S x) {
     if (l / B == r / B) {
       sq[l / B].update_part(l % B, r % B, x);
@@ -180,7 +175,6 @@ struct SquareDecomposition {
     }
   }
 
-  // 半開区間[ l , r )に対する取得クエリ
   typename block::T query(int l, int r) {
     if (l / B == r / B) return sq[l / B].query_part(l % B, r % B);
     typename block::T ret = UNIT;
