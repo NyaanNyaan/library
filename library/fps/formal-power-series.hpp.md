@@ -167,7 +167,7 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 
 ### 平行移動
 
-[fps/taylor-shift.md](https://nyaannyaan.github.io/library/library/fps/taylor-shift.hpp.html)にて解説。
+[fps/taylor-shift.hpp](https://nyaannyaan.github.io/library/library/fps/taylor-shift.hpp.html)にて解説。
 
 ### 階差(imos法)/累積和
 
