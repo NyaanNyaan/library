@@ -43,6 +43,7 @@
 "verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp": "2020-08-01 15:08:31 +0900",
 "verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp": "2020-08-02 17:27:04 +0900",
 "verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp": "2020-08-01 15:08:31 +0900",
+"verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp": "2020-08-07 01:38:52 +0900",
 "verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp": "2020-08-01 16:01:37 +0900",
 "verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp": "2020-08-02 17:27:04 +0900",
 "verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp": "2020-08-05 03:59:34 +0900",
