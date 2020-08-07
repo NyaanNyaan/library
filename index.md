@@ -83,6 +83,7 @@ layout: default
 ### geometry
 
 * :warning: <a href="library/geometry/geometry.hpp.html">geometry/geometry.hpp</a>
+* :heavy_check_mark: <a href="library/geometry/integer-geometry.hpp.html">geometry/integer-geometry.hpp</a>
 
 
 <div id="f8b0b924ebd7046dbfa85a856e4682c8"></div>
@@ -294,6 +295,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-argument-sort.test.cpp.html">verify/verify-yosupo-other/yosupo-argument-sort.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp.html">verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify/verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
