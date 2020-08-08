@@ -39,7 +39,9 @@ layout: default
 ## Required by
 
 * :heavy_check_mark: <a href="../fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
+* :warning: <a href="../math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
 * :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+* :warning: <a href="../verify/verify-yosupo-math/yosupo-factrization.hpp.html">verify/verify-yosupo-math/yosupo-factrization.hpp</a>
 
 
 ## Verified with

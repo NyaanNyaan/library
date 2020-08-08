@@ -31,9 +31,15 @@ layout: default
 
 * category: <a href="../../index.html#fb97f878c938d7517d3d9f7de68146e9">modint</a>
 * <a href="{{ site.github.repository_url }}/blob/master/modint/modint-montgomery64.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-08 23:18:56+09:00
+    - Last commit date: 2020-08-09 01:48:03+09:00
 
 
+
+
+## Required by
+
+* :warning: <a href="../math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
+* :warning: <a href="../verify/verify-yosupo-math/yosupo-factrization.hpp.html">verify/verify-yosupo-math/yosupo-factrization.hpp</a>
 
 
 ## Code
@@ -76,7 +82,7 @@ struct montgomery64 {
   montgomery64(const int64_t &b) : a(reduce((u128(b) + mod) * n2)){};
 
   static u64 reduce(const u128 &b) {
-    return (b + u128(u64(b) * u64(-r)) * mod) >> 32;
+    return (b + u128(u64(b) * u64(-r)) * mod) >> 64;
   }
 
   mint &operator+=(const mint &b) {
@@ -184,7 +190,7 @@ struct montgomery64 {
   montgomery64(const int64_t &b) : a(reduce((u128(b) + mod) * n2)){};
 
   static u64 reduce(const u128 &b) {
-    return (b + u128(u64(b) * u64(-r)) * mod) >> 32;
+    return (b + u128(u64(b) * u64(-r)) * mod) >> 64;
   }
 
   mint &operator+=(const mint &b) {

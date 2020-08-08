@@ -36,6 +36,11 @@ layout: default
 
 
 
+## Required by
+
+* :warning: <a href="verify/verify-yosupo-math/yosupo-factrization.hpp.html">verify/verify-yosupo-math/yosupo-factrization.hpp</a>
+
+
 ## Verified with
 
 * :heavy_check_mark: <a href="../verify/verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp</a>
