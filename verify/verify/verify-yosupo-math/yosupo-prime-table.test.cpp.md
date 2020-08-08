@@ -25,25 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: verify/verify-yosupo-math/yosupo-factrization.hpp
+# :heavy_check_mark: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-factrization.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-09 01:48:03+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-prime-table.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-09 02:39:23+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/factorize">https://judge.yosupo.jp/problem/factorize</a>
+* see: <a href="https://judge.yosupo.jp/problem/enumerate_primes">https://judge.yosupo.jp/problem/enumerate_primes</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../competitive-template.hpp.html">competitive-template.hpp</a>
-* :warning: <a href="../../math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
-* :heavy_check_mark: <a href="../../misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :heavy_check_mark: <a href="../../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :warning: <a href="../../modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/math/prime-table.hpp.html">math/prime-table.hpp</a>
+* :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
 
 
 ## Code
@@ -51,27 +49,26 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/factorize"
+#define PROBLEM "https://judge.yosupo.jp/problem/enumerate_primes"
 
 #include "../../competitive-template.hpp"
-#include "../../math/prime-factor.hpp"
+#include "../../math/prime-table.hpp"
 #include "../../misc/fastio.hpp"
 
 void solve() {
-  int Q;
-  rd(Q);
-  rep(_, Q) {
-    int64_t n;
-    rd(n);
-    auto prime = prime_factor(n);
-    sort(all(prime));
-    wt(sz(prime));
-    rep(i, sz(prime)) {
-      wt(' ');
-      wt(prime[i]);
-    }
-    wt('\n');
+  int N, A, B;
+  rd(N, A, B);
+  auto sieve = PrimeTable(N);
+  int x = (sz(sieve) + A - B - 1) / A;
+  wt(sz(sieve));
+  wt(' ');
+  wt(x);
+  wt('\n');
+  rep(i, x) {
+    if (i) wt(' ');
+    wt(sieve[i * A + B]);
   }
+  wt('\n');
 }
 ```
 {% endraw %}
@@ -79,8 +76,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-yosupo-math/yosupo-factrization.hpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/factorize"
+#line 1 "verify/verify-yosupo-math/yosupo-prime-table.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/enumerate_primes"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -382,280 +379,24 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "math/prime-factor.hpp"
+#line 3 "math/prime-table.hpp"
 using namespace std;
 
-#line 3 "modint/arbitrary-prime-modint.hpp"
-using namespace std;
-
-struct ArbitraryLazyMontgomeryModInt {
-  using mint = ArbitraryLazyMontgomeryModInt;
-  using i32 = int32_t;
-  using u32 = uint32_t;
-  using u64 = uint64_t;
-
-  static u32 mod;
-  static u32 r;
-  static u32 n2;
-
-  static u32 get_r() {
-    u32 ret = mod;
-    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
-    return ret;
+// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}
+vector<int> PrimeTable(int N) {
+  vector<bool> sieve(N / 2 + 1, 1);
+  for (int p = 5, d = 4, p2 = p * p;; p += d = 6 - d) {
+    if ((p2 = p * p) > N) break;
+    if (!sieve[p >> 1]) continue;
+    for (int q = p2, r = d * p, s = 6 * p; q <= N; q += r = s - r)
+      sieve[q >> 1] = 0;
   }
-
-  static void set_mod(u32 m) {
-    assert(m < (1 << 30));
-    assert((m & 1) == 1);
-    mod = m;
-    n2 = -u64(m) % m;
-    r = get_r();
-    assert(r * mod == 1);
-  }
-
-  u32 a;
-
-  ArbitraryLazyMontgomeryModInt() : a(0) {}
-  ArbitraryLazyMontgomeryModInt(const int64_t &b)
-      : a(reduce(u64(b % mod + mod) * n2)){};
-
-  static u32 reduce(const u64 &b) {
-    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
-  }
-
-  mint &operator+=(const mint &b) {
-    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  mint &operator-=(const mint &b) {
-    if (i32(a -= b.a) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  mint &operator*=(const mint &b) {
-    a = reduce(u64(a) * b.a);
-    return *this;
-  }
-
-  mint &operator/=(const mint &b) {
-    *this *= b.inverse();
-    return *this;
-  }
-
-  mint operator+(const mint &b) const { return mint(*this) += b; }
-  mint operator-(const mint &b) const { return mint(*this) -= b; }
-  mint operator*(const mint &b) const { return mint(*this) *= b; }
-  mint operator/(const mint &b) const { return mint(*this) /= b; }
-  bool operator==(const mint &b) const {
-    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
-  }
-  bool operator!=(const mint &b) const {
-    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
-  }
-  mint operator-() const { return mint() - mint(*this); }
-
-  mint pow(u64 n) const {
-    mint ret(1), mul(*this);
-    while (n > 0) {
-      if (n & 1) ret *= mul;
-      mul *= mul;
-      n >>= 1;
-    }
-    return ret;
-  }
-
-  friend ostream &operator<<(ostream &os, const mint &b) {
-    return os << b.get();
-  }
-
-  friend istream &operator>>(istream &is, mint &b) {
-    int64_t t;
-    is >> t;
-    b = ArbitraryLazyMontgomeryModInt(t);
-    return (is);
-  }
-
-  mint inverse() const { return pow(mod - 2); }
-
-  u32 get() const {
-    u32 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
-  static u32 get_mod() { return mod; }
-};
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::mod;
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::r;
-typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
-#line 3 "modint/modint-montgomery64.hpp"
-using namespace std;
-
-struct montgomery64 {
-  using mint = montgomery64;
-  using i64 = int64_t;
-  using u64 = uint64_t;
-  using u128 = __uint128_t;
-
-  static u64 mod;
-  static u64 r;
-  static u64 n2;
-
-  static u64 get_r() {
-    u64 ret = mod;
-    for (i64 i = 0; i < 5; ++i) ret *= 2 - mod * ret;
-    return ret;
-  }
-
-  static void set_mod(u64 m) {
-    assert(m < (1LL << 62));
-    assert((m & 1) == 1);
-    mod = m;
-    n2 = -u128(m) % m;
-    r = get_r();
-    assert(r * mod == 1);
-  }
-
-  u64 a;
-
-  montgomery64() : a(0) {}
-  montgomery64(const int64_t &b) : a(reduce((u128(b) + mod) * n2)){};
-
-  static u64 reduce(const u128 &b) {
-    return (b + u128(u64(b) * u64(-r)) * mod) >> 64;
-  }
-
-  mint &operator+=(const mint &b) {
-    if (i64(a += b.a - 2 * mod) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  mint &operator-=(const mint &b) {
-    if (i64(a -= b.a) < 0) a += 2 * mod;
-    return *this;
-  }
-
-  mint &operator*=(const mint &b) {
-    a = reduce(u128(a) * b.a);
-    return *this;
-  }
-
-  mint &operator/=(const mint &b) {
-    *this *= b.inverse();
-    return *this;
-  }
-
-  mint operator+(const mint &b) const { return mint(*this) += b; }
-  mint operator-(const mint &b) const { return mint(*this) -= b; }
-  mint operator*(const mint &b) const { return mint(*this) *= b; }
-  mint operator/(const mint &b) const { return mint(*this) /= b; }
-  bool operator==(const mint &b) const {
-    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
-  }
-  bool operator!=(const mint &b) const {
-    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
-  }
-  mint operator-() const { return mint() - mint(*this); }
-
-  mint pow(u128 n) const {
-    mint ret(1), mul(*this);
-    while (n > 0) {
-      if (n & 1) ret *= mul;
-      mul *= mul;
-      n >>= 1;
-    }
-    return ret;
-  }
-
-  friend ostream &operator<<(ostream &os, const mint &b) {
-    return os << b.get();
-  }
-
-  friend istream &operator>>(istream &is, mint &b) {
-    int64_t t;
-    is >> t;
-    b = montgomery64(t);
-    return (is);
-  }
-
-  mint inverse() const { return pow(mod - 2); }
-
-  u64 get() const {
-    u64 ret = reduce(a);
-    return ret >= mod ? ret - mod : ret;
-  }
-
-  static u64 get_mod() { return mod; }
-};
-typename montgomery64::u64 montgomery64::mod, montgomery64::r, montgomery64::n2;
-#line 7 "math/prime-factor.hpp"
-
-template <typename mint>
-bool miller_rabin(uint64_t n, vector<uint64_t> as) {
-  mint::set_mod(n);
-  uint64_t d = n - 1;
-  while (d % 2 == 0) d /= 2;
-  mint e{1}, rev{int64_t(n - 1)};
-  for (uint64_t a : as) {
-    if (n <= a) break;
-    uint64_t t = d;
-    mint y = mint(a).pow(t);
-    while (t != n - 1 && y != e && y != rev) {
-      y *= y;
-      t *= 2;
-    }
-    if (y != rev && t % 2 == 0) return false;
-  }
-  return true;
+  vector<int> ret{2, 3};
+  for (int p = 5, d = 4; p <= N; p += d = 6 - d)
+    if (sieve[p >> 1]) ret.push_back(p);
+  while (ret.back() > N) ret.pop_back();
+  return ret;
 }
-
-bool is_prime(uint64_t n) {
-  if (n == 2) return true;
-  if (n <= 1 || n % 2 == 0) return false;
-  if (n < (1LL << 30))
-    return miller_rabin<ArbitraryLazyMontgomeryModInt>(n, {2, 7, 61});
-  else
-    return miller_rabin<montgomery64>(
-        n, {2, 325, 9375, 28178, 450775, 9780504, 1795265022});
-}
-
-template <typename mint>
-uint64_t pollard_rho(uint64_t n) {
-  if (is_prime(n)) return n;
-  if (n % 2 == 0) return 2;
-  mint::set_mod(n);
-  uint64_t d;
-  mint one{1}, c{1};
-  auto f = [&](mint x) { return x * x + c; };
-  for (;; c += one) {
-    mint x{2}, y{2};
-    do {
-      x = f(x), y = f(f(y));
-      d = __gcd<uint64_t>((x - y).get(), n);
-    } while (d == 1);
-    if (d < n) return d;
-  }
-  assert(0);
-}
-
-vector<uint64_t> prime_factor(uint64_t n) {
-  if (n <= 1) return {};
-  uint64_t p;
-  if (n <= (1LL << 30))
-    p = pollard_rho<ArbitraryLazyMontgomeryModInt>(n);
-  else
-    p = pollard_rho<montgomery64>(n);
-  if (p == n) return {p};
-  auto l = prime_factor(p);
-  auto r = prime_factor(n / p);
-  copy(begin(r), end(r), back_inserter(l));
-  return l;
-}
-
-/**
- * @brief 高速素因数分解(Miller Rabin/Pollard's Rho)
- * @docs docs/prime-factorization.md
- */
 #line 3 "misc/fastio.hpp"
 using namespace std;
 
@@ -747,23 +488,22 @@ struct Dummy {
 }  // namespace fastio
 using fastio::rd;
 using fastio::wt;
-#line 6 "verify/verify-yosupo-math/yosupo-factrization.hpp"
+#line 6 "verify/verify-yosupo-math/yosupo-prime-table.test.cpp"
 
 void solve() {
-  int Q;
-  rd(Q);
-  rep(_, Q) {
-    int64_t n;
-    rd(n);
-    auto prime = prime_factor(n);
-    sort(all(prime));
-    wt(sz(prime));
-    rep(i, sz(prime)) {
-      wt(' ');
-      wt(prime[i]);
-    }
-    wt('\n');
+  int N, A, B;
+  rd(N, A, B);
+  auto sieve = PrimeTable(N);
+  int x = (sz(sieve) + A - B - 1) / A;
+  wt(sz(sieve));
+  wt(' ');
+  wt(x);
+  wt('\n');
+  rep(i, x) {
+    if (i) wt(' ');
+    wt(sieve[i * A + B]);
   }
+  wt('\n');
 }
 
 ```

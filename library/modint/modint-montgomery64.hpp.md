@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: modint/modint-montgomery64.hpp
+# :heavy_check_mark: modint/modint-montgomery64.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,8 +38,12 @@ layout: default
 
 ## Required by
 
-* :warning: <a href="../math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
-* :warning: <a href="../verify/verify-yosupo-math/yosupo-factrization.hpp.html">verify/verify-yosupo-math/yosupo-factrization.hpp</a>
+* :heavy_check_mark: <a href="../math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-factrization.test.cpp.html">verify/verify-yosupo-math/yosupo-factrization.test.cpp</a>
 
 
 ## Code

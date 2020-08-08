@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: 高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small>
+# :heavy_check_mark: 高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -73,12 +73,12 @@ $$a ^ {2^r \cdot d} \equiv -1 \mod p$$
 ## Depends on
 
 * :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :warning: <a href="../modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
+* :heavy_check_mark: <a href="../modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 
 
-## Required by
+## Verified with
 
-* :warning: <a href="../verify/verify-yosupo-math/yosupo-factrization.hpp.html">verify/verify-yosupo-math/yosupo-factrization.hpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-factrization.test.cpp.html">verify/verify-yosupo-math/yosupo-factrization.test.cpp</a>
 
 
 ## Code

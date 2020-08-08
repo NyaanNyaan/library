@@ -111,7 +111,8 @@ layout: default
 * :warning: <a href="library/math/grundy-number.hpp.html">math/grundy-number.hpp</a>
 * :warning: <a href="library/math/matrix-fast.hpp.html">math/matrix-fast.hpp</a>
 * :warning: <a href="library/math/matrix.hpp.html">math/matrix.hpp</a>
-* :warning: <a href="library/math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
+* :heavy_check_mark: <a href="library/math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
+* :heavy_check_mark: <a href="library/math/prime-table.hpp.html">math/prime-table.hpp</a>
 * :warning: <a href="library/math/rational-number.hpp.html">math/rational-number.hpp</a>
 * :warning: <a href="library/math/semiring.hpp.html">math/semiring.hpp</a>
 * :heavy_check_mark: <a href="library/math/sum_of_floor.hpp.html">math/sum_of_floor.hpp</a>
@@ -137,7 +138,7 @@ layout: default
 
 * :heavy_check_mark: <a href="library/modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :warning: <a href="library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
+* :heavy_check_mark: <a href="library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
@@ -213,13 +214,6 @@ layout: default
 * :heavy_check_mark: <a href="library/tree/rerooting.hpp.html">tree/rerooting.hpp</a>
 
 
-<div id="7298ccfe146a0dd6796a2b3f9ffabb95"></div>
-
-### verify/verify-yosupo-math
-
-* :warning: <a href="library/verify/verify-yosupo-math/yosupo-factrization.hpp.html">verify/verify-yosupo-math/yosupo-factrization.hpp</a>
-
-
 ## Verify Files
 
 * :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp</a>
@@ -291,9 +285,11 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp.html">verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-determinant.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-factrization.test.cpp.html">verify/verify-yosupo-math/yosupo-factrization.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify/verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-log.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-log.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-prime-table.test.cpp.html">verify/verify-yosupo-math/yosupo-prime-table.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
