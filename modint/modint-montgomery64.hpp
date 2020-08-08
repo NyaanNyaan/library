@@ -33,7 +33,7 @@ struct montgomery64 {
   montgomery64(const int64_t &b) : a(reduce((u128(b) + mod) * n2)){};
 
   static u64 reduce(const u128 &b) {
-    return (b + u128(u64(b) * u64(-r)) * mod) >> 32;
+    return (b + u128(u64(b) * u64(-r)) * mod) >> 64;
   }
 
   mint &operator+=(const mint &b) {
