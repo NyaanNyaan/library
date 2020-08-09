@@ -4,16 +4,18 @@ using namespace std;
 
 // Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}
 vector<int> PrimeTable(int N) {
-  vector<bool> sieve(N / 2 + 1, 1);
-  for (int p = 5, d = 4, p2 = p * p;; p += d = 6 - d) {
-    if ((p2 = p * p) > N) break;
-    if (!sieve[p >> 1]) continue;
-    for (int q = p2, r = d * p, s = 6 * p; q <= N; q += r = s - r)
-      sieve[q >> 1] = 0;
+  vector<bool> sieve(N / 3 + 1, 1);
+  for (int p = 5, d = 4, i = 1, sqn = int(sqrt(N) + 0.1); p <= sqn;
+       p += d = 6 - d, i++) {
+    if (!sieve[i]) continue;
+    for (int q = p * p / 3, r = d * p / 3 + (d * p % 3 == 2), s = 2 * p,
+             qe = sieve.size();
+         q < qe; q += r = s - r)
+      sieve[q] = 0;
   }
   vector<int> ret{2, 3};
-  for (int p = 5, d = 4; p <= N; p += d = 6 - d)
-    if (sieve[p >> 1]) ret.push_back(p);
-  while (ret.back() > N) ret.pop_back();
+  for (int p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)
+    if (sieve[i]) ret.push_back(p);
+  while (!ret.empty() && ret.back() > N) ret.pop_back();
   return ret;
 }
