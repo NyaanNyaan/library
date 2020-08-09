@@ -83,6 +83,17 @@ inline void wt(T x) {
   por += 12 - i;
 }
 
+inline void wt() {}
+template <typename Head, typename... Tail>
+inline void wt(Head head, Tail... tail) {
+  wt(head);
+  wt(tail...);
+}
+template<typename T>
+inline void wtn(T x){
+  wt(x, '\n');
+}
+
 struct Dummy {
   Dummy() { atexit(flush); }
 } dummy;
@@ -90,3 +101,4 @@ struct Dummy {
 }  // namespace fastio
 using fastio::rd;
 using fastio::wt;
+using fastio::wtn;
