@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/multipoint-evaluation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 01:10:03+09:00
+    - Last commit date: 2020-08-09 20:56:02+09:00
 
 
 
@@ -43,6 +43,7 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-interpolation.test.cpp.html">verify/verify-yosupo-fps/yosupo-interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-multieval.test.cpp.html">verify/verify-yosupo-fps/yosupo-multieval.test.cpp</a>
 
 
@@ -52,6 +53,9 @@ layout: default
 {% raw %}
 ```cpp
 #pragma once
+#include <bits/stdc++.h>
+using namespace std;
+
 #include "./formal-power-series.hpp"
 
 template <typename mint>
@@ -110,14 +114,16 @@ struct ProductTree {
       else if (buf[(i << 1) | 0].size() == buf[(i << 1) | 1].size()) {
         buf[i] = buf[(i << 1) | 0];
         f.clear();
-        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]), back_inserter(f));
+        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),
+             back_inserter(f));
         buf[i].ntt_doubling();
         f.ntt_doubling();
         for (int j = 0; j < (int)buf[i].size(); j++) buf[i][j] *= f[j];
       } else {
         buf[i] = buf[(i << 1) | 0];
         f.clear();
-        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]), back_inserter(f));
+        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),
+             back_inserter(f));
         buf[i].ntt_doubling();
         f.intt();
         f.resize(buf[i].size(), mint(0));
@@ -133,14 +139,14 @@ struct ProductTree {
 };
 
 template <typename mint>
-vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
-                                  const vector<mint> &xs) {
+vector<mint> InnerMultipointEvaluation(const FormalPowerSeries<mint> &f,
+                                       const vector<mint> &xs,
+                                       const ProductTree<mint> &ptree) {
   using fps = FormalPowerSeries<mint>;
-  ProductTree<mint> ptree(xs);
   vector<mint> ret;
-  ret.reserve(2 * ptree.N);
+  ret.reserve(xs.size());
   auto rec = [&](auto self, fps a, int idx) {
-    if(ptree.l[idx] == ptree.r[idx]) return;
+    if (ptree.l[idx] == ptree.r[idx]) return;
     a %= ptree.buf[idx];
     if ((int)a.size() <= 64) {
       for (int i = ptree.l[idx]; i < ptree.r[idx]; i++)
@@ -153,14 +159,23 @@ vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
   rec(rec, f, 1);
   return ret;
 }
+
+template <typename mint>
+vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
+                                  const vector<mint> &xs) {
+  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));
+}
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "fps/formal-power-series.hpp"
+#line 2 "fps/multipoint-evaluation.hpp"
 #include <bits/stdc++.h>
+using namespace std;
+
+#line 3 "fps/formal-power-series.hpp"
 using namespace std;
 
 template <typename mint>
@@ -319,7 +334,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/formal-power-series.md
  */
-#line 3 "fps/multipoint-evaluation.hpp"
+#line 6 "fps/multipoint-evaluation.hpp"
 
 template <typename mint>
 struct ProductTree {
@@ -377,14 +392,16 @@ struct ProductTree {
       else if (buf[(i << 1) | 0].size() == buf[(i << 1) | 1].size()) {
         buf[i] = buf[(i << 1) | 0];
         f.clear();
-        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]), back_inserter(f));
+        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),
+             back_inserter(f));
         buf[i].ntt_doubling();
         f.ntt_doubling();
         for (int j = 0; j < (int)buf[i].size(); j++) buf[i][j] *= f[j];
       } else {
         buf[i] = buf[(i << 1) | 0];
         f.clear();
-        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]), back_inserter(f));
+        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),
+             back_inserter(f));
         buf[i].ntt_doubling();
         f.intt();
         f.resize(buf[i].size(), mint(0));
@@ -400,14 +417,14 @@ struct ProductTree {
 };
 
 template <typename mint>
-vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
-                                  const vector<mint> &xs) {
+vector<mint> InnerMultipointEvaluation(const FormalPowerSeries<mint> &f,
+                                       const vector<mint> &xs,
+                                       const ProductTree<mint> &ptree) {
   using fps = FormalPowerSeries<mint>;
-  ProductTree<mint> ptree(xs);
   vector<mint> ret;
-  ret.reserve(2 * ptree.N);
+  ret.reserve(xs.size());
   auto rec = [&](auto self, fps a, int idx) {
-    if(ptree.l[idx] == ptree.r[idx]) return;
+    if (ptree.l[idx] == ptree.r[idx]) return;
     a %= ptree.buf[idx];
     if ((int)a.size() <= 64) {
       for (int i = ptree.l[idx]; i < ptree.r[idx]; i++)
@@ -419,6 +436,12 @@ vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
   };
   rec(rec, f, 1);
   return ret;
+}
+
+template <typename mint>
+vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
+                                  const vector<mint> &xs) {
+  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));
 }
 
 ```

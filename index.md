@@ -75,6 +75,7 @@ layout: default
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="library/fps/polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/utility.hpp.html">fps/utility.hpp</a>
 
@@ -272,6 +273,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-interpolation.test.cpp.html">verify/verify-yosupo-fps/yosupo-interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-log-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-log-arb.test.cpp</a>

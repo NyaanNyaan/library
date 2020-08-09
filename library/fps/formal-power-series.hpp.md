@@ -185,6 +185,7 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 * :heavy_check_mark: <a href="kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
 * :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
 * :heavy_check_mark: <a href="taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 * :heavy_check_mark: <a href="utility.hpp.html">fps/utility.hpp</a>
 
@@ -193,6 +194,7 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-interpolation.test.cpp.html">verify/verify-yosupo-fps/yosupo-interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-log-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-log-arb.test.cpp</a>
