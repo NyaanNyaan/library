@@ -101,7 +101,6 @@ struct StringSearch {
   StringSearch(LCPArray &lcp)
       : s(lcp.SA.s), sa(lcp.SA), lcp(lcp), sparse(lcp.LCP) {}
 
- private:
   pair<int, int> comp(const string &t, int len, int si, int ti = 0) {
     int sn = (int)s.size(), tn = (int)t.size();
     si += len, ti += len;
@@ -146,7 +145,7 @@ struct StringSearch {
                         max(lcp.rank[i], lcp.rank[j]));
   }
 
-  // String Search  O(|T| + log |S|) 
+  // String Search  O(|T| + log |S|)
   // return : [l, r], l and r are indices of Suffix Array
   // if T doesn't exist, return (-1, -1)
   pair<int, int> find(string &t) {
