@@ -1,4 +1,7 @@
 #pragma once
+#include <bits/stdc++.h>
+using namespace std;
+
 #include "./formal-power-series.hpp"
 
 template <typename mint>
@@ -57,14 +60,16 @@ struct ProductTree {
       else if (buf[(i << 1) | 0].size() == buf[(i << 1) | 1].size()) {
         buf[i] = buf[(i << 1) | 0];
         f.clear();
-        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]), back_inserter(f));
+        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),
+             back_inserter(f));
         buf[i].ntt_doubling();
         f.ntt_doubling();
         for (int j = 0; j < (int)buf[i].size(); j++) buf[i][j] *= f[j];
       } else {
         buf[i] = buf[(i << 1) | 0];
         f.clear();
-        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]), back_inserter(f));
+        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),
+             back_inserter(f));
         buf[i].ntt_doubling();
         f.intt();
         f.resize(buf[i].size(), mint(0));
@@ -80,14 +85,14 @@ struct ProductTree {
 };
 
 template <typename mint>
-vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
-                                  const vector<mint> &xs) {
+vector<mint> InnerMultipointEvaluation(const FormalPowerSeries<mint> &f,
+                                       const vector<mint> &xs,
+                                       const ProductTree<mint> &ptree) {
   using fps = FormalPowerSeries<mint>;
-  ProductTree<mint> ptree(xs);
   vector<mint> ret;
-  ret.reserve(2 * ptree.N);
+  ret.reserve(xs.size());
   auto rec = [&](auto self, fps a, int idx) {
-    if(ptree.l[idx] == ptree.r[idx]) return;
+    if (ptree.l[idx] == ptree.r[idx]) return;
     a %= ptree.buf[idx];
     if ((int)a.size() <= 64) {
       for (int i = ptree.l[idx]; i < ptree.r[idx]; i++)
@@ -99,4 +104,10 @@ vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
   };
   rec(rec, f, 1);
   return ret;
+}
+
+template <typename mint>
+vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
+                                  const vector<mint> &xs) {
+  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));
 }
