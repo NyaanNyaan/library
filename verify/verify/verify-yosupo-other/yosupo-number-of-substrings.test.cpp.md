@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#d39daa9a5438d03dc407439811d187a2">verify/verify-yosupo-other</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 15:16:50+09:00
+    - Last commit date: 2020-08-09 23:27:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/number_of_substrings">https://judge.yosupo.jp/problem/number_of_substrings</a>
@@ -507,7 +507,6 @@ struct StringSearch {
   StringSearch(LCPArray &lcp)
       : s(lcp.SA.s), sa(lcp.SA), lcp(lcp), sparse(lcp.LCP) {}
 
- private:
   pair<int, int> comp(const string &t, int len, int si, int ti = 0) {
     int sn = (int)s.size(), tn = (int)t.size();
     si += len, ti += len;
@@ -552,7 +551,7 @@ struct StringSearch {
                         max(lcp.rank[i], lcp.rank[j]));
   }
 
-  // String Search  O(|T| + log |S|) 
+  // String Search  O(|T| + log |S|)
   // return : [l, r], l and r are indices of Suffix Array
   // if T doesn't exist, return (-1, -1)
   pair<int, int> find(string &t) {

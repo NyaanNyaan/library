@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/suffix-array.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-08-09 23:27:32+09:00
 
 
 
@@ -156,7 +156,6 @@ struct StringSearch {
   StringSearch(LCPArray &lcp)
       : s(lcp.SA.s), sa(lcp.SA), lcp(lcp), sparse(lcp.LCP) {}
 
- private:
   pair<int, int> comp(const string &t, int len, int si, int ti = 0) {
     int sn = (int)s.size(), tn = (int)t.size();
     si += len, ti += len;
@@ -201,7 +200,7 @@ struct StringSearch {
                         max(lcp.rank[i], lcp.rank[j]));
   }
 
-  // String Search  O(|T| + log |S|) 
+  // String Search  O(|T| + log |S|)
   // return : [l, r], l and r are indices of Suffix Array
   // if T doesn't exist, return (-1, -1)
   pair<int, int> find(string &t) {
@@ -386,7 +385,6 @@ struct StringSearch {
   StringSearch(LCPArray &lcp)
       : s(lcp.SA.s), sa(lcp.SA), lcp(lcp), sparse(lcp.LCP) {}
 
- private:
   pair<int, int> comp(const string &t, int len, int si, int ti = 0) {
     int sn = (int)s.size(), tn = (int)t.size();
     si += len, ti += len;
@@ -431,7 +429,7 @@ struct StringSearch {
                         max(lcp.rank[i], lcp.rank[j]));
   }
 
-  // String Search  O(|T| + log |S|) 
+  // String Search  O(|T| + log |S|)
   // return : [l, r], l and r are indices of Suffix Array
   // if T doesn't exist, return (-1, -1)
   pair<int, int> find(string &t) {
