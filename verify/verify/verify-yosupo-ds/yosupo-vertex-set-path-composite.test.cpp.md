@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 03:59:34+09:00
+    - Last commit date: 2020-08-09 17:31:00+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/vertex_set_path_composite">https://judge.yosupo.jp/problem/vertex_set_path_composite</a>
@@ -697,6 +697,17 @@ inline void wt(T x) {
   por += 12 - i;
 }
 
+inline void wt() {}
+template <typename Head, typename... Tail>
+inline void wt(Head head, Tail... tail) {
+  wt(head);
+  wt(tail...);
+}
+template<typename T>
+inline void wtn(T x){
+  wt(x, '\n');
+}
+
 struct Dummy {
   Dummy() { atexit(flush); }
 } dummy;
@@ -704,6 +715,7 @@ struct Dummy {
 }  // namespace fastio
 using fastio::rd;
 using fastio::wt;
+using fastio::wtn;
 #line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 

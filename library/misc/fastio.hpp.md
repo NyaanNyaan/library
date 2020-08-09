@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#bc957e26ff41470c556ee5d09e96880b">misc</a>
 * <a href="{{ site.github.repository_url }}/blob/master/misc/fastio.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 03:59:34+09:00
+    - Last commit date: 2020-08-09 17:31:00+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-swag.test.cpp.html">verify/verify-yosupo-ds/yosupo-swag.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-factrization.test.cpp.html">verify/verify-yosupo-math/yosupo-factrization.test.cpp</a>
@@ -137,6 +138,17 @@ inline void wt(T x) {
   por += 12 - i;
 }
 
+inline void wt() {}
+template <typename Head, typename... Tail>
+inline void wt(Head head, Tail... tail) {
+  wt(head);
+  wt(tail...);
+}
+template<typename T>
+inline void wtn(T x){
+  wt(x, '\n');
+}
+
 struct Dummy {
   Dummy() { atexit(flush); }
 } dummy;
@@ -144,6 +156,7 @@ struct Dummy {
 }  // namespace fastio
 using fastio::rd;
 using fastio::wt;
+using fastio::wtn;
 ```
 {% endraw %}
 
@@ -235,6 +248,17 @@ inline void wt(T x) {
   por += 12 - i;
 }
 
+inline void wt() {}
+template <typename Head, typename... Tail>
+inline void wt(Head head, Tail... tail) {
+  wt(head);
+  wt(tail...);
+}
+template<typename T>
+inline void wtn(T x){
+  wt(x, '\n');
+}
+
 struct Dummy {
   Dummy() { atexit(flush); }
 } dummy;
@@ -242,6 +266,7 @@ struct Dummy {
 }  // namespace fastio
 using fastio::rd;
 using fastio::wt;
+using fastio::wtn;
 
 ```
 {% endraw %}

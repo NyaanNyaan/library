@@ -25,25 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-ds/yosupo-swag.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-swag.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-09 17:31:00+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/static_range_inversions_query">https://judge.yosupo.jp/problem/static_range_inversions_query</a>
+* see: <a href="https://judge.yosupo.jp/problem/queue_operate_all_composite">https://judge.yosupo.jp/problem/queue_operate_all_composite</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
-* :heavy_check_mark: <a href="../../../library/misc/compress.hpp.html">misc/compress.hpp</a>
+* :heavy_check_mark: <a href="../../../library/data-structure/slide-window-aggregation.hpp.html">data-structure/slide-window-aggregation.hpp</a>
 * :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :heavy_check_mark: <a href="../../../library/misc/mo.hpp.html">misc/mo.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 
 
 ## Code
@@ -51,54 +50,37 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/static_range_inversions_query"
+#define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/binary-indexed-tree.hpp"
-#include "../../misc/compress.hpp"
+#include "../../data-structure/slide-window-aggregation.hpp"
 #include "../../misc/fastio.hpp"
-#include "../../misc/mo.hpp"
+#include "../../modint/montgomery-modint.hpp"
 
 void solve() {
-  int N, Q;
-  rd(N);
+  using mint = LazyMontgomeryModInt<998244353>;
+  using p = pair<mint, mint>;
+  auto f = [](const p &a, const p &b) {
+    return p{a.first * b.first, a.second * b.first + b.second};
+  };
+  SlideWindowAggregation<p, decltype(f)> swag(f, p{1, 0});
+  int Q;
   rd(Q);
-  vi a(N);
-  rep(i, N) rd(a[i]);
-  Mo mo(N, Q);
-  rep(i, Q) {
-    int l, r;
-    rd(l);
-    rd(r);
-    mo.insert(l, r);
-  }
-  compress<int> zip(a);
-  BinaryIndexedTree<int> bit(zip.size() + 1);
-  rep(i, N) a[i] = zip.get(a[i]);
-
-  ll cnt = 0;
-  vl ans(Q);
-  auto addleft = [&](int idx) {
-    cnt += bit.sum(0, a[idx] - 1);
-    bit.add(a[idx], 1);
-  };
-  auto addright = [&](int idx) {
-    cnt += bit.sum(a[idx] + 1, zip.size());
-    bit.add(a[idx], 1);
-  };
-  auto delleft = [&](int idx) {
-    cnt -= bit.sum(0, a[idx] - 1);
-    bit.add(a[idx], -1);
-  };
-  auto delright = [&](int idx) {
-    cnt -= bit.sum(a[idx] + 1, zip.size());
-    bit.add(a[idx], -1);
-  };
-  auto rem = [&](int idx) { ans[idx] = cnt; };
-  mo.run(addleft,addright,delleft,delright,rem);
-  each(x, ans) {
-    wt(x);
-    wt('\n');
+  rep(_, Q) {
+    int cmd;
+    rd(cmd);
+    if (cmd == 0) {
+      int a, b;
+      rd(a, b);
+      swag.push(p{a, b});
+    } else if (cmd == 1) {
+      swag.pop();
+    } else {
+      int x;
+      rd(x);
+      p q = swag.query();
+      wtn((q.first * x + q.second).get());
+    }
   }
 }
 ```
@@ -107,8 +89,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/static_range_inversions_query"
+#line 1 "verify/verify-yosupo-ds/yosupo-swag.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -410,95 +392,52 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/binary-indexed-tree.hpp"
+#line 3 "data-structure/slide-window-aggregation.hpp"
 using namespace std;
 
-template <typename T>
-struct BinaryIndexedTree {
-  int N;
-  int max_2beki;
-  vector<T> data;
+template <typename T, typename F>
+struct SlideWindowAggregation {
+  stack<T> a0, a1;
+  stack<T> r0, r1;
+  F f;
+  T I, f0, f1;
 
-  BinaryIndexedTree(int size) {
-    N = ++size;
-    data.assign(N + 3, 0);
-    max_2beki = 1;
-    while (max_2beki * 2 <= N) max_2beki *= 2;
+  SlideWindowAggregation(F f_, T I_) : f(f_), I(I_), f0(I_), f1(I_) {}
+
+ private:
+  void push_s0(const T &x) {
+    a0.push(x);
+    r0.push(f0 = f(x, f0));
   }
-
-  // get sum of [0,k]
-  T sum(int k) const {
-    if (k < 0) return 0;  // return 0 if k < 0
-    T ret = 0;
-    for (++k; k > 0; k -= k & -k) ret += data[k];
-    return ret;
+  void push_s1(const T &x) {
+    a1.push(x);
+    r1.push(f1 = f(f1, x));
   }
-
-  // getsum of [l,r]
-  inline T sum(int l, int r) const { return sum(r) - sum(l - 1); }
-
-  // get value of k
-  inline T operator[](int k) const { return sum(k) - sum(k - 1); }
-
-  // data[k] += x
-  void add(int k, T x) {
-    for (++k; k < N; k += k & -k) data[k] += x;
-  }
-
-  // range add x to [l,r]
-  void imos(int l, int r, T x) {
-    add(l, x);
-    add(r + 1, -x);
-  }
-
-  // minimize i s.t. sum(i) >= w
-  int lower_bound(T w) {
-    if (w <= 0) return 0;
-    int x = 0;
-    for (int k = max_2beki; k > 0; k /= 2) {
-      if (x + k <= N - 1 && data[x + k] < w) {
-        w -= data[x + k];
-        x += k;
-      }
+  void transfer() {
+    while (!a1.empty()) {
+      push_s0(a1.top());
+      a1.pop();
     }
-    return x;
+    while (!r1.empty()) r1.pop();
+    f1 = I;
   }
 
-  // minimize i s.t. sum(i) > w
-  int upper_bound(T w) {
-    if (w < 0) return 0;
-    int x = 0;
-    for (int k = max_2beki; k > 0; k /= 2) {
-      if (x + k <= N - 1 && data[x + k] <= w) {
-        w -= data[x + k];
-        x += k;
-      }
+ public:
+  void push(const T &x) {
+    if (a0.empty()) {
+      push_s0(x);
+      transfer();
+    } else {
+      push_s1(x);
     }
-    return x;
   }
-};
-#line 3 "misc/compress.hpp"
-using namespace std;
-
-template<class T>
-struct compress{
-  vector<T> xs;
-  compress(const vector<T>& v){
-    xs.reserve(v.size());
-    for(T x : v) xs.push_back(x);
-    sort(xs.begin(),xs.end());
-    xs.erase(unique(xs.begin(),xs.end()) , xs.end());
+  void pop() {
+    if (a0.empty()) transfer();
+    a0.pop();
+    r0.pop();
+    f0 = r0.empty() ? I : r0.top();
   }
-
-  int get(const T& x){
-    return lower_bound(xs.begin(),xs.end(),x) - xs.begin();
-  }
-  int size(){
-    return xs.size();
-  }
-  T& operator[](int i){
-    return xs[i];
-  }
+  T query() { return f(f0, f1); }
 };
 #line 3 "misc/fastio.hpp"
 using namespace std;
@@ -603,85 +542,126 @@ struct Dummy {
 using fastio::rd;
 using fastio::wt;
 using fastio::wtn;
-#line 3 "misc/mo.hpp"
+#line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 
-struct Mo {
-  int width;
-  vector<int> left, right, order;
+template <uint32_t mod>
+struct LazyMontgomeryModInt {
+  using mint = LazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
 
-  Mo(int N, int Q) : order(Q) {
-    width = max(1, N / max<int>(1, sqrt(Q / 3)));
-    iota(begin(order), end(order), 0);
+  static constexpr u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
   }
 
-  void insert(int l, int r) { /* [l, r) */
-    left.emplace_back(l);
-    right.emplace_back(r);
+  static constexpr u32 r = get_r();
+  static constexpr u32 n2 = -u64(mod) % mod;
+  static_assert(r * mod == 1, "invalid, r * mod != 1");
+  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
+  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
+
+  u32 a;
+
+  constexpr LazyMontgomeryModInt() : a(0) {}
+  constexpr LazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static constexpr u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
   }
 
-  template <typename AL, typename AR, typename DL, typename DR, typename REM>
-  void run(const AL &add_left, const AR &add_right, const DL &delete_left,
-           const DR &delete_right, const REM &rem) {
-    assert(left.size() == order.size());
-    sort(begin(order), end(order), [&](int a, int b) {
-      int ablock = left[a] / width, bblock = left[b] / width;
-      if (ablock != bblock) return ablock < bblock;
-      if (ablock & 1) return right[a] < right[b];
-      return right[a] > right[b];
-    });
-    int nl = 0, nr = 0;
-    for (auto idx : order) {
-      while (nl > left[idx]) add_left(--nl);
-      while (nr < right[idx]) add_right(nr++);
-      while (nl < left[idx]) delete_left(nl++);
-      while (nr > right[idx]) delete_right(--nr);
-      rem(idx);
+  constexpr mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  constexpr mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  constexpr mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
+    return *this;
+  }
+
+  constexpr mint &operator/=(const mint &b) {
+    *this *= b.inverse();
+    return *this;
+  }
+
+  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
+  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
+  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
+  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
+  constexpr bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr mint operator-() const { return mint() - mint(*this); }
+
+  constexpr mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
     }
+    return ret;
   }
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
+
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
+  }
+
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = LazyMontgomeryModInt<mod>(t);
+    return (is);
+  }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
+
+  static constexpr u32 get_mod() { return mod; }
 };
-#line 8 "verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp"
+#line 7 "verify/verify-yosupo-ds/yosupo-swag.test.cpp"
 
 void solve() {
-  int N, Q;
-  rd(N);
+  using mint = LazyMontgomeryModInt<998244353>;
+  using p = pair<mint, mint>;
+  auto f = [](const p &a, const p &b) {
+    return p{a.first * b.first, a.second * b.first + b.second};
+  };
+  SlideWindowAggregation<p, decltype(f)> swag(f, p{1, 0});
+  int Q;
   rd(Q);
-  vi a(N);
-  rep(i, N) rd(a[i]);
-  Mo mo(N, Q);
-  rep(i, Q) {
-    int l, r;
-    rd(l);
-    rd(r);
-    mo.insert(l, r);
-  }
-  compress<int> zip(a);
-  BinaryIndexedTree<int> bit(zip.size() + 1);
-  rep(i, N) a[i] = zip.get(a[i]);
-
-  ll cnt = 0;
-  vl ans(Q);
-  auto addleft = [&](int idx) {
-    cnt += bit.sum(0, a[idx] - 1);
-    bit.add(a[idx], 1);
-  };
-  auto addright = [&](int idx) {
-    cnt += bit.sum(a[idx] + 1, zip.size());
-    bit.add(a[idx], 1);
-  };
-  auto delleft = [&](int idx) {
-    cnt -= bit.sum(0, a[idx] - 1);
-    bit.add(a[idx], -1);
-  };
-  auto delright = [&](int idx) {
-    cnt -= bit.sum(a[idx] + 1, zip.size());
-    bit.add(a[idx], -1);
-  };
-  auto rem = [&](int idx) { ans[idx] = cnt; };
-  mo.run(addleft,addright,delleft,delright,rem);
-  each(x, ans) {
-    wt(x);
-    wt('\n');
+  rep(_, Q) {
+    int cmd;
+    rd(cmd);
+    if (cmd == 0) {
+      int a, b;
+      rd(a, b);
+      swag.push(p{a, b});
+    } else if (cmd == 1) {
+      swag.pop();
+    } else {
+      int x;
+      rd(x);
+      p q = swag.query();
+      wtn((q.first * x + q.second).get());
+    }
   }
 }
 

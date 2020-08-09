@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 03:59:34+09:00
+    - Last commit date: 2020-08-09 17:31:00+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/polynomial_taylor_shift">https://judge.yosupo.jp/problem/polynomial_taylor_shift</a>
@@ -1360,6 +1360,17 @@ inline void wt(T x) {
   por += 12 - i;
 }
 
+inline void wt() {}
+template <typename Head, typename... Tail>
+inline void wt(Head head, Tail... tail) {
+  wt(head);
+  wt(tail...);
+}
+template<typename T>
+inline void wtn(T x){
+  wt(x, '\n');
+}
+
 struct Dummy {
   Dummy() { atexit(flush); }
 } dummy;
@@ -1367,6 +1378,7 @@ struct Dummy {
 }  // namespace fastio
 using fastio::rd;
 using fastio::wt;
+using fastio::wtn;
 #line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 

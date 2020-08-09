@@ -54,6 +54,7 @@ layout: default
 * :warning: <a href="library/data-structure/randomized-binary-search-tree.hpp.html">data-structure/randomized-binary-search-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
+* :heavy_check_mark: <a href="library/data-structure/slide-window-aggregation.hpp.html">data-structure/slide-window-aggregation.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sliding-window-minimum.hpp.html">data-structure/sliding-window-minimum.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/square-decomposition.hpp.html">平方分割 <small>(data-structure/square-decomposition.hpp)</small></a>
@@ -265,6 +266,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-swag.test.cpp.html">verify/verify-yosupo-ds/yosupo-swag.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
