@@ -39,7 +39,7 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
           while ((int)self.size() <= d) self.emplace_back(0);
           ++count[d];
           ++self[d];
-          for (auto &dst : g[cur]) {
+          for (int dst : g[cur]) {
             if (par == dst || v[dst]) continue;
             dfs(dst, cur, d + 1);
           }
