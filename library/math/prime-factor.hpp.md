@@ -68,7 +68,7 @@ $$a ^ {2^r \cdot d} \equiv -1 \mod p$$
 
 ## Depends on
 
-* :question: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 
 

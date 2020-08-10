@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 
 
 ## Required by
