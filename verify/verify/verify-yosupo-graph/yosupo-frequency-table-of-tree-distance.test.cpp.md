@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 01:59:19+09:00
+    - Last commit date: 2020-08-11 02:13:10+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/frequency_table_of_tree_distance">https://judge.yosupo.jp/problem/frequency_table_of_tree_distance</a>
@@ -1525,7 +1525,7 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
           while ((int)self.size() <= d) self.emplace_back(0);
           ++count[d];
           ++self[d];
-          for (auto &dst : g[cur]) {
+          for (int dst : g[cur]) {
             if (par == dst || v[dst]) continue;
             dfs(dst, cur, d + 1);
           }

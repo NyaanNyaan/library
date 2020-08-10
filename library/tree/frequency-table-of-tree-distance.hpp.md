@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/frequency-table-of-tree-distance.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 01:41:09+09:00
+    - Last commit date: 2020-08-11 02:13:10+09:00
 
 
 
@@ -97,7 +97,7 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
           while ((int)self.size() <= d) self.emplace_back(0);
           ++count[d];
           ++self[d];
-          for (auto &dst : g[cur]) {
+          for (int dst : g[cur]) {
             if (par == dst || v[dst]) continue;
             dfs(dst, cur, d + 1);
           }
@@ -1053,7 +1053,7 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
           while ((int)self.size() <= d) self.emplace_back(0);
           ++count[d];
           ++self[d];
-          for (auto &dst : g[cur]) {
+          for (int dst : g[cur]) {
             if (par == dst || v[dst]) continue;
             dfs(dst, cur, d + 1);
           }
