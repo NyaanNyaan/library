@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 01:41:09+09:00
+    - Last commit date: 2020-08-11 01:59:19+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/frequency_table_of_tree_distance">https://judge.yosupo.jp/problem/frequency_table_of_tree_distance</a>
@@ -59,8 +59,11 @@ layout: default
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 
 #include "../../competitive-template.hpp"
+
 #include "../../graph/graph-template.hpp"
+
 #include "../../misc/fastio.hpp"
+
 #include "../../tree/frequency-table-of-tree-distance.hpp"
 
 void solve() {
@@ -392,6 +395,8 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
+#line 4 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp"
+
 #line 3 "graph/graph-template.hpp"
 using namespace std;
 
@@ -486,6 +491,8 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
+#line 6 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp"
+
 #line 3 "misc/fastio.hpp"
 using namespace std;
 
@@ -589,6 +596,8 @@ struct Dummy {
 using fastio::rd;
 using fastio::wt;
 using fastio::wtn;
+#line 8 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp"
+
 #line 3 "tree/frequency-table-of-tree-distance.hpp"
 using namespace std;
 
@@ -1537,7 +1546,7 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
     return ans;
   }
 };
-#line 7 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp"
+#line 10 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp"
 
 void solve() {
   int N;
