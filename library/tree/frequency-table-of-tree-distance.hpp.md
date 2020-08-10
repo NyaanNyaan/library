@@ -25,25 +25,30 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: tree/frequency-table-of-tree-distance.hpp
+# :x: tree/frequency-table-of-tree-distance.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/frequency-table-of-tree-distance.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-10 19:50:09+09:00
+    - Last commit date: 2020-08-11 00:13:26+09:00
 
 
 
 
 ## Depends on
 
-* :warning: <a href="../misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
-* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
-* :warning: <a href="centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
+* :x: <a href="../misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
+* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :question: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :x: <a href="centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
+
+
+## Verified with
+
+* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 
 
 ## Code
@@ -59,8 +64,61 @@ using namespace std;
 #include "../ntt/arbitrary-ntt.hpp"
 #include "./centroid-decomposition.hpp"
 
-//template<typename G>
-//struct FrequencyTableOf
+template <typename G>
+struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
+  using CentroidDecomposition<G>::g;
+  using CentroidDecomposition<G>::v;
+  using CentroidDecomposition<G>::get_size;
+  using CentroidDecomposition<G>::get_centroid;
+
+  FrequencyTableOfTreeDistance(const G &g)
+      : CentroidDecomposition<G>(g, false) {}
+
+  vector<long long> get(int start = 0) {
+    queue<int> Q;
+    int root = get_centroid(start, -1, get_size(start, -1) / 2);
+    Q.push(root);
+    vector<long long> ans, count, self;
+    ans.reserve(g.size());
+    count.reserve(g.size());
+    self.reserve(g.size());
+
+    while (!Q.empty()) {
+      int r = Q.front();
+      Q.pop();
+      count.clear();
+      v[r] = 1;
+      for (auto &c : g[r]) {
+        if (v[c]) continue;
+        self.clear();
+        Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
+        MFP([&](auto dfs, int cur, int par, int d) -> void {
+          while ((int)count.size() <= d) count.emplace_back(0);
+          while ((int)self.size() <= d) self.emplace_back(0);
+          ++count[d];
+          ++self[d];
+          for (auto &dst : g[cur]) {
+            if (par == dst || v[dst]) continue;
+            dfs(dst, cur, d + 1);
+          }
+        })
+        (c, r, 1);
+        auto self2 = ArbitraryNTT::multiply_i128(self, self);
+        while (self2.size() > ans.size()) ans.emplace_back(0);
+        for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
+      }
+      if (count.empty()) continue;
+      ++count[0];
+      auto count2 = ArbitraryNTT::multiply_i128(count, count);
+      while (count2.size() > ans.size()) ans.emplace_back(0);
+      for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];
+    }
+
+    for (auto &x : ans) x >>= 1;
+    return ans;
+  }
+};
+
 ```
 {% endraw %}
 
@@ -792,6 +850,7 @@ struct NTT {
   }
 
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
+    if (a.size() == 0 && b.size() == 0) return vector<mint>{};
     int l = a.size() + b.size() - 1;
     if (min<int>(a.size(), b.size()) <= 40) {
       vector<mint> s(l);
@@ -831,7 +890,7 @@ struct NTT {
 
 namespace ArbitraryNTT {
 using i64 = int64_t;
-using u128 = __uint128_t;
+using i128 = __uint128_t;
 constexpr int32_t m0 = 167772161;
 constexpr int32_t m1 = 469762049;
 constexpr int32_t m2 = 754974721;
@@ -884,62 +943,28 @@ vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
 }
 
 template <typename T>
-vector<u128> multiply_u128(const vector<T> &s, const vector<T> &t) {
+vector<i128> multiply_i128(const vector<T> &s, const vector<T> &t) {
+  if (s.size() == 0 && t.size() == 0) return {};
+  if (min<int>(s.size(), t.size()) < 128) {
+    vector<i128> ret(s.size() + t.size() - 1);
+    for (int i = 0; i < (int)s.size(); ++i)
+      for (int j = 0; j < (int)t.size(); ++j) ret[i + j] += i64(s[i]) * t[j];
+    return ret;
+  }
   auto d0 = mul<T, mint0>(s, t);
   auto d1 = mul<T, mint1>(s, t);
   auto d2 = mul<T, mint2>(s, t);
   int n = d0.size();
-  vector<u128> ret(n);
+  vector<i128> ret(n);
   for (int i = 0; i < n; i++) {
     i64 n1 = d1[i].get(), n2 = d2[i].get();
     i64 a = d0[i].get();
-    u128 b = (n1 + m1 - a) * r01 % m1;
-    u128 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    i128 b = (n1 + m1 - a) * r01 % m1;
+    i128 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
     ret[i] = a + b * w1 + c * w2;
   }
   return ret;
 }
-
-/*
-template <int mod>
-vector<int> multiply(const vector<int> &s, const vector<int> &t) {
-  auto d0 = mul<m0>(s, t);
-  auto d1 = mul<m1>(s, t);
-  auto d2 = mul<m2>(s, t);
-  int n = d0.size();
-  vector<int> res(n);
-  using i64 = int64_t;
-  static const int r01 = mint1(m0).inverse().get();
-  static const int r02 = mint2(m0).inverse().get();
-  static const int r12 = mint2(m1).inverse().get();
-  static const int r02r12 = i64(r02) * r12 % m2;
-  static const int w1 = m0 % mod;
-  static const int w2 = i64(w1) * m1 % mod;
-  for (int i = 0; i < n; i++) {
-    i64 n1 = d1[i].get(), n2 = d2[i].get();
-    i64 a = d0[i].get();
-    i64 b = (n1 + m1 - a) * r01 % m1;
-    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    res[i] = (a + b * w1 + c * w2) % mod;
-  }
-  return std::move(res);
-}
-
-template <int mod>
-vector<LazyMontgomeryModInt<mod>> multiply(
-    const vector<LazyMontgomeryModInt<mod>> &a,
-    const vector<LazyMontgomeryModInt<mod>> &b) {
-  using mint = LazyMontgomeryModInt<mod>;
-  vector<int> s(a.size()), t(b.size());
-  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
-  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();
-  vector<int> u = multiply<mod>(s, t);
-  vector<mint> ret(u.size());
-  for (int i = 0; i < (int)u.size(); ++i)
-    ret[i].a = mint::reduce(uint64_t(u[i]) * mint::n2);
-  return std::move(ret);
-}
-*/
 }  // namespace ArbitraryNTT
 #line 3 "tree/centroid-decomposition.hpp"
 using namespace std;
@@ -952,13 +977,13 @@ struct CentroidDecomposition {
   vector<vector<int>> tree;
   int root;
 
-  CentroidDecomposition(const G &g_, int isbuild = 1) : g(g_) {
+  CentroidDecomposition(const G &g_, int isbuild = true) : g(g_) {
+    sub.resize(g.size(), 0);
+    v.resize(g.size(), false);
     if (isbuild) build();
   }
 
   void build() {
-    sub.resize(g.size(), 0);
-    v.resize(g.size(), false);
     tree.resize(g.size());
     root = build_dfs(0);
   }
@@ -985,7 +1010,7 @@ struct CentroidDecomposition {
     v[centroid] = true;
     for (auto &dst : g[centroid]) {
       if (!v[dst]) {
-        int nxt = build_dfs(centroid, build_dfs(dst));
+        int nxt = build_dfs(dst);
         if (centroid != nxt) tree[centroid].emplace_back(nxt);
       }
     }
@@ -995,8 +1020,60 @@ struct CentroidDecomposition {
 };
 #line 8 "tree/frequency-table-of-tree-distance.hpp"
 
-//template<typename G>
-//struct FrequencyTableOf
+template <typename G>
+struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
+  using CentroidDecomposition<G>::g;
+  using CentroidDecomposition<G>::v;
+  using CentroidDecomposition<G>::get_size;
+  using CentroidDecomposition<G>::get_centroid;
+
+  FrequencyTableOfTreeDistance(const G &g)
+      : CentroidDecomposition<G>(g, false) {}
+
+  vector<long long> get(int start = 0) {
+    queue<int> Q;
+    int root = get_centroid(start, -1, get_size(start, -1) / 2);
+    Q.push(root);
+    vector<long long> ans, count, self;
+    ans.reserve(g.size());
+    count.reserve(g.size());
+    self.reserve(g.size());
+
+    while (!Q.empty()) {
+      int r = Q.front();
+      Q.pop();
+      count.clear();
+      v[r] = 1;
+      for (auto &c : g[r]) {
+        if (v[c]) continue;
+        self.clear();
+        Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
+        MFP([&](auto dfs, int cur, int par, int d) -> void {
+          while ((int)count.size() <= d) count.emplace_back(0);
+          while ((int)self.size() <= d) self.emplace_back(0);
+          ++count[d];
+          ++self[d];
+          for (auto &dst : g[cur]) {
+            if (par == dst || v[dst]) continue;
+            dfs(dst, cur, d + 1);
+          }
+        })
+        (c, r, 1);
+        auto self2 = ArbitraryNTT::multiply_i128(self, self);
+        while (self2.size() > ans.size()) ans.emplace_back(0);
+        for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
+      }
+      if (count.empty()) continue;
+      ++count[0];
+      auto count2 = ArbitraryNTT::multiply_i128(count, count);
+      while (count2.size() > ans.size()) ans.emplace_back(0);
+      for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];
+    }
+
+    for (auto &x : ans) x >>= 1;
+    return ans;
+  }
+};
 
 ```
 {% endraw %}

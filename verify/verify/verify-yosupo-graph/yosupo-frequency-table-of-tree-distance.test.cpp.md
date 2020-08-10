@@ -25,28 +25,30 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: verify/verify-yuki/yuki-0214.test.cpp
+# :x: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#4164944468408d7a42ddd5d21630208a">verify/verify-yuki</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yuki/yuki-0214.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-08-11 00:13:26+09:00
 
 
-* see: <a href="https://yukicoder.me/problems/no/214">https://yukicoder.me/problems/no/214</a>
+* see: <a href="https://judge.yosupo.jp/problem/frequency_table_of_tree_distance">https://judge.yosupo.jp/problem/frequency_table_of_tree_distance</a>
 
 
 ## Depends on
 
 * :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :question: <a href="../../../library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :x: <a href="../../../library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
+* :question: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :question: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :x: <a href="../../../library/misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
 * :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :question: <a href="../../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 * :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :x: <a href="../../../library/tree/centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
+* :x: <a href="../../../library/tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
 
 
 ## Code
@@ -54,77 +56,42 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://yukicoder.me/problems/no/214"
+#define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
+
 #include "../../competitive-template.hpp"
-#include "../../fps/arbitrary-fps.hpp"
-#include "../../fps/kitamasa.hpp"
-#include "../../modint/montgomery-modint.hpp"
-
-using mint = LazyMontgomeryModInt<1000000007>;
-using fps = FormalPowerSeries<mint>;
-
-mint dp[310][5050];
-mint ep[310][5050];
+#include "../../graph/graph-template.hpp"
+#include "../../misc/fastio.hpp"
+#include "../../tree/frequency-table-of-tree-distance.hpp"
 
 void solve() {
-  inl(N, P, C);
-  vl s{2, 3, 5, 7, 11, 13};
-  vl t{4, 6, 8, 9, 10, 12};
-
-  dp[0][0] = 1;
-  each(x, s) {
-    rep(i, P + 1) rep(j, 5010) ep[i][j] = mint();
-    rep(i, P + 1) rep(j, 5050) {
-      if (dp[i][j] == 0) continue;
-      for (int k = i, l = j; k <= P; k++, l += x) {
-        ep[k][l] += dp[i][j];
-      }
-    }
-    swap(dp, ep);
+  int N;
+  rd(N);
+  vvi g(N);
+  rep(_, N - 1) {
+    int u, v;
+    rd(u, v);
+    g[u].pb(v);
+    g[v].pb(u);
   }
-  fps f(5010);
-  rep(i, 5000) f[i] = dp[P][i];
-
-  rep(i, C + 1) rep(j, 5010) dp[i][j] = mint();
-  dp[0][0] = 1;
-  each(x, t) {
-    rep(i, C + 1) rep(j, 5010) ep[i][j] = mint();
-    rep(i, C + 1) rep(j, 5050) {
-      if (dp[i][j] == 0) continue;
-      for (int k = i, l = j; k <= C; k++, l += x) {
-        ep[k][l] += dp[i][j];
-      }
-    }
-    swap(dp, ep);
+  FrequencyTableOfTreeDistance<vvi> ft(g);
+  auto d = ft.get();
+  d.resize(N);
+  rep1(i, N - 1) {
+    if (i != 1) wt(' ');
+    wt(d[i]);
   }
-  fps g(5010);
-  rep(i, 5000) g[i] = dp[C][i];
-
-  f.shrink();
-  g.shrink();
-  f = f * g;
-  f.shrink();
-  g = f.rev();
-  rep1(i, sz(g) - 1) g[i] += g[i - 1];
-  g = g.rev();
-
-  f[0] = 1;
-  rep1(i, sz(f) - 1) f[i] = -f[i];
-  g[0] = 0;
-  mint ans1 = LinearRecursionFormula(N, f, g);
-  g %= f;
-  mint ans2 = LinearRecursionFormula(N, f, g);
-  assert(ans1 == ans2);
-  out(ans1);
+  wt('\n');
 }
+
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-yuki/yuki-0214.test.cpp"
-#define PROBLEM "https://yukicoder.me/problems/no/214"
+#line 1 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
+
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
 #define Nyaan_template
@@ -425,9 +392,223 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "fps/arbitrary-fps.hpp"
+#line 3 "graph/graph-template.hpp"
 using namespace std;
 
+template <typename T>
+struct edge {
+  int src, to;
+  T cost;
+
+  edge(int to, T cost) : src(-1), to(to), cost(cost) {}
+  edge(int src, int to, T cost) : src(src), to(to), cost(cost) {}
+
+  edge &operator=(const int &x) {
+    to = x;
+    return *this;
+  }
+
+  operator int() const { return to; }
+};
+template <typename T>
+using Edges = vector<edge<T>>;
+template <typename T>
+using WeightedGraph = vector<Edges<T>>;
+using UnweightedGraph = vector<vector<int>>;
+
+// Input of (Unweighted) Graph
+UnweightedGraph graph(int N, int M = -1, bool is_directed = false,
+                      bool is_1origin = true) {
+  UnweightedGraph g(N);
+  if (M == -1) M = N - 1;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    if (is_1origin) x--, y--;
+    g[x].push_back(y);
+    if (!is_directed) g[y].push_back(x);
+  }
+  return g;
+}
+
+// Input of Weighted Graph
+template <typename T>
+WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
+                        bool is_1origin = true) {
+  WeightedGraph<T> g(N);
+  if (M == -1) M = N - 1;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    cin >> c;
+    if (is_1origin) x--, y--;
+    g[x].eb(x, y, c);
+    if (!is_directed) g[y].eb(y, x, c);
+  }
+  return g;
+}
+
+// Input of Edges
+template <typename T>
+Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
+  Edges<T> es;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    es.emplace_back(x, y, c);
+  }
+  return es;
+}
+
+// Input of Adjacency Matrix
+template <typename T>
+vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
+                           bool is_directed = false, bool is_1origin = true) {
+  vector<vector<T>> d(N, vector<T>(N, INF));
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    d[x][y] = c;
+    if (!is_directed) d[y][x] = c;
+  }
+  return d;
+}
+#line 3 "misc/fastio.hpp"
+using namespace std;
+
+namespace fastio {
+static constexpr int SZ = 1 << 17;
+char ibuf[SZ], obuf[SZ];
+int pil = 0, pir = 0, por = 0;
+
+struct Pre {
+  char num[40000];
+  constexpr Pre() : num() {
+    for (int i = 0; i < 10000; i++) {
+      int n = i;
+      for (int j = 3; j >= 0; j--) {
+        num[i * 4 + j] = n % 10 + '0';
+        n /= 10;
+      }
+    }
+  }
+} constexpr pre;
+
+inline void load() {
+  memcpy(ibuf, ibuf + pil, pir - pil);
+  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);
+  pil = 0;
+}
+inline void flush() {
+  fwrite(obuf, 1, por, stdout);
+  por = 0;
+}
+
+inline void rd(char& c) { c = ibuf[pil++]; }
+template <typename T>
+inline void rd(T& x) {
+  if (pil + 32 > pir) load();
+  char c;
+  do
+    c = ibuf[pil++];
+  while (c < '-');
+  bool minus = 0;
+  if (c == '-') {
+    minus = 1;
+    c = ibuf[pil++];
+  }
+  x = 0;
+  while (c >= '0') {
+    x = x * 10 + (c & 15);
+    c = ibuf[pil++];
+  }
+  if (minus) x = -x;
+}
+inline void rd() {}
+template <typename Head, typename... Tail>
+inline void rd(Head& head, Tail&... tail) {
+  rd(head);
+  rd(tail...);
+}
+
+inline void wt(char c) { obuf[por++] = c; }
+template <typename T>
+inline void wt(T x) {
+  if (por > SZ - 32) flush();
+  if (!x) {
+    obuf[por++] = '0';
+    return;
+  }
+  if (x < 0) {
+    obuf[por++] = '-';
+    x = -x;
+  }
+  int i = 12;
+  char buf[16];
+  while (x >= 10000) {
+    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);
+    x /= 10000;
+    i -= 4;
+  }
+  int d = x < 100 ? (x < 10 ? 1 : 2) : (x < 1000 ? 3 : 4);
+  memcpy(obuf + por, pre.num + x * 4 + 4 - d, d);
+  por += d;
+  memcpy(obuf + por, buf + i + 4, 12 - i);
+  por += 12 - i;
+}
+
+inline void wt() {}
+template <typename Head, typename... Tail>
+inline void wt(Head head, Tail... tail) {
+  wt(head);
+  wt(tail...);
+}
+template<typename T>
+inline void wtn(T x){
+  wt(x, '\n');
+}
+
+struct Dummy {
+  Dummy() { atexit(flush); }
+} dummy;
+
+}  // namespace fastio
+using fastio::rd;
+using fastio::wt;
+using fastio::wtn;
+#line 3 "tree/frequency-table-of-tree-distance.hpp"
+using namespace std;
+
+#line 3 "misc/fixpoint.hpp"
+using namespace std;
+
+template< typename F >
+struct FixPoint : F {
+  FixPoint(F &&f) : F(forward< F >(f)) {}
+ 
+  template< typename... Args >
+  decltype(auto) operator()(Args &&... args) const {
+    return F::operator()(*this, forward< Args >(args)...);
+  }
+};
+ 
+template< typename F >
+inline decltype(auto) MFP(F &&f) {
+  return FixPoint< F >{forward< F >(f)};
+}
 #line 3 "ntt/arbitrary-ntt.hpp"
 using namespace std;
 
@@ -1248,386 +1429,134 @@ vector<i128> multiply_i128(const vector<T> &s, const vector<T> &t) {
   return ret;
 }
 }  // namespace ArbitraryNTT
-#line 3 "fps/formal-power-series.hpp"
+#line 3 "tree/centroid-decomposition.hpp"
 using namespace std;
 
-template <typename mint>
-struct FormalPowerSeries : vector<mint> {
-  using vector<mint>::vector;
-  using FPS = FormalPowerSeries;
+template <typename G>
+struct CentroidDecomposition {
+  const G &g;
+  vector<int> sub;
+  vector<bool> v;
+  vector<vector<int>> tree;
+  int root;
 
-  FPS &operator+=(const FPS &r) {
-    if (r.size() > this->size()) this->resize(r.size());
-    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];
-    return *this;
+  CentroidDecomposition(const G &g_, int isbuild = true) : g(g_) {
+    sub.resize(g.size(), 0);
+    v.resize(g.size(), false);
+    if (isbuild) build();
   }
 
-  FPS &operator+=(const mint &r) {
-    if (this->empty()) this->resize(1);
-    (*this)[0] += r;
-    return *this;
+  void build() {
+    tree.resize(g.size());
+    root = build_dfs(0);
   }
 
-  FPS &operator-=(const FPS &r) {
-    if (r.size() > this->size()) this->resize(r.size());
-    for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-    return *this;
-  }
-
-  FPS &operator-=(const mint &r) {
-    if (this->empty()) this->resize(1);
-    (*this)[0] -= r;
-    return *this;
-  }
-
-  FPS &operator*=(const mint &v) {
-    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
-    return *this;
-  }
-
-  FPS &operator/=(const FPS &r) {
-    if (this->size() < r.size()) {
-      this->clear();
-      return *this;
+  int get_size(int cur, int par) {
+    sub[cur] = 1;
+    for (auto &dst : g[cur]) {
+      if (dst == par || v[dst]) continue;
+      sub[cur] += get_size(dst, cur);
     }
-    int n = this->size() - r.size() + 1;
-    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
+    return sub[cur];
   }
 
-  FPS &operator%=(const FPS &r) {
-    *this -= *this / r * r;
-    shrink();
-    return *this;
+  int get_centroid(int cur, int par, int mid) {
+    for (auto &dst : g[cur]) {
+      if (dst == par || v[dst]) continue;
+      if (sub[dst] > mid) return get_centroid(dst, cur, mid);
+    }
+    return cur;
   }
 
-  FPS operator+(const FPS &r) const { return FPS(*this) += r; }
-  FPS operator+(const mint &v) const { return FPS(*this) += v; }
-  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
-  FPS operator-(const mint &v) const { return FPS(*this) -= v; }
-  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }
-  FPS operator*(const mint &v) const { return FPS(*this) *= v; }
-  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }
-  FPS operator%(const FPS &r) const { return FPS(*this) %= r; }
-  FPS operator-() const {
-    FPS ret(this->size());
-    for (int i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];
-    return ret;
-  }
-
-  void shrink() {
-    while (this->size() && this->back() == mint(0)) this->pop_back();
-  }
-
-  FPS rev() const {
-    FPS ret(*this);
-    reverse(begin(ret), end(ret));
-    return ret;
-  }
-
-  FPS dot(FPS r) const {
-    FPS ret(min(this->size(), r.size()));
-    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];
-    return ret;
-  }
-
-  FPS pre(int sz) const {
-    return FPS(begin(*this), begin(*this) + min((int)this->size(), sz));
-  }
-
-  FPS operator>>(int sz) const {
-    if ((int)this->size() <= sz) return {};
-    FPS ret(*this);
-    ret.erase(ret.begin(), ret.begin() + sz);
-    return ret;
-  }
-
-  FPS operator<<(int sz) const {
-    FPS ret(*this);
-    ret.insert(ret.begin(), sz, mint(0));
-    return ret;
-  }
-
-  FPS diff() const {
-    const int n = (int)this->size();
-    FPS ret(max(0, n - 1));
-    for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * mint(i);
-    return ret;
-  }
-
-  FPS integral() const {
-    const int n = (int)this->size();
-    FPS ret(n + 1);
-    ret[0] = mint(0);
-    for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / mint(i + 1);
-    return ret;
-  }
-
-  mint eval(mint x) const {
-    mint r = 0, w = 1;
-    for (auto &v : *this) r += w * v, w *= x;
-    return r;
-  }
-
-  FPS log(int deg = -1) const {
-    assert((*this)[0] == mint(1));
-    if (deg == -1) deg = (int)this->size();
-    return (this->diff() * this->inv(deg)).pre(deg - 1).integral();
-  }
-
-  FPS pow(int64_t k, int deg = -1) const {
-    const int n = (int)this->size();
-    if (deg == -1) deg = n;
-    for (int i = 0; i < n; i++) {
-      if ((*this)[i] != mint(0)) {
-        if (i * k > deg) return FPS(deg, mint(0));
-        mint rev = mint(1) / (*this)[i];
-        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
-        ret = (ret << (i * k)).pre(deg);
-        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
-        return ret;
+  int build_dfs(int cur) {
+    int centroid = get_centroid(cur, -1, get_size(cur, -1) / 2);
+    v[centroid] = true;
+    for (auto &dst : g[centroid]) {
+      if (!v[dst]) {
+        int nxt = build_dfs(dst);
+        if (centroid != nxt) tree[centroid].emplace_back(nxt);
       }
     }
-    return FPS(deg, mint(0));
+    v[centroid] = false;
+    return centroid;
   }
-
-  static void *ntt_ptr;
-  static void set_fft();
-  FPS &operator*=(const FPS &r);
-  void ntt();
-  void intt();
-  void ntt_doubling();
-  static int ntt_pr();
-  FPS inv(int deg = -1) const;
-  FPS exp(int deg = -1) const;
 };
-template <typename mint>
-void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
+#line 8 "tree/frequency-table-of-tree-distance.hpp"
 
-/**
- * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
- */
-#line 7 "fps/arbitrary-fps.hpp"
+template <typename G>
+struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
+  using CentroidDecomposition<G>::g;
+  using CentroidDecomposition<G>::v;
+  using CentroidDecomposition<G>::get_size;
+  using CentroidDecomposition<G>::get_centroid;
 
-template <typename mint>
-void FormalPowerSeries<mint>::set_fft() {
-  ntt_ptr = nullptr;
-}
+  FrequencyTableOfTreeDistance(const G &g)
+      : CentroidDecomposition<G>(g, false) {}
 
-template <typename mint>
-void FormalPowerSeries<mint>::ntt() {
-  exit(1);
-}
+  vector<long long> get(int start = 0) {
+    queue<int> Q;
+    int root = get_centroid(start, -1, get_size(start, -1) / 2);
+    Q.push(root);
+    vector<long long> ans, count, self;
+    ans.reserve(g.size());
+    count.reserve(g.size());
+    self.reserve(g.size());
 
-template <typename mint>
-void FormalPowerSeries<mint>::intt() {
-  exit(1);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt_doubling() {
-  exit(1);
-}
-
-template <typename mint>
-int FormalPowerSeries<mint>::ntt_pr() {
-  exit(1);
-}
-
-template <typename mint>
-FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
-    const FormalPowerSeries<mint>& r) {
-  if (this->empty() || r.empty()) {
-    this->clear();
-    return *this;
-  }
-  auto ret = ArbitraryNTT::multiply(*this, r);
-  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
-}
-
-template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
-  assert((*this)[0] != mint(0));
-  if (deg == -1) deg = (*this).size();
-  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
-  for (int i = 1; i < deg; i <<= 1)
-    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
-  return ret.pre(deg);
-}
-
-template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
-  assert((*this).size() == 0 || (*this)[0] == mint(0));
-  if (deg == -1) deg = (int)this->size();
-  FormalPowerSeries<mint> ret({mint(1)});
-  for (int i = 1; i < deg; i <<= 1) {
-    ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
-  }
-  return ret.pre(deg);
-}
-#line 3 "fps/kitamasa.hpp"
-using namespace std;
-
-#line 6 "fps/kitamasa.hpp"
-
-template <typename mint>
-mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
-                            FormalPowerSeries<mint> P) {
-  Q.shrink();
-  mint ret = 0;
-  if (P.size() >= Q.size()) {
-    auto R = P / Q;
-    P -= R * Q;
-    P.shrink();
-    if (k < (int)R.size()) ret += R[k];
-  }
-  if ((int)P.size() == 0) return ret;
-
-  FormalPowerSeries<mint>::set_fft();
-  if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {
-    P.resize((int)Q.size() - 1);
-    while (k) {
-      auto Q2 = Q;
-      for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];
-      auto S = P * Q2;
-      auto T = Q * Q2;
-      if (k & 1) {
-        for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
-      } else {
-        for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];
-        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];
+    while (!Q.empty()) {
+      int r = Q.front();
+      Q.pop();
+      count.clear();
+      v[r] = 1;
+      for (auto &c : g[r]) {
+        if (v[c]) continue;
+        self.clear();
+        Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
+        MFP([&](auto dfs, int cur, int par, int d) -> void {
+          while ((int)count.size() <= d) count.emplace_back(0);
+          while ((int)self.size() <= d) self.emplace_back(0);
+          ++count[d];
+          ++self[d];
+          for (auto &dst : g[cur]) {
+            if (par == dst || v[dst]) continue;
+            dfs(dst, cur, d + 1);
+          }
+        })
+        (c, r, 1);
+        auto self2 = ArbitraryNTT::multiply_i128(self, self);
+        while (self2.size() > ans.size()) ans.emplace_back(0);
+        for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
       }
-      k >>= 1;
+      if (count.empty()) continue;
+      ++count[0];
+      auto count2 = ArbitraryNTT::multiply_i128(count, count);
+      while (count2.size() > ans.size()) ans.emplace_back(0);
+      for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];
     }
-    return ret + P[0];
-  } else {
-    int N = 1;
-    while (N < (int)Q.size()) N <<= 1;
 
-    P.resize(2 * N);
-    Q.resize(2 * N);
-    P.ntt();
-    Q.ntt();
-    vector<mint> S(2 * N), T(2 * N);
-
-    vector<int> btr(N);
-    for (int i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {
-      btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));
-    }
-    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())
-                  .inverse()
-                  .pow((mint::get_mod() - 1) / (2 * N));
-
-    while (k) {
-      mint inv2 = mint(2).inverse();
-
-      // even degree of Q(x)Q(-x)
-      T.resize(N);
-      for (int i = 0; i < N; i++) T[i] = Q[(i << 1) | 0] * Q[(i << 1) | 1];
-
-      S.resize(N);
-      if (k & 1) {
-        // odd degree of P(x)Q(-x)
-        for (auto &i : btr) {
-          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] -
-                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *
-                 inv2;
-          inv2 *= dw;
-        }
-      } else {
-        // even degree of P(x)Q(-x)
-        for (int i = 0; i < N; i++) {
-          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +
-                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *
-                 inv2;
-        }
-      }
-      swap(P, S);
-      swap(Q, T);
-      k >>= 1;
-      if (k < N) break;
-      P.ntt_doubling();
-      Q.ntt_doubling();
-    }
-    P.intt();
-    Q.intt();
-    return ret + (P * (Q.inv()))[k];
+    for (auto &x : ans) x >>= 1;
+    return ans;
   }
-}
-
-template <typename mint>
-mint kitamasa(long long N, FormalPowerSeries<mint> Q,
-              FormalPowerSeries<mint> a) {
-  int k = Q.size() - 1;
-  assert((int)a.size() == k);
-  auto P = a * Q;
-  P.resize(Q.size() - 1);
-  return LinearRecursionFormula<mint>(N, Q, P);
-}
-
-/**
- * @brief 線形漸化式の高速計算
- * @docs docs/linear-recursive.md
- */
-#line 6 "verify/verify-yuki/yuki-0214.test.cpp"
-
-using mint = LazyMontgomeryModInt<1000000007>;
-using fps = FormalPowerSeries<mint>;
-
-mint dp[310][5050];
-mint ep[310][5050];
+};
+#line 7 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp"
 
 void solve() {
-  inl(N, P, C);
-  vl s{2, 3, 5, 7, 11, 13};
-  vl t{4, 6, 8, 9, 10, 12};
-
-  dp[0][0] = 1;
-  each(x, s) {
-    rep(i, P + 1) rep(j, 5010) ep[i][j] = mint();
-    rep(i, P + 1) rep(j, 5050) {
-      if (dp[i][j] == 0) continue;
-      for (int k = i, l = j; k <= P; k++, l += x) {
-        ep[k][l] += dp[i][j];
-      }
-    }
-    swap(dp, ep);
+  int N;
+  rd(N);
+  vvi g(N);
+  rep(_, N - 1) {
+    int u, v;
+    rd(u, v);
+    g[u].pb(v);
+    g[v].pb(u);
   }
-  fps f(5010);
-  rep(i, 5000) f[i] = dp[P][i];
-
-  rep(i, C + 1) rep(j, 5010) dp[i][j] = mint();
-  dp[0][0] = 1;
-  each(x, t) {
-    rep(i, C + 1) rep(j, 5010) ep[i][j] = mint();
-    rep(i, C + 1) rep(j, 5050) {
-      if (dp[i][j] == 0) continue;
-      for (int k = i, l = j; k <= C; k++, l += x) {
-        ep[k][l] += dp[i][j];
-      }
-    }
-    swap(dp, ep);
+  FrequencyTableOfTreeDistance<vvi> ft(g);
+  auto d = ft.get();
+  d.resize(N);
+  rep1(i, N - 1) {
+    if (i != 1) wt(' ');
+    wt(d[i]);
   }
-  fps g(5010);
-  rep(i, 5000) g[i] = dp[C][i];
-
-  f.shrink();
-  g.shrink();
-  f = f * g;
-  f.shrink();
-  g = f.rev();
-  rep1(i, sz(g) - 1) g[i] += g[i - 1];
-  g = g.rev();
-
-  f[0] = 1;
-  rep1(i, sz(f) - 1) f[i] = -f[i];
-  g[0] = 0;
-  mint ans1 = LinearRecursionFormula(N, f, g);
-  g %= f;
-  mint ans2 = LinearRecursionFormula(N, f, g);
-  assert(ans1 == ans2);
-  out(ans1);
+  wt('\n');
 }
 
 ```

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+# :x: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-09 17:31:00+09:00
+    - Last commit date: 2020-08-11 00:13:26+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/polynomial_taylor_shift">https://judge.yosupo.jp/problem/polynomial_taylor_shift</a>
@@ -39,15 +39,15 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../../library/fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
-* :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
-* :heavy_check_mark: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :x: <a href="../../../library/fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
+* :question: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :x: <a href="../../../library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -1006,6 +1006,7 @@ struct NTT {
   }
 
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
+    if (a.size() == 0 && b.size() == 0) return vector<mint>{};
     int l = a.size() + b.size() - 1;
     if (min<int>(a.size(), b.size()) <= 40) {
       vector<mint> s(l);

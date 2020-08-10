@@ -25,20 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: tree/centroid-decomposition.hpp
+# :x: tree/centroid-decomposition.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/centroid-decomposition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-10 14:17:50+09:00
+    - Last commit date: 2020-08-11 00:13:26+09:00
 
 
 
 
 ## Required by
 
-* :warning: <a href="frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
+* :x: <a href="frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
+
+
+## Verified with
+
+* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 
 
 ## Code
@@ -58,13 +63,13 @@ struct CentroidDecomposition {
   vector<vector<int>> tree;
   int root;
 
-  CentroidDecomposition(const G &g_, int isbuild = 1) : g(g_) {
+  CentroidDecomposition(const G &g_, int isbuild = true) : g(g_) {
+    sub.resize(g.size(), 0);
+    v.resize(g.size(), false);
     if (isbuild) build();
   }
 
   void build() {
-    sub.resize(g.size(), 0);
-    v.resize(g.size(), false);
     tree.resize(g.size());
     root = build_dfs(0);
   }
@@ -91,7 +96,7 @@ struct CentroidDecomposition {
     v[centroid] = true;
     for (auto &dst : g[centroid]) {
       if (!v[dst]) {
-        int nxt = build_dfs(centroid, build_dfs(dst));
+        int nxt = build_dfs(dst);
         if (centroid != nxt) tree[centroid].emplace_back(nxt);
       }
     }
@@ -117,13 +122,13 @@ struct CentroidDecomposition {
   vector<vector<int>> tree;
   int root;
 
-  CentroidDecomposition(const G &g_, int isbuild = 1) : g(g_) {
+  CentroidDecomposition(const G &g_, int isbuild = true) : g(g_) {
+    sub.resize(g.size(), 0);
+    v.resize(g.size(), false);
     if (isbuild) build();
   }
 
   void build() {
-    sub.resize(g.size(), 0);
-    v.resize(g.size(), false);
     tree.resize(g.size());
     root = build_dfs(0);
   }
@@ -150,7 +155,7 @@ struct CentroidDecomposition {
     v[centroid] = true;
     for (auto &dst : g[centroid]) {
       if (!v[dst]) {
-        int nxt = build_dfs(centroid, build_dfs(dst));
+        int nxt = build_dfs(dst);
         if (centroid != nxt) tree[centroid].emplace_back(nxt);
       }
     }
