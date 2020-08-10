@@ -66,6 +66,7 @@
 "verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp": "2020-08-11 00:13:26 +0900",
 "verify/verify-yosupo-graph/yosupo-cartesian.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-graph/yosupo-diameter.test.cpp": "2020-08-01 15:16:50 +0900",
+"verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp": "2020-08-11 02:31:15 +0900",
 "verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp": "2020-08-05 02:19:06 +0900",
 "verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp": "2020-08-02 18:11:02 +0900",
 "verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp": "2020-08-02 19:53:18 +0900",
