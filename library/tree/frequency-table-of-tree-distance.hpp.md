@@ -21,31 +21,29 @@ layout: default
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="../../../assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="../../../assets/css/copy-button.css" />
+<script type="text/javascript" src="../../assets/js/copy-button.js"></script>
+<link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+# :warning: tree/frequency-table-of-tree-distance.hpp
 
-<a href="../../../index.html">Back to top page</a>
+<a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp">View this file on GitHub</a>
+* category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
+* <a href="{{ site.github.repository_url }}/blob/master/tree/frequency-table-of-tree-distance.hpp">View this file on GitHub</a>
     - Last commit date: 2020-08-10 14:17:50+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/inv_of_formal_power_series">https://judge.yosupo.jp/problem/inv_of_formal_power_series</a>
 
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../../../library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :x: <a href="../../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :warning: <a href="../misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
+* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :x: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :question: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :warning: <a href="centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
 
 
 ## Code
@@ -53,329 +51,46 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
+#pragma once
+#include <bits/stdc++.h>
+using namespace std;
 
-#include "../../competitive-template.hpp"
-#include "../../modint/montgomery-modint.hpp"
-#include "../../fps/arbitrary-fps.hpp"
-using mint = LazyMontgomeryModInt<998244353>;
-using fps = FormalPowerSeries<mint>;
+#include "../misc/fixpoint.hpp"
+#include "../ntt/arbitrary-ntt.hpp"
+#include "./centroid-decomposition.hpp"
 
-void solve() {
-  ini(N);
-  fps a(N);
-  in(a);
-  out(a.inv());
-}
+//template<typename G>
+//struct FrequencyTableOf
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
-
-#line 1 "competitive-template.hpp"
-#pragma region kyopro_template
-#define Nyaan_template
-#include <immintrin.h>
+#line 2 "tree/frequency-table-of-tree-distance.hpp"
 #include <bits/stdc++.h>
-#define pb push_back
-#define eb emplace_back
-#define fi first
-#define se second
-#define each(x, v) for (auto &x : v)
-#define all(v) (v).begin(), (v).end()
-#define sz(v) ((int)(v).size())
-#define mem(a, val) memset(a, val, sizeof(a))
-#define ini(...)   \
-  int __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define inl(...)         \
-  long long __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define ins(...)      \
-  string __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define inc(...)    \
-  char __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define in2(s, t)                           \
-  for (int i = 0; i < (int)s.size(); i++) { \
-    in(s[i], t[i]);                         \
-  }
-#define in3(s, t, u)                        \
-  for (int i = 0; i < (int)s.size(); i++) { \
-    in(s[i], t[i], u[i]);                   \
-  }
-#define in4(s, t, u, v)                     \
-  for (int i = 0; i < (int)s.size(); i++) { \
-    in(s[i], t[i], u[i], v[i]);             \
-  }
-#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)
-#define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)
-#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)
-#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)
-#define reg(i, a, b) for (long long i = (a); i < (b); i++)
-#define die(...)      \
-  do {                \
-    out(__VA_ARGS__); \
-    return;           \
-  } while (0)
 using namespace std;
-using ll = long long;
-template <class T>
-using V = vector<T>;
-using vi = vector<int>;
-using vl = vector<long long>;
-using vvi = vector<vector<int>>;
-using vd = V<double>;
-using vs = V<string>;
-using vvl = vector<vector<long long>>;
-using P = pair<long long, long long>;
-using vp = vector<P>;
-using pii = pair<int, int>;
-using vpi = vector<pair<int, int>>;
-constexpr int inf = 1001001001;
-constexpr long long infLL = (1LL << 61) - 1;
-template <typename T, typename U>
-inline bool amin(T &x, U y) {
-  return (y < x) ? (x = y, true) : false;
-}
-template <typename T, typename U>
-inline bool amax(T &x, U y) {
-  return (x < y) ? (x = y, true) : false;
-}
-template <typename T, typename U>
-ostream &operator<<(ostream &os, const pair<T, U> &p) {
-  os << p.first << " " << p.second;
-  return os;
-}
-template <typename T, typename U>
-istream &operator>>(istream &is, pair<T, U> &p) {
-  is >> p.first >> p.second;
-  return is;
-}
-template <typename T>
-ostream &operator<<(ostream &os, const vector<T> &v) {
-  int s = (int)v.size();
-  for (int i = 0; i < s; i++) os << (i ? " " : "") << v[i];
-  return os;
-}
-template <typename T>
-istream &operator>>(istream &is, vector<T> &v) {
-  for (auto &x : v) is >> x;
-  return is;
-}
-void in() {}
-template <typename T, class... U>
-void in(T &t, U &... u) {
-  cin >> t;
-  in(u...);
-}
-void out() { cout << "\n"; }
-template <typename T, class... U>
-void out(const T &t, const U &... u) {
-  cout << t;
-  if (sizeof...(u)) cout << " ";
-  out(u...);
-}
 
-#ifdef NyaanDebug
-#define trc(...)                   \
-  do {                             \
-    cerr << #__VA_ARGS__ << " = "; \
-    dbg_out(__VA_ARGS__);          \
-  } while (0)
-#define trca(v, N)       \
-  do {                   \
-    cerr << #v << " = "; \
-    array_out(v, N);     \
-  } while (0)
-#define trcc(v)                             \
-  do {                                      \
-    cerr << #v << " = {";                   \
-    each(x, v) { cerr << " " << x << ","; } \
-    cerr << "}" << endl;                    \
-  } while (0)
-template <typename T>
-void _cout(const T &c) {
-  cerr << c;
-}
-void _cout(const int &c) {
-  if (c == 1001001001)
-    cerr << "inf";
-  else if (c == -1001001001)
-    cerr << "-inf";
-  else
-    cerr << c;
-}
-void _cout(const unsigned int &c) {
-  if (c == 1001001001)
-    cerr << "inf";
-  else
-    cerr << c;
-}
-void _cout(const long long &c) {
-  if (c == 1001001001 || c == (1LL << 61) - 1)
-    cerr << "inf";
-  else if (c == -1001001001 || c == -((1LL << 61) - 1))
-    cerr << "-inf";
-  else
-    cerr << c;
-}
-void _cout(const unsigned long long &c) {
-  if (c == 1001001001 || c == (1LL << 61) - 1)
-    cerr << "inf";
-  else
-    cerr << c;
-}
-template <typename T, typename U>
-void _cout(const pair<T, U> &p) {
-  cerr << "{ ";
-  _cout(p.fi);
-  cerr << ", ";
-  _cout(p.se);
-  cerr << " } ";
-}
-template <typename T>
-void _cout(const vector<T> &v) {
-  int s = v.size();
-  cerr << "{ ";
-  for (int i = 0; i < s; i++) {
-    cerr << (i ? ", " : "");
-    _cout(v[i]);
-  }
-  cerr << " } ";
-}
-template <typename T>
-void _cout(const vector<vector<T>> &v) {
-  cerr << "[ ";
-  for (const auto &x : v) {
-    cerr << endl;
-    _cout(x);
-    cerr << ", ";
-  }
-  cerr << endl << " ] ";
-}
-void dbg_out() { cerr << endl; }
-template <typename T, class... U>
-void dbg_out(const T &t, const U &... u) {
-  _cout(t);
-  if (sizeof...(u)) cerr << ", ";
-  dbg_out(u...);
-}
-template <typename T>
-void array_out(const T &v, int s) {
-  cerr << "{ ";
-  for (int i = 0; i < s; i++) {
-    cerr << (i ? ", " : "");
-    _cout(v[i]);
-  }
-  cerr << " } " << endl;
-}
-template <typename T>
-void array_out(const T &v, int H, int W) {
-  cerr << "[ ";
-  for (int i = 0; i < H; i++) {
-    cerr << (i ? ", " : "");
-    array_out(v[i], W);
-  }
-  cerr << " ] " << endl;
-}
-#else
-#define trc(...)
-#define trca(...)
-#define trcc(...)
-#endif
+#line 3 "misc/fixpoint.hpp"
+using namespace std;
 
-inline int popcnt(unsigned long long a) { return __builtin_popcountll(a); }
-inline int lsb(unsigned long long a) { return __builtin_ctzll(a); }
-inline int msb(unsigned long long a) { return 63 - __builtin_clzll(a); }
-template <typename T>
-inline int getbit(T a, int i) {
-  return (a >> i) & 1;
-}
-template <typename T>
-inline void setbit(T &a, int i) {
-  a |= (1LL << i);
-}
-template <typename T>
-inline void delbit(T &a, int i) {
-  a &= ~(1LL << i);
-}
-template <typename T>
-int lb(const vector<T> &v, const T &a) {
-  return lower_bound(begin(v), end(v), a) - begin(v);
-}
-template <typename T>
-int ub(const vector<T> &v, const T &a) {
-  return upper_bound(begin(v), end(v), a) - begin(v);
-}
-template <typename T>
-int btw(T a, T x, T b) {
-  return a <= x && x < b;
-}
-template <typename T, typename U>
-T ceil(T a, U b) {
-  return (a + b - 1) / b;
-}
-constexpr long long TEN(int n) {
-  long long ret = 1, x = 10;
-  while (n) {
-    if (n & 1) ret *= x;
-    x *= x;
-    n >>= 1;
+template< typename F >
+struct FixPoint : F {
+  FixPoint(F &&f) : F(forward< F >(f)) {}
+ 
+  template< typename... Args >
+  decltype(auto) operator()(Args &&... args) const {
+    return F::operator()(*this, forward< Args >(args)...);
   }
-  return ret;
-}
-template <typename T>
-vector<T> mkrui(const vector<T> &v) {
-  vector<T> ret(v.size() + 1);
-  for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];
-  return ret;
 };
-template <typename T>
-vector<T> mkuni(const vector<T> &v) {
-  vector<T> ret(v);
-  sort(ret.begin(), ret.end());
-  ret.erase(unique(ret.begin(), ret.end()), ret.end());
-  return ret;
+ 
+template< typename F >
+inline decltype(auto) MFP(F &&f) {
+  return FixPoint< F >{forward< F >(f)};
 }
-template <typename F>
-vector<int> mkord(int N, F f) {
-  vector<int> ord(N);
-  iota(begin(ord), end(ord), 0);
-  sort(begin(ord), end(ord), f);
-  return ord;
-}
-template <typename T = int>
-vector<T> mkiota(int N) {
-  vector<T> ret(N);
-  iota(begin(ret), end(ret), 0);
-  return ret;
-}
-template <typename T>
-vector<int> mkinv(vector<T> &v) {
-  vector<int> inv(v.size());
-  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;
-  return inv;
-}
+#line 3 "ntt/arbitrary-ntt.hpp"
+using namespace std;
 
-struct IoSetupNya {
-  IoSetupNya() {
-    cin.tie(nullptr);
-    ios::sync_with_stdio(false);
-    cout << fixed << setprecision(15);
-    cerr << fixed << setprecision(7);
-  }
-} iosetupnya;
-
-void solve();
-int main() { solve(); }
-
-#pragma endregion
 #line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 
@@ -470,12 +185,6 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 get_mod() { return mod; }
 };
-#line 3 "fps/arbitrary-fps.hpp"
-using namespace std;
-
-#line 3 "ntt/arbitrary-ntt.hpp"
-using namespace std;
-
 #line 3 "ntt/ntt-avx2.hpp"
 using namespace std;
 
@@ -1231,236 +940,65 @@ vector<LazyMontgomeryModInt<mod>> multiply(
 }
 */
 }  // namespace ArbitraryNTT
-#line 3 "fps/formal-power-series.hpp"
+#line 3 "tree/centroid-decomposition.hpp"
 using namespace std;
 
-template <typename mint>
-struct FormalPowerSeries : vector<mint> {
-  using vector<mint>::vector;
-  using FPS = FormalPowerSeries;
+template <typename G>
+struct CentroidDecomposition {
+  const G &g;
+  vector<int> sub;
+  vector<bool> v;
+  vector<vector<int>> tree;
+  int root;
 
-  FPS &operator+=(const FPS &r) {
-    if (r.size() > this->size()) this->resize(r.size());
-    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];
-    return *this;
+  CentroidDecomposition(const G &g_, int isbuild = 1) : g(g_) {
+    if (isbuild) build();
   }
 
-  FPS &operator+=(const mint &r) {
-    if (this->empty()) this->resize(1);
-    (*this)[0] += r;
-    return *this;
+  void build() {
+    sub.resize(g.size(), 0);
+    v.resize(g.size(), false);
+    tree.resize(g.size());
+    root = build_dfs(0);
   }
 
-  FPS &operator-=(const FPS &r) {
-    if (r.size() > this->size()) this->resize(r.size());
-    for (int i = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];
-    return *this;
-  }
-
-  FPS &operator-=(const mint &r) {
-    if (this->empty()) this->resize(1);
-    (*this)[0] -= r;
-    return *this;
-  }
-
-  FPS &operator*=(const mint &v) {
-    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;
-    return *this;
-  }
-
-  FPS &operator/=(const FPS &r) {
-    if (this->size() < r.size()) {
-      this->clear();
-      return *this;
+  int get_size(int cur, int par) {
+    sub[cur] = 1;
+    for (auto &dst : g[cur]) {
+      if (dst == par || v[dst]) continue;
+      sub[cur] += get_size(dst, cur);
     }
-    int n = this->size() - r.size() + 1;
-    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
+    return sub[cur];
   }
 
-  FPS &operator%=(const FPS &r) {
-    *this -= *this / r * r;
-    shrink();
-    return *this;
+  int get_centroid(int cur, int par, int mid) {
+    for (auto &dst : g[cur]) {
+      if (dst == par || v[dst]) continue;
+      if (sub[dst] > mid) return get_centroid(dst, cur, mid);
+    }
+    return cur;
   }
 
-  FPS operator+(const FPS &r) const { return FPS(*this) += r; }
-  FPS operator+(const mint &v) const { return FPS(*this) += v; }
-  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }
-  FPS operator-(const mint &v) const { return FPS(*this) -= v; }
-  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }
-  FPS operator*(const mint &v) const { return FPS(*this) *= v; }
-  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }
-  FPS operator%(const FPS &r) const { return FPS(*this) %= r; }
-  FPS operator-() const {
-    FPS ret(this->size());
-    for (int i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];
-    return ret;
-  }
-
-  void shrink() {
-    while (this->size() && this->back() == mint(0)) this->pop_back();
-  }
-
-  FPS rev() const {
-    FPS ret(*this);
-    reverse(begin(ret), end(ret));
-    return ret;
-  }
-
-  FPS dot(FPS r) const {
-    FPS ret(min(this->size(), r.size()));
-    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];
-    return ret;
-  }
-
-  FPS pre(int sz) const {
-    return FPS(begin(*this), begin(*this) + min((int)this->size(), sz));
-  }
-
-  FPS operator>>(int sz) const {
-    if ((int)this->size() <= sz) return {};
-    FPS ret(*this);
-    ret.erase(ret.begin(), ret.begin() + sz);
-    return ret;
-  }
-
-  FPS operator<<(int sz) const {
-    FPS ret(*this);
-    ret.insert(ret.begin(), sz, mint(0));
-    return ret;
-  }
-
-  FPS diff() const {
-    const int n = (int)this->size();
-    FPS ret(max(0, n - 1));
-    for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * mint(i);
-    return ret;
-  }
-
-  FPS integral() const {
-    const int n = (int)this->size();
-    FPS ret(n + 1);
-    ret[0] = mint(0);
-    for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / mint(i + 1);
-    return ret;
-  }
-
-  mint eval(mint x) const {
-    mint r = 0, w = 1;
-    for (auto &v : *this) r += w * v, w *= x;
-    return r;
-  }
-
-  FPS log(int deg = -1) const {
-    assert((*this)[0] == mint(1));
-    if (deg == -1) deg = (int)this->size();
-    return (this->diff() * this->inv(deg)).pre(deg - 1).integral();
-  }
-
-  FPS pow(int64_t k, int deg = -1) const {
-    const int n = (int)this->size();
-    if (deg == -1) deg = n;
-    for (int i = 0; i < n; i++) {
-      if ((*this)[i] != mint(0)) {
-        if (i * k > deg) return FPS(deg, mint(0));
-        mint rev = mint(1) / (*this)[i];
-        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
-        ret = (ret << (i * k)).pre(deg);
-        if ((int)ret.size() < deg) ret.resize(deg, mint(0));
-        return ret;
+  int build_dfs(int cur) {
+    int centroid = get_centroid(cur, -1, get_size(cur, -1) / 2);
+    v[centroid] = true;
+    for (auto &dst : g[centroid]) {
+      if (!v[dst]) {
+        int nxt = build_dfs(centroid, build_dfs(dst));
+        if (centroid != nxt) tree[centroid].emplace_back(nxt);
       }
     }
-    return FPS(deg, mint(0));
+    v[centroid] = false;
+    return centroid;
   }
-
-  static void *ntt_ptr;
-  static void set_fft();
-  FPS &operator*=(const FPS &r);
-  void ntt();
-  void intt();
-  void ntt_doubling();
-  static int ntt_pr();
-  FPS inv(int deg = -1) const;
-  FPS exp(int deg = -1) const;
 };
-template <typename mint>
-void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
+#line 8 "tree/frequency-table-of-tree-distance.hpp"
 
-/**
- * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
- */
-#line 7 "fps/arbitrary-fps.hpp"
-
-template <typename mint>
-void FormalPowerSeries<mint>::set_fft() {
-  ntt_ptr = nullptr;
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt() {
-  exit(1);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::intt() {
-  exit(1);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt_doubling() {
-  exit(1);
-}
-
-template <typename mint>
-int FormalPowerSeries<mint>::ntt_pr() {
-  exit(1);
-}
-
-template <typename mint>
-FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
-    const FormalPowerSeries<mint>& r) {
-  if (this->empty() || r.empty()) {
-    this->clear();
-    return *this;
-  }
-  auto ret = ArbitraryNTT::multiply(*this, r);
-  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
-}
-
-template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
-  assert((*this)[0] != mint(0));
-  if (deg == -1) deg = (*this).size();
-  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});
-  for (int i = 1; i < deg; i <<= 1)
-    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i << 1);
-  return ret.pre(deg);
-}
-
-template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
-  assert((*this).size() == 0 || (*this)[0] == mint(0));
-  if (deg == -1) deg = (int)this->size();
-  FormalPowerSeries<mint> ret({mint(1)});
-  for (int i = 1; i < deg; i <<= 1) {
-    ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
-  }
-  return ret.pre(deg);
-}
-#line 6 "verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp"
-using mint = LazyMontgomeryModInt<998244353>;
-using fps = FormalPowerSeries<mint>;
-
-void solve() {
-  ini(N);
-  fps a(N);
-  in(a);
-  out(a.inv());
-}
+//template<typename G>
+//struct FrequencyTableOf
 
 ```
 {% endraw %}
 
-<a href="../../../index.html">Back to top page</a>
+<a href="../../index.html">Back to top page</a>
 

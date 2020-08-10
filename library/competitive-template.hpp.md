@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: competitive-template.hpp
+# :question: competitive-template.hpp
 
 <a href="../index.html">Back to top page</a>
 
@@ -91,15 +91,15 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-interpolation.test.cpp.html">verify/verify-yosupo-fps/yosupo-interpolation.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-log-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-log-arb.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yosupo-fps/yosupo-log-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-log-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify/verify-yosupo-fps/yosupo-log.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-multieval.test.cpp.html">verify/verify-yosupo-fps/yosupo-multieval.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
@@ -116,9 +116,9 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-math/yosupo-prime-table.test.cpp.html">verify/verify-yosupo-math/yosupo-prime-table.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
@@ -129,13 +129,13 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify/verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0789.test.cpp.html">verify/verify-yuki/yuki-0789.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp.html">verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 
 
