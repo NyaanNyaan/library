@@ -37,12 +37,13 @@ vector<int> multiply(const vector<T> &s, const vector<T> &t, int mod) {
   auto d2 = mul<T, mint2>(s, t);
   int n = d0.size();
   vector<int> ret(n);
+  const int W1 = w1 % mod;
+  const int W2 = w2 % mod;
   for (int i = 0; i < n; i++) {
-    i64 n1 = d1[i].get(), n2 = d2[i].get();
-    i64 a = d0[i].get();
-    i64 b = (n1 + m1 - a) * r01 % m1;
-    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    ret[i] = (a + b * w1 + c * w2) % mod;
+    int n1 = d1[i].get(), n2 = d2[i].get(), a = d0[i].get();
+    int b = i64(n1 + m1 - a) * r01 % m1;
+    int c = (i64(n2 + m2 - a) * r02r12 + i64(m2 - b) * r12) % m2;
+    ret[i] = (i64(a) + i64(b) * W1 + i64(c) * W2) % mod;
   }
   return ret;
 }
