@@ -31,14 +31,13 @@ layout: default
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/frequency-table-of-tree-distance.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 02:13:10+09:00
+    - Last commit date: 2020-08-11 02:23:11+09:00
 
 
 
 
 ## Depends on
 
-* :x: <a href="../misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
 * :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :question: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
@@ -60,7 +59,6 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "../misc/fixpoint.hpp"
 #include "../ntt/arbitrary-ntt.hpp"
 #include "./centroid-decomposition.hpp"
 
@@ -92,17 +90,17 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         if (v[c]) continue;
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
-        MFP([&](auto dfs, int cur, int par, int d) -> void {
+        auto dfs = [&](auto dfs_, int cur, int par, int d) -> void {
           while ((int)count.size() <= d) count.emplace_back(0);
           while ((int)self.size() <= d) self.emplace_back(0);
           ++count[d];
           ++self[d];
           for (int dst : g[cur]) {
             if (par == dst || v[dst]) continue;
-            dfs(dst, cur, d + 1);
+            dfs_(dfs_, dst, cur, d + 1);
           }
-        })
-        (c, r, 1);
+        };
+        dfs(dfs, c, r, 1);
         auto self2 = ArbitraryNTT::multiply_i128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
@@ -129,23 +127,6 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
 #include <bits/stdc++.h>
 using namespace std;
 
-#line 3 "misc/fixpoint.hpp"
-using namespace std;
-
-template< typename F >
-struct FixPoint : F {
-  FixPoint(F &&f) : F(forward< F >(f)) {}
- 
-  template< typename... Args >
-  decltype(auto) operator()(Args &&... args) const {
-    return F::operator()(*this, forward< Args >(args)...);
-  }
-};
- 
-template< typename F >
-inline decltype(auto) MFP(F &&f) {
-  return FixPoint< F >{forward< F >(f)};
-}
 #line 3 "ntt/arbitrary-ntt.hpp"
 using namespace std;
 
@@ -1018,7 +999,7 @@ struct CentroidDecomposition {
     return centroid;
   }
 };
-#line 8 "tree/frequency-table-of-tree-distance.hpp"
+#line 7 "tree/frequency-table-of-tree-distance.hpp"
 
 template <typename G>
 struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
@@ -1048,17 +1029,17 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         if (v[c]) continue;
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
-        MFP([&](auto dfs, int cur, int par, int d) -> void {
+        auto dfs = [&](auto dfs_, int cur, int par, int d) -> void {
           while ((int)count.size() <= d) count.emplace_back(0);
           while ((int)self.size() <= d) self.emplace_back(0);
           ++count[d];
           ++self[d];
           for (int dst : g[cur]) {
             if (par == dst || v[dst]) continue;
-            dfs(dst, cur, d + 1);
+            dfs_(dfs_, dst, cur, d + 1);
           }
-        })
-        (c, r, 1);
+        };
+        dfs(dfs, c, r, 1);
         auto self2 = ArbitraryNTT::multiply_i128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];

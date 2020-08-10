@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 02:13:10+09:00
+    - Last commit date: 2020-08-11 02:23:11+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/frequency_table_of_tree_distance">https://judge.yosupo.jp/problem/frequency_table_of_tree_distance</a>
@@ -42,7 +42,6 @@ layout: default
 * :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :question: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
 * :question: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :x: <a href="../../../library/misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
 * :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :question: <a href="../../../library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
@@ -601,23 +600,6 @@ using fastio::wtn;
 #line 3 "tree/frequency-table-of-tree-distance.hpp"
 using namespace std;
 
-#line 3 "misc/fixpoint.hpp"
-using namespace std;
-
-template< typename F >
-struct FixPoint : F {
-  FixPoint(F &&f) : F(forward< F >(f)) {}
- 
-  template< typename... Args >
-  decltype(auto) operator()(Args &&... args) const {
-    return F::operator()(*this, forward< Args >(args)...);
-  }
-};
- 
-template< typename F >
-inline decltype(auto) MFP(F &&f) {
-  return FixPoint< F >{forward< F >(f)};
-}
 #line 3 "ntt/arbitrary-ntt.hpp"
 using namespace std;
 
@@ -1490,7 +1472,7 @@ struct CentroidDecomposition {
     return centroid;
   }
 };
-#line 8 "tree/frequency-table-of-tree-distance.hpp"
+#line 7 "tree/frequency-table-of-tree-distance.hpp"
 
 template <typename G>
 struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
@@ -1520,17 +1502,17 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         if (v[c]) continue;
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
-        MFP([&](auto dfs, int cur, int par, int d) -> void {
+        auto dfs = [&](auto dfs_, int cur, int par, int d) -> void {
           while ((int)count.size() <= d) count.emplace_back(0);
           while ((int)self.size() <= d) self.emplace_back(0);
           ++count[d];
           ++self[d];
           for (int dst : g[cur]) {
             if (par == dst || v[dst]) continue;
-            dfs(dst, cur, d + 1);
+            dfs_(dfs_, dst, cur, d + 1);
           }
-        })
-        (c, r, 1);
+        };
+        dfs(dfs, c, r, 1);
         auto self2 = ArbitraryNTT::multiply_i128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];

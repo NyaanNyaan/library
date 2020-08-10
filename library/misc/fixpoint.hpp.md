@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: misc/fixpoint.hpp
+# :warning: misc/fixpoint.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -34,16 +34,6 @@ layout: default
     - Last commit date: 2020-08-10 14:17:50+09:00
 
 
-
-
-## Required by
-
-* :x: <a href="../tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
-
-
-## Verified with
-
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 
 
 ## Code
