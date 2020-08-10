@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: ntt/ntt-avx2.hpp
+# :heavy_check_mark: ntt/ntt-avx2.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,15 +38,15 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 ## Required by
 
 * :heavy_check_mark: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :heavy_check_mark: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :question: <a href="arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :x: <a href="../tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
+* :heavy_check_mark: <a href="arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="../tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
 
 
 ## Verified with
@@ -63,7 +63,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>

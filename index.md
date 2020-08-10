@@ -39,7 +39,7 @@ layout: default
 ### .
 
 * :warning: <a href="library/bundle.py.html">bundle.py</a>
-* :question: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -94,7 +94,7 @@ layout: default
 ### graph
 
 * :warning: <a href="library/graph/dimension-expanded-graph.hpp.html">graph/dimension-expanded-graph.hpp</a>
-* :question: <a href="library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
 * :heavy_check_mark: <a href="library/graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
 * :heavy_check_mark: <a href="library/graph/kruskal.hpp.html">graph/kruskal.hpp</a>
 * :heavy_check_mark: <a href="library/graph/lowlink.hpp.html">graph/lowlink.hpp</a>
@@ -128,7 +128,7 @@ layout: default
 ### misc
 
 * :heavy_check_mark: <a href="library/misc/compress.hpp.html">misc/compress.hpp</a>
-* :question: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
 * :warning: <a href="library/misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
 * :heavy_check_mark: <a href="library/misc/mo.hpp.html">misc/mo.hpp</a>
 * :warning: <a href="library/misc/rng.hpp.html">misc/rng.hpp</a>
@@ -144,8 +144,8 @@ layout: default
 * :heavy_check_mark: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :question: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 <div id="5dcb4a1ea5a35da52691d50c8313c333"></div>
@@ -162,8 +162,8 @@ layout: default
 
 ### ntt
 
-* :question: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :question: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 * :heavy_check_mark: <a href="library/ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
 * :heavy_check_mark: <a href="library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
 
@@ -212,10 +212,10 @@ layout: default
 ### tree
 
 * :heavy_check_mark: <a href="library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
-* :x: <a href="library/tree/centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
+* :heavy_check_mark: <a href="library/tree/centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
 * :warning: <a href="library/tree/dsu-on-tree.hpp.html">tree/dsu-on-tree.hpp</a>
 * :warning: <a href="library/tree/euler-tour.hpp.html">tree/euler-tour.hpp</a>
-* :x: <a href="library/tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
+* :heavy_check_mark: <a href="library/tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
 * :heavy_check_mark: <a href="library/tree/heavy-light-decomposition.hpp.html">tree/heavy-light-decomposition.hpp</a>
 * :heavy_check_mark: <a href="library/tree/rerooting.hpp.html">tree/rerooting.hpp</a>
 
@@ -300,7 +300,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
-* :x: <a href="verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp.html">verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp.html">verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp</a>

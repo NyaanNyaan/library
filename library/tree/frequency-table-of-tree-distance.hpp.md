@@ -25,29 +25,29 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: tree/frequency-table-of-tree-distance.hpp
+# :heavy_check_mark: tree/frequency-table-of-tree-distance.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/frequency-table-of-tree-distance.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 02:23:11+09:00
+    - Last commit date: 2020-08-11 02:31:15+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :question: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :question: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
-* :x: <a href="centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
+* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 
 
 ## Code
@@ -72,11 +72,24 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
   FrequencyTableOfTreeDistance(const G &g)
       : CentroidDecomposition<G>(g, false) {}
 
+  vector<long long> count, self;
+
+  void dfs_depth(int cur, int par, int d) {
+    while ((int)count.size() <= d) count.emplace_back(0);
+    while ((int)self.size() <= d) self.emplace_back(0);
+    ++count[d];
+    ++self[d];
+    for (int dst : g[cur]) {
+      if (par == dst || v[dst]) continue;
+      dfs_depth(dst, cur, d + 1);
+    }
+  };
+
   vector<long long> get(int start = 0) {
     queue<int> Q;
     int root = get_centroid(start, -1, get_size(start, -1) / 2);
     Q.push(root);
-    vector<long long> ans, count, self;
+    vector<long long> ans;
     ans.reserve(g.size());
     count.reserve(g.size());
     self.reserve(g.size());
@@ -90,17 +103,7 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         if (v[c]) continue;
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
-        auto dfs = [&](auto dfs_, int cur, int par, int d) -> void {
-          while ((int)count.size() <= d) count.emplace_back(0);
-          while ((int)self.size() <= d) self.emplace_back(0);
-          ++count[d];
-          ++self[d];
-          for (int dst : g[cur]) {
-            if (par == dst || v[dst]) continue;
-            dfs_(dfs_, dst, cur, d + 1);
-          }
-        };
-        dfs(dfs, c, r, 1);
+        dfs_depth(c, r, 1);
         auto self2 = ArbitraryNTT::multiply_i128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
@@ -1011,11 +1014,24 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
   FrequencyTableOfTreeDistance(const G &g)
       : CentroidDecomposition<G>(g, false) {}
 
+  vector<long long> count, self;
+
+  void dfs_depth(int cur, int par, int d) {
+    while ((int)count.size() <= d) count.emplace_back(0);
+    while ((int)self.size() <= d) self.emplace_back(0);
+    ++count[d];
+    ++self[d];
+    for (int dst : g[cur]) {
+      if (par == dst || v[dst]) continue;
+      dfs_depth(dst, cur, d + 1);
+    }
+  };
+
   vector<long long> get(int start = 0) {
     queue<int> Q;
     int root = get_centroid(start, -1, get_size(start, -1) / 2);
     Q.push(root);
-    vector<long long> ans, count, self;
+    vector<long long> ans;
     ans.reserve(g.size());
     count.reserve(g.size());
     self.reserve(g.size());
@@ -1029,17 +1045,7 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         if (v[c]) continue;
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
-        auto dfs = [&](auto dfs_, int cur, int par, int d) -> void {
-          while ((int)count.size() <= d) count.emplace_back(0);
-          while ((int)self.size() <= d) self.emplace_back(0);
-          ++count[d];
-          ++self[d];
-          for (int dst : g[cur]) {
-            if (par == dst || v[dst]) continue;
-            dfs_(dfs_, dst, cur, d + 1);
-          }
-        };
-        dfs(dfs, c, r, 1);
+        dfs_depth(c, r, 1);
         auto self2 = ArbitraryNTT::multiply_i128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];

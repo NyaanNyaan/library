@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: ntt/arbitrary-ntt.hpp
+# :heavy_check_mark: ntt/arbitrary-ntt.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,15 +38,15 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :question: <a href="ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Required by
 
 * :heavy_check_mark: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :x: <a href="../tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
+* :heavy_check_mark: <a href="../tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
 
 
 ## Verified with
@@ -55,7 +55,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-log-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-log-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>

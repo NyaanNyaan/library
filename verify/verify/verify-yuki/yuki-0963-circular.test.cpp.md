@@ -39,14 +39,14 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/fps/fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
-* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code

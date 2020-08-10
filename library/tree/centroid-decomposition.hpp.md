@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: tree/centroid-decomposition.hpp
+# :heavy_check_mark: tree/centroid-decomposition.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,12 +38,12 @@ layout: default
 
 ## Required by
 
-* :x: <a href="frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
+* :heavy_check_mark: <a href="frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 
 
 ## Code
