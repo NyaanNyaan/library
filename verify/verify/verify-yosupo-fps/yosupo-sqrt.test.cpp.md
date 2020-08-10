@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
@@ -40,13 +40,13 @@ layout: default
 ## Depends on
 
 * :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :x: <a href="../../../library/fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
-* :question: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :question: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../../../library/fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
+* :heavy_check_mark: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :question: <a href="../../../library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
 * :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 

@@ -42,7 +42,7 @@ layout: default
 * :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
 * :question: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :question: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 
 
