@@ -7,7 +7,7 @@ using namespace std;
 
 namespace ArbitraryNTT {
 using i64 = int64_t;
-using i128 = __uint128_t;
+using i128 = __int128_t;
 constexpr int32_t m0 = 167772161;
 constexpr int32_t m1 = 469762049;
 constexpr int32_t m2 = 754974721;
