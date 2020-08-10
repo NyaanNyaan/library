@@ -2,7 +2,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "../misc/fixpoint.hpp"
 #include "../ntt/arbitrary-ntt.hpp"
 #include "./centroid-decomposition.hpp"
 
@@ -34,17 +33,17 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         if (v[c]) continue;
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
-        MFP([&](auto dfs, int cur, int par, int d) -> void {
+        auto dfs = [&](auto dfs_, int cur, int par, int d) -> void {
           while ((int)count.size() <= d) count.emplace_back(0);
           while ((int)self.size() <= d) self.emplace_back(0);
           ++count[d];
           ++self[d];
           for (int dst : g[cur]) {
             if (par == dst || v[dst]) continue;
-            dfs(dst, cur, d + 1);
+            dfs_(dfs_, dst, cur, d + 1);
           }
-        })
-        (c, r, 1);
+        };
+        dfs(dfs, c, r, 1);
         auto self2 = ArbitraryNTT::multiply_i128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
