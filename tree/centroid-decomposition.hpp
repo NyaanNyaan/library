@@ -10,13 +10,13 @@ struct CentroidDecomposition {
   vector<vector<int>> tree;
   int root;
 
-  CentroidDecomposition(const G &g_, int isbuild = 1) : g(g_) {
+  CentroidDecomposition(const G &g_, int isbuild = true) : g(g_) {
+    sub.resize(g.size(), 0);
+    v.resize(g.size(), false);
     if (isbuild) build();
   }
 
   void build() {
-    sub.resize(g.size(), 0);
-    v.resize(g.size(), false);
     tree.resize(g.size());
     root = build_dfs(0);
   }
@@ -43,7 +43,7 @@ struct CentroidDecomposition {
     v[centroid] = true;
     for (auto &dst : g[centroid]) {
       if (!v[dst]) {
-        int nxt = build_dfs(centroid, build_dfs(dst));
+        int nxt = build_dfs(dst);
         if (centroid != nxt) tree[centroid].emplace_back(nxt);
       }
     }
