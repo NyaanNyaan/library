@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#011eb2a53bd4e154f230a822c229c9cb">verify/verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 00:13:26+09:00
+    - Last commit date: 2020-08-11 01:41:09+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -1226,7 +1226,7 @@ struct NTT {
 
 namespace ArbitraryNTT {
 using i64 = int64_t;
-using i128 = __uint128_t;
+using i128 = __int128_t;
 constexpr int32_t m0 = 167772161;
 constexpr int32_t m1 = 469762049;
 constexpr int32_t m2 = 754974721;

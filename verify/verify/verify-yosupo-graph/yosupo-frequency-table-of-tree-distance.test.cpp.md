@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 00:13:26+09:00
+    - Last commit date: 2020-08-11 01:41:09+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/frequency_table_of_tree_distance">https://judge.yosupo.jp/problem/frequency_table_of_tree_distance</a>
@@ -1353,7 +1353,7 @@ struct NTT {
 
 namespace ArbitraryNTT {
 using i64 = int64_t;
-using i128 = __uint128_t;
+using i128 = __int128_t;
 constexpr int32_t m0 = 167772161;
 constexpr int32_t m1 = 469762049;
 constexpr int32_t m2 = 754974721;
