@@ -39,7 +39,7 @@ layout: default
 ### .
 
 * :warning: <a href="library/bundle.py.html">bundle.py</a>
-* :question: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -67,13 +67,13 @@ layout: default
 
 ### fps
 
-* :question: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :heavy_check_mark: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">fps/differential-equation.hpp</a>
 * :warning: <a href="library/fps/famous-series.hpp.html">fps/famous-series.hpp</a>
-* :question: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :question: <a href="library/fps/fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
+* :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="library/fps/fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
-* :x: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
+* :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :heavy_check_mark: <a href="library/fps/polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
@@ -144,15 +144,15 @@ layout: default
 * :heavy_check_mark: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :question: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :question: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 <div id="5dcb4a1ea5a35da52691d50c8313c333"></div>
 
 ### modulo
 
-* :question: <a href="library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :heavy_check_mark: <a href="library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
 * :heavy_check_mark: <a href="library/modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
 * :heavy_check_mark: <a href="library/modulo/mod-log.hpp.html">modulo/mod-log.hpp</a>
 * :heavy_check_mark: <a href="library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
@@ -162,8 +162,8 @@ layout: default
 
 ### ntt
 
-* :question: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :question: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :heavy_check_mark: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :heavy_check_mark: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 * :heavy_check_mark: <a href="library/ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
 * :heavy_check_mark: <a href="library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
 
@@ -314,7 +314,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :x: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
@@ -325,13 +325,13 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify/verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
-* :x: <a href="verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
-* :x: <a href="verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0789.test.cpp.html">verify/verify-yuki/yuki-0789.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp.html">verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
-* :x: <a href="verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-helloworld.test.cpp.html">verify/verify-yuki/yuki-helloworld.test.cpp</a>
 
