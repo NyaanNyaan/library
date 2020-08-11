@@ -47,13 +47,13 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
         dfs_depth(c, r, 1);
-        auto self2 = ArbitraryNTT::multiply_i128(self, self);
+        auto self2 = ArbitraryNTT::multiply_u128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
       }
       if (count.empty()) continue;
       ++count[0];
-      auto count2 = ArbitraryNTT::multiply_i128(count, count);
+      auto count2 = ArbitraryNTT::multiply_u128(count, count);
       while (count2.size() > ans.size()) ans.emplace_back(0);
       for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];
     }
