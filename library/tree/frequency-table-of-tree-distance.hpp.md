@@ -31,17 +31,17 @@ layout: default
 
 * category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/tree/frequency-table-of-tree-distance.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-11 02:31:15+09:00
+    - Last commit date: 2020-08-11 16:52:22+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
+* :question: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 * :heavy_check_mark: <a href="centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
 
 
@@ -104,13 +104,13 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
         dfs_depth(c, r, 1);
-        auto self2 = ArbitraryNTT::multiply_i128(self, self);
+        auto self2 = ArbitraryNTT::multiply_u128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
       }
       if (count.empty()) continue;
       ++count[0];
-      auto count2 = ArbitraryNTT::multiply_i128(count, count);
+      auto count2 = ArbitraryNTT::multiply_u128(count, count);
       while (count2.size() > ans.size()) ans.emplace_back(0);
       for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];
     }
@@ -874,7 +874,7 @@ struct NTT {
 
 namespace ArbitraryNTT {
 using i64 = int64_t;
-using i128 = __int128_t;
+using u128 = __uint128_t;
 constexpr int32_t m0 = 167772161;
 constexpr int32_t m1 = 469762049;
 constexpr int32_t m2 = 754974721;
@@ -927,10 +927,10 @@ vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
 }
 
 template <typename T>
-vector<i128> multiply_i128(const vector<T> &s, const vector<T> &t) {
+vector<u128> multiply_u128(const vector<T> &s, const vector<T> &t) {
   if (s.size() == 0 && t.size() == 0) return {};
   if (min<int>(s.size(), t.size()) < 128) {
-    vector<i128> ret(s.size() + t.size() - 1);
+    vector<u128> ret(s.size() + t.size() - 1);
     for (int i = 0; i < (int)s.size(); ++i)
       for (int j = 0; j < (int)t.size(); ++j) ret[i + j] += i64(s[i]) * t[j];
     return ret;
@@ -939,12 +939,12 @@ vector<i128> multiply_i128(const vector<T> &s, const vector<T> &t) {
   auto d1 = mul<T, mint1>(s, t);
   auto d2 = mul<T, mint2>(s, t);
   int n = d0.size();
-  vector<i128> ret(n);
+  vector<u128> ret(n);
   for (int i = 0; i < n; i++) {
     i64 n1 = d1[i].get(), n2 = d2[i].get();
     i64 a = d0[i].get();
-    i128 b = (n1 + m1 - a) * r01 % m1;
-    i128 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    u128 b = (n1 + m1 - a) * r01 % m1;
+    u128 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
     ret[i] = a + b * w1 + c * w2;
   }
   return ret;
@@ -1046,13 +1046,13 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
         dfs_depth(c, r, 1);
-        auto self2 = ArbitraryNTT::multiply_i128(self, self);
+        auto self2 = ArbitraryNTT::multiply_u128(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
       }
       if (count.empty()) continue;
       ++count[0];
-      auto count2 = ArbitraryNTT::multiply_i128(count, count);
+      auto count2 = ArbitraryNTT::multiply_u128(count, count);
       while (count2.size() > ans.size()) ans.emplace_back(0);
       for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];
     }
