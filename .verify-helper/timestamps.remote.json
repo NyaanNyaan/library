@@ -57,6 +57,7 @@
 "verify/verify-yosupo-fps/yosupo-interpolation.test.cpp": "2020-08-11 00:13:26 +0900",
 "verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp": "2020-08-11 16:52:22 +0900",
 "verify/verify-yosupo-fps/yosupo-inv.test.cpp": "2020-08-11 00:13:26 +0900",
+"verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp": "2020-08-12 21:42:19 +0900",
 "verify/verify-yosupo-fps/yosupo-log-arb.test.cpp": "2020-08-11 16:52:22 +0900",
 "verify/verify-yosupo-fps/yosupo-log.test.cpp": "2020-08-11 00:13:26 +0900",
 "verify/verify-yosupo-fps/yosupo-multieval.test.cpp": "2020-08-11 00:13:26 +0900",
