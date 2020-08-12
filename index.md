@@ -39,7 +39,7 @@ layout: default
 ### .
 
 * :warning: <a href="library/bundle.py.html">bundle.py</a>
-* :question: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -68,7 +68,7 @@ layout: default
 ### fps
 
 * :heavy_check_mark: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :x: <a href="library/fps/berlekamp-massey.hpp.html">fps/berlekamp-massey.hpp</a>
+* :heavy_check_mark: <a href="library/fps/berlekamp-massey.hpp.html">fps/berlekamp-massey.hpp</a>
 * :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">fps/differential-equation.hpp</a>
 * :warning: <a href="library/fps/famous-series.hpp.html">fps/famous-series.hpp</a>
 * :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
@@ -129,7 +129,7 @@ layout: default
 ### misc
 
 * :heavy_check_mark: <a href="library/misc/compress.hpp.html">misc/compress.hpp</a>
-* :question: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
 * :warning: <a href="library/misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
 * :heavy_check_mark: <a href="library/misc/mo.hpp.html">misc/mo.hpp</a>
 * :warning: <a href="library/misc/rng.hpp.html">misc/rng.hpp</a>
@@ -145,7 +145,7 @@ layout: default
 * :heavy_check_mark: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :question: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
@@ -292,7 +292,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-interpolation.test.cpp.html">verify/verify-yosupo-fps/yosupo-interpolation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv.test.cpp</a>
-* :x: <a href="verify/verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp.html">verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp.html">verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-log-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-log-arb.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify/verify-yosupo-fps/yosupo-log.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-multieval.test.cpp.html">verify/verify-yosupo-fps/yosupo-multieval.test.cpp</a>

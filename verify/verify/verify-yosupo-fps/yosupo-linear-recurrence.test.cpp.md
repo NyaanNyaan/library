@@ -25,23 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-12 21:35:55+09:00
+    - Last commit date: 2020-08-12 21:42:19+09:00
 
 
+* see: <a href="https://judge.yosupo.jp/problem/find_linear_recurrence">https://judge.yosupo.jp/problem/find_linear_recurrence</a>
 
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../../../library/fps/berlekamp-massey.hpp.html">fps/berlekamp-massey.hpp</a>
-* :question: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/fps/berlekamp-massey.hpp.html">fps/berlekamp-massey.hpp</a>
+* :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 
 
 ## Code
@@ -49,6 +50,8 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
+#define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
+
 #include "../../competitive-template.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../fps/berlekamp-massey.hpp"
@@ -79,6 +82,9 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
+#line 1 "verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
+
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
 #define Nyaan_template
@@ -609,7 +615,7 @@ struct Dummy {
 using fastio::rd;
 using fastio::wt;
 using fastio::wtn;
-#line 5 "verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp"
+#line 7 "verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp"
 
 void solve() {
   using mint = LazyMontgomeryModInt<998244353>;
