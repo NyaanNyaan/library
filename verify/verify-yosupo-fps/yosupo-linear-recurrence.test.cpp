@@ -1,3 +1,5 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
+
 #include "../../competitive-template.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../fps/berlekamp-massey.hpp"
