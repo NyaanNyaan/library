@@ -25,24 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+# :x: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 02:19:06+09:00
+* category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-12 21:35:55+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
 
 
 ## Depends on
 
 * :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
-* :heavy_check_mark: <a href="../../../library/tree/heavy-light-decomposition.hpp.html">tree/heavy-light-decomposition.hpp</a>
+* :x: <a href="../../../library/fps/berlekamp-massey.hpp.html">fps/berlekamp-massey.hpp</a>
+* :question: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 
 
 ## Code
@@ -50,35 +49,36 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
-
 #include "../../competitive-template.hpp"
-#include "../../tree/cartesian-tree.hpp"
-#include "../../tree/heavy-light-decomposition.hpp"
+#include "../../modint/montgomery-modint.hpp"
+#include "../../fps/berlekamp-massey.hpp"
+#include "misc/fastio.hpp"
 
 void solve() {
-  ini(N, L);
-  vi a(N);
-  in(a);
-  vvi g;
-  int root;
-  tie(g, root) = CartesianTree<int>(a);
-  HeavyLightDecomposition<vvi> hld(g, root);
-  vi ans(N - L + 1);
-  rep(i, N - L + 1) ans[i] = a[hld.lca(i, i + L - 1)];
-  out(ans);
+  using mint = LazyMontgomeryModInt<998244353>;
+  int N;
+  rd(N);
+  V<mint> a(N);
+  for (int i = 0; i < N; i++) {
+    int n;
+    rd(n);
+    a[i] = n;
+  }
+  auto b = BerlekampMassey<mint>(a);
+  wtn(b.size() - 1);
+  for (int i = 1; i < (int)b.size(); i++) {
+    if (i != 1) wt(' ');
+    wt((-b[i]).get());
+  }
+  wt('\n');
 }
+
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
-
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
 #define Nyaan_template
@@ -379,292 +379,255 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "tree/cartesian-tree.hpp"
+#line 3 "modint/montgomery-modint.hpp"
 using namespace std;
 
-#line 3 "graph/graph-template.hpp"
-using namespace std;
+template <uint32_t mod>
+struct LazyMontgomeryModInt {
+  using mint = LazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
 
-template <typename T>
-struct edge {
-  int src, to;
-  T cost;
+  static constexpr u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
+  }
 
-  edge(int to, T cost) : src(-1), to(to), cost(cost) {}
-  edge(int src, int to, T cost) : src(src), to(to), cost(cost) {}
+  static constexpr u32 r = get_r();
+  static constexpr u32 n2 = -u64(mod) % mod;
+  static_assert(r * mod == 1, "invalid, r * mod != 1");
+  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
+  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
 
-  edge &operator=(const int &x) {
-    to = x;
+  u32 a;
+
+  constexpr LazyMontgomeryModInt() : a(0) {}
+  constexpr LazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static constexpr u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
+  }
+
+  constexpr mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
     return *this;
   }
 
-  operator int() const { return to; }
-};
-template <typename T>
-using Edges = vector<edge<T>>;
-template <typename T>
-using WeightedGraph = vector<Edges<T>>;
-using UnweightedGraph = vector<vector<int>>;
-
-// Input of (Unweighted) Graph
-UnweightedGraph graph(int N, int M = -1, bool is_directed = false,
-                      bool is_1origin = true) {
-  UnweightedGraph g(N);
-  if (M == -1) M = N - 1;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    if (is_1origin) x--, y--;
-    g[x].push_back(y);
-    if (!is_directed) g[y].push_back(x);
+  constexpr mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
+    return *this;
   }
-  return g;
-}
 
-// Input of Weighted Graph
-template <typename T>
-WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
-                        bool is_1origin = true) {
-  WeightedGraph<T> g(N);
-  if (M == -1) M = N - 1;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    cin >> c;
-    if (is_1origin) x--, y--;
-    g[x].eb(x, y, c);
-    if (!is_directed) g[y].eb(y, x, c);
+  constexpr mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
+    return *this;
   }
-  return g;
-}
 
-// Input of Edges
-template <typename T>
-Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
-  Edges<T> es;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    if (is_weighted)
-      cin >> c;
-    else
-      c = 1;
-    if (is_1origin) x--, y--;
-    es.emplace_back(x, y, c);
+  constexpr mint &operator/=(const mint &b) {
+    *this *= b.inverse();
+    return *this;
   }
-  return es;
-}
 
-// Input of Adjacency Matrix
-template <typename T>
-vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
-                           bool is_directed = false, bool is_1origin = true) {
-  vector<vector<T>> d(N, vector<T>(N, INF));
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    if (is_weighted)
-      cin >> c;
-    else
-      c = 1;
-    if (is_1origin) x--, y--;
-    d[x][y] = c;
-    if (!is_directed) d[y][x] = c;
+  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
+  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
+  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
+  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
+  constexpr bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
   }
-  return d;
-}
-#line 6 "tree/cartesian-tree.hpp"
+  constexpr bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr mint operator-() const { return mint() - mint(*this); }
 
-// return value : pair<graph, root>
-template <typename T>
-pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {
-  int N = (int)a.size();
-  vector<vector<int>> g(N);
-  vector<int> p(N, -1), st;
-  st.reserve(N);
-  for (int i = 0; i < N; i++) {
-    int prv = -1;
-    while (!st.empty() && a[i] < a[st.back()]) {
-      prv = st.back();
-      st.pop_back();
+  constexpr mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
     }
-    if (prv != -1) p[prv] = i;
-    if (!st.empty()) p[i] = st.back();
-    st.push_back(i);
+    return ret;
   }
-  int root = -1;
-  for (int i = 0; i < N; i++) {
-    if (p[i] != -1)
-      g[p[i]].push_back(i);
-    else
-      root = i;
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
+
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
   }
-  return make_pair(g, root);
-}
-#line 3 "tree/heavy-light-decomposition.hpp"
+
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = LazyMontgomeryModInt<mod>(t);
+    return (is);
+  }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
+
+  static constexpr u32 get_mod() { return mod; }
+};
+#line 3 "fps/berlekamp-massey.hpp"
 using namespace std;
 
-#line 6 "tree/heavy-light-decomposition.hpp"
-
-template <typename G>
-struct HeavyLightDecomposition {
-  G& g;
-  int idx;
-  vector<int> size, depth, in, out, nxt, par;
-  HeavyLightDecomposition(G& g, int root = 0)
-      : g(g),
-        idx(0),
-        size(g.size(), 0),
-        depth(g.size(), 0),
-        in(g.size(), -1),
-        out(g.size(), -1),
-        nxt(g.size(), root),
-        par(g.size(), root) {
-    dfs_sz(root);
-    dfs_hld(root);
-  }
-
-  void build(int root) {
-    dfs_sz(root);
-    dfs_hld(root);
-  }
-
-  void dfs_sz(int cur) {
-    size[cur] = 1;
-    for (auto& dst : g[cur]) {
-      if (dst == par[cur]) {
-        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))
-          swap(g[cur][0], g[cur][1]);
-        else
-          continue;
-      }
-      depth[dst] = depth[cur] + 1;
-      par[dst] = cur;
-      dfs_sz(dst);
-      size[cur] += size[dst];
-      if (size[dst] > size[g[cur][0]]) {
-        swap(dst, g[cur][0]);
-      }
+template <typename mint>
+vector<mint> BerlekampMassey(const vector<mint> &s) {
+  const int N = (int)s.size();
+  vector<mint> b, c;
+  b.reserve(N + 1);
+  c.reserve(N + 1);
+  b.push_back(mint(1));
+  c.push_back(mint(1));
+  mint y = mint(1);
+  for (int ed = 1; ed <= N; ed++) {
+    int l = int(c.size()), m = int(b.size());
+    mint x = 0;
+    for (int i = 0; i < l; i++) x += c[i] * s[ed - l + i];
+    b.emplace_back(mint(0));
+    m++;
+    if (x == mint(0)) continue;
+    mint freq = x / y;
+    if (l < m) {
+      auto tmp = c;
+      c.insert(begin(c), m - l, mint(0));
+      for (int i = 0; i < m; i++) c[m - 1 - i] -= freq * b[m - 1 - i];
+      b = tmp;
+      y = x;
+    } else {
+      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];
     }
   }
+  reverse(begin(c), end(c));
+  return c;
+}
+#line 3 "misc/fastio.hpp"
+using namespace std;
 
-  void dfs_hld(int cur) {
-    in[cur] = idx++;
-    for (auto dst : g[cur]) {
-      if (dst == par[cur]) continue;
-      nxt[dst] = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));
-      dfs_hld(dst);
-    }
-    out[cur] = idx;
-  }
+namespace fastio {
+static constexpr int SZ = 1 << 17;
+char ibuf[SZ], obuf[SZ];
+int pil = 0, pir = 0, por = 0;
 
-  template <typename F>
-  void edge_query(int u, int v, const F& f) {
-    while (1) {
-      if (in[u] > in[v]) swap(u, v);
-      if (nxt[u] != nxt[v]) {
-        f(in[nxt[v]], in[v] + 1);
-        v = par[nxt[v]];
-      } else {
-        if (u != v) f(in[u] + 1, in[v] + 1);
-        break;
+struct Pre {
+  char num[40000];
+  constexpr Pre() : num() {
+    for (int i = 0; i < 10000; i++) {
+      int n = i;
+      for (int j = 3; j >= 0; j--) {
+        num[i * 4 + j] = n % 10 + '0';
+        n /= 10;
       }
     }
   }
+} constexpr pre;
 
-  // TODO : verify
-  template <typename F>
-  void uncommutable_edge_query(int u, int v, const F& f) {
-    while (1) {
-      if (nxt[u] != nxt[v]) {
-        if (in[u] > in[v]) {
-          f(in[u] + 1, in[nxt[u]], true);
-          u = par[nxt[u]];
-        } else {
-          f(in[nxt[v]], in[v] + 1, false);
-          v = par[nxt[v]];
-        }
-      } else {
-        if (in[u] != in[v]) {
-          if (in[u] > in[v])
-            f(in[u] + 1, in[v] + 1, true);
-          else
-            f(in[u] + 1, in[v] + 1, true);
-        }
-        break;
-      }
-    }
-  }
+inline void load() {
+  memcpy(ibuf, ibuf + pil, pir - pil);
+  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);
+  pil = 0;
+}
+inline void flush() {
+  fwrite(obuf, 1, por, stdout);
+  por = 0;
+}
 
-  template <typename F>
-  void node_query(int u, int v, const F& f) {
-    while (1) {
-      if (in[u] > in[v]) swap(u, v);
-      if (nxt[u] != nxt[v]) {
-        f(in[nxt[v]], in[v] + 1);
-        v = par[nxt[v]];
-      } else {
-        f(in[u], in[v] + 1);
-        break;
-      }
-    }
+inline void rd(char& c) { c = ibuf[pil++]; }
+template <typename T>
+inline void rd(T& x) {
+  if (pil + 32 > pir) load();
+  char c;
+  do
+    c = ibuf[pil++];
+  while (c < '-');
+  bool minus = 0;
+  if (c == '-') {
+    minus = 1;
+    c = ibuf[pil++];
   }
+  x = 0;
+  while (c >= '0') {
+    x = x * 10 + (c & 15);
+    c = ibuf[pil++];
+  }
+  if (minus) x = -x;
+}
+inline void rd() {}
+template <typename Head, typename... Tail>
+inline void rd(Head& head, Tail&... tail) {
+  rd(head);
+  rd(tail...);
+}
 
-  template <typename F>
-  void uncommutable_node_query(int u, int v, const F& f) {
-    while (1) {
-      if (nxt[u] != nxt[v]) {
-        if (in[u] > in[v]) {
-          f(in[u] + 1, in[nxt[u]], true);
-          u = par[nxt[u]];
-        } else {
-          f(in[nxt[v]], in[v] + 1, false);
-          v = par[nxt[v]];
-        }
-      } else {
-        if (in[u] > in[v])
-          f(in[u] + 1, in[v], true);
-        else
-          f(in[u], in[v] + 1, true);
-        break;
-      }
-    }
+inline void wt(char c) { obuf[por++] = c; }
+template <typename T>
+inline void wt(T x) {
+  if (por > SZ - 32) flush();
+  if (!x) {
+    obuf[por++] = '0';
+    return;
   }
+  if (x < 0) {
+    obuf[por++] = '-';
+    x = -x;
+  }
+  int i = 12;
+  char buf[16];
+  while (x >= 10000) {
+    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);
+    x /= 10000;
+    i -= 4;
+  }
+  int d = x < 100 ? (x < 10 ? 1 : 2) : (x < 1000 ? 3 : 4);
+  memcpy(obuf + por, pre.num + x * 4 + 4 - d, d);
+  por += d;
+  memcpy(obuf + por, buf + i + 4, 12 - i);
+  por += 12 - i;
+}
 
-  template <typename F>
-  void sub_edge_query(int u, const F& f) {
-    f(in[u] + 1, out[u]);
-  }
+inline void wt() {}
+template <typename Head, typename... Tail>
+inline void wt(Head head, Tail... tail) {
+  wt(head);
+  wt(tail...);
+}
+template<typename T>
+inline void wtn(T x){
+  wt(x, '\n');
+}
 
-  template <typename F>
-  void sub_node_query(int u, const F& f) {
-    f(in[u], out[u]);
-  }
+struct Dummy {
+  Dummy() { atexit(flush); }
+} dummy;
 
-  int lca(int a, int b) {
-    while (nxt[a] != nxt[b]) {
-      if (in[a] < in[b]) swap(a, b);
-      a = par[nxt[a]];
-    }
-    return depth[a] < depth[b] ? a : b;
-  }
-};
-#line 7 "verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp"
+}  // namespace fastio
+using fastio::rd;
+using fastio::wt;
+using fastio::wtn;
+#line 5 "verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp"
 
 void solve() {
-  ini(N, L);
-  vi a(N);
-  in(a);
-  vvi g;
-  int root;
-  tie(g, root) = CartesianTree<int>(a);
-  HeavyLightDecomposition<vvi> hld(g, root);
-  vi ans(N - L + 1);
-  rep(i, N - L + 1) ans[i] = a[hld.lca(i, i + L - 1)];
-  out(ans);
+  using mint = LazyMontgomeryModInt<998244353>;
+  int N;
+  rd(N);
+  V<mint> a(N);
+  for (int i = 0; i < N; i++) {
+    int n;
+    rd(n);
+    a[i] = n;
+  }
+  auto b = BerlekampMassey<mint>(a);
+  wtn(b.size() - 1);
+  for (int i = 1; i < (int)b.size(); i++) {
+    if (i != 1) wt(' ');
+    wt((-b[i]).get());
+  }
+  wt('\n');
 }
 
 ```
