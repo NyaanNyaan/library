@@ -31,15 +31,15 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/famous-series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 01:07:13+09:00
+    - Last commit date: 2020-08-13 14:48:13+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :x: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
 
 
 ## Code
@@ -276,7 +276,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 
 /**
  * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
+ * @docs docs/fps/formal-power-series.md
  */
 #line 3 "modulo/binomial.hpp"
 using namespace std;

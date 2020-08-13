@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: competitive-template.hpp
+# :question: competitive-template.hpp
 
 <a href="../index.html">Back to top page</a>
 
@@ -103,7 +103,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
@@ -131,14 +131,14 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify/verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0789.test.cpp.html">verify/verify-yuki/yuki-0789.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp.html">verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
-* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
+* :x: <a href="../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 
 
 ## Code

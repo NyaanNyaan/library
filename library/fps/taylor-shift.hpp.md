@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 平行移動 <small>(fps/taylor-shift.hpp)</small>
+# :x: 平行移動 <small>(fps/taylor-shift.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/taylor-shift.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 01:10:03+09:00
+    - Last commit date: 2020-08-13 14:48:13+09:00
 
 
 
@@ -58,13 +58,13 @@ $$=\sum_{j=0}^N\frac{x^j}{(N-j)!}\sum_{m=0}^j\frac{a^{j-m}}{(j-m)!}\left((N-m)!f
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :x: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 
 
 ## Code
@@ -262,7 +262,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 
 /**
  * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
+ * @docs docs/fps/formal-power-series.md
  */
 #line 3 "modulo/binomial.hpp"
 using namespace std;

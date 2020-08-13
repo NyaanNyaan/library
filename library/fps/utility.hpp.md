@@ -25,25 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: fps/utility.hpp
+# :x: fps/utility.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/utility.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 01:10:03+09:00
+    - Last commit date: 2020-08-13 14:48:13+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 
 
 ## Code
@@ -238,7 +238,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 
 /**
  * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
+ * @docs docs/fps/formal-power-series.md
  */
 #line 3 "fps/utility.hpp"
 

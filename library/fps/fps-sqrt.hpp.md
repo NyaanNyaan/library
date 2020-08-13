@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-sqrt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 01:10:03+09:00
+    - Last commit date: 2020-08-13 14:48:13+09:00
 
 
 
@@ -55,7 +55,7 @@ $$\leftrightarrow g \equiv \frac{1}{2}\left(\hat{g}+\frac{f}{\hat{g}}\right) \mo
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
 
@@ -273,7 +273,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 
 /**
  * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
+ * @docs docs/fps/formal-power-series.md
  */
 #line 3 "modint/arbitrary-prime-modint.hpp"
 using namespace std;

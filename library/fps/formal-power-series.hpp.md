@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
+# :question: 多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/formal-power-series.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-31 20:35:22+09:00
+    - Last commit date: 2020-08-13 14:48:13+09:00
 
 
 
@@ -177,17 +177,17 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 
 ## Required by
 
-* :heavy_check_mark: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :heavy_check_mark: <a href="differential-equation.hpp.html">fps/differential-equation.hpp</a>
+* :question: <a href="arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
+* :x: <a href="differential-equation.hpp.html">fps/differential-equation.hpp</a>
 * :warning: <a href="famous-series.hpp.html">fps/famous-series.hpp</a>
-* :heavy_check_mark: <a href="fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
+* :x: <a href="fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
 * :heavy_check_mark: <a href="fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
-* :heavy_check_mark: <a href="kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
+* :x: <a href="kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
-* :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :heavy_check_mark: <a href="polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
-* :heavy_check_mark: <a href="taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
-* :heavy_check_mark: <a href="utility.hpp.html">fps/utility.hpp</a>
+* :x: <a href="taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
+* :x: <a href="utility.hpp.html">fps/utility.hpp</a>
 
 
 ## Verified with
@@ -203,13 +203,13 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 
 
 ## Code
@@ -375,7 +375,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 
 /**
  * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
+ * @docs docs/fps/formal-power-series.md
  */
 
 ```
@@ -542,7 +542,7 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
 
 /**
  * @brief 多項式/形式的冪級数ライブラリ
- * @docs docs/formal-power-series.md
+ * @docs docs/fps/formal-power-series.md
  */
 
 ```
