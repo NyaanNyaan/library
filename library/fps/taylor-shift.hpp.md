@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 平行移動 <small>(fps/taylor-shift.hpp)</small>
+# :heavy_check_mark: 平行移動 <small>(fps/taylor-shift.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -36,7 +36,7 @@ layout: default
 
 
 
-### fps-平行移動
+## fps-平行移動
 
 $N$次の多項式$f(x)$に対して$g(x) = f(x+a)$となる$g(x)$を求める。
 これは、
@@ -58,13 +58,13 @@ $$=\sum_{j=0}^N\frac{x^j}{(N-j)!}\sum_{m=0}^j\frac{a^{j-m}}{(j-m)!}\left((N-m)!f
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :x: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 
 
 ## Code

@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
 * :heavy_check_mark: <a href="../../../library/segment-tree/persistent-segment-tree.hpp.html">永続セグメント木 <small>(segment-tree/persistent-segment-tree.hpp)</small></a>
 

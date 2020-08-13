@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small>
+# :heavy_check_mark: 線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -36,7 +36,7 @@ layout: default
 
 
 
-# 線形漸化式の第$N$項を高速に求めるライブラリ
+## 線形漸化式の第$N$項を高速に求めるライブラリ
 
 $k$項間漸化式
 
@@ -54,7 +54,7 @@ $$a_N = [x^N]\frac{P(x)}{Q(x)}$$
 
 になり、これは[リンク先のアルゴリズム](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html)を使って$\mathrm{O}(N \log k \log N)$で計算できる。
 
-さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さQの畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。
+さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さQの畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。(詳細は実装を参考のこと。)
 
 verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \log k \log N), N=200000,k=10^{18}$
 - [ナイーブな実装](https://atcoder.jp/contests/s8pc-3/submissions/15526069) 1846ms
@@ -63,13 +63,13 @@ verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \l
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
-* :x: <a href="../../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
 
 
 ## Code

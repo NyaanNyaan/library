@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/math/sum_of_floor.hpp.html">math/sum_of_floor.hpp</a>
 
 

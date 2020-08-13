@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
 ## Verified with
