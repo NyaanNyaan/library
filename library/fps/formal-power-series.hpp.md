@@ -89,7 +89,7 @@ $\mathrm{O}(N)$
 
 ### ダブリング
 
-$f \mod x^n$を求めたい時に、$f = f_0 \mod n$から始めて精度を倍々にして求める手法のことをダブリングと呼ぶ。
+$f \mod x^n$を求めたい時に、$f \equiv f_0 \mod x$から始めて精度を倍々にして求める手法のことをダブリングと呼ぶ。
 
 具体的には、$\hat{f} \equiv f \mod x^k$から$f \mod x^{2k}$を
 
@@ -101,7 +101,7 @@ $$(f - \hat{f})^2 \equiv 0 \mod x^{2k}$$
 
 $fg\equiv 1 \mod x^n$となる$f$の逆元$g$をダブリングで求めたい。
 
-まず$g \equiv f_0^{-1} \mod x$である。次に、$g = \hat{g} \mod x^k$が分かっているとき$g \mod x^{2k}$を出す。
+まず$g \equiv f_0^{-1} \mod x$である。次に、$g \equiv \hat{g} \mod x^k$が分かっているとき$g \mod x^{2k}$を出す。
 
 $$(g-\hat{g})^2\equiv g^2-2g\hat{g}+\hat{g}^2\equiv0 \mod x^{2k}$$
 
