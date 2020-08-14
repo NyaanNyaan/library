@@ -41,6 +41,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-swag.test.cpp.html">verify/verify-yosupo-ds/yosupo-swag.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-composition.test.cpp.html">verify/verify-yosupo-fps/yosupo-composition.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp.html">verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
