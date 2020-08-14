@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-composition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 19:35:43+09:00
+    - Last commit date: 2020-08-14 19:52:35+09:00
 
 
 
@@ -55,8 +55,8 @@ layout: default
 #pragma once
 #include <bits/stdc++.h>
 using namespace std;
-#include "./formal-power-series.hpp"
 #include "../modulo/binomial.hpp"
+#include "./formal-power-series.hpp"
 
 // find Q(P(x)) mod x ^ min(deg(P), deg(Q))
 template <typename mint>
@@ -64,7 +64,6 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
                                     FormalPowerSeries<mint> Q,
                                     Binomial<mint>& C, int deg = -1) {
   using fps = FormalPowerSeries<mint>;
-
   int N = (deg == -1) ? min(P.size(), Q.size()) : deg;
   if (N == 0) return fps{};
   P.shrink();
@@ -75,8 +74,8 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
   }
   if (N == 1) return fps{Q.eval(P[0])};
 
-  P.resize(N);
-  Q.resize(N);
+  P.resize(N, mint(0));
+  Q.resize(N, mint(0));
   int M = max<int>(1, sqrt(N / log2(N)));
   int L = (N + M - 1) / M;
   fps Pm = fps{begin(P), begin(P) + M};
@@ -87,19 +86,19 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
   pms[0] = Pm;
   for (int i = 1; i < J; i++) pms[i] = (pms[i - 1] * pms[i - 1]).pre(N);
 
-  auto comp = [&](auto rec, int left, int j, const fps& Qd, int deg) -> fps {
+  auto comp = [&](auto rec, int left, int j) -> fps {
     if (j == 1) {
-      mint Q1 = left + 0 < (int)Qd.size() ? Qd[left + 0] : mint(0);
-      mint Q2 = left + 1 < (int)Qd.size() ? Qd[left + 1] : mint(0);
-      return std::move((pms[0].pre(deg) * Q2 + Q1).pre(deg));
+      mint Q1 = left + 0 < (int)Q.size() ? Q[left + 0] : mint(0);
+      mint Q2 = left + 1 < (int)Q.size() ? Q[left + 1] : mint(0);
+      return (pms[0].pre(N) * Q2 + Q1).pre(N);
     }
-    if ((int)Qd.size() <= left) return fps{};
-    fps Q1 = rec(rec, left, j - 1, Qd, deg);
-    fps Q2 = rec(rec, left + (1 << (j - 1)), j - 1, Qd, deg);
-    return std::move((Q1 + pms[j - 1].pre(deg) * Q2).pre(deg));
+    if (N <= left) return fps{};
+    fps Q1 = rec(rec, left, j - 1);
+    fps Q2 = rec(rec, left + (1 << (j - 1)), j - 1);
+    return (Q1 + pms[j - 1].pre(N) * Q2).pre(N);
   };
 
-  fps QPm = comp(comp, 0, J, Q, N);
+  fps QPm = comp(comp, 0, J);
   fps R = QPm;
   fps pw_Pr{mint(1)};
   fps dPm = Pm.diff();
@@ -109,7 +108,7 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
   while (deg_dPm != (int)dPm.size() && dPm[deg_dPm] == mint(0)) deg_dPm++;
   fps idPm = dPm.empty() ? fps{} : (dPm >> deg_dPm).inv(N);
 
-  for (int l = 1, d = M; l <= L && N > d; l++, d += M) {
+  for (int l = 1, d = M; l <= L && d < N; l++, d += M) {
     pw_Pr = (pw_Pr * Pr).pre(N - d);
     if (dPm.empty()) {
       R += (pw_Pr * Q[l]) << d;
@@ -119,7 +118,7 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
       R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;
     };
   }
-  R.resize(N);
+  R.resize(N, mint(0));
   return R;
 }
 
@@ -132,6 +131,50 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
 #line 2 "fps/fps-composition.hpp"
 #include <bits/stdc++.h>
 using namespace std;
+#line 3 "modulo/binomial.hpp"
+using namespace std;
+
+template <typename T>
+struct Binomial {
+  vector<T> fac_, finv_, inv_;
+  Binomial(int MAX) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {
+    MAX += 9;
+    fac_[0] = finv_[0] = inv_[0] = 1;
+    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;
+    finv_[MAX] = fac_[MAX].inverse();
+    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);
+    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];
+  }
+
+  inline T fac(int i) const { return fac_[i]; }
+  inline T finv(int i) const { return finv_[i]; }
+  inline T inv(int i) const { return inv_[i]; }
+
+  T C(int n, int r) const {
+    if (n < r || r < 0) return T(0);
+    return fac_[n] * finv_[n - r] * finv_[r];
+  }
+
+  T C_naive(int n, int r) const {
+    if (n < r || r < 0) return T(0);
+    T ret = 1;
+    for (T i = 1; i <= r; i += T(1)) {
+      ret *= n--;
+      ret *= i.inverse();
+    }
+    return ret;
+  }
+
+  T P(int n, int r) const {
+    if (n < r || r < 0) return T(0);
+    return fac_[n] * finv_[n - r];
+  }
+
+  T H(int n, int r) const {
+    if (n < 0 || r < 0) return (0);
+    return r == 0 ? 1 : C(n + r - 1, r);
+  }
+};
 #line 3 "fps/formal-power-series.hpp"
 using namespace std;
 
@@ -291,50 +334,6 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/fps/formal-power-series.md
  */
-#line 3 "modulo/binomial.hpp"
-using namespace std;
-
-template <typename T>
-struct Binomial {
-  vector<T> fac_, finv_, inv_;
-  Binomial(int MAX) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {
-    MAX += 9;
-    fac_[0] = finv_[0] = inv_[0] = 1;
-    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;
-    finv_[MAX] = fac_[MAX].inverse();
-    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);
-    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];
-  }
-
-  inline T fac(int i) const { return fac_[i]; }
-  inline T finv(int i) const { return finv_[i]; }
-  inline T inv(int i) const { return inv_[i]; }
-
-  T C(int n, int r) const {
-    if (n < r || r < 0) return T(0);
-    return fac_[n] * finv_[n - r] * finv_[r];
-  }
-
-  T C_naive(int n, int r) const {
-    if (n < r || r < 0) return T(0);
-    T ret = 1;
-    for (T i = 1; i <= r; i += T(1)) {
-      ret *= n--;
-      ret *= i.inverse();
-    }
-    return ret;
-  }
-
-  T P(int n, int r) const {
-    if (n < r || r < 0) return T(0);
-    return fac_[n] * finv_[n - r];
-  }
-
-  T H(int n, int r) const {
-    if (n < 0 || r < 0) return (0);
-    return r == 0 ? 1 : C(n + r - 1, r);
-  }
-};
 #line 6 "fps/fps-composition.hpp"
 
 // find Q(P(x)) mod x ^ min(deg(P), deg(Q))
@@ -343,7 +342,6 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
                                     FormalPowerSeries<mint> Q,
                                     Binomial<mint>& C, int deg = -1) {
   using fps = FormalPowerSeries<mint>;
-
   int N = (deg == -1) ? min(P.size(), Q.size()) : deg;
   if (N == 0) return fps{};
   P.shrink();
@@ -354,8 +352,8 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
   }
   if (N == 1) return fps{Q.eval(P[0])};
 
-  P.resize(N);
-  Q.resize(N);
+  P.resize(N, mint(0));
+  Q.resize(N, mint(0));
   int M = max<int>(1, sqrt(N / log2(N)));
   int L = (N + M - 1) / M;
   fps Pm = fps{begin(P), begin(P) + M};
@@ -366,19 +364,19 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
   pms[0] = Pm;
   for (int i = 1; i < J; i++) pms[i] = (pms[i - 1] * pms[i - 1]).pre(N);
 
-  auto comp = [&](auto rec, int left, int j, const fps& Qd, int deg) -> fps {
+  auto comp = [&](auto rec, int left, int j) -> fps {
     if (j == 1) {
-      mint Q1 = left + 0 < (int)Qd.size() ? Qd[left + 0] : mint(0);
-      mint Q2 = left + 1 < (int)Qd.size() ? Qd[left + 1] : mint(0);
-      return std::move((pms[0].pre(deg) * Q2 + Q1).pre(deg));
+      mint Q1 = left + 0 < (int)Q.size() ? Q[left + 0] : mint(0);
+      mint Q2 = left + 1 < (int)Q.size() ? Q[left + 1] : mint(0);
+      return (pms[0].pre(N) * Q2 + Q1).pre(N);
     }
-    if ((int)Qd.size() <= left) return fps{};
-    fps Q1 = rec(rec, left, j - 1, Qd, deg);
-    fps Q2 = rec(rec, left + (1 << (j - 1)), j - 1, Qd, deg);
-    return std::move((Q1 + pms[j - 1].pre(deg) * Q2).pre(deg));
+    if (N <= left) return fps{};
+    fps Q1 = rec(rec, left, j - 1);
+    fps Q2 = rec(rec, left + (1 << (j - 1)), j - 1);
+    return (Q1 + pms[j - 1].pre(N) * Q2).pre(N);
   };
 
-  fps QPm = comp(comp, 0, J, Q, N);
+  fps QPm = comp(comp, 0, J);
   fps R = QPm;
   fps pw_Pr{mint(1)};
   fps dPm = Pm.diff();
@@ -388,7 +386,7 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
   while (deg_dPm != (int)dPm.size() && dPm[deg_dPm] == mint(0)) deg_dPm++;
   fps idPm = dPm.empty() ? fps{} : (dPm >> deg_dPm).inv(N);
 
-  for (int l = 1, d = M; l <= L && N > d; l++, d += M) {
+  for (int l = 1, d = M; l <= L && d < N; l++, d += M) {
     pw_Pr = (pw_Pr * Pr).pre(N - d);
     if (dPm.empty()) {
       R += (pw_Pr * Q[l]) << d;
@@ -398,7 +396,7 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
       R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;
     };
   }
-  R.resize(N);
+  R.resize(N, mint(0));
   return R;
 }
 
