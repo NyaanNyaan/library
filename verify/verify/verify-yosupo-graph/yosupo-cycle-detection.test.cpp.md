@@ -25,22 +25,23 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
+# :x: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:37:43+09:00
+* category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-14 21:03:02+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A</a>
+* see: <a href="https://judge.yosupo.jp/problem/cycle_detection">https://judge.yosupo.jp/problem/cycle_detection</a>
 
 
 ## Depends on
 
 * :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
+* :x: <a href="../../../library/graph/cycle-detection.hpp.html">graph/cycle-detection.hpp</a>
+* :question: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
 
 
 ## Code
@@ -48,35 +49,85 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/union-find.hpp"
+#include "../../graph/cycle-detection.hpp"
+#include "../../graph/graph-template.hpp"
 
-void solve() {
-  ini(N, Q);
-  UnionFind uf(N);
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(x, y);
-      uf.unite(x, y);
-    } else {
-      ini(x,y);
-      out(uf.same(x,y));
+template <typename G>
+vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
+  vector<int> pidx(g.size(), -1), vis(g.size(), 0);
+
+  vector<pair<int, int>> cycle;
+  int finish = 0;
+  auto dfs = [&](auto rec, int cur, int pval, int par) -> int {
+    pidx[cur] = pval;
+    vis[cur] = 1;
+    for (auto& dst : g[cur]) {
+      if (finish) return -1;
+      if (!directed && dst == par) continue;
+      if (pidx[dst] == pidx[cur]) {
+        cycle.emplace_back(cur, dst);
+        return dst;
+      }
+      if (vis[dst]) continue;
+      int nx = rec(rec, dst, pval, cur);
+      trc(cur, dst, nx);
+      if (nx != -1) {
+        cycle.emplace_back(cur, dst);
+        if (cur == nx) {
+          finish = 1;
+          return -1;
+        }
+        return nx;
+      }
+    }
+    pidx[cur] = -1;
+    return -1;
+  };
+
+  for (int i = 0; i < (int)g.size(); i++) {
+    if (vis[i]) continue;
+    dfs(dfs, i, i, -1);
+
+    if (finish) {
+      reverse(begin(cycle), end(cycle));
+      return cycle;
     }
   }
+  return vector<pair<int, int>>{};
 }
+
+void solve() {
+  ini(N, M);
+  vvi g(N);
+  auto idx = [&](pair<ll, ll> p) { return (p.first << 20) + p.second; };
+  map<ll, vector<int>> m;
+  rep(_, M) {
+    ini(u, v);
+    m[idx(P(u, v))].pb(_);
+    g[u].pb(v);
+  }
+  auto cycle = CycleDetection<vvi>(g);
+  if (cycle.empty()) die(-1);
+  trc(cycle);
+  out(sz(cycle));
+  each(p, cycle) {
+    auto& v = m[idx(P(p.first, p.second))];
+    out(v.back());
+    v.pop_back();
+  }
+}
+
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A"
+#line 1 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -378,41 +429,211 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/union-find.hpp"
+#line 3 "graph/cycle-detection.hpp"
+using namespace std;
+#line 3 "graph/graph-template.hpp"
 using namespace std;
 
-struct UnionFind {
-  vector<int> data;
-  UnionFind(int N) : data(N, -1) {}
+template <typename T>
+struct edge {
+  int src, to;
+  T cost;
 
-  int find(int k) { return data[k] < 0 ? k : data[k] = find(data[k]); }
+  edge(int to, T cost) : src(-1), to(to), cost(cost) {}
+  edge(int src, int to, T cost) : src(src), to(to), cost(cost) {}
 
-  int unite(int x, int y) {
-    if ((x = find(x)) == (y = find(y))) return false;
-    if (data[x] > data[y]) swap(x, y);
-    data[x] += data[y];
-    data[y] = x;
-    return true;
+  edge &operator=(const int &x) {
+    to = x;
+    return *this;
   }
 
-  int size(int k) { return -data[find(k)]; }
-
-  int same(int x, int y) { return find(x) == find(y); }
+  operator int() const { return to; }
 };
-#line 6 "verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp"
+template <typename T>
+using Edges = vector<edge<T>>;
+template <typename T>
+using WeightedGraph = vector<Edges<T>>;
+using UnweightedGraph = vector<vector<int>>;
+
+// Input of (Unweighted) Graph
+UnweightedGraph graph(int N, int M = -1, bool is_directed = false,
+                      bool is_1origin = true) {
+  UnweightedGraph g(N);
+  if (M == -1) M = N - 1;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    if (is_1origin) x--, y--;
+    g[x].push_back(y);
+    if (!is_directed) g[y].push_back(x);
+  }
+  return g;
+}
+
+// Input of Weighted Graph
+template <typename T>
+WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
+                        bool is_1origin = true) {
+  WeightedGraph<T> g(N);
+  if (M == -1) M = N - 1;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    cin >> c;
+    if (is_1origin) x--, y--;
+    g[x].eb(x, y, c);
+    if (!is_directed) g[y].eb(y, x, c);
+  }
+  return g;
+}
+
+// Input of Edges
+template <typename T>
+Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
+  Edges<T> es;
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    es.emplace_back(x, y, c);
+  }
+  return es;
+}
+
+// Input of Adjacency Matrix
+template <typename T>
+vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
+                           bool is_directed = false, bool is_1origin = true) {
+  vector<vector<T>> d(N, vector<T>(N, INF));
+  for (int _ = 0; _ < M; _++) {
+    int x, y;
+    cin >> x >> y;
+    T c;
+    if (is_weighted)
+      cin >> c;
+    else
+      c = 1;
+    if (is_1origin) x--, y--;
+    d[x][y] = c;
+    if (!is_directed) d[y][x] = c;
+  }
+  return d;
+}
+#line 5 "graph/cycle-detection.hpp"
+
+template <typename G>
+vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
+  vector<int> pidx(g.size(), -1), vis(g.size(), 0);
+
+  vector<pair<int, int>> cycle;
+  int finish = 0;
+  auto dfs = [&](auto rec, int cur, int pval, int par) -> int {
+    pidx[cur] = pval;
+    vis[cur] = 1;
+    for (auto& dst : g[cur]) {
+      if (finish) return -1;
+      if (!directed && dst == par) continue;
+      if (pidx[dst] == pidx[cur]) {
+        cycle.emplace_back(cur, dst);
+        return dst;
+      }
+      if (vis[dst]) continue;
+      int nx = rec(rec, dst, pval, cur);
+      trc(cur, dst, nx);
+      if (nx != -1) {
+        cycle.emplace_back(cur, dst);
+        if (cur == nx) {
+          finish = 1;
+          return -1;
+        }
+        return nx;
+      }
+    }
+    pidx[cur] = -1;
+    return -1;
+  };
+
+  for (int i = 0; i < (int)g.size(); i++) {
+    if (vis[i]) continue;
+    dfs(dfs, i, i, -1);
+
+    if (finish) {
+      reverse(begin(cycle), end(cycle));
+      return cycle;
+    }
+  }
+  return vector<pair<int, int>>{};
+}
+#line 6 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp"
+
+template <typename G>
+vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
+  vector<int> pidx(g.size(), -1), vis(g.size(), 0);
+
+  vector<pair<int, int>> cycle;
+  int finish = 0;
+  auto dfs = [&](auto rec, int cur, int pval, int par) -> int {
+    pidx[cur] = pval;
+    vis[cur] = 1;
+    for (auto& dst : g[cur]) {
+      if (finish) return -1;
+      if (!directed && dst == par) continue;
+      if (pidx[dst] == pidx[cur]) {
+        cycle.emplace_back(cur, dst);
+        return dst;
+      }
+      if (vis[dst]) continue;
+      int nx = rec(rec, dst, pval, cur);
+      trc(cur, dst, nx);
+      if (nx != -1) {
+        cycle.emplace_back(cur, dst);
+        if (cur == nx) {
+          finish = 1;
+          return -1;
+        }
+        return nx;
+      }
+    }
+    pidx[cur] = -1;
+    return -1;
+  };
+
+  for (int i = 0; i < (int)g.size(); i++) {
+    if (vis[i]) continue;
+    dfs(dfs, i, i, -1);
+
+    if (finish) {
+      reverse(begin(cycle), end(cycle));
+      return cycle;
+    }
+  }
+  return vector<pair<int, int>>{};
+}
 
 void solve() {
-  ini(N, Q);
-  UnionFind uf(N);
-  rep(_, Q) {
-    ini(c);
-    if (c == 0) {
-      ini(x, y);
-      uf.unite(x, y);
-    } else {
-      ini(x,y);
-      out(uf.same(x,y));
-    }
+  ini(N, M);
+  vvi g(N);
+  auto idx = [&](pair<ll, ll> p) { return (p.first << 20) + p.second; };
+  map<ll, vector<int>> m;
+  rep(_, M) {
+    ini(u, v);
+    m[idx(P(u, v))].pb(_);
+    g[u].pb(v);
+  }
+  auto cycle = CycleDetection<vvi>(g);
+  if (cycle.empty()) die(-1);
+  trc(cycle);
+  out(sz(cycle));
+  each(p, cycle) {
+    auto& v = m[idx(P(p.first, p.second))];
+    out(v.back());
+    v.pop_back();
   }
 }
 

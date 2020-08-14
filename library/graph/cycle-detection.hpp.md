@@ -25,26 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: tree/cartesian-tree.hpp
+# :x: graph/cycle-detection.hpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#c0af77cf8294ff93a5cdb2963ca9f038">tree</a>
-* <a href="{{ site.github.repository_url }}/blob/master/tree/cartesian-tree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
+* <a href="{{ site.github.repository_url }}/blob/master/graph/cycle-detection.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-14 21:03:02+09:00
 
 
 
 
 ## Depends on
 
-* :question: <a href="../graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :question: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp.html">verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp</a>
 
 
 ## Code
@@ -55,34 +54,50 @@ layout: default
 #pragma once
 #include <bits/stdc++.h>
 using namespace std;
+#include "./graph-template.hpp"
 
-#include "../graph/graph-template.hpp"
+template <typename G>
+vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
+  vector<int> pidx(g.size(), -1), vis(g.size(), 0);
 
-// return value : pair<graph, root>
-template <typename T>
-pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {
-  int N = (int)a.size();
-  vector<vector<int>> g(N);
-  vector<int> p(N, -1), st;
-  st.reserve(N);
-  for (int i = 0; i < N; i++) {
-    int prv = -1;
-    while (!st.empty() && a[i] < a[st.back()]) {
-      prv = st.back();
-      st.pop_back();
+  vector<pair<int, int>> cycle;
+  int finish = 0;
+  auto dfs = [&](auto rec, int cur, int pval, int par) -> int {
+    pidx[cur] = pval;
+    vis[cur] = 1;
+    for (auto& dst : g[cur]) {
+      if (finish) return -1;
+      if (!directed && dst == par) continue;
+      if (pidx[dst] == pidx[cur]) {
+        cycle.emplace_back(cur, dst);
+        return dst;
+      }
+      if (vis[dst]) continue;
+      int nx = rec(rec, dst, pval, cur);
+      trc(cur, dst, nx);
+      if (nx != -1) {
+        cycle.emplace_back(cur, dst);
+        if (cur == nx) {
+          finish = 1;
+          return -1;
+        }
+        return nx;
+      }
     }
-    if (prv != -1) p[prv] = i;
-    if (!st.empty()) p[i] = st.back();
-    st.push_back(i);
+    pidx[cur] = -1;
+    return -1;
+  };
+
+  for (int i = 0; i < (int)g.size(); i++) {
+    if (vis[i]) continue;
+    dfs(dfs, i, i, -1);
+
+    if (finish) {
+      reverse(begin(cycle), end(cycle));
+      return cycle;
+    }
   }
-  int root = -1;
-  for (int i = 0; i < N; i++) {
-    if (p[i] != -1)
-      g[p[i]].push_back(i);
-    else
-      root = i;
-  }
-  return make_pair(g, root);
+  return vector<pair<int, int>>{};
 }
 ```
 {% endraw %}
@@ -90,10 +105,9 @@ pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "tree/cartesian-tree.hpp"
+#line 2 "graph/cycle-detection.hpp"
 #include <bits/stdc++.h>
 using namespace std;
-
 #line 3 "graph/graph-template.hpp"
 using namespace std;
 
@@ -188,33 +202,50 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
-#line 6 "tree/cartesian-tree.hpp"
+#line 5 "graph/cycle-detection.hpp"
 
-// return value : pair<graph, root>
-template <typename T>
-pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {
-  int N = (int)a.size();
-  vector<vector<int>> g(N);
-  vector<int> p(N, -1), st;
-  st.reserve(N);
-  for (int i = 0; i < N; i++) {
-    int prv = -1;
-    while (!st.empty() && a[i] < a[st.back()]) {
-      prv = st.back();
-      st.pop_back();
+template <typename G>
+vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
+  vector<int> pidx(g.size(), -1), vis(g.size(), 0);
+
+  vector<pair<int, int>> cycle;
+  int finish = 0;
+  auto dfs = [&](auto rec, int cur, int pval, int par) -> int {
+    pidx[cur] = pval;
+    vis[cur] = 1;
+    for (auto& dst : g[cur]) {
+      if (finish) return -1;
+      if (!directed && dst == par) continue;
+      if (pidx[dst] == pidx[cur]) {
+        cycle.emplace_back(cur, dst);
+        return dst;
+      }
+      if (vis[dst]) continue;
+      int nx = rec(rec, dst, pval, cur);
+      trc(cur, dst, nx);
+      if (nx != -1) {
+        cycle.emplace_back(cur, dst);
+        if (cur == nx) {
+          finish = 1;
+          return -1;
+        }
+        return nx;
+      }
     }
-    if (prv != -1) p[prv] = i;
-    if (!st.empty()) p[i] = st.back();
-    st.push_back(i);
+    pidx[cur] = -1;
+    return -1;
+  };
+
+  for (int i = 0; i < (int)g.size(); i++) {
+    if (vis[i]) continue;
+    dfs(dfs, i, i, -1);
+
+    if (finish) {
+      reverse(begin(cycle), end(cycle));
+      return cycle;
+    }
   }
-  int root = -1;
-  for (int i = 0; i < N; i++) {
-    if (p[i] != -1)
-      g[p[i]].push_back(i);
-    else
-      root = i;
-  }
-  return make_pair(g, root);
+  return vector<pair<int, int>>{};
 }
 
 ```
