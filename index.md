@@ -39,7 +39,7 @@ layout: default
 ### .
 
 * :warning: <a href="library/bundle.py.html">bundle.py</a>
-* :question: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -97,9 +97,9 @@ layout: default
 ### graph
 
 * :warning: <a href="library/graph/add-range-edge.hpp.html">graph/add-range-edge.hpp</a>
-* :x: <a href="library/graph/cycle-detection.hpp.html">graph/cycle-detection.hpp</a>
+* :warning: <a href="library/graph/cycle-detection.hpp.html">graph/cycle-detection.hpp</a>
 * :warning: <a href="library/graph/dimension-expanded-graph.hpp.html">graph/dimension-expanded-graph.hpp</a>
-* :question: <a href="library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
 * :heavy_check_mark: <a href="library/graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
 * :heavy_check_mark: <a href="library/graph/kruskal.hpp.html">graph/kruskal.hpp</a>
 * :heavy_check_mark: <a href="library/graph/lowlink.hpp.html">graph/lowlink.hpp</a>
@@ -306,7 +306,6 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
-* :x: <a href="verify/verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp.html">verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp.html">verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp</a>

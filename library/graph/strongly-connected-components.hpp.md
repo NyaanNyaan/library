@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
 
 
 ## Verified with

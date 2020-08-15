@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: graph/graph-template.hpp
+# :heavy_check_mark: graph/graph-template.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Required by
 
-* :x: <a href="cycle-detection.hpp.html">graph/cycle-detection.hpp</a>
+* :warning: <a href="cycle-detection.hpp.html">graph/cycle-detection.hpp</a>
 * :warning: <a href="dimension-expanded-graph.hpp.html">graph/dimension-expanded-graph.hpp</a>
 * :heavy_check_mark: <a href="graph-utility.hpp.html">graph/graph-utility.hpp</a>
 * :heavy_check_mark: <a href="kruskal.hpp.html">graph/kruskal.hpp</a>
@@ -79,7 +79,6 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp.html">verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp.html">verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp</a>

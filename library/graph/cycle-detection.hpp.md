@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: graph/cycle-detection.hpp
+# :warning: graph/cycle-detection.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,12 +38,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
-
-
-## Verified with
-
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp.html">verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp</a>
+* :heavy_check_mark: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
 
 
 ## Code
