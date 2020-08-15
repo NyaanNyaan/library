@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 20:14:31+09:00
+    - Last commit date: 2020-08-15 20:32:31+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/cycle_detection">https://judge.yosupo.jp/problem/cycle_detection</a>
@@ -50,6 +50,7 @@ layout: default
 {% raw %}
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
+
 
 #include "../../competitive-template.hpp"
 #include "../../graph/cycle-detection.hpp"
@@ -84,6 +85,7 @@ void solve() {
 ```cpp
 #line 1 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
+
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -525,7 +527,7 @@ vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
   }
   return vector<pair<int, int>>{};
 }
-#line 6 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp"
+#line 7 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp"
 
 void solve() {
   ini(N, M);
