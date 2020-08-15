@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 21:03:02+09:00
+    - Last commit date: 2020-08-15 17:13:54+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/cycle_detection">https://judge.yosupo.jp/problem/cycle_detection</a>
@@ -54,50 +54,6 @@ layout: default
 #include "../../competitive-template.hpp"
 #include "../../graph/cycle-detection.hpp"
 #include "../../graph/graph-template.hpp"
-
-template <typename G>
-vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
-  vector<int> pidx(g.size(), -1), vis(g.size(), 0);
-
-  vector<pair<int, int>> cycle;
-  int finish = 0;
-  auto dfs = [&](auto rec, int cur, int pval, int par) -> int {
-    pidx[cur] = pval;
-    vis[cur] = 1;
-    for (auto& dst : g[cur]) {
-      if (finish) return -1;
-      if (!directed && dst == par) continue;
-      if (pidx[dst] == pidx[cur]) {
-        cycle.emplace_back(cur, dst);
-        return dst;
-      }
-      if (vis[dst]) continue;
-      int nx = rec(rec, dst, pval, cur);
-      trc(cur, dst, nx);
-      if (nx != -1) {
-        cycle.emplace_back(cur, dst);
-        if (cur == nx) {
-          finish = 1;
-          return -1;
-        }
-        return nx;
-      }
-    }
-    pidx[cur] = -1;
-    return -1;
-  };
-
-  for (int i = 0; i < (int)g.size(); i++) {
-    if (vis[i]) continue;
-    dfs(dfs, i, i, -1);
-
-    if (finish) {
-      reverse(begin(cycle), end(cycle));
-      return cycle;
-    }
-  }
-  return vector<pair<int, int>>{};
-}
 
 void solve() {
   ini(N, M);
@@ -571,50 +527,6 @@ vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
   return vector<pair<int, int>>{};
 }
 #line 6 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp"
-
-template <typename G>
-vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
-  vector<int> pidx(g.size(), -1), vis(g.size(), 0);
-
-  vector<pair<int, int>> cycle;
-  int finish = 0;
-  auto dfs = [&](auto rec, int cur, int pval, int par) -> int {
-    pidx[cur] = pval;
-    vis[cur] = 1;
-    for (auto& dst : g[cur]) {
-      if (finish) return -1;
-      if (!directed && dst == par) continue;
-      if (pidx[dst] == pidx[cur]) {
-        cycle.emplace_back(cur, dst);
-        return dst;
-      }
-      if (vis[dst]) continue;
-      int nx = rec(rec, dst, pval, cur);
-      trc(cur, dst, nx);
-      if (nx != -1) {
-        cycle.emplace_back(cur, dst);
-        if (cur == nx) {
-          finish = 1;
-          return -1;
-        }
-        return nx;
-      }
-    }
-    pidx[cur] = -1;
-    return -1;
-  };
-
-  for (int i = 0; i < (int)g.size(); i++) {
-    if (vis[i]) continue;
-    dfs(dfs, i, i, -1);
-
-    if (finish) {
-      reverse(begin(cycle), end(cycle));
-      return cycle;
-    }
-  }
-  return vector<pair<int, int>>{};
-}
 
 void solve() {
   ini(N, M);
