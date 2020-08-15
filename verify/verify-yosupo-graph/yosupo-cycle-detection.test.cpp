@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
 
+
 #include "../../competitive-template.hpp"
 #include "../../graph/cycle-detection.hpp"
 #include "../../graph/graph-template.hpp"
