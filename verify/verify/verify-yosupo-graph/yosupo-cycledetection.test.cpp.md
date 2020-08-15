@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
+# :x: verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 20:32:31+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-15 20:45:16+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/cycle_detection">https://judge.yosupo.jp/problem/cycle_detection</a>
@@ -74,7 +74,6 @@ void solve() {
     out(v.back());
     v.pop_back();
   }
-  out();
 }
 
 ```
@@ -83,7 +82,7 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp"
+#line 1 "verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
 
 
@@ -527,7 +526,7 @@ vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
   }
   return vector<pair<int, int>>{};
 }
-#line 7 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp"
+#line 7 "verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp"
 
 void solve() {
   ini(N, M);
@@ -547,7 +546,6 @@ void solve() {
     out(v.back());
     v.pop_back();
   }
-  out();
 }
 
 ```

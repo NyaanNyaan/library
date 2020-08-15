@@ -43,7 +43,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp.html">verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp.html">verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp</a>
 
 
 ## Code

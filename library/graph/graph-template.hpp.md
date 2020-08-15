@@ -79,7 +79,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
-* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp.html">verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp.html">verify/verify-yosupo-graph/yosupo-cycledetection.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp.html">verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp</a>
