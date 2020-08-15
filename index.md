@@ -54,6 +54,7 @@ layout: default
 * :heavy_check_mark: <a href="library/data-structure/dynamic-union-find.hpp.html">data-structure/dynamic-union-find.hpp</a>
 * :warning: <a href="library/data-structure/randomized-binary-search-tree.hpp.html">data-structure/randomized-binary-search-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
+* :heavy_check_mark: <a href="library/data-structure/range-union-find.hpp.html">data-structure/range-union-find.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/slide-window-aggregation.hpp.html">data-structure/slide-window-aggregation.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sliding-window-minimum.hpp.html">data-structure/sliding-window-minimum.hpp</a>
@@ -341,6 +342,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1170.test.cpp.html">verify/verify-yuki/yuki-1170.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-helloworld.test.cpp.html">verify/verify-yuki/yuki-helloworld.test.cpp</a>
 
 
