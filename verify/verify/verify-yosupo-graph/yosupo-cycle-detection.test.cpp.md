@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 17:13:54+09:00
+    - Last commit date: 2020-08-15 17:28:50+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/cycle_detection">https://judge.yosupo.jp/problem/cycle_detection</a>
@@ -67,7 +67,6 @@ void solve() {
   }
   auto cycle = CycleDetection<vvi>(g);
   if (cycle.empty()) die(-1);
-  trc(cycle);
   out(sz(cycle));
   each(p, cycle) {
     auto& v = m[idx(P(p.first, p.second))];
@@ -501,7 +500,6 @@ vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
       }
       if (vis[dst]) continue;
       int nx = rec(rec, dst, pval, cur);
-      trc(cur, dst, nx);
       if (nx != -1) {
         cycle.emplace_back(cur, dst);
         if (cur == nx) {
@@ -540,7 +538,6 @@ void solve() {
   }
   auto cycle = CycleDetection<vvi>(g);
   if (cycle.empty()) die(-1);
-  trc(cycle);
   out(sz(cycle));
   each(p, cycle) {
     auto& v = m[idx(P(p.first, p.second))];

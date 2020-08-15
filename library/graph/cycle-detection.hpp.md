@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
 * <a href="{{ site.github.repository_url }}/blob/master/graph/cycle-detection.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-14 21:03:02+09:00
+    - Last commit date: 2020-08-15 17:28:50+09:00
 
 
 
@@ -74,7 +74,6 @@ vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
       }
       if (vis[dst]) continue;
       int nx = rec(rec, dst, pval, cur);
-      trc(cur, dst, nx);
       if (nx != -1) {
         cycle.emplace_back(cur, dst);
         if (cur == nx) {
@@ -222,7 +221,6 @@ vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
       }
       if (vis[dst]) continue;
       int nx = rec(rec, dst, pval, cur);
-      trc(cur, dst, nx);
       if (nx != -1) {
         cycle.emplace_back(cur, dst);
         if (cur == nx) {

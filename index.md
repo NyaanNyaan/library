@@ -95,6 +95,7 @@ layout: default
 
 ### graph
 
+* :warning: <a href="library/graph/add-range-edge.hpp.html">graph/add-range-edge.hpp</a>
 * :x: <a href="library/graph/cycle-detection.hpp.html">graph/cycle-detection.hpp</a>
 * :warning: <a href="library/graph/dimension-expanded-graph.hpp.html">graph/dimension-expanded-graph.hpp</a>
 * :question: <a href="library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
