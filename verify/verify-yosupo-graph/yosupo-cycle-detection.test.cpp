@@ -16,7 +16,6 @@ void solve() {
   }
   auto cycle = CycleDetection<vvi>(g);
   if (cycle.empty()) die(-1);
-  trc(cycle);
   out(sz(cycle));
   each(p, cycle) {
     auto& v = m[idx(P(p.first, p.second))];
