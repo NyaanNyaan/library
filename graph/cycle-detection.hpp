@@ -21,7 +21,6 @@ vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
       }
       if (vis[dst]) continue;
       int nx = rec(rec, dst, pval, cur);
-      trc(cur, dst, nx);
       if (nx != -1) {
         cycle.emplace_back(cur, dst);
         if (cur == nx) {
