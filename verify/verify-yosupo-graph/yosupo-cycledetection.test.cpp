@@ -23,5 +23,4 @@ void solve() {
     out(v.back());
     v.pop_back();
   }
-  out();
 }
