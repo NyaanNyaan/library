@@ -8,7 +8,7 @@ using namespace std;
 template<typename string_t> struct RollingHash{
   using ull = unsigned long long;
   using Pu = pair<ull , ull>;
-  string_t& data;
+  const string_t& data;
   vector<Pu> hashed , power;
   int size_;
   static Pu basis;
@@ -59,7 +59,7 @@ template<typename string_t> struct RollingHash{
   }
 
   // Rolling Hashの構築　O( |S| )
-  RollingHash(string_t &S) : data(S) , size_((int)S.size()){
+  RollingHash(const string_t &S) : data(S) , size_((int)S.size()){
     // hashed[i] 部分列[0 , i)のハッシュを記録 hashed[0] = (0,0)
     // power[i] basisのi乗を記録
     hashed.resize(size_ + 1);
