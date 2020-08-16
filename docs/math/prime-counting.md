@@ -16,7 +16,7 @@ $\pi(N) = f(\lfloor\sqrt{N}\rfloor,N) + \pi(\lfloor\sqrt{N}\rfloor) - 1$
 
 $f(x,n) = f(x-1,n) \ \ \ \ \ \mathrm{(if\ x\ is\ not\ prime)}$
 
-$f(x,n) = f(x - 1, n) - \# \{i | (i \in [1, n] \wedge x|i )\}$
+$f(x,n) = f(x - 1, n) - \# \lbrace i | (i \in [1, n] \wedge x|i )\rbrace$
 $= f(x-1,n)-f(x-1,\frac{n}{x}) \ \ \ \ \ \mathrm{(if\ x\ is\ prime)}$
 
 となるので、$x$を$\sqrt{N}$以下の素数、$n =\lfloor\frac{N}{K}\rfloor$を範囲として、$x$を大きくしていくin-placeな動的計画法で$\pi(N)$を求められる。計算量は
