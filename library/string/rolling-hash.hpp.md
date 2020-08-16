@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#b45cffe084dd3d20d928bee85e7b0f21">string</a>
 * <a href="{{ site.github.repository_url }}/blob/master/string/rolling-hash.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-08-16 16:29:52+09:00
 
 
 
@@ -51,7 +51,7 @@ using namespace std;
 template<typename string_t> struct RollingHash{
   using ull = unsigned long long;
   using Pu = pair<ull , ull>;
-  string_t& data;
+  const string_t& data;
   vector<Pu> hashed , power;
   int size_;
   static Pu basis;
@@ -102,7 +102,7 @@ template<typename string_t> struct RollingHash{
   }
 
   // Rolling Hashの構築　O( |S| )
-  RollingHash(string_t &S) : data(S) , size_((int)S.size()){
+  RollingHash(const string_t &S) : data(S) , size_((int)S.size()){
     // hashed[i] 部分列[0 , i)のハッシュを記録 hashed[0] = (0,0)
     // power[i] basisのi乗を記録
     hashed.resize(size_ + 1);
@@ -227,7 +227,7 @@ using namespace std;
 template<typename string_t> struct RollingHash{
   using ull = unsigned long long;
   using Pu = pair<ull , ull>;
-  string_t& data;
+  const string_t& data;
   vector<Pu> hashed , power;
   int size_;
   static Pu basis;
@@ -278,7 +278,7 @@ template<typename string_t> struct RollingHash{
   }
 
   // Rolling Hashの構築　O( |S| )
-  RollingHash(string_t &S) : data(S) , size_((int)S.size()){
+  RollingHash(const string_t &S) : data(S) , size_((int)S.size()){
     // hashed[i] 部分列[0 , i)のハッシュを記録 hashed[0] = (0,0)
     // power[i] basisのi乗を記録
     hashed.resize(size_ + 1);

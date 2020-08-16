@@ -39,7 +39,7 @@ layout: default
 ### .
 
 * :warning: <a href="library/bundle.py.html">bundle.py</a>
-* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -119,6 +119,7 @@ layout: default
 * :warning: <a href="library/math/grundy-number.hpp.html">math/grundy-number.hpp</a>
 * :warning: <a href="library/math/matrix-fast.hpp.html">math/matrix-fast.hpp</a>
 * :warning: <a href="library/math/matrix.hpp.html">math/matrix.hpp</a>
+* :x: <a href="library/math/prime-counting.hpp.html">素数カウント <small>(math/prime-counting.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/prime-table.hpp.html">math/prime-table.hpp</a>
 * :warning: <a href="library/math/rational-number.hpp.html">math/rational-number.hpp</a>
@@ -311,6 +312,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp.html">verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp.html">verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp</a>
+* :x: <a href="verify/verify/verify-yosupo-math/yosupo-counting-primes.test.hpp.html">verify/verify-yosupo-math/yosupo-counting-primes.test.hpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-factrization.test.cpp.html">verify/verify-yosupo-math/yosupo-factrization.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify/verify-yosupo-math/yosupo-linear-equation.test.cpp</a>

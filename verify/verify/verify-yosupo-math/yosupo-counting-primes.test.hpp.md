@@ -25,24 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+# :x: verify/verify-yosupo-math/yosupo-counting-primes.test.hpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 02:19:06+09:00
+* category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-counting-primes.test.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-16 16:29:52+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D</a>
+* see: <a href="https://judge.yosupo.jp/problem/counting_primes">https://judge.yosupo.jp/problem/counting_primes</a>
 
 
 ## Depends on
 
 * :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
-* :heavy_check_mark: <a href="../../../library/tree/heavy-light-decomposition.hpp.html">tree/heavy-light-decomposition.hpp</a>
+* :x: <a href="../../../library/math/prime-counting.hpp.html">素数カウント <small>(math/prime-counting.hpp)</small></a>
 
 
 ## Code
@@ -50,24 +48,14 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
+#define PROBLEM "https://judge.yosupo.jp/problem/counting_primes"
 
 #include "../../competitive-template.hpp"
-#include "../../tree/cartesian-tree.hpp"
-#include "../../tree/heavy-light-decomposition.hpp"
+#include "../../math/prime-counting.hpp"
 
 void solve() {
-  ini(N, L);
-  vi a(N);
-  in(a);
-  vvi g;
-  int root;
-  tie(g, root) = CartesianTree<int>(a);
-  HeavyLightDecomposition<vvi> hld(g, root);
-  vi ans(N - L + 1);
-  rep(i, N - L + 1) ans[i] = a[hld.lca(i, i + L - 1)];
-  out(ans);
+  inl(N);
+  out(prime_counting(N));
 }
 ```
 {% endraw %}
@@ -75,9 +63,8 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
+#line 1 "verify/verify-yosupo-math/yosupo-counting-primes.test.hpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/counting_primes"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -379,292 +366,38 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "tree/cartesian-tree.hpp"
+#line 3 "math/prime-counting.hpp"
 using namespace std;
 
-#line 3 "graph/graph-template.hpp"
-using namespace std;
-
-template <typename T>
-struct edge {
-  int src, to;
-  T cost;
-
-  edge(int to, T cost) : src(-1), to(to), cost(cost) {}
-  edge(int src, int to, T cost) : src(src), to(to), cost(cost) {}
-
-  edge &operator=(const int &x) {
-    to = x;
-    return *this;
+pair<vector<long long>, vector<long long>> pi_table(long long N) {
+  using i64 = long long;
+  vector<i64> ns{0};
+  for (i64 i = N; i > 0; i = N / (N / i + 1)) ns.push_back(i);
+  vector<i64> h(ns);
+  for (auto &x : h) --x;
+  for (i64 x = 2, sq = sqrtl(N), nsz = ns.size(); x <= sq; ++x) {
+    if (h[nsz - x] == h[nsz - x + 1]) continue;
+    i64 x2 = x * x, pi = h[nsz - x + 1];
+    for (i64 i = 1, n = ns[i]; i < nsz && n >= x2; n = ns[++i])
+      h[i] -= h[i * x <= sq ? i * x : nsz - n / x] - pi;
   }
-
-  operator int() const { return to; }
-};
-template <typename T>
-using Edges = vector<edge<T>>;
-template <typename T>
-using WeightedGraph = vector<Edges<T>>;
-using UnweightedGraph = vector<vector<int>>;
-
-// Input of (Unweighted) Graph
-UnweightedGraph graph(int N, int M = -1, bool is_directed = false,
-                      bool is_1origin = true) {
-  UnweightedGraph g(N);
-  if (M == -1) M = N - 1;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    if (is_1origin) x--, y--;
-    g[x].push_back(y);
-    if (!is_directed) g[y].push_back(x);
-  }
-  return g;
+  return {ns, h};
 }
 
-// Input of Weighted Graph
-template <typename T>
-WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
-                        bool is_1origin = true) {
-  WeightedGraph<T> g(N);
-  if (M == -1) M = N - 1;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    cin >> c;
-    if (is_1origin) x--, y--;
-    g[x].eb(x, y, c);
-    if (!is_directed) g[y].eb(y, x, c);
-  }
-  return g;
+long long prime_counting(long long N) {
+  if (N < 2) return 0;
+  return pi_table(N).second[1];
 }
 
-// Input of Edges
-template <typename T>
-Edges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {
-  Edges<T> es;
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    if (is_weighted)
-      cin >> c;
-    else
-      c = 1;
-    if (is_1origin) x--, y--;
-    es.emplace_back(x, y, c);
-  }
-  return es;
-}
-
-// Input of Adjacency Matrix
-template <typename T>
-vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
-                           bool is_directed = false, bool is_1origin = true) {
-  vector<vector<T>> d(N, vector<T>(N, INF));
-  for (int _ = 0; _ < M; _++) {
-    int x, y;
-    cin >> x >> y;
-    T c;
-    if (is_weighted)
-      cin >> c;
-    else
-      c = 1;
-    if (is_1origin) x--, y--;
-    d[x][y] = c;
-    if (!is_directed) d[y][x] = c;
-  }
-  return d;
-}
-#line 6 "tree/cartesian-tree.hpp"
-
-// return value : pair<graph, root>
-template <typename T>
-pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {
-  int N = (int)a.size();
-  vector<vector<int>> g(N);
-  vector<int> p(N, -1), st;
-  st.reserve(N);
-  for (int i = 0; i < N; i++) {
-    int prv = -1;
-    while (!st.empty() && a[i] < a[st.back()]) {
-      prv = st.back();
-      st.pop_back();
-    }
-    if (prv != -1) p[prv] = i;
-    if (!st.empty()) p[i] = st.back();
-    st.push_back(i);
-  }
-  int root = -1;
-  for (int i = 0; i < N; i++) {
-    if (p[i] != -1)
-      g[p[i]].push_back(i);
-    else
-      root = i;
-  }
-  return make_pair(g, root);
-}
-#line 3 "tree/heavy-light-decomposition.hpp"
-using namespace std;
-
-#line 6 "tree/heavy-light-decomposition.hpp"
-
-template <typename G>
-struct HeavyLightDecomposition {
-  G& g;
-  int idx;
-  vector<int> size, depth, in, out, nxt, par;
-  HeavyLightDecomposition(G& g, int root = 0)
-      : g(g),
-        idx(0),
-        size(g.size(), 0),
-        depth(g.size(), 0),
-        in(g.size(), -1),
-        out(g.size(), -1),
-        nxt(g.size(), root),
-        par(g.size(), root) {
-    dfs_sz(root);
-    dfs_hld(root);
-  }
-
-  void build(int root) {
-    dfs_sz(root);
-    dfs_hld(root);
-  }
-
-  void dfs_sz(int cur) {
-    size[cur] = 1;
-    for (auto& dst : g[cur]) {
-      if (dst == par[cur]) {
-        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))
-          swap(g[cur][0], g[cur][1]);
-        else
-          continue;
-      }
-      depth[dst] = depth[cur] + 1;
-      par[dst] = cur;
-      dfs_sz(dst);
-      size[cur] += size[dst];
-      if (size[dst] > size[g[cur][0]]) {
-        swap(dst, g[cur][0]);
-      }
-    }
-  }
-
-  void dfs_hld(int cur) {
-    in[cur] = idx++;
-    for (auto dst : g[cur]) {
-      if (dst == par[cur]) continue;
-      nxt[dst] = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));
-      dfs_hld(dst);
-    }
-    out[cur] = idx;
-  }
-
-  template <typename F>
-  void edge_query(int u, int v, const F& f) {
-    while (1) {
-      if (in[u] > in[v]) swap(u, v);
-      if (nxt[u] != nxt[v]) {
-        f(in[nxt[v]], in[v] + 1);
-        v = par[nxt[v]];
-      } else {
-        if (u != v) f(in[u] + 1, in[v] + 1);
-        break;
-      }
-    }
-  }
-
-  // TODO : verify
-  template <typename F>
-  void uncommutable_edge_query(int u, int v, const F& f) {
-    while (1) {
-      if (nxt[u] != nxt[v]) {
-        if (in[u] > in[v]) {
-          f(in[u] + 1, in[nxt[u]], true);
-          u = par[nxt[u]];
-        } else {
-          f(in[nxt[v]], in[v] + 1, false);
-          v = par[nxt[v]];
-        }
-      } else {
-        if (in[u] != in[v]) {
-          if (in[u] > in[v])
-            f(in[u] + 1, in[v] + 1, true);
-          else
-            f(in[u] + 1, in[v] + 1, true);
-        }
-        break;
-      }
-    }
-  }
-
-  template <typename F>
-  void node_query(int u, int v, const F& f) {
-    while (1) {
-      if (in[u] > in[v]) swap(u, v);
-      if (nxt[u] != nxt[v]) {
-        f(in[nxt[v]], in[v] + 1);
-        v = par[nxt[v]];
-      } else {
-        f(in[u], in[v] + 1);
-        break;
-      }
-    }
-  }
-
-  template <typename F>
-  void uncommutable_node_query(int u, int v, const F& f) {
-    while (1) {
-      if (nxt[u] != nxt[v]) {
-        if (in[u] > in[v]) {
-          f(in[u] + 1, in[nxt[u]], true);
-          u = par[nxt[u]];
-        } else {
-          f(in[nxt[v]], in[v] + 1, false);
-          v = par[nxt[v]];
-        }
-      } else {
-        if (in[u] > in[v])
-          f(in[u] + 1, in[v], true);
-        else
-          f(in[u], in[v] + 1, true);
-        break;
-      }
-    }
-  }
-
-  template <typename F>
-  void sub_edge_query(int u, const F& f) {
-    f(in[u] + 1, out[u]);
-  }
-
-  template <typename F>
-  void sub_node_query(int u, const F& f) {
-    f(in[u], out[u]);
-  }
-
-  int lca(int a, int b) {
-    while (nxt[a] != nxt[b]) {
-      if (in[a] < in[b]) swap(a, b);
-      a = par[nxt[a]];
-    }
-    return depth[a] < depth[b] ? a : b;
-  }
-};
-#line 7 "verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp"
+/**
+ * @brief 素数カウント
+ * @docs docs/math/prime-counting.md
+ */
+#line 5 "verify/verify-yosupo-math/yosupo-counting-primes.test.hpp"
 
 void solve() {
-  ini(N, L);
-  vi a(N);
-  in(a);
-  vvi g;
-  int root;
-  tie(g, root) = CartesianTree<int>(a);
-  HeavyLightDecomposition<vvi> hld(g, root);
-  vi ans(N - L + 1);
-  rep(i, N - L + 1) ans[i] = a[hld.lca(i, i + L - 1)];
-  out(ans);
+  inl(N);
+  out(prime_counting(N));
 }
 
 ```
