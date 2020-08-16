@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: verify/verify-yosupo-math/yosupo-counting-primes.test.hpp
+# :heavy_check_mark: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-counting-primes.test.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-16 16:29:52+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-counting-primes.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-16 16:36:29+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/counting_primes">https://judge.yosupo.jp/problem/counting_primes</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../../../library/math/prime-counting.hpp.html">素数カウント <small>(math/prime-counting.hpp)</small></a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/math/prime-counting.hpp.html">素数カウント <small>(math/prime-counting.hpp)</small></a>
 
 
 ## Code
@@ -63,7 +63,7 @@ void solve() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-yosupo-math/yosupo-counting-primes.test.hpp"
+#line 1 "verify/verify-yosupo-math/yosupo-counting-primes.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/counting_primes"
 
 #line 1 "competitive-template.hpp"
@@ -393,7 +393,7 @@ long long prime_counting(long long N) {
  * @brief 素数カウント
  * @docs docs/math/prime-counting.md
  */
-#line 5 "verify/verify-yosupo-math/yosupo-counting-primes.test.hpp"
+#line 5 "verify/verify-yosupo-math/yosupo-counting-primes.test.cpp"
 
 void solve() {
   inl(N);

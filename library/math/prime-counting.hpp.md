@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: 素数カウント <small>(math/prime-counting.hpp)</small>
+# :heavy_check_mark: 素数カウント <small>(math/prime-counting.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -93,7 +93,7 @@ $h(x,n) = h(x-1,n)-h(x-1,\lfloor\frac{n}{x}\rfloor) + \pi(x-1) \ \ \ \ \ \mathrm
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/verify-yosupo-math/yosupo-counting-primes.test.hpp.html">verify/verify-yosupo-math/yosupo-counting-primes.test.hpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-counting-primes.test.cpp.html">verify/verify-yosupo-math/yosupo-counting-primes.test.cpp</a>
 
 
 ## Code
