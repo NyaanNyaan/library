@@ -36,9 +36,7 @@ layout: default
 
 
 
-# 素数カウント
-
-## 素数の個数$\pi(N)$を計算する
+## 素数の個数$\pi(N)$の高速計算
 
 $\pi(N)$を$\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$で計算するライブラリ。
 
@@ -77,7 +75,7 @@ $g(x,n) = g(x-1,n)-g(x-1,\lfloor\frac{n}{x}\rfloor) + \pi(x) \ \ \ \ \ \mathrm{o
 
 ほしいものは$g(x,n)-1$なので$h(x,n) = g(x,n)-1$とおいて微調整すると、
 
-$\pi(x) = h(\lfloor\sqrt{N}\rfloor,n)$
+$\pi(N) = h(\lfloor\sqrt{N}\rfloor,N)$
 
 $h(x,n) = h(x-1,n) \ \ \ \ \ \mathrm{if\ x\ is\ not\ prime\ or}\ n<x^2$
 
