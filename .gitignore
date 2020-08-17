@@ -12,3 +12,5 @@ buf.cpp
 output
 docs/modint/montgomery-modint.md
 verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
+math/sum-of-multiplicative-function.hpp
+docs/math/sum-of-multiplicative-function.md
