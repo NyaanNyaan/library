@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-counting-primes.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-16 16:36:29+09:00
+    - Last commit date: 2020-08-19 01:53:12+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/counting_primes">https://judge.yosupo.jp/problem/counting_primes</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/math/prime-counting.hpp.html">素数カウント <small>(math/prime-counting.hpp)</small></a>
+* :heavy_check_mark: <a href="../../../library/math/prime-counting.hpp.html">素数カウント($\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$) <small>(math/prime-counting.hpp)</small></a>
 
 
 ## Code
@@ -390,7 +390,7 @@ long long prime_counting(long long N) {
 }
 
 /**
- * @brief 素数カウント
+ * @brief 素数カウント($\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$)
  * @docs docs/math/prime-counting.md
  */
 #line 5 "verify/verify-yosupo-math/yosupo-counting-primes.test.cpp"
