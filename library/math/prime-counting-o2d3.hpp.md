@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: 素数カウント($\mathrm{O}(N^{\frac{2}{3}})$) <small>(math/prime-counting-o2d3.hpp)</small>
+# :heavy_check_mark: 素数カウント($\mathrm{O}(N^{\frac{2}{3}})$) <small>(math/prime-counting-o2d3.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/prime-counting-o2d3.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 01:53:12+09:00
+    - Last commit date: 2020-08-19 02:01:39+09:00
 
 
 
@@ -45,6 +45,11 @@ TODO: 計算量解析を書く
 ## Depends on
 
 * :heavy_check_mark: <a href="prime-table.hpp.html">math/prime-table.hpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp.html">verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp</a>
 
 
 ## Code
@@ -106,7 +111,6 @@ int64_t prime_counting(long long N) {
   // fenwick tree, which restore [ h(p, 1), h(p, N ^ {2/3}) )
   // bit[i] corresponds to h[i + N3] (1 <= i)
   bit.resize(nsz - N3);
-  // stack<pair<i64, int>> s;
 
   auto dfs = [&](auto rec, i64 cur, int pid, int flag) -> void {
     if (flag) {
@@ -254,7 +258,6 @@ int64_t prime_counting(long long N) {
   // fenwick tree, which restore [ h(p, 1), h(p, N ^ {2/3}) )
   // bit[i] corresponds to h[i + N3] (1 <= i)
   bit.resize(nsz - N3);
-  // stack<pair<i64, int>> s;
 
   auto dfs = [&](auto rec, i64 cur, int pid, int flag) -> void {
     if (flag) {
