@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-07 00:07:06+09:00
+    - Last commit date: 2020-08-18 23:32:19+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/set_xor_min">https://judge.yosupo.jp/problem/set_xor_min</a>
@@ -521,7 +521,7 @@ struct BinaryTrie {
 
 /**
  * @brief Binary Trie
- * @docs docs/binary-trie.md
+ * @docs docs/data-structure/binary-trie.md
  */
 #line 5 "verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp"
 
