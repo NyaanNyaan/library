@@ -52,7 +52,6 @@ int64_t prime_counting(long long N) {
   // fenwick tree, which restore [ h(p, 1), h(p, N ^ {2/3}) )
   // bit[i] corresponds to h[i + N3] (1 <= i)
   bit.resize(nsz - N3);
-  // stack<pair<i64, int>> s;
 
   auto dfs = [&](auto rec, i64 cur, int pid, int flag) -> void {
     if (flag) {
