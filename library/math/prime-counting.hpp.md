@@ -83,6 +83,11 @@ $h(x,n) = \begin{cases} h(x-1,n) & \mathrm{if}\ x\ \mathrm{is}\ \mathrm{not}\  \
 
 以上より全体の計算量は$\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$となる。
 
+#### 補足
+
+区間を3つに区切ってFenwick Treeを使用することで更なる計算量の改善が可能である。(ただし実装はかなり煩雑になる。)
+
+[$\mathrm{O}(\frac{2}{3})$での実装](https://nyaannyaan.github.io/library/library/math/prime-counting-o2d3.hpp.html)
 
 ## Verified with
 
