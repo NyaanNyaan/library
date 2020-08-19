@@ -16,3 +16,8 @@ FormalPowerSeries<mint> DifferentialEquation(
   }
   return f.pre(deg);
 }
+
+/**
+ * @brief 常微分方程式
+ * @docs docs/fps/differential-equation.md
+ */
