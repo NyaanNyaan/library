@@ -70,7 +70,7 @@ layout: default
 
 * :heavy_check_mark: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :heavy_check_mark: <a href="library/fps/berlekamp-massey.hpp.html">fps/berlekamp-massey.hpp</a>
-* :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">fps/differential-equation.hpp</a>
+* :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">常微分方程式 <small>(fps/differential-equation.hpp)</small></a>
 * :warning: <a href="library/fps/famous-series.hpp.html">fps/famous-series.hpp</a>
 * :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
@@ -119,6 +119,7 @@ layout: default
 * :warning: <a href="library/math/grundy-number.hpp.html">math/grundy-number.hpp</a>
 * :warning: <a href="library/math/matrix-fast.hpp.html">math/matrix-fast.hpp</a>
 * :warning: <a href="library/math/matrix.hpp.html">math/matrix.hpp</a>
+* :warning: <a href="library/math/prime-counting-faster.hpp.html">math/prime-counting-faster.hpp</a>
 * :heavy_check_mark: <a href="library/math/prime-counting-o2d3.hpp.html">素数カウント($\mathrm{O}(N^{\frac{2}{3}})$) <small>(math/prime-counting-o2d3.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/prime-counting.hpp.html">素数カウント($\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$) <small>(math/prime-counting.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
