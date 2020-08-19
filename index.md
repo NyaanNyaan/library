@@ -74,7 +74,7 @@ layout: default
 * :warning: <a href="library/fps/famous-series.hpp.html">fps/famous-series.hpp</a>
 * :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/fps-composition.hpp.html">fps/fps-composition.hpp</a>
+* :heavy_check_mark: <a href="library/fps/fps-composition.hpp.html">関数の合成 <small>(fps/fps-composition.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>

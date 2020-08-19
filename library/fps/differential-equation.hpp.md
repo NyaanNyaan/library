@@ -40,9 +40,9 @@ layout: default
 
 $$\frac{d}{dx}f \equiv F(f) \mod x^n,\ f(0) = f_0$$
 
-を満たす$f$をダブリングを利用して$\mathrm{O}(N \log N)$で求めるアルゴリズム。
+を満たす形式的冪級数$f$をダブリングを利用して$\mathrm{O}(N \log N)$で求めるアルゴリズム。($F$は$\mathrm{O}(k \log k)$で$\mod x^k$まで計算できる関数とする。)
 
-[出典(codeforces)](https://codeforces.com/blog/entry/76447)
+[出典(codeforces)](https://codeforces.com/blog/entry/76447)　調べてみると中国のブログに記述が散見されることから、中国では比較的一般的なテクニックのようである。
 
 #### 概要
 
@@ -52,7 +52,11 @@ $F(f)$の$f=\hat{f}$におけるテイラー展開の式
 
 $$F(f) = \sum_{k=0}^\infty \frac{F^{(k)}(\hat{f})}{k!}(f-\hat{f})^k$$
 
-を$(f-\hat{f})^2 \equiv 0 \mod x^{2k}$を利用して変形すると
+は$f - \hat{f} \equiv 0 \mod x$なので形式的冪級数に適用できる。
+
+$$\frac{d}{dx}f \equiv F(f) \equiv \sum_{k=0}^\infty \frac{F^{(k)}(\hat{f})}{k!}(f-\hat{f})^k \mod x^{2k}$$
+
+$(f-\hat{f})^2 \equiv 0 \mod x^{2k}$を利用して
 
 $$\frac{d}{dx}f \equiv F(\hat{f}) +F'(\hat{f})(f-\hat{f}) \mod x^{2k} \cdots (\ast)$$
 

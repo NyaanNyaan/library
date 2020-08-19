@@ -181,7 +181,7 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 * :heavy_check_mark: <a href="differential-equation.hpp.html">常微分方程式 <small>(fps/differential-equation.hpp)</small></a>
 * :warning: <a href="famous-series.hpp.html">fps/famous-series.hpp</a>
 * :heavy_check_mark: <a href="fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
-* :heavy_check_mark: <a href="fps-composition.hpp.html">fps/fps-composition.hpp</a>
+* :heavy_check_mark: <a href="fps-composition.hpp.html">関数の合成 <small>(fps/fps-composition.hpp)</small></a>
 * :heavy_check_mark: <a href="fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
