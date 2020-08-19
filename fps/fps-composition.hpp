@@ -67,3 +67,8 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
   R.resize(N, mint(0));
   return R;
 }
+
+/**
+ * @brief 関数の合成
+ * @docs docs/fps/fps-composition.md
+ */
