@@ -69,5 +69,5 @@ vector<uint64_t> prime_factor(uint64_t n) {
 
 /**
  * @brief 高速素因数分解(Miller Rabin/Pollard's Rho)
- * @docs docs/prime-factorization.md
+ * @docs docs/math/prime-factorization.md
  */
