@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-inv.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-13 14:48:13+09:00
+    - Last commit date: 2020-08-20 12:22:55+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/inv_of_formal_power_series">https://judge.yosupo.jp/problem/inv_of_formal_power_series</a>
@@ -39,12 +39,12 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
+* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :question: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
+* :question: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
 ## Code
@@ -1217,7 +1217,11 @@ struct FormalPowerSeries : vector<mint> {
   FPS diff() const {
     const int n = (int)this->size();
     FPS ret(max(0, n - 1));
-    for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * mint(i);
+    mint one(1), coeff(1);
+    for (int i = 1; i < n; i++) {
+      ret[i - 1] = (*this)[i] * coeff;
+      coeff += one;
+    }
     return ret;
   }
 
@@ -1225,7 +1229,10 @@ struct FormalPowerSeries : vector<mint> {
     const int n = (int)this->size();
     FPS ret(n + 1);
     ret[0] = mint(0);
-    for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / mint(i + 1);
+    if (n > 0) ret[1] = mint(1);
+    auto mod = mint::get_mod();
+    for (int i = 2; i <= n; i++) ret[i] = (-ret[mod % i]) * (mod / i);
+    for (int i = 0; i < n; i++) ret[i + 1] *= (*this)[i];
     return ret;
   }
 
@@ -1342,13 +1349,75 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
+  using fps = FormalPowerSeries<mint>;
   assert((*this).size() == 0 || (*this)[0] == mint(0));
-  if (deg == -1) deg = (int)this->size();
-  FormalPowerSeries<mint> ret({mint(1)});
-  for (int i = 1; i < deg; i <<= 1) {
-    ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
+  if (deg == -1) deg = this->size();
+
+  fps inv;
+  inv.reserve(deg + 1);
+  inv.push_back(mint(0));
+  inv.push_back(mint(1));
+
+  auto inplace_integral = [&](fps& F) -> void {
+    const int n = (int)F.size();
+    auto mod = mint::get_mod();
+    while ((int)inv.size() <= n) {
+      int i = inv.size();
+      inv.push_back((-inv[mod % i]) * (mod / i));
+    }
+    F.insert(begin(F), mint(0));
+    for (int i = 1; i <= n; i++) F[i] *= inv[i];
+  };
+
+  auto inplace_diff = [](fps& F) -> void {
+    if (F.empty()) return;
+    F.erase(begin(F));
+    mint coeff = 1, one = 1;
+    for (int i = 0; i < (int)F.size(); i++) {
+      F[i] *= coeff;
+      coeff += one;
+    }
+  };
+
+  fps b{1, 1 < (int)this->size() ? (*this)[1] : 0}, c{1}, z1, z2{1, 1};
+  for (int m = 2; m < deg; m *= 2) {
+    auto y = b;
+    y.resize(2 * m);
+    y.ntt();
+    z1 = z2;
+    fps z(m);
+    for (int i = 0; i < m; ++i) z[i] = y[i] * z1[i];
+    z.intt();
+    fill(begin(z), begin(z) + m / 2, mint(0));
+    z.ntt();
+    for (int i = 0; i < m; ++i) z[i] *= -z1[i];
+    z.intt();
+    c.insert(end(c), begin(z) + m / 2, end(z));
+    z2 = c;
+    z2.resize(2 * m);
+    z2.ntt();
+    fps x(begin(*this), begin(*this) + min<int>(this->size(), m));
+    inplace_diff(x);
+    x.push_back(mint(0));
+    x.ntt();
+    for (int i = 0; i < m; ++i) x[i] *= y[i];
+    x.intt();
+    x -= b.diff();
+    x.resize(2 * m);
+    for (int i = 0; i < m - 1; ++i) x[m + i] = x[i], x[i] = mint(0);
+    x.ntt();
+    for (int i = 0; i < 2 * m; ++i) x[i] *= z2[i];
+    x.intt();
+    x.pop_back();
+    inplace_integral(x);
+    for (int i = m; i < min<int>(this->size(), 2 * m); ++i) x[i] += (*this)[i];
+    fill(begin(x), begin(x) + m, mint(0));
+    x.ntt();
+    for (int i = 0; i < 2 * m; ++i) x[i] *= y[i];
+    x.intt();
+    b.insert(end(b), begin(x) + m, end(x));
   }
-  return ret.pre(deg);
+  return fps{begin(b), begin(b) + deg};
 }
 #line 6 "verify/verify-yosupo-fps/yosupo-inv.test.cpp"
 using mint = LazyMontgomeryModInt<998244353>;
