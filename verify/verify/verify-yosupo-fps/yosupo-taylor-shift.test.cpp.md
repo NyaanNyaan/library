@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-20 12:22:55+09:00
+    - Last commit date: 2020-08-21 03:00:46+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/polynomial_taylor_shift">https://judge.yosupo.jp/problem/polynomial_taylor_shift</a>
@@ -1608,7 +1608,7 @@ FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
 
 /**
  * @brief 平行移動
- * @docs docs/fps-taylor-shift.md
+ * @docs docs/fps/fps-taylor-shift.md
  */
 #line 9 "verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp"
 

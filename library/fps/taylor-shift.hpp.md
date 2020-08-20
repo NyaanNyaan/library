@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/taylor-shift.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-20 12:22:55+09:00
+    - Last commit date: 2020-08-21 03:00:46+09:00
 
 
 
@@ -95,7 +95,7 @@ FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
 
 /**
  * @brief 平行移動
- * @docs docs/fps-taylor-shift.md
+ * @docs docs/fps/fps-taylor-shift.md
  */
 
 ```
@@ -336,7 +336,7 @@ FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
 
 /**
  * @brief 平行移動
- * @docs docs/fps-taylor-shift.md
+ * @docs docs/fps/fps-taylor-shift.md
  */
 
 ```
