@@ -71,11 +71,73 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
 
 template <typename mint>
 FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
+  using fps = FormalPowerSeries<mint>;
   assert((*this).size() == 0 || (*this)[0] == mint(0));
-  if (deg == -1) deg = (int)this->size();
-  FormalPowerSeries<mint> ret({mint(1)});
-  for (int i = 1; i < deg; i <<= 1) {
-    ret = (ret * (pre(i << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);
+  if (deg == -1) deg = this->size();
+
+  fps inv;
+  inv.reserve(deg + 1);
+  inv.push_back(mint(0));
+  inv.push_back(mint(1));
+
+  auto inplace_integral = [&](fps& F) -> void {
+    const int n = (int)F.size();
+    auto mod = mint::get_mod();
+    while ((int)inv.size() <= n) {
+      int i = inv.size();
+      inv.push_back((-inv[mod % i]) * (mod / i));
+    }
+    F.insert(begin(F), mint(0));
+    for (int i = 1; i <= n; i++) F[i] *= inv[i];
+  };
+
+  auto inplace_diff = [](fps& F) -> void {
+    if (F.empty()) return;
+    F.erase(begin(F));
+    mint coeff = 1, one = 1;
+    for (int i = 0; i < (int)F.size(); i++) {
+      F[i] *= coeff;
+      coeff += one;
+    }
+  };
+
+  fps b{1, 1 < (int)this->size() ? (*this)[1] : 0}, c{1}, z1, z2{1, 1};
+  for (int m = 2; m < deg; m *= 2) {
+    auto y = b;
+    y.resize(2 * m);
+    y.ntt();
+    z1 = z2;
+    fps z(m);
+    for (int i = 0; i < m; ++i) z[i] = y[i] * z1[i];
+    z.intt();
+    fill(begin(z), begin(z) + m / 2, mint(0));
+    z.ntt();
+    for (int i = 0; i < m; ++i) z[i] *= -z1[i];
+    z.intt();
+    c.insert(end(c), begin(z) + m / 2, end(z));
+    z2 = c;
+    z2.resize(2 * m);
+    z2.ntt();
+    fps x(begin(*this), begin(*this) + min<int>(this->size(), m));
+    inplace_diff(x);
+    x.push_back(mint(0));
+    x.ntt();
+    for (int i = 0; i < m; ++i) x[i] *= y[i];
+    x.intt();
+    x -= b.diff();
+    x.resize(2 * m);
+    for (int i = 0; i < m - 1; ++i) x[m + i] = x[i], x[i] = mint(0);
+    x.ntt();
+    for (int i = 0; i < 2 * m; ++i) x[i] *= z2[i];
+    x.intt();
+    x.pop_back();
+    inplace_integral(x);
+    for (int i = m; i < min<int>(this->size(), 2 * m); ++i) x[i] += (*this)[i];
+    fill(begin(x), begin(x) + m, mint(0));
+    x.ntt();
+    for (int i = 0; i < 2 * m; ++i) x[i] *= y[i];
+    x.intt();
+    b.insert(end(b), begin(x) + m, end(x));
   }
-  return ret.pre(deg);
+  return fps{begin(b), begin(b) + deg};
 }

@@ -101,7 +101,11 @@ struct FormalPowerSeries : vector<mint> {
   FPS diff() const {
     const int n = (int)this->size();
     FPS ret(max(0, n - 1));
-    for (int i = 1; i < n; i++) ret[i - 1] = (*this)[i] * mint(i);
+    mint one(1), coeff(1);
+    for (int i = 1; i < n; i++) {
+      ret[i - 1] = (*this)[i] * coeff;
+      coeff += one;
+    }
     return ret;
   }
 
@@ -109,7 +113,10 @@ struct FormalPowerSeries : vector<mint> {
     const int n = (int)this->size();
     FPS ret(n + 1);
     ret[0] = mint(0);
-    for (int i = 0; i < n; i++) ret[i + 1] = (*this)[i] / mint(i + 1);
+    if (n > 0) ret[1] = mint(1);
+    auto mod = mint::get_mod();
+    for (int i = 2; i <= n; i++) ret[i] = (-ret[mod % i]) * (mod / i);
+    for (int i = 0; i < n; i++) ret[i + 1] *= (*this)[i];
     return ret;
   }
 
