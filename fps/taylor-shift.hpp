@@ -21,5 +21,5 @@ FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
 
 /**
  * @brief 平行移動
- * @docs docs/fps-taylor-shift.md
+ * @docs docs/fps/fps-taylor-shift.md
  */
