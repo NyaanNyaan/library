@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segment-tree/persistent-segment-tree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 16:01:37+09:00
+    - Last commit date: 2020-08-20 12:40:30+09:00
 
 
 
@@ -192,7 +192,7 @@ struct PersistentSegmentTree {
 
 /**
  * @brief 永続セグメント木
- * @docs docs/persistent-segtree.md
+ * @docs docs/segment-tree/persistent-segtree.md
  */
 
 ```
@@ -328,7 +328,7 @@ struct PersistentSegmentTree {
 
 /**
  * @brief 永続セグメント木
- * @docs docs/persistent-segtree.md
+ * @docs docs/segment-tree/persistent-segtree.md
  */
 
 ```

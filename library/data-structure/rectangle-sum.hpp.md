@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/rectangle-sum.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 16:01:37+09:00
+    - Last commit date: 2020-08-20 12:40:30+09:00
 
 
 
@@ -244,7 +244,7 @@ struct PersistentSegmentTree {
 
 /**
  * @brief 永続セグメント木
- * @docs docs/persistent-segtree.md
+ * @docs docs/segment-tree/persistent-segtree.md
  */
 #line 6 "data-structure/rectangle-sum.hpp"
 
