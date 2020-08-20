@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/prime-factor.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-09 01:48:03+09:00
+    - Last commit date: 2020-08-21 03:22:06+09:00
 
 
 
@@ -153,7 +153,7 @@ vector<uint64_t> prime_factor(uint64_t n) {
 
 /**
  * @brief 高速素因数分解(Miller Rabin/Pollard's Rho)
- * @docs docs/prime-factorization.md
+ * @docs docs/math/prime-factorization.md
  */
 
 ```
@@ -435,7 +435,7 @@ vector<uint64_t> prime_factor(uint64_t n) {
 
 /**
  * @brief 高速素因数分解(Miller Rabin/Pollard's Rho)
- * @docs docs/prime-factorization.md
+ * @docs docs/math/prime-factorization.md
  */
 
 ```

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-factrization.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-09 17:31:00+09:00
+    - Last commit date: 2020-08-21 03:22:06+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/factorize">https://judge.yosupo.jp/problem/factorize</a>
@@ -654,7 +654,7 @@ vector<uint64_t> prime_factor(uint64_t n) {
 
 /**
  * @brief 高速素因数分解(Miller Rabin/Pollard's Rho)
- * @docs docs/prime-factorization.md
+ * @docs docs/math/prime-factorization.md
  */
 #line 3 "misc/fastio.hpp"
 using namespace std;
