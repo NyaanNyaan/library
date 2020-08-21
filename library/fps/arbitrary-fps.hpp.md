@@ -237,7 +237,7 @@ using namespace std;
 
 #line 3 "modint/simd-montgomery.hpp"
 using namespace std;
-#line 5 "modint/simd-montgomery.hpp"
+#include <immintrin.h>
 
 __attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
 my128_mullo_epu32(const __m128i &a, const __m128i &b) {

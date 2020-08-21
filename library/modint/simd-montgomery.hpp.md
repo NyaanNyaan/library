@@ -177,7 +177,7 @@ montgomery_sub_256(const __m256i &a, const __m256i &b, const __m256i &m2,
 #line 2 "modint/simd-montgomery.hpp"
 #include <bits/stdc++.h>
 using namespace std;
-#line 5 "modint/simd-montgomery.hpp"
+#include <immintrin.h>
 
 __attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i
 my128_mullo_epu32(const __m128i &a, const __m128i &b) {
