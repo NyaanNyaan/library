@@ -44,7 +44,7 @@ layout: default
 
 [参考資料その１](http://people.csail.mit.edu/madhu/ST12/scribe/lect06.pdf)　[参考資料その２](https://scrapbox.io/37zigen-43465887/half-GCD)
 
-多項式$a(x),b(x)$がある。$h|a,h|b$が成り立つ任意の多項式$h$に対して$g|h$となるような$g$を多項式のGCDとして$\gcd(a,b)$と置く。
+多項式$a(x),b(x)$がある。$h\mid a,h\mid b$が成り立つ任意の多項式$h$に対して$g\mid h$となるような$g$を多項式のGCDとして$\gcd(a,b)$と置く。
 
 $\gcd(a,b)$は通常のgcdと同様にユークリッドの互除法で求まるが、一回の除算につき次数は最低1しか減らないため、愚直に計算すると計算量が$\mathrm{O}(N^2 \log N)$程度になってしまう。そこで高速化のためにHalf-GCD法と呼ばれるアルゴリズムを使用する。
 
