@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 常微分方程式 <small>(fps/differential-equation.hpp)</small>
+# :x: 常微分方程式 <small>(fps/differential-equation.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/differential-equation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-20 12:22:55+09:00
+    - Last commit date: 2020-08-21 15:57:02+09:00
 
 
 
@@ -87,12 +87,12 @@ $$f\equiv r^{-1}\left( \int \left( \left(F(\hat{f}) -F'(\hat{f})\hat{f}\right)\c
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
 
 
 ## Code
@@ -174,6 +174,22 @@ struct FormalPowerSeries : vector<mint> {
       return *this;
     }
     int n = this->size() - r.size() + 1;
+    if ((int)r.size() <= 64) {
+      FPS f(*this), g(r);
+      g.shrink();
+      mint coeff = g.back().inverse();
+      for (auto &x : g) x *= coeff;
+      int deg = (int)f.size() - (int)g.size() + 1;
+      int gs = g.size();
+      FPS quo(deg);
+      for (int i = deg - 1; i >= 0; i--) {
+        quo[i] = f[i + gs - 1];
+        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] * g[j];
+      }
+      *this = quo * coeff;
+      this->resize(n, mint(0));
+      return *this;
+    }
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 

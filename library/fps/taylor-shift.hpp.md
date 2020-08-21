@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 平行移動 <small>(fps/taylor-shift.hpp)</small>
+# :x: 平行移動 <small>(fps/taylor-shift.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/taylor-shift.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 03:00:46+09:00
+    - Last commit date: 2020-08-21 15:57:02+09:00
 
 
 
@@ -58,13 +58,13 @@ $$=\sum_{j=0}^N\frac{x^j}{(N-j)!}\sum_{m=0}^j\frac{a^{j-m}}{(j-m)!}\left((N-m)!f
 
 ## Depends on
 
-* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :question: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
+* :x: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 
 
 ## Code
@@ -148,6 +148,22 @@ struct FormalPowerSeries : vector<mint> {
       return *this;
     }
     int n = this->size() - r.size() + 1;
+    if ((int)r.size() <= 64) {
+      FPS f(*this), g(r);
+      g.shrink();
+      mint coeff = g.back().inverse();
+      for (auto &x : g) x *= coeff;
+      int deg = (int)f.size() - (int)g.size() + 1;
+      int gs = g.size();
+      FPS quo(deg);
+      for (int i = deg - 1; i >= 0; i--) {
+        quo[i] = f[i + gs - 1];
+        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] * g[j];
+      }
+      *this = quo * coeff;
+      this->resize(n, mint(0));
+      return *this;
+    }
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
