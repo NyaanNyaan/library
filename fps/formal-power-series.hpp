@@ -42,6 +42,22 @@ struct FormalPowerSeries : vector<mint> {
       return *this;
     }
     int n = this->size() - r.size() + 1;
+    if ((int)r.size() <= 64) {
+      FPS f(*this), g(r);
+      g.shrink();
+      mint coeff = g.back().inverse();
+      for (auto &x : g) x *= coeff;
+      int deg = (int)f.size() - (int)g.size() + 1;
+      int gs = g.size();
+      FPS quo(deg);
+      for (int i = deg - 1; i >= 0; i--) {
+        quo[i] = f[i + gs - 1];
+        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] * g[j];
+      }
+      *this = quo * coeff;
+      this->resize(n, mint(0));
+      return *this;
+    }
     return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();
   }
 
