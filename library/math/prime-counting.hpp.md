@@ -87,7 +87,10 @@ $h(x,n) = \begin{cases} h(x-1,n) & \mathrm{if}\ x\ \mathrm{is}\ \mathrm{not}\  \
 
 区間を3つに区切ってFenwick Treeを使用することで更なる計算量の改善が可能である。(ただし実装はかなり煩雑になる。)
 
-[$\mathrm{O}(\frac{2}{3})$での実装](https://nyaannyaan.github.io/library/library/math/prime-counting-o2d3.hpp.html)
+[$\mathrm{O}(N^\frac{2}{3})$での実装](https://nyaannyaan.github.io/library/library/math/prime-counting-o2d3.hpp.html)
+
+なお、高速化をしたい場合は整数同士の除算をdouble型同士の除算で計算するのが最も高速化への寄与が大きい。なぜなら、64bit整数同士の除算は80クロックと低速なのに対してdouble型同士は11クロックとはるかに高速であり、また$N=10^{12}$程度の大きさ同士の切り捨て除算ならばdouble型で計算しても誤差が発生しないことが規格で保証されているためである。(Library Checkerの提出で比較すると、686ms→180msとおよそ4倍もの高速化となっている。)
+
 
 ## Verified with
 
