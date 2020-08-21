@@ -74,8 +74,8 @@ $N \leq 8192$とすると、感覚的には解説したアルゴリズムより�
 
 ## Depends on
 
-* :question: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :question: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
+* :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
 
 
 ## Verified with
