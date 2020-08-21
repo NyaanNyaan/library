@@ -83,6 +83,7 @@
 "verify/verify-yosupo-math/yosupo-prime-table.test.cpp": "2020-08-09 17:31:00 +0900",
 "verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp": "2020-08-07 03:15:06 +0900",
+"verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp": "2020-08-22 00:42:49 +0900",
 "verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp": "2020-08-11 16:52:22 +0900",
 "verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp": "2020-08-11 16:52:22 +0900",
 "verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp": "2020-08-11 16:52:22 +0900",
