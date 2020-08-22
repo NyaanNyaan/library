@@ -72,6 +72,7 @@ layout: default
 * :heavy_check_mark: <a href="library/fps/berlekamp-massey.hpp.html">fps/berlekamp-massey.hpp</a>
 * :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">常微分方程式 <small>(fps/differential-equation.hpp)</small></a>
 * :warning: <a href="library/fps/famous-series.hpp.html">fps/famous-series.hpp</a>
+* :warning: <a href="library/fps/fast-multieval.hpp.html">fps/fast-multieval.hpp</a>
 * :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-composition.hpp.html">関数の合成 <small>(fps/fps-composition.hpp)</small></a>

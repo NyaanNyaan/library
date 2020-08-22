@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: fps/ntt-friendly-fps.hpp
+# :warning: fps/fast-multieval.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
-* <a href="{{ site.github.repository_url }}/blob/master/fps/ntt-friendly-fps.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/fps/fast-multieval.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-23 01:27:42+09:00
 
 
 
@@ -39,30 +39,10 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
-
-
-## Required by
-
-* :warning: <a href="fast-multieval.hpp.html">fps/fast-multieval.hpp</a>
-
-
-## Verified with
-
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-composition.test.cpp.html">verify/verify-yosupo-fps/yosupo-composition.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-interpolation.test.cpp.html">verify/verify-yosupo-fps/yosupo-interpolation.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify/verify-yosupo-fps/yosupo-log.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-multieval.test.cpp.html">verify/verify-yosupo-fps/yosupo-multieval.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 
 
 ## Code
@@ -71,157 +51,182 @@ layout: default
 {% raw %}
 ```cpp
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
-
-#include "../ntt/ntt-avx2.hpp"
-#include "./formal-power-series.hpp"
+#include "../modint/montgomery-modint.hpp"
+#include "./ntt-friendly-fps.hpp"
 
 template <typename mint>
-void FormalPowerSeries<mint>::set_fft() {
-  if (!ntt_ptr) ntt_ptr = new NTT<mint>;
-}
-
-template <typename mint>
-FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(
-    const FormalPowerSeries<mint>& r) {
-  if (this->empty() || r.empty()) {
-    this->clear();
-    return *this;
-  }
-  set_fft();
-  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this, r);
-  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt() {
-  set_fft();
-  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::intt() {
-  set_fft();
-  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);
-}
-
-template <typename mint>
-void FormalPowerSeries<mint>::ntt_doubling() {
-  set_fft();
-  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);
-}
-
-template <typename mint>
-int FormalPowerSeries<mint>::ntt_pr() {
-  set_fft();
-  return static_cast<NTT<mint>*>(ntt_ptr)->pr;
-}
-
-template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {
-  assert((*this)[0] != mint(0));
-  if (deg == -1) deg = (int)this->size();
-  FormalPowerSeries<mint> res(deg);
-  res[0] = {mint(1) / (*this)[0]};
-  for (int d = 1; d < deg; d <<= 1) {
-    FormalPowerSeries<mint> f(2 * d), g(2 * d);
-    for (int j = 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];
-    for (int j = 0; j < d; j++) g[j] = res[j];
-    f.ntt();
-    g.ntt();
-    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
-    f.intt();
-    for (int j = 0; j < d; j++) f[j] = 0;
-    f.ntt();
-    for (int j = 0; j < 2 * d; j++) f[j] *= g[j];
-    f.intt();
-    for (int j = d; j < min(2 * d, deg); j++) res[j] = -f[j];
-  }
-  return res.pre(deg);
-}
-
-template <typename mint>
-FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
+__attribute__((target("avx2"), optimize("unroll-loops"))) vector<mint>
+FastMultiEval(const FormalPowerSeries<mint> &f, const vector<mint> &xs) {
   using fps = FormalPowerSeries<mint>;
-  assert((*this).size() == 0 || (*this)[0] == mint(0));
-  if (deg == -1) deg = this->size();
 
-  fps inv;
-  inv.reserve(deg + 1);
-  inv.push_back(mint(0));
-  inv.push_back(mint(1));
+  int s = xs.size();
+  int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));
 
-  auto inplace_integral = [&](fps& F) -> void {
-    const int n = (int)F.size();
-    auto mod = mint::get_mod();
-    while ((int)inv.size() <= n) {
-      int i = inv.size();
-      inv.push_back((-inv[mod % i]) * (mod / i));
-    }
-    F.insert(begin(F), mint(0));
-    for (int i = 1; i <= n; i++) F[i] *= inv[i];
-  };
-
-  auto inplace_diff = [](fps& F) -> void {
-    if (F.empty()) return;
-    F.erase(begin(F));
-    mint coeff = 1, one = 1;
-    for (int i = 0; i < (int)F.size(); i++) {
-      F[i] *= coeff;
-      coeff += one;
-    }
-  };
-
-  fps b{1, 1 < (int)this->size() ? (*this)[1] : 0}, c{1}, z1, z2{1, 1};
-  for (int m = 2; m < deg; m *= 2) {
-    auto y = b;
-    y.resize(2 * m);
-    y.ntt();
-    z1 = z2;
-    fps z(m);
-    for (int i = 0; i < m; ++i) z[i] = y[i] * z1[i];
-    z.intt();
-    fill(begin(z), begin(z) + m / 2, mint(0));
-    z.ntt();
-    for (int i = 0; i < m; ++i) z[i] *= -z1[i];
-    z.intt();
-    c.insert(end(c), begin(z) + m / 2, end(z));
-    z2 = c;
-    z2.resize(2 * m);
-    z2.ntt();
-    fps x(begin(*this), begin(*this) + min<int>(this->size(), m));
-    inplace_diff(x);
-    x.push_back(mint(0));
-    x.ntt();
-    for (int i = 0; i < m; ++i) x[i] *= y[i];
-    x.intt();
-    x -= b.diff();
-    x.resize(2 * m);
-    for (int i = 0; i < m - 1; ++i) x[m + i] = x[i], x[i] = mint(0);
-    x.ntt();
-    for (int i = 0; i < 2 * m; ++i) x[i] *= z2[i];
-    x.intt();
-    x.pop_back();
-    inplace_integral(x);
-    for (int i = m; i < min<int>(this->size(), 2 * m); ++i) x[i] += (*this)[i];
-    fill(begin(x), begin(x) + m, mint(0));
-    x.ntt();
-    for (int i = 0; i < 2 * m; ++i) x[i] *= y[i];
-    x.intt();
-    b.insert(end(b), begin(x) + m, end(x));
+  vector<FormalPowerSeries<mint>> buf(2 * N);
+  for (int i = 0; i < N; i++) {
+    mint n = mint{i < s ? -xs[i] : mint(0)};
+    buf[i + N] = fps{n + 1, n - 1};
   }
-  return fps{begin(b), begin(b) + deg};
-}
+  for (int i = N - 1; i > 0; i--) {
+    fps &f(buf[(i << 1) | 0]), &g(buf[(i << 1) | 1]);
+    int n = f.size();
+    int m = n << 1;
+    buf[i].reserve(m);
+    buf[i].resize(n);
+    for (int j = 0; j < n; j++) buf[i][j] = f[j] * g[j] - mint(1);
+    if (i != 1) {
+      buf[i].ntt_doubling();
+      for (int j = 0; j < m; j++) buf[i][j] += j < n ? mint(1) : -mint(1);
+    }
+  }
 
+  int fs = f.size();
+  fps root = buf[1];
+  root.intt();
+  root.push_back(1);
+  reverse(begin(root), end(root));
+  root = root.inv(fs).rev() * f;
+  root.erase(begin(root), begin(root) + fs - 1);
+  root.resize(N, mint(0));
+
+  /**/
+  fps::set_fft();
+  NTT<mint> &ntt = *static_cast<NTT<mint> *>(fps::ntt_ptr);
+  mint *ar1 = reinterpret_cast<mint *>(buf1_);
+  mint *ar2 = reinterpret_cast<mint *>(buf2_);
+  for (int i = 0; i < N; i++) ar1[i] = root[i];
+
+  using A = array<int, 4>;
+  queue<A> Q;
+  Q.push({1, 0, 0, N});
+  while (!Q.empty()) {
+    auto [i, l, st, len] = Q.front();
+    Q.pop();
+    mint *f = ar1 + st;
+    mint *g = ar2 + st;
+    if (i >= N) continue;
+    ntt.ntt(f, len);
+
+    memcpy(g, f, len * sizeof(int));
+    int m = l + (len >> 1);
+
+    for (int j = 0; j < len; j++) f[j] *= buf[(i << 1) + 1][j];
+    ntt.intt(f, len);
+    memcpy(f, f + (len >> 1), (len >> 1) * sizeof(int));
+    Q.push({i * 2 + 0, l, st, len >> 1});
+
+    if (m >= s) continue;
+    for (int j = 0; j < len; j++) g[j] *= buf[(i << 1) + 0][j];
+    ntt.intt(g, len);
+    memcpy(f + (len >> 1), g + (len >> 1), (len >> 1) * sizeof(int));
+    Q.push({i * 2 + 1, m, st + (len >> 1), len >> 1});
+  }
+
+  vector<mint> ans(ar1, ar1 + s);
+  return ans;
+}
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "fps/ntt-friendly-fps.hpp"
+#line 2 "modint/montgomery-modint.hpp"
 #include <bits/stdc++.h>
+using namespace std;
+
+template <uint32_t mod>
+struct LazyMontgomeryModInt {
+  using mint = LazyMontgomeryModInt;
+  using i32 = int32_t;
+  using u32 = uint32_t;
+  using u64 = uint64_t;
+
+  static constexpr u32 get_r() {
+    u32 ret = mod;
+    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;
+    return ret;
+  }
+
+  static constexpr u32 r = get_r();
+  static constexpr u32 n2 = -u64(mod) % mod;
+  static_assert(r * mod == 1, "invalid, r * mod != 1");
+  static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
+  static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
+
+  u32 a;
+
+  constexpr LazyMontgomeryModInt() : a(0) {}
+  constexpr LazyMontgomeryModInt(const int64_t &b)
+      : a(reduce(u64(b % mod + mod) * n2)){};
+
+  static constexpr u32 reduce(const u64 &b) {
+    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;
+  }
+
+  constexpr mint &operator+=(const mint &b) {
+    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  constexpr mint &operator-=(const mint &b) {
+    if (i32(a -= b.a) < 0) a += 2 * mod;
+    return *this;
+  }
+
+  constexpr mint &operator*=(const mint &b) {
+    a = reduce(u64(a) * b.a);
+    return *this;
+  }
+
+  constexpr mint &operator/=(const mint &b) {
+    *this *= b.inverse();
+    return *this;
+  }
+
+  constexpr mint operator+(const mint &b) const { return mint(*this) += b; }
+  constexpr mint operator-(const mint &b) const { return mint(*this) -= b; }
+  constexpr mint operator*(const mint &b) const { return mint(*this) *= b; }
+  constexpr mint operator/(const mint &b) const { return mint(*this) /= b; }
+  constexpr bool operator==(const mint &b) const {
+    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr bool operator!=(const mint &b) const {
+    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
+  }
+  constexpr mint operator-() const { return mint() - mint(*this); }
+
+  constexpr mint pow(u64 n) const {
+    mint ret(1), mul(*this);
+    while (n > 0) {
+      if (n & 1) ret *= mul;
+      mul *= mul;
+      n >>= 1;
+    }
+    return ret;
+  }
+  
+  constexpr mint inverse() const { return pow(mod - 2); }
+
+  friend ostream &operator<<(ostream &os, const mint &b) {
+    return os << b.get();
+  }
+
+  friend istream &operator>>(istream &is, mint &b) {
+    int64_t t;
+    is >> t;
+    b = LazyMontgomeryModInt<mod>(t);
+    return (is);
+  }
+  
+  constexpr u32 get() const {
+    u32 ret = reduce(a);
+    return ret >= mod ? ret - mod : ret;
+  }
+
+  static constexpr u32 get_mod() { return mod; }
+};
+#line 3 "fps/ntt-friendly-fps.hpp"
 using namespace std;
 
 #line 3 "ntt/ntt-avx2.hpp"
@@ -1186,6 +1191,79 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
     b.insert(end(b), begin(x) + m, end(x));
   }
   return fps{begin(b), begin(b) + deg};
+}
+#line 4 "fps/fast-multieval.hpp"
+
+template <typename mint>
+__attribute__((target("avx2"), optimize("unroll-loops"))) vector<mint>
+FastMultiEval(const FormalPowerSeries<mint> &f, const vector<mint> &xs) {
+  using fps = FormalPowerSeries<mint>;
+
+  int s = xs.size();
+  int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));
+
+  vector<FormalPowerSeries<mint>> buf(2 * N);
+  for (int i = 0; i < N; i++) {
+    mint n = mint{i < s ? -xs[i] : mint(0)};
+    buf[i + N] = fps{n + 1, n - 1};
+  }
+  for (int i = N - 1; i > 0; i--) {
+    fps &f(buf[(i << 1) | 0]), &g(buf[(i << 1) | 1]);
+    int n = f.size();
+    int m = n << 1;
+    buf[i].reserve(m);
+    buf[i].resize(n);
+    for (int j = 0; j < n; j++) buf[i][j] = f[j] * g[j] - mint(1);
+    if (i != 1) {
+      buf[i].ntt_doubling();
+      for (int j = 0; j < m; j++) buf[i][j] += j < n ? mint(1) : -mint(1);
+    }
+  }
+
+  int fs = f.size();
+  fps root = buf[1];
+  root.intt();
+  root.push_back(1);
+  reverse(begin(root), end(root));
+  root = root.inv(fs).rev() * f;
+  root.erase(begin(root), begin(root) + fs - 1);
+  root.resize(N, mint(0));
+
+  /**/
+  fps::set_fft();
+  NTT<mint> &ntt = *static_cast<NTT<mint> *>(fps::ntt_ptr);
+  mint *ar1 = reinterpret_cast<mint *>(buf1_);
+  mint *ar2 = reinterpret_cast<mint *>(buf2_);
+  for (int i = 0; i < N; i++) ar1[i] = root[i];
+
+  using A = array<int, 4>;
+  queue<A> Q;
+  Q.push({1, 0, 0, N});
+  while (!Q.empty()) {
+    auto [i, l, st, len] = Q.front();
+    Q.pop();
+    mint *f = ar1 + st;
+    mint *g = ar2 + st;
+    if (i >= N) continue;
+    ntt.ntt(f, len);
+
+    memcpy(g, f, len * sizeof(int));
+    int m = l + (len >> 1);
+
+    for (int j = 0; j < len; j++) f[j] *= buf[(i << 1) + 1][j];
+    ntt.intt(f, len);
+    memcpy(f, f + (len >> 1), (len >> 1) * sizeof(int));
+    Q.push({i * 2 + 0, l, st, len >> 1});
+
+    if (m >= s) continue;
+    for (int j = 0; j < len; j++) g[j] *= buf[(i << 1) + 0][j];
+    ntt.intt(g, len);
+    memcpy(f + (len >> 1), g + (len >> 1), (len >> 1) * sizeof(int));
+    Q.push({i * 2 + 1, m, st + (len >> 1), len >> 1});
+  }
+
+  vector<mint> ans(ar1, ar1 + s);
+  return ans;
 }
 
 ```
