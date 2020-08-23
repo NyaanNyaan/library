@@ -52,6 +52,8 @@ layout: default
 * :heavy_check_mark: <a href="library/data-structure/binary-trie.hpp.html">Binary Trie <small>(data-structure/binary-trie.hpp)</small></a>
 * :warning: <a href="library/data-structure/dynamic-binary-indexed-tree.hpp.html">data-structure/dynamic-binary-indexed-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/dynamic-union-find.hpp.html">data-structure/dynamic-union-find.hpp</a>
+* :heavy_check_mark: <a href="library/data-structure/persistent-array.hpp.html">永続配列 <small>(data-structure/persistent-array.hpp)</small></a>
+* :heavy_check_mark: <a href="library/data-structure/persistent-union-find.hpp.html">完全永続Union-Find <small>(data-structure/persistent-union-find.hpp)</small></a>
 * :warning: <a href="library/data-structure/randomized-binary-search-tree.hpp.html">data-structure/randomized-binary-search-tree.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/range-union-find.hpp.html">data-structure/range-union-find.hpp</a>
@@ -287,6 +289,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp.html">verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp.html">verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp.html">verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp.html">verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
