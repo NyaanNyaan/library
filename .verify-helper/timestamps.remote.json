@@ -42,6 +42,7 @@
 "verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp": "2020-08-18 23:32:19 +0900",
 "verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp": "2020-08-01 15:08:31 +0900",
 "verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp": "2020-08-02 17:27:04 +0900",
+"verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp": "2020-08-23 22:52:35 +0900",
 "verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp": "2020-08-01 15:08:31 +0900",
 "verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp": "2020-08-07 01:46:09 +0900",
 "verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp": "2020-08-20 12:40:30 +0900",
