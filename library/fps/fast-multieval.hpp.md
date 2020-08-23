@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fast-multieval.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-23 01:27:42+09:00
+    - Last commit date: 2020-08-23 14:53:25+09:00
 
 
 
@@ -55,10 +55,9 @@ layout: default
 #include "./ntt-friendly-fps.hpp"
 
 template <typename mint>
-__attribute__((target("avx2"), optimize("unroll-loops"))) vector<mint>
-FastMultiEval(const FormalPowerSeries<mint> &f, const vector<mint> &xs) {
+vector<mint> FastMultiEval(const FormalPowerSeries<mint> &f,
+                           const vector<mint> &xs) {
   using fps = FormalPowerSeries<mint>;
-
   int s = xs.size();
   int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));
 
@@ -89,42 +88,29 @@ FastMultiEval(const FormalPowerSeries<mint> &f, const vector<mint> &xs) {
   root.erase(begin(root), begin(root) + fs - 1);
   root.resize(N, mint(0));
 
-  /**/
-  fps::set_fft();
-  NTT<mint> &ntt = *static_cast<NTT<mint> *>(fps::ntt_ptr);
-  mint *ar1 = reinterpret_cast<mint *>(buf1_);
-  mint *ar2 = reinterpret_cast<mint *>(buf2_);
-  for (int i = 0; i < N; i++) ar1[i] = root[i];
+  vector<mint> ans(s);
 
-  using A = array<int, 4>;
-  queue<A> Q;
-  Q.push({1, 0, 0, N});
-  while (!Q.empty()) {
-    auto [i, l, st, len] = Q.front();
-    Q.pop();
-    mint *f = ar1 + st;
-    mint *g = ar2 + st;
-    if (i >= N) continue;
-    ntt.ntt(f, len);
-
-    memcpy(g, f, len * sizeof(int));
-    int m = l + (len >> 1);
-
-    for (int j = 0; j < len; j++) f[j] *= buf[(i << 1) + 1][j];
-    ntt.intt(f, len);
-    memcpy(f, f + (len >> 1), (len >> 1) * sizeof(int));
-    Q.push({i * 2 + 0, l, st, len >> 1});
-
-    if (m >= s) continue;
-    for (int j = 0; j < len; j++) g[j] *= buf[(i << 1) + 0][j];
-    ntt.intt(g, len);
-    memcpy(f + (len >> 1), g + (len >> 1), (len >> 1) * sizeof(int));
-    Q.push({i * 2 + 1, m, st + (len >> 1), len >> 1});
-  }
-
-  vector<mint> ans(ar1, ar1 + s);
+  auto calc = [&](auto rec, int i, int l, int r, fps f) -> void {
+    if (i >= N) {
+      ans[i - N] = f[0];
+      return;
+    }
+    int len = f.size(), m = (l + r) >> 1;
+    f.ntt();
+    fps tmp = buf[i * 2 + 1];
+    for (int j = 0; j < len; j++) tmp[j] *= f[j];
+    tmp.intt();
+    rec(rec, i * 2 + 0, l, m, fps{begin(tmp) + (len >> 1), end(tmp)});
+    if (m >= s) return;
+    tmp = buf[i * 2 + 0];
+    for (int j = 0; j < len; j++) tmp[j] *= f[j];
+    tmp.intt();
+    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});
+  };
+  calc(calc, 1, 0, N, root);
   return ans;
 }
+
 ```
 {% endraw %}
 
@@ -1195,10 +1181,9 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
 #line 4 "fps/fast-multieval.hpp"
 
 template <typename mint>
-__attribute__((target("avx2"), optimize("unroll-loops"))) vector<mint>
-FastMultiEval(const FormalPowerSeries<mint> &f, const vector<mint> &xs) {
+vector<mint> FastMultiEval(const FormalPowerSeries<mint> &f,
+                           const vector<mint> &xs) {
   using fps = FormalPowerSeries<mint>;
-
   int s = xs.size();
   int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));
 
@@ -1229,40 +1214,26 @@ FastMultiEval(const FormalPowerSeries<mint> &f, const vector<mint> &xs) {
   root.erase(begin(root), begin(root) + fs - 1);
   root.resize(N, mint(0));
 
-  /**/
-  fps::set_fft();
-  NTT<mint> &ntt = *static_cast<NTT<mint> *>(fps::ntt_ptr);
-  mint *ar1 = reinterpret_cast<mint *>(buf1_);
-  mint *ar2 = reinterpret_cast<mint *>(buf2_);
-  for (int i = 0; i < N; i++) ar1[i] = root[i];
+  vector<mint> ans(s);
 
-  using A = array<int, 4>;
-  queue<A> Q;
-  Q.push({1, 0, 0, N});
-  while (!Q.empty()) {
-    auto [i, l, st, len] = Q.front();
-    Q.pop();
-    mint *f = ar1 + st;
-    mint *g = ar2 + st;
-    if (i >= N) continue;
-    ntt.ntt(f, len);
-
-    memcpy(g, f, len * sizeof(int));
-    int m = l + (len >> 1);
-
-    for (int j = 0; j < len; j++) f[j] *= buf[(i << 1) + 1][j];
-    ntt.intt(f, len);
-    memcpy(f, f + (len >> 1), (len >> 1) * sizeof(int));
-    Q.push({i * 2 + 0, l, st, len >> 1});
-
-    if (m >= s) continue;
-    for (int j = 0; j < len; j++) g[j] *= buf[(i << 1) + 0][j];
-    ntt.intt(g, len);
-    memcpy(f + (len >> 1), g + (len >> 1), (len >> 1) * sizeof(int));
-    Q.push({i * 2 + 1, m, st + (len >> 1), len >> 1});
-  }
-
-  vector<mint> ans(ar1, ar1 + s);
+  auto calc = [&](auto rec, int i, int l, int r, fps f) -> void {
+    if (i >= N) {
+      ans[i - N] = f[0];
+      return;
+    }
+    int len = f.size(), m = (l + r) >> 1;
+    f.ntt();
+    fps tmp = buf[i * 2 + 1];
+    for (int j = 0; j < len; j++) tmp[j] *= f[j];
+    tmp.intt();
+    rec(rec, i * 2 + 0, l, m, fps{begin(tmp) + (len >> 1), end(tmp)});
+    if (m >= s) return;
+    tmp = buf[i * 2 + 0];
+    for (int j = 0; j < len; j++) tmp[j] *= f[j];
+    tmp.intt();
+    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});
+  };
+  calc(calc, 1, 0, N, root);
   return ans;
 }
 
