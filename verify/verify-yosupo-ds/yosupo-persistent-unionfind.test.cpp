@@ -1,7 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/persistent-array.hpp"
 #include "../../data-structure/persistent-union-find.hpp"
 
 void solve() {
