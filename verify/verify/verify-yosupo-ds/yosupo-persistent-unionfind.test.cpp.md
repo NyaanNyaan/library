@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-23 22:52:35+09:00
+    - Last commit date: 2020-08-24 22:53:15+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/persistent_unionfind">https://judge.yosupo.jp/problem/persistent_unionfind</a>
@@ -52,7 +52,6 @@ layout: default
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/persistent-array.hpp"
 #include "../../data-structure/persistent-union-find.hpp"
 
 void solve() {
@@ -383,6 +382,9 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
+#line 3 "data-structure/persistent-union-find.hpp"
+using namespace std;
+
 #line 3 "data-structure/persistent-array.hpp"
 using namespace std;
 
@@ -464,9 +466,6 @@ struct PersistentArray {
 /**
  * @brief 永続配列
  */
-#line 3 "data-structure/persistent-union-find.hpp"
-using namespace std;
-
 #line 6 "data-structure/persistent-union-find.hpp"
 
 struct PersistentUnionFind {
@@ -503,7 +502,7 @@ typename PersistentUnionFind::Node *PersistentUnionFind::root = nullptr;
 /**
  * @brief 完全永続Union-Find
  */
-#line 6 "verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp"
+#line 5 "verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp"
 
 void solve() {
   ini(N, Q);
