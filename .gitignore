@@ -12,4 +12,4 @@ buf.cpp
 output
 docs/modint/montgomery-modint.md
 verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
-ntt/cooley-turkey-ntt.hpp
+test.exe
