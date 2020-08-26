@@ -240,7 +240,7 @@ struct ArbitraryLengthNTT {
   ArbitraryLengthNTT(int len_ = -1) {
     int mod = mint::get_mod();
     if ((len = len_) == -1) len = mod - 1;
-    if (len <= 1) len = 2;
+    if (mod >= 3 && len <= 1) len = 2;
     while ((mod - 1) % len != 0) ++len;
     w.resize(len + 1);
     mint pr = mint(get_pr(mod)).pow((mod - 1) / len);
@@ -320,7 +320,9 @@ struct ArbitraryLengthNTT {
   }
 
   static void ntt(vector<mint> &a) {
+    assert(len % a.size() == 0);
     int N = (int)a.size();
+    if(N <= 1) return;
     if (N <= 64) {
       dft(a);
       return;
