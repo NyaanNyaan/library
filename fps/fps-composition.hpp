@@ -69,6 +69,6 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
 }
 
 /**
- * @brief 関数の合成
+ * @brief 関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ )
  * @docs docs/fps/fps-composition.md
  */
