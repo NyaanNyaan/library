@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-composition.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+    - Last commit date: 2020-08-27 23:08:54+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/composition_of_formal_power_series">https://judge.yosupo.jp/problem/composition_of_formal_power_series</a>
@@ -55,7 +55,8 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
 
 #include "../../competitive-template.hpp"
 #include "../../fps/formal-power-series.hpp"
@@ -82,11 +83,7 @@ void solve() {
     rd(n);
     g[i] = n;
   }
-  fps R, pg{mint(1)};
-  for (int i = 0; i < N; i++) {
-    R += pg * f[i];
-    pg = (pg * g).pre(N);
-  }
+  fps R = Composition<mint>(g, f, C);
 
   for (int i = 0; i < (int)R.size(); i++) {
     if (i) wt(' ');
@@ -101,7 +98,8 @@ void solve() {
 {% raw %}
 ```cpp
 #line 1 "verify/verify-yosupo-fps/yosupo-composition.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -1682,7 +1680,7 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 get_mod() { return mod; }
 };
-#line 10 "verify/verify-yosupo-fps/yosupo-composition.test.cpp"
+#line 11 "verify/verify-yosupo-fps/yosupo-composition.test.cpp"
 
 void solve() {
   using mint = LazyMontgomeryModInt<998244353>;
@@ -1701,11 +1699,7 @@ void solve() {
     rd(n);
     g[i] = n;
   }
-  fps R, pg{mint(1)};
-  for (int i = 0; i < N; i++) {
-    R += pg * f[i];
-    pg = (pg * g).pre(N);
-  }
+  fps R = Composition<mint>(g, f, C);
 
   for (int i = 0; i < (int)R.size(); i++) {
     if (i) wt(' ');
