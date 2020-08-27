@@ -95,5 +95,4 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) fps Composition(
 
 /**
  * @brief 関数の合成( $\mathrm{O}(N^2)$ )
- * @docs docs/fps/fps-composition.md
  */
