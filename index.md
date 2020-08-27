@@ -127,8 +127,8 @@ layout: default
 * :warning: <a href="library/math/matrix-fast.hpp.html">math/matrix-fast.hpp</a>
 * :warning: <a href="library/math/matrix.hpp.html">math/matrix.hpp</a>
 * :warning: <a href="library/math/prime-counting-faster.hpp.html">math/prime-counting-faster.hpp</a>
-* :heavy_check_mark: <a href="library/math/prime-counting-o2d3.hpp.html">素数カウント($\mathrm{O}(N^{\frac{2}{3}})$) <small>(math/prime-counting-o2d3.hpp)</small></a>
-* :heavy_check_mark: <a href="library/math/prime-counting.hpp.html">素数カウント($\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$) <small>(math/prime-counting.hpp)</small></a>
+* :heavy_check_mark: <a href="library/math/prime-counting-o2d3.hpp.html">素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ ) <small>(math/prime-counting-o2d3.hpp)</small></a>
+* :heavy_check_mark: <a href="library/math/prime-counting.hpp.html">素数カウント( $\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$ ) <small>(math/prime-counting.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/prime-table.hpp.html">math/prime-table.hpp</a>
 * :warning: <a href="library/math/rational-number.hpp.html">math/rational-number.hpp</a>

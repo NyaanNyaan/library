@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 素数カウント($\mathrm{O}(N^{\frac{2}{3}})$) <small>(math/prime-counting-o2d3.hpp)</small>
+# :heavy_check_mark: 素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ ) <small>(math/prime-counting-o2d3.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/prime-counting-o2d3.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 02:01:39+09:00
+    - Last commit date: 2020-08-28 01:02:38+09:00
 
 
 
@@ -174,7 +174,7 @@ int64_t prime_counting(long long N) {
 }
 
 /**
- * @brief 素数カウント($\mathrm{O}(N^{\frac{2}{3}})$)
+ * @brief 素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ )
  * @docs docs/math/prime-counting-o2d3.md
  */
 
@@ -321,7 +321,7 @@ int64_t prime_counting(long long N) {
 }
 
 /**
- * @brief 素数カウント($\mathrm{O}(N^{\frac{2}{3}})$)
+ * @brief 素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ )
  * @docs docs/math/prime-counting-o2d3.md
  */
 

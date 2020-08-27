@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 02:01:39+09:00
+    - Last commit date: 2020-08-28 01:02:38+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/counting_primes">https://judge.yosupo.jp/problem/counting_primes</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/math/prime-counting-o2d3.hpp.html">素数カウント($\mathrm{O}(N^{\frac{2}{3}})$) <small>(math/prime-counting-o2d3.hpp)</small></a>
+* :heavy_check_mark: <a href="../../../library/math/prime-counting-o2d3.hpp.html">素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ ) <small>(math/prime-counting-o2d3.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/math/prime-table.hpp.html">math/prime-table.hpp</a>
 
 
@@ -503,7 +503,7 @@ int64_t prime_counting(long long N) {
 }
 
 /**
- * @brief 素数カウント($\mathrm{O}(N^{\frac{2}{3}})$)
+ * @brief 素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ )
  * @docs docs/math/prime-counting-o2d3.md
  */
 #line 5 "verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp"

@@ -38,7 +38,7 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="prime-counting-o2d3.hpp.html">素数カウント($\mathrm{O}(N^{\frac{2}{3}})$) <small>(math/prime-counting-o2d3.hpp)</small></a>
+* :heavy_check_mark: <a href="prime-counting-o2d3.hpp.html">素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ ) <small>(math/prime-counting-o2d3.hpp)</small></a>
 
 
 ## Verified with

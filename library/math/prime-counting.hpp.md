@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 素数カウント($\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$) <small>(math/prime-counting.hpp)</small>
+# :heavy_check_mark: 素数カウント( $\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$ ) <small>(math/prime-counting.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/prime-counting.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-19 01:53:12+09:00
+    - Last commit date: 2020-08-28 01:02:38+09:00
 
 
 
@@ -127,7 +127,7 @@ long long prime_counting(long long N) {
 }
 
 /**
- * @brief 素数カウント($\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$)
+ * @brief 素数カウント( $\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$ )
  * @docs docs/math/prime-counting.md
  */
 
@@ -162,7 +162,7 @@ long long prime_counting(long long N) {
 }
 
 /**
- * @brief 素数カウント($\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$)
+ * @brief 素数カウント( $\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$ )
  * @docs docs/math/prime-counting.md
  */
 
