@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 関数の合成 <small>(fps/fps-composition.hpp)</small>
+# :heavy_check_mark: 関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ ) <small>(fps/fps-composition.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-composition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+    - Last commit date: 2020-08-28 00:50:35+09:00
 
 
 
@@ -69,7 +69,9 @@ $$Q^{(i)}{(P_m)} \equiv \frac{\left(Q^{(i-1)}{(P_m)}\right)'}{P_m'} \mod x^{n-i}
 
 実装してから思ったが、元の論文には行列積を使用した$O(\sqrt{N}\cdot T(\sqrt{N}))$($T(n)$は行列積のオーダー)のアルゴリズムも載っており、オーダーは実質2乗だがSIMDの利用などにより定数倍高速化が見込める。
 
-$N \leq 8192$とすると、感覚的には解説したアルゴリズムよりも大きさ$100$の行列積$100回$の方が高速に動作する気がする…(まあそんなことを言い始めたらFFTよりkaratsubaの方が早いのでは？みたいな話になるのでキリがないけど…)
+$N \leq 8192$とすると、感覚的には解説したアルゴリズムよりも大きさ$100$の行列積$100回$の方が高速に動作する気がする… 
+
+$\rightarrow$実装したら3倍速かった [実装](https://nyaannyaan.github.io/library/library/fps/fps-composition-fast.hpp.html)
 
 
 ## Depends on
@@ -159,7 +161,7 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
 }
 
 /**
- * @brief 関数の合成
+ * @brief 関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ )
  * @docs docs/fps/fps-composition.md
  */
 
@@ -465,7 +467,7 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
 }
 
 /**
- * @brief 関数の合成
+ * @brief 関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ )
  * @docs docs/fps/fps-composition.md
  */
 

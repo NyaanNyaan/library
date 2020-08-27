@@ -39,7 +39,7 @@ layout: default
 ## Required by
 
 * :warning: <a href="../fps/famous-series.hpp.html">fps/famous-series.hpp</a>
-* :heavy_check_mark: <a href="../fps/fps-composition.hpp.html">関数の合成 <small>(fps/fps-composition.hpp)</small></a>
+* :heavy_check_mark: <a href="../fps/fps-composition.hpp.html">関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ ) <small>(fps/fps-composition.hpp)</small></a>
 * :heavy_check_mark: <a href="../fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 
 

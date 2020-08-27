@@ -79,7 +79,8 @@ layout: default
 * :warning: <a href="library/fps/fast-multieval.hpp.html">fps/fast-multieval.hpp</a>
 * :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/fps-composition.hpp.html">関数の合成 <small>(fps/fps-composition.hpp)</small></a>
+* :warning: <a href="library/fps/fps-composition-fast.hpp.html">関数の合成( $\mathrm{O}(N^2)$ ) <small>(fps/fps-composition-fast.hpp)</small></a>
+* :heavy_check_mark: <a href="library/fps/fps-composition.hpp.html">関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ ) <small>(fps/fps-composition.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
