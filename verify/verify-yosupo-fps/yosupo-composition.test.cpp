@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
 
 #include "../../competitive-template.hpp"
 #include "../../fps/formal-power-series.hpp"
@@ -25,11 +26,7 @@ void solve() {
     rd(n);
     g[i] = n;
   }
-  fps R, pg{mint(1)};
-  for (int i = 0; i < N; i++) {
-    R += pg * f[i];
-    pg = (pg * g).pre(N);
-  }
+  fps R = Composition<mint>(g, f, C);
 
   for (int i = 0; i < (int)R.size(); i++) {
     if (i) wt(' ');
