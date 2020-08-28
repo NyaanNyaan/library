@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-circular.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+    - Last commit date: 2020-08-28 23:20:42+09:00
 
 
 
@@ -156,7 +156,7 @@ pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
 
 /**
  * @brief 三角関数
- * @docs docs/fps-circular.md
+ * @docs docs/fps/fps-circular.md
  */
 
 ```
@@ -530,7 +530,7 @@ pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
 
 /**
  * @brief 三角関数
- * @docs docs/fps-circular.md
+ * @docs docs/fps/fps-circular.md
  */
 
 ```

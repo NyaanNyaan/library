@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#4164944468408d7a42ddd5d21630208a">verify/verify-yuki</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yuki/yuki-0963-circular.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+    - Last commit date: 2020-08-28 23:20:42+09:00
 
 
 * see: <a href="https://yukicoder.me/problems/no/963">https://yukicoder.me/problems/no/963</a>
@@ -743,7 +743,7 @@ pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
 
 /**
  * @brief 三角関数
- * @docs docs/fps-circular.md
+ * @docs docs/fps/fps-circular.md
  */
 #line 3 "fps/ntt-friendly-fps.hpp"
 using namespace std;
