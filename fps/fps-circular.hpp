@@ -88,5 +88,5 @@ pair<FormalPowerSeries<mint>, FormalPowerSeries<mint>> circular(
 
 /**
  * @brief 三角関数
- * @docs docs/fps-circular.md
+ * @docs docs/fps/fps-circular.md
  */
