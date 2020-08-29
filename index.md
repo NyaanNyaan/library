@@ -172,6 +172,7 @@ layout: default
 * :heavy_check_mark: <a href="library/modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
 * :heavy_check_mark: <a href="library/modulo/mod-log.hpp.html">modulo/mod-log.hpp</a>
 * :heavy_check_mark: <a href="library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+* :warning: <a href="library/modulo/strassen.hpp.html">modulo/strassen.hpp</a>
 
 
 <div id="ccb3669c87b2d028539237c4554e3c0f"></div>

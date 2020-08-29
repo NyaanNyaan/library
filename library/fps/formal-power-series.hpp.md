@@ -182,6 +182,7 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 * :warning: <a href="famous-series.hpp.html">fps/famous-series.hpp</a>
 * :warning: <a href="fast-multieval.hpp.html">fps/fast-multieval.hpp</a>
 * :heavy_check_mark: <a href="fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
+* :warning: <a href="fps-composition-fast.hpp.html">関数の合成( $\mathrm{O}(N^2)$ ) <small>(fps/fps-composition-fast.hpp)</small></a>
 * :heavy_check_mark: <a href="fps-composition.hpp.html">関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ ) <small>(fps/fps-composition.hpp)</small></a>
 * :heavy_check_mark: <a href="fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
@@ -191,6 +192,7 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 * :heavy_check_mark: <a href="polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
 * :heavy_check_mark: <a href="taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 * :heavy_check_mark: <a href="utility.hpp.html">fps/utility.hpp</a>
+* :warning: <a href="../modulo/strassen.hpp.html">modulo/strassen.hpp</a>
 
 
 ## Verified with

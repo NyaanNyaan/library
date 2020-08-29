@@ -40,8 +40,10 @@ layout: default
 
 * :heavy_check_mark: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :warning: <a href="../fps/fast-multieval.hpp.html">fps/fast-multieval.hpp</a>
+* :warning: <a href="../fps/fps-composition-fast.hpp.html">関数の合成( $\mathrm{O}(N^2)$ ) <small>(fps/fps-composition-fast.hpp)</small></a>
 * :heavy_check_mark: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :heavy_check_mark: <a href="../modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
+* :warning: <a href="../modulo/strassen.hpp.html">modulo/strassen.hpp</a>
 * :heavy_check_mark: <a href="../ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
