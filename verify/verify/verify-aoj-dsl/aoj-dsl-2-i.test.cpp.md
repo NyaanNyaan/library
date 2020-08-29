@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:37:43+09:00
+    - Last commit date: 2020-08-30 00:52:21+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I</a>
@@ -383,13 +383,13 @@ int main() { solve(); }
 #line 3 "segment-tree/range-update-range-sum-lazyseg.hpp"
 using namespace std;
 
-template <typename E,E UNUSED_VALUE>
+template <typename E, E UNUSED_VALUE>
 struct UpdateSum_LazySegmentTree {
   int n, height;
   using T = pair<E, E>;
   T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
   T g(T a, E b) { return T(b * a.second, a.second); };
-  E h(E a, E b) { return b; };
+  E h(E, E b) { return b; };
   T ti = P(0, 0);
   E ei = UNUSED_VALUE;
   vector<T> dat;

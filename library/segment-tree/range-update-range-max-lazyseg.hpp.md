@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segment-tree/range-update-range-max-lazyseg.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-08-30 00:52:21+09:00
 
 
 
@@ -55,8 +55,8 @@ struct UpdateMax_LazySegmentTree {
   int n, height;
   using T = E;
   T f(T a, T b) { return max(a, b); };
-  T g(T a, E b) { return b; };
-  E h(E a, E b) { return b; };
+  T g(T, E b) { return b; };
+  E h(E, E b) { return b; };
   T ti = MINF;
   E ei = MINF;
   vector<T> dat;
@@ -144,8 +144,8 @@ struct UpdateMax_LazySegmentTree {
   int n, height;
   using T = E;
   T f(T a, T b) { return max(a, b); };
-  T g(T a, E b) { return b; };
-  E h(E a, E b) { return b; };
+  T g(T, E b) { return b; };
+  E h(E, E b) { return b; };
   T ti = MINF;
   E ei = MINF;
   vector<T> dat;

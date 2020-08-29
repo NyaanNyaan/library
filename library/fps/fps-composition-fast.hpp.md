@@ -31,14 +31,16 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-composition-fast.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-29 20:36:31+09:00
+    - Last commit date: 2020-08-30 00:52:21+09:00
 
 
 
 
 ## Depends on
 
+* :heavy_check_mark: <a href="../competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :warning: <a href="../misc/timer.hpp.html">misc/timer.hpp</a>
 * :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :warning: <a href="../modulo/strassen.hpp.html">modulo/strassen.hpp</a>
@@ -991,13 +993,31 @@ inner_fast_mul(const Mat* s, const Mat* t, const Mat* u) {
     memcpy(u->a + i * m, (mint*)(c + (i << SHIFT_)), m * sizeof(int));
 }
 
-/*
 __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
-inner_block_dec_mul(const Mat* s, const Mat* t, const Mat* u){
+inner_block_dec_mul(const Mat* s, const Mat* t, const Mat* u) {
   int n = s->H, m = t->W, p = s->W;
-  for(int i = 0; i < )
+  memset((int*)(u->a), 0, n * m * sizeof(int));
+  for (int is = 0; is < n; is += (1 << SHIFT_))
+    for (int ks = 0; ks < p; ks += (1 << SHIFT_))
+      for (int js = 0; js < m; js += (1 << SHIFT_)) {
+        int ie = min(is + (1 << SHIFT_), n);
+        int je = min(js + (1 << SHIFT_), m);
+        int ke = min(ks + (1 << SHIFT_), p);
+        for (int l = is; l < ie; l++)
+          memcpy((mint*)(a + ((l - is) << SHIFT_)), s->a + l * p + ks,
+                 (ke - ks) * sizeof(int));
+        for (int l = ks; l < ke; l++)
+          memcpy((mint*)(b + ((l - ks) << SHIFT_)), t->a + l * m + js,
+                 (je - js) * sizeof(int));
+        inner_simd_mul(ie - is, je - js, ke - ks);
+        for (int l = is; l < ie; l++) {
+          for (int ll = js; ll < je; ll++) {
+            u->a[l * m + ll] +=
+                *reinterpret_cast<mint*>(c + ((l - is) << SHIFT_) + (ll - js));
+          }
+        }
+      }
 }
-*/
 
 __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
 inner_strassen(const Mat* a, const Mat* b, const Mat* c) {
@@ -1100,10 +1120,407 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm strassen(
   return std::move(u);
 }
 
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm block_dec(
+    const vvm& s, const vvm& t) {
+  int n = s.size(), p = s[0].size(), m = t[0].size();
+  assert(int(n * p * 1.4) <= BUFFER_SIZE);
+  assert(int(p * m * 1.4) <= BUFFER_SIZE);
+  assert(int(n * m * 1.4) <= BUFFER_SIZE);
+  memset(A, 0, int(n * p * 1.4) * sizeof(int));
+  memset(B, 0, int(p * m * 1.4) * sizeof(int));
+  memset(C, 0, int(m * n * 1.4) * sizeof(int));
+
+  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(), p * sizeof(int));
+  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(), m * sizeof(int));
+
+  Mat S(n, p, A), T(p, m, B), U(n, m, C);
+  inner_block_dec_mul(&S, &T, &U);
+  vvm u(n, vm(m));
+  for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
+  return std::move(u);
+}
+
 #ifdef BUFFER_SIZE
 #undef BUFFER_SIZE
 #endif
 }  // namespace FastMatProd
+
+#line 1 "competitive-template.hpp"
+#pragma region kyopro_template
+#define Nyaan_template
+#line 5 "competitive-template.hpp"
+#define pb push_back
+#define eb emplace_back
+#define fi first
+#define se second
+#define each(x, v) for (auto &x : v)
+#define all(v) (v).begin(), (v).end()
+#define sz(v) ((int)(v).size())
+#define mem(a, val) memset(a, val, sizeof(a))
+#define ini(...)   \
+  int __VA_ARGS__; \
+  in(__VA_ARGS__)
+#define inl(...)         \
+  long long __VA_ARGS__; \
+  in(__VA_ARGS__)
+#define ins(...)      \
+  string __VA_ARGS__; \
+  in(__VA_ARGS__)
+#define inc(...)    \
+  char __VA_ARGS__; \
+  in(__VA_ARGS__)
+#define in2(s, t)                           \
+  for (int i = 0; i < (int)s.size(); i++) { \
+    in(s[i], t[i]);                         \
+  }
+#define in3(s, t, u)                        \
+  for (int i = 0; i < (int)s.size(); i++) { \
+    in(s[i], t[i], u[i]);                   \
+  }
+#define in4(s, t, u, v)                     \
+  for (int i = 0; i < (int)s.size(); i++) { \
+    in(s[i], t[i], u[i], v[i]);             \
+  }
+#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)
+#define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)
+#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)
+#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)
+#define reg(i, a, b) for (long long i = (a); i < (b); i++)
+#define die(...)      \
+  do {                \
+    out(__VA_ARGS__); \
+    return;           \
+  } while (0)
+using namespace std;
+using ll = long long;
+template <class T>
+using V = vector<T>;
+using vi = vector<int>;
+using vl = vector<long long>;
+using vvi = vector<vector<int>>;
+using vd = V<double>;
+using vs = V<string>;
+using vvl = vector<vector<long long>>;
+using P = pair<long long, long long>;
+using vp = vector<P>;
+using pii = pair<int, int>;
+using vpi = vector<pair<int, int>>;
+constexpr int inf = 1001001001;
+constexpr long long infLL = (1LL << 61) - 1;
+template <typename T, typename U>
+inline bool amin(T &x, U y) {
+  return (y < x) ? (x = y, true) : false;
+}
+template <typename T, typename U>
+inline bool amax(T &x, U y) {
+  return (x < y) ? (x = y, true) : false;
+}
+template <typename T, typename U>
+ostream &operator<<(ostream &os, const pair<T, U> &p) {
+  os << p.first << " " << p.second;
+  return os;
+}
+template <typename T, typename U>
+istream &operator>>(istream &is, pair<T, U> &p) {
+  is >> p.first >> p.second;
+  return is;
+}
+template <typename T>
+ostream &operator<<(ostream &os, const vector<T> &v) {
+  int s = (int)v.size();
+  for (int i = 0; i < s; i++) os << (i ? " " : "") << v[i];
+  return os;
+}
+template <typename T>
+istream &operator>>(istream &is, vector<T> &v) {
+  for (auto &x : v) is >> x;
+  return is;
+}
+void in() {}
+template <typename T, class... U>
+void in(T &t, U &... u) {
+  cin >> t;
+  in(u...);
+}
+void out() { cout << "\n"; }
+template <typename T, class... U>
+void out(const T &t, const U &... u) {
+  cout << t;
+  if (sizeof...(u)) cout << " ";
+  out(u...);
+}
+
+#ifdef NyaanDebug
+#define trc(...)                   \
+  do {                             \
+    cerr << #__VA_ARGS__ << " = "; \
+    dbg_out(__VA_ARGS__);          \
+  } while (0)
+#define trca(v, N)       \
+  do {                   \
+    cerr << #v << " = "; \
+    array_out(v, N);     \
+  } while (0)
+#define trcc(v)                             \
+  do {                                      \
+    cerr << #v << " = {";                   \
+    each(x, v) { cerr << " " << x << ","; } \
+    cerr << "}" << endl;                    \
+  } while (0)
+template <typename T>
+void _cout(const T &c) {
+  cerr << c;
+}
+void _cout(const int &c) {
+  if (c == 1001001001)
+    cerr << "inf";
+  else if (c == -1001001001)
+    cerr << "-inf";
+  else
+    cerr << c;
+}
+void _cout(const unsigned int &c) {
+  if (c == 1001001001)
+    cerr << "inf";
+  else
+    cerr << c;
+}
+void _cout(const long long &c) {
+  if (c == 1001001001 || c == (1LL << 61) - 1)
+    cerr << "inf";
+  else if (c == -1001001001 || c == -((1LL << 61) - 1))
+    cerr << "-inf";
+  else
+    cerr << c;
+}
+void _cout(const unsigned long long &c) {
+  if (c == 1001001001 || c == (1LL << 61) - 1)
+    cerr << "inf";
+  else
+    cerr << c;
+}
+template <typename T, typename U>
+void _cout(const pair<T, U> &p) {
+  cerr << "{ ";
+  _cout(p.fi);
+  cerr << ", ";
+  _cout(p.se);
+  cerr << " } ";
+}
+template <typename T>
+void _cout(const vector<T> &v) {
+  int s = v.size();
+  cerr << "{ ";
+  for (int i = 0; i < s; i++) {
+    cerr << (i ? ", " : "");
+    _cout(v[i]);
+  }
+  cerr << " } ";
+}
+template <typename T>
+void _cout(const vector<vector<T>> &v) {
+  cerr << "[ ";
+  for (const auto &x : v) {
+    cerr << endl;
+    _cout(x);
+    cerr << ", ";
+  }
+  cerr << endl << " ] ";
+}
+void dbg_out() { cerr << endl; }
+template <typename T, class... U>
+void dbg_out(const T &t, const U &... u) {
+  _cout(t);
+  if (sizeof...(u)) cerr << ", ";
+  dbg_out(u...);
+}
+template <typename T>
+void array_out(const T &v, int s) {
+  cerr << "{ ";
+  for (int i = 0; i < s; i++) {
+    cerr << (i ? ", " : "");
+    _cout(v[i]);
+  }
+  cerr << " } " << endl;
+}
+template <typename T>
+void array_out(const T &v, int H, int W) {
+  cerr << "[ ";
+  for (int i = 0; i < H; i++) {
+    cerr << (i ? ", " : "");
+    array_out(v[i], W);
+  }
+  cerr << " ] " << endl;
+}
+#else
+#define trc(...)
+#define trca(...)
+#define trcc(...)
+#endif
+
+inline int popcnt(unsigned long long a) { return __builtin_popcountll(a); }
+inline int lsb(unsigned long long a) { return __builtin_ctzll(a); }
+inline int msb(unsigned long long a) { return 63 - __builtin_clzll(a); }
+template <typename T>
+inline int getbit(T a, int i) {
+  return (a >> i) & 1;
+}
+template <typename T>
+inline void setbit(T &a, int i) {
+  a |= (1LL << i);
+}
+template <typename T>
+inline void delbit(T &a, int i) {
+  a &= ~(1LL << i);
+}
+template <typename T>
+int lb(const vector<T> &v, const T &a) {
+  return lower_bound(begin(v), end(v), a) - begin(v);
+}
+template <typename T>
+int ub(const vector<T> &v, const T &a) {
+  return upper_bound(begin(v), end(v), a) - begin(v);
+}
+template <typename T>
+int btw(T a, T x, T b) {
+  return a <= x && x < b;
+}
+template <typename T, typename U>
+T ceil(T a, U b) {
+  return (a + b - 1) / b;
+}
+constexpr long long TEN(int n) {
+  long long ret = 1, x = 10;
+  while (n) {
+    if (n & 1) ret *= x;
+    x *= x;
+    n >>= 1;
+  }
+  return ret;
+}
+template <typename T>
+vector<T> mkrui(const vector<T> &v) {
+  vector<T> ret(v.size() + 1);
+  for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];
+  return ret;
+};
+template <typename T>
+vector<T> mkuni(const vector<T> &v) {
+  vector<T> ret(v);
+  sort(ret.begin(), ret.end());
+  ret.erase(unique(ret.begin(), ret.end()), ret.end());
+  return ret;
+}
+template <typename F>
+vector<int> mkord(int N, F f) {
+  vector<int> ord(N);
+  iota(begin(ord), end(ord), 0);
+  sort(begin(ord), end(ord), f);
+  return ord;
+}
+template <typename T = int>
+vector<T> mkiota(int N) {
+  vector<T> ret(N);
+  iota(begin(ret), end(ret), 0);
+  return ret;
+}
+template <typename T>
+vector<int> mkinv(vector<T> &v) {
+  vector<int> inv(v.size());
+  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;
+  return inv;
+}
+
+struct IoSetupNya {
+  IoSetupNya() {
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(15);
+    cerr << fixed << setprecision(7);
+  }
+} iosetupnya;
+
+void solve();
+int main() { solve(); }
+
+#pragma endregion
+#line 3 "misc/timer.hpp"
+using namespace std;
+
+struct Timer {
+  chrono::high_resolution_clock::time_point st;
+
+  Timer() { reset(); }
+
+  void reset() { st = chrono::high_resolution_clock::now(); }
+
+  chrono::milliseconds::rep elapsed() {
+    auto ed = chrono::high_resolution_clock::now();
+    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();
+  }
+};
+#line 636 "modulo/strassen.hpp"
+
+void time_test() {
+  using mint = LazyMontgomeryModInt<998244353>;
+  using vm = V<mint>;
+  using vvm = V<V<mint>>;
+  int N = 1024;
+  int P = N, M = N;
+  mt19937 rng(58);
+  vvm s(N, vm(P)), t(P, vm(M));
+  rep(i, N) rep(j, P) s[i][j] = rng() & 1;
+  rep(i, P) rep(j, M) t[i][j] = rng() & 1;
+  vvm u, u2;
+  Timer timer;
+
+  int loop = 5;
+  timer.reset();
+  rep(i, loop) u = FastMatProd::strassen(s, t);
+  out("strassen", timer.elapsed() / loop);
+
+  timer.reset();
+  u2 = FastMatProd::naive_mul(s, t);
+  out("naive", timer.elapsed());
+
+  timer.reset();
+  auto u3 = FastMatProd::block_dec(s, t);
+  out("block dec", timer.elapsed());
+
+  out(u == u2);
+  out(u == u3);
+  cout << endl;
+}
+
+void solve() {
+  using mint = LazyMontgomeryModInt<998244353>;
+  using vm = V<mint>;
+  using vvm = V<V<mint>>;
+
+  time_test();
+
+  int N, P, M;
+  mt19937 rng(58);
+  int loop = 100;
+  while (loop--) {
+    N = rng() % 1000 + 1;
+    M = rng() % 1000 + 1;
+    P = rng() % 1000 + 1;
+    vvm s(N, vm(P)), t(P, vm(M));
+    rep(i, N) rep(j, P) s[i][j] = rng() % 998244353;
+    rep(i, P) rep(j, M) t[i][j] = rng() % 998244353;
+    using namespace FastMatProd;
+    auto u = strassen(s, t);
+    auto u2 = naive_mul(s, t);
+    if (u != u2) {
+      out("ng", N, P, M);
+      exit(1);
+    } else {
+      cout << "ok " << N << " " << P << " " << M << endl;
+    }
+  }
+  out("all ok");
+}
 #line 5 "fps/fps-composition-fast.hpp"
 using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;

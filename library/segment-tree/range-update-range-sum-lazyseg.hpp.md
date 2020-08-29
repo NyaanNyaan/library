@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#cf992883f659a62542b674f4570b728a">segment-tree</a>
 * <a href="{{ site.github.repository_url }}/blob/master/segment-tree/range-update-range-sum-lazyseg.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-08-30 00:52:21+09:00
 
 
 
@@ -51,13 +51,13 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename E,E UNUSED_VALUE>
+template <typename E, E UNUSED_VALUE>
 struct UpdateSum_LazySegmentTree {
   int n, height;
   using T = pair<E, E>;
   T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
   T g(T a, E b) { return T(b * a.second, a.second); };
-  E h(E a, E b) { return b; };
+  E h(E, E b) { return b; };
   T ti = P(0, 0);
   E ei = UNUSED_VALUE;
   vector<T> dat;
@@ -140,13 +140,13 @@ struct UpdateSum_LazySegmentTree {
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename E,E UNUSED_VALUE>
+template <typename E, E UNUSED_VALUE>
 struct UpdateSum_LazySegmentTree {
   int n, height;
   using T = pair<E, E>;
   T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
   T g(T a, E b) { return T(b * a.second, a.second); };
-  E h(E a, E b) { return b; };
+  E h(E, E b) { return b; };
   T ti = P(0, 0);
   E ei = UNUSED_VALUE;
   vector<T> dat;

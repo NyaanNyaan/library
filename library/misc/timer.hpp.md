@@ -39,7 +39,9 @@ layout: default
 ## Required by
 
 * :warning: <a href="../arbitrary-length-test.cpp.html">arbitrary-length-test.cpp</a>
+* :warning: <a href="../fps/fps-composition-fast.hpp.html">関数の合成( $\mathrm{O}(N^2)$ ) <small>(fps/fps-composition-fast.hpp)</small></a>
 * :warning: <a href="simulated-annealing.hpp.html">misc/simulated-annealing.hpp</a>
+* :warning: <a href="../modulo/strassen.hpp.html">modulo/strassen.hpp</a>
 
 
 ## Code
