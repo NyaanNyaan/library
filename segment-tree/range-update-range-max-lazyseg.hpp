@@ -7,8 +7,8 @@ struct UpdateMax_LazySegmentTree {
   int n, height;
   using T = E;
   T f(T a, T b) { return max(a, b); };
-  T g(T a, E b) { return b; };
-  E h(E a, E b) { return b; };
+  T g(T, E b) { return b; };
+  E h(E, E b) { return b; };
   T ti = MINF;
   E ei = MINF;
   vector<T> dat;
