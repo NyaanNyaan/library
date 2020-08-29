@@ -170,7 +170,7 @@ struct Mat {
     WM = (W >> 1) + (W & 1);
   }
 
-  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
   range_add(mint* b, int as, int ae, int bs) const {
     const m256 M0 = _mm256_set1_epi32(0);
     const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);
@@ -203,7 +203,7 @@ struct Mat {
     for (; as < ae; ++as, ++bs) b[bs] += a[as];
   }
 
-  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
   range_sub(mint* b, int as, int ae, int bs) const {
     const m256 M0 = _mm256_set1_epi32(0);
     const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);
@@ -236,7 +236,7 @@ struct Mat {
     for (; as < ae; ++as, ++bs) b[bs] -= a[as];
   }
 
-  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
   op_range_add(mint* b, int as, int ae, int bs) const {
     const m256 M0 = _mm256_set1_epi32(0);
     const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);
@@ -266,7 +266,40 @@ struct Mat {
       _mm256_storeu_si256((m256*)(a + a2), BA2);
       _mm256_storeu_si256((m256*)(a + a3), BA3);
     }
-    for (; as < ae; ++as, ++bs) a[bs] += b[as];
+    for (; as < ae; ++as, ++bs) a[as] += b[bs];
+  }
+
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
+  op_range_sub(mint* b, int as, int ae, int bs) const {
+    const m256 M0 = _mm256_set1_epi32(0);
+    const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);
+    for (; as < ae - 31; as += 32, bs += 32) {
+      int a0 = as;
+      int a1 = as + 8;
+      int a2 = as + 16;
+      int a3 = as + 24;
+      int b0 = bs;
+      int b1 = bs + 8;
+      int b2 = bs + 16;
+      int b3 = bs + 24;
+      const m256 A0 = _mm256_loadu_si256((m256*)(a + a0));
+      const m256 A1 = _mm256_loadu_si256((m256*)(a + a1));
+      const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));
+      const m256 A3 = _mm256_loadu_si256((m256*)(a + a3));
+      const m256 B0 = _mm256_loadu_si256((m256*)(b + b0));
+      const m256 B1 = _mm256_loadu_si256((m256*)(b + b1));
+      const m256 B2 = _mm256_loadu_si256((m256*)(b + b2));
+      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));
+      const m256 BA0 = montgomery_sub_256(A0, B0, M2, M0);
+      const m256 BA1 = montgomery_sub_256(A1, B1, M2, M0);
+      const m256 BA2 = montgomery_sub_256(A2, B2, M2, M0);
+      const m256 BA3 = montgomery_sub_256(A3, B3, M2, M0);
+      _mm256_storeu_si256((m256*)(a + a0), BA0);
+      _mm256_storeu_si256((m256*)(a + a1), BA1);
+      _mm256_storeu_si256((m256*)(a + a2), BA2);
+      _mm256_storeu_si256((m256*)(a + a3), BA3);
+    }
+    for (; as < ae; ++as, ++bs) a[as] -= b[bs];
   }
 
   __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
@@ -359,47 +392,63 @@ struct Mat {
 
   __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
   opaddA11(mint* b) const {
-    for (int i = 0; i < HM; i++)
-      for (int j = 0; j < WM; j++) a[i * W + j] += b[i * WM + j];
-      /*
     for (int i = 0; i < HM; i++) {
       int as = i * W;
       int ae = i * W + WM;
       int bs = i * WM;
       op_range_add(b, as, ae, bs);
-    } */
+    }
   }
 
   __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
   opaddA12(mint* b) const {
-    for (int i = 0; i < HM; i++)
-      for (int j = 0; j < W - WM; j++) a[i * W + WM + j] += b[i * WM + j];
+    for (int i = 0; i < HM; i++) {
+      int as = i * W + WM;
+      int ae = i * W + W;
+      int bs = i * WM;
+      op_range_add(b, as, ae, bs);
+    }
   }
 
   __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
   opaddA21(mint* b) const {
-    for (int i = 0; i < H - HM; i++)
-      for (int j = 0; j < WM; j++) a[(i + HM) * W + j] += b[i * WM + j];
+    for (int i = 0; i < H - HM; i++) {
+      int as = (i + HM) * W;
+      int ae = (i + HM) * W + WM;
+      int bs = i * WM;
+      op_range_add(b, as, ae, bs);
+    }
+    //  for (int j = 0; j < WM; j++) a[(i + HM) * W + j] += b[i * WM + j];
   }
 
   __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
   opaddA22(mint* b) const {
-    for (int i = 0; i < H - HM; i++)
-      for (int j = 0; j < W - WM; j++)
-        a[(i + HM) * W + WM + j] += b[i * WM + j];
+    for (int i = 0; i < H - HM; i++) {
+      int as = (i + HM) * W + WM;
+      int ae = (i + HM) * W + W;
+      int bs = i * WM;
+      op_range_add(b, as, ae, bs);
+    }
   }
 
   __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
   opsubA11(mint* b) const {
-    for (int i = 0; i < HM; i++)
-      for (int j = 0; j < WM; j++) a[i * W + j] -= b[i * WM + j];
+    for (int i = 0; i < HM; i++) {
+      int as = i * W;
+      int ae = i * W + WM;
+      int bs = i * WM;
+      op_range_sub(b, as, ae, bs);
+    }
   }
 
   __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
   opsubA22(mint* b) const {
-    for (int i = 0; i < H - HM; i++)
-      for (int j = 0; j < W - WM; j++)
-        a[(i + HM) * W + WM + j] -= b[i * WM + j];
+    for (int i = 0; i < H - HM; i++) {
+      int as = (i + HM) * W + WM;
+      int ae = (i + HM) * W + W;
+      int bs = i * WM;
+      op_range_sub(b, as, ae, bs);
+    }
   }
 
   void dump() const {
@@ -421,7 +470,6 @@ mint C[BUFFER_SIZE] __attribute__((aligned(64)));
 __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
 inner_fast_mul(const Mat* s, const Mat* t, const Mat* u) {
   int n = s->H, m = t->W, p = s->W;
-  assert(p == t->H);
   for (int i = 0; i < n; i++)
     memcpy((mint*)(a + (i << SHIFT_)), s->a + i * p, p * sizeof(int));
   for (int i = 0; i < p; i++)
@@ -431,10 +479,17 @@ inner_fast_mul(const Mat* s, const Mat* t, const Mat* u) {
     memcpy(u->a + i * m, (mint*)(c + (i << SHIFT_)), m * sizeof(int));
 }
 
+/*
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
+inner_block_dec_mul(const Mat* s, const Mat* t, const Mat* u){
+  int n = s->H, m = t->W, p = s->W;
+  for(int i = 0; i < )
+}
+*/
+
 __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
 inner_strassen(const Mat* a, const Mat* b, const Mat* c) {
   int n = a->H, m = b->W, p = a->W;
-  assert(p == b->H);
   if (max({n, m, p}) <= (1 << SHIFT_)) {
     inner_fast_mul(a, b, c);
     return;
