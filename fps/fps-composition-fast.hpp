@@ -2,6 +2,7 @@
 #include "../fps/formal-power-series.hpp"
 #include "../modint/montgomery-modint.hpp"
 #include "../modulo/strassen.hpp"
+
 using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
@@ -80,9 +81,7 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) fps Composition(
       for (int j = 0; j < K; j++) {
         QS[i][j] = (i * K + j) < (int)Q.size() ? Q[i * K + j] : mint();
       }
-    
-    QP = FastMatProd::fast_mul_2(QS, PS);
-    // QP = FastMatProd::naive_mul(QS, PS);
+    QP = FastMatProd::strassen(QS, PS);
   }
 
   fps ans(N, mint());

@@ -104,49 +104,6 @@ inner_simd_mul(u32 n, u32 m, u32 p) {
   }
 }
 
-__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vector<fps>
-fast_mul(const vector<fps>& s, const vector<fps>& t) {
-  int n = s.size(), m = t[0].size(), p = t.size();
-  assert(max({n, m, p}) <= (1 << SHIFT_));
-  assert(p == (int)s[0].size());
-  memset(a, 0, sizeof(a));
-  memset(b, 0, sizeof(b));
-  for (int i = 0; i < n; i++)
-    memcpy(a + (i << SHIFT_), s[i].data(), p * sizeof(int));
-  for (int k = 0; k < p; k++)
-    memcpy(b + (k << SHIFT_), t[k].data(), m * sizeof(int));
-  inner_simd_mul(n, m, p);
-  vector<fps> u(n, fps(m));
-  for (int i = 0; i < n; i++)
-    memcpy(u[i].data(), (mint*)(c + (i << SHIFT_)), m * sizeof(int));
-  return u;
-}
-
-__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vector<fps>
-fast_mul_2(const vector<fps>& s, const vector<fps>& t) {
-  int n = s.size(), m = t[0].size(), p = t.size();
-  assert(max({n, p}) <= (1 << SHIFT_));
-  assert(p == (int)s[0].size());
-  memset(a, 0, sizeof(a));
-  memset(b, 0, sizeof(b));
-  for (int i = 0; i < n; i++)
-    memcpy(a + (i << SHIFT_), s[i].data(), p * sizeof(int));
-
-  vector<fps> u(n, fps(m));
-  for (int l = 0; l < m; l += (1 << SHIFT_)) {
-    int bs = l;
-    int be = min(m, bs + (1 << SHIFT_));
-    if (bs + (1 << SHIFT_) != be) memset(b, 0, sizeof(b));
-    for (int k = 0; k < p; k++)
-      memcpy(b + (k << SHIFT_), t[k].data() + bs, (be - bs) * sizeof(int));
-    inner_simd_mul(n, be - bs, p);
-    for (int i = 0; i < n; i++)
-      memcpy(u[i].data() + bs, (mint*)(c + (i << SHIFT_)),
-             (be - bs) * sizeof(int));
-  }
-  return u;
-}
-
 // for debug
 __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm naive_mul(
     const vvm& a, const vvm& b) {
@@ -158,9 +115,7 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm naive_mul(
       for (int j = 0; j < m; j++) c[i][j] += a[i][k] * b[k][j];
   return c;
 }
-}  // namespace FastMatProd
 
-namespace FastMatProd {
 struct Mat {
   int H, W, HM, WM;
   mint* a;
@@ -512,6 +467,10 @@ inner_strassen(const Mat* a, const Mat* b, const Mat* c) {
     inner_fast_mul(a, b, c);
     return;
   }
+  if (min({n, m, p}) <= (1 << (SHIFT_ - 2))) {
+    inner_block_dec_mul(a, b, c);
+    return;
+  }
   int nm = n / 2 + (n & 1);
   int mm = m / 2 + (m & 1);
   int pm = p / 2 + (p & 1);
@@ -586,25 +545,7 @@ inner_strassen(const Mat* a, const Mat* b, const Mat* c) {
   c->opaddA11(u.a);
 }
 
-__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm strassen(
-    const vvm& s, const vvm& t) {
-  int n = s.size(), p = s[0].size(), m = t[0].size();
-  assert(int(n * p * 1.4) <= BUFFER_SIZE);
-  assert(int(p * m * 1.4) <= BUFFER_SIZE);
-  assert(int(n * m * 1.4) <= BUFFER_SIZE);
-  memset(A, 0, int(n * p * 1.4) * sizeof(int));
-  memset(B, 0, int(p * m * 1.4) * sizeof(int));
-  memset(C, 0, int(m * n * 1.4) * sizeof(int));
-
-  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(), p * sizeof(int));
-  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(), m * sizeof(int));
-
-  Mat S(n, p, A), T(p, m, B), U(n, m, C);
-  inner_strassen(&S, &T, &U);
-  vvm u(n, vm(m));
-  for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
-  return std::move(u);
-}
+using vfps = vector<fps>;
 
 __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm block_dec(
     const vvm& s, const vvm& t) {
@@ -626,71 +567,127 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm block_dec(
   return std::move(u);
 }
 
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vfps block_dec(
+    const vfps& s, const vfps& t) {
+  int n = s.size(), p = s[0].size(), m = t[0].size();
+  assert(int(n * p * 1.4) <= BUFFER_SIZE);
+  assert(int(p * m * 1.4) <= BUFFER_SIZE);
+  assert(int(n * m * 1.4) <= BUFFER_SIZE);
+  memset(A, 0, int(n * p * 1.4) * sizeof(int));
+  memset(B, 0, int(p * m * 1.4) * sizeof(int));
+  memset(C, 0, int(m * n * 1.4) * sizeof(int));
+
+  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(), p * sizeof(int));
+  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(), m * sizeof(int));
+
+  Mat S(n, p, A), T(p, m, B), U(n, m, C);
+  inner_block_dec_mul(&S, &T, &U);
+  vfps u(n, fps(m));
+  for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
+  return std::move(u);
+}
+
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm strassen(
+    const vvm& s, const vvm& t) {
+  int n = s.size(), p = s[0].size(), m = t[0].size();
+  assert(int(n * p * 1.4) <= BUFFER_SIZE);
+  assert(int(p * m * 1.4) <= BUFFER_SIZE);
+  assert(int(n * m * 1.4) <= BUFFER_SIZE);
+  memset(A, 0, int(n * p * 1.4) * sizeof(int));
+  memset(B, 0, int(p * m * 1.4) * sizeof(int));
+  memset(C, 0, int(m * n * 1.4) * sizeof(int));
+
+  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(), p * sizeof(int));
+  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(), m * sizeof(int));
+
+  Mat S(n, p, A), T(p, m, B), U(n, m, C);
+  inner_strassen(&S, &T, &U);
+  vvm u(n, vm(m));
+  for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
+  return std::move(u);
+}
+
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vfps strassen(
+    const vfps& s, const vfps& t) {
+  int n = s.size(), p = s[0].size(), m = t[0].size();
+  assert(int(n * p * 1.4) <= BUFFER_SIZE);
+  assert(int(p * m * 1.4) <= BUFFER_SIZE);
+  assert(int(n * m * 1.4) <= BUFFER_SIZE);
+  memset(A, 0, int(n * p * 1.4) * sizeof(int));
+  memset(B, 0, int(p * m * 1.4) * sizeof(int));
+  memset(C, 0, int(m * n * 1.4) * sizeof(int));
+
+  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(), p * sizeof(int));
+  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(), m * sizeof(int));
+
+  Mat S(n, p, A), T(p, m, B), U(n, m, C);
+  inner_strassen(&S, &T, &U);
+  vfps u(n, fps(m));
+  for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
+  return std::move(u);
+}
+
 #ifdef BUFFER_SIZE
 #undef BUFFER_SIZE
 #endif
-}  // namespace FastMatProd
 
-#include "competitive-template.hpp"
-#include "misc/timer.hpp"
-
+#include "../misc/timer.hpp"
 void time_test() {
-  using mint = LazyMontgomeryModInt<998244353>;
-  using vm = V<mint>;
-  using vvm = V<V<mint>>;
   int N = 1024;
   int P = N, M = N;
   mt19937 rng(58);
   vvm s(N, vm(P)), t(P, vm(M));
-  rep(i, N) rep(j, P) s[i][j] = rng() & 1;
-  rep(i, P) rep(j, M) t[i][j] = rng() & 1;
+  for (int i = 0; i < N; i++)
+    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;
+  for (int i = 0; i < P; i++)
+    for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;
   vvm u, u2;
   Timer timer;
 
   int loop = 5;
   timer.reset();
-  rep(i, loop) u = FastMatProd::strassen(s, t);
-  out("strassen", timer.elapsed() / loop);
+  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s, t);
+  cout << "strassen " << (timer.elapsed() / loop) << endl;
 
   timer.reset();
   u2 = FastMatProd::naive_mul(s, t);
-  out("naive", timer.elapsed());
+  cout << "naive " << (timer.elapsed() / loop) << endl;
 
   timer.reset();
   auto u3 = FastMatProd::block_dec(s, t);
-  out("block dec", timer.elapsed());
+  cout << "block dec " << (timer.elapsed() / loop) << endl;
 
-  out(u == u2);
-  out(u == u3);
-  cout << endl;
+  assert(u == u2);
+  assert(u == u3);
 }
 
-void solve() {
-  using mint = LazyMontgomeryModInt<998244353>;
-  using vm = V<mint>;
-  using vvm = V<V<mint>>;
-
-  time_test();
-
+void debug_test() {
+  // time_test();
   int N, P, M;
   mt19937 rng(58);
-  int loop = 100;
+  int loop = 1000;
   while (loop--) {
-    N = rng() % 1000 + 1;
-    M = rng() % 1000 + 1;
-    P = rng() % 1000 + 1;
+    N = rng() % 500 + 1;
+    M = rng() % 500 + 1;
+    P = rng() % 500 + 1;
     vvm s(N, vm(P)), t(P, vm(M));
-    rep(i, N) rep(j, P) s[i][j] = rng() % 998244353;
-    rep(i, P) rep(j, M) t[i][j] = rng() % 998244353;
-    using namespace FastMatProd;
+    for (int i = 0; i < N; i++)
+      for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;
+    for (int i = 0; i < P; i++)
+      for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;
     auto u = strassen(s, t);
     auto u2 = naive_mul(s, t);
+    auto u3 = block_dec(s, t);
     if (u != u2) {
-      out("ng", N, P, M);
+      cout << "ng u1 " << N << " " << P << " " << M << endl;
+      exit(1);
+    } else if (u != u3) {
+      cout << "ng u1 " << N << " " << P << " " << M << endl;
       exit(1);
     } else {
       cout << "ok " << N << " " << P << " " << M << endl;
     }
   }
-  out("all ok");
+  cout << "all ok";
 }
+}  // namespace FastMatProd
