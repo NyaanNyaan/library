@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-sqrt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+    - Last commit date: 2020-08-30 23:52:50+09:00
 
 
 
@@ -106,7 +106,7 @@ FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
 
 /**
  * @brief 平方根
- * @docs docs/fps-sqrt.md
+ * @docs docs/fps/fps-sqrt.md
  */
 
 ```
@@ -466,7 +466,7 @@ FormalPowerSeries<mint> sqrt(const FormalPowerSeries<mint> &f, int deg = -1) {
 
 /**
  * @brief 平方根
- * @docs docs/fps-sqrt.md
+ * @docs docs/fps/fps-sqrt.md
  */
 
 ```
