@@ -54,6 +54,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-factrization.test.cpp.html">verify/verify-yosupo-math/yosupo-factrization.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp.html">verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-mod-log.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-log.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-prime-table.test.cpp.html">verify/verify-yosupo-math/yosupo-prime-table.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp</a>

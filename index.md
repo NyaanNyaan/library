@@ -127,6 +127,7 @@ layout: default
 * :warning: <a href="library/math/float-binomial.hpp.html">math/float-binomial.hpp</a>
 * :warning: <a href="library/math/gray-code.hpp.html">math/gray-code.hpp</a>
 * :warning: <a href="library/math/grundy-number.hpp.html">math/grundy-number.hpp</a>
+* :heavy_check_mark: <a href="library/math/kth-root-integral.hpp.html">$\mathrm{floor}(a^{\frac{1}{k}})$ <small>(math/kth-root-integral.hpp)</small></a>
 * :warning: <a href="library/math/matrix-fast.hpp.html">math/matrix-fast.hpp</a>
 * :warning: <a href="library/math/matrix.hpp.html">math/matrix.hpp</a>
 * :warning: <a href="library/math/prime-counting-faster.hpp.html">math/prime-counting-faster.hpp</a>
@@ -336,6 +337,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-counting-primes.test.cpp.html">verify/verify-yosupo-math/yosupo-counting-primes.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-factrization.test.cpp.html">verify/verify-yosupo-math/yosupo-factrization.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp.html">verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify/verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-log.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-log.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
