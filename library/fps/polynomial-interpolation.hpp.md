@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/polynomial-interpolation.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+    - Last commit date: 2020-08-31 22:48:29+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
 
 
 ## Verified with
@@ -57,6 +58,7 @@ layout: default
 using namespace std;
 
 #include "./formal-power-series.hpp"
+#include "./multipoint-evaluation.hpp"
 
 template <class mint>
 FormalPowerSeries<mint> PolynomialInterpolation(const vector<mint> &xs,

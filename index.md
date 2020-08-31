@@ -83,10 +83,12 @@ layout: default
 * :heavy_check_mark: <a href="library/fps/fps-composition.hpp.html">関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ ) <small>(fps/fps-composition.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
+* :heavy_check_mark: <a href="library/fps/lagrange-interpolation-point.hpp.html">fps/lagrange-interpolation-point.hpp</a>
 * :heavy_check_mark: <a href="library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
 * :heavy_check_mark: <a href="library/fps/polynomial-gcd.hpp.html">多項式GCD <small>(fps/polynomial-gcd.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
+* :heavy_check_mark: <a href="library/fps/sum-of-exponential-times-poly.hpp.html">$\sum_{i}a^i f(i)$ <small>(fps/sum-of-exponential-times-poly.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/utility.hpp.html">fps/utility.hpp</a>
 
@@ -120,6 +122,7 @@ layout: default
 
 * :warning: <a href="library/math/divisor-multiple-transform.hpp.html">math/divisor-multiple-transform.hpp</a>
 * :heavy_check_mark: <a href="library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
+* :warning: <a href="library/math/enamurate-multiplicative-function.hpp.html">math/enamurate-multiplicative-function.hpp</a>
 * :warning: <a href="library/math/f2.hpp.html">math/f2.hpp</a>
 * :warning: <a href="library/math/float-binomial.hpp.html">math/float-binomial.hpp</a>
 * :warning: <a href="library/math/gray-code.hpp.html">math/gray-code.hpp</a>
@@ -320,6 +323,8 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp.html">verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp.html">verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
