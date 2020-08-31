@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-factrization.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 03:22:06+09:00
+    - Last commit date: 2020-09-01 02:18:41+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/factorize">https://judge.yosupo.jp/problem/factorize</a>
@@ -42,6 +42,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="../../../library/misc/rng.hpp.html">misc/rng.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 
@@ -385,6 +386,14 @@ int main() { solve(); }
 #line 3 "math/prime-factor.hpp"
 using namespace std;
 
+#line 3 "misc/rng.hpp"
+using namespace std;
+
+unsigned long long rng() {
+  static unsigned long long x_ = 88172645463325252ULL;
+  x_ = x_ ^ (x_ << 7);
+  return x_ = x_ ^ (x_ >> 9);
+}
 #line 3 "modint/arbitrary-prime-modint.hpp"
 using namespace std;
 
@@ -588,7 +597,7 @@ struct montgomery64 {
   static u64 get_mod() { return mod; }
 };
 typename montgomery64::u64 montgomery64::mod, montgomery64::r, montgomery64::n2;
-#line 7 "math/prime-factor.hpp"
+#line 8 "math/prime-factor.hpp"
 
 template <typename mint>
 bool miller_rabin(uint64_t n, vector<uint64_t> as) {
@@ -627,7 +636,10 @@ uint64_t pollard_rho(uint64_t n) {
   uint64_t d;
   mint one{1}, c{1};
   auto f = [&](mint x) { return x * x + c; };
-  for (;; c += one) {
+  while(1) {
+    do {
+      c = rng() % mint::get_mod();
+    } while (c == 0);
     mint x{2}, y{2};
     do {
       x = f(x), y = f(f(y));

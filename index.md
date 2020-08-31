@@ -152,7 +152,7 @@ layout: default
 * :heavy_check_mark: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
 * :warning: <a href="library/misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
 * :heavy_check_mark: <a href="library/misc/mo.hpp.html">misc/mo.hpp</a>
-* :warning: <a href="library/misc/rng.hpp.html">misc/rng.hpp</a>
+* :heavy_check_mark: <a href="library/misc/rng.hpp.html">misc/rng.hpp</a>
 * :warning: <a href="library/misc/simulated-annealing.hpp.html">misc/simulated-annealing.hpp</a>
 * :warning: <a href="library/misc/timer.hpp.html">misc/timer.hpp</a>
 

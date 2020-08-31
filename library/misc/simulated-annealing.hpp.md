@@ -38,7 +38,7 @@ layout: default
 
 ## Depends on
 
-* :warning: <a href="rng.hpp.html">misc/rng.hpp</a>
+* :heavy_check_mark: <a href="rng.hpp.html">misc/rng.hpp</a>
 * :warning: <a href="timer.hpp.html">misc/timer.hpp</a>
 
 
