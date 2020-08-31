@@ -4,6 +4,7 @@
 using namespace std;
 
 #include "./formal-power-series.hpp"
+#include "./multipoint-evaluation.hpp"
 
 template <class mint>
 FormalPowerSeries<mint> PolynomialInterpolation(const vector<mint> &xs,
