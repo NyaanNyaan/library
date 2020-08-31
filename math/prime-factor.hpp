@@ -2,6 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include "../misc/rng.hpp"
 #include "../modint/arbitrary-prime-modint.hpp"
 #include "../modint/modint-montgomery64.hpp"
 
@@ -42,7 +43,10 @@ uint64_t pollard_rho(uint64_t n) {
   uint64_t d;
   mint one{1}, c{1};
   auto f = [&](mint x) { return x * x + c; };
-  for (;; c += one) {
+  while(1) {
+    do {
+      c = rng() % mint::get_mod();
+    } while (c == 0);
     mint x{2}, y{2};
     do {
       x = f(x), y = f(f(y));
