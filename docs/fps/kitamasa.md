@@ -1,5 +1,9 @@
 ## 線形漸化式の第$N$項を高速に求めるライブラリ
 
+$[x^N]\frac{P(x)}{Q(x)}$($\mathrm{deg}(Q) = k$)を$\mathrm{O}(N \log k \log N)$で計算するライブラリ。
+
+#### 概要
+
 $k$項間漸化式
 
 $$a_n = c_1a_{n-1}+c_2a_{n-2} \ldots + c_ka_{n-k}$$

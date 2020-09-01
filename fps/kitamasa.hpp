@@ -102,5 +102,5 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
 
 /**
  * @brief 線形漸化式の高速計算
- * @docs docs/linear-recursive.md
+ * @docs docs/fps/kitamasa.md
  */
