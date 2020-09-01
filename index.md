@@ -140,6 +140,7 @@ layout: default
 * :warning: <a href="library/math/semiring.hpp.html">math/semiring.hpp</a>
 * :heavy_check_mark: <a href="library/math/sum-of-multiplicative-function.hpp.html">乗法的関数の和 <small>(math/sum-of-multiplicative-function.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/sum_of_floor.hpp.html">math/sum_of_floor.hpp</a>
+* :heavy_check_mark: <a href="library/math/two-sat.hpp.html">math/two-sat.hpp</a>
 * :warning: <a href="library/math/walsh-hadamard-transform.hpp.html">math/walsh-hadamard-transform.hpp</a>
 * :warning: <a href="library/math/zeta-mobius-transform.hpp.html">math/zeta-mobius-transform.hpp</a>
 
@@ -349,6 +350,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp.html">verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-two-sat.test.cpp.html">verify/verify-yosupo-math/yosupo-two-sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>

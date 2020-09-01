@@ -46,6 +46,7 @@ layout: default
 * :heavy_check_mark: <a href="strongly-connected-components.hpp.html">graph/strongly-connected-components.hpp</a>
 * :heavy_check_mark: <a href="topological-sort.hpp.html">graph/topological-sort.hpp</a>
 * :warning: <a href="../math/grundy-number.hpp.html">math/grundy-number.hpp</a>
+* :heavy_check_mark: <a href="../math/two-sat.hpp.html">math/two-sat.hpp</a>
 * :heavy_check_mark: <a href="../shortest-path/bellman-ford.hpp.html">shortest-path/bellman-ford.hpp</a>
 * :heavy_check_mark: <a href="../shortest-path/dijkstra.hpp.html">shortest-path/dijkstra.hpp</a>
 * :heavy_check_mark: <a href="../shortest-path/restore-shortest-path.hpp.html">shortest-path/restore-shortest-path.hpp</a>
@@ -84,6 +85,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp.html">verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp.html">verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-two-sat.test.cpp.html">verify/verify-yosupo-math/yosupo-two-sat.test.cpp</a>
 
 
 ## Code

@@ -25,31 +25,25 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/strongly-connected-components.hpp
+# :heavy_check_mark: math/two-sat.hpp
 
 <a href="../../index.html">Back to top page</a>
 
-* category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/strongly-connected-components.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-02 19:22:09+09:00
+* category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
+* <a href="{{ site.github.repository_url }}/blob/master/math/two-sat.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-09-02 02:50:44+09:00
 
 
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
-
-
-## Required by
-
-* :heavy_check_mark: <a href="../math/two-sat.hpp.html">math/two-sat.hpp</a>
+* :heavy_check_mark: <a href="../graph/graph-template.hpp.html">graph/graph-template.hpp</a>
+* :heavy_check_mark: <a href="../graph/strongly-connected-components.hpp.html">graph/strongly-connected-components.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-grl/aoj-grl-3-c.test.cpp.html">verify/verify-aoj-grl/aoj-grl-3-c.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp.html">verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-two-sat.test.cpp.html">verify/verify-yosupo-math/yosupo-two-sat.test.cpp</a>
 
 
@@ -62,86 +56,44 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "./graph-template.hpp"
+#include "../graph/strongly-connected-components.hpp"
 
-// Strongly Connected Components
-// DAG of SC graph   ... scc.dag (including multiedges)
-// new node of k     ... scc[k]
-// inv of scc[k] = i ... scc.belong(i)
-template <typename G>
-struct StronglyConnectedComponents {
- private:
-  const G &g;
-  vector<vector<int>> rg;
-  vector<int> comp, order;
-  vector<char> used;
-  vector<vector<int>> blng;
+struct TwoSAT {
+  int N;
+  vector<vector<int>> g;
 
- public:
-  vector<vector<int>> dag;
-  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }
+  TwoSAT(int n) : N(n), g(2 * n) {}
 
-  int operator[](int k) { return comp[k]; }
+  inline int id(int node, int cond) { return node + (cond ? N : 0); }
 
-  vector<int> &belong(int i) { return blng[i]; }
+  void add_cond(int s, int fs, int t, int ft) {
+    g[id(s, !(fs))].push_back(id(t, ft));
+    g[id(t, !(ft))].push_back(id(s, fs));
+  };
 
- private:
-  void dfs(int idx) {
-    if (used[idx]) return;
-    used[idx] = true;
-    for (auto to : g[idx]) dfs(int(to));
-    order.push_back(idx);
-  }
-
-  void rdfs(int idx, int cnt) {
-    if (comp[idx] != -1) return;
-    comp[idx] = cnt;
-    for (int to : rg[idx]) rdfs(to, cnt);
-  }
-
-  void build() {
-    for (int i = 0; i < (int)g.size(); i++) dfs(i);
-    reverse(begin(order), end(order));
-    used.clear();
-    used.shrink_to_fit();
-
-    comp.resize(g.size(), -1);
-
-    rg.resize(g.size());
-    for (int i = 0; i < (int)g.size(); i++) {
-      for (auto e : g[i]) {
-        rg[(int)e].emplace_back(i);
-      }
+  vector<int> run() {
+    StronglyConnectedComponents<decltype(g)> scc(g);
+    vector<int> ret(N);
+    for (int i = 0; i < N; i++) {
+      if (scc[i] == scc[N + i])
+        return {};
+      else
+        ret[i] = scc[i] < scc[N + i];
     }
-    int ptr = 0;
-    for (int i : order)
-      if (comp[i] == -1) rdfs(i, ptr), ptr++;
-    rg.clear();
-    rg.shrink_to_fit();
-    order.clear();
-    order.shrink_to_fit();
-
-    dag.resize(ptr);
-    blng.resize(ptr);
-    for (int i = 0; i < (int)g.size(); i++) {
-      blng[comp[i]].push_back(i);
-      for (auto &to : g[i]) {
-        int x = comp[i], y = comp[to];
-        if (x == y) continue;
-        dag[x].push_back(y);
-      }
-    }
+    return ret;
   }
 };
-
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "graph/strongly-connected-components.hpp"
+#line 2 "math/two-sat.hpp"
 #include <bits/stdc++.h>
+using namespace std;
+
+#line 3 "graph/strongly-connected-components.hpp"
 using namespace std;
 
 #line 3 "graph/graph-template.hpp"
@@ -307,6 +259,33 @@ struct StronglyConnectedComponents {
         dag[x].push_back(y);
       }
     }
+  }
+};
+#line 6 "math/two-sat.hpp"
+
+struct TwoSAT {
+  int N;
+  vector<vector<int>> g;
+
+  TwoSAT(int n) : N(n), g(2 * n) {}
+
+  inline int id(int node, int cond) { return node + (cond ? N : 0); }
+
+  void add_cond(int s, int fs, int t, int ft) {
+    g[id(s, !(fs))].push_back(id(t, ft));
+    g[id(t, !(ft))].push_back(id(s, fs));
+  };
+
+  vector<int> run() {
+    StronglyConnectedComponents<decltype(g)> scc(g);
+    vector<int> ret(N);
+    for (int i = 0; i < N; i++) {
+      if (scc[i] == scc[N + i])
+        return {};
+      else
+        ret[i] = scc[i] < scc[N + i];
+    }
+    return ret;
   }
 };
 
