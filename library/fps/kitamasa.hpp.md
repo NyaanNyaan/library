@@ -31,12 +31,16 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/kitamasa.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+    - Last commit date: 2020-09-01 18:14:12+09:00
 
 
 
 
 ## 線形漸化式の第$N$項を高速に求めるライブラリ
+
+$[x^N]\frac{P(x)}{Q(x)}$($\mathrm{deg}(Q) = k$)を$\mathrm{O}(N \log k \log N)$で計算するライブラリ。
+
+#### 概要
 
 $k$項間漸化式
 
@@ -181,7 +185,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
 
 /**
  * @brief 線形漸化式の高速計算
- * @docs docs/linear-recursive.md
+ * @docs docs/fps/kitamasa.md
  */
 
 ```
@@ -476,7 +480,7 @@ mint kitamasa(long long N, FormalPowerSeries<mint> Q,
 
 /**
  * @brief 線形漸化式の高速計算
- * @docs docs/linear-recursive.md
+ * @docs docs/fps/kitamasa.md
  */
 
 ```
