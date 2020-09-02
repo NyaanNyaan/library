@@ -140,7 +140,7 @@ layout: default
 * :warning: <a href="library/math/semiring.hpp.html">math/semiring.hpp</a>
 * :heavy_check_mark: <a href="library/math/sum-of-multiplicative-function.hpp.html">乗法的関数の和 <small>(math/sum-of-multiplicative-function.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/sum_of_floor.hpp.html">math/sum_of_floor.hpp</a>
-* :heavy_check_mark: <a href="library/math/two-sat.hpp.html">math/two-sat.hpp</a>
+* :heavy_check_mark: <a href="library/math/two-sat.hpp.html">2-SAT <small>(math/two-sat.hpp)</small></a>
 * :warning: <a href="library/math/walsh-hadamard-transform.hpp.html">math/walsh-hadamard-transform.hpp</a>
 * :warning: <a href="library/math/zeta-mobius-transform.hpp.html">math/zeta-mobius-transform.hpp</a>
 

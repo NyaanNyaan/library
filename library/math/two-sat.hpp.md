@@ -25,15 +25,32 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: math/two-sat.hpp
+# :heavy_check_mark: 2-SAT <small>(math/two-sat.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/two-sat.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-02 02:50:44+09:00
+    - Last commit date: 2020-09-02 12:36:57+09:00
 
 
+
+
+## 2-SAT
+
+2-SATを$\mathrm{O}(N + M)$($N$は論理変数の個数、$M$は節の個数)で計算するライブラリ。
+
+#### 概要
+
+SAT(充足可能性問題,satisfiability problem)とは、論理変数$x_1,x_2,\ldots x_n$からなる論理式が与えられたときに、変数に真か偽かを割り当てることで式全体を真にできるかを判定する問題である。
+
+SATは一般にはNP困難であることが知られているが、連言標準形に直したときに節内の変数の数が2以下であるものを2-SATと呼び、多項式時間で解くことが出来る。
+
+#### 使い方
+
+- `TwoSAT(n)`　: $n$頂点のSATを初期化する。
+- `add_cond(s, fs, t, ft)` : $v(i,0)=x_i,v(i,1)=\lnot x_i$としたとき、$(v(x_s,s) \wedge v(x_t,t))$を条件に加える。
+- `run()` : 2-SATを解く。条件を満たす組み合わせが存在するときは各変数の値が格納された配列を、存在しないときは空の配列を返す。
 
 
 ## Depends on
@@ -83,6 +100,12 @@ struct TwoSAT {
     return ret;
   }
 };
+
+/**
+ * @brief 2-SAT
+ * @docs docs/math/two-sat.md
+ */
+
 ```
 {% endraw %}
 
@@ -288,6 +311,11 @@ struct TwoSAT {
     return ret;
   }
 };
+
+/**
+ * @brief 2-SAT
+ * @docs docs/math/two-sat.md
+ */
 
 ```
 {% endraw %}

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-two-sat.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-02 02:50:44+09:00
+    - Last commit date: 2020-09-02 12:36:57+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/two_sat">https://judge.yosupo.jp/problem/two_sat</a>
@@ -42,7 +42,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/graph/strongly-connected-components.hpp.html">graph/strongly-connected-components.hpp</a>
-* :heavy_check_mark: <a href="../../../library/math/two-sat.hpp.html">math/two-sat.hpp</a>
+* :heavy_check_mark: <a href="../../../library/math/two-sat.hpp.html">2-SAT <small>(math/two-sat.hpp)</small></a>
 
 
 ## Code
@@ -580,6 +580,11 @@ struct TwoSAT {
     return ret;
   }
 };
+
+/**
+ * @brief 2-SAT
+ * @docs docs/math/two-sat.md
+ */
 #line 5 "verify/verify-yosupo-math/yosupo-two-sat.test.cpp"
 
 void solve() {

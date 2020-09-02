@@ -43,7 +43,7 @@ layout: default
 
 ## Required by
 
-* :heavy_check_mark: <a href="../math/two-sat.hpp.html">math/two-sat.hpp</a>
+* :heavy_check_mark: <a href="../math/two-sat.hpp.html">2-SAT <small>(math/two-sat.hpp)</small></a>
 
 
 ## Verified with
