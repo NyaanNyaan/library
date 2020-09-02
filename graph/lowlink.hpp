@@ -12,25 +12,20 @@ struct LowLink {
   const G &g;
   vector<int> ord, low, articulation;
   vector<pair<int, int> > bridge;
-  
+
   LowLink(const G &g) : g(g) {
     N = g.size();
     ord.resize(N, -1);
     low.resize(N, -1);
-    articulation.reserve(N);
-    bridge.reserve(N);
     int k = 0;
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++)
       if (!(~ord[i])) k = dfs(i, k, -1);
-    }
-    articulation.shrink_to_fit();
-    bridge.shrink_to_fit();
   }
 
   int dfs(int idx, int k, int par) {
     low[idx] = (ord[idx] = k++);
     int cnt = 0;
-    bool is_arti = false;
+    bool is_arti = false, flg = false;
     for (auto &to : g[idx]) {
       if (ord[to] == -1) {
         cnt++;
@@ -40,7 +35,7 @@ struct LowLink {
         if (ord[idx] < low[to]) {
           bridge.emplace_back(minmax(idx, (int)to));
         }
-      } else if (to != par) {
+      } else if (to != par || exchange(flg, true)) {
         low[idx] = min(low[idx], ord[to]);
       }
     }
