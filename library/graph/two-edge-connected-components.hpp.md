@@ -25,12 +25,12 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: graph/lowlink.hpp
+# :heavy_check_mark: graph/two-edge-connected-components.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#f8b0b924ebd7046dbfa85a856e4682c8">graph</a>
-* <a href="{{ site.github.repository_url }}/blob/master/graph/lowlink.hpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/graph/two-edge-connected-components.hpp">View this file on GitHub</a>
     - Last commit date: 2020-09-02 23:02:05+09:00
 
 
@@ -39,17 +39,11 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="graph-template.hpp.html">graph/graph-template.hpp</a>
-
-
-## Required by
-
-* :heavy_check_mark: <a href="two-edge-connected-components.hpp.html">graph/two-edge-connected-components.hpp</a>
+* :heavy_check_mark: <a href="lowlink.hpp.html">graph/lowlink.hpp</a>
 
 
 ## Verified with
 
-* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-grl/aoj-grl-3-a.test.cpp.html">verify/verify-aoj-grl/aoj-grl-3-a.test.cpp</a>
-* :heavy_check_mark: <a href="../../verify/verify/verify-aoj-grl/aoj-grl-3-b.test.cpp.html">verify/verify-aoj-grl/aoj-grl-3-b.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp.html">verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp</a>
 
 
@@ -63,54 +57,51 @@ layout: default
 using namespace std;
 
 #include "./graph-template.hpp"
+#include "./lowlink.hpp"
 
-// LowLink ... enumerate bridge and articulation point
-// bridge ... 橋 articulation point ... 関節点
 template <typename G>
-struct LowLink {
-  int N;
+struct TwoEdgeConnectedComponents {
   const G &g;
-  vector<int> ord, low, articulation;
-  vector<pair<int, int> > bridge;
-
-  LowLink(const G &g) : g(g) {
-    N = g.size();
-    ord.resize(N, -1);
-    low.resize(N, -1);
-    int k = 0;
-    for (int i = 0; i < N; i++)
-      if (!(~ord[i])) k = dfs(i, k, -1);
-  }
-
-  int dfs(int idx, int k, int par) {
-    low[idx] = (ord[idx] = k++);
-    int cnt = 0;
-    bool is_arti = false, flg = false;
-    for (auto &to : g[idx]) {
-      if (ord[to] == -1) {
-        cnt++;
-        k = dfs(to, k, idx);
-        low[idx] = min(low[idx], low[to]);
-        is_arti |= (par != -1) && (low[to] >= ord[idx]);
-        if (ord[idx] < low[to]) {
-          bridge.emplace_back(minmax(idx, (int)to));
-        }
-      } else if (to != par || exchange(flg, true)) {
-        low[idx] = min(low[idx], ord[to]);
-      }
+  LowLink<G> low;
+  vector<int> comp;
+  int k;
+  vector<vector<int>> groups, tree;
+  TwoEdgeConnectedComponents(const G &g_)
+      : g(g_), low(g_), comp(g_.size(), -1), k(0) {
+    for (int i = 0; i < (int)g.size(); i++) {
+      if (comp[i] == -1) dfs(i, -1);
     }
-    is_arti |= par == -1 && cnt > 1;
-    if (is_arti) articulation.push_back(idx);
-    return k;
+    groups.resize(k);
+    tree.resize(k);
+    for (int i = 0; i < (int)g.size(); i++) {
+      groups[comp[i]].push_back(i);
+    }
+    for (auto &e : low.bridge) {
+      int u = comp[e.first], v = comp[e.second];
+      tree[u].push_back(v);
+    }
+  };
+
+  int operator[](const int &k) const { return comp[k]; }
+
+  void dfs(int i, int p) {
+    if (p >= 0 && low.ord[p] >= low.low[i])
+      comp[i] = comp[p];
+    else
+      comp[i] = k++;
+    for (auto &d : g[i]) {
+      if (comp[d] == -1) dfs(d, i);
+    }
   }
 };
+
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "graph/lowlink.hpp"
+#line 2 "graph/two-edge-connected-components.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -208,6 +199,9 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
+#line 3 "graph/lowlink.hpp"
+using namespace std;
+
 #line 6 "graph/lowlink.hpp"
 
 // LowLink ... enumerate bridge and articulation point
@@ -248,6 +242,43 @@ struct LowLink {
     is_arti |= par == -1 && cnt > 1;
     if (is_arti) articulation.push_back(idx);
     return k;
+  }
+};
+#line 7 "graph/two-edge-connected-components.hpp"
+
+template <typename G>
+struct TwoEdgeConnectedComponents {
+  const G &g;
+  LowLink<G> low;
+  vector<int> comp;
+  int k;
+  vector<vector<int>> groups, tree;
+  TwoEdgeConnectedComponents(const G &g_)
+      : g(g_), low(g_), comp(g_.size(), -1), k(0) {
+    for (int i = 0; i < (int)g.size(); i++) {
+      if (comp[i] == -1) dfs(i, -1);
+    }
+    groups.resize(k);
+    tree.resize(k);
+    for (int i = 0; i < (int)g.size(); i++) {
+      groups[comp[i]].push_back(i);
+    }
+    for (auto &e : low.bridge) {
+      int u = comp[e.first], v = comp[e.second];
+      tree[u].push_back(v);
+    }
+  };
+
+  int operator[](const int &k) const { return comp[k]; }
+
+  void dfs(int i, int p) {
+    if (p >= 0 && low.ord[p] >= low.low[i])
+      comp[i] = comp[p];
+    else
+      comp[i] = k++;
+    for (auto &d : g[i]) {
+      if (comp[d] == -1) dfs(d, i);
+    }
   }
 };
 

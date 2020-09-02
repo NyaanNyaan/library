@@ -121,6 +121,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp.html">verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp.html">verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp.html">verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp.html">verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-math/yosupo-counting-primes.test.cpp.html">verify/verify-yosupo-math/yosupo-counting-primes.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-determinant.test.cpp</a>

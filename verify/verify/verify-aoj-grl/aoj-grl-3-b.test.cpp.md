@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-3-b.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:45:41+09:00
+    - Last commit date: 2020-09-02 23:02:05+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B</a>
@@ -480,25 +480,20 @@ struct LowLink {
   const G &g;
   vector<int> ord, low, articulation;
   vector<pair<int, int> > bridge;
-  
+
   LowLink(const G &g) : g(g) {
     N = g.size();
     ord.resize(N, -1);
     low.resize(N, -1);
-    articulation.reserve(N);
-    bridge.reserve(N);
     int k = 0;
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++)
       if (!(~ord[i])) k = dfs(i, k, -1);
-    }
-    articulation.shrink_to_fit();
-    bridge.shrink_to_fit();
   }
 
   int dfs(int idx, int k, int par) {
     low[idx] = (ord[idx] = k++);
     int cnt = 0;
-    bool is_arti = false;
+    bool is_arti = false, flg = false;
     for (auto &to : g[idx]) {
       if (ord[to] == -1) {
         cnt++;
@@ -508,7 +503,7 @@ struct LowLink {
         if (ord[idx] < low[to]) {
           bridge.emplace_back(minmax(idx, (int)to));
         }
-      } else if (to != par) {
+      } else if (to != par || exchange(flg, true)) {
         low[idx] = min(low[idx], ord[to]);
       }
     }

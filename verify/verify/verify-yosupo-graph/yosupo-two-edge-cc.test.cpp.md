@@ -25,16 +25,16 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
-* category: <a href="../../../index.html#0fb7d45b0bc84eef4927d543d7edb9be">verify/verify-aoj-grl</a>
-* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-grl/aoj-grl-3-a.test.cpp">View this file on GitHub</a>
+* category: <a href="../../../index.html#e77e1bd3177e01198e075aa9e3604a66">verify/verify-yosupo-graph</a>
+* <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-09-02 23:02:05+09:00
 
 
-* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A</a>
+* see: <a href="https://judge.yosupo.jp/problem/two_edge_connected_components">https://judge.yosupo.jp/problem/two_edge_connected_components</a>
 
 
 ## Depends on
@@ -42,6 +42,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/graph/lowlink.hpp.html">graph/lowlink.hpp</a>
+* :heavy_check_mark: <a href="../../../library/graph/two-edge-connected-components.hpp.html">graph/two-edge-connected-components.hpp</a>
 
 
 ## Code
@@ -49,29 +50,32 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A"
+#define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 
 #include "../../competitive-template.hpp"
+#include "../../graph/graph-template.hpp"
 #include "../../graph/lowlink.hpp"
+#include "../../graph/two-edge-connected-components.hpp"
 
 void solve() {
-  ini(N, E);
-  auto g = graph(N, E, false, false);
-  LowLink<vvi> lowlink(g);
-  sort(all(lowlink.articulation));
-  each(x, lowlink.articulation) out(x);
+  ini(N, M);
+  auto g = graph(N, M, false, false);
+  TwoEdgeConnectedComponents<vvi> low(g);
+  int s = low.groups.size();
+  out(s);
+  rep(i, s) {
+    cout << (low.groups[i].size()) << " ";
+    out(low.groups[i]);
+  }
 }
-
 ```
 {% endraw %}
 
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "verify/verify-aoj-grl/aoj-grl-3-a.test.cpp"
-#define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A"
+#line 1 "verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/two_edge_connected_components"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template
@@ -373,9 +377,6 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "graph/lowlink.hpp"
-using namespace std;
-
 #line 3 "graph/graph-template.hpp"
 using namespace std;
 
@@ -470,6 +471,9 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
+#line 3 "graph/lowlink.hpp"
+using namespace std;
+
 #line 6 "graph/lowlink.hpp"
 
 // LowLink ... enumerate bridge and articulation point
@@ -512,14 +516,58 @@ struct LowLink {
     return k;
   }
 };
-#line 6 "verify/verify-aoj-grl/aoj-grl-3-a.test.cpp"
+#line 3 "graph/two-edge-connected-components.hpp"
+using namespace std;
+
+#line 7 "graph/two-edge-connected-components.hpp"
+
+template <typename G>
+struct TwoEdgeConnectedComponents {
+  const G &g;
+  LowLink<G> low;
+  vector<int> comp;
+  int k;
+  vector<vector<int>> groups, tree;
+  TwoEdgeConnectedComponents(const G &g_)
+      : g(g_), low(g_), comp(g_.size(), -1), k(0) {
+    for (int i = 0; i < (int)g.size(); i++) {
+      if (comp[i] == -1) dfs(i, -1);
+    }
+    groups.resize(k);
+    tree.resize(k);
+    for (int i = 0; i < (int)g.size(); i++) {
+      groups[comp[i]].push_back(i);
+    }
+    for (auto &e : low.bridge) {
+      int u = comp[e.first], v = comp[e.second];
+      tree[u].push_back(v);
+    }
+  };
+
+  int operator[](const int &k) const { return comp[k]; }
+
+  void dfs(int i, int p) {
+    if (p >= 0 && low.ord[p] >= low.low[i])
+      comp[i] = comp[p];
+    else
+      comp[i] = k++;
+    for (auto &d : g[i]) {
+      if (comp[d] == -1) dfs(d, i);
+    }
+  }
+};
+#line 7 "verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp"
 
 void solve() {
-  ini(N, E);
-  auto g = graph(N, E, false, false);
-  LowLink<vvi> lowlink(g);
-  sort(all(lowlink.articulation));
-  each(x, lowlink.articulation) out(x);
+  ini(N, M);
+  auto g = graph(N, M, false, false);
+  TwoEdgeConnectedComponents<vvi> low(g);
+  int s = low.groups.size();
+  out(s);
+  rep(i, s) {
+    cout << (low.groups[i].size()) << " ";
+    out(low.groups[i]);
+  }
 }
 
 ```
