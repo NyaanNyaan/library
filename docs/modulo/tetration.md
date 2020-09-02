@@ -8,6 +8,8 @@ $$a \uparrow \uparrow b =\begin{cases} 1 & \mathrm{if}\ \ b = 0\newline a^{a \up
 
 #### 概要
 
+(この内容は[koprickyさんのライブラリ](https://kopricky.github.io/code/Computation_Advanced/tetration.html)を参考に書きました。)
+
 $a\uparrow \uparrow b$と$a\uparrow \uparrow (b-1)$の関係式を元に再帰的に計算する。
 
 $a$と$m$が互いに素の時は、オイラーの定理$a ^ {\phi(m)}\equiv 1 \mod m$より、

@@ -29,3 +29,8 @@ struct TwoSAT {
     return ret;
   }
 };
+
+/**
+ * @brief 2-SAT
+ * @docs docs/math/two-sat.md
+ */
