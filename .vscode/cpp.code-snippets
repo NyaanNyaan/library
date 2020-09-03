@@ -99,7 +99,7 @@
     ],
     "description": "solve_function_for_multitest"
   },"Square_Decomposition": {
-    "prefix": "_SquareDecomposition",
+    "prefix": "_SquareRootDecomposition",
     "body": [
       "struct block {",
       "  // S 作用素の型 T 要素の型",

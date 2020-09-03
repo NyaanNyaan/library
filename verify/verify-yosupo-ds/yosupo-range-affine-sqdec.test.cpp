@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/square-decomposition.hpp"
+#include "../../data-structure/square-root-decomposition.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
 constexpr int B = 300;
@@ -67,7 +67,7 @@ void solve() {
   };
 
   auto merge = [](const affine &a,const affine &b) { return a * b; };
-  SquareDecomposition<decltype(merge), block, B> sqd(N, merge, id);
+  SquareRootDecomposition<decltype(merge), block, B> sqd(N, merge, id);
 
   rep(_, Q) {
     ini(cmd);

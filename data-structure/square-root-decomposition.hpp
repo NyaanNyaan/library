@@ -3,12 +3,12 @@
 using namespace std;
 
 template <typename MERGE, typename block, int B>
-struct SquareDecomposition {
+struct SquareRootDecomposition {
   int N;
   vector<block> sq;
   MERGE merge;
   typename block::T UNIT;
-  SquareDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
+  SquareRootDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
       : N(N_), sq(N / B + 1), merge(merge_), UNIT(UNIT_) {
     for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
@@ -35,5 +35,5 @@ struct SquareDecomposition {
 
 /**
  * @brief 平方分割
- * @docs docs/sqrt-dec.md
+ * @docs docs/data-structure/sqrt-dec.md
  */

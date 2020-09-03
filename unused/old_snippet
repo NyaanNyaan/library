@@ -4686,7 +4686,7 @@
     "description": "Union_Find_With_Potential"
   },
   "Square_Decomposition": {
-    "prefix": "_SquareDecomposition",
+    "prefix": "_SquareRootDecomposition",
     "body": [
       "",
       "constexpr int B = 300;",
