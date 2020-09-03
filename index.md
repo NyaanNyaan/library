@@ -40,7 +40,7 @@ layout: default
 
 * :warning: <a href="library/arbitrary-length-test.cpp.html">arbitrary-length-test.cpp</a>
 * :warning: <a href="library/bundle.py.html">bundle.py</a>
-* :question: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -139,7 +139,7 @@ layout: default
 * :heavy_check_mark: <a href="library/math/prime-table.hpp.html">math/prime-table.hpp</a>
 * :warning: <a href="library/math/rational-number.hpp.html">math/rational-number.hpp</a>
 * :warning: <a href="library/math/semiring.hpp.html">math/semiring.hpp</a>
-* :x: <a href="library/math/subset-convolution.hpp.html">Subset Convolution <small>(math/subset-convolution.hpp)</small></a>
+* :heavy_check_mark: <a href="library/math/subset-convolution.hpp.html">Subset Convolution <small>(math/subset-convolution.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/sum-of-multiplicative-function.hpp.html">乗法的関数の和 <small>(math/sum-of-multiplicative-function.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/sum_of_floor.hpp.html">math/sum_of_floor.hpp</a>
 * :heavy_check_mark: <a href="library/math/two-sat.hpp.html">2-SAT <small>(math/two-sat.hpp)</small></a>
@@ -152,7 +152,7 @@ layout: default
 ### misc
 
 * :heavy_check_mark: <a href="library/misc/compress.hpp.html">misc/compress.hpp</a>
-* :question: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
 * :warning: <a href="library/misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
 * :heavy_check_mark: <a href="library/misc/mo.hpp.html">misc/mo.hpp</a>
 * :heavy_check_mark: <a href="library/misc/rng.hpp.html">misc/rng.hpp</a>
@@ -168,7 +168,7 @@ layout: default
 * :heavy_check_mark: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
 * :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :question: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 
 
@@ -350,7 +350,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-prime-table.test.cpp.html">verify/verify-yosupo-math/yosupo-prime-table.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
-* :x: <a href="verify/verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp.html">verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp.html">verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp.html">verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp</a>

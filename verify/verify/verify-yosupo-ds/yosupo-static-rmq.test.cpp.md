@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
 
 

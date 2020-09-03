@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/data-structure/persistent-array.hpp.html">永続配列 <small>(data-structure/persistent-array.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/data-structure/persistent-union-find.hpp.html">完全永続Union-Find <small>(data-structure/persistent-union-find.hpp)</small></a>
 

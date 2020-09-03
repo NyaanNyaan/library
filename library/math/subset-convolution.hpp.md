@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: Subset Convolution <small>(math/subset-convolution.hpp)</small>
+# :heavy_check_mark: Subset Convolution <small>(math/subset-convolution.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
@@ -71,7 +71,7 @@ $$(f\circ g)_2\cdot x\equiv (f_1+f_2\cdot x)\circ(g_1+g_2\cdot x)-f_1\circ g_1 \
 
 ## Verified with
 
-* :x: <a href="../../verify/verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp.html">verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp.html">verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp</a>
 
 
 ## Code

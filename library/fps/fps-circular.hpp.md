@@ -56,7 +56,7 @@ $g \equiv \cos f, h \equiv \sin f \mod x^n$を求めたい。
 ## Depends on
 
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :question: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 
 
 ## Verified with

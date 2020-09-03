@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/math/kth-root-integral.hpp.html">$\mathrm{floor}(a^{\frac{1}{k}})$ <small>(math/kth-root-integral.hpp)</small></a>
-* :question: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
 
 
 ## Code

@@ -25,24 +25,24 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :x: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+# :heavy_check_mark: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-04 01:02:15+09:00
+    - Last commit date: 2020-09-04 01:02:50+09:00
 
 
-* see: <a href=""></a>
+* see: <a href="https://judge.yosupo.jp/problem/subset_convolution">https://judge.yosupo.jp/problem/subset_convolution</a>
 
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :x: <a href="../../../library/math/subset-convolution.hpp.html">Subset Convolution <small>(math/subset-convolution.hpp)</small></a>
-* :question: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :question: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/math/subset-convolution.hpp.html">Subset Convolution <small>(math/subset-convolution.hpp)</small></a>
+* :heavy_check_mark: <a href="../../../library/misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 
 
 ## Code
@@ -50,7 +50,7 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM
+#define PROBLEM "https://judge.yosupo.jp/problem/subset_convolution"
 
 #include "../../competitive-template.hpp"
 #include "../../math/subset-convolution.hpp"
@@ -86,7 +86,7 @@ void solve() {
 {% raw %}
 ```cpp
 #line 1 "verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp"
-#define PROBLEM
+#define PROBLEM "https://judge.yosupo.jp/problem/subset_convolution"
 
 #line 1 "competitive-template.hpp"
 #pragma region kyopro_template

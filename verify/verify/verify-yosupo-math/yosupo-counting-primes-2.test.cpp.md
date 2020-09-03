@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/math/prime-counting-o2d3.hpp.html">素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ ) <small>(math/prime-counting-o2d3.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/math/prime-table.hpp.html">math/prime-table.hpp</a>
 

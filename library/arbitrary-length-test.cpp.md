@@ -38,8 +38,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="competitive-template.hpp.html">competitive-template.hpp</a>
-* :question: <a href="misc/fastio.hpp.html">misc/fastio.hpp</a>
+* :heavy_check_mark: <a href="competitive-template.hpp.html">competitive-template.hpp</a>
+* :heavy_check_mark: <a href="misc/fastio.hpp.html">misc/fastio.hpp</a>
 * :warning: <a href="misc/timer.hpp.html">misc/timer.hpp</a>
 * :heavy_check_mark: <a href="modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
 * :heavy_check_mark: <a href="ntt/cooley-turkey-ntt.hpp.html">ntt/cooley-turkey-ntt.hpp</a>
