@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
+* :question: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/graph/lowlink.hpp.html">graph/lowlink.hpp</a>
 * :heavy_check_mark: <a href="../../../library/graph/two-edge-connected-components.hpp.html">graph/two-edge-connected-components.hpp</a>
