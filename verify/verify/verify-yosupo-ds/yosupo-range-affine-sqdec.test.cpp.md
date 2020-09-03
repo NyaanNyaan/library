@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-07 01:46:09+09:00
+    - Last commit date: 2020-09-03 23:56:45+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/point_set_range_composite">https://judge.yosupo.jp/problem/point_set_range_composite</a>
@@ -40,7 +40,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
-* :heavy_check_mark: <a href="../../../library/data-structure/square-decomposition.hpp.html">平方分割 <small>(data-structure/square-decomposition.hpp)</small></a>
+* :heavy_check_mark: <a href="../../../library/data-structure/square-root-decomposition.hpp.html">平方分割 <small>(data-structure/square-root-decomposition.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 
 
@@ -52,7 +52,7 @@ layout: default
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/square-decomposition.hpp"
+#include "../../data-structure/square-root-decomposition.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
 constexpr int B = 300;
@@ -118,7 +118,7 @@ void solve() {
   };
 
   auto merge = [](const affine &a,const affine &b) { return a * b; };
-  SquareDecomposition<decltype(merge), block, B> sqd(N, merge, id);
+  SquareRootDecomposition<decltype(merge), block, B> sqd(N, merge, id);
 
   rep(_, Q) {
     ini(cmd);
@@ -441,16 +441,16 @@ void solve();
 int main() { solve(); }
 
 #pragma endregion
-#line 3 "data-structure/square-decomposition.hpp"
+#line 3 "data-structure/square-root-decomposition.hpp"
 using namespace std;
 
 template <typename MERGE, typename block, int B>
-struct SquareDecomposition {
+struct SquareRootDecomposition {
   int N;
   vector<block> sq;
   MERGE merge;
   typename block::T UNIT;
-  SquareDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
+  SquareRootDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
       : N(N_), sq(N / B + 1), merge(merge_), UNIT(UNIT_) {
     for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
@@ -477,7 +477,7 @@ struct SquareDecomposition {
 
 /**
  * @brief 平方分割
- * @docs docs/sqrt-dec.md
+ * @docs docs/data-structure/sqrt-dec.md
  */
 #line 3 "modint/montgomery-modint.hpp"
 using namespace std;
@@ -638,7 +638,7 @@ void solve() {
   };
 
   auto merge = [](const affine &a,const affine &b) { return a * b; };
-  SquareDecomposition<decltype(merge), block, B> sqd(N, merge, id);
+  SquareRootDecomposition<decltype(merge), block, B> sqd(N, merge, id);
 
   rep(_, Q) {
     ini(cmd);

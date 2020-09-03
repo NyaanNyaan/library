@@ -63,7 +63,7 @@ layout: default
 * :heavy_check_mark: <a href="library/data-structure/slide-window-aggregation.hpp.html">data-structure/slide-window-aggregation.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sliding-window-minimum.hpp.html">data-structure/sliding-window-minimum.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/square-decomposition.hpp.html">平方分割 <small>(data-structure/square-decomposition.hpp)</small></a>
+* :heavy_check_mark: <a href="library/data-structure/square-root-decomposition.hpp.html">平方分割 <small>(data-structure/square-root-decomposition.hpp)</small></a>
 * :heavy_check_mark: <a href="library/data-structure/union-find-with-potential.hpp.html">data-structure/union-find-with-potential.hpp</a>
 * :heavy_check_mark: <a href="library/data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
 

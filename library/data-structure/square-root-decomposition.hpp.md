@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: 平方分割 <small>(data-structure/square-decomposition.hpp)</small>
+# :heavy_check_mark: 平方分割 <small>(data-structure/square-root-decomposition.hpp)</small>
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
-* <a href="{{ site.github.repository_url }}/blob/master/data-structure/square-decomposition.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-07 01:46:09+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/data-structure/square-root-decomposition.hpp">View this file on GitHub</a>
+    - Last commit date: 2020-09-03 23:56:45+09:00
 
 
 
@@ -109,12 +109,12 @@ struct block {
 using namespace std;
 
 template <typename MERGE, typename block, int B>
-struct SquareDecomposition {
+struct SquareRootDecomposition {
   int N;
   vector<block> sq;
   MERGE merge;
   typename block::T UNIT;
-  SquareDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
+  SquareRootDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
       : N(N_), sq(N / B + 1), merge(merge_), UNIT(UNIT_) {
     for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
@@ -141,7 +141,7 @@ struct SquareDecomposition {
 
 /**
  * @brief 平方分割
- * @docs docs/sqrt-dec.md
+ * @docs docs/data-structure/sqrt-dec.md
  */
 
 ```
@@ -150,17 +150,17 @@ struct SquareDecomposition {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 2 "data-structure/square-decomposition.hpp"
+#line 2 "data-structure/square-root-decomposition.hpp"
 #include <bits/stdc++.h>
 using namespace std;
 
 template <typename MERGE, typename block, int B>
-struct SquareDecomposition {
+struct SquareRootDecomposition {
   int N;
   vector<block> sq;
   MERGE merge;
   typename block::T UNIT;
-  SquareDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
+  SquareRootDecomposition(int N_, MERGE merge_, typename block::T UNIT_)
       : N(N_), sq(N / B + 1), merge(merge_), UNIT(UNIT_) {
     for(int i = 0; i < (int)sq.size(); i++) sq[i].init(i);
   }
@@ -187,7 +187,7 @@ struct SquareDecomposition {
 
 /**
  * @brief 平方分割
- * @docs docs/sqrt-dec.md
+ * @docs docs/data-structure/sqrt-dec.md
  */
 
 ```
