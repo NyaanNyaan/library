@@ -25,15 +25,20 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: math/float-binomial.hpp
+# :heavy_check_mark: math/float-binomial.hpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#7e676e9e663beb40fd133f5ee24487c2">math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/math/float-binomial.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-09-04 23:57:13+09:00
 
 
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-1220.test.cpp.html">verify/verify-yuki/yuki-1220.test.cpp</a>
 
 
 ## Code
@@ -45,22 +50,30 @@ layout: default
 #include <bits/stdc++.h>
 using namespace std;
 
-struct float_bicom {
-  vector<long double> fac;
-  float_bicom(int MAX) {
-    fac.resize(MAX + 1, 0.0);
-    fac[0] = 0.0;
+struct FloatBinomial {
+  vector<long double> fac_;
+  static constexpr long double LOGZERO = -1e10;
+
+  FloatBinomial(int MAX) {
+    fac_.resize(MAX + 1, 0.0);
+    fac_[0] = 0.0;
     for (int i = 1; i <= MAX; i++) {
-      fac[i] = fac[i - 1] + log(i);
+      fac_[i] = fac_[i - 1] + logl(i);
     }
   }
-  long double C(int n, int k) {
-    if (n < k || k < 0 || n < 0) return 0.0;
-    return exp(fac[n] - fac[n - k] - fac[k]);
+
+  long double logfac(int n) const { return fac_[n]; }
+
+  long double logfinv(int n) const { return -fac_[n]; }
+
+  long double logC(int n, int k) const {
+    if (n < k || k < 0 || n < 0) return LOGZERO;
+    return fac_[n] - fac_[n - k] - fac_[k];
   }
-  long double P(int n, int k) {
-    if (n < k || k < 0 || n < 0) return 0.0;
-    return exp(fac[n] - fac[n - k]);
+
+  long double logP(int n, int k) const {
+    if (n < k || k < 0 || n < 0) return LOGZERO;
+    return fac_[n] - fac_[n - k];
   }
 };
 ```
@@ -73,22 +86,30 @@ struct float_bicom {
 #include <bits/stdc++.h>
 using namespace std;
 
-struct float_bicom {
-  vector<long double> fac;
-  float_bicom(int MAX) {
-    fac.resize(MAX + 1, 0.0);
-    fac[0] = 0.0;
+struct FloatBinomial {
+  vector<long double> fac_;
+  static constexpr long double LOGZERO = -1e10;
+
+  FloatBinomial(int MAX) {
+    fac_.resize(MAX + 1, 0.0);
+    fac_[0] = 0.0;
     for (int i = 1; i <= MAX; i++) {
-      fac[i] = fac[i - 1] + log(i);
+      fac_[i] = fac_[i - 1] + logl(i);
     }
   }
-  long double C(int n, int k) {
-    if (n < k || k < 0 || n < 0) return 0.0;
-    return exp(fac[n] - fac[n - k] - fac[k]);
+
+  long double logfac(int n) const { return fac_[n]; }
+
+  long double logfinv(int n) const { return -fac_[n]; }
+
+  long double logC(int n, int k) const {
+    if (n < k || k < 0 || n < 0) return LOGZERO;
+    return fac_[n] - fac_[n - k] - fac_[k];
   }
-  long double P(int n, int k) {
-    if (n < k || k < 0 || n < 0) return 0.0;
-    return exp(fac[n] - fac[n - k]);
+
+  long double logP(int n, int k) const {
+    if (n < k || k < 0 || n < 0) return LOGZERO;
+    return fac_[n] - fac_[n - k];
   }
 };
 

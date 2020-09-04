@@ -126,7 +126,7 @@ layout: default
 * :heavy_check_mark: <a href="library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
 * :warning: <a href="library/math/enamurate-multiplicative-function.hpp.html">math/enamurate-multiplicative-function.hpp</a>
 * :warning: <a href="library/math/f2.hpp.html">math/f2.hpp</a>
-* :warning: <a href="library/math/float-binomial.hpp.html">math/float-binomial.hpp</a>
+* :heavy_check_mark: <a href="library/math/float-binomial.hpp.html">math/float-binomial.hpp</a>
 * :warning: <a href="library/math/gray-code.hpp.html">math/gray-code.hpp</a>
 * :warning: <a href="library/math/grundy-number.hpp.html">math/grundy-number.hpp</a>
 * :heavy_check_mark: <a href="library/math/kth-root-integral.hpp.html">$\mathrm{floor}(a^{\frac{1}{k}})$ <small>(math/kth-root-integral.hpp)</small></a>
@@ -379,6 +379,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1170.test.cpp.html">verify/verify-yuki/yuki-1170.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1220.test.cpp.html">verify/verify-yuki/yuki-1220.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-helloworld.test.cpp.html">verify/verify-yuki/yuki-helloworld.test.cpp</a>
 
 

@@ -160,6 +160,7 @@ layout: default
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 * :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1170.test.cpp.html">verify/verify-yuki/yuki-1170.test.cpp</a>
+* :heavy_check_mark: <a href="../verify/verify/verify-yuki/yuki-1220.test.cpp.html">verify/verify-yuki/yuki-1220.test.cpp</a>
 
 
 ## Code
