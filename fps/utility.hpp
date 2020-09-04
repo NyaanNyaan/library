@@ -1,5 +1,6 @@
 #pragma once
 #include "./formal-power-series.hpp"
+#include "../modulo/binomial.hpp"
 
 template <typename mint>
 FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
@@ -19,4 +20,20 @@ FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
     w.clear();
   }
   return v[0];
+}
+
+template <typename mint>
+void OGFtoEGF(FormalPowerSeries<mint>& f, const Binomial<mint>& C) {
+  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);
+}
+
+template <typename mint>
+void EGFtoOGF(FormalPowerSeries<mint>& f, const Binomial<mint>& C) {
+  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);
+}
+
+template <typename mint>
+FormalPowerSeries<mint> e_x(int deg, const Binomial<mint>& C) {
+  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};
+  return std::move(ret);
 }
