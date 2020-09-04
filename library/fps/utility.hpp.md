@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/utility.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-21 15:57:02+09:00
+    - Last commit date: 2020-09-04 20:05:16+09:00
 
 
 
@@ -39,6 +39,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
+* :heavy_check_mark: <a href="../modulo/binomial.hpp.html">modulo/binomial.hpp</a>
 
 
 ## Verified with
@@ -53,6 +54,7 @@ layout: default
 ```cpp
 #pragma once
 #include "./formal-power-series.hpp"
+#include "../modulo/binomial.hpp"
 
 template <typename mint>
 FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
@@ -72,6 +74,22 @@ FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
     w.clear();
   }
   return v[0];
+}
+
+template <typename mint>
+void OGFtoEGF(FormalPowerSeries<mint>& f, const Binomial<mint>& C) {
+  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);
+}
+
+template <typename mint>
+void EGFtoOGF(FormalPowerSeries<mint>& f, const Binomial<mint>& C) {
+  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);
+}
+
+template <typename mint>
+FormalPowerSeries<mint> e_x(int deg, const Binomial<mint>& C) {
+  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};
+  return std::move(ret);
 }
 
 ```
@@ -263,7 +281,51 @@ void *FormalPowerSeries<mint>::ntt_ptr = nullptr;
  * @brief 多項式/形式的冪級数ライブラリ
  * @docs docs/fps/formal-power-series.md
  */
-#line 3 "fps/utility.hpp"
+#line 3 "modulo/binomial.hpp"
+using namespace std;
+
+template <typename T>
+struct Binomial {
+  vector<T> fac_, finv_, inv_;
+  Binomial(int MAX) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {
+    MAX += 9;
+    fac_[0] = finv_[0] = inv_[0] = 1;
+    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;
+    finv_[MAX] = fac_[MAX].inverse();
+    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);
+    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];
+  }
+
+  inline T fac(int i) const { return fac_[i]; }
+  inline T finv(int i) const { return finv_[i]; }
+  inline T inv(int i) const { return inv_[i]; }
+
+  T C(int n, int r) const {
+    if (n < r || r < 0) return T(0);
+    return fac_[n] * finv_[n - r] * finv_[r];
+  }
+
+  T C_naive(int n, int r) const {
+    if (n < r || r < 0) return T(0);
+    T ret = 1;
+    for (T i = 1; i <= r; i += T(1)) {
+      ret *= n--;
+      ret *= i.inverse();
+    }
+    return ret;
+  }
+
+  T P(int n, int r) const {
+    if (n < r || r < 0) return T(0);
+    return fac_[n] * finv_[n - r];
+  }
+
+  T H(int n, int r) const {
+    if (n < 0 || r < 0) return (0);
+    return r == 0 ? 1 : C(n + r - 1, r);
+  }
+};
+#line 4 "fps/utility.hpp"
 
 template <typename mint>
 FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
@@ -283,6 +345,22 @@ FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
     w.clear();
   }
   return v[0];
+}
+
+template <typename mint>
+void OGFtoEGF(FormalPowerSeries<mint>& f, const Binomial<mint>& C) {
+  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);
+}
+
+template <typename mint>
+void EGFtoOGF(FormalPowerSeries<mint>& f, const Binomial<mint>& C) {
+  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);
+}
+
+template <typename mint>
+FormalPowerSeries<mint> e_x(int deg, const Binomial<mint>& C) {
+  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};
+  return std::move(ret);
 }
 
 ```

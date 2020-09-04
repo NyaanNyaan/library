@@ -43,6 +43,7 @@ layout: default
 * :heavy_check_mark: <a href="../fps/lagrange-interpolation-point.hpp.html">fps/lagrange-interpolation-point.hpp</a>
 * :heavy_check_mark: <a href="../fps/sum-of-exponential-times-poly.hpp.html">$\sum_{i}a^i f(i)$ <small>(fps/sum-of-exponential-times-poly.hpp)</small></a>
 * :heavy_check_mark: <a href="../fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
+* :heavy_check_mark: <a href="../fps/utility.hpp.html">fps/utility.hpp</a>
 
 
 ## Verified with
@@ -53,6 +54,7 @@ layout: default
 * :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
 
 
 ## Code
