@@ -2,21 +2,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct float_bicom {
-  vector<long double> fac;
-  float_bicom(int MAX) {
-    fac.resize(MAX + 1, 0.0);
-    fac[0] = 0.0;
+struct FloatBinomial {
+  vector<long double> fac_;
+  static constexpr long double LOGZERO = -1e10;
+
+  FloatBinomial(int MAX) {
+    fac_.resize(MAX + 1, 0.0);
+    fac_[0] = 0.0;
     for (int i = 1; i <= MAX; i++) {
-      fac[i] = fac[i - 1] + log(i);
+      fac_[i] = fac_[i - 1] + logl(i);
     }
   }
-  long double C(int n, int k) {
-    if (n < k || k < 0 || n < 0) return 0.0;
-    return exp(fac[n] - fac[n - k] - fac[k]);
+
+  long double logfac(int n) const { return fac_[n]; }
+
+  long double logfinv(int n) const { return -fac_[n]; }
+
+  long double logC(int n, int k) const {
+    if (n < k || k < 0 || n < 0) return LOGZERO;
+    return fac_[n] - fac_[n - k] - fac_[k];
   }
-  long double P(int n, int k) {
-    if (n < k || k < 0 || n < 0) return 0.0;
-    return exp(fac[n] - fac[n - k]);
+
+  long double logP(int n, int k) const {
+    if (n < k || k < 0 || n < 0) return LOGZERO;
+    return fac_[n] - fac_[n - k];
   }
 };
