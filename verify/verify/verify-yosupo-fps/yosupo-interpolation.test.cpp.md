@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-interpolation.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-31 22:48:29+09:00
+    - Last commit date: 2020-09-07 01:48:26+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/polynomial_interpolation">https://judge.yosupo.jp/problem/polynomial_interpolation</a>
@@ -42,7 +42,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
-* :heavy_check_mark: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="../../../library/fps/ntt-friendly-fps.hpp.html">NTT mod用FPSライブラリ <small>(fps/ntt-friendly-fps.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/fps/polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>

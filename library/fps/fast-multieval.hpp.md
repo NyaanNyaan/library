@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fast-multieval.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-23 14:53:25+09:00
+    - Last commit date: 2020-09-07 01:48:26+09:00
 
 
 
@@ -39,7 +39,7 @@ layout: default
 ## Depends on
 
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">NTT mod用FPSライブラリ <small>(fps/ntt-friendly-fps.hpp)</small></a>
 * :heavy_check_mark: <a href="../modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
 * :heavy_check_mark: <a href="../ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
@@ -1178,6 +1178,11 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   }
   return fps{begin(b), begin(b) + deg};
 }
+
+/**
+ * @brief NTT mod用FPSライブラリ
+ * @docs docs/fps/ntt-friendly-fps.md
+ */
 #line 4 "fps/fast-multieval.hpp"
 
 template <typename mint>

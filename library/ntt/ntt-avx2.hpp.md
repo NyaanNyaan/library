@@ -45,7 +45,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
 * :warning: <a href="../fps/fast-multieval.hpp.html">fps/fast-multieval.hpp</a>
-* :heavy_check_mark: <a href="../fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="../fps/ntt-friendly-fps.hpp.html">NTT mod用FPSライブラリ <small>(fps/ntt-friendly-fps.hpp)</small></a>
 * :heavy_check_mark: <a href="arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
 * :heavy_check_mark: <a href="../tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
 

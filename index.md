@@ -85,7 +85,7 @@ layout: default
 * :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/lagrange-interpolation-point.hpp.html">fps/lagrange-interpolation-point.hpp</a>
 * :heavy_check_mark: <a href="library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
-* :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">NTT mod用FPSライブラリ <small>(fps/ntt-friendly-fps.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/polynomial-gcd.hpp.html">多項式GCD <small>(fps/polynomial-gcd.hpp)</small></a>
 * :heavy_check_mark: <a href="library/fps/polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
 * :heavy_check_mark: <a href="library/fps/sum-of-exponential-times-poly.hpp.html">$\sum_{i}a^i f(i)$ <small>(fps/sum-of-exponential-times-poly.hpp)</small></a>

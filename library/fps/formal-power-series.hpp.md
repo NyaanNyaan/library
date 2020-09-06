@@ -183,7 +183,7 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 * :heavy_check_mark: <a href="fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
 * :heavy_check_mark: <a href="multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
-* :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">fps/ntt-friendly-fps.hpp</a>
+* :heavy_check_mark: <a href="ntt-friendly-fps.hpp.html">NTT mod用FPSライブラリ <small>(fps/ntt-friendly-fps.hpp)</small></a>
 * :heavy_check_mark: <a href="polynomial-gcd.hpp.html">多項式GCD <small>(fps/polynomial-gcd.hpp)</small></a>
 * :heavy_check_mark: <a href="polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
 * :heavy_check_mark: <a href="taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
