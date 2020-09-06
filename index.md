@@ -132,6 +132,7 @@ layout: default
 * :heavy_check_mark: <a href="library/math/kth-root-integral.hpp.html">$\mathrm{floor}(a^{\frac{1}{k}})$ <small>(math/kth-root-integral.hpp)</small></a>
 * :warning: <a href="library/math/matrix-fast.hpp.html">math/matrix-fast.hpp</a>
 * :warning: <a href="library/math/matrix.hpp.html">math/matrix.hpp</a>
+* :heavy_check_mark: <a href="library/math/nim-product.hpp.html">Nim Product <small>(math/nim-product.hpp)</small></a>
 * :warning: <a href="library/math/prime-counting-faster.hpp.html">math/prime-counting-faster.hpp</a>
 * :heavy_check_mark: <a href="library/math/prime-counting-o2d3.hpp.html">素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ ) <small>(math/prime-counting-o2d3.hpp)</small></a>
 * :heavy_check_mark: <a href="library/math/prime-counting.hpp.html">素数カウント( $\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$ ) <small>(math/prime-counting.hpp)</small></a>
@@ -348,6 +349,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify/verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-log.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-log.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-nim-product.test.cpp.html">verify/verify-yosupo-math/yosupo-nim-product.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-prime-table.test.cpp.html">verify/verify-yosupo-math/yosupo-prime-table.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp.html">verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp</a>
