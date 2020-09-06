@@ -45,11 +45,7 @@ layout: default
 - `ntt-friendly-fps.hpp` $\cdots$ NTT素数mod用の高速な実装を行ったもの。
 - `arbitrary-fps.hpp` $\cdots$ 任意mod畳み込み用の実装を行ったもの。
 
-実装の一部はうしさんのライブラリを大きく参考にしました。感謝…
-
-TODO: 実装していない関数の実装
-
-TODO: invやexpはNTT$\cdot$INTTを利用した高速化があるので実装する
+実装の一部は[うしさんのライブラリ](https://ei1333.github.io/library/library/math/fps/formal-power-series.cpp.html)を大きく参考にしました。感謝…
 
 ### 加算・減算
 
@@ -60,6 +56,8 @@ $\mathrm{O}(N)$
 $h(x)=f(x)g(x)$となる$h(x)$を求める。これはFFT/NTT(FMT)で求められる。$\mathrm{O}(N \log N)$
 
 ### 除算
+
+(注：この項に書かれている除算は多項式としての除算である。)
 
 $f(x) = g(x)q(x) + r(x)$となる多項式$q,r$を求めたい。($f$は$n-1$次、$g$は$m-1$次($n>m$),$q$は$n-m$次とする。)ここで、
 
@@ -119,19 +117,19 @@ $$g\equiv2\hat{g}-f\hat{g}^2 \mod x^{2k}$$
 
 ### log
 
-$f_0 = 1$を満たす$f$について$g\equiv\log f \mod x^n$となる$g$は
+$f_0 = 1$を満たす$f$に対して、$e^f \equiv g \mod x^n$を満たす$g$を$g\equiv\log f \mod x^n$として定義する。この時、$g$は
 
-$$\log f\equiv \int \frac{f'}{f} \mod x^n$$
+$$\log f \equiv \int \frac{f'}{f} \mod x^n$$
 
-から求まる。($g_0 = 0$とすると$x=0$を代入したとき両辺が$0$になるので、積分による定数項周りの心配は不要)
+から求まる。(なお、上の式は一見すると不定積分の定数項のズレが心配に見えるが、$g_0 = 0$とおくと$x=0$を代入したとき両辺が等しくなるので問題ない。)
 
 ### ニュートン法
 
-$G(g) \equiv f \mod x^n$を満たすFPSである$g$を求めたい。普通のニュートン法+ダブリングの要領で
+$G(g) \equiv f \mod x^n$を満たすFPSである$g$を求めたい。$G(\hat{g}) \equiv f \mod x^n$を満たす$\hat{g}$が求まっている時、$\hat{g}$と$g \equiv x^{2n}$の間には次の関係式が従う。
 
 $$g \equiv \hat{g} - \frac{G(\hat{g})-f}{G'(\hat{g})} \mod x^{2n}$$
 
-が従う。(証明は$G(\hat{g})$を$\hat{g}=0$でテイラー展開すると求まる)これを使ってexpを求める。
+証明は$G(\hat{g})$を$\hat{g}=0$でテイラー展開すると求まる。この式を使って$\mathrm{exp}$や$\mathrm{sqrt}$を計算することが出来る。
 
 ### exp
 
@@ -143,13 +141,11 @@ $$\log g \equiv f \mod x^n$$
 
 $$g \equiv \hat{g} - \frac{\log\hat{g}-f}{\log'\hat{g}} \mod x^{2n}$$
 
-$\log' \hat{g}=\frac{1}{\hat{g}}$より
+$\log' \hat{g}\equiv\frac{1}{\hat{g}}$より
 
 $$g\equiv \hat{g}(1-\log \hat{g}+f) \mod x^{2n}$$
 
 となりダブリングで求まる。$\mathrm{O}(N \log N)$ 
-
-modがNTT素数の場合は$\mathrm{O}(N \log^2 N)$の分割統治FFTの方が高速に動作するらしい。(未検証)
 
 ### 累乗
 
@@ -171,9 +167,9 @@ $f$の一番次数の低い項が$a_p x^p \ (p \neq 0)$のときは$\left(\frac{
 
 ### 階差(imos法)/累積和
 
-数列に対して階差を取る(imos法)、あるいはその逆に累積和を取ることを形式的冪級数の数式的な操作に置き換えると、それぞれ$1-x$を掛ける/割る操作に対応している。計算量$\mathrm{O}(N)$
+(関数は未実装)
+数列に対して階差を取る(imos法)、あるいはその逆に累積和を取ることを形式的冪級数の数式的な操作に置き換えると、それぞれ$1-x$を掛ける/割る操作に対応している。計算量はともに$\mathrm{O}(N)$である。
 
-(ただし、除算のアルゴリズムは$x$の降べき順に値を決定するため、$x$の昇べき順に値を決める累積和とは異なるものである。よって累積和を除算を使って求めようとすると$0$次の項が変なことになるので要注意。)
 
 ## Required by
 
