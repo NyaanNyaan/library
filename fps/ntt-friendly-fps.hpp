@@ -141,3 +141,8 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
   }
   return fps{begin(b), begin(b) + deg};
 }
+
+/**
+ * @brief NTT mod用FPSライブラリ
+ * @docs docs/fps/ntt-friendly-fps.md
+ */
