@@ -125,11 +125,27 @@ $$\log f \equiv \int \frac{f'}{f} \mod x^n$$
 
 ### ニュートン法
 
-$G(g) \equiv f \mod x^n$を満たすFPSである$g$を求めたい。$G(\hat{g}) \equiv f \mod x^n$を満たす$\hat{g}$が求まっている時、$\hat{g}$と$g \equiv x^{2n}$の間には次の関係式が従う。
+数値解析におけるニュートン法とは、$f(x)=0$を満たす$x$の値を、漸化式
+
+$$x_{n+1} = x_{n}-\frac{f(x_n)}{f'(x_n)}$$
+
+を利用した反復計算により真の値を得るアルゴリズムであった。このアルゴリズムを形式的冪級数にも応用する。
+
+$G(g) \equiv f \mod x^n$を満たす形式的冪級数$g$を求めたい。$G(\hat{g}) \equiv f \mod x^n$を満たす$\hat{g}$が求まっている時、$\hat{g}$と$g \mod x^{2n}$の間に成り立つ関係式を考える。
+
+$G(g)$の$g = \hat{g}$におけるテイラー展開の式は
+
+$$G(g) = G(\hat{g}) + G'(\hat{g})(g-\hat{g})+\mathrm{O}((g-\hat{g})^2)$$
+
+となるが、$g - \hat{g} \equiv 0 \mod x$なので形式的冪級数を考えてもよい。辺々$\mod x^{2n}$を取ると、$(g-\hat{g})^2 \equiv 0 \mod x ^{2n}$より
+
+$$G(g) \equiv f \equiv G(\hat{g}) + G'(\hat{g})(g-\hat{g}) \mod x^{2n}$$
+
+であり、これをさらに変形して
 
 $$g \equiv \hat{g} - \frac{G(\hat{g})-f}{G'(\hat{g})} \mod x^{2n}$$
 
-証明は$G(\hat{g})$を$\hat{g}=0$でテイラー展開すると求まる。この式を使って$\mathrm{exp}$や$\mathrm{sqrt}$を計算することが出来る。
+を得る。この式を使って$\mathrm{exp}$や$\mathrm{sqrt}$を計算することが出来る。
 
 ### exp
 
