@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#350dfa5f4985bc48300c39d2bca2b63d">verify/verify-yosupo-ds</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 15:08:31+09:00
+    - Last commit date: 2020-09-08 23:53:33+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/range_affine_range_sum">https://judge.yosupo.jp/problem/range_affine_range_sum</a>
@@ -540,6 +540,7 @@ struct LST {
     while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1) | 1));
   }
   void update(int a, int b, E x) {
+    if (a >= b) return;
     thrust(a += n);
     thrust(b += n - 1);
     for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {
@@ -556,6 +557,7 @@ struct LST {
     recalc(a);
   }
   T query(int a, int b) {
+    if (a >= b) return ti;
     thrust(a += n);
     thrust(b += n - 1);
     T vl = ti, vr = ti;

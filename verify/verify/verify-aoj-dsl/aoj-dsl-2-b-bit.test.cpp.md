@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#d06e9a54f52c77c0ad2ba3a0600eaa96">verify/verify-aoj-dsl</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-01 13:37:43+09:00
+    - Last commit date: 2020-09-08 23:53:33+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
@@ -390,8 +390,8 @@ struct BinaryIndexedTree {
   vector<T> data;
 
   BinaryIndexedTree(int size) {
-    N = ++size;
-    data.assign(N + 3, 0);
+    N = size + 3;
+    data.assign(N + 1, 0);
     max_2beki = 1;
     while (max_2beki * 2 <= N) max_2beki *= 2;
   }

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#36397fe12f935090ad150c6ce0c258d4">data-structure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/data-structure/binary-indexed-tree.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-09-08 23:53:33+09:00
 
 
 
@@ -66,8 +66,8 @@ struct BinaryIndexedTree {
   vector<T> data;
 
   BinaryIndexedTree(int size) {
-    N = ++size;
-    data.assign(N + 3, 0);
+    N = size + 3;
+    data.assign(N + 1, 0);
     max_2beki = 1;
     while (max_2beki * 2 <= N) max_2beki *= 2;
   }
@@ -140,8 +140,8 @@ struct BinaryIndexedTree {
   vector<T> data;
 
   BinaryIndexedTree(int size) {
-    N = ++size;
-    data.assign(N + 3, 0);
+    N = size + 3;
+    data.assign(N + 1, 0);
     max_2beki = 1;
     while (max_2beki * 2 <= N) max_2beki *= 2;
   }
