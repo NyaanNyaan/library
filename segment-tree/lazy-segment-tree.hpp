@@ -51,6 +51,7 @@ struct LST {
     while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1) | 1));
   }
   void update(int a, int b, E x) {
+    if (a >= b) return;
     thrust(a += n);
     thrust(b += n - 1);
     for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {
@@ -67,6 +68,7 @@ struct LST {
     recalc(a);
   }
   T query(int a, int b) {
+    if (a >= b) return ti;
     thrust(a += n);
     thrust(b += n - 1);
     T vl = ti, vr = ti;

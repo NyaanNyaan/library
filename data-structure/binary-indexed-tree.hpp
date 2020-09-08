@@ -9,8 +9,8 @@ struct BinaryIndexedTree {
   vector<T> data;
 
   BinaryIndexedTree(int size) {
-    N = ++size;
-    data.assign(N + 3, 0);
+    N = size + 3;
+    data.assign(N + 1, 0);
     max_2beki = 1;
     while (max_2beki * 2 <= N) max_2beki *= 2;
   }
