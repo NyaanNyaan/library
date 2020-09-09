@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :warning: atcoder/two-sat.hpp
+# :heavy_check_mark: atcoder/two-sat.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,12 @@ layout: default
 
 ## Depends on
 
-* :warning: <a href="internal_scc.hpp.html">atcoder/internal_scc.hpp</a>
+* :heavy_check_mark: <a href="internal_scc.hpp.html">atcoder/internal_scc.hpp</a>
+
+
+## Verified with
+
+* :heavy_check_mark: <a href="../../verify/verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp.html">verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp</a>
 
 
 ## Code

@@ -48,11 +48,11 @@ layout: default
 ### atcoder
 
 * :heavy_check_mark: <a href="library/atcoder/internal_queue.hpp.html">atcoder/internal_queue.hpp</a>
-* :warning: <a href="library/atcoder/internal_scc.hpp.html">atcoder/internal_scc.hpp</a>
+* :heavy_check_mark: <a href="library/atcoder/internal_scc.hpp.html">atcoder/internal_scc.hpp</a>
 * :heavy_check_mark: <a href="library/atcoder/maxflow.hpp.html">atcoder/maxflow.hpp</a>
 * :warning: <a href="library/atcoder/mincostflow.hpp.html">atcoder/mincostflow.hpp</a>
-* :warning: <a href="library/atcoder/scc.hpp.html">atcoder/scc.hpp</a>
-* :warning: <a href="library/atcoder/two-sat.hpp.html">atcoder/two-sat.hpp</a>
+* :heavy_check_mark: <a href="library/atcoder/scc.hpp.html">atcoder/scc.hpp</a>
+* :heavy_check_mark: <a href="library/atcoder/two-sat.hpp.html">atcoder/two-sat.hpp</a>
 
 
 <div id="36397fe12f935090ad150c6ce0c258d4"></div>
@@ -358,6 +358,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp.html">verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp.html">verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp.html">verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp.html">verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp.html">verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp.html">verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp</a>
@@ -376,6 +377,7 @@ layout: default
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp.html">verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp</a>
+* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp.html">verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-two-sat.test.cpp.html">verify/verify-yosupo-math/yosupo-two-sat.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp</a>
 * :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
