@@ -2,8 +2,8 @@
 #include "../modint/arbitrary-prime-modint.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
-  if (a == 0) return 0;
-  if (p == 2) return a;
+  assert(0 <= a && a < p);
+  if (a < 2) return a;
   using mint = ArbitraryLazyMontgomeryModInt;
   mint::set_mod(p);
   if (mint(a).pow((p - 1) >> 1) != 1) return -1;
@@ -30,3 +30,8 @@ int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   }
   return x.get();
 }
+
+/**
+ * @brief mod sqrt(Tonelli-Shanks algorithm)
+ * @docs docs/modulo/mod-sqrt.md
+ */
