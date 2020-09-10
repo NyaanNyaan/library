@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#17f17e0bbb64138c9a2bbb0627c5fef6">verify/verify-yosupo-fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-07 01:48:26+09:00
+    - Last commit date: 2020-09-10 23:36:22+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sqrt_of_formal_power_series">https://judge.yosupo.jp/problem/sqrt_of_formal_power_series</a>
@@ -46,7 +46,7 @@ layout: default
 * :heavy_check_mark: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulo/mod-sqrt.hpp.html">mod sqrt(Tonelli-Shanks algorithm) <small>(modulo/mod-sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="../../../library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
 
 
@@ -1552,8 +1552,8 @@ typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
 #line 3 "modulo/mod-sqrt.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
-  if (a == 0) return 0;
-  if (p == 2) return a;
+  assert(0 <= a && a < p);
+  if (a < 2) return a;
   using mint = ArbitraryLazyMontgomeryModInt;
   mint::set_mod(p);
   if (mint(a).pow((p - 1) >> 1) != 1) return -1;
@@ -1580,6 +1580,11 @@ int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   }
   return x.get();
 }
+
+/**
+ * @brief mod sqrt(Tonelli-Shanks algorithm)
+ * @docs docs/modulo/mod-sqrt.md
+ */
 #line 4 "fps/fps-sqrt.hpp"
 
 template <typename mint>

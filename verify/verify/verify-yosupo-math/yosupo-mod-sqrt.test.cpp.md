@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#7298ccfe146a0dd6796a2b3f9ffabb95">verify/verify-yosupo-math</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-05 01:10:03+09:00
+    - Last commit date: 2020-09-10 23:36:22+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/sqrt_mod">https://judge.yosupo.jp/problem/sqrt_mod</a>
@@ -41,7 +41,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../../../library/competitive-template.hpp.html">competitive-template.hpp</a>
 * :heavy_check_mark: <a href="../../../library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :heavy_check_mark: <a href="../../../library/modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+* :heavy_check_mark: <a href="../../../library/modulo/mod-sqrt.hpp.html">mod sqrt(Tonelli-Shanks algorithm) <small>(modulo/mod-sqrt.hpp)</small></a>
 
 
 ## Code
@@ -476,8 +476,8 @@ typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
 #line 3 "modulo/mod-sqrt.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
-  if (a == 0) return 0;
-  if (p == 2) return a;
+  assert(0 <= a && a < p);
+  if (a < 2) return a;
   using mint = ArbitraryLazyMontgomeryModInt;
   mint::set_mod(p);
   if (mint(a).pow((p - 1) >> 1) != 1) return -1;
@@ -504,6 +504,11 @@ int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   }
   return x.get();
 }
+
+/**
+ * @brief mod sqrt(Tonelli-Shanks algorithm)
+ * @docs docs/modulo/mod-sqrt.md
+ */
 #line 5 "verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp"
 
 void solve() {

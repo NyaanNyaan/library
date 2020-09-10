@@ -40,7 +40,7 @@ layout: default
 
 * :heavy_check_mark: <a href="../fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
 * :heavy_check_mark: <a href="../math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
-* :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+* :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">mod sqrt(Tonelli-Shanks algorithm) <small>(modulo/mod-sqrt.hpp)</small></a>
 
 
 ## Verified with

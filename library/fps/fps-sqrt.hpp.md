@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#05934928102b17827b8f03ed60c3e6e0">fps</a>
 * <a href="{{ site.github.repository_url }}/blob/master/fps/fps-sqrt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-30 23:52:50+09:00
+    - Last commit date: 2020-09-10 23:36:22+09:00
 
 
 
@@ -63,7 +63,7 @@ $$\leftrightarrow g \equiv \frac{1}{2}\left(\hat{g}+\frac{f}{\hat{g}}\right) \mo
 
 * :heavy_check_mark: <a href="formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
 * :heavy_check_mark: <a href="../modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">modulo/mod-sqrt.hpp</a>
+* :heavy_check_mark: <a href="../modulo/mod-sqrt.hpp.html">mod sqrt(Tonelli-Shanks algorithm) <small>(modulo/mod-sqrt.hpp)</small></a>
 
 
 ## Verified with
@@ -410,8 +410,8 @@ typename ArbitraryLazyMontgomeryModInt::u32 ArbitraryLazyMontgomeryModInt::n2;
 #line 3 "modulo/mod-sqrt.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
-  if (a == 0) return 0;
-  if (p == 2) return a;
+  assert(0 <= a && a < p);
+  if (a < 2) return a;
   using mint = ArbitraryLazyMontgomeryModInt;
   mint::set_mod(p);
   if (mint(a).pow((p - 1) >> 1) != 1) return -1;
@@ -438,6 +438,11 @@ int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   }
   return x.get();
 }
+
+/**
+ * @brief mod sqrt(Tonelli-Shanks algorithm)
+ * @docs docs/modulo/mod-sqrt.md
+ */
 #line 4 "fps/fps-sqrt.hpp"
 
 template <typename mint>
