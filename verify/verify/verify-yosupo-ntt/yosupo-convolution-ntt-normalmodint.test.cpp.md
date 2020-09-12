@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#011eb2a53bd4e154f230a822c229c9cb">verify/verify-yosupo-ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-02 17:27:04+09:00
+    - Last commit date: 2020-09-12 22:28:25+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod">https://judge.yosupo.jp/problem/convolution_mod</a>
@@ -611,6 +611,10 @@ struct NTT {
       }
     }
   }
+
+  void ntt(vector<mint> &a) { fft4(a, __builtin_ctz(a.size())); }
+
+  void intt(vector<mint> &a) { ifft4(a, __builtin_ctz(a.size())); }
 
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
     int l = a.size() + b.size() - 1;

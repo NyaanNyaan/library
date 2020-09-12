@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#ccb3669c87b2d028539237c4554e3c0f">ntt</a>
 * <a href="{{ site.github.repository_url }}/blob/master/ntt/ntt.hpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-28 11:29:32+09:00
+    - Last commit date: 2020-09-12 22:28:25+09:00
 
 
 
@@ -205,6 +205,10 @@ struct NTT {
       }
     }
   }
+
+  void ntt(vector<mint> &a) { fft4(a, __builtin_ctz(a.size())); }
+
+  void intt(vector<mint> &a) { ifft4(a, __builtin_ctz(a.size())); }
 
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
     int l = a.size() + b.size() - 1;
@@ -394,6 +398,10 @@ struct NTT {
       }
     }
   }
+
+  void ntt(vector<mint> &a) { fft4(a, __builtin_ctz(a.size())); }
+
+  void intt(vector<mint> &a) { ifft4(a, __builtin_ctz(a.size())); }
 
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
     int l = a.size() + b.size() - 1;
