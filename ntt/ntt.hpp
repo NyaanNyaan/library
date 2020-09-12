@@ -157,6 +157,10 @@ struct NTT {
     }
   }
 
+  void ntt(vector<mint> &a) { fft4(a, __builtin_ctz(a.size())); }
+
+  void intt(vector<mint> &a) { ifft4(a, __builtin_ctz(a.size())); }
+
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
     int l = a.size() + b.size() - 1;
     if (min<int>(a.size(), b.size()) <= 40) {
