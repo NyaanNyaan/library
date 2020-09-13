@@ -38,6 +38,7 @@ layout: default
 
 ### .
 
+* :warning: <a href="library/a.py.html">a.py</a>
 * :warning: <a href="library/arbitrary-length-test.cpp.html">arbitrary-length-test.cpp</a>
 * :warning: <a href="library/bundle.py.html">bundle.py</a>
 * :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
@@ -271,6 +272,7 @@ layout: default
 
 ### unused/python
 
+* :warning: <a href="library/unused/python/fastio.py.html">unused/python/fastio.py</a>
 * :warning: <a href="library/unused/python/ntt-numba.py.html">unused/python/ntt-numba.py</a>
 * :warning: <a href="library/unused/python/ntt.py.html">unused/python/ntt.py</a>
 * :warning: <a href="library/unused/python/segtree-immutable.py.html">unused/python/segtree-immutable.py</a>
