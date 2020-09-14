@@ -72,5 +72,17 @@
     "limits": "cpp",
     "typeinfo": "cpp"
   },
-  "C_Cpp.suggestSnippets": false
+  "C_Cpp.suggestSnippets": false,
+  "python.linting.enabled": true,
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": [
+    "--indent-size=2",
+    "--ignore=E111, E114, E402, E501"
+  ],
+  "[python]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+  }
 }
