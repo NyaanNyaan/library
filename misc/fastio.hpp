@@ -76,9 +76,25 @@ inline void wt(T x) {
     x /= 10000;
     i -= 4;
   }
-  int d = x < 100 ? (x < 10 ? 1 : 2) : (x < 1000 ? 3 : 4);
-  memcpy(obuf + por, pre.num + x * 4 + 4 - d, d);
-  por += d;
+  if (x < 100) {
+    if (x < 10) {
+      wt(char('0' + char(x)));
+    } else {
+      uint32_t q = (uint32_t(x) * 205) >> 11;
+      uint32_t r = uint32_t(x) - q * 10;
+      obuf[por + 0] = '0' + q;
+      obuf[por + 1] = '0' + r;
+      por += 2;
+    }
+  } else {
+    if (x < 1000) {
+      memcpy(obuf + por, pre.num + (x << 2) + 1, 3);
+      por += 3;
+    } else {
+      memcpy(obuf + por, pre.num + (x << 2), 4);
+      por += 4;
+    }
+  }
   memcpy(obuf + por, buf + i + 4, 12 - i);
   por += 12 - i;
 }
@@ -89,8 +105,8 @@ inline void wt(Head head, Tail... tail) {
   wt(head);
   wt(tail...);
 }
-template<typename T>
-inline void wtn(T x){
+template <typename T>
+inline void wtn(T x) {
   wt(x, '\n');
 }
 
