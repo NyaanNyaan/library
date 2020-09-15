@@ -1,411 +1,865 @@
 ---
-layout: default
+data:
+  libraryCategories:
+  - name: atcoder
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: atcoder/internal_queue.hpp
+      title: atcoder/internal_queue.hpp
+    - icon: ':heavy_check_mark:'
+      path: atcoder/internal_scc.hpp
+      title: atcoder/internal_scc.hpp
+    - icon: ':heavy_check_mark:'
+      path: atcoder/maxflow.hpp
+      title: atcoder/maxflow.hpp
+    - icon: ':warning:'
+      path: atcoder/mincostflow.hpp
+      title: atcoder/mincostflow.hpp
+    - icon: ':heavy_check_mark:'
+      path: atcoder/scc.hpp
+      title: atcoder/scc.hpp
+    - icon: ':heavy_check_mark:'
+      path: atcoder/two-sat.hpp
+      title: atcoder/two-sat.hpp
+  - name: .
+    pages:
+    - icon: ':warning:'
+      path: bundle.py
+      title: bundle.py
+    - icon: ':heavy_check_mark:'
+      path: competitive-template.hpp
+      title: competitive-template.hpp
+  - name: data-structure
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: data-structure/2d-binary-indexed-tree.hpp
+      title: data-structure/2d-binary-indexed-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/2d-cumulative-sum.hpp
+      title: data-structure/2d-cumulative-sum.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/binary-indexed-tree.hpp
+      title: data-structure/binary-indexed-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/binary-trie.hpp
+      title: Binary Trie
+    - icon: ':warning:'
+      path: data-structure/dynamic-binary-indexed-tree.hpp
+      title: data-structure/dynamic-binary-indexed-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/dynamic-union-find.hpp
+      title: data-structure/dynamic-union-find.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/persistent-array.hpp
+      title: "\u6C38\u7D9A\u914D\u5217"
+    - icon: ':heavy_check_mark:'
+      path: data-structure/persistent-queue.hpp
+      title: data-structure/persistent-queue.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/persistent-union-find.hpp
+      title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
+    - icon: ':warning:'
+      path: data-structure/randomized-binary-search-tree.hpp
+      title: data-structure/randomized-binary-search-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/range-sum-range-add-bit.hpp
+      title: data-structure/range-sum-range-add-bit.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/range-union-find.hpp
+      title: data-structure/range-union-find.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/rectangle-sum.hpp
+      title: data-structure/rectangle-sum.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/slide-window-aggregation.hpp
+      title: data-structure/slide-window-aggregation.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/sliding-window-minimum.hpp
+      title: data-structure/sliding-window-minimum.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/sparse-table.hpp
+      title: data-structure/sparse-table.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/square-root-decomposition.hpp
+      title: "\u5E73\u65B9\u5206\u5272"
+    - icon: ':heavy_check_mark:'
+      path: data-structure/union-find-with-potential.hpp
+      title: data-structure/union-find-with-potential.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure/union-find.hpp
+      title: data-structure/union-find.hpp
+  - name: flow
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: flow/flow-on-bipartite-graph.hpp
+      title: flow/flow-on-bipartite-graph.hpp
+  - name: fps
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: fps/arbitrary-fps.hpp
+      title: fps/arbitrary-fps.hpp
+    - icon: ':heavy_check_mark:'
+      path: fps/berlekamp-massey.hpp
+      title: fps/berlekamp-massey.hpp
+    - icon: ':heavy_check_mark:'
+      path: fps/differential-equation.hpp
+      title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
+    - icon: ':warning:'
+      path: fps/famous-series.hpp
+      title: fps/famous-series.hpp
+    - icon: ':warning:'
+      path: fps/fast-multieval.hpp
+      title: fps/fast-multieval.hpp
+    - icon: ':heavy_check_mark:'
+      path: fps/formal-power-series.hpp
+      title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
+        \u30E9\u30EA"
+    - icon: ':heavy_check_mark:'
+      path: fps/fps-circular.hpp
+      title: "\u4E09\u89D2\u95A2\u6570"
+    - icon: ':warning:'
+      path: fps/fps-composition-fast.hpp
+      title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
+    - icon: ':heavy_check_mark:'
+      path: fps/fps-composition.hpp
+      title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
+        right)$ )"
+    - icon: ':heavy_check_mark:'
+      path: fps/fps-sqrt.hpp
+      title: "\u5E73\u65B9\u6839"
+    - icon: ':heavy_check_mark:'
+      path: fps/kitamasa.hpp
+      title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
+    - icon: ':heavy_check_mark:'
+      path: fps/lagrange-interpolation-point.hpp
+      title: fps/lagrange-interpolation-point.hpp
+    - icon: ':heavy_check_mark:'
+      path: fps/multipoint-evaluation.hpp
+      title: fps/multipoint-evaluation.hpp
+    - icon: ':heavy_check_mark:'
+      path: fps/ntt-friendly-fps.hpp
+      title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
+    - icon: ':heavy_check_mark:'
+      path: fps/polynomial-gcd.hpp
+      title: "\u591A\u9805\u5F0FGCD"
+    - icon: ':heavy_check_mark:'
+      path: fps/polynomial-interpolation.hpp
+      title: fps/polynomial-interpolation.hpp
+    - icon: ':heavy_check_mark:'
+      path: fps/sum-of-exponential-times-poly.hpp
+      title: $\sum_{i}a^i f(i)$
+    - icon: ':heavy_check_mark:'
+      path: fps/taylor-shift.hpp
+      title: "\u5E73\u884C\u79FB\u52D5"
+    - icon: ':heavy_check_mark:'
+      path: fps/utility.hpp
+      title: fps/utility.hpp
+  - name: geometry
+    pages:
+    - icon: ':warning:'
+      path: geometry/geometry.hpp
+      title: geometry/geometry.hpp
+    - icon: ':heavy_check_mark:'
+      path: geometry/integer-geometry.hpp
+      title: geometry/integer-geometry.hpp
+  - name: graph
+    pages:
+    - icon: ':warning:'
+      path: graph/add-range-edge.hpp
+      title: graph/add-range-edge.hpp
+    - icon: ':warning:'
+      path: graph/cycle-detection.hpp
+      title: graph/cycle-detection.hpp
+    - icon: ':warning:'
+      path: graph/dimension-expanded-graph.hpp
+      title: graph/dimension-expanded-graph.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/graph-template.hpp
+      title: graph/graph-template.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/graph-utility.hpp
+      title: graph/graph-utility.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/kruskal.hpp
+      title: graph/kruskal.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/lowlink.hpp
+      title: graph/lowlink.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/max-independent-set.hpp
+      title: graph/max-independent-set.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/strongly-connected-components.hpp
+      title: graph/strongly-connected-components.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/topological-sort.hpp
+      title: graph/topological-sort.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/two-edge-connected-components.hpp
+      title: graph/two-edge-connected-components.hpp
+  - name: math
+    pages:
+    - icon: ':warning:'
+      path: math/divisor-multiple-transform.hpp
+      title: math/divisor-multiple-transform.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/elementary-function.hpp
+      title: math/elementary-function.hpp
+    - icon: ':warning:'
+      path: math/enamurate-multiplicative-function.hpp
+      title: math/enamurate-multiplicative-function.hpp
+    - icon: ':warning:'
+      path: math/f2.hpp
+      title: math/f2.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/float-binomial.hpp
+      title: math/float-binomial.hpp
+    - icon: ':warning:'
+      path: math/gray-code.hpp
+      title: math/gray-code.hpp
+    - icon: ':warning:'
+      path: math/grundy-number.hpp
+      title: math/grundy-number.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/kth-root-integral.hpp
+      title: $\mathrm{floor}(a^{\frac{1}{k}})$
+    - icon: ':warning:'
+      path: math/matrix-fast.hpp
+      title: math/matrix-fast.hpp
+    - icon: ':warning:'
+      path: math/matrix.hpp
+      title: math/matrix.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/nim-product.hpp
+      title: Nim Product
+    - icon: ':warning:'
+      path: math/prime-counting-faster.hpp
+      title: math/prime-counting-faster.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/prime-counting-o2d3.hpp
+      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
+        \ )"
+    - icon: ':heavy_check_mark:'
+      path: math/prime-counting.hpp
+      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
+        log N})$ )"
+    - icon: ':heavy_check_mark:'
+      path: math/prime-factor.hpp
+      title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+    - icon: ':heavy_check_mark:'
+      path: math/prime-table.hpp
+      title: math/prime-table.hpp
+    - icon: ':warning:'
+      path: math/rational-number.hpp
+      title: math/rational-number.hpp
+    - icon: ':warning:'
+      path: math/semiring.hpp
+      title: math/semiring.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/subset-convolution.hpp
+      title: Subset Convolution
+    - icon: ':heavy_check_mark:'
+      path: math/sum-of-multiplicative-function.hpp
+      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
+    - icon: ':heavy_check_mark:'
+      path: math/sum_of_floor.hpp
+      title: math/sum_of_floor.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/two-sat.hpp
+      title: 2-SAT
+    - icon: ':warning:'
+      path: math/walsh-hadamard-transform.hpp
+      title: math/walsh-hadamard-transform.hpp
+    - icon: ':warning:'
+      path: math/zeta-mobius-transform.hpp
+      title: math/zeta-mobius-transform.hpp
+  - name: misc
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: misc/compress.hpp
+      title: misc/compress.hpp
+    - icon: ':heavy_check_mark:'
+      path: misc/fastio.hpp
+      title: misc/fastio.hpp
+    - icon: ':warning:'
+      path: misc/fixpoint.hpp
+      title: misc/fixpoint.hpp
+    - icon: ':heavy_check_mark:'
+      path: misc/mo.hpp
+      title: misc/mo.hpp
+    - icon: ':heavy_check_mark:'
+      path: misc/rng.hpp
+      title: misc/rng.hpp
+    - icon: ':warning:'
+      path: misc/simulated-annealing.hpp
+      title: misc/simulated-annealing.hpp
+    - icon: ':warning:'
+      path: misc/timer.hpp
+      title: misc/timer.hpp
+  - name: modint
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: modint/arbitrary-modint.hpp
+      title: modint/arbitrary-modint.hpp
+    - icon: ':heavy_check_mark:'
+      path: modint/arbitrary-prime-modint.hpp
+      title: modint/arbitrary-prime-modint.hpp
+    - icon: ':heavy_check_mark:'
+      path: modint/modint-montgomery64.hpp
+      title: modint/modint-montgomery64.hpp
+    - icon: ':heavy_check_mark:'
+      path: modint/modint.hpp
+      title: modint/modint.hpp
+    - icon: ':heavy_check_mark:'
+      path: modint/montgomery-modint.hpp
+      title: modint/montgomery-modint.hpp
+    - icon: ':heavy_check_mark:'
+      path: modint/simd-montgomery.hpp
+      title: modint/simd-montgomery.hpp
+  - name: modulo
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: modulo/binomial.hpp
+      title: modulo/binomial.hpp
+    - icon: ':heavy_check_mark:'
+      path: modulo/gauss-elimination.hpp
+      title: modulo/gauss-elimination.hpp
+    - icon: ':heavy_check_mark:'
+      path: modulo/mod-log.hpp
+      title: modulo/mod-log.hpp
+    - icon: ':heavy_check_mark:'
+      path: modulo/mod-sqrt.hpp
+      title: mod sqrt(Tonelli-Shanks algorithm)
+    - icon: ':warning:'
+      path: modulo/strassen.hpp
+      title: modulo/strassen.hpp
+    - icon: ':heavy_check_mark:'
+      path: modulo/tetration.hpp
+      title: tetration
+  - name: ntt
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: ntt/arbitrary-ntt.hpp
+      title: ntt/arbitrary-ntt.hpp
+    - icon: ':heavy_check_mark:'
+      path: ntt/cooley-turkey-ntt.hpp
+      title: ntt/cooley-turkey-ntt.hpp
+    - icon: ':heavy_check_mark:'
+      path: ntt/ntt-avx2.hpp
+      title: ntt/ntt-avx2.hpp
+    - icon: ':heavy_check_mark:'
+      path: ntt/ntt-sse42.hpp
+      title: ntt/ntt-sse42.hpp
+    - icon: ':heavy_check_mark:'
+      path: ntt/ntt.hpp
+      title: ntt/ntt.hpp
+  - name: segment-tree
+    pages:
+    - icon: ':warning:'
+      path: segment-tree/dynamic-li-chao-tree.hpp
+      title: segment-tree/dynamic-li-chao-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/dynamic-segment-tree.hpp
+      title: segment-tree/dynamic-segment-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/lazy-segment-tree.hpp
+      title: segment-tree/lazy-segment-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/li-chao-tree.hpp
+      title: segment-tree/li-chao-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/persistent-segment-tree.hpp
+      title: "\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/range-add-range-max-lazyseg.hpp
+      title: segment-tree/range-add-range-max-lazyseg.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/range-add-range-min-lazyseg.hpp
+      title: segment-tree/range-add-range-min-lazyseg.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/range-add-range-sum-lazyseg.hpp
+      title: segment-tree/range-add-range-sum-lazyseg.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/range-update-range-max-lazyseg.hpp
+      title: segment-tree/range-update-range-max-lazyseg.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/range-update-range-min-lazyseg.hpp
+      title: segment-tree/range-update-range-min-lazyseg.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/range-update-range-sum-lazyseg.hpp
+      title: segment-tree/range-update-range-sum-lazyseg.hpp
+    - icon: ':warning:'
+      path: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
+      title: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
+    - icon: ':heavy_check_mark:'
+      path: segment-tree/segment-tree.hpp
+      title: segment-tree/segment-tree.hpp
+  - name: shortest-path
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: shortest-path/bellman-ford.hpp
+      title: shortest-path/bellman-ford.hpp
+    - icon: ':heavy_check_mark:'
+      path: shortest-path/dijkstra.hpp
+      title: shortest-path/dijkstra.hpp
+    - icon: ':heavy_check_mark:'
+      path: shortest-path/restore-shortest-path.hpp
+      title: shortest-path/restore-shortest-path.hpp
+    - icon: ':heavy_check_mark:'
+      path: shortest-path/warshall-floyd.hpp
+      title: shortest-path/warshall-floyd.hpp
+  - name: string
+    pages:
+    - icon: ':warning:'
+      path: string/rolling-hash.hpp
+      title: string/rolling-hash.hpp
+    - icon: ':warning:'
+      path: string/run-length-encoding.hpp
+      title: string/run-length-encoding.hpp
+    - icon: ':warning:'
+      path: string/subsequence-dp.hpp
+      title: string/subsequence-dp.hpp
+    - icon: ':heavy_check_mark:'
+      path: string/suffix-array.hpp
+      title: string/suffix-array.hpp
+  - name: tree
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: tree/cartesian-tree.hpp
+      title: tree/cartesian-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: tree/centroid-decomposition.hpp
+      title: tree/centroid-decomposition.hpp
+    - icon: ':warning:'
+      path: tree/dsu-on-tree.hpp
+      title: tree/dsu-on-tree.hpp
+    - icon: ':warning:'
+      path: tree/euler-tour.hpp
+      title: tree/euler-tour.hpp
+    - icon: ':heavy_check_mark:'
+      path: tree/frequency-table-of-tree-distance.hpp
+      title: tree/frequency-table-of-tree-distance.hpp
+    - icon: ':heavy_check_mark:'
+      path: tree/heavy-light-decomposition.hpp
+      title: tree/heavy-light-decomposition.hpp
+    - icon: ':heavy_check_mark:'
+      path: tree/rerooting.hpp
+      title: tree/rerooting.hpp
+  - name: unused/python
+    pages:
+    - icon: ':warning:'
+      path: unused/python/fastio.py
+      title: unused/python/fastio.py
+    - icon: ':warning:'
+      path: unused/python/ntt-numba.py
+      title: unused/python/ntt-numba.py
+    - icon: ':warning:'
+      path: unused/python/ntt.py
+      title: unused/python/ntt.py
+    - icon: ':warning:'
+      path: unused/python/segtree-immutable.py
+      title: unused/python/segtree-immutable.py
+    - icon: ':warning:'
+      path: unused/python/segtree-mutable.py
+      title: unused/python/segtree-mutable.py
+    - icon: ':warning:'
+      path: unused/python/tuning_optuna.py
+      title: unused/python/tuning_optuna.py
+  verificationCategories:
+  - name: verify/verify-aoj-dsl
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
+  - name: verify/verify-aoj-grl
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - name: verify/verify-aoj-ntl
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
+  - name: verify/verify-yosupo-ds
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - name: verify/verify-yosupo-fps
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-log.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-log.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - name: verify/verify-yosupo-graph
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+  - name: verify/verify-yosupo-math
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
+      title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
+      title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-factrization.test.cpp
+      title: verify/verify-yosupo-math/yosupo-factrization.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+      title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+      title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+      title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+      title: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+      title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+      title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
+      title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+      title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
+      title: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
+      title: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+      title: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
+      title: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+      title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+  - name: verify/verify-yosupo-ntt
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+  - name: verify/verify-yosupo-other
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
+      title: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
+      title: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+      title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
+      title: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+      title: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+      title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+  - name: verify/verify-yuki
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0214.test.cpp
+      title: verify/verify-yuki/yuki-0214.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0215.test.cpp
+      title: verify/verify-yuki/yuki-0215.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0789.test.cpp
+      title: verify/verify-yuki/yuki-0789.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+      title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0963-circular.test.cpp
+      title: verify/verify-yuki/yuki-0963-circular.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0963.test.cpp
+      title: verify/verify-yuki/yuki-0963.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1080.test.cpp
+      title: verify/verify-yuki/yuki-1080.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1145.test.cpp
+      title: verify/verify-yuki/yuki-1145.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1170.test.cpp
+      title: verify/verify-yuki/yuki-1170.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1220.test.cpp
+      title: verify/verify-yuki/yuki-1220.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-helloworld.test.cpp
+      title: verify/verify-yuki/yuki-helloworld.test.cpp
+layout: toppage
 ---
-
-<!-- mathjax config similar to math.stackexchange -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: { equationNumbers: { autoNumber: "AMS" }},
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { matchFontHeight: false },
-    displayAlign: "left",
-    displayIndent: "2em"
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="assets/css/copy-button.css" />
-
-
-# {{ site.title }}
-
-[![Actions Status]({{ site.github.repository_url }}/workflows/verify/badge.svg)]({{ site.github.repository_url }}/actions)
-<a href="{{ site.github.repository_url }}"><img src="https://img.shields.io/github/last-commit/{{ site.github.owner_name }}/{{ site.github.repository_name }}" /></a>
-
-{% if site.github.project_tagline %}{{ site.github.project_tagline }}{% else %}This documentation is automatically generated by <a href="https://github.com/online-judge-tools/verification-helper">online-judge-tools/verification-helper</a>.{% endif %}
-
-## Library Files
-
-<div id="5058f1af8388633f609cadb75a75dc9d"></div>
-
-### .
-
-* :warning: <a href="library/a.py.html">a.py</a>
-* :warning: <a href="library/arbitrary-length-test.cpp.html">arbitrary-length-test.cpp</a>
-* :warning: <a href="library/bundle.py.html">bundle.py</a>
-* :heavy_check_mark: <a href="library/competitive-template.hpp.html">competitive-template.hpp</a>
-
-
-<div id="554e0d24f25abaa0e2922c944fbc560c"></div>
-
-### atcoder
-
-* :heavy_check_mark: <a href="library/atcoder/internal_queue.hpp.html">atcoder/internal_queue.hpp</a>
-* :heavy_check_mark: <a href="library/atcoder/internal_scc.hpp.html">atcoder/internal_scc.hpp</a>
-* :heavy_check_mark: <a href="library/atcoder/maxflow.hpp.html">atcoder/maxflow.hpp</a>
-* :warning: <a href="library/atcoder/mincostflow.hpp.html">atcoder/mincostflow.hpp</a>
-* :heavy_check_mark: <a href="library/atcoder/scc.hpp.html">atcoder/scc.hpp</a>
-* :heavy_check_mark: <a href="library/atcoder/two-sat.hpp.html">atcoder/two-sat.hpp</a>
-
-
-<div id="36397fe12f935090ad150c6ce0c258d4"></div>
-
-### data-structure
-
-* :heavy_check_mark: <a href="library/data-structure/2d-binary-indexed-tree.hpp.html">data-structure/2d-binary-indexed-tree.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/2d-cumulative-sum.hpp.html">data-structure/2d-cumulative-sum.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/binary-indexed-tree.hpp.html">data-structure/binary-indexed-tree.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/binary-trie.hpp.html">Binary Trie <small>(data-structure/binary-trie.hpp)</small></a>
-* :warning: <a href="library/data-structure/dynamic-binary-indexed-tree.hpp.html">data-structure/dynamic-binary-indexed-tree.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/dynamic-union-find.hpp.html">data-structure/dynamic-union-find.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/persistent-array.hpp.html">永続配列 <small>(data-structure/persistent-array.hpp)</small></a>
-* :heavy_check_mark: <a href="library/data-structure/persistent-queue.hpp.html">data-structure/persistent-queue.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/persistent-union-find.hpp.html">完全永続Union-Find <small>(data-structure/persistent-union-find.hpp)</small></a>
-* :warning: <a href="library/data-structure/randomized-binary-search-tree.hpp.html">data-structure/randomized-binary-search-tree.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/range-sum-range-add-bit.hpp.html">data-structure/range-sum-range-add-bit.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/range-union-find.hpp.html">data-structure/range-union-find.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/rectangle-sum.hpp.html">data-structure/rectangle-sum.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/slide-window-aggregation.hpp.html">data-structure/slide-window-aggregation.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/sliding-window-minimum.hpp.html">data-structure/sliding-window-minimum.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/sparse-table.hpp.html">data-structure/sparse-table.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/square-root-decomposition.hpp.html">平方分割 <small>(data-structure/square-root-decomposition.hpp)</small></a>
-* :heavy_check_mark: <a href="library/data-structure/union-find-with-potential.hpp.html">data-structure/union-find-with-potential.hpp</a>
-* :heavy_check_mark: <a href="library/data-structure/union-find.hpp.html">data-structure/union-find.hpp</a>
-
-
-<div id="cff5497121104c2b8e0cb41ed2083a9b"></div>
-
-### flow
-
-* :heavy_check_mark: <a href="library/flow/flow-on-bipartite-graph.hpp.html">flow/flow-on-bipartite-graph.hpp</a>
-
-
-<div id="05934928102b17827b8f03ed60c3e6e0"></div>
-
-### fps
-
-* :heavy_check_mark: <a href="library/fps/arbitrary-fps.hpp.html">fps/arbitrary-fps.hpp</a>
-* :heavy_check_mark: <a href="library/fps/berlekamp-massey.hpp.html">fps/berlekamp-massey.hpp</a>
-* :heavy_check_mark: <a href="library/fps/differential-equation.hpp.html">常微分方程式 <small>(fps/differential-equation.hpp)</small></a>
-* :warning: <a href="library/fps/famous-series.hpp.html">fps/famous-series.hpp</a>
-* :warning: <a href="library/fps/fast-multieval.hpp.html">fps/fast-multieval.hpp</a>
-* :heavy_check_mark: <a href="library/fps/formal-power-series.hpp.html">多項式/形式的冪級数ライブラリ <small>(fps/formal-power-series.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/fps-circular.hpp.html">三角関数 <small>(fps/fps-circular.hpp)</small></a>
-* :warning: <a href="library/fps/fps-composition-fast.hpp.html">関数の合成( $\mathrm{O}(N^2)$ ) <small>(fps/fps-composition-fast.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/fps-composition.hpp.html">関数の合成( $\mathrm{O}\left((N \log N)^{\frac{3}{2}}\right)$ ) <small>(fps/fps-composition.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/fps-sqrt.hpp.html">平方根 <small>(fps/fps-sqrt.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/kitamasa.hpp.html">線形漸化式の高速計算 <small>(fps/kitamasa.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/lagrange-interpolation-point.hpp.html">fps/lagrange-interpolation-point.hpp</a>
-* :heavy_check_mark: <a href="library/fps/multipoint-evaluation.hpp.html">fps/multipoint-evaluation.hpp</a>
-* :heavy_check_mark: <a href="library/fps/ntt-friendly-fps.hpp.html">NTT mod用FPSライブラリ <small>(fps/ntt-friendly-fps.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/polynomial-gcd.hpp.html">多項式GCD <small>(fps/polynomial-gcd.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/polynomial-interpolation.hpp.html">fps/polynomial-interpolation.hpp</a>
-* :heavy_check_mark: <a href="library/fps/sum-of-exponential-times-poly.hpp.html">$\sum_{i}a^i f(i)$ <small>(fps/sum-of-exponential-times-poly.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/taylor-shift.hpp.html">平行移動 <small>(fps/taylor-shift.hpp)</small></a>
-* :heavy_check_mark: <a href="library/fps/utility.hpp.html">fps/utility.hpp</a>
-
-
-<div id="ed7daeb157cd9b31e53896ad3c771a26"></div>
-
-### geometry
-
-* :warning: <a href="library/geometry/geometry.hpp.html">geometry/geometry.hpp</a>
-* :heavy_check_mark: <a href="library/geometry/integer-geometry.hpp.html">geometry/integer-geometry.hpp</a>
-
-
-<div id="f8b0b924ebd7046dbfa85a856e4682c8"></div>
-
-### graph
-
-* :warning: <a href="library/graph/add-range-edge.hpp.html">graph/add-range-edge.hpp</a>
-* :warning: <a href="library/graph/cycle-detection.hpp.html">graph/cycle-detection.hpp</a>
-* :warning: <a href="library/graph/dimension-expanded-graph.hpp.html">graph/dimension-expanded-graph.hpp</a>
-* :heavy_check_mark: <a href="library/graph/graph-template.hpp.html">graph/graph-template.hpp</a>
-* :heavy_check_mark: <a href="library/graph/graph-utility.hpp.html">graph/graph-utility.hpp</a>
-* :heavy_check_mark: <a href="library/graph/kruskal.hpp.html">graph/kruskal.hpp</a>
-* :heavy_check_mark: <a href="library/graph/lowlink.hpp.html">graph/lowlink.hpp</a>
-* :heavy_check_mark: <a href="library/graph/max-independent-set.hpp.html">graph/max-independent-set.hpp</a>
-* :heavy_check_mark: <a href="library/graph/strongly-connected-components.hpp.html">graph/strongly-connected-components.hpp</a>
-* :heavy_check_mark: <a href="library/graph/topological-sort.hpp.html">graph/topological-sort.hpp</a>
-* :heavy_check_mark: <a href="library/graph/two-edge-connected-components.hpp.html">graph/two-edge-connected-components.hpp</a>
-
-
-<div id="7e676e9e663beb40fd133f5ee24487c2"></div>
-
-### math
-
-* :warning: <a href="library/math/divisor-multiple-transform.hpp.html">math/divisor-multiple-transform.hpp</a>
-* :heavy_check_mark: <a href="library/math/elementary-function.hpp.html">math/elementary-function.hpp</a>
-* :warning: <a href="library/math/enamurate-multiplicative-function.hpp.html">math/enamurate-multiplicative-function.hpp</a>
-* :warning: <a href="library/math/f2.hpp.html">math/f2.hpp</a>
-* :heavy_check_mark: <a href="library/math/float-binomial.hpp.html">math/float-binomial.hpp</a>
-* :warning: <a href="library/math/gray-code.hpp.html">math/gray-code.hpp</a>
-* :warning: <a href="library/math/grundy-number.hpp.html">math/grundy-number.hpp</a>
-* :heavy_check_mark: <a href="library/math/kth-root-integral.hpp.html">$\mathrm{floor}(a^{\frac{1}{k}})$ <small>(math/kth-root-integral.hpp)</small></a>
-* :warning: <a href="library/math/matrix-fast.hpp.html">math/matrix-fast.hpp</a>
-* :warning: <a href="library/math/matrix.hpp.html">math/matrix.hpp</a>
-* :heavy_check_mark: <a href="library/math/nim-product.hpp.html">Nim Product <small>(math/nim-product.hpp)</small></a>
-* :warning: <a href="library/math/prime-counting-faster.hpp.html">math/prime-counting-faster.hpp</a>
-* :heavy_check_mark: <a href="library/math/prime-counting-o2d3.hpp.html">素数カウント( $\mathrm{O}(N^{\frac{2}{3}})$ ) <small>(math/prime-counting-o2d3.hpp)</small></a>
-* :heavy_check_mark: <a href="library/math/prime-counting.hpp.html">素数カウント( $\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$ ) <small>(math/prime-counting.hpp)</small></a>
-* :heavy_check_mark: <a href="library/math/prime-factor.hpp.html">高速素因数分解(Miller Rabin/Pollard's Rho) <small>(math/prime-factor.hpp)</small></a>
-* :heavy_check_mark: <a href="library/math/prime-table.hpp.html">math/prime-table.hpp</a>
-* :warning: <a href="library/math/rational-number.hpp.html">math/rational-number.hpp</a>
-* :warning: <a href="library/math/semiring.hpp.html">math/semiring.hpp</a>
-* :heavy_check_mark: <a href="library/math/subset-convolution.hpp.html">Subset Convolution <small>(math/subset-convolution.hpp)</small></a>
-* :heavy_check_mark: <a href="library/math/sum-of-multiplicative-function.hpp.html">乗法的関数の和 <small>(math/sum-of-multiplicative-function.hpp)</small></a>
-* :heavy_check_mark: <a href="library/math/sum_of_floor.hpp.html">math/sum_of_floor.hpp</a>
-* :heavy_check_mark: <a href="library/math/two-sat.hpp.html">2-SAT <small>(math/two-sat.hpp)</small></a>
-* :warning: <a href="library/math/walsh-hadamard-transform.hpp.html">math/walsh-hadamard-transform.hpp</a>
-* :warning: <a href="library/math/zeta-mobius-transform.hpp.html">math/zeta-mobius-transform.hpp</a>
-
-
-<div id="bc957e26ff41470c556ee5d09e96880b"></div>
-
-### misc
-
-* :heavy_check_mark: <a href="library/misc/compress.hpp.html">misc/compress.hpp</a>
-* :heavy_check_mark: <a href="library/misc/fastio.hpp.html">misc/fastio.hpp</a>
-* :warning: <a href="library/misc/fixpoint.hpp.html">misc/fixpoint.hpp</a>
-* :heavy_check_mark: <a href="library/misc/mo.hpp.html">misc/mo.hpp</a>
-* :heavy_check_mark: <a href="library/misc/rng.hpp.html">misc/rng.hpp</a>
-* :warning: <a href="library/misc/simulated-annealing.hpp.html">misc/simulated-annealing.hpp</a>
-* :warning: <a href="library/misc/timer.hpp.html">misc/timer.hpp</a>
-
-
-<div id="fb97f878c938d7517d3d9f7de68146e9"></div>
-
-### modint
-
-* :heavy_check_mark: <a href="library/modint/arbitrary-modint.hpp.html">modint/arbitrary-modint.hpp</a>
-* :heavy_check_mark: <a href="library/modint/arbitrary-prime-modint.hpp.html">modint/arbitrary-prime-modint.hpp</a>
-* :heavy_check_mark: <a href="library/modint/modint-montgomery64.hpp.html">modint/modint-montgomery64.hpp</a>
-* :heavy_check_mark: <a href="library/modint/modint.hpp.html">modint/modint.hpp</a>
-* :heavy_check_mark: <a href="library/modint/montgomery-modint.hpp.html">modint/montgomery-modint.hpp</a>
-* :heavy_check_mark: <a href="library/modint/simd-montgomery.hpp.html">modint/simd-montgomery.hpp</a>
-
-
-<div id="5dcb4a1ea5a35da52691d50c8313c333"></div>
-
-### modulo
-
-* :heavy_check_mark: <a href="library/modulo/binomial.hpp.html">modulo/binomial.hpp</a>
-* :heavy_check_mark: <a href="library/modulo/gauss-elimination.hpp.html">modulo/gauss-elimination.hpp</a>
-* :heavy_check_mark: <a href="library/modulo/mod-log.hpp.html">modulo/mod-log.hpp</a>
-* :heavy_check_mark: <a href="library/modulo/mod-sqrt.hpp.html">mod sqrt(Tonelli-Shanks algorithm) <small>(modulo/mod-sqrt.hpp)</small></a>
-* :warning: <a href="library/modulo/strassen.hpp.html">modulo/strassen.hpp</a>
-* :heavy_check_mark: <a href="library/modulo/tetration.hpp.html">tetration <small>(modulo/tetration.hpp)</small></a>
-
-
-<div id="ccb3669c87b2d028539237c4554e3c0f"></div>
-
-### ntt
-
-* :heavy_check_mark: <a href="library/ntt/arbitrary-ntt.hpp.html">ntt/arbitrary-ntt.hpp</a>
-* :heavy_check_mark: <a href="library/ntt/cooley-turkey-ntt.hpp.html">ntt/cooley-turkey-ntt.hpp</a>
-* :heavy_check_mark: <a href="library/ntt/ntt-avx2.hpp.html">ntt/ntt-avx2.hpp</a>
-* :heavy_check_mark: <a href="library/ntt/ntt-sse42.hpp.html">ntt/ntt-sse42.hpp</a>
-* :heavy_check_mark: <a href="library/ntt/ntt.hpp.html">ntt/ntt.hpp</a>
-
-
-<div id="cf992883f659a62542b674f4570b728a"></div>
-
-### segment-tree
-
-* :warning: <a href="library/segment-tree/dynamic-li-chao-tree.hpp.html">segment-tree/dynamic-li-chao-tree.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/dynamic-segment-tree.hpp.html">segment-tree/dynamic-segment-tree.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/lazy-segment-tree.hpp.html">segment-tree/lazy-segment-tree.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/li-chao-tree.hpp.html">segment-tree/li-chao-tree.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/persistent-segment-tree.hpp.html">永続セグメント木 <small>(segment-tree/persistent-segment-tree.hpp)</small></a>
-* :heavy_check_mark: <a href="library/segment-tree/range-add-range-max-lazyseg.hpp.html">segment-tree/range-add-range-max-lazyseg.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/range-add-range-min-lazyseg.hpp.html">segment-tree/range-add-range-min-lazyseg.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/range-add-range-sum-lazyseg.hpp.html">segment-tree/range-add-range-sum-lazyseg.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/range-update-range-max-lazyseg.hpp.html">segment-tree/range-update-range-max-lazyseg.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/range-update-range-min-lazyseg.hpp.html">segment-tree/range-update-range-min-lazyseg.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/range-update-range-sum-lazyseg.hpp.html">segment-tree/range-update-range-sum-lazyseg.hpp</a>
-* :warning: <a href="library/segment-tree/range-weighted-add-range-sum-lazyseg.hpp.html">segment-tree/range-weighted-add-range-sum-lazyseg.hpp</a>
-* :heavy_check_mark: <a href="library/segment-tree/segment-tree.hpp.html">segment-tree/segment-tree.hpp</a>
-
-
-<div id="d53d0f39583bbf03056486512d3e44bc"></div>
-
-### shortest-path
-
-* :heavy_check_mark: <a href="library/shortest-path/bellman-ford.hpp.html">shortest-path/bellman-ford.hpp</a>
-* :heavy_check_mark: <a href="library/shortest-path/dijkstra.hpp.html">shortest-path/dijkstra.hpp</a>
-* :heavy_check_mark: <a href="library/shortest-path/restore-shortest-path.hpp.html">shortest-path/restore-shortest-path.hpp</a>
-* :heavy_check_mark: <a href="library/shortest-path/warshall-floyd.hpp.html">shortest-path/warshall-floyd.hpp</a>
-
-
-<div id="b45cffe084dd3d20d928bee85e7b0f21"></div>
-
-### string
-
-* :warning: <a href="library/string/rolling-hash.hpp.html">string/rolling-hash.hpp</a>
-* :warning: <a href="library/string/run-length-encoding.hpp.html">string/run-length-encoding.hpp</a>
-* :warning: <a href="library/string/subsequence-dp.hpp.html">string/subsequence-dp.hpp</a>
-* :heavy_check_mark: <a href="library/string/suffix-array.hpp.html">string/suffix-array.hpp</a>
-
-
-<div id="c0af77cf8294ff93a5cdb2963ca9f038"></div>
-
-### tree
-
-* :heavy_check_mark: <a href="library/tree/cartesian-tree.hpp.html">tree/cartesian-tree.hpp</a>
-* :heavy_check_mark: <a href="library/tree/centroid-decomposition.hpp.html">tree/centroid-decomposition.hpp</a>
-* :warning: <a href="library/tree/dsu-on-tree.hpp.html">tree/dsu-on-tree.hpp</a>
-* :warning: <a href="library/tree/euler-tour.hpp.html">tree/euler-tour.hpp</a>
-* :heavy_check_mark: <a href="library/tree/frequency-table-of-tree-distance.hpp.html">tree/frequency-table-of-tree-distance.hpp</a>
-* :heavy_check_mark: <a href="library/tree/heavy-light-decomposition.hpp.html">tree/heavy-light-decomposition.hpp</a>
-* :heavy_check_mark: <a href="library/tree/rerooting.hpp.html">tree/rerooting.hpp</a>
-
-
-<div id="1fff5e1f009a90e6e1bc2cb52b88bfd3"></div>
-
-### unused/python
-
-* :warning: <a href="library/unused/python/fastio.py.html">unused/python/fastio.py</a>
-* :warning: <a href="library/unused/python/ntt-numba.py.html">unused/python/ntt-numba.py</a>
-* :warning: <a href="library/unused/python/ntt.py.html">unused/python/ntt.py</a>
-* :warning: <a href="library/unused/python/segtree-immutable.py.html">unused/python/segtree-immutable.py</a>
-* :warning: <a href="library/unused/python/segtree-mutable.py.html">unused/python/segtree-mutable.py</a>
-* :warning: <a href="library/unused/python/tuning_optuna.py.html">unused/python/tuning_optuna.py</a>
-
-
-## Verify Files
-
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp.html">verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-1-a.test.cpp.html">verify/verify-aoj-grl/aoj-grl-1-a.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-1-b.test.cpp.html">verify/verify-aoj-grl/aoj-grl-1-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-1-c.test.cpp.html">verify/verify-aoj-grl/aoj-grl-1-c.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-2-a.test.cpp.html">verify/verify-aoj-grl/aoj-grl-2-a.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-3-a.test.cpp.html">verify/verify-aoj-grl/aoj-grl-3-a.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-3-b.test.cpp.html">verify/verify-aoj-grl/aoj-grl-3-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-3-c.test.cpp.html">verify/verify-aoj-grl/aoj-grl-3-c.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-4-a.test.cpp.html">verify/verify-aoj-grl/aoj-grl-4-a.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-4-b.test.cpp.html">verify/verify-aoj-grl/aoj-grl-4-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp.html">verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-5-a.test.cpp.html">verify/verify-aoj-grl/aoj-grl-5-a.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-5-b.test.cpp.html">verify/verify-aoj-grl/aoj-grl-5-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-5-c.test.cpp.html">verify/verify-aoj-grl/aoj-grl-5-c.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-5-d.test.cpp.html">verify/verify-aoj-grl/aoj-grl-5-d.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-grl/aoj-grl-5-e.test.cpp.html">verify/verify-aoj-grl/aoj-grl-5-e.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp.html">verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp.html">verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp.html">verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp.html">verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp.html">verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp.html">verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp.html">verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp.html">verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-swag.test.cpp.html">verify/verify-yosupo-ds/yosupo-swag.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp.html">verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-composition.test.cpp.html">verify/verify-yosupo-fps/yosupo-composition.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-exp.test.cpp.html">verify/verify-yosupo-fps/yosupo-exp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-interpolation.test.cpp.html">verify/verify-yosupo-fps/yosupo-interpolation.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-inv.test.cpp.html">verify/verify-yosupo-fps/yosupo-inv.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp.html">verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-log-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-log-arb.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-log.test.cpp.html">verify/verify-yosupo-fps/yosupo-log.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-multieval.test.cpp.html">verify/verify-yosupo-fps/yosupo-multieval.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-pow.test.cpp.html">verify/verify-yosupo-fps/yosupo-pow.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-sqrt.test.cpp.html">verify/verify-yosupo-fps/yosupo-sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp.html">verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp.html">verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp.html">verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-cartesian.test.cpp.html">verify/verify-yosupo-graph/yosupo-cartesian.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-diameter.test.cpp.html">verify/verify-yosupo-graph/yosupo-diameter.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp.html">verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp.html">verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp.html">verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp.html">verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp.html">verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp.html">verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp.html">verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp.html">verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp.html">verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-counting-primes.test.cpp.html">verify/verify-yosupo-math/yosupo-counting-primes.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-determinant.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-factrization.test.cpp.html">verify/verify-yosupo-math/yosupo-factrization.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp.html">verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html">verify/verify-yosupo-math/yosupo-linear-equation.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-log.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-log.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html">verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-nim-product.test.cpp.html">verify/verify-yosupo-math/yosupo-nim-product.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-prime-table.test.cpp.html">verify/verify-yosupo-math/yosupo-prime-table.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp.html">verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp.html">verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp.html">verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp.html">verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp.html">verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-math/yosupo-two-sat.test.cpp.html">verify/verify-yosupo-math/yosupo-two-sat.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp.html">verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp.html">verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp.html">verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-argument-sort.test.cpp.html">verify/verify-yosupo-other/yosupo-argument-sort.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp.html">verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp.html">verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html">verify/verify-yosupo-other/yosupo-suffix-array.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html">verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0214.test.cpp.html">verify/verify-yuki/yuki-0214.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0215.test.cpp.html">verify/verify-yuki/yuki-0215.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0789.test.cpp.html">verify/verify-yuki/yuki-0789.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp.html">verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0963-circular.test.cpp.html">verify/verify-yuki/yuki-0963-circular.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-0963.test.cpp.html">verify/verify-yuki/yuki-0963.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1080.test.cpp.html">verify/verify-yuki/yuki-1080.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1145.test.cpp.html">verify/verify-yuki/yuki-1145.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1170.test.cpp.html">verify/verify-yuki/yuki-1170.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-1220.test.cpp.html">verify/verify-yuki/yuki-1220.test.cpp</a>
-* :heavy_check_mark: <a href="verify/verify/verify-yuki/yuki-helloworld.test.cpp.html">verify/verify-yuki/yuki-helloworld.test.cpp</a>
-
-
