@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
@@ -137,21 +137,25 @@ data:
     \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
     \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
     \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
-    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  int\
-    \ d = x < 100 ? (x < 10 ? 1 : 2) : (x < 1000 ? 3 : 4);\n  memcpy(obuf + por, pre.num\
-    \ + x * 4 + 4 - d, d);\n  por += d;\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n\
-    \  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename Head, typename...\
-    \ Tail>\ninline void wt(Head head, Tail... tail) {\n  wt(head);\n  wt(tail...);\n\
-    }\ntemplate<typename T>\ninline void wtn(T x){\n  wt(x, '\\n');\n}\n\nstruct Dummy\
-    \ {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 3 \"math/kth-root-integral.hpp\"\n\
-    using namespace std;\n\nuint64_t kth_root_integral(uint64_t a, uint64_t k) {\n\
-    \  if (a <= 1 || k == 1) return a;\n  if (64 <= k) return 1;\n  auto check = [&](__uint128_t\
-    \ n) {\n    __uint128_t x = 1, m = n;\n    for (int p = k; p; p >>= 1, m *= m)\n\
-    \      if (p & 1) x *= m;\n    return x <= a;\n  };\n  uint64_t n = powl(a, (long\
-    \ double)(1.0) / k);\n  while (!check(n)) --n;\n  while (check(n + 1)) ++n;\n\
-    \  return n;\n}\n\n/**\n * @brief $\\mathrm{floor}(a^{\\frac{1}{k}})$\n * @docs\
-    \ docs/math/kth-root-integral.md\n */\n#line 6 \"verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp\"\
+    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
+    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
+    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
+    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
+    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
+    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 3 \"math/kth-root-integral.hpp\"\nusing namespace std;\n\nuint64_t kth_root_integral(uint64_t\
+    \ a, uint64_t k) {\n  if (a <= 1 || k == 1) return a;\n  if (64 <= k) return 1;\n\
+    \  auto check = [&](__uint128_t n) {\n    __uint128_t x = 1, m = n;\n    for (int\
+    \ p = k; p; p >>= 1, m *= m)\n      if (p & 1) x *= m;\n    return x <= a;\n \
+    \ };\n  uint64_t n = powl(a, (long double)(1.0) / k);\n  while (!check(n)) --n;\n\
+    \  while (check(n + 1)) ++n;\n  return n;\n}\n\n/**\n * @brief $\\mathrm{floor}(a^{\\\
+    frac{1}{k}})$\n * @docs docs/math/kth-root-integral.md\n */\n#line 6 \"verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp\"\
     \n\nvoid solve() {\n  int T;\n  uint64_t A, K;\n  rd(T);\n  while (T--) {\n  \
     \  rd(A, K);\n    wtn(kth_root_integral(A, K));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/kth_root_integer\"\n\n\
@@ -166,7 +170,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
   requiredBy: []
-  timestamp: '2020-08-31 23:29:15+09:00'
+  timestamp: '2020-09-15 23:09:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp

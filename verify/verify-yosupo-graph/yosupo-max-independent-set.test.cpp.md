@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
@@ -137,26 +137,31 @@ data:
     \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
     \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
     \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
-    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  int\
-    \ d = x < 100 ? (x < 10 ? 1 : 2) : (x < 1000 ? 3 : 4);\n  memcpy(obuf + por, pre.num\
-    \ + x * 4 + 4 - d, d);\n  por += d;\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n\
-    \  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename Head, typename...\
-    \ Tail>\ninline void wt(Head head, Tail... tail) {\n  wt(head);\n  wt(tail...);\n\
-    }\ntemplate<typename T>\ninline void wtn(T x){\n  wt(x, '\\n');\n}\n\nstruct Dummy\
-    \ {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 3 \"graph/max-independent-set.hpp\"\
-    \nusing namespace std;\n\ntemplate <int m>\nvector<int> max_independent_set(const\
-    \ vector<vector<int>> &g) {\n  constexpr int M = (m + 63) / 64 * 64;\n  int N\
-    \ = g.size();\n  vector<bitset<M>> bs(N);\n  for (int i = 0; i < N; i++)\n   \
-    \ for (auto &j : g[i]) bs[i][j] = bs[j][i] = 1;\n  bitset<M> res, cur, ignore;\n\
-    \  auto dfs = [&](auto rec, int i) -> void {\n    if (i == N) {\n      if (cur.count()\
-    \ > res.count()) res = cur;\n      return;\n    }\n    if ((bs[i] & cur).any()\
-    \ || (bs[i] & ~ignore).count() >= 2) {\n      ignore[i] = 1;\n      rec(rec, i\
-    \ + 1);\n      ignore[i] = 0;\n    }\n    if ((bs[i] & cur).none()) {\n      cur[i]\
-    \ = 1;\n      rec(rec, i + 1);\n      cur[i] = 0;\n    }\n  };\n  dfs(dfs, 0);\n\
-    \  vector<int> res2;\n  for (int i = 0; i < N; i++)\n    if (res[i]) res2.push_back(i);\n\
-    \  return res2;\n}\n#line 6 \"verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp\"\
-    \n\nvoid solve() {\n  int N, M;\n  rd(N, M);\n  vector<vector<int>> g(N);\n  rep(i,\
+    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
+    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
+    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
+    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
+    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
+    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 3 \"graph/max-independent-set.hpp\"\nusing namespace std;\n\ntemplate <int\
+    \ m>\nvector<int> max_independent_set(const vector<vector<int>> &g) {\n  constexpr\
+    \ int M = (m + 63) / 64 * 64;\n  int N = g.size();\n  vector<bitset<M>> bs(N);\n\
+    \  for (int i = 0; i < N; i++)\n    for (auto &j : g[i]) bs[i][j] = bs[j][i] =\
+    \ 1;\n  bitset<M> res, cur, ignore;\n  auto dfs = [&](auto rec, int i) -> void\
+    \ {\n    if (i == N) {\n      if (cur.count() > res.count()) res = cur;\n    \
+    \  return;\n    }\n    if ((bs[i] & cur).any() || (bs[i] & ~ignore).count() >=\
+    \ 2) {\n      ignore[i] = 1;\n      rec(rec, i + 1);\n      ignore[i] = 0;\n \
+    \   }\n    if ((bs[i] & cur).none()) {\n      cur[i] = 1;\n      rec(rec, i +\
+    \ 1);\n      cur[i] = 0;\n    }\n  };\n  dfs(dfs, 0);\n  vector<int> res2;\n \
+    \ for (int i = 0; i < N; i++)\n    if (res[i]) res2.push_back(i);\n  return res2;\n\
+    }\n#line 6 \"verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp\"\n\
+    \nvoid solve() {\n  int N, M;\n  rd(N, M);\n  vector<vector<int>> g(N);\n  rep(i,\
     \ M) {\n    int u, v;\n    rd(u, v);\n    g[u].push_back(v);\n    g[v].push_back(u);\n\
     \  }\n  auto ans = max_independent_set<40>(g);\n  wtn(ans.size());\n  rep(i, ans.size())\
     \ wt(ans[i], (i == (int)ans.size() - 1 ? '\\n' : ' '));\n}\n"
@@ -174,7 +179,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
   requiredBy: []
-  timestamp: '2020-09-01 01:49:02+09:00'
+  timestamp: '2020-09-15 23:09:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp

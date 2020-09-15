@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
     path: fps/berlekamp-massey.hpp
     title: fps/berlekamp-massey.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []
@@ -184,17 +184,22 @@ data:
     \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
     \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
     \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
-    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  int\
-    \ d = x < 100 ? (x < 10 ? 1 : 2) : (x < 1000 ? 3 : 4);\n  memcpy(obuf + por, pre.num\
-    \ + x * 4 + 4 - d, d);\n  por += d;\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n\
-    \  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename Head, typename...\
-    \ Tail>\ninline void wt(Head head, Tail... tail) {\n  wt(head);\n  wt(tail...);\n\
-    }\ntemplate<typename T>\ninline void wtn(T x){\n  wt(x, '\\n');\n}\n\nstruct Dummy\
-    \ {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 7 \"verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp\"\
-    \n\nvoid solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n  int N;\n\
-    \  rd(N);\n  V<mint> a(N);\n  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n\
-    \    a[i] = n;\n  }\n  auto b = BerlekampMassey<mint>(a);\n  wtn(b.size() - 1);\n\
+    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
+    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
+    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
+    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
+    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
+    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 7 \"verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp\"\n\nvoid\
+    \ solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n  int N;\n  rd(N);\n\
+    \  V<mint> a(N);\n  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n  \
+    \  a[i] = n;\n  }\n  auto b = BerlekampMassey<mint>(a);\n  wtn(b.size() - 1);\n\
     \  for (int i = 1; i < (int)b.size(); i++) {\n    if (i != 1) wt(' ');\n    wt((-b[i]).get());\n\
     \  }\n  wt('\\n');\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
@@ -213,7 +218,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   requiredBy: []
-  timestamp: '2020-08-12 21:42:19+09:00'
+  timestamp: '2020-09-15 23:09:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp

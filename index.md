@@ -26,7 +26,7 @@ data:
     - icon: ':warning:'
       path: bundle.py
       title: bundle.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -110,7 +110,7 @@ data:
     - icon: ':warning:'
       path: fps/fast-multieval.hpp
       title: fps/fast-multieval.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/formal-power-series.hpp
       title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
         \u30E9\u30EA"
@@ -120,7 +120,7 @@ data:
     - icon: ':warning:'
       path: fps/fps-composition-fast.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
@@ -136,7 +136,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/multipoint-evaluation.hpp
       title: fps/multipoint-evaluation.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
@@ -255,7 +255,7 @@ data:
     - icon: ':warning:'
       path: math/semiring.hpp
       title: math/semiring.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/subset-convolution.hpp
       title: Subset Convolution
     - icon: ':heavy_check_mark:'
@@ -278,7 +278,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -310,15 +310,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
     - icon: ':heavy_check_mark:'
@@ -333,7 +333,7 @@ data:
     - icon: ':warning:'
       path: modulo/strassen.hpp
       title: modulo/strassen.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: modulo/tetration.hpp
       title: tetration
   - name: ntt
@@ -341,10 +341,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/arbitrary-ntt.hpp
       title: ntt/arbitrary-ntt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: ntt/cooley-turkey-ntt.hpp
       title: ntt/cooley-turkey-ntt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
     - icon: ':heavy_check_mark:'
@@ -641,7 +641,7 @@ data:
       title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - name: verify/verify-yosupo-fps
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     - icon: ':heavy_check_mark:'
@@ -759,7 +759,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
       title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -768,7 +768,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
       title: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
       title: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
     - icon: ':heavy_check_mark:'
@@ -779,7 +779,7 @@ data:
       title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - name: verify/verify-yosupo-ntt
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     - icon: ':heavy_check_mark:'
@@ -803,7 +803,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - name: verify/verify-yosupo-other
@@ -814,7 +814,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
       title: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
       title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     - icon: ':heavy_check_mark:'
