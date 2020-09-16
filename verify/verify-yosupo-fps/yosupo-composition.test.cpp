@@ -3,7 +3,7 @@
 
 #include "../../competitive-template.hpp"
 #include "../../fps/formal-power-series.hpp"
-#include "../../fps/fps-composition.hpp"
+#include "../../fps/fps-composition-fast.hpp"
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
@@ -26,7 +26,7 @@ void solve() {
     rd(n);
     g[i] = n;
   }
-  fps R = Composition<mint>(g, f, C);
+  fps R = Composition(g, f);
 
   for (int i = 0; i < (int)R.size(); i++) {
     if (i) wt(' ');

@@ -21,13 +21,14 @@ __attribute__((target("avx2"), optimize("O3"))) u64 gcd_fast(u64 x, u64 y) {
   u32 by = __builtin_ctz(y);
   u32 k = min(bx, by);
   x >>= bx, y >>= by;
-  while (x != 0)
-    if (x == y) return x << k;
+  while (x != 0 && y != 0)
+    if (x == y)
+      return x << k;
     else if (x > y)
       x = (x - y) >> __builtin_ctz(x - y);
     else
       y = (y - x) >> __builtin_ctz(y - x);
-  return y << k;
+  return (x + y) << k;
 }
 
 template <typename T = int32_t>
