@@ -197,6 +197,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/two-edge-connected-components.hpp
       title: graph/two-edge-connected-components.hpp
+  - name: inner
+    pages:
+    - icon: ':warning:'
+      path: inner/inner_math.hpp
+      title: inner/inner_math.hpp
   - name: math
     pages:
     - icon: ':warning:'
@@ -255,7 +260,7 @@ data:
     - icon: ':warning:'
       path: math/semiring.hpp
       title: math/semiring.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: math/subset-convolution.hpp
       title: Subset Convolution
     - icon: ':heavy_check_mark:'
@@ -333,7 +338,7 @@ data:
     - icon: ':warning:'
       path: modulo/strassen.hpp
       title: modulo/strassen.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: modulo/tetration.hpp
       title: tetration
   - name: ntt
@@ -341,7 +346,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/arbitrary-ntt.hpp
       title: ntt/arbitrary-ntt.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: ntt/cooley-turkey-ntt.hpp
       title: ntt/cooley-turkey-ntt.hpp
     - icon: ':question:'
@@ -759,7 +764,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
       title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -768,7 +773,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
       title: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
       title: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
     - icon: ':heavy_check_mark:'
@@ -779,7 +784,7 @@ data:
       title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - name: verify/verify-yosupo-ntt
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     - icon: ':heavy_check_mark:'
@@ -803,7 +808,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - name: verify/verify-yosupo-other
@@ -814,7 +819,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
       title: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
       title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     - icon: ':heavy_check_mark:'

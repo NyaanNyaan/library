@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/modulo/tetration.md
@@ -64,7 +64,7 @@ data:
   path: modulo/tetration.hpp
   requiredBy: []
   timestamp: '2020-09-02 02:03:54+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
 documentation_of: modulo/tetration.hpp
