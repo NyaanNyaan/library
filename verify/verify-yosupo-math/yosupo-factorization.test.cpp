@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 
 #include "../../competitive-template.hpp"
-#include "../../prime/fast_factorize.hpp"
+#include "../../prime/fast-factorize.hpp"
 #include "../../misc/fastio.hpp"
 
 void solve() {

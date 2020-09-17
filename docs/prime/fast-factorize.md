@@ -1,6 +1,6 @@
 ## 高速な素因数分解
 
-ミラーラビン素数判定法とポラード・ロー素因数分解法を組み合わせることで$\mathrm{O}(N^{\frac{1}{4}}\log N)$で素因数分解を行うライブラリ。
+ミラーラビン素数判定法とポラード・ロー素因数分解法を組み合わせることで$\mathrm{O}(N^{\frac{1}{4}})$で素因数分解を行うライブラリ。
 
 #### ミラー・ラビン素数判定法(Miller-Rabin primality test)
 
@@ -26,4 +26,6 @@ $$a ^ {2^r \cdot d} \equiv -1 \mod p$$
 
 #### ポラード・ロー素因数分解法(Pollard's rho algorithm)
 
-後で書く
+TODO:書く
+
+参考文献　[Kiri8128さんの記事](https://qiita.com/Kiri8128/items/eca965fe86ea5f4cbb98)　[高校数学の美しい物語](https://mathtrain.jp/rhoalgorithm)

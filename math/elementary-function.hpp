@@ -17,16 +17,6 @@ long long my_lcm(long long x, long long y) {
 #define gcd my_gcd
 #define lcm my_lcm
 
-// Prime -> 1 {0, 0, 1, 1, 0, 1, 0, 1, ...}
-vector<int> Primes(int N) {
-  vector<int> A(N + 1, 1);
-  A[0] = A[1] = 0;
-  for (int i = 2; i * i <= N; i++)
-    if (A[i] == 1)
-      for (int j = i << 1; j <= N; j += i) A[j] = 0;
-  return A;
-}
-
 // Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}
 vector<long long> PrimeSieve(int N) {
   vector<int> prime = Primes(N);

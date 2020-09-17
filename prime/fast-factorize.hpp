@@ -95,5 +95,5 @@ using fast_factorize::is_prime;
 
 /**
  * @brief 高速素因数分解(Miller Rabin/Pollard's Rho)
- * @docs docs/math/prime-factorization.md
+ * @docs docs/prime/fast-factorize.md
  */
