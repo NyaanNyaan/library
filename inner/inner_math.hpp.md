@@ -3,9 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: prime/fast_factorize.hpp
+    path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unary-test/osak.test.cpp
+    title: verify/verify-unary-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
@@ -36,10 +39,11 @@ data:
   isVerificationFile: false
   path: inner/inner_math.hpp
   requiredBy:
-  - prime/fast_factorize.hpp
+  - prime/fast-factorize.hpp
   timestamp: '2020-09-18 00:33:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unary-test/osak.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
 documentation_of: inner/inner_math.hpp
 layout: document

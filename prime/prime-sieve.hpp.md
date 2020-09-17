@@ -1,0 +1,34 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _pathExtension: hpp
+  _verificationStatusIcon: ':warning:'
+  attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    links: []
+  bundledCode: "#line 2 \"prime/prime-sieve.hpp\"\n#include <bits/stdc++.h>\nusing\
+    \ namespace std;\n\n// Prime -> {0, 0, 1, 1, 0, 1, 0, 1, ...}\nvector<bool> prime_sieve(int\
+    \ N) {\n  vector<bool> sieve(max(1, N) + 1, 1);\n  sieve[0] = sieve[1] = false;\n\
+    \  for (int i = 2; i * i <= N; i++)\n    if (sieve[i] == true)\n      for (int\
+    \ j = i * i; j <= N; j += i) sieve[j] = false;\n  return sieve;\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n// Prime\
+    \ -> {0, 0, 1, 1, 0, 1, 0, 1, ...}\nvector<bool> prime_sieve(int N) {\n  vector<bool>\
+    \ sieve(max(1, N) + 1, 1);\n  sieve[0] = sieve[1] = false;\n  for (int i = 2;\
+    \ i * i <= N; i++)\n    if (sieve[i] == true)\n      for (int j = i * i; j <=\
+    \ N; j += i) sieve[j] = false;\n  return sieve;\n}\n"
+  dependsOn: []
+  isVerificationFile: false
+  path: prime/prime-sieve.hpp
+  requiredBy: []
+  timestamp: '2020-09-18 02:00:45+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: prime/prime-sieve.hpp
+layout: document
+redirect_from:
+- /library/prime/prime-sieve.hpp
+- /library/prime/prime-sieve.hpp.html
+title: prime/prime-sieve.hpp
+---

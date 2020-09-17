@@ -16,17 +16,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unary-test/osak.test.cpp
+    title: verify/verify-unary-test/osak.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    _deprecated_at_docs: docs/math/prime-factorization.md
+    _deprecated_at_docs: docs/prime/fast-factorize.md
     document_title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's\
       \ Rho)"
     links: []
-  bundledCode: "#line 2 \"prime/fast_factorize.hpp\"\n#include <bits/stdc++.h>\nusing\
+  bundledCode: "#line 2 \"prime/fast-factorize.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n#line 3 \"inner/inner_math.hpp\"\nusing namespace std;\n\n\
     namespace inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 =\
     \ int64_t;\nusing u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n\
@@ -101,7 +104,7 @@ data:
     \  return (is);\n  }\n\n  mint inverse() const { return pow(mod - 2); }\n\n  u64\
     \ get() const {\n    u64 ret = reduce(a);\n    return ret >= mod ? ret - mod :\
     \ ret;\n  }\n\n  static u64 get_mod() { return mod; }\n};\ntypename montgomery64::u64\
-    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 9 \"prime/fast_factorize.hpp\"\
+    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 9 \"prime/fast-factorize.hpp\"\
     \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
     bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
     \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
@@ -130,7 +133,7 @@ data:
     \ factorize(u64 n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n\
     \  return ret;\n}\n\n}  // namespace fast_factorize\nusing fast_factorize::factorize;\n\
     using fast_factorize::is_prime;\n\n/**\n * @brief \u9AD8\u901F\u7D20\u56E0\u6570\
-    \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/math/prime-factorization.md\n\
+    \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n\
     \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../inner/inner_math.hpp\"\n#include \"../misc/rng.hpp\"\n#include \"../modint/arbitrary-prime-modint.hpp\"\
@@ -163,7 +166,7 @@ data:
     \ factorize(u64 n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n\
     \  return ret;\n}\n\n}  // namespace fast_factorize\nusing fast_factorize::factorize;\n\
     using fast_factorize::is_prime;\n\n/**\n * @brief \u9AD8\u901F\u7D20\u56E0\u6570\
-    \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/math/prime-factorization.md\n\
+    \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n\
     \ */"
   dependsOn:
   - inner/inner_math.hpp
@@ -171,22 +174,23 @@ data:
   - modint/arbitrary-prime-modint.hpp
   - modint/modint-montgomery64.hpp
   isVerificationFile: false
-  path: prime/fast_factorize.hpp
+  path: prime/fast-factorize.hpp
   requiredBy: []
-  timestamp: '2020-09-18 00:33:24+09:00'
+  timestamp: '2020-09-18 02:00:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unary-test/osak.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-documentation_of: prime/fast_factorize.hpp
+documentation_of: prime/fast-factorize.hpp
 layout: document
 redirect_from:
-- /library/prime/fast_factorize.hpp
-- /library/prime/fast_factorize.hpp.html
+- /library/prime/fast-factorize.hpp
+- /library/prime/fast-factorize.hpp.html
 title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
 ---
 ## 高速な素因数分解
 
-ミラーラビン素数判定法とポラード・ロー素因数分解法を組み合わせることで$\mathrm{O}(N^{\frac{1}{4}}\log N)$で素因数分解を行うライブラリ。
+ミラーラビン素数判定法とポラード・ロー素因数分解法を組み合わせることで$\mathrm{O}(N^{\frac{1}{4}})$で素因数分解を行うライブラリ。
 
 #### ミラー・ラビン素数判定法(Miller-Rabin primality test)
 
@@ -212,4 +216,6 @@ $$a ^ {2^r \cdot d} \equiv -1 \mod p$$
 
 #### ポラード・ロー素因数分解法(Pollard's rho algorithm)
 
-後で書く
+TODO:書く
+
+参考文献　[Kiri8128さんの記事](https://qiita.com/Kiri8128/items/eca965fe86ea5f4cbb98)　[高校数学の美しい物語](https://mathtrain.jp/rhoalgorithm)

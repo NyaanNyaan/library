@@ -26,7 +26,7 @@ data:
     - icon: ':warning:'
       path: bundle.py
       title: bundle.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -207,7 +207,7 @@ data:
     - icon: ':warning:'
       path: math/divisor-multiple-transform.hpp
       title: math/divisor-multiple-transform.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
     - icon: ':warning:'
@@ -280,7 +280,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -326,7 +326,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
     - icon: ':heavy_check_mark:'
@@ -358,8 +358,17 @@ data:
   - name: prime
     pages:
     - icon: ':heavy_check_mark:'
-      path: prime/fast_factorize.hpp
+      path: prime/factor-enumerate.hpp
+      title: prime/factor-enumerate.hpp
+    - icon: ':heavy_check_mark:'
+      path: prime/fast-factorize.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+    - icon: ':heavy_check_mark:'
+      path: prime/osak.hpp
+      title: prime/osak.hpp
+    - icon: ':warning:'
+      path: prime/prime-sieve.hpp
+      title: prime/prime-sieve.hpp
   - name: segment-tree
     pages:
     - icon: ':warning:'
@@ -584,21 +593,26 @@ data:
       title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - name: verify/verify-aoj-ntl
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
+  - name: verify/verify-unary-test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unary-test/osak.test.cpp
+      title: verify/verify-unary-test/osak.test.cpp
   - name: verify/verify-yosupo-ds
     pages:
     - icon: ':heavy_check_mark:'
@@ -748,7 +762,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
       title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     - icon: ':heavy_check_mark:'

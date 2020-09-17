@@ -9,12 +9,15 @@ data:
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
   - icon: ':heavy_check_mark:'
-    path: prime/fast_factorize.hpp
+    path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unary-test/osak.test.cpp
+    title: verify/verify-unary-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
@@ -103,11 +106,12 @@ data:
   requiredBy:
   - modulo/mod-sqrt.hpp
   - fps/fps-sqrt.hpp
-  - prime/fast_factorize.hpp
+  - prime/fast-factorize.hpp
   timestamp: '2020-07-28 19:14:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+  - verify/verify-unary-test/osak.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
