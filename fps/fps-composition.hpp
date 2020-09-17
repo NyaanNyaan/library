@@ -60,7 +60,7 @@ FormalPowerSeries<mint> Composition(FormalPowerSeries<mint> P,
       R += (pw_Pr * Q[l]) << d;
     } else {
       idPm.resize(N - d);
-      QPm = ((QPm.diff().pre(N - d) >> deg_dPm) * idPm).pre(N - d);
+      QPm = ((QPm.diff() >> deg_dPm) * idPm).pre(N - d);
       R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;
     };
   }
