@@ -3,16 +3,13 @@
 
 #include "../../competitive-template.hpp"
 #include "../../fps/formal-power-series.hpp"
-#include "../../fps/fps-composition-fast.hpp"
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
-#include "../../modulo/binomial.hpp"
 
 void solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   using fps = FormalPowerSeries<mint>;
-  Binomial<mint> C(8192);
   int N;
   rd(N);
   fps f(N), g(N);
@@ -26,8 +23,12 @@ void solve() {
     rd(n);
     g[i] = n;
   }
-  fps R = Composition(g, f);
-
+  fps R = {mint(0)}, e = {mint(1)};
+  for (int i = 0; i < N; i++) {
+    R += e * f[i];
+    e *= g;
+  }
+  R.resize(N);
   for (int i = 0; i < (int)R.size(); i++) {
     if (i) wt(' ');
     wt(R[i].get());
