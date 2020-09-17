@@ -5,18 +5,15 @@ data:
   - icon: ':warning:'
     path: misc/simulated-annealing.hpp
     title: misc/simulated-annealing.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  _extendedVerifiedWith: []
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
@@ -39,9 +36,8 @@ data:
   - modulo/strassen.hpp
   - fps/fps-composition-fast.hpp
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: misc/timer.hpp
 layout: document
 redirect_from:

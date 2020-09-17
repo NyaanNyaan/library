@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/frequency-table-of-tree-distance.hpp
     title: tree/frequency-table-of-tree-distance.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fps-circular.hpp
     title: "\u4E09\u89D2\u95A2\u6570"
-  - icon: ':x:'
+  - icon: ':warning:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   - icon: ':heavy_check_mark:'

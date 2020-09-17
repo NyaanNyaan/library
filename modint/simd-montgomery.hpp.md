@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/frequency-table-of-tree-distance.hpp
     title: tree/frequency-table-of-tree-distance.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   - icon: ':heavy_check_mark:'
@@ -20,7 +20,7 @@ data:
   - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':x:'
+  - icon: ':warning:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   - icon: ':heavy_check_mark:'

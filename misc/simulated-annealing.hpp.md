@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':warning:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   - icon: ':heavy_check_mark:'

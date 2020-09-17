@@ -117,7 +117,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/fps-circular.hpp
       title: "\u4E09\u89D2\u95A2\u6570"
-    - icon: ':x:'
+    - icon: ':warning:'
       path: fps/fps-composition-fast.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
     - icon: ':warning:'
@@ -298,7 +298,7 @@ data:
     - icon: ':warning:'
       path: misc/simulated-annealing.hpp
       title: misc/simulated-annealing.hpp
-    - icon: ':x:'
+    - icon: ':warning:'
       path: misc/timer.hpp
       title: misc/timer.hpp
   - name: modint
@@ -323,7 +323,7 @@ data:
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
     - icon: ':heavy_check_mark:'
@@ -335,7 +335,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/mod-sqrt.hpp
       title: mod sqrt(Tonelli-Shanks algorithm)
-    - icon: ':x:'
+    - icon: ':warning:'
       path: modulo/strassen.hpp
       title: modulo/strassen.hpp
     - icon: ':heavy_check_mark:'
