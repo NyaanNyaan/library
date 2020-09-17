@@ -366,7 +366,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: prime/prime-enumerate.hpp
       title: prime/prime-enumerate.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: prime/prime-sieve.hpp
       title: prime/prime-sieve.hpp
   - name: segment-tree
@@ -771,6 +771,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
       title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
+      title: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
       title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp

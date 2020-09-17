@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
+    title: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
@@ -23,8 +26,9 @@ data:
   path: prime/prime-sieve.hpp
   requiredBy: []
   timestamp: '2020-09-18 02:00:45+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
 documentation_of: prime/prime-sieve.hpp
 layout: document
 redirect_from:
