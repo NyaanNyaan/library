@@ -654,8 +654,8 @@ data:
     \ i = 0; i < N; i++) {\n    int n;\n    rd(n);\n    f[i] = n;\n  }\n  for (int\
     \ i = 0; i < N; i++) {\n    int n;\n    rd(n);\n    g[i] = n;\n  }\n  fps R =\
     \ {mint(0)}, e = {mint(1)};\n  for (int i = 0; i < N; i++) {\n    R += e * f[i];\n\
-    \    e *= g;\n  }\n  R.resize(N);\n  for (int i = 0; i < (int)R.size(); i++) {\n\
-    \    if (i) wt(' ');\n    wt(R[i].get());\n  }\n  wt('\\n');\n}\n"
+    \    e *= g;\n    e.resize(N);\n  }\n  R.resize(N);\n  for (int i = 0; i < (int)R.size();\
+    \ i++) {\n    if (i) wt(' ');\n    wt(R[i].get());\n  }\n  wt('\\n');\n}\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/composition_of_formal_power_series\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../fps/formal-power-series.hpp\"\
     \n#include \"../../fps/ntt-friendly-fps.hpp\"\n#include \"../../misc/fastio.hpp\"\
@@ -664,9 +664,9 @@ data:
     \  int N;\n  rd(N);\n  fps f(N), g(N);\n  for (int i = 0; i < N; i++) {\n    int\
     \ n;\n    rd(n);\n    f[i] = n;\n  }\n  for (int i = 0; i < N; i++) {\n    int\
     \ n;\n    rd(n);\n    g[i] = n;\n  }\n  fps R = {mint(0)}, e = {mint(1)};\n  for\
-    \ (int i = 0; i < N; i++) {\n    R += e * f[i];\n    e *= g;\n  }\n  R.resize(N);\n\
-    \  for (int i = 0; i < (int)R.size(); i++) {\n    if (i) wt(' ');\n    wt(R[i].get());\n\
-    \  }\n  wt('\\n');\n}"
+    \ (int i = 0; i < N; i++) {\n    R += e * f[i];\n    e *= g;\n    e.resize(N);\n\
+    \  }\n  R.resize(N);\n  for (int i = 0; i < (int)R.size(); i++) {\n    if (i)\
+    \ wt(' ');\n    wt(R[i].get());\n  }\n  wt('\\n');\n}"
   dependsOn:
   - competitive-template.hpp
   - fps/formal-power-series.hpp
@@ -678,7 +678,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   requiredBy: []
-  timestamp: '2020-09-17 18:42:02+09:00'
+  timestamp: '2020-09-17 19:48:00+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition.test.cpp
