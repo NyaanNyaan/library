@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 
 #include "../../competitive-template.hpp"
-#include "../../math/prime-factor.hpp"
+#include "../../prime/fast_factorize.hpp"
 #include "../../misc/fastio.hpp"
 
 void solve() {
@@ -10,8 +10,7 @@ void solve() {
   rep(_, Q) {
     int64_t n;
     rd(n);
-    auto prime = prime_factor(n);
-    sort(all(prime));
+    auto prime = factorize(n);
     wt(sz(prime));
     rep(i, sz(prime)) {
       wt(' ');
