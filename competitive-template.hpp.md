@@ -102,7 +102,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - icon: ':heavy_check_mark:'
@@ -189,19 +189,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -370,7 +370,7 @@ data:
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
@@ -576,7 +576,7 @@ data:
   path: competitive-template.hpp
   requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/elementary-function.hpp
     title: math/elementary-function.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_B
@@ -120,18 +120,11 @@ data:
     \ long z;\n  if (x > y) swap(x, y);\n  while (x) {\n    x = y % (z = x);\n   \
     \ y = z;\n  }\n  return y;\n}\nlong long my_lcm(long long x, long long y) {\n\
     \  return 1LL * x / my_gcd(x, y) * y;\n}\n#define gcd my_gcd\n#define lcm my_lcm\n\
-    \n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<long long> PrimeSieve(int\
-    \ N) {\n  vector<int> prime = Primes(N);\n  vector<long long> ret;\n  for (int\
-    \ i = 0; i < (int)prime.size(); i++)\n    if (prime[i] == 1) ret.push_back(i);\n\
-    \  return ret;\n}\n\n// Factors (using for fast factorization)\n// {0, 0, 1, 1,\
-    \ 2, 1, 2, 1, 2, 3, ...}\nvector<int> Factors(int N) {\n  vector<int> A(N + 1,\
-    \ 1);\n  A[0] = A[1] = 0;\n  for (int i = 2; i * i <= N; i++)\n    if (A[i] ==\
-    \ 1)\n      for (int j = i << 1; j <= N; j += i) A[j] = i;\n  return A;\n}\n\n\
-    // totient function \u03C6(N)=(1 ~ N , gcd(i,N) = 1)\n// {0, 1, 1, 2, 4, 2, 6,\
-    \ 4, ... }\nvector<int> EulersTotientFunction(int N) {\n  vector<int> ret(N +\
-    \ 1, 0);\n  for (int i = 0; i <= N; i++) ret[i] = i;\n  for (int i = 2; i <= N;\
-    \ i++) {\n    if (ret[i] == i)\n      for (int j = i; j <= N; j += i) ret[j] =\
-    \ ret[j] / i * (i - 1);\n  }\n  return ret;\n}\n\n// Divisor ex) 12 -> {1, 2,\
+    \n// totient function \u03C6(N)=(1 ~ N , gcd(i,N) = 1)\n// {0, 1, 1, 2, 4, 2,\
+    \ 6, 4, ... }\nvector<int> EulersTotientFunction(int N) {\n  vector<int> ret(N\
+    \ + 1, 0);\n  for (int i = 0; i <= N; i++) ret[i] = i;\n  for (int i = 2; i <=\
+    \ N; i++) {\n    if (ret[i] == i)\n      for (int j = i; j <= N; j += i) ret[j]\
+    \ = ret[j] / i * (i - 1);\n  }\n  return ret;\n}\n\n// Divisor ex) 12 -> {1, 2,\
     \ 3, 4, 6, 12}\nvector<long long> Divisor(long long N) {\n  vector<long long>\
     \ v;\n  for (long long i = 1; i * i <= N; i++) {\n    if (N % i == 0) {\n    \
     \  v.push_back(i);\n      if (i * i != N) v.push_back(N / i);\n    }\n  }\n  return\
@@ -178,8 +171,8 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   requiredBy: []
-  timestamp: '2020-09-18 02:00:45+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-09-18 02:08:48+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
 layout: document

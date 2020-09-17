@@ -2,30 +2,30 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-log.hpp
     title: modulo/mod-log.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
@@ -33,14 +33,7 @@ data:
     using namespace std;\n\nlong long my_gcd(long long x, long long y) {\n  long long\
     \ z;\n  if (x > y) swap(x, y);\n  while (x) {\n    x = y % (z = x);\n    y = z;\n\
     \  }\n  return y;\n}\nlong long my_lcm(long long x, long long y) {\n  return 1LL\
-    \ * x / my_gcd(x, y) * y;\n}\n#define gcd my_gcd\n#define lcm my_lcm\n\n// Prime\
-    \ Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<long long> PrimeSieve(int N) {\n\
-    \  vector<int> prime = Primes(N);\n  vector<long long> ret;\n  for (int i = 0;\
-    \ i < (int)prime.size(); i++)\n    if (prime[i] == 1) ret.push_back(i);\n  return\
-    \ ret;\n}\n\n// Factors (using for fast factorization)\n// {0, 0, 1, 1, 2, 1,\
-    \ 2, 1, 2, 3, ...}\nvector<int> Factors(int N) {\n  vector<int> A(N + 1, 1);\n\
-    \  A[0] = A[1] = 0;\n  for (int i = 2; i * i <= N; i++)\n    if (A[i] == 1)\n\
-    \      for (int j = i << 1; j <= N; j += i) A[j] = i;\n  return A;\n}\n\n// totient\
+    \ * x / my_gcd(x, y) * y;\n}\n#define gcd my_gcd\n#define lcm my_lcm\n\n// totient\
     \ function \u03C6(N)=(1 ~ N , gcd(i,N) = 1)\n// {0, 1, 1, 2, 4, 2, 6, 4, ... }\n\
     vector<int> EulersTotientFunction(int N) {\n  vector<int> ret(N + 1, 0);\n  for\
     \ (int i = 0; i <= N; i++) ret[i] = i;\n  for (int i = 2; i <= N; i++) {\n   \
@@ -85,14 +78,7 @@ data:
     \ my_gcd(long long x, long long y) {\n  long long z;\n  if (x > y) swap(x, y);\n\
     \  while (x) {\n    x = y % (z = x);\n    y = z;\n  }\n  return y;\n}\nlong long\
     \ my_lcm(long long x, long long y) {\n  return 1LL * x / my_gcd(x, y) * y;\n}\n\
-    #define gcd my_gcd\n#define lcm my_lcm\n\n// Prime Sieve {2, 3, 5, 7, 11, 13,\
-    \ 17, ...}\nvector<long long> PrimeSieve(int N) {\n  vector<int> prime = Primes(N);\n\
-    \  vector<long long> ret;\n  for (int i = 0; i < (int)prime.size(); i++)\n   \
-    \ if (prime[i] == 1) ret.push_back(i);\n  return ret;\n}\n\n// Factors (using\
-    \ for fast factorization)\n// {0, 0, 1, 1, 2, 1, 2, 1, 2, 3, ...}\nvector<int>\
-    \ Factors(int N) {\n  vector<int> A(N + 1, 1);\n  A[0] = A[1] = 0;\n  for (int\
-    \ i = 2; i * i <= N; i++)\n    if (A[i] == 1)\n      for (int j = i << 1; j <=\
-    \ N; j += i) A[j] = i;\n  return A;\n}\n\n// totient function \u03C6(N)=(1 ~ N\
+    #define gcd my_gcd\n#define lcm my_lcm\n\n// totient function \u03C6(N)=(1 ~ N\
     \ , gcd(i,N) = 1)\n// {0, 1, 1, 2, 4, 2, 6, 4, ... }\nvector<int> EulersTotientFunction(int\
     \ N) {\n  vector<int> ret(N + 1, 0);\n  for (int i = 0; i <= N; i++) ret[i] =\
     \ i;\n  for (int i = 2; i <= N; i++) {\n    if (ret[i] == i)\n      for (int j\
@@ -137,8 +123,8 @@ data:
   path: math/elementary-function.hpp
   requiredBy:
   - modulo/mod-log.hpp
-  timestamp: '2020-09-18 02:00:45+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-09-18 02:08:48+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp

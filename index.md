@@ -26,7 +26,7 @@ data:
     - icon: ':warning:'
       path: bundle.py
       title: bundle.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -207,7 +207,7 @@ data:
     - icon: ':warning:'
       path: math/divisor-multiple-transform.hpp
       title: math/divisor-multiple-transform.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
     - icon: ':warning:'
@@ -248,9 +248,6 @@ data:
       path: math/prime-counting.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
         log N})$ )"
-    - icon: ':heavy_check_mark:'
-      path: math/prime-table.hpp
-      title: math/prime-table.hpp
     - icon: ':warning:'
       path: math/rational-number.hpp
       title: math/rational-number.hpp
@@ -280,7 +277,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -326,7 +323,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
     - icon: ':heavy_check_mark:'
@@ -366,6 +363,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: prime/osak.hpp
       title: prime/osak.hpp
+    - icon: ':heavy_check_mark:'
+      path: prime/prime-enumerate.hpp
+      title: prime/prime-enumerate.hpp
     - icon: ':warning:'
       path: prime/prime-sieve.hpp
       title: prime/prime-sieve.hpp
@@ -593,19 +593,19 @@ data:
       title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - name: verify/verify-aoj-ntl
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - name: verify/verify-unary-test
@@ -762,7 +762,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
       title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     - icon: ':heavy_check_mark:'

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -9,8 +9,8 @@ data:
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
       \ )"
   - icon: ':heavy_check_mark:'
-    path: math/prime-table.hpp
-    title: math/prime-table.hpp
+    path: prime/prime-enumerate.hpp
+    title: prime/prime-enumerate.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -120,9 +120,9 @@ data:
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"math/prime-counting-o2d3.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"math/prime-table.hpp\"\nusing namespace std;\n\
-    \n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<int> PrimeTable(int N)\
-    \ {\n  vector<bool> sieve(N / 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn\
+    \nusing namespace std;\n\n#line 3 \"prime/prime-enumerate.hpp\"\nusing namespace\
+    \ std;\n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<int> prime_enumerate(int\
+    \ N) {\n  vector<bool> sieve(N / 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn\
     \ = int(sqrt(N) + 0.1); p <= sqn;\n       p += d = 6 - d, i++) {\n    if (!sieve[i])\
     \ continue;\n    for (int q = p * p / 3, r = d * p / 3 + (d * p % 3 == 2), s =\
     \ 2 * p,\n             qe = sieve.size();\n         q < qe; q += r = s - r)\n\
@@ -135,7 +135,7 @@ data:
     \ bit;\n\n  // calculate N^{1/2}, N^{1/3}, N{1/6}, N{2/3}\n  N2 = sqrt(N);\n \
     \ N3 = pow(N, 1.0 / 3.0);\n  while (N3 * N3 * N3 > N) N3--;\n  while ((N3 + 1)\
     \ * (N3 + 1) * (N3 + 1) <= N) N3++;\n  N6 = sqrt(N3);\n  N23 = N / N3;\n\n  //\
-    \ precalc prime sieve below N ^ {1/2}\n  auto prime = PrimeTable(N2 + 1000);\n\
+    \ precalc prime sieve below N ^ {1/2}\n  auto prime = prime_enumerate(N2 + 1000);\n\
     \  // index of prime\n  int pidx = 0;\n  // restore pi(p - 1)\n  i64 pi = 0;\n\
     \n  // initialize ns\n  ns.reserve(N2 * 2 + 2);\n  ns.push_back(0);\n  for (int\
     \ i = 1; i <= N2; i++) ns.push_back(my_div(N, i));\n  for (int i = ns.back() -\
@@ -177,11 +177,11 @@ data:
   dependsOn:
   - competitive-template.hpp
   - math/prime-counting-o2d3.hpp
-  - math/prime-table.hpp
+  - prime/prime-enumerate.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   requiredBy: []
-  timestamp: '2020-08-28 01:02:38+09:00'
+  timestamp: '2020-09-18 02:08:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
