@@ -121,9 +121,6 @@ data:
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-factrization.test.cpp
-    title: verify/verify-yosupo-math/yosupo-factrization.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - icon: ':heavy_check_mark:'
@@ -132,6 +129,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
@@ -614,10 +614,10 @@ data:
   - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
-  - verify/verify-yosupo-math/yosupo-factrization.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp

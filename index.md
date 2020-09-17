@@ -199,7 +199,7 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: inner
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
   - name: math
@@ -248,9 +248,6 @@ data:
       path: math/prime-counting.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
         log N})$ )"
-    - icon: ':heavy_check_mark:'
-      path: math/prime-factor.hpp
-      title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
     - icon: ':heavy_check_mark:'
       path: math/prime-table.hpp
       title: math/prime-table.hpp
@@ -358,6 +355,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/ntt.hpp
       title: ntt/ntt.hpp
+  - name: prime
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: prime/fast_factorize.hpp
+      title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   - name: segment-tree
     pages:
     - icon: ':warning:'
@@ -738,8 +740,8 @@ data:
       path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-math/yosupo-factrization.test.cpp
-      title: verify/verify-yosupo-math/yosupo-factrization.test.cpp
+      path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+      title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
       title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp

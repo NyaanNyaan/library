@@ -34,14 +34,14 @@ data:
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-factrization.test.cpp
-    title: verify/verify-yosupo-math/yosupo-factrization.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
     title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
@@ -150,9 +150,9 @@ data:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
-  - verify/verify-yosupo-math/yosupo-factrization.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
