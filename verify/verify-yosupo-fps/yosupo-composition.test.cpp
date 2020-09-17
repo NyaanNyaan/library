@@ -27,6 +27,7 @@ void solve() {
   for (int i = 0; i < N; i++) {
     R += e * f[i];
     e *= g;
+    e.resize(N);
   }
   R.resize(N);
   for (int i = 0; i < (int)R.size(); i++) {
