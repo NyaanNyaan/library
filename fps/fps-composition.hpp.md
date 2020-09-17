@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
@@ -122,11 +122,11 @@ data:
     \ deg_dPm++;\n  fps idPm = dPm.empty() ? fps{} : (dPm >> deg_dPm).inv(N);\n\n\
     \  for (int l = 1, d = M; l <= L && d < N; l++, d += M) {\n    pw_Pr = (pw_Pr\
     \ * Pr).pre(N - d);\n    if (dPm.empty()) {\n      R += (pw_Pr * Q[l]) << d;\n\
-    \    } else {\n      idPm.resize(N - d);\n      QPm = ((QPm.diff().pre(N - d)\
-    \ >> deg_dPm) * idPm).pre(N - d);\n      R += ((QPm * pw_Pr).pre(N - d) * C.finv(l))\
-    \ << d;\n    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief\
-    \ \u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
-    right)$ )\n * @docs docs/fps/fps-composition.md\n */\n"
+    \    } else {\n      idPm.resize(N - d);\n      QPm = ((QPm.diff() >> deg_dPm)\
+    \ * idPm).pre(N - d);\n      R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;\n\
+    \    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief \u95A2\
+    \u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\right)$\
+    \ )\n * @docs docs/fps/fps-composition.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n#include \"\
     ../modulo/binomial.hpp\"\n#include \"./formal-power-series.hpp\"\n\n// find Q(P(x))\
     \ mod x ^ min(deg(P), deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint>\
@@ -152,18 +152,18 @@ data:
     \ deg_dPm++;\n  fps idPm = dPm.empty() ? fps{} : (dPm >> deg_dPm).inv(N);\n\n\
     \  for (int l = 1, d = M; l <= L && d < N; l++, d += M) {\n    pw_Pr = (pw_Pr\
     \ * Pr).pre(N - d);\n    if (dPm.empty()) {\n      R += (pw_Pr * Q[l]) << d;\n\
-    \    } else {\n      idPm.resize(N - d);\n      QPm = ((QPm.diff().pre(N - d)\
-    \ >> deg_dPm) * idPm).pre(N - d);\n      R += ((QPm * pw_Pr).pre(N - d) * C.finv(l))\
-    \ << d;\n    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief\
-    \ \u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
-    right)$ )\n * @docs docs/fps/fps-composition.md\n */\n"
+    \    } else {\n      idPm.resize(N - d);\n      QPm = ((QPm.diff() >> deg_dPm)\
+    \ * idPm).pre(N - d);\n      R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;\n\
+    \    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief \u95A2\
+    \u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\right)$\
+    \ )\n * @docs docs/fps/fps-composition.md\n */\n"
   dependsOn:
   - modulo/binomial.hpp
   - fps/formal-power-series.hpp
   isVerificationFile: false
   path: fps/fps-composition.hpp
   requiredBy: []
-  timestamp: '2020-08-28 00:50:35+09:00'
+  timestamp: '2020-09-17 21:46:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: fps/fps-composition.hpp
