@@ -17,26 +17,6 @@ long long my_lcm(long long x, long long y) {
 #define gcd my_gcd
 #define lcm my_lcm
 
-// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}
-vector<long long> PrimeSieve(int N) {
-  vector<int> prime = Primes(N);
-  vector<long long> ret;
-  for (int i = 0; i < (int)prime.size(); i++)
-    if (prime[i] == 1) ret.push_back(i);
-  return ret;
-}
-
-// Factors (using for fast factorization)
-// {0, 0, 1, 1, 2, 1, 2, 1, 2, 3, ...}
-vector<int> Factors(int N) {
-  vector<int> A(N + 1, 1);
-  A[0] = A[1] = 0;
-  for (int i = 2; i * i <= N; i++)
-    if (A[i] == 1)
-      for (int j = i << 1; j <= N; j += i) A[j] = i;
-  return A;
-}
-
 // totient function φ(N)=(1 ~ N , gcd(i,N) = 1)
 // {0, 1, 1, 2, 4, 2, 6, 4, ... }
 vector<int> EulersTotientFunction(int N) {

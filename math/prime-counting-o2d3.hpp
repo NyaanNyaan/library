@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "./prime-table.hpp"
+#include "../prime/prime-enumerate.hpp"
 
 inline int64_t my_div(int64_t n, int64_t p) { return double(n) / p; };
 
@@ -22,7 +22,7 @@ int64_t prime_counting(long long N) {
   N23 = N / N3;
 
   // precalc prime sieve below N ^ {1/2}
-  auto prime = PrimeTable(N2 + 1000);
+  auto prime = prime_enumerate(N2 + 1000);
   // index of prime
   int pidx = 0;
   // restore pi(p - 1)

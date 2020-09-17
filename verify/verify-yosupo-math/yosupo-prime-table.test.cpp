@@ -1,13 +1,13 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_primes"
 
 #include "../../competitive-template.hpp"
-#include "../../math/prime-table.hpp"
+#include "../../prime/prime-enumerate.hpp"
 #include "../../misc/fastio.hpp"
 
 void solve() {
   int N, A, B;
   rd(N, A, B);
-  auto sieve = PrimeTable(N);
+  auto sieve = prime_enumerate(N);
   int x = (sz(sieve) + A - B - 1) / A;
   wt(sz(sieve));
   wt(' ');
