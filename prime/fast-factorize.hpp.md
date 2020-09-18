@@ -34,15 +34,15 @@ data:
     namespace inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 =\
     \ int64_t;\nusing u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n\
     \  while (b) swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT inv(T\
-    \ a, T p) {\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b % a;\n    swap(a,\
-    \ b /= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ?\
+    \ a, T p) {\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a,\
+    \ b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ?\
     \ y + p : y;\n}\n\ntemplate <typename T, typename U>\nT modpow(T a, U n, T p)\
-    \ {\n  T ret = 1;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if (n & 1) ret\
-    \ = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line 3 \"misc/rng.hpp\"\
-    \nusing namespace std;\n\nunsigned long long rng() {\n  static unsigned long long\
-    \ x_ = 88172645463325252ULL;\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >>\
-    \ 9);\n}\n#line 3 \"modint/arbitrary-prime-modint.hpp\"\nusing namespace std;\n\
-    \nstruct ArbitraryLazyMontgomeryModInt {\n  using mint = ArbitraryLazyMontgomeryModInt;\n\
+    \ {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if (n & 1)\
+    \ ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line 3 \"\
+    misc/rng.hpp\"\nusing namespace std;\n\nunsigned long long rng() {\n  static unsigned\
+    \ long long x_ = 88172645463325252ULL;\n  x_ = x_ ^ (x_ << 7);\n  return x_ =\
+    \ x_ ^ (x_ >> 9);\n}\n#line 3 \"modint/arbitrary-prime-modint.hpp\"\nusing namespace\
+    \ std;\n\nstruct ArbitraryLazyMontgomeryModInt {\n  using mint = ArbitraryLazyMontgomeryModInt;\n\
     \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
     \  static u32 mod;\n  static u32 r;\n  static u32 n2;\n\n  static u32 get_r()\
     \ {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n\
@@ -176,7 +176,7 @@ data:
   isVerificationFile: false
   path: prime/fast-factorize.hpp
   requiredBy: []
-  timestamp: '2020-09-18 02:00:45+09:00'
+  timestamp: '2020-09-19 00:42:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unary-test/osak.test.cpp

@@ -323,6 +323,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
+    - icon: ':warning:'
+      path: modulo/kth-root-mod.hpp
+      title: modulo/kth-root-mod.hpp
     - icon: ':heavy_check_mark:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
