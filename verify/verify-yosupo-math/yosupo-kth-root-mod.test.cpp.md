@@ -254,8 +254,8 @@ data:
     \  INT s = p - 1, t = 0;\n  while (s % pi == 0) s /= pi, ++t;\n  INT pe = 1;\n\
     \  for (INT _ = 0; _ < ei; ++_) pe *= pi;\n\n  INT u = inv(pe - s % pe, pe);\n\
     \  mint mc = c, one = 1;\n  mint z = mc.pow((s * u + 1) / pe);\n  mint zpe = mc.pow(s\
-    \ * u);\n  if (zpe == one) return z;\n\n  assert(t > ei);\n  mint vs;\n  {\n \
-    \   INT ptm1 = 1;\n    for (INT _ = 0; _ < t - 1; ++_) ptm1 *= pi;\n    for (mint\
+    \ * u);\n  if (zpe == one) return z;\n  assert(t > ei);\n  \n  mint vs;\n  {\n\
+    \    INT ptm1 = 1;\n    for (INT _ = 0; _ < t - 1; ++_) ptm1 *= pi;\n    for (mint\
     \ v = 2;; v += one) {\n      vs = v.pow(s);\n      if (vs.pow(ptm1) != one) break;\n\
     \    }\n  }\n\n  mint vspe = vs.pow(pe);\n  INT vs_e = ei;\n  mint base = vspe;\n\
     \  for (INT _ = 0; _ < t - ei - 1; _++) base = base.pow(pi);\n  Memo<mint> memo(base,\
@@ -268,23 +268,13 @@ data:
     \n    z *= vs.pow(bsgs);\n    zpe *= vspe.pow(bsgs);\n  }\n  return z;\n}\n\n\
     template <typename INT, typename LINT, typename mint>\nINT inner_kth_root(INT\
     \ a, INT k, INT p) {\n  a %= p;\n  if (k == 0) return a == 1 ? a : -1;\n  if (a\
-    \ <= 1 || k <= 1) return a;\n\n  assert(p > 2);\n  if (mint::get_mod() != decltype(mint::a)(p))\
+    \ <= 1 || k <= 1) return a;\n  assert(p > 2);\n  if (mint::get_mod() != decltype(mint::a)(p))\
     \ mint::set_mod(p);\n  INT g = gcd(p - 1, k);\n  if (modpow<INT, LINT>(a, (p -\
-    \ 1) / g, p) != 1) return -1;\n  if (LINT(g) * g <= p) {\n    a = mint(a).pow(inv(k\
-    \ / g, (p - 1) / g)).get();\n    unordered_map<INT, int> fac;\n    for (auto &f\
-    \ : factorize(g)) fac[f]++;\n    if (mint::get_mod() != decltype(mint::a)(p))\
-    \ mint::set_mod(p);\n    for (auto pp : fac)\n      a = pe_root<INT, LINT, mint>(a,\
-    \ pp.first, pp.second, p).get();\n    return a;\n  } else {\n    // find primitive\
-    \ root\n    auto pf_p = factorize(p - 1);\n    vector<INT> fac;\n    for (auto\
-    \ &f : pf_p) fac.push_back(f);\n    fac.erase(unique(begin(fac), end(fac)), end(fac));\n\
-    \    if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n    mint\
-    \ one = 1, pr = 1;\n    auto ok = [&]() {\n      for (auto &f : fac)\n       \
-    \ if (pr.pow((p - 1) / f) == one) return false;\n      return true;\n    };\n\
-    \    while (!ok()) pr += one;\n\n    // BS-GS ... find  {pr ^ g} ^ n = a mod p\n\
-    \    mint base = pr.pow(g);\n    INT m = sqrt((p - 1) / g) + 1;\n    Memo<mint>\
-    \ memo(base, m, (p - 1) / g);\n    INT n = memo.find(mint(a));\n\n    INT y =\
-    \ LINT(n) * inv(k / g, (p - 1) / g) % ((p - 1) / g);\n    return pr.pow(y).get();\n\
-    \  }\n}\n\nint64_t kth_root(int64_t a, int64_t k, int64_t p) {\n  if (max({a,\
+    \ 1) / g, p) != 1) return -1;\n  a = mint(a).pow(inv(k / g, (p - 1) / g)).get();\n\
+    \  unordered_map<INT, int> fac;\n  for (auto &f : factorize(g)) fac[f]++;\n  if\
+    \ (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n  for (auto pp\
+    \ : fac)\n    a = pe_root<INT, LINT, mint>(a, pp.first, pp.second, p).get();\n\
+    \  return a;\n}\n\nint64_t kth_root(int64_t a, int64_t k, int64_t p) {\n  if (max({a,\
     \ k, p}) < (1LL << 30))\n    return inner_kth_root<int32_t, int64_t, ArbitraryLazyMontgomeryModInt>(a,\
     \ k,\n                                                                       \
     \    p);\n  else\n    return inner_kth_root<int64_t, __int128_t, montgomery64>(a,\
@@ -308,7 +298,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   requiredBy: []
-  timestamp: '2020-09-19 20:58:03+09:00'
+  timestamp: '2020-09-20 01:55:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
