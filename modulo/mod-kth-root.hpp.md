@@ -247,13 +247,14 @@ redirect_from:
 - /library/modulo/mod-kth-root.hpp.html
 title: kth root(Tonelli-Shanks algorithm)
 ---
+
 ## kth root
 
 整数$a,k$、素数$p$に対して$x^k \equiv a \mod p$を満たす$x$を$\mathrm{O}(\min (p,k)^{\frac{1}{4}})$で計算するライブラリ。
 
 #### 概要
 
-[37zigenさんの解説](https://yukicoder.me/problems/no/981/editorial)を大きく参考にしました。
+[37zigenさんの解説](https://yukicoder.me/problems/no/981/editorial)を参考にしました。
 
 原始根を利用して考察する。$\mod p$上の原始根を$r$と置き、$x\equiv r^y,a\equiv r^b$とすると上の等式は
 
@@ -263,8 +264,8 @@ $$x^k \equiv a \mod p \leftrightarrow ky \equiv b \mod p-1$$
 
 - $b \not \equiv 0 \mod g$の場合は解が存在しない。
 - $b \equiv 0 \mod g$の場合は、$\frac{k}{g}$と$\frac{p-1}{g}$が互いに素なので$\left(\frac{k}{g}\right)^{-1}\mod \frac{p-1}{g}$が存在して、この時
-    $$y \equiv \frac{b}{g} \left(\frac{k}{g}\right)^{-1}\mod \frac{p-1}{g}$$
-    が解となる。
+$$y \equiv \frac{b}{g} \left(\frac{k}{g}\right)^{-1}\mod \frac{p-1}{g}$$
+が解となる。
 
 以上より解を求めることが出来たが、このままでは計算量は離散対数問題と同じ$\mathrm{O}(\sqrt{p})$なので、[mod sqrt](https://nyaannyaan.github.io/library/library/modulo/mod-sqrt.hpp.html)の時と同様にTonelli-Shanks algorithmを利用して高速化を図る。
 
@@ -315,4 +316,4 @@ $e=t-t'$となる。$e$が分かったら、$z^{ {p_i}^{t'-1}}\equiv 1$を満た
 
 また、Tonelli-Shanksのループ回数は高々$\lfloor\log_{p_i}p\rfloor - 1$回となる。つまり、$t=e_i=1$の時($g$と$p-1$がともに$p_i$で1回ずつしか割り切れないとき)はループに入らないので、$p_i > \sqrt{p-1}$である素数に対しては高速に解が計算できるとわかる。よって、全体の計算量は$g=\gcd(k,p-1)$が$\mathrm{O}(\sqrt{p})$程度の重複度2の素因数を含む時が最大で、この時$\mathrm{O}(g^{\frac{1}{4}})=\mathrm{O}(\min (p,k)^{\frac{1}{4}})$となる。
 
-$g$の素因数分解もMillar-rabinとPollardの$\rho$法を利用すれば$\mathrm{O}(g^{\frac{1}{4}})$で計算できるので、全体の計算量は$\mathrm{O}(\min (p,k)^{\frac{1}{4}})$となる。
+$g$の素因数分解も[Millar-rabinとPollardの$\rho$法](https://nyaannyaan.github.io/library/prime/fast-factorize.hpp)を利用すれば$\mathrm{O}(g^{\frac{1}{4}})$で計算できるので、全体の計算量は$\mathrm{O}(\min (p,k)^{\frac{1}{4}})$となる。
