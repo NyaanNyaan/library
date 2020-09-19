@@ -294,7 +294,7 @@ $$(\ast) \leftrightarrow p_i^{e_i}w\equiv d\mod p$$
 
 $$\leftrightarrow p_i^{e_i}w\equiv d\mod s\ \wedge p_i^{e_i} w\equiv d\mod p_i^t$$
 
-となる。ここで、$\left(-s^{-1} \mod {p_i}^{e_i}\right)=u$と置き、$z$の初期値を$z_0 \equiv \mathrm{pow}(c,\frac{su+1}{{p_i}^{e_i}}) \mod p$とおくと、
+となる。ここで、$\left(-s^{-1} \mod {p_i}^{e_i}\right)=u$と置き、$z$の初期値を$z_0 \equiv \mathrm{pow}(c,\frac{su+1}{ {p_i}^{e_i} }) \mod p$とおくと、
 
 $$p_i^{e_i}w_0 \equiv d(su+1) \mod p-1$$
 
@@ -309,7 +309,7 @@ $$\mathrm{Ind}_r v^{s} \equiv 0\mod s\ ,\mathrm{Ind}_r v^s \not\equiv 0\mod p_i$
 が成り立つ。($\mathrm{Ind}_r$は$r$を底、$p$を法としたときの指数。)この$v^s$を利用してTonelli-Shanks algorithmを実行する。
 
 まず、現在の$z$の誤差項$p_i^{e^i} z - d\mod p_i^{e_i}$の誤差が$np_i^e$と表せるとする。この時$e$は、$c^{-1}z^{p_i^{e_i}}$を$p_i$乗していって$1$になるまでにかかった回数を$t'$としたときに
-$e=t-t'$となる。$e$が分かったら、$z^{{p_i}^{t'-1}}\equiv 1$を満たすまで$z$に$\mathrm{pow}(v^s,p^{e-e_i})$を掛け続ける。このアルゴリズムを$t'=0$になるまで繰り返せば$z$を求めることが出来る。
+$e=t-t'$となる。$e$が分かったら、$z^{ {p_i}^{t'-1} }\equiv 1$を満たすまで$z$に$\mathrm{pow}(v^s,p^{e-e_i})$を掛け続ける。このアルゴリズムを$t'=0$になるまで繰り返せば$z$を求めることが出来る。
 
 このままだとTonelli-Shanksのループ一回あたり最大$p_i-1$回の乗算が必要となるが、最後の$\mathrm{pow}(v^s,2^{e-e_i})$を掛ける所でBaby Step Giant Stepを利用することで、ループあたりの乗算回数を$\mathrm{O}(\sqrt{p_i})$回に落とすことが出来る。
 
