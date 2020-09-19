@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   _extendedRequiredBy: []

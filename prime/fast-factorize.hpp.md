@@ -1,28 +1,37 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':question:'
+    path: modulo/mod-kth-root.hpp
+    title: kth root(Tonelli-Shanks algorithm)
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unary-test/osak.test.cpp
     title: verify/verify-unary-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+    title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yuki/yuki-0981.test.cpp
+    title: verify/verify-yuki/yuki-0981.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/prime/fast-factorize.md
@@ -167,7 +176,7 @@ data:
     \  return ret;\n}\n\n}  // namespace fast_factorize\nusing fast_factorize::factorize;\n\
     using fast_factorize::is_prime;\n\n/**\n * @brief \u9AD8\u901F\u7D20\u56E0\u6570\
     \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n\
-    \ */"
+    \ */\n"
   dependsOn:
   - inner/inner_math.hpp
   - misc/rng.hpp
@@ -175,12 +184,15 @@ data:
   - modint/modint-montgomery64.hpp
   isVerificationFile: false
   path: prime/fast-factorize.hpp
-  requiredBy: []
-  timestamp: '2020-09-19 00:42:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  requiredBy:
+  - modulo/mod-kth-root.hpp
+  timestamp: '2020-09-19 20:58:03+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unary-test/osak.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yuki/yuki-0981.test.cpp
 documentation_of: prime/fast-factorize.hpp
 layout: document
 redirect_from:
