@@ -95,14 +95,13 @@ redirect_from:
 - /library/modulo/mod-sqrt.hpp.html
 title: mod sqrt(Tonelli-Shanks algorithm)
 ---
-
 ## mod sqrt(Tonelli-Shanks algorithm)
 
 整数$a$、素数$p$に対して$x^2 \equiv a \mod p$を満たす$x$を$\mathrm{O}(\log ^2 p)$で計算するライブラリ。
 
 #### 概要
 
-[37zigenさんの記事](https://37zigen.com/tonelli-shank-%e3%81%ae%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0/)を大きく参考にしました。
+[37zigenさんの記事](https://37zigen.com/tonelli-shank-%e3%81%ae%e3%82%a2%e3%83%ab%e3%82%b4%e3%83%aa%e3%82%ba%e3%83%a0/)を大きく参考にした。
 
 まず、オイラーの規準により
 
@@ -114,7 +113,7 @@ $\mod p$上の原始根を$r$と置き、$x\equiv r^y,a\equiv r^b$とすると�
 
 $$x^2 \equiv a \mod p \leftrightarrow 2y \equiv b \mod p-1$$
 
-と言い換えられる。よって原始根がわかれば解は求まるが、原始根の計算には$\mathrm{O}(\sqrt p \log p\log \log p)$程度の計算量が必要になる。そこで、原始根を計算せずにうまく$a$を利用して$x$を計算できるように工夫をする。(つまり、$\mod p-1$の世界での計算を$\mod p$の世界での計算にうまく置き換えて解く。)
+と言い換えられる。よって原始根がわかれば解は求まるが、離散対数問題を解く部分が$\mathrm{O}(\sqrt{p})$程度の計算量となり遅い。そこで、原始根を計算せずにうまく$a$を利用して$x$を計算できるように工夫をする。(つまり、$\mod p-1$の世界での計算を$\mod p$の世界での計算にうまく置き換えて解く。)
 
 $p - 1 =s\cdot 2^t$($t$は奇数)を満たすように$s,t$を取ると、中国剰余定理より
 
