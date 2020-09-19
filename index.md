@@ -26,7 +26,7 @@ data:
     - icon: ':warning:'
       path: bundle.py
       title: bundle.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -199,7 +199,7 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: inner
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
   - name: math
@@ -286,7 +286,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
@@ -300,10 +300,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-modint.hpp
       title: modint/arbitrary-modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/modint-montgomery64.hpp
       title: modint/modint-montgomery64.hpp
     - icon: ':heavy_check_mark:'
@@ -323,7 +323,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/mod-kth-root.hpp
       title: kth root(Tonelli-Shanks algorithm)
     - icon: ':heavy_check_mark:'
@@ -360,7 +360,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: prime/factor-enumerate.hpp
       title: prime/factor-enumerate.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: prime/fast-factorize.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
     - icon: ':heavy_check_mark:'
@@ -873,9 +873,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0963.test.cpp
       title: verify/verify-yuki/yuki-0963.test.cpp
-    - icon: ':x:'
-      path: verify/verify-yuki/yuki-0981.test.cpp
-      title: verify/verify-yuki/yuki-0981.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1080.test.cpp
       title: verify/verify-yuki/yuki-1080.test.cpp
