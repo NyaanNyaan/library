@@ -59,8 +59,8 @@ mint pe_root(INT c, INT pi, INT ei, INT p) {
   mint z = mc.pow((s * u + 1) / pe);
   mint zpe = mc.pow(s * u);
   if (zpe == one) return z;
-
   assert(t > ei);
+  
   mint vs;
   {
     INT ptm1 = 1;
@@ -104,43 +104,17 @@ INT inner_kth_root(INT a, INT k, INT p) {
   a %= p;
   if (k == 0) return a == 1 ? a : -1;
   if (a <= 1 || k <= 1) return a;
-
   assert(p > 2);
   if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);
   INT g = gcd(p - 1, k);
   if (modpow<INT, LINT>(a, (p - 1) / g, p) != 1) return -1;
-  if (LINT(g) * g <= p) {
-    a = mint(a).pow(inv(k / g, (p - 1) / g)).get();
-    unordered_map<INT, int> fac;
-    for (auto &f : factorize(g)) fac[f]++;
-    if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);
-    for (auto pp : fac)
-      a = pe_root<INT, LINT, mint>(a, pp.first, pp.second, p).get();
-    return a;
-  } else {
-    // find primitive root
-    auto pf_p = factorize(p - 1);
-    vector<INT> fac;
-    for (auto &f : pf_p) fac.push_back(f);
-    fac.erase(unique(begin(fac), end(fac)), end(fac));
-    if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);
-    mint one = 1, pr = 1;
-    auto ok = [&]() {
-      for (auto &f : fac)
-        if (pr.pow((p - 1) / f) == one) return false;
-      return true;
-    };
-    while (!ok()) pr += one;
-
-    // BS-GS ... find  {pr ^ g} ^ n = a mod p
-    mint base = pr.pow(g);
-    INT m = sqrt((p - 1) / g) + 1;
-    Memo<mint> memo(base, m, (p - 1) / g);
-    INT n = memo.find(mint(a));
-
-    INT y = LINT(n) * inv(k / g, (p - 1) / g) % ((p - 1) / g);
-    return pr.pow(y).get();
-  }
+  a = mint(a).pow(inv(k / g, (p - 1) / g)).get();
+  unordered_map<INT, int> fac;
+  for (auto &f : factorize(g)) fac[f]++;
+  if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);
+  for (auto pp : fac)
+    a = pe_root<INT, LINT, mint>(a, pp.first, pp.second, p).get();
+  return a;
 }
 
 int64_t kth_root(int64_t a, int64_t k, int64_t p) {
