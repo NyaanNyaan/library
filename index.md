@@ -117,10 +117,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/fps-circular.hpp
       title: "\u4E09\u89D2\u95A2\u6570"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-composition-fast.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
@@ -292,7 +292,7 @@ data:
     - icon: ':warning:'
       path: misc/simulated-annealing.hpp
       title: misc/simulated-annealing.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: misc/timer.hpp
       title: misc/timer.hpp
   - name: modint
@@ -332,7 +332,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/mod-sqrt.hpp
       title: mod sqrt(Tonelli-Shanks algorithm)
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: modulo/strassen.hpp
       title: modulo/strassen.hpp
     - icon: ':heavy_check_mark:'
@@ -665,6 +665,12 @@ data:
       title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - name: verify/verify-yosupo-fps
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp

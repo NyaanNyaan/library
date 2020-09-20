@@ -263,9 +263,7 @@ $$x^k \equiv a \mod p \leftrightarrow ky \equiv b \mod p-1$$
 と言い換えられる。ここで$g = \gcd(k,p-1)$と置くと、上の合同式が成り立つ条件は$b \equiv 0 \mod g$であることがわかる。よって、
 
 - $b \not \equiv 0 \mod g$の場合は解が存在しない。
-- $b \equiv 0 \mod g$の場合は、$\frac{k}{g}$と$\frac{p-1}{g}$が互いに素なので$\left(\frac{k}{g}\right)^{-1}\mod \frac{p-1}{g}$が存在して、この時
-$$y \equiv \frac{b}{g} \left(\frac{k}{g}\right)^{-1}\mod \frac{p-1}{g}$$
-が解となる。
+- $b \equiv 0 \mod g$の場合は、$\frac{k}{g}$と$\frac{p-1}{g}$が互いに素なので$\left(\frac{k}{g}\right)^{-1}\mod \frac{p-1}{g}$が存在して、この時$y \equiv \frac{b}{g} \left(\frac{k}{g}\right)^{-1}\mod \frac{p-1}{g}$が解となる。
 
 以上より解を求めることが出来たが、このままでは計算量は離散対数問題と同じ$\mathrm{O}(\sqrt{p})$なので、[mod sqrt](https://nyaannyaan.github.io/library/library/modulo/mod-sqrt.hpp.html)の時と同様にTonelli-Shanks algorithmを利用して高速化を図る。
 

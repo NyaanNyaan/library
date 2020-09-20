@@ -11,16 +11,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
@@ -470,8 +473,8 @@ data:
     \ {\n      cout << \"ok \" << N << \" \" << P << \" \" << M << endl;\n    }\n\
     \  }\n  cout << \"all ok\";\n}\n}  // namespace FastMatProd\n"
   code: "#pragma once\n#include <immintrin.h>\n//\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\n#include \"fps/formal-power-series.hpp\"\n#include \"modint/montgomery-modint.hpp\"\
-    \n#include \"modint/simd-montgomery.hpp\"\n\nnamespace FastMatProd {\n\nusing\
+    \ namespace std;\n\n#include \"../fps/formal-power-series.hpp\"\n#include \"../modint/montgomery-modint.hpp\"\
+    \n#include \"../modint/simd-montgomery.hpp\"\n\nnamespace FastMatProd {\n\nusing\
     \ mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\nusing vvm\
     \ = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\nusing u32 = uint32_t;\n\
     using i32 = int32_t;\nusing u64 = uint64_t;\nusing m256 = __m256i;\n\nconstexpr\
@@ -782,9 +785,10 @@ data:
   path: modulo/strassen.hpp
   requiredBy:
   - fps/fps-composition-fast.hpp
-  timestamp: '2020-08-30 03:20:25+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2020-09-20 15:04:46+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
 documentation_of: modulo/strassen.hpp
 layout: document
 redirect_from:
