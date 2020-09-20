@@ -52,5 +52,5 @@ struct HashMap {
 
 /**
  * @brief Hash Map
- * @docs data-structure/hash-map.md
+ * @docs docs/data-structure/hash-map.md
  */
