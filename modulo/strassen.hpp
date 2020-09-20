@@ -4,9 +4,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "fps/formal-power-series.hpp"
-#include "modint/montgomery-modint.hpp"
-#include "modint/simd-montgomery.hpp"
+#include "../fps/formal-power-series.hpp"
+#include "../modint/montgomery-modint.hpp"
+#include "../modint/simd-montgomery.hpp"
 
 namespace FastMatProd {
 
