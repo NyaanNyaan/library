@@ -16,6 +16,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
     title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -150,6 +153,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ds/yosupo-swag.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp

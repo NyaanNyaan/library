@@ -50,6 +50,9 @@ data:
       path: data-structure/dynamic-union-find.hpp
       title: data-structure/dynamic-union-find.hpp
     - icon: ':heavy_check_mark:'
+      path: data-structure/hash-map.hpp
+      title: Hash Map
+    - icon: ':heavy_check_mark:'
       path: data-structure/persistent-array.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':heavy_check_mark:'
@@ -621,6 +624,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
       title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
