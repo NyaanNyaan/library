@@ -11,45 +11,45 @@ data:
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/data-structure/hash-map.md
-    document_title: Hash Map
+    document_title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
     links: []
   bundledCode: "#line 2 \"data-structure/hash-map.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename Key, typename Val, uint32_t N = 1 <<\
-    \ 20>\nstruct HashMap {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \ private:\n  struct Node {\n    Key key;\n    Val val;\n    Node* nxt;\n    Node()\
-    \ = default;\n  };\n\n  u32 mask;\n  Node** table;\n  Node* pool;\n  int pid;\n\
-    \n  Node* my_new(const Key& key, const Val& val) {\n    pool[pid].key = key;\n\
-    \    pool[pid].val = val;\n    pool[pid].nxt = nullptr;\n    return &(pool[pid++]);\n\
-    \  }\n\n  u32 hash(u64 x) {\n    static const u64 m =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
-    \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
-    \      .count();\n    x ^= x >> 23;\n    x ^= m;\n    x ^= x >> 47;\n    return\
-    \ (x - (x >> 32)) & mask;\n  }\n\n public:\n  HashMap() : mask(N - 1), table(new\
-    \ Node*[N]()), pool(new Node[N]), pid(0) {}\n\n  Val& operator[](const Key& key)\
-    \ {\n    u32 h = hash(key);\n    Node** pp = &(table[h]);\n    while (*pp != nullptr\
-    \ && (*pp)->key != key) pp = &((*pp)->nxt);\n    if (*pp == nullptr) *pp = my_new(key,\
-    \ Val(0));\n    return (*pp)->val;\n  }\n};\n\n/**\n * @brief Hash Map\n * @docs\
-    \ docs/data-structure/hash-map.md\n */\n"
+    \ 20,\n          Val DefaultValue = Val(), Key UnusedKey = numeric_limits<Key>::max()>\n\
+    struct HashMap {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n\
+    \  vector<Key> keys;\n  vector<Val> vals;\n  bitset<N> flag;\n  static constexpr\
+    \ u32 shift = 64 - __lg(N);\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
+    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
+    \  }\n\n public:\n  HashMap() : keys(N, UnusedKey), vals(N, DefaultValue) {\n\
+    \    static_assert((N & (N - 1)) == 0 && N > 0);\n  }\n\n  Val& operator[](const\
+    \ Key& i) {\n    static u64 r = rng();\n    u32 hash = (u64(i) * r) >> shift;\n\
+    \    while(true){\n      if(!flag[hash]) {\n        keys[hash] = i;\n        flag[hash]\
+    \ = 1;\n        return vals[hash];\n      }\n      if(keys[hash] == i) return\
+    \ vals[hash];\n      hash = (hash + 1) & (N - 1);\n    }\n  }\n};\n\n/**\n * @brief\
+    \ Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hash-map.md\n\
+    \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <typename Key, typename Val, uint32_t N = 1 << 20>\nstruct HashMap {\n  using\
-    \ u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  struct Node {\n   \
-    \ Key key;\n    Val val;\n    Node* nxt;\n    Node() = default;\n  };\n\n  u32\
-    \ mask;\n  Node** table;\n  Node* pool;\n  int pid;\n\n  Node* my_new(const Key&\
-    \ key, const Val& val) {\n    pool[pid].key = key;\n    pool[pid].val = val;\n\
-    \    pool[pid].nxt = nullptr;\n    return &(pool[pid++]);\n  }\n\n  u32 hash(u64\
-    \ x) {\n    static const u64 m =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
-    \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
-    \      .count();\n    x ^= x >> 23;\n    x ^= m;\n    x ^= x >> 47;\n    return\
-    \ (x - (x >> 32)) & mask;\n  }\n\n public:\n  HashMap() : mask(N - 1), table(new\
-    \ Node*[N]()), pool(new Node[N]), pid(0) {}\n\n  Val& operator[](const Key& key)\
-    \ {\n    u32 h = hash(key);\n    Node** pp = &(table[h]);\n    while (*pp != nullptr\
-    \ && (*pp)->key != key) pp = &((*pp)->nxt);\n    if (*pp == nullptr) *pp = my_new(key,\
-    \ Val(0));\n    return (*pp)->val;\n  }\n};\n\n/**\n * @brief Hash Map\n * @docs\
-    \ docs/data-structure/hash-map.md\n */\n"
+    \ <typename Key, typename Val, uint32_t N = 1 << 20,\n          Val DefaultValue\
+    \ = Val(), Key UnusedKey = numeric_limits<Key>::max()>\nstruct HashMap {\n  using\
+    \ u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  vector<Key> keys;\n\
+    \  vector<Val> vals;\n  bitset<N> flag;\n  static constexpr u32 shift = 64 - __lg(N);\n\
+    \n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
+    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
+    \  }\n\n public:\n  HashMap() : keys(N, UnusedKey), vals(N, DefaultValue) {\n\
+    \    static_assert((N & (N - 1)) == 0 && N > 0);\n  }\n\n  Val& operator[](const\
+    \ Key& i) {\n    static u64 r = rng();\n    u32 hash = (u64(i) * r) >> shift;\n\
+    \    while(true){\n      if(!flag[hash]) {\n        keys[hash] = i;\n        flag[hash]\
+    \ = 1;\n        return vals[hash];\n      }\n      if(keys[hash] == i) return\
+    \ vals[hash];\n      hash = (hash + 1) & (N - 1);\n    }\n  }\n};\n\n/**\n * @brief\
+    \ Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hash-map.md\n\
+    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/hash-map.hpp
   requiredBy: []
-  timestamp: '2020-09-20 20:56:25+09:00'
+  timestamp: '2020-09-21 14:00:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
@@ -58,7 +58,7 @@ layout: document
 redirect_from:
 - /library/data-structure/hash-map.hpp
 - /library/data-structure/hash-map.hpp.html
-title: Hash Map
+title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
 ---
 ## Hash Map
 
@@ -70,8 +70,9 @@ title: Hash Map
 
 同様のデータ構造にC++の`unordered_map`があるが、`unordered_map`はハッシュ衝突の脆弱性があり、CodeForcesのようなHackの存在するコンテストで無造作に使用するのは危険である。([参考](https://kimiyuki.net/blog/2017/03/08/unordered-map-hash-collision/))
 
-このライブラリでは最低限の機能を持ったHash Mapを実装している。実装には大きく分けて連鎖法と開番地法があり、開番地法の方が定数倍がよいらしいが、簡単のため連鎖法で実装している。そのため定数倍はあまりよくないが、それでも`unordered_map`より2倍程度の速さで動作する。
+このライブラリでは最低限の機能を持ったHash Mapを実装している。実装には大きく分けて連鎖法と開番地法があるが、開番地法の方がメモリの消費が少なく定数倍もよい。yosupo judgeの提出は以下の通りで、入出力の時間も考慮すると開番地法は`unordered_map`のおよそ4倍程度の速さで動作しているとわかる。
 
-- [自作のHash Map](https://judge.yosupo.jp/submission/23579)　141ms
+- [自作Hash Map(開番地法)](https://judge.yosupo.jp/submission/23703) 100ms
+- [自作Hash Map(連鎖法)](https://judge.yosupo.jp/submission/23726)　146ms
 - [ハッシュ衝突の対策をしたunordered_map](https://judge.yosupo.jp/submission/23582) 263ms
-- (入出力にかかる時間はともに最大50ms程度と考えられる。)
+- (入出力にかかる時間は最大50ms程度と考えられる。)

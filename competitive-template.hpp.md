@@ -70,6 +70,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
     title: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
   - icon: ':heavy_check_mark:'
@@ -615,6 +618,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp

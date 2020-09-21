@@ -8,8 +8,9 @@
 
 同様のデータ構造にC++の`unordered_map`があるが、`unordered_map`はハッシュ衝突の脆弱性があり、CodeForcesのようなHackの存在するコンテストで無造作に使用するのは危険である。([参考](https://kimiyuki.net/blog/2017/03/08/unordered-map-hash-collision/))
 
-このライブラリでは最低限の機能を持ったHash Mapを実装している。実装には大きく分けて連鎖法と開番地法があり、開番地法の方が定数倍がよいらしいが、簡単のため連鎖法で実装している。そのため定数倍はあまりよくないが、それでも`unordered_map`より2倍程度の速さで動作する。
+このライブラリでは最低限の機能を持ったHash Mapを実装している。実装には大きく分けて連鎖法と開番地法があるが、開番地法の方がメモリの消費が少なく定数倍もよい。yosupo judgeの提出は以下の通りで、入出力の時間も考慮すると開番地法は`unordered_map`のおよそ4倍程度の速さで動作しているとわかる。
 
-- [自作のHash Map](https://judge.yosupo.jp/submission/23579)　141ms
+- [自作Hash Map(開番地法)](https://judge.yosupo.jp/submission/23703) 100ms
+- [自作Hash Map(連鎖法)](https://judge.yosupo.jp/submission/23726)　146ms
 - [ハッシュ衝突の対策をしたunordered_map](https://judge.yosupo.jp/submission/23582) 263ms
-- (入出力にかかる時間はともに最大50ms程度と考えられる。)
+- (入出力にかかる時間は最大50ms程度と考えられる。)
