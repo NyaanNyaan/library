@@ -119,10 +119,10 @@ data:
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
-    \nusing namespace std;\n\ntemplate <typename Key, typename Val, Val DefaultValue\
-    \ = Val()>\nstruct HashMap {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\
-    \n private:\n  u32 cap, s;\n  Key* keys;\n  Val* vals;\n  vector<bool> flag;\n\
-    \  const u64 r;\n  u32 shift;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
+    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  u32 cap,\
+    \ s;\n  Key* keys;\n  Val* vals;\n  vector<bool> flag;\n  const u64 r;\n  u32\
+    \ shift;\n  Val DefaultValue;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
     \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
     \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
     \  }\n\n  void reallocate() {\n    cap <<= 1;\n    Key* k = new Key[cap];\n  \
@@ -134,52 +134,57 @@ data:
     \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n public:\n\
     \  HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n  \
     \      vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
-    \ - __lg(cap)) {}\n\n  ~HashMap() {\n    delete(keys);\n    delete(vals);\n  }\n\
-    \n  Val& operator[](const Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n \
-    \   while (true) {\n      if (!flag[hash]) {\n        if (s + s / 4 >= cap) {\n\
-    \          reallocate();\n          return (*this)[i];\n        }\n        keys[hash]\
-    \ = i;\n        flag[hash] = 1;\n        ++s;\n        return vals[hash] = DefaultValue;\n\
-    \      }\n      if (keys[hash] == i) return vals[hash];\n      hash = (hash +\
-    \ 1) & (cap - 1);\n    }\n  }\n\n  // exist -> return pointer \n  // not exist\
-    \ -> return nullptr \n  Val* find(const Key& i) {\n    u32 hash = (u64(i) * r)\
-    \ >> shift;\n    while (true) {\n      if (!flag[hash]) return nullptr;\n    \
-    \  if (keys[hash] == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap\
-    \ - 1);\n    }\n  }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n\
-    \ * @docs docs/data-structure/hash-map.md\n */\n#line 3 \"misc/fastio.hpp\"\n\
-    using namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\n\
-    char ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char\
-    \ num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++)\
-    \ {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4\
-    \ + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\
-    \ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir -\
-    \ pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline\
-    \ void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void\
-    \ rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x)\
-    \ {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while\
-    \ (c < '-');\n  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
-    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
-    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
-    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
-    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
-    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
-    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
-    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
-    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
-    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
-    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
-    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
-    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
-    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
-    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
-    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
-    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
-    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
-    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
-    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 6 \"verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp\"\n\
-    \nHashMap<ll, ll> m;\n\nvoid solve() {\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_,\
-    \ Q) {\n    rd(c);\n    if (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n\
-    \      rd(k, v);\n      m[k] = v;\n    }\n  }\n}\n"
+    \ - __lg(cap)),\n        DefaultValue(Val()) {}\n\n  ~HashMap() {\n    delete\
+    \ (keys);\n    delete (vals);\n  }\n\n  Val& operator[](const Key& i) {\n    u32\
+    \ hash = (u64(i) * r) >> shift;\n    while (true) {\n      if (!flag[hash]) {\n\
+    \        if (s + s / 4 >= cap) {\n          reallocate();\n          return (*this)[i];\n\
+    \        }\n        keys[hash] = i;\n        flag[hash] = 1;\n        ++s;\n \
+    \       return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i)\
+    \ return vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n  //\
+    \ exist -> return pointer of Val\n  // not exist -> return nullptr\n  Val* find(const\
+    \ Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n     \
+    \ if (!flag[hash]) return nullptr;\n      if (keys[hash] == i) return &(vals[hash]);\n\
+    \      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n  // return vector< pair<const\
+    \ Key&, val& > >\n  vector<pair<const Key&, Val&>> enumerate() {\n    vector<pair<const\
+    \ Key&, Val&>> ret;\n    for (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i],\
+    \ vals[i]);\n    return ret;\n  }\n\n  int size() { return s; }\n\n  // set default_value\n\
+    \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
+    \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
+    \ */\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\n\
+    static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
+    \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
+    \ {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j\
+    \ = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n\
+    \      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
+    \ ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ -\
+    \ pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1,\
+    \ por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c = ibuf[pil++]; }\n\
+    template <typename T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n\
+    \  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n  bool minus = 0;\n\
+    \  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n  }\n  x = 0;\n  while\
+    \ (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if (minus)\
+    \ x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\n\
+    inline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline void\
+    \ wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n\
+    \    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n  }\n\
+    \  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num\
+    \ + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n\
+    \    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n      uint32_t\
+    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
+    \     obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n\
+    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x\
+    \ << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num\
+    \ + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i +\
+    \ 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename\
+    \ Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n  wt(head);\n\
+    \  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n  wt(x, '\\\
+    n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
+    \ fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n#line 6 \"\
+    verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp\"\n\nHashMap<ll,\
+    \ ll> m;\n\nvoid solve() {\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_, Q) {\n\
+    \    rd(c);\n    if (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n    \
+    \  rd(k, v);\n      m[k] = v;\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n\
     #include \"../../competitive-template.hpp\"\n#include \"../../data-structure/hash-map-variable-length.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n\nHashMap<ll, ll> m;\n\nvoid solve() {\n\
@@ -193,7 +198,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 21:25:52+09:00'
+  timestamp: '2020-09-21 22:22:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp

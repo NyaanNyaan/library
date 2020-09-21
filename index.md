@@ -383,7 +383,7 @@ data:
       title: prime/prime-sieve.hpp
   - name: segment-tree
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/dynamic-li-chao-tree.hpp
       title: segment-tree/dynamic-li-chao-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -630,6 +630,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
       title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp

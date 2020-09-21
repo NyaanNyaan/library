@@ -82,6 +82,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
   - icon: ':heavy_check_mark:'
@@ -625,6 +628,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
