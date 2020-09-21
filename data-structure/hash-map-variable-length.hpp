@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename Key, typename Val, Val DefaultValue = Val()>
+template <typename Key, typename Val>
 struct HashMap {
   using u32 = uint32_t;
   using u64 = uint64_t;
@@ -14,6 +14,7 @@ struct HashMap {
   vector<bool> flag;
   const u64 r;
   u32 shift;
+  Val DefaultValue;
 
   static u64 rng() {
     u64 m = chrono::duration_cast<chrono::nanoseconds>(
@@ -55,11 +56,12 @@ struct HashMap {
         vals(new Val[cap]),
         flag(cap),
         r(rng()),
-        shift(64 - __lg(cap)) {}
+        shift(64 - __lg(cap)),
+        DefaultValue(Val()) {}
 
   ~HashMap() {
-    delete(keys);
-    delete(vals);
+    delete (keys);
+    delete (vals);
   }
 
   Val& operator[](const Key& i) {
@@ -80,8 +82,8 @@ struct HashMap {
     }
   }
 
-  // exist -> return pointer 
-  // not exist -> return nullptr 
+  // exist -> return pointer of Val
+  // not exist -> return nullptr
   Val* find(const Key& i) {
     u32 hash = (u64(i) * r) >> shift;
     while (true) {
@@ -90,6 +92,19 @@ struct HashMap {
       hash = (hash + 1) & (cap - 1);
     }
   }
+
+  // return vector< pair<const Key&, val& > >
+  vector<pair<const Key&, Val&>> enumerate() {
+    vector<pair<const Key&, Val&>> ret;
+    for (u32 i = 0; i < cap; ++i)
+      if (flag[i]) ret.emplace_back(keys[i], vals[i]);
+    return ret;
+  }
+
+  int size() { return s; }
+
+  // set default_value
+  void set_default(const Val& val) { DefaultValue = val; }
 };
 
 /**

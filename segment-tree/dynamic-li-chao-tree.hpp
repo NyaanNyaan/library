@@ -2,6 +2,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include "../data-structure/hash-map-variable-length.hpp"
+
 template <typename T, T INF>
 struct DynamicLiChaoTree {
   struct Line {
@@ -16,7 +18,7 @@ struct DynamicLiChaoTree {
 
   // remind セグ木は1-indexedの実装
   T xmin, xmax, _size;
-  unordered_map<T, Line> seg;
+  HashMap<T, Line> seg;
 
   // [l , r]におけるLi Chao Tree
   DynamicLiChaoTree(T xmin, T xmax) : xmin(xmin), xmax(xmax) {
@@ -24,6 +26,7 @@ struct DynamicLiChaoTree {
     while (_size < xmax - xmin + 1) _size <<= 1;
   }
 
+ private:
   // 内部用の関数
   void update(T a, T b, T left, T right, T seg_idx) {
     Line line(a, b);
@@ -51,13 +54,8 @@ struct DynamicLiChaoTree {
     right = left + (_size >> upper_bit);
     update(a, b, left, right, seg_idx);
   }
-  /*
-  void update(T a,T b,T left,T right){
-    T lower_bit = (left | right) & (- (left | right) );
-    T seg_idx = ( _size + left ) / lower_bit;
-    update(a , b , left , right , seg_idx);
-  }
-  */
+
+ public:
   // y = ax + bなる直線を追加
   void update(T a, T b) { update(a, b, 0, _size, 1); }
 
@@ -86,13 +84,5 @@ struct DynamicLiChaoTree {
         seg_idx = (seg_idx << 1) | 1, left = mid;
     }
     return ret;
-  }
-
-  void merge(DynamicLiChaoTree<T, INF> &other) {
-    if (seg.size() < other.seg.size()) seg.swap(other.seg);
-    for (auto &x : other.seg) {
-      if (x.second.intercept == INF) continue;
-      update(x.second.slope, x.second.intercept, x.first);
-    }
   }
 };
