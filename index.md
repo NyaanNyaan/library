@@ -53,6 +53,10 @@ data:
       path: data-structure/hash-map-chain.hpp
       title: "Hash Map(\u9023\u9396\u6CD5)"
     - icon: ':heavy_check_mark:'
+      path: data-structure/hash-map-variable-length.hpp
+      title: "Hash Map(\u53EF\u5909\u9577\u30CF\u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\
+        \u30EB)"
+    - icon: ':heavy_check_mark:'
       path: data-structure/hash-map.hpp
       title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
     - icon: ':heavy_check_mark:'
@@ -630,6 +634,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp

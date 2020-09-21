@@ -1,14 +1,8 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: modulo/mod-log.hpp
-    title: modulo/mod-log.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
-    title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
@@ -121,12 +115,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: math/elementary-function.hpp
-  requiredBy:
-  - modulo/mod-log.hpp
+  requiredBy: []
   timestamp: '2020-09-18 02:08:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp

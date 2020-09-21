@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: modulo/mod-log.hpp
+    title: modulo/mod-log.hpp
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
@@ -15,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+    title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
@@ -45,6 +51,7 @@ data:
   isVerificationFile: false
   path: inner/inner_math.hpp
   requiredBy:
+  - modulo/mod-log.hpp
   - modulo/mod-kth-root.hpp
   - prime/fast-factorize.hpp
   timestamp: '2020-09-19 00:42:31+09:00'
@@ -52,6 +59,7 @@ data:
   verifiedWith:
   - verify/verify-unary-test/osak.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
 documentation_of: inner/inner_math.hpp
 layout: document

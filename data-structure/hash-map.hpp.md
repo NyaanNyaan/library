@@ -15,41 +15,39 @@ data:
     links: []
   bundledCode: "#line 2 \"data-structure/hash-map.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename Key, typename Val, uint32_t N = 1 <<\
-    \ 20,\n          Val DefaultValue = Val(), Key UnusedKey = numeric_limits<Key>::max()>\n\
-    struct HashMap {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n\
-    \  vector<Key> keys;\n  vector<Val> vals;\n  bitset<N> flag;\n  static constexpr\
-    \ u32 shift = 64 - __lg(N);\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
-    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
-    \  }\n\n public:\n  HashMap() : keys(N, UnusedKey), vals(N, DefaultValue) {\n\
-    \    static_assert((N & (N - 1)) == 0 && N > 0);\n  }\n\n  Val& operator[](const\
-    \ Key& i) {\n    static u64 r = rng();\n    u32 hash = (u64(i) * r) >> shift;\n\
-    \    while(true){\n      if(!flag[hash]) {\n        keys[hash] = i;\n        flag[hash]\
-    \ = 1;\n        return vals[hash];\n      }\n      if(keys[hash] == i) return\
-    \ vals[hash];\n      hash = (hash + 1) & (N - 1);\n    }\n  }\n};\n\n/**\n * @brief\
-    \ Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hash-map.md\n\
+    \ 20,\n          Val DefaultValue = Val()>\nstruct HashMap {\n  using u32 = uint32_t;\n\
+    \  using u64 = uint64_t;\n\n private:\n  Key* keys;\n  Val* vals;\n  bitset<N>\
+    \ flag;\n  static constexpr u32 shift = 64 - __lg(N);\n\n  static u64 rng() {\n\
+    \    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n                chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
+    \  }\n\n public:\n  HashMap() : keys(new Key[N]), vals(new Val[N]) {\n    static_assert((N\
+    \ & (N - 1)) == 0 && N > 0);\n  }\n\n  Val& operator[](const Key& i) {\n    static\
+    \ u64 r = rng();\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n\
+    \      if (!flag[hash]) {\n        keys[hash] = i;\n        flag[hash] = 1;\n\
+    \        return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i)\
+    \ return vals[hash];\n      hash = (hash + 1) & (N - 1);\n    }\n  }\n};\n\n/**\n\
+    \ * @brief Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hash-map.md\n\
     \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename Key, typename Val, uint32_t N = 1 << 20,\n          Val DefaultValue\
-    \ = Val(), Key UnusedKey = numeric_limits<Key>::max()>\nstruct HashMap {\n  using\
-    \ u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  vector<Key> keys;\n\
-    \  vector<Val> vals;\n  bitset<N> flag;\n  static constexpr u32 shift = 64 - __lg(N);\n\
-    \n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ = Val()>\nstruct HashMap {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\
+    \n private:\n  Key* keys;\n  Val* vals;\n  bitset<N> flag;\n  static constexpr\
+    \ u32 shift = 64 - __lg(N);\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
     \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
     \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
-    \  }\n\n public:\n  HashMap() : keys(N, UnusedKey), vals(N, DefaultValue) {\n\
-    \    static_assert((N & (N - 1)) == 0 && N > 0);\n  }\n\n  Val& operator[](const\
-    \ Key& i) {\n    static u64 r = rng();\n    u32 hash = (u64(i) * r) >> shift;\n\
-    \    while(true){\n      if(!flag[hash]) {\n        keys[hash] = i;\n        flag[hash]\
-    \ = 1;\n        return vals[hash];\n      }\n      if(keys[hash] == i) return\
-    \ vals[hash];\n      hash = (hash + 1) & (N - 1);\n    }\n  }\n};\n\n/**\n * @brief\
-    \ Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hash-map.md\n\
+    \  }\n\n public:\n  HashMap() : keys(new Key[N]), vals(new Val[N]) {\n    static_assert((N\
+    \ & (N - 1)) == 0 && N > 0);\n  }\n\n  Val& operator[](const Key& i) {\n    static\
+    \ u64 r = rng();\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n\
+    \      if (!flag[hash]) {\n        keys[hash] = i;\n        flag[hash] = 1;\n\
+    \        return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i)\
+    \ return vals[hash];\n      hash = (hash + 1) & (N - 1);\n    }\n  }\n};\n\n/**\n\
+    \ * @brief Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hash-map.md\n\
     \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/hash-map.hpp
   requiredBy: []
-  timestamp: '2020-09-21 14:00:42+09:00'
+  timestamp: '2020-09-21 20:08:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
