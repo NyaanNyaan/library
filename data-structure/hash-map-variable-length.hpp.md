@@ -1,18 +1,23 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: modulo/mod-log.hpp
+    title: modulo/mod-log.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+    title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/data-structure/hash-map.md
-    document_title: "Hash Map(\u53EF\u5909\u9577\u30CF\u30C3\u30B7\u30E5\u30C6\u30FC\
-      \u30D6\u30EB)"
+    document_title: "Hash Map(\u53EF\u5909\u9577\u7248)"
     links: []
   bundledCode: "#line 2 \"data-structure/hash-map-variable-length.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename Key, typename Val,\
@@ -28,16 +33,20 @@ data:
     \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
     \        f[hash] = 1;\n      }\n    }\n    delete (keys);\n    delete (vals);\n\
     \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n public:\n\
-    \  HashMap()\n      : cap(16),\n        s(0),\n        keys(new Key[cap]),\n \
-    \       vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
-    \ - __lg(cap)) {}\n\n  Val& operator[](const Key& i) {\n    u32 hash = (u64(i)\
-    \ * r) >> shift;\n    while (true) {\n      if (!flag[hash]) {\n        if (s\
-    \ + s / 4 > cap) {\n          reallocate();\n          return (*this)[i];\n  \
-    \      }\n        keys[hash] = i;\n        flag[hash] = 1;\n        ++s;\n   \
-    \     return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i) return\
-    \ vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n};\n\n/**\n *\
-    \ @brief Hash Map(\u53EF\u5909\u9577\u30CF\u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\
-    \u30EB)\n * @docs docs/data-structure/hash-map.md\n */\n"
+    \  HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n  \
+    \      vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
+    \ - __lg(cap)) {}\n\n  ~HashMap() {\n    delete(keys);\n    delete(vals);\n  }\n\
+    \n  Val& operator[](const Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n \
+    \   while (true) {\n      if (!flag[hash]) {\n        if (s + s / 4 >= cap) {\n\
+    \          reallocate();\n          return (*this)[i];\n        }\n        keys[hash]\
+    \ = i;\n        flag[hash] = 1;\n        ++s;\n        return vals[hash] = DefaultValue;\n\
+    \      }\n      if (keys[hash] == i) return vals[hash];\n      hash = (hash +\
+    \ 1) & (cap - 1);\n    }\n  }\n\n  // exist -> return pointer \n  // not exist\
+    \ -> return nullptr \n  Val* find(const Key& i) {\n    u32 hash = (u64(i) * r)\
+    \ >> shift;\n    while (true) {\n      if (!flag[hash]) return nullptr;\n    \
+    \  if (keys[hash] == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap\
+    \ - 1);\n    }\n  }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n\
+    \ * @docs docs/data-structure/hash-map.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename Key, typename Val, Val DefaultValue = Val()>\nstruct HashMap {\n \
     \ using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  u32 cap, s;\n\
@@ -52,31 +61,36 @@ data:
     \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
     \        f[hash] = 1;\n      }\n    }\n    delete (keys);\n    delete (vals);\n\
     \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n public:\n\
-    \  HashMap()\n      : cap(16),\n        s(0),\n        keys(new Key[cap]),\n \
-    \       vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
-    \ - __lg(cap)) {}\n\n  Val& operator[](const Key& i) {\n    u32 hash = (u64(i)\
-    \ * r) >> shift;\n    while (true) {\n      if (!flag[hash]) {\n        if (s\
-    \ + s / 4 > cap) {\n          reallocate();\n          return (*this)[i];\n  \
-    \      }\n        keys[hash] = i;\n        flag[hash] = 1;\n        ++s;\n   \
-    \     return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i) return\
-    \ vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n};\n\n/**\n *\
-    \ @brief Hash Map(\u53EF\u5909\u9577\u30CF\u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\
-    \u30EB)\n * @docs docs/data-structure/hash-map.md\n */\n"
+    \  HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n  \
+    \      vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
+    \ - __lg(cap)) {}\n\n  ~HashMap() {\n    delete(keys);\n    delete(vals);\n  }\n\
+    \n  Val& operator[](const Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n \
+    \   while (true) {\n      if (!flag[hash]) {\n        if (s + s / 4 >= cap) {\n\
+    \          reallocate();\n          return (*this)[i];\n        }\n        keys[hash]\
+    \ = i;\n        flag[hash] = 1;\n        ++s;\n        return vals[hash] = DefaultValue;\n\
+    \      }\n      if (keys[hash] == i) return vals[hash];\n      hash = (hash +\
+    \ 1) & (cap - 1);\n    }\n  }\n\n  // exist -> return pointer \n  // not exist\
+    \ -> return nullptr \n  Val* find(const Key& i) {\n    u32 hash = (u64(i) * r)\
+    \ >> shift;\n    while (true) {\n      if (!flag[hash]) return nullptr;\n    \
+    \  if (keys[hash] == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap\
+    \ - 1);\n    }\n  }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n\
+    \ * @docs docs/data-structure/hash-map.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/hash-map-variable-length.hpp
-  requiredBy: []
-  timestamp: '2020-09-21 20:08:25+09:00'
+  requiredBy:
+  - modulo/mod-log.hpp
+  timestamp: '2020-09-21 21:25:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
+  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
 documentation_of: data-structure/hash-map-variable-length.hpp
 layout: document
 redirect_from:
 - /library/data-structure/hash-map-variable-length.hpp
 - /library/data-structure/hash-map-variable-length.hpp.html
-title: "Hash Map(\u53EF\u5909\u9577\u30CF\u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\u30EB\
-  )"
+title: "Hash Map(\u53EF\u5909\u9577\u7248)"
 ---
 ## Hash Map
 

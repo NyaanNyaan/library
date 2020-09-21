@@ -6,8 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure/hash-map-variable-length.hpp
-    title: "Hash Map(\u53EF\u5909\u9577\u30CF\u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\u30EB\
-      )"
+    title: "Hash Map(\u53EF\u5909\u9577\u7248)"
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
@@ -133,17 +132,21 @@ data:
     \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
     \        f[hash] = 1;\n      }\n    }\n    delete (keys);\n    delete (vals);\n\
     \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n public:\n\
-    \  HashMap()\n      : cap(16),\n        s(0),\n        keys(new Key[cap]),\n \
-    \       vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
-    \ - __lg(cap)) {}\n\n  Val& operator[](const Key& i) {\n    u32 hash = (u64(i)\
-    \ * r) >> shift;\n    while (true) {\n      if (!flag[hash]) {\n        if (s\
-    \ + s / 4 > cap) {\n          reallocate();\n          return (*this)[i];\n  \
-    \      }\n        keys[hash] = i;\n        flag[hash] = 1;\n        ++s;\n   \
-    \     return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i) return\
-    \ vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n};\n\n/**\n *\
-    \ @brief Hash Map(\u53EF\u5909\u9577\u30CF\u30C3\u30B7\u30E5\u30C6\u30FC\u30D6\
-    \u30EB)\n * @docs docs/data-structure/hash-map.md\n */\n#line 3 \"misc/fastio.hpp\"\
-    \nusing namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\n\
+    \  HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n  \
+    \      vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
+    \ - __lg(cap)) {}\n\n  ~HashMap() {\n    delete(keys);\n    delete(vals);\n  }\n\
+    \n  Val& operator[](const Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n \
+    \   while (true) {\n      if (!flag[hash]) {\n        if (s + s / 4 >= cap) {\n\
+    \          reallocate();\n          return (*this)[i];\n        }\n        keys[hash]\
+    \ = i;\n        flag[hash] = 1;\n        ++s;\n        return vals[hash] = DefaultValue;\n\
+    \      }\n      if (keys[hash] == i) return vals[hash];\n      hash = (hash +\
+    \ 1) & (cap - 1);\n    }\n  }\n\n  // exist -> return pointer \n  // not exist\
+    \ -> return nullptr \n  Val* find(const Key& i) {\n    u32 hash = (u64(i) * r)\
+    \ >> shift;\n    while (true) {\n      if (!flag[hash]) return nullptr;\n    \
+    \  if (keys[hash] == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap\
+    \ - 1);\n    }\n  }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n\
+    \ * @docs docs/data-structure/hash-map.md\n */\n#line 3 \"misc/fastio.hpp\"\n\
+    using namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\n\
     char ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char\
     \ num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++)\
     \ {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4\
@@ -190,7 +193,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 20:08:25+09:00'
+  timestamp: '2020-09-21 21:25:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp

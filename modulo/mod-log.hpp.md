@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: data-structure/hash-map-variable-length.hpp
+    title: "Hash Map(\u53EF\u5909\u9577\u7248)"
+  - icon: ':heavy_check_mark:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
   _extendedRequiredBy: []
@@ -15,41 +18,70 @@ data:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"modulo/mod-log.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n\n#line 3 \"inner/inner_math.hpp\"\nusing namespace std;\n\nnamespace\
-    \ inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 = int64_t;\n\
-    using u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n  while (b)\
-    \ swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT inv(T a, T p) {\n\
-    \  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n\
-    \    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ? y + p : y;\n\
-    }\n\ntemplate <typename T, typename U>\nT modpow(T a, U n, T p) {\n  T ret = 1\
-    \ % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if (n & 1) ret = U(ret) *\
-    \ a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line 6 \"modulo/mod-log.hpp\"\
+    \ std;\n\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\nusing namespace\
+    \ std;\n\ntemplate <typename Key, typename Val, Val DefaultValue = Val()>\nstruct\
+    \ HashMap {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n \
+    \ u32 cap, s;\n  Key* keys;\n  Val* vals;\n  vector<bool> flag;\n  const u64 r;\n\
+    \  u32 shift;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
+    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
+    \  }\n\n  void reallocate() {\n    cap <<= 1;\n    Key* k = new Key[cap];\n  \
+    \  Val* v = new Val[cap];\n    vector<bool> f(cap);\n    u32 sh = shift - 1;\n\
+    \    for (int i = 0; i < (int)flag.size(); i++) {\n      if (flag[i]) {\n    \
+    \    u32 hash = (u64(keys[i]) * r) >> sh;\n        while (f[hash]) hash = (hash\
+    \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
+    \        f[hash] = 1;\n      }\n    }\n    delete (keys);\n    delete (vals);\n\
+    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n public:\n\
+    \  HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n  \
+    \      vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
+    \ - __lg(cap)) {}\n\n  ~HashMap() {\n    delete(keys);\n    delete(vals);\n  }\n\
+    \n  Val& operator[](const Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n \
+    \   while (true) {\n      if (!flag[hash]) {\n        if (s + s / 4 >= cap) {\n\
+    \          reallocate();\n          return (*this)[i];\n        }\n        keys[hash]\
+    \ = i;\n        flag[hash] = 1;\n        ++s;\n        return vals[hash] = DefaultValue;\n\
+    \      }\n      if (keys[hash] == i) return vals[hash];\n      hash = (hash +\
+    \ 1) & (cap - 1);\n    }\n  }\n\n  // exist -> return pointer \n  // not exist\
+    \ -> return nullptr \n  Val* find(const Key& i) {\n    u32 hash = (u64(i) * r)\
+    \ >> shift;\n    while (true) {\n      if (!flag[hash]) return nullptr;\n    \
+    \  if (keys[hash] == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap\
+    \ - 1);\n    }\n  }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n\
+    \ * @docs docs/data-structure/hash-map.md\n */\n#line 3 \"inner/inner_math.hpp\"\
+    \nusing namespace std;\n\nnamespace inner {\n\nusing i32 = int32_t;\nusing u32\
+    \ = uint32_t;\nusing i64 = int64_t;\nusing u64 = uint64_t;\n\ntemplate <typename\
+    \ T>\nT gcd(T a, T b) {\n  while (b) swap(a %= b, b);\n  return a;\n}\n\ntemplate\
+    \ <typename T>\nT inv(T a, T p) {\n  T b = p, x = 1, y = 0;\n  while (a) {\n \
+    \   T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b\
+    \ == 1);\n  return y < 0 ? y + p : y;\n}\n\ntemplate <typename T, typename U>\n\
+    T modpow(T a, U n, T p) {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a) * a\
+    \ % p)\n    if (n & 1) ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace\
+    \ inner\n#line 7 \"modulo/mod-log.hpp\"\n\nint64_t mod_log(int64_t a, int64_t\
+    \ b, int64_t p) {\n  using namespace inner;\n  if ((a %= p) < 0) a += p;\n  if\
+    \ ((b %= p) < 0) b += p;\n  int64_t f, g, r = 1 % p;\n  for (f = 0; (g = gcd(a,\
+    \ p)) > 1; ++f) {\n    if (b % g) return (r == b) ? f : -1;\n    b /= g;\n   \
+    \ p /= g;\n    (r *= (a / g)) %= p;\n  }\n  if (p == 1) return f;\n  int64_t ir\
+    \ = inv(r, p);\n  (b *= ir) %= p;\n  int64_t k = 0, ak = 1;\n  HashMap<int64_t,\
+    \ int64_t> baby;\n  for (; k * k < p; ++k) {\n    if(!baby.find(ak)) baby[ak]\
+    \ = k;\n    (ak *= a) %= p;\n  }\n  int64_t iak = inv(ak, p);\n  for (int64_t\
+    \ i = 0; i < k; ++i) {\n    if (baby.find(b)) return f + i * k + baby[b];\n  \
+    \  (b *= iak) %= p;\n  }\n  return -1;\n}\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
+    \ \"../data-structure/hash-map-variable-length.hpp\"\n#include \"../inner/inner_math.hpp\"\
     \n\nint64_t mod_log(int64_t a, int64_t b, int64_t p) {\n  using namespace inner;\n\
     \  if ((a %= p) < 0) a += p;\n  if ((b %= p) < 0) b += p;\n  int64_t f, g, r =\
     \ 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1; ++f) {\n    if (b % g) return (r\
     \ == b) ? f : -1;\n    b /= g;\n    p /= g;\n    (r *= (a / g)) %= p;\n  }\n \
     \ if (p == 1) return f;\n  int64_t ir = inv(r, p);\n  (b *= ir) %= p;\n  int64_t\
-    \ k = 0, ak = 1;\n  unordered_map<int64_t, int64_t> baby;\n  for (; k * k < p;\
-    \ ++k) {\n    if (!baby.count(ak)) baby[ak] = k;\n    (ak *= a) %= p;\n  }\n \
-    \ int64_t iak = inv(ak, p);\n  for (int64_t i = 0; i < k; ++i) {\n    if (baby.count(b))\
-    \ return f + i * k + baby[b];\n    (b *= iak) %= p;\n  }\n  return -1;\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../inner/inner_math.hpp\"\n\nint64_t mod_log(int64_t a, int64_t b, int64_t\
-    \ p) {\n  using namespace inner;\n  if ((a %= p) < 0) a += p;\n  if ((b %= p)\
-    \ < 0) b += p;\n  int64_t f, g, r = 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1;\
-    \ ++f) {\n    if (b % g) return (r == b) ? f : -1;\n    b /= g;\n    p /= g;\n\
-    \    (r *= (a / g)) %= p;\n  }\n  if (p == 1) return f;\n  int64_t ir = inv(r,\
-    \ p);\n  (b *= ir) %= p;\n  int64_t k = 0, ak = 1;\n  unordered_map<int64_t, int64_t>\
-    \ baby;\n  for (; k * k < p; ++k) {\n    if (!baby.count(ak)) baby[ak] = k;\n\
-    \    (ak *= a) %= p;\n  }\n  int64_t iak = inv(ak, p);\n  for (int64_t i = 0;\
-    \ i < k; ++i) {\n    if (baby.count(b)) return f + i * k + baby[b];\n    (b *=\
-    \ iak) %= p;\n  }\n  return -1;\n}"
+    \ k = 0, ak = 1;\n  HashMap<int64_t, int64_t> baby;\n  for (; k * k < p; ++k)\
+    \ {\n    if(!baby.find(ak)) baby[ak] = k;\n    (ak *= a) %= p;\n  }\n  int64_t\
+    \ iak = inv(ak, p);\n  for (int64_t i = 0; i < k; ++i) {\n    if (baby.find(b))\
+    \ return f + i * k + baby[b];\n    (b *= iak) %= p;\n  }\n  return -1;\n}"
   dependsOn:
+  - data-structure/hash-map-variable-length.hpp
   - inner/inner_math.hpp
   isVerificationFile: false
   path: modulo/mod-log.hpp
   requiredBy: []
-  timestamp: '2020-09-21 20:08:25+09:00'
+  timestamp: '2020-09-21 21:25:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
