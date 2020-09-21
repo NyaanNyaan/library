@@ -49,7 +49,7 @@ struct HashMap {
 
  public:
   HashMap()
-      : cap(16),
+      : cap(8),
         s(0),
         keys(new Key[cap]),
         vals(new Val[cap]),
@@ -57,11 +57,16 @@ struct HashMap {
         r(rng()),
         shift(64 - __lg(cap)) {}
 
+  ~HashMap() {
+    delete(keys);
+    delete(vals);
+  }
+
   Val& operator[](const Key& i) {
     u32 hash = (u64(i) * r) >> shift;
     while (true) {
       if (!flag[hash]) {
-        if (s + s / 4 > cap) {
+        if (s + s / 4 >= cap) {
           reallocate();
           return (*this)[i];
         }
@@ -74,9 +79,20 @@ struct HashMap {
       hash = (hash + 1) & (cap - 1);
     }
   }
+
+  // exist -> return pointer 
+  // not exist -> return nullptr 
+  Val* find(const Key& i) {
+    u32 hash = (u64(i) * r) >> shift;
+    while (true) {
+      if (!flag[hash]) return nullptr;
+      if (keys[hash] == i) return &(vals[hash]);
+      hash = (hash + 1) & (cap - 1);
+    }
+  }
 };
 
 /**
- * @brief Hash Map(可変長ハッシュテーブル)
+ * @brief Hash Map(可変長版)
  * @docs docs/data-structure/hash-map.md
  */
