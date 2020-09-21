@@ -3,14 +3,14 @@
 using namespace std;
 
 template <typename Key, typename Val, uint32_t N = 1 << 20,
-          Val DefaultValue = Val(), Key UnusedKey = numeric_limits<Key>::max()>
+          Val DefaultValue = Val()>
 struct HashMap {
   using u32 = uint32_t;
   using u64 = uint64_t;
 
  private:
-  vector<Key> keys;
-  vector<Val> vals;
+  Key* keys;
+  Val* vals;
   bitset<N> flag;
   static constexpr u32 shift = 64 - __lg(N);
 
@@ -24,20 +24,20 @@ struct HashMap {
   }
 
  public:
-  HashMap() : keys(N, UnusedKey), vals(N, DefaultValue) {
+  HashMap() : keys(new Key[N]), vals(new Val[N]) {
     static_assert((N & (N - 1)) == 0 && N > 0);
   }
 
   Val& operator[](const Key& i) {
     static u64 r = rng();
     u32 hash = (u64(i) * r) >> shift;
-    while(true){
-      if(!flag[hash]) {
+    while (true) {
+      if (!flag[hash]) {
         keys[hash] = i;
         flag[hash] = 1;
-        return vals[hash];
+        return vals[hash] = DefaultValue;
       }
-      if(keys[hash] == i) return vals[hash];
+      if (keys[hash] == i) return vals[hash];
       hash = (hash + 1) & (N - 1);
     }
   }
