@@ -288,6 +288,9 @@ data:
       path: misc/compress.hpp
       title: misc/compress.hpp
     - icon: ':heavy_check_mark:'
+      path: misc/doubling.hpp
+      title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -758,6 +761,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
       title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
