@@ -80,6 +80,7 @@
 "verify/verify-yosupo-graph/yosupo-cartesian.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-graph/yosupo-diameter.test.cpp": "2020-08-01 15:16:50 +0900",
 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp": "2020-09-15 23:09:15 +0900",
+"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp": "2020-09-25 00:54:05 +0900",
 "verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp": "2020-08-05 02:19:06 +0900",
 "verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp": "2020-09-15 23:09:15 +0900",
 "verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp": "2020-09-15 23:09:15 +0900",
