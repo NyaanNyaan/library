@@ -491,6 +491,9 @@ data:
       path: unused/python/segtree-mutable.py
       title: unused/python/segtree-mutable.py
     - icon: ':warning:'
+      path: unused/python/template.py
+      title: unused/python/template.py
+    - icon: ':warning:'
       path: unused/python/tuning_optuna.py
       title: unused/python/tuning_optuna.py
   verificationCategories:
