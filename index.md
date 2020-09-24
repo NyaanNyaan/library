@@ -248,7 +248,8 @@ data:
       title: Nim Product
     - icon: ':warning:'
       path: math/prime-counting-faster.hpp
-      title: math/prime-counting-faster.hpp
+      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
+        log N})$\u30FB\u9AD8\u901F\u5316\u7248)"
     - icon: ':heavy_check_mark:'
       path: math/prime-counting-o2d3.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
@@ -458,6 +459,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/centroid-decomposition.hpp
       title: tree/centroid-decomposition.hpp
+    - icon: ':warning:'
+      path: tree/convert-rooted-tree.hpp
+      title: tree/convert-rooted-tree.hpp
     - icon: ':warning:'
       path: tree/dsu-on-tree.hpp
       title: tree/dsu-on-tree.hpp
