@@ -42,14 +42,14 @@ data:
     \       return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i)\
     \ return vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n  //\
     \ exist -> return pointer of Val\n  // not exist -> return nullptr\n  Val* find(const\
-    \ Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n     \
-    \ if (!flag[hash]) return nullptr;\n      if (keys[hash] == i) return &(vals[hash]);\n\
+    \ Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n\
+    \      if (!flag[hash]) return nullptr;\n      if (keys[hash] == i) return &(vals[hash]);\n\
     \      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n  // return vector< pair<const\
-    \ Key&, val& > >\n  vector<pair<const Key&, Val&>> enumerate() {\n    vector<pair<const\
+    \ Key&, val& > >\n  vector<pair<const Key&, Val&>> enumerate() const {\n    vector<pair<const\
     \ Key&, Val&>> ret;\n    for (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i],\
-    \ vals[i]);\n    return ret;\n  }\n\n  int size() { return s; }\n\n  // set default_value\n\
-    \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
-    \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
+    \ vals[i]);\n    return ret;\n  }\n\n  int size() const { return s; }\n\n  //\
+    \ set default_value\n  void set_default(const Val& val) { DefaultValue = val;\
+    \ }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
     \ */\n#line 3 \"inner/inner_math.hpp\"\nusing namespace std;\n\nnamespace inner\
     \ {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 = int64_t;\nusing\
     \ u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n  while (b) swap(a\
@@ -85,7 +85,7 @@ data:
   isVerificationFile: false
   path: modulo/mod-log.hpp
   requiredBy: []
-  timestamp: '2020-09-21 22:22:10+09:00'
+  timestamp: '2020-09-25 21:13:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp

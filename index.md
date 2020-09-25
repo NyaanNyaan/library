@@ -44,6 +44,9 @@ data:
       path: data-structure/binary-trie.hpp
       title: Binary Trie
     - icon: ':warning:'
+      path: data-structure/dynamic-binary-indexed-tree-2d.hpp
+      title: data-structure/dynamic-binary-indexed-tree-2d.hpp
+    - icon: ':warning:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: data-structure/dynamic-binary-indexed-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -503,6 +506,11 @@ data:
     - icon: ':warning:'
       path: unused/python/tuning_optuna.py
       title: unused/python/tuning_optuna.py
+  - name: verify/verify-yosupo-ds
+    pages:
+    - icon: ':warning:'
+      path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
   verificationCategories:
   - name: verify/verify-aoj-dsl
     pages:

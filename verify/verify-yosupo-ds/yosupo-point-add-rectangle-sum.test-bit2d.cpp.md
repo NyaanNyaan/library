@@ -5,23 +5,29 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: segment-tree/dynamic-li-chao-tree.hpp
-    title: segment-tree/dynamic-li-chao-tree.hpp
-  - icon: ':heavy_check_mark:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
+  - icon: ':warning:'
+    path: data-structure/dynamic-binary-indexed-tree-2d.hpp
+    title: data-structure/dynamic-binary-indexed-tree-2d.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/compress.hpp
+    title: misc/compress.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/segment_add_get_min
+    PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
     links:
-    - https://judge.yosupo.jp/problem/segment_add_get_min
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/segment_add_get_min\"\n\n\
-    #line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
+    - https://judge.yosupo.jp/problem/point_add_rectangle_sum
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n\
+    \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
     \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
     \ each(x, v) for (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define\
@@ -118,8 +124,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"segment-tree/dynamic-li-chao-tree.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
     \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
     \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  u32 cap,\
     \ s;\n  Key* keys;\n  Val* vals;\n  vector<bool> flag;\n  const u64 r;\n  u32\
@@ -151,72 +156,103 @@ data:
     \ vals[i]);\n    return ret;\n  }\n\n  int size() const { return s; }\n\n  //\
     \ set default_value\n  void set_default(const Val& val) { DefaultValue = val;\
     \ }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
-    \ */\n#line 6 \"segment-tree/dynamic-li-chao-tree.hpp\"\n\ntemplate <typename\
-    \ T, T INF>\nstruct DynamicLiChaoTree {\n  struct Line {\n    T slope, intercept;\n\
-    \    Line() : slope(0), intercept(INF) {}\n    Line(T slope, T intercept) : slope(slope),\
-    \ intercept(intercept) {}\n    inline T get(T x) const { return slope * x + intercept;\
-    \ }\n    inline bool over(const Line &other, const T &x) const {\n      return\
-    \ get(x) < other.get(x);\n    }\n  };\n\n  // remind \u30BB\u30B0\u6728\u306F\
-    1-indexed\u306E\u5B9F\u88C5\n  T xmin, xmax, _size;\n  HashMap<T, Line> seg;\n\
-    \n  // [l , r]\u306B\u304A\u3051\u308BLi Chao Tree\n  DynamicLiChaoTree(T xmin,\
-    \ T xmax) : xmin(xmin), xmax(xmax) {\n    _size = 1;\n    while (_size < xmax\
-    \ - xmin + 1) _size <<= 1;\n  }\n\n private:\n  // \u5185\u90E8\u7528\u306E\u95A2\
-    \u6570\n  void update(T a, T b, T left, T right, T seg_idx) {\n    Line line(a,\
-    \ b);\n    while (1) {\n      T mid = (left + right) >> 1;\n      bool l_over\
-    \ = line.over(seg[seg_idx], min(xmax, left + xmin));\n      bool r_over = line.over(seg[seg_idx],\
-    \ min(xmax, right - 1 + xmin));\n      if (l_over == r_over) {\n        if (l_over)\
-    \ swap(seg[seg_idx], line);\n        return;\n      }\n      bool m_over = line.over(seg[seg_idx],\
-    \ min(xmax, mid + xmin));\n      if (m_over) swap(seg[seg_idx], line);\n     \
-    \ if (l_over != m_over)\n        seg_idx = (seg_idx << 1), right = mid;\n    \
-    \  else\n        seg_idx = (seg_idx << 1) | 1, left = mid;\n    }\n  }\n  // \u5185\
-    \u90E8\u7528\u306E\u95A2\u6570\n  void update(T a, T b, T seg_idx) {\n    T left,\
-    \ right;\n    T upper_bit = 63 - __builtin_clzll(seg_idx);\n    left = (_size\
-    \ >> upper_bit) * (seg_idx - (1 << upper_bit));\n    right = left + (_size >>\
-    \ upper_bit);\n    update(a, b, left, right, seg_idx);\n  }\n\n public:\n  //\
-    \ y = ax + b\u306A\u308B\u76F4\u7DDA\u3092\u8FFD\u52A0\n  void update(T a, T b)\
-    \ { update(a, b, 0, _size, 1); }\n\n  // \u9589\u533A\u9593x in [left , right]\u306B\
-    \u7DDA\u5206y = ax + b\u3092\u8FFD\u52A0\u3059\u308B\u30AF\u30A8\u30EA\n  void\
-    \ update_line_segment(T a, T b, T left, T right) {\n    left -= xmin - _size,\
-    \ right -= xmin - _size - 1;\n    for (; left < right; left >>= 1, right >>= 1)\
-    \ {\n      if (left & 1) update(a, b, left++);\n      if (right & 1) update(a,\
-    \ b, --right);\n    }\n  }\n\n  // x\u306B\u304A\u3051\u308B\u6700\u5C0F\u5024\
-    \u30AF\u30A8\u30EA\n  T query(T x) {\n    T left = 0, right = _size, seg_idx =\
-    \ 1, idx = x - xmin, ret = INF;\n    while (1) {\n      T cur = seg[seg_idx].get(x);\n\
-    \      // \u7DDA\u5206\u8FFD\u52A0\u30AF\u30A8\u30EA\u304C\u306A\u3044\u5834\u5408\
-    \u306F\u3053\u3053\u306E\u30B3\u30E1\u30F3\u30C8\u30A2\u30A6\u30C8\u3092\u5916\
-    \u3057\u3066\u9AD8\u901F\u5316\u53EF\u80FD(1.5\u500D\u7A0B\u5EA6\uFF1F)\n    \
-    \  // if(cur == INF) break;\n      ret = min(ret, cur);\n      if (left + 1 >=\
-    \ right) break;\n      T mid = (left + right) >> 1;\n      if (idx < mid)\n  \
-    \      seg_idx = (seg_idx << 1), right = mid;\n      else\n        seg_idx = (seg_idx\
-    \ << 1) | 1, left = mid;\n    }\n    return ret;\n  }\n};\n#line 5 \"verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  DynamicLiChaoTree<ll, infLL> lichao(-1001001001,\
-    \ 1001001001);\n  rep(i, N) {\n    inl(l, r, a, b);\n    lichao.update_line_segment(a,\
-    \ b, l, r - 1);\n  }\n  rep(i, Q) {\n    inl(c);\n    if (c == 0) {\n      inl(l,\
-    \ r, a, b);\n      lichao.update_line_segment(a, b, l, r - 1);\n    } else {\n\
-    \      ini(x);\n      ll ans = lichao.query(x);\n      if (ans >= infLL)\n   \
-    \     out(\"INFINITY\");\n      else\n        out(ans);\n    }\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/segment_add_get_min\"\n\
-    \n#include \"../../competitive-template.hpp\"\n#include \"../../segment-tree/dynamic-li-chao-tree.hpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  DynamicLiChaoTree<ll, infLL> lichao(-1001001001,\
-    \ 1001001001);\n  rep(i, N) {\n    inl(l, r, a, b);\n    lichao.update_line_segment(a,\
-    \ b, l, r - 1);\n  }\n  rep(i, Q) {\n    inl(c);\n    if (c == 0) {\n      inl(l,\
-    \ r, a, b);\n      lichao.update_line_segment(a, b, l, r - 1);\n    } else {\n\
-    \      ini(x);\n      ll ans = lichao.query(x);\n      if (ans >= infLL)\n   \
-    \     out(\"INFINITY\");\n      else\n        out(ans);\n    }\n  }\n}"
+    \ */\n#line 4 \"data-structure/dynamic-binary-indexed-tree-2d.hpp\"\nusing namespace\
+    \ std;\n\n#line 7 \"data-structure/dynamic-binary-indexed-tree-2d.hpp\"\n\ntemplate\
+    \ <typename T>\nstruct DynamicBinaryIndexedTree2D {\n  using i32 = int32_t;\n\
+    \  using u32 = uint32_t;\n  using u64 = uint64_t;\n  u32 N, M;\n  HashMap<u64,\
+    \ T> dat;\n\n  DynamicBinaryIndexedTree2D() = default;\n  DynamicBinaryIndexedTree2D(u32\
+    \ n, u32 m) : N(n + 1), M(m + 1) {\n    assert(N < (1LL << 30));\n    assert(M\
+    \ < (1LL << 30));\n  }\n\n private:\n  inline u64 id(u32 n, u32 m) const { return\
+    \ (u64(n) << 32) | u32(m); }\n\n  inline u64 get(u32 n, u32 m) const {\n    T*\
+    \ p = dat.find(id(n, m));\n    return p ? *p : T();\n  }\n\n public:\n  __attribute__((target(\"\
+    bmi\"))) void add(u32 n, u32 m, T k) {\n    for (++n, ++m; n <= N; n += _blsi_u32(n))\n\
+    \      for (u32 j = m; j <= M; j += _blsi_u32(j)) dat[id(n, j)] += k;\n  }\n\n\
+    \  __attribute__((target(\"bmi\"))) T sum(i32 n, i32 m) const {\n    if (n < 0\
+    \ || m < 0) return T();\n    T ret = T();\n    for (u32 i = n; i > 0; i = _blsr_u32(i))\n\
+    \      for (u32 j = m; j > 0; j = _blsr_u32(j)) ret += get(i, j);\n    return\
+    \ ret;\n  }\n\n  T sum(i32 nl, i32 ml, i32 nr, i32 mr) const {\n    return sum(nr,\
+    \ mr) - sum(nr, ml) - sum(nl, mr) + sum(nl, ml);\n  }\n};\n#line 3 \"misc/compress.hpp\"\
+    \nusing namespace std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n\
+    \  compress(const vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v)\
+    \ xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
+    \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
+    \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
+    \ i){\n    return xs[i];\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
+    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
+    \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
+    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
+    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
+    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
+    \ load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf\
+    \ + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush()\
+    \ {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c)\
+    \ { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil\
+    \ + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
+    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
+    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
+    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
+    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
+    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
+    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
+    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
+    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
+    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
+    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
+    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
+    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
+    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
+    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 8 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp\"\
+    \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N), Y(N), W(N),\
+    \ c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) rd(X[i], Y[i], W[i]);\n  rep(i, Q)\
+    \ {\n    rd(c[i], s[i], t[i], u[i]);\n    if (c[i]) rd(v[i]);\n  }\n\n  vi xs{-1,\
+    \ inf}, ys{-1, inf};\n  each(x, X) xs.push_back(x);\n  each(y, Y) ys.push_back(y);\n\
+    \  rep(i, Q) {\n    if (!c[i]) {\n      xs.push_back(s[i]);\n      ys.push_back(t[i]);\n\
+    \    }\n  }\n\n  auto zipx = compress<int>(xs);\n  auto zipy = compress<int>(ys);\n\
+    \n  DynamicBinaryIndexedTree2D<ll> seg(zipx.size(), zipy.size());\n  rep(i, N)\
+    \ seg.add(zipx.get(X[i]), zipy.get(Y[i]), W[i]);\n\n  rep(i, Q) {\n    if (c[i])\
+    \ {\n      int nl = zipx.get(s[i]);\n      int ml = zipy.get(t[i]);\n      int\
+    \ nr = zipx.get(u[i]);\n      int mr = zipy.get(v[i]);\n      out(seg.sum(nl,\
+    \ ml, nr, mr));\n    } else\n      seg.add(zipx.get(s[i]), zipy.get(t[i]), u[i]);\n\
+    \  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
+    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/hash-map-variable-length.hpp\"\
+    \n#include \"../../data-structure/dynamic-binary-indexed-tree-2d.hpp\"\n#include\
+    \ \"../../misc/compress.hpp\"\n#include \"../../misc/fastio.hpp\"\n\nvoid solve()\
+    \ {\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q),\
+    \ u(Q), v(Q);\n  rep(i, N) rd(X[i], Y[i], W[i]);\n  rep(i, Q) {\n    rd(c[i],\
+    \ s[i], t[i], u[i]);\n    if (c[i]) rd(v[i]);\n  }\n\n  vi xs{-1, inf}, ys{-1,\
+    \ inf};\n  each(x, X) xs.push_back(x);\n  each(y, Y) ys.push_back(y);\n  rep(i,\
+    \ Q) {\n    if (!c[i]) {\n      xs.push_back(s[i]);\n      ys.push_back(t[i]);\n\
+    \    }\n  }\n\n  auto zipx = compress<int>(xs);\n  auto zipy = compress<int>(ys);\n\
+    \n  DynamicBinaryIndexedTree2D<ll> seg(zipx.size(), zipy.size());\n  rep(i, N)\
+    \ seg.add(zipx.get(X[i]), zipy.get(Y[i]), W[i]);\n\n  rep(i, Q) {\n    if (c[i])\
+    \ {\n      int nl = zipx.get(s[i]);\n      int ml = zipy.get(t[i]);\n      int\
+    \ nr = zipx.get(u[i]);\n      int mr = zipy.get(v[i]);\n      out(seg.sum(nl,\
+    \ ml, nr, mr));\n    } else\n      seg.add(zipx.get(s[i]), zipy.get(t[i]), u[i]);\n\
+    \  }\n}"
   dependsOn:
   - competitive-template.hpp
-  - segment-tree/dynamic-li-chao-tree.hpp
   - data-structure/hash-map-variable-length.hpp
-  isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
+  - data-structure/dynamic-binary-indexed-tree-2d.hpp
+  - misc/compress.hpp
+  - misc/fastio.hpp
+  isVerificationFile: false
+  path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
   requiredBy: []
   timestamp: '2020-09-25 21:13:15+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
+- /library/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+- /library/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp.html
+title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
 ---

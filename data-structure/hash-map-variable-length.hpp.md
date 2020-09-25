@@ -2,12 +2,21 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: data-structure/dynamic-binary-indexed-tree.hpp
+    title: data-structure/dynamic-binary-indexed-tree.hpp
+  - icon: ':warning:'
+    path: data-structure/dynamic-binary-indexed-tree-2d.hpp
+    title: data-structure/dynamic-binary-indexed-tree-2d.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/mod-log.hpp
     title: modulo/mod-log.hpp
   - icon: ':heavy_check_mark:'
     path: segment-tree/dynamic-li-chao-tree.hpp
     title: segment-tree/dynamic-li-chao-tree.hpp
+  - icon: ':warning:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
@@ -49,14 +58,14 @@ data:
     \       return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i)\
     \ return vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n  //\
     \ exist -> return pointer of Val\n  // not exist -> return nullptr\n  Val* find(const\
-    \ Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n     \
-    \ if (!flag[hash]) return nullptr;\n      if (keys[hash] == i) return &(vals[hash]);\n\
+    \ Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n\
+    \      if (!flag[hash]) return nullptr;\n      if (keys[hash] == i) return &(vals[hash]);\n\
     \      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n  // return vector< pair<const\
-    \ Key&, val& > >\n  vector<pair<const Key&, Val&>> enumerate() {\n    vector<pair<const\
+    \ Key&, val& > >\n  vector<pair<const Key&, Val&>> enumerate() const {\n    vector<pair<const\
     \ Key&, Val&>> ret;\n    for (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i],\
-    \ vals[i]);\n    return ret;\n  }\n\n  int size() { return s; }\n\n  // set default_value\n\
-    \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
-    \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
+    \ vals[i]);\n    return ret;\n  }\n\n  int size() const { return s; }\n\n  //\
+    \ set default_value\n  void set_default(const Val& val) { DefaultValue = val;\
+    \ }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
     \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename Key, typename Val>\nstruct HashMap {\n  using u32 = uint32_t;\n  using\
@@ -81,23 +90,26 @@ data:
     \ = i;\n        flag[hash] = 1;\n        ++s;\n        return vals[hash] = DefaultValue;\n\
     \      }\n      if (keys[hash] == i) return vals[hash];\n      hash = (hash +\
     \ 1) & (cap - 1);\n    }\n  }\n\n  // exist -> return pointer of Val\n  // not\
-    \ exist -> return nullptr\n  Val* find(const Key& i) {\n    u32 hash = (u64(i)\
+    \ exist -> return nullptr\n  Val* find(const Key& i) const {\n    u32 hash = (u64(i)\
     \ * r) >> shift;\n    while (true) {\n      if (!flag[hash]) return nullptr;\n\
     \      if (keys[hash] == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap\
     \ - 1);\n    }\n  }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<const\
-    \ Key&, Val&>> enumerate() {\n    vector<pair<const Key&, Val&>> ret;\n    for\
-    \ (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
-    \    return ret;\n  }\n\n  int size() { return s; }\n\n  // set default_value\n\
-    \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
-    \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
+    \ Key&, Val&>> enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n\
+    \    for (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i],\
+    \ vals[i]);\n    return ret;\n  }\n\n  int size() const { return s; }\n\n  //\
+    \ set default_value\n  void set_default(const Val& val) { DefaultValue = val;\
+    \ }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
     \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/hash-map-variable-length.hpp
   requiredBy:
+  - data-structure/dynamic-binary-indexed-tree.hpp
+  - data-structure/dynamic-binary-indexed-tree-2d.hpp
   - modulo/mod-log.hpp
   - segment-tree/dynamic-li-chao-tree.hpp
-  timestamp: '2020-09-21 22:22:10+09:00'
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+  timestamp: '2020-09-25 21:13:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
