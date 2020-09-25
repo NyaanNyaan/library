@@ -10,7 +10,7 @@ struct BinaryLifting {
   vector<vector<Data>> table;
   T I;
 
-  BinaryLifting(int n, int64_t lim, const T I_ = T())
+  BinaryLifting(int n, uint64_t lim, const T I_ = T())
       : N(n), LOG(__lg(lim) + 2), I(I_) {
     table.resize(n, vector<Data>(LOG, Data(-1, I)));
   }
@@ -31,7 +31,7 @@ struct BinaryLifting {
   }
 
   // from i, move t times
-  Data query(int i, int64_t t) const {
+  Data query(int i, uint64_t t) const {
     T d = I;
     for (int k = LOG - 1; k >= 0; k--) {
       if ((t >> k) & 1) {
@@ -48,17 +48,19 @@ struct BinaryLifting {
 
   // assuming graph is DAG ( edge(u, v) <-> u < v )
   // find max j | j <= t, path from i to j exists
-  inline Data binary_search(int i, int t) {
+  inline pair<uint64_t, Data> binary_search(int i, int t) {
     int thres = i;
     T d = I;
+    uint64_t times = 0;
     for (int k = LOG - 1; k >= 0; k--) {
       int nxt = table[thres][k].first;
-      if(nxt != -1 && nxt <= t) {
+      if (nxt != -1 && nxt <= t) {
         d = d + table[thres][k].second;
         thres = nxt;
+        times += 1LL << k;
       }
     }
-    return Data(thres, d);
+    return make_pair(times, Data(thres, d));
   }
 };
 

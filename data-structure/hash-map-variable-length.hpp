@@ -84,7 +84,7 @@ struct HashMap {
 
   // exist -> return pointer of Val
   // not exist -> return nullptr
-  Val* find(const Key& i) {
+  Val* find(const Key& i) const {
     u32 hash = (u64(i) * r) >> shift;
     while (true) {
       if (!flag[hash]) return nullptr;
@@ -94,14 +94,14 @@ struct HashMap {
   }
 
   // return vector< pair<const Key&, val& > >
-  vector<pair<const Key&, Val&>> enumerate() {
+  vector<pair<const Key&, Val&>> enumerate() const {
     vector<pair<const Key&, Val&>> ret;
     for (u32 i = 0; i < cap; ++i)
       if (flag[i]) ret.emplace_back(keys[i], vals[i]);
     return ret;
   }
 
-  int size() { return s; }
+  int size() const { return s; }
 
   // set default_value
   void set_default(const Val& val) { DefaultValue = val; }
