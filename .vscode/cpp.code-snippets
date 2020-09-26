@@ -143,5 +143,20 @@
       ""
     ],
     "description": "Square_Decomposition"
+  },
+  "template": {
+    "prefix": "_tmp",
+    "body": [
+      "#include \"competitive-template.hpp\"",
+      "#include \"graph/graph-template.hpp\"",
+      "#include \"modint/montgomery-modint.hpp\"",
+      "template<uint32_t MOD>",
+      "using Mint = LazyMontgomeryModInt<MOD>;",
+      "",
+      "void solve() {",
+      "  ",
+      "}"
+    ],
+    "description": "template"
   }
 }

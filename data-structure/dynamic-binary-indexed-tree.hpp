@@ -2,43 +2,44 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "data-structure/hash-map-variable-length.hpp"
+#include "hash-map-variable-length.hpp"
 
-template <typename idx_t, typename data_t>
+template <typename S, typename T>
 struct DynamicFenwickTree {
-  idx_t N;
-  HashMap<idx_t, data_t> data;
-  DynamicFenwickTree(idx_t size) { N = size += 3; }
+  S N;
+  HashMap<S, T> data;
+  explicit DynamicFenwickTree() = default;
+  explicit DynamicFenwickTree(S size) { N = size + 1; }
 
-  void add(idx_t k, data_t x) {
-    for (k++; k < N; k += k & -k) data[k] += x;
+  void add(S k, T x) {
+    for (++k; k < N; k += k & -k) data[k] += x;
   }
 
-  data_t sum(idx_t k) {
+  // [0, k)
+  T sum(S k) const {
     if (k < 0) return 0;
-    data_t ret = 0;
-    for (k++; k > 0; k -= k & -k) ret += data[k];
+    T ret = T();
+    for (; k > 0; k -= k & -k) {
+      const T* p = data.find(k);
+      ret += p ? *p : T();
+    }
     return ret;
   }
 
-  data_t sum(idx_t a, idx_t b) { return sum(b) - sum(a - 1); }
+  // [a, b)
+  T sum(S a, S b) const { return sum(b) - sum(a); }
 
-  data_t operator[](idx_t k) { return sum(k) - sum(k - 1); }
+  T operator[](S k) { return sum(k + 1) - sum(k); }
 
-  idx_t lower_bound(data_t w) {
+  S lower_bound(T w) {
     if (w <= 0) return 0;
-    idx_t x = 0;
-    for (idx_t k = 1 << __lg(x); k > 0; k /= 2) {
+    S x = 0;
+    for (S k = 1 << __lg(x); k > 0; k >>= 1) {
       if (x + k <= N - 1 && data[x + k] < w) {
         w -= data[x + k];
         x += k;
       }
     }
     return x;
-  }
-
-  void merge(DynamicFenwickTree<idx_t, data_t>& other) {
-    if (data.size() < other.data.size()) data.swap(other.data);
-    for (auto& x : other.data) data[x.fi] += x.se;
   }
 };

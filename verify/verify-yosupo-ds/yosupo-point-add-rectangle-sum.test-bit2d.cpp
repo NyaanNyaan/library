@@ -29,7 +29,7 @@ void solve() {
   auto zipx = compress<int>(xs);
   auto zipy = compress<int>(ys);
 
-  DynamicBinaryIndexedTree2D<ll> seg(zipx.size(), zipy.size());
+  DynamicFenwickTree2D<ll> seg(zipx.size(), zipy.size());
   rep(i, N) seg.add(zipx.get(X[i]), zipy.get(Y[i]), W[i]);
 
   rep(i, Q) {

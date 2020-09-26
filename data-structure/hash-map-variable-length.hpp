@@ -7,12 +7,11 @@ struct HashMap {
   using u32 = uint32_t;
   using u64 = uint64_t;
 
- private:
   u32 cap, s;
   Key* keys;
   Val* vals;
   vector<bool> flag;
-  const u64 r;
+  u64 r;
   u32 shift;
   Val DefaultValue;
 
@@ -48,8 +47,7 @@ struct HashMap {
     --shift;
   }
 
- public:
-  HashMap()
+  explicit HashMap()
       : cap(8),
         s(0),
         keys(new Key[cap]),

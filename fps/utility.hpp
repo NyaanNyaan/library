@@ -5,6 +5,7 @@
 template <typename mint>
 FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
   using fps = FormalPowerSeries<mint>;
+  if((int)v.size() == 0) return fps{mint(1)};
   sort(begin(v), end(v), [](fps &a, fps &b) { return a.size() < b.size(); });
   vector<fps> w;
   w.reserve(sz(v) / 2 + 1);
