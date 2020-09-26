@@ -157,9 +157,9 @@ data:
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
     #line 3 \"modulo/mod-log.hpp\"\nusing namespace std;\n\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
     \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
-    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  u32 cap,\
-    \ s;\n  Key* keys;\n  Val* vals;\n  vector<bool> flag;\n  const u64 r;\n  u32\
-    \ shift;\n  Val DefaultValue;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap, s;\n  Key*\
+    \ keys;\n  Val* vals;\n  vector<bool> flag;\n  u64 r;\n  u32 shift;\n  Val DefaultValue;\n\
+    \n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
     \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
     \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
     \  }\n\n  void reallocate() {\n    cap <<= 1;\n    Key* k = new Key[cap];\n  \
@@ -168,9 +168,9 @@ data:
     \    u32 hash = (u64(keys[i]) * r) >> sh;\n        while (f[hash]) hash = (hash\
     \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
     \        f[hash] = 1;\n      }\n    }\n    delete (keys);\n    delete (vals);\n\
-    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n public:\n\
-    \  HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n  \
-    \      vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
+    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n  explicit\
+    \ HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n   \
+    \     vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
     \ - __lg(cap)),\n        DefaultValue(Val()) {}\n\n  ~HashMap() {\n    delete\
     \ (keys);\n    delete (vals);\n  }\n\n  Val& operator[](const Key& i) {\n    u32\
     \ hash = (u64(i) * r) >> shift;\n    while (true) {\n      if (!flag[hash]) {\n\
@@ -222,7 +222,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   requiredBy: []
-  timestamp: '2020-09-25 21:13:15+09:00'
+  timestamp: '2020-09-26 23:59:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-mod-log.test.cpp

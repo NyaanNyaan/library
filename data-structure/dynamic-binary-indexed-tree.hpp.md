@@ -4,7 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: data-structure/dynamic-binary-indexed-tree-2d.hpp
+    title: data-structure/dynamic-binary-indexed-tree-2d.hpp
+  - icon: ':warning:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
@@ -14,9 +20,9 @@ data:
   bundledCode: "#line 2 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
     \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
-    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  u32 cap,\
-    \ s;\n  Key* keys;\n  Val* vals;\n  vector<bool> flag;\n  const u64 r;\n  u32\
-    \ shift;\n  Val DefaultValue;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap, s;\n  Key*\
+    \ keys;\n  Val* vals;\n  vector<bool> flag;\n  u64 r;\n  u32 shift;\n  Val DefaultValue;\n\
+    \n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
     \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
     \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
     \  }\n\n  void reallocate() {\n    cap <<= 1;\n    Key* k = new Key[cap];\n  \
@@ -25,9 +31,9 @@ data:
     \    u32 hash = (u64(keys[i]) * r) >> sh;\n        while (f[hash]) hash = (hash\
     \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
     \        f[hash] = 1;\n      }\n    }\n    delete (keys);\n    delete (vals);\n\
-    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n public:\n\
-    \  HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n  \
-    \      vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
+    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n  explicit\
+    \ HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n   \
+    \     vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
     \ - __lg(cap)),\n        DefaultValue(Val()) {}\n\n  ~HashMap() {\n    delete\
     \ (keys);\n    delete (vals);\n  }\n\n  Val& operator[](const Key& i) {\n    u32\
     \ hash = (u64(i) * r) >> shift;\n    while (true) {\n      if (!flag[hash]) {\n\
@@ -45,38 +51,38 @@ data:
     \ set default_value\n  void set_default(const Val& val) { DefaultValue = val;\
     \ }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
     \ */\n#line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate <typename\
-    \ idx_t, typename data_t>\nstruct DynamicFenwickTree {\n  idx_t N;\n  HashMap<idx_t,\
-    \ data_t> data;\n  DynamicFenwickTree(idx_t size) { N = size += 3; }\n\n  void\
-    \ add(idx_t k, data_t x) {\n    for (k++; k < N; k += k & -k) data[k] += x;\n\
-    \  }\n\n  data_t sum(idx_t k) {\n    if (k < 0) return 0;\n    data_t ret = 0;\n\
-    \    for (k++; k > 0; k -= k & -k) ret += data[k];\n    return ret;\n  }\n\n \
-    \ data_t sum(idx_t a, idx_t b) { return sum(b) - sum(a - 1); }\n\n  data_t operator[](idx_t\
-    \ k) { return sum(k) - sum(k - 1); }\n\n  idx_t lower_bound(data_t w) {\n    if\
-    \ (w <= 0) return 0;\n    idx_t x = 0;\n    for (idx_t k = 1 << __lg(x); k > 0;\
-    \ k /= 2) {\n      if (x + k <= N - 1 && data[x + k] < w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n\n  void merge(DynamicFenwickTree<idx_t,\
-    \ data_t>& other) {\n    if (data.size() < other.data.size()) data.swap(other.data);\n\
-    \    for (auto& x : other.data) data[x.fi] += x.se;\n  }\n};\n"
+    \ S, typename T>\nstruct DynamicFenwickTree {\n  S N;\n  HashMap<S, T> data;\n\
+    \  explicit DynamicFenwickTree() = default;\n  explicit DynamicFenwickTree(S size)\
+    \ { N = size + 1; }\n\n  void add(S k, T x) {\n    for (++k; k < N; k += k & -k)\
+    \ data[k] += x;\n  }\n\n  // [0, k)\n  T sum(S k) const {\n    if (k < 0) return\
+    \ 0;\n    T ret = T();\n    for (; k > 0; k -= k & -k) {\n      const T* p = data.find(k);\n\
+    \      ret += p ? *p : T();\n    }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S\
+    \ a, S b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) { return sum(k\
+    \ + 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n    S\
+    \ x = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k <= N\
+    \ - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n    \
+    \  }\n    }\n    return x;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"data-structure/hash-map-variable-length.hpp\"\n\ntemplate <typename idx_t,\
-    \ typename data_t>\nstruct DynamicFenwickTree {\n  idx_t N;\n  HashMap<idx_t,\
-    \ data_t> data;\n  DynamicFenwickTree(idx_t size) { N = size += 3; }\n\n  void\
-    \ add(idx_t k, data_t x) {\n    for (k++; k < N; k += k & -k) data[k] += x;\n\
-    \  }\n\n  data_t sum(idx_t k) {\n    if (k < 0) return 0;\n    data_t ret = 0;\n\
-    \    for (k++; k > 0; k -= k & -k) ret += data[k];\n    return ret;\n  }\n\n \
-    \ data_t sum(idx_t a, idx_t b) { return sum(b) - sum(a - 1); }\n\n  data_t operator[](idx_t\
-    \ k) { return sum(k) - sum(k - 1); }\n\n  idx_t lower_bound(data_t w) {\n    if\
-    \ (w <= 0) return 0;\n    idx_t x = 0;\n    for (idx_t k = 1 << __lg(x); k > 0;\
-    \ k /= 2) {\n      if (x + k <= N - 1 && data[x + k] < w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n\n  void merge(DynamicFenwickTree<idx_t,\
-    \ data_t>& other) {\n    if (data.size() < other.data.size()) data.swap(other.data);\n\
-    \    for (auto& x : other.data) data[x.fi] += x.se;\n  }\n};\n"
+    \ \"hash-map-variable-length.hpp\"\n\ntemplate <typename S, typename T>\nstruct\
+    \ DynamicFenwickTree {\n  S N;\n  HashMap<S, T> data;\n  explicit DynamicFenwickTree()\
+    \ = default;\n  explicit DynamicFenwickTree(S size) { N = size + 1; }\n\n  void\
+    \ add(S k, T x) {\n    for (++k; k < N; k += k & -k) data[k] += x;\n  }\n\n  //\
+    \ [0, k)\n  T sum(S k) const {\n    if (k < 0) return 0;\n    T ret = T();\n \
+    \   for (; k > 0; k -= k & -k) {\n      const T* p = data.find(k);\n      ret\
+    \ += p ? *p : T();\n    }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S a, S\
+    \ b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) { return sum(k +\
+    \ 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n    S x\
+    \ = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k <= N -\
+    \ 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n      }\n\
+    \    }\n    return x;\n  }\n};\n"
   dependsOn:
   - data-structure/hash-map-variable-length.hpp
   isVerificationFile: false
   path: data-structure/dynamic-binary-indexed-tree.hpp
-  requiredBy: []
-  timestamp: '2020-09-25 21:13:15+09:00'
+  requiredBy:
+  - data-structure/dynamic-binary-indexed-tree-2d.hpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+  timestamp: '2020-09-26 23:59:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: data-structure/dynamic-binary-indexed-tree.hpp

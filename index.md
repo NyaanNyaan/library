@@ -414,6 +414,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/range-add-range-sum-lazyseg.hpp
       title: segment-tree/range-add-range-sum-lazyseg.hpp
+    - icon: ':warning:'
+      path: segment-tree/range-tree.hpp
+      title: segment-tree/range-tree.hpp
     - icon: ':heavy_check_mark:'
       path: segment-tree/range-update-range-max-lazyseg.hpp
       title: segment-tree/range-update-range-max-lazyseg.hpp

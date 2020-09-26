@@ -10,6 +10,9 @@ data:
   - icon: ':warning:'
     path: data-structure/dynamic-binary-indexed-tree-2d.hpp
     title: data-structure/dynamic-binary-indexed-tree-2d.hpp
+  - icon: ':warning:'
+    path: data-structure/dynamic-binary-indexed-tree.hpp
+    title: data-structure/dynamic-binary-indexed-tree.hpp
   - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
@@ -126,9 +129,9 @@ data:
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
     \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
-    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  u32 cap,\
-    \ s;\n  Key* keys;\n  Val* vals;\n  vector<bool> flag;\n  const u64 r;\n  u32\
-    \ shift;\n  Val DefaultValue;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap, s;\n  Key*\
+    \ keys;\n  Val* vals;\n  vector<bool> flag;\n  u64 r;\n  u32 shift;\n  Val DefaultValue;\n\
+    \n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
     \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
     \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
     \  }\n\n  void reallocate() {\n    cap <<= 1;\n    Key* k = new Key[cap];\n  \
@@ -137,9 +140,9 @@ data:
     \    u32 hash = (u64(keys[i]) * r) >> sh;\n        while (f[hash]) hash = (hash\
     \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
     \        f[hash] = 1;\n      }\n    }\n    delete (keys);\n    delete (vals);\n\
-    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n public:\n\
-    \  HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n  \
-    \      vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
+    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n  explicit\
+    \ HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n   \
+    \     vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
     \ - __lg(cap)),\n        DefaultValue(Val()) {}\n\n  ~HashMap() {\n    delete\
     \ (keys);\n    delete (vals);\n  }\n\n  Val& operator[](const Key& i) {\n    u32\
     \ hash = (u64(i) * r) >> shift;\n    while (true) {\n      if (!flag[hash]) {\n\
@@ -156,22 +159,32 @@ data:
     \ vals[i]);\n    return ret;\n  }\n\n  int size() const { return s; }\n\n  //\
     \ set default_value\n  void set_default(const Val& val) { DefaultValue = val;\
     \ }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
-    \ */\n#line 4 \"data-structure/dynamic-binary-indexed-tree-2d.hpp\"\nusing namespace\
-    \ std;\n\n#line 7 \"data-structure/dynamic-binary-indexed-tree-2d.hpp\"\n\ntemplate\
-    \ <typename T>\nstruct DynamicBinaryIndexedTree2D {\n  using i32 = int32_t;\n\
-    \  using u32 = uint32_t;\n  using u64 = uint64_t;\n  u32 N, M;\n  HashMap<u64,\
-    \ T> dat;\n\n  DynamicBinaryIndexedTree2D() = default;\n  DynamicBinaryIndexedTree2D(u32\
-    \ n, u32 m) : N(n + 1), M(m + 1) {\n    assert(N < (1LL << 30));\n    assert(M\
-    \ < (1LL << 30));\n  }\n\n private:\n  inline u64 id(u32 n, u32 m) const { return\
-    \ (u64(n) << 32) | u32(m); }\n\n  inline u64 get(u32 n, u32 m) const {\n    T*\
-    \ p = dat.find(id(n, m));\n    return p ? *p : T();\n  }\n\n public:\n  __attribute__((target(\"\
-    bmi\"))) void add(u32 n, u32 m, T k) {\n    for (++n, ++m; n <= N; n += _blsi_u32(n))\n\
-    \      for (u32 j = m; j <= M; j += _blsi_u32(j)) dat[id(n, j)] += k;\n  }\n\n\
-    \  __attribute__((target(\"bmi\"))) T sum(i32 n, i32 m) const {\n    if (n < 0\
-    \ || m < 0) return T();\n    T ret = T();\n    for (u32 i = n; i > 0; i = _blsr_u32(i))\n\
-    \      for (u32 j = m; j > 0; j = _blsr_u32(j)) ret += get(i, j);\n    return\
-    \ ret;\n  }\n\n  T sum(i32 nl, i32 ml, i32 nr, i32 mr) const {\n    return sum(nr,\
-    \ mr) - sum(nr, ml) - sum(nl, mr) + sum(nl, ml);\n  }\n};\n#line 3 \"misc/compress.hpp\"\
+    \ */\n#line 3 \"data-structure/dynamic-binary-indexed-tree-2d.hpp\"\nusing namespace\
+    \ std;\n\n#line 3 \"data-structure/dynamic-binary-indexed-tree.hpp\"\nusing namespace\
+    \ std;\n\n#line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate\
+    \ <typename S, typename T>\nstruct DynamicFenwickTree {\n  S N;\n  HashMap<S,\
+    \ T> data;\n  explicit DynamicFenwickTree() = default;\n  explicit DynamicFenwickTree(S\
+    \ size) { N = size + 1; }\n\n  void add(S k, T x) {\n    for (++k; k < N; k +=\
+    \ k & -k) data[k] += x;\n  }\n\n  // [0, k)\n  T sum(S k) const {\n    if (k <\
+    \ 0) return 0;\n    T ret = T();\n    for (; k > 0; k -= k & -k) {\n      const\
+    \ T* p = data.find(k);\n      ret += p ? *p : T();\n    }\n    return ret;\n \
+    \ }\n\n  // [a, b)\n  T sum(S a, S b) const { return sum(b) - sum(a); }\n\n  T\
+    \ operator[](S k) { return sum(k + 1) - sum(k); }\n\n  S lower_bound(T w) {\n\
+    \    if (w <= 0) return 0;\n    S x = 0;\n    for (S k = 1 << __lg(x); k > 0;\
+    \ k >>= 1) {\n      if (x + k <= N - 1 && data[x + k] < w) {\n        w -= data[x\
+    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n#line 6 \"data-structure/dynamic-binary-indexed-tree-2d.hpp\"\
+    \n\ntemplate <typename T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int,\
+    \ T>;\n  int N, M;\n  vector<BIT*> bit;\n  DynamicFenwickTree2D() = default;\n\
+    \  DynamicFenwickTree2D(int n, int m) : N(n + 1), M(m) {\n    for (int _ = 0;\
+    \ _ < N; ++_) bit.push_back(new BIT(M));\n  }\n  \n  void add(int i, int j, const\
+    \ T& x) {\n    for (++i; i < N; i += i & -i) (*bit[i]).add(j, x);\n  }\n\n  //\
+    \ i = [0, n), j = [0, m)\n  T sum(int n, int m) const {\n    if (n < 0 || m <\
+    \ 0) return T();\n    T ret = T();\n    for (; n; n -= n & -n) ret += (*bit[n]).sum(m);\n\
+    \    return ret;\n  }\n\n  // i = [nl, nr), j = [ml, mr)\n  T sum(int nl, int\
+    \ ml, int nr, int mr) const {\n    T ret = T();\n    while (nl != nr) {\n    \
+    \  if (nl < nr) {\n        ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr &\
+    \ -nr;\n      } else {\n        ret -= (*bit[nl]).sum(ml, mr);\n        nl -=\
+    \ nl & -nl;\n      }\n    }\n    return ret;\n  }\n};\n#line 3 \"misc/compress.hpp\"\
     \nusing namespace std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n\
     \  compress(const vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v)\
     \ xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
@@ -215,12 +228,11 @@ data:
     \ inf}, ys{-1, inf};\n  each(x, X) xs.push_back(x);\n  each(y, Y) ys.push_back(y);\n\
     \  rep(i, Q) {\n    if (!c[i]) {\n      xs.push_back(s[i]);\n      ys.push_back(t[i]);\n\
     \    }\n  }\n\n  auto zipx = compress<int>(xs);\n  auto zipy = compress<int>(ys);\n\
-    \n  DynamicBinaryIndexedTree2D<ll> seg(zipx.size(), zipy.size());\n  rep(i, N)\
-    \ seg.add(zipx.get(X[i]), zipy.get(Y[i]), W[i]);\n\n  rep(i, Q) {\n    if (c[i])\
-    \ {\n      int nl = zipx.get(s[i]);\n      int ml = zipy.get(t[i]);\n      int\
-    \ nr = zipx.get(u[i]);\n      int mr = zipy.get(v[i]);\n      out(seg.sum(nl,\
-    \ ml, nr, mr));\n    } else\n      seg.add(zipx.get(s[i]), zipy.get(t[i]), u[i]);\n\
-    \  }\n}\n"
+    \n  DynamicFenwickTree2D<ll> seg(zipx.size(), zipy.size());\n  rep(i, N) seg.add(zipx.get(X[i]),\
+    \ zipy.get(Y[i]), W[i]);\n\n  rep(i, Q) {\n    if (c[i]) {\n      int nl = zipx.get(s[i]);\n\
+    \      int ml = zipy.get(t[i]);\n      int nr = zipx.get(u[i]);\n      int mr\
+    \ = zipy.get(v[i]);\n      out(seg.sum(nl, ml, nr, mr));\n    } else\n      seg.add(zipx.get(s[i]),\
+    \ zipy.get(t[i]), u[i]);\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/hash-map-variable-length.hpp\"\
     \n#include \"../../data-structure/dynamic-binary-indexed-tree-2d.hpp\"\n#include\
@@ -231,22 +243,22 @@ data:
     \ inf};\n  each(x, X) xs.push_back(x);\n  each(y, Y) ys.push_back(y);\n  rep(i,\
     \ Q) {\n    if (!c[i]) {\n      xs.push_back(s[i]);\n      ys.push_back(t[i]);\n\
     \    }\n  }\n\n  auto zipx = compress<int>(xs);\n  auto zipy = compress<int>(ys);\n\
-    \n  DynamicBinaryIndexedTree2D<ll> seg(zipx.size(), zipy.size());\n  rep(i, N)\
-    \ seg.add(zipx.get(X[i]), zipy.get(Y[i]), W[i]);\n\n  rep(i, Q) {\n    if (c[i])\
-    \ {\n      int nl = zipx.get(s[i]);\n      int ml = zipy.get(t[i]);\n      int\
-    \ nr = zipx.get(u[i]);\n      int mr = zipy.get(v[i]);\n      out(seg.sum(nl,\
-    \ ml, nr, mr));\n    } else\n      seg.add(zipx.get(s[i]), zipy.get(t[i]), u[i]);\n\
-    \  }\n}"
+    \n  DynamicFenwickTree2D<ll> seg(zipx.size(), zipy.size());\n  rep(i, N) seg.add(zipx.get(X[i]),\
+    \ zipy.get(Y[i]), W[i]);\n\n  rep(i, Q) {\n    if (c[i]) {\n      int nl = zipx.get(s[i]);\n\
+    \      int ml = zipy.get(t[i]);\n      int nr = zipx.get(u[i]);\n      int mr\
+    \ = zipy.get(v[i]);\n      out(seg.sum(nl, ml, nr, mr));\n    } else\n      seg.add(zipx.get(s[i]),\
+    \ zipy.get(t[i]), u[i]);\n  }\n}\n"
   dependsOn:
   - competitive-template.hpp
   - data-structure/hash-map-variable-length.hpp
   - data-structure/dynamic-binary-indexed-tree-2d.hpp
+  - data-structure/dynamic-binary-indexed-tree.hpp
   - misc/compress.hpp
   - misc/fastio.hpp
   isVerificationFile: false
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
   requiredBy: []
-  timestamp: '2020-09-25 21:13:15+09:00'
+  timestamp: '2020-09-26 23:59:24+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
