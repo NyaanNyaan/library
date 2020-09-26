@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
-    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
@@ -96,6 +93,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
@@ -601,8 +601,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: competitive-template.hpp
-  requiredBy:
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+  requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -636,6 +635,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp

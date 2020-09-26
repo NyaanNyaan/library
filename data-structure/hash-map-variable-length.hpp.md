@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: data-structure/dynamic-binary-indexed-tree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree-2d.hpp
     title: data-structure/dynamic-binary-indexed-tree-2d.hpp
   - icon: ':heavy_check_mark:'
@@ -14,9 +14,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: segment-tree/dynamic-li-chao-tree.hpp
     title: segment-tree/dynamic-li-chao-tree.hpp
-  - icon: ':warning:'
-    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
-    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
@@ -24,6 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
@@ -107,12 +107,12 @@ data:
   - data-structure/dynamic-binary-indexed-tree-2d.hpp
   - modulo/mod-log.hpp
   - segment-tree/dynamic-li-chao-tree.hpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
   timestamp: '2020-09-26 23:59:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
 documentation_of: data-structure/hash-map-variable-length.hpp
 layout: document

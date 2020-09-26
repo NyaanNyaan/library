@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
-    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
     title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
@@ -31,11 +31,11 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: misc/compress.hpp
-  requiredBy:
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+  requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
 documentation_of: misc/compress.hpp
 layout: document

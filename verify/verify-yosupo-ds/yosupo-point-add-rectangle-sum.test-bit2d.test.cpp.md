@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree-2d.hpp
     title: data-structure/dynamic-binary-indexed-tree-2d.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: data-structure/dynamic-binary-indexed-tree.hpp
   - icon: ':heavy_check_mark:'
@@ -22,13 +22,13 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
     links:
     - https://judge.yosupo.jp/problem/point_add_rectangle_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp\"\
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n\
     \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
@@ -221,7 +221,7 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 8 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp\"\
+    #line 8 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp\"\
     \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N), Y(N), W(N),\
     \ c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) rd(X[i], Y[i], W[i]);\n  rep(i, Q)\
     \ {\n    rd(c[i], s[i], t[i], u[i]);\n    if (c[i]) rd(v[i]);\n  }\n\n  vi xs{-1,\
@@ -255,16 +255,16 @@ data:
   - data-structure/dynamic-binary-indexed-tree.hpp
   - misc/compress.hpp
   - misc/fastio.hpp
-  isVerificationFile: false
-  path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+  isVerificationFile: true
+  path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-09-26 23:59:24+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2020-09-27 00:39:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
 layout: document
 redirect_from:
-- /library/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
-- /library/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp.html
-title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
 ---
