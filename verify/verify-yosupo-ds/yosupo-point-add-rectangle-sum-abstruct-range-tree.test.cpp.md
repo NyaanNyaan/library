@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/abstract-range-tree.hpp
-    title: data-structure-2d/abstract-range-tree.hpp
+    title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
   - icon: ':heavy_check_mark:'
     path: data-structure/binary-indexed-tree.hpp
     title: data-structure/binary-indexed-tree.hpp
@@ -154,7 +154,7 @@ data:
     \ N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = t_merge(L, ds_sum(*ds[a],\
     \ id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = t_merge(ds_sum(*ds[b],\
     \ id(b, yl), id(b, yr)), R);\n    }\n    return t_merge(L, R);\n  }\n};\n\n/*\n\
-    \ * @brief\u3000\u62BD\u8C61\u5316\u9818\u57DF\u6728\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \ * @brief \u62BD\u8C61\u5316\u9818\u57DF\u6728\n * @docs docs/data-structure-2d/ds-2d.md\n\
     \ */\n#line 3 \"data-structure/binary-indexed-tree.hpp\"\nusing namespace std;\n\
     \ntemplate <typename T>\nstruct BinaryIndexedTree {\n  int N;\n  vector<T> data;\n\
     \n  BinaryIndexedTree() = default;\n\n  BinaryIndexedTree(int size) { init(size);\
@@ -246,7 +246,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 20:14:15+09:00'
+  timestamp: '2020-09-28 02:10:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp

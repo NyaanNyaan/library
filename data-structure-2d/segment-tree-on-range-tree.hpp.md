@@ -14,6 +14,7 @@ data:
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
+    document_title: "\u9818\u57DF\u6728(Segment Tree)"
     links: []
   bundledCode: "#line 2 \"data-structure-2d/segment-tree-on-range-tree.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"segment-tree/segment-tree.hpp\"\
@@ -73,8 +74,8 @@ data:
     \ yl, S xr, S yr) {\n    T L = ti, R = ti;\n    int a = id(xl), b = id(xr);\n\
     \    for (a += N, b += N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = f(L,\
     \ seg[a].query(id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = f(seg[b].query(id(b,\
-    \ yl), id(b, yr)), R);\n    }\n    return f(L, R);\n  }\n};\n\n/*\n * @brief\u3000\
-    \u9818\u57DF\u6728(Segment Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    \ yl), id(b, yr)), R);\n    }\n    return f(L, R);\n  }\n};\n\n/*\n * @brief \u9818\
+    \u57DF\u6728(Segment Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../segment-tree/segment-tree.hpp\"\n\n// S ... index_type\n// T ... value_type\n\
     // F ... function_type\ntemplate <typename S, typename T, typename F>\nstruct\
@@ -100,14 +101,14 @@ data:
     \ yl, S xr, S yr) {\n    T L = ti, R = ti;\n    int a = id(xl), b = id(xr);\n\
     \    for (a += N, b += N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = f(L,\
     \ seg[a].query(id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = f(seg[b].query(id(b,\
-    \ yl), id(b, yr)), R);\n    }\n    return f(L, R);\n  }\n};\n\n/*\n * @brief\u3000\
-    \u9818\u57DF\u6728(Segment Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    \ yl), id(b, yr)), R);\n    }\n    return f(L, R);\n  }\n};\n\n/*\n * @brief \u9818\
+    \u57DF\u6728(Segment Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
   dependsOn:
   - segment-tree/segment-tree.hpp
   isVerificationFile: false
   path: data-structure-2d/segment-tree-on-range-tree.hpp
   requiredBy: []
-  timestamp: '2020-09-27 20:14:15+09:00'
+  timestamp: '2020-09-28 02:10:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
@@ -116,7 +117,7 @@ layout: document
 redirect_from:
 - /library/data-structure-2d/segment-tree-on-range-tree.hpp
 - /library/data-structure-2d/segment-tree-on-range-tree.hpp.html
-title: data-structure-2d/segment-tree-on-range-tree.hpp
+title: "\u9818\u57DF\u6728(Segment Tree)"
 ---
 ## 領域木
 

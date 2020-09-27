@@ -12,7 +12,7 @@ data:
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/segment-tree-on-range-tree.hpp
-    title: data-structure-2d/segment-tree-on-range-tree.hpp
+    title: "\u9818\u57DF\u6728(Segment Tree)"
   - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
@@ -219,9 +219,9 @@ data:
     \ yl, S xr, S yr) {\n    T L = ti, R = ti;\n    int a = id(xl), b = id(xr);\n\
     \    for (a += N, b += N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = f(L,\
     \ seg[a].query(id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = f(seg[b].query(id(b,\
-    \ yl), id(b, yr)), R);\n    }\n    return f(L, R);\n  }\n};\n\n/*\n * @brief\u3000\
-    \u9818\u57DF\u6728(Segment Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n\
-    #line 7 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp\"\
+    \ yl), id(b, yr)), R);\n    }\n    return f(L, R);\n  }\n};\n\n/*\n * @brief \u9818\
+    \u57DF\u6728(Segment Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n#line\
+    \ 7 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp\"\
     \n\nvoid solve() {\n  auto f = [](ll a, ll b) { return a + b; };\n\n  RangeTree<int,\
     \ ll, decltype(f)> rtree(f, 0);\n\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N),\
     \ Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) {\n    rd(X[i], Y[i],\
@@ -250,7 +250,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 20:14:15+09:00'
+  timestamp: '2020-09-28 02:10:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp

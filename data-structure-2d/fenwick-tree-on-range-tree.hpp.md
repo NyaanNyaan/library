@@ -11,6 +11,7 @@ data:
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
+    document_title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
     links: []
   bundledCode: "#line 2 \"data-structure-2d/fenwick-tree-on-range-tree.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\n// S ... size_type\n// T ... value_type\n\
@@ -44,7 +45,7 @@ data:
     \ (a != b) {\n      if (a < b) {\n        ret += bit[b].sum(id(b, yl), id(b, yr));\n\
     \        b -= b & -b;\n      } else {\n        ret -= bit[a].sum(id(a, yl), id(a,\
     \ yr));\n        a -= a & -a;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n\
-    \ * @brief\u3000\u9818\u57DF\u6728(Binary Indexed Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \ * @brief \u9818\u57DF\u6728(Binary Indexed Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n\
     \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n// S ...\
     \ size_type\n// T ... value_type\ntemplate <typename S, typename T>\nstruct FenwickRangeTree\
@@ -77,13 +78,13 @@ data:
     \ (a != b) {\n      if (a < b) {\n        ret += bit[b].sum(id(b, yl), id(b, yr));\n\
     \        b -= b & -b;\n      } else {\n        ret -= bit[a].sum(id(a, yl), id(a,\
     \ yr));\n        a -= a & -a;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n\
-    \ * @brief\u3000\u9818\u57DF\u6728(Binary Indexed Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \ * @brief \u9818\u57DF\u6728(Binary Indexed Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n\
     \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure-2d/fenwick-tree-on-range-tree.hpp
   requiredBy: []
-  timestamp: '2020-09-27 20:14:15+09:00'
+  timestamp: '2020-09-28 02:10:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
@@ -92,7 +93,7 @@ layout: document
 redirect_from:
 - /library/data-structure-2d/fenwick-tree-on-range-tree.hpp
 - /library/data-structure-2d/fenwick-tree-on-range-tree.hpp.html
-title: data-structure-2d/fenwick-tree-on-range-tree.hpp
+title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
 ---
 ## 領域木
 

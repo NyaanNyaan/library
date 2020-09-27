@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/rectangle-sum.hpp
-    title: data-structure-2d/rectangle-sum.hpp
+    title: "\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728)"
   - icon: ':heavy_check_mark:'
     path: segment-tree/persistent-segment-tree.hpp
     title: "\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -183,8 +183,8 @@ data:
     \ r = lower_bound(begin(xs), end(xs), x2) - begin(xs);\n    int d = lower_bound(begin(ys),\
     \ end(ys), y1) - begin(ys);\n    int u = lower_bound(begin(ys), end(ys), y2) -\
     \ begin(ys);\n    return seg.query(u, l, r) - seg.query(d, l, r);\n  }\n};\n\n\
-    /*\n * @brief\u3000\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\
-    \u6728)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n#line 5 \"verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp\"\
+    /*\n * @brief \u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
+    )\n * @docs docs/data-structure-2d/ds-2d.md\n */\n#line 5 \"verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  vl xs(N), ys(N), ws(N);\n  in3(xs, ys, ws);\n\
     \  auto f = [](ll u, ll v) { return u + v; };\n  RectangleSum<ll, ll, decltype(f)>\
     \ rect(xs, ys, ws, f);\n  rep(_, Q) {\n    inl(l, d, r, u);\n    out(rect.rect_sum(l,\
@@ -202,7 +202,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 20:14:15+09:00'
+  timestamp: '2020-09-28 02:10:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp

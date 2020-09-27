@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/segment-tree-on-range-tree.hpp
-    title: data-structure-2d/segment-tree-on-range-tree.hpp
+    title: "\u9818\u57DF\u6728(Segment Tree)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp

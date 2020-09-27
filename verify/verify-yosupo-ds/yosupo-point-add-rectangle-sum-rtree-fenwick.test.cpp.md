@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/fenwick-tree-on-range-tree.hpp
-    title: data-structure-2d/fenwick-tree-on-range-tree.hpp
+    title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
   - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
@@ -152,8 +152,8 @@ data:
     \ ret = T();\n    int a = id(xl), b = id(xr);\n    while (a != b) {\n      if\
     \ (a < b) {\n        ret += bit[b].sum(id(b, yl), id(b, yr));\n        b -= b\
     \ & -b;\n      } else {\n        ret -= bit[a].sum(id(a, yl), id(a, yr));\n  \
-    \      a -= a & -a;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief\u3000\
-    \u9818\u57DF\u6728(Binary Indexed Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \      a -= a & -a;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief\
+    \ \u9818\u57DF\u6728(Binary Indexed Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n\
     \ */\n#line 3 \"misc/compress.hpp\"\nusing namespace std;\n\ntemplate<class T>\n\
     struct compress{\n  vector<T> xs;\n  compress(const vector<T>& v){\n    xs.reserve(v.size());\n\
     \    for(T x : v) xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
@@ -216,7 +216,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 20:38:35+09:00'
+  timestamp: '2020-09-28 02:10:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp

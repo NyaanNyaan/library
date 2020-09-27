@@ -92,25 +92,25 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/2d-binary-indexed-tree.hpp
-      title: data-structure-2d/2d-binary-indexed-tree.hpp
+      title: "\u4E8C\u6B21\u5143Binary Indexed Tree"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/2d-cumulative-sum.hpp
-      title: data-structure-2d/2d-cumulative-sum.hpp
+      title: "\u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/abstract-range-tree.hpp
-      title: data-structure-2d/abstract-range-tree.hpp
+      title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
       title: "\u52D5\u7684Binary Indexed Tree"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
-      title: data-structure-2d/fenwick-tree-on-range-tree.hpp
+      title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/rectangle-sum.hpp
-      title: data-structure-2d/rectangle-sum.hpp
+      title: "\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728)"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/segment-tree-on-range-tree.hpp
-      title: data-structure-2d/segment-tree-on-range-tree.hpp
+      title: "\u9818\u57DF\u6728(Segment Tree)"
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'
