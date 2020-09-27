@@ -2,7 +2,7 @@
 
 #include "../../competitive-template.hpp"
 #include "../../data-structure/hash-map-variable-length.hpp"
-#include "../../data-structure/dynamic-binary-indexed-tree-2d.hpp"
+#include "../../data-structure-2d/dynamic-binary-indexed-tree-2d.hpp"
 #include "../../misc/compress.hpp"
 #include "../../misc/fastio.hpp"
 

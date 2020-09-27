@@ -2,7 +2,7 @@
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/2d-binary-indexed-tree.hpp"
+#include "../../data-structure-2d/2d-binary-indexed-tree.hpp"
 
 void solve() {
   ini(N);

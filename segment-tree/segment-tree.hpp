@@ -6,31 +6,32 @@ template <typename T, typename F>
 struct SegmentTree {
   int size;
   vector<T> seg;
-  const F func;
-  const T UNIT;
+  const F f;
+  const T I;
 
-  SegmentTree(int N, F func, T UNIT) : func(func), UNIT(UNIT) {
-    size = 1;
-    while (size < N) size <<= 1;
-    seg.assign(2 * size, UNIT);
-  }
+  SegmentTree(F f_, const T &I_) : size(0), f(f_), I(I_) {}
 
-  SegmentTree(const vector<T> &v, F func, T UNIT) : func(func), UNIT(UNIT) {
-    int N = (int)v.size();
-    size = 1;
-    while (size < N) size <<= 1;
-    seg.assign(2 * size, UNIT);
-    for (int i = 0; i < N; i++) {
+  SegmentTree(int N, F f_, const T &I_) : f(f_), I(I_) { init(N); }
+
+  SegmentTree(const vector<T> &v, F f, T I) : f(f), I(I) {
+    init(v.size());
+    for (int i = 0; i < (int)v.size(); i++) {
       seg[i + size] = v[i];
     }
     build();
+  }
+
+  void init(int N) {
+    size = 1;
+    while (size < N) size <<= 1;
+    seg.assign(2 * size, I);
   }
 
   void set(int k, T x) { seg[k + size] = x; }
 
   void build() {
     for (int k = size - 1; k > 0; k--) {
-      seg[k] = func(seg[2 * k], seg[2 * k + 1]);
+      seg[k] = f(seg[2 * k], seg[2 * k + 1]);
     }
   }
 
@@ -38,7 +39,7 @@ struct SegmentTree {
     k += size;
     seg[k] = x;
     while (k >>= 1) {
-      seg[k] = func(seg[2 * k], seg[2 * k + 1]);
+      seg[k] = f(seg[2 * k], seg[2 * k + 1]);
     }
   }
 
@@ -46,18 +47,18 @@ struct SegmentTree {
     k += size;
     seg[k] += x;
     while (k >>= 1) {
-      seg[k] = func(seg[2 * k], seg[2 * k + 1]);
+      seg[k] = f(seg[2 * k], seg[2 * k + 1]);
     }
   }
 
   // query to [a, b)
   T query(int a, int b) {
-    T L = UNIT, R = UNIT;
+    T L = I, R = I;
     for (a += size, b += size; a < b; a >>= 1, b >>= 1) {
-      if (a & 1) L = func(L, seg[a++]);
-      if (b & 1) R = func(seg[--b], R);
+      if (a & 1) L = f(L, seg[a++]);
+      if (b & 1) R = f(seg[--b], R);
     }
-    return func(L, R);
+    return f(L, R);
   }
 
   T &operator[](const int &k) { return seg[k + size]; }
@@ -65,7 +66,7 @@ struct SegmentTree {
   template <typename C>
   int find_subtree(int a, const C &check, T &M, bool type) {
     while (a < size) {
-      T nxt = type ? func(seg[2 * a + type], M) : func(M, seg[2 * a + type]);
+      T nxt = type ? f(seg[2 * a + type], M) : f(M, seg[2 * a + type]);
       if (check(nxt))
         a = 2 * a + type;
       else
@@ -76,15 +77,15 @@ struct SegmentTree {
 
   template <typename C>
   int find_first(int a, const C &check) {
-    T L = UNIT;
+    T L = I;
     if (a <= 0) {
-      if (check(func(L, seg[1]))) return find_subtree(1, check, L, false);
+      if (check(f(L, seg[1]))) return find_subtree(1, check, L, false);
       return -1;
     }
     int b = size;
     for (a += size, b += size; a < b; a >>= 1, b >>= 1) {
       if (a & 1) {
-        T nxt = func(L, seg[a]);
+        T nxt = f(L, seg[a]);
         if (check(nxt)) return find_subtree(a, check, L, false);
         L = nxt;
         ++a;
@@ -95,15 +96,15 @@ struct SegmentTree {
 
   template <typename C>
   int find_last(int b, const C &check) {
-    T R = UNIT;
+    T R = I;
     if (b >= size) {
-      if (check(func(seg[1], R))) return find_subtree(1, check, R, true);
+      if (check(f(seg[1], R))) return find_subtree(1, check, R, true);
       return -1;
     }
     int a = size;
     for (b += size; a < b; a >>= 1, b >>= 1) {
       if (b & 1) {
-        T nxt = func(seg[--b], R);
+        T nxt = f(seg[--b], R);
         if (check(nxt)) return find_subtree(b, check, R, true);
         R = nxt;
       }
