@@ -5,14 +5,15 @@ using namespace std;
 template <typename T>
 struct BinaryIndexedTree {
   int N;
-  int max_2beki;
   vector<T> data;
 
-  BinaryIndexedTree(int size) {
-    N = size + 3;
+  BinaryIndexedTree() = default;
+
+  BinaryIndexedTree(int size) { init(size); }
+
+  void init(int size) {
+    N = size + 2;
     data.assign(N + 1, 0);
-    max_2beki = 1;
-    while (max_2beki * 2 <= N) max_2beki *= 2;
   }
 
   // get sum of [0,k]
@@ -44,7 +45,7 @@ struct BinaryIndexedTree {
   int lower_bound(T w) {
     if (w <= 0) return 0;
     int x = 0;
-    for (int k = max_2beki; k > 0; k /= 2) {
+    for (int k = 1 << __lg(N); k; k >>= 1) {
       if (x + k <= N - 1 && data[x + k] < w) {
         w -= data[x + k];
         x += k;
@@ -57,7 +58,7 @@ struct BinaryIndexedTree {
   int upper_bound(T w) {
     if (w < 0) return 0;
     int x = 0;
-    for (int k = max_2beki; k > 0; k /= 2) {
+    for (int k = 1 << __lg(N); k; k >>= 1) {
       if (x + k <= N - 1 && data[x + k] <= w) {
         w -= data[x + k];
         x += k;

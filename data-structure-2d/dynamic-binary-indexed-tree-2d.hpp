@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "dynamic-binary-indexed-tree.hpp"
+#include "../data-structure/dynamic-binary-indexed-tree.hpp"
 
 template <typename T>
 struct DynamicFenwickTree2D {

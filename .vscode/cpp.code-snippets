@@ -12,28 +12,12 @@
   // ],
   // "description": "Log output to console"
   // }
-  "modint": {
-    "prefix": "_mint",
-    "body": [
-      "#include \"modint/montgomery-modint.hpp\"",
-      "#include \"modulo/binomial.hpp\"",
-      "constexpr int MOD9 = 998244353;",
-      "constexpr int MOD1 = 1000000007;",
-      "using mint = LazyMontgomeryModInt<MOD9>;",
-      "Binomial<mint> C(2002002);"
-    ],
-    "description": "modint"
-  },
   "fps": {
     "prefix": "_fps",
     "body": [
-      "#include \"modint/montgomery-modint.hpp\"",
       "#include \"modulo/binomial.hpp\"",
       "#include \"fps/ntt-friendly-fps.hpp\"",
-      "// #include \"fps/arbitrary-fps.hpp\"",
-      "constexpr int MOD9 = 998244353;",
-      "constexpr int MOD1 = 1000000007;",
-      "using mint = LazyMontgomeryModInt<MOD9>;",
+      "using mint = LazyMontgomeryModInt<998244353>;",
       "Binomial<mint> C(2002002);",
       "using fps = FormalPowerSeries<mint>;"
     ],
