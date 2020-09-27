@@ -5,6 +5,9 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
+    path: data-structure-2d/abstract-range-tree.hpp
+    title: data-structure-2d/abstract-range-tree.hpp
+  - icon: ':heavy_check_mark:'
     path: data-structure/binary-indexed-tree.hpp
     title: data-structure/binary-indexed-tree.hpp
   - icon: ':heavy_check_mark:'
@@ -13,21 +16,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
-    path: misc/mo.hpp
-    title: misc/mo.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/static_range_inversions_query
+    PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
     links:
-    - https://judge.yosupo.jp/problem/static_range_inversions_query
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
-    \n\n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
+    - https://judge.yosupo.jp/problem/point_add_rectangle_sum
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n\
+    \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
     \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
     \ each(x, v) for (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define\
@@ -124,29 +124,59 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/binary-indexed-tree.hpp\"\
-    \nusing namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree {\n\
-    \  int N;\n  vector<T> data;\n\n  BinaryIndexedTree() = default;\n\n  BinaryIndexedTree(int\
-    \ size) { init(size); }\n\n  void init(int size) {\n    N = size + 2;\n    data.assign(N\
-    \ + 1, 0);\n  }\n\n  // get sum of [0,k]\n  T sum(int k) const {\n    if (k <\
-    \ 0) return 0;  // return 0 if k < 0\n    T ret = 0;\n    for (++k; k > 0; k -=\
-    \ k & -k) ret += data[k];\n    return ret;\n  }\n\n  // getsum of [l,r]\n  inline\
-    \ T sum(int l, int r) const { return sum(r) - sum(l - 1); }\n\n  // get value\
-    \ of k\n  inline T operator[](int k) const { return sum(k) - sum(k - 1); }\n\n\
-    \  // data[k] += x\n  void add(int k, T x) {\n    for (++k; k < N; k += k & -k)\
-    \ data[k] += x;\n  }\n\n  // range add x to [l,r]\n  void imos(int l, int r, T\
-    \ x) {\n    add(l, x);\n    add(r + 1, -x);\n  }\n\n  // minimize i s.t. sum(i)\
-    \ >= w\n  int lower_bound(T w) {\n    if (w <= 0) return 0;\n    int x = 0;\n\
-    \    for (int k = 1 << __lg(N); k; k >>= 1) {\n      if (x + k <= N - 1 && data[x\
-    \ + k] < w) {\n        w -= data[x + k];\n        x += k;\n      }\n    }\n  \
-    \  return x;\n  }\n\n  // minimize i s.t. sum(i) > w\n  int upper_bound(T w) {\n\
-    \    if (w < 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k; k\
-    \ >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <= w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n#line 3 \"misc/compress.hpp\"\
-    \nusing namespace std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n\
-    \  compress(const vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v)\
-    \ xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
-    \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure-2d/abstract-range-tree.hpp\"\
+    \nusing namespace std;\n\n// DS ... data_structure_type\n// S ... size_type\n\
+    // T ... value_type\ntemplate <typename DS, typename S, typename T>\nstruct RangeTree\
+    \ {\n  using NEW = function<DS*(int)>;\n  using ADD = function<void(DS&, int,\
+    \ T)>;\n  using SUM = function<T(DS&, int, int)>;\n  using MRG = function<T(T,\
+    \ T)>;\n  using P = pair<S, S>;\n\n  S N, M;\n  const NEW ds_new;\n  const ADD\
+    \ ds_add;\n  const SUM ds_sum;\n  const MRG t_merge;\n  const T ti;\n  vector<DS*>\
+    \ ds;\n  vector<vector<S>> ys;\n  vector<P> ps;\n\n  RangeTree(const NEW& nw,\
+    \ const ADD& ad, const SUM& sm, const MRG& mrg,\n            const T& ti_)\n \
+    \     : ds_new(nw), ds_add(ad), ds_sum(sm), t_merge(mrg), ti(ti_) {}\n\n  void\
+    \ add_point(S x, S y) { ps.push_back(make_pair(x, y)); }\n\n  void build() {\n\
+    \    sort(begin(ps), end(ps));\n    ps.erase(unique(begin(ps), end(ps)), end(ps));\n\
+    \    N = ps.size();\n    ds.resize(2 * N, nullptr);\n    ys.resize(2 * N);\n \
+    \   for (int i = 0; i < N; ++i) {\n      ys[i + N].push_back(ps[i].second);\n\
+    \      ds[i + N] = ds_new(1);\n    }\n    for (int i = N - 1; i > 0; --i) {\n\
+    \      ys[i].resize(ys[i << 1].size() + ys[(i << 1) | 1].size());\n      merge(begin(ys[(i\
+    \ << 1) | 0]), end(ys[(i << 1) | 0]),\n            begin(ys[(i << 1) | 1]), end(ys[(i\
+    \ << 1) | 1]), begin(ys[i]));\n      ys[i].erase(unique(begin(ys[i]), end(ys[i])),\
+    \ end(ys[i]));\n      ds[i] = ds_new(ys[i].size());\n    }\n  }\n\n  int id(S\
+    \ x) const {\n    return lower_bound(\n               begin(ps), end(ps), make_pair(x,\
+    \ S()),\n               [](const P& a, const P& b) { return a.first < b.first;\
+    \ }) -\n           begin(ps);\n  }\n\n  int id(int i, S y) const {\n    return\
+    \ lower_bound(begin(ys[i]), end(ys[i]), y) - begin(ys[i]);\n  }\n\n  void add(S\
+    \ x, S y, T a) {\n    int i = lower_bound(begin(ps), end(ps), make_pair(x, y))\
+    \ - begin(ps);\n    assert(ps[i] == make_pair(x, y));\n    for (i += N; i; i >>=\
+    \ 1) ds_add(*ds[i], id(i, y), a);\n  }\n\n  T sum(S xl, S yl, S xr, S yr) {\n\
+    \    T L = ti, R = ti;\n    int a = id(xl), b = id(xr);\n    for (a += N, b +=\
+    \ N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = t_merge(L, ds_sum(*ds[a],\
+    \ id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = t_merge(ds_sum(*ds[b],\
+    \ id(b, yl), id(b, yr)), R);\n    }\n    return t_merge(L, R);\n  }\n};\n#line\
+    \ 3 \"data-structure/binary-indexed-tree.hpp\"\nusing namespace std;\n\ntemplate\
+    \ <typename T>\nstruct BinaryIndexedTree {\n  int N;\n  vector<T> data;\n\n  BinaryIndexedTree()\
+    \ = default;\n\n  BinaryIndexedTree(int size) { init(size); }\n\n  void init(int\
+    \ size) {\n    N = size + 2;\n    data.assign(N + 1, 0);\n  }\n\n  // get sum\
+    \ of [0,k]\n  T sum(int k) const {\n    if (k < 0) return 0;  // return 0 if k\
+    \ < 0\n    T ret = 0;\n    for (++k; k > 0; k -= k & -k) ret += data[k];\n   \
+    \ return ret;\n  }\n\n  // getsum of [l,r]\n  inline T sum(int l, int r) const\
+    \ { return sum(r) - sum(l - 1); }\n\n  // get value of k\n  inline T operator[](int\
+    \ k) const { return sum(k) - sum(k - 1); }\n\n  // data[k] += x\n  void add(int\
+    \ k, T x) {\n    for (++k; k < N; k += k & -k) data[k] += x;\n  }\n\n  // range\
+    \ add x to [l,r]\n  void imos(int l, int r, T x) {\n    add(l, x);\n    add(r\
+    \ + 1, -x);\n  }\n\n  // minimize i s.t. sum(i) >= w\n  int lower_bound(T w) {\n\
+    \    if (w <= 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k;\
+    \ k >>= 1) {\n      if (x + k <= N - 1 && data[x + k] < w) {\n        w -= data[x\
+    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n\n  // minimize\
+    \ i s.t. sum(i) > w\n  int upper_bound(T w) {\n    if (w < 0) return 0;\n    int\
+    \ x = 0;\n    for (int k = 1 << __lg(N); k; k >>= 1) {\n      if (x + k <= N -\
+    \ 1 && data[x + k] <= w) {\n        w -= data[x + k];\n        x += k;\n     \
+    \ }\n    }\n    return x;\n  }\n};\n#line 3 \"misc/compress.hpp\"\nusing namespace\
+    \ std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n  compress(const\
+    \ vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v) xs.push_back(x);\n\
+    \    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end()) , xs.end());\n\
+    \  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
     \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
     \ i){\n    return xs[i];\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
@@ -179,63 +209,49 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 3 \"misc/mo.hpp\"\nusing namespace std;\n\nstruct Mo {\n  int width;\n \
-    \ vector<int> left, right, order;\n\n  Mo(int N, int Q) : order(Q) {\n    width\
-    \ = max(1, N / max<int>(1, sqrt(Q / 3)));\n    iota(begin(order), end(order),\
-    \ 0);\n  }\n\n  void insert(int l, int r) { /* [l, r) */\n    left.emplace_back(l);\n\
-    \    right.emplace_back(r);\n  }\n\n  template <typename AL, typename AR, typename\
-    \ DL, typename DR, typename REM>\n  void run(const AL &add_left, const AR &add_right,\
-    \ const DL &delete_left,\n           const DR &delete_right, const REM &rem) {\n\
-    \    assert(left.size() == order.size());\n    sort(begin(order), end(order),\
-    \ [&](int a, int b) {\n      int ablock = left[a] / width, bblock = left[b] /\
-    \ width;\n      if (ablock != bblock) return ablock < bblock;\n      if (ablock\
-    \ & 1) return right[a] < right[b];\n      return right[a] > right[b];\n    });\n\
-    \    int nl = 0, nr = 0;\n    for (auto idx : order) {\n      while (nl > left[idx])\
-    \ add_left(--nl);\n      while (nr < right[idx]) add_right(nr++);\n      while\
-    \ (nl < left[idx]) delete_left(nl++);\n      while (nr > right[idx]) delete_right(--nr);\n\
-    \      rem(idx);\n    }\n  }\n};\n#line 8 \"verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp\"\
-    \n\nvoid solve() {\n  int N, Q;\n  rd(N);\n  rd(Q);\n  vi a(N);\n  rep(i, N) rd(a[i]);\n\
-    \  Mo mo(N, Q);\n  rep(i, Q) {\n    int l, r;\n    rd(l);\n    rd(r);\n    mo.insert(l,\
-    \ r);\n  }\n  compress<int> zip(a);\n  BinaryIndexedTree<int> bit(zip.size() +\
-    \ 1);\n  rep(i, N) a[i] = zip.get(a[i]);\n\n  ll cnt = 0;\n  vl ans(Q);\n  auto\
-    \ addleft = [&](int idx) {\n    cnt += bit.sum(0, a[idx] - 1);\n    bit.add(a[idx],\
-    \ 1);\n  };\n  auto addright = [&](int idx) {\n    cnt += bit.sum(a[idx] + 1,\
-    \ zip.size());\n    bit.add(a[idx], 1);\n  };\n  auto delleft = [&](int idx) {\n\
-    \    cnt -= bit.sum(0, a[idx] - 1);\n    bit.add(a[idx], -1);\n  };\n  auto delright\
-    \ = [&](int idx) {\n    cnt -= bit.sum(a[idx] + 1, zip.size());\n    bit.add(a[idx],\
-    \ -1);\n  };\n  auto rem = [&](int idx) { ans[idx] = cnt; };\n  mo.run(addleft,addright,delleft,delright,rem);\n\
-    \  each(x, ans) {\n    wt(x);\n    wt('\\n');\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
-    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/binary-indexed-tree.hpp\"\
-    \n#include \"../../misc/compress.hpp\"\n#include \"../../misc/fastio.hpp\"\n#include\
-    \ \"../../misc/mo.hpp\"\n\nvoid solve() {\n  int N, Q;\n  rd(N);\n  rd(Q);\n \
-    \ vi a(N);\n  rep(i, N) rd(a[i]);\n  Mo mo(N, Q);\n  rep(i, Q) {\n    int l, r;\n\
-    \    rd(l);\n    rd(r);\n    mo.insert(l, r);\n  }\n  compress<int> zip(a);\n\
-    \  BinaryIndexedTree<int> bit(zip.size() + 1);\n  rep(i, N) a[i] = zip.get(a[i]);\n\
-    \n  ll cnt = 0;\n  vl ans(Q);\n  auto addleft = [&](int idx) {\n    cnt += bit.sum(0,\
-    \ a[idx] - 1);\n    bit.add(a[idx], 1);\n  };\n  auto addright = [&](int idx)\
-    \ {\n    cnt += bit.sum(a[idx] + 1, zip.size());\n    bit.add(a[idx], 1);\n  };\n\
-    \  auto delleft = [&](int idx) {\n    cnt -= bit.sum(0, a[idx] - 1);\n    bit.add(a[idx],\
-    \ -1);\n  };\n  auto delright = [&](int idx) {\n    cnt -= bit.sum(a[idx] + 1,\
-    \ zip.size());\n    bit.add(a[idx], -1);\n  };\n  auto rem = [&](int idx) { ans[idx]\
-    \ = cnt; };\n  mo.run(addleft,addright,delleft,delright,rem);\n  each(x, ans)\
-    \ {\n    wt(x);\n    wt('\\n');\n  }\n}"
+    #line 8 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp\"\
+    \n\nvoid solve() {\n  using BIT = BinaryIndexedTree<ll>;\n  auto nw = [](int n)\
+    \ { return new BIT(n); };\n  auto add = [](BIT& bit, int i, ll a) { bit.add(i,\
+    \ a); };\n  auto sum = [](BIT& bit, int i, int j) {\n    return bit.sum(j - 1)\
+    \ - bit.sum(i - 1);\n  };\n  auto mrg = [](ll a, ll b) { return a + b; };\n\n\
+    \  RangeTree<BIT, int, ll> rtree(nw, add, sum, mrg, 0);\n\n  int N, Q;\n  rd(N,\
+    \ Q);\n  vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i,\
+    \ N) {\n    rd(X[i], Y[i], W[i]);\n    rtree.add_point(X[i], Y[i]);\n  }\n  rep(i,\
+    \ Q) {\n    rd(c[i], s[i], t[i], u[i]);\n    if (c[i])\n      rd(v[i]);\n    else\n\
+    \      rtree.add_point(s[i], t[i]);\n  }\n\n  rtree.build();\n  rep(i, N) { rtree.add(X[i],\
+    \ Y[i], W[i]); }\n  rep(i, Q) {\n    if (c[i]) {\n      out(rtree.sum(s[i], t[i],\
+    \ u[i], v[i]));\n    } else\n      rtree.add(s[i], t[i], u[i]);\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
+    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure-2d/abstract-range-tree.hpp\"\
+    \n#include \"../../data-structure/binary-indexed-tree.hpp\"\n#include \"../../misc/compress.hpp\"\
+    \n#include \"../../misc/fastio.hpp\"\n\nvoid solve() {\n  using BIT = BinaryIndexedTree<ll>;\n\
+    \  auto nw = [](int n) { return new BIT(n); };\n  auto add = [](BIT& bit, int\
+    \ i, ll a) { bit.add(i, a); };\n  auto sum = [](BIT& bit, int i, int j) {\n  \
+    \  return bit.sum(j - 1) - bit.sum(i - 1);\n  };\n  auto mrg = [](ll a, ll b)\
+    \ { return a + b; };\n\n  RangeTree<BIT, int, ll> rtree(nw, add, sum, mrg, 0);\n\
+    \n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q),\
+    \ u(Q), v(Q);\n  rep(i, N) {\n    rd(X[i], Y[i], W[i]);\n    rtree.add_point(X[i],\
+    \ Y[i]);\n  }\n  rep(i, Q) {\n    rd(c[i], s[i], t[i], u[i]);\n    if (c[i])\n\
+    \      rd(v[i]);\n    else\n      rtree.add_point(s[i], t[i]);\n  }\n\n  rtree.build();\n\
+    \  rep(i, N) { rtree.add(X[i], Y[i], W[i]); }\n  rep(i, Q) {\n    if (c[i]) {\n\
+    \      out(rtree.sum(s[i], t[i], u[i], v[i]));\n    } else\n      rtree.add(s[i],\
+    \ t[i], u[i]);\n  }\n}"
   dependsOn:
   - competitive-template.hpp
+  - data-structure-2d/abstract-range-tree.hpp
   - data-structure/binary-indexed-tree.hpp
   - misc/compress.hpp
   - misc/fastio.hpp
-  - misc/mo.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
   requiredBy: []
   timestamp: '2020-09-27 19:18:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
 ---

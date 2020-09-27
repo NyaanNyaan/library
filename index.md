@@ -37,7 +37,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/binary-trie.hpp
       title: Binary Trie
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: data-structure/dynamic-binary-indexed-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -99,7 +99,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/2d-cumulative-sum.hpp
       title: data-structure-2d/2d-cumulative-sum.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
+      path: data-structure-2d/abstract-range-tree.hpp
+      title: data-structure-2d/abstract-range-tree.hpp
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
       title: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
     - icon: ':heavy_check_mark:'
@@ -395,9 +398,6 @@ data:
       title: prime/prime-sieve.hpp
   - name: segment-tree
     pages:
-    - icon: ':warning:'
-      path: segment-tree/abstract-range-tree.hpp
-      title: segment-tree/abstract-range-tree.hpp
     - icon: ':heavy_check_mark:'
       path: segment-tree/dynamic-li-chao-tree.hpp
       title: segment-tree/dynamic-li-chao-tree.hpp
@@ -678,7 +678,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
     - icon: ':heavy_check_mark:'

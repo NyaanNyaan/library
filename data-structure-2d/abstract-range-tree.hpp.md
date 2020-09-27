@@ -2,13 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
-  bundledCode: "#line 2 \"segment-tree/abstract-range-tree.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"data-structure-2d/abstract-range-tree.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n// DS ... data_structure_type\n// S ... size_type\n//\
     \ T ... value_type\ntemplate <typename DS, typename S, typename T>\nstruct RangeTree\
     \ {\n  using NEW = function<DS*(int)>;\n  using ADD = function<void(DS&, int,\
@@ -69,15 +72,16 @@ data:
     \ id(b, yl), id(b, yr)), R);\n    }\n    return t_merge(L, R);\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: segment-tree/abstract-range-tree.hpp
+  path: data-structure-2d/abstract-range-tree.hpp
   requiredBy: []
-  timestamp: '2020-09-27 16:45:55+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
-documentation_of: segment-tree/abstract-range-tree.hpp
+  timestamp: '2020-09-27 19:18:38+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+documentation_of: data-structure-2d/abstract-range-tree.hpp
 layout: document
 redirect_from:
-- /library/segment-tree/abstract-range-tree.hpp
-- /library/segment-tree/abstract-range-tree.hpp.html
-title: segment-tree/abstract-range-tree.hpp
+- /library/data-structure-2d/abstract-range-tree.hpp
+- /library/data-structure-2d/abstract-range-tree.hpp.html
+title: data-structure-2d/abstract-range-tree.hpp
 ---

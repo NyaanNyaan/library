@@ -117,28 +117,27 @@ data:
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/binary-indexed-tree.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree {\n\
-    \  int N;\n  int max_2beki;\n  vector<T> data;\n\n  BinaryIndexedTree(int size)\
-    \ {\n    N = size + 3;\n    data.assign(N + 1, 0);\n    max_2beki = 1;\n    while\
-    \ (max_2beki * 2 <= N) max_2beki *= 2;\n  }\n\n  // get sum of [0,k]\n  T sum(int\
-    \ k) const {\n    if (k < 0) return 0;  // return 0 if k < 0\n    T ret = 0;\n\
-    \    for (++k; k > 0; k -= k & -k) ret += data[k];\n    return ret;\n  }\n\n \
-    \ // getsum of [l,r]\n  inline T sum(int l, int r) const { return sum(r) - sum(l\
-    \ - 1); }\n\n  // get value of k\n  inline T operator[](int k) const { return\
-    \ sum(k) - sum(k - 1); }\n\n  // data[k] += x\n  void add(int k, T x) {\n    for\
-    \ (++k; k < N; k += k & -k) data[k] += x;\n  }\n\n  // range add x to [l,r]\n\
-    \  void imos(int l, int r, T x) {\n    add(l, x);\n    add(r + 1, -x);\n  }\n\n\
-    \  // minimize i s.t. sum(i) >= w\n  int lower_bound(T w) {\n    if (w <= 0) return\
-    \ 0;\n    int x = 0;\n    for (int k = max_2beki; k > 0; k /= 2) {\n      if (x\
-    \ + k <= N - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x +=\
-    \ k;\n      }\n    }\n    return x;\n  }\n\n  // minimize i s.t. sum(i) > w\n\
-    \  int upper_bound(T w) {\n    if (w < 0) return 0;\n    int x = 0;\n    for (int\
-    \ k = max_2beki; k > 0; k /= 2) {\n      if (x + k <= N - 1 && data[x + k] <=\
-    \ w) {\n        w -= data[x + k];\n        x += k;\n      }\n    }\n    return\
-    \ x;\n  }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp\"\n\n\
-    void solve() {\n  ini(N, Q);\n  BinaryIndexedTree<int> bit(N);\n  rep(_, Q) {\n\
-    \    ini(c);\n    if (c == 0) {\n      ini(s, t, x);\n      s--, t--;\n      bit.imos(s,\
-    \ t, x);\n    } else {\n      ini(i);\n      i--;\n      out(bit.sum(i));\n  \
-    \  }\n  }\n}\n"
+    \  int N;\n  vector<T> data;\n\n  BinaryIndexedTree() = default;\n\n  BinaryIndexedTree(int\
+    \ size) { init(size); }\n\n  void init(int size) {\n    N = size + 2;\n    data.assign(N\
+    \ + 1, 0);\n  }\n\n  // get sum of [0,k]\n  T sum(int k) const {\n    if (k <\
+    \ 0) return 0;  // return 0 if k < 0\n    T ret = 0;\n    for (++k; k > 0; k -=\
+    \ k & -k) ret += data[k];\n    return ret;\n  }\n\n  // getsum of [l,r]\n  inline\
+    \ T sum(int l, int r) const { return sum(r) - sum(l - 1); }\n\n  // get value\
+    \ of k\n  inline T operator[](int k) const { return sum(k) - sum(k - 1); }\n\n\
+    \  // data[k] += x\n  void add(int k, T x) {\n    for (++k; k < N; k += k & -k)\
+    \ data[k] += x;\n  }\n\n  // range add x to [l,r]\n  void imos(int l, int r, T\
+    \ x) {\n    add(l, x);\n    add(r + 1, -x);\n  }\n\n  // minimize i s.t. sum(i)\
+    \ >= w\n  int lower_bound(T w) {\n    if (w <= 0) return 0;\n    int x = 0;\n\
+    \    for (int k = 1 << __lg(N); k; k >>= 1) {\n      if (x + k <= N - 1 && data[x\
+    \ + k] < w) {\n        w -= data[x + k];\n        x += k;\n      }\n    }\n  \
+    \  return x;\n  }\n\n  // minimize i s.t. sum(i) > w\n  int upper_bound(T w) {\n\
+    \    if (w < 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k; k\
+    \ >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <= w) {\n        w -= data[x\
+    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp\"\
+    \n\nvoid solve() {\n  ini(N, Q);\n  BinaryIndexedTree<int> bit(N);\n  rep(_, Q)\
+    \ {\n    ini(c);\n    if (c == 0) {\n      ini(s, t, x);\n      s--, t--;\n  \
+    \    bit.imos(s, t, x);\n    } else {\n      ini(i);\n      i--;\n      out(bit.sum(i));\n\
+    \    }\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/binary-indexed-tree.hpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  BinaryIndexedTree<int> bit(N);\n  rep(_, Q)\
@@ -151,7 +150,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
   requiredBy: []
-  timestamp: '2020-09-08 23:53:33+09:00'
+  timestamp: '2020-09-27 19:18:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
