@@ -16,6 +16,8 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
+    _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
+    document_title: "\u52D5\u7684Binary Indexed Tree"
     links: []
   bundledCode: "#line 2 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\n\
     #include <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"data-structure/dynamic-binary-indexed-tree.hpp\"\
@@ -74,7 +76,8 @@ data:
     \ ml, int nr, int mr) const {\n    T ret = T();\n    while (nl != nr) {\n    \
     \  if (nl < nr) {\n        ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr &\
     \ -nr;\n      } else {\n        ret -= (*bit[nl]).sum(ml, mr);\n        nl -=\
-    \ nl & -nl;\n      }\n    }\n    return ret;\n  }\n};\n"
+    \ nl & -nl;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684\
+    Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate <typename\
     \ T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int, T>;\n\
@@ -88,14 +91,15 @@ data:
     \ const {\n    T ret = T();\n    while (nl != nr) {\n      if (nl < nr) {\n  \
     \      ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr & -nr;\n      } else {\n\
     \        ret -= (*bit[nl]).sum(ml, mr);\n        nl -= nl & -nl;\n      }\n  \
-    \  }\n    return ret;\n  }\n};\n"
+    \  }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684Binary Indexed Tree\n\
+    \ * @docs docs/data-structure-2d/ds-2d.md\n */\n"
   dependsOn:
   - data-structure/dynamic-binary-indexed-tree.hpp
   - data-structure/hash-map-variable-length.hpp
   isVerificationFile: false
   path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
   requiredBy: []
-  timestamp: '2020-09-27 19:18:38+09:00'
+  timestamp: '2020-09-27 20:14:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
@@ -104,5 +108,23 @@ layout: document
 redirect_from:
 - /library/data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
 - /library/data-structure-2d/dynamic-binary-indexed-tree-2d.hpp.html
-title: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
+title: "\u52D5\u7684Binary Indexed Tree"
 ---
+## 領域木
+
+TODO: 書く
+TODO: Merge Treeと領域木の呼び方が良くわかっていないので調べる
+
+- 矩形和クエリ
+  - 2D累積和
+  - 永続セグメント木
+  - Merge Tree
+  - Wavelet Matrix
+- 一点更新・矩形和クエリ
+  - 2D Fenwick Tree
+  - 2D Segment Tree
+  - 動的 2D Fenwick Tree
+  - 領域木(Segment Tree)
+  - 抽象化領域木
+  - 領域木(Fenwick Tree)
+  - 動的Wavelet Matrix

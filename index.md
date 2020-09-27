@@ -26,7 +26,7 @@ data:
     - icon: ':warning:'
       path: bundle.py
       title: bundle.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -71,9 +71,6 @@ data:
       path: data-structure/range-union-find.hpp
       title: data-structure/range-union-find.hpp
     - icon: ':heavy_check_mark:'
-      path: data-structure/rectangle-sum.hpp
-      title: data-structure/rectangle-sum.hpp
-    - icon: ':heavy_check_mark:'
       path: data-structure/slide-window-aggregation.hpp
       title: data-structure/slide-window-aggregation.hpp
     - icon: ':heavy_check_mark:'
@@ -104,7 +101,13 @@ data:
       title: data-structure-2d/abstract-range-tree.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
-      title: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
+      title: "\u52D5\u7684Binary Indexed Tree"
+    - icon: ':x:'
+      path: data-structure-2d/fenwick-tree-on-range-tree.hpp
+      title: data-structure-2d/fenwick-tree-on-range-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure-2d/rectangle-sum.hpp
+      title: data-structure-2d/rectangle-sum.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/segment-tree-on-range-tree.hpp
       title: data-structure-2d/segment-tree-on-range-tree.hpp
@@ -295,13 +298,13 @@ data:
       title: math/zeta-mobius-transform.hpp
   - name: misc
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/compress.hpp
       title: misc/compress.hpp
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -687,6 +690,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp

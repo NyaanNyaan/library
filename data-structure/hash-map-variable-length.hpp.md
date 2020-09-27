@@ -13,7 +13,7 @@ data:
     title: segment-tree/dynamic-li-chao-tree.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
-    title: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
+    title: "\u52D5\u7684Binary Indexed Tree"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp

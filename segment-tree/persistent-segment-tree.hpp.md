@@ -3,8 +3,8 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: data-structure/rectangle-sum.hpp
-    title: data-structure/rectangle-sum.hpp
+    path: data-structure-2d/rectangle-sum.hpp
+    title: data-structure-2d/rectangle-sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
@@ -108,7 +108,7 @@ data:
   isVerificationFile: false
   path: segment-tree/persistent-segment-tree.hpp
   requiredBy:
-  - data-structure/rectangle-sum.hpp
+  - data-structure-2d/rectangle-sum.hpp
   timestamp: '2020-08-20 12:40:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

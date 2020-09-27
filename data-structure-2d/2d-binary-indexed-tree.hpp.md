@@ -10,6 +10,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
+    _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
     links: []
   bundledCode: "#line 2 \"data-structure-2d/2d-binary-indexed-tree.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree2D\
@@ -33,7 +34,9 @@ data:
     \    return ret;\n  }\n\n  // [(x1,y1) , (x2,y2)] \u306E\u548C\n  // x1 > x2,\
     \ y1 > y2\u306E\u6642\u306Fswap\n  T sum(int x1, int y1, int x2, int y2) {\n \
     \   if (x1 > x2 || y1 > y2) return T(0);\n    return sum(x2, y2) - sum(x2, y1\
-    \ - 1) - sum(x1 - 1, y2) +\n           sum(x1 - 1, y1 - 1);\n  }\n};\n"
+    \ - 1) - sum(x1 - 1, y2) +\n           sum(x1 - 1, y1 - 1);\n  }\n};\n\n/*\n *\
+    \ @brief\u3000\u4E8C\u6B21\u5143Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename T>\nstruct BinaryIndexedTree2D {\n  int H, W;\n  vector<vector<T>>\
     \ bit;\n  BinaryIndexedTree2D(int H, int W) : H(H + 1), W(W + 1) {\n    bit.resize(H\
@@ -56,12 +59,13 @@ data:
     \ , (x2,y2)] \u306E\u548C\n  // x1 > x2, y1 > y2\u306E\u6642\u306Fswap\n  T sum(int\
     \ x1, int y1, int x2, int y2) {\n    if (x1 > x2 || y1 > y2) return T(0);\n  \
     \  return sum(x2, y2) - sum(x2, y1 - 1) - sum(x1 - 1, y2) +\n           sum(x1\
-    \ - 1, y1 - 1);\n  }\n};"
+    \ - 1, y1 - 1);\n  }\n};\n\n/*\n * @brief\u3000\u4E8C\u6B21\u5143Binary Indexed\
+    \ Tree\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure-2d/2d-binary-indexed-tree.hpp
   requiredBy: []
-  timestamp: '2020-09-27 16:45:55+09:00'
+  timestamp: '2020-09-27 20:14:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
@@ -72,3 +76,21 @@ redirect_from:
 - /library/data-structure-2d/2d-binary-indexed-tree.hpp.html
 title: data-structure-2d/2d-binary-indexed-tree.hpp
 ---
+## 領域木
+
+TODO: 書く
+TODO: Merge Treeと領域木の呼び方が良くわかっていないので調べる
+
+- 矩形和クエリ
+  - 2D累積和
+  - 永続セグメント木
+  - Merge Tree
+  - Wavelet Matrix
+- 一点更新・矩形和クエリ
+  - 2D Fenwick Tree
+  - 2D Segment Tree
+  - 動的 2D Fenwick Tree
+  - 領域木(Segment Tree)
+  - 抽象化領域木
+  - 領域木(Fenwick Tree)
+  - 動的Wavelet Matrix

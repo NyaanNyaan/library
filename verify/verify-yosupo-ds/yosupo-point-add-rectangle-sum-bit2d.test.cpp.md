@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -9,14 +9,14 @@ data:
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
-    title: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
+    title: "\u52D5\u7684Binary Indexed Tree"
   - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: data-structure/dynamic-binary-indexed-tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []
@@ -185,11 +185,12 @@ data:
     \ const {\n    T ret = T();\n    while (nl != nr) {\n      if (nl < nr) {\n  \
     \      ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr & -nr;\n      } else {\n\
     \        ret -= (*bit[nl]).sum(ml, mr);\n        nl -= nl & -nl;\n      }\n  \
-    \  }\n    return ret;\n  }\n};\n#line 3 \"misc/compress.hpp\"\nusing namespace\
-    \ std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n  compress(const\
-    \ vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v) xs.push_back(x);\n\
-    \    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end()) , xs.end());\n\
-    \  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
+    \  }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684Binary Indexed Tree\n\
+    \ * @docs docs/data-structure-2d/ds-2d.md\n */\n#line 3 \"misc/compress.hpp\"\n\
+    using namespace std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n\
+    \  compress(const vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v)\
+    \ xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
+    \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
     \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
     \ i){\n    return xs[i];\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
@@ -259,7 +260,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 19:18:38+09:00'
+  timestamp: '2020-09-27 20:14:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp

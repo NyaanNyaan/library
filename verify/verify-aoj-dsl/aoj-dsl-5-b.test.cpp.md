@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -127,7 +127,8 @@ data:
     \ j++) {\n        data[i][j] += data[i][j - 1] + data[i - 1][j] - data[i - 1][j\
     \ - 1];\n      }\n    }\n  }\n\n  T query(int i1, int j1, int i2, int j2) {\n\
     \    return (data[i2][j2] - data[i1][j2] - data[i2][j1] + data[i1][j1]);\n  }\n\
-    };\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp\"\n\nvoid solve() {\n\
+    };\n\n/*\n * @brief\u3000\u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \ */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp\"\n\nvoid solve() {\n\
     \  ini(N);\n  int L = 1000;\n  CumulativeSum2D<int> ruiseki(L, L);\n  rep(i, N)\
     \ {\n    ini(x1, y1, x2, y2);\n    ruiseki.imos(x1, y1, x2 , y2, 1);\n  }\n  ruiseki.build();\n\
     \  int ans = 0;\n  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]);\
@@ -144,7 +145,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 16:45:55+09:00'
+  timestamp: '2020-09-27 20:14:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp

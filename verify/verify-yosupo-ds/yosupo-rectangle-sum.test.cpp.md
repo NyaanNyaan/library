@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: data-structure/rectangle-sum.hpp
-    title: data-structure/rectangle-sum.hpp
+    path: data-structure-2d/rectangle-sum.hpp
+    title: data-structure-2d/rectangle-sum.hpp
   - icon: ':heavy_check_mark:'
     path: segment-tree/persistent-segment-tree.hpp
     title: "\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -118,7 +118,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/rectangle-sum.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure-2d/rectangle-sum.hpp\"\
     \nusing namespace std;\n\n#line 3 \"segment-tree/persistent-segment-tree.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T, typename F, int NODES = 20000000>\n\
     struct PersistentSegmentTree {\n  using ll = long long;\n  struct Node {\n   \
@@ -162,7 +162,7 @@ data:
     \ b) { return query_(a, b, roots[t], 0, N); }\n  T query(ll a, ll b) { return\
     \ query_(a, b, roots.back(), 0, N); }\n\n  Node *new_tree() { return nil; }\n\
     };\n\n/**\n * @brief \u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\n * @docs\
-    \ docs/segment-tree/persistent-segtree.md\n */\n#line 6 \"data-structure/rectangle-sum.hpp\"\
+    \ docs/segment-tree/persistent-segtree.md\n */\n#line 6 \"data-structure-2d/rectangle-sum.hpp\"\
     \n\ntemplate <typename T, typename U, typename F>\nstruct RectangleSum {\n  PersistentSegmentTree<U,\
     \ F> seg;\n  vector<T> xs, ys;\n  vector<U> ws;\n  vector<int> ord;\n\n  RectangleSum(const\
     \ vector<T> &xs_, const vector<T> &ys_, const vector<U> &ws_,\n              \
@@ -182,26 +182,27 @@ data:
     \ U(0);\n    int l = lower_bound(begin(xs), end(xs), x1) - begin(xs);\n    int\
     \ r = lower_bound(begin(xs), end(xs), x2) - begin(xs);\n    int d = lower_bound(begin(ys),\
     \ end(ys), y1) - begin(ys);\n    int u = lower_bound(begin(ys), end(ys), y2) -\
-    \ begin(ys);\n    return seg.query(u, l, r) - seg.query(d, l, r);\n  }\n};\n#line\
-    \ 5 \"verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp\"\n\nvoid solve()\
-    \ {\n  ini(N, Q);\n  vl xs(N), ys(N), ws(N);\n  in3(xs, ys, ws);\n  auto f = [](ll\
-    \ u, ll v) { return u + v; };\n  RectangleSum<ll, ll, decltype(f)> rect(xs, ys,\
-    \ ws, f);\n  rep(_, Q) {\n    inl(l, d, r, u);\n    out(rect.rect_sum(l, d, r,\
-    \ u));\n  }\n}\n"
+    \ begin(ys);\n    return seg.query(u, l, r) - seg.query(d, l, r);\n  }\n};\n\n\
+    /*\n * @brief\u3000\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\
+    \u6728)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n#line 5 \"verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp\"\
+    \n\nvoid solve() {\n  ini(N, Q);\n  vl xs(N), ys(N), ws(N);\n  in3(xs, ys, ws);\n\
+    \  auto f = [](ll u, ll v) { return u + v; };\n  RectangleSum<ll, ll, decltype(f)>\
+    \ rect(xs, ys, ws, f);\n  rep(_, Q) {\n    inl(l, d, r, u);\n    out(rect.rect_sum(l,\
+    \ d, r, u));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rectangle_sum\"\n\n#include\
-    \ \"../../competitive-template.hpp\"\n#include \"../../data-structure/rectangle-sum.hpp\"\
+    \ \"../../competitive-template.hpp\"\n#include \"../../data-structure-2d/rectangle-sum.hpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  vl xs(N), ys(N), ws(N);\n  in3(xs, ys, ws);\n\
     \  auto f = [](ll u, ll v) { return u + v; };\n  RectangleSum<ll, ll, decltype(f)>\
     \ rect(xs, ys, ws, f);\n  rep(_, Q) {\n    inl(l, d, r, u);\n    out(rect.rect_sum(l,\
     \ d, r, u));\n  }\n}"
   dependsOn:
   - competitive-template.hpp
-  - data-structure/rectangle-sum.hpp
+  - data-structure-2d/rectangle-sum.hpp
   - segment-tree/persistent-segment-tree.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-08-20 12:40:30+09:00'
+  timestamp: '2020-09-27 20:14:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp

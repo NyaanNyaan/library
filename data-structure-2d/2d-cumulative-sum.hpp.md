@@ -10,6 +10,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
+    _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
     links: []
   bundledCode: "#line 2 \"data-structure-2d/2d-cumulative-sum.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n// Don't Forget to call build() !!!!!\ntemplate <class\
@@ -23,7 +24,8 @@ data:
     \ j++) {\n        data[i][j] += data[i][j - 1] + data[i - 1][j] - data[i - 1][j\
     \ - 1];\n      }\n    }\n  }\n\n  T query(int i1, int j1, int i2, int j2) {\n\
     \    return (data[i2][j2] - data[i1][j2] - data[i2][j1] + data[i1][j1]);\n  }\n\
-    };\n"
+    };\n\n/*\n * @brief\u3000\u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n// Don't\
     \ Forget to call build() !!!!!\ntemplate <class T>\nstruct CumulativeSum2D {\n\
     \  vector<vector<T> > data;\n\n  CumulativeSum2D(int H, int W) : data(H + 3, vector<int>(W\
@@ -35,12 +37,14 @@ data:
     \ i++) {\n      for (int j = 1; j < (int)data[i].size(); j++) {\n        data[i][j]\
     \ += data[i][j - 1] + data[i - 1][j] - data[i - 1][j - 1];\n      }\n    }\n \
     \ }\n\n  T query(int i1, int j1, int i2, int j2) {\n    return (data[i2][j2] -\
-    \ data[i1][j2] - data[i2][j1] + data[i1][j1]);\n  }\n};"
+    \ data[i1][j2] - data[i2][j1] + data[i1][j1]);\n  }\n};\n\n/*\n * @brief\u3000\
+    \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure-2d/2d-cumulative-sum.hpp
   requiredBy: []
-  timestamp: '2020-09-27 16:45:55+09:00'
+  timestamp: '2020-09-27 20:14:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
@@ -51,3 +55,21 @@ redirect_from:
 - /library/data-structure-2d/2d-cumulative-sum.hpp.html
 title: data-structure-2d/2d-cumulative-sum.hpp
 ---
+## 領域木
+
+TODO: 書く
+TODO: Merge Treeと領域木の呼び方が良くわかっていないので調べる
+
+- 矩形和クエリ
+  - 2D累積和
+  - 永続セグメント木
+  - Merge Tree
+  - Wavelet Matrix
+- 一点更新・矩形和クエリ
+  - 2D Fenwick Tree
+  - 2D Segment Tree
+  - 動的 2D Fenwick Tree
+  - 領域木(Segment Tree)
+  - 抽象化領域木
+  - 領域木(Fenwick Tree)
+  - 動的Wavelet Matrix
