@@ -75,3 +75,8 @@ struct RangeTree {
     return t_merge(L, R);
   }
 };
+
+/*
+ * @brief　抽象化領域木
+ * @docs docs/data-structure-2d/ds-2d.md
+ */

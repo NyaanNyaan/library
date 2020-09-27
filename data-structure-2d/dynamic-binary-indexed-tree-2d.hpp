@@ -41,3 +41,8 @@ struct DynamicFenwickTree2D {
     return ret;
   }
 };
+
+/*
+ * @brief 動的Binary Indexed Tree
+ * @docs docs/data-structure-2d/ds-2d.md
+ */

@@ -69,3 +69,8 @@ struct RangeTree {
     return f(L, R);
   }
 };
+
+/*
+ * @brief　領域木(Segment Tree)
+ * @docs docs/data-structure-2d/ds-2d.md
+ */

@@ -54,3 +54,8 @@ struct BinaryIndexedTree2D {
            sum(x1 - 1, y1 - 1);
   }
 };
+
+/*
+ * @brief　二次元Binary Indexed Tree
+ * @docs docs/data-structure-2d/ds-2d.md
+ */

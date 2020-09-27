@@ -35,3 +35,8 @@ struct CumulativeSum2D {
     return (data[i2][j2] - data[i1][j2] - data[i2][j1] + data[i1][j1]);
   }
 };
+
+/*
+ * @brief　二次元累積和
+ * @docs docs/data-structure-2d/ds-2d.md
+ */

@@ -55,3 +55,8 @@ struct RectangleSum {
     return seg.query(u, l, r) - seg.query(d, l, r);
   }
 };
+
+/*
+ * @brief　矩形和(永続セグメント木)
+ * @docs docs/data-structure-2d/ds-2d.md
+ */
