@@ -2,11 +2,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "./timer.hpp"
-#include "./rng.hpp"
+#include "rng.hpp"
+#include "timer.hpp"
 
 namespace Simulated_Annealing {
-
 // exp高速化用のlogテーブル
 // exp(d/T) > rng()  <=>  d > T * log(rng)を使い前計算
 struct gen_log {
@@ -20,12 +19,11 @@ struct gen_log {
       l[i] = log(double(x)) - log_u64max;
     }
   }
-};
-constexpr auto rnd_log = gen_log();
+} constexpr rnd_log;
 
 // 時間
 double start_time = 0;
-constexpr double end_time = 1980;
+constexpr double end_time = 2900;
 double inv_time = 1.0 / (end_time - start_time);
 double cur_time = 0;
 
@@ -47,45 +45,19 @@ void set_temp(double startTemp) {
 // スコア
 using score_t = long long;
 score_t score = 0, diff = 0;
+// 遷移のパターン用の変数
+int mode = 0;
 
-// 入力用,答え用変数
-
-// 入力
-void input() {
-  // 入力
-}
-
-void output() {
-  // 出力
-}
-
-void init() {
-  score = diff = 0;
-  // 初期解を構築してスコアを計算
-}
-
-// 状態変数(古い状態と新しい状態をメモする用)
-int mode = 0;  // 遷移のパターン用の変数
-
-void set_state(int iter) {
-  // 遷移先を設定
-}
-
-void calc_diff() {
-  // 差分を計算(遷移をするかは問題によって決める)
-}
-
-void update() {
-  // 遷移を採用して更新
-  score += diff;
-}
-
-void undo() {
-  // 復元
-}
+void input();
+void output();
+void init();
+void set_state(int);
+void calc_diff();
+void update();
+void undo();
 
 // 実行
-void simulated_annealing(double startTemp, Timer *timer = nullptr,
+score_t simulated_annealing(double startTemp, Timer *timer = nullptr,
                          bool is_tuning = false) {
   // タイマーの設定
   if (timer == nullptr) timer = new Timer();
@@ -126,7 +98,7 @@ void simulated_annealing(double startTemp, Timer *timer = nullptr,
 
 // デバッグ用に 65536 iteration毎に出力
 #ifdef NyaanDebug
-    if (!is_tuning and (iter & 0x3FFFFF) == 0) {
+    if (!is_tuning and (iter & 0xFFFF) == 0) {
       cerr << cur_time << "\t" << iter << "\t" << score << endl;
     }
 #endif
@@ -135,6 +107,7 @@ void simulated_annealing(double startTemp, Timer *timer = nullptr,
 #ifdef NyaanDebug
   cerr << iter << "\t" << score << endl;
 #endif
+  return score;
 }
 
 // 実行用
@@ -166,3 +139,45 @@ void test(const vector<string> &filenames, double temp, int loop = 1) {
 
 }  // namespace Simulated_Annealing
 namespace SA = Simulated_Annealing;
+
+/*
+namespace Simulated_Annealing{
+// 入力
+void input() {
+
+}
+
+void output() {
+
+}
+
+// 初期解を構築してスコアを計算
+// スコア: score (型 : score_t)
+void init() {
+  score = diff = 0;
+
+}
+
+// 遷移先を設定(変数 : mode)
+void set_state(int iter) {
+
+}
+
+// 差分を計算(遷移をするかは問題によって決める)
+// 差分の変数はdiff
+void calc_diff() {
+
+}
+
+// 遷移を採用して更新
+void update() {
+  score += diff;
+
+}
+
+// 元の状態に復元
+void undo() {
+
+}
+}
+*/

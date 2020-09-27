@@ -1,3 +1,5 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
+
 #include "../../competitive-template.hpp"
 #include "../../data-structure-2d/fenwick-tree-on-range-tree.hpp"
 #include "../../misc/compress.hpp"
