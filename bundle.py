@@ -26,6 +26,8 @@ with open(args[1], mode='r', encoding='utf-8') as f:
             buf.write('\n')
 buf.close()
 
+import datetime
+print("// " + str(datetime.datetime.now()))
 cmd = "oj-bundle " + buffer
 src = subprocess.check_output(cmd.split()).decode("utf-8")
 lines = src.split('\n')

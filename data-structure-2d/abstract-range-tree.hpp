@@ -77,6 +77,6 @@ struct RangeTree {
 };
 
 /*
- * @brief　抽象化領域木
+ * @brief 抽象化領域木
  * @docs docs/data-structure-2d/ds-2d.md
  */
