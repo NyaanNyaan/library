@@ -11,12 +11,12 @@ data:
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
-  bundledCode: "#line 2 \"data-structure/2d-binary-indexed-tree.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree2D {\n\
-    \  int H, W;\n  vector<vector<T>> bit;\n  BinaryIndexedTree2D(int H, int W) :\
-    \ H(H + 1), W(W + 1) {\n    bit.resize(H + 3, vector<T>(W + 3, 0));\n  }\n  //\
-    \ \u95A2\u6570\u306E\u5165\u529B\u306Eindex\u306F0-origin\u3092\u60F3\u5B9A\n\n\
-    \  // (x,y)\u306Bw\u3092\u8DB3\u3059\n  // \u7BC4\u56F2\u5916\u306E\u6642\u306F\
+  bundledCode: "#line 2 \"data-structure-2d/2d-binary-indexed-tree.hpp\"\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree2D\
+    \ {\n  int H, W;\n  vector<vector<T>> bit;\n  BinaryIndexedTree2D(int H, int W)\
+    \ : H(H + 1), W(W + 1) {\n    bit.resize(H + 3, vector<T>(W + 3, 0));\n  }\n \
+    \ // \u95A2\u6570\u306E\u5165\u529B\u306Eindex\u306F0-origin\u3092\u60F3\u5B9A\
+    \n\n  // (x,y)\u306Bw\u3092\u8DB3\u3059\n  // \u7BC4\u56F2\u5916\u306E\u6642\u306F\
     \u8DB3\u3055\u306A\u3044\n  void add(int x, int y, T w) {\n    if (x < 0 || x\
     \ >= H || y < 0 || y >= W) return;\n    for (int a = (++y, ++x); a <= H; a +=\
     \ a & -a) {\n      for (int b = y; b <= W; b += b & -b) {\n        bit[a][b] +=\
@@ -59,16 +59,16 @@ data:
     \ - 1, y1 - 1);\n  }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: data-structure/2d-binary-indexed-tree.hpp
+  path: data-structure-2d/2d-binary-indexed-tree.hpp
   requiredBy: []
-  timestamp: '2020-07-28 11:29:32+09:00'
+  timestamp: '2020-09-27 16:45:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
-documentation_of: data-structure/2d-binary-indexed-tree.hpp
+documentation_of: data-structure-2d/2d-binary-indexed-tree.hpp
 layout: document
 redirect_from:
-- /library/data-structure/2d-binary-indexed-tree.hpp
-- /library/data-structure/2d-binary-indexed-tree.hpp.html
-title: data-structure/2d-binary-indexed-tree.hpp
+- /library/data-structure-2d/2d-binary-indexed-tree.hpp
+- /library/data-structure-2d/2d-binary-indexed-tree.hpp.html
+title: data-structure-2d/2d-binary-indexed-tree.hpp
 ---

@@ -123,63 +123,62 @@ data:
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"segment-tree/segment-tree.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T, typename F>\nstruct SegmentTree\
-    \ {\n  int size;\n  vector<T> seg;\n  const F func;\n  const T UNIT;\n\n  SegmentTree(int\
-    \ N, F func, T UNIT) : func(func), UNIT(UNIT) {\n    size = 1;\n    while (size\
-    \ < N) size <<= 1;\n    seg.assign(2 * size, UNIT);\n  }\n\n  SegmentTree(const\
-    \ vector<T> &v, F func, T UNIT) : func(func), UNIT(UNIT) {\n    int N = (int)v.size();\n\
-    \    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2 * size, UNIT);\n\
-    \    for (int i = 0; i < N; i++) {\n      seg[i + size] = v[i];\n    }\n    build();\n\
-    \  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void build() {\n  \
-    \  for (int k = size - 1; k > 0; k--) {\n      seg[k] = func(seg[2 * k], seg[2\
+    \ {\n  int size;\n  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree(F\
+    \ f_, const T &I_) : size(0), f(f_), I(I_) {}\n\n  SegmentTree(int N, F f_, const\
+    \ T &I_) : f(f_), I(I_) { init(N); }\n\n  SegmentTree(const vector<T> &v, F f,\
+    \ T I) : f(f), I(I) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
+    \ i++) {\n      seg[i + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int\
+    \ N) {\n    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2 * size,\
+    \ I);\n  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void build()\
+    \ {\n    for (int k = size - 1; k > 0; k--) {\n      seg[k] = f(seg[2 * k], seg[2\
     \ * k + 1]);\n    }\n  }\n\n  void update(int k, T x) {\n    k += size;\n    seg[k]\
-    \ = x;\n    while (k >>= 1) {\n      seg[k] = func(seg[2 * k], seg[2 * k + 1]);\n\
+    \ = x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n\
     \    }\n  }\n\n  void add(int k, T x) {\n    k += size;\n    seg[k] += x;\n  \
-    \  while (k >>= 1) {\n      seg[k] = func(seg[2 * k], seg[2 * k + 1]);\n    }\n\
-    \  }\n\n  // query to [a, b)\n  T query(int a, int b) {\n    T L = UNIT, R = UNIT;\n\
+    \  while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n \
+    \ }\n\n  // query to [a, b)\n  T query(int a, int b) {\n    T L = I, R = I;\n\
     \    for (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L\
-    \ = func(L, seg[a++]);\n      if (b & 1) R = func(seg[--b], R);\n    }\n    return\
-    \ func(L, R);\n  }\n\n  T &operator[](const int &k) { return seg[k + size]; }\n\
-    \n  template <typename C>\n  int find_subtree(int a, const C &check, T &M, bool\
-    \ type) {\n    while (a < size) {\n      T nxt = type ? func(seg[2 * a + type],\
-    \ M) : func(M, seg[2 * a + type]);\n      if (check(nxt))\n        a = 2 * a +\
-    \ type;\n      else\n        M = nxt, a = 2 * a + 1 - type;\n    }\n    return\
-    \ a - size;\n  }\n\n  template <typename C>\n  int find_first(int a, const C &check)\
-    \ {\n    T L = UNIT;\n    if (a <= 0) {\n      if (check(func(L, seg[1]))) return\
-    \ find_subtree(1, check, L, false);\n      return -1;\n    }\n    int b = size;\n\
-    \    for (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) {\n\
-    \        T nxt = func(L, seg[a]);\n        if (check(nxt)) return find_subtree(a,\
-    \ check, L, false);\n        L = nxt;\n        ++a;\n      }\n    }\n    return\
-    \ -1;\n  }\n\n  template <typename C>\n  int find_last(int b, const C &check)\
-    \ {\n    T R = UNIT;\n    if (b >= size) {\n      if (check(func(seg[1], R)))\
-    \ return find_subtree(1, check, R, true);\n      return -1;\n    }\n    int a\
-    \ = size;\n    for (b += size; a < b; a >>= 1, b >>= 1) {\n      if (b & 1) {\n\
-    \        T nxt = func(seg[--b], R);\n        if (check(nxt)) return find_subtree(b,\
-    \ check, R, true);\n        R = nxt;\n      }\n    }\n    return -1;\n  }\n};\n\
-    #line 3 \"tree/heavy-light-decomposition.hpp\"\nusing namespace std;\n\n#line\
-    \ 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\ntemplate <typename T>\n\
-    struct edge {\n  int src, to;\n  T cost;\n\n  edge(int to, T cost) : src(-1),\
-    \ to(to), cost(cost) {}\n  edge(int src, int to, T cost) : src(src), to(to), cost(cost)\
-    \ {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\
-    \n  operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
-    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
-    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
-    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
-    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
-    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
-    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
-    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
-    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
-    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
+    \ = f(L, seg[a++]);\n      if (b & 1) R = f(seg[--b], R);\n    }\n    return f(L,\
+    \ R);\n  }\n\n  T &operator[](const int &k) { return seg[k + size]; }\n\n  template\
+    \ <typename C>\n  int find_subtree(int a, const C &check, T &M, bool type) {\n\
+    \    while (a < size) {\n      T nxt = type ? f(seg[2 * a + type], M) : f(M, seg[2\
+    \ * a + type]);\n      if (check(nxt))\n        a = 2 * a + type;\n      else\n\
+    \        M = nxt, a = 2 * a + 1 - type;\n    }\n    return a - size;\n  }\n\n\
+    \  template <typename C>\n  int find_first(int a, const C &check) {\n    T L =\
+    \ I;\n    if (a <= 0) {\n      if (check(f(L, seg[1]))) return find_subtree(1,\
+    \ check, L, false);\n      return -1;\n    }\n    int b = size;\n    for (a +=\
+    \ size, b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) {\n        T nxt\
+    \ = f(L, seg[a]);\n        if (check(nxt)) return find_subtree(a, check, L, false);\n\
+    \        L = nxt;\n        ++a;\n      }\n    }\n    return -1;\n  }\n\n  template\
+    \ <typename C>\n  int find_last(int b, const C &check) {\n    T R = I;\n    if\
+    \ (b >= size) {\n      if (check(f(seg[1], R))) return find_subtree(1, check,\
+    \ R, true);\n      return -1;\n    }\n    int a = size;\n    for (b += size; a\
+    \ < b; a >>= 1, b >>= 1) {\n      if (b & 1) {\n        T nxt = f(seg[--b], R);\n\
+    \        if (check(nxt)) return find_subtree(b, check, R, true);\n        R =\
+    \ nxt;\n      }\n    }\n    return -1;\n  }\n};\n#line 3 \"tree/heavy-light-decomposition.hpp\"\
+    \nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\
+    \ std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n\
+    \  edge(int to, T cost) : src(-1), to(to), cost(cost) {}\n  edge(int src, int\
+    \ to, T cost) : src(src), to(to), cost(cost) {}\n\n  edge &operator=(const int\
+    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
+    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
-    \    g[x].eb(x, y, c);\n    if (!is_directed) g[y].eb(y, x, c);\n  }\n  return\
-    \ g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T> esgraph(int N, int\
-    \ M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T> es;\n  for\
-    \ (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n   \
-    \ if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\n// Input of\
-    \ Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int N, int\
-    \ M, T INF, int is_weighted = true,\n                           bool is_directed\
+    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
+    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
+    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
+    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
+    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
+    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
+    \  if (is_1origin) x--, y--;\n    g[x].eb(x, y, c);\n    if (!is_directed) g[y].eb(y,\
+    \ x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
+    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
+    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
+    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
+    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
+    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
+    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
     \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
@@ -253,7 +252,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-08-05 02:19:06+09:00'
+  timestamp: '2020-09-27 16:45:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp

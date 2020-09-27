@@ -5,20 +5,17 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: data-structure/hash-map-variable-length.hpp
-    title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-  - icon: ':heavy_check_mark:'
-    path: data-structure/dynamic-binary-indexed-tree-2d.hpp
-    title: data-structure/dynamic-binary-indexed-tree-2d.hpp
-  - icon: ':heavy_check_mark:'
-    path: data-structure/dynamic-binary-indexed-tree.hpp
-    title: data-structure/dynamic-binary-indexed-tree.hpp
-  - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
+    path: data-structure-2d/segment-tree-on-range-tree.hpp
+    title: data-structure-2d/segment-tree-on-range-tree.hpp
+  - icon: ':heavy_check_mark:'
+    path: segment-tree/segment-tree.hpp
+    title: segment-tree/segment-tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -28,7 +25,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
     links:
     - https://judge.yosupo.jp/problem/point_add_rectangle_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp\"\
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n\
     \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
@@ -127,68 +124,11 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
-    \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
-    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap, s;\n  Key*\
-    \ keys;\n  Val* vals;\n  vector<bool> flag;\n  u64 r;\n  u32 shift;\n  Val DefaultValue;\n\
-    \n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
-    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
-    \  }\n\n  void reallocate() {\n    cap <<= 1;\n    Key* k = new Key[cap];\n  \
-    \  Val* v = new Val[cap];\n    vector<bool> f(cap);\n    u32 sh = shift - 1;\n\
-    \    for (int i = 0; i < (int)flag.size(); i++) {\n      if (flag[i]) {\n    \
-    \    u32 hash = (u64(keys[i]) * r) >> sh;\n        while (f[hash]) hash = (hash\
-    \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
-    \        f[hash] = 1;\n      }\n    }\n    delete (keys);\n    delete (vals);\n\
-    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n  explicit\
-    \ HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n   \
-    \     vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
-    \ - __lg(cap)),\n        DefaultValue(Val()) {}\n\n  ~HashMap() {\n    delete\
-    \ (keys);\n    delete (vals);\n  }\n\n  Val& operator[](const Key& i) {\n    u32\
-    \ hash = (u64(i) * r) >> shift;\n    while (true) {\n      if (!flag[hash]) {\n\
-    \        if (s + s / 4 >= cap) {\n          reallocate();\n          return (*this)[i];\n\
-    \        }\n        keys[hash] = i;\n        flag[hash] = 1;\n        ++s;\n \
-    \       return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i)\
-    \ return vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n  //\
-    \ exist -> return pointer of Val\n  // not exist -> return nullptr\n  Val* find(const\
-    \ Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n\
-    \      if (!flag[hash]) return nullptr;\n      if (keys[hash] == i) return &(vals[hash]);\n\
-    \      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n  // return vector< pair<const\
-    \ Key&, val& > >\n  vector<pair<const Key&, Val&>> enumerate() const {\n    vector<pair<const\
-    \ Key&, Val&>> ret;\n    for (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i],\
-    \ vals[i]);\n    return ret;\n  }\n\n  int size() const { return s; }\n\n  //\
-    \ set default_value\n  void set_default(const Val& val) { DefaultValue = val;\
-    \ }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
-    \ */\n#line 3 \"data-structure/dynamic-binary-indexed-tree-2d.hpp\"\nusing namespace\
-    \ std;\n\n#line 3 \"data-structure/dynamic-binary-indexed-tree.hpp\"\nusing namespace\
-    \ std;\n\n#line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate\
-    \ <typename S, typename T>\nstruct DynamicFenwickTree {\n  S N;\n  HashMap<S,\
-    \ T> data;\n  explicit DynamicFenwickTree() = default;\n  explicit DynamicFenwickTree(S\
-    \ size) { N = size + 1; }\n\n  void add(S k, T x) {\n    for (++k; k < N; k +=\
-    \ k & -k) data[k] += x;\n  }\n\n  // [0, k)\n  T sum(S k) const {\n    if (k <\
-    \ 0) return 0;\n    T ret = T();\n    for (; k > 0; k -= k & -k) {\n      const\
-    \ T* p = data.find(k);\n      ret += p ? *p : T();\n    }\n    return ret;\n \
-    \ }\n\n  // [a, b)\n  T sum(S a, S b) const { return sum(b) - sum(a); }\n\n  T\
-    \ operator[](S k) { return sum(k + 1) - sum(k); }\n\n  S lower_bound(T w) {\n\
-    \    if (w <= 0) return 0;\n    S x = 0;\n    for (S k = 1 << __lg(x); k > 0;\
-    \ k >>= 1) {\n      if (x + k <= N - 1 && data[x + k] < w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n#line 6 \"data-structure/dynamic-binary-indexed-tree-2d.hpp\"\
-    \n\ntemplate <typename T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int,\
-    \ T>;\n  int N, M;\n  vector<BIT*> bit;\n  DynamicFenwickTree2D() = default;\n\
-    \  DynamicFenwickTree2D(int n, int m) : N(n + 1), M(m) {\n    for (int _ = 0;\
-    \ _ < N; ++_) bit.push_back(new BIT(M));\n  }\n  \n  void add(int i, int j, const\
-    \ T& x) {\n    for (++i; i < N; i += i & -i) (*bit[i]).add(j, x);\n  }\n\n  //\
-    \ i = [0, n), j = [0, m)\n  T sum(int n, int m) const {\n    if (n < 0 || m <\
-    \ 0) return T();\n    T ret = T();\n    for (; n; n -= n & -n) ret += (*bit[n]).sum(m);\n\
-    \    return ret;\n  }\n\n  // i = [nl, nr), j = [ml, mr)\n  T sum(int nl, int\
-    \ ml, int nr, int mr) const {\n    T ret = T();\n    while (nl != nr) {\n    \
-    \  if (nl < nr) {\n        ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr &\
-    \ -nr;\n      } else {\n        ret -= (*bit[nl]).sum(ml, mr);\n        nl -=\
-    \ nl & -nl;\n      }\n    }\n    return ret;\n  }\n};\n#line 3 \"misc/compress.hpp\"\
-    \nusing namespace std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n\
-    \  compress(const vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v)\
-    \ xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
-    \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"misc/compress.hpp\"\nusing\
+    \ namespace std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n  compress(const\
+    \ vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v) xs.push_back(x);\n\
+    \    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end()) , xs.end());\n\
+    \  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
     \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
     \ i){\n    return xs[i];\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
@@ -221,50 +161,100 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 8 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp\"\
-    \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N), Y(N), W(N),\
-    \ c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) rd(X[i], Y[i], W[i]);\n  rep(i, Q)\
-    \ {\n    rd(c[i], s[i], t[i], u[i]);\n    if (c[i]) rd(v[i]);\n  }\n\n  vi xs{-1,\
-    \ inf}, ys{-1, inf};\n  each(x, X) xs.push_back(x);\n  each(y, Y) ys.push_back(y);\n\
-    \  rep(i, Q) {\n    if (!c[i]) {\n      xs.push_back(s[i]);\n      ys.push_back(t[i]);\n\
-    \    }\n  }\n\n  auto zipx = compress<int>(xs);\n  auto zipy = compress<int>(ys);\n\
-    \n  DynamicFenwickTree2D<ll> seg(zipx.size(), zipy.size());\n  rep(i, N) seg.add(zipx.get(X[i]),\
-    \ zipy.get(Y[i]), W[i]);\n\n  rep(i, Q) {\n    if (c[i]) {\n      int nl = zipx.get(s[i]);\n\
-    \      int ml = zipy.get(t[i]);\n      int nr = zipx.get(u[i]);\n      int mr\
-    \ = zipy.get(v[i]);\n      out(seg.sum(nl, ml, nr, mr));\n    } else\n      seg.add(zipx.get(s[i]),\
-    \ zipy.get(t[i]), u[i]);\n  }\n}\n"
+    #line 3 \"data-structure-2d/segment-tree-on-range-tree.hpp\"\nusing namespace\
+    \ std;\n\n#line 3 \"segment-tree/segment-tree.hpp\"\nusing namespace std;\n\n\
+    template <typename T, typename F>\nstruct SegmentTree {\n  int size;\n  vector<T>\
+    \ seg;\n  const F f;\n  const T I;\n\n  SegmentTree(F f_, const T &I_) : size(0),\
+    \ f(f_), I(I_) {}\n\n  SegmentTree(int N, F f_, const T &I_) : f(f_), I(I_) {\
+    \ init(N); }\n\n  SegmentTree(const vector<T> &v, F f, T I) : f(f), I(I) {\n \
+    \   init(v.size());\n    for (int i = 0; i < (int)v.size(); i++) {\n      seg[i\
+    \ + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int N) {\n    size\
+    \ = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2 * size, I);\n  }\n\n\
+    \  void set(int k, T x) { seg[k + size] = x; }\n\n  void build() {\n    for (int\
+    \ k = size - 1; k > 0; k--) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n\
+    \    }\n  }\n\n  void update(int k, T x) {\n    k += size;\n    seg[k] = x;\n\
+    \    while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n\
+    \  }\n\n  void add(int k, T x) {\n    k += size;\n    seg[k] += x;\n    while\
+    \ (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\n \
+    \ // query to [a, b)\n  T query(int a, int b) {\n    T L = I, R = I;\n    for\
+    \ (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = f(L,\
+    \ seg[a++]);\n      if (b & 1) R = f(seg[--b], R);\n    }\n    return f(L, R);\n\
+    \  }\n\n  T &operator[](const int &k) { return seg[k + size]; }\n\n  template\
+    \ <typename C>\n  int find_subtree(int a, const C &check, T &M, bool type) {\n\
+    \    while (a < size) {\n      T nxt = type ? f(seg[2 * a + type], M) : f(M, seg[2\
+    \ * a + type]);\n      if (check(nxt))\n        a = 2 * a + type;\n      else\n\
+    \        M = nxt, a = 2 * a + 1 - type;\n    }\n    return a - size;\n  }\n\n\
+    \  template <typename C>\n  int find_first(int a, const C &check) {\n    T L =\
+    \ I;\n    if (a <= 0) {\n      if (check(f(L, seg[1]))) return find_subtree(1,\
+    \ check, L, false);\n      return -1;\n    }\n    int b = size;\n    for (a +=\
+    \ size, b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) {\n        T nxt\
+    \ = f(L, seg[a]);\n        if (check(nxt)) return find_subtree(a, check, L, false);\n\
+    \        L = nxt;\n        ++a;\n      }\n    }\n    return -1;\n  }\n\n  template\
+    \ <typename C>\n  int find_last(int b, const C &check) {\n    T R = I;\n    if\
+    \ (b >= size) {\n      if (check(f(seg[1], R))) return find_subtree(1, check,\
+    \ R, true);\n      return -1;\n    }\n    int a = size;\n    for (b += size; a\
+    \ < b; a >>= 1, b >>= 1) {\n      if (b & 1) {\n        T nxt = f(seg[--b], R);\n\
+    \        if (check(nxt)) return find_subtree(b, check, R, true);\n        R =\
+    \ nxt;\n      }\n    }\n    return -1;\n  }\n};\n#line 6 \"data-structure-2d/segment-tree-on-range-tree.hpp\"\
+    \n\n// S ... index_type\n// T ... value_type\n// F ... function_type\ntemplate\
+    \ <typename S, typename T, typename F>\nstruct RangeTree {\n  using Seg = SegmentTree<T,\
+    \ F>;\n  using P = pair<S, S>;\n\n  S N, M;\n  const F f;\n  T ti;\n  vector<SegmentTree<T,\
+    \ F>> seg;\n  vector<vector<S>> ys;\n  vector<P> ps;\n\n  RangeTree(const F& f_,\
+    \ const T& ti_) : f(f_), ti(ti_) {}\n\n  void add_point(S x, S y) { ps.push_back(make_pair(x,\
+    \ y)); }\n\n  void build() {\n    sort(begin(ps), end(ps));\n    ps.erase(unique(begin(ps),\
+    \ end(ps)), end(ps));\n    N = ps.size();\n    for (int i = 0; i < 2 * N; ++i)\
+    \ seg.push_back(Seg{f, ti});\n    ys.resize(2 * N);\n    for (int i = 0; i < N;\
+    \ ++i) {\n      ys[i + N].push_back(ps[i].second);\n      seg[i + N].init(1);\n\
+    \    }\n    for (int i = N - 1; i > 0; --i) {\n      ys[i].resize(ys[i << 1].size()\
+    \ + ys[(i << 1) | 1].size());\n      merge(begin(ys[(i << 1) | 0]), end(ys[(i\
+    \ << 1) | 0]),\n            begin(ys[(i << 1) | 1]), end(ys[(i << 1) | 1]), begin(ys[i]));\n\
+    \      ys[i].erase(unique(begin(ys[i]), end(ys[i])), end(ys[i]));\n      seg[i].init(ys[i].size());\n\
+    \    }\n  }\n\n  int id(S x) const {\n    return lower_bound(\n              \
+    \ begin(ps), end(ps), make_pair(x, S()),\n               [](const P& a, const\
+    \ P& b) { return a.first < b.first; }) -\n           begin(ps);\n  }\n\n  int\
+    \ id(int i, S y) const {\n    return lower_bound(begin(ys[i]), end(ys[i]), y)\
+    \ - begin(ys[i]);\n  }\n\n  void add(S x, S y, T a) {\n    int i = lower_bound(begin(ps),\
+    \ end(ps), make_pair(x, y)) - begin(ps);\n    assert(ps[i] == make_pair(x, y));\n\
+    \    for (i += N; i; i >>= 1) seg[i].add(id(i, y), a);\n  }\n\n  T sum(S xl, S\
+    \ yl, S xr, S yr) {\n    T L = ti, R = ti;\n    int a = id(xl), b = id(xr);\n\
+    \    for (a += N, b += N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = f(L,\
+    \ seg[a].query(id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = f(seg[b].query(id(b,\
+    \ yl), id(b, yr)), R);\n    }\n    return f(L, R);\n  }\n};\n#line 7 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp\"\
+    \n\nvoid solve() {\n  auto f = [](ll a, ll b) { return a + b; };\n\n  RangeTree<int,\
+    \ ll, decltype(f)> rtree(f, 0);\n\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N),\
+    \ Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) {\n    rd(X[i], Y[i],\
+    \ W[i]);\n    rtree.add_point(X[i], Y[i]);\n  }\n  rep(i, Q) {\n    rd(c[i], s[i],\
+    \ t[i], u[i]);\n    if (c[i])\n      rd(v[i]);\n    else\n      rtree.add_point(s[i],\
+    \ t[i]);\n  }\n\n  rtree.build();\n  rep(i, N) rtree.add(X[i], Y[i], W[i]);\n\
+    \  rep(i, Q) {\n    if (c[i]) {\n      out(rtree.sum(s[i], t[i], u[i], v[i]));\n\
+    \    } else\n      rtree.add(s[i], t[i], u[i]);\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
-    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/hash-map-variable-length.hpp\"\
-    \n#include \"../../data-structure/dynamic-binary-indexed-tree-2d.hpp\"\n#include\
-    \ \"../../misc/compress.hpp\"\n#include \"../../misc/fastio.hpp\"\n\nvoid solve()\
-    \ {\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q),\
-    \ u(Q), v(Q);\n  rep(i, N) rd(X[i], Y[i], W[i]);\n  rep(i, Q) {\n    rd(c[i],\
-    \ s[i], t[i], u[i]);\n    if (c[i]) rd(v[i]);\n  }\n\n  vi xs{-1, inf}, ys{-1,\
-    \ inf};\n  each(x, X) xs.push_back(x);\n  each(y, Y) ys.push_back(y);\n  rep(i,\
-    \ Q) {\n    if (!c[i]) {\n      xs.push_back(s[i]);\n      ys.push_back(t[i]);\n\
-    \    }\n  }\n\n  auto zipx = compress<int>(xs);\n  auto zipy = compress<int>(ys);\n\
-    \n  DynamicFenwickTree2D<ll> seg(zipx.size(), zipy.size());\n  rep(i, N) seg.add(zipx.get(X[i]),\
-    \ zipy.get(Y[i]), W[i]);\n\n  rep(i, Q) {\n    if (c[i]) {\n      int nl = zipx.get(s[i]);\n\
-    \      int ml = zipy.get(t[i]);\n      int nr = zipx.get(u[i]);\n      int mr\
-    \ = zipy.get(v[i]);\n      out(seg.sum(nl, ml, nr, mr));\n    } else\n      seg.add(zipx.get(s[i]),\
-    \ zipy.get(t[i]), u[i]);\n  }\n}\n"
+    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../misc/compress.hpp\"\
+    \n#include \"../../misc/fastio.hpp\"\n#include \"../../data-structure-2d/segment-tree-on-range-tree.hpp\"\
+    \n\nvoid solve() {\n  auto f = [](ll a, ll b) { return a + b; };\n\n  RangeTree<int,\
+    \ ll, decltype(f)> rtree(f, 0);\n\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N),\
+    \ Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) {\n    rd(X[i], Y[i],\
+    \ W[i]);\n    rtree.add_point(X[i], Y[i]);\n  }\n  rep(i, Q) {\n    rd(c[i], s[i],\
+    \ t[i], u[i]);\n    if (c[i])\n      rd(v[i]);\n    else\n      rtree.add_point(s[i],\
+    \ t[i]);\n  }\n\n  rtree.build();\n  rep(i, N) rtree.add(X[i], Y[i], W[i]);\n\
+    \  rep(i, Q) {\n    if (c[i]) {\n      out(rtree.sum(s[i], t[i], u[i], v[i]));\n\
+    \    } else\n      rtree.add(s[i], t[i], u[i]);\n  }\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - data-structure/hash-map-variable-length.hpp
-  - data-structure/dynamic-binary-indexed-tree-2d.hpp
-  - data-structure/dynamic-binary-indexed-tree.hpp
   - misc/compress.hpp
   - misc/fastio.hpp
+  - data-structure-2d/segment-tree-on-range-tree.hpp
+  - segment-tree/segment-tree.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 00:39:08+09:00'
+  timestamp: '2020-09-27 16:45:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
 ---

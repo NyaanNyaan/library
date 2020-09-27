@@ -5,8 +5,8 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: data-structure/2d-cumulative-sum.hpp
-    title: data-structure/2d-cumulative-sum.hpp
+    path: data-structure-2d/2d-cumulative-sum.hpp
+    title: data-structure-2d/2d-cumulative-sum.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -115,7 +115,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/2d-cumulative-sum.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure-2d/2d-cumulative-sum.hpp\"\
     \nusing namespace std;\n\n// Don't Forget to call build() !!!!!\ntemplate <class\
     \ T>\nstruct CumulativeSum2D {\n  vector<vector<T> > data;\n\n  CumulativeSum2D(int\
     \ H, int W) : data(H + 3, vector<int>(W + 3, 0)) {}\n\n  void add(int i, int j,\
@@ -133,18 +133,18 @@ data:
     \  int ans = 0;\n  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]);\
     \ }\n  out(ans);\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B\"\
-    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/2d-cumulative-sum.hpp\"\
+    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure-2d/2d-cumulative-sum.hpp\"\
     \n\nvoid solve() {\n  ini(N);\n  int L = 1000;\n  CumulativeSum2D<int> ruiseki(L,\
     \ L);\n  rep(i, N) {\n    ini(x1, y1, x2, y2);\n    ruiseki.imos(x1, y1, x2 ,\
     \ y2, 1);\n  }\n  ruiseki.build();\n  int ans = 0;\n  rep(i, L) rep(j, L) { amax(ans,\
     \ ruiseki.data[i + 1][j + 1]); }\n  out(ans);\n}"
   dependsOn:
   - competitive-template.hpp
-  - data-structure/2d-cumulative-sum.hpp
+  - data-structure-2d/2d-cumulative-sum.hpp
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
   requiredBy: []
-  timestamp: '2020-08-01 13:37:43+09:00'
+  timestamp: '2020-09-27 16:45:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp

@@ -32,21 +32,12 @@ data:
   - name: data-structure
     pages:
     - icon: ':heavy_check_mark:'
-      path: data-structure/2d-binary-indexed-tree.hpp
-      title: data-structure/2d-binary-indexed-tree.hpp
-    - icon: ':heavy_check_mark:'
-      path: data-structure/2d-cumulative-sum.hpp
-      title: data-structure/2d-cumulative-sum.hpp
-    - icon: ':heavy_check_mark:'
       path: data-structure/binary-indexed-tree.hpp
       title: data-structure/binary-indexed-tree.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure/binary-trie.hpp
       title: Binary Trie
-    - icon: ':heavy_check_mark:'
-      path: data-structure/dynamic-binary-indexed-tree-2d.hpp
-      title: data-structure/dynamic-binary-indexed-tree-2d.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: data-structure/dynamic-binary-indexed-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -100,6 +91,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/union-find.hpp
       title: data-structure/union-find.hpp
+  - name: data-structure-2d
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: data-structure-2d/2d-binary-indexed-tree.hpp
+      title: data-structure-2d/2d-binary-indexed-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure-2d/2d-cumulative-sum.hpp
+      title: data-structure-2d/2d-cumulative-sum.hpp
+    - icon: ':warning:'
+      path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
+      title: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
+    - icon: ':heavy_check_mark:'
+      path: data-structure-2d/segment-tree-on-range-tree.hpp
+      title: data-structure-2d/segment-tree-on-range-tree.hpp
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -390,6 +395,9 @@ data:
       title: prime/prime-sieve.hpp
   - name: segment-tree
     pages:
+    - icon: ':warning:'
+      path: segment-tree/abstract-range-tree.hpp
+      title: segment-tree/abstract-range-tree.hpp
     - icon: ':heavy_check_mark:'
       path: segment-tree/dynamic-li-chao-tree.hpp
       title: segment-tree/dynamic-li-chao-tree.hpp
@@ -414,9 +422,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/range-add-range-sum-lazyseg.hpp
       title: segment-tree/range-add-range-sum-lazyseg.hpp
-    - icon: ':warning:'
-      path: segment-tree/range-tree.hpp
-      title: segment-tree/range-tree.hpp
     - icon: ':heavy_check_mark:'
       path: segment-tree/range-update-range-max-lazyseg.hpp
       title: segment-tree/range-update-range-max-lazyseg.hpp
@@ -673,9 +678,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
-      title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+      path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp

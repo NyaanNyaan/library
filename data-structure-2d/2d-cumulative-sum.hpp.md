@@ -11,7 +11,7 @@ data:
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
-  bundledCode: "#line 2 \"data-structure/2d-cumulative-sum.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"data-structure-2d/2d-cumulative-sum.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n// Don't Forget to call build() !!!!!\ntemplate <class\
     \ T>\nstruct CumulativeSum2D {\n  vector<vector<T> > data;\n\n  CumulativeSum2D(int\
     \ H, int W) : data(H + 3, vector<int>(W + 3, 0)) {}\n\n  void add(int i, int j,\
@@ -38,16 +38,16 @@ data:
     \ data[i1][j2] - data[i2][j1] + data[i1][j1]);\n  }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: data-structure/2d-cumulative-sum.hpp
+  path: data-structure-2d/2d-cumulative-sum.hpp
   requiredBy: []
-  timestamp: '2020-07-28 11:29:32+09:00'
+  timestamp: '2020-09-27 16:45:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
-documentation_of: data-structure/2d-cumulative-sum.hpp
+documentation_of: data-structure-2d/2d-cumulative-sum.hpp
 layout: document
 redirect_from:
-- /library/data-structure/2d-cumulative-sum.hpp
-- /library/data-structure/2d-cumulative-sum.hpp.html
-title: data-structure/2d-cumulative-sum.hpp
+- /library/data-structure-2d/2d-cumulative-sum.hpp
+- /library/data-structure-2d/2d-cumulative-sum.hpp.html
+title: data-structure-2d/2d-cumulative-sum.hpp
 ---

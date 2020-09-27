@@ -2,12 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: data-structure/dynamic-binary-indexed-tree.hpp
-  - icon: ':heavy_check_mark:'
-    path: data-structure/dynamic-binary-indexed-tree-2d.hpp
-    title: data-structure/dynamic-binary-indexed-tree-2d.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/mod-log.hpp
     title: modulo/mod-log.hpp
@@ -21,9 +18,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
@@ -104,7 +98,6 @@ data:
   path: data-structure/hash-map-variable-length.hpp
   requiredBy:
   - data-structure/dynamic-binary-indexed-tree.hpp
-  - data-structure/dynamic-binary-indexed-tree-2d.hpp
   - modulo/mod-log.hpp
   - segment-tree/dynamic-li-chao-tree.hpp
   timestamp: '2020-09-26 23:59:24+09:00'
@@ -112,7 +105,6 @@ data:
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
 documentation_of: data-structure/hash-map-variable-length.hpp
 layout: document

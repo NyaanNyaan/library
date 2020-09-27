@@ -5,8 +5,8 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: data-structure/2d-binary-indexed-tree.hpp
-    title: data-structure/2d-binary-indexed-tree.hpp
+    path: data-structure-2d/2d-binary-indexed-tree.hpp
+    title: data-structure-2d/2d-binary-indexed-tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -115,7 +115,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/2d-binary-indexed-tree.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure-2d/2d-binary-indexed-tree.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree2D {\n\
     \  int H, W;\n  vector<vector<T>> bit;\n  BinaryIndexedTree2D(int H, int W) :\
     \ H(H + 1), W(W + 1) {\n    bit.resize(H + 3, vector<T>(W + 3, 0));\n  }\n  //\
@@ -144,18 +144,18 @@ data:
     \ ans = 0;\n  rep(i, L) rep(j, L) { amax(ans, bit.sum(i, j)); }\n  out(ans);\n\
     }\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B\"\
-    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/2d-binary-indexed-tree.hpp\"\
+    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure-2d/2d-binary-indexed-tree.hpp\"\
     \n\nvoid solve() {\n  ini(N);\n  int L = 1000;\n  BinaryIndexedTree2D<int> bit(L\
     \ + 1, L + 1);\n  rep(i, N) {\n    ini(x1, y1, x2, y2);\n    bit.imos(x1, y1,\
     \ x2 - 1, y2 - 1, 1);\n  }\n  int ans = 0;\n  rep(i, L) rep(j, L) { amax(ans,\
     \ bit.sum(i, j)); }\n  out(ans);\n}"
   dependsOn:
   - competitive-template.hpp
-  - data-structure/2d-binary-indexed-tree.hpp
+  - data-structure-2d/2d-binary-indexed-tree.hpp
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-08-01 13:37:43+09:00'
+  timestamp: '2020-09-27 16:45:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp

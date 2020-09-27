@@ -4,16 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: data-structure/dynamic-binary-indexed-tree-2d.hpp
-    title: data-structure/dynamic-binary-indexed-tree-2d.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
@@ -79,12 +73,10 @@ data:
   - data-structure/hash-map-variable-length.hpp
   isVerificationFile: false
   path: data-structure/dynamic-binary-indexed-tree.hpp
-  requiredBy:
-  - data-structure/dynamic-binary-indexed-tree-2d.hpp
+  requiredBy: []
   timestamp: '2020-09-26 23:59:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum.test-bit2d.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: data-structure/dynamic-binary-indexed-tree.hpp
 layout: document
 redirect_from:
