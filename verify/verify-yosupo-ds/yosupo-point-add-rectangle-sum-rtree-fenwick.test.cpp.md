@@ -1,104 +1,107 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data-structure-2d/fenwick-tree-on-range-tree.hpp
     title: data-structure-2d/fenwick-tree-on-range-tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n\
-    #define Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define\
-    \ pb push_back\n#define eb emplace_back\n#define fi first\n#define se second\n\
-    #define each(x, v) for (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n\
-    #define sz(v) ((int)(v).size())\n#define mem(a, val) memset(a, val, sizeof(a))\n\
-    #define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)\
-    \         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...)\
-    \      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inc(...)    \\\
-    \n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)               \
-    \            \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
-    \ t[i]);                         \\\n  }\n#define in3(s, t, u)               \
-    \         \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i],\
-    \ u[i]);                   \\\n  }\n#define in4(s, t, u, v)                  \
-    \   \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i],\
-    \ v[i]);             \\\n  }\n#define rep(i, N) for (long long i = 0; i < (long\
-    \ long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1; i >=\
-    \ 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n\
-    #define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n#define\
-    \ reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define die(...)      \\\
-    \n  do {                \\\n    out(__VA_ARGS__); \\\n    return;           \\\
-    \n  } while (0)\nusing namespace std;\nusing ll = long long;\ntemplate <class\
-    \ T>\nusing V = vector<T>;\nusing vi = vector<int>;\nusing vl = vector<long long>;\n\
-    using vvi = vector<vector<int>>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvl = vector<vector<long long>>;\nusing P = pair<long long, long long>;\n\
-    using vp = vector<P>;\nusing pii = pair<int, int>;\nusing vpi = vector<pair<int,\
-    \ int>>;\nconstexpr int inf = 1001001001;\nconstexpr long long infLL = (1LL <<\
-    \ 61) - 1;\ntemplate <typename T, typename U>\ninline bool amin(T &x, U y) {\n\
-    \  return (y < x) ? (x = y, true) : false;\n}\ntemplate <typename T, typename\
-    \ U>\ninline bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true) : false;\n\
-    }\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os, const pair<T,\
-    \ U> &p) {\n  os << p.first << \" \" << p.second;\n  return os;\n}\ntemplate <typename\
-    \ T, typename U>\nistream &operator>>(istream &is, pair<T, U> &p) {\n  is >> p.first\
-    \ >> p.second;\n  return is;\n}\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, const vector<T> &v) {\n  int s = (int)v.size();\n  for (int i = 0; i <\
-    \ s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n}\ntemplate <typename\
-    \ T>\nistream &operator>>(istream &is, vector<T> &v) {\n  for (auto &x : v) is\
-    \ >> x;\n  return is;\n}\nvoid in() {}\ntemplate <typename T, class... U>\nvoid\
-    \ in(T &t, U &... u) {\n  cin >> t;\n  in(u...);\n}\nvoid out() { cout << \"\\\
-    n\"; }\ntemplate <typename T, class... U>\nvoid out(const T &t, const U &... u)\
-    \ {\n  cout << t;\n  if (sizeof...(u)) cout << \" \";\n  out(u...);\n}\n\n#ifdef\
-    \ NyaanDebug\n#define trc(...)                   \\\n  do {                  \
-    \           \\\n    cerr << #__VA_ARGS__ << \" = \"; \\\n    dbg_out(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#define trca(v, N)       \\\n  do {            \
-    \       \\\n    cerr << #v << \" = \"; \\\n    array_out(v, N);     \\\n  } while\
-    \ (0)\n#define trcc(v)                             \\\n  do {                \
-    \                      \\\n    cerr << #v << \" = {\";                   \\\n\
-    \    each(x, v) { cerr << \" \" << x << \",\"; } \\\n    cerr << \"}\" << endl;\
-    \                    \\\n  } while (0)\ntemplate <typename T>\nvoid _cout(const\
-    \ T &c) {\n  cerr << c;\n}\nvoid _cout(const int &c) {\n  if (c == 1001001001)\n\
-    \    cerr << \"inf\";\n  else if (c == -1001001001)\n    cerr << \"-inf\";\n \
-    \ else\n    cerr << c;\n}\nvoid _cout(const unsigned int &c) {\n  if (c == 1001001001)\n\
-    \    cerr << \"inf\";\n  else\n    cerr << c;\n}\nvoid _cout(const long long &c)\
-    \ {\n  if (c == 1001001001 || c == (1LL << 61) - 1)\n    cerr << \"inf\";\n  else\
-    \ if (c == -1001001001 || c == -((1LL << 61) - 1))\n    cerr << \"-inf\";\n  else\n\
-    \    cerr << c;\n}\nvoid _cout(const unsigned long long &c) {\n  if (c == 1001001001\
-    \ || c == (1LL << 61) - 1)\n    cerr << \"inf\";\n  else\n    cerr << c;\n}\n\
-    template <typename T, typename U>\nvoid _cout(const pair<T, U> &p) {\n  cerr <<\
-    \ \"{ \";\n  _cout(p.fi);\n  cerr << \", \";\n  _cout(p.se);\n  cerr << \" } \"\
-    ;\n}\ntemplate <typename T>\nvoid _cout(const vector<T> &v) {\n  int s = v.size();\n\
-    \  cerr << \"{ \";\n  for (int i = 0; i < s; i++) {\n    cerr << (i ? \", \" :\
-    \ \"\");\n    _cout(v[i]);\n  }\n  cerr << \" } \";\n}\ntemplate <typename T>\n\
-    void _cout(const vector<vector<T>> &v) {\n  cerr << \"[ \";\n  for (const auto\
-    \ &x : v) {\n    cerr << endl;\n    _cout(x);\n    cerr << \", \";\n  }\n  cerr\
-    \ << endl << \" ] \";\n}\nvoid dbg_out() { cerr << endl; }\ntemplate <typename\
-    \ T, class... U>\nvoid dbg_out(const T &t, const U &... u) {\n  _cout(t);\n  if\
-    \ (sizeof...(u)) cerr << \", \";\n  dbg_out(u...);\n}\ntemplate <typename T>\n\
-    void array_out(const T &v, int s) {\n  cerr << \"{ \";\n  for (int i = 0; i <\
-    \ s; i++) {\n    cerr << (i ? \", \" : \"\");\n    _cout(v[i]);\n  }\n  cerr <<\
-    \ \" } \" << endl;\n}\ntemplate <typename T>\nvoid array_out(const T &v, int H,\
-    \ int W) {\n  cerr << \"[ \";\n  for (int i = 0; i < H; i++) {\n    cerr << (i\
-    \ ? \", \" : \"\");\n    array_out(v[i], W);\n  }\n  cerr << \" ] \" << endl;\n\
-    }\n#else\n#define trc(...)\n#define trca(...)\n#define trcc(...)\n#endif\n\ninline\
-    \ int popcnt(unsigned long long a) { return __builtin_popcountll(a); }\ninline\
-    \ int lsb(unsigned long long a) { return __builtin_ctzll(a); }\ninline int msb(unsigned\
-    \ long long a) { return 63 - __builtin_clzll(a); }\ntemplate <typename T>\ninline\
-    \ int getbit(T a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename T>\n\
-    inline void setbit(T &a, int i) {\n  a |= (1LL << i);\n}\ntemplate <typename T>\n\
-    inline void delbit(T &a, int i) {\n  a &= ~(1LL << i);\n}\ntemplate <typename\
-    \ T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
+    PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
+    links:
+    - https://judge.yosupo.jp/problem/point_add_rectangle_sum
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n\
+    \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
+    \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
+    \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
+    \ each(x, v) for (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define\
+    \ sz(v) ((int)(v).size())\n#define mem(a, val) memset(a, val, sizeof(a))\n#define\
+    \ ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)  \
+    \       \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...) \
+    \     \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inc(...)    \\\n\
+    \  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)                \
+    \           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i]);\
+    \                         \\\n  }\n#define in3(s, t, u)                      \
+    \  \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i]);\
+    \                   \\\n  }\n#define in4(s, t, u, v)                     \\\n\
+    \  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i], v[i]);\
+    \             \\\n  }\n#define rep(i, N) for (long long i = 0; i < (long long)(N);\
+    \ i++)\n#define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)\n\
+    #define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n#define repr1(i,\
+    \ N) for (long long i = (N); (long long)(i) > 0; i--)\n#define reg(i, a, b) for\
+    \ (long long i = (a); i < (b); i++)\n#define die(...)      \\\n  do {        \
+    \        \\\n    out(__VA_ARGS__); \\\n    return;           \\\n  } while (0)\n\
+    using namespace std;\nusing ll = long long;\ntemplate <class T>\nusing V = vector<T>;\n\
+    using vi = vector<int>;\nusing vl = vector<long long>;\nusing vvi = vector<vector<int>>;\n\
+    using vd = V<double>;\nusing vs = V<string>;\nusing vvl = vector<vector<long long>>;\n\
+    using P = pair<long long, long long>;\nusing vp = vector<P>;\nusing pii = pair<int,\
+    \ int>;\nusing vpi = vector<pair<int, int>>;\nconstexpr int inf = 1001001001;\n\
+    constexpr long long infLL = (1LL << 61) - 1;\ntemplate <typename T, typename U>\n\
+    inline bool amin(T &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\n\
+    template <typename T, typename U>\ninline bool amax(T &x, U y) {\n  return (x\
+    \ < y) ? (x = y, true) : false;\n}\ntemplate <typename T, typename U>\nostream\
+    \ &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first << \" \" <<\
+    \ p.second;\n  return os;\n}\ntemplate <typename T, typename U>\nistream &operator>>(istream\
+    \ &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int\
+    \ s = (int)v.size();\n  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") <<\
+    \ v[i];\n  return os;\n}\ntemplate <typename T>\nistream &operator>>(istream &is,\
+    \ vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return is;\n}\nvoid in() {}\n\
+    template <typename T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n  in(u...);\n\
+    }\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class... U>\nvoid out(const\
+    \ T &t, const U &... u) {\n  cout << t;\n  if (sizeof...(u)) cout << \" \";\n\
+    \  out(u...);\n}\n\n#ifdef NyaanDebug\n#define trc(...)                   \\\n\
+    \  do {                             \\\n    cerr << #__VA_ARGS__ << \" = \"; \\\
+    \n    dbg_out(__VA_ARGS__);          \\\n  } while (0)\n#define trca(v, N)   \
+    \    \\\n  do {                   \\\n    cerr << #v << \" = \"; \\\n    array_out(v,\
+    \ N);     \\\n  } while (0)\n#define trcc(v)                             \\\n\
+    \  do {                                      \\\n    cerr << #v << \" = {\"; \
+    \                  \\\n    each(x, v) { cerr << \" \" << x << \",\"; } \\\n  \
+    \  cerr << \"}\" << endl;                    \\\n  } while (0)\ntemplate <typename\
+    \ T>\nvoid _cout(const T &c) {\n  cerr << c;\n}\nvoid _cout(const int &c) {\n\
+    \  if (c == 1001001001)\n    cerr << \"inf\";\n  else if (c == -1001001001)\n\
+    \    cerr << \"-inf\";\n  else\n    cerr << c;\n}\nvoid _cout(const unsigned int\
+    \ &c) {\n  if (c == 1001001001)\n    cerr << \"inf\";\n  else\n    cerr << c;\n\
+    }\nvoid _cout(const long long &c) {\n  if (c == 1001001001 || c == (1LL << 61)\
+    \ - 1)\n    cerr << \"inf\";\n  else if (c == -1001001001 || c == -((1LL << 61)\
+    \ - 1))\n    cerr << \"-inf\";\n  else\n    cerr << c;\n}\nvoid _cout(const unsigned\
+    \ long long &c) {\n  if (c == 1001001001 || c == (1LL << 61) - 1)\n    cerr <<\
+    \ \"inf\";\n  else\n    cerr << c;\n}\ntemplate <typename T, typename U>\nvoid\
+    \ _cout(const pair<T, U> &p) {\n  cerr << \"{ \";\n  _cout(p.fi);\n  cerr << \"\
+    , \";\n  _cout(p.se);\n  cerr << \" } \";\n}\ntemplate <typename T>\nvoid _cout(const\
+    \ vector<T> &v) {\n  int s = v.size();\n  cerr << \"{ \";\n  for (int i = 0; i\
+    \ < s; i++) {\n    cerr << (i ? \", \" : \"\");\n    _cout(v[i]);\n  }\n  cerr\
+    \ << \" } \";\n}\ntemplate <typename T>\nvoid _cout(const vector<vector<T>> &v)\
+    \ {\n  cerr << \"[ \";\n  for (const auto &x : v) {\n    cerr << endl;\n    _cout(x);\n\
+    \    cerr << \", \";\n  }\n  cerr << endl << \" ] \";\n}\nvoid dbg_out() { cerr\
+    \ << endl; }\ntemplate <typename T, class... U>\nvoid dbg_out(const T &t, const\
+    \ U &... u) {\n  _cout(t);\n  if (sizeof...(u)) cerr << \", \";\n  dbg_out(u...);\n\
+    }\ntemplate <typename T>\nvoid array_out(const T &v, int s) {\n  cerr << \"{ \"\
+    ;\n  for (int i = 0; i < s; i++) {\n    cerr << (i ? \", \" : \"\");\n    _cout(v[i]);\n\
+    \  }\n  cerr << \" } \" << endl;\n}\ntemplate <typename T>\nvoid array_out(const\
+    \ T &v, int H, int W) {\n  cerr << \"[ \";\n  for (int i = 0; i < H; i++) {\n\
+    \    cerr << (i ? \", \" : \"\");\n    array_out(v[i], W);\n  }\n  cerr << \"\
+    \ ] \" << endl;\n}\n#else\n#define trc(...)\n#define trca(...)\n#define trcc(...)\n\
+    #endif\n\ninline int popcnt(unsigned long long a) { return __builtin_popcountll(a);\
+    \ }\ninline int lsb(unsigned long long a) { return __builtin_ctzll(a); }\ninline\
+    \ int msb(unsigned long long a) { return 63 - __builtin_clzll(a); }\ntemplate\
+    \ <typename T>\ninline int getbit(T a, int i) {\n  return (a >> i) & 1;\n}\ntemplate\
+    \ <typename T>\ninline void setbit(T &a, int i) {\n  a |= (1LL << i);\n}\ntemplate\
+    \ <typename T>\ninline void delbit(T &a, int i) {\n  a &= ~(1LL << i);\n}\ntemplate\
+    \ <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
     \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
     \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
     \ <typename T>\nint btw(T a, T x, T b) {\n  return a <= x && x < b;\n}\ntemplate\
@@ -187,7 +190,7 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 5 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp\"\
+    #line 7 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp\"\
     \nvoid solve() {\n  FenwickRangeTree<int, ll> bit;\n\n  int N, Q;\n  rd(N, Q);\n\
     \  vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) {\n\
     \    rd(X[i], Y[i], W[i]);\n    bit.add_point(X[i], Y[i]);\n  }\n  rep(i, Q) {\n\
@@ -195,7 +198,8 @@ data:
     \     bit.add_point(s[i], t[i]);\n  }\n\n  bit.build();\n  rep(i, N) { bit.add(X[i],\
     \ Y[i], W[i]); }\n  rep(i, Q) {\n    if (c[i]) {\n      out(bit.sum(s[i], t[i],\
     \ u[i], v[i]));\n    } else\n      bit.add(s[i], t[i], u[i]);\n  }\n}\n"
-  code: "#include \"../../competitive-template.hpp\"\n#include \"../../data-structure-2d/fenwick-tree-on-range-tree.hpp\"\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
+    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure-2d/fenwick-tree-on-range-tree.hpp\"\
     \n#include \"../../misc/compress.hpp\"\n#include \"../../misc/fastio.hpp\"\nvoid\
     \ solve() {\n  FenwickRangeTree<int, ll> bit;\n\n  int N, Q;\n  rd(N, Q);\n  vector<int>\
     \ X(N), Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) {\n    rd(X[i],\
@@ -212,8 +216,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 20:14:15+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-09-27 20:38:35+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
 layout: document

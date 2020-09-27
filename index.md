@@ -26,7 +26,7 @@ data:
     - icon: ':warning:'
       path: bundle.py
       title: bundle.py
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -102,7 +102,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
       title: "\u52D5\u7684Binary Indexed Tree"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
       title: data-structure-2d/fenwick-tree-on-range-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -298,13 +298,13 @@ data:
       title: math/zeta-mobius-transform.hpp
   - name: misc
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -690,7 +690,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
     - icon: ':heavy_check_mark:'

@@ -48,7 +48,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
     title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
   - icon: ':heavy_check_mark:'
@@ -406,7 +406,7 @@ data:
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
@@ -612,7 +612,7 @@ data:
   path: competitive-template.hpp
   requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
