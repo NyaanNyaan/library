@@ -39,8 +39,8 @@ struct HashMap {
         f[hash] = 1;
       }
     }
-    delete (keys);
-    delete (vals);
+    delete[] (keys);
+    delete[] (vals);
     keys = k;
     vals = v;
     flag.swap(f);
@@ -58,8 +58,8 @@ struct HashMap {
         DefaultValue(Val()) {}
 
   ~HashMap() {
-    delete (keys);
-    delete (vals);
+    delete[] (keys);
+    delete[] (vals);
   }
 
   Val& operator[](const Key& i) {
