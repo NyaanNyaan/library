@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
     title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segment-tree/li-chao-tree.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T, T INF>\nstruct LiChaoTree {\n  struct\

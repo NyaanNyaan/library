@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: modulo/mod-log.hpp
-    title: modulo/mod-log.hpp
-  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
+  - icon: ':heavy_check_mark:'
+    path: modulo/mod-log.hpp
+    title: modulo/mod-log.hpp
   - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
@@ -16,18 +16,17 @@ data:
     path: verify/verify-unary-test/osak.test.cpp
     title: verify/verify-unary-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"inner/inner_math.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nnamespace inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\n\

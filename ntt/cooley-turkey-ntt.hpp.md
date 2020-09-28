@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"ntt/cooley-turkey-ntt.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nnamespace FastFourierTransform {\nusing real = double;\n\

@@ -5,11 +5,11 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: modulo/tetration.hpp
-    title: tetration
-  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/tetration.hpp
+    title: tetration
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

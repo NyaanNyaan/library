@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"string/subsequence-dp.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nvector<vector<int>> CalcNext(const string &S, char offset\

@@ -2,17 +2,16 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/topological-sort.hpp
-    title: graph/topological-sort.hpp
-  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/topological-sort.hpp
+    title: graph/topological-sort.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/grundy-number.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n#line 3 \"graph/topological-sort.hpp\"\nusing namespace std;\n\

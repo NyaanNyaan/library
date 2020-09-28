@@ -5,40 +5,25 @@ data:
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
-    path: ntt/ntt-avx2.hpp
-    title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: tree/frequency-table-of-tree-distance.hpp
-    title: tree/frequency-table-of-tree-distance.hpp
+    path: ntt/ntt-avx2.hpp
+    title: ntt/ntt-avx2.hpp
+  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/frequency-table-of-tree-distance.hpp
+    title: tree/frequency-table-of-tree-distance.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-    title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0215.test.cpp
-    title: verify/verify-yuki/yuki-0215.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-1080.test.cpp
-    title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0214.test.cpp
-    title: verify/verify-yuki/yuki-0214.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
@@ -46,15 +31,29 @@ data:
     path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+    path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0214.test.cpp
+    title: verify/verify-yuki/yuki-0214.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0215.test.cpp
+    title: verify/verify-yuki/yuki-0215.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1080.test.cpp
+    title: verify/verify-yuki/yuki-1080.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"ntt/arbitrary-ntt.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n#line 3 \"modint/montgomery-modint.hpp\"\nusing namespace\

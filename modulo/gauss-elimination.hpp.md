@@ -10,15 +10,14 @@ data:
     path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
-    title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
+    title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"modulo/gauss-elimination.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"modint/simd-montgomery.hpp\"\nusing namespace\

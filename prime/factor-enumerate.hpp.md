@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"prime/factor-enumerate.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nvector<int> factor_enumerate(int N) {\n  vector<int> lp(N\

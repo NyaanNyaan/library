@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"shortest-path/dijkstra.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\

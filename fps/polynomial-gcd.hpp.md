@@ -13,7 +13,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/fps/polynomial-gcd.md
     document_title: "\u591A\u9805\u5F0FGCD"
     links: []

@@ -5,14 +5,14 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/kruskal.hpp
-    title: graph/kruskal.hpp
+    path: data-structure/union-find.hpp
+    title: data-structure/union-find.hpp
   - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   - icon: ':heavy_check_mark:'
-    path: data-structure/union-find.hpp
-    title: data-structure/union-find.hpp
+    path: graph/kruskal.hpp
+    title: graph/kruskal.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

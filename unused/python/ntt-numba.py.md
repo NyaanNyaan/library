@@ -8,9 +8,9 @@ data:
   attributes:
     links: []
   bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/documentation/build.py\"\
-    , line 70, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
+    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
     \ basedir=basedir).decode()\n  File \"/opt/hostedtoolcache/Python/3.8.5/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/python.py\"\
-    , line 84, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
+    , line 85, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "from numba import jit, njit, i8\nimport numpy as np\n\n\n@njit(i8(i8, i8,\
     \ i8), cache=True)\ndef modpow(a, p, m):\n  r = 1\n  while p:\n    if p & 1: r\
     \ = r * a % m\n    a = a * a % m\n    p >>= 1\n  return r\n\n\n@njit(i8[:](i8[:],\

@@ -7,15 +7,6 @@ data:
     title: data-structure/range-sum-range-add-bit.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,10 +15,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"data-structure/binary-indexed-tree.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree {\n  int\

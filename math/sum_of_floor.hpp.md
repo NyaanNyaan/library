@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/sum_of_floor.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n// sum_{0 <= i < N} (ai + b) // m\ntemplate <typename T>\n\

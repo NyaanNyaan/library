@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"misc/fixpoint.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\ntemplate< typename F >\nstruct FixPoint : F {\n  FixPoint(F &&f) : F(forward<\

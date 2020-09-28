@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/matrix-fast.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\ntemplate <class T, int H, int W>\nstruct Matrix {\n  using\

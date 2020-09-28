@@ -4,18 +4,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+    path: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
-    title: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segment-tree/range-add-range-sum-lazyseg.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename E>\nstruct AddSum_LazySegmentTree\

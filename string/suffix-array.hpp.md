@@ -7,18 +7,17 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-    title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
     title: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
     title: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+    title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://atcoder.jp/contests/abc135/submissions/7574225
     - https://atcoder.jp/contests/abc141/submissions/7577295

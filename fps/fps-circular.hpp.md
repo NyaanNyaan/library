@@ -19,7 +19,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/fps/fps-circular.md
     document_title: "\u4E09\u89D2\u95A2\u6570"
     links: []

@@ -5,11 +5,11 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/strongly-connected-components.hpp
-    title: graph/strongly-connected-components.hpp
-  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/strongly-connected-components.hpp
+    title: graph/strongly-connected-components.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

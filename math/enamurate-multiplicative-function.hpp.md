@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/enamurate-multiplicative-function.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n// f(n, p, c) : n = pow(p, c), f is multiplicative function\n\

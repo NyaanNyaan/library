@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/graph-utility.hpp
-    title: graph/graph-utility.hpp
-  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/graph-utility.hpp
+    title: graph/graph-utility.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"shortest-path/restore-shortest-path.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-utility.hpp\"\nusing namespace std;\n\

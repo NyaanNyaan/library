@@ -2,47 +2,32 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: ntt/ntt-avx2.hpp
-    title: ntt/ntt-avx2.hpp
+    path: fps/formal-power-series.hpp
+    title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
+      \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
-    path: fps/formal-power-series.hpp
-    title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
-      \u30E9\u30EA"
+    path: ntt/ntt-avx2.hpp
+    title: ntt/ntt-avx2.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: fps/fast-multieval.hpp
     title: fps/fast-multieval.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0963.test.cpp
-    title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-1145.test.cpp
-    title: verify/verify-yuki/yuki-1145.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0963-circular.test.cpp
-    title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-log.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-log.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
@@ -50,18 +35,32 @@ data:
     path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-log.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-log.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0963-circular.test.cpp
+    title: verify/verify-yuki/yuki-0963-circular.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0963.test.cpp
+    title: verify/verify-yuki/yuki-0963.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1145.test.cpp
+    title: verify/verify-yuki/yuki-1145.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/fps/ntt-friendly-fps.md
     document_title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
     links: []

@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"tree/convert-rooted-tree.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename G>\nG convert_rooted_tree(const G&\

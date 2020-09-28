@@ -13,7 +13,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/fps/differential-equation.md
     document_title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
     links: []

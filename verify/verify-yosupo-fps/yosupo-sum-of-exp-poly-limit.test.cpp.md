@@ -5,6 +5,12 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
+    path: fps/lagrange-interpolation-point.hpp
+    title: fps/lagrange-interpolation-point.hpp
+  - icon: ':heavy_check_mark:'
+    path: fps/sum-of-exponential-times-poly.hpp
+    title: $\sum_{i}a^i f(i)$
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
@@ -13,12 +19,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':heavy_check_mark:'
-    path: fps/lagrange-interpolation-point.hpp
-    title: fps/lagrange-interpolation-point.hpp
-  - icon: ':heavy_check_mark:'
-    path: fps/sum-of-exponential-times-poly.hpp
-    title: $\sum_{i}a^i f(i)$
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

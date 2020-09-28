@@ -5,11 +5,11 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: data-structure/persistent-union-find.hpp
-    title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
-  - icon: ':heavy_check_mark:'
     path: data-structure/persistent-array.hpp
     title: "\u6C38\u7D9A\u914D\u5217"
+  - icon: ':heavy_check_mark:'
+    path: data-structure/persistent-union-find.hpp
+    title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

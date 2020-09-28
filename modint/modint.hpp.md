@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"modint/modint.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\ntemplate <int mod>\nstruct ModInt {\n  int x;\n\n  ModInt() : x(0) {}\n\

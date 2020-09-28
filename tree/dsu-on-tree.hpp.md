@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"tree/dsu-on-tree.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"data-structure/union-find-with-potential.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\n// Potential\u3064\u304DUnion-Find\n\

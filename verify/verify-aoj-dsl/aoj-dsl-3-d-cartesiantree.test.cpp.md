@@ -5,11 +5,11 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: tree/cartesian-tree.hpp
-    title: tree/cartesian-tree.hpp
-  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/cartesian-tree.hpp
+    title: tree/cartesian-tree.hpp
   - icon: ':heavy_check_mark:'
     path: tree/heavy-light-decomposition.hpp
     title: tree/heavy-light-decomposition.hpp

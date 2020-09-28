@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     document_title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
     links: []
   bundledCode: "#line 2 \"data-structure/persistent-union-find.hpp\"\n#include <bits/stdc++.h>\n\

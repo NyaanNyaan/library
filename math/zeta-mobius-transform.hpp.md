@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/zeta-mobius-transform.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T>\nvoid superset_zeta_transform(vector<T>&\

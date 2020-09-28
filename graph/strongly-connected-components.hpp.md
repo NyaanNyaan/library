@@ -10,18 +10,17 @@ data:
     title: 2-SAT
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
-    title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+    title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/strongly-connected-components.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\

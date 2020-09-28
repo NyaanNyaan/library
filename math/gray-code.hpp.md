@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/gray-code.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\nvector<int> gray_code(int n) {\n  vector<int> ret(1 << n);\n  for (int\

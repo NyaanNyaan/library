@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"string/rolling-hash.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n// \u4F7F\u3044\u65B9\n// \u6587\u5B57\u5217\u306E\u30CF\u30C3\

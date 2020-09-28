@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"atcoder/mincostflow.hpp\"\n#include <algorithm>\n#include\
     \ <cassert>\n#include <limits>\n#include <queue>\n#include <vector>\n\nnamespace\

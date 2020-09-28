@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"data-structure/dynamic-union-find.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nstruct DynamicUnionFind {\n  unordered_map<int, int> m;\n\

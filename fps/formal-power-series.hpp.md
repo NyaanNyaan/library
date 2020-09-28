@@ -3,35 +3,20 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: modulo/strassen.hpp
-    title: modulo/strassen.hpp
-  - icon: ':heavy_check_mark:'
-    path: fps/kitamasa.hpp
-    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-  - icon: ':heavy_check_mark:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
+  - icon: ':heavy_check_mark:'
+    path: fps/differential-equation.hpp
+    title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
+  - icon: ':warning:'
+    path: fps/famous-series.hpp
+    title: fps/famous-series.hpp
   - icon: ':warning:'
     path: fps/fast-multieval.hpp
     title: fps/fast-multieval.hpp
   - icon: ':heavy_check_mark:'
-    path: fps/multipoint-evaluation.hpp
-    title: fps/multipoint-evaluation.hpp
-  - icon: ':heavy_check_mark:'
-    path: fps/ntt-friendly-fps.hpp
-    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':warning:'
-    path: fps/famous-series.hpp
-    title: fps/famous-series.hpp
-  - icon: ':heavy_check_mark:'
-    path: fps/utility.hpp
-    title: fps/utility.hpp
-  - icon: ':heavy_check_mark:'
     path: fps/fps-circular.hpp
     title: "\u4E09\u89D2\u95A2\u6570"
-  - icon: ':heavy_check_mark:'
-    path: fps/taylor-shift.hpp
-    title: "\u5E73\u884C\u79FB\u52D5"
   - icon: ':heavy_check_mark:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
@@ -40,69 +25,39 @@ data:
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
   - icon: ':heavy_check_mark:'
-    path: fps/differential-equation.hpp
-    title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':heavy_check_mark:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
+  - icon: ':heavy_check_mark:'
+    path: fps/kitamasa.hpp
+    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
+  - icon: ':heavy_check_mark:'
+    path: fps/multipoint-evaluation.hpp
+    title: fps/multipoint-evaluation.hpp
+  - icon: ':heavy_check_mark:'
+    path: fps/ntt-friendly-fps.hpp
+    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: fps/polynomial-gcd.hpp
     title: "\u591A\u9805\u5F0FGCD"
   - icon: ':heavy_check_mark:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
+  - icon: ':heavy_check_mark:'
+    path: fps/taylor-shift.hpp
+    title: "\u5E73\u884C\u79FB\u52D5"
+  - icon: ':heavy_check_mark:'
+    path: fps/utility.hpp
+    title: fps/utility.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/strassen.hpp
+    title: modulo/strassen.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0963.test.cpp
-    title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0215.test.cpp
-    title: verify/verify-yuki/yuki-0215.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-1145.test.cpp
-    title: verify/verify-yuki/yuki-1145.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0963-circular.test.cpp
-    title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-1080.test.cpp
-    title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0214.test.cpp
-    title: verify/verify-yuki/yuki-0214.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-log.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-log.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
@@ -110,15 +65,59 @@ data:
     path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-log.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-log.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0214.test.cpp
+    title: verify/verify-yuki/yuki-0214.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0215.test.cpp
+    title: verify/verify-yuki/yuki-0215.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0963-circular.test.cpp
+    title: verify/verify-yuki/yuki-0963-circular.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0963.test.cpp
+    title: verify/verify-yuki/yuki-0963.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1080.test.cpp
+    title: verify/verify-yuki/yuki-1080.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1145.test.cpp
+    title: verify/verify-yuki/yuki-1145.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/fps/formal-power-series.md
     document_title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
       \u30A4\u30D6\u30E9\u30EA"

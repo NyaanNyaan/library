@@ -12,26 +12,26 @@ data:
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   - icon: ':heavy_check_mark:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
+    path: fps/ntt-friendly-fps.hpp
+    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: modulo/strassen.hpp
-    title: modulo/strassen.hpp
-  - icon: ':heavy_check_mark:'
-    path: modint/simd-montgomery.hpp
-    title: modint/simd-montgomery.hpp
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   - icon: ':heavy_check_mark:'
-    path: fps/ntt-friendly-fps.hpp
-    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
+    path: modint/montgomery-modint.hpp
+    title: modint/montgomery-modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: modint/simd-montgomery.hpp
+    title: modint/simd-montgomery.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/strassen.hpp
+    title: modulo/strassen.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

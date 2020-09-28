@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"geometry/geometry.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nusing Real = long double;\nusing Point = complex<Real>;\n\

@@ -4,24 +4,23 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+    path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/elementary-function.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nlong long my_gcd(long long x, long long y) {\n  long long\

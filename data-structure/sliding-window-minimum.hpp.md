@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"data-structure/sliding-window-minimum.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n// return dat | dat[i] := ( answer of range [i - K, i)\

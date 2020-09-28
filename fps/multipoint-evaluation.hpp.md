@@ -19,7 +19,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"fps/multipoint-evaluation.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace\

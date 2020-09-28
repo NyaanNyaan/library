@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/float-binomial.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nstruct FloatBinomial {\n  vector<long double> fac_;\n  static\

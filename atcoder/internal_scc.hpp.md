@@ -3,22 +3,21 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: atcoder/two-sat.hpp
-    title: atcoder/two-sat.hpp
-  - icon: ':heavy_check_mark:'
     path: atcoder/scc.hpp
     title: atcoder/scc.hpp
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
-    title: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
+    path: atcoder/two-sat.hpp
+    title: atcoder/two-sat.hpp
+  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
     title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
+    title: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"atcoder/internal_scc.hpp\"\n#include <algorithm>\n#include\
     \ <utility>\n#include <vector>\n\nnamespace atcoder {\nnamespace internal {\n\n\

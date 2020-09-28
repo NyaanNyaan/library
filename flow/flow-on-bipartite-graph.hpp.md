@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: atcoder/maxflow.hpp
-    title: atcoder/maxflow.hpp
-  - icon: ':heavy_check_mark:'
     path: atcoder/internal_queue.hpp
     title: atcoder/internal_queue.hpp
+  - icon: ':heavy_check_mark:'
+    path: atcoder/maxflow.hpp
+    title: atcoder/maxflow.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"flow/flow-on-bipartite-graph.hpp\"\n#include <bits/stdc++.h>\n\
     #line 7 \"atcoder/maxflow.hpp\"\n\n#line 3 \"atcoder/internal_queue.hpp\"\n\n\

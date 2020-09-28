@@ -5,11 +5,11 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/graph-utility.hpp
-    title: graph/graph-utility.hpp
-  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/graph-utility.hpp
+    title: graph/graph-utility.hpp
   - icon: ':heavy_check_mark:'
     path: tree/heavy-light-decomposition.hpp
     title: tree/heavy-light-decomposition.hpp

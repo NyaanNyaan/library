@@ -7,17 +7,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+    path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
@@ -25,15 +16,23 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-    title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"tree/heavy-light-decomposition.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\

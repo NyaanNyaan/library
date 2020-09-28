@@ -5,6 +5,9 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/graph-template.hpp
+    title: graph/graph-template.hpp
+  - icon: ':heavy_check_mark:'
     path: segment-tree/range-add-range-sum-lazyseg.hpp
     title: segment-tree/range-add-range-sum-lazyseg.hpp
   - icon: ':heavy_check_mark:'
@@ -13,9 +16,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/heavy-light-decomposition.hpp
     title: tree/heavy-light-decomposition.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

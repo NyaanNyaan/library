@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
-    title: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segment-tree/range-update-range-sum-lazyseg.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename E, E UNUSED_VALUE>\n\

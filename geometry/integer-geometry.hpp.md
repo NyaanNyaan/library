@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"geometry/integer-geometry.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nstruct Point {\n  using T = long long;\n  T x, y;\n  Point()\

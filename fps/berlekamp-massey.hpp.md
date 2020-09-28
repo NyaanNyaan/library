@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"fps/berlekamp-massey.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\ntemplate <typename mint>\nvector<mint> BerlekampMassey(const\

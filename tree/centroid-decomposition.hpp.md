@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"tree/centroid-decomposition.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename G>\nstruct CentroidDecomposition {\n\

@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"atcoder/two-sat.hpp\"\n\n#include <cassert>\n#include <vector>\n\
     \n#line 2 \"atcoder/internal_scc.hpp\"\n#include <algorithm>\n#include <utility>\n\

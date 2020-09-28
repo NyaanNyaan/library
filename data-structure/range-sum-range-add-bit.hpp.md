@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"data-structure/range-sum-range-add-bit.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"data-structure/binary-indexed-tree.hpp\"\nusing\

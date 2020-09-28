@@ -3,53 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: tree/dsu-on-tree.hpp
-    title: tree/dsu-on-tree.hpp
-  - icon: ':heavy_check_mark:'
-    path: tree/rerooting.hpp
-    title: tree/rerooting.hpp
-  - icon: ':heavy_check_mark:'
-    path: tree/cartesian-tree.hpp
-    title: tree/cartesian-tree.hpp
-  - icon: ':warning:'
-    path: tree/euler-tour.hpp
-    title: tree/euler-tour.hpp
-  - icon: ':heavy_check_mark:'
-    path: tree/heavy-light-decomposition.hpp
-    title: tree/heavy-light-decomposition.hpp
-  - icon: ':heavy_check_mark:'
-    path: shortest-path/bellman-ford.hpp
-    title: shortest-path/bellman-ford.hpp
-  - icon: ':heavy_check_mark:'
-    path: shortest-path/warshall-floyd.hpp
-    title: shortest-path/warshall-floyd.hpp
-  - icon: ':heavy_check_mark:'
-    path: shortest-path/restore-shortest-path.hpp
-    title: shortest-path/restore-shortest-path.hpp
-  - icon: ':heavy_check_mark:'
-    path: shortest-path/dijkstra.hpp
-    title: shortest-path/dijkstra.hpp
-  - icon: ':warning:'
-    path: math/grundy-number.hpp
-    title: math/grundy-number.hpp
-  - icon: ':heavy_check_mark:'
-    path: math/two-sat.hpp
-    title: 2-SAT
-  - icon: ':heavy_check_mark:'
-    path: graph/graph-utility.hpp
-    title: graph/graph-utility.hpp
-  - icon: ':warning:'
     path: graph/cycle-detection.hpp
     title: graph/cycle-detection.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/strongly-connected-components.hpp
-    title: graph/strongly-connected-components.hpp
   - icon: ':warning:'
     path: graph/dimension-expanded-graph.hpp
     title: graph/dimension-expanded-graph.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/two-edge-connected-components.hpp
-    title: graph/two-edge-connected-components.hpp
+    path: graph/graph-utility.hpp
+    title: graph/graph-utility.hpp
   - icon: ':heavy_check_mark:'
     path: graph/kruskal.hpp
     title: graph/kruskal.hpp
@@ -57,27 +18,63 @@ data:
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/strongly-connected-components.hpp
+    title: graph/strongly-connected-components.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/topological-sort.hpp
     title: graph/topological-sort.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/two-edge-connected-components.hpp
+    title: graph/two-edge-connected-components.hpp
+  - icon: ':warning:'
+    path: math/grundy-number.hpp
+    title: math/grundy-number.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/two-sat.hpp
+    title: 2-SAT
+  - icon: ':heavy_check_mark:'
+    path: shortest-path/bellman-ford.hpp
+    title: shortest-path/bellman-ford.hpp
+  - icon: ':heavy_check_mark:'
+    path: shortest-path/dijkstra.hpp
+    title: shortest-path/dijkstra.hpp
+  - icon: ':heavy_check_mark:'
+    path: shortest-path/restore-shortest-path.hpp
+    title: shortest-path/restore-shortest-path.hpp
+  - icon: ':heavy_check_mark:'
+    path: shortest-path/warshall-floyd.hpp
+    title: shortest-path/warshall-floyd.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/cartesian-tree.hpp
+    title: tree/cartesian-tree.hpp
+  - icon: ':warning:'
+    path: tree/dsu-on-tree.hpp
+    title: tree/dsu-on-tree.hpp
+  - icon: ':warning:'
+    path: tree/euler-tour.hpp
+    title: tree/euler-tour.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/heavy-light-decomposition.hpp
+    title: tree/heavy-light-decomposition.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/rerooting.hpp
+    title: tree/rerooting.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+    path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
-    title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
@@ -85,66 +82,68 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-    title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-    title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-    title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-    title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-    title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-    title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+    title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/graph-template.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T\

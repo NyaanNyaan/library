@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"data-structure/persistent-queue.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T>\nstruct PersistentQueue {\n  struct\

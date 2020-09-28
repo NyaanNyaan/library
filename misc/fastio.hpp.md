@@ -4,20 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
-    title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
@@ -25,50 +19,41 @@ data:
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
     title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
-    title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
-    title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
-    title: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
-    title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
-    title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
-    title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
-    title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
-    title: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
@@ -76,30 +61,44 @@ data:
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+    path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+    path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+    path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+    title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+    path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+    title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+    path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+    title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+    path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+    title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+    title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+    title: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+    title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\

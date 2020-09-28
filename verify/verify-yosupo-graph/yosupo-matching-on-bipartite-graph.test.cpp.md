@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: atcoder/maxflow.hpp
-    title: atcoder/maxflow.hpp
-  - icon: ':heavy_check_mark:'
     path: atcoder/internal_queue.hpp
     title: atcoder/internal_queue.hpp
+  - icon: ':heavy_check_mark:'
+    path: atcoder/maxflow.hpp
+    title: atcoder/maxflow.hpp
   - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp

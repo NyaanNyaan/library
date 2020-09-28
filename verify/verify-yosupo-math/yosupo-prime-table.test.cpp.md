@@ -5,11 +5,11 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: prime/prime-enumerate.hpp
-    title: prime/prime-enumerate.hpp
-  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
+    path: prime/prime-enumerate.hpp
+    title: prime/prime-enumerate.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

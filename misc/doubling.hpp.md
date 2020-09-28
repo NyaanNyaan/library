@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/misc/doubling.md
     document_title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
     links: []

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/max-independent-set.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <int m>\nvector<int> max_independent_set(const\

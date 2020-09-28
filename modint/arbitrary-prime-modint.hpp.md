@@ -3,24 +3,27 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: modulo/mod-sqrt.hpp
-    title: mod sqrt(Tonelli-Shanks algorithm)
+    path: fps/fps-sqrt.hpp
+    title: "\u5E73\u65B9\u6839"
   - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
-    path: fps/fps-sqrt.hpp
-    title: "\u5E73\u65B9\u6839"
+    path: modulo/mod-sqrt.hpp
+    title: mod sqrt(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-unary-test/osak.test.cpp
     title: verify/verify-unary-test/osak.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
@@ -28,15 +31,11 @@ data:
     path: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"modint/arbitrary-prime-modint.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nstruct ArbitraryLazyMontgomeryModInt {\n  using mint =\

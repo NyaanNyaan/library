@@ -5,11 +5,11 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: string/suffix-array.hpp
-    title: string/suffix-array.hpp
-  - icon: ':heavy_check_mark:'
     path: data-structure/sparse-table.hpp
     title: data-structure/sparse-table.hpp
+  - icon: ':heavy_check_mark:'
+    path: string/suffix-array.hpp
+    title: string/suffix-array.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

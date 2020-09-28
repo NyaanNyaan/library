@@ -5,14 +5,14 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
     path: fps/berlekamp-massey.hpp
     title: fps/berlekamp-massey.hpp
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
+    path: modint/montgomery-modint.hpp
+    title: modint/montgomery-modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segment-tree/range-add-range-max-lazyseg.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename E, E MINF>\nstruct\

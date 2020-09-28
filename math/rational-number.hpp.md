@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"math/rational-number.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nstruct RationalNumber {\n  pair<long long, long long> a;\n\

@@ -7,15 +7,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"fps/lagrange-interpolation-point.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"modulo/binomial.hpp\"\nusing namespace std;\n\

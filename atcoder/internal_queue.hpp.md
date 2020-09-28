@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"atcoder/internal_queue.hpp\"\n#include <vector>\n\nnamespace\
     \ atcoder {\n\nnamespace internal {\n\ntemplate <class T>\nstruct simple_queue\

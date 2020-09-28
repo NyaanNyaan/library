@@ -5,9 +5,6 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: prime/fast-factorize.hpp
-    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
-  - icon: ':heavy_check_mark:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
   - icon: ':heavy_check_mark:'
@@ -20,11 +17,14 @@ data:
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
   - icon: ':heavy_check_mark:'
-    path: prime/osak.hpp
-    title: prime/osak.hpp
-  - icon: ':heavy_check_mark:'
     path: prime/factor-enumerate.hpp
     title: prime/factor-enumerate.hpp
+  - icon: ':heavy_check_mark:'
+    path: prime/fast-factorize.hpp
+    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+  - icon: ':heavy_check_mark:'
+    path: prime/osak.hpp
+    title: prime/osak.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

@@ -10,15 +10,14 @@ data:
     title: "\u5E73\u65B9\u6839"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
-    title: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+    title: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/modulo/mod-sqrt.md
     document_title: mod sqrt(Tonelli-Shanks algorithm)
     links: []

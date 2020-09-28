@@ -22,15 +22,14 @@ data:
     path: verify/verify-unary-test/osak.test.cpp
     title: verify/verify-unary-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-    title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+    title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/prime/fast-factorize.md
     document_title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's\
       \ Rho)"

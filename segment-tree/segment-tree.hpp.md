@@ -7,11 +7,17 @@ data:
     title: "\u9818\u57DF\u6728(Segment Tree)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+    path: verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    path: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
@@ -19,24 +25,17 @@ data:
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
-    title: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
-    title: verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
     title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"segment-tree/segment-tree.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T, typename F>\nstruct SegmentTree\

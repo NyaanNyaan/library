@@ -10,15 +10,14 @@ data:
     title: math/grundy-number.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"graph/topological-sort.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\

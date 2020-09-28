@@ -13,15 +13,14 @@ data:
     path: verify/verify-unary-test/osak.test.cpp
     title: verify/verify-unary-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-    title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+    title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"modint/modint-montgomery64.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\nstruct montgomery64 {\n  using mint = montgomery64;\n\

@@ -7,8 +7,8 @@ data:
     title: string/suffix-array.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-    title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
     title: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
@@ -16,12 +16,11 @@ data:
     path: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
     title: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+    path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+    title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"data-structure/sparse-table.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T>\nstruct SparseTable {\n  vector<vector<T>\

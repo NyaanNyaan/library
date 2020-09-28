@@ -8,11 +8,11 @@ data:
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
-    path: ntt/ntt-sse42.hpp
-    title: ntt/ntt-sse42.hpp
-  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
+  - icon: ':heavy_check_mark:'
+    path: ntt/ntt-sse42.hpp
+    title: ntt/ntt-sse42.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

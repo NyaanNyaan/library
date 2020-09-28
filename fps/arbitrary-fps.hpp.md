@@ -2,32 +2,29 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: ntt/arbitrary-ntt.hpp
-    title: ntt/arbitrary-ntt.hpp
+    path: fps/formal-power-series.hpp
+    title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
+      \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
-    path: ntt/ntt-avx2.hpp
-    title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
-    path: fps/formal-power-series.hpp
-    title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
-      \u30E9\u30EA"
+    path: ntt/arbitrary-ntt.hpp
+    title: ntt/arbitrary-ntt.hpp
+  - icon: ':heavy_check_mark:'
+    path: ntt/ntt-avx2.hpp
+    title: ntt/ntt-avx2.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0215.test.cpp
-    title: verify/verify-yuki/yuki-0215.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-1080.test.cpp
-    title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0214.test.cpp
-    title: verify/verify-yuki/yuki-0214.test.cpp
+    path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
@@ -35,15 +32,17 @@ data:
     path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+    path: verify/verify-yuki/yuki-0214.test.cpp
+    title: verify/verify-yuki/yuki-0214.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+    path: verify/verify-yuki/yuki-0215.test.cpp
+    title: verify/verify-yuki/yuki-0215.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1080.test.cpp
+    title: verify/verify-yuki/yuki-1080.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"fps/arbitrary-fps.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n#line 3 \"ntt/arbitrary-ntt.hpp\"\nusing namespace std;\n\n\

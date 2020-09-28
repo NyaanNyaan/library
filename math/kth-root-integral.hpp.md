@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     _deprecated_at_docs: docs/math/kth-root-integral.md
     document_title: $\mathrm{floor}(a^{\frac{1}{k}})$
     links: []

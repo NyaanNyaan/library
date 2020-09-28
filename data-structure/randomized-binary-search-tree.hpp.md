@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 2 \"data-structure/randomized-binary-search-tree.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename F>\n\
