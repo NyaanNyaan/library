@@ -111,6 +111,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/segment-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Segment Tree)"
+    - icon: ':warning:'
+      path: data-structure-2d/wavelet-matrix.hpp
+      title: data-structure-2d/wavelet-matrix.hpp
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'
