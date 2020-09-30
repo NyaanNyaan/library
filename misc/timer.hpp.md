@@ -11,6 +11,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
+  - icon: ':warning:'
+    path: trial/fast-gcd.hpp
+    title: trial/fast-gcd.hpp
+  - icon: ':warning:'
+    path: trial/fast-inv.hpp
+    title: trial/fast-inv.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
@@ -34,6 +40,8 @@ data:
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
+  - trial/fast-inv.hpp
+  - trial/fast-gcd.hpp
   - misc/simulated-annealing.hpp
   - modulo/strassen.hpp
   - fps/fps-composition-fast.hpp

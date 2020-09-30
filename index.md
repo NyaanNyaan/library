@@ -497,6 +497,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: tree/rerooting.hpp
+  - name: trial
+    pages:
+    - icon: ':warning:'
+      path: trial/fast-gcd.hpp
+      title: trial/fast-gcd.hpp
+    - icon: ':warning:'
+      path: trial/fast-inv.hpp
+      title: trial/fast-inv.hpp
   - name: unused/python
     pages:
     - icon: ':warning:'
