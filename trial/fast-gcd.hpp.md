@@ -12,17 +12,17 @@ data:
     links: []
   bundledCode: "#line 2 \"trial/fast-gcd.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\nnamespace fast_gcd {\nusing u64 = uint64_t;\nusing u32 = uint32_t;\n\
-    \n__attribute__((target(\"bmi\"))) uint64_t binary_gcd(uint64_t a, uint64_t b)\
-    \ {\n  if (a == 0 || b == 0) return a + b;\n  int n = __builtin_ctzll(a);\n  int\
-    \ m = __builtin_ctzll(b);\n  a >>= n;\n  b >>= m;\n  while (a != b) {\n    bool\
-    \ f = a > b;\n    u64 c = f ? a : b;\n    b = f ? b : a;\n    a = (c - b) >> __builtin_ctzll(c\
-    \ - b);\n  }\n  return a << min(n, m);\n}\n}  // namespace fast_gcd\n\nnamespace\
+    \n__attribute__((target(\"bmi\"))) u64 binary_gcd(u64 a, u64 b) {\n  if (a ==\
+    \ 0 || b == 0) return a + b;\n  int n = __builtin_ctzll(a);\n  int m = __builtin_ctzll(b);\n\
+    \  a >>= n;\n  b >>= m;\n  while (a != b) {\n    int m = __builtin_ctzll(a - b);\n\
+    \    bool f = a > b;\n    u64 c = f ? a : b;\n    b = f ? b : a;\n    a = (c -\
+    \ b) >> m;\n  }\n  return a << min(n, m);\n}\n}  // namespace fast_gcd\n\nnamespace\
     \ fast_gcd {\n#line 3 \"misc/timer.hpp\"\nusing namespace std;\n\nstruct Timer\
     \ {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\
     \n  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
     \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
     \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
-    \ 27 \"trial/fast-gcd.hpp\"\n\nuint64_t naive_gcd(uint64_t a, uint64_t b) {\n\
+    \ 28 \"trial/fast-gcd.hpp\"\n\nuint64_t naive_gcd(uint64_t a, uint64_t b) {\n\
     \  while (b) swap(a %= b, b);\n  return a;\n}\n\nu64 x_;\nvoid rng_init() { x_\
     \ = 88172645463325252ULL; }\nu64 rng() { return x_ = x_ ^ (x_ << 7), x_ = x_ ^\
     \ (x_ >> 9); }\n\nvoid test_inner(u64 (*f)(u64, u64)) {\n  auto test = [](u64\
@@ -32,7 +32,7 @@ data:
     \ & upper;\n      u64 b = rng() & upper;\n      res += f(a, b);\n    }\n\n   \
     \ // output results\n    cerr << s << \" \" << res << \" \" << timer.elapsed()\
     \ << endl;\n  };\n\n  rng_init();\n  test(f, 1e7, 1LL << 16, \"small\");\n  test(f,\
-    \ 5e6, 1LL << 32, \"medium\");\n  test(f, 2.5e6, 0, \"large\");\n}\n\nvoid unit_test()\
+    \ 1e7, 1LL << 32, \"medium\");\n  test(f, 1e7, 0, \"large\");\n}\n\nvoid unit_test()\
     \ {\n  using P = pair<u64, u64>;\n  using F = u64 (*)(u64, u64);\n\n  vector<P>\
     \ testcase{P(2, 4),\n                     P(100000, 10000),\n                \
     \     P(998244353, 1000000007),\n                     P(1LL << 40, 1LL << 60),\n\
@@ -55,10 +55,10 @@ data:
     \ << endl;\n  test_inner(binary_gcd);\n}\n\n}  // namespace fast_gcd\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\nnamespace\
     \ fast_gcd {\nusing u64 = uint64_t;\nusing u32 = uint32_t;\n\n__attribute__((target(\"\
-    bmi\"))) uint64_t binary_gcd(uint64_t a, uint64_t b) {\n  if (a == 0 || b == 0)\
-    \ return a + b;\n  int n = __builtin_ctzll(a);\n  int m = __builtin_ctzll(b);\n\
-    \  a >>= n;\n  b >>= m;\n  while (a != b) {\n    bool f = a > b;\n    u64 c =\
-    \ f ? a : b;\n    b = f ? b : a;\n    a = (c - b) >> __builtin_ctzll(c - b);\n\
+    bmi\"))) u64 binary_gcd(u64 a, u64 b) {\n  if (a == 0 || b == 0) return a + b;\n\
+    \  int n = __builtin_ctzll(a);\n  int m = __builtin_ctzll(b);\n  a >>= n;\n  b\
+    \ >>= m;\n  while (a != b) {\n    int m = __builtin_ctzll(a - b);\n    bool f\
+    \ = a > b;\n    u64 c = f ? a : b;\n    b = f ? b : a;\n    a = (c - b) >> m;\n\
     \  }\n  return a << min(n, m);\n}\n}  // namespace fast_gcd\n\nnamespace fast_gcd\
     \ {\n#include \"misc/timer.hpp\"\n\nuint64_t naive_gcd(uint64_t a, uint64_t b)\
     \ {\n  while (b) swap(a %= b, b);\n  return a;\n}\n\nu64 x_;\nvoid rng_init()\
@@ -70,7 +70,7 @@ data:
     \ & upper;\n      u64 b = rng() & upper;\n      res += f(a, b);\n    }\n\n   \
     \ // output results\n    cerr << s << \" \" << res << \" \" << timer.elapsed()\
     \ << endl;\n  };\n\n  rng_init();\n  test(f, 1e7, 1LL << 16, \"small\");\n  test(f,\
-    \ 5e6, 1LL << 32, \"medium\");\n  test(f, 2.5e6, 0, \"large\");\n}\n\nvoid unit_test()\
+    \ 1e7, 1LL << 32, \"medium\");\n  test(f, 1e7, 0, \"large\");\n}\n\nvoid unit_test()\
     \ {\n  using P = pair<u64, u64>;\n  using F = u64 (*)(u64, u64);\n\n  vector<P>\
     \ testcase{P(2, 4),\n                     P(100000, 10000),\n                \
     \     P(998244353, 1000000007),\n                     P(1LL << 40, 1LL << 60),\n\
@@ -96,7 +96,7 @@ data:
   isVerificationFile: false
   path: trial/fast-gcd.hpp
   requiredBy: []
-  timestamp: '2020-09-30 23:27:24+09:00'
+  timestamp: '2020-10-01 14:45:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: trial/fast-gcd.hpp
