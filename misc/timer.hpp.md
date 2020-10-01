@@ -16,7 +16,7 @@ data:
     title: trial/fast-gcd.hpp
   - icon: ':warning:'
     path: trial/fast-inv.hpp
-    title: trial/fast-inv.hpp
+    title: "\u9AD8\u901Fmodulo\u9006\u5143"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp

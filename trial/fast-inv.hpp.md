@@ -9,6 +9,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
+    _deprecated_at_docs: docs/trial/fast-inv.md
+    document_title: "\u9AD8\u901Fmodulo\u9006\u5143"
     links: []
   bundledCode: "#line 2 \"trial/fast-inv.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\nnamespace fast_inv {\nusing u64 = uint64_t;\nusing u32 = uint32_t;\n\
@@ -46,11 +48,11 @@ data:
     \    while (n--) {\n      u32 a;\n      do {\n        a = rng() & upper;\n   \
     \     a = a >= MOD ? a - MOD : a;\n      } while (a == 0);\n      res += f(a);\n\
     \    }\n\n    // output results\n    cerr << s << \" \" << res << \" \" << timer.elapsed()\
-    \ << endl;\n  };\n\n  rng_init();\n  test(f, 1e7, 1 << 10, \"small\");\n  test(f,\
-    \ 1e7, 1 << 20, \"medium\");\n  test(f, 1e7, 1 << 30, \"large\");\n}\n\nvoid unit_test()\
-    \ {\n  using F = u32 (*)(u32);\n\n  vector<u32> testcase;\n  for (u32 i = 1; i\
-    \ <= 100000; ++i) testcase.emplace_back(i);\n  rng_init();\n  for (u32 loop =\
-    \ 100000; --loop;) {\n    u32 r = rng() % MOD;\n    if (r != 0) testcase.emplace_back(r);\n\
+    \ << endl;\n  };\n\n  rng_init();\n  test(f, 1e7, 1 << 10, \"small\");\n  // test(f,\
+    \ 1e8, 1 << 20, \"medium\");\n  // test(f, 1e8, 1 << 30, \"large\");\n}\n\nvoid\
+    \ unit_test() {\n  using F = u32 (*)(u32);\n\n  vector<u32> testcase;\n  for (u32\
+    \ i = 1; i <= 100000; ++i) testcase.emplace_back(i);\n  rng_init();\n  for (u32\
+    \ loop = 100000; --loop;) {\n    u32 r = rng() % MOD;\n    if (r != 0) testcase.emplace_back(r);\n\
     \  }\n  vector<F> functions = {pow_inv, egcd_inv, montgomery_pow_inv, bgcd_inv};\n\
     \n  for (auto t : testcase) {\n    unordered_set<u32> s;\n    for (auto &f : functions)\
     \ {\n      s.insert(f(t));\n    }\n    if (s.size() != 1u) {\n      cerr << \"\
@@ -61,7 +63,8 @@ data:
     \n  // extgcd-inv\n  cerr << \"extgcd-inv\" << endl;\n  test_inner(egcd_inv);\n\
     \n  // montgomery-inv\n  cerr << \"montgomery-inv\" << endl;\n  test_inner(montgomery_pow_inv);\n\
     \n  // binary-gcd-inv\n  cerr << \"binary-gcd-inv\" << endl;\n  test_inner(bgcd_inv);\n\
-    }\n\n}  // namespace fast_inv\n"
+    }\n\n}  // namespace fast_inv\n\n/**\n * @brief \u9AD8\u901Fmodulo\u9006\u5143\
+    \n * @docs docs/trial/fast-inv.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\nnamespace\
     \ fast_inv {\nusing u64 = uint64_t;\nusing u32 = uint32_t;\nusing i32 = int32_t;\n\
     constexpr u32 MOD = 998244353;\n\nstruct Pre {\n  u32 a[64];\n  constexpr Pre()\
@@ -93,11 +96,11 @@ data:
     \    while (n--) {\n      u32 a;\n      do {\n        a = rng() & upper;\n   \
     \     a = a >= MOD ? a - MOD : a;\n      } while (a == 0);\n      res += f(a);\n\
     \    }\n\n    // output results\n    cerr << s << \" \" << res << \" \" << timer.elapsed()\
-    \ << endl;\n  };\n\n  rng_init();\n  test(f, 1e7, 1 << 10, \"small\");\n  test(f,\
-    \ 1e7, 1 << 20, \"medium\");\n  test(f, 1e7, 1 << 30, \"large\");\n}\n\nvoid unit_test()\
-    \ {\n  using F = u32 (*)(u32);\n\n  vector<u32> testcase;\n  for (u32 i = 1; i\
-    \ <= 100000; ++i) testcase.emplace_back(i);\n  rng_init();\n  for (u32 loop =\
-    \ 100000; --loop;) {\n    u32 r = rng() % MOD;\n    if (r != 0) testcase.emplace_back(r);\n\
+    \ << endl;\n  };\n\n  rng_init();\n  test(f, 1e7, 1 << 10, \"small\");\n  // test(f,\
+    \ 1e8, 1 << 20, \"medium\");\n  // test(f, 1e8, 1 << 30, \"large\");\n}\n\nvoid\
+    \ unit_test() {\n  using F = u32 (*)(u32);\n\n  vector<u32> testcase;\n  for (u32\
+    \ i = 1; i <= 100000; ++i) testcase.emplace_back(i);\n  rng_init();\n  for (u32\
+    \ loop = 100000; --loop;) {\n    u32 r = rng() % MOD;\n    if (r != 0) testcase.emplace_back(r);\n\
     \  }\n  vector<F> functions = {pow_inv, egcd_inv, montgomery_pow_inv, bgcd_inv};\n\
     \n  for (auto t : testcase) {\n    unordered_set<u32> s;\n    for (auto &f : functions)\
     \ {\n      s.insert(f(t));\n    }\n    if (s.size() != 1u) {\n      cerr << \"\
@@ -108,13 +111,14 @@ data:
     \n  // extgcd-inv\n  cerr << \"extgcd-inv\" << endl;\n  test_inner(egcd_inv);\n\
     \n  // montgomery-inv\n  cerr << \"montgomery-inv\" << endl;\n  test_inner(montgomery_pow_inv);\n\
     \n  // binary-gcd-inv\n  cerr << \"binary-gcd-inv\" << endl;\n  test_inner(bgcd_inv);\n\
-    }\n\n}  // namespace fast_inv"
+    }\n\n}  // namespace fast_inv\n\n/**\n * @brief \u9AD8\u901Fmodulo\u9006\u5143\
+    \n * @docs docs/trial/fast-inv.md\n */\n"
   dependsOn:
   - misc/timer.hpp
   isVerificationFile: false
   path: trial/fast-inv.hpp
   requiredBy: []
-  timestamp: '2020-10-01 23:30:12+09:00'
+  timestamp: '2020-10-02 00:13:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: trial/fast-inv.hpp
@@ -122,5 +126,26 @@ layout: document
 redirect_from:
 - /library/trial/fast-inv.hpp
 - /library/trial/fast-inv.hpp.html
-title: trial/fast-inv.hpp
+title: "\u9AD8\u901Fmodulo\u9006\u5143"
 ---
+## 高速modulo逆元
+
+(アルゴリズムの内容については各所の解説を参照されたし。)
+
+逆元を計算する4種類のアルゴリズムに対して、適度な最適化を加えた関数を作成し、$1e8$回ずつ逆元を計算させて時間を測定したものが次の表である。(単位はms)
+
+入力する値の範囲は$2^{10}$以下、$2^{20}$以下、$2^{30}$以下の3つの場合についてそれぞれ実験した。
+
+- CPU: Intel core i5-8350U
+- コンパイルオプション : `-Wl,-stack,1073741824 -O2`
+
+| アルゴリズム | $\sim 2^{10}$ | $\sim 2^{20}$ | $\sim 2^{30}$    |
+| -------- | -------- | -------- | --- |
+| pow  | 10283    | 10285     |  10359   |
+| montgomery  | 9674  | 9702  |  9797   |
+| extgcd  | 4832    | 9714     |  14262   |
+| binary-gcd  | 3563 | 6421 |  8716   |
+
+結論：binary-gcd一択
+
+(ここでは実装していないが、binary-gcdは逆元前計算との相性がよいのでキャッシュ汚染を気にしなければ更なる高速化も可能だと思われる。)

@@ -504,7 +504,7 @@ data:
       title: trial/fast-gcd.hpp
     - icon: ':warning:'
       path: trial/fast-inv.hpp
-      title: trial/fast-inv.hpp
+      title: "\u9AD8\u901Fmodulo\u9006\u5143"
   - name: unused/python
     pages:
     - icon: ':warning:'
