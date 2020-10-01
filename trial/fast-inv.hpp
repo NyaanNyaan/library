@@ -53,8 +53,7 @@ __attribute__((target("bmi"))) u32 bgcd_inv(u32 a) {
 namespace fast_inv {
 
 #include "misc/timer.hpp"
-
-u32 pow_inv(u32 a) {
+__attribute__((optimize("unroll-loops"))) u32 pow_inv(u32 a) {
   u32 ret = 1;
   for (u32 p = MOD - 2; p; a = u64(a) * a % MOD, p >>= 1)
     if (p & 1) ret = u64(ret) * a % MOD;
@@ -71,6 +70,17 @@ u32 egcd_inv(u32 a) {
     s -= a / b * t;
     a %= b;
   }
+}
+
+u32 reduce(const u64 &b) { return (b + u64(u32(b) * 998244351u) * MOD) >> 32; }
+
+u32 mul(const u32 &a, const u32 &b) { return reduce(u64(a) * b); }
+
+__attribute__((optimize("unroll-loops"))) u32 montgomery_pow_inv(u32 a) {
+  u32 ret = 301989884u;
+  for (u32 p = MOD - 2; p; a = mul(a, a), p >>= 1)
+    if (p & 1) ret = mul(ret, a);
+  return reduce(reduce(ret));
 }
 
 u64 x_;
@@ -117,7 +127,7 @@ void unit_test() {
     u32 r = rng() % MOD;
     if (r != 0) testcase.emplace_back(r);
   }
-  vector<F> functions = {pow_inv, egcd_inv, bgcd_inv};
+  vector<F> functions = {pow_inv, egcd_inv, montgomery_pow_inv, bgcd_inv};
 
   for (auto t : testcase) {
     unordered_set<u32> s;
@@ -135,7 +145,6 @@ void unit_test() {
   }
   cerr << "verify passed." << endl;
 
-  /*
   // pow-inv
   cerr << "pow-inv" << endl;
   test_inner(pow_inv);
@@ -143,7 +152,11 @@ void unit_test() {
   // extgcd-inv
   cerr << "extgcd-inv" << endl;
   test_inner(egcd_inv);
-  */
+
+  // montgomery-inv
+  cerr << "montgomery-inv" << endl;
+  test_inner(montgomery_pow_inv);
+
   // binary-gcd-inv
   cerr << "binary-gcd-inv" << endl;
   test_inner(bgcd_inv);

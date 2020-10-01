@@ -27,7 +27,11 @@ with open(args[1], mode='r', encoding='utf-8') as f:
 buf.close()
 
 import datetime
-print("// " + str(datetime.datetime.now()))
+nw = datetime.datetime.now()
+print("/**")
+print(" *  date : " + nw.strftime("%Y-%m-%d %H:%M:%S"))
+print(" */")
+print()
 cmd = "oj-bundle " + buffer
 src = subprocess.check_output(cmd.split()).decode("utf-8")
 lines = src.split('\n')
