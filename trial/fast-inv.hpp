@@ -113,8 +113,8 @@ void test_inner(u32 (*f)(u32)) {
 
   rng_init();
   test(f, 1e7, 1 << 10, "small");
-  test(f, 1e7, 1 << 20, "medium");
-  test(f, 1e7, 1 << 30, "large");
+  // test(f, 1e8, 1 << 20, "medium");
+  // test(f, 1e8, 1 << 30, "large");
 }
 
 void unit_test() {
@@ -163,3 +163,8 @@ void unit_test() {
 }
 
 }  // namespace fast_inv
+
+/**
+ * @brief 高速modulo逆元
+ * @docs docs/trial/fast-inv.md
+ */
