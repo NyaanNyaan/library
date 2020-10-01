@@ -21,16 +21,16 @@ __attribute__((target("bmi"))) u32 bgcd_inv(u32 a) {
   u32 b = MOD, s = 1, t = 0;
   int n = __builtin_ctz(a);
   a >>= n;
-  if(a < 1 << 20) {
-    if(a == 1) return pre.a[n];
-    t -= b / a;
+  if (__builtin_expect(a < 1 << 20, false)) {
+    if (a == 1) return pre.a[n];
+    t = -(b / a);
     b %= a;
     int m = __builtin_ctz(b);
     b >>= m;
-    s <<= m;
+    s = 1u << m;
     n += m;
   }
-  while (a != b){
+  while (a != b) {
     int m = __builtin_ctz(a - b);
     n += m;
     if (a > b) {
@@ -44,7 +44,7 @@ __attribute__((target("bmi"))) u32 bgcd_inv(u32 a) {
       b >>= m;
       s <<= m;
     }
-  } 
+  }
   return u64(s) * pre.a[n] % MOD;
 }
 
@@ -135,6 +135,7 @@ void unit_test() {
   }
   cerr << "verify passed." << endl;
 
+  /*
   // pow-inv
   cerr << "pow-inv" << endl;
   test_inner(pow_inv);
@@ -142,7 +143,7 @@ void unit_test() {
   // extgcd-inv
   cerr << "extgcd-inv" << endl;
   test_inner(egcd_inv);
-
+  */
   // binary-gcd-inv
   cerr << "binary-gcd-inv" << endl;
   test_inner(bgcd_inv);
