@@ -933,6 +933,9 @@ data:
   - name: verify/verify-yuki
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0117.test.cpp
+      title: verify/verify-yuki/yuki-0117.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0214.test.cpp
       title: verify/verify-yuki/yuki-0214.test.cpp
     - icon: ':heavy_check_mark:'

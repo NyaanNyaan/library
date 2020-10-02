@@ -193,34 +193,38 @@ data:
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 3 \"modulo/binomial.hpp\"\nusing namespace std;\n\
     \ntemplate <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n \
-    \ Binomial(int MAX) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    MAX\
-    \ += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <= MAX;\
-    \ i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n   \
-    \ for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n    for\
-    \ (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n  inline\
-    \ T fac(int i) const { return fac_[i]; }\n  inline T finv(int i) const { return\
-    \ finv_[i]; }\n  inline T inv(int i) const { return inv_[i]; }\n\n  T C(int n,\
-    \ int r) const {\n    if (n < r || r < 0) return T(0);\n    return fac_[n] * finv_[n\
-    \ - r] * finv_[r];\n  }\n\n  T C_naive(int n, int r) const {\n    if (n < r ||\
-    \ r < 0) return T(0);\n    T ret = 1;\n    for (T i = 1; i <= r; i += T(1)) {\n\
-    \      ret *= n--;\n      ret *= i.inverse();\n    }\n    return ret;\n  }\n\n\
-    \  T P(int n, int r) const {\n    if (n < r || r < 0) return T(0);\n    return\
-    \ fac_[n] * finv_[n - r];\n  }\n\n  T H(int n, int r) const {\n    if (n < 0 ||\
-    \ r < 0) return (0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line\
-    \ 3 \"fps/lagrange-interpolation-point.hpp\"\nusing namespace std;\n\n#line 6\
-    \ \"fps/lagrange-interpolation-point.hpp\"\n\n// given  : y(x=0) , y(x=1) , ...\
-    \ , y(k)\n// return : y(x)\ntemplate <typename mint>\nmint lagrange_interpolation(const\
-    \ vector<mint>& y, long long x,\n                            const Binomial<mint>&\
-    \ C) {\n  int N = (int)y.size() - 1;\n  if (x <= N) return y[x];\n  mint ret =\
-    \ 0;\n  vector<mint> dp(N + 1, 1), pd(N + 1, 1);\n  mint a = x, one = 1;\n  for\
-    \ (int i = 0; i < N; i++) dp[i + 1] = dp[i] * a, a -= one;\n  for (int i = N;\
-    \ i > 0; i--) pd[i - 1] = pd[i] * a, a += one;\n  for (int i = 0; i <= N; i++)\
-    \ {\n    mint tmp = y[i] * dp[i] * pd[i] * C.finv(i) * C.finv(N - i);\n    ret\
-    \ += ((N - i) & 1) ? -tmp : tmp;\n  }\n  return ret;\n}\n#line 3 \"fps/sum-of-exponential-times-poly.hpp\"\
+    \ Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n\
+    \    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <=\
+    \ MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
+    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
+    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
+    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
+    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
+    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
+    \  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size()) extend();\n    return\
+    \ fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size()) extend();\n\
+    \    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
+    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
+    \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
+    \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
+    \ = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i)\
+    \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
+    \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
+    \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
+    \ - 1, r);\n  }\n};\n#line 3 \"fps/lagrange-interpolation-point.hpp\"\nusing namespace\
+    \ std;\n\n#line 6 \"fps/lagrange-interpolation-point.hpp\"\n\n// given  : y(x=0)\
+    \ , y(x=1) , ... , y(k)\n// return : y(x)\ntemplate <typename mint>\nmint lagrange_interpolation(const\
+    \ vector<mint>& y, long long x,\n                            Binomial<mint>& C)\
+    \ {\n  int N = (int)y.size() - 1;\n  if (x <= N) return y[x];\n  mint ret = 0;\n\
+    \  vector<mint> dp(N + 1, 1), pd(N + 1, 1);\n  mint a = x, one = 1;\n  for (int\
+    \ i = 0; i < N; i++) dp[i + 1] = dp[i] * a, a -= one;\n  for (int i = N; i > 0;\
+    \ i--) pd[i - 1] = pd[i] * a, a += one;\n  for (int i = 0; i <= N; i++) {\n  \
+    \  mint tmp = y[i] * dp[i] * pd[i] * C.finv(i) * C.finv(N - i);\n    ret += ((N\
+    \ - i) & 1) ? -tmp : tmp;\n  }\n  return ret;\n}\n#line 3 \"fps/sum-of-exponential-times-poly.hpp\"\
     \nusing namespace std;\n\n#line 6 \"fps/sum-of-exponential-times-poly.hpp\"\n\n\
     // given  : f(0)...f(k) (deg(f) = k), a, n\n// return : \\sum_{i=0...n-1} a^i\
     \ f(i)\ntemplate <typename mint>\nmint sum_of_exp(const vector<mint>& f, mint\
-    \ a, long long n,\n                const Binomial<mint>& C) {\n  if (n == 0) return\
+    \ a, long long n,\n                Binomial<mint>& C) {\n  if (n == 0) return\
     \ mint(0);\n  if (a == mint(0)) return f[0];\n  if (a == mint(1)) {\n    vector<mint>\
     \ g(f.size() + 1, mint(0));\n    for (int i = 1; i < (int)g.size(); i++) g[i]\
     \ = g[i - 1] + f[i - 1];\n    return lagrange_interpolation(g, n, C);\n  }\n \
@@ -233,28 +237,28 @@ data:
     \ = lagrange_interpolation(g, n - 1, C);\n  return tn * a.pow(n - 1) + c;\n}\n\
     \n// given  : f(0)...f(k) (deg(f) = k), a\n// return : \\sum_{i=0...infty} a^i\
     \ f(i)\ntemplate <typename mint>\nmint sum_of_exp_limit(const vector<mint>& f,\
-    \ mint a, const Binomial<mint>& C) {\n  if (a == mint(0)) return f[0];\n  int\
-    \ K = f.size() - 1;\n  vector<mint> g(f.size());\n  mint buf = 1;\n  for (int\
-    \ i = 0; i < (int)g.size(); i++) g[i] = f[i] * buf, buf *= a;\n  for (int i =\
-    \ 1; i < (int)g.size(); i++) g[i] += g[i - 1];\n  mint c = 0, buf2 = 1;\n  for\
-    \ (int i = 0; i <= K; i++) c += C.C(K + 1, i) * buf2 * g[K - i], buf2 *= -a;\n\
-    \  c /= (-a + 1).pow(K + 1);\n  return c;\n}\n\n// given  : p, n\n// return :\
-    \ (0^p, 1^p, ... , n^p)\ntemplate <typename mint>\nvector<mint> exp_enamurate(int\
-    \ p, int n) {\n  vector<mint> f(n + 1, mint(0));\n  if (!p) {\n    f[0] = 1;\n\
-    \    return std::move(f);\n  }\n  f[1] = 1;\n  vector<bool> sieve(n + 1, false);\n\
-    \  vector<int> ps;\n  for (int i = 2; i <= n; i++) {\n    if (!sieve[i]) {\n \
-    \     f[i] = mint(i).pow(p);\n      ps.push_back(i);\n    }\n    for (int j =\
-    \ 0; j < (int)ps.size() && i * ps[j] <= n; j++) {\n      sieve[i * ps[j]] = 1;\n\
-    \      f[i * ps[j]] = f[i] * f[ps[j]];\n      if (i % ps[j] == 0) break;\n   \
-    \ }\n  }\n  return std::move(f);\n}\n\n// given  : d, r, n\n// return : \\sum_{i=0...n-1}\
-    \ r^i i^d\ntemplate <typename mint>\nmint sum_of_exp2(int d, mint r, long long\
-    \ n, const Binomial<mint>& C) {\n  vector<mint> f = exp_enamurate<mint>(d, d);\n\
-    \  return sum_of_exp(f, r, n, C);\n}\n\n// given  : d, r\n// return : \\sum_{i=0...infty}\
-    \ r^i i^d\ntemplate <typename mint>\nmint sum_of_exp_limit2(int d, mint r, const\
-    \ Binomial<mint>& C) {\n  vector<mint> f = exp_enamurate<mint>(d, d);\n  return\
-    \ sum_of_exp_limit(f, r, C);\n}\n\n/**\n * @brief $\\sum_{i}a^i f(i)$\n * @docs\
-    \ docs/fps/sum-of-exponential-times-poly.md\n */\n#line 9 \"verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp\"\
-    \n\nvoid solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n  Binomial<mint>\
+    \ mint a, Binomial<mint>& C) {\n  if (a == mint(0)) return f[0];\n  int K = f.size()\
+    \ - 1;\n  vector<mint> g(f.size());\n  mint buf = 1;\n  for (int i = 0; i < (int)g.size();\
+    \ i++) g[i] = f[i] * buf, buf *= a;\n  for (int i = 1; i < (int)g.size(); i++)\
+    \ g[i] += g[i - 1];\n  mint c = 0, buf2 = 1;\n  for (int i = 0; i <= K; i++) c\
+    \ += C.C(K + 1, i) * buf2 * g[K - i], buf2 *= -a;\n  c /= (-a + 1).pow(K + 1);\n\
+    \  return c;\n}\n\n// given  : p, n\n// return : (0^p, 1^p, ... , n^p)\ntemplate\
+    \ <typename mint>\nvector<mint> exp_enamurate(int p, int n) {\n  vector<mint>\
+    \ f(n + 1, mint(0));\n  if (!p) {\n    f[0] = 1;\n    return std::move(f);\n \
+    \ }\n  f[1] = 1;\n  vector<bool> sieve(n + 1, false);\n  vector<int> ps;\n  for\
+    \ (int i = 2; i <= n; i++) {\n    if (!sieve[i]) {\n      f[i] = mint(i).pow(p);\n\
+    \      ps.push_back(i);\n    }\n    for (int j = 0; j < (int)ps.size() && i *\
+    \ ps[j] <= n; j++) {\n      sieve[i * ps[j]] = 1;\n      f[i * ps[j]] = f[i] *\
+    \ f[ps[j]];\n      if (i % ps[j] == 0) break;\n    }\n  }\n  return std::move(f);\n\
+    }\n\n// given  : d, r, n\n// return : \\sum_{i=0...n-1} r^i i^d\ntemplate <typename\
+    \ mint>\nmint sum_of_exp2(int d, mint r, long long n, Binomial<mint>& C) {\n \
+    \ vector<mint> f = exp_enamurate<mint>(d, d);\n  return sum_of_exp(f, r, n, C);\n\
+    }\n\n// given  : d, r\n// return : \\sum_{i=0...infty} r^i i^d\ntemplate <typename\
+    \ mint>\nmint sum_of_exp_limit2(int d, mint r, Binomial<mint>& C) {\n  vector<mint>\
+    \ f = exp_enamurate<mint>(d, d);\n  return sum_of_exp_limit(f, r, C);\n}\n\n/**\n\
+    \ * @brief $\\sum_{i}a^i f(i)$\n * @docs docs/fps/sum-of-exponential-times-poly.md\n\
+    \ */\n#line 9 \"verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp\"\n\n\
+    void solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n  Binomial<mint>\
     \ C(10001000);\n  long long r, d, n;\n  rd(r, d, n);\n  wtn(sum_of_exp2<mint>(d,\
     \ r, n, C).get());\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
@@ -274,7 +278,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   requiredBy: []
-  timestamp: '2020-09-15 23:09:15+09:00'
+  timestamp: '2020-10-02 15:43:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp

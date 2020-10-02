@@ -133,6 +133,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0117.test.cpp
+    title: verify/verify-yuki/yuki-0117.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
   - icon: ':heavy_check_mark:'
@@ -256,6 +259,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp

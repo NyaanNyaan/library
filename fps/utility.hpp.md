@@ -82,35 +82,39 @@ data:
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
     \ 3 \"modulo/binomial.hpp\"\nusing namespace std;\n\ntemplate <typename T>\nstruct\
-    \ Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX) : fac_(MAX +\
-    \ 10), finv_(MAX + 10), inv_(MAX + 10) {\n    MAX += 9;\n    fac_[0] = finv_[0]\
+    \ Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX\
+    \ + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    MAX += 9;\n    fac_[0] = finv_[0]\
     \ = inv_[0] = 1;\n    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n\
     \    finv_[MAX] = fac_[MAX].inverse();\n    for (int i = MAX - 1; i > 0; i--)\
     \ finv_[i] = finv_[i + 1] * (i + 1);\n    for (int i = 1; i <= MAX; i++) inv_[i]\
-    \ = finv_[i] * fac_[i - 1];\n  }\n\n  inline T fac(int i) const { return fac_[i];\
-    \ }\n  inline T finv(int i) const { return finv_[i]; }\n  inline T inv(int i)\
-    \ const { return inv_[i]; }\n\n  T C(int n, int r) const {\n    if (n < r || r\
-    \ < 0) return T(0);\n    return fac_[n] * finv_[n - r] * finv_[r];\n  }\n\n  T\
-    \ C_naive(int n, int r) const {\n    if (n < r || r < 0) return T(0);\n    T ret\
-    \ = 1;\n    for (T i = 1; i <= r; i += T(1)) {\n      ret *= n--;\n      ret *=\
-    \ i.inverse();\n    }\n    return ret;\n  }\n\n  T P(int n, int r) const {\n \
-    \   if (n < r || r < 0) return T(0);\n    return fac_[n] * finv_[n - r];\n  }\n\
-    \n  T H(int n, int r) const {\n    if (n < 0 || r < 0) return (0);\n    return\
-    \ r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 4 \"fps/utility.hpp\"\n\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>>\
-    \ v) {\n  using fps = FormalPowerSeries<mint>;\n  if((int)v.size() == 0) return\
-    \ fps{mint(1)};\n  sort(begin(v), end(v), [](fps &a, fps &b) { return a.size()\
-    \ < b.size(); });\n  vector<fps> w;\n  w.reserve(sz(v) / 2 + 1);\n  while ((int)v.size()\
-    \ > 1) {\n    for (int i = 0; i < (int)v.size(); i += 2) {\n      if (i + 1 ==\
-    \ (int)v.size()) {\n        w.emplace_back(v.back());\n      } else {\n      \
-    \  w.emplace_back(v[i] * v[i + 1]);\n      }\n    }\n    swap(v, w);\n    w.clear();\n\
-    \  }\n  return v[0];\n}\n\ntemplate <typename mint>\nvoid OGFtoEGF(FormalPowerSeries<mint>&\
-    \ f, const Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i]\
-    \ *= C.finv(i);\n}\n\ntemplate <typename mint>\nvoid EGFtoOGF(FormalPowerSeries<mint>&\
-    \ f, const Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i]\
-    \ *= C.fac(i);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> e_x(int\
-    \ deg, const Binomial<mint>& C) {\n  FormalPowerSeries<mint> ret{begin(C.finv_),\
-    \ begin(C.finv_) + deg};\n  return std::move(ret);\n}\n"
+    \ = finv_[i] * fac_[i - 1];\n  }\n\n  void extend() {\n    int n = fac_.size();\n\
+    \    T fac = fac_.back() * n;\n    T inv = (-inv_[T::get_mod() % n]) * (T::get_mod()\
+    \ / n);\n    T finv = finv_.back() * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n\
+    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size())\
+    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size())\
+    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
+    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
+    \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
+    \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
+    \ = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i)\
+    \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
+    \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
+    \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
+    \ - 1, r);\n  }\n};\n#line 4 \"fps/utility.hpp\"\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {\n  using fps =\
+    \ FormalPowerSeries<mint>;\n  if((int)v.size() == 0) return fps{mint(1)};\n  sort(begin(v),\
+    \ end(v), [](fps &a, fps &b) { return a.size() < b.size(); });\n  vector<fps>\
+    \ w;\n  w.reserve(sz(v) / 2 + 1);\n  while ((int)v.size() > 1) {\n    for (int\
+    \ i = 0; i < (int)v.size(); i += 2) {\n      if (i + 1 == (int)v.size()) {\n \
+    \       w.emplace_back(v.back());\n      } else {\n        w.emplace_back(v[i]\
+    \ * v[i + 1]);\n      }\n    }\n    swap(v, w);\n    w.clear();\n  }\n  return\
+    \ v[0];\n}\n\ntemplate <typename mint>\nvoid OGFtoEGF(FormalPowerSeries<mint>&\
+    \ f, Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n\
+    }\n\ntemplate <typename mint>\nvoid EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>&\
+    \ C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n\
+    \  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};\n  return\
+    \ std::move(ret);\n}\n"
   code: "#pragma once\n#include \"./formal-power-series.hpp\"\n#include \"../modulo/binomial.hpp\"\
     \n\ntemplate <typename mint>\nFormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>>\
     \ v) {\n  using fps = FormalPowerSeries<mint>;\n  if((int)v.size() == 0) return\
@@ -120,19 +124,19 @@ data:
     \ (int)v.size()) {\n        w.emplace_back(v.back());\n      } else {\n      \
     \  w.emplace_back(v[i] * v[i + 1]);\n      }\n    }\n    swap(v, w);\n    w.clear();\n\
     \  }\n  return v[0];\n}\n\ntemplate <typename mint>\nvoid OGFtoEGF(FormalPowerSeries<mint>&\
-    \ f, const Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i]\
-    \ *= C.finv(i);\n}\n\ntemplate <typename mint>\nvoid EGFtoOGF(FormalPowerSeries<mint>&\
-    \ f, const Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i]\
-    \ *= C.fac(i);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> e_x(int\
-    \ deg, const Binomial<mint>& C) {\n  FormalPowerSeries<mint> ret{begin(C.finv_),\
-    \ begin(C.finv_) + deg};\n  return std::move(ret);\n}\n"
+    \ f, Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n\
+    }\n\ntemplate <typename mint>\nvoid EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>&\
+    \ C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n\
+    \  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};\n  return\
+    \ std::move(ret);\n}\n"
   dependsOn:
   - fps/formal-power-series.hpp
   - modulo/binomial.hpp
   isVerificationFile: false
   path: fps/utility.hpp
   requiredBy: []
-  timestamp: '2020-09-26 23:59:24+09:00'
+  timestamp: '2020-10-02 15:43:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1145.test.cpp
