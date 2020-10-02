@@ -8,7 +8,7 @@ using namespace std;
 // return : y(x)
 template <typename mint>
 mint lagrange_interpolation(const vector<mint>& y, long long x,
-                            const Binomial<mint>& C) {
+                            Binomial<mint>& C) {
   int N = (int)y.size() - 1;
   if (x <= N) return y[x];
   mint ret = 0;

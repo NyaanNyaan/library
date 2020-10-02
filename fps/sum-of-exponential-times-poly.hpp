@@ -8,7 +8,7 @@ using namespace std;
 // return : \sum_{i=0...n-1} a^i f(i)
 template <typename mint>
 mint sum_of_exp(const vector<mint>& f, mint a, long long n,
-                const Binomial<mint>& C) {
+                Binomial<mint>& C) {
   if (n == 0) return mint(0);
   if (a == mint(0)) return f[0];
   if (a == mint(1)) {
@@ -33,7 +33,7 @@ mint sum_of_exp(const vector<mint>& f, mint a, long long n,
 // given  : f(0)...f(k) (deg(f) = k), a
 // return : \sum_{i=0...infty} a^i f(i)
 template <typename mint>
-mint sum_of_exp_limit(const vector<mint>& f, mint a, const Binomial<mint>& C) {
+mint sum_of_exp_limit(const vector<mint>& f, mint a, Binomial<mint>& C) {
   if (a == mint(0)) return f[0];
   int K = f.size() - 1;
   vector<mint> g(f.size());
@@ -75,7 +75,7 @@ vector<mint> exp_enamurate(int p, int n) {
 // given  : d, r, n
 // return : \sum_{i=0...n-1} r^i i^d
 template <typename mint>
-mint sum_of_exp2(int d, mint r, long long n, const Binomial<mint>& C) {
+mint sum_of_exp2(int d, mint r, long long n, Binomial<mint>& C) {
   vector<mint> f = exp_enamurate<mint>(d, d);
   return sum_of_exp(f, r, n, C);
 }
@@ -83,7 +83,7 @@ mint sum_of_exp2(int d, mint r, long long n, const Binomial<mint>& C) {
 // given  : d, r
 // return : \sum_{i=0...infty} r^i i^d
 template <typename mint>
-mint sum_of_exp_limit2(int d, mint r, const Binomial<mint>& C) {
+mint sum_of_exp_limit2(int d, mint r, Binomial<mint>& C) {
   vector<mint> f = exp_enamurate<mint>(d, d);
   return sum_of_exp_limit(f, r, C);
 }

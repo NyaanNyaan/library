@@ -24,17 +24,17 @@ FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
 }
 
 template <typename mint>
-void OGFtoEGF(FormalPowerSeries<mint>& f, const Binomial<mint>& C) {
+void OGFtoEGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {
   for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);
 }
 
 template <typename mint>
-void EGFtoOGF(FormalPowerSeries<mint>& f, const Binomial<mint>& C) {
+void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {
   for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);
 }
 
 template <typename mint>
-FormalPowerSeries<mint> e_x(int deg, const Binomial<mint>& C) {
+FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {
   FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};
   return std::move(ret);
 }
