@@ -142,5 +142,18 @@
       "}"
     ],
     "description": "template"
+  },
+  "_mint": {
+    "prefix": "_mint",
+    "body": [
+      "#include \"modint/montgomery-modint.hpp\"",
+      "using mint = LazyMontgomeryModInt<998244353>;",
+      "using vm = vector<mint>;",
+      "using vvm = vector<vm>;",
+      "#include \"modulo/binomial.hpp\";",
+      "Binomial<mint> cmb;",
+      ""
+    ],
+    "description": "_mint"
   }
 }

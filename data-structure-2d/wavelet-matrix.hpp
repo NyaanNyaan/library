@@ -50,8 +50,6 @@ struct WaveletMatrix {
   WaveletMatrix(u32 _n) : n(_n), a(_n) {}
   WaveletMatrix(const vector<T>& _a) : n(_a.size()), a(_a) { build(); }
 
-  T& operator[](u32 i) { return a[i]; }
-
   __attribute__((optimize("O3"))) void build() {
     lg = __lg(max<T>(*max_element(begin(a), end(a)), 1)) + 1;
     bv.assign(lg, n);
@@ -67,11 +65,13 @@ struct WaveletMatrix {
     return;
   }
 
-  inline pair<u32, u32> succ0(int l, int r, int h) {
+  void set(u32 i, const T& x) { a[i] = x; }
+
+  inline pair<u32, u32> succ0(int l, int r, int h) const {
     return make_pair(bv[h].rank0(l), bv[h].rank0(r));
   }
 
-  inline pair<u32, u32> succ1(int l, int r, int h) {
+  inline pair<u32, u32> succ1(int l, int r, int h) const {
     u32 l0 = bv[h].rank0(l);
     u32 r0 = bv[h].rank0(r);
     u32 zeros = bv[h].zeros;
@@ -109,5 +109,38 @@ struct WaveletMatrix {
   // k-th (0-indexed) largest number in a[l, r)
   T kth_largest(int l, int r, int k) {
     return kth_smallest(l, r, r - l - k - 1);
+  }
+
+  // count i s.t. (l <= i < r) && (v[i] < upper)
+  int range_freq(int l, int r, T upper) {
+    int ret = 0;
+    for (int h = lg - 1; h >= 0; --h) {
+      bool f = (upper >> h) & 1;
+      u32 l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);
+      if (f) {
+        ret += r0 - l0;
+        l += bv[h].zeros - l0;
+        r += bv[h].zeros - r0;
+      } else {
+        l = l0;
+        r = l0;
+      }
+    }
+  }
+
+  int range_freq(int l, int r, T lower, T upper) {
+    return range_freq(l, r, upper) - range_freq(l, r, lower);
+  }
+
+  // max v[i] s.t. (l <= i < r) && (v[i] < upper)
+  T prev_value(int l, int r, T upper) {
+    int cnt = range_freq(l, r, upper);
+    return cnt == 0 ? T(-1) : kth_smallest(l, r, cnt - 1);
+  }
+
+  // min v[i] s.t. (l <= i < r) && (lower <= v[i])
+  T next_value(int l, int r, T lower) {
+    int cnt = range_freq(l, r, lower);
+    return cnt == r - l ? T(-1) : kth_smallest(l, r, cnt);
   }
 };
