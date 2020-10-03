@@ -1,5 +1,4 @@
 #include <immintrin.h>
-#include <x86intrin.h>
 //
 #include <bits/stdc++.h>
 
@@ -28,13 +27,13 @@ struct bit_vector {
 
   __attribute__((target("popcnt"))) void build() {
     for (u32 i = 1; i < block.size(); ++i)
-      count[i] = count[i - 1] + _popcnt64(block[i - 1]);
+      count[i] = count[i - 1] + _mm_popcnt_u64(block[i - 1]);
     zeros = rank0(n);
   }
 
   inline u32 rank0(u32 i) const { return i - rank1(i); }
   __attribute__((target("bmi2", "popcnt"))) inline u32 rank1(u32 i) const {
-    return count[i / w] + _popcnt64(_bzhi_u64(block[i / w], i % w));
+    return count[i / w] + _mm_popcnt_u64(_bzhi_u64(block[i / w], i % w));
   }
 };
 
@@ -45,7 +44,7 @@ struct WaveletMatrix {
   using u64 = uint64_t;
 
   struct BIT {
-    int N;
+    u32 N;
     vector<T> data;
 
     BIT() = default;
@@ -56,25 +55,25 @@ struct WaveletMatrix {
       data.assign(N + 1, 0);
     }
 
-    void add(int k, T x) {
-      for (++k; k <= N; k += k & -k) data[k] += x;
+    __attribute__((target("bmi"))) void add(u32 k, T x) {
+      for (++k; k <= N; k += _blsi_u32(k)) data[k] += x;
     }
 
-    T sum(int k) const {
+    __attribute__((target("bmi"))) T sum(u32 k) const {
       T ret = T();
-      for (; k; k -= k & -k) ret += data[k];
+      for (; k; k = _blsr_u32(k)) ret += data[k];
       return ret;
     }
 
-    inline T sum(int l, int r) const {
+    __attribute__((target("bmi"))) T sum(int l, int r) const {
       T ret = T();
       while (l != r) {
         if (l < r) {
           ret += data[r];
-          r -= r & -r;
+          r = _blsr_u32(r);
         } else {
           ret -= data[l];
-          l -= l & -l;
+          l = _blsr_u32(l);
         }
       }
       return ret;
@@ -103,9 +102,9 @@ struct WaveletMatrix {
     ys.erase(unique(begin(ys), end(ys)), end(ys));
     vector<u32> cur(n), nxt(n);
     for (int i = 0; i < n; ++i) cur[i] = yid(ps[i].second);
-    lg = __lg(max(int(n) - 1, 1)) + 1;
+    lg = __lg(max(n, 1)) + 1;
     bv.assign(lg, n);
-    bit.assign(lg + 1, n);
+    bit.assign(lg, n);
     for (int h = lg - 1; h >= 0; --h) {
       for (int i = 0; i < n; ++i)
         if ((cur[i] >> h) & 1) bv[h].set(i);
@@ -127,8 +126,6 @@ struct WaveletMatrix {
 
   void add(S x, S y, T val) {
     int i = lower_bound(begin(ps), end(ps), P{x, y}) - begin(ps);
-    assert(ps[i] == P(x, y));
-    bit[lg].add(i, val);
     for (int h = lg - 1; h >= 0; --h) {
       int i0 = bv[h].rank0(i);
       if (bv[h].get(i))
@@ -140,8 +137,6 @@ struct WaveletMatrix {
   }
 
   T sum(int l, int r, u32 upper) const {
-    trc(l, r, upper);
-    if (upper >= u32(1 << lg)) return bit[lg].sum(l, r);
     T res = 0;
     for (int h = lg; h--;) {
       int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);

@@ -1,7 +1,6 @@
 #pragma once
 #include <bits/stdc++.h>
 #include <immintrin.h>
-#include <x86intrin.h>
 using namespace std;
 
 struct bit_vector {
@@ -27,13 +26,13 @@ struct bit_vector {
 
   __attribute__((target("popcnt"))) void build() {
     for (u32 i = 1; i < block.size(); ++i)
-      count[i] = count[i - 1] + _popcnt64(block[i - 1]);
+      count[i] = count[i - 1] + _mm_popcnt_u64(block[i - 1]);
     zeros = rank0(n);
   }
 
   inline u32 rank0(u32 i) const { return i - rank1(i); }
   __attribute__((target("bmi2", "popcnt"))) inline u32 rank1(u32 i) const {
-    return count[i / w] + _popcnt64(_bzhi_u64(block[i / w], i % w));
+    return count[i / w] + _mm_popcnt_u64(_bzhi_u64(block[i / w], i % w));
   }
 };
 
