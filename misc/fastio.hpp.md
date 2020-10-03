@@ -24,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
     title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
@@ -97,7 +100,7 @@ data:
     path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -167,7 +170,7 @@ data:
   path: misc/fastio.hpp
   requiredBy: []
   timestamp: '2020-09-15 23:09:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
@@ -182,6 +185,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp

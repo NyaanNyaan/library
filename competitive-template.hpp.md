@@ -168,6 +168,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
@@ -409,7 +412,7 @@ data:
     path: verify/verify-yuki/yuki-1220.test.cpp
     title: verify/verify-yuki/yuki-1220.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n\
@@ -614,7 +617,7 @@ data:
   path: competitive-template.hpp
   requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
@@ -653,6 +656,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - verify/verify-unary-test/osak.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp

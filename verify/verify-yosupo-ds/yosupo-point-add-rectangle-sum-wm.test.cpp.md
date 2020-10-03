@@ -4,26 +4,23 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
-    path: fps/berlekamp-massey.hpp
-    title: fps/berlekamp-massey.hpp
+  - icon: ':x:'
+    path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
+    title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
   - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
+    PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
     links:
-    - https://judge.yosupo.jp/problem/find_linear_recurrence
-  bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\n\
+    - https://judge.yosupo.jp/problem/point_add_rectangle_sum
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n\
     \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
     \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
@@ -121,62 +118,69 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"modint/montgomery-modint.hpp\"\
-    \nusing namespace std;\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
-    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
-    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
-    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
-    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
-    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
-    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
-    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
-    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
-    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
-    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
-    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
-    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
-    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 3 \"fps/berlekamp-massey.hpp\"\nusing namespace std;\n\
-    \ntemplate <typename mint>\nvector<mint> BerlekampMassey(const vector<mint> &s)\
-    \ {\n  const int N = (int)s.size();\n  vector<mint> b, c;\n  b.reserve(N + 1);\n\
-    \  c.reserve(N + 1);\n  b.push_back(mint(1));\n  c.push_back(mint(1));\n  mint\
-    \ y = mint(1);\n  for (int ed = 1; ed <= N; ed++) {\n    int l = int(c.size()),\
-    \ m = int(b.size());\n    mint x = 0;\n    for (int i = 0; i < l; i++) x += c[i]\
-    \ * s[ed - l + i];\n    b.emplace_back(mint(0));\n    m++;\n    if (x == mint(0))\
-    \ continue;\n    mint freq = x / y;\n    if (l < m) {\n      auto tmp = c;\n \
-    \     c.insert(begin(c), m - l, mint(0));\n      for (int i = 0; i < m; i++) c[m\
-    \ - 1 - i] -= freq * b[m - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n\
-    \      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n\
-    \  }\n  reverse(begin(c), end(c));\n  return c;\n}\n#line 3 \"misc/fastio.hpp\"\
-    \nusing namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\n\
-    char ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char\
-    \ num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++)\
-    \ {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4\
-    \ + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\
-    \ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir -\
-    \ pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline\
-    \ void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void\
-    \ rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x)\
-    \ {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while\
-    \ (c < '-');\n  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 2 \"data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp\"\
+    \n//\n#line 4 \"data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp\"\n\nusing\
+    \ namespace std;\n\nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64\
+    \ = int64_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 w = 64;\n  vector<u64>\
+    \ block;\n  vector<u32> count;\n  u32 n, zeros;\n\n  inline u32 get(u32 i) const\
+    \ { return u32(block[i / w] >> (i % w)) & 1u; }\n  inline void set(u32 i) { block[i\
+    \ / w] |= 1LL << (i % w); }\n\n  bit_vector() {}\n  bit_vector(int _n) { init(_n);\
+    \ }\n  __attribute__((optimize(\"O3\", \"unroll-loops\"))) void init(int _n) {\n\
+    \    n = zeros = _n;\n    block.resize(n / w + 1, 0);\n    count.resize(block.size(),\
+    \ 0);\n  }\n\n  __attribute__((target(\"popcnt\"))) void build() {\n    for (u32\
+    \ i = 1; i < block.size(); ++i)\n      count[i] = count[i - 1] + _mm_popcnt_u64(block[i\
+    \ - 1]);\n    zeros = rank0(n);\n  }\n\n  inline u32 rank0(u32 i) const { return\
+    \ i - rank1(i); }\n  __attribute__((target(\"bmi2\", \"popcnt\"))) inline u32\
+    \ rank1(u32 i) const {\n    return count[i / w] + _mm_popcnt_u64(_bzhi_u64(block[i\
+    \ / w], i % w));\n  }\n};\n\ntemplate <typename S, typename T>\nstruct WaveletMatrix\
+    \ {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\
+    \n  struct BIT {\n    u32 N;\n    vector<T> data;\n\n    BIT() = default;\n  \
+    \  BIT(int size) { init(size); }\n\n    void init(int size) {\n      N = size;\n\
+    \      data.assign(N + 1, 0);\n    }\n\n    __attribute__((target(\"bmi\"))) void\
+    \ add(u32 k, T x) {\n      for (++k; k <= N; k += _blsi_u32(k)) data[k] += x;\n\
+    \    }\n\n    __attribute__((target(\"bmi\"))) T sum(u32 k) const {\n      T ret\
+    \ = T();\n      for (; k; k = _blsr_u32(k)) ret += data[k];\n      return ret;\n\
+    \    }\n\n    __attribute__((target(\"bmi\"))) T sum(int l, int r) const {\n \
+    \     T ret = T();\n      while (l != r) {\n        if (l < r) {\n          ret\
+    \ += data[r];\n          r = _blsr_u32(r);\n        } else {\n          ret -=\
+    \ data[l];\n          l = _blsr_u32(l);\n        }\n      }\n      return ret;\n\
+    \    }\n  };\n\n  using P = pair<S, S>;\n  int n, lg;\n  vector<bit_vector> bv;\n\
+    \  vector<BIT> bit;\n  vector<P> ps;\n  vector<S> ys;\n\n  WaveletMatrix() {}\n\
+    \n  void add_point(S x, S y) {\n    ps.emplace_back(x, y);\n    ys.emplace_back(y);\n\
+    \  }\n\n  __attribute__((optimize(\"O3\"))) void build() {\n    sort(begin(ps),\
+    \ end(ps));\n    ps.erase(unique(begin(ps), end(ps)), end(ps));\n    n = ps.size();\n\
+    \    sort(begin(ys), end(ys));\n    ys.erase(unique(begin(ys), end(ys)), end(ys));\n\
+    \    vector<u32> cur(n), nxt(n);\n    for (int i = 0; i < n; ++i) cur[i] = yid(ps[i].second);\n\
+    \    lg = __lg(max(n, 1)) + 1;\n    bv.assign(lg, n);\n    bit.assign(lg, n);\n\
+    \    for (int h = lg - 1; h >= 0; --h) {\n      for (int i = 0; i < n; ++i)\n\
+    \        if ((cur[i] >> h) & 1) bv[h].set(i);\n      bv[h].build();\n      array<decltype(begin(nxt)),\
+    \ 2> it{begin(nxt), begin(nxt) + bv[h].zeros};\n      for (int i = 0; i < n; ++i)\
+    \ *it[bv[h].get(i)]++ = cur[i];\n      swap(cur, nxt);\n    }\n  }\n\n  int xid(S\
+    \ x) const {\n    return lower_bound(\n               begin(ps), end(ps), make_pair(x,\
+    \ S()),\n               [](const P& a, const P& b) { return a.first < b.first;\
+    \ }) -\n           begin(ps);\n  }\n\n  int yid(S y) const { return lower_bound(begin(ys),\
+    \ end(ys), y) - begin(ys); }\n\n  void add(S x, S y, T val) {\n    int i = lower_bound(begin(ps),\
+    \ end(ps), P{x, y}) - begin(ps);\n    for (int h = lg - 1; h >= 0; --h) {\n  \
+    \    int i0 = bv[h].rank0(i);\n      if (bv[h].get(i))\n        i += bv[h].zeros\
+    \ - i0;\n      else\n        i = i0;\n      bit[h].add(i, val);\n    }\n  }\n\n\
+    \  T sum(int l, int r, u32 upper) const {\n    T res = 0;\n    for (int h = lg;\
+    \ h--;) {\n      int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if ((upper\
+    \ >> h) & 1) {\n        res += bit[h].sum(l0, r0);\n        l += bv[h].zeros -\
+    \ l0;\n        r += bv[h].zeros - r0;\n      } else {\n        l = l0, r = r0;\n\
+    \      }\n    }\n    return res;\n  }\n\n  T sum(S lx, S ly, S rx, S ry) const\
+    \ {\n    int l = xid(lx), r = xid(rx);\n    return sum(l, r, yid(ry)) - sum(l,\
+    \ r, yid(ly));\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\n\
+    namespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\n\
+    int pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
+    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
+    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
+    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load()\
+    \ {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf +\
+    \ pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n\
+    \  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c\
+    \ = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil +\
+    \ 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
+    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
     \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
     \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
     \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
@@ -196,35 +200,38 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 7 \"verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp\"\n\nvoid\
-    \ solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n  int N;\n  rd(N);\n\
-    \  V<mint> a(N);\n  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n  \
-    \  a[i] = n;\n  }\n  auto b = BerlekampMassey<mint>(a);\n  wtn(b.size() - 1);\n\
-    \  for (int i = 1; i < (int)b.size(); i++) {\n    if (i != 1) wt(' ');\n    wt((-b[i]).get());\n\
-    \  }\n  wt('\\n');\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/find_linear_recurrence\"\
-    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../fps/berlekamp-massey.hpp\"\n#include \"misc/fastio.hpp\"\n\n\
-    void solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n  int N;\n  rd(N);\n\
-    \  V<mint> a(N);\n  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n  \
-    \  a[i] = n;\n  }\n  auto b = BerlekampMassey<mint>(a);\n  wtn(b.size() - 1);\n\
-    \  for (int i = 1; i < (int)b.size(); i++) {\n    if (i != 1) wt(' ');\n    wt((-b[i]).get());\n\
-    \  }\n  wt('\\n');\n}\n"
+    #line 6 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp\"\
+    \n\nvoid solve() {\n  WaveletMatrix<int, ll> wm;\n\n  int N, Q;\n  rd(N, Q);\n\
+    \  vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) {\n\
+    \    rd(X[i], Y[i], W[i]);\n    wm.add_point(X[i], Y[i]);\n  }\n  rep(i, Q) {\n\
+    \    rd(c[i], s[i], t[i], u[i]);\n    if (c[i])\n      rd(v[i]);\n    else\n \
+    \     wm.add_point(s[i], t[i]);\n  }\n\n  wm.build();\n  rep(i, N) { wm.add(X[i],\
+    \ Y[i], W[i]); }\n  rep(i, Q) {\n    if (c[i]) {\n      out(wm.sum(s[i], t[i],\
+    \ u[i], v[i]));\n    } else\n      wm.add(s[i], t[i], u[i]);\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
+    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp\"\
+    \n#include \"../../misc/fastio.hpp\"\n\nvoid solve() {\n  WaveletMatrix<int, ll>\
+    \ wm;\n\n  int N, Q;\n  rd(N, Q);\n  vector<int> X(N), Y(N), W(N), c(Q), s(Q),\
+    \ t(Q), u(Q), v(Q);\n  rep(i, N) {\n    rd(X[i], Y[i], W[i]);\n    wm.add_point(X[i],\
+    \ Y[i]);\n  }\n  rep(i, Q) {\n    rd(c[i], s[i], t[i], u[i]);\n    if (c[i])\n\
+    \      rd(v[i]);\n    else\n      wm.add_point(s[i], t[i]);\n  }\n\n  wm.build();\n\
+    \  rep(i, N) { wm.add(X[i], Y[i], W[i]); }\n  rep(i, Q) {\n    if (c[i]) {\n \
+    \     out(wm.sum(s[i], t[i], u[i], v[i]));\n    } else\n      wm.add(s[i], t[i],\
+    \ u[i]);\n  }\n}"
   dependsOn:
   - competitive-template.hpp
-  - modint/montgomery-modint.hpp
-  - fps/berlekamp-massey.hpp
+  - data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
   - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   requiredBy: []
-  timestamp: '2020-09-15 23:09:15+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-10-04 03:43:15+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
-- /verify/verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp.html
-title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
 ---

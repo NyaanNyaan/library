@@ -26,7 +26,7 @@ data:
     - icon: ':warning:'
       path: bundle.py
       title: bundle.py
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -105,7 +105,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
-    - icon: ':warning:'
+    - icon: ':x:'
       path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
       title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -310,7 +310,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -707,6 +707,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
