@@ -43,7 +43,7 @@ struct WaveletMatrix {
   using i64 = int64_t;
   using u64 = uint64_t;
 
-  u32 n, lg;
+  int n, lg;
   vector<T> a;
   vector<bit_vector> bv;
 
@@ -54,12 +54,12 @@ struct WaveletMatrix {
     lg = __lg(max<T>(*max_element(begin(a), end(a)), 1)) + 1;
     bv.assign(lg, n);
     vector<T> cur = a, nxt(n);
-    for (u32 h = lg - 1; h >= 0; --h) {
-      for (u32 i = 0; i < n; ++i)
+    for (int h = lg - 1; h >= 0; --h) {
+      for (int i = 0; i < n; ++i)
         if ((cur[i] >> h) & 1) bv[h].set(i);
       bv[h].build();
       array<decltype(begin(nxt)), 2> it{begin(nxt), begin(nxt) + bv[h].zeros};
-      for (u32 i = 0; i < n; ++i) *it[bv[h].get(i)]++ = cur[i];
+      for (int i = 0; i < n; ++i) *it[bv[h].get(i)]++ = cur[i];
       swap(cur, nxt);
     }
     return;
@@ -81,7 +81,7 @@ struct WaveletMatrix {
   // return a[k]
   T access(u32 k) const {
     T ret = 0;
-    for (u32 h = lg - 1; h >= 0; --h) {
+    for (int h = lg - 1; h >= 0; --h) {
       u32 f = bv[h].get(k);
       ret |= f ? T(1) << h : 0;
       k = f ? bv[h].rank1(k) + bv[h].zeros : bv[h].rank0(k);
@@ -92,7 +92,7 @@ struct WaveletMatrix {
   // k-th (0-indexed) smallest number in a[l, r)
   T kth_smallest(u32 l, u32 r, u32 k) const {
     T res = 0;
-    for (u32 h = lg - 1; h >= 0; --h) {
+    for (int h = lg - 1; h >= 0; --h) {
       u32 l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);
       if (k < r0 - l0)
         l = l0, r = r0;
@@ -126,6 +126,7 @@ struct WaveletMatrix {
         r = l0;
       }
     }
+    return ret;
   }
 
   int range_freq(int l, int r, T lower, T upper) {
