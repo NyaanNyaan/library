@@ -105,6 +105,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
+    - icon: ':warning:'
+      path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
+      title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/rectangle-sum.hpp
       title: "\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728)"
