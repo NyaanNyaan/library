@@ -39,8 +39,8 @@ struct HashMap {
         f[hash] = 1;
       }
     }
-    delete[] (keys);
-    delete[] (vals);
+    delete[](keys);
+    delete[](vals);
     keys = k;
     vals = v;
     flag.swap(f);
@@ -57,9 +57,23 @@ struct HashMap {
         shift(64 - __lg(cap)),
         DefaultValue(Val()) {}
 
+  // copy constructor
+  HashMap(const HashMap& obj) {
+    cap = obj.cap;
+    s = obj.s;
+    flag = obj.flag;
+    r = obj.r;
+    shift = obj.shift;
+    DefaultValue = obj.DefaultValue;
+    keys = new Key[cap];
+    vals = new Val[cap];
+    memcpy(keys, obj.keys, sizeof(Key) * cap);
+    memcpy(vals, obj.vals, sizeof(Val) * cap);
+  }
+
   ~HashMap() {
-    delete[] (keys);
-    delete[] (vals);
+    delete[](keys);
+    delete[](vals);
   }
 
   Val& operator[](const Key& i) {
@@ -103,6 +117,24 @@ struct HashMap {
 
   // set default_value
   void set_default(const Val& val) { DefaultValue = val; }
+
+  // swap
+  friend void swap(HashMap<Key, Val>& a, HashMap<Key, Val>& b) {
+    using std::swap;
+    swap(a.cap, b.cap);
+    swap(a.s, b.s);
+    swap(a.keys, b.keys);
+    swap(a.vals, b.vals);
+    swap(a.flag, b.flag);
+    swap(a.r, b.r);
+    swap(a.shift, b.shift);
+    swap(a.DefaultValue, b.DefaultValue);
+  }
+
+  HashMap<Key, Val>& operator=(HashMap<Key, Val> b) {
+    swap(*this, b);
+    return *this;
+  }
 };
 
 /**
