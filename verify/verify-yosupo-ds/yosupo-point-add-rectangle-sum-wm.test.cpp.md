@@ -120,40 +120,40 @@ data:
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 2 \"data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp\"\
     \n//\n#line 4 \"data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp\"\n\nusing\
-    \ namespace std;\n\nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64\
-    \ = int64_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 w = 64;\n  vector<u64>\
-    \ block;\n  vector<u32> count;\n  u32 n, zeros;\n\n  inline u32 get(u32 i) const\
-    \ { return u32(block[i / w] >> (i % w)) & 1u; }\n  inline void set(u32 i) { block[i\
-    \ / w] |= 1LL << (i % w); }\n\n  bit_vector() {}\n  bit_vector(int _n) { init(_n);\
-    \ }\n  __attribute__((optimize(\"O3\", \"unroll-loops\"))) void init(int _n) {\n\
-    \    n = zeros = _n;\n    block.resize(n / w + 1, 0);\n    count.resize(block.size(),\
-    \ 0);\n  }\n\n  __attribute__((target(\"popcnt\"))) void build() {\n    for (u32\
-    \ i = 1; i < block.size(); ++i)\n      count[i] = count[i - 1] + _mm_popcnt_u64(block[i\
+    \ namespace std;\n\nstruct bit_vector {\n#pragma GCC target(\"bmi2\", \"popcnt\"\
+    )\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\n\
+    \  static constexpr u32 w = 64;\n  vector<u64> block;\n  vector<u32> count;\n\
+    \  u32 n, zeros;\n\n  inline u32 get(u32 i) const { return u32(block[i / w] >>\
+    \ (i % w)) & 1u; }\n  inline void set(u32 i) { block[i / w] |= 1LL << (i % w);\
+    \ }\n\n  bit_vector() {}\n  bit_vector(int _n) { init(_n); }\n  __attribute__((optimize(\"\
+    O3\", \"unroll-loops\"))) void init(int _n) {\n    n = zeros = _n;\n    block.resize(n\
+    \ / w + 1, 0);\n    count.resize(block.size(), 0);\n  }\n  \n  void build() {\n\
+    \    for (u32 i = 1; i < block.size(); ++i)\n      count[i] = count[i - 1] + _mm_popcnt_u64(block[i\
     \ - 1]);\n    zeros = rank0(n);\n  }\n\n  inline u32 rank0(u32 i) const { return\
-    \ i - rank1(i); }\n  __attribute__((target(\"bmi2\", \"popcnt\"))) inline u32\
-    \ rank1(u32 i) const {\n    return count[i / w] + _mm_popcnt_u64(_bzhi_u64(block[i\
-    \ / w], i % w));\n  }\n};\n\ntemplate <typename S, typename T>\nstruct WaveletMatrix\
-    \ {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\
-    \n  struct BIT {\n    u32 N;\n    vector<T> data;\n\n    BIT() = default;\n  \
-    \  BIT(int size) { init(size); }\n\n    void init(int size) {\n      N = size;\n\
-    \      data.assign(N + 1, 0);\n    }\n\n    __attribute__((target(\"bmi\"))) void\
-    \ add(u32 k, T x) {\n      for (++k; k <= N; k += _blsi_u32(k)) data[k] += x;\n\
-    \    }\n\n    __attribute__((target(\"bmi\"))) T sum(u32 k) const {\n      T ret\
-    \ = T();\n      for (; k; k = _blsr_u32(k)) ret += data[k];\n      return ret;\n\
-    \    }\n\n    __attribute__((target(\"bmi\"))) T sum(int l, int r) const {\n \
-    \     T ret = T();\n      while (l != r) {\n        if (l < r) {\n          ret\
-    \ += data[r];\n          r = _blsr_u32(r);\n        } else {\n          ret -=\
-    \ data[l];\n          l = _blsr_u32(l);\n        }\n      }\n      return ret;\n\
-    \    }\n  };\n\n  using P = pair<S, S>;\n  int n, lg;\n  vector<bit_vector> bv;\n\
-    \  vector<BIT> bit;\n  vector<P> ps;\n  vector<S> ys;\n\n  WaveletMatrix() {}\n\
-    \n  void add_point(S x, S y) {\n    ps.emplace_back(x, y);\n    ys.emplace_back(y);\n\
-    \  }\n\n  __attribute__((optimize(\"O3\"))) void build() {\n    sort(begin(ps),\
-    \ end(ps));\n    ps.erase(unique(begin(ps), end(ps)), end(ps));\n    n = ps.size();\n\
-    \    sort(begin(ys), end(ys));\n    ys.erase(unique(begin(ys), end(ys)), end(ys));\n\
-    \    vector<u32> cur(n), nxt(n);\n    for (int i = 0; i < n; ++i) cur[i] = yid(ps[i].second);\n\
-    \    lg = __lg(max(n, 1)) + 1;\n    bv.assign(lg, n);\n    bit.assign(lg, n);\n\
-    \    for (int h = lg - 1; h >= 0; --h) {\n      for (int i = 0; i < n; ++i)\n\
-    \        if ((cur[i] >> h) & 1) bv[h].set(i);\n      bv[h].build();\n      array<decltype(begin(nxt)),\
+    \ i - rank1(i); }\n\n  inline u32 rank1(u32 i) const {\n    return count[i / w]\
+    \ + _mm_popcnt_u64(_bzhi_u64(block[i / w], i % w));\n  }\n};\n\ntemplate <typename\
+    \ S, typename T>\nstruct WaveletMatrix {\n  using u32 = uint32_t;\n  using i64\
+    \ = int64_t;\n  using u64 = uint64_t;\n\n  struct BIT {\n    u32 N;\n    vector<T>\
+    \ data;\n\n    BIT() = default;\n    BIT(int size) { init(size); }\n\n    void\
+    \ init(int size) {\n      N = size;\n      data.assign(N + 1, 0);\n    }\n\n \
+    \   __attribute__((target(\"bmi\"))) void add(u32 k, T x) {\n      for (++k; k\
+    \ <= N; k += _blsi_u32(k)) data[k] += x;\n    }\n\n    __attribute__((target(\"\
+    bmi\"))) T sum(u32 k) const {\n      T ret = T();\n      for (; k; k = _blsr_u32(k))\
+    \ ret += data[k];\n      return ret;\n    }\n\n    __attribute__((target(\"bmi\"\
+    ))) T sum(int l, int r) const {\n      T ret = T();\n      while (l != r) {\n\
+    \        if (l < r) {\n          ret += data[r];\n          r = _blsr_u32(r);\n\
+    \        } else {\n          ret -= data[l];\n          l = _blsr_u32(l);\n  \
+    \      }\n      }\n      return ret;\n    }\n  };\n\n  using P = pair<S, S>;\n\
+    \  int n, lg;\n  vector<bit_vector> bv;\n  vector<BIT> bit;\n  vector<P> ps;\n\
+    \  vector<S> ys;\n\n  WaveletMatrix() {}\n\n  void add_point(S x, S y) {\n   \
+    \ ps.emplace_back(x, y);\n    ys.emplace_back(y);\n  }\n\n  __attribute__((optimize(\"\
+    O3\"))) void build() {\n    sort(begin(ps), end(ps));\n    ps.erase(unique(begin(ps),\
+    \ end(ps)), end(ps));\n    n = ps.size();\n    sort(begin(ys), end(ys));\n   \
+    \ ys.erase(unique(begin(ys), end(ys)), end(ys));\n    vector<u32> cur(n), nxt(n);\n\
+    \    for (int i = 0; i < n; ++i) cur[i] = yid(ps[i].second);\n    lg = __lg(max(n,\
+    \ 1)) + 1;\n    bv.assign(lg, n);\n    bit.assign(lg, n);\n    for (int h = lg\
+    \ - 1; h >= 0; --h) {\n      for (int i = 0; i < n; ++i)\n        if ((cur[i]\
+    \ >> h) & 1) bv[h].set(i);\n      bv[h].build();\n      array<decltype(begin(nxt)),\
     \ 2> it{begin(nxt), begin(nxt) + bv[h].zeros};\n      for (int i = 0; i < n; ++i)\
     \ *it[bv[h].get(i)]++ = cur[i];\n      swap(cur, nxt);\n    }\n  }\n\n  int xid(S\
     \ x) const {\n    return lower_bound(\n               begin(ps), end(ps), make_pair(x,\
@@ -225,7 +225,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   requiredBy: []
-  timestamp: '2020-10-04 03:43:15+09:00'
+  timestamp: '2020-10-05 18:22:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
