@@ -34,7 +34,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unary-test/osak.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"verify/verify-unit-test/osak.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 1 \"competitive-template.hpp\"\
     \n#pragma region kyopro_template\n#define Nyaan_template\n#include <immintrin.h>\n\
     #include <bits/stdc++.h>\n#define pb push_back\n#define eb emplace_back\n#define\
@@ -248,7 +248,7 @@ data:
     \   if (pr[j] == lp[i]) break;\n    }\n  }\n  return lp;\n}\n#line 6 \"prime/osak.hpp\"\
     \n\ntemplate<int MAX>\nvector<int> osak(int n){\n  static vector<int> f = factor_enumerate(MAX);\n\
     \  vector<int> ret;\n  while(f[n]) ret.push_back(f[n]), n /= f[n];\n  return ret;\n\
-    }\n#line 6 \"verify/verify-unary-test/osak.test.cpp\"\n\nunsigned long long rng2()\
+    }\n#line 6 \"verify/verify-unit-test/osak.test.cpp\"\n\nunsigned long long rng2()\
     \ {\n  static unsigned long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
     \  .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nvoid\
@@ -284,15 +284,15 @@ data:
   - prime/osak.hpp
   - prime/factor-enumerate.hpp
   isVerificationFile: true
-  path: verify/verify-unary-test/osak.test.cpp
+  path: verify/verify-unit-test/osak.test.cpp
   requiredBy: []
-  timestamp: '2020-09-19 20:58:03+09:00'
+  timestamp: '2020-10-06 19:07:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unary-test/osak.test.cpp
+documentation_of: verify/verify-unit-test/osak.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unary-test/osak.test.cpp
-- /verify/verify/verify-unary-test/osak.test.cpp.html
-title: verify/verify-unary-test/osak.test.cpp
+- /verify/verify/verify-unit-test/osak.test.cpp
+- /verify/verify/verify-unit-test/osak.test.cpp.html
+title: verify/verify-unit-test/osak.test.cpp
 ---

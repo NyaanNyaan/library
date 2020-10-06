@@ -13,8 +13,8 @@ data:
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-unary-test/osak.test.cpp
-    title: verify/verify-unary-test/osak.test.cpp
+    path: verify/verify-unit-test/osak.test.cpp
+    title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
@@ -56,7 +56,7 @@ data:
   timestamp: '2020-09-19 00:42:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unary-test/osak.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp

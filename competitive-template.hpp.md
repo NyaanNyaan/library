@@ -124,8 +124,8 @@ data:
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-unary-test/osak.test.cpp
-    title: verify/verify-unary-test/osak.test.cpp
+    path: verify/verify-unit-test/osak.test.cpp
+    title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
@@ -625,6 +625,7 @@ data:
   - verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
   - verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
@@ -657,7 +658,6 @@ data:
   - verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-  - verify/verify-unary-test/osak.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp

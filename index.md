@@ -114,7 +114,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/segment-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Segment Tree)"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/wavelet-matrix.hpp
       title: data-structure-2d/wavelet-matrix.hpp
   - name: flow
@@ -658,11 +658,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
-  - name: verify/verify-unary-test
+  - name: verify/verify-unit-test
     pages:
     - icon: ':heavy_check_mark:'
-      path: verify/verify-unary-test/osak.test.cpp
-      title: verify/verify-unary-test/osak.test.cpp
+      path: verify/verify-unit-test/osak.test.cpp
+      title: verify/verify-unit-test/osak.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/wavelet-matrix.test.cpp
+      title: verify/verify-unit-test/wavelet-matrix.test.cpp
   - name: verify/verify-yosupo-ds
     pages:
     - icon: ':heavy_check_mark:'
