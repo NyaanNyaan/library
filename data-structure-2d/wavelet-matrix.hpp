@@ -31,7 +31,7 @@ struct bit_vector {
   }
 
   inline u32 rank0(u32 i) const { return i - rank1(i); }
-  __attribute__((target("bmi2", "popcnt"))) inline u32 rank1(u32 i) const {
+  __attribute__((target("bmi2,popcnt"))) inline u32 rank1(u32 i) const {
     return count[i / w] + _mm_popcnt_u64(_bzhi_u64(block[i / w], i % w));
   }
 };
@@ -112,6 +112,7 @@ struct WaveletMatrix {
 
   // count i s.t. (l <= i < r) && (v[i] < upper)
   int range_freq(int l, int r, T upper) {
+    if(upper >= (T(1) << lg)) return r - l;
     int ret = 0;
     for (int h = lg - 1; h >= 0; --h) {
       bool f = (upper >> h) & 1;
@@ -122,7 +123,7 @@ struct WaveletMatrix {
         r += bv[h].zeros - r0;
       } else {
         l = l0;
-        r = l0;
+        r = r0;
       }
     }
     return ret;
