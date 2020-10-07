@@ -4,20 +4,21 @@ using namespace std;
 
 template <typename T, typename F>
 struct RandomizedBinarySearchTree {
-  unsigned long long rng() {
-    static unsigned long long x_ = 88172645463325252ULL;
+  uint64_t rng() {
+    static uint64_t x_ = 88172645463325252ULL;
     x_ = x_ ^ (x_ << 7);
-    return x_ = x_ ^ (x_ >> 9);
+    x_ = x_ ^ (x_ >> 9);
+    return x_ & 0xFFFFFFFFull;
   }
 
   struct Node {
     Node *l, *r;
-    int cnt;
     T key, sum;
+    int cnt;
 
     Node() {}
 
-    Node(const T &k) : l(nullptr), r(nullptr), cnt(1), key(k), sum(k) {}
+    Node(const T &k) : l(nullptr), r(nullptr), key(k), sum(k), cnt(1) {}
   };
 
   vector<Node> pool;
@@ -28,7 +29,7 @@ struct RandomizedBinarySearchTree {
   RandomizedBinarySearchTree(const F &f_, const T &I_, int pool_size = 2000000)
       : pool(pool_size), ptr(0), f(f_), I(I_) {}
 
-  Node *my_new(const T &k) { return &(pool[ptr++] = Node(k, I)); }
+  Node *my_new(const T &k) { return &(pool[ptr++] = Node(k)); }
 
   inline int count(const Node *t) { return t ? t->cnt : 0; }
 
@@ -37,11 +38,12 @@ struct RandomizedBinarySearchTree {
   Node *update(Node *t) {
     t->cnt = count(t->l) + count(t->r) + 1;
     t->sum = f(f(sum(t->l), t->key), sum(t->r));
+    return t;
   }
 
   Node *merge(Node *l, Node *r) {
     if (!l || !r) return l ? l : r;
-    if (rng() % (l->cnt + r->cnt) < l->cnt) {
+    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {
       l->r = merge(l->r, r);
       return update(l);
     } else {
@@ -92,4 +94,6 @@ struct RandomizedBinarySearchTree {
   }
 
   int size(Node *t) { return count(t); }
+
+  Node *make() { return nullptr; }
 };
