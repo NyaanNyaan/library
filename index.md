@@ -21,6 +21,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: atcoder/two-sat.hpp
       title: atcoder/two-sat.hpp
+  - name: binary-search-tree
+    pages:
+    - icon: ':warning:'
+      path: binary-search-tree/randomized-binary-search-tree.hpp
+      title: binary-search-tree/randomized-binary-search-tree.hpp
+    - icon: ':warning:'
+      path: binary-search-tree/rbst-ordered-set.hpp
+      title: binary-search-tree/rbst-ordered-set.hpp
   - name: .
     pages:
     - icon: ':warning:'
@@ -61,9 +69,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/persistent-union-find.hpp
       title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
-    - icon: ':warning:'
-      path: data-structure/randomized-binary-search-tree.hpp
-      title: data-structure/randomized-binary-search-tree.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure/range-sum-range-add-bit.hpp
       title: data-structure/range-sum-range-add-bit.hpp
