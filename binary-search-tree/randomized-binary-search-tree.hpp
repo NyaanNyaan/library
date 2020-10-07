@@ -31,7 +31,7 @@ struct RandomizedBinarySearchTree {
 
   Node *my_new(const T &k) { return &(pool[ptr++] = Node(k)); }
 
-  inline int count(const Node *t) { return t ? t->cnt : 0; }
+  inline int count(const Node *t){ return t ? t->cnt : 0; }
 
   inline T sum(const Node *t) { return t ? t->sum : I; }
 
