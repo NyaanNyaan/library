@@ -27,6 +27,9 @@ data:
       path: binary-search-tree/randomized-binary-search-tree.hpp
       title: binary-search-tree/randomized-binary-search-tree.hpp
     - icon: ':warning:'
+      path: binary-search-tree/rbst-ordered-map.hpp
+      title: binary-search-tree/rbst-ordered-map.hpp
+    - icon: ':warning:'
       path: binary-search-tree/rbst-ordered-set.hpp
       title: binary-search-tree/rbst-ordered-set.hpp
   - name: .
