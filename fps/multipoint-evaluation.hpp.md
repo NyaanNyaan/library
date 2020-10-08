@@ -176,8 +176,8 @@ data:
   timestamp: '2020-08-21 15:57:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
 documentation_of: fps/multipoint-evaluation.hpp
 layout: document
 redirect_from:

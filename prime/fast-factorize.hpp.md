@@ -186,8 +186,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
 documentation_of: prime/fast-factorize.hpp
 layout: document
 redirect_from:

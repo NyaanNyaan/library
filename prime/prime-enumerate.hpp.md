@@ -43,8 +43,8 @@ data:
   timestamp: '2020-09-18 02:20:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
 documentation_of: prime/prime-enumerate.hpp
 layout: document
 redirect_from:

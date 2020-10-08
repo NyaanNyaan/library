@@ -187,9 +187,9 @@ data:
   timestamp: '2020-08-09 23:27:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+  - verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
 documentation_of: string/suffix-array.hpp
 layout: document
 redirect_from:

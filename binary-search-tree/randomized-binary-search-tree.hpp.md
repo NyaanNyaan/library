@@ -3,9 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: binary-search-tree/rbst-ordered-map.hpp
-    title: binary-search-tree/rbst-ordered-map.hpp
-  - icon: ':warning:'
     path: binary-search-tree/rbst-ordered-set.hpp
     title: binary-search-tree/rbst-ordered-set.hpp
   _extendedVerifiedWith: []
@@ -79,7 +76,6 @@ data:
   isVerificationFile: false
   path: binary-search-tree/randomized-binary-search-tree.hpp
   requiredBy:
-  - binary-search-tree/rbst-ordered-map.hpp
   - binary-search-tree/rbst-ordered-set.hpp
   timestamp: '2020-10-08 01:49:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS

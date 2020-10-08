@@ -40,10 +40,10 @@ data:
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
+  - modulo/strassen.hpp
   - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
   - misc/simulated-annealing.hpp
-  - modulo/strassen.hpp
   - fps/fps-composition-fast.hpp
   timestamp: '2020-07-28 11:29:32+09:00'
   verificationStatus: LIBRARY_ALL_AC

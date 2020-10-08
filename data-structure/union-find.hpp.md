@@ -39,8 +39,8 @@ data:
   timestamp: '2020-07-28 11:29:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
 documentation_of: data-structure/union-find.hpp
 layout: document
 redirect_from:

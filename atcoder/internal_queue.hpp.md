@@ -36,8 +36,8 @@ data:
   isVerificationFile: false
   path: atcoder/internal_queue.hpp
   requiredBy:
-  - atcoder/maxflow.hpp
   - flow/flow-on-bipartite-graph.hpp
+  - atcoder/maxflow.hpp
   timestamp: '2020-09-08 18:51:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
