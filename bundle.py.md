@@ -24,12 +24,12 @@ data:
     \ mode='w', encoding='utf-8')\nwith open(args[1], mode='r', encoding='utf-8')\
     \ as f:\n    lines = f.readlines()   \n    for line in lines:\n        buf.write(line)\n\
     \        # #include\u540C\u58EB\u306F1\u884C\u7A7A\u3051\u308B\n        if len(line)\
-    \ > 0 and line[0] == '#':\n            buf.write('\\n')\nbuf.close()\n\nimport\
-    \ datetime\nnw = datetime.datetime.now()\nprint(\"/**\")\nprint(\" *  date : \"\
-    \ + nw.strftime(\"%Y-%m-%d %H:%M:%S\"))\nprint(\" */\")\nprint()\ncmd = \"oj-bundle\
-    \ \" + buffer\nsrc = subprocess.check_output(cmd.split()).decode(\"utf-8\")\n\
-    lines = src.split('\\n')\nfor line in lines:\n    if not re.match('^#line', line):\n\
-    \        print(line, end='')\n"
+    \ > 8 and line[:8] == '#include':\n            buf.write('\\n')\nbuf.close()\n\
+    \nimport datetime\nnw = datetime.datetime.now()\nprint(\"/**\")\nprint(\" *  date\
+    \ : \" + nw.strftime(\"%Y-%m-%d %H:%M:%S\"))\nprint(\" */\")\nprint()\ncmd = \"\
+    oj-bundle \" + buffer\nsrc = subprocess.check_output(cmd.split()).decode(\"utf-8\"\
+    )\nlines = src.split('\\n')\nfor line in lines:\n    if not re.match('^#line',\
+    \ line):\n        print(line, end='')\n"
   dependsOn: []
   isVerificationFile: false
   path: bundle.py
