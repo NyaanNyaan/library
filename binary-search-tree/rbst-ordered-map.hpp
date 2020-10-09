@@ -64,8 +64,8 @@ struct OrderedMap {
     return res;
   }
 
-  pair<NodePtr, NodePtr> split(NodePtr t, const Key &x,int i = -1) {
-    if(i == -1){
+  pair<NodePtr, NodePtr> split(NodePtr t, const Key &x, int i = -1) {
+    if (i == -1) {
       i = 0;
       while (t) {
         buf[i++] = t;
@@ -111,8 +111,8 @@ struct OrderedMap {
   void insert(const Key &x, const Val &y) {
     NodePtr p = t;
     int i = 0;
-    while(p) {
-      if(pool[p].key == x) {
+    while (p) {
+      if (pool[p].key == x) {
         pool[p].val = y;
         return;
       }
@@ -140,4 +140,5 @@ typename OrderedMap<Key, Val, S>::Node *OrderedMap<Key, Val, S>::pool = nullptr;
 template <typename Key, typename Val, int S>
 int OrderedMap<Key, Val, S>::ptr = 1;
 template <typename Key, typename Val, int S>
-typename OrderedMap<Key, Val, S>::NodePtr OrderedMap<Key, Val, S>::buf[128] = {};
+typename OrderedMap<Key, Val, S>::NodePtr OrderedMap<Key, Val, S>::buf[128] =
+    {};

@@ -22,7 +22,7 @@ with open(args[1], mode='r', encoding='utf-8') as f:
     for line in lines:
         buf.write(line)
         # #include同士は1行空ける
-        if len(line) > 0 and line[0] == '#':
+        if len(line) > 8 and line[:8] == '#include':
             buf.write('\n')
 buf.close()
 
