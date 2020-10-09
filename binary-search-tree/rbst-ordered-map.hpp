@@ -2,149 +2,142 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename Key, typename Val, int S = 2000000, bool MULTI = false>
+template <typename Key, typename Val, int S = 2000000>
 struct OrderedMap {
-  struct RandomizedBinarySearchTree {
-    uint64_t rng() {
-      static uint64_t x_ = 88172645463325252ULL;
-      x_ = x_ ^ (x_ << 7);
-      x_ = x_ ^ (x_ >> 9);
-      return x_ & 0xFFFFFFFFull;
-    }
+  uint64_t rng() {
+    static uint64_t x_ = 88172645463325252ULL;
+    x_ = x_ ^ (x_ << 7);
+    x_ = x_ ^ (x_ >> 9);
+    return x_ & 0xFFFFFFFFull;
+  }
 
-    struct Node {
-      Node *l, *r;
-      Key key;
-      Val val;
-      int cnt;
-
-      Node() {}
-
-      Node(const Key &k, const Val &v)
-          : l(nullptr), r(nullptr), key(k), val(v), cnt(1) {}
-    };
-
-    vector<Node> pool;
-    int ptr;
-
-    RandomizedBinarySearchTree(int pool_size = 2000000)
-        : pool(pool_size), ptr(0) {}
-
-    Node *my_new(const Key &k, const Val &v) {
-      return &(pool[ptr++] = Node(k, v));
-    }
-
-    inline int count(const Node *t) { return t ? t->cnt : 0; }
-
-    inline Node *update(Node *t) {
-      t->cnt = count(t->l) + count(t->r) + 1;
-      return t;
-    }
-
-    Node *merge(Node *l, Node *r) {
-      if (!l || !r) return l ? l : r;
-
-      if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {
-        l->r = merge(l->r, r);
-        return update(l);
-      } else {
-        r->l = merge(l, r->l);
-        return update(r);
-      }
-    }
-
-    pair<Node *, Node *> split(Node *t, int k) {
-      if (!t) return {nullptr, nullptr};
-      if (k <= count(t->l)) {
-        auto s = split(t->l, k);
-        t->l = s.second;
-        return {s.first, update(t)};
-      } else {
-        auto s = split(t->r, k - count(t->l) - 1);
-        t->r = s.first;
-        return {update(t), s.second};
-      }
-    }
-
-    void insert(Node *&t, int k, const Key &key, const Val &val) {
-      auto x = split(t, k);
-      t = merge(merge(x.first, my_new(key, val)), x.second);
-    }
-
-    void erase(Node *&t, int k) {
-      auto x = split(t, k);
-      t = merge(x.first, split(x.second, 1).second);
-    }
-
-    int size(Node *t) { return count(t); }
-
-    Node *make() { return nullptr; }
+  using NodePtr = uint32_t;
+  struct Node {
+    NodePtr l, r;
+    Key key;
+    Val val;
+    uint32_t cnt;
   };
 
-  using T = pair<Key, Val>;
-  using F = function<T(T, T)>;
-  using RBST = RandomizedBinarySearchTree;
-  using Node = typename RBST::Node;
+  NodePtr t;
+  static Node *pool;
+  static int ptr;
+  static NodePtr buf[128];
 
-  static RBST *rbst;
-  Node *t;
-
-  OrderedMap() {
-    if (!rbst) rbst = new RBST(S);
-    t = rbst->make();
-  }
-
-  pair<Node *, Node *> split(Node *t, const Key &x) {
-    if (!t) return {nullptr, nullptr};
-    if (x <= t->key) {
-      auto s = split(t->l, x);
-      t->l = s.second;
-      return {s.first, rbst->update(t)};
-    } else {
-      auto s = split(t->r, x);
-      t->r = s.first;
-      return {rbst->update(t), s.second};
+  OrderedMap() : t(0) {
+    if (!pool) {
+      pool = new Node[S + 10];
+      pool[0].l = pool[0].r = pool[0].cnt = 0;
     }
   }
 
-  Node *_find(const Key &x) {
-    Node *p = t;
+  NodePtr my_new(const Key &k, const Val &v) {
+    pool[ptr].l = pool[ptr].r = 0;
+    pool[ptr].key = k;
+    pool[ptr].val = v;
+    pool[ptr].cnt = 1;
+    return ptr++;
+  }
+
+  NodePtr merge(NodePtr l, NodePtr r) {
+    if (!l || !r) return l ? l : r;
+    NodePtr res;
+    NodePtr *pre = &res;
+    while (true) {
+      if (!l || !r) {
+        *pre = l ? l : r;
+        break;
+      }
+      uint32_t s = pool[l].cnt + pool[r].cnt;
+      if (uint32_t((rng() * s) >> 32) < pool[l].cnt) {
+        *pre = l;
+        pool[l].cnt = s + 1;
+        pre = &(pool[l].r);
+        l = pool[l].r;
+      } else {
+        *pre = r;
+        pool[r].cnt = s + 1;
+        pre = &(pool[r].l);
+        r = pool[r].l;
+      }
+    }
+    return res;
+  }
+
+  pair<NodePtr, NodePtr> split(NodePtr t, const Key &x,int i = -1) {
+    if(i == -1){
+      i = 0;
+      while (t) {
+        buf[i++] = t;
+        t = x <= pool[t].key ? pool[t].l : pool[t].r;
+      }
+    }
+    NodePtr l = 0, r = 0;
+    uint32_t pre = 0;
+    while (i--) {
+      NodePtr t = buf[i];
+      if (x <= pool[t].key) {
+        pool[t].l = r;
+        pool[t].cnt = (pre += pool[pool[t].r].cnt + 1);
+        r = t;
+      } else {
+        pool[t].r = l;
+        pool[t].cnt = (pre += pool[pool[t].l].cnt + 1);
+        l = t;
+      }
+    }
+    return {l, r};
+  }
+
+  NodePtr _find(const Key &x) const {
+    NodePtr p = t;
     while (p) {
-      if (x == p->key) return p;
-      p = x < p->key ? p->l : p->r;
+      if (x == pool[p].key) return p;
+      p = x < pool[p].key ? pool[p].l : pool[p].r;
     }
-    return nullptr;
+    return 0;
   }
 
   Val &operator[](const Key &x) {
-    Node *p = _find(x);
-    if (p) return p->val;
-    insert(x, Val());
-    return _find(x)->val;
+    NodePtr p = _find(x);
+    if (p) return pool[p].val;
+    NodePtr l, r;
+    tie(l, r) = split(t, x);
+    NodePtr n = my_new(x, Val());
+    t = merge(merge(l, n), r);
+    return pool[n].val;
   }
 
   void insert(const Key &x, const Val &y) {
-    Node *p = _find(x);
-    if (p) {
-      p->val = y;
-      return;
+    NodePtr p = t;
+    int i = 0;
+    while(p) {
+      if(pool[p].key == x) {
+        pool[p].val = y;
+        return;
+      }
+      buf[i++] = p;
+      p = x < pool[p].key ? pool[p].l : pool[p].r;
     }
-    Node *l, *r;
-    tie(l, r) = split(t, x);
-    t = rbst->merge(rbst->merge(l, rbst->my_new(x, y)), r);
+    NodePtr l, r;
+    tie(l, r) = split(t, x, i);
+    t = merge(merge(l, my_new(x, y)), r);
   }
 
   Val get(const Key &x) const {
-    Node *p = t;
+    NodePtr p = t;
     while (p) {
-      if (x == p->key) return p->val;
-      p = x < p->key ? p->l : p->r;
+      if (x == pool[p].key) return pool[p].val;
+      p = x < pool[p].key ? pool[p].l : pool[p].r;
     }
     return Val();
   }
 
-  int size() { return rbst->count(t); }
+  int size() { return pool[t].cnt; }
 };
-template <typename Key, typename Val, int S, bool MULTI>
-typename OrderedMap<Key, Val, S, MULTI>::RBST
-    *OrderedMap<Key, Val, S, MULTI>::rbst = nullptr;
+template <typename Key, typename Val, int S>
+typename OrderedMap<Key, Val, S>::Node *OrderedMap<Key, Val, S>::pool = nullptr;
+template <typename Key, typename Val, int S>
+int OrderedMap<Key, Val, S>::ptr = 1;
+template <typename Key, typename Val, int S>
+typename OrderedMap<Key, Val, S>::NodePtr OrderedMap<Key, Val, S>::buf[128] = {};
