@@ -50,6 +50,13 @@ vector<int> multiply(const vector<T> &s, const vector<T> &t, int mod) {
 
 template <typename mint>
 vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
+  if (a.size() == 0 && b.size() == 0) return {};
+  if (min<int>(a.size(), b.size()) < 128) {
+    vector<mint> ret(a.size() + b.size() - 1);
+    for (int i = 0; i < (int)a.size(); ++i)
+      for (int j = 0; j < (int)b.size(); ++j) ret[i + j] += a[i] * b[j];
+    return ret;
+  }
   vector<int> s(a.size()), t(b.size());
   for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();
   for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();

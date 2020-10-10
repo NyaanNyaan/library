@@ -4,9 +4,9 @@ using namespace std;
 
 #include "../modint/simd-montgomery.hpp"
 
-constexpr int SZ = 1 << 19;
-uint32_t buf1_[SZ * 2] __attribute__((aligned(64)));
-uint32_t buf2_[SZ * 2] __attribute__((aligned(64)));
+constexpr int SZ_FFT_BUF = 1 << 23;
+uint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));
+uint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));
 
 template <typename mint>
 struct NTT {
@@ -533,6 +533,7 @@ struct NTT {
         for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
       return s;
     }
+    assert(l <= SZ_FFT_BUF);
     int M = 4;
     while (M < l) M <<= 1;
     for (int i = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;

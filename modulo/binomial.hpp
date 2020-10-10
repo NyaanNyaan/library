@@ -6,6 +6,7 @@ template <typename T>
 struct Binomial {
   vector<T> fac_, finv_, inv_;
   Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {
+    assert(T::get_mod() != 0);
     MAX += 9;
     fac_[0] = finv_[0] = inv_[0] = 1;
     for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;

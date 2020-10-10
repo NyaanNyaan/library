@@ -1,26 +1,22 @@
 #pragma once
-#include "./formal-power-series.hpp"
 #include "../modulo/binomial.hpp"
+#include "./formal-power-series.hpp"
 
 template <typename mint>
 FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {
   using fps = FormalPowerSeries<mint>;
-  if((int)v.size() == 0) return fps{mint(1)};
-  sort(begin(v), end(v), [](fps &a, fps &b) { return a.size() < b.size(); });
-  vector<fps> w;
-  w.reserve(sz(v) / 2 + 1);
-  while ((int)v.size() > 1) {
-    for (int i = 0; i < (int)v.size(); i += 2) {
-      if (i + 1 == (int)v.size()) {
-        w.emplace_back(v.back());
-      } else {
-        w.emplace_back(v[i] * v[i + 1]);
-      }
-    }
-    swap(v, w);
-    w.clear();
+  if ((int)v.size() == 0) return fps{mint(1)};
+  sort(begin(v), end(v), [](fps& a, fps& b) { return a.size() < b.size(); });
+  queue<fps> q;
+  for (auto& f : v) q.push(f);
+  while ((int)q.size() > 1) {
+    fps a = q.front();
+    q.pop();
+    fps b = q.front();
+    q.pop();
+    q.push(a * b);
   }
-  return v[0];
+  return q.front();
 }
 
 template <typename mint>
@@ -37,4 +33,21 @@ template <typename mint>
 FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {
   FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};
   return std::move(ret);
+}
+
+// f *= (1 + c x^n)
+template <typename mint>
+void sparse_mul(FormalPowerSeries<mint>& f, int n, mint c, int expand = true) {
+  if (expand) f.resize(f.size() + n);
+  for (int i = (int)f.size() - 1; i >= 0; --i) {
+    if (i - n >= 0) f[i] += f[i - n] * c;
+  }
+}
+
+// f /= (1 + c x^n)
+template <typename mint>
+void sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {
+  for (int i = 0; i < (int)f.size(); ++i) {
+    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;
+  }
 }
