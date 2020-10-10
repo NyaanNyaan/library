@@ -10,11 +10,11 @@ data:
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/fps/fps-taylor-shift.md
     document_title: "\u5E73\u884C\u79FB\u52D5"
@@ -128,7 +128,7 @@ data:
   path: fps/taylor-shift.hpp
   requiredBy: []
   timestamp: '2020-10-11 00:26:38+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 documentation_of: fps/taylor-shift.hpp

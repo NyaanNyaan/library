@@ -7,11 +7,11 @@ data:
       \u30E9\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/fps/differential-equation.md
     document_title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
@@ -105,7 +105,7 @@ data:
   path: fps/differential-equation.hpp
   requiredBy: []
   timestamp: '2020-08-21 15:57:02+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0963.test.cpp
 documentation_of: fps/differential-equation.hpp

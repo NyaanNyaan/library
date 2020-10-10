@@ -10,14 +10,14 @@ data:
     title: modint/montgomery-modint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/fps/fps-circular.md
     document_title: "\u4E09\u89D2\u95A2\u6570"
@@ -200,7 +200,7 @@ data:
   path: fps/fps-circular.hpp
   requiredBy: []
   timestamp: '2020-08-28 23:20:42+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
