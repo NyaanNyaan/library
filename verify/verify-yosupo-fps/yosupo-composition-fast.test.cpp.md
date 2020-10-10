@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   _extendedRequiredBy: []
@@ -616,10 +616,10 @@ data:
     \ i < K; i++) ans += (QP[i] * TS[i]).pre(N);\n  }\n  return ans;\n}\n\n/**\n *\
     \ @brief \u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )\n */\n#line 3 \"\
     fps/ntt-friendly-fps.hpp\"\nusing namespace std;\n\n#line 3 \"ntt/ntt-avx2.hpp\"\
-    \nusing namespace std;\n\n#line 6 \"ntt/ntt-avx2.hpp\"\n\nconstexpr int SZ = 1\
-    \ << 19;\nuint32_t buf1_[SZ * 2] __attribute__((aligned(64)));\nuint32_t buf2_[SZ\
-    \ * 2] __attribute__((aligned(64)));\n\ntemplate <typename mint>\nstruct NTT {\n\
-    \  static constexpr uint32_t get_pr() {\n    uint32_t mod = mint::get_mod();\n\
+    \nusing namespace std;\n\n#line 6 \"ntt/ntt-avx2.hpp\"\n\nconstexpr int SZ_FFT_BUF\
+    \ = 1 << 23;\nuint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));\nuint32_t\
+    \ buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\ntemplate <typename mint>\n\
+    struct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t mod = mint::get_mod();\n\
     \    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int idx = 0;\n    u64 m\
     \ = mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n      if (m % i == 0) {\n\
     \        ds[idx++] = i;\n        while (m % i == 0) m /= i;\n      }\n    }\n\
@@ -902,19 +902,20 @@ data:
     \ = a.size() + b.size() - 1;\n    if (min<int>(a.size(), b.size()) <= 40) {\n\
     \      vector<mint> s(l);\n      for (int i = 0; i < (int)a.size(); ++i)\n   \
     \     for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];\n     \
-    \ return s;\n    }\n    int M = 4;\n    while (M < l) M <<= 1;\n    for (int i\
-    \ = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;\n    for (int i = (int)a.size();\
-    \ i < M; ++i) buf1[i].a = 0;\n    for (int i = 0; i < (int)b.size(); ++i) buf2[i].a\
-    \ = b[i].a;\n    for (int i = (int)b.size(); i < M; ++i) buf2[i].a = 0;\n    ntt(buf1,\
-    \ M);\n    ntt(buf2, M);\n    for (int i = 0; i < M; ++i)\n      buf1[i].a = mint::reduce(uint64_t(buf1[i].a)\
-    \ * buf2[i].a);\n    intt(buf1, M, false);\n    vector<mint> s(l);\n    mint invm\
-    \ = mint(M).inverse();\n    for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;\n\
-    \    return s;\n  }\n\n  void ntt_doubling(vector<mint> &a) {\n    int M = (int)a.size();\n\
-    \    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n   \
-    \ mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for\
-    \ (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2\
-    \ * M);\n    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line\
-    \ 7 \"fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
+    \ return s;\n    }\n    assert(l <= SZ_FFT_BUF);\n    int M = 4;\n    while (M\
+    \ < l) M <<= 1;\n    for (int i = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;\n\
+    \    for (int i = (int)a.size(); i < M; ++i) buf1[i].a = 0;\n    for (int i =\
+    \ 0; i < (int)b.size(); ++i) buf2[i].a = b[i].a;\n    for (int i = (int)b.size();\
+    \ i < M; ++i) buf2[i].a = 0;\n    ntt(buf1, M);\n    ntt(buf2, M);\n    for (int\
+    \ i = 0; i < M; ++i)\n      buf1[i].a = mint::reduce(uint64_t(buf1[i].a) * buf2[i].a);\n\
+    \    intt(buf1, M, false);\n    vector<mint> s(l);\n    mint invm = mint(M).inverse();\n\
+    \    for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;\n    return s;\n  }\n\n\
+    \  void ntt_doubling(vector<mint> &a) {\n    int M = (int)a.size();\n    for (int\
+    \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
+    \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
+    \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 7 \"\
+    fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
     \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
     FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
     \ r) {\n  if (this->empty() || r.empty()) {\n    this->clear();\n    return *this;\n\
@@ -1026,7 +1027,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   requiredBy: []
-  timestamp: '2020-09-20 15:04:46+09:00'
+  timestamp: '2020-10-11 00:26:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp

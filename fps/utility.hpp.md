@@ -1,27 +1,47 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint>\
-    \ {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS\
-    \ &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
-    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+  bundledCode: "#line 2 \"modulo/binomial.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
+    \ std;\n\ntemplate <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n\
+    \  Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n\
+    \    assert(T::get_mod() != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0]\
+    \ = 1;\n    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX]\
+    \ = fac_[MAX].inverse();\n    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i\
+    \ + 1] * (i + 1);\n    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i\
+    \ - 1];\n  }\n\n  void extend() {\n    int n = fac_.size();\n    T fac = fac_.back()\
+    \ * n;\n    T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv\
+    \ = finv_.back() * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n\
+    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size())\
+    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size())\
+    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
+    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
+    \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
+    \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
+    \ = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i)\
+    \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
+    \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
+    \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
+    \ - 1, r);\n  }\n};\n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace\
+    \ std;\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
+    \  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+    \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
+    \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
     \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
@@ -81,63 +101,53 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 3 \"modulo/binomial.hpp\"\nusing namespace std;\n\ntemplate <typename T>\nstruct\
-    \ Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX\
-    \ + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    MAX += 9;\n    fac_[0] = finv_[0]\
-    \ = inv_[0] = 1;\n    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n\
-    \    finv_[MAX] = fac_[MAX].inverse();\n    for (int i = MAX - 1; i > 0; i--)\
-    \ finv_[i] = finv_[i + 1] * (i + 1);\n    for (int i = 1; i <= MAX; i++) inv_[i]\
-    \ = finv_[i] * fac_[i - 1];\n  }\n\n  void extend() {\n    int n = fac_.size();\n\
-    \    T fac = fac_.back() * n;\n    T inv = (-inv_[T::get_mod() % n]) * (T::get_mod()\
-    \ / n);\n    T finv = finv_.back() * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n\
-    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size())\
-    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size())\
-    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
-    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
-    \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
-    \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
-    \ = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i)\
-    \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
-    \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
-    \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 4 \"fps/utility.hpp\"\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {\n  using fps =\
-    \ FormalPowerSeries<mint>;\n  if((int)v.size() == 0) return fps{mint(1)};\n  sort(begin(v),\
-    \ end(v), [](fps &a, fps &b) { return a.size() < b.size(); });\n  vector<fps>\
-    \ w;\n  w.reserve(sz(v) / 2 + 1);\n  while ((int)v.size() > 1) {\n    for (int\
-    \ i = 0; i < (int)v.size(); i += 2) {\n      if (i + 1 == (int)v.size()) {\n \
-    \       w.emplace_back(v.back());\n      } else {\n        w.emplace_back(v[i]\
-    \ * v[i + 1]);\n      }\n    }\n    swap(v, w);\n    w.clear();\n  }\n  return\
-    \ v[0];\n}\n\ntemplate <typename mint>\nvoid OGFtoEGF(FormalPowerSeries<mint>&\
-    \ f, Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n\
-    }\n\ntemplate <typename mint>\nvoid EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>&\
-    \ C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n\
-    \  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};\n  return\
-    \ std::move(ret);\n}\n"
-  code: "#pragma once\n#include \"./formal-power-series.hpp\"\n#include \"../modulo/binomial.hpp\"\
+    \ 4 \"fps/utility.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>>\
+    \ v) {\n  using fps = FormalPowerSeries<mint>;\n  if ((int)v.size() == 0) return\
+    \ fps{mint(1)};\n  sort(begin(v), end(v), [](fps& a, fps& b) { return a.size()\
+    \ < b.size(); });\n  queue<fps> q;\n  for (auto& f : v) q.push(f);\n  while ((int)q.size()\
+    \ > 1) {\n    fps a = q.front();\n    q.pop();\n    fps b = q.front();\n    q.pop();\n\
+    \    q.push(a * b);\n  }\n  return q.front();\n}\n\ntemplate <typename mint>\n\
+    void OGFtoEGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
+    \ 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n}\n\ntemplate <typename mint>\n\
+    void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
+    \ 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  FormalPowerSeries<mint>\
+    \ ret{begin(C.finv_), begin(C.finv_) + deg};\n  return std::move(ret);\n}\n\n\
+    // f *= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>&\
+    \ f, int n, mint c, int expand = true) {\n  if (expand) f.resize(f.size() + n);\n\
+    \  for (int i = (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] +=\
+    \ f[i - n] * c;\n  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid\
+    \ sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {\n  for (int i = 0; i\
+    \ < (int)f.size(); ++i) {\n    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;\n\
+    \  }\n}\n"
+  code: "#pragma once\n#include \"../modulo/binomial.hpp\"\n#include \"./formal-power-series.hpp\"\
     \n\ntemplate <typename mint>\nFormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>>\
-    \ v) {\n  using fps = FormalPowerSeries<mint>;\n  if((int)v.size() == 0) return\
-    \ fps{mint(1)};\n  sort(begin(v), end(v), [](fps &a, fps &b) { return a.size()\
-    \ < b.size(); });\n  vector<fps> w;\n  w.reserve(sz(v) / 2 + 1);\n  while ((int)v.size()\
-    \ > 1) {\n    for (int i = 0; i < (int)v.size(); i += 2) {\n      if (i + 1 ==\
-    \ (int)v.size()) {\n        w.emplace_back(v.back());\n      } else {\n      \
-    \  w.emplace_back(v[i] * v[i + 1]);\n      }\n    }\n    swap(v, w);\n    w.clear();\n\
-    \  }\n  return v[0];\n}\n\ntemplate <typename mint>\nvoid OGFtoEGF(FormalPowerSeries<mint>&\
-    \ f, Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n\
-    }\n\ntemplate <typename mint>\nvoid EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>&\
-    \ C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n\
-    \  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};\n  return\
-    \ std::move(ret);\n}\n"
+    \ v) {\n  using fps = FormalPowerSeries<mint>;\n  if ((int)v.size() == 0) return\
+    \ fps{mint(1)};\n  sort(begin(v), end(v), [](fps& a, fps& b) { return a.size()\
+    \ < b.size(); });\n  queue<fps> q;\n  for (auto& f : v) q.push(f);\n  while ((int)q.size()\
+    \ > 1) {\n    fps a = q.front();\n    q.pop();\n    fps b = q.front();\n    q.pop();\n\
+    \    q.push(a * b);\n  }\n  return q.front();\n}\n\ntemplate <typename mint>\n\
+    void OGFtoEGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
+    \ 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n}\n\ntemplate <typename mint>\n\
+    void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
+    \ 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  FormalPowerSeries<mint>\
+    \ ret{begin(C.finv_), begin(C.finv_) + deg};\n  return std::move(ret);\n}\n\n\
+    // f *= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>&\
+    \ f, int n, mint c, int expand = true) {\n  if (expand) f.resize(f.size() + n);\n\
+    \  for (int i = (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] +=\
+    \ f[i - n] * c;\n  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid\
+    \ sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {\n  for (int i = 0; i\
+    \ < (int)f.size(); ++i) {\n    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;\n\
+    \  }\n}\n"
   dependsOn:
-  - fps/formal-power-series.hpp
   - modulo/binomial.hpp
+  - fps/formal-power-series.hpp
   isVerificationFile: false
   path: fps/utility.hpp
   requiredBy: []
-  timestamp: '2020-10-02 15:43:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-11 00:26:38+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-1145.test.cpp
 documentation_of: fps/utility.hpp

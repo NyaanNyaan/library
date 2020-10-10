@@ -1,38 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/polynomial_taylor_shift
@@ -180,58 +180,59 @@ data:
     \ const __m256i &b, const __m256i &m2,\n                   const __m256i &m0)\
     \ {\n  __m256i ret = _mm256_sub_epi32(a, b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
     \ ret), m2),\n                          ret);\n}\n#line 6 \"ntt/ntt-avx2.hpp\"\
-    \n\nconstexpr int SZ = 1 << 19;\nuint32_t buf1_[SZ * 2] __attribute__((aligned(64)));\n\
-    uint32_t buf2_[SZ * 2] __attribute__((aligned(64)));\n\ntemplate <typename mint>\n\
-    struct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t mod = mint::get_mod();\n\
-    \    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int idx = 0;\n    u64 m\
-    \ = mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n      if (m % i == 0) {\n\
-    \        ds[idx++] = i;\n        while (m % i == 0) m /= i;\n      }\n    }\n\
-    \    if (m != 1) ds[idx++] = m;\n\n    uint32_t pr = 2;\n    while (1) {\n   \
-    \   int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n        u64 a = pr, b\
-    \ = (mod - 1) / ds[i], r = 1;\n        while (b) {\n          if (b & 1) r = r\
-    \ * a % mod;\n          a = a * a % mod;\n          b >>= 1;\n        }\n    \
-    \    if (r == 1) {\n          flg = 0;\n          break;\n        }\n      }\n\
-    \      if (flg == 1) break;\n      ++pr;\n    }\n    return pr;\n  };\n\n  static\
-    \ constexpr uint32_t mod = mint::get_mod();\n  static constexpr uint32_t pr =\
-    \ get_pr();\n  static constexpr int level = __builtin_ctzll(mod - 1);\n  mint\
-    \ dw[level], dy[level];\n  mint *buf1, *buf2;\n\n  constexpr NTT() {\n    setwy(level);\n\
-    \    buf1 = reinterpret_cast<mint *>(::buf1_);\n    buf2 = reinterpret_cast<mint\
-    \ *>(::buf2_);\n  }\n\n  constexpr void setwy(int k) {\n    mint w[level], y[level];\n\
-    \    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1] = w[k - 1].inverse();\n\
-    \    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i + 1] * w[i + 1], y[i] =\
-    \ y[i + 1] * y[i + 1];\n    dw[0] = dy[0] = w[1] * w[1];\n    dw[1] = w[1], dy[1]\
-    \ = y[1], dw[2] = w[2], dy[2] = y[2];\n    for (int i = 3; i < k; ++i) {\n   \
-    \   dw[i] = dw[i - 1] * y[i - 2] * w[i];\n      dy[i] = dy[i - 1] * w[i - 2] *\
-    \ y[i];\n    }\n  }\n\n  __attribute__((target(\"avx2\"))) void ntt(mint *a, int\
-    \ n) {\n    int k = n ? __builtin_ctz(n) : 0;\n    if (k == 0) return;\n    if\
-    \ (k == 1) {\n      mint a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0]\
-    \ + a1;\n      return;\n    }\n    if (k & 1) {\n      int v = 1 << (k - 1);\n\
-    \      if (v < 8) {\n        for (int j = 0; j < v; ++j) {\n          mint ajv\
-    \ = a[j + v];\n          a[j + v] = a[j] - ajv;\n          a[j] += ajv;\n    \
-    \    }\n      } else {\n        const __m256i m0 = _mm256_set1_epi32(0);\n   \
-    \     const __m256i m2 = _mm256_set1_epi32(mod + mod);\n        int j0 = 0;\n\
-    \        int j1 = v;\n        for (; j0 < v; j0 += 8, j1 += 8) {\n          __m256i\
-    \ T0 = _mm256_loadu_si256((__m256i *)(a + j0));\n          __m256i T1 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j1));\n          __m256i naj = montgomery_add_256(T0, T1, m2, m0);\n\
-    \          __m256i najv = montgomery_sub_256(T0, T1, m2, m0);\n          _mm256_storeu_si256((__m256i\
-    \ *)(a + j0), naj);\n          _mm256_storeu_si256((__m256i *)(a + j1), najv);\n\
-    \        }\n      }\n    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 <<\
-    \ (k - 2 - (k & 1));\n    mint one = mint(1);\n    mint imag = dw[1];\n    while\
-    \ (v) {\n      if (v == 1) {\n        mint ww = one, xx = one, wx = one;\n   \
-    \     for (int jh = 0; jh < u;) {\n          ww = xx * xx, wx = ww * xx;\n   \
-    \       mint t0 = a[jh + 0], t1 = a[jh + 1] * xx;\n          mint t2 = a[jh +\
-    \ 2] * ww, t3 = a[jh + 3] * wx;\n          mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n\
-    \          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;\n          a[jh + 0]\
-    \ = t0p2 + t1p3, a[jh + 1] = t0p2 - t1p3;\n          a[jh + 2] = t0m2 + t1m3,\
-    \ a[jh + 3] = t0m2 - t1m3;\n          xx *= dw[__builtin_ctz((jh += 4))];\n  \
-    \      }\n      } else if (v == 4) {\n        const __m128i m0 = _mm_set1_epi32(0);\n\
-    \        const __m128i m1 = _mm_set1_epi32(mod);\n        const __m128i m2 = _mm_set1_epi32(mod\
-    \ + mod);\n        const __m128i r = _mm_set1_epi32(mint::r);\n        const __m128i\
-    \ Imag = _mm_set1_epi32(imag.a);\n        mint ww = one, xx = one, wx = one;\n\
-    \        for (int jh = 0; jh < u;) {\n          if (jh == 0) {\n            int\
-    \ j0 = 0;\n            int j1 = v;\n            int j2 = j1 + v;\n           \
-    \ int j3 = j2 + v;\n            int je = v;\n            for (; j0 < je; j0 +=\
-    \ 4, j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
+    \n\nconstexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
+    uint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\ntemplate <typename\
+    \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t mod\
+    \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
+    \ idx = 0;\n    u64 m = mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n   \
+    \   if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i == 0) m /=\
+    \ i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t pr = 2;\n\
+    \    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n\
+    \        u64 a = pr, b = (mod - 1) / ds[i], r = 1;\n        while (b) {\n    \
+    \      if (b & 1) r = r * a % mod;\n          a = a * a % mod;\n          b >>=\
+    \ 1;\n        }\n        if (r == 1) {\n          flg = 0;\n          break;\n\
+    \        }\n      }\n      if (flg == 1) break;\n      ++pr;\n    }\n    return\
+    \ pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr\
+    \ uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
+    \ - 1);\n  mint dw[level], dy[level];\n  mint *buf1, *buf2;\n\n  constexpr NTT()\
+    \ {\n    setwy(level);\n    buf1 = reinterpret_cast<mint *>(::buf1_);\n    buf2\
+    \ = reinterpret_cast<mint *>(::buf2_);\n  }\n\n  constexpr void setwy(int k) {\n\
+    \    mint w[level], y[level];\n    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n\
+    \    y[k - 1] = w[k - 1].inverse();\n    for (int i = k - 2; i > 0; --i)\n   \
+    \   w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];\n    dw[0] = dy[0]\
+    \ = w[1] * w[1];\n    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];\n\
+    \    for (int i = 3; i < k; ++i) {\n      dw[i] = dw[i - 1] * y[i - 2] * w[i];\n\
+    \      dy[i] = dy[i - 1] * w[i - 2] * y[i];\n    }\n  }\n\n  __attribute__((target(\"\
+    avx2\"))) void ntt(mint *a, int n) {\n    int k = n ? __builtin_ctz(n) : 0;\n\
+    \    if (k == 0) return;\n    if (k == 1) {\n      mint a1 = a[1];\n      a[1]\
+    \ = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n    }\n    if (k & 1)\
+    \ {\n      int v = 1 << (k - 1);\n      if (v < 8) {\n        for (int j = 0;\
+    \ j < v; ++j) {\n          mint ajv = a[j + v];\n          a[j + v] = a[j] - ajv;\n\
+    \          a[j] += ajv;\n        }\n      } else {\n        const __m256i m0 =\
+    \ _mm256_set1_epi32(0);\n        const __m256i m2 = _mm256_set1_epi32(mod + mod);\n\
+    \        int j0 = 0;\n        int j1 = v;\n        for (; j0 < v; j0 += 8, j1\
+    \ += 8) {\n          __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));\n \
+    \         __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));\n          __m256i\
+    \ naj = montgomery_add_256(T0, T1, m2, m0);\n          __m256i najv = montgomery_sub_256(T0,\
+    \ T1, m2, m0);\n          _mm256_storeu_si256((__m256i *)(a + j0), naj);\n   \
+    \       _mm256_storeu_si256((__m256i *)(a + j1), najv);\n        }\n      }\n\
+    \    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 << (k - 2 - (k & 1));\n\
+    \    mint one = mint(1);\n    mint imag = dw[1];\n    while (v) {\n      if (v\
+    \ == 1) {\n        mint ww = one, xx = one, wx = one;\n        for (int jh = 0;\
+    \ jh < u;) {\n          ww = xx * xx, wx = ww * xx;\n          mint t0 = a[jh\
+    \ + 0], t1 = a[jh + 1] * xx;\n          mint t2 = a[jh + 2] * ww, t3 = a[jh +\
+    \ 3] * wx;\n          mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n          mint t0m2\
+    \ = t0 - t2, t1m3 = (t1 - t3) * imag;\n          a[jh + 0] = t0p2 + t1p3, a[jh\
+    \ + 1] = t0p2 - t1p3;\n          a[jh + 2] = t0m2 + t1m3, a[jh + 3] = t0m2 - t1m3;\n\
+    \          xx *= dw[__builtin_ctz((jh += 4))];\n        }\n      } else if (v\
+    \ == 4) {\n        const __m128i m0 = _mm_set1_epi32(0);\n        const __m128i\
+    \ m1 = _mm_set1_epi32(mod);\n        const __m128i m2 = _mm_set1_epi32(mod + mod);\n\
+    \        const __m128i r = _mm_set1_epi32(mint::r);\n        const __m128i Imag\
+    \ = _mm_set1_epi32(imag.a);\n        mint ww = one, xx = one, wx = one;\n    \
+    \    for (int jh = 0; jh < u;) {\n          if (jh == 0) {\n            int j0\
+    \ = 0;\n            int j1 = v;\n            int j2 = j1 + v;\n            int\
+    \ j3 = j2 + v;\n            int je = v;\n            for (; j0 < je; j0 += 4,\
+    \ j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
     \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
     \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
     \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
@@ -465,22 +466,23 @@ data:
     \ = a.size() + b.size() - 1;\n    if (min<int>(a.size(), b.size()) <= 40) {\n\
     \      vector<mint> s(l);\n      for (int i = 0; i < (int)a.size(); ++i)\n   \
     \     for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];\n     \
-    \ return s;\n    }\n    int M = 4;\n    while (M < l) M <<= 1;\n    for (int i\
-    \ = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;\n    for (int i = (int)a.size();\
-    \ i < M; ++i) buf1[i].a = 0;\n    for (int i = 0; i < (int)b.size(); ++i) buf2[i].a\
-    \ = b[i].a;\n    for (int i = (int)b.size(); i < M; ++i) buf2[i].a = 0;\n    ntt(buf1,\
-    \ M);\n    ntt(buf2, M);\n    for (int i = 0; i < M; ++i)\n      buf1[i].a = mint::reduce(uint64_t(buf1[i].a)\
-    \ * buf2[i].a);\n    intt(buf1, M, false);\n    vector<mint> s(l);\n    mint invm\
-    \ = mint(M).inverse();\n    for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;\n\
-    \    return s;\n  }\n\n  void ntt_doubling(vector<mint> &a) {\n    int M = (int)a.size();\n\
-    \    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n   \
-    \ mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for\
-    \ (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2\
-    \ * M);\n    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line\
-    \ 3 \"fps/formal-power-series.hpp\"\nusing namespace std;\n\ntemplate <typename\
-    \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
-    \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
-    \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
+    \ return s;\n    }\n    assert(l <= SZ_FFT_BUF);\n    int M = 4;\n    while (M\
+    \ < l) M <<= 1;\n    for (int i = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;\n\
+    \    for (int i = (int)a.size(); i < M; ++i) buf1[i].a = 0;\n    for (int i =\
+    \ 0; i < (int)b.size(); ++i) buf2[i].a = b[i].a;\n    for (int i = (int)b.size();\
+    \ i < M; ++i) buf2[i].a = 0;\n    ntt(buf1, M);\n    ntt(buf2, M);\n    for (int\
+    \ i = 0; i < M; ++i)\n      buf1[i].a = mint::reduce(uint64_t(buf1[i].a) * buf2[i].a);\n\
+    \    intt(buf1, M, false);\n    vector<mint> s(l);\n    mint invm = mint(M).inverse();\n\
+    \    for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;\n    return s;\n  }\n\n\
+    \  void ntt_doubling(vector<mint> &a) {\n    int M = (int)a.size();\n    for (int\
+    \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
+    \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
+    \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 3 \"\
+    fps/formal-power-series.hpp\"\nusing namespace std;\n\ntemplate <typename mint>\n\
+    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
+    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
+    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
     \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
     \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
     \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
@@ -658,16 +660,16 @@ data:
     \ { return mod; }\n};\n#line 3 \"modulo/binomial.hpp\"\nusing namespace std;\n\
     \ntemplate <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n \
     \ Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n\
-    \    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <=\
-    \ MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
-    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
-    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
-    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
-    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
-    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
-    \  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size()) extend();\n    return\
-    \ fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size()) extend();\n\
-    \    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
+    \    assert(T::get_mod() != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0]\
+    \ = 1;\n    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX]\
+    \ = fac_[MAX].inverse();\n    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i\
+    \ + 1] * (i + 1);\n    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i\
+    \ - 1];\n  }\n\n  void extend() {\n    int n = fac_.size();\n    T fac = fac_.back()\
+    \ * n;\n    T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv\
+    \ = finv_.back() * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n\
+    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size())\
+    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size())\
+    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
     \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
     \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
     \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
@@ -713,8 +715,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   requiredBy: []
-  timestamp: '2020-10-02 15:43:20+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-10-11 00:26:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 layout: document

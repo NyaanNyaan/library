@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/fps/fps-taylor-shift.md
     document_title: "\u5E73\u884C\u79FB\u52D5"
@@ -85,16 +85,17 @@ data:
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
     \ 3 \"modulo/binomial.hpp\"\nusing namespace std;\n\ntemplate <typename T>\nstruct\
     \ Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX\
-    \ + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    MAX += 9;\n    fac_[0] = finv_[0]\
-    \ = inv_[0] = 1;\n    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n\
-    \    finv_[MAX] = fac_[MAX].inverse();\n    for (int i = MAX - 1; i > 0; i--)\
-    \ finv_[i] = finv_[i + 1] * (i + 1);\n    for (int i = 1; i <= MAX; i++) inv_[i]\
-    \ = finv_[i] * fac_[i - 1];\n  }\n\n  void extend() {\n    int n = fac_.size();\n\
-    \    T fac = fac_.back() * n;\n    T inv = (-inv_[T::get_mod() % n]) * (T::get_mod()\
-    \ / n);\n    T finv = finv_.back() * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n\
-    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size())\
-    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size())\
-    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
+    \ + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod() != 0);\n \
+    \   MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <=\
+    \ MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
+    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
+    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
+    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
+    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
+    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
+    \  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size()) extend();\n    return\
+    \ fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size()) extend();\n\
+    \    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
     \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
     \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
     \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
@@ -126,8 +127,8 @@ data:
   isVerificationFile: false
   path: fps/taylor-shift.hpp
   requiredBy: []
-  timestamp: '2020-10-02 15:43:20+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-10-11 00:26:38+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 documentation_of: fps/taylor-shift.hpp
