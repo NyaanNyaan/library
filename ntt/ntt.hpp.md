@@ -82,7 +82,11 @@ data:
     \ ++i) s[i] = a[i];\n    for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];\n\
     \    fft4(s, k);\n    fft4(t, k);\n    for (int i = 0; i < M; ++i) s[i] *= t[i];\n\
     \    ifft4(s, k);\n    s.resize(l);\n    mint invm = mint(M).inverse();\n    for\
-    \ (int i = 0; i < l; ++i) s[i] *= invm;\n    return s;\n  }\n};\n"
+    \ (int i = 0; i < l; ++i) s[i] *= invm;\n    return s;\n  }\n\n  void ntt_doubling(vector<mint>\
+    \ &a) {\n    int M = (int)a.size();\n    auto b = a;\n    intt(b);\n    mint r\
+    \ = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i\
+    \ = 0; i < M; i++) b[i] *= r, r *= zeta;\n    ntt(b);\n    copy(begin(b), end(b),\
+    \ back_inserter(a));\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t\
     \ mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n  \
@@ -152,12 +156,15 @@ data:
     \ i < (int)b.size(); ++i) t[i] = b[i];\n    fft4(s, k);\n    fft4(t, k);\n   \
     \ for (int i = 0; i < M; ++i) s[i] *= t[i];\n    ifft4(s, k);\n    s.resize(l);\n\
     \    mint invm = mint(M).inverse();\n    for (int i = 0; i < l; ++i) s[i] *= invm;\n\
-    \    return s;\n  }\n};"
+    \    return s;\n  }\n\n  void ntt_doubling(vector<mint> &a) {\n    int M = (int)a.size();\n\
+    \    auto b = a;\n    intt(b);\n    mint r = 1, zeta = mint(pr).pow((mint::get_mod()\
+    \ - 1) / (M << 1));\n    for (int i = 0; i < M; i++) b[i] *= r, r *= zeta;\n \
+    \   ntt(b);\n    copy(begin(b), end(b), back_inserter(a));\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: ntt/ntt.hpp
   requiredBy: []
-  timestamp: '2020-09-12 22:28:25+09:00'
+  timestamp: '2020-10-11 01:10:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp

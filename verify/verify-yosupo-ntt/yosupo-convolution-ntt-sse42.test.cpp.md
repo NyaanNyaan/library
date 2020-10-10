@@ -196,22 +196,22 @@ data:
     \ const __m256i &b, const __m256i &m2,\n                   const __m256i &m0)\
     \ {\n  __m256i ret = _mm256_sub_epi32(a, b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
     \ ret), m2),\n                          ret);\n}\n#line 6 \"ntt/ntt-sse42.hpp\"\
-    \n\nconstexpr int SZ = 1 << 19;\nuint32_t buf1_[SZ * 2] __attribute__((aligned(64)));\n\
-    uint32_t buf2_[SZ * 2] __attribute__((aligned(64)));\n\ntemplate <typename mint>\n\
-    struct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t mod = mint::get_mod();\n\
-    \    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int idx = 0;\n    u64 m\
-    \ = mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n      if (m % i == 0) {\n\
-    \        ds[idx++] = i;\n        while (m % i == 0) m /= i;\n      }\n    }\n\
-    \    if (m != 1) ds[idx++] = m;\n\n    uint32_t pr = 2;\n    while (1) {\n   \
-    \   int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n        u64 a = pr, b\
-    \ = (mod - 1) / ds[i], r = 1;\n        while (b) {\n          if (b & 1) r = r\
-    \ * a % mod;\n          a = a * a % mod;\n          b >>= 1;\n        }\n    \
-    \    if (r == 1) {\n          flg = 0;\n          break;\n        }\n      }\n\
-    \      if (flg == 1) break;\n      ++pr;\n    }\n    return pr;\n  };\n\n  static\
-    \ constexpr uint32_t mod = mint::get_mod();\n  static constexpr uint32_t pr =\
-    \ get_pr();\n  static constexpr int level = __builtin_ctzll(mod - 1);\n  mint\
-    \ dw[level], dy[level];\n  mint *buf1, *buf2;\n\n  NTT() {\n    setwy(level);\n\
-    \    buf1 = reinterpret_cast<mint *>(::buf1_);\n    buf2 = reinterpret_cast<mint\
+    \n\nconstexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
+    uint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\ntemplate <typename\
+    \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t mod\
+    \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
+    \ idx = 0;\n    u64 m = mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n   \
+    \   if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i == 0) m /=\
+    \ i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t pr = 2;\n\
+    \    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n\
+    \        u64 a = pr, b = (mod - 1) / ds[i], r = 1;\n        while (b) {\n    \
+    \      if (b & 1) r = r * a % mod;\n          a = a * a % mod;\n          b >>=\
+    \ 1;\n        }\n        if (r == 1) {\n          flg = 0;\n          break;\n\
+    \        }\n      }\n      if (flg == 1) break;\n      ++pr;\n    }\n    return\
+    \ pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr\
+    \ uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
+    \ - 1);\n  mint dw[level], dy[level];\n  mint *buf1, *buf2;\n\n  NTT() {\n   \
+    \ setwy(level);\n    buf1 = reinterpret_cast<mint *>(::buf1_);\n    buf2 = reinterpret_cast<mint\
     \ *>(::buf2_);\n  }\n\n  constexpr void setwy(int k) {\n    mint w[level], y[level];\n\
     \    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1] = w[k - 1].inverse();\n\
     \    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i + 1] * w[i + 1], y[i] =\
@@ -365,7 +365,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
   requiredBy: []
-  timestamp: '2020-08-02 17:27:04+09:00'
+  timestamp: '2020-10-11 01:10:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp

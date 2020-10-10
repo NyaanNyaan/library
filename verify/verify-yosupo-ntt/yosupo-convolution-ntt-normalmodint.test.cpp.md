@@ -210,9 +210,13 @@ data:
     \ i < (int)b.size(); ++i) t[i] = b[i];\n    fft4(s, k);\n    fft4(t, k);\n   \
     \ for (int i = 0; i < M; ++i) s[i] *= t[i];\n    ifft4(s, k);\n    s.resize(l);\n\
     \    mint invm = mint(M).inverse();\n    for (int i = 0; i < l; ++i) s[i] *= invm;\n\
-    \    return s;\n  }\n};\n#line 6 \"verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp\"\
-    \n\nconstexpr int MOD = 998244353;\nusing mint = ModInt<MOD>;\nusing vm = vector<mint>;\n\
-    \nvoid solve() {\n  NTT<mint> ntt;\n  ini(N, M);\n  vm a(N), b(M);\n  in(a, b);\n\
+    \    return s;\n  }\n\n  void ntt_doubling(vector<mint> &a) {\n    int M = (int)a.size();\n\
+    \    auto b = a;\n    intt(b);\n    mint r = 1, zeta = mint(pr).pow((mint::get_mod()\
+    \ - 1) / (M << 1));\n    for (int i = 0; i < M; i++) b[i] *= r, r *= zeta;\n \
+    \   ntt(b);\n    copy(begin(b), end(b), back_inserter(a));\n  }\n};\n#line 6 \"\
+    verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp\"\n\nconstexpr\
+    \ int MOD = 998244353;\nusing mint = ModInt<MOD>;\nusing vm = vector<mint>;\n\n\
+    void solve() {\n  NTT<mint> ntt;\n  ini(N, M);\n  vm a(N), b(M);\n  in(a, b);\n\
     \  auto c = ntt.multiply(a, b);\n  out(c);\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n\n#include\
     \ \"../../competitive-template.hpp\"\n#include \"../../modint/modint.hpp\"\n#include\
@@ -226,7 +230,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
   requiredBy: []
-  timestamp: '2020-09-12 22:28:25+09:00'
+  timestamp: '2020-10-11 01:10:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
