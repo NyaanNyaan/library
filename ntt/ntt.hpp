@@ -184,4 +184,14 @@ struct NTT {
     for (int i = 0; i < l; ++i) s[i] *= invm;
     return s;
   }
+
+  void ntt_doubling(vector<mint> &a) {
+    int M = (int)a.size();
+    auto b = a;
+    intt(b);
+    mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));
+    for (int i = 0; i < M; i++) b[i] *= r, r *= zeta;
+    ntt(b);
+    copy(begin(b), end(b), back_inserter(a));
+  }
 };

@@ -4,9 +4,9 @@ using namespace std;
 
 #include "../modint/simd-montgomery.hpp"
 
-constexpr int SZ = 1 << 19;
-uint32_t buf1_[SZ * 2] __attribute__((aligned(64)));
-uint32_t buf2_[SZ * 2] __attribute__((aligned(64)));
+constexpr int SZ_FFT_BUF = 1 << 23;
+uint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));
+uint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));
 
 template <typename mint>
 struct NTT {
