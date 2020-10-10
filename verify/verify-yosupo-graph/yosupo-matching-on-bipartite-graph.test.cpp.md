@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: atcoder/maxflow.hpp
     title: atcoder/maxflow.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'

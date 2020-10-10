@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: atcoder/two-sat.hpp
     title: atcoder/two-sat.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   _extendedRequiredBy: []

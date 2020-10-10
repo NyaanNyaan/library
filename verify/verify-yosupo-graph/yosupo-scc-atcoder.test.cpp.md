@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: atcoder/scc.hpp
     title: atcoder/scc.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   _extendedRequiredBy: []

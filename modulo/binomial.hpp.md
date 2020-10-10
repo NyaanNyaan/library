@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: fps/utility.hpp
     title: fps/utility.hpp
   _extendedVerifiedWith:
@@ -43,11 +43,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modulo/binomial.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -103,7 +103,7 @@ data:
   - fps/sum-of-exponential-times-poly.hpp
   - fps/utility.hpp
   timestamp: '2020-10-11 00:26:38+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
