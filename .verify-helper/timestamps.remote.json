@@ -136,6 +136,7 @@
 "verify/verify-yuki/yuki-0963-circular.test.cpp": "2020-10-11 00:26:38 +0900",
 "verify/verify-yuki/yuki-0963.test.cpp": "2020-10-11 00:26:38 +0900",
 "verify/verify-yuki/yuki-1080.test.cpp": "2020-10-11 00:26:38 +0900",
+"verify/verify-yuki/yuki-1145.test.cpp": "2020-10-11 00:26:38 +0900",
 "verify/verify-yuki/yuki-1170.test.cpp": "2020-08-15 19:54:29 +0900",
 "verify/verify-yuki/yuki-1220.test.cpp": "2020-09-04 23:57:13 +0900",
 "verify/verify-yuki/yuki-helloworld.test.cpp": "2020-08-01 13:57:58 +0900"
