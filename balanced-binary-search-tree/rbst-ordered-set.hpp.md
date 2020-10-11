@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn:
   - icon: ':warning:'
-    path: binary-search-tree/randomized-binary-search-tree.hpp
-    title: binary-search-tree/randomized-binary-search-tree.hpp
+    path: balanced-binary-search-tree/randomized-binary-search-tree.hpp
+    title: balanced-binary-search-tree/randomized-binary-search-tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"binary-search-tree/randomized-binary-search-tree.hpp\"\n\
-    #include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename\
+  bundledCode: "#line 2 \"balanced-binary-search-tree/randomized-binary-search-tree.hpp\"\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename\
     \ F>\nstruct RandomizedBinarySearchTree {\n  uint64_t rng() {\n    static uint64_t\
     \ x_ = 88172645463325252ULL;\n    x_ = x_ ^ (x_ << 7);\n    x_ = x_ ^ (x_ >> 9);\n\
     \    return x_ & 0xFFFFFFFFull;\n  }\n\n  struct Node {\n    Node *l, *r;\n  \
@@ -41,8 +41,8 @@ data:
     \ a);\n    auto y = split(x.second, b - a);\n    auto ret = sum(y.first);\n  \
     \  t = merge(x.first, merge(y.first, y.second));\n    return ret;\n  }\n\n  int\
     \ size(Node *t) { return count(t); }\n\n  Node *make() { return nullptr; }\n};\n\
-    #line 3 \"binary-search-tree/rbst-ordered-set.hpp\"\n\ntemplate <typename T, int\
-    \ S = 2000000, bool MULTI = false>\nstruct OrderedSet {\n  using F = function<T(T,\
+    #line 3 \"balanced-binary-search-tree/rbst-ordered-set.hpp\"\n\ntemplate <typename\
+    \ T, int S = 2000000, bool MULTI = false>\nstruct OrderedSet {\n  using F = function<T(T,\
     \ T)>;\n  using RBST = RandomizedBinarySearchTree<T, F>;\n  using Node = typename\
     \ RBST::Node;\n\n  static RBST* rbst;\n  Node* t;\n\n  OrderedSet() {\n    if\
     \ (!rbst) rbst = new RBST([](T, T) { return T(); }, T(), S);\n    t = rbst->make();\n\
@@ -110,17 +110,17 @@ data:
     \    }\n  }\n};\ntemplate <typename T, int S, bool MULTI>\ntypename OrderedSet<T,\
     \ S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;\n"
   dependsOn:
-  - binary-search-tree/randomized-binary-search-tree.hpp
+  - balanced-binary-search-tree/randomized-binary-search-tree.hpp
   isVerificationFile: false
-  path: binary-search-tree/rbst-ordered-set.hpp
+  path: balanced-binary-search-tree/rbst-ordered-set.hpp
   requiredBy: []
-  timestamp: '2020-10-08 01:49:03+09:00'
+  timestamp: '2020-10-11 13:18:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: binary-search-tree/rbst-ordered-set.hpp
+documentation_of: balanced-binary-search-tree/rbst-ordered-set.hpp
 layout: document
 redirect_from:
-- /library/binary-search-tree/rbst-ordered-set.hpp
-- /library/binary-search-tree/rbst-ordered-set.hpp.html
-title: binary-search-tree/rbst-ordered-set.hpp
+- /library/balanced-binary-search-tree/rbst-ordered-set.hpp
+- /library/balanced-binary-search-tree/rbst-ordered-set.hpp.html
+title: balanced-binary-search-tree/rbst-ordered-set.hpp
 ---

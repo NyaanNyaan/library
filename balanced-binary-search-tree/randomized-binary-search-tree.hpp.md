@@ -3,15 +3,15 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: binary-search-tree/rbst-ordered-set.hpp
-    title: binary-search-tree/rbst-ordered-set.hpp
+    path: balanced-binary-search-tree/rbst-ordered-set.hpp
+    title: balanced-binary-search-tree/rbst-ordered-set.hpp
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"binary-search-tree/randomized-binary-search-tree.hpp\"\n\
-    #include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename\
+  bundledCode: "#line 2 \"balanced-binary-search-tree/randomized-binary-search-tree.hpp\"\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename\
     \ F>\nstruct RandomizedBinarySearchTree {\n  uint64_t rng() {\n    static uint64_t\
     \ x_ = 88172645463325252ULL;\n    x_ = x_ ^ (x_ << 7);\n    x_ = x_ ^ (x_ >> 9);\n\
     \    return x_ & 0xFFFFFFFFull;\n  }\n\n  struct Node {\n    Node *l, *r;\n  \
@@ -74,16 +74,16 @@ data:
     \ { return nullptr; }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: binary-search-tree/randomized-binary-search-tree.hpp
+  path: balanced-binary-search-tree/randomized-binary-search-tree.hpp
   requiredBy:
-  - binary-search-tree/rbst-ordered-set.hpp
-  timestamp: '2020-10-08 01:49:03+09:00'
+  - balanced-binary-search-tree/rbst-ordered-set.hpp
+  timestamp: '2020-10-11 13:18:57+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: binary-search-tree/randomized-binary-search-tree.hpp
+documentation_of: balanced-binary-search-tree/randomized-binary-search-tree.hpp
 layout: document
 redirect_from:
-- /library/binary-search-tree/randomized-binary-search-tree.hpp
-- /library/binary-search-tree/randomized-binary-search-tree.hpp.html
-title: binary-search-tree/randomized-binary-search-tree.hpp
+- /library/balanced-binary-search-tree/randomized-binary-search-tree.hpp
+- /library/balanced-binary-search-tree/randomized-binary-search-tree.hpp.html
+title: balanced-binary-search-tree/randomized-binary-search-tree.hpp
 ---

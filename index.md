@@ -21,17 +21,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: atcoder/two-sat.hpp
       title: atcoder/two-sat.hpp
-  - name: binary-search-tree
+  - name: balanced-binary-search-tree
     pages:
     - icon: ':warning:'
-      path: binary-search-tree/randomized-binary-search-tree.hpp
-      title: binary-search-tree/randomized-binary-search-tree.hpp
+      path: balanced-binary-search-tree/randomized-binary-search-tree.hpp
+      title: balanced-binary-search-tree/randomized-binary-search-tree.hpp
     - icon: ':warning:'
-      path: binary-search-tree/rbst-ordered-map.hpp
-      title: binary-search-tree/rbst-ordered-map.hpp
+      path: balanced-binary-search-tree/rbst-ordered-map.hpp
+      title: balanced-binary-search-tree/rbst-ordered-map.hpp
     - icon: ':warning:'
-      path: binary-search-tree/rbst-ordered-set.hpp
-      title: binary-search-tree/rbst-ordered-set.hpp
+      path: balanced-binary-search-tree/rbst-ordered-set.hpp
+      title: balanced-binary-search-tree/rbst-ordered-set.hpp
   - name: .
     pages:
     - icon: ':warning:'
@@ -336,6 +336,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/timer.hpp
       title: misc/timer.hpp
+    - icon: ':warning:'
+      path: misc/vector-pool.hpp
+      title: misc/vector-pool.hpp
   - name: modint
     pages:
     - icon: ':heavy_check_mark:'
