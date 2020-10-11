@@ -63,8 +63,10 @@
   "solve_function": {
     "prefix": "_sol",
     "body": [
+      "#include \"competitive-template.hpp\"",
+      "",
       "void solve(){",
-      "$0",
+      "  $0",
       "}"
     ],
     "description": "solve_function"
