@@ -465,6 +465,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra.hpp
       title: shortest-path/dijkstra.hpp
+    - icon: ':warning:'
+      path: shortest-path/dual-of-shortest-path.hpp
+      title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
     - icon: ':heavy_check_mark:'
       path: shortest-path/restore-shortest-path.hpp
       title: shortest-path/restore-shortest-path.hpp
