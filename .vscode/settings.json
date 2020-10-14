@@ -80,10 +80,16 @@
     "--indent-size=2",
     "--ignore=E111, E114, E302, E402, E501, E731"
   ],
+  "[cpp]": {
+    "editor.tabSize": 2
+  },
   "[python]": {
     "editor.tabSize": 2,
     "editor.formatOnSave": false,
     "editor.formatOnPaste": false,
     "editor.formatOnType": false,
-  }
+  },
+  "editor.detectIndentation": false,
+  "editor.tabSize": 2,
+  "C_Cpp.clang_format_style": "{ BasedOnStyle: Google, TabWidth: 2, IndentWidth: 2}"
 }
