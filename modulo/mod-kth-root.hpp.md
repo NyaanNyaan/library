@@ -101,16 +101,24 @@ data:
     \ get() const {\n    u64 ret = reduce(a);\n    return ret >= mod ? ret - mod :\
     \ ret;\n  }\n\n  static u64 get_mod() { return mod; }\n};\ntypename montgomery64::u64\
     \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 3 \"prime/fast-factorize.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"misc/rng.hpp\"\nusing namespace std;\n\nunsigned\
-    \ long long rng() {\n  static unsigned long long x_ = 88172645463325252ULL;\n\
-    \  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n#line 9 \"prime/fast-factorize.hpp\"\
-    \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
-    bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
-    \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
-    \  for (u64 a : as) {\n    if (n <= a) break;\n    u64 t = d;\n    mint y = mint(a).pow(t);\n\
-    \    while (t != n - 1 && y != e && y != rev) {\n      y *= y;\n      t *= 2;\n\
-    \    }\n    if (y != rev && t % 2 == 0) return false;\n  }\n  return true;\n}\n\
-    \nbool is_prime(u64 n) {\n  if (~n & 1) return n == 2;\n  if (n <= 1) return false;\n\
+    \nusing namespace std;\n\n#line 3 \"misc/rng.hpp\"\nusing namespace std;\n\nnamespace\
+    \ my_rand {\n\nuint64_t rng() {\n  static uint64_t x_ = 88172645463325252ULL;\n\
+    \  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\n// [l, r)\nint64_t\
+    \ randint(int64_t l, int64_t r) {\n  assert(l < r);\n  return l + rng() % (r -\
+    \ l);\n}\n\n//\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n \
+    \ int64_t d = r - l;\n  assert(0 <= d && n <= d);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::rng;\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    \n#line 9 \"prime/fast-factorize.hpp\"\n\nnamespace fast_factorize {\nusing u64\
+    \ = uint64_t;\n\ntemplate <typename mint>\nbool miller_rabin(u64 n, vector<u64>\
+    \ as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n  u64 d = n - 1;\n  while\
+    \ (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n  for (u64 a : as) {\n\
+    \    if (n <= a) break;\n    u64 t = d;\n    mint y = mint(a).pow(t);\n    while\
+    \ (t != n - 1 && y != e && y != rev) {\n      y *= y;\n      t *= 2;\n    }\n\
+    \    if (y != rev && t % 2 == 0) return false;\n  }\n  return true;\n}\n\nbool\
+    \ is_prime(u64 n) {\n  if (~n & 1) return n == 2;\n  if (n <= 1) return false;\n\
     \  if (n < (1LL << 30))\n    return miller_rabin<ArbitraryLazyMontgomeryModInt>(n,\
     \ {2, 7, 61});\n  else\n    return miller_rabin<montgomery64>(\n        n, {2,\
     \ 325, 9375, 28178, 450775, 9780504, 1795265022});\n}\n\ntemplate <typename mint,\
@@ -235,7 +243,7 @@ data:
   isVerificationFile: false
   path: modulo/mod-kth-root.hpp
   requiredBy: []
-  timestamp: '2020-09-20 01:55:17+09:00'
+  timestamp: '2020-10-16 00:17:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp

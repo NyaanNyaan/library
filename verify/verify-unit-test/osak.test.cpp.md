@@ -143,9 +143,16 @@ data:
     \ y < 0 ? y + p : y;\n}\n\ntemplate <typename T, typename U>\nT modpow(T a, U\
     \ n, T p) {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if\
     \ (n & 1) ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line\
-    \ 3 \"misc/rng.hpp\"\nusing namespace std;\n\nunsigned long long rng() {\n  static\
-    \ unsigned long long x_ = 88172645463325252ULL;\n  x_ = x_ ^ (x_ << 7);\n  return\
-    \ x_ = x_ ^ (x_ >> 9);\n}\n#line 3 \"modint/arbitrary-prime-modint.hpp\"\nusing\
+    \ 3 \"misc/rng.hpp\"\nusing namespace std;\n\nnamespace my_rand {\n\nuint64_t\
+    \ rng() {\n  static uint64_t x_ = 88172645463325252ULL;\n  x_ = x_ ^ (x_ << 7);\n\
+    \  return x_ = x_ ^ (x_ >> 9);\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n//\nvector<int64_t>\
+    \ randset(int64_t l, int64_t r, int64_t n) {\n  int64_t d = r - l;\n  assert(0\
+    \ <= d && n <= d);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i; --i)\
+    \ {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m =\
+    \ r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n}  // namespace my_rand\n\nusing my_rand::rng;\nusing my_rand::randint;\n\
+    using my_rand::randset;\n\n#line 3 \"modint/arbitrary-prime-modint.hpp\"\nusing\
     \ namespace std;\n\nstruct ArbitraryLazyMontgomeryModInt {\n  using mint = ArbitraryLazyMontgomeryModInt;\n\
     \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
     \  static u32 mod;\n  static u32 r;\n  static u32 n2;\n\n  static u32 get_r()\
@@ -286,7 +293,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/osak.test.cpp
   requiredBy: []
-  timestamp: '2020-10-06 19:07:08+09:00'
+  timestamp: '2020-10-16 00:17:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/osak.test.cpp

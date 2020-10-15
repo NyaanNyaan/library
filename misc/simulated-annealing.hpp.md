@@ -14,10 +14,17 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/simulated-annealing.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"misc/rng.hpp\"\nusing namespace std;\n\nunsigned\
-    \ long long rng() {\n  static unsigned long long x_ = 88172645463325252ULL;\n\
-    \  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n#line 3 \"misc/timer.hpp\"\
-    \nusing namespace std;\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    using namespace std;\n\n#line 3 \"misc/rng.hpp\"\nusing namespace std;\n\nnamespace\
+    \ my_rand {\n\nuint64_t rng() {\n  static uint64_t x_ = 88172645463325252ULL;\n\
+    \  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\n// [l, r)\nint64_t\
+    \ randint(int64_t l, int64_t r) {\n  assert(l < r);\n  return l + rng() % (r -\
+    \ l);\n}\n\n//\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n \
+    \ int64_t d = r - l;\n  assert(0 <= d && n <= d);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::rng;\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    \n#line 3 \"misc/timer.hpp\"\nusing namespace std;\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
     \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
@@ -145,7 +152,7 @@ data:
   isVerificationFile: false
   path: misc/simulated-annealing.hpp
   requiredBy: []
-  timestamp: '2020-09-27 20:38:35+09:00'
+  timestamp: '2020-10-16 00:17:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: misc/simulated-annealing.hpp
