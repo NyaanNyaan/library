@@ -5,7 +5,14 @@ using namespace std;
 namespace my_rand {
 
 uint64_t rng() {
+#ifdef NyaanDebug
+  static uint64_t x_ =
+      chrono::duration_cast<chrono::nanoseconds>(
+          chrono::high_resolution_clock::now().time_since_epoch())
+          .count();
+#else
   static uint64_t x_ = 88172645463325252ULL;
+#endif
   x_ = x_ ^ (x_ << 7);
   return x_ = x_ ^ (x_ >> 9);
 }
@@ -32,7 +39,6 @@ vector<int64_t> randset(int64_t l, int64_t r, int64_t n) {
 
 }  // namespace my_rand
 
-using my_rand::rng;
 using my_rand::randint;
 using my_rand::randset;
-
+using my_rand::rng;

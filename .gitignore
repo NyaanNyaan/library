@@ -10,6 +10,8 @@ buf.cpp
 docs/modint/montgomery-modint.md
 input
 Makefile
+naive.cpp
+naive.exe
 out
 out.cpp
 out.exe
@@ -17,6 +19,6 @@ output
 segment-tree/lazy-seg-tree-with-index.hpp
 test.cpp
 test.exe
+verify/verify-unit-test/orderedmap.test.cpp
 verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
 verify/verify-yuki/yuki-0981.test.cpp
-verify/verify-unit-test/orderedmap.test.cpp
