@@ -18,8 +18,7 @@ int64_t randint(int64_t l, int64_t r) {
 
 //
 vector<int64_t> randset(int64_t l, int64_t r, int64_t n) {
-  int64_t d = r - l;
-  assert(0 <= d && n <= d);
+  assert(l <= r && n <= r - l);
   unordered_set<int64_t> s;
   for (int64_t i = n; i; --i) {
     int64_t m = randint(l, r + 1 - i);

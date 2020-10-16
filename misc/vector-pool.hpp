@@ -2,9 +2,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename T>
+template <typename T,typename ptr_t = int>
 struct VectorPool {
-  using ptr_t = int;
   vector<T> pool;
   vector<ptr_t> st;
   int idx;
@@ -13,7 +12,7 @@ struct VectorPool {
   // pool[0] is missing number (assuming nil)
   VectorPool(int s = 4) : pool(s), st(), idx(1), cap(s) { assert(s > 0); }
 
-  inline T& operator[](ptr_t i) { return pool[i]; }
+  inline T& operator[](ptr_t i) { return pool[int(i)]; }
 
   void reallocate() {
     assert(idx == cap && st.size() == 0);
@@ -22,10 +21,10 @@ struct VectorPool {
   }
 
   ptr_t alloc() {
-    if (idx != cap) return idx++;
+    if (idx != cap) return ptr_t(idx++);
     if (st.empty()) {
       reallocate();
-      return idx++;
+      return ptr_t(idx++);
     }
     ptr_t ret = st.back();
     st.pop_back();
@@ -35,7 +34,7 @@ struct VectorPool {
   template <typename... Args>
   ptr_t my_new(Args... args) {
     ptr_t ret = alloc();
-    pool[ret] = T(args...);
+    pool[int(ret)] = T(args...);
     return ret;
   }
 

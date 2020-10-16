@@ -6,6 +6,7 @@ using namespace std;
 
 template <typename Key, typename Val>
 struct OrderedMap {
+ private:
   uint64_t rng() {
     static uint64_t x_ = 88172645463325252ULL;
     x_ = x_ ^ (x_ << 7);
@@ -13,7 +14,7 @@ struct OrderedMap {
     return x_ & 0xFFFFFFFFull;
   }
 
-  using NodePtr = uint32_t;
+  struct NodePtr;
   struct Node {
     NodePtr l, r;
     Key key;
@@ -24,113 +25,117 @@ struct OrderedMap {
         : l(0), r(0), key(k), val(v), sum(v), cnt(1) {}
   };
 
-  static VectorPool<Node> init_pool() {
-    VectorPool<Node> pool;
-    pool[0].l = pool[0].r = pool[0].cnt = 0;
-    pool[0].key = Key();
-    pool[0].val = pool[0].sum = Val();
-    return pool;
-  }
+  struct NodePtr {
+    int n;
+    explicit constexpr NodePtr() {}
+    explicit constexpr NodePtr(int _n) : n(_n) {}
+    constexpr bool operator==(const NodePtr &r) { return n == r.n; }
+    constexpr bool operator!=(const NodePtr &r) { return n != r.n; }
+    explicit constexpr operator int() { return n; }
+    explicit constexpr operator bool() { return n != 0; }
+    constexpr bool operator!() { return n == 0; }
+    Node *operator->() { return &(pool.pool[n]); }
+    pair<const Key &, Val &> operator*() {
+      assert(n != 0 and "pair<const Key &, Val &> NodePtr::operator*()");
+      return make_pair(pool.pool[n].key, pool.pool[n].val);
+    }
+    static constexpr NodePtr nil() { return NodePtr(0); }
+  };
 
   using F = function<Val(Val, Val)>;
 
-  static void set_monoid(const F &_f, const Val &I_) {
-    f = _f;
-    I = I_;
-    pool[0].val = pool[0].sum = I_;
-  }
-
-  static VectorPool<Node> pool;
+  static VectorPool<Node, NodePtr> pool;
   static F f;
   static Val I;
+  static bool fold_flag, lazy_flag;
   NodePtr root;
-
-  OrderedMap() : root(0) {}
 
   NodePtr my_new(const Key &k, const Val &v) {
     NodePtr ret = pool.my_new(k, v);
-    assert(ret != 0);
+    assert(bool(ret) && "NodePtr my_new(const Key &k, const Val &v)");
     return ret;
   }
 
   void my_delete(NodePtr t) {
-    assert(t != 0);
+    assert(bool(t) && "void my_delete(NodePtr t)");
     pool.free(t);
   }
 
-  // update (*t)
-  inline NodePtr update(NodePtr t) {
-    pool[t].cnt = pool[pool[t].l].cnt + pool[pool[t].r].cnt + 1;
-    pool[t].sum = f(f(pool[pool[t].l].sum, pool[t].val), pool[pool[t].r].sum);
+  // inner_update (*t)
+  inline NodePtr inner_update(NodePtr t) {
+    t->cnt = t->l->cnt + t->r->cnt + 1;
+    if (fold_flag) {
+      t->sum = f(f(t->l->sum, t->val), t->r->sum);
+    }
     return t;
   }
 
   // assign (*this)[x] = y, and update parent nodes
   void thrust(NodePtr p, const Key &x, const Val &y) {
     if (!p) return;
-    if (pool[p].key == x) {
-      pool[p].val = y;
-      update(p);
+    if (p->key == x) {
+      p->val = y;
+      inner_update(p);
       return;
     }
-    NodePtr nxt = pool[p].key < x ? pool[p].r : pool[p].l;
+    NodePtr nxt = p->key < x ? p->r : p->l;
     thrust(nxt, x, y);
-    update(p);
+    inner_update(p);
   }
 
   // merge (*l, *r)
   NodePtr merge(NodePtr l, NodePtr r) {
-    if (!l || !r) return l ? l : r;
-    if (int((rng() * (pool[l].cnt + pool[r].cnt)) >> 32) < pool[l].cnt) {
-      pool[l].r = merge(pool[l].r, r);
-      return update(l);
+    if (!l || !r) return bool(l) ? l : r;
+    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {
+      l->r = merge(l->r, r);
+      return inner_update(l);
     } else {
-      pool[r].l = merge(l, pool[r].l);
-      return update(r);
+      r->l = merge(l, r->l);
+      return inner_update(r);
     }
   }
 
   // split (*t) to [-inf, x), [x, inf)
   pair<NodePtr, NodePtr> split(NodePtr t, const Key &x) {
-    if (!t) return {0, 0};
-    if (x <= pool[t].key) {
-      auto s = split(pool[t].l, x);
-      pool[t].l = s.second;
-      return {s.first, update(t)};
+    if (!t) return {NodePtr::nil(), NodePtr::nil()};
+    if (x <= t->key) {
+      auto s = split(t->l, x);
+      t->l = s.second;
+      return {s.first, inner_update(t)};
     } else {
-      auto s = split(pool[t].r, x);
-      pool[t].r = s.first;
-      return {update(t), s.second};
+      auto s = split(t->r, x);
+      t->r = s.first;
+      return {inner_update(t), s.second};
     }
   }
 
   // split (*t) to [-inf, x], (x, inf)
   pair<NodePtr, NodePtr> split_upper(NodePtr t, const Key &x) {
-    if (!t) return {0, 0};
-    if (x < pool[t].key) {
-      auto s = split(pool[t].l, x);
-      pool[t].l = s.second;
-      return {s.first, update(t)};
+    if (!t) return {NodePtr::nil(), NodePtr::nil()};
+    if (x < t->key) {
+      auto s = split(t->l, x);
+      t->l = s.second;
+      return {s.first, inner_update(t)};
     } else {
-      auto s = split(pool[t].r, x);
-      pool[t].r = s.first;
-      return {update(t), s.second};
+      auto s = split(t->r, x);
+      t->r = s.first;
+      return {inner_update(t), s.second};
     }
   }
 
   // find t : t->key == x
   NodePtr find_ptr(const Key &x) const {
     NodePtr p = root;
-    while (p) {
-      if (x == pool[p].key) return p;
-      p = x < pool[p].key ? pool[p].l : pool[p].r;
+    while (bool(p)) {
+      if (x == p->key) return p;
+      p = x < p->key ? p->l : p->r;
     }
-    return 0;
+    return NodePtr::nil();
   }
 
   // find t : t->key is minimum among (ptr n: n->key >= x)
-  NodePtr lower_ptr(NodePtr p, const Key &x) const {
-    if (!p) return 0;
+  static NodePtr lower_ptr(NodePtr p, const Key &x) {
+    if (!p) return NodePtr::nil();
     if (pool[p].val == x) return p;
     if (pool[p].val < x) return lower_ptr(pool[p].r, x);
     NodePtr q = lower_ptr(pool[p].l, x);
@@ -138,65 +143,75 @@ struct OrderedMap {
   }
 
   // find t : t->key is minimum among (ptr n: n->key > x)
-  NodePtr upper_ptr(NodePtr p, const Key &x) const {
-    if (!p) return 0;
+  static NodePtr upper_ptr(NodePtr p, const Key &x) {
+    if (!p) return NodePtr::nil();
     if (pool[p].val <= x) return upper_ptr(pool[p].r, x);
     NodePtr q = upper_ptr(pool[p].l, x);
     return q ? q : p;
   }
 
+  NodePtr build(int l, int r, const vector<Val> &v) {
+    if (l == r) return NodePtr::nil();
+    if (l + 1 == r) return my_new(l, v[l]);
+    return merge(build(l, (l + r) >> 1, v), build((l + r) >> 1, r, v));
+  }
+
+ public:
+  OrderedMap() : root(NodePtr::nil()) {}
+
+  void build(const vector<Val> &v) { root = build(0, v.size(), v); }
+
+  static void set_monoid(const F &_f, const Val &I_) {
+    f = _f;
+    I = I_;
+    NodePtr root = NodePtr::nil();
+    root->val = root->sum = I_;
+    fold_flag = true;
+  }
+
+  static VectorPool<Node, NodePtr> init_pool() {
+    VectorPool<Node, NodePtr> pool;
+    NodePtr root = NodePtr::nil();
+    root->l = root->r = root;
+    root->cnt = 0;
+    root->key = Key();
+    root->val = root->sum = Val();
+    return pool;
+  }
+
   // access (*this)[x]
   Val &operator[](const Key &x) {
     NodePtr p = find_ptr(x);
-    if (p) return pool[p].val;
+    if (p) return p->val;
     NodePtr l, r;
     tie(l, r) = split(root, x);
     NodePtr n = my_new(x, Val());
     root = merge(merge(l, n), r);
-    return pool[n].val;
+    return n->val;
   }
 
   // get (*this)[x]
   Val get(const Key &x) const {
     NodePtr p = root;
     while (p) {
-      if (x == pool[p].key) return pool[p].val;
-      p = x < pool[p].key ? pool[p].l : pool[p].r;
+      if (x == p->key) return p->val;
+      p = x < p->key ? p->l : p->r;
     }
     return Val();
   }
 
-  // getの設計をNodePtrを返す仕様にすべき？
-  // (存在しないときにnullptrを返せないと色々都合が悪い)
-
   // get node, of which key is minimum
-  pair<const Key &, Val &> get_first() const {
-    assert((*this).size() > 0);
+  NodePtr first_ptr() const {
     NodePtr p = root;
     while (!pool[p].l) p = pool[p].l;
-    return make_pair(pool[p].key, pool[p].val);
+    return p;
   }
 
   // get node, of which key is maximum
-  pair<const Key &, Val &> get_last() const {
-    assert((*this).size() > 0);
+  NodePtr last_ptr() const {
     NodePtr p = root;
     while (!pool[p].r) p = pool[p].r;
-    return make_pair(pool[p].key, pool[p].val);
-  }
-
-  // get pair(key, val) (lower_bound x)
-  pair<const Key &, Val &> get_lower_bound(const Key &x) const {
-    NodePtr p = lower_ptr(root, x);
-    assert(p != 0);
-    return make_pair(pool[p].key, pool[p].val);
-  }
-
-  // get pair(key, val) (upper_bound x)
-  pair<const Key &, Val &> get_upper_bound(const Key &x) const {
-    NodePtr p = upper_ptr(root, x);
-    assert(p != 0);
-    return make_pair(pool[p].key, pool[p].val);
+    return p;
   }
 
   // enumerate all key in order of increasing
@@ -217,6 +232,18 @@ struct OrderedMap {
     NodePtr p = find_ptr(x);
     if (p) {
       thrust(root, x, y);
+      return;
+    }
+    NodePtr l, r;
+    tie(l, r) = split(root, x);
+    root = merge(merge(l, my_new(x, y)), r);
+  }
+
+  void apply(const Key &x, const Val &y) {
+    assert(fold_flag = true);
+    NodePtr p = find_ptr(x);
+    if (p) {
+      thrust(root, x, f(p->val, y));
       return;
     }
     NodePtr l, r;
@@ -264,25 +291,94 @@ struct OrderedMap {
     return ret;
   }
 
-  // calculate f([n : l <= n.key < r])
-  Val fold(const Key &l, const Key &r) {
-    auto x = split(root, l);
-    auto y = split(x.second, r);
-    Val ret = y.first.sum;
-    root = merge(x.first, merge(y.first, y.second));
+  // (0-indexed) kth smallest number
+  NodePtr kth_element(int n) {
+    if (root->cnt <= n) return NodePtr::nil();
+    NodePtr p = root;
+    while (bool(p)) {
+      int sl = p->l->cnt;
+      if (sl + 1 == n) return p;
+      if (sl < n) {
+        n -= sl + 1;
+        p = p->r;
+      } else {
+        p = p->l;
+      }
+    }
+  }
+
+ private:
+  // fold [l, inf]
+  Val fold_left(NodePtr p, const Key &l) {
+    Val ret = I;
+    while (bool(p)) {
+      if (p->key == l) {
+        ret = f(f(p->val, p->r->sum), ret);
+        break;
+      } else if (p->key < l) {
+        p = p->r;
+      } else {
+        ret = f(f(p->val, p->r->sum), ret);
+        p = p->l;
+      }
+    }
     return ret;
   }
 
+  // fold [inf, r)
+  Val fold_right(NodePtr p, const Key &r) {
+    Val ret = I;
+    while (bool(p)) {
+      if (p->key == r) {
+        ret = f(ret, p->l->sum);
+        break;
+      } else if (p->key < r) {
+        ret = f(ret, f(p->l->sum, p->val));
+        p = p->r;
+      } else {
+        p = p->l;
+      }
+    }
+    return ret;
+  }
+
+ public:
+  // calculate f([n : l <= n.key < r])
+  Val fold(const Key &l, const Key &r) {
+    NodePtr p = root;
+    while (bool(p)) {
+      if (p->key < l) {
+        p = p->r;
+      } else if (r <= p->key) {
+        p = p->l;
+      } else
+        break;
+    }
+    return f(f(fold_left(p->l, l), p->val), fold_right(p->r, r));
+  }
+
   // count containing nodes
-  int size() const { return pool[root].cnt; }
+  int size() const { return root->cnt; }
 };
 
 template <typename Key, typename Val>
-VectorPool<typename OrderedMap<Key, Val>::Node> OrderedMap<Key, Val>::pool =
-    OrderedMap<Key, Val>::init_pool();
+VectorPool<typename OrderedMap<Key, Val>::Node,
+           typename OrderedMap<Key, Val>::NodePtr>
+    OrderedMap<Key, Val>::pool = OrderedMap<Key, Val>::init_pool();
 template <typename Key, typename Val>
 function<Val(Val, Val)> OrderedMap<Key, Val>::f = +[](Val, Val) {
   return Val();
 };
 template <typename Key, typename Val>
 Val OrderedMap<Key, Val>::I = Val();
+
+template <typename Key, typename Val>
+bool OrderedMap<Key, Val>::fold_flag = false;
+
+template <typename Key, typename Val>
+bool OrderedMap<Key, Val>::lazy_flag = false;
+
+/**
+ *  @brief OrderedMap(順序付き連想配列, RBST)
+ *  @docs balanced-binary-search-tree/rbst-ordered-map.md
+ */ 
