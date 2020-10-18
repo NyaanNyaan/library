@@ -28,7 +28,7 @@ data:
       title: balanced-binary-search-tree/randomized-binary-search-tree.hpp
     - icon: ':warning:'
       path: balanced-binary-search-tree/rbst-ordered-map.hpp
-      title: balanced-binary-search-tree/rbst-ordered-map.hpp
+      title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217, RBST)"
     - icon: ':warning:'
       path: balanced-binary-search-tree/rbst-ordered-set.hpp
       title: balanced-binary-search-tree/rbst-ordered-set.hpp

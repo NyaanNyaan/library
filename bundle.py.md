@@ -7,9 +7,9 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/onlinejudge_verify/documentation/build.py\"\
+  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/documentation/build.py\"\
     , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir).decode()\n  File \"/opt/hostedtoolcache/Python/3.8.6/x64/lib/python3.8/site-packages/onlinejudge_verify/languages/python.py\"\
+    \ basedir=basedir).decode()\n  File \"/opt/hostedtoolcache/Python/3.9.0/x64/lib/python3.9/site-packages/onlinejudge_verify/languages/python.py\"\
     , line 85, in bundle\n    raise NotImplementedError\nNotImplementedError\n"
   code: "import subprocess\nimport sys\nimport re\nimport io\n\n# oj-bundle\u3092\u4F7F\
     \u7528\u3057\u305F\u969B\u3001Windows\u74B0\u5883\u3060\u3068\n# \u300C#line 3\
@@ -20,16 +20,16 @@ data:
     \u30E9\u30C3\u30D1\u30FC\n\n# \u51FA\u529B\u3092utf-8\u306B\u3059\u308B(\u3053\
     \u308C\u3092\u3057\u306A\u3044\u3068win\u3067\u306F\u6587\u5B57\u5316\u3051\u3059\
     \u308B)\nsys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')\n\n\
-    args = sys.argv\nif len(args) < 2:\n    exit()\nbuffer = 'buf.cpp'\n\nbuf = open(buffer,\
+    args = sys.argv\nif len(args) < 2:\n  exit()\nbuffer = \"buf.cpp\"\n\nbuf = open(buffer,\
     \ mode='w', encoding='utf-8')\nwith open(args[1], mode='r', encoding='utf-8')\
-    \ as f:\n    lines = f.readlines()   \n    for line in lines:\n        buf.write(line)\n\
-    \        # #include\u540C\u58EB\u306F1\u884C\u7A7A\u3051\u308B\n        if len(line)\
-    \ > 8 and line[:8] == '#include':\n            buf.write('\\n')\nbuf.close()\n\
-    \nimport datetime\nnw = datetime.datetime.now()\nprint(\"/**\")\nprint(\" *  date\
-    \ : \" + nw.strftime(\"%Y-%m-%d %H:%M:%S\"))\nprint(\" */\")\nprint()\ncmd = \"\
-    oj-bundle \" + buffer\nsrc = subprocess.check_output(cmd.split()).decode(\"utf-8\"\
-    )\nlines = src.split('\\n')\nfor line in lines:\n    if not re.match('^#line',\
-    \ line):\n        print(line, end='')\n"
+    \ as f:\n  lines = f.readlines()\n  for line in lines:\n    buf.write(line)\n\
+    \    # #include\u540C\u58EB\u306F1\u884C\u7A7A\u3051\u308B\n    if len(line) >\
+    \ 8 and line[:8] == '#include':\n      buf.write('\\n')\nbuf.close()\n\nlibrary_path\
+    \ = \"C:/Users/denjo/Desktop/ABC/library\"\n\nimport datetime\nnw = datetime.datetime.now()\n\
+    print(\"/**\")\nprint(\" *  date : \" + nw.strftime(\"%Y-%m-%d %H:%M:%S\"))\n\
+    print(\" */\")\nprint()\ncmd = [\"oj-bundle\", \"-I\", library_path, buffer]\n\
+    src = subprocess.check_output(cmd).decode(\"utf-8\")\nlines = src.split('\\n')\n\
+    for line in lines:\n  if not re.match('^#line', line):\n    print(line, end='')\n"
   dependsOn: []
   isVerificationFile: false
   path: bundle.py
