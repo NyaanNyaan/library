@@ -61,32 +61,21 @@ data:
     \ c = Q.front();\n      Q.pop();\n      f(c, [&](A d) {\n        if (dist[id(d)]\
     \ == -1) {\n          dist[id(d)] = dist[id(c)] + 1;\n          Q.push(d);\n \
     \       }\n      });\n    }\n    return dist;\n  }\n\n  template <typename F>\n\
-    \  vector<i64> bfs01(F f, A s = {}) {\n    vector<i64> dist(N, -1);\n    deque<A>\
-    \ Q;\n    dist[id(s)] = 0;\n    Q.push_back(s);\n    while (!Q.empty()) {\n  \
-    \    A c = Q.front();\n      Q.pop_front();\n      f(c, [&](A d, i64 w) {\n  \
-    \      if (dist[id(d)] == -1) {\n          dist[id(d)] = dist[id(c)] + w;\n  \
-    \        if (w == 0)\n            Q.push_front(d);\n          else\n         \
-    \   Q.push_back(d);\n        }\n      });\n    }\n    return dist;\n  }\n\n  template\
-    \ <typename F>\n  vector<i64> dijkstra(F f, A s = {}) {\n    vector<i64> dist(N,\
-    \ -1);\n    using P = pair<i64, A>;\n    priority_queue<P, vector<P>, greater<P>>\
-    \ Q;\n    Q.emplace(dist[id(s)] = 0, s);\n    while (!Q.empty()) {\n      i64\
-    \ d;\n      A c;\n      tie(d, c) = Q.top();\n      Q.pop();\n      if (dist[id(c)]\
-    \ < d) continue;\n      f(c, [&](A d, i64 w) {\n        if (dist[id(d)] == -1\
-    \ or dist[id(d)] > dist[id(c)] + w) {\n          Q.emplace(dist[id(d)] = dist[id(c)]\
-    \ + w, d);\n        }\n      });\n    }\n    return dist;\n  }\n};\n\nstruct GridGraph\
-    \ : DimensionExpandedGraph<2> {\n  vector<string> str;\n  char ng;\n  int is_8_direction;\n\
-    \n  template <typename... T>\n  GridGraph(const T &... t) : ng('#'), is_8_direction(false)\
-    \ {\n    N = 1;\n    g_size = A({t...});\n    set_coeff();\n  }\n\n  operator\
-    \ vector<string> &() { return str; }\n\n  template <typename F>\n  void adjacent(pair<int,int>\
-    \ c, F f) {\n    int dx[] = {1, 0, -1, 0, 1, 1, -1, -1};\n    int dy[] = {0, 1,\
-    \ 0, -1, 1, -1, 1, -1};\n    int i, j;\n    tie(i, j) = c;\n    for (int k = 0;\
-    \ k < is_8_direction ? 8 : 4; k++) {\n      int di = i + dx[k], dj = dy[k];\n\
-    \      if (ok(di, dj) and str[di][dj] != ng) f(di, dj);\n    }\n  }\n\n  template\
-    \ <typename F>\n  vector<i64> bfs(F f, A s = {}){\n    vector<i64> dist(N, -1);\n\
-    \    queue<A> Q;\n    dist[id(s)] = 0;\n    Q.push(s);\n    while (!Q.empty())\
-    \ {\n      A c = Q.front();\n      Q.pop();\n      adjacent(c, [&](A d) {\n  \
-    \      if (dist[id(d)] == -1) {\n          dist[id(d)] = dist[id(c)] + 1;\n  \
-    \        Q.push(d);\n        }\n      });\n    }\n    return dist;\n  }\n};\n"
+    \  vector<i64> bfs01(F f, A s = {}) {\n    vector<i64> dist(N, -1);\n    vector<bool>\
+    \ vis(N, 0);\n    deque<A> Q;\n    dist[id(s)] = 0;\n    Q.push_back(s);\n   \
+    \ while (!Q.empty()) {\n      A c = Q.front();\n      Q.pop_front();\n      if\
+    \ (vis[id(c)]) continue;\n      vis[id(c)] = true;\n      i64 dc = dist[id(c)];\n\
+    \      f(c, [&](A d, i64 w) {\n        i64 &dd = dist[id(d)];\n        if (dd\
+    \ == -1 || dc + w < dd) {\n          dd = dc + w;\n          if (w == 0)\n   \
+    \         Q.push_front(d);\n          else\n            Q.push_back(d);\n    \
+    \    }\n      });\n    }\n    return dist;\n  }\n\n  template <typename F>\n \
+    \ vector<i64> dijkstra(F f, A s = {}) {\n    vector<i64> dist(N, -1);\n    using\
+    \ P = pair<i64, A>;\n    priority_queue<P, vector<P>, greater<P>> Q;\n    Q.emplace(dist[id(s)]\
+    \ = 0, s);\n    while (!Q.empty()) {\n      i64 d;\n      A c;\n      tie(d, c)\
+    \ = Q.top();\n      Q.pop();\n      if (dist[id(c)] < d) continue;\n      f(c,\
+    \ [&](A d, i64 w) {\n        if (dist[id(d)] == -1 or dist[id(d)] > dist[id(c)]\
+    \ + w) {\n          Q.emplace(dist[id(d)] = dist[id(c)] + w, d);\n        }\n\
+    \      });\n    }\n    return dist;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"./graph-template.hpp\"\n\ntemplate <int DIM>\nstruct DimensionExpandedGraph\
     \ {\n  using i64 = long long;\n  using A = array<int, DIM>;\n\n  int N;\n  A g_size,\
@@ -110,38 +99,27 @@ data:
     \ c = Q.front();\n      Q.pop();\n      f(c, [&](A d) {\n        if (dist[id(d)]\
     \ == -1) {\n          dist[id(d)] = dist[id(c)] + 1;\n          Q.push(d);\n \
     \       }\n      });\n    }\n    return dist;\n  }\n\n  template <typename F>\n\
-    \  vector<i64> bfs01(F f, A s = {}) {\n    vector<i64> dist(N, -1);\n    deque<A>\
-    \ Q;\n    dist[id(s)] = 0;\n    Q.push_back(s);\n    while (!Q.empty()) {\n  \
-    \    A c = Q.front();\n      Q.pop_front();\n      f(c, [&](A d, i64 w) {\n  \
-    \      if (dist[id(d)] == -1) {\n          dist[id(d)] = dist[id(c)] + w;\n  \
-    \        if (w == 0)\n            Q.push_front(d);\n          else\n         \
-    \   Q.push_back(d);\n        }\n      });\n    }\n    return dist;\n  }\n\n  template\
-    \ <typename F>\n  vector<i64> dijkstra(F f, A s = {}) {\n    vector<i64> dist(N,\
-    \ -1);\n    using P = pair<i64, A>;\n    priority_queue<P, vector<P>, greater<P>>\
-    \ Q;\n    Q.emplace(dist[id(s)] = 0, s);\n    while (!Q.empty()) {\n      i64\
-    \ d;\n      A c;\n      tie(d, c) = Q.top();\n      Q.pop();\n      if (dist[id(c)]\
-    \ < d) continue;\n      f(c, [&](A d, i64 w) {\n        if (dist[id(d)] == -1\
-    \ or dist[id(d)] > dist[id(c)] + w) {\n          Q.emplace(dist[id(d)] = dist[id(c)]\
-    \ + w, d);\n        }\n      });\n    }\n    return dist;\n  }\n};\n\nstruct GridGraph\
-    \ : DimensionExpandedGraph<2> {\n  vector<string> str;\n  char ng;\n  int is_8_direction;\n\
-    \n  template <typename... T>\n  GridGraph(const T &... t) : ng('#'), is_8_direction(false)\
-    \ {\n    N = 1;\n    g_size = A({t...});\n    set_coeff();\n  }\n\n  operator\
-    \ vector<string> &() { return str; }\n\n  template <typename F>\n  void adjacent(pair<int,int>\
-    \ c, F f) {\n    int dx[] = {1, 0, -1, 0, 1, 1, -1, -1};\n    int dy[] = {0, 1,\
-    \ 0, -1, 1, -1, 1, -1};\n    int i, j;\n    tie(i, j) = c;\n    for (int k = 0;\
-    \ k < is_8_direction ? 8 : 4; k++) {\n      int di = i + dx[k], dj = dy[k];\n\
-    \      if (ok(di, dj) and str[di][dj] != ng) f(di, dj);\n    }\n  }\n\n  template\
-    \ <typename F>\n  vector<i64> bfs(F f, A s = {}){\n    vector<i64> dist(N, -1);\n\
-    \    queue<A> Q;\n    dist[id(s)] = 0;\n    Q.push(s);\n    while (!Q.empty())\
-    \ {\n      A c = Q.front();\n      Q.pop();\n      adjacent(c, [&](A d) {\n  \
-    \      if (dist[id(d)] == -1) {\n          dist[id(d)] = dist[id(c)] + 1;\n  \
-    \        Q.push(d);\n        }\n      });\n    }\n    return dist;\n  }\n};"
+    \  vector<i64> bfs01(F f, A s = {}) {\n    vector<i64> dist(N, -1);\n    vector<bool>\
+    \ vis(N, 0);\n    deque<A> Q;\n    dist[id(s)] = 0;\n    Q.push_back(s);\n   \
+    \ while (!Q.empty()) {\n      A c = Q.front();\n      Q.pop_front();\n      if\
+    \ (vis[id(c)]) continue;\n      vis[id(c)] = true;\n      i64 dc = dist[id(c)];\n\
+    \      f(c, [&](A d, i64 w) {\n        i64 &dd = dist[id(d)];\n        if (dd\
+    \ == -1 || dc + w < dd) {\n          dd = dc + w;\n          if (w == 0)\n   \
+    \         Q.push_front(d);\n          else\n            Q.push_back(d);\n    \
+    \    }\n      });\n    }\n    return dist;\n  }\n\n  template <typename F>\n \
+    \ vector<i64> dijkstra(F f, A s = {}) {\n    vector<i64> dist(N, -1);\n    using\
+    \ P = pair<i64, A>;\n    priority_queue<P, vector<P>, greater<P>> Q;\n    Q.emplace(dist[id(s)]\
+    \ = 0, s);\n    while (!Q.empty()) {\n      i64 d;\n      A c;\n      tie(d, c)\
+    \ = Q.top();\n      Q.pop();\n      if (dist[id(c)] < d) continue;\n      f(c,\
+    \ [&](A d, i64 w) {\n        if (dist[id(d)] == -1 or dist[id(d)] > dist[id(c)]\
+    \ + w) {\n          Q.emplace(dist[id(d)] = dist[id(c)] + w, d);\n        }\n\
+    \      });\n    }\n    return dist;\n  }\n};\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: graph/dimension-expanded-graph.hpp
   requiredBy: []
-  timestamp: '2020-07-28 11:29:32+09:00'
+  timestamp: '2020-10-21 00:35:35+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/dimension-expanded-graph.hpp
