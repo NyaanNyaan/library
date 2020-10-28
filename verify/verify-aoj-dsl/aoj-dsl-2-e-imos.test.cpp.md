@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure/binary-indexed-tree.hpp
-    title: data-structure/binary-indexed-tree.hpp
+    title: Binary Indexed Tree(Fenwick Tree)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -133,11 +133,13 @@ data:
     \  return x;\n  }\n\n  // minimize i s.t. sum(i) > w\n  int upper_bound(T w) {\n\
     \    if (w < 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k; k\
     \ >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <= w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  BinaryIndexedTree<int> bit(N);\n  rep(_, Q)\
-    \ {\n    ini(c);\n    if (c == 0) {\n      ini(s, t, x);\n      s--, t--;\n  \
-    \    bit.imos(s, t, x);\n    } else {\n      ini(i);\n      i--;\n      out(bit.sum(i));\n\
-    \    }\n  }\n}\n"
+    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief\
+    \ Binary Indexed Tree(Fenwick Tree)\n * @docs docs/data-structure/binary-indexed-tree.md\n\
+    \ */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp\"\n\nvoid solve()\
+    \ {\n  ini(N, Q);\n  BinaryIndexedTree<int> bit(N);\n  rep(_, Q) {\n    ini(c);\n\
+    \    if (c == 0) {\n      ini(s, t, x);\n      s--, t--;\n      bit.imos(s, t,\
+    \ x);\n    } else {\n      ini(i);\n      i--;\n      out(bit.sum(i));\n    }\n\
+    \  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/binary-indexed-tree.hpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  BinaryIndexedTree<int> bit(N);\n  rep(_, Q)\
@@ -150,7 +152,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 19:18:38+09:00'
+  timestamp: '2020-10-28 23:43:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp

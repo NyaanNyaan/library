@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure/binary-indexed-tree.hpp
-    title: data-structure/binary-indexed-tree.hpp
+    title: Binary Indexed Tree(Fenwick Tree)
   - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
@@ -142,10 +142,11 @@ data:
     \  return x;\n  }\n\n  // minimize i s.t. sum(i) > w\n  int upper_bound(T w) {\n\
     \    if (w < 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k; k\
     \ >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <= w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n#line 3 \"misc/compress.hpp\"\
-    \nusing namespace std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n\
-    \  compress(const vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v)\
-    \ xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
+    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief\
+    \ Binary Indexed Tree(Fenwick Tree)\n * @docs docs/data-structure/binary-indexed-tree.md\n\
+    \ */\n#line 3 \"misc/compress.hpp\"\nusing namespace std;\n\ntemplate<class T>\n\
+    struct compress{\n  vector<T> xs;\n  compress(const vector<T>& v){\n    xs.reserve(v.size());\n\
+    \    for(T x : v) xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
     \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
     \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
     \ i){\n    return xs[i];\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
@@ -229,7 +230,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 19:18:38+09:00'
+  timestamp: '2020-10-28 23:43:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp

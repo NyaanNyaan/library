@@ -27,6 +27,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/data-structure/binary-indexed-tree.md
+    document_title: Binary Indexed Tree(Fenwick Tree)
     links: []
   bundledCode: "#line 2 \"data-structure/binary-indexed-tree.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree {\n  int\
@@ -46,7 +48,9 @@ data:
     \  return x;\n  }\n\n  // minimize i s.t. sum(i) > w\n  int upper_bound(T w) {\n\
     \    if (w < 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k; k\
     \ >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <= w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n"
+    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief\
+    \ Binary Indexed Tree(Fenwick Tree)\n * @docs docs/data-structure/binary-indexed-tree.md\n\
+    \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename T>\nstruct BinaryIndexedTree {\n  int N;\n  vector<T> data;\n\n  BinaryIndexedTree()\
     \ = default;\n\n  BinaryIndexedTree(int size) { init(size); }\n\n  void init(int\
@@ -65,13 +69,14 @@ data:
     \ i s.t. sum(i) > w\n  int upper_bound(T w) {\n    if (w < 0) return 0;\n    int\
     \ x = 0;\n    for (int k = 1 << __lg(N); k; k >>= 1) {\n      if (x + k <= N -\
     \ 1 && data[x + k] <= w) {\n        w -= data[x + k];\n        x += k;\n     \
-    \ }\n    }\n    return x;\n  }\n};"
+    \ }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief Binary Indexed Tree(Fenwick\
+    \ Tree)\n * @docs docs/data-structure/binary-indexed-tree.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/binary-indexed-tree.hpp
   requiredBy:
   - data-structure/range-sum-range-add-bit.hpp
-  timestamp: '2020-09-27 19:18:38+09:00'
+  timestamp: '2020-10-28 23:43:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
@@ -85,5 +90,23 @@ layout: document
 redirect_from:
 - /library/data-structure/binary-indexed-tree.hpp
 - /library/data-structure/binary-indexed-tree.hpp.html
-title: data-structure/binary-indexed-tree.hpp
+title: Binary Indexed Tree(Fenwick Tree)
 ---
+## Binary Indexed Tree
+
+#### 概要
+
+Binary Indexed Tree(BIT, Fenwick Treeとも)とは、要素数$n$の数列に対して、値の一点加算と区間和の取得を$\mathrm{O}(\log n)$で行うことが出来るデータ構造である。実装がシンプルで定数倍が非常に軽い一方、Segment Treeと異なり逆元が存在しないと区間和が求められないという欠点もある。
+
+また、imos法と併用することで区間加算と一点取得を$\mathrm{O}(\log N)$で行うこともできる。(実はimos法を使用しなくても実装を少し書き換えれば区間加算・一点取得BITは実現できるがここでは実装していない。)
+
+#### 使い方
+
+- `BinaryIndexedTree<T>(size)`: 要素数$size+1$のBITを作成する。
+- `add(k, x)`: k番目の要素にxを加算する。
+- `operator[](k)`: k番目の要素を取得する。
+- `sum(k)`: 区間`[0, k]`の和を取得する。(閉区間に注意)
+- `sum(l, r)`: 区間`[l, r]`の和を取得する。(閉区間に注意)
+- `imos(l, r, k)`: imos法を利用するとき、`[l, r]`にkを加算する。(この時、一点取得は`sum(k)`で行う。)
+- `lower_bound(w)`: 要素が全て非負の時、`[0, k]`の区間和がw以上となるような最小のkを求める。
+- `upper_bound(w)`: 要素が全て非負の時、`[0, k]`の区間和がw以上となるような最小のkを求める。

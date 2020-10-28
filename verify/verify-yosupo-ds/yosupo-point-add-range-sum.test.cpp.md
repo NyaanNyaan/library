@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure/binary-indexed-tree.hpp
-    title: data-structure/binary-indexed-tree.hpp
+    title: Binary Indexed Tree(Fenwick Tree)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -133,8 +133,10 @@ data:
     \  return x;\n  }\n\n  // minimize i s.t. sum(i) > w\n  int upper_bound(T w) {\n\
     \    if (w < 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k; k\
     \ >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <= w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n#line 5 \"verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  BinaryIndexedTree<ll>\
+    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief\
+    \ Binary Indexed Tree(Fenwick Tree)\n * @docs docs/data-structure/binary-indexed-tree.md\n\
+    \ */\n#line 5 \"verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp\"\n\
+    \nvoid solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  BinaryIndexedTree<ll>\
     \ bit(N);\n  rep(i, N) bit.add(i, a[i]);\n  rep(_, Q) {\n    inl(c, x, y);\n \
     \   if (c)\n      out(bit.sum(x, y - 1));\n    else\n      bit.add(x, y);\n  }\n\
     }\n"
@@ -150,7 +152,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 19:18:38+09:00'
+  timestamp: '2020-10-28 23:43:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp

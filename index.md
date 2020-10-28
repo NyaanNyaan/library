@@ -44,7 +44,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: data-structure/binary-indexed-tree.hpp
-      title: data-structure/binary-indexed-tree.hpp
+      title: Binary Indexed Tree(Fenwick Tree)
     - icon: ':heavy_check_mark:'
       path: data-structure/binary-trie.hpp
       title: Binary Trie
