@@ -86,13 +86,13 @@ data:
   isVerificationFile: false
   path: atcoder/internal_scc.hpp
   requiredBy:
-  - atcoder/scc.hpp
   - atcoder/two-sat.hpp
+  - atcoder/scc.hpp
   timestamp: '2020-09-08 23:53:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
   - verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
+  - verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
 documentation_of: atcoder/internal_scc.hpp
 layout: document
 redirect_from:

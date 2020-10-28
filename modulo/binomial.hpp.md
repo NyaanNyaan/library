@@ -96,23 +96,23 @@ data:
   isVerificationFile: false
   path: modulo/binomial.hpp
   requiredBy:
-  - fps/fps-composition.hpp
+  - fps/famous-series.hpp
   - fps/lagrange-interpolation-point.hpp
   - fps/taylor-shift.hpp
-  - fps/famous-series.hpp
+  - fps/fps-composition.hpp
   - fps/sum-of-exponential-times-poly.hpp
   - fps/utility.hpp
   timestamp: '2020-10-11 00:26:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp
-  - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
+  - verify/verify-yuki/yuki-1145.test.cpp
 documentation_of: modulo/binomial.hpp
 layout: document
 redirect_from:

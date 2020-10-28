@@ -56,10 +56,10 @@ data:
   timestamp: '2020-09-19 00:42:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
 documentation_of: inner/inner_math.hpp
 layout: document
 redirect_from:

@@ -122,9 +122,9 @@ data:
   isVerificationFile: false
   path: data-structure/hash-map-variable-length.hpp
   requiredBy:
+  - data-structure/dynamic-binary-indexed-tree.hpp
   - modulo/mod-log.hpp
   - segment-tree/dynamic-li-chao-tree.hpp
-  - data-structure/dynamic-binary-indexed-tree.hpp
   - data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
   timestamp: '2020-10-05 01:14:31+09:00'
   verificationStatus: LIBRARY_ALL_AC

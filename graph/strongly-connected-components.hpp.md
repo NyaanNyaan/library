@@ -106,9 +106,9 @@ data:
   timestamp: '2020-08-02 19:22:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+  - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+  - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
 documentation_of: graph/strongly-connected-components.hpp
 layout: document
 redirect_from:

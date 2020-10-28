@@ -112,15 +112,15 @@ data:
   timestamp: '2020-09-27 16:45:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-  - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
 documentation_of: segment-tree/segment-tree.hpp
 layout: document
 redirect_from:

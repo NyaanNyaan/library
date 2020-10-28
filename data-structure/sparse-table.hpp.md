@@ -56,9 +56,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+  - verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
-  - verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
 documentation_of: data-structure/sparse-table.hpp
 layout: document
 redirect_from:
