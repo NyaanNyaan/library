@@ -2,12 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: atcoder/internal_scc.hpp
-    title: atcoder/internal_scc.hpp
-  - icon: ':heavy_check_mark:'
-    path: atcoder/two-sat.hpp
-    title: atcoder/two-sat.hpp
-  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   _extendedRequiredBy: []
@@ -178,8 +172,6 @@ data:
     \  cout << \"0\\n\";\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - atcoder/two-sat.hpp
-  - atcoder/internal_scc.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
   requiredBy: []

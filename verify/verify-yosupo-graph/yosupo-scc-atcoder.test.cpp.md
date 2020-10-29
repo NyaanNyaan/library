@@ -2,12 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: atcoder/internal_scc.hpp
-    title: atcoder/internal_scc.hpp
-  - icon: ':heavy_check_mark:'
-    path: atcoder/scc.hpp
-    title: atcoder/scc.hpp
-  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   _extendedRequiredBy: []
@@ -166,8 +160,6 @@ data:
     \ \" \" << x << endl;\n  }\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - atcoder/scc.hpp
-  - atcoder/internal_scc.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
   requiredBy: []

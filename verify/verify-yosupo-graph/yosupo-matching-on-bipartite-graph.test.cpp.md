@@ -2,12 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: atcoder/internal_queue.hpp
-    title: atcoder/internal_queue.hpp
-  - icon: ':heavy_check_mark:'
-    path: atcoder/maxflow.hpp
-    title: atcoder/maxflow.hpp
-  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -232,8 +226,6 @@ data:
     \ v);\n  }\n  wtn(graph.flow());\n  auto es = graph.edges();\n  for (auto &e :\
     \ es) {\n    wt(e.first, ' ', e.second, '\\n');\n  }\n}"
   dependsOn:
-  - atcoder/maxflow.hpp
-  - atcoder/internal_queue.hpp
   - competitive-template.hpp
   - flow/flow-on-bipartite-graph.hpp
   - misc/fastio.hpp

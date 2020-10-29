@@ -1,26 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: atcoder
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: atcoder/internal_queue.hpp
-      title: atcoder/internal_queue.hpp
-    - icon: ':heavy_check_mark:'
-      path: atcoder/internal_scc.hpp
-      title: atcoder/internal_scc.hpp
-    - icon: ':heavy_check_mark:'
-      path: atcoder/maxflow.hpp
-      title: atcoder/maxflow.hpp
-    - icon: ':warning:'
-      path: atcoder/mincostflow.hpp
-      title: atcoder/mincostflow.hpp
-    - icon: ':heavy_check_mark:'
-      path: atcoder/scc.hpp
-      title: atcoder/scc.hpp
-    - icon: ':heavy_check_mark:'
-      path: atcoder/two-sat.hpp
-      title: atcoder/two-sat.hpp
   - name: balanced-binary-search-tree
     pages:
     - icon: ':warning:'
@@ -34,9 +14,6 @@ data:
       title: balanced-binary-search-tree/rbst-ordered-set.hpp
   - name: .
     pages:
-    - icon: ':warning:'
-      path: bundle.py
-      title: bundle.py
     - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
@@ -522,29 +499,6 @@ data:
     - icon: ':warning:'
       path: trial/fast-inv.hpp
       title: "\u9AD8\u901Fmodulo\u9006\u5143"
-  - name: unused/python
-    pages:
-    - icon: ':warning:'
-      path: unused/python/fastio.py
-      title: unused/python/fastio.py
-    - icon: ':warning:'
-      path: unused/python/ntt-numba.py
-      title: unused/python/ntt-numba.py
-    - icon: ':warning:'
-      path: unused/python/ntt.py
-      title: unused/python/ntt.py
-    - icon: ':warning:'
-      path: unused/python/segtree-immutable.py
-      title: unused/python/segtree-immutable.py
-    - icon: ':warning:'
-      path: unused/python/segtree-mutable.py
-      title: unused/python/segtree-mutable.py
-    - icon: ':warning:'
-      path: unused/python/template.py
-      title: unused/python/template.py
-    - icon: ':warning:'
-      path: unused/python/tuning_optuna.py
-      title: unused/python/tuning_optuna.py
   verificationCategories:
   - name: verify/verify-aoj-dsl
     pages:
@@ -993,3 +947,15 @@ data:
       title: verify/verify-yuki/yuki-helloworld.test.cpp
 layout: toppage
 ---
+このライブラリは競技プログラミング用に作成したアルゴリズム・データ構造などをまとめたものです。
+
+バグなどを発見したらIssueで報告いただけると助かります。
+
+C++14での使用を想定しています。(一部のライブラリはavx2対応の環境でのみ動作します。)
+
+ [![Actions Status](https://github.com/NyaanNyaan/library/workflows/verify/badge.svg)](https://github.com/NyaanNyaan/library/actions)
+ [![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://NyaanNyaan.github.io/library/)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/NyaanNyaan/library?style=flat-square)
+![Lines of code](https://img.shields.io/tokei/lines/github/NyaanNyaan/library?style=flat-square)
+[![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FNyaan)](https://atcoder.jp/users/Nyaan)
+[![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fcodeforces%2Fjson%2FNyaan)](https://codeforces.com/profile/Nyaan)

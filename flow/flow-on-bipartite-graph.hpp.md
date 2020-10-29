@@ -1,12 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: atcoder/internal_queue.hpp
-    title: atcoder/internal_queue.hpp
-  - icon: ':heavy_check_mark:'
-    path: atcoder/maxflow.hpp
-    title: atcoder/maxflow.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -93,9 +87,7 @@ data:
     \ int>> ret;\n    for (auto &e : es) {\n      if (e.flow > 0 && e.from != s &&\
     \ e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n      }\n    }\n\
     \    return ret;\n  }\n};\n\n}  // namespace BipartiteGraph\n"
-  dependsOn:
-  - atcoder/maxflow.hpp
-  - atcoder/internal_queue.hpp
+  dependsOn: []
   isVerificationFile: false
   path: flow/flow-on-bipartite-graph.hpp
   requiredBy: []
