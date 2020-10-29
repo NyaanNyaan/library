@@ -75,6 +75,7 @@ struct OrderedSet {
     return ret;
   }
 
+  /*
   vector<string> dump() {
     int width = 128;
     string emp(width, ' ');
@@ -108,6 +109,12 @@ struct OrderedSet {
       dump(s, t->r, i + 2, j + off, off / 2, cdep + 1, mdep);
     }
   }
+  */
 };
 template <typename T, int S, bool MULTI>
 typename OrderedSet<T, S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;
+
+/**
+ *  @brief OrderedSet(順序付き集合)
+ *  @docs docs/balanced-binary-search-tree/rbst-ordered-set.md
+ */ 

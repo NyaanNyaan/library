@@ -75,7 +75,7 @@ struct HashMap {
 
   // exist -> return pointer of Val
   // not exist -> return nullptr
-  Val* find(const Key& i) const {
+  const Val* find(const Key& i) const {
     u32 hash = (u64(i) * r) >> shift;
     while (true) {
       if (!flag[hash]) return nullptr;

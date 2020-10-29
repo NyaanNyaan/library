@@ -1,8 +1,8 @@
-## OrderedMap(順序付き連想配列, RBST)
+## OrderedMap(順序付き連想配列)
 
-順序付き連想配列をRandomized Binary Search Tree(merge-splitベース)を内部実装として実装したもの。計算量は言及がない限り$\mathrm{O}(N)$。
+順序付き連想配列をRandomized Binary Search Tree(merge-splitベース)を内部実装として実装したもの。計算量は言及がない限り$\mathrm{O}(\log N)$。
 
-#### 使用方法
+#### 使い方
 
 内部ではノードへのポインタを`NodePtr`型で管理しており、一部の関数は`NodePtr`型が返り値となる。`NodePtr p`に対して`*p`で`pair(const key&, val&)`を取得することが出来る。(インクリメント等は実装しておらず参照にしか使えない。)また、`NodePtr::nil()`は`nullptr`と同様の意味を持っており、`bool(NodePtr) = false`を返す設計となっている。
 
