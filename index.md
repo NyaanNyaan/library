@@ -14,7 +14,7 @@ data:
       title: balanced-binary-search-tree/rbst-ordered-set.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -25,7 +25,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/binary-trie.hpp
       title: Binary Trie
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: data-structure/dynamic-binary-indexed-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/hash-map-chain.hpp
       title: "Hash Map(\u9023\u9396\u6CD5)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: data-structure/hash-map-variable-length.hpp
       title: "Hash Map(\u53EF\u5909\u9577\u7248)"
     - icon: ':heavy_check_mark:'
@@ -84,7 +84,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/abstract-range-tree.hpp
       title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
       title: "\u52D5\u7684Binary Indexed Tree"
     - icon: ':heavy_check_mark:'
@@ -213,7 +213,7 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: inner
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
   - name: math
@@ -289,13 +289,13 @@ data:
       title: math/zeta-mobius-transform.hpp
   - name: misc
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/compress.hpp
       title: misc/compress.hpp
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -347,7 +347,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/mod-kth-root.hpp
       title: kth root(Tonelli-Shanks algorithm)
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
     - icon: ':heavy_check_mark:'
@@ -669,7 +669,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -822,7 +822,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
       title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     - icon: ':heavy_check_mark:'
@@ -953,8 +953,6 @@ layout: toppage
 
 C++14での使用を想定しています。(一部のライブラリはavx2対応の環境でのみ動作します。)
 
- [![Actions Status](https://github.com/NyaanNyaan/library/workflows/verify/badge.svg)](https://github.com/NyaanNyaan/library/actions)
- [![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=+&color=brightgreen&logo=github)](https://NyaanNyaan.github.io/library/)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/NyaanNyaan/library?style=flat-square)
 ![Lines of code](https://img.shields.io/tokei/lines/github/NyaanNyaan/library?style=flat-square)
 [![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FNyaan)](https://atcoder.jp/users/Nyaan)

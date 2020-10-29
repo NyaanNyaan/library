@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
     title: "\u52D5\u7684Binary Indexed Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: data-structure/dynamic-binary-indexed-tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -129,46 +129,35 @@ data:
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
     \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
-    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap, s;\n  Key*\
-    \ keys;\n  Val* vals;\n  vector<bool> flag;\n  u64 r;\n  u32 shift;\n  Val DefaultValue;\n\
-    \n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap, s;\n  vector<Key>\
+    \ keys;\n  vector<Val> vals;\n  vector<bool> flag;\n  u64 r;\n  u32 shift;\n \
+    \ Val DefaultValue;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
     \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
     \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
-    \  }\n\n  void reallocate() {\n    cap <<= 1;\n    Key* k = new Key[cap];\n  \
-    \  Val* v = new Val[cap];\n    vector<bool> f(cap);\n    u32 sh = shift - 1;\n\
-    \    for (int i = 0; i < (int)flag.size(); i++) {\n      if (flag[i]) {\n    \
-    \    u32 hash = (u64(keys[i]) * r) >> sh;\n        while (f[hash]) hash = (hash\
-    \ + 1) & (cap - 1);\n        k[hash] = keys[i];\n        v[hash] = vals[i];\n\
-    \        f[hash] = 1;\n      }\n    }\n    delete[](keys);\n    delete[](vals);\n\
-    \    keys = k;\n    vals = v;\n    flag.swap(f);\n    --shift;\n  }\n\n  explicit\
-    \ HashMap()\n      : cap(8),\n        s(0),\n        keys(new Key[cap]),\n   \
-    \     vals(new Val[cap]),\n        flag(cap),\n        r(rng()),\n        shift(64\
-    \ - __lg(cap)),\n        DefaultValue(Val()) {}\n\n  // copy constructor\n  HashMap(const\
-    \ HashMap& obj) {\n    cap = obj.cap;\n    s = obj.s;\n    flag = obj.flag;\n\
-    \    r = obj.r;\n    shift = obj.shift;\n    DefaultValue = obj.DefaultValue;\n\
-    \    keys = new Key[cap];\n    vals = new Val[cap];\n    memcpy(keys, obj.keys,\
-    \ sizeof(Key) * cap);\n    memcpy(vals, obj.vals, sizeof(Val) * cap);\n  }\n\n\
-    \  ~HashMap() {\n    delete[](keys);\n    delete[](vals);\n  }\n\n  Val& operator[](const\
-    \ Key& i) {\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n     \
-    \ if (!flag[hash]) {\n        if (s + s / 4 >= cap) {\n          reallocate();\n\
-    \          return (*this)[i];\n        }\n        keys[hash] = i;\n        flag[hash]\
-    \ = 1;\n        ++s;\n        return vals[hash] = DefaultValue;\n      }\n   \
-    \   if (keys[hash] == i) return vals[hash];\n      hash = (hash + 1) & (cap -\
-    \ 1);\n    }\n  }\n\n  // exist -> return pointer of Val\n  // not exist -> return\
-    \ nullptr\n  Val* find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n\
-    \    while (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash]\
-    \ == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n \
-    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&,\
-    \ Val&>> enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for\
-    \ (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
+    \  }\n\n  void reallocate() {\n    cap <<= 1;\n    vector<Key> k(cap);\n    vector<Val>\
+    \ v(cap);\n    vector<bool> f(cap);\n    u32 sh = shift - 1;\n    for (int i =\
+    \ 0; i < (int)flag.size(); i++) {\n      if (flag[i]) {\n        u32 hash = (u64(keys[i])\
+    \ * r) >> sh;\n        while (f[hash]) hash = (hash + 1) & (cap - 1);\n      \
+    \  k[hash] = keys[i];\n        v[hash] = vals[i];\n        f[hash] = 1;\n    \
+    \  }\n    }\n    keys.swap(k);\n    vals.swap(v);\n    flag.swap(f);\n    --shift;\n\
+    \  }\n\n  explicit HashMap()\n      : cap(8),\n        s(0),\n        keys(cap),\n\
+    \        vals(cap),\n        flag(cap),\n        r(rng()),\n        shift(64 -\
+    \ __lg(cap)),\n        DefaultValue(Val()) {}\n\n  Val& operator[](const Key&\
+    \ i) {\n    u32 hash = (u64(i) * r) >> shift;\n    while (true) {\n      if (!flag[hash])\
+    \ {\n        if (s + s / 4 >= cap) {\n          reallocate();\n          return\
+    \ (*this)[i];\n        }\n        keys[hash] = i;\n        flag[hash] = 1;\n \
+    \       ++s;\n        return vals[hash] = DefaultValue;\n      }\n      if (keys[hash]\
+    \ == i) return vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\
+    \n  // exist -> return pointer of Val\n  // not exist -> return nullptr\n  Val*\
+    \ find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n    while\
+    \ (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash] == i)\
+    \ return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n\
+    \  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&, Val&>>\
+    \ enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for (u32 i\
+    \ = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
     \    return ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n\
-    \  void set_default(const Val& val) { DefaultValue = val; }\n\n  // swap\n  friend\
-    \ void swap(HashMap<Key, Val>& a, HashMap<Key, Val>& b) {\n    using std::swap;\n\
-    \    swap(a.cap, b.cap);\n    swap(a.s, b.s);\n    swap(a.keys, b.keys);\n   \
-    \ swap(a.vals, b.vals);\n    swap(a.flag, b.flag);\n    swap(a.r, b.r);\n    swap(a.shift,\
-    \ b.shift);\n    swap(a.DefaultValue, b.DefaultValue);\n  }\n\n  HashMap<Key,\
-    \ Val>& operator=(HashMap<Key, Val> b) {\n    swap(*this, b);\n    return *this;\n\
-    \  }\n};\n\n/**\n * @brief Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
+    \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
+    \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
     \ */\n#line 3 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\nusing\
     \ namespace std;\n\n#line 3 \"data-structure/dynamic-binary-indexed-tree.hpp\"\
     \nusing namespace std;\n\n#line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\
@@ -270,8 +259,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-10-05 01:14:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-10-29 18:54:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
 layout: document
