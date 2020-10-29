@@ -9,6 +9,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
+    _deprecated_at_docs: docs/balanced-binary-search-tree/rbst-ordered-set.md
+    document_title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
     links: []
   bundledCode: "#line 2 \"balanced-binary-search-tree/randomized-binary-search-tree.hpp\"\
     \n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename\
@@ -60,7 +62,7 @@ data:
     \      p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  int upper_bound(const\
     \ T& x) {\n    Node* p = t;\n    int ret = 0;\n    while (p) {\n      if (x <\
     \ p->key) {\n        p = p->l;\n      } else {\n        ret += rbst->count(p->l)\
-    \ + 1;\n        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  vector<string>\
+    \ + 1;\n        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  /*\n  vector<string>\
     \ dump() {\n    int width = 128;\n    string emp(width, ' ');\n    string data;\n\
     \    data += string(\"  DUMP ... size : \") + to_string(rbst->size(t));\n\n  \
     \  vector<string> ret(width, emp);\n    ret[0] = data;\n\n    int max_dep = 0;\n\
@@ -73,8 +75,10 @@ data:
     \ if (t->l) {\n      s[i + 1][j - off / 2] = 'L';\n      dump(s, t->l, i + 2,\
     \ j - off, off / 2, cdep + 1, mdep);\n    }\n    if (t->r) {\n      s[i + 1][j\
     \ + off / 2] = 'R';\n      dump(s, t->r, i + 2, j + off, off / 2, cdep + 1, mdep);\n\
-    \    }\n  }\n};\ntemplate <typename T, int S, bool MULTI>\ntypename OrderedSet<T,\
-    \ S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;\n"
+    \    }\n  }\n  */\n};\ntemplate <typename T, int S, bool MULTI>\ntypename OrderedSet<T,\
+    \ S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;\n\n/**\n *  @brief\
+    \ OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)\n *  @docs docs/balanced-binary-search-tree/rbst-ordered-set.md\n\
+    \ */ \n"
   code: "#pragma once\n#include \"./randomized-binary-search-tree.hpp\"\n\ntemplate\
     \ <typename T, int S = 2000000, bool MULTI = false>\nstruct OrderedSet {\n  using\
     \ F = function<T(T, T)>;\n  using RBST = RandomizedBinarySearchTree<T, F>;\n \
@@ -94,7 +98,7 @@ data:
     \        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  int upper_bound(const\
     \ T& x) {\n    Node* p = t;\n    int ret = 0;\n    while (p) {\n      if (x <\
     \ p->key) {\n        p = p->l;\n      } else {\n        ret += rbst->count(p->l)\
-    \ + 1;\n        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  vector<string>\
+    \ + 1;\n        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  /*\n  vector<string>\
     \ dump() {\n    int width = 128;\n    string emp(width, ' ');\n    string data;\n\
     \    data += string(\"  DUMP ... size : \") + to_string(rbst->size(t));\n\n  \
     \  vector<string> ret(width, emp);\n    ret[0] = data;\n\n    int max_dep = 0;\n\
@@ -107,14 +111,16 @@ data:
     \ if (t->l) {\n      s[i + 1][j - off / 2] = 'L';\n      dump(s, t->l, i + 2,\
     \ j - off, off / 2, cdep + 1, mdep);\n    }\n    if (t->r) {\n      s[i + 1][j\
     \ + off / 2] = 'R';\n      dump(s, t->r, i + 2, j + off, off / 2, cdep + 1, mdep);\n\
-    \    }\n  }\n};\ntemplate <typename T, int S, bool MULTI>\ntypename OrderedSet<T,\
-    \ S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;\n"
+    \    }\n  }\n  */\n};\ntemplate <typename T, int S, bool MULTI>\ntypename OrderedSet<T,\
+    \ S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;\n\n/**\n *  @brief\
+    \ OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)\n *  @docs docs/balanced-binary-search-tree/rbst-ordered-set.md\n\
+    \ */ \n"
   dependsOn:
   - balanced-binary-search-tree/randomized-binary-search-tree.hpp
   isVerificationFile: false
   path: balanced-binary-search-tree/rbst-ordered-set.hpp
   requiredBy: []
-  timestamp: '2020-10-11 13:18:57+09:00'
+  timestamp: '2020-10-29 19:42:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: balanced-binary-search-tree/rbst-ordered-set.hpp
@@ -122,5 +128,19 @@ layout: document
 redirect_from:
 - /library/balanced-binary-search-tree/rbst-ordered-set.hpp
 - /library/balanced-binary-search-tree/rbst-ordered-set.hpp.html
-title: balanced-binary-search-tree/rbst-ordered-set.hpp
+title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
 ---
+## OrderedMap(順序付き集合)
+
+順序付き連想配列をRandomized Binary Search Tree(merge-splitベース)を内部実装として実装したもの。計算量は言及がない限り$\mathrm{O}(\log N)$。
+
+#### 使い方
+
+- `OrderedSet(class T, int S = 2000000)`: 型`T`、`OrderedSet`のオブジェクト全体での`insert`を呼ぶ回数が最大S回であるような`OrderedSet`を生成する。$\mathrm{O}(1)$
+- `insert(x)`: xを追加する。
+- `delete(x)`: xを削除する。
+- `lower_bound(x)`: x未満の要素の個数を返す。
+- `upper_bound(x)`: x以上の要素の個数を返す。
+- `count(x)`: xの個数を返す。
+- `kth_element(int k)`: k番目の要素を返す。
+- `size()`: sizeを返す。$\mathrm{O}(1)$

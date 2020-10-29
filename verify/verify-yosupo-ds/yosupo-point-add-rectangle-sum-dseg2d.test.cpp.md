@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/segment-tree-on-range-tree.hpp
     title: "\u9818\u57DF\u6728(Segment Tree)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'

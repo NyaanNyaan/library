@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -10,10 +10,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/binary-indexed-tree.hpp
     title: Binary Indexed Tree(Fenwick Tree)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []

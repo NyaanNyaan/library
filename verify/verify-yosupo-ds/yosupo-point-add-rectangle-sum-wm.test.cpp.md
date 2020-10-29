@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
     title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []

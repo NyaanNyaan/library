@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: balanced-binary-search-tree/rbst-ordered-set.hpp
-    title: balanced-binary-search-tree/rbst-ordered-set.hpp
+    title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'

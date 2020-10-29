@@ -10,8 +10,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     _deprecated_at_docs: docs/balanced-binary-search-tree/rbst-ordered-map.md
-    document_title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217,\
-      \ RBST)"
+    document_title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
     links: []
   bundledCode: "#line 2 \"balanced-binary-search-tree/rbst-ordered-map.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"misc/vector-pool.hpp\"\n\
@@ -147,8 +146,8 @@ data:
     \ Val>\nVal OrderedMap<Key, Val>::I = Val();\n\ntemplate <typename Key, typename\
     \ Val>\nbool OrderedMap<Key, Val>::fold_flag = false;\n\ntemplate <typename Key,\
     \ typename Val>\nbool OrderedMap<Key, Val>::lazy_flag = false;\n\n/**\n *  @brief\
-    \ OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217, RBST)\n *  @docs\
-    \ docs/balanced-binary-search-tree/rbst-ordered-map.md\n */ \n"
+    \ OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n *  @docs docs/balanced-binary-search-tree/rbst-ordered-map.md\n\
+    \ */ \n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../misc/vector-pool.hpp\"\n\ntemplate <typename Key, typename Val>\nstruct\
     \ OrderedMap {\n private:\n  uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n\
@@ -271,14 +270,14 @@ data:
     \ Val>\nVal OrderedMap<Key, Val>::I = Val();\n\ntemplate <typename Key, typename\
     \ Val>\nbool OrderedMap<Key, Val>::fold_flag = false;\n\ntemplate <typename Key,\
     \ typename Val>\nbool OrderedMap<Key, Val>::lazy_flag = false;\n\n/**\n *  @brief\
-    \ OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217, RBST)\n *  @docs\
-    \ docs/balanced-binary-search-tree/rbst-ordered-map.md\n */ \n"
+    \ OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n *  @docs docs/balanced-binary-search-tree/rbst-ordered-map.md\n\
+    \ */ \n"
   dependsOn:
   - misc/vector-pool.hpp
   isVerificationFile: false
   path: balanced-binary-search-tree/rbst-ordered-map.hpp
   requiredBy: []
-  timestamp: '2020-10-19 23:23:39+09:00'
+  timestamp: '2020-10-29 19:42:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: balanced-binary-search-tree/rbst-ordered-map.hpp
@@ -286,13 +285,13 @@ layout: document
 redirect_from:
 - /library/balanced-binary-search-tree/rbst-ordered-map.hpp
 - /library/balanced-binary-search-tree/rbst-ordered-map.hpp.html
-title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217, RBST)"
+title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
 ---
-## OrderedMap(順序付き連想配列, RBST)
+## OrderedMap(順序付き連想配列)
 
-順序付き連想配列をRandomized Binary Search Tree(merge-splitベース)を内部実装として実装したもの。計算量は言及がない限り$\mathrm{O}(N)$。
+順序付き連想配列をRandomized Binary Search Tree(merge-splitベース)を内部実装として実装したもの。計算量は言及がない限り$\mathrm{O}(\log N)$。
 
-#### 使用方法
+#### 使い方
 
 内部ではノードへのポインタを`NodePtr`型で管理しており、一部の関数は`NodePtr`型が返り値となる。`NodePtr p`に対して`*p`で`pair(const key&, val&)`を取得することが出来る。(インクリメント等は実装しておらず参照にしか使えない。)また、`NodePtr::nil()`は`nullptr`と同様の意味を持っており、`bool(NodePtr) = false`を返す設計となっている。
 

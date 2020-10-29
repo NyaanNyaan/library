@@ -8,13 +8,13 @@ data:
       title: balanced-binary-search-tree/randomized-binary-search-tree.hpp
     - icon: ':warning:'
       path: balanced-binary-search-tree/rbst-ordered-map.hpp
-      title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217, RBST)"
+      title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
     - icon: ':warning:'
       path: balanced-binary-search-tree/rbst-ordered-set.hpp
-      title: balanced-binary-search-tree/rbst-ordered-set.hpp
+      title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -25,7 +25,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/binary-trie.hpp
       title: Binary Trie
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: data-structure/dynamic-binary-indexed-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/hash-map-chain.hpp
       title: "Hash Map(\u9023\u9396\u6CD5)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/hash-map-variable-length.hpp
       title: "Hash Map(\u53EF\u5909\u9577\u7248)"
     - icon: ':heavy_check_mark:'
@@ -84,7 +84,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/abstract-range-tree.hpp
       title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
       title: "\u52D5\u7684Binary Indexed Tree"
     - icon: ':heavy_check_mark:'
@@ -213,7 +213,7 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: inner
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
   - name: math
@@ -289,13 +289,13 @@ data:
       title: math/zeta-mobius-transform.hpp
   - name: misc
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -347,7 +347,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/mod-kth-root.hpp
       title: kth root(Tonelli-Shanks algorithm)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
     - icon: ':heavy_check_mark:'
@@ -669,7 +669,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -822,7 +822,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
       title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     - icon: ':heavy_check_mark:'

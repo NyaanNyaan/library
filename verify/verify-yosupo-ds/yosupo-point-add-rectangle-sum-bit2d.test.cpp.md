@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
     title: "\u52D5\u7684Binary Indexed Tree"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: data-structure/dynamic-binary-indexed-tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -148,13 +148,13 @@ data:
     \ (*this)[i];\n        }\n        keys[hash] = i;\n        flag[hash] = 1;\n \
     \       ++s;\n        return vals[hash] = DefaultValue;\n      }\n      if (keys[hash]\
     \ == i) return vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\
-    \n  // exist -> return pointer of Val\n  // not exist -> return nullptr\n  Val*\
-    \ find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n    while\
-    \ (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash] == i)\
-    \ return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n\
-    \  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&, Val&>>\
-    \ enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for (u32 i\
-    \ = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
+    \n  // exist -> return pointer of Val\n  // not exist -> return nullptr\n  const\
+    \ Val* find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n   \
+    \ while (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash]\
+    \ == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n \
+    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&,\
+    \ Val&>> enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for\
+    \ (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
     \    return ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n\
     \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
     \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
@@ -259,8 +259,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-10-29 18:54:28+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-29 19:42:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
 layout: document

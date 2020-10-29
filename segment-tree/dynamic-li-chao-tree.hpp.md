@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
   _extendedRequiredBy: []
@@ -35,13 +35,13 @@ data:
     \ (*this)[i];\n        }\n        keys[hash] = i;\n        flag[hash] = 1;\n \
     \       ++s;\n        return vals[hash] = DefaultValue;\n      }\n      if (keys[hash]\
     \ == i) return vals[hash];\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\
-    \n  // exist -> return pointer of Val\n  // not exist -> return nullptr\n  Val*\
-    \ find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n    while\
-    \ (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash] == i)\
-    \ return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n  }\n\n\
-    \  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&, Val&>>\
-    \ enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for (u32 i\
-    \ = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
+    \n  // exist -> return pointer of Val\n  // not exist -> return nullptr\n  const\
+    \ Val* find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n   \
+    \ while (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash]\
+    \ == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n \
+    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&,\
+    \ Val&>> enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for\
+    \ (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
     \    return ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n\
     \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
     \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
@@ -127,7 +127,7 @@ data:
   isVerificationFile: false
   path: segment-tree/dynamic-li-chao-tree.hpp
   requiredBy: []
-  timestamp: '2020-10-29 18:54:28+09:00'
+  timestamp: '2020-10-29 19:42:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
