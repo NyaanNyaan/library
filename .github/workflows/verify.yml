@@ -15,19 +15,6 @@ jobs:
     - name: Install dependencies
       run: pip3 install -U online-judge-verify-helper
 
-
-    # required only if you want to verify C# script files
-    - uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '3.1.101'
-    - name: Install dependencies (C#)
-      run: dotnet tool install -g dotnet-script && echo ::add-path::$HOME/.dotnet/tools
-
-    # required only if you want to verify Nim code
-    - name: Install dependencies (Nim)
-      run: sudo apt install nim
-
-
     - name: Run tests
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
