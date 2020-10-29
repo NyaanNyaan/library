@@ -8,8 +8,8 @@ struct HashMap {
   using u64 = uint64_t;
 
   u32 cap, s;
-  Key* keys;
-  Val* vals;
+  vector<Key> keys;
+  vector<Val> vals;
   vector<bool> flag;
   u64 r;
   u32 shift;
@@ -26,8 +26,8 @@ struct HashMap {
 
   void reallocate() {
     cap <<= 1;
-    Key* k = new Key[cap];
-    Val* v = new Val[cap];
+    vector<Key> k(cap);
+    vector<Val> v(cap);
     vector<bool> f(cap);
     u32 sh = shift - 1;
     for (int i = 0; i < (int)flag.size(); i++) {
@@ -39,10 +39,8 @@ struct HashMap {
         f[hash] = 1;
       }
     }
-    delete[](keys);
-    delete[](vals);
-    keys = k;
-    vals = v;
+    keys.swap(k);
+    vals.swap(v);
     flag.swap(f);
     --shift;
   }
@@ -50,31 +48,12 @@ struct HashMap {
   explicit HashMap()
       : cap(8),
         s(0),
-        keys(new Key[cap]),
-        vals(new Val[cap]),
+        keys(cap),
+        vals(cap),
         flag(cap),
         r(rng()),
         shift(64 - __lg(cap)),
         DefaultValue(Val()) {}
-
-  // copy constructor
-  HashMap(const HashMap& obj) {
-    cap = obj.cap;
-    s = obj.s;
-    flag = obj.flag;
-    r = obj.r;
-    shift = obj.shift;
-    DefaultValue = obj.DefaultValue;
-    keys = new Key[cap];
-    vals = new Val[cap];
-    memcpy(keys, obj.keys, sizeof(Key) * cap);
-    memcpy(vals, obj.vals, sizeof(Val) * cap);
-  }
-
-  ~HashMap() {
-    delete[](keys);
-    delete[](vals);
-  }
 
   Val& operator[](const Key& i) {
     u32 hash = (u64(i) * r) >> shift;
@@ -117,24 +96,6 @@ struct HashMap {
 
   // set default_value
   void set_default(const Val& val) { DefaultValue = val; }
-
-  // swap
-  friend void swap(HashMap<Key, Val>& a, HashMap<Key, Val>& b) {
-    using std::swap;
-    swap(a.cap, b.cap);
-    swap(a.s, b.s);
-    swap(a.keys, b.keys);
-    swap(a.vals, b.vals);
-    swap(a.flag, b.flag);
-    swap(a.r, b.r);
-    swap(a.shift, b.shift);
-    swap(a.DefaultValue, b.DefaultValue);
-  }
-
-  HashMap<Key, Val>& operator=(HashMap<Key, Val> b) {
-    swap(*this, b);
-    return *this;
-  }
 };
 
 /**
