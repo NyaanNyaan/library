@@ -244,21 +244,29 @@ data:
     \ (p == n) return {p};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
     \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<u64>\
     \ factorize(u64 n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n\
-    \  return ret;\n}\n\n}  // namespace fast_factorize\nusing fast_factorize::factorize;\n\
-    using fast_factorize::is_prime;\n\n/**\n * @brief \u9AD8\u901F\u7D20\u56E0\u6570\
-    \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n\
-    \ */\n#line 3 \"prime/osak.hpp\"\nusing namespace std;\n\n#line 3 \"prime/factor-enumerate.hpp\"\
-    \nusing namespace std;\n\nvector<int> factor_enumerate(int N) {\n  vector<int>\
-    \ lp(N + 1, 0);\n  if (N < 2) return lp;\n  vector<int> pr{2, 3};\n  for (int\
-    \ i = 2; i <= N; i += 2) lp[i] = 2;\n  for (int i = 3; i <= N; i += 6) lp[i] =\
-    \ 3;\n  for (int i = 5, d = 4; i <= N; i += d = 6 - d) {\n    if (lp[i] == 0)\
-    \ {\n      lp[i] = i;\n      pr.push_back(i);\n    }\n    for (int j = 2; j <\
-    \ (int)pr.size() && i * pr[j] <= N; ++j) {\n      lp[i * pr[j]] = pr[j];\n   \
-    \   if (pr[j] == lp[i]) break;\n    }\n  }\n  return lp;\n}\n#line 6 \"prime/osak.hpp\"\
-    \n\ntemplate<int MAX>\nvector<int> osak(int n){\n  static vector<int> f = factor_enumerate(MAX);\n\
-    \  vector<int> ret;\n  while(f[n]) ret.push_back(f[n]), n /= f[n];\n  return ret;\n\
-    }\n#line 6 \"verify/verify-unit-test/osak.test.cpp\"\n\nunsigned long long rng2()\
-    \ {\n  static unsigned long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \  return ret;\n}\n\nusing i64 = int64_t;\n\nmap<u64, i64> factor_count(u64 n)\
+    \ {\n  map<u64, i64> mp;\n  for (auto &x : factorize(n)) mp[x]++;\n  return mp;\n\
+    }\n\nvector<u64> divisors(u64 n) {\n  if (n == 0) return {};\n  vector<pair<u64,\
+    \ i64>> v;\n  for (auto &p : factor_count(n)) v.push_back(p);\n  vector<u64> ret;\n\
+    \  auto f = [&](auto rec, int i, u64 x) -> void {\n    if (i == (int)v.size())\
+    \ {\n      ret.push_back(x);\n      return;\n    }\n    for (int j = v[i].second;;\
+    \ --j) {\n      rec(rec, i + 1, x);\n      if (j == 0) break;\n      x *= v[i].first;\n\
+    \    }\n  };\n  f(f, 0, 1);\n  sort(begin(ret), end(ret));\n  return ret;\n}\n\
+    \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
+    using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
+    \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
+    \ docs/prime/fast-factorize.md\n */\n#line 3 \"prime/osak.hpp\"\nusing namespace\
+    \ std;\n\n#line 3 \"prime/factor-enumerate.hpp\"\nusing namespace std;\n\nvector<int>\
+    \ factor_enumerate(int N) {\n  vector<int> lp(N + 1, 0);\n  if (N < 2) return\
+    \ lp;\n  vector<int> pr{2, 3};\n  for (int i = 2; i <= N; i += 2) lp[i] = 2;\n\
+    \  for (int i = 3; i <= N; i += 6) lp[i] = 3;\n  for (int i = 5, d = 4; i <= N;\
+    \ i += d = 6 - d) {\n    if (lp[i] == 0) {\n      lp[i] = i;\n      pr.push_back(i);\n\
+    \    }\n    for (int j = 2; j < (int)pr.size() && i * pr[j] <= N; ++j) {\n   \
+    \   lp[i * pr[j]] = pr[j];\n      if (pr[j] == lp[i]) break;\n    }\n  }\n  return\
+    \ lp;\n}\n#line 6 \"prime/osak.hpp\"\n\ntemplate<int MAX>\nvector<int> osak(int\
+    \ n){\n  static vector<int> f = factor_enumerate(MAX);\n  vector<int> ret;\n \
+    \ while(f[n]) ret.push_back(f[n]), n /= f[n];\n  return ret;\n}\n#line 6 \"verify/verify-unit-test/osak.test.cpp\"\
+    \n\nunsigned long long rng2() {\n  static unsigned long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
     \  .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nvoid\
     \ solve() {\n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << '\\n';\n\n  rep(i,\
@@ -295,7 +303,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/osak.test.cpp
   requiredBy: []
-  timestamp: '2020-10-17 00:29:44+09:00'
+  timestamp: '2020-11-02 22:41:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/osak.test.cpp

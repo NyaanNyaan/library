@@ -243,38 +243,47 @@ data:
     \ {p};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n / p);\n \
     \ copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<u64> factorize(u64\
     \ n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n  return\
-    \ ret;\n}\n\n}  // namespace fast_factorize\nusing fast_factorize::factorize;\n\
-    using fast_factorize::is_prime;\n\n/**\n * @brief \u9AD8\u901F\u7D20\u56E0\u6570\
-    \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n\
-    \ */\n#line 9 \"modulo/mod-kth-root.hpp\"\n\nnamespace kth_root_mod {\n\n// fast\
-    \ BS-GS\ntemplate <typename T>\nstruct Memo {\n  Memo(const T &g, int s, int period)\n\
-    \      : size(1 << __lg(min(s, period))),\n        mask(size - 1),\n        period(period),\n\
-    \        vs(size),\n        os(size + 1) {\n    T x(1);\n    for (int i = 0; i\
-    \ < size; ++i, x *= g) os[x.get() & mask]++;\n    for (int i = 1; i < size; ++i)\
-    \ os[i] += os[i - 1];\n    x = 1;\n    for (int i = 0; i < size; ++i, x *= g)\
-    \ vs[--os[x.get() & mask]] = {x, i};\n    gpow = x;\n    os[size] = size;\n  }\n\
-    \  int find(T x) const {\n    for (int t = 0; t < period; t += size, x *= gpow)\
-    \ {\n      for (int m = (x.get() & mask), i = os[m]; i < os[m + 1]; ++i) {\n \
-    \       if (x == vs[i].first) {\n          int ret = vs[i].second - t;\n     \
-    \     return ret < 0 ? ret + period : ret;\n        }\n      }\n    }\n    assert(0);\n\
-    \  }\n  T gpow;\n  int size, mask, period;\n  vector<pair<T, int> > vs;\n  vector<int>\
-    \ os;\n};\n\nusing inner::gcd;\nusing inner::inv;\nusing inner::modpow;\ntemplate\
-    \ <typename INT, typename LINT, typename mint>\nmint pe_root(INT c, INT pi, INT\
-    \ ei, INT p) {\n  if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n\
-    \  INT s = p - 1, t = 0;\n  while (s % pi == 0) s /= pi, ++t;\n  INT pe = 1;\n\
-    \  for (INT _ = 0; _ < ei; ++_) pe *= pi;\n\n  INT u = inv(pe - s % pe, pe);\n\
-    \  mint mc = c, one = 1;\n  mint z = mc.pow((s * u + 1) / pe);\n  mint zpe = mc.pow(s\
-    \ * u);\n  if (zpe == one) return z;\n  assert(t > ei);\n  \n  mint vs;\n  {\n\
-    \    INT ptm1 = 1;\n    for (INT _ = 0; _ < t - 1; ++_) ptm1 *= pi;\n    for (mint\
-    \ v = 2;; v += one) {\n      vs = v.pow(s);\n      if (vs.pow(ptm1) != one) break;\n\
-    \    }\n  }\n\n  mint vspe = vs.pow(pe);\n  INT vs_e = ei;\n  mint base = vspe;\n\
-    \  for (INT _ = 0; _ < t - ei - 1; _++) base = base.pow(pi);\n  Memo<mint> memo(base,\
-    \ (INT)(sqrt(t - ei) * sqrt(pi)) + 1, pi);\n\n  while (zpe != one) {\n    mint\
-    \ tmp = zpe;\n    INT td = 0;\n    while (tmp != 1) ++td, tmp = tmp.pow(pi);\n\
-    \    INT e = t - td;\n    while (vs_e != e) {\n      vs = vs.pow(pi);\n      vspe\
-    \ = vspe.pow(pi);\n      ++vs_e;\n    }\n\n    // BS-GS ... find (zpe * ( vspe\
-    \ ^ n ) ) ^( p_i ^ (td - 1) ) = 1\n    mint base_zpe = zpe.inverse();\n    for\
-    \ (INT _ = 0; _ < td - 1; _++) base_zpe = base_zpe.pow(pi);\n    INT bsgs = memo.find(base_zpe);\n\
+    \ ret;\n}\n\nusing i64 = int64_t;\n\nmap<u64, i64> factor_count(u64 n) {\n  map<u64,\
+    \ i64> mp;\n  for (auto &x : factorize(n)) mp[x]++;\n  return mp;\n}\n\nvector<u64>\
+    \ divisors(u64 n) {\n  if (n == 0) return {};\n  vector<pair<u64, i64>> v;\n \
+    \ for (auto &p : factor_count(n)) v.push_back(p);\n  vector<u64> ret;\n  auto\
+    \ f = [&](auto rec, int i, u64 x) -> void {\n    if (i == (int)v.size()) {\n \
+    \     ret.push_back(x);\n      return;\n    }\n    for (int j = v[i].second;;\
+    \ --j) {\n      rec(rec, i + 1, x);\n      if (j == 0) break;\n      x *= v[i].first;\n\
+    \    }\n  };\n  f(f, 0, 1);\n  sort(begin(ret), end(ret));\n  return ret;\n}\n\
+    \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
+    using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
+    \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
+    \ docs/prime/fast-factorize.md\n */\n#line 9 \"modulo/mod-kth-root.hpp\"\n\nnamespace\
+    \ kth_root_mod {\n\n// fast BS-GS\ntemplate <typename T>\nstruct Memo {\n  Memo(const\
+    \ T &g, int s, int period)\n      : size(1 << __lg(min(s, period))),\n       \
+    \ mask(size - 1),\n        period(period),\n        vs(size),\n        os(size\
+    \ + 1) {\n    T x(1);\n    for (int i = 0; i < size; ++i, x *= g) os[x.get() &\
+    \ mask]++;\n    for (int i = 1; i < size; ++i) os[i] += os[i - 1];\n    x = 1;\n\
+    \    for (int i = 0; i < size; ++i, x *= g) vs[--os[x.get() & mask]] = {x, i};\n\
+    \    gpow = x;\n    os[size] = size;\n  }\n  int find(T x) const {\n    for (int\
+    \ t = 0; t < period; t += size, x *= gpow) {\n      for (int m = (x.get() & mask),\
+    \ i = os[m]; i < os[m + 1]; ++i) {\n        if (x == vs[i].first) {\n        \
+    \  int ret = vs[i].second - t;\n          return ret < 0 ? ret + period : ret;\n\
+    \        }\n      }\n    }\n    assert(0);\n  }\n  T gpow;\n  int size, mask,\
+    \ period;\n  vector<pair<T, int> > vs;\n  vector<int> os;\n};\n\nusing inner::gcd;\n\
+    using inner::inv;\nusing inner::modpow;\ntemplate <typename INT, typename LINT,\
+    \ typename mint>\nmint pe_root(INT c, INT pi, INT ei, INT p) {\n  if (mint::get_mod()\
+    \ != decltype(mint::a)(p)) mint::set_mod(p);\n  INT s = p - 1, t = 0;\n  while\
+    \ (s % pi == 0) s /= pi, ++t;\n  INT pe = 1;\n  for (INT _ = 0; _ < ei; ++_) pe\
+    \ *= pi;\n\n  INT u = inv(pe - s % pe, pe);\n  mint mc = c, one = 1;\n  mint z\
+    \ = mc.pow((s * u + 1) / pe);\n  mint zpe = mc.pow(s * u);\n  if (zpe == one)\
+    \ return z;\n  assert(t > ei);\n  \n  mint vs;\n  {\n    INT ptm1 = 1;\n    for\
+    \ (INT _ = 0; _ < t - 1; ++_) ptm1 *= pi;\n    for (mint v = 2;; v += one) {\n\
+    \      vs = v.pow(s);\n      if (vs.pow(ptm1) != one) break;\n    }\n  }\n\n \
+    \ mint vspe = vs.pow(pe);\n  INT vs_e = ei;\n  mint base = vspe;\n  for (INT _\
+    \ = 0; _ < t - ei - 1; _++) base = base.pow(pi);\n  Memo<mint> memo(base, (INT)(sqrt(t\
+    \ - ei) * sqrt(pi)) + 1, pi);\n\n  while (zpe != one) {\n    mint tmp = zpe;\n\
+    \    INT td = 0;\n    while (tmp != 1) ++td, tmp = tmp.pow(pi);\n    INT e = t\
+    \ - td;\n    while (vs_e != e) {\n      vs = vs.pow(pi);\n      vspe = vspe.pow(pi);\n\
+    \      ++vs_e;\n    }\n\n    // BS-GS ... find (zpe * ( vspe ^ n ) ) ^( p_i ^\
+    \ (td - 1) ) = 1\n    mint base_zpe = zpe.inverse();\n    for (INT _ = 0; _ <\
+    \ td - 1; _++) base_zpe = base_zpe.pow(pi);\n    INT bsgs = memo.find(base_zpe);\n\
     \n    z *= vs.pow(bsgs);\n    zpe *= vspe.pow(bsgs);\n  }\n  return z;\n}\n\n\
     template <typename INT, typename LINT, typename mint>\nINT inner_kth_root(INT\
     \ a, INT k, INT p) {\n  a %= p;\n  if (k == 0) return a == 1 ? a : -1;\n  if (a\
@@ -308,7 +317,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   requiredBy: []
-  timestamp: '2020-10-17 00:29:44+09:00'
+  timestamp: '2020-11-02 22:41:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp

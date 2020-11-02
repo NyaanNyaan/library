@@ -55,6 +55,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/range-union-find.hpp
       title: data-structure/range-union-find.hpp
+    - icon: ':warning:'
+      path: data-structure/rollback-union-find.hpp
+      title: "Rollback\u3064\u304DUnion Find"
     - icon: ':heavy_check_mark:'
       path: data-structure/slide-window-aggregation.hpp
       title: data-structure/slide-window-aggregation.hpp
@@ -72,7 +75,7 @@ data:
       title: data-structure/union-find-with-potential.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure/union-find.hpp
-      title: data-structure/union-find.hpp
+      title: Union Find(Disjoint Set Union)
   - name: data-structure-2d
     pages:
     - icon: ':heavy_check_mark:'
@@ -629,6 +632,9 @@ data:
   - name: verify/verify-unit-test
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/factorize.test.cpp
+      title: verify/verify-unit-test/factorize.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/osak.test.cpp
       title: verify/verify-unit-test/osak.test.cpp
     - icon: ':heavy_check_mark:'
@@ -947,13 +953,14 @@ data:
       title: verify/verify-yuki/yuki-helloworld.test.cpp
 layout: toppage
 ---
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/NyaanNyaan/library?style=flat-square)
+![Lines of code](https://img.shields.io/tokei/lines/github/NyaanNyaan/library?style=flat-square)
+
+[![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FNyaan)](https://atcoder.jp/users/Nyaan)
+[![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fcodeforces%2Fjson%2FNyaan)](https://codeforces.com/profile/Nyaan)
+
 このライブラリは競技プログラミング用に作成したアルゴリズム・データ構造などをまとめたものです。
 
 バグなどを発見したらIssueで報告いただけると助かります。
 
 C++14での使用を想定しています。(一部のライブラリはavx2対応の環境でのみ動作します。)
-
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/NyaanNyaan/library?style=flat-square)
-![Lines of code](https://img.shields.io/tokei/lines/github/NyaanNyaan/library?style=flat-square)
-[![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FNyaan)](https://atcoder.jp/users/Nyaan)
-[![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fcodeforces%2Fjson%2FNyaan)](https://codeforces.com/profile/Nyaan)

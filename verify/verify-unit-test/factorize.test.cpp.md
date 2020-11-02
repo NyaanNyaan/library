@@ -8,9 +8,6 @@ data:
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
   - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
@@ -20,39 +17,45 @@ data:
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
   - icon: ':heavy_check_mark:'
+    path: prime/factor-enumerate.hpp
+    title: prime/factor-enumerate.hpp
+  - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+  - icon: ':heavy_check_mark:'
+    path: prime/osak.hpp
+    title: prime/osak.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/factorize
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/factorize
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-factorization.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n\n#line 1 \"\
-    competitive-template.hpp\"\n#pragma region kyopro_template\n#define Nyaan_template\n\
-    #include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb push_back\n#define\
-    \ eb emplace_back\n#define fi first\n#define se second\n#define each(x, v) for\
-    \ (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n\
-    #define mem(a, val) memset(a, val, sizeof(a))\n#define ini(...)   \\\n  int __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
-    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
-    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
-    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
-    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
-    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
-    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n#define rep(i, N) for (long\
-    \ long i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i =\
-    \ (long long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <=\
-    \ (long long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i)\
-    \ > 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
-    \ die(...)      \\\n  do {                \\\n    out(__VA_ARGS__); \\\n    return;\
-    \           \\\n  } while (0)\nusing namespace std;\nusing ll = long long;\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/factorize.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 1 \"competitive-template.hpp\"\
+    \n#pragma region kyopro_template\n#define Nyaan_template\n#include <immintrin.h>\n\
+    #include <bits/stdc++.h>\n#define pb push_back\n#define eb emplace_back\n#define\
+    \ fi first\n#define se second\n#define each(x, v) for (auto &x : v)\n#define all(v)\
+    \ (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n#define mem(a, val)\
+    \ memset(a, val, sizeof(a))\n#define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define inl(...)         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define\
+    \ inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)\
+    \                           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\
+    \n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)  \
+    \                      \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n  \
+    \  in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)  \
+    \                   \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
+    \ t[i], u[i], v[i]);             \\\n  }\n#define rep(i, N) for (long long i =\
+    \ 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1;\
+    \ i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N);\
+    \ i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n\
+    #define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define die(...) \
+    \     \\\n  do {                \\\n    out(__VA_ARGS__); \\\n    return;    \
+    \       \\\n  } while (0)\nusing namespace std;\nusing ll = long long;\ntemplate\
     \ <class T>\nusing V = vector<T>;\nusing vi = vector<int>;\nusing vl = vector<long\
     \ long>;\nusing vvi = vector<vector<int>>;\nusing vd = V<double>;\nusing vs =\
     \ V<string>;\nusing vvl = vector<vector<long long>>;\nusing P = pair<long long,\
@@ -252,47 +255,47 @@ data:
     \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
     using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
-    \ docs/prime/fast-factorize.md\n */\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
-    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
-    \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
-    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
-    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
-    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
-    \ load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf\
-    \ + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush()\
-    \ {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c)\
-    \ { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil\
-    \ + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
-    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
-    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
-    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
-    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
-    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
-    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
-    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
-    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
-    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
-    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
-    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
-    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
-    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
-    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
-    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
-    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
-    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
-    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
-    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
-    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 6 \"verify/verify-yosupo-math/yosupo-factorization.test.cpp\"\n\nvoid solve()\
-    \ {\n  int Q;\n  rd(Q);\n  rep(_, Q) {\n    int64_t n;\n    rd(n);\n    auto prime\
-    \ = factorize(n);\n    wt(sz(prime));\n    rep(i, sz(prime)) {\n      wt(' ');\n\
-    \      wt(prime[i]);\n    }\n    wt('\\n');\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/factorize\"\n\n#include\
-    \ \"../../competitive-template.hpp\"\n#include \"../../prime/fast-factorize.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n\nvoid solve() {\n  int Q;\n  rd(Q);\n \
-    \ rep(_, Q) {\n    int64_t n;\n    rd(n);\n    auto prime = factorize(n);\n  \
-    \  wt(sz(prime));\n    rep(i, sz(prime)) {\n      wt(' ');\n      wt(prime[i]);\n\
-    \    }\n    wt('\\n');\n  }\n}"
+    \ docs/prime/fast-factorize.md\n */\n#line 3 \"prime/osak.hpp\"\nusing namespace\
+    \ std;\n\n#line 3 \"prime/factor-enumerate.hpp\"\nusing namespace std;\n\nvector<int>\
+    \ factor_enumerate(int N) {\n  vector<int> lp(N + 1, 0);\n  if (N < 2) return\
+    \ lp;\n  vector<int> pr{2, 3};\n  for (int i = 2; i <= N; i += 2) lp[i] = 2;\n\
+    \  for (int i = 3; i <= N; i += 6) lp[i] = 3;\n  for (int i = 5, d = 4; i <= N;\
+    \ i += d = 6 - d) {\n    if (lp[i] == 0) {\n      lp[i] = i;\n      pr.push_back(i);\n\
+    \    }\n    for (int j = 2; j < (int)pr.size() && i * pr[j] <= N; ++j) {\n   \
+    \   lp[i * pr[j]] = pr[j];\n      if (pr[j] == lp[i]) break;\n    }\n  }\n  return\
+    \ lp;\n}\n#line 6 \"prime/osak.hpp\"\n\ntemplate<int MAX>\nvector<int> osak(int\
+    \ n){\n  static vector<int> f = factor_enumerate(MAX);\n  vector<int> ret;\n \
+    \ while(f[n]) ret.push_back(f[n]), n /= f[n];\n  return ret;\n}\n#line 6 \"verify/verify-unit-test/factorize.test.cpp\"\
+    \n\nunsigned long long rng2() {\n  static unsigned long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \  .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nvoid\
+    \ solve() {\n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << '\\n';\n\n  using\
+    \ u64 = fast_factorize::u64;\n  using i64 = fast_factorize::i64;\n\n  auto test\
+    \ = [](uint32_t n) {\n    vector<u64> naive_ds;\n    for (uint32_t i = 1; i *\
+    \ i <= n; ++i) {\n      if (n % i == 0) {\n        naive_ds.push_back(i);\n  \
+    \      if (i * i != n) naive_ds.push_back(n / i);\n      }\n    }\n    sort(all(naive_ds));\n\
+    \    assert(naive_ds == fast_factorize::divisors(n));\n\n    map<u64, i64> naive_factor;\n\
+    \    uint32_t m = n;\n    for (uint32_t i = 2; i * i <= n; ++i) {\n      while\
+    \ (m % i == 0) {\n        naive_factor[i]++;\n        m /= i;\n      }\n    }\n\
+    \    if (m > 1) naive_factor[m]++;\n\n    assert(naive_factor == fast_factorize::factor_count(n));\n\
+    \  };\n\n  rep(i, 10000) { \n    uint32_t n = (rng() & ((1 << 30) - 1)) + 1; \n\
+    \    test(i);\n    test(n);\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../competitive-template.hpp\"\n#include \"../../prime/fast-factorize.hpp\"\n\
+    #include \"../../prime/osak.hpp\"\n\nunsigned long long rng2() {\n  static unsigned\
+    \ long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n        \
+    \  chrono::high_resolution_clock::now().time_since_epoch())\n          .count();\n\
+    \  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nvoid solve() {\n\
+    \  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << '\\n';\n\n  using u64 = fast_factorize::u64;\n\
+    \  using i64 = fast_factorize::i64;\n\n  auto test = [](uint32_t n) {\n    vector<u64>\
+    \ naive_ds;\n    for (uint32_t i = 1; i * i <= n; ++i) {\n      if (n % i == 0)\
+    \ {\n        naive_ds.push_back(i);\n        if (i * i != n) naive_ds.push_back(n\
+    \ / i);\n      }\n    }\n    sort(all(naive_ds));\n    assert(naive_ds == fast_factorize::divisors(n));\n\
+    \n    map<u64, i64> naive_factor;\n    uint32_t m = n;\n    for (uint32_t i =\
+    \ 2; i * i <= n; ++i) {\n      while (m % i == 0) {\n        naive_factor[i]++;\n\
+    \        m /= i;\n      }\n    }\n    if (m > 1) naive_factor[m]++;\n\n    assert(naive_factor\
+    \ == fast_factorize::factor_count(n));\n  };\n\n  rep(i, 10000) { \n    uint32_t\
+    \ n = (rng() & ((1 << 30) - 1)) + 1; \n    test(i);\n    test(n);\n  }\n}"
   dependsOn:
   - competitive-template.hpp
   - prime/fast-factorize.hpp
@@ -300,17 +303,18 @@ data:
   - misc/rng.hpp
   - modint/arbitrary-prime-modint.hpp
   - modint/modint-montgomery64.hpp
-  - misc/fastio.hpp
+  - prime/osak.hpp
+  - prime/factor-enumerate.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  path: verify/verify-unit-test/factorize.test.cpp
   requiredBy: []
   timestamp: '2020-11-02 22:41:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+documentation_of: verify/verify-unit-test/factorize.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-factorization.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-factorization.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+- /verify/verify/verify-unit-test/factorize.test.cpp
+- /verify/verify/verify-unit-test/factorize.test.cpp.html
+title: verify/verify-unit-test/factorize.test.cpp
 ---

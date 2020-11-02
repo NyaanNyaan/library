@@ -124,6 +124,9 @@ data:
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/factorize.test.cpp
+    title: verify/verify-unit-test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
@@ -686,6 +689,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
+  - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp

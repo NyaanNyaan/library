@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure/union-find.hpp
-    title: data-structure/union-find.hpp
+    title: Union Find(Disjoint Set Union)
   - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
@@ -156,14 +156,15 @@ data:
     \ x, int y) {\n    if ((x = find(x)) == (y = find(y))) return false;\n    if (data[x]\
     \ > data[y]) swap(x, y);\n    data[x] += data[y];\n    data[y] = x;\n    return\
     \ true;\n  }\n\n  int size(int k) { return -data[find(k)]; }\n\n  int same(int\
-    \ x, int y) { return find(x) == find(y); }\n};\n#line 7 \"graph/kruskal.hpp\"\n\
-    \ntemplate <typename T>\nT kruskal(int N, Edges<T> &es) {\n  sort(begin(es), end(es),\n\
-    \       [&](edge<T> a, edge<T> b) { return a.cost < b.cost; });\n  UnionFind uf(N);\n\
-    \  T ret = 0;\n  for (edge<T> &e : es) {\n    if (uf.same(e.src, e.to)) continue;\n\
-    \    ret += e.cost;\n    uf.unite(e.src, e.to);\n  }\n  return ret;\n}\n#line\
-    \ 6 \"verify/verify-aoj-grl/aoj-grl-2-a.test.cpp\"\n\nvoid solve() {\n  ini(N,\
-    \ E);\n  auto es = esgraph<int>(N, E, true, false);\n  auto mst = kruskal(N, es);\n\
-    \  out(mst);\n}\n"
+    \ x, int y) { return find(x) == find(y); }\n};\n\n/**\n * @brief Union Find(Disjoint\
+    \ Set Union)\n * @docs docs/data-structure/union-find.md\n */\n#line 7 \"graph/kruskal.hpp\"\
+    \n\ntemplate <typename T>\nT kruskal(int N, Edges<T> &es) {\n  sort(begin(es),\
+    \ end(es),\n       [&](edge<T> a, edge<T> b) { return a.cost < b.cost; });\n \
+    \ UnionFind uf(N);\n  T ret = 0;\n  for (edge<T> &e : es) {\n    if (uf.same(e.src,\
+    \ e.to)) continue;\n    ret += e.cost;\n    uf.unite(e.src, e.to);\n  }\n  return\
+    \ ret;\n}\n#line 6 \"verify/verify-aoj-grl/aoj-grl-2-a.test.cpp\"\n\nvoid solve()\
+    \ {\n  ini(N, E);\n  auto es = esgraph<int>(N, E, true, false);\n  auto mst =\
+    \ kruskal(N, es);\n  out(mst);\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_2_A\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../graph/kruskal.hpp\"\
     \n\nvoid solve() {\n  ini(N, E);\n  auto es = esgraph<int>(N, E, true, false);\n\
@@ -176,7 +177,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   requiredBy: []
-  timestamp: '2020-08-01 13:45:41+09:00'
+  timestamp: '2020-11-02 22:41:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp

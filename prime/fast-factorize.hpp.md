@@ -19,6 +19,9 @@ data:
     title: kth root(Tonelli-Shanks algorithm)
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/factorize.test.cpp
+    title: verify/verify-unit-test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
@@ -145,10 +148,18 @@ data:
     \ (p == n) return {p};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
     \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<u64>\
     \ factorize(u64 n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n\
-    \  return ret;\n}\n\n}  // namespace fast_factorize\nusing fast_factorize::factorize;\n\
-    using fast_factorize::is_prime;\n\n/**\n * @brief \u9AD8\u901F\u7D20\u56E0\u6570\
-    \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n\
-    \ */\n"
+    \  return ret;\n}\n\nusing i64 = int64_t;\n\nmap<u64, i64> factor_count(u64 n)\
+    \ {\n  map<u64, i64> mp;\n  for (auto &x : factorize(n)) mp[x]++;\n  return mp;\n\
+    }\n\nvector<u64> divisors(u64 n) {\n  if (n == 0) return {};\n  vector<pair<u64,\
+    \ i64>> v;\n  for (auto &p : factor_count(n)) v.push_back(p);\n  vector<u64> ret;\n\
+    \  auto f = [&](auto rec, int i, u64 x) -> void {\n    if (i == (int)v.size())\
+    \ {\n      ret.push_back(x);\n      return;\n    }\n    for (int j = v[i].second;;\
+    \ --j) {\n      rec(rec, i + 1, x);\n      if (j == 0) break;\n      x *= v[i].first;\n\
+    \    }\n  };\n  f(f, 0, 1);\n  sort(begin(ret), end(ret));\n  return ret;\n}\n\
+    \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
+    using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
+    \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
+    \ docs/prime/fast-factorize.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../inner/inner_math.hpp\"\n#include \"../misc/rng.hpp\"\n#include \"../modint/arbitrary-prime-modint.hpp\"\
     \n#include \"../modint/modint-montgomery64.hpp\"\n\nnamespace fast_factorize {\n\
@@ -178,10 +189,18 @@ data:
     \ (p == n) return {p};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
     \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<u64>\
     \ factorize(u64 n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n\
-    \  return ret;\n}\n\n}  // namespace fast_factorize\nusing fast_factorize::factorize;\n\
-    using fast_factorize::is_prime;\n\n/**\n * @brief \u9AD8\u901F\u7D20\u56E0\u6570\
-    \u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n\
-    \ */\n"
+    \  return ret;\n}\n\nusing i64 = int64_t;\n\nmap<u64, i64> factor_count(u64 n)\
+    \ {\n  map<u64, i64> mp;\n  for (auto &x : factorize(n)) mp[x]++;\n  return mp;\n\
+    }\n\nvector<u64> divisors(u64 n) {\n  if (n == 0) return {};\n  vector<pair<u64,\
+    \ i64>> v;\n  for (auto &p : factor_count(n)) v.push_back(p);\n  vector<u64> ret;\n\
+    \  auto f = [&](auto rec, int i, u64 x) -> void {\n    if (i == (int)v.size())\
+    \ {\n      ret.push_back(x);\n      return;\n    }\n    for (int j = v[i].second;;\
+    \ --j) {\n      rec(rec, i + 1, x);\n      if (j == 0) break;\n      x *= v[i].first;\n\
+    \    }\n  };\n  f(f, 0, 1);\n  sort(begin(ret), end(ret));\n  return ret;\n}\n\
+    \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
+    using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
+    \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
+    \ docs/prime/fast-factorize.md\n */\n"
   dependsOn:
   - inner/inner_math.hpp
   - misc/rng.hpp
@@ -191,11 +210,12 @@ data:
   path: prime/fast-factorize.hpp
   requiredBy:
   - modulo/mod-kth-root.hpp
-  timestamp: '2020-10-17 00:29:44+09:00'
+  timestamp: '2020-11-02 22:41:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
 documentation_of: prime/fast-factorize.hpp
 layout: document

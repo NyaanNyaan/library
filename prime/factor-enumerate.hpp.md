@@ -7,6 +7,9 @@ data:
     title: prime/osak.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/factorize.test.cpp
+    title: verify/verify-unit-test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   _pathExtension: hpp
@@ -37,6 +40,7 @@ data:
   timestamp: '2020-09-18 02:00:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
 documentation_of: prime/factor-enumerate.hpp
 layout: document
