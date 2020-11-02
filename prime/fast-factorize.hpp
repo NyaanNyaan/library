@@ -89,7 +89,39 @@ vector<u64> factorize(u64 n) {
   return ret;
 }
 
+using i64 = int64_t;
+
+map<u64, i64> factor_count(u64 n) {
+  map<u64, i64> mp;
+  for (auto &x : factorize(n)) mp[x]++;
+  return mp;
+}
+
+vector<u64> divisors(u64 n) {
+  if (n == 0) return {};
+  vector<pair<u64, i64>> v;
+  for (auto &p : factor_count(n)) v.push_back(p);
+  vector<u64> ret;
+  auto f = [&](auto rec, int i, u64 x) -> void {
+    if (i == (int)v.size()) {
+      ret.push_back(x);
+      return;
+    }
+    for (int j = v[i].second;; --j) {
+      rec(rec, i + 1, x);
+      if (j == 0) break;
+      x *= v[i].first;
+    }
+  };
+  f(f, 0, 1);
+  sort(begin(ret), end(ret));
+  return ret;
+}
+
 }  // namespace fast_factorize
+
+using fast_factorize::divisors;
+using fast_factorize::factor_count;
 using fast_factorize::factorize;
 using fast_factorize::is_prime;
 

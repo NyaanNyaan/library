@@ -20,3 +20,8 @@ struct UnionFind {
 
   int same(int x, int y) { return find(x) == find(y); }
 };
+
+/**
+ * @brief Union Find(Disjoint Set Union)
+ * @docs docs/data-structure/union-find.md
+ */
