@@ -52,11 +52,16 @@ redirect_from:
 - /library/data-structure/union-find.hpp.html
 title: Union Find(Disjoint Set Union)
 ---
-## rollbackつきUnion-Find
+## Union-Find Tree(Disjoint Set Union)
 
 #### 概要
 
-素集合のマージ・および同じ連結成分に所属しているかを$\mathrm{O}(\alpha(n))$で高速に判定するライブラリ。($\alpha(n)$はアッカーマン関数の逆関数)
+Union-Find Treeとは、素集合データ構造に対して
+
+- 頂点$x,y$が属している二つの集合をマージする
+- 頂点$x,y$が同じ集合に属しているかを判定する
+
+という二つの操作をともに$\mathrm{O}(\alpha(n))$で高速に実行するライブラリである。($\alpha(n)$はアッカーマン関数$A(n, n)$の逆関数)
 
 #### 使い方
 
