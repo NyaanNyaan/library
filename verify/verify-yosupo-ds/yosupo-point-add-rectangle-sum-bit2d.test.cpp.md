@@ -9,7 +9,7 @@ data:
     title: "\u52D5\u7684Binary Indexed Tree"
   - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
-    title: data-structure/dynamic-binary-indexed-tree.hpp
+    title: "\u52D5\u7684Binary Indexed Tree"
   - icon: ':heavy_check_mark:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
@@ -168,27 +168,28 @@ data:
     \ const {\n    if (k < 0) return 0;\n    T ret = T();\n    for (; k > 0; k -=\
     \ k & -k) {\n      const T* p = data.find(k);\n      ret += p ? *p : T();\n  \
     \  }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S a, S b) const { return sum(b)\
-    \ - sum(a); }\n\n  T operator[](S k) { return sum(k + 1) - sum(k); }\n\n  S lower_bound(T\
-    \ w) {\n    if (w <= 0) return 0;\n    S x = 0;\n    for (S k = 1 << __lg(x);\
-    \ k > 0; k >>= 1) {\n      if (x + k <= N - 1 && data[x + k] < w) {\n        w\
-    \ -= data[x + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n#line\
-    \ 6 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\n\ntemplate <typename\
-    \ T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int, T>;\n\
-    \  int N, M;\n  vector<BIT*> bit;\n  DynamicFenwickTree2D() = default;\n  DynamicFenwickTree2D(int\
-    \ n, int m) : N(n + 1), M(m) {\n    for (int _ = 0; _ < N; ++_) bit.push_back(new\
-    \ BIT(M));\n  }\n  \n  void add(int i, int j, const T& x) {\n    for (++i; i <\
-    \ N; i += i & -i) (*bit[i]).add(j, x);\n  }\n\n  // i = [0, n), j = [0, m)\n \
-    \ T sum(int n, int m) const {\n    if (n < 0 || m < 0) return T();\n    T ret\
-    \ = T();\n    for (; n; n -= n & -n) ret += (*bit[n]).sum(m);\n    return ret;\n\
-    \  }\n\n  // i = [nl, nr), j = [ml, mr)\n  T sum(int nl, int ml, int nr, int mr)\
-    \ const {\n    T ret = T();\n    while (nl != nr) {\n      if (nl < nr) {\n  \
-    \      ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr & -nr;\n      } else {\n\
-    \        ret -= (*bit[nl]).sum(ml, mr);\n        nl -= nl & -nl;\n      }\n  \
-    \  }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684Binary Indexed Tree\n\
-    \ * @docs docs/data-structure-2d/ds-2d.md\n */\n#line 3 \"misc/compress.hpp\"\n\
-    using namespace std;\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n\
-    \  compress(const vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v)\
-    \ xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
+    \ - sum(a); }\n\n  T operator[](S k) const { return sum(k + 1) - sum(k); }\n\n\
+    \  S lower_bound(T w) {\n    if (w <= 0) return 0;\n    S x = 0;\n    for (S k\
+    \ = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <\
+    \ w) {\n        w -= data[x + k];\n        x += k;\n      }\n    }\n    return\
+    \ x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed Tree\n * @docs docs/data-structure/dynamic-binary-indexed-tree.md\n\
+    \ */\n#line 6 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\n\ntemplate\
+    \ <typename T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int,\
+    \ T>;\n  int N, M;\n  vector<BIT*> bit;\n  DynamicFenwickTree2D() = default;\n\
+    \  DynamicFenwickTree2D(int n, int m) : N(n + 1), M(m) {\n    for (int _ = 0;\
+    \ _ < N; ++_) bit.push_back(new BIT(M));\n  }\n  \n  void add(int i, int j, const\
+    \ T& x) {\n    for (++i; i < N; i += i & -i) (*bit[i]).add(j, x);\n  }\n\n  //\
+    \ i = [0, n), j = [0, m)\n  T sum(int n, int m) const {\n    if (n < 0 || m <\
+    \ 0) return T();\n    T ret = T();\n    for (; n; n -= n & -n) ret += (*bit[n]).sum(m);\n\
+    \    return ret;\n  }\n\n  // i = [nl, nr), j = [ml, mr)\n  T sum(int nl, int\
+    \ ml, int nr, int mr) const {\n    T ret = T();\n    while (nl != nr) {\n    \
+    \  if (nl < nr) {\n        ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr &\
+    \ -nr;\n      } else {\n        ret -= (*bit[nl]).sum(ml, mr);\n        nl -=\
+    \ nl & -nl;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684\
+    Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n */\n#line 3 \"\
+    misc/compress.hpp\"\nusing namespace std;\n\ntemplate<class T>\nstruct compress{\n\
+    \  vector<T> xs;\n  compress(const vector<T>& v){\n    xs.reserve(v.size());\n\
+    \    for(T x : v) xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
     \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
     \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
     \ i){\n    return xs[i];\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
@@ -259,7 +260,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-10-29 19:42:19+09:00'
+  timestamp: '2020-11-03 21:41:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp

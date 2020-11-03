@@ -7,7 +7,7 @@ data:
     title: "\u52D5\u7684Binary Indexed Tree"
   - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
-    title: data-structure/dynamic-binary-indexed-tree.hpp
+    title: "\u52D5\u7684Binary Indexed Tree"
   - icon: ':heavy_check_mark:'
     path: modulo/mod-log.hpp
     title: modulo/mod-log.hpp

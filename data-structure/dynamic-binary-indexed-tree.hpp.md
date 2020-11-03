@@ -15,6 +15,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/data-structure/dynamic-binary-indexed-tree.md
+    document_title: "\u52D5\u7684Binary Indexed Tree"
     links: []
   bundledCode: "#line 2 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
@@ -55,11 +57,12 @@ data:
     \ data[k] += x;\n  }\n\n  // [0, k)\n  T sum(S k) const {\n    if (k < 0) return\
     \ 0;\n    T ret = T();\n    for (; k > 0; k -= k & -k) {\n      const T* p = data.find(k);\n\
     \      ret += p ? *p : T();\n    }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S\
-    \ a, S b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) { return sum(k\
-    \ + 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n    S\
-    \ x = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k <= N\
-    \ - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n    \
-    \  }\n    }\n    return x;\n  }\n};\n"
+    \ a, S b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) const { return\
+    \ sum(k + 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n\
+    \    S x = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k\
+    \ <= N - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n\
+    \      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed\
+    \ Tree\n * @docs docs/data-structure/dynamic-binary-indexed-tree.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"hash-map-variable-length.hpp\"\n\ntemplate <typename S, typename T>\nstruct\
     \ DynamicFenwickTree {\n  S N;\n  HashMap<S, T> data;\n  explicit DynamicFenwickTree()\
@@ -68,18 +71,19 @@ data:
     \ [0, k)\n  T sum(S k) const {\n    if (k < 0) return 0;\n    T ret = T();\n \
     \   for (; k > 0; k -= k & -k) {\n      const T* p = data.find(k);\n      ret\
     \ += p ? *p : T();\n    }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S a, S\
-    \ b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) { return sum(k +\
-    \ 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n    S x\
-    \ = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k <= N -\
-    \ 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n      }\n\
-    \    }\n    return x;\n  }\n};\n"
+    \ b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) const { return sum(k\
+    \ + 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n    S\
+    \ x = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k <= N\
+    \ - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n    \
+    \  }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed\
+    \ Tree\n * @docs docs/data-structure/dynamic-binary-indexed-tree.md\n */\n"
   dependsOn:
   - data-structure/hash-map-variable-length.hpp
   isVerificationFile: false
   path: data-structure/dynamic-binary-indexed-tree.hpp
   requiredBy:
   - data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
-  timestamp: '2020-10-29 19:42:19+09:00'
+  timestamp: '2020-11-03 21:41:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
@@ -88,5 +92,22 @@ layout: document
 redirect_from:
 - /library/data-structure/dynamic-binary-indexed-tree.hpp
 - /library/data-structure/dynamic-binary-indexed-tree.hpp.html
-title: data-structure/dynamic-binary-indexed-tree.hpp
+title: "\u52D5\u7684Binary Indexed Tree"
 ---
+## 動的Binary Indexed Tree
+
+#### 概要
+
+[Binary Indexed Tree](https://nyaannyaan.github.io/library/data-structure/binary-indexed-tree.hpp)を動的にしたライブラリ。
+
+Binary Indexed Tree(BIT)は区間和と一点加算が配列長を$n$として時間計算量$\mathrm{O}(\log n)$で出来るが、空間計算量が$\mathrm{O}(n)$になるため$n$がメモリサイズより大きいときに使用できない。そこで、配列の代わりに連想配列を利用することで空間計算量を(クエリ数を$q$として)$\mathrm{O}(q \log n)$で抑えたものが動的Binary Indexed Treeである。
+
+#### 使い方
+
+- `DynamicBinaryIndexedTree<T>(int n)`: $[0, n]$を添え字の値として取れるBITを作成する。
+- `add(k, x)`: k番目の要素にxを加算する。
+- `operator[](k)`: k番目の要素を取得する。
+- `sum(k)`: 区間`[0, k)`の和を取得する。
+- `sum(l, r)`: 区間`[l, r)`の和を取得する。
+- `operator[](k)`: `k`番目の要素の値を取得する。
+- `lower_bound(w)`: 要素が全て非負の時、`[0, k]`の区間和がw以上となるような最小のkを求める。
