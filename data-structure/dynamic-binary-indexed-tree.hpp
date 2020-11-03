@@ -29,7 +29,7 @@ struct DynamicFenwickTree {
   // [a, b)
   T sum(S a, S b) const { return sum(b) - sum(a); }
 
-  T operator[](S k) { return sum(k + 1) - sum(k); }
+  T operator[](S k) const { return sum(k + 1) - sum(k); }
 
   S lower_bound(T w) {
     if (w <= 0) return 0;
@@ -43,3 +43,8 @@ struct DynamicFenwickTree {
     return x;
   }
 };
+
+/**
+ * @brief 動的Binary Indexed Tree
+ * @docs docs/data-structure/dynamic-binary-indexed-tree.md
+ */
