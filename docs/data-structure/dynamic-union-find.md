@@ -1,13 +1,8 @@
-## Union-Find Tree(Disjoint Set Union)
+## 動的Union Find
 
 #### 概要
 
-Union-Find Treeとは、素集合データ構造に対して
-
-- 頂点$x,y$が属している二つの集合をマージする
-- 頂点$x,y$が同じ集合に属しているかを判定する
-
-という二つの操作をともに$\mathrm{O}(\alpha(n))$で高速に実行するライブラリである。($\alpha(n)$はアッカーマン関数$A(n, n)$の逆関数)
+[Union Find](https://nyaannyaan.github.io/library/data-structure/union-find.hpp)の動的版。配列を使っていた部分を連想配列に変えることで空間計算量を削減している。
 
 #### 使い方
 

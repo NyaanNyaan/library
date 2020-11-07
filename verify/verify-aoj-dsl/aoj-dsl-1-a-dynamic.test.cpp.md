@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-union-find.hpp
-    title: data-structure/dynamic-union-find.hpp
+    title: "\u52D5\u7684Union Find"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -125,10 +125,12 @@ data:
     \ {\n      ity->second += itx->second;\n      itx->second = y;\n    } else {\n\
     \      itx->second += ity->second;\n      ity->second = x;\n    }\n    return\
     \ true;\n  }\n\n  int size(int k) { return -data(find(k)); }\n\n  int same(int\
-    \ x, int y) { return find(x) == find(y); }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  DynamicUnionFind uf;\n  rep(_, Q) {\n    ini(c);\n\
-    \    if (c == 0) {\n      ini(x, y);\n      uf.unite(x, y);\n    } else {\n  \
-    \    ini(x,y);\n      out(uf.same(x,y));\n    }\n  }\n}\n"
+    \ x, int y) { return find(x) == find(y); }\n};\n\n/**\n * @brief \u52D5\u7684\
+    Union Find\n * @docs docs/data-structure/dynamic-union-find.md\n */\n#line 6 \"\
+    verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp\"\n\nvoid solve() {\n  ini(N,\
+    \ Q);\n  DynamicUnionFind uf;\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n\
+    \      ini(x, y);\n      uf.unite(x, y);\n    } else {\n      ini(x,y);\n    \
+    \  out(uf.same(x,y));\n    }\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/dynamic-union-find.hpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  DynamicUnionFind uf;\n  rep(_, Q) {\n    ini(c);\n\
@@ -140,7 +142,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
   requiredBy: []
-  timestamp: '2020-08-01 13:37:43+09:00'
+  timestamp: '2020-11-08 01:02:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp

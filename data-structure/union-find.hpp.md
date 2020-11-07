@@ -69,3 +69,4 @@ Union-Find Treeとは、素集合データ構造に対して
 - `unite(int x, int y)`：xとyをマージする。返り値はマージに成功したら`true`、失敗したら`false`を返す。計算量$\mathrm{O}(\alpha(n))$($n$はUnionFindのサイズ)
 - `find(int k)`：kの根を返す。計算量$\mathrm{O}(\alpha(n))$
 - `same(int x, int y)`：xとyが同じ連結成分に所属しているかを返す。計算量$\mathrm{O}(\alpha(n))$
+- `size(int k)`：xを含む連結成分のサイズを返す。

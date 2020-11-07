@@ -30,7 +30,7 @@ data:
       title: "\u52D5\u7684Binary Indexed Tree"
     - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-union-find.hpp
-      title: data-structure/dynamic-union-find.hpp
+      title: "\u52D5\u7684Union Find"
     - icon: ':heavy_check_mark:'
       path: data-structure/hash-map-chain.hpp
       title: "Hash Map(\u9023\u9396\u6CD5)"
