@@ -32,3 +32,8 @@ struct DynamicUnionFind {
 
   int same(int x, int y) { return find(x) == find(y); }
 };
+
+/**
+ * @brief 動的Union Find
+ * @docs docs/data-structure/dynamic-union-find.md
+ */
