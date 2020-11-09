@@ -145,3 +145,8 @@ struct WaveletMatrix {
     return cnt == r - l ? T(-1) : kth_smallest(l, r, cnt);
   }
 };
+
+/*
+ * @brief Wavelet Matrix
+ * @docs docs/data-structure-2d/wavelet-matrix.md
+ */
