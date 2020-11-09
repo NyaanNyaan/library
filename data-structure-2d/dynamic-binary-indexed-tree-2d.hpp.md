@@ -16,7 +16,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
-    document_title: "\u52D5\u7684Binary Indexed Tree"
+    document_title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
     links: []
   bundledCode: "#line 2 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\n\
     #include <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"data-structure/dynamic-binary-indexed-tree.hpp\"\
@@ -76,8 +76,8 @@ data:
     \ const {\n    T ret = T();\n    while (nl != nr) {\n      if (nl < nr) {\n  \
     \      ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr & -nr;\n      } else {\n\
     \        ret -= (*bit[nl]).sum(ml, mr);\n        nl -= nl & -nl;\n      }\n  \
-    \  }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684Binary Indexed Tree\n\
-    \ * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    \  }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684\u4E8C\u6B21\u5143\
+    Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate <typename\
     \ T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int, T>;\n\
@@ -91,15 +91,15 @@ data:
     \ const {\n    T ret = T();\n    while (nl != nr) {\n      if (nl < nr) {\n  \
     \      ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr & -nr;\n      } else {\n\
     \        ret -= (*bit[nl]).sum(ml, mr);\n        nl -= nl & -nl;\n      }\n  \
-    \  }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684Binary Indexed Tree\n\
-    \ * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    \  }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684\u4E8C\u6B21\u5143\
+    Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
   dependsOn:
   - data-structure/dynamic-binary-indexed-tree.hpp
   - data-structure/hash-map-variable-length.hpp
   isVerificationFile: false
   path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
   requiredBy: []
-  timestamp: '2020-11-03 21:41:31+09:00'
+  timestamp: '2020-11-09 12:30:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
@@ -108,7 +108,7 @@ layout: document
 redirect_from:
 - /library/data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
 - /library/data-structure-2d/dynamic-binary-indexed-tree-2d.hpp.html
-title: "\u52D5\u7684Binary Indexed Tree"
+title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
 ---
 ## 領域木
 

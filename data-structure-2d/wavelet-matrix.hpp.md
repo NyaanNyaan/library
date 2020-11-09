@@ -9,6 +9,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/data-structure-2d/wavelet-matrix.md
+    document_title: Wavelet Matrix
     links: []
   bundledCode: "#line 2 \"data-structure-2d/wavelet-matrix.hpp\"\n#include <bits/stdc++.h>\n\
     #include <immintrin.h>\nusing namespace std;\n\nstruct bit_vector {\n  using u32\
@@ -61,7 +63,8 @@ data:
     \ r, upper);\n    return cnt == 0 ? T(-1) : kth_smallest(l, r, cnt - 1);\n  }\n\
     \n  // min v[i] s.t. (l <= i < r) && (lower <= v[i])\n  T next_value(int l, int\
     \ r, T lower) {\n    int cnt = range_freq(l, r, lower);\n    return cnt == r -\
-    \ l ? T(-1) : kth_smallest(l, r, cnt);\n  }\n};\n"
+    \ l ? T(-1) : kth_smallest(l, r, cnt);\n  }\n};\n\n/*\n * @brief Wavelet Matrix\n\
+    \ * @docs docs/data-structure-2d/wavelet-matrix.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\n#include <immintrin.h>\nusing namespace\
     \ std;\n\nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n\
     \  using u64 = uint64_t;\n\n  static constexpr u32 w = 64;\n  vector<u64> block;\n\
@@ -113,12 +116,13 @@ data:
     \ == 0 ? T(-1) : kth_smallest(l, r, cnt - 1);\n  }\n\n  // min v[i] s.t. (l <=\
     \ i < r) && (lower <= v[i])\n  T next_value(int l, int r, T lower) {\n    int\
     \ cnt = range_freq(l, r, lower);\n    return cnt == r - l ? T(-1) : kth_smallest(l,\
-    \ r, cnt);\n  }\n};"
+    \ r, cnt);\n  }\n};\n\n/*\n * @brief Wavelet Matrix\n * @docs docs/data-structure-2d/wavelet-matrix.md\n\
+    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure-2d/wavelet-matrix.hpp
   requiredBy: []
-  timestamp: '2020-10-06 19:07:08+09:00'
+  timestamp: '2020-11-09 12:30:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/wavelet-matrix.test.cpp
@@ -127,5 +131,24 @@ layout: document
 redirect_from:
 - /library/data-structure-2d/wavelet-matrix.hpp
 - /library/data-structure-2d/wavelet-matrix.hpp.html
-title: data-structure-2d/wavelet-matrix.hpp
+title: Wavelet Matrix
 ---
+## Wavelet Matrix
+
+#### 概要
+
+数列に対する様々なクエリを$\mathrm{O}(\log N)$で行えるデータ構造。定数倍も比較的軽い。
+
+二次元クエリの処理に使われることが多く、例えばBITを上に載せることで矩形和・一点加算のクエリを処理できるようになる。[実装](https://nyaannyaan.github.io/library/data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp)　また、bit vectorを平衡二分木に変えることで動的なクエリが処理できるようになる。(未実装…)
+
+#### 使い方
+
+`WaveletMatrix(n)`: 要素数nのWaveletMatrixを生成する。
+`set(i, x)`:　i番目の要素にxを代入する。
+`build()`:　データ構造を構築する。(これ以降`set(i, x)`を呼び出してはいけない。)
+`accsess(k)`: k番目の要素の値を得る。
+`kth_smallest(l, r, k)`:　`[l, r)`の範囲でk(0-indexed)番目に小さい値を返す。
+`kth_largest(l, r, k)`:　`[l, r)`の範囲でk(0-indexed)番目に大きい値を返す。
+`range_freq(l, r, upper)`: `[l, r)`の範囲でupper未満の要素の個数を返す。
+`prev_value(l, r, lower)`: `l, r`の範囲でupper未満の最後の値を返す。
+`prev_value(l, r, lower)`: `l, r`の範囲でlower以上の最初の値を返す。

@@ -89,7 +89,7 @@ data:
       title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
-      title: "\u52D5\u7684Binary Indexed Tree"
+      title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
@@ -104,7 +104,7 @@ data:
       title: "\u9818\u57DF\u6728(Segment Tree)"
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/wavelet-matrix.hpp
-      title: data-structure-2d/wavelet-matrix.hpp
+      title: Wavelet Matrix
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'

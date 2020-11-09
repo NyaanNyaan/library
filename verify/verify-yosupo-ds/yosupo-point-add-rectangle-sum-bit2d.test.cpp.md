@@ -6,7 +6,7 @@ data:
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
-    title: "\u52D5\u7684Binary Indexed Tree"
+    title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
   - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: "\u52D5\u7684Binary Indexed Tree"
@@ -186,9 +186,9 @@ data:
     \  if (nl < nr) {\n        ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr &\
     \ -nr;\n      } else {\n        ret -= (*bit[nl]).sum(ml, mr);\n        nl -=\
     \ nl & -nl;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684\
-    Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n */\n#line 3 \"\
-    misc/compress.hpp\"\nusing namespace std;\n\ntemplate<class T>\nstruct compress{\n\
-    \  vector<T> xs;\n  compress(const vector<T>& v){\n    xs.reserve(v.size());\n\
+    \u4E8C\u6B21\u5143Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n\
+    \ */\n#line 3 \"misc/compress.hpp\"\nusing namespace std;\n\ntemplate<class T>\n\
+    struct compress{\n  vector<T> xs;\n  compress(const vector<T>& v){\n    xs.reserve(v.size());\n\
     \    for(T x : v) xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
     \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
     \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
@@ -260,7 +260,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-11-03 21:41:31+09:00'
+  timestamp: '2020-11-09 12:30:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
