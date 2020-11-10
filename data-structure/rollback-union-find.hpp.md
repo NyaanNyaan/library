@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/data-structure/rollback-union-find.md
     document_title: "Rollback\u3064\u304DUnion Find"
@@ -48,8 +51,9 @@ data:
   path: data-structure/rollback-union-find.hpp
   requiredBy: []
   timestamp: '2020-11-02 22:41:23+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
 documentation_of: data-structure/rollback-union-find.hpp
 layout: document
 redirect_from:
