@@ -119,7 +119,7 @@ data:
     \nusing namespace std;\n\ntemplate <class T>\nstruct UnionFindWithPotential {\n\
     \  vector<int> dat;\n  vector<T> pot;\n\n  UnionFindWithPotential(int N, T I_\
     \ = 0) : dat(N, -1), pot(N, T()) {}\n\n  int root(int x) {\n    if (dat[x] < 0)\
-    \ return x;\n    if (pot[dat[x]] >= 0) pot[x] += pot[dat[x]];\n    return dat[x]\
+    \ return x;\n    if(pot[dat[x]] >= 0) pot[x] += pot[dat[x]];\n    return dat[x]\
     \ = root(dat[x]);\n  }\n\n  // return P(x) - P(root(x))\n  T potential(int x)\
     \ {\n    root(x);\n    return pot[x];\n  }\n\n  bool same(int x, int y) { return\
     \ root(x) == root(y); }\n\n  // return P(x) - P(y)\n  T diff(int x, int y) {\n\
@@ -128,11 +128,12 @@ data:
     \ T p) {\n    p += potential(y) - potential(x);\n    x = root(x), y = root(y);\n\
     \    if (x == y) return p == T();\n    if (dat[x] < dat[y]) swap(x, y), p = -p;\n\
     \    dat[y] += dat[x];\n    dat[x] = y;\n    pot[x] = p;\n    return true;\n \
-    \ }\n\n  int size(int x) { return -dat[root(x)]; }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  UnionFindWithPotential<int> uf(N);\n  rep(_,\
-    \ Q) {\n    ini(c);\n    if (c == 0) {\n      ini(x, y, z);\n      uf.merge(y,\
-    \ x, z);\n    } else {\n      ini(x, y);\n      if (!uf.same(x, y))\n        out(\"\
-    ?\");\n      else\n        out(uf.diff(y, x));\n    }\n  }\n}\n"
+    \ }\n\n  // return size of CC including x\n  int size(int x) { return -dat[root(x)];\
+    \ }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp\"\n\nvoid solve()\
+    \ {\n  ini(N, Q);\n  UnionFindWithPotential<int> uf(N);\n  rep(_, Q) {\n    ini(c);\n\
+    \    if (c == 0) {\n      ini(x, y, z);\n      uf.merge(y, x, z);\n    } else\
+    \ {\n      ini(x, y);\n      if (!uf.same(x, y))\n        out(\"?\");\n      else\n\
+    \        out(uf.diff(y, x));\n    }\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/union-find-with-potential.hpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  UnionFindWithPotential<int> uf(N);\n  rep(_,\
@@ -145,7 +146,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
   requiredBy: []
-  timestamp: '2020-11-19 22:59:27+09:00'
+  timestamp: '2020-11-19 23:14:11+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
