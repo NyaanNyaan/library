@@ -23,24 +23,31 @@ data:
     \ N) : data(N, -1) {}\n\n  int find(int k) { return data[k] < 0 ? k : data[k]\
     \ = find(data[k]); }\n\n  int unite(int x, int y) {\n    if ((x = find(x)) ==\
     \ (y = find(y))) return false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x]\
-    \ += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  int size(int k) {\
-    \ return -data[find(k)]; }\n\n  int same(int x, int y) { return find(x) == find(y);\
-    \ }\n};\n\n/**\n * @brief Union Find(Disjoint Set Union)\n * @docs docs/data-structure/union-find.md\n\
-    \ */\n"
+    \ += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  // f ... merge function\n\
+    \  template<typename F>\n  int unite(int x, int y, F &f) {\n    if ((x = find(x))\
+    \ == (y = find(y))) return false;\n    if (data[x] > data[y]) swap(x, y);\n  \
+    \  data[x] += data[y];\n    data[y] = x;\n    f(x, y);\n    return true;\n  }\n\
+    \n  int size(int k) { return -data[find(k)]; }\n\n  int same(int x, int y) { return\
+    \ find(x) == find(y); }\n};\n\n/**\n * @brief Union Find(Disjoint Set Union)\n\
+    \ * @docs docs/data-structure/union-find.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\nstruct UnionFind\
     \ {\n  vector<int> data;\n  UnionFind(int N) : data(N, -1) {}\n\n  int find(int\
     \ k) { return data[k] < 0 ? k : data[k] = find(data[k]); }\n\n  int unite(int\
     \ x, int y) {\n    if ((x = find(x)) == (y = find(y))) return false;\n    if (data[x]\
     \ > data[y]) swap(x, y);\n    data[x] += data[y];\n    data[y] = x;\n    return\
-    \ true;\n  }\n\n  int size(int k) { return -data[find(k)]; }\n\n  int same(int\
-    \ x, int y) { return find(x) == find(y); }\n};\n\n/**\n * @brief Union Find(Disjoint\
-    \ Set Union)\n * @docs docs/data-structure/union-find.md\n */\n"
+    \ true;\n  }\n\n  // f ... merge function\n  template<typename F>\n  int unite(int\
+    \ x, int y, F &f) {\n    if ((x = find(x)) == (y = find(y))) return false;\n \
+    \   if (data[x] > data[y]) swap(x, y);\n    data[x] += data[y];\n    data[y] =\
+    \ x;\n    f(x, y);\n    return true;\n  }\n\n  int size(int k) { return -data[find(k)];\
+    \ }\n\n  int same(int x, int y) { return find(x) == find(y); }\n};\n\n/**\n *\
+    \ @brief Union Find(Disjoint Set Union)\n * @docs docs/data-structure/union-find.md\n\
+    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/union-find.hpp
   requiredBy:
   - graph/kruskal.hpp
-  timestamp: '2020-11-02 22:41:23+09:00'
+  timestamp: '2020-11-19 22:59:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
