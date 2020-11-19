@@ -16,6 +16,17 @@ struct UnionFind {
     return true;
   }
 
+  // f ... merge function
+  template<typename F>
+  int unite(int x, int y, F &f) {
+    if ((x = find(x)) == (y = find(y))) return false;
+    if (data[x] > data[y]) swap(x, y);
+    data[x] += data[y];
+    data[y] = x;
+    f(x, y);
+    return true;
+  }
+
   int size(int k) { return -data[find(k)]; }
 
   int same(int x, int y) { return find(x) == find(y); }
