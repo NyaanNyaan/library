@@ -11,7 +11,7 @@ struct UnionFindWithPotential {
 
   int root(int x) {
     if (dat[x] < 0) return x;
-    if (pot[dat[x]] >= 0) pot[x] += pot[dat[x]];
+    if(pot[dat[x]] >= 0) pot[x] += pot[dat[x]];
     return dat[x] = root(dat[x]);
   }
 
