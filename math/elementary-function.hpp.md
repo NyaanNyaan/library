@@ -118,10 +118,10 @@ data:
   timestamp: '2020-09-18 02:08:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
 documentation_of: math/elementary-function.hpp
 layout: document

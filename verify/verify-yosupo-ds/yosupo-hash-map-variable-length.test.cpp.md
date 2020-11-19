@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -143,18 +143,18 @@ data:
     \ Val* find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n   \
     \ while (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash]\
     \ == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n \
-    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&,\
-    \ Val&>> enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for\
-    \ (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
-    \    return ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n\
-    \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
-    \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
-    \ */\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
-    \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
-    \ {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j\
-    \ = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n\
-    \      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
+    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<Key, Val>>\
+    \ enumerate() const {\n    vector<pair<Key, Val>> ret;\n    for (u32 i = 0; i\
+    \ < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n    return\
+    \ ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n  void\
+    \ set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief Hash\
+    \ Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n */\n\
+    #line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\nstatic\
+    \ constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0,\
+    \ por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n\
+    \    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3;\
+    \ j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n \
+    \     }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
     \ ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ -\
     \ pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1,\
     \ por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c = ibuf[pil++]; }\n\
@@ -197,7 +197,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   requiredBy: []
-  timestamp: '2020-10-29 19:42:19+09:00'
+  timestamp: '2020-11-19 22:42:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp

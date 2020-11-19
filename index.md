@@ -14,7 +14,7 @@ data:
       title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -70,7 +70,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/square-root-decomposition.hpp
       title: "\u5E73\u65B9\u5206\u5272"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: data-structure/union-find-with-potential.hpp
       title: data-structure/union-find-with-potential.hpp
     - icon: ':heavy_check_mark:'
@@ -514,7 +514,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
     - icon: ':heavy_check_mark:'

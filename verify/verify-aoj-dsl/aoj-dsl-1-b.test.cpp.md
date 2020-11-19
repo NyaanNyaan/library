@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure/union-find-with-potential.hpp
     title: data-structure/union-find-with-potential.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B
@@ -116,26 +116,19 @@ data:
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/union-find-with-potential.hpp\"\
-    \nusing namespace std;\n\n// Potential\u3064\u304DUnion-Find\ntemplate <class\
-    \ T>\nstruct UnionFindWithPotential {\n  vector<int> par, rank;\n  // pot...\u6839\
-    \u306B\u5BFE\u3059\u308B\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB\n  vector<T> pot;\n\
-    \  T UNIT;\n\n  UnionFindWithPotential(int N, T UNIT_ = 0)\n      : par(N), rank(N),\
-    \ pot(N), UNIT(UNIT_) {\n    for (int i = 0; i < N; i++) par[i] = i, rank[i] =\
-    \ 0, pot[i] = UNIT;\n  }\n\n  // x\u306E\u6839\u3092\u8FD4\u3059\u95A2\u6570\n\
-    \  int root(int x) {\n    if (par[x] == x) return x;\n    int r = root(par[x]);\n\
-    \    pot[x] += pot[par[x]];\n    return par[x] = r;\n  }\n\n  // \u6839\u306B\u5BFE\
-    \u3059\u308B\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB\u3092\u8FD4\u3059\u95A2\u6570\
-    \n  T potential(int x) {\n    root(x);\n    return pot[x];\n  }\n\n  // \u6839\
-    \u304C\u540C\u3058\u304B\u3092\u5224\u5B9A\u3059\u308B\u95A2\u6570\n  bool same(int\
-    \ x, int y) { return root(x) == root(y); }\n\n  // x\u306Ey\u306B\u5BFE\u3059\u308B\
-    potential\u3092\u8FD4\u3059\u95A2\u6570\n  T diff(int x, int y) { return potential(x)\
-    \ - potential(y); }\n\n  // x\u306Ey\u306B\u5BFE\u3059\u308Bpotential\u304Cp\u3067\
-    \u3042\u308B (x\u306Fy\u3088\u308A\u3082p\u5927\u304D\u3044)\n  // false\u306E\
-    \u6642\u3001\u65E2\u5B58\u306E\u60C5\u5831\u3068\u77DB\u76FE\n  bool merge(int\
-    \ x, int y, T p) {\n    p += potential(y) - potential(x);\n    x = root(x), y\
-    \ = root(y);\n    if (x == y) {\n      return p == UNIT;\n    }\n    if (rank[x]\
-    \ > rank[y]) swap(x, y), p = -p;\n    if (rank[x] == rank[y]) ++rank[x];\n   \
-    \ par[x] = y, pot[x] = p;\n    return true;\n  }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp\"\
+    \nusing namespace std;\n\ntemplate <class T>\nstruct UnionFindWithPotential {\n\
+    \  vector<int> dat;\n  vector<T> pot;\n\n  UnionFindWithPotential(int N, T I_\
+    \ = 0) : dat(N, -1), pot(N, T()) {}\n\n  int root(int x) {\n    if (dat[x] < 0)\
+    \ return x;\n    pot[x] += pot[dat[x]];\n    return dat[x] = root(dat[x]);\n \
+    \ }\n\n  // return P(x) - P(root(x))\n  T potential(int x) {\n    root(x);\n \
+    \   return pot[x];\n  }\n\n  bool same(int x, int y) { return root(x) == root(y);\
+    \ }\n\n  // return P(x) - P(y)\n  T diff(int x, int y) { \n    assert(same(x,\
+    \ y));\n    return potential(x) - potential(y); \n  }\n\n  // s.t. P(x) = P(y)\
+    \ + p\n  // return Satisfiablility\n  bool merge(int x, int y, T p) {\n    p +=\
+    \ potential(y) - potential(x);\n    x = root(x), y = root(y);\n    if (x == y)\
+    \ return p == T();\n    if (dat[x] < dat[y]) swap(x, y), p = -p;\n    dat[y] +=\
+    \ dat[x];\n    dat[x] = y;\n    pot[x] = p;\n    return true;\n  }\n\n  int size(int\
+    \ x) { return -dat[root(x)]; }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  UnionFindWithPotential<int> uf(N);\n  rep(_,\
     \ Q) {\n    ini(c);\n    if (c == 0) {\n      ini(x, y, z);\n      uf.merge(y,\
     \ x, z);\n    } else {\n      ini(x, y);\n      if (!uf.same(x, y))\n        out(\"\
@@ -152,8 +145,8 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
   requiredBy: []
-  timestamp: '2020-08-01 13:37:43+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-19 22:42:33+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
 layout: document

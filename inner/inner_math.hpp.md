@@ -60,8 +60,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
 documentation_of: inner/inner_math.hpp

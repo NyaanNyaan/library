@@ -79,12 +79,12 @@ data:
   timestamp: '2020-10-28 23:43:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
 documentation_of: data-structure/binary-indexed-tree.hpp
 layout: document
 redirect_from:

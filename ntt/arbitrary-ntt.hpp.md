@@ -521,17 +521,17 @@ data:
   timestamp: '2020-10-11 00:26:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-  - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+  - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
-  - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
 documentation_of: ntt/arbitrary-ntt.hpp
 layout: document
 redirect_from:

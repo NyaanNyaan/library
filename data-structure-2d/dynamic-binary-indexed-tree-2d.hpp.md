@@ -45,13 +45,13 @@ data:
     \ Val* find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n   \
     \ while (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash]\
     \ == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n \
-    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&,\
-    \ Val&>> enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for\
-    \ (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
-    \    return ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n\
-    \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
-    \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
-    \ */\n#line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate <typename\
+    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<Key, Val>>\
+    \ enumerate() const {\n    vector<pair<Key, Val>> ret;\n    for (u32 i = 0; i\
+    \ < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n    return\
+    \ ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n  void\
+    \ set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief Hash\
+    \ Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n */\n\
+    #line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate <typename\
     \ S, typename T>\nstruct DynamicFenwickTree {\n  S N;\n  HashMap<S, T> data;\n\
     \  explicit DynamicFenwickTree() = default;\n  explicit DynamicFenwickTree(S size)\
     \ { N = size + 1; }\n\n  void add(S k, T x) {\n    for (++k; k < N; k += k & -k)\
@@ -99,7 +99,7 @@ data:
   isVerificationFile: false
   path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
   requiredBy: []
-  timestamp: '2020-11-09 12:30:18+09:00'
+  timestamp: '2020-11-19 22:42:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp

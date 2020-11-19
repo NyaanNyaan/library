@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -152,27 +152,27 @@ data:
     \ Val* find(const Key& i) const {\n    u32 hash = (u64(i) * r) >> shift;\n   \
     \ while (true) {\n      if (!flag[hash]) return nullptr;\n      if (keys[hash]\
     \ == i) return &(vals[hash]);\n      hash = (hash + 1) & (cap - 1);\n    }\n \
-    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<const Key&,\
-    \ Val&>> enumerate() const {\n    vector<pair<const Key&, Val&>> ret;\n    for\
-    \ (u32 i = 0; i < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n\
-    \    return ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n\
-    \  void set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief\
-    \ Hash Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n\
-    \ */\n#line 3 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\nusing\
-    \ namespace std;\n\n#line 3 \"data-structure/dynamic-binary-indexed-tree.hpp\"\
-    \nusing namespace std;\n\n#line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\
-    \n\ntemplate <typename S, typename T>\nstruct DynamicFenwickTree {\n  S N;\n \
-    \ HashMap<S, T> data;\n  explicit DynamicFenwickTree() = default;\n  explicit\
-    \ DynamicFenwickTree(S size) { N = size + 1; }\n\n  void add(S k, T x) {\n   \
-    \ for (++k; k < N; k += k & -k) data[k] += x;\n  }\n\n  // [0, k)\n  T sum(S k)\
-    \ const {\n    if (k < 0) return 0;\n    T ret = T();\n    for (; k > 0; k -=\
-    \ k & -k) {\n      const T* p = data.find(k);\n      ret += p ? *p : T();\n  \
-    \  }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S a, S b) const { return sum(b)\
-    \ - sum(a); }\n\n  T operator[](S k) const { return sum(k + 1) - sum(k); }\n\n\
-    \  S lower_bound(T w) {\n    if (w <= 0) return 0;\n    S x = 0;\n    for (S k\
-    \ = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <\
-    \ w) {\n        w -= data[x + k];\n        x += k;\n      }\n    }\n    return\
-    \ x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed Tree\n * @docs docs/data-structure/dynamic-binary-indexed-tree.md\n\
+    \ }\n\n  // return vector< pair<const Key&, val& > >\n  vector<pair<Key, Val>>\
+    \ enumerate() const {\n    vector<pair<Key, Val>> ret;\n    for (u32 i = 0; i\
+    \ < cap; ++i)\n      if (flag[i]) ret.emplace_back(keys[i], vals[i]);\n    return\
+    \ ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n  void\
+    \ set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief Hash\
+    \ Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n */\n\
+    #line 3 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\nusing namespace\
+    \ std;\n\n#line 3 \"data-structure/dynamic-binary-indexed-tree.hpp\"\nusing namespace\
+    \ std;\n\n#line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate\
+    \ <typename S, typename T>\nstruct DynamicFenwickTree {\n  S N;\n  HashMap<S,\
+    \ T> data;\n  explicit DynamicFenwickTree() = default;\n  explicit DynamicFenwickTree(S\
+    \ size) { N = size + 1; }\n\n  void add(S k, T x) {\n    for (++k; k < N; k +=\
+    \ k & -k) data[k] += x;\n  }\n\n  // [0, k)\n  T sum(S k) const {\n    if (k <\
+    \ 0) return 0;\n    T ret = T();\n    for (; k > 0; k -= k & -k) {\n      const\
+    \ T* p = data.find(k);\n      ret += p ? *p : T();\n    }\n    return ret;\n \
+    \ }\n\n  // [a, b)\n  T sum(S a, S b) const { return sum(b) - sum(a); }\n\n  T\
+    \ operator[](S k) const { return sum(k + 1) - sum(k); }\n\n  S lower_bound(T w)\
+    \ {\n    if (w <= 0) return 0;\n    S x = 0;\n    for (S k = 1 << __lg(x); k >\
+    \ 0; k >>= 1) {\n      if (x + k <= N - 1 && data[x + k] < w) {\n        w -=\
+    \ data[x + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n\n/**\n\
+    \ * @brief \u52D5\u7684Binary Indexed Tree\n * @docs docs/data-structure/dynamic-binary-indexed-tree.md\n\
     \ */\n#line 6 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\n\ntemplate\
     \ <typename T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int,\
     \ T>;\n  int N, M;\n  vector<BIT*> bit;\n  DynamicFenwickTree2D() = default;\n\
@@ -260,7 +260,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-11-09 12:30:18+09:00'
+  timestamp: '2020-11-19 22:42:33+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
