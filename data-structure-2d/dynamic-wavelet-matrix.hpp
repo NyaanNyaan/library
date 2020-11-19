@@ -2,7 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 書き掛け 
+// 実装破綻した　おわり
 
 template <typename S, typename T, T (*f)(T, T), T (*I)(), int LOG = 20>
 struct DynamicWaveletMatrix {
@@ -81,13 +81,12 @@ struct DynamicWaveletMatrix {
     struct BNode {
       BNode *l, *r;
       T key, sum;
-      int cnt;
-      int cnt1;
+      int b, cnt, cnt1;
 
       BNode() {}
 
-      BNode(const T &k, bool b)
-          : l(nullptr), r(nullptr), key(k), sum(k), cnt(1), cnt1(b) {}
+      BNode(const T &k, bool _b)
+          : l(nullptr), r(nullptr), key(k), sum(k), b(_b), cnt(1), cnt1(_b) {}
     };
 
     BBST() {}
@@ -100,7 +99,7 @@ struct DynamicWaveletMatrix {
 
     static BNode *update(BNode *t) {
       t->cnt = count(t->l) + count(t->r) + 1;
-      t->cnt1 = count1(t->l) + count1(t->r) + t->cnt1;
+      t->cnt1 = count1(t->l) + count1(t->r) + t->b;
       t->sum = f(f(sum(t->l), t->key), sum(t->r));
       return t;
     }
@@ -129,9 +128,11 @@ struct DynamicWaveletMatrix {
       }
     }
 
-    static void insert(BNode *&t, int k, const T &key, bool b) {
+    static int insert(BNode *&t, int k, const T &key, bool b) {
       auto x = split(t, k);
-      t = merge(merge(x.first, my_new(key, b)), x.second);
+      int c1 = count1(x.first);
+      t = merge(merge(x.first, new BNode(key, b)), x.second);
+      return c1;
     }
 
     static BNode *kth_element(BNode *t, int k) {
@@ -149,25 +150,49 @@ struct DynamicWaveletMatrix {
       exit(1);
     }
 
-    static BNode *add(BNode *t, int k, const T &y) {
+    static pair<BNode *, int> add(BNode *t, int k, const T &y) {
       assert(k < count(t));
       int l = count(t->l);
-      BNode *ret = nullptr;
+      int c1;
+      BNode *ret;
       if (k == l) {
         t->key += y;
         ret = t;
+        c1 = count1(t->l);
       } else if (k < l) {
-        ret = add(t->l, k, y);
+        tie(ret, c1) = add(t->l, k, y);
       } else {
-        ret = add(t->r, k - l - 1, y);
+        tie(ret, c1) = add(t->r, k - l - 1, y);
+        c1 += count(t->l);
       }
       t->sum = f(f(sum(t->l), t->key), sum(t->r));
-      return ret;
+      return make_pair(ret, c1);
     }
 
-    static int size(BNode *t) { return count(t); }
+    //  fold [0, k)
+    static pair<T, int> presum(BNode *t, int k) {
+      assert(k <= count(t));
+      T s = I();
+      int c1 = 0;
+      while (t != nullptr and k != 0) {
+        int l = count(t->l);
+        if (k == l) {
+          s = f(s, t->l->sum);
+          c1 += t->l->cnt1;
+          break;
+        } else if (k < l) {
+          t = t->l;
+        } else {
+          s = f(s, f(sum(t->l), t->key));
+          c1 += count1(t->l) + t->b;
+          k -= l + 1;
+          t = t->r;
+        }
+      }
+      return make_pair(s, c1);
+    }
 
-    static T fold(BNode *t) { return sum(t); }
+    static int size(BNode*t){return count(t);}
   };
 
   struct Node {
@@ -189,21 +214,55 @@ struct DynamicWaveletMatrix {
     if (exist) {
       for (int h = LOG - 1; h >= 0; h--) {
         int b = (y >> h) & 1;
-        auto bv_node = BBST::add(n->bv, k, y);
+        typename BBST::BNode *bv_node;
+        int c1;
+        tie(bv_node, c1) = BBST::add(n->bv, k, y);
         if (b) {
-          k = BBST::count1(bv_node) - 1;
+          k = c1;
         } else {
-          k = k - BBST::count1(bv_node);
+          k -= c1;
         }
         assert(k >= 0);
-        assert(b->p[b] != nullptr);
+        assert(h == 0 or n->p[b] != nullptr);
         n = n->p[b];
       }
     } else {
       MultiSet::insert(xs, k, x, y);
       for (int h = LOG - 1; h >= 0; h--) {
         int b = (y >> h) & 1;
+        int c1 = BBST::insert(n->bv, k, x, y);
+        if (b) {
+          k = c1;
+        } else {
+          k -= c1;
+        }
+        if (h != 0 and n->p[b] == nullptr) n->p[b] = new Node;
+        n = n->p[b];
+      }
+    }
+  }
+
+  T sum(int l, int r, T upper) {
+    assert(upper < (1LL << LOG));
+    T res = 0;
+    auto n = root;
+    for (int h = LOG - 1; h >= 0; --h) {
+      if(n == nullptr) break;
+      auto L = BBST::presum(n->bv, l);
+      auto R = BBST::presum(n->bv, r);
+      int s = size(n->bv);
+      if((upper >> h) & 1) {
+        
       }
     }
   }
 };
+
+int f(int a, int b) { return a + b; }
+
+int e() { return 0; }
+
+void solve() {
+  DynamicWaveletMatrix<int,int,f,e> wm;
+  wm.add(1,2);
+}

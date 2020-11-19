@@ -85,8 +85,8 @@ struct HashMap {
   }
 
   // return vector< pair<const Key&, val& > >
-  vector<pair<const Key&, Val&>> enumerate() const {
-    vector<pair<const Key&, Val&>> ret;
+  vector<pair<Key, Val>> enumerate() const {
+    vector<pair<Key, Val>> ret;
     for (u32 i = 0; i < cap; ++i)
       if (flag[i]) ret.emplace_back(keys[i], vals[i]);
     return ret;
