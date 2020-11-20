@@ -14,7 +14,7 @@ data:
       title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -40,6 +40,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/hash-map.hpp
       title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
+    - icon: ':warning:'
+      path: data-structure/hash-table.hpp
+      title: data-structure/hash-table.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure/persistent-array.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
@@ -70,7 +73,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/square-root-decomposition.hpp
       title: "\u5E73\u65B9\u5206\u5272"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/union-find-with-potential.hpp
       title: data-structure/union-find-with-potential.hpp
     - icon: ':heavy_check_mark:'
@@ -514,7 +517,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
     - icon: ':heavy_check_mark:'
