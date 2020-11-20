@@ -11,8 +11,9 @@ struct UnionFindWithPotential {
 
   int root(int x) {
     if (dat[x] < 0) return x;
-    if(pot[dat[x]] >= 0) pot[x] += pot[dat[x]];
-    return dat[x] = root(dat[x]);
+    int r = root(dat[x]);
+    pot[x] += pot[dat[x]];
+    return dat[x] = r;
   }
 
   // return P(x) - P(root(x))
@@ -25,7 +26,6 @@ struct UnionFindWithPotential {
 
   // return P(x) - P(y)
   T diff(int x, int y) {
-    assert(same(x, y));
     return potential(x) - potential(y);
   }
 
