@@ -132,7 +132,7 @@ data:
     \      if (!flag[hash]) {\n        keys[hash] = i;\n        flag[hash] = 1;\n\
     \        return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i)\
     \ return vals[hash];\n      hash = (hash + 1) & (N - 1);\n    }\n  }\n};\n\n/**\n\
-    \ * @brief Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hashmap_all.md\n\
+    \ * @brief Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/hashmap/hashmap_all.md\n\
     \ */\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\n\
     static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
     \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
@@ -181,7 +181,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
   requiredBy: []
-  timestamp: '2020-11-22 18:12:25+09:00'
+  timestamp: '2020-11-22 18:22:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp

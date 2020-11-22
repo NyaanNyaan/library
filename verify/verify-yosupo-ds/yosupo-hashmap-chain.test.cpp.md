@@ -134,7 +134,7 @@ data:
     \    u32 h = (u64(key) * r) >> shift;\n    Node** pp = &(table[h]);\n    while\
     \ (*pp != nullptr && (*pp)->key != key) pp = &((*pp)->nxt);\n    if (*pp == nullptr)\
     \ *pp = my_new(key, DefaultValue);\n    return (*pp)->val;\n  }\n};\n\n/**\n *\
-    \ @brief Hash Map(\u9023\u9396\u6CD5)\n * @docs docs/data-structure/hashmap_all.md\n\
+    \ @brief Hash Map(\u9023\u9396\u6CD5)\n * @docs docs/hashmap/hashmap_all.md\n\
     \ */\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\n\
     static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
     \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
@@ -183,7 +183,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
   requiredBy: []
-  timestamp: '2020-11-22 18:12:25+09:00'
+  timestamp: '2020-11-22 18:22:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
