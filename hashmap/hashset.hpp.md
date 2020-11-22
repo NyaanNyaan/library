@@ -13,7 +13,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/hashmap/hashset.md
-    document_title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8"
+    document_title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
     links: []
   bundledCode: "#line 2 \"hashmap/hashmap-base.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64\
@@ -106,17 +106,17 @@ data:
     \n}  // namespace HashMapImpl\n#line 2 \"hashmap/hashset.hpp\"\n\ntemplate <typename\
     \ Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key, Key> {\n  using HashMapImpl::HashMapBase<Key,\
     \ Key>::HashMapBase;\n};\n\n/* \n * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\
-    \u30C8\n * @docs docs/hashmap/hashset.md\n**/\n"
+    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n"
   code: "#include \"hashmap-base.hpp\"\n\ntemplate <typename Key>\nstruct HashSet\
     \ : HashMapImpl::HashMapBase<Key, Key> {\n  using HashMapImpl::HashMapBase<Key,\
     \ Key>::HashMapBase;\n};\n\n/* \n * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\
-    \u30C8\n * @docs docs/hashmap/hashset.md\n**/\n"
+    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n"
   dependsOn:
   - hashmap/hashmap-base.hpp
   isVerificationFile: false
   path: hashmap/hashset.hpp
   requiredBy: []
-  timestamp: '2020-11-22 19:59:08+09:00'
+  timestamp: '2020-11-22 20:13:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/hashset.test.cpp
@@ -125,7 +125,7 @@ layout: document
 redirect_from:
 - /library/hashmap/hashset.hpp
 - /library/hashmap/hashset.hpp.html
-title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8"
+title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
 ---
 ## HashSet(集合)
 
@@ -144,6 +144,7 @@ TODO:書く
 - Keyに`pair<Integral, Integral>`を取れる
 - `const_iterator`は存在しない
 - `size()`の型は`int`
+- Keyの型が`const`じゃないので書き換えられる(当然壊れる)
 - たぶん他にもたくさんありそう
 
 使える関数は以下の通り。(使用方法および計算量は`std::unordered_set`とだいたい同じなので略)

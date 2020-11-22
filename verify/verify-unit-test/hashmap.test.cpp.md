@@ -6,7 +6,7 @@ data:
     title: hashmap/hashmap-base.hpp
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap.hpp
-    title: hashmap/hashmap.hpp
+    title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -119,7 +119,9 @@ data:
     \ == k) {\n        if (base::dflag[h] == true) base::data[h].second = Val();\n\
     \        return base::data[h].second;\n      }\n      h = (h + 1) & (base::cap\
     \ - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key, const Val&\
-    \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n#line 6 \"verify/verify-unit-test/hashmap.test.cpp\"\
+    \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n\n/* \n * @brief\
+    \ \u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)\n * @docs\
+    \ docs/hashmap/hashmap.md\n**/\n#line 6 \"verify/verify-unit-test/hashmap.test.cpp\"\
     \n\nnamespace HashMapTest {\n\nuint64_t rng() {\n  static uint64_t x_ =\n    \
     \  chrono::duration_cast<chrono::nanoseconds>(\n          chrono::high_resolution_clock::now().time_since_epoch())\n\
     \          .count();\n  return x_ ^= (x_ << 7), x_ ^= (x_ >> 9);\n}\n// [l, r)\n\
@@ -250,7 +252,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/hashmap.test.cpp
   requiredBy: []
-  timestamp: '2020-11-22 19:59:08+09:00'
+  timestamp: '2020-11-22 20:13:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/hashmap.test.cpp

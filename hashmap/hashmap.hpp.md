@@ -15,6 +15,9 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/hashmap/hashmap.md
+    document_title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\
+      \u5217)"
     links: []
   bundledCode: "#line 2 \"hashmap/hashmap-base.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64\
@@ -117,7 +120,9 @@ data:
     \ == k) {\n        if (base::dflag[h] == true) base::data[h].second = Val();\n\
     \        return base::data[h].second;\n      }\n      h = (h + 1) & (base::cap\
     \ - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key, const Val&\
-    \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n"
+    \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n\n/* \n * @brief\
+    \ \u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)\n * @docs\
+    \ docs/hashmap/hashmap.md\n**/\n"
   code: "#include \"hashmap-base.hpp\"\n\ntemplate <typename Key, typename Val>\n\
     struct HashMap : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {\n  using base\
     \ = typename HashMapImpl::HashMapBase<Key, pair<Key, Val>>;\n  using HashMapImpl::HashMapBase<Key,\
@@ -131,13 +136,15 @@ data:
     \    if (base::dflag[h] == true) base::data[h].second = Val();\n        return\
     \ base::data[h].second;\n      }\n      h = (h + 1) & (base::cap - 1);\n    }\n\
     \  }\n\n  typename base::itr emplace(const Key& key, const Val& val) {\n    return\
-    \ base::insert(Data(key, val));\n  }\n};\n"
+    \ base::insert(Data(key, val));\n  }\n};\n\n/* \n * @brief \u30CF\u30C3\u30B7\u30E5\
+    \u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)\n * @docs docs/hashmap/hashmap.md\n\
+    **/\n"
   dependsOn:
   - hashmap/hashmap-base.hpp
   isVerificationFile: false
   path: hashmap/hashmap.hpp
   requiredBy: []
-  timestamp: '2020-11-22 19:59:08+09:00'
+  timestamp: '2020-11-22 20:13:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
@@ -147,5 +154,38 @@ layout: document
 redirect_from:
 - /library/hashmap/hashmap.hpp
 - /library/hashmap/hashmap.hpp.html
-title: hashmap/hashmap.hpp
+title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
 ---
+## HashSet(集合)
+
+## 概要
+
+TODO:書く
+
+- アピールポイント
+  - `std::unordered_map`より3~4倍速い(要出典)
+  - Keyの型は`Integral`だけでなく`pair<Integral, Integral>`を取れる
+  - ハッシュに実行時乱数を採用している
+
+## 使い方
+
+`unordered_map`と基本的に同じだがいくつか相違点がある。
+- Keyに`pair<Integral, Integral>`を取れる
+- `const_iterator`は存在しない
+- `size()`の型は`int`
+- Keyの型が`const`じゃないので書き換えられる(当然壊れる)
+- たぶん他にもたくさんありそう
+
+使える関数は以下の通り。(使用方法および計算量は`std::unordered_set`とだいたい同じなので略)
+
+- `find, contain`
+- `insert`
+- `erase`
+- `empty`
+- `size`
+- `clear`
+- `reserve`
+- `begin(), end(), begin(*this), end(*this)`
+- `operator[]`
+- `emplace`
+- `iterator`および`iterator`のメンバ関数

@@ -6,7 +6,7 @@ data:
     title: hashmap/hashmap-base.hpp
   - icon: ':heavy_check_mark:'
     path: hashmap/hashset.hpp
-    title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8"
+    title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -109,7 +109,7 @@ data:
     \n}  // namespace HashMapImpl\n#line 2 \"hashmap/hashset.hpp\"\n\ntemplate <typename\
     \ Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key, Key> {\n  using HashMapImpl::HashMapBase<Key,\
     \ Key>::HashMapBase;\n};\n\n/* \n * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\
-    \u30C8\n * @docs docs/hashmap/hashset.md\n**/\n#line 6 \"verify/verify-unit-test/hashset.test.cpp\"\
+    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n#line 6 \"verify/verify-unit-test/hashset.test.cpp\"\
     \nuint64_t rng() {\n  static uint64_t x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
     \  .count();\n  return x_ ^= (x_ << 7), x_ ^= (x_ >> 9);\n}\n// [l, r)\nint64_t\
@@ -248,7 +248,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/hashset.test.cpp
   requiredBy: []
-  timestamp: '2020-11-22 19:59:08+09:00'
+  timestamp: '2020-11-22 20:13:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/hashset.test.cpp

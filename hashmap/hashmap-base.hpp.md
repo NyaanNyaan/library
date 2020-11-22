@@ -4,10 +4,10 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap.hpp
-    title: hashmap/hashmap.hpp
+    title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
   - icon: ':heavy_check_mark:'
     path: hashmap/hashset.hpp
-    title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8"
+    title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/hashmap.test.cpp
