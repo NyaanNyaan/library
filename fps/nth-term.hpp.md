@@ -2,29 +2,36 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: fps/berlekamp-massey.hpp
+    title: fps/berlekamp-massey.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: fps/nth-term.hpp
-    title: fps/nth-term.hpp
-  _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0214.test.cpp
-    title: verify/verify-yuki/yuki-0214.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0215.test.cpp
-    title: verify/verify-yuki/yuki-0215.test.cpp
+    path: fps/kitamasa.hpp
+    title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    _deprecated_at_docs: docs/fps/kitamasa.md
-    document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
     links: []
-  bundledCode: "#line 2 \"fps/kitamasa.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n\n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace std;\n\ntemplate\
-    \ <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
+  bundledCode: "#line 2 \"fps/nth-term.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
+    \ std;\n\n#line 3 \"fps/berlekamp-massey.hpp\"\nusing namespace std;\n\ntemplate\
+    \ <typename mint>\nvector<mint> BerlekampMassey(const vector<mint> &s) {\n  const\
+    \ int N = (int)s.size();\n  vector<mint> b, c;\n  b.reserve(N + 1);\n  c.reserve(N\
+    \ + 1);\n  b.push_back(mint(1));\n  c.push_back(mint(1));\n  mint y = mint(1);\n\
+    \  for (int ed = 1; ed <= N; ed++) {\n    int l = int(c.size()), m = int(b.size());\n\
+    \    mint x = 0;\n    for (int i = 0; i < l; i++) x += c[i] * s[ed - l + i];\n\
+    \    b.emplace_back(mint(0));\n    m++;\n    if (x == mint(0)) continue;\n   \
+    \ mint freq = x / y;\n    if (l < m) {\n      auto tmp = c;\n      c.insert(begin(c),\
+    \ m - l, mint(0));\n      for (int i = 0; i < m; i++) c[m - 1 - i] -= freq * b[m\
+    \ - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n      for (int i = 0;\
+    \ i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n  }\n  reverse(begin(c),\
+    \ end(c));\n  return c;\n}\n#line 3 \"fps/kitamasa.hpp\"\nusing namespace std;\n\
+    \n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace std;\n\ntemplate <typename\
+    \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
     \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
     \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
     \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
@@ -124,88 +131,27 @@ data:
     \ - 1);\n  auto P = a.pre((int)Q.size() - 1) * Q;\n  P.resize(Q.size() - 1);\n\
     \  return LinearRecursionFormula<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\
     \u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n\
-    \ */\n"
+    \ */\n#line 7 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(int\
+    \ n, const vector<mint> &s) {\n  return kitamasa(n, BerlekampMassey<mint>(s),\
+    \ s);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"formal-power-series.hpp\"\n\ntemplate <typename mint>\nmint LinearRecursionFormula(long\
-    \ long k, FormalPowerSeries<mint> Q,\n                            FormalPowerSeries<mint>\
-    \ P) {\n  Q.shrink();\n  mint ret = 0;\n  if (P.size() >= Q.size()) {\n    auto\
-    \ R = P / Q;\n    P -= R * Q;\n    P.shrink();\n    if (k < (int)R.size()) ret\
-    \ += R[k];\n  }\n  if ((int)P.size() == 0) return ret;\n\n  FormalPowerSeries<mint>::set_fft();\n\
-    \  if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {\n    P.resize((int)Q.size()\
-    \ - 1);\n    while (k) {\n      auto Q2 = Q;\n      for (int i = 1; i < (int)Q2.size();\
-    \ i += 2) Q2[i] = -Q2[i];\n      auto S = P * Q2;\n      auto T = Q * Q2;\n  \
-    \    if (k & 1) {\n        for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1]\
-    \ = S[i];\n        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n\
-    \      } else {\n        for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1]\
-    \ = S[i];\n        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n\
-    \      }\n      k >>= 1;\n    }\n    return ret + P[0];\n  } else {\n    int N\
-    \ = 1;\n    while (N < (int)Q.size()) N <<= 1;\n\n    P.resize(2 * N);\n    Q.resize(2\
-    \ * N);\n    P.ntt();\n    Q.ntt();\n    vector<mint> S(2 * N), T(2 * N);\n\n\
-    \    vector<int> btr(N);\n    for (int i = 0, logn = __builtin_ctz(N); i < (1\
-    \ << logn); i++) {\n      btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));\n\
-    \    }\n    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())\n              \
-    \    .inverse()\n                  .pow((mint::get_mod() - 1) / (2 * N));\n\n\
-    \    while (k) {\n      mint inv2 = mint(2).inverse();\n\n      // even degree\
-    \ of Q(x)Q(-x)\n      T.resize(N);\n      for (int i = 0; i < N; i++) T[i] = Q[(i\
-    \ << 1) | 0] * Q[(i << 1) | 1];\n\n      S.resize(N);\n      if (k & 1) {\n  \
-    \      // odd degree of P(x)Q(-x)\n        for (auto &i : btr) {\n          S[i]\
-    \ = (P[(i << 1) | 0] * Q[(i << 1) | 1] -\n                  P[(i << 1) | 1] *\
-    \ Q[(i << 1) | 0]) *\n                 inv2;\n          inv2 *= dw;\n        }\n\
-    \      } else {\n        // even degree of P(x)Q(-x)\n        for (int i = 0;\
-    \ i < N; i++) {\n          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +\n     \
-    \             P[(i << 1) | 1] * Q[(i << 1) | 0]) *\n                 inv2;\n \
-    \       }\n      }\n      swap(P, S);\n      swap(Q, T);\n      k >>= 1;\n   \
-    \   if (k < N) break;\n      P.ntt_doubling();\n      Q.ntt_doubling();\n    }\n\
-    \    P.intt();\n    Q.intt();\n    return ret + (P * (Q.inv()))[k];\n  }\n}\n\n\
-    template <typename mint>\nmint kitamasa(long long N, FormalPowerSeries<mint> Q,\n\
-    \              FormalPowerSeries<mint> a) {\n  assert(!Q.empty() && Q[0] != 0);\n\
-    \  if(N < (int)a.size()) return a[N];\n  assert((int)a.size() >= int(Q.size())\
-    \ - 1);\n  auto P = a.pre((int)Q.size() - 1) * Q;\n  P.resize(Q.size() - 1);\n\
-    \  return LinearRecursionFormula<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\
-    \u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n\
-    \ */\n"
+    \ \"berlekamp-massey.hpp\"\n#include \"kitamasa.hpp\"\n\ntemplate <typename mint>\n\
+    mint nth_term(int n, const vector<mint> &s) {\n  return kitamasa(n, BerlekampMassey<mint>(s),\
+    \ s);\n}\n"
   dependsOn:
+  - fps/berlekamp-massey.hpp
+  - fps/kitamasa.hpp
   - fps/formal-power-series.hpp
   isVerificationFile: false
-  path: fps/kitamasa.hpp
-  requiredBy:
-  - fps/nth-term.hpp
+  path: fps/nth-term.hpp
+  requiredBy: []
   timestamp: '2020-11-22 19:59:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/verify-yuki/yuki-0214.test.cpp
-  - verify/verify-yuki/yuki-0215.test.cpp
-documentation_of: fps/kitamasa.hpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: fps/nth-term.hpp
 layout: document
 redirect_from:
-- /library/fps/kitamasa.hpp
-- /library/fps/kitamasa.hpp.html
-title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
+- /library/fps/nth-term.hpp
+- /library/fps/nth-term.hpp.html
+title: fps/nth-term.hpp
 ---
-## 線形漸化式の第$N$項を高速に求めるライブラリ
-
-$[x^N]\frac{P(x)}{Q(x)}$($\mathrm{deg}(Q) = k$)を$\mathrm{O}(N \log k \log N)$で計算するライブラリ。
-
-#### 概要
-
-$k$項間漸化式
-
-$$a_n = c_1a_{n-1}+c_2a_{n-2} \ldots + c_ka_{n-k}$$
-
-の第$N$項は
-
-$$Q(x)=1-c_1x-c_2x^2-\ldots -c_kx^k$$
-
-$$P(x)=Q(x)(a_0+a_1x+a_2x^2+\ldots) \mod x^k$$
-
-と置いたとき
-
-$$a_N = [x^N]\frac{P(x)}{Q(x)}$$
-
-になり、これはBostan-Mori Algorithmを使って$\mathrm{O}(N \log k \log N)$で計算できる。[日本語での解説](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html)
-
-さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さQの畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。(詳細は実装を参考のこと。)
-
-verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \log k \log N), N=200000,k=10^{18}$
-- [ナイーブな実装](https://atcoder.jp/contests/s8pc-3/submissions/15526069) 1846ms
-- [高速化した場合](https://atcoder.jp/contests/s8pc-3/submissions/15520531) 631ms

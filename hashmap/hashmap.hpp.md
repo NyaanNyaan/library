@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/hashmap.test.cpp
+    title: verify/verify-unit-test/hashmap.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   _pathExtension: hpp
@@ -16,9 +19,9 @@ data:
   bundledCode: "#line 2 \"hashmap/hashmap-base.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64\
     \ = uint64_t;\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\
-    \ntemplate <typename Key, typename Data>\nstruct itrB : iterator<bidirectional_iterator_tag,\
-    \ Key, ptrdiff_t, Key*, Key&> {\n  using base = iterator<bidirectional_iterator_tag,\
-    \ Key, ptrdiff_t, Key*, Key&>;\n  using ptr = typename base::pointer;\n  using\
+    \ntemplate <typename Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
+    \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
+    \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
     \ ref = typename base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n\
     \  explicit constexpr itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32\
     \ _i, HashMapBase<Key, Data>* _p) : i(_i), p(_p) {}\n  explicit constexpr itrB(u32\
@@ -38,9 +41,9 @@ data:
     \  }\n  itrB operator--(int) {\n    itrB it(*this);\n    --(*this);\n    return\
     \ it;\n  }\n};\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase {\n\
     \  using u32 = uint32_t;\n  using u64 = uint64_t;\n  using iterator = itrB<Key,\
-    \ Data>;\n  using itr = iterator;\n protected:\n  template <typename K,\n    \
-    \        enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n         \
-    \   enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline u32 inner_hash(const\
+    \ Data>;\n  using itr = iterator;\n\n protected:\n  template <typename K,\n  \
+    \          enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n       \
+    \     enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline u32 inner_hash(const\
     \ K& key) const {\n    return u32((u64(key ^ r) * 11995408973635179863ULL) >>\
     \ shift);\n  }\n  template <\n      typename K, enable_if_t<is_same<K, Key>::value,\
     \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
@@ -84,22 +87,22 @@ data:
     \      if (flag[h] == false) {\n        if (extend_rate(s + 1)) {\n          extend();\n\
     \          h = hash(d);\n          continue;\n        }\n        data[h] = d;\n\
     \        flag[h] = true;\n        ++s;\n        return itr(h, this);\n      }\n\
-    \      if (dtok(data[h]) == dtok(d)) {\n        data[h] = d;\n        if (dflag[h]\
-    \ == true) {\n          dflag[h] = false;\n          ++s;\n        }\n       \
-    \ return itr(h, this);\n      }\n      h = (h + 1) & (cap - 1);\n    }\n  }\n\n\
-    \  // tips for speed up :\n  // if return value is unnecessary, make argument_2\
+    \      if (dtok(data[h]) == dtok(d)) {\n        if (dflag[h] == true) {\n    \
+    \      data[h] = d;\n          dflag[h] = false;\n          ++s;\n        }\n\
+    \        return itr(h, this);\n      }\n      h = (h + 1) & (cap - 1);\n    }\n\
+    \  }\n\n  // tips for speed up :\n  // if return value is unnecessary, make argument_2\
     \ false.\n  itr erase(itr it, bool get_next = true) {\n    if (it == this->end())\
     \ return this->end();\n    s--;\n    if (shrink_rate(s)) {\n      Data d = data[it.i];\n\
-    \      shrink();\n      it = find(d);\n    }\n    int ni = (it.i + 1) & (cap -\
-    \ 1);\n    if (this->flag[ni]) {\n      this->dflag[it.i] = true;\n    } else\
-    \ {\n      this->flag[it.i] = false;\n    }\n    if (get_next) ++it;\n    return\
-    \ it;\n  }\n\n  itr erase(const Key& key) { return erase(find(key)); }\n\n  bool\
-    \ empty() const { return s == 0; }\n\n  int size() const { return s; }\n\n  void\
-    \ clear() {\n    fill(std::begin(flag), std::end(flag), false);\n    fill(std::begin(dflag),\
-    \ std::end(dflag), false);\n    s = 0;\n  }\n\n  void reserve(int n) {\n    if\
-    \ (n <= 0) return;\n    n = 1 << min(23, __lg(n) + 2);\n    if (cap < u32(n))\
-    \ reallocate(n);\n  }\n};\n\ntemplate <typename Key, typename Data>\nuint64_t\
-    \ HashMapBase<Key, Data>::r =\n    chrono::duration_cast<chrono::nanoseconds>(\n\
+    \      shrink();\n      it = find(dtok(d));\n    }\n    int ni = (it.i + 1) &\
+    \ (cap - 1);\n    if (this->flag[ni]) {\n      this->dflag[it.i] = true;\n   \
+    \ } else {\n      this->flag[it.i] = false;\n    }\n    if (get_next) ++it;\n\
+    \    return it;\n  }\n\n  itr erase(const Key& key) { return erase(find(key));\
+    \ }\n\n  bool empty() const { return s == 0; }\n\n  int size() const { return\
+    \ s; }\n\n  void clear() {\n    fill(std::begin(flag), std::end(flag), false);\n\
+    \    fill(std::begin(dflag), std::end(dflag), false);\n    s = 0;\n  }\n\n  void\
+    \ reserve(int n) {\n    if (n <= 0) return;\n    n = 1 << min(23, __lg(n) + 2);\n\
+    \    if (cap < u32(n)) reallocate(n);\n  }\n};\n\ntemplate <typename Key, typename\
+    \ Data>\nuint64_t HashMapBase<Key, Data>::r =\n    chrono::duration_cast<chrono::nanoseconds>(\n\
     \        chrono::high_resolution_clock::now().time_since_epoch())\n        .count();\n\
     \n}  // namespace HashMapImpl\n#line 2 \"hashmap/hashmap.hpp\"\n\ntemplate <typename\
     \ Key, typename Val>\nstruct HashMap : HashMapImpl::HashMapBase<Key, pair<Key,\
@@ -113,7 +116,8 @@ data:
     \        ++base::s;\n        return base::data[h].second;\n      }\n      if (base::data[h].first\
     \ == k) {\n        if (base::dflag[h] == true) base::data[h].second = Val();\n\
     \        return base::data[h].second;\n      }\n      h = (h + 1) & (base::cap\
-    \ - 1);\n    }\n  }\n};\n"
+    \ - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key, const Val&\
+    \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n"
   code: "#include \"hashmap-base.hpp\"\n\ntemplate <typename Key, typename Val>\n\
     struct HashMap : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {\n  using base\
     \ = typename HashMapImpl::HashMapBase<Key, pair<Key, Val>>;\n  using HashMapImpl::HashMapBase<Key,\
@@ -126,16 +130,18 @@ data:
     \ base::data[h].second;\n      }\n      if (base::data[h].first == k) {\n    \
     \    if (base::dflag[h] == true) base::data[h].second = Val();\n        return\
     \ base::data[h].second;\n      }\n      h = (h + 1) & (base::cap - 1);\n    }\n\
-    \  }\n};\n"
+    \  }\n\n  typename base::itr emplace(const Key& key, const Val& val) {\n    return\
+    \ base::insert(Data(key, val));\n  }\n};\n"
   dependsOn:
   - hashmap/hashmap-base.hpp
   isVerificationFile: false
   path: hashmap/hashmap.hpp
   requiredBy: []
-  timestamp: '2020-11-22 18:43:33+09:00'
+  timestamp: '2020-11-22 19:59:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+  - verify/verify-unit-test/hashmap.test.cpp
 documentation_of: hashmap/hashmap.hpp
 layout: document
 redirect_from:

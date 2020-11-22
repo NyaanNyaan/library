@@ -124,9 +124,9 @@ data:
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"hashmap/hashmap-base.hpp\"\
     \nusing namespace std;\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing\
     \ u64 = uint64_t;\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\
-    \ntemplate <typename Key, typename Data>\nstruct itrB : iterator<bidirectional_iterator_tag,\
-    \ Key, ptrdiff_t, Key*, Key&> {\n  using base = iterator<bidirectional_iterator_tag,\
-    \ Key, ptrdiff_t, Key*, Key&>;\n  using ptr = typename base::pointer;\n  using\
+    \ntemplate <typename Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
+    \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
+    \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
     \ ref = typename base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n\
     \  explicit constexpr itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32\
     \ _i, HashMapBase<Key, Data>* _p) : i(_i), p(_p) {}\n  explicit constexpr itrB(u32\
@@ -146,9 +146,9 @@ data:
     \  }\n  itrB operator--(int) {\n    itrB it(*this);\n    --(*this);\n    return\
     \ it;\n  }\n};\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase {\n\
     \  using u32 = uint32_t;\n  using u64 = uint64_t;\n  using iterator = itrB<Key,\
-    \ Data>;\n  using itr = iterator;\n protected:\n  template <typename K,\n    \
-    \        enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n         \
-    \   enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline u32 inner_hash(const\
+    \ Data>;\n  using itr = iterator;\n\n protected:\n  template <typename K,\n  \
+    \          enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n       \
+    \     enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline u32 inner_hash(const\
     \ K& key) const {\n    return u32((u64(key ^ r) * 11995408973635179863ULL) >>\
     \ shift);\n  }\n  template <\n      typename K, enable_if_t<is_same<K, Key>::value,\
     \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
@@ -192,22 +192,22 @@ data:
     \      if (flag[h] == false) {\n        if (extend_rate(s + 1)) {\n          extend();\n\
     \          h = hash(d);\n          continue;\n        }\n        data[h] = d;\n\
     \        flag[h] = true;\n        ++s;\n        return itr(h, this);\n      }\n\
-    \      if (dtok(data[h]) == dtok(d)) {\n        data[h] = d;\n        if (dflag[h]\
-    \ == true) {\n          dflag[h] = false;\n          ++s;\n        }\n       \
-    \ return itr(h, this);\n      }\n      h = (h + 1) & (cap - 1);\n    }\n  }\n\n\
-    \  // tips for speed up :\n  // if return value is unnecessary, make argument_2\
+    \      if (dtok(data[h]) == dtok(d)) {\n        if (dflag[h] == true) {\n    \
+    \      data[h] = d;\n          dflag[h] = false;\n          ++s;\n        }\n\
+    \        return itr(h, this);\n      }\n      h = (h + 1) & (cap - 1);\n    }\n\
+    \  }\n\n  // tips for speed up :\n  // if return value is unnecessary, make argument_2\
     \ false.\n  itr erase(itr it, bool get_next = true) {\n    if (it == this->end())\
     \ return this->end();\n    s--;\n    if (shrink_rate(s)) {\n      Data d = data[it.i];\n\
-    \      shrink();\n      it = find(d);\n    }\n    int ni = (it.i + 1) & (cap -\
-    \ 1);\n    if (this->flag[ni]) {\n      this->dflag[it.i] = true;\n    } else\
-    \ {\n      this->flag[it.i] = false;\n    }\n    if (get_next) ++it;\n    return\
-    \ it;\n  }\n\n  itr erase(const Key& key) { return erase(find(key)); }\n\n  bool\
-    \ empty() const { return s == 0; }\n\n  int size() const { return s; }\n\n  void\
-    \ clear() {\n    fill(std::begin(flag), std::end(flag), false);\n    fill(std::begin(dflag),\
-    \ std::end(dflag), false);\n    s = 0;\n  }\n\n  void reserve(int n) {\n    if\
-    \ (n <= 0) return;\n    n = 1 << min(23, __lg(n) + 2);\n    if (cap < u32(n))\
-    \ reallocate(n);\n  }\n};\n\ntemplate <typename Key, typename Data>\nuint64_t\
-    \ HashMapBase<Key, Data>::r =\n    chrono::duration_cast<chrono::nanoseconds>(\n\
+    \      shrink();\n      it = find(dtok(d));\n    }\n    int ni = (it.i + 1) &\
+    \ (cap - 1);\n    if (this->flag[ni]) {\n      this->dflag[it.i] = true;\n   \
+    \ } else {\n      this->flag[it.i] = false;\n    }\n    if (get_next) ++it;\n\
+    \    return it;\n  }\n\n  itr erase(const Key& key) { return erase(find(key));\
+    \ }\n\n  bool empty() const { return s == 0; }\n\n  int size() const { return\
+    \ s; }\n\n  void clear() {\n    fill(std::begin(flag), std::end(flag), false);\n\
+    \    fill(std::begin(dflag), std::end(dflag), false);\n    s = 0;\n  }\n\n  void\
+    \ reserve(int n) {\n    if (n <= 0) return;\n    n = 1 << min(23, __lg(n) + 2);\n\
+    \    if (cap < u32(n)) reallocate(n);\n  }\n};\n\ntemplate <typename Key, typename\
+    \ Data>\nuint64_t HashMapBase<Key, Data>::r =\n    chrono::duration_cast<chrono::nanoseconds>(\n\
     \        chrono::high_resolution_clock::now().time_since_epoch())\n        .count();\n\
     \n}  // namespace HashMapImpl\n#line 2 \"hashmap/hashmap.hpp\"\n\ntemplate <typename\
     \ Key, typename Val>\nstruct HashMap : HashMapImpl::HashMapBase<Key, pair<Key,\
@@ -221,18 +221,19 @@ data:
     \        ++base::s;\n        return base::data[h].second;\n      }\n      if (base::data[h].first\
     \ == k) {\n        if (base::dflag[h] == true) base::data[h].second = Val();\n\
     \        return base::data[h].second;\n      }\n      h = (h + 1) & (base::cap\
-    \ - 1);\n    }\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\n\
-    namespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\n\
-    int pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
-    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
-    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
-    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load()\
-    \ {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf +\
-    \ pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n\
-    \  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c\
-    \ = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil +\
-    \ 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
-    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
+    \ - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key, const Val&\
+    \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n#line 3 \"misc/fastio.hpp\"\
+    \nusing namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\n\
+    char ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char\
+    \ num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++)\
+    \ {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4\
+    \ + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\
+    \ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir -\
+    \ pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline\
+    \ void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void\
+    \ rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x)\
+    \ {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while\
+    \ (c < '-');\n  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
     \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
     \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
     \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
@@ -270,7 +271,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   requiredBy: []
-  timestamp: '2020-11-22 18:43:33+09:00'
+  timestamp: '2020-11-22 19:59:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
