@@ -3,7 +3,7 @@
 template <typename Key, typename Val>
 struct HashMap : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {
   using base = typename HashMapImpl::HashMapBase<Key, pair<Key, Val>>;
-  using base::HashMapBase;
+  using HashMapImpl::HashMapBase<Key, pair<Key, Val>>::HashMapBase;
   using Data = pair<Key, Val>;
 
   Val& operator[](const Key& k) {
