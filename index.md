@@ -40,9 +40,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/hash-map.hpp
       title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
-    - icon: ':warning:'
-      path: data-structure/hash-table.hpp
-      title: data-structure/hash-table.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure/persistent-array.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
@@ -220,6 +217,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/two-edge-connected-components.hpp
       title: graph/two-edge-connected-components.hpp
+  - name: hashmap
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: hashmap/hashmap-base.hpp
+      title: hashmap/hashmap-base.hpp
+    - icon: ':warning:'
+      path: hashmap/hashmap.hpp
+      title: hashmap/hashmap.hpp
+    - icon: ':heavy_check_mark:'
+      path: hashmap/hashset.hpp
+      title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8"
   - name: inner
     pages:
     - icon: ':heavy_check_mark:'
@@ -640,6 +648,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/factorize.test.cpp
       title: verify/verify-unit-test/factorize.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/hashset.test.cpp
+      title: verify/verify-unit-test/hashset.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/osak.test.cpp
       title: verify/verify-unit-test/osak.test.cpp
