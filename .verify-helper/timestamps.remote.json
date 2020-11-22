@@ -40,6 +40,7 @@
 "verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp": "2020-09-18 02:08:48 +0900",
 "verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp": "2020-09-18 02:08:48 +0900",
 "verify/verify-unit-test/factorize.test.cpp": "2020-11-02 22:41:23 +0900",
+"verify/verify-unit-test/hashset.test.cpp": "2020-11-22 17:17:09 +0900",
 "verify/verify-unit-test/osak.test.cpp": "2020-11-02 22:41:23 +0900",
 "verify/verify-unit-test/wavelet-matrix.test.cpp": "2020-11-09 12:30:18 +0900",
 "verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp": "2020-08-18 23:32:19 +0900",
