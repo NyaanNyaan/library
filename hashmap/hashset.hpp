@@ -6,6 +6,6 @@ struct HashSet : HashMapImpl::HashMapBase<Key, Key> {
 };
 
 /* 
- * @brief ハッシュセット
+ * @brief ハッシュセット(集合)
  * @docs docs/hashmap/hashset.md
 **/

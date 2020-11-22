@@ -5,13 +5,13 @@
 TODO:書く
 
 - アピールポイント
-  - `std::unordered_set`より3~4倍速い(要出典)
+  - `std::unordered_map`より3~4倍速い(要出典)
   - Keyの型は`Integral`だけでなく`pair<Integral, Integral>`を取れる
   - ハッシュに実行時乱数を採用している
 
 ## 使い方
 
-`unordered_set`と基本的に同じだがいくつか相違点がある。
+`unordered_map`と基本的に同じだがいくつか相違点がある。
 - Keyに`pair<Integral, Integral>`を取れる
 - `const_iterator`は存在しない
 - `size()`の型は`int`
@@ -28,4 +28,6 @@ TODO:書く
 - `clear`
 - `reserve`
 - `begin(), end(), begin(*this), end(*this)`
+- `operator[]`
+- `emplace`
 - `iterator`および`iterator`のメンバ関数
