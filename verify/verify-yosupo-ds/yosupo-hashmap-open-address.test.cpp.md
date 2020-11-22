@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: data-structure/hash-map.hpp
+    path: hashmap/hashmap-open-address.hpp
     title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []
@@ -19,9 +19,9 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/associative_array
     links:
     - https://judge.yosupo.jp/problem/associative_array
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-hash-map.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n#line 1 \"\
-    competitive-template.hpp\"\n#pragma region kyopro_template\n#define Nyaan_template\n\
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n#line\
+    \ 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define Nyaan_template\n\
     #include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb push_back\n#define\
     \ eb emplace_back\n#define fi first\n#define se second\n#define each(x, v) for\
     \ (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n\
@@ -118,7 +118,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/hash-map.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"hashmap/hashmap-open-address.hpp\"\
     \nusing namespace std;\n\ntemplate <typename Key, typename Val, uint32_t N = 1\
     \ << 20,\n          Val DefaultValue = Val()>\nstruct HashMap {\n  using u32 =\
     \ uint32_t;\n  using u64 = uint64_t;\n\n private:\n  Key* keys;\n  Val* vals;\n\
@@ -132,7 +132,7 @@ data:
     \      if (!flag[hash]) {\n        keys[hash] = i;\n        flag[hash] = 1;\n\
     \        return vals[hash] = DefaultValue;\n      }\n      if (keys[hash] == i)\
     \ return vals[hash];\n      hash = (hash + 1) & (N - 1);\n    }\n  }\n};\n\n/**\n\
-    \ * @brief Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hash-map.md\n\
+    \ * @brief Hash Map(\u958B\u756A\u5730\u6CD5)\n * @docs docs/data-structure/hashmap_all.md\n\
     \ */\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\n\
     static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
     \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
@@ -164,30 +164,30 @@ data:
     \  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n  wt(x, '\\\
     n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
     \ fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n#line 6 \"\
-    verify/verify-yosupo-ds/yosupo-hash-map.test.cpp\"\n\nvoid solve() {\n  HashMap<ll,\
-    \ ll, 1 << 20> m;\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_, Q) {\n    rd(c);\n\
-    \    if (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n      rd(k, v);\n\
-    \      m[k] = v;\n    }\n  }\n}\n"
+    verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp\"\n\nvoid solve()\
+    \ {\n  HashMap<ll, ll, 1 << 20> m;\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_,\
+    \ Q) {\n    rd(c);\n    if (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n\
+    \      rd(k, v);\n      m[k] = v;\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n\
-    #include \"../../competitive-template.hpp\"\n#include \"../../data-structure/hash-map.hpp\"\
+    #include \"../../competitive-template.hpp\"\n#include \"../../hashmap/hashmap-open-address.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n\nvoid solve() {\n  HashMap<ll, ll, 1 <<\
     \ 20> m;\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_, Q) {\n    rd(c);\n    if\
     \ (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n      rd(k, v);\n     \
     \ m[k] = v;\n    }\n  }\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - data-structure/hash-map.hpp
+  - hashmap/hashmap-open-address.hpp
   - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 20:08:25+09:00'
+  timestamp: '2020-11-22 18:12:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-hash-map.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
 ---

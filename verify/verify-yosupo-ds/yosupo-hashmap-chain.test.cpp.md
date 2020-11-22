@@ -5,8 +5,8 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: math/nim-product.hpp
-    title: Nim Product
+    path: hashmap/hashmap-chain.hpp
+    title: "Hash Map(\u9023\u9396\u6CD5)"
   - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
@@ -16,12 +16,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/nim_product_64
+    PROBLEM: https://judge.yosupo.jp/problem/associative_array
     links:
-    - https://judge.yosupo.jp/problem/nim_product_64
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-nim-product.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/nim_product_64\"\n\n#line 1\
-    \ \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define Nyaan_template\n\
+    - https://judge.yosupo.jp/problem/associative_array
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n#line\
+    \ 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define Nyaan_template\n\
     #include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb push_back\n#define\
     \ eb emplace_back\n#define fi first\n#define se second\n#define each(x, v) for\
     \ (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n\
@@ -118,19 +118,23 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"math/nim-product.hpp\"\n\
-    using namespace std;\n\nnamespace nimber {\nusing u64 = uint64_t;\n\nu64 calc(u64,\
-    \ u64, int p, int pre);\n\nstruct Precalc {\n  u64 dp[256][256];\n  Precalc()\
-    \ {\n    for (int i = 0; i < 256; i++)\n      for (int j = 0; j <= i; j++) {\n\
-    \        dp[i][j] = dp[j][i] = calc(i, j, 8, true);\n      }\n  }\n\n} precalc;\n\
-    \nu64 calc(u64 a, u64 b, int p = 64, int pre = false) {\n  if (min(a, b) <= 1)\
-    \ return a * b;\n  while (max(a, b) < 1ull << (p >> 1)) p >>= 1;\n  if (!pre &&\
-    \ p <= 8) return precalc.dp[a][b];\n  p >>= 1;\n  u64 a1 = a >> p, a2 = a & ((1ull\
-    \ << p) - 1);\n  u64 b1 = b >> p, b2 = b & ((1ull << p) - 1);\n  u64 c = calc(a1,\
-    \ b1, p, pre);\n  u64 d = calc(a2, b2, p, pre);\n  u64 e = calc(a1 ^ a2, b1 ^\
-    \ b2, p, pre);\n  return calc(c, 1ull << (p - 1), p, pre) ^ d ^ ((d ^ e) << p);\n\
-    }\n\nu64 nim_product(u64 a, u64 b) { return calc(a, b); }\n\n}  // namespace nimber\n\
-    using nimber::nim_product;\n\n/**\n * @brief Nim Product\n * @docs docs/math/nim-product.md\n\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"hashmap/hashmap-chain.hpp\"\
+    \nusing namespace std;\n\ntemplate <typename Key, typename Val, uint32_t N = 1\
+    \ << 20,\n          Val DefaultValue = Val()>\nstruct HashMap {\n  using u32 =\
+    \ uint32_t;\n  using u64 = uint64_t;\n\n private:\n  struct Node {\n    Key key;\n\
+    \    Val val;\n    Node* nxt;\n    Node() = default;\n  };\n\n  u32 mask;\n  Node**\
+    \ table;\n  Node* pool;\n  int pid;\n  static constexpr u32 shift = 64 - __lg(N);\n\
+    \n  Node* my_new(const Key& key, const Val& val) {\n    pool[pid].key = key;\n\
+    \    pool[pid].val = val;\n    pool[pid].nxt = nullptr;\n    return &(pool[pid++]);\n\
+    \  }\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
+    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
+    \  }\n\n public:\n  HashMap() : mask(N - 1), table(new Node*[N]()), pool(new Node[N]),\
+    \ pid(0) {}\n\n  Val& operator[](const Key& key) {\n    static u64 r = rng();\n\
+    \    u32 h = (u64(key) * r) >> shift;\n    Node** pp = &(table[h]);\n    while\
+    \ (*pp != nullptr && (*pp)->key != key) pp = &((*pp)->nxt);\n    if (*pp == nullptr)\
+    \ *pp = my_new(key, DefaultValue);\n    return (*pp)->val;\n  }\n};\n\n/**\n *\
+    \ @brief Hash Map(\u9023\u9396\u6CD5)\n * @docs docs/data-structure/hashmap_all.md\n\
     \ */\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\n\
     static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
     \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
@@ -162,27 +166,30 @@ data:
     \  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n  wt(x, '\\\
     n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
     \ fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n#line 6 \"\
-    verify/verify-yosupo-math/yosupo-nim-product.test.cpp\"\n\nvoid solve() {\n  int\
-    \ T;\n  rd(T);\n  rep(i, T) {\n    uint64_t a, b;\n    rd(a, b);\n    wtn(nim_product(a,\
-    \ b));\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/nim_product_64\"\n\n#include\
-    \ \"../../competitive-template.hpp\"\n#include \"../../math/nim-product.hpp\"\n\
-    #include \"../../misc/fastio.hpp\"\n\nvoid solve() {\n  int T;\n  rd(T);\n  rep(i,\
-    \ T) {\n    uint64_t a, b;\n    rd(a, b);\n    wtn(nim_product(a, b));\n  }\n}"
+    verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp\"\n\nvoid solve() {\n  HashMap<ll,\
+    \ ll, 1 << 20> m;\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_, Q) {\n    rd(c);\n\
+    \    if (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n      rd(k, v);\n\
+    \      m[k] = v;\n    }\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n\
+    #include \"../../competitive-template.hpp\"\n#include \"../../hashmap/hashmap-chain.hpp\"\
+    \n#include \"../../misc/fastio.hpp\"\n\nvoid solve() {\n  HashMap<ll, ll, 1 <<\
+    \ 20> m;\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_, Q) {\n    rd(c);\n    if\
+    \ (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n      rd(k, v);\n     \
+    \ m[k] = v;\n    }\n  }\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - math/nim-product.hpp
+  - hashmap/hashmap-chain.hpp
   - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
   requiredBy: []
-  timestamp: '2020-09-15 23:09:15+09:00'
+  timestamp: '2020-11-22 18:12:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-nim-product.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-nim-product.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
 ---

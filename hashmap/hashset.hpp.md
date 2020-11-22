@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
   _extendedRequiredBy: []

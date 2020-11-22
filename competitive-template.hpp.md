@@ -136,14 +136,17 @@ data:
     path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
@@ -418,7 +421,7 @@ data:
     path: verify/verify-yuki/yuki-1220.test.cpp
     title: verify/verify-yuki/yuki-1220.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n\
@@ -623,7 +626,7 @@ data:
   path: competitive-template.hpp
   requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
@@ -681,6 +684,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
   - verify/verify-yosupo-ds/yosupo-swag.test.cpp
   - verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
@@ -696,12 +700,12 @@ data:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-yuki/yuki-1170.test.cpp

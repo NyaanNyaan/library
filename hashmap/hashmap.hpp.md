@@ -1,13 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"hashmap/hashmap-base.hpp\"\n#include <bits/stdc++.h>\nusing\
@@ -129,8 +132,9 @@ data:
   path: hashmap/hashmap.hpp
   requiredBy: []
   timestamp: '2020-11-22 17:17:09+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
 documentation_of: hashmap/hashmap.hpp
 layout: document
 redirect_from:

@@ -14,7 +14,7 @@ data:
       title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -32,14 +32,8 @@ data:
       path: data-structure/dynamic-union-find.hpp
       title: "\u52D5\u7684Union Find"
     - icon: ':heavy_check_mark:'
-      path: data-structure/hash-map-chain.hpp
-      title: "Hash Map(\u9023\u9396\u6CD5)"
-    - icon: ':heavy_check_mark:'
       path: data-structure/hash-map-variable-length.hpp
       title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-    - icon: ':heavy_check_mark:'
-      path: data-structure/hash-map.hpp
-      title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
     - icon: ':heavy_check_mark:'
       path: data-structure/persistent-array.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
@@ -219,10 +213,16 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: hashmap
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: hashmap/hashmap-base.hpp
       title: hashmap/hashmap-base.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
+      path: hashmap/hashmap-chain.hpp
+      title: "Hash Map(\u9023\u9396\u6CD5)"
+    - icon: ':heavy_check_mark:'
+      path: hashmap/hashmap-open-address.hpp
+      title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
+    - icon: ':x:'
       path: hashmap/hashmap.hpp
       title: hashmap/hashmap.hpp
     - icon: ':heavy_check_mark:'
@@ -312,7 +312,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -666,14 +666,17 @@ data:
       path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
-      title: verify/verify-yosupo-ds/yosupo-hash-map-chain.test.cpp
-    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
-      title: verify/verify-yosupo-ds/yosupo-hash-map.test.cpp
+      path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
