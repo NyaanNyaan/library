@@ -10,8 +10,10 @@ template <typename Key, typename Data>
 struct HashMapBase;
 
 template <typename Key, typename Data>
-struct itrB : iterator<bidirectional_iterator_tag, Key, ptrdiff_t, Key*, Key&> {
-  using base = iterator<bidirectional_iterator_tag, Key, ptrdiff_t, Key*, Key&>;
+struct itrB
+    : iterator<bidirectional_iterator_tag, Data, ptrdiff_t, Data*, Data&> {
+  using base =
+      iterator<bidirectional_iterator_tag, Data, ptrdiff_t, Data*, Data&>;
   using ptr = typename base::pointer;
   using ref = typename base::reference;
 
@@ -66,6 +68,7 @@ struct HashMapBase {
   using u64 = uint64_t;
   using iterator = itrB<Key, Data>;
   using itr = iterator;
+
  protected:
   template <typename K,
             enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,
@@ -195,8 +198,8 @@ struct HashMapBase {
         return itr(h, this);
       }
       if (dtok(data[h]) == dtok(d)) {
-        data[h] = d;
         if (dflag[h] == true) {
+          data[h] = d;
           dflag[h] = false;
           ++s;
         }
@@ -214,7 +217,7 @@ struct HashMapBase {
     if (shrink_rate(s)) {
       Data d = data[it.i];
       shrink();
-      it = find(d);
+      it = find(dtok(d));
     }
     int ni = (it.i + 1) & (cap - 1);
     if (this->flag[ni]) {

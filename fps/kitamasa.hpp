@@ -93,9 +93,10 @@ mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
 template <typename mint>
 mint kitamasa(long long N, FormalPowerSeries<mint> Q,
               FormalPowerSeries<mint> a) {
-  int k = Q.size() - 1;
-  assert((int)a.size() == k);
-  auto P = a * Q;
+  assert(!Q.empty() && Q[0] != 0);
+  if(N < (int)a.size()) return a[N];
+  assert((int)a.size() >= int(Q.size()) - 1);
+  auto P = a.pre((int)Q.size() - 1) * Q;
   P.resize(Q.size() - 1);
   return LinearRecursionFormula<mint>(N, Q, P);
 }

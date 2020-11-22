@@ -28,4 +28,8 @@ struct HashMap : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {
       h = (h + 1) & (base::cap - 1);
     }
   }
+
+  typename base::itr emplace(const Key& key, const Val& val) {
+    return base::insert(Data(key, val));
+  }
 };

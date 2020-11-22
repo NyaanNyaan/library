@@ -32,11 +32,3 @@ vector<mint> BerlekampMassey(const vector<mint> &s) {
   reverse(begin(c), end(c));
   return c;
 }
-
-#include "kitamasa.hpp"
-template <typename mint>
-mint nth_term(int n, const vector<mint> &s) {
-  vector<mint> Q = BerlekampMassey<mint>(s);
-  
-  return kitamasa(n, BerlekampMassey<mint>(s), s);
-}
