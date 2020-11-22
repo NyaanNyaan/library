@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/hash-map.hpp"
+#include "../../hashmap/hashmap-open-address.hpp"
 #include "../../misc/fastio.hpp"
 
 void solve() {

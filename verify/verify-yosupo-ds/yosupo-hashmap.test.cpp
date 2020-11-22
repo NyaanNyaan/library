@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
 #include "../../competitive-template.hpp"
-#include "../../data-structure/hash-map-chain.hpp"
+#include "../../hashmap/hashmap.hpp"
 #include "../../misc/fastio.hpp"
 
 void solve() {
-  HashMap<ll, ll, 1 << 20> m;
+  HashMap<uint64_t, uint64_t> m;
   int Q;
   ll c, k, v;
   rd(Q);
