@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"hashmap/hashmap-base.hpp\"\n#include <bits/stdc++.h>\nusing\
@@ -104,7 +104,20 @@ data:
     \n}  // namespace HashMapImpl\n#line 2 \"hashmap/hashmap.hpp\"\n\ntemplate <typename\
     \ Key, typename Val>\nstruct HashMap : HashMapImpl::HashMapBase<Key, pair<Key,\
     \ Val>> {\n  using base = typename HashMapImpl::HashMapBase<Key, pair<Key, Val>>;\n\
-    \  using base::HashMapBase;\n  using Data = pair<Key, Val>;\n\n  Val& operator[](const\
+    \  using HashMapImpl::HashMapBase<Key, pair<Key, Val>>::HashMapBase;\n  using\
+    \ Data = pair<Key, Val>;\n\n  Val& operator[](const Key& k) {\n    typename base::u32\
+    \ h = base::inner_hash(k);\n    while (true) {\n      if (base::flag[h] == false)\
+    \ {\n        if (base::extend_rate(base::s + 1)) {\n          base::extend();\n\
+    \          h = base::hash(k);\n          continue;\n        }\n        base::data[h].first\
+    \ = k;\n        base::data[h].second = Val();\n        base::flag[h] = true;\n\
+    \        ++base::s;\n        return base::data[h].second;\n      }\n      if (base::data[h].first\
+    \ == k) {\n        if (base::dflag[h] == true) base::data[h].second = Val();\n\
+    \        return base::data[h].second;\n      }\n      h = (h + 1) & (base::cap\
+    \ - 1);\n    }\n  }\n};\n"
+  code: "#include \"hashmap-base.hpp\"\n\ntemplate <typename Key, typename Val>\n\
+    struct HashMap : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {\n  using base\
+    \ = typename HashMapImpl::HashMapBase<Key, pair<Key, Val>>;\n  using HashMapImpl::HashMapBase<Key,\
+    \ pair<Key, Val>>::HashMapBase;\n  using Data = pair<Key, Val>;\n\n  Val& operator[](const\
     \ Key& k) {\n    typename base::u32 h = base::inner_hash(k);\n    while (true)\
     \ {\n      if (base::flag[h] == false) {\n        if (base::extend_rate(base::s\
     \ + 1)) {\n          base::extend();\n          h = base::hash(k);\n         \
@@ -114,25 +127,13 @@ data:
     \    if (base::dflag[h] == true) base::data[h].second = Val();\n        return\
     \ base::data[h].second;\n      }\n      h = (h + 1) & (base::cap - 1);\n    }\n\
     \  }\n};\n"
-  code: "#include \"hashmap-base.hpp\"\n\ntemplate <typename Key, typename Val>\n\
-    struct HashMap : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {\n  using base\
-    \ = typename HashMapImpl::HashMapBase<Key, pair<Key, Val>>;\n  using base::HashMapBase;\n\
-    \  using Data = pair<Key, Val>;\n\n  Val& operator[](const Key& k) {\n    typename\
-    \ base::u32 h = base::inner_hash(k);\n    while (true) {\n      if (base::flag[h]\
-    \ == false) {\n        if (base::extend_rate(base::s + 1)) {\n          base::extend();\n\
-    \          h = base::hash(k);\n          continue;\n        }\n        base::data[h].first\
-    \ = k;\n        base::data[h].second = Val();\n        base::flag[h] = true;\n\
-    \        ++base::s;\n        return base::data[h].second;\n      }\n      if (base::data[h].first\
-    \ == k) {\n        if (base::dflag[h] == true) base::data[h].second = Val();\n\
-    \        return base::data[h].second;\n      }\n      h = (h + 1) & (base::cap\
-    \ - 1);\n    }\n  }\n};\n"
   dependsOn:
   - hashmap/hashmap-base.hpp
   isVerificationFile: false
   path: hashmap/hashmap.hpp
   requiredBy: []
-  timestamp: '2020-11-22 17:17:09+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-11-22 18:43:33+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
 documentation_of: hashmap/hashmap.hpp

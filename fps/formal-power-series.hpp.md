@@ -6,6 +6,9 @@ data:
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
   - icon: ':heavy_check_mark:'
+    path: fps/berlekamp-massey.hpp
+    title: fps/berlekamp-massey.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/differential-equation.hpp
     title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
   - icon: ':warning:'
@@ -76,6 +79,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
@@ -270,10 +276,12 @@ data:
   - fps/taylor-shift.hpp
   - fps/polynomial-gcd.hpp
   - fps/fps-sqrt.hpp
+  - fps/berlekamp-massey.hpp
   timestamp: '2020-08-21 15:57:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
+  - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp

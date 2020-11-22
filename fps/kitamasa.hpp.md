@@ -5,8 +5,14 @@ data:
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: fps/berlekamp-massey.hpp
+    title: fps/berlekamp-massey.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
@@ -161,10 +167,12 @@ data:
   - fps/formal-power-series.hpp
   isVerificationFile: false
   path: fps/kitamasa.hpp
-  requiredBy: []
+  requiredBy:
+  - fps/berlekamp-massey.hpp
   timestamp: '2020-09-01 18:14:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
 documentation_of: fps/kitamasa.hpp

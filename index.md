@@ -14,7 +14,7 @@ data:
       title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -213,7 +213,7 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: hashmap
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: hashmap/hashmap-base.hpp
       title: hashmap/hashmap-base.hpp
     - icon: ':heavy_check_mark:'
@@ -222,7 +222,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: hashmap/hashmap-open-address.hpp
       title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: hashmap/hashmap.hpp
       title: hashmap/hashmap.hpp
     - icon: ':heavy_check_mark:'
@@ -312,7 +312,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -674,7 +674,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
     - icon: ':heavy_check_mark:'
