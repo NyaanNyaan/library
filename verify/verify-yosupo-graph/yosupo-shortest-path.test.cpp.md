@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: shortest-path/dijkstra.hpp
     title: shortest-path/dijkstra.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: shortest-path/restore-shortest-path.hpp
     title: shortest-path/restore-shortest-path.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
@@ -127,9 +127,9 @@ data:
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"graph/graph-utility.hpp\"\
     \nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\
     \ std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n\
-    \  edge(int to, T cost) : src(-1), to(to), cost(cost) {}\n  edge(int src, int\
-    \ to, T cost) : src(src), to(to), cost(cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src,\
+    \ int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
+    \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
     \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
     \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
     \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
@@ -180,16 +180,16 @@ data:
     \  if (end) return;\n    }\n    if (end) return;\n    ret.pop_back();\n  };\n\
     \  dfs(dfs, u);\n  return ret;\n}\n#line 3 \"shortest-path/dijkstra.hpp\"\nusing\
     \ namespace std;\n\n#line 6 \"shortest-path/dijkstra.hpp\"\n\n// unreachable ->\
-    \ -1 \ntemplate<typename T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start\
-    \ = 0){ \n  using P = pair<T , int>;\n  int N = (int)g.size();\n  T INF = numeric_limits<T>::max()\
-    \ / 2;\n  vector<T> d(N , INF);\n  priority_queue<P , vector<P> , greater<P> >\
-    \ Q;\n  d[start] = 0;\n  Q.emplace(0 , start);\n  while(!Q.empty()){\n    P p\
-    \ = Q.top(); Q.pop();\n    int cur = p.second;\n    if(d[cur] < p.first) continue;\n\
-    \    for(auto dst : g[cur]){\n      if( d[cur] + dst.cost < d[dst]){\n       \
-    \ d[dst] = d[cur] + dst.cost;\n        Q.emplace(d[dst] , dst);\n      }\n   \
-    \ }\n  }\n  return d;\n}\n#line 3 \"shortest-path/restore-shortest-path.hpp\"\n\
-    using namespace std;\n\n#line 6 \"shortest-path/restore-shortest-path.hpp\"\n\n\
-    // restore shortest path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
+    \ -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start\
+    \ = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n  vector<T> d(N,\
+    \ T(-1));\n  priority_queue<P, vector<P>, greater<P> > Q;\n  d[start] = 0;\n \
+    \ Q.emplace(0, start);\n  while (!Q.empty()) {\n    P p = Q.top();\n    Q.pop();\n\
+    \    int cur = p.second;\n    if (d[cur] < p.first) continue;\n    for (auto dst\
+    \ : g[cur]) {\n      if (d[dst] == T(-1) or d[cur] + dst.cost < d[dst]) {\n  \
+    \      d[dst] = d[cur] + dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n\
+    \    }\n  }\n  return d;\n}\n#line 3 \"shortest-path/restore-shortest-path.hpp\"\
+    \nusing namespace std;\n\n#line 6 \"shortest-path/restore-shortest-path.hpp\"\n\
+    \n// restore shortest path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
     \ &g, vector<T> &d, int S,\n                                  int G) {\n  int\
     \ N = g.size();\n  WeightedGraph<T> rev(g.size());\n  for (int i = 0; i < N; i++)\n\
     \    for (auto &e : g[i]) rev[e.to].emplace_back(e.to, i, e.cost);\n  vector<int>\
@@ -200,14 +200,14 @@ data:
     \    }\n    ret.push_back((vis[nxt] = 1, dist = nval, p = nxt));\n  } while (p\
     \ != S);\n  reverse(begin(ret), end(ret));\n  return ret;\n}\n#line 7 \"verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp\"\
     \n\nvoid solve() {\n  ini(N, M, S, T);\n  auto g = wgraph<ll>(N, M, true, false);\n\
-    \  auto d = dijkstra<ll>(g, S);\n  if (d[T] > TEN(18)) die(-1);\n  auto p = restore_shortest_path<ll>(g,\
+    \  auto d = dijkstra<ll>(g, S);\n  if (d[T] == -1) die(-1);\n  auto p = restore_shortest_path<ll>(g,\
     \ d, S, T);\n  out(d[T], sz(p) - 1);\n  rep(i, sz(p) - 1) out(p[i], p[i + 1]);\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n\n#include\
     \ \"../../competitive-template.hpp\"\n#include \"../../graph/graph-utility.hpp\"\
     \n#include \"../../shortest-path/dijkstra.hpp\"\n#include \"../../shortest-path/restore-shortest-path.hpp\"\
     \n\nvoid solve() {\n  ini(N, M, S, T);\n  auto g = wgraph<ll>(N, M, true, false);\n\
-    \  auto d = dijkstra<ll>(g, S);\n  if (d[T] > TEN(18)) die(-1);\n  auto p = restore_shortest_path<ll>(g,\
+    \  auto d = dijkstra<ll>(g, S);\n  if (d[T] == -1) die(-1);\n  auto p = restore_shortest_path<ll>(g,\
     \ d, S, T);\n  out(d[T], sz(p) - 1);\n  rep(i, sz(p) - 1) out(p[i], p[i + 1]);\n\
     }"
   dependsOn:
@@ -219,8 +219,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   requiredBy: []
-  timestamp: '2020-08-02 18:11:02+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-24 16:37:57+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
 layout: document

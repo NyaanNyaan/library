@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   - icon: ':heavy_check_mark:'
@@ -121,11 +121,11 @@ data:
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"tree/rerooting.hpp\"\nusing\
     \ namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\
     \ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
-    \ to, T cost) : src(-1), to(to), cost(cost) {}\n  edge(int src, int to, T cost)\
-    \ : src(src), to(to), cost(cost) {}\n\n  edge &operator=(const int &x) {\n   \
-    \ to = x;\n    return *this;\n  }\n\n  operator int() const { return to; }\n};\n\
-    template <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename T>\n\
-    using WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
+    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
+    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
     \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
     \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
@@ -203,7 +203,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
   requiredBy: []
-  timestamp: '2020-08-01 13:45:41+09:00'
+  timestamp: '2020-11-24 16:37:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp

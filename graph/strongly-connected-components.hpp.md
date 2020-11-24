@@ -1,33 +1,33 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/two-sat.hpp
     title: 2-SAT
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/strongly-connected-components.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\
     \ std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n\
-    \  edge(int to, T cost) : src(-1), to(to), cost(cost) {}\n  edge(int src, int\
-    \ to, T cost) : src(src), to(to), cost(cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src,\
+    \ int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
+    \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
     \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
     \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
     \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
@@ -103,8 +103,8 @@ data:
   path: graph/strongly-connected-components.hpp
   requiredBy:
   - math/two-sat.hpp
-  timestamp: '2020-08-02 19:22:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-24 16:37:57+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp

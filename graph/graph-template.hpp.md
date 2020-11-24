@@ -8,40 +8,43 @@ data:
   - icon: ':warning:'
     path: graph/dimension-expanded-graph.hpp
     title: graph/dimension-expanded-graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
   - icon: ':heavy_check_mark:'
     path: graph/kruskal.hpp
     title: graph/kruskal.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
   - icon: ':heavy_check_mark:'
     path: graph/topological-sort.hpp
     title: graph/topological-sort.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/two-edge-connected-components.hpp
     title: graph/two-edge-connected-components.hpp
   - icon: ':warning:'
     path: math/grundy-number.hpp
     title: math/grundy-number.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/two-sat.hpp
     title: 2-SAT
   - icon: ':heavy_check_mark:'
     path: shortest-path/bellman-ford.hpp
     title: shortest-path/bellman-ford.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: shortest-path/bfs01.hpp
+    title: shortest-path/bfs01.hpp
+  - icon: ':question:'
     path: shortest-path/dijkstra.hpp
     title: shortest-path/dijkstra.hpp
   - icon: ':warning:'
     path: shortest-path/dual-of-shortest-path.hpp
     title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: shortest-path/restore-shortest-path.hpp
     title: shortest-path/restore-shortest-path.hpp
   - icon: ':heavy_check_mark:'
@@ -132,26 +135,26 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph-template.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T\
-    \ cost;\n\n  edge(int to, T cost) : src(-1), to(to), cost(cost) {}\n  edge(int\
-    \ src, int to, T cost) : src(src), to(to), cost(cost) {}\n\n  edge &operator=(const\
+    \ cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int\
+    \ _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
     \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
     \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
     \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
@@ -178,14 +181,14 @@ data:
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
     \ d;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int to, T cost)\
-    \ : src(-1), to(to), cost(cost) {}\n  edge(int src, int to, T cost) : src(src),\
-    \ to(to), cost(cost) {}\n\n  edge &operator=(const int &x) {\n    to = x;\n  \
-    \  return *this;\n  }\n\n  operator int() const { return to; }\n};\ntemplate <typename\
-    \ T>\nusing Edges = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph\
-    \ = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\n// Input\
-    \ of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool is_directed\
-    \ = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+    \ <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T\
+    \ _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost)\
+    \ : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int &x) {\n\
+    \    to = x;\n    return *this;\n  }\n\n  operator int() const { return to; }\n\
+    };\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
+    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
     \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
     \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
@@ -212,6 +215,7 @@ data:
   requiredBy:
   - shortest-path/bellman-ford.hpp
   - shortest-path/warshall-floyd.hpp
+  - shortest-path/bfs01.hpp
   - shortest-path/dual-of-shortest-path.hpp
   - shortest-path/restore-shortest-path.hpp
   - shortest-path/dijkstra.hpp
@@ -230,8 +234,8 @@ data:
   - graph/dimension-expanded-graph.hpp
   - graph/two-edge-connected-components.hpp
   - graph/graph-utility.hpp
-  timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-24 16:37:57+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp

@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/two-edge-connected-components.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\
     \ std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n\
-    \  edge(int to, T cost) : src(-1), to(to), cost(cost) {}\n  edge(int src, int\
-    \ to, T cost) : src(src), to(to), cost(cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src,\
+    \ int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
+    \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
     \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
     \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
     \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
@@ -91,8 +91,8 @@ data:
   isVerificationFile: false
   path: graph/two-edge-connected-components.hpp
   requiredBy: []
-  timestamp: '2020-09-02 23:02:05+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-11-24 16:37:57+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
 documentation_of: graph/two-edge-connected-components.hpp

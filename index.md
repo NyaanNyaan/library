@@ -14,7 +14,7 @@ data:
       title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -152,7 +152,8 @@ data:
       title: fps/multipoint-evaluation.hpp
     - icon: ':warning:'
       path: fps/nth-term.hpp
-      title: fps/nth-term.hpp
+      title: "\u4E0E\u3048\u3089\u308C\u305F\u6570\u5217\u306E\u7B2C$n$\u9805\u3092\
+        \u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
     - icon: ':heavy_check_mark:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
@@ -190,28 +191,28 @@ data:
     - icon: ':warning:'
       path: graph/dimension-expanded-graph.hpp
       title: graph/dimension-expanded-graph.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/graph-template.hpp
       title: graph/graph-template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/graph-utility.hpp
       title: graph/graph-utility.hpp
     - icon: ':heavy_check_mark:'
       path: graph/kruskal.hpp
       title: graph/kruskal.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/lowlink.hpp
       title: graph/lowlink.hpp
     - icon: ':heavy_check_mark:'
       path: graph/max-independent-set.hpp
       title: graph/max-independent-set.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/strongly-connected-components.hpp
       title: graph/strongly-connected-components.hpp
     - icon: ':heavy_check_mark:'
       path: graph/topological-sort.hpp
       title: graph/topological-sort.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/two-edge-connected-components.hpp
       title: graph/two-edge-connected-components.hpp
   - name: hashmap
@@ -298,7 +299,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/sum_of_floor.hpp
       title: math/sum_of_floor.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/two-sat.hpp
       title: 2-SAT
     - icon: ':warning:'
@@ -459,13 +460,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/bellman-ford.hpp
       title: shortest-path/bellman-ford.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
+      path: shortest-path/bfs01.hpp
+      title: shortest-path/bfs01.hpp
+    - icon: ':question:'
       path: shortest-path/dijkstra.hpp
       title: shortest-path/dijkstra.hpp
     - icon: ':warning:'
       path: shortest-path/dual-of-shortest-path.hpp
       title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: shortest-path/restore-shortest-path.hpp
       title: shortest-path/restore-shortest-path.hpp
     - icon: ':heavy_check_mark:'
@@ -825,13 +829,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
       title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
       title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
       title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
       title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - name: verify/verify-yosupo-math
@@ -890,7 +894,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
       title: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
       title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - name: verify/verify-yosupo-ntt

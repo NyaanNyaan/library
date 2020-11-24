@@ -35,7 +35,8 @@ data:
     title: fps/multipoint-evaluation.hpp
   - icon: ':warning:'
     path: fps/nth-term.hpp
-    title: fps/nth-term.hpp
+    title: "\u4E0E\u3048\u3089\u308C\u305F\u6570\u5217\u306E\u7B2C$n$\u9805\u3092\u8A08\
+      \u7B97(Berlekamp-Massey/Bostan-Mori)"
   - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"

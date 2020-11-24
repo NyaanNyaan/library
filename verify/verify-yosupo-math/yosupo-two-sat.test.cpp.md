@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/two-sat.hpp
     title: 2-SAT
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_sat
@@ -125,11 +125,11 @@ data:
     \ namespace std;\n\n#line 3 \"graph/strongly-connected-components.hpp\"\nusing\
     \ namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\
     \ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
-    \ to, T cost) : src(-1), to(to), cost(cost) {}\n  edge(int src, int to, T cost)\
-    \ : src(src), to(to), cost(cost) {}\n\n  edge &operator=(const int &x) {\n   \
-    \ to = x;\n    return *this;\n  }\n\n  operator int() const { return to; }\n};\n\
-    template <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename T>\n\
-    using WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
+    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
+    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
     \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
     \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
@@ -202,8 +202,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   requiredBy: []
-  timestamp: '2020-09-02 12:36:57+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-24 16:37:57+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
 layout: document

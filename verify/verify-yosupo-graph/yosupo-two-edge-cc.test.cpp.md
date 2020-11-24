@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/two-edge-connected-components.hpp
     title: graph/two-edge-connected-components.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
@@ -123,8 +123,8 @@ data:
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"graph/graph-template.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n\
-    \  T cost;\n\n  edge(int to, T cost) : src(-1), to(to), cost(cost) {}\n  edge(int\
-    \ src, int to, T cost) : src(src), to(to), cost(cost) {}\n\n  edge &operator=(const\
+    \  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int\
+    \ _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
     \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
     \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
     \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
@@ -194,8 +194,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   requiredBy: []
-  timestamp: '2020-09-02 23:02:05+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-24 16:37:57+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
 layout: document
