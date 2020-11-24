@@ -49,6 +49,6 @@ double rnd() {
 }  // namespace my_rand
 
 using my_rand::randint;
-using my_rand::random;
 using my_rand::randset;
+using my_rand::rnd;
 using my_rand::rng;
