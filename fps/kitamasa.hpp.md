@@ -1,24 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: fps/nth-term.hpp
-    title: "\u4E0E\u3048\u3089\u308C\u305F\u6570\u5217\u306E\u7B2C$n$\u9805\u3092\u8A08\
-      \u7B97(Berlekamp-Massey/Bostan-Mori)"
+    title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
+    title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/fps/kitamasa.md
     document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
@@ -172,8 +174,9 @@ data:
   requiredBy:
   - fps/nth-term.hpp
   timestamp: '2020-11-22 19:59:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
 documentation_of: fps/kitamasa.hpp
@@ -183,7 +186,7 @@ redirect_from:
 - /library/fps/kitamasa.hpp.html
 title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
 ---
-## 線形漸化式の第$N$項を高速に求めるライブラリ
+## 線形漸化式の高速計算
 
 $[x^N]\frac{P(x)}{Q(x)}$($\mathrm{deg}(Q) = k$)を$\mathrm{O}(N \log k \log N)$で計算するライブラリ。
 
@@ -203,9 +206,11 @@ $$P(x)=Q(x)(a_0+a_1x+a_2x^2+\ldots) \mod x^k$$
 
 $$a_N = [x^N]\frac{P(x)}{Q(x)}$$
 
-になり、これはBostan-Mori Algorithmを使って$\mathrm{O}(N \log k \log N)$で計算できる。[日本語での解説](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html)
+になり、これはBostan-Mori Algorithmを使って$\mathrm{O}(N \log k \log N)$で計算できる。[論文](https://arxiv.org/abs/2008.08822)　[日本語での解説](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html) 
 
-さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さQの畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。(詳細は実装を参考のこと。)
+(線形漸化式の高速計算アルゴリズムは「高速きたまさ法」と通称されるアルゴリズムが競プロ界では非常に有名で、計算量も$\mathrm{O}(N \log k \log N)$と等速だが、Bostan-Mori Algorithmの方が一般のケースに対して定数倍がよい。)
+
+さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さQの畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$\frac{2}{3}M(n)$)の高速化が見込める。(詳細は実装を参考のこと。)
 
 verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \log k \log N), N=200000,k=10^{18}$
 - [ナイーブな実装](https://atcoder.jp/contests/s8pc-3/submissions/15526069) 1846ms

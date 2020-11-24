@@ -1,24 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/berlekamp-massey.hpp
     title: fps/berlekamp-massey.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
+    title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    _deprecated_at_docs: docs/fps/kitamasa.md
-    document_title: "\u4E0E\u3048\u3089\u308C\u305F\u6570\u5217\u306E\u7B2C$n$\u9805\
-      \u3092\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
+    _deprecated_at_docs: docs/fps/nth-term.md
+    document_title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97\
+      (Berlekamp-Massey/Bostan-Mori)"
     links: []
   bundledCode: "#line 2 \"fps/nth-term.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\n#line 3 \"fps/berlekamp-massey.hpp\"\nusing namespace std;\n\ntemplate\
@@ -134,19 +137,19 @@ data:
     \ - 1);\n  auto P = a.pre((int)Q.size() - 1) * Q;\n  P.resize(Q.size() - 1);\n\
     \  return LinearRecursionFormula<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\
     \u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n\
-    \ */\n#line 7 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(int\
-    \ n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n  auto\
-    \ bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
-    \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u4E0E\u3048\u3089\u308C\u305F\u6570\
-    \u5217\u306E\u7B2C$n$\u9805\u3092\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n\
-    \ * @docs docs/fps/kitamasa.md\n */\n"
+    \ */\n#line 7 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(long\
+    \ long n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n \
+    \ auto bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
+    \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
+    \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
+    \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"berlekamp-massey.hpp\"\n#include \"kitamasa.hpp\"\n\ntemplate <typename mint>\n\
-    mint nth_term(int n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n\
+    mint nth_term(long long n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  auto bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
-    \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u4E0E\u3048\u3089\u308C\u305F\u6570\
-    \u5217\u306E\u7B2C$n$\u9805\u3092\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n\
-    \ * @docs docs/fps/kitamasa.md\n */\n"
+    \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
+    \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
+    \ */\n"
   dependsOn:
   - fps/berlekamp-massey.hpp
   - fps/kitamasa.hpp
@@ -154,41 +157,34 @@ data:
   isVerificationFile: false
   path: fps/nth-term.hpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2020-11-25 08:55:02+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
 documentation_of: fps/nth-term.hpp
 layout: document
 redirect_from:
 - /library/fps/nth-term.hpp
 - /library/fps/nth-term.hpp.html
-title: "\u4E0E\u3048\u3089\u308C\u305F\u6570\u5217\u306E\u7B2C$n$\u9805\u3092\u8A08\
-  \u7B97(Berlekamp-Massey/Bostan-Mori)"
+title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
 ---
-## 線形漸化式の第$N$項を高速に求めるライブラリ
+## 線形回帰数列の高速計算(Berlekamp-Massey/Bostan-Mori)
 
-$[x^N]\frac{P(x)}{Q(x)}$($\mathrm{deg}(Q) = k$)を$\mathrm{O}(N \log k \log N)$で計算するライブラリ。
+線形回帰数列の前$k$項が与えられたときに第$n$項を$\mathrm{O}(k^2+k \log k\log n)$で計算するライブラリ。
 
 #### 概要
 
-$k$項間漸化式
+斉次線形漸化式
 
-$$a_n = c_1a_{n-1}+c_2a_{n-2} \ldots + c_ka_{n-k}$$
+$$a_i=\sum_{j=1}^k c_j a_{i-j} (i\geq k)$$
 
-の第$N$項は
+の形で表される数列を線形回帰数列と呼ぶ。ここで$(a_i)$の母関数を考えると、$(a_i)$は適当な$P(x)$および$c_1,c_2\ldots,c_k$を用いて
 
-$$Q(x)=1-c_1x-c_2x^2-\ldots -c_kx^k$$
+$$\sum_{i=0}^\infty a_i x^i = \frac{P(x)}{1-c_1x-c_2x^2-\ldots -c_kx^k}$$
 
-$$P(x)=Q(x)(a_0+a_1x+a_2x^2+\ldots) \mod x^k$$
+と表せる。ここで$P(x)$および$c_1,c_2\ldots,c_k$は[Berlekamp-Massey algorithm](https://nyaannyaan.github.io/library/fps/berlekamp-massey.hpp)で計算できて、さらに線形漸化式の第$n$項は[Bostan-Mori algorithm](https://nyaannyaan.github.io/library/fps/kitamasa.hpp)で高速に計算できる。
 
-と置いたとき
+#### 使い方
 
-$$a_N = [x^N]\frac{P(x)}{Q(x)}$$
-
-になり、これはBostan-Mori Algorithmを使って$\mathrm{O}(N \log k \log N)$で計算できる。[日本語での解説](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html)
-
-さらに、もし素数$p$がNTT素数だった場合は1回のループ当たりの操作が長さQの畳み込み4回で済むので、愚直なアルゴリズム(ループ当たり計算量$2M(n)$)に対して3倍(計算量$2/3M(n)$)の高速化が見込める。(詳細は実装を参考のこと。)
-
-verify(AtCoder 双子コン#3 G フィボナッチ数の総和) $\mathrm{O}(N \log k \log N), N=200000,k=10^{18}$
-- [ナイーブな実装](https://atcoder.jp/contests/s8pc-3/submissions/15526069) 1846ms
-- [高速化した場合](https://atcoder.jp/contests/s8pc-3/submissions/15520531) 631ms
+- `nth-term(N, a)`: 数列$(a_i)$の第$N$項を計算する。
+ 

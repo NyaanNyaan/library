@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -101,10 +101,10 @@ data:
       title: flow/flow-on-bipartite-graph.hpp
   - name: fps
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/arbitrary-fps.hpp
       title: fps/arbitrary-fps.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/berlekamp-massey.hpp
       title: fps/berlekamp-massey.hpp
     - icon: ':heavy_check_mark:'
@@ -116,7 +116,7 @@ data:
     - icon: ':warning:'
       path: fps/fast-multieval.hpp
       title: fps/fast-multieval.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/formal-power-series.hpp
       title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
         \u30E9\u30EA"
@@ -133,7 +133,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
     - icon: ':heavy_check_mark:'
@@ -142,10 +142,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/multipoint-evaluation.hpp
       title: fps/multipoint-evaluation.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: fps/nth-term.hpp
-      title: "\u4E0E\u3048\u3089\u308C\u305F\u6570\u5217\u306E\u7B2C$n$\u9805\u3092\
-        \u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
+      title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
     - icon: ':heavy_check_mark:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
@@ -343,10 +342,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
   - name: modulo
@@ -374,13 +373,13 @@ data:
       title: tetration
   - name: ntt
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ntt/arbitrary-ntt.hpp
       title: ntt/arbitrary-ntt.hpp
     - icon: ':heavy_check_mark:'
       path: ntt/cooley-turkey-ntt.hpp
       title: ntt/cooley-turkey-ntt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
     - icon: ':heavy_check_mark:'
@@ -973,6 +972,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0214.test.cpp
       title: verify/verify-yuki/yuki-0214.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
+      title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0215.test.cpp
       title: verify/verify-yuki/yuki-0215.test.cpp
