@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/two-sat.hpp
     title: 2-SAT
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/strongly-connected-components.hpp\"\n#include <bits/stdc++.h>\n\
@@ -104,7 +104,7 @@ data:
   requiredBy:
   - math/two-sat.hpp
   timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp

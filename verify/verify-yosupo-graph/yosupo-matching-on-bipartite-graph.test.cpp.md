@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: flow/flow-on-bipartite-graph.hpp
     title: flow/flow-on-bipartite-graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []

@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/two-edge-connected-components.hpp
     title: graph/two-edge-connected-components.hpp
   _extendedVerifiedWith:
@@ -15,11 +15,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/lowlink.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -89,7 +89,7 @@ data:
   requiredBy:
   - graph/two-edge-connected-components.hpp
   timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - verify/verify-aoj-grl/aoj-grl-3-a.test.cpp

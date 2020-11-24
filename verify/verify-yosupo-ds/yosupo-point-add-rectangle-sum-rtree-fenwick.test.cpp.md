@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []

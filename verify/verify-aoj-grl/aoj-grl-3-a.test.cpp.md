@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
   _extendedRequiredBy: []

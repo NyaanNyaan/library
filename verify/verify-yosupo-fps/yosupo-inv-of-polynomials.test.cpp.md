@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/polynomial-gcd.hpp
     title: "\u591A\u9805\u5F0FGCD"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'

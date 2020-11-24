@@ -4,22 +4,22 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra.hpp
     title: shortest-path/dijkstra.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/restore-shortest-path.hpp
     title: shortest-path/restore-shortest-path.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
@@ -220,7 +220,7 @@ data:
   path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   requiredBy: []
   timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
 layout: document

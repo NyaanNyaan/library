@@ -123,12 +123,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/radix-heap.test.cpp
+    title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
@@ -279,13 +282,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
     title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - icon: ':heavy_check_mark:'
@@ -297,13 +300,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -342,7 +345,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - icon: ':heavy_check_mark:'
@@ -708,6 +711,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-yuki/yuki-1170.test.cpp
   - verify/verify-yuki/yuki-1220.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp

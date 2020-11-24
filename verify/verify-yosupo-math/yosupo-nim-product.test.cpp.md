@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/nim-product.hpp
     title: Nim Product
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []

@@ -4,31 +4,31 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: prime/factor-enumerate.hpp
     title: prime/factor-enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: prime/osak.hpp
     title: prime/osak.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -143,17 +143,20 @@ data:
     \ y < 0 ? y + p : y;\n}\n\ntemplate <typename T, typename U>\nT modpow(T a, U\
     \ n, T p) {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if\
     \ (n & 1) ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line\
-    \ 3 \"misc/rng.hpp\"\nusing namespace std;\n\nnamespace my_rand {\n\nuint64_t\
-    \ rng() {\n#ifdef NyaanDebug\n  static uint64_t x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
-    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
-    \  .count();\n#else\n  static uint64_t x_ = 88172645463325252ULL;\n#endif\n  x_\
-    \ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\n// [l, r)\nint64_t randint(int64_t\
-    \ l, int64_t r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n//\n\
-    vector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l <= r &&\
-    \ n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i; --i) {\n\
-    \    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r -\
-    \ i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing\
+    \ 3 \"misc/rng.hpp\"\nusing namespace std;\n\nnamespace my_rand {\n\n// [0, 2^64\
+    \ - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double random() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n\
+    \  double r(rng());\n  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n\
+    }  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::random;\nusing\
     \ my_rand::randset;\nusing my_rand::rng;\n#line 3 \"modint/arbitrary-prime-modint.hpp\"\
     \nusing namespace std;\n\nstruct ArbitraryLazyMontgomeryModInt {\n  using mint\
     \ = ArbitraryLazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n\
@@ -303,8 +306,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/osak.test.cpp
   requiredBy: []
-  timestamp: '2020-11-02 22:41:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-24 21:21:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-unit-test/osak.test.cpp
 layout: document

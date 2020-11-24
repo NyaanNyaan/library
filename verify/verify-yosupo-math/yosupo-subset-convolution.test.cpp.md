@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/subset-convolution.hpp
     title: Subset Convolution
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'

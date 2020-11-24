@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/max-independent-set.hpp
     title: graph/max-independent-set.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []

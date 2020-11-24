@@ -8,28 +8,28 @@ data:
   - icon: ':warning:'
     path: graph/dimension-expanded-graph.hpp
     title: graph/dimension-expanded-graph.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
   - icon: ':heavy_check_mark:'
     path: graph/kruskal.hpp
     title: graph/kruskal.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
   - icon: ':heavy_check_mark:'
     path: graph/topological-sort.hpp
     title: graph/topological-sort.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/two-edge-connected-components.hpp
     title: graph/two-edge-connected-components.hpp
   - icon: ':warning:'
     path: math/grundy-number.hpp
     title: math/grundy-number.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/two-sat.hpp
     title: 2-SAT
   - icon: ':heavy_check_mark:'
@@ -38,13 +38,16 @@ data:
   - icon: ':warning:'
     path: shortest-path/bfs01.hpp
     title: shortest-path/bfs01.hpp
-  - icon: ':question:'
+  - icon: ':warning:'
+    path: shortest-path/dijkstra-radix-heap.hpp
+    title: shortest-path/dijkstra-radix-heap.hpp
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra.hpp
     title: shortest-path/dijkstra.hpp
   - icon: ':warning:'
     path: shortest-path/dual-of-shortest-path.hpp
     title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/restore-shortest-path.hpp
     title: shortest-path/restore-shortest-path.hpp
   - icon: ':heavy_check_mark:'
@@ -135,20 +138,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph-template.hpp\"\n#include <bits/stdc++.h>\nusing\
@@ -215,6 +218,7 @@ data:
   requiredBy:
   - shortest-path/bellman-ford.hpp
   - shortest-path/warshall-floyd.hpp
+  - shortest-path/dijkstra-radix-heap.hpp
   - shortest-path/bfs01.hpp
   - shortest-path/dual-of-shortest-path.hpp
   - shortest-path/restore-shortest-path.hpp
@@ -235,7 +239,7 @@ data:
   - graph/two-edge-connected-components.hpp
   - graph/graph-utility.hpp
   timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp

@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/kth-root-integral.hpp
     title: $\mathrm{floor}(a^{\frac{1}{k}})$
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   _extendedRequiredBy: []

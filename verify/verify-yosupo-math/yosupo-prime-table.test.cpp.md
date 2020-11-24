@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'

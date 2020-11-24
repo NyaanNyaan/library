@@ -4,23 +4,23 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':question:'
-    path: modint/arbitrary-prime-modint.hpp
-    title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: modulo/mod-sqrt.hpp
-    title: mod sqrt(Tonelli-Shanks algorithm)
+  - icon: ':x:'
+    path: data-structure/radix-heap.hpp
+    title: data-structure/radix-heap.hpp
+  - icon: ':x:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/sqrt_mod
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/sqrt_mod
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n\n#line 1 \"competitive-template.hpp\"\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/radix-heap.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 1 \"competitive-template.hpp\"\
     \n#pragma region kyopro_template\n#define Nyaan_template\n#include <immintrin.h>\n\
     #include <bits/stdc++.h>\n#define pb push_back\n#define eb emplace_back\n#define\
     \ fi first\n#define se second\n#define each(x, v) for (auto &x : v)\n#define all(v)\
@@ -118,71 +118,86 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"modint/arbitrary-prime-modint.hpp\"\
-    \nusing namespace std;\n\nstruct ArbitraryLazyMontgomeryModInt {\n  using mint\
-    \ = ArbitraryLazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n\
-    \  using u64 = uint64_t;\n\n  static u32 mod;\n  static u32 r;\n  static u32 n2;\n\
-    \n  static u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i)\
-    \ ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static void set_mod(u32 m)\
-    \ {\n    assert(m < (1 << 30));\n    assert((m & 1) == 1);\n    mod = m;\n   \
-    \ n2 = -u64(m) % m;\n    r = get_r();\n    assert(r * mod == 1);\n  }\n\n  u32\
-    \ a;\n\n  ArbitraryLazyMontgomeryModInt() : a(0) {}\n  ArbitraryLazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static u32 reduce(const\
-    \ u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  mint\
-    \ &operator+=(const mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 *\
-    \ mod;\n    return *this;\n  }\n\n  mint &operator-=(const mint &b) {\n    if\
-    \ (i32(a -= b.a) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  mint\
-    \ &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  mint operator+(const mint &b) const { return mint(*this) += b; }\n \
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  mint operator*(const\
-    \ mint &b) const { return mint(*this) *= b; }\n  mint operator/(const mint &b)\
-    \ const { return mint(*this) /= b; }\n  bool operator==(const mint &b) const {\n\
-    \    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n\
-    \  bool operator!=(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ != (b.a >= mod ? b.a - mod : b.a);\n  }\n  mint operator-() const { return mint()\
-    \ - mint(*this); }\n\n  mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n\
-    \    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n\
-    \ >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = ArbitraryLazyMontgomeryModInt(t);\n\
-    \    return (is);\n  }\n\n  mint inverse() const { return pow(mod - 2); }\n\n\
-    \  u32 get() const {\n    u32 ret = reduce(a);\n    return ret >= mod ? ret -\
-    \ mod : ret;\n  }\n\n  static u32 get_mod() { return mod; }\n};\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::mod;\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::r;\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::n2;\n#line 3 \"modulo/mod-sqrt.hpp\"\n\nint64_t\
-    \ mod_sqrt(const int64_t &a, const int64_t &p) {\n  assert(0 <= a && a < p);\n\
-    \  if (a < 2) return a;\n  using mint = ArbitraryLazyMontgomeryModInt;\n  mint::set_mod(p);\n\
-    \  if (mint(a).pow((p - 1) >> 1) != 1) return -1;\n  mint b = 1, one = 1;\n  while\
-    \ (b.pow((p - 1) >> 1) == 1) b += one;\n  int64_t m = p - 1, e = 0;\n  while (m\
-    \ % 2 == 0) m >>= 1, e += 1;\n  mint x = mint(a).pow((m - 1) >> 1);\n  mint y\
-    \ = mint(a) * x * x;\n  x *= a;\n  mint z = mint(b).pow(m);\n  while (y != 1)\
-    \ {\n    int64_t j = 0;\n    mint t = y;\n    while (t != one) {\n      j += 1;\n\
-    \      t *= t;\n    }\n    z = z.pow(int64_t(1) << (e - j - 1));\n    x *= z;\n\
-    \    z *= z;\n    y *= z;\n    e = j;\n  }\n  return x.get();\n}\n\n/**\n * @brief\
-    \ mod sqrt(Tonelli-Shanks algorithm)\n * @docs docs/modulo/mod-sqrt.md\n */\n\
-    #line 5 \"verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp\"\n\nvoid solve()\
-    \ {\n  ini(T);\n  rep(_, T) {\n    inl(y, p);\n    out(mod_sqrt(y, p));\n  }\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n\n#include\
-    \ \"../../competitive-template.hpp\"\n#include \"../../modulo/mod-sqrt.hpp\"\n\
-    \nvoid solve() {\n  ini(T);\n  rep(_, T) {\n    inl(y, p);\n    out(mod_sqrt(y,\
-    \ p));\n  }\n}"
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/radix-heap.hpp\"\
+    \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct RadixHeap\
+    \ {\n  using uint = typename make_unsigned<Key>::type;\n  static constexpr int\
+    \ bit = sizeof(Key) * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint,\
+    \ bit + 1> ms;\n\n  int s;\n  uint last;\n\n  RadixHeap() : s(0), last(0) { fill(begin(ms),\
+    \ end(ms), uint(-1)); }\n\n  bool empty() const { return s == 0; }\n\n  int size()\
+    \ const { return s; }\n\n  __attribute__((target(\"lzcnt\"))) inline uint64_t\
+    \ getbit(uint a) const {\n    return 64 - _lzcnt_u64(a);\n  }\n\n  void push(const\
+    \ uint &key, const Val &val) {\n    s++;\n    uint64_t b = getbit(key ^ last);\n\
+    \    vs[b].emplace_back(key, val);\n    ms[b] = min(key, ms[b]);\n  }\n\n  pair<uint,\
+    \ Val> pop() {\n    if (ms[0] == uint(-1)) {\n      int idx = 1;\n      while\
+    \ (ms[idx] == uint(-1)) idx++;\n      last = ms[idx];\n      for (auto &p : vs[idx])\
+    \ {\n        uint64_t b = getbit(p.first ^ last);\n        vs[b].emplace_back(p);\n\
+    \        ms[b] = min(p.first, ms[b]);\n      }\n      vs[idx].clear();\n     \
+    \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
+    \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n#line 3 \"\
+    misc/rng.hpp\"\nusing namespace std;\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\n\
+    uint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double random() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n\
+    \  double r(rng());\n  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n\
+    }  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::random;\nusing\
+    \ my_rand::randset;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\
+    \n\ntemplate <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx,\
+    \ Key d, double ratio) {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n\
+    \    Key i = 0;\n    while (i < mx) {\n      assert(q1.empty() == q2.empty());\n\
+    \      assert(q1.size() == (int)q2.size());\n      if (q1.empty() or random()\
+    \ < ratio) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n        Val j{rng()};\n\
+    #pragma GCC diagnostic warning \"-Wnarrowing\"\n        q1.push(i, j);\n     \
+    \   q2.emplace(i, j);\n        i += d;\n      } else {\n        auto t1 = q1.pop();\n\
+    \        decltype(t1) t2 = *begin(q2);\n        assert(t1 == t2);\n        q2.erase(begin(q2));\n\
+    \      }\n    }\n    while (q1.size() != 0) {\n      auto t1 = q1.pop();\n   \
+    \   decltype(t1) t2 = *begin(q2);\n      assert(t1 == t2);\n      q2.erase(begin(q2));\n\
+    \    }\n  };\n  t(10, 1, 0.5);\n  t(10, 1, 0.7);\n  t(10, 1, 0.9);\n  t(1000,\
+    \ 1, 0.5);\n  t(1000, 1, 0.7);\n  t(1000, 1, 0.9);\n  t(TEN(8), 334, 0.5);\n \
+    \ t(TEN(8), 1333, 0.9);\n  t(TEN(9), 13333, 0.7);\n}\n\nvoid solve() {\n  test<int32_t,\
+    \ int64_t>();\n  test<int64_t, int64_t>();\n  test<uint32_t, int64_t>();\n  test<uint64_t,\
+    \ int64_t>();\n  test<uint64_t, uint64_t>();\n  test<uint64_t, vector<int> >();\n\
+    \n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../competitive-template.hpp\"\n#include \"../../data-structure/radix-heap.hpp\"\
+    \n#include \"../../misc/rng.hpp\"\n\ntemplate <typename Key, typename Val>\nvoid\
+    \ test() {\n  auto t = [](Key mx, Key d, double ratio) {\n    RadixHeap<Key, Val>\
+    \ q1;\n    map<Key, Val> q2;\n    Key i = 0;\n    while (i < mx) {\n      assert(q1.empty()\
+    \ == q2.empty());\n      assert(q1.size() == (int)q2.size());\n      if (q1.empty()\
+    \ or random() < ratio) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n   \
+    \     Val j{rng()};\n#pragma GCC diagnostic warning \"-Wnarrowing\"\n        q1.push(i,\
+    \ j);\n        q2.emplace(i, j);\n        i += d;\n      } else {\n        auto\
+    \ t1 = q1.pop();\n        decltype(t1) t2 = *begin(q2);\n        assert(t1 ==\
+    \ t2);\n        q2.erase(begin(q2));\n      }\n    }\n    while (q1.size() !=\
+    \ 0) {\n      auto t1 = q1.pop();\n      decltype(t1) t2 = *begin(q2);\n     \
+    \ assert(t1 == t2);\n      q2.erase(begin(q2));\n    }\n  };\n  t(10, 1, 0.5);\n\
+    \  t(10, 1, 0.7);\n  t(10, 1, 0.9);\n  t(1000, 1, 0.5);\n  t(1000, 1, 0.7);\n\
+    \  t(1000, 1, 0.9);\n  t(TEN(8), 334, 0.5);\n  t(TEN(8), 1333, 0.9);\n  t(TEN(9),\
+    \ 13333, 0.7);\n}\n\nvoid solve() {\n  test<int32_t, int64_t>();\n  test<int64_t,\
+    \ int64_t>();\n  test<uint32_t, int64_t>();\n  test<uint64_t, int64_t>();\n  test<uint64_t,\
+    \ uint64_t>();\n  test<uint64_t, vector<int> >();\n\n  int a, b;\n  cin >> a >>\
+    \ b;\n  cout << (a + b) << endl;\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - modulo/mod-sqrt.hpp
-  - modint/arbitrary-prime-modint.hpp
+  - data-structure/radix-heap.hpp
+  - misc/rng.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+  path: verify/verify-unit-test/radix-heap.test.cpp
   requiredBy: []
-  timestamp: '2020-09-10 23:36:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-24 21:21:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+documentation_of: verify/verify-unit-test/radix-heap.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+- /verify/verify/verify-unit-test/radix-heap.test.cpp
+- /verify/verify/verify-unit-test/radix-heap.test.cpp.html
+title: verify/verify-unit-test/radix-heap.test.cpp
 ---

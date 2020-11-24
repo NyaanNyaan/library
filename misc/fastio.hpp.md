@@ -75,7 +75,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
     title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
@@ -106,7 +106,7 @@ data:
     path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -176,7 +176,7 @@ data:
   path: misc/fastio.hpp
   requiredBy: []
   timestamp: '2020-09-15 23:09:15+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
