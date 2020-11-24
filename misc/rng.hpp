@@ -4,17 +4,15 @@ using namespace std;
 
 namespace my_rand {
 
+// [0, 2^64 - 1)
 uint64_t rng() {
-#ifdef NyaanDebug
   static uint64_t x_ =
-      chrono::duration_cast<chrono::nanoseconds>(
-          chrono::high_resolution_clock::now().time_since_epoch())
-          .count();
-#else
-  static uint64_t x_ = 88172645463325252ULL;
-#endif
-  x_ = x_ ^ (x_ << 7);
-  return x_ = x_ ^ (x_ >> 9);
+      uint64_t(chrono::duration_cast<chrono::nanoseconds>(
+                   chrono::high_resolution_clock::now().time_since_epoch())
+                   .count()) *
+      10150724397891781847ULL;
+  x_ ^= x_ << 7;
+  return x_ ^= x_ >> 9;
 }
 
 // [l, r)
@@ -23,7 +21,7 @@ int64_t randint(int64_t l, int64_t r) {
   return l + rng() % (r - l);
 }
 
-//
+// choose n numbers from [l, r) without overlapping
 vector<int64_t> randset(int64_t l, int64_t r, int64_t n) {
   assert(l <= r && n <= r - l);
   unordered_set<int64_t> s;
@@ -37,8 +35,20 @@ vector<int64_t> randset(int64_t l, int64_t r, int64_t n) {
   return ret;
 }
 
+// [0.0, 1.0)
+double random() {
+  union raw_cast {
+    double t;
+    uint64_t u;
+  };
+  double r(rng());
+  ((raw_cast*)(&r))->u -= 1ull << 58;
+  return r;
+}
+
 }  // namespace my_rand
 
 using my_rand::randint;
+using my_rand::random;
 using my_rand::randset;
 using my_rand::rng;
