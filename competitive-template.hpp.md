@@ -64,6 +64,12 @@ data:
     path: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
   - icon: ':heavy_check_mark:'
@@ -731,6 +737,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
@@ -740,6 +747,7 @@ data:
   - verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
   - verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp

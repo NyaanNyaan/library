@@ -12,12 +12,12 @@ data:
     _deprecated_at_docs: docs/balanced-binary-search-tree/rbst-ordered-map.md
     document_title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
     links: []
-  bundledCode: "#line 2 \"balanced-binary-search-tree/rbst-ordered-map.hpp\"\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"misc/vector-pool.hpp\"\n\
-    using namespace std;\n\ntemplate <typename T,typename ptr_t = int>\nstruct VectorPool\
-    \ {\n  vector<T> pool;\n  vector<ptr_t> st;\n  int idx;\n  int cap;\n\n  // pool[0]\
-    \ is missing number (assuming nil)\n  VectorPool(int s = 4) : pool(s), st(), idx(1),\
-    \ cap(s) { assert(s > 0); }\n\n  inline T& operator[](ptr_t i) { return pool[int(i)];\
+  bundledCode: "#line 2 \"orderedmap/rbst-ordered-map.hpp\"\n#include <bits/stdc++.h>\n\
+    using namespace std;\n\n#line 3 \"misc/vector-pool.hpp\"\nusing namespace std;\n\
+    \ntemplate <typename T,typename ptr_t = int>\nstruct VectorPool {\n  vector<T>\
+    \ pool;\n  vector<ptr_t> st;\n  int idx;\n  int cap;\n\n  // pool[0] is missing\
+    \ number (assuming nil)\n  VectorPool(int s = 4) : pool(s), st(), idx(1), cap(s)\
+    \ { assert(s > 0); }\n\n  inline T& operator[](ptr_t i) { return pool[int(i)];\
     \ }\n\n  void reallocate() {\n    assert(idx == cap && st.size() == 0);\n    cap\
     \ *= 2;\n    pool.resize(cap, T());\n  }\n\n  ptr_t alloc() {\n    if (idx !=\
     \ cap) return ptr_t(idx++);\n    if (st.empty()) {\n      reallocate();\n    \
@@ -25,7 +25,7 @@ data:
     \    return ret;\n  }\n\n  template <typename... Args>\n  ptr_t my_new(Args...\
     \ args) {\n    ptr_t ret = alloc();\n    pool[int(ret)] = T(args...);\n    return\
     \ ret;\n  }\n\n  void free(ptr_t i) { st.push_back(i); }\n\n  void clear() {\n\
-    \    idx = 1;\n    st.clear();\n  }\n};\n#line 6 \"balanced-binary-search-tree/rbst-ordered-map.hpp\"\
+    \    idx = 1;\n    st.clear();\n  }\n};\n#line 6 \"orderedmap/rbst-ordered-map.hpp\"\
     \n\ntemplate <typename Key, typename Val>\nstruct OrderedMap {\n private:\n  uint64_t\
     \ rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n    x_ = x_ ^ (x_ <<\
     \ 7);\n    x_ = x_ ^ (x_ >> 9);\n    return x_ & 0xFFFFFFFFull;\n  }\n\n  struct\
@@ -275,16 +275,16 @@ data:
   dependsOn:
   - misc/vector-pool.hpp
   isVerificationFile: false
-  path: balanced-binary-search-tree/rbst-ordered-map.hpp
+  path: orderedmap/rbst-ordered-map.hpp
   requiredBy: []
-  timestamp: '2020-10-29 19:42:19+09:00'
+  timestamp: '2020-11-24 21:53:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: balanced-binary-search-tree/rbst-ordered-map.hpp
+documentation_of: orderedmap/rbst-ordered-map.hpp
 layout: document
 redirect_from:
-- /library/balanced-binary-search-tree/rbst-ordered-map.hpp
-- /library/balanced-binary-search-tree/rbst-ordered-map.hpp.html
+- /library/orderedmap/rbst-ordered-map.hpp
+- /library/orderedmap/rbst-ordered-map.hpp.html
 title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
 ---
 ## OrderedMap(順序付き連想配列)

@@ -38,7 +38,7 @@ data:
   - icon: ':warning:'
     path: shortest-path/bfs01.hpp
     title: shortest-path/bfs01.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
     title: shortest-path/dijkstra-radix-heap.hpp
   - icon: ':heavy_check_mark:'
@@ -72,6 +72,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
@@ -252,6 +255,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp

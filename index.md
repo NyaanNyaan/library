@@ -1,17 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: balanced-binary-search-tree
-    pages:
-    - icon: ':warning:'
-      path: balanced-binary-search-tree/randomized-binary-search-tree.hpp
-      title: balanced-binary-search-tree/randomized-binary-search-tree.hpp
-    - icon: ':warning:'
-      path: balanced-binary-search-tree/rbst-ordered-map.hpp
-      title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
-    - icon: ':warning:'
-      path: balanced-binary-search-tree/rbst-ordered-set.hpp
-      title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: .
     pages:
     - icon: ':question:'
@@ -43,9 +32,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/persistent-union-find.hpp
       title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
-    - icon: ':x:'
+    - icon: ':question:'
       path: data-structure/radix-heap.hpp
-      title: data-structure/radix-heap.hpp
+      title: Radix Heap
     - icon: ':heavy_check_mark:'
       path: data-structure/range-sum-range-add-bit.hpp
       title: data-structure/range-sum-range-add-bit.hpp
@@ -400,6 +389,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/ntt.hpp
       title: ntt/ntt.hpp
+  - name: orderedmap
+    pages:
+    - icon: ':warning:'
+      path: orderedmap/randomized-binary-search-tree.hpp
+      title: orderedmap/randomized-binary-search-tree.hpp
+    - icon: ':warning:'
+      path: orderedmap/rbst-ordered-map.hpp
+      title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
+    - icon: ':warning:'
+      path: orderedmap/rbst-ordered-set.hpp
+      title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: prime
     pages:
     - icon: ':x:'
@@ -466,10 +466,11 @@ data:
     - icon: ':warning:'
       path: shortest-path/bfs01.hpp
       title: shortest-path/bfs01.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra-fast.hpp
-      title: shortest-path/dijkstra-fast.hpp
-    - icon: ':warning:'
+      title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\
+        \u5316)"
+    - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra-radix-heap.hpp
       title: shortest-path/dijkstra-radix-heap.hpp
     - icon: ':heavy_check_mark:'
@@ -597,6 +598,12 @@ data:
       title: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
   - name: verify/verify-aoj-grl
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+      title: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp

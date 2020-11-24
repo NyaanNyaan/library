@@ -156,7 +156,7 @@ redirect_from:
 - /library/hashmap/hashmap.hpp.html
 title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
 ---
-## HashSet(集合)
+## HashMap(連想配列)
 
 ## 概要
 

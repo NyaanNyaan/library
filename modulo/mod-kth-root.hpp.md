@@ -112,43 +112,43 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
     \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
     \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
-    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble random() {\n\
-    \  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double r(rng());\n\
-    \  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::random;\nusing my_rand::randset;\nusing\
-    \ my_rand::rng;\n#line 9 \"prime/fast-factorize.hpp\"\n\nnamespace fast_factorize\
-    \ {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\nbool miller_rabin(u64\
-    \ n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n  u64 d\
-    \ = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n  for\
-    \ (u64 a : as) {\n    if (n <= a) break;\n    u64 t = d;\n    mint y = mint(a).pow(t);\n\
-    \    while (t != n - 1 && y != e && y != rev) {\n      y *= y;\n      t *= 2;\n\
-    \    }\n    if (y != rev && t % 2 == 0) return false;\n  }\n  return true;\n}\n\
-    \nbool is_prime(u64 n) {\n  if (~n & 1) return n == 2;\n  if (n <= 1) return false;\n\
-    \  if (n < (1LL << 30))\n    return miller_rabin<ArbitraryLazyMontgomeryModInt>(n,\
-    \ {2, 7, 61});\n  else\n    return miller_rabin<montgomery64>(\n        n, {2,\
-    \ 325, 9375, 28178, 450775, 9780504, 1795265022});\n}\n\ntemplate <typename mint,\
-    \ typename T>\nT pollard_rho(T n) {\n  if (~n & 1) return 2;\n  if (is_prime(n))\
-    \ return n;\n  if (mint::get_mod() != n) mint::set_mod(n);\n  mint R, one = 1;\n\
-    \  auto f = [&](mint x) { return x * x + R; };\n  auto rnd = [&]() { return rng()\
-    \ % (n - 2) + 2; };\n  while (1) {\n    mint x, y, ys, q = one;\n    R = rnd(),\
-    \ y = rnd();\n    T g = 1;\n    constexpr int m = 128;\n    for (int r = 1; g\
-    \ == 1; r <<= 1) {\n      x = y;\n      for (int i = 0; i < r; ++i) y = f(y);\n\
-    \      for (int k = 0; g == 1 && k < r; k += m) {\n        ys = y;\n        for\
-    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = inner::gcd<T>(q.get(),\
-    \ n);\n      }\n    }\n    if (g == n) do\n        g = inner::gcd<T>((x - (ys\
-    \ = f(ys))).get(), n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n\
-    \  exit(1);\n}\n\nvector<u64> inner_factorize(u64 n) {\n  if (n <= 1) return {};\n\
-    \  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
-    \ uint32_t>(n);\n  else\n    p = pollard_rho<montgomery64, uint64_t>(n);\n  if\
-    \ (p == n) return {p};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
-    \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<u64>\
-    \ factorize(u64 n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n\
-    \  return ret;\n}\n\nusing i64 = int64_t;\n\nmap<u64, i64> factor_count(u64 n)\
-    \ {\n  map<u64, i64> mp;\n  for (auto &x : factorize(n)) mp[x]++;\n  return mp;\n\
-    }\n\nvector<u64> divisors(u64 n) {\n  if (n == 0) return {};\n  vector<pair<u64,\
-    \ i64>> v;\n  for (auto &p : factor_count(n)) v.push_back(p);\n  vector<u64> ret;\n\
-    \  auto f = [&](auto rec, int i, u64 x) -> void {\n    if (i == (int)v.size())\
-    \ {\n      ret.push_back(x);\n      return;\n    }\n    for (int j = v[i].second;;\
+    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
+    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double r(rng());\n  ((raw_cast*)(&r))->u\
+    \ -= 1ull << 58;\n  return r;\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::random;\nusing my_rand::randset;\nusing my_rand::rng;\n#line 9\
+    \ \"prime/fast-factorize.hpp\"\n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\
+    \ntemplate <typename mint>\nbool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod()\
+    \ != n) mint::set_mod(n);\n  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint\
+    \ e{1}, rev{int64_t(n - 1)};\n  for (u64 a : as) {\n    if (n <= a) break;\n \
+    \   u64 t = d;\n    mint y = mint(a).pow(t);\n    while (t != n - 1 && y != e\
+    \ && y != rev) {\n      y *= y;\n      t *= 2;\n    }\n    if (y != rev && t %\
+    \ 2 == 0) return false;\n  }\n  return true;\n}\n\nbool is_prime(u64 n) {\n  if\
+    \ (~n & 1) return n == 2;\n  if (n <= 1) return false;\n  if (n < (1LL << 30))\n\
+    \    return miller_rabin<ArbitraryLazyMontgomeryModInt>(n, {2, 7, 61});\n  else\n\
+    \    return miller_rabin<montgomery64>(\n        n, {2, 325, 9375, 28178, 450775,\
+    \ 9780504, 1795265022});\n}\n\ntemplate <typename mint, typename T>\nT pollard_rho(T\
+    \ n) {\n  if (~n & 1) return 2;\n  if (is_prime(n)) return n;\n  if (mint::get_mod()\
+    \ != n) mint::set_mod(n);\n  mint R, one = 1;\n  auto f = [&](mint x) { return\
+    \ x * x + R; };\n  auto rnd_ = [&]() { return rng() % (n - 2) + 2; };\n  while\
+    \ (1) {\n    mint x, y, ys, q = one;\n    R = rnd_(), y = rnd_();\n    T g = 1;\n\
+    \    constexpr int m = 128;\n    for (int r = 1; g == 1; r <<= 1) {\n      x =\
+    \ y;\n      for (int i = 0; i < r; ++i) y = f(y);\n      for (int k = 0; g ==\
+    \ 1 && k < r; k += m) {\n        ys = y;\n        for (int i = 0; i < m && i <\
+    \ r - k; ++i) q *= x - (y = f(y));\n        g = inner::gcd<T>(q.get(), n);\n \
+    \     }\n    }\n    if (g == n) do\n        g = inner::gcd<T>((x - (ys = f(ys))).get(),\
+    \ n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n  exit(1);\n}\n\n\
+    vector<u64> inner_factorize(u64 n) {\n  if (n <= 1) return {};\n  u64 p;\n  if\
+    \ (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt, uint32_t>(n);\n\
+    \  else\n    p = pollard_rho<montgomery64, uint64_t>(n);\n  if (p == n) return\
+    \ {p};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n / p);\n \
+    \ copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<u64> factorize(u64\
+    \ n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n  return\
+    \ ret;\n}\n\nusing i64 = int64_t;\n\nmap<u64, i64> factor_count(u64 n) {\n  map<u64,\
+    \ i64> mp;\n  for (auto &x : factorize(n)) mp[x]++;\n  return mp;\n}\n\nvector<u64>\
+    \ divisors(u64 n) {\n  if (n == 0) return {};\n  vector<pair<u64, i64>> v;\n \
+    \ for (auto &p : factor_count(n)) v.push_back(p);\n  vector<u64> ret;\n  auto\
+    \ f = [&](auto rec, int i, u64 x) -> void {\n    if (i == (int)v.size()) {\n \
+    \     ret.push_back(x);\n      return;\n    }\n    for (int j = v[i].second;;\
     \ --j) {\n      rec(rec, i + 1, x);\n      if (j == 0) break;\n      x *= v[i].first;\n\
     \    }\n  };\n  f(f, 0, 1);\n  sort(begin(ret), end(ret));\n  return ret;\n}\n\
     \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
@@ -257,7 +257,7 @@ data:
   isVerificationFile: false
   path: modulo/mod-kth-root.hpp
   requiredBy: []
-  timestamp: '2020-11-24 21:21:12+09:00'
+  timestamp: '2020-11-24 21:53:28+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp

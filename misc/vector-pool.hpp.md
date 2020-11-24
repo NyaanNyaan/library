@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: balanced-binary-search-tree/rbst-ordered-map.hpp
+    path: orderedmap/rbst-ordered-map.hpp
     title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
   _extendedVerifiedWith: []
   _pathExtension: hpp
@@ -40,7 +40,7 @@ data:
   isVerificationFile: false
   path: misc/vector-pool.hpp
   requiredBy:
-  - balanced-binary-search-tree/rbst-ordered-map.hpp
+  - orderedmap/rbst-ordered-map.hpp
   timestamp: '2020-10-16 20:19:19+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

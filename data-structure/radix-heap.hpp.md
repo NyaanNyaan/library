@@ -2,19 +2,28 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-fast.hpp
-    title: shortest-path/dijkstra-fast.hpp
-  - icon: ':warning:'
+    title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\
+      \u5316)"
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
     title: shortest-path/dijkstra-radix-heap.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   - icon: ':x:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
+    _deprecated_at_docs: docs/data-structure/radix-heap.md
+    document_title: Radix Heap
     links: []
   bundledCode: "#line 2 \"data-structure/radix-heap.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename Key, typename Val>\nstruct RadixHeap\
@@ -31,7 +40,8 @@ data:
     \ {\n        uint64_t b = getbit(p.first ^ last);\n        vs[b].emplace_back(p);\n\
     \        ms[b] = min(p.first, ms[b]);\n      }\n      vs[idx].clear();\n     \
     \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
-    \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n"
+    \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n\n/**\n *\
+    \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename Key, typename Val>\nstruct RadixHeap {\n  using uint = typename make_unsigned<Key>::type;\n\
     \  static constexpr int bit = sizeof(Key) * 8;\n  array<vector<pair<uint, Val>\
@@ -47,21 +57,37 @@ data:
     \        vs[b].emplace_back(p);\n        ms[b] = min(p.first, ms[b]);\n      }\n\
     \      vs[idx].clear();\n      ms[idx] = uint(-1);\n    }\n    --s;\n    auto\
     \ res = vs[0].back();\n    vs[0].pop_back();\n    if (vs[0].empty()) ms[0] = uint(-1);\n\
-    \    return res;\n  }\n};"
+    \    return res;\n  }\n};\n\n/**\n * @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n\
+    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/radix-heap.hpp
   requiredBy:
   - shortest-path/dijkstra-fast.hpp
   - shortest-path/dijkstra-radix-heap.hpp
-  timestamp: '2020-11-24 21:21:12+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-11-24 21:53:28+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
 documentation_of: data-structure/radix-heap.hpp
 layout: document
 redirect_from:
 - /library/data-structure/radix-heap.hpp
 - /library/data-structure/radix-heap.hpp.html
-title: data-structure/radix-heap.hpp
+title: Radix Heap
 ---
+## Radix Heap
+
+#### 概要
+
+Radix Heap(基数ヒープ)とは、単調順位ヒープ(追加した値が最後に取り出した値より大きい必要があるヒープ)の一種である。`std::priority_queue`と比べて定数倍が軽いことからDijkstra法に用いて定数倍高速化に使用される。
+
+#### 使い方
+
+- `RadixHeap<Key, Val>()`: コンストラクタ。`Key`は整数型のみを取る。
+- `push(Key, Val)`: ヒープにpushする。
+- `pop()`: ヒープの要素のうち最小のものをpopして返す。
+- `size()`: ヒープ内の要素数を返す。
+- `empty()`: ヒープが空かどうかを返す。

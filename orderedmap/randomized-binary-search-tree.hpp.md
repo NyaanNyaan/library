@@ -3,17 +3,17 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: balanced-binary-search-tree/rbst-ordered-set.hpp
+    path: orderedmap/rbst-ordered-set.hpp
     title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"balanced-binary-search-tree/randomized-binary-search-tree.hpp\"\
-    \n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename\
-    \ F>\nstruct RandomizedBinarySearchTree {\n  uint64_t rng() {\n    static uint64_t\
-    \ x_ = 88172645463325252ULL;\n    x_ = x_ ^ (x_ << 7);\n    x_ = x_ ^ (x_ >> 9);\n\
+  bundledCode: "#line 2 \"orderedmap/randomized-binary-search-tree.hpp\"\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename F>\n\
+    struct RandomizedBinarySearchTree {\n  uint64_t rng() {\n    static uint64_t x_\
+    \ = 88172645463325252ULL;\n    x_ = x_ ^ (x_ << 7);\n    x_ = x_ ^ (x_ >> 9);\n\
     \    return x_ & 0xFFFFFFFFull;\n  }\n\n  struct Node {\n    Node *l, *r;\n  \
     \  T key, sum;\n    int cnt;\n\n    Node() {}\n\n    Node(const T &k) : l(nullptr),\
     \ r(nullptr), key(k), sum(k), cnt(1) {}\n  };\n\n  vector<Node> pool;\n  int ptr;\n\
@@ -74,16 +74,16 @@ data:
     \ { return nullptr; }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: balanced-binary-search-tree/randomized-binary-search-tree.hpp
+  path: orderedmap/randomized-binary-search-tree.hpp
   requiredBy:
-  - balanced-binary-search-tree/rbst-ordered-set.hpp
-  timestamp: '2020-10-11 13:18:57+09:00'
+  - orderedmap/rbst-ordered-set.hpp
+  timestamp: '2020-11-24 21:53:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: balanced-binary-search-tree/randomized-binary-search-tree.hpp
+documentation_of: orderedmap/randomized-binary-search-tree.hpp
 layout: document
 redirect_from:
-- /library/balanced-binary-search-tree/randomized-binary-search-tree.hpp
-- /library/balanced-binary-search-tree/randomized-binary-search-tree.hpp.html
-title: balanced-binary-search-tree/randomized-binary-search-tree.hpp
+- /library/orderedmap/randomized-binary-search-tree.hpp
+- /library/orderedmap/randomized-binary-search-tree.hpp.html
+title: orderedmap/randomized-binary-search-tree.hpp
 ---

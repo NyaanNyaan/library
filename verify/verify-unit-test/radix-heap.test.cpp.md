@@ -4,9 +4,9 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: data-structure/radix-heap.hpp
-    title: data-structure/radix-heap.hpp
+    title: Radix Heap
   - icon: ':x:'
     path: misc/rng.hpp
     title: misc/rng.hpp
@@ -133,9 +133,10 @@ data:
     \ {\n        uint64_t b = getbit(p.first ^ last);\n        vs[b].emplace_back(p);\n\
     \        ms[b] = min(p.first, ms[b]);\n      }\n      vs[idx].clear();\n     \
     \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
-    \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n#line 3 \"\
-    misc/rng.hpp\"\nusing namespace std;\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\n\
-    uint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n\n/**\n *\
+    \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n#line 3\
+    \ \"misc/rng.hpp\"\nusing namespace std;\n\nnamespace my_rand {\n\n// [0, 2^64\
+    \ - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
     \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
     \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
@@ -145,11 +146,11 @@ data:
     \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
     \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
     \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double random() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n\
-    \  double r(rng());\n  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n\
-    }  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::random;\nusing\
-    \ my_rand::randset;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\
-    \n\ntemplate <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx,\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double\
+    \ r(rng());\n  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::random;\nusing my_rand::randset;\n\
+    using my_rand::rng;\n#line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\n\
+    \ntemplate <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx,\
     \ Key d, double ratio) {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n\
     \    Key i = 0;\n    while (i < mx) {\n      assert(q1.empty() == q2.empty());\n\
     \      assert(q1.size() == (int)q2.size());\n      if (q1.empty() or random()\
@@ -191,7 +192,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/radix-heap.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 21:21:12+09:00'
+  timestamp: '2020-11-24 21:53:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-unit-test/radix-heap.test.cpp

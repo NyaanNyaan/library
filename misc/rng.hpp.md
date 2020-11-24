@@ -43,10 +43,10 @@ data:
     \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
     \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
     \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double random() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n\
-    \  double r(rng());\n  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n\
-    }  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::random;\nusing\
-    \ my_rand::randset;\nusing my_rand::rng;\n"
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double\
+    \ r(rng());\n  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::random;\nusing my_rand::randset;\n\
+    using my_rand::rng;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\nnamespace\
     \ my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n  \
     \    uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n                  \
@@ -58,11 +58,10 @@ data:
     \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
     \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
     \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
-    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble random() {\n\
-    \  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double r(rng());\n\
-    \  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::random;\nusing my_rand::randset;\nusing\
-    \ my_rand::rng;\n"
+    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
+    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double r(rng());\n  ((raw_cast*)(&r))->u\
+    \ -= 1ull << 58;\n  return r;\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::random;\nusing my_rand::randset;\nusing my_rand::rng;\n"
   dependsOn: []
   isVerificationFile: false
   path: misc/rng.hpp
@@ -70,7 +69,7 @@ data:
   - prime/fast-factorize.hpp
   - modulo/mod-kth-root.hpp
   - misc/simulated-annealing.hpp
-  timestamp: '2020-11-24 21:21:12+09:00'
+  timestamp: '2020-11-24 21:53:28+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp

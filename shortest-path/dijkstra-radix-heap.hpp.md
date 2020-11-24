@@ -1,16 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: data-structure/radix-heap.hpp
-    title: data-structure/radix-heap.hpp
+    title: Radix Heap
   - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+    title: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"shortest-path/dijkstra-radix-heap.hpp\"\n#include <bits/stdc++.h>\n\
@@ -57,14 +60,15 @@ data:
     \        vs[b].emplace_back(p);\n        ms[b] = min(p.first, ms[b]);\n      }\n\
     \      vs[idx].clear();\n      ms[idx] = uint(-1);\n    }\n    --s;\n    auto\
     \ res = vs[0].back();\n    vs[0].pop_back();\n    if (vs[0].empty()) ms[0] = uint(-1);\n\
-    \    return res;\n  }\n};\n#line 7 \"shortest-path/dijkstra-radix-heap.hpp\"\n\
-    \n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra_radix_heap(WeightedGraph<T>\
-    \ &g, int start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n \
-    \ RadixHeap<T, int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty())\
-    \ {\n    auto p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first))\
-    \ continue;\n    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) or d[cur]\
-    \ + dst.cost < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst],\
-    \ dst);\n      }\n    }\n  }\n  return d;\n}\n"
+    \    return res;\n  }\n};\n\n/**\n * @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n\
+    \ */\n#line 7 \"shortest-path/dijkstra-radix-heap.hpp\"\n\n// unreachable -> -1\n\
+    template <typename T>\nvector<T> dijkstra_radix_heap(WeightedGraph<T> &g, int\
+    \ start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  RadixHeap<T,\
+    \ int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto\
+    \ p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first)) continue;\n\
+    \    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) or d[cur] + dst.cost\
+    \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst], dst);\n\
+    \      }\n    }\n  }\n  return d;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../graph/graph-template.hpp\"\n#include \"../data-structure/radix-heap.hpp\"\
     \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra_radix_heap(WeightedGraph<T>\
@@ -80,9 +84,10 @@ data:
   isVerificationFile: false
   path: shortest-path/dijkstra-radix-heap.hpp
   requiredBy: []
-  timestamp: '2020-11-24 21:21:12+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2020-11-24 21:53:28+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
 documentation_of: shortest-path/dijkstra-radix-heap.hpp
 layout: document
 redirect_from:

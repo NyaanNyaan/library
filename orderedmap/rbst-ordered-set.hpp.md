@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':warning:'
-    path: balanced-binary-search-tree/randomized-binary-search-tree.hpp
-    title: balanced-binary-search-tree/randomized-binary-search-tree.hpp
+    path: orderedmap/randomized-binary-search-tree.hpp
+    title: orderedmap/randomized-binary-search-tree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: hpp
@@ -12,10 +12,10 @@ data:
     _deprecated_at_docs: docs/balanced-binary-search-tree/rbst-ordered-set.md
     document_title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
     links: []
-  bundledCode: "#line 2 \"balanced-binary-search-tree/randomized-binary-search-tree.hpp\"\
-    \n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename\
-    \ F>\nstruct RandomizedBinarySearchTree {\n  uint64_t rng() {\n    static uint64_t\
-    \ x_ = 88172645463325252ULL;\n    x_ = x_ ^ (x_ << 7);\n    x_ = x_ ^ (x_ >> 9);\n\
+  bundledCode: "#line 2 \"orderedmap/randomized-binary-search-tree.hpp\"\n#include\
+    \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T, typename F>\n\
+    struct RandomizedBinarySearchTree {\n  uint64_t rng() {\n    static uint64_t x_\
+    \ = 88172645463325252ULL;\n    x_ = x_ ^ (x_ << 7);\n    x_ = x_ ^ (x_ >> 9);\n\
     \    return x_ & 0xFFFFFFFFull;\n  }\n\n  struct Node {\n    Node *l, *r;\n  \
     \  T key, sum;\n    int cnt;\n\n    Node() {}\n\n    Node(const T &k) : l(nullptr),\
     \ r(nullptr), key(k), sum(k), cnt(1) {}\n  };\n\n  vector<Node> pool;\n  int ptr;\n\
@@ -43,14 +43,14 @@ data:
     \ a);\n    auto y = split(x.second, b - a);\n    auto ret = sum(y.first);\n  \
     \  t = merge(x.first, merge(y.first, y.second));\n    return ret;\n  }\n\n  int\
     \ size(Node *t) { return count(t); }\n\n  Node *make() { return nullptr; }\n};\n\
-    #line 3 \"balanced-binary-search-tree/rbst-ordered-set.hpp\"\n\ntemplate <typename\
-    \ T, int S = 2000000, bool MULTI = false>\nstruct OrderedSet {\n  using F = function<T(T,\
-    \ T)>;\n  using RBST = RandomizedBinarySearchTree<T, F>;\n  using Node = typename\
-    \ RBST::Node;\n\n  static RBST* rbst;\n  Node* t;\n\n  OrderedSet() {\n    if\
-    \ (!rbst) rbst = new RBST([](T, T) { return T(); }, T(), S);\n    t = rbst->make();\n\
-    \  }\n\n  T kth_element(int k) {\n    Node* p = t;\n    int l;\n    while (k !=\
-    \ (l = rbst->count(p->l))) {\n      if (k < l) {\n        p = p->l;\n      } else\
-    \ {\n        p = p->r;\n        k -= l + 1;\n      }\n    }\n    return p->key;\n\
+    #line 3 \"orderedmap/rbst-ordered-set.hpp\"\n\ntemplate <typename T, int S = 2000000,\
+    \ bool MULTI = false>\nstruct OrderedSet {\n  using F = function<T(T, T)>;\n \
+    \ using RBST = RandomizedBinarySearchTree<T, F>;\n  using Node = typename RBST::Node;\n\
+    \n  static RBST* rbst;\n  Node* t;\n\n  OrderedSet() {\n    if (!rbst) rbst =\
+    \ new RBST([](T, T) { return T(); }, T(), S);\n    t = rbst->make();\n  }\n\n\
+    \  T kth_element(int k) {\n    Node* p = t;\n    int l;\n    while (k != (l =\
+    \ rbst->count(p->l))) {\n      if (k < l) {\n        p = p->l;\n      } else {\n\
+    \        p = p->r;\n        k -= l + 1;\n      }\n    }\n    return p->key;\n\
     \  }\n\n  void insert(const T& x) {\n    int l = lower_bound(x);\n    int r =\
     \ upper_bound(x);\n    if (!MULTI and l != r) return;\n    rbst->insert(t, l,\
     \ x);\n  }\n\n  void erase(const T& x) {\n    int l = lower_bound(x);\n    int\
@@ -116,18 +116,18 @@ data:
     \ OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)\n *  @docs docs/balanced-binary-search-tree/rbst-ordered-set.md\n\
     \ */ \n"
   dependsOn:
-  - balanced-binary-search-tree/randomized-binary-search-tree.hpp
+  - orderedmap/randomized-binary-search-tree.hpp
   isVerificationFile: false
-  path: balanced-binary-search-tree/rbst-ordered-set.hpp
+  path: orderedmap/rbst-ordered-set.hpp
   requiredBy: []
-  timestamp: '2020-10-29 19:42:19+09:00'
+  timestamp: '2020-11-24 21:53:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: balanced-binary-search-tree/rbst-ordered-set.hpp
+documentation_of: orderedmap/rbst-ordered-set.hpp
 layout: document
 redirect_from:
-- /library/balanced-binary-search-tree/rbst-ordered-set.hpp
-- /library/balanced-binary-search-tree/rbst-ordered-set.hpp.html
+- /library/orderedmap/rbst-ordered-set.hpp
+- /library/orderedmap/rbst-ordered-set.hpp.html
 title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
 ---
 ## OrderedMap(順序付き集合)
