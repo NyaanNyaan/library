@@ -19,7 +19,9 @@
       "#include \"modulo/binomial.hpp\"",
       "#include \"fps/ntt-friendly-fps.hpp\"",
       "using mint = LazyMontgomeryModInt<998244353>;",
-      "Binomial<mint> C(2002002);",
+      "Binomial<mint> C;",
+      "using vm = vector<mint>;",
+      "using vvm = vector<vm>;",
       "using fps = FormalPowerSeries<mint>;"
     ],
     "description": "fps"
@@ -130,21 +132,6 @@
       ""
     ],
     "description": "Square_Decomposition"
-  },
-  "template": {
-    "prefix": "_tmp",
-    "body": [
-      "#include \"competitive-template.hpp\"",
-      "#include \"graph/graph-template.hpp\"",
-      "#include \"modint/montgomery-modint.hpp\"",
-      "template<uint32_t MOD>",
-      "using Mint = LazyMontgomeryModInt<MOD>;",
-      "",
-      "void solve() {",
-      "  ",
-      "}"
-    ],
-    "description": "template"
   },
   "_mint": {
     "prefix": "_mint",

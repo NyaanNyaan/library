@@ -7,8 +7,8 @@ struct edge {
   int src, to;
   T cost;
 
-  edge(int to, T cost) : src(-1), to(to), cost(cost) {}
-  edge(int src, int to, T cost) : src(src), to(to), cost(cost) {}
+  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}
+  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}
 
   edge &operator=(const int &x) {
     to = x;

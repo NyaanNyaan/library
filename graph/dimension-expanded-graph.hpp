@@ -4,119 +4,187 @@ using namespace std;
 
 #include "./graph-template.hpp"
 
-template <int64_t DIM>
+template <int DIM, typename Data_t = long long>
 struct DimensionExpandedGraph {
-  using i64 = long long;
-  using A = array<i64, DIM>;
+  static_assert(is_signed<Data_t>::value, "Data_t must be signed.");
+  using DG = DimensionExpandedGraph;
 
-  i64 N;
-  A g_size, coeff;
+  struct A : array<int, DIM> {
+    using array<int, DIM>::operator[];
+#pragma GCC diagnostic ignored "-Wnarrowing"
+    template <typename... Args>
+    A(Args... args) : array<int, DIM>({args...}) {}
+#pragma GCC diagnostic warning "-Wnarrowing"
 
-  template <typename... T>
-  DimensionExpandedGraph(const T &... t) : N(1), g_size({t...}) {
-    set_coeff();
-  }
-
-  void set_coeff() {
-    coeff.fill(1);
-    for (i64 i = 0; i < DIM; i++) {
-      assert(g_size[i] != 0);
-      for (i64 j = 0; j < i; j++) coeff[j] *= g_size[i];
-      N *= g_size[i];
+    A &operator+=(const A &r) {
+      for (int i = 0; i < DIM; i++) (*this)[i] += r[i];
+      return *this;
     }
-  }
+    A &operator-=(const A &r) {
+      for (int i = 0; i < DIM; i++) (*this)[i] -= r[i];
+      return *this;
+    }
+    A operator+(const A &r) { return (*this) += r; }
+    A operator-(const A &r) { return (*this) -= r; }
 
-  i64 operator()(const A &a) {
-    i64 ret = 0;
-    for (i64 i = 0; i < DIM; i++) {
-      if (a[i] < 0 or g_size[i] <= a[i]) return -1;
+    int id() const { return DG::id(*this); }
+    friend int id(const A &a) { return DG::id(a); }
+
+    bool ok() const { return DG::ok(*this); }
+    friend bool ok(const A &a) { return DG::ok(a); }
+
+    inline bool is_add() const { return (*this)[0] == ADD; }
+    friend inline bool is_add(const A &a) { return a[0] == ADD; }
+
+    vector<A> near() const {
+      static vector<A> res;
+      res.clear();
+      if (is_add() == true) return res;
+      for (int i = 0; i < DIM; i++) {
+        A asc(*this), dec(*this);
+        asc[i]++;
+        dec[i]--;
+        if (asc[i] != g_size[i]) res.push_back(asc);
+        if (dec[i] != -1) res.push_back(dec);
+      }
+      return res;
+    }
+    friend vector<A> near(const A &a) { return a.near(); }
+  };
+
+  static int N, add_node;
+  static A g_size, coeff;
+  static constexpr int ADD = numeric_limits<int>::min();
+
+  static int id(const A &a) {
+    if (a[0] == ADD) return N + a[1];
+    int ret = 0;
+    for (int i = 0; i < DIM; i++) {
       ret += a[i] * coeff[i];
     }
     return ret;
   }
+  template <typename... T>
+  static int id(const T &... t) {
+    return id(A{t...});
+  }
 
-  A inv(i64 n) {
-    A ret{};
-    for (i64 i = 0; i < DIM; i++) {
-      ret[i] = n / coeff[i];
-      n %= coeff[i];
+  static bool ok(const A &a) {
+    if (a[0] == ADD) {
+      return 0 <= a[1] && a[1] < add_node;
     }
-    return ret;
-  }
-
-  i64 inner_id(i64, i64 n) { return n; }
-  template <typename T, typename... U>
-  i64 inner_id(i64 i, i64 n, T &&t, U &&... u) {
-    if (t < 0 or g_size[i] <= t) return -1;
-    n += coeff[i++] * t;
-    return inner_id(i, n, forward<U>(u)...);
+    for (int i = 0; i < DIM; i++)
+      if (a[i] < 0 or g_size[i] <= a[i]) return false;
+    return true;
   }
   template <typename... T>
-  i64 operator()(const T &... t) {
-    return inner_id(0, 0, t...);
+  static bool ok(const T &... t) {
+    return ok(A{t...});
   }
 
-  i64 ok(const A &a) {
-    for (i64 i = 0; i < DIM; i++)
-      if (a[i] < 0 or g_size[i] <= a[i]) return 0;
-    return 1;
-  }
+  static A ad(int n) { return A{DG::ADD, n}; };
 
-  i64 inner_ok(i64) { return 1; }
-  template <typename T, typename... U>
-  i64 inner_ok(i64 idx, T &&t, U &&... u) {
-    if (t < 0 or g_size[idx++] <= t) return 0;
-    return inner_ok(idx, forward<U>(u)...);
-  }
+  vector<char> grid;
+  vector<Data_t> dat;
+
+  explicit DimensionExpandedGraph() = default;
   template <typename... T>
-  i64 ok(const T &... t) {
-    return inner_ok(0, t...);
+  explicit DimensionExpandedGraph(const T &... t) {
+    set(t...);
   }
 
-  template <typename F>
-  vector<i64> bfs(F f, A s = {}) {
-    vector<i64> dist(N, -1);
-    queue<A> Q;
-    assert((*this)(s) != -1);
-    dist[(*this)(s)] = 0;
-    Q.push(s);
+  template <typename... T>
+  void set(const T &... t) {
+    N = 1;
+    g_size = A{t...};
+    coeff.fill(1);
+    for (int i = 0; i < DIM; i++) {
+      assert(g_size[i] != 0);
+      for (int j = 0; j < i; j++) coeff[j] *= g_size[i];
+      N *= g_size[i];
+    }
+    dat.resize(N + add_node, -1);
+  }
+
+  void add(int n) {
+    add_node = n;
+    dat.resize(N + add_node, -1);
+  }
+
+  void scan(istream &is = std::cin) {
+    grid.reserve(N);
+    int l = g_size[DIM - 1];
+    for (int i = 0; i < N; i += l) {
+      string s;
+      is >> s;
+      copy(begin(s), end(s), back_inserter(grid));
+    }
+  }
+
+  friend istream &operator>>(istream &is, DG &g) {
+    g.scan(is);
+    return is;
+  }
+
+  char &operator()(const A &a) { return grid[id(a)]; }
+  template <typename... T>
+  char &operator()(const T &... t) {
+    return grid[id(t...)];
+  }
+
+  A find(const char &c) {
+    A a{};
+    fill(begin(a), end(a), 0);
+    a[DIM - 1] = -1;
+    while (true) {
+      a[DIM - 1]++;
+      for (int i = DIM - 1;; i--) {
+        if (a[i] != g_size[i]) break;
+        if (i == 0) return a;
+        a[i] = 0;
+        a[i - 1]++;
+      }
+      if ((*this)(a) == c) return a;
+    }
+  }
+
+  template <typename F, typename Dist_t = Data_t>
+  vector<Dist_t> bfs(F f, A s) {
+    vector<Dist_t> dist(N + add_node, -1);
+    if (!ok(s)) return dist;
+    vector<A> Q;
+    dist[id(s)] = 0;
+    Q.push_back(s);
     while (!Q.empty()) {
-      A c = Q.front();
-      Q.pop();
-      i64 idc = (*this)(c);
+      A c = Q.back();
+      Q.pop_back();
+      int dc = dist[id(c)];
       f(c, [&](A d) {
-        i64 idd = (*this)(d);
-        if (idd == -1) return;
-        if (dist[idd] == -1) {
-          dist[idd] = dist[idc] + 1;
-          Q.push(d);
+        if (!ok(d)) return;
+        if (dist[id(d)] == -1) {
+          dist[id(d)] = dc + 1;
+          Q.push_back(d);
         }
       });
     }
     return dist;
   }
 
-  template <typename F>
-  vector<i64> bfs01(F f, A s = {}) {
-    vector<i64> dist(N, -1);
-    vector<bool> vis(N, 0);
+  template <typename F, typename Dist_t = Data_t>
+  vector<Dist_t> bfs01(F f, A s) {
+    vector<Dist_t> dist(N + add_node, -1);
+    if (!ok(s)) return dist;
     deque<A> Q;
-    assert((*this)(s) != -1);
-    dist[(*this)(s)] = 0;
+    dist[id(s)] = 0;
     Q.push_back(s);
     while (!Q.empty()) {
       A c = Q.front();
       Q.pop_front();
-      i64 idc = (*this)(c);
-      if (vis[idc]) continue;
-      vis[idc] = true;
-      i64 dc = dist[idc];
-      f(c, [&](A d, i64 w) {
-        i64 idd = (*this)(d);
-        if (idd == -1) return;
-        i64 dd = dist[idd];
-        if (dd == -1 || dc + w < dd) {
-          dist[idd] = dc + w;
+      int dc = dist[id(c)];
+      f(c, [&](A d, Data_t w) {
+        if (!ok(d)) return;
+        if (dist[id(d)] == -1) {
+          dist[id(d)] = dc + w;
           if (w == 0)
             Q.push_front(d);
           else
@@ -127,25 +195,25 @@ struct DimensionExpandedGraph {
     return dist;
   }
 
-  vector<i64> dijkstra(function<void(A, function<void(A, i64)>)> f, A s = {}) {
-    vector<i64> dist(N, -1);
-    using P = pair<i64, A>;
-    priority_queue<P, vector<P>, greater<P>> Q;
-    assert((*this)(s) != -1);
-    Q.emplace(dist[(*this)(s)] = 0, s);
+  template <typename F, typename Dist_t = Data_t>
+  static vector<Dist_t> dijkstra(F f, A s) {
+    vector<Dist_t> dist(N, -1);
+    using P = pair<Dist_t, A>;
+    auto cmp = [](P &a, P &b) { return a.first > b.first; };
+    priority_queue<P, vector<P>, decltype(cmp)> Q(cmp);
+    assert(id(s) != -1);
+    dist[id(s)] = 0;
+    Q.emplace(0, s);
     while (!Q.empty()) {
-      i64 dc;
+      Dist_t dc;
       A c;
       tie(dc, c) = Q.top();
       Q.pop();
-      i64 idc = (*this)(c);
-      if (dist[idc] < dc) continue;
-      f(c, [&](const A &d, i64 w) {
-        i64 idd = (*this)(d);
-        if (idd == -1) return;
-        i64 dd = dist[idd];
-        if (dd == -1 || dd > dc + w) {
-          dist[idd] = dc + w;
+      if (dist[id(c)] < dc) continue;
+      f(c, [&](A d, Dist_t w) {
+        if (!ok(d)) return;
+        if (dist[id(d)] == -1 || dist[id(d)] > dc + w) {
+          dist[id(d)] = dc + w;
           Q.emplace(dc + w, d);
         }
       });
@@ -153,7 +221,29 @@ struct DimensionExpandedGraph {
     return dist;
   }
 
-  static vector<array<i64, 2>> direction4() {
-    return {{{1, 0}}, {{0, 1}}, {{-1, 0}}, {{0, -1}}};
+  // Union Find
+  int find(A u) {
+    return dat[id(u)] < 0 ? id(u) : dat[id(u)] = find(dat[id(u)]);
   }
+  bool same(A u, A v) { return find(u) == find(v); }
+  bool unite(A u, A v) {
+    if ((u = find(u)) == (v = find(v))) return false;
+    int iu = id(u), iv = id(v);
+    if (dat[iu] > dat[iv]) swap(iu, iv);
+    dat[iu] += dat[iv];
+    dat[iv] = iu;
+    return true;
+  }
+  Data_t size(A u) { return -dat[find(u)]; }
 };
+
+template <int DIM, typename Data_t>
+int DimensionExpandedGraph<DIM, Data_t>::N = 0;
+template <int DIM, typename Data_t>
+int DimensionExpandedGraph<DIM, Data_t>::add_node = 0;
+template <int DIM, typename Data_t>
+typename DimensionExpandedGraph<DIM, Data_t>::A
+    DimensionExpandedGraph<DIM, Data_t>::g_size;
+template <int DIM, typename Data_t>
+typename DimensionExpandedGraph<DIM, Data_t>::A
+    DimensionExpandedGraph<DIM, Data_t>::coeff;

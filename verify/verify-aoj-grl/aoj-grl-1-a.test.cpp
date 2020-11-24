@@ -9,7 +9,7 @@ void solve() {
   auto g = wgraph<int>(N, E, true, false);
   auto d = dijkstra<int>(g, S);
   each(x, d) {
-    if (x > TEN(9))
+    if (x == -1)
       out("INF");
     else
       out(x);
