@@ -49,3 +49,8 @@ struct RadixHeap {
     return res;
   }
 };
+
+/**
+ * @brief Radix Heap
+ * @docs docs/data-structure/radix-heap.md
+ */

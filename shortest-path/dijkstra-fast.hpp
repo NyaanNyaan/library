@@ -43,3 +43,8 @@ struct DijkstraGraph {
     return d;
   }
 };
+
+/*
+ * @brief ダイクストラ法(定数倍高速化)
+ * @docs docs/shortest-path/dijkstra-fast.md
+**/

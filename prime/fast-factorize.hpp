@@ -46,10 +46,10 @@ T pollard_rho(T n) {
   if (mint::get_mod() != n) mint::set_mod(n);
   mint R, one = 1;
   auto f = [&](mint x) { return x * x + R; };
-  auto rnd = [&]() { return rng() % (n - 2) + 2; };
+  auto rnd_ = [&]() { return rng() % (n - 2) + 2; };
   while (1) {
     mint x, y, ys, q = one;
-    R = rnd(), y = rnd();
+    R = rnd_(), y = rnd_();
     T g = 1;
     constexpr int m = 128;
     for (int r = 1; g == 1; r <<= 1) {

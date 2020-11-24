@@ -36,7 +36,7 @@ vector<int64_t> randset(int64_t l, int64_t r, int64_t n) {
 }
 
 // [0.0, 1.0)
-double random() {
+double rnd() {
   union raw_cast {
     double t;
     uint64_t u;
