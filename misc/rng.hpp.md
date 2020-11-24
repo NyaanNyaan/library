@@ -5,30 +5,30 @@ data:
   - icon: ':warning:'
     path: misc/simulated-annealing.hpp
     title: misc/simulated-annealing.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/rng.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -45,7 +45,7 @@ data:
     \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
     double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double\
     \ r(rng());\n  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n}  // namespace\
-    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::random;\nusing my_rand::randset;\n\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::rnd;\n\
     using my_rand::rng;\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\nnamespace\
     \ my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n  \
@@ -61,7 +61,7 @@ data:
     \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
     \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double r(rng());\n  ((raw_cast*)(&r))->u\
     \ -= 1ull << 58;\n  return r;\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::random;\nusing my_rand::randset;\nusing my_rand::rng;\n"
+    using my_rand::randset;\nusing my_rand::rnd;\nusing my_rand::rng;\n"
   dependsOn: []
   isVerificationFile: false
   path: misc/rng.hpp
@@ -69,8 +69,8 @@ data:
   - prime/fast-factorize.hpp
   - modulo/mod-kth-root.hpp
   - misc/simulated-annealing.hpp
-  timestamp: '2020-11-24 21:53:28+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-11-24 23:00:02+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp

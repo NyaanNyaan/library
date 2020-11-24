@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_root_mod
@@ -218,8 +218,8 @@ data:
     \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
     \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double r(rng());\n  ((raw_cast*)(&r))->u\
     \ -= 1ull << 58;\n  return r;\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::random;\nusing my_rand::randset;\nusing my_rand::rng;\n#line 9\
-    \ \"prime/fast-factorize.hpp\"\n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\
+    using my_rand::randset;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 9 \"\
+    prime/fast-factorize.hpp\"\n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\
     \ntemplate <typename mint>\nbool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod()\
     \ != n) mint::set_mod(n);\n  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint\
     \ e{1}, rev{int64_t(n - 1)};\n  for (u64 a : as) {\n    if (n <= a) break;\n \
@@ -320,8 +320,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 21:53:28+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-24 23:00:02+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
 layout: document

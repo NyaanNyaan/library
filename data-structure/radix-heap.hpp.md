@@ -16,11 +16,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/data-structure/radix-heap.md
     document_title: Radix Heap
@@ -66,7 +66,7 @@ data:
   - shortest-path/dijkstra-fast.hpp
   - shortest-path/dijkstra-radix-heap.hpp
   timestamp: '2020-11-24 21:53:28+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp

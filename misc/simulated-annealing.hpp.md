@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
@@ -28,8 +28,8 @@ data:
     \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
     \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double r(rng());\n  ((raw_cast*)(&r))->u\
     \ -= 1ull << 58;\n  return r;\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::random;\nusing my_rand::randset;\nusing my_rand::rng;\n#line 3\
-    \ \"misc/timer.hpp\"\nusing namespace std;\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    using my_rand::randset;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 3 \"\
+    misc/timer.hpp\"\nusing namespace std;\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
     \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
@@ -157,7 +157,7 @@ data:
   isVerificationFile: false
   path: misc/simulated-annealing.hpp
   requiredBy: []
-  timestamp: '2020-11-24 21:53:28+09:00'
+  timestamp: '2020-11-24 23:00:02+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: misc/simulated-annealing.hpp
