@@ -41,9 +41,8 @@ double rnd() {
     double t;
     uint64_t u;
   };
-  double r(rng());
-  ((raw_cast*)(&r))->u -= 1ull << 58;
-  return r;
+  constexpr uint64_t p = uint64_t(1023 - 64) << 52;
+  return rnd() * ((raw_cast*)(&p))->t;
 }
 
 }  // namespace my_rand

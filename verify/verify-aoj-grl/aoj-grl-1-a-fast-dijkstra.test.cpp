@@ -4,9 +4,9 @@
 #include "../../competitive-template.hpp"
 #include "../../shortest-path/dijkstra-fast.hpp"
 
-DijkstraGraph<int, 100000, 500000> g;
 void solve() {
   ini(N, E, S);
+  DijkstraGraph<int> g(N, E);
   rep(i, E) {
     ini(s, t, d);
     g.add_edge(s, t, d);

@@ -19,7 +19,7 @@ vector<T> dijkstra(WeightedGraph<T> &g, int start = 0) {
     int cur = p.second;
     if (d[cur] < p.first) continue;
     for (auto dst : g[cur]) {
-      if (d[dst] == T(-1) or d[cur] + dst.cost < d[dst]) {
+      if (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {
         d[dst] = d[cur] + dst.cost;
         Q.emplace(d[dst], dst);
       }
@@ -27,3 +27,8 @@ vector<T> dijkstra(WeightedGraph<T> &g, int start = 0) {
   }
   return d;
 }
+
+/*
+ * @brief ダイクストラ法
+ * @docs docs/shortest-path/dijkstra.md
+**/
