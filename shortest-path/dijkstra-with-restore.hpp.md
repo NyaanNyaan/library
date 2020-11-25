@@ -8,9 +8,12 @@ data:
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/shortest-path/dijkstra-with-restore.md
     document_title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\
@@ -94,8 +97,9 @@ data:
   path: shortest-path/dijkstra-with-restore.hpp
   requiredBy: []
   timestamp: '2020-11-26 01:55:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
 documentation_of: shortest-path/dijkstra-with-restore.hpp
 layout: document
 redirect_from:

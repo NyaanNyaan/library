@@ -292,6 +292,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
     title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - icon: ':heavy_check_mark:'
@@ -684,6 +687,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
   - verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp

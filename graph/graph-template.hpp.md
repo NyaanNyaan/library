@@ -41,7 +41,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-with-restore.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
   - icon: ':heavy_check_mark:'
@@ -71,6 +71,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/rerooting.hpp
     title: tree/rerooting.hpp
+  - icon: ':warning:'
+    path: tree/tree-path.hpp
+    title: tree/tree-path.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
@@ -147,6 +150,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
@@ -239,6 +245,7 @@ data:
   - tree/heavy-light-decomposition.hpp
   - tree/cartesian-tree.hpp
   - tree/dsu-on-tree.hpp
+  - tree/tree-path.hpp
   - tree/euler-tour.hpp
   - graph/topological-sort.hpp
   - graph/kruskal.hpp
@@ -255,6 +262,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp

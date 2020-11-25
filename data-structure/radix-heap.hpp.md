@@ -9,7 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-with-restore.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
   _extendedVerifiedWith:
@@ -25,6 +25,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -75,6 +78,7 @@ data:
   timestamp: '2020-11-24 21:53:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp

@@ -76,6 +76,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
     title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
@@ -194,6 +197,7 @@ data:
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
   - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
