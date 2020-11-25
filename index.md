@@ -527,9 +527,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: tree/rerooting.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: tree/tree-path.hpp
-      title: tree/tree-path.hpp
+      title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   - name: trial
     pages:
     - icon: ':warning:'
@@ -692,6 +692,9 @@ data:
       path: verify/verify-unit-test/radix-heap.test.cpp
       title: verify/verify-unit-test/radix-heap.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/tree-path.test.cpp
+      title: verify/verify-unit-test/tree-path.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/wavelet-matrix.test.cpp
       title: verify/verify-unit-test/wavelet-matrix.test.cpp
   - name: verify/verify-yosupo-ds
@@ -844,6 +847,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp

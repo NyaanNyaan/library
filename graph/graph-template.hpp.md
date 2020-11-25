@@ -71,9 +71,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/rerooting.hpp
     title: tree/rerooting.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: tree/tree-path.hpp
-    title: tree/tree-path.hpp
+    title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
@@ -130,6 +130,9 @@ data:
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/tree-path.test.cpp
+    title: verify/verify-unit-test/tree-path.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -147,6 +150,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
@@ -267,9 +273,11 @@ data:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp

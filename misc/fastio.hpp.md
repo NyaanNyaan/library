@@ -70,6 +70,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
     title: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   - icon: ':heavy_check_mark:'
@@ -200,6 +203,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp

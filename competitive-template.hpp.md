@@ -142,6 +142,9 @@ data:
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/tree-path.test.cpp
+    title: verify/verify-unit-test/tree-path.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
   - icon: ':heavy_check_mark:'
@@ -279,6 +282,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
@@ -693,6 +699,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
   - verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
@@ -726,6 +733,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp

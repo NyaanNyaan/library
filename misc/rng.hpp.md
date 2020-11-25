@@ -25,6 +25,9 @@ data:
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/tree-path.test.cpp
+    title: verify/verify-unit-test/tree-path.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
@@ -79,6 +82,7 @@ data:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
