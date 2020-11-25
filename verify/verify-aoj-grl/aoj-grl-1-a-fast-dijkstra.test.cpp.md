@@ -137,28 +137,39 @@ data:
     \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
     \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n\n/**\n *\
     \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n#line 6\
-    \ \"shortest-path/dijkstra-fast.hpp\"\n\ntemplate <typename T, int N, int M>\n\
-    struct DijkstraGraph {\n  array<int, N> first;\n  array<int, M + 1> succ, V;\n\
-    \  array<T, M + 1> C;\n  int ec;\n\n  constexpr DijkstraGraph() : ec(0) { fill(begin(first),\
-    \ end(first), 0); }\n\n  void add_edge(int u, int v, T c) {\n    ++ec;\n    succ[ec]\
-    \ = first[u];\n    first[u] = ec;\n    V[ec] = v;\n    C[ec] = c;\n  }\n\n  vector<T>\
-    \ dijkstra(int start = 0) {\n    vector<T> d(N, T(-1));\n    RadixHeap<T, int>\
-    \ Q;\n    d[start] = 0;\n    Q.push(0, start);\n    while (!Q.empty()) {\n   \
-    \   auto p = Q.pop();\n      int u = p.second;\n      if (d[u] < T(p.first)) continue;\n\
-    \      T du = d[u];\n      for (int id = first[u]; id; id = succ[id]) {\n    \
-    \    int v = V[id];\n        T c = C[id];\n        if (d[v] == T(-1) or du + c\
-    \ < d[v]) {\n          d[v] = du + c;\n          Q.push(d[v], v);\n        }\n\
-    \      }\n    }\n    return d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\
-    \u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
-    **/\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp\"\n\n\
-    DijkstraGraph<int, 100000, 500000> g;\nvoid solve() {\n  ini(N, E, S);\n  rep(i,\
-    \ E) {\n    ini(s, t, d);\n    g.add_edge(s, t, d);\n  }\n  auto d = g.dijkstra(S);\n\
+    \ \"shortest-path/dijkstra-fast.hpp\"\n\ntemplate <typename T>\nstruct FastGraph\
+    \ {\n private:\n  struct E {\n    int v;\n    T c;\n    E() {}\n    E(const int&\
+    \ _v, const T& _c) : v(_v), c(_c) {}\n  };\n  template <typename It>\n  struct\
+    \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
+    \ return e; }\n    int size() const { return int(e - b); }\n  };\n\n  int N, M,\
+    \ ec;\n  vector<int> head;\n  vector<pair<int, E>> buf;\n  vector<E> es;\n\n \
+    \ void build() {\n    partial_sum(begin(head), end(head), begin(head));\n    es.resize(M);\n\
+    \    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n public:\n  FastGraph(int\
+    \ _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0) {\n    buf.reserve(M);\n \
+    \ }\n  void add_edge(int u, int v, T c) {\n    buf.emplace_back(u, E{v, c});\n\
+    \    ++head[u];\n    if ((int)buf.size() == M) build();\n  }\n  Es<typename vector<E>::iterator>\
+    \ operator[](int u) {\n    return {begin(es) + head[u], begin(es) + head[u + 1]};\n\
+    \  }\n  const Es<typename vector<E>::const_iterator> operator[](int u) const {\n\
+    \    return {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size()\
+    \ const { return N; }\n};\n\ntemplate <typename T>\nstruct DijkstraGraph {\n \
+    \ FastGraph<T> g;\n\n  DijkstraGraph(int _n, int _m) : g(_n, _m) {}\n\n  void\
+    \ add_edge(int u, int v, T c) { g.add_edge(u, v, c); }\n\n  vector<T> dijkstra(int\
+    \ start = 0) {\n    vector<T> d(g.size(), T(-1));\n    RadixHeap<T, int> Q;\n\
+    \    d[start] = 0;\n    Q.push(0, start);\n    while (!Q.empty()) {\n      auto\
+    \ p = Q.pop();\n      int u = p.second;\n      if (d[u] < T(p.first)) continue;\n\
+    \      T du = d[u];\n      for (auto& [v, c] : g[u]) {\n        if (d[v] == T(-1)\
+    \ or du + c < d[v]) {\n          d[v] = du + c;\n          Q.push(d[v], v);\n\
+    \        }\n      }\n    }\n    return d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\
+    \u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs\
+    \ docs/shortest-path/dijkstra-fast.md\n **/\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp\"\
+    \n\nvoid solve() {\n  ini(N, E, S);\n  DijkstraGraph<int> g(N, E);\n  rep(i, E)\
+    \ {\n    ini(s, t, d);\n    g.add_edge(s, t, d);\n  }\n  auto d = g.dijkstra(S);\n\
     \  d.resize(N);\n  each(x, d) {\n    if (x == -1)\n      out(\"INF\");\n    else\n\
     \      out(x);\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../shortest-path/dijkstra-fast.hpp\"\
-    \n\nDijkstraGraph<int, 100000, 500000> g;\nvoid solve() {\n  ini(N, E, S);\n \
-    \ rep(i, E) {\n    ini(s, t, d);\n    g.add_edge(s, t, d);\n  }\n  auto d = g.dijkstra(S);\n\
+    \n\nvoid solve() {\n  ini(N, E, S);\n  DijkstraGraph<int> g(N, E);\n  rep(i, E)\
+    \ {\n    ini(s, t, d);\n    g.add_edge(s, t, d);\n  }\n  auto d = g.dijkstra(S);\n\
     \  d.resize(N);\n  each(x, d) {\n    if (x == -1)\n      out(\"INF\");\n    else\n\
     \      out(x);\n  }\n}\n"
   dependsOn:
@@ -168,7 +179,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 21:53:28+09:00'
+  timestamp: '2020-11-26 01:55:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp

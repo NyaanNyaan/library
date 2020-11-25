@@ -10,11 +10,16 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dijkstra.test.cpp
+    title: verify/verify-unit-test/dijkstra.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/shortest-path/dijkstra.md
+    document_title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
     links: []
   bundledCode: "#line 2 \"shortest-path/dijkstra.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\
@@ -51,9 +56,10 @@ data:
     \ vector<P>, greater<P> > Q;\n  d[start] = 0;\n  Q.emplace(0, start);\n  while\
     \ (!Q.empty()) {\n    P p = Q.top();\n    Q.pop();\n    int cur = p.second;\n\
     \    if (d[cur] < p.first) continue;\n    for (auto dst : g[cur]) {\n      if\
-    \ (d[dst] == T(-1) or d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
+    \ (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
     \ dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n    }\n  }\n  return d;\n\
-    }\n"
+    }\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n\
+    **/\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../graph/graph-template.hpp\"\n\n// unreachable -> -1\ntemplate <typename\
     \ T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start = 0) {\n  using P = pair<T,\
@@ -61,23 +67,36 @@ data:
     \ vector<P>, greater<P> > Q;\n  d[start] = 0;\n  Q.emplace(0, start);\n  while\
     \ (!Q.empty()) {\n    P p = Q.top();\n    Q.pop();\n    int cur = p.second;\n\
     \    if (d[cur] < p.first) continue;\n    for (auto dst : g[cur]) {\n      if\
-    \ (d[dst] == T(-1) or d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
+    \ (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
     \ dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n    }\n  }\n  return d;\n\
-    }"
+    }\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n\
+    **/\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: shortest-path/dijkstra.hpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
+  timestamp: '2020-11-26 01:55:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
 documentation_of: shortest-path/dijkstra.hpp
 layout: document
 redirect_from:
 - /library/shortest-path/dijkstra.hpp
 - /library/shortest-path/dijkstra.hpp.html
-title: shortest-path/dijkstra.hpp
+title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
 ---
+## ダイクストラ法
+
+ダイクストラ法を$\mathrm{O}(E \log V)$で行うライブラリ。
+
+#### 概要
+
+ダイクストラ法とは負辺の無い有向グラフでの単一始点最短経路を$\mathrm{O}(E \log V)$で計算するアルゴリズムである。[基数ヒープ](https://nyaannyaan.github.io/library/shortest-path/dijkstra-radix-heap.hpp)やフィボナッチヒープを用いた高速化も知られている。
+
+#### 使い方
+
+- `dijkstra(g, start = 0)`: sを始点としたダイクストラ法を行い、sからの距離(到達できない場合`-1`)が格納された配列を返す。

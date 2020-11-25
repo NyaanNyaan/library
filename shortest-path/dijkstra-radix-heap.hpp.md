@@ -12,9 +12,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dijkstra.test.cpp
+    title: verify/verify-unit-test/dijkstra.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/shortest-path/dijkstra-radix-heap.md
+    document_title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
     links: []
   bundledCode: "#line 2 \"shortest-path/dijkstra-radix-heap.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\
@@ -66,32 +71,48 @@ data:
     \ start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  RadixHeap<T,\
     \ int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto\
     \ p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first)) continue;\n\
-    \    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) or d[cur] + dst.cost\
+    \    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost\
     \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst], dst);\n\
-    \      }\n    }\n  }\n  return d;\n}\n"
+    \      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\
+    \u30C8\u30E9\u6CD5(Radix Heap)\n * @docs docs/shortest-path/dijkstra-radix-heap.md\n\
+    **/\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../graph/graph-template.hpp\"\n#include \"../data-structure/radix-heap.hpp\"\
     \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra_radix_heap(WeightedGraph<T>\
     \ &g, int start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n \
     \ RadixHeap<T, int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty())\
     \ {\n    auto p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first))\
-    \ continue;\n    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) or d[cur]\
+    \ continue;\n    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur]\
     \ + dst.cost < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst],\
-    \ dst);\n      }\n    }\n  }\n  return d;\n}\n"
+    \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\
+    \u30B9\u30C8\u30E9\u6CD5(Radix Heap)\n * @docs docs/shortest-path/dijkstra-radix-heap.md\n\
+    **/\n"
   dependsOn:
   - graph/graph-template.hpp
   - data-structure/radix-heap.hpp
   isVerificationFile: false
   path: shortest-path/dijkstra-radix-heap.hpp
   requiredBy: []
-  timestamp: '2020-11-24 21:53:28+09:00'
+  timestamp: '2020-11-26 01:55:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
 documentation_of: shortest-path/dijkstra-radix-heap.hpp
 layout: document
 redirect_from:
 - /library/shortest-path/dijkstra-radix-heap.hpp
 - /library/shortest-path/dijkstra-radix-heap.hpp.html
-title: shortest-path/dijkstra-radix-heap.hpp
+title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
 ---
+## ダイクストラ法(Radix Heap)
+
+ダイクストラ法の定数倍高速化ライブラリ。
+
+#### 概要
+
+ダイクストラ法のヒープに[Radix Heap(基数ヒープ)](https://nyaannyaan.github.io/library/data-structure/radix-heap.hpp)を使用することで最小値の取得にかかる時間計算量を高速化したライブラリ。
+
+#### 使い方
+
+- `dijkstra(g, start = 0)`: sを始点としたダイクストラ法を行い、計算結果を返す。

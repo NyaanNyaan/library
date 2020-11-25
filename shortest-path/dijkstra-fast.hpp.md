@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dijkstra.test.cpp
+    title: verify/verify-unit-test/dijkstra.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -34,43 +37,66 @@ data:
     \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
     \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n\n/**\n *\
     \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n#line 6\
-    \ \"shortest-path/dijkstra-fast.hpp\"\n\ntemplate <typename T, int N, int M>\n\
-    struct DijkstraGraph {\n  array<int, N> first;\n  array<int, M + 1> succ, V;\n\
-    \  array<T, M + 1> C;\n  int ec;\n\n  constexpr DijkstraGraph() : ec(0) { fill(begin(first),\
-    \ end(first), 0); }\n\n  void add_edge(int u, int v, T c) {\n    ++ec;\n    succ[ec]\
-    \ = first[u];\n    first[u] = ec;\n    V[ec] = v;\n    C[ec] = c;\n  }\n\n  vector<T>\
-    \ dijkstra(int start = 0) {\n    vector<T> d(N, T(-1));\n    RadixHeap<T, int>\
-    \ Q;\n    d[start] = 0;\n    Q.push(0, start);\n    while (!Q.empty()) {\n   \
-    \   auto p = Q.pop();\n      int u = p.second;\n      if (d[u] < T(p.first)) continue;\n\
-    \      T du = d[u];\n      for (int id = first[u]; id; id = succ[id]) {\n    \
-    \    int v = V[id];\n        T c = C[id];\n        if (d[v] == T(-1) or du + c\
-    \ < d[v]) {\n          d[v] = du + c;\n          Q.push(d[v], v);\n        }\n\
-    \      }\n    }\n    return d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\
-    \u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
-    **/\n"
+    \ \"shortest-path/dijkstra-fast.hpp\"\n\ntemplate <typename T>\nstruct FastGraph\
+    \ {\n private:\n  struct E {\n    int v;\n    T c;\n    E() {}\n    E(const int&\
+    \ _v, const T& _c) : v(_v), c(_c) {}\n  };\n  template <typename It>\n  struct\
+    \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
+    \ return e; }\n    int size() const { return int(e - b); }\n  };\n\n  int N, M,\
+    \ ec;\n  vector<int> head;\n  vector<pair<int, E>> buf;\n  vector<E> es;\n\n \
+    \ void build() {\n    partial_sum(begin(head), end(head), begin(head));\n    es.resize(M);\n\
+    \    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n public:\n  FastGraph(int\
+    \ _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0) {\n    buf.reserve(M);\n \
+    \ }\n  void add_edge(int u, int v, T c) {\n    buf.emplace_back(u, E{v, c});\n\
+    \    ++head[u];\n    if ((int)buf.size() == M) build();\n  }\n  Es<typename vector<E>::iterator>\
+    \ operator[](int u) {\n    return {begin(es) + head[u], begin(es) + head[u + 1]};\n\
+    \  }\n  const Es<typename vector<E>::const_iterator> operator[](int u) const {\n\
+    \    return {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size()\
+    \ const { return N; }\n};\n\ntemplate <typename T>\nstruct DijkstraGraph {\n \
+    \ FastGraph<T> g;\n\n  DijkstraGraph(int _n, int _m) : g(_n, _m) {}\n\n  void\
+    \ add_edge(int u, int v, T c) { g.add_edge(u, v, c); }\n\n  vector<T> dijkstra(int\
+    \ start = 0) {\n    vector<T> d(g.size(), T(-1));\n    RadixHeap<T, int> Q;\n\
+    \    d[start] = 0;\n    Q.push(0, start);\n    while (!Q.empty()) {\n      auto\
+    \ p = Q.pop();\n      int u = p.second;\n      if (d[u] < T(p.first)) continue;\n\
+    \      T du = d[u];\n      for (auto& [v, c] : g[u]) {\n        if (d[v] == T(-1)\
+    \ or du + c < d[v]) {\n          d[v] = du + c;\n          Q.push(d[v], v);\n\
+    \        }\n      }\n    }\n    return d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\
+    \u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs\
+    \ docs/shortest-path/dijkstra-fast.md\n **/\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../data-structure/radix-heap.hpp\"\n\ntemplate <typename T, int N, int M>\n\
-    struct DijkstraGraph {\n  array<int, N> first;\n  array<int, M + 1> succ, V;\n\
-    \  array<T, M + 1> C;\n  int ec;\n\n  constexpr DijkstraGraph() : ec(0) { fill(begin(first),\
-    \ end(first), 0); }\n\n  void add_edge(int u, int v, T c) {\n    ++ec;\n    succ[ec]\
-    \ = first[u];\n    first[u] = ec;\n    V[ec] = v;\n    C[ec] = c;\n  }\n\n  vector<T>\
-    \ dijkstra(int start = 0) {\n    vector<T> d(N, T(-1));\n    RadixHeap<T, int>\
-    \ Q;\n    d[start] = 0;\n    Q.push(0, start);\n    while (!Q.empty()) {\n   \
-    \   auto p = Q.pop();\n      int u = p.second;\n      if (d[u] < T(p.first)) continue;\n\
-    \      T du = d[u];\n      for (int id = first[u]; id; id = succ[id]) {\n    \
-    \    int v = V[id];\n        T c = C[id];\n        if (d[v] == T(-1) or du + c\
-    \ < d[v]) {\n          d[v] = du + c;\n          Q.push(d[v], v);\n        }\n\
-    \      }\n    }\n    return d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\
-    \u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
-    **/\n"
+    \ \"../data-structure/radix-heap.hpp\"\n\ntemplate <typename T>\nstruct FastGraph\
+    \ {\n private:\n  struct E {\n    int v;\n    T c;\n    E() {}\n    E(const int&\
+    \ _v, const T& _c) : v(_v), c(_c) {}\n  };\n  template <typename It>\n  struct\
+    \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
+    \ return e; }\n    int size() const { return int(e - b); }\n  };\n\n  int N, M,\
+    \ ec;\n  vector<int> head;\n  vector<pair<int, E>> buf;\n  vector<E> es;\n\n \
+    \ void build() {\n    partial_sum(begin(head), end(head), begin(head));\n    es.resize(M);\n\
+    \    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n public:\n  FastGraph(int\
+    \ _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0) {\n    buf.reserve(M);\n \
+    \ }\n  void add_edge(int u, int v, T c) {\n    buf.emplace_back(u, E{v, c});\n\
+    \    ++head[u];\n    if ((int)buf.size() == M) build();\n  }\n  Es<typename vector<E>::iterator>\
+    \ operator[](int u) {\n    return {begin(es) + head[u], begin(es) + head[u + 1]};\n\
+    \  }\n  const Es<typename vector<E>::const_iterator> operator[](int u) const {\n\
+    \    return {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size()\
+    \ const { return N; }\n};\n\ntemplate <typename T>\nstruct DijkstraGraph {\n \
+    \ FastGraph<T> g;\n\n  DijkstraGraph(int _n, int _m) : g(_n, _m) {}\n\n  void\
+    \ add_edge(int u, int v, T c) { g.add_edge(u, v, c); }\n\n  vector<T> dijkstra(int\
+    \ start = 0) {\n    vector<T> d(g.size(), T(-1));\n    RadixHeap<T, int> Q;\n\
+    \    d[start] = 0;\n    Q.push(0, start);\n    while (!Q.empty()) {\n      auto\
+    \ p = Q.pop();\n      int u = p.second;\n      if (d[u] < T(p.first)) continue;\n\
+    \      T du = d[u];\n      for (auto& [v, c] : g[u]) {\n        if (d[v] == T(-1)\
+    \ or du + c < d[v]) {\n          d[v] = du + c;\n          Q.push(d[v], v);\n\
+    \        }\n      }\n    }\n    return d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\
+    \u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs\
+    \ docs/shortest-path/dijkstra-fast.md\n **/\n"
   dependsOn:
   - data-structure/radix-heap.hpp
   isVerificationFile: false
   path: shortest-path/dijkstra-fast.hpp
   requiredBy: []
-  timestamp: '2020-11-24 21:53:28+09:00'
+  timestamp: '2020-11-26 01:55:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
 documentation_of: shortest-path/dijkstra-fast.hpp
 layout: document
@@ -86,13 +112,13 @@ title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901
 
 #### 概要
 
-ダイクストラ法を空間・時間ともに定数倍高速化したライブラリ。具体的には、隣接リストを配列3本で表現することで空間計算量を2倍改善して、ヒープに[Radix Heap(基数ヒープ)](https://nyaannyaan.github.io/library/data-structure/radix-heap.hpp)を使用することで最小値の取得にかかる時間計算量も2倍改善している。
+ダイクストラ法を空間・時間ともに定数倍高速化したライブラリ。
 
-[ナイーブな実装](https://nyaannyaan.github.io/library/shortest-path/dijkstra.hpp)と雑なランダムケースで比較したところ、全体としておよそ3倍程度の高速化がなされるようだ。
+[ナイーブな実装](https://nyaannyaan.github.io/library/shortest-path/dijkstra.hpp)と雑なランダムケースで比較したところ、全体としておよそ2倍程度の高速化がなされるようだ。
 
 #### 使い方
 
-- `DijkstraGraph<T, N, M>` :辺の重みがTで、頂点数の最大が`N`、辺数の最大が`M`であるグラフを生成する。
+- `DijkstraGraph<T>(N, M)` :辺の重みがTで、頂点数の最大が`N`、辺数の最大が`M`であるグラフを生成する。
 - `add_edge(u, v, c)`: uからvへ向かう重みcの有向辺を追加する。
 - `dijkstra(s)`: sを始点としたダイクストラ法を行い、計算結果を返す。
 

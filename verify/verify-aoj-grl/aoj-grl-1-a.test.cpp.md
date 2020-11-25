@@ -9,7 +9,7 @@ data:
     title: graph/graph-template.hpp
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra.hpp
-    title: shortest-path/dijkstra.hpp
+    title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -153,9 +153,10 @@ data:
     \ vector<P>, greater<P> > Q;\n  d[start] = 0;\n  Q.emplace(0, start);\n  while\
     \ (!Q.empty()) {\n    P p = Q.top();\n    Q.pop();\n    int cur = p.second;\n\
     \    if (d[cur] < p.first) continue;\n    for (auto dst : g[cur]) {\n      if\
-    \ (d[dst] == T(-1) or d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
+    \ (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
     \ dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n    }\n  }\n  return d;\n\
-    }\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a.test.cpp\"\n\nvoid solve() {\n\
+    }\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n\
+    **/\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a.test.cpp\"\n\nvoid solve() {\n\
     \  ini(N, E, S);\n  auto g = wgraph<int>(N, E, true, false);\n  auto d = dijkstra<int>(g,\
     \ S);\n  each(x, d) {\n    if (x == -1)\n      out(\"INF\");\n    else\n     \
     \ out(x);\n  }\n}\n"
@@ -171,7 +172,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
+  timestamp: '2020-11-26 01:55:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp

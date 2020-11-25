@@ -12,7 +12,7 @@ data:
     title: graph/graph-template.hpp
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
-    title: shortest-path/dijkstra-radix-heap.hpp
+    title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -171,12 +171,14 @@ data:
     \ start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  RadixHeap<T,\
     \ int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto\
     \ p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first)) continue;\n\
-    \    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) or d[cur] + dst.cost\
+    \    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost\
     \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst], dst);\n\
-    \      }\n    }\n  }\n  return d;\n}\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp\"\
-    \n\nvoid solve() {\n  ini(N, E, S);\n  auto g = wgraph<int>(N, E, true, false);\n\
-    \  auto d = dijkstra_radix_heap<int>(g, S);\n  each(x, d) {\n    if (x == -1)\n\
-    \      out(\"INF\");\n    else\n      out(x);\n  }\n}\n"
+    \      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\
+    \u30C8\u30E9\u6CD5(Radix Heap)\n * @docs docs/shortest-path/dijkstra-radix-heap.md\n\
+    **/\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp\"\n\nvoid\
+    \ solve() {\n  ini(N, E, S);\n  auto g = wgraph<int>(N, E, true, false);\n  auto\
+    \ d = dijkstra_radix_heap<int>(g, S);\n  each(x, d) {\n    if (x == -1)\n    \
+    \  out(\"INF\");\n    else\n      out(x);\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../shortest-path/dijkstra-radix-heap.hpp\"\
     \n\nvoid solve() {\n  ini(N, E, S);\n  auto g = wgraph<int>(N, E, true, false);\n\
@@ -190,7 +192,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 21:53:28+09:00'
+  timestamp: '2020-11-26 01:55:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp

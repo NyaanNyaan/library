@@ -40,10 +40,13 @@ data:
     title: shortest-path/bfs01.hpp
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
-    title: shortest-path/dijkstra-radix-heap.hpp
+    title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
+  - icon: ':warning:'
+    path: shortest-path/dijkstra-with-restore.hpp
+    title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra.hpp
-    title: shortest-path/dijkstra.hpp
+    title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
   - icon: ':warning:'
     path: shortest-path/dual-of-shortest-path.hpp
     title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
@@ -120,6 +123,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dijkstra.test.cpp
+    title: verify/verify-unit-test/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
@@ -222,6 +228,7 @@ data:
   - shortest-path/bellman-ford.hpp
   - shortest-path/warshall-floyd.hpp
   - shortest-path/dijkstra-radix-heap.hpp
+  - shortest-path/dijkstra-with-restore.hpp
   - shortest-path/bfs01.hpp
   - shortest-path/dual-of-shortest-path.hpp
   - shortest-path/restore-shortest-path.hpp
@@ -255,6 +262,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp

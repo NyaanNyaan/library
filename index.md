@@ -471,10 +471,13 @@ data:
         \u5316)"
     - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra-radix-heap.hpp
-      title: shortest-path/dijkstra-radix-heap.hpp
+      title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
+    - icon: ':warning:'
+      path: shortest-path/dijkstra-with-restore.hpp
+      title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
     - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra.hpp
-      title: shortest-path/dijkstra.hpp
+      title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
     - icon: ':warning:'
       path: shortest-path/dual-of-shortest-path.hpp
       title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
@@ -667,6 +670,9 @@ data:
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - name: verify/verify-unit-test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/dijkstra.test.cpp
+      title: verify/verify-unit-test/dijkstra.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/factorize.test.cpp
       title: verify/verify-unit-test/factorize.test.cpp

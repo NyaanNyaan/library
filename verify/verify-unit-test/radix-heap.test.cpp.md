@@ -146,11 +146,11 @@ data:
     \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
     \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
     \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  double\
-    \ r(rng());\n  ((raw_cast*)(&r))->u -= 1ull << 58;\n  return r;\n}\n\n}  // namespace\
-    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::rnd;\n\
-    using my_rand::rng;\n#line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\n\
-    \ntemplate <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx,\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rnd() * ((raw_cast*)(&p))->t;\n\
+    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\
+    \n\ntemplate <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx,\
     \ Key d, double ratio) {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n\
     \    Key i = 0;\n    while (i < mx) {\n      assert(q1.empty() == q2.empty());\n\
     \      assert(q1.size() == (int)q2.size());\n      if (q1.empty() or random()\
@@ -192,7 +192,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/radix-heap.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 23:00:02+09:00'
+  timestamp: '2020-11-26 01:55:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/radix-heap.test.cpp
