@@ -30,3 +30,8 @@ pair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {
   }
   return make_pair(g, root);
 }
+
+/**
+ * @brief Cartesian Tree
+ * @docs docs/tree/cartesian-tree.md
+ */

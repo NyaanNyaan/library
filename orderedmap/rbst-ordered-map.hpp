@@ -380,5 +380,5 @@ bool OrderedMap<Key, Val>::lazy_flag = false;
 
 /**
  *  @brief OrderedMap(順序付き連想配列)
- *  @docs docs/balanced-binary-search-tree/rbst-ordered-map.md
+ *  @docs docs/orderedmap/rbst-ordered-map.md
  */ 

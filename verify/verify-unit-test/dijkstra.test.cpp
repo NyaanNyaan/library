@@ -33,7 +33,7 @@ void test() {
 
   shuffle(all(es), mt);
   WeightedGraph<ll> g(N);
-  DijkstraGraph<ll> dg(N, M);
+  StaticGraph<ll> dg(N, M);
   if (es.size() > M) es.resize(M);
 
   for (auto&& [u, v, c] : es) {
@@ -45,13 +45,8 @@ void test() {
 
   d1 = dijkstra(g);
   d2 = dijkstra_radix_heap(g);
-  d3 = dg.dijkstra();
-
-  if (N <= 20) {
-    trc(d1);
-    trc(d2);
-    trc(d3);
-  }
+  d3 = dijkstra(g);
+  
   assert(d1 == d2);
   assert(d1 == d3);
 }
