@@ -523,7 +523,7 @@ data:
       title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
     - icon: ':heavy_check_mark:'
       path: tree/frequency-table-of-tree-distance.hpp
-      title: tree/frequency-table-of-tree-distance.hpp
+      title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
     - icon: ':heavy_check_mark:'
       path: tree/heavy-light-decomposition.hpp
       title: tree/heavy-light-decomposition.hpp
@@ -531,7 +531,7 @@ data:
       path: tree/rerooting.hpp
       title: tree/rerooting.hpp
     - icon: ':heavy_check_mark:'
-      path: tree/tree-path.hpp
+      path: tree/tree-query.hpp
       title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   - name: trial
     pages:

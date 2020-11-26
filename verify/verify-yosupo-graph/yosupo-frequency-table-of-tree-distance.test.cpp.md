@@ -27,7 +27,7 @@ data:
     title: tree/centroid-decomposition.hpp
   - icon: ':heavy_check_mark:'
     path: tree/frequency-table-of-tree-distance.hpp
-    title: tree/frequency-table-of-tree-distance.hpp
+    title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -648,7 +648,9 @@ data:
     \ continue;\n      ++count[0];\n      auto count2 = ArbitraryNTT::multiply_u128(count,\
     \ count);\n      while (count2.size() > ans.size()) ans.emplace_back(0);\n   \
     \   for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];\n    }\n\
-    \n    for (auto &x : ans) x >>= 1;\n    return ans;\n  }\n};\n#line 10 \"verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp\"\
+    \n    for (auto &x : ans) x >>= 1;\n    return ans;\n  }\n};\n\n/**\n * @brief\
+    \ \u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03\n * @docs\
+    \ docs/tree/frequency-table-of-tree-distance.md\n */\n#line 10 \"verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp\"\
     \n\nvoid solve() {\n  int N;\n  rd(N);\n  vvi g(N);\n  rep(_, N - 1) {\n    int\
     \ u, v;\n    rd(u, v);\n    g[u].pb(v);\n    g[v].pb(u);\n  }\n  FrequencyTableOfTreeDistance<vvi>\
     \ ft(g);\n  auto d = ft.get();\n  d.resize(N);\n  rep1(i, N - 1) {\n    if (i\
@@ -673,7 +675,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
+  timestamp: '2020-11-27 00:47:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp

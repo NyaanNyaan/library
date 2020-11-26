@@ -24,6 +24,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/tree/frequency-table-of-tree-distance.md
+    document_title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
     links: []
   bundledCode: "#line 2 \"tree/frequency-table-of-tree-distance.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"ntt/arbitrary-ntt.hpp\"\nusing namespace std;\n\
@@ -476,7 +478,9 @@ data:
     \ continue;\n      ++count[0];\n      auto count2 = ArbitraryNTT::multiply_u128(count,\
     \ count);\n      while (count2.size() > ans.size()) ans.emplace_back(0);\n   \
     \   for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];\n    }\n\
-    \n    for (auto &x : ans) x >>= 1;\n    return ans;\n  }\n};\n"
+    \n    for (auto &x : ans) x >>= 1;\n    return ans;\n  }\n};\n\n/**\n * @brief\
+    \ \u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03\n * @docs\
+    \ docs/tree/frequency-table-of-tree-distance.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../ntt/arbitrary-ntt.hpp\"\n#include \"./centroid-decomposition.hpp\"\n\n\
     template <typename G>\nstruct FrequencyTableOfTreeDistance : CentroidDecomposition<G>\
@@ -500,7 +504,9 @@ data:
     \ continue;\n      ++count[0];\n      auto count2 = ArbitraryNTT::multiply_u128(count,\
     \ count);\n      while (count2.size() > ans.size()) ans.emplace_back(0);\n   \
     \   for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];\n    }\n\
-    \n    for (auto &x : ans) x >>= 1;\n    return ans;\n  }\n};\n"
+    \n    for (auto &x : ans) x >>= 1;\n    return ans;\n  }\n};\n\n/**\n * @brief\
+    \ \u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03\n * @docs\
+    \ docs/tree/frequency-table-of-tree-distance.md\n */\n"
   dependsOn:
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
@@ -510,7 +516,7 @@ data:
   isVerificationFile: false
   path: tree/frequency-table-of-tree-distance.hpp
   requiredBy: []
-  timestamp: '2020-10-11 00:26:38+09:00'
+  timestamp: '2020-11-27 00:47:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
@@ -519,5 +525,13 @@ layout: document
 redirect_from:
 - /library/tree/frequency-table-of-tree-distance.hpp
 - /library/tree/frequency-table-of-tree-distance.hpp.html
-title: tree/frequency-table-of-tree-distance.hpp
+title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
 ---
+## 頂点間の距離の度数分布
+
+頂点間の距離の度数分布を$\mathrm{O}(n \log^2 n)$で計算するライブラリ。
+
+#### 使い方
+
+- `FrequencyTableOfTreeDistance(const G &g)`: 重心分解用のデータ構造を構築する。
+- `get(start = 0)`: startを根として計算した結果を返す。

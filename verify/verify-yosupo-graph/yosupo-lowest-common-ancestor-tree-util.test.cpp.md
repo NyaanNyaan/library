@@ -11,7 +11,7 @@ data:
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
-    path: tree/tree-path.hpp
+    path: tree/tree-query.hpp
     title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -152,7 +152,7 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 3 \"tree/tree-path.hpp\"\nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\
+    #line 3 \"tree/tree-query.hpp\"\nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n\
     \  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int\
     \ _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
@@ -180,7 +180,7 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"tree/tree-path.hpp\"\n\ntemplate <typename G>\nstruct Tree\
+    \ d;\n}\n#line 6 \"tree/tree-query.hpp\"\n\ntemplate <typename G>\nstruct Tree\
     \ {\n private:\n  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int>\
     \ dp;\n  void build() {\n    bl.resize(g.size());\n    dp.resize(g.size());\n\
     \    dfs(root, -1, 0);\n  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c]\
@@ -210,19 +210,19 @@ data:
     \    int p;\n    rd(p);\n    g[p].push_back(i);\n  }\n  Tree<vvi> tree(g);\n \
     \ rep(i, Q) {\n    int u, v;\n    rd(u, v);\n    wtn(tree.lca(u, v));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include \"../../competitive-template.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n#include \"../../tree/tree-path.hpp\"\n\n\
-    void solve() {\n  int N, Q;\n  rd(N, Q);\n  vvi g(N);\n  rep1(i, N - 1) {\n  \
-    \  int p;\n    rd(p);\n    g[p].push_back(i);\n  }\n  Tree<vvi> tree(g);\n  rep(i,\
-    \ Q) {\n    int u, v;\n    rd(u, v);\n    wtn(tree.lca(u, v));\n  }\n}\n"
+    \n#include \"../../misc/fastio.hpp\"\n#include \"../../tree/tree-query.hpp\"\n\
+    \nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vvi g(N);\n  rep1(i, N - 1) {\n\
+    \    int p;\n    rd(p);\n    g[p].push_back(i);\n  }\n  Tree<vvi> tree(g);\n \
+    \ rep(i, Q) {\n    int u, v;\n    rd(u, v);\n    wtn(tree.lca(u, v));\n  }\n}\n"
   dependsOn:
   - competitive-template.hpp
   - misc/fastio.hpp
-  - tree/tree-path.hpp
+  - tree/tree-query.hpp
   - graph/graph-template.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   requiredBy: []
-  timestamp: '2020-11-26 16:49:47+09:00'
+  timestamp: '2020-11-27 00:47:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp

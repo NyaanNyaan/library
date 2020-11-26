@@ -11,7 +11,7 @@ data:
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
-    path: tree/tree-path.hpp
+    path: tree/tree-query.hpp
     title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
@@ -136,7 +136,7 @@ data:
     double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
     \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rnd() * ((raw_cast*)(&p))->t;\n\
     }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 3 \"tree/tree-path.hpp\"\nusing\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 3 \"tree/tree-query.hpp\"\nusing\
     \ namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\
     \ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
     \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
@@ -165,7 +165,7 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"tree/tree-path.hpp\"\n\ntemplate <typename G>\nstruct Tree\
+    \ d;\n}\n#line 6 \"tree/tree-query.hpp\"\n\ntemplate <typename G>\nstruct Tree\
     \ {\n private:\n  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int>\
     \ dp;\n  void build() {\n    bl.resize(g.size());\n    dp.resize(g.size());\n\
     \    dfs(root, -1, 0);\n  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c]\
@@ -203,7 +203,7 @@ data:
     \ >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../competitive-template.hpp\"\n#include \"../../misc/rng.hpp\"\n#include \"\
-    ../../tree/tree-path.hpp\"\n\nvoid test(vvi& g) {\n  cerr << g.size() << endl;\n\
+    ../../tree/tree-query.hpp\"\n\nvoid test(vvi& g) {\n  cerr << g.size() << endl;\n\
     \  Tree<vvi> tree(g);\n  int N = sz(g);\n  rep(i, N) rep(j, N) {\n    vi p1 =\
     \ tree.path(i, j);\n    vi p2{int(i)};\n    for (int k = i; k != j;) {\n     \
     \ p2.push_back(k = tree.nxt(k, j));\n    }\n    assert(p1 == p2);\n    int l =\
@@ -216,12 +216,12 @@ data:
   dependsOn:
   - competitive-template.hpp
   - misc/rng.hpp
-  - tree/tree-path.hpp
+  - tree/tree-query.hpp
   - graph/graph-template.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/tree-path.test.cpp
   requiredBy: []
-  timestamp: '2020-11-26 16:49:47+09:00'
+  timestamp: '2020-11-27 00:47:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/tree-path.test.cpp

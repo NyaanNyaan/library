@@ -19,7 +19,7 @@ data:
     title: ntt/arbitrary-ntt.hpp
   - icon: ':heavy_check_mark:'
     path: tree/frequency-table-of-tree-distance.hpp
-    title: tree/frequency-table-of-tree-distance.hpp
+    title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp

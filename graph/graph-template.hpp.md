@@ -72,7 +72,7 @@ data:
     path: tree/rerooting.hpp
     title: tree/rerooting.hpp
   - icon: ':heavy_check_mark:'
-    path: tree/tree-path.hpp
+    path: tree/tree-query.hpp
     title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -266,10 +266,10 @@ data:
   - math/two-sat.hpp
   - math/grundy-number.hpp
   - tree/rerooting.hpp
+  - tree/tree-query.hpp
   - tree/heavy-light-decomposition.hpp
   - tree/cartesian-tree.hpp
   - tree/dsu-on-tree.hpp
-  - tree/tree-path.hpp
   - tree/euler-tour.hpp
   - graph/topological-sort.hpp
   - graph/kruskal.hpp
