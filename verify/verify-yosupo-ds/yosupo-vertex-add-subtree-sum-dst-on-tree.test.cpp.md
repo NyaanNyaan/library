@@ -17,8 +17,8 @@ data:
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
-    path: tree/euler-tour.hpp
-    title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
+    path: tree/dsu-on-tree.hpp
+    title: DSU on Tree(Guni)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -28,7 +28,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
     links:
     - https://judge.yosupo.jp/problem/vertex_add_subtree_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp\"\
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\n\
     \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
@@ -200,7 +200,7 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 3 \"tree/euler-tour.hpp\"\nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\
+    #line 3 \"tree/dsu-on-tree.hpp\"\nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n\
     \  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int\
     \ _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
@@ -228,76 +228,84 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"tree/euler-tour.hpp\"\n\ntemplate <typename G>\nstruct EulerTour\
-    \ {\n private:\n  struct RMQ {\n    int n, s;\n    using P = pair<int, int>;\n\
-    \    vector<P> seg;\n    P UNIT = P(1 << 30, -1);\n\n    RMQ(int N) : n(N), s(1)\
-    \ {\n      while (s < N) s <<= 1;\n      seg.assign(2 * s, UNIT);\n    }\n\n \
-    \   void set(int k, P x) { seg[k + s] = x; }\n\n    P operator[](int k) const\
-    \ { return seg[k + s]; }\n\n    void build() {\n      for (int k = s - 1; k >\
-    \ 0; k--) {\n        seg[k] = min(seg[2 * k], seg[2 * k + 1]);\n      }\n    }\n\
-    \n    P query(int a, int b) const {\n      P R = UNIT;\n      for (a += s, b +=\
-    \ s; a < b; a >>= 1, b >>= 1) {\n        if (a & 1) R = min(R, seg[a++]);\n  \
-    \      if (b & 1) R = min(R, seg[--b]);\n      }\n      return R;\n    }\n\n \
-    \   int size() const { return n; }\n  };\n\n  vector<int> down, up;\n  int id;\n\
-    \  RMQ rmq;\n\n  void init(G &g, int root) {\n    dfs(g, root, -1, 0);\n    if\
-    \ (id < rmq.size()) rmq.set(id++, {-1, -1});\n    for (int i = 0; i < (int)g.size();\
-    \ i++) {\n      if (down[i] == -1) {\n        rmq.set(id++, {-1, -1});\n     \
-    \   dfs(g, i, -1, 0);\n        if (id < rmq.size()) rmq.set(id++, {-1, -1});\n\
-    \      }\n    }\n    rmq.build();\n  }\n\n  void dfs(G &g, int c, int p, int dp)\
-    \ {\n    down[c] = id;\n    rmq.set(id++, {dp, c});\n    for (auto &d : g[c])\
-    \ {\n      if (d == p) continue;\n      dfs(g, d, c, dp + 1);\n    }\n    up[c]\
-    \ = id;\n    if (p != -1) rmq.set(id++, {dp - 1, p});\n  }\n\n public:\n  // remind\
-    \ : because of additional node,\n  // DS on tour should reserve 2 * n nodes.\n\
-    \  EulerTour(G &g, int root = 0)\n      : down(g.size(), -1), up(g.size(), -1),\
-    \ id(0), rmq(2 * g.size()) {\n    init(g, root);\n  }\n\n  pair<int, int> idx(int\
-    \ i) const { return {down[i], up[i]}; }\n\n  int lca(int a, int b) const {\n \
-    \   if (down[a] > down[b]) swap(a, b);\n    return rmq.query(down[a], down[b]\
-    \ + 1).second;\n  }\n\n  template <typename F>\n  void node_query(int a, int b,\
-    \ F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
-    \ + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int a,\
-    \ int b, F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n \
-    \   f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ a, F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return int(rmq.size());\
-    \ }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\
-    \u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */\n#line 8 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp\"\
+    \ d;\n}\n#line 6 \"tree/dsu-on-tree.hpp\"\n\ntemplate <typename G>\nstruct DSUonTree\
+    \ {\n private:\n  G &g;\n  int N;\n  vector<int> sub_sz, euler, down, up;\n  int\
+    \ idx_;\n  int root;\n\n  int dfs1(int cur, int par = -1) {\n    sub_sz[cur] =\
+    \ 1;\n    if ((int)g[cur].size() >= 2 and g[cur][0] == par) {\n      swap(g[cur][0],\
+    \ g[cur][1]);\n    }\n    for (auto &dst : g[cur]) {\n      if (dst == par) continue;\n\
+    \      sub_sz[cur] += dfs1(dst, cur);\n      if (sub_sz[dst] > sub_sz[g[cur][0]])\
+    \ swap(dst, g[cur][0]);\n    }\n    return sub_sz[cur];\n  }\n\n  void dfs2(int\
+    \ cur, int par = -1) {\n    euler[idx_] = cur;\n    down[cur] = idx_++;\n    for\
+    \ (auto &dst : g[cur]) {\n      if (dst == par) continue;\n      dfs2(dst, cur);\n\
+    \    }\n    up[cur] = idx_;\n  }\n\n public:\n  DSUonTree(G &_g,int _root = 0)\n\
+    \      : g(_g),\n        N(_g.size()),\n        sub_sz(_g.size()),\n        euler(_g.size()),\n\
+    \        down(_g.size()),\n        up(_g.size()),\n        idx_(0),\n        root(_root)\
+    \ {\n    dfs1(root);\n    dfs2(root);\n  }\n\n  int idx(int u) const { return\
+    \ down[u]; }\n\n  template <typename UPDATE, typename QUERY, typename CLEAR, typename\
+    \ RESET>\n  void run(UPDATE &update, QUERY &query, CLEAR &clear, RESET &reset)\
+    \ {\n    auto dsu = [&](auto rc, int cur, int par = -1, bool keep = true) -> void\
+    \ {\n      // light edge -> run dfs and clear data\n      for (int i = 1; i <\
+    \ (int)g[cur].size(); i++)\n        if (g[cur][i] != par) rc(rc, g[cur][i], cur,\
+    \ false);\n\n      // heavy edge -> run dfs and reserve data\n      if (sub_sz[cur]\
+    \ != 1) rc(rc, g[cur][0], cur, true);\n\n      // light edge -> reserve data\n\
+    \      if (sub_sz[cur] != 1)\n        for (int i = up[g[cur][0]]; i < up[cur];\
+    \ i++) update(euler[i]);\n\n      // current node -> reserve data\n      update(cur);\n\
+    \n      // answer queries related to subtree of current node\n      query(cur);\n\
+    \n      // if keep is false, clear all data\n      if (!keep) {\n        for (int\
+    \ i = down[cur]; i < up[cur]; i++) clear(euler[i]);\n        reset();\n      }\n\
+    \      return;\n    };\n    dsu(dsu, root);\n  }\n};\n\n/**\n * @brief DSU on\
+    \ Tree(Guni)\n * @docs docs/tree/dsu-on-tree.md\n */\n#line 8 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp\"\
     \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vector<int> a(N);\n  rep(i, N)\
-    \ rd(a[i]);\n\n  vvi g(N);\n  rep1(i, N - 1) {\n    int p;\n    rd(p);\n    g[p].push_back(i);\n\
-    \  }\n\n  EulerTour<decltype(g)> et(g);\n  BinaryIndexedTree<ll> bit(et.size());\n\
-    \n  rep(i, N) {\n    auto&& [d, u] = et.idx(i);\n    bit.add(d, a[i]);\n  }\n\
-    \  rep(i, Q) {\n    int c;\n    rd(c);\n    if (c == 0) {\n      int x, y;\n \
-    \     rd(x, y);\n      auto&& [d, u] = et.idx(x);\n      bit.add(d, y);\n    }\
-    \ else {\n      int x;\n      rd(x);\n      ll ans = 0;\n      auto f = [&](int\
-    \ u, int v) { ans += bit.sum(u, v - 1); };\n      et.subtree_query(x, f);\n  \
-    \    wtn(ans);\n    }\n  }\n}\n"
+    \ rd(a[i]);\n\n  StaticGraph<void> g(N, N - 1);\n  rep1(i, N - 1) {\n    int p;\n\
+    \    rd(p);\n    g.add_edge(p, i);\n  }\n\n  V<V<pair<int, int>>> upd(N);\n  V<V<int>>\
+    \ que(N);\n\n  rep(i, N) upd[i].emplace_back(0, a[i]);\n  rep1(i, Q) {\n    int\
+    \ c, u;\n    rd(c, u);\n    if (c == 0) {\n      int x;\n      rd(x);\n      upd[u].emplace_back(i,\
+    \ x);\n    } else {\n      que[u].push_back(i);\n    }\n  }\n\n  BinaryIndexedTree<ll>\
+    \ bit(Q + 1);\n  vl ans(Q + 1, infLL);\n\n  // reflect data of node i\n  auto\
+    \ update = [&](int i) {\n    for (auto&& [j, x] : upd[i]) bit.add(j, x);\n  };\n\
+    \  // answer queries of subtree i\n  auto query = [&](int i) {\n    for (auto&&\
+    \ j : que[i]) ans[j] = bit.sum(j);\n  };\n  // below two function are called if\
+    \ all data must be deleted\n  // delete data of node i (if necesarry)\n  auto\
+    \ clear = [&](int i) {\n    for (auto&& [j, x] : upd[i]) bit.add(j, -x);\n  };\n\
+    \  // delete data related to all (if necesarry)\n  auto reset = [&]() {\n\n  };\n\
+    \n  DSUonTree<decltype(g)> dsu(g);\n  dsu.run(update, query, clear, reset);\n\
+    \  each(x, ans) if (x != infLL) wtn(x);\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/binary-indexed-tree.hpp\"\
     \n#include \"../../graph/static-graph.hpp\"\n#include \"../../misc/fastio.hpp\"\
-    \n#include \"../../tree/euler-tour.hpp\"\n\nvoid solve() {\n  int N, Q;\n  rd(N,\
-    \ Q);\n  vector<int> a(N);\n  rep(i, N) rd(a[i]);\n\n  vvi g(N);\n  rep1(i, N\
-    \ - 1) {\n    int p;\n    rd(p);\n    g[p].push_back(i);\n  }\n\n  EulerTour<decltype(g)>\
-    \ et(g);\n  BinaryIndexedTree<ll> bit(et.size());\n\n  rep(i, N) {\n    auto&&\
-    \ [d, u] = et.idx(i);\n    bit.add(d, a[i]);\n  }\n  rep(i, Q) {\n    int c;\n\
-    \    rd(c);\n    if (c == 0) {\n      int x, y;\n      rd(x, y);\n      auto&&\
-    \ [d, u] = et.idx(x);\n      bit.add(d, y);\n    } else {\n      int x;\n    \
-    \  rd(x);\n      ll ans = 0;\n      auto f = [&](int u, int v) { ans += bit.sum(u,\
-    \ v - 1); };\n      et.subtree_query(x, f);\n      wtn(ans);\n    }\n  }\n}\n"
+    \n#include \"../../tree/dsu-on-tree.hpp\"\n\nvoid solve() {\n  int N, Q;\n  rd(N,\
+    \ Q);\n  vector<int> a(N);\n  rep(i, N) rd(a[i]);\n\n  StaticGraph<void> g(N,\
+    \ N - 1);\n  rep1(i, N - 1) {\n    int p;\n    rd(p);\n    g.add_edge(p, i);\n\
+    \  }\n\n  V<V<pair<int, int>>> upd(N);\n  V<V<int>> que(N);\n\n  rep(i, N) upd[i].emplace_back(0,\
+    \ a[i]);\n  rep1(i, Q) {\n    int c, u;\n    rd(c, u);\n    if (c == 0) {\n  \
+    \    int x;\n      rd(x);\n      upd[u].emplace_back(i, x);\n    } else {\n  \
+    \    que[u].push_back(i);\n    }\n  }\n\n  BinaryIndexedTree<ll> bit(Q + 1);\n\
+    \  vl ans(Q + 1, infLL);\n\n  // reflect data of node i\n  auto update = [&](int\
+    \ i) {\n    for (auto&& [j, x] : upd[i]) bit.add(j, x);\n  };\n  // answer queries\
+    \ of subtree i\n  auto query = [&](int i) {\n    for (auto&& j : que[i]) ans[j]\
+    \ = bit.sum(j);\n  };\n  // below two function are called if all data must be\
+    \ deleted\n  // delete data of node i (if necesarry)\n  auto clear = [&](int i)\
+    \ {\n    for (auto&& [j, x] : upd[i]) bit.add(j, -x);\n  };\n  // delete data\
+    \ related to all (if necesarry)\n  auto reset = [&]() {\n\n  };\n\n  DSUonTree<decltype(g)>\
+    \ dsu(g);\n  dsu.run(update, query, clear, reset);\n  each(x, ans) if (x != infLL)\
+    \ wtn(x);\n}\n"
   dependsOn:
   - competitive-template.hpp
   - data-structure/binary-indexed-tree.hpp
   - graph/static-graph.hpp
   - misc/fastio.hpp
-  - tree/euler-tour.hpp
+  - tree/dsu-on-tree.hpp
   - graph/graph-template.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   requiredBy: []
   timestamp: '2020-11-26 23:21:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
 ---

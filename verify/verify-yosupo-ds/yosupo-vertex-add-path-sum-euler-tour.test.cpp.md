@@ -158,20 +158,21 @@ data:
     \ int& v) : to(v) {}\n  operator int() const { return to; }\n};\n\ntemplate <typename\
     \ T = void>\nstruct StaticGraph {\n private:\n  template <typename It>\n  struct\
     \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
-    \ return e; }\n    int size() const { return int(e - b); }\n  };\n  int N, M,\
-    \ ec;\n  vector<int> head;\n  vector<pair<int, E<T>>> buf;\n  vector<E<T>> es;\n\
-    \n  void build() {\n    partial_sum(begin(head), end(head), begin(head));\n  \
-    \  es.resize(M);\n    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n public:\n\
-    \  StaticGraph(int _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0) {\n    buf.reserve(M);\n\
-    \  }\n\n  template <typename... Args>\n  void add_edge(int u, Args&&... args)\
-    \ {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n    buf.emplace_back(u, E<T>{std::forward<Args>(args)...});\n\
-    #pragma GCC diagnostic warning \"-Wnarrowing\"\n    ++head[u];\n    if ((int)buf.size()\
-    \ == M) build();\n  }\n\n  Es<typename vector<E<T>>::iterator> operator[](int\
-    \ u) {\n    return {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  const\
-    \ Es<typename vector<E<T>>::const_iterator> operator[](int u) const {\n    return\
-    \ {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size() const { return\
-    \ N; }\n};\n\n}  // namespace StaticGraphImpl\n\nusing StaticGraphImpl::StaticGraph;\n\
-    \n/**\n * @brief Static Graph\n */\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
+    \ return e; }\n    int size() const { return int(e - b); }\n    auto&& operator[](int\
+    \ i) const { return b[i]; }\n  };\n  \n  int N, M, ec;\n  vector<int> head;\n\
+    \  vector<pair<int, E<T>>> buf;\n  vector<E<T>> es;\n\n  void build() {\n    partial_sum(begin(head),\
+    \ end(head), begin(head));\n    es.resize(M);\n    for (auto&& [u, e] : buf) es[--head[u]]\
+    \ = e;\n  }\n\n public:\n  StaticGraph(int _n, int _m) : N(_n), M(_m), ec(0),\
+    \ head(N + 1, 0) {\n    buf.reserve(M);\n  }\n\n  template <typename... Args>\n\
+    \  void add_edge(int u, Args&&... args) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\
+    \n    buf.emplace_back(u, E<T>{std::forward<Args>(args)...});\n#pragma GCC diagnostic\
+    \ warning \"-Wnarrowing\"\n    ++head[u];\n    if ((int)buf.size() == M) build();\n\
+    \  }\n\n  Es<typename vector<E<T>>::iterator> operator[](int u) {\n    return\
+    \ {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  const Es<typename vector<E<T>>::const_iterator>\
+    \ operator[](int u) const {\n    return {begin(es) + head[u], begin(es) + head[u\
+    \ + 1]};\n  }\n  int size() const { return N; }\n};\n\n}  // namespace StaticGraphImpl\n\
+    \nusing StaticGraphImpl::StaticGraph;\n\n/**\n * @brief Static Graph\n * @docs\
+    \ docs/graph/static-graph.md\n */\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
     \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
     \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
@@ -311,7 +312,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   requiredBy: []
-  timestamp: '2020-11-26 16:49:47+09:00'
+  timestamp: '2020-11-26 23:21:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp

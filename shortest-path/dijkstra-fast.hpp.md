@@ -51,20 +51,21 @@ data:
     \ int& v) : to(v) {}\n  operator int() const { return to; }\n};\n\ntemplate <typename\
     \ T = void>\nstruct StaticGraph {\n private:\n  template <typename It>\n  struct\
     \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
-    \ return e; }\n    int size() const { return int(e - b); }\n  };\n  int N, M,\
-    \ ec;\n  vector<int> head;\n  vector<pair<int, E<T>>> buf;\n  vector<E<T>> es;\n\
-    \n  void build() {\n    partial_sum(begin(head), end(head), begin(head));\n  \
-    \  es.resize(M);\n    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n public:\n\
-    \  StaticGraph(int _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0) {\n    buf.reserve(M);\n\
-    \  }\n\n  template <typename... Args>\n  void add_edge(int u, Args&&... args)\
-    \ {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n    buf.emplace_back(u, E<T>{std::forward<Args>(args)...});\n\
-    #pragma GCC diagnostic warning \"-Wnarrowing\"\n    ++head[u];\n    if ((int)buf.size()\
-    \ == M) build();\n  }\n\n  Es<typename vector<E<T>>::iterator> operator[](int\
-    \ u) {\n    return {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  const\
-    \ Es<typename vector<E<T>>::const_iterator> operator[](int u) const {\n    return\
-    \ {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size() const { return\
-    \ N; }\n};\n\n}  // namespace StaticGraphImpl\n\nusing StaticGraphImpl::StaticGraph;\n\
-    \n/**\n * @brief Static Graph\n */\n#line 7 \"shortest-path/dijkstra-fast.hpp\"\
+    \ return e; }\n    int size() const { return int(e - b); }\n    auto&& operator[](int\
+    \ i) const { return b[i]; }\n  };\n  \n  int N, M, ec;\n  vector<int> head;\n\
+    \  vector<pair<int, E<T>>> buf;\n  vector<E<T>> es;\n\n  void build() {\n    partial_sum(begin(head),\
+    \ end(head), begin(head));\n    es.resize(M);\n    for (auto&& [u, e] : buf) es[--head[u]]\
+    \ = e;\n  }\n\n public:\n  StaticGraph(int _n, int _m) : N(_n), M(_m), ec(0),\
+    \ head(N + 1, 0) {\n    buf.reserve(M);\n  }\n\n  template <typename... Args>\n\
+    \  void add_edge(int u, Args&&... args) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\
+    \n    buf.emplace_back(u, E<T>{std::forward<Args>(args)...});\n#pragma GCC diagnostic\
+    \ warning \"-Wnarrowing\"\n    ++head[u];\n    if ((int)buf.size() == M) build();\n\
+    \  }\n\n  Es<typename vector<E<T>>::iterator> operator[](int u) {\n    return\
+    \ {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  const Es<typename vector<E<T>>::const_iterator>\
+    \ operator[](int u) const {\n    return {begin(es) + head[u], begin(es) + head[u\
+    \ + 1]};\n  }\n  int size() const { return N; }\n};\n\n}  // namespace StaticGraphImpl\n\
+    \nusing StaticGraphImpl::StaticGraph;\n\n/**\n * @brief Static Graph\n * @docs\
+    \ docs/graph/static-graph.md\n */\n#line 7 \"shortest-path/dijkstra-fast.hpp\"\
     \n\ntemplate <typename T>\nvector<T> dijkstra(StaticGraph<T>& g, int start = 0)\
     \ {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start] = 0;\n\
     \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
@@ -103,7 +104,7 @@ data:
   isVerificationFile: false
   path: shortest-path/dijkstra-fast.hpp
   requiredBy: []
-  timestamp: '2020-11-26 18:26:31+09:00'
+  timestamp: '2020-11-26 23:21:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
@@ -129,7 +130,6 @@ title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901
 
 #### 使い方
 
-- `DijkstraGraph<T>(N, M)` :辺の重みがTで、頂点数の最大が`N`、辺数の最大が`M`であるグラフを生成する。
-- `add_edge(u, v, c)`: uからvへ向かう重みcの有向辺を追加する。
-- `dijkstra(s)`: sを始点としたダイクストラ法を行い、計算結果を返す。
-
+- `dijkstra(g, s)`: sを始点としたダイクストラ法を行い、計算結果を返す。
+- `dijkstra_restore(g, s)`: sを始点としたダイクストラ法(復元付き)を行い、計算結果を返す。
+  - いずれの場合もgは[`StaticGraph`](https://nyaannyaan.github.io/library/graph/static-graph.hpp)である必要がある。
