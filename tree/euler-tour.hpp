@@ -84,21 +84,21 @@ struct EulerTour {
   }
 
   template <typename F>
-  void node_query(int a, int b, F &f) {
+  void node_query(int a, int b, const F &f) {
     int l = lca(a, b);
     f(down[l], down[a] + 1);
     f(down[l] + 1, down[b] + 1);
   }
 
   template <typename F>
-  void edge_query(int a, int b, F &f) {
+  void edge_query(int a, int b, const F &f) {
     int l = lca(a, b);
     f(down[l] + 1, down[a] + 1);
     f(down[l] + 1, down[b] + 1);
   }
 
   template <typename F>
-  void subtree_query(int a, F &f) {
+  void subtree_query(int a, const F &f) {
     f(down[a], up[a]);
   }
 

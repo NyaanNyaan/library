@@ -2,35 +2,48 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include "../hashmap/hashmap.hpp"
+
 struct DynamicUnionFind {
-  unordered_map<int, int> m;
-  DynamicUnionFind() {}
+  HashMap<int, int> m;
+  DynamicUnionFind() = default;
 
   int data(int k) {
-    auto itk = m.find(k);
-    return itk == m.end() ? m[k] = -1 : itk->second;
+    auto it = m.find(k);
+    return it == m.end() ? m[k] = -1 : it->second;
   }
   int find(int k) {
-    int datk = data(k);
-    return datk < 0 ? k : m[k] = find(datk);
+    int n = data(k);
+    return n < 0 ? k : m[k] = find(n);
   }
 
   int unite(int x, int y) {
-    if ((x = find(x)) == (y = find(y))) return false;
+    x = find(x), y = find(y);
+    if (x == y) return false;
     auto itx = m.find(x), ity = m.find(y);
-    if (itx->second > ity->second) {
-      ity->second += itx->second;
-      itx->second = y;
-    } else {
-      itx->second += ity->second;
-      ity->second = x;
-    }
+    if (itx->second > ity->second) swap(itx, ity), swap(x, y);
+    itx->second += ity->second;
+    ity->second = x;
+    return true;
+  }
+
+  template <typename F>
+  int unite(int x, int y, const F& f) {
+    x = find(x), y = find(y);
+    if (x == y) return false;
+    auto itx = m.find(x), ity = m.find(y);
+    if (itx->second > ity->second) swap(itx, ity), swap(x, y);
+    itx->second += ity->second;
+    ity->second = x;
+    f(x, y);
     return true;
   }
 
   int size(int k) { return -data(find(k)); }
 
   int same(int x, int y) { return find(x) == find(y); }
+
+  void clear() { m.clear(); }
 };
 
 /**
