@@ -21,7 +21,6 @@ vector<pair<T, int>> dijkstra_restore(WeightedGraph<T> &g, int start = 0) {
     if (dc < T(p.first)) continue;
     trc(p,dc);
     for (auto dst : g[cur]) {
-      trc("dst",dst.cost, dst.to);
       if (d[dst].first == T(-1) || dc + dst.cost < d[dst].first) {
         d[dst] = P{dc + dst.cost, cur};
         Q.push(dc + dst.cost, dst);

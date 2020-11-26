@@ -37,11 +37,9 @@ struct Tree {
   int par(int u) const { return u == root ? -1 : bl[u][0]; }
 
   int kth_ancestor(int u, int k) const {
+    if (dp[u] < k) return -1;
     for (int i = k ? __lg(k) : -1; i >= 0; --i) {
-      if ((k >> i) & 1) {
-        if (i >= (int)bl[u].size()) return -1;
-        u = bl[u][i];
-      }
+      if ((k >> i) & 1) u = bl[u][i];
     }
     return u;
   }
