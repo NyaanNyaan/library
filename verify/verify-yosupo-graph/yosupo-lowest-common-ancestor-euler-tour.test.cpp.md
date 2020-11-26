@@ -8,22 +8,22 @@ data:
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   - icon: ':heavy_check_mark:'
-    path: misc/rng.hpp
-    title: misc/rng.hpp
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
-    path: tree/tree-path.hpp
-    title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
+    path: tree/euler-tour.hpp
+    title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    PROBLEM: https://judge.yosupo.jp/problem/lca
     links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/tree-path.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 1 \"competitive-template.hpp\"\
+    - https://judge.yosupo.jp/problem/lca
+  bundledCode: "#line 1 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#line 1 \"competitive-template.hpp\"\
     \n#pragma region kyopro_template\n#define Nyaan_template\n#include <immintrin.h>\n\
     #include <bits/stdc++.h>\n#define pb push_back\n#define eb emplace_back\n#define\
     \ fi first\n#define se second\n#define each(x, v) for (auto &x : v)\n#define all(v)\
@@ -121,27 +121,42 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"misc/rng.hpp\"\nusing namespace\
-    \ std;\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static\
-    \ uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rnd() * ((raw_cast*)(&p))->t;\n\
-    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 3 \"tree/tree-path.hpp\"\nusing\
-    \ namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\
-    \ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
-    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
-    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"misc/fastio.hpp\"\nusing\
+    \ namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar\
+    \ ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char\
+    \ num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++)\
+    \ {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4\
+    \ + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\
+    \ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir -\
+    \ pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline\
+    \ void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void\
+    \ rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x)\
+    \ {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while\
+    \ (c < '-');\n  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
+    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
+    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
+    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
+    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
+    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
+    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
+    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
+    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
+    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
+    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
+    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
+    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
+    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 3 \"tree/euler-tour.hpp\"\nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\
+    \nusing namespace std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n\
+    \  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int\
+    \ _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
+    \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
     \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
     \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
     \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
@@ -165,69 +180,63 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"tree/tree-path.hpp\"\n\ntemplate <typename G>\nstruct Tree\
-    \ {\n private:\n  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int>\
-    \ dp;\n  void build() {\n    bl.resize(g.size());\n    dp.resize(g.size());\n\
-    \    dfs(root, -1, 0);\n  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c]\
-    \ = _dp;\n    for (int i = p, x = -1; i != -1;) {\n      bl[c].push_back(i);\n\
-    \      i = ++x < (int)bl[i].size() ? bl[i][x] : -1;\n    }\n    for (auto& d :\
-    \ g[c]) {\n      if (d == p) continue;\n      dfs(d, c, _dp + 1);\n    }\n  }\n\
-    \n public:\n  Tree(G& _g, int _r = 0) : g(_g), root(_r) { build(); }\n\n  int\
-    \ depth(int u) const { return dp[u]; }\n\n  int par(int u) const { return u ==\
-    \ root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int u, int k) const {\n    if\
-    \ (dp[u] < k) return -1;\n    for (int i = k ? __lg(k) : -1; i >= 0; --i) {\n\
-    \      if ((k >> i) & 1) u = bl[u][i];\n    }\n    return u;\n  }\n\n  int nxt(int\
-    \ s, int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n    int u = kth_ancestor(t,\
-    \ dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u : bl[s][0];\n  }\n\n  vector<int>\
-    \ path(int s, int t) const {\n    vector<int> pre, suf;\n    while (dp[s] > dp[t])\
-    \ {\n      pre.push_back(s);\n      s = bl[s][0];\n    }\n    while (dp[s] < dp[t])\
-    \ {\n      suf.push_back(t);\n      t = bl[t][0];\n    }\n    while (s != t) {\n\
-    \      pre.push_back(s);\n      suf.push_back(t);\n      s = bl[s][0];\n     \
-    \ t = bl[t][0];\n    }\n    pre.push_back(s);\n    reverse(begin(suf), end(suf));\n\
-    \    copy(begin(suf), end(suf), back_inserter(pre));\n    return pre;\n  }\n\n\
-    \  int lca(int u, int v) {\n    if (dp[u] != dp[v]) {\n      if (dp[u] > dp[v])\
-    \ swap(u, v);\n      v = kth_ancestor(v, dp[v] - dp[u]);\n    }\n    if (u ==\
-    \ v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u]\
-    \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
-    \    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\
-    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n */\n#line 6 \"verify/verify-unit-test/tree-path.test.cpp\"\
-    \n\nvoid test(vvi& g) {\n  cerr << g.size() << endl;\n  Tree<vvi> tree(g);\n \
-    \ int N = sz(g);\n  rep(i, N) rep(j, N) {\n    vi p1 = tree.path(i, j);\n    vi\
-    \ p2{int(i)};\n    for (int k = i; k != j;) {\n      p2.push_back(k = tree.nxt(k,\
-    \ j));\n    }\n    assert(p1 == p2);\n    int l = i, ld = tree.depth(i);\n   \
-    \ each(x, p1) if (amin(ld, tree.depth(x))) l = x;\n    assert(l == tree.lca(i,\
-    \ j));\n  }\n}\n\nvoid solve() {\n  for (int N : vi{2, 3, 4, 5, 10, 100, 300})\
-    \ {\n    vvi g(N);\n    rep1(i, N - 1) g[randint(0, i)].push_back(i);\n    test(g);\n\
-    \  }\n\n  for (int N : vi{2, 3, 4, 5, 10, 100, 200}) {\n    vvi g(N);\n    rep1(i,\
-    \ N - 1) g[i - 1].push_back(i);\n    test(g);\n  }\n\n  int a, b;\n  cin >> a\
-    \ >> b;\n  cout << a + b << endl;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../competitive-template.hpp\"\n#include \"../../misc/rng.hpp\"\n#include \"\
-    ../../tree/tree-path.hpp\"\n\nvoid test(vvi& g) {\n  cerr << g.size() << endl;\n\
-    \  Tree<vvi> tree(g);\n  int N = sz(g);\n  rep(i, N) rep(j, N) {\n    vi p1 =\
-    \ tree.path(i, j);\n    vi p2{int(i)};\n    for (int k = i; k != j;) {\n     \
-    \ p2.push_back(k = tree.nxt(k, j));\n    }\n    assert(p1 == p2);\n    int l =\
-    \ i, ld = tree.depth(i);\n    each(x, p1) if (amin(ld, tree.depth(x))) l = x;\n\
-    \    assert(l == tree.lca(i, j));\n  }\n}\n\nvoid solve() {\n  for (int N : vi{2,\
-    \ 3, 4, 5, 10, 100, 300}) {\n    vvi g(N);\n    rep1(i, N - 1) g[randint(0, i)].push_back(i);\n\
-    \    test(g);\n  }\n\n  for (int N : vi{2, 3, 4, 5, 10, 100, 200}) {\n    vvi\
-    \ g(N);\n    rep1(i, N - 1) g[i - 1].push_back(i);\n    test(g);\n  }\n\n  int\
-    \ a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ d;\n}\n#line 6 \"tree/euler-tour.hpp\"\n\ntemplate <typename G>\nstruct EulerTour\
+    \ {\n private:\n  struct RMQ {\n    int n, s;\n    using P = pair<int, int>;\n\
+    \    vector<P> seg;\n    P UNIT = P(1 << 30, -1);\n\n    RMQ(int N) : n(N), s(1)\
+    \ {\n      while (s < N) s <<= 1;\n      seg.assign(2 * s, UNIT);\n    }\n\n \
+    \   void set(int k, P x) { seg[k + s] = x; }\n\n    P operator[](int k) const\
+    \ { return seg[k + s]; }\n\n    void build() {\n      for (int k = s - 1; k >\
+    \ 0; k--) {\n        seg[k] = min(seg[2 * k], seg[2 * k + 1]);\n      }\n    }\n\
+    \n    P query(int a, int b) const {\n      P R = UNIT;\n      for (a += s, b +=\
+    \ s; a < b; a >>= 1, b >>= 1) {\n        if (a & 1) R = min(R, seg[a++]);\n  \
+    \      if (b & 1) R = min(R, seg[--b]);\n      }\n      return R;\n    }\n\n \
+    \   int size() const { return n; }\n  };\n\n  vector<int> down, up;\n  int id;\n\
+    \  RMQ rmq;\n\n  void init(G &g, int root) {\n    dfs(g, root, -1, 0);\n    if\
+    \ (id < rmq.size()) rmq.set(id++, {-1, -1});\n    for (int i = 0; i < (int)g.size();\
+    \ i++) {\n      if (down[i] == -1) {\n        rmq.set(id++, {-1, -1});\n     \
+    \   dfs(g, i, -1, 0);\n        if (id < rmq.size()) rmq.set(id++, {-1, -1});\n\
+    \      }\n    }\n    rmq.build();\n  }\n\n  void dfs(G &g, int c, int p, int dp)\
+    \ {\n    down[c] = id;\n    rmq.set(id++, {dp, c});\n    for (auto &d : g[c])\
+    \ {\n      if (d == p) continue;\n      dfs(g, d, c, dp + 1);\n    }\n    up[c]\
+    \ = id;\n    if (p != -1) rmq.set(id++, {dp - 1, p});\n  }\n\n public:\n  // remind\
+    \ : because of additional node,\n  // DS on tour should reserve 2 * n nodes.\n\
+    \  EulerTour(G &g, int root = 0)\n      : down(g.size(), -1), up(g.size(), -1),\
+    \ id(0), rmq(2 * g.size()) {\n    init(g, root);\n  }\n\n  pair<int, int> idx(int\
+    \ i) const { return {down[i], up[i]}; }\n\n  int lca(int a, int b) const {\n \
+    \   if (down[a] > down[b]) swap(a, b);\n    return rmq.query(down[a], down[b]\
+    \ + 1).second;\n  }\n\n  template <typename F>\n  void node_query(int a, int b,\
+    \ F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
+    \ + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int a,\
+    \ int b, F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n \
+    \   f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ a, F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return int(rmq.size());\
+    \ }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\
+    \u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */\n#line 6 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp\"\
+    \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vvi g(N);\n  rep1(i, N - 1) {\n\
+    \    int p;\n    rd(p);\n    g[p].push_back(i);\n  }\n  EulerTour<vvi> tour(g);\n\
+    \  rep(i, Q) {\n    int u, v;\n    rd(u, v);\n    wtn(tour.lca(u, v));\n  }\n\
+    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include \"../../competitive-template.hpp\"\
+    \n#include \"../../misc/fastio.hpp\"\n#include \"../../tree/euler-tour.hpp\"\n\
+    \nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vvi g(N);\n  rep1(i, N - 1) {\n\
+    \    int p;\n    rd(p);\n    g[p].push_back(i);\n  }\n  EulerTour<vvi> tour(g);\n\
+    \  rep(i, Q) {\n    int u, v;\n    rd(u, v);\n    wtn(tour.lca(u, v));\n  }\n\
+    }\n"
   dependsOn:
   - competitive-template.hpp
-  - misc/rng.hpp
-  - tree/tree-path.hpp
+  - misc/fastio.hpp
+  - tree/euler-tour.hpp
   - graph/graph-template.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/tree-path.test.cpp
+  path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
   requiredBy: []
   timestamp: '2020-11-26 16:49:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/tree-path.test.cpp
+documentation_of: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/tree-path.test.cpp
-- /verify/verify/verify-unit-test/tree-path.test.cpp.html
-title: verify/verify-unit-test/tree-path.test.cpp
+- /verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
+- /verify/verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp.html
+title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
 ---

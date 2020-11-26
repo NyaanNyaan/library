@@ -56,38 +56,10 @@ data:
     \ g[c]) {\n      if (d == p) continue;\n      dfs(d, c, _dp + 1);\n    }\n  }\n\
     \n public:\n  Tree(G& _g, int _r = 0) : g(_g), root(_r) { build(); }\n\n  int\
     \ depth(int u) const { return dp[u]; }\n\n  int par(int u) const { return u ==\
-    \ root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int u, int k) const {\n    for\
-    \ (int i = k ? __lg(k) : -1; i >= 0; --i) {\n      if ((k >> i) & 1) {\n     \
-    \   if (i >= (int)bl[u].size()) return -1;\n        u = bl[u][i];\n      }\n \
-    \   }\n    return u;\n  }\n\n  int nxt(int s, int t) const {\n    if (dp[s] >=\
-    \ dp[t]) return par(s);\n    int u = kth_ancestor(t, dp[t] - dp[s] - 1);\n   \
-    \ return bl[u][0] == s ? u : bl[s][0];\n  }\n\n  vector<int> path(int s, int t)\
-    \ const {\n    vector<int> pre, suf;\n    while (dp[s] > dp[t]) {\n      pre.push_back(s);\n\
-    \      s = bl[s][0];\n    }\n    while (dp[s] < dp[t]) {\n      suf.push_back(t);\n\
-    \      t = bl[t][0];\n    }\n    while (s != t) {\n      pre.push_back(s);\n \
-    \     suf.push_back(t);\n      s = bl[s][0];\n      t = bl[t][0];\n    }\n   \
-    \ pre.push_back(s);\n    reverse(begin(suf), end(suf));\n    copy(begin(suf),\
-    \ end(suf), back_inserter(pre));\n    return pre;\n  }\n\n  int lca(int u, int\
-    \ v) {\n    if (dp[u] != dp[v]) {\n      if (dp[u] > dp[v]) swap(u, v);\n    \
-    \  v = kth_ancestor(v, dp[v] - dp[u]);\n    }\n    if (u == v) return u;\n   \
-    \ for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u] < (1 << i)) continue;\n\
-    \      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n    }\n    return\
-    \ bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\
-    \u7684\u306A\u30AF\u30A8\u30EA\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../graph/graph-template.hpp\"\n\ntemplate <typename G>\nstruct Tree {\n private:\n\
-    \  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int> dp;\n  void build()\
-    \ {\n    bl.resize(g.size());\n    dp.resize(g.size());\n    dfs(root, -1, 0);\n\
-    \  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c] = _dp;\n    for (int i\
-    \ = p, x = -1; i != -1;) {\n      bl[c].push_back(i);\n      i = ++x < (int)bl[i].size()\
-    \ ? bl[i][x] : -1;\n    }\n    for (auto& d : g[c]) {\n      if (d == p) continue;\n\
-    \      dfs(d, c, _dp + 1);\n    }\n  }\n\n public:\n  Tree(G& _g, int _r = 0)\
-    \ : g(_g), root(_r) { build(); }\n\n  int depth(int u) const { return dp[u]; }\n\
-    \n  int par(int u) const { return u == root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int\
-    \ u, int k) const {\n    for (int i = k ? __lg(k) : -1; i >= 0; --i) {\n     \
-    \ if ((k >> i) & 1) {\n        if (i >= (int)bl[u].size()) return -1;\n      \
-    \  u = bl[u][i];\n      }\n    }\n    return u;\n  }\n\n  int nxt(int s, int t)\
-    \ const {\n    if (dp[s] >= dp[t]) return par(s);\n    int u = kth_ancestor(t,\
+    \ root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int u, int k) const {\n    if\
+    \ (dp[u] < k) return -1;\n    for (int i = k ? __lg(k) : -1; i >= 0; --i) {\n\
+    \      if ((k >> i) & 1) u = bl[u][i];\n    }\n    return u;\n  }\n\n  int nxt(int\
+    \ s, int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n    int u = kth_ancestor(t,\
     \ dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u : bl[s][0];\n  }\n\n  vector<int>\
     \ path(int s, int t) const {\n    vector<int> pre, suf;\n    while (dp[s] > dp[t])\
     \ {\n      pre.push_back(s);\n      s = bl[s][0];\n    }\n    while (dp[s] < dp[t])\
@@ -101,12 +73,38 @@ data:
     \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
     \    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\
     \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n */\n"
+  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
+    \ \"../graph/graph-template.hpp\"\n\ntemplate <typename G>\nstruct Tree {\n private:\n\
+    \  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int> dp;\n  void build()\
+    \ {\n    bl.resize(g.size());\n    dp.resize(g.size());\n    dfs(root, -1, 0);\n\
+    \  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c] = _dp;\n    for (int i\
+    \ = p, x = -1; i != -1;) {\n      bl[c].push_back(i);\n      i = ++x < (int)bl[i].size()\
+    \ ? bl[i][x] : -1;\n    }\n    for (auto& d : g[c]) {\n      if (d == p) continue;\n\
+    \      dfs(d, c, _dp + 1);\n    }\n  }\n\n public:\n  Tree(G& _g, int _r = 0)\
+    \ : g(_g), root(_r) { build(); }\n\n  int depth(int u) const { return dp[u]; }\n\
+    \n  int par(int u) const { return u == root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int\
+    \ u, int k) const {\n    if (dp[u] < k) return -1;\n    for (int i = k ? __lg(k)\
+    \ : -1; i >= 0; --i) {\n      if ((k >> i) & 1) u = bl[u][i];\n    }\n    return\
+    \ u;\n  }\n\n  int nxt(int s, int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n\
+    \    int u = kth_ancestor(t, dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u\
+    \ : bl[s][0];\n  }\n\n  vector<int> path(int s, int t) const {\n    vector<int>\
+    \ pre, suf;\n    while (dp[s] > dp[t]) {\n      pre.push_back(s);\n      s = bl[s][0];\n\
+    \    }\n    while (dp[s] < dp[t]) {\n      suf.push_back(t);\n      t = bl[t][0];\n\
+    \    }\n    while (s != t) {\n      pre.push_back(s);\n      suf.push_back(t);\n\
+    \      s = bl[s][0];\n      t = bl[t][0];\n    }\n    pre.push_back(s);\n    reverse(begin(suf),\
+    \ end(suf));\n    copy(begin(suf), end(suf), back_inserter(pre));\n    return\
+    \ pre;\n  }\n\n  int lca(int u, int v) {\n    if (dp[u] != dp[v]) {\n      if\
+    \ (dp[u] > dp[v]) swap(u, v);\n      v = kth_ancestor(v, dp[v] - dp[u]);\n   \
+    \ }\n    if (u == v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n\
+    \      if (dp[u] < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i],\
+    \ v = bl[v][i];\n    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\
+    \u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n */\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/tree-path.hpp
   requiredBy: []
-  timestamp: '2020-11-26 03:36:12+09:00'
+  timestamp: '2020-11-26 16:49:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp

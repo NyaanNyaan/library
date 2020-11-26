@@ -62,9 +62,9 @@ data:
   - icon: ':warning:'
     path: tree/dsu-on-tree.hpp
     title: tree/dsu-on-tree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: tree/euler-tour.hpp
-    title: tree/euler-tour.hpp
+    title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
   - icon: ':heavy_check_mark:'
     path: tree/heavy-light-decomposition.hpp
     title: tree/heavy-light-decomposition.hpp
@@ -133,8 +133,14 @@ data:
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
@@ -150,6 +156,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
@@ -267,6 +276,7 @@ data:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
@@ -275,8 +285,10 @@ data:
   - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp

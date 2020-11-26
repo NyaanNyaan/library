@@ -4,6 +4,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/radix-heap.hpp
     title: Radix Heap
+  - icon: ':heavy_check_mark:'
+    path: graph/static-graph.hpp
+    title: Static Graph
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -36,64 +39,60 @@ data:
     \        ms[b] = min(p.first, ms[b]);\n      }\n      vs[idx].clear();\n     \
     \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
     \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n\n/**\n *\
-    \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n#line 6\
-    \ \"shortest-path/dijkstra-fast.hpp\"\n\ntemplate <typename T>\nstruct FastGraph\
-    \ {\n private:\n  struct E {\n    int v;\n    T c;\n    E() {}\n    E(const int&\
-    \ _v, const T& _c) : v(_v), c(_c) {}\n  };\n  template <typename It>\n  struct\
+    \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n#line 3\
+    \ \"graph/static-graph.hpp\"\nusing namespace std;\n\nnamespace StaticGraphImpl\
+    \ {\n\ntemplate <typename T, bool Cond = is_void<T>::value>\nstruct E;\ntemplate\
+    \ <typename T>\nstruct E<T, false> {\n  int to;\n  T cost;\n  E() {}\n  E(const\
+    \ int& v, const T& c) : to(v), cost(c) {}\n  operator int() const { return to;\
+    \ }\n};\ntemplate <typename T>\nstruct E<T, true> {\n  int to;\n  E() {}\n  E(const\
+    \ int& v) : to(v) {}\n  operator int() const { return to; }\n};\n\ntemplate <typename\
+    \ T = void>\nstruct StaticGraph {\n private:\n  template <typename It>\n  struct\
     \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
-    \ return e; }\n    int size() const { return int(e - b); }\n  };\n\n  int N, M,\
-    \ ec;\n  vector<int> head;\n  vector<pair<int, E>> buf;\n  vector<E> es;\n\n \
-    \ void build() {\n    partial_sum(begin(head), end(head), begin(head));\n    es.resize(M);\n\
-    \    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n public:\n  FastGraph(int\
-    \ _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0) {\n    buf.reserve(M);\n \
-    \ }\n  void add_edge(int u, int v, T c) {\n    buf.emplace_back(u, E{v, c});\n\
-    \    ++head[u];\n    if ((int)buf.size() == M) build();\n  }\n  Es<typename vector<E>::iterator>\
-    \ operator[](int u) {\n    return {begin(es) + head[u], begin(es) + head[u + 1]};\n\
-    \  }\n  const Es<typename vector<E>::const_iterator> operator[](int u) const {\n\
-    \    return {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size()\
-    \ const { return N; }\n};\n\ntemplate <typename T>\nstruct DijkstraGraph {\n \
-    \ FastGraph<T> g;\n\n  DijkstraGraph(int _n, int _m) : g(_n, _m) {}\n\n  void\
-    \ add_edge(int u, int v, T c) { g.add_edge(u, v, c); }\n\n  vector<T> dijkstra(int\
-    \ start = 0) {\n    vector<T> d(g.size(), T(-1));\n    RadixHeap<T, int> Q;\n\
-    \    d[start] = 0;\n    Q.push(0, start);\n    while (!Q.empty()) {\n      auto\
-    \ p = Q.pop();\n      int u = p.second;\n      if (d[u] < T(p.first)) continue;\n\
-    \      T du = d[u];\n      for (auto& [v, c] : g[u]) {\n        if (d[v] == T(-1)\
-    \ or du + c < d[v]) {\n          d[v] = du + c;\n          Q.push(d[v], v);\n\
-    \        }\n      }\n    }\n    return d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\
-    \u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs\
-    \ docs/shortest-path/dijkstra-fast.md\n **/\n"
+    \ return e; }\n    int size() const { return int(e - b); }\n  };\n  int N, M,\
+    \ ec;\n  vector<int> head;\n  vector<pair<int, E<T>>> buf;\n  vector<E<T>> es;\n\
+    \n  void build() {\n    partial_sum(begin(head), end(head), begin(head));\n  \
+    \  es.resize(M);\n    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n public:\n\
+    \  StaticGraph(int _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0) {\n    buf.reserve(M);\n\
+    \  }\n\n  template <typename... Args>\n  void add_edge(int u, Args&&... args)\
+    \ {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n    buf.emplace_back(u, E<T>{std::forward<Args>(args)...});\n\
+    #pragma GCC diagnostic warning \"-Wnarrowing\"\n    ++head[u];\n    if ((int)buf.size()\
+    \ == M) build();\n  }\n\n  Es<typename vector<E<T>>::iterator> operator[](int\
+    \ u) {\n    return {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  const\
+    \ Es<typename vector<E<T>>::const_iterator> operator[](int u) const {\n    return\
+    \ {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size() const { return\
+    \ N; }\n};\n\n}  // namespace StaticGraphImpl\n\nusing StaticGraphImpl::StaticGraph;\n\
+    \n/**\n * @brief Static Graph\n */\n#line 7 \"shortest-path/dijkstra-fast.hpp\"\
+    \n\ntemplate <typename T>\nstruct DijkstraGraph {\n  StaticGraph<T> g;\n\n  DijkstraGraph(int\
+    \ _n, int _m) : g(_n, _m) {}\n\n  void add_edge(int u, int v, T c) { g.add_edge(u,\
+    \ v, c); }\n\n  vector<T> dijkstra(int start = 0) {\n    vector<T> d(g.size(),\
+    \ T(-1));\n    RadixHeap<T, int> Q;\n    d[start] = 0;\n    Q.push(0, start);\n\
+    \    while (!Q.empty()) {\n      auto p = Q.pop();\n      int u = p.second;\n\
+    \      if (d[u] < T(p.first)) continue;\n      T du = d[u];\n      for (auto&&\
+    \ [v, c] : g[u]) {\n        if (d[v] == T(-1) || du + c < d[v]) {\n          d[v]\
+    \ = du + c;\n          Q.push(d[v], v);\n        }\n      }\n    }\n    return\
+    \ d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\
+    \u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
+    \ **/\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../data-structure/radix-heap.hpp\"\n\ntemplate <typename T>\nstruct FastGraph\
-    \ {\n private:\n  struct E {\n    int v;\n    T c;\n    E() {}\n    E(const int&\
-    \ _v, const T& _c) : v(_v), c(_c) {}\n  };\n  template <typename It>\n  struct\
-    \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
-    \ return e; }\n    int size() const { return int(e - b); }\n  };\n\n  int N, M,\
-    \ ec;\n  vector<int> head;\n  vector<pair<int, E>> buf;\n  vector<E> es;\n\n \
-    \ void build() {\n    partial_sum(begin(head), end(head), begin(head));\n    es.resize(M);\n\
-    \    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n public:\n  FastGraph(int\
-    \ _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0) {\n    buf.reserve(M);\n \
-    \ }\n  void add_edge(int u, int v, T c) {\n    buf.emplace_back(u, E{v, c});\n\
-    \    ++head[u];\n    if ((int)buf.size() == M) build();\n  }\n  Es<typename vector<E>::iterator>\
-    \ operator[](int u) {\n    return {begin(es) + head[u], begin(es) + head[u + 1]};\n\
-    \  }\n  const Es<typename vector<E>::const_iterator> operator[](int u) const {\n\
-    \    return {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size()\
-    \ const { return N; }\n};\n\ntemplate <typename T>\nstruct DijkstraGraph {\n \
-    \ FastGraph<T> g;\n\n  DijkstraGraph(int _n, int _m) : g(_n, _m) {}\n\n  void\
-    \ add_edge(int u, int v, T c) { g.add_edge(u, v, c); }\n\n  vector<T> dijkstra(int\
-    \ start = 0) {\n    vector<T> d(g.size(), T(-1));\n    RadixHeap<T, int> Q;\n\
-    \    d[start] = 0;\n    Q.push(0, start);\n    while (!Q.empty()) {\n      auto\
-    \ p = Q.pop();\n      int u = p.second;\n      if (d[u] < T(p.first)) continue;\n\
-    \      T du = d[u];\n      for (auto& [v, c] : g[u]) {\n        if (d[v] == T(-1)\
-    \ or du + c < d[v]) {\n          d[v] = du + c;\n          Q.push(d[v], v);\n\
-    \        }\n      }\n    }\n    return d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\
-    \u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs\
-    \ docs/shortest-path/dijkstra-fast.md\n **/\n"
+    \ \"../data-structure/radix-heap.hpp\"\n#include \"../graph/static-graph.hpp\"\
+    \n\ntemplate <typename T>\nstruct DijkstraGraph {\n  StaticGraph<T> g;\n\n  DijkstraGraph(int\
+    \ _n, int _m) : g(_n, _m) {}\n\n  void add_edge(int u, int v, T c) { g.add_edge(u,\
+    \ v, c); }\n\n  vector<T> dijkstra(int start = 0) {\n    vector<T> d(g.size(),\
+    \ T(-1));\n    RadixHeap<T, int> Q;\n    d[start] = 0;\n    Q.push(0, start);\n\
+    \    while (!Q.empty()) {\n      auto p = Q.pop();\n      int u = p.second;\n\
+    \      if (d[u] < T(p.first)) continue;\n      T du = d[u];\n      for (auto&&\
+    \ [v, c] : g[u]) {\n        if (d[v] == T(-1) || du + c < d[v]) {\n          d[v]\
+    \ = du + c;\n          Q.push(d[v], v);\n        }\n      }\n    }\n    return\
+    \ d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\
+    \u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
+    \ **/\n"
   dependsOn:
   - data-structure/radix-heap.hpp
+  - graph/static-graph.hpp
   isVerificationFile: false
   path: shortest-path/dijkstra-fast.hpp
   requiredBy: []
-  timestamp: '2020-11-26 01:55:58+09:00'
+  timestamp: '2020-11-26 16:49:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/dijkstra.test.cpp

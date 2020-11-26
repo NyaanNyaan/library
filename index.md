@@ -198,6 +198,9 @@ data:
       path: graph/max-independent-set.hpp
       title: graph/max-independent-set.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/static-graph.hpp
+      title: Static Graph
+    - icon: ':heavy_check_mark:'
       path: graph/strongly-connected-components.hpp
       title: graph/strongly-connected-components.hpp
     - icon: ':heavy_check_mark:'
@@ -515,9 +518,9 @@ data:
     - icon: ':warning:'
       path: tree/dsu-on-tree.hpp
       title: tree/dsu-on-tree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: tree/euler-tour.hpp
-      title: tree/euler-tour.hpp
+      title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
     - icon: ':heavy_check_mark:'
       path: tree/frequency-table-of-tree-distance.hpp
       title: tree/frequency-table-of-tree-distance.hpp
@@ -769,8 +772,14 @@ data:
       path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
       title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
@@ -847,6 +856,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp

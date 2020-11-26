@@ -189,24 +189,23 @@ data:
     \ g[c]) {\n      if (d == p) continue;\n      dfs(d, c, _dp + 1);\n    }\n  }\n\
     \n public:\n  Tree(G& _g, int _r = 0) : g(_g), root(_r) { build(); }\n\n  int\
     \ depth(int u) const { return dp[u]; }\n\n  int par(int u) const { return u ==\
-    \ root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int u, int k) const {\n    for\
-    \ (int i = k ? __lg(k) : -1; i >= 0; --i) {\n      if ((k >> i) & 1) {\n     \
-    \   if (i >= (int)bl[u].size()) return -1;\n        u = bl[u][i];\n      }\n \
-    \   }\n    return u;\n  }\n\n  int nxt(int s, int t) const {\n    if (dp[s] >=\
-    \ dp[t]) return par(s);\n    int u = kth_ancestor(t, dp[t] - dp[s] - 1);\n   \
-    \ return bl[u][0] == s ? u : bl[s][0];\n  }\n\n  vector<int> path(int s, int t)\
-    \ const {\n    vector<int> pre, suf;\n    while (dp[s] > dp[t]) {\n      pre.push_back(s);\n\
-    \      s = bl[s][0];\n    }\n    while (dp[s] < dp[t]) {\n      suf.push_back(t);\n\
-    \      t = bl[t][0];\n    }\n    while (s != t) {\n      pre.push_back(s);\n \
-    \     suf.push_back(t);\n      s = bl[s][0];\n      t = bl[t][0];\n    }\n   \
-    \ pre.push_back(s);\n    reverse(begin(suf), end(suf));\n    copy(begin(suf),\
-    \ end(suf), back_inserter(pre));\n    return pre;\n  }\n\n  int lca(int u, int\
-    \ v) {\n    if (dp[u] != dp[v]) {\n      if (dp[u] > dp[v]) swap(u, v);\n    \
-    \  v = kth_ancestor(v, dp[v] - dp[u]);\n    }\n    if (u == v) return u;\n   \
-    \ for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u] < (1 << i)) continue;\n\
-    \      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n    }\n    return\
-    \ bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\
-    \u7684\u306A\u30AF\u30A8\u30EA\n */\n#line 6 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp\"\
+    \ root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int u, int k) const {\n    if\
+    \ (dp[u] < k) return -1;\n    for (int i = k ? __lg(k) : -1; i >= 0; --i) {\n\
+    \      if ((k >> i) & 1) u = bl[u][i];\n    }\n    return u;\n  }\n\n  int nxt(int\
+    \ s, int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n    int u = kth_ancestor(t,\
+    \ dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u : bl[s][0];\n  }\n\n  vector<int>\
+    \ path(int s, int t) const {\n    vector<int> pre, suf;\n    while (dp[s] > dp[t])\
+    \ {\n      pre.push_back(s);\n      s = bl[s][0];\n    }\n    while (dp[s] < dp[t])\
+    \ {\n      suf.push_back(t);\n      t = bl[t][0];\n    }\n    while (s != t) {\n\
+    \      pre.push_back(s);\n      suf.push_back(t);\n      s = bl[s][0];\n     \
+    \ t = bl[t][0];\n    }\n    pre.push_back(s);\n    reverse(begin(suf), end(suf));\n\
+    \    copy(begin(suf), end(suf), back_inserter(pre));\n    return pre;\n  }\n\n\
+    \  int lca(int u, int v) {\n    if (dp[u] != dp[v]) {\n      if (dp[u] > dp[v])\
+    \ swap(u, v);\n      v = kth_ancestor(v, dp[v] - dp[u]);\n    }\n    if (u ==\
+    \ v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u]\
+    \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
+    \    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\
+    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n */\n#line 6 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp\"\
     \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vvi g(N);\n  rep1(i, N - 1) {\n\
     \    int p;\n    rd(p);\n    g[p].push_back(i);\n  }\n  Tree<vvi> tree(g);\n \
     \ rep(i, Q) {\n    int u, v;\n    rd(u, v);\n    wtn(tree.lca(u, v));\n  }\n}\n"
@@ -223,7 +222,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   requiredBy: []
-  timestamp: '2020-11-26 03:36:12+09:00'
+  timestamp: '2020-11-26 16:49:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp

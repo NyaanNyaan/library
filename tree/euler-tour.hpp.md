@@ -5,10 +5,22 @@ data:
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/tree/euler-tour.md
+    document_title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\
+      \u6027)"
     links: []
   bundledCode: "#line 2 \"tree/euler-tour.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
     \ std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\ntemplate\
@@ -39,93 +51,112 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"tree/euler-tour.hpp\"\n\n// ** NOT RECOMMEND TO USE **\n//\
-    \ euler tour of node \nstruct EulerTour {\n  struct UnionFind {\n    vector<int>\
-    \ data;\n    UnionFind(int N) : data(N, -1) {}\n\n    int find(int k) { return\
-    \ data[k] < 0 ? k : data[k] = find(data[k]); }\n\n    int unite(int x, int y)\
-    \ {\n      if ((x = find(x)) == (y = find(y))) return false;\n      if (data[x]\
-    \ > data[y]) swap(x, y);\n      data[x] += data[y];\n      data[y] = x;\n    \
-    \  return true;\n    }\n\n    int size(int k) { return -data[find(k)]; }\n\n \
-    \   int same(int x, int y) { return find(x) == find(y); }\n  };\n\n  struct SegmentTree_RangeMin\
-    \ {\n    int size;\n    using P = pair<int, int>;\n    vector<P> seg;\n    P UNIT\
-    \ = P(1 << 30, -1);\n\n    SegmentTree_RangeMin() {}\n\n    SegmentTree_RangeMin(int\
-    \ N) {\n      size = 1;\n      while (size < N) size <<= 1;\n      seg.assign(2\
-    \ * size, UNIT);\n    }\n\n    void set(int k, P x) { seg[k + size] = x; }\n\n\
-    \    void build() {\n      for (int k = size - 1; k > 0; k--) {\n        seg[k]\
-    \ = min(seg[2 * k], seg[2 * k + 1]);\n      }\n    }\n\n    // query to [a, b)\n\
-    \    P query(int a, int b) {\n      P L = UNIT, R = UNIT;\n      for (a += size,\
-    \ b += size; a < b; a >>= 1, b >>= 1) {\n        if (a & 1) L = min(L, seg[a++]);\n\
-    \        if (b & 1) R = min(seg[--b], R);\n      }\n      return min(L, R);\n\
-    \    }\n  };\n\n  using G = vector<vector<int>>;\n\n  UnionFind uf;\n  vector<int>\
-    \ down, up, tour, par, depth;\n  int i_;\n  SegmentTree_RangeMin lca_seg;\n\n\
-    \  EulerTour(G &g)\n      : uf(g.size()),\n        down(g.size(), -1),\n     \
-    \   up(g.size()),\n        tour(g.size() * 2),\n        par(g.size()),\n     \
-    \   depth(g.size(), -1),\n        i_(0),\n        lca_seg(2 * g.size()) {\n  \
-    \  vector<int> isroot(g.size(), 1);\n    for (int i = 0; i < (int)g.size(); i++)\
-    \ {\n      for (auto &d : g[i]) isroot[d] = 0;\n    }\n    for (int i = 0; i <\
-    \ (int)g.size(); i++) {\n      if (!isroot[i]) continue;\n      dfs(g, i, -1);\n\
-    \    }\n    lca_seg.build();\n  }\n\n  void dfs(G &g, int c, int p) {\n    down[c]\
-    \ = i_;\n    par[c] = p;\n    depth[c] = ~p ? depth[p] + 1 : 0;\n    lca_seg.set(i_,\
-    \ {depth[c], c});\n    tour[i_++] = c;\n    if (~p) uf.unite(c, p);\n    for (auto\
-    \ &d : g[c]) {\n      if (d == p) continue;\n      dfs(g, d, c);\n    }\n    up[c]\
-    \ = i_;\n    if (~p) lca_seg.set(i_, {depth[p], p});\n    tour[i_++] = c;\n  }\n\
-    \n  int lca(int a, int b) {\n    if (!uf.same(a, b)) return -1;\n    if (down[a]\
-    \ > down[b]) swap(a, b);\n    return lca_seg.query(down[a], down[b] + 1).second;\n\
-    \  }\n\n  template <typename F>\n  void node_query(int a, int b, F &f) {\n   \
-    \ int l = lca(a, b);\n    assert(l != -1);\n    f(down[l], down[a] + 1);\n   \
-    \ f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int\
-    \ a, int b, F &f) {\n    int l = lca(a, b);\n    assert(l != -1);\n    f(down[l]\
-    \ + 1, down[a] + 1);\n    f(down[l] + 1, down[b] + 1);\n  }\n};\n"
+    \ d;\n}\n#line 6 \"tree/euler-tour.hpp\"\n\ntemplate <typename G>\nstruct EulerTour\
+    \ {\n private:\n  struct RMQ {\n    int n, s;\n    using P = pair<int, int>;\n\
+    \    vector<P> seg;\n    P UNIT = P(1 << 30, -1);\n\n    RMQ(int N) : n(N), s(1)\
+    \ {\n      while (s < N) s <<= 1;\n      seg.assign(2 * s, UNIT);\n    }\n\n \
+    \   void set(int k, P x) { seg[k + s] = x; }\n\n    P operator[](int k) const\
+    \ { return seg[k + s]; }\n\n    void build() {\n      for (int k = s - 1; k >\
+    \ 0; k--) {\n        seg[k] = min(seg[2 * k], seg[2 * k + 1]);\n      }\n    }\n\
+    \n    P query(int a, int b) const {\n      P R = UNIT;\n      for (a += s, b +=\
+    \ s; a < b; a >>= 1, b >>= 1) {\n        if (a & 1) R = min(R, seg[a++]);\n  \
+    \      if (b & 1) R = min(R, seg[--b]);\n      }\n      return R;\n    }\n\n \
+    \   int size() const { return n; }\n  };\n\n  vector<int> down, up;\n  int id;\n\
+    \  RMQ rmq;\n\n  void init(G &g, int root) {\n    dfs(g, root, -1, 0);\n    if\
+    \ (id < rmq.size()) rmq.set(id++, {-1, -1});\n    for (int i = 0; i < (int)g.size();\
+    \ i++) {\n      if (down[i] == -1) {\n        rmq.set(id++, {-1, -1});\n     \
+    \   dfs(g, i, -1, 0);\n        if (id < rmq.size()) rmq.set(id++, {-1, -1});\n\
+    \      }\n    }\n    rmq.build();\n  }\n\n  void dfs(G &g, int c, int p, int dp)\
+    \ {\n    down[c] = id;\n    rmq.set(id++, {dp, c});\n    for (auto &d : g[c])\
+    \ {\n      if (d == p) continue;\n      dfs(g, d, c, dp + 1);\n    }\n    up[c]\
+    \ = id;\n    if (p != -1) rmq.set(id++, {dp - 1, p});\n  }\n\n public:\n  // remind\
+    \ : because of additional node,\n  // DS on tour should reserve 2 * n nodes.\n\
+    \  EulerTour(G &g, int root = 0)\n      : down(g.size(), -1), up(g.size(), -1),\
+    \ id(0), rmq(2 * g.size()) {\n    init(g, root);\n  }\n\n  pair<int, int> idx(int\
+    \ i) const { return {down[i], up[i]}; }\n\n  int lca(int a, int b) const {\n \
+    \   if (down[a] > down[b]) swap(a, b);\n    return rmq.query(down[a], down[b]\
+    \ + 1).second;\n  }\n\n  template <typename F>\n  void node_query(int a, int b,\
+    \ F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
+    \ + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int a,\
+    \ int b, F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n \
+    \   f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ a, F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return int(rmq.size());\
+    \ }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\
+    \u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../graph/graph-template.hpp\"\n\n// ** NOT RECOMMEND TO USE **\n// euler tour\
-    \ of node \nstruct EulerTour {\n  struct UnionFind {\n    vector<int> data;\n\
-    \    UnionFind(int N) : data(N, -1) {}\n\n    int find(int k) { return data[k]\
-    \ < 0 ? k : data[k] = find(data[k]); }\n\n    int unite(int x, int y) {\n    \
-    \  if ((x = find(x)) == (y = find(y))) return false;\n      if (data[x] > data[y])\
-    \ swap(x, y);\n      data[x] += data[y];\n      data[y] = x;\n      return true;\n\
-    \    }\n\n    int size(int k) { return -data[find(k)]; }\n\n    int same(int x,\
-    \ int y) { return find(x) == find(y); }\n  };\n\n  struct SegmentTree_RangeMin\
-    \ {\n    int size;\n    using P = pair<int, int>;\n    vector<P> seg;\n    P UNIT\
-    \ = P(1 << 30, -1);\n\n    SegmentTree_RangeMin() {}\n\n    SegmentTree_RangeMin(int\
-    \ N) {\n      size = 1;\n      while (size < N) size <<= 1;\n      seg.assign(2\
-    \ * size, UNIT);\n    }\n\n    void set(int k, P x) { seg[k + size] = x; }\n\n\
-    \    void build() {\n      for (int k = size - 1; k > 0; k--) {\n        seg[k]\
-    \ = min(seg[2 * k], seg[2 * k + 1]);\n      }\n    }\n\n    // query to [a, b)\n\
-    \    P query(int a, int b) {\n      P L = UNIT, R = UNIT;\n      for (a += size,\
-    \ b += size; a < b; a >>= 1, b >>= 1) {\n        if (a & 1) L = min(L, seg[a++]);\n\
-    \        if (b & 1) R = min(seg[--b], R);\n      }\n      return min(L, R);\n\
-    \    }\n  };\n\n  using G = vector<vector<int>>;\n\n  UnionFind uf;\n  vector<int>\
-    \ down, up, tour, par, depth;\n  int i_;\n  SegmentTree_RangeMin lca_seg;\n\n\
-    \  EulerTour(G &g)\n      : uf(g.size()),\n        down(g.size(), -1),\n     \
-    \   up(g.size()),\n        tour(g.size() * 2),\n        par(g.size()),\n     \
-    \   depth(g.size(), -1),\n        i_(0),\n        lca_seg(2 * g.size()) {\n  \
-    \  vector<int> isroot(g.size(), 1);\n    for (int i = 0; i < (int)g.size(); i++)\
-    \ {\n      for (auto &d : g[i]) isroot[d] = 0;\n    }\n    for (int i = 0; i <\
-    \ (int)g.size(); i++) {\n      if (!isroot[i]) continue;\n      dfs(g, i, -1);\n\
-    \    }\n    lca_seg.build();\n  }\n\n  void dfs(G &g, int c, int p) {\n    down[c]\
-    \ = i_;\n    par[c] = p;\n    depth[c] = ~p ? depth[p] + 1 : 0;\n    lca_seg.set(i_,\
-    \ {depth[c], c});\n    tour[i_++] = c;\n    if (~p) uf.unite(c, p);\n    for (auto\
-    \ &d : g[c]) {\n      if (d == p) continue;\n      dfs(g, d, c);\n    }\n    up[c]\
-    \ = i_;\n    if (~p) lca_seg.set(i_, {depth[p], p});\n    tour[i_++] = c;\n  }\n\
-    \n  int lca(int a, int b) {\n    if (!uf.same(a, b)) return -1;\n    if (down[a]\
-    \ > down[b]) swap(a, b);\n    return lca_seg.query(down[a], down[b] + 1).second;\n\
-    \  }\n\n  template <typename F>\n  void node_query(int a, int b, F &f) {\n   \
-    \ int l = lca(a, b);\n    assert(l != -1);\n    f(down[l], down[a] + 1);\n   \
-    \ f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int\
-    \ a, int b, F &f) {\n    int l = lca(a, b);\n    assert(l != -1);\n    f(down[l]\
-    \ + 1, down[a] + 1);\n    f(down[l] + 1, down[b] + 1);\n  }\n};"
+    \ \"../graph/graph-template.hpp\"\n\ntemplate <typename G>\nstruct EulerTour {\n\
+    \ private:\n  struct RMQ {\n    int n, s;\n    using P = pair<int, int>;\n   \
+    \ vector<P> seg;\n    P UNIT = P(1 << 30, -1);\n\n    RMQ(int N) : n(N), s(1)\
+    \ {\n      while (s < N) s <<= 1;\n      seg.assign(2 * s, UNIT);\n    }\n\n \
+    \   void set(int k, P x) { seg[k + s] = x; }\n\n    P operator[](int k) const\
+    \ { return seg[k + s]; }\n\n    void build() {\n      for (int k = s - 1; k >\
+    \ 0; k--) {\n        seg[k] = min(seg[2 * k], seg[2 * k + 1]);\n      }\n    }\n\
+    \n    P query(int a, int b) const {\n      P R = UNIT;\n      for (a += s, b +=\
+    \ s; a < b; a >>= 1, b >>= 1) {\n        if (a & 1) R = min(R, seg[a++]);\n  \
+    \      if (b & 1) R = min(R, seg[--b]);\n      }\n      return R;\n    }\n\n \
+    \   int size() const { return n; }\n  };\n\n  vector<int> down, up;\n  int id;\n\
+    \  RMQ rmq;\n\n  void init(G &g, int root) {\n    dfs(g, root, -1, 0);\n    if\
+    \ (id < rmq.size()) rmq.set(id++, {-1, -1});\n    for (int i = 0; i < (int)g.size();\
+    \ i++) {\n      if (down[i] == -1) {\n        rmq.set(id++, {-1, -1});\n     \
+    \   dfs(g, i, -1, 0);\n        if (id < rmq.size()) rmq.set(id++, {-1, -1});\n\
+    \      }\n    }\n    rmq.build();\n  }\n\n  void dfs(G &g, int c, int p, int dp)\
+    \ {\n    down[c] = id;\n    rmq.set(id++, {dp, c});\n    for (auto &d : g[c])\
+    \ {\n      if (d == p) continue;\n      dfs(g, d, c, dp + 1);\n    }\n    up[c]\
+    \ = id;\n    if (p != -1) rmq.set(id++, {dp - 1, p});\n  }\n\n public:\n  // remind\
+    \ : because of additional node,\n  // DS on tour should reserve 2 * n nodes.\n\
+    \  EulerTour(G &g, int root = 0)\n      : down(g.size(), -1), up(g.size(), -1),\
+    \ id(0), rmq(2 * g.size()) {\n    init(g, root);\n  }\n\n  pair<int, int> idx(int\
+    \ i) const { return {down[i], up[i]}; }\n\n  int lca(int a, int b) const {\n \
+    \   if (down[a] > down[b]) swap(a, b);\n    return rmq.query(down[a], down[b]\
+    \ + 1).second;\n  }\n\n  template <typename F>\n  void node_query(int a, int b,\
+    \ F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
+    \ + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int a,\
+    \ int b, F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n \
+    \   f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ a, F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return int(rmq.size());\
+    \ }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\
+    \u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/euler-tour.hpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2020-11-26 16:49:47+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
 documentation_of: tree/euler-tour.hpp
 layout: document
 redirect_from:
 - /library/tree/euler-tour.hpp
 - /library/tree/euler-tour.hpp.html
-title: tree/euler-tour.hpp
+title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
 ---
+## Euler Tour
+
+無向森が与えられたときにそれぞれの木に対してEuler Tourを構築するライブラリ。
+
+#### 概要
+
+TODO: アルゴリズムの説明を書く
+
+TODO: 森が与えられた時と辺クエリのverifyを書いていないので、書く
+
+備忘録
+
+- LCAを求めるときとパスクエリで記録する値が違う
+  - LCAの時は原義のオイラーツアー(たぶん)
+  - パスクエリは入る時と出る時を記録
+- 逆元つきモノイドはEuler Tourでクエリ$\mathrm{O}(\log N)$
+- 逆元なしモノイドはHL Decでクエリ$\mathrm{O}(\log^2 N)$
+
+#### 使い方
+
+- `EulerTour(g, root)`: グラフ`g`に対して`root`を最初の根とするオイラーツアーを構築する。
+- `lca(u, v)`:$\mathrm{lca}(u,v)$を返す。
+- `idx(i)` : `make_pair(down[i], up[i])`を返す。ここで`down[i]`は頂点iに入った時のid、`up[i]`は頂点iから出た時のidである。
+- `path_query(u, v, f)`: 頂点クエリ用の関数。
+- `edge_query(u, v, f)`: 辺クエリ用の関数。
+- `subtree_query(u, v, f)`: 部分木クエリ用の関数。
