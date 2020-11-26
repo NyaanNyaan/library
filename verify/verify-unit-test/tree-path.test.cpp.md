@@ -190,17 +190,18 @@ data:
     \ v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u]\
     \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
     \    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\
-    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n */\n#line 6 \"verify/verify-unit-test/tree-path.test.cpp\"\
-    \n\nvoid test(vvi& g) {\n  cerr << g.size() << endl;\n  Tree<vvi> tree(g);\n \
-    \ int N = sz(g);\n  rep(i, N) rep(j, N) {\n    vi p1 = tree.path(i, j);\n    vi\
-    \ p2{int(i)};\n    for (int k = i; k != j;) {\n      p2.push_back(k = tree.nxt(k,\
-    \ j));\n    }\n    assert(p1 == p2);\n    int l = i, ld = tree.depth(i);\n   \
-    \ each(x, p1) if (amin(ld, tree.depth(x))) l = x;\n    assert(l == tree.lca(i,\
-    \ j));\n  }\n}\n\nvoid solve() {\n  for (int N : vi{2, 3, 4, 5, 10, 100, 300})\
-    \ {\n    vvi g(N);\n    rep1(i, N - 1) g[randint(0, i)].push_back(i);\n    test(g);\n\
-    \  }\n\n  for (int N : vi{2, 3, 4, 5, 10, 100, 200}) {\n    vvi g(N);\n    rep1(i,\
-    \ N - 1) g[i - 1].push_back(i);\n    test(g);\n  }\n\n  int a, b;\n  cin >> a\
-    \ >> b;\n  cout << a + b << endl;\n}\n"
+    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n * @docs docs/tree/tree-query.md\n\
+    \ */\n#line 6 \"verify/verify-unit-test/tree-path.test.cpp\"\n\nvoid test(vvi&\
+    \ g) {\n  cerr << g.size() << endl;\n  Tree<vvi> tree(g);\n  int N = sz(g);\n\
+    \  rep(i, N) rep(j, N) {\n    vi p1 = tree.path(i, j);\n    vi p2{int(i)};\n \
+    \   for (int k = i; k != j;) {\n      p2.push_back(k = tree.nxt(k, j));\n    }\n\
+    \    assert(p1 == p2);\n    int l = i, ld = tree.depth(i);\n    each(x, p1) if\
+    \ (amin(ld, tree.depth(x))) l = x;\n    assert(l == tree.lca(i, j));\n  }\n}\n\
+    \nvoid solve() {\n  for (int N : vi{2, 3, 4, 5, 10, 100, 300}) {\n    vvi g(N);\n\
+    \    rep1(i, N - 1) g[randint(0, i)].push_back(i);\n    test(g);\n  }\n\n  for\
+    \ (int N : vi{2, 3, 4, 5, 10, 100, 200}) {\n    vvi g(N);\n    rep1(i, N - 1)\
+    \ g[i - 1].push_back(i);\n    test(g);\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../competitive-template.hpp\"\n#include \"../../misc/rng.hpp\"\n#include \"\
     ../../tree/tree-query.hpp\"\n\nvoid test(vvi& g) {\n  cerr << g.size() << endl;\n\
@@ -221,7 +222,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/tree-path.test.cpp
   requiredBy: []
-  timestamp: '2020-11-27 00:47:15+09:00'
+  timestamp: '2020-11-27 03:12:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/tree-path.test.cpp

@@ -205,7 +205,8 @@ data:
     \ v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u]\
     \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
     \    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\
-    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n */\n#line 6 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp\"\
+    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n * @docs docs/tree/tree-query.md\n\
+    \ */\n#line 6 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp\"\
     \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vvi g(N);\n  rep1(i, N - 1) {\n\
     \    int p;\n    rd(p);\n    g[p].push_back(i);\n  }\n  Tree<vvi> tree(g);\n \
     \ rep(i, Q) {\n    int u, v;\n    rd(u, v);\n    wtn(tree.lca(u, v));\n  }\n}\n"
@@ -222,7 +223,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   requiredBy: []
-  timestamp: '2020-11-27 00:47:15+09:00'
+  timestamp: '2020-11-27 03:12:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp

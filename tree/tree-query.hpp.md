@@ -15,6 +15,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/tree/tree-query.md
     document_title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\
       \u30EA"
     links: []
@@ -72,7 +73,8 @@ data:
     \ v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u]\
     \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
     \    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\
-    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n */\n"
+    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n * @docs docs/tree/tree-query.md\n\
+    \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../graph/graph-template.hpp\"\n\ntemplate <typename G>\nstruct Tree {\n private:\n\
     \  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int> dp;\n  void build()\
@@ -98,13 +100,14 @@ data:
     \ }\n    if (u == v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n\
     \      if (dp[u] < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i],\
     \ v = bl[v][i];\n    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\
-    \u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n */\n"
+    \u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n * @docs docs/tree/tree-query.md\n\
+    \ */\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/tree-query.hpp
   requiredBy: []
-  timestamp: '2020-11-27 00:47:15+09:00'
+  timestamp: '2020-11-27 03:12:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
@@ -116,3 +119,25 @@ redirect_from:
 - /library/tree/tree-query.hpp.html
 title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
 ---
+## 木に対する一般的なクエリ
+
+#### 概要
+
+木を触る時によく使うクエリを詰め込んだデータ構造。ダブリングをベースに実装している。
+
+
+#### 余談
+
+`nxt(s, t)`を$\langle$前計算$\mathrm{O}(N)$,クエリ$\mathrm{O}(1)$$\rangle$で出来るか考えたけど良くわからなかった。$\langle\mathrm{O}(N),\mathrm{O}(1)\rangle$RMQとかで出来るんだろうか…
+
+ちなみにsparse tableを使えば$\langle\mathrm{O}(N\log N),\mathrm{O}(1)\rangle$は達成可能だと思う。自分の実装は$\langle\mathrm{O}(N\log N),\mathrm{O}(\log N)\rangle$だが空間の定数倍がsparse tableより2倍くらいよい(多分)のでMLEに強いはず…
+
+#### 使い方
+
+- `Tree(g, root = 0)`: rootを根としてデータ構造を構築する。(以下のクエリでgはrootを根とした根付き木とみなされる。)　$\mathrm{O}(N \log N)$
+- `depth(u)`: uの深さを返す。$\mathrm{O}(1)$
+- `par(u)`: uの親ノードを返す。(存在しない場合-1を返す。)　$\mathrm{O}(1)$
+- `kth_ancestor(u, k)`: $\mathrm{par}^k(u)$を返す。(存在しない場合-1を返す。)　$\mathrm{O}(\log N)$
+- `nxt(s, t)`: s-t間のパス上の点のうちsに隣接する点を返す。 $\mathrm{O}(\log N)$
+- `lca(u, v)`: uとvのlcaを返す。$\mathrm{O}(\log N)$
+- `path(s, t)`: s-t間のパスを返す。$\mathrm{O}(|\mathrm{path}|)$
