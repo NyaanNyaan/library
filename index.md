@@ -535,10 +535,10 @@ data:
       title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   - name: trial
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: trial/fast-gcd.hpp
-      title: trial/fast-gcd.hpp
-    - icon: ':warning:'
+      title: "\u9AD8\u901FGCD"
+    - icon: ':heavy_check_mark:'
       path: trial/fast-inv.hpp
       title: "\u9AD8\u901Fmodulo\u9006\u5143"
   verificationCategories:
@@ -682,6 +682,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/factorize.test.cpp
       title: verify/verify-unit-test/factorize.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/fast-inv-gcd.test.cpp
+      title: verify/verify-unit-test/fast-inv-gcd.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashmap.test.cpp
       title: verify/verify-unit-test/hashmap.test.cpp

@@ -136,6 +136,9 @@ data:
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv-gcd.test.cpp
+    title: verify/verify-unit-test/fast-inv-gcd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
@@ -753,6 +756,7 @@ data:
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-yuki/yuki-1170.test.cpp
   - verify/verify-yuki/yuki-1220.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp

@@ -11,13 +11,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: trial/fast-gcd.hpp
-    title: trial/fast-gcd.hpp
-  - icon: ':warning:'
+    title: "\u9AD8\u901FGCD"
+  - icon: ':heavy_check_mark:'
     path: trial/fast-inv.hpp
     title: "\u9AD8\u901Fmodulo\u9006\u5143"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv-gcd.test.cpp
+    title: verify/verify-unit-test/fast-inv-gcd.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
@@ -49,6 +52,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-unit-test/fast-inv-gcd.test.cpp
 documentation_of: misc/timer.hpp
 layout: document
 redirect_from:
