@@ -2,6 +2,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include "../misc/timer.hpp"
+
 namespace fast_gcd {
 using u64 = uint64_t;
 using u32 = uint32_t;
@@ -24,7 +26,6 @@ __attribute__((target("bmi"))) u64 binary_gcd(u64 a, u64 b) {
 }  // namespace fast_gcd
 
 namespace fast_gcd {
-#include "misc/timer.hpp"
 
 uint64_t naive_gcd(uint64_t a, uint64_t b) {
   while (b) swap(a %= b, b);
@@ -36,7 +37,7 @@ void rng_init() { x_ = 88172645463325252ULL; }
 u64 rng() { return x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9); }
 
 void test_inner(u64 (*f)(u64, u64)) {
-  auto test = [](u64 (*f)(u64, u64), int n, u64 upper, string s) {
+  auto test = [&](u64 (*f)(u64, u64), int n, u64 upper, string s) {
     assert((upper & (upper - 1)) == 0);
     --upper;
 
@@ -57,9 +58,9 @@ void test_inner(u64 (*f)(u64, u64)) {
   };
 
   rng_init();
-  test(f, 1e7, 1LL << 16, "small");
-  test(f, 1e7, 1LL << 32, "medium");
-  test(f, 1e7, 0, "large");
+  test(f, 1e5, 1LL << 16, "small");
+  test(f, 1e5, 1LL << 32, "medium");
+  test(f, 1e5, 0, "large");
 }
 
 void unit_test() {
@@ -119,3 +120,8 @@ void unit_test() {
 }
 
 }  // namespace fast_gcd
+
+/**
+ * @brief 高速GCD
+ * @docs docs/trial/fast-gcd.md
+ */

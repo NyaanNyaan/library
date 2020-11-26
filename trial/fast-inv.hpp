@@ -2,6 +2,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include "../misc/timer.hpp"
+
 namespace fast_inv {
 using u64 = uint64_t;
 using u32 = uint32_t;
@@ -52,7 +54,6 @@ __attribute__((target("bmi"))) u32 bgcd_inv(u32 a) {
 
 namespace fast_inv {
 
-#include "misc/timer.hpp"
 __attribute__((optimize("unroll-loops"))) u32 pow_inv(u32 a) {
   u32 ret = 1;
   for (u32 p = MOD - 2; p; a = u64(a) * a % MOD, p >>= 1)
@@ -112,9 +113,9 @@ void test_inner(u32 (*f)(u32)) {
   };
 
   rng_init();
-  test(f, 1e7, 1 << 10, "small");
-  // test(f, 1e8, 1 << 20, "medium");
-  // test(f, 1e8, 1 << 30, "large");
+  test(f, 1e5, 1 << 10, "small");
+  test(f, 1e5, 1 << 20, "medium");
+  test(f, 1e5, 1 << 30, "large");
 }
 
 void unit_test() {
