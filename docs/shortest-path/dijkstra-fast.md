@@ -10,7 +10,6 @@
 
 #### 使い方
 
-- `DijkstraGraph<T>(N, M)` :辺の重みがTで、頂点数の最大が`N`、辺数の最大が`M`であるグラフを生成する。
-- `add_edge(u, v, c)`: uからvへ向かう重みcの有向辺を追加する。
-- `dijkstra(s)`: sを始点としたダイクストラ法を行い、計算結果を返す。
-
+- `dijkstra(g, s)`: sを始点としたダイクストラ法を行い、計算結果を返す。
+- `dijkstra_restore(g, s)`: sを始点としたダイクストラ法(復元付き)を行い、計算結果を返す。
+  - いずれの場合もgは[`StaticGraph`](https://nyaannyaan.github.io/library/graph/static-graph.hpp)である必要がある。

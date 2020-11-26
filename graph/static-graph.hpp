@@ -31,7 +31,9 @@ struct StaticGraph {
     It begin() const { return b; }
     It end() const { return e; }
     int size() const { return int(e - b); }
+    auto&& operator[](int i) const { return b[i]; }
   };
+  
   int N, M, ec;
   vector<int> head;
   vector<pair<int, E<T>>> buf;
@@ -72,4 +74,5 @@ using StaticGraphImpl::StaticGraph;
 
 /**
  * @brief Static Graph
+ * @docs docs/graph/static-graph.md
  */
