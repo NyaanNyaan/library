@@ -9,7 +9,7 @@ data:
     title: graph/graph-template.hpp
   - icon: ':heavy_check_mark:'
     path: tree/cartesian-tree.hpp
-    title: tree/cartesian-tree.hpp
+    title: Cartesian Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -155,7 +155,8 @@ data:
     \      st.pop_back();\n    }\n    if (prv != -1) p[prv] = i;\n    if (!st.empty())\
     \ p[i] = st.back();\n    st.push_back(i);\n  }\n  int root = -1;\n  for (int i\
     \ = 0; i < N; i++) {\n    if (p[i] != -1)\n      g[p[i]].push_back(i);\n    else\n\
-    \      root = i;\n  }\n  return make_pair(g, root);\n}\n#line 5 \"verify/verify-yosupo-graph/yosupo-cartesian.test.cpp\"\
+    \      root = i;\n  }\n  return make_pair(g, root);\n}\n\n/**\n * @brief Cartesian\
+    \ Tree\n * @docs docs/tree/cartesian-tree.md\n */\n#line 5 \"verify/verify-yosupo-graph/yosupo-cartesian.test.cpp\"\
     \n\nvoid solve(){\n  ini(N);\n  vl a(N);\n  in(a);\n  auto [g, root] = CartesianTree<ll>(a);\n\
     \  vl ans(N);\n  ans[root] = root;\n  rep(i,N){\n    each(j,g[i]) ans[j] = i;\n\
     \  }\n  out(ans);\n}\n"
@@ -171,7 +172,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
+  timestamp: '2020-11-26 18:26:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp

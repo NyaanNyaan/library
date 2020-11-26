@@ -9,7 +9,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    _deprecated_at_docs: docs/balanced-binary-search-tree/rbst-ordered-set.md
+    _deprecated_at_docs: docs/orderedmap/rbst-ordered-set.md
     document_title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
     links: []
   bundledCode: "#line 2 \"orderedmap/randomized-binary-search-tree.hpp\"\n#include\
@@ -77,7 +77,7 @@ data:
     \ + off / 2] = 'R';\n      dump(s, t->r, i + 2, j + off, off / 2, cdep + 1, mdep);\n\
     \    }\n  }\n  */\n};\ntemplate <typename T, int S, bool MULTI>\ntypename OrderedSet<T,\
     \ S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;\n\n/**\n *  @brief\
-    \ OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)\n *  @docs docs/balanced-binary-search-tree/rbst-ordered-set.md\n\
+    \ OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)\n *  @docs docs/orderedmap/rbst-ordered-set.md\n\
     \ */ \n"
   code: "#pragma once\n#include \"./randomized-binary-search-tree.hpp\"\n\ntemplate\
     \ <typename T, int S = 2000000, bool MULTI = false>\nstruct OrderedSet {\n  using\
@@ -113,14 +113,14 @@ data:
     \ + off / 2] = 'R';\n      dump(s, t->r, i + 2, j + off, off / 2, cdep + 1, mdep);\n\
     \    }\n  }\n  */\n};\ntemplate <typename T, int S, bool MULTI>\ntypename OrderedSet<T,\
     \ S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;\n\n/**\n *  @brief\
-    \ OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)\n *  @docs docs/balanced-binary-search-tree/rbst-ordered-set.md\n\
+    \ OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)\n *  @docs docs/orderedmap/rbst-ordered-set.md\n\
     \ */ \n"
   dependsOn:
   - orderedmap/randomized-binary-search-tree.hpp
   isVerificationFile: false
   path: orderedmap/rbst-ordered-set.hpp
   requiredBy: []
-  timestamp: '2020-11-24 21:53:28+09:00'
+  timestamp: '2020-11-26 18:26:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: orderedmap/rbst-ordered-set.hpp

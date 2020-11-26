@@ -189,26 +189,30 @@ data:
     \ {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  int size() const { return\
     \ N; }\n};\n\n}  // namespace StaticGraphImpl\n\nusing StaticGraphImpl::StaticGraph;\n\
     \n/**\n * @brief Static Graph\n */\n#line 7 \"shortest-path/dijkstra-fast.hpp\"\
-    \n\ntemplate <typename T>\nstruct DijkstraGraph {\n  StaticGraph<T> g;\n\n  DijkstraGraph(int\
-    \ _n, int _m) : g(_n, _m) {}\n\n  void add_edge(int u, int v, T c) { g.add_edge(u,\
-    \ v, c); }\n\n  vector<T> dijkstra(int start = 0) {\n    vector<T> d(g.size(),\
-    \ T(-1));\n    RadixHeap<T, int> Q;\n    d[start] = 0;\n    Q.push(0, start);\n\
-    \    while (!Q.empty()) {\n      auto p = Q.pop();\n      int u = p.second;\n\
-    \      if (d[u] < T(p.first)) continue;\n      T du = d[u];\n      for (auto&&\
-    \ [v, c] : g[u]) {\n        if (d[v] == T(-1) || du + c < d[v]) {\n          d[v]\
-    \ = du + c;\n          Q.push(d[v], v);\n        }\n      }\n    }\n    return\
-    \ d;\n  }\n};\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\
-    \u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
-    \ **/\n#line 3 \"shortest-path/dijkstra-radix-heap.hpp\"\nusing namespace std;\n\
-    \n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\ntemplate <typename\
-    \ T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1),\
-    \ to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to),\
-    \ cost(_cost) {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return\
-    \ *this;\n  }\n\n  operator int() const { return to; }\n};\ntemplate <typename\
-    \ T>\nusing Edges = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph\
-    \ = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\n// Input\
-    \ of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool is_directed\
-    \ = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+    \n\ntemplate <typename T>\nvector<T> dijkstra(StaticGraph<T>& g, int start = 0)\
+    \ {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start] = 0;\n\
+    \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
+    \ = p.second;\n    if (d[u] < T(p.first)) continue;\n    T du = d[u];\n    for\
+    \ (auto&& [v, c] : g[u]) {\n      if (d[v] == T(-1) || du + c < d[v]) {\n    \
+    \    d[v] = du + c;\n        Q.push(d[v], v);\n      }\n    }\n  }\n  return d;\n\
+    }\n\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(StaticGraph<T>&\
+    \ g, int start = 0) {\n  vector<pair<T, int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T,\
+    \ int> Q;\n  d[start] = {0, -1};\n  Q.push(0, start);\n  while (!Q.empty()) {\n\
+    \    auto p = Q.pop();\n    int u = p.second;\n    if (d[u].first < T(p.first))\
+    \ continue;\n    T du = d[u].first;\n    for (auto&& [v, c] : g[u]) {\n      if\
+    \ (d[v].first == T(-1) || du + c < d[v].first) {\n        d[v] = {du + c, u};\n\
+    \        Q.push(du + c, v);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief\
+    \ \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316\
+    )\n * @docs docs/shortest-path/dijkstra-fast.md\n **/\n#line 3 \"shortest-path/dijkstra-radix-heap.hpp\"\
+    \nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\
+    \ std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n\
+    \  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src,\
+    \ int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
+    \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
+    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
     \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
     \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
@@ -255,13 +259,12 @@ data:
     \ C + 1);\n    es.emplace_back(u, v, c);\n  }\n  rep(_, M - (N - 1)) {\n    int\
     \ u, v;\n    do {\n      u = randint(0, N), v = randint(0, N);\n    } while (u\
     \ == v);\n    ll c = randint(0, C + 1);\n    es.emplace_back(u, v, c);\n  }\n\n\
-    \  shuffle(all(es), mt);\n  WeightedGraph<ll> g(N);\n  DijkstraGraph<ll> dg(N,\
-    \ M);\n  if (es.size() > M) es.resize(M);\n\n  for (auto&& [u, v, c] : es) {\n\
-    \    g[u].emplace_back(v, c);\n    dg.add_edge(u, v, c);\n  }\n\n  vl d1, d2,\
-    \ d3;\n\n  d1 = dijkstra(g);\n  d2 = dijkstra_radix_heap(g);\n  d3 = dg.dijkstra();\n\
-    \n  if (N <= 20) {\n    trc(d1);\n    trc(d2);\n    trc(d3);\n  }\n  assert(d1\
-    \ == d2);\n  assert(d1 == d3);\n}\n\nvoid solve() {\n  test<1, 0, 100>();\n  test<2,\
-    \ 0, 100>();\n  test<2, 1, 100>();\n  test<3, 0, 100>();\n  test<3, 1, 100>();\n\
+    \  shuffle(all(es), mt);\n  WeightedGraph<ll> g(N);\n  StaticGraph<ll> dg(N, M);\n\
+    \  if (es.size() > M) es.resize(M);\n\n  for (auto&& [u, v, c] : es) {\n    g[u].emplace_back(v,\
+    \ c);\n    dg.add_edge(u, v, c);\n  }\n\n  vl d1, d2, d3;\n\n  d1 = dijkstra(g);\n\
+    \  d2 = dijkstra_radix_heap(g);\n  d3 = dijkstra(g);\n  \n  assert(d1 == d2);\n\
+    \  assert(d1 == d3);\n}\n\nvoid solve() {\n  test<1, 0, 100>();\n  test<2, 0,\
+    \ 100>();\n  test<2, 1, 100>();\n  test<3, 0, 100>();\n  test<3, 1, 100>();\n\
     \  test<3, 2, 100>();\n  test<TEN(2), TEN(1), 100>();\n  test<TEN(2), TEN(2) -\
     \ 1, 100>();\n  test<TEN(2), TEN(2) * 2, 100>();\n  test<TEN(3), TEN(3) * 2, 100>();\n\
     \  test<TEN(4), TEN(4) * 2, 100>();\n  test<TEN(5), TEN(5) * 2, 100>();\n  test<TEN(6),\
@@ -278,17 +281,16 @@ data:
     \ v, c);\n  }\n  rep(_, M - (N - 1)) {\n    int u, v;\n    do {\n      u = randint(0,\
     \ N), v = randint(0, N);\n    } while (u == v);\n    ll c = randint(0, C + 1);\n\
     \    es.emplace_back(u, v, c);\n  }\n\n  shuffle(all(es), mt);\n  WeightedGraph<ll>\
-    \ g(N);\n  DijkstraGraph<ll> dg(N, M);\n  if (es.size() > M) es.resize(M);\n\n\
-    \  for (auto&& [u, v, c] : es) {\n    g[u].emplace_back(v, c);\n    dg.add_edge(u,\
+    \ g(N);\n  StaticGraph<ll> dg(N, M);\n  if (es.size() > M) es.resize(M);\n\n \
+    \ for (auto&& [u, v, c] : es) {\n    g[u].emplace_back(v, c);\n    dg.add_edge(u,\
     \ v, c);\n  }\n\n  vl d1, d2, d3;\n\n  d1 = dijkstra(g);\n  d2 = dijkstra_radix_heap(g);\n\
-    \  d3 = dg.dijkstra();\n\n  if (N <= 20) {\n    trc(d1);\n    trc(d2);\n    trc(d3);\n\
-    \  }\n  assert(d1 == d2);\n  assert(d1 == d3);\n}\n\nvoid solve() {\n  test<1,\
-    \ 0, 100>();\n  test<2, 0, 100>();\n  test<2, 1, 100>();\n  test<3, 0, 100>();\n\
-    \  test<3, 1, 100>();\n  test<3, 2, 100>();\n  test<TEN(2), TEN(1), 100>();\n\
-    \  test<TEN(2), TEN(2) - 1, 100>();\n  test<TEN(2), TEN(2) * 2, 100>();\n  test<TEN(3),\
-    \ TEN(3) * 2, 100>();\n  test<TEN(4), TEN(4) * 2, 100>();\n  test<TEN(5), TEN(5)\
-    \ * 2, 100>();\n  test<TEN(6), TEN(6) * 2, 100>();\n\n  int n, m;\n  cin >> n\
-    \ >> m;\n  cout << n + m << endl;\n}"
+    \  d3 = dijkstra(g);\n  \n  assert(d1 == d2);\n  assert(d1 == d3);\n}\n\nvoid\
+    \ solve() {\n  test<1, 0, 100>();\n  test<2, 0, 100>();\n  test<2, 1, 100>();\n\
+    \  test<3, 0, 100>();\n  test<3, 1, 100>();\n  test<3, 2, 100>();\n  test<TEN(2),\
+    \ TEN(1), 100>();\n  test<TEN(2), TEN(2) - 1, 100>();\n  test<TEN(2), TEN(2) *\
+    \ 2, 100>();\n  test<TEN(3), TEN(3) * 2, 100>();\n  test<TEN(4), TEN(4) * 2, 100>();\n\
+    \  test<TEN(5), TEN(5) * 2, 100>();\n  test<TEN(6), TEN(6) * 2, 100>();\n\n  int\
+    \ n, m;\n  cin >> n >> m;\n  cout << n + m << endl;\n}"
   dependsOn:
   - competitive-template.hpp
   - misc/rng.hpp
@@ -301,7 +303,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2020-11-26 16:49:47+09:00'
+  timestamp: '2020-11-26 18:26:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/dijkstra.test.cpp

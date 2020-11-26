@@ -58,7 +58,7 @@ data:
     title: shortest-path/warshall-floyd.hpp
   - icon: ':heavy_check_mark:'
     path: tree/cartesian-tree.hpp
-    title: tree/cartesian-tree.hpp
+    title: Cartesian Tree
   - icon: ':warning:'
     path: tree/dsu-on-tree.hpp
     title: tree/dsu-on-tree.hpp

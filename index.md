@@ -508,7 +508,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: tree/cartesian-tree.hpp
-      title: tree/cartesian-tree.hpp
+      title: Cartesian Tree
     - icon: ':heavy_check_mark:'
       path: tree/centroid-decomposition.hpp
       title: tree/centroid-decomposition.hpp
@@ -877,6 +877,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
       title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
       title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
