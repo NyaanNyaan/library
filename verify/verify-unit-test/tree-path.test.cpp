@@ -2,7 +2,7 @@
 
 #include "../../competitive-template.hpp"
 #include "../../misc/rng.hpp"
-#include "../../tree/tree-path.hpp"
+#include "../../tree/tree-query.hpp"
 
 void test(vvi& g) {
   cerr << g.size() << endl;

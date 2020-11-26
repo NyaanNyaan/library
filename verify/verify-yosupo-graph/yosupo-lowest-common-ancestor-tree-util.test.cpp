@@ -2,7 +2,7 @@
 
 #include "../../competitive-template.hpp"
 #include "../../misc/fastio.hpp"
-#include "../../tree/tree-path.hpp"
+#include "../../tree/tree-query.hpp"
 
 void solve() {
   int N, Q;
