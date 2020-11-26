@@ -121,12 +121,12 @@ data:
     \ = find(data[k]); }\n\n  int unite(int x, int y) {\n    if ((x = find(x)) ==\
     \ (y = find(y))) return false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x]\
     \ += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  // f ... merge function\n\
-    \  template<typename F>\n  int unite(int x, int y, F &f) {\n    if ((x = find(x))\
-    \ == (y = find(y))) return false;\n    if (data[x] > data[y]) swap(x, y);\n  \
-    \  data[x] += data[y];\n    data[y] = x;\n    f(x, y);\n    return true;\n  }\n\
-    \n  int size(int k) { return -data[find(k)]; }\n\n  int same(int x, int y) { return\
-    \ find(x) == find(y); }\n};\n\n/**\n * @brief Union Find(Disjoint Set Union)\n\
-    \ * @docs docs/data-structure/union-find.md\n */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp\"\
+    \  template<typename F>\n  int unite(int x, int y,const F &f) {\n    if ((x =\
+    \ find(x)) == (y = find(y))) return false;\n    if (data[x] > data[y]) swap(x,\
+    \ y);\n    data[x] += data[y];\n    data[y] = x;\n    f(x, y);\n    return true;\n\
+    \  }\n\n  int size(int k) { return -data[find(k)]; }\n\n  int same(int x, int\
+    \ y) { return find(x) == find(y); }\n};\n\n/**\n * @brief Union Find(Disjoint\
+    \ Set Union)\n * @docs docs/data-structure/union-find.md\n */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  UnionFind uf(N);\n  rep(_, Q) {\n    ini(c);\n\
     \    if (c == 0) {\n      ini(x, y);\n      uf.unite(x, y);\n    } else {\n  \
     \    ini(x,y);\n      out(uf.same(x,y));\n    }\n  }\n}\n"
@@ -141,7 +141,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
   requiredBy: []
-  timestamp: '2020-11-19 22:59:27+09:00'
+  timestamp: '2020-11-27 00:11:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp

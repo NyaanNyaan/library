@@ -8,23 +8,35 @@ data:
     path: data-structure/dynamic-union-find.hpp
     title: "\u52D5\u7684Union Find"
   - icon: ':heavy_check_mark:'
+    path: graph/graph-template.hpp
+    title: graph/graph-template.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/static-graph.hpp
+    title: Static Graph
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
+  - icon: ':heavy_check_mark:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/dsu-on-tree.hpp
+    title: DSU on Tree(Guni)
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2995
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A
-  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp\"\n#define\
-    \ PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A\"\
-    \n\n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2995
+  bundledCode: "#line 1 \"verify/verify-aoj-other/aoj-2995-hashmap.test.cpp\"\n#define\
+    \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2995\"\n\n\
+    #line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
     \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
     \ each(x, v) for (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define\
@@ -240,30 +252,165 @@ data:
     \   f(x, y);\n    return true;\n  }\n\n  int size(int k) { return -data(find(k));\
     \ }\n\n  int same(int x, int y) { return find(x) == find(y); }\n\n  void clear()\
     \ { m.clear(); }\n};\n\n/**\n * @brief \u52D5\u7684Union Find\n * @docs docs/data-structure/dynamic-union-find.md\n\
-    \ */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp\"\n\nvoid solve()\
-    \ {\n  ini(N, Q);\n  DynamicUnionFind uf;\n  rep(_, Q) {\n    ini(c);\n    if\
-    \ (c == 0) {\n      ini(x, y);\n      uf.unite(x, y);\n    } else {\n      ini(x,y);\n\
-    \      out(uf.same(x,y));\n    }\n  }\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_A\"\
+    \ */\n#line 3 \"graph/static-graph.hpp\"\nusing namespace std;\n\nnamespace StaticGraphImpl\
+    \ {\n\ntemplate <typename T, bool Cond = is_void<T>::value>\nstruct E;\ntemplate\
+    \ <typename T>\nstruct E<T, false> {\n  int to;\n  T cost;\n  E() {}\n  E(const\
+    \ int& v, const T& c) : to(v), cost(c) {}\n  operator int() const { return to;\
+    \ }\n};\ntemplate <typename T>\nstruct E<T, true> {\n  int to;\n  E() {}\n  E(const\
+    \ int& v) : to(v) {}\n  operator int() const { return to; }\n};\n\ntemplate <typename\
+    \ T = void>\nstruct StaticGraph {\n private:\n  template <typename It>\n  struct\
+    \ Es {\n    It b, e;\n    It begin() const { return b; }\n    It end() const {\
+    \ return e; }\n    int size() const { return int(e - b); }\n    auto&& operator[](int\
+    \ i) const { return b[i]; }\n  };\n  \n  int N, M, ec;\n  vector<int> head;\n\
+    \  vector<pair<int, E<T>>> buf;\n  vector<E<T>> es;\n\n  void build() {\n    partial_sum(begin(head),\
+    \ end(head), begin(head));\n    es.resize(M);\n    for (auto&& [u, e] : buf) es[--head[u]]\
+    \ = e;\n  }\n\n public:\n  StaticGraph(int _n, int _m) : N(_n), M(_m), ec(0),\
+    \ head(N + 1, 0) {\n    buf.reserve(M);\n  }\n\n  template <typename... Args>\n\
+    \  void add_edge(int u, Args&&... args) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\
+    \n    buf.emplace_back(u, E<T>{std::forward<Args>(args)...});\n#pragma GCC diagnostic\
+    \ warning \"-Wnarrowing\"\n    ++head[u];\n    if ((int)buf.size() == M) build();\n\
+    \  }\n\n  Es<typename vector<E<T>>::iterator> operator[](int u) {\n    return\
+    \ {begin(es) + head[u], begin(es) + head[u + 1]};\n  }\n  const Es<typename vector<E<T>>::const_iterator>\
+    \ operator[](int u) const {\n    return {begin(es) + head[u], begin(es) + head[u\
+    \ + 1]};\n  }\n  int size() const { return N; }\n};\n\n}  // namespace StaticGraphImpl\n\
+    \nusing StaticGraphImpl::StaticGraph;\n\n/**\n * @brief Static Graph\n * @docs\
+    \ docs/graph/static-graph.md\n */\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
+    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
+    \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
+    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
+    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
+    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
+    \ load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf\
+    \ + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush()\
+    \ {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c)\
+    \ { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil\
+    \ + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
+    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
+    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
+    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
+    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
+    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
+    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
+    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
+    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
+    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
+    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
+    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
+    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
+    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
+    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 3 \"tree/dsu-on-tree.hpp\"\nusing namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\
+    \nusing namespace std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n\
+    \  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int\
+    \ _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
+    \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
+    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
+    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
+    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
+    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
+    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
+    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
+    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
+    \  if (is_1origin) x--, y--;\n    g[x].eb(x, y, c);\n    if (!is_directed) g[y].eb(y,\
+    \ x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
+    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
+    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
+    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
+    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
+    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
+    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
+    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
+    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
+    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
+    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
+    \ d;\n}\n#line 6 \"tree/dsu-on-tree.hpp\"\n\ntemplate <typename G>\nstruct DSUonTree\
+    \ {\n private:\n  G &g;\n  int N;\n  vector<int> sub_sz, euler, down, up;\n  int\
+    \ idx_;\n  int root;\n\n  int dfs1(int cur, int par = -1) {\n    sub_sz[cur] =\
+    \ 1;\n    if ((int)g[cur].size() >= 2 and g[cur][0] == par) {\n      swap(g[cur][0],\
+    \ g[cur][1]);\n    }\n    for (auto &dst : g[cur]) {\n      if (dst == par) continue;\n\
+    \      sub_sz[cur] += dfs1(dst, cur);\n      if (sub_sz[dst] > sub_sz[g[cur][0]])\
+    \ swap(dst, g[cur][0]);\n    }\n    return sub_sz[cur];\n  }\n\n  void dfs2(int\
+    \ cur, int par = -1) {\n    euler[idx_] = cur;\n    down[cur] = idx_++;\n    for\
+    \ (auto &dst : g[cur]) {\n      if (dst == par) continue;\n      dfs2(dst, cur);\n\
+    \    }\n    up[cur] = idx_;\n  }\n\n public:\n  DSUonTree(G &_g,int _root = 0)\n\
+    \      : g(_g),\n        N(_g.size()),\n        sub_sz(_g.size()),\n        euler(_g.size()),\n\
+    \        down(_g.size()),\n        up(_g.size()),\n        idx_(0),\n        root(_root)\
+    \ {\n    dfs1(root);\n    dfs2(root);\n  }\n\n  int idx(int u) const { return\
+    \ down[u]; }\n\n  template <typename UPDATE, typename QUERY, typename CLEAR, typename\
+    \ RESET>\n  void run(UPDATE &update, QUERY &query, CLEAR &clear, RESET &reset)\
+    \ {\n    auto dsu = [&](auto rc, int cur, int par = -1, bool keep = true) -> void\
+    \ {\n      // light edge -> run dfs and clear data\n      for (int i = 1; i <\
+    \ (int)g[cur].size(); i++)\n        if (g[cur][i] != par) rc(rc, g[cur][i], cur,\
+    \ false);\n\n      // heavy edge -> run dfs and reserve data\n      if (sub_sz[cur]\
+    \ != 1) rc(rc, g[cur][0], cur, true);\n\n      // light edge -> reserve data\n\
+    \      if (sub_sz[cur] != 1)\n        for (int i = up[g[cur][0]]; i < up[cur];\
+    \ i++) update(euler[i]);\n\n      // current node -> reserve data\n      update(cur);\n\
+    \n      // answer queries related to subtree of current node\n      query(cur);\n\
+    \n      // if keep is false, clear all data\n      if (!keep) {\n        for (int\
+    \ i = down[cur]; i < up[cur]; i++) clear(euler[i]);\n        reset();\n      }\n\
+    \      return;\n    };\n    dsu(dsu, root);\n  }\n};\n\n/**\n * @brief DSU on\
+    \ Tree(Guni)\n * @docs docs/tree/dsu-on-tree.md\n */\n#line 8 \"verify/verify-aoj-other/aoj-2995-hashmap.test.cpp\"\
+    \n\nvoid solve() {\n  int N, K;\n  rd(N, K);\n  StaticGraph<void> g(N, 2 * N -\
+    \ 2);\n  rep1(i, N - 1) {\n    int u, v;\n    rd(u, v);\n    --u, --v;\n    g.add_edge(u,\
+    \ v);\n    g.add_edge(v, u);\n  }\n\n  V<pair<int, int>> cl(N);\n  rep(i, N) rd(cl[i].first,\
+    \ cl[i].second);\n\n  DynamicUnionFind uf;\n  int sm = 0;\n  vi ans(N);\n  HashMap<int,\
+    \ int> val;\n  // reflect data of node i\n  auto update = [&](int i) {\n    uf.unite(cl[i].first,\
+    \ cl[i].second,\n             [&](int x, int y) { val[x] += val[y]; });\n    int\
+    \ p = uf.find(cl[i].first);\n    if (uf.size(p) > val[p]) {\n      sm++;\n   \
+    \   val[p]++;\n    }\n  };\n  // answer queries of subtree i\n  auto query = [&](int\
+    \ i) { ans[i] = sm; };\n  // below two function are called if all data must be\
+    \ deleted\n  // delete data of node i (if necesarry)\n  auto clear = [&](int)\
+    \ {};\n  // delete data related to all (if necesarry)\n  auto reset = [&]() {\n\
+    \    uf.clear();\n    sm = 0;\n    val.clear();\n  };\n\n  DSUonTree<decltype(g)>\
+    \ dsu(g);\n  dsu.run(update, query, clear, reset);\n\n  each(x, ans) wtn(x);\n\
+    }\n"
+  code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2995\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/dynamic-union-find.hpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  DynamicUnionFind uf;\n  rep(_, Q) {\n    ini(c);\n\
-    \    if (c == 0) {\n      ini(x, y);\n      uf.unite(x, y);\n    } else {\n  \
-    \    ini(x,y);\n      out(uf.same(x,y));\n    }\n  }\n}"
+    \n#include \"../../graph/static-graph.hpp\"\n#include \"../../misc/fastio.hpp\"\
+    \n#include \"../../tree/dsu-on-tree.hpp\"\n\nvoid solve() {\n  int N, K;\n  rd(N,\
+    \ K);\n  StaticGraph<void> g(N, 2 * N - 2);\n  rep1(i, N - 1) {\n    int u, v;\n\
+    \    rd(u, v);\n    --u, --v;\n    g.add_edge(u, v);\n    g.add_edge(v, u);\n\
+    \  }\n\n  V<pair<int, int>> cl(N);\n  rep(i, N) rd(cl[i].first, cl[i].second);\n\
+    \n  DynamicUnionFind uf;\n  int sm = 0;\n  vi ans(N);\n  HashMap<int, int> val;\n\
+    \  // reflect data of node i\n  auto update = [&](int i) {\n    uf.unite(cl[i].first,\
+    \ cl[i].second,\n             [&](int x, int y) { val[x] += val[y]; });\n    int\
+    \ p = uf.find(cl[i].first);\n    if (uf.size(p) > val[p]) {\n      sm++;\n   \
+    \   val[p]++;\n    }\n  };\n  // answer queries of subtree i\n  auto query = [&](int\
+    \ i) { ans[i] = sm; };\n  // below two function are called if all data must be\
+    \ deleted\n  // delete data of node i (if necesarry)\n  auto clear = [&](int)\
+    \ {};\n  // delete data related to all (if necesarry)\n  auto reset = [&]() {\n\
+    \    uf.clear();\n    sm = 0;\n    val.clear();\n  };\n\n  DSUonTree<decltype(g)>\
+    \ dsu(g);\n  dsu.run(update, query, clear, reset);\n\n  each(x, ans) wtn(x);\n\
+    }\n"
   dependsOn:
   - competitive-template.hpp
   - data-structure/dynamic-union-find.hpp
   - hashmap/hashmap.hpp
   - hashmap/hashmap-base.hpp
+  - graph/static-graph.hpp
+  - misc/fastio.hpp
+  - tree/dsu-on-tree.hpp
+  - graph/graph-template.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+  path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   requiredBy: []
   timestamp: '2020-11-27 00:11:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+documentation_of: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
-- /verify/verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp.html
-title: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+- /verify/verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+- /verify/verify/verify-aoj-other/aoj-2995-hashmap.test.cpp.html
+title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
 ---

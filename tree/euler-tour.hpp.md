@@ -76,13 +76,13 @@ data:
     \ i) const { return {down[i], up[i]}; }\n\n  int lca(int a, int b) const {\n \
     \   if (down[a] > down[b]) swap(a, b);\n    return rmq.query(down[a], down[b]\
     \ + 1).second;\n  }\n\n  template <typename F>\n  void node_query(int a, int b,\
-    \ F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
+    \ const F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
     \ + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int a,\
-    \ int b, F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n \
-    \   f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ a, F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return int(rmq.size());\
-    \ }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\
-    \u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */\n"
+    \ int b, const F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n\
+    \    f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ a, const F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return\
+    \ int(rmq.size()); }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\
+    \u30FC(\u9802\u70B9\u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../graph/graph-template.hpp\"\n\ntemplate <typename G>\nstruct EulerTour {\n\
     \ private:\n  struct RMQ {\n    int n, s;\n    using P = pair<int, int>;\n   \
@@ -109,19 +109,19 @@ data:
     \ i) const { return {down[i], up[i]}; }\n\n  int lca(int a, int b) const {\n \
     \   if (down[a] > down[b]) swap(a, b);\n    return rmq.query(down[a], down[b]\
     \ + 1).second;\n  }\n\n  template <typename F>\n  void node_query(int a, int b,\
-    \ F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
+    \ const F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
     \ + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int a,\
-    \ int b, F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n \
-    \   f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ a, F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return int(rmq.size());\
-    \ }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\
-    \u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */"
+    \ int b, const F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n\
+    \    f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ a, const F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return\
+    \ int(rmq.size()); }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\
+    \u30FC(\u9802\u70B9\u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/euler-tour.hpp
   requiredBy: []
-  timestamp: '2020-11-26 16:49:47+09:00'
+  timestamp: '2020-11-27 00:11:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp

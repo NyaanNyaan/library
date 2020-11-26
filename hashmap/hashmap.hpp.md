@@ -4,8 +4,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: data-structure/dynamic-union-find.hpp
+    title: "\u52D5\u7684Union Find"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+    title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/hashmap.test.cpp
     title: verify/verify-unit-test/hashmap.test.cpp
@@ -143,12 +152,15 @@ data:
   - hashmap/hashmap-base.hpp
   isVerificationFile: false
   path: hashmap/hashmap.hpp
-  requiredBy: []
+  requiredBy:
+  - data-structure/dynamic-union-find.hpp
   timestamp: '2020-11-22 20:13:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
 documentation_of: hashmap/hashmap.hpp
 layout: document
 redirect_from:

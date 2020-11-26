@@ -11,6 +11,12 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+    title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2995.test.cpp
+    title: verify/verify-aoj-other/aoj-2995.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
@@ -91,6 +97,8 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
 documentation_of: graph/static-graph.hpp

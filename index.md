@@ -674,6 +674,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
+  - name: verify/verify-aoj-other
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+      title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-2995.test.cpp
+      title: verify/verify-aoj-other/aoj-2995.test.cpp
   - name: verify/verify-unit-test
     pages:
     - icon: ':heavy_check_mark:'

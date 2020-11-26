@@ -7,6 +7,12 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+    title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2995.test.cpp
+    title: verify/verify-aoj-other/aoj-2995.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   _pathExtension: hpp
@@ -108,6 +114,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-2995.test.cpp
 documentation_of: tree/dsu-on-tree.hpp
 layout: document
 redirect_from:

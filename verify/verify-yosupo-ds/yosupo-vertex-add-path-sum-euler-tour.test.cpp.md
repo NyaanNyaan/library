@@ -271,13 +271,14 @@ data:
     \ i) const { return {down[i], up[i]}; }\n\n  int lca(int a, int b) const {\n \
     \   if (down[a] > down[b]) swap(a, b);\n    return rmq.query(down[a], down[b]\
     \ + 1).second;\n  }\n\n  template <typename F>\n  void node_query(int a, int b,\
-    \ F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
+    \ const F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
     \ + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int a,\
-    \ int b, F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n \
-    \   f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ a, F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return int(rmq.size());\
-    \ }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\
-    \u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */\n#line 9 \"verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp\"\
+    \ int b, const F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n\
+    \    f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ a, const F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return\
+    \ int(rmq.size()); }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\
+    \u30FC(\u9802\u70B9\u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */\n#line\
+    \ 9 \"verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp\"\
     \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vector<int> a(N);\n  rep(i, N)\
     \ rd(a[i]);\n\n  StaticGraph<void> g(N, 2 * N - 2);\n  rep(i, N - 1) {\n    int\
     \ u, v;\n    rd(u, v);\n    g.add_edge(u, v);\n    g.add_edge(v, u);\n  }\n\n\
@@ -312,7 +313,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   requiredBy: []
-  timestamp: '2020-11-26 23:21:39+09:00'
+  timestamp: '2020-11-27 00:11:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp

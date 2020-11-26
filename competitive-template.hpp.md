@@ -130,6 +130,12 @@ data:
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+    title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2995.test.cpp
+    title: verify/verify-aoj-other/aoj-2995.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
@@ -755,6 +761,8 @@ data:
   - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/osak.test.cpp
