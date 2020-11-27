@@ -14,7 +14,6 @@ void solve() {
     g[a].emplace_back(b, c);
   }
   auto d = dijkstra_restore(g, s);
-  trc(d);
   if (d[t].first == -1) {
     wtn(-1);
     return;

@@ -13,7 +13,6 @@ void solve() {
     int N, K;
     char c = '!';
     scanf("%c(%d,%d)\n", &c, &N, &K);
-    trc(c, N, K);
     if (c == 'C') out(C.C(N, K));
     if (c == 'P') out(C.P(N, K));
     if (c == 'H') out(C.H(N, K));

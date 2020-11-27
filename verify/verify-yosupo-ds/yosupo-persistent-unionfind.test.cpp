@@ -11,7 +11,6 @@ void solve() {
 
   rep(i, Q) {
     ini(t, k, u, v);
-    trc(t, k, u, v);
     if (t) {
       auto r = roots[k + 1];
       out(uf.same(u, v, r));
