@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/debug.test.cpp
+    title: verify/verify-unit-test/debug.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/hashset.test.cpp
     title: verify/verify-unit-test/hashset.test.cpp
   _pathExtension: hpp
@@ -119,6 +122,7 @@ data:
   timestamp: '2020-11-22 20:13:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
 documentation_of: hashmap/hashset.hpp
 layout: document

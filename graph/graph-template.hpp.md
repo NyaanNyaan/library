@@ -64,7 +64,7 @@ data:
     title: DSU on Tree(Guni)
   - icon: ':heavy_check_mark:'
     path: tree/euler-tour.hpp
-    title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
+    title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   - icon: ':heavy_check_mark:'
     path: tree/heavy-light-decomposition.hpp
     title: tree/heavy-light-decomposition.hpp

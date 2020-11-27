@@ -16,6 +16,9 @@ data:
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/debug.test.cpp
+    title: verify/verify-unit-test/debug.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/hashmap.test.cpp
     title: verify/verify-unit-test/hashmap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -159,6 +162,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
 documentation_of: hashmap/hashmap.hpp

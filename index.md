@@ -506,9 +506,9 @@ data:
       title: string/suffix-array.hpp
   - name: template
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
-      title: template/debug.hpp
+      title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
   - name: tree
     pages:
     - icon: ':heavy_check_mark:'
@@ -525,7 +525,7 @@ data:
       title: DSU on Tree(Guni)
     - icon: ':heavy_check_mark:'
       path: tree/euler-tour.hpp
-      title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
+      title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':heavy_check_mark:'
       path: tree/frequency-table-of-tree-distance.hpp
       title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
@@ -689,6 +689,9 @@ data:
       title: verify/verify-aoj-other/aoj-2995.test.cpp
   - name: verify/verify-unit-test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/debug.test.cpp
+      title: verify/verify-unit-test/debug.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/dijkstra.test.cpp
       title: verify/verify-unit-test/dijkstra.test.cpp

@@ -18,7 +18,7 @@ data:
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: tree/euler-tour.hpp
-    title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC(\u9802\u70B9\u5C5E\u6027)"
+    title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -259,8 +259,7 @@ data:
     \    f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
     \ a, const F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return\
     \ int(rmq.size()); }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\
-    \u30FC(\u9802\u70B9\u5C5E\u6027)\n * @docs docs/tree/euler-tour.md\n */\n#line\
-    \ 8 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp\"\
+    \u30FC\n * @docs docs/tree/euler-tour.md\n */\n#line 8 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp\"\
     \n\nvoid solve() {\n  int N, Q;\n  rd(N, Q);\n  vector<int> a(N);\n  rep(i, N)\
     \ rd(a[i]);\n\n  vvi g(N);\n  rep1(i, N - 1) {\n    int p;\n    rd(p);\n    g[p].push_back(i);\n\
     \  }\n\n  EulerTour<decltype(g)> et(g);\n  BinaryIndexedTree<ll> bit(et.size());\n\
@@ -292,7 +291,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   requiredBy: []
-  timestamp: '2020-11-27 00:11:16+09:00'
+  timestamp: '2020-11-27 19:57:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
