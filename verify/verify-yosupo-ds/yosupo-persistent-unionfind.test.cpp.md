@@ -166,17 +166,16 @@ data:
     \ 5 \"verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp\"\n\nvoid solve()\
     \ {\n  ini(N, Q);\n  PersistentUnionFind uf(N);\n  V<decltype(uf)::Node *> roots(Q\
     \ + 1, nullptr);\n  roots[0] = uf.get_root();\n\n  rep(i, Q) {\n    ini(t, k,\
-    \ u, v);\n    trc(t, k, u, v);\n    if (t) {\n      auto r = roots[k + 1];\n \
-    \     out(uf.same(u, v, r));\n    } else {\n      auto r = roots[k + 1];\n   \
-    \   uf.unite(u, v, r);\n      roots[i + 1] = uf.get_root();\n    }\n  }\n}\n"
+    \ u, v);\n    if (t) {\n      auto r = roots[k + 1];\n      out(uf.same(u, v,\
+    \ r));\n    } else {\n      auto r = roots[k + 1];\n      uf.unite(u, v, r);\n\
+    \      roots[i + 1] = uf.get_root();\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\n\
     \n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/persistent-union-find.hpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  PersistentUnionFind uf(N);\n  V<decltype(uf)::Node\
     \ *> roots(Q + 1, nullptr);\n  roots[0] = uf.get_root();\n\n  rep(i, Q) {\n  \
-    \  ini(t, k, u, v);\n    trc(t, k, u, v);\n    if (t) {\n      auto r = roots[k\
-    \ + 1];\n      out(uf.same(u, v, r));\n    } else {\n      auto r = roots[k +\
-    \ 1];\n      uf.unite(u, v, r);\n      roots[i + 1] = uf.get_root();\n    }\n\
-    \  }\n}"
+    \  ini(t, k, u, v);\n    if (t) {\n      auto r = roots[k + 1];\n      out(uf.same(u,\
+    \ v, r));\n    } else {\n      auto r = roots[k + 1];\n      uf.unite(u, v, r);\n\
+    \      roots[i + 1] = uf.get_root();\n    }\n  }\n}"
   dependsOn:
   - competitive-template.hpp
   - data-structure/persistent-union-find.hpp
@@ -184,7 +183,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
   requiredBy: []
-  timestamp: '2020-08-24 22:53:15+09:00'
+  timestamp: '2020-11-27 13:31:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp

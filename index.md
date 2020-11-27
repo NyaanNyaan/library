@@ -504,6 +504,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/suffix-array.hpp
       title: string/suffix-array.hpp
+  - name: template
+    pages:
+    - icon: ':warning:'
+      path: template/debug.hpp
+      title: template/debug.hpp
   - name: tree
     pages:
     - icon: ':heavy_check_mark:'
