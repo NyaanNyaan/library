@@ -9,6 +9,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
+  - icon: ':heavy_check_mark:'
+    path: matrix/matrix-tree.hpp
+    title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
+      \u5217)"
+  - icon: ':heavy_check_mark:'
+    path: matrix/polynomial-matrix-determinant.hpp
+    title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
@@ -16,6 +23,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1303.test.cpp
+    title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -172,12 +182,15 @@ data:
   isVerificationFile: false
   path: fps/multipoint-evaluation.hpp
   requiredBy:
+  - matrix/matrix-tree.hpp
+  - matrix/polynomial-matrix-determinant.hpp
   - fps/polynomial-interpolation.hpp
   timestamp: '2020-08-21 15:57:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
 documentation_of: fps/multipoint-evaluation.hpp
 layout: document
 redirect_from:

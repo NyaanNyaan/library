@@ -257,12 +257,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/kth-root-integral.hpp
       title: $\mathrm{floor}(a^{\frac{1}{k}})$
-    - icon: ':warning:'
-      path: math/matrix-fast.hpp
-      title: math/matrix-fast.hpp
-    - icon: ':warning:'
-      path: math/matrix.hpp
-      title: math/matrix.hpp
     - icon: ':heavy_check_mark:'
       path: math/nim-product.hpp
       title: Nim Product
@@ -302,6 +296,21 @@ data:
     - icon: ':warning:'
       path: math/zeta-mobius-transform.hpp
       title: math/zeta-mobius-transform.hpp
+  - name: matrix
+    pages:
+    - icon: ':warning:'
+      path: matrix/matrix-fast.hpp
+      title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
+    - icon: ':heavy_check_mark:'
+      path: matrix/matrix-tree.hpp
+      title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
+        \u5217)"
+    - icon: ':heavy_check_mark:'
+      path: matrix/matrix.hpp
+      title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
+    - icon: ':heavy_check_mark:'
+      path: matrix/polynomial-matrix-determinant.hpp
+      title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   - name: misc
     pages:
     - icon: ':heavy_check_mark:'
@@ -1057,6 +1066,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1220.test.cpp
       title: verify/verify-yuki/yuki-1220.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1303.test.cpp
+      title: verify/verify-yuki/yuki-1303.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-helloworld.test.cpp
       title: verify/verify-yuki/yuki-helloworld.test.cpp

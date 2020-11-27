@@ -52,6 +52,13 @@ data:
     path: fps/utility.hpp
     title: fps/utility.hpp
   - icon: ':heavy_check_mark:'
+    path: matrix/matrix-tree.hpp
+    title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
+      \u5217)"
+  - icon: ':heavy_check_mark:'
+    path: matrix/polynomial-matrix-determinant.hpp
+    title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
+  - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   _extendedVerifiedWith:
@@ -121,6 +128,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1303.test.cpp
+    title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -260,6 +270,8 @@ data:
   isVerificationFile: false
   path: fps/formal-power-series.hpp
   requiredBy:
+  - matrix/matrix-tree.hpp
+  - matrix/polynomial-matrix-determinant.hpp
   - modulo/strassen.hpp
   - fps/famous-series.hpp
   - fps/arbitrary-fps.hpp
@@ -295,6 +307,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-log.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
