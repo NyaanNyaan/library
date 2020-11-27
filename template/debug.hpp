@@ -4,50 +4,68 @@ using namespace std;
 
 namespace DebugImpl {
 
-template <typename T, enable_if_t<is_integral<T>::value, nullptr_t> = nullptr>
-void print(const T& t) {
-  if (t == inf) {
-    cerr << "inf";
-    return;
+void dump(const char& t) { cerr << t; }
+
+void dump(const string& t) { cerr << t; }
+
+template <typename T>
+void dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr) {
+  string res;
+  if (t == inf) res = "inf";
+  if (is_signed<T>::value && t == -inf) res = "-inf";
+  if (sizeof(T) == 8) {
+    if (t == infLL) res = "inf";
+    if (is_signed<T>::value && t == -infLL) res = "-inf";
   }
-  if constexpr (is_signed<T>::value) {
-    if (t == -inf) {
-      cerr << "-inf";
-      return;
-    }
-  }
-  if constexpr (sizeof(T) == 8) {
-    if constexpr (is_signed<T>::value) {
-      if (t == -infLL) {
-        cerr << "-inf";
-        return;
-      }
-    }
-    if (t == infLL) {
-      cerr << "inf";
-      return;
-    }
-  }
-  cerr << t;
-  return;
+  if (res.empty()) res = to_string(t);
+  cerr << res;
 }
 
-template <typename T, enable_if_t<!is_void<typename T::iterator>::value,
-                                  nullptr_t> = nullptr>
-void print(const T& t) {
-  cerr << "{ ";
+template <typename T, typename U>
+void dump(const pair<T, U>&);
+template <typename T>
+void dump(const pair<T*, int>&);
+
+template <typename T>
+void dump(const T& t,
+          enable_if_t<!is_void<typename T::iterator>::value>* = nullptr) {
+  cerr << "[ ";
   for (auto it = t.begin(); it != t.end();) {
-    print(*it);
-    cerr << (++it == t.end() ? " }" : ", ");
+    dump(*it);
+    cerr << (++it == t.end() ? " ]" : ", ");
+  }
+}
+
+template <typename T, typename U>
+void dump(const pair<T, U>& t) {
+  cerr << "( ";
+  dump(t.first);
+  cerr << ", ";
+  dump(t.second);
+  cerr << " )";
+}
+
+template <typename T>
+void dump(const pair<T*, int>& t) {
+  cerr << "[ ";
+  for (int i = 0; i < t.second; i++) {
+    dump(t.first[i]);
+    cerr << (i == t.second - 1 ? " ]" : ", ");
   }
 }
 
 void trace() { cerr << endl; }
 template <typename Head, typename... Tail>
 void trace(Head&& head, Tail&&... tail) {
-  print(head);
-  if (sizeof...(tail) != 0) cerr << ", ";
+  cerr << " ";
+  dump(head);
+  if (sizeof...(tail) != 0) cerr << ",";
   trace(forward<Tail>(tail)...);
 }
 
 }  // namespace DebugImpl
+using DebugImpl::trace;
+
+/**
+ * @brief デバッグ用ダンプ関数
+ */

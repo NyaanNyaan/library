@@ -106,6 +106,6 @@ struct EulerTour {
 };
 
 /**
- * @brief オイラーツアー(頂点属性)
+ * @brief オイラーツアー
  * @docs docs/tree/euler-tour.md
  */
