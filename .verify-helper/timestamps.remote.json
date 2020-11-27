@@ -86,7 +86,7 @@
 "verify/verify-yosupo-fps/yosupo-composition.test.cpp": "2020-10-11 00:26:38 +0900",
 "verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp": "2020-10-11 00:26:38 +0900",
 "verify/verify-yosupo-fps/yosupo-exp.test.cpp": "2020-10-11 00:26:38 +0900",
-"verify/verify-yosupo-fps/yosupo-interpolation.test.cpp": "2020-10-11 00:26:38 +0900",
+"verify/verify-yosupo-fps/yosupo-interpolation.test.cpp": "2020-11-28 01:47:19 +0900",
 "verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp": "2020-10-11 00:26:38 +0900",
 "verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp": "2020-10-11 00:26:38 +0900",
 "verify/verify-yosupo-fps/yosupo-inv.test.cpp": "2020-10-11 00:26:38 +0900",
@@ -161,5 +161,6 @@
 "verify/verify-yuki/yuki-1145.test.cpp": "2020-10-11 00:26:38 +0900",
 "verify/verify-yuki/yuki-1170.test.cpp": "2020-08-15 19:54:29 +0900",
 "verify/verify-yuki/yuki-1220.test.cpp": "2020-09-04 23:57:13 +0900",
+"verify/verify-yuki/yuki-1303.test.cpp": "2020-11-28 01:47:19 +0900",
 "verify/verify-yuki/yuki-helloworld.test.cpp": "2020-08-01 13:57:58 +0900"
 }
