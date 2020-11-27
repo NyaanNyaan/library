@@ -6,19 +6,19 @@ template <class T>
 struct Matrix {
   vector<vector<T> > A;
 
-  Matrix() {}
+  Matrix() = default;
+  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}
+  Matrix(int n) : A(n, vector<T>(n, T())){};
 
-  Matrix(int n, int m) : A(n, vector<T>(m, 0)) {}
+  int H() const { return A.size(); }
 
-  Matrix(int n) : A(n, vector<T>(n, 0)){};
+  int W() const { return A[0].size(); }
 
-  int height() const { return (A.size()); }
+  int size() const { return A.size(); }
 
-  int width() const { return (A[0].size()); }
+  inline const vector<T> &operator[](int k) const { return A[k]; }
 
-  inline const vector<T> &operator[](int k) const { return (A.at(k)); }
-
-  inline vector<T> &operator[](int k) { return (A.at(k)); }
+  inline vector<T> &operator[](int k) { return A[k]; }
 
   static Matrix I(int n) {
     Matrix mat(n);
@@ -27,35 +27,34 @@ struct Matrix {
   }
 
   Matrix &operator+=(const Matrix &B) {
-    int n = height(), m = width();
-    assert(n == B.height() && m == B.width());
+    int n = H(), m = W();
+    assert(n == B.H() && m == B.W());
     for (int i = 0; i < n; i++)
       for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];
     return (*this);
   }
 
   Matrix &operator-=(const Matrix &B) {
-    int n = height(), m = width();
-    assert(n == B.height() && m == B.width());
+    int n = H(), m = W();
+    assert(n == B.H() && m == B.W());
     for (int i = 0; i < n; i++)
       for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];
     return (*this);
   }
 
   Matrix &operator*=(const Matrix &B) {
-    int n = height(), m = B.width(), p = width();
-    assert(p == B.height());
+    int n = H(), m = B.W(), p = W();
+    assert(p == B.H());
     vector<vector<T> > C(n, vector<T>(m, 0));
     for (int i = 0; i < n; i++)
-      for (int j = 0; j < m; j++)
-        for (int k = 0; k < p; k++)
-          C[i][j] = (C[i][j] + (*this)[i][k] * B[k][j]);
+      for (int k = 0; k < p; k++)
+        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] * B[k][j];
     A.swap(C);
     return (*this);
   }
 
   Matrix &operator^=(long long k) {
-    Matrix B = Matrix::I(height());
+    Matrix B = Matrix::I(H());
     while (k > 0) {
       if (k & 1) B *= *this;
       *this *= *this;
@@ -73,8 +72,8 @@ struct Matrix {
 
   Matrix operator^(const long long k) const { return (Matrix(*this) ^= k); }
 
-  friend ostream &operator<<(ostream &os, Matrix &p) {
-    int n = p.height(), m = p.width();
+  friend ostream &operator<<(ostream &os, const Matrix &p) {
+    int n = p.H(), m = p.W();
     for (int i = 0; i < n; i++) {
       os << "[";
       for (int j = 0; j < m; j++) {
@@ -84,32 +83,40 @@ struct Matrix {
     return (os);
   }
 
-  T determinant() {
+  T determinant() const {
     Matrix B(*this);
-    assert(width() == height());
+    assert(H() == W());
     T ret = 1;
-    for (int i = 0; i < width(); i++) {
+    for (int i = 0; i < H(); i++) {
       int idx = -1;
-      for (int j = i; j < width(); j++) {
-        if (B[j][i] != 0) idx = j;
+      for (int j = i; j < W(); j++) {
+        if (B[j][i] != 0) {
+          idx = j;
+          break;
+        }
       }
-      if (idx == -1) return (0);
+      if (idx == -1) return 0;
       if (i != idx) {
-        ret *= -1;
+        ret *= T(-1);
         swap(B[i], B[idx]);
       }
       ret *= B[i][i];
-      T vv = B[i][i];
-      for (int j = 0; j < width(); j++) {
-        B[i][j] /= vv;
+      T inv = T(1) / B[i][i];
+      for (int j = 0; j < W(); j++) {
+        B[i][j] *= inv;
       }
-      for (int j = i + 1; j < width(); j++) {
+      for (int j = i + 1; j < H(); j++) {
         T a = B[j][i];
-        for (int k = 0; k < width(); k++) {
+        if (a == 0) continue;
+        for (int k = i; k < W(); k++) {
           B[j][k] -= B[i][k] * a;
         }
       }
     }
-    return (ret);
+    return ret;
   }
 };
+
+/**
+ * @brief 行列ライブラリ
+ */

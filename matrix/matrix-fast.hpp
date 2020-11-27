@@ -2,12 +2,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <class T, int H, int W>
+template <typename T, int H, int W>
 struct Matrix {
   using Array = array<array<T, W>, H>;
   Array A;
 
-  Matrix() : A({}) {}
+  Matrix() : A() {
+    for (int i = 0; i < H; i++)
+      for (int j = 0; j < W; j++) a[i][j] = T();
+  }
 
   int height() const { return H; }
 
@@ -104,3 +107,7 @@ struct Matrix {
     return (ret);
   }
 };
+
+/**
+ * @brief 行列ライブラリ(std::array版)
+ */
