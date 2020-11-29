@@ -40,11 +40,11 @@ struct Matrix {
   }
 
   Matrix &operator*=(const Matrix &B) {
-    assert(H == W);
+    assert(W == B.H);
     Matrix C;
     for (int i = 0; i < H; i++)
-      for (int j = 0; j < H; j++)
-        for (int k = 0; k < H; k++) C[i][j] = (C[i][j] + A[i][k] * B[k][j]);
+      for (int k = 0; k < W; k++)
+        for (int j = 0; j < B.W; j++) C[i][j] += A[i][k] * B[k][j];
     A.swap(C.A);
     return (*this);
   }
@@ -85,21 +85,25 @@ struct Matrix {
     for (int i = 0; i < H; i++) {
       int idx = -1;
       for (int j = i; j < W; j++) {
-        if (B[j][i] != 0) idx = j;
+        if (B[j][i] != 0) {
+          idx = j;
+          break;
+        }
       }
-      if (idx == -1) return (0);
+      if (idx == -1) return 0;
       if (i != idx) {
-        ret *= -1;
+        ret *= T(-1);
         swap(B[i], B[idx]);
       }
       ret *= B[i][i];
-      T vv = B[i][i];
+      T inv = T(1) / B[i][i];
       for (int j = 0; j < W; j++) {
-        B[i][j] /= vv;
+        B[i][j] *= inv;
       }
       for (int j = i + 1; j < H; j++) {
         T a = B[j][i];
-        for (int k = 0; k < W; k++) {
+        if (a == 0) continue;
+        for (int k = i; k < W; k++) {
           B[j][k] -= B[i][k] * a;
         }
       }

@@ -9,7 +9,7 @@ struct AddSum_LazySegmentTree {
   T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
   T g(T a, E b) { return T(a.first + b * a.second, a.second); };
   E h(E a, E b) { return a + b; };
-  T ti = P(0, 0);
+  T ti = T(0, 0);
   E ei = 0;
   vector<T> dat;
   vector<E> laz;
