@@ -19,4 +19,4 @@
 - `kth_ancestor(u, k)`: $\mathrm{par}^k(u)$を返す。(存在しない場合-1を返す。)　$\mathrm{O}(\log N)$
 - `nxt(s, t)`: s-t間のパス上の点のうちsに隣接する点を返す。 $\mathrm{O}(\log N)$
 - `lca(u, v)`: uとvのlcaを返す。$\mathrm{O}(\log N)$
-- `path(s, t)`: s-t間のパスを返す。$\mathrm{O}(|\mathrm{path}|)$
+- `path(s, t)`: s-t間のパス$p$をパスに所属する頂点の列で返す。$\mathrm{O}(\lvert p\rvert)$

@@ -128,7 +128,7 @@ data:
     \nusing namespace std;\n\ntemplate <typename E>\nstruct AddSum_LazySegmentTree\
     \ {\n  int n, height;\n  using T = pair<E, E>;\n  T f(T a, T b) { return T(a.first\
     \ + b.first, a.second + b.second); };\n  T g(T a, E b) { return T(a.first + b\
-    \ * a.second, a.second); };\n  E h(E a, E b) { return a + b; };\n  T ti = P(0,\
+    \ * a.second, a.second); };\n  E h(E a, E b) { return a + b; };\n  T ti = T(0,\
     \ 0);\n  E ei = 0;\n  vector<T> dat;\n  vector<E> laz;\n\n  AddSum_LazySegmentTree(const\
     \ vector<E> &v) { build(v); }\n\n  void init(int n_) {\n    n = 1;\n    height\
     \ = 0;\n    while (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n  \
@@ -284,7 +284,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
+  timestamp: '2020-11-29 14:35:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
