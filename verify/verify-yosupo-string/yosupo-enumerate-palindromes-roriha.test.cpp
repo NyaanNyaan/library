@@ -1,3 +1,5 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/enumerate_palindromes"
+
 #include "../../template/template.hpp"
 //
 #include "../../string/rolling-hash.hpp"
