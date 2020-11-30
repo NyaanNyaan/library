@@ -26,4 +26,5 @@ FormalPowerSeries<mint> PolynomialMatrixDeterminant(
 
 /**
  * @brief 多項式行列の行列式
+ * @docs docs/matrix/polynomial-matrix-determinant.md
  */

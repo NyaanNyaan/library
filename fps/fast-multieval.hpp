@@ -58,3 +58,7 @@ vector<mint> FastMultiEval(const FormalPowerSeries<mint> &f,
   calc(calc, 1, 0, N, root);
   return ans;
 }
+
+/**
+ * @brief Multipoint Evaluation(高速化版)
+ */

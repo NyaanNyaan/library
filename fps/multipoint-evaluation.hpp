@@ -111,3 +111,7 @@ vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
                                   const vector<mint> &xs) {
   return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));
 }
+
+/**
+ * @brief Multipoint Evaluation
+ */
