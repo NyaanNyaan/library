@@ -7,6 +7,9 @@ data:
     title: template/template.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/debug.test.cpp
+    title: verify/verify-unit-test/debug.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - icon: ':heavy_check_mark:'
@@ -47,6 +50,7 @@ data:
   timestamp: '2020-11-30 18:57:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/debug.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
 documentation_of: template/bitop.hpp
