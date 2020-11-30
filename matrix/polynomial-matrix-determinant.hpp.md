@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: fps/multipoint-evaluation.hpp
-    title: fps/multipoint-evaluation.hpp
+    title: Multipoint Evaluation
   - icon: ':heavy_check_mark:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
@@ -26,6 +26,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/matrix/polynomial-matrix-determinant.md
     document_title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
     links: []
   bundledCode: "#line 2 \"matrix/polynomial-matrix-determinant.hpp\"\n#include <bits/stdc++.h>\n\
@@ -134,28 +135,29 @@ data:
     \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
     \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
     \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
-    \ xs, ProductTree<mint>(xs));\n}\n#line 7 \"fps/polynomial-interpolation.hpp\"\
-    \n\ntemplate <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const\
-    \ vector<mint> &xs,\n                                                const vector<mint>\
-    \ &ys) {\n  using fps = FormalPowerSeries<mint>;\n  assert(xs.size() == ys.size());\n\
-    \  ProductTree<mint> ptree(xs);\n  fps w = ptree.buf[1].diff();\n  vector<mint>\
-    \ vs = InnerMultipointEvaluation<mint>(w, xs, ptree);\n  auto rec = [&](auto self,\
-    \ int idx) -> fps {\n    if (idx >= ptree.N) {\n      if (idx - ptree.N < (int)xs.size())\n\
-    \        return {ys[idx - ptree.N] / vs[idx - ptree.N]};\n      else\n       \
-    \ return {mint(1)};\n    }\n    if (ptree.buf[idx << 1 | 0].empty())\n      return\
-    \ {};\n    else if (ptree.buf[idx << 1 | 1].empty())\n      return self(self,\
-    \ idx << 1 | 0);\n    return self(self, idx << 1 | 0) * ptree.buf[idx << 1 | 1]\
-    \ +\n           self(self, idx << 1 | 1) * ptree.buf[idx << 1 | 0];\n  };\n  return\
-    \ rec(rec, 1);\n}\n#line 3 \"matrix/matrix.hpp\"\nusing namespace std;\n\ntemplate\
-    \ <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n\
-    \  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
-    \ T())){};\n\n  int H() const { return A.size(); }\n\n  int W() const { return\
-    \ A[0].size(); }\n\n  int size() const { return A.size(); }\n\n  inline const\
-    \ vector<T> &operator[](int k) const { return A[k]; }\n\n  inline vector<T> &operator[](int\
-    \ k) { return A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for\
-    \ (int i = 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
-    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
-    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
+    \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n\
+    #line 7 \"fps/polynomial-interpolation.hpp\"\n\ntemplate <class mint>\nFormalPowerSeries<mint>\
+    \ PolynomialInterpolation(const vector<mint> &xs,\n                          \
+    \                      const vector<mint> &ys) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  assert(xs.size() == ys.size());\n  ProductTree<mint> ptree(xs);\n  fps w =\
+    \ ptree.buf[1].diff();\n  vector<mint> vs = InnerMultipointEvaluation<mint>(w,\
+    \ xs, ptree);\n  auto rec = [&](auto self, int idx) -> fps {\n    if (idx >= ptree.N)\
+    \ {\n      if (idx - ptree.N < (int)xs.size())\n        return {ys[idx - ptree.N]\
+    \ / vs[idx - ptree.N]};\n      else\n        return {mint(1)};\n    }\n    if\
+    \ (ptree.buf[idx << 1 | 0].empty())\n      return {};\n    else if (ptree.buf[idx\
+    \ << 1 | 1].empty())\n      return self(self, idx << 1 | 0);\n    return self(self,\
+    \ idx << 1 | 0) * ptree.buf[idx << 1 | 1] +\n           self(self, idx << 1 |\
+    \ 1) * ptree.buf[idx << 1 | 0];\n  };\n  return rec(rec, 1);\n}\n#line 3 \"matrix/matrix.hpp\"\
+    \nusing namespace std;\n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T>\
+    \ > A;\n\n  Matrix() = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T()))\
+    \ {}\n  Matrix(int n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return\
+    \ A.size(); }\n\n  int W() const { return A[0].size(); }\n\n  int size() const\
+    \ { return A.size(); }\n\n  inline const vector<T> &operator[](int k) const {\
+    \ return A[k]; }\n\n  inline vector<T> &operator[](int k) { return A[k]; }\n\n\
+    \  static Matrix I(int n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++)\
+    \ mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const Matrix\
+    \ &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n  \
+    \  for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
     \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
     \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
     \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
@@ -192,7 +194,8 @@ data:
     \  for (int x = 0; x <= deg; x++) {\n    xs[x] = x;\n    for (int i = 0; i < N;\
     \ ++i)\n      for (int j = 0; j < N; ++j) M[i][j] = m[i][j].eval(x);\n    ys[x]\
     \ = M.determinant();\n  }\n  return PolynomialInterpolation<mint>(xs, ys);\n}\n\
-    \n/**\n * @brief \u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F\n */\n"
+    \n/**\n * @brief \u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F\n * @docs\
+    \ docs/matrix/polynomial-matrix-determinant.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../fps/formal-power-series.hpp\"\n#include \"../fps/polynomial-interpolation.hpp\"\
     \n#include \"matrix.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
@@ -203,7 +206,7 @@ data:
     \ xs[x] = x;\n    for (int i = 0; i < N; ++i)\n      for (int j = 0; j < N; ++j)\
     \ M[i][j] = m[i][j].eval(x);\n    ys[x] = M.determinant();\n  }\n  return PolynomialInterpolation<mint>(xs,\
     \ ys);\n}\n\n/**\n * @brief \u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F\
-    \n */\n"
+    \n * @docs docs/matrix/polynomial-matrix-determinant.md\n */\n"
   dependsOn:
   - fps/formal-power-series.hpp
   - fps/polynomial-interpolation.hpp
@@ -213,7 +216,7 @@ data:
   path: matrix/polynomial-matrix-determinant.hpp
   requiredBy:
   - matrix/matrix-tree.hpp
-  timestamp: '2020-11-28 01:47:19+09:00'
+  timestamp: '2020-12-01 01:27:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp
@@ -224,3 +227,14 @@ redirect_from:
 - /library/matrix/polynomial-matrix-determinant.hpp.html
 title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
 ---
+## 多項式行列の行列式
+
+TODO : 清書・使い方を書く
+
+- このライブラリではラグランジュ補間を用いて$\mathrm{O}(N^3 d)$で解いているが他にも解き方はある
+- [noshiさんのブログ](https://noshi91.hatenablog.com/entry/2020/11/28/115621)
+  - 除算にユークリッドの互除法を利用すれば行列式を計算できることと、線形変換を利用してさらに計算量を落とせることが説明されている
+- [hitonanodeさんのブログ](https://rsm9.hatenablog.com/entry/2020/11/28/005448)
+  - $\mod x^m$が欲しい場合はFPSで$\mathrm{O}(N^3 m \mathrm{polylog} m)$くらいで解ける
+  - ただし常にpivotに対して逆元が存在する必要があり、これは$\mod x$の行列が行列式を持つことと同値
+  - リンク先の問題では「連結グラフに行列木を適用している」「辺のあるところに重み$1$の辺を張る」という事実から逆元の存在が示せる

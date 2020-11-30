@@ -1,27 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
+    document_title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
     links: []
   bundledCode: "#line 2 \"modint/montgomery-modint.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n\
@@ -532,7 +536,8 @@ data:
     \ fps{begin(tmp) + (len >> 1), end(tmp)});\n    if (m >= s) return;\n    tmp =\
     \ buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= f[j];\n    tmp.intt();\n\
     \    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n  };\n\
-    \  calc(calc, 1, 0, N, root);\n  return ans;\n}\n"
+    \  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint Evaluation(\u9AD8\
+    \u901F\u5316\u7248)\n */\n"
   code: "#pragma once\n#include \"../modint/montgomery-modint.hpp\"\n#include \"./ntt-friendly-fps.hpp\"\
     \n\ntemplate <typename mint>\nvector<mint> FastMultiEval(const FormalPowerSeries<mint>\
     \ &f,\n                           const vector<mint> &xs) {\n  using fps = FormalPowerSeries<mint>;\n\
@@ -554,7 +559,8 @@ data:
     \ 0, l, m, fps{begin(tmp) + (len >> 1), end(tmp)});\n    if (m >= s) return;\n\
     \    tmp = buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= f[j];\n\
     \    tmp.intt();\n    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n\
-    \  };\n  calc(calc, 1, 0, N, root);\n  return ans;\n}\n"
+    \  };\n  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint\
+    \ Evaluation(\u9AD8\u901F\u5316\u7248)\n */\n"
   dependsOn:
   - modint/montgomery-modint.hpp
   - fps/ntt-friendly-fps.hpp
@@ -564,13 +570,14 @@ data:
   isVerificationFile: false
   path: fps/fast-multieval.hpp
   requiredBy: []
-  timestamp: '2020-10-11 00:26:38+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2020-12-01 01:27:24+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
 documentation_of: fps/fast-multieval.hpp
 layout: document
 redirect_from:
 - /library/fps/fast-multieval.hpp
 - /library/fps/fast-multieval.hpp.html
-title: fps/fast-multieval.hpp
+title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
 ---

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: fps/multipoint-evaluation.hpp
-    title: fps/multipoint-evaluation.hpp
+    title: Multipoint Evaluation
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: matrix/matrix-tree.hpp
@@ -132,19 +132,19 @@ data:
     \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
     \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
     \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
-    \ xs, ProductTree<mint>(xs));\n}\n#line 7 \"fps/polynomial-interpolation.hpp\"\
-    \n\ntemplate <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const\
-    \ vector<mint> &xs,\n                                                const vector<mint>\
-    \ &ys) {\n  using fps = FormalPowerSeries<mint>;\n  assert(xs.size() == ys.size());\n\
-    \  ProductTree<mint> ptree(xs);\n  fps w = ptree.buf[1].diff();\n  vector<mint>\
-    \ vs = InnerMultipointEvaluation<mint>(w, xs, ptree);\n  auto rec = [&](auto self,\
-    \ int idx) -> fps {\n    if (idx >= ptree.N) {\n      if (idx - ptree.N < (int)xs.size())\n\
-    \        return {ys[idx - ptree.N] / vs[idx - ptree.N]};\n      else\n       \
-    \ return {mint(1)};\n    }\n    if (ptree.buf[idx << 1 | 0].empty())\n      return\
-    \ {};\n    else if (ptree.buf[idx << 1 | 1].empty())\n      return self(self,\
-    \ idx << 1 | 0);\n    return self(self, idx << 1 | 0) * ptree.buf[idx << 1 | 1]\
-    \ +\n           self(self, idx << 1 | 1) * ptree.buf[idx << 1 | 0];\n  };\n  return\
-    \ rec(rec, 1);\n}\n"
+    \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n\
+    #line 7 \"fps/polynomial-interpolation.hpp\"\n\ntemplate <class mint>\nFormalPowerSeries<mint>\
+    \ PolynomialInterpolation(const vector<mint> &xs,\n                          \
+    \                      const vector<mint> &ys) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  assert(xs.size() == ys.size());\n  ProductTree<mint> ptree(xs);\n  fps w =\
+    \ ptree.buf[1].diff();\n  vector<mint> vs = InnerMultipointEvaluation<mint>(w,\
+    \ xs, ptree);\n  auto rec = [&](auto self, int idx) -> fps {\n    if (idx >= ptree.N)\
+    \ {\n      if (idx - ptree.N < (int)xs.size())\n        return {ys[idx - ptree.N]\
+    \ / vs[idx - ptree.N]};\n      else\n        return {mint(1)};\n    }\n    if\
+    \ (ptree.buf[idx << 1 | 0].empty())\n      return {};\n    else if (ptree.buf[idx\
+    \ << 1 | 1].empty())\n      return self(self, idx << 1 | 0);\n    return self(self,\
+    \ idx << 1 | 0) * ptree.buf[idx << 1 | 1] +\n           self(self, idx << 1 |\
+    \ 1) * ptree.buf[idx << 1 | 0];\n  };\n  return rec(rec, 1);\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"./formal-power-series.hpp\"\n#include \"./multipoint-evaluation.hpp\"\n\n\
     template <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const vector<mint>\
@@ -167,7 +167,7 @@ data:
   requiredBy:
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
-  timestamp: '2020-11-28 01:47:19+09:00'
+  timestamp: '2020-12-01 01:27:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp

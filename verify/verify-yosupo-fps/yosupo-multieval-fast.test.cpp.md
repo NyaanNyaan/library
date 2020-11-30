@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: competitive-template.hpp
-    title: competitive-template.hpp
+  - icon: ':x:'
+    path: fps/fast-multieval.hpp
+    title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
   - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
@@ -11,9 +11,6 @@ data:
   - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: fps/utility.hpp
-    title: fps/utility.hpp
   - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -26,126 +23,166 @@ data:
   - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
+  - icon: ':question:'
+    path: template/bitop.hpp
+    title: template/bitop.hpp
+  - icon: ':question:'
+    path: template/debug.hpp
+    title: template/debug.hpp
+  - icon: ':question:'
+    path: template/inout.hpp
+    title: template/inout.hpp
+  - icon: ':question:'
+    path: template/macro.hpp
+    title: template/macro.hpp
+  - icon: ':question:'
+    path: template/template.hpp
+    title: template/template.hpp
+  - icon: ':question:'
+    path: template/util.hpp
+    title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1145
-    links:
-    - https://yukicoder.me/problems/no/1145
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-1145.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/1145\"\n\n#line 1 \"competitive-template.hpp\"\
-    \n#pragma region kyopro_template\n#define Nyaan_template\n#include <immintrin.h>\n\
-    #include <bits/stdc++.h>\n#define pb push_back\n#define eb emplace_back\n#define\
-    \ fi first\n#define se second\n#define each(x, v) for (auto &x : v)\n#define all(v)\
-    \ (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n#define mem(a, val)\
-    \ memset(a, val, sizeof(a))\n#define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define inl(...)         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define\
-    \ inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)\
-    \                           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\
-    \n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)  \
-    \                      \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n  \
-    \  in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)  \
-    \                   \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
-    \ t[i], u[i], v[i]);             \\\n  }\n#define rep(i, N) for (long long i =\
-    \ 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1;\
-    \ i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N);\
-    \ i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n\
-    #define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define die(...) \
-    \     \\\n  do {                \\\n    out(__VA_ARGS__); \\\n    return;    \
-    \       \\\n  } while (0)\nusing namespace std;\nusing ll = long long;\ntemplate\
-    \ <class T>\nusing V = vector<T>;\nusing vi = vector<int>;\nusing vl = vector<long\
-    \ long>;\nusing vvi = vector<vector<int>>;\nusing vd = V<double>;\nusing vs =\
-    \ V<string>;\nusing vvl = vector<vector<long long>>;\nusing P = pair<long long,\
-    \ long long>;\nusing vp = vector<P>;\nusing pii = pair<int, int>;\nusing vpi =\
-    \ vector<pair<int, int>>;\nconstexpr int inf = 1001001001;\nconstexpr long long\
-    \ infLL = (1LL << 61) - 1;\ntemplate <typename T, typename U>\ninline bool amin(T\
-    \ &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate <typename\
-    \ T, typename U>\ninline bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true)\
-    \ : false;\n}\ntemplate <typename T, typename U>\nostream &operator<<(ostream\
-    \ &os, const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return\
-    \ os;\n}\ntemplate <typename T, typename U>\nistream &operator>>(istream &is,\
-    \ pair<T, U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\nvoid in() {}\ntemplate <typename\
-    \ T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n  in(u...);\n}\nvoid\
-    \ out() { cout << \"\\n\"; }\ntemplate <typename T, class... U>\nvoid out(const\
-    \ T &t, const U &... u) {\n  cout << t;\n  if (sizeof...(u)) cout << \" \";\n\
-    \  out(u...);\n}\n\n#ifdef NyaanDebug\n#define trc(...)                   \\\n\
-    \  do {                             \\\n    cerr << #__VA_ARGS__ << \" = \"; \\\
-    \n    dbg_out(__VA_ARGS__);          \\\n  } while (0)\n#define trca(v, N)   \
-    \    \\\n  do {                   \\\n    cerr << #v << \" = \"; \\\n    array_out(v,\
-    \ N);     \\\n  } while (0)\n#define trcc(v)                             \\\n\
-    \  do {                                      \\\n    cerr << #v << \" = {\"; \
-    \                  \\\n    each(x, v) { cerr << \" \" << x << \",\"; } \\\n  \
-    \  cerr << \"}\" << endl;                    \\\n  } while (0)\ntemplate <typename\
-    \ T>\nvoid _cout(const T &c) {\n  cerr << c;\n}\nvoid _cout(const int &c) {\n\
-    \  if (c == 1001001001)\n    cerr << \"inf\";\n  else if (c == -1001001001)\n\
-    \    cerr << \"-inf\";\n  else\n    cerr << c;\n}\nvoid _cout(const unsigned int\
-    \ &c) {\n  if (c == 1001001001)\n    cerr << \"inf\";\n  else\n    cerr << c;\n\
-    }\nvoid _cout(const long long &c) {\n  if (c == 1001001001 || c == (1LL << 61)\
-    \ - 1)\n    cerr << \"inf\";\n  else if (c == -1001001001 || c == -((1LL << 61)\
-    \ - 1))\n    cerr << \"-inf\";\n  else\n    cerr << c;\n}\nvoid _cout(const unsigned\
-    \ long long &c) {\n  if (c == 1001001001 || c == (1LL << 61) - 1)\n    cerr <<\
-    \ \"inf\";\n  else\n    cerr << c;\n}\ntemplate <typename T, typename U>\nvoid\
-    \ _cout(const pair<T, U> &p) {\n  cerr << \"{ \";\n  _cout(p.fi);\n  cerr << \"\
-    , \";\n  _cout(p.se);\n  cerr << \" } \";\n}\ntemplate <typename T>\nvoid _cout(const\
-    \ vector<T> &v) {\n  int s = v.size();\n  cerr << \"{ \";\n  for (int i = 0; i\
-    \ < s; i++) {\n    cerr << (i ? \", \" : \"\");\n    _cout(v[i]);\n  }\n  cerr\
-    \ << \" } \";\n}\ntemplate <typename T>\nvoid _cout(const vector<vector<T>> &v)\
-    \ {\n  cerr << \"[ \";\n  for (const auto &x : v) {\n    cerr << endl;\n    _cout(x);\n\
-    \    cerr << \", \";\n  }\n  cerr << endl << \" ] \";\n}\nvoid dbg_out() { cerr\
-    \ << endl; }\ntemplate <typename T, class... U>\nvoid dbg_out(const T &t, const\
-    \ U &... u) {\n  _cout(t);\n  if (sizeof...(u)) cerr << \", \";\n  dbg_out(u...);\n\
-    }\ntemplate <typename T>\nvoid array_out(const T &v, int s) {\n  cerr << \"{ \"\
-    ;\n  for (int i = 0; i < s; i++) {\n    cerr << (i ? \", \" : \"\");\n    _cout(v[i]);\n\
-    \  }\n  cerr << \" } \" << endl;\n}\ntemplate <typename T>\nvoid array_out(const\
-    \ T &v, int H, int W) {\n  cerr << \"[ \";\n  for (int i = 0; i < H; i++) {\n\
-    \    cerr << (i ? \", \" : \"\");\n    array_out(v[i], W);\n  }\n  cerr << \"\
-    \ ] \" << endl;\n}\n#else\n#define trc(...)\n#define trca(...)\n#define trcc(...)\n\
-    #endif\n\ninline int popcnt(unsigned long long a) { return __builtin_popcountll(a);\
-    \ }\ninline int lsb(unsigned long long a) { return __builtin_ctzll(a); }\ninline\
-    \ int msb(unsigned long long a) { return 63 - __builtin_clzll(a); }\ntemplate\
-    \ <typename T>\ninline int getbit(T a, int i) {\n  return (a >> i) & 1;\n}\ntemplate\
-    \ <typename T>\ninline void setbit(T &a, int i) {\n  a |= (1LL << i);\n}\ntemplate\
-    \ <typename T>\ninline void delbit(T &a, int i) {\n  a &= ~(1LL << i);\n}\ntemplate\
-    \ <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
-    \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
-    \ <typename T>\nint btw(T a, T x, T b) {\n  return a <= x && x < b;\n}\ntemplate\
-    \ <typename T, typename U>\nT ceil(T a, U b) {\n  return (a + b - 1) / b;\n}\n\
-    constexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n  while (n) {\n\
-    \    if (n & 1) ret *= x;\n    x *= x;\n    n >>= 1;\n  }\n  return ret;\n}\n\
-    template <typename T>\nvector<T> mkrui(const vector<T> &v) {\n  vector<T> ret(v.size()\
-    \ + 1);\n  for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n\
-    \  return ret;\n};\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v)\
-    \ {\n  vector<T> ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(),\
-    \ ret.end()), ret.end());\n  return ret;\n}\ntemplate <typename F>\nvector<int>\
-    \ mkord(int N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n\
-    \  sort(begin(ord), end(ord), f);\n  return ord;\n}\ntemplate <typename T = int>\n\
-    vector<T> mkiota(int N) {\n  vector<T> ret(N);\n  iota(begin(ret), end(ret), 0);\n\
-    \  return ret;\n}\ntemplate <typename T>\nvector<int> mkinv(vector<T> &v) {\n\
-    \  vector<int> inv(v.size());\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]]\
-    \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
-    \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
-    \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"fps/ntt-friendly-fps.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"ntt/ntt-avx2.hpp\"\nusing namespace std;\n\
-    \n#line 3 \"modint/simd-montgomery.hpp\"\nusing namespace std;\n#line 5 \"modint/simd-montgomery.hpp\"\
-    \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
-    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
-    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
-    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
-    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
-    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
-    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
-    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    links: []
+  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n// bits\n#include <bits/stdc++.h>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
+    \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
+    \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
+    \ first; }\n  U &y() { return second; }\n  const U &y() const { return second;\
+    \ }\n\n  P &operator+=(const P &r) {\n    first += r.first;\n    second += r.second;\n\
+    \    return *this;\n  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n\
+    \    second -= r.second;\n    return *this;\n  }\n  P &operator*=(const P &r)\
+    \ {\n    first *= r.first;\n    second *= r.second;\n    return *this;\n  }\n\
+    \  P operator+(const P &r) const { return P(*this) += r; }\n  P operator-(const\
+    \ P &r) const { return P(*this) -= r; }\n  P operator*(const P &r) const { return\
+    \ P(*this) *= r; }\n};\n\nusing pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing\
+    \ vp = V<pl>;\n\nconstexpr int inf = 1001001001;\nconstexpr long long infLL =\
+    \ 4004004004004004004LL;\n\ntemplate <typename T>\nint sz(const T &t) {\n  return\
+    \ t.size();\n}\ntemplate <typename T, size_t N>\nvoid mem(T (&a)[N], int c) {\n\
+    \  memset(a, c, sizeof(T) * N);\n}\n\ntemplate <typename T, typename U>\ninline\
+    \ bool amin(T &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate\
+    \ <typename T, typename U>\ninline bool amax(T &x, U y) {\n  return (x < y) ?\
+    \ (x = y, true) : false;\n}\n\ntemplate <typename T>\nint lb(const vector<T> &v,\
+    \ const T &a) {\n  return lower_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
+    \ <typename T>\nint ub(const vector<T> &v, const T &a) {\n  return upper_bound(begin(v),\
+    \ end(v), a) - begin(v);\n}\n\ntemplate <typename T>\nint btw(T a, T x, T b) {\n\
+    \  return a <= x && x < b;\n}\n\ntemplate <typename T, typename U>\nT ceil(T a,\
+    \ U b) {\n  return (a + b - 1) / b;\n}\n\nconstexpr long long TEN(int n) {\n \
+    \ long long ret = 1, x = 10;\n  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x :\
+    \ 1);\n  return ret;\n}\n\ntemplate <typename T, typename U>\npair<T, U> mkp(const\
+    \ T &t, const U &u) {\n  return make_pair(t, u);\n}\n\ntemplate <typename T>\n\
+    vector<T> mkrui(const vector<T> &v, bool rev = false) {\n  vector<T> ret(v.size()\
+    \ + 1);\n  if (rev) {\n    for (int i = int(v.size()) - 1; i >= 0; i--) ret[i]\
+    \ = v[i] + ret[i + 1];\n  } else {\n    for (int i = 0; i < int(v.size()); i++)\
+    \ ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n};\n\ntemplate <typename T>\n\
+    vector<T> mkuni(const vector<T> &v) {\n  vector<T> ret(v);\n  sort(ret.begin(),\
+    \ ret.end());\n  ret.erase(unique(ret.begin(), ret.end()), ret.end());\n  return\
+    \ ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int N, F f) {\n  vector<int>\
+    \ ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord), end(ord), f);\n\
+    \  return ord;\n}\n\ntemplate <typename T>\nvector<T> reord(const vector<T> &v,\
+    \ const vector<T> &ord) {\n  int N = v.size();\n  vector<T> ret(N);\n  for (int\
+    \ i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return ret;\n};\n\ntemplate <typename\
+    \ T = int>\nvector<T> mkiota(int N) {\n  vector<T> ret(N);\n  iota(begin(ret),\
+    \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
+    \ &v, int max_val = -1) {\n  if (max_val < (int)v.size()) max_val = v.size() -\
+    \ 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i = 0; i < (int)v.size();\
+    \ i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace Nyaan\n#line 12 \"\
+    template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\n\
+    namespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\n__attribute__((target(\"bmi\")))\
+    \ inline int botbit(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n__attribute__((target(\"\
+    bmi\"))) inline int ctz(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n\n__attribute__((target(\"\
+    lzcnt\"))) inline int topbit(const u64 &a) {\n  return 63 - _lzcnt_u64(a);\n}\n\
+    __attribute__((target(\"lzcnt\"))) inline int clz64(const u64 &a) {\n  return\
+    \ _lzcnt_u64(a);\n}\n\ntemplate <typename T>\ninline int gbit(const T &a, int\
+    \ i) {\n  return (a >> i) & 1;\n}\ntemplate <typename T>\ninline void sbit(T &a,\
+    \ int i, bool b) {\n  a ^= (gbit(a, i) == b ? 0 : (T(b) << i));\n}\n\nconstexpr\
+    \ long long PW(int n) { return 1LL << n; }\n\nconstexpr long long MSK(int n) {\
+    \ return (1LL << n) - 1; }\n\n}  // namespace Nyaan\n#line 15 \"template/template.hpp\"\
+    \n\n// inout\n#line 1 \"template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename\
+    \ T, typename U>\nostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os\
+    \ << p.first << \" \" << p.second;\n  return os;\n}\ntemplate <typename T, typename\
+    \ U>\nistream &operator>>(istream &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n\
+    \  return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, const\
+    \ vector<T> &v) {\n  int s = (int)v.size();\n  for (int i = 0; i < s; i++) os\
+    \ << (i ? \" \" : \"\") << v[i];\n  return os;\n}\ntemplate <typename T>\nistream\
+    \ &operator>>(istream &is, vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return\
+    \ is;\n}\n\nvoid in() {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &...\
+    \ u) {\n  cin >> t;\n  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate\
+    \ <typename T, class... U, char sep = ' '>\nvoid out(const T &t, const U &...\
+    \ u) {\n  cout << t;\n  if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nvoid\
+    \ outr() {}\ntemplate <typename T, class... U, char sep = ' '>\nvoid outr(const\
+    \ T &t, const U &... u) {\n  cout << t;\n  outr(u...);\n}\n\nstruct IoSetupNya\
+    \ {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
+    \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
+    \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 18 \"template/template.hpp\"\
+    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\nvoid dump(const\
+    \ char& t) { cerr << t; }\n\nvoid dump(const string& t) { cerr << t; }\n\ntemplate\
+    \ <typename T>\nvoid dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr)\
+    \ {\n  string res;\n  if (t == Nyaan::inf) res = \"inf\";\n  if (is_signed<T>::value)\n\
+    \    if (t == -Nyaan::inf) res = \"-inf\";\n  if (sizeof(T) == 8) {\n    if (t\
+    \ == Nyaan::infLL) res = \"inf\";\n    if (is_signed<T>::value)\n      if (t ==\
+    \ -Nyaan::infLL) res = \"-inf\";\n  }\n  if (res.empty()) res = to_string(t);\n\
+    \  cerr << res;\n}\n\ntemplate <typename T, typename U>\nvoid dump(const pair<T,\
+    \ U>&);\ntemplate <typename T>\nvoid dump(const pair<T*, int>&);\n\ntemplate <typename\
+    \ T>\nvoid dump(const T& t,\n          enable_if_t<!is_void<typename T::iterator>::value>*\
+    \ = nullptr) {\n  cerr << \"[ \";\n  for (auto it = t.begin(); it != t.end();)\
+    \ {\n    dump(*it);\n    cerr << (++it == t.end() ? \" ]\" : \", \");\n  }\n}\n\
+    \ntemplate <typename T, typename U>\nvoid dump(const pair<T, U>& t) {\n  cerr\
+    \ << \"( \";\n  dump(t.first);\n  cerr << \", \";\n  dump(t.second);\n  cerr <<\
+    \ \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const pair<T*, int>& t) {\n \
+    \ cerr << \"[ \";\n  for (int i = 0; i < t.second; i++) {\n    dump(t.first[i]);\n\
+    \    cerr << (i == t.second - 1 ? \" ]\" : \", \");\n  }\n}\n\nvoid trace() {\
+    \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
+    \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
+    \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
+    \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
+    \                            \\\n  do {                                      \\\
+    \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
+    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
+    \ : v)\n#define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long\
+    \ i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long\
+    \ long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long\
+    \ long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) >\
+    \ 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
+    \ regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond)\
+    \ for (long long i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__;\
+    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
+    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
+    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
+    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
+    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
+    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
+    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
+    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)     \
+    \        \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n\
+    \    return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
+    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
+    \ 2 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\n//\n#line 3 \"\
+    fps/ntt-friendly-fps.hpp\"\nusing namespace std;\n\n#line 3 \"ntt/ntt-avx2.hpp\"\
+    \nusing namespace std;\n\n#line 3 \"modint/simd-montgomery.hpp\"\nusing namespace\
+    \ std;\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
+    ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
+    \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
+    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
+    \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
+    \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
+    \  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
+    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
+    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
     \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
     \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
@@ -643,57 +680,67 @@ data:
     \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
     \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
     \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 4 \"fps/utility.hpp\"\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {\n  using fps =\
-    \ FormalPowerSeries<mint>;\n  if ((int)v.size() == 0) return fps{mint(1)};\n \
-    \ sort(begin(v), end(v), [](fps& a, fps& b) { return a.size() < b.size(); });\n\
-    \  queue<fps> q;\n  for (auto& f : v) q.push(f);\n  while ((int)q.size() > 1)\
-    \ {\n    fps a = q.front();\n    q.pop();\n    fps b = q.front();\n    q.pop();\n\
-    \    q.push(a * b);\n  }\n  return q.front();\n}\n\ntemplate <typename mint>\n\
-    void OGFtoEGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
-    \ 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n}\n\ntemplate <typename mint>\n\
-    void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
-    \ 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  FormalPowerSeries<mint>\
-    \ ret{begin(C.finv_), begin(C.finv_) + deg};\n  return std::move(ret);\n}\n\n\
-    // f *= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>&\
-    \ f, int n, mint c, int expand = true) {\n  if (expand) f.resize(f.size() + n);\n\
-    \  for (int i = (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] +=\
-    \ f[i - n] * c;\n  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid\
-    \ sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {\n  for (int i = 0; i\
-    \ < (int)f.size(); ++i) {\n    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;\n\
-    \  }\n}\n#line 7 \"verify/verify-yuki/yuki-1145.test.cpp\"\n\nconstexpr int MOD9\
-    \ = 998244353;\nusing mint = LazyMontgomeryModInt<MOD9>;\nusing fps = FormalPowerSeries<mint>;\n\
-    \nvoid solve() {\n  ini(N, M);\n  fps a(N);\n  in(a);\n  V<fps> v;\n  each(x,\
-    \ a) v.emplace_back(fps{1, -x});\n  fps q = Pi(v);\n  fps p = q.diff();\n  fps\
-    \ f = -p * q.inv(M + 1);\n  f.resize(M);\n  out(f);\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1145\"\n\n#include \"\
-    ../../competitive-template.hpp\"\n#include \"../../fps/ntt-friendly-fps.hpp\"\n\
-    #include \"../../modint/montgomery-modint.hpp\"\n#include \"../../fps/utility.hpp\"\
-    \n\nconstexpr int MOD9 = 998244353;\nusing mint = LazyMontgomeryModInt<MOD9>;\n\
-    using fps = FormalPowerSeries<mint>;\n\nvoid solve() {\n  ini(N, M);\n  fps a(N);\n\
-    \  in(a);\n  V<fps> v;\n  each(x, a) v.emplace_back(fps{1, -x});\n  fps q = Pi(v);\n\
-    \  fps p = q.diff();\n  fps f = -p * q.inv(M + 1);\n  f.resize(M);\n  out(f);\n\
-    }"
+    \ - 1, r);\n  }\n};\n#line 6 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\n// #include \"fps/arbitrary-fps.hpp\"\
+    \n// using mint = LazyMontgomeryModInt<1000000007>;\nBinomial<mint> C;\nusing\
+    \ vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
+    #line 4 \"fps/fast-multieval.hpp\"\n\ntemplate <typename mint>\nvector<mint> FastMultiEval(const\
+    \ FormalPowerSeries<mint> &f,\n                           const vector<mint> &xs)\
+    \ {\n  using fps = FormalPowerSeries<mint>;\n  int s = xs.size();\n  int N = 1\
+    \ << (32 - __builtin_clz((int)xs.size() - 1));\n\n  vector<FormalPowerSeries<mint>>\
+    \ buf(2 * N);\n  for (int i = 0; i < N; i++) {\n    mint n = mint{i < s ? -xs[i]\
+    \ : mint(0)};\n    buf[i + N] = fps{n + 1, n - 1};\n  }\n  for (int i = N - 1;\
+    \ i > 0; i--) {\n    fps &f(buf[(i << 1) | 0]), &g(buf[(i << 1) | 1]);\n    int\
+    \ n = f.size();\n    int m = n << 1;\n    buf[i].reserve(m);\n    buf[i].resize(n);\n\
+    \    for (int j = 0; j < n; j++) buf[i][j] = f[j] * g[j] - mint(1);\n    if (i\
+    \ != 1) {\n      buf[i].ntt_doubling();\n      for (int j = 0; j < m; j++) buf[i][j]\
+    \ += j < n ? mint(1) : -mint(1);\n    }\n  }\n\n  int fs = f.size();\n  fps root\
+    \ = buf[1];\n  root.intt();\n  root.push_back(1);\n  reverse(begin(root), end(root));\n\
+    \  root = root.inv(fs).rev() * f;\n  root.erase(begin(root), begin(root) + fs\
+    \ - 1);\n  root.resize(N, mint(0));\n\n  vector<mint> ans(s);\n\n  auto calc =\
+    \ [&](auto rec, int i, int l, int r, fps f) -> void {\n    if (i >= N) {\n   \
+    \   ans[i - N] = f[0];\n      return;\n    }\n    int len = f.size(), m = (l +\
+    \ r) >> 1;\n    f.ntt();\n    fps tmp = buf[i * 2 + 1];\n    for (int j = 0; j\
+    \ < len; j++) tmp[j] *= f[j];\n    tmp.intt();\n    rec(rec, i * 2 + 0, l, m,\
+    \ fps{begin(tmp) + (len >> 1), end(tmp)});\n    if (m >= s) return;\n    tmp =\
+    \ buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= f[j];\n    tmp.intt();\n\
+    \    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n  };\n\
+    \  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint Evaluation(\u9AD8\
+    \u901F\u5316\u7248)\n */\n#line 14 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
+    \n//\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(n, m);\n  fps a(n);\n\
+    \  in(a);\n  vm xs(m);\n  in(xs);\n  out(FastMultiEval(a, xs));\n}\n"
+  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\n// #include \"fps/arbitrary-fps.hpp\"\
+    \n// using mint = LazyMontgomeryModInt<1000000007>;\nBinomial<mint> C;\nusing\
+    \ vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
+    #include \"../../fps/fast-multieval.hpp\"\n//\n\nusing namespace Nyaan;\nvoid\
+    \ Nyaan::solve() {\n  ini(n, m);\n  fps a(n);\n  in(a);\n  vm xs(m);\n  in(xs);\n\
+    \  out(FastMultiEval(a, xs));\n}\n"
   dependsOn:
-  - competitive-template.hpp
+  - template/template.hpp
+  - template/util.hpp
+  - template/bitop.hpp
+  - template/inout.hpp
+  - template/debug.hpp
+  - template/macro.hpp
   - fps/ntt-friendly-fps.hpp
   - ntt/ntt-avx2.hpp
   - modint/simd-montgomery.hpp
   - fps/formal-power-series.hpp
   - modint/montgomery-modint.hpp
-  - fps/utility.hpp
   - modulo/binomial.hpp
+  - fps/fast-multieval.hpp
   isVerificationFile: true
-  path: verify/verify-yuki/yuki-1145.test.cpp
+  path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   requiredBy: []
-  timestamp: '2020-10-11 00:26:38+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-01 01:27:24+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-1145.test.cpp
+documentation_of: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-1145.test.cpp
-- /verify/verify/verify-yuki/yuki-1145.test.cpp.html
-title: verify/verify-yuki/yuki-1145.test.cpp
+- /verify/verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+- /verify/verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp.html
+title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
 ---

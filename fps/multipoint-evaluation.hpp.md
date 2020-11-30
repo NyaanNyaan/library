@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
@@ -29,6 +29,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: Multipoint Evaluation
     links: []
   bundledCode: "#line 2 \"fps/multipoint-evaluation.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace\
@@ -135,7 +136,7 @@ data:
     \ 1);\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> MultipointEvaluation(const\
     \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
     \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
-    }\n"
+    }\n\n/**\n * @brief Multipoint Evaluation\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"./formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct ProductTree\
     \ {\n  using fps = FormalPowerSeries<mint>;\n  const vector<mint> &xs;\n  vector<fps>\
@@ -176,7 +177,8 @@ data:
     \ a, (idx << 1) | 0);\n    self(self, a, (idx << 1) | 1);\n  };\n  rec(rec, f,\
     \ 1);\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> MultipointEvaluation(const\
     \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
-    \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n}"
+    \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
+    }\n\n/**\n * @brief Multipoint Evaluation\n */\n"
   dependsOn:
   - fps/formal-power-series.hpp
   isVerificationFile: false
@@ -185,7 +187,7 @@ data:
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - fps/polynomial-interpolation.hpp
-  timestamp: '2020-08-21 15:57:02+09:00'
+  timestamp: '2020-12-01 01:27:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
@@ -196,5 +198,5 @@ layout: document
 redirect_from:
 - /library/fps/multipoint-evaluation.hpp
 - /library/fps/multipoint-evaluation.hpp.html
-title: fps/multipoint-evaluation.hpp
+title: Multipoint Evaluation
 ---

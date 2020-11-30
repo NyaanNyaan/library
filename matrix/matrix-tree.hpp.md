@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: fps/multipoint-evaluation.hpp
-    title: fps/multipoint-evaluation.hpp
+    title: Multipoint Evaluation
   - icon: ':heavy_check_mark:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
@@ -173,27 +173,28 @@ data:
     \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
     \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
     \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
-    \ xs, ProductTree<mint>(xs));\n}\n#line 7 \"fps/polynomial-interpolation.hpp\"\
-    \n\ntemplate <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const\
-    \ vector<mint> &xs,\n                                                const vector<mint>\
-    \ &ys) {\n  using fps = FormalPowerSeries<mint>;\n  assert(xs.size() == ys.size());\n\
-    \  ProductTree<mint> ptree(xs);\n  fps w = ptree.buf[1].diff();\n  vector<mint>\
-    \ vs = InnerMultipointEvaluation<mint>(w, xs, ptree);\n  auto rec = [&](auto self,\
-    \ int idx) -> fps {\n    if (idx >= ptree.N) {\n      if (idx - ptree.N < (int)xs.size())\n\
-    \        return {ys[idx - ptree.N] / vs[idx - ptree.N]};\n      else\n       \
-    \ return {mint(1)};\n    }\n    if (ptree.buf[idx << 1 | 0].empty())\n      return\
-    \ {};\n    else if (ptree.buf[idx << 1 | 1].empty())\n      return self(self,\
-    \ idx << 1 | 0);\n    return self(self, idx << 1 | 0) * ptree.buf[idx << 1 | 1]\
-    \ +\n           self(self, idx << 1 | 1) * ptree.buf[idx << 1 | 0];\n  };\n  return\
-    \ rec(rec, 1);\n}\n#line 8 \"matrix/polynomial-matrix-determinant.hpp\"\n\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> PolynomialMatrixDeterminant(\n    const\
-    \ Matrix<FormalPowerSeries<mint>> &m) {\n  int N = m.size();\n  int deg = 0;\n\
-    \  for (int i = 0; i < N; ++i) deg += max<int>(1, m[i][i].size()) - 1;\n  vector<mint>\
-    \ xs(deg + 1);\n  vector<mint> ys(deg + 1);\n  Matrix<mint> M(N);\n  for (int\
-    \ x = 0; x <= deg; x++) {\n    xs[x] = x;\n    for (int i = 0; i < N; ++i)\n \
-    \     for (int j = 0; j < N; ++j) M[i][j] = m[i][j].eval(x);\n    ys[x] = M.determinant();\n\
-    \  }\n  return PolynomialInterpolation<mint>(xs, ys);\n}\n\n/**\n * @brief \u591A\
-    \u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F\n */\n#line 7 \"matrix/matrix-tree.hpp\"\
+    \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n\
+    #line 7 \"fps/polynomial-interpolation.hpp\"\n\ntemplate <class mint>\nFormalPowerSeries<mint>\
+    \ PolynomialInterpolation(const vector<mint> &xs,\n                          \
+    \                      const vector<mint> &ys) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  assert(xs.size() == ys.size());\n  ProductTree<mint> ptree(xs);\n  fps w =\
+    \ ptree.buf[1].diff();\n  vector<mint> vs = InnerMultipointEvaluation<mint>(w,\
+    \ xs, ptree);\n  auto rec = [&](auto self, int idx) -> fps {\n    if (idx >= ptree.N)\
+    \ {\n      if (idx - ptree.N < (int)xs.size())\n        return {ys[idx - ptree.N]\
+    \ / vs[idx - ptree.N]};\n      else\n        return {mint(1)};\n    }\n    if\
+    \ (ptree.buf[idx << 1 | 0].empty())\n      return {};\n    else if (ptree.buf[idx\
+    \ << 1 | 1].empty())\n      return self(self, idx << 1 | 0);\n    return self(self,\
+    \ idx << 1 | 0) * ptree.buf[idx << 1 | 1] +\n           self(self, idx << 1 |\
+    \ 1) * ptree.buf[idx << 1 | 0];\n  };\n  return rec(rec, 1);\n}\n#line 8 \"matrix/polynomial-matrix-determinant.hpp\"\
+    \n\ntemplate <typename mint>\nFormalPowerSeries<mint> PolynomialMatrixDeterminant(\n\
+    \    const Matrix<FormalPowerSeries<mint>> &m) {\n  int N = m.size();\n  int deg\
+    \ = 0;\n  for (int i = 0; i < N; ++i) deg += max<int>(1, m[i][i].size()) - 1;\n\
+    \  vector<mint> xs(deg + 1);\n  vector<mint> ys(deg + 1);\n  Matrix<mint> M(N);\n\
+    \  for (int x = 0; x <= deg; x++) {\n    xs[x] = x;\n    for (int i = 0; i < N;\
+    \ ++i)\n      for (int j = 0; j < N; ++j) M[i][j] = m[i][j].eval(x);\n    ys[x]\
+    \ = M.determinant();\n  }\n  return PolynomialInterpolation<mint>(xs, ys);\n}\n\
+    \n/**\n * @brief \u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F\n * @docs\
+    \ docs/matrix/polynomial-matrix-determinant.md\n */\n#line 7 \"matrix/matrix-tree.hpp\"\
     \n\ntemplate <typename T>\nstruct MatrixTree {\n  int n;\n  Matrix<T> m;\n  MatrixTree(int\
     \ _n) : n(_n), m(_n) { assert(n > 0); }\n\n  void add(int i, int j, const T& x)\
     \ {\n    if (i < n) m[i][i] += x;\n    if (j < n) m[j][j] += x;\n    if (i < n\
@@ -231,7 +232,7 @@ data:
   isVerificationFile: false
   path: matrix/matrix-tree.hpp
   requiredBy: []
-  timestamp: '2020-11-28 01:47:19+09:00'
+  timestamp: '2020-12-01 01:27:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp
