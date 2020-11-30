@@ -171,7 +171,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   requiredBy: []
-  timestamp: '2020-09-18 02:08:48+09:00'
+  timestamp: '2020-11-30 23:47:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp

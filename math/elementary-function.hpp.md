@@ -110,12 +110,12 @@ data:
     \ - 1;\n  while (d * d < n) ++d;\n  return (d * d == n) ? d : -1;\n}\n\n// return\
     \ a number of n's digit\n// zero ... return value if n = 0 (default -> 1)\nint\
     \ isDigit(long long n, int zero = 1) {\n  if (n == 0) return zero;\n  int ret\
-    \ = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}"
+    \ = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: math/elementary-function.hpp
   requiredBy: []
-  timestamp: '2020-09-18 02:08:48+09:00'
+  timestamp: '2020-11-30 23:47:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp

@@ -5,7 +5,7 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: math/prime-counting-o2d3.hpp
+    path: multiplicative-function/prime-counting-o2d3.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
       \ )"
   - icon: ':heavy_check_mark:'
@@ -119,7 +119,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"math/prime-counting-o2d3.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"multiplicative-function/prime-counting-o2d3.hpp\"\
     \nusing namespace std;\n\n#line 3 \"prime/prime-enumerate.hpp\"\nusing namespace\
     \ std;\n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<int> prime_enumerate(int\
     \ N) {\n  vector<bool> sieve(N / 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn\
@@ -128,7 +128,7 @@ data:
     \           qe = sieve.size();\n         q < qe; q += r = s - r)\n      sieve[q]\
     \ = 0;\n  }\n  vector<int> ret{2, 3};\n  for (int p = 5, d = 4, i = 1; p <= N;\
     \ p += d = 6 - d, i++)\n    if (sieve[i]) ret.push_back(p);\n  while (!ret.empty()\
-    \ && ret.back() > N) ret.pop_back();\n  return ret;\n}\n#line 6 \"math/prime-counting-o2d3.hpp\"\
+    \ && ret.back() > N) ret.pop_back();\n  return ret;\n}\n#line 6 \"multiplicative-function/prime-counting-o2d3.hpp\"\
     \n\ninline int64_t my_div(int64_t n, int64_t p) { return double(n) / p; };\n\n\
     int64_t prime_counting(long long N) {\n  using i64 = long long;\n\n  i64 N6, N3,\
     \ N2, N23, nsz;\n  vector<i64> ns, h;\n  vector<int> bit;\n\n  // calculate N^{1/2},\
@@ -168,19 +168,20 @@ data:
     \ = 1, n = ns[i]; i < nsz && n >= p2; n = ns[++i])\n      h[i] -= h[i * p <= N2\
     \ ? i * p : nsz - my_div(n, p)] - pi;\n    ++pidx;\n    ++pi;\n  }\n\n  return\
     \ h[1];\n}\n\n/**\n * @brief \u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\\
-    frac{2}{3}})$ )\n * @docs docs/math/prime-counting-o2d3.md\n */\n#line 5 \"verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp\"\
-    \n\nvoid solve() {\n  inl(N);\n  out(prime_counting(N));\n}\n"
+    frac{2}{3}})$ )\n * @docs docs/multiplicative-function/prime-counting-o2d3.md\n\
+    \ */\n#line 5 \"verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp\"\n\
+    \nvoid solve() {\n  inl(N);\n  out(prime_counting(N));\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n\n#include\
-    \ \"../../competitive-template.hpp\"\n#include \"../../math/prime-counting-o2d3.hpp\"\
+    \ \"../../competitive-template.hpp\"\n#include \"../../multiplicative-function/prime-counting-o2d3.hpp\"\
     \n\nvoid solve() {\n  inl(N);\n  out(prime_counting(N));\n}"
   dependsOn:
   - competitive-template.hpp
-  - math/prime-counting-o2d3.hpp
+  - multiplicative-function/prime-counting-o2d3.hpp
   - prime/prime-enumerate.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   requiredBy: []
-  timestamp: '2020-09-18 02:20:07+09:00'
+  timestamp: '2020-11-30 23:47:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp

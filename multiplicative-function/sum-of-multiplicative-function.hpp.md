@@ -9,14 +9,14 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/math/sum-of-multiplicative-function.md
+    _deprecated_at_docs: docs/multiplicative-function/sum-of-multiplicative-function.md
     document_title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
     links: []
-  bundledCode: "#line 2 \"math/sum-of-multiplicative-function.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\ntemplate <typename T>\nT sum_of_totient(long long N) {\n\
-    \  if (N < 2) return N;\n  using i64 = long long;\n\n  auto f = [](i64 v, i64\
-    \ p, i64) -> i64 { return v / p * (p - 1); };\n  vector<i64> ns{0}, p;\n  for\
-    \ (i64 i = N; i > 0; i = N / (N / i + 1)) ns.push_back(i);\n  i64 s = ns.size(),\
+  bundledCode: "#line 2 \"multiplicative-function/sum-of-multiplicative-function.hpp\"\
+    \n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename T>\nT sum_of_totient(long\
+    \ long N) {\n  if (N < 2) return N;\n  using i64 = long long;\n\n  auto f = [](i64\
+    \ v, i64 p, i64) -> i64 { return v / p * (p - 1); };\n  vector<i64> ns{0}, p;\n\
+    \  for (i64 i = N; i > 0; i = N / (N / i + 1)) ns.push_back(i);\n  i64 s = ns.size(),\
     \ sq = sqrt(N);\n  auto idx = [&](i64 n) { return n <= sq ? s - n : N / n; };\n\
     \n  vector<T> h0(s), h1(s), buf(s);\n  for (int i = 0; i < s; i++) {\n    T x\
     \ = ns[i];\n    h0[i] = x - 1;\n    h1[i] = x * (x + 1) / 2 - 1;\n  }\n\n  for\
@@ -32,7 +32,7 @@ data:
     \ (int j = i + 1; j < (int)p.size() && p[j] * p[j] <= lim; j++) {\n      rec(rec,\
     \ j, 1, p[j], lim / p[j], cur);\n    }\n  };\n\n  for (int i = 0; i < (int)p.size();\
     \ i++) dfs(dfs, i, 1, p[i], N / p[i], 1);\n  return ans;\n}\n\n/**\n * @brief\
-    \ \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C\n * @docs docs/math/sum-of-multiplicative-function.md\n\
+    \ \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.md\n\
     \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename T>\nT sum_of_totient(long long N) {\n  if (N < 2) return N;\n  using\
@@ -54,20 +54,20 @@ data:
     \ <= lim; j++) {\n      rec(rec, j, 1, p[j], lim / p[j], cur);\n    }\n  };\n\n\
     \  for (int i = 0; i < (int)p.size(); i++) dfs(dfs, i, 1, p[i], N / p[i], 1);\n\
     \  return ans;\n}\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C\
-    \n * @docs docs/math/sum-of-multiplicative-function.md\n */\n"
+    \n * @docs docs/multiplicative-function/sum-of-multiplicative-function.md\n */\n"
   dependsOn: []
   isVerificationFile: false
-  path: math/sum-of-multiplicative-function.hpp
+  path: multiplicative-function/sum-of-multiplicative-function.hpp
   requiredBy: []
-  timestamp: '2020-08-22 00:42:49+09:00'
+  timestamp: '2020-11-30 23:47:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
-documentation_of: math/sum-of-multiplicative-function.hpp
+documentation_of: multiplicative-function/sum-of-multiplicative-function.hpp
 layout: document
 redirect_from:
-- /library/math/sum-of-multiplicative-function.hpp
-- /library/math/sum-of-multiplicative-function.hpp.html
+- /library/multiplicative-function/sum-of-multiplicative-function.hpp
+- /library/multiplicative-function/sum-of-multiplicative-function.hpp.html
 title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
 ---
 
@@ -100,7 +100,7 @@ $$S_p(\lfloor \frac{N}{k} \rfloor) = \sum_{p\ \mathrm{is}\ \mathrm{prime},1\leq 
 
 $$S_c(N) = \sum_{p\ \mathrm{is}\ \mathrm{prime},1\leq p\leq N} p^c$$
 
-の線形和で表すことが出来る。$S_c(\lfloor \frac{N}{k} \rfloor)$は[素数カウント](https://nyaannyaan.github.io/library/library/math/prime-counting.hpp.html)のアルゴリズムを一般的に拡張した方法で高速に求められる。(素数カウントの時に求めた$\pi(n)$は$c=0$の時の場合でると言える。)
+の線形和で表すことが出来る。$S_c(\lfloor \frac{N}{k} \rfloor)$は[素数カウント](https://nyaannyaan.github.io/library/library/multiplicative-function/prime-counting.hpp.html)のアルゴリズムを一般的に拡張した方法で高速に求められる。(素数カウントの時に求めた$\pi(n)$は$c=0$の時の場合でると言える。)
 
 $f(x,n) :=$ ($n$以下の自然数のうち$x$以下の素数を因数に持たない整数$p$に対する$p^c$の和)
 

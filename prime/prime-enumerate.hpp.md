@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: math/prime-counting-o2d3.hpp
+    path: multiplicative-function/prime-counting-o2d3.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
       \ )"
   _extendedVerifiedWith:
@@ -39,7 +39,7 @@ data:
   isVerificationFile: false
   path: prime/prime-enumerate.hpp
   requiredBy:
-  - math/prime-counting-o2d3.hpp
+  - multiplicative-function/prime-counting-o2d3.hpp
   timestamp: '2020-09-18 02:20:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -5,7 +5,7 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: math/prime-counting.hpp
+    path: multiplicative-function/prime-counting.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
       log N})$ )"
   _extendedRequiredBy: []
@@ -116,7 +116,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"math/prime-counting.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"multiplicative-function/prime-counting.hpp\"\
     \nusing namespace std;\n\npair<vector<long long>, vector<long long>> pi_table(long\
     \ long N) {\n  using i64 = long long;\n  vector<i64> ns{0};\n  for (i64 i = N;\
     \ i > 0; i = N / (N / i + 1)) ns.push_back(i);\n  vector<i64> h(ns);\n  for (auto\
@@ -126,19 +126,19 @@ data:
     \      h[i] -= h[i * x <= sq ? i * x : nsz - n / x] - pi;\n  }\n  return {ns,\
     \ h};\n}\n\nlong long prime_counting(long long N) {\n  if (N < 2) return 0;\n\
     \  return pi_table(N).second[1];\n}\n\n/**\n * @brief \u7D20\u6570\u30AB\u30A6\
-    \u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\log N})$ )\n * @docs docs/math/prime-counting.md\n\
+    \u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\log N})$ )\n * @docs docs/multiplicative-function/prime-counting.md\n\
     \ */\n#line 5 \"verify/verify-yosupo-math/yosupo-counting-primes.test.cpp\"\n\n\
     void solve() {\n  inl(N);\n  out(prime_counting(N));\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n\n#include\
-    \ \"../../competitive-template.hpp\"\n#include \"../../math/prime-counting.hpp\"\
+    \ \"../../competitive-template.hpp\"\n#include \"../../multiplicative-function/prime-counting.hpp\"\
     \n\nvoid solve() {\n  inl(N);\n  out(prime_counting(N));\n}"
   dependsOn:
   - competitive-template.hpp
-  - math/prime-counting.hpp
+  - multiplicative-function/prime-counting.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   requiredBy: []
-  timestamp: '2020-08-28 01:02:38+09:00'
+  timestamp: '2020-11-30 23:47:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp

@@ -5,11 +5,11 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: math/sum-of-multiplicative-function.hpp
-    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
-  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: multiplicative-function/sum-of-multiplicative-function.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -118,7 +118,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"math/sum-of-multiplicative-function.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"multiplicative-function/sum-of-multiplicative-function.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T>\nT sum_of_totient(long long N)\
     \ {\n  if (N < 2) return N;\n  using i64 = long long;\n\n  auto f = [](i64 v,\
     \ i64 p, i64) -> i64 { return v / p * (p - 1); };\n  vector<i64> ns{0}, p;\n \
@@ -138,7 +138,7 @@ data:
     \ (int j = i + 1; j < (int)p.size() && p[j] * p[j] <= lim; j++) {\n      rec(rec,\
     \ j, 1, p[j], lim / p[j], cur);\n    }\n  };\n\n  for (int i = 0; i < (int)p.size();\
     \ i++) dfs(dfs, i, 1, p[i], N / p[i], 1);\n  return ans;\n}\n\n/**\n * @brief\
-    \ \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C\n * @docs docs/math/sum-of-multiplicative-function.md\n\
+    \ \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.md\n\
     \ */\n#line 3 \"modint/montgomery-modint.hpp\"\nusing namespace std;\n\ntemplate\
     \ <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
     \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
@@ -176,18 +176,18 @@ data:
     \n\nvoid solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n  long long\
     \ N;\n  in(N);\n  out(sum_of_totient<mint>(N));\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
-    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../math/sum-of-multiplicative-function.hpp\"\
+    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../multiplicative-function/sum-of-multiplicative-function.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n\nvoid solve() {\n  using mint\
     \ = LazyMontgomeryModInt<998244353>;\n  long long N;\n  in(N);\n  out(sum_of_totient<mint>(N));\n\
     }\n"
   dependsOn:
   - competitive-template.hpp
-  - math/sum-of-multiplicative-function.hpp
+  - multiplicative-function/sum-of-multiplicative-function.hpp
   - modint/montgomery-modint.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   requiredBy: []
-  timestamp: '2020-08-22 00:42:49+09:00'
+  timestamp: '2020-11-30 23:47:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp

@@ -233,15 +233,9 @@ data:
       title: inner/inner_math.hpp
   - name: math
     pages:
-    - icon: ':warning:'
-      path: math/divisor-multiple-transform.hpp
-      title: math/divisor-multiple-transform.hpp
     - icon: ':heavy_check_mark:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
-    - icon: ':warning:'
-      path: math/enamurate-multiplicative-function.hpp
-      title: math/enamurate-multiplicative-function.hpp
     - icon: ':warning:'
       path: math/f2.hpp
       title: math/f2.hpp
@@ -250,7 +244,7 @@ data:
       title: math/float-binomial.hpp
     - icon: ':warning:'
       path: math/gray-code.hpp
-      title: math/gray-code.hpp
+      title: "\u30B0\u30EC\u30A4\u30B3\u30FC\u30C9"
     - icon: ':heavy_check_mark:'
       path: math/grundy-number.hpp
       title: Grundy Number
@@ -260,18 +254,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/nim-product.hpp
       title: Nim Product
-    - icon: ':heavy_check_mark:'
-      path: math/prime-counting-faster.hpp
-      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
-        log N})$\u30FB\u9AD8\u901F\u5316\u7248)"
-    - icon: ':heavy_check_mark:'
-      path: math/prime-counting-o2d3.hpp
-      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
-        \ )"
-    - icon: ':heavy_check_mark:'
-      path: math/prime-counting.hpp
-      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
-        log N})$ )"
     - icon: ':warning:'
       path: math/rational-number.hpp
       title: math/rational-number.hpp
@@ -281,9 +263,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/subset-convolution.hpp
       title: Subset Convolution
-    - icon: ':heavy_check_mark:'
-      path: math/sum-of-multiplicative-function.hpp
-      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
     - icon: ':heavy_check_mark:'
       path: math/sum_of_floor.hpp
       title: math/sum_of_floor.hpp
@@ -386,6 +365,29 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/tetration.hpp
       title: tetration
+  - name: multiplicative-function
+    pages:
+    - icon: ':warning:'
+      path: multiplicative-function/divisor-multiple-transform.hpp
+      title: multiplicative-function/divisor-multiple-transform.hpp
+    - icon: ':warning:'
+      path: multiplicative-function/enamurate-multiplicative-function.hpp
+      title: multiplicative-function/enamurate-multiplicative-function.hpp
+    - icon: ':heavy_check_mark:'
+      path: multiplicative-function/prime-counting-faster.hpp
+      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
+        log N})$\u30FB\u9AD8\u901F\u5316\u7248)"
+    - icon: ':heavy_check_mark:'
+      path: multiplicative-function/prime-counting-o2d3.hpp
+      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
+        \ )"
+    - icon: ':heavy_check_mark:'
+      path: multiplicative-function/prime-counting.hpp
+      title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
+        log N})$ )"
+    - icon: ':heavy_check_mark:'
+      path: multiplicative-function/sum-of-multiplicative-function.hpp
+      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
   - name: ntt
     pages:
     - icon: ':heavy_check_mark:'
