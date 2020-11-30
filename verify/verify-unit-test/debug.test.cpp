@@ -1,9 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../hashmap/hashmap.hpp"
 #include "../../hashmap/hashset.hpp"
-#include "../../template/debug.hpp"
+
+using namespace Nyaan;
 
 void test() {
   // Integral
@@ -76,7 +77,7 @@ void test() {
   }
 }
 
-void solve() {
+void Nyaan::solve() {
   test();
   int a, b;
   cin >> a >> b;
