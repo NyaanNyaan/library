@@ -5,13 +5,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
     path: modulo/mod-sqrt.hpp
     title: mod sqrt(Tonelli-Shanks algorithm)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
@@ -36,11 +36,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-  - icon: ':x:'
-    path: verify/verify-yuki/yuki-0981.test.cpp
-    title: verify/verify-yuki/yuki-0981.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0103.test.cpp
+    title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/arbitrary-prime-modint.hpp\"\n#include <bits/stdc++.h>\n\
@@ -120,7 +120,7 @@ data:
   - modulo/mod-kth-root.hpp
   - fps/fps-sqrt.hpp
   timestamp: '2020-07-28 19:14:39+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
@@ -128,7 +128,7 @@ data:
   - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-yuki/yuki-0981.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
 documentation_of: modint/arbitrary-prime-modint.hpp
 layout: document

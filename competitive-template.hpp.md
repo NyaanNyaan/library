@@ -337,6 +337,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
+    title: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   - icon: ':heavy_check_mark:'
@@ -456,9 +459,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':x:'
-    path: verify/verify-yuki/yuki-0981.test.cpp
-    title: verify/verify-yuki/yuki-0981.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
@@ -475,7 +475,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n\
@@ -680,7 +680,7 @@ data:
   path: competitive-template.hpp
   requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
@@ -701,6 +701,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
+  - verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
@@ -773,7 +774,6 @@ data:
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-yuki/yuki-1170.test.cpp
-  - verify/verify-yuki/yuki-0981.test.cpp
   - verify/verify-yuki/yuki-1220.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp

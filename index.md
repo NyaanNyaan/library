@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -181,7 +181,7 @@ data:
       title: graph/cycle-detection.hpp
     - icon: ':heavy_check_mark:'
       path: graph/dimension-expanded-graph.hpp
-      title: graph/dimension-expanded-graph.hpp
+      title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
     - icon: ':heavy_check_mark:'
       path: graph/graph-template.hpp
       title: graph/graph-template.hpp
@@ -228,7 +228,7 @@ data:
       title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   - name: inner
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
   - name: math
@@ -251,16 +251,16 @@ data:
     - icon: ':warning:'
       path: math/gray-code.hpp
       title: math/gray-code.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: math/grundy-number.hpp
-      title: math/grundy-number.hpp
+      title: Grundy Number
     - icon: ':heavy_check_mark:'
       path: math/kth-root-integral.hpp
       title: $\mathrm{floor}(a^{\frac{1}{k}})$
     - icon: ':heavy_check_mark:'
       path: math/nim-product.hpp
       title: Nim Product
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: math/prime-counting-faster.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
         log N})$\u30FB\u9AD8\u901F\u5316\u7248)"
@@ -331,7 +331,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
@@ -348,10 +348,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-modint.hpp
       title: modint/arbitrary-modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/modint-montgomery64.hpp
       title: modint/modint-montgomery64.hpp
     - icon: ':heavy_check_mark:'
@@ -371,7 +371,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/mod-kth-root.hpp
       title: kth root(Tonelli-Shanks algorithm)
     - icon: ':heavy_check_mark:'
@@ -419,7 +419,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: prime/factor-enumerate.hpp
       title: prime/factor-enumerate.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: prime/fast-factorize.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
     - icon: ':heavy_check_mark:'
@@ -953,6 +953,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
+      title: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1066,6 +1069,9 @@ data:
   - name: verify/verify-yuki
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0103.test.cpp
+      title: verify/verify-yuki/yuki-0103.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0117.test.cpp
       title: verify/verify-yuki/yuki-0117.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1092,9 +1098,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0963.test.cpp
       title: verify/verify-yuki/yuki-0963.test.cpp
-    - icon: ':x:'
-      path: verify/verify-yuki/yuki-0981.test.cpp
-      title: verify/verify-yuki/yuki-0981.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1080.test.cpp
       title: verify/verify-yuki/yuki-1080.test.cpp

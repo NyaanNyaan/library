@@ -5,9 +5,9 @@ data:
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/grundy-number.hpp
-    title: math/grundy-number.hpp
+    title: Grundy Number
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0103.test.cpp
+    title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -77,6 +80,7 @@ data:
   timestamp: '2020-11-24 16:37:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
 documentation_of: graph/topological-sort.hpp

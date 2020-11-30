@@ -18,6 +18,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
     links: []
   bundledCode: "#line 2 \"graph/dimension-expanded-graph.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <int DIM, typename Data_t = long long>\nstruct\
@@ -107,7 +108,8 @@ data:
     \ = 0;\ntemplate <int DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM,\
     \ Data_t>::A\n    DimensionExpandedGraph<DIM, Data_t>::g_size;\ntemplate <int\
     \ DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM, Data_t>::A\n   \
-    \ DimensionExpandedGraph<DIM, Data_t>::coeff;\n"
+    \ DimensionExpandedGraph<DIM, Data_t>::coeff;\n\n/**\n * @brief \u6B21\u5143\u62E1\
+    \u5F35\u30B0\u30E9\u30D5\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <int DIM, typename Data_t = long long>\nstruct DimensionExpandedGraph {\n  static_assert(is_signed<Data_t>::value,\
     \ \"Data_t must be signed.\");\n  using DG = DimensionExpandedGraph;\n\n  struct\
@@ -195,12 +197,13 @@ data:
     \ = 0;\ntemplate <int DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM,\
     \ Data_t>::A\n    DimensionExpandedGraph<DIM, Data_t>::g_size;\ntemplate <int\
     \ DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM, Data_t>::A\n   \
-    \ DimensionExpandedGraph<DIM, Data_t>::coeff;\n"
+    \ DimensionExpandedGraph<DIM, Data_t>::coeff;\n\n/**\n * @brief \u6B21\u5143\u62E1\
+    \u5F35\u30B0\u30E9\u30D5\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/dimension-expanded-graph.hpp
   requiredBy: []
-  timestamp: '2020-11-30 22:35:55+09:00'
+  timestamp: '2020-11-30 22:51:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
@@ -212,5 +215,5 @@ layout: document
 redirect_from:
 - /library/graph/dimension-expanded-graph.hpp
 - /library/graph/dimension-expanded-graph.hpp.html
-title: graph/dimension-expanded-graph.hpp
+title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
 ---

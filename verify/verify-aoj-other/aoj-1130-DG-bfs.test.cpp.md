@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: graph/dimension-expanded-graph.hpp
-    title: graph/dimension-expanded-graph.hpp
+    title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -244,7 +244,8 @@ data:
     \ = 0;\ntemplate <int DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM,\
     \ Data_t>::A\n    DimensionExpandedGraph<DIM, Data_t>::g_size;\ntemplate <int\
     \ DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM, Data_t>::A\n   \
-    \ DimensionExpandedGraph<DIM, Data_t>::coeff;\n#line 6 \"verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp\"\
+    \ DimensionExpandedGraph<DIM, Data_t>::coeff;\n\n/**\n * @brief \u6B21\u5143\u62E1\
+    \u5F35\u30B0\u30E9\u30D5\n */\n#line 6 \"verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp\"\
     \n//\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  while (1) {\n    int H,\
     \ W;\n    in(W, H);\n    if (H * W == 0) break;\n    DimensionExpandedGraph<2>\
     \ g(H, W);\n    in(g);\n    auto st = g.find('@');\n    auto d = g.bfs(\n    \
@@ -268,7 +269,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   requiredBy: []
-  timestamp: '2020-11-30 22:35:55+09:00'
+  timestamp: '2020-11-30 22:51:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp

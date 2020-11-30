@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
+    title: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/math/prime-counting.md
     document_title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\\
@@ -44,8 +47,9 @@ data:
   path: math/prime-counting-faster.hpp
   requiredBy: []
   timestamp: '2020-09-24 23:29:46+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
 documentation_of: math/prime-counting-faster.hpp
 layout: document
 redirect_from:

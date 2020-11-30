@@ -8,10 +8,14 @@ data:
     path: graph/topological-sort.hpp
     title: graph/topological-sort.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0103.test.cpp
+    title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: Grundy Number
     links: []
   bundledCode: "#line 2 \"math/grundy-number.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n#line 3 \"graph/topological-sort.hpp\"\nusing namespace std;\n\
@@ -58,7 +62,8 @@ data:
     \ + 1, 0);\n  for (int _ = (int)g.size() - 1; _ >= 0; _--) {\n    int i = topo[_];\n\
     \    if (g[i].size() == 0) continue;\n    for (auto &x : g[i]) {\n      memo[grundy[x]]++;\n\
     \    }\n    while (memo[grundy[i]] > 0) grundy[i]++;\n    for (auto &x : g[i])\
-    \ {\n      memo[grundy[x]]--;\n    }\n  }\n  return grundy;\n};\n"
+    \ {\n      memo[grundy[x]]--;\n    }\n  }\n  return grundy;\n};\n\n/**\n * @brief\
+    \ Grundy Number\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../graph/topological-sort.hpp\"\n\nvector<int> GrundyNumber(vector<vector<int>>\
     \ &g) {\n  vector<int> topo = TopologicalSort(g);\n  if ((int)topo.size() == 0)\
@@ -66,20 +71,22 @@ data:
     \ + 1, 0);\n  for (int _ = (int)g.size() - 1; _ >= 0; _--) {\n    int i = topo[_];\n\
     \    if (g[i].size() == 0) continue;\n    for (auto &x : g[i]) {\n      memo[grundy[x]]++;\n\
     \    }\n    while (memo[grundy[i]] > 0) grundy[i]++;\n    for (auto &x : g[i])\
-    \ {\n      memo[grundy[x]]--;\n    }\n  }\n  return grundy;\n};"
+    \ {\n      memo[grundy[x]]--;\n    }\n  }\n  return grundy;\n};\n\n/**\n * @brief\
+    \ Grundy Number\n */\n"
   dependsOn:
   - graph/topological-sort.hpp
   - graph/graph-template.hpp
   isVerificationFile: false
   path: math/grundy-number.hpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2020-11-30 22:51:08+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: math/grundy-number.hpp
 layout: document
 redirect_from:
 - /library/math/grundy-number.hpp
 - /library/math/grundy-number.hpp.html
-title: math/grundy-number.hpp
+title: Grundy Number
 ---

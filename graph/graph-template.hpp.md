@@ -23,9 +23,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/two-edge-connected-components.hpp
     title: graph/two-edge-connected-components.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: math/grundy-number.hpp
-    title: math/grundy-number.hpp
+    title: Grundy Number
   - icon: ':heavy_check_mark:'
     path: math/two-sat.hpp
     title: 2-SAT
@@ -189,6 +189,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0103.test.cpp
+    title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -303,6 +306,7 @@ data:
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp

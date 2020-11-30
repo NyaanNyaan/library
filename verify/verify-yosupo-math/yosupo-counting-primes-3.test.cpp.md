@@ -5,42 +5,40 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: modint/arbitrary-prime-modint.hpp
-    title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: modulo/mod-sqrt.hpp
-    title: mod sqrt(Tonelli-Shanks algorithm)
+    path: math/prime-counting-faster.hpp
+    title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
+      log N})$\u30FB\u9AD8\u901F\u5316\u7248)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/sqrt_mod
+    PROBLEM: https://judge.yosupo.jp/problem/counting_primes
     links:
-    - https://judge.yosupo.jp/problem/sqrt_mod
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n\n#line 1 \"competitive-template.hpp\"\
-    \n#pragma region kyopro_template\n#define Nyaan_template\n#include <immintrin.h>\n\
-    #include <bits/stdc++.h>\n#define pb push_back\n#define eb emplace_back\n#define\
-    \ fi first\n#define se second\n#define each(x, v) for (auto &x : v)\n#define all(v)\
-    \ (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n#define mem(a, val)\
-    \ memset(a, val, sizeof(a))\n#define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define inl(...)         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define\
-    \ inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)\
-    \                           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\
-    \n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)  \
-    \                      \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n  \
-    \  in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)  \
-    \                   \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
-    \ t[i], u[i], v[i]);             \\\n  }\n#define rep(i, N) for (long long i =\
-    \ 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1;\
-    \ i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N);\
-    \ i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n\
-    #define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define die(...) \
-    \     \\\n  do {                \\\n    out(__VA_ARGS__); \\\n    return;    \
-    \       \\\n  } while (0)\nusing namespace std;\nusing ll = long long;\ntemplate\
+    - https://judge.yosupo.jp/problem/counting_primes
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n\n#line\
+    \ 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define Nyaan_template\n\
+    #include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb push_back\n#define\
+    \ eb emplace_back\n#define fi first\n#define se second\n#define each(x, v) for\
+    \ (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n\
+    #define mem(a, val) memset(a, val, sizeof(a))\n#define ini(...)   \\\n  int __VA_ARGS__;\
+    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
+    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
+    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
+    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
+    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
+    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
+    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
+    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n#define rep(i, N) for (long\
+    \ long i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i =\
+    \ (long long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <=\
+    \ (long long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i)\
+    \ > 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
+    \ die(...)      \\\n  do {                \\\n    out(__VA_ARGS__); \\\n    return;\
+    \           \\\n  } while (0)\nusing namespace std;\nusing ll = long long;\ntemplate\
     \ <class T>\nusing V = vector<T>;\nusing vi = vector<int>;\nusing vl = vector<long\
     \ long>;\nusing vvi = vector<vector<int>>;\nusing vd = V<double>;\nusing vs =\
     \ V<string>;\nusing vvl = vector<vector<long long>>;\nusing P = pair<long long,\
@@ -118,71 +116,38 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"modint/arbitrary-prime-modint.hpp\"\
-    \nusing namespace std;\n\nstruct ArbitraryLazyMontgomeryModInt {\n  using mint\
-    \ = ArbitraryLazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n\
-    \  using u64 = uint64_t;\n\n  static u32 mod;\n  static u32 r;\n  static u32 n2;\n\
-    \n  static u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i)\
-    \ ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static void set_mod(u32 m)\
-    \ {\n    assert(m < (1 << 30));\n    assert((m & 1) == 1);\n    mod = m;\n   \
-    \ n2 = -u64(m) % m;\n    r = get_r();\n    assert(r * mod == 1);\n  }\n\n  u32\
-    \ a;\n\n  ArbitraryLazyMontgomeryModInt() : a(0) {}\n  ArbitraryLazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static u32 reduce(const\
-    \ u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  mint\
-    \ &operator+=(const mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 *\
-    \ mod;\n    return *this;\n  }\n\n  mint &operator-=(const mint &b) {\n    if\
-    \ (i32(a -= b.a) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  mint\
-    \ &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  mint operator+(const mint &b) const { return mint(*this) += b; }\n \
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  mint operator*(const\
-    \ mint &b) const { return mint(*this) *= b; }\n  mint operator/(const mint &b)\
-    \ const { return mint(*this) /= b; }\n  bool operator==(const mint &b) const {\n\
-    \    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n\
-    \  bool operator!=(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ != (b.a >= mod ? b.a - mod : b.a);\n  }\n  mint operator-() const { return mint()\
-    \ - mint(*this); }\n\n  mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n\
-    \    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n\
-    \ >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = ArbitraryLazyMontgomeryModInt(t);\n\
-    \    return (is);\n  }\n\n  mint inverse() const { return pow(mod - 2); }\n\n\
-    \  u32 get() const {\n    u32 ret = reduce(a);\n    return ret >= mod ? ret -\
-    \ mod : ret;\n  }\n\n  static u32 get_mod() { return mod; }\n};\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::mod;\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::r;\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::n2;\n#line 3 \"modulo/mod-sqrt.hpp\"\n\nint64_t\
-    \ mod_sqrt(const int64_t &a, const int64_t &p) {\n  assert(0 <= a && a < p);\n\
-    \  if (a < 2) return a;\n  using mint = ArbitraryLazyMontgomeryModInt;\n  mint::set_mod(p);\n\
-    \  if (mint(a).pow((p - 1) >> 1) != 1) return -1;\n  mint b = 1, one = 1;\n  while\
-    \ (b.pow((p - 1) >> 1) == 1) b += one;\n  int64_t m = p - 1, e = 0;\n  while (m\
-    \ % 2 == 0) m >>= 1, e += 1;\n  mint x = mint(a).pow((m - 1) >> 1);\n  mint y\
-    \ = mint(a) * x * x;\n  x *= a;\n  mint z = mint(b).pow(m);\n  while (y != 1)\
-    \ {\n    int64_t j = 0;\n    mint t = y;\n    while (t != one) {\n      j += 1;\n\
-    \      t *= t;\n    }\n    z = z.pow(int64_t(1) << (e - j - 1));\n    x *= z;\n\
-    \    z *= z;\n    y *= z;\n    e = j;\n  }\n  return x.get();\n}\n\n/**\n * @brief\
-    \ mod sqrt(Tonelli-Shanks algorithm)\n * @docs docs/modulo/mod-sqrt.md\n */\n\
-    #line 5 \"verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp\"\n\nvoid solve()\
-    \ {\n  ini(T);\n  rep(_, T) {\n    inl(y, p);\n    out(mod_sqrt(y, p));\n  }\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sqrt_mod\"\n\n#include\
-    \ \"../../competitive-template.hpp\"\n#include \"../../modulo/mod-sqrt.hpp\"\n\
-    \nvoid solve() {\n  ini(T);\n  rep(_, T) {\n    inl(y, p);\n    out(mod_sqrt(y,\
-    \ p));\n  }\n}"
+    \ main() { solve(); }\n\n#pragma endregion\n#line 2 \"math/prime-counting-faster.hpp\"\
+    \nusing namespace std;\n\nnamespace PrimeCounting {\nusing i64 = long long;\n\
+    static inline i64 my_div(i64 n, i64 p) { return double(n) / p; };\n\n__attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) i64\nprime_counting(i64 N) {\n \
+    \ i64 N2 = sqrt(N);\n  i64 NdN2 = my_div(N, N2);\n\n  vector<i64> hl(NdN2);\n\
+    \  for (int i = 1; i < NdN2; i++) hl[i] = my_div(N, i) - 1;\n\n  vector<int> hs(N2\
+    \ + 1);\n  iota(begin(hs), end(hs), -1);\n\n  for (int x = 2, pi = 0; x <= N2;\
+    \ ++x) {\n    if (hs[x] == hs[x - 1]) continue;\n    i64 x2 = i64(x) * x;\n  \
+    \  i64 imax = min<i64>(NdN2, my_div(N, x2) + 1);\n    i64 ix = x;\n    for (i64\
+    \ i = 1; i < imax; ++i) {\n      hl[i] -= (ix < NdN2 ? hl[ix] : hs[my_div(N, ix)])\
+    \ - pi;\n      ix += x;\n    }\n    for (int n = N2; n >= x2; n--) {\n      hs[n]\
+    \ -= hs[my_div(n, x)] - pi;\n    }\n    ++pi;\n  }\n  return hl[1];\n}\n\n}  //\
+    \ namespace PrimeCounting\n\n/**\n * @brief \u7D20\u6570\u30AB\u30A6\u30F3\u30C8\
+    ( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\log N})$\u30FB\u9AD8\u901F\u5316\u7248\
+    )\n * @docs docs/math/prime-counting.md\n */\n#line 5 \"verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp\"\
+    \n\nvoid solve() {\n  inl(N);\n  out(PrimeCounting::prime_counting(N));\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n\n#include\
+    \ \"../../competitive-template.hpp\"\n#include \"../../math/prime-counting-faster.hpp\"\
+    \n\nvoid solve() {\n  inl(N);\n  out(PrimeCounting::prime_counting(N));\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - modulo/mod-sqrt.hpp
-  - modint/arbitrary-prime-modint.hpp
+  - math/prime-counting-faster.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+  path: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
   requiredBy: []
-  timestamp: '2020-09-10 23:36:22+09:00'
+  timestamp: '2020-11-30 22:51:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+documentation_of: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
 ---

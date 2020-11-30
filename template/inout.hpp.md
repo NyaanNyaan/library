@@ -25,6 +25,9 @@ data:
     path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
     title: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0103.test.cpp
+    title: verify/verify-yuki/yuki-0103.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0697.test.cpp
     title: verify/verify-yuki/yuki-0697.test.cpp
   - icon: ':heavy_check_mark:'
@@ -81,6 +84,7 @@ data:
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-yuki/yuki-1283.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-0697.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
