@@ -2,8 +2,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include "./graph-template.hpp"
-
 template <int DIM, typename Data_t = long long>
 struct DimensionExpandedGraph {
   static_assert(is_signed<Data_t>::value, "Data_t must be signed.");
@@ -54,7 +52,7 @@ struct DimensionExpandedGraph {
 
   static int N, add_node;
   static A g_size, coeff;
-  static constexpr int ADD = numeric_limits<int>::min();
+  static constexpr int ADD = numeric_limits<int>::max();
 
   static int id(const A &a) {
     if (a[0] == ADD) return N + a[1];
@@ -82,10 +80,13 @@ struct DimensionExpandedGraph {
     return ok(A{t...});
   }
 
+  template <typename... Args>
+  static A cast(Args... args) {
+    return A(args...);
+  }
   static A ad(int n) { return A{DG::ADD, n}; };
 
   vector<char> grid;
-  vector<Data_t> dat;
 
   explicit DimensionExpandedGraph() = default;
   template <typename... T>
@@ -103,13 +104,9 @@ struct DimensionExpandedGraph {
       for (int j = 0; j < i; j++) coeff[j] *= g_size[i];
       N *= g_size[i];
     }
-    dat.resize(N + add_node, -1);
   }
 
-  void add(int n) {
-    add_node = n;
-    dat.resize(N + add_node, -1);
-  }
+  void add(int n) { add_node = n; }
 
   void scan(istream &is = std::cin) {
     grid.reserve(N);
@@ -126,6 +123,7 @@ struct DimensionExpandedGraph {
     return is;
   }
 
+  vector<char> &get_grid() { return grid; }
   char &operator()(const A &a) { return grid[id(a)]; }
   template <typename... T>
   char &operator()(const T &... t) {
@@ -221,20 +219,40 @@ struct DimensionExpandedGraph {
     return dist;
   }
 
-  // Union Find
-  int find(A u) {
-    return dat[id(u)] < 0 ? id(u) : dat[id(u)] = find(dat[id(u)]);
+  vector<A> dat;
+
+  template <typename F>
+  void uf(F f) {
+    A dflt;
+    dflt[0] = -1;
+    dat.resize(N + add_node, dflt);
+    A a{};
+    fill(begin(a), end(a), 0);
+    a[DIM - 1] = -1;
+    while (true) {
+      a[DIM - 1]++;
+      for (int i = DIM - 1;; i--) {
+        if (a[i] != g_size[i]) break;
+        if (i == 0) return;
+        a[i] = 0;
+        a[i - 1]++;
+      }
+      f(a, [&](A u, A v) { unite(u, v); });
+    }
   }
+
+  // Union Find
+  A find(A u) { return dat[id(u)][0] < 0 ? u : dat[id(u)] = find(dat[id(u)]); }
   bool same(A u, A v) { return find(u) == find(v); }
   bool unite(A u, A v) {
     if ((u = find(u)) == (v = find(v))) return false;
     int iu = id(u), iv = id(v);
-    if (dat[iu] > dat[iv]) swap(iu, iv);
+    if (dat[iu] > dat[iv]) swap(u, v), swap(iu, iv);
     dat[iu] += dat[iv];
-    dat[iv] = iu;
+    dat[iv] = u;
     return true;
   }
-  Data_t size(A u) { return -dat[find(u)]; }
+  Data_t size(A u) { return -dat[id(find(u))][0]; }
 };
 
 template <int DIM, typename Data_t>

@@ -74,7 +74,3 @@ using DebugImpl::trace;
 #else
 #define trc(...)
 #endif
-
-/**
- * @brief デバッグ用ダンプ関数
- */

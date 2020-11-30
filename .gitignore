@@ -22,4 +22,3 @@ test.cpp
 test.exe
 verify/verify-unit-test/orderedmap.test.cpp
 verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
-verify/verify-yuki/yuki-0981.test.cpp
