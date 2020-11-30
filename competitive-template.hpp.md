@@ -135,7 +135,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -427,14 +427,14 @@ data:
     path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
-    title: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
+    path: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
+    title: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
-    title: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+    path: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+    title: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-    title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+    path: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+    title: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0117.test.cpp
     title: verify/verify-yuki/yuki-0117.test.cpp
@@ -475,7 +475,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n\
@@ -680,7 +680,7 @@ data:
   path: competitive-template.hpp
   requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
@@ -732,9 +732,6 @@ data:
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
-  - verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-  - verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
-  - verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
@@ -797,6 +794,9 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+  - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+  - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+  - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp

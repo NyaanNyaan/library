@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -148,26 +148,28 @@ data:
     \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
     double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
     \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rnd() * ((raw_cast*)(&p))->t;\n\
-    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 3 \"shortest-path/dijkstra-fast.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"data-structure/radix-heap.hpp\"\nusing namespace\
-    \ std;\n\ntemplate <typename Key, typename Val>\nstruct RadixHeap {\n  using uint\
-    \ = typename make_unsigned<Key>::type;\n  static constexpr int bit = sizeof(Key)\
-    \ * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint, bit + 1>\
-    \ ms;\n\n  int s;\n  uint last;\n\n  RadixHeap() : s(0), last(0) { fill(begin(ms),\
-    \ end(ms), uint(-1)); }\n\n  bool empty() const { return s == 0; }\n\n  int size()\
-    \ const { return s; }\n\n  __attribute__((target(\"lzcnt\"))) inline uint64_t\
-    \ getbit(uint a) const {\n    return 64 - _lzcnt_u64(a);\n  }\n\n  void push(const\
-    \ uint &key, const Val &val) {\n    s++;\n    uint64_t b = getbit(key ^ last);\n\
-    \    vs[b].emplace_back(key, val);\n    ms[b] = min(key, ms[b]);\n  }\n\n  pair<uint,\
-    \ Val> pop() {\n    if (ms[0] == uint(-1)) {\n      int idx = 1;\n      while\
-    \ (ms[idx] == uint(-1)) idx++;\n      last = ms[idx];\n      for (auto &p : vs[idx])\
-    \ {\n        uint64_t b = getbit(p.first ^ last);\n        vs[b].emplace_back(p);\n\
-    \        ms[b] = min(p.first, ms[b]);\n      }\n      vs[idx].clear();\n     \
-    \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
-    \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n\n/**\n *\
-    \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n#line 3\
-    \ \"graph/static-graph.hpp\"\nusing namespace std;\n\nnamespace StaticGraphImpl\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 3 \"shortest-path/dijkstra-fast.hpp\"\nusing namespace std;\n\n#line 3 \"\
+    data-structure/radix-heap.hpp\"\nusing namespace std;\n\ntemplate <typename Key,\
+    \ typename Val>\nstruct RadixHeap {\n  using uint = typename make_unsigned<Key>::type;\n\
+    \  static constexpr int bit = sizeof(Key) * 8;\n  array<vector<pair<uint, Val>\
+    \ >, bit + 1> vs;\n  array<uint, bit + 1> ms;\n\n  int s;\n  uint last;\n\n  RadixHeap()\
+    \ : s(0), last(0) { fill(begin(ms), end(ms), uint(-1)); }\n\n  bool empty() const\
+    \ { return s == 0; }\n\n  int size() const { return s; }\n\n  __attribute__((target(\"\
+    lzcnt\"))) inline uint64_t getbit(uint a) const {\n    return 64 - _lzcnt_u64(a);\n\
+    \  }\n\n  void push(const uint &key, const Val &val) {\n    s++;\n    uint64_t\
+    \ b = getbit(key ^ last);\n    vs[b].emplace_back(key, val);\n    ms[b] = min(key,\
+    \ ms[b]);\n  }\n\n  pair<uint, Val> pop() {\n    if (ms[0] == uint(-1)) {\n  \
+    \    int idx = 1;\n      while (ms[idx] == uint(-1)) idx++;\n      last = ms[idx];\n\
+    \      for (auto &p : vs[idx]) {\n        uint64_t b = getbit(p.first ^ last);\n\
+    \        vs[b].emplace_back(p);\n        ms[b] = min(p.first, ms[b]);\n      }\n\
+    \      vs[idx].clear();\n      ms[idx] = uint(-1);\n    }\n    --s;\n    auto\
+    \ res = vs[0].back();\n    vs[0].pop_back();\n    if (vs[0].empty()) ms[0] = uint(-1);\n\
+    \    return res;\n  }\n};\n\n/**\n * @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n\
+    \ */\n#line 3 \"graph/static-graph.hpp\"\nusing namespace std;\n\nnamespace StaticGraphImpl\
     \ {\n\ntemplate <typename T, bool Cond = is_void<T>::value>\nstruct E;\ntemplate\
     \ <typename T>\nstruct E<T, false> {\n  int to;\n  T cost;\n  E() {}\n  E(const\
     \ int& v, const T& c) : to(v), cost(c) {}\n  operator int() const { return to;\
@@ -304,7 +306,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2020-11-26 23:21:39+09:00'
+  timestamp: '2020-11-30 18:57:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/dijkstra.test.cpp

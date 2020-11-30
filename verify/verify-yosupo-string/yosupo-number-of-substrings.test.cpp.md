@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -16,49 +16,49 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
+    PROBLEM: https://judge.yosupo.jp/problem/number_of_substrings
     links:
-    - https://judge.yosupo.jp/problem/zalgorithm
-  bundledCode: "#line 1 \"verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n\n#line 1 \"\
-    competitive-template.hpp\"\n#pragma region kyopro_template\n#define Nyaan_template\n\
-    #include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb push_back\n#define\
-    \ eb emplace_back\n#define fi first\n#define se second\n#define each(x, v) for\
-    \ (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n\
-    #define mem(a, val) memset(a, val, sizeof(a))\n#define ini(...)   \\\n  int __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
-    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
-    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
-    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
-    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
-    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
-    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n#define rep(i, N) for (long\
-    \ long i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i =\
-    \ (long long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <=\
-    \ (long long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i)\
-    \ > 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
-    \ die(...)      \\\n  do {                \\\n    out(__VA_ARGS__); \\\n    return;\
-    \           \\\n  } while (0)\nusing namespace std;\nusing ll = long long;\ntemplate\
-    \ <class T>\nusing V = vector<T>;\nusing vi = vector<int>;\nusing vl = vector<long\
-    \ long>;\nusing vvi = vector<vector<int>>;\nusing vd = V<double>;\nusing vs =\
-    \ V<string>;\nusing vvl = vector<vector<long long>>;\nusing P = pair<long long,\
-    \ long long>;\nusing vp = vector<P>;\nusing pii = pair<int, int>;\nusing vpi =\
-    \ vector<pair<int, int>>;\nconstexpr int inf = 1001001001;\nconstexpr long long\
-    \ infLL = (1LL << 61) - 1;\ntemplate <typename T, typename U>\ninline bool amin(T\
-    \ &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate <typename\
-    \ T, typename U>\ninline bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true)\
-    \ : false;\n}\ntemplate <typename T, typename U>\nostream &operator<<(ostream\
-    \ &os, const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return\
-    \ os;\n}\ntemplate <typename T, typename U>\nistream &operator>>(istream &is,\
-    \ pair<T, U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\nvoid in() {}\ntemplate <typename\
-    \ T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n  in(u...);\n}\nvoid\
-    \ out() { cout << \"\\n\"; }\ntemplate <typename T, class... U>\nvoid out(const\
+    - https://judge.yosupo.jp/problem/number_of_substrings
+  bundledCode: "#line 1 \"verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\n\n\
+    #line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
+    \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
+    \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
+    \ each(x, v) for (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define\
+    \ sz(v) ((int)(v).size())\n#define mem(a, val) memset(a, val, sizeof(a))\n#define\
+    \ ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)  \
+    \       \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...) \
+    \     \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inc(...)    \\\n\
+    \  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)                \
+    \           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i]);\
+    \                         \\\n  }\n#define in3(s, t, u)                      \
+    \  \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i]);\
+    \                   \\\n  }\n#define in4(s, t, u, v)                     \\\n\
+    \  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i], v[i]);\
+    \             \\\n  }\n#define rep(i, N) for (long long i = 0; i < (long long)(N);\
+    \ i++)\n#define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)\n\
+    #define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n#define repr1(i,\
+    \ N) for (long long i = (N); (long long)(i) > 0; i--)\n#define reg(i, a, b) for\
+    \ (long long i = (a); i < (b); i++)\n#define die(...)      \\\n  do {        \
+    \        \\\n    out(__VA_ARGS__); \\\n    return;           \\\n  } while (0)\n\
+    using namespace std;\nusing ll = long long;\ntemplate <class T>\nusing V = vector<T>;\n\
+    using vi = vector<int>;\nusing vl = vector<long long>;\nusing vvi = vector<vector<int>>;\n\
+    using vd = V<double>;\nusing vs = V<string>;\nusing vvl = vector<vector<long long>>;\n\
+    using P = pair<long long, long long>;\nusing vp = vector<P>;\nusing pii = pair<int,\
+    \ int>;\nusing vpi = vector<pair<int, int>>;\nconstexpr int inf = 1001001001;\n\
+    constexpr long long infLL = (1LL << 61) - 1;\ntemplate <typename T, typename U>\n\
+    inline bool amin(T &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\n\
+    template <typename T, typename U>\ninline bool amax(T &x, U y) {\n  return (x\
+    \ < y) ? (x = y, true) : false;\n}\ntemplate <typename T, typename U>\nostream\
+    \ &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first << \" \" <<\
+    \ p.second;\n  return os;\n}\ntemplate <typename T, typename U>\nistream &operator>>(istream\
+    \ &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int\
+    \ s = (int)v.size();\n  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") <<\
+    \ v[i];\n  return os;\n}\ntemplate <typename T>\nistream &operator>>(istream &is,\
+    \ vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return is;\n}\nvoid in() {}\n\
+    template <typename T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n  in(u...);\n\
+    }\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class... U>\nvoid out(const\
     \ T &t, const U &... u) {\n  cout << t;\n  if (sizeof...(u)) cout << \" \";\n\
     \  out(u...);\n}\n\n#ifdef NyaanDebug\n#define trc(...)                   \\\n\
     \  do {                             \\\n    cerr << #__VA_ARGS__ << \" = \"; \\\
@@ -200,29 +200,29 @@ data:
     \    ret = comp(t, min(leftlen, rightlen), sa[med]);\n    if (ret.second == tlen)\
     \ return find_range(left, med, right, tlen);\n    return make_pair(-1, -1);\n\
     \  }\n};\n// Usage:\n//  SuffixArray sa(S);\n//  LCPArray lcp(sa);\n//  StringSearch\
-    \ search(lcp);\n#line 5 \"verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp\"\
-    \n\nvoid solve(){\n  ins(S);\n  SuffixArray sa(S);\n  LCPArray lcp(sa);\n  StringSearch\
-    \ search(lcp);\n  rep(i,sz(S)){\n    cout << (i?\" \":\"\") << search.ArbitaryLCP(0\
-    \ , i);\n  }\n  out();\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n\n#include\
-    \ \"../../competitive-template.hpp\"\n#include \"../../string/suffix-array.hpp\"\
-    \n\nvoid solve(){\n  ins(S);\n  SuffixArray sa(S);\n  LCPArray lcp(sa);\n  StringSearch\
-    \ search(lcp);\n  rep(i,sz(S)){\n    cout << (i?\" \":\"\") << search.ArbitaryLCP(0\
-    \ , i);\n  }\n  out();\n}"
+    \ search(lcp);\n#line 5 \"verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp\"\
+    \n\nvoid solve() {\n  ins(S);\n  SuffixArray sa(S);\n  LCPArray lcp(sa);\n  ll\
+    \ ans = 1LL * sz(S) * (sz(S) + 1) / 2;\n  each(x,lcp.LCP) ans -= x;\n  out(ans);\n\
+    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\n\
+    \n#include \"../../competitive-template.hpp\"\n#include \"../../string/suffix-array.hpp\"\
+    \n\nvoid solve() {\n  ins(S);\n  SuffixArray sa(S);\n  LCPArray lcp(sa);\n  ll\
+    \ ans = 1LL * sz(S) * (sz(S) + 1) / 2;\n  each(x,lcp.LCP) ans -= x;\n  out(ans);\n\
+    }"
   dependsOn:
   - competitive-template.hpp
   - string/suffix-array.hpp
   - data-structure/sparse-table.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+  path: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   requiredBy: []
-  timestamp: '2020-08-09 23:27:32+09:00'
+  timestamp: '2020-11-30 18:57:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+documentation_of: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-- /verify/verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp.html
-title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+- /verify/verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
+- /verify/verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp.html
+title: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
 ---

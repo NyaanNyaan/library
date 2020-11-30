@@ -10,14 +10,14 @@ data:
     path: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
     title: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
-    title: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
+    path: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
+    title: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
-    title: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+    path: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+    title: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-    title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+    path: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+    title: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -55,10 +55,10 @@ data:
   timestamp: '2020-07-28 11:29:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-  - verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
-  - verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+  - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+  - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+  - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
 documentation_of: data-structure/sparse-table.hpp
 layout: document
 redirect_from:

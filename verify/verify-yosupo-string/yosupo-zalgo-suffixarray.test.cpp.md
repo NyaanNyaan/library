@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -16,11 +16,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/suffixarray
+    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
     links:
-    - https://judge.yosupo.jp/problem/suffixarray
-  bundledCode: "#line 1 \"verify/verify-yosupo-other/yosupo-suffix-array.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\n\n#line 1 \"\
+    - https://judge.yosupo.jp/problem/zalgorithm
+  bundledCode: "#line 1 \"verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n\n#line 1 \"\
     competitive-template.hpp\"\n#pragma region kyopro_template\n#define Nyaan_template\n\
     #include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb push_back\n#define\
     \ eb emplace_back\n#define fi first\n#define se second\n#define each(x, v) for\
@@ -200,27 +200,29 @@ data:
     \    ret = comp(t, min(leftlen, rightlen), sa[med]);\n    if (ret.second == tlen)\
     \ return find_range(left, med, right, tlen);\n    return make_pair(-1, -1);\n\
     \  }\n};\n// Usage:\n//  SuffixArray sa(S);\n//  LCPArray lcp(sa);\n//  StringSearch\
-    \ search(lcp);\n#line 5 \"verify/verify-yosupo-other/yosupo-suffix-array.test.cpp\"\
-    \n\nvoid solve() {\n  ins(S);\n  SuffixArray sa(S);\n  sa.sa.erase(begin(sa.sa));\n\
-    \  out(sa.sa);\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\n\n#include\
+    \ search(lcp);\n#line 5 \"verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp\"\
+    \n\nvoid solve(){\n  ins(S);\n  SuffixArray sa(S);\n  LCPArray lcp(sa);\n  StringSearch\
+    \ search(lcp);\n  rep(i,sz(S)){\n    cout << (i?\" \":\"\") << search.ArbitaryLCP(0\
+    \ , i);\n  }\n  out();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n\n#include\
     \ \"../../competitive-template.hpp\"\n#include \"../../string/suffix-array.hpp\"\
-    \n\nvoid solve() {\n  ins(S);\n  SuffixArray sa(S);\n  sa.sa.erase(begin(sa.sa));\n\
-    \  out(sa.sa);\n}"
+    \n\nvoid solve(){\n  ins(S);\n  SuffixArray sa(S);\n  LCPArray lcp(sa);\n  StringSearch\
+    \ search(lcp);\n  rep(i,sz(S)){\n    cout << (i?\" \":\"\") << search.ArbitaryLCP(0\
+    \ , i);\n  }\n  out();\n}"
   dependsOn:
   - competitive-template.hpp
   - string/suffix-array.hpp
   - data-structure/sparse-table.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+  path: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   requiredBy: []
-  timestamp: '2020-08-09 23:27:32+09:00'
+  timestamp: '2020-11-30 18:57:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+documentation_of: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
-- /verify/verify/verify-yosupo-other/yosupo-suffix-array.test.cpp.html
-title: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+- /verify/verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+- /verify/verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp.html
+title: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
 ---

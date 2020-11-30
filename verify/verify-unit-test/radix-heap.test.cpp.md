@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
@@ -148,16 +148,19 @@ data:
     \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
     double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
     \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rnd() * ((raw_cast*)(&p))->t;\n\
-    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\
-    \n\ntemplate <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx,\
-    \ Key d, double ratio) {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n\
-    \    Key i = 0;\n    while (i < mx) {\n      assert(q1.empty() == q2.empty());\n\
-    \      assert(q1.size() == (int)q2.size());\n      if (q1.empty() or random()\
-    \ < ratio) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n        Val j{rng()};\n\
-    #pragma GCC diagnostic warning \"-Wnarrowing\"\n        q1.push(i, j);\n     \
-    \   q2.emplace(i, j);\n        i += d;\n      } else {\n        auto t1 = q1.pop();\n\
-    \        decltype(t1) t2 = *begin(q2);\n        assert(t1 == t2);\n        q2.erase(begin(q2));\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\n\ntemplate <typename\
+    \ Key, typename Val>\nvoid test() {\n  auto t = [](Key mx, Key d, double ratio)\
+    \ {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n    Key i = 0;\n    while\
+    \ (i < mx) {\n      assert(q1.empty() == q2.empty());\n      assert(q1.size()\
+    \ == (int)q2.size());\n      if (q1.empty() or random() < ratio) {\n#pragma GCC\
+    \ diagnostic ignored \"-Wnarrowing\"\n        Val j{rng()};\n#pragma GCC diagnostic\
+    \ warning \"-Wnarrowing\"\n        q1.push(i, j);\n        q2.emplace(i, j);\n\
+    \        i += d;\n      } else {\n        auto t1 = q1.pop();\n        decltype(t1)\
+    \ t2 = *begin(q2);\n        assert(t1 == t2);\n        q2.erase(begin(q2));\n\
     \      }\n    }\n    while (q1.size() != 0) {\n      auto t1 = q1.pop();\n   \
     \   decltype(t1) t2 = *begin(q2);\n      assert(t1 == t2);\n      q2.erase(begin(q2));\n\
     \    }\n  };\n  t(10, 1, 0.5);\n  t(10, 1, 0.7);\n  t(10, 1, 0.9);\n  t(1000,\
@@ -192,7 +195,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/radix-heap.test.cpp
   requiredBy: []
-  timestamp: '2020-11-26 01:55:58+09:00'
+  timestamp: '2020-11-30 18:57:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/radix-heap.test.cpp

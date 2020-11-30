@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -211,7 +211,7 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: hashmap
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: hashmap/hashmap-base.hpp
       title: hashmap/hashmap-base.hpp
     - icon: ':heavy_check_mark:'
@@ -220,10 +220,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: hashmap/hashmap-open-address.hpp
       title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: hashmap/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: hashmap/hashset.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   - name: inner
@@ -325,6 +325,9 @@ data:
     - icon: ':warning:'
       path: misc/fixpoint.hpp
       title: misc/fixpoint.hpp
+    - icon: ':warning:'
+      path: misc/int_div.hpp
+      title: misc/int_div.hpp
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
@@ -501,7 +504,7 @@ data:
       title: shortest-path/warshall-floyd.hpp
   - name: string
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: string/rolling-hash.hpp
       title: string/rolling-hash.hpp
     - icon: ':warning:'
@@ -515,9 +518,24 @@ data:
       title: string/suffix-array.hpp
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
+      path: template/bitop.hpp
+      title: template/bitop.hpp
+    - icon: ':x:'
       path: template/debug.hpp
       title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
+    - icon: ':x:'
+      path: template/inout.hpp
+      title: template/inout.hpp
+    - icon: ':x:'
+      path: template/macro.hpp
+      title: template/macro.hpp
+    - icon: ':x:'
+      path: template/template.hpp
+      title: template/template.hpp
+    - icon: ':x:'
+      path: template/util.hpp
+      title: template/util.hpp
   - name: tree
     pages:
     - icon: ':heavy_check_mark:'
@@ -698,7 +716,7 @@ data:
       title: verify/verify-aoj-other/aoj-2995.test.cpp
   - name: verify/verify-unit-test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-unit-test/debug.test.cpp
       title: verify/verify-unit-test/debug.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1019,15 +1037,23 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
       title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+  - name: verify/verify-yosupo-string
+    pages:
+    - icon: ':x:'
+      path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
+      title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
-      title: verify/verify-yosupo-other/yosupo-number-of-substrings.test.cpp
+      path: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
+      title: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
-      title: verify/verify-yosupo-other/yosupo-suffix-array.test.cpp
+      path: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+      title: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
+      title: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
-      title: verify/verify-yosupo-other/yosupo-zalgo-suffixarray.test.cpp
+      path: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+      title: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - name: verify/verify-yuki
     pages:
     - icon: ':heavy_check_mark:'

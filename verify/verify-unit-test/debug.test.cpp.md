@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: template/debug.hpp
     title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -230,46 +230,50 @@ data:
     \ docs/hashmap/hashmap.md\n**/\n#line 2 \"hashmap/hashset.hpp\"\n\ntemplate <typename\
     \ Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key, Key> {\n  using HashMapImpl::HashMapBase<Key,\
     \ Key>::HashMapBase;\n};\n\n/* \n * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\
-    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n#line 3 \"template/debug.hpp\"\
-    \nusing namespace std;\n\nnamespace DebugImpl {\n\nvoid dump(const char& t) {\
-    \ cerr << t; }\n\nvoid dump(const string& t) { cerr << t; }\n\ntemplate <typename\
-    \ T>\nvoid dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr) {\n\
-    \  string res;\n  if (t == inf) res = \"inf\";\n  if (is_signed<T>::value && t\
-    \ == -inf) res = \"-inf\";\n  if (sizeof(T) == 8) {\n    if (t == infLL) res =\
-    \ \"inf\";\n    if (is_signed<T>::value && t == -infLL) res = \"-inf\";\n  }\n\
-    \  if (res.empty()) res = to_string(t);\n  cerr << res;\n}\n\ntemplate <typename\
-    \ T, typename U>\nvoid dump(const pair<T, U>&);\ntemplate <typename T>\nvoid dump(const\
-    \ pair<T*, int>&);\n\ntemplate <typename T>\nvoid dump(const T& t,\n         \
-    \ enable_if_t<!is_void<typename T::iterator>::value>* = nullptr) {\n  cerr <<\
-    \ \"[ \";\n  for (auto it = t.begin(); it != t.end();) {\n    dump(*it);\n   \
-    \ cerr << (++it == t.end() ? \" ]\" : \", \");\n  }\n}\n\ntemplate <typename T,\
-    \ typename U>\nvoid dump(const pair<T, U>& t) {\n  cerr << \"( \";\n  dump(t.first);\n\
-    \  cerr << \", \";\n  dump(t.second);\n  cerr << \" )\";\n}\n\ntemplate <typename\
-    \ T>\nvoid dump(const pair<T*, int>& t) {\n  cerr << \"[ \";\n  for (int i = 0;\
-    \ i < t.second; i++) {\n    dump(t.first[i]);\n    cerr << (i == t.second - 1\
-    \ ? \" ]\" : \", \");\n  }\n}\n\nvoid trace() { cerr << endl; }\ntemplate <typename\
-    \ Head, typename... Tail>\nvoid trace(Head&& head, Tail&&... tail) {\n  cerr <<\
-    \ \" \";\n  dump(head);\n  if (sizeof...(tail) != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n\
-    }\n\n}  // namespace DebugImpl\nusing DebugImpl::trace;\n\n/**\n * @brief \u30C7\
-    \u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570\n */\n#line 7 \"verify/verify-unit-test/debug.test.cpp\"\
-    \n\nvoid test() {\n  // Integral\n  {\n    trace(1, 2, 3);\n    trace(inf, -inf,\
-    \ infLL);\n    trace(-infLL, 1001001000, 1LL << 61);\n  }\n  // pair\n  {\n  \
-    \  pair<int, int> p1{1, 2};\n    pair<pair<int, int>, int> p2{p1, 3};\n    pair<vector<int>,\
-    \ int> p3{{1, 2}, 3};\n    trace(p1, p2, p3);\n  }\n  // Container\n  {\n    vector<int>\
-    \ vc{1, inf};\n    set<int> st{2, 3};\n    array<int, 3> ar{{1, 2, 3}};\n    trace(vc,\
-    \ st, ar);\n  }\n  // Dict\n  {\n    map<int, int> m;\n    m[0] = 1, m[1] = 2;\n\
-    \    trace(m);\n  }\n  // Native array\n  {\n    int a[] = {1, 2, 3, 4, 5};\n\
-    \    trace(make_pair(a, 2), make_pair(a + 3, 2));\n  }\n  // string, char\n  {\n\
-    \    char c = 'a';\n    string s = \"abc\";\n    trace(c, s);\n  }\n  // other\n\
-    \  {\n    vector<pair<int, int>> v;\n    v.push_back({0, 1});\n    v.push_back({2,\
-    \ 3});\n    trace(v);\n    vector<vector<int>> a(2);\n    a[0] = vector<int>{0,\
-    \ 1};\n    a[1] = vector<int>{2, 3};\n    trace(a);\n    vector<vector<vector<int>>>\
-    \ b(2);\n    b[0] = b[1] = a;\n    trace(b);\n  }\n  // original structure\n \
-    \ {\n    HashSet<int> st;\n    st.insert(2);\n    st.insert(3);\n    HashMap<int,\
-    \ int> m;\n    m[0] = 1, m[1] = 2;\n    trace(st, m);\n  }\n  // cv qualifier\n\
-    \  {\n    int a0 = 0;\n    const int a1 = 1;\n    int& a2 = a0;\n    const int&\
-    \ a3 = a1;\n    trace(a0, a1, a2, a3);\n  }\n}\n\nvoid solve() {\n  test();\n\
-    \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n#line 1 \"template/debug.hpp\"\
+    \nnamespace DebugImpl {\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const\
+    \ string& t) { cerr << t; }\n\ntemplate <typename T>\nvoid dump(const T& t, enable_if_t<is_integral<T>::value>*\
+    \ = nullptr) {\n  string res;\n  if (t == Nyaan::inf) res = \"inf\";\n  if (is_signed<T>::value)\n\
+    \    if (t == -Nyaan::inf) res = \"-inf\";\n  if (sizeof(T) == 8) {\n    if (t\
+    \ == Nyaan::infLL) res = \"inf\";\n    if (is_signed<T>::value)\n      if (t ==\
+    \ -Nyaan::infLL) res = \"-inf\";\n  }\n  if (res.empty()) res = to_string(t);\n\
+    \  cerr << res;\n}\n\ntemplate <typename T, typename U>\nvoid dump(const pair<T,\
+    \ U>&);\ntemplate <typename T>\nvoid dump(const pair<T*, int>&);\n\ntemplate <typename\
+    \ T>\nvoid dump(const T& t,\n          enable_if_t<!is_void<typename T::iterator>::value>*\
+    \ = nullptr) {\n  cerr << \"[ \";\n  for (auto it = t.begin(); it != t.end();)\
+    \ {\n    dump(*it);\n    cerr << (++it == t.end() ? \" ]\" : \", \");\n  }\n}\n\
+    \ntemplate <typename T, typename U>\nvoid dump(const pair<T, U>& t) {\n  cerr\
+    \ << \"( \";\n  dump(t.first);\n  cerr << \", \";\n  dump(t.second);\n  cerr <<\
+    \ \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const pair<T*, int>& t) {\n \
+    \ cerr << \"[ \";\n  for (int i = 0; i < t.second; i++) {\n    dump(t.first[i]);\n\
+    \    cerr << (i == t.second - 1 ? \" ]\" : \", \");\n  }\n}\n\nvoid trace() {\
+    \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
+    \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
+    \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
+    \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
+    \                            \\\n  do {                                      \\\
+    \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n\n/**\n * @brief\
+    \ \u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570\n */\n#line 7 \"\
+    verify/verify-unit-test/debug.test.cpp\"\n\nvoid test() {\n  // Integral\n  {\n\
+    \    trace(1, 2, 3);\n    trace(inf, -inf, infLL);\n    trace(-infLL, 1001001000,\
+    \ 1LL << 61);\n  }\n  // pair\n  {\n    pair<int, int> p1{1, 2};\n    pair<pair<int,\
+    \ int>, int> p2{p1, 3};\n    pair<vector<int>, int> p3{{1, 2}, 3};\n    trace(p1,\
+    \ p2, p3);\n  }\n  // Container\n  {\n    vector<int> vc{1, inf};\n    set<int>\
+    \ st{2, 3};\n    array<int, 3> ar{{1, 2, 3}};\n    trace(vc, st, ar);\n  }\n \
+    \ // Dict\n  {\n    map<int, int> m;\n    m[0] = 1, m[1] = 2;\n    trace(m);\n\
+    \  }\n  // Native array\n  {\n    int a[] = {1, 2, 3, 4, 5};\n    trace(make_pair(a,\
+    \ 2), make_pair(a + 3, 2));\n  }\n  // string, char\n  {\n    char c = 'a';\n\
+    \    string s = \"abc\";\n    trace(c, s);\n  }\n  // other\n  {\n    vector<pair<int,\
+    \ int>> v;\n    v.push_back({0, 1});\n    v.push_back({2, 3});\n    trace(v);\n\
+    \    vector<vector<int>> a(2);\n    a[0] = vector<int>{0, 1};\n    a[1] = vector<int>{2,\
+    \ 3};\n    trace(a);\n    vector<vector<vector<int>>> b(2);\n    b[0] = b[1] =\
+    \ a;\n    trace(b);\n  }\n  // original structure\n  {\n    HashSet<int> st;\n\
+    \    st.insert(2);\n    st.insert(3);\n    HashMap<int, int> m;\n    m[0] = 1,\
+    \ m[1] = 2;\n    trace(st, m);\n  }\n  // cv qualifier\n  {\n    int a0 = 0;\n\
+    \    const int a1 = 1;\n    int& a2 = a0;\n    const int& a3 = a1;\n    trace(a0,\
+    \ a1, a2, a3);\n  }\n}\n\nvoid solve() {\n  test();\n  int a, b;\n  cin >> a >>\
+    \ b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../competitive-template.hpp\"\n#include \"../../hashmap/hashmap.hpp\"\n#include\
     \ \"../../hashmap/hashset.hpp\"\n#include \"../../template/debug.hpp\"\n\nvoid\
@@ -300,8 +304,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/debug.test.cpp
   requiredBy: []
-  timestamp: '2020-11-27 19:57:10+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-11-30 18:57:55+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-unit-test/debug.test.cpp
 layout: document
