@@ -43,6 +43,7 @@
 "verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp": "2020-09-18 02:08:48 +0900",
 "verify/verify-aoj-other/aoj-2995-hashmap.test.cpp": "2020-11-27 00:11:16 +0900",
 "verify/verify-aoj-other/aoj-2995.test.cpp": "2020-11-27 00:11:16 +0900",
+"verify/verify-unit-test/debug.test.cpp": "2020-11-30 19:17:19 +0900",
 "verify/verify-unit-test/dijkstra.test.cpp": "2020-11-30 18:57:55 +0900",
 "verify/verify-unit-test/factorize.test.cpp": "2020-11-30 18:57:55 +0900",
 "verify/verify-unit-test/fast-inv-gcd.test.cpp": "2020-11-26 20:10:22 +0900",
