@@ -28,7 +28,7 @@ $$S_p(\lfloor \frac{N}{k} \rfloor) = \sum_{p\ \mathrm{is}\ \mathrm{prime},1\leq 
 
 $$S_c(N) = \sum_{p\ \mathrm{is}\ \mathrm{prime},1\leq p\leq N} p^c$$
 
-の線形和で表すことが出来る。$S_c(\lfloor \frac{N}{k} \rfloor)$は[素数カウント](https://nyaannyaan.github.io/library/library/math/prime-counting.hpp.html)のアルゴリズムを一般的に拡張した方法で高速に求められる。(素数カウントの時に求めた$\pi(n)$は$c=0$の時の場合でると言える。)
+の線形和で表すことが出来る。$S_c(\lfloor \frac{N}{k} \rfloor)$は[素数カウント](https://nyaannyaan.github.io/library/library/multiplicative-function/prime-counting.hpp.html)のアルゴリズムを一般的に拡張した方法で高速に求められる。(素数カウントの時に求めた$\pi(n)$は$c=0$の時の場合でると言える。)
 
 $f(x,n) :=$ ($n$以下の自然数のうち$x$以下の素数を因数に持たない整数$p$に対する$p^c$の和)
 

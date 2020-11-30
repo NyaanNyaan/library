@@ -24,5 +24,5 @@ long long prime_counting(long long N) {
 
 /**
  * @brief 素数カウント( $\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$ )
- * @docs docs/math/prime-counting.md
+ * @docs docs/multiplicative-function/prime-counting.md
  */

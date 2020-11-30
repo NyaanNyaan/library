@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sum_of_totient_function"
 
 #include "../../competitive-template.hpp"
-#include "../../math/sum-of-multiplicative-function.hpp"
+#include "../../multiplicative-function/sum-of-multiplicative-function.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
 void solve() {

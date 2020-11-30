@@ -50,5 +50,5 @@ T sum_of_totient(long long N) {
 
 /**
  * @brief 乗法的関数の和
- * @docs docs/math/sum-of-multiplicative-function.md
+ * @docs docs/multiplicative-function/sum-of-multiplicative-function.md
  */
