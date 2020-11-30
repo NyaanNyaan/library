@@ -45,9 +45,17 @@ double rnd() {
   return rnd() * ((raw_cast*)(&p))->t;
 }
 
+template <typename T>
+void randshf(vector<T>& v) {
+  int n = v.size();
+  for (int loop = 0; loop < 2; loop++)
+    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);
+}
+
 }  // namespace my_rand
 
 using my_rand::randint;
 using my_rand::randset;
+using my_rand::randshf;
 using my_rand::rnd;
 using my_rand::rng;

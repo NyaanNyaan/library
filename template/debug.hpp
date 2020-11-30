@@ -1,7 +1,3 @@
-#pragma once
-#include <bits/stdc++.h>
-using namespace std;
-
 namespace DebugImpl {
 
 void dump(const char& t) { cerr << t; }
@@ -11,11 +7,13 @@ void dump(const string& t) { cerr << t; }
 template <typename T>
 void dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr) {
   string res;
-  if (t == inf) res = "inf";
-  if (is_signed<T>::value && t == -inf) res = "-inf";
+  if (t == Nyaan::inf) res = "inf";
+  if (is_signed<T>::value)
+    if (t == -Nyaan::inf) res = "-inf";
   if (sizeof(T) == 8) {
-    if (t == infLL) res = "inf";
-    if (is_signed<T>::value && t == -infLL) res = "-inf";
+    if (t == Nyaan::infLL) res = "inf";
+    if (is_signed<T>::value)
+      if (t == -Nyaan::infLL) res = "-inf";
   }
   if (res.empty()) res = to_string(t);
   cerr << res;
@@ -64,7 +62,18 @@ void trace(Head&& head, Tail&&... tail) {
 }
 
 }  // namespace DebugImpl
+
 using DebugImpl::trace;
+
+#ifdef NyaanDebug
+#define trc(...)                            \
+  do {                                      \
+    cerr << "## " << #__VA_ARGS__ << " = "; \
+    DebugImpl::trace(__VA_ARGS__);          \
+  } while (0)
+#else
+#define trc(...)
+#endif
 
 /**
  * @brief デバッグ用ダンプ関数

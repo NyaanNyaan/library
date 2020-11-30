@@ -2,96 +2,113 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <typename Str>
+template <typename Str = string, int BASE_NUM = 1>
 struct RollingHash {
-  using u32 = uint32_t;
   using u64 = unsigned long long;
+  using u128 = __uint128_t;
 
-  static constexpr u64 rmod = (1ull << 61) - 1;
+  static constexpr u64 md = (1ull << 61) - 1;
 
-  static constexpr u64 modmul(const u64 a, const u64 b) {
-    u64 l1 = (u32)a, h1 = a >> 32, l2 = (u32)b, h2 = b >> 32;
-    u64 l = l1 * l2, m = l1 * h2 + l2 * h1, h = h1 * h2;
-    u64 ret = (l & rmod) + (l >> 61) + (h << 3) + (m >> 29) + (m << 35 >> 3);
-    if (ret > rmod) ret = (ret & rmod) + (ret >> 61);
-    if (ret >= rmod) ret -= rmod;
-    return ret;
+  static inline constexpr u64 modmul(const u64 &a, const u64 &b) {
+    u128 ret = u128(a) * b;
+    ret = (ret & md) + (ret >> 61);
+    return ret >= md ? ret - md : ret;
+  }
+  static inline constexpr u64 modfma(const u64 &a, const u64 &b, const u64 &c) {
+    u128 ret = u128(a) * b + c;
+    ret = (ret & md) + (ret >> 61);
+    return ret >= md ? ret - md : ret;
   }
 
-  static constexpr u64 modfma(const u64 a, const u64 b, const u64 c) {
-    u64 l1 = (u32)a, h1 = a >> 32, l2 = (u32)b, h2 = b >> 32;
-    u64 l = l1 * l2, m = l1 * h2 + l2 * h1, h = h1 * h2;
-    u64 ret =
-        (l & rmod) + (l >> 61) + (h << 3) + (m >> 29) + (m << 35 >> 3) + c;
-    if (ret > rmod) ret = (ret & rmod) + (ret >> 61);
-    if (ret >= rmod) ret -= rmod;
-    return ret;
-  }
+  struct Hash : array<u64, BASE_NUM> {
+    using array<u64, BASE_NUM>::operator[];
 
-  static constexpr P get_basis() {
-    vector<u64> ds = {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321};
-    auto rand_time =
-        chrono::duration_cast<chrono::nanoseconds>(
-            chrono::high_resolution_clock::now().time_since_epoch())
-            .count();
-    mt19937_64 rng(rand_time);
-
-    auto modpow = [&](u64 a, u64 b) {
-      a %= rmod;
-      u64 r = 1;
-      for (; b; a = modmul(a, a), b >>= 1) r = modmul(r, a);
-      return r;
-    };
-    auto isPrimitive = [&](u64 x) {
-      for (u64 &d : ds)
-        if (modpow(x, (rmod - 1) / d) == 1) return false;
-      return true;
-    };
-
-    u64 a = 1, b = 1;
-    do {
-      a = rng() % (rmod - 1) + 1, b = rng() % (rmod - 1) + 1;
-      while (isPrimitive(a, ds) == false) a = rng() % rmod;
-      while (isPrimitive(b, ds) == false) b = rng() % rmod;
-    } while (a == b);
-    return P(a, b);
-  }
-
-  struct P : pair<u64, u64> {
-    template <typename Args... args>
-    P(Args... args) : pair<u64, u64>(args...) {}
-
-    P &operator+=(const P &r) {
-      if ((this->first += r.first) >= rmod) this->first -= rmod;
-      if ((this->second += r.second) >= rmod) this->second -= rmod;
+    Hash() : array<u64, BASE_NUM>() {}
+    constexpr static Hash set(u64 a) {
+      Hash res;
+      for (int i = 0; i < BASE_NUM; i++) res[i] = a;
+      return res;
+    }
+    Hash &operator+=(const Hash &r) {
+      for (int i = 0; i < BASE_NUM; i++)
+        if (((*this)[i] += r[i]) >= md) (*this)[i] -= md;
       return *this;
     }
-    P &operator-=(const P &r) {
-      if ((this->first += rmod - r.first) >= rmod) this->first -= rmod;
-      if ((this->second += rmod - r.second) >= rmod) this->second -= rmod;
+    Hash &operator+=(const u64 &r) {
+      for (int i = 0; i < BASE_NUM; i++)
+        if (((*this)[i] += r) >= md) (*this)[i] -= md;
       return *this;
     }
-    P &operator*=(const P &r) {
-      this->first = modmul(this->first, r.first);
-      this->second = modmul(this->second, r.second);
+    Hash &operator-=(const Hash &r) {
+      for (int i = 0; i < BASE_NUM; i++)
+        if (((*this)[i] += md - r[i]) >= md) (*this)[i] -= md;
       return *this;
     }
-    P operator+(const P &r) { return P(*this) += r; }
-    P operator-(const P &r) { return P(*this) -= r; }
-    P operator*(const P &r) { return P(*this) *= r; }
-    P operator-() { return P(0, 0) - (*this); }
-    P friend fma(const P &a, const P &b, const P &c) {
-      return P{modfma(a.first, b.first, c.first),
-               modfma(a.first, b.second, c.second)};
+    Hash &operator-=(const u64 &r) {
+      for (int i = 0; i < BASE_NUM; i++)
+        if (((*this)[i] += md - r) >= md) (*this)[i] -= md;
+      return *this;
+    }
+    inline Hash &operator*=(const Hash &r) {
+      for (int i = 0; i < BASE_NUM; i++) (*this)[i] = modmul((*this)[i], r[i]);
+      return *this;
+    }
+    Hash operator+(const Hash &r) { return Hash(*this) += r; }
+    Hash operator+(const u64 &r) { return Hash(*this) += r; }
+    Hash operator-(const Hash &r) { return Hash(*this) -= r; }
+    Hash operator-(const u64 &r) { return Hash(*this) -= r; }
+    inline Hash operator*(const Hash &r) { return Hash(*this) *= r; }
+    Hash operator-() const {
+      Hash res;
+      for (int i = 0; i < BASE_NUM; i++)
+        res[i] = (*this)[i] == 0 ? 0 : md - (*this)[i];
+      return res;
+    }
+    friend Hash pfma(const Hash &a, const Hash &b, const Hash &c) {
+      Hash res;
+      for (int i = 0; i < BASE_NUM; i++) res[i] = modfma(a[i], b[i], c[i]);
+      return res;
+    }
+    friend Hash pfma(const Hash &a, const Hash &b, const u64 &c) {
+      Hash res;
+      for (int i = 0; i < BASE_NUM; i++) res[i] = modfma(a[i], b[i], c);
+      return res;
     }
   };
 
-  const Str &data;
-  vector<P> hs, pw;
-  int s;
-  static P basis;
+  static Hash get_basis() {
+    constexpr u64 ds[] = {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321};
+    static auto rand_time =
+        chrono::duration_cast<chrono::nanoseconds>(
+            chrono::high_resolution_clock::now().time_since_epoch())
+            .count();
+    static mt19937_64 rng(rand_time);
 
-  RollingHash() = default;
+    auto modpow = [&](u64 a, u64 b) {
+      u64 r = 1;
+      for (a %= md; b; a = modmul(a, a), b >>= 1) r = modmul(r, a);
+      return r;
+    };
+    auto isPrimitive = [&](u64 x) {
+      for (auto &d : ds)
+        if (modpow(x, (md - 1) / d) <= 1) return false;
+      return true;
+    };
+
+    Hash h;
+    for (int i = 0; i < BASE_NUM; i++) {
+      while (isPrimitive(h[i] = rng() % (md - 1) + 1) == false)
+        ;
+    }
+    return h;
+  }
+
+  Str data;
+  vector<Hash> hs, pw;
+  int s;
+  static Hash basis;
+
+  RollingHash() { build(string()); }
 
   RollingHash(const Str &S) { build(S); }
 
@@ -100,74 +117,55 @@ struct RollingHash {
     s = S.size();
     hs.resize(s + 1);
     pw.resize(s + 1);
-    pw[0] = P(1, 1), hs[0] = P(0, 0);
+    pw[0] = Hash::set(1);
+    hs[0] = Hash::set(0);
     for (int i = 1; i <= s; i++) {
       pw[i] = pw[i - 1] * basis;
-      hs[i] = fma(hs[i - 1], basis[i], P(S[i - 1], S[i - 1]));
+      hs[i] = pfma(hs[i - 1], basis, u64(S[i - 1]));
     }
   }
 
-  P get(const int &l, const int &r) const {
-    return -fma(hs[l], pw[r - 1], -hs[r]);
+  Hash get(int l, int r = -1) const {
+    if (r == -1) r = s;
+    return pfma(hs[l], -pw[r - l], hs[r]);
   }
 
-  static P get_hash(Str &T) const {
-    P ret = P(0, 0);
-    for (int i = 0; i < (int)T.size(); i++) ret = fma(ret, basis, {T[i], T[i]});
+  static Hash get_hash(const Str &T) {
+    Hash ret = Hash::set(0);
+    for (int i = 0; i < (int)T.size(); i++) ret = pfma(ret, basis, u64(T[i]));
     return ret;
   }
 
-  int find(Str &T) const {
+  int find(Str &T, int lower = 0) const {
     auto ths = get_hash(T);
-    for (int i = 0; i <= s - (int)T.size(); i++)
+    for (int i = lower; i <= s - (int)T.size(); i++)
       if (ths == get(i, i + (int)T.size())) return i;
     return -1;
   }
 
-  vector<int> find_all(Str &T) const {
-    auto t_hash = get_hash(T);
-    vector<int> ret;
-    for (int i = 0; i <= s - (int)T.size(); i++)
-      if (t_hash == get(i, i + (int)T.size())) ret.push_back(i);
-    return ret;
-  }
-
-  int LongestCommonPrefix(RollingHash<Str> &t, int al, int bl) const {
-    int ok = 0, ng = min(s - al, t.s - bl) + 1;
+  friend int LCP(const RollingHash &a, const RollingHash &b, int al, int bl) {
+    int ok = 0, ng = min(a.size() - al, b.size() - bl) + 1;
     while (ok + 1 < ng) {
       int med = (ok + ng) / 2;
-      (get(al, med + al) == t.get(bl, med + bl) ? ok : ng) = med;
+      (a.get(al, med + al) == b.get(bl, med + bl) ? ok : ng) = med;
     }
     return ok;
   }
 
-  int strcmp(RollingHash<Str> &t, int al, int bl, int ar = -1,
-             int br = -1) const {
-    if (ar == -1) ar = s;
-    if (br == -1) br = t.s;
-    int n = min<int>({LongestCommonPrefix(t, al, bl), ar - al, br - bl});
-    if (al + n == ar) return (bl + n == br) ? 0 : 1;
-    if (bl + n == br) return -1;
-    return (data[al + n] < t.data[bl + n]) ? 1 : -1;
+  friend int strcmp(const RollingHash &a, const RollingHash &b, int al, int bl,
+                    int ar = -1, int br = -1) {
+    if (ar == -1) ar = a.size();
+    if (br == -1) br = b.size();
+    int n = min<int>({LCP(a, b, al, bl), ar - al, br - bl});
+    return al + n == ar
+               ? bl + n == br ? 0 : 1
+               : bl + n == br ? -1 : a.data[al + n] < b.data[bl + n] ? 1 : -1;
   }
 
-  int LongestCommonSubString() const {
-    auto f = [&](int len) {
-      map<P, int> m;
-      for (int i = 0; i <= s - len; i++)
-        if ((m[get(i, i + len)] += 1) != 1) return true;
-      return false;
-    };
-    int ok = 0, ng = s;
-    while (ok + 1 < ng) {
-      int med = (ok + ng) / 2;
-      (f(med) ? ok : ng) = med;
-    }
-    return ok;
-  }
+  int size() const { return s; }
 };
 
-template <typename Str>
-typename RollingHash<Str>::P RollingHash<Str>::basis =
-    RollingHash<Str>::get_basis();
-using Roriha = RollingHash<string>;
+template <typename Str, int BASE_NUM>
+typename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =
+    RollingHash<Str, BASE_NUM>::get_basis();
+using roriha = RollingHash<string, 1>;
