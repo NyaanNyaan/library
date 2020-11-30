@@ -265,3 +265,7 @@ typename DimensionExpandedGraph<DIM, Data_t>::A
 template <int DIM, typename Data_t>
 typename DimensionExpandedGraph<DIM, Data_t>::A
     DimensionExpandedGraph<DIM, Data_t>::coeff;
+
+/**
+ * @brief 次元拡張グラフ
+ */

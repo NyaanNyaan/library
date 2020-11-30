@@ -22,3 +22,7 @@ vector<int> GrundyNumber(vector<vector<int>> &g) {
   }
   return grundy;
 };
+
+/**
+ * @brief Grundy Number
+ */
