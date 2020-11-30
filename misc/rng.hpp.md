@@ -5,10 +5,10 @@ data:
   - icon: ':warning:'
     path: misc/simulated-annealing.hpp
     title: misc/simulated-annealing.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
@@ -36,8 +36,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yuki/yuki-0981.test.cpp
+    title: verify/verify-yuki/yuki-0981.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/rng.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -84,7 +87,7 @@ data:
   - modulo/mod-kth-root.hpp
   - misc/simulated-annealing.hpp
   timestamp: '2020-11-30 18:57:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
@@ -94,6 +97,7 @@ data:
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-yuki/yuki-0981.test.cpp
 documentation_of: misc/rng.hpp
 layout: document
 redirect_from:

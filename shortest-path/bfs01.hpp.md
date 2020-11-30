@@ -5,9 +5,12 @@ data:
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+    title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"shortest-path/bfs01.hpp\"\n#include <bits/stdc++.h>\nusing\
@@ -60,8 +63,9 @@ data:
   path: shortest-path/bfs01.hpp
   requiredBy: []
   timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
 documentation_of: shortest-path/bfs01.hpp
 layout: document
 redirect_from:

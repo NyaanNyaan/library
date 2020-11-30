@@ -5,9 +5,6 @@ data:
   - icon: ':warning:'
     path: graph/cycle-detection.hpp
     title: graph/cycle-detection.hpp
-  - icon: ':warning:'
-    path: graph/dimension-expanded-graph.hpp
-    title: graph/dimension-expanded-graph.hpp
   - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
@@ -35,7 +32,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: shortest-path/bellman-ford.hpp
     title: shortest-path/bellman-ford.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/bfs01.hpp
     title: shortest-path/bfs01.hpp
   - icon: ':heavy_check_mark:'
@@ -126,6 +123,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+    title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
@@ -276,7 +276,6 @@ data:
   - graph/cycle-detection.hpp
   - graph/lowlink.hpp
   - graph/strongly-connected-components.hpp
-  - graph/dimension-expanded-graph.hpp
   - graph/two-edge-connected-components.hpp
   - graph/graph-utility.hpp
   timestamp: '2020-11-24 16:37:57+09:00'
@@ -301,6 +300,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
+  - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp

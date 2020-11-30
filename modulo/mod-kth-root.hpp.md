@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedRequiredBy: []
@@ -21,8 +21,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yuki/yuki-0981.test.cpp
+    title: verify/verify-yuki/yuki-0981.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/modulo/mod-kth-root.md
     document_title: kth root(Tonelli-Shanks algorithm)
@@ -261,9 +264,10 @@ data:
   path: modulo/mod-kth-root.hpp
   requiredBy: []
   timestamp: '2020-11-30 18:57:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yuki/yuki-0981.test.cpp
 documentation_of: modulo/mod-kth-root.hpp
 layout: document
 redirect_from:

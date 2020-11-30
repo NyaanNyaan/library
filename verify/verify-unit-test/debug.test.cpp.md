@@ -15,7 +15,7 @@ data:
     title: template/bitop.hpp
   - icon: ':heavy_check_mark:'
     path: template/debug.hpp
-    title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
+    title: template/debug.hpp
   - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
@@ -140,49 +140,57 @@ data:
     \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
     \                            \\\n  do {                                      \\\
     \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n\n/**\n * @brief\
-    \ \u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570\n */\n#line 21\
-    \ \"template/template.hpp\"\n\n// macro\n#line 2 \"template/macro.hpp\"\n\n#define\
-    \ each(x, v) for (auto&& x : v)\n#define all(v) (v).begin(), (v).end()\n#define\
-    \ rep(i, N) for (long long i = 0; i < (long long)(N); i++)\n#define repr(i, N)\
-    \ for (long long i = (long long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long\
-    \ long i = 1; i <= (long long)(N); i++)\n#define repr1(i, N) for (long long i\
-    \ = (N); (long long)(i) > 0; i--)\n#define reg(i, a, b) for (long long i = (a);\
-    \ i < (b); i++)\n#define regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n\
-    #define repc(i, a, cond) for (long long i = (a); (cond); i++)\n\n#define die(...)\
-    \      \\\n  do {                \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;\
-    \           \\\n  } while (0)\n#line 24 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 3 \"hashmap/hashmap-base.hpp\"\
-    \nusing namespace std;\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing\
-    \ u64 = uint64_t;\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\
-    \ntemplate <typename Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
-    \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
-    \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
-    \ ref = typename base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n\
-    \  explicit constexpr itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32\
-    \ _i, HashMapBase<Key, Data>* _p) : i(_i), p(_p) {}\n  explicit constexpr itrB(u32\
-    \ _i, const HashMapBase<Key, Data>* _p)\n      : i(_i), p(const_cast<HashMapBase<Key,\
-    \ Data>*>(_p)) {}\n  friend void swap(itrB& l, itrB& r) { swap(l.i, r.i), swap(l.p,\
-    \ r.p); }\n  friend bool operator==(const itrB& l, const itrB& r) { return l.i\
-    \ == r.i; }\n  friend bool operator!=(const itrB& l, const itrB& r) { return l.i\
-    \ != r.i; }\n  const ref operator*() const {\n    return const_cast<const HashMapBase<Key,\
-    \ Data>*>(p)->data[i];\n  }\n  ref operator*() { return p->data[i]; }\n  ptr operator->()\
-    \ const { return &(p->data[i]); }\n\n  itrB& operator++() {\n    assert(i != p->cap\
-    \ && \"itr::operator++()\");\n    do {\n      i++;\n      if (i == p->cap) break;\n\
-    \      if (p->flag[i] == true && p->dflag[i] == false) break;\n    } while (true);\n\
-    \    return (*this);\n  }\n  itrB operator++(int) {\n    itrB it(*this);\n   \
-    \ ++(*this);\n    return it;\n  }\n  itrB& operator--() {\n    do {\n      i--;\n\
-    \      if (p->flag[i] == true && p->dflag[i] == false) break;\n      assert(i\
-    \ != 0 && \"itr::operator--()\");\n    } while (true);\n    return (*this);\n\
-    \  }\n  itrB operator--(int) {\n    itrB it(*this);\n    --(*this);\n    return\
-    \ it;\n  }\n};\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase {\n\
-    \  using u32 = uint32_t;\n  using u64 = uint64_t;\n  using iterator = itrB<Key,\
-    \ Data>;\n  using itr = iterator;\n\n protected:\n  template <typename K,\n  \
-    \          enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n       \
-    \     enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline u32 inner_hash(const\
-    \ K& key) const {\n    return u32((u64(key ^ r) * 11995408973635179863ULL) >>\
-    \ shift);\n  }\n  template <\n      typename K, enable_if_t<is_same<K, Key>::value,\
-    \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
+    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
+    \ : v)\n#define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long\
+    \ i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long\
+    \ long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long\
+    \ long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) >\
+    \ 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
+    \ regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond)\
+    \ for (long long i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__;\
+    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
+    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
+    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
+    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
+    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
+    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
+    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
+    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)     \
+    \        \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n\
+    \    return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
+    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
+    \ 3 \"hashmap/hashmap-base.hpp\"\nusing namespace std;\n\nnamespace HashMapImpl\
+    \ {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename Key, typename\
+    \ Data>\nstruct HashMapBase;\n\ntemplate <typename Key, typename Data>\nstruct\
+    \ itrB\n    : iterator<bidirectional_iterator_tag, Data, ptrdiff_t, Data*, Data&>\
+    \ {\n  using base =\n      iterator<bidirectional_iterator_tag, Data, ptrdiff_t,\
+    \ Data*, Data&>;\n  using ptr = typename base::pointer;\n  using ref = typename\
+    \ base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n  explicit constexpr\
+    \ itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32 _i, HashMapBase<Key,\
+    \ Data>* _p) : i(_i), p(_p) {}\n  explicit constexpr itrB(u32 _i, const HashMapBase<Key,\
+    \ Data>* _p)\n      : i(_i), p(const_cast<HashMapBase<Key, Data>*>(_p)) {}\n \
+    \ friend void swap(itrB& l, itrB& r) { swap(l.i, r.i), swap(l.p, r.p); }\n  friend\
+    \ bool operator==(const itrB& l, const itrB& r) { return l.i == r.i; }\n  friend\
+    \ bool operator!=(const itrB& l, const itrB& r) { return l.i != r.i; }\n  const\
+    \ ref operator*() const {\n    return const_cast<const HashMapBase<Key, Data>*>(p)->data[i];\n\
+    \  }\n  ref operator*() { return p->data[i]; }\n  ptr operator->() const { return\
+    \ &(p->data[i]); }\n\n  itrB& operator++() {\n    assert(i != p->cap && \"itr::operator++()\"\
+    );\n    do {\n      i++;\n      if (i == p->cap) break;\n      if (p->flag[i]\
+    \ == true && p->dflag[i] == false) break;\n    } while (true);\n    return (*this);\n\
+    \  }\n  itrB operator++(int) {\n    itrB it(*this);\n    ++(*this);\n    return\
+    \ it;\n  }\n  itrB& operator--() {\n    do {\n      i--;\n      if (p->flag[i]\
+    \ == true && p->dflag[i] == false) break;\n      assert(i != 0 && \"itr::operator--()\"\
+    );\n    } while (true);\n    return (*this);\n  }\n  itrB operator--(int) {\n\
+    \    itrB it(*this);\n    --(*this);\n    return it;\n  }\n};\n\ntemplate <typename\
+    \ Key, typename Data>\nstruct HashMapBase {\n  using u32 = uint32_t;\n  using\
+    \ u64 = uint64_t;\n  using iterator = itrB<Key, Data>;\n  using itr = iterator;\n\
+    \n protected:\n  template <typename K,\n            enable_if_t<is_same<K, Key>::value,\
+    \ nullptr_t> = nullptr,\n            enable_if_t<is_integral<K>::value, nullptr_t>\
+    \ = nullptr>\n  inline u32 inner_hash(const K& key) const {\n    return u32((u64(key\
+    \ ^ r) * 11995408973635179863ULL) >> shift);\n  }\n  template <\n      typename\
+    \ K, enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
     \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::second)>::value,\
     \ nullptr_t> = nullptr>\n  inline u32 inner_hash(const K& key) const {\n    u64\
     \ a = key.first ^ r;\n    u64 b = key.second ^ r;\n    a *= 11995408973635179863ULL;\n\
@@ -312,7 +320,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/debug.test.cpp
   requiredBy: []
-  timestamp: '2020-11-30 19:17:19+09:00'
+  timestamp: '2020-11-30 22:35:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/debug.test.cpp

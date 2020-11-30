@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -179,7 +179,7 @@ data:
     - icon: ':warning:'
       path: graph/cycle-detection.hpp
       title: graph/cycle-detection.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/dimension-expanded-graph.hpp
       title: graph/dimension-expanded-graph.hpp
     - icon: ':heavy_check_mark:'
@@ -228,7 +228,7 @@ data:
       title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   - name: inner
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
   - name: math
@@ -331,7 +331,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
@@ -348,10 +348,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-modint.hpp
       title: modint/arbitrary-modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/modint-montgomery64.hpp
       title: modint/modint-montgomery64.hpp
     - icon: ':heavy_check_mark:'
@@ -371,7 +371,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modulo/mod-kth-root.hpp
       title: kth root(Tonelli-Shanks algorithm)
     - icon: ':heavy_check_mark:'
@@ -419,7 +419,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: prime/factor-enumerate.hpp
       title: prime/factor-enumerate.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: prime/fast-factorize.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
     - icon: ':heavy_check_mark:'
@@ -477,7 +477,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/bellman-ford.hpp
       title: shortest-path/bellman-ford.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/bfs01.hpp
       title: shortest-path/bfs01.hpp
     - icon: ':heavy_check_mark:'
@@ -523,7 +523,7 @@ data:
       title: template/bitop.hpp
     - icon: ':heavy_check_mark:'
       path: template/debug.hpp
-      title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
+      title: template/debug.hpp
     - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
@@ -708,6 +708,15 @@ data:
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - name: verify/verify-aoj-other
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
+      title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+      title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
+      title: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
       title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
@@ -1069,6 +1078,9 @@ data:
       path: verify/verify-yuki/yuki-0215.test.cpp
       title: verify/verify-yuki/yuki-0215.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0697.test.cpp
+      title: verify/verify-yuki/yuki-0697.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0789.test.cpp
       title: verify/verify-yuki/yuki-0789.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1080,6 +1092,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0963.test.cpp
       title: verify/verify-yuki/yuki-0963.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yuki/yuki-0981.test.cpp
+      title: verify/verify-yuki/yuki-0981.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1080.test.cpp
       title: verify/verify-yuki/yuki-1080.test.cpp
@@ -1092,6 +1107,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1220.test.cpp
       title: verify/verify-yuki/yuki-1220.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1283.test.cpp
+      title: verify/verify-yuki/yuki-1283.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1303.test.cpp
       title: verify/verify-yuki/yuki-1303.test.cpp

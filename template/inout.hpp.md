@@ -7,6 +7,15 @@ data:
     title: template/template.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
+    title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+    title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
+    title: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -15,6 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
     title: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0697.test.cpp
+    title: verify/verify-yuki/yuki-0697.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1283.test.cpp
+    title: verify/verify-yuki/yuki-1283.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -61,7 +76,12 @@ data:
   timestamp: '2020-11-30 18:57:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
+  - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
+  - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-yuki/yuki-1283.test.cpp
+  - verify/verify-yuki/yuki-0697.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
 documentation_of: template/inout.hpp

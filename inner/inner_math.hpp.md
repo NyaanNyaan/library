@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
     path: modulo/mod-log.hpp
     title: modulo/mod-log.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
@@ -27,8 +27,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yuki/yuki-0981.test.cpp
+    title: verify/verify-yuki/yuki-0981.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"inner/inner_math.hpp\"\n#include <bits/stdc++.h>\nusing\
@@ -57,13 +60,14 @@ data:
   - modulo/mod-log.hpp
   - modulo/mod-kth-root.hpp
   timestamp: '2020-09-19 00:42:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-yuki/yuki-0981.test.cpp
 documentation_of: inner/inner_math.hpp
 layout: document
 redirect_from:

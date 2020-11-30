@@ -9,7 +9,7 @@ data:
     title: template/bitop.hpp
   - icon: ':heavy_check_mark:'
     path: template/debug.hpp
-    title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
+    title: template/debug.hpp
   - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
@@ -134,25 +134,34 @@ data:
     \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
     \                            \\\n  do {                                      \\\
     \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n\n/**\n * @brief\
-    \ \u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570\n */\n#line 21\
-    \ \"template/template.hpp\"\n\n// macro\n#line 2 \"template/macro.hpp\"\n\n#define\
-    \ each(x, v) for (auto&& x : v)\n#define all(v) (v).begin(), (v).end()\n#define\
-    \ rep(i, N) for (long long i = 0; i < (long long)(N); i++)\n#define repr(i, N)\
-    \ for (long long i = (long long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long\
-    \ long i = 1; i <= (long long)(N); i++)\n#define repr1(i, N) for (long long i\
-    \ = (N); (long long)(i) > 0; i--)\n#define reg(i, a, b) for (long long i = (a);\
-    \ i < (b); i++)\n#define regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n\
-    #define repc(i, a, cond) for (long long i = (a); (cond); i++)\n\n#define die(...)\
-    \      \\\n  do {                \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;\
-    \           \\\n  } while (0)\n#line 24 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\
-    \n//\n#line 3 \"string/rolling-hash.hpp\"\nusing namespace std;\n\ntemplate <typename\
-    \ Str = string, int BASE_NUM = 1>\nstruct RollingHash {\n  using u64 = unsigned\
-    \ long long;\n  using u128 = __uint128_t;\n\n  static constexpr u64 md = (1ull\
-    \ << 61) - 1;\n\n  static inline constexpr u64 modmul(const u64 &a, const u64\
-    \ &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) + (ret >> 61);\n  \
-    \  return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
+    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
+    \ : v)\n#define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long\
+    \ i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long\
+    \ long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long\
+    \ long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) >\
+    \ 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
+    \ regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond)\
+    \ for (long long i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__;\
+    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
+    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
+    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
+    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
+    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
+    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
+    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
+    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)     \
+    \        \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n\
+    \    return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
+    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
+    \ 4 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\n//\n#line\
+    \ 3 \"string/rolling-hash.hpp\"\nusing namespace std;\n\ntemplate <typename Str\
+    \ = string, int BASE_NUM = 1>\nstruct RollingHash {\n  using u64 = unsigned long\
+    \ long;\n  using u128 = __uint128_t;\n\n  static constexpr u64 md = (1ull << 61)\
+    \ - 1;\n\n  static inline constexpr u64 modmul(const u64 &a, const u64 &b) {\n\
+    \    u128 ret = u128(a) * b;\n    ret = (ret & md) + (ret >> 61);\n    return\
+    \ ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
     \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
     \n  struct Hash : array<u64, BASE_NUM> {\n    using array<u64, BASE_NUM>::operator[];\n\
@@ -233,7 +242,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2020-11-30 19:10:29+09:00'
+  timestamp: '2020-11-30 22:35:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
