@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
   _extendedRequiredBy: []

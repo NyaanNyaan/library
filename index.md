@@ -504,7 +504,7 @@ data:
       title: shortest-path/warshall-floyd.hpp
   - name: string
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/rolling-hash.hpp
       title: string/rolling-hash.hpp
     - icon: ':warning:'
@@ -518,22 +518,22 @@ data:
       title: string/suffix-array.hpp
   - name: template
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1039,7 +1039,7 @@ data:
       title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - name: verify/verify-yosupo-string
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
       title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1048,7 +1048,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
       title: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
       title: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
     - icon: ':heavy_check_mark:'

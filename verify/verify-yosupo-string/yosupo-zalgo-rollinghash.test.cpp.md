@@ -1,86 +1,89 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/rolling-hash.hpp
     title: string/rolling-hash.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: "\u30C7\u30D0\u30C3\u30B0\u7528\u30C0\u30F3\u30D7\u95A2\u6570"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n// bits\n#include <bits/stdc++.h>\n\n// utility\n#line\
-    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
-    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
-    \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
-    \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
-    \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
-    \ first; }\n  U &y() { return second; }\n  const U &y() const { return second;\
-    \ }\n\n  P &operator+=(const P &r) {\n    first += r.first;\n    second += r.second;\n\
-    \    return *this;\n  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n\
-    \    second -= r.second;\n    return *this;\n  }\n  P &operator*=(const P &r)\
-    \ {\n    first *= r.first;\n    second *= r.second;\n    return *this;\n  }\n\
-    \  P operator+(const P &r) const { return P(*this) += r; }\n  P operator-(const\
-    \ P &r) const { return P(*this) -= r; }\n  P operator*(const P &r) const { return\
-    \ P(*this) *= r; }\n};\n\nusing pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing\
-    \ vp = V<pl>;\n\nconstexpr int inf = 1001001001;\nconstexpr long long infLL =\
-    \ 4004004004004004004LL;\n\ntemplate <typename T>\nint sz(const T &t) {\n  return\
-    \ t.size();\n}\ntemplate <typename T, size_t N>\nvoid mem(T (&a)[N], int c) {\n\
-    \  memset(a, c, sizeof(T) * N);\n}\n\ntemplate <typename T, typename U>\ninline\
-    \ bool amin(T &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate\
-    \ <typename T, typename U>\ninline bool amax(T &x, U y) {\n  return (x < y) ?\
-    \ (x = y, true) : false;\n}\n\ntemplate <typename T>\nint lb(const vector<T> &v,\
-    \ const T &a) {\n  return lower_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
-    \ <typename T>\nint ub(const vector<T> &v, const T &a) {\n  return upper_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\n\ntemplate <typename T>\nint btw(T a, T x, T b) {\n\
-    \  return a <= x && x < b;\n}\n\ntemplate <typename T, typename U>\nT ceil(T a,\
-    \ U b) {\n  return (a + b - 1) / b;\n}\n\nconstexpr long long TEN(int n) {\n \
-    \ long long ret = 1, x = 10;\n  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x :\
-    \ 1);\n  return ret;\n}\n\ntemplate <typename T, typename U>\npair<T, U> mkp(const\
-    \ T &t, const U &u) {\n  return make_pair(t, u);\n}\n\ntemplate <typename T>\n\
-    vector<T> mkrui(const vector<T> &v, bool rev = false) {\n  vector<T> ret(v.size()\
-    \ + 1);\n  if (rev) {\n    for (int i = int(v.size()) - 1; i >= 0; i--) ret[i]\
-    \ = v[i] + ret[i + 1];\n  } else {\n    for (int i = 0; i < int(v.size()); i++)\
-    \ ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n};\n\ntemplate <typename T>\n\
-    vector<T> mkuni(const vector<T> &v) {\n  vector<T> ret(v);\n  sort(ret.begin(),\
-    \ ret.end());\n  ret.erase(unique(ret.begin(), ret.end()), ret.end());\n  return\
-    \ ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int N, F f) {\n  vector<int>\
-    \ ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord), end(ord), f);\n\
-    \  return ord;\n}\n\ntemplate <typename T>\nvector<T> reord(const vector<T> &v,\
-    \ const vector<T> &ord) {\n  int N = v.size();\n  vector<T> ret(N);\n  for (int\
-    \ i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return ret;\n};\n\ntemplate <typename\
-    \ T = int>\nvector<T> mkiota(int N) {\n  vector<T> ret(N);\n  iota(begin(ret),\
-    \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
-    \ &v, int max_val = -1) {\n  if (max_val < (int)v.size()) max_val = v.size() -\
-    \ 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i = 0; i < (int)v.size();\
-    \ i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace Nyaan\n#line 12 \"\
-    template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\n\
-    namespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
+    links:
+    - https://judge.yosupo.jp/problem/zalgorithm
+  bundledCode: "#line 1 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n\n#line 2 \"\
+    template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\
+    \n// bits\n#include <bits/stdc++.h>\n\n// utility\n#line 1 \"template/util.hpp\"\
+    \nnamespace Nyaan {\nusing ll = long long;\nusing i64 = long long;\nusing u64\
+    \ = unsigned long long;\nusing i128 = __int128_t;\nusing u128 = __uint128_t;\n\
+    \ntemplate <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV\
+    \ = vector<vector<T>>;\nusing vi = vector<int>;\nusing vl = vector<long long>;\n\
+    using vd = V<double>;\nusing vs = V<string>;\nusing vvi = vector<vector<int>>;\n\
+    using vvl = vector<vector<long long>>;\n\ntemplate <typename T, typename U>\n\
+    struct P : pair<T, U> {\n  template <typename... Args>\n  P(Args... args) : pair<T,\
+    \ U>(args...) {}\n\n  using pair<T, U>::first;\n  using pair<T, U>::second;\n\n\
+    \  T &x() { return first; }\n  const T &x() const { return first; }\n  U &y()\
+    \ { return second; }\n  const U &y() const { return second; }\n\n  P &operator+=(const\
+    \ P &r) {\n    first += r.first;\n    second += r.second;\n    return *this;\n\
+    \  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n    second -= r.second;\n\
+    \    return *this;\n  }\n  P &operator*=(const P &r) {\n    first *= r.first;\n\
+    \    second *= r.second;\n    return *this;\n  }\n  P operator+(const P &r) const\
+    \ { return P(*this) += r; }\n  P operator-(const P &r) const { return P(*this)\
+    \ -= r; }\n  P operator*(const P &r) const { return P(*this) *= r; }\n};\n\nusing\
+    \ pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing vp = V<pl>;\n\nconstexpr int\
+    \ inf = 1001001001;\nconstexpr long long infLL = 4004004004004004004LL;\n\ntemplate\
+    \ <typename T>\nint sz(const T &t) {\n  return t.size();\n}\ntemplate <typename\
+    \ T, size_t N>\nvoid mem(T (&a)[N], int c) {\n  memset(a, c, sizeof(T) * N);\n\
+    }\n\ntemplate <typename T, typename U>\ninline bool amin(T &x, U y) {\n  return\
+    \ (y < x) ? (x = y, true) : false;\n}\ntemplate <typename T, typename U>\ninline\
+    \ bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true) : false;\n}\n\ntemplate\
+    \ <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
+    \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
+    \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\n\
+    template <typename T>\nint btw(T a, T x, T b) {\n  return a <= x && x < b;\n}\n\
+    \ntemplate <typename T, typename U>\nT ceil(T a, U b) {\n  return (a + b - 1)\
+    \ / b;\n}\n\nconstexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n\
+    \  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate\
+    \ <typename T, typename U>\npair<T, U> mkp(const T &t, const U &u) {\n  return\
+    \ make_pair(t, u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const vector<T>\
+    \ &v, bool rev = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for\
+    \ (int i = int(v.size()) - 1; i >= 0; i--) ret[i] = v[i] + ret[i + 1];\n  } else\
+    \ {\n    for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n\
+    \  }\n  return ret;\n};\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T>\
+    \ &v) {\n  vector<T> ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(),\
+    \ ret.end()), ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int>\
+    \ mkord(int N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n\
+    \  sort(begin(ord), end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\n\
+    vector<T> reord(const vector<T> &v, const vector<T> &ord) {\n  int N = v.size();\n\
+    \  vector<T> ret(N);\n  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return\
+    \ ret;\n};\n\ntemplate <typename T = int>\nvector<T> mkiota(int N) {\n  vector<T>\
+    \ ret(N);\n  iota(begin(ret), end(ret), 0);\n  return ret;\n}\n\ntemplate <typename\
+    \ T>\nvector<int> mkinv(vector<T> &v, int max_val = -1) {\n  if (max_val < (int)v.size())\
+    \ max_val = v.size() - 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i =\
+    \ 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace\
+    \ Nyaan\n#line 12 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \nnamespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
     \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\n__attribute__((target(\"bmi\")))\
     \ inline int botbit(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n__attribute__((target(\"\
     bmi\"))) inline int ctz(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n\n__attribute__((target(\"\
@@ -143,7 +146,7 @@ data:
     #define repc(i, a, cond) for (long long i = (a); (cond); i++)\n\n#define die(...)\
     \      \\\n  do {                \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;\
     \           \\\n  } while (0)\n#line 24 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\
     \n//\n#line 3 \"string/rolling-hash.hpp\"\nusing namespace std;\n\ntemplate <typename\
     \ Str = string, int BASE_NUM = 1>\nstruct RollingHash {\n  using u64 = unsigned\
     \ long long;\n  using u128 = __uint128_t;\n\n  static constexpr u64 md = (1ull\
@@ -210,11 +213,12 @@ data:
     \ + n] ? 1 : -1;\n  }\n\n  int size() const { return s; }\n};\n\ntemplate <typename\
     \ Str, int BASE_NUM>\ntypename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str,\
     \ BASE_NUM>::basis =\n    RollingHash<Str, BASE_NUM>::get_basis();\nusing roriha\
-    \ = RollingHash<string, 1>;\n#line 4 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\
+    \ = RollingHash<string, 1>;\n#line 6 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\
     \n//\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  string s;\n  in(s);\n \
     \ RollingHash<string,2> rori(s);\n  vi ans(sz(s));\n  rep(i,sz(s))ans[i]=LCP(rori,rori,0,i);\n\
     \  out(ans);\n}\n"
-  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../string/rolling-hash.hpp\"\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../string/rolling-hash.hpp\"\
     \n//\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  string s;\n  in(s);\n \
     \ RollingHash<string,2> rori(s);\n  vi ans(sz(s));\n  rep(i,sz(s))ans[i]=LCP(rori,rori,0,i);\n\
     \  out(ans);\n}\n"
@@ -229,8 +233,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2020-11-30 18:57:55+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-11-30 19:10:29+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
 layout: document
