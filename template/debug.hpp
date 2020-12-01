@@ -1,8 +1,28 @@
 namespace DebugImpl {
 
+template <typename U, typename = void>
+struct is_specialize : false_type {};
+template <typename U>
+struct is_specialize<
+    U, typename conditional<false, typename U::iterator, void>::type>
+    : true_type {};
+template <typename U>
+struct is_specialize<
+    U, typename conditional<false, decltype(U::first), void>::type>
+    : true_type {};
+template <typename U>
+struct is_specialize<U, enable_if_t<is_integral<U>::value, void>> : true_type {
+};
+
 void dump(const char& t) { cerr << t; }
 
 void dump(const string& t) { cerr << t; }
+
+template <typename U,
+          enable_if_t<!is_specialize<U>::value, nullptr_t> = nullptr>
+void dump(const U& t) {
+  cerr << t;
+}
 
 template <typename T>
 void dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr) {

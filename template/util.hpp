@@ -83,16 +83,6 @@ int ub(const vector<T> &v, const T &a) {
   return upper_bound(begin(v), end(v), a) - begin(v);
 }
 
-template <typename T>
-int btw(T a, T x, T b) {
-  return a <= x && x < b;
-}
-
-template <typename T, typename U>
-T ceil(T a, U b) {
-  return (a + b - 1) / b;
-}
-
 constexpr long long TEN(int n) {
   long long ret = 1, x = 10;
   for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x : 1);

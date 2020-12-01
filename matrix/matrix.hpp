@@ -75,7 +75,7 @@ struct Matrix {
   friend ostream &operator<<(ostream &os, const Matrix &p) {
     int n = p.H(), m = p.W();
     for (int i = 0; i < n; i++) {
-      os << "[";
+       os << (i ? "   " : "") << "[";
       for (int j = 0; j < m; j++) {
         os << p[i][j] << (j + 1 == m ? "]\n" : ",");
       }
