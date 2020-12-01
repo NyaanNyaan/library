@@ -6,27 +6,7 @@ using namespace std;
 
 template <typename G>
 struct HeavyLightDecomposition {
-  G& g;
-  int idx;
-  vector<int> size, depth, in, out, nxt, par;
-  HeavyLightDecomposition(G& g, int root = 0)
-      : g(g),
-        idx(0),
-        size(g.size(), 0),
-        depth(g.size(), 0),
-        in(g.size(), -1),
-        out(g.size(), -1),
-        nxt(g.size(), root),
-        par(g.size(), root) {
-    dfs_sz(root);
-    dfs_hld(root);
-  }
-
-  void build(int root) {
-    dfs_sz(root);
-    dfs_hld(root);
-  }
-
+ private:
   void dfs_sz(int cur) {
     size[cur] = 1;
     for (auto& dst : g[cur]) {
@@ -47,103 +27,82 @@ struct HeavyLightDecomposition {
   }
 
   void dfs_hld(int cur) {
-    in[cur] = idx++;
+    down[cur] = id++;
     for (auto dst : g[cur]) {
       if (dst == par[cur]) continue;
       nxt[dst] = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));
       dfs_hld(dst);
     }
-    out[cur] = idx;
+    up[cur] = id;
   }
 
-  template <typename F>
-  void edge_query(int u, int v, const F& f) {
-    while (1) {
-      if (in[u] > in[v]) swap(u, v);
-      if (nxt[u] != nxt[v]) {
-        f(in[nxt[v]], in[v] + 1);
-        v = par[nxt[v]];
-      } else {
-        if (u != v) f(in[u] + 1, in[v] + 1);
-        break;
-      }
+  // [u, v)
+  vector<pair<int, int>> ascend(int u, int v) const {
+    vector<pair<int, int>> res;
+    while (nxt[u] != nxt[v]) {
+      res.emplace_back(down[u], down[nxt[u]]);
+      u = par[nxt[u]];
     }
+    if (u != v) res.emplace_back(down[u], down[v] + 1);
+    return res;
   }
 
-  // TODO : verify
-  template <typename F>
-  void uncommutable_edge_query(int u, int v, const F& f) {
-    while (1) {
-      if (nxt[u] != nxt[v]) {
-        if (in[u] > in[v]) {
-          f(in[u] + 1, in[nxt[u]], true);
-          u = par[nxt[u]];
-        } else {
-          f(in[nxt[v]], in[v] + 1, false);
-          v = par[nxt[v]];
-        }
-      } else {
-        if (in[u] != in[v]) {
-          if (in[u] > in[v])
-            f(in[u] + 1, in[v] + 1, true);
-          else
-            f(in[u] + 1, in[v] + 1, true);
-        }
-        break;
-      }
-    }
+  // (u, v]
+  vector<pair<int, int>> descend(int u, int v) const {
+    if (u == v) return {};
+    if (nxt[u] == nxt[v]) return {{down[u] + 1, down[v]}};
+    auto res = descend(u, par[nxt[v]]);
+    res.emplace_back(down[nxt[v]], down[v]);
+    return res;
   }
 
-  template <typename F>
-  void node_query(int u, int v, const F& f) {
-    while (1) {
-      if (in[u] > in[v]) swap(u, v);
-      if (nxt[u] != nxt[v]) {
-        f(in[nxt[v]], in[v] + 1);
-        v = par[nxt[v]];
-      } else {
-        f(in[u], in[v] + 1);
-        break;
-      }
-    }
+ public:
+  G& g;
+  int id;
+  vector<int> size, depth, down, up, nxt, par;
+  HeavyLightDecomposition(G& _g, int root = 0)
+      : g(_g),
+        id(0),
+        size(g.size(), 0),
+        depth(g.size(), 0),
+        down(g.size(), -1),
+        up(g.size(), -1),
+        nxt(g.size(), root),
+        par(g.size(), root) {
+    dfs_sz(root);
+    dfs_hld(root);
   }
 
+  void build(int root) {
+    dfs_sz(root);
+    dfs_hld(root);
+  }
+
+  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }
+
   template <typename F>
-  void uncommutable_node_query(int u, int v, const F& f) {
-    while (1) {
-      if (nxt[u] != nxt[v]) {
-        if (in[u] > in[v]) {
-          f(in[u] + 1, in[nxt[u]], true);
-          u = par[nxt[u]];
-        } else {
-          f(in[nxt[v]], in[v] + 1, false);
-          v = par[nxt[v]];
-        }
-      } else {
-        if (in[u] > in[v])
-          f(in[u] + 1, in[v], true);
-        else
-          f(in[u], in[v] + 1, true);
-        break;
-      }
-    }
+  void path_query(int u, int v, bool vertex, const F& f) {
+    int l = lca(u, v);
+    for (auto&& [a, b] : ascend(u, l)) f(a + 1, b);
+    if (vertex) f(down[l], down[l] + 1);
+    for (auto&& [a, b] : descend(l, v)) f(a, b + 1);
   }
 
   template <typename F>
-  void sub_edge_query(int u, const F& f) {
-    f(in[u] + 1, out[u]);
-  }
-
-  template <typename F>
-  void sub_node_query(int u, const F& f) {
-    f(in[u], out[u]);
+  void subtree_query(int u, bool vertex, const F& f) {
+    f(down[u] + int(!vertex), up[u]);
   }
 
   int lca(int a, int b) {
     while (nxt[a] != nxt[b]) {
-      if (in[a] < in[b]) swap(a, b);
+      if (down[a] < down[b]) swap(a, b);
       a = par[nxt[a]];
     }
     return depth[a] < depth[b] ? a : b;
   }
 };
+
+/**
+ * @brief Heavy Light Decomposition(重軽分解)
+ * @docs docs/tree/heavy-light-decomposition.md
+ */

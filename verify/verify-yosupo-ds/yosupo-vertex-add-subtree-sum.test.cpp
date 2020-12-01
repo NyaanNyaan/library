@@ -18,7 +18,7 @@ void solve() {
   HeavyLightDecomposition<vvi> hld(g);
   auto f = [](ll a, ll b) { return a + b; };
   SegmentTree<ll, decltype(f)> seg(N, f, 0);
-  rep(i, N) { seg.set(hld.in[i], a[i]); }
+  rep(i, N) { seg.set(hld.idx(i).first, a[i]); }
   seg.build();
 
   ll ans = 0;
@@ -29,11 +29,11 @@ void solve() {
     if (cmd) {
       ini(u);
       ans = 0;
-      hld.sub_node_query(u, que);
+      hld.subtree_query(u, true, que);
       out(ans);
     } else {
       inl(k, x);
-      seg.add(hld.in[k], x);
+      seg.add(hld.idx(k).first, x);
     }
   }
 }

@@ -9,11 +9,11 @@ struct SegmentTree {
   const F f;
   const T I;
 
-  SegmentTree(F f_, const T &I_) : size(0), f(f_), I(I_) {}
+  SegmentTree(F _f, const T &I_) : size(0), f(_f), I(I_) {}
 
-  SegmentTree(int N, F f_, const T &I_) : f(f_), I(I_) { init(N); }
+  SegmentTree(int N, F _f, const T &I_) : f(_f), I(I_) { init(N); }
 
-  SegmentTree(const vector<T> &v, F f, T I) : f(f), I(I) {
+  SegmentTree(const vector<T> &v, F _f, T I_) : f(_f), I(I_) {
     init(v.size());
     for (int i = 0; i < (int)v.size(); i++) {
       seg[i + size] = v[i];

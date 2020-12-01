@@ -24,11 +24,11 @@ void solve() {
     ini(c);
     if (c == 0) {
       ini(v, w);
-      seg.add(hld.in[v], w);
+      seg.add(hld.idx(v).first, w);
     } else {
       ini(v);
       ans = 0;
-      hld.edge_query(0, v, q);
+      hld.path_query(0, v,false, q);
       out(ans);
     }
   }

@@ -28,11 +28,11 @@ void solve() {
     if (c == 0) {
       inl(v, w);
       W = w;
-      hld.edge_query(0, v, add);
+      hld.path_query(0, v, false, add);
     } else {
       ini(v);
       ans = 0;
-      hld.edge_query(0, v, query);
+      hld.path_query(0, v, false, query);
       out(ans);
     }
   }
