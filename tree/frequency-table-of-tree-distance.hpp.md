@@ -15,7 +15,7 @@ data:
     title: ntt/ntt-avx2.hpp
   - icon: ':heavy_check_mark:'
     path: tree/centroid-decomposition.hpp
-    title: tree/centroid-decomposition.hpp
+    title: Centroid Decomposition
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -456,26 +456,27 @@ data:
     \ get_centroid(cur, -1, get_size(cur, -1) / 2);\n    v[centroid] = true;\n   \
     \ for (auto &dst : g[centroid]) {\n      if (!v[dst]) {\n        int nxt = build_dfs(dst);\n\
     \        if (centroid != nxt) tree[centroid].emplace_back(nxt);\n      }\n   \
-    \ }\n    v[centroid] = false;\n    return centroid;\n  }\n};\n#line 7 \"tree/frequency-table-of-tree-distance.hpp\"\
-    \n\ntemplate <typename G>\nstruct FrequencyTableOfTreeDistance : CentroidDecomposition<G>\
-    \ {\n  using CentroidDecomposition<G>::g;\n  using CentroidDecomposition<G>::v;\n\
-    \  using CentroidDecomposition<G>::get_size;\n  using CentroidDecomposition<G>::get_centroid;\n\
-    \n  FrequencyTableOfTreeDistance(const G &g)\n      : CentroidDecomposition<G>(g,\
-    \ false) {}\n\n  vector<long long> count, self;\n\n  void dfs_depth(int cur, int\
-    \ par, int d) {\n    while ((int)count.size() <= d) count.emplace_back(0);\n \
-    \   while ((int)self.size() <= d) self.emplace_back(0);\n    ++count[d];\n   \
-    \ ++self[d];\n    for (int dst : g[cur]) {\n      if (par == dst || v[dst]) continue;\n\
-    \      dfs_depth(dst, cur, d + 1);\n    }\n  };\n\n  vector<long long> get(int\
-    \ start = 0) {\n    queue<int> Q;\n    int root = get_centroid(start, -1, get_size(start,\
-    \ -1) / 2);\n    Q.push(root);\n    vector<long long> ans;\n    ans.reserve(g.size());\n\
-    \    count.reserve(g.size());\n    self.reserve(g.size());\n\n    while (!Q.empty())\
-    \ {\n      int r = Q.front();\n      Q.pop();\n      count.clear();\n      v[r]\
-    \ = 1;\n      for (auto &c : g[r]) {\n        if (v[c]) continue;\n        self.clear();\n\
-    \        Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));\n        dfs_depth(c,\
-    \ r, 1);\n        auto self2 = ArbitraryNTT::multiply_u128(self, self);\n    \
-    \    while (self2.size() > ans.size()) ans.emplace_back(0);\n        for (int\
-    \ i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];\n      }\n      if (count.empty())\
-    \ continue;\n      ++count[0];\n      auto count2 = ArbitraryNTT::multiply_u128(count,\
+    \ }\n    v[centroid] = false;\n    return centroid;\n  }\n};\n\n/**\n * @brief\
+    \ Centroid Decomposition\n * @docs docs/tree/centroid-decomposition.md\n */\n\
+    #line 7 \"tree/frequency-table-of-tree-distance.hpp\"\n\ntemplate <typename G>\n\
+    struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {\n  using CentroidDecomposition<G>::g;\n\
+    \  using CentroidDecomposition<G>::v;\n  using CentroidDecomposition<G>::get_size;\n\
+    \  using CentroidDecomposition<G>::get_centroid;\n\n  FrequencyTableOfTreeDistance(const\
+    \ G &g)\n      : CentroidDecomposition<G>(g, false) {}\n\n  vector<long long>\
+    \ count, self;\n\n  void dfs_depth(int cur, int par, int d) {\n    while ((int)count.size()\
+    \ <= d) count.emplace_back(0);\n    while ((int)self.size() <= d) self.emplace_back(0);\n\
+    \    ++count[d];\n    ++self[d];\n    for (int dst : g[cur]) {\n      if (par\
+    \ == dst || v[dst]) continue;\n      dfs_depth(dst, cur, d + 1);\n    }\n  };\n\
+    \n  vector<long long> get(int start = 0) {\n    queue<int> Q;\n    int root =\
+    \ get_centroid(start, -1, get_size(start, -1) / 2);\n    Q.push(root);\n    vector<long\
+    \ long> ans;\n    ans.reserve(g.size());\n    count.reserve(g.size());\n    self.reserve(g.size());\n\
+    \n    while (!Q.empty()) {\n      int r = Q.front();\n      Q.pop();\n      count.clear();\n\
+    \      v[r] = 1;\n      for (auto &c : g[r]) {\n        if (v[c]) continue;\n\
+    \        self.clear();\n        Q.emplace(get_centroid(c, -1, get_size(c, -1)\
+    \ / 2));\n        dfs_depth(c, r, 1);\n        auto self2 = ArbitraryNTT::multiply_u128(self,\
+    \ self);\n        while (self2.size() > ans.size()) ans.emplace_back(0);\n   \
+    \     for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];\n      }\n\
+    \      if (count.empty()) continue;\n      ++count[0];\n      auto count2 = ArbitraryNTT::multiply_u128(count,\
     \ count);\n      while (count2.size() > ans.size()) ans.emplace_back(0);\n   \
     \   for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];\n    }\n\
     \n    for (auto &x : ans) x >>= 1;\n    return ans;\n  }\n};\n\n/**\n * @brief\
@@ -516,7 +517,7 @@ data:
   isVerificationFile: false
   path: tree/frequency-table-of-tree-distance.hpp
   requiredBy: []
-  timestamp: '2020-11-27 00:47:15+09:00'
+  timestamp: '2020-12-02 03:43:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp

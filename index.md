@@ -551,7 +551,7 @@ data:
       title: Cartesian Tree
     - icon: ':heavy_check_mark:'
       path: tree/centroid-decomposition.hpp
-      title: tree/centroid-decomposition.hpp
+      title: Centroid Decomposition
     - icon: ':warning:'
       path: tree/convert-rooted-tree.hpp
       title: tree/convert-rooted-tree.hpp

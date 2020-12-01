@@ -12,6 +12,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/tree/centroid-decomposition.md
+    document_title: Centroid Decomposition
     links: []
   bundledCode: "#line 2 \"tree/centroid-decomposition.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename G>\nstruct CentroidDecomposition {\n\
@@ -28,7 +30,8 @@ data:
     \ get_centroid(cur, -1, get_size(cur, -1) / 2);\n    v[centroid] = true;\n   \
     \ for (auto &dst : g[centroid]) {\n      if (!v[dst]) {\n        int nxt = build_dfs(dst);\n\
     \        if (centroid != nxt) tree[centroid].emplace_back(nxt);\n      }\n   \
-    \ }\n    v[centroid] = false;\n    return centroid;\n  }\n};\n"
+    \ }\n    v[centroid] = false;\n    return centroid;\n  }\n};\n\n/**\n * @brief\
+    \ Centroid Decomposition\n * @docs docs/tree/centroid-decomposition.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename G>\nstruct CentroidDecomposition {\n  const G &g;\n  vector<int> sub;\n\
     \  vector<bool> v;\n  vector<vector<int>> tree;\n  int root;\n\n  CentroidDecomposition(const\
@@ -43,13 +46,15 @@ data:
     \ cur) {\n    int centroid = get_centroid(cur, -1, get_size(cur, -1) / 2);\n \
     \   v[centroid] = true;\n    for (auto &dst : g[centroid]) {\n      if (!v[dst])\
     \ {\n        int nxt = build_dfs(dst);\n        if (centroid != nxt) tree[centroid].emplace_back(nxt);\n\
-    \      }\n    }\n    v[centroid] = false;\n    return centroid;\n  }\n};"
+    \      }\n    }\n    v[centroid] = false;\n    return centroid;\n  }\n};\n\n/**\n\
+    \ * @brief Centroid Decomposition\n * @docs docs/tree/centroid-decomposition.md\n\
+    \ */"
   dependsOn: []
   isVerificationFile: false
   path: tree/centroid-decomposition.hpp
   requiredBy:
   - tree/frequency-table-of-tree-distance.hpp
-  timestamp: '2020-08-11 00:13:26+09:00'
+  timestamp: '2020-12-02 03:43:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
@@ -58,5 +63,13 @@ layout: document
 redirect_from:
 - /library/tree/centroid-decomposition.hpp
 - /library/tree/centroid-decomposition.hpp.html
-title: tree/centroid-decomposition.hpp
+title: Centroid Decomposition
 ---
+## 重心分解
+
+#### 概要
+
+TODO
+
+#### 使い方
+
