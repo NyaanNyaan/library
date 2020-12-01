@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - icon: ':heavy_check_mark:'
@@ -37,7 +37,7 @@ data:
     path: verify/verify-yuki/yuki-1283.test.cpp
     title: verify/verify-yuki/yuki-1283.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -66,28 +66,26 @@ data:
     \ (x = y, true) : false;\n}\n\ntemplate <typename T>\nint lb(const vector<T> &v,\
     \ const T &a) {\n  return lower_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
     \ <typename T>\nint ub(const vector<T> &v, const T &a) {\n  return upper_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\n\ntemplate <typename T>\nint btw(T a, T x, T b) {\n\
-    \  return a <= x && x < b;\n}\n\ntemplate <typename T, typename U>\nT ceil(T a,\
-    \ U b) {\n  return (a + b - 1) / b;\n}\n\nconstexpr long long TEN(int n) {\n \
-    \ long long ret = 1, x = 10;\n  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x :\
-    \ 1);\n  return ret;\n}\n\ntemplate <typename T, typename U>\npair<T, U> mkp(const\
-    \ T &t, const U &u) {\n  return make_pair(t, u);\n}\n\ntemplate <typename T>\n\
-    vector<T> mkrui(const vector<T> &v, bool rev = false) {\n  vector<T> ret(v.size()\
-    \ + 1);\n  if (rev) {\n    for (int i = int(v.size()) - 1; i >= 0; i--) ret[i]\
-    \ = v[i] + ret[i + 1];\n  } else {\n    for (int i = 0; i < int(v.size()); i++)\
-    \ ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n};\n\ntemplate <typename T>\n\
-    vector<T> mkuni(const vector<T> &v) {\n  vector<T> ret(v);\n  sort(ret.begin(),\
-    \ ret.end());\n  ret.erase(unique(ret.begin(), ret.end()), ret.end());\n  return\
-    \ ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int N, F f) {\n  vector<int>\
-    \ ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord), end(ord), f);\n\
-    \  return ord;\n}\n\ntemplate <typename T>\nvector<T> reord(const vector<T> &v,\
-    \ const vector<T> &ord) {\n  int N = v.size();\n  vector<T> ret(N);\n  for (int\
-    \ i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return ret;\n};\n\ntemplate <typename\
-    \ T = int>\nvector<T> mkiota(int N) {\n  vector<T> ret(N);\n  iota(begin(ret),\
-    \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
-    \ &v, int max_val = -1) {\n  if (max_val < (int)v.size()) max_val = v.size() -\
-    \ 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i = 0; i < (int)v.size();\
-    \ i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace Nyaan\n"
+    \ end(v), a) - begin(v);\n}\n\nconstexpr long long TEN(int n) {\n  long long ret\
+    \ = 1, x = 10;\n  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return\
+    \ ret;\n}\n\ntemplate <typename T, typename U>\npair<T, U> mkp(const T &t, const\
+    \ U &u) {\n  return make_pair(t, u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const\
+    \ vector<T> &v, bool rev = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev)\
+    \ {\n    for (int i = int(v.size()) - 1; i >= 0; i--) ret[i] = v[i] + ret[i +\
+    \ 1];\n  } else {\n    for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i]\
+    \ + v[i];\n  }\n  return ret;\n};\n\ntemplate <typename T>\nvector<T> mkuni(const\
+    \ vector<T> &v) {\n  vector<T> ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(),\
+    \ ret.end()), ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int>\
+    \ mkord(int N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n\
+    \  sort(begin(ord), end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\n\
+    vector<T> reord(const vector<T> &v, const vector<T> &ord) {\n  int N = v.size();\n\
+    \  vector<T> ret(N);\n  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return\
+    \ ret;\n};\n\ntemplate <typename T = int>\nvector<T> mkiota(int N) {\n  vector<T>\
+    \ ret(N);\n  iota(begin(ret), end(ret), 0);\n  return ret;\n}\n\ntemplate <typename\
+    \ T>\nvector<int> mkinv(vector<T> &v, int max_val = -1) {\n  if (max_val < (int)v.size())\
+    \ max_val = v.size() - 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i =\
+    \ 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace\
+    \ Nyaan\n"
   code: "namespace Nyaan {\nusing ll = long long;\nusing i64 = long long;\nusing u64\
     \ = unsigned long long;\nusing i128 = __int128_t;\nusing u128 = __uint128_t;\n\
     \ntemplate <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV\
@@ -114,35 +112,32 @@ data:
     \ <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
     \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
     \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\n\
-    template <typename T>\nint btw(T a, T x, T b) {\n  return a <= x && x < b;\n}\n\
-    \ntemplate <typename T, typename U>\nT ceil(T a, U b) {\n  return (a + b - 1)\
-    \ / b;\n}\n\nconstexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n\
-    \  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate\
-    \ <typename T, typename U>\npair<T, U> mkp(const T &t, const U &u) {\n  return\
-    \ make_pair(t, u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const vector<T>\
-    \ &v, bool rev = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for\
-    \ (int i = int(v.size()) - 1; i >= 0; i--) ret[i] = v[i] + ret[i + 1];\n  } else\
-    \ {\n    for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n\
-    \  }\n  return ret;\n};\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T>\
-    \ &v) {\n  vector<T> ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(),\
-    \ ret.end()), ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int>\
-    \ mkord(int N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n\
-    \  sort(begin(ord), end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\n\
-    vector<T> reord(const vector<T> &v, const vector<T> &ord) {\n  int N = v.size();\n\
-    \  vector<T> ret(N);\n  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return\
-    \ ret;\n};\n\ntemplate <typename T = int>\nvector<T> mkiota(int N) {\n  vector<T>\
-    \ ret(N);\n  iota(begin(ret), end(ret), 0);\n  return ret;\n}\n\ntemplate <typename\
-    \ T>\nvector<int> mkinv(vector<T> &v, int max_val = -1) {\n  if (max_val < (int)v.size())\
-    \ max_val = v.size() - 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i =\
-    \ 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace\
-    \ Nyaan\n"
+    constexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n  for (; n; x\
+    \ *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate <typename\
+    \ T, typename U>\npair<T, U> mkp(const T &t, const U &u) {\n  return make_pair(t,\
+    \ u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const vector<T> &v, bool rev\
+    \ = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for (int i = int(v.size())\
+    \ - 1; i >= 0; i--) ret[i] = v[i] + ret[i + 1];\n  } else {\n    for (int i =\
+    \ 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n\
+    };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
+    \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
+    \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
+    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
+    \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<T> reord(const\
+    \ vector<T> &v, const vector<T> &ord) {\n  int N = v.size();\n  vector<T> ret(N);\n\
+    \  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return ret;\n};\n\ntemplate\
+    \ <typename T = int>\nvector<T> mkiota(int N) {\n  vector<T> ret(N);\n  iota(begin(ret),\
+    \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
+    \ &v, int max_val = -1) {\n  if (max_val < (int)v.size()) max_val = v.size() -\
+    \ 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i = 0; i < (int)v.size();\
+    \ i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace Nyaan\n"
   dependsOn: []
   isVerificationFile: false
   path: template/util.hpp
   requiredBy:
   - template/template.hpp
-  timestamp: '2020-11-30 18:57:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2020-12-01 11:28:23+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp

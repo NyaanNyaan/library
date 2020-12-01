@@ -1,54 +1,58 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
+    links:
+    - https://judge.yosupo.jp/problem/multipoint_evaluation
+  bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\n\
+    // \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n// bits\n#include <bits/stdc++.h>\n\n// utility\n#line\
     \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
     \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
@@ -76,30 +80,27 @@ data:
     \ (x = y, true) : false;\n}\n\ntemplate <typename T>\nint lb(const vector<T> &v,\
     \ const T &a) {\n  return lower_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
     \ <typename T>\nint ub(const vector<T> &v, const T &a) {\n  return upper_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\n\ntemplate <typename T>\nint btw(T a, T x, T b) {\n\
-    \  return a <= x && x < b;\n}\n\ntemplate <typename T, typename U>\nT ceil(T a,\
-    \ U b) {\n  return (a + b - 1) / b;\n}\n\nconstexpr long long TEN(int n) {\n \
-    \ long long ret = 1, x = 10;\n  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x :\
-    \ 1);\n  return ret;\n}\n\ntemplate <typename T, typename U>\npair<T, U> mkp(const\
-    \ T &t, const U &u) {\n  return make_pair(t, u);\n}\n\ntemplate <typename T>\n\
-    vector<T> mkrui(const vector<T> &v, bool rev = false) {\n  vector<T> ret(v.size()\
-    \ + 1);\n  if (rev) {\n    for (int i = int(v.size()) - 1; i >= 0; i--) ret[i]\
-    \ = v[i] + ret[i + 1];\n  } else {\n    for (int i = 0; i < int(v.size()); i++)\
-    \ ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n};\n\ntemplate <typename T>\n\
-    vector<T> mkuni(const vector<T> &v) {\n  vector<T> ret(v);\n  sort(ret.begin(),\
-    \ ret.end());\n  ret.erase(unique(ret.begin(), ret.end()), ret.end());\n  return\
-    \ ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int N, F f) {\n  vector<int>\
-    \ ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord), end(ord), f);\n\
-    \  return ord;\n}\n\ntemplate <typename T>\nvector<T> reord(const vector<T> &v,\
-    \ const vector<T> &ord) {\n  int N = v.size();\n  vector<T> ret(N);\n  for (int\
-    \ i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return ret;\n};\n\ntemplate <typename\
-    \ T = int>\nvector<T> mkiota(int N) {\n  vector<T> ret(N);\n  iota(begin(ret),\
-    \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
-    \ &v, int max_val = -1) {\n  if (max_val < (int)v.size()) max_val = v.size() -\
-    \ 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i = 0; i < (int)v.size();\
-    \ i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace Nyaan\n#line 12 \"\
-    template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\n\
-    namespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ end(v), a) - begin(v);\n}\n\nconstexpr long long TEN(int n) {\n  long long ret\
+    \ = 1, x = 10;\n  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return\
+    \ ret;\n}\n\ntemplate <typename T, typename U>\npair<T, U> mkp(const T &t, const\
+    \ U &u) {\n  return make_pair(t, u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const\
+    \ vector<T> &v, bool rev = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev)\
+    \ {\n    for (int i = int(v.size()) - 1; i >= 0; i--) ret[i] = v[i] + ret[i +\
+    \ 1];\n  } else {\n    for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i]\
+    \ + v[i];\n  }\n  return ret;\n};\n\ntemplate <typename T>\nvector<T> mkuni(const\
+    \ vector<T> &v) {\n  vector<T> ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(),\
+    \ ret.end()), ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int>\
+    \ mkord(int N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n\
+    \  sort(begin(ord), end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\n\
+    vector<T> reord(const vector<T> &v, const vector<T> &ord) {\n  int N = v.size();\n\
+    \  vector<T> ret(N);\n  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return\
+    \ ret;\n};\n\ntemplate <typename T = int>\nvector<T> mkiota(int N) {\n  vector<T>\
+    \ ret(N);\n  iota(begin(ret), end(ret), 0);\n  return ret;\n}\n\ntemplate <typename\
+    \ T>\nvector<int> mkinv(vector<T> &v, int max_val = -1) {\n  if (max_val < (int)v.size())\
+    \ max_val = v.size() - 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i =\
+    \ 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace\
+    \ Nyaan\n#line 12 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \nnamespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
     \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\n__attribute__((target(\"bmi\")))\
     \ inline int botbit(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n__attribute__((target(\"\
     bmi\"))) inline int ctz(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n\n__attribute__((target(\"\
@@ -127,8 +128,15 @@ data:
     \ {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
     \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
     \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 18 \"template/template.hpp\"\
-    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\nvoid dump(const\
-    \ char& t) { cerr << t; }\n\nvoid dump(const string& t) { cerr << t; }\n\ntemplate\
+    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
+    \ <typename U, typename = void>\nstruct is_specialize : false_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<\n    U, typename conditional<false, typename\
+    \ U::iterator, void>::type>\n    : true_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, decltype(U::first), void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value,\
+    \ void>> : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid\
+    \ dump(const string& t) { cerr << t; }\n\ntemplate <typename U,\n          enable_if_t<!is_specialize<U>::value,\
+    \ nullptr_t> = nullptr>\nvoid dump(const U& t) {\n  cerr << t;\n}\n\ntemplate\
     \ <typename T>\nvoid dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr)\
     \ {\n  string res;\n  if (t == Nyaan::inf) res = \"inf\";\n  if (is_signed<T>::value)\n\
     \    if (t == -Nyaan::inf) res = \"-inf\";\n  if (sizeof(T) == 8) {\n    if (t\
@@ -171,7 +179,7 @@ data:
     \        \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n\
     \    return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\n//\n#line 3 \"\
+    \ 4 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\n//\n#line 3 \"\
     fps/ntt-friendly-fps.hpp\"\nusing namespace std;\n\n#line 3 \"ntt/ntt-avx2.hpp\"\
     \nusing namespace std;\n\n#line 3 \"modint/simd-montgomery.hpp\"\nusing namespace\
     \ std;\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
@@ -680,7 +688,7 @@ data:
     \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
     \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
     \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 6 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
+    \ - 1, r);\n  }\n};\n#line 8 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\n// #include \"fps/arbitrary-fps.hpp\"\
     \n// using mint = LazyMontgomeryModInt<1000000007>;\nBinomial<mint> C;\nusing\
     \ vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
@@ -706,10 +714,11 @@ data:
     \ buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= f[j];\n    tmp.intt();\n\
     \    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n  };\n\
     \  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint Evaluation(\u9AD8\
-    \u901F\u5316\u7248)\n */\n#line 14 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
+    \u901F\u5316\u7248)\n */\n#line 16 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
     \n//\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(n, m);\n  fps a(n);\n\
     \  in(a);\n  vm xs(m);\n  in(xs);\n  out(FastMultiEval(a, xs));\n}\n"
-  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\
+    \n// \n#include \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\n// #include \"fps/arbitrary-fps.hpp\"\
     \n// using mint = LazyMontgomeryModInt<1000000007>;\nBinomial<mint> C;\nusing\
@@ -734,8 +743,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   requiredBy: []
-  timestamp: '2020-12-01 01:27:24+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-01 11:28:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
 layout: document

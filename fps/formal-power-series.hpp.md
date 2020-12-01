@@ -8,10 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/differential-equation.hpp
     title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':warning:'
-    path: fps/famous-series.hpp
-    title: fps/famous-series.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
   - icon: ':heavy_check_mark:'
@@ -24,6 +21,9 @@ data:
     path: fps/fps-composition.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
+  - icon: ':warning:'
+    path: fps/fps-famous-series.hpp
+    title: fps/fps-famous-series.hpp
   - icon: ':heavy_check_mark:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
@@ -36,7 +36,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/nth-term.hpp
     title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
@@ -92,7 +92,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-log.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - icon: ':heavy_check_mark:'
@@ -135,7 +135,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/fps/formal-power-series.md
     document_title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
@@ -276,7 +276,6 @@ data:
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - modulo/strassen.hpp
-  - fps/famous-series.hpp
   - fps/arbitrary-fps.hpp
   - fps/fps-composition.hpp
   - fps/kitamasa.hpp
@@ -285,6 +284,7 @@ data:
   - fps/utility.hpp
   - fps/fps-composition-fast.hpp
   - fps/multipoint-evaluation.hpp
+  - fps/fps-famous-series.hpp
   - fps/polynomial-interpolation.hpp
   - fps/differential-equation.hpp
   - fps/ntt-friendly-fps.hpp
@@ -293,7 +293,7 @@ data:
   - fps/fps-sqrt.hpp
   - fps/nth-term.hpp
   timestamp: '2020-08-21 15:57:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp

@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/square-root-decomposition.hpp
     title: "\u5E73\u65B9\u5206\u5272"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   _extendedRequiredBy: []

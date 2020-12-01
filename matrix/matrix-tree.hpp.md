@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
@@ -55,19 +55,19 @@ data:
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
     \ (Matrix(*this) ^= k); }\n\n  friend ostream &operator<<(ostream &os, const Matrix\
     \ &p) {\n    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n  \
-    \    os << \"[\";\n      for (int j = 0; j < m; j++) {\n        os << p[i][j]\
-    \ << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\
-    \n  T determinant() const {\n    Matrix B(*this);\n    assert(H() == W());\n \
-    \   T ret = 1;\n    for (int i = 0; i < H(); i++) {\n      int idx = -1;\n   \
-    \   for (int j = i; j < W(); j++) {\n        if (B[j][i] != 0) {\n          idx\
-    \ = j;\n          break;\n        }\n      }\n      if (idx == -1) return 0;\n\
-    \      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i], B[idx]);\n \
-    \     }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n      for (int\
-    \ j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n      for (int j =\
-    \ i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a == 0) continue;\n\
-    \        for (int k = i; k < W(); k++) {\n          B[j][k] -= B[i][k] * a;\n\
-    \        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n * @brief \u884C\u5217\
-    \u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 3 \"matrix/polynomial-matrix-determinant.hpp\"\
+    \     os << (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++)\
+    \ {\n        os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n\
+    \    return (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n  \
+    \  assert(H() == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n\
+    \      int idx = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i]\
+    \ != 0) {\n          idx = j;\n          break;\n        }\n      }\n      if\
+    \ (idx == -1) return 0;\n      if (i != idx) {\n        ret *= T(-1);\n      \
+    \  swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n\
+    \      for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n   \
+    \   for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a\
+    \ == 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k]\
+    \ -= B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n\
+    \ * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 3 \"matrix/polynomial-matrix-determinant.hpp\"\
     \nusing namespace std;\n\n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace\
     \ std;\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
     \  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
@@ -232,7 +232,7 @@ data:
   isVerificationFile: false
   path: matrix/matrix-tree.hpp
   requiredBy: []
-  timestamp: '2020-12-01 01:27:24+09:00'
+  timestamp: '2020-12-01 11:28:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp

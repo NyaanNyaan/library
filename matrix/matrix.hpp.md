@@ -11,6 +11,9 @@ data:
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/debug.test.cpp
+    title: verify/verify-unit-test/debug.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
@@ -45,19 +48,19 @@ data:
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
     \ (Matrix(*this) ^= k); }\n\n  friend ostream &operator<<(ostream &os, const Matrix\
     \ &p) {\n    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n  \
-    \    os << \"[\";\n      for (int j = 0; j < m; j++) {\n        os << p[i][j]\
-    \ << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\
-    \n  T determinant() const {\n    Matrix B(*this);\n    assert(H() == W());\n \
-    \   T ret = 1;\n    for (int i = 0; i < H(); i++) {\n      int idx = -1;\n   \
-    \   for (int j = i; j < W(); j++) {\n        if (B[j][i] != 0) {\n          idx\
-    \ = j;\n          break;\n        }\n      }\n      if (idx == -1) return 0;\n\
-    \      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i], B[idx]);\n \
-    \     }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n      for (int\
-    \ j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n      for (int j =\
-    \ i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a == 0) continue;\n\
-    \        for (int k = i; k < W(); k++) {\n          B[j][k] -= B[i][k] * a;\n\
-    \        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n * @brief \u884C\u5217\
-    \u30E9\u30A4\u30D6\u30E9\u30EA\n */\n"
+    \     os << (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++)\
+    \ {\n        os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n\
+    \    return (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n  \
+    \  assert(H() == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n\
+    \      int idx = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i]\
+    \ != 0) {\n          idx = j;\n          break;\n        }\n      }\n      if\
+    \ (idx == -1) return 0;\n      if (i != idx) {\n        ret *= T(-1);\n      \
+    \  swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n\
+    \      for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n   \
+    \   for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a\
+    \ == 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k]\
+    \ -= B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n\
+    \ * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n\
     \  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
@@ -84,28 +87,29 @@ data:
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
     \ (Matrix(*this) ^= k); }\n\n  friend ostream &operator<<(ostream &os, const Matrix\
     \ &p) {\n    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n  \
-    \    os << \"[\";\n      for (int j = 0; j < m; j++) {\n        os << p[i][j]\
-    \ << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\
-    \n  T determinant() const {\n    Matrix B(*this);\n    assert(H() == W());\n \
-    \   T ret = 1;\n    for (int i = 0; i < H(); i++) {\n      int idx = -1;\n   \
-    \   for (int j = i; j < W(); j++) {\n        if (B[j][i] != 0) {\n          idx\
-    \ = j;\n          break;\n        }\n      }\n      if (idx == -1) return 0;\n\
-    \      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i], B[idx]);\n \
-    \     }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n      for (int\
-    \ j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n      for (int j =\
-    \ i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a == 0) continue;\n\
-    \        for (int k = i; k < W(); k++) {\n          B[j][k] -= B[i][k] * a;\n\
-    \        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n * @brief \u884C\u5217\
-    \u30E9\u30A4\u30D6\u30E9\u30EA\n */\n"
+    \     os << (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++)\
+    \ {\n        os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n\
+    \    return (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n  \
+    \  assert(H() == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n\
+    \      int idx = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i]\
+    \ != 0) {\n          idx = j;\n          break;\n        }\n      }\n      if\
+    \ (idx == -1) return 0;\n      if (i != idx) {\n        ret *= T(-1);\n      \
+    \  swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n\
+    \      for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n   \
+    \   for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a\
+    \ == 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k]\
+    \ -= B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n\
+    \ * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: matrix/matrix.hpp
   requiredBy:
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
-  timestamp: '2020-11-28 01:47:19+09:00'
+  timestamp: '2020-12-01 11:28:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/debug.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document

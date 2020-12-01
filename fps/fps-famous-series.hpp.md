@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
@@ -98,28 +98,28 @@ data:
     \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
     \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
     \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 4 \"fps/famous-series.hpp\"\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> Stirling1st(int N, Binomial<mint> &C) {\n  using fps =\
-    \ FormalPowerSeries<mint>;\n  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n\
-    \  fps f = {0, 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n\
-    \    f *= TaylorShift(f, mint(n >> 1), C);\n    if (n & 1) f = (f << 1) + f *\
-    \ (n - 1);\n  }\n  return f;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ Stirling2nd(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  fps f(N + 1), g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N)\
-    \ * C.finv(i);\n    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f\
-    \ * g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> BernoulliEGF(int\
-    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  for (int i = 0; i <= N; i++) f[i] = C.finv(i + 1);\n  return f.inv(N\
-    \ + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Partition(int\
-    \ N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
-    \ 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long k1 = 1LL *\
-    \ k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) / 2;\n    if\
-    \ (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n    if (k2 <=\
-    \ N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\ntemplate <typename\
-    \ mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return {0};\n  if (N ==\
-    \ 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] = 1;\n  mint coeff\
-    \ = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] = (f[i - 1] + f[i -\
-    \ 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n"
+    \ - 1, r);\n  }\n};\n#line 4 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename\
+    \ mint>\nFormalPowerSeries<mint> Stirling1st(int N, Binomial<mint> &C) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  if (N <= 0) return fps{1};\n  int lg = 31\
+    \ - __builtin_clz(N);\n  fps f = {0, 1};\n  for (int i = lg - 1; i >= 0; i--)\
+    \ {\n    int n = N >> i;\n    f *= TaylorShift(f, mint(n >> 1), C);\n    if (n\
+    \ & 1) f = (f << 1) + f * (n - 1);\n  }\n  return f;\n}\n\ntemplate <typename\
+    \ mint>\nFormalPowerSeries<mint> Stirling2nd(int N, Binomial<mint> &C) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  fps f(N + 1), g(N + 1);\n  for (int i = 0;\
+    \ i <= N; i++) {\n    f[i] = mint(i).pow(N) * C.finv(i);\n    g[i] = (i & 1) ?\
+    \ -C.finv(i) : C.finv(i);\n  }\n  return (f * g).pre(N + 1);\n}\n\ntemplate <typename\
+    \ mint>\nFormalPowerSeries<mint> BernoulliEGF(int N, Binomial<mint> &C) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  for (int i = 0; i <= N; i++)\
+    \ f[i] = C.finv(i + 1);\n  return f.inv(N + 1);\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> Partition(int N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  fps f(N + 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long\
+    \ k1 = 1LL * k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) /\
+    \ 2;\n    if (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n\
+    \    if (k2 <= N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\n\
+    template <typename mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return\
+    \ {0};\n  if (N == 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] =\
+    \ 1;\n  mint coeff = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] =\
+    \ (f[i - 1] + f[i - 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n"
   code: "#pragma once\n#include \"./formal-power-series.hpp\"\n#include \"../modulo/binomial.hpp\"\
     \n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling1st(int N, Binomial<mint>\
     \ &C) {\n  using fps = FormalPowerSeries<mint>;\n  if (N <= 0) return fps{1};\n\
@@ -141,20 +141,20 @@ data:
     template <typename mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return\
     \ {0};\n  if (N == 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] =\
     \ 1;\n  mint coeff = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] =\
-    \ (f[i - 1] + f[i - 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};"
+    \ (f[i - 1] + f[i - 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n"
   dependsOn:
   - fps/formal-power-series.hpp
   - modulo/binomial.hpp
   isVerificationFile: false
-  path: fps/famous-series.hpp
+  path: fps/fps-famous-series.hpp
   requiredBy: []
-  timestamp: '2020-10-11 00:26:38+09:00'
+  timestamp: '2020-12-01 11:28:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: fps/famous-series.hpp
+documentation_of: fps/fps-famous-series.hpp
 layout: document
 redirect_from:
-- /library/fps/famous-series.hpp
-- /library/fps/famous-series.hpp.html
-title: fps/famous-series.hpp
+- /library/fps/fps-famous-series.hpp
+- /library/fps/fps-famous-series.hpp.html
+title: fps/fps-famous-series.hpp
 ---

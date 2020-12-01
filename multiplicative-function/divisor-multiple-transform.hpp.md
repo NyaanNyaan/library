@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: multiplicative-function/mf-famous-series.hpp
+    title: multiplicative-function/mf-famous-series.hpp
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
@@ -69,7 +72,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: multiplicative-function/divisor-multiple-transform.hpp
-  requiredBy: []
+  requiredBy:
+  - multiplicative-function/mf-famous-series.hpp
   timestamp: '2020-11-30 23:47:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -110,13 +110,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/differential-equation.hpp
       title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-    - icon: ':warning:'
-      path: fps/famous-series.hpp
-      title: fps/famous-series.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fast-multieval.hpp
       title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/formal-power-series.hpp
       title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
         \u30E9\u30EA"
@@ -130,6 +127,9 @@ data:
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
+    - icon: ':warning:'
+      path: fps/fps-famous-series.hpp
+      title: fps/fps-famous-series.hpp
     - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
@@ -145,7 +145,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/nth-term.hpp
       title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
@@ -336,15 +336,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
     - icon: ':heavy_check_mark:'
@@ -373,6 +373,9 @@ data:
     - icon: ':warning:'
       path: multiplicative-function/enamurate-multiplicative-function.hpp
       title: multiplicative-function/enamurate-multiplicative-function.hpp
+    - icon: ':warning:'
+      path: multiplicative-function/mf-famous-series.hpp
+      title: multiplicative-function/mf-famous-series.hpp
     - icon: ':heavy_check_mark:'
       path: multiplicative-function/prime-counting-faster.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
@@ -396,7 +399,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/cooley-turkey-ntt.hpp
       title: ntt/cooley-turkey-ntt.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
     - icon: ':heavy_check_mark:'
@@ -520,22 +523,22 @@ data:
       title: string/suffix-array.hpp
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -881,7 +884,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-log.test.cpp
       title: verify/verify-yosupo-fps/yosupo-log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
       title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     - icon: ':heavy_check_mark:'

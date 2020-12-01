@@ -116,7 +116,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 2 \"multiplicative-function/prime-counting-faster.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"multiplicative-function/prime-counting-faster.hpp\"\
     \nusing namespace std;\n\nnamespace PrimeCounting {\nusing i64 = long long;\n\
     static inline i64 my_div(i64 n, i64 p) { return double(n) / p; };\n\n__attribute__((target(\"\
     avx2\"), optimize(\"O3\", \"unroll-loops\"))) i64\nprime_counting(i64 N) {\n \
@@ -141,7 +141,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
   requiredBy: []
-  timestamp: '2020-11-30 23:47:25+09:00'
+  timestamp: '2020-12-01 11:28:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp

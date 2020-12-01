@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: fps/famous-series.hpp
-    title: fps/famous-series.hpp
   - icon: ':heavy_check_mark:'
     path: fps/fps-composition.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
+  - icon: ':warning:'
+    path: fps/fps-famous-series.hpp
+    title: fps/fps-famous-series.hpp
   - icon: ':heavy_check_mark:'
     path: fps/lagrange-interpolation-point.hpp
     title: fps/lagrange-interpolation-point.hpp
@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - icon: ':heavy_check_mark:'
@@ -53,7 +53,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modulo/binomial.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
@@ -102,14 +102,14 @@ data:
   isVerificationFile: false
   path: modulo/binomial.hpp
   requiredBy:
-  - fps/famous-series.hpp
   - fps/sum-of-exponential-times-poly.hpp
   - fps/fps-composition.hpp
   - fps/lagrange-interpolation-point.hpp
   - fps/utility.hpp
+  - fps/fps-famous-series.hpp
   - fps/taylor-shift.hpp
   timestamp: '2020-10-11 00:26:38+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
