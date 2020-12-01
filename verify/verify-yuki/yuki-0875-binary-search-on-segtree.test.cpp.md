@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
   _extendedRequiredBy: []
@@ -118,9 +118,9 @@ data:
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"segment-tree/segment-tree.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T, typename F>\nstruct SegmentTree\
     \ {\n  int size;\n  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree(F\
-    \ f_, const T &I_) : size(0), f(f_), I(I_) {}\n\n  SegmentTree(int N, F f_, const\
-    \ T &I_) : f(f_), I(I_) { init(N); }\n\n  SegmentTree(const vector<T> &v, F f,\
-    \ T I) : f(f), I(I) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
+    \ _f, const T &I_) : size(0), f(_f), I(I_) {}\n\n  SegmentTree(int N, F _f, const\
+    \ T &I_) : f(_f), I(I_) { init(N); }\n\n  SegmentTree(const vector<T> &v, F _f,\
+    \ T I_) : f(_f), I(I_) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
     \ i++) {\n      seg[i + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int\
     \ N) {\n    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2 * size,\
     \ I);\n  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void build()\
@@ -172,7 +172,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   requiredBy: []
-  timestamp: '2020-09-27 16:45:55+09:00'
+  timestamp: '2020-12-02 02:29:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp

@@ -23,6 +23,9 @@ data:
     title: fps/utility.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - icon: ':heavy_check_mark:'
@@ -116,6 +119,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp

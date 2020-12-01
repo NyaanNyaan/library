@@ -55,9 +55,6 @@ data:
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - icon: ':heavy_check_mark:'
@@ -241,7 +238,6 @@ data:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp

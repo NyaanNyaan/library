@@ -19,6 +19,9 @@ data:
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - icon: ':heavy_check_mark:'
@@ -140,6 +143,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp

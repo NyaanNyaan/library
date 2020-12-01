@@ -1,0 +1,38 @@
+---
+data:
+  _extendedDependsOn: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  _pathExtension: hpp
+  _verificationStatusIcon: ':heavy_check_mark:'
+  attributes:
+    document_title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
+    links: []
+  bundledCode: "#line 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\n\
+    struct Affine {\n  mint a, b;\n  Affine(mint _a = 1, mint _b = 0) : a(_a), b(_b)\
+    \ {}\n  mint operator()(mint x) { return a * x + b; }\n  friend Affine operator*(const\
+    \ Affine& l, const Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n\
+    \  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n */\n"
+  code: "#pragma once\n\ntemplate <typename mint>\nstruct Affine {\n  mint a, b;\n\
+    \  Affine(mint _a = 1, mint _b = 0) : a(_a), b(_b) {}\n  mint operator()(mint\
+    \ x) { return a * x + b; }\n  friend Affine operator*(const Affine& l, const Affine&\
+    \ r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n};\n\n/**\n * @brief\
+    \ \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n */\n"
+  dependsOn: []
+  isVerificationFile: false
+  path: math/affine-transformation.hpp
+  requiredBy: []
+  timestamp: '2020-12-02 02:29:02+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+documentation_of: math/affine-transformation.hpp
+layout: document
+redirect_from:
+- /library/math/affine-transformation.hpp
+- /library/math/affine-transformation.hpp.html
+title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
+---

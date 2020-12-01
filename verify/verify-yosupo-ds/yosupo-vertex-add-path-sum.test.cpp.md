@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/heavy-light-decomposition.hpp
-    title: tree/heavy-light-decomposition.hpp
+    title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -124,9 +124,9 @@ data:
     \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"segment-tree/segment-tree.hpp\"\
     \nusing namespace std;\n\ntemplate <typename T, typename F>\nstruct SegmentTree\
     \ {\n  int size;\n  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree(F\
-    \ f_, const T &I_) : size(0), f(f_), I(I_) {}\n\n  SegmentTree(int N, F f_, const\
-    \ T &I_) : f(f_), I(I_) { init(N); }\n\n  SegmentTree(const vector<T> &v, F f,\
-    \ T I) : f(f), I(I) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
+    \ _f, const T &I_) : size(0), f(_f), I(I_) {}\n\n  SegmentTree(int N, F _f, const\
+    \ T &I_) : f(_f), I(I_) { init(N); }\n\n  SegmentTree(const vector<T> &v, F _f,\
+    \ T I_) : f(_f), I(I_) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
     \ i++) {\n      seg[i + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int\
     \ N) {\n    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2 * size,\
     \ I);\n  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void build()\
@@ -184,66 +184,56 @@ data:
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
     \ d;\n}\n#line 6 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename\
-    \ G>\nstruct HeavyLightDecomposition {\n  G& g;\n  int idx;\n  vector<int> size,\
-    \ depth, in, out, nxt, par;\n  HeavyLightDecomposition(G& g, int root = 0)\n \
-    \     : g(g),\n        idx(0),\n        size(g.size(), 0),\n        depth(g.size(),\
-    \ 0),\n        in(g.size(), -1),\n        out(g.size(), -1),\n        nxt(g.size(),\
-    \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
-    \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
-    \n  void dfs_sz(int cur) {\n    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n\
-    \      if (dst == par[cur]) {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n\
-    \          swap(g[cur][0], g[cur][1]);\n        else\n          continue;\n  \
-    \    }\n      depth[dst] = depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n\
+    \ G>\nstruct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n\
+    \    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur])\
+    \ {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n         \
+    \ swap(g[cur][0], g[cur][1]);\n        else\n          continue;\n      }\n  \
+    \    depth[dst] = depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n\
     \      size[cur] += size[dst];\n      if (size[dst] > size[g[cur][0]]) {\n   \
     \     swap(dst, g[cur][0]);\n      }\n    }\n  }\n\n  void dfs_hld(int cur) {\n\
-    \    in[cur] = idx++;\n    for (auto dst : g[cur]) {\n      if (dst == par[cur])\
+    \    down[cur] = id++;\n    for (auto dst : g[cur]) {\n      if (dst == par[cur])\
     \ continue;\n      nxt[dst] = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));\n\
-    \      dfs_hld(dst);\n    }\n    out[cur] = idx;\n  }\n\n  template <typename\
-    \ F>\n  void edge_query(int u, int v, const F& f) {\n    while (1) {\n      if\
-    \ (in[u] > in[v]) swap(u, v);\n      if (nxt[u] != nxt[v]) {\n        f(in[nxt[v]],\
-    \ in[v] + 1);\n        v = par[nxt[v]];\n      } else {\n        if (u != v) f(in[u]\
-    \ + 1, in[v] + 1);\n        break;\n      }\n    }\n  }\n\n  // TODO : verify\n\
-    \  template <typename F>\n  void uncommutable_edge_query(int u, int v, const F&\
-    \ f) {\n    while (1) {\n      if (nxt[u] != nxt[v]) {\n        if (in[u] > in[v])\
-    \ {\n          f(in[u] + 1, in[nxt[u]], true);\n          u = par[nxt[u]];\n \
-    \       } else {\n          f(in[nxt[v]], in[v] + 1, false);\n          v = par[nxt[v]];\n\
-    \        }\n      } else {\n        if (in[u] != in[v]) {\n          if (in[u]\
-    \ > in[v])\n            f(in[u] + 1, in[v] + 1, true);\n          else\n     \
-    \       f(in[u] + 1, in[v] + 1, true);\n        }\n        break;\n      }\n \
-    \   }\n  }\n\n  template <typename F>\n  void node_query(int u, int v, const F&\
-    \ f) {\n    while (1) {\n      if (in[u] > in[v]) swap(u, v);\n      if (nxt[u]\
-    \ != nxt[v]) {\n        f(in[nxt[v]], in[v] + 1);\n        v = par[nxt[v]];\n\
-    \      } else {\n        f(in[u], in[v] + 1);\n        break;\n      }\n    }\n\
-    \  }\n\n  template <typename F>\n  void uncommutable_node_query(int u, int v,\
-    \ const F& f) {\n    while (1) {\n      if (nxt[u] != nxt[v]) {\n        if (in[u]\
-    \ > in[v]) {\n          f(in[u] + 1, in[nxt[u]], true);\n          u = par[nxt[u]];\n\
-    \        } else {\n          f(in[nxt[v]], in[v] + 1, false);\n          v = par[nxt[v]];\n\
-    \        }\n      } else {\n        if (in[u] > in[v])\n          f(in[u] + 1,\
-    \ in[v], true);\n        else\n          f(in[u], in[v] + 1, true);\n        break;\n\
-    \      }\n    }\n  }\n\n  template <typename F>\n  void sub_edge_query(int u,\
-    \ const F& f) {\n    f(in[u] + 1, out[u]);\n  }\n\n  template <typename F>\n \
-    \ void sub_node_query(int u, const F& f) {\n    f(in[u], out[u]);\n  }\n\n  int\
-    \ lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (in[a] < in[b])\
-    \ swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] < depth[b] ?\
-    \ a : b;\n  }\n};\n#line 6 \"verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp\"\
+    \      dfs_hld(dst);\n    }\n    up[cur] = id;\n  }\n\n  // [u, v)\n  vector<pair<int,\
+    \ int>> ascend(int u, int v) const {\n    vector<pair<int, int>> res;\n    while\
+    \ (nxt[u] != nxt[v]) {\n      res.emplace_back(down[u], down[nxt[u]]);\n     \
+    \ u = par[nxt[u]];\n    }\n    if (u != v) res.emplace_back(down[u], down[v] +\
+    \ 1);\n    return res;\n  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int\
+    \ u, int v) const {\n    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return\
+    \ {{down[u] + 1, down[v]}};\n    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]],\
+    \ down[v]);\n    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int>\
+    \ size, depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root\
+    \ = 0)\n      : g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
+    \ 0),\n        down(g.size(), -1),\n        up(g.size(), -1),\n        nxt(g.size(),\
+    \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
+    \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
+    \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
+    \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
+    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a + 1,\
+    \ b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l,\
+    \ v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int u,\
+    \ bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n \
+    \ int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a] <\
+    \ down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] < depth[b]\
+    \ ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\u8EFD\u5206\
+    \u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp\"\
     \n\nvoid solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  auto g = graph(N, N\
     \ - 1, false, false);\n\n  HeavyLightDecomposition<vvi> hld(g);\n  auto f = [](ll\
     \ a, ll b) { return a + b; };\n  SegmentTree<ll, decltype(f)> seg(N, f, 0);\n\
-    \  rep(i, N) { seg.set(hld.in[i], a[i]); }\n  seg.build();\n\n  ll ans = 0;\n\
-    \  auto que = [&](int u, int v) { ans += seg.query(u, v); };\n\n  rep(_, Q) {\n\
-    \    ini(cmd, u, v);\n    if (cmd) {\n      ans = 0;\n      hld.node_query(u,\
-    \ v, que);\n      out(ans);\n    } else {\n      seg.add(hld.in[u], v);\n    }\n\
-    \  }\n}\n"
+    \  rep(i, N) { seg.set(hld.idx(i).first, a[i]); }\n  seg.build();\n\n  ll ans\
+    \ = 0;\n  auto que = [&](int u, int v) { ans += seg.query(u, v); };\n\n  rep(_,\
+    \ Q) {\n    ini(cmd, u, v);\n    if (cmd) {\n      ans = 0;\n      hld.path_query(u,\
+    \ v,true, que);\n      out(ans);\n    } else {\n      seg.add(hld.idx(u).first,\
+    \ v);\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\n\
     \n#include \"../../competitive-template.hpp\"\n#include \"../../segment-tree/segment-tree.hpp\"\
     \n#include \"../../tree/heavy-light-decomposition.hpp\"\n\nvoid solve() {\n  ini(N,\
     \ Q);\n  vl a(N);\n  in(a);\n  auto g = graph(N, N - 1, false, false);\n\n  HeavyLightDecomposition<vvi>\
     \ hld(g);\n  auto f = [](ll a, ll b) { return a + b; };\n  SegmentTree<ll, decltype(f)>\
-    \ seg(N, f, 0);\n  rep(i, N) { seg.set(hld.in[i], a[i]); }\n  seg.build();\n\n\
-    \  ll ans = 0;\n  auto que = [&](int u, int v) { ans += seg.query(u, v); };\n\n\
-    \  rep(_, Q) {\n    ini(cmd, u, v);\n    if (cmd) {\n      ans = 0;\n      hld.node_query(u,\
-    \ v, que);\n      out(ans);\n    } else {\n      seg.add(hld.in[u], v);\n    }\n\
-    \  }\n}"
+    \ seg(N, f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first, a[i]); }\n  seg.build();\n\
+    \n  ll ans = 0;\n  auto que = [&](int u, int v) { ans += seg.query(u, v); };\n\
+    \n  rep(_, Q) {\n    ini(cmd, u, v);\n    if (cmd) {\n      ans = 0;\n      hld.path_query(u,\
+    \ v,true, que);\n      out(ans);\n    } else {\n      seg.add(hld.idx(u).first,\
+    \ v);\n    }\n  }\n}"
   dependsOn:
   - competitive-template.hpp
   - segment-tree/segment-tree.hpp
@@ -252,8 +242,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-02 02:29:02+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
 layout: document

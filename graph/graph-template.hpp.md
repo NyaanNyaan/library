@@ -62,9 +62,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/euler-tour.hpp
     title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/heavy-light-decomposition.hpp
-    title: tree/heavy-light-decomposition.hpp
+    title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   - icon: ':heavy_check_mark:'
     path: tree/rerooting.hpp
     title: tree/rerooting.hpp
@@ -141,7 +141,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -193,7 +193,7 @@ data:
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph-template.hpp\"\n#include <bits/stdc++.h>\nusing\
@@ -282,7 +282,7 @@ data:
   - graph/two-edge-connected-components.hpp
   - graph/graph-utility.hpp
   timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp

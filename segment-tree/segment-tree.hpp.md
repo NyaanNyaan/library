@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -34,15 +34,15 @@ data:
     path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
     title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segment-tree/segment-tree.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename T, typename F>\nstruct SegmentTree\
     \ {\n  int size;\n  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree(F\
-    \ f_, const T &I_) : size(0), f(f_), I(I_) {}\n\n  SegmentTree(int N, F f_, const\
-    \ T &I_) : f(f_), I(I_) { init(N); }\n\n  SegmentTree(const vector<T> &v, F f,\
-    \ T I) : f(f), I(I) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
+    \ _f, const T &I_) : size(0), f(_f), I(I_) {}\n\n  SegmentTree(int N, F _f, const\
+    \ T &I_) : f(_f), I(I_) { init(N); }\n\n  SegmentTree(const vector<T> &v, F _f,\
+    \ T I_) : f(_f), I(I_) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
     \ i++) {\n      seg[i + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int\
     \ N) {\n    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2 * size,\
     \ I);\n  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void build()\
@@ -73,9 +73,9 @@ data:
     \ nxt;\n      }\n    }\n    return -1;\n  }\n};\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename T, typename F>\nstruct SegmentTree {\n  int size;\n  vector<T> seg;\n\
-    \  const F f;\n  const T I;\n\n  SegmentTree(F f_, const T &I_) : size(0), f(f_),\
-    \ I(I_) {}\n\n  SegmentTree(int N, F f_, const T &I_) : f(f_), I(I_) { init(N);\
-    \ }\n\n  SegmentTree(const vector<T> &v, F f, T I) : f(f), I(I) {\n    init(v.size());\n\
+    \  const F f;\n  const T I;\n\n  SegmentTree(F _f, const T &I_) : size(0), f(_f),\
+    \ I(I_) {}\n\n  SegmentTree(int N, F _f, const T &I_) : f(_f), I(I_) { init(N);\
+    \ }\n\n  SegmentTree(const vector<T> &v, F _f, T I_) : f(_f), I(I_) {\n    init(v.size());\n\
     \    for (int i = 0; i < (int)v.size(); i++) {\n      seg[i + size] = v[i];\n\
     \    }\n    build();\n  }\n\n  void init(int N) {\n    size = 1;\n    while (size\
     \ < N) size <<= 1;\n    seg.assign(2 * size, I);\n  }\n\n  void set(int k, T x)\
@@ -109,8 +109,8 @@ data:
   path: segment-tree/segment-tree.hpp
   requiredBy:
   - data-structure-2d/segment-tree-on-range-tree.hpp
-  timestamp: '2020-09-27 16:45:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-02 02:29:02+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp

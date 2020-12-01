@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy:
@@ -12,9 +12,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
@@ -126,7 +123,6 @@ data:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
 documentation_of: graph/graph-utility.hpp
 layout: document
