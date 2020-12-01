@@ -83,6 +83,20 @@ struct HeavyLightDecomposition {
   template <typename F>
   void path_query(int u, int v, bool vertex, const F& f) {
     int l = lca(u, v);
+    for (auto&& [a, b] : ascend(u, l)) {
+      int s = a + 1, t = b;
+      s > t ? f(t, s) : f(s, t);
+    }
+    if (vertex) f(down[l], down[l] + 1);
+    for (auto&& [a, b] : descend(l, v)) {
+      int s = a, t = b + 1;
+      s > t ? f(t, s) : f(s, t);
+    }
+  }
+
+  template <typename F>
+  void path_noncommutative_query(int u, int v, bool vertex, const F& f) {
+    int l = lca(u, v);
     for (auto&& [a, b] : ascend(u, l)) f(a + 1, b);
     if (vertex) f(down[l], down[l] + 1);
     for (auto&& [a, b] : descend(l, v)) f(a, b + 1);

@@ -49,7 +49,7 @@ void Nyaan::solve() {
         else
           ans = seg2.query(r, l)(ans);
       };
-      hld.path_query(x, y, true, f);
+      hld.path_noncommutative_query(x, y, true, f);
       out(ans);
     }
   }
