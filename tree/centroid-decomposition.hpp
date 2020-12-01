@@ -51,3 +51,8 @@ struct CentroidDecomposition {
     return centroid;
   }
 };
+
+/**
+ * @brief Centroid Decomposition
+ * @docs docs/tree/centroid-decomposition.md
+ */
