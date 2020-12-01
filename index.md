@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: competitive-template.hpp
       title: competitive-template.hpp
   - name: data-structure
@@ -182,7 +182,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dimension-expanded-graph.hpp
       title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/graph-template.hpp
       title: graph/graph-template.hpp
     - icon: ':heavy_check_mark:'
@@ -477,7 +477,7 @@ data:
     - icon: ':warning:'
       path: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
       title: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree.hpp
       title: segment-tree/segment-tree.hpp
   - name: shortest-path
@@ -564,7 +564,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/frequency-table-of-tree-distance.hpp
       title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/heavy-light-decomposition.hpp
       title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
     - icon: ':warning:'
@@ -840,7 +840,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     - icon: ':heavy_check_mark:'

@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
     path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
     title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segment-tree/segment-tree.hpp\"\n#include <bits/stdc++.h>\n\
@@ -110,7 +110,7 @@ data:
   requiredBy:
   - data-structure-2d/segment-tree-on-range-tree.hpp
   timestamp: '2020-12-02 02:29:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp

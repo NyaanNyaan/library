@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
   _extendedRequiredBy: []

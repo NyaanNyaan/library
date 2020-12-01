@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   - icon: ':heavy_check_mark:'
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
   - icon: ':heavy_check_mark:'
@@ -34,7 +34,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/heavy-light-decomposition.hpp
     title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   _extendedRequiredBy: []
@@ -195,13 +195,18 @@ data:
     \    dfs_hld(root);\n  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
     \  }\n\n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]);\
     \ }\n\n  template <typename F>\n  void path_query(int u, int v, bool vertex, const\
-    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
-    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
-    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
-    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
-    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n\
+    \      int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if\
+    \ (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n\
+    \      int s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n\
+    \  template <typename F>\n  void path_noncommutative_query(int u, int v, bool\
+    \ vertex, const F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u,\
+    \ l)) f(a + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&&\
+    \ [a, b] : descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void\
+    \ subtree_query(int u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex),\
+    \ up[u]);\n  }\n\n  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n\
+    \      if (down[a] < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n   \
+    \ return depth[a] < depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
     \ 13 \"verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp\"\n//\n\
     #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
@@ -343,8 +348,8 @@ data:
     \ af(y, z));\n      seg2.update(hld.idx(x).first, af(y, z));\n    } else {\n \
     \     mint ans = z;\n      auto f = [&](int l, int r) {\n        if (l <= r)\n\
     \          ans = seg1.query(l, r)(ans);\n        else\n          ans = seg2.query(r,\
-    \ l)(ans);\n      };\n      hld.path_query(x, y, true, f);\n      out(ans);\n\
-    \    }\n  }\n}\n"
+    \ l)(ans);\n      };\n      hld.path_noncommutative_query(x, y, true, f);\n  \
+    \    out(ans);\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
     using vm = vector<mint>;\nusing vvm = vector<vm>;\n#include \"../../modulo/binomial.hpp\"\
@@ -362,8 +367,8 @@ data:
     \ af(y, z));\n      seg2.update(hld.idx(x).first, af(y, z));\n    } else {\n \
     \     mint ans = z;\n      auto f = [&](int l, int r) {\n        if (l <= r)\n\
     \          ans = seg1.query(l, r)(ans);\n        else\n          ans = seg2.query(r,\
-    \ l)(ans);\n      };\n      hld.path_query(x, y, true, f);\n      out(ans);\n\
-    \    }\n  }\n}\n"
+    \ l)(ans);\n      };\n      hld.path_noncommutative_query(x, y, true, f);\n  \
+    \    out(ans);\n    }\n  }\n}\n"
   dependsOn:
   - modint/montgomery-modint.hpp
   - modulo/binomial.hpp
@@ -380,7 +385,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 02:29:02+09:00'
+  timestamp: '2020-12-02 03:24:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/heavy-light-decomposition.hpp
     title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   _extendedRequiredBy: []
@@ -208,21 +208,27 @@ data:
     \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
     \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
     \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
-    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a + 1,\
-    \ b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l,\
-    \ v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int u,\
-    \ bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n \
-    \ int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a] <\
-    \ down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] < depth[b]\
-    \ ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\u8EFD\u5206\
-    \u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line 7 \"verify/verify-aoj-grl/aoj-grl-5-d.test.cpp\"\
-    \nvoid solve() {\n  ini(N);\n  vvi g(N);\n  rep(i, N) {\n    ini(n);\n    g[i].resize(n);\n\
-    \    in(g[i]);\n  }\n\n  HeavyLightDecomposition<vvi> hld(g);\n  auto f = [](int\
-    \ a, int b) { return a + b; };\n  SegmentTree<int, decltype(f)> seg(N, f, 0);\n\
-    \  int ans = 0;\n  auto q = [&](int u, int v) { ans += seg.query(u, v); };\n\n\
-    \  ini(Q);\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(v, w);\n\
-    \      seg.add(hld.idx(v).first, w);\n    } else {\n      ini(v);\n      ans =\
-    \ 0;\n      hld.path_query(0, v,false, q);\n      out(ans);\n    }\n  }\n}\n"
+    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n   \
+    \   int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if (vertex)\
+    \ f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n      int\
+    \ s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n  template\
+    \ <typename F>\n  void path_noncommutative_query(int u, int v, bool vertex, const\
+    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
+    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
+    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
+    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
+    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
+    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
+    \ 7 \"verify/verify-aoj-grl/aoj-grl-5-d.test.cpp\"\nvoid solve() {\n  ini(N);\n\
+    \  vvi g(N);\n  rep(i, N) {\n    ini(n);\n    g[i].resize(n);\n    in(g[i]);\n\
+    \  }\n\n  HeavyLightDecomposition<vvi> hld(g);\n  auto f = [](int a, int b) {\
+    \ return a + b; };\n  SegmentTree<int, decltype(f)> seg(N, f, 0);\n  int ans =\
+    \ 0;\n  auto q = [&](int u, int v) { ans += seg.query(u, v); };\n\n  ini(Q);\n\
+    \  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(v, w);\n      seg.add(hld.idx(v).first,\
+    \ w);\n    } else {\n      ini(v);\n      ans = 0;\n      hld.path_query(0, v,false,\
+    \ q);\n      out(ans);\n    }\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_D\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../segment-tree/segment-tree.hpp\"\
     \n#include \"../../tree/heavy-light-decomposition.hpp\"\nvoid solve() {\n  ini(N);\n\
@@ -241,7 +247,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 02:29:02+09:00'
+  timestamp: '2020-12-02 03:24:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
@@ -18,7 +18,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -31,7 +31,7 @@ data:
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/tree/heavy-light-decomposition.md
     document_title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
@@ -90,14 +90,19 @@ data:
     \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
     \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
     \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
-    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a + 1,\
-    \ b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l,\
-    \ v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int u,\
-    \ bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n \
-    \ int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a] <\
-    \ down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] < depth[b]\
-    \ ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\u8EFD\u5206\
-    \u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n"
+    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n   \
+    \   int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if (vertex)\
+    \ f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n      int\
+    \ s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n  template\
+    \ <typename F>\n  void path_noncommutative_query(int u, int v, bool vertex, const\
+    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
+    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
+    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
+    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
+    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
+    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../graph/graph-template.hpp\"\n\ntemplate <typename G>\nstruct HeavyLightDecomposition\
     \ {\n private:\n  void dfs_sz(int cur) {\n    size[cur] = 1;\n    for (auto& dst\
@@ -123,21 +128,26 @@ data:
     \    dfs_hld(root);\n  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
     \  }\n\n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]);\
     \ }\n\n  template <typename F>\n  void path_query(int u, int v, bool vertex, const\
-    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
-    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
-    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
-    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
-    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n\
+    \      int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if\
+    \ (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n\
+    \      int s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n\
+    \  template <typename F>\n  void path_noncommutative_query(int u, int v, bool\
+    \ vertex, const F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u,\
+    \ l)) f(a + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&&\
+    \ [a, b] : descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void\
+    \ subtree_query(int u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex),\
+    \ up[u]);\n  }\n\n  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n\
+    \      if (down[a] < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n   \
+    \ return depth[a] < depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/heavy-light-decomposition.hpp
   requiredBy: []
-  timestamp: '2020-12-02 02:29:02+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2020-12-02 03:24:49+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
@@ -154,3 +164,19 @@ redirect_from:
 - /library/tree/heavy-light-decomposition.hpp.html
 title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
 ---
+## Heavy Light Decomposition(重軽分解)
+
+#### 概要
+
+Heavy Light Decomposition(重軽分解、HLDec)とは、木のパスをheavy pathとlight pathに分けて管理するデータ構造である。
+
+HLDecの特長は「任意のパスを$\rm{O}(\log N)$本の列に分解する」という点である。木をHLDecで管理することで木に対する問題を列に対する問題として処理することができるため、「パス上の頂点の持つ値を同時に更新する」といった木上のパスに関するクエリを容易に処理することが出来るようになる。
+
+#### 使い方
+
+- `HeavyLightDecomposition(g, root=0)`:`root`を根とした重軽分解を構築する。$\mathrm{O}(N)$
+- `idx(i)`: 頂点iのオイラーツアー順を`pair(down, up)`の形で返す。$\mathrm{O}(1)$
+- `path_query(u, v, vertex, f)`: **可換な**パスクエリを処理する。$\mathrm{O}(\log^2N)$
+- `path_noncommutative_query(u, v, vertex, f)`: **非可換な**パスクエリを処理する。$\mathrm{O}(\log^2N)$
+- `subtree_query(u, vertex, f)`: 部分木クエリを処理する。$\mathrm{O}(\log^N)$
+- `lca(u, v)`: uとvの最小共通祖先(LCA)を返す。$\mathrm{O}(\log^N)$

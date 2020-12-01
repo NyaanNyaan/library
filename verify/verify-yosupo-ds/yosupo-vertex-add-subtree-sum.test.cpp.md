@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/heavy-light-decomposition.hpp
     title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   _extendedRequiredBy: []
@@ -208,16 +208,22 @@ data:
     \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
     \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
     \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
-    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a + 1,\
-    \ b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l,\
-    \ v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int u,\
-    \ bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n \
-    \ int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a] <\
-    \ down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] < depth[b]\
-    \ ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\u8EFD\u5206\
-    \u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  vvi g(N);\n  rep1(u,\
-    \ N - 1) {\n    ini(v);\n    g[u].pb(v);\n    g[v].pb(u);\n  }\n\n  HeavyLightDecomposition<vvi>\
+    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n   \
+    \   int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if (vertex)\
+    \ f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n      int\
+    \ s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n  template\
+    \ <typename F>\n  void path_noncommutative_query(int u, int v, bool vertex, const\
+    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
+    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
+    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
+    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
+    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
+    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
+    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
+    \ 6 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp\"\n\nvoid\
+    \ solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  vvi g(N);\n  rep1(u, N - 1)\
+    \ {\n    ini(v);\n    g[u].pb(v);\n    g[v].pb(u);\n  }\n\n  HeavyLightDecomposition<vvi>\
     \ hld(g);\n  auto f = [](ll a, ll b) { return a + b; };\n  SegmentTree<ll, decltype(f)>\
     \ seg(N, f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first, a[i]); }\n  seg.build();\n\
     \n  ll ans = 0;\n  auto que = [&](int u, int v) { ans += seg.query(u, v); };\n\
@@ -243,7 +249,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 02:29:02+09:00'
+  timestamp: '2020-12-02 03:24:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
