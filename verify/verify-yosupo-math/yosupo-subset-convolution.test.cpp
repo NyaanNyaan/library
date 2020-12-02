@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/subset_convolution"
 
 #include "../../competitive-template.hpp"
-#include "../../math/subset-convolution.hpp"
+#include "../../set-function/subset-convolution.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
 

@@ -55,5 +55,5 @@ vector<mint> subset_convolution(const vector<mint>& a, const vector<mint>& b) {
 
 /**
  * @brief Subset Convolution
- * @docs docs/math/subset-convolution.md
+ * @docs docs/set-function/subset-convolution.md
  */
