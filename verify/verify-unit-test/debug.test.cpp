@@ -8,6 +8,8 @@
 using namespace Nyaan;
 
 void test() {
+
+  using DebugImpl::trace;
   // number
   {
     cerr << "number" << endl;

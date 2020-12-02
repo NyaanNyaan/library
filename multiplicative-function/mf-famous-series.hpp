@@ -11,3 +11,8 @@ static constexpr vector<T> mobius_function(int N) {
   divisor_transform::mobius_transform(a);
   return a;
 }
+
+/**
+ * @brief 有名な乗法的関数
+ * @docs docs/multiplicative-function/mf-famous-series.md
+ */
