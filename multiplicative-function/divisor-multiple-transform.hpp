@@ -22,18 +22,18 @@ struct divisor_transform {
 
   template <typename T>
   static void zeta_transform(map<long long, T> &a) {
-    for (auto &x : a)
-      for (auto &y : a) {
-        if (x == y) break;
-        if (x.first % y.first == 0) x.second += y.second;
+    for (auto p = rbegin(a); p != rend(a); p++)
+      for (auto &x : a) {
+        if (p->first == x.first) break;
+        if (p->first % x.first == 0) p->second += x.second;
       }
   }
   template <typename T>
   static void mobius_transform(map<long long, T> &a) {
     for (auto &x : a)
-      for (auto &y : a) {
-        if (x == y) break;
-        if (x.first % y.first == 0) x.second -= y.second;
+      for (auto p = rbegin(a); p != rend(a); p++) {
+        if (x.first == p->first) break;
+        if (p->first % x.first == 0) p->second -= x.second;
       }
   }
 };
@@ -67,3 +67,7 @@ struct multiple_transform {
         if (p2->first % p1->first == 0) p1->second -= p2->second;
   }
 };
+
+/**
+ * @brief 倍数変換・約数変換
+ */
