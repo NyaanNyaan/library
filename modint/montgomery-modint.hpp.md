@@ -142,6 +142,9 @@ data:
     path: verify/verify-yuki/yuki-0117.test.cpp
     title: verify/verify-yuki/yuki-0117.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0125.test.cpp
+    title: verify/verify-yuki/yuki-0125.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
   - icon: ':heavy_check_mark:'
@@ -150,6 +153,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0886.test.cpp
+    title: verify/verify-yuki/yuki-0886.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0890.test.cpp
+    title: verify/verify-yuki/yuki-0890.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0896.test.cpp
+    title: verify/verify-yuki/yuki-0896.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
@@ -281,15 +293,19 @@ data:
   - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
+  - verify/verify-yuki/yuki-0896.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp

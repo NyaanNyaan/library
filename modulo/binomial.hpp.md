@@ -44,6 +44,12 @@ data:
     path: verify/verify-yuki/yuki-0117.test.cpp
     title: verify/verify-yuki/yuki-0117.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0125.test.cpp
+    title: verify/verify-yuki/yuki-0125.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0890.test.cpp
+    title: verify/verify-yuki/yuki-0890.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
   - icon: ':heavy_check_mark:'
@@ -123,8 +129,10 @@ data:
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yuki/yuki-0125.test.cpp
 documentation_of: modulo/binomial.hpp
 layout: document
 redirect_from:

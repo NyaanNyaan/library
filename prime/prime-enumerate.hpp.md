@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/divisor-multiple-transform.hpp
-    title: multiplicative-function/divisor-multiple-transform.hpp
+    title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
+  - icon: ':heavy_check_mark:'
+    path: multiplicative-function/gcd-convolution.hpp
+    title: "GCD\u7573\u307F\u8FBC\u307F"
   - icon: ':warning:'
     path: multiplicative-function/mf-famous-series.hpp
     title: multiplicative-function/mf-famous-series.hpp
@@ -19,6 +22,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0125.test.cpp
+    title: verify/verify-yuki/yuki-0125.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0886.test.cpp
+    title: verify/verify-yuki/yuki-0886.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0890.test.cpp
+    title: verify/verify-yuki/yuki-0890.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0896.test.cpp
+    title: verify/verify-yuki/yuki-0896.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -47,12 +62,17 @@ data:
   requiredBy:
   - multiplicative-function/prime-counting-o2d3.hpp
   - multiplicative-function/mf-famous-series.hpp
+  - multiplicative-function/gcd-convolution.hpp
   - multiplicative-function/divisor-multiple-transform.hpp
   timestamp: '2020-09-18 02:20:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
+  - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-0896.test.cpp
+  - verify/verify-yuki/yuki-0125.test.cpp
 documentation_of: prime/prime-enumerate.hpp
 layout: document
 redirect_from:

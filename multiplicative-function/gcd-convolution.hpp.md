@@ -8,12 +8,16 @@ data:
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0886.test.cpp
+    title: verify/verify-yuki/yuki-0886.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: "GCD\u7573\u307F\u8FBC\u307F"
     links: []
-  bundledCode: "#line 2 \"multiplicative-function/mf-famous-series.hpp\"\n#include\
+  bundledCode: "#line 2 \"multiplicative-function/gcd-convolution.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"multiplicative-function/divisor-multiple-transform.hpp\"\
     \nusing namespace std;\n\n#line 3 \"prime/prime-enumerate.hpp\"\nusing namespace\
     \ std;\n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<int> prime_enumerate(int\
@@ -50,27 +54,33 @@ data:
     \ &a) {\n    for (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2\
     \ = rbegin(a); p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second\
     \ -= p2->second;\n  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\
-    \u6570\u5909\u63DB\n */\n#line 6 \"multiplicative-function/mf-famous-series.hpp\"\
-    \n\ntemplate <typename T>\nstatic constexpr vector<T> mobius_function(int N) {\n\
-    \  vector<T> a(N + 1, 0);\n  a[1] = 1;\n  divisor_transform::mobius_transform(a);\n\
-    \  return a;\n}\n"
+    \u6570\u5909\u63DB\n */\n#line 6 \"multiplicative-function/gcd-convolution.hpp\"\
+    \n\ntemplate <typename mint>\nvector<mint> gcd_convolution(const vector<mint>&\
+    \ a, const vector<mint>& b) {\n  assert(a.size() == b.size());\n  auto s = a,\
+    \ t = b;\n  multiple_transform::zeta_transform(s);\n  multiple_transform::zeta_transform(t);\n\
+    \  for (int i = 0; i < (int)a.size(); i++) s[i] *= t[i];\n  multiple_transform::mobius_transform(s);\n\
+    \  return s;\n}\n\n/**\n * @brief GCD\u7573\u307F\u8FBC\u307F\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"divisor-multiple-transform.hpp\"\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> mobius_function(int N) {\n  vector<T> a(N + 1, 0);\n  a[1] = 1;\n\
-    \  divisor_transform::mobius_transform(a);\n  return a;\n}\n"
+    \ \"divisor-multiple-transform.hpp\"\n\ntemplate <typename mint>\nvector<mint>\
+    \ gcd_convolution(const vector<mint>& a, const vector<mint>& b) {\n  assert(a.size()\
+    \ == b.size());\n  auto s = a, t = b;\n  multiple_transform::zeta_transform(s);\n\
+    \  multiple_transform::zeta_transform(t);\n  for (int i = 0; i < (int)a.size();\
+    \ i++) s[i] *= t[i];\n  multiple_transform::mobius_transform(s);\n  return s;\n\
+    }\n\n/**\n * @brief GCD\u7573\u307F\u8FBC\u307F\n */\n"
   dependsOn:
   - multiplicative-function/divisor-multiple-transform.hpp
   - prime/prime-enumerate.hpp
   isVerificationFile: false
-  path: multiplicative-function/mf-famous-series.hpp
+  path: multiplicative-function/gcd-convolution.hpp
   requiredBy: []
   timestamp: '2020-12-02 14:41:33+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
-documentation_of: multiplicative-function/mf-famous-series.hpp
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yuki/yuki-0886.test.cpp
+documentation_of: multiplicative-function/gcd-convolution.hpp
 layout: document
 redirect_from:
-- /library/multiplicative-function/mf-famous-series.hpp
-- /library/multiplicative-function/mf-famous-series.hpp.html
-title: multiplicative-function/mf-famous-series.hpp
+- /library/multiplicative-function/gcd-convolution.hpp
+- /library/multiplicative-function/gcd-convolution.hpp.html
+title: "GCD\u7573\u307F\u8FBC\u307F"
 ---

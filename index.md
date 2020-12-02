@@ -361,12 +361,15 @@ data:
       title: tetration
   - name: multiplicative-function
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/divisor-multiple-transform.hpp
-      title: multiplicative-function/divisor-multiple-transform.hpp
+      title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
     - icon: ':warning:'
       path: multiplicative-function/enamurate-multiplicative-function.hpp
       title: multiplicative-function/enamurate-multiplicative-function.hpp
+    - icon: ':heavy_check_mark:'
+      path: multiplicative-function/gcd-convolution.hpp
+      title: "GCD\u7573\u307F\u8FBC\u307F"
     - icon: ':warning:'
       path: multiplicative-function/mf-famous-series.hpp
       title: multiplicative-function/mf-famous-series.hpp
@@ -1091,6 +1094,9 @@ data:
       path: verify/verify-yuki/yuki-0117.test.cpp
       title: verify/verify-yuki/yuki-0117.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0125.test.cpp
+      title: verify/verify-yuki/yuki-0125.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0214.test.cpp
       title: verify/verify-yuki/yuki-0214.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1108,6 +1114,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
       title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0886.test.cpp
+      title: verify/verify-yuki/yuki-0886.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0890.test.cpp
+      title: verify/verify-yuki/yuki-0890.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0896.test.cpp
+      title: verify/verify-yuki/yuki-0896.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0963-circular.test.cpp
       title: verify/verify-yuki/yuki-0963-circular.test.cpp
