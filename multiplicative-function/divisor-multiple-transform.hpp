@@ -56,9 +56,9 @@ struct multiple_transform {
 
   template <typename T>
   static void zeta_transform(map<long long, T> &a) {
-    for (auto p1 = rbegin(a); p1 != rend(a); p1++)
-      for (auto p2 = rbegin(a); p2 != p1; p2++)
-        if (p2->first % p1->first == 0) p1->second += p2->second;
+    for (auto &x : a)
+      for (auto p = rbegin(a); p->first != x.first; p++)
+        if (p->first % x.first == 0) x.second += p->second;
   }
   template <typename T>
   static void mobius_transform(map<long long, T> &a) {
@@ -70,4 +70,5 @@ struct multiple_transform {
 
 /**
  * @brief 倍数変換・約数変換
+ * @docs docs/multiplicative-function/divisor-multiple-transform.md
  */

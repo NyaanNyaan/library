@@ -83,8 +83,6 @@ void trace(Head&& head, Tail&&... tail) {
 
 }  // namespace DebugImpl
 
-using DebugImpl::trace;
-
 #ifdef NyaanDebug
 #define trc(...)                            \
   do {                                      \
