@@ -5,14 +5,14 @@ data:
     path: competitive-template.hpp
     title: competitive-template.hpp
   - icon: ':heavy_check_mark:'
-    path: math/subset-convolution.hpp
-    title: Subset Convolution
-  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: set-function/subset-convolution.hpp
+    title: Subset Convolution
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -121,7 +121,7 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"math/subset-convolution.hpp\"\
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"set-function/subset-convolution.hpp\"\
     \nusing namespace std;\n\ntemplate <typename mint>\nvector<mint> subset_convolution(const\
     \ vector<mint>& a, const vector<mint>& b) {\n  int N = a.size();\n  assert(a.size()\
     \ == b.size() && (N & (N - 1)) == 0);\n  int l = __builtin_ctz(N);\n\n  auto conv\
@@ -143,49 +143,49 @@ data:
     \       // A[j] *= x\n        for (int k = l; k > d; --k) A[j][k] = A[j][k - 1];\n\
     \        A[j][0] = mint(0);\n      }\n    }\n  }\n\n  vector<mint> C(N);\n  for\
     \ (int i = 0; i < N; i++) C[i] = A[i][l];\n  return C;\n}\n\n/**\n * @brief Subset\
-    \ Convolution\n * @docs docs/math/subset-convolution.md\n */\n#line 3 \"misc/fastio.hpp\"\
-    \nusing namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\n\
-    char ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char\
-    \ num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++)\
-    \ {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4\
-    \ + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\
-    \ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir -\
-    \ pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline\
-    \ void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void\
-    \ rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x)\
-    \ {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while\
-    \ (c < '-');\n  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
-    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
-    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
-    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
-    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
-    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
-    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
-    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
-    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
-    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
-    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
-    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
-    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
-    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
-    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
-    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
-    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
-    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
-    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
-    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 3 \"modint/montgomery-modint.hpp\"\nusing namespace std;\n\ntemplate <uint32_t\
-    \ mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r\
-    \ * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"\
-    invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2\
-    \ == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr\
-    \ LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b % mod + mod)\
-    \ * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n    return (b +\
-    \ u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
+    \ Convolution\n * @docs docs/set-function/subset-convolution.md\n */\n#line 3\
+    \ \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\nstatic constexpr\
+    \ int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\
+    \nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int\
+    \ i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--)\
+    \ {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n\
+    \  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir\
+    \ - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n\
+    \  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por\
+    \ = 0;\n}\n\ninline void rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename\
+    \ T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n\
+    \    c = ibuf[pil++];\n  while (c < '-');\n  bool minus = 0;\n  if (c == '-')\
+    \ {\n    minus = 1;\n    c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n\
+    \    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if (minus) x = -x;\n\
+    }\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void\
+    \ rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void\
+    \ wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline void wt(T x)\
+    \ {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n    return;\n\
+    \  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n  }\n  int i = 12;\n\
+    \  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000)\
+    \ * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10)\
+    \ {\n      wt(char('0' + char(x)));\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      obuf[por + 0]\
+    \ = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n    }\n  } else\
+    \ {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x << 2) + 1, 3);\n\
+    \      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num + (x << 2), 4);\n\
+    \      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n  por\
+    \ += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void wt(Head head, Tail... tail) {\n  wt(head);\n  wt(tail...);\n}\ntemplate\
+    \ <typename T>\ninline void wtn(T x) {\n  wt(x, '\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::wt;\nusing fastio::wtn;\n#line 3 \"modint/montgomery-modint.hpp\"\
+    \nusing namespace std;\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
+    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
+    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
+    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
+    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
+    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
+    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
+    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
+    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
+    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
     \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
     \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
     \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
@@ -214,7 +214,7 @@ data:
     \ = n;\n  }\n  auto c = subset_convolution(a, b);\n  rep(i, 1 << N) {\n    if\
     \ (i) wt(' ');\n    wt(c[i].get());\n  }\n  wt('\\n');\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\n\n\
-    #include \"../../competitive-template.hpp\"\n#include \"../../math/subset-convolution.hpp\"\
+    #include \"../../competitive-template.hpp\"\n#include \"../../set-function/subset-convolution.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
     \n\nvoid solve() {\n  int N;\n  rd(N);\n  using mint = LazyMontgomeryModInt<998244353>;\n\
     \  using vm = V<mint>;\n  vm a(1 << N), b(1 << N);\n  int n;\n  rep(i, 1 << N)\
@@ -223,13 +223,13 @@ data:
     \ (i) wt(' ');\n    wt(c[i].get());\n  }\n  wt('\\n');\n}"
   dependsOn:
   - competitive-template.hpp
-  - math/subset-convolution.hpp
+  - set-function/subset-convolution.hpp
   - misc/fastio.hpp
   - modint/montgomery-modint.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   requiredBy: []
-  timestamp: '2020-09-15 23:09:15+09:00'
+  timestamp: '2020-12-02 11:16:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp

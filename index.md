@@ -264,20 +264,11 @@ data:
       path: math/semiring.hpp
       title: math/semiring.hpp
     - icon: ':heavy_check_mark:'
-      path: math/subset-convolution.hpp
-      title: Subset Convolution
-    - icon: ':heavy_check_mark:'
       path: math/sum_of_floor.hpp
       title: math/sum_of_floor.hpp
     - icon: ':heavy_check_mark:'
       path: math/two-sat.hpp
       title: 2-SAT
-    - icon: ':warning:'
-      path: math/walsh-hadamard-transform.hpp
-      title: math/walsh-hadamard-transform.hpp
-    - icon: ':warning:'
-      path: math/zeta-mobius-transform.hpp
-      title: math/zeta-mobius-transform.hpp
   - name: matrix
     pages:
     - icon: ':warning:'
@@ -480,6 +471,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree.hpp
       title: segment-tree/segment-tree.hpp
+  - name: set-function
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: set-function/subset-convolution.hpp
+      title: Subset Convolution
+    - icon: ':warning:'
+      path: set-function/walsh-hadamard-transform.hpp
+      title: set-function/walsh-hadamard-transform.hpp
+    - icon: ':warning:'
+      path: set-function/zeta-mobius-transform.hpp
+      title: set-function/zeta-mobius-transform.hpp
   - name: shortest-path
     pages:
     - icon: ':heavy_check_mark:'

@@ -9,10 +9,10 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/math/subset-convolution.md
+    _deprecated_at_docs: docs/set-function/subset-convolution.md
     document_title: Subset Convolution
     links: []
-  bundledCode: "#line 2 \"math/subset-convolution.hpp\"\n#include <bits/stdc++.h>\n\
+  bundledCode: "#line 2 \"set-function/subset-convolution.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\ntemplate <typename mint>\nvector<mint> subset_convolution(const\
     \ vector<mint>& a, const vector<mint>& b) {\n  int N = a.size();\n  assert(a.size()\
     \ == b.size() && (N & (N - 1)) == 0);\n  int l = __builtin_ctz(N);\n\n  auto conv\
@@ -34,7 +34,7 @@ data:
     \       // A[j] *= x\n        for (int k = l; k > d; --k) A[j][k] = A[j][k - 1];\n\
     \        A[j][0] = mint(0);\n      }\n    }\n  }\n\n  vector<mint> C(N);\n  for\
     \ (int i = 0; i < N; i++) C[i] = A[i][l];\n  return C;\n}\n\n/**\n * @brief Subset\
-    \ Convolution\n * @docs docs/math/subset-convolution.md\n */\n"
+    \ Convolution\n * @docs docs/set-function/subset-convolution.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename mint>\nvector<mint> subset_convolution(const vector<mint>& a, const\
     \ vector<mint>& b) {\n  int N = a.size();\n  assert(a.size() == b.size() && (N\
@@ -56,21 +56,21 @@ data:
     \ (int k = d; k <= l; k++) A[j + n][k] -= A[j][k];\n        // A[j] *= x\n   \
     \     for (int k = l; k > d; --k) A[j][k] = A[j][k - 1];\n        A[j][0] = mint(0);\n\
     \      }\n    }\n  }\n\n  vector<mint> C(N);\n  for (int i = 0; i < N; i++) C[i]\
-    \ = A[i][l];\n  return C;\n}\n\n/**\n * @brief Subset Convolution\n * @docs docs/math/subset-convolution.md\n\
+    \ = A[i][l];\n  return C;\n}\n\n/**\n * @brief Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n\
     \ */\n"
   dependsOn: []
   isVerificationFile: false
-  path: math/subset-convolution.hpp
+  path: set-function/subset-convolution.hpp
   requiredBy: []
-  timestamp: '2020-09-04 01:02:15+09:00'
+  timestamp: '2020-12-02 11:16:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
-documentation_of: math/subset-convolution.hpp
+documentation_of: set-function/subset-convolution.hpp
 layout: document
 redirect_from:
-- /library/math/subset-convolution.hpp
-- /library/math/subset-convolution.hpp.html
+- /library/set-function/subset-convolution.hpp
+- /library/set-function/subset-convolution.hpp.html
 title: Subset Convolution
 ---
 

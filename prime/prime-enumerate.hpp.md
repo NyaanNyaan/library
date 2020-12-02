@@ -2,6 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: multiplicative-function/divisor-multiple-transform.hpp
+    title: multiplicative-function/divisor-multiple-transform.hpp
+  - icon: ':warning:'
+    path: multiplicative-function/mf-famous-series.hpp
+    title: multiplicative-function/mf-famous-series.hpp
   - icon: ':heavy_check_mark:'
     path: multiplicative-function/prime-counting-o2d3.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
@@ -40,6 +46,8 @@ data:
   path: prime/prime-enumerate.hpp
   requiredBy:
   - multiplicative-function/prime-counting-o2d3.hpp
+  - multiplicative-function/mf-famous-series.hpp
+  - multiplicative-function/divisor-multiple-transform.hpp
   timestamp: '2020-09-18 02:20:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
