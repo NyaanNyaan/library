@@ -12,6 +12,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
+    _deprecated_at_docs: docs/multiplicative-function/mf-famous-series.md
+    document_title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
     links: []
   bundledCode: "#line 2 \"multiplicative-function/mf-famous-series.hpp\"\n#include\
     \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"multiplicative-function/divisor-multiple-transform.hpp\"\
@@ -53,18 +55,22 @@ data:
     \n * @docs docs/multiplicative-function/divisor-multiple-transform.md\n */\n#line\
     \ 6 \"multiplicative-function/mf-famous-series.hpp\"\n\ntemplate <typename T>\n\
     static constexpr vector<T> mobius_function(int N) {\n  vector<T> a(N + 1, 0);\n\
-    \  a[1] = 1;\n  divisor_transform::mobius_transform(a);\n  return a;\n}\n"
+    \  a[1] = 1;\n  divisor_transform::mobius_transform(a);\n  return a;\n}\n\n/**\n\
+    \ * @brief \u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
+    \ */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"divisor-multiple-transform.hpp\"\n\ntemplate <typename T>\nstatic constexpr\
     \ vector<T> mobius_function(int N) {\n  vector<T> a(N + 1, 0);\n  a[1] = 1;\n\
-    \  divisor_transform::mobius_transform(a);\n  return a;\n}\n"
+    \  divisor_transform::mobius_transform(a);\n  return a;\n}\n\n/**\n * @brief \u6709\
+    \u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
+    \ */\n"
   dependsOn:
   - multiplicative-function/divisor-multiple-transform.hpp
   - prime/prime-enumerate.hpp
   isVerificationFile: false
   path: multiplicative-function/mf-famous-series.hpp
   requiredBy: []
-  timestamp: '2020-12-03 00:21:28+09:00'
+  timestamp: '2020-12-03 00:53:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: multiplicative-function/mf-famous-series.hpp
@@ -72,5 +78,18 @@ layout: document
 redirect_from:
 - /library/multiplicative-function/mf-famous-series.hpp
 - /library/multiplicative-function/mf-famous-series.hpp.html
-title: multiplicative-function/mf-famous-series.hpp
+title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
 ---
+## 有名な乗法的関数
+
+#### メビウス関数　$\mu(n)$
+
+メビウス関数に関する説明は[ここ]()に詳しい。
+
+競技プログラミングにおいてのメビウス関数の利用法は(雑に説明すると)包除原理の$(-1)^k$と似た使い方をすることが多い。具体例を見てみる。
+
+例題：[Cube-loving Numbers](https://www.hackerrank.com/contests/university-codesprint-5/challenges)
+
+$$g(a)=\begin{cases}\lfloor\frac{N}{a^3}\rfloor&(a\neq 1)\\0 & (a=1) \end{cases}$$
+
+TODO: 続きを書く

@@ -1,43 +1,43 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -349,8 +349,43 @@ data:
     \  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;\
     \                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 8 \"verify/verify-unit-test/debug.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid test() {\n  // number\n  {\n    cerr << \"number\"\
-    \ << endl;\n    trace(1, 2, 3);\n    trace(inf, -inf, infLL);\n    trace(-infLL,\
+    \nusing namespace Nyaan;\n\nvoid test() {\n\n  using DebugImpl::trace;\n  // number\n\
+    \  {\n    cerr << \"number\" << endl;\n    trace(1, 2, 3);\n    trace(inf, -inf,\
+    \ infLL);\n    trace(-infLL, 1.1, (long double)(1.2));\n  }\n  // pair\n  {\n\
+    \    cerr << \"pair\" << endl;\n    pair<int, int> p1{1, 2};\n    pair<pair<int,\
+    \ int>, int> p2{p1, 3};\n    pair<vector<int>, int> p3{{1, 2}, 3};\n    trace(p1,\
+    \ p2, p3);\n  }\n  // Container\n  {\n    cerr << \"container\" << endl;\n   \
+    \ vector<int> vc{1, inf};\n    set<int> st{2, 3};\n    array<int, 3> ar{{1, 2,\
+    \ 3}};\n    trace(vc, st, ar);\n  }\n  // Dict\n  {\n    cerr << \"dict\" << endl;\n\
+    \    map<int, int> m;\n    m[0] = 1, m[1] = 2;\n    trace(m);\n  }\n  // Native\
+    \ array\n  {\n    cerr << \"native array\" << endl;\n    int a[] = {1, 2, 3, 4,\
+    \ 5};\n    trace(make_pair(a, 2), make_pair(a + 3, 2));\n  }\n  // string, char\n\
+    \  {\n    cerr << \"char & string\" << endl;\n    char c = 'a';\n    string s\
+    \ = \"abc\";\n    trace(c, s);\n  }\n  // other\n  {\n    cerr << \"high-dimensional\
+    \ vector\" << endl;\n    vector<pair<int, int>> v;\n    v.push_back({0, 1});\n\
+    \    v.push_back({2, 3});\n    trace(v);\n    vector<vector<int>> a(2);\n    a[0]\
+    \ = vector<int>{0, 1};\n    a[1] = vector<int>{2, 3};\n    trace(a);\n    vector<vector<vector<int>>>\
+    \ b(2);\n    b[0] = b[1] = a;\n    trace(b);\n  }\n  // cv qualifier (int)\n \
+    \ {\n    cerr << \"cv qualifier (int)\" << endl;\n    int a0 = 0;\n    const int\
+    \ a1 = 1;\n    int& a2 = a0;\n    const int& a3 = a1;\n    trace(a0, a1, a2, a3);\n\
+    \  }\n  // cv qualifier (char)\n  {\n    cerr << \"cv qualifier (char)\" << endl;\n\
+    \    char a0 = 'a';\n    const char a1 = 'b';\n    char& a2 = a0;\n    const char&\
+    \ a3 = a1;\n    trace(a0, a1, a2, a3);\n  }\n   // cv qualifier (string)\n  {\n\
+    \    cerr << \"cv qualifier (char)\" << endl;\n    string a0 = \"abc\";\n    const\
+    \ string a1 = \"def\";\n    string& a2 = a0;\n    const string& a3 = a1;\n   \
+    \ trace(a0, a1, a2, a3);\n  }\n  // original iterator\n  {\n    cerr << \"original\
+    \ iterator\" << endl;\n    HashSet<int> st;\n    st.insert(2);\n    st.insert(3);\n\
+    \    HashMap<int, int> m;\n    m[0] = 1, m[1] = 2;\n    trace(st, m);\n  }\n \
+    \ // original structure\n  {\n    cerr << \"original strucure\" << endl;\n   \
+    \ LazyMontgomeryModInt<998244353> a(998244354);\n    trace(a);\n    Matrix<LazyMontgomeryModInt<998244353>>\
+    \ mat;\n    mat = mat.I(3);\n    trace(mat);\n  }\n}\n\nvoid Nyaan::solve() {\n\
+    \  test();\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../hashmap/hashmap.hpp\"\n#include \"../../hashmap/hashset.hpp\"\n#include\
+    \ \"../../matrix/matrix.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n#include \"../../template/template.hpp\"\nusing namespace Nyaan;\n\nvoid test()\
+    \ {\n\n  using DebugImpl::trace;\n  // number\n  {\n    cerr << \"number\" <<\
+    \ endl;\n    trace(1, 2, 3);\n    trace(inf, -inf, infLL);\n    trace(-infLL,\
     \ 1.1, (long double)(1.2));\n  }\n  // pair\n  {\n    cerr << \"pair\" << endl;\n\
     \    pair<int, int> p1{1, 2};\n    pair<pair<int, int>, int> p2{p1, 3};\n    pair<vector<int>,\
     \ int> p3{{1, 2}, 3};\n    trace(p1, p2, p3);\n  }\n  // Container\n  {\n    cerr\
@@ -363,41 +398,6 @@ data:
     \ c = 'a';\n    string s = \"abc\";\n    trace(c, s);\n  }\n  // other\n  {\n\
     \    cerr << \"high-dimensional vector\" << endl;\n    vector<pair<int, int>>\
     \ v;\n    v.push_back({0, 1});\n    v.push_back({2, 3});\n    trace(v);\n    vector<vector<int>>\
-    \ a(2);\n    a[0] = vector<int>{0, 1};\n    a[1] = vector<int>{2, 3};\n    trace(a);\n\
-    \    vector<vector<vector<int>>> b(2);\n    b[0] = b[1] = a;\n    trace(b);\n\
-    \  }\n  // cv qualifier (int)\n  {\n    cerr << \"cv qualifier (int)\" << endl;\n\
-    \    int a0 = 0;\n    const int a1 = 1;\n    int& a2 = a0;\n    const int& a3\
-    \ = a1;\n    trace(a0, a1, a2, a3);\n  }\n  // cv qualifier (char)\n  {\n    cerr\
-    \ << \"cv qualifier (char)\" << endl;\n    char a0 = 'a';\n    const char a1 =\
-    \ 'b';\n    char& a2 = a0;\n    const char& a3 = a1;\n    trace(a0, a1, a2, a3);\n\
-    \  }\n   // cv qualifier (string)\n  {\n    cerr << \"cv qualifier (char)\" <<\
-    \ endl;\n    string a0 = \"abc\";\n    const string a1 = \"def\";\n    string&\
-    \ a2 = a0;\n    const string& a3 = a1;\n    trace(a0, a1, a2, a3);\n  }\n  //\
-    \ original iterator\n  {\n    cerr << \"original iterator\" << endl;\n    HashSet<int>\
-    \ st;\n    st.insert(2);\n    st.insert(3);\n    HashMap<int, int> m;\n    m[0]\
-    \ = 1, m[1] = 2;\n    trace(st, m);\n  }\n  // original structure\n  {\n    cerr\
-    \ << \"original strucure\" << endl;\n    LazyMontgomeryModInt<998244353> a(998244354);\n\
-    \    trace(a);\n    Matrix<LazyMontgomeryModInt<998244353>> mat;\n    mat = mat.I(3);\n\
-    \    trace(mat);\n  }\n}\n\nvoid Nyaan::solve() {\n  test();\n  int a, b;\n  cin\
-    \ >> a >> b;\n  cout << a + b << endl;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../hashmap/hashmap.hpp\"\n#include \"../../hashmap/hashset.hpp\"\n#include\
-    \ \"../../matrix/matrix.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../template/template.hpp\"\nusing namespace Nyaan;\n\nvoid test()\
-    \ {\n  // number\n  {\n    cerr << \"number\" << endl;\n    trace(1, 2, 3);\n\
-    \    trace(inf, -inf, infLL);\n    trace(-infLL, 1.1, (long double)(1.2));\n \
-    \ }\n  // pair\n  {\n    cerr << \"pair\" << endl;\n    pair<int, int> p1{1, 2};\n\
-    \    pair<pair<int, int>, int> p2{p1, 3};\n    pair<vector<int>, int> p3{{1, 2},\
-    \ 3};\n    trace(p1, p2, p3);\n  }\n  // Container\n  {\n    cerr << \"container\"\
-    \ << endl;\n    vector<int> vc{1, inf};\n    set<int> st{2, 3};\n    array<int,\
-    \ 3> ar{{1, 2, 3}};\n    trace(vc, st, ar);\n  }\n  // Dict\n  {\n    cerr <<\
-    \ \"dict\" << endl;\n    map<int, int> m;\n    m[0] = 1, m[1] = 2;\n    trace(m);\n\
-    \  }\n  // Native array\n  {\n    cerr << \"native array\" << endl;\n    int a[]\
-    \ = {1, 2, 3, 4, 5};\n    trace(make_pair(a, 2), make_pair(a + 3, 2));\n  }\n\
-    \  // string, char\n  {\n    cerr << \"char & string\" << endl;\n    char c =\
-    \ 'a';\n    string s = \"abc\";\n    trace(c, s);\n  }\n  // other\n  {\n    cerr\
-    \ << \"high-dimensional vector\" << endl;\n    vector<pair<int, int>> v;\n   \
-    \ v.push_back({0, 1});\n    v.push_back({2, 3});\n    trace(v);\n    vector<vector<int>>\
     \ a(2);\n    a[0] = vector<int>{0, 1};\n    a[1] = vector<int>{2, 3};\n    trace(a);\n\
     \    vector<vector<vector<int>>> b(2);\n    b[0] = b[1] = a;\n    trace(b);\n\
     \  }\n  // cv qualifier (int)\n  {\n    cerr << \"cv qualifier (int)\" << endl;\n\
@@ -430,8 +430,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/debug.test.cpp
   requiredBy: []
-  timestamp: '2020-12-03 00:21:28+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-03 00:53:43+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/debug.test.cpp
 layout: document

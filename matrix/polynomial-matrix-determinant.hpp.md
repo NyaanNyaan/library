@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
   _extendedRequiredBy:

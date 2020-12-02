@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
     title: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -64,7 +64,7 @@ data:
     path: verify/verify-yuki/yuki-1283.test.cpp
     title: verify/verify-yuki/yuki-1283.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
@@ -253,7 +253,7 @@ data:
   path: template/template.hpp
   requiredBy: []
   timestamp: '2020-12-03 00:21:28+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
