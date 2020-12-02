@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   _extendedRequiredBy: []

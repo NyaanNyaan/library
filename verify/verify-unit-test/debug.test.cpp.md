@@ -1,43 +1,43 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -325,45 +325,44 @@ data:
     \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
     \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
     \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
-    \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
-    \                            \\\n  do {                                      \\\
-    \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
-    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
-    \ : v)\n#define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long\
-    \ i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long\
-    \ long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long\
-    \ long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) >\
-    \ 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
-    \ regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond)\
-    \ for (long long i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
-    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
-    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
-    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
-    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
-    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
-    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)     \
-    \        \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n\
-    \    return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
-    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 8 \"verify/verify-unit-test/debug.test.cpp\"\nusing namespace Nyaan;\n\nvoid\
-    \ test() {\n  // number\n  {\n    cerr << \"number\" << endl;\n    trace(1, 2,\
-    \ 3);\n    trace(inf, -inf, infLL);\n    trace(-infLL, 1.1, (long double)(1.2));\n\
-    \  }\n  // pair\n  {\n    cerr << \"pair\" << endl;\n    pair<int, int> p1{1,\
-    \ 2};\n    pair<pair<int, int>, int> p2{p1, 3};\n    pair<vector<int>, int> p3{{1,\
-    \ 2}, 3};\n    trace(p1, p2, p3);\n  }\n  // Container\n  {\n    cerr << \"container\"\
-    \ << endl;\n    vector<int> vc{1, inf};\n    set<int> st{2, 3};\n    array<int,\
-    \ 3> ar{{1, 2, 3}};\n    trace(vc, st, ar);\n  }\n  // Dict\n  {\n    cerr <<\
-    \ \"dict\" << endl;\n    map<int, int> m;\n    m[0] = 1, m[1] = 2;\n    trace(m);\n\
-    \  }\n  // Native array\n  {\n    cerr << \"native array\" << endl;\n    int a[]\
-    \ = {1, 2, 3, 4, 5};\n    trace(make_pair(a, 2), make_pair(a + 3, 2));\n  }\n\
-    \  // string, char\n  {\n    cerr << \"char & string\" << endl;\n    char c =\
-    \ 'a';\n    string s = \"abc\";\n    trace(c, s);\n  }\n  // other\n  {\n    cerr\
-    \ << \"high-dimensional vector\" << endl;\n    vector<pair<int, int>> v;\n   \
-    \ v.push_back({0, 1});\n    v.push_back({2, 3});\n    trace(v);\n    vector<vector<int>>\
+    \ DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)                           \
+    \ \\\n  do {                                      \\\n    cerr << \"## \" << #__VA_ARGS__\
+    \ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);          \\\n  } while (0)\n\
+    #else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\n\n// macro\n\
+    #line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x : v)\n#define\
+    \ all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long i = 0; i < (long\
+    \ long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1; i >=\
+    \ 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n\
+    #define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n#define\
+    \ reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for\
+    \ (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long\
+    \ i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define inl(...)         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define\
+    \ inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)\
+    \                           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\
+    \n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)  \
+    \                      \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n  \
+    \  in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)  \
+    \                   \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
+    \ t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)             \\\n\
+    \  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;\
+    \                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\n\nnamespace\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 8 \"verify/verify-unit-test/debug.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid test() {\n  // number\n  {\n    cerr << \"number\"\
+    \ << endl;\n    trace(1, 2, 3);\n    trace(inf, -inf, infLL);\n    trace(-infLL,\
+    \ 1.1, (long double)(1.2));\n  }\n  // pair\n  {\n    cerr << \"pair\" << endl;\n\
+    \    pair<int, int> p1{1, 2};\n    pair<pair<int, int>, int> p2{p1, 3};\n    pair<vector<int>,\
+    \ int> p3{{1, 2}, 3};\n    trace(p1, p2, p3);\n  }\n  // Container\n  {\n    cerr\
+    \ << \"container\" << endl;\n    vector<int> vc{1, inf};\n    set<int> st{2, 3};\n\
+    \    array<int, 3> ar{{1, 2, 3}};\n    trace(vc, st, ar);\n  }\n  // Dict\n  {\n\
+    \    cerr << \"dict\" << endl;\n    map<int, int> m;\n    m[0] = 1, m[1] = 2;\n\
+    \    trace(m);\n  }\n  // Native array\n  {\n    cerr << \"native array\" << endl;\n\
+    \    int a[] = {1, 2, 3, 4, 5};\n    trace(make_pair(a, 2), make_pair(a + 3, 2));\n\
+    \  }\n  // string, char\n  {\n    cerr << \"char & string\" << endl;\n    char\
+    \ c = 'a';\n    string s = \"abc\";\n    trace(c, s);\n  }\n  // other\n  {\n\
+    \    cerr << \"high-dimensional vector\" << endl;\n    vector<pair<int, int>>\
+    \ v;\n    v.push_back({0, 1});\n    v.push_back({2, 3});\n    trace(v);\n    vector<vector<int>>\
     \ a(2);\n    a[0] = vector<int>{0, 1};\n    a[1] = vector<int>{2, 3};\n    trace(a);\n\
     \    vector<vector<vector<int>>> b(2);\n    b[0] = b[1] = a;\n    trace(b);\n\
     \  }\n  // cv qualifier (int)\n  {\n    cerr << \"cv qualifier (int)\" << endl;\n\
@@ -431,8 +430,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/debug.test.cpp
   requiredBy: []
-  timestamp: '2020-12-01 11:28:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-03 00:21:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-unit-test/debug.test.cpp
 layout: document

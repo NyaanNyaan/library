@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
     title: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -52,7 +52,7 @@ data:
     path: verify/verify-yuki/yuki-1283.test.cpp
     title: verify/verify-yuki/yuki-1283.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n\n__attribute__((target(\"\
@@ -84,7 +84,7 @@ data:
   requiredBy:
   - template/template.hpp
   timestamp: '2020-11-30 18:57:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

@@ -17,6 +17,9 @@ data:
       \ )"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multiplicative-function.test.cpp
+    title: verify/verify-unit-test/multiplicative-function.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -69,6 +72,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
+  - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp

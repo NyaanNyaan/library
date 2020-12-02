@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
     title: modint/arbitrary-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'

@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/affine-transformation.hpp
     title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -16,22 +16,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -316,32 +316,31 @@ data:
     \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
     \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
     \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
-    \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
-    \                            \\\n  do {                                      \\\
-    \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
-    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
-    \ : v)\n#define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long\
-    \ i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long\
-    \ long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long\
-    \ long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) >\
-    \ 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
-    \ regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond)\
-    \ for (long long i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
-    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
-    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
-    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
-    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
-    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
-    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)     \
-    \        \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n\
-    \    return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
-    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 15 \"verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp\"\nusing\
-    \ namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n, q);\n  vm a(n), b(n);\n\
+    \ DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)                           \
+    \ \\\n  do {                                      \\\n    cerr << \"## \" << #__VA_ARGS__\
+    \ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);          \\\n  } while (0)\n\
+    #else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\n\n// macro\n\
+    #line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x : v)\n#define\
+    \ all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long i = 0; i < (long\
+    \ long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1; i >=\
+    \ 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n\
+    #define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n#define\
+    \ reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for\
+    \ (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long\
+    \ i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define inl(...)         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define\
+    \ inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)\
+    \                           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\
+    \n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)  \
+    \                      \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n  \
+    \  in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)  \
+    \                   \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
+    \ t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)             \\\n\
+    \  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;\
+    \                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\n\nnamespace\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 15 \"verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n, q);\n  vm a(n), b(n);\n\
     \  in2(a, b);\n  auto g = graph(n, n - 1, false, false);\n\n  HeavyLightDecomposition<vvi>\
     \ hld(g);\n\n  using af = Affine<mint>;\n  auto m1 = [](af a_, af b_) { return\
     \ a_ * b_; };\n  auto m2 = [](af a_, af b_) { return b_ * a_; };\n  SegmentTree<af,\
@@ -389,7 +388,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2020-12-02 11:16:55+09:00'
+  timestamp: '2020-12-03 00:21:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

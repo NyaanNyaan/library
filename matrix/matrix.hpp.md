@@ -10,14 +10,14 @@ data:
     path: matrix/polynomial-matrix-determinant.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
     links: []
@@ -107,7 +107,7 @@ data:
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
   timestamp: '2020-12-01 11:28:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp

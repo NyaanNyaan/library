@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
     title: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -52,7 +52,7 @@ data:
     path: verify/verify-yuki/yuki-1283.test.cpp
     title: verify/verify-yuki/yuki-1283.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
@@ -82,10 +82,10 @@ data:
     \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
     \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
     \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
-    \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
-    \                            \\\n  do {                                      \\\
-    \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n"
+    \ DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)                           \
+    \ \\\n  do {                                      \\\n    cerr << \"## \" << #__VA_ARGS__\
+    \ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);          \\\n  } while (0)\n\
+    #else\n#define trc(...)\n#endif\n"
   code: "namespace DebugImpl {\n\ntemplate <typename U, typename = void>\nstruct is_specialize\
     \ : false_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
     \ conditional<false, typename U::iterator, void>::type>\n    : true_type {};\n\
@@ -113,17 +113,17 @@ data:
     \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
     \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
     \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
-    \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
-    \                            \\\n  do {                                      \\\
-    \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n"
+    \ DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)                           \
+    \ \\\n  do {                                      \\\n    cerr << \"## \" << #__VA_ARGS__\
+    \ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);          \\\n  } while (0)\n\
+    #else\n#define trc(...)\n#endif\n"
   dependsOn: []
   isVerificationFile: false
   path: template/debug.hpp
   requiredBy:
   - template/template.hpp
-  timestamp: '2020-12-01 11:28:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-03 00:21:28+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

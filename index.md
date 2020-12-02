@@ -211,7 +211,7 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: hashmap
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: hashmap/hashmap-base.hpp
       title: hashmap/hashmap-base.hpp
     - icon: ':heavy_check_mark:'
@@ -220,10 +220,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: hashmap/hashmap-open-address.hpp
       title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: hashmap/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: hashmap/hashset.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   - name: inner
@@ -278,7 +278,7 @@ data:
       path: matrix/matrix-tree.hpp
       title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
         \u5217)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: matrix/matrix.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
@@ -330,7 +330,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
     - icon: ':heavy_check_mark:'
@@ -531,22 +531,22 @@ data:
       title: string/suffix-array.hpp
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -741,7 +741,7 @@ data:
       title: verify/verify-aoj-other/aoj-2995.test.cpp
   - name: verify/verify-unit-test
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-unit-test/debug.test.cpp
       title: verify/verify-unit-test/debug.test.cpp
     - icon: ':heavy_check_mark:'
@@ -759,6 +759,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashset.test.cpp
       title: verify/verify-unit-test/hashset.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/multiplicative-function.test.cpp
+      title: verify/verify-unit-test/multiplicative-function.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/osak.test.cpp
       title: verify/verify-unit-test/osak.test.cpp

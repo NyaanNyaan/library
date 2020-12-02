@@ -44,16 +44,16 @@ data:
     \ int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p\
     \ : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k] -= a[k * p];\n  }\n\n\
     \  template <typename T>\n  static void zeta_transform(map<long long, T> &a) {\n\
-    \    for (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2 = rbegin(a);\
-    \ p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second += p2->second;\n\
-    \  }\n  template <typename T>\n  static void mobius_transform(map<long long, T>\
-    \ &a) {\n    for (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2\
-    \ = rbegin(a); p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second\
-    \ -= p2->second;\n  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\
-    \u6570\u5909\u63DB\n */\n#line 6 \"multiplicative-function/mf-famous-series.hpp\"\
-    \n\ntemplate <typename T>\nstatic constexpr vector<T> mobius_function(int N) {\n\
-    \  vector<T> a(N + 1, 0);\n  a[1] = 1;\n  divisor_transform::mobius_transform(a);\n\
-    \  return a;\n}\n"
+    \    for (auto &x : a)\n      for (auto p = rbegin(a); p->first != x.first; p++)\n\
+    \        if (p->first % x.first == 0) x.second += p->second;\n  }\n  template\
+    \ <typename T>\n  static void mobius_transform(map<long long, T> &a) {\n    for\
+    \ (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2 = rbegin(a);\
+    \ p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second -= p2->second;\n\
+    \  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB\
+    \n * @docs docs/multiplicative-function/divisor-multiple-transform.md\n */\n#line\
+    \ 6 \"multiplicative-function/mf-famous-series.hpp\"\n\ntemplate <typename T>\n\
+    static constexpr vector<T> mobius_function(int N) {\n  vector<T> a(N + 1, 0);\n\
+    \  a[1] = 1;\n  divisor_transform::mobius_transform(a);\n  return a;\n}\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"divisor-multiple-transform.hpp\"\n\ntemplate <typename T>\nstatic constexpr\
     \ vector<T> mobius_function(int N) {\n  vector<T> a(N + 1, 0);\n  a[1] = 1;\n\
@@ -64,7 +64,7 @@ data:
   isVerificationFile: false
   path: multiplicative-function/mf-famous-series.hpp
   requiredBy: []
-  timestamp: '2020-12-02 14:41:33+09:00'
+  timestamp: '2020-12-03 00:21:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: multiplicative-function/mf-famous-series.hpp

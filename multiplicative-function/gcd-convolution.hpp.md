@@ -48,18 +48,19 @@ data:
     \ int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p\
     \ : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k] -= a[k * p];\n  }\n\n\
     \  template <typename T>\n  static void zeta_transform(map<long long, T> &a) {\n\
-    \    for (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2 = rbegin(a);\
-    \ p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second += p2->second;\n\
-    \  }\n  template <typename T>\n  static void mobius_transform(map<long long, T>\
-    \ &a) {\n    for (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2\
-    \ = rbegin(a); p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second\
-    \ -= p2->second;\n  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\
-    \u6570\u5909\u63DB\n */\n#line 6 \"multiplicative-function/gcd-convolution.hpp\"\
-    \n\ntemplate <typename mint>\nvector<mint> gcd_convolution(const vector<mint>&\
-    \ a, const vector<mint>& b) {\n  assert(a.size() == b.size());\n  auto s = a,\
-    \ t = b;\n  multiple_transform::zeta_transform(s);\n  multiple_transform::zeta_transform(t);\n\
-    \  for (int i = 0; i < (int)a.size(); i++) s[i] *= t[i];\n  multiple_transform::mobius_transform(s);\n\
-    \  return s;\n}\n\n/**\n * @brief GCD\u7573\u307F\u8FBC\u307F\n */\n"
+    \    for (auto &x : a)\n      for (auto p = rbegin(a); p->first != x.first; p++)\n\
+    \        if (p->first % x.first == 0) x.second += p->second;\n  }\n  template\
+    \ <typename T>\n  static void mobius_transform(map<long long, T> &a) {\n    for\
+    \ (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2 = rbegin(a);\
+    \ p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second -= p2->second;\n\
+    \  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB\
+    \n * @docs docs/multiplicative-function/divisor-multiple-transform.md\n */\n#line\
+    \ 6 \"multiplicative-function/gcd-convolution.hpp\"\n\ntemplate <typename mint>\n\
+    vector<mint> gcd_convolution(const vector<mint>& a, const vector<mint>& b) {\n\
+    \  assert(a.size() == b.size());\n  auto s = a, t = b;\n  multiple_transform::zeta_transform(s);\n\
+    \  multiple_transform::zeta_transform(t);\n  for (int i = 0; i < (int)a.size();\
+    \ i++) s[i] *= t[i];\n  multiple_transform::mobius_transform(s);\n  return s;\n\
+    }\n\n/**\n * @brief GCD\u7573\u307F\u8FBC\u307F\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"divisor-multiple-transform.hpp\"\n\ntemplate <typename mint>\nvector<mint>\
     \ gcd_convolution(const vector<mint>& a, const vector<mint>& b) {\n  assert(a.size()\
@@ -73,7 +74,7 @@ data:
   isVerificationFile: false
   path: multiplicative-function/gcd-convolution.hpp
   requiredBy: []
-  timestamp: '2020-12-02 14:41:33+09:00'
+  timestamp: '2020-12-03 00:21:28+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0886.test.cpp

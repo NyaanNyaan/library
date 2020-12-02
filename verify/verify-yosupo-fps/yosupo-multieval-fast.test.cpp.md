@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -23,22 +23,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -155,36 +155,35 @@ data:
     \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
     \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
     \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
-    \ DebugImpl\n\nusing DebugImpl::trace;\n\n#ifdef NyaanDebug\n#define trc(...)\
-    \                            \\\n  do {                                      \\\
-    \n    cerr << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
-    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
-    \ : v)\n#define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long\
-    \ i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long\
-    \ long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long\
-    \ long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) >\
-    \ 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
-    \ regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond)\
-    \ for (long long i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n\
-    \  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
-    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
-    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
-    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
-    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
-    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)     \
-    \        \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n\
-    \    return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
-    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\n//\n#line 3 \"\
-    fps/ntt-friendly-fps.hpp\"\nusing namespace std;\n\n#line 3 \"ntt/ntt-avx2.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"modint/simd-montgomery.hpp\"\nusing namespace\
-    \ std;\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
-    ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
-    \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
+    \ DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)                           \
+    \ \\\n  do {                                      \\\n    cerr << \"## \" << #__VA_ARGS__\
+    \ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);          \\\n  } while (0)\n\
+    #else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\n\n// macro\n\
+    #line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x : v)\n#define\
+    \ all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long i = 0; i < (long\
+    \ long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1; i >=\
+    \ 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n\
+    #define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n#define\
+    \ reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for\
+    \ (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long\
+    \ i = (a); (cond); i++)\n\n#define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define inl(...)         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define\
+    \ inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)\
+    \                           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\
+    \n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)  \
+    \                      \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n  \
+    \  in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)  \
+    \                   \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
+    \ t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)             \\\n\
+    \  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;\
+    \                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\n\nnamespace\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
+    \n//\n#line 3 \"fps/ntt-friendly-fps.hpp\"\nusing namespace std;\n\n#line 3 \"\
+    ntt/ntt-avx2.hpp\"\nusing namespace std;\n\n#line 3 \"modint/simd-montgomery.hpp\"\
+    \nusing namespace std;\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"\
+    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i\
+    \ &a, const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
     sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
     \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
     \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
@@ -743,7 +742,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   requiredBy: []
-  timestamp: '2020-12-01 11:28:23+09:00'
+  timestamp: '2020-12-03 00:21:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
