@@ -4,26 +4,20 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
-    path: data-structure-2d/fenwick-tree-on-range-tree.hpp
-    title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
-  - icon: ':heavy_check_mark:'
-    path: misc/compress.hpp
-    title: misc/compress.hpp
-  - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
+  - icon: ':question:'
+    path: set-function/enumerate-set.hpp
+    title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B
     links:
-    - https://judge.yosupo.jp/problem/point_add_rectangle_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\n\
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B
+  bundledCode: "#line 1 \"verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp\"\n#define\
+    \ PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B\"\
     \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
     \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
@@ -121,108 +115,37 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure-2d/fenwick-tree-on-range-tree.hpp\"\
-    \nusing namespace std;\n\n// S ... size_type\n// T ... value_type\ntemplate <typename\
-    \ S, typename T>\nstruct FenwickRangeTree {\n  struct BIT {\n    int N;\n    vector<T>\
-    \ data;\n\n    BIT() = default;\n    BIT(int size) { init(size); }\n\n    void\
-    \ init(int size) {\n      N = size;\n      data.assign(N + 1, 0);\n    }\n\n \
-    \   void add(int k, T x) {\n      for (++k; k <= N; k += k & -k) data[k] += x;\n\
-    \    }\n\n    T sum(int k) const {\n      T ret = T();\n      for (; k; k -= k\
-    \ & -k) ret += data[k];\n      return ret;\n    }\n\n    inline T sum(int l, int\
-    \ r) const {\n      T ret = T();\n      while (l != r) {\n        if (l < r) {\n\
-    \          ret += data[r];\n          r -= r & -r;\n        } else {\n       \
-    \   ret -= data[l];\n          l -= l & -l;\n        }\n      }\n      return\
-    \ ret;\n    }\n  };\n\n  using P = pair<S, S>;\n  S N, M;\n  vector<BIT> bit;\n\
-    \  vector<vector<S>> ys;\n  vector<P> ps;\n\n  FenwickRangeTree() = default;\n\
-    \n  void add_point(S x, S y) { ps.push_back(make_pair(x, y)); }\n\n  void build()\
-    \ {\n    sort(begin(ps), end(ps));\n    ps.erase(unique(begin(ps), end(ps)), end(ps));\n\
-    \    N = ps.size();\n    bit.resize(N + 1);\n    ys.resize(N + 1);\n    for (int\
-    \ i = 0; i <= N; ++i) {\n      for (int j = i + 1; j <= N; j += j & -j) ys[j].push_back(ps[i].second);\n\
-    \      sort(begin(ys[i]), end(ys[i]));\n      ys[i].erase(unique(begin(ys[i]),\
-    \ end(ys[i])), end(ys[i]));\n      bit[i].init(ys[i].size());\n    }\n  }\n\n\
-    \  int id(S x) const {\n    return lower_bound(\n               begin(ps), end(ps),\
-    \ make_pair(x, S()),\n               [](const P& a, const P& b) { return a.first\
-    \ < b.first; }) -\n           begin(ps);\n  }\n\n  int id(int i, S y) const {\n\
-    \    return lower_bound(begin(ys[i]), end(ys[i]), y) - begin(ys[i]);\n  }\n\n\
-    \  void add(S x, S y, T a) {\n    int i = lower_bound(begin(ps), end(ps), make_pair(x,\
-    \ y)) - begin(ps);\n    assert(ps[i] == make_pair(x, y));\n    for (++i; i <=\
-    \ N; i += i & -i) bit[i].add(id(i, y), a);\n  }\n\n  T sum(S x, S y) const {\n\
-    \    T ret = T();\n    for (int a = id(x); a; a -= a & -a) ret += bit[a].sum(id(a,\
-    \ y));\n    return ret;\n  }\n\n  T sum(S xl, S yl, S xr, S yr) const {\n    T\
-    \ ret = T();\n    int a = id(xl), b = id(xr);\n    while (a != b) {\n      if\
-    \ (a < b) {\n        ret += bit[b].sum(id(b, yl), id(b, yr));\n        b -= b\
-    \ & -b;\n      } else {\n        ret -= bit[a].sum(id(a, yl), id(a, yr));\n  \
-    \      a -= a & -a;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief\
-    \ \u9818\u57DF\u6728(Binary Indexed Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n\
-    \ */\n#line 3 \"misc/compress.hpp\"\nusing namespace std;\n\ntemplate<class T>\n\
-    struct compress{\n  vector<T> xs;\n  compress(const vector<T>& v){\n    xs.reserve(v.size());\n\
-    \    for(T x : v) xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
-    \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
-    \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
-    \ i){\n    return xs[i];\n  }\n};\n#line 3 \"misc/fastio.hpp\"\nusing namespace\
-    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
-    \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
-    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
-    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
-    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
-    \ load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf\
-    \ + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush()\
-    \ {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c)\
-    \ { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil\
-    \ + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
-    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
-    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
-    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
-    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
-    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
-    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
-    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
-    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
-    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
-    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
-    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
-    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
-    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
-    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
-    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
-    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
-    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
-    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
-    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
-    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 7 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp\"\
-    \nvoid solve() {\n  FenwickRangeTree<int, ll> bit;\n\n  int N, Q;\n  rd(N, Q);\n\
-    \  vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) {\n\
-    \    rd(X[i], Y[i], W[i]);\n    bit.add_point(X[i], Y[i]);\n  }\n  rep(i, Q) {\n\
-    \    rd(c[i], s[i], t[i], u[i]);\n    if (c[i])\n      rd(v[i]);\n    else\n \
-    \     bit.add_point(s[i], t[i]);\n  }\n\n  bit.build();\n  rep(i, N) { bit.add(X[i],\
-    \ Y[i], W[i]); }\n  rep(i, Q) {\n    if (c[i]) {\n      out(bit.sum(s[i], t[i],\
-    \ u[i], v[i]));\n    } else\n      bit.add(s[i], t[i], u[i]);\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
-    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure-2d/fenwick-tree-on-range-tree.hpp\"\
-    \n#include \"../../misc/compress.hpp\"\n#include \"../../misc/fastio.hpp\"\nvoid\
-    \ solve() {\n  FenwickRangeTree<int, ll> bit;\n\n  int N, Q;\n  rd(N, Q);\n  vector<int>\
-    \ X(N), Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);\n  rep(i, N) {\n    rd(X[i],\
-    \ Y[i], W[i]);\n    bit.add_point(X[i], Y[i]);\n  }\n  rep(i, Q) {\n    rd(c[i],\
-    \ s[i], t[i], u[i]);\n    if (c[i])\n      rd(v[i]);\n    else\n      bit.add_point(s[i],\
-    \ t[i]);\n  }\n\n  bit.build();\n  rep(i, N) { bit.add(X[i], Y[i], W[i]); }\n\
-    \  rep(i, Q) {\n    if (c[i]) {\n      out(bit.sum(s[i], t[i], u[i], v[i]));\n\
-    \    } else\n      bit.add(s[i], t[i], u[i]);\n  }\n}"
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"set-function/enumerate-set.hpp\"\
+    \nusing namespace std;\n\n// enumerate x : x \\subset b\nvector<int> enumerate_subset(int\
+    \ b) {\n  vector<int> res;\n  for (int i = b; i >= 0; --i) res.push_back(i &=\
+    \ b);\n  return res;\n};\n\n// enumerate x : x \\in {n} and x \\superset b\nvector<int>\
+    \ enumerate_superset(int b, int n) {\n  vector<int> res;\n  for (int i = b; i\
+    \ < (1 << n); i = (i + 1) | b) res.push_back(i);\n  return res;\n}\n\n/**\n *\
+    \ @brief \u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319\n\
+    \ */\n#line 5 \"verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp\"\n\nvoid solve()\
+    \ {\n  ini(n);\n  int b = 0;\n  ini(k);\n  rep(i, k) {\n    ini(x);\n    b |=\
+    \ 1 << x;\n  }\n  each(c, enumerate_superset(b, n)) {\n    cout << c << \":\"\
+    ;\n    rep(i, n) if ((c >> i) & 1) cout << \" \" << i;\n    cout << \"\\n\";\n\
+    \  }\n}\n"
+  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B\"\
+    \n#include \"../../competitive-template.hpp\"\n#include \"../../set-function/enumerate-set.hpp\"\
+    \n\nvoid solve() {\n  ini(n);\n  int b = 0;\n  ini(k);\n  rep(i, k) {\n    ini(x);\n\
+    \    b |= 1 << x;\n  }\n  each(c, enumerate_superset(b, n)) {\n    cout << c <<\
+    \ \":\";\n    rep(i, n) if ((c >> i) & 1) cout << \" \" << i;\n    cout << \"\\\
+    n\";\n  }\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - data-structure-2d/fenwick-tree-on-range-tree.hpp
-  - misc/compress.hpp
-  - misc/fastio.hpp
+  - set-function/enumerate-set.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+  path: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
   requiredBy: []
-  timestamp: '2020-09-28 02:10:54+09:00'
+  timestamp: '2020-12-03 11:26:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+documentation_of: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+- /verify/verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
+- /verify/verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp.html
+title: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
 ---

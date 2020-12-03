@@ -4,24 +4,21 @@ data:
   - icon: ':question:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
-    path: data-structure/binary-indexed-tree.hpp
-    title: Binary Indexed Tree(Fenwick Tree)
-  - icon: ':heavy_check_mark:'
-    path: data-structure/range-sum-range-add-bit.hpp
-    title: data-structure/range-sum-range-add-bit.hpp
+  - icon: ':question:'
+    path: set-function/enumerate-set.hpp
+    title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G
-  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp\"\n#define\
-    \ PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G\"\
-    \n\n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B
+  bundledCode: "#line 1 \"verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp\"\n#define\
+    \ PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B\"\
+    \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
     \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
     \ each(x, v) for (auto &x : v)\n#define all(v) (v).begin(), (v).end()\n#define\
@@ -118,58 +115,37 @@ data:
     \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
     \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
     \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"data-structure/range-sum-range-add-bit.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"data-structure/binary-indexed-tree.hpp\"\n\
-    using namespace std;\n\ntemplate <typename T>\nstruct BinaryIndexedTree {\n  int\
-    \ N;\n  vector<T> data;\n\n  BinaryIndexedTree() = default;\n\n  BinaryIndexedTree(int\
-    \ size) { init(size); }\n\n  void init(int size) {\n    N = size + 2;\n    data.assign(N\
-    \ + 1, 0);\n  }\n\n  // get sum of [0,k]\n  T sum(int k) const {\n    if (k <\
-    \ 0) return 0;  // return 0 if k < 0\n    T ret = 0;\n    for (++k; k > 0; k -=\
-    \ k & -k) ret += data[k];\n    return ret;\n  }\n\n  // getsum of [l,r]\n  inline\
-    \ T sum(int l, int r) const { return sum(r) - sum(l - 1); }\n\n  // get value\
-    \ of k\n  inline T operator[](int k) const { return sum(k) - sum(k - 1); }\n\n\
-    \  // data[k] += x\n  void add(int k, T x) {\n    for (++k; k < N; k += k & -k)\
-    \ data[k] += x;\n  }\n\n  // range add x to [l,r]\n  void imos(int l, int r, T\
-    \ x) {\n    add(l, x);\n    add(r + 1, -x);\n  }\n\n  // minimize i s.t. sum(i)\
-    \ >= w\n  int lower_bound(T w) {\n    if (w <= 0) return 0;\n    int x = 0;\n\
-    \    for (int k = 1 << __lg(N); k; k >>= 1) {\n      if (x + k <= N - 1 && data[x\
-    \ + k] < w) {\n        w -= data[x + k];\n        x += k;\n      }\n    }\n  \
-    \  return x;\n  }\n\n  // minimize i s.t. sum(i) > w\n  int upper_bound(T w) {\n\
-    \    if (w < 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k; k\
-    \ >>= 1) {\n      if (x + k <= N - 1 && data[x + k] <= w) {\n        w -= data[x\
-    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief\
-    \ Binary Indexed Tree(Fenwick Tree)\n * @docs docs/data-structure/binary-indexed-tree.md\n\
-    \ */\n#line 6 \"data-structure/range-sum-range-add-bit.hpp\"\n\ntemplate <typename\
-    \ T>\nstruct RangeAddRangeSumBIT {\n  BinaryIndexedTree<T> a, b;\n  RangeAddRangeSumBIT(int\
-    \ N) : a(N + 1), b(N + 1) {}\n\n  // add x to [l, r)\n  void add(int l, int r,\
-    \ T x) {\n    a.add(l, x);\n    a.add(r, -x);\n    b.add(l, x * (1 - l));\n  \
-    \  b.add(r, x * (r - 1));\n  }\n\n  // return sum of [l, r)\n  T sum(T l, T r)\
-    \ {\n    --r, --l;\n    return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);\n\
-    \  }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp\"\n\nvoid solve()\
-    \ {\n  ini(N, Q);\n  RangeAddRangeSumBIT<ll> bit(N);\n  rep(_, Q) {\n    ini(c);\n\
-    \    if (c == 0) {\n      ini(s, t, x);\n      s--;\n      bit.add(s, t, x);\n\
-    \    } else {\n      ini(s, t);\n      s--;\n      out(bit.sum(s, t));\n    }\n\
-    \  }\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G\"\
-    \n\n#include \"../../competitive-template.hpp\"\n#include \"../../data-structure/range-sum-range-add-bit.hpp\"\
-    \n\nvoid solve() {\n  ini(N, Q);\n  RangeAddRangeSumBIT<ll> bit(N);\n  rep(_,\
-    \ Q) {\n    ini(c);\n    if (c == 0) {\n      ini(s, t, x);\n      s--;\n    \
-    \  bit.add(s, t, x);\n    } else {\n      ini(s, t);\n      s--;\n      out(bit.sum(s,\
-    \ t));\n    }\n  }\n}"
+    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"set-function/enumerate-set.hpp\"\
+    \nusing namespace std;\n\n// enumerate x : x \\subset b\nvector<int> enumerate_subset(int\
+    \ b) {\n  vector<int> res;\n  for (int i = b; i >= 0; --i) res.push_back(i &=\
+    \ b);\n  return res;\n};\n\n// enumerate x : x \\in {n} and x \\superset b\nvector<int>\
+    \ enumerate_superset(int b, int n) {\n  vector<int> res;\n  for (int i = b; i\
+    \ < (1 << n); i = (i + 1) | b) res.push_back(i);\n  return res;\n}\n\n/**\n *\
+    \ @brief \u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319\n\
+    \ */\n#line 5 \"verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp\"\n\nvoid solve()\
+    \ {\n  ini(n);\n  int b = 0;\n  ini(k);\n  rep(i, k) {\n    ini(x);\n    b |=\
+    \ 1 << x;\n  }\n  auto ss = enumerate_subset(b);\n  reverse(all(ss));\n  each(c,\
+    \ ss) {\n    cout << c << \":\";\n    rep(i, n) if ((c >> i) & 1) cout << \" \"\
+    \ << i;\n    cout << \"\\n\";\n  }\n}\n"
+  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B\"\
+    \n#include \"../../competitive-template.hpp\"\n#include \"../../set-function/enumerate-set.hpp\"\
+    \n\nvoid solve() {\n  ini(n);\n  int b = 0;\n  ini(k);\n  rep(i, k) {\n    ini(x);\n\
+    \    b |= 1 << x;\n  }\n  auto ss = enumerate_subset(b);\n  reverse(all(ss));\n\
+    \  each(c, ss) {\n    cout << c << \":\";\n    rep(i, n) if ((c >> i) & 1) cout\
+    \ << \" \" << i;\n    cout << \"\\n\";\n  }\n}\n"
   dependsOn:
   - competitive-template.hpp
-  - data-structure/range-sum-range-add-bit.hpp
-  - data-structure/binary-indexed-tree.hpp
+  - set-function/enumerate-set.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+  path: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   requiredBy: []
-  timestamp: '2020-10-28 23:43:11+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-03 11:26:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+documentation_of: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
-- /verify/verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp.html
-title: verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+- /verify/verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
+- /verify/verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp.html
+title: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
 ---

@@ -115,6 +115,12 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
+    title: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
+  - icon: ':x:'
+    path: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
+    title: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
   - icon: ':heavy_check_mark:'
@@ -475,7 +481,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n\
@@ -680,7 +686,7 @@ data:
   path: competitive-template.hpp
   requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
@@ -794,6 +800,8 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+  - verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
+  - verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
