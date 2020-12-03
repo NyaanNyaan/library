@@ -117,7 +117,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
     title: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
     title: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   - icon: ':heavy_check_mark:'
@@ -481,7 +481,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n\
@@ -686,7 +686,7 @@ data:
   path: competitive-template.hpp
   requiredBy: []
   timestamp: '2020-07-28 11:29:32+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp

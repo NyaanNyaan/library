@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: competitive-template.hpp
     title: competitive-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: set-function/enumerate-set.hpp
     title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B
+    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_C
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B
+    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_C
   bundledCode: "#line 1 \"verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp\"\n#define\
-    \ PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B\"\
+    \ PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_C\"\
     \n#line 1 \"competitive-template.hpp\"\n#pragma region kyopro_template\n#define\
     \ Nyaan_template\n#include <immintrin.h>\n#include <bits/stdc++.h>\n#define pb\
     \ push_back\n#define eb emplace_back\n#define fi first\n#define se second\n#define\
@@ -127,7 +127,7 @@ data:
     \ 1 << x;\n  }\n  auto ss = enumerate_subset(b);\n  reverse(all(ss));\n  each(c,\
     \ ss) {\n    cout << c << \":\";\n    rep(i, n) if ((c >> i) & 1) cout << \" \"\
     \ << i;\n    cout << \"\\n\";\n  }\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B\"\
+  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_C\"\
     \n#include \"../../competitive-template.hpp\"\n#include \"../../set-function/enumerate-set.hpp\"\
     \n\nvoid solve() {\n  ini(n);\n  int b = 0;\n  ini(k);\n  rep(i, k) {\n    ini(x);\n\
     \    b |= 1 << x;\n  }\n  auto ss = enumerate_subset(b);\n  reverse(all(ss));\n\
@@ -139,8 +139,8 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   requiredBy: []
-  timestamp: '2020-12-03 11:26:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-03 12:37:02+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
 layout: document

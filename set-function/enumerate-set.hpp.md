@@ -6,11 +6,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
     title: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
     title: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\
       \u6319"
@@ -35,7 +35,7 @@ data:
   path: set-function/enumerate-set.hpp
   requiredBy: []
   timestamp: '2020-12-03 11:26:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
