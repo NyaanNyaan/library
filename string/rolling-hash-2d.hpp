@@ -61,3 +61,8 @@ template <typename Str, int BASE_NUM>
 typename RollingHash2D<Str, BASE_NUM>::Hash RollingHash2D<Str, BASE_NUM>::basis[2] =
     {inner::Hash<BASE_NUM>::get_basis(), inner::Hash<BASE_NUM>::get_basis()};
 using roriha2d = RollingHash2D<string, 1>;
+
+/**
+ * @brief 二次元ローリングハッシュ
+ * @docs docs/string/rolling-hash-2d.md
+ */

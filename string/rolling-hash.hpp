@@ -72,3 +72,8 @@ template <typename Str, int BASE_NUM>
 typename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =
     inner::Hash<BASE_NUM>::get_basis();
 using roriha = RollingHash<string, 1>;
+
+/**
+ * @brief Rolling Hash
+ * @docs 
+ */
