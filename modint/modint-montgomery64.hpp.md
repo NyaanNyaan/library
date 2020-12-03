@@ -94,16 +94,16 @@ data:
   isVerificationFile: false
   path: modint/modint-montgomery64.hpp
   requiredBy:
-  - prime/fast-factorize.hpp
   - modulo/mod-kth-root.hpp
+  - prime/fast-factorize.hpp
   timestamp: '2020-08-09 01:48:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: modint/modint-montgomery64.hpp
 layout: document
 redirect_from:

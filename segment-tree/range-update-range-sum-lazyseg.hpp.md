@@ -76,8 +76,8 @@ data:
   timestamp: '2020-08-30 00:52:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
 documentation_of: segment-tree/range-update-range-sum-lazyseg.hpp
 layout: document
 redirect_from:

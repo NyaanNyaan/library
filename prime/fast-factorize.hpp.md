@@ -224,9 +224,9 @@ data:
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: prime/fast-factorize.hpp
 layout: document
 redirect_from:

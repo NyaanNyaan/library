@@ -104,13 +104,13 @@ data:
   isVerificationFile: false
   path: matrix/matrix.hpp
   requiredBy:
-  - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
+  - matrix/matrix-tree.hpp
   timestamp: '2020-12-01 11:28:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/debug.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-unit-test/debug.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document
 redirect_from:

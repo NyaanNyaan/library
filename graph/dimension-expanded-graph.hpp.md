@@ -208,8 +208,8 @@ data:
   verifiedWith:
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
-  - verify/verify-yuki/yuki-1283.test.cpp
   - verify/verify-yuki/yuki-0697.test.cpp
+  - verify/verify-yuki/yuki-1283.test.cpp
 documentation_of: graph/dimension-expanded-graph.hpp
 layout: document
 redirect_from:

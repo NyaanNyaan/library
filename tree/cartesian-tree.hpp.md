@@ -76,8 +76,8 @@ data:
   timestamp: '2020-11-26 18:26:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+  - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
 documentation_of: tree/cartesian-tree.hpp
 layout: document
 redirect_from:
