@@ -75,5 +75,5 @@ using roriha = RollingHash<string, 1>;
 
 /**
  * @brief Rolling Hash
- * @docs 
+ * @docs docs/string/rolling-hash.md
  */

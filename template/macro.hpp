@@ -7,6 +7,11 @@
 #define reg(i, a, b) for (long long i = (a); i < (b); i++)
 #define regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)
 #define repc(i, a, cond) for (long long i = (a); (cond); i++)
+#define enm(i, val, vec)                                  \
+  for (long long i = 0; i < (long long)(vec).size(); i++) \
+    if (auto& val = vec[i]; false)                        \
+      ;                                                 \
+    else
 
 #define ini(...)   \
   int __VA_ARGS__; \

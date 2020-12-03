@@ -4,14 +4,14 @@ __attribute__((target("popcnt"))) inline int popcnt(const u64 &a) {
   return _mm_popcnt_u64(a);
 }
 
-__attribute__((target("bmi"))) inline int botbit(const u64 &a) {
+__attribute__((target("bmi"))) inline int lsb(const u64 &a) {
   return _tzcnt_u64(a);
 }
 __attribute__((target("bmi"))) inline int ctz(const u64 &a) {
   return _tzcnt_u64(a);
 }
 
-__attribute__((target("lzcnt"))) inline int topbit(const u64 &a) {
+__attribute__((target("lzcnt"))) inline int msb(const u64 &a) {
   return 63 - _lzcnt_u64(a);
 }
 __attribute__((target("lzcnt"))) inline int clz64(const u64 &a) {
