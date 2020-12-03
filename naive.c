@@ -1,1 +1,0 @@
-long d[1<<16],*p,*a=d,N,K,X,Y,i,j,k,M=1024;main(){for(scanf("%d%d%d%d",&N,p=a+M,&X,&Y);~scanf("%d",&i);a[i]=*p=1);for(i=M;i--;)K+=a[i];for(;++i<N;p+=M)for(j=M;j--;p[M+M+j]-=p[j]*(K-!!i))for(k=M;k;p[M+j^--k]+=p[j]*a[k]);for(;X<M--;k+=M<=Y?p[M]:0);printf("%d\n",k%998244353);}
