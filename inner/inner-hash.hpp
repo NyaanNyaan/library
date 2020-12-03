@@ -15,6 +15,8 @@ struct Hash : array<u64, BASE_NUM> {
 
   static constexpr u64 md = (1ull << 61) - 1;
 
+  static u64 cast(const int64_t &a) { return a < 0 ? a + md : a; }
+
   static inline constexpr u64 modmul(const u64 &a, const u64 &b) {
     u128 ret = u128(a) * b;
     ret = (ret & md) + (ret >> 61);

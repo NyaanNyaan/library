@@ -7,7 +7,6 @@ using namespace std;
 template <typename Str, int BASE_NUM = 1>
 struct RollingHash {
   using Hash = inner::Hash<BASE_NUM>;
-  using u64 = unsigned long long;
   Str data;
   vector<Hash> hs, pw;
   int s;
@@ -24,7 +23,7 @@ struct RollingHash {
     hs[0] = Hash::set(0);
     for (int i = 1; i <= s; i++) {
       pw[i] = pw[i - 1] * basis;
-      hs[i] = pfma(hs[i - 1], basis, u64(S[i - 1]));
+      hs[i] = pfma(hs[i - 1], basis, Hash::cast(S[i - 1]));
     }
   }
 
@@ -35,7 +34,8 @@ struct RollingHash {
 
   static Hash get_hash(const Str &T) {
     Hash ret = Hash::set(0);
-    for (int i = 0; i < (int)T.size(); i++) ret = pfma(ret, basis, u64(T[i]));
+    for (int i = 0; i < (int)T.size(); i++)
+      ret = pfma(ret, basis, Hash::cast(T[i]));
     return ret;
   }
 
