@@ -524,6 +524,9 @@ data:
   - name: string
     pages:
     - icon: ':heavy_check_mark:'
+      path: string/rolling-hash-2d.hpp
+      title: string/rolling-hash-2d.hpp
+    - icon: ':heavy_check_mark:'
       path: string/rolling-hash.hpp
       title: string/rolling-hash.hpp
     - icon: ':warning:'
@@ -596,6 +599,11 @@ data:
       path: trial/fast-inv.hpp
       title: "\u9AD8\u901Fmodulo\u9006\u5143"
   verificationCategories:
+  - name: verify/verify-aoj-alds
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+      title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - name: verify/verify-aoj-dsl
     pages:
     - icon: ':heavy_check_mark:'

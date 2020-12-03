@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+    title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
   - icon: ':heavy_check_mark:'
@@ -770,6 +773,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
