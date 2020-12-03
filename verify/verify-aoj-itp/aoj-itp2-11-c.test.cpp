@@ -1,5 +1,5 @@
 #define PROBLEM \
-  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_B"
+  "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP2_11_C"
 #include "../../competitive-template.hpp"
 #include "../../set-function/enumerate-set.hpp"
 
