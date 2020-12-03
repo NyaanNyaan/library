@@ -31,5 +31,4 @@ vector<pair<T, int>> dijkstra_restore(WeightedGraph<T> &g, int start = 0) {
 
 /*
  * @brief ダイクストラ法(復元付き)
- * @docs docs/shortest-path/dijkstra-with-restore.md
  **/
