@@ -179,45 +179,44 @@ data:
     \    for (auto dst : g[cur]) {\n      if (d[dst].first == T(-1) || dc + dst.cost\
     \ < d[dst].first) {\n        d[dst] = P{dc + dst.cost, cur};\n        Q.push(dc\
     \ + dst.cost, dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\
-    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)\n * @docs docs/shortest-path/dijkstra-with-restore.md\n\
-    \ **/\n#line 3 \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
-    \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
-    \ {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j\
-    \ = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n\
-    \      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
-    \ ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ -\
-    \ pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1,\
-    \ por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c = ibuf[pil++]; }\n\
-    template <typename T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n\
-    \  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n  bool minus = 0;\n\
-    \  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n  }\n  x = 0;\n  while\
-    \ (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if (minus)\
-    \ x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\n\
-    inline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\n\
-    inline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline void\
-    \ wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n\
-    \    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n  }\n\
-    \  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num\
-    \ + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n\
-    \    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n      uint32_t\
-    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
-    \     obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x\
-    \ << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num\
-    \ + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i +\
-    \ 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename\
-    \ Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n  wt(head);\n\
-    \  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n  wt(x, '\\\
-    n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
-    \ fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n#line 5 \"\
-    verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp\"\n\nvoid solve() {\n\
-    \  int N, M, s, t;\n  rd(N, M, s, t);\n\n  WeightedGraph<ll> g(N);\n  rep(i, M)\
-    \ {\n    int a, b, c;\n    rd(a, b, c);\n    g[a].emplace_back(b, c);\n  }\n \
-    \ auto d = dijkstra_restore(g, s);\n  if (d[t].first == -1) {\n    wtn(-1);\n\
-    \    return;\n  }\n  vi ans;\n  for (int r = t; r != s; r = d[r].second) ans.push_back(r);\n\
-    \  ans.push_back(s);\n  wt(d[t].first, ' ', sz(ans) - 1, '\\n');\n  repr(i, sz(ans)\
-    \ - 1) wt(ans[i + 1], ' ', ans[i], '\\n');\n}\n"
+    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)\n **/\n#line 3\
+    \ \"misc/fastio.hpp\"\nusing namespace std;\n\nnamespace fastio {\nstatic constexpr\
+    \ int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\
+    \nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int\
+    \ i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--)\
+    \ {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n\
+    \  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir\
+    \ - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n\
+    \  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por\
+    \ = 0;\n}\n\ninline void rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename\
+    \ T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n\
+    \    c = ibuf[pil++];\n  while (c < '-');\n  bool minus = 0;\n  if (c == '-')\
+    \ {\n    minus = 1;\n    c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n\
+    \    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if (minus) x = -x;\n\
+    }\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void\
+    \ rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void\
+    \ wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline void wt(T x)\
+    \ {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n    return;\n\
+    \  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n  }\n  int i = 12;\n\
+    \  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000)\
+    \ * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10)\
+    \ {\n      wt(char('0' + char(x)));\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      obuf[por + 0]\
+    \ = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n    }\n  } else\
+    \ {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x << 2) + 1, 3);\n\
+    \      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num + (x << 2), 4);\n\
+    \      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n  por\
+    \ += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void wt(Head head, Tail... tail) {\n  wt(head);\n  wt(tail...);\n}\ntemplate\
+    \ <typename T>\ninline void wtn(T x) {\n  wt(x, '\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::wt;\nusing fastio::wtn;\n#line 5 \"verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp\"\
+    \n\nvoid solve() {\n  int N, M, s, t;\n  rd(N, M, s, t);\n\n  WeightedGraph<ll>\
+    \ g(N);\n  rep(i, M) {\n    int a, b, c;\n    rd(a, b, c);\n    g[a].emplace_back(b,\
+    \ c);\n  }\n  auto d = dijkstra_restore(g, s);\n  if (d[t].first == -1) {\n  \
+    \  wtn(-1);\n    return;\n  }\n  vi ans;\n  for (int r = t; r != s; r = d[r].second)\
+    \ ans.push_back(r);\n  ans.push_back(s);\n  wt(d[t].first, ' ', sz(ans) - 1, '\\\
+    n');\n  repr(i, sz(ans) - 1) wt(ans[i + 1], ' ', ans[i], '\\n');\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n#include\
     \ \"../../competitive-template.hpp\"\n#include \"../../shortest-path/dijkstra-with-restore.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n\nvoid solve() {\n  int N, M, s, t;\n  rd(N,\
@@ -236,7 +235,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   requiredBy: []
-  timestamp: '2020-11-27 13:31:28+09:00'
+  timestamp: '2020-12-03 13:59:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp

@@ -525,10 +525,10 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: string/rolling-hash-2d.hpp
-      title: string/rolling-hash-2d.hpp
+      title: "\u4E8C\u6B21\u5143\u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\u30E5"
     - icon: ':heavy_check_mark:'
       path: string/rolling-hash.hpp
-      title: string/rolling-hash.hpp
+      title: Rolling Hash
     - icon: ':warning:'
       path: string/run-length-encoding.hpp
       title: string/run-length-encoding.hpp
@@ -1184,4 +1184,4 @@ layout: toppage
 
 バグや解説の誤りなどを発見したら[Issue](https://github.com/NyaanNyaan/library/issues)にてご一報いただけると助かります。
 
-言語はC++14での使用を想定していますが、テスト用のコードはC++17の一部の機能(構造束縛化・`constexpr if`など)が使用されています。また、一部のライブラリはavx2やBMI2などの拡張命令が実行できる環境でのみ動作します。
+動作確認はg++/C++17で行っています。また、一部のライブラリはavx2やBMI2などの拡張命令が実行できる環境でのみ動作します。

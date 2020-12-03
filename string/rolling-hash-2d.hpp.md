@@ -12,6 +12,9 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/string/rolling-hash-2d.md
+    document_title: "\u4E8C\u6B21\u5143\u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\
+      \u30E5"
     links: []
   bundledCode: "#line 2 \"string/rolling-hash-2d.hpp\"\n#include <bits/stdc++.h>\n\
     using namespace std;\n\n#line 3 \"inner/inner-hash.hpp\"\nusing namespace std;\n\
@@ -79,7 +82,8 @@ data:
     \ ret;\n  }\n\n};\n\ntemplate <typename Str, int BASE_NUM>\ntypename RollingHash2D<Str,\
     \ BASE_NUM>::Hash RollingHash2D<Str, BASE_NUM>::basis[2] =\n    {inner::Hash<BASE_NUM>::get_basis(),\
     \ inner::Hash<BASE_NUM>::get_basis()};\nusing roriha2d = RollingHash2D<string,\
-    \ 1>;\n"
+    \ 1>;\n\n/**\n * @brief \u4E8C\u6B21\u5143\u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\
+    \u30C3\u30B7\u30E5\n * @docs docs/string/rolling-hash-2d.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../inner/inner-hash.hpp\"\n\ntemplate <typename Str, int BASE_NUM = 1>\nstruct\
     \ RollingHash2D {\n  using Hash = inner::Hash<BASE_NUM>;\n  using u64 = unsigned\
@@ -104,13 +108,15 @@ data:
     \ basis[0], h);\n    }\n    return ret;\n  }\n\n};\n\ntemplate <typename Str,\
     \ int BASE_NUM>\ntypename RollingHash2D<Str, BASE_NUM>::Hash RollingHash2D<Str,\
     \ BASE_NUM>::basis[2] =\n    {inner::Hash<BASE_NUM>::get_basis(), inner::Hash<BASE_NUM>::get_basis()};\n\
-    using roriha2d = RollingHash2D<string, 1>;\n"
+    using roriha2d = RollingHash2D<string, 1>;\n\n/**\n * @brief \u4E8C\u6B21\u5143\
+    \u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\u30E5\n * @docs docs/string/rolling-hash-2d.md\n\
+    \ */\n"
   dependsOn:
   - inner/inner-hash.hpp
   isVerificationFile: false
   path: string/rolling-hash-2d.hpp
   requiredBy: []
-  timestamp: '2020-12-03 13:38:31+09:00'
+  timestamp: '2020-12-03 13:49:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
@@ -119,5 +125,15 @@ layout: document
 redirect_from:
 - /library/string/rolling-hash-2d.hpp
 - /library/string/rolling-hash-2d.hpp.html
-title: string/rolling-hash-2d.hpp
+title: "\u4E8C\u6B21\u5143\u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\u30E5"
 ---
+## Rolling Hash
+
+二次元の列の一致判定を前計算$\mathrm{O}(n)$クエリ$\mathrm{O}(1)$で処理するライブラリ。
+
+#### 使い方
+
+`RollingHash<Str>(S)`: コンストラクタ。Sを対象としたRollingHashを構築する。$\mathrm{O}(\mid S\mid)$
+`build(S)`: Sを対象としたRollingHashを構築する。$\mathrm{O}(\mid S\mid)$
+`get(l, r)`: 区間[l, r)のハッシュを返す。$\mathrm{O}(1)$
+`get_hash(T)`: Tのハッシュ値を返す。$\mathrm{O}(\mid T\mid)$

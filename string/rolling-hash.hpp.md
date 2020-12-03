@@ -15,6 +15,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/string/rolling-hash.md
+    document_title: Rolling Hash
     links: []
   bundledCode: "#line 2 \"string/rolling-hash.hpp\"\n#include <bits/stdc++.h>\nusing\
     \ namespace std;\n\n#line 3 \"inner/inner-hash.hpp\"\nusing namespace std;\n\n\
@@ -83,7 +85,8 @@ data:
     \   : bl + n == br ? -1 : a.data[al + n] < b.data[bl + n] ? 1 : -1;\n  }\n\n \
     \ int size() const { return s; }\n};\n\ntemplate <typename Str, int BASE_NUM>\n\
     typename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =\n\
-    \    inner::Hash<BASE_NUM>::get_basis();\nusing roriha = RollingHash<string, 1>;\n"
+    \    inner::Hash<BASE_NUM>::get_basis();\nusing roriha = RollingHash<string, 1>;\n\
+    \n/**\n * @brief Rolling Hash\n * @docs docs/string/rolling-hash.md\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../inner/inner-hash.hpp\"\n\ntemplate <typename Str, int BASE_NUM = 1>\nstruct\
     \ RollingHash {\n  using Hash = inner::Hash<BASE_NUM>;\n  Str data;\n  vector<Hash>\
@@ -110,13 +113,14 @@ data:
     \ + n] < b.data[bl + n] ? 1 : -1;\n  }\n\n  int size() const { return s; }\n};\n\
     \ntemplate <typename Str, int BASE_NUM>\ntypename RollingHash<Str, BASE_NUM>::Hash\
     \ RollingHash<Str, BASE_NUM>::basis =\n    inner::Hash<BASE_NUM>::get_basis();\n\
-    using roriha = RollingHash<string, 1>;\n"
+    using roriha = RollingHash<string, 1>;\n\n/**\n * @brief Rolling Hash\n * @docs\
+    \ docs/string/rolling-hash.md\n */\n"
   dependsOn:
   - inner/inner-hash.hpp
   isVerificationFile: false
   path: string/rolling-hash.hpp
   requiredBy: []
-  timestamp: '2020-12-03 13:38:31+09:00'
+  timestamp: '2020-12-03 14:17:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
@@ -126,5 +130,19 @@ layout: document
 redirect_from:
 - /library/string/rolling-hash.hpp
 - /library/string/rolling-hash.hpp.html
-title: string/rolling-hash.hpp
+title: Rolling Hash
 ---
+## Rolling Hash
+
+列の一致判定を前計算$\mathrm{O}(n)$クエリ$\mathrm{O}(1)$で処理するライブラリ。
+
+#### 使い方
+
+`RollingHash<Str>(S)`: コンストラクタ。Sを対象としたRollingHashを構築する。$\mathrm{O}(\mid S\mid)$
+`build(S)`: Sを対象としたRollingHashを構築する。$\mathrm{O}(\mid S\mid)$
+`get(l, r)`: 区間[l, r)のハッシュを返す。$\mathrm{O}(1)$
+`get_hash(T)`: Tのハッシュ値を返す。$\mathrm{O}(\mid T\mid)$
+`find(T, lower = 0)`: Sのlower文字目以降で初めてTが出てくる位置を返す。(存在しない場合は-1を返す。)$\mathrm{O}(\mid S\mid)$
+`LCP(a, b, al, bl)`: aのal文字目から始まるsuffixとbのb文字目から始まるsuffixのLCPを返す。$\mathrm{O}(\log (\mid S\mid+\mid T\mid))$
+`strcmp(a, b, al, bl, ar=-1, br=-1)`: a[al, ar)とb[bl, br)の大小を比較する。(返り値はstd::strcmpの仕様に準ずる。)$\mathrm{O}(\log (\mid S\mid+\mid T\mid))$
+`size()`: Sのサイズを返す。

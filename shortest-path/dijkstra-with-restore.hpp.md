@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/shortest-path/dijkstra-with-restore.md
     document_title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\
       \u304D)"
     links: []
@@ -74,8 +73,7 @@ data:
     \    for (auto dst : g[cur]) {\n      if (d[dst].first == T(-1) || dc + dst.cost\
     \ < d[dst].first) {\n        d[dst] = P{dc + dst.cost, cur};\n        Q.push(dc\
     \ + dst.cost, dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\
-    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)\n * @docs docs/shortest-path/dijkstra-with-restore.md\n\
-    \ **/\n"
+    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)\n **/\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
     \ \"../data-structure/radix-heap.hpp\"\n#include \"../graph/graph-template.hpp\"\
     \n\n// unreachable -> {-1, -1}\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(WeightedGraph<T>\
@@ -86,15 +84,14 @@ data:
     \    for (auto dst : g[cur]) {\n      if (d[dst].first == T(-1) || dc + dst.cost\
     \ < d[dst].first) {\n        d[dst] = P{dc + dst.cost, cur};\n        Q.push(dc\
     \ + dst.cost, dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\
-    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)\n * @docs docs/shortest-path/dijkstra-with-restore.md\n\
-    \ **/\n"
+    \u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)\n **/\n"
   dependsOn:
   - data-structure/radix-heap.hpp
   - graph/graph-template.hpp
   isVerificationFile: false
   path: shortest-path/dijkstra-with-restore.hpp
   requiredBy: []
-  timestamp: '2020-11-27 13:31:28+09:00'
+  timestamp: '2020-12-03 13:59:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
