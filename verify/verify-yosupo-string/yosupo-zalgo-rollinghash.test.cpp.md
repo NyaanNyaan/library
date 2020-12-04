@@ -130,116 +130,116 @@ data:
     \ U>&);\ntemplate <typename T>\nvoid dump(const pair<T*, int>&);\n\ntemplate <typename\
     \ T>\nvoid dump(const T& t,\n          enable_if_t<!is_void<typename T::iterator>::value>*\
     \ = nullptr) {\n  cerr << \"[ \";\n  for (auto it = t.begin(); it != t.end();)\
-    \ {\n    dump(*it);\n    cerr << (++it == t.end() ? \" ]\" : \", \");\n  }\n}\n\
-    \ntemplate <typename T, typename U>\nvoid dump(const pair<T, U>& t) {\n  cerr\
-    \ << \"( \";\n  dump(t.first);\n  cerr << \", \";\n  dump(t.second);\n  cerr <<\
-    \ \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const pair<T*, int>& t) {\n \
-    \ cerr << \"[ \";\n  for (int i = 0; i < t.second; i++) {\n    dump(t.first[i]);\n\
-    \    cerr << (i == t.second - 1 ? \" ]\" : \", \");\n  }\n}\n\nvoid trace() {\
-    \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
-    \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
-    \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
-    \ DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)                           \
-    \ \\\n  do {                                      \\\n    cerr << \"## \" << #__VA_ARGS__\
-    \ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);          \\\n  } while (0)\n\
-    #else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\n\n// macro\n\
-    #line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x : v)\n#define\
-    \ all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long i = 0; i < (long\
-    \ long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1; i >=\
-    \ 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n\
-    #define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n#define\
-    \ reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for\
-    \ (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long\
-    \ i = (a); (cond); i++)\n#define enm(i, val, vec)                            \
-    \      \\\n  for (long long i = 0; i < (long long)(vec).size(); i++) \\\n    if\
-    \ (auto& val = vec[i]; false)                        \\\n      ;             \
-    \                                    \\\n    else\n\n#define ini(...)   \\\n \
-    \ int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long\
-    \ long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string\
-    \ __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define in2(s, t)                           \\\n  for\
-    \ (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i]);              \
-    \           \\\n  }\n#define in3(s, t, u)                        \\\n  for (int\
-    \ i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i]);             \
-    \      \\\n  }\n#define in4(s, t, u, v)                     \\\n  for (int i =\
-    \ 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i], v[i]);           \
-    \  \\\n  }\n\n#define die(...)             \\\n  do {                       \\\
-    \n    Nyaan::out(__VA_ARGS__); \\\n    return;                  \\\n  } while\
-    \ (0)\n#line 24 \"template/template.hpp\"\n\nnamespace Nyaan {\nvoid solve();\n\
-    }\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\
-    \n//\n#line 3 \"string/rolling-hash.hpp\"\nusing namespace std;\n\n#line 3 \"\
-    inner/inner-hash.hpp\"\nusing namespace std;\n\nnamespace inner {\nusing u64 =\
-    \ unsigned long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM>\n\
-    struct Hash : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n\
-    \  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\
-    \n  static constexpr u64 md = (1ull << 61) - 1;\n\n  static u64 cast(const int64_t\
-    \ &a) { return a < 0 ? a + md : a; }\n\n  static inline constexpr u64 modmul(const\
-    \ u64 &a, const u64 &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) +\
-    \ (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr\
-    \ u64 modfma(const u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a)\
-    \ * b + c;\n    ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret -\
-    \ md : ret;\n  }\n  constexpr static Hash set(u64 a) {\n    Hash res;\n    for\
-    \ (int i = 0; i < n; i++) res[i] = a;\n    return res;\n  }\n  Hash &operator+=(const\
-    \ Hash &r) {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i])\
-    \ >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator+=(const u64\
-    \ &r) {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += r) >= md) (*this)[i]\
-    \ -= md;\n    return *this;\n  }\n  Hash &operator-=(const Hash &r) {\n    for\
-    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md) (*this)[i]\
-    \ -= md;\n    return *this;\n  }\n  Hash &operator-=(const u64 &r) {\n    for\
-    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r) >= md) (*this)[i]\
-    \ -= md;\n    return *this;\n  }\n  inline Hash &operator*=(const Hash &r) {\n\
-    \    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i], r[i]);\n    return\
-    \ *this;\n  }\n  Hash operator+(const Hash &r) { return Hash(*this) += r; }\n\
-    \  Hash operator+(const u64 &r) { return Hash(*this) += r; }\n  Hash operator-(const\
-    \ Hash &r) { return Hash(*this) -= r; }\n  Hash operator-(const u64 &r) { return\
-    \ Hash(*this) -= r; }\n  inline Hash operator*(const Hash &r) { return Hash(*this)\
-    \ *= r; }\n  Hash operator-() const {\n    Hash res;\n    for (int i = 0; i <\
-    \ n; i++) res[i] = (*this)[i] == 0 ? 0 : md - (*this)[i];\n    return res;\n \
-    \ }\n  friend Hash pfma(const Hash &a, const Hash &b, const Hash &c) {\n    Hash\
-    \ res;\n    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], c[i]);\n \
-    \   return res;\n  }\n  friend Hash pfma(const Hash &a, const Hash &b, const u64\
-    \ &c) {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = modfma(a[i],\
-    \ b[i], c);\n    return res;\n  }\n\n  static Hash get_basis() {\n    constexpr\
-    \ u64 ds[] = {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321};\n    static auto\
-    \ rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n         \
-    \   chrono::high_resolution_clock::now().time_since_epoch())\n            .count();\n\
-    \    static mt19937_64 rng(rand_time);\n\n    auto modpow = [&](u64 a, u64 b)\
-    \ {\n      u64 r = 1;\n      for (a %= md; b; a = modmul(a, a), b >>= 1) r = modmul(r,\
-    \ a);\n      return r;\n    };\n    auto isPrimitive = [&](u64 x) {\n      for\
-    \ (auto &d : ds)\n        if (modpow(x, (md - 1) / d) <= 1) return false;\n  \
-    \    return true;\n    };\n\n    Hash h;\n    for (int i = 0; i < n; i++) {\n\
-    \      while (isPrimitive(h[i] = rng() % (md - 1) + 1) == false)\n        ;\n\
-    \    }\n    return h;\n  }\n};\n\n}  // namespace inner\n#line 6 \"string/rolling-hash.hpp\"\
-    \n\ntemplate <typename Str, int BASE_NUM = 1>\nstruct RollingHash {\n  using Hash\
-    \ = inner::Hash<BASE_NUM>;\n  Str data;\n  vector<Hash> hs, pw;\n  int s;\n  static\
-    \ Hash basis;\n\n  RollingHash(const Str &S = Str()) { build(S); }\n\n  void build(const\
-    \ Str &S) {\n    data = S;\n    s = S.size();\n    hs.resize(s + 1);\n    pw.resize(s\
-    \ + 1);\n    pw[0] = Hash::set(1);\n    hs[0] = Hash::set(0);\n    for (int i\
-    \ = 1; i <= s; i++) {\n      pw[i] = pw[i - 1] * basis;\n      hs[i] = pfma(hs[i\
-    \ - 1], basis, Hash::cast(S[i - 1]));\n    }\n  }\n\n  Hash get(int l, int r =\
-    \ -1) const {\n    if (r == -1) r = s;\n    return pfma(hs[l], -pw[r - l], hs[r]);\n\
-    \  }\n\n  static Hash get_hash(const Str &T) {\n    Hash ret = Hash::set(0);\n\
-    \    for (int i = 0; i < (int)T.size(); i++)\n      ret = pfma(ret, basis, Hash::cast(T[i]));\n\
-    \    return ret;\n  }\n\n  int find(Str &T, int lower = 0) const {\n    auto ths\
-    \ = get_hash(T);\n    for (int i = lower; i <= s - (int)T.size(); i++)\n     \
-    \ if (ths == get(i, i + (int)T.size())) return i;\n    return -1;\n  }\n\n  friend\
-    \ int LCP(const RollingHash &a, const RollingHash &b, int al, int bl) {\n    int\
-    \ ok = 0, ng = min(a.size() - al, b.size() - bl) + 1;\n    while (ok + 1 < ng)\
-    \ {\n      int med = (ok + ng) / 2;\n      (a.get(al, med + al) == b.get(bl, med\
-    \ + bl) ? ok : ng) = med;\n    }\n    return ok;\n  }\n\n  friend int strcmp(const\
-    \ RollingHash &a, const RollingHash &b, int al, int bl,\n                    int\
-    \ ar = -1, int br = -1) {\n    if (ar == -1) ar = a.size();\n    if (br == -1)\
-    \ br = b.size();\n    int n = min<int>({LCP(a, b, al, bl), ar - al, br - bl});\n\
-    \    return al + n == ar\n               ? bl + n == br ? 0 : 1\n            \
-    \   : bl + n == br ? -1 : a.data[al + n] < b.data[bl + n] ? 1 : -1;\n  }\n\n \
-    \ int size() const { return s; }\n};\n\ntemplate <typename Str, int BASE_NUM>\n\
-    typename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =\n\
-    \    inner::Hash<BASE_NUM>::get_basis();\nusing roriha = RollingHash<string, 1>;\n\
-    \n/**\n * @brief Rolling Hash\n * @docs docs/string/rolling-hash.md\n */\n#line\
-    \ 6 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\n//\nusing\
-    \ namespace Nyaan;\nvoid Nyaan::solve() {\n  string s;\n  in(s);\n  RollingHash<string,2>\
-    \ rori(s);\n  vi ans(sz(s));\n  rep(i,sz(s))ans[i]=LCP(rori,rori,0,i);\n  out(ans);\n\
-    }\n"
+    \ {\n    dump(*it);\n    cerr << (++it == t.end() ? \"\" : \", \");\n  }\n  cerr\
+    \ << \" ]\";\n}\n\ntemplate <typename T, typename U>\nvoid dump(const pair<T,\
+    \ U>& t) {\n  cerr << \"( \";\n  dump(t.first);\n  cerr << \", \";\n  dump(t.second);\n\
+    \  cerr << \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const pair<T*, int>&\
+    \ t) {\n  cerr << \"[ \";\n  for (int i = 0; i < t.second; i++) {\n    dump(t.first[i]);\n\
+    \    cerr << (i == t.second - 1 ? \"\" : \", \");\n  }\n  cerr << \" ]\";\n}\n\
+    \nvoid trace() { cerr << endl; }\ntemplate <typename Head, typename... Tail>\n\
+    void trace(Head&& head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n \
+    \ if (sizeof...(tail) != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n\
+    }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
+    \                    \\\n  do {                                      \\\n    cerr\
+    \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
+    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
+    \ : v)\n#define each2(x, y, v) for (auto&& [x, y] : v)\n#define all(v) (v).begin(),\
+    \ (v).end()\n#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)\n\
+    #define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)\n#define\
+    \ rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n#define repr1(i,\
+    \ N) for (long long i = (N); (long long)(i) > 0; i--)\n#define reg(i, a, b) for\
+    \ (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for (long long i =\
+    \ (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long i = (a); (cond);\
+    \ i++)\n#define enm(i, val, vec)                                  \\\n  for (long\
+    \ long i = 0; i < (long long)(vec).size(); i++) \\\n    if (auto& val = vec[i];\
+    \ false)                        \\\n      ;                                  \
+    \                 \\\n    else\n\n#define ini(...)   \\\n  int __VA_ARGS__; \\\
+    \n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__; \\\n\
+    \  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s,\
+    \ t)                           \\\n  for (int i = 0; i < (int)s.size(); i++) {\
+    \ \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)\
+    \                        \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
+    \    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)\
+    \                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n   \
+    \ in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)        \
+    \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
+    \   return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
+    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
+    \ 4 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\n//\n#line\
+    \ 3 \"string/rolling-hash.hpp\"\nusing namespace std;\n\n#line 3 \"inner/inner-hash.hpp\"\
+    \nusing namespace std;\n\nnamespace inner {\nusing u64 = unsigned long long;\n\
+    using u128 = __uint128_t;\n\ntemplate <int BASE_NUM>\nstruct Hash : array<u64,\
+    \ BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n  static constexpr int\
+    \ n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\n  static constexpr\
+    \ u64 md = (1ull << 61) - 1;\n\n  static u64 cast(const int64_t &a) { return a\
+    \ < 0 ? a + md : a; }\n\n  static inline constexpr u64 modmul(const u64 &a, const\
+    \ u64 &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) + (ret >> 61);\n\
+    \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
+    \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
+    \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
+    \  constexpr static Hash set(u64 a) {\n    Hash res;\n    for (int i = 0; i <\
+    \ n; i++) res[i] = a;\n    return res;\n  }\n  Hash &operator+=(const Hash &r)\
+    \ {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i]) >= md) (*this)[i]\
+    \ -= md;\n    return *this;\n  }\n  Hash &operator+=(const u64 &r) {\n    for\
+    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += r) >= md) (*this)[i] -= md;\n\
+    \    return *this;\n  }\n  Hash &operator-=(const Hash &r) {\n    for (int i =\
+    \ 0; i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md) (*this)[i] -= md;\n\
+    \    return *this;\n  }\n  Hash &operator-=(const u64 &r) {\n    for (int i =\
+    \ 0; i < n; i++)\n      if (((*this)[i] += md - r) >= md) (*this)[i] -= md;\n\
+    \    return *this;\n  }\n  inline Hash &operator*=(const Hash &r) {\n    for (int\
+    \ i = 0; i < n; i++) (*this)[i] = modmul((*this)[i], r[i]);\n    return *this;\n\
+    \  }\n  Hash operator+(const Hash &r) { return Hash(*this) += r; }\n  Hash operator+(const\
+    \ u64 &r) { return Hash(*this) += r; }\n  Hash operator-(const Hash &r) { return\
+    \ Hash(*this) -= r; }\n  Hash operator-(const u64 &r) { return Hash(*this) -=\
+    \ r; }\n  inline Hash operator*(const Hash &r) { return Hash(*this) *= r; }\n\
+    \  Hash operator-() const {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i]\
+    \ = (*this)[i] == 0 ? 0 : md - (*this)[i];\n    return res;\n  }\n  friend Hash\
+    \ pfma(const Hash &a, const Hash &b, const Hash &c) {\n    Hash res;\n    for\
+    \ (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], c[i]);\n    return res;\n\
+    \  }\n  friend Hash pfma(const Hash &a, const Hash &b, const u64 &c) {\n    Hash\
+    \ res;\n    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], c);\n    return\
+    \ res;\n  }\n\n  static Hash get_basis() {\n    constexpr u64 ds[] = {2, 3, 5,\
+    \ 7, 11, 13, 31, 41, 61, 151, 331, 1321};\n    static auto rand_time =\n     \
+    \   chrono::duration_cast<chrono::nanoseconds>(\n            chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \            .count();\n    static mt19937_64 rng(rand_time);\n\n    auto modpow\
+    \ = [&](u64 a, u64 b) {\n      u64 r = 1;\n      for (a %= md; b; a = modmul(a,\
+    \ a), b >>= 1) r = modmul(r, a);\n      return r;\n    };\n    auto isPrimitive\
+    \ = [&](u64 x) {\n      for (auto &d : ds)\n        if (modpow(x, (md - 1) / d)\
+    \ <= 1) return false;\n      return true;\n    };\n\n    Hash h;\n    for (int\
+    \ i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md - 1) + 1)\
+    \ == false)\n        ;\n    }\n    return h;\n  }\n};\n\n}  // namespace inner\n\
+    #line 6 \"string/rolling-hash.hpp\"\n\ntemplate <typename Str, int BASE_NUM =\
+    \ 1>\nstruct RollingHash {\n  using Hash = inner::Hash<BASE_NUM>;\n  Str data;\n\
+    \  vector<Hash> hs, pw;\n  int s;\n  static Hash basis;\n\n  RollingHash(const\
+    \ Str &S = Str()) { build(S); }\n\n  void build(const Str &S) {\n    data = S;\n\
+    \    s = S.size();\n    hs.resize(s + 1);\n    pw.resize(s + 1);\n    pw[0] =\
+    \ Hash::set(1);\n    hs[0] = Hash::set(0);\n    for (int i = 1; i <= s; i++) {\n\
+    \      pw[i] = pw[i - 1] * basis;\n      hs[i] = pfma(hs[i - 1], basis, Hash::cast(S[i\
+    \ - 1]));\n    }\n  }\n\n  Hash get(int l, int r = -1) const {\n    if (r == -1)\
+    \ r = s;\n    return pfma(hs[l], -pw[r - l], hs[r]);\n  }\n\n  static Hash get_hash(const\
+    \ Str &T) {\n    Hash ret = Hash::set(0);\n    for (int i = 0; i < (int)T.size();\
+    \ i++)\n      ret = pfma(ret, basis, Hash::cast(T[i]));\n    return ret;\n  }\n\
+    \n  int find(Str &T, int lower = 0) const {\n    auto ths = get_hash(T);\n   \
+    \ for (int i = lower; i <= s - (int)T.size(); i++)\n      if (ths == get(i, i\
+    \ + (int)T.size())) return i;\n    return -1;\n  }\n\n  friend int LCP(const RollingHash\
+    \ &a, const RollingHash &b, int al, int bl) {\n    int ok = 0, ng = min(a.size()\
+    \ - al, b.size() - bl) + 1;\n    while (ok + 1 < ng) {\n      int med = (ok +\
+    \ ng) / 2;\n      (a.get(al, med + al) == b.get(bl, med + bl) ? ok : ng) = med;\n\
+    \    }\n    return ok;\n  }\n\n  friend int strcmp(const RollingHash &a, const\
+    \ RollingHash &b, int al, int bl,\n                    int ar = -1, int br = -1)\
+    \ {\n    if (ar == -1) ar = a.size();\n    if (br == -1) br = b.size();\n    int\
+    \ n = min<int>({LCP(a, b, al, bl), ar - al, br - bl});\n    return al + n == ar\n\
+    \               ? bl + n == br ? 0 : 1\n               : bl + n == br ? -1 : a.data[al\
+    \ + n] < b.data[bl + n] ? 1 : -1;\n  }\n\n  int size() const { return s; }\n};\n\
+    \ntemplate <typename Str, int BASE_NUM>\ntypename RollingHash<Str, BASE_NUM>::Hash\
+    \ RollingHash<Str, BASE_NUM>::basis =\n    inner::Hash<BASE_NUM>::get_basis();\n\
+    using roriha = RollingHash<string, 1>;\n\n/**\n * @brief Rolling Hash\n * @docs\
+    \ docs/string/rolling-hash.md\n */\n#line 6 \"verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp\"\
+    \n//\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  string s;\n  in(s);\n \
+    \ RollingHash<string,2> rori(s);\n  vi ans(sz(s));\n  rep(i,sz(s))ans[i]=LCP(rori,rori,0,i);\n\
+    \  out(ans);\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\n\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../string/rolling-hash.hpp\"\
     \n//\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  string s;\n  in(s);\n \
@@ -257,7 +257,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2020-12-03 14:17:09+09:00'
+  timestamp: '2020-12-04 23:12:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp

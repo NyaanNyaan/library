@@ -9,7 +9,7 @@ data:
     title: inner/inner-hash.hpp
   - icon: ':heavy_check_mark:'
     path: string/rolling-hash-2d.hpp
-    title: "\u4E8C\u6B21\u5143\u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\u30E5"
+    title: "\u4E8C\u6B21\u5143Rolling Hash"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -184,11 +184,11 @@ data:
     \ ret;\n  }\n\n};\n\ntemplate <typename Str, int BASE_NUM>\ntypename RollingHash2D<Str,\
     \ BASE_NUM>::Hash RollingHash2D<Str, BASE_NUM>::basis[2] =\n    {inner::Hash<BASE_NUM>::get_basis(),\
     \ inner::Hash<BASE_NUM>::get_basis()};\nusing roriha2d = RollingHash2D<string,\
-    \ 1>;\n\n/**\n * @brief \u4E8C\u6B21\u5143\u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\
-    \u30C3\u30B7\u30E5\n * @docs docs/string/rolling-hash-2d.md\n */\n#line 6 \"verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp\"\
-    \n\nvoid solve() {\n  ini(H, W);\n  vs S(H);\n  in(S);\n  roriha2d rori(S);\n\n\
-    \  ini(h, w);\n  vs T(h);\n  in(T);\n\n  auto th = roriha2d::get_hash(T);\n  rep(i,\
-    \ H - h + 1) rep(j, W - w + 1) {\n    auto sh = rori.get(i, j, i + h, j + w);\n\
+    \ 1>;\n\n/**\n * @brief \u4E8C\u6B21\u5143Rolling Hash\n * @docs docs/string/rolling-hash-2d.md\n\
+    \ */\n#line 6 \"verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp\"\n\nvoid\
+    \ solve() {\n  ini(H, W);\n  vs S(H);\n  in(S);\n  roriha2d rori(S);\n\n  ini(h,\
+    \ w);\n  vs T(h);\n  in(T);\n\n  auto th = roriha2d::get_hash(T);\n  rep(i, H\
+    \ - h + 1) rep(j, W - w + 1) {\n    auto sh = rori.get(i, j, i + h, j + w);\n\
     \    if (sh == th) out(i, j);\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_C\"\
     \n\n#include \"../../competitive-template.hpp\"\n#include \"../../string/rolling-hash-2d.hpp\"\
@@ -203,7 +203,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   requiredBy: []
-  timestamp: '2020-12-03 13:49:57+09:00'
+  timestamp: '2020-12-04 23:12:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp

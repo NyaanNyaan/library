@@ -307,44 +307,45 @@ data:
     \ U>&);\ntemplate <typename T>\nvoid dump(const pair<T*, int>&);\n\ntemplate <typename\
     \ T>\nvoid dump(const T& t,\n          enable_if_t<!is_void<typename T::iterator>::value>*\
     \ = nullptr) {\n  cerr << \"[ \";\n  for (auto it = t.begin(); it != t.end();)\
-    \ {\n    dump(*it);\n    cerr << (++it == t.end() ? \" ]\" : \", \");\n  }\n}\n\
-    \ntemplate <typename T, typename U>\nvoid dump(const pair<T, U>& t) {\n  cerr\
-    \ << \"( \";\n  dump(t.first);\n  cerr << \", \";\n  dump(t.second);\n  cerr <<\
-    \ \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const pair<T*, int>& t) {\n \
-    \ cerr << \"[ \";\n  for (int i = 0; i < t.second; i++) {\n    dump(t.first[i]);\n\
-    \    cerr << (i == t.second - 1 ? \" ]\" : \", \");\n  }\n}\n\nvoid trace() {\
-    \ cerr << endl; }\ntemplate <typename Head, typename... Tail>\nvoid trace(Head&&\
-    \ head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n  if (sizeof...(tail)\
-    \ != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n}\n\n}  // namespace\
-    \ DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)                           \
-    \ \\\n  do {                                      \\\n    cerr << \"## \" << #__VA_ARGS__\
-    \ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);          \\\n  } while (0)\n\
-    #else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\n\n// macro\n\
-    #line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x : v)\n#define\
-    \ all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long i = 0; i < (long\
-    \ long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1; i >=\
-    \ 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n\
-    #define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n#define\
-    \ reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for\
-    \ (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long\
-    \ i = (a); (cond); i++)\n#define enm(i, val, vec)                            \
-    \      \\\n  for (long long i = 0; i < (long long)(vec).size(); i++) \\\n    if\
-    \ (auto& val = vec[i]; false)                        \\\n      ;             \
-    \                                    \\\n    else\n\n#define ini(...)   \\\n \
-    \ int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long\
-    \ long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string\
-    \ __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inc(...)    \\\n  char __VA_ARGS__;\
-    \ \\\n  in(__VA_ARGS__)\n#define in2(s, t)                           \\\n  for\
-    \ (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i]);              \
-    \           \\\n  }\n#define in3(s, t, u)                        \\\n  for (int\
-    \ i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i]);             \
-    \      \\\n  }\n#define in4(s, t, u, v)                     \\\n  for (int i =\
-    \ 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i], v[i]);           \
-    \  \\\n  }\n\n#define die(...)             \\\n  do {                       \\\
-    \n    Nyaan::out(__VA_ARGS__); \\\n    return;                  \\\n  } while\
-    \ (0)\n#line 24 \"template/template.hpp\"\n\nnamespace Nyaan {\nvoid solve();\n\
-    }\nint main() { Nyaan::solve(); }\n#line 15 \"verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n, q);\n  vm a(n), b(n);\n\
+    \ {\n    dump(*it);\n    cerr << (++it == t.end() ? \"\" : \", \");\n  }\n  cerr\
+    \ << \" ]\";\n}\n\ntemplate <typename T, typename U>\nvoid dump(const pair<T,\
+    \ U>& t) {\n  cerr << \"( \";\n  dump(t.first);\n  cerr << \", \";\n  dump(t.second);\n\
+    \  cerr << \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const pair<T*, int>&\
+    \ t) {\n  cerr << \"[ \";\n  for (int i = 0; i < t.second; i++) {\n    dump(t.first[i]);\n\
+    \    cerr << (i == t.second - 1 ? \"\" : \", \");\n  }\n  cerr << \" ]\";\n}\n\
+    \nvoid trace() { cerr << endl; }\ntemplate <typename Head, typename... Tail>\n\
+    void trace(Head&& head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n \
+    \ if (sizeof...(tail) != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n\
+    }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
+    \                    \\\n  do {                                      \\\n    cerr\
+    \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
+    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
+    \ : v)\n#define each2(x, y, v) for (auto&& [x, y] : v)\n#define all(v) (v).begin(),\
+    \ (v).end()\n#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)\n\
+    #define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)\n#define\
+    \ rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n#define repr1(i,\
+    \ N) for (long long i = (N); (long long)(i) > 0; i--)\n#define reg(i, a, b) for\
+    \ (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for (long long i =\
+    \ (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long i = (a); (cond);\
+    \ i++)\n#define enm(i, val, vec)                                  \\\n  for (long\
+    \ long i = 0; i < (long long)(vec).size(); i++) \\\n    if (auto& val = vec[i];\
+    \ false)                        \\\n      ;                                  \
+    \                 \\\n    else\n\n#define ini(...)   \\\n  int __VA_ARGS__; \\\
+    \n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__; \\\n\
+    \  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s,\
+    \ t)                           \\\n  for (int i = 0; i < (int)s.size(); i++) {\
+    \ \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)\
+    \                        \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
+    \    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)\
+    \                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n   \
+    \ in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)        \
+    \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
+    \   return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
+    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
+    \ 15 \"verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp\"\nusing\
+    \ namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n, q);\n  vm a(n), b(n);\n\
     \  in2(a, b);\n  auto g = graph(n, n - 1, false, false);\n\n  HeavyLightDecomposition<vvi>\
     \ hld(g);\n\n  using af = Affine<mint>;\n  auto m1 = [](af a_, af b_) { return\
     \ a_ * b_; };\n  auto m2 = [](af a_, af b_) { return b_ * a_; };\n  SegmentTree<af,\
@@ -392,7 +393,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2020-12-03 23:28:38+09:00'
+  timestamp: '2020-12-04 23:12:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

@@ -250,7 +250,7 @@ data:
       title: math/float-binomial.hpp
     - icon: ':warning:'
       path: math/gray-code.hpp
-      title: "\u30B0\u30EC\u30A4\u30B3\u30FC\u30C9"
+      title: Gray code
     - icon: ':heavy_check_mark:'
       path: math/grundy-number.hpp
       title: Grundy Number
@@ -538,7 +538,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: string/rolling-hash-2d.hpp
-      title: "\u4E8C\u6B21\u5143\u30ED\u30FC\u30EA\u30F3\u30B0\u30CF\u30C3\u30B7\u30E5"
+      title: "\u4E8C\u6B21\u5143Rolling Hash"
     - icon: ':heavy_check_mark:'
       path: string/rolling-hash.hpp
       title: Rolling Hash
@@ -551,6 +551,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/suffix-array.hpp
       title: string/suffix-array.hpp
+    - icon: ':warning:'
+      path: string/suffix-automaton.hpp
+      title: Suffix Automaton
   - name: template
     pages:
     - icon: ':heavy_check_mark:'
