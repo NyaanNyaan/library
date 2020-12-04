@@ -197,7 +197,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    \ 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
     \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
     \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
     \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
@@ -329,7 +329,7 @@ data:
     \  him = him.pre(i << 1);\n      swap(re, hre);\n      swap(im, him);\n    }\n\
     \  }\n  return make_pair(re.pre(deg), im.pre(deg));\n}\n\n/**\n * @brief \u4E09\
     \u89D2\u95A2\u6570\n * @docs docs/fps/fps-circular.md\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
-    \n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
     \n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
     ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
     \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
@@ -668,7 +668,7 @@ data:
     \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
-    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 7 \"\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 5 \"\
     fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
     \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
     FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
@@ -768,7 +768,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-0963-circular.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-0963-circular.test.cpp

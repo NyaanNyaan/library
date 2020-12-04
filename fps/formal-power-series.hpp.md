@@ -141,10 +141,10 @@ data:
     document_title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
       \u30A4\u30D6\u30E9\u30EA"
     links: []
-  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename\
-    \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
-    \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
-    \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
+  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\n\
+    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
+    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
+    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
     \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
     \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
     \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
@@ -205,9 +205,9 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n"
-  code: "#pragma once\n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries :\
-    \ vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
-    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+  code: "#pragma once\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint>\
+    \ {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS\
+    \ &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
     \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
@@ -291,7 +291,7 @@ data:
   - fps/nth-term.hpp
   - fps/fps-circular.hpp
   - fps/fps-famous-series.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp

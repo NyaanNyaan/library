@@ -16,10 +16,10 @@ data:
     _deprecated_at_docs: docs/fps/differential-equation.md
     document_title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
     links: []
-  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename\
-    \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
-    \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
-    \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
+  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\n\
+    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
+    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
+    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
     \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
     \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
     \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
@@ -104,7 +104,7 @@ data:
   isVerificationFile: false
   path: fps/differential-equation.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0963.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: data-structure/radix-heap.hpp
     title: Radix Heap
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':question:'

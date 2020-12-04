@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: math/elementary-function.hpp
     title: math/elementary-function.hpp
   - icon: ':question:'

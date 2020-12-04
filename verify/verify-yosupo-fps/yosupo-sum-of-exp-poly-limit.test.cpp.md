@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: fps/sum-of-exponential-times-poly.hpp
     title: $\sum_{i}a^i f(i)$
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':x:'
@@ -273,9 +273,9 @@ data:
     \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
     \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
     \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 2 \"fps/lagrange-interpolation-point.hpp\"\n\n\n\n\
-    #line 6 \"fps/lagrange-interpolation-point.hpp\"\n\n// given  : y(x=0) , y(x=1)\
-    \ , ... , y(k)\n// return : y(x)\ntemplate <typename mint>\nmint lagrange_interpolation(const\
+    \ - 1, r);\n  }\n};\n#line 2 \"fps/lagrange-interpolation-point.hpp\"\n\n#line\
+    \ 4 \"fps/lagrange-interpolation-point.hpp\"\n\n// given  : y(x=0) , y(x=1) ,\
+    \ ... , y(k)\n// return : y(x)\ntemplate <typename mint>\nmint lagrange_interpolation(const\
     \ vector<mint>& y, long long x,\n                            Binomial<mint>& C)\
     \ {\n  int N = (int)y.size() - 1;\n  if (x <= N) return y[x];\n  mint ret = 0;\n\
     \  vector<mint> dp(N + 1, 1), pd(N + 1, 1);\n  mint a = x, one = 1;\n  for (int\
@@ -283,7 +283,7 @@ data:
     \ i--) pd[i - 1] = pd[i] * a, a += one;\n  for (int i = 0; i <= N; i++) {\n  \
     \  mint tmp = y[i] * dp[i] * pd[i] * C.finv(i) * C.finv(N - i);\n    ret += ((N\
     \ - i) & 1) ? -tmp : tmp;\n  }\n  return ret;\n}\n#line 2 \"fps/sum-of-exponential-times-poly.hpp\"\
-    \n\n\n\n#line 6 \"fps/sum-of-exponential-times-poly.hpp\"\n\n// given  : f(0)...f(k)\
+    \n\n#line 4 \"fps/sum-of-exponential-times-poly.hpp\"\n\n// given  : f(0)...f(k)\
     \ (deg(f) = k), a, n\n// return : \\sum_{i=0...n-1} a^i f(i)\ntemplate <typename\
     \ mint>\nmint sum_of_exp(const vector<mint>& f, mint a, long long n,\n       \
     \         Binomial<mint>& C) {\n  if (n == 0) return mint(0);\n  if (a == mint(0))\
@@ -344,7 +344,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp

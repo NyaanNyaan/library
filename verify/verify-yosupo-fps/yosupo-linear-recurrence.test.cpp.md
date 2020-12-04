@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: fps/berlekamp-massey.hpp
     title: fps/berlekamp-massey.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':x:'
@@ -216,7 +216,7 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"fps/berlekamp-massey.hpp\"\n\n\n\ntemplate <typename\
+    \ { return mod; }\n};\n#line 2 \"fps/berlekamp-massey.hpp\"\n\ntemplate <typename\
     \ mint>\nvector<mint> BerlekampMassey(const vector<mint> &s) {\n  const int N\
     \ = (int)s.size();\n  vector<mint> b, c;\n  b.reserve(N + 1);\n  c.reserve(N +\
     \ 1);\n  b.push_back(mint(1));\n  c.push_back(mint(1));\n  mint y = mint(1);\n\
@@ -285,7 +285,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp

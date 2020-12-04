@@ -5,7 +5,7 @@ data:
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   - icon: ':x:'
@@ -27,10 +27,10 @@ data:
   attributes:
     document_title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
     links: []
-  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename\
-    \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
-    \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
-    \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
+  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\n\
+    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
+    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
+    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
     \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
     \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
     \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
@@ -542,7 +542,7 @@ data:
   isVerificationFile: false
   path: fps/fps-composition-fast.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp

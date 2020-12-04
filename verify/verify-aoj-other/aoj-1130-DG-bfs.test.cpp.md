@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/dimension-expanded-graph.hpp
     title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1130
@@ -292,7 +292,7 @@ data:
   path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
 layout: document

@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
     title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

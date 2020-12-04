@@ -32,7 +32,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: shortest-path/bellman-ford.hpp
     title: shortest-path/bellman-ford.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/bfs01.hpp
     title: shortest-path/bfs01.hpp
   - icon: ':question:'
@@ -56,7 +56,7 @@ data:
   - icon: ':question:'
     path: tree/cartesian-tree.hpp
     title: Cartesian Tree
-  - icon: ':x:'
+  - icon: ':question:'
     path: tree/dsu-on-tree.hpp
     title: DSU on Tree(Guni)
   - icon: ':x:'
@@ -120,16 +120,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
     title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
   - icon: ':x:'

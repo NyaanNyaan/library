@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: graph/static-graph.hpp
     title: Static Graph
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':question:'

@@ -9,11 +9,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segment-tree/range-add-range-sum-lazyseg.hpp\"\n\n\n\ntemplate\
@@ -75,7 +75,7 @@ data:
   path: segment-tree/range-add-range-sum-lazyseg.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp

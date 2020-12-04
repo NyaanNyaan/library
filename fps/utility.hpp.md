@@ -37,7 +37,7 @@ data:
     \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
     \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
     \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename\
+    \ - 1, r);\n  }\n};\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename\
     \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
     \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
     \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
@@ -146,7 +146,7 @@ data:
   isVerificationFile: false
   path: fps/utility.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-1145.test.cpp

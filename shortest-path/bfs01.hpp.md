@@ -6,11 +6,11 @@ data:
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
     title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"shortest-path/bfs01.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
@@ -63,7 +63,7 @@ data:
   path: shortest-path/bfs01.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
 documentation_of: shortest-path/bfs01.hpp

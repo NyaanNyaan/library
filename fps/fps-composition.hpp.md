@@ -20,7 +20,7 @@ data:
     document_title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\\
       frac{3}{2}}\\right)$ )"
     links: []
-  bundledCode: "#line 2 \"fps/fps-composition.hpp\"\n\n\n#line 2 \"modulo/binomial.hpp\"\
+  bundledCode: "#line 2 \"fps/fps-composition.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
     \n\n\n\ntemplate <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n\
     \  Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n\
     \    assert(T::get_mod() != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0]\
@@ -40,7 +40,7 @@ data:
     \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
     \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
     \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename\
+    \ - 1, r);\n  }\n};\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename\
     \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
     \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
     \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
@@ -104,7 +104,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 6 \"fps/fps-composition.hpp\"\n\n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\n\
+    \ 5 \"fps/fps-composition.hpp\"\n\n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\n\
     template <typename mint>\nFormalPowerSeries<mint> Composition(FormalPowerSeries<mint>\
     \ P,\n                                    FormalPowerSeries<mint> Q,\n       \
     \                             Binomial<mint>& C, int deg = -1) {\n  using fps\
@@ -133,7 +133,7 @@ data:
     \    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief \u95A2\
     \u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\right)$\
     \ )\n * @docs docs/fps/fps-composition.md\n */\n"
-  code: "#pragma once\n\n\n#include \"../modulo/binomial.hpp\"\n#include \"./formal-power-series.hpp\"\
+  code: "#pragma once\n\n#include \"../modulo/binomial.hpp\"\n#include \"./formal-power-series.hpp\"\
     \n\n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ Composition(FormalPowerSeries<mint> P,\n                                   \
     \ FormalPowerSeries<mint> Q,\n                                    Binomial<mint>&\
@@ -168,7 +168,7 @@ data:
   isVerificationFile: false
   path: fps/fps-composition.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp

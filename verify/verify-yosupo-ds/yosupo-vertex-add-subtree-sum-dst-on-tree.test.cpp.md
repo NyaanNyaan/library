@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: graph/static-graph.hpp
     title: Static Graph
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'
@@ -31,7 +31,7 @@ data:
   - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: tree/dsu-on-tree.hpp
     title: DSU on Tree(Guni)
   _extendedRequiredBy: []

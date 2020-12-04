@@ -16,9 +16,9 @@ data:
     _deprecated_at_docs: docs/fps/polynomial-gcd.md
     document_title: "\u591A\u9805\u5F0FGCD"
     links: []
-  bundledCode: "#line 2 \"fps/polynomial-gcd.hpp\"\n\n\n\n#line 2 \"fps/formal-power-series.hpp\"\
-    \n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
-    \  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+  bundledCode: "#line 2 \"fps/polynomial-gcd.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
     \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
@@ -80,7 +80,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 6 \"fps/polynomial-gcd.hpp\"\n\nnamespace poly_gcd {\n\ntemplate <typename mint>\n\
+    \ 4 \"fps/polynomial-gcd.hpp\"\n\nnamespace poly_gcd {\n\ntemplate <typename mint>\n\
     using FPS = FormalPowerSeries<mint>;\ntemplate <typename mint>\nusing Arr = pair<FPS<mint>,\
     \ FPS<mint>>;\n\ntemplate <typename mint>\nstruct Mat {\n  using fps = FPS<mint>;\n\
     \  fps a00, a01, a10, a11;\n\n  Mat() = default;\n  Mat(const fps& a00_, const\
@@ -126,7 +126,7 @@ data:
     }\n\n}  // namespace poly_gcd\nusing poly_gcd::PolyGCD;\nusing poly_gcd::PolyInv;\n\
     \n/**\n * @brief \u591A\u9805\u5F0FGCD\n * @docs docs/fps/polynomial-gcd.md\n\
     \ */\n"
-  code: "#pragma once\n\n\n\n#include \"./formal-power-series.hpp\"\n\nnamespace poly_gcd\
+  code: "#pragma once\n\n#include \"./formal-power-series.hpp\"\n\nnamespace poly_gcd\
     \ {\n\ntemplate <typename mint>\nusing FPS = FormalPowerSeries<mint>;\ntemplate\
     \ <typename mint>\nusing Arr = pair<FPS<mint>, FPS<mint>>;\n\ntemplate <typename\
     \ mint>\nstruct Mat {\n  using fps = FPS<mint>;\n  fps a00, a01, a10, a11;\n\n\
@@ -177,7 +177,7 @@ data:
   isVerificationFile: false
   path: fps/polynomial-gcd.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   - icon: ':question:'
@@ -22,16 +22,16 @@ data:
   - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: trial/fast-gcd.hpp
     title: "\u9AD8\u901FGCD"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: trial/fast-inv.hpp
     title: "\u9AD8\u901Fmodulo\u9006\u5143"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -295,7 +295,7 @@ data:
   path: verify/verify-unit-test/fast-inv-gcd.test.cpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/fast-inv-gcd.test.cpp
 layout: document

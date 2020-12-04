@@ -6,20 +6,20 @@ data:
   - icon: ':x:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/elementary-function.hpp\"\n\nlong long my_gcd(long\
@@ -115,7 +115,7 @@ data:
   path: math/elementary-function.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp

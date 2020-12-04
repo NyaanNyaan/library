@@ -11,10 +11,10 @@ data:
   - icon: ':x:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   - icon: ':x:'
@@ -203,7 +203,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    \ 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
     \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
     \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
     \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
@@ -675,21 +675,21 @@ data:
     \ PS);\n  }\n\n  fps ans(N, mint());\n  {\n    // step 4,5\n    for (int i = 0;\
     \ i < K; i++) ans += (QP[i] * TS[i]).pre(N);\n  }\n  return ans;\n}\n\n/**\n *\
     \ @brief \u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )\n */\n#line 2 \"\
-    fps/ntt-friendly-fps.hpp\"\n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 6\
-    \ \"ntt/ntt-avx2.hpp\"\n\nconstexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t buf1_[SZ_FFT_BUF]\
-    \ __attribute__((aligned(64)));\nuint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
-    \ntemplate <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr()\
-    \ {\n    uint32_t mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32]\
-    \ = {};\n    int idx = 0;\n    u64 m = mod - 1;\n    for (u64 i = 2; i * i <=\
-    \ m; ++i) {\n      if (m % i == 0) {\n        ds[idx++] = i;\n        while (m\
-    \ % i == 0) m /= i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t\
-    \ pr = 2;\n    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx;\
-    \ ++i) {\n        u64 a = pr, b = (mod - 1) / ds[i], r = 1;\n        while (b)\
-    \ {\n          if (b & 1) r = r * a % mod;\n          a = a * a % mod;\n     \
-    \     b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n       \
-    \   break;\n        }\n      }\n      if (flg == 1) break;\n      ++pr;\n    }\n\
-    \    return pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n\
-    \  static constexpr uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
+    fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 6 \"ntt/ntt-avx2.hpp\"\
+    \n\nconstexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
+    uint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\ntemplate <typename\
+    \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t mod\
+    \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
+    \ idx = 0;\n    u64 m = mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n   \
+    \   if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i == 0) m /=\
+    \ i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t pr = 2;\n\
+    \    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n\
+    \        u64 a = pr, b = (mod - 1) / ds[i], r = 1;\n        while (b) {\n    \
+    \      if (b & 1) r = r * a % mod;\n          a = a * a % mod;\n          b >>=\
+    \ 1;\n        }\n        if (r == 1) {\n          flg = 0;\n          break;\n\
+    \        }\n      }\n      if (flg == 1) break;\n      ++pr;\n    }\n    return\
+    \ pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr\
+    \ uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
     \ - 1);\n  mint dw[level], dy[level];\n  mint *buf1, *buf2;\n\n  constexpr NTT()\
     \ {\n    setwy(level);\n    buf1 = reinterpret_cast<mint *>(::buf1_);\n    buf2\
     \ = reinterpret_cast<mint *>(::buf2_);\n  }\n\n  constexpr void setwy(int k) {\n\
@@ -974,7 +974,7 @@ data:
     \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
-    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 7 \"\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 5 \"\
     fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
     \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
     FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
@@ -1091,7 +1091,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp

@@ -31,9 +31,9 @@ data:
   attributes:
     document_title: Multipoint Evaluation
     links: []
-  bundledCode: "#line 2 \"fps/multipoint-evaluation.hpp\"\n\n\n\n#line 2 \"fps/formal-power-series.hpp\"\
-    \n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
-    \  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+  bundledCode: "#line 2 \"fps/multipoint-evaluation.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
     \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
@@ -95,7 +95,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 6 \"fps/multipoint-evaluation.hpp\"\n\ntemplate <typename mint>\nstruct ProductTree\
+    \ 4 \"fps/multipoint-evaluation.hpp\"\n\ntemplate <typename mint>\nstruct ProductTree\
     \ {\n  using fps = FormalPowerSeries<mint>;\n  const vector<mint> &xs;\n  vector<fps>\
     \ buf;\n  int N, xsz;\n  vector<int> l, r;\n  ProductTree(const vector<mint> &xs_)\
     \ : xs(xs_), xsz(xs.size()) {\n    N = 1;\n    while (N < (int)xs.size()) N *=\
@@ -136,7 +136,7 @@ data:
     \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
     \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
     }\n\n/**\n * @brief Multipoint Evaluation\n */\n"
-  code: "#pragma once\n\n\n\n#include \"./formal-power-series.hpp\"\n\ntemplate <typename\
+  code: "#pragma once\n\n#include \"./formal-power-series.hpp\"\n\ntemplate <typename\
     \ mint>\nstruct ProductTree {\n  using fps = FormalPowerSeries<mint>;\n  const\
     \ vector<mint> &xs;\n  vector<fps> buf;\n  int N, xsz;\n  vector<int> l, r;\n\
     \  ProductTree(const vector<mint> &xs_) : xs(xs_), xsz(xs.size()) {\n    N = 1;\n\
@@ -185,7 +185,7 @@ data:
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
   - fps/polynomial-interpolation.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp

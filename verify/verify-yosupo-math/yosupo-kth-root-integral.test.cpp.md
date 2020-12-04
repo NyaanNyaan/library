@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: math/kth-root-integral.hpp
     title: $\mathrm{floor}(a^{\frac{1}{k}})$
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

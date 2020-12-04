@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/range-add-range-sum-lazyseg.hpp
     title: segment-tree/range-add-range-sum-lazyseg.hpp
   - icon: ':question:'

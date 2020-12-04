@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: hashmap/hashmap-chain.hpp
     title: "Hash Map(\u9023\u9396\u6CD5)"
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

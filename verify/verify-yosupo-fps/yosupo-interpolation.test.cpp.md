@@ -197,9 +197,9 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"fps/multipoint-evaluation.hpp\"\n\n\n\n#line 2 \"fps/formal-power-series.hpp\"\
-    \n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
-    \  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+    \ 2 \"fps/multipoint-evaluation.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
     \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
@@ -261,7 +261,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 6 \"fps/multipoint-evaluation.hpp\"\n\ntemplate <typename mint>\nstruct ProductTree\
+    \ 4 \"fps/multipoint-evaluation.hpp\"\n\ntemplate <typename mint>\nstruct ProductTree\
     \ {\n  using fps = FormalPowerSeries<mint>;\n  const vector<mint> &xs;\n  vector<fps>\
     \ buf;\n  int N, xsz;\n  vector<int> l, r;\n  ProductTree(const vector<mint> &xs_)\
     \ : xs(xs_), xsz(xs.size()) {\n    N = 1;\n    while (N < (int)xs.size()) N *=\
@@ -302,7 +302,7 @@ data:
     \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
     \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
     }\n\n/**\n * @brief Multipoint Evaluation\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
-    \n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
     \n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
     ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
     \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
@@ -641,7 +641,7 @@ data:
     \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
-    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 7 \"\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 5 \"\
     fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
     \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
     FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
@@ -725,8 +725,8 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"fps/polynomial-interpolation.hpp\"\n\n\n\n#line\
-    \ 7 \"fps/polynomial-interpolation.hpp\"\n\ntemplate <class mint>\nFormalPowerSeries<mint>\
+    \ { return mod; }\n};\n#line 2 \"fps/polynomial-interpolation.hpp\"\n\n#line 5\
+    \ \"fps/polynomial-interpolation.hpp\"\n\ntemplate <class mint>\nFormalPowerSeries<mint>\
     \ PolynomialInterpolation(const vector<mint> &xs,\n                          \
     \                      const vector<mint> &ys) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  assert(xs.size() == ys.size());\n  ProductTree<mint> ptree(xs);\n  fps w =\
@@ -767,7 +767,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp

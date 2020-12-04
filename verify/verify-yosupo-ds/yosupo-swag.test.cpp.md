@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: data-structure/slide-window-aggregation.hpp
     title: data-structure/slide-window-aggregation.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':x:'

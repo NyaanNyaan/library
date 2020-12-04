@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: graph/max-independent-set.hpp
     title: graph/max-independent-set.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

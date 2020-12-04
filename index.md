@@ -17,7 +17,7 @@ data:
     - icon: ':x:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: "\u52D5\u7684Binary Indexed Tree"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-union-find.hpp
       title: "\u52D5\u7684Union Find"
     - icon: ':x:'
@@ -179,7 +179,7 @@ data:
     - icon: ':warning:'
       path: graph/cycle-detection.hpp
       title: graph/cycle-detection.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: graph/dimension-expanded-graph.hpp
       title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
     - icon: ':question:'
@@ -223,7 +223,7 @@ data:
     - icon: ':question:'
       path: hashmap/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: hashmap/hashset.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   - name: inner
@@ -231,7 +231,7 @@ data:
     - icon: ':question:'
       path: inner/inner-hash.hpp
       title: inner/inner-hash.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
   - name: math
@@ -239,7 +239,7 @@ data:
     - icon: ':x:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-    - icon: ':x:'
+    - icon: ':question:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
     - icon: ':warning:'
@@ -295,7 +295,7 @@ data:
     - icon: ':x:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -307,13 +307,13 @@ data:
     - icon: ':x:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
       path: misc/simulated-annealing.hpp
       title: misc/simulated-annealing.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: misc/timer.hpp
       title: misc/timer.hpp
     - icon: ':warning:'
@@ -324,10 +324,10 @@ data:
     - icon: ':x:'
       path: modint/arbitrary-modint.hpp
       title: modint/arbitrary-modint.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: modint/modint-montgomery64.hpp
       title: modint/modint-montgomery64.hpp
     - icon: ':x:'
@@ -421,13 +421,13 @@ data:
       title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: prime
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: prime/factor-enumerate.hpp
       title: prime/factor-enumerate.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: prime/fast-factorize.hpp
       title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: prime/osak.hpp
       title: prime/osak.hpp
     - icon: ':x:'
@@ -472,7 +472,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/range-add-range-min-lazyseg.hpp
       title: segment-tree/range-add-range-min-lazyseg.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/range-add-range-sum-lazyseg.hpp
       title: segment-tree/range-add-range-sum-lazyseg.hpp
     - icon: ':heavy_check_mark:'
@@ -492,7 +492,7 @@ data:
       title: segment-tree/segment-tree.hpp
   - name: set-function
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set-function/enumerate-set.hpp
       title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319"
     - icon: ':x:'
@@ -509,7 +509,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/bellman-ford.hpp
       title: shortest-path/bellman-ford.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/bfs01.hpp
       title: shortest-path/bfs01.hpp
     - icon: ':question:'
@@ -585,7 +585,7 @@ data:
     - icon: ':warning:'
       path: tree/convert-rooted-tree.hpp
       title: tree/convert-rooted-tree.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: tree/dsu-on-tree.hpp
       title: DSU on Tree(Guni)
     - icon: ':x:'
@@ -608,10 +608,10 @@ data:
       title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   - name: trial
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: trial/fast-gcd.hpp
       title: "\u9AD8\u901FGCD"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: trial/fast-inv.hpp
       title: "\u9AD8\u901Fmodulo\u9006\u5143"
   verificationCategories:
@@ -732,15 +732,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - name: verify/verify-aoj-itp
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
       title: verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
       title: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   - name: verify/verify-aoj-ntl
@@ -748,33 +748,33 @@ data:
     - icon: ':x:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - name: verify/verify-aoj-other
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
       title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
       title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
       title: verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
       title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2995.test.cpp
       title: verify/verify-aoj-other/aoj-2995.test.cpp
   - name: verify/verify-unit-test
@@ -785,22 +785,22 @@ data:
     - icon: ':x:'
       path: verify/verify-unit-test/dijkstra.test.cpp
       title: verify/verify-unit-test/dijkstra.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/factorize.test.cpp
       title: verify/verify-unit-test/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fast-inv-gcd.test.cpp
       title: verify/verify-unit-test/fast-inv-gcd.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashmap.test.cpp
       title: verify/verify-unit-test/hashmap.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashset.test.cpp
       title: verify/verify-unit-test/hashset.test.cpp
     - icon: ':x:'
       path: verify/verify-unit-test/multiplicative-function.test.cpp
       title: verify/verify-unit-test/multiplicative-function.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/osak.test.cpp
       title: verify/verify-unit-test/osak.test.cpp
     - icon: ':x:'

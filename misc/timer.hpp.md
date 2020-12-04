@@ -11,21 +11,21 @@ data:
   - icon: ':x:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: trial/fast-gcd.hpp
     title: "\u9AD8\u901FGCD"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: trial/fast-inv.hpp
     title: "\u9AD8\u901Fmodulo\u9006\u5143"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fast-inv-gcd.test.cpp
     title: verify/verify-unit-test/fast-inv-gcd.test.cpp
   - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/timer.hpp\"\n\n\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
@@ -48,7 +48,7 @@ data:
   - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp

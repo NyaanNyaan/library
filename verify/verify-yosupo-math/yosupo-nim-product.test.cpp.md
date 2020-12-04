@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: math/nim-product.hpp
     title: Nim Product
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

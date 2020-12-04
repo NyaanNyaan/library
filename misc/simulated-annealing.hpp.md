@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   _extendedRequiredBy: []

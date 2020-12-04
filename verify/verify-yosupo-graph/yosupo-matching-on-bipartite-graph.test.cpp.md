@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: flow/flow-on-bipartite-graph.hpp
     title: flow/flow-on-bipartite-graph.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

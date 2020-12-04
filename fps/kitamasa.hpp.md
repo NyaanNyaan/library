@@ -25,9 +25,9 @@ data:
     _deprecated_at_docs: docs/fps/kitamasa.md
     document_title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
     links: []
-  bundledCode: "#line 2 \"fps/kitamasa.hpp\"\n\n\n\n#line 2 \"fps/formal-power-series.hpp\"\
-    \n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
-    \  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+  bundledCode: "#line 2 \"fps/kitamasa.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
     \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
@@ -89,7 +89,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 6 \"fps/kitamasa.hpp\"\n\ntemplate <typename mint>\nmint LinearRecursionFormula(long\
+    \ 4 \"fps/kitamasa.hpp\"\n\ntemplate <typename mint>\nmint LinearRecursionFormula(long\
     \ long k, FormalPowerSeries<mint> Q,\n                            FormalPowerSeries<mint>\
     \ P) {\n  Q.shrink();\n  mint ret = 0;\n  if (P.size() >= Q.size()) {\n    auto\
     \ R = P / Q;\n    P -= R * Q;\n    P.shrink();\n    if (k < (int)R.size()) ret\
@@ -127,7 +127,7 @@ data:
     \  return LinearRecursionFormula<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\
     \u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n\
     \ */\n"
-  code: "#pragma once\n\n\n\n#include \"formal-power-series.hpp\"\n\ntemplate <typename\
+  code: "#pragma once\n\n#include \"formal-power-series.hpp\"\n\ntemplate <typename\
     \ mint>\nmint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,\n\
     \                            FormalPowerSeries<mint> P) {\n  Q.shrink();\n  mint\
     \ ret = 0;\n  if (P.size() >= Q.size()) {\n    auto R = P / Q;\n    P -= R * Q;\n\
@@ -171,7 +171,7 @@ data:
   path: fps/kitamasa.hpp
   requiredBy:
   - fps/nth-term.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0215.test.cpp

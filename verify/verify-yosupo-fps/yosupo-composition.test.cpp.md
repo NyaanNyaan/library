@@ -12,7 +12,7 @@ data:
   - icon: ':x:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':x:'
@@ -201,7 +201,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    \ 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
     \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
     \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
     \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
@@ -264,7 +264,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 2 \"fps/fps-composition.hpp\"\n\n\n#line 2 \"modulo/binomial.hpp\"\n\n\n\ntemplate\
+    \ 2 \"fps/fps-composition.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\n\n\n\ntemplate\
     \ <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int\
     \ MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod()\
     \ != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i\
@@ -284,7 +284,7 @@ data:
     \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
     \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
     \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 6 \"fps/fps-composition.hpp\"\n\n// find Q(P(x)) mod\
+    \ - 1, r);\n  }\n};\n#line 5 \"fps/fps-composition.hpp\"\n\n// find Q(P(x)) mod\
     \ x ^ min(deg(P), deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint> Composition(FormalPowerSeries<mint>\
     \ P,\n                                    FormalPowerSeries<mint> Q,\n       \
     \                             Binomial<mint>& C, int deg = -1) {\n  using fps\
@@ -313,7 +313,7 @@ data:
     \    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief \u95A2\
     \u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\right)$\
     \ )\n * @docs docs/fps/fps-composition.md\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
-    \n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
     \n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
     ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
     \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
@@ -652,7 +652,7 @@ data:
     \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
-    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 7 \"\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 5 \"\
     fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
     \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
     FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
@@ -803,7 +803,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition.test.cpp

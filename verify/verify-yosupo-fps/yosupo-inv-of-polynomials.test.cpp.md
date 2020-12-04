@@ -11,7 +11,7 @@ data:
   - icon: ':x:'
     path: fps/polynomial-gcd.hpp
     title: "\u591A\u9805\u5F0FGCD"
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':x:'
@@ -229,8 +229,8 @@ data:
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
     #line 10 \"verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp\"\n//\n\
-    #line 2 \"fps/ntt-friendly-fps.hpp\"\n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\
-    \n#line 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
+    #line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line\
+    \ 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
     \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
     my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
     \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
@@ -570,7 +570,7 @@ data:
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
     \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 2 \"\
-    fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
     \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
     \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
     \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
@@ -633,7 +633,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 7 \"fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
+    \ 5 \"fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
     \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
     FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
     \ r) {\n  if (this->empty() || r.empty()) {\n    this->clear();\n    return *this;\n\
@@ -683,7 +683,7 @@ data:
     \ i < 2 * m; ++i) x[i] *= y[i];\n    x.intt();\n    b.insert(end(b), begin(x)\
     \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
     \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
-    \ */\n#line 2 \"fps/polynomial-gcd.hpp\"\n\n\n\n#line 6 \"fps/polynomial-gcd.hpp\"\
+    \ */\n#line 2 \"fps/polynomial-gcd.hpp\"\n\n#line 4 \"fps/polynomial-gcd.hpp\"\
     \n\nnamespace poly_gcd {\n\ntemplate <typename mint>\nusing FPS = FormalPowerSeries<mint>;\n\
     template <typename mint>\nusing Arr = pair<FPS<mint>, FPS<mint>>;\n\ntemplate\
     \ <typename mint>\nstruct Mat {\n  using fps = FPS<mint>;\n  fps a00, a01, a10,\
@@ -799,7 +799,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp

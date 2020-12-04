@@ -23,8 +23,8 @@ data:
     document_title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97\
       (Berlekamp-Massey/Bostan-Mori)"
     links: []
-  bundledCode: "#line 2 \"fps/nth-term.hpp\"\n\n\n\n#line 2 \"fps/berlekamp-massey.hpp\"\
-    \n\n\n\ntemplate <typename mint>\nvector<mint> BerlekampMassey(const vector<mint>\
+  bundledCode: "#line 2 \"fps/nth-term.hpp\"\n\n#line 2 \"fps/berlekamp-massey.hpp\"\
+    \n\ntemplate <typename mint>\nvector<mint> BerlekampMassey(const vector<mint>\
     \ &s) {\n  const int N = (int)s.size();\n  vector<mint> b, c;\n  b.reserve(N +\
     \ 1);\n  c.reserve(N + 1);\n  b.push_back(mint(1));\n  c.push_back(mint(1));\n\
     \  mint y = mint(1);\n  for (int ed = 1; ed <= N; ed++) {\n    int l = int(c.size()),\
@@ -35,9 +35,9 @@ data:
     \ - 1 - i] -= freq * b[m - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n\
     \      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n\
     \  }\n  reverse(begin(c), end(c));\n  return c;\n}\n#line 2 \"fps/kitamasa.hpp\"\
-    \n\n\n\n#line 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename mint>\n\
-    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
-    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
+    \n\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct\
+    \ FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using FPS\
+    \ = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
     \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
     \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
     \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
@@ -99,7 +99,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 6 \"fps/kitamasa.hpp\"\n\ntemplate <typename mint>\nmint LinearRecursionFormula(long\
+    \ 4 \"fps/kitamasa.hpp\"\n\ntemplate <typename mint>\nmint LinearRecursionFormula(long\
     \ long k, FormalPowerSeries<mint> Q,\n                            FormalPowerSeries<mint>\
     \ P) {\n  Q.shrink();\n  mint ret = 0;\n  if (P.size() >= Q.size()) {\n    auto\
     \ R = P / Q;\n    P -= R * Q;\n    P.shrink();\n    if (k < (int)R.size()) ret\
@@ -136,13 +136,13 @@ data:
     \ - 1);\n  auto P = a.pre((int)Q.size() - 1) * Q;\n  P.resize(Q.size() - 1);\n\
     \  return LinearRecursionFormula<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\
     \u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n\
-    \ */\n#line 7 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(long\
+    \ */\n#line 5 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(long\
     \ long n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n \
     \ auto bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
     \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
     \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
     \ */\n"
-  code: "#pragma once\n\n\n\n#include \"berlekamp-massey.hpp\"\n#include \"kitamasa.hpp\"\
+  code: "#pragma once\n\n#include \"berlekamp-massey.hpp\"\n#include \"kitamasa.hpp\"\
     \n\ntemplate <typename mint>\nmint nth_term(long long n, const vector<mint> &s)\
     \ {\n  using fps = FormalPowerSeries<mint>;\n  auto bm = BerlekampMassey<mint>(s);\n\
     \  return kitamasa(n, fps{begin(bm), end(bm)}, fps{begin(s), end(s)});\n}\n\n\
@@ -155,7 +155,7 @@ data:
   isVerificationFile: false
   path: fps/nth-term.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp

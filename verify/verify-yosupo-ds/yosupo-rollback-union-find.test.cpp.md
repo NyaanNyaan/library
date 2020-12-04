@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: data-structure/rollback-union-find.hpp
     title: "Rollback\u3064\u304DUnion Find"
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

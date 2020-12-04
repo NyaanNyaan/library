@@ -10,7 +10,7 @@ data:
   - icon: ':x:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'
