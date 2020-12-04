@@ -16,6 +16,7 @@ out
 out.cpp
 out.exe
 output
+output1
 segment-tree/lazy-seg-tree-with-index.hpp
 test
 test.cpp

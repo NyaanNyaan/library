@@ -51,8 +51,12 @@ struct RBSTBase {
   }
 
   Ptr build(int l, int r, const vector<decltype(Node::key)> &v) {
-    if (l + 1 >= r) return my_new(v[l]);
-    return merge(build(l, (l + r) >> 1, v), build((l + r) >> 1, r, v));
+    if (l + 1 == r) return my_new(v[l]);
+    int m = (l + r) >> 1;
+    Ptr pm = my_new(v[m]);
+    if (l < m) pm->l = build(l, m, v);
+    if (m + 1 < r) pm->r = build(m + 1, r, v);
+    return update(pm);
   }
 
   Ptr build(const vector<decltype(Node::key)> &v) {
