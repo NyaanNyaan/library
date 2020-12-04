@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure/sparse-table.hpp
     title: data-structure/sparse-table.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
     title: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
     title: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
     title: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links:
     - https://atcoder.jp/contests/abc135/submissions/7574225
@@ -24,9 +24,8 @@ data:
     - https://judge.yosupo.jp/submission/240
     - https://judge.yosupo.jp/submission/241
     - https://onlinejudge.u-aizu.ac.jp/status/users/NyaanNyaan/submissions/1/ALDS1_14_D/judge/3874273/C++14
-  bundledCode: "#line 2 \"string/suffix-array.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\n#line 3 \"data-structure/sparse-table.hpp\"\nusing namespace\
-    \ std;\n\ntemplate <typename T>\nstruct SparseTable {\n  vector<vector<T> > table;\n\
+  bundledCode: "#line 2 \"string/suffix-array.hpp\"\n\n\n\n#line 2 \"data-structure/sparse-table.hpp\"\
+    \n\ntemplate <typename T>\nstruct SparseTable {\n  vector<vector<T> > table;\n\
     \  vector<int> log_table;\n\n  inline T f(T a, T b) { return min(a, b); }\n\n\
     \  SparseTable(const vector<T> &v) {\n    int b = 0;\n    while ((1 << b) <= (int)v.size())\
     \ ++b;\n    table.assign(b, vector<T>(1 << b));\n    for (int i = 0; i < (int)v.size();\
@@ -107,39 +106,38 @@ data:
     \ return find_range(left, med, right, tlen);\n    return make_pair(-1, -1);\n\
     \  }\n};\n// Usage:\n//  SuffixArray sa(S);\n//  LCPArray lcp(sa);\n//  StringSearch\
     \ search(lcp);\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../data-structure/sparse-table.hpp\"\n\n// remind: SA including empty string\n\
-    // verify https://judge.yosupo.jp/submission/240\nstruct SuffixArray {\n  int\
-    \ _size;\n  vector<int> sa;\n  string &s;\n  SuffixArray(string &str) : _size(str.size()),\
-    \ s(str) {\n    s.push_back(0);\n    sa.resize(s.size());\n    iota(begin(sa),\
-    \ end(sa), 0);\n    sort(begin(sa), end(sa),\n         [&](int a, int b) { return\
-    \ s[a] == s[b] ? a > b : s[a] < s[b]; });\n    vector<int> classes(s.size()),\
-    \ c(s.begin(), s.end()), cnt(s.size());\n    for (int len = 1; len < (int)s.size();\
-    \ len <<= 1) {\n      for (int i = 0; i < (int)s.size(); i++) {\n        if (i\
-    \ > 0 && c[sa[i - 1]] == c[sa[i]] &&\n            sa[i - 1] + len < (int)s.size()\
-    \ &&\n            c[sa[i - 1] + len / 2] == c[sa[i] + len / 2]) {\n          classes[sa[i]]\
-    \ = classes[sa[i - 1]];\n        } else {\n          classes[sa[i]] = i;\n   \
-    \     }\n      }\n      iota(begin(cnt), end(cnt), 0);\n      copy(begin(sa),\
-    \ end(sa), begin(c));\n      for (int i = 0; i < (int)s.size(); i++) {\n     \
-    \   int s1 = c[i] - len;\n        if (s1 >= 0) sa[cnt[classes[s1]]++] = s1;\n\
-    \      }\n      classes.swap(c);\n    }\n    s.pop_back();\n  }\n\n  void output()\
-    \ {\n    cout << \"SA\\tidx\\tstr\" << endl;\n    for (int i = 0; i < size();\
-    \ i++) {\n      cout << i << \": \\t\" << sa[i] << \" \\t\";\n      if (sa[i]\
-    \ != _size)\n        cout << s.substr(sa[i], _size - sa[i]) << endl;\n      else\n\
-    \        cout << \"$\" << endl;\n    }\n    cout << endl;\n  }\n\n  int size()\
-    \ const { return _size + 1; }\n  int operator[](int k) const { return sa[k]; }\n\
-    };\n\nstruct LCPArray {\n  const SuffixArray &SA;\n  vector<int> LCP, rank;\n\
-    \  LCPArray(const SuffixArray &sa) : SA(sa) {\n    LCP.resize(SA.size());\n  \
-    \  rank.resize(SA.size());\n    for (int i = 0; i < SA.size(); i++) {\n      rank[SA[i]]\
-    \ = i;\n    }\n    LCP[0] = 0;\n\n    for (int i = 0, h = 0; i < SA.size() - 1;\
-    \ i++) {\n      int j = SA[rank[i] - 1];\n      h ? h-- : h;\n      while ((i\
-    \ > j ? i : j) + h < SA.size() - 1 &&\n             SA.s[i + h] == SA.s[j + h]\
-    \ && ++h)\n        ;\n      LCP[rank[i] - 1] = h;\n    }\n  }\n\n  void output()\
-    \ {\n    cout << \"SA\\tidx\\tLCP\\tstr\" << endl;\n    for (int i = 0; i < SA.size();\
-    \ i++) {\n      cout << i << \"\\t\" << SA[i] << \" \\t\" << LCP[i] << \"\\t\"\
-    ;\n      if (SA[i] == SA.size() - 1)\n        cout << \"$\";\n      else\n   \
-    \     cout << SA.s.substr(SA[i], SA.size() - 1 - SA[i]);\n      cout << endl;\n\
-    \    }\n  }\n};\n\n// verify\n// https://onlinejudge.u-aizu.ac.jp/status/users/NyaanNyaan/submissions/1/ALDS1_14_D/judge/3874273/C++14\n\
+  code: "#pragma once\n\n\n\n#include \"../data-structure/sparse-table.hpp\"\n\n//\
+    \ remind: SA including empty string\n// verify https://judge.yosupo.jp/submission/240\n\
+    struct SuffixArray {\n  int _size;\n  vector<int> sa;\n  string &s;\n  SuffixArray(string\
+    \ &str) : _size(str.size()), s(str) {\n    s.push_back(0);\n    sa.resize(s.size());\n\
+    \    iota(begin(sa), end(sa), 0);\n    sort(begin(sa), end(sa),\n         [&](int\
+    \ a, int b) { return s[a] == s[b] ? a > b : s[a] < s[b]; });\n    vector<int>\
+    \ classes(s.size()), c(s.begin(), s.end()), cnt(s.size());\n    for (int len =\
+    \ 1; len < (int)s.size(); len <<= 1) {\n      for (int i = 0; i < (int)s.size();\
+    \ i++) {\n        if (i > 0 && c[sa[i - 1]] == c[sa[i]] &&\n            sa[i -\
+    \ 1] + len < (int)s.size() &&\n            c[sa[i - 1] + len / 2] == c[sa[i] +\
+    \ len / 2]) {\n          classes[sa[i]] = classes[sa[i - 1]];\n        } else\
+    \ {\n          classes[sa[i]] = i;\n        }\n      }\n      iota(begin(cnt),\
+    \ end(cnt), 0);\n      copy(begin(sa), end(sa), begin(c));\n      for (int i =\
+    \ 0; i < (int)s.size(); i++) {\n        int s1 = c[i] - len;\n        if (s1 >=\
+    \ 0) sa[cnt[classes[s1]]++] = s1;\n      }\n      classes.swap(c);\n    }\n  \
+    \  s.pop_back();\n  }\n\n  void output() {\n    cout << \"SA\\tidx\\tstr\" <<\
+    \ endl;\n    for (int i = 0; i < size(); i++) {\n      cout << i << \": \\t\"\
+    \ << sa[i] << \" \\t\";\n      if (sa[i] != _size)\n        cout << s.substr(sa[i],\
+    \ _size - sa[i]) << endl;\n      else\n        cout << \"$\" << endl;\n    }\n\
+    \    cout << endl;\n  }\n\n  int size() const { return _size + 1; }\n  int operator[](int\
+    \ k) const { return sa[k]; }\n};\n\nstruct LCPArray {\n  const SuffixArray &SA;\n\
+    \  vector<int> LCP, rank;\n  LCPArray(const SuffixArray &sa) : SA(sa) {\n    LCP.resize(SA.size());\n\
+    \    rank.resize(SA.size());\n    for (int i = 0; i < SA.size(); i++) {\n    \
+    \  rank[SA[i]] = i;\n    }\n    LCP[0] = 0;\n\n    for (int i = 0, h = 0; i <\
+    \ SA.size() - 1; i++) {\n      int j = SA[rank[i] - 1];\n      h ? h-- : h;\n\
+    \      while ((i > j ? i : j) + h < SA.size() - 1 &&\n             SA.s[i + h]\
+    \ == SA.s[j + h] && ++h)\n        ;\n      LCP[rank[i] - 1] = h;\n    }\n  }\n\
+    \n  void output() {\n    cout << \"SA\\tidx\\tLCP\\tstr\" << endl;\n    for (int\
+    \ i = 0; i < SA.size(); i++) {\n      cout << i << \"\\t\" << SA[i] << \" \\t\"\
+    \ << LCP[i] << \"\\t\";\n      if (SA[i] == SA.size() - 1)\n        cout << \"\
+    $\";\n      else\n        cout << SA.s.substr(SA[i], SA.size() - 1 - SA[i]);\n\
+    \      cout << endl;\n    }\n  }\n};\n\n// verify\n// https://onlinejudge.u-aizu.ac.jp/status/users/NyaanNyaan/submissions/1/ALDS1_14_D/judge/3874273/C++14\n\
     // https://atcoder.jp/contests/abc135/submissions/7574225\n// https://judge.yosupo.jp/submission/241\n\
     // https://atcoder.jp/contests/abc141/submissions/7577295\nstruct StringSearch\
     \ {\n  string &s;\n  const SuffixArray &sa;\n  const LCPArray &lcp;\n  SparseTable<int>\
@@ -184,8 +182,8 @@ data:
   isVerificationFile: false
   path: string/suffix-array.hpp
   requiredBy: []
-  timestamp: '2020-08-09 23:27:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp

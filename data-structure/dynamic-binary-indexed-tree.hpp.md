@@ -1,31 +1,30 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
     title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/data-structure/dynamic-binary-indexed-tree.md
     document_title: "\u52D5\u7684Binary Indexed Tree"
     links: []
-  bundledCode: "#line 2 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"data-structure/hash-map-variable-length.hpp\"\
-    \nusing namespace std;\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
-    \ {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap, s;\n  vector<Key>\
-    \ keys;\n  vector<Val> vals;\n  vector<bool> flag;\n  u64 r;\n  u32 shift;\n \
-    \ Val DefaultValue;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
-    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
+  bundledCode: "#line 2 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\n#line\
+    \ 2 \"data-structure/hash-map-variable-length.hpp\"\n\ntemplate <typename Key,\
+    \ typename Val>\nstruct HashMap {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\
+    \n  u32 cap, s;\n  vector<Key> keys;\n  vector<Val> vals;\n  vector<bool> flag;\n\
+    \  u64 r;\n  u32 shift;\n  Val DefaultValue;\n\n  static u64 rng() {\n    u64\
+    \ m = chrono::duration_cast<chrono::nanoseconds>(\n                chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
     \  }\n\n  void reallocate() {\n    cap <<= 1;\n    vector<Key> k(cap);\n    vector<Val>\
     \ v(cap);\n    vector<bool> f(cap);\n    u32 sh = shift - 1;\n    for (int i =\
     \ 0; i < (int)flag.size(); i++) {\n      if (flag[i]) {\n        u32 hash = (u64(keys[i])\
@@ -50,7 +49,7 @@ data:
     \ ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n  void\
     \ set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief Hash\
     \ Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n */\n\
-    #line 6 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate <typename\
+    #line 4 \"data-structure/dynamic-binary-indexed-tree.hpp\"\n\ntemplate <typename\
     \ S, typename T>\nstruct DynamicFenwickTree {\n  S N;\n  HashMap<S, T> data;\n\
     \  explicit DynamicFenwickTree() = default;\n  explicit DynamicFenwickTree(S size)\
     \ { N = size + 1; }\n\n  void add(S k, T x) {\n    for (++k; k < N; k += k & -k)\
@@ -63,19 +62,18 @@ data:
     \ <= N - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n\
     \      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed\
     \ Tree\n * @docs docs/data-structure/dynamic-binary-indexed-tree.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"hash-map-variable-length.hpp\"\n\ntemplate <typename S, typename T>\nstruct\
-    \ DynamicFenwickTree {\n  S N;\n  HashMap<S, T> data;\n  explicit DynamicFenwickTree()\
-    \ = default;\n  explicit DynamicFenwickTree(S size) { N = size + 1; }\n\n  void\
-    \ add(S k, T x) {\n    for (++k; k < N; k += k & -k) data[k] += x;\n  }\n\n  //\
-    \ [0, k)\n  T sum(S k) const {\n    if (k < 0) return 0;\n    T ret = T();\n \
-    \   for (; k > 0; k -= k & -k) {\n      const T* p = data.find(k);\n      ret\
-    \ += p ? *p : T();\n    }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S a, S\
-    \ b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) const { return sum(k\
-    \ + 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n    S\
-    \ x = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k <= N\
-    \ - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n    \
-    \  }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed\
+  code: "#pragma once\n\n#include \"hash-map-variable-length.hpp\"\n\ntemplate <typename\
+    \ S, typename T>\nstruct DynamicFenwickTree {\n  S N;\n  HashMap<S, T> data;\n\
+    \  explicit DynamicFenwickTree() = default;\n  explicit DynamicFenwickTree(S size)\
+    \ { N = size + 1; }\n\n  void add(S k, T x) {\n    for (++k; k < N; k += k & -k)\
+    \ data[k] += x;\n  }\n\n  // [0, k)\n  T sum(S k) const {\n    if (k < 0) return\
+    \ 0;\n    T ret = T();\n    for (; k > 0; k -= k & -k) {\n      const T* p = data.find(k);\n\
+    \      ret += p ? *p : T();\n    }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S\
+    \ a, S b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) const { return\
+    \ sum(k + 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n\
+    \    S x = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k\
+    \ <= N - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n\
+    \      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed\
     \ Tree\n * @docs docs/data-structure/dynamic-binary-indexed-tree.md\n */\n"
   dependsOn:
   - data-structure/hash-map-variable-length.hpp
@@ -83,8 +81,8 @@ data:
   path: data-structure/dynamic-binary-indexed-tree.hpp
   requiredBy:
   - data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
-  timestamp: '2020-11-19 22:42:33+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
 documentation_of: data-structure/dynamic-binary-indexed-tree.hpp

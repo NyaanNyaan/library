@@ -1,50 +1,50 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
@@ -53,13 +53,27 @@ data:
   bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\n\
     // \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n// bits\n#include <bits/stdc++.h>\n\n// utility\n#line\
-    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
-    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
+    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
+    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
+    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
+    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
+    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
+    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
+    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
+    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
+    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
+    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
+    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
+    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
@@ -99,7 +113,7 @@ data:
     \ T>\nvector<int> mkinv(vector<T> &v, int max_val = -1) {\n  if (max_val < (int)v.size())\
     \ max_val = v.size() - 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i =\
     \ 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace\
-    \ Nyaan\n#line 12 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \ Nyaan\n#line 70 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
     \nnamespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
     \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\n__attribute__((target(\"bmi\")))\
     \ inline int lsb(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n__attribute__((target(\"\
@@ -110,7 +124,7 @@ data:
     }\ntemplate <typename T>\ninline void sbit(T &a, int i, bool b) {\n  a ^= (gbit(a,\
     \ i) == b ? 0 : (T(b) << i));\n}\n\nconstexpr long long PW(int n) { return 1LL\
     \ << n; }\n\nconstexpr long long MSK(int n) { return (1LL << n) - 1; }\n\n}  //\
-    \ namespace Nyaan\n#line 15 \"template/template.hpp\"\n\n// inout\n#line 1 \"\
+    \ namespace Nyaan\n#line 73 \"template/template.hpp\"\n\n// inout\n#line 1 \"\
     template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename U>\n\
     ostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first << \"\
     \ \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\nistream\
@@ -127,7 +141,7 @@ data:
     \ U &... u) {\n  cout << t;\n  outr(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya()\
     \ {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed\
     \ << setprecision(15);\n    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\
-    \n}  // namespace Nyaan\n#line 18 \"template/template.hpp\"\n\n// debug\n#line\
+    \n}  // namespace Nyaan\n#line 76 \"template/template.hpp\"\n\n// debug\n#line\
     \ 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate <typename U, typename\
     \ = void>\nstruct is_specialize : false_type {};\ntemplate <typename U>\nstruct\
     \ is_specialize<\n    U, typename conditional<false, typename U::iterator, void>::type>\n\
@@ -158,7 +172,7 @@ data:
     }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
     \                    \\\n  do {                                      \\\n    cerr\
     \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 79 \"template/template.hpp\"\
     \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
     \ : v)\n#define each2(x, y, v) for (auto&& [x, y] : v)\n#define all(v) (v).begin(),\
     \ (v).end()\n#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)\n\
@@ -181,20 +195,20 @@ data:
     \                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n   \
     \ in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)        \
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
-    \   return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
+    \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\n//\n#line 3 \"\
-    fps/ntt-friendly-fps.hpp\"\nusing namespace std;\n\n#line 3 \"ntt/ntt-avx2.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"modint/simd-montgomery.hpp\"\nusing namespace\
-    \ std;\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
-    ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
-    \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
-    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
-    \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
-    \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
-    \  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
-    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
-    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ 4 \"verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp\"\n//\n#line 2 \"\
+    fps/ntt-friendly-fps.hpp\"\n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2\
+    \ \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\
+    \n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
+    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
+    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
+    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
+    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
+    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
+    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
+    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
     \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
     \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
@@ -524,43 +538,42 @@ data:
     \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
-    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 3 \"\
-    fps/formal-power-series.hpp\"\nusing namespace std;\n\ntemplate <typename mint>\n\
-    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
-    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
-    \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n  FPS &operator-=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] -= r;\n\
-    \    return *this;\n  }\n\n  FPS &operator*=(const mint &v) {\n    for (int k\
-    \ = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n    return *this;\n  }\n\n\
-    \  FPS &operator/=(const FPS &r) {\n    if (this->size() < r.size()) {\n     \
-    \ this->clear();\n      return *this;\n    }\n    int n = this->size() - r.size()\
-    \ + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this), g(r);\n      g.shrink();\n\
-    \      mint coeff = g.back().inverse();\n      for (auto &x : g) x *= coeff;\n\
-    \      int deg = (int)f.size() - (int)g.size() + 1;\n      int gs = g.size();\n\
-    \      FPS quo(deg);\n      for (int i = deg - 1; i >= 0; i--) {\n        quo[i]\
-    \ = f[i + gs - 1];\n        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] *\
-    \ g[j];\n      }\n      *this = quo * coeff;\n      this->resize(n, mint(0));\n\
-    \      return *this;\n    }\n    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();\n\
-    \  }\n\n  FPS &operator%=(const FPS &r) {\n    *this -= *this / r * r;\n    shrink();\n\
-    \    return *this;\n  }\n\n  FPS operator+(const FPS &r) const { return FPS(*this)\
-    \ += r; }\n  FPS operator+(const mint &v) const { return FPS(*this) += v; }\n\
-    \  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator-(const\
-    \ mint &v) const { return FPS(*this) -= v; }\n  FPS operator*(const FPS &r) const\
-    \ { return FPS(*this) *= r; }\n  FPS operator*(const mint &v) const { return FPS(*this)\
-    \ *= v; }\n  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }\n \
-    \ FPS operator%(const FPS &r) const { return FPS(*this) %= r; }\n  FPS operator-()\
-    \ const {\n    FPS ret(this->size());\n    for (int i = 0; i < (int)this->size();\
-    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
-    \ (this->size() && this->back() == mint(0)) this->pop_back();\n  }\n\n  FPS rev()\
-    \ const {\n    FPS ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
-    \ ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(), r.size()));\n\
-    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
-    \   return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 2 \"\
+    fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
+    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
+    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
+    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
+    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
+    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
+    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
+    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
+    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
+    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
+    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
+    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
+    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
+    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
+    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
+    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
+    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
+    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
+    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
+    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
+    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
+    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
+    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
+    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
+    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
+    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
+    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
     \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
     \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
     \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
@@ -639,31 +652,31 @@ data:
     \ i < 2 * m; ++i) x[i] *= y[i];\n    x.intt();\n    b.insert(end(b), begin(x)\
     \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
     \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
-    \ */\n#line 3 \"modint/montgomery-modint.hpp\"\nusing namespace std;\n\ntemplate\
-    \ <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r\
-    \ * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"\
-    invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2\
-    \ == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr\
-    \ LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b % mod + mod)\
-    \ * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n    return (b +\
-    \ u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ */\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\n\
+    struct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32\
+    \ = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
+    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
+    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
     \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
     \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
@@ -672,19 +685,19 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 3 \"modulo/binomial.hpp\"\nusing namespace std;\n\
-    \ntemplate <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n \
-    \ Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n\
-    \    assert(T::get_mod() != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0]\
-    \ = 1;\n    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX]\
-    \ = fac_[MAX].inverse();\n    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i\
-    \ + 1] * (i + 1);\n    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i\
-    \ - 1];\n  }\n\n  void extend() {\n    int n = fac_.size();\n    T fac = fac_.back()\
-    \ * n;\n    T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv\
-    \ = finv_.back() * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n\
-    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size())\
-    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size())\
-    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
+    \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\n\n\ntemplate <typename\
+    \ T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX =\
+    \ 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod()\
+    \ != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i\
+    \ = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
+    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
+    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
+    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
+    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
+    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
+    \  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size()) extend();\n    return\
+    \ fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size()) extend();\n\
+    \    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
     \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
     \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
     \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
@@ -747,8 +760,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   requiredBy: []
-  timestamp: '2020-12-04 23:12:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
 layout: document

@@ -1,26 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: inner/inner-hash.hpp
     title: inner/inner-hash.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
     title: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/string/rolling-hash.md
     document_title: Rolling Hash
     links: []
-  bundledCode: "#line 2 \"string/rolling-hash.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\n#line 3 \"inner/inner-hash.hpp\"\nusing namespace std;\n\n\
-    namespace inner {\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
+  bundledCode: "#line 2 \"string/rolling-hash.hpp\"\n\n\n\n#line 2 \"inner/inner-hash.hpp\"\
+    \n\nnamespace inner {\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
     \ntemplate <int BASE_NUM>\nstruct Hash : array<u64, BASE_NUM> {\n  using array<u64,\
     \ BASE_NUM>::operator[];\n  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64,\
     \ BASE_NUM>() {}\n\n  static constexpr u64 md = (1ull << 61) - 1;\n\n  static\
@@ -87,16 +86,15 @@ data:
     typename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =\n\
     \    inner::Hash<BASE_NUM>::get_basis();\nusing roriha = RollingHash<string, 1>;\n\
     \n/**\n * @brief Rolling Hash\n * @docs docs/string/rolling-hash.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../inner/inner-hash.hpp\"\n\ntemplate <typename Str, int BASE_NUM = 1>\nstruct\
-    \ RollingHash {\n  using Hash = inner::Hash<BASE_NUM>;\n  Str data;\n  vector<Hash>\
-    \ hs, pw;\n  int s;\n  static Hash basis;\n\n  RollingHash(const Str &S = Str())\
-    \ { build(S); }\n\n  void build(const Str &S) {\n    data = S;\n    s = S.size();\n\
-    \    hs.resize(s + 1);\n    pw.resize(s + 1);\n    pw[0] = Hash::set(1);\n   \
-    \ hs[0] = Hash::set(0);\n    for (int i = 1; i <= s; i++) {\n      pw[i] = pw[i\
-    \ - 1] * basis;\n      hs[i] = pfma(hs[i - 1], basis, Hash::cast(S[i - 1]));\n\
-    \    }\n  }\n\n  Hash get(int l, int r = -1) const {\n    if (r == -1) r = s;\n\
-    \    return pfma(hs[l], -pw[r - l], hs[r]);\n  }\n\n  static Hash get_hash(const\
+  code: "#pragma once\n\n\n\n#include \"../inner/inner-hash.hpp\"\n\ntemplate <typename\
+    \ Str, int BASE_NUM = 1>\nstruct RollingHash {\n  using Hash = inner::Hash<BASE_NUM>;\n\
+    \  Str data;\n  vector<Hash> hs, pw;\n  int s;\n  static Hash basis;\n\n  RollingHash(const\
+    \ Str &S = Str()) { build(S); }\n\n  void build(const Str &S) {\n    data = S;\n\
+    \    s = S.size();\n    hs.resize(s + 1);\n    pw.resize(s + 1);\n    pw[0] =\
+    \ Hash::set(1);\n    hs[0] = Hash::set(0);\n    for (int i = 1; i <= s; i++) {\n\
+    \      pw[i] = pw[i - 1] * basis;\n      hs[i] = pfma(hs[i - 1], basis, Hash::cast(S[i\
+    \ - 1]));\n    }\n  }\n\n  Hash get(int l, int r = -1) const {\n    if (r == -1)\
+    \ r = s;\n    return pfma(hs[l], -pw[r - l], hs[r]);\n  }\n\n  static Hash get_hash(const\
     \ Str &T) {\n    Hash ret = Hash::set(0);\n    for (int i = 0; i < (int)T.size();\
     \ i++)\n      ret = pfma(ret, basis, Hash::cast(T[i]));\n    return ret;\n  }\n\
     \n  int find(Str &T, int lower = 0) const {\n    auto ths = get_hash(T);\n   \
@@ -120,8 +118,8 @@ data:
   isVerificationFile: false
   path: string/rolling-hash.hpp
   requiredBy: []
-  timestamp: '2020-12-03 14:17:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp

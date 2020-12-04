@@ -2,45 +2,45 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
     title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: "\u52D5\u7684Binary Indexed Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modulo/mod-log.hpp
     title: modulo/mod-log.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segment-tree/dynamic-li-chao-tree.hpp
     title: segment-tree/dynamic-li-chao-tree.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/data-structure/hash-map.md
     document_title: "Hash Map(\u53EF\u5909\u9577\u7248)"
     links: []
-  bundledCode: "#line 2 \"data-structure/hash-map-variable-length.hpp\"\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\ntemplate <typename Key, typename Val>\n\
-    struct HashMap {\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap,\
-    \ s;\n  vector<Key> keys;\n  vector<Val> vals;\n  vector<bool> flag;\n  u64 r;\n\
-    \  u32 shift;\n  Val DefaultValue;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
-    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
-    \  }\n\n  void reallocate() {\n    cap <<= 1;\n    vector<Key> k(cap);\n    vector<Val>\
+  bundledCode: "#line 2 \"data-structure/hash-map-variable-length.hpp\"\n\ntemplate\
+    \ <typename Key, typename Val>\nstruct HashMap {\n  using u32 = uint32_t;\n  using\
+    \ u64 = uint64_t;\n\n  u32 cap, s;\n  vector<Key> keys;\n  vector<Val> vals;\n\
+    \  vector<bool> flag;\n  u64 r;\n  u32 shift;\n  Val DefaultValue;\n\n  static\
+    \ u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n     \
+    \           chrono::high_resolution_clock::now().time_since_epoch())\n       \
+    \         .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n  }\n\
+    \n  void reallocate() {\n    cap <<= 1;\n    vector<Key> k(cap);\n    vector<Val>\
     \ v(cap);\n    vector<bool> f(cap);\n    u32 sh = shift - 1;\n    for (int i =\
     \ 0; i < (int)flag.size(); i++) {\n      if (flag[i]) {\n        u32 hash = (u64(keys[i])\
     \ * r) >> sh;\n        while (f[hash]) hash = (hash + 1) & (cap - 1);\n      \
@@ -64,14 +64,13 @@ data:
     \ ret;\n  }\n\n  int size() const { return s; }\n\n  // set default_value\n  void\
     \ set_default(const Val& val) { DefaultValue = val; }\n};\n\n/**\n * @brief Hash\
     \ Map(\u53EF\u5909\u9577\u7248)\n * @docs docs/data-structure/hash-map.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <typename Key, typename Val>\nstruct HashMap {\n  using u32 = uint32_t;\n  using\
-    \ u64 = uint64_t;\n\n  u32 cap, s;\n  vector<Key> keys;\n  vector<Val> vals;\n\
-    \  vector<bool> flag;\n  u64 r;\n  u32 shift;\n  Val DefaultValue;\n\n  static\
-    \ u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n     \
-    \           chrono::high_resolution_clock::now().time_since_epoch())\n       \
-    \         .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n  }\n\
-    \n  void reallocate() {\n    cap <<= 1;\n    vector<Key> k(cap);\n    vector<Val>\
+  code: "#pragma once\n\ntemplate <typename Key, typename Val>\nstruct HashMap {\n\
+    \  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  u32 cap, s;\n  vector<Key>\
+    \ keys;\n  vector<Val> vals;\n  vector<bool> flag;\n  u64 r;\n  u32 shift;\n \
+    \ Val DefaultValue;\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
+    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
+    \  }\n\n  void reallocate() {\n    cap <<= 1;\n    vector<Key> k(cap);\n    vector<Val>\
     \ v(cap);\n    vector<bool> f(cap);\n    u32 sh = shift - 1;\n    for (int i =\
     \ 0; i < (int)flag.size(); i++) {\n      if (flag[i]) {\n        u32 hash = (u64(keys[i])\
     \ * r) >> sh;\n        while (f[hash]) hash = (hash + 1) & (cap - 1);\n      \
@@ -103,8 +102,8 @@ data:
   - data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
   - segment-tree/dynamic-li-chao-tree.hpp
   - data-structure/dynamic-binary-indexed-tree.hpp
-  timestamp: '2020-11-19 22:42:33+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp

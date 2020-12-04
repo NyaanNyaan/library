@@ -1,45 +1,44 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/berlekamp-massey.hpp
     title: fps/berlekamp-massey.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/fps/nth-term.md
     document_title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97\
       (Berlekamp-Massey/Bostan-Mori)"
     links: []
-  bundledCode: "#line 2 \"fps/nth-term.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n\n#line 3 \"fps/berlekamp-massey.hpp\"\nusing namespace std;\n\ntemplate\
-    \ <typename mint>\nvector<mint> BerlekampMassey(const vector<mint> &s) {\n  const\
-    \ int N = (int)s.size();\n  vector<mint> b, c;\n  b.reserve(N + 1);\n  c.reserve(N\
-    \ + 1);\n  b.push_back(mint(1));\n  c.push_back(mint(1));\n  mint y = mint(1);\n\
-    \  for (int ed = 1; ed <= N; ed++) {\n    int l = int(c.size()), m = int(b.size());\n\
-    \    mint x = 0;\n    for (int i = 0; i < l; i++) x += c[i] * s[ed - l + i];\n\
-    \    b.emplace_back(mint(0));\n    m++;\n    if (x == mint(0)) continue;\n   \
-    \ mint freq = x / y;\n    if (l < m) {\n      auto tmp = c;\n      c.insert(begin(c),\
-    \ m - l, mint(0));\n      for (int i = 0; i < m; i++) c[m - 1 - i] -= freq * b[m\
-    \ - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n      for (int i = 0;\
-    \ i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n  }\n  reverse(begin(c),\
-    \ end(c));\n  return c;\n}\n#line 3 \"fps/kitamasa.hpp\"\nusing namespace std;\n\
-    \n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace std;\n\ntemplate <typename\
-    \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
-    \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
-    \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
+  bundledCode: "#line 2 \"fps/nth-term.hpp\"\n\n\n\n#line 2 \"fps/berlekamp-massey.hpp\"\
+    \n\n\n\ntemplate <typename mint>\nvector<mint> BerlekampMassey(const vector<mint>\
+    \ &s) {\n  const int N = (int)s.size();\n  vector<mint> b, c;\n  b.reserve(N +\
+    \ 1);\n  c.reserve(N + 1);\n  b.push_back(mint(1));\n  c.push_back(mint(1));\n\
+    \  mint y = mint(1);\n  for (int ed = 1; ed <= N; ed++) {\n    int l = int(c.size()),\
+    \ m = int(b.size());\n    mint x = 0;\n    for (int i = 0; i < l; i++) x += c[i]\
+    \ * s[ed - l + i];\n    b.emplace_back(mint(0));\n    m++;\n    if (x == mint(0))\
+    \ continue;\n    mint freq = x / y;\n    if (l < m) {\n      auto tmp = c;\n \
+    \     c.insert(begin(c), m - l, mint(0));\n      for (int i = 0; i < m; i++) c[m\
+    \ - 1 - i] -= freq * b[m - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n\
+    \      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n\
+    \  }\n  reverse(begin(c), end(c));\n  return c;\n}\n#line 2 \"fps/kitamasa.hpp\"\
+    \n\n\n\n#line 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename mint>\n\
+    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
+    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
+    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
     \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
     \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
     \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
@@ -143,13 +142,12 @@ data:
     \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
     \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
     \ */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"berlekamp-massey.hpp\"\n#include \"kitamasa.hpp\"\n\ntemplate <typename mint>\n\
-    mint nth_term(long long n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  auto bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
-    \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
-    \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
-    \ */\n"
+  code: "#pragma once\n\n\n\n#include \"berlekamp-massey.hpp\"\n#include \"kitamasa.hpp\"\
+    \n\ntemplate <typename mint>\nmint nth_term(long long n, const vector<mint> &s)\
+    \ {\n  using fps = FormalPowerSeries<mint>;\n  auto bm = BerlekampMassey<mint>(s);\n\
+    \  return kitamasa(n, fps{begin(bm), end(bm)}, fps{begin(s), end(s)});\n}\n\n\
+    /**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97\
+    (Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n */\n"
   dependsOn:
   - fps/berlekamp-massey.hpp
   - fps/kitamasa.hpp
@@ -157,8 +155,8 @@ data:
   isVerificationFile: false
   path: fps/nth-term.hpp
   requiredBy: []
-  timestamp: '2020-11-25 08:55:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
 documentation_of: fps/nth-term.hpp

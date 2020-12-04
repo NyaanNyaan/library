@@ -5,70 +5,70 @@ data:
   - icon: ':warning:'
     path: graph/cycle-detection.hpp
     title: graph/cycle-detection.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
   - icon: ':heavy_check_mark:'
     path: graph/kruskal.hpp
     title: graph/kruskal.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/topological-sort.hpp
     title: graph/topological-sort.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/two-edge-connected-components.hpp
     title: graph/two-edge-connected-components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/grundy-number.hpp
     title: Grundy Number
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/two-sat.hpp
     title: 2-SAT
   - icon: ':heavy_check_mark:'
     path: shortest-path/bellman-ford.hpp
     title: shortest-path/bellman-ford.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: shortest-path/bfs01.hpp
     title: shortest-path/bfs01.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: shortest-path/dijkstra-radix-heap.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: shortest-path/dijkstra-with-restore.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: shortest-path/dijkstra.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
   - icon: ':warning:'
     path: shortest-path/dual-of-shortest-path.hpp
     title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: shortest-path/restore-shortest-path.hpp
     title: shortest-path/restore-shortest-path.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: shortest-path/warshall-floyd.hpp
     title: shortest-path/warshall-floyd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/cartesian-tree.hpp
     title: Cartesian Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/dsu-on-tree.hpp
     title: DSU on Tree(Guni)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/euler-tour.hpp
     title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/heavy-light-decomposition.hpp
     title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   - icon: ':heavy_check_mark:'
     path: tree/rerooting.hpp
     title: tree/rerooting.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/tree-query.hpp
     title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedVerifiedWith:
@@ -84,7 +84,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
   - icon: ':heavy_check_mark:'
@@ -108,7 +108,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,84 +120,112 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
     title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"graph/graph-template.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T\
+  bundledCode: "#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct\
+    \ edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
+    \ cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost)\
+    \ {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\
+    \n  operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
+    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
+    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
+    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
+    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
+    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
+    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
+    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
+    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
+    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
+    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
+    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
+    \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
+    \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
+    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
+    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
+    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
+    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
+    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
+    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
+    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
+    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
+    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
+    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
+    \ d;\n}\n"
+  code: "#pragma once\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T\
     \ cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int\
     \ _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
     \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
@@ -212,48 +240,19 @@ data:
     \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
     \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
     \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].eb(x, y, c);\n    if (!is_directed) g[y].eb(y,\
-    \ x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
-    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
-    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
-    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
-    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
-    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
-    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
-    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
-    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
-    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T\
-    \ _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost)\
-    \ : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int &x) {\n\
-    \    to = x;\n    return *this;\n  }\n\n  operator int() const { return to; }\n\
-    };\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
-    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
-    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
-    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
-    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
-    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
-    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
-    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
-    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
-    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].eb(x, y, c);\n    if (!is_directed) g[y].eb(y,\
-    \ x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
-    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
-    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
-    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
-    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
-    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
-    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
-    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
-    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
-    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}"
+    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
+    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
+    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
+    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
+    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
+    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
+    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
+    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
+    \                       bool is_directed = false, bool is_1origin = true) {\n\
+    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
+    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
+    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}"
   dependsOn: []
   isVerificationFile: false
   path: graph/graph-template.hpp
@@ -281,8 +280,8 @@ data:
   - shortest-path/dijkstra.hpp
   - shortest-path/restore-shortest-path.hpp
   - shortest-path/dijkstra-with-restore.hpp
-  timestamp: '2020-11-24 16:37:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp

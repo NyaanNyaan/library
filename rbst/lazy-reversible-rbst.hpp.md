@@ -1,29 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: rbst/rbst-base.hpp
     title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
       )"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/rbst/lazy-reversible-rbst.md
     document_title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\
       \u8861\u4E8C\u5206\u6728"
     links: []
-  bundledCode: "#line 2 \"rbst/lazy-reversible-rbst.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"rbst/rbst-base.hpp\"\nusing namespace std;\n\
-    \ntemplate <typename Node>\nstruct RBSTBase {\n  using Ptr = Node *;\n  template\
-    \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
-    \  }\n  Ptr make_tree() { return nullptr; }\n\n  // for avoiding memory leak,\
-    \ activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template <typename...\
-    \ Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
+  bundledCode: "#line 2 \"rbst/lazy-reversible-rbst.hpp\"\n\n\n\n#line 2 \"rbst/rbst-base.hpp\"\
+    \n\n\n\ntemplate <typename Node>\nstruct RBSTBase {\n  using Ptr = Node *;\n \
+    \ template <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return\
+    \ new Node(args...);\n  }\n  Ptr make_tree() { return nullptr; }\n\n  // for avoiding\
+    \ memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template\
+    \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
     \  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr t) const { return\
     \ count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l :\
     \ r;\n    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {\n      push(l);\n\
@@ -76,13 +75,12 @@ data:
     \ x);\n    t->sum = g(t->sum, x);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\
     \u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728\n * @docs\
     \ docs/rbst/lazy-reversible-rbst.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"rbst-base.hpp\"\n\ntemplate <typename T, typename E>\nstruct LazyReversibleRBSTNode\
-    \ {\n  typename RBSTBase<LazyReversibleRBSTNode>::Ptr l, r;\n  T key, sum;\n \
-    \ E lazy;\n  int cnt;\n  bool rev;\n\n  LazyReversibleRBSTNode(const T &t = T(),\
-    \ const E &e = E())\n      : l(), r(), key(t), sum(t), lazy(e), cnt(1), rev(false)\
-    \ {}\n};\n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E,\
-    \ E),\n          T (*ts)(T)>\nstruct LazyReversibleRBST : RBSTBase<LazyReversibleRBSTNode<T,\
+  code: "#pragma once\n\n\n\n#include \"rbst-base.hpp\"\n\ntemplate <typename T, typename\
+    \ E>\nstruct LazyReversibleRBSTNode {\n  typename RBSTBase<LazyReversibleRBSTNode>::Ptr\
+    \ l, r;\n  T key, sum;\n  E lazy;\n  int cnt;\n  bool rev;\n\n  LazyReversibleRBSTNode(const\
+    \ T &t = T(), const E &e = E())\n      : l(), r(), key(t), sum(t), lazy(e), cnt(1),\
+    \ rev(false) {}\n};\n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T,\
+    \ E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct LazyReversibleRBST : RBSTBase<LazyReversibleRBSTNode<T,\
     \ E>> {\n  using Node = LazyReversibleRBSTNode<T, E>;\n  using base = RBSTBase<LazyReversibleRBSTNode<T,\
     \ E>>;\n  using base::merge;\n  using base::split;\n  using typename base::Ptr;\n\
     \n  LazyReversibleRBST() = default;\n\n  void toggle(Ptr t) {\n    swap(t->l,\
@@ -111,8 +109,8 @@ data:
   isVerificationFile: false
   path: rbst/lazy-reversible-rbst.hpp
   requiredBy: []
-  timestamp: '2020-12-04 12:13:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
 documentation_of: rbst/lazy-reversible-rbst.hpp

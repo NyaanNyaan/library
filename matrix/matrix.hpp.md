@@ -2,47 +2,46 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
       \u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/polynomial-matrix-determinant.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
     links: []
-  bundledCode: "#line 2 \"matrix/matrix.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix()\
-    \ = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
-    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
-    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
-    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
-    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
-    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
-    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
-    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
-    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
-    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
-    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
-    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
-    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
-    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
-    \ vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k = 0; k\
-    \ < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] * B[k][j];\n\
-    \    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long long k)\
-    \ {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k & 1) B *=\
-    \ *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n \
-    \   return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
+  bundledCode: "#line 2 \"matrix/matrix.hpp\"\n\n\n\ntemplate <class T>\nstruct Matrix\
+    \ {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n  Matrix(int n, int m)\
+    \ : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n, T())){};\n\
+    \n  int H() const { return A.size(); }\n\n  int W() const { return A[0].size();\
+    \ }\n\n  int size() const { return A.size(); }\n\n  inline const vector<T> &operator[](int\
+    \ k) const { return A[k]; }\n\n  inline vector<T> &operator[](int k) { return\
+    \ A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for (int i =\
+    \ 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
+    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
+    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
+    \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
+    \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
+    \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
+    \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
+    \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
+    \ > C(n, vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k\
+    \ = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
+    \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
+    \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
+    \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
+    \    return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
     \ (Matrix(*this) += B); }\n\n  Matrix operator-(const Matrix &B) const { return\
     \ (Matrix(*this) -= B); }\n\n  Matrix operator*(const Matrix &B) const { return\
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
@@ -61,16 +60,16 @@ data:
     \ == 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k]\
     \ -= B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n\
     \ * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n\
-    \  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
-    \ T())){};\n\n  int H() const { return A.size(); }\n\n  int W() const { return\
-    \ A[0].size(); }\n\n  int size() const { return A.size(); }\n\n  inline const\
-    \ vector<T> &operator[](int k) const { return A[k]; }\n\n  inline vector<T> &operator[](int\
-    \ k) { return A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for\
-    \ (int i = 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
-    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
-    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
+  code: "#pragma once\n\n\n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T>\
+    \ > A;\n\n  Matrix() = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T()))\
+    \ {}\n  Matrix(int n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return\
+    \ A.size(); }\n\n  int W() const { return A[0].size(); }\n\n  int size() const\
+    \ { return A.size(); }\n\n  inline const vector<T> &operator[](int k) const {\
+    \ return A[k]; }\n\n  inline vector<T> &operator[](int k) { return A[k]; }\n\n\
+    \  static Matrix I(int n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++)\
+    \ mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const Matrix\
+    \ &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n  \
+    \  for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
     \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
     \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
     \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
@@ -106,8 +105,8 @@ data:
   requiredBy:
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
-  timestamp: '2020-12-01 11:28:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-unit-test/debug.test.cpp

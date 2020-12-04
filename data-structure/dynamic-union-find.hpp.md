@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
   _extendedRequiredBy: []
@@ -12,19 +12,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/data-structure/dynamic-union-find.md
     document_title: "\u52D5\u7684Union Find"
     links: []
-  bundledCode: "#line 2 \"data-structure/dynamic-union-find.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"hashmap/hashmap-base.hpp\"\nusing namespace\
-    \ std;\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\
-    \ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\ntemplate <typename\
+  bundledCode: "#line 2 \"data-structure/dynamic-union-find.hpp\"\n\n#line 2 \"hashmap/hashmap-base.hpp\"\
+    \n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\n\
+    template <typename Key, typename Data>\nstruct HashMapBase;\n\ntemplate <typename\
     \ Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
     \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
     \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
@@ -125,7 +124,7 @@ data:
     \ - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key, const Val&\
     \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n\n/* \n * @brief\
     \ \u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)\n * @docs\
-    \ docs/hashmap/hashmap.md\n**/\n#line 6 \"data-structure/dynamic-union-find.hpp\"\
+    \ docs/hashmap/hashmap.md\n**/\n#line 4 \"data-structure/dynamic-union-find.hpp\"\
     \n\nstruct DynamicUnionFind {\n  HashMap<int, int> m;\n  DynamicUnionFind() =\
     \ default;\n\n  int data(int k) {\n    auto it = m.find(k);\n    return it ==\
     \ m.end() ? m[k] = -1 : it->second;\n  }\n  int find(int k) {\n    int n = data(k);\n\
@@ -141,21 +140,21 @@ data:
     \ }\n\n  int same(int x, int y) { return find(x) == find(y); }\n\n  void clear()\
     \ { m.clear(); }\n};\n\n/**\n * @brief \u52D5\u7684Union Find\n * @docs docs/data-structure/dynamic-union-find.md\n\
     \ */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../hashmap/hashmap.hpp\"\n\nstruct DynamicUnionFind {\n  HashMap<int, int>\
-    \ m;\n  DynamicUnionFind() = default;\n\n  int data(int k) {\n    auto it = m.find(k);\n\
-    \    return it == m.end() ? m[k] = -1 : it->second;\n  }\n  int find(int k) {\n\
-    \    int n = data(k);\n    return n < 0 ? k : m[k] = find(n);\n  }\n\n  int unite(int\
-    \ x, int y) {\n    x = find(x), y = find(y);\n    if (x == y) return false;\n\
-    \    auto itx = m.find(x), ity = m.find(y);\n    if (itx->second > ity->second)\
-    \ swap(itx, ity), swap(x, y);\n    itx->second += ity->second;\n    ity->second\
-    \ = x;\n    return true;\n  }\n\n  template <typename F>\n  int unite(int x, int\
-    \ y, const F& f) {\n    x = find(x), y = find(y);\n    if (x == y) return false;\n\
-    \    auto itx = m.find(x), ity = m.find(y);\n    if (itx->second > ity->second)\
-    \ swap(itx, ity), swap(x, y);\n    itx->second += ity->second;\n    ity->second\
-    \ = x;\n    f(x, y);\n    return true;\n  }\n\n  int size(int k) { return -data(find(k));\
-    \ }\n\n  int same(int x, int y) { return find(x) == find(y); }\n\n  void clear()\
-    \ { m.clear(); }\n};\n\n/**\n * @brief \u52D5\u7684Union Find\n * @docs docs/data-structure/dynamic-union-find.md\n\
+  code: "#pragma once\n\n#include \"../hashmap/hashmap.hpp\"\n\nstruct DynamicUnionFind\
+    \ {\n  HashMap<int, int> m;\n  DynamicUnionFind() = default;\n\n  int data(int\
+    \ k) {\n    auto it = m.find(k);\n    return it == m.end() ? m[k] = -1 : it->second;\n\
+    \  }\n  int find(int k) {\n    int n = data(k);\n    return n < 0 ? k : m[k] =\
+    \ find(n);\n  }\n\n  int unite(int x, int y) {\n    x = find(x), y = find(y);\n\
+    \    if (x == y) return false;\n    auto itx = m.find(x), ity = m.find(y);\n \
+    \   if (itx->second > ity->second) swap(itx, ity), swap(x, y);\n    itx->second\
+    \ += ity->second;\n    ity->second = x;\n    return true;\n  }\n\n  template <typename\
+    \ F>\n  int unite(int x, int y, const F& f) {\n    x = find(x), y = find(y);\n\
+    \    if (x == y) return false;\n    auto itx = m.find(x), ity = m.find(y);\n \
+    \   if (itx->second > ity->second) swap(itx, ity), swap(x, y);\n    itx->second\
+    \ += ity->second;\n    ity->second = x;\n    f(x, y);\n    return true;\n  }\n\
+    \n  int size(int k) { return -data(find(k)); }\n\n  int same(int x, int y) { return\
+    \ find(x) == find(y); }\n\n  void clear() { m.clear(); }\n};\n\n/**\n * @brief\
+    \ \u52D5\u7684Union Find\n * @docs docs/data-structure/dynamic-union-find.md\n\
     \ */\n"
   dependsOn:
   - hashmap/hashmap.hpp
@@ -163,8 +162,8 @@ data:
   isVerificationFile: false
   path: data-structure/dynamic-union-find.hpp
   requiredBy: []
-  timestamp: '2020-11-27 00:11:16+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp

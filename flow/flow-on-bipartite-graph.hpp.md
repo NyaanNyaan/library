@@ -3,19 +3,20 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
     title: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"flow/flow-on-bipartite-graph.hpp\"\n#include <bits/stdc++.h>\n\
-    #line 7 \"atcoder/maxflow.hpp\"\n\n#line 3 \"atcoder/internal_queue.hpp\"\n\n\
-    namespace atcoder {\n\nnamespace internal {\n\ntemplate <class T>\nstruct simple_queue\
-    \ {\n  std::vector<T> payload;\n  int pos = 0;\n  void reserve(int n) { payload.reserve(n);\
-    \ }\n  int size() const { return int(payload.size()) - pos; }\n  bool empty()\
-    \ const { return pos == int(payload.size()); }\n  void push(const T& t) { payload.push_back(t);\
+  bundledCode: "#line 2 \"flow/flow-on-bipartite-graph.hpp\"\n\n#line 2 \"atcoder/maxflow.hpp\"\
+    \n#include <algorithm>\n#include <cassert>\n#include <limits>\n#include <queue>\n\
+    #include <vector>\n\n#line 3 \"atcoder/internal_queue.hpp\"\n\nnamespace atcoder\
+    \ {\n\nnamespace internal {\n\ntemplate <class T>\nstruct simple_queue {\n  std::vector<T>\
+    \ payload;\n  int pos = 0;\n  void reserve(int n) { payload.reserve(n); }\n  int\
+    \ size() const { return int(payload.size()) - pos; }\n  bool empty() const { return\
+    \ pos == int(payload.size()); }\n  void push(const T& t) { payload.push_back(t);\
     \ }\n  T& front() { return payload[pos]; }\n  void clear() {\n    payload.clear();\n\
     \    pos = 0;\n  }\n  void pop() { pos++; }\n};\n\n}  // namespace internal\n\n\
     }  // namespace atcoder\n#line 9 \"atcoder/maxflow.hpp\"\n\nnamespace atcoder\
@@ -74,25 +75,24 @@ data:
     \ int>> ret;\n    for (auto &e : es) {\n      if (e.flow > 0 && e.from != s &&\
     \ e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n      }\n    }\n\
     \    return ret;\n  }\n};\n\n}  // namespace BipartiteGraph\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\n#include \"../atcoder/maxflow.hpp\"\
-    \n\nnamespace BipartiteGraph {\nusing namespace atcoder;\ntemplate <typename Cap>\n\
-    struct Matching : mf_graph<Cap> {\n  int L, R, s, t;\n\n  explicit Matching(int\
-    \ N, int M)\n      : mf_graph<Cap>(N + M + 2), L(N), R(M), s(N + M), t(N + M +\
-    \ 1) {\n    for (int i = 0; i < L; i++) mf_graph<Cap>::add_edge(s, i, 1);\n  \
-    \  for (int i = 0; i < R; i++) mf_graph<Cap>::add_edge(i + L, t, 1);\n  }\n\n\
-    \  int add_edge(int n, int m, int cap = 1) override {\n    assert(0 <= n && n\
-    \ < L);\n    assert(0 <= m && m < R);\n    return mf_graph<Cap>::add_edge(n, m\
-    \ + L, cap);\n  }\n\n  Cap flow() { return mf_graph<Cap>::flow(s, t); }\n\n  vector<pair<int,\
-    \ int>> edges() {\n    auto es = mf_graph<Cap>::edges();\n    vector<pair<int,\
-    \ int>> ret;\n    for (auto &e : es) {\n      if (e.flow > 0 && e.from != s &&\
-    \ e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n      }\n    }\n\
-    \    return ret;\n  }\n};\n\n}  // namespace BipartiteGraph\n"
+  code: "#pragma once\n\n#include \"../atcoder/maxflow.hpp\"\n\nnamespace BipartiteGraph\
+    \ {\nusing namespace atcoder;\ntemplate <typename Cap>\nstruct Matching : mf_graph<Cap>\
+    \ {\n  int L, R, s, t;\n\n  explicit Matching(int N, int M)\n      : mf_graph<Cap>(N\
+    \ + M + 2), L(N), R(M), s(N + M), t(N + M + 1) {\n    for (int i = 0; i < L; i++)\
+    \ mf_graph<Cap>::add_edge(s, i, 1);\n    for (int i = 0; i < R; i++) mf_graph<Cap>::add_edge(i\
+    \ + L, t, 1);\n  }\n\n  int add_edge(int n, int m, int cap = 1) override {\n \
+    \   assert(0 <= n && n < L);\n    assert(0 <= m && m < R);\n    return mf_graph<Cap>::add_edge(n,\
+    \ m + L, cap);\n  }\n\n  Cap flow() { return mf_graph<Cap>::flow(s, t); }\n\n\
+    \  vector<pair<int, int>> edges() {\n    auto es = mf_graph<Cap>::edges();\n \
+    \   vector<pair<int, int>> ret;\n    for (auto &e : es) {\n      if (e.flow >\
+    \ 0 && e.from != s && e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n\
+    \      }\n    }\n    return ret;\n  }\n};\n\n}  // namespace BipartiteGraph\n"
   dependsOn: []
   isVerificationFile: false
   path: flow/flow-on-bipartite-graph.hpp
   requiredBy: []
-  timestamp: '2020-09-08 18:51:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
 documentation_of: flow/flow-on-bipartite-graph.hpp

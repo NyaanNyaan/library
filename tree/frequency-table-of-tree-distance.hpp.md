@@ -1,36 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/centroid-decomposition.hpp
     title: Centroid Decomposition
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/tree/frequency-table-of-tree-distance.md
     document_title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
     links: []
-  bundledCode: "#line 2 \"tree/frequency-table-of-tree-distance.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"ntt/arbitrary-ntt.hpp\"\nusing namespace std;\n\
-    \n#line 3 \"modint/montgomery-modint.hpp\"\nusing namespace std;\n\ntemplate <uint32_t\
-    \ mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
+  bundledCode: "#line 2 \"tree/frequency-table-of-tree-distance.hpp\"\n\n\n\n#line\
+    \ 2 \"ntt/arbitrary-ntt.hpp\"\n\n\n\n#line 2 \"modint/montgomery-modint.hpp\"\n\
+    \n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
     \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
     \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
     \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
@@ -62,10 +61,9 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 3 \"ntt/ntt-avx2.hpp\"\nusing namespace std;\n\n\
-    #line 3 \"modint/simd-montgomery.hpp\"\nusing namespace std;\n#include <immintrin.h>\n\
-    \n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
-    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
+    \ { return mod; }\n};\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n\n#include <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ __m128i\nmy128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
     \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
     \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
@@ -441,14 +439,14 @@ data:
     \ i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n    i64 a = d0[i].get();\n\
     \    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2 + m2 - a) * r02r12\
     \ + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n  }\n  return ret;\n\
-    }\n}  // namespace ArbitraryNTT\n#line 3 \"tree/centroid-decomposition.hpp\"\n\
-    using namespace std;\n\ntemplate <typename G>\nstruct CentroidDecomposition {\n\
-    \  const G &g;\n  vector<int> sub;\n  vector<bool> v;\n  vector<vector<int>> tree;\n\
-    \  int root;\n\n  CentroidDecomposition(const G &g_, int isbuild = true) : g(g_)\
-    \ {\n    sub.resize(g.size(), 0);\n    v.resize(g.size(), false);\n    if (isbuild)\
-    \ build();\n  }\n\n  void build() {\n    tree.resize(g.size());\n    root = build_dfs(0);\n\
-    \  }\n\n  int get_size(int cur, int par) {\n    sub[cur] = 1;\n    for (auto &dst\
-    \ : g[cur]) {\n      if (dst == par || v[dst]) continue;\n      sub[cur] += get_size(dst,\
+    }\n}  // namespace ArbitraryNTT\n#line 2 \"tree/centroid-decomposition.hpp\"\n\
+    \n\n\ntemplate <typename G>\nstruct CentroidDecomposition {\n  const G &g;\n \
+    \ vector<int> sub;\n  vector<bool> v;\n  vector<vector<int>> tree;\n  int root;\n\
+    \n  CentroidDecomposition(const G &g_, int isbuild = true) : g(g_) {\n    sub.resize(g.size(),\
+    \ 0);\n    v.resize(g.size(), false);\n    if (isbuild) build();\n  }\n\n  void\
+    \ build() {\n    tree.resize(g.size());\n    root = build_dfs(0);\n  }\n\n  int\
+    \ get_size(int cur, int par) {\n    sub[cur] = 1;\n    for (auto &dst : g[cur])\
+    \ {\n      if (dst == par || v[dst]) continue;\n      sub[cur] += get_size(dst,\
     \ cur);\n    }\n    return sub[cur];\n  }\n\n  int get_centroid(int cur, int par,\
     \ int mid) {\n    for (auto &dst : g[cur]) {\n      if (dst == par || v[dst])\
     \ continue;\n      if (sub[dst] > mid) return get_centroid(dst, cur, mid);\n \
@@ -482,9 +480,8 @@ data:
     \n    for (auto &x : ans) x >>= 1;\n    return ans;\n  }\n};\n\n/**\n * @brief\
     \ \u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03\n * @docs\
     \ docs/tree/frequency-table-of-tree-distance.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../ntt/arbitrary-ntt.hpp\"\n#include \"./centroid-decomposition.hpp\"\n\n\
-    template <typename G>\nstruct FrequencyTableOfTreeDistance : CentroidDecomposition<G>\
+  code: "#pragma once\n\n\n\n#include \"../ntt/arbitrary-ntt.hpp\"\n#include \"./centroid-decomposition.hpp\"\
+    \n\ntemplate <typename G>\nstruct FrequencyTableOfTreeDistance : CentroidDecomposition<G>\
     \ {\n  using CentroidDecomposition<G>::g;\n  using CentroidDecomposition<G>::v;\n\
     \  using CentroidDecomposition<G>::get_size;\n  using CentroidDecomposition<G>::get_centroid;\n\
     \n  FrequencyTableOfTreeDistance(const G &g)\n      : CentroidDecomposition<G>(g,\
@@ -517,8 +514,8 @@ data:
   isVerificationFile: false
   path: tree/frequency-table-of-tree-distance.hpp
   requiredBy: []
-  timestamp: '2020-12-02 03:43:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
 documentation_of: tree/frequency-table-of-tree-distance.hpp

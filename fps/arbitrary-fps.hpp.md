@@ -1,79 +1,78 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"fps/arbitrary-fps.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\n#line 3 \"ntt/arbitrary-ntt.hpp\"\nusing namespace std;\n\n\
-    #line 3 \"modint/montgomery-modint.hpp\"\nusing namespace std;\n\ntemplate <uint32_t\
-    \ mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r\
-    \ * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"\
-    invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2\
-    \ == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr\
-    \ LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b % mod + mod)\
-    \ * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n    return (b +\
-    \ u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+  bundledCode: "#line 2 \"fps/arbitrary-fps.hpp\"\n\n\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\
+    \n\n\n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\n\
+    struct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32\
+    \ = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
+    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
+    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
     \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
     \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
@@ -82,10 +81,9 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 3 \"ntt/ntt-avx2.hpp\"\nusing namespace std;\n\n\
-    #line 3 \"modint/simd-montgomery.hpp\"\nusing namespace std;\n#include <immintrin.h>\n\
-    \n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
-    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
+    \ { return mod; }\n};\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n\n#include <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ __m128i\nmy128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
     \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
     \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
@@ -461,11 +459,11 @@ data:
     \ i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n    i64 a = d0[i].get();\n\
     \    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2 + m2 - a) * r02r12\
     \ + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n  }\n  return ret;\n\
-    }\n}  // namespace ArbitraryNTT\n#line 3 \"fps/formal-power-series.hpp\"\nusing\
-    \ namespace std;\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint>\
-    \ {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS\
-    \ &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
-    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    }\n}  // namespace ArbitraryNTT\n#line 2 \"fps/formal-power-series.hpp\"\n\n\n\
+    \ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+    \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
+    \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
     \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
@@ -544,13 +542,12 @@ data:
     \ ret({mint(1)});\n  for (int i = 1; i < deg; i <<= 1) {\n    ret = (ret * (pre(i\
     \ << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);\n  }\n  return ret.pre(deg);\n\
     }\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../ntt/arbitrary-ntt.hpp\"\n#include \"./formal-power-series.hpp\"\n\ntemplate\
-    \ <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  ntt_ptr = nullptr;\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt() {\n  exit(1);\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::intt() {\n  exit(1);\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling() {\n\
-    \  exit(1);\n}\n\ntemplate <typename mint>\nint FormalPowerSeries<mint>::ntt_pr()\
+  code: "#pragma once\n\n\n\n#include \"../ntt/arbitrary-ntt.hpp\"\n#include \"./formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  ntt_ptr\
+    \ = nullptr;\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt()\
+    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::intt()\
+    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling()\
+    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nint FormalPowerSeries<mint>::ntt_pr()\
     \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n\
     \    const FormalPowerSeries<mint>& r) {\n  if (this->empty() || r.empty()) {\n\
     \    this->clear();\n    return *this;\n  }\n  auto ret = ArbitraryNTT::multiply(*this,\
@@ -574,8 +571,8 @@ data:
   isVerificationFile: false
   path: fps/arbitrary-fps.hpp
   requiredBy: []
-  timestamp: '2020-10-11 00:26:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp

@@ -3,33 +3,16 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
     title: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/data-structure/rollback-union-find.md
     document_title: "Rollback\u3064\u304DUnion Find"
     links: []
-  bundledCode: "#line 2 \"data-structure/rollback-union-find.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\nstruct RollbackUnionFind {\n  vector<int> data;\n  stack<pair<int,\
-    \ int> > history;\n  int inner_snap;\n\n  RollbackUnionFind(int sz) : inner_snap(0)\
-    \ { data.assign(sz, -1); }\n\n  bool unite(int x, int y) {\n    x = find(x), y\
-    \ = find(y);\n    history.emplace(x, data[x]);\n    history.emplace(y, data[y]);\n\
-    \    if (x == y) return false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x]\
-    \ += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  int find(int k) {\n\
-    \    if (data[k] < 0) return k;\n    return find(data[k]);\n  }\n\n  int same(int\
-    \ x, int y) { return find(x) == find(y); }\n\n  int size(int k) { return (-data[find(k)]);\
-    \ }\n\n  void undo() {\n    data[history.top().first] = history.top().second;\n\
-    \    history.pop();\n    data[history.top().first] = history.top().second;\n \
-    \   history.pop();\n  }\n\n  void snapshot() { inner_snap = int(history.size()\
-    \ >> 1); }\n\n  int get_state() { return int(history.size() >> 1); }\n\n  void\
-    \ rollback(int state = -1) {\n    if (state == -1) state = inner_snap;\n    state\
-    \ <<= 1;\n    assert(state <= (int)history.size());\n    while (state < (int)history.size())\
-    \ undo();\n  }\n};\n\n/**\n * @brief Rollback\u3064\u304DUnion Find\n * @docs\
-    \ docs/data-structure/rollback-union-find.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\nstruct RollbackUnionFind\
+  bundledCode: "#line 2 \"data-structure/rollback-union-find.hpp\"\n\nstruct RollbackUnionFind\
     \ {\n  vector<int> data;\n  stack<pair<int, int> > history;\n  int inner_snap;\n\
     \n  RollbackUnionFind(int sz) : inner_snap(0) { data.assign(sz, -1); }\n\n  bool\
     \ unite(int x, int y) {\n    x = find(x), y = find(y);\n    history.emplace(x,\
@@ -46,12 +29,28 @@ data:
     \ <= (int)history.size());\n    while (state < (int)history.size()) undo();\n\
     \  }\n};\n\n/**\n * @brief Rollback\u3064\u304DUnion Find\n * @docs docs/data-structure/rollback-union-find.md\n\
     \ */\n"
+  code: "#pragma once\n\nstruct RollbackUnionFind {\n  vector<int> data;\n  stack<pair<int,\
+    \ int> > history;\n  int inner_snap;\n\n  RollbackUnionFind(int sz) : inner_snap(0)\
+    \ { data.assign(sz, -1); }\n\n  bool unite(int x, int y) {\n    x = find(x), y\
+    \ = find(y);\n    history.emplace(x, data[x]);\n    history.emplace(y, data[y]);\n\
+    \    if (x == y) return false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x]\
+    \ += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  int find(int k) {\n\
+    \    if (data[k] < 0) return k;\n    return find(data[k]);\n  }\n\n  int same(int\
+    \ x, int y) { return find(x) == find(y); }\n\n  int size(int k) { return (-data[find(k)]);\
+    \ }\n\n  void undo() {\n    data[history.top().first] = history.top().second;\n\
+    \    history.pop();\n    data[history.top().first] = history.top().second;\n \
+    \   history.pop();\n  }\n\n  void snapshot() { inner_snap = int(history.size()\
+    \ >> 1); }\n\n  int get_state() { return int(history.size() >> 1); }\n\n  void\
+    \ rollback(int state = -1) {\n    if (state == -1) state = inner_snap;\n    state\
+    \ <<= 1;\n    assert(state <= (int)history.size());\n    while (state < (int)history.size())\
+    \ undo();\n  }\n};\n\n/**\n * @brief Rollback\u3064\u304DUnion Find\n * @docs\
+    \ docs/data-structure/rollback-union-find.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/rollback-union-find.hpp
   requiredBy: []
-  timestamp: '2020-11-02 22:41:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
 documentation_of: data-structure/rollback-union-find.hpp

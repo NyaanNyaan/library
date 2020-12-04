@@ -1,27 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"modulo/gauss-elimination.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"modint/simd-montgomery.hpp\"\nusing namespace\
-    \ std;\n#include <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+  bundledCode: "#line 2 \"modulo/gauss-elimination.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n\n#include <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmy128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
     \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
@@ -108,12 +107,11 @@ data:
     \ {\n      vector<mint> x(W);\n      x[j] = -1;\n      for (int k = 0; k < j;\
     \ ++k)\n        if (pivot[k] != -1) x[k] = a[pivot[k]][j];\n      res.push_back(x);\n\
     \    }\n  }\n  return res;\n}\n\n}  // namespace Gauss\nusing namespace Gauss;\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"modint/simd-montgomery.hpp\"\n\nnamespace Gauss {\nuint32_t a_buf_[4096][4096]\
-    \ __attribute__((aligned(64)));\n\n// return value: (rank, (-1) ^ (number of swap\
-    \ time))\ntemplate <typename mint>\n__attribute__((target(\"avx2\"))) pair<int,\
-    \ int> GaussianElimination(\n    const vector<vector<mint>> &m, int LinearEquation\
-    \ = false) {\n  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);\n\
+  code: "#pragma once\n\n\n\n#include \"modint/simd-montgomery.hpp\"\n\nnamespace\
+    \ Gauss {\nuint32_t a_buf_[4096][4096] __attribute__((aligned(64)));\n\n// return\
+    \ value: (rank, (-1) ^ (number of swap time))\ntemplate <typename mint>\n__attribute__((target(\"\
+    avx2\"))) pair<int, int> GaussianElimination(\n    const vector<vector<mint>>\
+    \ &m, int LinearEquation = false) {\n  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);\n\
     \  int H = m.size(), W = m[0].size(), rank = 0;\n  int det = 1;\n  for (int i\
     \ = 0; i < H; i++)\n    for (int j = 0; j < W; j++) a[i][j].a = m[i][j].a;\n\n\
     \  __m256i r = _mm256_set1_epi32(mint::r);\n  __m256i m0 = _mm256_set1_epi32(0);\n\
@@ -162,8 +160,8 @@ data:
   isVerificationFile: false
   path: modulo/gauss-elimination.hpp
   requiredBy: []
-  timestamp: '2020-07-30 19:30:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp

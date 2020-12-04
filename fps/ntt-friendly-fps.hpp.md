@@ -1,87 +1,85 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-log.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/fps/ntt-friendly-fps.md
     document_title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
     links: []
-  bundledCode: "#line 2 \"fps/ntt-friendly-fps.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\n#line 3 \"ntt/ntt-avx2.hpp\"\nusing namespace std;\n\n#line\
-    \ 3 \"modint/simd-montgomery.hpp\"\nusing namespace std;\n#include <immintrin.h>\n\
-    \n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
-    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
-    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
-    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
-    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
-    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
-    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
-    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+  bundledCode: "#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\
+    \n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\n\n\n#include <immintrin.h>\n\n\
+    __attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const\
+    \ __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
+    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
+    \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
+    \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
+    \  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
+    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
+    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
     \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
     \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
@@ -411,43 +409,42 @@ data:
     \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
-    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 3 \"\
-    fps/formal-power-series.hpp\"\nusing namespace std;\n\ntemplate <typename mint>\n\
-    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
-    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
-    \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n  FPS &operator-=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] -= r;\n\
-    \    return *this;\n  }\n\n  FPS &operator*=(const mint &v) {\n    for (int k\
-    \ = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n    return *this;\n  }\n\n\
-    \  FPS &operator/=(const FPS &r) {\n    if (this->size() < r.size()) {\n     \
-    \ this->clear();\n      return *this;\n    }\n    int n = this->size() - r.size()\
-    \ + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this), g(r);\n      g.shrink();\n\
-    \      mint coeff = g.back().inverse();\n      for (auto &x : g) x *= coeff;\n\
-    \      int deg = (int)f.size() - (int)g.size() + 1;\n      int gs = g.size();\n\
-    \      FPS quo(deg);\n      for (int i = deg - 1; i >= 0; i--) {\n        quo[i]\
-    \ = f[i + gs - 1];\n        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] *\
-    \ g[j];\n      }\n      *this = quo * coeff;\n      this->resize(n, mint(0));\n\
-    \      return *this;\n    }\n    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();\n\
-    \  }\n\n  FPS &operator%=(const FPS &r) {\n    *this -= *this / r * r;\n    shrink();\n\
-    \    return *this;\n  }\n\n  FPS operator+(const FPS &r) const { return FPS(*this)\
-    \ += r; }\n  FPS operator+(const mint &v) const { return FPS(*this) += v; }\n\
-    \  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator-(const\
-    \ mint &v) const { return FPS(*this) -= v; }\n  FPS operator*(const FPS &r) const\
-    \ { return FPS(*this) *= r; }\n  FPS operator*(const mint &v) const { return FPS(*this)\
-    \ *= v; }\n  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }\n \
-    \ FPS operator%(const FPS &r) const { return FPS(*this) %= r; }\n  FPS operator-()\
-    \ const {\n    FPS ret(this->size());\n    for (int i = 0; i < (int)this->size();\
-    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
-    \ (this->size() && this->back() == mint(0)) this->pop_back();\n  }\n\n  FPS rev()\
-    \ const {\n    FPS ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
-    \ ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(), r.size()));\n\
-    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
-    \   return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 2 \"\
+    fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
+    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
+    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
+    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
+    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
+    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
+    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
+    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
+    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
+    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
+    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
+    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
+    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
+    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
+    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
+    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
+    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
+    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
+    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
+    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
+    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
+    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
+    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
+    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
+    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
+    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
+    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
     \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
     \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
     \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
@@ -527,10 +524,9 @@ data:
     \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
     \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
     \ */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../ntt/ntt-avx2.hpp\"\n#include \"./formal-power-series.hpp\"\n\ntemplate\
-    \ <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  if (!ntt_ptr)\
-    \ ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>&\
+  code: "#pragma once\n\n\n\n#include \"../ntt/ntt-avx2.hpp\"\n#include \"./formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  if\
+    \ (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>&\
     \ FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>& r)\
     \ {\n  if (this->empty() || r.empty()) {\n    this->clear();\n    return *this;\n\
     \  }\n  set_fft();\n  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this,\
@@ -588,8 +584,8 @@ data:
   path: fps/ntt-friendly-fps.hpp
   requiredBy:
   - fps/fast-multieval.hpp
-  timestamp: '2020-10-11 00:26:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-log.test.cpp

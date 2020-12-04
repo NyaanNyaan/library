@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: segment-tree/persistent-segment-tree.hpp
     title: "\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
     document_title: "\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728)"
     links: []
-  bundledCode: "#line 2 \"data-structure-2d/rectangle-sum.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"segment-tree/persistent-segment-tree.hpp\"\n\
-    using namespace std;\n\ntemplate <typename T, typename F, int NODES = 20000000>\n\
-    struct PersistentSegmentTree {\n  using ll = long long;\n  struct Node {\n   \
-    \ T data;\n    Node *l, *r;\n    Node() {}\n    Node(const T &_data) : data(_data),\
-    \ l(nullptr), r(nullptr) {}\n  };\n\n  Node *pool;\n  int pid;\n  ll N;\n  const\
-    \ F f;\n  const T ID;\n  Node *nil;\n  vector<Node *> roots;\n\n  PersistentSegmentTree(const\
-    \ vector<T> &v, const F &f_, const T &ID_)\n      : pid(0), f(f_), ID(ID_), nil(nullptr)\
-    \ {\n    pool = new Node[NODES];\n    nil = my_new(ID);\n    nil->l = nil->r =\
-    \ nil;\n    roots.reserve(262144);\n    roots.push_back(build(v));\n  }\n\n  PersistentSegmentTree(const\
-    \ ll &N_, const F &f_, const T &ID_)\n      : pid(0), N(N_), f(f_), ID(ID_), nil(nullptr)\
+  bundledCode: "#line 2 \"data-structure-2d/rectangle-sum.hpp\"\n\n\n\n#line 2 \"\
+    segment-tree/persistent-segment-tree.hpp\"\n\n\n\ntemplate <typename T, typename\
+    \ F, int NODES = 20000000>\nstruct PersistentSegmentTree {\n  using ll = long\
+    \ long;\n  struct Node {\n    T data;\n    Node *l, *r;\n    Node() {}\n    Node(const\
+    \ T &_data) : data(_data), l(nullptr), r(nullptr) {}\n  };\n\n  Node *pool;\n\
+    \  int pid;\n  ll N;\n  const F f;\n  const T ID;\n  Node *nil;\n  vector<Node\
+    \ *> roots;\n\n  PersistentSegmentTree(const vector<T> &v, const F &f_, const\
+    \ T &ID_)\n      : pid(0), f(f_), ID(ID_), nil(nullptr) {\n    pool = new Node[NODES];\n\
+    \    nil = my_new(ID);\n    nil->l = nil->r = nil;\n    roots.reserve(262144);\n\
+    \    roots.push_back(build(v));\n  }\n\n  PersistentSegmentTree(const ll &N_,\
+    \ const F &f_, const T &ID_)\n      : pid(0), N(N_), f(f_), ID(ID_), nil(nullptr)\
     \ {\n    pool = new Node[NODES];\n    nil = my_new(ID);\n    nil->l = nil->r =\
     \ nil;\n    roots.reserve(262144);\n    roots.push_back(nil);\n  }\n\n  Node *my_new(const\
     \ T &data) {\n    pool[pid].data = data;\n    pool[pid].l = pool[pid].r = nil;\n\
@@ -83,10 +83,9 @@ data:
     \ begin(ys);\n    return seg.query(u, l, r) - seg.query(d, l, r);\n  }\n};\n\n\
     /*\n * @brief \u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
     )\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../segment-tree/persistent-segment-tree.hpp\"\n\ntemplate <typename T, typename\
-    \ U, typename F>\nstruct RectangleSum {\n  PersistentSegmentTree<U, F> seg;\n\
-    \  vector<T> xs, ys;\n  vector<U> ws;\n  vector<int> ord;\n\n  RectangleSum(const\
+  code: "#pragma once\n\n\n\n#include \"../segment-tree/persistent-segment-tree.hpp\"\
+    \n\ntemplate <typename T, typename U, typename F>\nstruct RectangleSum {\n  PersistentSegmentTree<U,\
+    \ F> seg;\n  vector<T> xs, ys;\n  vector<U> ws;\n  vector<int> ord;\n\n  RectangleSum(const\
     \ vector<T> &xs_, const vector<T> &ys_, const vector<U> &ws_,\n              \
     \ const F &f)\n      : seg({(int)xs_.size() + 1, f, U(0)}) {\n    int N = xs_.size();\n\
     \    xs.reserve(N);\n    ys.reserve(N);\n    ws.reserve(N);\n    ord.resize(N);\n\
@@ -112,8 +111,8 @@ data:
   isVerificationFile: false
   path: data-structure-2d/rectangle-sum.hpp
   requiredBy: []
-  timestamp: '2020-09-28 02:10:54+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
 documentation_of: data-structure-2d/rectangle-sum.hpp

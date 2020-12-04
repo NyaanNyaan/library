@@ -3,17 +3,39 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/set-function/subset-convolution.md
     document_title: Subset Convolution
     links: []
-  bundledCode: "#line 2 \"set-function/subset-convolution.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\ntemplate <typename mint>\nvector<mint> subset_convolution(const\
+  bundledCode: "#line 2 \"set-function/subset-convolution.hpp\"\n\n\n\ntemplate <typename\
+    \ mint>\nvector<mint> subset_convolution(const vector<mint>& a, const vector<mint>&\
+    \ b) {\n  int N = a.size();\n  assert(a.size() == b.size() && (N & (N - 1)) ==\
+    \ 0);\n  int l = __builtin_ctz(N);\n\n  auto conv = [&](vector<mint>& a, vector<mint>&\
+    \ b) -> void {\n    for (int k = l; k >= 0; --k) {\n      mint n = mint(0);\n\
+    \      for (int i = 0; i <= k; ++i) n += a[i] * b[k - i];\n      a[k] = n;\n \
+    \   }\n  };\n\n  vector<vector<mint>> A(N, vector<mint>(l + 1)), B(N, vector<mint>(l\
+    \ + 1));\n  for (int i = 0; i < N; i++) A[i][0] = a[i], B[i][0] = b[i];\n  vector<mint>\
+    \ buf(l + 1);\n\n  for (int n = N / 2, d = 1; n; n >>= 1, ++d) {\n    for (int\
+    \ i = 0; i < N; i += 2 * n) {\n      for (int j = i; j < i + n; j++) {\n     \
+    \   // A[j + n] = A[j] + A[j + n] * x\n        buf[0] = A[j][0];\n        for\
+    \ (int k = 1; k <= d; k++) buf[k] = A[j][k] + A[j + n][k - 1];\n        copy(begin(buf),\
+    \ end(buf), begin(A[j + n]));\n        buf[0] = B[j][0];\n        for (int k =\
+    \ 1; k <= d; k++) buf[k] = B[j][k] + B[j + n][k - 1];\n        copy(begin(buf),\
+    \ end(buf), begin(B[j + n]));\n      }\n    }\n  }\n\n  for (int i = 0; i < N;\
+    \ i++) conv(A[i], B[i]);\n  \n  for (int n = 1, d = 0; n < N; n <<= 1, ++d) {\n\
+    \    for (int i = 0; i < N; i += 2 * n) {\n      for (int j = i; j < i + n; j++)\
+    \ {\n        // A[j + n] -= A[j]\n        for (int k = d; k <= l; k++) A[j + n][k]\
+    \ -= A[j][k];\n        // A[j] *= x\n        for (int k = l; k > d; --k) A[j][k]\
+    \ = A[j][k - 1];\n        A[j][0] = mint(0);\n      }\n    }\n  }\n\n  vector<mint>\
+    \ C(N);\n  for (int i = 0; i < N; i++) C[i] = A[i][l];\n  return C;\n}\n\n/**\n\
+    \ * @brief Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n\
+    \ */\n"
+  code: "#pragma once\n\n\n\ntemplate <typename mint>\nvector<mint> subset_convolution(const\
     \ vector<mint>& a, const vector<mint>& b) {\n  int N = a.size();\n  assert(a.size()\
     \ == b.size() && (N & (N - 1)) == 0);\n  int l = __builtin_ctz(N);\n\n  auto conv\
     \ = [&](vector<mint>& a, vector<mint>& b) -> void {\n    for (int k = l; k >=\
@@ -35,35 +57,12 @@ data:
     \        A[j][0] = mint(0);\n      }\n    }\n  }\n\n  vector<mint> C(N);\n  for\
     \ (int i = 0; i < N; i++) C[i] = A[i][l];\n  return C;\n}\n\n/**\n * @brief Subset\
     \ Convolution\n * @docs docs/set-function/subset-convolution.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <typename mint>\nvector<mint> subset_convolution(const vector<mint>& a, const\
-    \ vector<mint>& b) {\n  int N = a.size();\n  assert(a.size() == b.size() && (N\
-    \ & (N - 1)) == 0);\n  int l = __builtin_ctz(N);\n\n  auto conv = [&](vector<mint>&\
-    \ a, vector<mint>& b) -> void {\n    for (int k = l; k >= 0; --k) {\n      mint\
-    \ n = mint(0);\n      for (int i = 0; i <= k; ++i) n += a[i] * b[k - i];\n   \
-    \   a[k] = n;\n    }\n  };\n\n  vector<vector<mint>> A(N, vector<mint>(l + 1)),\
-    \ B(N, vector<mint>(l + 1));\n  for (int i = 0; i < N; i++) A[i][0] = a[i], B[i][0]\
-    \ = b[i];\n  vector<mint> buf(l + 1);\n\n  for (int n = N / 2, d = 1; n; n >>=\
-    \ 1, ++d) {\n    for (int i = 0; i < N; i += 2 * n) {\n      for (int j = i; j\
-    \ < i + n; j++) {\n        // A[j + n] = A[j] + A[j + n] * x\n        buf[0] =\
-    \ A[j][0];\n        for (int k = 1; k <= d; k++) buf[k] = A[j][k] + A[j + n][k\
-    \ - 1];\n        copy(begin(buf), end(buf), begin(A[j + n]));\n        buf[0]\
-    \ = B[j][0];\n        for (int k = 1; k <= d; k++) buf[k] = B[j][k] + B[j + n][k\
-    \ - 1];\n        copy(begin(buf), end(buf), begin(B[j + n]));\n      }\n    }\n\
-    \  }\n\n  for (int i = 0; i < N; i++) conv(A[i], B[i]);\n  \n  for (int n = 1,\
-    \ d = 0; n < N; n <<= 1, ++d) {\n    for (int i = 0; i < N; i += 2 * n) {\n  \
-    \    for (int j = i; j < i + n; j++) {\n        // A[j + n] -= A[j]\n        for\
-    \ (int k = d; k <= l; k++) A[j + n][k] -= A[j][k];\n        // A[j] *= x\n   \
-    \     for (int k = l; k > d; --k) A[j][k] = A[j][k - 1];\n        A[j][0] = mint(0);\n\
-    \      }\n    }\n  }\n\n  vector<mint> C(N);\n  for (int i = 0; i < N; i++) C[i]\
-    \ = A[i][l];\n  return C;\n}\n\n/**\n * @brief Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n\
-    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: set-function/subset-convolution.hpp
   requiredBy: []
-  timestamp: '2020-12-02 11:16:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
 documentation_of: set-function/subset-convolution.hpp

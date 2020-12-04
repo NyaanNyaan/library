@@ -2,211 +2,147 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/differential-equation.hpp
     title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-circular.hpp
     title: "\u4E09\u89D2\u95A2\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-composition.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
   - icon: ':warning:'
     path: fps/fps-famous-series.hpp
     title: fps/fps-famous-series.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/multipoint-evaluation.hpp
     title: Multipoint Evaluation
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/nth-term.hpp
     title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/polynomial-gcd.hpp
     title: "\u591A\u9805\u5F0FGCD"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/utility.hpp
     title: fps/utility.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
       \u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/polynomial-matrix-determinant.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-log.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/fps/formal-power-series.md
     document_title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
       \u30A4\u30D6\u30E9\u30EA"
     links: []
-  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint>\
-    \ {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS\
-    \ &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
-    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
-    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
-    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
-    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
-    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
-    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
-    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
-    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
-    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
-    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
-    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
-    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
-    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
-    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
-    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
-    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
-    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
-    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
-    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
-    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
-    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
-    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
-    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
-    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
-    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
-    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
-    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
-    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
-    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
-    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
-    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
-    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
-    \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
-    \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
-    \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
-    \ operator<<(int sz) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(),\
-    \ sz, mint(0));\n    return ret;\n  }\n\n  FPS diff() const {\n    const int n\
-    \ = (int)this->size();\n    FPS ret(max(0, n - 1));\n    mint one(1), coeff(1);\n\
-    \    for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n \
-    \     coeff += one;\n    }\n    return ret;\n  }\n\n  FPS integral() const {\n\
-    \    const int n = (int)this->size();\n    FPS ret(n + 1);\n    ret[0] = mint(0);\n\
-    \    if (n > 0) ret[1] = mint(1);\n    auto mod = mint::get_mod();\n    for (int\
-    \ i = 2; i <= n; i++) ret[i] = (-ret[mod % i]) * (mod / i);\n    for (int i =\
-    \ 0; i < n; i++) ret[i + 1] *= (*this)[i];\n    return ret;\n  }\n\n  mint eval(mint\
-    \ x) const {\n    mint r = 0, w = 1;\n    for (auto &v : *this) r += w * v, w\
-    \ *= x;\n    return r;\n  }\n\n  FPS log(int deg = -1) const {\n    assert((*this)[0]\
-    \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
-    \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
-    \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
-    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));\n\
-    \        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg)\
-    \ ret.resize(deg, mint(0));\n        return ret;\n      }\n    }\n    return FPS(deg,\
-    \ mint(0));\n  }\n\n  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const\
-    \ FPS &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int\
-    \ ntt_pr();\n  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n\
-    };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
-    \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
-    \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
+  bundledCode: "#line 2 \"fps/formal-power-series.hpp\"\n\n\n\ntemplate <typename\
+    \ mint>\nstruct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n\
     \  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if\
     \ (r.size() > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
     \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
@@ -269,6 +205,69 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n"
+  code: "#pragma once\n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries :\
+    \ vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
+    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
+    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
+    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
+    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
+    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
+    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
+    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
+    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
+    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
+    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
+    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
+    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
+    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
+    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
+    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
+    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
+    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
+    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
+    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
+    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
+    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
+    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
+    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
+    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
+    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
+    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
+    \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
+    \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
+    \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
+    \ operator<<(int sz) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(),\
+    \ sz, mint(0));\n    return ret;\n  }\n\n  FPS diff() const {\n    const int n\
+    \ = (int)this->size();\n    FPS ret(max(0, n - 1));\n    mint one(1), coeff(1);\n\
+    \    for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n \
+    \     coeff += one;\n    }\n    return ret;\n  }\n\n  FPS integral() const {\n\
+    \    const int n = (int)this->size();\n    FPS ret(n + 1);\n    ret[0] = mint(0);\n\
+    \    if (n > 0) ret[1] = mint(1);\n    auto mod = mint::get_mod();\n    for (int\
+    \ i = 2; i <= n; i++) ret[i] = (-ret[mod % i]) * (mod / i);\n    for (int i =\
+    \ 0; i < n; i++) ret[i + 1] *= (*this)[i];\n    return ret;\n  }\n\n  mint eval(mint\
+    \ x) const {\n    mint r = 0, w = 1;\n    for (auto &v : *this) r += w * v, w\
+    \ *= x;\n    return r;\n  }\n\n  FPS log(int deg = -1) const {\n    assert((*this)[0]\
+    \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
+    \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
+    \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
+    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
+    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
+    \ / (*this)[i];\n        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));\n\
+    \        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg)\
+    \ ret.resize(deg, mint(0));\n        return ret;\n      }\n    }\n    return FPS(deg,\
+    \ mint(0));\n  }\n\n  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const\
+    \ FPS &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int\
+    \ ntt_pr();\n  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n\
+    };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
+    \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
+    \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: fps/formal-power-series.hpp
@@ -292,8 +291,8 @@ data:
   - fps/nth-term.hpp
   - fps/fps-circular.hpp
   - fps/fps-famous-series.hpp
-  timestamp: '2020-08-21 15:57:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp

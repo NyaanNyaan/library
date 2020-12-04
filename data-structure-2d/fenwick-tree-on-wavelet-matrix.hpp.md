@@ -3,25 +3,25 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 1 \"data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp\"\n\
-    #include <immintrin.h>\n//\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using\
-    \ u64 = uint64_t;\n\n  static constexpr u32 w = 64;\n  vector<u64> block;\n  vector<u32>\
-    \ count;\n  u32 n, zeros;\n\n  inline u32 get(u32 i) const { return u32(block[i\
-    \ / w] >> (i % w)) & 1u; }\n  inline void set(u32 i) { block[i / w] |= 1LL <<\
-    \ (i % w); }\n\n  bit_vector() {}\n  bit_vector(int _n) { init(_n); }\n  __attribute__((optimize(\"\
-    O3,unroll-loops\"))) void init(int _n) {\n    n = zeros = _n;\n    block.resize(n\
-    \ / w + 1, 0);\n    count.resize(block.size(), 0);\n  }\n\n  __attribute__((target(\"\
-    popcnt\"))) void build() {\n    for (u32 i = 1; i < block.size(); ++i)\n     \
-    \ count[i] = count[i - 1] + _mm_popcnt_u64(block[i - 1]);\n    zeros = rank0(n);\n\
-    \  }\n\n  inline u32 rank0(u32 i) const { return i - rank1(i); }\n\n  __attribute__((target(\"\
+    #include <immintrin.h>\n//\n\n\n\n\nstruct bit_vector {\n  using u32 = uint32_t;\n\
+    \  using i64 = int64_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 w =\
+    \ 64;\n  vector<u64> block;\n  vector<u32> count;\n  u32 n, zeros;\n\n  inline\
+    \ u32 get(u32 i) const { return u32(block[i / w] >> (i % w)) & 1u; }\n  inline\
+    \ void set(u32 i) { block[i / w] |= 1LL << (i % w); }\n\n  bit_vector() {}\n \
+    \ bit_vector(int _n) { init(_n); }\n  __attribute__((optimize(\"O3,unroll-loops\"\
+    ))) void init(int _n) {\n    n = zeros = _n;\n    block.resize(n / w + 1, 0);\n\
+    \    count.resize(block.size(), 0);\n  }\n\n  __attribute__((target(\"popcnt\"\
+    ))) void build() {\n    for (u32 i = 1; i < block.size(); ++i)\n      count[i]\
+    \ = count[i - 1] + _mm_popcnt_u64(block[i - 1]);\n    zeros = rank0(n);\n  }\n\
+    \n  inline u32 rank0(u32 i) const { return i - rank1(i); }\n\n  __attribute__((target(\"\
     bmi2,popcnt\"))) inline u32 rank1(u32 i) const {\n    return count[i / w] + _mm_popcnt_u64(_bzhi_u64(block[i\
     \ / w], i % w));\n  }\n};\n\ntemplate <typename S, typename T>\nstruct WaveletMatrix\
     \ {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\
@@ -61,17 +61,17 @@ data:
     \      }\n    }\n    return res;\n  }\n\n  T sum(S lx, S ly, S rx, S ry) const\
     \ {\n    int l = xid(lx), r = xid(rx);\n    return sum(l, r, yid(ry)) - sum(l,\
     \ r, yid(ly));\n  }\n};\n"
-  code: "#include <immintrin.h>\n//\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using\
-    \ u64 = uint64_t;\n\n  static constexpr u32 w = 64;\n  vector<u64> block;\n  vector<u32>\
-    \ count;\n  u32 n, zeros;\n\n  inline u32 get(u32 i) const { return u32(block[i\
-    \ / w] >> (i % w)) & 1u; }\n  inline void set(u32 i) { block[i / w] |= 1LL <<\
-    \ (i % w); }\n\n  bit_vector() {}\n  bit_vector(int _n) { init(_n); }\n  __attribute__((optimize(\"\
-    O3,unroll-loops\"))) void init(int _n) {\n    n = zeros = _n;\n    block.resize(n\
-    \ / w + 1, 0);\n    count.resize(block.size(), 0);\n  }\n\n  __attribute__((target(\"\
-    popcnt\"))) void build() {\n    for (u32 i = 1; i < block.size(); ++i)\n     \
-    \ count[i] = count[i - 1] + _mm_popcnt_u64(block[i - 1]);\n    zeros = rank0(n);\n\
-    \  }\n\n  inline u32 rank0(u32 i) const { return i - rank1(i); }\n\n  __attribute__((target(\"\
+  code: "#include <immintrin.h>\n//\n\n\n\n\nstruct bit_vector {\n  using u32 = uint32_t;\n\
+    \  using i64 = int64_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 w =\
+    \ 64;\n  vector<u64> block;\n  vector<u32> count;\n  u32 n, zeros;\n\n  inline\
+    \ u32 get(u32 i) const { return u32(block[i / w] >> (i % w)) & 1u; }\n  inline\
+    \ void set(u32 i) { block[i / w] |= 1LL << (i % w); }\n\n  bit_vector() {}\n \
+    \ bit_vector(int _n) { init(_n); }\n  __attribute__((optimize(\"O3,unroll-loops\"\
+    ))) void init(int _n) {\n    n = zeros = _n;\n    block.resize(n / w + 1, 0);\n\
+    \    count.resize(block.size(), 0);\n  }\n\n  __attribute__((target(\"popcnt\"\
+    ))) void build() {\n    for (u32 i = 1; i < block.size(); ++i)\n      count[i]\
+    \ = count[i - 1] + _mm_popcnt_u64(block[i - 1]);\n    zeros = rank0(n);\n  }\n\
+    \n  inline u32 rank0(u32 i) const { return i - rank1(i); }\n\n  __attribute__((target(\"\
     bmi2,popcnt\"))) inline u32 rank1(u32 i) const {\n    return count[i / w] + _mm_popcnt_u64(_bzhi_u64(block[i\
     \ / w], i % w));\n  }\n};\n\ntemplate <typename S, typename T>\nstruct WaveletMatrix\
     \ {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\
@@ -115,8 +115,8 @@ data:
   isVerificationFile: false
   path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
   requiredBy: []
-  timestamp: '2020-10-05 19:26:40+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
 documentation_of: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp

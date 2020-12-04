@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
@@ -9,18 +9,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/tree/cartesian-tree.md
     document_title: Cartesian Tree
     links: []
-  bundledCode: "#line 2 \"tree/cartesian-tree.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\
-    \ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
+  bundledCode: "#line 2 \"tree/cartesian-tree.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
+    \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
     \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
     \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
     \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
@@ -35,46 +34,45 @@ data:
     \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
     \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
     \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].eb(x, y, c);\n    if (!is_directed) g[y].eb(y,\
-    \ x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
-    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
-    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
-    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
-    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
-    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
-    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
-    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
-    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
-    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"tree/cartesian-tree.hpp\"\n\n// return value : pair<graph,\
-    \ root>\ntemplate <typename T>\npair<vector<vector<int>>, int> CartesianTree(vector<T>\
-    \ &a) {\n  int N = (int)a.size();\n  vector<vector<int>> g(N);\n  vector<int>\
-    \ p(N, -1), st;\n  st.reserve(N);\n  for (int i = 0; i < N; i++) {\n    int prv\
-    \ = -1;\n    while (!st.empty() && a[i] < a[st.back()]) {\n      prv = st.back();\n\
-    \      st.pop_back();\n    }\n    if (prv != -1) p[prv] = i;\n    if (!st.empty())\
-    \ p[i] = st.back();\n    st.push_back(i);\n  }\n  int root = -1;\n  for (int i\
-    \ = 0; i < N; i++) {\n    if (p[i] != -1)\n      g[p[i]].push_back(i);\n    else\n\
-    \      root = i;\n  }\n  return make_pair(g, root);\n}\n\n/**\n * @brief Cartesian\
-    \ Tree\n * @docs docs/tree/cartesian-tree.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../graph/graph-template.hpp\"\n\n// return value : pair<graph, root>\ntemplate\
-    \ <typename T>\npair<vector<vector<int>>, int> CartesianTree(vector<T> &a) {\n\
-    \  int N = (int)a.size();\n  vector<vector<int>> g(N);\n  vector<int> p(N, -1),\
-    \ st;\n  st.reserve(N);\n  for (int i = 0; i < N; i++) {\n    int prv = -1;\n\
-    \    while (!st.empty() && a[i] < a[st.back()]) {\n      prv = st.back();\n  \
-    \    st.pop_back();\n    }\n    if (prv != -1) p[prv] = i;\n    if (!st.empty())\
-    \ p[i] = st.back();\n    st.push_back(i);\n  }\n  int root = -1;\n  for (int i\
-    \ = 0; i < N; i++) {\n    if (p[i] != -1)\n      g[p[i]].push_back(i);\n    else\n\
-    \      root = i;\n  }\n  return make_pair(g, root);\n}\n\n/**\n * @brief Cartesian\
-    \ Tree\n * @docs docs/tree/cartesian-tree.md\n */"
+    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
+    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
+    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
+    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
+    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
+    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
+    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
+    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
+    \                       bool is_directed = false, bool is_1origin = true) {\n\
+    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
+    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
+    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"tree/cartesian-tree.hpp\"\
+    \n\n// return value : pair<graph, root>\ntemplate <typename T>\npair<vector<vector<int>>,\
+    \ int> CartesianTree(vector<T> &a) {\n  int N = (int)a.size();\n  vector<vector<int>>\
+    \ g(N);\n  vector<int> p(N, -1), st;\n  st.reserve(N);\n  for (int i = 0; i <\
+    \ N; i++) {\n    int prv = -1;\n    while (!st.empty() && a[i] < a[st.back()])\
+    \ {\n      prv = st.back();\n      st.pop_back();\n    }\n    if (prv != -1) p[prv]\
+    \ = i;\n    if (!st.empty()) p[i] = st.back();\n    st.push_back(i);\n  }\n  int\
+    \ root = -1;\n  for (int i = 0; i < N; i++) {\n    if (p[i] != -1)\n      g[p[i]].push_back(i);\n\
+    \    else\n      root = i;\n  }\n  return make_pair(g, root);\n}\n\n/**\n * @brief\
+    \ Cartesian Tree\n * @docs docs/tree/cartesian-tree.md\n */\n"
+  code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\n// return\
+    \ value : pair<graph, root>\ntemplate <typename T>\npair<vector<vector<int>>,\
+    \ int> CartesianTree(vector<T> &a) {\n  int N = (int)a.size();\n  vector<vector<int>>\
+    \ g(N);\n  vector<int> p(N, -1), st;\n  st.reserve(N);\n  for (int i = 0; i <\
+    \ N; i++) {\n    int prv = -1;\n    while (!st.empty() && a[i] < a[st.back()])\
+    \ {\n      prv = st.back();\n      st.pop_back();\n    }\n    if (prv != -1) p[prv]\
+    \ = i;\n    if (!st.empty()) p[i] = st.back();\n    st.push_back(i);\n  }\n  int\
+    \ root = -1;\n  for (int i = 0; i < N; i++) {\n    if (p[i] != -1)\n      g[p[i]].push_back(i);\n\
+    \    else\n      root = i;\n  }\n  return make_pair(g, root);\n}\n\n/**\n * @brief\
+    \ Cartesian Tree\n * @docs docs/tree/cartesian-tree.md\n */"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/cartesian-tree.hpp
   requiredBy: []
-  timestamp: '2020-11-26 18:26:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
   - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp

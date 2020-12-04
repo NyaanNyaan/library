@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
@@ -12,25 +12,25 @@ data:
     document_title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\
       \u5BFE)"
     links: []
-  bundledCode: "#line 2 \"shortest-path/dual-of-shortest-path.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"graph/graph-template.hpp\"\nusing namespace\
-    \ std;\n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n\
-    \  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src,\
-    \ int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const\
-    \ int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
-    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
-    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
-    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
-    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+  bundledCode: "#line 2 \"shortest-path/dual-of-shortest-path.hpp\"\n\n\n\n#line 2\
+    \ \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct edge {\n  int\
+    \ src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost)\
+    \ {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\
+    \n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\n \
+    \ operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
+    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
+    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
+    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
+    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
+    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
+    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
+    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
+    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
+    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
-    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
-    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
-    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
-    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
-    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].eb(x, y, c);\n    if (!is_directed) g[y].eb(y,\
-    \ x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
+    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
+    \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
+    \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
     \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
     \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
     \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
@@ -54,11 +54,11 @@ data:
     \        }\n      }\n      if (!upd) break;\n      if (loop == N - 1) return {};\n\
     \    }\n    return d;\n  }\n};\n\n/**\n * @brief \u725B\u30B2\u30FC(\u6700\u77ED\
     \u8DEF\u554F\u984C\u306E\u53CC\u5BFE)\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct Dual_of_Shortest_Path\
-    \ {\n  int N;\n  vector<vector<edge<T>>> g;\n  T INF;\n  vector<T> d;\n\n  Dual_of_Shortest_Path(int\
-    \ _n)\n      : N(_n), g(N), INF(numeric_limits<T>::max() / 2), d(N, INF) {}\n\n\
-    \  // add constraint f(j) <= f(i) + w\n  void add_edge(int i, int j, T c) { g[i].emplace_back(i,\
+  code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\ntemplate\
+    \ <typename T>\nstruct Dual_of_Shortest_Path {\n  int N;\n  vector<vector<edge<T>>>\
+    \ g;\n  T INF;\n  vector<T> d;\n\n  Dual_of_Shortest_Path(int _n)\n      : N(_n),\
+    \ g(N), INF(numeric_limits<T>::max() / 2), d(N, INF) {}\n\n  // add constraint\
+    \ f(j) <= f(i) + w\n  void add_edge(int i, int j, T c) { g[i].emplace_back(i,\
     \ j, c); }\n\n  // solve max{f(t) - f(s)} for each t\n  // if unsatisfiable, return\
     \ empty vector\n  vector<T> solve(int start = 0) {\n    d[start] = 0;\n    for\
     \ (int loop = 0; loop < N; ++loop) {\n      int upd = 0;\n      for (int i = 0;\
@@ -72,7 +72,7 @@ data:
   isVerificationFile: false
   path: shortest-path/dual-of-shortest-path.hpp
   requiredBy: []
-  timestamp: '2020-11-24 16:37:57+09:00'
+  timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: shortest-path/dual-of-shortest-path.hpp

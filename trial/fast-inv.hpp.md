@@ -1,32 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/fast-inv-gcd.test.cpp
     title: verify/verify-unit-test/fast-inv-gcd.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/trial/fast-inv.md
     document_title: "\u9AD8\u901Fmodulo\u9006\u5143"
     links: []
-  bundledCode: "#line 2 \"trial/fast-inv.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n\n#line 3 \"misc/timer.hpp\"\nusing namespace std;\n\nstruct Timer {\n\
-    \  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\n\
-    \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
-    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
-    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
-    \ 6 \"trial/fast-inv.hpp\"\n\nnamespace fast_inv {\nusing u64 = uint64_t;\nusing\
-    \ u32 = uint32_t;\nusing i32 = int32_t;\nconstexpr u32 MOD = 998244353;\n\nstruct\
-    \ Pre {\n  u32 a[64];\n  constexpr Pre() : a() {\n    static_assert(MOD & 1);\n\
-    \    a[0] = 1;\n    for (int i = 1; i < 64; i++) a[i] = u64(a[i - 1]) * ((MOD\
-    \ + 1) >> 1) % MOD;\n  }\n} constexpr pre;\n\n__attribute__((target(\"bmi\")))\
-    \ u32 bgcd_inv(u32 a) {\n  u32 b = MOD, s = 1, t = 0;\n  int n = __builtin_ctz(a);\n\
+  bundledCode: "#line 2 \"trial/fast-inv.hpp\"\n\n\n\n#line 2 \"misc/timer.hpp\"\n\
+    \n\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer()\
+    \ { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
+    };\n#line 6 \"trial/fast-inv.hpp\"\n\nnamespace fast_inv {\nusing u64 = uint64_t;\n\
+    using u32 = uint32_t;\nusing i32 = int32_t;\nconstexpr u32 MOD = 998244353;\n\n\
+    struct Pre {\n  u32 a[64];\n  constexpr Pre() : a() {\n    static_assert(MOD &\
+    \ 1);\n    a[0] = 1;\n    for (int i = 1; i < 64; i++) a[i] = u64(a[i - 1]) *\
+    \ ((MOD + 1) >> 1) % MOD;\n  }\n} constexpr pre;\n\n__attribute__((target(\"bmi\"\
+    ))) u32 bgcd_inv(u32 a) {\n  u32 b = MOD, s = 1, t = 0;\n  int n = __builtin_ctz(a);\n\
     \  a >>= n;\n  if (__builtin_expect(a < 1 << 20, false)) {\n    if (a == 1) return\
     \ pre.a[n];\n    t = -(b / a);\n    b %= a;\n    int m = __builtin_ctz(b);\n \
     \   b >>= m;\n    s = 1u << m;\n    n += m;\n  }\n  while (a != b) {\n    int\
@@ -68,13 +67,12 @@ data:
     \n  // binary-gcd-inv\n  cerr << \"binary-gcd-inv\" << endl;\n  test_inner(bgcd_inv);\n\
     }\n\n}  // namespace fast_inv\n\n/**\n * @brief \u9AD8\u901Fmodulo\u9006\u5143\
     \n * @docs docs/trial/fast-inv.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../misc/timer.hpp\"\n\nnamespace fast_inv {\nusing u64 = uint64_t;\nusing\
-    \ u32 = uint32_t;\nusing i32 = int32_t;\nconstexpr u32 MOD = 998244353;\n\nstruct\
-    \ Pre {\n  u32 a[64];\n  constexpr Pre() : a() {\n    static_assert(MOD & 1);\n\
-    \    a[0] = 1;\n    for (int i = 1; i < 64; i++) a[i] = u64(a[i - 1]) * ((MOD\
-    \ + 1) >> 1) % MOD;\n  }\n} constexpr pre;\n\n__attribute__((target(\"bmi\")))\
-    \ u32 bgcd_inv(u32 a) {\n  u32 b = MOD, s = 1, t = 0;\n  int n = __builtin_ctz(a);\n\
+  code: "#pragma once\n\n\n\n#include \"../misc/timer.hpp\"\n\nnamespace fast_inv\
+    \ {\nusing u64 = uint64_t;\nusing u32 = uint32_t;\nusing i32 = int32_t;\nconstexpr\
+    \ u32 MOD = 998244353;\n\nstruct Pre {\n  u32 a[64];\n  constexpr Pre() : a()\
+    \ {\n    static_assert(MOD & 1);\n    a[0] = 1;\n    for (int i = 1; i < 64; i++)\
+    \ a[i] = u64(a[i - 1]) * ((MOD + 1) >> 1) % MOD;\n  }\n} constexpr pre;\n\n__attribute__((target(\"\
+    bmi\"))) u32 bgcd_inv(u32 a) {\n  u32 b = MOD, s = 1, t = 0;\n  int n = __builtin_ctz(a);\n\
     \  a >>= n;\n  if (__builtin_expect(a < 1 << 20, false)) {\n    if (a == 1) return\
     \ pre.a[n];\n    t = -(b / a);\n    b %= a;\n    int m = __builtin_ctz(b);\n \
     \   b >>= m;\n    s = 1u << m;\n    n += m;\n  }\n  while (a != b) {\n    int\
@@ -121,8 +119,8 @@ data:
   isVerificationFile: false
   path: trial/fast-inv.hpp
   requiredBy: []
-  timestamp: '2020-11-26 20:10:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
 documentation_of: trial/fast-inv.hpp

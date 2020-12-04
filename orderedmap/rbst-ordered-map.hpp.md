@@ -12,9 +12,8 @@ data:
     _deprecated_at_docs: docs/orderedmap/rbst-ordered-map.md
     document_title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
     links: []
-  bundledCode: "#line 2 \"orderedmap/rbst-ordered-map.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"misc/vector-pool.hpp\"\nusing namespace std;\n\
-    \ntemplate <typename T,typename ptr_t = int>\nstruct VectorPool {\n  vector<T>\
+  bundledCode: "#line 2 \"orderedmap/rbst-ordered-map.hpp\"\n\n\n\n#line 2 \"misc/vector-pool.hpp\"\
+    \n\n\n\ntemplate <typename T,typename ptr_t = int>\nstruct VectorPool {\n  vector<T>\
     \ pool;\n  vector<ptr_t> st;\n  int idx;\n  int cap;\n\n  // pool[0] is missing\
     \ number (assuming nil)\n  VectorPool(int s = 4) : pool(s), st(), idx(1), cap(s)\
     \ { assert(s > 0); }\n\n  inline T& operator[](ptr_t i) { return pool[int(i)];\
@@ -148,48 +147,47 @@ data:
     \ typename Val>\nbool OrderedMap<Key, Val>::lazy_flag = false;\n\n/**\n *  @brief\
     \ OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n *  @docs docs/orderedmap/rbst-ordered-map.md\n\
     \ */ \n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../misc/vector-pool.hpp\"\n\ntemplate <typename Key, typename Val>\nstruct\
-    \ OrderedMap {\n private:\n  uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n\
-    \    x_ = x_ ^ (x_ << 7);\n    x_ = x_ ^ (x_ >> 9);\n    return x_ & 0xFFFFFFFFull;\n\
-    \  }\n\n  struct NodePtr;\n  struct Node {\n    NodePtr l, r;\n    Key key;\n\
-    \    Val val, sum;\n    int cnt;\n    Node() {}\n    Node(const Key &k, const\
-    \ Val &v)\n        : l(0), r(0), key(k), val(v), sum(v), cnt(1) {}\n  };\n\n \
-    \ struct NodePtr {\n    int n;\n    explicit constexpr NodePtr() {}\n    explicit\
-    \ constexpr NodePtr(int _n) : n(_n) {}\n    constexpr bool operator==(const NodePtr\
-    \ &r) { return n == r.n; }\n    constexpr bool operator!=(const NodePtr &r) {\
-    \ return n != r.n; }\n    explicit constexpr operator int() { return n; }\n  \
-    \  explicit constexpr operator bool() { return n != 0; }\n    constexpr bool operator!()\
-    \ { return n == 0; }\n    Node *operator->() { return &(pool.pool[n]); }\n   \
-    \ pair<const Key &, Val &> operator*() {\n      assert(n != 0 and \"pair<const\
-    \ Key &, Val &> NodePtr::operator*()\");\n      return make_pair(pool.pool[n].key,\
-    \ pool.pool[n].val);\n    }\n    static constexpr NodePtr nil() { return NodePtr(0);\
-    \ }\n  };\n\n  using F = function<Val(Val, Val)>;\n\n  static VectorPool<Node,\
-    \ NodePtr> pool;\n  static F f;\n  static Val I;\n  static bool fold_flag, lazy_flag;\n\
-    \  NodePtr root;\n\n  NodePtr my_new(const Key &k, const Val &v) {\n    NodePtr\
-    \ ret = pool.my_new(k, v);\n    assert(bool(ret) && \"NodePtr my_new(const Key\
-    \ &k, const Val &v)\");\n    return ret;\n  }\n\n  void my_delete(NodePtr t) {\n\
-    \    assert(bool(t) && \"void my_delete(NodePtr t)\");\n    pool.free(t);\n  }\n\
-    \n  // inner_update (*t)\n  inline NodePtr inner_update(NodePtr t) {\n    t->cnt\
-    \ = t->l->cnt + t->r->cnt + 1;\n    if (fold_flag) {\n      t->sum = f(f(t->l->sum,\
-    \ t->val), t->r->sum);\n    }\n    return t;\n  }\n\n  // assign (*this)[x] =\
-    \ y, and update parent nodes\n  void thrust(NodePtr p, const Key &x, const Val\
-    \ &y) {\n    if (!p) return;\n    if (p->key == x) {\n      p->val = y;\n    \
-    \  inner_update(p);\n      return;\n    }\n    NodePtr nxt = p->key < x ? p->r\
-    \ : p->l;\n    thrust(nxt, x, y);\n    inner_update(p);\n  }\n\n  // merge (*l,\
-    \ *r)\n  NodePtr merge(NodePtr l, NodePtr r) {\n    if (!l || !r) return bool(l)\
-    \ ? l : r;\n    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {\n     \
-    \ l->r = merge(l->r, r);\n      return inner_update(l);\n    } else {\n      r->l\
-    \ = merge(l, r->l);\n      return inner_update(r);\n    }\n  }\n\n  // split (*t)\
-    \ to [-inf, x), [x, inf)\n  pair<NodePtr, NodePtr> split(NodePtr t, const Key\
-    \ &x) {\n    if (!t) return {NodePtr::nil(), NodePtr::nil()};\n    if (x <= t->key)\
-    \ {\n      auto s = split(t->l, x);\n      t->l = s.second;\n      return {s.first,\
-    \ inner_update(t)};\n    } else {\n      auto s = split(t->r, x);\n      t->r\
-    \ = s.first;\n      return {inner_update(t), s.second};\n    }\n  }\n\n  // split\
-    \ (*t) to [-inf, x], (x, inf)\n  pair<NodePtr, NodePtr> split_upper(NodePtr t,\
+  code: "#pragma once\n\n\n\n#include \"../misc/vector-pool.hpp\"\n\ntemplate <typename\
+    \ Key, typename Val>\nstruct OrderedMap {\n private:\n  uint64_t rng() {\n   \
+    \ static uint64_t x_ = 88172645463325252ULL;\n    x_ = x_ ^ (x_ << 7);\n    x_\
+    \ = x_ ^ (x_ >> 9);\n    return x_ & 0xFFFFFFFFull;\n  }\n\n  struct NodePtr;\n\
+    \  struct Node {\n    NodePtr l, r;\n    Key key;\n    Val val, sum;\n    int\
+    \ cnt;\n    Node() {}\n    Node(const Key &k, const Val &v)\n        : l(0), r(0),\
+    \ key(k), val(v), sum(v), cnt(1) {}\n  };\n\n  struct NodePtr {\n    int n;\n\
+    \    explicit constexpr NodePtr() {}\n    explicit constexpr NodePtr(int _n) :\
+    \ n(_n) {}\n    constexpr bool operator==(const NodePtr &r) { return n == r.n;\
+    \ }\n    constexpr bool operator!=(const NodePtr &r) { return n != r.n; }\n  \
+    \  explicit constexpr operator int() { return n; }\n    explicit constexpr operator\
+    \ bool() { return n != 0; }\n    constexpr bool operator!() { return n == 0; }\n\
+    \    Node *operator->() { return &(pool.pool[n]); }\n    pair<const Key &, Val\
+    \ &> operator*() {\n      assert(n != 0 and \"pair<const Key &, Val &> NodePtr::operator*()\"\
+    );\n      return make_pair(pool.pool[n].key, pool.pool[n].val);\n    }\n    static\
+    \ constexpr NodePtr nil() { return NodePtr(0); }\n  };\n\n  using F = function<Val(Val,\
+    \ Val)>;\n\n  static VectorPool<Node, NodePtr> pool;\n  static F f;\n  static\
+    \ Val I;\n  static bool fold_flag, lazy_flag;\n  NodePtr root;\n\n  NodePtr my_new(const\
+    \ Key &k, const Val &v) {\n    NodePtr ret = pool.my_new(k, v);\n    assert(bool(ret)\
+    \ && \"NodePtr my_new(const Key &k, const Val &v)\");\n    return ret;\n  }\n\n\
+    \  void my_delete(NodePtr t) {\n    assert(bool(t) && \"void my_delete(NodePtr\
+    \ t)\");\n    pool.free(t);\n  }\n\n  // inner_update (*t)\n  inline NodePtr inner_update(NodePtr\
+    \ t) {\n    t->cnt = t->l->cnt + t->r->cnt + 1;\n    if (fold_flag) {\n      t->sum\
+    \ = f(f(t->l->sum, t->val), t->r->sum);\n    }\n    return t;\n  }\n\n  // assign\
+    \ (*this)[x] = y, and update parent nodes\n  void thrust(NodePtr p, const Key\
+    \ &x, const Val &y) {\n    if (!p) return;\n    if (p->key == x) {\n      p->val\
+    \ = y;\n      inner_update(p);\n      return;\n    }\n    NodePtr nxt = p->key\
+    \ < x ? p->r : p->l;\n    thrust(nxt, x, y);\n    inner_update(p);\n  }\n\n  //\
+    \ merge (*l, *r)\n  NodePtr merge(NodePtr l, NodePtr r) {\n    if (!l || !r) return\
+    \ bool(l) ? l : r;\n    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {\n\
+    \      l->r = merge(l->r, r);\n      return inner_update(l);\n    } else {\n \
+    \     r->l = merge(l, r->l);\n      return inner_update(r);\n    }\n  }\n\n  //\
+    \ split (*t) to [-inf, x), [x, inf)\n  pair<NodePtr, NodePtr> split(NodePtr t,\
     \ const Key &x) {\n    if (!t) return {NodePtr::nil(), NodePtr::nil()};\n    if\
-    \ (x < t->key) {\n      auto s = split(t->l, x);\n      t->l = s.second;\n   \
-    \   return {s.first, inner_update(t)};\n    } else {\n      auto s = split(t->r,\
+    \ (x <= t->key) {\n      auto s = split(t->l, x);\n      t->l = s.second;\n  \
+    \    return {s.first, inner_update(t)};\n    } else {\n      auto s = split(t->r,\
+    \ x);\n      t->r = s.first;\n      return {inner_update(t), s.second};\n    }\n\
+    \  }\n\n  // split (*t) to [-inf, x], (x, inf)\n  pair<NodePtr, NodePtr> split_upper(NodePtr\
+    \ t, const Key &x) {\n    if (!t) return {NodePtr::nil(), NodePtr::nil()};\n \
+    \   if (x < t->key) {\n      auto s = split(t->l, x);\n      t->l = s.second;\n\
+    \      return {s.first, inner_update(t)};\n    } else {\n      auto s = split(t->r,\
     \ x);\n      t->r = s.first;\n      return {inner_update(t), s.second};\n    }\n\
     \  }\n\n  // find t : t->key == x\n  NodePtr find_ptr(const Key &x) const {\n\
     \    NodePtr p = root;\n    while (bool(p)) {\n      if (x == p->key) return p;\n\
@@ -277,7 +275,7 @@ data:
   isVerificationFile: false
   path: orderedmap/rbst-ordered-map.hpp
   requiredBy: []
-  timestamp: '2020-11-26 18:26:31+09:00'
+  timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: orderedmap/rbst-ordered-map.hpp

@@ -1,35 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/multipoint-evaluation.hpp
     title: Multipoint Evaluation
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
       \u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/polynomial-matrix-determinant.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"fps/polynomial-interpolation.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace\
-    \ std;\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
+  bundledCode: "#line 2 \"fps/polynomial-interpolation.hpp\"\n\n\n\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
     \  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
     \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
@@ -92,7 +91,7 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 3 \"fps/multipoint-evaluation.hpp\"\nusing namespace std;\n\n#line 6 \"fps/multipoint-evaluation.hpp\"\
+    \ 2 \"fps/multipoint-evaluation.hpp\"\n\n\n\n#line 6 \"fps/multipoint-evaluation.hpp\"\
     \n\ntemplate <typename mint>\nstruct ProductTree {\n  using fps = FormalPowerSeries<mint>;\n\
     \  const vector<mint> &xs;\n  vector<fps> buf;\n  int N, xsz;\n  vector<int> l,\
     \ r;\n  ProductTree(const vector<mint> &xs_) : xs(xs_), xsz(xs.size()) {\n   \
@@ -145,11 +144,10 @@ data:
     \ << 1 | 1].empty())\n      return self(self, idx << 1 | 0);\n    return self(self,\
     \ idx << 1 | 0) * ptree.buf[idx << 1 | 1] +\n           self(self, idx << 1 |\
     \ 1) * ptree.buf[idx << 1 | 0];\n  };\n  return rec(rec, 1);\n}\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"./formal-power-series.hpp\"\n#include \"./multipoint-evaluation.hpp\"\n\n\
-    template <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const vector<mint>\
-    \ &xs,\n                                                const vector<mint> &ys)\
-    \ {\n  using fps = FormalPowerSeries<mint>;\n  assert(xs.size() == ys.size());\n\
+  code: "#pragma once\n\n\n\n#include \"./formal-power-series.hpp\"\n#include \"./multipoint-evaluation.hpp\"\
+    \n\ntemplate <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const\
+    \ vector<mint> &xs,\n                                                const vector<mint>\
+    \ &ys) {\n  using fps = FormalPowerSeries<mint>;\n  assert(xs.size() == ys.size());\n\
     \  ProductTree<mint> ptree(xs);\n  fps w = ptree.buf[1].diff();\n  vector<mint>\
     \ vs = InnerMultipointEvaluation<mint>(w, xs, ptree);\n  auto rec = [&](auto self,\
     \ int idx) -> fps {\n    if (idx >= ptree.N) {\n      if (idx - ptree.N < (int)xs.size())\n\
@@ -167,8 +165,8 @@ data:
   requiredBy:
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
-  timestamp: '2020-12-01 01:27:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp

@@ -1,123 +1,122 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: tree/frequency-table-of-tree-distance.hpp
     title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-log.test.cpp
     title: verify/verify-yosupo-fps/yosupo-log.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"ntt/ntt-avx2.hpp\"\n#include <bits/stdc++.h>\nusing namespace\
-    \ std;\n\n#line 3 \"modint/simd-montgomery.hpp\"\nusing namespace std;\n#include\
-    \ <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+  bundledCode: "#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n\n#include <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmy128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
     \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
@@ -456,60 +455,60 @@ data:
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
     \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../modint/simd-montgomery.hpp\"\n\nconstexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t\
-    \ buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));\nuint32_t buf2_[SZ_FFT_BUF]\
-    \ __attribute__((aligned(64)));\n\ntemplate <typename mint>\nstruct NTT {\n  static\
-    \ constexpr uint32_t get_pr() {\n    uint32_t mod = mint::get_mod();\n    using\
-    \ u64 = uint64_t;\n    u64 ds[32] = {};\n    int idx = 0;\n    u64 m = mod - 1;\n\
-    \    for (u64 i = 2; i * i <= m; ++i) {\n      if (m % i == 0) {\n        ds[idx++]\
-    \ = i;\n        while (m % i == 0) m /= i;\n      }\n    }\n    if (m != 1) ds[idx++]\
-    \ = m;\n\n    uint32_t pr = 2;\n    while (1) {\n      int flg = 1;\n      for\
-    \ (int i = 0; i < idx; ++i) {\n        u64 a = pr, b = (mod - 1) / ds[i], r =\
-    \ 1;\n        while (b) {\n          if (b & 1) r = r * a % mod;\n          a\
-    \ = a * a % mod;\n          b >>= 1;\n        }\n        if (r == 1) {\n     \
-    \     flg = 0;\n          break;\n        }\n      }\n      if (flg == 1) break;\n\
-    \      ++pr;\n    }\n    return pr;\n  };\n\n  static constexpr uint32_t mod =\
-    \ mint::get_mod();\n  static constexpr uint32_t pr = get_pr();\n  static constexpr\
-    \ int level = __builtin_ctzll(mod - 1);\n  mint dw[level], dy[level];\n  mint\
-    \ *buf1, *buf2;\n\n  constexpr NTT() {\n    setwy(level);\n    buf1 = reinterpret_cast<mint\
-    \ *>(::buf1_);\n    buf2 = reinterpret_cast<mint *>(::buf2_);\n  }\n\n  constexpr\
-    \ void setwy(int k) {\n    mint w[level], y[level];\n    w[k - 1] = mint(pr).pow((mod\
-    \ - 1) / (1 << k));\n    y[k - 1] = w[k - 1].inverse();\n    for (int i = k -\
-    \ 2; i > 0; --i)\n      w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];\n\
-    \    dw[0] = dy[0] = w[1] * w[1];\n    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2],\
-    \ dy[2] = y[2];\n    for (int i = 3; i < k; ++i) {\n      dw[i] = dw[i - 1] *\
-    \ y[i - 2] * w[i];\n      dy[i] = dy[i - 1] * w[i - 2] * y[i];\n    }\n  }\n\n\
-    \  __attribute__((target(\"avx2\"))) void ntt(mint *a, int n) {\n    int k = n\
-    \ ? __builtin_ctz(n) : 0;\n    if (k == 0) return;\n    if (k == 1) {\n      mint\
-    \ a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n\
-    \    }\n    if (k & 1) {\n      int v = 1 << (k - 1);\n      if (v < 8) {\n  \
-    \      for (int j = 0; j < v; ++j) {\n          mint ajv = a[j + v];\n       \
-    \   a[j + v] = a[j] - ajv;\n          a[j] += ajv;\n        }\n      } else {\n\
-    \        const __m256i m0 = _mm256_set1_epi32(0);\n        const __m256i m2 =\
-    \ _mm256_set1_epi32(mod + mod);\n        int j0 = 0;\n        int j1 = v;\n  \
-    \      for (; j0 < v; j0 += 8, j1 += 8) {\n          __m256i T0 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j0));\n          __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));\n\
-    \          __m256i naj = montgomery_add_256(T0, T1, m2, m0);\n          __m256i\
-    \ najv = montgomery_sub_256(T0, T1, m2, m0);\n          _mm256_storeu_si256((__m256i\
-    \ *)(a + j0), naj);\n          _mm256_storeu_si256((__m256i *)(a + j1), najv);\n\
-    \        }\n      }\n    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 <<\
-    \ (k - 2 - (k & 1));\n    mint one = mint(1);\n    mint imag = dw[1];\n    while\
-    \ (v) {\n      if (v == 1) {\n        mint ww = one, xx = one, wx = one;\n   \
-    \     for (int jh = 0; jh < u;) {\n          ww = xx * xx, wx = ww * xx;\n   \
-    \       mint t0 = a[jh + 0], t1 = a[jh + 1] * xx;\n          mint t2 = a[jh +\
-    \ 2] * ww, t3 = a[jh + 3] * wx;\n          mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n\
-    \          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;\n          a[jh + 0]\
-    \ = t0p2 + t1p3, a[jh + 1] = t0p2 - t1p3;\n          a[jh + 2] = t0m2 + t1m3,\
-    \ a[jh + 3] = t0m2 - t1m3;\n          xx *= dw[__builtin_ctz((jh += 4))];\n  \
-    \      }\n      } else if (v == 4) {\n        const __m128i m0 = _mm_set1_epi32(0);\n\
-    \        const __m128i m1 = _mm_set1_epi32(mod);\n        const __m128i m2 = _mm_set1_epi32(mod\
-    \ + mod);\n        const __m128i r = _mm_set1_epi32(mint::r);\n        const __m128i\
-    \ Imag = _mm_set1_epi32(imag.a);\n        mint ww = one, xx = one, wx = one;\n\
-    \        for (int jh = 0; jh < u;) {\n          if (jh == 0) {\n            int\
-    \ j0 = 0;\n            int j1 = v;\n            int j2 = j1 + v;\n           \
-    \ int j3 = j2 + v;\n            int je = v;\n            for (; j0 < je; j0 +=\
-    \ 4, j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
+  code: "#pragma once\n\n\n\n#include \"../modint/simd-montgomery.hpp\"\n\nconstexpr\
+    \ int SZ_FFT_BUF = 1 << 23;\nuint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
+    uint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\ntemplate <typename\
+    \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t mod\
+    \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
+    \ idx = 0;\n    u64 m = mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n   \
+    \   if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i == 0) m /=\
+    \ i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t pr = 2;\n\
+    \    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n\
+    \        u64 a = pr, b = (mod - 1) / ds[i], r = 1;\n        while (b) {\n    \
+    \      if (b & 1) r = r * a % mod;\n          a = a * a % mod;\n          b >>=\
+    \ 1;\n        }\n        if (r == 1) {\n          flg = 0;\n          break;\n\
+    \        }\n      }\n      if (flg == 1) break;\n      ++pr;\n    }\n    return\
+    \ pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr\
+    \ uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
+    \ - 1);\n  mint dw[level], dy[level];\n  mint *buf1, *buf2;\n\n  constexpr NTT()\
+    \ {\n    setwy(level);\n    buf1 = reinterpret_cast<mint *>(::buf1_);\n    buf2\
+    \ = reinterpret_cast<mint *>(::buf2_);\n  }\n\n  constexpr void setwy(int k) {\n\
+    \    mint w[level], y[level];\n    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n\
+    \    y[k - 1] = w[k - 1].inverse();\n    for (int i = k - 2; i > 0; --i)\n   \
+    \   w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];\n    dw[0] = dy[0]\
+    \ = w[1] * w[1];\n    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];\n\
+    \    for (int i = 3; i < k; ++i) {\n      dw[i] = dw[i - 1] * y[i - 2] * w[i];\n\
+    \      dy[i] = dy[i - 1] * w[i - 2] * y[i];\n    }\n  }\n\n  __attribute__((target(\"\
+    avx2\"))) void ntt(mint *a, int n) {\n    int k = n ? __builtin_ctz(n) : 0;\n\
+    \    if (k == 0) return;\n    if (k == 1) {\n      mint a1 = a[1];\n      a[1]\
+    \ = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n    }\n    if (k & 1)\
+    \ {\n      int v = 1 << (k - 1);\n      if (v < 8) {\n        for (int j = 0;\
+    \ j < v; ++j) {\n          mint ajv = a[j + v];\n          a[j + v] = a[j] - ajv;\n\
+    \          a[j] += ajv;\n        }\n      } else {\n        const __m256i m0 =\
+    \ _mm256_set1_epi32(0);\n        const __m256i m2 = _mm256_set1_epi32(mod + mod);\n\
+    \        int j0 = 0;\n        int j1 = v;\n        for (; j0 < v; j0 += 8, j1\
+    \ += 8) {\n          __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));\n \
+    \         __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));\n          __m256i\
+    \ naj = montgomery_add_256(T0, T1, m2, m0);\n          __m256i najv = montgomery_sub_256(T0,\
+    \ T1, m2, m0);\n          _mm256_storeu_si256((__m256i *)(a + j0), naj);\n   \
+    \       _mm256_storeu_si256((__m256i *)(a + j1), najv);\n        }\n      }\n\
+    \    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 << (k - 2 - (k & 1));\n\
+    \    mint one = mint(1);\n    mint imag = dw[1];\n    while (v) {\n      if (v\
+    \ == 1) {\n        mint ww = one, xx = one, wx = one;\n        for (int jh = 0;\
+    \ jh < u;) {\n          ww = xx * xx, wx = ww * xx;\n          mint t0 = a[jh\
+    \ + 0], t1 = a[jh + 1] * xx;\n          mint t2 = a[jh + 2] * ww, t3 = a[jh +\
+    \ 3] * wx;\n          mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n          mint t0m2\
+    \ = t0 - t2, t1m3 = (t1 - t3) * imag;\n          a[jh + 0] = t0p2 + t1p3, a[jh\
+    \ + 1] = t0p2 - t1p3;\n          a[jh + 2] = t0m2 + t1m3, a[jh + 3] = t0m2 - t1m3;\n\
+    \          xx *= dw[__builtin_ctz((jh += 4))];\n        }\n      } else if (v\
+    \ == 4) {\n        const __m128i m0 = _mm_set1_epi32(0);\n        const __m128i\
+    \ m1 = _mm_set1_epi32(mod);\n        const __m128i m2 = _mm_set1_epi32(mod + mod);\n\
+    \        const __m128i r = _mm_set1_epi32(mint::r);\n        const __m128i Imag\
+    \ = _mm_set1_epi32(imag.a);\n        mint ww = one, xx = one, wx = one;\n    \
+    \    for (int jh = 0; jh < u;) {\n          if (jh == 0) {\n            int j0\
+    \ = 0;\n            int j1 = v;\n            int j2 = j1 + v;\n            int\
+    \ j3 = j2 + v;\n            int je = v;\n            for (; j0 < je; j0 += 4,\
+    \ j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
     \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
     \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
     \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
@@ -766,8 +765,8 @@ data:
   - fps/arbitrary-fps.hpp
   - fps/ntt-friendly-fps.hpp
   - fps/fast-multieval.hpp
-  timestamp: '2020-10-11 00:26:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp

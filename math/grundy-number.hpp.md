@@ -1,42 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/topological-sort.hpp
     title: graph/topological-sort.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: Grundy Number
     links: []
-  bundledCode: "#line 2 \"math/grundy-number.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\n#line 3 \"graph/topological-sort.hpp\"\nusing namespace std;\n\
-    \n#line 3 \"graph/graph-template.hpp\"\nusing namespace std;\n\ntemplate <typename\
-    \ T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1),\
-    \ to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to),\
-    \ cost(_cost) {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return\
-    \ *this;\n  }\n\n  operator int() const { return to; }\n};\ntemplate <typename\
-    \ T>\nusing Edges = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph\
-    \ = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\n// Input\
-    \ of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool is_directed\
-    \ = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+  bundledCode: "#line 2 \"math/grundy-number.hpp\"\n\n\n\n#line 2 \"graph/topological-sort.hpp\"\
+    \n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct edge\
+    \ {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
+    \ cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost)\
+    \ {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\
+    \n  operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
+    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
+    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
+    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
+    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
+    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
+    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
+    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
+    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
+    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
-    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
-    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
-    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
-    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
-    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].eb(x, y, c);\n    if (!is_directed) g[y].eb(y,\
-    \ x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
+    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
+    \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
+    \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
     \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
     \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
     \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
@@ -47,7 +46,7 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"graph/topological-sort.hpp\"\n\n// if the graph is not DAG,\
+    \ d;\n}\n#line 4 \"graph/topological-sort.hpp\"\n\n// if the graph is not DAG,\
     \ return empty vector\ntemplate <typename T>\nvector<int> TopologicalSort(T &g)\
     \ {\n  int N = g.size();\n  vector<int> marked(N, 0), temp(N, 0), v;\n  auto visit\
     \ = [&](auto f, int i) -> bool {\n    if (temp[i] == 1) return false;\n    if\
@@ -64,23 +63,22 @@ data:
     \    }\n    while (memo[grundy[i]] > 0) grundy[i]++;\n    for (auto &x : g[i])\
     \ {\n      memo[grundy[x]]--;\n    }\n  }\n  return grundy;\n};\n\n/**\n * @brief\
     \ Grundy Number\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"../graph/topological-sort.hpp\"\n\nvector<int> GrundyNumber(vector<vector<int>>\
-    \ &g) {\n  vector<int> topo = TopologicalSort(g);\n  if ((int)topo.size() == 0)\
-    \ return vector<int>();\n  vector<int> grundy(g.size(), 0);\n  vector<int> memo(g.size()\
-    \ + 1, 0);\n  for (int _ = (int)g.size() - 1; _ >= 0; _--) {\n    int i = topo[_];\n\
-    \    if (g[i].size() == 0) continue;\n    for (auto &x : g[i]) {\n      memo[grundy[x]]++;\n\
-    \    }\n    while (memo[grundy[i]] > 0) grundy[i]++;\n    for (auto &x : g[i])\
-    \ {\n      memo[grundy[x]]--;\n    }\n  }\n  return grundy;\n};\n\n/**\n * @brief\
-    \ Grundy Number\n */\n"
+  code: "#pragma once\n\n\n\n#include \"../graph/topological-sort.hpp\"\n\nvector<int>\
+    \ GrundyNumber(vector<vector<int>> &g) {\n  vector<int> topo = TopologicalSort(g);\n\
+    \  if ((int)topo.size() == 0) return vector<int>();\n  vector<int> grundy(g.size(),\
+    \ 0);\n  vector<int> memo(g.size() + 1, 0);\n  for (int _ = (int)g.size() - 1;\
+    \ _ >= 0; _--) {\n    int i = topo[_];\n    if (g[i].size() == 0) continue;\n\
+    \    for (auto &x : g[i]) {\n      memo[grundy[x]]++;\n    }\n    while (memo[grundy[i]]\
+    \ > 0) grundy[i]++;\n    for (auto &x : g[i]) {\n      memo[grundy[x]]--;\n  \
+    \  }\n  }\n  return grundy;\n};\n\n/**\n * @brief Grundy Number\n */\n"
   dependsOn:
   - graph/topological-sort.hpp
   - graph/graph-template.hpp
   isVerificationFile: false
   path: math/grundy-number.hpp
   requiredBy: []
-  timestamp: '2020-11-30 22:51:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: math/grundy-number.hpp

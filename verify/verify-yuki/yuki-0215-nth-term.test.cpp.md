@@ -1,172 +1,234 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: competitive-template.hpp
-    title: competitive-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/berlekamp-massey.hpp
     title: fps/berlekamp-massey.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/nth-term.hpp
     title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
+  - icon: ':question:'
+    path: template/bitop.hpp
+    title: template/bitop.hpp
+  - icon: ':question:'
+    path: template/debug.hpp
+    title: template/debug.hpp
+  - icon: ':question:'
+    path: template/inout.hpp
+    title: template/inout.hpp
+  - icon: ':question:'
+    path: template/macro.hpp
+    title: template/macro.hpp
+  - icon: ':question:'
+    path: template/template.hpp
+    title: template/template.hpp
+  - icon: ':question:'
+    path: template/util.hpp
+    title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/215
     links:
     - https://yukicoder.me/problems/no/215
   bundledCode: "#line 1 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\n#define\
-    \ PROBLEM \"https://yukicoder.me/problems/no/215\"\n\n#line 1 \"competitive-template.hpp\"\
-    \n#pragma region kyopro_template\n#define Nyaan_template\n#include <immintrin.h>\n\
-    #include <bits/stdc++.h>\n#define pb push_back\n#define eb emplace_back\n#define\
-    \ fi first\n#define se second\n#define each(x, v) for (auto &x : v)\n#define all(v)\
-    \ (v).begin(), (v).end()\n#define sz(v) ((int)(v).size())\n#define mem(a, val)\
-    \ memset(a, val, sizeof(a))\n#define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define inl(...)         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define\
-    \ inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)\
-    \                           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\
-    \n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)  \
-    \                      \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n  \
-    \  in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)  \
-    \                   \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
-    \ t[i], u[i], v[i]);             \\\n  }\n#define rep(i, N) for (long long i =\
-    \ 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1;\
-    \ i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N);\
-    \ i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n\
-    #define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define die(...) \
-    \     \\\n  do {                \\\n    out(__VA_ARGS__); \\\n    return;    \
-    \       \\\n  } while (0)\nusing namespace std;\nusing ll = long long;\ntemplate\
-    \ <class T>\nusing V = vector<T>;\nusing vi = vector<int>;\nusing vl = vector<long\
-    \ long>;\nusing vvi = vector<vector<int>>;\nusing vd = V<double>;\nusing vs =\
-    \ V<string>;\nusing vvl = vector<vector<long long>>;\nusing P = pair<long long,\
-    \ long long>;\nusing vp = vector<P>;\nusing pii = pair<int, int>;\nusing vpi =\
-    \ vector<pair<int, int>>;\nconstexpr int inf = 1001001001;\nconstexpr long long\
-    \ infLL = (1LL << 61) - 1;\ntemplate <typename T, typename U>\ninline bool amin(T\
-    \ &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate <typename\
-    \ T, typename U>\ninline bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true)\
-    \ : false;\n}\ntemplate <typename T, typename U>\nostream &operator<<(ostream\
-    \ &os, const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return\
-    \ os;\n}\ntemplate <typename T, typename U>\nistream &operator>>(istream &is,\
-    \ pair<T, U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\nvoid in() {}\ntemplate <typename\
-    \ T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n  in(u...);\n}\nvoid\
-    \ out() { cout << \"\\n\"; }\ntemplate <typename T, class... U>\nvoid out(const\
-    \ T &t, const U &... u) {\n  cout << t;\n  if (sizeof...(u)) cout << \" \";\n\
-    \  out(u...);\n}\n\n#ifdef NyaanDebug\n#define trc(...)                   \\\n\
-    \  do {                             \\\n    cerr << #__VA_ARGS__ << \" = \"; \\\
-    \n    dbg_out(__VA_ARGS__);          \\\n  } while (0)\n#define trca(v, N)   \
-    \    \\\n  do {                   \\\n    cerr << #v << \" = \"; \\\n    array_out(v,\
-    \ N);     \\\n  } while (0)\n#define trcc(v)                             \\\n\
-    \  do {                                      \\\n    cerr << #v << \" = {\"; \
-    \                  \\\n    each(x, v) { cerr << \" \" << x << \",\"; } \\\n  \
-    \  cerr << \"}\" << endl;                    \\\n  } while (0)\ntemplate <typename\
-    \ T>\nvoid _cout(const T &c) {\n  cerr << c;\n}\nvoid _cout(const int &c) {\n\
-    \  if (c == 1001001001)\n    cerr << \"inf\";\n  else if (c == -1001001001)\n\
-    \    cerr << \"-inf\";\n  else\n    cerr << c;\n}\nvoid _cout(const unsigned int\
-    \ &c) {\n  if (c == 1001001001)\n    cerr << \"inf\";\n  else\n    cerr << c;\n\
-    }\nvoid _cout(const long long &c) {\n  if (c == 1001001001 || c == (1LL << 61)\
-    \ - 1)\n    cerr << \"inf\";\n  else if (c == -1001001001 || c == -((1LL << 61)\
-    \ - 1))\n    cerr << \"-inf\";\n  else\n    cerr << c;\n}\nvoid _cout(const unsigned\
-    \ long long &c) {\n  if (c == 1001001001 || c == (1LL << 61) - 1)\n    cerr <<\
-    \ \"inf\";\n  else\n    cerr << c;\n}\ntemplate <typename T, typename U>\nvoid\
-    \ _cout(const pair<T, U> &p) {\n  cerr << \"{ \";\n  _cout(p.fi);\n  cerr << \"\
-    , \";\n  _cout(p.se);\n  cerr << \" } \";\n}\ntemplate <typename T>\nvoid _cout(const\
-    \ vector<T> &v) {\n  int s = v.size();\n  cerr << \"{ \";\n  for (int i = 0; i\
-    \ < s; i++) {\n    cerr << (i ? \", \" : \"\");\n    _cout(v[i]);\n  }\n  cerr\
-    \ << \" } \";\n}\ntemplate <typename T>\nvoid _cout(const vector<vector<T>> &v)\
-    \ {\n  cerr << \"[ \";\n  for (const auto &x : v) {\n    cerr << endl;\n    _cout(x);\n\
-    \    cerr << \", \";\n  }\n  cerr << endl << \" ] \";\n}\nvoid dbg_out() { cerr\
-    \ << endl; }\ntemplate <typename T, class... U>\nvoid dbg_out(const T &t, const\
-    \ U &... u) {\n  _cout(t);\n  if (sizeof...(u)) cerr << \", \";\n  dbg_out(u...);\n\
-    }\ntemplate <typename T>\nvoid array_out(const T &v, int s) {\n  cerr << \"{ \"\
-    ;\n  for (int i = 0; i < s; i++) {\n    cerr << (i ? \", \" : \"\");\n    _cout(v[i]);\n\
-    \  }\n  cerr << \" } \" << endl;\n}\ntemplate <typename T>\nvoid array_out(const\
-    \ T &v, int H, int W) {\n  cerr << \"[ \";\n  for (int i = 0; i < H; i++) {\n\
-    \    cerr << (i ? \", \" : \"\");\n    array_out(v[i], W);\n  }\n  cerr << \"\
-    \ ] \" << endl;\n}\n#else\n#define trc(...)\n#define trca(...)\n#define trcc(...)\n\
-    #endif\n\ninline int popcnt(unsigned long long a) { return __builtin_popcountll(a);\
-    \ }\ninline int lsb(unsigned long long a) { return __builtin_ctzll(a); }\ninline\
-    \ int msb(unsigned long long a) { return 63 - __builtin_clzll(a); }\ntemplate\
-    \ <typename T>\ninline int getbit(T a, int i) {\n  return (a >> i) & 1;\n}\ntemplate\
-    \ <typename T>\ninline void setbit(T &a, int i) {\n  a |= (1LL << i);\n}\ntemplate\
-    \ <typename T>\ninline void delbit(T &a, int i) {\n  a &= ~(1LL << i);\n}\ntemplate\
-    \ <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
-    \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
-    \ <typename T>\nint btw(T a, T x, T b) {\n  return a <= x && x < b;\n}\ntemplate\
-    \ <typename T, typename U>\nT ceil(T a, U b) {\n  return (a + b - 1) / b;\n}\n\
-    constexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n  while (n) {\n\
-    \    if (n & 1) ret *= x;\n    x *= x;\n    n >>= 1;\n  }\n  return ret;\n}\n\
-    template <typename T>\nvector<T> mkrui(const vector<T> &v) {\n  vector<T> ret(v.size()\
-    \ + 1);\n  for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n\
-    \  return ret;\n};\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v)\
-    \ {\n  vector<T> ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(),\
-    \ ret.end()), ret.end());\n  return ret;\n}\ntemplate <typename F>\nvector<int>\
+    \ PROBLEM \"https://yukicoder.me/problems/no/215\"\n\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
+    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
+    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
+    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
+    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
+    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
+    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
+    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
+    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
+    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
+    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
+    \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
+    \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
+    \ first; }\n  U &y() { return second; }\n  const U &y() const { return second;\
+    \ }\n\n  P &operator+=(const P &r) {\n    first += r.first;\n    second += r.second;\n\
+    \    return *this;\n  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n\
+    \    second -= r.second;\n    return *this;\n  }\n  P &operator*=(const P &r)\
+    \ {\n    first *= r.first;\n    second *= r.second;\n    return *this;\n  }\n\
+    \  P operator+(const P &r) const { return P(*this) += r; }\n  P operator-(const\
+    \ P &r) const { return P(*this) -= r; }\n  P operator*(const P &r) const { return\
+    \ P(*this) *= r; }\n};\n\nusing pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing\
+    \ vp = V<pl>;\n\nconstexpr int inf = 1001001001;\nconstexpr long long infLL =\
+    \ 4004004004004004004LL;\n\ntemplate <typename T>\nint sz(const T &t) {\n  return\
+    \ t.size();\n}\ntemplate <typename T, size_t N>\nvoid mem(T (&a)[N], int c) {\n\
+    \  memset(a, c, sizeof(T) * N);\n}\n\ntemplate <typename T, typename U>\ninline\
+    \ bool amin(T &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate\
+    \ <typename T, typename U>\ninline bool amax(T &x, U y) {\n  return (x < y) ?\
+    \ (x = y, true) : false;\n}\n\ntemplate <typename T>\nint lb(const vector<T> &v,\
+    \ const T &a) {\n  return lower_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
+    \ <typename T>\nint ub(const vector<T> &v, const T &a) {\n  return upper_bound(begin(v),\
+    \ end(v), a) - begin(v);\n}\n\nconstexpr long long TEN(int n) {\n  long long ret\
+    \ = 1, x = 10;\n  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return\
+    \ ret;\n}\n\ntemplate <typename T, typename U>\npair<T, U> mkp(const T &t, const\
+    \ U &u) {\n  return make_pair(t, u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const\
+    \ vector<T> &v, bool rev = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev)\
+    \ {\n    for (int i = int(v.size()) - 1; i >= 0; i--) ret[i] = v[i] + ret[i +\
+    \ 1];\n  } else {\n    for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i]\
+    \ + v[i];\n  }\n  return ret;\n};\n\ntemplate <typename T>\nvector<T> mkuni(const\
+    \ vector<T> &v) {\n  vector<T> ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(),\
+    \ ret.end()), ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int>\
     \ mkord(int N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n\
-    \  sort(begin(ord), end(ord), f);\n  return ord;\n}\ntemplate <typename T = int>\n\
-    vector<T> mkiota(int N) {\n  vector<T> ret(N);\n  iota(begin(ret), end(ret), 0);\n\
-    \  return ret;\n}\ntemplate <typename T>\nvector<int> mkinv(vector<T> &v) {\n\
-    \  vector<int> inv(v.size());\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]]\
-    \ = i;\n  return inv;\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n\
-    \    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n  \
-    \  cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\nvoid solve();\nint\
-    \ main() { solve(); }\n\n#pragma endregion\n#line 3 \"fps/arbitrary-fps.hpp\"\n\
-    using namespace std;\n\n#line 3 \"ntt/arbitrary-ntt.hpp\"\nusing namespace std;\n\
-    \n#line 3 \"modint/montgomery-modint.hpp\"\nusing namespace std;\n\ntemplate <uint32_t\
-    \ mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r\
-    \ * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"\
-    invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2\
-    \ == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr\
-    \ LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b % mod + mod)\
-    \ * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n    return (b +\
-    \ u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \  sort(begin(ord), end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\n\
+    vector<T> reord(const vector<T> &v, const vector<T> &ord) {\n  int N = v.size();\n\
+    \  vector<T> ret(N);\n  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return\
+    \ ret;\n};\n\ntemplate <typename T = int>\nvector<T> mkiota(int N) {\n  vector<T>\
+    \ ret(N);\n  iota(begin(ret), end(ret), 0);\n  return ret;\n}\n\ntemplate <typename\
+    \ T>\nvector<int> mkinv(vector<T> &v, int max_val = -1) {\n  if (max_val < (int)v.size())\
+    \ max_val = v.size() - 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i =\
+    \ 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace\
+    \ Nyaan\n#line 70 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \nnamespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\n__attribute__((target(\"bmi\")))\
+    \ inline int lsb(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n__attribute__((target(\"\
+    bmi\"))) inline int ctz(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n\n__attribute__((target(\"\
+    lzcnt\"))) inline int msb(const u64 &a) {\n  return 63 - _lzcnt_u64(a);\n}\n__attribute__((target(\"\
+    lzcnt\"))) inline int clz64(const u64 &a) {\n  return _lzcnt_u64(a);\n}\n\ntemplate\
+    \ <typename T>\ninline int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n\
+    }\ntemplate <typename T>\ninline void sbit(T &a, int i, bool b) {\n  a ^= (gbit(a,\
+    \ i) == b ? 0 : (T(b) << i));\n}\n\nconstexpr long long PW(int n) { return 1LL\
+    \ << n; }\n\nconstexpr long long MSK(int n) { return (1LL << n) - 1; }\n\n}  //\
+    \ namespace Nyaan\n#line 73 \"template/template.hpp\"\n\n// inout\n#line 1 \"\
+    template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename U>\n\
+    ostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first << \"\
+    \ \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\nistream\
+    \ &operator>>(istream &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n  return\
+    \ is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, const vector<T>\
+    \ &v) {\n  int s = (int)v.size();\n  for (int i = 0; i < s; i++) os << (i ? \"\
+    \ \" : \"\") << v[i];\n  return os;\n}\ntemplate <typename T>\nistream &operator>>(istream\
+    \ &is, vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return is;\n}\n\nvoid\
+    \ in() {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &... u) {\n  cin\
+    \ >> t;\n  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename\
+    \ T, class... U, char sep = ' '>\nvoid out(const T &t, const U &... u) {\n  cout\
+    \ << t;\n  if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nvoid outr() {}\n\
+    template <typename T, class... U, char sep = ' '>\nvoid outr(const T &t, const\
+    \ U &... u) {\n  cout << t;\n  outr(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya()\
+    \ {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed\
+    \ << setprecision(15);\n    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\
+    \n}  // namespace Nyaan\n#line 76 \"template/template.hpp\"\n\n// debug\n#line\
+    \ 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate <typename U, typename\
+    \ = void>\nstruct is_specialize : false_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, typename U::iterator, void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
+    \ conditional<false, decltype(U::first), void>::type>\n    : true_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value, void>>\
+    \ : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const\
+    \ string& t) { cerr << t; }\n\ntemplate <typename U,\n          enable_if_t<!is_specialize<U>::value,\
+    \ nullptr_t> = nullptr>\nvoid dump(const U& t) {\n  cerr << t;\n}\n\ntemplate\
+    \ <typename T>\nvoid dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr)\
+    \ {\n  string res;\n  if (t == Nyaan::inf) res = \"inf\";\n  if (is_signed<T>::value)\n\
+    \    if (t == -Nyaan::inf) res = \"-inf\";\n  if (sizeof(T) == 8) {\n    if (t\
+    \ == Nyaan::infLL) res = \"inf\";\n    if (is_signed<T>::value)\n      if (t ==\
+    \ -Nyaan::infLL) res = \"-inf\";\n  }\n  if (res.empty()) res = to_string(t);\n\
+    \  cerr << res;\n}\n\ntemplate <typename T, typename U>\nvoid dump(const pair<T,\
+    \ U>&);\ntemplate <typename T>\nvoid dump(const pair<T*, int>&);\n\ntemplate <typename\
+    \ T>\nvoid dump(const T& t,\n          enable_if_t<!is_void<typename T::iterator>::value>*\
+    \ = nullptr) {\n  cerr << \"[ \";\n  for (auto it = t.begin(); it != t.end();)\
+    \ {\n    dump(*it);\n    cerr << (++it == t.end() ? \"\" : \", \");\n  }\n  cerr\
+    \ << \" ]\";\n}\n\ntemplate <typename T, typename U>\nvoid dump(const pair<T,\
+    \ U>& t) {\n  cerr << \"( \";\n  dump(t.first);\n  cerr << \", \";\n  dump(t.second);\n\
+    \  cerr << \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const pair<T*, int>&\
+    \ t) {\n  cerr << \"[ \";\n  for (int i = 0; i < t.second; i++) {\n    dump(t.first[i]);\n\
+    \    cerr << (i == t.second - 1 ? \"\" : \", \");\n  }\n  cerr << \" ]\";\n}\n\
+    \nvoid trace() { cerr << endl; }\ntemplate <typename Head, typename... Tail>\n\
+    void trace(Head&& head, Tail&&... tail) {\n  cerr << \" \";\n  dump(head);\n \
+    \ if (sizeof...(tail) != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n\
+    }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
+    \                    \\\n  do {                                      \\\n    cerr\
+    \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 79 \"template/template.hpp\"\
+    \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
+    \ : v)\n#define each2(x, y, v) for (auto&& [x, y] : v)\n#define all(v) (v).begin(),\
+    \ (v).end()\n#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)\n\
+    #define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)\n#define\
+    \ rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n#define repr1(i,\
+    \ N) for (long long i = (N); (long long)(i) > 0; i--)\n#define reg(i, a, b) for\
+    \ (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for (long long i =\
+    \ (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long i = (a); (cond);\
+    \ i++)\n#define enm(i, val, vec)                                  \\\n  for (long\
+    \ long i = 0; i < (long long)(vec).size(); i++) \\\n    if (auto& val = vec[i];\
+    \ false)                        \\\n      ;                                  \
+    \                 \\\n    else\n\n#define ini(...)   \\\n  int __VA_ARGS__; \\\
+    \n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__; \\\n\
+    \  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s,\
+    \ t)                           \\\n  for (int i = 0; i < (int)s.size(); i++) {\
+    \ \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)\
+    \                        \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
+    \    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)\
+    \                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n   \
+    \ in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)        \
+    \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
+    \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
+    \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
+    \ 2 \"fps/arbitrary-fps.hpp\"\n\n\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n\n\n\
+    #line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct\
+    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
+    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
+    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
+    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
     \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
     \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
@@ -175,17 +237,16 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 3 \"ntt/ntt-avx2.hpp\"\nusing namespace std;\n\n\
-    #line 3 \"modint/simd-montgomery.hpp\"\nusing namespace std;\n#line 5 \"modint/simd-montgomery.hpp\"\
-    \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
-    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
-    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
-    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
-    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
-    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
-    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
-    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ { return mod; }\n};\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
+    ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
+    \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
+    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
+    \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
+    \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
+    \  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
+    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
+    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
     \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
     \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
@@ -554,11 +615,11 @@ data:
     \ i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n    i64 a = d0[i].get();\n\
     \    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2 + m2 - a) * r02r12\
     \ + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n  }\n  return ret;\n\
-    }\n}  // namespace ArbitraryNTT\n#line 3 \"fps/formal-power-series.hpp\"\nusing\
-    \ namespace std;\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint>\
-    \ {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS\
-    \ &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
-    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    }\n}  // namespace ArbitraryNTT\n#line 2 \"fps/formal-power-series.hpp\"\n\n\n\
+    \ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+    \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
+    \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
     \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
@@ -638,10 +699,10 @@ data:
     \ << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);\n  }\n  return ret.pre(deg);\n\
     }\n#line 6 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\nusing mint = LazyMontgomeryModInt<1000000007>;\n\
     using vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
-    \n#line 3 \"fps/nth-term.hpp\"\nusing namespace std;\n\n#line 3 \"fps/berlekamp-massey.hpp\"\
-    \nusing namespace std;\n\ntemplate <typename mint>\nvector<mint> BerlekampMassey(const\
-    \ vector<mint> &s) {\n  const int N = (int)s.size();\n  vector<mint> b, c;\n \
-    \ b.reserve(N + 1);\n  c.reserve(N + 1);\n  b.push_back(mint(1));\n  c.push_back(mint(1));\n\
+    \n#line 2 \"fps/nth-term.hpp\"\n\n\n\n#line 2 \"fps/berlekamp-massey.hpp\"\n\n\
+    \n\ntemplate <typename mint>\nvector<mint> BerlekampMassey(const vector<mint>\
+    \ &s) {\n  const int N = (int)s.size();\n  vector<mint> b, c;\n  b.reserve(N +\
+    \ 1);\n  c.reserve(N + 1);\n  b.push_back(mint(1));\n  c.push_back(mint(1));\n\
     \  mint y = mint(1);\n  for (int ed = 1; ed <= N; ed++) {\n    int l = int(c.size()),\
     \ m = int(b.size());\n    mint x = 0;\n    for (int i = 0; i < l; i++) x += c[i]\
     \ * s[ed - l + i];\n    b.emplace_back(mint(0));\n    m++;\n    if (x == mint(0))\
@@ -649,41 +710,41 @@ data:
     \     c.insert(begin(c), m - l, mint(0));\n      for (int i = 0; i < m; i++) c[m\
     \ - 1 - i] -= freq * b[m - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n\
     \      for (int i = 0; i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n\
-    \  }\n  reverse(begin(c), end(c));\n  return c;\n}\n#line 3 \"fps/kitamasa.hpp\"\
-    \nusing namespace std;\n\n#line 6 \"fps/kitamasa.hpp\"\n\ntemplate <typename mint>\n\
-    mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,\n        \
-    \                    FormalPowerSeries<mint> P) {\n  Q.shrink();\n  mint ret =\
-    \ 0;\n  if (P.size() >= Q.size()) {\n    auto R = P / Q;\n    P -= R * Q;\n  \
-    \  P.shrink();\n    if (k < (int)R.size()) ret += R[k];\n  }\n  if ((int)P.size()\
-    \ == 0) return ret;\n\n  FormalPowerSeries<mint>::set_fft();\n  if (FormalPowerSeries<mint>::ntt_ptr\
-    \ == nullptr) {\n    P.resize((int)Q.size() - 1);\n    while (k) {\n      auto\
-    \ Q2 = Q;\n      for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];\n\
-    \      auto S = P * Q2;\n      auto T = Q * Q2;\n      if (k & 1) {\n        for\
-    \ (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];\n        for (int i\
-    \ = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n      } else {\n        for\
-    \ (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];\n        for (int i\
-    \ = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n      }\n      k >>= 1;\n\
-    \    }\n    return ret + P[0];\n  } else {\n    int N = 1;\n    while (N < (int)Q.size())\
-    \ N <<= 1;\n\n    P.resize(2 * N);\n    Q.resize(2 * N);\n    P.ntt();\n    Q.ntt();\n\
-    \    vector<mint> S(2 * N), T(2 * N);\n\n    vector<int> btr(N);\n    for (int\
-    \ i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {\n      btr[i] = (btr[i\
-    \ >> 1] >> 1) + ((i & 1) << (logn - 1));\n    }\n    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())\n\
-    \                  .inverse()\n                  .pow((mint::get_mod() - 1) /\
-    \ (2 * N));\n\n    while (k) {\n      mint inv2 = mint(2).inverse();\n\n     \
-    \ // even degree of Q(x)Q(-x)\n      T.resize(N);\n      for (int i = 0; i < N;\
-    \ i++) T[i] = Q[(i << 1) | 0] * Q[(i << 1) | 1];\n\n      S.resize(N);\n     \
-    \ if (k & 1) {\n        // odd degree of P(x)Q(-x)\n        for (auto &i : btr)\
-    \ {\n          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] -\n                 \
-    \ P[(i << 1) | 1] * Q[(i << 1) | 0]) *\n                 inv2;\n          inv2\
-    \ *= dw;\n        }\n      } else {\n        // even degree of P(x)Q(-x)\n   \
-    \     for (int i = 0; i < N; i++) {\n          S[i] = (P[(i << 1) | 0] * Q[(i\
-    \ << 1) | 1] +\n                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *\n     \
-    \            inv2;\n        }\n      }\n      swap(P, S);\n      swap(Q, T);\n\
-    \      k >>= 1;\n      if (k < N) break;\n      P.ntt_doubling();\n      Q.ntt_doubling();\n\
-    \    }\n    P.intt();\n    Q.intt();\n    return ret + (P * (Q.inv()))[k];\n \
-    \ }\n}\n\ntemplate <typename mint>\nmint kitamasa(long long N, FormalPowerSeries<mint>\
-    \ Q,\n              FormalPowerSeries<mint> a) {\n  assert(!Q.empty() && Q[0]\
-    \ != 0);\n  if(N < (int)a.size()) return a[N];\n  assert((int)a.size() >= int(Q.size())\
+    \  }\n  reverse(begin(c), end(c));\n  return c;\n}\n#line 2 \"fps/kitamasa.hpp\"\
+    \n\n\n\n#line 6 \"fps/kitamasa.hpp\"\n\ntemplate <typename mint>\nmint LinearRecursionFormula(long\
+    \ long k, FormalPowerSeries<mint> Q,\n                            FormalPowerSeries<mint>\
+    \ P) {\n  Q.shrink();\n  mint ret = 0;\n  if (P.size() >= Q.size()) {\n    auto\
+    \ R = P / Q;\n    P -= R * Q;\n    P.shrink();\n    if (k < (int)R.size()) ret\
+    \ += R[k];\n  }\n  if ((int)P.size() == 0) return ret;\n\n  FormalPowerSeries<mint>::set_fft();\n\
+    \  if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {\n    P.resize((int)Q.size()\
+    \ - 1);\n    while (k) {\n      auto Q2 = Q;\n      for (int i = 1; i < (int)Q2.size();\
+    \ i += 2) Q2[i] = -Q2[i];\n      auto S = P * Q2;\n      auto T = Q * Q2;\n  \
+    \    if (k & 1) {\n        for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1]\
+    \ = S[i];\n        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n\
+    \      } else {\n        for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1]\
+    \ = S[i];\n        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n\
+    \      }\n      k >>= 1;\n    }\n    return ret + P[0];\n  } else {\n    int N\
+    \ = 1;\n    while (N < (int)Q.size()) N <<= 1;\n\n    P.resize(2 * N);\n    Q.resize(2\
+    \ * N);\n    P.ntt();\n    Q.ntt();\n    vector<mint> S(2 * N), T(2 * N);\n\n\
+    \    vector<int> btr(N);\n    for (int i = 0, logn = __builtin_ctz(N); i < (1\
+    \ << logn); i++) {\n      btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));\n\
+    \    }\n    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())\n              \
+    \    .inverse()\n                  .pow((mint::get_mod() - 1) / (2 * N));\n\n\
+    \    while (k) {\n      mint inv2 = mint(2).inverse();\n\n      // even degree\
+    \ of Q(x)Q(-x)\n      T.resize(N);\n      for (int i = 0; i < N; i++) T[i] = Q[(i\
+    \ << 1) | 0] * Q[(i << 1) | 1];\n\n      S.resize(N);\n      if (k & 1) {\n  \
+    \      // odd degree of P(x)Q(-x)\n        for (auto &i : btr) {\n          S[i]\
+    \ = (P[(i << 1) | 0] * Q[(i << 1) | 1] -\n                  P[(i << 1) | 1] *\
+    \ Q[(i << 1) | 0]) *\n                 inv2;\n          inv2 *= dw;\n        }\n\
+    \      } else {\n        // even degree of P(x)Q(-x)\n        for (int i = 0;\
+    \ i < N; i++) {\n          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +\n     \
+    \             P[(i << 1) | 1] * Q[(i << 1) | 0]) *\n                 inv2;\n \
+    \       }\n      }\n      swap(P, S);\n      swap(Q, T);\n      k >>= 1;\n   \
+    \   if (k < N) break;\n      P.ntt_doubling();\n      Q.ntt_doubling();\n    }\n\
+    \    P.intt();\n    Q.intt();\n    return ret + (P * (Q.inv()))[k];\n  }\n}\n\n\
+    template <typename mint>\nmint kitamasa(long long N, FormalPowerSeries<mint> Q,\n\
+    \              FormalPowerSeries<mint> a) {\n  assert(!Q.empty() && Q[0] != 0);\n\
+    \  if(N < (int)a.size()) return a[N];\n  assert((int)a.size() >= int(Q.size())\
     \ - 1);\n  auto P = a.pre((int)Q.size() - 1) * Q;\n  P.resize(Q.size() - 1);\n\
     \  return LinearRecursionFormula<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\
     \u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n\
@@ -692,31 +753,36 @@ data:
     \ auto bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
     \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
     \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
-    \ */\n#line 12 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\n\nvoid solve()\
-    \ {\n  inl(N, P, C);\n  vl s{2, 3, 5, 7, 11, 13};\n  vl t{4, 6, 8, 9, 10, 12};\n\
-    \n  auto calc = [](vl d, ll n) -> fps {\n    ll mx = d.back() * n;\n    vvm dp(n\
-    \ + 2, vm(mx + 20));\n    dp[0][0] = 1;\n    each(x, d) rep(i, n) rep(j, mx) dp[i\
-    \ + 1][j + x] += dp[i][j];\n    return fps{begin(dp[n]), end(dp[n])};\n  };\n\n\
-    \  fps f1 = calc(s, P);\n  fps f2 = calc(t, C);\n  fps f = f1 * f2;\n  f.shrink();\n\
-    \n  int d = sz(f) + 10;\n\n  vm a(d * 2);\n  vm dp(d * 3 + 10);\n  dp[0] = 1;\n\
-    \  rep(i, 2 * d) {\n    reg(j, i, sz(dp)) a[i] += dp[j];\n    rep(j, sz(f)) dp[i\
-    \ + j] += dp[i] * f[j];\n  }\n  a.erase(begin(a));\n  out(nth_term(N - 1, a));\n\
-    }\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n\n#include \"../../competitive-template.hpp\"\
+    \ */\n#line 12 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\n\nusing namespace\
+    \ Nyaan; void Nyaan::solve() {\n  inl(N, P, C);\n  vl s{2, 3, 5, 7, 11, 13};\n\
+    \  vl t{4, 6, 8, 9, 10, 12};\n\n  auto calc = [](vl d, ll n) -> fps {\n    ll\
+    \ mx = d.back() * n;\n    vvm dp(n + 2, vm(mx + 20));\n    dp[0][0] = 1;\n   \
+    \ each(x, d) rep(i, n) rep(j, mx) dp[i + 1][j + x] += dp[i][j];\n    return fps{begin(dp[n]),\
+    \ end(dp[n])};\n  };\n\n  fps f1 = calc(s, P);\n  fps f2 = calc(t, C);\n  fps\
+    \ f = f1 * f2;\n  f.shrink();\n\n  int d = sz(f) + 10;\n\n  vm a(d * 2);\n  vm\
+    \ dp(d * 3 + 10);\n  dp[0] = 1;\n  rep(i, 2 * d) {\n    reg(j, i, sz(dp)) a[i]\
+    \ += dp[j];\n    rep(j, sz(f)) dp[i + j] += dp[i] * f[j];\n  }\n  a.erase(begin(a));\n\
+    \  out(nth_term(N - 1, a));\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n\n#include \"../../template/template.hpp\"\
     \n#include \"../../fps/arbitrary-fps.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
     \nusing mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
     \ vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\n#include \"../../fps/nth-term.hpp\"\
-    \n\nvoid solve() {\n  inl(N, P, C);\n  vl s{2, 3, 5, 7, 11, 13};\n  vl t{4, 6,\
-    \ 8, 9, 10, 12};\n\n  auto calc = [](vl d, ll n) -> fps {\n    ll mx = d.back()\
-    \ * n;\n    vvm dp(n + 2, vm(mx + 20));\n    dp[0][0] = 1;\n    each(x, d) rep(i,\
-    \ n) rep(j, mx) dp[i + 1][j + x] += dp[i][j];\n    return fps{begin(dp[n]), end(dp[n])};\n\
-    \  };\n\n  fps f1 = calc(s, P);\n  fps f2 = calc(t, C);\n  fps f = f1 * f2;\n\
-    \  f.shrink();\n\n  int d = sz(f) + 10;\n\n  vm a(d * 2);\n  vm dp(d * 3 + 10);\n\
-    \  dp[0] = 1;\n  rep(i, 2 * d) {\n    reg(j, i, sz(dp)) a[i] += dp[j];\n    rep(j,\
-    \ sz(f)) dp[i + j] += dp[i] * f[j];\n  }\n  a.erase(begin(a));\n  out(nth_term(N\
-    \ - 1, a));\n}\n"
+    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  inl(N, P, C);\n  vl s{2, 3,\
+    \ 5, 7, 11, 13};\n  vl t{4, 6, 8, 9, 10, 12};\n\n  auto calc = [](vl d, ll n)\
+    \ -> fps {\n    ll mx = d.back() * n;\n    vvm dp(n + 2, vm(mx + 20));\n    dp[0][0]\
+    \ = 1;\n    each(x, d) rep(i, n) rep(j, mx) dp[i + 1][j + x] += dp[i][j];\n  \
+    \  return fps{begin(dp[n]), end(dp[n])};\n  };\n\n  fps f1 = calc(s, P);\n  fps\
+    \ f2 = calc(t, C);\n  fps f = f1 * f2;\n  f.shrink();\n\n  int d = sz(f) + 10;\n\
+    \n  vm a(d * 2);\n  vm dp(d * 3 + 10);\n  dp[0] = 1;\n  rep(i, 2 * d) {\n    reg(j,\
+    \ i, sz(dp)) a[i] += dp[j];\n    rep(j, sz(f)) dp[i + j] += dp[i] * f[j];\n  }\n\
+    \  a.erase(begin(a));\n  out(nth_term(N - 1, a));\n}\n"
   dependsOn:
-  - competitive-template.hpp
+  - template/template.hpp
+  - template/util.hpp
+  - template/bitop.hpp
+  - template/inout.hpp
+  - template/debug.hpp
+  - template/macro.hpp
   - fps/arbitrary-fps.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
@@ -729,8 +795,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
   requiredBy: []
-  timestamp: '2020-11-25 09:01:21+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-0215-nth-term.test.cpp
 layout: document

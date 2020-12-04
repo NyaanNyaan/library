@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: multiplicative-function/divisor-multiple-transform.hpp
     title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
   _extendedRequiredBy: []
@@ -15,17 +15,17 @@ data:
     _deprecated_at_docs: docs/multiplicative-function/mf-famous-series.md
     document_title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
     links: []
-  bundledCode: "#line 2 \"multiplicative-function/mf-famous-series.hpp\"\n#include\
-    \ <bits/stdc++.h>\nusing namespace std;\n\n#line 3 \"multiplicative-function/divisor-multiple-transform.hpp\"\
-    \nusing namespace std;\n\n#line 3 \"prime/prime-enumerate.hpp\"\nusing namespace\
-    \ std;\n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<int> prime_enumerate(int\
-    \ N) {\n  vector<bool> sieve(N / 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn\
-    \ = sqrt(N); p <= sqn; p += d = 6 - d, i++) {\n    if (!sieve[i]) continue;\n\
-    \    for (int q = p * p / 3, r = d * p / 3 + (d * p % 3 == 2), s = 2 * p,\n  \
-    \           qe = sieve.size();\n         q < qe; q += r = s - r)\n      sieve[q]\
-    \ = 0;\n  }\n  vector<int> ret{2, 3};\n  for (int p = 5, d = 4, i = 1; p <= N;\
-    \ p += d = 6 - d, i++)\n    if (sieve[i]) ret.push_back(p);\n  while (!ret.empty()\
-    \ && ret.back() > N) ret.pop_back();\n  return ret;\n}\n#line 6 \"multiplicative-function/divisor-multiple-transform.hpp\"\
+  bundledCode: "#line 2 \"multiplicative-function/mf-famous-series.hpp\"\n\n\n\n#line\
+    \ 2 \"multiplicative-function/divisor-multiple-transform.hpp\"\n\n\n\n#line 2\
+    \ \"prime/prime-enumerate.hpp\"\n\n\n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17,\
+    \ ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N / 3 + 1,\
+    \ 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d = 6 - d,\
+    \ i++) {\n    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r = d * p\
+    \ / 3 + (d * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n      \
+    \   q < qe; q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2, 3};\n\
+    \  for (int p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i])\
+    \ ret.push_back(p);\n  while (!ret.empty() && ret.back() > N) ret.pop_back();\n\
+    \  return ret;\n}\n#line 6 \"multiplicative-function/divisor-multiple-transform.hpp\"\
     \n\nstruct divisor_transform {\n  template <typename T>\n  static void zeta_transform(vector<T>\
     \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
     \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];\n\
@@ -58,19 +58,18 @@ data:
     \  a[1] = 1;\n  divisor_transform::mobius_transform(a);\n  return a;\n}\n\n/**\n\
     \ * @brief \u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
     \ */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"divisor-multiple-transform.hpp\"\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> mobius_function(int N) {\n  vector<T> a(N + 1, 0);\n  a[1] = 1;\n\
-    \  divisor_transform::mobius_transform(a);\n  return a;\n}\n\n/**\n * @brief \u6709\
-    \u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
-    \ */\n"
+  code: "#pragma once\n\n\n\n#include \"divisor-multiple-transform.hpp\"\n\ntemplate\
+    \ <typename T>\nstatic constexpr vector<T> mobius_function(int N) {\n  vector<T>\
+    \ a(N + 1, 0);\n  a[1] = 1;\n  divisor_transform::mobius_transform(a);\n  return\
+    \ a;\n}\n\n/**\n * @brief \u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n *\
+    \ @docs docs/multiplicative-function/mf-famous-series.md\n */\n"
   dependsOn:
   - multiplicative-function/divisor-multiple-transform.hpp
   - prime/prime-enumerate.hpp
   isVerificationFile: false
   path: multiplicative-function/mf-famous-series.hpp
   requiredBy: []
-  timestamp: '2020-12-03 00:53:43+09:00'
+  timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: multiplicative-function/mf-famous-series.hpp

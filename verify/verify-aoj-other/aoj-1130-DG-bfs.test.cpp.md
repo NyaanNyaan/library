@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/dimension-expanded-graph.hpp
     title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1130
@@ -34,13 +34,27 @@ data:
   bundledCode: "#line 1 \"verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp\"\n#define\
     \ PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1130\"\n\
     //\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n// bits\n#include <bits/stdc++.h>\n\n// utility\n#line\
-    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
-    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
+    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
+    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
+    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
+    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
+    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
+    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
+    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
+    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
+    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
+    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
+    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
+    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
@@ -80,7 +94,7 @@ data:
     \ T>\nvector<int> mkinv(vector<T> &v, int max_val = -1) {\n  if (max_val < (int)v.size())\
     \ max_val = v.size() - 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i =\
     \ 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace\
-    \ Nyaan\n#line 12 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \ Nyaan\n#line 70 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
     \nnamespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
     \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\n__attribute__((target(\"bmi\")))\
     \ inline int lsb(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n__attribute__((target(\"\
@@ -91,7 +105,7 @@ data:
     }\ntemplate <typename T>\ninline void sbit(T &a, int i, bool b) {\n  a ^= (gbit(a,\
     \ i) == b ? 0 : (T(b) << i));\n}\n\nconstexpr long long PW(int n) { return 1LL\
     \ << n; }\n\nconstexpr long long MSK(int n) { return (1LL << n) - 1; }\n\n}  //\
-    \ namespace Nyaan\n#line 15 \"template/template.hpp\"\n\n// inout\n#line 1 \"\
+    \ namespace Nyaan\n#line 73 \"template/template.hpp\"\n\n// inout\n#line 1 \"\
     template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename U>\n\
     ostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first << \"\
     \ \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\nistream\
@@ -108,7 +122,7 @@ data:
     \ U &... u) {\n  cout << t;\n  outr(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya()\
     \ {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed\
     \ << setprecision(15);\n    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\
-    \n}  // namespace Nyaan\n#line 18 \"template/template.hpp\"\n\n// debug\n#line\
+    \n}  // namespace Nyaan\n#line 76 \"template/template.hpp\"\n\n// debug\n#line\
     \ 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate <typename U, typename\
     \ = void>\nstruct is_specialize : false_type {};\ntemplate <typename U>\nstruct\
     \ is_specialize<\n    U, typename conditional<false, typename U::iterator, void>::type>\n\
@@ -139,7 +153,7 @@ data:
     }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
     \                    \\\n  do {                                      \\\n    cerr\
     \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 79 \"template/template.hpp\"\
     \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
     \ : v)\n#define each2(x, y, v) for (auto&& [x, y] : v)\n#define all(v) (v).begin(),\
     \ (v).end()\n#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)\n\
@@ -162,103 +176,103 @@ data:
     \                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n   \
     \ in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)        \
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
-    \   return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
+    \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp\"\n//\n#line 3 \"graph/dimension-expanded-graph.hpp\"\
-    \nusing namespace std;\n\ntemplate <int DIM, typename Data_t = long long>\nstruct\
-    \ DimensionExpandedGraph {\n  static_assert(is_signed<Data_t>::value, \"Data_t\
-    \ must be signed.\");\n  using DG = DimensionExpandedGraph;\n\n  struct A : array<int,\
-    \ DIM> {\n    using array<int, DIM>::operator[];\n#pragma GCC diagnostic ignored\
-    \ \"-Wnarrowing\"\n    template <typename... Args>\n    A(Args... args) : array<int,\
-    \ DIM>({args...}) {}\n#pragma GCC diagnostic warning \"-Wnarrowing\"\n\n    A\
-    \ &operator+=(const A &r) {\n      for (int i = 0; i < DIM; i++) (*this)[i] +=\
-    \ r[i];\n      return *this;\n    }\n    A &operator-=(const A &r) {\n      for\
-    \ (int i = 0; i < DIM; i++) (*this)[i] -= r[i];\n      return *this;\n    }\n\
-    \    A operator+(const A &r) { return (*this) += r; }\n    A operator-(const A\
-    \ &r) { return (*this) -= r; }\n\n    int id() const { return DG::id(*this); }\n\
-    \    friend int id(const A &a) { return DG::id(a); }\n\n    bool ok() const {\
-    \ return DG::ok(*this); }\n    friend bool ok(const A &a) { return DG::ok(a);\
-    \ }\n\n    inline bool is_add() const { return (*this)[0] == ADD; }\n    friend\
-    \ inline bool is_add(const A &a) { return a[0] == ADD; }\n\n    vector<A> near()\
-    \ const {\n      static vector<A> res;\n      res.clear();\n      if (is_add()\
-    \ == true) return res;\n      for (int i = 0; i < DIM; i++) {\n        A asc(*this),\
-    \ dec(*this);\n        asc[i]++;\n        dec[i]--;\n        if (asc[i] != g_size[i])\
-    \ res.push_back(asc);\n        if (dec[i] != -1) res.push_back(dec);\n      }\n\
-    \      return res;\n    }\n    friend vector<A> near(const A &a) { return a.near();\
-    \ }\n  };\n\n  static int N, add_node;\n  static A g_size, coeff;\n  static constexpr\
-    \ int ADD = numeric_limits<int>::max();\n\n  static int id(const A &a) {\n   \
-    \ if (a[0] == ADD) return N + a[1];\n    int ret = 0;\n    for (int i = 0; i <\
-    \ DIM; i++) {\n      ret += a[i] * coeff[i];\n    }\n    return ret;\n  }\n  template\
-    \ <typename... T>\n  static int id(const T &... t) {\n    return id(A{t...});\n\
-    \  }\n\n  static bool ok(const A &a) {\n    if (a[0] == ADD) {\n      return 0\
-    \ <= a[1] && a[1] < add_node;\n    }\n    for (int i = 0; i < DIM; i++)\n    \
-    \  if (a[i] < 0 or g_size[i] <= a[i]) return false;\n    return true;\n  }\n \
-    \ template <typename... T>\n  static bool ok(const T &... t) {\n    return ok(A{t...});\n\
-    \  }\n\n  template <typename... Args>\n  static A cast(Args... args) {\n    return\
-    \ A(args...);\n  }\n  static A ad(int n) { return A{DG::ADD, n}; };\n\n  vector<char>\
-    \ grid;\n\n  explicit DimensionExpandedGraph() = default;\n  template <typename...\
-    \ T>\n  explicit DimensionExpandedGraph(const T &... t) {\n    set(t...);\n  }\n\
-    \n  template <typename... T>\n  void set(const T &... t) {\n    N = 1;\n    g_size\
-    \ = A{t...};\n    coeff.fill(1);\n    for (int i = 0; i < DIM; i++) {\n      assert(g_size[i]\
-    \ != 0);\n      for (int j = 0; j < i; j++) coeff[j] *= g_size[i];\n      N *=\
-    \ g_size[i];\n    }\n  }\n\n  void add(int n) { add_node = n; }\n\n  void scan(istream\
-    \ &is = std::cin) {\n    grid.reserve(N);\n    int l = g_size[DIM - 1];\n    for\
-    \ (int i = 0; i < N; i += l) {\n      string s;\n      is >> s;\n      copy(begin(s),\
-    \ end(s), back_inserter(grid));\n    }\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, DG &g) {\n    g.scan(is);\n    return is;\n  }\n\n  vector<char> &get_grid()\
-    \ { return grid; }\n  char &operator()(const A &a) { return grid[id(a)]; }\n \
-    \ template <typename... T>\n  char &operator()(const T &... t) {\n    return grid[id(t...)];\n\
-    \  }\n\n  A find(const char &c) {\n    A a{};\n    fill(begin(a), end(a), 0);\n\
-    \    a[DIM - 1] = -1;\n    while (true) {\n      a[DIM - 1]++;\n      for (int\
-    \ i = DIM - 1;; i--) {\n        if (a[i] != g_size[i]) break;\n        if (i ==\
-    \ 0) return a;\n        a[i] = 0;\n        a[i - 1]++;\n      }\n      if ((*this)(a)\
-    \ == c) return a;\n    }\n  }\n\n  template <typename F, typename Dist_t = Data_t>\n\
-    \  vector<Dist_t> bfs(F f, A s) {\n    vector<Dist_t> dist(N + add_node, -1);\n\
-    \    if (!ok(s)) return dist;\n    vector<A> Q;\n    dist[id(s)] = 0;\n    Q.push_back(s);\n\
-    \    while (!Q.empty()) {\n      A c = Q.back();\n      Q.pop_back();\n      int\
-    \ dc = dist[id(c)];\n      f(c, [&](A d) {\n        if (!ok(d)) return;\n    \
-    \    if (dist[id(d)] == -1) {\n          dist[id(d)] = dc + 1;\n          Q.push_back(d);\n\
-    \        }\n      });\n    }\n    return dist;\n  }\n\n  template <typename F,\
-    \ typename Dist_t = Data_t>\n  vector<Dist_t> bfs01(F f, A s) {\n    vector<Dist_t>\
-    \ dist(N + add_node, -1);\n    if (!ok(s)) return dist;\n    deque<A> Q;\n   \
-    \ dist[id(s)] = 0;\n    Q.push_back(s);\n    while (!Q.empty()) {\n      A c =\
-    \ Q.front();\n      Q.pop_front();\n      int dc = dist[id(c)];\n      f(c, [&](A\
-    \ d, Data_t w) {\n        if (!ok(d)) return;\n        if (dist[id(d)] == -1)\
-    \ {\n          dist[id(d)] = dc + w;\n          if (w == 0)\n            Q.push_front(d);\n\
-    \          else\n            Q.push_back(d);\n        }\n      });\n    }\n  \
-    \  return dist;\n  }\n\n  template <typename F, typename Dist_t = Data_t>\n  static\
-    \ vector<Dist_t> dijkstra(F f, A s) {\n    vector<Dist_t> dist(N, -1);\n    using\
-    \ P = pair<Dist_t, A>;\n    auto cmp = [](P &a, P &b) { return a.first > b.first;\
-    \ };\n    priority_queue<P, vector<P>, decltype(cmp)> Q(cmp);\n    assert(id(s)\
-    \ != -1);\n    dist[id(s)] = 0;\n    Q.emplace(0, s);\n    while (!Q.empty())\
-    \ {\n      Dist_t dc;\n      A c;\n      tie(dc, c) = Q.top();\n      Q.pop();\n\
-    \      if (dist[id(c)] < dc) continue;\n      f(c, [&](A d, Dist_t w) {\n    \
-    \    if (!ok(d)) return;\n        if (dist[id(d)] == -1 || dist[id(d)] > dc +\
-    \ w) {\n          dist[id(d)] = dc + w;\n          Q.emplace(dc + w, d);\n   \
-    \     }\n      });\n    }\n    return dist;\n  }\n\n  vector<A> dat;\n\n  template\
-    \ <typename F>\n  void uf(F f) {\n    A dflt;\n    dflt[0] = -1;\n    dat.resize(N\
-    \ + add_node, dflt);\n    A a{};\n    fill(begin(a), end(a), 0);\n    a[DIM -\
-    \ 1] = -1;\n    while (true) {\n      a[DIM - 1]++;\n      for (int i = DIM -\
-    \ 1;; i--) {\n        if (a[i] != g_size[i]) break;\n        if (i == 0) return;\n\
-    \        a[i] = 0;\n        a[i - 1]++;\n      }\n      f(a, [&](A u, A v) { unite(u,\
-    \ v); });\n    }\n  }\n\n  // Union Find\n  A find(A u) { return dat[id(u)][0]\
-    \ < 0 ? u : dat[id(u)] = find(dat[id(u)]); }\n  bool same(A u, A v) { return find(u)\
-    \ == find(v); }\n  bool unite(A u, A v) {\n    if ((u = find(u)) == (v = find(v)))\
-    \ return false;\n    int iu = id(u), iv = id(v);\n    if (dat[iu] > dat[iv]) swap(u,\
-    \ v), swap(iu, iv);\n    dat[iu] += dat[iv];\n    dat[iv] = u;\n    return true;\n\
-    \  }\n  Data_t size(A u) { return -dat[id(find(u))][0]; }\n};\n\ntemplate <int\
-    \ DIM, typename Data_t>\nint DimensionExpandedGraph<DIM, Data_t>::N = 0;\ntemplate\
-    \ <int DIM, typename Data_t>\nint DimensionExpandedGraph<DIM, Data_t>::add_node\
-    \ = 0;\ntemplate <int DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM,\
-    \ Data_t>::A\n    DimensionExpandedGraph<DIM, Data_t>::g_size;\ntemplate <int\
-    \ DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM, Data_t>::A\n   \
-    \ DimensionExpandedGraph<DIM, Data_t>::coeff;\n\n/**\n * @brief \u6B21\u5143\u62E1\
-    \u5F35\u30B0\u30E9\u30D5\n */\n#line 6 \"verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp\"\
-    \n//\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  while (1) {\n    int H,\
-    \ W;\n    in(W, H);\n    if (H * W == 0) break;\n    DimensionExpandedGraph<2>\
-    \ g(H, W);\n    in(g);\n    auto st = g.find('@');\n    auto d = g.bfs(\n    \
-    \    [&](auto a, auto f) { each(x, a.near()) if (g(x) != '#') f(x); }, st);\n\
-    \    ll ans = 0;\n    each(x, d) if (~x) ans++;\n    out(ans);\n  }\n}\n"
+    \ 4 \"verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp\"\n//\n#line 2 \"graph/dimension-expanded-graph.hpp\"\
+    \n\ntemplate <int DIM, typename Data_t = long long>\nstruct DimensionExpandedGraph\
+    \ {\n  static_assert(is_signed<Data_t>::value, \"Data_t must be signed.\");\n\
+    \  using DG = DimensionExpandedGraph;\n\n  struct A : array<int, DIM> {\n    using\
+    \ array<int, DIM>::operator[];\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\
+    \n    template <typename... Args>\n    A(Args... args) : array<int, DIM>({args...})\
+    \ {}\n#pragma GCC diagnostic warning \"-Wnarrowing\"\n\n    A &operator+=(const\
+    \ A &r) {\n      for (int i = 0; i < DIM; i++) (*this)[i] += r[i];\n      return\
+    \ *this;\n    }\n    A &operator-=(const A &r) {\n      for (int i = 0; i < DIM;\
+    \ i++) (*this)[i] -= r[i];\n      return *this;\n    }\n    A operator+(const\
+    \ A &r) { return (*this) += r; }\n    A operator-(const A &r) { return (*this)\
+    \ -= r; }\n\n    int id() const { return DG::id(*this); }\n    friend int id(const\
+    \ A &a) { return DG::id(a); }\n\n    bool ok() const { return DG::ok(*this); }\n\
+    \    friend bool ok(const A &a) { return DG::ok(a); }\n\n    inline bool is_add()\
+    \ const { return (*this)[0] == ADD; }\n    friend inline bool is_add(const A &a)\
+    \ { return a[0] == ADD; }\n\n    vector<A> near() const {\n      static vector<A>\
+    \ res;\n      res.clear();\n      if (is_add() == true) return res;\n      for\
+    \ (int i = 0; i < DIM; i++) {\n        A asc(*this), dec(*this);\n        asc[i]++;\n\
+    \        dec[i]--;\n        if (asc[i] != g_size[i]) res.push_back(asc);\n   \
+    \     if (dec[i] != -1) res.push_back(dec);\n      }\n      return res;\n    }\n\
+    \    friend vector<A> near(const A &a) { return a.near(); }\n  };\n\n  static\
+    \ int N, add_node;\n  static A g_size, coeff;\n  static constexpr int ADD = numeric_limits<int>::max();\n\
+    \n  static int id(const A &a) {\n    if (a[0] == ADD) return N + a[1];\n    int\
+    \ ret = 0;\n    for (int i = 0; i < DIM; i++) {\n      ret += a[i] * coeff[i];\n\
+    \    }\n    return ret;\n  }\n  template <typename... T>\n  static int id(const\
+    \ T &... t) {\n    return id(A{t...});\n  }\n\n  static bool ok(const A &a) {\n\
+    \    if (a[0] == ADD) {\n      return 0 <= a[1] && a[1] < add_node;\n    }\n \
+    \   for (int i = 0; i < DIM; i++)\n      if (a[i] < 0 or g_size[i] <= a[i]) return\
+    \ false;\n    return true;\n  }\n  template <typename... T>\n  static bool ok(const\
+    \ T &... t) {\n    return ok(A{t...});\n  }\n\n  template <typename... Args>\n\
+    \  static A cast(Args... args) {\n    return A(args...);\n  }\n  static A ad(int\
+    \ n) { return A{DG::ADD, n}; };\n\n  vector<char> grid;\n\n  explicit DimensionExpandedGraph()\
+    \ = default;\n  template <typename... T>\n  explicit DimensionExpandedGraph(const\
+    \ T &... t) {\n    set(t...);\n  }\n\n  template <typename... T>\n  void set(const\
+    \ T &... t) {\n    N = 1;\n    g_size = A{t...};\n    coeff.fill(1);\n    for\
+    \ (int i = 0; i < DIM; i++) {\n      assert(g_size[i] != 0);\n      for (int j\
+    \ = 0; j < i; j++) coeff[j] *= g_size[i];\n      N *= g_size[i];\n    }\n  }\n\
+    \n  void add(int n) { add_node = n; }\n\n  void scan(istream &is = std::cin) {\n\
+    \    grid.reserve(N);\n    int l = g_size[DIM - 1];\n    for (int i = 0; i < N;\
+    \ i += l) {\n      string s;\n      is >> s;\n      copy(begin(s), end(s), back_inserter(grid));\n\
+    \    }\n  }\n\n  friend istream &operator>>(istream &is, DG &g) {\n    g.scan(is);\n\
+    \    return is;\n  }\n\n  vector<char> &get_grid() { return grid; }\n  char &operator()(const\
+    \ A &a) { return grid[id(a)]; }\n  template <typename... T>\n  char &operator()(const\
+    \ T &... t) {\n    return grid[id(t...)];\n  }\n\n  A find(const char &c) {\n\
+    \    A a{};\n    fill(begin(a), end(a), 0);\n    a[DIM - 1] = -1;\n    while (true)\
+    \ {\n      a[DIM - 1]++;\n      for (int i = DIM - 1;; i--) {\n        if (a[i]\
+    \ != g_size[i]) break;\n        if (i == 0) return a;\n        a[i] = 0;\n   \
+    \     a[i - 1]++;\n      }\n      if ((*this)(a) == c) return a;\n    }\n  }\n\
+    \n  template <typename F, typename Dist_t = Data_t>\n  vector<Dist_t> bfs(F f,\
+    \ A s) {\n    vector<Dist_t> dist(N + add_node, -1);\n    if (!ok(s)) return dist;\n\
+    \    vector<A> Q;\n    dist[id(s)] = 0;\n    Q.push_back(s);\n    while (!Q.empty())\
+    \ {\n      A c = Q.back();\n      Q.pop_back();\n      int dc = dist[id(c)];\n\
+    \      f(c, [&](A d) {\n        if (!ok(d)) return;\n        if (dist[id(d)] ==\
+    \ -1) {\n          dist[id(d)] = dc + 1;\n          Q.push_back(d);\n        }\n\
+    \      });\n    }\n    return dist;\n  }\n\n  template <typename F, typename Dist_t\
+    \ = Data_t>\n  vector<Dist_t> bfs01(F f, A s) {\n    vector<Dist_t> dist(N + add_node,\
+    \ -1);\n    if (!ok(s)) return dist;\n    deque<A> Q;\n    dist[id(s)] = 0;\n\
+    \    Q.push_back(s);\n    while (!Q.empty()) {\n      A c = Q.front();\n     \
+    \ Q.pop_front();\n      int dc = dist[id(c)];\n      f(c, [&](A d, Data_t w) {\n\
+    \        if (!ok(d)) return;\n        if (dist[id(d)] == -1) {\n          dist[id(d)]\
+    \ = dc + w;\n          if (w == 0)\n            Q.push_front(d);\n          else\n\
+    \            Q.push_back(d);\n        }\n      });\n    }\n    return dist;\n\
+    \  }\n\n  template <typename F, typename Dist_t = Data_t>\n  static vector<Dist_t>\
+    \ dijkstra(F f, A s) {\n    vector<Dist_t> dist(N, -1);\n    using P = pair<Dist_t,\
+    \ A>;\n    auto cmp = [](P &a, P &b) { return a.first > b.first; };\n    priority_queue<P,\
+    \ vector<P>, decltype(cmp)> Q(cmp);\n    assert(id(s) != -1);\n    dist[id(s)]\
+    \ = 0;\n    Q.emplace(0, s);\n    while (!Q.empty()) {\n      Dist_t dc;\n   \
+    \   A c;\n      tie(dc, c) = Q.top();\n      Q.pop();\n      if (dist[id(c)] <\
+    \ dc) continue;\n      f(c, [&](A d, Dist_t w) {\n        if (!ok(d)) return;\n\
+    \        if (dist[id(d)] == -1 || dist[id(d)] > dc + w) {\n          dist[id(d)]\
+    \ = dc + w;\n          Q.emplace(dc + w, d);\n        }\n      });\n    }\n  \
+    \  return dist;\n  }\n\n  vector<A> dat;\n\n  template <typename F>\n  void uf(F\
+    \ f) {\n    A dflt;\n    dflt[0] = -1;\n    dat.resize(N + add_node, dflt);\n\
+    \    A a{};\n    fill(begin(a), end(a), 0);\n    a[DIM - 1] = -1;\n    while (true)\
+    \ {\n      a[DIM - 1]++;\n      for (int i = DIM - 1;; i--) {\n        if (a[i]\
+    \ != g_size[i]) break;\n        if (i == 0) return;\n        a[i] = 0;\n     \
+    \   a[i - 1]++;\n      }\n      f(a, [&](A u, A v) { unite(u, v); });\n    }\n\
+    \  }\n\n  // Union Find\n  A find(A u) { return dat[id(u)][0] < 0 ? u : dat[id(u)]\
+    \ = find(dat[id(u)]); }\n  bool same(A u, A v) { return find(u) == find(v); }\n\
+    \  bool unite(A u, A v) {\n    if ((u = find(u)) == (v = find(v))) return false;\n\
+    \    int iu = id(u), iv = id(v);\n    if (dat[iu] > dat[iv]) swap(u, v), swap(iu,\
+    \ iv);\n    dat[iu] += dat[iv];\n    dat[iv] = u;\n    return true;\n  }\n  Data_t\
+    \ size(A u) { return -dat[id(find(u))][0]; }\n};\n\ntemplate <int DIM, typename\
+    \ Data_t>\nint DimensionExpandedGraph<DIM, Data_t>::N = 0;\ntemplate <int DIM,\
+    \ typename Data_t>\nint DimensionExpandedGraph<DIM, Data_t>::add_node = 0;\ntemplate\
+    \ <int DIM, typename Data_t>\ntypename DimensionExpandedGraph<DIM, Data_t>::A\n\
+    \    DimensionExpandedGraph<DIM, Data_t>::g_size;\ntemplate <int DIM, typename\
+    \ Data_t>\ntypename DimensionExpandedGraph<DIM, Data_t>::A\n    DimensionExpandedGraph<DIM,\
+    \ Data_t>::coeff;\n\n/**\n * @brief \u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5\
+    \n */\n#line 6 \"verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp\"\n//\nusing\
+    \ namespace Nyaan;\nvoid Nyaan::solve() {\n  while (1) {\n    int H, W;\n    in(W,\
+    \ H);\n    if (H * W == 0) break;\n    DimensionExpandedGraph<2> g(H, W);\n  \
+    \  in(g);\n    auto st = g.find('@');\n    auto d = g.bfs(\n        [&](auto a,\
+    \ auto f) { each(x, a.near()) if (g(x) != '#') f(x); }, st);\n    ll ans = 0;\n\
+    \    each(x, d) if (~x) ans++;\n    out(ans);\n  }\n}\n"
   code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1130\"\
     \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../graph/dimension-expanded-graph.hpp\"\
     \n//\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  while (1) {\n    int H,\
@@ -277,8 +291,8 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   requiredBy: []
-  timestamp: '2020-12-04 23:12:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
 layout: document

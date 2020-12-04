@@ -3,18 +3,40 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/modulo/tetration.md
     document_title: tetration
     links: []
-  bundledCode: "#line 2 \"modulo/tetration.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\ntemplate <typename T = uint32_t, typename U = uint64_t, T\
-    \ MAX = 1000000000>\nT tetration(uint64_t a, uint64_t b, uint64_t m) {\n  auto\
+  bundledCode: "#line 2 \"modulo/tetration.hpp\"\n\n\n\ntemplate <typename T = uint32_t,\
+    \ typename U = uint64_t, T MAX = 1000000000>\nT tetration(uint64_t a, uint64_t\
+    \ b, uint64_t m) {\n  auto prime_table = [](T m) -> vector<int> {\n    T thres\
+    \ = sqrt(m) + 1;\n    vector<bool> flg(thres + 1);\n    for (T i = 2; i * i <=\
+    \ thres; ++i) {\n      if (!flg[i])\n        for (T j = i * i; j <= thres; j +=\
+    \ i) flg[j] = 1;\n    }\n    vector<int> ret;\n    for (T i = 2; i <= thres; i++)\n\
+    \      if (!flg[i]) ret.push_back(i);\n    return ret;\n  };\n\n  static const\
+    \ vector<int> ps = prime_table(MAX);\n\n  auto totient = [&](T n) -> T {\n   \
+    \ T ret = n;\n    for (auto& p : ps) {\n      if (p * p > n) break;\n      if\
+    \ (n % p == 0) {\n        ret = ret / p * (p - 1);\n        while (n % p == 0)\
+    \ n /= p;\n      }\n    }\n    if (n != 1) ret = ret / n * (n - 1);\n    return\
+    \ ret;\n  };\n\n  auto mpow = [](U a, U p, T m) -> pair<T, int> {\n    U ret =\
+    \ 1 % m;\n    int flg = true;\n    for (; p; p >>= 1) {\n      if (p & 1)\n  \
+    \      if ((ret *= a) >= m) flg = 0, ret %= m;\n      if (p == 1) break;\n   \
+    \   if ((a *= a) >= m) flg = 0, a %= m;\n    }\n    return {ret, flg};\n  };\n\
+    \n  auto calc = [&](auto rec, T a, U b, T m) -> pair<T, int> {\n    if (a == 0)\
+    \ return {!(b & 1), true};\n    if (a == 1) return {1, true};\n    if (m == 1)\
+    \ return {0, false};\n    if (b == 0) return {1, true};\n    if (b == 1) return\
+    \ {a % m, a < m};\n    T phi_m = totient(m), pre, ret;\n    int flg1, flg2;\n\
+    \    tie(pre, flg1) = rec(rec, a, b - 1, phi_m);\n    tie(ret, flg2) = mpow(a\
+    \ % m, U(pre) + (flg1 ? 0 : phi_m), m);\n    return {ret, flg1 && flg2};\n  };\n\
+    \n  return calc(calc, a, b, m).first % m;\n}\n\n/**\n * @brief tetration\n * @docs\
+    \ docs/modulo/tetration.md\n */\n"
+  code: "#pragma once\n\n\n\ntemplate <typename T = uint32_t, typename U = uint64_t,\
+    \ T MAX = 1000000000>\nT tetration(uint64_t a, uint64_t b, uint64_t m) {\n  auto\
     \ prime_table = [](T m) -> vector<int> {\n    T thres = sqrt(m) + 1;\n    vector<bool>\
     \ flg(thres + 1);\n    for (T i = 2; i * i <= thres; ++i) {\n      if (!flg[i])\n\
     \        for (T j = i * i; j <= thres; j += i) flg[j] = 1;\n    }\n    vector<int>\
@@ -35,35 +57,12 @@ data:
     \    tie(ret, flg2) = mpow(a % m, U(pre) + (flg1 ? 0 : phi_m), m);\n    return\
     \ {ret, flg1 && flg2};\n  };\n\n  return calc(calc, a, b, m).first % m;\n}\n\n\
     /**\n * @brief tetration\n * @docs docs/modulo/tetration.md\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
-    \ <typename T = uint32_t, typename U = uint64_t, T MAX = 1000000000>\nT tetration(uint64_t\
-    \ a, uint64_t b, uint64_t m) {\n  auto prime_table = [](T m) -> vector<int> {\n\
-    \    T thres = sqrt(m) + 1;\n    vector<bool> flg(thres + 1);\n    for (T i =\
-    \ 2; i * i <= thres; ++i) {\n      if (!flg[i])\n        for (T j = i * i; j <=\
-    \ thres; j += i) flg[j] = 1;\n    }\n    vector<int> ret;\n    for (T i = 2; i\
-    \ <= thres; i++)\n      if (!flg[i]) ret.push_back(i);\n    return ret;\n  };\n\
-    \n  static const vector<int> ps = prime_table(MAX);\n\n  auto totient = [&](T\
-    \ n) -> T {\n    T ret = n;\n    for (auto& p : ps) {\n      if (p * p > n) break;\n\
-    \      if (n % p == 0) {\n        ret = ret / p * (p - 1);\n        while (n %\
-    \ p == 0) n /= p;\n      }\n    }\n    if (n != 1) ret = ret / n * (n - 1);\n\
-    \    return ret;\n  };\n\n  auto mpow = [](U a, U p, T m) -> pair<T, int> {\n\
-    \    U ret = 1 % m;\n    int flg = true;\n    for (; p; p >>= 1) {\n      if (p\
-    \ & 1)\n        if ((ret *= a) >= m) flg = 0, ret %= m;\n      if (p == 1) break;\n\
-    \      if ((a *= a) >= m) flg = 0, a %= m;\n    }\n    return {ret, flg};\n  };\n\
-    \n  auto calc = [&](auto rec, T a, U b, T m) -> pair<T, int> {\n    if (a == 0)\
-    \ return {!(b & 1), true};\n    if (a == 1) return {1, true};\n    if (m == 1)\
-    \ return {0, false};\n    if (b == 0) return {1, true};\n    if (b == 1) return\
-    \ {a % m, a < m};\n    T phi_m = totient(m), pre, ret;\n    int flg1, flg2;\n\
-    \    tie(pre, flg1) = rec(rec, a, b - 1, phi_m);\n    tie(ret, flg2) = mpow(a\
-    \ % m, U(pre) + (flg1 ? 0 : phi_m), m);\n    return {ret, flg1 && flg2};\n  };\n\
-    \n  return calc(calc, a, b, m).first % m;\n}\n\n/**\n * @brief tetration\n * @docs\
-    \ docs/modulo/tetration.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: modulo/tetration.hpp
   requiredBy: []
-  timestamp: '2020-09-02 02:03:54+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
 documentation_of: modulo/tetration.hpp

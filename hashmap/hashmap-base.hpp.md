@@ -2,69 +2,68 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/dynamic-union-find.hpp
     title: "\u52D5\u7684Union Find"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/hashmap.test.cpp
     title: verify/verify-unit-test/hashmap.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/hashset.test.cpp
     title: verify/verify-unit-test/hashset.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"hashmap/hashmap-base.hpp\"\n#include <bits/stdc++.h>\nusing\
-    \ namespace std;\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64\
-    \ = uint64_t;\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\
-    \ntemplate <typename Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
-    \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
-    \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
-    \ ref = typename base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n\
-    \  explicit constexpr itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32\
-    \ _i, HashMapBase<Key, Data>* _p) : i(_i), p(_p) {}\n  explicit constexpr itrB(u32\
-    \ _i, const HashMapBase<Key, Data>* _p)\n      : i(_i), p(const_cast<HashMapBase<Key,\
-    \ Data>*>(_p)) {}\n  friend void swap(itrB& l, itrB& r) { swap(l.i, r.i), swap(l.p,\
-    \ r.p); }\n  friend bool operator==(const itrB& l, const itrB& r) { return l.i\
-    \ == r.i; }\n  friend bool operator!=(const itrB& l, const itrB& r) { return l.i\
-    \ != r.i; }\n  const ref operator*() const {\n    return const_cast<const HashMapBase<Key,\
-    \ Data>*>(p)->data[i];\n  }\n  ref operator*() { return p->data[i]; }\n  ptr operator->()\
-    \ const { return &(p->data[i]); }\n\n  itrB& operator++() {\n    assert(i != p->cap\
-    \ && \"itr::operator++()\");\n    do {\n      i++;\n      if (i == p->cap) break;\n\
-    \      if (p->flag[i] == true && p->dflag[i] == false) break;\n    } while (true);\n\
-    \    return (*this);\n  }\n  itrB operator++(int) {\n    itrB it(*this);\n   \
-    \ ++(*this);\n    return it;\n  }\n  itrB& operator--() {\n    do {\n      i--;\n\
-    \      if (p->flag[i] == true && p->dflag[i] == false) break;\n      assert(i\
-    \ != 0 && \"itr::operator--()\");\n    } while (true);\n    return (*this);\n\
-    \  }\n  itrB operator--(int) {\n    itrB it(*this);\n    --(*this);\n    return\
-    \ it;\n  }\n};\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase {\n\
-    \  using u32 = uint32_t;\n  using u64 = uint64_t;\n  using iterator = itrB<Key,\
-    \ Data>;\n  using itr = iterator;\n\n protected:\n  template <typename K,\n  \
-    \          enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n       \
-    \     enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline u32 inner_hash(const\
-    \ K& key) const {\n    return u32((u64(key ^ r) * 11995408973635179863ULL) >>\
-    \ shift);\n  }\n  template <\n      typename K, enable_if_t<is_same<K, Key>::value,\
-    \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
+  bundledCode: "#line 2 \"hashmap/hashmap-base.hpp\"\n\nnamespace HashMapImpl {\n\
+    using u32 = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename Key, typename\
+    \ Data>\nstruct HashMapBase;\n\ntemplate <typename Key, typename Data>\nstruct\
+    \ itrB\n    : iterator<bidirectional_iterator_tag, Data, ptrdiff_t, Data*, Data&>\
+    \ {\n  using base =\n      iterator<bidirectional_iterator_tag, Data, ptrdiff_t,\
+    \ Data*, Data&>;\n  using ptr = typename base::pointer;\n  using ref = typename\
+    \ base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n  explicit constexpr\
+    \ itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32 _i, HashMapBase<Key,\
+    \ Data>* _p) : i(_i), p(_p) {}\n  explicit constexpr itrB(u32 _i, const HashMapBase<Key,\
+    \ Data>* _p)\n      : i(_i), p(const_cast<HashMapBase<Key, Data>*>(_p)) {}\n \
+    \ friend void swap(itrB& l, itrB& r) { swap(l.i, r.i), swap(l.p, r.p); }\n  friend\
+    \ bool operator==(const itrB& l, const itrB& r) { return l.i == r.i; }\n  friend\
+    \ bool operator!=(const itrB& l, const itrB& r) { return l.i != r.i; }\n  const\
+    \ ref operator*() const {\n    return const_cast<const HashMapBase<Key, Data>*>(p)->data[i];\n\
+    \  }\n  ref operator*() { return p->data[i]; }\n  ptr operator->() const { return\
+    \ &(p->data[i]); }\n\n  itrB& operator++() {\n    assert(i != p->cap && \"itr::operator++()\"\
+    );\n    do {\n      i++;\n      if (i == p->cap) break;\n      if (p->flag[i]\
+    \ == true && p->dflag[i] == false) break;\n    } while (true);\n    return (*this);\n\
+    \  }\n  itrB operator++(int) {\n    itrB it(*this);\n    ++(*this);\n    return\
+    \ it;\n  }\n  itrB& operator--() {\n    do {\n      i--;\n      if (p->flag[i]\
+    \ == true && p->dflag[i] == false) break;\n      assert(i != 0 && \"itr::operator--()\"\
+    );\n    } while (true);\n    return (*this);\n  }\n  itrB operator--(int) {\n\
+    \    itrB it(*this);\n    --(*this);\n    return it;\n  }\n};\n\ntemplate <typename\
+    \ Key, typename Data>\nstruct HashMapBase {\n  using u32 = uint32_t;\n  using\
+    \ u64 = uint64_t;\n  using iterator = itrB<Key, Data>;\n  using itr = iterator;\n\
+    \n protected:\n  template <typename K,\n            enable_if_t<is_same<K, Key>::value,\
+    \ nullptr_t> = nullptr,\n            enable_if_t<is_integral<K>::value, nullptr_t>\
+    \ = nullptr>\n  inline u32 inner_hash(const K& key) const {\n    return u32((u64(key\
+    \ ^ r) * 11995408973635179863ULL) >> shift);\n  }\n  template <\n      typename\
+    \ K, enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
     \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::second)>::value,\
     \ nullptr_t> = nullptr>\n  inline u32 inner_hash(const K& key) const {\n    u64\
     \ a = key.first ^ r;\n    u64 b = key.second ^ r;\n    a *= 11995408973635179863ULL;\n\
@@ -123,11 +122,10 @@ data:
     \ Data>\nuint64_t HashMapBase<Key, Data>::r =\n    chrono::duration_cast<chrono::nanoseconds>(\n\
     \        chrono::high_resolution_clock::now().time_since_epoch())\n        .count();\n\
     \n}  // namespace HashMapImpl\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\nnamespace\
-    \ HashMapImpl {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename\
-    \ Key, typename Data>\nstruct HashMapBase;\n\ntemplate <typename Key, typename\
-    \ Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag, Data, ptrdiff_t,\
-    \ Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
+  code: "#pragma once\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64\
+    \ = uint64_t;\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\
+    \ntemplate <typename Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
+    \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
     \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
     \ ref = typename base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n\
     \  explicit constexpr itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32\
@@ -219,8 +217,8 @@ data:
   - data-structure/dynamic-union-find.hpp
   - hashmap/hashmap.hpp
   - hashmap/hashset.hpp
-  timestamp: '2020-11-22 19:59:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp

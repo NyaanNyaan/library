@@ -1,39 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
       \u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/polynomial-matrix-determinant.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: Multipoint Evaluation
     links: []
-  bundledCode: "#line 2 \"fps/multipoint-evaluation.hpp\"\n#include <bits/stdc++.h>\n\
-    using namespace std;\n\n#line 3 \"fps/formal-power-series.hpp\"\nusing namespace\
-    \ std;\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
+  bundledCode: "#line 2 \"fps/multipoint-evaluation.hpp\"\n\n\n\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\n\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n\
     \  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
     \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
@@ -137,48 +136,47 @@ data:
     \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
     \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
     }\n\n/**\n * @brief Multipoint Evaluation\n */\n"
-  code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\n#include\
-    \ \"./formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct ProductTree\
-    \ {\n  using fps = FormalPowerSeries<mint>;\n  const vector<mint> &xs;\n  vector<fps>\
-    \ buf;\n  int N, xsz;\n  vector<int> l, r;\n  ProductTree(const vector<mint> &xs_)\
-    \ : xs(xs_), xsz(xs.size()) {\n    N = 1;\n    while (N < (int)xs.size()) N *=\
-    \ 2;\n    buf.resize(2 * N);\n    l.resize(2 * N, xs.size());\n    r.resize(2\
-    \ * N, xs.size());\n    fps::set_fft();\n    if (fps::ntt_ptr == nullptr)\n  \
-    \    build();\n    else\n      build_ntt();\n  }\n\n  void build() {\n    for\
-    \ (int i = 0; i < xsz; i++) {\n      l[i + N] = i;\n      r[i + N] = i + 1;\n\
-    \      buf[i + N] = {-xs[i], 1};\n    }\n    for (int i = N - 1; i > 0; i--) {\n\
-    \      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i << 1) | 1];\n      if (buf[(i\
+  code: "#pragma once\n\n\n\n#include \"./formal-power-series.hpp\"\n\ntemplate <typename\
+    \ mint>\nstruct ProductTree {\n  using fps = FormalPowerSeries<mint>;\n  const\
+    \ vector<mint> &xs;\n  vector<fps> buf;\n  int N, xsz;\n  vector<int> l, r;\n\
+    \  ProductTree(const vector<mint> &xs_) : xs(xs_), xsz(xs.size()) {\n    N = 1;\n\
+    \    while (N < (int)xs.size()) N *= 2;\n    buf.resize(2 * N);\n    l.resize(2\
+    \ * N, xs.size());\n    r.resize(2 * N, xs.size());\n    fps::set_fft();\n   \
+    \ if (fps::ntt_ptr == nullptr)\n      build();\n    else\n      build_ntt();\n\
+    \  }\n\n  void build() {\n    for (int i = 0; i < xsz; i++) {\n      l[i + N]\
+    \ = i;\n      r[i + N] = i + 1;\n      buf[i + N] = {-xs[i], 1};\n    }\n    for\
+    \ (int i = N - 1; i > 0; i--) {\n      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i\
+    \ << 1) | 1];\n      if (buf[(i << 1) | 0].empty())\n        continue;\n     \
+    \ else if (buf[(i << 1) | 1].empty())\n        buf[i] = buf[(i << 1) | 0];\n \
+    \     else\n        buf[i] = buf[(i << 1) | 0] * buf[(i << 1) | 1];\n    }\n \
+    \ }\n\n  void build_ntt() {\n    fps f;\n    f.reserve(N * 2);\n    for (int i\
+    \ = 0; i < xsz; i++) {\n      l[i + N] = i;\n      r[i + N] = i + 1;\n      buf[i\
+    \ + N] = {-xs[i] + 1, -xs[i] - 1};\n    }\n    for (int i = N - 1; i > 0; i--)\
+    \ {\n      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i << 1) | 1];\n      if (buf[(i\
     \ << 1) | 0].empty())\n        continue;\n      else if (buf[(i << 1) | 1].empty())\n\
-    \        buf[i] = buf[(i << 1) | 0];\n      else\n        buf[i] = buf[(i << 1)\
-    \ | 0] * buf[(i << 1) | 1];\n    }\n  }\n\n  void build_ntt() {\n    fps f;\n\
-    \    f.reserve(N * 2);\n    for (int i = 0; i < xsz; i++) {\n      l[i + N] =\
-    \ i;\n      r[i + N] = i + 1;\n      buf[i + N] = {-xs[i] + 1, -xs[i] - 1};\n\
-    \    }\n    for (int i = N - 1; i > 0; i--) {\n      l[i] = l[(i << 1) | 0];\n\
-    \      r[i] = r[(i << 1) | 1];\n      if (buf[(i << 1) | 0].empty())\n       \
-    \ continue;\n      else if (buf[(i << 1) | 1].empty())\n        buf[i] = buf[(i\
-    \ << 1) | 0];\n      else if (buf[(i << 1) | 0].size() == buf[(i << 1) | 1].size())\
-    \ {\n        buf[i] = buf[(i << 1) | 0];\n        f.clear();\n        copy(begin(buf[(i\
-    \ << 1) | 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n    \
-    \    buf[i].ntt_doubling();\n        f.ntt_doubling();\n        for (int j = 0;\
-    \ j < (int)buf[i].size(); j++) buf[i][j] *= f[j];\n      } else {\n        buf[i]\
-    \ = buf[(i << 1) | 0];\n        f.clear();\n        copy(begin(buf[(i << 1) |\
-    \ 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n        buf[i].ntt_doubling();\n\
-    \        f.intt();\n        f.resize(buf[i].size(), mint(0));\n        f.ntt();\n\
+    \        buf[i] = buf[(i << 1) | 0];\n      else if (buf[(i << 1) | 0].size()\
+    \ == buf[(i << 1) | 1].size()) {\n        buf[i] = buf[(i << 1) | 0];\n      \
+    \  f.clear();\n        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),\n\
+    \             back_inserter(f));\n        buf[i].ntt_doubling();\n        f.ntt_doubling();\n\
     \        for (int j = 0; j < (int)buf[i].size(); j++) buf[i][j] *= f[j];\n   \
-    \   }\n    }\n    for (int i = 0; i < 2 * N; i++) {\n      buf[i].intt();\n  \
-    \    buf[i].shrink();\n    }\n  }\n};\n\ntemplate <typename mint>\nvector<mint>\
-    \ InnerMultipointEvaluation(const FormalPowerSeries<mint> &f,\n              \
-    \                         const vector<mint> &xs,\n                          \
-    \             const ProductTree<mint> &ptree) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  vector<mint> ret;\n  ret.reserve(xs.size());\n  auto rec = [&](auto self, fps\
-    \ a, int idx) {\n    if (ptree.l[idx] == ptree.r[idx]) return;\n    a %= ptree.buf[idx];\n\
-    \    if ((int)a.size() <= 64) {\n      for (int i = ptree.l[idx]; i < ptree.r[idx];\
-    \ i++)\n        ret.push_back(a.eval(xs[i]));\n      return;\n    }\n    self(self,\
-    \ a, (idx << 1) | 0);\n    self(self, a, (idx << 1) | 1);\n  };\n  rec(rec, f,\
-    \ 1);\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> MultipointEvaluation(const\
-    \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
-    \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
-    }\n\n/**\n * @brief Multipoint Evaluation\n */\n"
+    \   } else {\n        buf[i] = buf[(i << 1) | 0];\n        f.clear();\n      \
+    \  copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n\
+    \        buf[i].ntt_doubling();\n        f.intt();\n        f.resize(buf[i].size(),\
+    \ mint(0));\n        f.ntt();\n        for (int j = 0; j < (int)buf[i].size();\
+    \ j++) buf[i][j] *= f[j];\n      }\n    }\n    for (int i = 0; i < 2 * N; i++)\
+    \ {\n      buf[i].intt();\n      buf[i].shrink();\n    }\n  }\n};\n\ntemplate\
+    \ <typename mint>\nvector<mint> InnerMultipointEvaluation(const FormalPowerSeries<mint>\
+    \ &f,\n                                       const vector<mint> &xs,\n      \
+    \                                 const ProductTree<mint> &ptree) {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  vector<mint> ret;\n  ret.reserve(xs.size());\n\
+    \  auto rec = [&](auto self, fps a, int idx) {\n    if (ptree.l[idx] == ptree.r[idx])\
+    \ return;\n    a %= ptree.buf[idx];\n    if ((int)a.size() <= 64) {\n      for\
+    \ (int i = ptree.l[idx]; i < ptree.r[idx]; i++)\n        ret.push_back(a.eval(xs[i]));\n\
+    \      return;\n    }\n    self(self, a, (idx << 1) | 0);\n    self(self, a, (idx\
+    \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
+    \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
+    \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
+    \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n"
   dependsOn:
   - fps/formal-power-series.hpp
   isVerificationFile: false
@@ -187,8 +185,8 @@ data:
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
   - fps/polynomial-interpolation.hpp
-  timestamp: '2020-12-01 01:27:24+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp

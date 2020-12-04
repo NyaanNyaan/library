@@ -1,43 +1,43 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap-base.hpp
     title: hashmap/hashmap-base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -45,36 +45,36 @@ data:
     - https://judge.yosupo.jp/problem/aplusb
   bundledCode: "#line 1 \"verify/verify-unit-test/debug.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"hashmap/hashmap-base.hpp\"\
-    \n#include <bits/stdc++.h>\nusing namespace std;\n\nnamespace HashMapImpl {\n\
-    using u32 = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename Key, typename\
-    \ Data>\nstruct HashMapBase;\n\ntemplate <typename Key, typename Data>\nstruct\
-    \ itrB\n    : iterator<bidirectional_iterator_tag, Data, ptrdiff_t, Data*, Data&>\
-    \ {\n  using base =\n      iterator<bidirectional_iterator_tag, Data, ptrdiff_t,\
-    \ Data*, Data&>;\n  using ptr = typename base::pointer;\n  using ref = typename\
-    \ base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n  explicit constexpr\
-    \ itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32 _i, HashMapBase<Key,\
-    \ Data>* _p) : i(_i), p(_p) {}\n  explicit constexpr itrB(u32 _i, const HashMapBase<Key,\
-    \ Data>* _p)\n      : i(_i), p(const_cast<HashMapBase<Key, Data>*>(_p)) {}\n \
-    \ friend void swap(itrB& l, itrB& r) { swap(l.i, r.i), swap(l.p, r.p); }\n  friend\
-    \ bool operator==(const itrB& l, const itrB& r) { return l.i == r.i; }\n  friend\
-    \ bool operator!=(const itrB& l, const itrB& r) { return l.i != r.i; }\n  const\
-    \ ref operator*() const {\n    return const_cast<const HashMapBase<Key, Data>*>(p)->data[i];\n\
-    \  }\n  ref operator*() { return p->data[i]; }\n  ptr operator->() const { return\
-    \ &(p->data[i]); }\n\n  itrB& operator++() {\n    assert(i != p->cap && \"itr::operator++()\"\
-    );\n    do {\n      i++;\n      if (i == p->cap) break;\n      if (p->flag[i]\
-    \ == true && p->dflag[i] == false) break;\n    } while (true);\n    return (*this);\n\
-    \  }\n  itrB operator++(int) {\n    itrB it(*this);\n    ++(*this);\n    return\
-    \ it;\n  }\n  itrB& operator--() {\n    do {\n      i--;\n      if (p->flag[i]\
-    \ == true && p->dflag[i] == false) break;\n      assert(i != 0 && \"itr::operator--()\"\
-    );\n    } while (true);\n    return (*this);\n  }\n  itrB operator--(int) {\n\
-    \    itrB it(*this);\n    --(*this);\n    return it;\n  }\n};\n\ntemplate <typename\
-    \ Key, typename Data>\nstruct HashMapBase {\n  using u32 = uint32_t;\n  using\
-    \ u64 = uint64_t;\n  using iterator = itrB<Key, Data>;\n  using itr = iterator;\n\
-    \n protected:\n  template <typename K,\n            enable_if_t<is_same<K, Key>::value,\
-    \ nullptr_t> = nullptr,\n            enable_if_t<is_integral<K>::value, nullptr_t>\
-    \ = nullptr>\n  inline u32 inner_hash(const K& key) const {\n    return u32((u64(key\
-    \ ^ r) * 11995408973635179863ULL) >> shift);\n  }\n  template <\n      typename\
-    \ K, enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
+    \n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\n\
+    template <typename Key, typename Data>\nstruct HashMapBase;\n\ntemplate <typename\
+    \ Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
+    \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
+    \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
+    \ ref = typename base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n\
+    \  explicit constexpr itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32\
+    \ _i, HashMapBase<Key, Data>* _p) : i(_i), p(_p) {}\n  explicit constexpr itrB(u32\
+    \ _i, const HashMapBase<Key, Data>* _p)\n      : i(_i), p(const_cast<HashMapBase<Key,\
+    \ Data>*>(_p)) {}\n  friend void swap(itrB& l, itrB& r) { swap(l.i, r.i), swap(l.p,\
+    \ r.p); }\n  friend bool operator==(const itrB& l, const itrB& r) { return l.i\
+    \ == r.i; }\n  friend bool operator!=(const itrB& l, const itrB& r) { return l.i\
+    \ != r.i; }\n  const ref operator*() const {\n    return const_cast<const HashMapBase<Key,\
+    \ Data>*>(p)->data[i];\n  }\n  ref operator*() { return p->data[i]; }\n  ptr operator->()\
+    \ const { return &(p->data[i]); }\n\n  itrB& operator++() {\n    assert(i != p->cap\
+    \ && \"itr::operator++()\");\n    do {\n      i++;\n      if (i == p->cap) break;\n\
+    \      if (p->flag[i] == true && p->dflag[i] == false) break;\n    } while (true);\n\
+    \    return (*this);\n  }\n  itrB operator++(int) {\n    itrB it(*this);\n   \
+    \ ++(*this);\n    return it;\n  }\n  itrB& operator--() {\n    do {\n      i--;\n\
+    \      if (p->flag[i] == true && p->dflag[i] == false) break;\n      assert(i\
+    \ != 0 && \"itr::operator--()\");\n    } while (true);\n    return (*this);\n\
+    \  }\n  itrB operator--(int) {\n    itrB it(*this);\n    --(*this);\n    return\
+    \ it;\n  }\n};\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase {\n\
+    \  using u32 = uint32_t;\n  using u64 = uint64_t;\n  using iterator = itrB<Key,\
+    \ Data>;\n  using itr = iterator;\n\n protected:\n  template <typename K,\n  \
+    \          enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n       \
+    \     enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline u32 inner_hash(const\
+    \ K& key) const {\n    return u32((u64(key ^ r) * 11995408973635179863ULL) >>\
+    \ shift);\n  }\n  template <\n      typename K, enable_if_t<is_same<K, Key>::value,\
+    \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
     \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::second)>::value,\
     \ nullptr_t> = nullptr>\n  inline u32 inner_hash(const K& key) const {\n    u64\
     \ a = key.first ^ r;\n    u64 b = key.second ^ r;\n    a *= 11995408973635179863ULL;\n\
@@ -150,28 +150,28 @@ data:
     \ docs/hashmap/hashmap.md\n**/\n#line 2 \"hashmap/hashset.hpp\"\n\ntemplate <typename\
     \ Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key, Key> {\n  using HashMapImpl::HashMapBase<Key,\
     \ Key>::HashMapBase;\n};\n\n/* \n * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\
-    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n#line 3 \"matrix/matrix.hpp\"\
-    \nusing namespace std;\n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T>\
-    \ > A;\n\n  Matrix() = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T()))\
-    \ {}\n  Matrix(int n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return\
-    \ A.size(); }\n\n  int W() const { return A[0].size(); }\n\n  int size() const\
-    \ { return A.size(); }\n\n  inline const vector<T> &operator[](int k) const {\
-    \ return A[k]; }\n\n  inline vector<T> &operator[](int k) { return A[k]; }\n\n\
-    \  static Matrix I(int n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++)\
-    \ mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const Matrix\
-    \ &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n  \
-    \  for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
-    \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
-    \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
-    \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
-    \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
-    \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
-    \ > C(n, vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k\
-    \ = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
-    \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
-    \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
-    \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
-    \    return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
+    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n#line 2 \"matrix/matrix.hpp\"\
+    \n\n\n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix()\
+    \ = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
+    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
+    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
+    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
+    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
+    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
+    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
+    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
+    \ vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k = 0; k\
+    \ < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] * B[k][j];\n\
+    \    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long long k)\
+    \ {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k & 1) B *=\
+    \ *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n \
+    \   return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
     \ (Matrix(*this) += B); }\n\n  Matrix operator-(const Matrix &B) const { return\
     \ (Matrix(*this) -= B); }\n\n  Matrix operator*(const Matrix &B) const { return\
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
@@ -189,16 +189,16 @@ data:
     \   for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a\
     \ == 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k]\
     \ -= B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n\
-    \ * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 3 \"modint/montgomery-modint.hpp\"\
-    \nusing namespace std;\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
-    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
-    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
-    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
-    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
-    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
-    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
-    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
-    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
+    \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
+    \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
+    \  for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n\
+    \  static constexpr u32 r = get_r();\n  static constexpr u32 n2 = -u64(mod) %\
+    \ mod;\n  static_assert(r * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod\
+    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
+    invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() :\
+    \ a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
     \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
     \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
     \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
@@ -223,54 +223,69 @@ data:
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\
-    \n// intrinstic\n#include <immintrin.h>\n\n// bits\n#line 9 \"template/template.hpp\"\
-    \n\n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
-    \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
-    \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
-    \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
-    \ first; }\n  U &y() { return second; }\n  const U &y() const { return second;\
-    \ }\n\n  P &operator+=(const P &r) {\n    first += r.first;\n    second += r.second;\n\
-    \    return *this;\n  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n\
-    \    second -= r.second;\n    return *this;\n  }\n  P &operator*=(const P &r)\
-    \ {\n    first *= r.first;\n    second *= r.second;\n    return *this;\n  }\n\
-    \  P operator+(const P &r) const { return P(*this) += r; }\n  P operator-(const\
-    \ P &r) const { return P(*this) -= r; }\n  P operator*(const P &r) const { return\
-    \ P(*this) *= r; }\n};\n\nusing pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing\
-    \ vp = V<pl>;\n\nconstexpr int inf = 1001001001;\nconstexpr long long infLL =\
-    \ 4004004004004004004LL;\n\ntemplate <typename T>\nint sz(const T &t) {\n  return\
-    \ t.size();\n}\ntemplate <typename T, size_t N>\nvoid mem(T (&a)[N], int c) {\n\
-    \  memset(a, c, sizeof(T) * N);\n}\n\ntemplate <typename T, typename U>\ninline\
-    \ bool amin(T &x, U y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate\
-    \ <typename T, typename U>\ninline bool amax(T &x, U y) {\n  return (x < y) ?\
-    \ (x = y, true) : false;\n}\n\ntemplate <typename T>\nint lb(const vector<T> &v,\
-    \ const T &a) {\n  return lower_bound(begin(v), end(v), a) - begin(v);\n}\ntemplate\
-    \ <typename T>\nint ub(const vector<T> &v, const T &a) {\n  return upper_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\n\nconstexpr long long TEN(int n) {\n  long long ret\
-    \ = 1, x = 10;\n  for (; n; x *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return\
-    \ ret;\n}\n\ntemplate <typename T, typename U>\npair<T, U> mkp(const T &t, const\
-    \ U &u) {\n  return make_pair(t, u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const\
-    \ vector<T> &v, bool rev = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev)\
-    \ {\n    for (int i = int(v.size()) - 1; i >= 0; i--) ret[i] = v[i] + ret[i +\
-    \ 1];\n  } else {\n    for (int i = 0; i < int(v.size()); i++) ret[i + 1] = ret[i]\
-    \ + v[i];\n  }\n  return ret;\n};\n\ntemplate <typename T>\nvector<T> mkuni(const\
-    \ vector<T> &v) {\n  vector<T> ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(),\
-    \ ret.end()), ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int>\
-    \ mkord(int N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n\
-    \  sort(begin(ord), end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\n\
-    vector<T> reord(const vector<T> &v, const vector<T> &ord) {\n  int N = v.size();\n\
-    \  vector<T> ret(N);\n  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return\
-    \ ret;\n};\n\ntemplate <typename T = int>\nvector<T> mkiota(int N) {\n  vector<T>\
-    \ ret(N);\n  iota(begin(ret), end(ret), 0);\n  return ret;\n}\n\ntemplate <typename\
-    \ T>\nvector<int> mkinv(vector<T> &v, int max_val = -1) {\n  if (max_val < (int)v.size())\
-    \ max_val = v.size() - 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i =\
-    \ 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace\
-    \ Nyaan\n#line 12 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
-    \nnamespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n\
+    #include <bitset>\n#include <cassert>\n#include <cctype>\n#include <cfenv>\n#include\
+    \ <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include <climits>\n#include\
+    \ <cmath>\n#include <complex>\n#include <csetjmp>\n#include <csignal>\n#include\
+    \ <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include\
+    \ <cstdlib>\n#include <cstring>\n#include <ctime>\n#include <deque>\n#include\
+    \ <exception>\n#include <forward_list>\n#include <fstream>\n#include <functional>\n\
+    #include <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iosfwd>\n\
+    #include <iostream>\n#include <istream>\n#include <iterator>\n#include <limits>\n\
+    #include <list>\n#include <locale>\n#include <map>\n#include <memory>\n#include\
+    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
+    #include <ratio>\n#include <regex>\n#include <set>\n#include <sstream>\n#include\
+    \ <stack>\n#include <stdexcept>\n#include <streambuf>\n#include <string>\n#include\
+    \ <system_error>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n\
+    #include <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include\
+    \ <valarray>\n#include <vector>\n\n// utility\n#line 1 \"template/util.hpp\"\n\
+    namespace Nyaan {\nusing ll = long long;\nusing i64 = long long;\nusing u64 =\
+    \ unsigned long long;\nusing i128 = __int128_t;\nusing u128 = __uint128_t;\n\n\
+    template <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV =\
+    \ vector<vector<T>>;\nusing vi = vector<int>;\nusing vl = vector<long long>;\n\
+    using vd = V<double>;\nusing vs = V<string>;\nusing vvi = vector<vector<int>>;\n\
+    using vvl = vector<vector<long long>>;\n\ntemplate <typename T, typename U>\n\
+    struct P : pair<T, U> {\n  template <typename... Args>\n  P(Args... args) : pair<T,\
+    \ U>(args...) {}\n\n  using pair<T, U>::first;\n  using pair<T, U>::second;\n\n\
+    \  T &x() { return first; }\n  const T &x() const { return first; }\n  U &y()\
+    \ { return second; }\n  const U &y() const { return second; }\n\n  P &operator+=(const\
+    \ P &r) {\n    first += r.first;\n    second += r.second;\n    return *this;\n\
+    \  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n    second -= r.second;\n\
+    \    return *this;\n  }\n  P &operator*=(const P &r) {\n    first *= r.first;\n\
+    \    second *= r.second;\n    return *this;\n  }\n  P operator+(const P &r) const\
+    \ { return P(*this) += r; }\n  P operator-(const P &r) const { return P(*this)\
+    \ -= r; }\n  P operator*(const P &r) const { return P(*this) *= r; }\n};\n\nusing\
+    \ pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing vp = V<pl>;\n\nconstexpr int\
+    \ inf = 1001001001;\nconstexpr long long infLL = 4004004004004004004LL;\n\ntemplate\
+    \ <typename T>\nint sz(const T &t) {\n  return t.size();\n}\ntemplate <typename\
+    \ T, size_t N>\nvoid mem(T (&a)[N], int c) {\n  memset(a, c, sizeof(T) * N);\n\
+    }\n\ntemplate <typename T, typename U>\ninline bool amin(T &x, U y) {\n  return\
+    \ (y < x) ? (x = y, true) : false;\n}\ntemplate <typename T, typename U>\ninline\
+    \ bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true) : false;\n}\n\ntemplate\
+    \ <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
+    \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
+    \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\n\
+    constexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n  for (; n; x\
+    \ *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate <typename\
+    \ T, typename U>\npair<T, U> mkp(const T &t, const U &u) {\n  return make_pair(t,\
+    \ u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const vector<T> &v, bool rev\
+    \ = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for (int i = int(v.size())\
+    \ - 1; i >= 0; i--) ret[i] = v[i] + ret[i + 1];\n  } else {\n    for (int i =\
+    \ 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n\
+    };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
+    \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
+    \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
+    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
+    \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<T> reord(const\
+    \ vector<T> &v, const vector<T> &ord) {\n  int N = v.size();\n  vector<T> ret(N);\n\
+    \  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];\n  return ret;\n};\n\ntemplate\
+    \ <typename T = int>\nvector<T> mkiota(int N) {\n  vector<T> ret(N);\n  iota(begin(ret),\
+    \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
+    \ &v, int max_val = -1) {\n  if (max_val < (int)v.size()) max_val = v.size() -\
+    \ 1;\n  vector<int> inv(max_val + 1, -1);\n  for (int i = 0; i < (int)v.size();\
+    \ i++) inv[v[i]] = i;\n  return inv;\n}\n\n}  // namespace Nyaan\n#line 70 \"\
+    template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\n\
+    namespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
     \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\n__attribute__((target(\"bmi\")))\
     \ inline int lsb(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n__attribute__((target(\"\
     bmi\"))) inline int ctz(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n\n__attribute__((target(\"\
@@ -280,7 +295,7 @@ data:
     }\ntemplate <typename T>\ninline void sbit(T &a, int i, bool b) {\n  a ^= (gbit(a,\
     \ i) == b ? 0 : (T(b) << i));\n}\n\nconstexpr long long PW(int n) { return 1LL\
     \ << n; }\n\nconstexpr long long MSK(int n) { return (1LL << n) - 1; }\n\n}  //\
-    \ namespace Nyaan\n#line 15 \"template/template.hpp\"\n\n// inout\n#line 1 \"\
+    \ namespace Nyaan\n#line 73 \"template/template.hpp\"\n\n// inout\n#line 1 \"\
     template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename U>\n\
     ostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first << \"\
     \ \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\nistream\
@@ -297,7 +312,7 @@ data:
     \ U &... u) {\n  cout << t;\n  outr(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya()\
     \ {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed\
     \ << setprecision(15);\n    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\
-    \n}  // namespace Nyaan\n#line 18 \"template/template.hpp\"\n\n// debug\n#line\
+    \n}  // namespace Nyaan\n#line 76 \"template/template.hpp\"\n\n// debug\n#line\
     \ 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate <typename U, typename\
     \ = void>\nstruct is_specialize : false_type {};\ntemplate <typename U>\nstruct\
     \ is_specialize<\n    U, typename conditional<false, typename U::iterator, void>::type>\n\
@@ -328,7 +343,7 @@ data:
     }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
     \                    \\\n  do {                                      \\\n    cerr\
     \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 21 \"template/template.hpp\"\
+    \          \\\n  } while (0)\n#else\n#define trc(...)\n#endif\n#line 79 \"template/template.hpp\"\
     \n\n// macro\n#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x\
     \ : v)\n#define each2(x, y, v) for (auto&& [x, y] : v)\n#define all(v) (v).begin(),\
     \ (v).end()\n#define rep(i, N) for (long long i = 0; i < (long long)(N); i++)\n\
@@ -351,7 +366,7 @@ data:
     \                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n   \
     \ in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)        \
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
-    \   return;                  \\\n  } while (0)\n#line 24 \"template/template.hpp\"\
+    \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 8 \"verify/verify-unit-test/debug.test.cpp\"\nusing namespace Nyaan;\n\nvoid\
     \ test() {\n\n  using DebugImpl::trace;\n  // number\n  {\n    cerr << \"number\"\
@@ -435,8 +450,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/debug.test.cpp
   requiredBy: []
-  timestamp: '2020-12-04 23:12:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-05 07:59:51+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-unit-test/debug.test.cpp
 layout: document
