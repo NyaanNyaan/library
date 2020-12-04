@@ -133,7 +133,7 @@ title: Suffix Automaton
 - 図を見ながら説明する
   - 黒線→遷移、赤線→suffix link、c→cloneされたノードを意味している
 
-![nyaan](nyaan.png)
+![nyaan](https://nyaannyaan.github.io/library/nyaan.png)
 
 書きかけ　(画像が貼れねえ～)
 
