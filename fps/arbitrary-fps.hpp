@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../ntt/arbitrary-ntt.hpp"
 #include "./formal-power-series.hpp"
 

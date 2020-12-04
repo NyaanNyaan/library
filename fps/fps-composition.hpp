@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "../modulo/binomial.hpp"
 #include "./formal-power-series.hpp"
 

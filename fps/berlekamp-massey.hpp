@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename mint>
 vector<mint> BerlekampMassey(const vector<mint> &s) {
   const int N = (int)s.size();

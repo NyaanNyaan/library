@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "formal-power-series.hpp"
 
 template <typename mint>

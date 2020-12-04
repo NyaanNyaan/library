@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../modulo/binomial.hpp"
 
 // given  : y(x=0) , y(x=1) , ... , y(k)

@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename mint>
 struct FormalPowerSeries : vector<mint> {
   using vector<mint>::vector;

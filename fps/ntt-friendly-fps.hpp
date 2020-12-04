@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../ntt/ntt-avx2.hpp"
 #include "./formal-power-series.hpp"
 
