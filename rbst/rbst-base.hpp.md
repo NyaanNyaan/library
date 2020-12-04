@@ -32,18 +32,19 @@ data:
     \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
     \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
     \    }\n  }\n\n  Ptr build(int l, int r, const vector<decltype(Node::key)> &v)\
-    \ {\n    if (l + 1 >= r) return my_new(v[l]);\n    return merge(build(l, (l +\
-    \ r) >> 1, v), build((l + r) >> 1, r, v));\n  }\n\n  Ptr build(const vector<decltype(Node::key)>\
-    \ &v) {\n    return build(0, (int)v.size(), v);\n  }\n\n  template <typename...\
-    \ Args>\n  void insert(Ptr &t, int k, const Args &... args) {\n    auto x = split(t,\
-    \ k);\n    t = merge(merge(x.first, my_new(args...)), x.second);\n  }\n\n  void\
-    \ erase(Ptr &t, int k) {\n    auto x = split(t, k);\n    t = merge(x.first, split(x.second,\
-    \ 1).second);\n  }\n\n protected:\n  static uint64_t rng() {\n    static uint64_t\
-    \ x_ = 88172645463325252ULL;\n    return x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >>\
-    \ 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline int count(const Ptr t) const { return\
-    \ t ? t->cnt : 0; }\n\n  virtual void push(Ptr) {}\n\n  virtual Ptr update(Ptr)\
-    \ = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\
-    \u5E95\u30AF\u30E9\u30B9)\n */\n"
+    \ {\n    if (l + 1 == r) return my_new(v[l]);\n    int m = (l + r) >> 1;\n   \
+    \ Ptr pm = my_new(v[m]);\n    if (l < m) pm->l = build(l, m, v);\n    if (m +\
+    \ 1 < r) pm->r = build(m + 1, r, v);\n    return update(pm);\n  }\n\n  Ptr build(const\
+    \ vector<decltype(Node::key)> &v) {\n    return build(0, (int)v.size(), v);\n\
+    \  }\n\n  template <typename... Args>\n  void insert(Ptr &t, int k, const Args\
+    \ &... args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
+    \ x.second);\n  }\n\n  void erase(Ptr &t, int k) {\n    auto x = split(t, k);\n\
+    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n  static\
+    \ uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n    return\
+    \ x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
+    \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
+    \ {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\
+    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n"
   code: "#pragma once\n#include <bits/stdc++.h>\nusing namespace std;\n\ntemplate\
     \ <typename Node>\nstruct RBSTBase {\n  using Ptr = Node *;\n  template <typename...\
     \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
@@ -60,24 +61,25 @@ data:
     \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
     \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
     \    }\n  }\n\n  Ptr build(int l, int r, const vector<decltype(Node::key)> &v)\
-    \ {\n    if (l + 1 >= r) return my_new(v[l]);\n    return merge(build(l, (l +\
-    \ r) >> 1, v), build((l + r) >> 1, r, v));\n  }\n\n  Ptr build(const vector<decltype(Node::key)>\
-    \ &v) {\n    return build(0, (int)v.size(), v);\n  }\n\n  template <typename...\
-    \ Args>\n  void insert(Ptr &t, int k, const Args &... args) {\n    auto x = split(t,\
-    \ k);\n    t = merge(merge(x.first, my_new(args...)), x.second);\n  }\n\n  void\
-    \ erase(Ptr &t, int k) {\n    auto x = split(t, k);\n    t = merge(x.first, split(x.second,\
-    \ 1).second);\n  }\n\n protected:\n  static uint64_t rng() {\n    static uint64_t\
-    \ x_ = 88172645463325252ULL;\n    return x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >>\
-    \ 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline int count(const Ptr t) const { return\
-    \ t ? t->cnt : 0; }\n\n  virtual void push(Ptr) {}\n\n  virtual Ptr update(Ptr)\
-    \ = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\
-    \u5E95\u30AF\u30E9\u30B9)\n */\n"
+    \ {\n    if (l + 1 == r) return my_new(v[l]);\n    int m = (l + r) >> 1;\n   \
+    \ Ptr pm = my_new(v[m]);\n    if (l < m) pm->l = build(l, m, v);\n    if (m +\
+    \ 1 < r) pm->r = build(m + 1, r, v);\n    return update(pm);\n  }\n\n  Ptr build(const\
+    \ vector<decltype(Node::key)> &v) {\n    return build(0, (int)v.size(), v);\n\
+    \  }\n\n  template <typename... Args>\n  void insert(Ptr &t, int k, const Args\
+    \ &... args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
+    \ x.second);\n  }\n\n  void erase(Ptr &t, int k) {\n    auto x = split(t, k);\n\
+    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n  static\
+    \ uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n    return\
+    \ x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
+    \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
+    \ {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\
+    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: rbst/rbst-base.hpp
   requiredBy:
   - rbst/lazy-reversible-rbst.hpp
-  timestamp: '2020-12-03 23:28:38+09:00'
+  timestamp: '2020-12-04 12:13:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp

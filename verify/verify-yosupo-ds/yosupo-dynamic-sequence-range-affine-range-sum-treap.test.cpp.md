@@ -8,16 +8,14 @@ data:
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
-    path: rbst/lazy-reversible-rbst.hpp
-    title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\u8861\
-      \u4E8C\u5206\u6728"
-  - icon: ':heavy_check_mark:'
-    path: rbst/rbst-base.hpp
-    title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
-      )"
+    path: rbst/treap.hpp
+    title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -45,7 +43,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
     links:
     - https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp\"\
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp\"\
     \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
     \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n// bits\n#include <bits/stdc++.h>\n\n// utility\n#line\
@@ -177,66 +175,86 @@ data:
     \  \\\n  }\n\n#define die(...)             \\\n  do {                       \\\
     \n    Nyaan::out(__VA_ARGS__); \\\n    return;                  \\\n  } while\
     \ (0)\n#line 24 \"template/template.hpp\"\n\nnamespace Nyaan {\nvoid solve();\n\
-    }\nint main() { Nyaan::solve(); }\n#line 5 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp\"\
-    \n//\n#line 3 \"rbst/lazy-reversible-rbst.hpp\"\nusing namespace std;\n\n#line\
-    \ 3 \"rbst/rbst-base.hpp\"\nusing namespace std;\n\ntemplate <typename Node>\n\
-    struct RBSTBase {\n  using Ptr = Node *;\n  template <typename... Args>\n  inline\
-    \ Ptr my_new(Args... args) {\n    return new Node(args...);\n  }\n  Ptr make_tree()\
-    \ { return nullptr; }\n\n  // for avoiding memory leak, activate below\n  /*\n\
-    \  using Ptr = shared_ptr<Node>;\n  template <typename... Args>\n  inline Ptr\
-    \ my_new(Args... args) {\n    return make_shared<Node>(args...);\n  }\n  Ptr make_tree()\
-    \ {return Ptr();}\n  */\n\n  int size(Ptr t) const { return count(t); }\n\n  Ptr\
-    \ merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l : r;\n    if (int((rng()\
-    \ * (l->cnt + r->cnt)) >> 32) < l->cnt) {\n      push(l);\n      l->r = merge(l->r,\
-    \ r);\n      return update(l);\n    } else {\n      push(r);\n      r->l = merge(l,\
-    \ r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t,\
-    \ int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k <=\
-    \ count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n   \
-    \   return {s.first, update(t)};\n    } else {\n      auto s = split(t->r, k -\
-    \ count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
-    \    }\n  }\n\n  Ptr build(int l, int r, const vector<decltype(Node::key)> &v)\
-    \ {\n    if (l + 1 == r) return my_new(v[l]);\n    int m = (l + r) >> 1;\n   \
-    \ Ptr pm = my_new(v[m]);\n    if (l < m) pm->l = build(l, m, v);\n    if (m +\
-    \ 1 < r) pm->r = build(m + 1, r, v);\n    return update(pm);\n  }\n\n  Ptr build(const\
-    \ vector<decltype(Node::key)> &v) {\n    return build(0, (int)v.size(), v);\n\
+    }\nint main() { Nyaan::solve(); }\n#line 5 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp\"\
+    \n//\n#line 3 \"rbst/treap.hpp\"\nusing namespace std;\n\n#line 3 \"misc/rng.hpp\"\
+    \nusing namespace std;\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng()\
+    \ {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rnd() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 6 \"rbst/treap.hpp\"\n\ntemplate <typename Node>\nstruct TreapBase {\n \
+    \ using Ptr = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args...\
+    \ args) {\n    return new Node(args...);\n  }\n  Ptr make_tree() { return nullptr;\
+    \ }\n\n  // for avoiding memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n\
+    \  template <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return\
+    \ make_shared<Node>(args...);\n  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n\
+    \  int size(Ptr t) const { return count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n\
+    \    if (!l || !r) return l ? l : r;\n    if (l->pr >= r->pr) {\n      push(l);\n\
+    \      l->r = merge(l->r, r);\n      return update(l);\n    } else {\n      push(r);\n\
+    \      r->l = merge(l, r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr,\
+    \ Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n\
+    \    if (k <= count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n\
+    \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
+    \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
+    \    }\n  }\n\n  Ptr build(const vector<decltype(Node::key)> &v) {\n    int n\
+    \ = v.size();\n    vector<Ptr> ps;\n    ps.reserve(n);\n    for (int i = 0; i\
+    \ < n; i++) ps.push_back(my_new(v[i]));\n    vector<int> p(n, -1), st;\n    for\
+    \ (int i = 0; i < n; i++) {\n      int prv = -1;\n      while (!st.empty() &&\
+    \ ps[i]->pr > ps[st.back()]->pr) {\n        prv = st.back();\n        st.pop_back();\n\
+    \      }\n      if (prv != -1) p[prv] = i;\n      if (!st.empty()) p[i] = st.back();\n\
+    \      st.push_back(i);\n    }\n    int root = -1;\n    for (int i = 0; i < n;\
+    \ i++) {\n      if (p[i] != -1) {\n        if (i < p[i]) {\n          ps[p[i]]->l\
+    \ = ps[i];\n        } else {\n          ps[p[i]]->r = ps[i];\n        }\n    \
+    \  } else\n        root = i;\n    }\n    dfs(ps[root]);\n    return ps[root];\n\
     \  }\n\n  template <typename... Args>\n  void insert(Ptr &t, int k, const Args\
     \ &... args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
     \ x.second);\n  }\n\n  void erase(Ptr &t, int k) {\n    auto x = split(t, k);\n\
-    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n  static\
-    \ uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n    return\
-    \ x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
-    \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
-    \ {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\
-    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 6 \"rbst/lazy-reversible-rbst.hpp\"\
-    \n\ntemplate <typename T, typename E>\nstruct LazyReversibleRBSTNode {\n  typename\
-    \ RBSTBase<LazyReversibleRBSTNode>::Ptr l, r;\n  T key, sum;\n  E lazy;\n  int\
-    \ cnt;\n  bool rev;\n\n  LazyReversibleRBSTNode(const T &t = T(), const E &e =\
-    \ E())\n      : l(), r(), key(t), sum(t), lazy(e), cnt(1), rev(false) {}\n};\n\
-    \ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ts)(T)>\nstruct LazyReversibleRBST : RBSTBase<LazyReversibleRBSTNode<T,\
-    \ E>> {\n  using Node = LazyReversibleRBSTNode<T, E>;\n  using base = RBSTBase<LazyReversibleRBSTNode<T,\
-    \ E>>;\n  using base::merge;\n  using base::split;\n  using typename base::Ptr;\n\
-    \n  LazyReversibleRBST() = default;\n\n  void toggle(Ptr t) {\n    swap(t->l,\
-    \ t->r);\n    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n  T fold(Ptr &t,\
-    \ int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b -\
-    \ a);\n    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
-    \    return ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n    auto x =\
-    \ split(t, a);\n    auto y = split(x.second, b - a);\n    toggle(y.first);\n \
-    \   t = merge(x.first, merge(y.first, y.second));\n  }\n\n  void apply(Ptr &t,\
-    \ int a, int b, const E &e) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
-    \ b - a);\n    propagate(y.first, e);\n    t = merge(x.first, merge(y.first, y.second));\n\
-    \  }\n\n protected:\n  inline T sum(const Ptr t) const { return t ? t->sum : T();\
-    \ }\n\n  Ptr update(Ptr t) override {\n    push(t);\n    t->cnt = 1;\n    t->sum\
-    \ = t->key;\n    if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n\
-    \    if (t->r) t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);\n    return\
-    \ t;\n  }\n\n  void push(Ptr t) override {\n    if (t->rev) {\n      if (t->l)\
-    \ toggle(t->l);\n      if (t->r) toggle(t->r);\n      t->rev = false;\n    }\n\
-    \    if (t->lazy != E()) {\n      if (t->l) propagate(t->l, t->lazy);\n      if\
-    \ (t->r) propagate(t->r, t->lazy);\n      t->lazy = E();\n    }\n  }\n\n  void\
-    \ propagate(Ptr t, const E &x) {\n    t->lazy = h(t->lazy, x);\n    t->key = g(t->key,\
-    \ x);\n    t->sum = g(t->sum, x);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\
-    \u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728\n * @docs\
-    \ docs/rbst/lazy-reversible-rbst.md\n */\n#line 7 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp\"\
+    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n\n  void\
+    \ dfs(Ptr r) {\n    if (r->l) dfs(r->l);\n    if (r->r) dfs(r->r);\n    update(r);\n\
+    \  }\n  \n  inline int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n\
+    \  virtual void push(Ptr) {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\ntemplate\
+    \ <typename T, typename E>\nstruct LazyReversibleTreapNode {\n  using Treap =\
+    \ TreapBase<LazyReversibleTreapNode>;\n  typename Treap::Ptr l, r;\n  T key, sum;\n\
+    \  E lazy;\n  int cnt;\n  uint32_t pr;\n  bool rev;\n\n  LazyReversibleTreapNode(const\
+    \ T &t = T(), const E &e = E())\n      : l(),\n        r(),\n        key(t),\n\
+    \        sum(t),\n        lazy(e),\n        cnt(1),\n        pr(my_rand::rng()),\n\
+    \        rev(false) {}\n};\n\ntemplate <typename T, typename E, T (*f)(T, T),\
+    \ T (*g)(T, E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct LazyReversibleTreap\
+    \ : TreapBase<LazyReversibleTreapNode<T, E>> {\n  using Node = LazyReversibleTreapNode<T,\
+    \ E>;\n  using base = TreapBase<LazyReversibleTreapNode<T, E>>;\n  using base::merge;\n\
+    \  using base::split;\n  using typename base::Ptr;\n\n  LazyReversibleTreap()\
+    \ = default;\n\n  void toggle(Ptr t) {\n    swap(t->l, t->r);\n    t->sum = ts(t->sum);\n\
+    \    t->rev ^= true;\n  }\n\n  T fold(Ptr &t, int a, int b) {\n    auto x = split(t,\
+    \ a);\n    auto y = split(x.second, b - a);\n    auto ret = sum(y.first);\n  \
+    \  t = merge(x.first, merge(y.first, y.second));\n    return ret;\n  }\n\n  void\
+    \ reverse(Ptr &t, int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
+    \ b - a);\n    toggle(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
+    \  }\n\n  void apply(Ptr &t, int a, int b, const E &e) {\n    auto x = split(t,\
+    \ a);\n    auto y = split(x.second, b - a);\n    propagate(y.first, e);\n    t\
+    \ = merge(x.first, merge(y.first, y.second));\n  }\n\n protected:\n  inline T\
+    \ sum(const Ptr t) const { return t ? t->sum : T(); }\n\n  Ptr update(Ptr t) override\
+    \ {\n    push(t);\n    t->cnt = 1;\n    t->sum = t->key;\n    if (t->l) t->cnt\
+    \ += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n    if (t->r) t->cnt += t->r->cnt,\
+    \ t->sum = f(t->sum, t->r->sum);\n    return t;\n  }\n\n  void push(Ptr t) override\
+    \ {\n    if (t->rev) {\n      if (t->l) toggle(t->l);\n      if (t->r) toggle(t->r);\n\
+    \      t->rev = false;\n    }\n    if (t->lazy != E()) {\n      if (t->l) propagate(t->l,\
+    \ t->lazy);\n      if (t->r) propagate(t->r, t->lazy);\n      t->lazy = E();\n\
+    \    }\n  }\n\n  void propagate(Ptr t, const E &x) {\n    t->lazy = h(t->lazy,\
+    \ x);\n    t->key = g(t->key, x);\n    t->sum = g(t->sum, x);\n  }\n};\n\n/**\n\
+    \ * @brief \u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap\n */\n#line 7\
+    \ \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp\"\
     \n//\n#line 3 \"modint/montgomery-modint.hpp\"\nusing namespace std;\n\ntemplate\
     \ <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
     \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
@@ -270,7 +288,7 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 9 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp\"\
+    \ { return mod; }\n};\n#line 9 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\nusing\
     \ vvm = vector<vm>;\n#line 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename\
     \ mint>\nstruct Affine {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n\
@@ -312,23 +330,23 @@ data:
     \  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n  wt(x, '\\\
     n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
     \ fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n#line 14 \"\
-    verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp\"\
+    verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp\"\
     \n\nusing T = pair<mint, mint>;\nusing E = Affine<mint>;\nT f(T a, T b) { return\
     \ T(a.first + b.first, a.second + b.second); }\nT g(T a, E b) { return T(b.a *\
     \ a.first + b.b * a.second, a.second); }\nE h(E a, E b) { return a * b; }\nT ts(T\
     \ a) { return a; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int N,\
     \ Q;\n  rd(N, Q);\n\n  V<T> a(N);\n  each(i, a) {\n    int n;\n    rd(n);\n  \
-    \  i = mkp(n, 1);\n  }\n\n  LazyReversibleRBST<T, E, f, g, h, ts> rbst;\n  auto\
-    \ root = rbst.build(a);\n\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if\
-    \ (cmd == 0) {\n      int i, x;\n      rd(i, x);\n      rbst.insert(root, i, T(x,\
-    \ 1));\n    } else if (cmd == 1) {\n      int i;\n      rd(i);\n      rbst.erase(root,\
-    \ i);\n    } else if (cmd == 2) {\n      int l, r;\n      rd(l, r);\n      rbst.reverse(root,\
+    \  i = mkp(n, 1);\n  }\n\n  LazyReversibleTreap<T, E, f, g, h, ts> treap;\n  auto\
+    \ root = treap.build(a);\n\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if\
+    \ (cmd == 0) {\n      int i, x;\n      rd(i, x);\n      treap.insert(root, i,\
+    \ T(x, 1));\n    } else if (cmd == 1) {\n      int i;\n      rd(i);\n      treap.erase(root,\
+    \ i);\n    } else if (cmd == 2) {\n      int l, r;\n      rd(l, r);\n      treap.reverse(root,\
     \ l, r);\n    } else if (cmd == 3) {\n      int l, r, b, c;\n      rd(l, r, b,\
-    \ c);\n      rbst.apply(root, l, r, E(b, c));\n    } else {\n      int l, r;\n\
-    \      rd(l, r);\n      wtn(rbst.fold(root, l, r).first.get());\n    }\n  }\n\
+    \ c);\n      treap.apply(root, l, r, E(b, c));\n    } else {\n      int l, r;\n\
+    \      rd(l, r);\n      wtn(treap.fold(root, l, r).first.get());\n    }\n  }\n\
     }\n"
   code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum\"\
-    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../rbst/lazy-reversible-rbst.hpp\"\
+    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../rbst/treap.hpp\"\
     \n//\n#include \"../../modint/montgomery-modint.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
     using vm = vector<mint>;\nusing vvm = vector<vm>;\n#include \"../../math/affine-transformation.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n\nusing T = pair<mint, mint>;\nusing E =\
@@ -336,14 +354,14 @@ data:
     \ }\nT g(T a, E b) { return T(b.a * a.first + b.b * a.second, a.second); }\nE\
     \ h(E a, E b) { return a * b; }\nT ts(T a) { return a; }\n\nusing namespace Nyaan;\n\
     void Nyaan::solve() {\n  int N, Q;\n  rd(N, Q);\n\n  V<T> a(N);\n  each(i, a)\
-    \ {\n    int n;\n    rd(n);\n    i = mkp(n, 1);\n  }\n\n  LazyReversibleRBST<T,\
-    \ E, f, g, h, ts> rbst;\n  auto root = rbst.build(a);\n\n  while (Q--) {\n   \
-    \ int cmd;\n    rd(cmd);\n    if (cmd == 0) {\n      int i, x;\n      rd(i, x);\n\
-    \      rbst.insert(root, i, T(x, 1));\n    } else if (cmd == 1) {\n      int i;\n\
-    \      rd(i);\n      rbst.erase(root, i);\n    } else if (cmd == 2) {\n      int\
-    \ l, r;\n      rd(l, r);\n      rbst.reverse(root, l, r);\n    } else if (cmd\
-    \ == 3) {\n      int l, r, b, c;\n      rd(l, r, b, c);\n      rbst.apply(root,\
-    \ l, r, E(b, c));\n    } else {\n      int l, r;\n      rd(l, r);\n      wtn(rbst.fold(root,\
+    \ {\n    int n;\n    rd(n);\n    i = mkp(n, 1);\n  }\n\n  LazyReversibleTreap<T,\
+    \ E, f, g, h, ts> treap;\n  auto root = treap.build(a);\n\n  while (Q--) {\n \
+    \   int cmd;\n    rd(cmd);\n    if (cmd == 0) {\n      int i, x;\n      rd(i,\
+    \ x);\n      treap.insert(root, i, T(x, 1));\n    } else if (cmd == 1) {\n   \
+    \   int i;\n      rd(i);\n      treap.erase(root, i);\n    } else if (cmd == 2)\
+    \ {\n      int l, r;\n      rd(l, r);\n      treap.reverse(root, l, r);\n    }\
+    \ else if (cmd == 3) {\n      int l, r, b, c;\n      rd(l, r, b, c);\n      treap.apply(root,\
+    \ l, r, E(b, c));\n    } else {\n      int l, r;\n      rd(l, r);\n      wtn(treap.fold(root,\
     \ l, r).first.get());\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
@@ -352,21 +370,21 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - rbst/lazy-reversible-rbst.hpp
-  - rbst/rbst-base.hpp
+  - rbst/treap.hpp
+  - misc/rng.hpp
   - modint/montgomery-modint.hpp
   - math/affine-transformation.hpp
   - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   requiredBy: []
   timestamp: '2020-12-04 12:13:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
 ---

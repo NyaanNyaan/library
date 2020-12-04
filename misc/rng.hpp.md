@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+  - icon: ':heavy_check_mark:'
+    path: rbst/treap.hpp
+    title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
@@ -30,6 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
@@ -89,6 +95,7 @@ data:
   - misc/simulated-annealing.hpp
   - modulo/mod-kth-root.hpp
   - prime/fast-factorize.hpp
+  - rbst/treap.hpp
   timestamp: '2020-11-30 18:57:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -96,6 +103,7 @@ data:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
