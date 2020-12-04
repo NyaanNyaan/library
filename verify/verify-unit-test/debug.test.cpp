@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
+#include "../../template/template.hpp"
 #include "../../hashmap/hashmap.hpp"
 #include "../../hashmap/hashset.hpp"
 #include "../../matrix/matrix.hpp"
 #include "../../modint/montgomery-modint.hpp"
-#include "../../template/template.hpp"
 using namespace Nyaan;
 
 void test() {

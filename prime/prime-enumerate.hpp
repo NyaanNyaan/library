@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 // Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}
 vector<int> prime_enumerate(int N) {
   vector<bool> sieve(N / 3 + 1, 1);

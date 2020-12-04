@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 // Prime -> {0, 0, 1, 1, 0, 1, 0, 1, ...}
 vector<bool> prime_sieve(int N) {
   vector<bool> sieve(max(1, N) + 1, 1);

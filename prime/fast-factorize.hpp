@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../inner/inner_math.hpp"
 #include "../misc/rng.hpp"
 #include "../modint/arbitrary-prime-modint.hpp"

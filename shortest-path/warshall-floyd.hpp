@@ -7,7 +7,7 @@
 // i : d[i][i] < 0 exists -> negative cycle
 template <typename T>
 void warshall_floyd(T& d) {
-  int N = sz(d[0]);
+  int N = d[0].size();
   for (int i = 0; i < N; i++) d[i][i] = 0;
   for (int k = 0; k < N; k++)
     for (int i = 0; i < N; i++)

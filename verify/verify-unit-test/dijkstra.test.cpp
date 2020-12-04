@@ -1,11 +1,13 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "../../template/template.hpp"
+//
 #include "../../misc/rng.hpp"
 #include "../../shortest-path/dijkstra-fast.hpp"
 #include "../../shortest-path/dijkstra-radix-heap.hpp"
 #include "../../shortest-path/dijkstra.hpp"
 
+using namespace Nyaan;
 template <int N, int M, int C>
 void test() {
   static_assert(N >= 1);
@@ -46,12 +48,11 @@ void test() {
   d1 = dijkstra(g);
   d2 = dijkstra_radix_heap(g);
   d3 = dijkstra(g);
-  
+
   assert(d1 == d2);
   assert(d1 == d3);
 }
-
-using namespace Nyaan; void Nyaan::solve() {
+void Nyaan::solve() {
   test<1, 0, 100>();
   test<2, 0, 100>();
   test<2, 1, 100>();

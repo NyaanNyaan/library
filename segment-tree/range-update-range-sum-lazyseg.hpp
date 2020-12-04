@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename E, E UNUSED_VALUE>
 struct UpdateSum_LazySegmentTree {
   int n, height;
@@ -9,7 +7,7 @@ struct UpdateSum_LazySegmentTree {
   T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };
   T g(T a, E b) { return T(b * a.second, a.second); };
   E h(E, E b) { return b; };
-  T ti = P(0, 0);
+  T ti = T(0, 0);
   E ei = UNUSED_VALUE;
   vector<T> dat;
   vector<E> laz;

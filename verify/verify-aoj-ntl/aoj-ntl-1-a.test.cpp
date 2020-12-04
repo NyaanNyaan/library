@@ -8,7 +8,7 @@ using namespace Nyaan; void Nyaan::solve() {
   ini(N);
   auto factor = PrimeFactors(N);
   vi ans;
-  each(p,factor) rep(_,p.second)ans.pb(p.first);
+  each(p,factor) rep(_,p.second)ans.push_back(p.first);
   cout << N << ":";
   each(x,ans)cout<< " " << x;
   cout << endl;

@@ -6,8 +6,9 @@
 using mint = LazyMontgomeryModInt<998244353>;
 using vm = vector<mint>;
 using vvm = vector<vm>;
-
 #include "../../multiplicative-function/divisor-multiple-transform.hpp"
+
+using namespace Nyaan;
 void test() {
   // 約数・倍数ゼータ/メビウス変換のverify
   auto map_transform = [](int n) {

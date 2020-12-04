@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 vector<int> factor_enumerate(int N) {
   vector<int> lp(N + 1, 0);
   if (N < 2) return lp;
