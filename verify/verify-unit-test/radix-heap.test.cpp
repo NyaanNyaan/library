@@ -4,6 +4,7 @@
 #include "../../data-structure/radix-heap.hpp"
 #include "../../misc/rng.hpp"
 
+using namespace Nyaan;
 template <typename Key, typename Val>
 void test() {
   auto t = [](Key mx, Key d, double ratio) {
@@ -13,7 +14,7 @@ void test() {
     while (i < mx) {
       assert(q1.empty() == q2.empty());
       assert(q1.size() == (int)q2.size());
-      if (q1.empty() or random() < ratio) {
+      if (q1.empty() or rnd() < ratio) {
 #pragma GCC diagnostic ignored "-Wnarrowing"
         Val j{rng()};
 #pragma GCC diagnostic warning "-Wnarrowing"

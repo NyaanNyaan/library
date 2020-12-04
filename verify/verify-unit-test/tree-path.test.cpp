@@ -4,6 +4,7 @@
 #include "../../misc/rng.hpp"
 #include "../../tree/tree-query.hpp"
 
+using namespace Nyaan;
 void test(vvi& g) {
   cerr << g.size() << endl;
   Tree<vvi> tree(g);

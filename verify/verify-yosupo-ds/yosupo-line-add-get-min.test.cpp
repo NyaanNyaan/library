@@ -12,12 +12,12 @@ using namespace Nyaan; void Nyaan::solve() {
   rep(i, Q) {
     in(c[i]);
     if (c[i])
-      in(d[i]), xs.pb(d[i]);
+      in(d[i]), xs.push_back(d[i]);
     else
       in(d[i], e[i]);
   }
-  xs.pb(-inf);
-  xs.pb(inf);
+  xs.push_back(-inf);
+  xs.push_back(inf);
 
   LiChaoTree<ll, infLL> lichao(xs);
   rep(_, N) lichao.update(a[_], b[_]);

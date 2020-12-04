@@ -1,7 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-
-
+#include "../../template/template.hpp"
 #include "../../data-structure-2d/wavelet-matrix.hpp"
 
 uint64_t rng() {
@@ -86,7 +85,7 @@ void test(int n, int q, bool all_zero = false, bool large = false) {
   }
 }
 
-int main() {
+void Nyaan::solve() {
   test(63, 1000);
   test(64, 1000);
   test(65, 1000);

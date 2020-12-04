@@ -4,6 +4,7 @@
 #include "../../data-structure/hash-map-variable-length.hpp"
 #include "../../misc/fastio.hpp"
 
+using namespace Nyaan;
 HashMap<ll, ll> m;
 
 using namespace Nyaan; void Nyaan::solve() {
