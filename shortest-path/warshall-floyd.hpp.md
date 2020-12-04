@@ -6,11 +6,11 @@ data:
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"shortest-path/warshall-floyd.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
@@ -43,21 +43,21 @@ data:
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
     \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"shortest-path/warshall-floyd.hpp\"\
     \n\n// i : d[i][i] < 0 exists -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T&\
-    \ d) {\n  int N = sz(d[0]);\n  for (int i = 0; i < N; i++) d[i][i] = 0;\n  for\
-    \ (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n      for (int j =\
-    \ 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n"
+    \ d) {\n  int N = d[0].size();\n  for (int i = 0; i < N; i++) d[i][i] = 0;\n \
+    \ for (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n      for (int\
+    \ j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n"
   code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\n// i : d[i][i]\
     \ < 0 exists -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T&\
-    \ d) {\n  int N = sz(d[0]);\n  for (int i = 0; i < N; i++) d[i][i] = 0;\n  for\
-    \ (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n      for (int j =\
-    \ 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}"
+    \ d) {\n  int N = d[0].size();\n  for (int i = 0; i < N; i++) d[i][i] = 0;\n \
+    \ for (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n      for (int\
+    \ j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: shortest-path/warshall-floyd.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
 documentation_of: shortest-path/warshall-floyd.hpp

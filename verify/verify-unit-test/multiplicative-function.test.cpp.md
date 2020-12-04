@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: multiplicative-function/divisor-multiple-transform.hpp
     title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
-  - icon: ':x:'
+  - icon: ':question:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
   - icon: ':question:'
@@ -34,7 +34,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -239,12 +239,12 @@ data:
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 6 \"verify/verify-unit-test/multiplicative-function.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\nusing\
-    \ vvm = vector<vm>;\n\n#line 2 \"multiplicative-function/divisor-multiple-transform.hpp\"\
-    \n\n\n\n#line 2 \"prime/prime-enumerate.hpp\"\n\n\n\n// Prime Sieve {2, 3, 5,\
-    \ 7, 11, 13, 17, ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N\
-    \ / 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p +=\
-    \ d = 6 - d, i++) {\n    if (!sieve[i]) continue;\n    for (int q = p * p / 3,\
-    \ r = d * p / 3 + (d * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n\
+    \ vvm = vector<vm>;\n#line 2 \"multiplicative-function/divisor-multiple-transform.hpp\"\
+    \n\n\n\n#line 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11,\
+    \ 13, 17, ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N /\
+    \ 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d\
+    \ = 6 - d, i++) {\n    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r\
+    \ = d * p / 3 + (d * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n\
     \         q < qe; q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2,\
     \ 3};\n  for (int p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i])\
     \ ret.push_back(p);\n  while (!ret.empty() && ret.back() > N) ret.pop_back();\n\
@@ -276,12 +276,12 @@ data:
     \ p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second -= p2->second;\n\
     \  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB\
     \n * @docs docs/multiplicative-function/divisor-multiple-transform.md\n */\n#line\
-    \ 11 \"verify/verify-unit-test/multiplicative-function.test.cpp\"\nvoid test()\
-    \ {\n  // \u7D04\u6570\u30FB\u500D\u6570\u30BC\u30FC\u30BF/\u30E1\u30D3\u30A6\u30B9\
-    \u5909\u63DB\u306Everify\n  auto map_transform = [](int n) {\n    map<ll, mint>\
-    \ a;\n    for (ll i = 1; i * i <= n; i++) {\n      if (n % i == 0) {\n       \
-    \ a[i] = rng();\n        a[n / i] = rng();\n      }\n    }\n    auto a1 = a;\n\
-    \    divisor_transform::zeta_transform(a1);\n    divisor_transform::mobius_transform(a1);\n\
+    \ 10 \"verify/verify-unit-test/multiplicative-function.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\nvoid test() {\n  // \u7D04\u6570\u30FB\u500D\u6570\u30BC\u30FC\u30BF\
+    /\u30E1\u30D3\u30A6\u30B9\u5909\u63DB\u306Everify\n  auto map_transform = [](int\
+    \ n) {\n    map<ll, mint> a;\n    for (ll i = 1; i * i <= n; i++) {\n      if\
+    \ (n % i == 0) {\n        a[i] = rng();\n        a[n / i] = rng();\n      }\n\
+    \    }\n    auto a1 = a;\n    divisor_transform::zeta_transform(a1);\n    divisor_transform::mobius_transform(a1);\n\
     \    assert(a1 == a && \"divisor_transform\");\n\n    multiple_transform::zeta_transform(a1);\n\
     \    multiple_transform::mobius_transform(a1);\n    assert(a1 == a && \"multiple_transform\"\
     );\n  };\n  rep(i, 1000) { map_transform(rng() % 100000 + 1); }\n  rep1(i, 100)\
@@ -291,18 +291,18 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n#include \"../../misc/rng.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\nusing\
-    \ vvm = vector<vm>;\n\n#include \"../../multiplicative-function/divisor-multiple-transform.hpp\"\
-    \nvoid test() {\n  // \u7D04\u6570\u30FB\u500D\u6570\u30BC\u30FC\u30BF/\u30E1\u30D3\
-    \u30A6\u30B9\u5909\u63DB\u306Everify\n  auto map_transform = [](int n) {\n   \
-    \ map<ll, mint> a;\n    for (ll i = 1; i * i <= n; i++) {\n      if (n % i ==\
-    \ 0) {\n        a[i] = rng();\n        a[n / i] = rng();\n      }\n    }\n   \
-    \ auto a1 = a;\n    divisor_transform::zeta_transform(a1);\n    divisor_transform::mobius_transform(a1);\n\
-    \    assert(a1 == a && \"divisor_transform\");\n\n    multiple_transform::zeta_transform(a1);\n\
-    \    multiple_transform::mobius_transform(a1);\n    assert(a1 == a && \"multiple_transform\"\
-    );\n  };\n  rep(i, 1000) { map_transform(rng() % 100000 + 1); }\n  rep1(i, 100)\
-    \ { map_transform(840 * i); }\n\n  \n\n}\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  test();\n  trc(\"test OK\");\n  int a, b;\n  cin >> a >> b;\n  cout <<\
-    \ a + b << endl;\n}"
+    \ vvm = vector<vm>;\n#include \"../../multiplicative-function/divisor-multiple-transform.hpp\"\
+    \n\nusing namespace Nyaan;\nvoid test() {\n  // \u7D04\u6570\u30FB\u500D\u6570\
+    \u30BC\u30FC\u30BF/\u30E1\u30D3\u30A6\u30B9\u5909\u63DB\u306Everify\n  auto map_transform\
+    \ = [](int n) {\n    map<ll, mint> a;\n    for (ll i = 1; i * i <= n; i++) {\n\
+    \      if (n % i == 0) {\n        a[i] = rng();\n        a[n / i] = rng();\n \
+    \     }\n    }\n    auto a1 = a;\n    divisor_transform::zeta_transform(a1);\n\
+    \    divisor_transform::mobius_transform(a1);\n    assert(a1 == a && \"divisor_transform\"\
+    );\n\n    multiple_transform::zeta_transform(a1);\n    multiple_transform::mobius_transform(a1);\n\
+    \    assert(a1 == a && \"multiple_transform\");\n  };\n  rep(i, 1000) { map_transform(rng()\
+    \ % 100000 + 1); }\n  rep1(i, 100) { map_transform(840 * i); }\n\n  \n\n}\n\n\
+    using namespace Nyaan; void Nyaan::solve() {\n  test();\n  trc(\"test OK\");\n\
+    \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -317,8 +317,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/multiplicative-function.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/multiplicative-function.test.cpp
 layout: document

@@ -11,7 +11,7 @@ data:
     - icon: ':question:'
       path: data-structure/binary-indexed-tree.hpp
       title: Binary Indexed Tree(Fenwick Tree)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/binary-trie.hpp
       title: Binary Trie
     - icon: ':x:'
@@ -20,13 +20,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-union-find.hpp
       title: "\u52D5\u7684Union Find"
-    - icon: ':x:'
+    - icon: ':question:'
       path: data-structure/hash-map-variable-length.hpp
       title: "Hash Map(\u53EF\u5909\u9577\u7248)"
     - icon: ':x:'
       path: data-structure/persistent-array.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/persistent-queue.hpp
       title: data-structure/persistent-queue.hpp
     - icon: ':x:'
@@ -185,7 +185,7 @@ data:
     - icon: ':question:'
       path: graph/graph-template.hpp
       title: graph/graph-template.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: graph/graph-utility.hpp
       title: graph/graph-utility.hpp
     - icon: ':heavy_check_mark:'
@@ -211,19 +211,19 @@ data:
       title: graph/two-edge-connected-components.hpp
   - name: hashmap
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: hashmap/hashmap-base.hpp
       title: hashmap/hashmap-base.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: hashmap/hashmap-chain.hpp
       title: "Hash Map(\u9023\u9396\u6CD5)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: hashmap/hashmap-open-address.hpp
       title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: hashmap/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: hashmap/hashset.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
   - name: inner
@@ -236,10 +236,10 @@ data:
       title: inner/inner_math.hpp
   - name: math
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
     - icon: ':warning:'
@@ -281,7 +281,7 @@ data:
       path: matrix/matrix-tree.hpp
       title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
         \u5217)"
-    - icon: ':x:'
+    - icon: ':question:'
       path: matrix/matrix.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':x:'
@@ -333,7 +333,7 @@ data:
     - icon: ':x:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
     - icon: ':x:'
@@ -364,7 +364,7 @@ data:
       title: tetration
   - name: multiplicative-function
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: multiplicative-function/divisor-multiple-transform.hpp
       title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
     - icon: ':warning:'
@@ -430,7 +430,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: prime/osak.hpp
       title: prime/osak.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: prime/prime-enumerate.hpp
       title: prime/prime-enumerate.hpp
     - icon: ':x:'
@@ -438,26 +438,26 @@ data:
       title: prime/prime-sieve.hpp
   - name: rbst
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: rbst/lazy-reversible-rbst.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\u8861\
         \u4E8C\u5206\u6728"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: rbst/rbst-base.hpp
       title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
         )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: rbst/treap.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
   - name: segment-tree
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/dynamic-li-chao-tree.hpp
       title: segment-tree/dynamic-li-chao-tree.hpp
     - icon: ':x:'
       path: segment-tree/dynamic-segment-tree.hpp
       title: segment-tree/dynamic-segment-tree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/lazy-segment-tree.hpp
       title: segment-tree/lazy-segment-tree.hpp
     - icon: ':x:'
@@ -481,7 +481,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/range-update-range-min-lazyseg.hpp
       title: segment-tree/range-update-range-min-lazyseg.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/range-update-range-sum-lazyseg.hpp
       title: segment-tree/range-update-range-sum-lazyseg.hpp
     - icon: ':warning:'
@@ -516,7 +516,7 @@ data:
       path: shortest-path/dijkstra-fast.hpp
       title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\
         \u5316)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra-radix-heap.hpp
       title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
     - icon: ':x:'
@@ -531,7 +531,7 @@ data:
     - icon: ':x:'
       path: shortest-path/restore-shortest-path.hpp
       title: shortest-path/restore-shortest-path.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/warshall-floyd.hpp
       title: shortest-path/warshall-floyd.hpp
   - name: string
@@ -640,7 +640,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -667,7 +667,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
     - icon: ':heavy_check_mark:'
@@ -696,7 +696,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
     - icon: ':heavy_check_mark:'
@@ -720,7 +720,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
     - icon: ':heavy_check_mark:'
@@ -745,7 +745,7 @@ data:
       title: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   - name: verify/verify-aoj-ntl
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
     - icon: ':heavy_check_mark:'
@@ -779,10 +779,10 @@ data:
       title: verify/verify-aoj-other/aoj-2995.test.cpp
   - name: verify/verify-unit-test
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/debug.test.cpp
       title: verify/verify-unit-test/debug.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/dijkstra.test.cpp
       title: verify/verify-unit-test/dijkstra.test.cpp
     - icon: ':heavy_check_mark:'
@@ -797,7 +797,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashset.test.cpp
       title: verify/verify-unit-test/hashset.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/multiplicative-function.test.cpp
       title: verify/verify-unit-test/multiplicative-function.test.cpp
     - icon: ':heavy_check_mark:'
@@ -814,37 +814,37 @@ data:
       title: verify/verify-unit-test/wavelet-matrix.test.cpp
   - name: verify/verify-yosupo-ds
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
       title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
     - icon: ':x:'
       path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
     - icon: ':x:'
       path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
       title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
       title: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
     - icon: ':x:'
@@ -1201,6 +1201,8 @@ layout: toppage
 ---
 [![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FNyaan)](https://atcoder.jp/users/Nyaan)
 [![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fcodeforces%2Fjson%2FNyaan)](https://codeforces.com/profile/Nyaan)
+
+**<bits/stdc++.h>を一斉に除去した結果、現在CIがfailingだらけで大変なことになっています**
 
 このライブラリは競技プログラミング用に作成したアルゴリズム・データ構造をまとめたものです。
 

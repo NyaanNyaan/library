@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/range-update-range-sum-lazyseg.hpp
     title: segment-tree/range-update-range-sum-lazyseg.hpp
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D
@@ -178,15 +178,15 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"segment-tree/range-update-range-sum-lazyseg.hpp\"\n\n\n\ntemplate <typename\
-    \ E, E UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree {\n  int n, height;\n \
-    \ using T = pair<E, E>;\n  T f(T a, T b) { return T(a.first + b.first, a.second\
-    \ + b.second); };\n  T g(T a, E b) { return T(b * a.second, a.second); };\n  E\
-    \ h(E, E b) { return b; };\n  T ti = P(0, 0);\n  E ei = UNUSED_VALUE;\n  vector<T>\
-    \ dat;\n  vector<E> laz;\n\n  UpdateSum_LazySegmentTree(const vector<E> &v) {\
-    \ build(v); }\n\n  void init(int n_) {\n    n = 1;\n    height = 0;\n    while\
-    \ (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2 *\
-    \ n, ei);\n  }\n\n  void build(const vector<E> &v) {\n    int n_ = v.size();\n\
+    \ 5 \"verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp\"\n//\n#line 2 \"segment-tree/range-update-range-sum-lazyseg.hpp\"\
+    \n\ntemplate <typename E, E UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree {\n\
+    \  int n, height;\n  using T = pair<E, E>;\n  T f(T a, T b) { return T(a.first\
+    \ + b.first, a.second + b.second); };\n  T g(T a, E b) { return T(b * a.second,\
+    \ a.second); };\n  E h(E, E b) { return b; };\n  T ti = T(0, 0);\n  E ei = UNUSED_VALUE;\n\
+    \  vector<T> dat;\n  vector<E> laz;\n\n  UpdateSum_LazySegmentTree(const vector<E>\
+    \ &v) { build(v); }\n\n  void init(int n_) {\n    n = 1;\n    height = 0;\n  \
+    \  while (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2\
+    \ * n, ei);\n  }\n\n  void build(const vector<E> &v) {\n    int n_ = v.size();\n\
     \    init(n_);\n    for (int i = 0; i < n_; i++) dat[n + i] = T(v[i], 1);\n  \
     \  for (int i = n - 1; i; i--)\n      dat[i] = f(dat[(i << 1) | 0], dat[(i <<\
     \ 1) | 1]);\n  }\n\n  inline T reflect(int k) { return laz[k] == ei ? dat[k] :\
@@ -205,14 +205,14 @@ data:
     \ += n);\n    thrust(b += n - 1);\n    T vl = ti, vr = ti;\n    for (int l = a,\
     \ r = b + 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) vl = f(vl, reflect(l++));\n\
     \      if (r & 1) vr = f(reflect(--r), vr);\n    }\n    return f(vl, vr).first;\n\
-    \  }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp\"\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  int I = (1LL << 31) - 1;\n  UpdateSum_LazySegmentTree<ll,\
-    \ infLL> seg{vl(N, I)};\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n     \
-    \ ini(s, t, x);\n      t++;\n      seg.update(s, t, x);\n    } else {\n      ini(i);\n\
-    \      out(seg.query(i, i + 1));\n    }\n  }\n}\n"
+    \  }\n};\n#line 7 \"verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp\"\n\nusing namespace\
+    \ Nyaan; \nvoid Nyaan::solve() {\n  ini(N, Q);\n  int I = (1LL << 31) - 1;\n \
+    \ UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N, I)};\n  rep(_, Q) {\n    ini(c);\n\
+    \    if (c == 0) {\n      ini(s, t, x);\n      t++;\n      seg.update(s, t, x);\n\
+    \    } else {\n      ini(i);\n      out(seg.query(i, i + 1));\n    }\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../segment-tree/range-update-range-sum-lazyseg.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  int I = (1LL\
+    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/range-update-range-sum-lazyseg.hpp\"\
+    \n\nusing namespace Nyaan; \nvoid Nyaan::solve() {\n  ini(N, Q);\n  int I = (1LL\
     \ << 31) - 1;\n  UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N, I)};\n  rep(_,\
     \ Q) {\n    ini(c);\n    if (c == 0) {\n      ini(s, t, x);\n      t++;\n    \
     \  seg.update(s, t, x);\n    } else {\n      ini(i);\n      out(seg.query(i, i\
@@ -228,8 +228,8 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
 layout: document

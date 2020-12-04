@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':x:'

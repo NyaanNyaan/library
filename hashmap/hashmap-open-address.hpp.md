@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/hashmap/hashmap_all.md
     document_title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
@@ -46,7 +46,7 @@ data:
   path: hashmap/hashmap-open-address.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
 documentation_of: hashmap/hashmap-open-address.hpp

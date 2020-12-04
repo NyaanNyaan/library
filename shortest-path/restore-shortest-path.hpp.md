@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
   _extendedRequiredBy: []
@@ -66,12 +66,13 @@ data:
     \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
     \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
     \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
-    \ v) {\n  vi ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur, int par\
-    \ = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n      end = 1;\n\
-    \      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst == par) continue;\n\
-    \      rec(rec, dst, cur);\n      if (end) return;\n    }\n    if (end) return;\n\
-    \    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n}\n#line 6 \"shortest-path/restore-shortest-path.hpp\"\
-    \n\n// restore shortest path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n#line 6 \"shortest-path/restore-shortest-path.hpp\"\n\n// restore shortest\
+    \ path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
     \ &g, vector<T> &d, int S,\n                                  int G) {\n  int\
     \ N = g.size();\n  WeightedGraph<T> rev(g.size());\n  for (int i = 0; i < N; i++)\n\
     \    for (auto &e : g[i]) rev[e.to].emplace_back(e.to, i, e.cost);\n  vector<int>\
@@ -98,7 +99,7 @@ data:
   isVerificationFile: false
   path: shortest-path/restore-shortest-path.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: modint/arbitrary-modint.hpp
     title: modint/arbitrary-modint.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':x:'

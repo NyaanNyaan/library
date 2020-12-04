@@ -9,7 +9,7 @@ data:
     path: shortest-path/restore-shortest-path.hpp
     title: shortest-path/restore-shortest-path.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - icon: ':x:'
@@ -25,7 +25,7 @@ data:
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/graph-utility.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
@@ -77,11 +77,12 @@ data:
     \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
     \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
     \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
-    \ v) {\n  vi ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur, int par\
-    \ = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n      end = 1;\n\
-    \      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst == par) continue;\n\
-    \      rec(rec, dst, cur);\n      if (end) return;\n    }\n    if (end) return;\n\
-    \    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n}\n"
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n"
   code: "#pragma once\n\n#include \"./graph-template.hpp\"\n\n// Depth of Rooted Tree\n\
     // unvisited nodes : d = -1\nvector<int> Depth(const UnweightedGraph &g, int start\
     \ = 0) {\n  vector<int> d(g.size(), -1);\n  auto dfs = [&](auto rec, int cur,\
@@ -102,20 +103,20 @@ data:
     \ &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n\
     \  d = Depth(g, u);\n  int v = max_element(begin(d), end(d)) - begin(d);\n  return\
     \ make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the path u-v ( O(N) )\n\
-    template <typename G>\nvector<int> Path(G &g, int u, int v) {\n  vi ret;\n  int\
-    \ end = 0;\n  auto dfs = [&](auto rec, int cur, int par = -1) -> void {\n    ret.push_back(cur);\n\
-    \    if (cur == v) {\n      end = 1;\n      return;\n    }\n    for (int dst :\
-    \ g[cur]) {\n      if (dst == par) continue;\n      rec(rec, dst, cur);\n    \
-    \  if (end) return;\n    }\n    if (end) return;\n    ret.pop_back();\n  };\n\
-    \  dfs(dfs, u);\n  return ret;\n}"
+    template <typename G>\nvector<int> Path(G &g, int u, int v) {\n  vector<int> ret;\n\
+    \  int end = 0;\n  auto dfs = [&](auto rec, int cur, int par = -1) -> void {\n\
+    \    ret.push_back(cur);\n    if (cur == v) {\n      end = 1;\n      return;\n\
+    \    }\n    for (int dst : g[cur]) {\n      if (dst == par) continue;\n      rec(rec,\
+    \ dst, cur);\n      if (end) return;\n    }\n    if (end) return;\n    ret.pop_back();\n\
+    \  };\n  dfs(dfs, u);\n  return ret;\n}"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: graph/graph-utility.hpp
   requiredBy:
   - shortest-path/restore-shortest-path.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - verify/verify-yosupo-graph/yosupo-diameter.test.cpp

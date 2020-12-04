@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/hashmap/hashmap_all.md
     document_title: "Hash Map(\u9023\u9396\u6CD5)"
@@ -51,7 +51,7 @@ data:
   path: hashmap/hashmap-chain.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
 documentation_of: hashmap/hashmap-chain.hpp

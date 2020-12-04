@@ -17,7 +17,7 @@ data:
     path: shortest-path/dijkstra-fast.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\
       \u5316)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
   - icon: ':question:'
@@ -44,7 +44,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -197,24 +197,25 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"misc/rng.hpp\"\n\n\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rnd() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"shortest-path/dijkstra-fast.hpp\"\n\n\n\n#line 2 \"data-structure/radix-heap.hpp\"\
+    \ 4 \"verify/verify-unit-test/dijkstra.test.cpp\"\n//\n#line 2 \"misc/rng.hpp\"\
+    \n\n\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
+    \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \           .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
+    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
+    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
+    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
+    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
+    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
+    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
+    \ - 64) << 52;\n  return rnd() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
+    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
+    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
+    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    shortest-path/dijkstra-fast.hpp\"\n\n\n\n#line 2 \"data-structure/radix-heap.hpp\"\
     \n\ntemplate <typename Key, typename Val>\nstruct RadixHeap {\n  using uint =\
     \ typename make_unsigned<Key>::type;\n  static constexpr int bit = sizeof(Key)\
     \ * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint, bit + 1>\
@@ -316,45 +317,47 @@ data:
     \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.emplace(d[dst],\
     \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\
     \u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n**/\n#line\
-    \ 8 \"verify/verify-unit-test/dijkstra.test.cpp\"\n\ntemplate <int N, int M, int\
-    \ C>\nvoid test() {\n  static_assert(N >= 1);\n  vector<tuple<int, int, ll>> es;\n\
-    \n  // connectivity\n  mt19937_64 mt(rng());\n  vi ord(N - 1);\n  iota(all(ord),\
-    \ 1);\n  shuffle(all(ord), mt);\n  ord.insert(begin(ord), 0);\n  rep(i, N - 1)\
-    \ {\n    int u = ord[i], v = ord[i + 1];\n    ll c = randint(0, C + 1);\n    es.emplace_back(u,\
-    \ v, c);\n  }\n  rep(_, M - (N - 1)) {\n    int u, v;\n    do {\n      u = randint(0,\
-    \ N), v = randint(0, N);\n    } while (u == v);\n    ll c = randint(0, C + 1);\n\
-    \    es.emplace_back(u, v, c);\n  }\n\n  shuffle(all(es), mt);\n  WeightedGraph<ll>\
-    \ g(N);\n  StaticGraph<ll> dg(N, M);\n  if (es.size() > M) es.resize(M);\n\n \
-    \ for (auto&& [u, v, c] : es) {\n    g[u].emplace_back(v, c);\n    dg.add_edge(u,\
-    \ v, c);\n  }\n\n  vl d1, d2, d3;\n\n  d1 = dijkstra(g);\n  d2 = dijkstra_radix_heap(g);\n\
-    \  d3 = dijkstra(g);\n  \n  assert(d1 == d2);\n  assert(d1 == d3);\n}\n\nusing\
-    \ namespace Nyaan; void Nyaan::solve() {\n  test<1, 0, 100>();\n  test<2, 0, 100>();\n\
-    \  test<2, 1, 100>();\n  test<3, 0, 100>();\n  test<3, 1, 100>();\n  test<3, 2,\
-    \ 100>();\n  test<TEN(2), TEN(1), 100>();\n  test<TEN(2), TEN(2) - 1, 100>();\n\
-    \  test<TEN(2), TEN(2) * 2, 100>();\n  test<TEN(3), TEN(3) * 2, 100>();\n  test<TEN(4),\
-    \ TEN(4) * 2, 100>();\n  test<TEN(5), TEN(5) * 2, 100>();\n  test<TEN(6), TEN(6)\
-    \ * 2, 100>();\n\n  int n, m;\n  cin >> n >> m;\n  cout << n + m << endl;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../template/template.hpp\"\n#include \"../../misc/rng.hpp\"\n#include \"../../shortest-path/dijkstra-fast.hpp\"\
-    \n#include \"../../shortest-path/dijkstra-radix-heap.hpp\"\n#include \"../../shortest-path/dijkstra.hpp\"\
-    \n\ntemplate <int N, int M, int C>\nvoid test() {\n  static_assert(N >= 1);\n\
-    \  vector<tuple<int, int, ll>> es;\n\n  // connectivity\n  mt19937_64 mt(rng());\n\
-    \  vi ord(N - 1);\n  iota(all(ord), 1);\n  shuffle(all(ord), mt);\n  ord.insert(begin(ord),\
-    \ 0);\n  rep(i, N - 1) {\n    int u = ord[i], v = ord[i + 1];\n    ll c = randint(0,\
+    \ 9 \"verify/verify-unit-test/dijkstra.test.cpp\"\n\nusing namespace Nyaan;\n\
+    template <int N, int M, int C>\nvoid test() {\n  static_assert(N >= 1);\n  vector<tuple<int,\
+    \ int, ll>> es;\n\n  // connectivity\n  mt19937_64 mt(rng());\n  vi ord(N - 1);\n\
+    \  iota(all(ord), 1);\n  shuffle(all(ord), mt);\n  ord.insert(begin(ord), 0);\n\
+    \  rep(i, N - 1) {\n    int u = ord[i], v = ord[i + 1];\n    ll c = randint(0,\
     \ C + 1);\n    es.emplace_back(u, v, c);\n  }\n  rep(_, M - (N - 1)) {\n    int\
     \ u, v;\n    do {\n      u = randint(0, N), v = randint(0, N);\n    } while (u\
     \ == v);\n    ll c = randint(0, C + 1);\n    es.emplace_back(u, v, c);\n  }\n\n\
     \  shuffle(all(es), mt);\n  WeightedGraph<ll> g(N);\n  StaticGraph<ll> dg(N, M);\n\
     \  if (es.size() > M) es.resize(M);\n\n  for (auto&& [u, v, c] : es) {\n    g[u].emplace_back(v,\
     \ c);\n    dg.add_edge(u, v, c);\n  }\n\n  vl d1, d2, d3;\n\n  d1 = dijkstra(g);\n\
-    \  d2 = dijkstra_radix_heap(g);\n  d3 = dijkstra(g);\n  \n  assert(d1 == d2);\n\
-    \  assert(d1 == d3);\n}\n\nusing namespace Nyaan; void Nyaan::solve() {\n  test<1,\
-    \ 0, 100>();\n  test<2, 0, 100>();\n  test<2, 1, 100>();\n  test<3, 0, 100>();\n\
-    \  test<3, 1, 100>();\n  test<3, 2, 100>();\n  test<TEN(2), TEN(1), 100>();\n\
-    \  test<TEN(2), TEN(2) - 1, 100>();\n  test<TEN(2), TEN(2) * 2, 100>();\n  test<TEN(3),\
-    \ TEN(3) * 2, 100>();\n  test<TEN(4), TEN(4) * 2, 100>();\n  test<TEN(5), TEN(5)\
-    \ * 2, 100>();\n  test<TEN(6), TEN(6) * 2, 100>();\n\n  int n, m;\n  cin >> n\
-    \ >> m;\n  cout << n + m << endl;\n}"
+    \  d2 = dijkstra_radix_heap(g);\n  d3 = dijkstra(g);\n\n  assert(d1 == d2);\n\
+    \  assert(d1 == d3);\n}\nvoid Nyaan::solve() {\n  test<1, 0, 100>();\n  test<2,\
+    \ 0, 100>();\n  test<2, 1, 100>();\n  test<3, 0, 100>();\n  test<3, 1, 100>();\n\
+    \  test<3, 2, 100>();\n  test<TEN(2), TEN(1), 100>();\n  test<TEN(2), TEN(2) -\
+    \ 1, 100>();\n  test<TEN(2), TEN(2) * 2, 100>();\n  test<TEN(3), TEN(3) * 2, 100>();\n\
+    \  test<TEN(4), TEN(4) * 2, 100>();\n  test<TEN(5), TEN(5) * 2, 100>();\n  test<TEN(6),\
+    \ TEN(6) * 2, 100>();\n\n  int n, m;\n  cin >> n >> m;\n  cout << n + m << endl;\n\
+    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include \"\
+    ../../shortest-path/dijkstra-fast.hpp\"\n#include \"../../shortest-path/dijkstra-radix-heap.hpp\"\
+    \n#include \"../../shortest-path/dijkstra.hpp\"\n\nusing namespace Nyaan;\ntemplate\
+    \ <int N, int M, int C>\nvoid test() {\n  static_assert(N >= 1);\n  vector<tuple<int,\
+    \ int, ll>> es;\n\n  // connectivity\n  mt19937_64 mt(rng());\n  vi ord(N - 1);\n\
+    \  iota(all(ord), 1);\n  shuffle(all(ord), mt);\n  ord.insert(begin(ord), 0);\n\
+    \  rep(i, N - 1) {\n    int u = ord[i], v = ord[i + 1];\n    ll c = randint(0,\
+    \ C + 1);\n    es.emplace_back(u, v, c);\n  }\n  rep(_, M - (N - 1)) {\n    int\
+    \ u, v;\n    do {\n      u = randint(0, N), v = randint(0, N);\n    } while (u\
+    \ == v);\n    ll c = randint(0, C + 1);\n    es.emplace_back(u, v, c);\n  }\n\n\
+    \  shuffle(all(es), mt);\n  WeightedGraph<ll> g(N);\n  StaticGraph<ll> dg(N, M);\n\
+    \  if (es.size() > M) es.resize(M);\n\n  for (auto&& [u, v, c] : es) {\n    g[u].emplace_back(v,\
+    \ c);\n    dg.add_edge(u, v, c);\n  }\n\n  vl d1, d2, d3;\n\n  d1 = dijkstra(g);\n\
+    \  d2 = dijkstra_radix_heap(g);\n  d3 = dijkstra(g);\n\n  assert(d1 == d2);\n\
+    \  assert(d1 == d3);\n}\nvoid Nyaan::solve() {\n  test<1, 0, 100>();\n  test<2,\
+    \ 0, 100>();\n  test<2, 1, 100>();\n  test<3, 0, 100>();\n  test<3, 1, 100>();\n\
+    \  test<3, 2, 100>();\n  test<TEN(2), TEN(1), 100>();\n  test<TEN(2), TEN(2) -\
+    \ 1, 100>();\n  test<TEN(2), TEN(2) * 2, 100>();\n  test<TEN(3), TEN(3) * 2, 100>();\n\
+    \  test<TEN(4), TEN(4) * 2, 100>();\n  test<TEN(5), TEN(5) * 2, 100>();\n  test<TEN(6),\
+    \ TEN(6) * 2, 100>();\n\n  int n, m;\n  cin >> n >> m;\n  cout << n + m << endl;\n\
+    }"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -372,8 +375,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/dijkstra.test.cpp
 layout: document

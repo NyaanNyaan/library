@@ -40,7 +40,7 @@ data:
     document_title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's\
       \ Rho)"
     links: []
-  bundledCode: "#line 2 \"prime/fast-factorize.hpp\"\n\n\n\n#line 2 \"inner/inner_math.hpp\"\
+  bundledCode: "#line 2 \"prime/fast-factorize.hpp\"\n\n#line 2 \"inner/inner_math.hpp\"\
     \n\nnamespace inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64\
     \ = int64_t;\nusing u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b)\
     \ {\n  while (b) swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT\
@@ -129,7 +129,7 @@ data:
     \  return (is);\n  }\n\n  mint inverse() const { return pow(mod - 2); }\n\n  u64\
     \ get() const {\n    u64 ret = reduce(a);\n    return ret >= mod ? ret - mod :\
     \ ret;\n  }\n\n  static u64 get_mod() { return mod; }\n};\ntypename montgomery64::u64\
-    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 9 \"prime/fast-factorize.hpp\"\
+    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 7 \"prime/fast-factorize.hpp\"\
     \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
     bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
     \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
@@ -168,7 +168,7 @@ data:
     using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
     \ docs/prime/fast-factorize.md\n */\n"
-  code: "#pragma once\n\n\n\n#include \"../inner/inner_math.hpp\"\n#include \"../misc/rng.hpp\"\
+  code: "#pragma once\n\n#include \"../inner/inner_math.hpp\"\n#include \"../misc/rng.hpp\"\
     \n#include \"../modint/arbitrary-prime-modint.hpp\"\n#include \"../modint/modint-montgomery64.hpp\"\
     \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
     bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
@@ -217,7 +217,7 @@ data:
   path: prime/fast-factorize.hpp
   requiredBy:
   - modulo/mod-kth-root.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp

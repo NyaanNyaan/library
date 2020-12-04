@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/range-update-range-sum-lazyseg.hpp
     title: segment-tree/range-update-range-sum-lazyseg.hpp
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I
@@ -178,11 +178,11 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"segment-tree/range-update-range-sum-lazyseg.hpp\"\n\n\n\ntemplate <typename\
+    \ 2 \"segment-tree/range-update-range-sum-lazyseg.hpp\"\n\ntemplate <typename\
     \ E, E UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree {\n  int n, height;\n \
     \ using T = pair<E, E>;\n  T f(T a, T b) { return T(a.first + b.first, a.second\
     \ + b.second); };\n  T g(T a, E b) { return T(b * a.second, a.second); };\n  E\
-    \ h(E, E b) { return b; };\n  T ti = P(0, 0);\n  E ei = UNUSED_VALUE;\n  vector<T>\
+    \ h(E, E b) { return b; };\n  T ti = T(0, 0);\n  E ei = UNUSED_VALUE;\n  vector<T>\
     \ dat;\n  vector<E> laz;\n\n  UpdateSum_LazySegmentTree(const vector<E> &v) {\
     \ build(v); }\n\n  void init(int n_) {\n    n = 1;\n    height = 0;\n    while\
     \ (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2 *\
@@ -227,8 +227,8 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
 layout: document

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
   - icon: ':question:'
@@ -181,50 +181,49 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"prime/prime-enumerate.hpp\"\n\n\n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17,\
-    \ ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N / 3 + 1,\
-    \ 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d = 6 - d,\
-    \ i++) {\n    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r = d * p\
-    \ / 3 + (d * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n      \
-    \   q < qe; q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2, 3};\n\
-    \  for (int p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i])\
-    \ ret.push_back(p);\n  while (!ret.empty() && ret.back() > N) ret.pop_back();\n\
-    \  return ret;\n}\n#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic\
-    \ constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0,\
-    \ por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n\
-    \    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3;\
-    \ j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n \
-    \     }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
-    \ ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ -\
-    \ pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1,\
-    \ por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c = ibuf[pil++]; }\n\
-    template <typename T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n\
-    \  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n  bool minus = 0;\n\
-    \  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n  }\n  x = 0;\n  while\
-    \ (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if (minus)\
-    \ x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\n\
-    inline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\n\
-    inline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline void\
-    \ wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n\
-    \    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n  }\n\
-    \  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num\
-    \ + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n\
-    \    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n      uint32_t\
-    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
-    \     obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x\
-    \ << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num\
-    \ + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i +\
-    \ 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename\
-    \ Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n  wt(head);\n\
-    \  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n  wt(x, '\\\
-    n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
-    \ fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n#line 6 \"\
-    verify/verify-yosupo-math/yosupo-prime-table.test.cpp\"\n\nusing namespace Nyaan;\
-    \ void Nyaan::solve() {\n  int N, A, B;\n  rd(N, A, B);\n  auto sieve = prime_enumerate(N);\n\
-    \  int x = (sz(sieve) + A - B - 1) / A;\n  wt(sz(sieve));\n  wt(' ');\n  wt(x);\n\
-    \  wt('\\n');\n  rep(i, x) {\n    if (i) wt(' ');\n    wt(sieve[i * A + B]);\n\
-    \  }\n  wt('\\n');\n}\n"
+    \ 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\n\
+    vector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N / 3 + 1, 1);\n  for\
+    \ (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d = 6 - d, i++) {\n\
+    \    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r = d * p / 3 + (d\
+    \ * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n         q < qe;\
+    \ q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2, 3};\n  for (int\
+    \ p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i]) ret.push_back(p);\n\
+    \  while (!ret.empty() && ret.back() > N) ret.pop_back();\n  return ret;\n}\n\
+    #line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr int SZ\
+    \ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct\
+    \ Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0;\
+    \ i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n\
+    \        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n\
+    } constexpr pre;\n\ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n\
+    \  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil\
+    \ = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n\
+    }\n\ninline void rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename T>\ninline\
+    \ void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n\
+    \  while (c < '-');\n  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n  \
+    \  c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c\
+    \ & 15);\n    c = ibuf[pil++];\n  }\n  if (minus) x = -x;\n}\ninline void rd()\
+    \ {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head, Tail&...\
+    \ tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) { obuf[por++]\
+    \ = c; }\ntemplate <typename T>\ninline void wt(T x) {\n  if (por > SZ - 32) flush();\n\
+    \  if (!x) {\n    obuf[por++] = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++]\
+    \ = '-';\n    x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000)\
+    \ {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n   \
+    \ i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n\
+    \    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r\
+    \ = uint32_t(x) - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1]\
+    \ = '0' + r;\n      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 6 \"verify/verify-yosupo-math/yosupo-prime-table.test.cpp\"\n\nusing namespace\
+    \ Nyaan; void Nyaan::solve() {\n  int N, A, B;\n  rd(N, A, B);\n  auto sieve =\
+    \ prime_enumerate(N);\n  int x = (sz(sieve) + A - B - 1) / A;\n  wt(sz(sieve));\n\
+    \  wt(' ');\n  wt(x);\n  wt('\\n');\n  rep(i, x) {\n    if (i) wt(' ');\n    wt(sieve[i\
+    \ * A + B]);\n  }\n  wt('\\n');\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n\n\
     #include \"../../template/template.hpp\"\n#include \"../../prime/prime-enumerate.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
@@ -244,7 +243,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-prime-table.test.cpp

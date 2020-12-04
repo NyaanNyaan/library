@@ -3,25 +3,25 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"segment-tree/range-update-range-sum-lazyseg.hpp\"\n\n\n\n\
-    template <typename E, E UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree {\n  int\
-    \ n, height;\n  using T = pair<E, E>;\n  T f(T a, T b) { return T(a.first + b.first,\
-    \ a.second + b.second); };\n  T g(T a, E b) { return T(b * a.second, a.second);\
-    \ };\n  E h(E, E b) { return b; };\n  T ti = P(0, 0);\n  E ei = UNUSED_VALUE;\n\
-    \  vector<T> dat;\n  vector<E> laz;\n\n  UpdateSum_LazySegmentTree(const vector<E>\
-    \ &v) { build(v); }\n\n  void init(int n_) {\n    n = 1;\n    height = 0;\n  \
-    \  while (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2\
-    \ * n, ei);\n  }\n\n  void build(const vector<E> &v) {\n    int n_ = v.size();\n\
+  bundledCode: "#line 2 \"segment-tree/range-update-range-sum-lazyseg.hpp\"\n\ntemplate\
+    \ <typename E, E UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree {\n  int n, height;\n\
+    \  using T = pair<E, E>;\n  T f(T a, T b) { return T(a.first + b.first, a.second\
+    \ + b.second); };\n  T g(T a, E b) { return T(b * a.second, a.second); };\n  E\
+    \ h(E, E b) { return b; };\n  T ti = T(0, 0);\n  E ei = UNUSED_VALUE;\n  vector<T>\
+    \ dat;\n  vector<E> laz;\n\n  UpdateSum_LazySegmentTree(const vector<E> &v) {\
+    \ build(v); }\n\n  void init(int n_) {\n    n = 1;\n    height = 0;\n    while\
+    \ (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2 *\
+    \ n, ei);\n  }\n\n  void build(const vector<E> &v) {\n    int n_ = v.size();\n\
     \    init(n_);\n    for (int i = 0; i < n_; i++) dat[n + i] = T(v[i], 1);\n  \
     \  for (int i = n - 1; i; i--)\n      dat[i] = f(dat[(i << 1) | 0], dat[(i <<\
     \ 1) | 1]);\n  }\n\n  inline T reflect(int k) { return laz[k] == ei ? dat[k] :\
@@ -41,10 +41,10 @@ data:
     \ r = b + 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) vl = f(vl, reflect(l++));\n\
     \      if (r & 1) vr = f(reflect(--r), vr);\n    }\n    return f(vl, vr).first;\n\
     \  }\n};\n"
-  code: "#pragma once\n\n\n\ntemplate <typename E, E UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree\
+  code: "#pragma once\n\ntemplate <typename E, E UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree\
     \ {\n  int n, height;\n  using T = pair<E, E>;\n  T f(T a, T b) { return T(a.first\
     \ + b.first, a.second + b.second); };\n  T g(T a, E b) { return T(b * a.second,\
-    \ a.second); };\n  E h(E, E b) { return b; };\n  T ti = P(0, 0);\n  E ei = UNUSED_VALUE;\n\
+    \ a.second); };\n  E h(E, E b) { return b; };\n  T ti = T(0, 0);\n  E ei = UNUSED_VALUE;\n\
     \  vector<T> dat;\n  vector<E> laz;\n\n  UpdateSum_LazySegmentTree(const vector<E>\
     \ &v) { build(v); }\n\n  void init(int n_) {\n    n = 1;\n    height = 0;\n  \
     \  while (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2\
@@ -72,8 +72,8 @@ data:
   isVerificationFile: false
   path: segment-tree/range-update-range-sum-lazyseg.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp

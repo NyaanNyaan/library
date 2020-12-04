@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: data-structure/dynamic-binary-indexed-tree.hpp
     title: "\u52D5\u7684Binary Indexed Tree"
-  - icon: ':x:'
+  - icon: ':question:'
     path: data-structure/hash-map-variable-length.hpp
     title: "Hash Map(\u53EF\u5909\u9577\u7248)"
   _extendedRequiredBy: []

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
   - icon: ':question:'
@@ -236,21 +236,22 @@ data:
     \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
     \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
     \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
-    \ v) {\n  vi ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur, int par\
-    \ = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n      end = 1;\n\
-    \      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst == par) continue;\n\
-    \      rec(rec, dst, cur);\n      if (end) return;\n    }\n    if (end) return;\n\
-    \    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n}\n#line 2 \"shortest-path/dijkstra.hpp\"\
-    \n\n\n\n#line 6 \"shortest-path/dijkstra.hpp\"\n\n// unreachable -> -1\ntemplate\
-    \ <typename T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start = 0) {\n  using\
-    \ P = pair<T, int>;\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  priority_queue<P,\
-    \ vector<P>, greater<P> > Q;\n  d[start] = 0;\n  Q.emplace(0, start);\n  while\
-    \ (!Q.empty()) {\n    P p = Q.top();\n    Q.pop();\n    int cur = p.second;\n\
-    \    if (d[cur] < p.first) continue;\n    for (auto dst : g[cur]) {\n      if\
-    \ (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
-    \ dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n    }\n  }\n  return d;\n\
-    }\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n\
-    **/\n#line 2 \"shortest-path/restore-shortest-path.hpp\"\n\n\n\n#line 6 \"shortest-path/restore-shortest-path.hpp\"\
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n#line 2 \"shortest-path/dijkstra.hpp\"\n\n\n\n#line 6 \"shortest-path/dijkstra.hpp\"\
+    \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T>\
+    \ &g, int start = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n\
+    \  vector<T> d(N, T(-1));\n  priority_queue<P, vector<P>, greater<P> > Q;\n  d[start]\
+    \ = 0;\n  Q.emplace(0, start);\n  while (!Q.empty()) {\n    P p = Q.top();\n \
+    \   Q.pop();\n    int cur = p.second;\n    if (d[cur] < p.first) continue;\n \
+    \   for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost\
+    \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.emplace(d[dst],\
+    \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\
+    \u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n**/\n#line\
+    \ 2 \"shortest-path/restore-shortest-path.hpp\"\n\n\n\n#line 6 \"shortest-path/restore-shortest-path.hpp\"\
     \n\n// restore shortest path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
     \ &g, vector<T> &d, int S,\n                                  int G) {\n  int\
     \ N = g.size();\n  WeightedGraph<T> rev(g.size());\n  for (int i = 0; i < N; i++)\n\
@@ -286,7 +287,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
   - icon: ':question:'
@@ -233,24 +233,24 @@ data:
     \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
     \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
     \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
-    \ v) {\n  vi ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur, int par\
-    \ = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n      end = 1;\n\
-    \      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst == par) continue;\n\
-    \      rec(rec, dst, cur);\n      if (end) return;\n    }\n    if (end) return;\n\
-    \    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n}\n#line 2 \"graph/strongly-connected-components.hpp\"\
-    \n\n#line 4 \"graph/strongly-connected-components.hpp\"\n\n// Strongly Connected\
-    \ Components\n// DAG of SC graph   ... scc.dag (including multiedges)\n// new\
-    \ node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\ntemplate <typename\
-    \ G>\nstruct StronglyConnectedComponents {\n private:\n  const G &g;\n  vector<vector<int>>\
-    \ rg;\n  vector<int> comp, order;\n  vector<char> used;\n  vector<vector<int>>\
-    \ blng;\n\n public:\n  vector<vector<int>> dag;\n  StronglyConnectedComponents(G\
-    \ &g) : g(g), used(g.size(), 0) { build(); }\n\n  int operator[](int k) { return\
-    \ comp[k]; }\n\n  vector<int> &belong(int i) { return blng[i]; }\n\n private:\n\
-    \  void dfs(int idx) {\n    if (used[idx]) return;\n    used[idx] = true;\n  \
-    \  for (auto to : g[idx]) dfs(int(to));\n    order.push_back(idx);\n  }\n\n  void\
-    \ rdfs(int idx, int cnt) {\n    if (comp[idx] != -1) return;\n    comp[idx] =\
-    \ cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n  }\n\n  void build() {\n \
-    \   for (int i = 0; i < (int)g.size(); i++) dfs(i);\n    reverse(begin(order),\
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n#line 2 \"graph/strongly-connected-components.hpp\"\n\n#line 4 \"graph/strongly-connected-components.hpp\"\
+    \n\n// Strongly Connected Components\n// DAG of SC graph   ... scc.dag (including\
+    \ multiedges)\n// new node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\n\
+    template <typename G>\nstruct StronglyConnectedComponents {\n private:\n  const\
+    \ G &g;\n  vector<vector<int>> rg;\n  vector<int> comp, order;\n  vector<char>\
+    \ used;\n  vector<vector<int>> blng;\n\n public:\n  vector<vector<int>> dag;\n\
+    \  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }\n\n\
+    \  int operator[](int k) { return comp[k]; }\n\n  vector<int> &belong(int i) {\
+    \ return blng[i]; }\n\n private:\n  void dfs(int idx) {\n    if (used[idx]) return;\n\
+    \    used[idx] = true;\n    for (auto to : g[idx]) dfs(int(to));\n    order.push_back(idx);\n\
+    \  }\n\n  void rdfs(int idx, int cnt) {\n    if (comp[idx] != -1) return;\n  \
+    \  comp[idx] = cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n  }\n\n  void\
+    \ build() {\n    for (int i = 0; i < (int)g.size(); i++) dfs(i);\n    reverse(begin(order),\
     \ end(order));\n    used.clear();\n    used.shrink_to_fit();\n\n    comp.resize(g.size(),\
     \ -1);\n\n    rg.resize(g.size());\n    for (int i = 0; i < (int)g.size(); i++)\
     \ {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n      }\n\
@@ -284,7 +284,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/elementary-function.hpp
     title: math/elementary-function.hpp
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A
@@ -224,13 +224,13 @@ data:
     \ = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}\n#line\
     \ 6 \"verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp\"\n\nusing namespace Nyaan; void\
     \ Nyaan::solve() {\n  ini(N);\n  auto factor = PrimeFactors(N);\n  vi ans;\n \
-    \ each(p,factor) rep(_,p.second)ans.pb(p.first);\n  cout << N << \":\";\n  each(x,ans)cout<<\
-    \ \" \" << x;\n  cout << endl;\n}\n"
+    \ each(p,factor) rep(_,p.second)ans.push_back(p.first);\n  cout << N << \":\"\
+    ;\n  each(x,ans)cout<< \" \" << x;\n  cout << endl;\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_A\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../math/elementary-function.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  auto factor = PrimeFactors(N);\n\
-    \  vi ans;\n  each(p,factor) rep(_,p.second)ans.pb(p.first);\n  cout << N << \"\
-    :\";\n  each(x,ans)cout<< \" \" << x;\n  cout << endl;\n}"
+    \  vi ans;\n  each(p,factor) rep(_,p.second)ans.push_back(p.first);\n  cout <<\
+    \ N << \":\";\n  each(x,ans)cout<< \" \" << x;\n  cout << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -242,8 +242,8 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
 layout: document

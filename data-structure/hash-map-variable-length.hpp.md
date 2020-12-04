@@ -11,11 +11,11 @@ data:
   - icon: ':x:'
     path: modulo/mod-log.hpp
     title: modulo/mod-log.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/dynamic-li-chao-tree.hpp
     title: segment-tree/dynamic-li-chao-tree.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
   - icon: ':x:'
@@ -28,7 +28,7 @@ data:
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/data-structure/hash-map.md
     document_title: "Hash Map(\u53EF\u5909\u9577\u7248)"
@@ -103,7 +103,7 @@ data:
   - segment-tree/dynamic-li-chao-tree.hpp
   - data-structure/dynamic-binary-indexed-tree.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp

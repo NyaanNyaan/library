@@ -178,11 +178,11 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"prime/prime-sieve.hpp\"\n\n\n\n// Prime -> {0, 0, 1, 1, 0, 1, 0, 1, ...}\n\
-    vector<bool> prime_sieve(int N) {\n  vector<bool> sieve(max(1, N) + 1, 1);\n \
-    \ sieve[0] = sieve[1] = false;\n  for (int i = 2; i * i <= N; i++)\n    if (sieve[i]\
-    \ == true)\n      for (int j = i * i; j <= N; j += i) sieve[j] = false;\n  return\
-    \ sieve;\n}\n#line 5 \"verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp\"\
+    \ 2 \"prime/prime-sieve.hpp\"\n\n// Prime -> {0, 0, 1, 1, 0, 1, 0, 1, ...}\nvector<bool>\
+    \ prime_sieve(int N) {\n  vector<bool> sieve(max(1, N) + 1, 1);\n  sieve[0] =\
+    \ sieve[1] = false;\n  for (int i = 2; i * i <= N; i++)\n    if (sieve[i] == true)\n\
+    \      for (int j = i * i; j <= N; j += i) sieve[j] = false;\n  return sieve;\n\
+    }\n#line 5 \"verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() { \n  ini(N, A, B); \n  auto sieve\
     \ = prime_sieve(N);\n  vi ans;\n  int cnt = 0;\n  for(int i = 0, j = 0; i <= N;\
     \ ++i){\n    if(sieve[i]){\n      if(j == B) ans.push_back(i);\n      if(++j ==\
@@ -204,7 +204,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp

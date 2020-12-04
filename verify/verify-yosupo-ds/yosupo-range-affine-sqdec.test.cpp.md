@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: data-structure/square-root-decomposition.hpp
     title: "\u5E73\u65B9\u5206\u5272"
-  - icon: ':x:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':question:'

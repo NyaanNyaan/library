@@ -196,7 +196,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"prime/fast-factorize.hpp\"\n\n\n\n#line 2 \"inner/inner_math.hpp\"\n\nnamespace\
+    \ 2 \"prime/fast-factorize.hpp\"\n\n#line 2 \"inner/inner_math.hpp\"\n\nnamespace\
     \ inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 = int64_t;\n\
     using u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n  while (b)\
     \ swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT inv(T a, T p) {\n\
@@ -285,7 +285,7 @@ data:
     \  return (is);\n  }\n\n  mint inverse() const { return pow(mod - 2); }\n\n  u64\
     \ get() const {\n    u64 ret = reduce(a);\n    return ret >= mod ? ret - mod :\
     \ ret;\n  }\n\n  static u64 get_mod() { return mod; }\n};\ntypename montgomery64::u64\
-    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 9 \"prime/fast-factorize.hpp\"\
+    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 7 \"prime/fast-factorize.hpp\"\
     \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
     bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
     \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
@@ -323,14 +323,14 @@ data:
     \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
     using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
-    \ docs/prime/fast-factorize.md\n */\n#line 2 \"prime/osak.hpp\"\n\n\n\n#line 2\
-    \ \"prime/factor-enumerate.hpp\"\n\n\n\nvector<int> factor_enumerate(int N) {\n\
-    \  vector<int> lp(N + 1, 0);\n  if (N < 2) return lp;\n  vector<int> pr{2, 3};\n\
-    \  for (int i = 2; i <= N; i += 2) lp[i] = 2;\n  for (int i = 3; i <= N; i +=\
-    \ 6) lp[i] = 3;\n  for (int i = 5, d = 4; i <= N; i += d = 6 - d) {\n    if (lp[i]\
-    \ == 0) {\n      lp[i] = i;\n      pr.push_back(i);\n    }\n    for (int j = 2;\
-    \ j < (int)pr.size() && i * pr[j] <= N; ++j) {\n      lp[i * pr[j]] = pr[j];\n\
-    \      if (pr[j] == lp[i]) break;\n    }\n  }\n  return lp;\n}\n#line 6 \"prime/osak.hpp\"\
+    \ docs/prime/fast-factorize.md\n */\n#line 2 \"prime/osak.hpp\"\n\n#line 2 \"\
+    prime/factor-enumerate.hpp\"\n\nvector<int> factor_enumerate(int N) {\n  vector<int>\
+    \ lp(N + 1, 0);\n  if (N < 2) return lp;\n  vector<int> pr{2, 3};\n  for (int\
+    \ i = 2; i <= N; i += 2) lp[i] = 2;\n  for (int i = 3; i <= N; i += 6) lp[i] =\
+    \ 3;\n  for (int i = 5, d = 4; i <= N; i += d = 6 - d) {\n    if (lp[i] == 0)\
+    \ {\n      lp[i] = i;\n      pr.push_back(i);\n    }\n    for (int j = 2; j <\
+    \ (int)pr.size() && i * pr[j] <= N; ++j) {\n      lp[i * pr[j]] = pr[j];\n   \
+    \   if (pr[j] == lp[i]) break;\n    }\n  }\n  return lp;\n}\n#line 4 \"prime/osak.hpp\"\
     \n\ntemplate<int MAX>\nvector<int> osak(int n){\n  static vector<int> f = factor_enumerate(MAX);\n\
     \  vector<int> ret;\n  while(f[n]) ret.push_back(f[n]), n /= f[n];\n  return ret;\n\
     }\n#line 6 \"verify/verify-unit-test/factorize.test.cpp\"\n\nunsigned long long\
@@ -381,7 +381,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/factorize.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/factorize.test.cpp

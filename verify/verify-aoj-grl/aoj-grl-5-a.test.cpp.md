@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
   - icon: ':question:'
@@ -28,7 +28,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_A
@@ -230,14 +230,14 @@ data:
     \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
     \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
     \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
-    \ v) {\n  vi ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur, int par\
-    \ = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n      end = 1;\n\
-    \      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst == par) continue;\n\
-    \      rec(rec, dst, cur);\n      if (end) return;\n    }\n    if (end) return;\n\
-    \    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n}\n#line 6 \"verify/verify-aoj-grl/aoj-grl-5-a.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<int>(N,\
-    \ N-1, false, false);\n  auto diam = Diameter<int>(g);\n  out(diam.second);\n\
-    }\n"
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n#line 6 \"verify/verify-aoj-grl/aoj-grl-5-a.test.cpp\"\n\nusing namespace Nyaan;\
+    \ void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<int>(N, N-1, false, false);\n\
+    \  auto diam = Diameter<int>(g);\n  out(diam.second);\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_A\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../graph/graph-utility.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<int>(N,\
@@ -254,8 +254,8 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 08:35:39+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
 layout: document

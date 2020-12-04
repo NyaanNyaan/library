@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/elementary-function.hpp
     title: math/elementary-function.hpp
   - icon: ':question:'
