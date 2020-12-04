@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/polynomial_taylor_shift"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
@@ -13,7 +13,7 @@ using mint = LazyMontgomeryModInt<MOD9>;
 Binomial<mint> C(530000);
 using fps = FormalPowerSeries<mint>;
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, c;
   rd(N);
   rd(c);

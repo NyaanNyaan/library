@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 pair<vector<long long>, vector<long long>> pi_table(long long N) {
   using i64 = long long;

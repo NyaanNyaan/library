@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../shortest-path/dijkstra-with-restore.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, M, s, t;
   rd(N, M, s, t);
 

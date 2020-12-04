@@ -1,6 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/215"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../fps/arbitrary-fps.hpp"
 #include "../../modint/montgomery-modint.hpp"
 using mint = LazyMontgomeryModInt<1000000007>;
@@ -10,7 +10,7 @@ using fps = FormalPowerSeries<mint>;
 
 #include "../../fps/nth-term.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   inl(N, P, C);
   vl s{2, 3, 5, 7, 11, 13};
   vl t{4, 6, 8, 9, 10, 12};

@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 vector<int> factor_enumerate(int N) {
   vector<int> lp(N + 1, 0);

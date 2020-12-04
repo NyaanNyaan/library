@@ -1,6 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1303"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/union-find.hpp"
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../matrix/matrix-tree.hpp"
@@ -15,7 +15,7 @@ Binomial<mint> C;
 
 int a[111][111];
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, M);
   UnionFind uf(N);
   rep(i, M) {

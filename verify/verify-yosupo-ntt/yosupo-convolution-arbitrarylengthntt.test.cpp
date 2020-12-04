@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../ntt/cooley-turkey-ntt.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   ArbitraryLengthNTT<mint> ntt(7 * 17 * (1 << 14));
   int N, M;

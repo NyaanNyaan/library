@@ -1,9 +1,9 @@
 #define PROBLEM "https://yukicoder.me/problems/no/875"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../segment-tree/segment-tree.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, Q);
   vi a(N);
   in(a);

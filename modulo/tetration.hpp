@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 template <typename T = uint32_t, typename U = uint64_t, T MAX = 1000000000>
 T tetration(uint64_t a, uint64_t b, uint64_t m) {

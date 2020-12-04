@@ -1,7 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../fps/formal-power-series.hpp"
 #include "../../fps/fps-composition.hpp"
 #include "../../fps/ntt-friendly-fps.hpp"
@@ -9,7 +9,7 @@
 #include "../../modint/montgomery-modint.hpp"
 #include "../../modulo/binomial.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   using fps = FormalPowerSeries<mint>;
   auto C = Binomial<mint>(8192);

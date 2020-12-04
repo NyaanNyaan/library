@@ -1,10 +1,11 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_C"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../string/rolling-hash-2d.hpp"
 
-void solve() {
+using namespace Nyaan;
+void Nyaan::solve() {
   ini(H, W);
   vs S(H);
   in(S);

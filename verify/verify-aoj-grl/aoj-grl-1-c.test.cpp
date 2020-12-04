@@ -1,10 +1,10 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../shortest-path/warshall-floyd.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, E);
   auto d = adjgraph<ll>(N, E, infLL, true, true, false);
   warshall_floyd(d);

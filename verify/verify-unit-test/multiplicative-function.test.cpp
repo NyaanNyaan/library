@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../misc/rng.hpp"
 #include "../../modint/montgomery-modint.hpp"
 using mint = LazyMontgomeryModInt<998244353>;
@@ -34,7 +34,7 @@ void test() {
 
 }
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   test();
   trc("test OK");
   int a, b;

@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/rollback-union-find.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, Q;
   rd(N, Q);
   vi ans(Q + 1, -1);

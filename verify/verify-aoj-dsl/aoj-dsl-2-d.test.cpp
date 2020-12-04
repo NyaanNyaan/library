@@ -1,10 +1,10 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../segment-tree/range-update-range-sum-lazyseg.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, Q);
   int I = (1LL << 31) - 1;
   UpdateSum_LazySegmentTree<ll, infLL> seg{vl(N, I)};

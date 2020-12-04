@@ -1,12 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../segment-tree/lazy-segment-tree.hpp"
 
 using mint = LazyMontgomeryModInt<998244353>;
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using P = pair<mint, mint>;
   auto f = [](P a, P b) { return P{a.first + b.first, a.second + b.second}; };
   auto g = [](P a, P b) {

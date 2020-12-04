@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 template <typename T, int MAX_LOG, int NODES = 16777216>
 struct BinaryTrie {

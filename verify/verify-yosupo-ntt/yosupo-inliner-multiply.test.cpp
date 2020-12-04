@@ -2,7 +2,7 @@
 
 #include <immintrin.h>
 //
-#include <bits/stdc++.h>
+
 
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"

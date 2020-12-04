@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include <bits/stdc++.h>
-using namespace std;
+
+#include "../../template/template.hpp"
+
 
 #include "../../hashmap/hashset.hpp"
 uint64_t rng() {
@@ -192,7 +193,7 @@ void unit_test() {
 
 }  // namespace HashSetTest
 
-int main() {
+void Nyaan::solve() {
   HashSetTest::unit_test<int>();
   HashSetTest::unit_test<int64_t>();
   HashSetTest::unit_test<pair<int,int>>();

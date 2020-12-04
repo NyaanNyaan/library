@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../graph/graph-utility.hpp"
 #include "../../graph/strongly-connected-components.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, M);
   auto g = graph(N, M, true, false);
   StronglyConnectedComponents<vvi> scc(g);

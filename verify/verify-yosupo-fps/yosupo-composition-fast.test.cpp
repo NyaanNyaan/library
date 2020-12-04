@@ -1,14 +1,14 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../fps/formal-power-series.hpp"
 #include "../../fps/fps-composition-fast.hpp"
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   using fps = FormalPowerSeries<mint>;
   int N;

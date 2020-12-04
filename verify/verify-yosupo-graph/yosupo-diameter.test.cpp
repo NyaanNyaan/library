@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../graph/graph-utility.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N);
   auto g = wgraph<ll>(N, N - 1, false, false);
   auto diam = Diameter<ll>(g);

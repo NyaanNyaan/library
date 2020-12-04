@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "../inner/inner_math.hpp"
 #include "../modint/arbitrary-prime-modint.hpp"

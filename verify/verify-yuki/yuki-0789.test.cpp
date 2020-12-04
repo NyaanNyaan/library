@@ -1,9 +1,9 @@
 #define PROBLEM "https://yukicoder.me/problems/no/789"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../segment-tree/dynamic-segment-tree.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N);
   auto f = [](ll a, ll b) { return a + b; };
   DynamicSegmentTree<ll, decltype(f)> seg(-100, inf, f, 0);

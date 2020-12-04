@@ -1,10 +1,10 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure-2d/2d-cumulative-sum.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N);
   int L = 1000;
   CumulativeSum2D<int> ruiseki(L, L);

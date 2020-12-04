@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "berlekamp-massey.hpp"
 #include "kitamasa.hpp"

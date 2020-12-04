@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "../ntt/ntt-avx2.hpp"
 #include "./formal-power-series.hpp"

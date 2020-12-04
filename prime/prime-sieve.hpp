@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 // Prime -> {0, 0, 1, 1, 0, 1, 0, 1, ...}
 vector<bool> prime_sieve(int N) {

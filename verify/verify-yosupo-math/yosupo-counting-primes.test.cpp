@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/counting_primes"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../multiplicative-function/prime-counting.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   inl(N);
   out(prime_counting(N));
 }

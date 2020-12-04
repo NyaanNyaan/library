@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../math/two-sat.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ins(p, cnf);
   ini(N, M);
   TwoSAT sat(N);

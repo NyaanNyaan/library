@@ -1,9 +1,9 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1170"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/range-union-find.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   inl(N, A, B);
   vl x(N);
   in(x);

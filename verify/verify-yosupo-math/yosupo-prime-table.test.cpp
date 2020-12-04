@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_primes"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../prime/prime-enumerate.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, A, B;
   rd(N, A, B);
   auto sieve = prime_enumerate(N);

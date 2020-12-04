@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 long long my_gcd(long long x, long long y) {
   long long z;

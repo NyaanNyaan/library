@@ -1,6 +1,5 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
 #include "./graph-template.hpp"
 
 template <typename G>

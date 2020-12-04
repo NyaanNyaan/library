@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/set_xor_min"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/binary-trie.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(Q);
   BinaryTrie<int, 30> trie;
   rep(_, Q) {

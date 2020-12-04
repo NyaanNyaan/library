@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sum_of_floor_of_linear"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../math/sum_of_floor.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(T);
   rep(_, T) {
     inl(N, M, A, B);

@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(a, b);
   out(a + b);
 }

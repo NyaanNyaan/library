@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "../modint/montgomery-modint.hpp"
 #include "./ntt-avx2.hpp"

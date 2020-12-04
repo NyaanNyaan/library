@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/segment_add_get_min"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../segment-tree/dynamic-li-chao-tree.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, Q);
   DynamicLiChaoTree<ll, infLL> lichao(-1001001001, 1001001001);
   rep(i, N) {

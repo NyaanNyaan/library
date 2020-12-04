@@ -1,7 +1,7 @@
 #pragma once
-#include <bits/stdc++.h>
+
 #include <immintrin.h>
-using namespace std;
+
 
 struct bit_vector {
   using u32 = uint32_t;

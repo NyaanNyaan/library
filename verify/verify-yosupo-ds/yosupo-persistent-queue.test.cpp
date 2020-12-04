@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_queue"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/persistent-queue.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   PersistentQueue<int> Q;
   ini(q);
   vi roots(q + 1);

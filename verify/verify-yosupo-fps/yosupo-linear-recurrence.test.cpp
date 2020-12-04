@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../fps/berlekamp-massey.hpp"
 #include "misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   int N;
   rd(N);

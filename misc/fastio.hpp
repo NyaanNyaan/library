@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 namespace fastio {
 static constexpr int SZ = 1 << 17;

@@ -1,8 +1,8 @@
 #pragma once
 #include <immintrin.h>
 //
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "../fps/formal-power-series.hpp"
 #include "../modint/montgomery-modint.hpp"

@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 template <int m>
 vector<int> max_independent_set(const vector<vector<int>> &g) {

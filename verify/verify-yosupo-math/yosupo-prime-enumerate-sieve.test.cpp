@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_primes"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../prime/prime-sieve.hpp"
 
-void solve() { 
+using namespace Nyaan; void Nyaan::solve() { 
   ini(N, A, B); 
   auto sieve = prime_sieve(N);
   vi ans;

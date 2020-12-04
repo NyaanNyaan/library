@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../atcoder/scc.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, M);
   scc_graph scc(N);
   rep(_,M) {

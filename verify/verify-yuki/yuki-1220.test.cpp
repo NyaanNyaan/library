@@ -1,9 +1,9 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1220"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../math/float-binomial.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   FloatBinomial C(200200);
   ini(Q);
   rep(_, Q) {

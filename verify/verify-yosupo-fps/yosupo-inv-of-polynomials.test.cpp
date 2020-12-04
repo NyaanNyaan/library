@@ -1,9 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/inv_of_polynomials"
 
+#include "../../template/template.hpp"
 #include <immintrin.h>
 //
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "../../misc/fastio.hpp"
 //
@@ -11,7 +12,7 @@ using namespace std;
 #include "../../fps/polynomial-gcd.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
-int main() {
+void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   using fps = FormalPowerSeries<mint>;
   int N, M;

@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "matrix.hpp"
 #include "polynomial-matrix-determinant.hpp"

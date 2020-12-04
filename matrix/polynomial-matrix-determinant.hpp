@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "../fps/formal-power-series.hpp"
 #include "../fps/polynomial-interpolation.hpp"

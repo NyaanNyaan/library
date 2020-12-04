@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../graph/graph-utility.hpp"
 #include "../../shortest-path/dijkstra.hpp"
 #include "../../shortest-path/restore-shortest-path.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, M, S, T);
   auto g = wgraph<ll>(N, M, true, false);
   auto d = dijkstra<ll>(g, S);

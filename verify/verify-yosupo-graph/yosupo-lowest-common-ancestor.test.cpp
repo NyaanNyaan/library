@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../graph/graph-utility.hpp"
 #include "../../tree/heavy-light-decomposition.hpp"
 
-void solve(){
+using namespace Nyaan; void Nyaan::solve(){
   ini(N,Q);
   vvi g(N);
   rep1(i,N-1){

@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 // Don't Forget to call build() !!!!!
 template <class T>

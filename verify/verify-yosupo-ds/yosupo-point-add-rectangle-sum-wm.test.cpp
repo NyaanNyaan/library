@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   WaveletMatrix<int, ll> wm;
 
   int N, Q;

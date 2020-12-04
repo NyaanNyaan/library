@@ -1,12 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-#include <bits/stdc++.h>
-using namespace std;
-
+#include "../../template/template.hpp"
+//
 #include "../../misc/doubling.hpp"
 #include "../../misc/fastio.hpp"
 
-int main() {
+void Nyaan::solve() {
   int N, Q;
   rd(N, Q);
   Doubling<int> db(N, N, 0);

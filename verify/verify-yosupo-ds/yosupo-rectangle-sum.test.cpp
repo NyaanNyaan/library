@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/rectangle_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure-2d/rectangle-sum.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, Q);
   vl xs(N), ys(N), ws(N);
   in3(xs, ys, ws);

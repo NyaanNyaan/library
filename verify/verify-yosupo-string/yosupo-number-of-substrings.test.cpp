@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/number_of_substrings"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../string/suffix-array.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ins(S);
   SuffixArray sa(S);
   LCPArray lcp(sa);

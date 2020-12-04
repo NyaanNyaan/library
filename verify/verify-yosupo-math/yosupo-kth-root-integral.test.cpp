@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/kth_root_integer"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../math/kth-root-integral.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int T;
   uint64_t A, K;
   rd(T);

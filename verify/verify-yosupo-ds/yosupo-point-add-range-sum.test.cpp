@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/binary-indexed-tree.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, Q);
   vl a(N);
   in(a);

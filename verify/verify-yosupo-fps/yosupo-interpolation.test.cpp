@@ -1,12 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/polynomial_interpolation"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../fps/multipoint-evaluation.hpp"
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../fps/polynomial-interpolation.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   using fps = FormalPowerSeries<mint>;
   int N;

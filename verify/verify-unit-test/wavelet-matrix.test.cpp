@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include <bits/stdc++.h>
+
 
 #include "../../data-structure-2d/wavelet-matrix.hpp"
 

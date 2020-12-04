@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 // LazySegmentTree
 template <typename T, typename E, typename F, typename G, typename H>

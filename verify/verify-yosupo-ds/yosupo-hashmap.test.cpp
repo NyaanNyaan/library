@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../hashmap/hashmap.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   HashMap<uint64_t, uint64_t> m;
   int Q;
   ll c, k, v;

@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sum_of_totient_function"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../multiplicative-function/sum-of-multiplicative-function.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   long long N;
   in(N);

@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../tree/euler-tour.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, Q;
   rd(N, Q);
   vvi g(N);

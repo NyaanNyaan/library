@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 // return dat | dat[i] := ( answer of range [i - K, i) )
 // T : data type

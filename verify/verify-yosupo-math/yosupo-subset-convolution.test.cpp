@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/subset_convolution"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../set-function/subset-convolution.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N;
   rd(N);
   using mint = LazyMontgomeryModInt<998244353>;

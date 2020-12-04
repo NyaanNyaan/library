@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 
 #include "../../graph/graph-template.hpp"
 
@@ -8,7 +8,7 @@
 
 #include "../../tree/frequency-table-of-tree-distance.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N;
   rd(N);
   vvi g(N);

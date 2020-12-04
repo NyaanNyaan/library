@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 template <int DIM, typename Data_t = long long>
 struct DimensionExpandedGraph {

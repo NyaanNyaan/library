@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tetration_mod"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../modulo/tetration.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int T;
   rd(T);
   rep(i, T) {

@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/slide-window-aggregation.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;
   using p = pair<mint, mint>;
   auto f = [](const p &a, const p &b) {

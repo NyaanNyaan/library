@@ -1,10 +1,10 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../shortest-path/bellman-ford.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, E, S);
   auto es = esgraph<int>(N, E, true, false);
   auto d = bellman_ford<int>(N, es, S);

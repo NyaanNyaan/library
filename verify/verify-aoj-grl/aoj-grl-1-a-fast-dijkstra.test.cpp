@@ -1,10 +1,10 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../shortest-path/dijkstra-fast.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, E, S);
   StaticGraph<int> g(N, E);
   rep(i, E) {

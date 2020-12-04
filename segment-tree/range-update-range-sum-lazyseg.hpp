@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 template <typename E, E UNUSED_VALUE>
 struct UpdateSum_LazySegmentTree {

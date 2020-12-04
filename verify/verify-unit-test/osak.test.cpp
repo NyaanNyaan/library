@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../prime/fast-factorize.hpp"
 #include "../../prime/osak.hpp"
 
@@ -13,7 +13,7 @@ unsigned long long rng2() {
   return x_ = x_ ^ (x_ >> 9);
 }
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int a, b;
   cin >> a >> b;
   cout << (a + b) << '\n';

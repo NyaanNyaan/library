@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 #include "./graph-template.hpp"
 #include "../data-structure/union-find.hpp"

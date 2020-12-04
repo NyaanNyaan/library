@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "../ntt/arbitrary-ntt.hpp"
 #include "./centroid-decomposition.hpp"

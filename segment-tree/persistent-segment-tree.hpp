@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 template <typename T, typename F, int NODES = 20000000>
 struct PersistentSegmentTree {

@@ -1,5 +1,5 @@
 #define PROBLEM "https://yukicoder.me/problems/no/215"
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../fps/arbitrary-fps.hpp"
 #include "../../fps/kitamasa.hpp"
 #include "../../modint/montgomery-modint.hpp"
@@ -10,7 +10,7 @@ using fps = FormalPowerSeries<mint>;
 mint dp[310][5050];
 mint ep[310][5050];
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   inl(N, P, C);
   vl s{2, 3, 5, 7, 11, 13};
   vl t{4, 6, 8, 9, 10, 12};

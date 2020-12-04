@@ -1,11 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../misc/compress.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../data-structure-2d/segment-tree-on-range-tree.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   auto f = [](ll a, ll b) { return a + b; };
 
   RangeTree<int, ll, decltype(f)> rtree(f, 0);

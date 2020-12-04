@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 uint64_t kth_root_integral(uint64_t a, uint64_t k) {
   if (a <= 1 || k == 1) return a;

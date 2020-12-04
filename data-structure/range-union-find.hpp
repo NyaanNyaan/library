@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 struct RangeUnionFind {
   vector<int> data, left, right;

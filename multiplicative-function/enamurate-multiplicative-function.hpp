@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 // f(n, p, c) : n = pow(p, c), f is multiplicative function
 template <typename mint, typename F>

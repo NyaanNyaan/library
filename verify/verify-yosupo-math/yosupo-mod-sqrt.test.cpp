@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_mod"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../modulo/mod-sqrt.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(T);
   rep(_, T) {
     inl(y, p);

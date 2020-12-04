@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../tree/cartesian-tree.hpp"
 
-void solve(){
+using namespace Nyaan; void Nyaan::solve(){
   ini(N);
   vl a(N);
   in(a);

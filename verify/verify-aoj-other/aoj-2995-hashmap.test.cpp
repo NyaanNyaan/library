@@ -1,12 +1,12 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2995"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/dynamic-union-find.hpp"
 #include "../../graph/static-graph.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../tree/dsu-on-tree.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, K;
   rd(N, K);
   StaticGraph<void> g(N, 2 * N - 2);

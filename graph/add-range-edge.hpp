@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 // do not forget setting graph_size !!
 struct RangeEdges {

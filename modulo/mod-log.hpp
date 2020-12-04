@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "../data-structure/hash-map-variable-length.hpp"
 #include "../inner/inner_math.hpp"

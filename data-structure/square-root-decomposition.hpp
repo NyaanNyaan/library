@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 template <typename MERGE, typename block, int B>
 struct SquareRootDecomposition {

@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 template <typename E, E INF>
 struct UpdateMin_LazySegmentTree {

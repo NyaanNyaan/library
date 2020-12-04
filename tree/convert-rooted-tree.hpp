@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 template <typename G>
 G convert_rooted_tree(const G& g, int root = 0, bool inverse = false) {

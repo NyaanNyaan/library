@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../ntt/ntt-avx2.hpp"
 
@@ -8,7 +8,7 @@ constexpr int MOD = 998244353;
 using mint = LazyMontgomeryModInt<MOD>;
 using vm = vector<mint>;
 
-__attribute__((target("avx2"))) void solve() {
+__attribute__((target("avx2"))) using namespace Nyaan; void Nyaan::solve() {
   NTT<mint> ntt;
   ini(N, M);
   vm a(N), b(M);

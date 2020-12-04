@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/square-root-decomposition.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
@@ -19,7 +19,7 @@ int N, Q;
 V<affine> a;
 affine id = {1, 0};
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   in(N, Q);
   a.resize(N);
   rep(i, N) in(a[i].a, a[i].b);

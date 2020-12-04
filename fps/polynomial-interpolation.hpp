@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 #include "./formal-power-series.hpp"
 #include "./multipoint-evaluation.hpp"

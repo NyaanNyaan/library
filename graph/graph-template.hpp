@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 template <typename T>
 struct edge {
@@ -50,8 +48,8 @@ WeightedGraph<T> wgraph(int N, int M = -1, bool is_directed = false,
     T c;
     cin >> c;
     if (is_1origin) x--, y--;
-    g[x].eb(x, y, c);
-    if (!is_directed) g[y].eb(y, x, c);
+    g[x].emplace_back(x, y, c);
+    if (!is_directed) g[y].emplace_back(y, x, c);
   }
   return g;
 }

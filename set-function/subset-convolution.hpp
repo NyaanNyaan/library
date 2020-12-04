@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 template <typename mint>
 vector<mint> subset_convolution(const vector<mint>& a, const vector<mint>& b) {

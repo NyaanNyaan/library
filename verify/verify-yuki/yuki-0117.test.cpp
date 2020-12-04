@@ -1,11 +1,11 @@
 #define PROBLEM "https://yukicoder.me/problems/no/117"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../modulo/binomial.hpp"
 using mint = LazyMontgomeryModInt<1000000007>;
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   Binomial<mint> C;
   int Q;
   scanf("%d\n", &Q);

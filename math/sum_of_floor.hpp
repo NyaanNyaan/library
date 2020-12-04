@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 // sum_{0 <= i < N} (ai + b) // m
 template <typename T>

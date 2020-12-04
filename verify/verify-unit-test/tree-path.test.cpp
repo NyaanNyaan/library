@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../misc/rng.hpp"
 #include "../../tree/tree-query.hpp"
 
@@ -21,7 +21,7 @@ void test(vvi& g) {
   }
 }
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   for (int N : vi{2, 3, 4, 5, 10, 100, 300}) {
     vvi g(N);
     rep1(i, N - 1) g[randint(0, i)].push_back(i);

@@ -1,12 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure-2d/abstract-range-tree.hpp"
 #include "../../data-structure/binary-indexed-tree.hpp"
 #include "../../misc/compress.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using BIT = BinaryIndexedTree<ll>;
   auto nw = [](int n) { return new BIT(n); };
   auto add = [](BIT& bit, int i, ll a) { bit.add(i, a); };

@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/maximum_independent_set"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../graph/max-independent-set.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, M;
   rd(N, M);
   vector<vector<int>> g(N);

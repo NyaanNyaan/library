@@ -1,13 +1,13 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/binary-indexed-tree.hpp"
 #include "../../graph/static-graph.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../misc/rng.hpp"
 #include "../../tree/euler-tour.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, Q;
   rd(N, Q);
   vector<int> a(N);

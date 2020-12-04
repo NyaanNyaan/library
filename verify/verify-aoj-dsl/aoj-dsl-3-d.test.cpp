@@ -1,10 +1,10 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/sliding-window-minimum.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, L);
   vi a(N);
   in(a);

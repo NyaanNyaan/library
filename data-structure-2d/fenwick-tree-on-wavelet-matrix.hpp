@@ -1,8 +1,8 @@
 #include <immintrin.h>
 //
-#include <bits/stdc++.h>
 
-using namespace std;
+
+
 
 struct bit_vector {
   using u32 = uint32_t;

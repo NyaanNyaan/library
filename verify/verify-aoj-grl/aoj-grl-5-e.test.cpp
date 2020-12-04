@@ -1,12 +1,12 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../segment-tree/range-add-range-sum-lazyseg.hpp"
 #include "../../segment-tree/segment-tree.hpp"
 #include "../../tree/heavy-light-decomposition.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N);
   vvi g(N);
   rep(i, N) {

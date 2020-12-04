@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-#include <bits/stdc++.h>
-using namespace std;
 
+#include "../../template/template.hpp"
+//
 #include "../../hashmap/hashmap.hpp"
 
 namespace HashMapTest {
@@ -170,7 +170,7 @@ void test() {
 
 }  // namespace HashMapTest
 
-int main() {
+void Nyaan::solve() {
   HashMapTest::test<int, int>();
   HashMapTest::test<long long, int>();
   HashMapTest::test<pair<int, int>, int>();

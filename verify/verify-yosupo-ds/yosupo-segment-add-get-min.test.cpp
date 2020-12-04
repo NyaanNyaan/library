@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/segment_add_get_min"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../segment-tree/li-chao-tree.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, Q);
   vl a(N), b(N), l(N), r(N);
   in4(l, r, a, b);

@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 #include <immintrin.h>
 
 __attribute__((target("sse4.2"))) __attribute__((always_inline)) __m128i

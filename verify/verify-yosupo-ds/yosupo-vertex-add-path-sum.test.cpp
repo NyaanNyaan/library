@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../segment-tree/segment-tree.hpp"
 #include "../../tree/heavy-light-decomposition.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, Q);
   vl a(N);
   in(a);

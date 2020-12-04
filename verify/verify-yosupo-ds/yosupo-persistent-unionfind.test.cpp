@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/persistent-union-find.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N, Q);
   PersistentUnionFind uf(N);
   V<decltype(uf)::Node *> roots(Q + 1, nullptr);

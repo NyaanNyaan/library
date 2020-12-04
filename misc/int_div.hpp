@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 long long floor(long long a,long long b) {
   assert(b > 0);

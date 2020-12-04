@@ -1,12 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_inversions_query"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/binary-indexed-tree.hpp"
 #include "../../misc/compress.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../misc/mo.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, Q;
   rd(N);
   rd(Q);

@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 template <typename mint>
 vector<mint> BerlekampMassey(const vector<mint> &s) {

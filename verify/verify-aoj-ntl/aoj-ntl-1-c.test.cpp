@@ -1,10 +1,10 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_C"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../math/elementary-function.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N);
   ll ans = 1;
   rep(i, N) {

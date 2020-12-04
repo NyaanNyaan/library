@@ -1,9 +1,9 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sort_points_by_argument"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../geometry/integer-geometry.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   ini(N);
   Points ps(N);
   in(ps);

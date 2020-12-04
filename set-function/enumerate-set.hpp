@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 // enumerate x : x \subset b
 vector<int> enumerate_subset(int b) {

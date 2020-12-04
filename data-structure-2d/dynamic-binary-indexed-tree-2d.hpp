@@ -1,6 +1,4 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
 
 #include "../data-structure/dynamic-binary-indexed-tree.hpp"
 

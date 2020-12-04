@@ -1,12 +1,12 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1080"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../fps/arbitrary-fps.hpp"
 #include "../../fps/fps-circular.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../modulo/binomial.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<1000000009>;
   using fps = FormalPowerSeries<mint>;
   Binomial<mint> C(1001001);

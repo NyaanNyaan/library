@@ -1,12 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/hash-map-variable-length.hpp"
 #include "../../misc/fastio.hpp"
 
 HashMap<ll, ll> m;
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int Q;
   ll c, k, v;
   rd(Q);

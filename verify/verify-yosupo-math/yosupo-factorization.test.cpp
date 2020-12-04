@@ -1,10 +1,10 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../prime/fast-factorize.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int Q;
   rd(Q);
   rep(_, Q) {

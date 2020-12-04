@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/radix-heap.hpp"
 #include "../../misc/rng.hpp"
 
@@ -45,7 +45,7 @@ void test() {
   t(TEN(9), 13333, 0.7);
 }
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   test<int32_t, int64_t>();
   test<int64_t, int64_t>();
   test<uint32_t, int64_t>();

@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 #include "../modulo/binomial.hpp"
 #include "./formal-power-series.hpp"
 

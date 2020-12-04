@@ -1,12 +1,12 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../data-structure/hash-map-variable-length.hpp"
 #include "../../data-structure-2d/dynamic-binary-indexed-tree-2d.hpp"
 #include "../../misc/compress.hpp"
 #include "../../misc/fastio.hpp"
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   int N, Q;
   rd(N, Q);
   vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q), u(Q), v(Q);

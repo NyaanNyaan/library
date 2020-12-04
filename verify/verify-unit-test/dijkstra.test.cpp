@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
-#include "../../competitive-template.hpp"
+#include "../../template/template.hpp"
 #include "../../misc/rng.hpp"
 #include "../../shortest-path/dijkstra-fast.hpp"
 #include "../../shortest-path/dijkstra-radix-heap.hpp"
@@ -51,7 +51,7 @@ void test() {
   assert(d1 == d3);
 }
 
-void solve() {
+using namespace Nyaan; void Nyaan::solve() {
   test<1, 0, 100>();
   test<2, 0, 100>();
   test<2, 1, 100>();

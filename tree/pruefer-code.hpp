@@ -1,6 +1,6 @@
 #pragma once
-#include <bits/stdc++.h>
-using namespace std;
+
+
 
 // input: [c \in [0, n)] * (n-2), n>=3
 vector<vector<int>> pruefer_code(const vector<int>& code) {
