@@ -1,4 +1,5 @@
 #define each(x, v) for (auto&& x : v)
+#define each2(x, y, v) for (auto&& [x, y] : v)
 #define all(v) (v).begin(), (v).end()
 #define rep(i, N) for (long long i = 0; i < (long long)(N); i++)
 #define repr(i, N) for (long long i = (long long)(N)-1; i >= 0; i--)
@@ -10,7 +11,7 @@
 #define enm(i, val, vec)                                  \
   for (long long i = 0; i < (long long)(vec).size(); i++) \
     if (auto& val = vec[i]; false)                        \
-      ;                                                 \
+      ;                                                   \
     else
 
 #define ini(...)   \

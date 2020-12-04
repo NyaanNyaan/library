@@ -50,8 +50,9 @@ void dump(const T& t,
   cerr << "[ ";
   for (auto it = t.begin(); it != t.end();) {
     dump(*it);
-    cerr << (++it == t.end() ? " ]" : ", ");
+    cerr << (++it == t.end() ? "" : ", ");
   }
+  cerr << " ]";
 }
 
 template <typename T, typename U>
@@ -68,8 +69,9 @@ void dump(const pair<T*, int>& t) {
   cerr << "[ ";
   for (int i = 0; i < t.second; i++) {
     dump(t.first[i]);
-    cerr << (i == t.second - 1 ? " ]" : ", ");
+    cerr << (i == t.second - 1 ? "" : ", ");
   }
+  cerr << " ]";
 }
 
 void trace() { cerr << endl; }

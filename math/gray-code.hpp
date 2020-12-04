@@ -9,5 +9,5 @@ vector<int> gray_code(int n) {
 };
 
 /**
- * @brief グレイコード
+ * @brief Gray code
  */ 
