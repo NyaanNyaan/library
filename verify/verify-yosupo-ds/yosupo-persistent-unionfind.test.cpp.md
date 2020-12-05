@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/persistent-array.hpp
     title: "\u6C38\u7D9A\u914D\u5217"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/persistent-union-find.hpp
     title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
   - icon: ':question:'
@@ -28,7 +28,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
@@ -251,7 +251,7 @@ data:
   path: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
 layout: document

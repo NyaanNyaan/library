@@ -27,16 +27,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
-  - icon: ':x:'
-    path: verify/verify-unit-test/radix-heap.test.cpp
-    title: verify/verify-unit-test/radix-heap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - icon: ':x:'
@@ -106,7 +103,6 @@ data:
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
-  - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/osak.test.cpp
 documentation_of: misc/rng.hpp
 layout: document

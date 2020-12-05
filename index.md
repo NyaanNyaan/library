@@ -8,13 +8,13 @@ data:
       title: competitive-template.hpp
   - name: data-structure
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/binary-indexed-tree.hpp
       title: Binary Indexed Tree(Fenwick Tree)
     - icon: ':heavy_check_mark:'
       path: data-structure/binary-trie.hpp
       title: Binary Trie
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: "\u52D5\u7684Binary Indexed Tree"
     - icon: ':heavy_check_mark:'
@@ -23,13 +23,13 @@ data:
     - icon: ':question:'
       path: data-structure/hash-map-variable-length.hpp
       title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/persistent-array.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
     - icon: ':heavy_check_mark:'
       path: data-structure/persistent-queue.hpp
       title: data-structure/persistent-queue.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/persistent-union-find.hpp
       title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
     - icon: ':question:'
@@ -44,13 +44,13 @@ data:
     - icon: ':x:'
       path: data-structure/rollback-union-find.hpp
       title: "Rollback\u3064\u304DUnion Find"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/slide-window-aggregation.hpp
       title: data-structure/slide-window-aggregation.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure/sliding-window-minimum.hpp
       title: data-structure/sliding-window-minimum.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: data-structure/sparse-table.hpp
       title: data-structure/sparse-table.hpp
     - icon: ':x:'
@@ -70,28 +70,28 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/2d-cumulative-sum.hpp
       title: "\u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/abstract-range-tree.hpp
       title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
       title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
     - icon: ':warning:'
       path: data-structure-2d/dynamic-wavelet-matrix.hpp
       title: data-structure-2d/dynamic-wavelet-matrix.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
       title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/rectangle-sum.hpp
       title: "\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/segment-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Segment Tree)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/wavelet-matrix.hpp
       title: Wavelet Matrix
   - name: flow
@@ -289,7 +289,7 @@ data:
       title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   - name: misc
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
     - icon: ':x:'
@@ -304,7 +304,7 @@ data:
     - icon: ':warning:'
       path: misc/int_div.hpp
       title: misc/int_div.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
     - icon: ':question:'
@@ -460,10 +460,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/lazy-segment-tree.hpp
       title: segment-tree/lazy-segment-tree.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: segment-tree/li-chao-tree.hpp
       title: segment-tree/li-chao-tree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/persistent-segment-tree.hpp
       title: "\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
@@ -585,10 +585,10 @@ data:
     - icon: ':warning:'
       path: tree/convert-rooted-tree.hpp
       title: tree/convert-rooted-tree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/dsu-on-tree.hpp
       title: DSU on Tree(Guni)
-    - icon: ':x:'
+    - icon: ':question:'
       path: tree/euler-tour.hpp
       title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':x:'
@@ -603,7 +603,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: tree/rerooting.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: tree/tree-query.hpp
       title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   - name: trial
@@ -803,13 +803,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/osak.test.cpp
       title: verify/verify-unit-test/osak.test.cpp
-    - icon: ':x:'
-      path: verify/verify-unit-test/radix-heap.test.cpp
-      title: verify/verify-unit-test/radix-heap.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/tree-path.test.cpp
       title: verify/verify-unit-test/tree-path.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/wavelet-matrix.test.cpp
       title: verify/verify-unit-test/wavelet-matrix.test.cpp
   - name: verify/verify-yosupo-ds
@@ -826,7 +823,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
     - icon: ':heavy_check_mark:'
@@ -841,37 +838,37 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
       title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
       title: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
       title: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     - icon: ':x:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
     - icon: ':x:'
@@ -880,25 +877,25 @@ data:
     - icon: ':x:'
       path: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
       title: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
       title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
       title: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
       title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
     - icon: ':x:'

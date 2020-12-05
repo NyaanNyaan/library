@@ -42,7 +42,7 @@ data:
   - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
     title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
   - icon: ':x:'

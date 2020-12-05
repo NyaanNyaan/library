@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: data-structure/sparse-table.hpp
     title: data-structure/sparse-table.hpp
   _extendedRequiredBy: []
