@@ -30,7 +30,8 @@ data:
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
     path: tree/convert-tree.hpp
-    title: "\u6728\u306E\u5909\u63DB"
+    title: "\u6839\u4ED8\u304D\u6728\u30FB\u9006\u8FBA\u304B\u3089\u306A\u308B\u6728\
+      \u3078\u306E\u5909\u63DB"
   - icon: ':heavy_check_mark:'
     path: tree/pruefer-code.hpp
     title: Pruefer Code
@@ -230,10 +231,11 @@ data:
     \ queue<int> que;\n  que.emplace(root);\n  while (!que.empty()) {\n    auto p\
     \ = que.front();\n    que.pop();\n    for (auto& e : g[p]) {\n      if (v[e] ==\
     \ false) {\n        v[e] = true;\n        que.push(e);\n        rg[p].push_back(e);\n\
-    \      }\n    }\n  }\n  return rg;\n}\n\n/**\n * @brief \u6728\u306E\u5909\u63DB\
-    \n */\n#line 2 \"tree/pruefer-code.hpp\"\n\n#line 4 \"tree/pruefer-code.hpp\"\n\
-    \n// input: [c \\in [0, n)] * (n-2), n>=3\nvector<vector<int>> pruefer_code(const\
-    \ vector<int>& code) {\n  int n = code.size() + 2;\n  assert(n > 2);\n  vector<vector<int>>\
+    \      }\n    }\n  }\n  return rg;\n}\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\
+    \u30FB\u9006\u8FBA\u304B\u3089\u306A\u308B\u6728\u3078\u306E\u5909\u63DB\n */\n\
+    #line 2 \"tree/pruefer-code.hpp\"\n\n#line 4 \"tree/pruefer-code.hpp\"\n\n// input:\
+    \ [c \\in [0, n)] * (n-2), n>=3\nvector<vector<int>> pruefer_code(const vector<int>&\
+    \ code) {\n  int n = code.size() + 2;\n  assert(n > 2);\n  vector<vector<int>>\
     \ g(n);\n  vector<int> deg(n, 1);\n  int e = 0;\n  for (auto& x : code) deg[x]++;\n\
     \  for (auto& i : code) {\n    for (int j = 0; j < n; j++) {\n      if (deg[j]\
     \ == 1) {\n        g[i].push_back(j);\n        g[j].push_back(i);\n        deg[i]--,\
@@ -378,7 +380,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/tree-path.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 18:58:08+09:00'
+  timestamp: '2020-12-05 20:52:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/tree-path.test.cpp

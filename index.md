@@ -562,7 +562,8 @@ data:
       title: Centroid Decomposition
     - icon: ':heavy_check_mark:'
       path: tree/convert-tree.hpp
-      title: "\u6728\u306E\u5909\u63DB"
+      title: "\u6839\u4ED8\u304D\u6728\u30FB\u9006\u8FBA\u304B\u3089\u306A\u308B\u6728\
+        \u3078\u306E\u5909\u63DB"
     - icon: ':heavy_check_mark:'
       path: tree/dsu-on-tree.hpp
       title: DSU on Tree(Guni)
