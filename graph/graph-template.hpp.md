@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
   - icon: ':question:'
@@ -26,7 +26,7 @@ data:
   - icon: ':x:'
     path: math/grundy-number.hpp
     title: Grundy Number
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/two-sat.hpp
     title: 2-SAT
   - icon: ':heavy_check_mark:'
@@ -186,7 +186,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - icon: ':x:'

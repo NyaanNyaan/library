@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
   - icon: ':question:'
