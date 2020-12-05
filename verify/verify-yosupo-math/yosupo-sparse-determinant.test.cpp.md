@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: modulo/gauss-elimination.hpp
     title: modulo/gauss-elimination.hpp
   - icon: ':question:'

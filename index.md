@@ -32,7 +32,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/persistent-union-find.hpp
       title: "\u5B8C\u5168\u6C38\u7D9AUnion-Find"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/radix-heap.hpp
       title: Radix Heap
     - icon: ':heavy_check_mark:'
@@ -96,7 +96,7 @@ data:
       title: Wavelet Matrix
   - name: flow
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: flow/flow-on-bipartite-graph.hpp
       title: flow/flow-on-bipartite-graph.hpp
   - name: fps
@@ -185,19 +185,19 @@ data:
     - icon: ':question:'
       path: graph/graph-template.hpp
       title: graph/graph-template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/graph-utility.hpp
       title: graph/graph-utility.hpp
     - icon: ':heavy_check_mark:'
       path: graph/kruskal.hpp
       title: graph/kruskal.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/lowlink.hpp
       title: graph/lowlink.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/max-independent-set.hpp
       title: graph/max-independent-set.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/static-graph.hpp
       title: Static Graph
     - icon: ':question:'
@@ -206,7 +206,7 @@ data:
     - icon: ':question:'
       path: graph/topological-sort.hpp
       title: graph/topological-sort.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/two-edge-connected-components.hpp
       title: graph/two-edge-connected-components.hpp
   - name: hashmap
@@ -254,7 +254,7 @@ data:
     - icon: ':x:'
       path: math/grundy-number.hpp
       title: Grundy Number
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: math/kth-root-integral.hpp
       title: $\mathrm{floor}(a^{\frac{1}{k}})$
     - icon: ':x:'
@@ -292,7 +292,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
     - icon: ':question:'
@@ -344,10 +344,10 @@ data:
     - icon: ':question:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: modulo/mod-kth-root.hpp
       title: kth root(Tonelli-Shanks algorithm)
     - icon: ':x:'
@@ -376,15 +376,15 @@ data:
     - icon: ':warning:'
       path: multiplicative-function/mf-famous-series.hpp
       title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/prime-counting-faster.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
         log N})$\u30FB\u9AD8\u901F\u5316\u7248)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/prime-counting-o2d3.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
         \ )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/prime-counting.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
         log N})$ )"
@@ -512,23 +512,23 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/bfs01.hpp
       title: shortest-path/bfs01.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra-fast.hpp
       title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\
         \u5316)"
     - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra-radix-heap.hpp
       title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra-with-restore.hpp
       title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra.hpp
       title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
     - icon: ':warning:'
       path: shortest-path/dual-of-shortest-path.hpp
       title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/restore-shortest-path.hpp
       title: shortest-path/restore-shortest-path.hpp
     - icon: ':heavy_check_mark:'
@@ -588,13 +588,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/dsu-on-tree.hpp
       title: DSU on Tree(Guni)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/euler-tour.hpp
       title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':heavy_check_mark:'
       path: tree/frequency-table-of-tree-distance.hpp
       title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/heavy-light-decomposition.hpp
       title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
     - icon: ':warning:'
@@ -603,7 +603,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: tree/rerooting.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/tree-query.hpp
       title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   - name: trial
@@ -977,66 +977,66 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
       title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
       title: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
       title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
       title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
       title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
       title: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
       title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
       title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
       title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - name: verify/verify-yosupo-math
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
       title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
       title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
       title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     - icon: ':x:'
