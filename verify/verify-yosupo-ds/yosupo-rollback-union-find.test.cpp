@@ -18,7 +18,6 @@ using namespace Nyaan; void Nyaan::solve() {
   }
   RollbackUnionFind uf(N);
   auto dfs = [&](auto rc, const A& a, int d = 0) -> void {
-    trca(a, 4);
     if (a[0] == 1) {
       ans[a[1]] = uf.same(a[2], a[3]);
     } else {

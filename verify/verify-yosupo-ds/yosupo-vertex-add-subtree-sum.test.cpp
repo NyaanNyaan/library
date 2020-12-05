@@ -11,8 +11,8 @@ using namespace Nyaan; void Nyaan::solve() {
   vvi g(N);
   rep1(u, N - 1) {
     ini(v);
-    g[u].pb(v);
-    g[v].pb(u);
+    g[u].push_back(v);
+    g[v].push_back(u);
   }
 
   HeavyLightDecomposition<vvi> hld(g);

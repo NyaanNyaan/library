@@ -4,21 +4,15 @@
 #include "../../data-structure/square-root-decomposition.hpp"
 #include "../../modint/montgomery-modint.hpp"
 
-constexpr int B = 300;
 using mint = LazyMontgomeryModInt<998244353>;
-struct affine {
-  mint a, b;
-  affine() = default;
-  affine(mint a_, mint b_) : a(a_), b(b_) {}
-};
-affine operator*(const  affine &l,const affine &r) {
-  return affine{r.a * l.a, r.a * l.b + r.b};
-};
+#include "../../math/affine-transformation.hpp"
+constexpr int B = 300;
 
+using namespace Nyaan;
+
+using affine = Affine<mint>;
 int N, Q;
 V<affine> a;
-affine id = {1, 0};
-
 using namespace Nyaan; void Nyaan::solve() {
   in(N, Q);
   a.resize(N);
@@ -60,14 +54,14 @@ using namespace Nyaan; void Nyaan::solve() {
     T query_all() { return fold; }
 
     T query_part(int l, int r) {
-      affine ret = id;
+      affine ret = affine();
       for (int i = l; i < r; i++) ret = ret * a[idx(i)];
       return ret;
     }
   };
 
   auto merge = [](const affine &a,const affine &b) { return a * b; };
-  SquareRootDecomposition<decltype(merge), block, B> sqd(N, merge, id);
+  SquareRootDecomposition<decltype(merge), block, B> sqd(N, merge, affine());
 
   rep(_, Q) {
     ini(cmd);

@@ -1,4 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
+
+#include "../../template/template.hpp"
+
 #include "../../modint/montgomery-modint.hpp"
 using mint = LazyMontgomeryModInt<998244353>;
 using vm = vector<mint>;
@@ -11,7 +14,6 @@ Binomial<mint> C;
 #include "../../segment-tree/segment-tree.hpp"
 #include "../../tree/heavy-light-decomposition.hpp"
 //
-#include "../../template/template.hpp"
 using namespace Nyaan;
 
 void Nyaan::solve() {
