@@ -197,10 +197,11 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
-    \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
-    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
-    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \ 4 \"verify/verify-yuki/yuki-0963-circular.test.cpp\"\n//\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+    \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
+    \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
     \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
@@ -738,14 +739,14 @@ data:
     \ - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n\
     \  }\n\n  T P(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    return\
     \ fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0)\
-    \ return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 8 \"\
+    \ return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"\
     verify/verify-yuki/yuki-0963-circular.test.cpp\"\n\nusing namespace Nyaan; void\
     \ Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<1012924417>;\n  using\
     \ fps = FormalPowerSeries<mint>;\n  Binomial<mint> C(1001001);\n  ini(N);\n  auto\
     \ [cos, sin] = circular(fps{0, 1}, fps(), N + 1);\n  out(((sin + 1) * cos.inv(N\
     \ + 1))[N] * 2 * C.fac(N));\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/963\"\n\n#include \"../../template/template.hpp\"\
-    \n#include \"../../fps/fps-circular.hpp\"\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n//\n#include \"../../fps/fps-circular.hpp\"\n#include \"../../fps/ntt-friendly-fps.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<1012924417>;\n\
     \  using fps = FormalPowerSeries<mint>;\n  Binomial<mint> C(1001001);\n  ini(N);\n\
@@ -768,7 +769,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-0963-circular.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 08:16:44+09:00'
+  timestamp: '2020-12-05 13:58:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-0963-circular.test.cpp

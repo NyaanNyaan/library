@@ -184,12 +184,13 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"graph/graph-utility.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate\
-    \ <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T\
-    \ _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost)\
-    \ : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int &x) {\n\
-    \    to = x;\n    return *this;\n  }\n\n  operator int() const { return to; }\n\
-    };\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ 4 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp\"\n//\n\
+    #line 2 \"graph/graph-utility.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\n\n\
+    template <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
+    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
+    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
+    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
     \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
     \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
     \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
@@ -276,15 +277,15 @@ data:
     \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
     \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
-    \ 6 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp\"\n\n\
-    using namespace Nyaan; void Nyaan::solve(){\n  ini(N,Q);\n  vvi g(N);\n  rep1(i,N-1){\n\
-    \    ini(j);\n    g[j].pb(i);\n  }\n  HeavyLightDecomposition<vvi> hld(g);\n \
-    \ rep(_,Q){\n    ini(u,v);\n    out(hld.lca(u,v));\n  }\n}\n"
+    \ 7 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp\"\n\n\
+    using namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  vvi g(N);\n  rep1(i,\
+    \ N - 1) {\n    ini(j);\n    g[j].push_back(i);\n  }\n  HeavyLightDecomposition<vvi>\
+    \ hld(g);\n  rep(_, Q) {\n    ini(u, v);\n    out(hld.lca(u, v));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n\n#include \"../../template/template.hpp\"\
-    \n#include \"../../graph/graph-utility.hpp\"\n#include \"../../tree/heavy-light-decomposition.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve(){\n  ini(N,Q);\n  vvi g(N);\n  rep1(i,N-1){\n\
-    \    ini(j);\n    g[j].pb(i);\n  }\n  HeavyLightDecomposition<vvi> hld(g);\n \
-    \ rep(_,Q){\n    ini(u,v);\n    out(hld.lca(u,v));\n  }\n}"
+    \n//\n#include \"../../graph/graph-utility.hpp\"\n#include \"../../tree/heavy-light-decomposition.hpp\"\
+    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  vvi g(N);\n\
+    \  rep1(i, N - 1) {\n    ini(j);\n    g[j].push_back(i);\n  }\n  HeavyLightDecomposition<vvi>\
+    \ hld(g);\n  rep(_, Q) {\n    ini(u, v);\n    out(hld.lca(u, v));\n  }\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -298,7 +299,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 08:35:39+09:00'
+  timestamp: '2020-12-05 13:58:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp

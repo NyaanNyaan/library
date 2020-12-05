@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
   - icon: ':question:'
@@ -47,7 +47,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/polynomial_taylor_shift
@@ -782,7 +782,7 @@ data:
   path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   requiredBy: []
   timestamp: '2020-12-05 08:16:44+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 layout: document

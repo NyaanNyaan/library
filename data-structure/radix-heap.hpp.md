@@ -22,6 +22,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/radix-heap.test.cpp
+    title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
@@ -82,6 +85,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/radix-heap.test.cpp
 documentation_of: data-structure/radix-heap.hpp
 layout: document
 redirect_from:

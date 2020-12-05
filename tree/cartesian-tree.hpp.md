@@ -9,11 +9,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/tree/cartesian-tree.md
     document_title: Cartesian Tree
@@ -72,7 +72,7 @@ data:
   path: tree/cartesian-tree.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
   - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp

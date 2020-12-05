@@ -9,11 +9,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"fps/lagrange-interpolation-point.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
@@ -61,7 +61,7 @@ data:
   path: fps/lagrange-interpolation-point.hpp
   requiredBy: []
   timestamp: '2020-12-05 08:16:44+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp

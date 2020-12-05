@@ -2,17 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
+    path: data-structure/radix-heap.hpp
+    title: Radix Heap
   - icon: ':question:'
-    path: modulo/binomial.hpp
-    title: modulo/binomial.hpp
-  - icon: ':question:'
-    path: multiplicative-function/divisor-multiple-transform.hpp
-    title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
-  - icon: ':question:'
-    path: prime/prime-enumerate.hpp
-    title: prime/prime-enumerate.hpp
+    path: misc/rng.hpp
+    title: misc/rng.hpp
   - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -34,14 +28,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/890
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://yukicoder.me/problems/no/890
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-0890.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/890\"\n//\n#line 2 \"template/template.hpp\"\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/radix-heap.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -187,130 +181,78 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yuki/yuki-0890.test.cpp\"\n//\n#line 2 \"modint/montgomery-modint.hpp\"\
-    \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
-    \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
-    \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
-    \  for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n\
-    \  static constexpr u32 r = get_r();\n  static constexpr u32 n2 = -u64(mod) %\
-    \ mod;\n  static_assert(r * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod\
-    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
-    invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() :\
-    \ a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
-    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
-    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
-    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
-    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
-    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 6 \"verify/verify-yuki/yuki-0890.test.cpp\"\nusing\
-    \ mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing vvm\
-    \ = vector<vm>;\n#line 2 \"modulo/binomial.hpp\"\n\n\n\ntemplate <typename T>\n\
-    struct Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX\
-    \ + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod() != 0);\n \
-    \   MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <=\
-    \ MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
-    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
-    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
-    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
-    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
-    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
-    \  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size()) extend();\n    return\
-    \ fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size()) extend();\n\
-    \    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
-    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
-    \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
-    \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
-    \ = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i)\
-    \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
-    \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
-    \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 10 \"verify/verify-yuki/yuki-0890.test.cpp\"\nBinomial<mint>\
-    \ C;\n\n#line 2 \"multiplicative-function/divisor-multiple-transform.hpp\"\n\n\
-    \n\n#line 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11, 13,\
-    \ 17, ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N / 3 +\
-    \ 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d = 6\
-    \ - d, i++) {\n    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r = d\
-    \ * p / 3 + (d * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n  \
-    \       q < qe; q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2,\
-    \ 3};\n  for (int p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i])\
-    \ ret.push_back(p);\n  while (!ret.empty() && ret.back() > N) ret.pop_back();\n\
-    \  return ret;\n}\n#line 6 \"multiplicative-function/divisor-multiple-transform.hpp\"\
-    \n\nstruct divisor_transform {\n  template <typename T>\n  static void zeta_transform(vector<T>\
-    \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
-    \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];\n\
-    \  }\n  template <typename T>\n  static void mobius_transform(T &a) {\n    int\
-    \ N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p :\
-    \ sieve)\n      for (int k = N / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n  template\
-    \ <typename T>\n  static void zeta_transform(map<long long, T> &a) {\n    for\
-    \ (auto p = rbegin(a); p != rend(a); p++)\n      for (auto &x : a) {\n       \
-    \ if (p->first == x.first) break;\n        if (p->first % x.first == 0) p->second\
-    \ += x.second;\n      }\n  }\n  template <typename T>\n  static void mobius_transform(map<long\
-    \ long, T> &a) {\n    for (auto &x : a)\n      for (auto p = rbegin(a); p != rend(a);\
-    \ p++) {\n        if (x.first == p->first) break;\n        if (p->first % x.first\
-    \ == 0) p->second -= x.second;\n      }\n  }\n};\n\nstruct multiple_transform\
-    \ {\n  template <typename T>\n  static void zeta_transform(vector<T> &a) {\n \
-    \   int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto\
-    \ &p : sieve)\n      for (int k = N / p; k > 0; --k) a[k] += a[k * p];\n  }\n\
-    \  template <typename T>\n  static void mobius_transform(vector<T> &a) {\n   \
-    \ int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p\
-    \ : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k] -= a[k * p];\n  }\n\n\
-    \  template <typename T>\n  static void zeta_transform(map<long long, T> &a) {\n\
-    \    for (auto &x : a)\n      for (auto p = rbegin(a); p->first != x.first; p++)\n\
-    \        if (p->first % x.first == 0) x.second += p->second;\n  }\n  template\
-    \ <typename T>\n  static void mobius_transform(map<long long, T> &a) {\n    for\
-    \ (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2 = rbegin(a);\
-    \ p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second -= p2->second;\n\
-    \  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB\
-    \n * @docs docs/multiplicative-function/divisor-multiple-transform.md\n */\n#line\
-    \ 13 \"verify/verify-yuki/yuki-0890.test.cpp\"\n//\n\nusing namespace Nyaan;\n\
-    void Nyaan::solve() {\n  ini(N, K);\n\n  vi ds;\n  rep1(i, N) if (N % i == 0)\
-    \ ds.push_back(i);\n\n  mint ans1, ans2;\n  {\n    vm a(N + 1);\n    each(i, ds)\
-    \ {\n      // i\u500B\u5468\u671F -> N/i\u500B\u306E\u533A\u9593\u304C\u5B58\u5728\
-    \u3059\u308B\n      if (K % (N / i) == 0)\n        a[i] = C.C(i, K / (N / i));\n\
-    \      else\n        a[i] = 0;\n    }\n\n    auto ol = a;\n    divisor_transform::mobius_transform(a);\n\
-    \    auto nw = a;\n    divisor_transform::zeta_transform(nw);\n    assert(ol ==\
-    \ nw);\n    ans1 = C.C(N, K) - a[N];\n  }\n  {\n    map<ll, mint> a;\n    each(i,\
-    \ ds) {\n      if (K % (N / i) == 0)\n        a[i] = C.C(i, K / (N / i));\n  \
-    \    else\n        a[i] = 0;\n    }\n    auto ol = a;\n    divisor_transform::mobius_transform(a);\n\
-    \    auto nw = a;\n    divisor_transform::zeta_transform(nw);\n    assert(ol ==\
-    \ nw);\n    ans2 = C.C(N, K) - a[N];\n  }\n\n  if (ans1 != ans2) exit(1);\n  out(ans1);\n\
-    }\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/890\"\n//\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
-    \nusing mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
-    \ vvm = vector<vm>;\n#include \"../../modulo/binomial.hpp\"\nBinomial<mint> C;\n\
-    \n#include \"../../multiplicative-function/divisor-multiple-transform.hpp\"\n\
-    //\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, K);\n\n  vi ds;\n\
-    \  rep1(i, N) if (N % i == 0) ds.push_back(i);\n\n  mint ans1, ans2;\n  {\n  \
-    \  vm a(N + 1);\n    each(i, ds) {\n      // i\u500B\u5468\u671F -> N/i\u500B\u306E\
-    \u533A\u9593\u304C\u5B58\u5728\u3059\u308B\n      if (K % (N / i) == 0)\n    \
-    \    a[i] = C.C(i, K / (N / i));\n      else\n        a[i] = 0;\n    }\n\n   \
-    \ auto ol = a;\n    divisor_transform::mobius_transform(a);\n    auto nw = a;\n\
-    \    divisor_transform::zeta_transform(nw);\n    assert(ol == nw);\n    ans1 =\
-    \ C.C(N, K) - a[N];\n  }\n  {\n    map<ll, mint> a;\n    each(i, ds) {\n     \
-    \ if (K % (N / i) == 0)\n        a[i] = C.C(i, K / (N / i));\n      else\n   \
-    \     a[i] = 0;\n    }\n    auto ol = a;\n    divisor_transform::mobius_transform(a);\n\
-    \    auto nw = a;\n    divisor_transform::zeta_transform(nw);\n    assert(ol ==\
-    \ nw);\n    ans2 = C.C(N, K) - a[N];\n  }\n\n  if (ans1 != ans2) exit(1);\n  out(ans1);\n\
-    }\n"
+    \ 4 \"verify/verify-unit-test/radix-heap.test.cpp\"\n//\n#line 2 \"data-structure/radix-heap.hpp\"\
+    \n\ntemplate <typename Key, typename Val>\nstruct RadixHeap {\n  using uint =\
+    \ typename make_unsigned<Key>::type;\n  static constexpr int bit = sizeof(Key)\
+    \ * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint, bit + 1>\
+    \ ms;\n\n  int s;\n  uint last;\n\n  RadixHeap() : s(0), last(0) { fill(begin(ms),\
+    \ end(ms), uint(-1)); }\n\n  bool empty() const { return s == 0; }\n\n  int size()\
+    \ const { return s; }\n\n  __attribute__((target(\"lzcnt\"))) inline uint64_t\
+    \ getbit(uint a) const {\n    return 64 - _lzcnt_u64(a);\n  }\n\n  void push(const\
+    \ uint &key, const Val &val) {\n    s++;\n    uint64_t b = getbit(key ^ last);\n\
+    \    vs[b].emplace_back(key, val);\n    ms[b] = min(key, ms[b]);\n  }\n\n  pair<uint,\
+    \ Val> pop() {\n    if (ms[0] == uint(-1)) {\n      int idx = 1;\n      while\
+    \ (ms[idx] == uint(-1)) idx++;\n      last = ms[idx];\n      for (auto &p : vs[idx])\
+    \ {\n        uint64_t b = getbit(p.first ^ last);\n        vs[b].emplace_back(p);\n\
+    \        ms[b] = min(p.first, ms[b]);\n      }\n      vs[idx].clear();\n     \
+    \ ms[idx] = uint(-1);\n    }\n    --s;\n    auto res = vs[0].back();\n    vs[0].pop_back();\n\
+    \    if (vs[0].empty()) ms[0] = uint(-1);\n    return res;\n  }\n};\n\n/**\n *\
+    \ @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n */\n#line 2\
+    \ \"misc/rng.hpp\"\n\n\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng()\
+    \ {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 7 \"verify/verify-unit-test/radix-heap.test.cpp\"\n\nusing namespace Nyaan;\n\
+    template <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx, Key\
+    \ d, double ratio) {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n   \
+    \ Key i = 0;\n    while (i < mx) {\n      assert(q1.empty() == q2.empty());\n\
+    \      assert(q1.size() == (int)q2.size());\n      if (q1.empty() || rnd() < ratio)\
+    \ {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n        Val j{rng()};\n#pragma\
+    \ GCC diagnostic warning \"-Wnarrowing\"\n        q1.push(i, j);\n        q2.emplace(i,\
+    \ j);\n      } else {\n        auto t1 = q1.pop();\n        decltype(t1) t2 =\
+    \ *begin(q2);\n        assert(t1 == t2);\n        q2.erase(begin(q2));\n     \
+    \ }\n      i += d;\n    }\n    while (q1.size() != 0) {\n      auto t1 = q1.pop();\n\
+    \      decltype(t1) t2 = *begin(q2);\n      assert(t1 == t2);\n      q2.erase(begin(q2));\n\
+    \    }\n  };\n  t(10, 1, 0.5);\n  t(10, 1, 0.7);\n  t(10, 1, 0.9);\n  t(1000,\
+    \ 1, 0.5);\n  t(1000, 1, 0.7);\n  t(1000, 1, 0.9);\n  t(TEN(8), 334, 0.5);\n \
+    \ t(TEN(8), 1333, 0.9);\n  t(TEN(9), 13333, 0.7);\n}\n\nusing namespace Nyaan;\n\
+    void Nyaan::solve() {\n  test<int32_t, int64_t>();\n  test<int64_t, int64_t>();\n\
+    \  test<uint32_t, int64_t>();\n  test<uint64_t, int64_t>();\n  test<uint64_t,\
+    \ uint64_t>();\n  test<uint64_t, vector<int> >();\n\n  int a, b;\n  cin >> a >>\
+    \ b;\n  cout << (a + b) << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../template/template.hpp\"\n//\n#include \"../../data-structure/radix-heap.hpp\"\
+    \n#include \"../../misc/rng.hpp\"\n\nusing namespace Nyaan;\ntemplate <typename\
+    \ Key, typename Val>\nvoid test() {\n  auto t = [](Key mx, Key d, double ratio)\
+    \ {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n    Key i = 0;\n    while\
+    \ (i < mx) {\n      assert(q1.empty() == q2.empty());\n      assert(q1.size()\
+    \ == (int)q2.size());\n      if (q1.empty() || rnd() < ratio) {\n#pragma GCC diagnostic\
+    \ ignored \"-Wnarrowing\"\n        Val j{rng()};\n#pragma GCC diagnostic warning\
+    \ \"-Wnarrowing\"\n        q1.push(i, j);\n        q2.emplace(i, j);\n      }\
+    \ else {\n        auto t1 = q1.pop();\n        decltype(t1) t2 = *begin(q2);\n\
+    \        assert(t1 == t2);\n        q2.erase(begin(q2));\n      }\n      i +=\
+    \ d;\n    }\n    while (q1.size() != 0) {\n      auto t1 = q1.pop();\n      decltype(t1)\
+    \ t2 = *begin(q2);\n      assert(t1 == t2);\n      q2.erase(begin(q2));\n    }\n\
+    \  };\n  t(10, 1, 0.5);\n  t(10, 1, 0.7);\n  t(10, 1, 0.9);\n  t(1000, 1, 0.5);\n\
+    \  t(1000, 1, 0.7);\n  t(1000, 1, 0.9);\n  t(TEN(8), 334, 0.5);\n  t(TEN(8), 1333,\
+    \ 0.9);\n  t(TEN(9), 13333, 0.7);\n}\n\nusing namespace Nyaan;\nvoid Nyaan::solve()\
+    \ {\n  test<int32_t, int64_t>();\n  test<int64_t, int64_t>();\n  test<uint32_t,\
+    \ int64_t>();\n  test<uint64_t, int64_t>();\n  test<uint64_t, uint64_t>();\n \
+    \ test<uint64_t, vector<int> >();\n\n  int a, b;\n  cin >> a >> b;\n  cout <<\
+    \ (a + b) << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -318,20 +260,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - modint/montgomery-modint.hpp
-  - modulo/binomial.hpp
-  - multiplicative-function/divisor-multiple-transform.hpp
-  - prime/prime-enumerate.hpp
+  - data-structure/radix-heap.hpp
+  - misc/rng.hpp
   isVerificationFile: true
-  path: verify/verify-yuki/yuki-0890.test.cpp
+  path: verify/verify-unit-test/radix-heap.test.cpp
   requiredBy: []
   timestamp: '2020-12-05 13:58:32+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-0890.test.cpp
+documentation_of: verify/verify-unit-test/radix-heap.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-0890.test.cpp
-- /verify/verify/verify-yuki/yuki-0890.test.cpp.html
-title: verify/verify-yuki/yuki-0890.test.cpp
+- /verify/verify/verify-unit-test/radix-heap.test.cpp
+- /verify/verify/verify-unit-test/radix-heap.test.cpp.html
+title: verify/verify-unit-test/radix-heap.test.cpp
 ---

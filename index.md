@@ -136,7 +136,7 @@ data:
     - icon: ':x:'
       path: fps/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
     - icon: ':question:'
@@ -154,10 +154,10 @@ data:
     - icon: ':question:'
       path: fps/polynomial-interpolation.hpp
       title: fps/polynomial-interpolation.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/sum-of-exponential-times-poly.hpp
       title: $\sum_{i}a^i f(i)$
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/taylor-shift.hpp
       title: "\u5E73\u884C\u79FB\u52D5"
     - icon: ':x:'
@@ -576,10 +576,10 @@ data:
       title: template/util.hpp
   - name: tree
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/cartesian-tree.hpp
       title: Cartesian Tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/centroid-decomposition.hpp
       title: Centroid Decomposition
     - icon: ':warning:'
@@ -591,7 +591,7 @@ data:
     - icon: ':question:'
       path: tree/euler-tour.hpp
       title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/frequency-table-of-tree-distance.hpp
       title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
     - icon: ':question:'
@@ -804,6 +804,9 @@ data:
       path: verify/verify-unit-test/osak.test.cpp
       title: verify/verify-unit-test/osak.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/radix-heap.test.cpp
+      title: verify/verify-unit-test/radix-heap.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/tree-path.test.cpp
       title: verify/verify-unit-test/tree-path.test.cpp
     - icon: ':heavy_check_mark:'
@@ -957,21 +960,21 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - name: verify/verify-yosupo-graph
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
       title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
       title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
       title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     - icon: ':x:'

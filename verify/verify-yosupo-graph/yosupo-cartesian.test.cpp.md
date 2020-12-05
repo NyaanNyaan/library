@@ -22,13 +22,13 @@ data:
   - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/cartesian-tree.hpp
     title: Cartesian Tree
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/cartesian_tree
@@ -240,7 +240,7 @@ data:
   path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
 layout: document

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/lagrange-interpolation-point.hpp
     title: fps/lagrange-interpolation-point.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/sum-of-exponential-times-poly.hpp
     title: $\sum_{i}a^i f(i)$
   - icon: ':question:'

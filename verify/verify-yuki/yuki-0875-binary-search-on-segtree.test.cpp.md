@@ -178,6 +178,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
+    \ 4 \"verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp\"\n//\n#line\
     \ 2 \"segment-tree/segment-tree.hpp\"\n\n\n\ntemplate <typename T, typename F>\n\
     struct SegmentTree {\n  int size;\n  vector<T> seg;\n  const F f;\n  const T I;\n\
     \n  SegmentTree(F _f, const T &I_) : size(0), f(_f), I(I_) {}\n\n  SegmentTree(int\
@@ -211,7 +212,7 @@ data:
     \    for (b += size; a < b; a >>= 1, b >>= 1) {\n      if (b & 1) {\n        T\
     \ nxt = f(seg[--b], R);\n        if (check(nxt)) return find_subtree(b, check,\
     \ R, true);\n        R = nxt;\n      }\n    }\n    return -1;\n  }\n};\n#line\
-    \ 5 \"verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp\"\n\nusing\
+    \ 6 \"verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp\"\n\nusing\
     \ namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vi a(N);\n  in(a);\n\
     \  auto f = [](int a, int b) { return min(a, b); };\n  SegmentTree<int, decltype(f)>\
     \ seg(a, f, inf);\n  rep(_, Q) {\n    ini(c, l, r);\n    if (c == 1) {\n     \
@@ -221,12 +222,12 @@ data:
     \ [&](int n) { return n <= mn; });\n      assert(a1 == a2);\n      out(a1 + 1);\n\
     \    }\n  }\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/875\"\n\n#include \"../../template/template.hpp\"\
-    \n#include \"../../segment-tree/segment-tree.hpp\"\n\nusing namespace Nyaan; void\
-    \ Nyaan::solve() {\n  ini(N, Q);\n  vi a(N);\n  in(a);\n  auto f = [](int a, int\
-    \ b) { return min(a, b); };\n  SegmentTree<int, decltype(f)> seg(a, f, inf);\n\
-    \  rep(_, Q) {\n    ini(c, l, r);\n    if (c == 1) {\n      l--, r--;\n      int\
-    \ vl = seg[l];\n      seg.update(l, seg[r]);\n      seg.update(r, vl);\n    }\
-    \ else {\n      l--;\n      int mn = seg.query(l, r);\n      int a1 = seg.find_first(l,\
+    \n//\n#include \"../../segment-tree/segment-tree.hpp\"\n\nusing namespace Nyaan;\
+    \ void Nyaan::solve() {\n  ini(N, Q);\n  vi a(N);\n  in(a);\n  auto f = [](int\
+    \ a, int b) { return min(a, b); };\n  SegmentTree<int, decltype(f)> seg(a, f,\
+    \ inf);\n  rep(_, Q) {\n    ini(c, l, r);\n    if (c == 1) {\n      l--, r--;\n\
+    \      int vl = seg[l];\n      seg.update(l, seg[r]);\n      seg.update(r, vl);\n\
+    \    } else {\n      l--;\n      int mn = seg.query(l, r);\n      int a1 = seg.find_first(l,\
     \ [&](int n) { return n <= mn; });\n      int a2 = seg.find_last(r, [&](int n)\
     \ { return n <= mn; });\n      assert(a1 == a2);\n      out(a1 + 1);\n    }\n\
     \  }\n}"
@@ -241,7 +242,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 13:58:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp

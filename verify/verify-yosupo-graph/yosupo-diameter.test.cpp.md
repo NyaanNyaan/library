@@ -28,7 +28,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tree_diameter
@@ -258,7 +258,7 @@ data:
   path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   requiredBy: []
   timestamp: '2020-12-05 08:35:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
 layout: document

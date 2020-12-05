@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   - icon: ':x:'

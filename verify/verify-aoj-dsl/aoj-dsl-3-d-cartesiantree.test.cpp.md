@@ -22,7 +22,7 @@ data:
   - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/cartesian-tree.hpp
     title: Cartesian Tree
   - icon: ':question:'

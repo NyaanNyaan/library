@@ -53,7 +53,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: shortest-path/warshall-floyd.hpp
     title: shortest-path/warshall-floyd.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/cartesian-tree.hpp
     title: Cartesian Tree
   - icon: ':heavy_check_mark:'
@@ -156,13 +156,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':x:'

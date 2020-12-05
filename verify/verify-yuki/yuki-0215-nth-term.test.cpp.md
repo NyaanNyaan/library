@@ -203,16 +203,17 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"fps/arbitrary-fps.hpp\"\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n\n\n#line\
-    \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
-    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
-    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
-    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
-    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
-    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
-    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
-    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
-    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ 4 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\n//\n#line 2 \"fps/arbitrary-fps.hpp\"\
+    \n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n\n\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
+    \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
+    \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
+    \  for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n\
+    \  static constexpr u32 r = get_r();\n  static constexpr u32 n2 = -u64(mod) %\
+    \ mod;\n  static_assert(r * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod\
+    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
+    invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() :\
+    \ a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
     \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
     \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
     \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
@@ -696,7 +697,7 @@ data:
     \ || (*this)[0] == mint(0));\n  if (deg == -1) deg = (int)this->size();\n  FormalPowerSeries<mint>\
     \ ret({mint(1)});\n  for (int i = 1; i < deg; i <<= 1) {\n    ret = (ret * (pre(i\
     \ << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);\n  }\n  return ret.pre(deg);\n\
-    }\n#line 6 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\nusing mint = LazyMontgomeryModInt<1000000007>;\n\
+    }\n#line 7 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\nusing mint = LazyMontgomeryModInt<1000000007>;\n\
     using vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
     \n#line 2 \"fps/nth-term.hpp\"\n\n#line 2 \"fps/berlekamp-massey.hpp\"\n\ntemplate\
     \ <typename mint>\nvector<mint> BerlekampMassey(const vector<mint> &s) {\n  const\
@@ -752,7 +753,7 @@ data:
     \ auto bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
     \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
     \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
-    \ */\n#line 12 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\n\nusing namespace\
+    \ */\n#line 13 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\n\nusing namespace\
     \ Nyaan; void Nyaan::solve() {\n  inl(N, P, C);\n  vl s{2, 3, 5, 7, 11, 13};\n\
     \  vl t{4, 6, 8, 9, 10, 12};\n\n  auto calc = [](vl d, ll n) -> fps {\n    ll\
     \ mx = d.back() * n;\n    vvm dp(n + 2, vm(mx + 20));\n    dp[0][0] = 1;\n   \
@@ -763,7 +764,7 @@ data:
     \ += dp[j];\n    rep(j, sz(f)) dp[i + j] += dp[i] * f[j];\n  }\n  a.erase(begin(a));\n\
     \  out(nth_term(N - 1, a));\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/215\"\n\n#include \"../../template/template.hpp\"\
-    \n#include \"../../fps/arbitrary-fps.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n//\n#include \"../../fps/arbitrary-fps.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
     \nusing mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
     \ vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\n#include \"../../fps/nth-term.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  inl(N, P, C);\n  vl s{2, 3,\
@@ -794,7 +795,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 08:16:44+09:00'
+  timestamp: '2020-12-05 13:58:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-0215-nth-term.test.cpp

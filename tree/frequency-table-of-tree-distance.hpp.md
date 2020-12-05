@@ -13,16 +13,16 @@ data:
   - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/centroid-decomposition.hpp
     title: Centroid Decomposition
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/tree/frequency-table-of-tree-distance.md
     document_title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
@@ -515,7 +515,7 @@ data:
   path: tree/frequency-table-of-tree-distance.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
 documentation_of: tree/frequency-table-of-tree-distance.hpp

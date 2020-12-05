@@ -37,16 +37,16 @@ data:
   - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/centroid-decomposition.hpp
     title: Centroid Decomposition
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/frequency-table-of-tree-distance.hpp
     title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -714,18 +714,18 @@ data:
     \ \u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03\n * @docs\
     \ docs/tree/frequency-table-of-tree-distance.md\n */\n#line 10 \"verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int N;\n  rd(N);\n  vvi g(N);\n\
-    \  rep(_, N - 1) {\n    int u, v;\n    rd(u, v);\n    g[u].pb(v);\n    g[v].pb(u);\n\
-    \  }\n  FrequencyTableOfTreeDistance<vvi> ft(g);\n  auto d = ft.get();\n  d.resize(N);\n\
-    \  rep1(i, N - 1) {\n    if (i != 1) wt(' ');\n    wt(d[i]);\n  }\n  wt('\\n');\n\
-    }\n"
+    \  rep(_, N - 1) {\n    int u, v;\n    rd(u, v);\n    g[u].push_back(v);\n   \
+    \ g[v].push_back(u);\n  }\n  FrequencyTableOfTreeDistance<vvi> ft(g);\n  auto\
+    \ d = ft.get();\n  d.resize(N);\n  rep1(i, N - 1) {\n    if (i != 1) wt(' ');\n\
+    \    wt(d[i]);\n  }\n  wt('\\n');\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
     \n\n#include \"../../template/template.hpp\"\n\n#include \"../../graph/graph-template.hpp\"\
     \n\n#include \"../../misc/fastio.hpp\"\n\n#include \"../../tree/frequency-table-of-tree-distance.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int N;\n  rd(N);\n  vvi g(N);\n\
-    \  rep(_, N - 1) {\n    int u, v;\n    rd(u, v);\n    g[u].pb(v);\n    g[v].pb(u);\n\
-    \  }\n  FrequencyTableOfTreeDistance<vvi> ft(g);\n  auto d = ft.get();\n  d.resize(N);\n\
-    \  rep1(i, N - 1) {\n    if (i != 1) wt(' ');\n    wt(d[i]);\n  }\n  wt('\\n');\n\
-    }\n"
+    \  rep(_, N - 1) {\n    int u, v;\n    rd(u, v);\n    g[u].push_back(v);\n   \
+    \ g[v].push_back(u);\n  }\n  FrequencyTableOfTreeDistance<vvi> ft(g);\n  auto\
+    \ d = ft.get();\n  d.resize(N);\n  rep1(i, N - 1) {\n    if (i != 1) wt(' ');\n\
+    \    wt(d[i]);\n  }\n  wt('\\n');\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -744,8 +744,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 13:58:32+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
 layout: document

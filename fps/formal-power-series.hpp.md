@@ -45,7 +45,7 @@ data:
   - icon: ':question:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
   - icon: ':x:'
@@ -107,7 +107,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - icon: ':x:'

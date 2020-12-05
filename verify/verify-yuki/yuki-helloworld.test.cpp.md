@@ -29,7 +29,7 @@ data:
     links:
     - https://yukicoder.me/problems/no/9000
   bundledCode: "#line 1 \"verify/verify-yuki/yuki-helloworld.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/9000\"\n\n\n#line 2 \"template/template.hpp\"\
+    \ \"https://yukicoder.me/problems/no/9000\"\n\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -175,10 +175,9 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 5 \"verify/verify-yuki/yuki-helloworld.test.cpp\"\nvoid Nyaan::solve() { cout\
+    \ 4 \"verify/verify-yuki/yuki-helloworld.test.cpp\"\nvoid Nyaan::solve() { cout\
     \ << \"Hello World!\" << endl; }\n"
   code: '#define PROBLEM "https://yukicoder.me/problems/no/9000"
-
 
 
     #include "../../template/template.hpp"
@@ -196,7 +195,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-helloworld.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 13:58:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-helloworld.test.cpp

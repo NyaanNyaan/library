@@ -181,6 +181,9 @@ data:
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/radix-heap.test.cpp
+    title: verify/verify-unit-test/radix-heap.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':heavy_check_mark:'
@@ -330,19 +333,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':x:'
@@ -833,6 +836,7 @@ data:
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/wavelet-matrix.test.cpp
   - verify/verify-unit-test/osak.test.cpp
