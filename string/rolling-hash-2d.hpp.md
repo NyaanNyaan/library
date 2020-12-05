@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: inner/inner-hash.hpp
     title: inner/inner-hash.hpp
   _extendedRequiredBy: []

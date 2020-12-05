@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/dimension-expanded-graph.hpp
     title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
   - icon: ':question:'

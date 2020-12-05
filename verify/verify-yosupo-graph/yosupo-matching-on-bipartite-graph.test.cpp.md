@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: flow/flow-on-bipartite-graph.hpp
     title: flow/flow-on-bipartite-graph.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

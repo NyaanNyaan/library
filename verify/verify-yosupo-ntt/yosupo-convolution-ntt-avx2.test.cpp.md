@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   - icon: ':question:'
@@ -31,7 +31,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
@@ -184,6 +184,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
+    \ 4 \"verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp\"\n//\n#line\
     \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
     \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
     \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
@@ -555,19 +556,17 @@ data:
     \ i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n    mint r = 1,\
     \ zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i = 0;\
     \ i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2 * M);\n\
-    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 6 \"\
+    \    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line 7 \"\
     verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp\"\n\nconstexpr int\
     \ MOD = 998244353;\nusing mint = LazyMontgomeryModInt<MOD>;\nusing vm = vector<mint>;\n\
-    \n__attribute__((target(\"avx2\"))) using namespace Nyaan; void Nyaan::solve()\
-    \ {\n  NTT<mint> ntt;\n  ini(N, M);\n  vm a(N), b(M);\n  in(a, b);\n  auto c =\
-    \ ntt.multiply(a, b);\n  out(c);\n}\n"
+    using namespace Nyaan;\nvoid Nyaan::solve() {\n  NTT<mint> ntt;\n  ini(N, M);\n\
+    \  vm a(N), b(M);\n  in(a, b);\n  auto c = ntt.multiply(a, b);\n  out(c);\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n\n#include\
-    \ \"../../template/template.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
     \n#include \"../../ntt/ntt-avx2.hpp\"\n\nconstexpr int MOD = 998244353;\nusing\
-    \ mint = LazyMontgomeryModInt<MOD>;\nusing vm = vector<mint>;\n\n__attribute__((target(\"\
-    avx2\"))) using namespace Nyaan; void Nyaan::solve() {\n  NTT<mint> ntt;\n  ini(N,\
-    \ M);\n  vm a(N), b(M);\n  in(a, b);\n  auto c = ntt.multiply(a, b);\n  out(c);\n\
-    }"
+    \ mint = LazyMontgomeryModInt<MOD>;\nusing vm = vector<mint>;\nusing namespace\
+    \ Nyaan;\nvoid Nyaan::solve() {\n  NTT<mint> ntt;\n  ini(N, M);\n  vm a(N), b(M);\n\
+    \  in(a, b);\n  auto c = ntt.multiply(a, b);\n  out(c);\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -581,8 +580,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 15:07:49+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
 layout: document
