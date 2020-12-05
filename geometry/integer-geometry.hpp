@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 struct Point {
   using T = long long;
   T x, y;
@@ -58,7 +56,7 @@ void ArgumentSort(Points &v) {
 
 // 1 ... counterclockwise / 0 straight / -1 clockwise
 int ccw(const Point &a, const Point &b, const Point &c) {
-  ll t = cross(b - a, c - a);
+  Point::T t = cross(b - a, c - a);
   return t < 0 ? -1 : t == 0 ? 0 : 1;
 }
 
