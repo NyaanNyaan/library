@@ -168,7 +168,7 @@ data:
     - icon: ':warning:'
       path: geometry/geometry.hpp
       title: geometry/geometry.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: geometry/integer-geometry.hpp
       title: geometry/integer-geometry.hpp
   - name: graph
@@ -556,22 +556,22 @@ data:
       title: Suffix Automaton
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1109,7 +1109,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
       title: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
       title: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
     - icon: ':heavy_check_mark:'

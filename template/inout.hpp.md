@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -474,7 +474,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
     title: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
   - icon: ':heavy_check_mark:'
@@ -559,7 +559,7 @@ data:
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename\
@@ -602,7 +602,7 @@ data:
   requiredBy:
   - template/template.hpp
   timestamp: '2020-11-30 18:57:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
