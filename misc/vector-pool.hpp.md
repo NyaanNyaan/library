@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: orderedmap/rbst-ordered-map.hpp
-    title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
@@ -37,8 +34,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: misc/vector-pool.hpp
-  requiredBy:
-  - orderedmap/rbst-ordered-map.hpp
+  requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

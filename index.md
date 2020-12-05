@@ -71,9 +71,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
       title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
-    - icon: ':warning:'
-      path: data-structure-2d/dynamic-wavelet-matrix.hpp
-      title: data-structure-2d/dynamic-wavelet-matrix.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
@@ -168,9 +165,6 @@ data:
       title: geometry/integer-geometry.hpp
   - name: graph
     pages:
-    - icon: ':warning:'
-      path: graph/add-range-edge.hpp
-      title: graph/add-range-edge.hpp
     - icon: ':heavy_check_mark:'
       path: graph/cycle-detection.hpp
       title: "\u9589\u8DEF\u306E\u691C\u51FA"
@@ -403,17 +397,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/ntt.hpp
       title: ntt/ntt.hpp
-  - name: orderedmap
-    pages:
-    - icon: ':warning:'
-      path: orderedmap/randomized-binary-search-tree.hpp
-      title: orderedmap/randomized-binary-search-tree.hpp
-    - icon: ':warning:'
-      path: orderedmap/rbst-ordered-map.hpp
-      title: "OrderedMap(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
-    - icon: ':warning:'
-      path: orderedmap/rbst-ordered-set.hpp
-      title: "OrderedSet(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408)"
   - name: prime
     pages:
     - icon: ':heavy_check_mark:'
