@@ -2,14 +2,14 @@
 
 #include <immintrin.h>
 //
-
-
+#include "../../template/template.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../ntt/ntt-avx2.hpp"
 
 NTT<LazyMontgomeryModInt<998244353>> ntt;
-int main() {
+using namespace Nyaan;
+void Nyaan::solve() {
   int N, M;
   rd(N, M);
   for (int i = 0; i < N; i++) {
