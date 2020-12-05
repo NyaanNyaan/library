@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: rbst/treap.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
+  - icon: ':heavy_check_mark:'
+    path: tree/pruefer-code.hpp
+    title: Pruefer Code
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
@@ -92,6 +95,7 @@ data:
   requiredBy:
   - misc/simulated-annealing.hpp
   - modulo/mod-kth-root.hpp
+  - tree/pruefer-code.hpp
   - prime/fast-factorize.hpp
   - rbst/treap.hpp
   timestamp: '2020-12-05 13:58:32+09:00'

@@ -560,9 +560,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/centroid-decomposition.hpp
       title: Centroid Decomposition
-    - icon: ':warning:'
-      path: tree/convert-rooted-tree.hpp
-      title: tree/convert-rooted-tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: tree/convert-tree.hpp
+      title: "\u6728\u306E\u5909\u63DB"
     - icon: ':heavy_check_mark:'
       path: tree/dsu-on-tree.hpp
       title: DSU on Tree(Guni)
@@ -575,7 +575,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/heavy-light-decomposition.hpp
       title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: tree/pruefer-code.hpp
       title: Pruefer Code
     - icon: ':heavy_check_mark:'

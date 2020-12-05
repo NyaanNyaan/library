@@ -16,6 +16,9 @@ data:
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/tree-path.test.cpp
+    title: verify/verify-unit-test/tree-path.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
@@ -59,6 +62,7 @@ data:
   - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-unit-test/tree-path.test.cpp
 documentation_of: data-structure/union-find.hpp
 layout: document
 redirect_from:
