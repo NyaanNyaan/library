@@ -22,5 +22,4 @@ test
 test.cpp
 test.exe
 verify/verify-unit-test/orderedmap.test.cpp
-verify/verify-unit-test/radix-heap.test.cpp
 verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp

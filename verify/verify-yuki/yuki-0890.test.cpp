@@ -1,5 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/890"
 //
+#include "../../template/template.hpp"
+//
 #include "../../modint/montgomery-modint.hpp"
 using mint = LazyMontgomeryModInt<1000000007>;
 using vm = vector<mint>;
@@ -9,7 +11,6 @@ Binomial<mint> C;
 
 #include "../../multiplicative-function/divisor-multiple-transform.hpp"
 //
-#include "../../template/template.hpp"
 
 using namespace Nyaan;
 void Nyaan::solve() {

@@ -42,7 +42,7 @@ double rnd() {
     uint64_t u;
   };
   constexpr uint64_t p = uint64_t(1023 - 64) << 52;
-  return rnd() * ((raw_cast*)(&p))->t;
+  return rng() * ((raw_cast*)(&p))->t;
 }
 
 template <typename T>

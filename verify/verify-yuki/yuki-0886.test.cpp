@@ -1,12 +1,13 @@
 #define PROBLEM "https://yukicoder.me/problems/no/886"
 //
+#include "../../template/template.hpp"
+//
 #include "../../modint/montgomery-modint.hpp"
 using mint = LazyMontgomeryModInt<1000000007>;
 using vm = vector<mint>;
 using vvm = vector<vm>;
 #include "../../multiplicative-function/gcd-convolution.hpp"
 //
-#include "../../template/template.hpp"
 
 using namespace Nyaan;
 void Nyaan::solve() {

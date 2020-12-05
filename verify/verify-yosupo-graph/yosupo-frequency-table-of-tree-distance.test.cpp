@@ -15,8 +15,8 @@ using namespace Nyaan; void Nyaan::solve() {
   rep(_, N - 1) {
     int u, v;
     rd(u, v);
-    g[u].pb(v);
-    g[v].pb(u);
+    g[u].push_back(v);
+    g[v].push_back(u);
   }
   FrequencyTableOfTreeDistance<vvi> ft(g);
   auto d = ft.get();

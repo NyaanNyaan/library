@@ -1,5 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/896"
 //
+#include "../../template/template.hpp"
+//
 #include "../../modint/montgomery-modint.hpp"
 using mint = LazyMontgomeryModInt<998244353>;
 using vm = vector<mint>;
@@ -7,7 +9,6 @@ using vvm = vector<vm>;
 
 #include "../../multiplicative-function/divisor-multiple-transform.hpp"
 //
-#include "../../template/template.hpp"
 
 using namespace Nyaan;
 void Nyaan::solve() {

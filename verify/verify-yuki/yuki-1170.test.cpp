@@ -1,6 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1170"
 
 #include "../../template/template.hpp"
+//
 #include "../../data-structure/range-union-find.hpp"
 
 using namespace Nyaan; void Nyaan::solve() {

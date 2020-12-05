@@ -1,6 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1220"
 
 #include "../../template/template.hpp"
+//
 #include "../../math/float-binomial.hpp"
 
 using namespace Nyaan; void Nyaan::solve() {

@@ -1,6 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/875"
 
 #include "../../template/template.hpp"
+//
 #include "../../segment-tree/segment-tree.hpp"
 
 using namespace Nyaan; void Nyaan::solve() {
