@@ -33,5 +33,5 @@ vector<vector<int>> rooted_tree(const vector<vector<int>>& g, int root = 0) {
 }
 
 /**
- * @brief 木の変換
+ * @brief 根付き木・逆辺からなる木への変換
  */
