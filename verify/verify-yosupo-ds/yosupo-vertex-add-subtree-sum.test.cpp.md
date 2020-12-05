@@ -31,7 +31,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
@@ -285,7 +285,7 @@ data:
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
     \ 6 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp\"\n\nusing\
     \ namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n\
-    \  vvi g(N);\n  rep1(u, N - 1) {\n    ini(v);\n    g[u].pb(v);\n    g[v].pb(u);\n\
+    \  vvi g(N);\n  rep1(u, N - 1) {\n    ini(v);\n    g[u].push_back(v);\n    g[v].push_back(u);\n\
     \  }\n\n  HeavyLightDecomposition<vvi> hld(g);\n  auto f = [](ll a, ll b) { return\
     \ a + b; };\n  SegmentTree<ll, decltype(f)> seg(N, f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first,\
     \ a[i]); }\n  seg.build();\n\n  ll ans = 0;\n  auto que = [&](int u, int v) {\
@@ -297,13 +297,14 @@ data:
     \n\n#include \"../../template/template.hpp\"\n#include \"../../segment-tree/segment-tree.hpp\"\
     \n#include \"../../tree/heavy-light-decomposition.hpp\"\n\nusing namespace Nyaan;\
     \ void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  vvi g(N);\n  rep1(u,\
-    \ N - 1) {\n    ini(v);\n    g[u].pb(v);\n    g[v].pb(u);\n  }\n\n  HeavyLightDecomposition<vvi>\
-    \ hld(g);\n  auto f = [](ll a, ll b) { return a + b; };\n  SegmentTree<ll, decltype(f)>\
-    \ seg(N, f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first, a[i]); }\n  seg.build();\n\
-    \n  ll ans = 0;\n  auto que = [&](int u, int v) { ans += seg.query(u, v); };\n\
-    \n  rep(_, Q) {\n    ini(cmd);\n    if (cmd) {\n      ini(u);\n      ans = 0;\n\
-    \      hld.subtree_query(u, true, que);\n      out(ans);\n    } else {\n     \
-    \ inl(k, x);\n      seg.add(hld.idx(k).first, x);\n    }\n  }\n}"
+    \ N - 1) {\n    ini(v);\n    g[u].push_back(v);\n    g[v].push_back(u);\n  }\n\
+    \n  HeavyLightDecomposition<vvi> hld(g);\n  auto f = [](ll a, ll b) { return a\
+    \ + b; };\n  SegmentTree<ll, decltype(f)> seg(N, f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first,\
+    \ a[i]); }\n  seg.build();\n\n  ll ans = 0;\n  auto que = [&](int u, int v) {\
+    \ ans += seg.query(u, v); };\n\n  rep(_, Q) {\n    ini(cmd);\n    if (cmd) {\n\
+    \      ini(u);\n      ans = 0;\n      hld.subtree_query(u, true, que);\n     \
+    \ out(ans);\n    } else {\n      inl(k, x);\n      seg.add(hld.idx(k).first, x);\n\
+    \    }\n  }\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -317,8 +318,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 13:41:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
 layout: document

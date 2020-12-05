@@ -41,7 +41,7 @@ data:
     - icon: ':x:'
       path: data-structure/range-union-find.hpp
       title: data-structure/range-union-find.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/rollback-union-find.hpp
       title: "Rollback\u3064\u304DUnion Find"
     - icon: ':heavy_check_mark:'
@@ -53,7 +53,7 @@ data:
     - icon: ':question:'
       path: data-structure/sparse-table.hpp
       title: data-structure/sparse-table.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/square-root-decomposition.hpp
       title: "\u5E73\u65B9\u5206\u5272"
     - icon: ':heavy_check_mark:'
@@ -110,7 +110,7 @@ data:
     - icon: ':x:'
       path: fps/differential-equation.hpp
       title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fast-multieval.hpp
       title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
     - icon: ':question:'
@@ -130,13 +130,13 @@ data:
     - icon: ':warning:'
       path: fps/fps-famous-series.hpp
       title: fps/fps-famous-series.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
     - icon: ':x:'
       path: fps/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-    - icon: ':x:'
+    - icon: ':question:'
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
     - icon: ':question:'
@@ -154,7 +154,7 @@ data:
     - icon: ':question:'
       path: fps/polynomial-interpolation.hpp
       title: fps/polynomial-interpolation.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: fps/sum-of-exponential-times-poly.hpp
       title: $\sum_{i}a^i f(i)$
     - icon: ':x:'
@@ -236,7 +236,7 @@ data:
       title: inner/inner_math.hpp
   - name: math
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
     - icon: ':heavy_check_mark:'
@@ -353,7 +353,7 @@ data:
     - icon: ':x:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: modulo/mod-sqrt.hpp
       title: mod sqrt(Tonelli-Shanks algorithm)
     - icon: ':heavy_check_mark:'
@@ -460,7 +460,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/lazy-segment-tree.hpp
       title: segment-tree/lazy-segment-tree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/li-chao-tree.hpp
       title: segment-tree/li-chao-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -865,16 +865,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
       title: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
       title: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
     - icon: ':heavy_check_mark:'
@@ -898,10 +898,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - name: verify/verify-yosupo-fps
@@ -936,25 +936,25 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-log.test.cpp
       title: verify/verify-yosupo-fps/yosupo-log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
       title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
       title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
       title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     - icon: ':x:'

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/li-chao-tree.hpp
     title: segment-tree/li-chao-tree.hpp
   - icon: ':question:'

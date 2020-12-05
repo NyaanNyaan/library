@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/li-chao-tree.hpp
     title: segment-tree/li-chao-tree.hpp
   - icon: ':question:'
@@ -25,7 +25,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/segment_add_get_min
@@ -223,8 +223,8 @@ data:
     \ }\n};\n#line 5 \"verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N), b(N),\
     \ l(N), r(N);\n  in4(l, r, a, b);\n  vl c(Q), d(Q), e(Q), f(Q), g(Q);\n  vl xs;\n\
-    \  rep(i, Q) {\n    in(c[i]);\n    if (c[i])\n      in(d[i]), xs.pb(d[i]);\n \
-    \   else\n      in(d[i], e[i], f[i], g[i]);\n  }\n  xs.pb(-inf);\n  xs.pb(inf);\n\
+    \  rep(i, Q) {\n    in(c[i]);\n    if (c[i])\n      in(d[i]), xs.push_back(d[i]);\n\
+    \    else\n      in(d[i], e[i], f[i], g[i]);\n  }\n  xs.push_back(-inf);\n  xs.push_back(inf);\n\
     \  LiChaoTree<ll, infLL> lichao(xs);\n  rep(_, N) lichao.update_segment(a[_],\
     \ b[_], l[_], r[_] - 1);\n\n  rep(i, Q) {\n    if (c[i]) {\n      ll ans = lichao.query(d[i]);\n\
     \      if (ans == infLL)\n        out(\"INFINITY\");\n      else\n        out(ans);\n\
@@ -234,8 +234,8 @@ data:
     \n#include \"../../template/template.hpp\"\n#include \"../../segment-tree/li-chao-tree.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N), b(N),\
     \ l(N), r(N);\n  in4(l, r, a, b);\n  vl c(Q), d(Q), e(Q), f(Q), g(Q);\n  vl xs;\n\
-    \  rep(i, Q) {\n    in(c[i]);\n    if (c[i])\n      in(d[i]), xs.pb(d[i]);\n \
-    \   else\n      in(d[i], e[i], f[i], g[i]);\n  }\n  xs.pb(-inf);\n  xs.pb(inf);\n\
+    \  rep(i, Q) {\n    in(c[i]);\n    if (c[i])\n      in(d[i]), xs.push_back(d[i]);\n\
+    \    else\n      in(d[i], e[i], f[i], g[i]);\n  }\n  xs.push_back(-inf);\n  xs.push_back(inf);\n\
     \  LiChaoTree<ll, infLL> lichao(xs);\n  rep(_, N) lichao.update_segment(a[_],\
     \ b[_], l[_], r[_] - 1);\n\n  rep(i, Q) {\n    if (c[i]) {\n      ll ans = lichao.query(d[i]);\n\
     \      if (ans == infLL)\n        out(\"INFINITY\");\n      else\n        out(ans);\n\
@@ -252,8 +252,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 13:41:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
 layout: document

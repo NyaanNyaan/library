@@ -6,14 +6,14 @@ data:
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/fps/sum-of-exponential-times-poly.md
     document_title: $\sum_{i}a^i f(i)$
@@ -117,7 +117,7 @@ data:
   path: fps/sum-of-exponential-times-poly.hpp
   requiredBy: []
   timestamp: '2020-12-05 08:16:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp

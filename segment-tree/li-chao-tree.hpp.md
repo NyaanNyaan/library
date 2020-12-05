@@ -6,11 +6,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
     title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
     title: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segment-tree/li-chao-tree.hpp\"\n\n\n\ntemplate <typename\
@@ -103,7 +103,7 @@ data:
   path: segment-tree/li-chao-tree.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp

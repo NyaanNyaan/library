@@ -8,16 +8,16 @@ data:
   - icon: ':question:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: modulo/mod-sqrt.hpp
     title: mod sqrt(Tonelli-Shanks algorithm)
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/fps/fps-sqrt.md
     document_title: "\u5E73\u65B9\u6839"
@@ -167,7 +167,7 @@ data:
   path: fps/fps-sqrt.hpp
   requiredBy: []
   timestamp: '2020-12-05 08:16:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
 documentation_of: fps/fps-sqrt.hpp

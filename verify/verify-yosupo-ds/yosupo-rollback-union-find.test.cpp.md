@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: data-structure/rollback-union-find.hpp
     title: "Rollback\u3064\u304DUnion Find"
   - icon: ':question:'
@@ -28,7 +28,7 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
@@ -232,22 +232,22 @@ data:
     \ vi ans(Q + 1, -1);\n  using A = array<int, 4>;\n  V<V<A>> g(Q + 1);\n  rep1(i,\
     \ Q) {\n    int t, k, u, v;\n    rd(t, k, u, v);\n    ++k;\n    g[k].push_back({{t,\
     \ int(i), u, v}});\n  }\n  RollbackUnionFind uf(N);\n  auto dfs = [&](auto rc,\
-    \ const A& a, int d = 0) -> void {\n    trca(a, 4);\n    if (a[0] == 1) {\n  \
-    \    ans[a[1]] = uf.same(a[2], a[3]);\n    } else {\n      if (a[0] == 0) uf.unite(a[2],\
-    \ a[3]);\n      for (auto& a : g[a[1]]) rc(rc, a, d + 1);\n      if (a[0] == 0)\
-    \ uf.undo();\n    }\n  };\n  dfs(dfs, {{-1, 0, -1, 0}});\n  each(x, ans) if (x\
-    \ != -1) wtn(x);\n}\n"
+    \ const A& a, int d = 0) -> void {\n    if (a[0] == 1) {\n      ans[a[1]] = uf.same(a[2],\
+    \ a[3]);\n    } else {\n      if (a[0] == 0) uf.unite(a[2], a[3]);\n      for\
+    \ (auto& a : g[a[1]]) rc(rc, a, d + 1);\n      if (a[0] == 0) uf.undo();\n   \
+    \ }\n  };\n  dfs(dfs, {{-1, 0, -1, 0}});\n  each(x, ans) if (x != -1) wtn(x);\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\n\
     \n#include \"../../template/template.hpp\"\n#include \"../../data-structure/rollback-union-find.hpp\"\
     \n#include \"../../misc/fastio.hpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
     \ {\n  int N, Q;\n  rd(N, Q);\n  vi ans(Q + 1, -1);\n  using A = array<int, 4>;\n\
     \  V<V<A>> g(Q + 1);\n  rep1(i, Q) {\n    int t, k, u, v;\n    rd(t, k, u, v);\n\
     \    ++k;\n    g[k].push_back({{t, int(i), u, v}});\n  }\n  RollbackUnionFind\
-    \ uf(N);\n  auto dfs = [&](auto rc, const A& a, int d = 0) -> void {\n    trca(a,\
-    \ 4);\n    if (a[0] == 1) {\n      ans[a[1]] = uf.same(a[2], a[3]);\n    } else\
-    \ {\n      if (a[0] == 0) uf.unite(a[2], a[3]);\n      for (auto& a : g[a[1]])\
-    \ rc(rc, a, d + 1);\n      if (a[0] == 0) uf.undo();\n    }\n  };\n  dfs(dfs,\
-    \ {{-1, 0, -1, 0}});\n  each(x, ans) if (x != -1) wtn(x);\n}"
+    \ uf(N);\n  auto dfs = [&](auto rc, const A& a, int d = 0) -> void {\n    if (a[0]\
+    \ == 1) {\n      ans[a[1]] = uf.same(a[2], a[3]);\n    } else {\n      if (a[0]\
+    \ == 0) uf.unite(a[2], a[3]);\n      for (auto& a : g[a[1]]) rc(rc, a, d + 1);\n\
+    \      if (a[0] == 0) uf.undo();\n    }\n  };\n  dfs(dfs, {{-1, 0, -1, 0}});\n\
+    \  each(x, ans) if (x != -1) wtn(x);\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -260,8 +260,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-05 13:41:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
 layout: document

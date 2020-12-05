@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
   - icon: ':x:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
-  - icon: ':x:'
+  - icon: ':question:'
     path: modulo/mod-sqrt.hpp
     title: mod sqrt(Tonelli-Shanks algorithm)
   - icon: ':question:'
@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - icon: ':x:'

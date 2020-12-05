@@ -9,10 +9,10 @@ data:
   - icon: ':warning:'
     path: fps/fps-famous-series.hpp
     title: fps/fps-famous-series.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: fps/lagrange-interpolation-point.hpp
     title: fps/lagrange-interpolation-point.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: fps/sum-of-exponential-times-poly.hpp
     title: $\sum_{i}a^i f(i)$
   - icon: ':x:'
@@ -22,16 +22,16 @@ data:
     path: fps/utility.hpp
     title: fps/utility.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - icon: ':x:'

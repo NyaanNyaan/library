@@ -42,7 +42,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
     title: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   - icon: ':heavy_check_mark:'
@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
     title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - icon: ':x:'
