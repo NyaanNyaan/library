@@ -214,14 +214,14 @@ data:
     \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
     \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
     using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\n\ntemplate <typename\
-    \ Key, typename Val>\nvoid test() {\n  auto t = [](Key mx, Key d, double ratio)\
-    \ {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n    Key i = 0;\n    while\
-    \ (i < mx) {\n      assert(q1.empty() == q2.empty());\n      assert(q1.size()\
-    \ == (int)q2.size());\n      if (q1.empty() or random() < ratio) {\n#pragma GCC\
-    \ diagnostic ignored \"-Wnarrowing\"\n        Val j{rng()};\n#pragma GCC diagnostic\
-    \ warning \"-Wnarrowing\"\n        q1.push(i, j);\n        q2.emplace(i, j);\n\
-    \        i += d;\n      } else {\n        auto t1 = q1.pop();\n        decltype(t1)\
+    #line 6 \"verify/verify-unit-test/radix-heap.test.cpp\"\n\nusing namespace Nyaan;\n\
+    template <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx, Key\
+    \ d, double ratio) {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n   \
+    \ Key i = 0;\n    while (i < mx) {\n      assert(q1.empty() == q2.empty());\n\
+    \      assert(q1.size() == (int)q2.size());\n      if (q1.empty() or rnd() < ratio)\
+    \ {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n        Val j{rng()};\n#pragma\
+    \ GCC diagnostic warning \"-Wnarrowing\"\n        q1.push(i, j);\n        q2.emplace(i,\
+    \ j);\n        i += d;\n      } else {\n        auto t1 = q1.pop();\n        decltype(t1)\
     \ t2 = *begin(q2);\n        assert(t1 == t2);\n        q2.erase(begin(q2));\n\
     \      }\n    }\n    while (q1.size() != 0) {\n      auto t1 = q1.pop();\n   \
     \   decltype(t1) t2 = *begin(q2);\n      assert(t1 == t2);\n      q2.erase(begin(q2));\n\
@@ -234,23 +234,24 @@ data:
     \ b;\n  cout << (a + b) << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n#include \"../../data-structure/radix-heap.hpp\"\
-    \n#include \"../../misc/rng.hpp\"\n\ntemplate <typename Key, typename Val>\nvoid\
-    \ test() {\n  auto t = [](Key mx, Key d, double ratio) {\n    RadixHeap<Key, Val>\
-    \ q1;\n    map<Key, Val> q2;\n    Key i = 0;\n    while (i < mx) {\n      assert(q1.empty()\
-    \ == q2.empty());\n      assert(q1.size() == (int)q2.size());\n      if (q1.empty()\
-    \ or random() < ratio) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n   \
-    \     Val j{rng()};\n#pragma GCC diagnostic warning \"-Wnarrowing\"\n        q1.push(i,\
-    \ j);\n        q2.emplace(i, j);\n        i += d;\n      } else {\n        auto\
-    \ t1 = q1.pop();\n        decltype(t1) t2 = *begin(q2);\n        assert(t1 ==\
-    \ t2);\n        q2.erase(begin(q2));\n      }\n    }\n    while (q1.size() !=\
-    \ 0) {\n      auto t1 = q1.pop();\n      decltype(t1) t2 = *begin(q2);\n     \
-    \ assert(t1 == t2);\n      q2.erase(begin(q2));\n    }\n  };\n  t(10, 1, 0.5);\n\
-    \  t(10, 1, 0.7);\n  t(10, 1, 0.9);\n  t(1000, 1, 0.5);\n  t(1000, 1, 0.7);\n\
-    \  t(1000, 1, 0.9);\n  t(TEN(8), 334, 0.5);\n  t(TEN(8), 1333, 0.9);\n  t(TEN(9),\
-    \ 13333, 0.7);\n}\n\nusing namespace Nyaan; void Nyaan::solve() {\n  test<int32_t,\
-    \ int64_t>();\n  test<int64_t, int64_t>();\n  test<uint32_t, int64_t>();\n  test<uint64_t,\
-    \ int64_t>();\n  test<uint64_t, uint64_t>();\n  test<uint64_t, vector<int> >();\n\
-    \n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << endl;\n}\n"
+    \n#include \"../../misc/rng.hpp\"\n\nusing namespace Nyaan;\ntemplate <typename\
+    \ Key, typename Val>\nvoid test() {\n  auto t = [](Key mx, Key d, double ratio)\
+    \ {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n    Key i = 0;\n    while\
+    \ (i < mx) {\n      assert(q1.empty() == q2.empty());\n      assert(q1.size()\
+    \ == (int)q2.size());\n      if (q1.empty() or rnd() < ratio) {\n#pragma GCC diagnostic\
+    \ ignored \"-Wnarrowing\"\n        Val j{rng()};\n#pragma GCC diagnostic warning\
+    \ \"-Wnarrowing\"\n        q1.push(i, j);\n        q2.emplace(i, j);\n       \
+    \ i += d;\n      } else {\n        auto t1 = q1.pop();\n        decltype(t1) t2\
+    \ = *begin(q2);\n        assert(t1 == t2);\n        q2.erase(begin(q2));\n   \
+    \   }\n    }\n    while (q1.size() != 0) {\n      auto t1 = q1.pop();\n      decltype(t1)\
+    \ t2 = *begin(q2);\n      assert(t1 == t2);\n      q2.erase(begin(q2));\n    }\n\
+    \  };\n  t(10, 1, 0.5);\n  t(10, 1, 0.7);\n  t(10, 1, 0.9);\n  t(1000, 1, 0.5);\n\
+    \  t(1000, 1, 0.7);\n  t(1000, 1, 0.9);\n  t(TEN(8), 334, 0.5);\n  t(TEN(8), 1333,\
+    \ 0.9);\n  t(TEN(9), 13333, 0.7);\n}\n\nusing namespace Nyaan; void Nyaan::solve()\
+    \ {\n  test<int32_t, int64_t>();\n  test<int64_t, int64_t>();\n  test<uint32_t,\
+    \ int64_t>();\n  test<uint64_t, int64_t>();\n  test<uint64_t, uint64_t>();\n \
+    \ test<uint64_t, vector<int> >();\n\n  int a, b;\n  cin >> a >> b;\n  cout <<\
+    \ (a + b) << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -263,7 +264,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/radix-heap.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:57:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-unit-test/radix-heap.test.cpp

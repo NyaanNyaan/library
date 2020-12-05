@@ -242,16 +242,16 @@ data:
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
     #line 6 \"verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp\"\n\
-    \nHashMap<ll, ll> m;\n\nusing namespace Nyaan; void Nyaan::solve() {\n  int Q;\n\
-    \  ll c, k, v;\n  rd(Q);\n  rep(_, Q) {\n    rd(c);\n    if (c) {\n      rd(k);\n\
-    \      wtn(m[k]);\n    } else {\n      rd(k, v);\n      m[k] = v;\n    }\n  }\n\
-    }\n"
+    \nusing namespace Nyaan;\nHashMap<ll, ll> m;\n\nusing namespace Nyaan; void Nyaan::solve()\
+    \ {\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_, Q) {\n    rd(c);\n    if (c)\
+    \ {\n      rd(k);\n      wtn(m[k]);\n    } else {\n      rd(k, v);\n      m[k]\
+    \ = v;\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n\
     #include \"../../template/template.hpp\"\n#include \"../../data-structure/hash-map-variable-length.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n\nHashMap<ll, ll> m;\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_, Q)\
-    \ {\n    rd(c);\n    if (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n\
-    \      rd(k, v);\n      m[k] = v;\n    }\n  }\n}\n"
+    \n#include \"../../misc/fastio.hpp\"\n\nusing namespace Nyaan;\nHashMap<ll, ll>\
+    \ m;\n\nusing namespace Nyaan; void Nyaan::solve() {\n  int Q;\n  ll c, k, v;\n\
+    \  rd(Q);\n  rep(_, Q) {\n    rd(c);\n    if (c) {\n      rd(k);\n      wtn(m[k]);\n\
+    \    } else {\n      rd(k, v);\n      m[k] = v;\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -264,7 +264,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:57:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp

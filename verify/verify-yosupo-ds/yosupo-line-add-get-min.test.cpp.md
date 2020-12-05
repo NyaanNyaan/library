@@ -223,20 +223,20 @@ data:
     \ }\n};\n#line 5 \"verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp\"\n\
     \nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N), b(N);\n\
     \  in2(a, b);\n  vl c(Q), d(Q), e(Q);\n  vl xs;\n  rep(i, Q) {\n    in(c[i]);\n\
-    \    if (c[i])\n      in(d[i]), xs.pb(d[i]);\n    else\n      in(d[i], e[i]);\n\
-    \  }\n  xs.pb(-inf);\n  xs.pb(inf);\n\n  LiChaoTree<ll, infLL> lichao(xs);\n \
-    \ rep(_, N) lichao.update(a[_], b[_]);\n\n  rep(i, Q) {\n    if (c[i]) {\n   \
-    \   out(lichao.query(d[i]));\n    } else {\n      lichao.update(d[i], e[i]);\n\
-    \    }\n  }\n}\n"
+    \    if (c[i])\n      in(d[i]), xs.push_back(d[i]);\n    else\n      in(d[i],\
+    \ e[i]);\n  }\n  xs.push_back(-inf);\n  xs.push_back(inf);\n\n  LiChaoTree<ll,\
+    \ infLL> lichao(xs);\n  rep(_, N) lichao.update(a[_], b[_]);\n\n  rep(i, Q) {\n\
+    \    if (c[i]) {\n      out(lichao.query(d[i]));\n    } else {\n      lichao.update(d[i],\
+    \ e[i]);\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/line_add_get_min\"\n\n\
     #include \"../../template/template.hpp\"\n#include \"../../segment-tree/li-chao-tree.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N), b(N);\n\
     \  in2(a, b);\n  vl c(Q), d(Q), e(Q);\n  vl xs;\n  rep(i, Q) {\n    in(c[i]);\n\
-    \    if (c[i])\n      in(d[i]), xs.pb(d[i]);\n    else\n      in(d[i], e[i]);\n\
-    \  }\n  xs.pb(-inf);\n  xs.pb(inf);\n\n  LiChaoTree<ll, infLL> lichao(xs);\n \
-    \ rep(_, N) lichao.update(a[_], b[_]);\n\n  rep(i, Q) {\n    if (c[i]) {\n   \
-    \   out(lichao.query(d[i]));\n    } else {\n      lichao.update(d[i], e[i]);\n\
-    \    }\n  }\n}"
+    \    if (c[i])\n      in(d[i]), xs.push_back(d[i]);\n    else\n      in(d[i],\
+    \ e[i]);\n  }\n  xs.push_back(-inf);\n  xs.push_back(inf);\n\n  LiChaoTree<ll,\
+    \ infLL> lichao(xs);\n  rep(_, N) lichao.update(a[_], b[_]);\n\n  rep(i, Q) {\n\
+    \    if (c[i]) {\n      out(lichao.query(d[i]));\n    } else {\n      lichao.update(d[i],\
+    \ e[i]);\n    }\n  }\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -248,7 +248,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-05 08:57:48+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp

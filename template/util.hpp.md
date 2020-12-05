@@ -186,6 +186,9 @@ data:
   - icon: ':x:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/wavelet-matrix.test.cpp
+    title: verify/verify-unit-test/wavelet-matrix.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
@@ -835,6 +838,7 @@ data:
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
+  - verify/verify-unit-test/wavelet-matrix.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
 documentation_of: template/util.hpp
