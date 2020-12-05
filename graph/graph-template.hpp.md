@@ -2,9 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/cycle-detection.hpp
-    title: graph/cycle-detection.hpp
+    title: "\u9589\u8DEF\u306E\u691C\u51FA"
   - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
@@ -160,6 +160,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   - icon: ':heavy_check_mark:'
@@ -309,6 +312,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
   - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp

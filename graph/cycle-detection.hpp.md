@@ -5,10 +5,14 @@ data:
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: "\u9589\u8DEF\u306E\u691C\u51FA"
     links: []
   bundledCode: "#line 2 \"graph/cycle-detection.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
     \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
@@ -51,7 +55,8 @@ data:
     \        }\n        return nx;\n      }\n    }\n    pidx[cur] = -1;\n    return\
     \ -1;\n  };\n\n  for (int i = 0; i < (int)g.size(); i++) {\n    if (vis[i]) continue;\n\
     \    dfs(dfs, i, i, -1);\n\n    if (finish) {\n      reverse(begin(cycle), end(cycle));\n\
-    \      return cycle;\n    }\n  }\n  return vector<pair<int, int>>{};\n}\n"
+    \      return cycle;\n    }\n  }\n  return vector<pair<int, int>>{};\n}\n\n/**\n\
+    \ * @brief \u9589\u8DEF\u306E\u691C\u51FA\n */\n"
   code: "#pragma once\n\n#include \"./graph-template.hpp\"\n\ntemplate <typename G>\n\
     vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {\n  vector<int>\
     \ pidx(g.size(), -1), vis(g.size(), 0);\n\n  vector<pair<int, int>> cycle;\n \
@@ -65,19 +70,21 @@ data:
     \   }\n        return nx;\n      }\n    }\n    pidx[cur] = -1;\n    return -1;\n\
     \  };\n\n  for (int i = 0; i < (int)g.size(); i++) {\n    if (vis[i]) continue;\n\
     \    dfs(dfs, i, i, -1);\n\n    if (finish) {\n      reverse(begin(cycle), end(cycle));\n\
-    \      return cycle;\n    }\n  }\n  return vector<pair<int, int>>{};\n}"
+    \      return cycle;\n    }\n  }\n  return vector<pair<int, int>>{};\n}\n\n/**\n\
+    \ * @brief \u9589\u8DEF\u306E\u691C\u51FA\n */\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: graph/cycle-detection.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2020-12-05 15:48:27+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
 documentation_of: graph/cycle-detection.hpp
 layout: document
 redirect_from:
 - /library/graph/cycle-detection.hpp
 - /library/graph/cycle-detection.hpp.html
-title: graph/cycle-detection.hpp
+title: "\u9589\u8DEF\u306E\u691C\u51FA"
 ---

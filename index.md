@@ -1,11 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: .
-    pages:
-    - icon: ':warning:'
-      path: competitive-template.hpp
-      title: competitive-template.hpp
   - name: data-structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -176,9 +171,9 @@ data:
     - icon: ':warning:'
       path: graph/add-range-edge.hpp
       title: graph/add-range-edge.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/cycle-detection.hpp
-      title: graph/cycle-detection.hpp
+      title: "\u9589\u8DEF\u306E\u691C\u51FA"
     - icon: ':heavy_check_mark:'
       path: graph/dimension-expanded-graph.hpp
       title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
@@ -972,6 +967,9 @@ data:
       path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
       title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
       title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1201,8 +1199,6 @@ layout: toppage
 ---
 [![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2FNyaan)](https://atcoder.jp/users/Nyaan)
 [![Nyaan](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fcodeforces%2Fjson%2FNyaan)](https://codeforces.com/profile/Nyaan)
-
-**<bits/stdc++.h>を一斉に除去した結果、現在CIがfailingだらけで大変なことになっています**
 
 このライブラリは競技プログラミング用に作成したアルゴリズム・データ構造をまとめたものです。
 
