@@ -44,3 +44,7 @@ vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
   }
   return vector<pair<int, int>>{};
 }
+
+/**
+ * @brief 閉路の検出
+ */
