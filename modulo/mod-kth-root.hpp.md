@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'

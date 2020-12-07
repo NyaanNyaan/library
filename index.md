@@ -296,7 +296,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
@@ -322,7 +322,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
     - icon: ':heavy_check_mark:'
@@ -470,25 +470,25 @@ data:
       title: segment-tree/segment-tree.hpp
   - name: set-function
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set-function/and-convolution.hpp
       title: AND Convoluion
     - icon: ':heavy_check_mark:'
       path: set-function/enumerate-set.hpp
       title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set-function/or-convolution.hpp
       title: OR Convoluion
     - icon: ':heavy_check_mark:'
       path: set-function/subset-convolution.hpp
       title: Subset Convolution
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set-function/walsh-hadamard-transform.hpp
       title: Walsh Hadamard Transform
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set-function/xor-convolution.hpp
       title: AND Convoluion
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: set-function/zeta-mobius-transform.hpp
       title: Zeta Transform / Moebius Transform
   - name: shortest-path
@@ -543,22 +543,22 @@ data:
       title: Suffix Automaton
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -794,7 +794,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/radix-heap.test.cpp
       title: verify/verify-unit-test/radix-heap.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/set-function.test.cpp
       title: verify/verify-unit-test/set-function.test.cpp
     - icon: ':heavy_check_mark:'

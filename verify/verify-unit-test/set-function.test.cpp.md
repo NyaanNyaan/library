@@ -1,67 +1,70 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set-function/and-convolution.hpp
     title: AND Convoluion
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set-function/or-convolution.hpp
     title: OR Convoluion
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set-function/walsh-hadamard-transform.hpp
     title: Walsh Hadamard Transform
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
     title: AND Convoluion
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set-function/zeta-mobius-transform.hpp
     title: Zeta Transform / Moebius Transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 1 \"verify/verify-unit-test/set-function.test.cpp\"\n\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
-    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
-    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
-    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
-    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
-    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
-    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
-    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    links:
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/set-function.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
+    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
+    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
+    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
+    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
+    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
     \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
     \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -193,7 +196,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 3 \"verify/verify-unit-test/set-function.test.cpp\"\n\nusing namespace Nyaan;\n\
+    \ 4 \"verify/verify-unit-test/set-function.test.cpp\"\n\nusing namespace Nyaan;\n\
     \n#line 2 \"misc/rng.hpp\"\n\n\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
     \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
@@ -279,7 +282,7 @@ data:
     \ 5 \"set-function/xor-convolution.hpp\"\n\ntemplate <typename T>\nvector<T> xor_convolution(vector<T>\
     \ a, vector<T> b) {\n  walsh_hadamard_transform(a);\n  walsh_hadamard_transform(b);\n\
     \  for (int i = 0; i < (int)a.size(); i++) a[i] *= b[i];\n  walsh_hadamard_transform(a,\
-    \ true);\n  return a;\n}\n\n/**\n * @brief AND Convoluion\n */\n#line 11 \"verify/verify-unit-test/set-function.test.cpp\"\
+    \ true);\n  return a;\n}\n\n/**\n * @brief AND Convoluion\n */\n#line 12 \"verify/verify-unit-test/set-function.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\n\ntemplate <typename T>\nvoid\
     \ test(int n) {\n  assert((n & (n - 1)) == 0);\n  vector<T> a(n), b(n), c(n);\n\
     \n  rep(i, n) {\n    a[i] = rng() & 0xFFFF;\n    b[i] = rng() & 0xFFFF;\n  }\n\
@@ -298,22 +301,23 @@ data:
     \ = 1; i <= 1024; i *= 2) {\n    test<ll>(i);\n    test<mint>(i);\n  }\n  cerr\
     \ << \"ok\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
     }\n"
-  code: "\n#include \"../../template/template.hpp\"\n\nusing namespace Nyaan;\n\n\
-    #include \"../../misc/rng.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../set-function/and-convolution.hpp\"\n#include \"../../set-function/or-convolution.hpp\"\
-    \n#include \"../../set-function/xor-convolution.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    \ntemplate <typename T>\nvoid test(int n) {\n  assert((n & (n - 1)) == 0);\n \
-    \ vector<T> a(n), b(n), c(n);\n\n  rep(i, n) {\n    a[i] = rng() & 0xFFFF;\n \
-    \   b[i] = rng() & 0xFFFF;\n  }\n\n  {\n    auto d = a;\n    subset_zeta_transform(d);\n\
-    \    subset_mobius_transform(d);\n    assert(a == d && \"subset\");\n  }\n\n \
-    \ {\n    auto d = a;\n    superset_zeta_transform(d);\n    superset_mobius_transform(d);\n\
-    \    assert(a == d && \"superset\");\n  }\n\n  {\n    auto d = a;\n    walsh_hadamard_transform(d);\n\
-    \    walsh_hadamard_transform(d, true);\n    assert(a == d && \"hadamard\");\n\
-    \  }\n\n  // and convolution\n  {\n    auto d = and_convolution(a, b);\n    fill(all(c),\
-    \ 0);\n    rep(i, n) rep(j, n) c[i & j] += a[i] * b[j];\n    assert(c == d &&\
-    \ \"and\");\n  }\n\n  // or convolution\n  {\n    auto d = or_convolution(a, b);\n\
-    \    fill(all(c), 0);\n    rep(i, n) rep(j, n) c[i | j] += a[i] * b[j];\n    assert(c\
-    \ == d && \"or\");\n  }\n\n  // xor convolution\n  {\n    auto d = xor_convolution(a,\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../template/template.hpp\"\n\nusing namespace Nyaan;\n\n#include \"../../misc/rng.hpp\"\
+    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../set-function/and-convolution.hpp\"\
+    \n#include \"../../set-function/or-convolution.hpp\"\n#include \"../../set-function/xor-convolution.hpp\"\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\n\ntemplate <typename T>\nvoid\
+    \ test(int n) {\n  assert((n & (n - 1)) == 0);\n  vector<T> a(n), b(n), c(n);\n\
+    \n  rep(i, n) {\n    a[i] = rng() & 0xFFFF;\n    b[i] = rng() & 0xFFFF;\n  }\n\
+    \n  {\n    auto d = a;\n    subset_zeta_transform(d);\n    subset_mobius_transform(d);\n\
+    \    assert(a == d && \"subset\");\n  }\n\n  {\n    auto d = a;\n    superset_zeta_transform(d);\n\
+    \    superset_mobius_transform(d);\n    assert(a == d && \"superset\");\n  }\n\
+    \n  {\n    auto d = a;\n    walsh_hadamard_transform(d);\n    walsh_hadamard_transform(d,\
+    \ true);\n    assert(a == d && \"hadamard\");\n  }\n\n  // and convolution\n \
+    \ {\n    auto d = and_convolution(a, b);\n    fill(all(c), 0);\n    rep(i, n)\
+    \ rep(j, n) c[i & j] += a[i] * b[j];\n    assert(c == d && \"and\");\n  }\n\n\
+    \  // or convolution\n  {\n    auto d = or_convolution(a, b);\n    fill(all(c),\
+    \ 0);\n    rep(i, n) rep(j, n) c[i | j] += a[i] * b[j];\n    assert(c == d &&\
+    \ \"or\");\n  }\n\n  // xor convolution\n  {\n    auto d = xor_convolution(a,\
     \ b);\n    fill(all(c), 0);\n    rep(i, n) rep(j, n) c[i ^ j] += a[i] * b[j];\n\
     \    assert(c == d && \"xor\");\n  }\n}\n\nvoid Nyaan::solve() {\n  for (int i\
     \ = 1; i <= 1024; i *= 2) {\n    test<ll>(i);\n    test<mint>(i);\n  }\n  cerr\
@@ -336,8 +340,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/set-function.test.cpp
   requiredBy: []
-  timestamp: '2020-12-07 13:36:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-07 13:42:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/set-function.test.cpp
 layout: document

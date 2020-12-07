@@ -2,18 +2,18 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set-function/and-convolution.hpp
     title: AND Convoluion
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: set-function/or-convolution.hpp
     title: OR Convoluion
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/set-function.test.cpp
     title: verify/verify-unit-test/set-function.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: Zeta Transform / Moebius Transform
     links: []
@@ -55,7 +55,7 @@ data:
   - set-function/and-convolution.hpp
   - set-function/or-convolution.hpp
   timestamp: '2020-12-07 13:36:10+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/set-function.test.cpp
 documentation_of: set-function/zeta-mobius-transform.hpp
