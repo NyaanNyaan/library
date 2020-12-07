@@ -131,6 +131,7 @@
 "verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp": "2020-12-05 08:35:39 +0900",
 "verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-math/yosupo-counting-primes.test.cpp": "2020-12-05 07:59:51 +0900",
+"verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp": "2020-12-08 01:05:40 +0900",
 "verify/verify-yosupo-math/yosupo-determinant.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-math/yosupo-factorization.test.cpp": "2020-12-08 00:23:55 +0900",
 "verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp": "2020-12-05 07:59:51 +0900",
