@@ -1,40 +1,40 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: marathon/log_table.hpp
     title: marathon/log_table.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: marathon/simulated-annealing.hpp
     title: Simulated Annealing
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -263,7 +263,7 @@ data:
     \  rep(i, N) rep(j, N) {\n    double cx = 0, cy = 0;\n    for (int ii = i;; ii\
     \ = (ii + 1) % N) {\n      cx += v[ii].x(), cy += v[ii].y();\n      if (ii ==\
     \ j) break;\n    }\n    amax(ans, sqrt(cx * cx + cy * cy));\n  }\n  return ans;\n\
-    }\n\nvoid Nyaan::solve() {\n  rep(i, 20) {\n    int n = 1000;\n    V<pd> v(n);\n\
+    }\n\nvoid Nyaan::solve() {\n  rep(i, 20) {\n    int n = 100;\n    V<pd> v(n);\n\
     \    rep(j, n) v[j] = pd(randint(0, 2 * TEN(6) + 1) + TEN(6),\n              \
     \          randint(0, 2 * TEN(6) + 1) + TEN(6));\n    auto ans1 = argsort(n, v);\n\
     \    auto ans2 = yakinamashi(n, v);\n    cerr << abs(ans1 - ans2) << endl;\n \
@@ -297,9 +297,9 @@ data:
     \ cx = 0, cy = 0;\n    for (int ii = i;; ii = (ii + 1) % N) {\n      cx += v[ii].x(),\
     \ cy += v[ii].y();\n      if (ii == j) break;\n    }\n    amax(ans, sqrt(cx *\
     \ cx + cy * cy));\n  }\n  return ans;\n}\n\nvoid Nyaan::solve() {\n  rep(i, 20)\
-    \ {\n    int n = 1000;\n    V<pd> v(n);\n    rep(j, n) v[j] = pd(randint(0, 2\
-    \ * TEN(6) + 1) + TEN(6),\n                        randint(0, 2 * TEN(6) + 1)\
-    \ + TEN(6));\n    auto ans1 = argsort(n, v);\n    auto ans2 = yakinamashi(n, v);\n\
+    \ {\n    int n = 100;\n    V<pd> v(n);\n    rep(j, n) v[j] = pd(randint(0, 2 *\
+    \ TEN(6) + 1) + TEN(6),\n                        randint(0, 2 * TEN(6) + 1) +\
+    \ TEN(6));\n    auto ans1 = argsort(n, v);\n    auto ans2 = yakinamashi(n, v);\n\
     \    cerr << abs(ans1 - ans2) << endl;\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
     \  cout << (a + b) << endl;\n}\n"
   dependsOn:
@@ -316,8 +316,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/simulated-annealing.test.cpp
   requiredBy: []
-  timestamp: '2020-12-08 00:23:55+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-08 00:48:40+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/simulated-annealing.test.cpp
 layout: document
