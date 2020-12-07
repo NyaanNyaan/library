@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename T>
 void walsh_hadamard_transform(vector<T>& f, bool inverse = false) {
   int n = f.size();
@@ -14,7 +12,15 @@ void walsh_hadamard_transform(vector<T>& f, bool inverse = false) {
     }
   }
   if (inverse) {
-    T invn = T(1) / T(f.size());
-    for (auto& x : f) x *= invn;
+    if constexpr (is_integral<T>::value) {
+      for (auto& x : f) x /= n;
+    } else {
+      T invn = T(1) / T(f.size());
+      for (auto& x : f) x *= invn;
+    }
   }
 }
+
+/**
+ * @brief Walsh Hadamard Transform
+ */

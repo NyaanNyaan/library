@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename T>
 void superset_zeta_transform(vector<T>& f) {
   int n = f.size();
@@ -53,3 +51,7 @@ void subset_mobius_transform(vector<T>& f) {
     }
   }
 }
+
+/**
+ * @brief Zeta Transform / Moebius Transform
+ */

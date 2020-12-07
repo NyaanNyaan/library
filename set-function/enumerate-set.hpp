@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 // enumerate x : x \subset b
 vector<int> enumerate_subset(int b) {
   vector<int> res;

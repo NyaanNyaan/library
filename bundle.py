@@ -35,7 +35,6 @@ print(" *  date : " + nw.strftime("%Y-%m-%d %H:%M:%S"))
 print(" */")
 print()
 print("#define NDEBUG")
-print("#include <immintrin.h>")
 cmd = ["oj-bundle", "-I", library_path, buffer]
 src = subprocess.check_output(cmd).decode("utf-8")
 lines = src.split('\n')

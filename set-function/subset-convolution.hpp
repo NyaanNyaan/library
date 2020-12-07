@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename mint>
 vector<mint> subset_convolution(const vector<mint>& a, const vector<mint>& b) {
   int N = a.size();

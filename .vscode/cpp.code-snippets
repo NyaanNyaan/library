@@ -67,9 +67,11 @@
   "solve_function": {
     "prefix": "_sol",
     "body": [
-      "#include \"competitive-template.hpp\"",
+      "#include \"template/template.hpp\"",
       "",
-      "void solve(){",
+      "using namespace Nyaan;",
+      "",
+      "void Nyaan::solve(){",
       "  $0",
       "}"
     ],
@@ -78,14 +80,17 @@
   "solve_function_for_multitest": {
     "prefix": "_solve_for_multitest",
     "body": [
+      "#include \"template/template.hpp\"",
+      "",
+      "using namespace Nyaan;",
+      "",
       "void q(){",
       "  $0",
       "}",
-      "",
-      "void solve(){",
+      "void Nyaan::solve(){",
       "  int T;",
       "  cin >> T;",
-      "  for(int i = 0 ; i < T ; i++) q();",
+      "  while(T--) q();",
       "}"
     ],
     "description": "solve_function_for_multitest"
