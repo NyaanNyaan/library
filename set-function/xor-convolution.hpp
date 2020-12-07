@@ -13,5 +13,5 @@ vector<T> xor_convolution(vector<T> a, vector<T> b) {
 }
 
 /**
- * @brief AND Convoluion
+ * @brief XOR Convoluion
  */

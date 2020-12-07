@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 namespace my_rand {
 
 // [0, 2^64 - 1)
