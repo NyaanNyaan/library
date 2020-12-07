@@ -271,7 +271,7 @@ data:
       title: 2-SAT
   - name: matrix
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: matrix/matrix-fast.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
     - icon: ':heavy_check_mark:'
@@ -1026,6 +1026,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+      title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant.test.cpp

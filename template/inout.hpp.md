@@ -412,6 +412,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - icon: ':heavy_check_mark:'
@@ -680,6 +683,7 @@ data:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
