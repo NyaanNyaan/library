@@ -24,7 +24,7 @@ data:
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
     path: tree/rerooting.hpp
-    title: tree/rerooting.hpp
+    title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -181,7 +181,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"tree/rerooting.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate\
+    \ 2 \"tree/rerooting.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate\
     \ <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T\
     \ _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost)\
     \ : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int &x) {\n\
@@ -209,7 +209,7 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"tree/rerooting.hpp\"\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"tree/rerooting.hpp\"\
     \n\n// Rerooting\n// f1(c1, c2) ... merge value of child node\n// f2(memo[i],\
     \ chd, par) ... return value from child node to parent node\n// memo[i] ... result\
     \ of subtree rooted i\n// dp[i] ... result of tree rooted i\ntemplate <typename\
@@ -229,19 +229,16 @@ data:
     \ buf[i]);\n\n    // update\n    dp[cur] = par == -1 ? head.back() : f1(pval,\
     \ head.back());\n\n    // propagate\n    int idx = 0;\n    for (auto &dst : g[cur])\
     \ {\n      if (dst == par) continue;\n      efs(dst, cur, f2(f1(pval, f1(head[idx],\
-    \ tail[idx + 1])), cur, dst));\n      idx++;\n    }\n  }\n};\n\n/*\n\nusing T\
-    \ = ;\n// identify element of f1, and answer of leaf\nT I = ;\n// merge value\
-    \ of child node\nauto f1 = [&](T x, T y) -> T {\n\n};\n// return value from child\
-    \ node to parent node\nauto f2 = [&](T x, int chd, int par) -> T {\n\n};\nRerooting<T,\
-    \ decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);\n\n*/\n#line 6 \"\
-    verify/verify-aoj-grl/aoj-grl-5-b.test.cpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  ini(N);\n  auto g = wgraph<int>(N, N - 1, false, false);\n  map<pair<int,\
-    \ int>, int> es;\n  rep(i, N) each(e, g[i]) es[{e.src, e.to}] = e.cost;\n\n  using\
-    \ T = int;\n  // identify element of f1, and answer of leaf\n  T I = 0;\n  //\
-    \ merge value of child node\n  auto f1 = [&](T x, T y) -> T { return max(x, y);\
-    \ };\n  // return value from child node to parent node\n  auto f2 = [&](T x, int\
-    \ chd, int par) -> T { return x + es[{chd, par}]; };\n  Rerooting<T, decltype(g),\
-    \ decltype(f1), decltype(f2)> dp(g, f1, f2, I);\n\n  rep(i,N) out(dp.dp[i]);\n\
+    \ tail[idx + 1])), cur, dst));\n      idx++;\n    }\n  }\n};\n\n/**\n * @brief\
+    \ Rerooting(\u5168\u65B9\u4F4D\u6728DP)\n * @docs docs/tree/rerooting.md\n */\n\
+    #line 6 \"verify/verify-aoj-grl/aoj-grl-5-b.test.cpp\"\n\nusing namespace Nyaan;\
+    \ void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<int>(N, N - 1, false, false);\n\
+    \  map<pair<int, int>, int> es;\n  rep(i, N) each(e, g[i]) es[{e.src, e.to}] =\
+    \ e.cost;\n\n  using T = int;\n  // identify element of f1, and answer of leaf\n\
+    \  T I = 0;\n  // merge value of child node\n  auto f1 = [&](T x, T y) -> T {\
+    \ return max(x, y); };\n  // return value from child node to parent node\n  auto\
+    \ f2 = [&](T x, int chd, int par) -> T { return x + es[{chd, par}]; };\n  Rerooting<T,\
+    \ decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);\n\n  rep(i,N) out(dp.dp[i]);\n\
     }\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_B\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../tree/rerooting.hpp\"\
@@ -265,7 +262,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-07 14:58:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp

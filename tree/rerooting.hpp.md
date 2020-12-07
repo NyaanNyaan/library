@@ -15,8 +15,10 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/tree/rerooting.md
+    document_title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
     links: []
-  bundledCode: "#line 2 \"tree/rerooting.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
+  bundledCode: "#line 2 \"tree/rerooting.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
     \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
     \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
     \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
@@ -44,7 +46,7 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"tree/rerooting.hpp\"\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"tree/rerooting.hpp\"\
     \n\n// Rerooting\n// f1(c1, c2) ... merge value of child node\n// f2(memo[i],\
     \ chd, par) ... return value from child node to parent node\n// memo[i] ... result\
     \ of subtree rooted i\n// dp[i] ... result of tree rooted i\ntemplate <typename\
@@ -64,12 +66,9 @@ data:
     \ buf[i]);\n\n    // update\n    dp[cur] = par == -1 ? head.back() : f1(pval,\
     \ head.back());\n\n    // propagate\n    int idx = 0;\n    for (auto &dst : g[cur])\
     \ {\n      if (dst == par) continue;\n      efs(dst, cur, f2(f1(pval, f1(head[idx],\
-    \ tail[idx + 1])), cur, dst));\n      idx++;\n    }\n  }\n};\n\n/*\n\nusing T\
-    \ = ;\n// identify element of f1, and answer of leaf\nT I = ;\n// merge value\
-    \ of child node\nauto f1 = [&](T x, T y) -> T {\n\n};\n// return value from child\
-    \ node to parent node\nauto f2 = [&](T x, int chd, int par) -> T {\n\n};\nRerooting<T,\
-    \ decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);\n\n*/\n"
-  code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\n// Rerooting\n\
+    \ tail[idx + 1])), cur, dst));\n      idx++;\n    }\n  }\n};\n\n/**\n * @brief\
+    \ Rerooting(\u5168\u65B9\u4F4D\u6728DP)\n * @docs docs/tree/rerooting.md\n */\n"
+  code: "#pragma once\n\n#include \"../graph/graph-template.hpp\"\n\n// Rerooting\n\
     // f1(c1, c2) ... merge value of child node\n// f2(memo[i], chd, par) ... return\
     \ value from child node to parent node\n// memo[i] ... result of subtree rooted\
     \ i\n// dp[i] ... result of tree rooted i\ntemplate <typename T, typename G, typename\
@@ -89,17 +88,14 @@ data:
     \ buf[i]);\n\n    // update\n    dp[cur] = par == -1 ? head.back() : f1(pval,\
     \ head.back());\n\n    // propagate\n    int idx = 0;\n    for (auto &dst : g[cur])\
     \ {\n      if (dst == par) continue;\n      efs(dst, cur, f2(f1(pval, f1(head[idx],\
-    \ tail[idx + 1])), cur, dst));\n      idx++;\n    }\n  }\n};\n\n/*\n\nusing T\
-    \ = ;\n// identify element of f1, and answer of leaf\nT I = ;\n// merge value\
-    \ of child node\nauto f1 = [&](T x, T y) -> T {\n\n};\n// return value from child\
-    \ node to parent node\nauto f2 = [&](T x, int chd, int par) -> T {\n\n};\nRerooting<T,\
-    \ decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);\n\n*/"
+    \ tail[idx + 1])), cur, dst));\n      idx++;\n    }\n  }\n};\n\n/**\n * @brief\
+    \ Rerooting(\u5168\u65B9\u4F4D\u6728DP)\n * @docs docs/tree/rerooting.md\n */\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/rerooting.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-07 14:58:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
@@ -109,5 +105,28 @@ layout: document
 redirect_from:
 - /library/tree/rerooting.hpp
 - /library/tree/rerooting.hpp.html
-title: tree/rerooting.hpp
+title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
 ---
+## 全方位木DP
+
+#### テンプレート
+
+```
+using T = ;
+// identify element of f1, and answer of leaf
+T I = ;
+
+// merge value of child node
+auto f1 = [&](T x, T y) -> T {
+
+};
+
+// return value from child node to parent node
+auto f2 = [&](T x, int chd, int par) -> T {
+
+};
+
+Rerooting<T, decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);
+```
+
+
