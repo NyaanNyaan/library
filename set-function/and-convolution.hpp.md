@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: data-structure/union-find-with-potential.hpp
-    title: data-structure/union-find-with-potential.hpp
+  - icon: ':x:'
+    path: set-function/zeta-mobius-transform.hpp
+    title: Zeta Transform / Moebius Transform
   - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -23,30 +23,30 @@ data:
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-unit-test/set-function.test.cpp
+    title: verify/verify-unit-test/set-function.test.cpp
+  _pathExtension: hpp
+  _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B
-    links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B
-  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B\"\n\
-    \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
-    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
-    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
-    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
-    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
-    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
-    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
-    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    document_title: AND Convoluion
+    links: []
+  bundledCode: "#line 2 \"set-function/and-convolution.hpp\"\n\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
+    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
+    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
+    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
+    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
+    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
     \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
     \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -178,31 +178,31 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"data-structure/union-find-with-potential.hpp\"\n\ntemplate <class T>\nstruct\
-    \ UnionFindWithPotential {\n  vector<int> dat;\n  vector<T> pot;\n\n  UnionFindWithPotential(int\
-    \ N, T I_ = 0) : dat(N, -1), pot(N, T()) {}\n\n  int root(int x) {\n    if (dat[x]\
-    \ < 0) return x;\n    int r = root(dat[x]);\n    pot[x] += pot[dat[x]];\n    return\
-    \ dat[x] = r;\n  }\n\n  // return P(x) - P(root(x))\n  T potential(int x) {\n\
-    \    root(x);\n    return pot[x];\n  }\n\n  bool same(int x, int y) { return root(x)\
-    \ == root(y); }\n\n  // return P(x) - P(y)\n  T diff(int x, int y) {\n    return\
-    \ potential(x) - potential(y);\n  }\n\n  // s.t. P(x) = P(y) + p\n  // return\
-    \ Satisfiablility\n  bool merge(int x, int y, T p) {\n    p += potential(y) -\
-    \ potential(x);\n    x = root(x), y = root(y);\n    if (x == y) return p == T();\n\
-    \    if (dat[x] < dat[y]) swap(x, y), p = -p;\n    dat[y] += dat[x];\n    dat[x]\
-    \ = y;\n    pot[x] = p;\n    return true;\n  }\n\n  // return size of CC including\
-    \ x\n  int size(int x) { return -dat[root(x)]; }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  UnionFindWithPotential<int>\
-    \ uf(N);\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(x, y, z);\n\
-    \      uf.merge(y, x, z);\n    } else {\n      ini(x, y);\n      if (!uf.same(x,\
-    \ y))\n        out(\"?\");\n      else\n        out(uf.diff(y, x));\n    }\n \
-    \ }\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure/union-find-with-potential.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  UnionFindWithPotential<int>\
-    \ uf(N);\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(x, y, z);\n\
-    \      uf.merge(y, x, z);\n    } else {\n      ini(x, y);\n      if (!uf.same(x,\
-    \ y))\n        out(\"?\");\n      else\n        out(uf.diff(y, x));\n    }\n \
-    \ }\n}"
+    \ 2 \"set-function/zeta-mobius-transform.hpp\"\n\ntemplate <typename T>\nvoid\
+    \ superset_zeta_transform(vector<T>& f) {\n  int n = f.size();\n  assert((n &\
+    \ (n - 1)) == 0);\n  for (int i = 1; i < n; i <<= 1) {\n    for (int j = 0; j\
+    \ < n; j++) {\n      if ((j & i) == 0) {\n        f[j] += f[j | i];\n      }\n\
+    \    }\n  }\n}\n\ntemplate <typename T>\nvoid superset_mobius_transform(vector<T>&\
+    \ f) {\n  int n = f.size();\n  assert((n & (n - 1)) == 0);\n  for (int i = 1;\
+    \ i < n; i <<= 1) {\n    for (int j = 0; j < n; j++) {\n      if ((j & i) == 0)\
+    \ {\n        f[j] -= f[j | i];\n      }\n    }\n  }\n}\n\ntemplate <typename T>\n\
+    void subset_zeta_transform(vector<T>& f) {\n  int n = f.size();\n  assert((n &\
+    \ (n - 1)) == 0);\n  for (int i = 1; i < n; i <<= 1) {\n    for (int j = 0; j\
+    \ < n; j++) {\n      if ((j & i) == 0) {\n        f[j | i] += f[j];\n      }\n\
+    \    }\n  }\n}\n\ntemplate <typename T>\nvoid subset_mobius_transform(vector<T>&\
+    \ f) {\n  int n = f.size();\n  assert((n & (n - 1)) == 0);\n  for (int i = 1;\
+    \ i < n; i <<= 1) {\n    for (int j = 0; j < n; j++) {\n      if ((j & i) == 0)\
+    \ {\n        f[j | i] -= f[j];\n      }\n    }\n  }\n}\n\n/**\n * @brief Zeta\
+    \ Transform / Moebius Transform\n */\n#line 5 \"set-function/and-convolution.hpp\"\
+    \n\ntemplate <typename T>\nvector<T> and_convolution(vector<T> a, vector<T> b)\
+    \ {\n  superset_zeta_transform(a);\n  superset_zeta_transform(b);\n  for (int\
+    \ i = 0; i < (int)a.size(); i++) a[i] *= b[i];\n  superset_mobius_transform(a);\n\
+    \  return a;\n}\n\n/**\n * @brief AND Convoluion\n */\n"
+  code: "#pragma once\n\n#include \"../template/template.hpp\"\n#include \"zeta-mobius-transform.hpp\"\
+    \n\ntemplate <typename T>\nvector<T> and_convolution(vector<T> a, vector<T> b)\
+    \ {\n  superset_zeta_transform(a);\n  superset_zeta_transform(b);\n  for (int\
+    \ i = 0; i < (int)a.size(); i++) a[i] *= b[i];\n  superset_mobius_transform(a);\n\
+    \  return a;\n}\n\n/**\n * @brief AND Convoluion\n */\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -210,17 +210,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - data-structure/union-find-with-potential.hpp
-  isVerificationFile: true
-  path: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
+  - set-function/zeta-mobius-transform.hpp
+  isVerificationFile: false
+  path: set-function/and-convolution.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
+  timestamp: '2020-12-07 13:36:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/verify-unit-test/set-function.test.cpp
+documentation_of: set-function/and-convolution.hpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
-- /verify/verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp.html
-title: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
+- /library/set-function/and-convolution.hpp
+- /library/set-function/and-convolution.hpp.html
+title: AND Convoluion
 ---

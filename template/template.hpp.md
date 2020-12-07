@@ -1,22 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: set-function/and-convolution.hpp
+    title: AND Convoluion
+  - icon: ':x:'
+    path: set-function/or-convolution.hpp
+    title: OR Convoluion
+  - icon: ':x:'
+    path: set-function/xor-convolution.hpp
+    title: AND Convoluion
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
@@ -195,6 +204,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/set-function.test.cpp
+    title: verify/verify-unit-test/set-function.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
@@ -574,7 +586,7 @@ data:
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
@@ -895,9 +907,12 @@ data:
   - template/macro.hpp
   isVerificationFile: false
   path: template/template.hpp
-  requiredBy: []
+  requiredBy:
+  - set-function/and-convolution.hpp
+  - set-function/or-convolution.hpp
+  - set-function/xor-convolution.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
@@ -1083,6 +1098,7 @@ data:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/wavelet-matrix.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
 documentation_of: template/template.hpp
 layout: document

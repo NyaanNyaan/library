@@ -2,7 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: set-function/and-convolution.hpp
+    title: AND Convoluion
+  - icon: ':x:'
+    path: set-function/or-convolution.hpp
+    title: OR Convoluion
+  - icon: ':x:'
+    path: set-function/xor-convolution.hpp
+    title: AND Convoluion
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -183,6 +192,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/set-function.test.cpp
+    title: verify/verify-unit-test/set-function.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
@@ -562,7 +574,7 @@ data:
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n\n__attribute__((target(\"\
@@ -592,8 +604,11 @@ data:
   path: template/bitop.hpp
   requiredBy:
   - template/template.hpp
+  - set-function/and-convolution.hpp
+  - set-function/or-convolution.hpp
+  - set-function/xor-convolution.hpp
   timestamp: '2020-12-03 14:17:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
@@ -779,6 +794,7 @@ data:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/wavelet-matrix.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
 documentation_of: template/bitop.hpp
 layout: document

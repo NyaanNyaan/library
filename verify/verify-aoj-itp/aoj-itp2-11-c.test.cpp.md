@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/enumerate-set.hpp
     title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -178,10 +178,10 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"set-function/enumerate-set.hpp\"\n\n\n\n// enumerate x : x \\subset b\n\
-    vector<int> enumerate_subset(int b) {\n  vector<int> res;\n  for (int i = b; i\
-    \ >= 0; --i) res.push_back(i &= b);\n  return res;\n};\n\n// enumerate x : x \\\
-    in {n} and x \\superset b\nvector<int> enumerate_superset(int b, int n) {\n  vector<int>\
+    \ 2 \"set-function/enumerate-set.hpp\"\n\n// enumerate x : x \\subset b\nvector<int>\
+    \ enumerate_subset(int b) {\n  vector<int> res;\n  for (int i = b; i >= 0; --i)\
+    \ res.push_back(i &= b);\n  return res;\n};\n\n// enumerate x : x \\in {n} and\
+    \ x \\superset b\nvector<int> enumerate_superset(int b, int n) {\n  vector<int>\
     \ res;\n  for (int i = b; i < (1 << n); i = (i + 1) | b) res.push_back(i);\n \
     \ return res;\n}\n\n/**\n * @brief \u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\
     \u5408\u306E\u5217\u6319\n */\n#line 5 \"verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp\"\
@@ -206,7 +206,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-07 13:36:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp

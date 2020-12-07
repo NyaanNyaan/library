@@ -12,7 +12,7 @@ data:
     _deprecated_at_docs: docs/set-function/subset-convolution.md
     document_title: Subset Convolution
     links: []
-  bundledCode: "#line 2 \"set-function/subset-convolution.hpp\"\n\n\n\ntemplate <typename\
+  bundledCode: "#line 2 \"set-function/subset-convolution.hpp\"\n\ntemplate <typename\
     \ mint>\nvector<mint> subset_convolution(const vector<mint>& a, const vector<mint>&\
     \ b) {\n  int N = a.size();\n  assert(a.size() == b.size() && (N & (N - 1)) ==\
     \ 0);\n  int l = __builtin_ctz(N);\n\n  auto conv = [&](vector<mint>& a, vector<mint>&\
@@ -35,7 +35,7 @@ data:
     \ C(N);\n  for (int i = 0; i < N; i++) C[i] = A[i][l];\n  return C;\n}\n\n/**\n\
     \ * @brief Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n\
     \ */\n"
-  code: "#pragma once\n\n\n\ntemplate <typename mint>\nvector<mint> subset_convolution(const\
+  code: "#pragma once\n\ntemplate <typename mint>\nvector<mint> subset_convolution(const\
     \ vector<mint>& a, const vector<mint>& b) {\n  int N = a.size();\n  assert(a.size()\
     \ == b.size() && (N & (N - 1)) == 0);\n  int l = __builtin_ctz(N);\n\n  auto conv\
     \ = [&](vector<mint>& a, vector<mint>& b) -> void {\n    for (int k = l; k >=\
@@ -61,7 +61,7 @@ data:
   isVerificationFile: false
   path: set-function/subset-convolution.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-07 13:36:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp

@@ -4,28 +4,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
     path: set-function/subset-convolution.hpp
     title: Subset Convolution
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -184,14 +184,14 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"set-function/subset-convolution.hpp\"\n\n\n\ntemplate <typename mint>\n\
-    vector<mint> subset_convolution(const vector<mint>& a, const vector<mint>& b)\
-    \ {\n  int N = a.size();\n  assert(a.size() == b.size() && (N & (N - 1)) == 0);\n\
-    \  int l = __builtin_ctz(N);\n\n  auto conv = [&](vector<mint>& a, vector<mint>&\
-    \ b) -> void {\n    for (int k = l; k >= 0; --k) {\n      mint n = mint(0);\n\
-    \      for (int i = 0; i <= k; ++i) n += a[i] * b[k - i];\n      a[k] = n;\n \
-    \   }\n  };\n\n  vector<vector<mint>> A(N, vector<mint>(l + 1)), B(N, vector<mint>(l\
-    \ + 1));\n  for (int i = 0; i < N; i++) A[i][0] = a[i], B[i][0] = b[i];\n  vector<mint>\
+    \ 2 \"set-function/subset-convolution.hpp\"\n\ntemplate <typename mint>\nvector<mint>\
+    \ subset_convolution(const vector<mint>& a, const vector<mint>& b) {\n  int N\
+    \ = a.size();\n  assert(a.size() == b.size() && (N & (N - 1)) == 0);\n  int l\
+    \ = __builtin_ctz(N);\n\n  auto conv = [&](vector<mint>& a, vector<mint>& b) ->\
+    \ void {\n    for (int k = l; k >= 0; --k) {\n      mint n = mint(0);\n      for\
+    \ (int i = 0; i <= k; ++i) n += a[i] * b[k - i];\n      a[k] = n;\n    }\n  };\n\
+    \n  vector<vector<mint>> A(N, vector<mint>(l + 1)), B(N, vector<mint>(l + 1));\n\
+    \  for (int i = 0; i < N; i++) A[i][0] = a[i], B[i][0] = b[i];\n  vector<mint>\
     \ buf(l + 1);\n\n  for (int n = N / 2, d = 1; n; n >>= 1, ++d) {\n    for (int\
     \ i = 0; i < N; i += 2 * n) {\n      for (int j = i; j < i + n; j++) {\n     \
     \   // A[j + n] = A[j] + A[j + n] * x\n        buf[0] = A[j][0];\n        for\
@@ -298,7 +298,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-07 13:36:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp

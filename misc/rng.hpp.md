@@ -33,6 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/set-function.test.cpp
+    title: verify/verify-unit-test/set-function.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
@@ -52,7 +55,7 @@ data:
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/rng.hpp\"\n\n\n\nnamespace my_rand {\n\n// [0, 2^64\
@@ -99,7 +102,7 @@ data:
   - prime/fast-factorize.hpp
   - rbst/treap.hpp
   timestamp: '2020-12-05 13:58:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
@@ -112,6 +115,7 @@ data:
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/set-function.test.cpp
 documentation_of: misc/rng.hpp
 layout: document
 redirect_from:
