@@ -103,7 +103,7 @@ double argsort(int N, V<pd> v) {
 
 void Nyaan::solve() {
   rep(i, 20) {
-    int n = 1000;
+    int n = 100;
     V<pd> v(n);
     rep(j, n) v[j] = pd(randint(0, 2 * TEN(6) + 1) + TEN(6),
                         randint(0, 2 * TEN(6) + 1) + TEN(6));
