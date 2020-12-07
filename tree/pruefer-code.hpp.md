@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: Pruefer Code
     links: []
-  bundledCode: "#line 2 \"tree/pruefer-code.hpp\"\n\n#line 2 \"misc/rng.hpp\"\n\n\n\
-    \nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
-    \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
-    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
-    \           .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
+  bundledCode: "#line 2 \"tree/pruefer-code.hpp\"\n\n#line 2 \"misc/rng.hpp\"\n\n\
+    namespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_\
+    \ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n            \
+    \       chrono::high_resolution_clock::now().time_since_epoch())\n           \
+    \        .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
     \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
     \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
     \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
@@ -65,8 +65,8 @@ data:
   isVerificationFile: false
   path: tree/pruefer-code.hpp
   requiredBy: []
-  timestamp: '2020-12-05 18:58:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-08 00:23:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-unit-test/tree-path.test.cpp
 documentation_of: tree/pruefer-code.hpp

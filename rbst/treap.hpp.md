@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
     links: []
-  bundledCode: "#line 2 \"rbst/treap.hpp\"\n\n\n\n#line 2 \"misc/rng.hpp\"\n\n\n\n\
-    namespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_\
-    \ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n            \
-    \       chrono::high_resolution_clock::now().time_since_epoch())\n           \
-    \        .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
-    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
+  bundledCode: "#line 2 \"rbst/treap.hpp\"\n\n\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace\
+    \ my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n  \
+    \    uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n                  \
+    \ chrono::high_resolution_clock::now().time_since_epoch())\n                 \
+    \  .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return x_\
+    \ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
     \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
     \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
     \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
@@ -157,8 +157,8 @@ data:
   isVerificationFile: false
   path: rbst/treap.hpp
   requiredBy: []
-  timestamp: '2020-12-05 13:58:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-08 00:23:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
 documentation_of: rbst/treap.hpp

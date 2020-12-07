@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -184,9 +184,9 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"trial/fast-inv.hpp\"\n\n\n\n#line 2 \"misc/timer.hpp\"\n\n\n\nstruct Timer\
-    \ {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\
-    \n  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
+    \ 2 \"trial/fast-inv.hpp\"\n\n\n\n#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n\
+    \  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\n\
+    \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
     \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
     \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
     \ 6 \"trial/fast-inv.hpp\"\n\nnamespace fast_inv {\nusing u64 = uint64_t;\nusing\
@@ -294,7 +294,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/fast-inv-gcd.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-08 00:23:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/fast-inv-gcd.test.cpp

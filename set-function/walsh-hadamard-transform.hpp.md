@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
-    title: AND Convoluion
+    title: XOR Convoluion
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/set-function.test.cpp

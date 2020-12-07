@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-  - icon: ':warning:'
-    path: misc/simulated-annealing.hpp
-    title: misc/simulated-annealing.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: marathon/simulated-annealing.hpp
+    title: Simulated Annealing
+  - icon: ':x:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   - icon: ':heavy_check_mark:'
@@ -21,19 +21,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fast-inv-gcd.test.cpp
     title: verify/verify-unit-test/fast-inv-gcd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: verify/verify-unit-test/simulated-annealing.test.cpp
+    title: verify/verify-unit-test/simulated-annealing.test.cpp
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"misc/timer.hpp\"\n\n\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+  bundledCode: "#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
     \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
     };\n"
-  code: "#pragma once\n\n\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+  code: "#pragma once\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
     \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
@@ -42,16 +45,17 @@ data:
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
-  - misc/simulated-annealing.hpp
   - modulo/strassen.hpp
   - fps/fps-composition-fast.hpp
+  - marathon/simulated-annealing.hpp
   - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-08 00:23:55+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
+  - verify/verify-unit-test/simulated-annealing.test.cpp
 documentation_of: misc/timer.hpp
 layout: document
 redirect_from:

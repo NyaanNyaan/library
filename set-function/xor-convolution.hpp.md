@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/walsh-hadamard-transform.hpp
     title: Walsh Hadamard Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -30,7 +30,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: AND Convoluion
+    document_title: XOR Convoluion
     links: []
   bundledCode: "#line 2 \"set-function/xor-convolution.hpp\"\n\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
@@ -189,12 +189,12 @@ data:
     \n\ntemplate <typename T>\nvector<T> xor_convolution(vector<T> a, vector<T> b)\
     \ {\n  walsh_hadamard_transform(a);\n  walsh_hadamard_transform(b);\n  for (int\
     \ i = 0; i < (int)a.size(); i++) a[i] *= b[i];\n  walsh_hadamard_transform(a,\
-    \ true);\n  return a;\n}\n\n/**\n * @brief AND Convoluion\n */\n"
+    \ true);\n  return a;\n}\n\n/**\n * @brief XOR Convoluion\n */\n"
   code: "#pragma once\n\n#include \"../template/template.hpp\"\n#include \"walsh-hadamard-transform.hpp\"\
     \n\ntemplate <typename T>\nvector<T> xor_convolution(vector<T> a, vector<T> b)\
     \ {\n  walsh_hadamard_transform(a);\n  walsh_hadamard_transform(b);\n  for (int\
     \ i = 0; i < (int)a.size(); i++) a[i] *= b[i];\n  walsh_hadamard_transform(a,\
-    \ true);\n  return a;\n}\n\n/**\n * @brief AND Convoluion\n */\n"
+    \ true);\n  return a;\n}\n\n/**\n * @brief XOR Convoluion\n */\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -206,7 +206,7 @@ data:
   isVerificationFile: false
   path: set-function/xor-convolution.hpp
   requiredBy: []
-  timestamp: '2020-12-07 13:36:10+09:00'
+  timestamp: '2020-12-08 00:23:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/set-function.test.cpp
@@ -215,5 +215,5 @@ layout: document
 redirect_from:
 - /library/set-function/xor-convolution.hpp
 - /library/set-function/xor-convolution.hpp.html
-title: AND Convoluion
+title: XOR Convoluion
 ---

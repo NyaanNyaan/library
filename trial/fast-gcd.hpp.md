@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   _extendedRequiredBy: []
@@ -16,7 +16,7 @@ data:
     document_title: "\u9AD8\u901FGCD"
     links: []
   bundledCode: "#line 2 \"trial/fast-gcd.hpp\"\n\n\n\n#line 2 \"misc/timer.hpp\"\n\
-    \n\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer()\
+    \nstruct Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer()\
     \ { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
@@ -101,7 +101,7 @@ data:
   isVerificationFile: false
   path: trial/fast-gcd.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-08 00:23:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp

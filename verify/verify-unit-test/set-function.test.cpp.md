@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -18,26 +18,26 @@ data:
     title: Walsh Hadamard Transform
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
-    title: AND Convoluion
+    title: XOR Convoluion
   - icon: ':heavy_check_mark:'
     path: set-function/zeta-mobius-transform.hpp
     title: Zeta Transform / Moebius Transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -197,7 +197,7 @@ data:
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-unit-test/set-function.test.cpp\"\n\nusing namespace Nyaan;\n\
-    \n#line 2 \"misc/rng.hpp\"\n\n\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
+    \n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
     \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
     \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
@@ -282,7 +282,7 @@ data:
     \ 5 \"set-function/xor-convolution.hpp\"\n\ntemplate <typename T>\nvector<T> xor_convolution(vector<T>\
     \ a, vector<T> b) {\n  walsh_hadamard_transform(a);\n  walsh_hadamard_transform(b);\n\
     \  for (int i = 0; i < (int)a.size(); i++) a[i] *= b[i];\n  walsh_hadamard_transform(a,\
-    \ true);\n  return a;\n}\n\n/**\n * @brief AND Convoluion\n */\n#line 12 \"verify/verify-unit-test/set-function.test.cpp\"\
+    \ true);\n  return a;\n}\n\n/**\n * @brief XOR Convoluion\n */\n#line 12 \"verify/verify-unit-test/set-function.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\n\ntemplate <typename T>\nvoid\
     \ test(int n) {\n  assert((n & (n - 1)) == 0);\n  vector<T> a(n), b(n), c(n);\n\
     \n  rep(i, n) {\n    a[i] = rng() & 0xFFFF;\n    b[i] = rng() & 0xFFFF;\n  }\n\
@@ -340,7 +340,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/set-function.test.cpp
   requiredBy: []
-  timestamp: '2020-12-07 13:42:44+09:00'
+  timestamp: '2020-12-08 00:23:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/set-function.test.cpp
