@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename T, int H, int W>
 struct Matrix {
   using Array = array<array<T, W>, H>;
@@ -9,7 +7,7 @@ struct Matrix {
 
   Matrix() : A() {
     for (int i = 0; i < H; i++)
-      for (int j = 0; j < W; j++) a[i][j] = T();
+      for (int j = 0; j < W; j++) (*this)[i][j] = T();
   }
 
   int height() const { return H; }
@@ -40,11 +38,11 @@ struct Matrix {
   }
 
   Matrix &operator*=(const Matrix &B) {
-    assert(W == B.H);
+    assert(H == W);
     Matrix C;
     for (int i = 0; i < H; i++)
-      for (int k = 0; k < W; k++)
-        for (int j = 0; j < B.W; j++) C[i][j] += A[i][k] * B[k][j];
+      for (int k = 0; k < H; k++)
+        for (int j = 0; j < H; j++) C[i][j] += A[i][k] * B[k][j];
     A.swap(C.A);
     return (*this);
   }
@@ -78,13 +76,13 @@ struct Matrix {
     return (os);
   }
 
-  T determinant() {
+  T determinant(int n = -1) {
+    if (n == -1) n = H;
     Matrix B(*this);
-    assert(H == W);
     T ret = 1;
-    for (int i = 0; i < H; i++) {
+    for (int i = 0; i < n; i++) {
       int idx = -1;
-      for (int j = i; j < W; j++) {
+      for (int j = i; j < n; j++) {
         if (B[j][i] != 0) {
           idx = j;
           break;
@@ -97,13 +95,13 @@ struct Matrix {
       }
       ret *= B[i][i];
       T inv = T(1) / B[i][i];
-      for (int j = 0; j < W; j++) {
+      for (int j = 0; j < n; j++) {
         B[i][j] *= inv;
       }
-      for (int j = i + 1; j < H; j++) {
+      for (int j = i + 1; j < n; j++) {
         T a = B[j][i];
         if (a == 0) continue;
-        for (int k = i; k < W; k++) {
+        for (int k = i; k < n; k++) {
           B[j][k] -= B[i][k] * a;
         }
       }
