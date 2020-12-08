@@ -202,6 +202,9 @@ data:
     path: verify/verify-unit-test/hashset.test.cpp
     title: verify/verify-unit-test/hashset.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/math.test.cpp
+    title: verify/verify-unit-test/math.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1122,6 +1125,7 @@ data:
   - verify/verify-unit-test/wavelet-matrix.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/set-function.test.cpp
+  - verify/verify-unit-test/math.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
 documentation_of: template/template.hpp

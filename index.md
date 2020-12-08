@@ -245,7 +245,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/float-binomial.hpp
       title: math/float-binomial.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: math/gray-code.hpp
       title: Gray code
     - icon: ':heavy_check_mark:'
@@ -790,6 +790,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashset.test.cpp
       title: verify/verify-unit-test/hashset.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/math.test.cpp
+      title: verify/verify-unit-test/math.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/mf.test.cpp
       title: verify/verify-unit-test/mf.test.cpp

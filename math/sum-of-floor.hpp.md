@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/math.test.cpp
+    title: verify/verify-unit-test/math.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
     title: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
   _pathExtension: hpp
@@ -36,6 +39,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
+  - verify/verify-unit-test/math.test.cpp
 documentation_of: math/sum-of-floor.hpp
 layout: document
 redirect_from:
