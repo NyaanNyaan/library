@@ -264,8 +264,8 @@ data:
       path: math/semiring.hpp
       title: math/semiring.hpp
     - icon: ':heavy_check_mark:'
-      path: math/sum_of_floor.hpp
-      title: math/sum_of_floor.hpp
+      path: math/sum-of-floor.hpp
+      title: math/sum-of-floor.hpp
     - icon: ':heavy_check_mark:'
       path: math/two-sat.hpp
       title: 2-SAT

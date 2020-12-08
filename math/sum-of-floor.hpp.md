@@ -10,7 +10,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/sum_of_floor.hpp\"\n\n\n\n// sum_{0 <= i < N} (ai +\
+  bundledCode: "#line 2 \"math/sum-of-floor.hpp\"\n\n\n\n// sum_{0 <= i < N} (ai +\
     \ b) // m\ntemplate <typename T>\nT sum_of_floor(T n, T m, T a, T b) {\n  T ret\
     \ = 0;\n  if (a >= m) ret += (n - 1) * n * (a / m) / 2, a %= m;\n  if (b >= m)\
     \ ret += n * (b / m), b %= m;\n  T y = (a * n + b) / m;\n  if (y == 0) return\
@@ -30,16 +30,16 @@ data:
     \ m, a, b + m) - sum_of_floor(xr, m, a, b + m - yr);\n}\n"
   dependsOn: []
   isVerificationFile: false
-  path: math/sum_of_floor.hpp
+  path: math/sum-of-floor.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-08 18:07:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
-documentation_of: math/sum_of_floor.hpp
+documentation_of: math/sum-of-floor.hpp
 layout: document
 redirect_from:
-- /library/math/sum_of_floor.hpp
-- /library/math/sum_of_floor.hpp.html
-title: math/sum_of_floor.hpp
+- /library/math/sum-of-floor.hpp
+- /library/math/sum-of-floor.hpp.html
+title: math/sum-of-floor.hpp
 ---

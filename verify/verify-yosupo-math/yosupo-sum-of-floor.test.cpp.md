@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math/sum_of_floor.hpp
-    title: math/sum_of_floor.hpp
+    path: math/sum-of-floor.hpp
+    title: math/sum-of-floor.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -178,7 +178,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"math/sum_of_floor.hpp\"\n\n\n\n// sum_{0 <= i < N} (ai + b) // m\ntemplate\
+    \ 2 \"math/sum-of-floor.hpp\"\n\n\n\n// sum_{0 <= i < N} (ai + b) // m\ntemplate\
     \ <typename T>\nT sum_of_floor(T n, T m, T a, T b) {\n  T ret = 0;\n  if (a >=\
     \ m) ret += (n - 1) * n * (a / m) / 2, a %= m;\n  if (b >= m) ret += n * (b /\
     \ m), b %= m;\n  T y = (a * n + b) / m;\n  if (y == 0) return ret;\n  T x = y\
@@ -190,7 +190,7 @@ data:
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(T);\n  rep(_, T) {\n \
     \   inl(N, M, A, B);\n    out(sum_of_floor(N, M, A, B));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_floor_of_linear\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../math/sum_of_floor.hpp\"\
+    \n\n#include \"../../template/template.hpp\"\n#include \"../../math/sum-of-floor.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(T);\n  rep(_, T) {\n \
     \   inl(N, M, A, B);\n    out(sum_of_floor(N, M, A, B));\n  }\n}"
   dependsOn:
@@ -200,11 +200,11 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - math/sum_of_floor.hpp
+  - math/sum-of-floor.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-08 18:07:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
