@@ -41,7 +41,7 @@ void Nyaan::solve() {
   gray_code_test();
   mod_affine_range_counting_test();
 
-  int a,b;
-  cin>>a>>b;
-  cout<<a+b<<endl;
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << endl;
 }
