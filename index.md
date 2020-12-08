@@ -105,7 +105,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/fast-multieval.hpp
       title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/formal-power-series.hpp
       title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
         \u30E9\u30EA"
@@ -119,9 +119,9 @@ data:
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
-    - icon: ':warning:'
+    - icon: ':x:'
       path: fps/fps-famous-series.hpp
-      title: fps/fps-famous-series.hpp
+      title: "\u6709\u540D\u306A\u6570\u5217"
     - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
@@ -137,7 +137,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/nth-term.hpp
       title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
@@ -149,7 +149,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/sum-of-exponential-times-poly.hpp
       title: $\sum_{i}a^i f(i)$
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/taylor-shift.hpp
       title: "\u5E73\u884C\u79FB\u52D5"
     - icon: ':heavy_check_mark:'
@@ -327,15 +327,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
     - icon: ':heavy_check_mark:'
@@ -393,7 +393,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/cooley-turkey-ntt.hpp
       title: ntt/cooley-turkey-ntt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
     - icon: ':heavy_check_mark:'
@@ -548,22 +548,22 @@ data:
       title: Suffix Automaton
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -959,6 +959,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp

@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
     title: XOR Convoluion
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -354,6 +354,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
@@ -589,7 +592,7 @@ data:
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/macro.hpp\"\n#define each(x, v) for (auto&& x :\
@@ -649,7 +652,7 @@ data:
   - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
   timestamp: '2020-12-04 23:12:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
@@ -750,6 +753,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp

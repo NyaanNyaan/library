@@ -5,12 +5,15 @@ data:
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
+  - icon: ':x:'
+    path: fps/fps-famous-series.hpp
+    title: "\u6709\u540D\u306A\u6570\u5217"
   - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: fps/utility.hpp
-    title: fps/utility.hpp
+  - icon: ':question:'
+    path: fps/taylor-shift.hpp
+    title: "\u5E73\u884C\u79FB\u52D5"
   - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -44,28 +47,28 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1145
+    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
     links:
-    - https://yukicoder.me/problems/no/1145
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-1145.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/1145\"\n\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
-    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
-    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
-    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
-    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
-    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
-    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
-    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
-    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
-    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
-    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
-    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
+  bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
+    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
+    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
+    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
+    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
+    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
+    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
+    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
+    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
     \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
     \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -197,8 +200,8 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yuki/yuki-1145.test.cpp\"\n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
-    \n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \ 4 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\n//\n#line 2 \"\
+    fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
     \n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
     ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
     \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
@@ -704,38 +707,50 @@ data:
     \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
     \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
     \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 4 \"fps/utility.hpp\"\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>> v) {\n  using fps =\
-    \ FormalPowerSeries<mint>;\n  if ((int)v.size() == 0) return fps{mint(1)};\n \
-    \ sort(begin(v), end(v), [](fps& a, fps& b) { return a.size() < b.size(); });\n\
-    \  queue<fps> q;\n  for (auto& f : v) q.push(f);\n  while ((int)q.size() > 1)\
-    \ {\n    fps a = q.front();\n    q.pop();\n    fps b = q.front();\n    q.pop();\n\
-    \    q.push(a * b);\n  }\n  return q.front();\n}\n\ntemplate <typename mint>\n\
-    void OGFtoEGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
-    \ 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n}\n\ntemplate <typename mint>\n\
-    void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
-    \ 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  FormalPowerSeries<mint>\
-    \ ret{begin(C.finv_), begin(C.finv_) + deg};\n  return std::move(ret);\n}\n\n\
-    // f *= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>&\
-    \ f, int n, mint c, int expand = true) {\n  if (expand) f.resize(f.size() + n);\n\
-    \  for (int i = (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] +=\
-    \ f[i - n] * c;\n  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid\
-    \ sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {\n  for (int i = 0; i\
-    \ < (int)f.size(); ++i) {\n    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;\n\
-    \  }\n}\n#line 8 \"verify/verify-yuki/yuki-1145.test.cpp\"\n\nconstexpr int MOD9\
-    \ = 998244353;\nusing mint = LazyMontgomeryModInt<MOD9>;\nusing fps = FormalPowerSeries<mint>;\n\
-    \nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, M);\n  fps a(N);\n  in(a);\n\
-    \  V<fps> v;\n  each(x, a) v.emplace_back(fps{1, -x});\n  fps q = Pi(v);\n  fps\
-    \ p = q.diff();\n  fps f = -p * q.inv(M + 1);\n  f.resize(M);\n  out(f);\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1145\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
-    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../fps/utility.hpp\"\
-    \n\nconstexpr int MOD9 = 998244353;\nusing mint = LazyMontgomeryModInt<MOD9>;\n\
-    using fps = FormalPowerSeries<mint>;\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  ini(N, M);\n  fps a(N);\n  in(a);\n  V<fps> v;\n  each(x, a) v.emplace_back(fps{1,\
-    \ -x});\n  fps q = Pi(v);\n  fps p = q.diff();\n  fps f = -p * q.inv(M + 1);\n\
-    \  f.resize(M);\n  out(f);\n}"
+    \ - 1, r);\n  }\n};\n#line 9 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\nBinomial<mint> C;\nusing vm =\
+    \ vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
+    // \n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate <typename\
+    \ mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,\n\
+    \                                    Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  assert(C.fac_.size() >= f.size() + 1);\n  int N = f.size();\n  for (int i =\
+    \ 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
+    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
+    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
+    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
+    \ */\n#line 5 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ Stirling1st(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n  fps f = {0,\
+    \ 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n    f *= TaylorShift(f,\
+    \ mint(n >> 1), C);\n    if (n & 1) f = (f << 1) + f * (n - 1);\n  }\n  return\
+    \ f;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2nd(int N,\
+    \ Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N + 1),\
+    \ g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) * C.finv(i);\n\
+    \    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f * g).pre(N + 1);\n\
+    }\n\ntemplate <typename mint>\nFormalPowerSeries<mint> BernoulliEGF(int N, Binomial<mint>\
+    \ &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  for (int i\
+    \ = 0; i <= N; i++) f[i] = C.finv(i + 1);\n  return f.inv(N + 1);\n}\n\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> Partition(int N, Binomial<mint> &)\
+    \ {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  f[0] = 1;\n  for\
+    \ (int k = 1; k <= N; k++) {\n    long long k1 = 1LL * k * (3 * k + 1) / 2;\n\
+    \    long long k2 = 1LL * k * (3 * k - 1) / 2;\n    if (k2 > N) break;\n    if\
+    \ (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n    if (k2 <= N) f[k2] += ((k & 1) ?\
+    \ -1 : 1);\n  }\n  return f.inv();\n}\n\ntemplate <typename mint>\nvector<mint>\
+    \ Montmort(int N) {\n  if (N <= 1) return {0};\n  if (N == 2) return {0, 1};\n\
+    \  vector<mint> f(N);\n  f[0] = 0, f[1] = 1;\n  mint coeff = 2, one = 1;\n  for\
+    \ (int i = 2; i < N; i++) {\n    f[i] = (f[i - 1] + f[i - 2]) * coeff;\n    coeff\
+    \ += one;\n  }\n  return f;\n};\n\n/**\n * @brief \u6709\u540D\u306A\u6570\u5217\
+    \n */\n#line 16 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\nusing\
+    \ namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n);\n  auto s1 = Stirling1st<mint>(n,\
+    \ C);\n  for(int i = n - 1; i>=0; i-=2) s1[i]=-s1[i];\n  out(s1);\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
+    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
+    \n#include \"../../template/template.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    Binomial<mint> C;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps\
+    \ = FormalPowerSeries<mint>;\n// \n#include \"../../fps/fps-famous-series.hpp\"\
+    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n);\n  auto s1 = Stirling1st<mint>(n,\
+    \ C);\n  for(int i = n - 1; i>=0; i-=2) s1[i]=-s1[i];\n  out(s1);\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -748,18 +763,19 @@ data:
   - modint/simd-montgomery.hpp
   - fps/formal-power-series.hpp
   - modint/montgomery-modint.hpp
-  - fps/utility.hpp
   - modulo/binomial.hpp
+  - fps/fps-famous-series.hpp
+  - fps/taylor-shift.hpp
   isVerificationFile: true
-  path: verify/verify-yuki/yuki-1145.test.cpp
+  path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 13:58:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-08 17:14:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-1145.test.cpp
+documentation_of: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-1145.test.cpp
-- /verify/verify/verify-yuki/yuki-1145.test.cpp.html
-title: verify/verify-yuki/yuki-1145.test.cpp
+- /verify/verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+- /verify/verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp.html
+title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
 ---

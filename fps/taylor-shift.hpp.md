@@ -1,20 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: fps/fps-famous-series.hpp
+    title: "\u6709\u540D\u306A\u6570\u5217"
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/fps/fps-taylor-shift.md
     document_title: "\u5E73\u884C\u79FB\u52D5"
@@ -126,11 +132,13 @@ data:
   - modulo/binomial.hpp
   isVerificationFile: false
   path: fps/taylor-shift.hpp
-  requiredBy: []
+  requiredBy:
+  - fps/fps-famous-series.hpp
   timestamp: '2020-12-05 08:16:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
 documentation_of: fps/taylor-shift.hpp
 layout: document
 redirect_from:

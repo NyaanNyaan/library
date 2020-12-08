@@ -102,6 +102,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
@@ -196,7 +199,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t\
@@ -278,7 +281,7 @@ data:
   - fps/fast-multieval.hpp
   - fps/fps-circular.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
@@ -305,6 +308,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp

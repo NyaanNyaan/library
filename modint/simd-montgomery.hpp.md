@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   - icon: ':heavy_check_mark:'
@@ -78,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
@@ -136,7 +139,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/simd-montgomery.hpp\"\n\n\n#include <immintrin.h>\n\
@@ -235,7 +238,7 @@ data:
   - fps/ntt-friendly-fps.hpp
   - fps/fast-multieval.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
@@ -256,6 +259,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
