@@ -1,37 +1,35 @@
 #pragma once
 
-
+#include "../prime/prime-enumerate.hpp"
+#include "../template/template.hpp"
 
 // f(n, p, c) : n = pow(p, c), f is multiplicative function
-template <typename mint, typename F>
-vector<mint> enamurate_multiplicative_function(const F& func, int n) {
-  assert(n < (1LL << 30));
-  vector<mint> f(n + 1, mint(0));
-  if (!p) {
-    f[0] = 1;
-    return std::move(f);
+
+template <typename T, T (*f)(int, int, int)>
+struct enamurate_multiplicative_function {
+  enamurate_multiplicative_function(int _n)
+      : ps(prime_enumerate(_n)), a(_n + 1, T()), n(_n), p(ps.size()) {}
+
+  vector<T> run() {
+    a[1] = 1;
+    dfs(-1, 1, 1);
+    return a;
   }
-  f[1] = 1;
-  vector<bool> sieve(n + 1, false);
+
+ private:
   vector<int> ps;
-  for (int i = 2; i <= n; i++) {
-    if (!sieve[i]) {
-      f[i] = func(i, i, 1);
-      ps.push_back(i);
-    }
-    for (int j = 0; j < (int)ps.size() && i * ps[j] <= n; j++) {
-      sieve[i * ps[j]] = 1;
-      if (i % ps[j] == 0) {
-        int c = 0, x = i, y = 1;
-        while (x % ps[j] == 0) x /= ps[j], y *= ps[j], ++c;
-        if (x == 1)
-          f[i * ps[j]] = func(i * ps[j], i, c + 1);
-        else
-          f[i * ps[j]] = f[x] * f[y];
-        break;
-      } else
-        f[i * ps[j]] = f[i] * f[ps[j]];
+  vector<T> a;
+  int n, p;
+  void dfs(int i, long long x, T y) {
+    a[x] = y;
+    if (y == T()) return;
+    for (int j = i + 1; j < p; j++) {
+      long long nx = x * ps[j];
+      long long dx = ps[j];
+      if (nx > n) break;
+      for (int c = 1; nx <= n; nx *= ps[j], dx *= ps[j], ++c) {
+        dfs(j, nx, y * f(dx, ps[j], c));
+      }
     }
   }
-  return std::move(f);
-}
+};
