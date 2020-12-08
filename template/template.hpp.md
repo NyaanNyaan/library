@@ -18,6 +18,12 @@ data:
     title: template/util.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: multiplicative-function/enamurate-multiplicative-function.hpp
+    title: multiplicative-function/enamurate-multiplicative-function.hpp
+  - icon: ':heavy_check_mark:'
+    path: multiplicative-function/mf-famous-series.hpp
+    title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
+  - icon: ':heavy_check_mark:'
     path: set-function/and-convolution.hpp
     title: AND Convoluion
   - icon: ':heavy_check_mark:'
@@ -195,6 +201,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/hashset.test.cpp
     title: verify/verify-unit-test/hashset.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/mf.test.cpp
+    title: verify/verify-unit-test/mf.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multiplicative-function.test.cpp
     title: verify/verify-unit-test/multiplicative-function.test.cpp
@@ -917,6 +926,8 @@ data:
   - set-function/and-convolution.hpp
   - set-function/or-convolution.hpp
   - set-function/xor-convolution.hpp
+  - multiplicative-function/mf-famous-series.hpp
+  - multiplicative-function/enamurate-multiplicative-function.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -1101,6 +1112,7 @@ data:
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/wavelet-matrix.test.cpp

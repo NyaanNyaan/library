@@ -28,6 +28,9 @@ data:
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/mf.test.cpp
+    title: verify/verify-unit-test/mf.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multiplicative-function.test.cpp
     title: verify/verify-unit-test/multiplicative-function.test.cpp
   - icon: ':heavy_check_mark:'
@@ -332,6 +335,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/set-function.test.cpp
 documentation_of: modint/montgomery-modint.hpp
 layout: document

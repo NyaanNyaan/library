@@ -361,13 +361,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: multiplicative-function/divisor-multiple-transform.hpp
       title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/enamurate-multiplicative-function.hpp
       title: multiplicative-function/enamurate-multiplicative-function.hpp
     - icon: ':heavy_check_mark:'
       path: multiplicative-function/gcd-convolution.hpp
       title: "GCD\u7573\u307F\u8FBC\u307F"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/mf-famous-series.hpp
       title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
     - icon: ':heavy_check_mark:'
@@ -790,6 +790,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashset.test.cpp
       title: verify/verify-unit-test/hashset.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/mf.test.cpp
+      title: verify/verify-unit-test/mf.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/multiplicative-function.test.cpp
       title: verify/verify-unit-test/multiplicative-function.test.cpp

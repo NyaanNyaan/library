@@ -8,10 +8,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: multiplicative-function/gcd-convolution.hpp
     title: "GCD\u7573\u307F\u8FBC\u307F"
-  - icon: ':warning:'
-    path: multiplicative-function/mf-famous-series.hpp
-    title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/mf.test.cpp
+    title: verify/verify-unit-test/mf.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multiplicative-function.test.cpp
     title: verify/verify-unit-test/multiplicative-function.test.cpp
@@ -103,7 +103,6 @@ data:
   isVerificationFile: false
   path: multiplicative-function/divisor-multiple-transform.hpp
   requiredBy:
-  - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/gcd-convolution.hpp
   timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -113,6 +112,7 @@ data:
   - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/mf.test.cpp
 documentation_of: multiplicative-function/divisor-multiple-transform.hpp
 layout: document
 redirect_from:
