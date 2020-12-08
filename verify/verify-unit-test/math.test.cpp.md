@@ -225,7 +225,7 @@ data:
     \ long>(a, b, m, xr, yr);\n    int a2 = 0;\n    rep(x, xr) {\n      int X = (a\
     \ * x + b) % m;\n      a2 += X < yr;\n    }\n    assert(a1 == a2);\n  }\n}\n\n\
     void Nyaan::solve() {\n  gray_code_test();\n  mod_affine_range_counting_test();\n\
-    \n  int a,b;\n  cin>>a>>b;\n  cout<<a+b<<endl;\n}\n"
+    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/gray-code.hpp\"\n#include\
     \ \"../../math/sum-of-floor.hpp\"\n#include \"../../misc/rng.hpp\"\nusing namespace\
@@ -239,7 +239,7 @@ data:
     \ long>(a, b, m, xr, yr);\n    int a2 = 0;\n    rep(x, xr) {\n      int X = (a\
     \ * x + b) % m;\n      a2 += X < yr;\n    }\n    assert(a1 == a2);\n  }\n}\n\n\
     void Nyaan::solve() {\n  gray_code_test();\n  mod_affine_range_counting_test();\n\
-    \n  int a,b;\n  cin>>a>>b;\n  cout<<a+b<<endl;\n}"
+    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -253,7 +253,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/math.test.cpp
   requiredBy: []
-  timestamp: '2020-12-08 20:05:21+09:00'
+  timestamp: '2020-12-08 20:57:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/math.test.cpp
