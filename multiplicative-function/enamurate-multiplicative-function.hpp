@@ -33,3 +33,7 @@ struct enamurate_multiplicative_function {
     }
   }
 };
+
+/**
+ * @brief 乗法的関数の列挙
+ */

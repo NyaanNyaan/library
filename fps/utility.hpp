@@ -31,6 +31,7 @@ void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {
 
 template <typename mint>
 FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {
+  while ((int)C.finv_.size() < deg) C.extend();
   FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_) + deg};
   return std::move(ret);
 }

@@ -7,7 +7,6 @@ template <typename mint>
 FormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,
                                     Binomial<mint>& C) {
   using fps = FormalPowerSeries<mint>;
-  assert(C.fac_.size() >= f.size() + 1);
   int N = f.size();
   for (int i = 0; i < N; i++) f[i] *= C.fac(i);
   reverse(begin(f), end(f));
