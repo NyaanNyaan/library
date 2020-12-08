@@ -7,7 +7,7 @@ data:
     title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
   - icon: ':heavy_check_mark:'
     path: multiplicative-function/enamurate-multiplicative-function.hpp
-    title: multiplicative-function/enamurate-multiplicative-function.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
   - icon: ':heavy_check_mark:'
     path: multiplicative-function/gcd-convolution.hpp
     title: "GCD\u7573\u307F\u8FBC\u307F"

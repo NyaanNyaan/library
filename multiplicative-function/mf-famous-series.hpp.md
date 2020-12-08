@@ -3,26 +3,26 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: multiplicative-function/enamurate-multiplicative-function.hpp
-    title: multiplicative-function/enamurate-multiplicative-function.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
   - icon: ':heavy_check_mark:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -201,22 +201,22 @@ data:
     \ j = i + 1; j < p; j++) {\n      long long nx = x * ps[j];\n      long long dx\
     \ = ps[j];\n      if (nx > n) break;\n      for (int c = 1; nx <= n; nx *= ps[j],\
     \ dx *= ps[j], ++c) {\n        dfs(j, nx, y * f(dx, ps[j], c));\n      }\n   \
-    \ }\n  }\n};\n#line 5 \"multiplicative-function/mf-famous-series.hpp\"\n\nnamespace\
-    \ multiplicative_function {\ntemplate <typename T>\nT moebius(int, int, int c)\
-    \ {\n  return c == 0 ? 1 : c == 1 ? -1 : 0;\n}\ntemplate <typename T>\nT sigma0(int,\
-    \ int, int c) {\n  return c + 1;\n}\ntemplate <typename T>\nT sigma1(int n, int\
-    \ p, int) {\n  return (n - 1) / (p - 1) + n;\n}\ntemplate <typename T>\nT totient(int\
-    \ n, int p, int) {\n  return n - n / p;\n}\n}  // namespace multiplicative_function\n\
-    \ntemplate <typename T>\nstatic constexpr vector<T> mobius_function(int n) {\n\
-    \  enamurate_multiplicative_function<T, multiplicative_function::moebius<T>> em(\n\
-    \      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr vector<T>\
-    \ sigma0(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::sigma0<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> sigma1(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::sigma1<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> totient(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::totient<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\n/**\n * @brief \u6709\u540D\u306A\u4E57\
-    \u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
+    \ }\n  }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319\
+    \n */\n#line 5 \"multiplicative-function/mf-famous-series.hpp\"\n\nnamespace multiplicative_function\
+    \ {\ntemplate <typename T>\nT moebius(int, int, int c) {\n  return c == 0 ? 1\
+    \ : c == 1 ? -1 : 0;\n}\ntemplate <typename T>\nT sigma0(int, int, int c) {\n\
+    \  return c + 1;\n}\ntemplate <typename T>\nT sigma1(int n, int p, int) {\n  return\
+    \ (n - 1) / (p - 1) + n;\n}\ntemplate <typename T>\nT totient(int n, int p, int)\
+    \ {\n  return n - n / p;\n}\n}  // namespace multiplicative_function\n\ntemplate\
+    \ <typename T>\nstatic constexpr vector<T> mobius_function(int n) {\n  enamurate_multiplicative_function<T,\
+    \ multiplicative_function::moebius<T>> em(\n      n);\n  return em.run();\n}\n\
+    \ntemplate <typename T>\nstatic constexpr vector<T> sigma0(int n) {\n  enamurate_multiplicative_function<T,\
+    \ multiplicative_function::sigma0<T>> em(\n      n);\n  return em.run();\n}\n\n\
+    template <typename T>\nstatic constexpr vector<T> sigma1(int n) {\n  enamurate_multiplicative_function<T,\
+    \ multiplicative_function::sigma1<T>> em(\n      n);\n  return em.run();\n}\n\n\
+    template <typename T>\nstatic constexpr vector<T> totient(int n) {\n  enamurate_multiplicative_function<T,\
+    \ multiplicative_function::totient<T>> em(\n      n);\n  return em.run();\n}\n\
+    \n/**\n * @brief \u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
     \ */\n"
   code: "#pragma once\n\n#include \"../template/template.hpp\"\n#include \"enamurate-multiplicative-function.hpp\"\
     \n\nnamespace multiplicative_function {\ntemplate <typename T>\nT moebius(int,\
@@ -247,7 +247,7 @@ data:
   isVerificationFile: false
   path: multiplicative-function/mf-famous-series.hpp
   requiredBy: []
-  timestamp: '2020-12-08 16:55:11+09:00'
+  timestamp: '2020-12-08 17:24:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/mf.test.cpp

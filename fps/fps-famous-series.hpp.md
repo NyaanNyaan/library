@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u6709\u540D\u306A\u6570\u5217"
     links: []
@@ -107,13 +107,13 @@ data:
     \ return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 4 \"\
     fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ TaylorShift(FormalPowerSeries<mint> f, mint a,\n                           \
-    \         Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n  assert(C.fac_.size()\
-    \ >= f.size() + 1);\n  int N = f.size();\n  for (int i = 0; i < N; i++) f[i] *=\
-    \ C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n  for (int i\
-    \ = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n  reverse(begin(f),\
-    \ end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n  return f;\n}\n\
-    \n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
-    \ */\n#line 5 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \         Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n  int\
+    \ N = f.size();\n  for (int i = 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f),\
+    \ end(f));\n  fps g(N, mint(1));\n  for (int i = 1; i < N; i++) g[i] = g[i - 1]\
+    \ * a * C.inv(i);\n  f = (f * g).pre(N);\n  reverse(begin(f), end(f));\n  for\
+    \ (int i = 0; i < N; i++) f[i] *= C.finv(i);\n  return f;\n}\n\n/**\n * @brief\
+    \ \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n */\n#line\
+    \ 5 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ Stirling1st(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n  fps f = {0,\
     \ 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n    f *= TaylorShift(f,\
@@ -167,8 +167,8 @@ data:
   isVerificationFile: false
   path: fps/fps-famous-series.hpp
   requiredBy: []
-  timestamp: '2020-12-08 17:14:41+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-12-08 17:24:32+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
 documentation_of: fps/fps-famous-series.hpp

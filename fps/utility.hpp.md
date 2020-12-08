@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
@@ -111,15 +111,15 @@ data:
     \ 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n}\n\ntemplate <typename mint>\n\
     void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
     \ 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  FormalPowerSeries<mint>\
-    \ ret{begin(C.finv_), begin(C.finv_) + deg};\n  return std::move(ret);\n}\n\n\
-    // f *= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>&\
-    \ f, int n, mint c, int expand = true) {\n  if (expand) f.resize(f.size() + n);\n\
-    \  for (int i = (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] +=\
-    \ f[i - n] * c;\n  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid\
-    \ sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {\n  for (int i = 0; i\
-    \ < (int)f.size(); ++i) {\n    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;\n\
-    \  }\n}\n"
+    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  while ((int)C.finv_.size()\
+    \ < deg) C.extend();\n  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_)\
+    \ + deg};\n  return std::move(ret);\n}\n\n// f *= (1 + c x^n)\ntemplate <typename\
+    \ mint>\nvoid sparse_mul(FormalPowerSeries<mint>& f, int n, mint c, int expand\
+    \ = true) {\n  if (expand) f.resize(f.size() + n);\n  for (int i = (int)f.size()\
+    \ - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] += f[i - n] * c;\n  }\n}\n\n//\
+    \ f /= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_div(FormalPowerSeries<mint>&\
+    \ f, int n, mint c) {\n  for (int i = 0; i < (int)f.size(); ++i) {\n    if (i\
+    \ + n < (int)f.size()) f[i + n] -= f[i] * c;\n  }\n}\n"
   code: "#pragma once\n#include \"../modulo/binomial.hpp\"\n#include \"./formal-power-series.hpp\"\
     \n\ntemplate <typename mint>\nFormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>>\
     \ v) {\n  using fps = FormalPowerSeries<mint>;\n  if ((int)v.size() == 0) return\
@@ -131,22 +131,22 @@ data:
     \ 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n}\n\ntemplate <typename mint>\n\
     void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
     \ 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  FormalPowerSeries<mint>\
-    \ ret{begin(C.finv_), begin(C.finv_) + deg};\n  return std::move(ret);\n}\n\n\
-    // f *= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>&\
-    \ f, int n, mint c, int expand = true) {\n  if (expand) f.resize(f.size() + n);\n\
-    \  for (int i = (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] +=\
-    \ f[i - n] * c;\n  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid\
-    \ sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {\n  for (int i = 0; i\
-    \ < (int)f.size(); ++i) {\n    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;\n\
-    \  }\n}\n"
+    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  while ((int)C.finv_.size()\
+    \ < deg) C.extend();\n  FormalPowerSeries<mint> ret{begin(C.finv_), begin(C.finv_)\
+    \ + deg};\n  return std::move(ret);\n}\n\n// f *= (1 + c x^n)\ntemplate <typename\
+    \ mint>\nvoid sparse_mul(FormalPowerSeries<mint>& f, int n, mint c, int expand\
+    \ = true) {\n  if (expand) f.resize(f.size() + n);\n  for (int i = (int)f.size()\
+    \ - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] += f[i - n] * c;\n  }\n}\n\n//\
+    \ f /= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_div(FormalPowerSeries<mint>&\
+    \ f, int n, mint c) {\n  for (int i = 0; i < (int)f.size(); ++i) {\n    if (i\
+    \ + n < (int)f.size()) f[i + n] -= f[i] * c;\n  }\n}\n"
   dependsOn:
   - modulo/binomial.hpp
   - fps/formal-power-series.hpp
   isVerificationFile: false
   path: fps/utility.hpp
   requiredBy: []
-  timestamp: '2020-12-05 08:16:44+09:00'
+  timestamp: '2020-12-08 17:24:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1145.test.cpp

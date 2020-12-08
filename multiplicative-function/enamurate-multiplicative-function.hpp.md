@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy:
@@ -33,6 +33,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
     links: []
   bundledCode: "#line 2 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\
     \n\n#line 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11, 13,\
@@ -199,7 +200,8 @@ data:
     \ j = i + 1; j < p; j++) {\n      long long nx = x * ps[j];\n      long long dx\
     \ = ps[j];\n      if (nx > n) break;\n      for (int c = 1; nx <= n; nx *= ps[j],\
     \ dx *= ps[j], ++c) {\n        dfs(j, nx, y * f(dx, ps[j], c));\n      }\n   \
-    \ }\n  }\n};\n"
+    \ }\n  }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319\
+    \n */\n"
   code: "#pragma once\n\n#include \"../prime/prime-enumerate.hpp\"\n#include \"../template/template.hpp\"\
     \n\n// f(n, p, c) : n = pow(p, c), f is multiplicative function\n\ntemplate <typename\
     \ T, T (*f)(int, int, int)>\nstruct enamurate_multiplicative_function {\n  enamurate_multiplicative_function(int\
@@ -210,7 +212,8 @@ data:
     \ j = i + 1; j < p; j++) {\n      long long nx = x * ps[j];\n      long long dx\
     \ = ps[j];\n      if (nx > n) break;\n      for (int c = 1; nx <= n; nx *= ps[j],\
     \ dx *= ps[j], ++c) {\n        dfs(j, nx, y * f(dx, ps[j], c));\n      }\n   \
-    \ }\n  }\n};\n"
+    \ }\n  }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319\
+    \n */\n"
   dependsOn:
   - prime/prime-enumerate.hpp
   - template/template.hpp
@@ -223,7 +226,7 @@ data:
   path: multiplicative-function/enamurate-multiplicative-function.hpp
   requiredBy:
   - multiplicative-function/mf-famous-series.hpp
-  timestamp: '2020-12-08 16:55:11+09:00'
+  timestamp: '2020-12-08 17:24:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/mf.test.cpp
@@ -232,5 +235,5 @@ layout: document
 redirect_from:
 - /library/multiplicative-function/enamurate-multiplicative-function.hpp
 - /library/multiplicative-function/enamurate-multiplicative-function.hpp.html
-title: multiplicative-function/enamurate-multiplicative-function.hpp
+title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
 ---

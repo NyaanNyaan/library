@@ -1,47 +1,47 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -740,14 +740,13 @@ data:
     \ - 1, r);\n  }\n};\n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\n\
     template <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
     \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
-    \ fps = FormalPowerSeries<mint>;\n  assert(C.fac_.size() >= f.size() + 1);\n \
-    \ int N = f.size();\n  for (int i = 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f),\
-    \ end(f));\n  fps g(N, mint(1));\n  for (int i = 1; i < N; i++) g[i] = g[i - 1]\
-    \ * a * C.inv(i);\n  f = (f * g).pre(N);\n  reverse(begin(f), end(f));\n  for\
-    \ (int i = 0; i < N; i++) f[i] *= C.finv(i);\n  return f;\n}\n\n/**\n * @brief\
-    \ \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n */\n#line\
-    \ 9 \"verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp\"\n\nconstexpr int\
-    \ MOD9 = 998244353;\nconstexpr int MOD1 = 1000000007;\nusing mint = LazyMontgomeryModInt<MOD9>;\n\
+    \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
+    \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
+    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
+    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
+    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
+    \ */\n#line 9 \"verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp\"\n\nconstexpr\
+    \ int MOD9 = 998244353;\nconstexpr int MOD1 = 1000000007;\nusing mint = LazyMontgomeryModInt<MOD9>;\n\
     Binomial<mint> C(530000);\nusing fps = FormalPowerSeries<mint>;\n\nusing namespace\
     \ Nyaan; void Nyaan::solve() {\n  int N, c;\n  rd(N);\n  rd(c);\n  fps f(N);\n\
     \  rep(i, N) {\n    int buf;\n    rd(buf);\n    f[i] = buf;\n  }\n  fps g = TaylorShift(f,\
@@ -781,7 +780,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 08:16:44+09:00'
+  timestamp: '2020-12-08 17:24:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
