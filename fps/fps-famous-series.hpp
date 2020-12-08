@@ -1,6 +1,7 @@
 #pragma once
 #include "./formal-power-series.hpp"
 #include "../modulo/binomial.hpp"
+#include "taylor-shift.hpp"
 
 template <typename mint>
 FormalPowerSeries<mint> Stirling1st(int N, Binomial<mint> &C) {
@@ -63,3 +64,7 @@ vector<mint> Montmort(int N) {
   }
   return f;
 };
+
+/**
+ * @brief 有名な数列
+ */
