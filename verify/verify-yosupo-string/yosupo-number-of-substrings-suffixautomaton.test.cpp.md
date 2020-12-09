@@ -2,11 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: multiplicative-function/enamurate-multiplicative-function.hpp
-    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
-  - icon: ':heavy_check_mark:'
-    path: prime/prime-enumerate.hpp
-    title: prime/prime-enumerate.hpp
+    path: string/suffix-automaton.hpp
+    title: Suffix Automaton
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -26,18 +23,17 @@ data:
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/mf.test.cpp
-    title: verify/verify-unit-test/mf.test.cpp
-  _pathExtension: hpp
+  _extendedVerifiedWith: []
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/multiplicative-function/mf-famous-series.md
-    document_title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
-    links: []
-  bundledCode: "#line 2 \"multiplicative-function/mf-famous-series.hpp\"\n\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/number_of_substrings
+    links:
+    - https://judge.yosupo.jp/problem/number_of_substrings
+  bundledCode: "#line 1 \"verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\n//\n\
+    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
     \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -182,59 +178,61 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\n\n#line\
-    \ 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\n\
-    vector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N / 3 + 1, 1);\n  for\
-    \ (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d = 6 - d, i++) {\n\
-    \    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r = d * p / 3 + (d\
-    \ * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n         q < qe;\
-    \ q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2, 3};\n  for (int\
-    \ p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i]) ret.push_back(p);\n\
-    \  while (!ret.empty() && ret.back() > N) ret.pop_back();\n  return ret;\n}\n\
-    #line 5 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\n\n\
-    // f(n, p, c) : n = pow(p, c), f is multiplicative function\n\ntemplate <typename\
-    \ T, T (*f)(int, int, int)>\nstruct enamurate_multiplicative_function {\n  enamurate_multiplicative_function(int\
-    \ _n)\n      : ps(prime_enumerate(_n)), a(_n + 1, T()), n(_n), p(ps.size()) {}\n\
-    \n  vector<T> run() {\n    a[1] = 1;\n    dfs(-1, 1, 1);\n    return a;\n  }\n\
-    \n private:\n  vector<int> ps;\n  vector<T> a;\n  int n, p;\n  void dfs(int i,\
-    \ long long x, T y) {\n    a[x] = y;\n    if (y == T()) return;\n    for (int\
-    \ j = i + 1; j < p; j++) {\n      long long nx = x * ps[j];\n      long long dx\
-    \ = ps[j];\n      if (nx > n) break;\n      for (int c = 1; nx <= n; nx *= ps[j],\
-    \ dx *= ps[j], ++c) {\n        dfs(j, nx, y * f(dx, ps[j], c));\n      }\n   \
-    \ }\n  }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319\
-    \n */\n#line 5 \"multiplicative-function/mf-famous-series.hpp\"\n\nnamespace multiplicative_function\
-    \ {\ntemplate <typename T>\nT moebius(int, int, int c) {\n  return c == 0 ? 1\
-    \ : c == 1 ? -1 : 0;\n}\ntemplate <typename T>\nT sigma0(int, int, int c) {\n\
-    \  return c + 1;\n}\ntemplate <typename T>\nT sigma1(int n, int p, int) {\n  return\
-    \ (n - 1) / (p - 1) + n;\n}\ntemplate <typename T>\nT totient(int n, int p, int)\
-    \ {\n  return n - n / p;\n}\n}  // namespace multiplicative_function\n\ntemplate\
-    \ <typename T>\nstatic constexpr vector<T> mobius_function(int n) {\n  enamurate_multiplicative_function<T,\
-    \ multiplicative_function::moebius<T>> em(\n      n);\n  return em.run();\n}\n\
-    \ntemplate <typename T>\nstatic constexpr vector<T> sigma0(int n) {\n  enamurate_multiplicative_function<T,\
-    \ multiplicative_function::sigma0<T>> em(\n      n);\n  return em.run();\n}\n\n\
-    template <typename T>\nstatic constexpr vector<T> sigma1(int n) {\n  enamurate_multiplicative_function<T,\
-    \ multiplicative_function::sigma1<T>> em(\n      n);\n  return em.run();\n}\n\n\
-    template <typename T>\nstatic constexpr vector<T> totient(int n) {\n  enamurate_multiplicative_function<T,\
-    \ multiplicative_function::totient<T>> em(\n      n);\n  return em.run();\n}\n\
-    \n/**\n * @brief \u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
-    \ */\n"
-  code: "#pragma once\n\n#include \"../template/template.hpp\"\n#include \"enamurate-multiplicative-function.hpp\"\
-    \n\nnamespace multiplicative_function {\ntemplate <typename T>\nT moebius(int,\
-    \ int, int c) {\n  return c == 0 ? 1 : c == 1 ? -1 : 0;\n}\ntemplate <typename\
-    \ T>\nT sigma0(int, int, int c) {\n  return c + 1;\n}\ntemplate <typename T>\n\
-    T sigma1(int n, int p, int) {\n  return (n - 1) / (p - 1) + n;\n}\ntemplate <typename\
-    \ T>\nT totient(int n, int p, int) {\n  return n - n / p;\n}\n}  // namespace\
-    \ multiplicative_function\n\ntemplate <typename T>\nstatic constexpr vector<T>\
-    \ mobius_function(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::moebius<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> sigma0(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::sigma0<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> sigma1(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::sigma1<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> totient(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::totient<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\n/**\n * @brief \u6709\u540D\u306A\u4E57\
-    \u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
-    \ */\n"
+    \ 4 \"verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp\"\
+    \n//\n#line 2 \"string/suffix-automaton.hpp\"\n\ntemplate <int margin = 'a'>\n\
+    struct SuffixAutomaton {\n  struct state {\n    vector<pair<char, int>> next;\n\
+    \    uint64_t hit;\n    int len, link, origin;\n    char key;\n    bool sorted;\n\
+    \n    state() : hit(0), len(0), link(-1), origin(-1), key(0), sorted(false) {}\n\
+    \    state(int l, char k)\n        : hit(0), len(l), link(-1), origin(-1), key(k),\
+    \ sorted(false) {}\n\n    __attribute__((target(\"popcnt\"))) int find(char c)\
+    \ {\n      c -= margin;\n      if (((hit >> c) & 1) == 0) return -1;\n      if\
+    \ (sorted) {\n        return _mm_popcnt_u64(hit & ((1ull << c) - 1));\n      }\
+    \ else {\n        c += margin;\n        for (int i = 0; i < (int)next.size();\
+    \ i++) {\n          if (next[i].first == c) return i;\n        }\n        assert(0);\n\
+    \      }\n    }\n\n    int to(char c) { return next[find(c)].second; }\n\n   \
+    \ void add(char c, int i) {\n      c -= margin;\n      assert(((hit >> c) & 1)\
+    \ == 0);\n      next.emplace_back(c + margin, i);\n      hit |= 1ull << c;\n \
+    \   }\n  };\n  vector<state> st;\n  vector<int> topo;\n\n  SuffixAutomaton() =\
+    \ default;\n\n  SuffixAutomaton(const string &S) { build(S); }\n\n  void build(const\
+    \ string &S) {\n    st.push_back(state());\n    int last = 0;\n    for (int i\
+    \ = 0; i < (int)S.size(); i++) extend(S[i], last);\n    tsort();\n  }\n\n  int\
+    \ size() const { return st.size(); }\n\n  state &operator[](int i) { return st[i];\
+    \ }\n\n private:\n  void extend(char c, int &last) {\n    int cur = st.size();\n\
+    \    st.emplace_back(st[last].len + 1, c);\n    int p = last;\n    for (; p !=\
+    \ -1 && st[p].find(c) == -1; p = st[p].link) {\n      st[p].add(c, cur);\n   \
+    \ }\n    if (p == -1) {\n      st[cur].link = 0;\n    } else {\n      int q =\
+    \ st[p].to(c);\n      if (st[p].len + 1 == st[q].len)\n        st[cur].link =\
+    \ q;\n      else {\n        int clone = st.size();\n        {\n          state\
+    \ cl = st[q];\n          cl.len = st[p].len + 1;\n          cl.origin = q;\n \
+    \         st.push_back(std::move(cl));\n        }\n        for (; p != -1; p =\
+    \ st[p].link) {\n          int i = st[p].find(c);\n          assert(i != -1);\n\
+    \          if (st[p].next[i].second != q) break;\n          st[p].next[i].second\
+    \ = clone;\n        }\n        st[q].link = st[cur].link = clone;\n      }\n \
+    \   }\n    last = cur;\n  }\n\n  vector<bool> marked, temp;\n  vector<vector<int>>\
+    \ buf;\n\n  void dfs(int i) {\n    temp[i] = 1;\n    for (auto &[_, j] : st[i].next)\n\
+    \      if (!marked[j]) dfs(j);\n    for (auto &j : buf[i])\n      if (!marked[j])\
+    \ dfs(j);\n    marked[i] = 1;\n    topo.push_back(i);\n    temp[i] = 0;\n  }\n\
+    \n  void tsort() {\n    int n = st.size();\n    marked.resize(n), temp.resize(n),\
+    \ buf.resize(n);\n    for (int i = 1; i < n; i++) buf[st[i].link].push_back(i);\n\
+    \    for (int i = 0; i < n; i++)\n      if (!marked[i]) dfs(i);\n    reverse(begin(topo),\
+    \ end(topo));\n    buf.clear();\n    buf.shrink_to_fit();\n    marked.clear();\n\
+    \    marked.shrink_to_fit();\n    temp.clear();\n    temp.shrink_to_fit();\n\n\
+    \    vector<int> inv(n);\n    for (int i = 0; i < n; i++) inv[topo[i]] = i;\n\
+    \    {\n      vector<state> st2;\n      for (int i = 0; i < n; i++) st2.emplace_back(std::move(st[topo[i]]));\n\
+    \      st.swap(st2);\n    }\n    for (int i = 0; i < n; i++) {\n      state &s\
+    \ = st[i];\n      sort(begin(s.next), end(s.next));\n      s.sorted = true;\n\
+    \      for (auto &[_, y] : s.next) y = inv[y];\n      if (s.link != -1) s.link\
+    \ = inv[s.link];\n      if (s.origin != -1) s.origin = inv[s.origin];\n    }\n\
+    \    topo.clear();\n    topo.shrink_to_fit();\n  }\n};\n\n/**\n * @brief Suffix\
+    \ Automaton\n * @docs docs/string/suffix-automaton.md\n */\n#line 6 \"verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp\"\
+    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ins(s);\n  SuffixAutomaton\
+    \ sa(s);\n\n  vl dp(sz(sa));\n  dp[0] = 1;\n  rep(i, sz(sa)) { each(p, sa[i].next)\
+    \ dp[p.second] += dp[i]; }\n  out(accumulate(all(dp),0LL) - 1);\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\n\
+    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../string/suffix-automaton.hpp\"\
+    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ins(s);\n  SuffixAutomaton\
+    \ sa(s);\n\n  vl dp(sz(sa));\n  dp[0] = 1;\n  rep(i, sz(sa)) { each(p, sa[i].next)\
+    \ dp[p.second] += dp[i]; }\n  out(accumulate(all(dp),0LL) - 1);\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -242,109 +240,17 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - multiplicative-function/enamurate-multiplicative-function.hpp
-  - prime/prime-enumerate.hpp
-  isVerificationFile: false
-  path: multiplicative-function/mf-famous-series.hpp
+  - string/suffix-automaton.hpp
+  isVerificationFile: true
+  path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
   requiredBy: []
-  timestamp: '2020-12-08 17:24:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/verify-unit-test/mf.test.cpp
-documentation_of: multiplicative-function/mf-famous-series.hpp
+  timestamp: '2020-12-09 15:22:26+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
 layout: document
 redirect_from:
-- /library/multiplicative-function/mf-famous-series.hpp
-- /library/multiplicative-function/mf-famous-series.hpp.html
-title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
+- /verify/verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
+- /verify/verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp.html
+title: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
 ---
-## 有名な乗法的関数
-
-来るべきDGF(ディリクレ母関数)の流行に備えて(本当に流行るのか？)、自分が理解していることをメモしておく…
-
-#### 乗法的関数
-
-$f(n)$が任意の$\gcd(a,b) = 1$である自然数$a,b$に対して$f(ab) = f(a)f(b)$となる時、$f(n)$は乗法的であると呼ぶ。特に任意の$a,b$について$f(ab)=f(a)f(b)$が成り立つ時は完全乗法的であると呼ぶ。
-
-乗法的関数の重要な性質は以下のようなものが挙げられる。
-
-- $f(n),g(n)$が乗法的である時、$h(n)=f(n)g(n)$も乗法的である。
-- $f(n),g(n)$が乗法的である時、ディリクレの畳み込みで得られる関数$h(n)=\sum_{d\mid n}f(d)g\left(\frac{n}{d}\right)$も乗法的である。
-
-また、乗法的関数に関するアルゴリズムは以下のものが知られている。
-
-- $f(n)$が乗法的であり、かつ$f(p^k)$が$\mathrm{O}(1)$で求まるとき、
-  - $f(n)$の計算が$\mathrm{O}(n^{\frac{1}{4}})$　(Pollard's Rho法)
-  - $f(n)$の初め$n$項の列挙が$\mathrm{O}(n)$　([実装](https://nyaannyaan.github.io/library/multiplicative-function/enamurate-multiplicative-function.hpp))
-  - $f(n)$の初め$n$項のprefix sumが$\mathrm{O}(n^{\frac{2}{3}})$　([実装](https://nyaannyaan.github.io/library/multiplicative-function/enamurate-multiplicative-function.hpp))
-  - $g(n)=\sum_{d\mid n}\mu\left(\frac{n}{d}\right)f(d)$の初め$n$項の列挙が$\mathrm{O}(n \log \log n)$　([実装](https://nyaannyaan.github.io/library/multiplicative-function/divisor-multiple-transform.hpp))
-
-#### 有名な乗法的関数
-
-- 定数関数　$\mathrm{I}(n)=c$
-- 恒等写像　$\mathrm{Id}(n)=n$
-- 指数関数　$\mathrm{Id}_a(n)=n^a$
-- Unit Function $\epsilon(n)=[n = 1]$
-- メビウス関数　$\mu(p^k) =[k = 0]-[k = 1]$
-- 約数関数 $\sigma_a(p^k) = \sum_{i=0}^k p^{ai}$
-- トーシェント関数　$\phi(p^k) = p^k - p^{k-1}$
-
-このうち下の3つは次の畳み込みの関係が知られている。
-
-- メビウス関数　$\sum_{d \mid n} \mu(n) = \epsilon(n)$
-- 約数関数 $\sum_{d \mid n} d^a = \sigma_a(n)$
-- トーシェント関数　$\sum_{d \mid n} \phi(d) = n$
-
-#### メビウス関数　$\mu(n)$
-
-メビウス関数に関する説明は[ここ](https://nyaannyaan.github.io/library/multiplicative-function/divisor-multiple-transform.hpp)に詳しく書いた。
-
-競技プログラミングにおいてのメビウス関数の利用法は(雑に説明すると)包除原理の$(-1)^k$と似た使い方をすることが多い。実際に具体例を見てみる。
-
-##### 例題1
-
-- $N$の約数$n$に対して$g(n)=\sum_{d\mid n}f(d)$と$\mu(n)$がわかっているとする。この時$f(N)$を$\mathrm{O}(\sigma(N))$で計算せよ。
-
-約数系包除を使えば$\mathrm{O}(\sigma(N)^2)$で解けるがより高速な解法を考えたい。
-まずは反転公式を使わずに考察してみる。具体的な$N$についていくつか実験してみると、
-
-$$f(16)=g(16)-g(8)$$
-
-$$f(12)=g(12)-g(6)-g(4)+g(2)$$
-
-$$f(30)=g(30)-g(15)-g(10)-g(6)+g(5)+g(3)+g(2)-g(1)$$
-
-のようになり、これは包除原理+BIT全探索で解くことが出来る。([tsutajさんの非常にわかりやすい包除PDF](https://compro.tsutaj.com//archive/181015_incexc.pdf)に類題の詳しい説明がある。)
-
-一方、反転公式を使うと、例えば$n=12$の時は
-
-$$f(12) = \sum_{d \in \lbrace 1,2,3,4,6,12\rbrace}\mu\left(\frac{n}{d}\right)g(d)=g(12)-g(6)-g(4)+g(2)$$
-
-となり包除原理によって得られる結果と一致する。
-
-下位集合に対するゼータ変換が包除原理で解けることと、約数集合に対するゼータ変換がメビウス関数で解けることは同じような関係にある(？)と言える。
-
-##### 例題2：[Cube-loving Numbers　(HackerRank)](https://www.hackerrank.com/contests/university-codesprint-5/challenges)
-
-- $N$が与えられるので、「自然数$a>1,b\geq 1$を用いて$a^3\times b$と表せる$N$以下の自然数の個数」を$\mathrm{O}(\sqrt[3]{N})$で計算せよ。
-
-$1\leq n\leq N$において自然数$a,b$を用いて$n=a^3\times b$と表せる$n$の個数$g(a)$は$g(a)=\lfloor\frac{N}{a^3}\rfloor$と容易に表せるので、この式をうまく利用して答えを求めたい。(直感的には、$g(n)$は一つの自然数を複数回カウントする関数なのでメビウス変換したいという気持ちになる。)
-
-対象を重複なく数え上げるために、自然数$n$に一対一対応する$(a,b)$を決定したい。具体的には、「$n=A^3\times B$を満たす自然数の組$(A,B)$の中で最も$B$が小さい組」を$n$に対応する組$(a,b)$とおく。そして、$f(a)$を「$(a,\frac{n}{a^3})$と対応している$N$以下の自然数$n$の個数」とおく。
-
-$f$と$g$の関係式を得るために、$g(a)$でカウントされている自然数$n$が$f$のどこでカウントされているかを考える。$n=a^3\times b$としたとき、$b$に一対一対応する整数の組を$(c,d)$とおくと、$n$に対応する組は$(ca,d)$であるから$f(ca)$で数え上げられていることが分かる。逆に$f(ca)$で数え上げられた$n$が$g(a)$で数えられていることも示せる。よって$f(a)$と$g(a)$の間には
-
-$$g(a)=\sum_{a\mid m}f(m) \leftrightarrow f(a)=\sum_{a\mid m}\mu\left(\frac{m}{a}\right)g(m)$$
-
-という倍数変換の関係式が成り立つことがわかる。また、求める答えは$M=\lfloor\sqrt[3]{N}\rfloor$と置いたとき$\sum_{a=2}^Mf(a)$である。
-($M\lt a$のとき$f(a)=g(a)=0$である事実を利用している。)
-
-よって倍数メビウス変換を用いれば$\mathrm{O}(M\log \log M)$で計算できることが示せたが、メビウス関数を用いることでさらなる高速化を図りたい。$\sum_{a=2}^Mf(a)$を$g(m)$の線形和に分解したときの$g(m)$の寄与を考察すると、
-
-$$\sum_{a=2}^M f(a)=\sum_{2\leq a\leq M, a\mid m} \left( \mu\left(\frac{m}{a}\right)g(m)\right)$$
-
-$$=\sum_{2\leq m\leq M} g(m)\left(\sum_{a\mid m,a\neq 1}\mu\left(\frac{m}{a}\right)\right)$$
-
-$$=\sum_{2\leq m\leq M} g(m)(-\mu(m)+\sum_{a\mid m}\mu(a))=-\sum_{2\leq m\leq M} g(m)\mu(m)$$
-
-と非常にきれいな式になる。$\mu(m)$および$g(m)$は線形で列挙できるため、求める答えも線形で列挙できる。以上よりこの問題を$\mathrm{O}(\sqrt[3]{N})$で解くことが出来た。

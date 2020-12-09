@@ -1,28 +1,23 @@
 ## Suffix Automaton
 
-これはなに？
-
 #### 概要
 
 これはなに？
 
-TODO:なにも理解していない　[CP-Algorithms](https://cp-algorithms.com/string/suffix-automaton.html)を全部読む
+参考文献：[CP-Algorithms](https://cp-algorithms.com/string/suffix-automaton.html)　[uwiさんの記事](https://w.atwiki.jp/uwicoder/pages/2842.html)　[迷路さんの記事](https://pazzle1230.hatenablog.com/entry/2020/04/10/030325)
 
-参考：[uwiさんの記事](https://w.atwiki.jp/uwicoder/pages/2842.html)　[迷路さんの記事](https://pazzle1230.hatenablog.com/entry/2020/04/10/030325)
-
-#### 図
+##### 図
 
 文字列$S="\mathrm{nyaan}"$に対応するオートマトンを書いたものが下図
 ![nyaan](https://nyaannyaan.github.io/library/nyaan.png)
 
 ##### 図の説明
 
-- Suffix Automaton：文字列のsuffixを受理するオートマトン
-- 頂点：全ての部分列と対応した状態
+- 頂点：部分列と対応した状態
 - 図の黒線：次の文字の状態への遷移
 - 図の赤線：次の文字の遷移が無かった場合に辿るsuffix link
 - 図のc→cloneされたノード
-- この説明ではなんのこっちゃという感じなので、$\mathrm{endpos}(T)$を定義して詳しく仕組みを見ていく
+  - この説明ではなんのこっちゃという感じなので、$\mathrm{endpos}(T)$を定義して詳しく仕組みを見ていく
 
 #### $\mathrm{endpos}$
 
@@ -55,10 +50,35 @@ $$\begin{cases}
 - 性質5:次のルールのみを用いて木を構築したとき、その構造はSuffix Linkによって作られた木と一致する。
   - $\mathrm{endpos}(T_1) \in \mathrm{endpos}(T_2),T_1 \in u,T_2 \in v$であるとき、かつその時に限り$u$は$v$の子孫である。(ただし$\mathrm{endpos}(\phi)=\lbrace{-1,0,\ldots,\mathrm{len}(S)-1\rbrace}$とおく。)
 
-#### 重要な性質
+#### Suffix Automatonの概要
+ 
+##### 今までのまとめ
 
-書きかけ　
+- 文字列$S$の部分文字列$T$は$\mathrm{endpos}(T)$の値によっていくつかの集合に分類できる。
+
+- Suffix Automatonは初期状態$t_0$とendpos-equivalentな集合に一対一対応する状態から構成される。
+
+- 状態$v$に対して一つ以上の部分文字列が対応する。このような部分列のうち一番長いものを$\mathrm{longest}(v)$としてその長さを$\mathrm{len}(v)$とおく。また、一番短い部分文字列の長さを$\mathrm{minlen}(v)$とおく。このとき、状態$v$に対応する全ての文字列は$\mathrm{longest}(v)$のSuffixであり、区間$[\mathrm{minlen}(v), len(v)]$に含まれる全ての長さに対応する全ての部分列のみを含む。
+
+- 状態$v \neq t_0$に対して、長さ$\mathrm{minlen}(v)-1$の$\mathrm{longest}(v)$のSuffixに対応する状態に繋がるリンクをSuffix Linkと定義する。Suffix Linkは$t_0$を根とする木を形成し、同時にこの木は集合$\mathrm{endpos}$の間の包含関係を表している。
+
+- 状態$v \neq t_0$について、$\mathrm{minlen}(v)$はSuffix Linkの接続先$\mathrm{link}(v)$を用いて次のように表される。
+$$\mathrm{minlen}(v) = \mathrm{len}(\mathrm{link}(v)) + 1$$
+
+- 任意の状態$v_0$からスタートしてSuffix Linkをたどると$t_0$に到達する。経由した頂点ごとの区間を連結すると連続区間$[0, \mathrm{len}(v_0)]$を得る。
+
+##### 実装
+
+- TODO:なにも理解していない　[CP-Algorithms](https://cp-algorithms.com/string/suffix-automaton.html)を読む
+
+- なんか頂点をcloneするとうまくいくらしい
+
+- $t_0$から文字列$T$に遷移を辿って状態$v$にたどり着いたとき、$T$は状態$v$に含まれている
+
+##### 性質
 
 - ノード数/辺数は$\mathrm{O}(\lvert S\lvert)$
 
 - 任意のcloneされたノードnについて、clone元のsuffix link先はnである
+
+##### 

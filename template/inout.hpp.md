@@ -520,11 +520,17 @@ data:
     path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
+    title: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
     title: verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
     title: verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp
+    title: verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
     title: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
@@ -645,11 +651,13 @@ data:
   timestamp: '2020-11-30 18:57:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
+  - verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
