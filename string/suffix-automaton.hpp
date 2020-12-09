@@ -1,20 +1,17 @@
 #pragma once
 
-
-
 template <int margin = 'a'>
 struct SuffixAutomaton {
   struct state {
     vector<pair<char, int>> next;
     uint64_t hit;
-    int len, link, origin, id;
+    int len, link, origin;
     char key;
     bool sorted;
 
-    state()
-        : hit(0), len(0), link(-1), origin(-1), id(-1), key(0), sorted(false) {}
+    state() : hit(0), len(0), link(-1), origin(-1), key(0), sorted(false) {}
     state(int l, char k)
-        : hit(0), len(l), link(-1), origin(-1), id(-1), key(k), sorted(false) {}
+        : hit(0), len(l), link(-1), origin(-1), key(k), sorted(false) {}
 
     __attribute__((target("popcnt"))) int find(char c) {
       c -= margin;
@@ -128,7 +125,6 @@ struct SuffixAutomaton {
     }
     for (int i = 0; i < n; i++) {
       state &s = st[i];
-      s.id = i;
       sort(begin(s.next), end(s.next));
       s.sorted = true;
       for (auto &[_, y] : s.next) y = inv[y];
