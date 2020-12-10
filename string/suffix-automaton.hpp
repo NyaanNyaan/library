@@ -3,51 +3,50 @@
 template <int margin = 'a'>
 struct SuffixAutomaton {
   struct state {
-    vector<pair<char, int>> next;
+    vector<pair<char, int>> nxt;
     uint64_t hit;
     int len, link, origin;
     char key;
-    bool sorted;
 
-    state() : hit(0), len(0), link(-1), origin(-1), key(0), sorted(false) {}
-    state(int l, char k)
-        : hit(0), len(l), link(-1), origin(-1), key(k), sorted(false) {}
+    state() : hit(0), len(0), link(-1), origin(-1), key(0) {}
+    state(int l, char k) : hit(0), len(l), link(-1), origin(-1), key(k) {}
 
-    __attribute__((target("popcnt"))) int find(char c) const {
+    __attribute__((target("popcnt"))) int get_idx(char c) const {
       c -= margin;
       if (((hit >> c) & 1) == 0) return -1;
       if (sorted) {
         return _mm_popcnt_u64(hit & ((1ull << c) - 1));
       } else {
         c += margin;
-        for (int i = 0; i < (int)next.size(); i++) {
-          if (next[i].first == c) return i;
+        for (int i = 0; i < (int)nxt.size(); i++) {
+          if (nxt[i].first == c) return i;
         }
-        assert(0);
       }
+      exit(1);
     }
 
-    inline int to(char c) const { 
-      int f = find(c);
-      return ~f ? next[find(c)].second : -1; 
+    inline int next(char c) const {
+      int f = get_idx(c);
+      return ~f ? nxt[f].second : -1;
     }
 
     void add(char c, int i) {
       c -= margin;
       assert(((hit >> c) & 1) == 0);
-      next.emplace_back(c + margin, i);
+      nxt.emplace_back(c + margin, i);
       hit |= 1ull << c;
     }
   };
+
+  inline int next(int i, char c) { return st[i].next(c); }
+  inline vector<pair<char, int>> &chd(int i) { return st[i].nxt; }
+  inline int link(int i) { return st[i].link; }
+
   vector<state> st;
-  vector<int> topo;
+  static bool sorted;
 
-  SuffixAutomaton() = default;
-
-  SuffixAutomaton(const string &S) {
-    build(S);
-    st.push_back(state());
-  }
+  SuffixAutomaton() : st(1) {}
+  SuffixAutomaton(const string &S) : st(1) { build(S); }
 
   void build(const string &S) {
     int last = 0;
@@ -55,28 +54,12 @@ struct SuffixAutomaton {
     tsort();
   }
 
-  [[deprecated]] void build(const vector<string> &S) {
-    for (auto &s : S) {
-      int i = 0, last = 0;
-      while (i < (int)s.size()) {
-        int f = st[last].find(s[i]);
-        if (f == -1) break;
-        last = st[last].next[f].second;
-        i++;
-      }
-      for (; i < (int)s.size(); i++) extend(s[i], last);
-    }
-  }
-
   int size() const { return st.size(); }
 
   int find(const string &s) const {
     int last = 0;
-    for (auto &c : s) {
-      int nx = st[last].find(c);
-      if (nx == -1) return -1;
-      last = st[last].next[nx].second;
-    }
+    for (auto &c : s)
+      if ((last = next(last, c)) == -1) return -1;
     return last;
   }
 
@@ -87,28 +70,26 @@ struct SuffixAutomaton {
     int cur = st.size();
     st.emplace_back(st[last].len + 1, c);
     int p = last;
-    for (; p != -1 && st[p].find(c) == -1; p = st[p].link) {
+    for (; p != -1 && st[p].get_idx(c) == -1; p = st[p].link) {
       st[p].add(c, cur);
     }
     if (p == -1) {
       st[cur].link = 0;
     } else {
-      int q = st[p].to(c);
+      int q = st[p].next(c);
       if (st[p].len + 1 == st[q].len)
         st[cur].link = q;
       else {
         int clone = st.size();
         {
           state cl = st[q];
-          cl.len = st[p].len + 1;
-          cl.origin = q;
+          cl.len = st[p].len + 1, cl.origin = q;
           st.push_back(std::move(cl));
         }
         for (; p != -1; p = st[p].link) {
-          int i = st[p].find(c);
-          assert(i != -1);
-          if (st[p].next[i].second != q) break;
-          st[p].next[i].second = clone;
+          int i = st[p].get_idx(c);
+          if (st[p].nxt[i].second != q) break;
+          st[p].nxt[i].second = clone;
         }
         st[q].link = st[cur].link = clone;
       }
@@ -116,55 +97,80 @@ struct SuffixAutomaton {
     last = cur;
   }
 
-  vector<bool> marked, temp;
-  vector<vector<int>> buf;
-
-  void dfs(int i) {
-    temp[i] = 1;
-    for (auto &[_, j] : st[i].next)
-      if (!marked[j]) dfs(j);
-    for (auto &j : buf[i])
-      if (!marked[j]) dfs(j);
-    marked[i] = 1;
-    topo.push_back(i);
-    temp[i] = 0;
-  }
-
   void tsort() {
     int n = st.size();
-    marked.resize(n), temp.resize(n), buf.resize(n);
-    for (int i = 1; i < n; i++) buf[st[i].link].push_back(i);
-    for (int i = 0; i < n; i++)
-      if (!marked[i]) dfs(i);
-    reverse(begin(topo), end(topo));
-    buf.clear();
-    buf.shrink_to_fit();
-    marked.clear();
-    marked.shrink_to_fit();
-    temp.clear();
-    temp.shrink_to_fit();
-
-    vector<int> inv(n);
-    for (int i = 0; i < n; i++) inv[topo[i]] = i;
+    vector<int> topo;
+    {
+      topo.reserve(n);
+      vector<vector<int>> base(n + 1);
+      for (int i = 0; i < n; i++) base[st[i].len].push_back(i);
+      for (int i = 0; i < n; i++)
+        if (!base[i].empty())
+          copy(begin(base[i]), end(base[i]), back_inserter(topo));
+    }
     {
       vector<state> st2;
+      st2.reserve(n);
       for (int i = 0; i < n; i++) st2.emplace_back(std::move(st[topo[i]]));
       st.swap(st2);
     }
+    vector<int> inv(n);
+    for (int i = 0; i < n; i++) inv[topo[i]] = i;
     for (int i = 0; i < n; i++) {
       state &s = st[i];
-      sort(begin(s.next), end(s.next));
-      s.sorted = true;
-      for (auto &[_, y] : s.next) y = inv[y];
+      sort(begin(s.nxt), end(s.nxt));
+      for (auto &[_, y] : s.nxt) y = inv[y];
       if (s.link != -1) s.link = inv[s.link];
       if (s.origin != -1) s.origin = inv[s.origin];
     }
-    topo.clear();
-    topo.shrink_to_fit();
+    sorted = true;
   }
 };
+
+template <int margin>
+bool SuffixAutomaton<margin>::sorted = false;
 
 /**
  * @brief Suffix Automaton
  * @docs docs/string/suffix-automaton.md
  */
+
+/*
+#include "string/suffix-automaton.hpp"
+#include "string/z-algorithm.hpp"
+
+template <char margin = 'a'>
+struct RunEnumerate {
+  string s;
+  SuffixAutomaton<margin> sa;
+
+  RunEnumerate(const string& _s) : s(_s), sa(_s) {}
+
+ private:
+  vector<int> enum_first_occurence() {
+    vector<int> fo(sa.size(), 1e9);
+    for (int i = sa.size() - 1; i >= 0; --i) {
+      if (sa[i].origin == -1) {
+        fo[i] = sa[i].len;
+      }
+      int l = sa[i].link;
+      if (i > 0 && sa[l].origin != -1 && fo[i] < fo[sa[i].link])
+        fo[sa[i].link] = fo[i];
+    }
+    return fo;
+  }
+
+  vector<int> factorize() {
+    auto fo = enum_first_occurence();
+    
+  }
+  
+  vector<array<int, 3>> run(vector<int>& f) {
+    unordered_map<uint64_t, array<int,3>> ret;
+    for(int i = 0; i < f.size(); i++) {
+
+    }
+  }
+};
+
+*/

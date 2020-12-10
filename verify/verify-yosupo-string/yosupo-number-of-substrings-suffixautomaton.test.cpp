@@ -11,6 +11,6 @@ void Nyaan::solve() {
 
   vl dp(sz(sa));
   dp[0] = 1;
-  rep(i, sz(sa)) { each(p, sa[i].next) dp[p.second] += dp[i]; }
+  rep(i, sz(sa)) { each(p, sa.chd(i)) dp[p.second] += dp[i]; }
   out(accumulate(all(dp),0LL) - 1);
 }
