@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 vector<vector<int>> CalcNext(const string &S, char offset = 'a', int w = 26) {
   int n = (int)S.size();
   vector<vector<int>> res(n + 1, vector<int>(w, n));
@@ -27,3 +25,7 @@ vector<T> SubSequenceDP(const string &S, char offset = 'a', int w = 26) {
   dp.erase(begin(dp));
   return dp;
 }
+
+/**
+ * @brief 部分列DP
+ */

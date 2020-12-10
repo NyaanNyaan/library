@@ -13,7 +13,7 @@ struct SuffixAutomaton {
     state(int l, char k)
         : hit(0), len(l), link(-1), origin(-1), key(k), sorted(false) {}
 
-    __attribute__((target("popcnt"))) int find(char c) {
+    __attribute__((target("popcnt"))) int find(char c) const {
       c -= margin;
       if (((hit >> c) & 1) == 0) return -1;
       if (sorted) {
@@ -27,7 +27,10 @@ struct SuffixAutomaton {
       }
     }
 
-    int to(char c) { return next[find(c)].second; }
+    inline int to(char c) const { 
+      int f = find(c);
+      return ~f ? next[find(c)].second : -1; 
+    }
 
     void add(char c, int i) {
       c -= margin;
@@ -41,16 +44,41 @@ struct SuffixAutomaton {
 
   SuffixAutomaton() = default;
 
-  SuffixAutomaton(const string &S) { build(S); }
+  SuffixAutomaton(const string &S) {
+    build(S);
+    st.push_back(state());
+  }
 
   void build(const string &S) {
-    st.push_back(state());
     int last = 0;
     for (int i = 0; i < (int)S.size(); i++) extend(S[i], last);
     tsort();
   }
 
+  [[deprecated]] void build(const vector<string> &S) {
+    for (auto &s : S) {
+      int i = 0, last = 0;
+      while (i < (int)s.size()) {
+        int f = st[last].find(s[i]);
+        if (f == -1) break;
+        last = st[last].next[f].second;
+        i++;
+      }
+      for (; i < (int)s.size(); i++) extend(s[i], last);
+    }
+  }
+
   int size() const { return st.size(); }
+
+  int find(const string &s) const {
+    int last = 0;
+    for (auto &c : s) {
+      int nx = st[last].find(c);
+      if (nx == -1) return -1;
+      last = st[last].next[nx].second;
+    }
+    return last;
+  }
 
   state &operator[](int i) { return st[i]; }
 
