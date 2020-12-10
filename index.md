@@ -549,7 +549,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/suffix-array.hpp
       title: string/suffix-array.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/suffix-automaton.hpp
       title: Suffix Automaton
     - icon: ':heavy_check_mark:'
@@ -560,22 +560,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1146,7 +1146,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
       title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
       title: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
     - icon: ':heavy_check_mark:'

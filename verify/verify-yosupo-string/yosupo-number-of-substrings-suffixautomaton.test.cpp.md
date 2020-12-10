@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/suffix-automaton.hpp
     title: Suffix Automaton
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/number_of_substrings
@@ -180,65 +180,68 @@ data:
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp\"\
     \n//\n#line 2 \"string/suffix-automaton.hpp\"\n\ntemplate <int margin = 'a'>\n\
-    struct SuffixAutomaton {\n  struct state {\n    vector<pair<char, int>> next;\n\
-    \    uint64_t hit;\n    int len, link, origin;\n    char key;\n    bool sorted;\n\
-    \n    state() : hit(0), len(0), link(-1), origin(-1), key(0), sorted(false) {}\n\
-    \    state(int l, char k)\n        : hit(0), len(l), link(-1), origin(-1), key(k),\
-    \ sorted(false) {}\n\n    __attribute__((target(\"popcnt\"))) int find(char c)\
-    \ const {\n      c -= margin;\n      if (((hit >> c) & 1) == 0) return -1;\n \
-    \     if (sorted) {\n        return _mm_popcnt_u64(hit & ((1ull << c) - 1));\n\
-    \      } else {\n        c += margin;\n        for (int i = 0; i < (int)next.size();\
-    \ i++) {\n          if (next[i].first == c) return i;\n        }\n        assert(0);\n\
-    \      }\n    }\n\n    inline int to(char c) const { \n      int f = find(c);\n\
-    \      return ~f ? next[find(c)].second : -1; \n    }\n\n    void add(char c,\
-    \ int i) {\n      c -= margin;\n      assert(((hit >> c) & 1) == 0);\n      next.emplace_back(c\
-    \ + margin, i);\n      hit |= 1ull << c;\n    }\n  };\n  vector<state> st;\n \
-    \ vector<int> topo;\n\n  SuffixAutomaton() = default;\n\n  SuffixAutomaton(const\
-    \ string &S) {\n    build(S);\n    st.push_back(state());\n  }\n\n  void build(const\
-    \ string &S) {\n    int last = 0;\n    for (int i = 0; i < (int)S.size(); i++)\
-    \ extend(S[i], last);\n    tsort();\n  }\n\n  [[deprecated]] void build(const\
-    \ vector<string> &S) {\n    for (auto &s : S) {\n      int i = 0, last = 0;\n\
-    \      while (i < (int)s.size()) {\n        int f = st[last].find(s[i]);\n   \
-    \     if (f == -1) break;\n        last = st[last].next[f].second;\n        i++;\n\
-    \      }\n      for (; i < (int)s.size(); i++) extend(s[i], last);\n    }\n  }\n\
-    \n  int size() const { return st.size(); }\n\n  int find(const string &s) const\
-    \ {\n    int last = 0;\n    for (auto &c : s) {\n      int nx = st[last].find(c);\n\
-    \      if (nx == -1) return -1;\n      last = st[last].next[nx].second;\n    }\n\
-    \    return last;\n  }\n\n  state &operator[](int i) { return st[i]; }\n\n private:\n\
-    \  void extend(char c, int &last) {\n    int cur = st.size();\n    st.emplace_back(st[last].len\
-    \ + 1, c);\n    int p = last;\n    for (; p != -1 && st[p].find(c) == -1; p =\
-    \ st[p].link) {\n      st[p].add(c, cur);\n    }\n    if (p == -1) {\n      st[cur].link\
-    \ = 0;\n    } else {\n      int q = st[p].to(c);\n      if (st[p].len + 1 == st[q].len)\n\
-    \        st[cur].link = q;\n      else {\n        int clone = st.size();\n   \
-    \     {\n          state cl = st[q];\n          cl.len = st[p].len + 1;\n    \
-    \      cl.origin = q;\n          st.push_back(std::move(cl));\n        }\n   \
-    \     for (; p != -1; p = st[p].link) {\n          int i = st[p].find(c);\n  \
-    \        assert(i != -1);\n          if (st[p].next[i].second != q) break;\n \
-    \         st[p].next[i].second = clone;\n        }\n        st[q].link = st[cur].link\
-    \ = clone;\n      }\n    }\n    last = cur;\n  }\n\n  vector<bool> marked, temp;\n\
-    \  vector<vector<int>> buf;\n\n  void dfs(int i) {\n    temp[i] = 1;\n    for\
-    \ (auto &[_, j] : st[i].next)\n      if (!marked[j]) dfs(j);\n    for (auto &j\
-    \ : buf[i])\n      if (!marked[j]) dfs(j);\n    marked[i] = 1;\n    topo.push_back(i);\n\
-    \    temp[i] = 0;\n  }\n\n  void tsort() {\n    int n = st.size();\n    marked.resize(n),\
-    \ temp.resize(n), buf.resize(n);\n    for (int i = 1; i < n; i++) buf[st[i].link].push_back(i);\n\
-    \    for (int i = 0; i < n; i++)\n      if (!marked[i]) dfs(i);\n    reverse(begin(topo),\
-    \ end(topo));\n    buf.clear();\n    buf.shrink_to_fit();\n    marked.clear();\n\
-    \    marked.shrink_to_fit();\n    temp.clear();\n    temp.shrink_to_fit();\n\n\
-    \    vector<int> inv(n);\n    for (int i = 0; i < n; i++) inv[topo[i]] = i;\n\
-    \    {\n      vector<state> st2;\n      for (int i = 0; i < n; i++) st2.emplace_back(std::move(st[topo[i]]));\n\
-    \      st.swap(st2);\n    }\n    for (int i = 0; i < n; i++) {\n      state &s\
-    \ = st[i];\n      sort(begin(s.next), end(s.next));\n      s.sorted = true;\n\
-    \      for (auto &[_, y] : s.next) y = inv[y];\n      if (s.link != -1) s.link\
-    \ = inv[s.link];\n      if (s.origin != -1) s.origin = inv[s.origin];\n    }\n\
-    \    topo.clear();\n    topo.shrink_to_fit();\n  }\n};\n\n/**\n * @brief Suffix\
-    \ Automaton\n * @docs docs/string/suffix-automaton.md\n */\n#line 6 \"verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp\"\
+    struct SuffixAutomaton {\n  struct state {\n    vector<pair<char, int>> nxt;\n\
+    \    uint64_t hit;\n    int len, link, origin;\n    char key;\n\n    state() :\
+    \ hit(0), len(0), link(-1), origin(-1), key(0) {}\n    state(int l, char k) :\
+    \ hit(0), len(l), link(-1), origin(-1), key(k) {}\n\n    __attribute__((target(\"\
+    popcnt\"))) int get_idx(char c) const {\n      c -= margin;\n      if (((hit >>\
+    \ c) & 1) == 0) return -1;\n      if (sorted) {\n        return _mm_popcnt_u64(hit\
+    \ & ((1ull << c) - 1));\n      } else {\n        c += margin;\n        for (int\
+    \ i = 0; i < (int)nxt.size(); i++) {\n          if (nxt[i].first == c) return\
+    \ i;\n        }\n      }\n      exit(1);\n    }\n\n    inline int next(char c)\
+    \ const {\n      int f = get_idx(c);\n      return ~f ? nxt[f].second : -1;\n\
+    \    }\n\n    void add(char c, int i) {\n      c -= margin;\n      assert(((hit\
+    \ >> c) & 1) == 0);\n      nxt.emplace_back(c + margin, i);\n      hit |= 1ull\
+    \ << c;\n    }\n  };\n\n  inline int next(int i, char c) { return st[i].next(c);\
+    \ }\n  inline vector<pair<char, int>> &chd(int i) { return st[i].nxt; }\n  inline\
+    \ int link(int i) { return st[i].link; }\n\n  vector<state> st;\n  static bool\
+    \ sorted;\n\n  SuffixAutomaton() : st(1) {}\n  SuffixAutomaton(const string &S)\
+    \ : st(1) { build(S); }\n\n  void build(const string &S) {\n    int last = 0;\n\
+    \    for (int i = 0; i < (int)S.size(); i++) extend(S[i], last);\n    tsort();\n\
+    \  }\n\n  int size() const { return st.size(); }\n\n  int find(const string &s)\
+    \ const {\n    int last = 0;\n    for (auto &c : s)\n      if ((last = next(last,\
+    \ c)) == -1) return -1;\n    return last;\n  }\n\n  state &operator[](int i) {\
+    \ return st[i]; }\n\n private:\n  void extend(char c, int &last) {\n    int cur\
+    \ = st.size();\n    st.emplace_back(st[last].len + 1, c);\n    int p = last;\n\
+    \    for (; p != -1 && st[p].get_idx(c) == -1; p = st[p].link) {\n      st[p].add(c,\
+    \ cur);\n    }\n    if (p == -1) {\n      st[cur].link = 0;\n    } else {\n  \
+    \    int q = st[p].next(c);\n      if (st[p].len + 1 == st[q].len)\n        st[cur].link\
+    \ = q;\n      else {\n        int clone = st.size();\n        {\n          state\
+    \ cl = st[q];\n          cl.len = st[p].len + 1, cl.origin = q;\n          st.push_back(std::move(cl));\n\
+    \        }\n        for (; p != -1; p = st[p].link) {\n          int i = st[p].get_idx(c);\n\
+    \          if (st[p].nxt[i].second != q) break;\n          st[p].nxt[i].second\
+    \ = clone;\n        }\n        st[q].link = st[cur].link = clone;\n      }\n \
+    \   }\n    last = cur;\n  }\n\n  void tsort() {\n    int n = st.size();\n    vector<int>\
+    \ topo;\n    {\n      topo.reserve(n);\n      vector<vector<int>> base(n + 1);\n\
+    \      for (int i = 0; i < n; i++) base[st[i].len].push_back(i);\n      for (int\
+    \ i = 0; i < n; i++)\n        if (!base[i].empty())\n          copy(begin(base[i]),\
+    \ end(base[i]), back_inserter(topo));\n    }\n    {\n      vector<state> st2;\n\
+    \      st2.reserve(n);\n      for (int i = 0; i < n; i++) st2.emplace_back(std::move(st[topo[i]]));\n\
+    \      st.swap(st2);\n    }\n    vector<int> inv(n);\n    for (int i = 0; i <\
+    \ n; i++) inv[topo[i]] = i;\n    for (int i = 0; i < n; i++) {\n      state &s\
+    \ = st[i];\n      sort(begin(s.nxt), end(s.nxt));\n      for (auto &[_, y] : s.nxt)\
+    \ y = inv[y];\n      if (s.link != -1) s.link = inv[s.link];\n      if (s.origin\
+    \ != -1) s.origin = inv[s.origin];\n    }\n    sorted = true;\n  }\n};\n\ntemplate\
+    \ <int margin>\nbool SuffixAutomaton<margin>::sorted = false;\n\n/**\n * @brief\
+    \ Suffix Automaton\n * @docs docs/string/suffix-automaton.md\n */\n\n/*\n#include\
+    \ \"string/suffix-automaton.hpp\"\n#include \"string/z-algorithm.hpp\"\n\ntemplate\
+    \ <char margin = 'a'>\nstruct RunEnumerate {\n  string s;\n  SuffixAutomaton<margin>\
+    \ sa;\n\n  RunEnumerate(const string& _s) : s(_s), sa(_s) {}\n\n private:\n  vector<int>\
+    \ enum_first_occurence() {\n    vector<int> fo(sa.size(), 1e9);\n    for (int\
+    \ i = sa.size() - 1; i >= 0; --i) {\n      if (sa[i].origin == -1) {\n       \
+    \ fo[i] = sa[i].len;\n      }\n      int l = sa[i].link;\n      if (i > 0 && sa[l].origin\
+    \ != -1 && fo[i] < fo[sa[i].link])\n        fo[sa[i].link] = fo[i];\n    }\n \
+    \   return fo;\n  }\n\n  vector<int> factorize() {\n    auto fo = enum_first_occurence();\n\
+    \    \n  }\n  \n  vector<array<int, 3>> run(vector<int>& f) {\n    unordered_map<uint64_t,\
+    \ array<int,3>> ret;\n    for(int i = 0; i < f.size(); i++) {\n\n    }\n  }\n\
+    };\n\n*/\n#line 6 \"verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp\"\
     \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ins(s);\n  SuffixAutomaton\
-    \ sa(s);\n\n  vl dp(sz(sa));\n  dp[0] = 1;\n  rep(i, sz(sa)) { each(p, sa[i].next)\
+    \ sa(s);\n\n  vl dp(sz(sa));\n  dp[0] = 1;\n  rep(i, sz(sa)) { each(p, sa.chd(i))\
     \ dp[p.second] += dp[i]; }\n  out(accumulate(all(dp),0LL) - 1);\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\n\
     //\n#include \"../../template/template.hpp\"\n//\n#include \"../../string/suffix-automaton.hpp\"\
     \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ins(s);\n  SuffixAutomaton\
-    \ sa(s);\n\n  vl dp(sz(sa));\n  dp[0] = 1;\n  rep(i, sz(sa)) { each(p, sa[i].next)\
+    \ sa(s);\n\n  vl dp(sz(sa));\n  dp[0] = 1;\n  rep(i, sz(sa)) { each(p, sa.chd(i))\
     \ dp[p.second] += dp[i]; }\n  out(accumulate(all(dp),0LL) - 1);\n}\n"
   dependsOn:
   - template/template.hpp
@@ -251,8 +254,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
   requiredBy: []
-  timestamp: '2020-12-10 19:54:55+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-11 01:15:14+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
 layout: document
