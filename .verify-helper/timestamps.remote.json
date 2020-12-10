@@ -165,6 +165,7 @@
 "verify/verify-yosupo-other/yosupo-argument-sort.test.cpp": "2020-12-05 15:21:15 +0900",
 "verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp": "2020-12-05 07:59:51 +0900",
+"verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp": "2020-12-11 01:15:14 +0900",
 "verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-string/yosupo-suffix-array.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp": "2020-12-09 15:22:26 +0900",
