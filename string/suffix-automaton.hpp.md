@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
     title: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/string/suffix-automaton.md
     document_title: Suffix Automaton
@@ -18,35 +18,42 @@ data:
     \ sorted;\n\n    state() : hit(0), len(0), link(-1), origin(-1), key(0), sorted(false)\
     \ {}\n    state(int l, char k)\n        : hit(0), len(l), link(-1), origin(-1),\
     \ key(k), sorted(false) {}\n\n    __attribute__((target(\"popcnt\"))) int find(char\
-    \ c) {\n      c -= margin;\n      if (((hit >> c) & 1) == 0) return -1;\n    \
-    \  if (sorted) {\n        return _mm_popcnt_u64(hit & ((1ull << c) - 1));\n  \
-    \    } else {\n        c += margin;\n        for (int i = 0; i < (int)next.size();\
+    \ c) const {\n      c -= margin;\n      if (((hit >> c) & 1) == 0) return -1;\n\
+    \      if (sorted) {\n        return _mm_popcnt_u64(hit & ((1ull << c) - 1));\n\
+    \      } else {\n        c += margin;\n        for (int i = 0; i < (int)next.size();\
     \ i++) {\n          if (next[i].first == c) return i;\n        }\n        assert(0);\n\
-    \      }\n    }\n\n    int to(char c) { return next[find(c)].second; }\n\n   \
-    \ void add(char c, int i) {\n      c -= margin;\n      assert(((hit >> c) & 1)\
-    \ == 0);\n      next.emplace_back(c + margin, i);\n      hit |= 1ull << c;\n \
-    \   }\n  };\n  vector<state> st;\n  vector<int> topo;\n\n  SuffixAutomaton() =\
-    \ default;\n\n  SuffixAutomaton(const string &S) { build(S); }\n\n  void build(const\
-    \ string &S) {\n    st.push_back(state());\n    int last = 0;\n    for (int i\
-    \ = 0; i < (int)S.size(); i++) extend(S[i], last);\n    tsort();\n  }\n\n  int\
-    \ size() const { return st.size(); }\n\n  state &operator[](int i) { return st[i];\
-    \ }\n\n private:\n  void extend(char c, int &last) {\n    int cur = st.size();\n\
-    \    st.emplace_back(st[last].len + 1, c);\n    int p = last;\n    for (; p !=\
-    \ -1 && st[p].find(c) == -1; p = st[p].link) {\n      st[p].add(c, cur);\n   \
-    \ }\n    if (p == -1) {\n      st[cur].link = 0;\n    } else {\n      int q =\
-    \ st[p].to(c);\n      if (st[p].len + 1 == st[q].len)\n        st[cur].link =\
-    \ q;\n      else {\n        int clone = st.size();\n        {\n          state\
-    \ cl = st[q];\n          cl.len = st[p].len + 1;\n          cl.origin = q;\n \
-    \         st.push_back(std::move(cl));\n        }\n        for (; p != -1; p =\
-    \ st[p].link) {\n          int i = st[p].find(c);\n          assert(i != -1);\n\
-    \          if (st[p].next[i].second != q) break;\n          st[p].next[i].second\
-    \ = clone;\n        }\n        st[q].link = st[cur].link = clone;\n      }\n \
-    \   }\n    last = cur;\n  }\n\n  vector<bool> marked, temp;\n  vector<vector<int>>\
-    \ buf;\n\n  void dfs(int i) {\n    temp[i] = 1;\n    for (auto &[_, j] : st[i].next)\n\
-    \      if (!marked[j]) dfs(j);\n    for (auto &j : buf[i])\n      if (!marked[j])\
-    \ dfs(j);\n    marked[i] = 1;\n    topo.push_back(i);\n    temp[i] = 0;\n  }\n\
-    \n  void tsort() {\n    int n = st.size();\n    marked.resize(n), temp.resize(n),\
-    \ buf.resize(n);\n    for (int i = 1; i < n; i++) buf[st[i].link].push_back(i);\n\
+    \      }\n    }\n\n    inline int to(char c) const { \n      int f = find(c);\n\
+    \      return ~f ? next[find(c)].second : -1; \n    }\n\n    void add(char c,\
+    \ int i) {\n      c -= margin;\n      assert(((hit >> c) & 1) == 0);\n      next.emplace_back(c\
+    \ + margin, i);\n      hit |= 1ull << c;\n    }\n  };\n  vector<state> st;\n \
+    \ vector<int> topo;\n\n  SuffixAutomaton() = default;\n\n  SuffixAutomaton(const\
+    \ string &S) {\n    build(S);\n    st.push_back(state());\n  }\n\n  void build(const\
+    \ string &S) {\n    int last = 0;\n    for (int i = 0; i < (int)S.size(); i++)\
+    \ extend(S[i], last);\n    tsort();\n  }\n\n  [[deprecated]] void build(const\
+    \ vector<string> &S) {\n    for (auto &s : S) {\n      int i = 0, last = 0;\n\
+    \      while (i < (int)s.size()) {\n        int f = st[last].find(s[i]);\n   \
+    \     if (f == -1) break;\n        last = st[last].next[f].second;\n        i++;\n\
+    \      }\n      for (; i < (int)s.size(); i++) extend(s[i], last);\n    }\n  }\n\
+    \n  int size() const { return st.size(); }\n\n  int find(const string &s) const\
+    \ {\n    int last = 0;\n    for (auto &c : s) {\n      int nx = st[last].find(c);\n\
+    \      if (nx == -1) return -1;\n      last = st[last].next[nx].second;\n    }\n\
+    \    return last;\n  }\n\n  state &operator[](int i) { return st[i]; }\n\n private:\n\
+    \  void extend(char c, int &last) {\n    int cur = st.size();\n    st.emplace_back(st[last].len\
+    \ + 1, c);\n    int p = last;\n    for (; p != -1 && st[p].find(c) == -1; p =\
+    \ st[p].link) {\n      st[p].add(c, cur);\n    }\n    if (p == -1) {\n      st[cur].link\
+    \ = 0;\n    } else {\n      int q = st[p].to(c);\n      if (st[p].len + 1 == st[q].len)\n\
+    \        st[cur].link = q;\n      else {\n        int clone = st.size();\n   \
+    \     {\n          state cl = st[q];\n          cl.len = st[p].len + 1;\n    \
+    \      cl.origin = q;\n          st.push_back(std::move(cl));\n        }\n   \
+    \     for (; p != -1; p = st[p].link) {\n          int i = st[p].find(c);\n  \
+    \        assert(i != -1);\n          if (st[p].next[i].second != q) break;\n \
+    \         st[p].next[i].second = clone;\n        }\n        st[q].link = st[cur].link\
+    \ = clone;\n      }\n    }\n    last = cur;\n  }\n\n  vector<bool> marked, temp;\n\
+    \  vector<vector<int>> buf;\n\n  void dfs(int i) {\n    temp[i] = 1;\n    for\
+    \ (auto &[_, j] : st[i].next)\n      if (!marked[j]) dfs(j);\n    for (auto &j\
+    \ : buf[i])\n      if (!marked[j]) dfs(j);\n    marked[i] = 1;\n    topo.push_back(i);\n\
+    \    temp[i] = 0;\n  }\n\n  void tsort() {\n    int n = st.size();\n    marked.resize(n),\
+    \ temp.resize(n), buf.resize(n);\n    for (int i = 1; i < n; i++) buf[st[i].link].push_back(i);\n\
     \    for (int i = 0; i < n; i++)\n      if (!marked[i]) dfs(i);\n    reverse(begin(topo),\
     \ end(topo));\n    buf.clear();\n    buf.shrink_to_fit();\n    marked.clear();\n\
     \    marked.shrink_to_fit();\n    temp.clear();\n    temp.shrink_to_fit();\n\n\
@@ -63,35 +70,43 @@ data:
     \ len, link, origin;\n    char key;\n    bool sorted;\n\n    state() : hit(0),\
     \ len(0), link(-1), origin(-1), key(0), sorted(false) {}\n    state(int l, char\
     \ k)\n        : hit(0), len(l), link(-1), origin(-1), key(k), sorted(false) {}\n\
-    \n    __attribute__((target(\"popcnt\"))) int find(char c) {\n      c -= margin;\n\
-    \      if (((hit >> c) & 1) == 0) return -1;\n      if (sorted) {\n        return\
-    \ _mm_popcnt_u64(hit & ((1ull << c) - 1));\n      } else {\n        c += margin;\n\
-    \        for (int i = 0; i < (int)next.size(); i++) {\n          if (next[i].first\
-    \ == c) return i;\n        }\n        assert(0);\n      }\n    }\n\n    int to(char\
-    \ c) { return next[find(c)].second; }\n\n    void add(char c, int i) {\n     \
-    \ c -= margin;\n      assert(((hit >> c) & 1) == 0);\n      next.emplace_back(c\
+    \n    __attribute__((target(\"popcnt\"))) int find(char c) const {\n      c -=\
+    \ margin;\n      if (((hit >> c) & 1) == 0) return -1;\n      if (sorted) {\n\
+    \        return _mm_popcnt_u64(hit & ((1ull << c) - 1));\n      } else {\n   \
+    \     c += margin;\n        for (int i = 0; i < (int)next.size(); i++) {\n   \
+    \       if (next[i].first == c) return i;\n        }\n        assert(0);\n   \
+    \   }\n    }\n\n    inline int to(char c) const { \n      int f = find(c);\n \
+    \     return ~f ? next[find(c)].second : -1; \n    }\n\n    void add(char c, int\
+    \ i) {\n      c -= margin;\n      assert(((hit >> c) & 1) == 0);\n      next.emplace_back(c\
     \ + margin, i);\n      hit |= 1ull << c;\n    }\n  };\n  vector<state> st;\n \
     \ vector<int> topo;\n\n  SuffixAutomaton() = default;\n\n  SuffixAutomaton(const\
-    \ string &S) { build(S); }\n\n  void build(const string &S) {\n    st.push_back(state());\n\
-    \    int last = 0;\n    for (int i = 0; i < (int)S.size(); i++) extend(S[i], last);\n\
-    \    tsort();\n  }\n\n  int size() const { return st.size(); }\n\n  state &operator[](int\
-    \ i) { return st[i]; }\n\n private:\n  void extend(char c, int &last) {\n    int\
-    \ cur = st.size();\n    st.emplace_back(st[last].len + 1, c);\n    int p = last;\n\
-    \    for (; p != -1 && st[p].find(c) == -1; p = st[p].link) {\n      st[p].add(c,\
-    \ cur);\n    }\n    if (p == -1) {\n      st[cur].link = 0;\n    } else {\n  \
-    \    int q = st[p].to(c);\n      if (st[p].len + 1 == st[q].len)\n        st[cur].link\
-    \ = q;\n      else {\n        int clone = st.size();\n        {\n          state\
-    \ cl = st[q];\n          cl.len = st[p].len + 1;\n          cl.origin = q;\n \
-    \         st.push_back(std::move(cl));\n        }\n        for (; p != -1; p =\
-    \ st[p].link) {\n          int i = st[p].find(c);\n          assert(i != -1);\n\
-    \          if (st[p].next[i].second != q) break;\n          st[p].next[i].second\
-    \ = clone;\n        }\n        st[q].link = st[cur].link = clone;\n      }\n \
-    \   }\n    last = cur;\n  }\n\n  vector<bool> marked, temp;\n  vector<vector<int>>\
-    \ buf;\n\n  void dfs(int i) {\n    temp[i] = 1;\n    for (auto &[_, j] : st[i].next)\n\
-    \      if (!marked[j]) dfs(j);\n    for (auto &j : buf[i])\n      if (!marked[j])\
-    \ dfs(j);\n    marked[i] = 1;\n    topo.push_back(i);\n    temp[i] = 0;\n  }\n\
-    \n  void tsort() {\n    int n = st.size();\n    marked.resize(n), temp.resize(n),\
-    \ buf.resize(n);\n    for (int i = 1; i < n; i++) buf[st[i].link].push_back(i);\n\
+    \ string &S) {\n    build(S);\n    st.push_back(state());\n  }\n\n  void build(const\
+    \ string &S) {\n    int last = 0;\n    for (int i = 0; i < (int)S.size(); i++)\
+    \ extend(S[i], last);\n    tsort();\n  }\n\n  [[deprecated]] void build(const\
+    \ vector<string> &S) {\n    for (auto &s : S) {\n      int i = 0, last = 0;\n\
+    \      while (i < (int)s.size()) {\n        int f = st[last].find(s[i]);\n   \
+    \     if (f == -1) break;\n        last = st[last].next[f].second;\n        i++;\n\
+    \      }\n      for (; i < (int)s.size(); i++) extend(s[i], last);\n    }\n  }\n\
+    \n  int size() const { return st.size(); }\n\n  int find(const string &s) const\
+    \ {\n    int last = 0;\n    for (auto &c : s) {\n      int nx = st[last].find(c);\n\
+    \      if (nx == -1) return -1;\n      last = st[last].next[nx].second;\n    }\n\
+    \    return last;\n  }\n\n  state &operator[](int i) { return st[i]; }\n\n private:\n\
+    \  void extend(char c, int &last) {\n    int cur = st.size();\n    st.emplace_back(st[last].len\
+    \ + 1, c);\n    int p = last;\n    for (; p != -1 && st[p].find(c) == -1; p =\
+    \ st[p].link) {\n      st[p].add(c, cur);\n    }\n    if (p == -1) {\n      st[cur].link\
+    \ = 0;\n    } else {\n      int q = st[p].to(c);\n      if (st[p].len + 1 == st[q].len)\n\
+    \        st[cur].link = q;\n      else {\n        int clone = st.size();\n   \
+    \     {\n          state cl = st[q];\n          cl.len = st[p].len + 1;\n    \
+    \      cl.origin = q;\n          st.push_back(std::move(cl));\n        }\n   \
+    \     for (; p != -1; p = st[p].link) {\n          int i = st[p].find(c);\n  \
+    \        assert(i != -1);\n          if (st[p].next[i].second != q) break;\n \
+    \         st[p].next[i].second = clone;\n        }\n        st[q].link = st[cur].link\
+    \ = clone;\n      }\n    }\n    last = cur;\n  }\n\n  vector<bool> marked, temp;\n\
+    \  vector<vector<int>> buf;\n\n  void dfs(int i) {\n    temp[i] = 1;\n    for\
+    \ (auto &[_, j] : st[i].next)\n      if (!marked[j]) dfs(j);\n    for (auto &j\
+    \ : buf[i])\n      if (!marked[j]) dfs(j);\n    marked[i] = 1;\n    topo.push_back(i);\n\
+    \    temp[i] = 0;\n  }\n\n  void tsort() {\n    int n = st.size();\n    marked.resize(n),\
+    \ temp.resize(n), buf.resize(n);\n    for (int i = 1; i < n; i++) buf[st[i].link].push_back(i);\n\
     \    for (int i = 0; i < n; i++)\n      if (!marked[i]) dfs(i);\n    reverse(begin(topo),\
     \ end(topo));\n    buf.clear();\n    buf.shrink_to_fit();\n    marked.clear();\n\
     \    marked.shrink_to_fit();\n    temp.clear();\n    temp.shrink_to_fit();\n\n\
@@ -107,8 +122,8 @@ data:
   isVerificationFile: false
   path: string/suffix-automaton.hpp
   requiredBy: []
-  timestamp: '2020-12-09 15:22:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-10 19:54:55+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
 documentation_of: string/suffix-automaton.hpp

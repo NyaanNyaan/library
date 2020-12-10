@@ -307,6 +307,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/rng.hpp
       title: misc/rng.hpp
+    - icon: ':warning:'
+      path: misc/simd.hpp
+      title: misc/simd.hpp
     - icon: ':heavy_check_mark:'
       path: misc/timer.hpp
       title: misc/timer.hpp
@@ -529,6 +532,9 @@ data:
   - name: string
     pages:
     - icon: ':heavy_check_mark:'
+      path: string/aho-corasick.hpp
+      title: string/aho-corasick.hpp
+    - icon: ':heavy_check_mark:'
       path: string/rolling-hash-2d.hpp
       title: "\u4E8C\u6B21\u5143Rolling Hash"
     - icon: ':heavy_check_mark:'
@@ -539,34 +545,37 @@ data:
       title: string/run-length-encoding.hpp
     - icon: ':warning:'
       path: string/subsequence-dp.hpp
-      title: string/subsequence-dp.hpp
+      title: "\u90E8\u5206\u5217DP"
     - icon: ':heavy_check_mark:'
       path: string/suffix-array.hpp
       title: string/suffix-array.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: string/suffix-automaton.hpp
       title: Suffix Automaton
+    - icon: ':heavy_check_mark:'
+      path: string/trie.hpp
+      title: string/trie.hpp
     - icon: ':heavy_check_mark:'
       path: string/z-algorithm.hpp
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1137,7 +1146,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
       title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
       title: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1211,6 +1220,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1220.test.cpp
       title: verify/verify-yuki/yuki-1220.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1269.test.cpp
+      title: verify/verify-yuki/yuki-1269.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1283.test.cpp
       title: verify/verify-yuki/yuki-1283.test.cpp

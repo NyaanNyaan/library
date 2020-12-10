@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
     title: XOR Convoluion
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -519,7 +519,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
     title: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
   - icon: ':heavy_check_mark:'
@@ -592,6 +592,9 @@ data:
     path: verify/verify-yuki/yuki-1220.test.cpp
     title: verify/verify-yuki/yuki-1220.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1269.test.cpp
+    title: verify/verify-yuki/yuki-1269.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1283.test.cpp
     title: verify/verify-yuki/yuki-1283.test.cpp
   - icon: ':heavy_check_mark:'
@@ -601,7 +604,7 @@ data:
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n\n__attribute__((target(\"\
@@ -637,7 +640,7 @@ data:
   - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
   timestamp: '2020-12-03 14:17:09+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
@@ -766,6 +769,7 @@ data:
   - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-yuki/yuki-1170.test.cpp
+  - verify/verify-yuki/yuki-1269.test.cpp
   - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-1283.test.cpp

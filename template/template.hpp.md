@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy:
@@ -531,7 +531,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
     title: verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
   - icon: ':heavy_check_mark:'
@@ -604,6 +604,9 @@ data:
     path: verify/verify-yuki/yuki-1220.test.cpp
     title: verify/verify-yuki/yuki-1220.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1269.test.cpp
+    title: verify/verify-yuki/yuki-1269.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1283.test.cpp
     title: verify/verify-yuki/yuki-1283.test.cpp
   - icon: ':heavy_check_mark:'
@@ -613,7 +616,7 @@ data:
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
@@ -941,7 +944,7 @@ data:
   - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
@@ -1070,6 +1073,7 @@ data:
   - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-yuki/yuki-1170.test.cpp
+  - verify/verify-yuki/yuki-1269.test.cpp
   - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-1283.test.cpp
