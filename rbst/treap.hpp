@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../misc/rng.hpp"
 
 template <typename Node>

@@ -1,8 +1,7 @@
 #pragma once
 
-
-
-#include "../misc/vector-pool.hpp"
+#include "../../template/template.hpp"
+#include "../../misc/vector-pool.hpp"
 
 template <typename Key, typename Val>
 struct OrderedMap {
@@ -377,8 +376,3 @@ bool OrderedMap<Key, Val>::fold_flag = false;
 
 template <typename Key, typename Val>
 bool OrderedMap<Key, Val>::lazy_flag = false;
-
-/**
- *  @brief OrderedMap(順序付き連想配列)
- *  @docs docs/orderedmap/rbst-ordered-map.md
- */ 

@@ -68,5 +68,5 @@ struct Simulated_Annealing {
 
 /**
  * @brief Simulated Annealing
- * @docs marathon/simulated-annealing.md
+ * @docs docs/marathon/simulated-annealing.md
  */

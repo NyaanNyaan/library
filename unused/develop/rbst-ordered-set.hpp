@@ -113,8 +113,3 @@ struct OrderedSet {
 };
 template <typename T, int S, bool MULTI>
 typename OrderedSet<T, S, MULTI>::RBST* OrderedSet<T, S, MULTI>::rbst = nullptr;
-
-/**
- *  @brief OrderedSet(順序付き集合)
- *  @docs docs/orderedmap/rbst-ordered-set.md
- */ 

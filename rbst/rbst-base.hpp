@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename Node>
 struct RBSTBase {
   using Ptr = Node *;
@@ -9,7 +7,7 @@ struct RBSTBase {
   inline Ptr my_new(Args... args) {
     return new Node(args...);
   }
-  Ptr make_tree() { return nullptr; }
+  inline Ptr make_tree() const { return nullptr; }
 
   // for avoiding memory leak, activate below
   /*
