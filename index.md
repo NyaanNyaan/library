@@ -305,7 +305,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
@@ -408,11 +408,11 @@ data:
       title: ntt/ntt.hpp
   - name: orderedmap
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: orderedmap/orderedmap-base.hpp
       title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\
         \u5E95\u30AF\u30E9\u30B9)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: orderedmap/orderedmap.hpp
       title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
   - name: prime
@@ -438,7 +438,7 @@ data:
       path: rbst/lazy-reversible-rbst.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\u8861\
         \u4E8C\u5206\u6728"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: rbst/rbst-base.hpp
       title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
         )"
@@ -570,22 +570,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -821,7 +821,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/multiplicative-function.test.cpp
       title: verify/verify-unit-test/multiplicative-function.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/orderedmap.test.cpp
       title: verify/verify-unit-test/orderedmap.test.cpp
     - icon: ':heavy_check_mark:'

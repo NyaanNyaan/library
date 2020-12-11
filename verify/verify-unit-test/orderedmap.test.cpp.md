@@ -1,59 +1,63 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: orderedmap/orderedmap-base.hpp
     title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\
       \u5E95\u30AF\u30E9\u30B9)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: orderedmap/orderedmap.hpp
     title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: rbst/rbst-base.hpp
     title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
       )"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
-    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
-    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
-    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
-    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
-    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
-    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
-    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    links:
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/orderedmap.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
+    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
+    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
+    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
+    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
+    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
     \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
     \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -185,7 +189,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"verify/verify-unit-test/orderedmap.test.cpp\"\n//\n#line 2 \"misc/rng.hpp\"\
+    \ 4 \"verify/verify-unit-test/orderedmap.test.cpp\"\n//\n#line 2 \"misc/rng.hpp\"\
     \n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
     \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
@@ -272,7 +276,7 @@ data:
     \ Val, false>, false> {\n  using base = OrderedMapBase<OrderedMapNode<Key, Val,\
     \ false>, false>;\n\n  OrderedMap() : base() {}\n\n  Val& operator[](const Key&\
     \ key) { return base::insert_key(key)->val; };\n\n};\n\n/**\n * @brief Ordered\
-    \ Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n#line 5 \"verify/verify-unit-test/orderedmap.test.cpp\"\
+    \ Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n#line 7 \"verify/verify-unit-test/orderedmap.test.cpp\"\
     \nusing namespace Nyaan;\n\nvoid orderdmap_test() {\n  OrderedMap<ll, ll> mp;\n\
     \  vector<pl> vc;\n\n  auto same_map = [&]() -> void {\n    for (int i = 0; i\
     \ < mp.size(); i++) {\n      auto kth = mp.kth_element(i);\n      assert(kth->key\
@@ -297,21 +301,22 @@ data:
     \ != 0 and (rng() % 15) == 0) {\n      int l = rng() % mp.size();\n      mp.erase(mp.find(vc[l].first));\n\
     \      vc.erase(begin(vc) + l);\n      same_map();\n    }\n  }\n}\n\nvoid Nyaan::solve()\
     \ { \n  orderdmap_test(); \n  ini(a,b);\n  out(a+b);\n}\n"
-  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\
-    \n#include \"../../orderedmap/orderedmap.hpp\"\nusing namespace Nyaan;\n\nvoid\
-    \ orderdmap_test() {\n  OrderedMap<ll, ll> mp;\n  vector<pl> vc;\n\n  auto same_map\
-    \ = [&]() -> void {\n    for (int i = 0; i < mp.size(); i++) {\n      auto kth\
-    \ = mp.kth_element(i);\n      assert(kth->key == vc[i].first && \"same_map\");\n\
-    \      assert(kth->val == vc[i].second && \"same_map\");\n    }\n  };\n\n  rep(i,\
-    \ 5000) {\n    ll key = rng() % 2048;\n    ll val = rng() % 2048;\n    {\n   \
-    \   // size\n      int s1 = mp.size();\n      int s2 = vc.size();\n      assert(s1\
-    \ == s2 and \"size\");\n      // lower_bound\n      int l1 = mp.lower_bound(key);\n\
-    \      int l2 = lb(vc, pl(key, -inf));\n      assert(l1 == l2 and \"lower_bound\"\
-    );\n      // upper_bound\n      int u1 = mp.upper_bound(key);\n      int u2 =\
-    \ ub(vc, pl(key, inf));\n      assert(u1 == u2 and \"upper_bound\");\n      //\
-    \ count\n      int c1 = mp.count(key);\n      assert(c1 == u1 - l1 and \"count\"\
-    );\n      // find\n      auto f = mp.find(key);\n      assert(!!f == c1 && \"\
-    find\");\n      // kth-element\n      if (l1 != s1) {\n        auto kth = mp.kth_element(l1);\n\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include \"\
+    ../../orderedmap/orderedmap.hpp\"\nusing namespace Nyaan;\n\nvoid orderdmap_test()\
+    \ {\n  OrderedMap<ll, ll> mp;\n  vector<pl> vc;\n\n  auto same_map = [&]() ->\
+    \ void {\n    for (int i = 0; i < mp.size(); i++) {\n      auto kth = mp.kth_element(i);\n\
+    \      assert(kth->key == vc[i].first && \"same_map\");\n      assert(kth->val\
+    \ == vc[i].second && \"same_map\");\n    }\n  };\n\n  rep(i, 5000) {\n    ll key\
+    \ = rng() % 2048;\n    ll val = rng() % 2048;\n    {\n      // size\n      int\
+    \ s1 = mp.size();\n      int s2 = vc.size();\n      assert(s1 == s2 and \"size\"\
+    );\n      // lower_bound\n      int l1 = mp.lower_bound(key);\n      int l2 =\
+    \ lb(vc, pl(key, -inf));\n      assert(l1 == l2 and \"lower_bound\");\n      //\
+    \ upper_bound\n      int u1 = mp.upper_bound(key);\n      int u2 = ub(vc, pl(key,\
+    \ inf));\n      assert(u1 == u2 and \"upper_bound\");\n      // count\n      int\
+    \ c1 = mp.count(key);\n      assert(c1 == u1 - l1 and \"count\");\n      // find\n\
+    \      auto f = mp.find(key);\n      assert(!!f == c1 && \"find\");\n      //\
+    \ kth-element\n      if (l1 != s1) {\n        auto kth = mp.kth_element(l1);\n\
     \        assert(kth->key == vc[l1].first);\n        assert(kth->val == vc[l1].second);\n\
     \      }\n    }\n\n    // insert\n    {\n      mp[key] = val;\n      int l = lb(vc,\
     \ pl(key, -inf));\n      if (l != sz(vc) and vc[l].first == key)\n        vc[l].second\
@@ -336,8 +341,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/orderedmap.test.cpp
   requiredBy: []
-  timestamp: '2020-12-11 19:08:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-11 21:50:03+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/orderedmap.test.cpp
 layout: document
