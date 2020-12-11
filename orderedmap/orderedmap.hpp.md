@@ -1,21 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: orderedmap/orderedmap-base.hpp
     title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\
       \u5E95\u30AF\u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: rbst/rbst-base.hpp
     title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
       )"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-unit-test/orderedmap.test.cpp
+    title: verify/verify-unit-test/orderedmap.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
     links: []
@@ -63,29 +66,32 @@ data:
     \ + 1;\n        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  int count(const\
     \ Key& k) const {\n    if constexpr (multi) {\n      return upper_bound(k) - lower_bound(k);\n\
     \    } else {\n      return !!find(k);\n    }\n  }\n\n  Ptr kth_element(int k)\
-    \ const {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      int lc\
-    \ = base::count(p->l);\n      if (lc == k) return p;\n      if (k < lc) {\n  \
-    \      p = p->l;\n      } else {\n        k -= lc + 1;\n        p = p->r;\n  \
-    \    }\n    }\n    return p;\n  }\n\n  void erase(Ptr p) { base::erase(root, p);\
-    \ }\n\n  void erase(const Key& key) {\n    Ptr p = find(key);\n    if (p) erase(p);\n\
-    \  }\n\n protected:\n  Ptr update(Ptr n) override {\n    n->cnt = 1 + base::count(n->l)\
-    \ + base::count(n->r);\n    return n;\n  }\n\n  Ptr insert_key(const Key& k) {\n\
-    \    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if constexpr (multi\
-    \ == false) {\n        if (k == p->key) return p;\n      }\n      if (k < p->key)\
-    \ {\n        p = p->l;\n      } else {\n        ret += base::count(p->l) + 1;\n\
-    \        p = p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto x =\
-    \ base::split(root, ret);\n    root = base::merge(base::merge(x.first, n), x.second);\n\
-    \    return n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000(\u9806\u5E8F\
-    \u4ED8\u304D\u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 4 \"\
-    orderedmap/orderedmap.hpp\"\n\ntemplate <typename Key, typename Val, bool multi>\n\
-    struct OrderedMapNode {\n  using Ptr = typename RBSTBase<OrderedMapNode>::Ptr;\n\
+    \ const {\n    Ptr p = root;\n    while (p) {\n      int lc = base::count(p->l);\n\
+    \      if (lc == k) return p;\n      if (k < lc) {\n        p = p->l;\n      }\
+    \ else {\n        k -= lc + 1;\n        p = p->r;\n      }\n    }\n    return\
+    \ p;\n  }\n\n  void erase(const Key& k) {\n    Ptr p = root;\n    int ret = 0;\n\
+    \    bool flg = false;\n    while (p) {\n      if (k == p->key) flg = true;\n\
+    \      if (k <= p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
+    \ + 1;\n        p = p->r;\n      }\n    }\n    if (flg) base::erase(root, ret);\n\
+    \  }\n\n  void erase(Ptr p) { erase(p->key); }\n\n  int size() const { return\
+    \ base::size(root); }\n\n protected:\n  Ptr update(Ptr n) override {\n    n->cnt\
+    \ = 1 + base::count(n->l) + base::count(n->r);\n    return n;\n  }\n\n  Ptr insert_key(const\
+    \ Key& k) {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if constexpr\
+    \ (multi == false) {\n        if (k == p->key) return p;\n      }\n      if (k\
+    \ < p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
+    \ + 1;\n        p = p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto\
+    \ x = base::split(root, ret);\n    root = base::merge(base::merge(x.first, n),\
+    \ x.second);\n    return n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000\
+    (\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n\
+    #line 4 \"orderedmap/orderedmap.hpp\"\n\ntemplate <typename Key, typename Val,\
+    \ bool multi>\nstruct OrderedMapNode {\n  using Ptr = typename RBSTBase<OrderedMapNode>::Ptr;\n\
     \  Ptr l, r;\n  Key key;\n  Val val;\n  int cnt;\n\n  OrderedMapNode(const Key&\
     \ k = Key(), const Val& v = Val())\n      : l(), r(), key(k), val(v), cnt(1) {}\n\
     };\n\ntemplate <typename Key, typename Val>\nstruct OrderedMap : OrderedMapBase<OrderedMapNode<Key,\
     \ Val, false>, false> {\n  using base = OrderedMapBase<OrderedMapNode<Key, Val,\
     \ false>, false>;\n\n  OrderedMap() : base() {}\n\n  Val& operator[](const Key&\
-    \ key) { return base::insert_key(key)->val; };\n};\n\n/**\n * @brief Ordered Map(\u9806\
-    \u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n"
+    \ key) { return base::insert_key(key)->val; };\n\n};\n\n/**\n * @brief Ordered\
+    \ Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n"
   code: "#pragma once\n\n#include \"orderedmap-base.hpp\"\n\ntemplate <typename Key,\
     \ typename Val, bool multi>\nstruct OrderedMapNode {\n  using Ptr = typename RBSTBase<OrderedMapNode>::Ptr;\n\
     \  Ptr l, r;\n  Key key;\n  Val val;\n  int cnt;\n\n  OrderedMapNode(const Key&\
@@ -93,18 +99,19 @@ data:
     };\n\ntemplate <typename Key, typename Val>\nstruct OrderedMap : OrderedMapBase<OrderedMapNode<Key,\
     \ Val, false>, false> {\n  using base = OrderedMapBase<OrderedMapNode<Key, Val,\
     \ false>, false>;\n\n  OrderedMap() : base() {}\n\n  Val& operator[](const Key&\
-    \ key) { return base::insert_key(key)->val; };\n};\n\n/**\n * @brief Ordered Map(\u9806\
-    \u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n"
+    \ key) { return base::insert_key(key)->val; };\n\n};\n\n/**\n * @brief Ordered\
+    \ Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n"
   dependsOn:
   - orderedmap/orderedmap-base.hpp
   - rbst/rbst-base.hpp
   isVerificationFile: false
   path: orderedmap/orderedmap.hpp
   requiredBy: []
-  timestamp: '2020-12-11 17:45:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-11 19:08:37+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+  - verify/verify-unit-test/orderedmap.test.cpp
 documentation_of: orderedmap/orderedmap.hpp
 layout: document
 redirect_from:

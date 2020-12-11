@@ -1,9 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: data-structure/union-find-with-potential.hpp
-    title: data-structure/union-find-with-potential.hpp
+  - icon: ':question:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':question:'
+    path: orderedmap/orderedmap-base.hpp
+    title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\
+      \u5E95\u30AF\u30E9\u30B9)"
+  - icon: ':question:'
+    path: orderedmap/orderedmap.hpp
+    title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
+  - icon: ':question:'
+    path: rbst/rbst-base.hpp
+    title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
+      )"
   - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -25,16 +36,12 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B
-    links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B
-  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B\"\n\
-    \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    links: []
+  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
@@ -178,31 +185,143 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"data-structure/union-find-with-potential.hpp\"\n\ntemplate <class T>\nstruct\
-    \ UnionFindWithPotential {\n  vector<int> dat;\n  vector<T> pot;\n\n  UnionFindWithPotential(int\
-    \ N, T I_ = 0) : dat(N, -1), pot(N, T()) {}\n\n  int root(int x) {\n    if (dat[x]\
-    \ < 0) return x;\n    int r = root(dat[x]);\n    pot[x] += pot[dat[x]];\n    return\
-    \ dat[x] = r;\n  }\n\n  // return P(x) - P(root(x))\n  T potential(int x) {\n\
-    \    root(x);\n    return pot[x];\n  }\n\n  bool same(int x, int y) { return root(x)\
-    \ == root(y); }\n\n  // return P(x) - P(y)\n  T diff(int x, int y) {\n    return\
-    \ potential(x) - potential(y);\n  }\n\n  // s.t. P(x) = P(y) + p\n  // return\
-    \ Satisfiablility\n  bool merge(int x, int y, T p) {\n    p += potential(y) -\
-    \ potential(x);\n    x = root(x), y = root(y);\n    if (x == y) return p == T();\n\
-    \    if (dat[x] < dat[y]) swap(x, y), p = -p;\n    dat[y] += dat[x];\n    dat[x]\
-    \ = y;\n    pot[x] = p;\n    return true;\n  }\n\n  // return size of CC including\
-    \ x\n  int size(int x) { return -dat[root(x)]; }\n};\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  UnionFindWithPotential<int>\
-    \ uf(N);\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(x, y, z);\n\
-    \      uf.merge(y, x, z);\n    } else {\n      ini(x, y);\n      if (!uf.same(x,\
-    \ y))\n        out(\"?\");\n      else\n        out(uf.diff(y, x));\n    }\n \
-    \ }\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure/union-find-with-potential.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  UnionFindWithPotential<int>\
-    \ uf(N);\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(x, y, z);\n\
-    \      uf.merge(y, x, z);\n    } else {\n      ini(x, y);\n      if (!uf.same(x,\
-    \ y))\n        out(\"?\");\n      else\n        out(uf.diff(y, x));\n    }\n \
-    \ }\n}"
+    \ 2 \"verify/verify-unit-test/orderedmap.test.cpp\"\n//\n#line 2 \"misc/rng.hpp\"\
+    \n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
+    \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \           .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
+    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
+    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
+    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
+    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
+    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
+    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
+    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
+    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
+    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
+    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    orderedmap/orderedmap.hpp\"\n\n#line 2 \"orderedmap/orderedmap-base.hpp\"\n\n\
+    #line 2 \"rbst/rbst-base.hpp\"\n\ntemplate <typename Node>\nstruct RBSTBase {\n\
+    \  using Ptr = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args...\
+    \ args) {\n    return new Node(args...);\n  }\n  inline Ptr make_tree() const\
+    \ { return nullptr; }\n\n  // for avoiding memory leak, activate below\n  /*\n\
+    \  using Ptr = shared_ptr<Node>;\n  template <typename... Args>\n  inline Ptr\
+    \ my_new(Args... args) {\n    return make_shared<Node>(args...);\n  }\n  Ptr make_tree()\
+    \ {return Ptr();}\n  */\n\n  int size(Ptr t) const { return count(t); }\n\n  Ptr\
+    \ merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l : r;\n    if (int((rng()\
+    \ * (l->cnt + r->cnt)) >> 32) < l->cnt) {\n      push(l);\n      l->r = merge(l->r,\
+    \ r);\n      return update(l);\n    } else {\n      push(r);\n      r->l = merge(l,\
+    \ r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t,\
+    \ int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k <=\
+    \ count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n   \
+    \   return {s.first, update(t)};\n    } else {\n      auto s = split(t->r, k -\
+    \ count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
+    \    }\n  }\n\n  Ptr build(int l, int r, const vector<decltype(Node::key)> &v)\
+    \ {\n    if (l + 1 == r) return my_new(v[l]);\n    int m = (l + r) >> 1;\n   \
+    \ Ptr pm = my_new(v[m]);\n    if (l < m) pm->l = build(l, m, v);\n    if (m +\
+    \ 1 < r) pm->r = build(m + 1, r, v);\n    return update(pm);\n  }\n\n  Ptr build(const\
+    \ vector<decltype(Node::key)> &v) {\n    return build(0, (int)v.size(), v);\n\
+    \  }\n\n  template <typename... Args>\n  void insert(Ptr &t, int k, const Args\
+    \ &... args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
+    \ x.second);\n  }\n\n  void erase(Ptr &t, int k) {\n    auto x = split(t, k);\n\
+    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n  static\
+    \ uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n    return\
+    \ x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
+    \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
+    \ {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\
+    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 4 \"orderedmap/orderedmap-base.hpp\"\
+    \n\ntemplate <typename Node, bool multi>\nstruct OrderedMapBase : RBSTBase<Node>\
+    \ {\n  using base = RBSTBase<Node>;\n  using Ptr = typename base::Ptr;\n  using\
+    \ Key = decltype(Node::key);\n\n  Ptr root;\n  OrderedMapBase() : root(base::make_tree())\
+    \ {}\n\n  Ptr find(const Key& k) const {\n    Ptr p = root;\n    while (p) {\n\
+    \      if (k == p->key) return p;\n      p = k < p->key ? p->l : p->r;\n    }\n\
+    \    return base::make_tree();\n  }\n\n  int lower_bound(const Key& k) const {\n\
+    \    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if (k <= p->key)\
+    \ {\n        p = p->l;\n      } else {\n        ret += base::count(p->l) + 1;\n\
+    \        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  int upper_bound(const\
+    \ Key& k) const {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n    \
+    \  if (k < p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
+    \ + 1;\n        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  int count(const\
+    \ Key& k) const {\n    if constexpr (multi) {\n      return upper_bound(k) - lower_bound(k);\n\
+    \    } else {\n      return !!find(k);\n    }\n  }\n\n  Ptr kth_element(int k)\
+    \ const {\n    Ptr p = root;\n    while (p) {\n      int lc = base::count(p->l);\n\
+    \      if (lc == k) return p;\n      if (k < lc) {\n        p = p->l;\n      }\
+    \ else {\n        k -= lc + 1;\n        p = p->r;\n      }\n    }\n    return\
+    \ p;\n  }\n\n  void erase(const Key& k) {\n    Ptr p = root;\n    int ret = 0;\n\
+    \    bool flg = false;\n    while (p) {\n      if (k == p->key) flg = true;\n\
+    \      if (k <= p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
+    \ + 1;\n        p = p->r;\n      }\n    }\n    if (flg) base::erase(root, ret);\n\
+    \  }\n\n  void erase(Ptr p) { erase(p->key); }\n\n  int size() const { return\
+    \ base::size(root); }\n\n protected:\n  Ptr update(Ptr n) override {\n    n->cnt\
+    \ = 1 + base::count(n->l) + base::count(n->r);\n    return n;\n  }\n\n  Ptr insert_key(const\
+    \ Key& k) {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if constexpr\
+    \ (multi == false) {\n        if (k == p->key) return p;\n      }\n      if (k\
+    \ < p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
+    \ + 1;\n        p = p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto\
+    \ x = base::split(root, ret);\n    root = base::merge(base::merge(x.first, n),\
+    \ x.second);\n    return n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000\
+    (\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n\
+    #line 4 \"orderedmap/orderedmap.hpp\"\n\ntemplate <typename Key, typename Val,\
+    \ bool multi>\nstruct OrderedMapNode {\n  using Ptr = typename RBSTBase<OrderedMapNode>::Ptr;\n\
+    \  Ptr l, r;\n  Key key;\n  Val val;\n  int cnt;\n\n  OrderedMapNode(const Key&\
+    \ k = Key(), const Val& v = Val())\n      : l(), r(), key(k), val(v), cnt(1) {}\n\
+    };\n\ntemplate <typename Key, typename Val>\nstruct OrderedMap : OrderedMapBase<OrderedMapNode<Key,\
+    \ Val, false>, false> {\n  using base = OrderedMapBase<OrderedMapNode<Key, Val,\
+    \ false>, false>;\n\n  OrderedMap() : base() {}\n\n  Val& operator[](const Key&\
+    \ key) { return base::insert_key(key)->val; };\n\n};\n\n/**\n * @brief Ordered\
+    \ Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n#line 5 \"verify/verify-unit-test/orderedmap.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid orderdmap_test() {\n  OrderedMap<ll, ll> mp;\n\
+    \  vector<pl> vc;\n\n  auto same_map = [&]() -> void {\n    for (int i = 0; i\
+    \ < mp.size(); i++) {\n      auto kth = mp.kth_element(i);\n      assert(kth->key\
+    \ == vc[i].first && \"same_map\");\n      assert(kth->val == vc[i].second && \"\
+    same_map\");\n    }\n  };\n\n  rep(i, 5000) {\n    ll key = rng() % 2048;\n  \
+    \  ll val = rng() % 2048;\n    {\n      // size\n      int s1 = mp.size();\n \
+    \     int s2 = vc.size();\n      assert(s1 == s2 and \"size\");\n      // lower_bound\n\
+    \      int l1 = mp.lower_bound(key);\n      int l2 = lb(vc, pl(key, -inf));\n\
+    \      assert(l1 == l2 and \"lower_bound\");\n      // upper_bound\n      int\
+    \ u1 = mp.upper_bound(key);\n      int u2 = ub(vc, pl(key, inf));\n      assert(u1\
+    \ == u2 and \"upper_bound\");\n      // count\n      int c1 = mp.count(key);\n\
+    \      assert(c1 == u1 - l1 and \"count\");\n      // find\n      auto f = mp.find(key);\n\
+    \      assert(!!f == c1 && \"find\");\n      // kth-element\n      if (l1 != s1)\
+    \ {\n        auto kth = mp.kth_element(l1);\n        assert(kth->key == vc[l1].first);\n\
+    \        assert(kth->val == vc[l1].second);\n      }\n    }\n\n    // insert\n\
+    \    {\n      mp[key] = val;\n      int l = lb(vc, pl(key, -inf));\n      if (l\
+    \ != sz(vc) and vc[l].first == key)\n        vc[l].second = val;\n      else\n\
+    \        vc.insert(begin(vc) + l, pl(key, val));\n      same_map();\n    }\n\n\
+    \    // erase(key)\n    if (mp.size() != 0 and (rng() % 15) == 0) {\n      int\
+    \ l = rng() % mp.size();\n      mp.erase(vc[l].first);\n      vc.erase(begin(vc)\
+    \ + l);\n      same_map();\n    }\n    \n    // erase(ptr)\n    if (mp.size()\
+    \ != 0 and (rng() % 15) == 0) {\n      int l = rng() % mp.size();\n      mp.erase(mp.find(vc[l].first));\n\
+    \      vc.erase(begin(vc) + l);\n      same_map();\n    }\n  }\n}\n\nvoid Nyaan::solve()\
+    \ { \n  orderdmap_test(); \n  ini(a,b);\n  out(a+b);\n}\n"
+  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\
+    \n#include \"../../orderedmap/orderedmap.hpp\"\nusing namespace Nyaan;\n\nvoid\
+    \ orderdmap_test() {\n  OrderedMap<ll, ll> mp;\n  vector<pl> vc;\n\n  auto same_map\
+    \ = [&]() -> void {\n    for (int i = 0; i < mp.size(); i++) {\n      auto kth\
+    \ = mp.kth_element(i);\n      assert(kth->key == vc[i].first && \"same_map\");\n\
+    \      assert(kth->val == vc[i].second && \"same_map\");\n    }\n  };\n\n  rep(i,\
+    \ 5000) {\n    ll key = rng() % 2048;\n    ll val = rng() % 2048;\n    {\n   \
+    \   // size\n      int s1 = mp.size();\n      int s2 = vc.size();\n      assert(s1\
+    \ == s2 and \"size\");\n      // lower_bound\n      int l1 = mp.lower_bound(key);\n\
+    \      int l2 = lb(vc, pl(key, -inf));\n      assert(l1 == l2 and \"lower_bound\"\
+    );\n      // upper_bound\n      int u1 = mp.upper_bound(key);\n      int u2 =\
+    \ ub(vc, pl(key, inf));\n      assert(u1 == u2 and \"upper_bound\");\n      //\
+    \ count\n      int c1 = mp.count(key);\n      assert(c1 == u1 - l1 and \"count\"\
+    );\n      // find\n      auto f = mp.find(key);\n      assert(!!f == c1 && \"\
+    find\");\n      // kth-element\n      if (l1 != s1) {\n        auto kth = mp.kth_element(l1);\n\
+    \        assert(kth->key == vc[l1].first);\n        assert(kth->val == vc[l1].second);\n\
+    \      }\n    }\n\n    // insert\n    {\n      mp[key] = val;\n      int l = lb(vc,\
+    \ pl(key, -inf));\n      if (l != sz(vc) and vc[l].first == key)\n        vc[l].second\
+    \ = val;\n      else\n        vc.insert(begin(vc) + l, pl(key, val));\n      same_map();\n\
+    \    }\n\n    // erase(key)\n    if (mp.size() != 0 and (rng() % 15) == 0) {\n\
+    \      int l = rng() % mp.size();\n      mp.erase(vc[l].first);\n      vc.erase(begin(vc)\
+    \ + l);\n      same_map();\n    }\n    \n    // erase(ptr)\n    if (mp.size()\
+    \ != 0 and (rng() % 15) == 0) {\n      int l = rng() % mp.size();\n      mp.erase(mp.find(vc[l].first));\n\
+    \      vc.erase(begin(vc) + l);\n      same_map();\n    }\n  }\n}\n\nvoid Nyaan::solve()\
+    \ { \n  orderdmap_test(); \n  ini(a,b);\n  out(a+b);\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -210,17 +329,20 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - data-structure/union-find-with-potential.hpp
+  - misc/rng.hpp
+  - orderedmap/orderedmap.hpp
+  - orderedmap/orderedmap-base.hpp
+  - rbst/rbst-base.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
+  path: verify/verify-unit-test/orderedmap.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-11 19:08:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
+documentation_of: verify/verify-unit-test/orderedmap.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
-- /verify/verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp.html
-title: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
+- /verify/verify/verify-unit-test/orderedmap.test.cpp
+- /verify/verify/verify-unit-test/orderedmap.test.cpp.html
+title: verify/verify-unit-test/orderedmap.test.cpp
 ---

@@ -3,26 +3,27 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-base.hpp
-    title: hashmap/hashmap-base.hpp
+    title: "Hash Map(base)\u3000(\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7\u30FB\u57FA\
+      \u5E95\u30AF\u30E9\u30B9)"
   - icon: ':heavy_check_mark:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -269,10 +270,12 @@ data:
     \    if (cap < u32(n)) reallocate(n);\n  }\n};\n\ntemplate <typename Key, typename\
     \ Data>\nuint64_t HashMapBase<Key, Data>::r =\n    chrono::duration_cast<chrono::nanoseconds>(\n\
     \        chrono::high_resolution_clock::now().time_since_epoch())\n        .count();\n\
-    \n}  // namespace HashMapImpl\n#line 2 \"hashmap/hashset.hpp\"\n\ntemplate <typename\
-    \ Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key, Key> {\n  using HashMapImpl::HashMapBase<Key,\
-    \ Key>::HashMapBase;\n};\n\n/* \n * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\
-    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n#line 7 \"verify/verify-unit-test/hashset.test.cpp\"\
+    \n}  // namespace HashMapImpl\n\n/**\n * @brief Hash Map(base)\u3000(\u30CF\u30C3\
+    \u30B7\u30E5\u30DE\u30C3\u30D7\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line\
+    \ 2 \"hashmap/hashset.hpp\"\n\ntemplate <typename Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key,\
+    \ Key> {\n  using HashMapImpl::HashMapBase<Key, Key>::HashMapBase;\n};\n\n/* \n\
+    \ * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)\n * @docs\
+    \ docs/hashmap/hashset.md\n**/\n#line 7 \"verify/verify-unit-test/hashset.test.cpp\"\
     \nuint64_t rng() {\n  static uint64_t x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
     \  .count();\n  return x_ ^= (x_ << 7), x_ ^= (x_ >> 9);\n}\n// [l, r)\nint64_t\
@@ -417,7 +420,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/hashset.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-11 19:08:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/hashset.test.cpp
