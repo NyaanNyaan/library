@@ -58,7 +58,6 @@ struct OrderedMapBase : RBSTBase<Node> {
 
   Ptr kth_element(int k) const {
     Ptr p = root;
-    int ret = 0;
     while (p) {
       int lc = base::count(p->l);
       if (lc == k) return p;
@@ -72,12 +71,25 @@ struct OrderedMapBase : RBSTBase<Node> {
     return p;
   }
 
-  void erase(Ptr p) { base::erase(root, p); }
-
-  void erase(const Key& key) {
-    Ptr p = find(key);
-    if (p) erase(p);
+  void erase(const Key& k) {
+    Ptr p = root;
+    int ret = 0;
+    bool flg = false;
+    while (p) {
+      if (k == p->key) flg = true;
+      if (k <= p->key) {
+        p = p->l;
+      } else {
+        ret += base::count(p->l) + 1;
+        p = p->r;
+      }
+    }
+    if (flg) base::erase(root, ret);
   }
+
+  void erase(Ptr p) { erase(p->key); }
+
+  int size() const { return base::size(root); }
 
  protected:
   Ptr update(Ptr n) override {

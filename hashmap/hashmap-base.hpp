@@ -253,3 +253,7 @@ uint64_t HashMapBase<Key, Data>::r =
         .count();
 
 }  // namespace HashMapImpl
+
+/**
+ * @brief Hash Map(base)　(ハッシュマップ・基底クラス)
+ */

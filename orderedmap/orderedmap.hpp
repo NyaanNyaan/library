@@ -21,6 +21,7 @@ struct OrderedMap : OrderedMapBase<OrderedMapNode<Key, Val, false>, false> {
   OrderedMap() : base() {}
 
   Val& operator[](const Key& key) { return base::insert_key(key)->val; };
+
 };
 
 /**
