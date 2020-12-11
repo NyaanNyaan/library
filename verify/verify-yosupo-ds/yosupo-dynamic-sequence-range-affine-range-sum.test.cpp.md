@@ -193,10 +193,10 @@ data:
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 5 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp\"\
-    \n//\n#line 2 \"rbst/lazy-reversible-rbst.hpp\"\n\n\n\n#line 2 \"rbst/rbst-base.hpp\"\
-    \n\n\n\ntemplate <typename Node>\nstruct RBSTBase {\n  using Ptr = Node *;\n \
-    \ template <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return\
-    \ new Node(args...);\n  }\n  Ptr make_tree() { return nullptr; }\n\n  // for avoiding\
+    \n//\n#line 2 \"rbst/lazy-reversible-rbst.hpp\"\n\n#line 2 \"rbst/rbst-base.hpp\"\
+    \n\ntemplate <typename Node>\nstruct RBSTBase {\n  using Ptr = Node *;\n  template\
+    \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
+    \  }\n  inline Ptr make_tree() const { return nullptr; }\n\n  // for avoiding\
     \ memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template\
     \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
     \  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr t) const { return\
@@ -221,7 +221,7 @@ data:
     \ x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
     \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
     \ {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\
-    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 6 \"rbst/lazy-reversible-rbst.hpp\"\
+    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 4 \"rbst/lazy-reversible-rbst.hpp\"\
     \n\ntemplate <typename T, typename E>\nstruct LazyReversibleRBSTNode {\n  typename\
     \ RBSTBase<LazyReversibleRBSTNode>::Ptr l, r;\n  T key, sum;\n  E lazy;\n  int\
     \ cnt;\n  bool rev;\n\n  LazyReversibleRBSTNode(const T &t = T(), const E &e =\
@@ -373,7 +373,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-11 17:45:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp

@@ -56,18 +56,7 @@ data:
     \ y = inv[y];\n      if (s.link != -1) s.link = inv[s.link];\n      if (s.origin\
     \ != -1) s.origin = inv[s.origin];\n    }\n    sorted = true;\n  }\n};\n\ntemplate\
     \ <int margin>\nbool SuffixAutomaton<margin>::sorted = false;\n\n/**\n * @brief\
-    \ Suffix Automaton\n * @docs docs/string/suffix-automaton.md\n */\n\n/*\n#include\
-    \ \"string/suffix-automaton.hpp\"\n#include \"string/z-algorithm.hpp\"\n\ntemplate\
-    \ <char margin = 'a'>\nstruct RunEnumerate {\n  string s;\n  SuffixAutomaton<margin>\
-    \ sa;\n\n  RunEnumerate(const string& _s) : s(_s), sa(_s) {}\n\n private:\n  vector<int>\
-    \ enum_first_occurence() {\n    vector<int> fo(sa.size(), 1e9);\n    for (int\
-    \ i = sa.size() - 1; i >= 0; --i) {\n      if (sa[i].origin == -1) {\n       \
-    \ fo[i] = sa[i].len;\n      }\n      int l = sa[i].link;\n      if (i > 0 && sa[l].origin\
-    \ != -1 && fo[i] < fo[sa[i].link])\n        fo[sa[i].link] = fo[i];\n    }\n \
-    \   return fo;\n  }\n\n  vector<int> factorize() {\n    auto fo = enum_first_occurence();\n\
-    \    \n  }\n  \n  vector<array<int, 3>> run(vector<int>& f) {\n    unordered_map<uint64_t,\
-    \ array<int,3>> ret;\n    for(int i = 0; i < f.size(); i++) {\n\n    }\n  }\n\
-    };\n\n*/\n"
+    \ Suffix Automaton\n * @docs docs/string/suffix-automaton.md\n */\n"
   code: "#pragma once\n\ntemplate <int margin = 'a'>\nstruct SuffixAutomaton {\n \
     \ struct state {\n    vector<pair<char, int>> nxt;\n    uint64_t hit;\n    int\
     \ len, link, origin;\n    char key;\n\n    state() : hit(0), len(0), link(-1),\
@@ -112,23 +101,12 @@ data:
     \ y = inv[y];\n      if (s.link != -1) s.link = inv[s.link];\n      if (s.origin\
     \ != -1) s.origin = inv[s.origin];\n    }\n    sorted = true;\n  }\n};\n\ntemplate\
     \ <int margin>\nbool SuffixAutomaton<margin>::sorted = false;\n\n/**\n * @brief\
-    \ Suffix Automaton\n * @docs docs/string/suffix-automaton.md\n */\n\n/*\n#include\
-    \ \"string/suffix-automaton.hpp\"\n#include \"string/z-algorithm.hpp\"\n\ntemplate\
-    \ <char margin = 'a'>\nstruct RunEnumerate {\n  string s;\n  SuffixAutomaton<margin>\
-    \ sa;\n\n  RunEnumerate(const string& _s) : s(_s), sa(_s) {}\n\n private:\n  vector<int>\
-    \ enum_first_occurence() {\n    vector<int> fo(sa.size(), 1e9);\n    for (int\
-    \ i = sa.size() - 1; i >= 0; --i) {\n      if (sa[i].origin == -1) {\n       \
-    \ fo[i] = sa[i].len;\n      }\n      int l = sa[i].link;\n      if (i > 0 && sa[l].origin\
-    \ != -1 && fo[i] < fo[sa[i].link])\n        fo[sa[i].link] = fo[i];\n    }\n \
-    \   return fo;\n  }\n\n  vector<int> factorize() {\n    auto fo = enum_first_occurence();\n\
-    \    \n  }\n  \n  vector<array<int, 3>> run(vector<int>& f) {\n    unordered_map<uint64_t,\
-    \ array<int,3>> ret;\n    for(int i = 0; i < f.size(); i++) {\n\n    }\n  }\n\
-    };\n\n*/"
+    \ Suffix Automaton\n * @docs docs/string/suffix-automaton.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: string/suffix-automaton.hpp
   requiredBy: []
-  timestamp: '2020-12-11 01:15:14+09:00'
+  timestamp: '2020-12-11 17:45:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp

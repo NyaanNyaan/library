@@ -247,6 +247,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
     title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
     title: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
   - icon: ':heavy_check_mark:'
@@ -822,6 +825,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp

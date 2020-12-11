@@ -405,6 +405,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/ntt.hpp
       title: ntt/ntt.hpp
+  - name: orderedmap
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: orderedmap/orderedmap-base.hpp
+      title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\
+        \u5E95\u30AF\u30E9\u30B9)"
+    - icon: ':heavy_check_mark:'
+      path: orderedmap/orderedmap.hpp
+      title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
   - name: prime
     pages:
     - icon: ':heavy_check_mark:'
@@ -861,6 +870,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
       title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
       title: verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp

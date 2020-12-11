@@ -14,7 +14,7 @@ data:
   attributes:
     document_title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
     links: []
-  bundledCode: "#line 2 \"rbst/treap.hpp\"\n\n\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace\
+  bundledCode: "#line 2 \"rbst/treap.hpp\"\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace\
     \ my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n  \
     \    uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n                  \
     \ chrono::high_resolution_clock::now().time_since_epoch())\n                 \
@@ -31,7 +31,7 @@ data:
     \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
     \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
     }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"\
     rbst/treap.hpp\"\n\ntemplate <typename Node>\nstruct TreapBase {\n  using Ptr\
     \ = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args... args)\
     \ {\n    return new Node(args...);\n  }\n  Ptr make_tree() { return nullptr; }\n\
@@ -92,7 +92,7 @@ data:
     \    }\n  }\n\n  void propagate(Ptr t, const E &x) {\n    t->lazy = h(t->lazy,\
     \ x);\n    t->key = g(t->key, x);\n    t->sum = g(t->sum, x);\n  }\n};\n\n/**\n\
     \ * @brief \u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap\n */\n"
-  code: "#pragma once\n\n\n\n#include \"../misc/rng.hpp\"\n\ntemplate <typename Node>\n\
+  code: "#pragma once\n\n#include \"../misc/rng.hpp\"\n\ntemplate <typename Node>\n\
     struct TreapBase {\n  using Ptr = Node *;\n  template <typename... Args>\n  inline\
     \ Ptr my_new(Args... args) {\n    return new Node(args...);\n  }\n  Ptr make_tree()\
     \ { return nullptr; }\n\n  // for avoiding memory leak, activate below\n  /*\n\
@@ -157,7 +157,7 @@ data:
   isVerificationFile: false
   path: rbst/treap.hpp
   requiredBy: []
-  timestamp: '2020-12-08 00:23:55+09:00'
+  timestamp: '2020-12-11 17:45:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp

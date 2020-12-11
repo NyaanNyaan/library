@@ -2,17 +2,19 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: marathon/log_table.hpp
-    title: marathon/log_table.hpp
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
-    path: marathon/simulated-annealing.hpp
-    title: Simulated Annealing
+    path: orderedmap/orderedmap-base.hpp
+    title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\
+      \u5E95\u30AF\u30E9\u30B9)"
   - icon: ':heavy_check_mark:'
-    path: misc/rng.hpp
-    title: misc/rng.hpp
+    path: orderedmap/orderedmap.hpp
+    title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
   - icon: ':heavy_check_mark:'
-    path: misc/timer.hpp
-    title: misc/timer.hpp
+    path: rbst/rbst-base.hpp
+    title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
+      )"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -37,20 +39,20 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    PROBLEM: https://judge.yosupo.jp/problem/associative_array
     links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/simulated-annealing.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
-    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
-    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
-    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
-    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
-    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
-    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    - https://judge.yosupo.jp/problem/associative_array
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n#line 2 \"\
+    template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\
+    \n#include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
+    #include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include <chrono>\n#include\
+    \ <cinttypes>\n#include <climits>\n#include <cmath>\n#include <complex>\n#include\
+    \ <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include\
+    \ <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include\
+    \ <ctime>\n#include <deque>\n#include <exception>\n#include <forward_list>\n#include\
+    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
+    #include <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
     \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
     \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
     #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
@@ -187,121 +189,116 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-unit-test/simulated-annealing.test.cpp\"\n//\n#line 2 \"marathon/simulated-annealing.hpp\"\
-    \n\n#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 2 \"marathon/log_table.hpp\"\n\nstruct log_table {\n  double l[65536];\n\
-    \  constexpr log_table() : l() {\n    unsigned long long x = 88172645463325252ULL;\n\
-    \    double log_u64max = log(2) * 64;\n    for (int i = 0; i < 65536; i++) {\n\
-    \      x = x ^ (x << 7);\n      x = x ^ (x >> 9);\n      l[i] = log(double(x))\
-    \ - log_u64max;\n    }\n  }\n};\n#line 5 \"marathon/simulated-annealing.hpp\"\n\
-    \ntemplate <typename Input, typename State, typename Diff>\nstruct Simulated_Annealing\
-    \ {\n private:\n  log_table rand_log;\n  double end_time, inv_time, cur_time;\n\
-    \  double start_temp, diff_temp, cur_temp;\n  Timer *timer;\n\n  void set_time(double\
-    \ start_time) {\n    inv_time = 1.0 / (end_time - start_time);\n    cur_time =\
-    \ start_time;\n  }\n  void set_temp() {\n    cur_temp = max(0.0, start_temp -\
-    \ cur_time * diff_temp * inv_time);\n  }\n\n public:\n  Simulated_Annealing(double\
-    \ _end_time, double _start_temp, double _end_temp,\n                      Timer\
-    \ *_timer = nullptr)\n      : end_time(_end_time),\n        start_temp(_start_temp),\n\
-    \        diff_temp(_start_temp - _end_temp),\n        timer(_timer) {\n    if\
-    \ (timer == nullptr) timer = new Timer;\n    set_time(timer->elapsed());\n   \
-    \ set_temp();\n  }\n\n  void reset() { timer->reset(); }\n\n  State run(const\
-    \ Input &input) {\n    State st(input);\n    for (int iter = 0;; iter++) {\n \
-    \     if ((iter & 0xFF) == 0) {\n        st.dump();\n        if ((cur_time = timer->elapsed())\
-    \ > end_time) break;\n        set_temp();\n      }\n      Diff d(st);\n      if\
-    \ (d.diff() > cur_temp * rand_log.l[iter & 0xFFFF]) {\n        st.update(d);\n\
-    \      } else {\n        st.undo(d);\n      }\n    }\n    return st;\n  }\n\n\
-    \  decltype(State().score()) test(const vector<string> &filenames) {\n    decltype(State().score())\
-    \ scores = 0.0;\n    for (auto &filename : filenames) {\n      timer->reset();\n\
-    \      ifstream is(filename);\n      cin.rdbuf(is.rdbuf());\n      Input input;\n\
-    \      input.scan();\n      auto res = run(input);\n      scores += res.score();\n\
-    \    }\n    return scores;\n  }\n};\n\n/**\n * @brief Simulated Annealing\n *\
-    \ @docs docs/marathon/simulated-annealing.md\n */\n#line 2 \"misc/rng.hpp\"\n\n\
-    namespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_\
-    \ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n            \
-    \       chrono::high_resolution_clock::now().time_since_epoch())\n           \
-    \        .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
-    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
-    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
-    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
-    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
-    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
-    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
-    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
-    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
-    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
-    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
-    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
-    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"\
-    verify/verify-unit-test/simulated-annealing.test.cpp\"\n\nusing namespace Nyaan;\n\
-    \nusing score_t = double;\nstruct Input {\n  int N;\n  V<P<double, double>> ps;\n\
-    \  Input() = default;\n  void scan() {\n    in(N);\n    ps.resize(N);\n    in(ps);\n\
-    \  }\n};\n\nstruct State {\n  int N;\n  V<P<double, double>> ps;\n  vi used;\n\
-    \  P<double, double> res;\n\n  struct Diff {\n    const State *st;\n    int n;\n\
-    \    P<double, double> res;\n    double d;\n    Diff() = default;\n    Diff(const\
-    \ State &state) : st(&state), res(state.res) {\n      n = rng() % state.N;\n \
-    \     if (state.used[n]) {\n        res -= state.ps[n];\n      } else {\n    \
-    \    res += state.ps[n];\n      }\n      d = res.x() * res.x() + res.y() * res.y()\
-    \ - state.score();\n    }\n    double diff() const { return d; }\n  };\n\n  State()\
-    \ = default;\n  State(const Input &input) : N(input.N), ps(input.ps) {\n    used.resize(N);\n\
-    \    rep(i, N) used[i] = rng() & 1;\n    res = P<double, double>(0, 0);\n    rep(i,\
-    \ N) {\n      if (used[i]) res += ps[i];\n    }\n  }\n  void update(const Diff\
-    \ &b) {\n    res = b.res;\n    used[b.n] ^= 1;\n  }\n  void undo(const Diff &)\
-    \ {}\n  score_t score() const { return res.x() * res.x() + res.y() * res.y();\
-    \ }\n\n  bool operator>(const State &s) { return score() > s.score(); };\n  void\
-    \ dump() {}\n};\nusing SA = Simulated_Annealing<Input, State, typename State::Diff>;\n\
-    \nusing pd = Nyaan::P<double, double>;\n\ndouble yakinamashi(int n, V<pd> ps)\
-    \ {\n  Input ip;\n  ip.N = n;\n  ip.ps = ps;\n  SA sa(10, 1000, 1);\n  State ans{};\n\
-    \  rep(i, 10) {\n    sa.reset();\n    auto s = sa.run(ip);\n    if (s > ans) swap(ans,\
-    \ s);\n  }\n  return sqrt(ans.score());\n}\n\ndouble argsort(int N, V<pd> v) {\n\
-    \  repr(i, N) {\n    if (v[i] == pd(0, 0)) v.erase(v.begin() + i);\n  }\n  N =\
-    \ sz(v);\n  sort(all(v), [](pd a, pd b) {\n    return atan2(double(a.y()), double(a.x()))\
-    \ <\n           atan2(double(b.y()), double(b.x()));\n  });\n  double ans = 0;\n\
-    \  rep(i, N) rep(j, N) {\n    double cx = 0, cy = 0;\n    for (int ii = i;; ii\
-    \ = (ii + 1) % N) {\n      cx += v[ii].x(), cy += v[ii].y();\n      if (ii ==\
-    \ j) break;\n    }\n    amax(ans, sqrt(cx * cx + cy * cy));\n  }\n  return ans;\n\
-    }\n\nvoid Nyaan::solve() {\n  rep(i, 20) {\n    int n = 100;\n    V<pd> v(n);\n\
-    \    rep(j, n) v[j] = pd(randint(0, 2 * TEN(6) + 1) + TEN(6),\n              \
-    \          randint(0, 2 * TEN(6) + 1) + TEN(6));\n    auto ans1 = argsort(n, v);\n\
-    \    auto ans2 = yakinamashi(n, v);\n    cerr << abs(ans1 - ans2) << endl;\n \
-    \ }\n\n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << endl;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../marathon/simulated-annealing.hpp\"\
-    \n#include \"../../misc/rng.hpp\"\n\nusing namespace Nyaan;\n\nusing score_t =\
-    \ double;\nstruct Input {\n  int N;\n  V<P<double, double>> ps;\n  Input() = default;\n\
-    \  void scan() {\n    in(N);\n    ps.resize(N);\n    in(ps);\n  }\n};\n\nstruct\
-    \ State {\n  int N;\n  V<P<double, double>> ps;\n  vi used;\n  P<double, double>\
-    \ res;\n\n  struct Diff {\n    const State *st;\n    int n;\n    P<double, double>\
-    \ res;\n    double d;\n    Diff() = default;\n    Diff(const State &state) : st(&state),\
-    \ res(state.res) {\n      n = rng() % state.N;\n      if (state.used[n]) {\n \
-    \       res -= state.ps[n];\n      } else {\n        res += state.ps[n];\n   \
-    \   }\n      d = res.x() * res.x() + res.y() * res.y() - state.score();\n    }\n\
-    \    double diff() const { return d; }\n  };\n\n  State() = default;\n  State(const\
-    \ Input &input) : N(input.N), ps(input.ps) {\n    used.resize(N);\n    rep(i,\
-    \ N) used[i] = rng() & 1;\n    res = P<double, double>(0, 0);\n    rep(i, N) {\n\
-    \      if (used[i]) res += ps[i];\n    }\n  }\n  void update(const Diff &b) {\n\
-    \    res = b.res;\n    used[b.n] ^= 1;\n  }\n  void undo(const Diff &) {}\n  score_t\
-    \ score() const { return res.x() * res.x() + res.y() * res.y(); }\n\n  bool operator>(const\
-    \ State &s) { return score() > s.score(); };\n  void dump() {}\n};\nusing SA =\
-    \ Simulated_Annealing<Input, State, typename State::Diff>;\n\nusing pd = Nyaan::P<double,\
-    \ double>;\n\ndouble yakinamashi(int n, V<pd> ps) {\n  Input ip;\n  ip.N = n;\n\
-    \  ip.ps = ps;\n  SA sa(10, 1000, 1);\n  State ans{};\n  rep(i, 10) {\n    sa.reset();\n\
-    \    auto s = sa.run(ip);\n    if (s > ans) swap(ans, s);\n  }\n  return sqrt(ans.score());\n\
-    }\n\ndouble argsort(int N, V<pd> v) {\n  repr(i, N) {\n    if (v[i] == pd(0, 0))\
-    \ v.erase(v.begin() + i);\n  }\n  N = sz(v);\n  sort(all(v), [](pd a, pd b) {\n\
-    \    return atan2(double(a.y()), double(a.x())) <\n           atan2(double(b.y()),\
-    \ double(b.x()));\n  });\n  double ans = 0;\n  rep(i, N) rep(j, N) {\n    double\
-    \ cx = 0, cy = 0;\n    for (int ii = i;; ii = (ii + 1) % N) {\n      cx += v[ii].x(),\
-    \ cy += v[ii].y();\n      if (ii == j) break;\n    }\n    amax(ans, sqrt(cx *\
-    \ cx + cy * cy));\n  }\n  return ans;\n}\n\nvoid Nyaan::solve() {\n  rep(i, 20)\
-    \ {\n    int n = 100;\n    V<pd> v(n);\n    rep(j, n) v[j] = pd(randint(0, 2 *\
-    \ TEN(6) + 1) + TEN(6),\n                        randint(0, 2 * TEN(6) + 1) +\
-    \ TEN(6));\n    auto ans1 = argsort(n, v);\n    auto ans2 = yakinamashi(n, v);\n\
-    \    cerr << abs(ans1 - ans2) << endl;\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
-    \  cout << (a + b) << endl;\n}\n"
+    \ 4 \"verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp\"\n//\n#line 2 \"orderedmap/orderedmap.hpp\"\
+    \n\n#line 2 \"orderedmap/orderedmap-base.hpp\"\n\n#line 2 \"rbst/rbst-base.hpp\"\
+    \n\ntemplate <typename Node>\nstruct RBSTBase {\n  using Ptr = Node *;\n  template\
+    \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
+    \  }\n  inline Ptr make_tree() const { return nullptr; }\n\n  // for avoiding\
+    \ memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template\
+    \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
+    \  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr t) const { return\
+    \ count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l :\
+    \ r;\n    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {\n      push(l);\n\
+    \      l->r = merge(l->r, r);\n      return update(l);\n    } else {\n      push(r);\n\
+    \      r->l = merge(l, r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr,\
+    \ Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n\
+    \    if (k <= count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n\
+    \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
+    \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
+    \    }\n  }\n\n  Ptr build(int l, int r, const vector<decltype(Node::key)> &v)\
+    \ {\n    if (l + 1 == r) return my_new(v[l]);\n    int m = (l + r) >> 1;\n   \
+    \ Ptr pm = my_new(v[m]);\n    if (l < m) pm->l = build(l, m, v);\n    if (m +\
+    \ 1 < r) pm->r = build(m + 1, r, v);\n    return update(pm);\n  }\n\n  Ptr build(const\
+    \ vector<decltype(Node::key)> &v) {\n    return build(0, (int)v.size(), v);\n\
+    \  }\n\n  template <typename... Args>\n  void insert(Ptr &t, int k, const Args\
+    \ &... args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
+    \ x.second);\n  }\n\n  void erase(Ptr &t, int k) {\n    auto x = split(t, k);\n\
+    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n  static\
+    \ uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n    return\
+    \ x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
+    \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
+    \ {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\
+    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 4 \"orderedmap/orderedmap-base.hpp\"\
+    \n\ntemplate <typename Node, bool multi>\nstruct OrderedMapBase : RBSTBase<Node>\
+    \ {\n  using base = RBSTBase<Node>;\n  using Ptr = typename base::Ptr;\n  using\
+    \ Key = decltype(Node::key);\n\n  Ptr root;\n  OrderedMapBase() : root(base::make_tree())\
+    \ {}\n\n  Ptr find(const Key& k) const {\n    Ptr p = root;\n    while (p) {\n\
+    \      if (k == p->key) return p;\n      p = k < p->key ? p->l : p->r;\n    }\n\
+    \    return base::make_tree();\n  }\n\n  int lower_bound(const Key& k) const {\n\
+    \    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if (k <= p->key)\
+    \ {\n        p = p->l;\n      } else {\n        ret += base::count(p->l) + 1;\n\
+    \        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  int upper_bound(const\
+    \ Key& k) const {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n    \
+    \  if (k < p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
+    \ + 1;\n        p = p->r;\n      }\n    }\n    return ret;\n  }\n\n  int count(const\
+    \ Key& k) const {\n    if constexpr (multi) {\n      return upper_bound(k) - lower_bound(k);\n\
+    \    } else {\n      return !!find(k);\n    }\n  }\n\n  Ptr kth_element(int k)\
+    \ const {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      int lc\
+    \ = base::count(p->l);\n      if (lc == k) return p;\n      if (k < lc) {\n  \
+    \      p = p->l;\n      } else {\n        k -= lc + 1;\n        p = p->r;\n  \
+    \    }\n    }\n    return p;\n  }\n\n  void erase(Ptr p) { base::erase(root, p);\
+    \ }\n\n  void erase(const Key& key) {\n    Ptr p = find(key);\n    if (p) erase(p);\n\
+    \  }\n\n protected:\n  Ptr update(Ptr n) override {\n    n->cnt = 1 + base::count(n->l)\
+    \ + base::count(n->r);\n    return n;\n  }\n\n  Ptr insert_key(const Key& k) {\n\
+    \    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if constexpr (multi\
+    \ == false) {\n        if (k == p->key) return p;\n      }\n      if (k < p->key)\
+    \ {\n        p = p->l;\n      } else {\n        ret += base::count(p->l) + 1;\n\
+    \        p = p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto x =\
+    \ base::split(root, ret);\n    root = base::merge(base::merge(x.first, n), x.second);\n\
+    \    return n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000(\u9806\u5E8F\
+    \u4ED8\u304D\u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 4 \"\
+    orderedmap/orderedmap.hpp\"\n\ntemplate <typename Key, typename Val, bool multi>\n\
+    struct OrderedMapNode {\n  using Ptr = typename RBSTBase<OrderedMapNode>::Ptr;\n\
+    \  Ptr l, r;\n  Key key;\n  Val val;\n  int cnt;\n\n  OrderedMapNode(const Key&\
+    \ k = Key(), const Val& v = Val())\n      : l(), r(), key(k), val(v), cnt(1) {}\n\
+    };\n\ntemplate <typename Key, typename Val>\nstruct OrderedMap : OrderedMapBase<OrderedMapNode<Key,\
+    \ Val, false>, false> {\n  using base = OrderedMapBase<OrderedMapNode<Key, Val,\
+    \ false>, false>;\n\n  OrderedMap() : base() {}\n\n  Val& operator[](const Key&\
+    \ key) { return base::insert_key(key)->val; };\n};\n\n/**\n * @brief Ordered Map(\u9806\
+    \u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\n#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace fastio\
+    \ {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0,\
+    \ pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
+    \ {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j\
+    \ = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n\
+    \      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
+    \ ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ -\
+    \ pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1,\
+    \ por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c = ibuf[pil++]; }\n\
+    template <typename T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n\
+    \  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n  bool minus = 0;\n\
+    \  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n  }\n  x = 0;\n  while\
+    \ (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if (minus)\
+    \ x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\n\
+    inline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline void\
+    \ wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n\
+    \    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n  }\n\
+    \  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num\
+    \ + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n\
+    \    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n      uint32_t\
+    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
+    \     obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n\
+    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x\
+    \ << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num\
+    \ + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i +\
+    \ 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename\
+    \ Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n  wt(head);\n\
+    \  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n  wt(x, '\\\
+    n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
+    \ fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n#line 10 \"\
+    verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp\"\nvoid Nyaan::solve() {\n\
+    \  int Q;\n  rd(Q);\n\n  OrderedMap<ll, ll> m;\n\n  while (Q--) {\n    int cmd;\n\
+    \    rd(cmd);\n    if (cmd) {\n      long long k;\n      rd(k);\n      auto p\
+    \ = m.find(k);\n      out(p ? p->val : 0);\n    } else {\n      long long k, v;\n\
+    \      rd(k, v);\n      m[k] = v;\n    }\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n\
+    #include \"../../template/template.hpp\"\n//\n#include \"../../orderedmap/orderedmap.hpp\"\
+    \n\nusing namespace Nyaan;\n\n#include \"../../misc/fastio.hpp\"\nvoid Nyaan::solve()\
+    \ {\n  int Q;\n  rd(Q);\n\n  OrderedMap<ll, ll> m;\n\n  while (Q--) {\n    int\
+    \ cmd;\n    rd(cmd);\n    if (cmd) {\n      long long k;\n      rd(k);\n     \
+    \ auto p = m.find(k);\n      out(p ? p->val : 0);\n    } else {\n      long long\
+    \ k, v;\n      rd(k, v);\n      m[k] = v;\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -309,20 +306,20 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - marathon/simulated-annealing.hpp
-  - misc/timer.hpp
-  - marathon/log_table.hpp
-  - misc/rng.hpp
+  - orderedmap/orderedmap.hpp
+  - orderedmap/orderedmap-base.hpp
+  - rbst/rbst-base.hpp
+  - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/simulated-annealing.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   requiredBy: []
   timestamp: '2020-12-11 17:45:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/simulated-annealing.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/simulated-annealing.test.cpp
-- /verify/verify/verify-unit-test/simulated-annealing.test.cpp.html
-title: verify/verify-unit-test/simulated-annealing.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
 ---
