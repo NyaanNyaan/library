@@ -58,6 +58,7 @@
 "verify/verify-unit-test/math.test.cpp": "2020-12-08 20:57:43 +0900",
 "verify/verify-unit-test/mf.test.cpp": "2020-12-08 17:24:32 +0900",
 "verify/verify-unit-test/multiplicative-function.test.cpp": "2020-12-08 00:23:55 +0900",
+"verify/verify-unit-test/orderedmap.test.cpp": "2020-12-11 21:50:03 +0900",
 "verify/verify-unit-test/osak.test.cpp": "2020-12-08 00:23:55 +0900",
 "verify/verify-unit-test/radix-heap.test.cpp": "2020-12-08 00:23:55 +0900",
 "verify/verify-unit-test/set-function.test.cpp": "2020-12-08 00:23:55 +0900",
