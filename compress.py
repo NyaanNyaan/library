@@ -61,10 +61,11 @@ def remove_garbage(text):
     result.append(prev)
   return ''.join(result)
 
+
 if __name__ == '__main__':
   p = "C:\\Users\\denjo\\Desktop\\ABC\\library\\unused\\a.cpp"
   with open(p, "r", encoding='utf-8') as f:
     content = f.read()
     compressed = remove_garbage(content)
   with open(p, "w", encoding='utf-8') as f:
-    f.write(compressed) 
+    f.write(compressed)

@@ -8,15 +8,14 @@
 using namespace Nyaan; void Nyaan::solve() {
   int L, R, M;
   rd(L, R, M);
-  BipartiteGraph::Matching<int> graph(L, R);
+  BipartiteGraph graph(L, R);
   rep(i, M) {
     int u, v;
     rd(u, v);
     graph.add_edge(u, v);
   }
   wtn(graph.flow());
-  auto es = graph.edges();
-  for (auto &e : es) {
+  for (auto &e : graph.MaximumMatching()) {
     wt(e.first, ' ', e.second, '\n');
   }
 }

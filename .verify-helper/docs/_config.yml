@@ -1,2 +1,2 @@
-exclude: ['atcoder', 'bundle.py','competitive-template.hpp', 'unused']
+exclude: ['atcoder', 'bundle.py','competitive-template.hpp', 'compress.py', 'unused']
 title: Nyaan's Library
