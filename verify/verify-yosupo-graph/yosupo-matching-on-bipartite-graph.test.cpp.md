@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: flow/flow-on-bipartite-graph.hpp
     title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30D5\u30ED\u30FC"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
@@ -299,18 +299,16 @@ data:
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
     #line 7 \"verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int L, R, M;\n  rd(L, R, M);\n\
-    \  BipartiteGraph::Matching<int> graph(L, R);\n  rep(i, M) {\n    int u, v;\n\
-    \    rd(u, v);\n    graph.add_edge(u, v);\n  }\n  wtn(graph.flow());\n  auto es\
-    \ = graph.edges();\n  for (auto &e : es) {\n    wt(e.first, ' ', e.second, '\\\
-    n');\n  }\n}\n"
+    \  BipartiteGraph graph(L, R);\n  rep(i, M) {\n    int u, v;\n    rd(u, v);\n\
+    \    graph.add_edge(u, v);\n  }\n  wtn(graph.flow());\n  for (auto &e : graph.MaximumMatching())\
+    \ {\n    wt(e.first, ' ', e.second, '\\n');\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n\n\
     #include \"../../atcoder/maxflow.hpp\"\n#include \"../../template/template.hpp\"\
     \n#include \"../../flow/flow-on-bipartite-graph.hpp\"\n#include \"../../misc/fastio.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int L, R, M;\n  rd(L, R, M);\n\
-    \  BipartiteGraph::Matching<int> graph(L, R);\n  rep(i, M) {\n    int u, v;\n\
-    \    rd(u, v);\n    graph.add_edge(u, v);\n  }\n  wtn(graph.flow());\n  auto es\
-    \ = graph.edges();\n  for (auto &e : es) {\n    wt(e.first, ' ', e.second, '\\\
-    n');\n  }\n}"
+    \  BipartiteGraph graph(L, R);\n  rep(i, M) {\n    int u, v;\n    rd(u, v);\n\
+    \    graph.add_edge(u, v);\n  }\n  wtn(graph.flow());\n  for (auto &e : graph.MaximumMatching())\
+    \ {\n    wt(e.first, ' ', e.second, '\\n');\n  }\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -323,8 +321,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   requiredBy: []
-  timestamp: '2020-12-13 00:57:06+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-13 02:16:33+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
 layout: document

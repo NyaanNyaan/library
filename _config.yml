@@ -3,6 +3,7 @@ exclude:
 - atcoder
 - bundle.py
 - competitive-template.hpp
+- compress.py
 - unused
 plugins:
 - jemoji

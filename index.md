@@ -1,11 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: .
-    pages:
-    - icon: ':warning:'
-      path: compress.py
-      title: compress.py
   - name: data-structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -93,7 +88,7 @@ data:
       title: Wavelet Matrix
   - name: flow
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: flow/flow-on-bipartite-graph.hpp
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30D5\u30ED\u30FC"
   - name: fps
@@ -298,7 +293,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -575,22 +570,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1033,7 +1028,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
       title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
       title: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
     - icon: ':heavy_check_mark:'
