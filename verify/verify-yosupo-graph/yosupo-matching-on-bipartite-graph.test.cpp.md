@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: flow/flow-on-bipartite-graph.hpp
-    title: flow/flow-on-bipartite-graph.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30D5\u30ED\u30FC"
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
@@ -235,28 +235,48 @@ data:
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 2 \"flow/flow-on-bipartite-graph.hpp\"\n\n#line 4 \"flow/flow-on-bipartite-graph.hpp\"\
-    \n\nnamespace BipartiteGraph {\nusing namespace atcoder;\ntemplate <typename Cap>\n\
-    struct Matching : mf_graph<Cap> {\n  int L, R, s, t;\n\n  explicit Matching(int\
-    \ N, int M)\n      : mf_graph<Cap>(N + M + 2), L(N), R(M), s(N + M), t(N + M +\
-    \ 1) {\n    for (int i = 0; i < L; i++) mf_graph<Cap>::add_edge(s, i, 1);\n  \
-    \  for (int i = 0; i < R; i++) mf_graph<Cap>::add_edge(i + L, t, 1);\n  }\n\n\
-    \  int add_edge(int n, int m, int cap = 1) override {\n    assert(0 <= n && n\
-    \ < L);\n    assert(0 <= m && m < R);\n    return mf_graph<Cap>::add_edge(n, m\
-    \ + L, cap);\n  }\n\n  Cap flow() { return mf_graph<Cap>::flow(s, t); }\n\n  vector<pair<int,\
-    \ int>> edges() {\n    auto es = mf_graph<Cap>::edges();\n    vector<pair<int,\
-    \ int>> ret;\n    for (auto &e : es) {\n      if (e.flow > 0 && e.from != s &&\
-    \ e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n      }\n    }\n\
-    \    return ret;\n  }\n};\n\n}  // namespace BipartiteGraph\n#line 2 \"misc/fastio.hpp\"\
-    \n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
-    \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
-    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
-    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
-    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
-    \ load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf\
-    \ + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush()\
-    \ {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c)\
-    \ { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil\
-    \ + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
+    \n\nnamespace BipartiteGraphImpl {\nusing namespace atcoder;\nstruct BipartiteGraph\
+    \ : mf_graph<long long> {\n  int L, R, s, t;\n\n  explicit BipartiteGraph(int\
+    \ N, int M)\n      : mf_graph<long long>(N + M + 2), L(N), R(M), s(N + M), t(N\
+    \ + M + 1) {\n    for (int i = 0; i < L; i++) mf_graph<long long>::add_edge(s,\
+    \ i, 1);\n    for (int i = 0; i < R; i++) mf_graph<long long>::add_edge(i + L,\
+    \ t, 1);\n  }\n\n  int add_edge(int n, int m, long long cap = 1) override {\n\
+    \    assert(0 <= n && n < L);\n    assert(0 <= m && m < R);\n    return mf_graph<long\
+    \ long>::add_edge(n, m + L, cap);\n  }\n\n  long long flow() { return mf_graph<long\
+    \ long>::flow(s, t); }\n\n  vector<pair<int, int>> MaximumMatching() {\n    auto\
+    \ es = mf_graph<long long>::edges();\n    vector<pair<int, int>> ret;\n    for\
+    \ (auto &e : es) {\n      if (e.flow > 0 && e.from != s && e.to != t) {\n    \
+    \    ret.emplace_back(e.from, e.to - L);\n      }\n    }\n    return ret;\n  }\n\
+    \n  // call after calclating flow !\n  pair<vector<int>, vector<int>> MinimumVertexCover()\
+    \ {\n    auto colored = PreCalc();\n    vector<int> nl, nr;\n    for (int i =\
+    \ 0; i < L; i++)\n      if (!colored[i]) nl.push_back(i);\n    for (int i = 0;\
+    \ i < R; i++)\n      if (colored[i + L]) nr.push_back(i);\n    return make_pair(nl,\
+    \ nr);\n  }\n\n  // call after calclating flow !\n  pair<vector<int>, vector<int>>\
+    \ MaximumIndependentSet() {\n    auto colored = PreCalc();\n    vector<int> nl,\
+    \ nr;\n    for (int i = 0; i < L; i++)\n      if (colored[i]) nl.push_back(i);\n\
+    \    for (int i = 0; i < R; i++)\n      if (!colored[i + L]) nr.push_back(i);\n\
+    \    return make_pair(nl, nr);\n  }\n\n private:\n  vector<bool> PreCalc() {\n\
+    \    vector<vector<int>> ag(L + R);\n    vector<bool> used(L, false);\n    for\
+    \ (auto &e : mf_graph<long long>::edges()) {\n      if (e.from == s || e.to ==\
+    \ t) continue;\n      if (e.flow > 0) {\n        ag[e.to].push_back(e.from);\n\
+    \        used[e.from] = true;\n      } else {\n        ag[e.from].push_back(e.to);\n\
+    \      }\n    }\n    vector<bool> colored(L + R, false);\n    auto dfs = [&](auto\
+    \ rc, int cur) -> void {\n      for (auto &d : ag[cur]) {\n        if (!colored[d])\
+    \ colored[d] = true, rc(rc, d);\n      }\n    };\n    for (int i = 0; i < L; i++)\n\
+    \      if (!used[i]) colored[i] = true, dfs(dfs, i);\n    return colored;\n  }\n\
+    };\n\n}  // namespace BipartiteGraphImpl\n\nusing BipartiteGraphImpl::BipartiteGraph;\n\
+    \n/**\n * @brief \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30D5\u30ED\u30FC\n * @docs\
+    \ docs/flow/flow-on-bipartite-graph.md\n */\n#line 2 \"misc/fastio.hpp\"\n\n\n\
+    \nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\n\
+    int pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
+    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
+    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
+    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load()\
+    \ {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf +\
+    \ pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n\
+    \  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c\
+    \ = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil +\
+    \ 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
     \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
     \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
     \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
@@ -303,8 +323,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-13 00:57:06+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
 layout: document

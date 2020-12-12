@@ -3,12 +3,14 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
     title: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
+    _deprecated_at_docs: docs/flow/flow-on-bipartite-graph.md
+    document_title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30D5\u30ED\u30FC"
     links: []
   bundledCode: "#line 2 \"flow/flow-on-bipartite-graph.hpp\"\n\n#line 2 \"atcoder/maxflow.hpp\"\
     \n#include <algorithm>\n#include <cassert>\n#include <limits>\n#include <queue>\n\
@@ -63,36 +65,77 @@ data:
     \ }\n    return visited;\n  }\n\n private:\n  int _n;\n  struct _edge {\n    int\
     \ to, rev;\n    Cap cap;\n  };\n  std::vector<std::pair<int, int>> pos;\n  std::vector<std::vector<_edge>>\
     \ g;\n};\n\n}  // namespace atcoder\n\nusing namespace atcoder;\n#line 4 \"flow/flow-on-bipartite-graph.hpp\"\
-    \n\nnamespace BipartiteGraph {\nusing namespace atcoder;\ntemplate <typename Cap>\n\
-    struct Matching : mf_graph<Cap> {\n  int L, R, s, t;\n\n  explicit Matching(int\
-    \ N, int M)\n      : mf_graph<Cap>(N + M + 2), L(N), R(M), s(N + M), t(N + M +\
-    \ 1) {\n    for (int i = 0; i < L; i++) mf_graph<Cap>::add_edge(s, i, 1);\n  \
-    \  for (int i = 0; i < R; i++) mf_graph<Cap>::add_edge(i + L, t, 1);\n  }\n\n\
-    \  int add_edge(int n, int m, int cap = 1) override {\n    assert(0 <= n && n\
-    \ < L);\n    assert(0 <= m && m < R);\n    return mf_graph<Cap>::add_edge(n, m\
-    \ + L, cap);\n  }\n\n  Cap flow() { return mf_graph<Cap>::flow(s, t); }\n\n  vector<pair<int,\
-    \ int>> edges() {\n    auto es = mf_graph<Cap>::edges();\n    vector<pair<int,\
-    \ int>> ret;\n    for (auto &e : es) {\n      if (e.flow > 0 && e.from != s &&\
-    \ e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n      }\n    }\n\
-    \    return ret;\n  }\n};\n\n}  // namespace BipartiteGraph\n"
-  code: "#pragma once\n\n#include \"../atcoder/maxflow.hpp\"\n\nnamespace BipartiteGraph\
-    \ {\nusing namespace atcoder;\ntemplate <typename Cap>\nstruct Matching : mf_graph<Cap>\
-    \ {\n  int L, R, s, t;\n\n  explicit Matching(int N, int M)\n      : mf_graph<Cap>(N\
-    \ + M + 2), L(N), R(M), s(N + M), t(N + M + 1) {\n    for (int i = 0; i < L; i++)\
-    \ mf_graph<Cap>::add_edge(s, i, 1);\n    for (int i = 0; i < R; i++) mf_graph<Cap>::add_edge(i\
-    \ + L, t, 1);\n  }\n\n  int add_edge(int n, int m, int cap = 1) override {\n \
-    \   assert(0 <= n && n < L);\n    assert(0 <= m && m < R);\n    return mf_graph<Cap>::add_edge(n,\
-    \ m + L, cap);\n  }\n\n  Cap flow() { return mf_graph<Cap>::flow(s, t); }\n\n\
-    \  vector<pair<int, int>> edges() {\n    auto es = mf_graph<Cap>::edges();\n \
-    \   vector<pair<int, int>> ret;\n    for (auto &e : es) {\n      if (e.flow >\
-    \ 0 && e.from != s && e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n\
-    \      }\n    }\n    return ret;\n  }\n};\n\n}  // namespace BipartiteGraph\n"
+    \n\nnamespace BipartiteGraphImpl {\nusing namespace atcoder;\nstruct BipartiteGraph\
+    \ : mf_graph<long long> {\n  int L, R, s, t;\n\n  explicit BipartiteGraph(int\
+    \ N, int M)\n      : mf_graph<long long>(N + M + 2), L(N), R(M), s(N + M), t(N\
+    \ + M + 1) {\n    for (int i = 0; i < L; i++) mf_graph<long long>::add_edge(s,\
+    \ i, 1);\n    for (int i = 0; i < R; i++) mf_graph<long long>::add_edge(i + L,\
+    \ t, 1);\n  }\n\n  int add_edge(int n, int m, long long cap = 1) override {\n\
+    \    assert(0 <= n && n < L);\n    assert(0 <= m && m < R);\n    return mf_graph<long\
+    \ long>::add_edge(n, m + L, cap);\n  }\n\n  long long flow() { return mf_graph<long\
+    \ long>::flow(s, t); }\n\n  vector<pair<int, int>> MaximumMatching() {\n    auto\
+    \ es = mf_graph<long long>::edges();\n    vector<pair<int, int>> ret;\n    for\
+    \ (auto &e : es) {\n      if (e.flow > 0 && e.from != s && e.to != t) {\n    \
+    \    ret.emplace_back(e.from, e.to - L);\n      }\n    }\n    return ret;\n  }\n\
+    \n  // call after calclating flow !\n  pair<vector<int>, vector<int>> MinimumVertexCover()\
+    \ {\n    auto colored = PreCalc();\n    vector<int> nl, nr;\n    for (int i =\
+    \ 0; i < L; i++)\n      if (!colored[i]) nl.push_back(i);\n    for (int i = 0;\
+    \ i < R; i++)\n      if (colored[i + L]) nr.push_back(i);\n    return make_pair(nl,\
+    \ nr);\n  }\n\n  // call after calclating flow !\n  pair<vector<int>, vector<int>>\
+    \ MaximumIndependentSet() {\n    auto colored = PreCalc();\n    vector<int> nl,\
+    \ nr;\n    for (int i = 0; i < L; i++)\n      if (colored[i]) nl.push_back(i);\n\
+    \    for (int i = 0; i < R; i++)\n      if (!colored[i + L]) nr.push_back(i);\n\
+    \    return make_pair(nl, nr);\n  }\n\n private:\n  vector<bool> PreCalc() {\n\
+    \    vector<vector<int>> ag(L + R);\n    vector<bool> used(L, false);\n    for\
+    \ (auto &e : mf_graph<long long>::edges()) {\n      if (e.from == s || e.to ==\
+    \ t) continue;\n      if (e.flow > 0) {\n        ag[e.to].push_back(e.from);\n\
+    \        used[e.from] = true;\n      } else {\n        ag[e.from].push_back(e.to);\n\
+    \      }\n    }\n    vector<bool> colored(L + R, false);\n    auto dfs = [&](auto\
+    \ rc, int cur) -> void {\n      for (auto &d : ag[cur]) {\n        if (!colored[d])\
+    \ colored[d] = true, rc(rc, d);\n      }\n    };\n    for (int i = 0; i < L; i++)\n\
+    \      if (!used[i]) colored[i] = true, dfs(dfs, i);\n    return colored;\n  }\n\
+    };\n\n}  // namespace BipartiteGraphImpl\n\nusing BipartiteGraphImpl::BipartiteGraph;\n\
+    \n/**\n * @brief \u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30D5\u30ED\u30FC\n * @docs\
+    \ docs/flow/flow-on-bipartite-graph.md\n */\n"
+  code: "#pragma once\n\n#include \"../atcoder/maxflow.hpp\"\n\nnamespace BipartiteGraphImpl\
+    \ {\nusing namespace atcoder;\nstruct BipartiteGraph : mf_graph<long long> {\n\
+    \  int L, R, s, t;\n\n  explicit BipartiteGraph(int N, int M)\n      : mf_graph<long\
+    \ long>(N + M + 2), L(N), R(M), s(N + M), t(N + M + 1) {\n    for (int i = 0;\
+    \ i < L; i++) mf_graph<long long>::add_edge(s, i, 1);\n    for (int i = 0; i <\
+    \ R; i++) mf_graph<long long>::add_edge(i + L, t, 1);\n  }\n\n  int add_edge(int\
+    \ n, int m, long long cap = 1) override {\n    assert(0 <= n && n < L);\n    assert(0\
+    \ <= m && m < R);\n    return mf_graph<long long>::add_edge(n, m + L, cap);\n\
+    \  }\n\n  long long flow() { return mf_graph<long long>::flow(s, t); }\n\n  vector<pair<int,\
+    \ int>> MaximumMatching() {\n    auto es = mf_graph<long long>::edges();\n   \
+    \ vector<pair<int, int>> ret;\n    for (auto &e : es) {\n      if (e.flow > 0\
+    \ && e.from != s && e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n\
+    \      }\n    }\n    return ret;\n  }\n\n  // call after calclating flow !\n \
+    \ pair<vector<int>, vector<int>> MinimumVertexCover() {\n    auto colored = PreCalc();\n\
+    \    vector<int> nl, nr;\n    for (int i = 0; i < L; i++)\n      if (!colored[i])\
+    \ nl.push_back(i);\n    for (int i = 0; i < R; i++)\n      if (colored[i + L])\
+    \ nr.push_back(i);\n    return make_pair(nl, nr);\n  }\n\n  // call after calclating\
+    \ flow !\n  pair<vector<int>, vector<int>> MaximumIndependentSet() {\n    auto\
+    \ colored = PreCalc();\n    vector<int> nl, nr;\n    for (int i = 0; i < L; i++)\n\
+    \      if (colored[i]) nl.push_back(i);\n    for (int i = 0; i < R; i++)\n   \
+    \   if (!colored[i + L]) nr.push_back(i);\n    return make_pair(nl, nr);\n  }\n\
+    \n private:\n  vector<bool> PreCalc() {\n    vector<vector<int>> ag(L + R);\n\
+    \    vector<bool> used(L, false);\n    for (auto &e : mf_graph<long long>::edges())\
+    \ {\n      if (e.from == s || e.to == t) continue;\n      if (e.flow > 0) {\n\
+    \        ag[e.to].push_back(e.from);\n        used[e.from] = true;\n      } else\
+    \ {\n        ag[e.from].push_back(e.to);\n      }\n    }\n    vector<bool> colored(L\
+    \ + R, false);\n    auto dfs = [&](auto rc, int cur) -> void {\n      for (auto\
+    \ &d : ag[cur]) {\n        if (!colored[d]) colored[d] = true, rc(rc, d);\n  \
+    \    }\n    };\n    for (int i = 0; i < L; i++)\n      if (!used[i]) colored[i]\
+    \ = true, dfs(dfs, i);\n    return colored;\n  }\n};\n\n}  // namespace BipartiteGraphImpl\n\
+    \nusing BipartiteGraphImpl::BipartiteGraph;\n\n/**\n * @brief \u4E8C\u90E8\u30B0\
+    \u30E9\u30D5\u306E\u30D5\u30ED\u30FC\n * @docs docs/flow/flow-on-bipartite-graph.md\n\
+    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: flow/flow-on-bipartite-graph.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-13 00:57:06+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
 documentation_of: flow/flow-on-bipartite-graph.hpp
@@ -100,5 +143,16 @@ layout: document
 redirect_from:
 - /library/flow/flow-on-bipartite-graph.hpp
 - /library/flow/flow-on-bipartite-graph.hpp.html
-title: flow/flow-on-bipartite-graph.hpp
+title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30D5\u30ED\u30FC"
 ---
+## 二部グラフのフロー
+
+#### 使い方
+
+- `BipartiteGraph(int N, int M)`
+- `add_edge(int n, int m, long long cap = 1)`
+- `flow()`
+- `MaximumMatching()`
+- `MinimumVertexCover()`
+- `MaximumIndependentSet()`
+

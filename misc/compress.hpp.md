@@ -22,23 +22,25 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"misc/compress.hpp\"\n\n\n\ntemplate<class T>\nstruct compress{\n\
-    \  vector<T> xs;\n  compress(const vector<T>& v){\n    xs.reserve(v.size());\n\
-    \    for(T x : v) xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
-    \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
-    \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
-    \ i){\n    return xs[i];\n  }\n};\n"
-  code: "#pragma once\n\n\n\ntemplate<class T>\nstruct compress{\n  vector<T> xs;\n\
-    \  compress(const vector<T>& v){\n    xs.reserve(v.size());\n    for(T x : v)\
-    \ xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
-    \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
-    \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
-    \ i){\n    return xs[i];\n  }\n};"
+  bundledCode: "#line 2 \"misc/compress.hpp\"\n\ntemplate <class T>\nstruct compress\
+    \ {\n  vector<T> xs;\n  compress(const vector<T>& v) {\n    xs.reserve(v.size());\n\
+    \    for (T x : v) xs.push_back(x);\n    sort(xs.begin(), xs.end());\n    xs.erase(unique(xs.begin(),\
+    \ xs.end()), xs.end());\n  }\n  int get(const T& x) const {\n    return lower_bound(xs.begin(),\
+    \ xs.end(), x) - xs.begin();\n  }\n  inline int operator()(const T& x) const {\
+    \ return get(x); }\n  T& operator[](int i) const { return xs[i]; }\n  int size()\
+    \ const { return xs.size(); }\n};\n\n/**\n * \u5EA7\u6A19\u5727\u7E2E\n */\n"
+  code: "#pragma once\n\ntemplate <class T>\nstruct compress {\n  vector<T> xs;\n\
+    \  compress(const vector<T>& v) {\n    xs.reserve(v.size());\n    for (T x : v)\
+    \ xs.push_back(x);\n    sort(xs.begin(), xs.end());\n    xs.erase(unique(xs.begin(),\
+    \ xs.end()), xs.end());\n  }\n  int get(const T& x) const {\n    return lower_bound(xs.begin(),\
+    \ xs.end(), x) - xs.begin();\n  }\n  inline int operator()(const T& x) const {\
+    \ return get(x); }\n  T& operator[](int i) const { return xs[i]; }\n  int size()\
+    \ const { return xs.size(); }\n};\n\n/**\n * \u5EA7\u6A19\u5727\u7E2E\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: misc/compress.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-13 00:57:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp

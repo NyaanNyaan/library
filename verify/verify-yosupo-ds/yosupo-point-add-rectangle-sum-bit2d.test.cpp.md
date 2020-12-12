@@ -13,25 +13,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -248,36 +248,37 @@ data:
     \ -nr;\n      } else {\n        ret -= (*bit[nl]).sum(ml, mr);\n        nl -=\
     \ nl & -nl;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684\
     \u4E8C\u6B21\u5143Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n\
-    \ */\n#line 2 \"misc/compress.hpp\"\n\n\n\ntemplate<class T>\nstruct compress{\n\
-    \  vector<T> xs;\n  compress(const vector<T>& v){\n    xs.reserve(v.size());\n\
-    \    for(T x : v) xs.push_back(x);\n    sort(xs.begin(),xs.end());\n    xs.erase(unique(xs.begin(),xs.end())\
-    \ , xs.end());\n  }\n\n  int get(const T& x){\n    return lower_bound(xs.begin(),xs.end(),x)\
-    \ - xs.begin();\n  }\n  int size(){\n    return xs.size();\n  }\n  T& operator[](int\
-    \ i){\n    return xs[i];\n  }\n};\n#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace\
-    \ fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint\
-    \ pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
-    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
-    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
-    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load()\
-    \ {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf +\
-    \ pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n\
-    \  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c\
-    \ = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil +\
-    \ 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
-    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
-    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
-    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
-    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
-    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
-    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
-    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
-    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
-    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
-    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
-    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
-    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
-    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
-    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ */\n#line 2 \"misc/compress.hpp\"\n\ntemplate <class T>\nstruct compress {\n\
+    \  vector<T> xs;\n  compress(const vector<T>& v) {\n    xs.reserve(v.size());\n\
+    \    for (T x : v) xs.push_back(x);\n    sort(xs.begin(), xs.end());\n    xs.erase(unique(xs.begin(),\
+    \ xs.end()), xs.end());\n  }\n  int get(const T& x) const {\n    return lower_bound(xs.begin(),\
+    \ xs.end(), x) - xs.begin();\n  }\n  inline int operator()(const T& x) const {\
+    \ return get(x); }\n  T& operator[](int i) const { return xs[i]; }\n  int size()\
+    \ const { return xs.size(); }\n};\n\n/**\n * \u5EA7\u6A19\u5727\u7E2E\n */\n#line\
+    \ 2 \"misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1\
+    \ << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre\
+    \ {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i <\
+    \ 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n    \
+    \    num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n}\
+    \ constexpr pre;\n\ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n\
+    \  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil\
+    \ = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n\
+    }\n\ninline void rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename T>\ninline\
+    \ void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n\
+    \  while (c < '-');\n  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n  \
+    \  c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c\
+    \ & 15);\n    c = ibuf[pil++];\n  }\n  if (minus) x = -x;\n}\ninline void rd()\
+    \ {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head, Tail&...\
+    \ tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) { obuf[por++]\
+    \ = c; }\ntemplate <typename T>\ninline void wt(T x) {\n  if (por > SZ - 32) flush();\n\
+    \  if (!x) {\n    obuf[por++] = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++]\
+    \ = '-';\n    x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000)\
+    \ {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n   \
+    \ i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n\
+    \    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r\
+    \ = uint32_t(x) - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1]\
+    \ = '0' + r;\n      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
     \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
     \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
     \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
@@ -328,7 +329,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-13 00:57:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
