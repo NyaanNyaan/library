@@ -9,7 +9,7 @@ data:
   - icon: ':x:'
     path: orderedmap/orderedmap.hpp
     title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: rbst/lazy-reversible-rbst.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\u8861\
       \u4E8C\u5206\u6728"
@@ -17,14 +17,14 @@ data:
   - icon: ':x:'
     path: verify/verify-unit-test/orderedmap.test.cpp
     title: verify/verify-unit-test/orderedmap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
   - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
       \u30E9\u30B9)"
@@ -53,12 +53,13 @@ data:
     \  }\n\n  template <typename... Args>\n  void insert(Ptr &t, int k, const Args\
     \ &... args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
     \ x.second);\n  }\n\n  void erase(Ptr &t, int k) {\n    auto x = split(t, k);\n\
-    \    auto y = split(x.second, 1);\n    my_del(t);\n    t = merge(x.first, y.second);\n\
-    \  }\n\n protected:\n  static uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n\
-    \    return x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
-    \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
-    \ = 0;\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\
-    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n"
+    \    auto y = split(x.second, 1);\n    my_del(y.first);\n    t = merge(x.first,\
+    \ y.second);\n  }\n\n protected:\n  static uint64_t rng() {\n    static uint64_t\
+    \ x_ = 88172645463325252ULL;\n    return x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n\
+    \  }\n\n  inline int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n \
+    \ virtual void push(Ptr) = 0;\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n *\
+    \ @brief \u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
+    )\n */\n"
   code: "#pragma once\n\ntemplate <typename Node>\nstruct RBSTBase {\n  using Ptr\
     \ = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args... args)\
     \ {\n    return new Node(args...);\n  }\n  inline void my_del(Ptr t) { delete\
@@ -83,7 +84,7 @@ data:
     \ Args>\n  void insert(Ptr &t, int k, const Args &... args) {\n    auto x = split(t,\
     \ k);\n    t = merge(merge(x.first, my_new(args...)), x.second);\n  }\n\n  void\
     \ erase(Ptr &t, int k) {\n    auto x = split(t, k);\n    auto y = split(x.second,\
-    \ 1);\n    my_del(t);\n    t = merge(x.first, y.second);\n  }\n\n protected:\n\
+    \ 1);\n    my_del(y.first);\n    t = merge(x.first, y.second);\n  }\n\n protected:\n\
     \  static uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n \
     \   return x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
     \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
@@ -93,11 +94,11 @@ data:
   isVerificationFile: false
   path: rbst/rbst-base.hpp
   requiredBy:
-  - rbst/lazy-reversible-rbst.hpp
   - orderedmap/orderedmap-base.hpp
   - orderedmap/orderedmap.hpp
-  timestamp: '2020-12-16 23:51:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  - rbst/lazy-reversible-rbst.hpp
+  timestamp: '2020-12-17 01:20:11+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp

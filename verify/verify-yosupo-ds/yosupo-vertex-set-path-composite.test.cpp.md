@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/affine-transformation.hpp
     title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'

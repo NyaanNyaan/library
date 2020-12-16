@@ -218,7 +218,7 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 2 \"shortest-path/dijkstra-fast.hpp\"\n\n\n\n#line 2 \"data-structure/radix-heap.hpp\"\
+    #line 2 \"shortest-path/dijkstra-fast.hpp\"\n\n#line 2 \"data-structure/radix-heap.hpp\"\
     \n\ntemplate <typename Key, typename Val>\nstruct RadixHeap {\n  using uint =\
     \ typename make_unsigned<Key>::type;\n  static constexpr int bit = sizeof(Key)\
     \ * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint, bit + 1>\
@@ -257,23 +257,30 @@ data:
     \ operator[](int u) const {\n    return {begin(es) + head[u], begin(es) + head[u\
     \ + 1]};\n  }\n  int size() const { return N; }\n};\n\n}  // namespace StaticGraphImpl\n\
     \nusing StaticGraphImpl::StaticGraph;\n\n/**\n * @brief Static Graph\n * @docs\
-    \ docs/graph/static-graph.md\n */\n#line 7 \"shortest-path/dijkstra-fast.hpp\"\
+    \ docs/graph/static-graph.md\n */\n#line 5 \"shortest-path/dijkstra-fast.hpp\"\
     \n\ntemplate <typename T>\nvector<T> dijkstra(StaticGraph<T>& g, int start = 0)\
     \ {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start] = 0;\n\
     \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
     \ = p.second;\n    if (d[u] < T(p.first)) continue;\n    T du = d[u];\n    for\
     \ (auto&& [v, c] : g[u]) {\n      if (d[v] == T(-1) || du + c < d[v]) {\n    \
     \    d[v] = du + c;\n        Q.push(d[v], v);\n      }\n    }\n  }\n  return d;\n\
-    }\n\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(StaticGraph<T>&\
-    \ g, int start = 0) {\n  vector<pair<T, int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T,\
-    \ int> Q;\n  d[start] = {0, -1};\n  Q.push(0, start);\n  while (!Q.empty()) {\n\
-    \    auto p = Q.pop();\n    int u = p.second;\n    if (d[u].first < T(p.first))\
-    \ continue;\n    T du = d[u].first;\n    for (auto&& [v, c] : g[u]) {\n      if\
-    \ (d[v].first == T(-1) || du + c < d[v].first) {\n        d[v] = {du + c, u};\n\
-    \        Q.push(du + c, v);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief\
-    \ \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316\
-    )\n * @docs docs/shortest-path/dijkstra-fast.md\n **/\n#line 5 \"verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int N, M, s, t;\n  rd(N, M,\
+    }\n\ntemplate <typename T>\nT dijkstra_point(StaticGraph<T>& g, int start, int\
+    \ goal) {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start]\
+    \ = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n \
+    \   int u = p.second;\n    if(u == goal) return d[u];\n    if (d[u] < T(p.first))\
+    \ continue;\n    T du = d[u];\n    for (auto&& [v, c] : g[u]) {\n      if (d[v]\
+    \ == T(-1) || du + c < d[v]) {\n        d[v] = du + c;\n        Q.push(d[v], v);\n\
+    \      }\n    }\n  }\n  return -1;\n}\n\ntemplate <typename T>\nvector<pair<T,\
+    \ int>> dijkstra_restore(StaticGraph<T>& g, int start = 0) {\n  vector<pair<T,\
+    \ int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T, int> Q;\n  d[start] = {0, -1};\n\
+    \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
+    \ = p.second;\n    if (d[u].first < T(p.first)) continue;\n    T du = d[u].first;\n\
+    \    for (auto&& [v, c] : g[u]) {\n      if (d[v].first == T(-1) || du + c < d[v].first)\
+    \ {\n        d[v] = {du + c, u};\n        Q.push(du + c, v);\n      }\n    }\n\
+    \  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\
+    (\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
+    \ **/\n#line 5 \"verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp\"\n\
+    \nusing namespace Nyaan; void Nyaan::solve() {\n  int N, M, s, t;\n  rd(N, M,\
     \ s, t);\n\n  StaticGraph<ll> g(N, M);\n  rep(i, M) {\n    int a, b, c;\n    rd(a,\
     \ b, c);\n    g.add_edge(a, b, c);\n  }\n  auto d = dijkstra_restore(g, s);\n\
     \  if (d[t].first == -1) {\n    wtn(-1);\n    return;\n  }\n  vi ans;\n  for (int\
@@ -303,7 +310,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-17 01:20:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp

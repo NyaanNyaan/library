@@ -89,8 +89,8 @@ data:
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
   - verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
 documentation_of: graph/lowlink.hpp
 layout: document

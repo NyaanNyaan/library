@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1320.test.cpp
+    title: verify/verify-yuki/yuki-1320.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -25,7 +28,7 @@ data:
     document_title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\
       \u9AD8\u901F\u5316)"
     links: []
-  bundledCode: "#line 2 \"shortest-path/dijkstra-fast.hpp\"\n\n\n\n#line 2 \"data-structure/radix-heap.hpp\"\
+  bundledCode: "#line 2 \"shortest-path/dijkstra-fast.hpp\"\n\n#line 2 \"data-structure/radix-heap.hpp\"\
     \n\ntemplate <typename Key, typename Val>\nstruct RadixHeap {\n  using uint =\
     \ typename make_unsigned<Key>::type;\n  static constexpr int bit = sizeof(Key)\
     \ * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint, bit + 1>\
@@ -64,48 +67,63 @@ data:
     \ operator[](int u) const {\n    return {begin(es) + head[u], begin(es) + head[u\
     \ + 1]};\n  }\n  int size() const { return N; }\n};\n\n}  // namespace StaticGraphImpl\n\
     \nusing StaticGraphImpl::StaticGraph;\n\n/**\n * @brief Static Graph\n * @docs\
-    \ docs/graph/static-graph.md\n */\n#line 7 \"shortest-path/dijkstra-fast.hpp\"\
+    \ docs/graph/static-graph.md\n */\n#line 5 \"shortest-path/dijkstra-fast.hpp\"\
     \n\ntemplate <typename T>\nvector<T> dijkstra(StaticGraph<T>& g, int start = 0)\
     \ {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start] = 0;\n\
     \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
     \ = p.second;\n    if (d[u] < T(p.first)) continue;\n    T du = d[u];\n    for\
     \ (auto&& [v, c] : g[u]) {\n      if (d[v] == T(-1) || du + c < d[v]) {\n    \
     \    d[v] = du + c;\n        Q.push(d[v], v);\n      }\n    }\n  }\n  return d;\n\
-    }\n\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(StaticGraph<T>&\
-    \ g, int start = 0) {\n  vector<pair<T, int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T,\
-    \ int> Q;\n  d[start] = {0, -1};\n  Q.push(0, start);\n  while (!Q.empty()) {\n\
-    \    auto p = Q.pop();\n    int u = p.second;\n    if (d[u].first < T(p.first))\
-    \ continue;\n    T du = d[u].first;\n    for (auto&& [v, c] : g[u]) {\n      if\
-    \ (d[v].first == T(-1) || du + c < d[v].first) {\n        d[v] = {du + c, u};\n\
-    \        Q.push(du + c, v);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief\
-    \ \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316\
-    )\n * @docs docs/shortest-path/dijkstra-fast.md\n **/\n"
-  code: "#pragma once\n\n\n\n#include \"../data-structure/radix-heap.hpp\"\n#include\
-    \ \"../graph/static-graph.hpp\"\n\ntemplate <typename T>\nvector<T> dijkstra(StaticGraph<T>&\
+    }\n\ntemplate <typename T>\nT dijkstra_point(StaticGraph<T>& g, int start, int\
+    \ goal) {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start]\
+    \ = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n \
+    \   int u = p.second;\n    if(u == goal) return d[u];\n    if (d[u] < T(p.first))\
+    \ continue;\n    T du = d[u];\n    for (auto&& [v, c] : g[u]) {\n      if (d[v]\
+    \ == T(-1) || du + c < d[v]) {\n        d[v] = du + c;\n        Q.push(d[v], v);\n\
+    \      }\n    }\n  }\n  return -1;\n}\n\ntemplate <typename T>\nvector<pair<T,\
+    \ int>> dijkstra_restore(StaticGraph<T>& g, int start = 0) {\n  vector<pair<T,\
+    \ int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T, int> Q;\n  d[start] = {0, -1};\n\
+    \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
+    \ = p.second;\n    if (d[u].first < T(p.first)) continue;\n    T du = d[u].first;\n\
+    \    for (auto&& [v, c] : g[u]) {\n      if (d[v].first == T(-1) || du + c < d[v].first)\
+    \ {\n        d[v] = {du + c, u};\n        Q.push(du + c, v);\n      }\n    }\n\
+    \  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\
+    (\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
+    \ **/\n"
+  code: "#pragma once\n\n#include \"../data-structure/radix-heap.hpp\"\n#include \"\
+    ../graph/static-graph.hpp\"\n\ntemplate <typename T>\nvector<T> dijkstra(StaticGraph<T>&\
     \ g, int start = 0) {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n\
     \  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n\
     \    int u = p.second;\n    if (d[u] < T(p.first)) continue;\n    T du = d[u];\n\
     \    for (auto&& [v, c] : g[u]) {\n      if (d[v] == T(-1) || du + c < d[v]) {\n\
     \        d[v] = du + c;\n        Q.push(d[v], v);\n      }\n    }\n  }\n  return\
-    \ d;\n}\n\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(StaticGraph<T>&\
-    \ g, int start = 0) {\n  vector<pair<T, int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T,\
-    \ int> Q;\n  d[start] = {0, -1};\n  Q.push(0, start);\n  while (!Q.empty()) {\n\
-    \    auto p = Q.pop();\n    int u = p.second;\n    if (d[u].first < T(p.first))\
-    \ continue;\n    T du = d[u].first;\n    for (auto&& [v, c] : g[u]) {\n      if\
-    \ (d[v].first == T(-1) || du + c < d[v].first) {\n        d[v] = {du + c, u};\n\
-    \        Q.push(du + c, v);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief\
-    \ \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316\
-    )\n * @docs docs/shortest-path/dijkstra-fast.md\n **/\n"
+    \ d;\n}\n\ntemplate <typename T>\nT dijkstra_point(StaticGraph<T>& g, int start,\
+    \ int goal) {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start]\
+    \ = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n \
+    \   int u = p.second;\n    if(u == goal) return d[u];\n    if (d[u] < T(p.first))\
+    \ continue;\n    T du = d[u];\n    for (auto&& [v, c] : g[u]) {\n      if (d[v]\
+    \ == T(-1) || du + c < d[v]) {\n        d[v] = du + c;\n        Q.push(d[v], v);\n\
+    \      }\n    }\n  }\n  return -1;\n}\n\ntemplate <typename T>\nvector<pair<T,\
+    \ int>> dijkstra_restore(StaticGraph<T>& g, int start = 0) {\n  vector<pair<T,\
+    \ int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T, int> Q;\n  d[start] = {0, -1};\n\
+    \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
+    \ = p.second;\n    if (d[u].first < T(p.first)) continue;\n    T du = d[u].first;\n\
+    \    for (auto&& [v, c] : g[u]) {\n      if (d[v].first == T(-1) || du + c < d[v].first)\
+    \ {\n        d[v] = {du + c, u};\n        Q.push(du + c, v);\n      }\n    }\n\
+    \  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\
+    (\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
+    \ **/\n"
   dependsOn:
   - data-structure/radix-heap.hpp
   - graph/static-graph.hpp
   isVerificationFile: false
   path: shortest-path/dijkstra-fast.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-17 01:20:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+  - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
 documentation_of: shortest-path/dijkstra-fast.hpp

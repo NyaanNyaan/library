@@ -185,7 +185,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"shortest-path/dijkstra-fast.hpp\"\n\n\n\n#line 2 \"data-structure/radix-heap.hpp\"\
+    \ 2 \"shortest-path/dijkstra-fast.hpp\"\n\n#line 2 \"data-structure/radix-heap.hpp\"\
     \n\ntemplate <typename Key, typename Val>\nstruct RadixHeap {\n  using uint =\
     \ typename make_unsigned<Key>::type;\n  static constexpr int bit = sizeof(Key)\
     \ * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint, bit + 1>\
@@ -224,23 +224,30 @@ data:
     \ operator[](int u) const {\n    return {begin(es) + head[u], begin(es) + head[u\
     \ + 1]};\n  }\n  int size() const { return N; }\n};\n\n}  // namespace StaticGraphImpl\n\
     \nusing StaticGraphImpl::StaticGraph;\n\n/**\n * @brief Static Graph\n * @docs\
-    \ docs/graph/static-graph.md\n */\n#line 7 \"shortest-path/dijkstra-fast.hpp\"\
+    \ docs/graph/static-graph.md\n */\n#line 5 \"shortest-path/dijkstra-fast.hpp\"\
     \n\ntemplate <typename T>\nvector<T> dijkstra(StaticGraph<T>& g, int start = 0)\
     \ {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start] = 0;\n\
     \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
     \ = p.second;\n    if (d[u] < T(p.first)) continue;\n    T du = d[u];\n    for\
     \ (auto&& [v, c] : g[u]) {\n      if (d[v] == T(-1) || du + c < d[v]) {\n    \
     \    d[v] = du + c;\n        Q.push(d[v], v);\n      }\n    }\n  }\n  return d;\n\
-    }\n\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(StaticGraph<T>&\
-    \ g, int start = 0) {\n  vector<pair<T, int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T,\
-    \ int> Q;\n  d[start] = {0, -1};\n  Q.push(0, start);\n  while (!Q.empty()) {\n\
-    \    auto p = Q.pop();\n    int u = p.second;\n    if (d[u].first < T(p.first))\
-    \ continue;\n    T du = d[u].first;\n    for (auto&& [v, c] : g[u]) {\n      if\
-    \ (d[v].first == T(-1) || du + c < d[v].first) {\n        d[v] = {du + c, u};\n\
-    \        Q.push(du + c, v);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief\
-    \ \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316\
-    )\n * @docs docs/shortest-path/dijkstra-fast.md\n **/\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, E, S);\n  StaticGraph<int>\
+    }\n\ntemplate <typename T>\nT dijkstra_point(StaticGraph<T>& g, int start, int\
+    \ goal) {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start]\
+    \ = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n \
+    \   int u = p.second;\n    if(u == goal) return d[u];\n    if (d[u] < T(p.first))\
+    \ continue;\n    T du = d[u];\n    for (auto&& [v, c] : g[u]) {\n      if (d[v]\
+    \ == T(-1) || du + c < d[v]) {\n        d[v] = du + c;\n        Q.push(d[v], v);\n\
+    \      }\n    }\n  }\n  return -1;\n}\n\ntemplate <typename T>\nvector<pair<T,\
+    \ int>> dijkstra_restore(StaticGraph<T>& g, int start = 0) {\n  vector<pair<T,\
+    \ int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T, int> Q;\n  d[start] = {0, -1};\n\
+    \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
+    \ = p.second;\n    if (d[u].first < T(p.first)) continue;\n    T du = d[u].first;\n\
+    \    for (auto&& [v, c] : g[u]) {\n      if (d[v].first == T(-1) || du + c < d[v].first)\
+    \ {\n        d[v] = {du + c, u};\n        Q.push(du + c, v);\n      }\n    }\n\
+    \  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\
+    (\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
+    \ **/\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp\"\n\n\
+    using namespace Nyaan; void Nyaan::solve() {\n  ini(N, E, S);\n  StaticGraph<int>\
     \ g(N, E);\n  rep(i, E) {\n    ini(s, t, d);\n    g.add_edge(s, t, d);\n  }\n\
     \  auto d = dijkstra(g, S);\n  d.resize(N);\n  each(x, d) {\n    if (x == -1)\n\
     \      out(\"INF\");\n    else\n      out(x);\n  }\n}\n"
@@ -263,7 +270,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-17 01:20:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp

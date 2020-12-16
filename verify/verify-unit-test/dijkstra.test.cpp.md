@@ -215,7 +215,7 @@ data:
     \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
     }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
     using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
-    shortest-path/dijkstra-fast.hpp\"\n\n\n\n#line 2 \"data-structure/radix-heap.hpp\"\
+    shortest-path/dijkstra-fast.hpp\"\n\n#line 2 \"data-structure/radix-heap.hpp\"\
     \n\ntemplate <typename Key, typename Val>\nstruct RadixHeap {\n  using uint =\
     \ typename make_unsigned<Key>::type;\n  static constexpr int bit = sizeof(Key)\
     \ * 8;\n  array<vector<pair<uint, Val> >, bit + 1> vs;\n  array<uint, bit + 1>\
@@ -254,59 +254,65 @@ data:
     \ operator[](int u) const {\n    return {begin(es) + head[u], begin(es) + head[u\
     \ + 1]};\n  }\n  int size() const { return N; }\n};\n\n}  // namespace StaticGraphImpl\n\
     \nusing StaticGraphImpl::StaticGraph;\n\n/**\n * @brief Static Graph\n * @docs\
-    \ docs/graph/static-graph.md\n */\n#line 7 \"shortest-path/dijkstra-fast.hpp\"\
+    \ docs/graph/static-graph.md\n */\n#line 5 \"shortest-path/dijkstra-fast.hpp\"\
     \n\ntemplate <typename T>\nvector<T> dijkstra(StaticGraph<T>& g, int start = 0)\
     \ {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start] = 0;\n\
     \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
     \ = p.second;\n    if (d[u] < T(p.first)) continue;\n    T du = d[u];\n    for\
     \ (auto&& [v, c] : g[u]) {\n      if (d[v] == T(-1) || du + c < d[v]) {\n    \
     \    d[v] = du + c;\n        Q.push(d[v], v);\n      }\n    }\n  }\n  return d;\n\
-    }\n\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(StaticGraph<T>&\
-    \ g, int start = 0) {\n  vector<pair<T, int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T,\
-    \ int> Q;\n  d[start] = {0, -1};\n  Q.push(0, start);\n  while (!Q.empty()) {\n\
-    \    auto p = Q.pop();\n    int u = p.second;\n    if (d[u].first < T(p.first))\
-    \ continue;\n    T du = d[u].first;\n    for (auto&& [v, c] : g[u]) {\n      if\
-    \ (d[v].first == T(-1) || du + c < d[v].first) {\n        d[v] = {du + c, u};\n\
-    \        Q.push(du + c, v);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief\
-    \ \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\u5316\
-    )\n * @docs docs/shortest-path/dijkstra-fast.md\n **/\n#line 2 \"shortest-path/dijkstra-radix-heap.hpp\"\
-    \n\n\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct\
-    \ edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
-    \ cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost)\
-    \ {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\
-    \n  operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
-    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
-    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
-    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
-    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
-    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
-    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
-    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
-    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
-    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
+    }\n\ntemplate <typename T>\nT dijkstra_point(StaticGraph<T>& g, int start, int\
+    \ goal) {\n  vector<T> d(g.size(), T(-1));\n  RadixHeap<T, int> Q;\n  d[start]\
+    \ = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n \
+    \   int u = p.second;\n    if(u == goal) return d[u];\n    if (d[u] < T(p.first))\
+    \ continue;\n    T du = d[u];\n    for (auto&& [v, c] : g[u]) {\n      if (d[v]\
+    \ == T(-1) || du + c < d[v]) {\n        d[v] = du + c;\n        Q.push(d[v], v);\n\
+    \      }\n    }\n  }\n  return -1;\n}\n\ntemplate <typename T>\nvector<pair<T,\
+    \ int>> dijkstra_restore(StaticGraph<T>& g, int start = 0) {\n  vector<pair<T,\
+    \ int>> d(g.size(), {T(-1), -1});\n  RadixHeap<T, int> Q;\n  d[start] = {0, -1};\n\
+    \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int u\
+    \ = p.second;\n    if (d[u].first < T(p.first)) continue;\n    T du = d[u].first;\n\
+    \    for (auto&& [v, c] : g[u]) {\n      if (d[v].first == T(-1) || du + c < d[v].first)\
+    \ {\n        d[v] = {du + c, u};\n        Q.push(du + c, v);\n      }\n    }\n\
+    \  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\
+    (\u5B9A\u6570\u500D\u9AD8\u901F\u5316)\n * @docs docs/shortest-path/dijkstra-fast.md\n\
+    \ **/\n#line 2 \"shortest-path/dijkstra-radix-heap.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
+    \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
+    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
+    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
+    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
+    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
-    \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
-    \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
-    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
-    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
-    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
-    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
-    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
-    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
-    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
-    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
-    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 7 \"shortest-path/dijkstra-radix-heap.hpp\"\n\n// unreachable ->\
-    \ -1\ntemplate <typename T>\nvector<T> dijkstra_radix_heap(WeightedGraph<T> &g,\
-    \ int start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  RadixHeap<T,\
-    \ int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto\
-    \ p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first)) continue;\n\
-    \    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost\
-    \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst], dst);\n\
-    \      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\
-    \u30C8\u30E9\u6CD5(Radix Heap)\n * @docs docs/shortest-path/dijkstra-radix-heap.md\n\
+    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
+    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
+    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
+    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
+    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
+    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
+    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
+    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
+    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
+    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
+    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
+    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
+    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
+    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
+    \                       bool is_directed = false, bool is_1origin = true) {\n\
+    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
+    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
+    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 7 \"shortest-path/dijkstra-radix-heap.hpp\"\
+    \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra_radix_heap(WeightedGraph<T>\
+    \ &g, int start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n \
+    \ RadixHeap<T, int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty())\
+    \ {\n    auto p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first))\
+    \ continue;\n    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur]\
+    \ + dst.cost < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst],\
+    \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\
+    \u30B9\u30C8\u30E9\u6CD5(Radix Heap)\n * @docs docs/shortest-path/dijkstra-radix-heap.md\n\
     **/\n#line 2 \"shortest-path/dijkstra.hpp\"\n\n\n\n#line 6 \"shortest-path/dijkstra.hpp\"\
     \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T>\
     \ &g, int start = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n\
@@ -375,7 +381,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2020-12-08 00:23:55+09:00'
+  timestamp: '2020-12-17 01:20:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/dijkstra.test.cpp
