@@ -7,6 +7,7 @@ struct RBSTBase {
   inline Ptr my_new(Args... args) {
     return new Node(args...);
   }
+  inline void my_del(Ptr t) { delete t; }
   inline Ptr make_tree() const { return nullptr; }
 
   // for avoiding memory leak, activate below
@@ -16,6 +17,7 @@ struct RBSTBase {
   inline Ptr my_new(Args... args) {
     return make_shared<Node>(args...);
   }
+  inline void my_del(Ptr t) {}
   Ptr make_tree() {return Ptr();}
   */
 
@@ -69,18 +71,20 @@ struct RBSTBase {
 
   void erase(Ptr &t, int k) {
     auto x = split(t, k);
-    t = merge(x.first, split(x.second, 1).second);
+    auto y = split(x.second, 1);
+    my_del(t);
+    t = merge(x.first, y.second);
   }
 
  protected:
   static uint64_t rng() {
     static uint64_t x_ = 88172645463325252ULL;
-    return x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9), x_ & 0xFFFFFFFFull;
+    return x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;
   }
 
   inline int count(const Ptr t) const { return t ? t->cnt : 0; }
 
-  virtual void push(Ptr) {}
+  virtual void push(Ptr) = 0;
 
   virtual Ptr update(Ptr) = 0;
 };
