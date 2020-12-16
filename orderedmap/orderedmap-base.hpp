@@ -92,6 +92,9 @@ struct OrderedMapBase : RBSTBase<Node> {
   int size() const { return base::size(root); }
 
  protected:
+
+  void push(Ptr) override {}
+  
   Ptr update(Ptr n) override {
     n->cnt = 1 + base::count(n->l) + base::count(n->r);
     return n;
