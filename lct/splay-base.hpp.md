@@ -112,8 +112,8 @@ data:
   isVerificationFile: false
   path: lct/splay-base.hpp
   requiredBy:
-  - lct/splay-reversible.hpp
   - lct/splay-lazy-reversible.hpp
+  - lct/splay-reversible.hpp
   timestamp: '2020-12-17 01:20:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

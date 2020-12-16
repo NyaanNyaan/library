@@ -77,8 +77,8 @@ data:
   isVerificationFile: false
   path: data-structure/radix-heap.hpp
   requiredBy:
-  - shortest-path/dijkstra-radix-heap.hpp
   - shortest-path/dijkstra-with-restore.hpp
+  - shortest-path/dijkstra-radix-heap.hpp
   - shortest-path/dijkstra-fast.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -88,8 +88,8 @@ data:
   - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
-  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
 documentation_of: data-structure/radix-heap.hpp
 layout: document
 redirect_from:

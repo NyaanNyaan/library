@@ -1,42 +1,42 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: orderedmap/orderedmap-base.hpp
     title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\
       \u5E95\u30AF\u30E9\u30B9)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: orderedmap/orderedmap.hpp
     title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: rbst/rbst-base.hpp
     title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
       )"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/associative_array
@@ -243,24 +243,25 @@ data:
     \      if (k <= p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
     \ + 1;\n        p = p->r;\n      }\n    }\n    if (flg) base::erase(root, ret);\n\
     \  }\n\n  void erase(Ptr p) { erase(p->key); }\n\n  int size() const { return\
-    \ base::size(root); }\n\n protected:\n  Ptr update(Ptr n) override {\n    n->cnt\
-    \ = 1 + base::count(n->l) + base::count(n->r);\n    return n;\n  }\n\n  Ptr insert_key(const\
-    \ Key& k) {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if constexpr\
-    \ (multi == false) {\n        if (k == p->key) return p;\n      }\n      if (k\
-    \ < p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
-    \ + 1;\n        p = p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto\
-    \ x = base::split(root, ret);\n    root = base::merge(base::merge(x.first, n),\
-    \ x.second);\n    return n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000\
-    (\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n\
-    #line 4 \"orderedmap/orderedmap.hpp\"\n\ntemplate <typename Key, typename Val,\
-    \ bool multi>\nstruct OrderedMapNode {\n  using Ptr = typename RBSTBase<OrderedMapNode>::Ptr;\n\
-    \  Ptr l, r;\n  Key key;\n  Val val;\n  int cnt;\n\n  OrderedMapNode(const Key&\
-    \ k = Key(), const Val& v = Val())\n      : l(), r(), key(k), val(v), cnt(1) {}\n\
-    };\n\ntemplate <typename Key, typename Val>\nstruct OrderedMap : OrderedMapBase<OrderedMapNode<Key,\
-    \ Val, false>, false> {\n  using base = OrderedMapBase<OrderedMapNode<Key, Val,\
-    \ false>, false>;\n\n  OrderedMap() : base() {}\n\n  Val& operator[](const Key&\
-    \ key) { return base::insert_key(key)->val; };\n\n};\n\n/**\n * @brief Ordered\
-    \ Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp\"\
+    \ base::size(root); }\n\n protected:\n\n  void push(Ptr) override {}\n  \n  Ptr\
+    \ update(Ptr n) override {\n    n->cnt = 1 + base::count(n->l) + base::count(n->r);\n\
+    \    return n;\n  }\n\n  Ptr insert_key(const Key& k) {\n    Ptr p = root;\n \
+    \   int ret = 0;\n    while (p) {\n      if constexpr (multi == false) {\n   \
+    \     if (k == p->key) return p;\n      }\n      if (k < p->key) {\n        p\
+    \ = p->l;\n      } else {\n        ret += base::count(p->l) + 1;\n        p =\
+    \ p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto x = base::split(root,\
+    \ ret);\n    root = base::merge(base::merge(x.first, n), x.second);\n    return\
+    \ n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\
+    \u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 4 \"orderedmap/orderedmap.hpp\"\
+    \n\ntemplate <typename Key, typename Val, bool multi>\nstruct OrderedMapNode {\n\
+    \  using Ptr = typename RBSTBase<OrderedMapNode>::Ptr;\n  Ptr l, r;\n  Key key;\n\
+    \  Val val;\n  int cnt;\n\n  OrderedMapNode(const Key& k = Key(), const Val& v\
+    \ = Val())\n      : l(), r(), key(k), val(v), cnt(1) {}\n};\n\ntemplate <typename\
+    \ Key, typename Val>\nstruct OrderedMap : OrderedMapBase<OrderedMapNode<Key, Val,\
+    \ false>, false> {\n  using base = OrderedMapBase<OrderedMapNode<Key, Val, false>,\
+    \ false>;\n\n  OrderedMap() : base() {}\n\n  Val& operator[](const Key& key) {\
+    \ return base::insert_key(key)->val; };\n\n};\n\n/**\n * @brief Ordered Map(\u9806\
+    \u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp\"\
     \n\nusing namespace Nyaan;\n\n#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace fastio\
     \ {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0,\
     \ pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
@@ -318,8 +319,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   requiredBy: []
-  timestamp: '2020-12-17 01:20:11+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-17 02:52:40+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
 layout: document

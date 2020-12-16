@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: rbst/rbst-base.hpp
     title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
       )"
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: orderedmap/orderedmap.hpp
     title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/orderedmap.test.cpp
     title: verify/verify-unit-test/orderedmap.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\
       \u57FA\u5E95\u30AF\u30E9\u30B9)"
@@ -75,15 +75,16 @@ data:
     \      if (k <= p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
     \ + 1;\n        p = p->r;\n      }\n    }\n    if (flg) base::erase(root, ret);\n\
     \  }\n\n  void erase(Ptr p) { erase(p->key); }\n\n  int size() const { return\
-    \ base::size(root); }\n\n protected:\n  Ptr update(Ptr n) override {\n    n->cnt\
-    \ = 1 + base::count(n->l) + base::count(n->r);\n    return n;\n  }\n\n  Ptr insert_key(const\
-    \ Key& k) {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if constexpr\
-    \ (multi == false) {\n        if (k == p->key) return p;\n      }\n      if (k\
-    \ < p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
-    \ + 1;\n        p = p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto\
-    \ x = base::split(root, ret);\n    root = base::merge(base::merge(x.first, n),\
-    \ x.second);\n    return n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000\
-    (\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n"
+    \ base::size(root); }\n\n protected:\n\n  void push(Ptr) override {}\n  \n  Ptr\
+    \ update(Ptr n) override {\n    n->cnt = 1 + base::count(n->l) + base::count(n->r);\n\
+    \    return n;\n  }\n\n  Ptr insert_key(const Key& k) {\n    Ptr p = root;\n \
+    \   int ret = 0;\n    while (p) {\n      if constexpr (multi == false) {\n   \
+    \     if (k == p->key) return p;\n      }\n      if (k < p->key) {\n        p\
+    \ = p->l;\n      } else {\n        ret += base::count(p->l) + 1;\n        p =\
+    \ p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto x = base::split(root,\
+    \ ret);\n    root = base::merge(base::merge(x.first, n), x.second);\n    return\
+    \ n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\
+    \u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n"
   code: "#pragma once\n\n#include \"../rbst/rbst-base.hpp\"\n\ntemplate <typename\
     \ Node, bool multi>\nstruct OrderedMapBase : RBSTBase<Node> {\n  using base =\
     \ RBSTBase<Node>;\n  using Ptr = typename base::Ptr;\n  using Key = decltype(Node::key);\n\
@@ -107,23 +108,24 @@ data:
     \      if (k <= p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
     \ + 1;\n        p = p->r;\n      }\n    }\n    if (flg) base::erase(root, ret);\n\
     \  }\n\n  void erase(Ptr p) { erase(p->key); }\n\n  int size() const { return\
-    \ base::size(root); }\n\n protected:\n  Ptr update(Ptr n) override {\n    n->cnt\
-    \ = 1 + base::count(n->l) + base::count(n->r);\n    return n;\n  }\n\n  Ptr insert_key(const\
-    \ Key& k) {\n    Ptr p = root;\n    int ret = 0;\n    while (p) {\n      if constexpr\
-    \ (multi == false) {\n        if (k == p->key) return p;\n      }\n      if (k\
-    \ < p->key) {\n        p = p->l;\n      } else {\n        ret += base::count(p->l)\
-    \ + 1;\n        p = p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto\
-    \ x = base::split(root, ret);\n    root = base::merge(base::merge(x.first, n),\
-    \ x.second);\n    return n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000\
-    (\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n"
+    \ base::size(root); }\n\n protected:\n\n  void push(Ptr) override {}\n  \n  Ptr\
+    \ update(Ptr n) override {\n    n->cnt = 1 + base::count(n->l) + base::count(n->r);\n\
+    \    return n;\n  }\n\n  Ptr insert_key(const Key& k) {\n    Ptr p = root;\n \
+    \   int ret = 0;\n    while (p) {\n      if constexpr (multi == false) {\n   \
+    \     if (k == p->key) return p;\n      }\n      if (k < p->key) {\n        p\
+    \ = p->l;\n      } else {\n        ret += base::count(p->l) + 1;\n        p =\
+    \ p->r;\n      }\n    }\n    Ptr n = base::my_new(k);\n    auto x = base::split(root,\
+    \ ret);\n    root = base::merge(base::merge(x.first, n), x.second);\n    return\
+    \ n;\n  }\n};\n\n/**\n * @brief Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\
+    \u96C6\u5408\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n"
   dependsOn:
   - rbst/rbst-base.hpp
   isVerificationFile: false
   path: orderedmap/orderedmap-base.hpp
   requiredBy:
   - orderedmap/orderedmap.hpp
-  timestamp: '2020-12-17 01:20:11+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-12-17 02:52:40+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp

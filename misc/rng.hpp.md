@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multiplicative-function.test.cpp
     title: verify/verify-unit-test/multiplicative-function.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/orderedmap.test.cpp
     title: verify/verify-unit-test/orderedmap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -61,7 +61,7 @@ data:
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\n\
@@ -103,27 +103,27 @@ data:
   path: misc/rng.hpp
   requiredBy:
   - modulo/mod-kth-root.hpp
+  - rbst/treap.hpp
   - tree/pruefer-code.hpp
   - prime/fast-factorize.hpp
-  - rbst/treap.hpp
   timestamp: '2020-12-08 00:23:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-  - verify/verify-unit-test/multiplicative-function.test.cpp
-  - verify/verify-unit-test/orderedmap.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
-  - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/orderedmap.test.cpp
+  - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
-  - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/math.test.cpp
-  - verify/verify-unit-test/simulated-annealing.test.cpp
+  - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
 documentation_of: misc/rng.hpp
 layout: document
 redirect_from:
