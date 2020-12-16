@@ -224,6 +224,28 @@ data:
     - icon: ':heavy_check_mark:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
+  - name: lct
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: lct/lazy-reversible-bbst-base.hpp
+      title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\
+        \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
+    - icon: ':warning:'
+      path: lct/link-cut-base.hpp
+      title: lct/link-cut-base.hpp
+    - icon: ':warning:'
+      path: lct/reversible-bbst-base.hpp
+      title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\
+        \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
+    - icon: ':heavy_check_mark:'
+      path: lct/splay-base.hpp
+      title: Splay Tree(base)
+    - icon: ':heavy_check_mark:'
+      path: lct/splay-lazy-reversible.hpp
+      title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay\u6728"
+    - icon: ':warning:'
+      path: lct/splay-reversible.hpp
+      title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay\u6728"
   - name: marathon
     pages:
     - icon: ':heavy_check_mark:'
@@ -234,7 +256,7 @@ data:
       title: Simulated Annealing
   - name: math
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
     - icon: ':heavy_check_mark:'
@@ -293,7 +315,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -305,7 +327,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
@@ -331,7 +353,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
     - icon: ':heavy_check_mark:'
@@ -408,11 +430,11 @@ data:
       title: ntt/ntt.hpp
   - name: orderedmap
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: orderedmap/orderedmap-base.hpp
       title: "Ordered Set(base)\u3000(\u9806\u5E8F\u4ED8\u304D\u96C6\u5408\u30FB\u57FA\
         \u5E95\u30AF\u30E9\u30B9)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: orderedmap/orderedmap.hpp
       title: "Ordered Map(\u9806\u5E8F\u4ED8\u304D\u9023\u60F3\u914D\u5217)"
   - name: prime
@@ -434,11 +456,11 @@ data:
       title: prime/prime-sieve.hpp
   - name: rbst
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: rbst/lazy-reversible-rbst.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\u8861\
         \u4E8C\u5206\u6728"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: rbst/rbst-base.hpp
       title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
         )"
@@ -570,22 +592,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -821,7 +843,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/multiplicative-function.test.cpp
       title: verify/verify-unit-test/multiplicative-function.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-unit-test/orderedmap.test.cpp
       title: verify/verify-unit-test/orderedmap.test.cpp
     - icon: ':heavy_check_mark:'
@@ -851,9 +873,12 @@ data:
       path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -874,7 +899,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
       title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
       title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
     - icon: ':heavy_check_mark:'

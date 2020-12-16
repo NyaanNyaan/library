@@ -1,45 +1,45 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/affine-transformation.hpp
     title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: rbst/lazy-reversible-rbst.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u4E71\u629E\u5E73\u8861\
       \u4E8C\u5206\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: rbst/rbst-base.hpp
     title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
       )"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/dynamic_sequence_range_affine_range_sum
@@ -196,32 +196,34 @@ data:
     \n//\n#line 2 \"rbst/lazy-reversible-rbst.hpp\"\n\n#line 2 \"rbst/rbst-base.hpp\"\
     \n\ntemplate <typename Node>\nstruct RBSTBase {\n  using Ptr = Node *;\n  template\
     \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
-    \  }\n  inline Ptr make_tree() const { return nullptr; }\n\n  // for avoiding\
-    \ memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template\
-    \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
-    \  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr t) const { return\
-    \ count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l :\
-    \ r;\n    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {\n      push(l);\n\
-    \      l->r = merge(l->r, r);\n      return update(l);\n    } else {\n      push(r);\n\
-    \      r->l = merge(l, r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr,\
-    \ Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n\
-    \    if (k <= count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n\
-    \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
-    \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
-    \    }\n  }\n\n  Ptr build(int l, int r, const vector<decltype(Node::key)> &v)\
-    \ {\n    if (l + 1 == r) return my_new(v[l]);\n    int m = (l + r) >> 1;\n   \
-    \ Ptr pm = my_new(v[m]);\n    if (l < m) pm->l = build(l, m, v);\n    if (m +\
-    \ 1 < r) pm->r = build(m + 1, r, v);\n    return update(pm);\n  }\n\n  Ptr build(const\
-    \ vector<decltype(Node::key)> &v) {\n    return build(0, (int)v.size(), v);\n\
-    \  }\n\n  template <typename... Args>\n  void insert(Ptr &t, int k, const Args\
-    \ &... args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
-    \ x.second);\n  }\n\n  void erase(Ptr &t, int k) {\n    auto x = split(t, k);\n\
-    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n  static\
+    \  }\n  inline void my_del(Ptr t) { delete t; }\n  inline Ptr make_tree() const\
+    \ { return nullptr; }\n\n  // for avoiding memory leak, activate below\n  /*\n\
+    \  using Ptr = shared_ptr<Node>;\n  template <typename... Args>\n  inline Ptr\
+    \ my_new(Args... args) {\n    return make_shared<Node>(args...);\n  }\n  inline\
+    \ void my_del(Ptr t) {}\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr\
+    \ t) const { return count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l ||\
+    \ !r) return l ? l : r;\n    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt)\
+    \ {\n      push(l);\n      l->r = merge(l->r, r);\n      return update(l);\n \
+    \   } else {\n      push(r);\n      r->l = merge(l, r->l);\n      return update(r);\n\
+    \    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr,\
+    \ nullptr};\n    push(t);\n    if (k <= count(t->l)) {\n      auto s = split(t->l,\
+    \ k);\n      t->l = s.second;\n      return {s.first, update(t)};\n    } else\
+    \ {\n      auto s = split(t->r, k - count(t->l) - 1);\n      t->r = s.first;\n\
+    \      return {update(t), s.second};\n    }\n  }\n\n  Ptr build(int l, int r,\
+    \ const vector<decltype(Node::key)> &v) {\n    if (l + 1 == r) return my_new(v[l]);\n\
+    \    int m = (l + r) >> 1;\n    Ptr pm = my_new(v[m]);\n    if (l < m) pm->l =\
+    \ build(l, m, v);\n    if (m + 1 < r) pm->r = build(m + 1, r, v);\n    return\
+    \ update(pm);\n  }\n\n  Ptr build(const vector<decltype(Node::key)> &v) {\n  \
+    \  return build(0, (int)v.size(), v);\n  }\n\n  template <typename... Args>\n\
+    \  void insert(Ptr &t, int k, const Args &... args) {\n    auto x = split(t, k);\n\
+    \    t = merge(merge(x.first, my_new(args...)), x.second);\n  }\n\n  void erase(Ptr\
+    \ &t, int k) {\n    auto x = split(t, k);\n    auto y = split(x.second, 1);\n\
+    \    my_del(t);\n    t = merge(x.first, y.second);\n  }\n\n protected:\n  static\
     \ uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n    return\
-    \ x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9), x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
-    \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
-    \ {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\
-    \u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 4 \"rbst/lazy-reversible-rbst.hpp\"\
+    \ x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n  }\n\n  inline int count(const\
+    \ Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr) = 0;\n\n\
+    \  virtual Ptr update(Ptr) = 0;\n};\n\n/**\n * @brief \u4E71\u629E\u5E73\u8861\
+    \u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 4 \"rbst/lazy-reversible-rbst.hpp\"\
     \n\ntemplate <typename T, typename E>\nstruct LazyReversibleRBSTNode {\n  typename\
     \ RBSTBase<LazyReversibleRBSTNode>::Ptr l, r;\n  T key, sum;\n  E lazy;\n  int\
     \ cnt;\n  bool rev;\n\n  LazyReversibleRBSTNode(const T &t = T(), const E &e =\
@@ -373,8 +375,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-11 17:45:42+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-16 23:51:04+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
 layout: document

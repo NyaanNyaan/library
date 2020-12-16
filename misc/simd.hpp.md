@@ -10,10 +10,19 @@ data:
   bundledCode: '#line 2 "misc/simd.hpp"
 
 
+    //#pragma GCC target("avx2")
+
+    #pragma GCC target("avx2,avx512f,avx512vl")
+
+    #pragma GCC optimize("O3")
+
+    #pragma GCC optimize("unroll-loops")
+
     #include <immintrin.h>
 
 
     using m256 = __m256i;
+
 
     #define ALIGN __attribute__((aligned(64)))
 
@@ -28,6 +37,11 @@ data:
 
 
     #define AND(a, b) _mm256_and_si256(a, b)
+
+    #define OR(a, b) _mm256_or_si256(a, b)
+
+    #define XOR(a, b) _mm256_xor_si256(a, b)
+
 
     #define ADD(a, b) _mm256_add_epi32(a, b)
 
@@ -55,10 +69,19 @@ data:
   code: '#pragma once
 
 
+    //#pragma GCC target("avx2")
+
+    #pragma GCC target("avx2,avx512f,avx512vl")
+
+    #pragma GCC optimize("O3")
+
+    #pragma GCC optimize("unroll-loops")
+
     #include <immintrin.h>
 
 
     using m256 = __m256i;
+
 
     #define ALIGN __attribute__((aligned(64)))
 
@@ -73,6 +96,11 @@ data:
 
 
     #define AND(a, b) _mm256_and_si256(a, b)
+
+    #define OR(a, b) _mm256_or_si256(a, b)
+
+    #define XOR(a, b) _mm256_xor_si256(a, b)
+
 
     #define ADD(a, b) _mm256_add_epi32(a, b)
 
@@ -101,7 +129,7 @@ data:
   isVerificationFile: false
   path: misc/simd.hpp
   requiredBy: []
-  timestamp: '2020-12-10 19:54:55+09:00'
+  timestamp: '2020-12-16 23:51:04+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: misc/simd.hpp
