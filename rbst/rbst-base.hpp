@@ -72,7 +72,7 @@ struct RBSTBase {
   void erase(Ptr &t, int k) {
     auto x = split(t, k);
     auto y = split(x.second, 1);
-    my_del(t);
+    my_del(y.first);
     t = merge(x.first, y.second);
   }
 

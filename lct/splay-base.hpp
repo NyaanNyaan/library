@@ -16,7 +16,6 @@ struct SplayTreeBase {
   void splay(Ptr t) {
     push(t);
     while (!is_root(t)) {
-      //cerr << "@splay " << t << endl;
       Ptr q = t->p;
       if (is_root(q)) {
         push(q), push(t);

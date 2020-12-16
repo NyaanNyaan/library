@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../data-structure/radix-heap.hpp"
 #include "../graph/static-graph.hpp"
 
@@ -24,6 +22,28 @@ vector<T> dijkstra(StaticGraph<T>& g, int start = 0) {
     }
   }
   return d;
+}
+
+template <typename T>
+T dijkstra_point(StaticGraph<T>& g, int start, int goal) {
+  vector<T> d(g.size(), T(-1));
+  RadixHeap<T, int> Q;
+  d[start] = 0;
+  Q.push(0, start);
+  while (!Q.empty()) {
+    auto p = Q.pop();
+    int u = p.second;
+    if(u == goal) return d[u];
+    if (d[u] < T(p.first)) continue;
+    T du = d[u];
+    for (auto&& [v, c] : g[u]) {
+      if (d[v] == T(-1) || du + c < d[v]) {
+        d[v] = du + c;
+        Q.push(d[v], v);
+      }
+    }
+  }
+  return -1;
 }
 
 template <typename T>
