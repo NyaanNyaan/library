@@ -5,7 +5,7 @@ struct LinkCutBase : Splay {
   using Node = typename Splay::Node;
   using Ptr = Node*;
 
-  Ptr expose(Ptr t) {
+  virtual Ptr expose(Ptr t) {
     Ptr rp = nullptr;
     for (Ptr cur = t; cur; cur = cur->p) {
       this->splay(cur);
@@ -17,7 +17,7 @@ struct LinkCutBase : Splay {
     return rp;
   }
 
-  void link(Ptr u, Ptr v) {
+  virtual void link(Ptr u, Ptr v) {
     evert(u);
     expose(v);
     u->p = v;
@@ -65,7 +65,7 @@ struct LinkCutBase : Splay {
     return x;
   }
 
-  void vertex_set(Ptr t, const decltype(Node::key)& key) {
+  virtual void vertex_set(Ptr t, const decltype(Node::key)& key) {
     this->splay(t);
     t->key = key;
     this->update(t);

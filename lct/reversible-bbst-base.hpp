@@ -8,7 +8,7 @@ struct ReversibleBBST : Tree {
 
   ReversibleBBST() = default;
 
-  void toggle(Ptr t) {
+  virtual void toggle(Ptr t) {
     swap(t->l, t->r);
     t->sum = ts(t->sum);
     t->rev ^= true;
