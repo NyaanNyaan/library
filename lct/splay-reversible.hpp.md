@@ -8,7 +8,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: lct/splay-base.hpp
     title: Splay Tree(base)
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: lct/link-cut-tree.hpp
+    title: Link Cut Tree
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
@@ -101,7 +104,8 @@ data:
   - lct/splay-base.hpp
   isVerificationFile: false
   path: lct/splay-reversible.hpp
-  requiredBy: []
+  requiredBy:
+  - lct/link-cut-tree.hpp
   timestamp: '2020-12-17 12:47:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

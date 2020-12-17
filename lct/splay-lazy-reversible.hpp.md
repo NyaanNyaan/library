@@ -8,11 +8,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: lct/splay-base.hpp
     title: Splay Tree(base)
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: lct/link-cut-tree-lazy.hpp
+    title: "\u9045\u5EF6\u4F1D\u642CLink Cut Tree"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -110,11 +116,13 @@ data:
   - lct/splay-base.hpp
   isVerificationFile: false
   path: lct/splay-lazy-reversible.hpp
-  requiredBy: []
+  requiredBy:
+  - lct/link-cut-tree-lazy.hpp
   timestamp: '2020-12-17 12:47:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
 documentation_of: lct/splay-lazy-reversible.hpp
 layout: document
 redirect_from:

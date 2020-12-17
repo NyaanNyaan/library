@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: lct/link-cut-tree-lazy.hpp
+    title: "\u9045\u5EF6\u4F1D\u642CLink Cut Tree"
+  - icon: ':heavy_check_mark:'
+    path: lct/link-cut-tree.hpp
+    title: Link Cut Tree
+  - icon: ':heavy_check_mark:'
     path: lct/splay-lazy-reversible.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree"
   - icon: ':heavy_check_mark:'
@@ -18,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -114,12 +123,15 @@ data:
   requiredBy:
   - lct/splay-lazy-reversible.hpp
   - lct/splay-reversible.hpp
+  - lct/link-cut-tree.hpp
+  - lct/link-cut-tree-lazy.hpp
   timestamp: '2020-12-17 12:47:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
 documentation_of: lct/splay-base.hpp
 layout: document
 redirect_from:

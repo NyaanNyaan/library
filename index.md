@@ -232,6 +232,12 @@ data:
         \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
     - icon: ':heavy_check_mark:'
       path: lct/link-cut-base.hpp
+      title: Link Cut Tree(base)
+    - icon: ':heavy_check_mark:'
+      path: lct/link-cut-tree-lazy.hpp
+      title: "\u9045\u5EF6\u4F1D\u642CLink Cut Tree"
+    - icon: ':heavy_check_mark:'
+      path: lct/link-cut-tree.hpp
       title: Link Cut Tree
     - icon: ':heavy_check_mark:'
       path: lct/reversible-bbst-base.hpp
@@ -932,6 +938,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp

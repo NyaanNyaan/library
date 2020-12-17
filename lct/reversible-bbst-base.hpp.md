@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: lct/link-cut-tree.hpp
+    title: Link Cut Tree
+  - icon: ':heavy_check_mark:'
     path: lct/splay-reversible.hpp
     title: "\u53CD\u8EE2\u53EF\u80FDSplay Tree"
   _extendedVerifiedWith:
@@ -58,6 +61,7 @@ data:
   path: lct/reversible-bbst-base.hpp
   requiredBy:
   - lct/splay-reversible.hpp
+  - lct/link-cut-tree.hpp
   timestamp: '2020-12-17 12:47:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
