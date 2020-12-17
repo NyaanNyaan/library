@@ -5,37 +5,37 @@ data:
     path: lct/lazy-reversible-bbst-base.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\
       \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-base.hpp
     title: Splay Tree(base)
   - icon: ':heavy_check_mark:'
     path: lct/splay-lazy-reversible.hpp
-    title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay\u6728"
-  - icon: ':heavy_check_mark:'
+    title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree"
+  - icon: ':question:'
     path: math/affine-transformation.hpp
     title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -284,12 +284,12 @@ data:
     \ int a, int b, const E &e) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
     \ b - a);\n    propagate(y.first, e);\n    t = merge(x.first, merge(y.first, y.second));\n\
     \  }\n\n protected:\n  inline T sum(const Ptr t) { return t ? t->sum : T(); }\n\
-    \n  Ptr update(Ptr t) override {\n    if (!t) return t;\n    push(t);\n    t->cnt\
-    \ = 1;\n    t->sum = t->key;\n    if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum,\
-    \ t->sum);\n    if (t->r) t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);\n\
-    \    return t;\n  }\n\n  void push(Ptr t) override {\n    if (!t) return;\n  \
-    \  if (t->rev) {\n      if (t->l) toggle(t->l);\n      if (t->r) toggle(t->r);\n\
-    \      t->rev = false;\n    }\n    if (t->lazy != E()) {\n      if (t->l) propagate(t->l,\
+    \n  Ptr update(Ptr t) override {\n    if (!t) return t;\n    t->cnt = 1;\n   \
+    \ t->sum = t->key;\n    if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n\
+    \    if (t->r) t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);\n    return\
+    \ t;\n  }\n\n  void push(Ptr t) override {\n    if (!t) return;\n    if (t->rev)\
+    \ {\n      if (t->l) toggle(t->l);\n      if (t->r) toggle(t->r);\n      t->rev\
+    \ = false;\n    }\n    if (t->lazy != E()) {\n      if (t->l) propagate(t->l,\
     \ t->lazy);\n      if (t->r) propagate(t->r, t->lazy);\n      t->lazy = E();\n\
     \    }\n  }\n\n  void propagate(Ptr t, const E &x) {\n    t->lazy = h(t->lazy,\
     \ x);\n    t->key = g(t->key, x);\n    t->sum = g(t->sum, x);\n  }\n};\n\n/**\n\
@@ -300,19 +300,16 @@ data:
     \  }\n  void my_del(Ptr p) { delete p; }\n\n  bool is_root(Ptr t) { return !(t->p)\
     \ || (t->p->l != t && t->p->r != t); }\n\n  int size(Ptr t) const { return count(t);\
     \ }\n\n  void splay(Ptr t) {\n    push(t);\n    while (!is_root(t)) {\n      Ptr\
-    \ q = t->p;\n      if (is_root(q)) {\n        push(q), push(t);\n        if (q->l\
-    \ == t)\n          rotr(t);\n        else\n          rotl(t);\n      } else {\n\
-    \        Ptr r = q->p;\n        push(r), push(q), push(t);\n        if (r->l ==\
-    \ q) {\n          if (q->l == t)\n            rotr(q), rotr(t);\n          else\n\
-    \            rotl(t), rotr(t);\n        } else {\n          if (q->r == t)\n \
-    \           rotl(q), rotl(t);\n          else\n            rotr(t), rotl(t);\n\
-    \        }\n      }\n    }\n  }\n\n  Ptr get_left(Ptr t) {\n    while (t->l) push(t),\
-    \ t = t->l;\n    return t;\n  }\n\n  Ptr get_right(Ptr t) {\n    while (t->r)\
-    \ push(t), t = t->r;\n    return t;\n  }\n\n  pair<Ptr, Ptr> split(Ptr t, int\
-    \ k) {\n    if (!t) return {nullptr, nullptr};\n    if (k == 0) return {nullptr,\
-    \ t};\n    if (k == count(t)) return {t, nullptr};\n    push(t);\n    if (k <=\
-    \ count(t->l)) {\n      auto x = split(t->l, k);\n      t->l = x.second;\n   \
-    \   t->p = nullptr;\n      if (x.second) x.second->p = t;\n      return {x.first,\
+    \ q = t->p;\n      if (is_root(q)) {\n        push(q), push(t);\n        rot(t);\n\
+    \      } else {\n        Ptr r = q->p;\n        push(r), push(q), push(t);\n \
+    \       if (pos(q) == pos(t))\n          rot(q), rot(t);\n        else\n     \
+    \     rot(t), rot(t);\n      }\n    }\n  }\n\n  Ptr get_left(Ptr t) {\n    while\
+    \ (t->l) push(t), t = t->l;\n    return t;\n  }\n\n  Ptr get_right(Ptr t) {\n\
+    \    while (t->r) push(t), t = t->r;\n    return t;\n  }\n\n  pair<Ptr, Ptr> split(Ptr\
+    \ t, int k) {\n    if (!t) return {nullptr, nullptr};\n    if (k == 0) return\
+    \ {nullptr, t};\n    if (k == count(t)) return {t, nullptr};\n    push(t);\n \
+    \   if (k <= count(t->l)) {\n      auto x = split(t->l, k);\n      t->l = x.second;\n\
+    \      t->p = nullptr;\n      if (x.second) x.second->p = t;\n      return {x.first,\
     \ update(t)};\n    } else {\n      auto x = split(t->r, k - count(t->l) - 1);\n\
     \      t->r = x.first;\n      t->p = nullptr;\n      if (x.first) x.first->p =\
     \ t;\n      return {update(t), x.second};\n    }\n  }\n\n  Ptr merge(Ptr l, Ptr\
@@ -332,24 +329,24 @@ data:
     \ t) = 0;\n\n  Ptr build(const vector<Ptr> &v) { return build(0, v.size(), v);\
     \ }\n\n  Ptr build(int l, int r, const vector<Ptr> &v) {\n    if (l + 1 >= r)\
     \ return v[l];\n    return merge(build(l, (l + r) >> 1, v), build((l + r) >> 1,\
-    \ r, v));\n  }\n\n private:\n  void rotr(Ptr t) {\n    Ptr x = t->p, y = x->p;\n\
-    \    if ((x->l = t->r)) t->r->p = x;\n    t->r = x, x->p = t;\n    update(x),\
-    \ update(t);\n    if ((t->p = y)) {\n      if (y->l == x) y->l = t, update(y);\n\
-    \      if (y->r == x) y->r = t, update(y);\n    }\n  }\n\n  void rotl(Ptr t) {\n\
-    \    Ptr x = t->p, y = x->p;\n    if ((x->r = t->l)) t->l->p = x;\n    t->l =\
-    \ x, x->p = t;\n    update(x), update(t);\n    if ((t->p = y)) {\n      if (y->l\
-    \ == x) y->l = t, update(y);\n      if (y->r == x) y->r = t, update(y);\n    }\n\
-    \  }\n};\n\n/**\n * @brief Splay Tree(base)\n */\n#line 5 \"lct/splay-lazy-reversible.hpp\"\
-    \n\ntemplate <typename T, typename E>\nstruct LazyReversibleSplayTreeNode {\n\
-    \  using Ptr = LazyReversibleSplayTreeNode *;\n  Ptr l, r, p;\n  T key, sum;\n\
-    \  E lazy;\n  int cnt;\n  bool rev;\n\n  LazyReversibleSplayTreeNode(const T &t\
-    \ = T(), const E &e = E())\n      : l(), r(), p(), key(t), sum(t), lazy(e), cnt(1),\
-    \ rev(false) {}\n};\n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T,\
-    \ E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct LazyReversibleSplayTree\n \
-    \   : LazyReversibleBBST<SplayTreeBase<LazyReversibleSplayTreeNode<T, E>>,\n \
-    \                        LazyReversibleSplayTreeNode<T, E>, T, E, f, g, h, ts>\
-    \ {\n  using Node = LazyReversibleSplayTreeNode<T, E>;\n};\n\n/**\n * @brief \u9045\
-    \u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay\u6728\n */\n#line 15 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp\"\
+    \ r, v));\n  }\n\n private:\n  inline int pos(Ptr t) {\n    if (t->p) {\n    \
+    \  if (t->p->l == t) return -1;\n      if (t->p->r == t) return 1;\n    }\n  \
+    \  return 0;\n  }\n\n  void rot(Ptr t) {\n    Ptr x = t->p, y = x->p;\n    if\
+    \ (pos(t) == -1) {\n      if ((x->l = t->r)) t->r->p = x;\n      t->r = x, x->p\
+    \ = t;\n    } else {\n      if ((x->r = t->l)) t->l->p = x;\n      t->l = x, x->p\
+    \ = t;\n    }\n    update(x), update(t);\n    if ((t->p = y)) {\n      if (y->l\
+    \ == x) y->l = t;\n      if (y->r == x) y->r = t;\n    }\n  }\n};\n\n/**\n * @brief\
+    \ Splay Tree(base)\n */\n#line 5 \"lct/splay-lazy-reversible.hpp\"\n\ntemplate\
+    \ <typename T, typename E>\nstruct LazyReversibleSplayTreeNode {\n  using Ptr\
+    \ = LazyReversibleSplayTreeNode *;\n  Ptr l, r, p;\n  T key, sum;\n  E lazy;\n\
+    \  int cnt;\n  bool rev;\n\n  LazyReversibleSplayTreeNode(const T &t = T(), const\
+    \ E &e = E())\n      : l(), r(), p(), key(t), sum(t), lazy(e), cnt(1), rev(false)\
+    \ {}\n};\n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E,\
+    \ E),\n          T (*ts)(T)>\nstruct LazyReversibleSplayTree\n    : LazyReversibleBBST<SplayTreeBase<LazyReversibleSplayTreeNode<T,\
+    \ E>>,\n                         LazyReversibleSplayTreeNode<T, E>, T, E, f, g,\
+    \ h, ts> {\n  using Node = LazyReversibleSplayTreeNode<T, E>;\n};\n\n/**\n * @brief\
+    \ \u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree\n */\n#line 15 \"\
+    verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp\"\
     \n\nusing T = pair<mint, mint>;\nusing E = Affine<mint>;\nT f(T a, T b) { return\
     \ T(a.first + b.first, a.second + b.second); }\nT g(T a, E b) { return T(b.a *\
     \ a.first + b.b * a.second, a.second); }\nE h(E a, E b) { return a * b; }\nT ts(T\
@@ -399,7 +396,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   requiredBy: []
-  timestamp: '2020-12-17 01:20:11+09:00'
+  timestamp: '2020-12-17 12:47:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
