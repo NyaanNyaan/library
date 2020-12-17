@@ -1,7 +1,7 @@
 #pragma once
 
 template <typename Splay>
-struct LinkCutTree : Splay {
+struct LinkCutBase : Splay {
   using Node = typename Splay::Node;
   using Ptr = Node*;
 
@@ -71,9 +71,7 @@ struct LinkCutTree : Splay {
     this->update(t);
   }
 
-  decltype(Node::key) vertex_get(Ptr t) {
-    return t->key;
-  }
+  decltype(Node::key) vertex_get(Ptr t) { return t->key; }
 
   decltype(Node::key) fold(Ptr u, Ptr v) {
     evert(u);
@@ -83,5 +81,5 @@ struct LinkCutTree : Splay {
 };
 
 /**
- * @brief Link Cut Tree
+ * @brief Link Cut Tree(base)
  */

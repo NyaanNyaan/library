@@ -11,8 +11,7 @@ using vm = vector<mint>;
 #include "../../math/affine-transformation.hpp"
 #include "../../misc/fastio.hpp"
 //
-#include "../../lct/link-cut-base.hpp"
-#include "../../lct/splay-reversible.hpp"
+#include "../../lct/link-cut-tree.hpp"
 //
 
 using T = long long;
@@ -24,8 +23,7 @@ void Nyaan::solve() {
   int N, Q;
   rd(N, Q);
 
-  using Splay = ReversibleSplayTree<T, f, ts>;
-  using LCT = LinkCutTree<Splay>;
+  using LCT = LinkCutTree<T, f, ts>;
   LCT lct;
 
   vector<LCT::Ptr> vs(N);
