@@ -71,6 +71,10 @@ struct LinkCutTree : Splay {
     this->update(t);
   }
 
+  decltype(Node::key) vertex_get(Ptr t) {
+    return t->key;
+  }
+
   decltype(Node::key) fold(Ptr u, Ptr v) {
     evert(u);
     expose(v);
