@@ -8,7 +8,6 @@ struct LinkCutTree : Splay {
   Ptr expose(Ptr t) {
     Ptr rp = nullptr;
     for (Ptr cur = t; cur; cur = cur->p) {
-      // cerr << "@expose " << cur << endl;
       this->splay(cur);
       cur->r = rp;
       this->update(cur);
@@ -71,3 +70,7 @@ struct LinkCutTree : Splay {
     return x;
   }
 };
+
+/**
+ * @brief Link Cut Tree
+ */

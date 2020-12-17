@@ -31,7 +31,6 @@ struct ReversibleBBST : Tree {
 
   Ptr update(Ptr t) override {
     if (!t) return t;
-    push(t);
     t->cnt = 1;
     t->sum = t->key;
     if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);
@@ -53,5 +52,5 @@ struct ReversibleBBST : Tree {
 };
 
 /**
- * @brief 遅延伝搬反転可能平衡二分木(基底クラス)
+ * @brief 反転可能平衡二分木(基底クラス)
  */

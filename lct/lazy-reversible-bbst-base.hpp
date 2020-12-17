@@ -42,7 +42,6 @@ struct LazyReversibleBBST : Tree {
 
   Ptr update(Ptr t) override {
     if (!t) return t;
-    push(t);
     t->cnt = 1;
     t->sum = t->key;
     if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);

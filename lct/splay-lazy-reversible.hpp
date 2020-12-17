@@ -25,5 +25,5 @@ struct LazyReversibleSplayTree
 };
 
 /**
- * @brief 遅延伝搬反転可能Splay木
+ * @brief 遅延伝搬反転可能Splay Tree
  */

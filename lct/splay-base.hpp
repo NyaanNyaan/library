@@ -19,24 +19,14 @@ struct SplayTreeBase {
       Ptr q = t->p;
       if (is_root(q)) {
         push(q), push(t);
-        if (q->l == t)
-          rotr(t);
-        else
-          rotl(t);
+        rot(t);
       } else {
         Ptr r = q->p;
         push(r), push(q), push(t);
-        if (r->l == q) {
-          if (q->l == t)
-            rotr(q), rotr(t);
-          else
-            rotl(t), rotr(t);
-        } else {
-          if (q->r == t)
-            rotl(q), rotl(t);
-          else
-            rotr(t), rotl(t);
-        }
+        if (pos(q) == pos(t))
+          rot(q), rot(t);
+        else
+          rot(t), rot(t);
       }
     }
   }
@@ -121,25 +111,27 @@ struct SplayTreeBase {
   }
 
  private:
-  void rotr(Ptr t) {
-    Ptr x = t->p, y = x->p;
-    if ((x->l = t->r)) t->r->p = x;
-    t->r = x, x->p = t;
-    update(x), update(t);
-    if ((t->p = y)) {
-      if (y->l == x) y->l = t, update(y);
-      if (y->r == x) y->r = t, update(y);
+  inline int pos(Ptr t) {
+    if (t->p) {
+      if (t->p->l == t) return -1;
+      if (t->p->r == t) return 1;
     }
+    return 0;
   }
 
-  void rotl(Ptr t) {
+  void rot(Ptr t) {
     Ptr x = t->p, y = x->p;
-    if ((x->r = t->l)) t->l->p = x;
-    t->l = x, x->p = t;
+    if (pos(t) == -1) {
+      if ((x->l = t->r)) t->r->p = x;
+      t->r = x, x->p = t;
+    } else {
+      if ((x->r = t->l)) t->l->p = x;
+      t->l = x, x->p = t;
+    }
     update(x), update(t);
     if ((t->p = y)) {
-      if (y->l == x) y->l = t, update(y);
-      if (y->r == x) y->r = t, update(y);
+      if (y->l == x) y->l = t;
+      if (y->r == x) y->r = t;
     }
   }
 };
