@@ -5,8 +5,8 @@ data:
     path: lct/link-cut-base.hpp
     title: Link Cut Tree(base)
   - icon: ':heavy_check_mark:'
-    path: lct/link-cut-tree.hpp
-    title: Link Cut Tree
+    path: lct/link-cut-tree-subtree.hpp
+    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/reversible-bbst-base.hpp
     title: "\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
@@ -15,17 +15,8 @@ data:
     path: lct/splay-base.hpp
     title: Splay Tree(base)
   - icon: ':heavy_check_mark:'
-    path: lct/splay-reversible.hpp
-    title: "\u53CD\u8EE2\u53EF\u80FDSplay Tree"
-  - icon: ':heavy_check_mark:'
-    path: math/affine-transformation.hpp
-    title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -50,11 +41,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
+    PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
     links:
-    - https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
+    - https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
     \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
@@ -200,124 +191,48 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp\"\
-    \n//\n\nusing namespace Nyaan;\n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\
-    \n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r\
-    \ * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"\
-    invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2\
-    \ == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr\
-    \ LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b % mod + mod)\
-    \ * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n    return (b +\
-    \ u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
-    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
-    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
-    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 9 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp\"\
-    \nusing mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\n#line\
-    \ 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\nstruct Affine\
-    \ {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr Affine(mint\
-    \ _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return a * x + b;\
-    \ }\n  friend Affine operator*(const Affine& l, const Affine& r) {\n    return\
-    \ Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const Affine& r)\
-    \ const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine& r) const\
-    \ { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream& os,\
-    \ const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n  \
-    \  return os;\n  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n\
-    \ */\n#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr\
-    \ int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\
-    \nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int\
-    \ i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--)\
-    \ {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n\
-    \  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir\
-    \ - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n\
-    \  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por\
-    \ = 0;\n}\n\ninline void rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename\
-    \ T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n\
-    \    c = ibuf[pil++];\n  while (c < '-');\n  bool minus = 0;\n  if (c == '-')\
-    \ {\n    minus = 1;\n    c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n\
-    \    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if (minus) x = -x;\n\
-    }\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void\
-    \ rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void\
-    \ wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline void wt(T x)\
-    \ {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n    return;\n\
-    \  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n  }\n  int i = 12;\n\
-    \  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000)\
-    \ * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10)\
-    \ {\n      wt(char('0' + char(x)));\n    } else {\n      uint32_t q = (uint32_t(x)\
-    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      obuf[por + 0]\
-    \ = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n    }\n  } else\
-    \ {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x << 2) + 1, 3);\n\
-    \      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num + (x << 2), 4);\n\
-    \      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n  por\
-    \ += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
-    inline void wt(Head head, Tail... tail) {\n  wt(head);\n  wt(tail...);\n}\ntemplate\
-    \ <typename T>\ninline void wtn(T x) {\n  wt(x, '\\n');\n}\n\nstruct Dummy {\n\
-    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 13 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp\"\
-    \n//\n#line 2 \"lct/link-cut-tree.hpp\"\n\n#line 2 \"lct/splay-reversible.hpp\"\
-    \n\n#line 2 \"lct/reversible-bbst-base.hpp\"\n\ntemplate <typename Tree, typename\
-    \ Node, typename T, T (*f)(T, T), T (*ts)(T)>\nstruct ReversibleBBST : Tree {\n\
-    \  using Tree::merge;\n  using Tree::split;\n  using typename Tree::Ptr;\n\n \
-    \ ReversibleBBST() = default;\n\n  virtual void toggle(Ptr t) {\n    swap(t->l,\
-    \ t->r);\n    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n  T fold(Ptr &t,\
-    \ int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b -\
-    \ a);\n    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
-    \    return ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n    auto x =\
-    \ split(t, a);\n    auto y = split(x.second, b - a);\n    toggle(y.first);\n \
-    \   t = merge(x.first, merge(y.first, y.second));\n  }\n\n  Ptr update(Ptr t)\
-    \ override {\n    if (!t) return t;\n    t->cnt = 1;\n    t->sum = t->key;\n \
-    \   if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n    if (t->r)\
-    \ t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);\n    return t;\n  }\n\n\
-    \ protected:\n  inline T sum(const Ptr t) { return t ? t->sum : T(); }\n\n  void\
-    \ push(Ptr t) override {\n    if (!t) return;\n    if (t->rev) {\n      if (t->l)\
-    \ toggle(t->l);\n      if (t->r) toggle(t->r);\n      t->rev = false;\n    }\n\
-    \  }\n};\n\n/**\n * @brief \u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728\
-    (\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 2 \"lct/splay-base.hpp\"\n\ntemplate\
-    \ <typename Node>\nstruct SplayTreeBase {\n  using Ptr = Node *;\n  template <typename...\
-    \ Args>\n  Ptr my_new(const Args &... args) {\n    return new Node(args...);\n\
-    \  }\n  void my_del(Ptr p) { delete p; }\n\n  bool is_root(Ptr t) { return !(t->p)\
-    \ || (t->p->l != t && t->p->r != t); }\n\n  int size(Ptr t) const { return count(t);\
-    \ }\n\n  void splay(Ptr t) {\n    push(t);\n    while (!is_root(t)) {\n      Ptr\
-    \ q = t->p;\n      if (is_root(q)) {\n        push(q), push(t);\n        rot(t);\n\
-    \      } else {\n        Ptr r = q->p;\n        push(r), push(q), push(t);\n \
-    \       if (pos(q) == pos(t))\n          rot(q), rot(t);\n        else\n     \
-    \     rot(t), rot(t);\n      }\n    }\n  }\n\n  Ptr get_left(Ptr t) {\n    while\
-    \ (t->l) push(t), t = t->l;\n    return t;\n  }\n\n  Ptr get_right(Ptr t) {\n\
-    \    while (t->r) push(t), t = t->r;\n    return t;\n  }\n\n  pair<Ptr, Ptr> split(Ptr\
-    \ t, int k) {\n    if (!t) return {nullptr, nullptr};\n    if (k == 0) return\
-    \ {nullptr, t};\n    if (k == count(t)) return {t, nullptr};\n    push(t);\n \
-    \   if (k <= count(t->l)) {\n      auto x = split(t->l, k);\n      t->l = x.second;\n\
-    \      t->p = nullptr;\n      if (x.second) x.second->p = t;\n      return {x.first,\
-    \ update(t)};\n    } else {\n      auto x = split(t->r, k - count(t->l) - 1);\n\
-    \      t->r = x.first;\n      t->p = nullptr;\n      if (x.first) x.first->p =\
-    \ t;\n      return {update(t), x.second};\n    }\n  }\n\n  Ptr merge(Ptr l, Ptr\
-    \ r) {\n    if (!l && !r) return nullptr;\n    if (!l) return splay(r), r;\n \
-    \   if (!r) return splay(l), l;\n    splay(l), splay(r);\n    l = get_right(l);\n\
-    \    splay(l);\n    l->r = r;\n    r->p = l;\n    update(l);\n    return l;\n\
-    \  }\n\n  using Key = decltype(Node::key);\n  Ptr build(const vector<Key> &v)\
-    \ { return build(0, v.size(), v); }\n  Ptr build(int l, int r, const vector<Key>\
+    \ 4 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp\"\
+    \n//\n#line 2 \"lct/link-cut-tree-subtree.hpp\"\n\n#line 2 \"lct/reversible-bbst-base.hpp\"\
+    \n\ntemplate <typename Tree, typename Node, typename T, T (*f)(T, T), T (*ts)(T)>\n\
+    struct ReversibleBBST : Tree {\n  using Tree::merge;\n  using Tree::split;\n \
+    \ using typename Tree::Ptr;\n\n  ReversibleBBST() = default;\n\n  virtual void\
+    \ toggle(Ptr t) {\n    swap(t->l, t->r);\n    t->sum = ts(t->sum);\n    t->rev\
+    \ ^= true;\n  }\n\n  T fold(Ptr &t, int a, int b) {\n    auto x = split(t, a);\n\
+    \    auto y = split(x.second, b - a);\n    auto ret = sum(y.first);\n    t = merge(x.first,\
+    \ merge(y.first, y.second));\n    return ret;\n  }\n\n  void reverse(Ptr &t, int\
+    \ a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b - a);\n\
+    \    toggle(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n  }\n\
+    \n  Ptr update(Ptr t) override {\n    if (!t) return t;\n    t->cnt = 1;\n   \
+    \ t->sum = t->key;\n    if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n\
+    \    if (t->r) t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);\n    return\
+    \ t;\n  }\n\n protected:\n  inline T sum(const Ptr t) { return t ? t->sum : T();\
+    \ }\n\n  void push(Ptr t) override {\n    if (!t) return;\n    if (t->rev) {\n\
+    \      if (t->l) toggle(t->l);\n      if (t->r) toggle(t->r);\n      t->rev =\
+    \ false;\n    }\n  }\n};\n\n/**\n * @brief \u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\
+    \u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line 2 \"lct/splay-base.hpp\"\
+    \n\ntemplate <typename Node>\nstruct SplayTreeBase {\n  using Ptr = Node *;\n\
+    \  template <typename... Args>\n  Ptr my_new(const Args &... args) {\n    return\
+    \ new Node(args...);\n  }\n  void my_del(Ptr p) { delete p; }\n\n  bool is_root(Ptr\
+    \ t) { return !(t->p) || (t->p->l != t && t->p->r != t); }\n\n  int size(Ptr t)\
+    \ const { return count(t); }\n\n  void splay(Ptr t) {\n    push(t);\n    while\
+    \ (!is_root(t)) {\n      Ptr q = t->p;\n      if (is_root(q)) {\n        push(q),\
+    \ push(t);\n        rot(t);\n      } else {\n        Ptr r = q->p;\n        push(r),\
+    \ push(q), push(t);\n        if (pos(q) == pos(t))\n          rot(q), rot(t);\n\
+    \        else\n          rot(t), rot(t);\n      }\n    }\n  }\n\n  Ptr get_left(Ptr\
+    \ t) {\n    while (t->l) push(t), t = t->l;\n    return t;\n  }\n\n  Ptr get_right(Ptr\
+    \ t) {\n    while (t->r) push(t), t = t->r;\n    return t;\n  }\n\n  pair<Ptr,\
+    \ Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr, nullptr};\n    if (k\
+    \ == 0) return {nullptr, t};\n    if (k == count(t)) return {t, nullptr};\n  \
+    \  push(t);\n    if (k <= count(t->l)) {\n      auto x = split(t->l, k);\n   \
+    \   t->l = x.second;\n      t->p = nullptr;\n      if (x.second) x.second->p =\
+    \ t;\n      return {x.first, update(t)};\n    } else {\n      auto x = split(t->r,\
+    \ k - count(t->l) - 1);\n      t->r = x.first;\n      t->p = nullptr;\n      if\
+    \ (x.first) x.first->p = t;\n      return {update(t), x.second};\n    }\n  }\n\
+    \n  Ptr merge(Ptr l, Ptr r) {\n    if (!l && !r) return nullptr;\n    if (!l)\
+    \ return splay(r), r;\n    if (!r) return splay(l), l;\n    splay(l), splay(r);\n\
+    \    l = get_right(l);\n    splay(l);\n    l->r = r;\n    r->p = l;\n    update(l);\n\
+    \    return l;\n  }\n\n  using Key = decltype(Node::key);\n  Ptr build(const vector<Key>\
+    \ &v) { return build(0, v.size(), v); }\n  Ptr build(int l, int r, const vector<Key>\
     \ &v) {\n    if (l + 1 >= r) return my_new(v[l]);\n    return merge(build(l, (l\
     \ + r) >> 1, v), build((l + r) >> 1, r, v));\n  }\n\n  template <typename... Args>\n\
     \  void insert(Ptr &t, int k, const Args &... args) {\n    splay(t);\n    auto\
@@ -336,64 +251,111 @@ data:
     \ = t;\n    } else {\n      if ((x->r = t->l)) t->l->p = x;\n      t->l = x, x->p\
     \ = t;\n    }\n    update(x), update(t);\n    if ((t->p = y)) {\n      if (y->l\
     \ == x) y->l = t;\n      if (y->r == x) y->r = t;\n    }\n  }\n};\n\n/**\n * @brief\
-    \ Splay Tree(base)\n */\n#line 5 \"lct/splay-reversible.hpp\"\n\ntemplate <typename\
-    \ T>\nstruct ReversibleSplayTreeNode {\n  using Ptr = ReversibleSplayTreeNode\
-    \ *;\n  Ptr l, r, p;\n  T key, sum;\n  int cnt;\n  bool rev;\n\n  ReversibleSplayTreeNode(const\
-    \ T &t = T())\n      : l(), r(), p(), key(t), sum(t), cnt(1), rev(false) {}\n\
-    };\n\ntemplate <typename T, T (*f)(T, T), T (*ts)(T)>\nstruct ReversibleSplayTree\n\
-    \    : ReversibleBBST<SplayTreeBase<ReversibleSplayTreeNode<T>>,\n           \
-    \          ReversibleSplayTreeNode<T>, T, f, ts> {\n  using Node = ReversibleSplayTreeNode<T>;\n\
-    };\n\n/**\n * @brief \u53CD\u8EE2\u53EF\u80FDSplay Tree\n */\n#line 4 \"lct/link-cut-tree.hpp\"\
-    \n\n//\n#line 2 \"lct/link-cut-base.hpp\"\n\ntemplate <typename Splay>\nstruct\
-    \ LinkCutBase : Splay {\n  using Node = typename Splay::Node;\n  using Ptr = Node*;\n\
-    \n  virtual Ptr expose(Ptr t) {\n    Ptr rp = nullptr;\n    for (Ptr cur = t;\
-    \ cur; cur = cur->p) {\n      this->splay(cur);\n      cur->r = rp;\n      this->update(cur);\n\
-    \      rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  virtual\
-    \ void link(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    u->p = v;\n  }\n\
-    \n  void cut(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    assert(v->l ==\
-    \ u);\n    v->l = u->p = nullptr;\n    this->update(v);\n  }\n\n  void evert(Ptr\
-    \ t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n  }\n\n  Ptr\
-    \ lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return nullptr;\n \
-    \   expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x, int k) {\n\
-    \    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r && x->r->sz\
-    \ > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -= x->r->sz;\n\
-    \        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n      }\n\
-    \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
+    \ Splay Tree(base)\n */\n#line 5 \"lct/link-cut-tree-subtree.hpp\"\n\ntemplate\
+    \ <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct LinkCutForSubtreeNode {\n\
+    \  using Node = LinkCutForSubtreeNode;\n  using Ptr = LinkCutForSubtreeNode*;\n\
+    \  Ptr l, r, p;\n  T key, sum, sub;\n  int cnt;\n  bool rev;\n\n  LinkCutForSubtreeNode(const\
+    \ T& t = T())\n      : l(), r(), p(), key(t), sum(t), sub(T()), cnt(1), rev(false)\
+    \ {}\n  void add(Node* other) { sub = f(sub, other->sum); }\n  void erase(Node*\
+    \ other) { sub = finv(sub, other->sum); }\n  void merge(Node* n1, Node* n2) {\n\
+    \    sum = f(f(n1 ? n1->sum : T(), key), f(sub, n2 ? n2->sum : T()));\n  }\n};\n\
+    \ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct SplayTreeForLCSubtree\n\
+    \    : ReversibleBBST<SplayTreeBase<LinkCutForSubtreeNode<T, f, finv>>,\n    \
+    \                 LinkCutForSubtreeNode<T, f, finv>, T, nullptr, nullptr> {\n\
+    \  using Node = LinkCutForSubtreeNode<T, f, finv>;\n};\n//\n#line 2 \"lct/link-cut-base.hpp\"\
+    \n\ntemplate <typename Splay>\nstruct LinkCutBase : Splay {\n  using Node = typename\
+    \ Splay::Node;\n  using Ptr = Node*;\n\n  virtual Ptr expose(Ptr t) {\n    Ptr\
+    \ rp = nullptr;\n    for (Ptr cur = t; cur; cur = cur->p) {\n      this->splay(cur);\n\
+    \      cur->r = rp;\n      this->update(cur);\n      rp = cur;\n    }\n    this->splay(t);\n\
+    \    return rp;\n  }\n\n  virtual void link(Ptr u, Ptr v) {\n    evert(u);\n \
+    \   expose(v);\n    u->p = v;\n  }\n\n  void cut(Ptr u, Ptr v) {\n    evert(u);\n\
+    \    expose(v);\n    assert(v->l == u);\n    v->l = u->p = nullptr;\n    this->update(v);\n\
+    \  }\n\n  void evert(Ptr t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n\
+    \  }\n\n  Ptr lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return\
+    \ nullptr;\n    expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x,\
+    \ int k) {\n    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r\
+    \ && x->r->sz > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -=\
+    \ x->r->sz;\n        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n\
+    \      }\n    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
     \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
     \ vertex_set(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n \
     \   t->key = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) vertex_get(Ptr\
     \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
     \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link Cut Tree(base)\n\
-    \ */\n#line 7 \"lct/link-cut-tree.hpp\"\n\ntemplate <typename T, T (*f)(T, T),\
-    \ T (*ts)(T)>\nstruct LinkCutTree : LinkCutBase<ReversibleSplayTree<T, f, ts>>\
-    \ {};\n\n/**\n * @brief Link Cut Tree\n */\n#line 15 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp\"\
-    \n//\n\nusing T = long long;\nT f(T a, T b) { return a + b; }\nT ts(T a) { return\
-    \ a; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int N, Q;\n  rd(N,\
-    \ Q);\n\n  using LCT = LinkCutTree<T, f, ts>;\n  LCT lct;\n\n  vector<LCT::Ptr>\
-    \ vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n    vs[i] = lct.my_new(a);\n\
-    \  }\n\n  for (int i = 1; i < N; i++) {\n    int a, b;\n    rd(a, b);\n    lct.link(vs[a],\
-    \ vs[b]);\n  }\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd == 0)\
-    \ {\n      int u, v, w, x;\n      rd(u, v, w, x);\n      lct.cut(vs[u], vs[v]);\n\
-    \      lct.link(vs[w], vs[x]);\n    } else if (cmd == 1) {\n      int u, x;\n\
-    \      rd(u, x);\n      lct.vertex_set(vs[u], lct.vertex_get(vs[u]) + x);\n  \
-    \  } else {\n      int u, v;\n      rd(u, v);\n      T fold = lct.fold(vs[u],\
-    \ vs[v]);\n      wtn(fold);\n    }\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_path_sum\"\
-    \n\n#include \"../../template/template.hpp\"\n//\n\nusing namespace Nyaan;\n\n\
-    #include \"../../modint/montgomery-modint.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    using vm = vector<mint>;\n#include \"../../math/affine-transformation.hpp\"\n\
-    #include \"../../misc/fastio.hpp\"\n//\n#include \"../../lct/link-cut-tree.hpp\"\
-    \n//\n\nusing T = long long;\nT f(T a, T b) { return a + b; }\nT ts(T a) { return\
-    \ a; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int N, Q;\n  rd(N,\
-    \ Q);\n\n  using LCT = LinkCutTree<T, f, ts>;\n  LCT lct;\n\n  vector<LCT::Ptr>\
-    \ vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n    vs[i] = lct.my_new(a);\n\
-    \  }\n\n  for (int i = 1; i < N; i++) {\n    int a, b;\n    rd(a, b);\n    lct.link(vs[a],\
-    \ vs[b]);\n  }\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd == 0)\
-    \ {\n      int u, v, w, x;\n      rd(u, v, w, x);\n      lct.cut(vs[u], vs[v]);\n\
-    \      lct.link(vs[w], vs[x]);\n    } else if (cmd == 1) {\n      int u, x;\n\
-    \      rd(u, x);\n      lct.vertex_set(vs[u], lct.vertex_get(vs[u]) + x);\n  \
-    \  } else {\n      int u, v;\n      rd(u, v);\n      T fold = lct.fold(vs[u],\
-    \ vs[v]);\n      wtn(fold);\n    }\n  }\n}\n"
+    \ */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\n\ntemplate <typename T, T (*f)(T,\
+    \ T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n    : LinkCutBase<SplayTreeForLCSubtree<T,\
+    \ f, finv>> {\n  using base = LinkCutBase<SplayTreeForLCSubtree<T, f, finv>>;\n\
+    \  using Node = typename base::Node;\n  using Ptr = typename base::Ptr;\n\n  Ptr\
+    \ expose(Ptr t) override {\n    Ptr rp = nullptr;\n    for (Ptr cur = t; cur;\
+    \ cur = cur->p) {\n      this->splay(cur);\n      if (cur->r) cur->add(cur->r);\n\
+    \      cur->r = rp;\n      if (cur->r) cur->erase(cur->r);\n      this->update(cur);\n\
+    \      rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  void link(Ptr\
+    \ u, Ptr v) override {\n    this->evert(u);\n    this->expose(v);\n    u->p =\
+    \ v;\n    v->add(u);\n  }\n\n  void toggle(Ptr t) override {\n    swap(t->l, t->r);\n\
+    \    t->rev ^= true;\n  }\n\n  Ptr update(Ptr t) override {\n    if (!t) return\
+    \ t;\n    t->cnt = 1 + this->count(t->l) + this->count(t->r);\n    t->merge(t->l,\
+    \ t->r);\n    return t;\n  }\n\n  void vertex_set(Ptr t, const T& key) override\
+    \ {\n    this->expose(t);\n    t->key = key;\n    this->update(t);\n  }\n\n  T\
+    \ subtree(Ptr t) {\n    this->expose(t);\n    return f(t->key, t->sub);\n  }\n\
+    };\n\n/**\n * @brief \u90E8\u5206\u6728\u30AF\u30A8\u30EALink Cut Tree\n */\n\
+    #line 6 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nusing T = ll;\nT f(ll a, ll b) { return a + b; }\n\
+    T finv(ll a, ll b) { return a - b; }\n\n#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace\
+    \ fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint\
+    \ pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
+    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
+    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
+    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load()\
+    \ {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf +\
+    \ pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n\
+    \  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c\
+    \ = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil +\
+    \ 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
+    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
+    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
+    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
+    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
+    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
+    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
+    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
+    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
+    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
+    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
+    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
+    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
+    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
+    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 14 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp\"\
+    \nvoid Nyaan::solve() {\n  using LCT = LinkCutTreeSubtreeQuery<T, f, finv>;\n\
+    \  LCT lct;\n\n  int N, Q;\n  rd(N, Q);\n\n  vector<LCT::Ptr> vs(N);\n  rep(i,\
+    \ N) {\n    int a;\n    rd(a);\n    vs[i] = lct.my_new(a);\n  }\n\n  for (int\
+    \ i = 1; i < N; i++) {\n    int a, b;\n    rd(a, b);\n    lct.link(vs[a], vs[b]);\n\
+    \  }\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd == 0) {\n     \
+    \ int u, v, w, x;\n      rd(u, v, w, x);\n      lct.cut(vs[u], vs[v]);\n     \
+    \ lct.link(vs[w], vs[x]);\n    } else if (cmd == 1) {\n      int u, x;\n     \
+    \ rd(u, x);\n      lct.vertex_set(vs[u], lct.vertex_get(vs[u]) + x);\n    } else\
+    \ {\n      int v, p;\n      rd(v, p);\n      lct.evert(vs[p]);\n      wtn(lct.subtree(vs[v]));\n\
+    \    }\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
+    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../lct/link-cut-tree-subtree.hpp\"\
+    \n\nusing namespace Nyaan;\n\nusing T = ll;\nT f(ll a, ll b) { return a + b; }\n\
+    T finv(ll a, ll b) { return a - b; }\n\n#include \"../../misc/fastio.hpp\"\nvoid\
+    \ Nyaan::solve() {\n  using LCT = LinkCutTreeSubtreeQuery<T, f, finv>;\n  LCT\
+    \ lct;\n\n  int N, Q;\n  rd(N, Q);\n\n  vector<LCT::Ptr> vs(N);\n  rep(i, N) {\n\
+    \    int a;\n    rd(a);\n    vs[i] = lct.my_new(a);\n  }\n\n  for (int i = 1;\
+    \ i < N; i++) {\n    int a, b;\n    rd(a, b);\n    lct.link(vs[a], vs[b]);\n \
+    \ }\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd == 0) {\n      int\
+    \ u, v, w, x;\n      rd(u, v, w, x);\n      lct.cut(vs[u], vs[v]);\n      lct.link(vs[w],\
+    \ vs[x]);\n    } else if (cmd == 1) {\n      int u, x;\n      rd(u, x);\n    \
+    \  lct.vertex_set(vs[u], lct.vertex_get(vs[u]) + x);\n    } else {\n      int\
+    \ v, p;\n      rd(v, p);\n      lct.evert(vs[p]);\n      wtn(lct.subtree(vs[v]));\n\
+    \    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -401,24 +363,21 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - modint/montgomery-modint.hpp
-  - math/affine-transformation.hpp
-  - misc/fastio.hpp
-  - lct/link-cut-tree.hpp
-  - lct/splay-reversible.hpp
+  - lct/link-cut-tree-subtree.hpp
   - lct/reversible-bbst-base.hpp
   - lct/splay-base.hpp
   - lct/link-cut-base.hpp
+  - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
   requiredBy: []
   timestamp: '2020-12-17 20:54:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
 ---

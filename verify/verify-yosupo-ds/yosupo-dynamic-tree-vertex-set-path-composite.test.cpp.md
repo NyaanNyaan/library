@@ -280,10 +280,10 @@ data:
     \n\n#line 2 \"lct/reversible-bbst-base.hpp\"\n\ntemplate <typename Tree, typename\
     \ Node, typename T, T (*f)(T, T), T (*ts)(T)>\nstruct ReversibleBBST : Tree {\n\
     \  using Tree::merge;\n  using Tree::split;\n  using typename Tree::Ptr;\n\n \
-    \ ReversibleBBST() = default;\n\n  void toggle(Ptr t) {\n    swap(t->l, t->r);\n\
-    \    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n  T fold(Ptr &t, int a,\
-    \ int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b - a);\n\
-    \    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
+    \ ReversibleBBST() = default;\n\n  virtual void toggle(Ptr t) {\n    swap(t->l,\
+    \ t->r);\n    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n  T fold(Ptr &t,\
+    \ int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b -\
+    \ a);\n    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
     \    return ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n    auto x =\
     \ split(t, a);\n    auto y = split(x.second, b - a);\n    toggle(y.first);\n \
     \   t = merge(x.first, merge(y.first, y.second));\n  }\n\n  Ptr update(Ptr t)\
@@ -346,26 +346,27 @@ data:
     };\n\n/**\n * @brief \u53CD\u8EE2\u53EF\u80FDSplay Tree\n */\n#line 4 \"lct/link-cut-tree.hpp\"\
     \n\n//\n#line 2 \"lct/link-cut-base.hpp\"\n\ntemplate <typename Splay>\nstruct\
     \ LinkCutBase : Splay {\n  using Node = typename Splay::Node;\n  using Ptr = Node*;\n\
-    \n  Ptr expose(Ptr t) {\n    Ptr rp = nullptr;\n    for (Ptr cur = t; cur; cur\
-    \ = cur->p) {\n      this->splay(cur);\n      cur->r = rp;\n      this->update(cur);\n\
-    \      rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  void link(Ptr\
-    \ u, Ptr v) {\n    evert(u);\n    expose(v);\n    u->p = v;\n  }\n\n  void cut(Ptr\
-    \ u, Ptr v) {\n    evert(u);\n    expose(v);\n    assert(v->l == u);\n    v->l\
-    \ = u->p = nullptr;\n    this->update(v);\n  }\n\n  void evert(Ptr t) {\n    expose(t);\n\
-    \    this->toggle(t);\n    this->push(t);\n  }\n\n  Ptr lca(Ptr u, Ptr v) {\n\
-    \    if (get_root(u) != get_root(v)) return nullptr;\n    expose(u);\n    return\
-    \ expose(v);\n  }\n\n  Ptr get_kth(Ptr x, int k) {\n    expose(x);\n    while\
-    \ (x) {\n      this->push(x);\n      if (x->r && x->r->sz > k) {\n        x =\
-    \ x->r;\n      } else {\n        if (x->r) k -= x->r->sz;\n        if (k == 0)\
-    \ return x;\n        k -= 1;\n        x = x->l;\n      }\n    }\n    return nullptr;\n\
-    \  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n    while (x->l) this->push(x),\
-    \ x = x->l;\n    return x;\n  }\n\n  void vertex_set(Ptr t, const decltype(Node::key)&\
-    \ key) {\n    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n\
-    \  decltype(Node::key) vertex_get(Ptr t) { return t->key; }\n\n  decltype(Node::key)\
-    \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
-    };\n\n/**\n * @brief Link Cut Tree(base)\n */\n#line 7 \"lct/link-cut-tree.hpp\"\
-    \n\ntemplate <typename T, T (*f)(T, T), T (*ts)(T)>\nstruct LinkCutTree : LinkCutBase<ReversibleSplayTree<T,\
-    \ f, ts>> {};\n\n/**\n * @brief Link Cut Tree\n */\n#line 16 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
+    \n  virtual Ptr expose(Ptr t) {\n    Ptr rp = nullptr;\n    for (Ptr cur = t;\
+    \ cur; cur = cur->p) {\n      this->splay(cur);\n      cur->r = rp;\n      this->update(cur);\n\
+    \      rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  virtual\
+    \ void link(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    u->p = v;\n  }\n\
+    \n  void cut(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    assert(v->l ==\
+    \ u);\n    v->l = u->p = nullptr;\n    this->update(v);\n  }\n\n  void evert(Ptr\
+    \ t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n  }\n\n  Ptr\
+    \ lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return nullptr;\n \
+    \   expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x, int k) {\n\
+    \    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r && x->r->sz\
+    \ > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -= x->r->sz;\n\
+    \        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n      }\n\
+    \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
+    \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
+    \ vertex_set(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n \
+    \   t->key = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) vertex_get(Ptr\
+    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
+    \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link Cut Tree(base)\n\
+    \ */\n#line 7 \"lct/link-cut-tree.hpp\"\n\ntemplate <typename T, T (*f)(T, T),\
+    \ T (*ts)(T)>\nstruct LinkCutTree : LinkCutBase<ReversibleSplayTree<T, f, ts>>\
+    \ {};\n\n/**\n * @brief Link Cut Tree\n */\n#line 16 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
     \n//\nusing Af = Affine<mint>;\nusing T = pair<Af, Af>;\nT f(T a, T b) { return\
     \ T(a.first * b.first, b.second * a.second); }\nT ts(T a) { return T(a.second,\
     \ a.first); }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int N, Q;\n\
@@ -415,7 +416,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2020-12-17 15:56:02+09:00'
+  timestamp: '2020-12-17 20:54:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp

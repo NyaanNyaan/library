@@ -27,10 +27,10 @@ data:
   bundledCode: "#line 2 \"lct/splay-reversible.hpp\"\n\n#line 2 \"lct/reversible-bbst-base.hpp\"\
     \n\ntemplate <typename Tree, typename Node, typename T, T (*f)(T, T), T (*ts)(T)>\n\
     struct ReversibleBBST : Tree {\n  using Tree::merge;\n  using Tree::split;\n \
-    \ using typename Tree::Ptr;\n\n  ReversibleBBST() = default;\n\n  void toggle(Ptr\
-    \ t) {\n    swap(t->l, t->r);\n    t->sum = ts(t->sum);\n    t->rev ^= true;\n\
-    \  }\n\n  T fold(Ptr &t, int a, int b) {\n    auto x = split(t, a);\n    auto\
-    \ y = split(x.second, b - a);\n    auto ret = sum(y.first);\n    t = merge(x.first,\
+    \ using typename Tree::Ptr;\n\n  ReversibleBBST() = default;\n\n  virtual void\
+    \ toggle(Ptr t) {\n    swap(t->l, t->r);\n    t->sum = ts(t->sum);\n    t->rev\
+    \ ^= true;\n  }\n\n  T fold(Ptr &t, int a, int b) {\n    auto x = split(t, a);\n\
+    \    auto y = split(x.second, b - a);\n    auto ret = sum(y.first);\n    t = merge(x.first,\
     \ merge(y.first, y.second));\n    return ret;\n  }\n\n  void reverse(Ptr &t, int\
     \ a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b - a);\n\
     \    toggle(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n  }\n\
@@ -106,7 +106,7 @@ data:
   path: lct/splay-reversible.hpp
   requiredBy:
   - lct/link-cut-tree.hpp
-  timestamp: '2020-12-17 12:47:44+09:00'
+  timestamp: '2020-12-17 20:54:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
