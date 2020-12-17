@@ -51,7 +51,7 @@ data:
     links:
     - https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite
   bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite\"\
+    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite\"\
     \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
@@ -197,7 +197,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
+    \ 5 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
     \n//\nusing namespace Nyaan;\n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\
     \ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
     \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
@@ -231,7 +231,7 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 8 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
+    \ { return mod; }\n};\n#line 9 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\n#line\
     \ 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\nstruct Affine\
     \ {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr Affine(mint\
@@ -272,25 +272,26 @@ data:
     inline void wt(Head head, Tail... tail) {\n  wt(head);\n  wt(tail...);\n}\ntemplate\
     \ <typename T>\ninline void wtn(T x) {\n  wt(x, '\\n');\n}\n\nstruct Dummy {\n\
     \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 12 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
+    using fastio::wt;\nusing fastio::wtn;\n#line 13 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
     \n//\n#line 2 \"lct/link-cut-base.hpp\"\n\ntemplate <typename Splay>\nstruct LinkCutTree\
-    \ : Splay {\n  using Node = typename Splay::Node;\n  using Ptr = Node *;\n\n \
-    \ Ptr expose(Ptr t) {\n    Ptr rp = nullptr;\n    for (Ptr cur = t; cur; cur =\
-    \ cur->p) {\n      this->splay(cur);\n      cur->r = rp;\n      this->update(cur);\n\
-    \      rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  void link(Ptr\
-    \ child, Ptr parent) {\n    expose(child);\n    expose(parent);\n    child->p\
-    \ = parent;\n    parent->r = child;\n    this->update(parent);\n  }\n\n  void\
-    \ cut(Ptr child) {\n    expose(child);\n    Ptr parent = child->l;\n    child->l\
-    \ = nullptr;\n    parent->p = nullptr;\n    this->update(child);\n  }\n\n  void\
-    \ evert(Ptr t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n \
-    \ }\n\n  Ptr lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return nullptr;\n\
-    \    expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x, int k) {\n\
-    \    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r && x->r->sz\
-    \ > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -= x->r->sz;\n\
-    \        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n      }\n\
-    \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
-    \    while (x->l) {\n      this->push(x);\n      x = x->l;\n    }\n    return\
-    \ x;\n  }\n};\n\n/**\n * @brief Link Cut Tree\n */\n#line 2 \"lct/splay-reversible.hpp\"\
+    \ : Splay {\n  using Node = typename Splay::Node;\n  using Ptr = Node*;\n\n  Ptr\
+    \ expose(Ptr t) {\n    Ptr rp = nullptr;\n    for (Ptr cur = t; cur; cur = cur->p)\
+    \ {\n      this->splay(cur);\n      cur->r = rp;\n      this->update(cur);\n \
+    \     rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  void link(Ptr\
+    \ u, Ptr v) {\n    evert(u);\n    expose(v);\n    u->p = v;\n  }\n\n  void cut(Ptr\
+    \ u, Ptr v) {\n    evert(u);\n    expose(v);\n    assert(v->l == u);\n    v->l\
+    \ = u->p = nullptr;\n    this->update(v);\n  }\n\n  void evert(Ptr t) {\n    expose(t);\n\
+    \    this->toggle(t);\n    this->push(t);\n  }\n\n  Ptr lca(Ptr u, Ptr v) {\n\
+    \    if (get_root(u) != get_root(v)) return nullptr;\n    expose(u);\n    return\
+    \ expose(v);\n  }\n\n  Ptr get_kth(Ptr x, int k) {\n    expose(x);\n    while\
+    \ (x) {\n      this->push(x);\n      if (x->r && x->r->sz > k) {\n        x =\
+    \ x->r;\n      } else {\n        if (x->r) k -= x->r->sz;\n        if (k == 0)\
+    \ return x;\n        k -= 1;\n        x = x->l;\n      }\n    }\n    return nullptr;\n\
+    \  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n    while (x->l) this->push(x),\
+    \ x = x->l;\n    return x;\n  }\n\n  void vertex_set(Ptr t, const decltype(Node::key)&\
+    \ key) {\n    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n\
+    \  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n \
+    \   return v->sum;\n  }\n};\n\n/**\n * @brief Link Cut Tree\n */\n#line 2 \"lct/splay-reversible.hpp\"\
     \n\n#line 2 \"lct/reversible-bbst-base.hpp\"\n\ntemplate <typename Tree, typename\
     \ Node, typename T, T (*f)(T, T), T (*ts)(T)>\nstruct ReversibleBBST : Tree {\n\
     \  using Tree::merge;\n  using Tree::split;\n  using typename Tree::Ptr;\n\n \
@@ -357,22 +358,21 @@ data:
     };\n\ntemplate <typename T, T (*f)(T, T), T (*ts)(T)>\nstruct ReversibleSplayTree\n\
     \    : ReversibleBBST<SplayTreeBase<ReversibleSplayTreeNode<T>>,\n           \
     \          ReversibleSplayTreeNode<T>, T, f, ts> {\n  using Node = ReversibleSplayTreeNode<T>;\n\
-    };\n\n/**\n * @brief \u53CD\u8EE2\u53EF\u80FDSplay Tree\n */\n#line 15 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
+    };\n\n/**\n * @brief \u53CD\u8EE2\u53EF\u80FDSplay Tree\n */\n#line 16 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp\"\
     \n//\nusing Af = Affine<mint>;\nusing T = pair<Af, Af>;\nT f(T a, T b) { return\
     \ T(a.first * b.first, b.second * a.second); }\nT ts(T a) { return T(a.second,\
     \ a.first); }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int N, Q;\n\
     \  rd(N, Q);\n\n  using Splay = ReversibleSplayTree<T, f, ts>;\n  using LCT =\
     \ LinkCutTree<Splay>;\n  LCT lct;\n\n  vector<LCT::Ptr> vs(N);\n  rep(i, N) {\n\
     \    int a, b;\n    rd(a, b);\n    vs[i] = lct.my_new(T(Af(a, b), Af(a, b)));\n\
-    \  }\n\n  for (int i = 1; i < N; i++) {\n    int a, b;\n    rd(a, b);\n    lct.evert(vs[a]);\n\
-    \    lct.link(vs[a], vs[b]);\n  }\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n\
-    \    if (cmd == 0) {\n      int U, V, W, X;\n      rd(U, V, W, X);\n      lct.evert(vs[U]);\n\
-    \      lct.cut(vs[V]);\n      lct.evert(vs[W]);\n      lct.link(vs[W], vs[X]);\n\
-    \    } else if (cmd == 1) {\n      int P, a, b;\n      rd(P, a, b);\n      lct.expose(vs[P]);\n\
-    \      vs[P]->key = T(Af(a, b), Af(a, b));\n      lct.update(vs[P]);\n    } else\
-    \ {\n      int U, V, X;\n      rd(U, V, X);\n      lct.evert(vs[U]);\n      lct.expose(vs[V]);\n\
-    \      auto ret = vs[V]->sum.first;\n      wtn(ret(X).get());\n    }\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite\"\
+    \  }\n\n  for (int i = 1; i < N; i++) {\n    int a, b;\n    rd(a, b);\n    lct.link(vs[a],\
+    \ vs[b]);\n  }\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd == 0)\
+    \ {\n      int U, V, W, X;\n      rd(U, V, W, X);\n      lct.cut(vs[U], vs[V]);\n\
+    \      lct.link(vs[W], vs[X]);\n    } else if (cmd == 1) {\n      int P, a, b;\n\
+    \      rd(P, a, b);\n      lct.vertex_set(vs[P], T(Af(a, b), Af(a, b)));\n   \
+    \ } else {\n      int U, V, X;\n      rd(U, V, X);\n      T fold = lct.fold(vs[U],\
+    \ vs[V]);\n      wtn(fold.first(X).get());\n    }\n  }\n}\n"
+  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite\"\
     \n\n#include \"../../template/template.hpp\"\n//\nusing namespace Nyaan;\n\n#include\
     \ \"../../modint/montgomery-modint.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
     using vm = vector<mint>;\n#include \"../../math/affine-transformation.hpp\"\n\
@@ -384,14 +384,13 @@ data:
     \ f, ts>;\n  using LCT = LinkCutTree<Splay>;\n  LCT lct;\n\n  vector<LCT::Ptr>\
     \ vs(N);\n  rep(i, N) {\n    int a, b;\n    rd(a, b);\n    vs[i] = lct.my_new(T(Af(a,\
     \ b), Af(a, b)));\n  }\n\n  for (int i = 1; i < N; i++) {\n    int a, b;\n   \
-    \ rd(a, b);\n    lct.evert(vs[a]);\n    lct.link(vs[a], vs[b]);\n  }\n  while\
-    \ (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd == 0) {\n      int U, V, W,\
-    \ X;\n      rd(U, V, W, X);\n      lct.evert(vs[U]);\n      lct.cut(vs[V]);\n\
-    \      lct.evert(vs[W]);\n      lct.link(vs[W], vs[X]);\n    } else if (cmd ==\
-    \ 1) {\n      int P, a, b;\n      rd(P, a, b);\n      lct.expose(vs[P]);\n   \
-    \   vs[P]->key = T(Af(a, b), Af(a, b));\n      lct.update(vs[P]);\n    } else\
-    \ {\n      int U, V, X;\n      rd(U, V, X);\n      lct.evert(vs[U]);\n      lct.expose(vs[V]);\n\
-    \      auto ret = vs[V]->sum.first;\n      wtn(ret(X).get());\n    }\n  }\n}\n"
+    \ rd(a, b);\n    lct.link(vs[a], vs[b]);\n  }\n  while (Q--) {\n    int cmd;\n\
+    \    rd(cmd);\n    if (cmd == 0) {\n      int U, V, W, X;\n      rd(U, V, W, X);\n\
+    \      lct.cut(vs[U], vs[V]);\n      lct.link(vs[W], vs[X]);\n    } else if (cmd\
+    \ == 1) {\n      int P, a, b;\n      rd(P, a, b);\n      lct.vertex_set(vs[P],\
+    \ T(Af(a, b), Af(a, b)));\n    } else {\n      int U, V, X;\n      rd(U, V, X);\n\
+    \      T fold = lct.fold(vs[U], vs[V]);\n      wtn(fold.first(X).get());\n   \
+    \ }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -409,7 +408,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2020-12-17 12:57:04+09:00'
+  timestamp: '2020-12-17 14:25:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
