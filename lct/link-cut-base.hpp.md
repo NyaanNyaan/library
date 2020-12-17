@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
   _pathExtension: hpp
@@ -28,8 +31,9 @@ data:
     \  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n    while (x->l) this->push(x),\
     \ x = x->l;\n    return x;\n  }\n\n  void vertex_set(Ptr t, const decltype(Node::key)&\
     \ key) {\n    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n\
-    \  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n \
-    \   return v->sum;\n  }\n};\n\n/**\n * @brief Link Cut Tree\n */\n"
+    \  decltype(Node::key) vertex_get(Ptr t) {\n    return t->key;\n  }\n\n  decltype(Node::key)\
+    \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
+    };\n\n/**\n * @brief Link Cut Tree\n */\n"
   code: "#pragma once\n\ntemplate <typename Splay>\nstruct LinkCutTree : Splay {\n\
     \  using Node = typename Splay::Node;\n  using Ptr = Node*;\n\n  Ptr expose(Ptr\
     \ t) {\n    Ptr rp = nullptr;\n    for (Ptr cur = t; cur; cur = cur->p) {\n  \
@@ -47,15 +51,17 @@ data:
     \  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n    while (x->l) this->push(x),\
     \ x = x->l;\n    return x;\n  }\n\n  void vertex_set(Ptr t, const decltype(Node::key)&\
     \ key) {\n    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n\
-    \  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n \
-    \   return v->sum;\n  }\n};\n\n/**\n * @brief Link Cut Tree\n */\n"
+    \  decltype(Node::key) vertex_get(Ptr t) {\n    return t->key;\n  }\n\n  decltype(Node::key)\
+    \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
+    };\n\n/**\n * @brief Link Cut Tree\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: lct/link-cut-base.hpp
   requiredBy: []
-  timestamp: '2020-12-17 14:25:13+09:00'
+  timestamp: '2020-12-17 14:48:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
 documentation_of: lct/link-cut-base.hpp
 layout: document
