@@ -1,4 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite"
+#define PROBLEM \
+  "https://judge.yosupo.jp/problem/dynamic_tree_vertex_set_path_composite"
 
 #include "../../template/template.hpp"
 //
@@ -37,7 +38,6 @@ void Nyaan::solve() {
   for (int i = 1; i < N; i++) {
     int a, b;
     rd(a, b);
-    lct.evert(vs[a]);
     lct.link(vs[a], vs[b]);
   }
   while (Q--) {
@@ -46,23 +46,17 @@ void Nyaan::solve() {
     if (cmd == 0) {
       int U, V, W, X;
       rd(U, V, W, X);
-      lct.evert(vs[U]);
-      lct.cut(vs[V]);
-      lct.evert(vs[W]);
+      lct.cut(vs[U], vs[V]);
       lct.link(vs[W], vs[X]);
     } else if (cmd == 1) {
       int P, a, b;
       rd(P, a, b);
-      lct.expose(vs[P]);
-      vs[P]->key = T(Af(a, b), Af(a, b));
-      lct.update(vs[P]);
+      lct.vertex_set(vs[P], T(Af(a, b), Af(a, b)));
     } else {
       int U, V, X;
       rd(U, V, X);
-      lct.evert(vs[U]);
-      lct.expose(vs[V]);
-      auto ret = vs[V]->sum.first;
-      wtn(ret(X).get());
+      T fold = lct.fold(vs[U], vs[V]);
+      wtn(fold.first(X).get());
     }
   }
 }

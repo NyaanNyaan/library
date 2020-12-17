@@ -3,7 +3,7 @@
 template <typename Splay>
 struct LinkCutTree : Splay {
   using Node = typename Splay::Node;
-  using Ptr = Node *;
+  using Ptr = Node*;
 
   Ptr expose(Ptr t) {
     Ptr rp = nullptr;
@@ -17,20 +17,18 @@ struct LinkCutTree : Splay {
     return rp;
   }
 
-  void link(Ptr child, Ptr parent) {
-    expose(child);
-    expose(parent);
-    child->p = parent;
-    parent->r = child;
-    this->update(parent);
+  void link(Ptr u, Ptr v) {
+    evert(u);
+    expose(v);
+    u->p = v;
   }
 
-  void cut(Ptr child) {
-    expose(child);
-    Ptr parent = child->l;
-    child->l = nullptr;
-    parent->p = nullptr;
-    this->update(child);
+  void cut(Ptr u, Ptr v) {
+    evert(u);
+    expose(v);
+    assert(v->l == u);
+    v->l = u->p = nullptr;
+    this->update(v);
   }
 
   void evert(Ptr t) {
@@ -63,11 +61,20 @@ struct LinkCutTree : Splay {
 
   Ptr get_root(Ptr x) {
     expose(x);
-    while (x->l) {
-      this->push(x);
-      x = x->l;
-    }
+    while (x->l) this->push(x), x = x->l;
     return x;
+  }
+
+  void vertex_set(Ptr t, const decltype(Node::key)& key) {
+    this->splay(t);
+    t->key = key;
+    this->update(t);
+  }
+
+  decltype(Node::key) fold(Ptr u, Ptr v) {
+    evert(u);
+    expose(v);
+    return v->sum;
   }
 };
 
