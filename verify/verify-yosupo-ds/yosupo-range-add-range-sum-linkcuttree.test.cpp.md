@@ -374,18 +374,18 @@ data:
     \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
     };\n\n/**\n * @brief Link Cut Tree(base)\n */\n#line 7 \"lct/link-cut-tree-lazy.hpp\"\
     \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ts)(T)>\nstruct LinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
+    \          T (*ts)(T)>\nstruct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
     \ E, f, g, h, ts>> {\n  using base = LinkCutBase<LazyReversibleSplayTree<T, E,\
     \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void apply(Ptr u, Ptr\
     \ v, const E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v,\
-    \ e);\n  }\n  \n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink Cut Tree\n */\n\
+    \ e);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink Cut Tree\n */\n\
     #line 14 \"verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp\"\
     \n//\n\nusing T = pair<mint, mint>;\nusing E = Affine<mint>;\nT f(T a, T b) {\
     \ return T(a.first + b.first, a.second + b.second); }\nT g(T a, E b) { return\
     \ T(a.first * b.a + a.second * b.b, a.second); }\nE h(E a, E b) { return a * b;\
     \ };\nT ts(T a) { return a; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n\
-    \  int N, Q;\n  rd(N, Q);\n\n  using LCT = LinkCutTree<T, E, f, g, h, ts>;\n \
-    \ LCT lct;\n\n  vector<LCT::Ptr> vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n\
+    \  int N, Q;\n  rd(N, Q);\n\n  using LCT = LazyLinkCutTree<T, E, f, g, h, ts>;\n\
+    \  LCT lct;\n\n  vector<LCT::Ptr> vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n\
     \    vs[i] = lct.my_new(T(a, 1));\n  }\n\n  for (int i = 1; i < N; i++) lct.link(vs[i\
     \ - 1], vs[i]);\n\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd ==\
     \ 0) {\n      int l, r, b, c;\n      rd(l, r, b, c);\n      lct.apply(vs[l], vs[r\
@@ -400,8 +400,8 @@ data:
     \ return T(a.first + b.first, a.second + b.second); }\nT g(T a, E b) { return\
     \ T(a.first * b.a + a.second * b.b, a.second); }\nE h(E a, E b) { return a * b;\
     \ };\nT ts(T a) { return a; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n\
-    \  int N, Q;\n  rd(N, Q);\n\n  using LCT = LinkCutTree<T, E, f, g, h, ts>;\n \
-    \ LCT lct;\n\n  vector<LCT::Ptr> vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n\
+    \  int N, Q;\n  rd(N, Q);\n\n  using LCT = LazyLinkCutTree<T, E, f, g, h, ts>;\n\
+    \  LCT lct;\n\n  vector<LCT::Ptr> vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n\
     \    vs[i] = lct.my_new(T(a, 1));\n  }\n\n  for (int i = 1; i < N; i++) lct.link(vs[i\
     \ - 1], vs[i]);\n\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd ==\
     \ 0) {\n      int l, r, b, c;\n      rd(l, r, b, c);\n      lct.apply(vs[l], vs[r\
@@ -425,7 +425,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   requiredBy: []
-  timestamp: '2020-12-17 15:56:02+09:00'
+  timestamp: '2020-12-17 16:59:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp

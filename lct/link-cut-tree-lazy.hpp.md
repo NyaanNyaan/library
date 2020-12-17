@@ -122,18 +122,18 @@ data:
     \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
     };\n\n/**\n * @brief Link Cut Tree(base)\n */\n#line 7 \"lct/link-cut-tree-lazy.hpp\"\
     \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ts)(T)>\nstruct LinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
+    \          T (*ts)(T)>\nstruct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
     \ E, f, g, h, ts>> {\n  using base = LinkCutBase<LazyReversibleSplayTree<T, E,\
     \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void apply(Ptr u, Ptr\
     \ v, const E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v,\
-    \ e);\n  }\n  \n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink Cut Tree\n */\n"
+    \ e);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink Cut Tree\n */\n"
   code: "#pragma once\n\n#include \"splay-lazy-reversible.hpp\"\n\n//\n#include \"\
     link-cut-base.hpp\"\n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T,\
-    \ E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct LinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
+    \ E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
     \ E, f, g, h, ts>> {\n  using base = LinkCutBase<LazyReversibleSplayTree<T, E,\
     \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void apply(Ptr u, Ptr\
     \ v, const E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v,\
-    \ e);\n  }\n  \n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink Cut Tree\n */\n"
+    \ e);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink Cut Tree\n */\n"
   dependsOn:
   - lct/splay-lazy-reversible.hpp
   - lct/lazy-reversible-bbst-base.hpp
@@ -142,7 +142,7 @@ data:
   isVerificationFile: false
   path: lct/link-cut-tree-lazy.hpp
   requiredBy: []
-  timestamp: '2020-12-17 15:56:02+09:00'
+  timestamp: '2020-12-17 16:59:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
