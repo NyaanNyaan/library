@@ -1,30 +1,32 @@
-#pragma once
+#ifndef ATCODER_SCC_HPP
+#define ATCODER_SCC_HPP 1
 
 #include <algorithm>
 #include <cassert>
 #include <vector>
 
-#include "./internal_scc.hpp"
+#include "internal_scc"
 
 namespace atcoder {
 
 struct scc_graph {
- private:
-  internal::scc_graph internal;
+  public:
+    scc_graph() : internal(0) {}
+    scc_graph(int n) : internal(n) {}
 
- public:
-  scc_graph() : internal(0) {}
-  scc_graph(int n) : internal(n) {}
+    void add_edge(int from, int to) {
+        int n = internal.num_vertices();
+        assert(0 <= from && from < n);
+        assert(0 <= to && to < n);
+        internal.add_edge(from, to);
+    }
 
-  void add_edge(int from, int to) {
-    int n = internal.num_vertices();
-    assert(0 <= from && from < n);
-    assert(0 <= to && to < n);
-    internal.add_edge(from, to);
-  }
+    std::vector<std::vector<int>> scc() { return internal.scc(); }
 
-  std::vector<std::vector<int>> scc() { return internal.scc(); }
+  private:
+    internal::scc_graph internal;
 };
 
 }  // namespace atcoder
-using namespace atcoder;
+
+#endif  // ATCODER_SCC_HPP
