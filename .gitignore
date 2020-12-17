@@ -6,6 +6,7 @@ a.exe
 a.py
 arbitrary-length-test.cpp
 b.cpp
+b.py
 buf.cpp
 docs/modint/montgomery-modint.md
 input

@@ -7,7 +7,7 @@
 
 template <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),
           T (*ts)(T)>
-struct LinkCutTree : LinkCutBase<LazyReversibleSplayTree<T, E, f, g, h, ts>> {
+struct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T, E, f, g, h, ts>> {
   using base = LinkCutBase<LazyReversibleSplayTree<T, E, f, g, h, ts>>;
   using Ptr = typename base::Ptr;
 
@@ -16,7 +16,6 @@ struct LinkCutTree : LinkCutBase<LazyReversibleSplayTree<T, E, f, g, h, ts>> {
     this->expose(v);
     this->propagate(v, e);
   }
-  
 };
 
 /**

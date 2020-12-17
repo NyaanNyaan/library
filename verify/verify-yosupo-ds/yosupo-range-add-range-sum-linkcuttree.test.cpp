@@ -25,7 +25,7 @@ void Nyaan::solve() {
   int N, Q;
   rd(N, Q);
 
-  using LCT = LinkCutTree<T, E, f, g, h, ts>;
+  using LCT = LazyLinkCutTree<T, E, f, g, h, ts>;
   LCT lct;
 
   vector<LCT::Ptr> vs(N);
