@@ -7,22 +7,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -36,106 +36,117 @@ data:
     - https://judge.yosupo.jp/problem/bipartitematching
   bundledCode: "#line 1 \"verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\n\n#line\
-    \ 2 \"atcoder/maxflow.hpp\"\n#include <algorithm>\n#include <cassert>\n#include\
-    \ <limits>\n#include <queue>\n#include <vector>\n\n#line 3 \"atcoder/internal_queue.hpp\"\
-    \n\nnamespace atcoder {\n\nnamespace internal {\n\ntemplate <class T>\nstruct\
-    \ simple_queue {\n  std::vector<T> payload;\n  int pos = 0;\n  void reserve(int\
-    \ n) { payload.reserve(n); }\n  int size() const { return int(payload.size())\
-    \ - pos; }\n  bool empty() const { return pos == int(payload.size()); }\n  void\
-    \ push(const T& t) { payload.push_back(t); }\n  T& front() { return payload[pos];\
-    \ }\n  void clear() {\n    payload.clear();\n    pos = 0;\n  }\n  void pop() {\
-    \ pos++; }\n};\n\n}  // namespace internal\n\n}  // namespace atcoder\n#line 9\
-    \ \"atcoder/maxflow.hpp\"\n\nnamespace atcoder {\n\ntemplate <class Cap>\nstruct\
-    \ mf_graph {\n public:\n  mf_graph() : _n(0) {}\n  mf_graph(int n) : _n(n), g(n)\
-    \ {}\n\n  virtual int add_edge(int from, int to, Cap cap) {\n    assert(0 <= from\
-    \ && from < _n);\n    assert(0 <= to && to < _n);\n    assert(0 <= cap);\n   \
-    \ int m = int(pos.size());\n    pos.push_back({from, int(g[from].size())});\n\
-    \    g[from].push_back(_edge{to, int(g[to].size()), cap});\n    g[to].push_back(_edge{from,\
-    \ int(g[from].size()) - 1, 0});\n    return m;\n  }\n\n  struct edge {\n    int\
-    \ from, to;\n    Cap cap, flow;\n  };\n\n  edge get_edge(int i) {\n    int m =\
-    \ int(pos.size());\n    assert(0 <= i && i < m);\n    auto _e = g[pos[i].first][pos[i].second];\n\
-    \    auto _re = g[_e.to][_e.rev];\n    return edge{pos[i].first, _e.to, _e.cap\
-    \ + _re.cap, _re.cap};\n  }\n\n  std::vector<edge> edges() {\n    int m = int(pos.size());\n\
-    \    std::vector<edge> result;\n    for (int i = 0; i < m; i++) {\n      result.push_back(get_edge(i));\n\
-    \    }\n    return result;\n  }\n\n  void change_edge(int i, Cap new_cap, Cap\
-    \ new_flow) {\n    int m = int(pos.size());\n    assert(0 <= i && i < m);\n  \
-    \  assert(0 <= new_flow && new_flow <= new_cap);\n    auto& _e = g[pos[i].first][pos[i].second];\n\
-    \    auto& _re = g[_e.to][_e.rev];\n    _e.cap = new_cap - new_flow;\n    _re.cap\
-    \ = new_flow;\n  }\n\n  Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max());\
-    \ }\n  Cap flow(int s, int t, Cap flow_limit) {\n    assert(0 <= s && s < _n);\n\
-    \    assert(0 <= t && t < _n);\n\n    std::vector<int> level(_n), iter(_n);\n\
-    \    internal::simple_queue<int> que;\n\n    auto bfs = [&]() {\n      std::fill(level.begin(),\
-    \ level.end(), -1);\n      level[s] = 0;\n      que.clear();\n      que.push(s);\n\
-    \      while (!que.empty()) {\n        int v = que.front();\n        que.pop();\n\
-    \        for (auto &e : g[v]) {\n          if (e.cap == 0 || level[e.to] >= 0)\
-    \ continue;\n          level[e.to] = level[v] + 1;\n          if (e.to == t) return;\n\
-    \          que.push(e.to);\n        }\n      }\n    };\n    auto dfs = [&](auto\
-    \ self, int v, Cap up) {\n      if (v == s) return up;\n      Cap res = 0;\n \
-    \     int level_v = level[v];\n      for (int& i = iter[v]; i < int(g[v].size());\
-    \ i++) {\n        _edge& e = g[v][i];\n        if (level_v <= level[e.to] || g[e.to][e.rev].cap\
-    \ == 0) continue;\n        Cap d = self(self, e.to, std::min(up - res, g[e.to][e.rev].cap));\n\
-    \        if (d <= 0) continue;\n        g[v][i].cap += d;\n        g[e.to][e.rev].cap\
-    \ -= d;\n        res += d;\n        if (res == up) break;\n      }\n      return\
-    \ res;\n    };\n\n    Cap flow = 0;\n    while (flow < flow_limit) {\n      bfs();\n\
-    \      if (level[t] == -1) break;\n      std::fill(iter.begin(), iter.end(), 0);\n\
-    \      while (flow < flow_limit) {\n        Cap f = dfs(dfs, t, flow_limit - flow);\n\
-    \        if (!f) break;\n        flow += f;\n      }\n    }\n    return flow;\n\
-    \  }\n\n  std::vector<bool> min_cut(int s) {\n    std::vector<bool> visited(_n);\n\
-    \    internal::simple_queue<int> que;\n    que.push(s);\n    while (!que.empty())\
-    \ {\n      int p = que.front();\n      que.pop();\n      visited[p] = true;\n\
-    \      for (auto e : g[p]) {\n        if (e.cap && !visited[e.to]) {\n       \
-    \   visited[e.to] = true;\n          que.push(e.to);\n        }\n      }\n   \
-    \ }\n    return visited;\n  }\n\n private:\n  int _n;\n  struct _edge {\n    int\
-    \ to, rev;\n    Cap cap;\n  };\n  std::vector<std::pair<int, int>> pos;\n  std::vector<std::vector<_edge>>\
-    \ g;\n};\n\n}  // namespace atcoder\n\nusing namespace atcoder;\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#line 8 \"\
-    template/template.hpp\"\n#include <array>\n#include <bitset>\n#line 11 \"template/template.hpp\"\
-    \n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include <chrono>\n\
-    #include <cinttypes>\n#include <climits>\n#include <cmath>\n#include <complex>\n\
-    #include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include <cstddef>\n\
-    #include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include <cstring>\n\
-    #include <ctime>\n#include <deque>\n#include <exception>\n#include <forward_list>\n\
-    #include <fstream>\n#include <functional>\n#include <initializer_list>\n#include\
-    \ <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
-    \ <istream>\n#include <iterator>\n#line 41 \"template/template.hpp\"\n#include\
-    \ <list>\n#include <locale>\n#include <map>\n#include <memory>\n#include <new>\n\
-    #include <numeric>\n#include <ostream>\n#line 49 \"template/template.hpp\"\n#include\
-    \ <random>\n#include <ratio>\n#include <regex>\n#include <set>\n#include <sstream>\n\
-    #include <stack>\n#include <stdexcept>\n#include <streambuf>\n#include <string>\n\
-    #include <system_error>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n\
-    #include <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include\
-    \ <valarray>\n#line 67 \"template/template.hpp\"\n\n// utility\n#line 1 \"template/util.hpp\"\
-    \nnamespace Nyaan {\nusing ll = long long;\nusing i64 = long long;\nusing u64\
-    \ = unsigned long long;\nusing i128 = __int128_t;\nusing u128 = __uint128_t;\n\
-    \ntemplate <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV\
-    \ = vector<vector<T>>;\nusing vi = vector<int>;\nusing vl = vector<long long>;\n\
-    using vd = V<double>;\nusing vs = V<string>;\nusing vvi = vector<vector<int>>;\n\
-    using vvl = vector<vector<long long>>;\n\ntemplate <typename T, typename U>\n\
-    struct P : pair<T, U> {\n  template <typename... Args>\n  P(Args... args) : pair<T,\
-    \ U>(args...) {}\n\n  using pair<T, U>::first;\n  using pair<T, U>::second;\n\n\
-    \  T &x() { return first; }\n  const T &x() const { return first; }\n  U &y()\
-    \ { return second; }\n  const U &y() const { return second; }\n\n  P &operator+=(const\
-    \ P &r) {\n    first += r.first;\n    second += r.second;\n    return *this;\n\
-    \  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n    second -= r.second;\n\
-    \    return *this;\n  }\n  P &operator*=(const P &r) {\n    first *= r.first;\n\
-    \    second *= r.second;\n    return *this;\n  }\n  P operator+(const P &r) const\
-    \ { return P(*this) += r; }\n  P operator-(const P &r) const { return P(*this)\
-    \ -= r; }\n  P operator*(const P &r) const { return P(*this) *= r; }\n};\n\nusing\
-    \ pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing vp = V<pl>;\n\nconstexpr int\
-    \ inf = 1001001001;\nconstexpr long long infLL = 4004004004004004004LL;\n\ntemplate\
-    \ <typename T>\nint sz(const T &t) {\n  return t.size();\n}\ntemplate <typename\
-    \ T, size_t N>\nvoid mem(T (&a)[N], int c) {\n  memset(a, c, sizeof(T) * N);\n\
-    }\n\ntemplate <typename T, typename U>\ninline bool amin(T &x, U y) {\n  return\
-    \ (y < x) ? (x = y, true) : false;\n}\ntemplate <typename T, typename U>\ninline\
-    \ bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true) : false;\n}\n\ntemplate\
-    \ <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
-    \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\n\
-    constexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n  for (; n; x\
-    \ *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate <typename\
-    \ T, typename U>\npair<T, U> mkp(const T &t, const U &u) {\n  return make_pair(t,\
-    \ u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const vector<T> &v, bool rev\
-    \ = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for (int i = int(v.size())\
+    \ 1 \"atcoder/maxflow.hpp\"\n\n\n\n#include <algorithm>\n#include <cassert>\n\
+    #include <limits>\n#include <queue>\n#include <vector>\n\n#line 1 \"atcoder/internal_queue.hpp\"\
+    \n\n\n\n#line 5 \"atcoder/internal_queue.hpp\"\n\nnamespace atcoder {\n\nnamespace\
+    \ internal {\n\ntemplate <class T> struct simple_queue {\n    std::vector<T> payload;\n\
+    \    int pos = 0;\n    void reserve(int n) { payload.reserve(n); }\n    int size()\
+    \ const { return int(payload.size()) - pos; }\n    bool empty() const { return\
+    \ pos == int(payload.size()); }\n    void push(const T& t) { payload.push_back(t);\
+    \ }\n    T& front() { return payload[pos]; }\n    void clear() {\n        payload.clear();\n\
+    \        pos = 0;\n    }\n    void pop() { pos++; }\n};\n\n}  // namespace internal\n\
+    \n}  // namespace atcoder\n\n\n#line 11 \"atcoder/maxflow.hpp\"\n\nnamespace atcoder\
+    \ {\n\ntemplate <class Cap> struct mf_graph {\n  public:\n    mf_graph() : _n(0)\
+    \ {}\n    mf_graph(int n) : _n(n), g(n) {}\n\n    virtual int add_edge(int from,\
+    \ int to, Cap cap) {\n        assert(0 <= from && from < _n);\n        assert(0\
+    \ <= to && to < _n);\n        assert(0 <= cap);\n        int m = int(pos.size());\n\
+    \        pos.push_back({from, int(g[from].size())});\n        int from_id = int(g[from].size());\n\
+    \        int to_id = int(g[to].size());\n        if (from == to) to_id++;\n  \
+    \      g[from].push_back(_edge{to, to_id, cap});\n        g[to].push_back(_edge{from,\
+    \ from_id, 0});\n        return m;\n    }\n\n    struct edge {\n        int from,\
+    \ to;\n        Cap cap, flow;\n    };\n\n    edge get_edge(int i) {\n        int\
+    \ m = int(pos.size());\n        assert(0 <= i && i < m);\n        auto _e = g[pos[i].first][pos[i].second];\n\
+    \        auto _re = g[_e.to][_e.rev];\n        return edge{pos[i].first, _e.to,\
+    \ _e.cap + _re.cap, _re.cap};\n    }\n    std::vector<edge> edges() {\n      \
+    \  int m = int(pos.size());\n        std::vector<edge> result;\n        for (int\
+    \ i = 0; i < m; i++) {\n            result.push_back(get_edge(i));\n        }\n\
+    \        return result;\n    }\n    void change_edge(int i, Cap new_cap, Cap new_flow)\
+    \ {\n        int m = int(pos.size());\n        assert(0 <= i && i < m);\n    \
+    \    assert(0 <= new_flow && new_flow <= new_cap);\n        auto& _e = g[pos[i].first][pos[i].second];\n\
+    \        auto& _re = g[_e.to][_e.rev];\n        _e.cap = new_cap - new_flow;\n\
+    \        _re.cap = new_flow;\n    }\n\n    Cap flow(int s, int t) {\n        return\
+    \ flow(s, t, std::numeric_limits<Cap>::max());\n    }\n    Cap flow(int s, int\
+    \ t, Cap flow_limit) {\n        assert(0 <= s && s < _n);\n        assert(0 <=\
+    \ t && t < _n);\n        assert(s != t);\n\n        std::vector<int> level(_n),\
+    \ iter(_n);\n        internal::simple_queue<int> que;\n\n        auto bfs = [&]()\
+    \ {\n            std::fill(level.begin(), level.end(), -1);\n            level[s]\
+    \ = 0;\n            que.clear();\n            que.push(s);\n            while\
+    \ (!que.empty()) {\n                int v = que.front();\n                que.pop();\n\
+    \                for (auto e : g[v]) {\n                    if (e.cap == 0 ||\
+    \ level[e.to] >= 0) continue;\n                    level[e.to] = level[v] + 1;\n\
+    \                    if (e.to == t) return;\n                    que.push(e.to);\n\
+    \                }\n            }\n        };\n        auto dfs = [&](auto self,\
+    \ int v, Cap up) {\n            if (v == s) return up;\n            Cap res =\
+    \ 0;\n            int level_v = level[v];\n            for (int& i = iter[v];\
+    \ i < int(g[v].size()); i++) {\n                _edge& e = g[v][i];\n        \
+    \        if (level_v <= level[e.to] || g[e.to][e.rev].cap == 0) continue;\n  \
+    \              Cap d =\n                    self(self, e.to, std::min(up - res,\
+    \ g[e.to][e.rev].cap));\n                if (d <= 0) continue;\n             \
+    \   g[v][i].cap += d;\n                g[e.to][e.rev].cap -= d;\n            \
+    \    res += d;\n                if (res == up) return res;\n            }\n  \
+    \          level[v] = _n;\n            return res;\n        };\n\n        Cap\
+    \ flow = 0;\n        while (flow < flow_limit) {\n            bfs();\n       \
+    \     if (level[t] == -1) break;\n            std::fill(iter.begin(), iter.end(),\
+    \ 0);\n            Cap f = dfs(dfs, t, flow_limit - flow);\n            if (!f)\
+    \ break;\n            flow += f;\n        }\n        return flow;\n    }\n\n \
+    \   std::vector<bool> min_cut(int s) {\n        std::vector<bool> visited(_n);\n\
+    \        internal::simple_queue<int> que;\n        que.push(s);\n        while\
+    \ (!que.empty()) {\n            int p = que.front();\n            que.pop();\n\
+    \            visited[p] = true;\n            for (auto e : g[p]) {\n         \
+    \       if (e.cap && !visited[e.to]) {\n                    visited[e.to] = true;\n\
+    \                    que.push(e.to);\n                }\n            }\n     \
+    \   }\n        return visited;\n    }\n\n  private:\n    int _n;\n    struct _edge\
+    \ {\n        int to, rev;\n        Cap cap;\n    };\n    std::vector<std::pair<int,\
+    \ int>> pos;\n    std::vector<std::vector<_edge>> g;\n};\n\n}  // namespace atcoder\n\
+    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#line 8 \"template/template.hpp\"\n#include <array>\n\
+    #include <bitset>\n#line 11 \"template/template.hpp\"\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
+    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
+    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    \ <iterator>\n#line 41 \"template/template.hpp\"\n#include <list>\n#include <locale>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#line 49 \"template/template.hpp\"\n#include <random>\n#include <ratio>\n\
+    #include <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include\
+    \ <stdexcept>\n#include <streambuf>\n#include <string>\n#include <system_error>\n\
+    #include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n\
+    #include <unordered_set>\n#include <utility>\n#include <valarray>\n#line 67 \"\
+    template/template.hpp\"\n\n// utility\n#line 1 \"template/util.hpp\"\nnamespace\
+    \ Nyaan {\nusing ll = long long;\nusing i64 = long long;\nusing u64 = unsigned\
+    \ long long;\nusing i128 = __int128_t;\nusing u128 = __uint128_t;\n\ntemplate\
+    \ <typename T>\nusing V = vector<T>;\ntemplate <typename T>\nusing VV = vector<vector<T>>;\n\
+    using vi = vector<int>;\nusing vl = vector<long long>;\nusing vd = V<double>;\n\
+    using vs = V<string>;\nusing vvi = vector<vector<int>>;\nusing vvl = vector<vector<long\
+    \ long>>;\n\ntemplate <typename T, typename U>\nstruct P : pair<T, U> {\n  template\
+    \ <typename... Args>\n  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T,\
+    \ U>::first;\n  using pair<T, U>::second;\n\n  T &x() { return first; }\n  const\
+    \ T &x() const { return first; }\n  U &y() { return second; }\n  const U &y()\
+    \ const { return second; }\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
+    \    second += r.second;\n    return *this;\n  }\n  P &operator-=(const P &r)\
+    \ {\n    first -= r.first;\n    second -= r.second;\n    return *this;\n  }\n\
+    \  P &operator*=(const P &r) {\n    first *= r.first;\n    second *= r.second;\n\
+    \    return *this;\n  }\n  P operator+(const P &r) const { return P(*this) +=\
+    \ r; }\n  P operator-(const P &r) const { return P(*this) -= r; }\n  P operator*(const\
+    \ P &r) const { return P(*this) *= r; }\n};\n\nusing pl = P<ll, ll>;\nusing pi\
+    \ = P<int, int>;\nusing vp = V<pl>;\n\nconstexpr int inf = 1001001001;\nconstexpr\
+    \ long long infLL = 4004004004004004004LL;\n\ntemplate <typename T>\nint sz(const\
+    \ T &t) {\n  return t.size();\n}\ntemplate <typename T, size_t N>\nvoid mem(T\
+    \ (&a)[N], int c) {\n  memset(a, c, sizeof(T) * N);\n}\n\ntemplate <typename T,\
+    \ typename U>\ninline bool amin(T &x, U y) {\n  return (y < x) ? (x = y, true)\
+    \ : false;\n}\ntemplate <typename T, typename U>\ninline bool amax(T &x, U y)\
+    \ {\n  return (x < y) ? (x = y, true) : false;\n}\n\ntemplate <typename T>\nint\
+    \ lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v), end(v),\
+    \ a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v, const T\
+    \ &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\nconstexpr\
+    \ long long TEN(int n) {\n  long long ret = 1, x = 10;\n  for (; n; x *= x, n\
+    \ >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate <typename T, typename\
+    \ U>\npair<T, U> mkp(const T &t, const U &u) {\n  return make_pair(t, u);\n}\n\
+    \ntemplate <typename T>\nvector<T> mkrui(const vector<T> &v, bool rev = false)\
+    \ {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for (int i = int(v.size())\
     \ - 1; i >= 0; i--) ret[i] = v[i] + ret[i + 1];\n  } else {\n    for (int i =\
     \ 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n\
     };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
@@ -321,7 +332,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   requiredBy: []
-  timestamp: '2020-12-13 02:16:33+09:00'
+  timestamp: '2020-12-17 22:06:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
