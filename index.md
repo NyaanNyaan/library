@@ -601,22 +601,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1080,7 +1080,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
       title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
       title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
     - icon: ':heavy_check_mark:'

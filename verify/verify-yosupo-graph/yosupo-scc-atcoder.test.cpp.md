@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/scc
@@ -175,7 +175,8 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 1 \"atcoder/scc.hpp\"\n\n\n\n#line 7 \"atcoder/scc.hpp\"\n\n#line 1 \"atcoder/internal_scc.hpp\"\
+    \ 4 \"verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp\"\n//\n#line 1 \"\
+    atcoder/scc.hpp\"\n\n\n\n#line 7 \"atcoder/scc.hpp\"\n\n#line 1 \"atcoder/internal_scc.hpp\"\
     \n\n\n\n#line 7 \"atcoder/internal_scc.hpp\"\n\n#line 1 \"atcoder/internal_csr.hpp\"\
     \n\n\n\n#line 7 \"atcoder/internal_csr.hpp\"\n\nnamespace atcoder {\nnamespace\
     \ internal {\n\ntemplate <class E> struct csr {\n    std::vector<int> start;\n\
@@ -221,16 +222,17 @@ data:
     \ from < n);\n        assert(0 <= to && to < n);\n        internal.add_edge(from,\
     \ to);\n    }\n\n    std::vector<std::vector<int>> scc() { return internal.scc();\
     \ }\n\n  private:\n    internal::scc_graph internal;\n};\n\n}  // namespace atcoder\n\
-    \n\n#line 5 \"verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp\"\n\nusing\
-    \ namespace Nyaan; void Nyaan::solve() {\n  ini(N, M);\n  scc_graph scc(N);\n\
-    \  rep(_,M) {\n    ini(u,v);\n    scc.add_edge(u,v);\n  }\n  auto res = scc.scc();\n\
-    \  out(res.size());\n  each(x, res) {\n    cout << x.size() << \" \" << x << endl;\n\
-    \  }\n}\n"
+    \n\n#line 6 \"verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp\"\n\nusing\
+    \ namespace atcoder;\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N,\
+    \ M);\n  scc_graph scc(N);\n  rep(_, M) {\n    ini(u, v);\n    scc.add_edge(u,\
+    \ v);\n  }\n  auto res = scc.scc();\n  out(res.size());\n  each(x, res) { cout\
+    \ << x.size() << \" \" << x << endl; }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n\n#include \"../../template/template.hpp\"\
-    \n#include \"../../atcoder/scc.hpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  ini(N, M);\n  scc_graph scc(N);\n  rep(_,M) {\n    ini(u,v);\n    scc.add_edge(u,v);\n\
-    \  }\n  auto res = scc.scc();\n  out(res.size());\n  each(x, res) {\n    cout\
-    \ << x.size() << \" \" << x << endl;\n  }\n}\n"
+    \n//\n#include \"../../atcoder/scc.hpp\"\n\nusing namespace atcoder;\nusing namespace\
+    \ Nyaan;\nvoid Nyaan::solve() {\n  ini(N, M);\n  scc_graph scc(N);\n  rep(_, M)\
+    \ {\n    ini(u, v);\n    scc.add_edge(u, v);\n  }\n  auto res = scc.scc();\n \
+    \ out(res.size());\n  each(x, res) { cout << x.size() << \" \" << x << endl; }\n\
+    }\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -241,8 +243,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
   requiredBy: []
-  timestamp: '2020-12-17 22:06:13+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-17 22:14:45+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
 layout: document

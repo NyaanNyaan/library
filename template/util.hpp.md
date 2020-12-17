@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
     title: XOR Convoluion
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -420,7 +420,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
     title: verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
     title: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
   - icon: ':heavy_check_mark:'
@@ -628,7 +628,7 @@ data:
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -733,7 +733,7 @@ data:
   - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
   timestamp: '2020-12-01 11:28:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
