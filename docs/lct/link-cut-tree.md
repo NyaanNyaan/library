@@ -27,7 +27,7 @@
 
 - 以上に説明した方法で木を管理したとき、内部でのポインタ操作によってPreferred EdgeとNormal Edgeを入れ替えることが出来る
 
-  - `u->r = nullptr`　$\leftrightarrow$ `u`から子に生えるPreferred EdgeをNormal Edgeに替える
+  - `splay(u), u->r = nullptr`　$\leftrightarrow$ `u`から子に生えるPreferred EdgeをNormal Edgeに替える
   - `v`から`u`にNormal Edgeが生えているとき、`splay(u), u->r = v` $\leftrightarrow$ `u`から子に生えるPreferred EdgeをNormal Edgeに替える
 
 - 上の二つを組み合わせると、Link Cut Treeの核である`expose(x)`：根から`x`までのパスをPreferred Edgeからなるパスにする関数を実装できる

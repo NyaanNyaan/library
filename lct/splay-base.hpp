@@ -13,7 +13,7 @@ struct SplayTreeBase {
 
   int size(Ptr t) const { return count(t); }
 
-  void splay(Ptr t) {
+  virtual void splay(Ptr t) {
     push(t);
     while (!is_root(t)) {
       Ptr q = t->p;
@@ -110,7 +110,6 @@ struct SplayTreeBase {
     return merge(build(l, (l + r) >> 1, v), build((l + r) >> 1, r, v));
   }
 
- private:
   inline int pos(Ptr t) {
     if (t->p) {
       if (t->p->l == t) return -1;
@@ -119,7 +118,7 @@ struct SplayTreeBase {
     return 0;
   }
 
-  void rot(Ptr t) {
+  virtual void rot(Ptr t) {
     Ptr x = t->p, y = x->p;
     if (pos(t) == -1) {
       if ((x->l = t->r)) t->r->p = x;
