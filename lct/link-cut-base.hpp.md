@@ -5,6 +5,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-lazy.hpp
     title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
+  - icon: ':warning:'
+    path: lct/link-cut-tree-subtree-add.hpp
+    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree.hpp
     title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
@@ -76,6 +79,7 @@ data:
   path: lct/link-cut-base.hpp
   requiredBy:
   - lct/link-cut-tree.hpp
+  - lct/link-cut-tree-subtree-add.hpp
   - lct/link-cut-tree-subtree.hpp
   - lct/link-cut-tree-lazy.hpp
   timestamp: '2020-12-18 15:24:25+09:00'
@@ -121,7 +125,7 @@ title: Link/Cut Tree(base)
 
 - 以上に説明した方法で木を管理したとき、内部でのポインタ操作によってPreferred EdgeとNormal Edgeを入れ替えることが出来る
 
-  - `u->r = nullptr`　$\leftrightarrow$ `u`から子に生えるPreferred EdgeをNormal Edgeに替える
+  - `splay(u), u->r = nullptr`　$\leftrightarrow$ `u`から子に生えるPreferred EdgeをNormal Edgeに替える
   - `v`から`u`にNormal Edgeが生えているとき、`splay(u), u->r = v` $\leftrightarrow$ `u`から子に生えるPreferred EdgeをNormal Edgeに替える
 
 - 上の二つを組み合わせると、Link Cut Treeの核である`expose(x)`：根から`x`までのパスをPreferred Edgeからなるパスにする関数を実装できる
