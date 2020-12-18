@@ -7,7 +7,7 @@ data:
       \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-base.hpp
-    title: Link Cut Tree(base)
+    title: Link/Cut Tree(base)
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-lazy.hpp
     title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
@@ -372,14 +372,14 @@ data:
     \ key) {\n    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n\
     \  decltype(Node::key) get_key(Ptr t) { return t->key; }\n\n  decltype(Node::key)\
     \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
-    };\n\n/**\n * @brief Link Cut Tree(base)\n */\n#line 7 \"lct/link-cut-tree-lazy.hpp\"\
-    \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ts)(T)>\nstruct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
-    \ E, f, g, h, ts>> {\n  using base = LinkCutBase<LazyReversibleSplayTree<T, E,\
-    \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void apply(Ptr u, Ptr\
-    \ v, const E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v,\
-    \ e);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink/Cut Tree\n */\n\
-    #line 14 \"verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp\"\
+    };\n\n/**\n * @brief Link/Cut Tree(base)\n * @docs docs/lct/link-cut-tree.md\n\
+    \ */\n#line 7 \"lct/link-cut-tree-lazy.hpp\"\n\ntemplate <typename T, typename\
+    \ E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct\
+    \ LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T, E, f, g, h, ts>> {\n\
+    \  using base = LinkCutBase<LazyReversibleSplayTree<T, E, f, g, h, ts>>;\n  using\
+    \ Ptr = typename base::Ptr;\n\n  void apply(Ptr u, Ptr v, const E& e) {\n    this->evert(u);\n\
+    \    this->expose(v);\n    this->propagate(v, e);\n  }\n};\n\n/**\n * @brief \u9045\
+    \u5EF6\u4F1D\u642CLink/Cut Tree\n */\n#line 14 \"verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp\"\
     \n//\n\nusing T = pair<mint, mint>;\nusing E = Affine<mint>;\nT f(T a, T b) {\
     \ return T(a.first + b.first, a.second + b.second); }\nT g(T a, E b) { return\
     \ T(a.first * b.a + a.second * b.b, a.second); }\nE h(E a, E b) { return a * b;\
@@ -425,7 +425,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   requiredBy: []
-  timestamp: '2020-12-18 14:55:17+09:00'
+  timestamp: '2020-12-18 15:24:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp

@@ -232,7 +232,7 @@ data:
         \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
     - icon: ':heavy_check_mark:'
       path: lct/link-cut-base.hpp
-      title: Link Cut Tree(base)
+      title: Link/Cut Tree(base)
     - icon: ':heavy_check_mark:'
       path: lct/link-cut-tree-lazy.hpp
       title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"

@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-base.hpp
-    title: Link Cut Tree(base)
+    title: Link/Cut Tree(base)
   - icon: ':heavy_check_mark:'
     path: lct/reversible-bbst-base.hpp
     title: "\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
@@ -110,13 +110,13 @@ data:
     \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
     \ = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) {\
     \ return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
-    \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link Cut Tree(base)\n\
-    \ */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\n\ntemplate <typename T, T (*f)(T,\
-    \ T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n    : LinkCutBase<SplayTreeForLCSubtree<T,\
-    \ f, finv>> {\n  using base = LinkCutBase<SplayTreeForLCSubtree<T, f, finv>>;\n\
-    \  using Node = typename base::Node;\n  using Ptr = typename base::Ptr;\n\n  Ptr\
-    \ expose(Ptr t) override {\n    Ptr rp = nullptr;\n    for (Ptr cur = t; cur;\
-    \ cur = cur->p) {\n      this->splay(cur);\n      if (cur->r) cur->add(cur->r);\n\
+    \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link/Cut Tree(base)\n\
+    \ * @docs docs/lct/link-cut-tree.md\n */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\
+    \n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n\
+    \    : LinkCutBase<SplayTreeForLCSubtree<T, f, finv>> {\n  using base = LinkCutBase<SplayTreeForLCSubtree<T,\
+    \ f, finv>>;\n  using Node = typename base::Node;\n  using Ptr = typename base::Ptr;\n\
+    \n  Ptr expose(Ptr t) override {\n    Ptr rp = nullptr;\n    for (Ptr cur = t;\
+    \ cur; cur = cur->p) {\n      this->splay(cur);\n      if (cur->r) cur->add(cur->r);\n\
     \      cur->r = rp;\n      if (cur->r) cur->erase(cur->r);\n      this->update(cur);\n\
     \      rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  void link(Ptr\
     \ u, Ptr v) override {\n    this->evert(u);\n    this->expose(v);\n    u->p =\
@@ -161,7 +161,7 @@ data:
   isVerificationFile: false
   path: lct/link-cut-tree-subtree.hpp
   requiredBy: []
-  timestamp: '2020-12-18 14:55:17+09:00'
+  timestamp: '2020-12-18 15:24:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp

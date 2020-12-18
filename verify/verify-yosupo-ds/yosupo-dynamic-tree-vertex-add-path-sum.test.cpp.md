@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-base.hpp
-    title: Link Cut Tree(base)
+    title: Link/Cut Tree(base)
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree.hpp
     title: Link/Cut Tree
@@ -363,10 +363,11 @@ data:
     \ key) {\n    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n\
     \  decltype(Node::key) get_key(Ptr t) { return t->key; }\n\n  decltype(Node::key)\
     \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
-    };\n\n/**\n * @brief Link Cut Tree(base)\n */\n#line 7 \"lct/link-cut-tree.hpp\"\
-    \n\ntemplate <typename T, T (*f)(T, T), T (*ts)(T)>\nstruct LinkCutTree : LinkCutBase<ReversibleSplayTree<T,\
-    \ f, ts>> {};\n\n/**\n * @brief Link/Cut Tree\n * @docs docs/lct/link-cut-tree.md\n\
-    \ */\n#line 15 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp\"\
+    };\n\n/**\n * @brief Link/Cut Tree(base)\n * @docs docs/lct/link-cut-tree.md\n\
+    \ */\n#line 7 \"lct/link-cut-tree.hpp\"\n\ntemplate <typename T, T (*f)(T, T),\
+    \ T (*ts)(T)>\nstruct LinkCutTree : LinkCutBase<ReversibleSplayTree<T, f, ts>>\
+    \ {};\n\n/**\n * @brief Link/Cut Tree\n * @docs docs/lct/link-cut-tree.md\n */\n\
+    #line 15 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp\"\
     \n//\n\nusing T = long long;\nT f(T a, T b) { return a + b; }\nT ts(T a) { return\
     \ a; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int N, Q;\n  rd(N,\
     \ Q);\n\n  using LCT = LinkCutTree<T, f, ts>;\n  LCT lct;\n\n  vector<LCT::Ptr>\
@@ -412,7 +413,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-18 14:55:17+09:00'
+  timestamp: '2020-12-18 15:24:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
