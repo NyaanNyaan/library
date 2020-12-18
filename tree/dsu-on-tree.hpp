@@ -55,24 +55,13 @@ struct DSUonTree {
   template <typename UPDATE, typename QUERY, typename CLEAR, typename RESET>
   void run(UPDATE &update, QUERY &query, CLEAR &clear, RESET &reset) {
     auto dsu = [&](auto rc, int cur, int par = -1, bool keep = true) -> void {
-      // light edge -> run dfs and clear data
       for (int i = 1; i < (int)g[cur].size(); i++)
         if (g[cur][i] != par) rc(rc, g[cur][i], cur, false);
-
-      // heavy edge -> run dfs and reserve data
       if (sub_sz[cur] != 1) rc(rc, g[cur][0], cur, true);
-
-      // light edge -> reserve data
       if (sub_sz[cur] != 1)
         for (int i = up[g[cur][0]]; i < up[cur]; i++) update(euler[i]);
-
-      // current node -> reserve data
       update(cur);
-
-      // answer queries related to subtree of current node
       query(cur);
-
-      // if keep is false, clear all data
       if (!keep) {
         for (int i = down[cur]; i < up[cur]; i++) clear(euler[i]);
         reset();

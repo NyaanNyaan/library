@@ -41,7 +41,7 @@ void Nyaan::solve() {
     } else if (cmd == 1) {
       int u, x;
       rd(u, x);
-      lct.vertex_set(vs[u], lct.vertex_get(vs[u]) + x);
+      lct.set_key(vs[u], lct.get_key(vs[u]) + x);
     } else {
       int v, p;
       rd(v, p);

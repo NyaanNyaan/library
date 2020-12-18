@@ -9,5 +9,6 @@ template <typename T, T (*f)(T, T), T (*ts)(T)>
 struct LinkCutTree : LinkCutBase<ReversibleSplayTree<T, f, ts>> {};
 
 /**
- * @brief Link Cut Tree
+ * @brief Link/Cut Tree
+ * @docs docs/lct/link-cut-tree.md
  */

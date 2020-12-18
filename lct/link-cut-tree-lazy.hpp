@@ -19,5 +19,5 @@ struct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T, E, f, g, h, ts>>
 };
 
 /**
- * @brief 遅延伝搬Link Cut Tree
+ * @brief 遅延伝搬Link/Cut Tree
  */

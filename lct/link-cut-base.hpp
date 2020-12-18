@@ -26,7 +26,6 @@ struct LinkCutBase : Splay {
   void cut(Ptr u, Ptr v) {
     evert(u);
     expose(v);
-    assert(v->l == u);
     v->l = u->p = nullptr;
     this->update(v);
   }
@@ -65,13 +64,13 @@ struct LinkCutBase : Splay {
     return x;
   }
 
-  virtual void vertex_set(Ptr t, const decltype(Node::key)& key) {
+  virtual void set_key(Ptr t, const decltype(Node::key)& key) {
     this->splay(t);
     t->key = key;
     this->update(t);
   }
 
-  decltype(Node::key) vertex_get(Ptr t) { return t->key; }
+  decltype(Node::key) get_key(Ptr t) { return t->key; }
 
   decltype(Node::key) fold(Ptr u, Ptr v) {
     evert(u);

@@ -70,7 +70,7 @@ struct LinkCutTreeSubtreeQuery
     return t;
   }
 
-  void vertex_set(Ptr t, const T& key) override {
+  void set_key(Ptr t, const T& key) override {
     this->expose(t);
     t->key = key;
     this->update(t);
@@ -83,5 +83,5 @@ struct LinkCutTreeSubtreeQuery
 };
 
 /**
- * @brief 部分木クエリLink Cut Tree
+ * @brief 部分木クエリLink/Cut Tree
  */

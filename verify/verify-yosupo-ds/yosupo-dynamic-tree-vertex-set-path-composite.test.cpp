@@ -50,7 +50,7 @@ void Nyaan::solve() {
     } else if (cmd == 1) {
       int P, a, b;
       rd(P, a, b);
-      lct.vertex_set(vs[P], T(Af(a, b), Af(a, b)));
+      lct.set_key(vs[P], T(Af(a, b), Af(a, b)));
     } else {
       int U, V, X;
       rd(U, V, X);
