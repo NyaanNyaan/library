@@ -80,5 +80,6 @@ struct LinkCutBase : Splay {
 };
 
 /**
- * @brief Link Cut Tree(base)
+ * @brief Link/Cut Tree(base)
+ * @docs docs/lct/link-cut-tree.md
  */
