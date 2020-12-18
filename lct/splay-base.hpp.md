@@ -4,13 +4,13 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-lazy.hpp
-    title: "\u9045\u5EF6\u4F1D\u642CLink Cut Tree"
+    title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree.hpp
-    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink Cut Tree"
+    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree.hpp
-    title: Link Cut Tree
+    title: Link/Cut Tree
   - icon: ':heavy_check_mark:'
     path: lct/splay-lazy-reversible.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree"

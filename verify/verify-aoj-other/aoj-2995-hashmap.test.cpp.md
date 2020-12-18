@@ -414,24 +414,21 @@ data:
     \ down[u]; }\n\n  template <typename UPDATE, typename QUERY, typename CLEAR, typename\
     \ RESET>\n  void run(UPDATE &update, QUERY &query, CLEAR &clear, RESET &reset)\
     \ {\n    auto dsu = [&](auto rc, int cur, int par = -1, bool keep = true) -> void\
-    \ {\n      // light edge -> run dfs and clear data\n      for (int i = 1; i <\
-    \ (int)g[cur].size(); i++)\n        if (g[cur][i] != par) rc(rc, g[cur][i], cur,\
-    \ false);\n\n      // heavy edge -> run dfs and reserve data\n      if (sub_sz[cur]\
-    \ != 1) rc(rc, g[cur][0], cur, true);\n\n      // light edge -> reserve data\n\
-    \      if (sub_sz[cur] != 1)\n        for (int i = up[g[cur][0]]; i < up[cur];\
-    \ i++) update(euler[i]);\n\n      // current node -> reserve data\n      update(cur);\n\
-    \n      // answer queries related to subtree of current node\n      query(cur);\n\
-    \n      // if keep is false, clear all data\n      if (!keep) {\n        for (int\
-    \ i = down[cur]; i < up[cur]; i++) clear(euler[i]);\n        reset();\n      }\n\
-    \      return;\n    };\n    dsu(dsu, root);\n  }\n};\n\n/**\n * @brief DSU on\
-    \ Tree(Guni)\n * @docs docs/tree/dsu-on-tree.md\n */\n#line 8 \"verify/verify-aoj-other/aoj-2995-hashmap.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int N, K;\n  rd(N, K);\n \
-    \ StaticGraph<void> g(N, 2 * N - 2);\n  rep1(i, N - 1) {\n    int u, v;\n    rd(u,\
-    \ v);\n    --u, --v;\n    g.add_edge(u, v);\n    g.add_edge(v, u);\n  }\n\n  V<pair<int,\
-    \ int>> cl(N);\n  rep(i, N) rd(cl[i].first, cl[i].second);\n\n  DynamicUnionFind\
-    \ uf;\n  int sm = 0;\n  vi ans(N);\n  HashMap<int, int> val;\n  // reflect data\
-    \ of node i\n  auto update = [&](int i) {\n    uf.unite(cl[i].first, cl[i].second,\n\
-    \             [&](int x, int y) { val[x] += val[y]; });\n    int p = uf.find(cl[i].first);\n\
+    \ {\n      for (int i = 1; i < (int)g[cur].size(); i++)\n        if (g[cur][i]\
+    \ != par) rc(rc, g[cur][i], cur, false);\n      if (sub_sz[cur] != 1) rc(rc, g[cur][0],\
+    \ cur, true);\n      if (sub_sz[cur] != 1)\n        for (int i = up[g[cur][0]];\
+    \ i < up[cur]; i++) update(euler[i]);\n      update(cur);\n      query(cur);\n\
+    \      if (!keep) {\n        for (int i = down[cur]; i < up[cur]; i++) clear(euler[i]);\n\
+    \        reset();\n      }\n      return;\n    };\n    dsu(dsu, root);\n  }\n\
+    };\n\n/**\n * @brief DSU on Tree(Guni)\n * @docs docs/tree/dsu-on-tree.md\n */\n\
+    #line 8 \"verify/verify-aoj-other/aoj-2995-hashmap.test.cpp\"\n\nusing namespace\
+    \ Nyaan; void Nyaan::solve() {\n  int N, K;\n  rd(N, K);\n  StaticGraph<void>\
+    \ g(N, 2 * N - 2);\n  rep1(i, N - 1) {\n    int u, v;\n    rd(u, v);\n    --u,\
+    \ --v;\n    g.add_edge(u, v);\n    g.add_edge(v, u);\n  }\n\n  V<pair<int, int>>\
+    \ cl(N);\n  rep(i, N) rd(cl[i].first, cl[i].second);\n\n  DynamicUnionFind uf;\n\
+    \  int sm = 0;\n  vi ans(N);\n  HashMap<int, int> val;\n  // reflect data of node\
+    \ i\n  auto update = [&](int i) {\n    uf.unite(cl[i].first, cl[i].second,\n \
+    \            [&](int x, int y) { val[x] += val[y]; });\n    int p = uf.find(cl[i].first);\n\
     \    if (uf.size(p) > val[p]) {\n      sm++;\n      val[p]++;\n    }\n  };\n \
     \ // answer queries of subtree i\n  auto query = [&](int i) { ans[i] = sm; };\n\
     \  // below two function are called if all data must be deleted\n  // delete data\
@@ -474,7 +471,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   requiredBy: []
-  timestamp: '2020-12-11 19:08:37+09:00'
+  timestamp: '2020-12-18 14:55:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp

@@ -66,17 +66,13 @@ data:
     \ down[u]; }\n\n  template <typename UPDATE, typename QUERY, typename CLEAR, typename\
     \ RESET>\n  void run(UPDATE &update, QUERY &query, CLEAR &clear, RESET &reset)\
     \ {\n    auto dsu = [&](auto rc, int cur, int par = -1, bool keep = true) -> void\
-    \ {\n      // light edge -> run dfs and clear data\n      for (int i = 1; i <\
-    \ (int)g[cur].size(); i++)\n        if (g[cur][i] != par) rc(rc, g[cur][i], cur,\
-    \ false);\n\n      // heavy edge -> run dfs and reserve data\n      if (sub_sz[cur]\
-    \ != 1) rc(rc, g[cur][0], cur, true);\n\n      // light edge -> reserve data\n\
-    \      if (sub_sz[cur] != 1)\n        for (int i = up[g[cur][0]]; i < up[cur];\
-    \ i++) update(euler[i]);\n\n      // current node -> reserve data\n      update(cur);\n\
-    \n      // answer queries related to subtree of current node\n      query(cur);\n\
-    \n      // if keep is false, clear all data\n      if (!keep) {\n        for (int\
-    \ i = down[cur]; i < up[cur]; i++) clear(euler[i]);\n        reset();\n      }\n\
-    \      return;\n    };\n    dsu(dsu, root);\n  }\n};\n\n/**\n * @brief DSU on\
-    \ Tree(Guni)\n * @docs docs/tree/dsu-on-tree.md\n */\n"
+    \ {\n      for (int i = 1; i < (int)g[cur].size(); i++)\n        if (g[cur][i]\
+    \ != par) rc(rc, g[cur][i], cur, false);\n      if (sub_sz[cur] != 1) rc(rc, g[cur][0],\
+    \ cur, true);\n      if (sub_sz[cur] != 1)\n        for (int i = up[g[cur][0]];\
+    \ i < up[cur]; i++) update(euler[i]);\n      update(cur);\n      query(cur);\n\
+    \      if (!keep) {\n        for (int i = down[cur]; i < up[cur]; i++) clear(euler[i]);\n\
+    \        reset();\n      }\n      return;\n    };\n    dsu(dsu, root);\n  }\n\
+    };\n\n/**\n * @brief DSU on Tree(Guni)\n * @docs docs/tree/dsu-on-tree.md\n */\n"
   code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\ntemplate\
     \ <typename G>\nstruct DSUonTree {\n private:\n  G &g;\n  int N;\n  vector<int>\
     \ sub_sz, euler, down, up;\n  int idx_;\n  int root;\n\n  int dfs1(int cur, int\
@@ -93,24 +89,20 @@ data:
     \    dfs2(root);\n  }\n\n  int idx(int u) const { return down[u]; }\n\n  template\
     \ <typename UPDATE, typename QUERY, typename CLEAR, typename RESET>\n  void run(UPDATE\
     \ &update, QUERY &query, CLEAR &clear, RESET &reset) {\n    auto dsu = [&](auto\
-    \ rc, int cur, int par = -1, bool keep = true) -> void {\n      // light edge\
-    \ -> run dfs and clear data\n      for (int i = 1; i < (int)g[cur].size(); i++)\n\
-    \        if (g[cur][i] != par) rc(rc, g[cur][i], cur, false);\n\n      // heavy\
-    \ edge -> run dfs and reserve data\n      if (sub_sz[cur] != 1) rc(rc, g[cur][0],\
-    \ cur, true);\n\n      // light edge -> reserve data\n      if (sub_sz[cur] !=\
-    \ 1)\n        for (int i = up[g[cur][0]]; i < up[cur]; i++) update(euler[i]);\n\
-    \n      // current node -> reserve data\n      update(cur);\n\n      // answer\
-    \ queries related to subtree of current node\n      query(cur);\n\n      // if\
-    \ keep is false, clear all data\n      if (!keep) {\n        for (int i = down[cur];\
-    \ i < up[cur]; i++) clear(euler[i]);\n        reset();\n      }\n      return;\n\
-    \    };\n    dsu(dsu, root);\n  }\n};\n\n/**\n * @brief DSU on Tree(Guni)\n *\
-    \ @docs docs/tree/dsu-on-tree.md\n */\n"
+    \ rc, int cur, int par = -1, bool keep = true) -> void {\n      for (int i = 1;\
+    \ i < (int)g[cur].size(); i++)\n        if (g[cur][i] != par) rc(rc, g[cur][i],\
+    \ cur, false);\n      if (sub_sz[cur] != 1) rc(rc, g[cur][0], cur, true);\n  \
+    \    if (sub_sz[cur] != 1)\n        for (int i = up[g[cur][0]]; i < up[cur]; i++)\
+    \ update(euler[i]);\n      update(cur);\n      query(cur);\n      if (!keep) {\n\
+    \        for (int i = down[cur]; i < up[cur]; i++) clear(euler[i]);\n        reset();\n\
+    \      }\n      return;\n    };\n    dsu(dsu, root);\n  }\n};\n\n/**\n * @brief\
+    \ DSU on Tree(Guni)\n * @docs docs/tree/dsu-on-tree.md\n */\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: tree/dsu-on-tree.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-18 14:55:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp

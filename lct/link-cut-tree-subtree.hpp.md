@@ -19,7 +19,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink Cut Tree"
+    document_title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
     links: []
   bundledCode: "#line 2 \"lct/link-cut-tree-subtree.hpp\"\n\n#line 2 \"lct/reversible-bbst-base.hpp\"\
     \n\ntemplate <typename Tree, typename Node, typename T, T (*f)(T, T), T (*ts)(T)>\n\
@@ -98,18 +98,18 @@ data:
     \      cur->r = rp;\n      this->update(cur);\n      rp = cur;\n    }\n    this->splay(t);\n\
     \    return rp;\n  }\n\n  virtual void link(Ptr u, Ptr v) {\n    evert(u);\n \
     \   expose(v);\n    u->p = v;\n  }\n\n  void cut(Ptr u, Ptr v) {\n    evert(u);\n\
-    \    expose(v);\n    assert(v->l == u);\n    v->l = u->p = nullptr;\n    this->update(v);\n\
-    \  }\n\n  void evert(Ptr t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n\
-    \  }\n\n  Ptr lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return\
-    \ nullptr;\n    expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x,\
-    \ int k) {\n    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r\
-    \ && x->r->sz > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -=\
-    \ x->r->sz;\n        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n\
-    \      }\n    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
+    \    expose(v);\n    v->l = u->p = nullptr;\n    this->update(v);\n  }\n\n  void\
+    \ evert(Ptr t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n \
+    \ }\n\n  Ptr lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return nullptr;\n\
+    \    expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x, int k) {\n\
+    \    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r && x->r->sz\
+    \ > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -= x->r->sz;\n\
+    \        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n      }\n\
+    \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
     \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
-    \ vertex_set(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n \
-    \   t->key = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) vertex_get(Ptr\
-    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
+    \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
+    \ = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) {\
+    \ return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
     \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link Cut Tree(base)\n\
     \ */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\n\ntemplate <typename T, T (*f)(T,\
     \ T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n    : LinkCutBase<SplayTreeForLCSubtree<T,\
@@ -123,10 +123,10 @@ data:
     \ v;\n    v->add(u);\n  }\n\n  void toggle(Ptr t) override {\n    swap(t->l, t->r);\n\
     \    t->rev ^= true;\n  }\n\n  Ptr update(Ptr t) override {\n    if (!t) return\
     \ t;\n    t->cnt = 1 + this->count(t->l) + this->count(t->r);\n    t->merge(t->l,\
-    \ t->r);\n    return t;\n  }\n\n  void vertex_set(Ptr t, const T& key) override\
-    \ {\n    this->expose(t);\n    t->key = key;\n    this->update(t);\n  }\n\n  T\
-    \ subtree(Ptr t) {\n    this->expose(t);\n    return f(t->key, t->sub);\n  }\n\
-    };\n\n/**\n * @brief \u90E8\u5206\u6728\u30AF\u30A8\u30EALink Cut Tree\n */\n"
+    \ t->r);\n    return t;\n  }\n\n  void set_key(Ptr t, const T& key) override {\n\
+    \    this->expose(t);\n    t->key = key;\n    this->update(t);\n  }\n\n  T subtree(Ptr\
+    \ t) {\n    this->expose(t);\n    return f(t->key, t->sub);\n  }\n};\n\n/**\n\
+    \ * @brief \u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree\n */\n"
   code: "#pragma once\n\n#include \"reversible-bbst-base.hpp\"\n#include \"splay-base.hpp\"\
     \n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct LinkCutForSubtreeNode\
     \ {\n  using Node = LinkCutForSubtreeNode;\n  using Ptr = LinkCutForSubtreeNode*;\n\
@@ -150,10 +150,10 @@ data:
     \ v;\n    v->add(u);\n  }\n\n  void toggle(Ptr t) override {\n    swap(t->l, t->r);\n\
     \    t->rev ^= true;\n  }\n\n  Ptr update(Ptr t) override {\n    if (!t) return\
     \ t;\n    t->cnt = 1 + this->count(t->l) + this->count(t->r);\n    t->merge(t->l,\
-    \ t->r);\n    return t;\n  }\n\n  void vertex_set(Ptr t, const T& key) override\
-    \ {\n    this->expose(t);\n    t->key = key;\n    this->update(t);\n  }\n\n  T\
-    \ subtree(Ptr t) {\n    this->expose(t);\n    return f(t->key, t->sub);\n  }\n\
-    };\n\n/**\n * @brief \u90E8\u5206\u6728\u30AF\u30A8\u30EALink Cut Tree\n */\n"
+    \ t->r);\n    return t;\n  }\n\n  void set_key(Ptr t, const T& key) override {\n\
+    \    this->expose(t);\n    t->key = key;\n    this->update(t);\n  }\n\n  T subtree(Ptr\
+    \ t) {\n    this->expose(t);\n    return f(t->key, t->sub);\n  }\n};\n\n/**\n\
+    \ * @brief \u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree\n */\n"
   dependsOn:
   - lct/reversible-bbst-base.hpp
   - lct/splay-base.hpp
@@ -161,7 +161,7 @@ data:
   isVerificationFile: false
   path: lct/link-cut-tree-subtree.hpp
   requiredBy: []
-  timestamp: '2020-12-17 20:54:42+09:00'
+  timestamp: '2020-12-18 14:55:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
@@ -170,5 +170,5 @@ layout: document
 redirect_from:
 - /library/lct/link-cut-tree-subtree.hpp
 - /library/lct/link-cut-tree-subtree.hpp.html
-title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink Cut Tree"
+title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
 ---

@@ -11,7 +11,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree.hpp
-    title: Link Cut Tree
+    title: Link/Cut Tree
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp

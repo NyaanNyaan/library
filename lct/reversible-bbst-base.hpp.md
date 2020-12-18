@@ -4,10 +4,10 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree.hpp
-    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink Cut Tree"
+    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree.hpp
-    title: Link Cut Tree
+    title: Link/Cut Tree
   - icon: ':heavy_check_mark:'
     path: lct/splay-reversible.hpp
     title: "\u53CD\u8EE2\u53EF\u80FDSplay Tree"
