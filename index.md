@@ -226,14 +226,14 @@ data:
       title: inner/inner_math.hpp
   - name: lct
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: lct/lazy-reversible-bbst-base.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\
         \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: lct/link-cut-base.hpp
       title: Link/Cut Tree(base)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: lct/link-cut-tree-lazy.hpp
       title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
     - icon: ':warning:'
@@ -249,10 +249,10 @@ data:
       path: lct/reversible-bbst-base.hpp
       title: "\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
         \u30E9\u30B9)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: lct/splay-base.hpp
       title: Splay Tree(base)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: lct/splay-lazy-reversible.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree"
     - icon: ':heavy_check_mark:'
@@ -268,7 +268,7 @@ data:
       title: Simulated Annealing
   - name: math
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
     - icon: ':heavy_check_mark:'
@@ -327,7 +327,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -365,7 +365,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
     - icon: ':heavy_check_mark:'
@@ -604,22 +604,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -947,7 +947,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     - icon: ':heavy_check_mark:'
