@@ -26,11 +26,11 @@ struct LinkCutForSubtreeNode {
         cnt(1),
         subcnt(0),
         rev(false) {}
-  void add(Ptr other) {
+  void make_normal(Ptr other) {
     sub = f(sub, other->sum);
     subcnt += other->cnt;
   }
-  void erase(Ptr other) {
+  void make_prefer(Ptr other) {
     sub = finv(sub, other->sum);
     subcnt -= other->cnt;
   }
@@ -91,8 +91,8 @@ struct LinkCutTreeSubtreeQuery
     Ptr rp = nullptr;
     for (Ptr cur = t; cur; cur = cur->p) {
       this->splay(cur), push(cur);
-      if (cur->r) cur->add(cur->r);
-      if (rp) rp->fetch(), cur->erase(rp);
+      if (cur->r) cur->make_normal(cur->r);
+      if (rp) rp->fetch(), cur->make_prefer(rp);
       cur->r = rp, update(cur), rp = cur;
     }
     this->splay(t), push(t);
@@ -102,8 +102,8 @@ struct LinkCutTreeSubtreeQuery
   void link(Ptr u, Ptr v) override {
     this->evert(u);
     this->expose(v);
-    u->p = v;
-    v->add(u), u->cancel = v->lazy;
+    u->p = v, v->r = u;
+    this->update(v);
   }
 
   void toggle(Ptr t) override {
@@ -120,7 +120,7 @@ struct LinkCutTreeSubtreeQuery
   void subtree_add(Ptr t, const T& add_val) {
     expose(t);
     Ptr l = t->l;
-    if (l) l->fetch(), t->l = nullptr, this->update(t);
+    if (l) t->l = nullptr, this->update(t);
     t->apply(add_val);
     if (l) t->l = l, this->update(t);
     push(t);
@@ -131,24 +131,44 @@ struct LinkCutTreeSubtreeQuery
     return f(t->key, t->sub);
   }
 
+  void splay(Ptr t) override {
+    push(t);
+    while (!this->is_root(t)) {
+      Ptr q = t->p;
+      if (this->is_root(q)) {
+        push(q), push(t);
+        rot(t);
+      } else {
+        Ptr r = q->p;
+        push(r), push(q), push(t);
+        if (this->pos(q) == this->pos(t))
+          rot(q), rot(t);
+        else
+          rot(t), rot(t);
+      }
+    }
+  }
+
+ protected:
   void rot(Ptr t) override {
     Ptr x = t->p, y = x->p;
+    if (y) y->fetch();
     x->fetch(), t->fetch();
     if (this->pos(t) == -1) {
-      if ((x->l = t->r)) t->r->fetch(), t->r->p = x;
+      if ((x->l = t->r)) t->r->p = x;
       t->r = x, x->p = t;
     } else {
-      if ((x->r = t->l)) t->l->fetch(), t->l->p = x;
+      if ((x->r = t->l)) t->l->p = x;
       t->l = x, x->p = t;
     }
     update(x), update(t);
     if ((t->p = y)) {
-      if (y->l == x) y->l = t, t->cancel = y->lazy;
-      if (y->r == x) y->r = t, t->cancel = y->lazy;
+      if (y->l == x) y->l = t, update(y);
+      if (y->r == x) y->r = t, update(y);
     }
   }
 };
 
 /**
- * @brief 部分木クエリLink/Cut Tree
+ * @brief 部分木加算クエリLink/Cut Tree
  */

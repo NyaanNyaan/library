@@ -70,7 +70,7 @@ struct LinkCutBase : Splay {
     this->update(t);
   }
 
-  decltype(Node::key) get_key(Ptr t) { return t->key; }
+  virtual decltype(Node::key) get_key(Ptr t) { return t->key; }
 
   decltype(Node::key) fold(Ptr u, Ptr v) {
     evert(u);
