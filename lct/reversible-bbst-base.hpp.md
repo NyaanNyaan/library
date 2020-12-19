@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: lct/link-cut-tree-subtree-add.hpp
-    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
+    title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree.hpp
     title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"

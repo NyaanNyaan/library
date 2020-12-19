@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: lct/link-cut-tree-lazy.hpp
     title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
   - icon: ':warning:'
     path: lct/link-cut-tree-subtree-add.hpp
-    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
+    title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree.hpp
     title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree.hpp
     title: Link/Cut Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-lazy-reversible.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree"
   - icon: ':heavy_check_mark:'
@@ -33,11 +33,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Splay Tree(base)
     links: []
@@ -137,7 +137,7 @@ data:
   - lct/link-cut-tree-subtree.hpp
   - lct/link-cut-tree-lazy.hpp
   timestamp: '2020-12-18 23:44:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp

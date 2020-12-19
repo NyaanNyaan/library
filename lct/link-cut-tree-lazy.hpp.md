@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/lazy-reversible-bbst-base.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\
       \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/link-cut-base.hpp
     title: Link/Cut Tree(base)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-base.hpp
     title: Splay Tree(base)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-lazy-reversible.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
     links: []
@@ -118,23 +118,29 @@ data:
     \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
     \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
     \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
-    \ = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) {\
-    \ return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
+    \ = key;\n    this->update(t);\n  }\n\n  virtual decltype(Node::key) get_key(Ptr\
+    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
     \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link/Cut Tree(base)\n\
     \ * @docs docs/lct/link-cut-tree.md\n */\n#line 7 \"lct/link-cut-tree-lazy.hpp\"\
     \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ts)(T)>\nstruct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
+    \          T (*ts)(T)>\nstruct LazyLinkCutTree\n    : LinkCutBase<LazyReversibleSplayTree<T,\
     \ E, f, g, h, ts>> {\n  using base = LinkCutBase<LazyReversibleSplayTree<T, E,\
-    \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void apply(Ptr u, Ptr\
-    \ v, const E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v,\
-    \ e);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink/Cut Tree\n */\n"
+    \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void set_key(Ptr t, const\
+    \ decltype(Node::key)& key) override{\n    this->evert(t);\n    t->key = key;\n\
+    \    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) override {\n\
+    \    this->evert(t);\n    return t->key;\n  }\n\n  void apply(Ptr u, Ptr v, const\
+    \ E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v, e);\n\
+    \  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink/Cut Tree\n */\n"
   code: "#pragma once\n\n#include \"splay-lazy-reversible.hpp\"\n\n//\n#include \"\
     link-cut-base.hpp\"\n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T,\
-    \ E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
+    \ E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct LazyLinkCutTree\n    : LinkCutBase<LazyReversibleSplayTree<T,\
     \ E, f, g, h, ts>> {\n  using base = LinkCutBase<LazyReversibleSplayTree<T, E,\
-    \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void apply(Ptr u, Ptr\
-    \ v, const E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v,\
-    \ e);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink/Cut Tree\n */\n"
+    \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void set_key(Ptr t, const\
+    \ decltype(Node::key)& key) override{\n    this->evert(t);\n    t->key = key;\n\
+    \    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) override {\n\
+    \    this->evert(t);\n    return t->key;\n  }\n\n  void apply(Ptr u, Ptr v, const\
+    \ E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v, e);\n\
+    \  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink/Cut Tree\n */\n"
   dependsOn:
   - lct/splay-lazy-reversible.hpp
   - lct/lazy-reversible-bbst-base.hpp
@@ -143,8 +149,8 @@ data:
   isVerificationFile: false
   path: lct/link-cut-tree-lazy.hpp
   requiredBy: []
-  timestamp: '2020-12-18 23:44:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-19 12:07:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
 documentation_of: lct/link-cut-tree-lazy.hpp

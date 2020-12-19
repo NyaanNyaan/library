@@ -2,12 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: lct/link-cut-tree-lazy.hpp
     title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
   - icon: ':warning:'
     path: lct/link-cut-tree-subtree-add.hpp
-    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
+    title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree.hpp
     title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
@@ -24,11 +24,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/lct/link-cut-tree.md
     document_title: Link/Cut Tree(base)
@@ -50,7 +50,7 @@ data:
     \  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n    while (x->l) this->push(x),\
     \ x = x->l;\n    return x;\n  }\n\n  virtual void set_key(Ptr t, const decltype(Node::key)&\
     \ key) {\n    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n\
-    \  decltype(Node::key) get_key(Ptr t) { return t->key; }\n\n  decltype(Node::key)\
+    \  virtual decltype(Node::key) get_key(Ptr t) { return t->key; }\n\n  decltype(Node::key)\
     \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
     };\n\n/**\n * @brief Link/Cut Tree(base)\n * @docs docs/lct/link-cut-tree.md\n\
     \ */\n"
@@ -70,10 +70,11 @@ data:
     \        x = x->l;\n      }\n    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr\
     \ x) {\n    expose(x);\n    while (x->l) this->push(x), x = x->l;\n    return\
     \ x;\n  }\n\n  virtual void set_key(Ptr t, const decltype(Node::key)& key) {\n\
-    \    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n  decltype(Node::key)\
-    \ get_key(Ptr t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v)\
-    \ {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief\
-    \ Link/Cut Tree(base)\n * @docs docs/lct/link-cut-tree.md\n */\n"
+    \    this->splay(t);\n    t->key = key;\n    this->update(t);\n  }\n\n  virtual\
+    \ decltype(Node::key) get_key(Ptr t) { return t->key; }\n\n  decltype(Node::key)\
+    \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
+    };\n\n/**\n * @brief Link/Cut Tree(base)\n * @docs docs/lct/link-cut-tree.md\n\
+    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: lct/link-cut-base.hpp
@@ -82,8 +83,8 @@ data:
   - lct/link-cut-tree-subtree-add.hpp
   - lct/link-cut-tree-subtree.hpp
   - lct/link-cut-tree-lazy.hpp
-  timestamp: '2020-12-18 15:24:25+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-12-19 12:07:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
@@ -164,11 +165,12 @@ Ptr expose(Ptr t) {
   - `expose(v)`する
   - `u->p = v`として`u`と`v`をNormal Edgeでつなぐ
     - `evert(u)`または`expose(u)`した頂点は親が`nullptr`になっていることを利用
-  - TODO: linkするだけなら`expose(v)`いらなくない？`evert(u), u->p = v`でいい気がする
+  - 疑問点: linkするだけなら`expose(v)`いらなくない？`evert(u), u->p = v`でいい気がする
     - [Gifted Infantの実装](http://yosupo06.github.io/Algorithm/src/datastructure/linkcuttree.hpp)は`evert(u), expose(v)`している
     - [kimiyukiさんの提出](https://judge.yosupo.jp/submission/4151)だと`expose(v)`の行に`// for the time complexity`と書いてある
     - [Library Checkerのfastest](https://judge.yosupo.jp/submission/31941)だと`expose(v)`していない
     - 以上をまとめると「あっても無くても良さそう？計算量解析に踏み入らないと理由はわからなそう？」という結論に
+    - パス加算クエリや部分木クエリに対応するときは`expose(v)`は必要そう(根方向からの伝播を反映させる必要があるため)
 
 - `cut(u, v)`：頂点`u`,`v`を切り離す
   - `evert(u), expose(v)`する

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/link-cut-base.hpp
     title: Link/Cut Tree(base)
   - icon: ':heavy_check_mark:'
@@ -11,28 +11,28 @@ data:
     path: lct/reversible-bbst-base.hpp
     title: "\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
       \u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-base.hpp
     title: Splay Tree(base)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -279,8 +279,8 @@ data:
     \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
     \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
     \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
-    \ = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) {\
-    \ return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
+    \ = key;\n    this->update(t);\n  }\n\n  virtual decltype(Node::key) get_key(Ptr\
+    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
     \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link/Cut Tree(base)\n\
     \ * @docs docs/lct/link-cut-tree.md\n */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\
     \n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n\
@@ -371,7 +371,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
   requiredBy: []
-  timestamp: '2020-12-18 23:44:26+09:00'
+  timestamp: '2020-12-19 12:07:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp

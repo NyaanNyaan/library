@@ -1,53 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/lazy-reversible-bbst-base.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\
       \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/link-cut-base.hpp
     title: Link/Cut Tree(base)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: lct/link-cut-tree-lazy.hpp
     title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-base.hpp
     title: Splay Tree(base)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-lazy-reversible.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/affine-transformation.hpp
     title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -370,24 +370,27 @@ data:
     \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
     \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
     \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
-    \ = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) {\
-    \ return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
+    \ = key;\n    this->update(t);\n  }\n\n  virtual decltype(Node::key) get_key(Ptr\
+    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
     \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link/Cut Tree(base)\n\
     \ * @docs docs/lct/link-cut-tree.md\n */\n#line 7 \"lct/link-cut-tree-lazy.hpp\"\
     \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ts)(T)>\nstruct LazyLinkCutTree : LinkCutBase<LazyReversibleSplayTree<T,\
+    \          T (*ts)(T)>\nstruct LazyLinkCutTree\n    : LinkCutBase<LazyReversibleSplayTree<T,\
     \ E, f, g, h, ts>> {\n  using base = LinkCutBase<LazyReversibleSplayTree<T, E,\
-    \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void apply(Ptr u, Ptr\
-    \ v, const E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v,\
-    \ e);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink/Cut Tree\n */\n\
-    #line 14 \"verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp\"\
-    \n//\n\nusing T = pair<mint, mint>;\nusing E = Affine<mint>;\nT f(T a, T b) {\
-    \ return T(a.first + b.first, a.second + b.second); }\nT g(T a, E b) { return\
-    \ T(a.first * b.a + a.second * b.b, a.second); }\nE h(E a, E b) { return a * b;\
-    \ };\nT ts(T a) { return a; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n\
-    \  int N, Q;\n  rd(N, Q);\n\n  using LCT = LazyLinkCutTree<T, E, f, g, h, ts>;\n\
-    \  LCT lct;\n\n  vector<LCT::Ptr> vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n\
-    \    vs[i] = lct.my_new(T(a, 1));\n  }\n\n  for (int i = 1; i < N; i++) lct.link(vs[i\
+    \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void set_key(Ptr t, const\
+    \ decltype(Node::key)& key) override{\n    this->evert(t);\n    t->key = key;\n\
+    \    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) override {\n\
+    \    this->evert(t);\n    return t->key;\n  }\n\n  void apply(Ptr u, Ptr v, const\
+    \ E& e) {\n    this->evert(u);\n    this->expose(v);\n    this->propagate(v, e);\n\
+    \  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642CLink/Cut Tree\n */\n#line 14\
+    \ \"verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp\"\n\
+    //\n\nusing T = pair<mint, mint>;\nusing E = Affine<mint>;\nT f(T a, T b) { return\
+    \ T(a.first + b.first, a.second + b.second); }\nT g(T a, E b) { return T(a.first\
+    \ * b.a + a.second * b.b, a.second); }\nE h(E a, E b) { return a * b; };\nT ts(T\
+    \ a) { return a; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int N,\
+    \ Q;\n  rd(N, Q);\n\n  using LCT = LazyLinkCutTree<T, E, f, g, h, ts>;\n  LCT\
+    \ lct;\n\n  vector<LCT::Ptr> vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n \
+    \   vs[i] = lct.my_new(T(a, 1));\n  }\n\n  for (int i = 1; i < N; i++) lct.link(vs[i\
     \ - 1], vs[i]);\n\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd ==\
     \ 0) {\n      int l, r, b, c;\n      rd(l, r, b, c);\n      lct.apply(vs[l], vs[r\
     \ - 1], E(b, c));\n    } else {\n      int l, r;\n      rd(l, r);\n      T fold\
@@ -426,8 +429,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   requiredBy: []
-  timestamp: '2020-12-18 23:44:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-12-19 12:07:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
 layout: document

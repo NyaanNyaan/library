@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/link-cut-base.hpp
     title: Link/Cut Tree(base)
   - icon: ':heavy_check_mark:'
     path: lct/reversible-bbst-base.hpp
     title: "\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
       \u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-base.hpp
     title: Splay Tree(base)
   _extendedRequiredBy: []
@@ -108,8 +108,8 @@ data:
     \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
     \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
     \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
-    \ = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) {\
-    \ return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
+    \ = key;\n    this->update(t);\n  }\n\n  virtual decltype(Node::key) get_key(Ptr\
+    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
     \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link/Cut Tree(base)\n\
     \ * @docs docs/lct/link-cut-tree.md\n */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\
     \n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n\
@@ -161,7 +161,7 @@ data:
   isVerificationFile: false
   path: lct/link-cut-tree-subtree.hpp
   requiredBy: []
-  timestamp: '2020-12-18 23:44:26+09:00'
+  timestamp: '2020-12-19 12:07:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp

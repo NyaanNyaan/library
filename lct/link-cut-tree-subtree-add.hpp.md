@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/link-cut-base.hpp
     title: Link/Cut Tree(base)
   - icon: ':heavy_check_mark:'
     path: lct/reversible-bbst-base.hpp
     title: "\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
       \u30E9\u30B9)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: lct/splay-base.hpp
     title: Splay Tree(base)
   _extendedRequiredBy: []
@@ -16,7 +16,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    document_title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
+    document_title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
     links: []
   bundledCode: "#line 2 \"lct/link-cut-tree-subtree-add.hpp\"\n\n// \u30D0\u30B0\u3000\
     \u898B\u3064\u304B\u3089\u3093\u3000\u7D42\u308F\u308A\n\n#line 2 \"lct/reversible-bbst-base.hpp\"\
@@ -85,17 +85,17 @@ data:
     \  int cnt, subcnt;\n  bool rev;\n\n  LinkCutForSubtreeNode(const T& t = T())\n\
     \      : l(),\n        r(),\n        p(),\n        key(t),\n        sum(t),\n\
     \        lazy(T()),\n        cancel(T()),\n        sub(T()),\n        cnt(1),\n\
-    \        subcnt(0),\n        rev(false) {}\n  void add(Ptr other) {\n    sub =\
-    \ f(sub, other->sum);\n    subcnt += other->cnt;\n  }\n  void erase(Ptr other)\
-    \ {\n    sub = finv(sub, other->sum);\n    subcnt -= other->cnt;\n  }\n  void\
-    \ merge(Ptr n1, Ptr n2) {\n    sum = f(f(n1 ? n1->sum : T(), key), f(sub, n2 ?\
-    \ n2->sum : T()));\n    cnt = 1 + (n1 ? n1->cnt : 0) + (n2 ? n2->cnt : 0) + subcnt;\n\
-    \    if (n1) n1->cancel = lazy;\n    if (n2) n2->cancel = lazy;\n  }\n  void apply(const\
-    \ T& add_val) {\n    key = f(key, add_val);\n    sum = f(sum, mul(add_val, cnt));\n\
-    \    lazy = f(lazy, add_val);\n    sub = f(sub, mul(add_val, subcnt));\n  }\n\
-    \  void fetch() {\n    if (!p) return;\n    apply(p->lazy - cancel);\n    cancel\
-    \ = p->lazy;\n  }\n};\n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T),\
-    \ T (*mul)(T, long long)>\nstruct SplayTreeForLCSubtree\n    : ReversibleBBST<SplayTreeBase<LinkCutForSubtreeNode<T,\
+    \        subcnt(0),\n        rev(false) {}\n  void make_normal(Ptr other) {\n\
+    \    sub = f(sub, other->sum);\n    subcnt += other->cnt;\n  }\n  void make_prefer(Ptr\
+    \ other) {\n    sub = finv(sub, other->sum);\n    subcnt -= other->cnt;\n  }\n\
+    \  void merge(Ptr n1, Ptr n2) {\n    sum = f(f(n1 ? n1->sum : T(), key), f(sub,\
+    \ n2 ? n2->sum : T()));\n    cnt = 1 + (n1 ? n1->cnt : 0) + (n2 ? n2->cnt : 0)\
+    \ + subcnt;\n    if (n1) n1->cancel = lazy;\n    if (n2) n2->cancel = lazy;\n\
+    \  }\n  void apply(const T& add_val) {\n    key = f(key, add_val);\n    sum =\
+    \ f(sum, mul(add_val, cnt));\n    lazy = f(lazy, add_val);\n    sub = f(sub, mul(add_val,\
+    \ subcnt));\n  }\n  void fetch() {\n    if (!p) return;\n    apply(p->lazy - cancel);\n\
+    \    cancel = p->lazy;\n  }\n};\n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T,\
+    \ T), T (*mul)(T, long long)>\nstruct SplayTreeForLCSubtree\n    : ReversibleBBST<SplayTreeBase<LinkCutForSubtreeNode<T,\
     \ f, finv, mul>>,\n                     LinkCutForSubtreeNode<T, f, finv, mul>,\
     \ T, nullptr,\n                     nullptr> {\n  using Node = LinkCutForSubtreeNode<T,\
     \ f, finv, mul>;\n};\n//\n#line 2 \"lct/link-cut-base.hpp\"\n\ntemplate <typename\
@@ -115,8 +115,8 @@ data:
     \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
     \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
     \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
-    \ = key;\n    this->update(t);\n  }\n\n  decltype(Node::key) get_key(Ptr t) {\
-    \ return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
+    \ = key;\n    this->update(t);\n  }\n\n  virtual decltype(Node::key) get_key(Ptr\
+    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
     \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link/Cut Tree(base)\n\
     \ * @docs docs/lct/link-cut-tree.md\n */\n#line 65 \"lct/link-cut-tree-subtree-add.hpp\"\
     \n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T), T (*mul)(T, long long)>\n\
@@ -129,24 +129,29 @@ data:
     \ update(Ptr t) override {\n    if (!t) return t;\n    t->merge(t->l, t->r);\n\
     \    return t;\n  }\n\n  Ptr expose(Ptr t) override {\n    Ptr rp = nullptr;\n\
     \    for (Ptr cur = t; cur; cur = cur->p) {\n      this->splay(cur), push(cur);\n\
-    \      if (cur->r) cur->add(cur->r);\n      if (rp) rp->fetch(), cur->erase(rp);\n\
+    \      if (cur->r) cur->make_normal(cur->r);\n      if (rp) rp->fetch(), cur->make_prefer(rp);\n\
     \      cur->r = rp, update(cur), rp = cur;\n    }\n    this->splay(t), push(t);\n\
     \    return rp;\n  }\n\n  void link(Ptr u, Ptr v) override {\n    this->evert(u);\n\
-    \    this->expose(v);\n    u->p = v;\n    v->add(u), u->cancel = v->lazy;\n  }\n\
-    \n  void toggle(Ptr t) override {\n    swap(t->l, t->r);\n    t->rev ^= true;\n\
+    \    this->expose(v);\n    u->p = v, v->r = u;\n    this->update(v);\n  }\n\n\
+    \  void toggle(Ptr t) override {\n    swap(t->l, t->r);\n    t->rev ^= true;\n\
     \  }\n\n  void set_key(Ptr t, const T& key) override {\n    this->expose(t);\n\
     \    t->key = key;\n    this->update(t);\n  }\n\n  void subtree_add(Ptr t, const\
-    \ T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) l->fetch(), t->l\
-    \ = nullptr, this->update(t);\n    t->apply(add_val);\n    if (l) t->l = l, this->update(t);\n\
+    \ T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) t->l = nullptr,\
+    \ this->update(t);\n    t->apply(add_val);\n    if (l) t->l = l, this->update(t);\n\
     \    push(t);\n  }\n\n  T subtree_sum(Ptr t) {\n    this->expose(t);\n    return\
-    \ f(t->key, t->sub);\n  }\n\n  void rot(Ptr t) override {\n    Ptr x = t->p, y\
-    \ = x->p;\n    x->fetch(), t->fetch();\n    if (this->pos(t) == -1) {\n      if\
-    \ ((x->l = t->r)) t->r->fetch(), t->r->p = x;\n      t->r = x, x->p = t;\n   \
-    \ } else {\n      if ((x->r = t->l)) t->l->fetch(), t->l->p = x;\n      t->l =\
-    \ x, x->p = t;\n    }\n    update(x), update(t);\n    if ((t->p = y)) {\n    \
-    \  if (y->l == x) y->l = t, t->cancel = y->lazy;\n      if (y->r == x) y->r =\
-    \ t, t->cancel = y->lazy;\n    }\n  }\n};\n\n/**\n * @brief \u90E8\u5206\u6728\
-    \u30AF\u30A8\u30EALink/Cut Tree\n */\n"
+    \ f(t->key, t->sub);\n  }\n\n  void splay(Ptr t) override {\n    push(t);\n  \
+    \  while (!this->is_root(t)) {\n      Ptr q = t->p;\n      if (this->is_root(q))\
+    \ {\n        push(q), push(t);\n        rot(t);\n      } else {\n        Ptr r\
+    \ = q->p;\n        push(r), push(q), push(t);\n        if (this->pos(q) == this->pos(t))\n\
+    \          rot(q), rot(t);\n        else\n          rot(t), rot(t);\n      }\n\
+    \    }\n  }\n\n protected:\n  void rot(Ptr t) override {\n    Ptr x = t->p, y\
+    \ = x->p;\n    if (y) y->fetch();\n    x->fetch(), t->fetch();\n    if (this->pos(t)\
+    \ == -1) {\n      if ((x->l = t->r)) t->r->p = x;\n      t->r = x, x->p = t;\n\
+    \    } else {\n      if ((x->r = t->l)) t->l->p = x;\n      t->l = x, x->p = t;\n\
+    \    }\n    update(x), update(t);\n    if ((t->p = y)) {\n      if (y->l == x)\
+    \ y->l = t, update(y);\n      if (y->r == x) y->r = t, update(y);\n    }\n  }\n\
+    };\n\n/**\n * @brief \u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut\
+    \ Tree\n */\n"
   code: "#pragma once\n\n// \u30D0\u30B0\u3000\u898B\u3064\u304B\u3089\u3093\u3000\
     \u7D42\u308F\u308A\n\n#include \"reversible-bbst-base.hpp\"\n#include \"splay-base.hpp\"\
     \n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T), T (*mul)(T, long long)>\n\
@@ -155,17 +160,17 @@ data:
     \  int cnt, subcnt;\n  bool rev;\n\n  LinkCutForSubtreeNode(const T& t = T())\n\
     \      : l(),\n        r(),\n        p(),\n        key(t),\n        sum(t),\n\
     \        lazy(T()),\n        cancel(T()),\n        sub(T()),\n        cnt(1),\n\
-    \        subcnt(0),\n        rev(false) {}\n  void add(Ptr other) {\n    sub =\
-    \ f(sub, other->sum);\n    subcnt += other->cnt;\n  }\n  void erase(Ptr other)\
-    \ {\n    sub = finv(sub, other->sum);\n    subcnt -= other->cnt;\n  }\n  void\
-    \ merge(Ptr n1, Ptr n2) {\n    sum = f(f(n1 ? n1->sum : T(), key), f(sub, n2 ?\
-    \ n2->sum : T()));\n    cnt = 1 + (n1 ? n1->cnt : 0) + (n2 ? n2->cnt : 0) + subcnt;\n\
-    \    if (n1) n1->cancel = lazy;\n    if (n2) n2->cancel = lazy;\n  }\n  void apply(const\
-    \ T& add_val) {\n    key = f(key, add_val);\n    sum = f(sum, mul(add_val, cnt));\n\
-    \    lazy = f(lazy, add_val);\n    sub = f(sub, mul(add_val, subcnt));\n  }\n\
-    \  void fetch() {\n    if (!p) return;\n    apply(p->lazy - cancel);\n    cancel\
-    \ = p->lazy;\n  }\n};\n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T),\
-    \ T (*mul)(T, long long)>\nstruct SplayTreeForLCSubtree\n    : ReversibleBBST<SplayTreeBase<LinkCutForSubtreeNode<T,\
+    \        subcnt(0),\n        rev(false) {}\n  void make_normal(Ptr other) {\n\
+    \    sub = f(sub, other->sum);\n    subcnt += other->cnt;\n  }\n  void make_prefer(Ptr\
+    \ other) {\n    sub = finv(sub, other->sum);\n    subcnt -= other->cnt;\n  }\n\
+    \  void merge(Ptr n1, Ptr n2) {\n    sum = f(f(n1 ? n1->sum : T(), key), f(sub,\
+    \ n2 ? n2->sum : T()));\n    cnt = 1 + (n1 ? n1->cnt : 0) + (n2 ? n2->cnt : 0)\
+    \ + subcnt;\n    if (n1) n1->cancel = lazy;\n    if (n2) n2->cancel = lazy;\n\
+    \  }\n  void apply(const T& add_val) {\n    key = f(key, add_val);\n    sum =\
+    \ f(sum, mul(add_val, cnt));\n    lazy = f(lazy, add_val);\n    sub = f(sub, mul(add_val,\
+    \ subcnt));\n  }\n  void fetch() {\n    if (!p) return;\n    apply(p->lazy - cancel);\n\
+    \    cancel = p->lazy;\n  }\n};\n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T,\
+    \ T), T (*mul)(T, long long)>\nstruct SplayTreeForLCSubtree\n    : ReversibleBBST<SplayTreeBase<LinkCutForSubtreeNode<T,\
     \ f, finv, mul>>,\n                     LinkCutForSubtreeNode<T, f, finv, mul>,\
     \ T, nullptr,\n                     nullptr> {\n  using Node = LinkCutForSubtreeNode<T,\
     \ f, finv, mul>;\n};\n//\n#include \"link-cut-base.hpp\"\n\ntemplate <typename\
@@ -178,24 +183,29 @@ data:
     \  }\n\n  Ptr update(Ptr t) override {\n    if (!t) return t;\n    t->merge(t->l,\
     \ t->r);\n    return t;\n  }\n\n  Ptr expose(Ptr t) override {\n    Ptr rp = nullptr;\n\
     \    for (Ptr cur = t; cur; cur = cur->p) {\n      this->splay(cur), push(cur);\n\
-    \      if (cur->r) cur->add(cur->r);\n      if (rp) rp->fetch(), cur->erase(rp);\n\
+    \      if (cur->r) cur->make_normal(cur->r);\n      if (rp) rp->fetch(), cur->make_prefer(rp);\n\
     \      cur->r = rp, update(cur), rp = cur;\n    }\n    this->splay(t), push(t);\n\
     \    return rp;\n  }\n\n  void link(Ptr u, Ptr v) override {\n    this->evert(u);\n\
-    \    this->expose(v);\n    u->p = v;\n    v->add(u), u->cancel = v->lazy;\n  }\n\
-    \n  void toggle(Ptr t) override {\n    swap(t->l, t->r);\n    t->rev ^= true;\n\
+    \    this->expose(v);\n    u->p = v, v->r = u;\n    this->update(v);\n  }\n\n\
+    \  void toggle(Ptr t) override {\n    swap(t->l, t->r);\n    t->rev ^= true;\n\
     \  }\n\n  void set_key(Ptr t, const T& key) override {\n    this->expose(t);\n\
     \    t->key = key;\n    this->update(t);\n  }\n\n  void subtree_add(Ptr t, const\
-    \ T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) l->fetch(), t->l\
-    \ = nullptr, this->update(t);\n    t->apply(add_val);\n    if (l) t->l = l, this->update(t);\n\
+    \ T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) t->l = nullptr,\
+    \ this->update(t);\n    t->apply(add_val);\n    if (l) t->l = l, this->update(t);\n\
     \    push(t);\n  }\n\n  T subtree_sum(Ptr t) {\n    this->expose(t);\n    return\
-    \ f(t->key, t->sub);\n  }\n\n  void rot(Ptr t) override {\n    Ptr x = t->p, y\
-    \ = x->p;\n    x->fetch(), t->fetch();\n    if (this->pos(t) == -1) {\n      if\
-    \ ((x->l = t->r)) t->r->fetch(), t->r->p = x;\n      t->r = x, x->p = t;\n   \
-    \ } else {\n      if ((x->r = t->l)) t->l->fetch(), t->l->p = x;\n      t->l =\
-    \ x, x->p = t;\n    }\n    update(x), update(t);\n    if ((t->p = y)) {\n    \
-    \  if (y->l == x) y->l = t, t->cancel = y->lazy;\n      if (y->r == x) y->r =\
-    \ t, t->cancel = y->lazy;\n    }\n  }\n};\n\n/**\n * @brief \u90E8\u5206\u6728\
-    \u30AF\u30A8\u30EALink/Cut Tree\n */\n"
+    \ f(t->key, t->sub);\n  }\n\n  void splay(Ptr t) override {\n    push(t);\n  \
+    \  while (!this->is_root(t)) {\n      Ptr q = t->p;\n      if (this->is_root(q))\
+    \ {\n        push(q), push(t);\n        rot(t);\n      } else {\n        Ptr r\
+    \ = q->p;\n        push(r), push(q), push(t);\n        if (this->pos(q) == this->pos(t))\n\
+    \          rot(q), rot(t);\n        else\n          rot(t), rot(t);\n      }\n\
+    \    }\n  }\n\n protected:\n  void rot(Ptr t) override {\n    Ptr x = t->p, y\
+    \ = x->p;\n    if (y) y->fetch();\n    x->fetch(), t->fetch();\n    if (this->pos(t)\
+    \ == -1) {\n      if ((x->l = t->r)) t->r->p = x;\n      t->r = x, x->p = t;\n\
+    \    } else {\n      if ((x->r = t->l)) t->l->p = x;\n      t->l = x, x->p = t;\n\
+    \    }\n    update(x), update(t);\n    if ((t->p = y)) {\n      if (y->l == x)\
+    \ y->l = t, update(y);\n      if (y->r == x) y->r = t, update(y);\n    }\n  }\n\
+    };\n\n/**\n * @brief \u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut\
+    \ Tree\n */\n"
   dependsOn:
   - lct/reversible-bbst-base.hpp
   - lct/splay-base.hpp
@@ -203,7 +213,7 @@ data:
   isVerificationFile: false
   path: lct/link-cut-tree-subtree-add.hpp
   requiredBy: []
-  timestamp: '2020-12-18 23:44:26+09:00'
+  timestamp: '2020-12-19 12:07:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: lct/link-cut-tree-subtree-add.hpp
@@ -211,5 +221,5 @@ layout: document
 redirect_from:
 - /library/lct/link-cut-tree-subtree-add.hpp
 - /library/lct/link-cut-tree-subtree-add.hpp.html
-title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
+title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
 ---
