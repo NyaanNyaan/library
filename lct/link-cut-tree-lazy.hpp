@@ -12,13 +12,13 @@ struct LazyLinkCutTree
   using base = LinkCutBase<LazyReversibleSplayTree<T, E, f, g, h, ts>>;
   using Ptr = typename base::Ptr;
 
-  void set_key(Ptr t, const decltype(Node::key)& key) override{
+  void set_key(Ptr t, const T& key) override{
     this->evert(t);
     t->key = key;
     this->update(t);
   }
 
-  decltype(Node::key) get_key(Ptr t) override {
+  T get_key(Ptr t) override {
     this->evert(t);
     return t->key;
   }
