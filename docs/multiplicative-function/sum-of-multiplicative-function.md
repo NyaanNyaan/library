@@ -52,7 +52,9 @@ $$h(x,n) = \begin{cases} h(x-1,n) & \mathrm{if}\ x\ \mathrm{is}\ \mathrm{not}\  
 
 - $k$番目に小さい素数を$p_k$と表して、$n$の最大の素因数を$p_i$とおく。すると$n$の子の頂点を小さい順に並べた列は$np_i, np_{i+1},\ldots , np_l$のように表せる。($p_l$は$np_l \leq N$を満たす最大の素数。)また、葉でないという条件から$p_i \leq \sqrt{n}$が従う。
 - このうち$n$と$p_{i+1},\ldots,p_{l}$は互いに素であるから、乗法性を利用して
+
 $$\sum_{i+1\leq j\leq l} f(np_{j})=f(n)\sum_{i+1\leq j\leq l} f(p_{j})=f(n)\left(S_p\left(\left\lfloor\frac{N}{n}\right\rfloor\right)-S_p\left(p_i\right)\right)$$
+
 と$S_p$を用いて高速に計算できる。
 - $f(np_i)$は$n=m\cdot p_i^e(\gcd(m,p_i)=1)$と素因数分解すれば個別に計算できる。
 
