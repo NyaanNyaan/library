@@ -378,7 +378,7 @@ data:
     \          T (*ts)(T)>\nstruct LazyLinkCutTree\n    : LinkCutBase<LazyReversibleSplayTree<T,\
     \ E, f, g, h, ts>> {\n  using base = LinkCutBase<LazyReversibleSplayTree<T, E,\
     \ f, g, h, ts>>;\n  using Ptr = typename base::Ptr;\n\n  void set_key(Ptr t, const\
-    \ T& key) override{\n    this->evert(t);\n    t->key = key;\n    this->update(t);\n\
+    \ T& key) override {\n    this->evert(t);\n    t->key = key;\n    this->update(t);\n\
     \  }\n\n  T get_key(Ptr t) override {\n    this->evert(t);\n    return t->key;\n\
     \  }\n\n  void apply(Ptr u, Ptr v, const E& e) {\n    this->evert(u);\n    this->expose(v);\n\
     \    this->propagate(v, e);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\u642C\
@@ -428,7 +428,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   requiredBy: []
-  timestamp: '2020-12-19 12:16:37+09:00'
+  timestamp: '2020-12-20 20:23:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
