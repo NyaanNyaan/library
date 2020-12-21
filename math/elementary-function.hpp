@@ -93,6 +93,7 @@ bool isPrimitiveRoot(long long r, long long mod) {
 
 // Get Primitive Root
 long long PrimitiveRoot(long long mod) {
+  if(mod == 2) return 1;
   long long ret = 1;
   while (isPrimitiveRoot(ret, mod) == false) ret++;
   return ret;

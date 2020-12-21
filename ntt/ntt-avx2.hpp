@@ -1,60 +1,64 @@
 #pragma once
 
-
-
 #include "../modint/simd-montgomery.hpp"
 
+namespace ntt_inner {
+using u64 = uint64_t;
+constexpr uint32_t get_pr(uint32_t mod) {
+  if (mod == 2) return 1;
+  u64 ds[32] = {};
+  int idx = 0;
+  u64 m = mod - 1;
+  for (u64 i = 2; i * i <= m; ++i) {
+    if (m % i == 0) {
+      ds[idx++] = i;
+      while (m % i == 0) m /= i;
+    }
+  }
+  if (m != 1) ds[idx++] = m;
+
+  uint32_t pr = 2;
+  while (1) {
+    int flg = 1;
+    for (int i = 0; i < idx; ++i) {
+      u64 a = pr, b = (mod - 1) / ds[i], r = 1;
+      while (b) {
+        if (b & 1) r = r * a % mod;
+        a = a * a % mod;
+        b >>= 1;
+      }
+      if (r == 1) {
+        flg = 0;
+        break;
+      }
+    }
+    if (flg == 1) break;
+    ++pr;
+  }
+  return pr;
+}
+
 constexpr int SZ_FFT_BUF = 1 << 23;
-uint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));
-uint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));
+uint32_t _buf1[SZ_FFT_BUF] __attribute__((aligned(64)));
+uint32_t _buf2[SZ_FFT_BUF] __attribute__((aligned(64)));
+}  // namespace ntt_inner
 
 template <typename mint>
 struct NTT {
-  static constexpr uint32_t get_pr() {
-    uint32_t mod = mint::get_mod();
-    using u64 = uint64_t;
-    u64 ds[32] = {};
-    int idx = 0;
-    u64 m = mod - 1;
-    for (u64 i = 2; i * i <= m; ++i) {
-      if (m % i == 0) {
-        ds[idx++] = i;
-        while (m % i == 0) m /= i;
-      }
-    }
-    if (m != 1) ds[idx++] = m;
-
-    uint32_t pr = 2;
-    while (1) {
-      int flg = 1;
-      for (int i = 0; i < idx; ++i) {
-        u64 a = pr, b = (mod - 1) / ds[i], r = 1;
-        while (b) {
-          if (b & 1) r = r * a % mod;
-          a = a * a % mod;
-          b >>= 1;
-        }
-        if (r == 1) {
-          flg = 0;
-          break;
-        }
-      }
-      if (flg == 1) break;
-      ++pr;
-    }
-    return pr;
-  };
-
   static constexpr uint32_t mod = mint::get_mod();
-  static constexpr uint32_t pr = get_pr();
+  static constexpr uint32_t pr = ntt_inner::get_pr(mint::get_mod());
   static constexpr int level = __builtin_ctzll(mod - 1);
   mint dw[level], dy[level];
   mint *buf1, *buf2;
 
   constexpr NTT() {
     setwy(level);
-    buf1 = reinterpret_cast<mint *>(::buf1_);
-    buf2 = reinterpret_cast<mint *>(::buf2_);
+    union raw_cast {
+      mint dat;
+      uint32_t _;
+    };
+    buf1 = &(((raw_cast *)(ntt_inner::_buf1))->dat);
+    buf2 = &(((raw_cast *)(ntt_inner::_buf2))->dat);
   }
 
   constexpr void setwy(int k) {
@@ -473,40 +477,40 @@ struct NTT {
     int M = 4;
     while (M < l) M <<= 1;
     if (zero_padding) {
-      for (int i = l1; i < M; i++) buf1_[i] = 0;
-      for (int i = l2; i < M; i++) buf2_[i] = 0;
+      for (int i = l1; i < M; i++) ntt_inner::_buf1[i] = 0;
+      for (int i = l2; i < M; i++) ntt_inner::_buf2[i] = 0;
     }
     const __m256i m0 = _mm256_set1_epi32(0);
     const __m256i m1 = _mm256_set1_epi32(mod);
     const __m256i r = _mm256_set1_epi32(mint::r);
     const __m256i N2 = _mm256_set1_epi32(mint::n2);
     for (int i = 0; i < l1; i += 8) {
-      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
+      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf1 + i));
       __m256i b = montgomery_mul_256(a, N2, r, m1);
-      _mm256_storeu_si256((__m256i *)(buf1_ + i), b);
+      _mm256_storeu_si256((__m256i *)(ntt_inner::_buf1 + i), b);
     }
     for (int i = 0; i < l2; i += 8) {
-      __m256i a = _mm256_loadu_si256((__m256i *)(buf2_ + i));
+      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf2 + i));
       __m256i b = montgomery_mul_256(a, N2, r, m1);
-      _mm256_storeu_si256((__m256i *)(buf2_ + i), b);
+      _mm256_storeu_si256((__m256i *)(ntt_inner::_buf2 + i), b);
     }
     ntt(buf1, M);
     ntt(buf2, M);
     for (int i = 0; i < M; i += 8) {
-      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
-      __m256i b = _mm256_loadu_si256((__m256i *)(buf2_ + i));
+      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf1 + i));
+      __m256i b = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf2 + i));
       __m256i c = montgomery_mul_256(a, b, r, m1);
-      _mm256_storeu_si256((__m256i *)(buf1_ + i), c);
+      _mm256_storeu_si256((__m256i *)(ntt_inner::_buf1 + i), c);
     }
     intt(buf1, M, false);
     const __m256i INVM = _mm256_set1_epi32((mint(M).inverse()).a);
     for (int i = 0; i < l; i += 8) {
-      __m256i a = _mm256_loadu_si256((__m256i *)(buf1_ + i));
+      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf1 + i));
       __m256i b = montgomery_mul_256(a, INVM, r, m1);
       __m256i c = my256_mulhi_epu32(my256_mullo_epu32(b, r), m1);
       __m256i d = _mm256_and_si256(_mm256_cmpgt_epi32(c, m0), m1);
       __m256i e = _mm256_sub_epi32(d, c);
-      _mm256_storeu_si256((__m256i *)(buf1_ + i), e);
+      _mm256_storeu_si256((__m256i *)(ntt_inner::_buf1 + i), e);
     }
   }
 
@@ -533,7 +537,7 @@ struct NTT {
         for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
       return s;
     }
-    assert(l <= SZ_FFT_BUF);
+    assert(l <= ntt_inner::SZ_FFT_BUF);
     int M = 4;
     while (M < l) M <<= 1;
     for (int i = 0; i < (int)a.size(); ++i) buf1[i].a = a[i].a;
