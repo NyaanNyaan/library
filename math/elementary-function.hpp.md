@@ -52,20 +52,21 @@ data:
     \  r %= mod;\n  if (r == 0) return false;\n  auto pf = PrimeFactors(mod - 1);\n\
     \  for (auto &x : pf) {\n    if (modpow(r, (mod - 1) / x.first, mod) == 1) return\
     \ false;\n  }\n  return true;\n}\n\n// Get Primitive Root\nlong long PrimitiveRoot(long\
-    \ long mod) {\n  long long ret = 1;\n  while (isPrimitiveRoot(ret, mod) == false)\
-    \ ret++;\n  return ret;\n}\n\n// Euler's phi function\nlong long phi(long long\
-    \ n) {\n  auto pf = PrimeFactors(n);\n  long long ret = n;\n  for (auto p : pf)\
-    \ {\n    ret /= p.first;\n    ret *= (p.first - 1);\n  }\n  return ret;\n}\n\n\
-    // Extended Euclidean algorithm\n// solve : ax + by = gcd(a, b)\n// return : pair(x,\
-    \ y)\npair<long long, long long> extgcd(long long a, long long b) {\n  if (b ==\
-    \ 0) return make_pair(1, 0);\n  long long x, y;\n  tie(y, x) = extgcd(b, a % b);\n\
-    \  y -= a / b * x;\n  return make_pair(x, y);\n}\n\n// Check if n is Square Number\n\
-    // true : return d s.t. d * d == n\n// false : return -1\nlong long SqrtInt(long\
-    \ long n) {\n  if (n == 0 || n == 1) return n;\n  long long d = (long long)sqrt(n)\
-    \ - 1;\n  while (d * d < n) ++d;\n  return (d * d == n) ? d : -1;\n}\n\n// return\
-    \ a number of n's digit\n// zero ... return value if n = 0 (default -> 1)\nint\
-    \ isDigit(long long n, int zero = 1) {\n  if (n == 0) return zero;\n  int ret\
-    \ = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}\n"
+    \ long mod) {\n  if(mod == 2) return 1;\n  long long ret = 1;\n  while (isPrimitiveRoot(ret,\
+    \ mod) == false) ret++;\n  return ret;\n}\n\n// Euler's phi function\nlong long\
+    \ phi(long long n) {\n  auto pf = PrimeFactors(n);\n  long long ret = n;\n  for\
+    \ (auto p : pf) {\n    ret /= p.first;\n    ret *= (p.first - 1);\n  }\n  return\
+    \ ret;\n}\n\n// Extended Euclidean algorithm\n// solve : ax + by = gcd(a, b)\n\
+    // return : pair(x, y)\npair<long long, long long> extgcd(long long a, long long\
+    \ b) {\n  if (b == 0) return make_pair(1, 0);\n  long long x, y;\n  tie(y, x)\
+    \ = extgcd(b, a % b);\n  y -= a / b * x;\n  return make_pair(x, y);\n}\n\n// Check\
+    \ if n is Square Number\n// true : return d s.t. d * d == n\n// false : return\
+    \ -1\nlong long SqrtInt(long long n) {\n  if (n == 0 || n == 1) return n;\n  long\
+    \ long d = (long long)sqrt(n) - 1;\n  while (d * d < n) ++d;\n  return (d * d\
+    \ == n) ? d : -1;\n}\n\n// return a number of n's digit\n// zero ... return value\
+    \ if n = 0 (default -> 1)\nint isDigit(long long n, int zero = 1) {\n  if (n ==\
+    \ 0) return zero;\n  int ret = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n \
+    \ }\n  return ret;\n}\n"
   code: "#pragma once\n\nlong long my_gcd(long long x, long long y) {\n  long long\
     \ z;\n  if (x > y) swap(x, y);\n  while (x) {\n    x = y % (z = x);\n    y = z;\n\
     \  }\n  return y;\n}\nlong long my_lcm(long long x, long long y) {\n  return 1LL\
@@ -95,26 +96,26 @@ data:
     \ isPrimitiveRoot(long long r, long long mod) {\n  r %= mod;\n  if (r == 0) return\
     \ false;\n  auto pf = PrimeFactors(mod - 1);\n  for (auto &x : pf) {\n    if (modpow(r,\
     \ (mod - 1) / x.first, mod) == 1) return false;\n  }\n  return true;\n}\n\n//\
-    \ Get Primitive Root\nlong long PrimitiveRoot(long long mod) {\n  long long ret\
-    \ = 1;\n  while (isPrimitiveRoot(ret, mod) == false) ret++;\n  return ret;\n}\n\
-    \n// Euler's phi function\nlong long phi(long long n) {\n  auto pf = PrimeFactors(n);\n\
-    \  long long ret = n;\n  for (auto p : pf) {\n    ret /= p.first;\n    ret *=\
-    \ (p.first - 1);\n  }\n  return ret;\n}\n\n// Extended Euclidean algorithm\n//\
-    \ solve : ax + by = gcd(a, b)\n// return : pair(x, y)\npair<long long, long long>\
-    \ extgcd(long long a, long long b) {\n  if (b == 0) return make_pair(1, 0);\n\
-    \  long long x, y;\n  tie(y, x) = extgcd(b, a % b);\n  y -= a / b * x;\n  return\
-    \ make_pair(x, y);\n}\n\n// Check if n is Square Number\n// true : return d s.t.\
-    \ d * d == n\n// false : return -1\nlong long SqrtInt(long long n) {\n  if (n\
-    \ == 0 || n == 1) return n;\n  long long d = (long long)sqrt(n) - 1;\n  while\
-    \ (d * d < n) ++d;\n  return (d * d == n) ? d : -1;\n}\n\n// return a number of\
-    \ n's digit\n// zero ... return value if n = 0 (default -> 1)\nint isDigit(long\
-    \ long n, int zero = 1) {\n  if (n == 0) return zero;\n  int ret = 0;\n  while\
-    \ (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}\n"
+    \ Get Primitive Root\nlong long PrimitiveRoot(long long mod) {\n  if(mod == 2)\
+    \ return 1;\n  long long ret = 1;\n  while (isPrimitiveRoot(ret, mod) == false)\
+    \ ret++;\n  return ret;\n}\n\n// Euler's phi function\nlong long phi(long long\
+    \ n) {\n  auto pf = PrimeFactors(n);\n  long long ret = n;\n  for (auto p : pf)\
+    \ {\n    ret /= p.first;\n    ret *= (p.first - 1);\n  }\n  return ret;\n}\n\n\
+    // Extended Euclidean algorithm\n// solve : ax + by = gcd(a, b)\n// return : pair(x,\
+    \ y)\npair<long long, long long> extgcd(long long a, long long b) {\n  if (b ==\
+    \ 0) return make_pair(1, 0);\n  long long x, y;\n  tie(y, x) = extgcd(b, a % b);\n\
+    \  y -= a / b * x;\n  return make_pair(x, y);\n}\n\n// Check if n is Square Number\n\
+    // true : return d s.t. d * d == n\n// false : return -1\nlong long SqrtInt(long\
+    \ long n) {\n  if (n == 0 || n == 1) return n;\n  long long d = (long long)sqrt(n)\
+    \ - 1;\n  while (d * d < n) ++d;\n  return (d * d == n) ? d : -1;\n}\n\n// return\
+    \ a number of n's digit\n// zero ... return value if n = 0 (default -> 1)\nint\
+    \ isDigit(long long n, int zero = 1) {\n  if (n == 0) return zero;\n  int ret\
+    \ = 0;\n  while (n) {\n    n /= 10;\n    ret++;\n  }\n  return ret;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: math/elementary-function.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-22 00:51:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
