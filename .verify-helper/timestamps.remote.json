@@ -200,5 +200,6 @@
 "verify/verify-yuki/yuki-1283.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yuki/yuki-1303.test.cpp": "2020-12-05 13:58:32 +0900",
 "verify/verify-yuki/yuki-1320.test.cpp": "2020-12-17 01:20:11 +0900",
+"verify/verify-yuki/yuki-1323.test.cpp": "2020-12-21 20:05:39 +0900",
 "verify/verify-yuki/yuki-helloworld.test.cpp": "2020-12-05 13:58:32 +0900"
 }
