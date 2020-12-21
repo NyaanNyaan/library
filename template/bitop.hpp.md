@@ -625,6 +625,9 @@ data:
     path: verify/verify-yuki/yuki-1320.test.cpp
     title: verify/verify-yuki/yuki-1320.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1323.test.cpp
+    title: verify/verify-yuki/yuki-1323.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
@@ -791,6 +794,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-yuki/yuki-1323.test.cpp
   - verify/verify-yuki/yuki-0697.test.cpp
   - verify/verify-yuki/yuki-1283.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp

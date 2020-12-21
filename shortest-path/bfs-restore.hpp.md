@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1323.test.cpp
+    title: verify/verify-yuki/yuki-1323.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"shortest-path/bfs-restore.hpp\"\n\nvector<pair<int, int>>\
@@ -26,8 +29,9 @@ data:
   path: shortest-path/bfs-restore.hpp
   requiredBy: []
   timestamp: '2020-12-21 18:22:27+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yuki/yuki-1323.test.cpp
 documentation_of: shortest-path/bfs-restore.hpp
 layout: document
 redirect_from:

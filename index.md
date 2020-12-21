@@ -548,7 +548,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/bellman-ford.hpp
       title: shortest-path/bellman-ford.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/bfs-restore.hpp
       title: shortest-path/bfs-restore.hpp
     - icon: ':heavy_check_mark:'
@@ -1300,6 +1300,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1320.test.cpp
       title: verify/verify-yuki/yuki-1320.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1323.test.cpp
+      title: verify/verify-yuki/yuki-1323.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-helloworld.test.cpp
       title: verify/verify-yuki/yuki-helloworld.test.cpp
