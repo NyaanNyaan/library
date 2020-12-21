@@ -332,7 +332,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
   requiredBy: []
-  timestamp: '2020-12-17 22:06:13+09:00'
+  timestamp: '2020-12-21 18:22:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp

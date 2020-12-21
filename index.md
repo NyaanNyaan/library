@@ -548,6 +548,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/bellman-ford.hpp
       title: shortest-path/bellman-ford.hpp
+    - icon: ':warning:'
+      path: shortest-path/bfs-restore.hpp
+      title: shortest-path/bfs-restore.hpp
     - icon: ':heavy_check_mark:'
       path: shortest-path/bfs01.hpp
       title: shortest-path/bfs01.hpp

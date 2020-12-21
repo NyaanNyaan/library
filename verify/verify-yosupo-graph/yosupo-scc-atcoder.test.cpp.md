@@ -243,7 +243,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp
   requiredBy: []
-  timestamp: '2020-12-17 22:14:45+09:00'
+  timestamp: '2020-12-21 18:22:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-scc-atcoder.test.cpp

@@ -145,7 +145,7 @@ data:
   isVerificationFile: false
   path: flow/flow-on-bipartite-graph.hpp
   requiredBy: []
-  timestamp: '2020-12-17 22:06:13+09:00'
+  timestamp: '2020-12-21 18:22:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp

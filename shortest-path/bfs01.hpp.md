@@ -13,7 +13,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"shortest-path/bfs01.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
+  bundledCode: "#line 2 \"shortest-path/bfs01.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
     \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
     \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
     \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
@@ -41,7 +41,7 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"shortest-path/bfs01.hpp\"\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"shortest-path/bfs01.hpp\"\
     \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> bfs01(WeightedGraph<T>&\
     \ g, int start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, -1);\n  deque<int>\
     \ Q;\n  d[start] = 0;\n  Q.push_back(start);\n  while (!Q.empty()) {\n    int\
@@ -49,20 +49,20 @@ data:
     \ if (d[dst] != -1) continue;\n      d[dst] = d[cur] + dst.cost;\n      if (dst.cost\
     \ == 0)\n        Q.push_front(dst);\n      else\n        Q.push_back(dst);\n \
     \   }\n  }\n  return d;\n}\n"
-  code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\n// unreachable\
+  code: "#pragma once\n\n#include \"../graph/graph-template.hpp\"\n\n// unreachable\
     \ -> -1\ntemplate <typename T>\nvector<T> bfs01(WeightedGraph<T>& g, int start\
     \ = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, -1);\n  deque<int> Q;\n \
     \ d[start] = 0;\n  Q.push_back(start);\n  while (!Q.empty()) {\n    int cur =\
     \ Q.front();\n    Q.pop_front();\n    for (auto& dst : g[cur]) {\n      if (d[dst]\
     \ != -1) continue;\n      d[dst] = d[cur] + dst.cost;\n      if (dst.cost == 0)\n\
     \        Q.push_front(dst);\n      else\n        Q.push_back(dst);\n    }\n  }\n\
-    \  return d;\n}"
+    \  return d;\n}\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: shortest-path/bfs01.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-21 18:22:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
