@@ -23,7 +23,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   - icon: ':heavy_check_mark:'
@@ -111,7 +111,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - icon: ':heavy_check_mark:'
@@ -139,7 +139,7 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/simd-montgomery.hpp\"\n\n\n#include <immintrin.h>\n\
@@ -238,7 +238,7 @@ data:
   - fps/fps-composition-fast.hpp
   - fps/arbitrary-fps.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp

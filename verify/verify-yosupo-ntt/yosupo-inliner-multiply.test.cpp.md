@@ -1,40 +1,40 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
@@ -593,21 +593,21 @@ data:
     \ (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2\
     \ * M);\n    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line\
     \ 9 \"verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp\"\n\nNTT<LazyMontgomeryModInt<998244353>>\
-    \ ntt;\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int N, M;\n  rd(N, M);\n\
-    \  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n    buf1_[i] = n;\n\
-    \  }\n  for (int i = 0; i < M; i++) {\n    int n;\n    rd(n);\n    buf2_[i] =\
-    \ n;\n  }\n  ntt.inplace_multiply(N, M, false);\n  int len = N + M - 1;\n  for\
-    \ (int i = 0; i < len; i++) {\n    if (i) wt(' ');\n    wt(buf1_[i]);\n  }\n \
-    \ wt('\\n');\n}\n"
+    \ ntt;\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  using namespace ntt_inner;\n\
+    \  int N, M;\n  rd(N, M);\n  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n\
+    \    _buf1[i] = n;\n  }\n  for (int i = 0; i < M; i++) {\n    int n;\n    rd(n);\n\
+    \    _buf2[i] = n;\n  }\n  ntt.inplace_multiply(N, M, false);\n  int len = N +\
+    \ M - 1;\n  for (int i = 0; i < len; i++) {\n    if (i) wt(' ');\n    wt(_buf1[i]);\n\
+    \  }\n  wt('\\n');\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n\n#include\
     \ <immintrin.h>\n//\n#include \"../../template/template.hpp\"\n#include \"../../misc/fastio.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../ntt/ntt-avx2.hpp\"\
     \n\nNTT<LazyMontgomeryModInt<998244353>> ntt;\nusing namespace Nyaan;\nvoid Nyaan::solve()\
-    \ {\n  int N, M;\n  rd(N, M);\n  for (int i = 0; i < N; i++) {\n    int n;\n \
-    \   rd(n);\n    buf1_[i] = n;\n  }\n  for (int i = 0; i < M; i++) {\n    int n;\n\
-    \    rd(n);\n    buf2_[i] = n;\n  }\n  ntt.inplace_multiply(N, M, false);\n  int\
-    \ len = N + M - 1;\n  for (int i = 0; i < len; i++) {\n    if (i) wt(' ');\n \
-    \   wt(buf1_[i]);\n  }\n  wt('\\n');\n}"
+    \ {\n  using namespace ntt_inner;\n  int N, M;\n  rd(N, M);\n  for (int i = 0;\
+    \ i < N; i++) {\n    int n;\n    rd(n);\n    _buf1[i] = n;\n  }\n  for (int i\
+    \ = 0; i < M; i++) {\n    int n;\n    rd(n);\n    _buf2[i] = n;\n  }\n  ntt.inplace_multiply(N,\
+    \ M, false);\n  int len = N + M - 1;\n  for (int i = 0; i < len; i++) {\n    if\
+    \ (i) wt(' ');\n    wt(_buf1[i]);\n  }\n  wt('\\n');\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -622,8 +622,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   requiredBy: []
-  timestamp: '2020-12-22 00:51:45+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-12-22 03:48:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
 layout: document
