@@ -10,23 +10,24 @@
 NTT<LazyMontgomeryModInt<998244353>> ntt;
 using namespace Nyaan;
 void Nyaan::solve() {
+  using namespace ntt_inner;
   int N, M;
   rd(N, M);
   for (int i = 0; i < N; i++) {
     int n;
     rd(n);
-    buf1_[i] = n;
+    _buf1[i] = n;
   }
   for (int i = 0; i < M; i++) {
     int n;
     rd(n);
-    buf2_[i] = n;
+    _buf2[i] = n;
   }
   ntt.inplace_multiply(N, M, false);
   int len = N + M - 1;
   for (int i = 0; i < len; i++) {
     if (i) wt(' ');
-    wt(buf1_[i]);
+    wt(_buf1[i]);
   }
   wt('\n');
 }
