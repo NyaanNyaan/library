@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: matrix/matrix-fast.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':question:'

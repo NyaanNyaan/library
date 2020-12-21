@@ -2,13 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
   - icon: ':heavy_check_mark:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: fps/fps-circular.hpp
     title: "\u4E09\u89D2\u95A2\u6570"
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
   - icon: ':heavy_check_mark:'
@@ -180,10 +180,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
   - icon: ':heavy_check_mark:'
@@ -195,22 +195,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0896.test.cpp
     title: verify/verify-yuki/yuki-0896.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1269.test.cpp
     title: verify/verify-yuki/yuki-1269.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _pathExtension: hpp

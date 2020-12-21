@@ -582,10 +582,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
   - icon: ':heavy_check_mark:'
@@ -606,16 +606,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0896.test.cpp
     title: verify/verify-yuki/yuki-0896.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
   - icon: ':heavy_check_mark:'
@@ -630,7 +630,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1283.test.cpp
     title: verify/verify-yuki/yuki-1283.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   - icon: ':heavy_check_mark:'

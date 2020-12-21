@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
@@ -11,7 +11,7 @@ data:
   - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
   - icon: ':question:'
@@ -34,17 +34,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"fps/arbitrary-fps.hpp\"\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\
@@ -573,7 +573,7 @@ data:
   path: fps/arbitrary-fps.hpp
   requiredBy: []
   timestamp: '2020-12-22 00:51:45+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
