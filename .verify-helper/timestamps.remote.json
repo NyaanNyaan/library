@@ -167,6 +167,7 @@
 "verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp": "2020-12-05 07:59:51 +0900",
+"verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp": "2020-12-22 03:48:06 +0900",
 "verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-other/yosupo-argument-sort.test.cpp": "2020-12-05 15:21:15 +0900",
 "verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp": "2020-12-05 07:59:51 +0900",
