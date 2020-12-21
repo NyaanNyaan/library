@@ -4,7 +4,7 @@
 #include <cassert>
 #include <vector>
 
-#include "internal_scc"
+#include "internal_scc.hpp"
 
 namespace atcoder {
 

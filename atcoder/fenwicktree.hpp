@@ -4,7 +4,7 @@
 #include <cassert>
 #include <vector>
 
-#include "internal_type_traits"
+#include "internal_type_traits.hpp"
 
 namespace atcoder {
 

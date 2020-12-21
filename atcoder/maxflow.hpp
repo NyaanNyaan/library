@@ -7,7 +7,7 @@
 #include <queue>
 #include <vector>
 
-#include "internal_queue"
+#include "internal_queue.hpp"
 
 namespace atcoder {
 
