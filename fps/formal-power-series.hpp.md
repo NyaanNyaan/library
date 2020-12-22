@@ -31,6 +31,9 @@ data:
     path: fps/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
   - icon: ':heavy_check_mark:'
+    path: fps/mod-pow.hpp
+    title: Mod-Pow ($f(x)^k \mod g(x)$)
+  - icon: ':heavy_check_mark:'
     path: fps/multipoint-evaluation.hpp
     title: Multipoint Evaluation
   - icon: ':heavy_check_mark:'
@@ -51,6 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/utility.hpp
     title: fps/utility.hpp
+  - icon: ':heavy_check_mark:'
+    path: matrix/black-box-linear-algebra.hpp
+    title: Black Box Linear Algebra
   - icon: ':heavy_check_mark:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
@@ -123,6 +129,9 @@ data:
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0720.test.cpp
+    title: verify/verify-yuki/yuki-0720.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
   - icon: ':heavy_check_mark:'
@@ -131,6 +140,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1112-sparse.test.cpp
+    title: verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1112.test.cpp
+    title: verify/verify-yuki/yuki-1112.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
@@ -277,6 +292,7 @@ data:
   requiredBy:
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
+  - matrix/black-box-linear-algebra.hpp
   - modulo/strassen.hpp
   - fps/fps-composition.hpp
   - fps/polynomial-gcd.hpp
@@ -287,6 +303,7 @@ data:
   - fps/differential-equation.hpp
   - fps/fps-famous-series.hpp
   - fps/ntt-friendly-fps.hpp
+  - fps/mod-pow.hpp
   - fps/fps-circular.hpp
   - fps/fps-composition-fast.hpp
   - fps/utility.hpp
@@ -314,12 +331,15 @@ data:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
 documentation_of: fps/formal-power-series.hpp

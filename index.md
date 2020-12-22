@@ -132,6 +132,9 @@ data:
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
     - icon: ':heavy_check_mark:'
+      path: fps/mod-pow.hpp
+      title: Mod-Pow ($f(x)^k \mod g(x)$)
+    - icon: ':heavy_check_mark:'
       path: fps/multipoint-evaluation.hpp
       title: Multipoint Evaluation
     - icon: ':heavy_check_mark:'
@@ -306,6 +309,9 @@ data:
       title: 2-SAT
   - name: matrix
     pages:
+    - icon: ':heavy_check_mark:'
+      path: matrix/black-box-linear-algebra.hpp
+      title: Black Box Linear Algebra
     - icon: ':heavy_check_mark:'
       path: matrix/matrix-fast.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
@@ -1256,6 +1262,9 @@ data:
       path: verify/verify-yuki/yuki-0697.test.cpp
       title: verify/verify-yuki/yuki-0697.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0720.test.cpp
+      title: verify/verify-yuki/yuki-0720.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0789.test.cpp
       title: verify/verify-yuki/yuki-0789.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1279,6 +1288,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1080.test.cpp
       title: verify/verify-yuki/yuki-1080.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1112-sparse.test.cpp
+      title: verify/verify-yuki/yuki-1112-sparse.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1112.test.cpp
+      title: verify/verify-yuki/yuki-1112.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1145.test.cpp
       title: verify/verify-yuki/yuki-1145.test.cpp

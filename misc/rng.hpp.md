@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: matrix/black-box-linear-algebra.hpp
+    title: Black Box Linear Algebra
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
@@ -60,6 +63,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1112-sparse.test.cpp
+    title: verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1112.test.cpp
+    title: verify/verify-yuki/yuki-1112.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -102,6 +111,7 @@ data:
   isVerificationFile: false
   path: misc/rng.hpp
   requiredBy:
+  - matrix/black-box-linear-algebra.hpp
   - modulo/mod-kth-root.hpp
   - rbst/treap.hpp
   - tree/pruefer-code.hpp
@@ -113,6 +123,8 @@ data:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp

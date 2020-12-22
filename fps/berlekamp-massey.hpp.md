@@ -5,6 +5,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/nth-term.hpp
     title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
+  - icon: ':heavy_check_mark:'
+    path: matrix/black-box-linear-algebra.hpp
+    title: Black Box Linear Algebra
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
@@ -12,6 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
     title: verify/verify-yuki/yuki-0215-nth-term.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1112-sparse.test.cpp
+    title: verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1112.test.cpp
+    title: verify/verify-yuki/yuki-1112.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -43,12 +52,15 @@ data:
   isVerificationFile: false
   path: fps/berlekamp-massey.hpp
   requiredBy:
+  - matrix/black-box-linear-algebra.hpp
   - fps/nth-term.hpp
   timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
 documentation_of: fps/berlekamp-massey.hpp
 layout: document
 redirect_from:

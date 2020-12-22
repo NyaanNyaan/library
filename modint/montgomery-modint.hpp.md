@@ -187,6 +187,9 @@ data:
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0720.test.cpp
+    title: verify/verify-yuki/yuki-0720.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0886.test.cpp
     title: verify/verify-yuki/yuki-0886.test.cpp
   - icon: ':heavy_check_mark:'
@@ -204,6 +207,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1112-sparse.test.cpp
+    title: verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1112.test.cpp
+    title: verify/verify-yuki/yuki-1112.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
@@ -342,16 +351,19 @@ data:
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-1269.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp
