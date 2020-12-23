@@ -39,6 +39,11 @@ struct ModMatrix : vector<FormalPowerSeries<mint>> {
       for (int j = 0; j < n; j++) res[i] += m[i][j] * r[j];
     return res;
   }
+
+  void apply(int i, mint r) {
+    int n = (*this).size();
+    for (int j = 0; j < n; j++) (*this)[i][j] *= r;
+  }
 };
 
 template <typename mint>
@@ -57,6 +62,10 @@ struct SparseMatrix : vector<vector<pair<int, mint>>> {
     for (int i = 0; i < n; i++)
       for (auto&& [j, x] : m[i]) res[i] += x * r[j];
     return res;
+  }
+
+  void apply(int i, mint r) {
+    for (auto&& [_, x] : (*this)[i]) x *= r;
   }
 };
 
@@ -83,8 +92,8 @@ FormalPowerSeries<mint> mat_minpoly(const Mat& A) {
 
 // calculate A^k b
 template <typename mint, typename Mat>
-FormalPowerSeries<mint> sparse_pow(const Mat& A, FormalPowerSeries<mint> b,
-                                   int64_t k) {
+FormalPowerSeries<mint> fast_pow(const Mat& A, FormalPowerSeries<mint> b,
+                                 int64_t k) {
   using fps = FormalPowerSeries<mint>;
   int n = b.size();
   fps mp = mat_minpoly<mint, Mat>(A);
@@ -93,10 +102,35 @@ FormalPowerSeries<mint> sparse_pow(const Mat& A, FormalPowerSeries<mint> b,
   for (int i = 0; i < (int)c.size(); i++) res += b * c[i], b = A * b;
   return res;
 }
+
+template <typename mint, typename Mat>
+mint fast_det(const Mat& A) {
+  using fps = FormalPowerSeries<mint>;
+  int n = A.size();
+  fps D;
+  while (true) {
+    do {
+      D = random_poly<mint>(n);
+    } while (any_of(begin(D), end(D), [](mint x) { return x == mint(0); }));
+
+    Mat AD = A;
+    for (int i = 0; i < n; i++) AD.apply(i, D[i]);
+    fps mp = mat_minpoly<mint, Mat>(AD);
+    if (mp.back() == 0) return 0;
+    if ((int)mp.size() != n + 1) continue;
+    mint det = n & 1 ? -mp.back() : mp.back();
+    mint Ddet = 1;
+    for (auto& d : D) Ddet *= d;
+    return det / Ddet;
+  }
+  exit(1);
+}
+
 }  // namespace BBLAImpl
 
+using BBLAImpl::fast_det;
+using BBLAImpl::fast_pow;
 using BBLAImpl::ModMatrix;
-using BBLAImpl::sparse_pow;
 using BBLAImpl::SparseMatrix;
 
 /**

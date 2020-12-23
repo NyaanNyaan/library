@@ -25,6 +25,6 @@ void Nyaan::solve() {
   }
   fps b(K * K);
   rep(i, K) b[i * K] = 1;
-  auto res = sparse_pow(m, b, N - 2);
+  auto res = fast_pow(m, b, N - 2);
   out(accumulate(begin(res), begin(res) + K, mint(0)));
 }
