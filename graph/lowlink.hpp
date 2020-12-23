@@ -11,13 +11,13 @@ struct LowLink {
   vector<int> ord, low, articulation;
   vector<pair<int, int> > bridge;
 
-  LowLink(const G &g) : g(g) {
+  LowLink(const G &_g) : g(_g) {
     N = g.size();
     ord.resize(N, -1);
     low.resize(N, -1);
     int k = 0;
     for (int i = 0; i < N; i++)
-      if (!(~ord[i])) k = dfs(i, k, -1);
+      if (ord[i] == -1) k = dfs(i, k, -1);
   }
 
   int dfs(int idx, int k, int par) {
