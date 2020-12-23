@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: graph/biconnected-components.hpp
+    title: "\u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3"
+  - icon: ':heavy_check_mark:'
     path: graph/cycle-detection.hpp
     title: "\u9589\u8DEF\u306E\u691C\u51FA"
   - icon: ':heavy_check_mark:'
@@ -53,6 +56,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: shortest-path/warshall-floyd.hpp
     title: shortest-path/warshall-floyd.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/block-cut-tree.hpp
+    title: Block Cut Tree
   - icon: ':heavy_check_mark:'
     path: tree/cartesian-tree.hpp
     title: Cartesian Tree
@@ -132,6 +138,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-3022.test.cpp
+    title: verify/verify-aoj-other/aoj-3022.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
@@ -267,11 +276,13 @@ data:
   - graph/strongly-connected-components.hpp
   - graph/kruskal.hpp
   - graph/lowlink.hpp
+  - graph/biconnected-components.hpp
   - graph/cycle-detection.hpp
   - graph/two-edge-connected-components.hpp
   - graph/graph-utility.hpp
   - tree/tree-query.hpp
   - tree/heavy-light-decomposition.hpp
+  - tree/block-cut-tree.hpp
   - tree/dsu-on-tree.hpp
   - tree/rerooting.hpp
   - tree/euler-tour.hpp
@@ -317,6 +328,7 @@ data:
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp

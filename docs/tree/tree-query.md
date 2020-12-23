@@ -4,12 +4,13 @@
 
 木を触る時によく使うクエリを詰め込んだデータ構造。ダブリングをベースに実装している。
 
-
 #### 余談
 
 `nxt(s, t)`を$\langle$前計算$\mathrm{O}(N)$,クエリ$\mathrm{O}(1)$$\rangle$で出来るか考えたけど良くわからなかった。$\langle\mathrm{O}(N),\mathrm{O}(1)\rangle$RMQとかで出来るんだろうか…
 
-ちなみにsparse tableを使えば$\langle\mathrm{O}(N\log N),\mathrm{O}(1)\rangle$は達成可能だと思う。自分の実装は$\langle\mathrm{O}(N\log N),\mathrm{O}(\log N)\rangle$だが空間の定数倍がsparse tableより2倍くらいよい(多分)のでMLEに強いはず…
+ちなみにsparse tableを使えば$\langle\mathrm{O}(N\log N),\mathrm{O}(1)\rangle$は達成可能だと思う。自分の実装は$\langle\mathrm{O}(N\log N),\mathrm{O}(\log N)\rangle$だが空間の定数倍がsparse tableより2倍くらいよい(多分)のでMLEに強いはず… 
+
+追記：よくよく考え直すとHLDで簡単に$\langle\mathrm{O}(N),\mathrm{O}(\log N)\rangle$が書けないか？(おいおい)(Heavy Edgeの根から$k$個親にさかのぼる操作が出来ないと錯覚してしまった…)　いつか書き直す
 
 #### 使い方
 

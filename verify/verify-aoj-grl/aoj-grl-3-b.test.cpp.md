@@ -213,10 +213,10 @@ data:
     \n\n// LowLink ... enumerate bridge and articulation point\n// bridge ... \u6A4B\
     \ articulation point ... \u95A2\u7BC0\u70B9\ntemplate <typename G>\nstruct LowLink\
     \ {\n  int N;\n  const G &g;\n  vector<int> ord, low, articulation;\n  vector<pair<int,\
-    \ int> > bridge;\n\n  LowLink(const G &g) : g(g) {\n    N = g.size();\n    ord.resize(N,\
+    \ int> > bridge;\n\n  LowLink(const G &_g) : g(_g) {\n    N = g.size();\n    ord.resize(N,\
     \ -1);\n    low.resize(N, -1);\n    int k = 0;\n    for (int i = 0; i < N; i++)\n\
-    \      if (!(~ord[i])) k = dfs(i, k, -1);\n  }\n\n  int dfs(int idx, int k, int\
-    \ par) {\n    low[idx] = (ord[idx] = k++);\n    int cnt = 0;\n    bool is_arti\
+    \      if (ord[i] == -1) k = dfs(i, k, -1);\n  }\n\n  int dfs(int idx, int k,\
+    \ int par) {\n    low[idx] = (ord[idx] = k++);\n    int cnt = 0;\n    bool is_arti\
     \ = false, flg = false;\n    for (auto &to : g[idx]) {\n      if (ord[to] == -1)\
     \ {\n        cnt++;\n        k = dfs(to, k, idx);\n        low[idx] = min(low[idx],\
     \ low[to]);\n        is_arti |= (par != -1) && (low[to] >= ord[idx]);\n      \
@@ -247,7 +247,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2020-12-23 11:33:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
