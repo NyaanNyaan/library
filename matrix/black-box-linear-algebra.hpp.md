@@ -17,6 +17,12 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112-sparse.test.cpp
     title: verify/verify-yuki/yuki-1112-sparse.test.cpp
   - icon: ':heavy_check_mark:'
@@ -141,29 +147,40 @@ data:
     \ j, mint x) { (*this)[i][j] += x; }\n\n  friend fps operator*(const ModMatrix&\
     \ m, const fps& r) {\n    int n = m.size();\n    assert(n == (int)r.size());\n\
     \    fps res(n);\n    for (int i = 0; i < n; i++)\n      for (int j = 0; j < n;\
-    \ j++) res[i] += m[i][j] * r[j];\n    return res;\n  }\n};\n\ntemplate <typename\
-    \ mint>\nstruct SparseMatrix : vector<vector<pair<int, mint>>> {\n  using fps\
-    \ = FormalPowerSeries<mint>;\n\n  template <typename... Args>\n  SparseMatrix(Args...\
-    \ args) : vector<vector<pair<int, mint>>>(args...) {}\n\n  inline void add(int\
-    \ i, int j, mint x) { (*this)[i].emplace_back(j, x); }\n\n  friend fps operator*(const\
-    \ SparseMatrix& m, const fps& r) {\n    int n = m.size();\n    assert(n == (int)r.size());\n\
-    \    fps res(n);\n    for (int i = 0; i < n; i++)\n      for (auto&& [j, x] :\
-    \ m[i]) res[i] += x * r[j];\n    return res;\n  }\n};\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> vector_minpoly(\n    const vector<FormalPowerSeries<mint>>&\
-    \ b) {\n  assert(!b.empty());\n  int n = b.size(), m = b[0].size();\n  FormalPowerSeries<mint>\
-    \ u = random_poly<mint>(m), a(n);\n  for (int i = 0; i < n; i++) a[i] = inner_product(b[i],\
-    \ u);\n  auto mp = BerlekampMassey<mint>(a);\n  return {mp.begin(), mp.end()};\n\
-    }\n\ntemplate <typename mint, typename Mat>\nFormalPowerSeries<mint> mat_minpoly(const\
-    \ Mat& A) {\n  int n = A.size();\n  FormalPowerSeries<mint> u = random_poly<mint>(n);\n\
+    \ j++) res[i] += m[i][j] * r[j];\n    return res;\n  }\n\n  void apply(int i,\
+    \ mint r) {\n    int n = (*this).size();\n    for (int j = 0; j < n; j++) (*this)[i][j]\
+    \ *= r;\n  }\n};\n\ntemplate <typename mint>\nstruct SparseMatrix : vector<vector<pair<int,\
+    \ mint>>> {\n  using fps = FormalPowerSeries<mint>;\n\n  template <typename...\
+    \ Args>\n  SparseMatrix(Args... args) : vector<vector<pair<int, mint>>>(args...)\
+    \ {}\n\n  inline void add(int i, int j, mint x) { (*this)[i].emplace_back(j, x);\
+    \ }\n\n  friend fps operator*(const SparseMatrix& m, const fps& r) {\n    int\
+    \ n = m.size();\n    assert(n == (int)r.size());\n    fps res(n);\n    for (int\
+    \ i = 0; i < n; i++)\n      for (auto&& [j, x] : m[i]) res[i] += x * r[j];\n \
+    \   return res;\n  }\n\n  void apply(int i, mint r) {\n    for (auto&& [_, x]\
+    \ : (*this)[i]) x *= r;\n  }\n};\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ vector_minpoly(\n    const vector<FormalPowerSeries<mint>>& b) {\n  assert(!b.empty());\n\
+    \  int n = b.size(), m = b[0].size();\n  FormalPowerSeries<mint> u = random_poly<mint>(m),\
+    \ a(n);\n  for (int i = 0; i < n; i++) a[i] = inner_product(b[i], u);\n  auto\
+    \ mp = BerlekampMassey<mint>(a);\n  return {mp.begin(), mp.end()};\n}\n\ntemplate\
+    \ <typename mint, typename Mat>\nFormalPowerSeries<mint> mat_minpoly(const Mat&\
+    \ A) {\n  int n = A.size();\n  FormalPowerSeries<mint> u = random_poly<mint>(n);\n\
     \  vector<FormalPowerSeries<mint>> b(n * 2 + 1);\n  for (int i = 0; i < (int)b.size();\
     \ i++) b[i] = u, u = A * u;\n  FormalPowerSeries<mint> mp = vector_minpoly(b);\n\
     \  return mp;\n}\n\n// calculate A^k b\ntemplate <typename mint, typename Mat>\n\
-    FormalPowerSeries<mint> sparse_pow(const Mat& A, FormalPowerSeries<mint> b,\n\
-    \                                   int64_t k) {\n  using fps = FormalPowerSeries<mint>;\n\
+    FormalPowerSeries<mint> fast_pow(const Mat& A, FormalPowerSeries<mint> b,\n  \
+    \                               int64_t k) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  int n = b.size();\n  fps mp = mat_minpoly<mint, Mat>(A);\n  fps c = mod_pow<mint>(k,\
     \ fps{0, 1}, mp.rev());\n  fps res(n);\n  for (int i = 0; i < (int)c.size(); i++)\
-    \ res += b * c[i], b = A * b;\n  return res;\n}\n}  // namespace BBLAImpl\n\n\
-    using BBLAImpl::ModMatrix;\nusing BBLAImpl::sparse_pow;\nusing BBLAImpl::SparseMatrix;\n\
+    \ res += b * c[i], b = A * b;\n  return res;\n}\n\ntemplate <typename mint, typename\
+    \ Mat>\nmint fast_det(const Mat& A) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  int n = A.size();\n  fps D;\n  while (true) {\n    do {\n      D = random_poly<mint>(n);\n\
+    \    } while (any_of(begin(D), end(D), [](mint x) { return x == mint(0); }));\n\
+    \n    Mat AD = A;\n    for (int i = 0; i < n; i++) AD.apply(i, D[i]);\n    fps\
+    \ mp = mat_minpoly<mint, Mat>(AD);\n    if (mp.back() == 0) return 0;\n    if\
+    \ ((int)mp.size() != n + 1) continue;\n    mint det = n & 1 ? -mp.back() : mp.back();\n\
+    \    mint Ddet = 1;\n    for (auto& d : D) Ddet *= d;\n    return det / Ddet;\n\
+    \  }\n  exit(1);\n}\n\n}  // namespace BBLAImpl\n\nusing BBLAImpl::fast_det;\n\
+    using BBLAImpl::fast_pow;\nusing BBLAImpl::ModMatrix;\nusing BBLAImpl::SparseMatrix;\n\
     \n/**\n * @brief Black Box Linear Algebra\n */\n"
   code: "\n#include \"../fps/berlekamp-massey.hpp\"\n#include \"../fps/formal-power-series.hpp\"\
     \n#include \"../fps/mod-pow.hpp\"\n#include \"../misc/rng.hpp\"\n//\nnamespace\
@@ -178,29 +195,40 @@ data:
     \ j, mint x) { (*this)[i][j] += x; }\n\n  friend fps operator*(const ModMatrix&\
     \ m, const fps& r) {\n    int n = m.size();\n    assert(n == (int)r.size());\n\
     \    fps res(n);\n    for (int i = 0; i < n; i++)\n      for (int j = 0; j < n;\
-    \ j++) res[i] += m[i][j] * r[j];\n    return res;\n  }\n};\n\ntemplate <typename\
-    \ mint>\nstruct SparseMatrix : vector<vector<pair<int, mint>>> {\n  using fps\
-    \ = FormalPowerSeries<mint>;\n\n  template <typename... Args>\n  SparseMatrix(Args...\
-    \ args) : vector<vector<pair<int, mint>>>(args...) {}\n\n  inline void add(int\
-    \ i, int j, mint x) { (*this)[i].emplace_back(j, x); }\n\n  friend fps operator*(const\
-    \ SparseMatrix& m, const fps& r) {\n    int n = m.size();\n    assert(n == (int)r.size());\n\
-    \    fps res(n);\n    for (int i = 0; i < n; i++)\n      for (auto&& [j, x] :\
-    \ m[i]) res[i] += x * r[j];\n    return res;\n  }\n};\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> vector_minpoly(\n    const vector<FormalPowerSeries<mint>>&\
-    \ b) {\n  assert(!b.empty());\n  int n = b.size(), m = b[0].size();\n  FormalPowerSeries<mint>\
-    \ u = random_poly<mint>(m), a(n);\n  for (int i = 0; i < n; i++) a[i] = inner_product(b[i],\
-    \ u);\n  auto mp = BerlekampMassey<mint>(a);\n  return {mp.begin(), mp.end()};\n\
-    }\n\ntemplate <typename mint, typename Mat>\nFormalPowerSeries<mint> mat_minpoly(const\
-    \ Mat& A) {\n  int n = A.size();\n  FormalPowerSeries<mint> u = random_poly<mint>(n);\n\
+    \ j++) res[i] += m[i][j] * r[j];\n    return res;\n  }\n\n  void apply(int i,\
+    \ mint r) {\n    int n = (*this).size();\n    for (int j = 0; j < n; j++) (*this)[i][j]\
+    \ *= r;\n  }\n};\n\ntemplate <typename mint>\nstruct SparseMatrix : vector<vector<pair<int,\
+    \ mint>>> {\n  using fps = FormalPowerSeries<mint>;\n\n  template <typename...\
+    \ Args>\n  SparseMatrix(Args... args) : vector<vector<pair<int, mint>>>(args...)\
+    \ {}\n\n  inline void add(int i, int j, mint x) { (*this)[i].emplace_back(j, x);\
+    \ }\n\n  friend fps operator*(const SparseMatrix& m, const fps& r) {\n    int\
+    \ n = m.size();\n    assert(n == (int)r.size());\n    fps res(n);\n    for (int\
+    \ i = 0; i < n; i++)\n      for (auto&& [j, x] : m[i]) res[i] += x * r[j];\n \
+    \   return res;\n  }\n\n  void apply(int i, mint r) {\n    for (auto&& [_, x]\
+    \ : (*this)[i]) x *= r;\n  }\n};\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ vector_minpoly(\n    const vector<FormalPowerSeries<mint>>& b) {\n  assert(!b.empty());\n\
+    \  int n = b.size(), m = b[0].size();\n  FormalPowerSeries<mint> u = random_poly<mint>(m),\
+    \ a(n);\n  for (int i = 0; i < n; i++) a[i] = inner_product(b[i], u);\n  auto\
+    \ mp = BerlekampMassey<mint>(a);\n  return {mp.begin(), mp.end()};\n}\n\ntemplate\
+    \ <typename mint, typename Mat>\nFormalPowerSeries<mint> mat_minpoly(const Mat&\
+    \ A) {\n  int n = A.size();\n  FormalPowerSeries<mint> u = random_poly<mint>(n);\n\
     \  vector<FormalPowerSeries<mint>> b(n * 2 + 1);\n  for (int i = 0; i < (int)b.size();\
     \ i++) b[i] = u, u = A * u;\n  FormalPowerSeries<mint> mp = vector_minpoly(b);\n\
     \  return mp;\n}\n\n// calculate A^k b\ntemplate <typename mint, typename Mat>\n\
-    FormalPowerSeries<mint> sparse_pow(const Mat& A, FormalPowerSeries<mint> b,\n\
-    \                                   int64_t k) {\n  using fps = FormalPowerSeries<mint>;\n\
+    FormalPowerSeries<mint> fast_pow(const Mat& A, FormalPowerSeries<mint> b,\n  \
+    \                               int64_t k) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  int n = b.size();\n  fps mp = mat_minpoly<mint, Mat>(A);\n  fps c = mod_pow<mint>(k,\
     \ fps{0, 1}, mp.rev());\n  fps res(n);\n  for (int i = 0; i < (int)c.size(); i++)\
-    \ res += b * c[i], b = A * b;\n  return res;\n}\n}  // namespace BBLAImpl\n\n\
-    using BBLAImpl::ModMatrix;\nusing BBLAImpl::sparse_pow;\nusing BBLAImpl::SparseMatrix;\n\
+    \ res += b * c[i], b = A * b;\n  return res;\n}\n\ntemplate <typename mint, typename\
+    \ Mat>\nmint fast_det(const Mat& A) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  int n = A.size();\n  fps D;\n  while (true) {\n    do {\n      D = random_poly<mint>(n);\n\
+    \    } while (any_of(begin(D), end(D), [](mint x) { return x == mint(0); }));\n\
+    \n    Mat AD = A;\n    for (int i = 0; i < n; i++) AD.apply(i, D[i]);\n    fps\
+    \ mp = mat_minpoly<mint, Mat>(AD);\n    if (mp.back() == 0) return 0;\n    if\
+    \ ((int)mp.size() != n + 1) continue;\n    mint det = n & 1 ? -mp.back() : mp.back();\n\
+    \    mint Ddet = 1;\n    for (auto& d : D) Ddet *= d;\n    return det / Ddet;\n\
+    \  }\n  exit(1);\n}\n\n}  // namespace BBLAImpl\n\nusing BBLAImpl::fast_det;\n\
+    using BBLAImpl::fast_pow;\nusing BBLAImpl::ModMatrix;\nusing BBLAImpl::SparseMatrix;\n\
     \n/**\n * @brief Black Box Linear Algebra\n */\n"
   dependsOn:
   - fps/berlekamp-massey.hpp
@@ -210,9 +238,11 @@ data:
   isVerificationFile: false
   path: matrix/black-box-linear-algebra.hpp
   requiredBy: []
-  timestamp: '2020-12-22 23:53:32+09:00'
+  timestamp: '2020-12-23 13:10:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
 documentation_of: matrix/black-box-linear-algebra.hpp

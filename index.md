@@ -1134,6 +1134,12 @@ data:
       path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+      title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+      title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     - icon: ':heavy_check_mark:'
