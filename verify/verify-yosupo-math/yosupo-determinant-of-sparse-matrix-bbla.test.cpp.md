@@ -400,9 +400,14 @@ data:
     \ mp = mat_minpoly<mint, Mat>(AD);\n    if (mp.back() == 0) return 0;\n    if\
     \ ((int)mp.size() != n + 1) continue;\n    mint det = n & 1 ? -mp.back() : mp.back();\n\
     \    mint Ddet = 1;\n    for (auto& d : D) Ddet *= d;\n    return det / Ddet;\n\
-    \  }\n  exit(1);\n}\n\n}  // namespace BBLAImpl\n\nusing BBLAImpl::fast_det;\n\
-    using BBLAImpl::fast_pow;\nusing BBLAImpl::ModMatrix;\nusing BBLAImpl::SparseMatrix;\n\
-    \n/**\n * @brief Black Box Linear Algebra\n */\n#line 13 \"verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp\"\
+    \  }\n  exit(1);\n}\n\ntemplate <typename mint, typename Mat>\nFormalPowerSeries<mint>\
+    \ fast_linear_equation(const Mat& A, const FormalPowerSeries<mint>& b) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  int n = A.size();\n  fps mp = mat_minpoly<mint,\
+    \ Mat>(A).rev();\n  fps buf = b, res(n);\n  for (int i = 1; i < (int)mp.size();\
+    \ i++) {\n    res = buf * mp[i];\n    buf = A * buf;\n  }\n  return buf * mp[0].inverse();\n\
+    }\n\n}  // namespace BBLAImpl\n\nusing BBLAImpl::fast_det;\nusing BBLAImpl::fast_pow;\n\
+    using BBLAImpl::ModMatrix;\nusing BBLAImpl::SparseMatrix;\n\n/**\n * @brief Black\
+    \ Box Linear Algebra\n */\n#line 13 \"verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp\"\
     \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, K);\n  SparseMatrix<mint>\
     \ mat(N);\n  rep(_, K) {\n    ini(a, b, c);\n    mat.add(a, b, c);\n  }\n  out(fast_det<mint,\
     \ SparseMatrix<mint>>(mat));\n}\n"
@@ -431,7 +436,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   requiredBy: []
-  timestamp: '2020-12-23 13:10:20+09:00'
+  timestamp: '2020-12-29 17:58:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp

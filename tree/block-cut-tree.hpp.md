@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-3022.test.cpp
     title: verify/verify-aoj-other/aoj-3022.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1326.test.cpp
+    title: verify/verify-yuki/yuki-1326.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -126,6 +129,7 @@ data:
   timestamp: '2020-12-23 12:00:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
 documentation_of: tree/block-cut-tree.hpp
 layout: document

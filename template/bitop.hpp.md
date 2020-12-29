@@ -646,6 +646,9 @@ data:
     path: verify/verify-yuki/yuki-1323.test.cpp
     title: verify/verify-yuki/yuki-1323.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1326.test.cpp
+    title: verify/verify-yuki/yuki-1326.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _pathExtension: hpp
@@ -840,6 +843,7 @@ data:
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp

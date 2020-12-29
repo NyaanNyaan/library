@@ -207,6 +207,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1320.test.cpp
     title: verify/verify-yuki/yuki-1320.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1326.test.cpp
+    title: verify/verify-yuki/yuki-1326.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -326,6 +329,7 @@ data:
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
   - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp

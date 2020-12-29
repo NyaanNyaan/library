@@ -27,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1326.test.cpp
+    title: verify/verify-yuki/yuki-1326.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -102,6 +105,7 @@ data:
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
   - verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
 documentation_of: graph/lowlink.hpp

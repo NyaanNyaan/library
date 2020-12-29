@@ -179,9 +179,14 @@ data:
     \ mp = mat_minpoly<mint, Mat>(AD);\n    if (mp.back() == 0) return 0;\n    if\
     \ ((int)mp.size() != n + 1) continue;\n    mint det = n & 1 ? -mp.back() : mp.back();\n\
     \    mint Ddet = 1;\n    for (auto& d : D) Ddet *= d;\n    return det / Ddet;\n\
-    \  }\n  exit(1);\n}\n\n}  // namespace BBLAImpl\n\nusing BBLAImpl::fast_det;\n\
-    using BBLAImpl::fast_pow;\nusing BBLAImpl::ModMatrix;\nusing BBLAImpl::SparseMatrix;\n\
-    \n/**\n * @brief Black Box Linear Algebra\n */\n"
+    \  }\n  exit(1);\n}\n\ntemplate <typename mint, typename Mat>\nFormalPowerSeries<mint>\
+    \ fast_linear_equation(const Mat& A, const FormalPowerSeries<mint>& b) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  int n = A.size();\n  fps mp = mat_minpoly<mint,\
+    \ Mat>(A).rev();\n  fps buf = b, res(n);\n  for (int i = 1; i < (int)mp.size();\
+    \ i++) {\n    res = buf * mp[i];\n    buf = A * buf;\n  }\n  return buf * mp[0].inverse();\n\
+    }\n\n}  // namespace BBLAImpl\n\nusing BBLAImpl::fast_det;\nusing BBLAImpl::fast_pow;\n\
+    using BBLAImpl::ModMatrix;\nusing BBLAImpl::SparseMatrix;\n\n/**\n * @brief Black\
+    \ Box Linear Algebra\n */\n"
   code: "\n#include \"../fps/berlekamp-massey.hpp\"\n#include \"../fps/formal-power-series.hpp\"\
     \n#include \"../fps/mod-pow.hpp\"\n#include \"../misc/rng.hpp\"\n//\nnamespace\
     \ BBLAImpl {\n\ntemplate <typename mint>\nmint inner_product(const FormalPowerSeries<mint>&\
@@ -227,9 +232,14 @@ data:
     \ mp = mat_minpoly<mint, Mat>(AD);\n    if (mp.back() == 0) return 0;\n    if\
     \ ((int)mp.size() != n + 1) continue;\n    mint det = n & 1 ? -mp.back() : mp.back();\n\
     \    mint Ddet = 1;\n    for (auto& d : D) Ddet *= d;\n    return det / Ddet;\n\
-    \  }\n  exit(1);\n}\n\n}  // namespace BBLAImpl\n\nusing BBLAImpl::fast_det;\n\
-    using BBLAImpl::fast_pow;\nusing BBLAImpl::ModMatrix;\nusing BBLAImpl::SparseMatrix;\n\
-    \n/**\n * @brief Black Box Linear Algebra\n */\n"
+    \  }\n  exit(1);\n}\n\ntemplate <typename mint, typename Mat>\nFormalPowerSeries<mint>\
+    \ fast_linear_equation(const Mat& A, const FormalPowerSeries<mint>& b) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  int n = A.size();\n  fps mp = mat_minpoly<mint,\
+    \ Mat>(A).rev();\n  fps buf = b, res(n);\n  for (int i = 1; i < (int)mp.size();\
+    \ i++) {\n    res = buf * mp[i];\n    buf = A * buf;\n  }\n  return buf * mp[0].inverse();\n\
+    }\n\n}  // namespace BBLAImpl\n\nusing BBLAImpl::fast_det;\nusing BBLAImpl::fast_pow;\n\
+    using BBLAImpl::ModMatrix;\nusing BBLAImpl::SparseMatrix;\n\n/**\n * @brief Black\
+    \ Box Linear Algebra\n */\n"
   dependsOn:
   - fps/berlekamp-massey.hpp
   - fps/formal-power-series.hpp
@@ -238,7 +248,7 @@ data:
   isVerificationFile: false
   path: matrix/black-box-linear-algebra.hpp
   requiredBy: []
-  timestamp: '2020-12-23 13:10:20+09:00'
+  timestamp: '2020-12-29 17:58:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
