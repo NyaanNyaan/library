@@ -22,4 +22,3 @@ segment-tree/lazy-seg-tree-with-index.hpp
 test
 test.cpp
 test.exe
-verify/verify-yuki/yuki-1326.test.cpp

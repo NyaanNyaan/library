@@ -126,6 +126,19 @@ mint fast_det(const Mat& A) {
   exit(1);
 }
 
+template <typename mint, typename Mat>
+FormalPowerSeries<mint> fast_linear_equation(const Mat& A, const FormalPowerSeries<mint>& b) {
+  using fps = FormalPowerSeries<mint>;
+  int n = A.size();
+  fps mp = mat_minpoly<mint, Mat>(A).rev();
+  fps buf = b, res(n);
+  for (int i = 1; i < (int)mp.size(); i++) {
+    res = buf * mp[i];
+    buf = A * buf;
+  }
+  return buf * mp[0].inverse();
+}
+
 }  // namespace BBLAImpl
 
 using BBLAImpl::fast_det;
