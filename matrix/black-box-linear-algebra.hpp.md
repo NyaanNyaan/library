@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/mod-pow.hpp
     title: Mod-Pow ($f(x)^k \mod g(x)$)
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   _extendedRequiredBy: []

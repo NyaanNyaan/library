@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/run-length-encoding.hpp
     title: "Run Length Encoding(\u9023\u9577\u5727\u7E2E)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -214,8 +214,8 @@ data:
     \    while (c == rle.back().first);\n    int n = randint(1, 101);\n    rle.emplace_back(c,\
     \ n);\n  }\n  string s = rev(rle);\n  vector<char> s2;\n  for (auto&& c : s) s2.push_back(c);\n\
     \  assert(rle == RunLengthEncoding(s));\n  assert(rle == RunLengthEncoding(s2));\n\
-    \  out(s);\n}\n\nvoid Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout\
-    \ << a + b << endl;\n\n  rep(i, 100) test();\n}\n"
+    }\n\nvoid Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout << a + b <<\
+    \ endl;\n\n  rep(i, 100) test();\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../string/run-length-encoding.hpp\"\
     \n\nusing namespace Nyaan;\n\nstring rev(vector<pair<char, int>>& rle) {\n  string\
@@ -225,9 +225,9 @@ data:
     \ {\n    char c;\n    do\n      c = randint(0, 26) + 'a';\n    while (c == rle.back().first);\n\
     \    int n = randint(1, 101);\n    rle.emplace_back(c, n);\n  }\n  string s =\
     \ rev(rle);\n  vector<char> s2;\n  for (auto&& c : s) s2.push_back(c);\n  assert(rle\
-    \ == RunLengthEncoding(s));\n  assert(rle == RunLengthEncoding(s2));\n  out(s);\n\
-    }\n\nvoid Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout << a + b <<\
-    \ endl;\n\n  rep(i, 100) test();\n}\n"
+    \ == RunLengthEncoding(s));\n  assert(rle == RunLengthEncoding(s2));\n}\n\nvoid\
+    \ Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\n\
+    \  rep(i, 100) test();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -240,8 +240,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/run-length-encoding.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 20:44:24+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-01-01 20:51:51+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/run-length-encoding.test.cpp
 layout: document
