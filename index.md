@@ -177,7 +177,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dimension-expanded-graph.hpp
       title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/graph-template.hpp
       title: graph/graph-template.hpp
     - icon: ':heavy_check_mark:'
@@ -301,7 +301,7 @@ data:
     - icon: ':warning:'
       path: math/rational-number.hpp
       title: math/rational-number.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: math/semiring.hpp
       title: "\u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
@@ -348,7 +348,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
@@ -582,7 +582,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/restore-shortest-path.hpp
       title: shortest-path/restore-shortest-path.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: shortest-path/warshall-floyd.hpp
       title: shortest-path/warshall-floyd.hpp
   - name: string
@@ -616,22 +616,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -885,7 +885,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/run-length-encoding.test.cpp
       title: verify/verify-unit-test/run-length-encoding.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-unit-test/semiring.test.cpp
       title: verify/verify-unit-test/semiring.test.cpp
     - icon: ':heavy_check_mark:'

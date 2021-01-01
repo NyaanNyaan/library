@@ -1,40 +1,40 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/semiring.hpp
     title: "\u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: shortest-path/warshall-floyd.hpp
     title: shortest-path/warshall-floyd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -190,72 +190,73 @@ data:
     \ 4 \"verify/verify-unit-test/semiring.test.cpp\"\n//\n#line 2 \"math/semiring.hpp\"\
     \n\ntemplate <typename T, T (*add)(T, T), T (*mul)(T, T), T (*I0)(), T (*I1)()>\n\
     struct semiring {\n  T x;\n  semiring() : x(I0()) {}\n  semiring(T y) : x(y) {}\n\
-    \  static T id0() { return I0(); }\n  static T id1() { return I1(); }\n\n  semiring\
-    \ &operator+=(const semiring &p) {\n    if (x == I0()) return *this = p;\n   \
-    \ if (p == I0()) return *this;\n    return *this = add(x, p.x);\n  }\n\n  semiring\
-    \ &operator*=(const semiring &p) {\n    if (x == I0() || p == I0()) return *this\
-    \ = I0();\n    if (x == I1()) return *this = p;\n    if (p == I1()) return *this;\n\
-    \    return *this = mul(x, p.x);\n  }\n\n  semiring operator+(const semiring &p)\
-    \ const { return semiring(*this) += p; }\n  semiring operator*(const semiring\
-    \ &p) const { return semiring(*this) *= p; }\n  bool operator==(const semiring\
-    \ &p) const { return x == p.x; }\n  bool operator!=(const semiring &p) const {\
-    \ return x != p.x; }\n  friend ostream &operator<<(ostream &os, const semiring\
-    \ &p) {\n    return os << p.x;\n  }\n};\n\ntemplate <typename rig, int N>\nstruct\
-    \ Mat {\n  using Array = array<array<rig, N>, N>;\n  Array A;\n\n  Mat() {\n \
-    \   for (int i = 0; i < N; i++) A[i].fill(rig::id0());\n  }\n  int height() const\
-    \ { return N; }\n  int width() const { return N; }\n  inline const array<rig,\
-    \ N> &operator[](int k) const { return A[k]; }\n  inline array<rig, N> &operator[](int\
-    \ k) { return A[k]; }\n\n  static Mat I() {\n    Mat m;\n    for (int i = 0; i\
-    \ < N; i++) m[i][i] = rig::id1();\n    return m;\n  }\n\n  Mat &operator+=(const\
-    \ Mat &B) {\n    for (int i = 0; i < N; i++)\n      for (int j = 0; j < N; j++)\
-    \ A[i][j] += B[i][j];\n    return (*this);\n  }\n\n  Mat &operator*=(const Mat\
-    \ &B) {\n    Mat C;\n    for (int i = 0; i < N; i++)\n      for (int k = 0; k\
-    \ < N; k++)\n        for (int j = 0; j < N; j++) C[i][j] += A[i][k] * B[k][j];\n\
-    \    A.swap(C.A);\n    return (*this);\n  }\n\n  Mat &operator^=(long long k)\
-    \ {\n    Mat B = Mat::I();\n    for (; k; *this *= *this, k >>= 1)\n      if (k\
-    \ & 1) B *= *this;\n    A.swap(B.A);\n    return (*this);\n  }\n\n  Mat operator+(const\
-    \ Mat &B) const { return (Mat(*this) += B); }\n  Mat operator*(const Mat &B) const\
-    \ { return (Mat(*this) *= B); }\n  Mat operator^(long long k) const { return (Mat(*this)\
-    \ ^= k); }\n\n  friend ostream &operator<<(ostream &os, Mat &p) {\n    for (int\
-    \ i = 0; i < N; i++) {\n      os << \"[\";\n      for (int j = 0; j < N; j++)\
-    \ {\n        os << p[i][j] << (j == N - 1 ? \"]\\n\" : \",\");\n      }\n    }\n\
-    \    return (os);\n  }\n};\n\n/**\n * @brief \u534A\u74B0\u30E9\u30A4\u30D6\u30E9\
-    \u30EA\n * @docs docs/math/semiring.md\n */\n#line 2 \"shortest-path/warshall-floyd.hpp\"\
-    \n\n\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct\
-    \ edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
-    \ cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost)\
-    \ {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\
-    \n  operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
-    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
-    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
-    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
-    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
-    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
-    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
-    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
-    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
-    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
+    \  static T id0() { return I0(); }\n  static T id1() { return I1(); }\n  operator\
+    \ T() const { return x; }\n\n  semiring &operator+=(const semiring &p) {\n   \
+    \ if (x == I0()) return *this = p;\n    if (p.x == I0()) return *this;\n    return\
+    \ *this = add(x, p.x);\n  }\n\n  semiring &operator*=(const semiring &p) {\n \
+    \   if (x == I0() || p.x == I0()) return *this = I0();\n    if (x == I1()) return\
+    \ *this = p;\n    if (p.x == I1()) return *this;\n    return *this = mul(x, p.x);\n\
+    \  }\n\n  semiring operator+(const semiring &p) const { return semiring(*this)\
+    \ += p; }\n  semiring operator*(const semiring &p) const { return semiring(*this)\
+    \ *= p; }\n  bool operator==(const semiring &p) const { return x == p.x; }\n \
+    \ bool operator!=(const semiring &p) const { return x != p.x; }\n  friend ostream\
+    \ &operator<<(ostream &os, const semiring &p) {\n    return os << p.x;\n  }\n\
+    };\n\ntemplate <typename rig, int N>\nstruct Mat {\n  using Array = array<array<rig,\
+    \ N>, N>;\n  Array A;\n\n  Mat() {\n    for (int i = 0; i < N; i++) A[i].fill(rig::id0());\n\
+    \  }\n  int height() const { return N; }\n  int width() const { return N; }\n\
+    \  inline const array<rig, N> &operator[](int k) const { return A[k]; }\n  inline\
+    \ array<rig, N> &operator[](int k) { return A[k]; }\n\n  static Mat I() {\n  \
+    \  Mat m;\n    for (int i = 0; i < N; i++) m[i][i] = rig::id1();\n    return m;\n\
+    \  }\n\n  Mat &operator+=(const Mat &B) {\n    for (int i = 0; i < N; i++)\n \
+    \     for (int j = 0; j < N; j++) A[i][j] += B[i][j];\n    return (*this);\n \
+    \ }\n\n  Mat &operator*=(const Mat &B) {\n    Mat C;\n    for (int i = 0; i <\
+    \ N; i++)\n      for (int k = 0; k < N; k++)\n        for (int j = 0; j < N; j++)\
+    \ C[i][j] += A[i][k] * B[k][j];\n    A.swap(C.A);\n    return (*this);\n  }\n\n\
+    \  Mat &operator^=(long long k) {\n    Mat B = Mat::I();\n    for (; k; *this\
+    \ *= *this, k >>= 1)\n      if (k & 1) B *= *this;\n    A.swap(B.A);\n    return\
+    \ (*this);\n  }\n\n  Mat operator+(const Mat &B) const { return (Mat(*this) +=\
+    \ B); }\n  Mat operator*(const Mat &B) const { return (Mat(*this) *= B); }\n \
+    \ Mat operator^(long long k) const { return (Mat(*this) ^= k); }\n\n  friend ostream\
+    \ &operator<<(ostream &os, Mat &p) {\n    for (int i = 0; i < N; i++) {\n    \
+    \  os << \"[\";\n      for (int j = 0; j < N; j++) {\n        os << p[i][j].x\
+    \ << (j == N - 1 ? \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\
+    };\n\n/**\n * @brief \u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/math/semiring.md\n\
+    \ */\n#line 2 \"shortest-path/warshall-floyd.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
+    \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
+    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
+    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
+    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
+    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
-    \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
-    \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
-    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
-    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
-    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
-    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
-    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
-    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
-    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
-    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
-    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"shortest-path/warshall-floyd.hpp\"\n\n// i : d[i][i] < 0 exists\
-    \ -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T& d) {\n  int\
-    \ N = d[0].size();\n  for (int i = 0; i < N; i++) d[i][i] = 0;\n  for (int k =\
-    \ 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n      for (int j = 0; j < N;\
-    \ j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n#line 7 \"verify/verify-unit-test/semiring.test.cpp\"\
-    \nusing namespace Nyaan;\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n\
-    // [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
+    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
+    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
+    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
+    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
+    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
+    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
+    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
+    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
+    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
+    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
+    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
+    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
+    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
+    \                       bool is_directed = false, bool is_1origin = true) {\n\
+    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
+    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
+    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"shortest-path/warshall-floyd.hpp\"\
+    \n\n// i : d[i][i] < 0 exists -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T&\
+    \ d) {\n  int N = d[0].size();\n  for (int i = 0; i < N; i++) d[i][i] = 0;\n \
+    \ for (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n      for (int\
+    \ j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n#line 7 \"\
+    verify/verify-unit-test/semiring.test.cpp\"\nusing namespace Nyaan;\n\n#line 2\
+    \ \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng()\
+    \ {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
     \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
     \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
@@ -308,8 +309,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/semiring.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 21:25:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-01-01 23:03:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-unit-test/semiring.test.cpp
 layout: document
