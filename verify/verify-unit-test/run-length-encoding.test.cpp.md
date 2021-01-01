@@ -1,6 +1,9 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':question:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
   - icon: ':x:'
     path: string/run-length-encoding.hpp
     title: "Run Length Encoding(\u9023\u9577\u5727\u7E2E)"
@@ -28,25 +31,25 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0077
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0077
-  bundledCode: "#line 1 \"verify/verify-aoj-other/aoj-0077.test.cpp\"\n#define PROBLEM\
-    \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0077\"\n//\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
-    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
-    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
-    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
-    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
-    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
-    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
-    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/run-length-encoding.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
+    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
+    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
+    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
+    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
+    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
     \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
     \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -178,36 +181,53 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-aoj-other/aoj-0077.test.cpp\"\n//\n#line 2 \"string/run-length-encoding.hpp\"\
+    \ 4 \"verify/verify-unit-test/run-length-encoding.test.cpp\"\n//\n#line 2 \"string/run-length-encoding.hpp\"\
     \n\ntemplate <typename C>\nvector<pair<typename C::value_type, int>> RunLengthEncoding(C&\
     \ S) {\n  using T = typename C::value_type;\n  if (S.empty()) return {};\n  vector<pair<T,\
     \ int>> ret;\n  T c = S[0];\n  int n = 1;\n  for (int i = 1; i < (int)S.size();\
     \ i++) {\n    if (S[i] == c)\n      n++;\n    else {\n      ret.emplace_back(c,\
     \ n);\n      c = S[i], n = 1;\n    }\n  }\n  ret.emplace_back(c, n);\n  return\
     \ ret;\n}\n\n/**\n * @brief Run Length Encoding(\u9023\u9577\u5727\u7E2E)\n */\n\
-    #line 6 \"verify/verify-aoj-other/aoj-0077.test.cpp\"\n\nusing namespace Nyaan;\n\
-    \nstring rev(vector<pair<char, int>>& rle) {\n  string res;\n  for (auto&& [c,\
-    \ n] : rle) res += string(n, c);\n  return res;\n}\n\nvoid Nyaan::solve() {\n\
-    \  string s;\n  while (cin >> s) {\n    vector<pair<char, int>> rle;\n    for\
-    \ (int i = 0; i < sz(s);) {\n      if (s[i] == '@') {\n        int n = s[i + 1]\
-    \ - '0';\n        char c = s[i + 2];\n        rle.emplace_back(c, n);\n      \
-    \  i += 3;\n      } else {\n        rle.emplace_back(s[i], 1);\n        i += 1;\n\
-    \      }\n    }\n    string ans = rev(rle);\n    auto rle2 = RunLengthEncoding(ans);\n\
-    \    assert(rle == rle2);\n    vector<char> buf;\n    each(c, ans) buf.push_back(c);\n\
-    \    auto rle3 = RunLengthEncoding(buf);\n    assert(rle == rle3);\n    out(ans);\n\
-    \  }\n}\n"
-  code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=0077\"\
-    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../string/run-length-encoding.hpp\"\
+    #line 6 \"verify/verify-unit-test/run-length-encoding.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nstring rev(vector<pair<char, int>>& rle) {\n  string res;\n  for (auto&&\
+    \ [c, n] : rle) res += string(n, c);\n  return res;\n}\n\n#line 2 \"misc/rng.hpp\"\
+    \n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
+    \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \           .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
+    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
+    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
+    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
+    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
+    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
+    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
+    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
+    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
+    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
+    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 16 \"\
+    verify/verify-unit-test/run-length-encoding.test.cpp\"\n\nvoid test() {\n  using\
+    \ vc = vector<pair<char, int>>;\n  int t = 100;\n  vc rle;\n  rle.emplace_back('a',\
+    \ 1);\n  while (t--) {\n    char c;\n    do\n      c = randint(0, 26) + 'a';\n\
+    \    while (c == rle.back().first);\n    int n = randint(1, 101);\n    rle.emplace_back(c,\
+    \ n);\n  }\n  string s = rev(rle);\n  vector<char> s2;\n  for (auto&& c : s) s2.push_back(c);\n\
+    \  assert(rle == RunLengthEncoding(s));\n  assert(rle == RunLengthEncoding(s2));\n\
+    \  out(s);\n}\n\nvoid Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout\
+    \ << a + b << endl;\n\n  rep(i, 100) test();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../template/template.hpp\"\n//\n#include \"../../string/run-length-encoding.hpp\"\
     \n\nusing namespace Nyaan;\n\nstring rev(vector<pair<char, int>>& rle) {\n  string\
     \ res;\n  for (auto&& [c, n] : rle) res += string(n, c);\n  return res;\n}\n\n\
-    void Nyaan::solve() {\n  string s;\n  while (cin >> s) {\n    vector<pair<char,\
-    \ int>> rle;\n    for (int i = 0; i < sz(s);) {\n      if (s[i] == '@') {\n  \
-    \      int n = s[i + 1] - '0';\n        char c = s[i + 2];\n        rle.emplace_back(c,\
-    \ n);\n        i += 3;\n      } else {\n        rle.emplace_back(s[i], 1);\n \
-    \       i += 1;\n      }\n    }\n    string ans = rev(rle);\n    auto rle2 = RunLengthEncoding(ans);\n\
-    \    assert(rle == rle2);\n    vector<char> buf;\n    each(c, ans) buf.push_back(c);\n\
-    \    auto rle3 = RunLengthEncoding(buf);\n    assert(rle == rle3);\n    out(ans);\n\
-    \  }\n}\n"
+    #include \"../../misc/rng.hpp\"\n\nvoid test() {\n  using vc = vector<pair<char,\
+    \ int>>;\n  int t = 100;\n  vc rle;\n  rle.emplace_back('a', 1);\n  while (t--)\
+    \ {\n    char c;\n    do\n      c = randint(0, 26) + 'a';\n    while (c == rle.back().first);\n\
+    \    int n = randint(1, 101);\n    rle.emplace_back(c, n);\n  }\n  string s =\
+    \ rev(rle);\n  vector<char> s2;\n  for (auto&& c : s) s2.push_back(c);\n  assert(rle\
+    \ == RunLengthEncoding(s));\n  assert(rle == RunLengthEncoding(s2));\n  out(s);\n\
+    }\n\nvoid Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout << a + b <<\
+    \ endl;\n\n  rep(i, 100) test();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -216,16 +236,17 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - string/run-length-encoding.hpp
+  - misc/rng.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-other/aoj-0077.test.cpp
+  path: verify/verify-unit-test/run-length-encoding.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 19:43:46+09:00'
+  timestamp: '2021-01-01 20:44:24+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-aoj-other/aoj-0077.test.cpp
+documentation_of: verify/verify-unit-test/run-length-encoding.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-other/aoj-0077.test.cpp
-- /verify/verify/verify-aoj-other/aoj-0077.test.cpp.html
-title: verify/verify-aoj-other/aoj-0077.test.cpp
+- /verify/verify/verify-unit-test/run-length-encoding.test.cpp
+- /verify/verify/verify-unit-test/run-length-encoding.test.cpp.html
+title: verify/verify-unit-test/run-length-encoding.test.cpp
 ---

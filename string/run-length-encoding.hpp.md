@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: verify/verify-aoj-other/aoj-0077.test.cpp
-    title: verify/verify-aoj-other/aoj-0077.test.cpp
+    path: verify/verify-unit-test/run-length-encoding.test.cpp
+    title: verify/verify-unit-test/run-length-encoding.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
@@ -32,7 +32,7 @@ data:
   timestamp: '2021-01-01 19:43:46+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - verify/verify-aoj-other/aoj-0077.test.cpp
+  - verify/verify-unit-test/run-length-encoding.test.cpp
 documentation_of: string/run-length-encoding.hpp
 layout: document
 redirect_from:

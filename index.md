@@ -348,7 +348,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
@@ -826,9 +826,6 @@ data:
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - name: verify/verify-aoj-other
     pages:
-    - icon: ':x:'
-      path: verify/verify-aoj-other/aoj-0077.test.cpp
-      title: verify/verify-aoj-other/aoj-0077.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
       title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
@@ -885,6 +882,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/radix-heap.test.cpp
       title: verify/verify-unit-test/radix-heap.test.cpp
+    - icon: ':x:'
+      path: verify/verify-unit-test/run-length-encoding.test.cpp
+      title: verify/verify-unit-test/run-length-encoding.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/set-function.test.cpp
       title: verify/verify-unit-test/set-function.test.cpp

@@ -156,9 +156,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
-  - icon: ':x:'
-    path: verify/verify-aoj-other/aoj-0077.test.cpp
-    title: verify/verify-aoj-other/aoj-0077.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
     title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
@@ -213,6 +210,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/run-length-encoding.test.cpp
+    title: verify/verify-unit-test/run-length-encoding.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/set-function.test.cpp
     title: verify/verify-unit-test/set-function.test.cpp
@@ -853,7 +853,6 @@ data:
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
-  - verify/verify-aoj-other/aoj-0077.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
@@ -885,6 +884,7 @@ data:
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
+  - verify/verify-unit-test/run-length-encoding.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/math.test.cpp
