@@ -7,7 +7,6 @@ struct semiring {
   semiring(T y) : x(y) {}
   static T id0() { return I0(); }
   static T id1() { return I1(); }
-  operator T() const { return x; }
 
   semiring &operator+=(const semiring &p) {
     if (x == I0()) return *this = p;
