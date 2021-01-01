@@ -7,17 +7,18 @@ struct semiring {
   semiring(T y) : x(y) {}
   static T id0() { return I0(); }
   static T id1() { return I1(); }
+  operator T() const { return x; }
 
   semiring &operator+=(const semiring &p) {
     if (x == I0()) return *this = p;
-    if (p == I0()) return *this;
+    if (p.x == I0()) return *this;
     return *this = add(x, p.x);
   }
 
   semiring &operator*=(const semiring &p) {
-    if (x == I0() || p == I0()) return *this = I0();
+    if (x == I0() || p.x == I0()) return *this = I0();
     if (x == I1()) return *this = p;
-    if (p == I1()) return *this;
+    if (p.x == I1()) return *this;
     return *this = mul(x, p.x);
   }
 
@@ -80,7 +81,7 @@ struct Mat {
     for (int i = 0; i < N; i++) {
       os << "[";
       for (int j = 0; j < N; j++) {
-        os << p[i][j] << (j == N - 1 ? "]\n" : ",");
+        os << p[i][j].x << (j == N - 1 ? "]\n" : ",");
       }
     }
     return (os);
