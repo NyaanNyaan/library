@@ -596,9 +596,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/rolling-hash.hpp
       title: Rolling Hash
-    - icon: ':warning:'
+    - icon: ':x:'
       path: string/run-length-encoding.hpp
-      title: string/run-length-encoding.hpp
+      title: "Run Length Encoding(\u9023\u9577\u5727\u7E2E)"
     - icon: ':warning:'
       path: string/subsequence-dp.hpp
       title: "\u90E8\u5206\u5217DP"
@@ -616,22 +616,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -826,6 +826,9 @@ data:
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - name: verify/verify-aoj-other
     pages:
+    - icon: ':x:'
+      path: verify/verify-aoj-other/aoj-0077.test.cpp
+      title: verify/verify-aoj-other/aoj-0077.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
       title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp

@@ -2,40 +2,41 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-aoj-other/aoj-0077.test.cpp
+    title: verify/verify-aoj-other/aoj-0077.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
+    document_title: "Run Length Encoding(\u9023\u9577\u5727\u7E2E)"
     links: []
-  bundledCode: "#line 2 \"string/run-length-encoding.hpp\"\n\n\n\nvector<pair<char,\
-    \ int>> RunLengthEncoding(string& S) {\n  vector<pair<char, int>> ret;\n  char\
-    \ c = -1;\n  int n = 0;\n  for (char x : S) {\n    if (c == x)\n      n++;\n \
-    \   else {\n      if (n) ret.emplace_back(c, n);\n      c = x, n = 1;\n    }\n\
-    \  }\n  if (n) ret.emplace_back(c, n);\n  return ret;\n}\n\ntemplate <typename\
-    \ T>\nvector<pair<T, int>> RunLengthEncoding(vector<T>& S) {\n  vector<pair<T,\
-    \ int>> ret;\n  T c = -1;\n  int n = 0;\n  for (T& x : S) {\n    if (c == x)\n\
-    \      n++;\n    else {\n      if (n) ret.emplace_back(c, n);\n      c = x, n\
-    \ = 1;\n    }\n  }\n  if (n) ret.emplace_back(c, n);\n  return ret;\n}\n"
-  code: "#pragma once\n\n\n\nvector<pair<char, int>> RunLengthEncoding(string& S)\
-    \ {\n  vector<pair<char, int>> ret;\n  char c = -1;\n  int n = 0;\n  for (char\
-    \ x : S) {\n    if (c == x)\n      n++;\n    else {\n      if (n) ret.emplace_back(c,\
-    \ n);\n      c = x, n = 1;\n    }\n  }\n  if (n) ret.emplace_back(c, n);\n  return\
-    \ ret;\n}\n\ntemplate <typename T>\nvector<pair<T, int>> RunLengthEncoding(vector<T>&\
-    \ S) {\n  vector<pair<T, int>> ret;\n  T c = -1;\n  int n = 0;\n  for (T& x :\
-    \ S) {\n    if (c == x)\n      n++;\n    else {\n      if (n) ret.emplace_back(c,\
-    \ n);\n      c = x, n = 1;\n    }\n  }\n  if (n) ret.emplace_back(c, n);\n  return\
-    \ ret;\n}"
+  bundledCode: "#line 2 \"string/run-length-encoding.hpp\"\n\ntemplate <typename C>\n\
+    vector<pair<typename C::value_type, int>> RunLengthEncoding(C& S) {\n  using T\
+    \ = typename C::value_type;\n  if (S.empty()) return {};\n  vector<pair<T, int>>\
+    \ ret;\n  T c = S[0];\n  int n = 1;\n  for (int i = 1; i < (int)S.size(); i++)\
+    \ {\n    if (S[i] == c)\n      n++;\n    else {\n      ret.emplace_back(c, n);\n\
+    \      c = S[i], n = 1;\n    }\n  }\n  ret.emplace_back(c, n);\n  return ret;\n\
+    }\n\n/**\n * @brief Run Length Encoding(\u9023\u9577\u5727\u7E2E)\n */\n"
+  code: "#pragma once\n\ntemplate <typename C>\nvector<pair<typename C::value_type,\
+    \ int>> RunLengthEncoding(C& S) {\n  using T = typename C::value_type;\n  if (S.empty())\
+    \ return {};\n  vector<pair<T, int>> ret;\n  T c = S[0];\n  int n = 1;\n  for\
+    \ (int i = 1; i < (int)S.size(); i++) {\n    if (S[i] == c)\n      n++;\n    else\
+    \ {\n      ret.emplace_back(c, n);\n      c = S[i], n = 1;\n    }\n  }\n  ret.emplace_back(c,\
+    \ n);\n  return ret;\n}\n\n/**\n * @brief Run Length Encoding(\u9023\u9577\u5727\
+    \u7E2E)\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: string/run-length-encoding.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-01-01 19:43:46+09:00'
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - verify/verify-aoj-other/aoj-0077.test.cpp
 documentation_of: string/run-length-encoding.hpp
 layout: document
 redirect_from:
 - /library/string/run-length-encoding.hpp
 - /library/string/run-length-encoding.hpp.html
-title: string/run-length-encoding.hpp
+title: "Run Length Encoding(\u9023\u9577\u5727\u7E2E)"
 ---
