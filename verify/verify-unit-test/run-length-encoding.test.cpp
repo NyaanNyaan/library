@@ -32,7 +32,6 @@ void test() {
   for (auto&& c : s) s2.push_back(c);
   assert(rle == RunLengthEncoding(s));
   assert(rle == RunLengthEncoding(s2));
-  out(s);
 }
 
 void Nyaan::solve() {
