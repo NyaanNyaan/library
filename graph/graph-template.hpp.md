@@ -145,6 +145,9 @@ data:
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/semiring.test.cpp
+    title: verify/verify-unit-test/semiring.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':heavy_check_mark:'
@@ -346,6 +349,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
+  - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
 documentation_of: graph/graph-template.hpp
 layout: document

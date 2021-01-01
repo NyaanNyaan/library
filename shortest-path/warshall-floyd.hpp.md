@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/semiring.test.cpp
+    title: verify/verify-unit-test/semiring.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -60,6 +63,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
+  - verify/verify-unit-test/semiring.test.cpp
 documentation_of: shortest-path/warshall-floyd.hpp
 layout: document
 redirect_from:

@@ -43,6 +43,9 @@ data:
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/semiring.test.cpp
+    title: verify/verify-unit-test/semiring.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/set-function.test.cpp
     title: verify/verify-unit-test/set-function.test.cpp
   - icon: ':heavy_check_mark:'
@@ -144,6 +147,7 @@ data:
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/math.test.cpp
+  - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/factorize.test.cpp

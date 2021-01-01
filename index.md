@@ -301,7 +301,7 @@ data:
     - icon: ':warning:'
       path: math/rational-number.hpp
       title: math/rational-number.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: math/semiring.hpp
       title: "\u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
@@ -885,6 +885,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/run-length-encoding.test.cpp
       title: verify/verify-unit-test/run-length-encoding.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/semiring.test.cpp
+      title: verify/verify-unit-test/semiring.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/set-function.test.cpp
       title: verify/verify-unit-test/set-function.test.cpp
