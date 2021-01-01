@@ -1,36 +1,24 @@
 #pragma once
 
-
-
-vector<pair<char, int>> RunLengthEncoding(string& S) {
-  vector<pair<char, int>> ret;
-  char c = -1;
-  int n = 0;
-  for (char x : S) {
-    if (c == x)
-      n++;
-    else {
-      if (n) ret.emplace_back(c, n);
-      c = x, n = 1;
-    }
-  }
-  if (n) ret.emplace_back(c, n);
-  return ret;
-}
-
-template <typename T>
-vector<pair<T, int>> RunLengthEncoding(vector<T>& S) {
+template <typename C>
+vector<pair<typename C::value_type, int>> RunLengthEncoding(C& S) {
+  using T = typename C::value_type;
+  if (S.empty()) return {};
   vector<pair<T, int>> ret;
-  T c = -1;
-  int n = 0;
-  for (T& x : S) {
-    if (c == x)
+  T c = S[0];
+  int n = 1;
+  for (int i = 1; i < (int)S.size(); i++) {
+    if (S[i] == c)
       n++;
     else {
-      if (n) ret.emplace_back(c, n);
-      c = x, n = 1;
+      ret.emplace_back(c, n);
+      c = S[i], n = 1;
     }
   }
-  if (n) ret.emplace_back(c, n);
+  ret.emplace_back(c, n);
   return ret;
 }
+
+/**
+ * @brief Run Length Encoding(連長圧縮)
+ */
