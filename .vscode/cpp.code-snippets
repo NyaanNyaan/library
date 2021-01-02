@@ -68,6 +68,7 @@
     "prefix": "_sol",
     "body": [
       "#include \"template/template.hpp\"",
+      "//",
       "",
       "using namespace Nyaan;",
       "",

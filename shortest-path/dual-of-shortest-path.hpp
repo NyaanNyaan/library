@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../graph/graph-template.hpp"
 
 template <typename T>
@@ -12,7 +10,7 @@ struct Dual_of_Shortest_Path {
   vector<T> d;
 
   Dual_of_Shortest_Path(int _n)
-      : N(_n), g(N), INF(numeric_limits<T>::max() / 2), d(N, INF) {}
+      : N(_n), g(N), INF(numeric_limits<T>::max() / 2.1), d(N, INF) {}
 
   // add constraint f(j) <= f(i) + w
   void add_edge(int i, int j, T c) { g[i].emplace_back(i, j, c); }
