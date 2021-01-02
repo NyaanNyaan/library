@@ -47,7 +47,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: shortest-path/dual-of-shortest-path.hpp
     title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
   - icon: ':heavy_check_mark:'
@@ -129,6 +129,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-0304.test.cpp
+    title: verify/verify-aoj-other/aoj-0304.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
     title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
@@ -334,6 +337,7 @@ data:
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+  - verify/verify-aoj-other/aoj-0304.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp

@@ -576,7 +576,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra.hpp
       title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: shortest-path/dual-of-shortest-path.hpp
       title: "\u725B\u30B2\u30FC(\u6700\u77ED\u8DEF\u554F\u984C\u306E\u53CC\u5BFE)"
     - icon: ':heavy_check_mark:'
@@ -826,6 +826,9 @@ data:
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - name: verify/verify-aoj-other
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-0304.test.cpp
+      title: verify/verify-aoj-other/aoj-0304.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
       title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
