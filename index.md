@@ -171,6 +171,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/biconnected-components.hpp
       title: "\u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3"
+    - icon: ':warning:'
+      path: graph/chromatic-number.hpp
+      title: "\u5F69\u8272\u6570"
     - icon: ':heavy_check_mark:'
       path: graph/cycle-detection.hpp
       title: "\u9589\u8DEF\u306E\u691C\u51FA"
