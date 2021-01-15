@@ -42,5 +42,5 @@ __attribute__((target("avx2"))) int ChromaticNumber(G& g) {
 
 /**
  * @brief 彩色数
- * @docs docs/chromatic-number.md
+ * @docs docs/graph/chromatic-number.md
  */

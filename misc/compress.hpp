@@ -13,7 +13,7 @@ struct compress {
     return lower_bound(xs.begin(), xs.end(), x) - xs.begin();
   }
   inline int operator()(const T& x) const { return get(x); }
-  T& operator[](int i) const { return xs[i]; }
+  T operator[](int i) { return xs[i]; }
   int size() const { return xs.size(); }
 };
 
