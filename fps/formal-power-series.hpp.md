@@ -69,7 +69,7 @@ data:
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
-    title: modulo/factorial.hpp
+    title: "\u968E\u4E57 $\\mod p$"
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp

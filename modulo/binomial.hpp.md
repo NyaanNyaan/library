@@ -26,7 +26,7 @@ data:
     title: fps/utility.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
-    title: modulo/factorial.hpp
+    title: "\u968E\u4E57 $\\mod p$"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

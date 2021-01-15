@@ -11,7 +11,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
-    title: modulo/factorial.hpp
+    title: "\u968E\u4E57 $\\mod p$"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0502.test.cpp

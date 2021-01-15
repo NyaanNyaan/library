@@ -393,7 +393,7 @@ data:
       title: modulo/binomial.hpp
     - icon: ':heavy_check_mark:'
       path: modulo/factorial.hpp
-      title: modulo/factorial.hpp
+      title: "\u968E\u4E57 $\\mod p$"
     - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
