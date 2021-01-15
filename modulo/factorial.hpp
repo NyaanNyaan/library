@@ -23,3 +23,8 @@ mint factorial(int n) {
   while (i < n) res *= ++i;
   return res;
 }
+
+/**
+ * @brief 階乗 $\mod p$
+ * @docs docs/modulo/factorial.md
+ */
