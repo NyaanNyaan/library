@@ -77,9 +77,9 @@ data:
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
 documentation_of: segment-tree/range-add-range-sum-lazyseg.hpp
 layout: document
 redirect_from:

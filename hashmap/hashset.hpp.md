@@ -124,8 +124,8 @@ data:
   timestamp: '2020-12-11 19:08:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
+  - verify/verify-unit-test/debug.test.cpp
 documentation_of: hashmap/hashset.hpp
 layout: document
 redirect_from:

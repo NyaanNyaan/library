@@ -150,6 +150,9 @@ data:
       path: fps/polynomial-interpolation.hpp
       title: fps/polynomial-interpolation.hpp
     - icon: ':heavy_check_mark:'
+      path: fps/sample-point-shift.hpp
+      title: fps/sample-point-shift.hpp
+    - icon: ':heavy_check_mark:'
       path: fps/sum-of-exponential-times-poly.hpp
       title: $\sum_{i}a^i f(i)$
     - icon: ':heavy_check_mark:'
@@ -388,6 +391,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
+    - icon: ':heavy_check_mark:'
+      path: modulo/factorial.hpp
+      title: modulo/factorial.hpp
     - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination.hpp
       title: modulo/gauss-elimination.hpp
@@ -1285,6 +1291,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0215.test.cpp
       title: verify/verify-yuki/yuki-0215.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0502.test.cpp
+      title: verify/verify-yuki/yuki-0502.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0697.test.cpp
       title: verify/verify-yuki/yuki-0697.test.cpp

@@ -13,6 +13,9 @@ data:
     path: fps/lagrange-interpolation-point.hpp
     title: fps/lagrange-interpolation-point.hpp
   - icon: ':heavy_check_mark:'
+    path: fps/sample-point-shift.hpp
+    title: fps/sample-point-shift.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/sum-of-exponential-times-poly.hpp
     title: $\sum_{i}a^i f(i)$
   - icon: ':heavy_check_mark:'
@@ -21,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/utility.hpp
     title: fps/utility.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/factorial.hpp
+    title: modulo/factorial.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
@@ -52,6 +58,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0125.test.cpp
     title: verify/verify-yuki/yuki-0125.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0502.test.cpp
+    title: verify/verify-yuki/yuki-0502.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0720.test.cpp
     title: verify/verify-yuki/yuki-0720.test.cpp
@@ -125,33 +134,36 @@ data:
   isVerificationFile: false
   path: modulo/binomial.hpp
   requiredBy:
+  - modulo/factorial.hpp
+  - fps/taylor-shift.hpp
+  - fps/utility.hpp
+  - fps/sample-point-shift.hpp
   - fps/fps-composition.hpp
   - fps/lagrange-interpolation-point.hpp
-  - fps/sum-of-exponential-times-poly.hpp
   - fps/fps-famous-series.hpp
-  - fps/utility.hpp
-  - fps/taylor-shift.hpp
+  - fps/sum-of-exponential-times-poly.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-yuki/yuki-0125.test.cpp
-  - verify/verify-yuki/yuki-0963-circular.test.cpp
-  - verify/verify-yuki/yuki-0890.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yuki/yuki-0963-circular.test.cpp
+  - verify/verify-yuki/yuki-0502.test.cpp
+  - verify/verify-yuki/yuki-0125.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
 documentation_of: modulo/binomial.hpp
 layout: document
 redirect_from:

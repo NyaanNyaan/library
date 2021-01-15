@@ -242,10 +242,10 @@ data:
     \ xs.push_back(x);\n    sort(xs.begin(), xs.end());\n    xs.erase(unique(xs.begin(),\
     \ xs.end()), xs.end());\n  }\n  int get(const T& x) const {\n    return lower_bound(xs.begin(),\
     \ xs.end(), x) - xs.begin();\n  }\n  inline int operator()(const T& x) const {\
-    \ return get(x); }\n  T& operator[](int i) const { return xs[i]; }\n  int size()\
-    \ const { return xs.size(); }\n};\n\n/**\n * \u5EA7\u6A19\u5727\u7E2E\n */\n#line\
-    \ 2 \"misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1\
-    \ << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre\
+    \ return get(x); }\n  T operator[](int i) { return xs[i]; }\n  int size() const\
+    \ { return xs.size(); }\n};\n\n/**\n * \u5EA7\u6A19\u5727\u7E2E\n */\n#line 2\
+    \ \"misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1 <<\
+    \ 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre\
     \ {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i <\
     \ 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n    \
     \    num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n}\
@@ -316,7 +316,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
   requiredBy: []
-  timestamp: '2020-12-13 00:57:06+09:00'
+  timestamp: '2021-01-15 18:15:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp

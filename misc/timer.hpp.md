@@ -48,18 +48,18 @@ data:
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
-  - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
-  - marathon/simulated-annealing.hpp
+  - trial/fast-inv.hpp
   - modulo/strassen.hpp
   - fps/fps-composition-fast.hpp
+  - marathon/simulated-annealing.hpp
   timestamp: '2020-12-08 00:23:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
+  - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
 documentation_of: misc/timer.hpp
 layout: document
 redirect_from:

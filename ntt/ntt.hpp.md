@@ -166,8 +166,8 @@ data:
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
 documentation_of: ntt/ntt.hpp
 layout: document
 redirect_from:

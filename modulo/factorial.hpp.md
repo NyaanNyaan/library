@@ -5,32 +5,22 @@ data:
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: matrix/black-box-linear-algebra.hpp
-    title: Black Box Linear Algebra
+    path: fps/sample-point-shift.hpp
+    title: fps/sample-point-shift.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/binomial.hpp
+    title: modulo/binomial.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-    title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-    title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0720.test.cpp
-    title: verify/verify-yuki/yuki-0720.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-1112-sparse.test.cpp
-    title: verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-1112.test.cpp
-    title: verify/verify-yuki/yuki-1112.test.cpp
+    path: verify/verify-yuki/yuki-0502.test.cpp
+    title: verify/verify-yuki/yuki-0502.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: Mod-Pow ($f(x)^k \mod g(x)$)
     links: []
-  bundledCode: "#line 2 \"fps/mod-pow.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
+  bundledCode: "#line 2 \"modulo/factorial.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
     \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
     \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
@@ -94,46 +84,72 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 4 \"fps/mod-pow.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint> mod_pow(int64_t\
-    \ k, const FormalPowerSeries<mint>& base,\n                                const\
-    \ FormalPowerSeries<mint>& d) {\n  using fps = FormalPowerSeries<mint>;\n  assert(!d.empty());\n\
-    \  auto inv = d.rev().inv();\n  auto quo = [&](const fps& poly) {\n    if (poly.size()\
-    \ < d.size()) return fps{};\n    int n = poly.size() - d.size() + 1;\n    return\
-    \ (poly.rev().pre(n) * inv.pre(n)).pre(n).rev();\n  };\n  fps res{1}, b(base);\n\
-    \  while (k) {\n    if (k & 1) {\n      res *= b;\n      res -= quo(res) * d;\n\
-    \      res.shrink();\n    }\n    b *= b;\n    b -= quo(b) * d;\n    b.shrink();\n\
-    \    k >>= 1;\n    assert(b.size() + 1 <= d.size());\n    assert(res.size() +\
-    \ 1 <= d.size());\n  }\n  return res;\n}\n\n/**\n * @brief Mod-Pow ($f(x)^k \\\
-    mod g(x)$)\n */\n"
-  code: "#pragma once\n\n#include \"formal-power-series.hpp\"\n\ntemplate <typename\
-    \ mint>\nFormalPowerSeries<mint> mod_pow(int64_t k, const FormalPowerSeries<mint>&\
-    \ base,\n                                const FormalPowerSeries<mint>& d) {\n\
-    \  using fps = FormalPowerSeries<mint>;\n  assert(!d.empty());\n  auto inv = d.rev().inv();\n\
-    \  auto quo = [&](const fps& poly) {\n    if (poly.size() < d.size()) return fps{};\n\
-    \    int n = poly.size() - d.size() + 1;\n    return (poly.rev().pre(n) * inv.pre(n)).pre(n).rev();\n\
-    \  };\n  fps res{1}, b(base);\n  while (k) {\n    if (k & 1) {\n      res *= b;\n\
-    \      res -= quo(res) * d;\n      res.shrink();\n    }\n    b *= b;\n    b -=\
-    \ quo(b) * d;\n    b.shrink();\n    k >>= 1;\n    assert(b.size() + 1 <= d.size());\n\
-    \    assert(res.size() + 1 <= d.size());\n  }\n  return res;\n}\n\n/**\n * @brief\
-    \ Mod-Pow ($f(x)^k \\mod g(x)$)\n */\n"
+    \ 2 \"fps/sample-point-shift.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\n\n\n\n\
+    template <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int\
+    \ MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod()\
+    \ != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i\
+    \ = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
+    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
+    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
+    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
+    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
+    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
+    \  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size()) extend();\n    return\
+    \ fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size()) extend();\n\
+    \    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
+    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
+    \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
+    \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
+    \ = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i)\
+    \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
+    \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
+    \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
+    \ - 1, r);\n  }\n};\n#line 5 \"fps/sample-point-shift.hpp\"\n\n// input  : h(0),\
+    \ h(1), ..., h(d - 1)\n// output : h(m), h(m + 1), ..., h(m + d - 1)\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>&\
+    \ ys, mint m) {\n  static Binomial<mint> C;\n  int d = ys.size() - 1;\n  FormalPowerSeries<mint>\
+    \ f(d + 1), g(d * 2 + 1);\n  for (int i = 0; i <= d; i++) {\n    f[i] = ys[i]\
+    \ * C.finv(i) * C.finv(d - i);\n    if ((d - i) & 1) f[i] = -f[i];\n  }\n  for\
+    \ (int i = 0; i <= 2 * d; i++) {\n    assert(m - d + i != mint(0));\n    g[i]\
+    \ = (m - d + i).inverse();\n  }\n  auto h = f * g;\n  mint coeff = 1;\n  for (int\
+    \ i = 0; i <= d; i++) coeff *= (m - d + i);\n  for (int i = 0; i <= d; i++) {\n\
+    \    h[i + d] *= coeff;\n    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
+    \ + d, begin(h) + 2 * d + 1};\n}\n#line 5 \"modulo/factorial.hpp\"\n\ntemplate\
+    \ <typename mint>\nmint factorial(int n) {\n  if (n <= 1) return 1;\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  constexpr long long v = 32768;\n  mint iv = mint(v).inverse();\n\
+    \  fps G{1, v + 1};\n  for (long long d = 1; d * v < mint::get_mod(); d <<= 1)\
+    \ {\n    fps G1 = SamplePointShift(G, mint(d) * iv);\n    fps G2 = SamplePointShift(G,\
+    \ mint(d * v + v) * iv);\n    fps G3 = SamplePointShift(G, mint(d * v + d + v)\
+    \ * iv);\n    for (int i = 0; i <= d; i++) G[i] *= G1[i], G2[i] *= G3[i];\n  \
+    \  copy(begin(G2), end(G2) - 1, back_inserter(G));\n  }\n  mint res = 1;\n  long\
+    \ long i = 0;\n  while (i + v <= n) res *= G[i / v], i += v;\n  while (i < n)\
+    \ res *= ++i;\n  return res;\n}\n"
+  code: "#pragma once\n\n#include \"../fps/formal-power-series.hpp\"\n#include \"\
+    ../fps/sample-point-shift.hpp\"\n\ntemplate <typename mint>\nmint factorial(int\
+    \ n) {\n  if (n <= 1) return 1;\n  using fps = FormalPowerSeries<mint>;\n  constexpr\
+    \ long long v = 32768;\n  mint iv = mint(v).inverse();\n  fps G{1, v + 1};\n \
+    \ for (long long d = 1; d * v < mint::get_mod(); d <<= 1) {\n    fps G1 = SamplePointShift(G,\
+    \ mint(d) * iv);\n    fps G2 = SamplePointShift(G, mint(d * v + v) * iv);\n  \
+    \  fps G3 = SamplePointShift(G, mint(d * v + d + v) * iv);\n    for (int i = 0;\
+    \ i <= d; i++) G[i] *= G1[i], G2[i] *= G3[i];\n    copy(begin(G2), end(G2) - 1,\
+    \ back_inserter(G));\n  }\n  mint res = 1;\n  long long i = 0;\n  while (i + v\
+    \ <= n) res *= G[i / v], i += v;\n  while (i < n) res *= ++i;\n  return res;\n\
+    }\n"
   dependsOn:
   - fps/formal-power-series.hpp
+  - fps/sample-point-shift.hpp
+  - modulo/binomial.hpp
   isVerificationFile: false
-  path: fps/mod-pow.hpp
-  requiredBy:
-  - matrix/black-box-linear-algebra.hpp
-  timestamp: '2020-12-22 23:53:32+09:00'
+  path: modulo/factorial.hpp
+  requiredBy: []
+  timestamp: '2021-01-15 18:15:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-documentation_of: fps/mod-pow.hpp
+  - verify/verify-yuki/yuki-0502.test.cpp
+documentation_of: modulo/factorial.hpp
 layout: document
 redirect_from:
-- /library/fps/mod-pow.hpp
-- /library/fps/mod-pow.hpp.html
-title: Mod-Pow ($f(x)^k \mod g(x)$)
+- /library/modulo/factorial.hpp
+- /library/modulo/factorial.hpp.html
+title: modulo/factorial.hpp
 ---

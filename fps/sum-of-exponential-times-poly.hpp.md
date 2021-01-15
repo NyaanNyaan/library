@@ -119,8 +119,8 @@ data:
   timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
 documentation_of: fps/sum-of-exponential-times-poly.hpp
 layout: document
 redirect_from:

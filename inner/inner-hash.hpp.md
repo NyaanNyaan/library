@@ -109,8 +109,8 @@ data:
   isVerificationFile: false
   path: inner/inner-hash.hpp
   requiredBy:
-  - string/rolling-hash-2d.hpp
   - string/rolling-hash.hpp
+  - string/rolling-hash-2d.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

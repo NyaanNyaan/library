@@ -49,6 +49,9 @@ data:
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
   - icon: ':heavy_check_mark:'
+    path: fps/sample-point-shift.hpp
+    title: fps/sample-point-shift.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
   - icon: ':heavy_check_mark:'
@@ -64,6 +67,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: matrix/polynomial-matrix-determinant.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
+  - icon: ':heavy_check_mark:'
+    path: modulo/factorial.hpp
+    title: modulo/factorial.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
@@ -134,6 +140,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0502.test.cpp
+    title: verify/verify-yuki/yuki-0502.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0720.test.cpp
     title: verify/verify-yuki/yuki-0720.test.cpp
@@ -296,60 +305,63 @@ data:
   isVerificationFile: false
   path: fps/formal-power-series.hpp
   requiredBy:
+  - matrix/black-box-linear-algebra.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
-  - matrix/black-box-linear-algebra.hpp
   - modulo/strassen.hpp
-  - fps/fps-composition.hpp
-  - fps/polynomial-gcd.hpp
-  - fps/fast-multieval.hpp
-  - fps/fps-sqrt.hpp
-  - fps/multipoint-evaluation.hpp
-  - fps/nth-term.hpp
-  - fps/differential-equation.hpp
-  - fps/fps-famous-series.hpp
-  - fps/ntt-friendly-fps.hpp
-  - fps/mod-pow.hpp
-  - fps/fps-circular.hpp
-  - fps/fps-composition-fast.hpp
-  - fps/utility.hpp
-  - fps/kitamasa.hpp
+  - modulo/factorial.hpp
   - fps/arbitrary-fps.hpp
-  - fps/taylor-shift.hpp
+  - fps/mod-pow.hpp
   - fps/polynomial-interpolation.hpp
+  - fps/differential-equation.hpp
+  - fps/taylor-shift.hpp
+  - fps/fps-circular.hpp
+  - fps/fps-sqrt.hpp
+  - fps/utility.hpp
+  - fps/nth-term.hpp
+  - fps/sample-point-shift.hpp
+  - fps/fps-composition.hpp
+  - fps/multipoint-evaluation.hpp
+  - fps/kitamasa.hpp
+  - fps/fps-composition-fast.hpp
+  - fps/ntt-friendly-fps.hpp
+  - fps/polynomial-gcd.hpp
+  - fps/fps-famous-series.hpp
+  - fps/fast-multieval.hpp
   timestamp: '2020-12-05 08:16:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-  - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - verify/verify-yosupo-fps/yosupo-log.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - verify/verify-yuki/yuki-0963.test.cpp
+  - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yuki/yuki-0214.test.cpp
+  - verify/verify-yuki/yuki-0963-circular.test.cpp
+  - verify/verify-yuki/yuki-0502.test.cpp
+  - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
-  - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - verify/verify-yosupo-fps/yosupo-pow.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp.test.cpp
+  - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-yuki/yuki-0963.test.cpp
-  - verify/verify-yuki/yuki-0215.test.cpp
-  - verify/verify-yuki/yuki-0214.test.cpp
-  - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-yuki/yuki-0963-circular.test.cpp
-  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
-  - verify/verify-yuki/yuki-1080.test.cpp
-  - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yosupo-fps/yosupo-log.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
 documentation_of: fps/formal-power-series.hpp
 layout: document
 redirect_from:
