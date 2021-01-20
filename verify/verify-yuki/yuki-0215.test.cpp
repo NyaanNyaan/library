@@ -56,9 +56,9 @@ using namespace Nyaan; void Nyaan::solve() {
   f[0] = 1;
   rep1(i, sz(f) - 1) f[i] = -f[i];
   g[0] = 0;
-  mint ans1 = LinearRecursionFormula(N, f, g);
+  mint ans1 = LinearRecurrence(N, f, g);
   g %= f;
-  mint ans2 = LinearRecursionFormula(N, f, g);
+  mint ans2 = LinearRecurrence(N, f, g);
   assert(ans1 == ans2);
   out(ans1);
 }

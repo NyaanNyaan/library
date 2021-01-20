@@ -1,15 +1,13 @@
 #pragma once
 
-
-
 template <typename mint>
 struct NTT {
   static constexpr uint32_t get_pr() {
-    uint32_t mod = mint::get_mod();
+    uint32_t _mod = mint::get_mod();
     using u64 = uint64_t;
     u64 ds[32] = {};
     int idx = 0;
-    u64 m = mod - 1;
+    u64 m = _mod - 1;
     for (u64 i = 2; i * i <= m; ++i) {
       if (m % i == 0) {
         ds[idx++] = i;
@@ -18,14 +16,14 @@ struct NTT {
     }
     if (m != 1) ds[idx++] = m;
 
-    uint32_t pr = 2;
+    uint32_t _pr = 2;
     while (1) {
       int flg = 1;
       for (int i = 0; i < idx; ++i) {
-        u64 a = pr, b = (mod - 1) / ds[i], r = 1;
+        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;
         while (b) {
-          if (b & 1) r = r * a % mod;
-          a = a * a % mod;
+          if (b & 1) r = r * a % _mod;
+          a = a * a % _mod;
           b >>= 1;
         }
         if (r == 1) {
@@ -34,9 +32,9 @@ struct NTT {
         }
       }
       if (flg == 1) break;
-      ++pr;
+      ++_pr;
     }
-    return pr;
+    return _pr;
   };
 
   static constexpr uint32_t mod = mint::get_mod();
@@ -57,7 +55,16 @@ struct NTT {
     }
   }
 
+  NTT() { setwy(level); }
+
   void fft4(vector<mint> &a, int k) {
+    if ((int)a.size() <= 1) return;
+    if (k == 1) {
+      mint a1 = a[1];
+      a[1] = a[0] - a[1];
+      a[0] = a[0] + a1;
+      return;
+    }
     if (k & 1) {
       int v = 1 << (k - 1);
       for (int j = 0; j < v; ++j) {
@@ -108,6 +115,13 @@ struct NTT {
   }
 
   void ifft4(vector<mint> &a, int k) {
+    if ((int)a.size() <= 1) return;
+    if (k == 1) {
+      mint a1 = a[1];
+      a[1] = a[0] - a[1];
+      a[0] = a[0] + a1;
+      return;
+    }
     int u = 1 << (k - 2);
     int v = 1;
     mint one = mint(1);
@@ -157,9 +171,17 @@ struct NTT {
     }
   }
 
-  void ntt(vector<mint> &a) { fft4(a, __builtin_ctz(a.size())); }
+  void ntt(vector<mint> &a) {
+    if ((int)a.size() <= 1) return;
+    fft4(a, __builtin_ctz(a.size()));
+  }
 
-  void intt(vector<mint> &a) { ifft4(a, __builtin_ctz(a.size())); }
+  void intt(vector<mint> &a) {
+    if ((int)a.size() <= 1) return;
+    ifft4(a, __builtin_ctz(a.size()));
+    mint iv = mint(a.size()).inverse();
+    for (auto &x : a) x *= iv;
+  }
 
   vector<mint> multiply(const vector<mint> &a, const vector<mint> &b) {
     int l = a.size() + b.size() - 1;

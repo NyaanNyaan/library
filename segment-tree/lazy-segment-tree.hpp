@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 // LazySegmentTree
 template <typename T, typename E, typename F, typename G, typename H>
 struct LST {
@@ -66,6 +64,10 @@ struct LST {
     dat[a] = x;
     laz[a] = ei;
     recalc(a);
+  }
+  T get_val(int a) {
+    thrust(a += n);
+    return reflect(a);
   }
   T query(int a, int b) {
     if (a >= b) return ti;

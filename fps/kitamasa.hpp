@@ -3,8 +3,8 @@
 #include "formal-power-series.hpp"
 
 template <typename mint>
-mint LinearRecursionFormula(long long k, FormalPowerSeries<mint> Q,
-                            FormalPowerSeries<mint> P) {
+mint LinearRecurrence(long long k, FormalPowerSeries<mint> Q,
+                      FormalPowerSeries<mint> P) {
   Q.shrink();
   mint ret = 0;
   if (P.size() >= Q.size()) {
@@ -92,11 +92,11 @@ template <typename mint>
 mint kitamasa(long long N, FormalPowerSeries<mint> Q,
               FormalPowerSeries<mint> a) {
   assert(!Q.empty() && Q[0] != 0);
-  if(N < (int)a.size()) return a[N];
+  if (N < (int)a.size()) return a[N];
   assert((int)a.size() >= int(Q.size()) - 1);
   auto P = a.pre((int)Q.size() - 1) * Q;
   P.resize(Q.size() - 1);
-  return LinearRecursionFormula<mint>(N, Q, P);
+  return LinearRecurrence<mint>(N, Q, P);
 }
 
 /**
