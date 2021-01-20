@@ -52,8 +52,8 @@ data:
   isVerificationFile: false
   path: set-function/zeta-mobius-transform.hpp
   requiredBy:
-  - set-function/or-convolution.hpp
   - set-function/and-convolution.hpp
+  - set-function/or-convolution.hpp
   timestamp: '2020-12-07 13:36:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -99,8 +99,8 @@ data:
     };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
     \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
     \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 4 \"fps/kitamasa.hpp\"\n\ntemplate <typename mint>\nmint LinearRecursionFormula(long\
-    \ long k, FormalPowerSeries<mint> Q,\n                            FormalPowerSeries<mint>\
+    \ 4 \"fps/kitamasa.hpp\"\n\ntemplate <typename mint>\nmint LinearRecurrence(long\
+    \ long k, FormalPowerSeries<mint> Q,\n                      FormalPowerSeries<mint>\
     \ P) {\n  Q.shrink();\n  mint ret = 0;\n  if (P.size() >= Q.size()) {\n    auto\
     \ R = P / Q;\n    P -= R * Q;\n    P.shrink();\n    if (k < (int)R.size()) ret\
     \ += R[k];\n  }\n  if ((int)P.size() == 0) return ret;\n\n  FormalPowerSeries<mint>::set_fft();\n\
@@ -132,13 +132,13 @@ data:
     \    P.intt();\n    Q.intt();\n    return ret + (P * (Q.inv()))[k];\n  }\n}\n\n\
     template <typename mint>\nmint kitamasa(long long N, FormalPowerSeries<mint> Q,\n\
     \              FormalPowerSeries<mint> a) {\n  assert(!Q.empty() && Q[0] != 0);\n\
-    \  if(N < (int)a.size()) return a[N];\n  assert((int)a.size() >= int(Q.size())\
+    \  if (N < (int)a.size()) return a[N];\n  assert((int)a.size() >= int(Q.size())\
     \ - 1);\n  auto P = a.pre((int)Q.size() - 1) * Q;\n  P.resize(Q.size() - 1);\n\
-    \  return LinearRecursionFormula<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\
-    \u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n\
-    \ */\n#line 5 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(long\
-    \ long n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n \
-    \ auto bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
+    \  return LinearRecurrence<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\u6F38\
+    \u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n */\n\
+    #line 5 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(long long\
+    \ n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n  auto\
+    \ bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
     \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
     \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
     \ */\n"
@@ -155,7 +155,7 @@ data:
   isVerificationFile: false
   path: fps/nth-term.hpp
   requiredBy: []
-  timestamp: '2020-12-05 08:16:44+09:00'
+  timestamp: '2021-01-21 03:21:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp

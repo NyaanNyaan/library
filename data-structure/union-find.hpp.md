@@ -58,11 +58,11 @@ data:
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
-  - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
+  - verify/verify-unit-test/tree-path.test.cpp
 documentation_of: data-structure/union-find.hpp
 layout: document
 redirect_from:

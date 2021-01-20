@@ -98,8 +98,8 @@ data:
   timestamp: '2020-12-07 14:58:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
 documentation_of: tree/rerooting.hpp
 layout: document
 redirect_from:

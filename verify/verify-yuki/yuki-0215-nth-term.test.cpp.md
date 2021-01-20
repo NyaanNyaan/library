@@ -712,46 +712,45 @@ data:
     \ - 1 - i];\n      b = tmp;\n      y = x;\n    } else {\n      for (int i = 0;\
     \ i < m; i++) c[l - 1 - i] -= freq * b[m - 1 - i];\n    }\n  }\n  reverse(begin(c),\
     \ end(c));\n  return c;\n}\n#line 2 \"fps/kitamasa.hpp\"\n\n#line 4 \"fps/kitamasa.hpp\"\
-    \n\ntemplate <typename mint>\nmint LinearRecursionFormula(long long k, FormalPowerSeries<mint>\
-    \ Q,\n                            FormalPowerSeries<mint> P) {\n  Q.shrink();\n\
-    \  mint ret = 0;\n  if (P.size() >= Q.size()) {\n    auto R = P / Q;\n    P -=\
-    \ R * Q;\n    P.shrink();\n    if (k < (int)R.size()) ret += R[k];\n  }\n  if\
-    \ ((int)P.size() == 0) return ret;\n\n  FormalPowerSeries<mint>::set_fft();\n\
-    \  if (FormalPowerSeries<mint>::ntt_ptr == nullptr) {\n    P.resize((int)Q.size()\
-    \ - 1);\n    while (k) {\n      auto Q2 = Q;\n      for (int i = 1; i < (int)Q2.size();\
-    \ i += 2) Q2[i] = -Q2[i];\n      auto S = P * Q2;\n      auto T = Q * Q2;\n  \
-    \    if (k & 1) {\n        for (int i = 1; i < (int)S.size(); i += 2) P[i >> 1]\
-    \ = S[i];\n        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n\
-    \      } else {\n        for (int i = 0; i < (int)S.size(); i += 2) P[i >> 1]\
-    \ = S[i];\n        for (int i = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n\
-    \      }\n      k >>= 1;\n    }\n    return ret + P[0];\n  } else {\n    int N\
-    \ = 1;\n    while (N < (int)Q.size()) N <<= 1;\n\n    P.resize(2 * N);\n    Q.resize(2\
-    \ * N);\n    P.ntt();\n    Q.ntt();\n    vector<mint> S(2 * N), T(2 * N);\n\n\
-    \    vector<int> btr(N);\n    for (int i = 0, logn = __builtin_ctz(N); i < (1\
-    \ << logn); i++) {\n      btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (logn - 1));\n\
-    \    }\n    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())\n              \
-    \    .inverse()\n                  .pow((mint::get_mod() - 1) / (2 * N));\n\n\
-    \    while (k) {\n      mint inv2 = mint(2).inverse();\n\n      // even degree\
-    \ of Q(x)Q(-x)\n      T.resize(N);\n      for (int i = 0; i < N; i++) T[i] = Q[(i\
-    \ << 1) | 0] * Q[(i << 1) | 1];\n\n      S.resize(N);\n      if (k & 1) {\n  \
-    \      // odd degree of P(x)Q(-x)\n        for (auto &i : btr) {\n          S[i]\
-    \ = (P[(i << 1) | 0] * Q[(i << 1) | 1] -\n                  P[(i << 1) | 1] *\
-    \ Q[(i << 1) | 0]) *\n                 inv2;\n          inv2 *= dw;\n        }\n\
-    \      } else {\n        // even degree of P(x)Q(-x)\n        for (int i = 0;\
-    \ i < N; i++) {\n          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] +\n     \
-    \             P[(i << 1) | 1] * Q[(i << 1) | 0]) *\n                 inv2;\n \
-    \       }\n      }\n      swap(P, S);\n      swap(Q, T);\n      k >>= 1;\n   \
-    \   if (k < N) break;\n      P.ntt_doubling();\n      Q.ntt_doubling();\n    }\n\
-    \    P.intt();\n    Q.intt();\n    return ret + (P * (Q.inv()))[k];\n  }\n}\n\n\
-    template <typename mint>\nmint kitamasa(long long N, FormalPowerSeries<mint> Q,\n\
-    \              FormalPowerSeries<mint> a) {\n  assert(!Q.empty() && Q[0] != 0);\n\
-    \  if(N < (int)a.size()) return a[N];\n  assert((int)a.size() >= int(Q.size())\
+    \n\ntemplate <typename mint>\nmint LinearRecurrence(long long k, FormalPowerSeries<mint>\
+    \ Q,\n                      FormalPowerSeries<mint> P) {\n  Q.shrink();\n  mint\
+    \ ret = 0;\n  if (P.size() >= Q.size()) {\n    auto R = P / Q;\n    P -= R * Q;\n\
+    \    P.shrink();\n    if (k < (int)R.size()) ret += R[k];\n  }\n  if ((int)P.size()\
+    \ == 0) return ret;\n\n  FormalPowerSeries<mint>::set_fft();\n  if (FormalPowerSeries<mint>::ntt_ptr\
+    \ == nullptr) {\n    P.resize((int)Q.size() - 1);\n    while (k) {\n      auto\
+    \ Q2 = Q;\n      for (int i = 1; i < (int)Q2.size(); i += 2) Q2[i] = -Q2[i];\n\
+    \      auto S = P * Q2;\n      auto T = Q * Q2;\n      if (k & 1) {\n        for\
+    \ (int i = 1; i < (int)S.size(); i += 2) P[i >> 1] = S[i];\n        for (int i\
+    \ = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n      } else {\n        for\
+    \ (int i = 0; i < (int)S.size(); i += 2) P[i >> 1] = S[i];\n        for (int i\
+    \ = 0; i < (int)T.size(); i += 2) Q[i >> 1] = T[i];\n      }\n      k >>= 1;\n\
+    \    }\n    return ret + P[0];\n  } else {\n    int N = 1;\n    while (N < (int)Q.size())\
+    \ N <<= 1;\n\n    P.resize(2 * N);\n    Q.resize(2 * N);\n    P.ntt();\n    Q.ntt();\n\
+    \    vector<mint> S(2 * N), T(2 * N);\n\n    vector<int> btr(N);\n    for (int\
+    \ i = 0, logn = __builtin_ctz(N); i < (1 << logn); i++) {\n      btr[i] = (btr[i\
+    \ >> 1] >> 1) + ((i & 1) << (logn - 1));\n    }\n    mint dw = mint(FormalPowerSeries<mint>::ntt_pr())\n\
+    \                  .inverse()\n                  .pow((mint::get_mod() - 1) /\
+    \ (2 * N));\n\n    while (k) {\n      mint inv2 = mint(2).inverse();\n\n     \
+    \ // even degree of Q(x)Q(-x)\n      T.resize(N);\n      for (int i = 0; i < N;\
+    \ i++) T[i] = Q[(i << 1) | 0] * Q[(i << 1) | 1];\n\n      S.resize(N);\n     \
+    \ if (k & 1) {\n        // odd degree of P(x)Q(-x)\n        for (auto &i : btr)\
+    \ {\n          S[i] = (P[(i << 1) | 0] * Q[(i << 1) | 1] -\n                 \
+    \ P[(i << 1) | 1] * Q[(i << 1) | 0]) *\n                 inv2;\n          inv2\
+    \ *= dw;\n        }\n      } else {\n        // even degree of P(x)Q(-x)\n   \
+    \     for (int i = 0; i < N; i++) {\n          S[i] = (P[(i << 1) | 0] * Q[(i\
+    \ << 1) | 1] +\n                  P[(i << 1) | 1] * Q[(i << 1) | 0]) *\n     \
+    \            inv2;\n        }\n      }\n      swap(P, S);\n      swap(Q, T);\n\
+    \      k >>= 1;\n      if (k < N) break;\n      P.ntt_doubling();\n      Q.ntt_doubling();\n\
+    \    }\n    P.intt();\n    Q.intt();\n    return ret + (P * (Q.inv()))[k];\n \
+    \ }\n}\n\ntemplate <typename mint>\nmint kitamasa(long long N, FormalPowerSeries<mint>\
+    \ Q,\n              FormalPowerSeries<mint> a) {\n  assert(!Q.empty() && Q[0]\
+    \ != 0);\n  if (N < (int)a.size()) return a[N];\n  assert((int)a.size() >= int(Q.size())\
     \ - 1);\n  auto P = a.pre((int)Q.size() - 1) * Q;\n  P.resize(Q.size() - 1);\n\
-    \  return LinearRecursionFormula<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\
-    \u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n\
-    \ */\n#line 5 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(long\
-    \ long n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n \
-    \ auto bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
+    \  return LinearRecurrence<mint>(N, Q, P);\n}\n\n/**\n * @brief \u7DDA\u5F62\u6F38\
+    \u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/kitamasa.md\n */\n\
+    #line 5 \"fps/nth-term.hpp\"\n\ntemplate <typename mint>\nmint nth_term(long long\
+    \ n, const vector<mint> &s) {\n  using fps = FormalPowerSeries<mint>;\n  auto\
+    \ bm = BerlekampMassey<mint>(s);\n  return kitamasa(n, fps{begin(bm), end(bm)},\
     \ fps{begin(s), end(s)});\n}\n\n/**\n * @brief \u7DDA\u5F62\u56DE\u5E30\u6570\u5217\
     \u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)\n * @docs docs/fps/nth-term.md\n\
     \ */\n#line 13 \"verify/verify-yuki/yuki-0215-nth-term.test.cpp\"\n\nusing namespace\
@@ -796,7 +795,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-0215-nth-term.test.cpp
   requiredBy: []
-  timestamp: '2020-12-22 00:51:45+09:00'
+  timestamp: '2021-01-21 03:21:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-0215-nth-term.test.cpp

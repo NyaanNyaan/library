@@ -38,8 +38,8 @@ data:
   timestamp: '2020-12-08 18:07:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/math.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
+  - verify/verify-unit-test/math.test.cpp
 documentation_of: math/sum-of-floor.hpp
 layout: document
 redirect_from:
