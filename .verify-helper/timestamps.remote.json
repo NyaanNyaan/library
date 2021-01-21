@@ -76,6 +76,7 @@
 "verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp": "2020-12-17 01:20:11 +0900",
 "verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp": "2021-01-21 23:33:19 +0900",
 "verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp": "2020-12-19 12:07:10 +0900",
+"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp": "2021-01-21 23:49:39 +0900",
 "verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp": "2020-12-19 12:07:10 +0900",
 "verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp": "2020-12-19 12:07:10 +0900",
 "verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp": "2020-12-05 08:57:48 +0900",
