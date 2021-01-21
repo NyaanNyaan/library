@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: lct/link-cut-tree-subtree-add.hpp
-    title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree.hpp
     title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
@@ -71,7 +68,6 @@ data:
   requiredBy:
   - lct/splay-reversible.hpp
   - lct/link-cut-tree.hpp
-  - lct/link-cut-tree-subtree-add.hpp
   - lct/link-cut-tree-subtree.hpp
   timestamp: '2020-12-17 20:54:42+09:00'
   verificationStatus: LIBRARY_ALL_AC

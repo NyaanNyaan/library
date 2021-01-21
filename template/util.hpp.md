@@ -20,6 +20,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
+  - icon: ':warning:'
+    path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
+    title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
@@ -246,6 +249,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
@@ -768,6 +774,7 @@ data:
   - set-function/xor-convolution.hpp
   - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
   timestamp: '2020-12-01 11:28:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -833,6 +840,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp

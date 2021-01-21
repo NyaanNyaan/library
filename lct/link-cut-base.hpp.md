@@ -5,9 +5,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-lazy.hpp
     title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
-  - icon: ':warning:'
-    path: lct/link-cut-tree-subtree-add.hpp
-    title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree.hpp
     title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
@@ -80,7 +77,6 @@ data:
   path: lct/link-cut-base.hpp
   requiredBy:
   - lct/link-cut-tree.hpp
-  - lct/link-cut-tree-subtree-add.hpp
   - lct/link-cut-tree-subtree.hpp
   - lct/link-cut-tree-lazy.hpp
   timestamp: '2020-12-19 12:07:10+09:00'
