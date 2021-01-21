@@ -28,11 +28,13 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
     links:
     - https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp\"\
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/dynamic_tree_vertex_add_subtree_sum\"\
     \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
@@ -179,7 +181,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp\"\
+    \ 4 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp\"\
     \n//\n#line 2 \"lct/link-cut-tree-subtree-add.hpp\"\n\ntemplate <typename T, T\
     \ (*add)(T, T), T (*sub)(T, T), T (*mul)(T, long long)>\nstruct LinkCutForSubtreeNode\
     \ {\n  using Node = LinkCutForSubtreeNode;\n  using Ptr = LinkCutForSubtreeNode*;\n\
@@ -233,7 +235,7 @@ data:
     \    update(x), update(t);\n    t->cancel = xc;\n    if ((t->p = y)) {\n     \
     \ if (y->l == x) y->l = t;\n      if (y->r == x) y->r = t;\n    }\n  }\n};\n\n\
     /**\n * @brief \u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree\n\
-    \ */\n#line 6 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp\"\
+    \ */\n#line 6 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp\"\
     \n\nusing namespace Nyaan;\nll add(ll a, ll b) { return a + b; }\nll sub(ll a,\
     \ ll b) { return a - b; }\nll mul(ll a, ll b) { return a * b; }\n\n#line 2 \"\
     misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\n\
@@ -266,7 +268,7 @@ data:
     \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
     \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
     \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 13 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp\"\
+    #line 13 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp\"\
     \nvoid Nyaan::solve() {\n  using LCT = LinkCutTreeSubtreeQuery<ll, add, sub, mul>;\n\
     \  LCT lct;\n\n  int N, Q;\n  rd(N, Q);\n\n  vector<LCT::Ptr> vs(N);\n  rep(i,\
     \ N) {\n    int a;\n    rd(a);\n    vs[i] = new LCT::Node(a);\n  }\n  for (int\
@@ -300,16 +302,16 @@ data:
   - template/macro.hpp
   - lct/link-cut-tree-subtree-add.hpp
   - misc/fastio.hpp
-  isVerificationFile: false
-  path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
+  isVerificationFile: true
+  path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
   requiredBy: []
-  timestamp: '2021-01-21 23:33:19+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-01-21 23:49:39+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
 layout: document
 redirect_from:
-- /library/verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
-- /library/verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp.html
-title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
 ---

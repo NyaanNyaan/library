@@ -687,11 +687,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: trial/fast-inv.hpp
       title: "\u9AD8\u901Fmodulo\u9006\u5143"
-  - name: verify/verify-yosupo-ds
-    pages:
-    - icon: ':warning:'
-      path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
-      title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
   verificationCategories:
   - name: verify/verify-aoj-alds
     pages:
@@ -940,6 +935,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp

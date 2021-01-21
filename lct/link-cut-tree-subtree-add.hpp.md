@@ -1,14 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
-    title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -124,12 +124,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: lct/link-cut-tree-subtree-add.hpp
-  requiredBy:
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test-2.cpp
+  requiredBy: []
   timestamp: '2021-01-21 23:33:19+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
 documentation_of: lct/link-cut-tree-subtree-add.hpp
 layout: document
 redirect_from:
