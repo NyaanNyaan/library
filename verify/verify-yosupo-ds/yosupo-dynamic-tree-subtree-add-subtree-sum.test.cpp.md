@@ -218,24 +218,23 @@ data:
     \ }\n\n  void evert(Ptr t) {\n    expose(t);\n    toggle(t);\n    push(t);\n \
     \ }\n\n  void link(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    u->p =\
     \ v, v->r = u;\n    update(v);\n  }\n\n  void cut(Ptr u, Ptr v) {\n    evert(u);\n\
-    \    expose(v);\n    v->l = u->p = nullptr;\n    this->update(v);\n  }\n\n  void\
-    \ toggle(Ptr t) {\n    swap(t->l, t->r);\n    t->rev ^= true;\n  }\n\n  T get_key(Ptr\
-    \ t) {\n    expose(t);\n    return t->key;\n  }\n\n  void set_key(Ptr t, const\
-    \ T& key) {\n    expose(t);\n    t->key = key;\n    update(t);\n  }\n\n  void\
-    \ subtree_add(Ptr t, const T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n\
-    \    if (l) t->l = nullptr, update(t);\n    t->apply(add_val);\n    if (l) t->l\
-    \ = l, update(t);\n  }\n\n  T subtree_sum(Ptr t) {\n    expose(t);\n    return\
-    \ add(t->key, t->subsum);\n  }\n\n protected:\n  bool is_root(Ptr t) { return\
-    \ !(t->p) || (t->p->l != t && t->p->r != t); }\n\n  inline int pos(Ptr t) {\n\
-    \    if (t->p) {\n      if (t->p->l == t) return -1;\n      if (t->p->r == t)\
-    \ return 1;\n    }\n    return 0;\n  }\n\n  void rot(Ptr t) {\n    Ptr x = t->p,\
-    \ y = x->p;\n    push(x), push(t);\n    if (pos(t) == -1) {\n      if ((x->l =\
-    \ t->r)) t->r->p = x;\n      t->r = x, x->p = t;\n    } else {\n      if ((x->r\
-    \ = t->l)) t->l->p = x;\n      t->l = x, x->p = t;\n    }\n    T xc = x->cancel;\n\
-    \    update(x), update(t);\n    t->cancel = xc;\n    if ((t->p = y)) {\n     \
-    \ if (y->l == x) y->l = t;\n      if (y->r == x) y->r = t;\n    }\n  }\n};\n\n\
-    /**\n * @brief \u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree\n\
-    \ */\n#line 7 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp\"\
+    \    expose(v);\n    v->l = u->p = nullptr;\n    update(v);\n  }\n\n  void toggle(Ptr\
+    \ t) {\n    swap(t->l, t->r);\n    t->rev ^= true;\n  }\n\n  T get_key(Ptr t)\
+    \ {\n    expose(t);\n    return t->key;\n  }\n\n  void set_key(Ptr t, const T&\
+    \ key) {\n    expose(t);\n    t->key = key;\n    update(t);\n  }\n\n  void subtree_add(Ptr\
+    \ t, const T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) t->l =\
+    \ nullptr, update(t);\n    t->apply(add_val);\n    if (l) t->l = l, update(t);\n\
+    \  }\n\n  T subtree_sum(Ptr t) {\n    expose(t);\n    return add(t->key, t->subsum);\n\
+    \  }\n\n protected:\n  bool is_root(Ptr t) { return !(t->p) || (t->p->l != t &&\
+    \ t->p->r != t); }\n\n  inline int pos(Ptr t) {\n    if (t->p) {\n      if (t->p->l\
+    \ == t) return -1;\n      if (t->p->r == t) return 1;\n    }\n    return 0;\n\
+    \  }\n\n  void rot(Ptr t) {\n    Ptr x = t->p, y = x->p;\n    push(x), push(t);\n\
+    \    if (pos(t) == -1) {\n      if ((x->l = t->r)) t->r->p = x;\n      t->r =\
+    \ x, x->p = t;\n    } else {\n      if ((x->r = t->l)) t->l->p = x;\n      t->l\
+    \ = x, x->p = t;\n    }\n    T xc = x->cancel;\n    update(x), update(t);\n  \
+    \  t->cancel = xc;\n    if ((t->p = y)) {\n      if (y->l == x) y->l = t;\n  \
+    \    if (y->r == x) y->r = t;\n    }\n  }\n};\n\n/**\n * @brief \u90E8\u5206\u6728\
+    \u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree\n */\n#line 7 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp\"\
     \n\nusing namespace Nyaan;\nll add(ll a, ll b) { return a + b; }\nll sub(ll a,\
     \ ll b) { return a - b; }\nll mul(ll a, ll b) { return a * b; }\n\n#line 2 \"\
     misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\n\
@@ -305,7 +304,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
   requiredBy: []
-  timestamp: '2021-01-21 23:33:19+09:00'
+  timestamp: '2021-01-22 14:25:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
