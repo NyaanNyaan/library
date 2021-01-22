@@ -127,7 +127,7 @@ struct LinkCutTreeSubtreeQuery {
     evert(u);
     expose(v);
     v->l = u->p = nullptr;
-    this->update(v);
+    update(v);
   }
 
   void toggle(Ptr t) {
