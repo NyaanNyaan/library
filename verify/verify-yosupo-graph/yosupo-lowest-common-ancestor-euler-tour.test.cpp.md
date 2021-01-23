@@ -30,6 +30,7 @@ data:
     title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

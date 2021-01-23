@@ -27,6 +27,7 @@ data:
     title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

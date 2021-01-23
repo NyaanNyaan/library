@@ -142,6 +142,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+    title: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - icon: ':heavy_check_mark:'
@@ -231,6 +234,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -318,6 +322,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
+  - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp

@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
     title: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

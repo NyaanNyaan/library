@@ -322,6 +322,9 @@ data:
       path: matrix/black-box-linear-algebra.hpp
       title: Black Box Linear Algebra
     - icon: ':heavy_check_mark:'
+      path: matrix/hafnian.hpp
+      title: matrix/hafnian.hpp
+    - icon: ':heavy_check_mark:'
       path: matrix/matrix-fast.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
     - icon: ':heavy_check_mark:'
@@ -1169,6 +1172,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
       title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+      title: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
       title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp

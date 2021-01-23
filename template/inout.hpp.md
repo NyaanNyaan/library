@@ -481,6 +481,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+    title: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
   - icon: ':heavy_check_mark:'
@@ -669,6 +672,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -731,6 +735,7 @@ data:
   - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
+  - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
   - verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp

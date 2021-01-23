@@ -30,6 +30,7 @@ data:
     title: "\u9AD8\u901Fmodulo\u9006\u5143"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

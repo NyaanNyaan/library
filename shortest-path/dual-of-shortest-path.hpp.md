@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-0304.test.cpp
     title: verify/verify-aoj-other/aoj-0304.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
