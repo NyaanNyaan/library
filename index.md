@@ -89,6 +89,9 @@ data:
   - name: dp
     pages:
     - icon: ':heavy_check_mark:'
+      path: dp/branch-and-bound.hpp
+      title: dp/branch-and-bound.hpp
+    - icon: ':heavy_check_mark:'
       path: dp/knapsack01.hpp
       title: dp/knapsack01.hpp
     - icon: ':heavy_check_mark:'
@@ -710,8 +713,14 @@ data:
       path: verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
       title: verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
+      title: verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
       title: verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dpl/aoj-dpl-1-h-bandb.test.cpp
+      title: verify/verify-aoj-dpl/aoj-dpl-1-h-bandb.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
       title: verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp

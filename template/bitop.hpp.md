@@ -28,8 +28,14 @@ data:
     path: verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
     title: verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
+    title: verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
     title: verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-dpl/aoj-dpl-1-h-bandb.test.cpp
+    title: verify/verify-aoj-dpl/aoj-dpl-1-h-bandb.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
     title: verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
@@ -901,6 +907,8 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
   - verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
   - verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
+  - verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
+  - verify/verify-aoj-dpl/aoj-dpl-1-h-bandb.test.cpp
   - verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
   - verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
