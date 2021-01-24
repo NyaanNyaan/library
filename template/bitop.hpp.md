@@ -25,6 +25,9 @@ data:
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
     title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
+    title: verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
   - icon: ':heavy_check_mark:'
@@ -887,6 +890,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
+  - verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp

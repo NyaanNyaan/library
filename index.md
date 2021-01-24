@@ -86,6 +86,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/wavelet-matrix.hpp
       title: Wavelet Matrix
+  - name: dp
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: dp/maximal-rectangle.hpp
+      title: dp/maximal-rectangle.hpp
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -696,6 +701,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
       title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+  - name: verify/verify-aoj-dpl
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
+      title: verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
   - name: verify/verify-aoj-dsl
     pages:
     - icon: ':heavy_check_mark:'
