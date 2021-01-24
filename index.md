@@ -89,6 +89,9 @@ data:
   - name: dp
     pages:
     - icon: ':heavy_check_mark:'
+      path: dp/knapsack01.hpp
+      title: dp/knapsack01.hpp
+    - icon: ':heavy_check_mark:'
       path: dp/maximal-rectangle.hpp
       title: dp/maximal-rectangle.hpp
   - name: flow
@@ -703,6 +706,15 @@ data:
       title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - name: verify/verify-aoj-dpl
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
+      title: verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
+      title: verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
+      title: verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
       title: verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
