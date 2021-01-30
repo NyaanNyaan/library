@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
   - icon: ':heavy_check_mark:'
@@ -78,15 +78,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112-sparse.test.cpp
     title: verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\n\
@@ -133,7 +133,7 @@ data:
   - modulo/mod-kth-root.hpp
   - prime/fast-factorize.hpp
   timestamp: '2020-12-08 00:23:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/segment-tree-beats.test.cpp
   - verify/verify-unit-test/math.test.cpp

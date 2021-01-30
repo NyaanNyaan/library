@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/fps/differential-equation.md
     document_title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
@@ -107,7 +107,7 @@ data:
   path: fps/differential-equation.hpp
   requiredBy: []
   timestamp: '2021-01-31 00:21:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0963.test.cpp
 documentation_of: fps/differential-equation.hpp

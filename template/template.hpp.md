@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy:
@@ -663,22 +663,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0896.test.cpp
     title: verify/verify-yuki/yuki-0896.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1080.test.cpp
     title: verify/verify-yuki/yuki-1080.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112-sparse.test.cpp
     title: verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
   - icon: ':heavy_check_mark:'
@@ -693,7 +693,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1283.test.cpp
     title: verify/verify-yuki/yuki-1283.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   - icon: ':heavy_check_mark:'
@@ -708,9 +708,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
@@ -1038,7 +1038,7 @@ data:
   - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/segment-tree-beats.test.cpp
   - verify/verify-unit-test/debug.test.cpp
