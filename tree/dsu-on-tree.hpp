@@ -54,7 +54,7 @@ struct DSUonTree {
 
   template <typename UPDATE, typename QUERY, typename CLEAR, typename RESET>
   void run(UPDATE &update, QUERY &query, CLEAR &clear, RESET &reset) {
-    auto dsu = [&](auto rc, int cur, int par = -1, bool keep = true) -> void {
+    auto dsu = [&](auto rc, int cur, int par = -1, bool keep = false) -> void {
       for (int i = 1; i < (int)g[cur].size(); i++)
         if (g[cur][i] != par) rc(rc, g[cur][i], cur, false);
       if (sub_sz[cur] != 1) rc(rc, g[cur][0], cur, true);

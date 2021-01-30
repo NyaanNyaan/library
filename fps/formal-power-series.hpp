@@ -153,7 +153,8 @@ struct FormalPowerSeries : vector<mint> {
       if ((*this)[i] != mint(0)) {
         if (i * k > deg) return FPS(deg, mint(0));
         mint rev = mint(1) / (*this)[i];
-        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));
+        FPS ret =
+            (((*this * rev) >> i).log(deg) * k).exp(deg) * ((*this)[i].pow(k));
         ret = (ret << (i * k)).pre(deg);
         if ((int)ret.size() < deg) ret.resize(deg, mint(0));
         return ret;
