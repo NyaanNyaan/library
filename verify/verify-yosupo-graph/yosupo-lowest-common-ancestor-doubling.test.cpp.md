@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/doubling.hpp
     title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'
