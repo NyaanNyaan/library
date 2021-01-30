@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0502.test.cpp
     title: verify/verify-yuki/yuki-0502.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"fps/sample-point-shift.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
@@ -96,25 +96,25 @@ data:
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
     \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
     \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));\n\
-    \        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg)\
-    \ ret.resize(deg, mint(0));\n        return ret;\n      }\n    }\n    return FPS(deg,\
-    \ mint(0));\n  }\n\n  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const\
-    \ FPS &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int\
-    \ ntt_pr();\n  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n\
-    };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
-    \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
-    \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 5 \"fps/sample-point-shift.hpp\"\n\n// input  : h(0), h(1), ..., h(d - 1)\n\
-    // output : h(m), h(m + 1), ..., h(m + d - 1)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ SamplePointShift(FormalPowerSeries<mint>& ys, mint m) {\n  static Binomial<mint>\
-    \ C;\n  int d = ys.size() - 1;\n  FormalPowerSeries<mint> f(d + 1), g(d * 2 +\
-    \ 1);\n  for (int i = 0; i <= d; i++) {\n    f[i] = ys[i] * C.finv(i) * C.finv(d\
-    \ - i);\n    if ((d - i) & 1) f[i] = -f[i];\n  }\n  for (int i = 0; i <= 2 * d;\
-    \ i++) {\n    assert(m - d + i != mint(0));\n    g[i] = (m - d + i).inverse();\n\
-    \  }\n  auto h = f * g;\n  mint coeff = 1;\n  for (int i = 0; i <= d; i++) coeff\
-    \ *= (m - d + i);\n  for (int i = 0; i <= d; i++) {\n    h[i + d] *= coeff;\n\
-    \    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
+    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
+    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
+    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
+    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
+    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
+    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
+    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
+    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
+    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
+    \ @docs docs/fps/formal-power-series.md\n */\n#line 5 \"fps/sample-point-shift.hpp\"\
+    \n\n// input  : h(0), h(1), ..., h(d - 1)\n// output : h(m), h(m + 1), ..., h(m\
+    \ + d - 1)\ntemplate <typename mint>\nFormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>&\
+    \ ys, mint m) {\n  static Binomial<mint> C;\n  int d = ys.size() - 1;\n  FormalPowerSeries<mint>\
+    \ f(d + 1), g(d * 2 + 1);\n  for (int i = 0; i <= d; i++) {\n    f[i] = ys[i]\
+    \ * C.finv(i) * C.finv(d - i);\n    if ((d - i) & 1) f[i] = -f[i];\n  }\n  for\
+    \ (int i = 0; i <= 2 * d; i++) {\n    assert(m - d + i != mint(0));\n    g[i]\
+    \ = (m - d + i).inverse();\n  }\n  auto h = f * g;\n  mint coeff = 1;\n  for (int\
+    \ i = 0; i <= d; i++) coeff *= (m - d + i);\n  for (int i = 0; i <= d; i++) {\n\
+    \    h[i + d] *= coeff;\n    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
     \ + d, begin(h) + 2 * d + 1};\n}\n"
   code: "#pragma once\n\n#include \"../modulo/binomial.hpp\"\n#include \"formal-power-series.hpp\"\
     \n\n// input  : h(0), h(1), ..., h(d - 1)\n// output : h(m), h(m + 1), ..., h(m\
@@ -134,8 +134,8 @@ data:
   path: fps/sample-point-shift.hpp
   requiredBy:
   - modulo/factorial.hpp
-  timestamp: '2021-01-15 18:15:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-01-31 00:21:53+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0502.test.cpp
 documentation_of: fps/sample-point-shift.hpp

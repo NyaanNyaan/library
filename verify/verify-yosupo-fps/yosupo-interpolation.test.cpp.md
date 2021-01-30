@@ -1,44 +1,44 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/multipoint-evaluation.hpp
     title: Multipoint Evaluation
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -253,66 +253,67 @@ data:
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
     \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
     \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));\n\
-    \        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg)\
-    \ ret.resize(deg, mint(0));\n        return ret;\n      }\n    }\n    return FPS(deg,\
-    \ mint(0));\n  }\n\n  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const\
-    \ FPS &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int\
-    \ ntt_pr();\n  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n\
-    };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
-    \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
-    \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 4 \"fps/multipoint-evaluation.hpp\"\n\ntemplate <typename mint>\nstruct ProductTree\
-    \ {\n  using fps = FormalPowerSeries<mint>;\n  const vector<mint> &xs;\n  vector<fps>\
-    \ buf;\n  int N, xsz;\n  vector<int> l, r;\n  ProductTree(const vector<mint> &xs_)\
-    \ : xs(xs_), xsz(xs.size()) {\n    N = 1;\n    while (N < (int)xs.size()) N *=\
-    \ 2;\n    buf.resize(2 * N);\n    l.resize(2 * N, xs.size());\n    r.resize(2\
-    \ * N, xs.size());\n    fps::set_fft();\n    if (fps::ntt_ptr == nullptr)\n  \
-    \    build();\n    else\n      build_ntt();\n  }\n\n  void build() {\n    for\
-    \ (int i = 0; i < xsz; i++) {\n      l[i + N] = i;\n      r[i + N] = i + 1;\n\
-    \      buf[i + N] = {-xs[i], 1};\n    }\n    for (int i = N - 1; i > 0; i--) {\n\
-    \      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i << 1) | 1];\n      if (buf[(i\
+    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
+    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
+    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
+    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
+    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
+    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
+    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
+    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
+    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
+    \ @docs docs/fps/formal-power-series.md\n */\n#line 4 \"fps/multipoint-evaluation.hpp\"\
+    \n\ntemplate <typename mint>\nstruct ProductTree {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  const vector<mint> &xs;\n  vector<fps> buf;\n  int N, xsz;\n  vector<int> l,\
+    \ r;\n  ProductTree(const vector<mint> &xs_) : xs(xs_), xsz(xs.size()) {\n   \
+    \ N = 1;\n    while (N < (int)xs.size()) N *= 2;\n    buf.resize(2 * N);\n   \
+    \ l.resize(2 * N, xs.size());\n    r.resize(2 * N, xs.size());\n    fps::set_fft();\n\
+    \    if (fps::ntt_ptr == nullptr)\n      build();\n    else\n      build_ntt();\n\
+    \  }\n\n  void build() {\n    for (int i = 0; i < xsz; i++) {\n      l[i + N]\
+    \ = i;\n      r[i + N] = i + 1;\n      buf[i + N] = {-xs[i], 1};\n    }\n    for\
+    \ (int i = N - 1; i > 0; i--) {\n      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i\
+    \ << 1) | 1];\n      if (buf[(i << 1) | 0].empty())\n        continue;\n     \
+    \ else if (buf[(i << 1) | 1].empty())\n        buf[i] = buf[(i << 1) | 0];\n \
+    \     else\n        buf[i] = buf[(i << 1) | 0] * buf[(i << 1) | 1];\n    }\n \
+    \ }\n\n  void build_ntt() {\n    fps f;\n    f.reserve(N * 2);\n    for (int i\
+    \ = 0; i < xsz; i++) {\n      l[i + N] = i;\n      r[i + N] = i + 1;\n      buf[i\
+    \ + N] = {-xs[i] + 1, -xs[i] - 1};\n    }\n    for (int i = N - 1; i > 0; i--)\
+    \ {\n      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i << 1) | 1];\n      if (buf[(i\
     \ << 1) | 0].empty())\n        continue;\n      else if (buf[(i << 1) | 1].empty())\n\
-    \        buf[i] = buf[(i << 1) | 0];\n      else\n        buf[i] = buf[(i << 1)\
-    \ | 0] * buf[(i << 1) | 1];\n    }\n  }\n\n  void build_ntt() {\n    fps f;\n\
-    \    f.reserve(N * 2);\n    for (int i = 0; i < xsz; i++) {\n      l[i + N] =\
-    \ i;\n      r[i + N] = i + 1;\n      buf[i + N] = {-xs[i] + 1, -xs[i] - 1};\n\
-    \    }\n    for (int i = N - 1; i > 0; i--) {\n      l[i] = l[(i << 1) | 0];\n\
-    \      r[i] = r[(i << 1) | 1];\n      if (buf[(i << 1) | 0].empty())\n       \
-    \ continue;\n      else if (buf[(i << 1) | 1].empty())\n        buf[i] = buf[(i\
-    \ << 1) | 0];\n      else if (buf[(i << 1) | 0].size() == buf[(i << 1) | 1].size())\
-    \ {\n        buf[i] = buf[(i << 1) | 0];\n        f.clear();\n        copy(begin(buf[(i\
-    \ << 1) | 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n    \
-    \    buf[i].ntt_doubling();\n        f.ntt_doubling();\n        for (int j = 0;\
-    \ j < (int)buf[i].size(); j++) buf[i][j] *= f[j];\n      } else {\n        buf[i]\
-    \ = buf[(i << 1) | 0];\n        f.clear();\n        copy(begin(buf[(i << 1) |\
-    \ 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n        buf[i].ntt_doubling();\n\
-    \        f.intt();\n        f.resize(buf[i].size(), mint(0));\n        f.ntt();\n\
+    \        buf[i] = buf[(i << 1) | 0];\n      else if (buf[(i << 1) | 0].size()\
+    \ == buf[(i << 1) | 1].size()) {\n        buf[i] = buf[(i << 1) | 0];\n      \
+    \  f.clear();\n        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),\n\
+    \             back_inserter(f));\n        buf[i].ntt_doubling();\n        f.ntt_doubling();\n\
     \        for (int j = 0; j < (int)buf[i].size(); j++) buf[i][j] *= f[j];\n   \
-    \   }\n    }\n    for (int i = 0; i < 2 * N; i++) {\n      buf[i].intt();\n  \
-    \    buf[i].shrink();\n    }\n  }\n};\n\ntemplate <typename mint>\nvector<mint>\
-    \ InnerMultipointEvaluation(const FormalPowerSeries<mint> &f,\n              \
-    \                         const vector<mint> &xs,\n                          \
-    \             const ProductTree<mint> &ptree) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  vector<mint> ret;\n  ret.reserve(xs.size());\n  auto rec = [&](auto self, fps\
-    \ a, int idx) {\n    if (ptree.l[idx] == ptree.r[idx]) return;\n    a %= ptree.buf[idx];\n\
-    \    if ((int)a.size() <= 64) {\n      for (int i = ptree.l[idx]; i < ptree.r[idx];\
-    \ i++)\n        ret.push_back(a.eval(xs[i]));\n      return;\n    }\n    self(self,\
-    \ a, (idx << 1) | 0);\n    self(self, a, (idx << 1) | 1);\n  };\n  rec(rec, f,\
-    \ 1);\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> MultipointEvaluation(const\
-    \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
-    \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
-    }\n\n/**\n * @brief Multipoint Evaluation\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
-    \n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line 2 \"modint/simd-montgomery.hpp\"\n\n\
-    \n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\")))\
-    \ __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
-    \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
-    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
-    \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
-    \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
-    \  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
-    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
-    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \   } else {\n        buf[i] = buf[(i << 1) | 0];\n        f.clear();\n      \
+    \  copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n\
+    \        buf[i].ntt_doubling();\n        f.intt();\n        f.resize(buf[i].size(),\
+    \ mint(0));\n        f.ntt();\n        for (int j = 0; j < (int)buf[i].size();\
+    \ j++) buf[i][j] *= f[j];\n      }\n    }\n    for (int i = 0; i < 2 * N; i++)\
+    \ {\n      buf[i].intt();\n      buf[i].shrink();\n    }\n  }\n};\n\ntemplate\
+    \ <typename mint>\nvector<mint> InnerMultipointEvaluation(const FormalPowerSeries<mint>\
+    \ &f,\n                                       const vector<mint> &xs,\n      \
+    \                                 const ProductTree<mint> &ptree) {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  vector<mint> ret;\n  ret.reserve(xs.size());\n\
+    \  auto rec = [&](auto self, fps a, int idx) {\n    if (ptree.l[idx] == ptree.r[idx])\
+    \ return;\n    a %= ptree.buf[idx];\n    if ((int)a.size() <= 64) {\n      for\
+    \ (int i = ptree.l[idx]; i < ptree.r[idx]; i++)\n        ret.push_back(a.eval(xs[i]));\n\
+    \      return;\n    }\n    self(self, a, (idx << 1) | 0);\n    self(self, a, (idx\
+    \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
+    \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
+    \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
+    \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n\
+    #line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line\
+    \ 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
+    \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
+    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
+    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
+    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
+    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
+    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
+    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
+    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
     \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
     \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
@@ -769,7 +770,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   requiredBy: []
-  timestamp: '2020-12-22 00:51:45+09:00'
+  timestamp: '2021-01-31 00:21:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp

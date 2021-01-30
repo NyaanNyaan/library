@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':question:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/strongly-connected-components.hpp
-    title: graph/strongly-connected-components.hpp
+    path: segment-tree/segment-tree-beats.hpp
+    title: segment-tree/segment-tree-beats.hpp
   - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -32,13 +32,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C
+    PROBLEM: https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C
-  bundledCode: "#line 1 \"verify/verify-aoj-grl/aoj-grl-3-c.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C\"\n\
-    \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    - https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
@@ -182,65 +182,123 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"graph/strongly-connected-components.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
-    \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
-    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
-    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
-    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
-    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
-    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
-    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
-    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
-    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
-    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
-    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
-    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
-    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
-    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
-    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
-    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
-    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
-    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
-    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
-    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
-    \                       bool is_directed = false, bool is_1origin = true) {\n\
-    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
-    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
-    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"graph/strongly-connected-components.hpp\"\
-    \n\n// Strongly Connected Components\n// DAG of SC graph   ... scc.dag (including\
-    \ multiedges)\n// new node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\n\
-    template <typename G>\nstruct StronglyConnectedComponents {\n private:\n  const\
-    \ G &g;\n  vector<vector<int>> rg;\n  vector<int> comp, order;\n  vector<char>\
-    \ used;\n  vector<vector<int>> blng;\n\n public:\n  vector<vector<int>> dag;\n\
-    \  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }\n\n\
-    \  int operator[](int k) { return comp[k]; }\n\n  vector<int> &belong(int i) {\
-    \ return blng[i]; }\n\n private:\n  void dfs(int idx) {\n    if (used[idx]) return;\n\
-    \    used[idx] = true;\n    for (auto to : g[idx]) dfs(int(to));\n    order.push_back(idx);\n\
-    \  }\n\n  void rdfs(int idx, int cnt) {\n    if (comp[idx] != -1) return;\n  \
-    \  comp[idx] = cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n  }\n\n  void\
-    \ build() {\n    for (int i = 0; i < (int)g.size(); i++) dfs(i);\n    reverse(begin(order),\
-    \ end(order));\n    used.clear();\n    used.shrink_to_fit();\n\n    comp.resize(g.size(),\
-    \ -1);\n\n    rg.resize(g.size());\n    for (int i = 0; i < (int)g.size(); i++)\
-    \ {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n      }\n\
-    \    }\n    int ptr = 0;\n    for (int i : order)\n      if (comp[i] == -1) rdfs(i,\
-    \ ptr), ptr++;\n    rg.clear();\n    rg.shrink_to_fit();\n    order.clear();\n\
-    \    order.shrink_to_fit();\n\n    dag.resize(ptr);\n    blng.resize(ptr);\n \
-    \   for (int i = 0; i < (int)g.size(); i++) {\n      blng[comp[i]].push_back(i);\n\
-    \      for (auto &to : g[i]) {\n        int x = comp[i], y = comp[to];\n     \
-    \   if (x == y) continue;\n        dag[x].push_back(y);\n      }\n    }\n  }\n\
-    };\n#line 6 \"verify/verify-aoj-grl/aoj-grl-3-c.test.cpp\"\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  ini(N, M);\n  auto g = graph(N, M, true, false);\n\
-    \  StronglyConnectedComponents<vvi> scc(g);\n  ini(Q);\n  rep(_, Q) {\n    ini(u,\
-    \ v);\n    out(scc[u] == scc[v]);\n  }\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_C\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../graph/strongly-connected-components.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, M);\n  auto g = graph(N,\
-    \ M, true, false);\n  StronglyConnectedComponents<vvi> scc(g);\n  ini(Q);\n  rep(_,\
-    \ Q) {\n    ini(u, v);\n    out(scc[u] == scc[v]);\n  }\n}"
+    \ 4 \"verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp\"\n//\n#line 2 \"\
+    segment-tree/segment-tree-beats.hpp\"\n\nstruct AngelBeats {\n  using i64 = long\
+    \ long;\n  static constexpr i64 INF = numeric_limits<i64>::max() / 2.1;\n\n  struct\
+    \ alignas(32) Node {\n    i64 sum = 0, g1 = 0, l1 = 0;\n    i64 g2 = -INF, gc\
+    \ = 1, l2 = INF, lc = 1, add = 0;\n  };\n\n  vector<Node> v;\n  i64 n, log;\n\n\
+    \  AngelBeats() {}\n  AngelBeats(int _n) : AngelBeats(vector<i64>(_n)) {}\n  AngelBeats(const\
+    \ vector<i64>& vc) {\n    n = 1, log = 0;\n    while (n < (int)vc.size()) n <<=\
+    \ 1, log++;\n    v.resize(2 * n);\n    for (i64 i = 0; i < (int)vc.size(); ++i)\
+    \ {\n      v[i + n].sum = v[i + n].g1 = v[i + n].l1 = vc[i];\n    }\n    for (i64\
+    \ i = n - 1; i; --i) update(i);\n  }\n\n  void range_chmin(int l, int r, i64 x)\
+    \ { inner_apply<1>(l, r, x); }\n  void range_chmax(int l, int r, i64 x) { inner_apply<2>(l,\
+    \ r, x); }\n  void range_add(int l, int r, i64 x) { inner_apply<3>(l, r, x); }\n\
+    \  void range_update(int l, int r, i64 x) { inner_apply<4>(l, r, x); }\n  i64\
+    \ range_min(int l, int r) { return inner_fold<1>(l, r); }\n  i64 range_max(int\
+    \ l, int r) { return inner_fold<2>(l, r); }\n  i64 range_sum(int l, int r) { return\
+    \ inner_fold<3>(l, r); }\n\n private:\n  void update(int k) {\n    Node& p = v[k];\n\
+    \    Node& l = v[(k << 1) | 0];\n    Node& r = v[(k << 1) | 1];\n\n    p.sum =\
+    \ l.sum + r.sum;\n\n#define unlikely(x) __builtin_expect(!!(x), 0)\n    if (unlikely(l.g1\
+    \ == r.g1)) {\n      p.g1 = l.g1;\n      p.g2 = max(l.g2, r.g2);\n      p.gc =\
+    \ l.gc + r.gc;\n    } else {\n      bool f = l.g1 > r.g1;\n      p.g1 = f ? l.g1\
+    \ : r.g1;\n      p.gc = f ? l.gc : r.gc;\n      p.g2 = max(f ? r.g1 : l.g1, f\
+    \ ? l.g2 : r.g2);\n    }\n\n    if (unlikely(l.l1 == r.l1)) {\n      p.l1 = l.l1;\n\
+    \      p.l2 = min(l.l2, r.l2);\n      p.lc = l.lc + r.lc;\n    } else {\n    \
+    \  bool f = l.l1 < r.l1;\n      p.l1 = f ? l.l1 : r.l1;\n      p.lc = f ? l.lc\
+    \ : r.lc;\n      p.l2 = min(f ? r.l1 : l.l1, f ? l.l2 : r.l2);\n    }\n#undef\
+    \ unlikely\n  }\n\n  void push_add(int k, i64 x) {\n    Node& p = v[k];\n    p.sum\
+    \ += x << (log + __builtin_clz(k) - 31);\n    p.g1 += x;\n    p.l1 += x;\n   \
+    \ if (p.g2 != -INF) p.g2 += x;\n    if (p.l2 != INF) p.l2 += x;\n    p.add +=\
+    \ x;\n  }\n  void push_min(int k, i64 x) {\n    Node& p = v[k];\n    p.sum +=\
+    \ (x - p.g1) * p.gc;\n    if (p.l1 == p.g1) p.l1 = x;\n    if (p.l2 == p.g1) p.l2\
+    \ = x;\n    p.g1 = x;\n  }\n  void push_max(int k, i64 x) {\n    Node& p = v[k];\n\
+    \    p.sum += (x - p.l1) * p.lc;\n    if (p.g1 == p.l1) p.g1 = x;\n    if (p.g2\
+    \ == p.l1) p.g2 = x;\n    p.l1 = x;\n  }\n  void push(int k) {\n    Node& p =\
+    \ v[k];\n    if (p.add != 0) {\n      push_add(k * 2 + 0, p.add);\n      push_add(k\
+    \ * 2 + 1, p.add);\n      p.add = 0;\n    }\n    if (p.g1 < v[k * 2 + 0].g1) push_min(k\
+    \ * 2 + 0, p.g1);\n    if (p.l1 > v[k * 2 + 0].l1) push_max(k * 2 + 0, p.l1);\n\
+    \n    if (p.g1 < v[k * 2 + 1].g1) push_min(k * 2 + 1, p.g1);\n    if (p.l1 > v[k\
+    \ * 2 + 1].l1) push_max(k * 2 + 1, p.l1);\n  }\n\n  void subtree_chmin(int k,\
+    \ i64 x) {\n    if (v[k].g1 <= x) return;\n    if (v[k].g2 < x) {\n      push_min(k,\
+    \ x);\n      return;\n    }\n    push(k);\n    subtree_chmin(k * 2 + 0, x);\n\
+    \    subtree_chmin(k * 2 + 1, x);\n    update(k);\n  }\n\n  void subtree_chmax(int\
+    \ k, i64 x) {\n    if (x <= v[k].l1) return;\n    if (x < v[k].l2) {\n      push_max(k,\
+    \ x);\n      return;\n    }\n    push(k);\n    subtree_chmax(k * 2 + 0, x);\n\
+    \    subtree_chmax(k * 2 + 1, x);\n    update(k);\n  }\n\n  template <int cmd>\n\
+    \  inline void _apply(int k, i64 x) {\n    if constexpr (cmd == 1) subtree_chmin(k,\
+    \ x);\n    if constexpr (cmd == 2) subtree_chmax(k, x);\n    if constexpr (cmd\
+    \ == 3) push_add(k, x);\n    if constexpr (cmd == 4) subtree_chmin(k, x), subtree_chmax(k,\
+    \ x);\n  }\n\n  template <int cmd>\n  void inner_apply(int l, int r, i64 x) {\n\
+    \    if (l == r) return;\n    l += n, r += n;\n    for (int i = log; i >= 1; i--)\
+    \ {\n      if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i)\
+    \ != r) push((r - 1) >> i);\n    }\n    {\n      int l2 = l, r2 = r;\n      while\
+    \ (l < r) {\n        if (l & 1) _apply<cmd>(l++, x);\n        if (r & 1) _apply<cmd>(--r,\
+    \ x);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n\
+    \    }\n    for (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l)\
+    \ update(l >> i);\n      if (((r >> i) << i) != r) update((r - 1) >> i);\n   \
+    \ }\n  }\n\n  template <int cmd>\n  inline i64 e() {\n    if constexpr (cmd ==\
+    \ 1)\n      return INF;\n    else if constexpr (cmd == 2)\n      return -INF;\n\
+    \    else\n      return 0;\n  }\n\n  template <int cmd>\n  inline void op(i64&\
+    \ a, const Node& b) {\n    if constexpr (cmd == 1) a = min(a, b.l1);\n    if constexpr\
+    \ (cmd == 2) a = max(a, b.g1);\n    if constexpr (cmd == 3) a += b.sum;\n  }\n\
+    \n  template <int cmd>\n  i64 inner_fold(int l, int r) {\n    if (l == r) return\
+    \ e<cmd>();\n    l += n, r += n;\n    for (int i = log; i >= 1; i--) {\n     \
+    \ if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
+    \ - 1) >> i);\n    }\n    i64 lx = e<cmd>(), rx = e<cmd>();\n    while (l < r)\
+    \ {\n      if (l & 1) op<cmd>(lx, v[l++]);\n      if (r & 1) op<cmd>(rx, v[--r]);\n\
+    \      l >>= 1;\n      r >>= 1;\n    }\n    if constexpr (cmd == 1) lx = min(lx,\
+    \ rx);\n    if constexpr (cmd == 2) lx = max(lx, rx);\n    if constexpr (cmd ==\
+    \ 3) lx += rx;\n    return lx;\n  }\n};\n#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace\
+    \ fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint\
+    \ pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
+    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
+    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
+    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load()\
+    \ {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf +\
+    \ pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n\
+    \  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c\
+    \ = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil +\
+    \ 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
+    \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
+    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
+    \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
+    \ Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n\
+    }\n\ninline void wt(char c) { obuf[por++] = c; }\ntemplate <typename T>\ninline\
+    \ void wt(T x) {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++]\
+    \ = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++] = '-';\n    x = -x;\n\
+    \  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf +\
+    \ i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x\
+    \ < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n    } else {\n\
+    \      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x)\
+    \ - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1] = '0' + r;\n\
+    \      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf +\
+    \ por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
+    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
+    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
+    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
+    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
+    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
+    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
+    #line 7 \"verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nvoid Nyaan::solve() {\n  i64 N, Q;\n  rd(N, Q);\n  vector<i64> init(N);\n\
+    \  for (int i = 0; i < N; i++) rd(init[i]);\n  AngelBeats seg(init);\n  while\
+    \ (Q--) {\n    i64 q;\n    rd(q);\n    if (q == 0) {\n      i64 l, r, b;\n   \
+    \   rd(l, r, b);\n      seg.range_chmin(l, r, b);\n    } else if (q == 1) {\n\
+    \      i64 l, r, b;\n      rd(l, r, b);\n      seg.range_chmax(l, r, b);\n   \
+    \ } else if (q == 2) {\n      i64 l, r, b;\n      rd(l, r, b);\n      seg.range_add(l,\
+    \ r, b);\n    } else {\n      i64 l, r;\n      rd(l, r);\n      wtn(seg.range_sum(l,\
+    \ r));\n    }\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/segment-tree-beats.hpp\"\
+    \n#include \"../../misc/fastio.hpp\"\n\nusing namespace Nyaan;\n\nvoid Nyaan::solve()\
+    \ {\n  i64 N, Q;\n  rd(N, Q);\n  vector<i64> init(N);\n  for (int i = 0; i < N;\
+    \ i++) rd(init[i]);\n  AngelBeats seg(init);\n  while (Q--) {\n    i64 q;\n  \
+    \  rd(q);\n    if (q == 0) {\n      i64 l, r, b;\n      rd(l, r, b);\n      seg.range_chmin(l,\
+    \ r, b);\n    } else if (q == 1) {\n      i64 l, r, b;\n      rd(l, r, b);\n \
+    \     seg.range_chmax(l, r, b);\n    } else if (q == 2) {\n      i64 l, r, b;\n\
+    \      rd(l, r, b);\n      seg.range_add(l, r, b);\n    } else {\n      i64 l,\
+    \ r;\n      rd(l, r);\n      wtn(seg.range_sum(l, r));\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -248,18 +306,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - graph/strongly-connected-components.hpp
-  - graph/graph-template.hpp
+  - segment-tree/segment-tree-beats.hpp
+  - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-01-31 00:21:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
-- /verify/verify/verify-aoj-grl/aoj-grl-3-c.test.cpp.html
-title: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
 ---

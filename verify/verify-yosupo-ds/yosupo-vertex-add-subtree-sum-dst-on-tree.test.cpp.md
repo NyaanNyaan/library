@@ -10,25 +10,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/static-graph.hpp
     title: Static Graph
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -308,8 +308,8 @@ data:
     \ {\n    dfs1(root);\n    dfs2(root);\n  }\n\n  int idx(int u) const { return\
     \ down[u]; }\n\n  template <typename UPDATE, typename QUERY, typename CLEAR, typename\
     \ RESET>\n  void run(UPDATE &update, QUERY &query, CLEAR &clear, RESET &reset)\
-    \ {\n    auto dsu = [&](auto rc, int cur, int par = -1, bool keep = true) -> void\
-    \ {\n      for (int i = 1; i < (int)g[cur].size(); i++)\n        if (g[cur][i]\
+    \ {\n    auto dsu = [&](auto rc, int cur, int par = -1, bool keep = false) ->\
+    \ void {\n      for (int i = 1; i < (int)g[cur].size(); i++)\n        if (g[cur][i]\
     \ != par) rc(rc, g[cur][i], cur, false);\n      if (sub_sz[cur] != 1) rc(rc, g[cur][0],\
     \ cur, true);\n      if (sub_sz[cur] != 1)\n        for (int i = up[g[cur][0]];\
     \ i < up[cur]; i++) update(euler[i]);\n      update(cur);\n      query(cur);\n\
@@ -366,7 +366,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   requiredBy: []
-  timestamp: '2020-12-18 14:55:17+09:00'
+  timestamp: '2021-01-31 00:21:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp

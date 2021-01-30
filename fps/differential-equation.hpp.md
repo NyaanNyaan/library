@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/fps/differential-equation.md
     document_title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
@@ -72,21 +72,22 @@ data:
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
     \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
     \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));\n\
-    \        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg)\
-    \ ret.resize(deg, mint(0));\n        return ret;\n      }\n    }\n    return FPS(deg,\
-    \ mint(0));\n  }\n\n  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const\
-    \ FPS &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int\
-    \ ntt_pr();\n  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n\
-    };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
-    \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
-    \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 3 \"fps/differential-equation.hpp\"\n\n// find f, saitsfying equation f' = g(f)\
-    \ mod x ^ deg\ntemplate <typename mint>\nFormalPowerSeries<mint> DifferentialEquation(\n\
-    \    function<FormalPowerSeries<mint>(FormalPowerSeries<mint>, int)> g,\n    function<FormalPowerSeries<mint>(FormalPowerSeries<mint>,\
-    \ int)> gprime,\n    mint f0, int deg) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  fps f{f0};\n  for (int i = 1; i < deg; i <<= 1) {\n    fps r = (-gprime(f,\
-    \ i << 1)).integral().exp(i << 1);\n    fps h = ((g(f, i << 1) - gprime(f, i <<\
+    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
+    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
+    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
+    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
+    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
+    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
+    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
+    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
+    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
+    \ @docs docs/fps/formal-power-series.md\n */\n#line 3 \"fps/differential-equation.hpp\"\
+    \n\n// find f, saitsfying equation f' = g(f) mod x ^ deg\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> DifferentialEquation(\n    function<FormalPowerSeries<mint>(FormalPowerSeries<mint>,\
+    \ int)> g,\n    function<FormalPowerSeries<mint>(FormalPowerSeries<mint>, int)>\
+    \ gprime,\n    mint f0, int deg) {\n  using fps = FormalPowerSeries<mint>;\n \
+    \ fps f{f0};\n  for (int i = 1; i < deg; i <<= 1) {\n    fps r = (-gprime(f, i\
+    \ << 1)).integral().exp(i << 1);\n    fps h = ((g(f, i << 1) - gprime(f, i <<\
     \ 1) * f) * r).pre(i << 1).integral();\n    f = ((h + f0) * r.inv(i << 1)).pre(i\
     \ << 1);\n  }\n  return f.pre(deg);\n}\n\n/**\n * @brief \u5E38\u5FAE\u5206\u65B9\
     \u7A0B\u5F0F\n * @docs docs/fps/differential-equation.md\n */\n"
@@ -105,8 +106,8 @@ data:
   isVerificationFile: false
   path: fps/differential-equation.hpp
   requiredBy: []
-  timestamp: '2020-12-05 08:16:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-01-31 00:21:53+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0963.test.cpp
 documentation_of: fps/differential-equation.hpp

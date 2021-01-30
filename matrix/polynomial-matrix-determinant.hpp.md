@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/multipoint-evaluation.hpp
     title: Multipoint Evaluation
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
       \u5217)"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/matrix/polynomial-matrix-determinant.md
     document_title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
@@ -85,89 +85,90 @@ data:
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
     \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
     \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret = (((*this * rev) >> i).log() * k).exp() * ((*this)[i].pow(k));\n\
-    \        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg)\
-    \ ret.resize(deg, mint(0));\n        return ret;\n      }\n    }\n    return FPS(deg,\
-    \ mint(0));\n  }\n\n  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const\
-    \ FPS &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int\
-    \ ntt_pr();\n  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n\
-    };\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\
-    \n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
-    \u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line\
-    \ 2 \"fps/polynomial-interpolation.hpp\"\n\n#line 2 \"fps/multipoint-evaluation.hpp\"\
-    \n\n#line 4 \"fps/multipoint-evaluation.hpp\"\n\ntemplate <typename mint>\nstruct\
-    \ ProductTree {\n  using fps = FormalPowerSeries<mint>;\n  const vector<mint>\
-    \ &xs;\n  vector<fps> buf;\n  int N, xsz;\n  vector<int> l, r;\n  ProductTree(const\
-    \ vector<mint> &xs_) : xs(xs_), xsz(xs.size()) {\n    N = 1;\n    while (N < (int)xs.size())\
-    \ N *= 2;\n    buf.resize(2 * N);\n    l.resize(2 * N, xs.size());\n    r.resize(2\
-    \ * N, xs.size());\n    fps::set_fft();\n    if (fps::ntt_ptr == nullptr)\n  \
-    \    build();\n    else\n      build_ntt();\n  }\n\n  void build() {\n    for\
-    \ (int i = 0; i < xsz; i++) {\n      l[i + N] = i;\n      r[i + N] = i + 1;\n\
-    \      buf[i + N] = {-xs[i], 1};\n    }\n    for (int i = N - 1; i > 0; i--) {\n\
-    \      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i << 1) | 1];\n      if (buf[(i\
+    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
+    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
+    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
+    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
+    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
+    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
+    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
+    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
+    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
+    \ @docs docs/fps/formal-power-series.md\n */\n#line 2 \"fps/polynomial-interpolation.hpp\"\
+    \n\n#line 2 \"fps/multipoint-evaluation.hpp\"\n\n#line 4 \"fps/multipoint-evaluation.hpp\"\
+    \n\ntemplate <typename mint>\nstruct ProductTree {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  const vector<mint> &xs;\n  vector<fps> buf;\n  int N, xsz;\n  vector<int> l,\
+    \ r;\n  ProductTree(const vector<mint> &xs_) : xs(xs_), xsz(xs.size()) {\n   \
+    \ N = 1;\n    while (N < (int)xs.size()) N *= 2;\n    buf.resize(2 * N);\n   \
+    \ l.resize(2 * N, xs.size());\n    r.resize(2 * N, xs.size());\n    fps::set_fft();\n\
+    \    if (fps::ntt_ptr == nullptr)\n      build();\n    else\n      build_ntt();\n\
+    \  }\n\n  void build() {\n    for (int i = 0; i < xsz; i++) {\n      l[i + N]\
+    \ = i;\n      r[i + N] = i + 1;\n      buf[i + N] = {-xs[i], 1};\n    }\n    for\
+    \ (int i = N - 1; i > 0; i--) {\n      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i\
+    \ << 1) | 1];\n      if (buf[(i << 1) | 0].empty())\n        continue;\n     \
+    \ else if (buf[(i << 1) | 1].empty())\n        buf[i] = buf[(i << 1) | 0];\n \
+    \     else\n        buf[i] = buf[(i << 1) | 0] * buf[(i << 1) | 1];\n    }\n \
+    \ }\n\n  void build_ntt() {\n    fps f;\n    f.reserve(N * 2);\n    for (int i\
+    \ = 0; i < xsz; i++) {\n      l[i + N] = i;\n      r[i + N] = i + 1;\n      buf[i\
+    \ + N] = {-xs[i] + 1, -xs[i] - 1};\n    }\n    for (int i = N - 1; i > 0; i--)\
+    \ {\n      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i << 1) | 1];\n      if (buf[(i\
     \ << 1) | 0].empty())\n        continue;\n      else if (buf[(i << 1) | 1].empty())\n\
-    \        buf[i] = buf[(i << 1) | 0];\n      else\n        buf[i] = buf[(i << 1)\
-    \ | 0] * buf[(i << 1) | 1];\n    }\n  }\n\n  void build_ntt() {\n    fps f;\n\
-    \    f.reserve(N * 2);\n    for (int i = 0; i < xsz; i++) {\n      l[i + N] =\
-    \ i;\n      r[i + N] = i + 1;\n      buf[i + N] = {-xs[i] + 1, -xs[i] - 1};\n\
-    \    }\n    for (int i = N - 1; i > 0; i--) {\n      l[i] = l[(i << 1) | 0];\n\
-    \      r[i] = r[(i << 1) | 1];\n      if (buf[(i << 1) | 0].empty())\n       \
-    \ continue;\n      else if (buf[(i << 1) | 1].empty())\n        buf[i] = buf[(i\
-    \ << 1) | 0];\n      else if (buf[(i << 1) | 0].size() == buf[(i << 1) | 1].size())\
-    \ {\n        buf[i] = buf[(i << 1) | 0];\n        f.clear();\n        copy(begin(buf[(i\
-    \ << 1) | 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n    \
-    \    buf[i].ntt_doubling();\n        f.ntt_doubling();\n        for (int j = 0;\
-    \ j < (int)buf[i].size(); j++) buf[i][j] *= f[j];\n      } else {\n        buf[i]\
-    \ = buf[(i << 1) | 0];\n        f.clear();\n        copy(begin(buf[(i << 1) |\
-    \ 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n        buf[i].ntt_doubling();\n\
-    \        f.intt();\n        f.resize(buf[i].size(), mint(0));\n        f.ntt();\n\
+    \        buf[i] = buf[(i << 1) | 0];\n      else if (buf[(i << 1) | 0].size()\
+    \ == buf[(i << 1) | 1].size()) {\n        buf[i] = buf[(i << 1) | 0];\n      \
+    \  f.clear();\n        copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),\n\
+    \             back_inserter(f));\n        buf[i].ntt_doubling();\n        f.ntt_doubling();\n\
     \        for (int j = 0; j < (int)buf[i].size(); j++) buf[i][j] *= f[j];\n   \
-    \   }\n    }\n    for (int i = 0; i < 2 * N; i++) {\n      buf[i].intt();\n  \
-    \    buf[i].shrink();\n    }\n  }\n};\n\ntemplate <typename mint>\nvector<mint>\
-    \ InnerMultipointEvaluation(const FormalPowerSeries<mint> &f,\n              \
-    \                         const vector<mint> &xs,\n                          \
-    \             const ProductTree<mint> &ptree) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  vector<mint> ret;\n  ret.reserve(xs.size());\n  auto rec = [&](auto self, fps\
-    \ a, int idx) {\n    if (ptree.l[idx] == ptree.r[idx]) return;\n    a %= ptree.buf[idx];\n\
-    \    if ((int)a.size() <= 64) {\n      for (int i = ptree.l[idx]; i < ptree.r[idx];\
-    \ i++)\n        ret.push_back(a.eval(xs[i]));\n      return;\n    }\n    self(self,\
-    \ a, (idx << 1) | 0);\n    self(self, a, (idx << 1) | 1);\n  };\n  rec(rec, f,\
-    \ 1);\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> MultipointEvaluation(const\
-    \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
-    \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
-    }\n\n/**\n * @brief Multipoint Evaluation\n */\n#line 5 \"fps/polynomial-interpolation.hpp\"\
-    \n\ntemplate <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const\
-    \ vector<mint> &xs,\n                                                const vector<mint>\
-    \ &ys) {\n  using fps = FormalPowerSeries<mint>;\n  assert(xs.size() == ys.size());\n\
-    \  ProductTree<mint> ptree(xs);\n  fps w = ptree.buf[1].diff();\n  vector<mint>\
-    \ vs = InnerMultipointEvaluation<mint>(w, xs, ptree);\n  auto rec = [&](auto self,\
-    \ int idx) -> fps {\n    if (idx >= ptree.N) {\n      if (idx - ptree.N < (int)xs.size())\n\
-    \        return {ys[idx - ptree.N] / vs[idx - ptree.N]};\n      else\n       \
-    \ return {mint(1)};\n    }\n    if (ptree.buf[idx << 1 | 0].empty())\n      return\
-    \ {};\n    else if (ptree.buf[idx << 1 | 1].empty())\n      return self(self,\
-    \ idx << 1 | 0);\n    return self(self, idx << 1 | 0) * ptree.buf[idx << 1 | 1]\
-    \ +\n           self(self, idx << 1 | 1) * ptree.buf[idx << 1 | 0];\n  };\n  return\
-    \ rec(rec, 1);\n}\n#line 2 \"matrix/matrix.hpp\"\n\n\n\ntemplate <class T>\nstruct\
-    \ Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n  Matrix(int n,\
-    \ int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n, T())){};\n\
-    \n  int H() const { return A.size(); }\n\n  int W() const { return A[0].size();\
-    \ }\n\n  int size() const { return A.size(); }\n\n  inline const vector<T> &operator[](int\
-    \ k) const { return A[k]; }\n\n  inline vector<T> &operator[](int k) { return\
-    \ A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for (int i =\
-    \ 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
-    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
-    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
-    \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
-    \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
-    \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
-    \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
-    \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
-    \ > C(n, vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k\
-    \ = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
-    \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
-    \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
-    \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
-    \    return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
+    \   } else {\n        buf[i] = buf[(i << 1) | 0];\n        f.clear();\n      \
+    \  copy(begin(buf[(i << 1) | 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n\
+    \        buf[i].ntt_doubling();\n        f.intt();\n        f.resize(buf[i].size(),\
+    \ mint(0));\n        f.ntt();\n        for (int j = 0; j < (int)buf[i].size();\
+    \ j++) buf[i][j] *= f[j];\n      }\n    }\n    for (int i = 0; i < 2 * N; i++)\
+    \ {\n      buf[i].intt();\n      buf[i].shrink();\n    }\n  }\n};\n\ntemplate\
+    \ <typename mint>\nvector<mint> InnerMultipointEvaluation(const FormalPowerSeries<mint>\
+    \ &f,\n                                       const vector<mint> &xs,\n      \
+    \                                 const ProductTree<mint> &ptree) {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  vector<mint> ret;\n  ret.reserve(xs.size());\n\
+    \  auto rec = [&](auto self, fps a, int idx) {\n    if (ptree.l[idx] == ptree.r[idx])\
+    \ return;\n    a %= ptree.buf[idx];\n    if ((int)a.size() <= 64) {\n      for\
+    \ (int i = ptree.l[idx]; i < ptree.r[idx]; i++)\n        ret.push_back(a.eval(xs[i]));\n\
+    \      return;\n    }\n    self(self, a, (idx << 1) | 0);\n    self(self, a, (idx\
+    \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
+    \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
+    \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
+    \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n\
+    #line 5 \"fps/polynomial-interpolation.hpp\"\n\ntemplate <class mint>\nFormalPowerSeries<mint>\
+    \ PolynomialInterpolation(const vector<mint> &xs,\n                          \
+    \                      const vector<mint> &ys) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  assert(xs.size() == ys.size());\n  ProductTree<mint> ptree(xs);\n  fps w =\
+    \ ptree.buf[1].diff();\n  vector<mint> vs = InnerMultipointEvaluation<mint>(w,\
+    \ xs, ptree);\n  auto rec = [&](auto self, int idx) -> fps {\n    if (idx >= ptree.N)\
+    \ {\n      if (idx - ptree.N < (int)xs.size())\n        return {ys[idx - ptree.N]\
+    \ / vs[idx - ptree.N]};\n      else\n        return {mint(1)};\n    }\n    if\
+    \ (ptree.buf[idx << 1 | 0].empty())\n      return {};\n    else if (ptree.buf[idx\
+    \ << 1 | 1].empty())\n      return self(self, idx << 1 | 0);\n    return self(self,\
+    \ idx << 1 | 0) * ptree.buf[idx << 1 | 1] +\n           self(self, idx << 1 |\
+    \ 1) * ptree.buf[idx << 1 | 0];\n  };\n  return rec(rec, 1);\n}\n#line 2 \"matrix/matrix.hpp\"\
+    \n\n\n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix()\
+    \ = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
+    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
+    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
+    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
+    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
+    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
+    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
+    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
+    \ vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k = 0; k\
+    \ < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] * B[k][j];\n\
+    \    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long long k)\
+    \ {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k & 1) B *=\
+    \ *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n \
+    \   return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
     \ (Matrix(*this) += B); }\n\n  Matrix operator-(const Matrix &B) const { return\
     \ (Matrix(*this) -= B); }\n\n  Matrix operator*(const Matrix &B) const { return\
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
@@ -215,8 +216,8 @@ data:
   path: matrix/polynomial-matrix-determinant.hpp
   requiredBy:
   - matrix/matrix-tree.hpp
-  timestamp: '2020-12-05 08:16:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-01-31 00:21:53+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp
 documentation_of: matrix/polynomial-matrix-determinant.hpp

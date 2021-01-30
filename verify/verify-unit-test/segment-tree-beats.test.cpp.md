@@ -2,17 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
-  - icon: ':question:'
-    path: modulo/binomial.hpp
-    title: modulo/binomial.hpp
+    path: misc/rng.hpp
+    title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
-    path: multiplicative-function/divisor-multiple-transform.hpp
-    title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
-    path: prime/prime-enumerate.hpp
-    title: prime/prime-enumerate.hpp
+    path: segment-tree/segment-tree-beats.hpp
+    title: segment-tree/segment-tree-beats.hpp
   - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -38,11 +32,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/890
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://yukicoder.me/problems/no/890
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-0890.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/890\"\n//\n#line 2 \"template/template.hpp\"\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/segment-tree-beats.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -188,130 +182,139 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yuki/yuki-0890.test.cpp\"\n//\n#line 2 \"modint/montgomery-modint.hpp\"\
-    \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
-    \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
-    \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
-    \  for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n\
-    \  static constexpr u32 r = get_r();\n  static constexpr u32 n2 = -u64(mod) %\
-    \ mod;\n  static_assert(r * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod\
-    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
-    invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() :\
-    \ a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
-    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
-    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
-    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
-    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
-    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 6 \"verify/verify-yuki/yuki-0890.test.cpp\"\nusing\
-    \ mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing vvm\
-    \ = vector<vm>;\n#line 2 \"modulo/binomial.hpp\"\n\n\n\ntemplate <typename T>\n\
-    struct Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX\
-    \ + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod() != 0);\n \
-    \   MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <=\
-    \ MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
-    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
-    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
-    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
-    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
-    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
-    \  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size()) extend();\n    return\
-    \ fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size()) extend();\n\
-    \    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
-    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
-    \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
-    \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
-    \ = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i)\
-    \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
-    \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
-    \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 10 \"verify/verify-yuki/yuki-0890.test.cpp\"\nBinomial<mint>\
-    \ C;\n\n#line 2 \"multiplicative-function/divisor-multiple-transform.hpp\"\n\n\
-    \n\n#line 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11, 13,\
-    \ 17, ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N / 3 +\
-    \ 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d = 6\
-    \ - d, i++) {\n    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r = d\
-    \ * p / 3 + (d * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n  \
-    \       q < qe; q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2,\
-    \ 3};\n  for (int p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i])\
-    \ ret.push_back(p);\n  while (!ret.empty() && ret.back() > N) ret.pop_back();\n\
-    \  return ret;\n}\n#line 6 \"multiplicative-function/divisor-multiple-transform.hpp\"\
-    \n\nstruct divisor_transform {\n  template <typename T>\n  static void zeta_transform(vector<T>\
-    \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
-    \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];\n\
-    \  }\n  template <typename T>\n  static void mobius_transform(T &a) {\n    int\
-    \ N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p :\
-    \ sieve)\n      for (int k = N / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n  template\
-    \ <typename T>\n  static void zeta_transform(map<long long, T> &a) {\n    for\
-    \ (auto p = rbegin(a); p != rend(a); p++)\n      for (auto &x : a) {\n       \
-    \ if (p->first == x.first) break;\n        if (p->first % x.first == 0) p->second\
-    \ += x.second;\n      }\n  }\n  template <typename T>\n  static void mobius_transform(map<long\
-    \ long, T> &a) {\n    for (auto &x : a)\n      for (auto p = rbegin(a); p != rend(a);\
-    \ p++) {\n        if (x.first == p->first) break;\n        if (p->first % x.first\
-    \ == 0) p->second -= x.second;\n      }\n  }\n};\n\nstruct multiple_transform\
-    \ {\n  template <typename T>\n  static void zeta_transform(vector<T> &a) {\n \
-    \   int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto\
-    \ &p : sieve)\n      for (int k = N / p; k > 0; --k) a[k] += a[k * p];\n  }\n\
-    \  template <typename T>\n  static void mobius_transform(vector<T> &a) {\n   \
-    \ int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p\
-    \ : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k] -= a[k * p];\n  }\n\n\
-    \  template <typename T>\n  static void zeta_transform(map<long long, T> &a) {\n\
-    \    for (auto &x : a)\n      for (auto p = rbegin(a); p->first != x.first; p++)\n\
-    \        if (p->first % x.first == 0) x.second += p->second;\n  }\n  template\
-    \ <typename T>\n  static void mobius_transform(map<long long, T> &a) {\n    for\
-    \ (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2 = rbegin(a);\
-    \ p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second -= p2->second;\n\
-    \  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB\
-    \n * @docs docs/multiplicative-function/divisor-multiple-transform.md\n */\n#line\
-    \ 13 \"verify/verify-yuki/yuki-0890.test.cpp\"\n//\n\nusing namespace Nyaan;\n\
-    void Nyaan::solve() {\n  ini(N, K);\n\n  vi ds;\n  rep1(i, N) if (N % i == 0)\
-    \ ds.push_back(i);\n\n  mint ans1, ans2;\n  {\n    vm a(N + 1);\n    each(i, ds)\
-    \ {\n      // i\u500B\u5468\u671F -> N/i\u500B\u306E\u533A\u9593\u304C\u5B58\u5728\
-    \u3059\u308B\n      if (K % (N / i) == 0)\n        a[i] = C.C(i, K / (N / i));\n\
-    \      else\n        a[i] = 0;\n    }\n\n    auto ol = a;\n    divisor_transform::mobius_transform(a);\n\
-    \    auto nw = a;\n    divisor_transform::zeta_transform(nw);\n    assert(ol ==\
-    \ nw);\n    ans1 = C.C(N, K) - a[N];\n  }\n  {\n    map<ll, mint> a;\n    each(i,\
-    \ ds) {\n      if (K % (N / i) == 0)\n        a[i] = C.C(i, K / (N / i));\n  \
-    \    else\n        a[i] = 0;\n    }\n    auto ol = a;\n    divisor_transform::mobius_transform(a);\n\
-    \    auto nw = a;\n    divisor_transform::zeta_transform(nw);\n    assert(ol ==\
-    \ nw);\n    ans2 = C.C(N, K) - a[N];\n  }\n\n  if (ans1 != ans2) exit(1);\n  out(ans1);\n\
-    }\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/890\"\n//\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
-    \nusing mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
-    \ vvm = vector<vm>;\n#include \"../../modulo/binomial.hpp\"\nBinomial<mint> C;\n\
-    \n#include \"../../multiplicative-function/divisor-multiple-transform.hpp\"\n\
-    //\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, K);\n\n  vi ds;\n\
-    \  rep1(i, N) if (N % i == 0) ds.push_back(i);\n\n  mint ans1, ans2;\n  {\n  \
-    \  vm a(N + 1);\n    each(i, ds) {\n      // i\u500B\u5468\u671F -> N/i\u500B\u306E\
-    \u533A\u9593\u304C\u5B58\u5728\u3059\u308B\n      if (K % (N / i) == 0)\n    \
-    \    a[i] = C.C(i, K / (N / i));\n      else\n        a[i] = 0;\n    }\n\n   \
-    \ auto ol = a;\n    divisor_transform::mobius_transform(a);\n    auto nw = a;\n\
-    \    divisor_transform::zeta_transform(nw);\n    assert(ol == nw);\n    ans1 =\
-    \ C.C(N, K) - a[N];\n  }\n  {\n    map<ll, mint> a;\n    each(i, ds) {\n     \
-    \ if (K % (N / i) == 0)\n        a[i] = C.C(i, K / (N / i));\n      else\n   \
-    \     a[i] = 0;\n    }\n    auto ol = a;\n    divisor_transform::mobius_transform(a);\n\
-    \    auto nw = a;\n    divisor_transform::zeta_transform(nw);\n    assert(ol ==\
-    \ nw);\n    ans2 = C.C(N, K) - a[N];\n  }\n\n  if (ans1 != ans2) exit(1);\n  out(ans1);\n\
-    }\n"
+    \ 4 \"verify/verify-unit-test/segment-tree-beats.test.cpp\"\n//\n#line 2 \"segment-tree/segment-tree-beats.hpp\"\
+    \n\nstruct AngelBeats {\n  using i64 = long long;\n  static constexpr i64 INF\
+    \ = numeric_limits<i64>::max() / 2.1;\n\n  struct alignas(32) Node {\n    i64\
+    \ sum = 0, g1 = 0, l1 = 0;\n    i64 g2 = -INF, gc = 1, l2 = INF, lc = 1, add =\
+    \ 0;\n  };\n\n  vector<Node> v;\n  i64 n, log;\n\n  AngelBeats() {}\n  AngelBeats(int\
+    \ _n) : AngelBeats(vector<i64>(_n)) {}\n  AngelBeats(const vector<i64>& vc) {\n\
+    \    n = 1, log = 0;\n    while (n < (int)vc.size()) n <<= 1, log++;\n    v.resize(2\
+    \ * n);\n    for (i64 i = 0; i < (int)vc.size(); ++i) {\n      v[i + n].sum =\
+    \ v[i + n].g1 = v[i + n].l1 = vc[i];\n    }\n    for (i64 i = n - 1; i; --i) update(i);\n\
+    \  }\n\n  void range_chmin(int l, int r, i64 x) { inner_apply<1>(l, r, x); }\n\
+    \  void range_chmax(int l, int r, i64 x) { inner_apply<2>(l, r, x); }\n  void\
+    \ range_add(int l, int r, i64 x) { inner_apply<3>(l, r, x); }\n  void range_update(int\
+    \ l, int r, i64 x) { inner_apply<4>(l, r, x); }\n  i64 range_min(int l, int r)\
+    \ { return inner_fold<1>(l, r); }\n  i64 range_max(int l, int r) { return inner_fold<2>(l,\
+    \ r); }\n  i64 range_sum(int l, int r) { return inner_fold<3>(l, r); }\n\n private:\n\
+    \  void update(int k) {\n    Node& p = v[k];\n    Node& l = v[(k << 1) | 0];\n\
+    \    Node& r = v[(k << 1) | 1];\n\n    p.sum = l.sum + r.sum;\n\n#define unlikely(x)\
+    \ __builtin_expect(!!(x), 0)\n    if (unlikely(l.g1 == r.g1)) {\n      p.g1 =\
+    \ l.g1;\n      p.g2 = max(l.g2, r.g2);\n      p.gc = l.gc + r.gc;\n    } else\
+    \ {\n      bool f = l.g1 > r.g1;\n      p.g1 = f ? l.g1 : r.g1;\n      p.gc =\
+    \ f ? l.gc : r.gc;\n      p.g2 = max(f ? r.g1 : l.g1, f ? l.g2 : r.g2);\n    }\n\
+    \n    if (unlikely(l.l1 == r.l1)) {\n      p.l1 = l.l1;\n      p.l2 = min(l.l2,\
+    \ r.l2);\n      p.lc = l.lc + r.lc;\n    } else {\n      bool f = l.l1 < r.l1;\n\
+    \      p.l1 = f ? l.l1 : r.l1;\n      p.lc = f ? l.lc : r.lc;\n      p.l2 = min(f\
+    \ ? r.l1 : l.l1, f ? l.l2 : r.l2);\n    }\n#undef unlikely\n  }\n\n  void push_add(int\
+    \ k, i64 x) {\n    Node& p = v[k];\n    p.sum += x << (log + __builtin_clz(k)\
+    \ - 31);\n    p.g1 += x;\n    p.l1 += x;\n    if (p.g2 != -INF) p.g2 += x;\n \
+    \   if (p.l2 != INF) p.l2 += x;\n    p.add += x;\n  }\n  void push_min(int k,\
+    \ i64 x) {\n    Node& p = v[k];\n    p.sum += (x - p.g1) * p.gc;\n    if (p.l1\
+    \ == p.g1) p.l1 = x;\n    if (p.l2 == p.g1) p.l2 = x;\n    p.g1 = x;\n  }\n  void\
+    \ push_max(int k, i64 x) {\n    Node& p = v[k];\n    p.sum += (x - p.l1) * p.lc;\n\
+    \    if (p.g1 == p.l1) p.g1 = x;\n    if (p.g2 == p.l1) p.g2 = x;\n    p.l1 =\
+    \ x;\n  }\n  void push(int k) {\n    Node& p = v[k];\n    if (p.add != 0) {\n\
+    \      push_add(k * 2 + 0, p.add);\n      push_add(k * 2 + 1, p.add);\n      p.add\
+    \ = 0;\n    }\n    if (p.g1 < v[k * 2 + 0].g1) push_min(k * 2 + 0, p.g1);\n  \
+    \  if (p.l1 > v[k * 2 + 0].l1) push_max(k * 2 + 0, p.l1);\n\n    if (p.g1 < v[k\
+    \ * 2 + 1].g1) push_min(k * 2 + 1, p.g1);\n    if (p.l1 > v[k * 2 + 1].l1) push_max(k\
+    \ * 2 + 1, p.l1);\n  }\n\n  void subtree_chmin(int k, i64 x) {\n    if (v[k].g1\
+    \ <= x) return;\n    if (v[k].g2 < x) {\n      push_min(k, x);\n      return;\n\
+    \    }\n    push(k);\n    subtree_chmin(k * 2 + 0, x);\n    subtree_chmin(k *\
+    \ 2 + 1, x);\n    update(k);\n  }\n\n  void subtree_chmax(int k, i64 x) {\n  \
+    \  if (x <= v[k].l1) return;\n    if (x < v[k].l2) {\n      push_max(k, x);\n\
+    \      return;\n    }\n    push(k);\n    subtree_chmax(k * 2 + 0, x);\n    subtree_chmax(k\
+    \ * 2 + 1, x);\n    update(k);\n  }\n\n  template <int cmd>\n  inline void _apply(int\
+    \ k, i64 x) {\n    if constexpr (cmd == 1) subtree_chmin(k, x);\n    if constexpr\
+    \ (cmd == 2) subtree_chmax(k, x);\n    if constexpr (cmd == 3) push_add(k, x);\n\
+    \    if constexpr (cmd == 4) subtree_chmin(k, x), subtree_chmax(k, x);\n  }\n\n\
+    \  template <int cmd>\n  void inner_apply(int l, int r, i64 x) {\n    if (l ==\
+    \ r) return;\n    l += n, r += n;\n    for (int i = log; i >= 1; i--) {\n    \
+    \  if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
+    \ - 1) >> i);\n    }\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n\
+    \        if (l & 1) _apply<cmd>(l++, x);\n        if (r & 1) _apply<cmd>(--r,\
+    \ x);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n\
+    \    }\n    for (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l)\
+    \ update(l >> i);\n      if (((r >> i) << i) != r) update((r - 1) >> i);\n   \
+    \ }\n  }\n\n  template <int cmd>\n  inline i64 e() {\n    if constexpr (cmd ==\
+    \ 1)\n      return INF;\n    else if constexpr (cmd == 2)\n      return -INF;\n\
+    \    else\n      return 0;\n  }\n\n  template <int cmd>\n  inline void op(i64&\
+    \ a, const Node& b) {\n    if constexpr (cmd == 1) a = min(a, b.l1);\n    if constexpr\
+    \ (cmd == 2) a = max(a, b.g1);\n    if constexpr (cmd == 3) a += b.sum;\n  }\n\
+    \n  template <int cmd>\n  i64 inner_fold(int l, int r) {\n    if (l == r) return\
+    \ e<cmd>();\n    l += n, r += n;\n    for (int i = log; i >= 1; i--) {\n     \
+    \ if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
+    \ - 1) >> i);\n    }\n    i64 lx = e<cmd>(), rx = e<cmd>();\n    while (l < r)\
+    \ {\n      if (l & 1) op<cmd>(lx, v[l++]);\n      if (r & 1) op<cmd>(rx, v[--r]);\n\
+    \      l >>= 1;\n      r >>= 1;\n    }\n    if constexpr (cmd == 1) lx = min(lx,\
+    \ rx);\n    if constexpr (cmd == 2) lx = max(lx, rx);\n    if constexpr (cmd ==\
+    \ 3) lx += rx;\n    return lx;\n  }\n};\n#line 6 \"verify/verify-unit-test/segment-tree-beats.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\
+    \n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 10 \"verify/verify-unit-test/segment-tree-beats.test.cpp\"\nvoid verify(int\
+    \ n, int coeff = 100) {\n  vl a(n);\n  rep(i, n) a[i] = randint(-TEN(10), TEN(10));\n\
+    \n  AngelBeats seg(a);\n  int q = n * n * coeff;\n  while (q--) {\n    int cmd\
+    \ = randint(0, 7);\n    if (cmd == 3) cmd = randint(0, 7);\n    int l, r;\n  \
+    \  do {\n      l = randint(0, n);\n      r = randint(0, n + 1);\n    } while (l\
+    \ > r);\n    i64 x = randint(-TEN(10), TEN(10));\n    if (cmd == 0) {\n      //\
+    \ range chmin\n      seg.range_chmin(l, r, x);\n      for (int i = l; i < r; i++)\
+    \ a[i] = min(a[i], x);\n    } else if (cmd == 1) {\n      // range chmax\n   \
+    \   seg.range_chmax(l, r, x);\n      for (int i = l; i < r; i++) a[i] = max(a[i],\
+    \ x);\n    } else if (cmd == 2) {\n      // range add\n      seg.range_add(l,\
+    \ r, x);\n      for (int i = l; i < r; i++) a[i] += x;\n    } else if (cmd ==\
+    \ 3) {\n      // range update\n      seg.range_update(l, r, x);\n      for (int\
+    \ i = l; i < r; i++) a[i] = x;\n    } else if (cmd == 4) {\n      // range min\n\
+    \      ll s1 = seg.range_min(l, r);\n      ll s2 = seg.INF;\n      for (int i\
+    \ = l; i < r; i++) s2 = min(s2, a[i]);\n      assert(s1 == s2 && \"range min\"\
+    );\n    } else if (cmd == 5) {\n      // range max\n      ll s1 = seg.range_max(l,\
+    \ r);\n      ll s2 = -seg.INF;\n      for (int i = l; i < r; i++) s2 = max(s2,\
+    \ a[i]);\n      assert(s1 == s2 && \"range max\");\n    } else if (cmd == 6) {\n\
+    \      // range sum\n      ll s1 = seg.range_sum(l, r);\n      ll s2 = 0;\n  \
+    \    for (int i = l; i < r; i++) s2 += a[i];\n      assert(s1 == s2 && \"range\
+    \ sum\");\n    }\n  }\n}\n\nvoid Nyaan::solve() {\n  int a, b;\n  cin >> a >>\
+    \ b;\n  cout << (a + b) << endl;\n\n  verify(1);\n  verify(2);\n  verify(63);\n\
+    \  verify(64);\n  verify(65);\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/segment-tree-beats.hpp\"\
+    \n\nusing namespace Nyaan;\n\n#include \"../../misc/rng.hpp\"\nvoid verify(int\
+    \ n, int coeff = 100) {\n  vl a(n);\n  rep(i, n) a[i] = randint(-TEN(10), TEN(10));\n\
+    \n  AngelBeats seg(a);\n  int q = n * n * coeff;\n  while (q--) {\n    int cmd\
+    \ = randint(0, 7);\n    if (cmd == 3) cmd = randint(0, 7);\n    int l, r;\n  \
+    \  do {\n      l = randint(0, n);\n      r = randint(0, n + 1);\n    } while (l\
+    \ > r);\n    i64 x = randint(-TEN(10), TEN(10));\n    if (cmd == 0) {\n      //\
+    \ range chmin\n      seg.range_chmin(l, r, x);\n      for (int i = l; i < r; i++)\
+    \ a[i] = min(a[i], x);\n    } else if (cmd == 1) {\n      // range chmax\n   \
+    \   seg.range_chmax(l, r, x);\n      for (int i = l; i < r; i++) a[i] = max(a[i],\
+    \ x);\n    } else if (cmd == 2) {\n      // range add\n      seg.range_add(l,\
+    \ r, x);\n      for (int i = l; i < r; i++) a[i] += x;\n    } else if (cmd ==\
+    \ 3) {\n      // range update\n      seg.range_update(l, r, x);\n      for (int\
+    \ i = l; i < r; i++) a[i] = x;\n    } else if (cmd == 4) {\n      // range min\n\
+    \      ll s1 = seg.range_min(l, r);\n      ll s2 = seg.INF;\n      for (int i\
+    \ = l; i < r; i++) s2 = min(s2, a[i]);\n      assert(s1 == s2 && \"range min\"\
+    );\n    } else if (cmd == 5) {\n      // range max\n      ll s1 = seg.range_max(l,\
+    \ r);\n      ll s2 = -seg.INF;\n      for (int i = l; i < r; i++) s2 = max(s2,\
+    \ a[i]);\n      assert(s1 == s2 && \"range max\");\n    } else if (cmd == 6) {\n\
+    \      // range sum\n      ll s1 = seg.range_sum(l, r);\n      ll s2 = 0;\n  \
+    \    for (int i = l; i < r; i++) s2 += a[i];\n      assert(s1 == s2 && \"range\
+    \ sum\");\n    }\n  }\n}\n\nvoid Nyaan::solve() {\n  int a, b;\n  cin >> a >>\
+    \ b;\n  cout << (a + b) << endl;\n\n  verify(1);\n  verify(2);\n  verify(63);\n\
+    \  verify(64);\n  verify(65);\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -319,20 +322,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - modint/montgomery-modint.hpp
-  - modulo/binomial.hpp
-  - multiplicative-function/divisor-multiple-transform.hpp
-  - prime/prime-enumerate.hpp
+  - segment-tree/segment-tree-beats.hpp
+  - misc/rng.hpp
   isVerificationFile: true
-  path: verify/verify-yuki/yuki-0890.test.cpp
+  path: verify/verify-unit-test/segment-tree-beats.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 13:58:32+09:00'
+  timestamp: '2021-01-31 00:21:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-0890.test.cpp
+documentation_of: verify/verify-unit-test/segment-tree-beats.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-0890.test.cpp
-- /verify/verify/verify-yuki/yuki-0890.test.cpp.html
-title: verify/verify-yuki/yuki-0890.test.cpp
+- /verify/verify/verify-unit-test/segment-tree-beats.test.cpp
+- /verify/verify/verify-unit-test/segment-tree-beats.test.cpp.html
+title: verify/verify-unit-test/segment-tree-beats.test.cpp
 ---
