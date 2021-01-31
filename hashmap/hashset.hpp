@@ -1,3 +1,5 @@
+#pragma once
+
 #include "hashmap-base.hpp"
 
 template <typename Key>
