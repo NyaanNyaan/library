@@ -159,6 +159,12 @@ struct LinkCutTreeSubtreeQuery {
     return add(t->key, t->subsum);
   }
 
+  Ptr get_root(Ptr x) {
+    expose(x);
+    while (x->l) this->push(x), x = x->l;
+    return x;
+  }
+
  protected:
   bool is_root(Ptr t) { return !(t->p) || (t->p->l != t && t->p->r != t); }
 
