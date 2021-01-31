@@ -301,6 +301,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
     title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -933,6 +936,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
+  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp

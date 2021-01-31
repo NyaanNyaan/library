@@ -31,6 +31,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   _isVerificationFailed: false
@@ -136,6 +139,7 @@ data:
   timestamp: '2020-12-18 23:44:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp

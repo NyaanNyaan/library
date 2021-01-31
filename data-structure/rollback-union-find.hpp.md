@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: graph/offline-dynamic-connectivity.hpp
+    title: graph/offline-dynamic-connectivity.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
     title: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
@@ -49,10 +55,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: data-structure/rollback-union-find.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/offline-dynamic-connectivity.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
 documentation_of: data-structure/rollback-union-find.hpp
 layout: document

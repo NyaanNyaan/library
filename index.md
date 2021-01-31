@@ -210,6 +210,9 @@ data:
       path: graph/max-independent-set.hpp
       title: graph/max-independent-set.hpp
     - icon: ':heavy_check_mark:'
+      path: graph/offline-dynamic-connectivity.hpp
+      title: graph/offline-dynamic-connectivity.hpp
+    - icon: ':heavy_check_mark:'
       path: graph/static-graph.hpp
       title: Static Graph
     - icon: ':heavy_check_mark:'
@@ -1002,6 +1005,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
       title: verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
       title: verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp

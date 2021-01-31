@@ -2,12 +2,31 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: data-structure/rollback-union-find.hpp
+    title: "Rollback\u3064\u304DUnion Find"
+  - icon: ':heavy_check_mark:'
+    path: graph/offline-dynamic-connectivity.hpp
+    title: graph/offline-dynamic-connectivity.hpp
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-base.hpp
     title: "Hash Map(base)\u3000(\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7\u30FB\u57FA\
       \u5E95\u30AF\u30E9\u30B9)"
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
+  - icon: ':heavy_check_mark:'
+    path: lct/link-cut-base.hpp
+    title: Link/Cut Tree(base)
+  - icon: ':heavy_check_mark:'
+    path: lct/link-cut-tree-subtree.hpp
+    title: "\u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree"
+  - icon: ':heavy_check_mark:'
+    path: lct/reversible-bbst-base.hpp
+    title: "\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
+      \u30E9\u30B9)"
+  - icon: ':heavy_check_mark:'
+    path: lct/splay-base.hpp
+    title: Splay Tree(base)
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -33,25 +52,25 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    PROBLEM: https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum
     links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/hashmap.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
-    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
-    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
-    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
-    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
-    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
-    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
-    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
-    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
-    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
-    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
-    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    - https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp\"\
+    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
+    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
+    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
+    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
+    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
+    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
+    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
+    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
+    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
     \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
     \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -183,7 +202,24 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-unit-test/hashmap.test.cpp\"\n//\n#line 2 \"hashmap/hashmap.hpp\"\
+    \ 5 \"verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp\"\n\
+    //\n#line 2 \"graph/offline-dynamic-connectivity.hpp\"\n\n#line 2 \"data-structure/rollback-union-find.hpp\"\
+    \n\nstruct RollbackUnionFind {\n  vector<int> data;\n  stack<pair<int, int> >\
+    \ history;\n  int inner_snap;\n\n  RollbackUnionFind(int sz) : inner_snap(0) {\
+    \ data.assign(sz, -1); }\n\n  bool unite(int x, int y) {\n    x = find(x), y =\
+    \ find(y);\n    history.emplace(x, data[x]);\n    history.emplace(y, data[y]);\n\
+    \    if (x == y) return false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x]\
+    \ += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  int find(int k) {\n\
+    \    if (data[k] < 0) return k;\n    return find(data[k]);\n  }\n\n  int same(int\
+    \ x, int y) { return find(x) == find(y); }\n\n  int size(int k) { return (-data[find(k)]);\
+    \ }\n\n  void undo() {\n    data[history.top().first] = history.top().second;\n\
+    \    history.pop();\n    data[history.top().first] = history.top().second;\n \
+    \   history.pop();\n  }\n\n  void snapshot() { inner_snap = int(history.size()\
+    \ >> 1); }\n\n  int get_state() { return int(history.size() >> 1); }\n\n  void\
+    \ rollback(int state = -1) {\n    if (state == -1) state = inner_snap;\n    state\
+    \ <<= 1;\n    assert(state <= (int)history.size());\n    while (state < (int)history.size())\
+    \ undo();\n  }\n};\n\n/**\n * @brief Rollback\u3064\u304DUnion Find\n * @docs\
+    \ docs/data-structure/rollback-union-find.md\n */\n#line 2 \"hashmap/hashmap.hpp\"\
     \n\n#line 2 \"hashmap/hashmap-base.hpp\"\n\nnamespace HashMapImpl {\nusing u32\
     \ = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename Key, typename Data>\n\
     struct HashMapBase;\n\ntemplate <typename Key, typename Data>\nstruct itrB\n \
@@ -287,131 +323,168 @@ data:
     \ - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key, const Val&\
     \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n\n/* \n * @brief\
     \ \u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)\n * @docs\
-    \ docs/hashmap/hashmap.md\n**/\n#line 6 \"verify/verify-unit-test/hashmap.test.cpp\"\
-    \n\nnamespace HashMapTest {\n\nuint64_t rng() {\n  static uint64_t x_ =\n    \
-    \  chrono::duration_cast<chrono::nanoseconds>(\n          chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \          .count();\n  return x_ ^= (x_ << 7), x_ ^= (x_ >> 9);\n}\n// [l, r)\n\
-    int64_t randint(int64_t l, int64_t r) {\n  assert(l < r);\n  return l + rng()\
-    \ % (r - l);\n}\n\ntemplate <typename K, enable_if_t<is_integral<K>::value, nullptr_t>\
-    \ = nullptr>\nK random_key(int mx) {\n  return K{K(randint(0, mx))};\n}\ntemplate\
-    \ <typename K, enable_if_t<is_integral<decltype(K::first)>::value,\n         \
-    \                         nullptr_t> = nullptr>\nK random_key(int mx) {\n  return\
-    \ K{decltype(K::first)(randint(0, mx)),\n           decltype(K::second)(randint(0,\
-    \ mx))};\n}\n\ntemplate <typename HM, typename M, typename K>\nvoid same_map(HM&\
-    \ hm, M& m, int mx) {\n  // iterator\n  {\n    M buf;\n    for (auto& x : hm)\
-    \ buf[x.first] = x.second;\n    assert(buf == m);\n  }\n\n  // ensure empty space\
-    \ in hash table\n  {\n    uint32_t s = 0;\n    for (uint32_t i = 0; i < hm.cap;\
-    \ ++i) s += hm.flag[i];\n    assert(s != hm.cap && \"hash table is full!\");\n\
-    \  }\n\n  // find\n  {\n    for (int i = 0; i < 2 * mx; i++) {\n      K k = random_key<K>(mx);\n\
-    \      auto flg1 = hm.find(k) != hm.end();\n      auto flg2 = m.find(k) != m.end();\n\
-    \      auto flg3 = hm.contain(k);\n      assert(flg1 == flg2 && \"find(k)\");\n\
-    \      assert(flg1 == flg3 && \"contain(k)\");\n    }\n  }\n\n  // empty\n  assert(hm.empty()\
-    \ == m.empty() && \"empty()\");\n  // size\n  assert(hm.size() == (int)m.size()\
-    \ && \"size()\");\n}\n\ntemplate <typename Key, typename Val>\nvoid stress_test(int\
-    \ mx, int loop_time) {\n  using HM = HashMap<Key, Val>;\n  using M = map<Key,\
-    \ Val>;\n\n  HM hm;\n  M m;\n\n  // insert [], erase(key)\n  for (int loop = 0;\
-    \ loop < loop_time; loop++) {\n    vector<Key> key;\n    vector<Val> val;\n  \
-    \  for (int i = mx; i--;) {\n      key.push_back(random_key<Key>(mx));\n     \
-    \ val.push_back(random_key<Val>(mx));\n    }\n    for (int i = 0; i < mx; i++)\
-    \ {\n      hm[key[i]] = val[i];\n      m[key[i]] = val[i];\n      same_map<HM,\
-    \ M, Key>(hm, m, mx);\n      same_map<const HM, M, Key>(hm, m, mx);\n    }\n \
-    \   assert(hm.size() == int(m.size()));\n    for (int i = 0; i < mx; i++) {\n\
-    \      hm.erase(key[i]);\n      m.erase(key[i]);\n      same_map<HM, M, Key>(hm,\
-    \ m, mx);\n      same_map<const HM, M, Key>(hm, m, mx);\n    }\n    assert(hm.size()\
-    \ == int(m.size()));\n    assert(hm.empty() == true);\n  }\n\n  // insert(Data),\
-    \ erase(it)\n  for (int loop = 0; loop < loop_time; loop++) {\n    vector<Key>\
-    \ key;\n    vector<Val> val;\n    for (int i = mx; i--;) {\n      key.push_back(random_key<Key>(mx));\n\
-    \      val.push_back(random_key<Val>(mx));\n    }\n    for (int i = 0; i < mx;\
-    \ i++) {\n      hm.emplace(key[i], val[i]);\n      m.emplace(key[i], val[i]);\n\
-    \      same_map<HM, M, Key>(hm, m, mx);\n      same_map<const HM, M, Key>(hm,\
-    \ m, mx);\n    }\n    assert(hm.size() == int(m.size()));\n    for (int i = 0;\
-    \ i < mx; i++) {\n      hm.erase(key[i]);\n      m.erase(key[i]);\n      same_map<HM,\
-    \ M, Key>(hm, m, mx);\n      same_map<const HM, M, Key>(hm, m, mx);\n    }\n \
-    \   assert(hm.size() == int(m.size()));\n    assert(hm.empty() == true);\n  }\n\
-    \  {\n    vector<Key> key;\n    vector<Val> val;\n    for (int i = mx; i--;) {\n\
-    \      key.push_back(random_key<Key>(mx));\n      val.push_back(random_key<Val>(mx));\n\
-    \    }\n    for (int i = 0; i < mx; i++) {\n      hm.emplace(key[i], val[i]);\n\
-    \      m.emplace(key[i], val[i]);\n      same_map<HM, M, Key>(hm, m, mx);\n  \
-    \    same_map<const HM, M, Key>(hm, m, mx);\n    }\n    // clear\n    hm.clear();\n\
-    \    m.clear();\n    same_map<HM, M, Key>(hm, m, mx);\n    same_map<const HM,\
-    \ M, Key>(hm, m, mx);\n    assert(hm.size() == int(m.size()));\n    assert(hm.empty()\
-    \ == true);\n\n    // reverse\n    hm.reserve(mx);\n    uint32_t cap = hm.cap;\n\
-    \    for (int i = 0; i < mx; i++) {\n      hm.emplace(key[i], val[i]);\n     \
-    \ m.emplace(key[i], val[i]);\n      same_map<HM, M, Key>(hm, m, mx);\n      same_map<const\
-    \ HM, M, Key>(hm, m, mx);\n    }\n    assert(hm.cap == cap);\n  }\n}\n\ntemplate\
-    \ <typename Key, typename Val = int>\nvoid test() {\n  stress_test<Key, Val>(1,\
-    \ 100);\n  stress_test<Key, Val>(2, 100);\n  stress_test<Key, Val>(4, 100);\n\
-    \  stress_test<Key, Val>(8, 100);\n  stress_test<Key, Val>(16, 100);\n  stress_test<Key,\
-    \ Val>(32, 10);\n  stress_test<Key, Val>(64, 10);\n  stress_test<Key, Val>(128,\
-    \ 3);\n  stress_test<Key, Val>(256, 3);\n}\n\n}  // namespace HashMapTest\n\n\
-    void Nyaan::solve() {\n  HashMapTest::test<int, int>();\n  HashMapTest::test<long\
-    \ long, int>();\n  HashMapTest::test<pair<int, int>, int>();\n  HashMapTest::test<pair<long\
-    \ long, int>, int>();\n  HashMapTest::test<pair<int, long long>, int>();\n  HashMapTest::test<pair<long\
-    \ long, long long>, int>();\n\n  int64_t a, b;\n  cin >> a >> b;\n  cout << (a\
-    \ + b) << endl;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../hashmap/hashmap.hpp\"\n\n\
-    namespace HashMapTest {\n\nuint64_t rng() {\n  static uint64_t x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
-    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
-    \  .count();\n  return x_ ^= (x_ << 7), x_ ^= (x_ >> 9);\n}\n// [l, r)\nint64_t\
-    \ randint(int64_t l, int64_t r) {\n  assert(l < r);\n  return l + rng() % (r -\
-    \ l);\n}\n\ntemplate <typename K, enable_if_t<is_integral<K>::value, nullptr_t>\
-    \ = nullptr>\nK random_key(int mx) {\n  return K{K(randint(0, mx))};\n}\ntemplate\
-    \ <typename K, enable_if_t<is_integral<decltype(K::first)>::value,\n         \
-    \                         nullptr_t> = nullptr>\nK random_key(int mx) {\n  return\
-    \ K{decltype(K::first)(randint(0, mx)),\n           decltype(K::second)(randint(0,\
-    \ mx))};\n}\n\ntemplate <typename HM, typename M, typename K>\nvoid same_map(HM&\
-    \ hm, M& m, int mx) {\n  // iterator\n  {\n    M buf;\n    for (auto& x : hm)\
-    \ buf[x.first] = x.second;\n    assert(buf == m);\n  }\n\n  // ensure empty space\
-    \ in hash table\n  {\n    uint32_t s = 0;\n    for (uint32_t i = 0; i < hm.cap;\
-    \ ++i) s += hm.flag[i];\n    assert(s != hm.cap && \"hash table is full!\");\n\
-    \  }\n\n  // find\n  {\n    for (int i = 0; i < 2 * mx; i++) {\n      K k = random_key<K>(mx);\n\
-    \      auto flg1 = hm.find(k) != hm.end();\n      auto flg2 = m.find(k) != m.end();\n\
-    \      auto flg3 = hm.contain(k);\n      assert(flg1 == flg2 && \"find(k)\");\n\
-    \      assert(flg1 == flg3 && \"contain(k)\");\n    }\n  }\n\n  // empty\n  assert(hm.empty()\
-    \ == m.empty() && \"empty()\");\n  // size\n  assert(hm.size() == (int)m.size()\
-    \ && \"size()\");\n}\n\ntemplate <typename Key, typename Val>\nvoid stress_test(int\
-    \ mx, int loop_time) {\n  using HM = HashMap<Key, Val>;\n  using M = map<Key,\
-    \ Val>;\n\n  HM hm;\n  M m;\n\n  // insert [], erase(key)\n  for (int loop = 0;\
-    \ loop < loop_time; loop++) {\n    vector<Key> key;\n    vector<Val> val;\n  \
-    \  for (int i = mx; i--;) {\n      key.push_back(random_key<Key>(mx));\n     \
-    \ val.push_back(random_key<Val>(mx));\n    }\n    for (int i = 0; i < mx; i++)\
-    \ {\n      hm[key[i]] = val[i];\n      m[key[i]] = val[i];\n      same_map<HM,\
-    \ M, Key>(hm, m, mx);\n      same_map<const HM, M, Key>(hm, m, mx);\n    }\n \
-    \   assert(hm.size() == int(m.size()));\n    for (int i = 0; i < mx; i++) {\n\
-    \      hm.erase(key[i]);\n      m.erase(key[i]);\n      same_map<HM, M, Key>(hm,\
-    \ m, mx);\n      same_map<const HM, M, Key>(hm, m, mx);\n    }\n    assert(hm.size()\
-    \ == int(m.size()));\n    assert(hm.empty() == true);\n  }\n\n  // insert(Data),\
-    \ erase(it)\n  for (int loop = 0; loop < loop_time; loop++) {\n    vector<Key>\
-    \ key;\n    vector<Val> val;\n    for (int i = mx; i--;) {\n      key.push_back(random_key<Key>(mx));\n\
-    \      val.push_back(random_key<Val>(mx));\n    }\n    for (int i = 0; i < mx;\
-    \ i++) {\n      hm.emplace(key[i], val[i]);\n      m.emplace(key[i], val[i]);\n\
-    \      same_map<HM, M, Key>(hm, m, mx);\n      same_map<const HM, M, Key>(hm,\
-    \ m, mx);\n    }\n    assert(hm.size() == int(m.size()));\n    for (int i = 0;\
-    \ i < mx; i++) {\n      hm.erase(key[i]);\n      m.erase(key[i]);\n      same_map<HM,\
-    \ M, Key>(hm, m, mx);\n      same_map<const HM, M, Key>(hm, m, mx);\n    }\n \
-    \   assert(hm.size() == int(m.size()));\n    assert(hm.empty() == true);\n  }\n\
-    \  {\n    vector<Key> key;\n    vector<Val> val;\n    for (int i = mx; i--;) {\n\
-    \      key.push_back(random_key<Key>(mx));\n      val.push_back(random_key<Val>(mx));\n\
-    \    }\n    for (int i = 0; i < mx; i++) {\n      hm.emplace(key[i], val[i]);\n\
-    \      m.emplace(key[i], val[i]);\n      same_map<HM, M, Key>(hm, m, mx);\n  \
-    \    same_map<const HM, M, Key>(hm, m, mx);\n    }\n    // clear\n    hm.clear();\n\
-    \    m.clear();\n    same_map<HM, M, Key>(hm, m, mx);\n    same_map<const HM,\
-    \ M, Key>(hm, m, mx);\n    assert(hm.size() == int(m.size()));\n    assert(hm.empty()\
-    \ == true);\n\n    // reverse\n    hm.reserve(mx);\n    uint32_t cap = hm.cap;\n\
-    \    for (int i = 0; i < mx; i++) {\n      hm.emplace(key[i], val[i]);\n     \
-    \ m.emplace(key[i], val[i]);\n      same_map<HM, M, Key>(hm, m, mx);\n      same_map<const\
-    \ HM, M, Key>(hm, m, mx);\n    }\n    assert(hm.cap == cap);\n  }\n}\n\ntemplate\
-    \ <typename Key, typename Val = int>\nvoid test() {\n  stress_test<Key, Val>(1,\
-    \ 100);\n  stress_test<Key, Val>(2, 100);\n  stress_test<Key, Val>(4, 100);\n\
-    \  stress_test<Key, Val>(8, 100);\n  stress_test<Key, Val>(16, 100);\n  stress_test<Key,\
-    \ Val>(32, 10);\n  stress_test<Key, Val>(64, 10);\n  stress_test<Key, Val>(128,\
-    \ 3);\n  stress_test<Key, Val>(256, 3);\n}\n\n}  // namespace HashMapTest\n\n\
-    void Nyaan::solve() {\n  HashMapTest::test<int, int>();\n  HashMapTest::test<long\
-    \ long, int>();\n  HashMapTest::test<pair<int, int>, int>();\n  HashMapTest::test<pair<long\
-    \ long, int>, int>();\n  HashMapTest::test<pair<int, long long>, int>();\n  HashMapTest::test<pair<long\
-    \ long, long long>, int>();\n\n  int64_t a, b;\n  cin >> a >> b;\n  cout << (a\
-    \ + b) << endl;\n}\n"
+    \ docs/hashmap/hashmap.md\n**/\n#line 5 \"graph/offline-dynamic-connectivity.hpp\"\
+    \n\nstruct OffLineDynamicConnectivity {\n  int N, Q, segsz;\n  RollbackUnionFind\
+    \ uf;\n  vector<vector<pair<int, int>>> seg, qadd, qdel;\n  HashMap<pair<int,\
+    \ int>, pair<int, int>> cnt;\n\n  OffLineDynamicConnectivity(int n, int q)\n \
+    \     : N(n), Q(q), uf(n), qadd(q), qdel(q) {\n    segsz = 1;\n    while (segsz\
+    \ < Q) segsz *= 2;\n    seg.resize(segsz * 2);\n  }\n\n  void add_edge(int t,\
+    \ int u, int v) { qadd[t].emplace_back(u, v); }\n  void del_edge(int t, int u,\
+    \ int v) { qdel[t].emplace_back(u, v); }\n\n  void build() {\n    for (int i =\
+    \ 0; i < Q; i++) {\n      for (auto& e : qadd[i]) {\n        auto& dat = cnt[e];\n\
+    \        if (dat.second++ == 0) dat.first = i;\n      }\n      for (auto& e :\
+    \ qdel[i]) {\n        auto& dat = cnt[e];\n        if (--dat.second == 0) segment(e,\
+    \ dat.first, i);\n      }\n    }\n    for (auto& [e, dat] : cnt) {\n      if (dat.second\
+    \ != 0) segment(e, dat.first, Q);\n    }\n  }\n\n  template <typename ADD, typename\
+    \ DEL, typename QUERY>\n  void dfs(const ADD& add, const DEL& del, const QUERY&\
+    \ query, int id, int l,\n           int r) {\n    if (Q <= l) return;\n    int\
+    \ state = uf.get_state();\n    vector<pair<int, int>> es;\n    for (auto& [u,\
+    \ v] : seg[id]) {\n      if (!uf.same(u, v)) {\n        uf.unite(u, v);\n    \
+    \    add(u, v);\n        es.emplace_back(u, v);\n      }\n    }\n    if (l + 1\
+    \ == r) {\n      query(l);\n    } else {\n      dfs(add, del, query, id * 2 +\
+    \ 0, l, (l + r) >> 1);\n      dfs(add, del, query, id * 2 + 1, (l + r) >> 1, r);\n\
+    \    }\n    for (auto& [u, v] : es) del(u, v);\n    uf.rollback(state);\n  }\n\
+    \n  template <typename ADD, typename DEL, typename QUERY>\n  void run(const ADD&\
+    \ add, const DEL& del, const QUERY& query) {\n    dfs(add, del, query, 1, 0, segsz);\n\
+    \  }\n\n private:\n  void segment(pair<int, int>& e, int l, int r) {\n    int\
+    \ L = l + segsz;\n    int R = r + segsz;\n    while (L < R) {\n      if (L & 1)\
+    \ seg[L++].push_back(e);\n      if (R & 1) seg[--R].push_back(e);\n      L >>=\
+    \ 1, R >>= 1;\n    }\n  }\n};\n#line 2 \"lct/link-cut-tree-subtree.hpp\"\n\n#line\
+    \ 2 \"lct/reversible-bbst-base.hpp\"\n\ntemplate <typename Tree, typename Node,\
+    \ typename T, T (*f)(T, T), T (*ts)(T)>\nstruct ReversibleBBST : Tree {\n  using\
+    \ Tree::merge;\n  using Tree::split;\n  using typename Tree::Ptr;\n\n  ReversibleBBST()\
+    \ = default;\n\n  virtual void toggle(Ptr t) {\n    swap(t->l, t->r);\n    t->sum\
+    \ = ts(t->sum);\n    t->rev ^= true;\n  }\n\n  T fold(Ptr &t, int a, int b) {\n\
+    \    auto x = split(t, a);\n    auto y = split(x.second, b - a);\n    auto ret\
+    \ = sum(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n    return\
+    \ ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n    auto x = split(t, a);\n\
+    \    auto y = split(x.second, b - a);\n    toggle(y.first);\n    t = merge(x.first,\
+    \ merge(y.first, y.second));\n  }\n\n  Ptr update(Ptr t) override {\n    if (!t)\
+    \ return t;\n    t->cnt = 1;\n    t->sum = t->key;\n    if (t->l) t->cnt += t->l->cnt,\
+    \ t->sum = f(t->l->sum, t->sum);\n    if (t->r) t->cnt += t->r->cnt, t->sum =\
+    \ f(t->sum, t->r->sum);\n    return t;\n  }\n\n protected:\n  inline T sum(const\
+    \ Ptr t) { return t ? t->sum : T(); }\n\n  void push(Ptr t) override {\n    if\
+    \ (!t) return;\n    if (t->rev) {\n      if (t->l) toggle(t->l);\n      if (t->r)\
+    \ toggle(t->r);\n      t->rev = false;\n    }\n  }\n};\n\n/**\n * @brief \u53CD\
+    \u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
+    )\n */\n#line 2 \"lct/splay-base.hpp\"\n\ntemplate <typename Node>\nstruct SplayTreeBase\
+    \ {\n  using Ptr = Node *;\n  template <typename... Args>\n  Ptr my_new(const\
+    \ Args &... args) {\n    return new Node(args...);\n  }\n  void my_del(Ptr p)\
+    \ { delete p; }\n\n  bool is_root(Ptr t) { return !(t->p) || (t->p->l != t &&\
+    \ t->p->r != t); }\n\n  int size(Ptr t) const { return count(t); }\n\n  virtual\
+    \ void splay(Ptr t) {\n    push(t);\n    while (!is_root(t)) {\n      Ptr q =\
+    \ t->p;\n      if (is_root(q)) {\n        push(q), push(t);\n        rot(t);\n\
+    \      } else {\n        Ptr r = q->p;\n        push(r), push(q), push(t);\n \
+    \       if (pos(q) == pos(t))\n          rot(q), rot(t);\n        else\n     \
+    \     rot(t), rot(t);\n      }\n    }\n  }\n\n  Ptr get_left(Ptr t) {\n    while\
+    \ (t->l) push(t), t = t->l;\n    return t;\n  }\n\n  Ptr get_right(Ptr t) {\n\
+    \    while (t->r) push(t), t = t->r;\n    return t;\n  }\n\n  pair<Ptr, Ptr> split(Ptr\
+    \ t, int k) {\n    if (!t) return {nullptr, nullptr};\n    if (k == 0) return\
+    \ {nullptr, t};\n    if (k == count(t)) return {t, nullptr};\n    push(t);\n \
+    \   if (k <= count(t->l)) {\n      auto x = split(t->l, k);\n      t->l = x.second;\n\
+    \      t->p = nullptr;\n      if (x.second) x.second->p = t;\n      return {x.first,\
+    \ update(t)};\n    } else {\n      auto x = split(t->r, k - count(t->l) - 1);\n\
+    \      t->r = x.first;\n      t->p = nullptr;\n      if (x.first) x.first->p =\
+    \ t;\n      return {update(t), x.second};\n    }\n  }\n\n  Ptr merge(Ptr l, Ptr\
+    \ r) {\n    if (!l && !r) return nullptr;\n    if (!l) return splay(r), r;\n \
+    \   if (!r) return splay(l), l;\n    splay(l), splay(r);\n    l = get_right(l);\n\
+    \    splay(l);\n    l->r = r;\n    r->p = l;\n    update(l);\n    return l;\n\
+    \  }\n\n  using Key = decltype(Node::key);\n  Ptr build(const vector<Key> &v)\
+    \ { return build(0, v.size(), v); }\n  Ptr build(int l, int r, const vector<Key>\
+    \ &v) {\n    if (l + 1 >= r) return my_new(v[l]);\n    return merge(build(l, (l\
+    \ + r) >> 1, v), build((l + r) >> 1, r, v));\n  }\n\n  template <typename... Args>\n\
+    \  void insert(Ptr &t, int k, const Args &... args) {\n    splay(t);\n    auto\
+    \ x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)), x.second);\n\
+    \  }\n\n  void erase(Ptr &t, int k) {\n    splay(t);\n    auto x = split(t, k);\n\
+    \    auto y = split(x.second, 1);\n    my_del(y.first);\n    t = merge(x.first,\
+    \ y.second);\n  }\n\n  virtual Ptr update(Ptr t) = 0;\n\n protected:\n  inline\
+    \ int count(Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr\
+    \ t) = 0;\n\n  Ptr build(const vector<Ptr> &v) { return build(0, v.size(), v);\
+    \ }\n\n  Ptr build(int l, int r, const vector<Ptr> &v) {\n    if (l + 1 >= r)\
+    \ return v[l];\n    return merge(build(l, (l + r) >> 1, v), build((l + r) >> 1,\
+    \ r, v));\n  }\n\n  inline int pos(Ptr t) {\n    if (t->p) {\n      if (t->p->l\
+    \ == t) return -1;\n      if (t->p->r == t) return 1;\n    }\n    return 0;\n\
+    \  }\n\n  virtual void rot(Ptr t) {\n    Ptr x = t->p, y = x->p;\n    if (pos(t)\
+    \ == -1) {\n      if ((x->l = t->r)) t->r->p = x;\n      t->r = x, x->p = t;\n\
+    \    } else {\n      if ((x->r = t->l)) t->l->p = x;\n      t->l = x, x->p = t;\n\
+    \    }\n    update(x), update(t);\n    if ((t->p = y)) {\n      if (y->l == x)\
+    \ y->l = t;\n      if (y->r == x) y->r = t;\n    }\n  }\n};\n\n/**\n * @brief\
+    \ Splay Tree(base)\n */\n#line 5 \"lct/link-cut-tree-subtree.hpp\"\n\ntemplate\
+    \ <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct LinkCutForSubtreeNode {\n\
+    \  using Node = LinkCutForSubtreeNode;\n  using Ptr = LinkCutForSubtreeNode*;\n\
+    \  Ptr l, r, p;\n  T key, sum, sub;\n  int cnt;\n  bool rev;\n\n  LinkCutForSubtreeNode(const\
+    \ T& t = T())\n      : l(), r(), p(), key(t), sum(t), sub(T()), cnt(1), rev(false)\
+    \ {}\n  void add(Node* other) { sub = f(sub, other->sum); }\n  void erase(Node*\
+    \ other) { sub = finv(sub, other->sum); }\n  void merge(Node* n1, Node* n2) {\n\
+    \    sum = f(f(n1 ? n1->sum : T(), key), f(sub, n2 ? n2->sum : T()));\n  }\n};\n\
+    \ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct SplayTreeForLCSubtree\n\
+    \    : ReversibleBBST<SplayTreeBase<LinkCutForSubtreeNode<T, f, finv>>,\n    \
+    \                 LinkCutForSubtreeNode<T, f, finv>, T, nullptr, nullptr> {\n\
+    \  using Node = LinkCutForSubtreeNode<T, f, finv>;\n};\n//\n#line 2 \"lct/link-cut-base.hpp\"\
+    \n\ntemplate <typename Splay>\nstruct LinkCutBase : Splay {\n  using Node = typename\
+    \ Splay::Node;\n  using Ptr = Node*;\n\n  virtual Ptr expose(Ptr t) {\n    Ptr\
+    \ rp = nullptr;\n    for (Ptr cur = t; cur; cur = cur->p) {\n      this->splay(cur);\n\
+    \      cur->r = rp;\n      this->update(cur);\n      rp = cur;\n    }\n    this->splay(t);\n\
+    \    return rp;\n  }\n\n  virtual void link(Ptr u, Ptr v) {\n    evert(u);\n \
+    \   expose(v);\n    u->p = v;\n  }\n\n  void cut(Ptr u, Ptr v) {\n    evert(u);\n\
+    \    expose(v);\n    v->l = u->p = nullptr;\n    this->update(v);\n  }\n\n  void\
+    \ evert(Ptr t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n \
+    \ }\n\n  Ptr lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return nullptr;\n\
+    \    expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x, int k) {\n\
+    \    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r && x->r->sz\
+    \ > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -= x->r->sz;\n\
+    \        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n      }\n\
+    \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
+    \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
+    \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
+    \ = key;\n    this->update(t);\n  }\n\n  virtual decltype(Node::key) get_key(Ptr\
+    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
+    \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link/Cut Tree(base)\n\
+    \ * @docs docs/lct/link-cut-tree.md\n */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\
+    \n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n\
+    \    : LinkCutBase<SplayTreeForLCSubtree<T, f, finv>> {\n  using base = LinkCutBase<SplayTreeForLCSubtree<T,\
+    \ f, finv>>;\n  using Node = typename base::Node;\n  using Ptr = typename base::Ptr;\n\
+    \n  Ptr expose(Ptr t) override {\n    Ptr rp = nullptr;\n    for (Ptr cur = t;\
+    \ cur; cur = cur->p) {\n      this->splay(cur);\n      if (cur->r) cur->add(cur->r);\n\
+    \      cur->r = rp;\n      if (cur->r) cur->erase(cur->r);\n      this->update(cur);\n\
+    \      rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  void link(Ptr\
+    \ u, Ptr v) override {\n    this->evert(u);\n    this->expose(v);\n    u->p =\
+    \ v;\n    v->add(u);\n  }\n\n  void toggle(Ptr t) override {\n    swap(t->l, t->r);\n\
+    \    t->rev ^= true;\n  }\n\n  Ptr update(Ptr t) override {\n    if (!t) return\
+    \ t;\n    t->cnt = 1 + this->count(t->l) + this->count(t->r);\n    t->merge(t->l,\
+    \ t->r);\n    return t;\n  }\n\n  void set_key(Ptr t, const T& key) override {\n\
+    \    this->expose(t);\n    t->key = key;\n    this->update(t);\n  }\n\n  T subtree(Ptr\
+    \ t) {\n    this->expose(t);\n    return f(t->key, t->sub);\n  }\n};\n\n/**\n\
+    \ * @brief \u90E8\u5206\u6728\u30AF\u30A8\u30EALink/Cut Tree\n */\n#line 8 \"\
+    verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp\"\n\nusing\
+    \ namespace Nyaan;\n\nll add(ll a, ll b) { return a + b; }\nll sub(ll a, ll b)\
+    \ { return a - b; }\n\nvoid Nyaan::solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n\
+    \  vl cmd(Q), X(Q), Y(Q);\n  rep(i, Q) {\n    in(cmd[i], X[i]);\n    if (cmd[i]\
+    \ != 3) in(Y[i]);\n  }\n\n  using LCT = LinkCutTreeSubtreeQuery<ll, add, sub>;\n\
+    \  LCT lct;\n  vector<LCT::Node*> vs(N);\n  rep(i, N) vs[i] = new LCT::Node(a[i]);\n\
+    \n  OffLineDynamicConnectivity dc(N, Q);\n  rep(i, Q) {\n    if (cmd[i] == 0)\
+    \ dc.add_edge(i, X[i], Y[i]);\n    if (cmd[i] == 1) dc.del_edge(i, X[i], Y[i]);\n\
+    \  }\n  dc.build();\n  vl ans;\n  auto add = [&](int u, int v) { lct.link(vs[u],\
+    \ vs[v]); };\n  auto del = [&](int u, int v) { lct.cut(vs[u], vs[v]); };\n  auto\
+    \ query = [&](int i) {\n    if (cmd[i] == 2) {\n      ll k = lct.get_key(vs[X[i]]);\n\
+    \      lct.set_key(vs[X[i]], k + Y[i]);\n    } else if (cmd[i] == 3) {\n     \
+    \ lct.evert(vs[X[i]]);\n      ans.emplace_back(lct.subtree(vs[X[i]]));\n    }\n\
+    \  };\n\n  dc.run(add, del, query);\n  each(x, ans) out(x);\n}\n"
+  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_graph_vertex_add_component_sum\"\
+    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../graph/offline-dynamic-connectivity.hpp\"\
+    \n#include \"../../lct/link-cut-tree-subtree.hpp\"\n\nusing namespace Nyaan;\n\
+    \nll add(ll a, ll b) { return a + b; }\nll sub(ll a, ll b) { return a - b; }\n\
+    \nvoid Nyaan::solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  vl cmd(Q), X(Q),\
+    \ Y(Q);\n  rep(i, Q) {\n    in(cmd[i], X[i]);\n    if (cmd[i] != 3) in(Y[i]);\n\
+    \  }\n\n  using LCT = LinkCutTreeSubtreeQuery<ll, add, sub>;\n  LCT lct;\n  vector<LCT::Node*>\
+    \ vs(N);\n  rep(i, N) vs[i] = new LCT::Node(a[i]);\n\n  OffLineDynamicConnectivity\
+    \ dc(N, Q);\n  rep(i, Q) {\n    if (cmd[i] == 0) dc.add_edge(i, X[i], Y[i]);\n\
+    \    if (cmd[i] == 1) dc.del_edge(i, X[i], Y[i]);\n  }\n  dc.build();\n  vl ans;\n\
+    \  auto add = [&](int u, int v) { lct.link(vs[u], vs[v]); };\n  auto del = [&](int\
+    \ u, int v) { lct.cut(vs[u], vs[v]); };\n  auto query = [&](int i) {\n    if (cmd[i]\
+    \ == 2) {\n      ll k = lct.get_key(vs[X[i]]);\n      lct.set_key(vs[X[i]], k\
+    \ + Y[i]);\n    } else if (cmd[i] == 3) {\n      lct.evert(vs[X[i]]);\n      ans.emplace_back(lct.subtree(vs[X[i]]));\n\
+    \    }\n  };\n\n  dc.run(add, del, query);\n  each(x, ans) out(x);\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -419,18 +492,24 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
+  - graph/offline-dynamic-connectivity.hpp
+  - data-structure/rollback-union-find.hpp
   - hashmap/hashmap.hpp
   - hashmap/hashmap-base.hpp
+  - lct/link-cut-tree-subtree.hpp
+  - lct/reversible-bbst-base.hpp
+  - lct/splay-base.hpp
+  - lct/link-cut-base.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/hashmap.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   requiredBy: []
   timestamp: '2021-01-31 22:24:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/hashmap.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/hashmap.test.cpp
-- /verify/verify/verify-unit-test/hashmap.test.cpp.html
-title: verify/verify-unit-test/hashmap.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
 ---

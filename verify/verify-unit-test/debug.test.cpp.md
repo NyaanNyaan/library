@@ -192,10 +192,11 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"hashmap/hashmap-base.hpp\"\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\n\
-    using u64 = uint64_t;\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\
-    \ntemplate <typename Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
-    \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
+    \ 2 \"hashmap/hashmap.hpp\"\n\n#line 2 \"hashmap/hashmap-base.hpp\"\n\nnamespace\
+    \ HashMapImpl {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename\
+    \ Key, typename Data>\nstruct HashMapBase;\n\ntemplate <typename Key, typename\
+    \ Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag, Data, ptrdiff_t,\
+    \ Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
     \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
     \ ref = typename base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n\
     \  explicit constexpr itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32\
@@ -281,7 +282,7 @@ data:
     \        chrono::high_resolution_clock::now().time_since_epoch())\n        .count();\n\
     \n}  // namespace HashMapImpl\n\n/**\n * @brief Hash Map(base)\u3000(\u30CF\u30C3\
     \u30B7\u30E5\u30DE\u30C3\u30D7\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line\
-    \ 2 \"hashmap/hashmap.hpp\"\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
+    \ 4 \"hashmap/hashmap.hpp\"\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
     \ : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {\n  using base = typename HashMapImpl::HashMapBase<Key,\
     \ pair<Key, Val>>;\n  using HashMapImpl::HashMapBase<Key, pair<Key, Val>>::HashMapBase;\n\
     \  using Data = pair<Key, Val>;\n\n  Val& operator[](const Key& k) {\n    typename\
@@ -295,31 +296,31 @@ data:
     \ - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key, const Val&\
     \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n\n/* \n * @brief\
     \ \u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)\n * @docs\
-    \ docs/hashmap/hashmap.md\n**/\n#line 2 \"hashmap/hashset.hpp\"\n\ntemplate <typename\
-    \ Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key, Key> {\n  using HashMapImpl::HashMapBase<Key,\
-    \ Key>::HashMapBase;\n};\n\n/* \n * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\
-    \u30C8(\u96C6\u5408)\n * @docs docs/hashmap/hashset.md\n**/\n#line 2 \"matrix/matrix.hpp\"\
-    \n\n\n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix()\
-    \ = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
-    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
-    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
-    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
-    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
-    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
-    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
-    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
-    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
-    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
-    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
-    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
-    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
-    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
-    \ vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k = 0; k\
-    \ < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] * B[k][j];\n\
-    \    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long long k)\
-    \ {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k & 1) B *=\
-    \ *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n \
-    \   return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
+    \ docs/hashmap/hashmap.md\n**/\n#line 2 \"hashmap/hashset.hpp\"\n\n#line 4 \"\
+    hashmap/hashset.hpp\"\n\ntemplate <typename Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key,\
+    \ Key> {\n  using HashMapImpl::HashMapBase<Key, Key>::HashMapBase;\n};\n\n/* \n\
+    \ * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)\n * @docs\
+    \ docs/hashmap/hashset.md\n**/\n#line 2 \"matrix/matrix.hpp\"\n\n\n\ntemplate\
+    \ <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n\
+    \  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
+    \ T())){};\n\n  int H() const { return A.size(); }\n\n  int W() const { return\
+    \ A[0].size(); }\n\n  int size() const { return A.size(); }\n\n  inline const\
+    \ vector<T> &operator[](int k) const { return A[k]; }\n\n  inline vector<T> &operator[](int\
+    \ k) { return A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for\
+    \ (int i = 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
+    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
+    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
+    \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
+    \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
+    \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
+    \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
+    \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
+    \ > C(n, vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k\
+    \ = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
+    \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
+    \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
+    \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
+    \    return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
     \ (Matrix(*this) += B); }\n\n  Matrix operator-(const Matrix &B) const { return\
     \ (Matrix(*this) -= B); }\n\n  Matrix operator*(const Matrix &B) const { return\
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
@@ -452,7 +453,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/debug.test.cpp
   requiredBy: []
-  timestamp: '2020-12-11 19:08:37+09:00'
+  timestamp: '2021-01-31 22:24:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/debug.test.cpp

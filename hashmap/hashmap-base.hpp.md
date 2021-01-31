@@ -6,6 +6,9 @@ data:
     path: data-structure/dynamic-union-find.hpp
     title: "\u52D5\u7684Union Find"
   - icon: ':heavy_check_mark:'
+    path: graph/offline-dynamic-connectivity.hpp
+    title: graph/offline-dynamic-connectivity.hpp
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
   - icon: ':heavy_check_mark:'
@@ -30,6 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -221,6 +227,7 @@ data:
   requiredBy:
   - hashmap/hashmap.hpp
   - hashmap/hashset.hpp
+  - graph/offline-dynamic-connectivity.hpp
   - data-structure/dynamic-union-find.hpp
   timestamp: '2020-12-11 19:08:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -230,6 +237,7 @@ data:
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
 documentation_of: hashmap/hashmap-base.hpp
 layout: document

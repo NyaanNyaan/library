@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: data-structure/rollback-union-find.hpp
+    title: "Rollback\u3064\u304DUnion Find"
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-base.hpp
     title: "Hash Map(base)\u3000(\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7\u30FB\u57FA\
       \u5E95\u30AF\u30E9\u30B9)"
@@ -11,19 +14,30 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
-    title: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-    title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+    path: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/data-structure/dynamic-union-find.md
-    document_title: "\u52D5\u7684Union Find"
     links: []
-  bundledCode: "#line 2 \"data-structure/dynamic-union-find.hpp\"\n\n#line 2 \"hashmap/hashmap.hpp\"\
+  bundledCode: "#line 2 \"graph/offline-dynamic-connectivity.hpp\"\n\n#line 2 \"data-structure/rollback-union-find.hpp\"\
+    \n\nstruct RollbackUnionFind {\n  vector<int> data;\n  stack<pair<int, int> >\
+    \ history;\n  int inner_snap;\n\n  RollbackUnionFind(int sz) : inner_snap(0) {\
+    \ data.assign(sz, -1); }\n\n  bool unite(int x, int y) {\n    x = find(x), y =\
+    \ find(y);\n    history.emplace(x, data[x]);\n    history.emplace(y, data[y]);\n\
+    \    if (x == y) return false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x]\
+    \ += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  int find(int k) {\n\
+    \    if (data[k] < 0) return k;\n    return find(data[k]);\n  }\n\n  int same(int\
+    \ x, int y) { return find(x) == find(y); }\n\n  int size(int k) { return (-data[find(k)]);\
+    \ }\n\n  void undo() {\n    data[history.top().first] = history.top().second;\n\
+    \    history.pop();\n    data[history.top().first] = history.top().second;\n \
+    \   history.pop();\n  }\n\n  void snapshot() { inner_snap = int(history.size()\
+    \ >> 1); }\n\n  int get_state() { return int(history.size() >> 1); }\n\n  void\
+    \ rollback(int state = -1) {\n    if (state == -1) state = inner_snap;\n    state\
+    \ <<= 1;\n    assert(state <= (int)history.size());\n    while (state < (int)history.size())\
+    \ undo();\n  }\n};\n\n/**\n * @brief Rollback\u3064\u304DUnion Find\n * @docs\
+    \ docs/data-structure/rollback-union-find.md\n */\n#line 2 \"hashmap/hashmap.hpp\"\
     \n\n#line 2 \"hashmap/hashmap-base.hpp\"\n\nnamespace HashMapImpl {\nusing u32\
     \ = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename Key, typename Data>\n\
     struct HashMapBase;\n\ntemplate <typename Key, typename Data>\nstruct itrB\n \
@@ -127,66 +141,75 @@ data:
     \ - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key, const Val&\
     \ val) {\n    return base::insert(Data(key, val));\n  }\n};\n\n/* \n * @brief\
     \ \u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)\n * @docs\
-    \ docs/hashmap/hashmap.md\n**/\n#line 4 \"data-structure/dynamic-union-find.hpp\"\
-    \n\nstruct DynamicUnionFind {\n  HashMap<int, int> m;\n  DynamicUnionFind() =\
-    \ default;\n\n  int data(int k) {\n    auto it = m.find(k);\n    return it ==\
-    \ m.end() ? m[k] = -1 : it->second;\n  }\n  int find(int k) {\n    int n = data(k);\n\
-    \    return n < 0 ? k : m[k] = find(n);\n  }\n\n  int unite(int x, int y) {\n\
-    \    x = find(x), y = find(y);\n    if (x == y) return false;\n    auto itx =\
-    \ m.find(x), ity = m.find(y);\n    if (itx->second > ity->second) swap(itx, ity),\
-    \ swap(x, y);\n    itx->second += ity->second;\n    ity->second = x;\n    return\
-    \ true;\n  }\n\n  template <typename F>\n  int unite(int x, int y, const F& f)\
-    \ {\n    x = find(x), y = find(y);\n    if (x == y) return false;\n    auto itx\
-    \ = m.find(x), ity = m.find(y);\n    if (itx->second > ity->second) swap(itx,\
-    \ ity), swap(x, y);\n    itx->second += ity->second;\n    ity->second = x;\n \
-    \   f(x, y);\n    return true;\n  }\n\n  int size(int k) { return -data(find(k));\
-    \ }\n\n  int same(int x, int y) { return find(x) == find(y); }\n\n  void clear()\
-    \ { m.clear(); }\n};\n\n/**\n * @brief \u52D5\u7684Union Find\n * @docs docs/data-structure/dynamic-union-find.md\n\
-    \ */\n"
-  code: "#pragma once\n\n#include \"../hashmap/hashmap.hpp\"\n\nstruct DynamicUnionFind\
-    \ {\n  HashMap<int, int> m;\n  DynamicUnionFind() = default;\n\n  int data(int\
-    \ k) {\n    auto it = m.find(k);\n    return it == m.end() ? m[k] = -1 : it->second;\n\
-    \  }\n  int find(int k) {\n    int n = data(k);\n    return n < 0 ? k : m[k] =\
-    \ find(n);\n  }\n\n  int unite(int x, int y) {\n    x = find(x), y = find(y);\n\
-    \    if (x == y) return false;\n    auto itx = m.find(x), ity = m.find(y);\n \
-    \   if (itx->second > ity->second) swap(itx, ity), swap(x, y);\n    itx->second\
-    \ += ity->second;\n    ity->second = x;\n    return true;\n  }\n\n  template <typename\
-    \ F>\n  int unite(int x, int y, const F& f) {\n    x = find(x), y = find(y);\n\
-    \    if (x == y) return false;\n    auto itx = m.find(x), ity = m.find(y);\n \
-    \   if (itx->second > ity->second) swap(itx, ity), swap(x, y);\n    itx->second\
-    \ += ity->second;\n    ity->second = x;\n    f(x, y);\n    return true;\n  }\n\
-    \n  int size(int k) { return -data(find(k)); }\n\n  int same(int x, int y) { return\
-    \ find(x) == find(y); }\n\n  void clear() { m.clear(); }\n};\n\n/**\n * @brief\
-    \ \u52D5\u7684Union Find\n * @docs docs/data-structure/dynamic-union-find.md\n\
-    \ */\n"
+    \ docs/hashmap/hashmap.md\n**/\n#line 5 \"graph/offline-dynamic-connectivity.hpp\"\
+    \n\nstruct OffLineDynamicConnectivity {\n  int N, Q, segsz;\n  RollbackUnionFind\
+    \ uf;\n  vector<vector<pair<int, int>>> seg, qadd, qdel;\n  HashMap<pair<int,\
+    \ int>, pair<int, int>> cnt;\n\n  OffLineDynamicConnectivity(int n, int q)\n \
+    \     : N(n), Q(q), uf(n), qadd(q), qdel(q) {\n    segsz = 1;\n    while (segsz\
+    \ < Q) segsz *= 2;\n    seg.resize(segsz * 2);\n  }\n\n  void add_edge(int t,\
+    \ int u, int v) { qadd[t].emplace_back(u, v); }\n  void del_edge(int t, int u,\
+    \ int v) { qdel[t].emplace_back(u, v); }\n\n  void build() {\n    for (int i =\
+    \ 0; i < Q; i++) {\n      for (auto& e : qadd[i]) {\n        auto& dat = cnt[e];\n\
+    \        if (dat.second++ == 0) dat.first = i;\n      }\n      for (auto& e :\
+    \ qdel[i]) {\n        auto& dat = cnt[e];\n        if (--dat.second == 0) segment(e,\
+    \ dat.first, i);\n      }\n    }\n    for (auto& [e, dat] : cnt) {\n      if (dat.second\
+    \ != 0) segment(e, dat.first, Q);\n    }\n  }\n\n  template <typename ADD, typename\
+    \ DEL, typename QUERY>\n  void dfs(const ADD& add, const DEL& del, const QUERY&\
+    \ query, int id, int l,\n           int r) {\n    if (Q <= l) return;\n    int\
+    \ state = uf.get_state();\n    vector<pair<int, int>> es;\n    for (auto& [u,\
+    \ v] : seg[id]) {\n      if (!uf.same(u, v)) {\n        uf.unite(u, v);\n    \
+    \    add(u, v);\n        es.emplace_back(u, v);\n      }\n    }\n    if (l + 1\
+    \ == r) {\n      query(l);\n    } else {\n      dfs(add, del, query, id * 2 +\
+    \ 0, l, (l + r) >> 1);\n      dfs(add, del, query, id * 2 + 1, (l + r) >> 1, r);\n\
+    \    }\n    for (auto& [u, v] : es) del(u, v);\n    uf.rollback(state);\n  }\n\
+    \n  template <typename ADD, typename DEL, typename QUERY>\n  void run(const ADD&\
+    \ add, const DEL& del, const QUERY& query) {\n    dfs(add, del, query, 1, 0, segsz);\n\
+    \  }\n\n private:\n  void segment(pair<int, int>& e, int l, int r) {\n    int\
+    \ L = l + segsz;\n    int R = r + segsz;\n    while (L < R) {\n      if (L & 1)\
+    \ seg[L++].push_back(e);\n      if (R & 1) seg[--R].push_back(e);\n      L >>=\
+    \ 1, R >>= 1;\n    }\n  }\n};\n"
+  code: "#pragma once\n\n#include \"../data-structure/rollback-union-find.hpp\"\n\
+    #include \"../hashmap/hashmap.hpp\"\n\nstruct OffLineDynamicConnectivity {\n \
+    \ int N, Q, segsz;\n  RollbackUnionFind uf;\n  vector<vector<pair<int, int>>>\
+    \ seg, qadd, qdel;\n  HashMap<pair<int, int>, pair<int, int>> cnt;\n\n  OffLineDynamicConnectivity(int\
+    \ n, int q)\n      : N(n), Q(q), uf(n), qadd(q), qdel(q) {\n    segsz = 1;\n \
+    \   while (segsz < Q) segsz *= 2;\n    seg.resize(segsz * 2);\n  }\n\n  void add_edge(int\
+    \ t, int u, int v) { qadd[t].emplace_back(u, v); }\n  void del_edge(int t, int\
+    \ u, int v) { qdel[t].emplace_back(u, v); }\n\n  void build() {\n    for (int\
+    \ i = 0; i < Q; i++) {\n      for (auto& e : qadd[i]) {\n        auto& dat = cnt[e];\n\
+    \        if (dat.second++ == 0) dat.first = i;\n      }\n      for (auto& e :\
+    \ qdel[i]) {\n        auto& dat = cnt[e];\n        if (--dat.second == 0) segment(e,\
+    \ dat.first, i);\n      }\n    }\n    for (auto& [e, dat] : cnt) {\n      if (dat.second\
+    \ != 0) segment(e, dat.first, Q);\n    }\n  }\n\n  template <typename ADD, typename\
+    \ DEL, typename QUERY>\n  void dfs(const ADD& add, const DEL& del, const QUERY&\
+    \ query, int id, int l,\n           int r) {\n    if (Q <= l) return;\n    int\
+    \ state = uf.get_state();\n    vector<pair<int, int>> es;\n    for (auto& [u,\
+    \ v] : seg[id]) {\n      if (!uf.same(u, v)) {\n        uf.unite(u, v);\n    \
+    \    add(u, v);\n        es.emplace_back(u, v);\n      }\n    }\n    if (l + 1\
+    \ == r) {\n      query(l);\n    } else {\n      dfs(add, del, query, id * 2 +\
+    \ 0, l, (l + r) >> 1);\n      dfs(add, del, query, id * 2 + 1, (l + r) >> 1, r);\n\
+    \    }\n    for (auto& [u, v] : es) del(u, v);\n    uf.rollback(state);\n  }\n\
+    \n  template <typename ADD, typename DEL, typename QUERY>\n  void run(const ADD&\
+    \ add, const DEL& del, const QUERY& query) {\n    dfs(add, del, query, 1, 0, segsz);\n\
+    \  }\n\n private:\n  void segment(pair<int, int>& e, int l, int r) {\n    int\
+    \ L = l + segsz;\n    int R = r + segsz;\n    while (L < R) {\n      if (L & 1)\
+    \ seg[L++].push_back(e);\n      if (R & 1) seg[--R].push_back(e);\n      L >>=\
+    \ 1, R >>= 1;\n    }\n  }\n};"
   dependsOn:
+  - data-structure/rollback-union-find.hpp
   - hashmap/hashmap.hpp
   - hashmap/hashmap-base.hpp
   isVerificationFile: false
-  path: data-structure/dynamic-union-find.hpp
+  path: graph/offline-dynamic-connectivity.hpp
   requiredBy: []
   timestamp: '2021-01-31 22:24:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
-documentation_of: data-structure/dynamic-union-find.hpp
+  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+documentation_of: graph/offline-dynamic-connectivity.hpp
 layout: document
 redirect_from:
-- /library/data-structure/dynamic-union-find.hpp
-- /library/data-structure/dynamic-union-find.hpp.html
-title: "\u52D5\u7684Union Find"
+- /library/graph/offline-dynamic-connectivity.hpp
+- /library/graph/offline-dynamic-connectivity.hpp.html
+title: graph/offline-dynamic-connectivity.hpp
 ---
-## 動的Union Find
-
-#### 概要
-
-[Union Find](https://nyaannyaan.github.io/library/data-structure/union-find.hpp)の動的版。配列を使っていた部分を連想配列に変えることで空間計算量を削減している。
-
-#### 使い方
-
-- `UnionFind(int sz)`：サイズ$sz$のUnionFindを生成する。計算量$\mathrm{O}(1)$
-- `unite(int x, int y)`：xとyをマージする。返り値はマージに成功したら`true`、失敗したら`false`を返す。計算量$\mathrm{O}(\alpha(n))$($n$はUnionFindのサイズ)
-- `find(int k)`：kの根を返す。計算量$\mathrm{O}(\alpha(n))$
-- `same(int x, int y)`：xとyが同じ連結成分に所属しているかを返す。計算量$\mathrm{O}(\alpha(n))$
-- `size(int k)`：xを含む連結成分のサイズを返す。

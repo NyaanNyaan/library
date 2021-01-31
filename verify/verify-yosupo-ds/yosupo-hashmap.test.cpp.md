@@ -186,10 +186,11 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"hashmap/hashmap-base.hpp\"\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\n\
-    using u64 = uint64_t;\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\
-    \ntemplate <typename Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
-    \ Data, ptrdiff_t, Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
+    \ 2 \"hashmap/hashmap.hpp\"\n\n#line 2 \"hashmap/hashmap-base.hpp\"\n\nnamespace\
+    \ HashMapImpl {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename\
+    \ Key, typename Data>\nstruct HashMapBase;\n\ntemplate <typename Key, typename\
+    \ Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag, Data, ptrdiff_t,\
+    \ Data*, Data&> {\n  using base =\n      iterator<bidirectional_iterator_tag,\
     \ Data, ptrdiff_t, Data*, Data&>;\n  using ptr = typename base::pointer;\n  using\
     \ ref = typename base::reference;\n\n  u32 i;\n  HashMapBase<Key, Data>* p;\n\n\
     \  explicit constexpr itrB() : i(0), p(nullptr) {}\n  explicit constexpr itrB(u32\
@@ -275,7 +276,7 @@ data:
     \        chrono::high_resolution_clock::now().time_since_epoch())\n        .count();\n\
     \n}  // namespace HashMapImpl\n\n/**\n * @brief Hash Map(base)\u3000(\u30CF\u30C3\
     \u30B7\u30E5\u30DE\u30C3\u30D7\u30FB\u57FA\u5E95\u30AF\u30E9\u30B9)\n */\n#line\
-    \ 2 \"hashmap/hashmap.hpp\"\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
+    \ 4 \"hashmap/hashmap.hpp\"\n\ntemplate <typename Key, typename Val>\nstruct HashMap\
     \ : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {\n  using base = typename HashMapImpl::HashMapBase<Key,\
     \ pair<Key, Val>>;\n  using HashMapImpl::HashMapBase<Key, pair<Key, Val>>::HashMapBase;\n\
     \  using Data = pair<Key, Val>;\n\n  Val& operator[](const Key& k) {\n    typename\
@@ -343,7 +344,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   requiredBy: []
-  timestamp: '2020-12-11 19:08:37+09:00'
+  timestamp: '2021-01-31 22:24:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
