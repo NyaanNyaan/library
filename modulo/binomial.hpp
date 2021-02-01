@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename T>
 struct Binomial {
   vector<T> fac_, finv_, inv_;
@@ -26,27 +24,30 @@ struct Binomial {
   }
 
   T fac(int i) {
+    if(i < 0) return T(0);
     while (i >= (int)fac_.size()) extend();
     return fac_[i];
   }
 
   T finv(int i) {
+    if(i < 0) return T(0);
     while (i >= (int)finv_.size()) extend();
     return finv_[i];
   }
 
   T inv(int i) {
+    if(i < 0) return T(0);
     while (i >= (int)inv_.size()) extend();
     return inv_[i];
   }
 
   T C(int n, int r) {
-    if (n < r || r < 0) return T(0);
+    if (n < 0 || n < r || r < 0) return T(0);
     return fac(n) * finv(n - r) * finv(r);
   }
 
   T C_naive(int n, int r) {
-    if (n < r || r < 0) return T(0);
+    if (n < 0 || n < r || r < 0) return T(0);
     T ret = T(1);
     r = min(r, n - r);
     for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);
@@ -54,7 +55,7 @@ struct Binomial {
   }
 
   T P(int n, int r) {
-    if (n < r || r < 0) return T(0);
+    if (n < 0 || n < r || r < 0) return T(0);
     return fac(n) * finv(n - r);
   }
 
