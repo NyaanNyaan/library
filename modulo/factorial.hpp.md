@@ -88,7 +88,7 @@ data:
     void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
     \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
     \ @docs docs/fps/formal-power-series.md\n */\n#line 2 \"fps/sample-point-shift.hpp\"\
-    \n\n#line 2 \"modulo/binomial.hpp\"\n\n\n\ntemplate <typename T>\nstruct Binomial\
+    \n\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial\
     \ {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX + 10),\
     \ finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod() != 0);\n    MAX +=\
     \ 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <= MAX; i++)\
@@ -98,26 +98,27 @@ data:
     \ {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n    T inv = (-inv_[T::get_mod()\
     \ % n]) * (T::get_mod() / n);\n    T finv = finv_.back() * inv;\n    fac_.push_back(fac);\n\
     \    finv_.push_back(finv);\n    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n\
-    \    while (i >= (int)fac_.size()) extend();\n    return fac_[i];\n  }\n\n  T\
-    \ finv(int i) {\n    while (i >= (int)finv_.size()) extend();\n    return finv_[i];\n\
-    \  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size()) extend();\n    return\
-    \ inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r || r < 0) return T(0);\n\
-    \    return fac(n) * finv(n - r) * finv(r);\n  }\n\n  T C_naive(int n, int r)\
-    \ {\n    if (n < r || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n\
-    \ - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n\
-    \  }\n\n  T P(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    return\
-    \ fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0)\
-    \ return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"\
-    fps/sample-point-shift.hpp\"\n\n// input  : h(0), h(1), ..., h(d - 1)\n// output\
-    \ : h(m), h(m + 1), ..., h(m + d - 1)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ SamplePointShift(FormalPowerSeries<mint>& ys, mint m) {\n  static Binomial<mint>\
-    \ C;\n  int d = ys.size() - 1;\n  FormalPowerSeries<mint> f(d + 1), g(d * 2 +\
-    \ 1);\n  for (int i = 0; i <= d; i++) {\n    f[i] = ys[i] * C.finv(i) * C.finv(d\
-    \ - i);\n    if ((d - i) & 1) f[i] = -f[i];\n  }\n  for (int i = 0; i <= 2 * d;\
-    \ i++) {\n    assert(m - d + i != mint(0));\n    g[i] = (m - d + i).inverse();\n\
-    \  }\n  auto h = f * g;\n  mint coeff = 1;\n  for (int i = 0; i <= d; i++) coeff\
-    \ *= (m - d + i);\n  for (int i = 0; i <= d; i++) {\n    h[i + d] *= coeff;\n\
-    \    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
+    \    if(i < 0) return T(0);\n    while (i >= (int)fac_.size()) extend();\n   \
+    \ return fac_[i];\n  }\n\n  T finv(int i) {\n    if(i < 0) return T(0);\n    while\
+    \ (i >= (int)finv_.size()) extend();\n    return finv_[i];\n  }\n\n  T inv(int\
+    \ i) {\n    if(i < 0) return T(0);\n    while (i >= (int)inv_.size()) extend();\n\
+    \    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 || n < r ||\
+    \ r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n  T\
+    \ C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n   \
+    \ T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
+    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
+    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
+    \n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"fps/sample-point-shift.hpp\"\n\n\
+    // input  : h(0), h(1), ..., h(d - 1)\n// output : h(m), h(m + 1), ..., h(m +\
+    \ d - 1)\ntemplate <typename mint>\nFormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>&\
+    \ ys, mint m) {\n  static Binomial<mint> C;\n  int d = ys.size() - 1;\n  FormalPowerSeries<mint>\
+    \ f(d + 1), g(d * 2 + 1);\n  for (int i = 0; i <= d; i++) {\n    f[i] = ys[i]\
+    \ * C.finv(i) * C.finv(d - i);\n    if ((d - i) & 1) f[i] = -f[i];\n  }\n  for\
+    \ (int i = 0; i <= 2 * d; i++) {\n    assert(m - d + i != mint(0));\n    g[i]\
+    \ = (m - d + i).inverse();\n  }\n  auto h = f * g;\n  mint coeff = 1;\n  for (int\
+    \ i = 0; i <= d; i++) coeff *= (m - d + i);\n  for (int i = 0; i <= d; i++) {\n\
+    \    h[i + d] *= coeff;\n    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
     \ + d, begin(h) + 2 * d + 1};\n}\n#line 5 \"modulo/factorial.hpp\"\n\ntemplate\
     \ <typename mint>\nmint factorial(int n) {\n  if (n <= 1) return 1;\n  using fps\
     \ = FormalPowerSeries<mint>;\n  constexpr long long v = 32768;\n  mint iv = mint(v).inverse();\n\
@@ -148,7 +149,7 @@ data:
   isVerificationFile: false
   path: modulo/factorial.hpp
   requiredBy: []
-  timestamp: '2021-01-31 00:21:53+09:00'
+  timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0502.test.cpp

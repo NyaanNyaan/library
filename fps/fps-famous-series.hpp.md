@@ -87,8 +87,8 @@ data:
     void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
     \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
     \ @docs docs/fps/formal-power-series.md\n */\n#line 2 \"modulo/binomial.hpp\"\n\
-    \n\n\ntemplate <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n\
-    \  Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n\
+    \ntemplate <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n \
+    \ Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n\
     \    assert(T::get_mod() != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0]\
     \ = 1;\n    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX]\
     \ = fac_[MAX].inverse();\n    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i\
@@ -96,25 +96,27 @@ data:
     \ - 1];\n  }\n\n  void extend() {\n    int n = fac_.size();\n    T fac = fac_.back()\
     \ * n;\n    T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv\
     \ = finv_.back() * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n\
-    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    while (i >= (int)fac_.size())\
-    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    while (i >= (int)finv_.size())\
-    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    while (i >= (int)inv_.size())\
-    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < r\
-    \ || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n\
-    \  T C_naive(int n, int r) {\n    if (n < r || r < 0) return T(0);\n    T ret\
-    \ = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i)\
-    \ * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < r || r\
-    \ < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int\
-    \ r) {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r\
-    \ - 1, r);\n  }\n};\n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\n\
-    template <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
-    \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
-    \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
-    \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
-    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
-    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
-    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
-    \ */\n#line 5 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    if(i < 0) return T(0);\n\
+    \    while (i >= (int)fac_.size()) extend();\n    return fac_[i];\n  }\n\n  T\
+    \ finv(int i) {\n    if(i < 0) return T(0);\n    while (i >= (int)finv_.size())\
+    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    if(i < 0) return\
+    \ T(0);\n    while (i >= (int)inv_.size()) extend();\n    return inv_[i];\n  }\n\
+    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
+    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  T C_naive(int n, int r) {\n    if\
+    \ (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n\
+    \ - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n\
+    \  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
+    \    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0\
+    \ || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n\
+    #line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate <typename\
+    \ mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,\n\
+    \                                    Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  int N = f.size();\n  for (int i = 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f),\
+    \ end(f));\n  fps g(N, mint(1));\n  for (int i = 1; i < N; i++) g[i] = g[i - 1]\
+    \ * a * C.inv(i);\n  f = (f * g).pre(N);\n  reverse(begin(f), end(f));\n  for\
+    \ (int i = 0; i < N; i++) f[i] *= C.finv(i);\n  return f;\n}\n\n/**\n * @brief\
+    \ \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n */\n#line\
+    \ 5 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ Stirling1st(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n  fps f = {0,\
     \ 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n    f *= TaylorShift(f,\
@@ -168,7 +170,7 @@ data:
   isVerificationFile: false
   path: fps/fps-famous-series.hpp
   requiredBy: []
-  timestamp: '2021-01-31 00:21:53+09:00'
+  timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
