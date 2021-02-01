@@ -697,6 +697,12 @@ data:
     path: verify/verify-yuki/yuki-1326.test.cpp
     title: verify/verify-yuki/yuki-1326.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
+    title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1340-semiring.test.cpp
+    title: verify/verify-yuki/yuki-1340-semiring.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _isVerificationFailed: false
@@ -871,6 +877,7 @@ data:
   - verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-1220.test.cpp
@@ -881,6 +888,7 @@ data:
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-yuki/yuki-1323.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-1340-semiring.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp

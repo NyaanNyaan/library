@@ -27,6 +27,7 @@ U add(U a, U b) { return max(a, b); }
 U mul(U a, U b) { return a + b; }
 U i0() { return -infLL; }
 U i1() { return 0; }
+using rig = semiring<U, add, mul, i0, i1>;
 //*/
 
 // min-plus semiring
@@ -36,6 +37,7 @@ U add(U a, U b) { return min(a, b); }
 U mul(U a, U b) { return a + b; }
 U i0() { return infLL; }
 U i1() { return 0; }
+using rig = semiring<U, add, mul, i0, i1>;
 //*/
 
 // max(x + a, b)
@@ -54,6 +56,7 @@ U mul(U a, U b) {
 }
 U i0() { return U(-infLL, -infLL); }
 U i1() { return U(0, -infLL); }
+using rig = semiring<U, add, mul, i0, i1>;
 //*/
 
 // xor-and semiring
@@ -63,5 +66,6 @@ U add(U a, U b) { return a ^ b; }
 U mul(U a, U b) { return a & b; }
 U i0() { return 0; }
 U i1() { return U(-1); }
+using rig = semiring<U, add, mul, i0, i1>;
 //*/
 ```
