@@ -35,13 +35,12 @@ struct AngelBeats {
  private:
   void update(int k) {
     Node& p = v[k];
-    Node& l = v[(k << 1) | 0];
-    Node& r = v[(k << 1) | 1];
+    Node& l = v[k * 2 + 0];
+    Node& r = v[k * 2 + 1];
 
     p.sum = l.sum + r.sum;
 
-#define unlikely(x) __builtin_expect(!!(x), 0)
-    if (unlikely(l.g1 == r.g1)) {
+    if (l.g1 == r.g1) {
       p.g1 = l.g1;
       p.g2 = max(l.g2, r.g2);
       p.gc = l.gc + r.gc;
@@ -52,7 +51,7 @@ struct AngelBeats {
       p.g2 = max(f ? r.g1 : l.g1, f ? l.g2 : r.g2);
     }
 
-    if (unlikely(l.l1 == r.l1)) {
+    if (l.l1 == r.l1) {
       p.l1 = l.l1;
       p.l2 = min(l.l2, r.l2);
       p.lc = l.lc + r.lc;
@@ -62,7 +61,6 @@ struct AngelBeats {
       p.lc = f ? l.lc : r.lc;
       p.l2 = min(f ? r.l1 : l.l1, f ? l.l2 : r.l2);
     }
-#undef unlikely
   }
 
   void push_add(int k, i64 x) {
@@ -161,12 +159,9 @@ struct AngelBeats {
 
   template <int cmd>
   inline i64 e() {
-    if constexpr (cmd == 1)
-      return INF;
-    else if constexpr (cmd == 2)
-      return -INF;
-    else
-      return 0;
+    if constexpr (cmd == 1) return INF;
+    if constexpr (cmd == 2) return -INF;
+    return 0;
   }
 
   template <int cmd>
@@ -197,3 +192,8 @@ struct AngelBeats {
     return lx;
   }
 };
+
+/**
+ * @brief Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats
+ * @docs docs/segment-tree/segment-tree-beats.md
+ */
