@@ -6,7 +6,7 @@ data:
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree-beats.hpp
-    title: segment-tree/segment-tree-beats.hpp
+    title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -198,22 +198,21 @@ data:
     \ range_min(int l, int r) { return inner_fold<1>(l, r); }\n  i64 range_max(int\
     \ l, int r) { return inner_fold<2>(l, r); }\n  i64 range_sum(int l, int r) { return\
     \ inner_fold<3>(l, r); }\n\n private:\n  void update(int k) {\n    Node& p = v[k];\n\
-    \    Node& l = v[(k << 1) | 0];\n    Node& r = v[(k << 1) | 1];\n\n    p.sum =\
-    \ l.sum + r.sum;\n\n#define unlikely(x) __builtin_expect(!!(x), 0)\n    if (unlikely(l.g1\
-    \ == r.g1)) {\n      p.g1 = l.g1;\n      p.g2 = max(l.g2, r.g2);\n      p.gc =\
-    \ l.gc + r.gc;\n    } else {\n      bool f = l.g1 > r.g1;\n      p.g1 = f ? l.g1\
-    \ : r.g1;\n      p.gc = f ? l.gc : r.gc;\n      p.g2 = max(f ? r.g1 : l.g1, f\
-    \ ? l.g2 : r.g2);\n    }\n\n    if (unlikely(l.l1 == r.l1)) {\n      p.l1 = l.l1;\n\
-    \      p.l2 = min(l.l2, r.l2);\n      p.lc = l.lc + r.lc;\n    } else {\n    \
-    \  bool f = l.l1 < r.l1;\n      p.l1 = f ? l.l1 : r.l1;\n      p.lc = f ? l.lc\
-    \ : r.lc;\n      p.l2 = min(f ? r.l1 : l.l1, f ? l.l2 : r.l2);\n    }\n#undef\
-    \ unlikely\n  }\n\n  void push_add(int k, i64 x) {\n    Node& p = v[k];\n    p.sum\
-    \ += x << (log + __builtin_clz(k) - 31);\n    p.g1 += x;\n    p.l1 += x;\n   \
-    \ if (p.g2 != -INF) p.g2 += x;\n    if (p.l2 != INF) p.l2 += x;\n    p.add +=\
-    \ x;\n  }\n  void push_min(int k, i64 x) {\n    Node& p = v[k];\n    p.sum +=\
-    \ (x - p.g1) * p.gc;\n    if (p.l1 == p.g1) p.l1 = x;\n    if (p.l2 == p.g1) p.l2\
-    \ = x;\n    p.g1 = x;\n  }\n  void push_max(int k, i64 x) {\n    Node& p = v[k];\n\
-    \    p.sum += (x - p.l1) * p.lc;\n    if (p.g1 == p.l1) p.g1 = x;\n    if (p.g2\
+    \    Node& l = v[k * 2 + 0];\n    Node& r = v[k * 2 + 1];\n\n    p.sum = l.sum\
+    \ + r.sum;\n\n    if (l.g1 == r.g1) {\n      p.g1 = l.g1;\n      p.g2 = max(l.g2,\
+    \ r.g2);\n      p.gc = l.gc + r.gc;\n    } else {\n      bool f = l.g1 > r.g1;\n\
+    \      p.g1 = f ? l.g1 : r.g1;\n      p.gc = f ? l.gc : r.gc;\n      p.g2 = max(f\
+    \ ? r.g1 : l.g1, f ? l.g2 : r.g2);\n    }\n\n    if (l.l1 == r.l1) {\n      p.l1\
+    \ = l.l1;\n      p.l2 = min(l.l2, r.l2);\n      p.lc = l.lc + r.lc;\n    } else\
+    \ {\n      bool f = l.l1 < r.l1;\n      p.l1 = f ? l.l1 : r.l1;\n      p.lc =\
+    \ f ? l.lc : r.lc;\n      p.l2 = min(f ? r.l1 : l.l1, f ? l.l2 : r.l2);\n    }\n\
+    \  }\n\n  void push_add(int k, i64 x) {\n    Node& p = v[k];\n    p.sum += x <<\
+    \ (log + __builtin_clz(k) - 31);\n    p.g1 += x;\n    p.l1 += x;\n    if (p.g2\
+    \ != -INF) p.g2 += x;\n    if (p.l2 != INF) p.l2 += x;\n    p.add += x;\n  }\n\
+    \  void push_min(int k, i64 x) {\n    Node& p = v[k];\n    p.sum += (x - p.g1)\
+    \ * p.gc;\n    if (p.l1 == p.g1) p.l1 = x;\n    if (p.l2 == p.g1) p.l2 = x;\n\
+    \    p.g1 = x;\n  }\n  void push_max(int k, i64 x) {\n    Node& p = v[k];\n  \
+    \  p.sum += (x - p.l1) * p.lc;\n    if (p.g1 == p.l1) p.g1 = x;\n    if (p.g2\
     \ == p.l1) p.g2 = x;\n    p.l1 = x;\n  }\n  void push(int k) {\n    Node& p =\
     \ v[k];\n    if (p.add != 0) {\n      push_add(k * 2 + 0, p.add);\n      push_add(k\
     \ * 2 + 1, p.add);\n      p.add = 0;\n    }\n    if (p.g1 < v[k * 2 + 0].g1) push_min(k\
@@ -238,28 +237,29 @@ data:
     \    }\n    for (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l)\
     \ update(l >> i);\n      if (((r >> i) << i) != r) update((r - 1) >> i);\n   \
     \ }\n  }\n\n  template <int cmd>\n  inline i64 e() {\n    if constexpr (cmd ==\
-    \ 1)\n      return INF;\n    else if constexpr (cmd == 2)\n      return -INF;\n\
-    \    else\n      return 0;\n  }\n\n  template <int cmd>\n  inline void op(i64&\
-    \ a, const Node& b) {\n    if constexpr (cmd == 1) a = min(a, b.l1);\n    if constexpr\
-    \ (cmd == 2) a = max(a, b.g1);\n    if constexpr (cmd == 3) a += b.sum;\n  }\n\
-    \n  template <int cmd>\n  i64 inner_fold(int l, int r) {\n    if (l == r) return\
-    \ e<cmd>();\n    l += n, r += n;\n    for (int i = log; i >= 1; i--) {\n     \
-    \ if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
-    \ - 1) >> i);\n    }\n    i64 lx = e<cmd>(), rx = e<cmd>();\n    while (l < r)\
-    \ {\n      if (l & 1) op<cmd>(lx, v[l++]);\n      if (r & 1) op<cmd>(rx, v[--r]);\n\
-    \      l >>= 1;\n      r >>= 1;\n    }\n    if constexpr (cmd == 1) lx = min(lx,\
-    \ rx);\n    if constexpr (cmd == 2) lx = max(lx, rx);\n    if constexpr (cmd ==\
-    \ 3) lx += rx;\n    return lx;\n  }\n};\n#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace\
-    \ fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint\
-    \ pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
-    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
-    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
-    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load()\
-    \ {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf +\
-    \ pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n\
-    \  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c) { c\
-    \ = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil +\
-    \ 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
+    \ 1) return INF;\n    if constexpr (cmd == 2) return -INF;\n    return 0;\n  }\n\
+    \n  template <int cmd>\n  inline void op(i64& a, const Node& b) {\n    if constexpr\
+    \ (cmd == 1) a = min(a, b.l1);\n    if constexpr (cmd == 2) a = max(a, b.g1);\n\
+    \    if constexpr (cmd == 3) a += b.sum;\n  }\n\n  template <int cmd>\n  i64 inner_fold(int\
+    \ l, int r) {\n    if (l == r) return e<cmd>();\n    l += n, r += n;\n    for\
+    \ (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l >> i);\n\
+    \      if (((r >> i) << i) != r) push((r - 1) >> i);\n    }\n    i64 lx = e<cmd>(),\
+    \ rx = e<cmd>();\n    while (l < r) {\n      if (l & 1) op<cmd>(lx, v[l++]);\n\
+    \      if (r & 1) op<cmd>(rx, v[--r]);\n      l >>= 1;\n      r >>= 1;\n    }\n\
+    \    if constexpr (cmd == 1) lx = min(lx, rx);\n    if constexpr (cmd == 2) lx\
+    \ = max(lx, rx);\n    if constexpr (cmd == 3) lx += rx;\n    return lx;\n  }\n\
+    };\n\n/**\n * @brief Range Chmin Chmax Add Update Range Min Max Sum Segment Tree\
+    \ Beats\n * @docs docs/segment-tree/segment-tree-beats.md\n */\n#line 2 \"misc/fastio.hpp\"\
+    \n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
+    \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
+    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
+    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
+    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
+    \ load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf\
+    \ + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush()\
+    \ {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void rd(char& c)\
+    \ { c = ibuf[pil++]; }\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil\
+    \ + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n  while (c < '-');\n\
     \  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n    c = ibuf[pil++];\n\
     \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n\
     \  }\n  if (minus) x = -x;\n}\ninline void rd() {}\ntemplate <typename Head, typename...\
@@ -311,7 +311,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
   requiredBy: []
-  timestamp: '2021-01-31 00:21:53+09:00'
+  timestamp: '2021-02-02 18:56:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp

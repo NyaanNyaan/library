@@ -560,7 +560,7 @@ data:
       title: "\u62BD\u8C61\u5316Segment Tree Beats"
     - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree-beats.hpp
-      title: segment-tree/segment-tree-beats.hpp
+      title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats
     - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree.hpp
       title: segment-tree/segment-tree.hpp
