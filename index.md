@@ -556,6 +556,9 @@ data:
       path: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
       title: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
     - icon: ':heavy_check_mark:'
+      path: segment-tree/segment-tree-beats-abstract.hpp
+      title: "\u62BD\u8C61\u5316Segment Tree Beats"
+    - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree-beats.hpp
       title: segment-tree/segment-tree-beats.hpp
     - icon: ':heavy_check_mark:'
@@ -1367,6 +1370,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
       title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0880.test.cpp
+      title: verify/verify-yuki/yuki-0880.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0886.test.cpp
       title: verify/verify-yuki/yuki-0886.test.cpp
