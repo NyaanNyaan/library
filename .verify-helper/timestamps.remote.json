@@ -140,6 +140,7 @@
 "verify/verify-yosupo-graph/yosupo-cartesian.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp": "2020-12-05 15:48:27 +0900",
 "verify/verify-yosupo-graph/yosupo-diameter.test.cpp": "2020-12-05 08:35:39 +0900",
+"verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp": "2021-02-04 22:39:44 +0900",
 "verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp": "2020-12-22 00:51:45 +0900",
 "verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp": "2020-12-05 07:59:51 +0900",
