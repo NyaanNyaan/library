@@ -40,6 +40,9 @@ data:
       path: data-structure/rollback-union-find.hpp
       title: "Rollback\u3064\u304DUnion Find"
     - icon: ':heavy_check_mark:'
+      path: data-structure/skew-heap.hpp
+      title: Skew Heap
+    - icon: ':heavy_check_mark:'
       path: data-structure/slide-window-aggregation.hpp
       title: data-structure/slide-window-aggregation.hpp
     - icon: ':heavy_check_mark:'
@@ -209,6 +212,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/max-independent-set.hpp
       title: graph/max-independent-set.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/minimum-cost-arborescence.hpp
+      title: graph/minimum-cost-arborescence.hpp
     - icon: ':heavy_check_mark:'
       path: graph/offline-dynamic-connectivity.hpp
       title: graph/offline-dynamic-connectivity.hpp
@@ -1159,6 +1165,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
       title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
       title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp

@@ -445,6 +445,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':heavy_check_mark:'
@@ -828,6 +831,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+  - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
