@@ -649,6 +649,9 @@ data:
     path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
     title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0879.test.cpp
+    title: verify/verify-yuki/yuki-0879.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0880.test.cpp
     title: verify/verify-yuki/yuki-0880.test.cpp
   - icon: ':heavy_check_mark:'
@@ -923,6 +926,7 @@ data:
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-yuki/yuki-1323.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-0879.test.cpp
   - verify/verify-yuki/yuki-1340-semiring.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp

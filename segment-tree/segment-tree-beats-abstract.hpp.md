@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0879.test.cpp
+    title: verify/verify-yuki/yuki-0879.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0880.test.cpp
     title: verify/verify-yuki/yuki-0880.test.cpp
   _isVerificationFailed: false
@@ -69,6 +72,7 @@ data:
   timestamp: '2021-02-02 18:02:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-0879.test.cpp
   - verify/verify-yuki/yuki-0880.test.cpp
 documentation_of: segment-tree/segment-tree-beats-abstract.hpp
 layout: document

@@ -1380,6 +1380,9 @@ data:
       path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
       title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0879.test.cpp
+      title: verify/verify-yuki/yuki-0879.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0880.test.cpp
       title: verify/verify-yuki/yuki-0880.test.cpp
     - icon: ':heavy_check_mark:'
