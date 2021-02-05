@@ -208,6 +208,7 @@
 "verify/verify-yuki/yuki-0720.test.cpp": "2021-02-01 19:31:03 +0900",
 "verify/verify-yuki/yuki-0789.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp": "2020-12-05 13:58:32 +0900",
+"verify/verify-yuki/yuki-0879.test.cpp": "2021-02-05 23:29:41 +0900",
 "verify/verify-yuki/yuki-0880.test.cpp": "2021-02-02 18:02:32 +0900",
 "verify/verify-yuki/yuki-0886.test.cpp": "2020-12-05 13:58:32 +0900",
 "verify/verify-yuki/yuki-0890.test.cpp": "2021-02-01 19:31:03 +0900",
