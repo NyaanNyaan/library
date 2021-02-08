@@ -96,19 +96,20 @@ struct LazySegmentTree {
       val[2 * i + 0] = g(val[2 * i + 0], laz[i]);
       val[2 * i + 1] = g(val[2 * i + 1], laz[i]);
       if (2 * i < n) {
-        laz[2 * i + 0] = h(laz[i], laz[2 * i + 0]);
-        laz[2 * i + 1] = h(laz[i], laz[2 * i + 1]);
+        compose(laz[2 * i + 0], laz[i]);
+        compose(laz[2 * i + 1], laz[i]);
       }
       laz[i] = ei();
     }
   }
-  void _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i + 1]); }
-  void _apply(int i, const E& x) {
+  inline void _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i + 1]); }
+  inline void _apply(int i, const E& x) {
     if (x != ei()) {
       val[i] = g(val[i], x);
-      if (i < n) laz[i] = h(laz[i], x);
+      if (i < n) compose(laz[i], x);
     }
   }
+  inline void compose(E& a, const E& b) { a = a == ei() ? b : h(a, b); }
 };
 
 namespace SegmentTreeUtil {
@@ -119,6 +120,10 @@ struct Pair {
   Pair() = default;
   Pair(const T& f, const T& s) : first(f), second(s) {}
   operator T() const { return first; }
+  friend ostream& operator<<(ostream& os, const Pair<T>& p) {
+    os << T(p.first);
+    return os;
+  }
 };
 
 template <typename T>
@@ -144,6 +149,10 @@ Pair<T> Psum(Pair<T> a, Pair<T> b) {
 template <typename T>
 Pair<T> Padd(Pair<T> a, T b) {
   return Pair<T>(a.first + a.second * b, a.second);
+}
+template <typename T>
+Pair<T> PUpdate(Pair<T> a, T b) {
+  return Pair<T>(a.second * b, a.second);
 }
 template <typename T>
 Pair<T> Pid() {
@@ -206,10 +215,10 @@ struct UpdateMin_LazySegmentTree
 
 template <typename T, T UNUSED_VALUE>
 struct UpdateSum_LazySegmentTree
-    : LazySegmentTree<Pair<T>, T, Psum<T>, Padd<T>, Update<T>, Pid<T>,
+    : LazySegmentTree<Pair<T>, T, Psum<T>, PUpdate<T>, Update<T>, Pid<T>,
                       Const<T, UNUSED_VALUE>> {
-  using base = LazySegmentTree<Pair<T>, T, Psum<T>, Padd<T>, Update<T>, Pid<T>,
-                               Const<T, UNUSED_VALUE>>;
+  using base = LazySegmentTree<Pair<T>, T, Psum<T>, PUpdate<T>, Update<T>,
+                               Pid<T>, Const<T, UNUSED_VALUE>>;
   UpdateSum_LazySegmentTree(const vector<T>& v) {
     vector<Pair<T>> w(v.size());
     for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i], 1);
