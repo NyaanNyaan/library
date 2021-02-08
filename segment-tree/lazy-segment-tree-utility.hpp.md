@@ -34,6 +34,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\
+      \u30E1\u30F3\u30C8\u6728"
     links: []
   bundledCode: "#line 2 \"segment-tree/lazy-segment-tree-utility.hpp\"\n\ntemplate\
     \ <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n       \
@@ -117,7 +119,9 @@ data:
     \ 1);\n    base::init(w);\n  }\n};\n\n}  // namespace SegmentTreeUtil\nusing SegmentTreeUtil::AddMax_LazySegmentTree;\n\
     using SegmentTreeUtil::AddMin_LazySegmentTree;\nusing SegmentTreeUtil::AddSum_LazySegmentTree;\n\
     using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
-    using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n"
+    using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
+    \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
+    \n */\n"
   code: "#pragma once\n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T,\
     \ E), E (*h)(E, E),\n          T (*ti)(), E (*ei)()>\nstruct LazySegmentTree {\n\
     \  int n, log;\n  vector<T> val;\n  vector<E> laz;\n\n  explicit LazySegmentTree()\
@@ -200,12 +204,14 @@ data:
     \ 1);\n    base::init(w);\n  }\n};\n\n}  // namespace SegmentTreeUtil\nusing SegmentTreeUtil::AddMax_LazySegmentTree;\n\
     using SegmentTreeUtil::AddMin_LazySegmentTree;\nusing SegmentTreeUtil::AddSum_LazySegmentTree;\n\
     using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
-    using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n"
+    using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
+    \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
+    \n */\n"
   dependsOn: []
   isVerificationFile: false
   path: segment-tree/lazy-segment-tree-utility.hpp
   requiredBy: []
-  timestamp: '2021-02-08 20:10:42+09:00'
+  timestamp: '2021-02-08 20:51:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
@@ -222,5 +228,6 @@ layout: document
 redirect_from:
 - /library/segment-tree/lazy-segment-tree-utility.hpp
 - /library/segment-tree/lazy-segment-tree-utility.hpp.html
-title: segment-tree/lazy-segment-tree-utility.hpp
+title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\
+  \u30C8\u6728"
 ---

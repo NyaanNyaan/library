@@ -533,7 +533,8 @@ data:
       title: segment-tree/dynamic-segment-tree.hpp
     - icon: ':heavy_check_mark:'
       path: segment-tree/lazy-segment-tree-utility.hpp
-      title: segment-tree/lazy-segment-tree-utility.hpp
+      title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\
+        \u30F3\u30C8\u6728"
     - icon: ':heavy_check_mark:'
       path: segment-tree/lazy-segment-tree.hpp
       title: segment-tree/lazy-segment-tree.hpp
@@ -543,24 +544,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/persistent-segment-tree.hpp
       title: "\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-    - icon: ':warning:'
-      path: segment-tree/range-add-range-max-lazyseg.hpp
-      title: segment-tree/range-add-range-max-lazyseg.hpp
-    - icon: ':warning:'
-      path: segment-tree/range-add-range-min-lazyseg.hpp
-      title: segment-tree/range-add-range-min-lazyseg.hpp
-    - icon: ':warning:'
-      path: segment-tree/range-add-range-sum-lazyseg.hpp
-      title: segment-tree/range-add-range-sum-lazyseg.hpp
-    - icon: ':warning:'
-      path: segment-tree/range-update-range-max-lazyseg.hpp
-      title: segment-tree/range-update-range-max-lazyseg.hpp
-    - icon: ':warning:'
-      path: segment-tree/range-update-range-min-lazyseg.hpp
-      title: segment-tree/range-update-range-min-lazyseg.hpp
-    - icon: ':warning:'
-      path: segment-tree/range-update-range-sum-lazyseg.hpp
-      title: segment-tree/range-update-range-sum-lazyseg.hpp
     - icon: ':warning:'
       path: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
       title: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
