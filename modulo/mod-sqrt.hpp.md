@@ -57,23 +57,23 @@ data:
     \ ArbitraryLazyMontgomeryModInt::r;\ntypename ArbitraryLazyMontgomeryModInt::u32\
     \ ArbitraryLazyMontgomeryModInt::n2;\n#line 3 \"modulo/mod-sqrt.hpp\"\n\nint64_t\
     \ mod_sqrt(const int64_t &a, const int64_t &p) {\n  assert(0 <= a && a < p);\n\
-    \  if (a < 2) return a;\n  using mint = ArbitraryLazyMontgomeryModInt;\n  mint::set_mod(p);\n\
-    \  if (mint(a).pow((p - 1) >> 1) != 1) return -1;\n  mint b = 1, one = 1;\n  while\
+    \  if (a < 2) return a;\n  using Mint = ArbitraryLazyMontgomeryModInt;\n  Mint::set_mod(p);\n\
+    \  if (Mint(a).pow((p - 1) >> 1) != 1) return -1;\n  Mint b = 1, one = 1;\n  while\
     \ (b.pow((p - 1) >> 1) == 1) b += one;\n  int64_t m = p - 1, e = 0;\n  while (m\
-    \ % 2 == 0) m >>= 1, e += 1;\n  mint x = mint(a).pow((m - 1) >> 1);\n  mint y\
-    \ = mint(a) * x * x;\n  x *= a;\n  mint z = mint(b).pow(m);\n  while (y != 1)\
-    \ {\n    int64_t j = 0;\n    mint t = y;\n    while (t != one) {\n      j += 1;\n\
+    \ % 2 == 0) m >>= 1, e += 1;\n  Mint x = Mint(a).pow((m - 1) >> 1);\n  Mint y\
+    \ = Mint(a) * x * x;\n  x *= a;\n  Mint z = Mint(b).pow(m);\n  while (y != 1)\
+    \ {\n    int64_t j = 0;\n    Mint t = y;\n    while (t != one) {\n      j += 1;\n\
     \      t *= t;\n    }\n    z = z.pow(int64_t(1) << (e - j - 1));\n    x *= z;\n\
     \    z *= z;\n    y *= z;\n    e = j;\n  }\n  return x.get();\n}\n\n/**\n * @brief\
     \ mod sqrt(Tonelli-Shanks algorithm)\n * @docs docs/modulo/mod-sqrt.md\n */\n"
   code: "#pragma once\n#include \"../modint/arbitrary-prime-modint.hpp\"\n\nint64_t\
     \ mod_sqrt(const int64_t &a, const int64_t &p) {\n  assert(0 <= a && a < p);\n\
-    \  if (a < 2) return a;\n  using mint = ArbitraryLazyMontgomeryModInt;\n  mint::set_mod(p);\n\
-    \  if (mint(a).pow((p - 1) >> 1) != 1) return -1;\n  mint b = 1, one = 1;\n  while\
+    \  if (a < 2) return a;\n  using Mint = ArbitraryLazyMontgomeryModInt;\n  Mint::set_mod(p);\n\
+    \  if (Mint(a).pow((p - 1) >> 1) != 1) return -1;\n  Mint b = 1, one = 1;\n  while\
     \ (b.pow((p - 1) >> 1) == 1) b += one;\n  int64_t m = p - 1, e = 0;\n  while (m\
-    \ % 2 == 0) m >>= 1, e += 1;\n  mint x = mint(a).pow((m - 1) >> 1);\n  mint y\
-    \ = mint(a) * x * x;\n  x *= a;\n  mint z = mint(b).pow(m);\n  while (y != 1)\
-    \ {\n    int64_t j = 0;\n    mint t = y;\n    while (t != one) {\n      j += 1;\n\
+    \ % 2 == 0) m >>= 1, e += 1;\n  Mint x = Mint(a).pow((m - 1) >> 1);\n  Mint y\
+    \ = Mint(a) * x * x;\n  x *= a;\n  Mint z = Mint(b).pow(m);\n  while (y != 1)\
+    \ {\n    int64_t j = 0;\n    Mint t = y;\n    while (t != one) {\n      j += 1;\n\
     \      t *= t;\n    }\n    z = z.pow(int64_t(1) << (e - j - 1));\n    x *= z;\n\
     \    z *= z;\n    y *= z;\n    e = j;\n  }\n  return x.get();\n}\n\n/**\n * @brief\
     \ mod sqrt(Tonelli-Shanks algorithm)\n * @docs docs/modulo/mod-sqrt.md\n */\n"
@@ -83,7 +83,7 @@ data:
   path: modulo/mod-sqrt.hpp
   requiredBy:
   - fps/fps-sqrt.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-02-08 19:11:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp

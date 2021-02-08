@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp
-    title: verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segment-tree/range-add-range-max-lazyseg.hpp\"\n\n\n\ntemplate\
@@ -68,9 +65,8 @@ data:
   path: segment-tree/range-add-range-max-lazyseg.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: segment-tree/range-add-range-max-lazyseg.hpp
 layout: document
 redirect_from:

@@ -16,9 +16,6 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-    title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -119,7 +116,6 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
 documentation_of: segment-tree/segment-tree.hpp
 layout: document

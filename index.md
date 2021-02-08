@@ -531,6 +531,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/dynamic-segment-tree.hpp
       title: segment-tree/dynamic-segment-tree.hpp
+    - icon: ':question:'
+      path: segment-tree/lazy-segment-tree-utility.hpp
+      title: segment-tree/lazy-segment-tree-utility.hpp
     - icon: ':heavy_check_mark:'
       path: segment-tree/lazy-segment-tree.hpp
       title: segment-tree/lazy-segment-tree.hpp
@@ -540,22 +543,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/persistent-segment-tree.hpp
       title: "\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: segment-tree/range-add-range-max-lazyseg.hpp
       title: segment-tree/range-add-range-max-lazyseg.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: segment-tree/range-add-range-min-lazyseg.hpp
       title: segment-tree/range-add-range-min-lazyseg.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: segment-tree/range-add-range-sum-lazyseg.hpp
       title: segment-tree/range-add-range-sum-lazyseg.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: segment-tree/range-update-range-max-lazyseg.hpp
       title: segment-tree/range-update-range-max-lazyseg.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: segment-tree/range-update-range-min-lazyseg.hpp
       title: segment-tree/range-update-range-min-lazyseg.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: segment-tree/range-update-range-sum-lazyseg.hpp
       title: segment-tree/range-update-range-sum-lazyseg.hpp
     - icon: ':warning:'
@@ -657,22 +660,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -765,7 +768,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -774,10 +777,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp
     - icon: ':heavy_check_mark:'
@@ -792,7 +795,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
     - icon: ':heavy_check_mark:'

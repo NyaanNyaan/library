@@ -4,28 +4,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
-    path: segment-tree/range-add-range-sum-lazyseg.hpp
-    title: segment-tree/range-add-range-sum-lazyseg.hpp
-  - icon: ':heavy_check_mark:'
-    path: segment-tree/segment-tree.hpp
-    title: segment-tree/segment-tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: segment-tree/lazy-segment-tree-utility.hpp
+    title: segment-tree/lazy-segment-tree-utility.hpp
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -188,66 +185,86 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"segment-tree/range-add-range-sum-lazyseg.hpp\"\n\n\n\ntemplate <typename\
-    \ E>\nstruct AddSum_LazySegmentTree {\n  int n, height;\n  using T = pair<E, E>;\n\
-    \  T f(T a, T b) { return T(a.first + b.first, a.second + b.second); };\n  T g(T\
-    \ a, E b) { return T(a.first + b * a.second, a.second); };\n  E h(E a, E b) {\
-    \ return a + b; };\n  T ti = T(0, 0);\n  E ei = 0;\n  vector<T> dat;\n  vector<E>\
-    \ laz;\n\n  AddSum_LazySegmentTree(const vector<E> &v) { build(v); }\n\n  void\
-    \ init(int n_) {\n    n = 1;\n    height = 0;\n    while (n < n_) n <<= 1, height++;\n\
-    \    dat.assign(2 * n, ti);\n    laz.assign(2 * n, ei);\n  }\n\n  void build(const\
-    \ vector<E> &v) {\n    int n_ = v.size();\n    init(n_);\n    for (int i = 0;\
-    \ i < n_; i++) dat[n + i] = T(v[i], 1);\n    for (int i = n - 1; i; i--)\n   \
-    \   dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);\n  }\n\n  inline T reflect(int\
-    \ k) { return laz[k] == ei ? dat[k] : g(dat[k], laz[k]); }\n\n  inline void propagate(int\
-    \ k) {\n    if (laz[k] == ei) return;\n    laz[(k << 1) | 0] = h(laz[(k << 1)\
-    \ | 0], laz[k]);\n    laz[(k << 1) | 1] = h(laz[(k << 1) | 1], laz[k]);\n    dat[k]\
-    \ = reflect(k);\n    laz[k] = ei;\n  }\n\n  inline void thrust(int k) {\n    for\
-    \ (int i = height; i; i--) propagate(k >> i);\n  }\n\n  inline void recalc(int\
-    \ k) {\n    while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1)\
-    \ | 1));\n  }\n\n  void update(int a, int b, E x) {\n    if (a >= b) return;\n\
-    \    thrust(a += n);\n    thrust(b += n - 1);\n    for (int l = a, r = b + 1;\
-    \ l < r; l >>= 1, r >>= 1) {\n      if (l & 1) laz[l] = h(laz[l], x), l++;\n \
-    \     if (r & 1) --r, laz[r] = h(laz[r], x);\n    }\n    recalc(a);\n    recalc(b);\n\
-    \  }\n\n  void set_val(int a, T x) {\n    thrust(a += n);\n    dat[a] = x;\n \
-    \   laz[a] = ei;\n    recalc(a);\n  }\n\n  E query(int a, int b) {\n    if (a\
-    \ >= b) return ti.first;\n    thrust(a += n);\n    thrust(b += n - 1);\n    T\
-    \ vl = ti, vr = ti;\n    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {\n\
-    \      if (l & 1) vl = f(vl, reflect(l++));\n      if (r & 1) vr = f(reflect(--r),\
-    \ vr);\n    }\n    return f(vl, vr).first;\n  }\n};\n#line 2 \"segment-tree/segment-tree.hpp\"\
-    \n\n\n\ntemplate <typename T, typename F>\nstruct SegmentTree {\n  int size;\n\
-    \  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree(F _f, const T &I_)\
-    \ : size(0), f(_f), I(I_) {}\n\n  SegmentTree(int N, F _f, const T &I_) : f(_f),\
-    \ I(I_) { init(N); }\n\n  SegmentTree(const vector<T> &v, F _f, T I_) : f(_f),\
-    \ I(I_) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size(); i++) {\n\
-    \      seg[i + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int N) {\n\
-    \    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2 * size, I);\n\
-    \  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void build() {\n  \
-    \  for (int k = size - 1; k > 0; k--) {\n      seg[k] = f(seg[2 * k], seg[2 *\
-    \ k + 1]);\n    }\n  }\n\n  void update(int k, T x) {\n    k += size;\n    seg[k]\
-    \ = x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n\
-    \    }\n  }\n\n  void add(int k, T x) {\n    k += size;\n    seg[k] += x;\n  \
-    \  while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n \
-    \ }\n\n  // query to [a, b)\n  T query(int a, int b) {\n    T L = I, R = I;\n\
-    \    for (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L\
-    \ = f(L, seg[a++]);\n      if (b & 1) R = f(seg[--b], R);\n    }\n    return f(L,\
-    \ R);\n  }\n\n  T &operator[](const int &k) { return seg[k + size]; }\n\n  template\
-    \ <typename C>\n  int find_subtree(int a, const C &check, T &M, bool type) {\n\
-    \    while (a < size) {\n      T nxt = type ? f(seg[2 * a + type], M) : f(M, seg[2\
-    \ * a + type]);\n      if (check(nxt))\n        a = 2 * a + type;\n      else\n\
-    \        M = nxt, a = 2 * a + 1 - type;\n    }\n    return a - size;\n  }\n\n\
-    \  template <typename C>\n  int find_first(int a, const C &check) {\n    T L =\
-    \ I;\n    if (a <= 0) {\n      if (check(f(L, seg[1]))) return find_subtree(1,\
-    \ check, L, false);\n      return -1;\n    }\n    int b = size;\n    for (a +=\
-    \ size, b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) {\n        T nxt\
-    \ = f(L, seg[a]);\n        if (check(nxt)) return find_subtree(a, check, L, false);\n\
-    \        L = nxt;\n        ++a;\n      }\n    }\n    return -1;\n  }\n\n  template\
-    \ <typename C>\n  int find_last(int b, const C &check) {\n    T R = I;\n    if\
-    \ (b >= size) {\n      if (check(f(seg[1], R))) return find_subtree(1, check,\
-    \ R, true);\n      return -1;\n    }\n    int a = size;\n    for (b += size; a\
-    \ < b; a >>= 1, b >>= 1) {\n      if (b & 1) {\n        T nxt = f(seg[--b], R);\n\
-    \        if (check(nxt)) return find_subtree(b, check, R, true);\n        R =\
-    \ nxt;\n      }\n    }\n    return -1;\n  }\n};\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
+    \ 5 \"verify/verify-aoj-grl/aoj-grl-5-e.test.cpp\"\n//\n#line 2 \"segment-tree/lazy-segment-tree-utility.hpp\"\
+    \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
+    \          T (*ti)(), E (*ei)()>\nstruct LazySegmentTree {\n  int n, log;\n  vector<T>\
+    \ val;\n  vector<E> laz;\n\n  explicit LazySegmentTree() {}\n  explicit LazySegmentTree(const\
+    \ vector<T>& vc) { init(vc); }\n\n  void init(const vector<T>& vc) {\n    n =\
+    \ 1, log = 0;\n    while (n < (int)vc.size()) n <<= 1, log++;\n    val.resize(2\
+    \ * n, ti());\n    laz.resize(n, ei());\n    for (int i = 0; i < (int)vc.size();\
+    \ ++i) val[i + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n  }\n\
+    \n  void update(int l, int r, const E& x) {\n    if (l == r) return;\n    l +=\
+    \ n, r += n;\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i)\
+    \ != l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n\
+    \    }\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l\
+    \ & 1) _apply(l++, x);\n        if (r & 1) _apply(--r, x);\n        l >>= 1;\n\
+    \        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n    }\n    for (int\
+    \ i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l) _update(l >> i);\n\
+    \      if (((r >> i) << i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int\
+    \ l, int r) {\n    if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(),\
+    \ R = ti();\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) !=\
+    \ l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n  \
+    \  }\n    while (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r &\
+    \ 1) R = f(val[--r], R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L,\
+    \ R);\n  }\n\n  void set_val(int k, const T& x) {\n    k += n;\n    for (int i\
+    \ = log; i >= 1; i--) {\n      if (((k >> i) << i) != k) _push(k >> i);\n    }\n\
+    \    val[k] = x;\n    for (int i = 1; i <= log; i++) {\n      if (((k >> i) <<\
+    \ i) != k) _update(k >> i);\n    }\n  }\n\n  void update_val(int k, const E& x)\
+    \ {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k >> i) <<\
+    \ i) != k) _push(k >> i);\n    }\n    val[k] = g(val[k], x);\n    for (int i =\
+    \ 1; i <= log; i++) {\n      if (((k >> i) << i) != k) _update(k >> i);\n    }\n\
+    \  }\n\n  T get_val(int k) {\n    k += n;\n    for (int i = log; i >= 1; i--)\
+    \ {\n      if (((k >> i) << i) != k) _push(k >> i);\n    }\n    return val[k];\n\
+    \  }\n\n private:\n  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2\
+    \ * i + 0] = g(val[2 * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i +\
+    \ 1], laz[i]);\n      if (2 * i < n) {\n        laz[2 * i + 0] = h(laz[i], laz[2\
+    \ * i + 0]);\n        laz[2 * i + 1] = h(laz[i], laz[2 * i + 1]);\n      }\n \
+    \     laz[i] = ei();\n    }\n  }\n  void _update(int i) { val[i] = f(val[2 * i\
+    \ + 0], val[2 * i + 1]); }\n  void _apply(int i, const E& x) {\n    if (x != ei())\
+    \ {\n      val[i] = g(val[i], x);\n      if (i < n) laz[i] = h(laz[i], x);\n \
+    \   }\n  }\n};\n\nnamespace SegmentTreeUtil {\n\ntemplate <typename T>\nstruct\
+    \ Pair {\n  T first, second;\n  Pair() = default;\n  Pair(const T& f, const T&\
+    \ s) : first(f), second(s) {}\n  operator T() const { return first; }\n};\n\n\
+    template <typename T>\nT Max(T a, T b) {\n  return max(a, b);\n}\ntemplate <typename\
+    \ T>\nT Min(T a, T b) {\n  return min(a, b);\n}\ntemplate <typename T>\nT Update(T,\
+    \ T b) {\n  return b;\n}\ntemplate <typename T>\nT Add(T a, T b) {\n  return a\
+    \ + b;\n}\ntemplate <typename T>\nPair<T> Psum(Pair<T> a, Pair<T> b) {\n  return\
+    \ Pair<T>(a.first + b.first, a.second + b.second);\n}\ntemplate <typename T>\n\
+    Pair<T> Padd(Pair<T> a, T b) {\n  return Pair<T>(a.first + a.second * b, a.second);\n\
+    }\ntemplate <typename T>\nPair<T> Pid() {\n  return Pair<T>(0, 0);\n}\ntemplate\
+    \ <typename T>\nT Zero() {\n  return T(0);\n}\ntemplate <typename T, T val>\n\
+    T Const() {\n  return val;\n}\n\ntemplate <typename T, T MINF>\nstruct AddMax_LazySegmentTree\n\
+    \    : LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>>\
+    \ {\n  using base =\n      LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>, Const<T,\
+    \ MINF>, Zero<T>>;\n  AddMax_LazySegmentTree(const vector<T>& v) : base(v) {}\n\
+    };\n\ntemplate <typename T, T INF>\nstruct AddMin_LazySegmentTree\n    : LazySegmentTree<T,\
+    \ T, Min<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>> {\n  using base =\n     \
+    \ LazySegmentTree<T, T, Min<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>>;\n  AddMin_LazySegmentTree(const\
+    \ vector<T>& v) : base(v) {}\n};\n\ntemplate <typename T>\nstruct AddSum_LazySegmentTree\n\
+    \    : LazySegmentTree<Pair<T>, T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>>\
+    \ {\n  using base =\n      LazySegmentTree<Pair<T>, T, Psum<T>, Padd<T>, Add<T>,\
+    \ Pid<T>, Zero<T>>;\n  AddSum_LazySegmentTree(const vector<T>& v) {\n    vector<Pair<T>>\
+    \ w(v.size());\n    for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i],\
+    \ 1);\n    base::init(w);\n  }\n};\n\ntemplate <typename T, T MINF>\nstruct UpdateMax_LazySegmentTree\n\
+    \    : LazySegmentTree<T, T, Max<T>, Update<T>, Update<T>, Const<T, MINF>,\n \
+    \                     Const<T, MINF>> {\n  using base = LazySegmentTree<T, T,\
+    \ Max<T>, Update<T>, Update<T>,\n                               Const<T, MINF>,\
+    \ Const<T, MINF>>;\n  UpdateMax_LazySegmentTree(const vector<T>& v) : base(v)\
+    \ {}\n};\n\ntemplate <typename T, T INF>\nstruct UpdateMin_LazySegmentTree\n \
+    \   : LazySegmentTree<T, T, Min<T>, Update<T>, Update<T>, Const<T, INF>,\n   \
+    \                   Const<T, INF>> {\n  using base = LazySegmentTree<T, T, Min<T>,\
+    \ Update<T>, Update<T>,\n                               Const<T, INF>, Const<T,\
+    \ INF>>;\n  UpdateMin_LazySegmentTree(const vector<T>& v) : base(v) {}\n};\n\n\
+    template <typename T, T UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree\n    :\
+    \ LazySegmentTree<Pair<T>, T, Psum<T>, Padd<T>, Update<T>, Pid<T>,\n         \
+    \             Const<T, UNUSED_VALUE>> {\n  using base = LazySegmentTree<Pair<T>,\
+    \ T, Psum<T>, Padd<T>, Update<T>, Pid<T>,\n                               Const<T,\
+    \ UNUSED_VALUE>>;\n  UpdateSum_LazySegmentTree(const vector<T>& v) {\n    vector<Pair<T>>\
+    \ w(v.size());\n    for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i],\
+    \ 1);\n    base::init(w);\n  }\n};\n\n}  // namespace SegmentTreeUtil\nusing SegmentTreeUtil::AddMax_LazySegmentTree;\n\
+    using SegmentTreeUtil::AddMin_LazySegmentTree;\nusing SegmentTreeUtil::AddSum_LazySegmentTree;\n\
+    using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
+    using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
     \n\n\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct\
     \ edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
     \ cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost)\
@@ -314,25 +331,25 @@ data:
     \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
     \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
-    \ 8 \"verify/verify-aoj-grl/aoj-grl-5-e.test.cpp\"\n\nusing namespace Nyaan; void\
-    \ Nyaan::solve() {\n  ini(N);\n  vvi g(N);\n  rep(i, N) {\n    ini(n);\n    g[i].resize(n);\n\
-    \    in(g[i]);\n  }\n\n  HeavyLightDecomposition<vvi> hld(g);\n  AddSum_LazySegmentTree<ll>\
-    \ seg(vl(N, 0));\n  ll W = 0;\n  auto add = [&](int u, int v) { seg.update(u,\
-    \ v, W); };\n  ll ans = 0;\n  auto query = [&](int u, int v) { ans += seg.query(u,\
-    \ v); };\n\n  ini(Q);\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      inl(v,\
-    \ w);\n      W = w;\n      hld.path_query(0, v, false, add);\n    } else {\n \
-    \     ini(v);\n      ans = 0;\n      hld.path_query(0, v, false, query);\n   \
-    \   out(ans);\n    }\n  }\n}\n"
+    \ 8 \"verify/verify-aoj-grl/aoj-grl-5-e.test.cpp\"\n\nusing namespace Nyaan;\n\
+    void Nyaan::solve() {\n  ini(N);\n  vvi g(N);\n  rep(i, N) {\n    ini(n);\n  \
+    \  g[i].resize(n);\n    in(g[i]);\n  }\n\n  HeavyLightDecomposition<vvi> hld(g);\n\
+    \  AddSum_LazySegmentTree<ll> seg(vl(N, 0));\n  ll W = 0;\n  auto add = [&](int\
+    \ u, int v) { seg.update(u, v, W); };\n  ll ans = 0;\n  auto query = [&](int u,\
+    \ int v) { ans += seg.query(u, v); };\n\n  ini(Q);\n  rep(_, Q) {\n    ini(c);\n\
+    \    if (c == 0) {\n      inl(v, w);\n      W = w;\n      hld.path_query(0, v,\
+    \ false, add);\n    } else {\n      ini(v);\n      ans = 0;\n      hld.path_query(0,\
+    \ v, false, query);\n      out(ans);\n    }\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../segment-tree/range-add-range-sum-lazyseg.hpp\"\
-    \n#include \"../../segment-tree/segment-tree.hpp\"\n#include \"../../tree/heavy-light-decomposition.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  vvi g(N);\n  rep(i,\
-    \ N) {\n    ini(n);\n    g[i].resize(n);\n    in(g[i]);\n  }\n\n  HeavyLightDecomposition<vvi>\
-    \ hld(g);\n  AddSum_LazySegmentTree<ll> seg(vl(N, 0));\n  ll W = 0;\n  auto add\
-    \ = [&](int u, int v) { seg.update(u, v, W); };\n  ll ans = 0;\n  auto query =\
-    \ [&](int u, int v) { ans += seg.query(u, v); };\n\n  ini(Q);\n  rep(_, Q) {\n\
-    \    ini(c);\n    if (c == 0) {\n      inl(v, w);\n      W = w;\n      hld.path_query(0,\
-    \ v, false, add);\n    } else {\n      ini(v);\n      ans = 0;\n      hld.path_query(0,\
+    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/lazy-segment-tree-utility.hpp\"\
+    \n#include \"../../tree/heavy-light-decomposition.hpp\"\n\nusing namespace Nyaan;\n\
+    void Nyaan::solve() {\n  ini(N);\n  vvi g(N);\n  rep(i, N) {\n    ini(n);\n  \
+    \  g[i].resize(n);\n    in(g[i]);\n  }\n\n  HeavyLightDecomposition<vvi> hld(g);\n\
+    \  AddSum_LazySegmentTree<ll> seg(vl(N, 0));\n  ll W = 0;\n  auto add = [&](int\
+    \ u, int v) { seg.update(u, v, W); };\n  ll ans = 0;\n  auto query = [&](int u,\
+    \ int v) { ans += seg.query(u, v); };\n\n  ini(Q);\n  rep(_, Q) {\n    ini(c);\n\
+    \    if (c == 0) {\n      inl(v, w);\n      W = w;\n      hld.path_query(0, v,\
+    \ false, add);\n    } else {\n      ini(v);\n      ans = 0;\n      hld.path_query(0,\
     \ v, false, query);\n      out(ans);\n    }\n  }\n}"
   dependsOn:
   - template/template.hpp
@@ -341,14 +358,13 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - segment-tree/range-add-range-sum-lazyseg.hpp
-  - segment-tree/segment-tree.hpp
+  - segment-tree/lazy-segment-tree-utility.hpp
   - tree/heavy-light-decomposition.hpp
   - graph/graph-template.hpp
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-02-08 19:11:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
