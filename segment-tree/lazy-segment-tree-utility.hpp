@@ -233,3 +233,7 @@ using SegmentTreeUtil::AddSum_LazySegmentTree;
 using SegmentTreeUtil::UpdateMax_LazySegmentTree;
 using SegmentTreeUtil::UpdateMin_LazySegmentTree;
 using SegmentTreeUtil::UpdateSum_LazySegmentTree;
+
+/**
+ * @brief 使用頻度の高い遅延セグメント木
+ */

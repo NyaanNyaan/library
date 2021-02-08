@@ -1,20 +1,18 @@
 #pragma once
 
-
-
-template <typename E, E MINF>
-struct AddMax_LazySegmentTree {
+template <typename E, E INF>
+struct AddMin_LazySegmentTree {
   int n, height;
   using T = E;
-  T f(T a, T b) { return max(a, b); };
+  T f(T a, T b) { return min(a, b); };
   T g(T a, E b) { return a + b; };
   E h(E a, E b) { return a + b; };
-  T ti = MINF;
+  T ti = INF;
   E ei = 0;
   vector<T> dat;
   vector<E> laz;
 
-  AddMax_LazySegmentTree(const vector<E> &v) { build(v); }
+  AddMin_LazySegmentTree(const vector<E> &v) { build(v); }
 
   void init(int n_) {
     n = 1;

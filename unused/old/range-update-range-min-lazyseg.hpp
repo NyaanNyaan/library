@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename E, E INF>
 struct UpdateMin_LazySegmentTree {
   int n, height;
