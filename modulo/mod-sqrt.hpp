@@ -4,20 +4,20 @@
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   assert(0 <= a && a < p);
   if (a < 2) return a;
-  using mint = ArbitraryLazyMontgomeryModInt;
-  mint::set_mod(p);
-  if (mint(a).pow((p - 1) >> 1) != 1) return -1;
-  mint b = 1, one = 1;
+  using Mint = ArbitraryLazyMontgomeryModInt;
+  Mint::set_mod(p);
+  if (Mint(a).pow((p - 1) >> 1) != 1) return -1;
+  Mint b = 1, one = 1;
   while (b.pow((p - 1) >> 1) == 1) b += one;
   int64_t m = p - 1, e = 0;
   while (m % 2 == 0) m >>= 1, e += 1;
-  mint x = mint(a).pow((m - 1) >> 1);
-  mint y = mint(a) * x * x;
+  Mint x = Mint(a).pow((m - 1) >> 1);
+  Mint y = Mint(a) * x * x;
   x *= a;
-  mint z = mint(b).pow(m);
+  Mint z = Mint(b).pow(m);
   while (y != 1) {
     int64_t j = 0;
-    mint t = y;
+    Mint t = y;
     while (t != one) {
       j += 1;
       t *= t;

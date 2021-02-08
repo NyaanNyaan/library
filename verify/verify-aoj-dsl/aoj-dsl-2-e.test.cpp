@@ -2,9 +2,11 @@
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E"
 
 #include "../../template/template.hpp"
-#include "../../segment-tree/range-add-range-sum-lazyseg.hpp"
+//
+#include "../../segment-tree/lazy-segment-tree-utility.hpp"
 
-using namespace Nyaan; void Nyaan::solve() {
+using namespace Nyaan;
+void Nyaan::solve() {
   ini(N, Q);
   int I = 0;
   AddSum_LazySegmentTree<int> seg(vi(N, I));

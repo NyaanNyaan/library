@@ -3,7 +3,7 @@
 
 #include "../../template/template.hpp"
 //
-#include "../../segment-tree/range-update-range-sum-lazyseg.hpp"
+#include "../../segment-tree/lazy-segment-tree-utility.hpp"
 
 using namespace Nyaan; 
 void Nyaan::solve() {

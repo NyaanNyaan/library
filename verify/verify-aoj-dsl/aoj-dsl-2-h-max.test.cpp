@@ -2,9 +2,11 @@
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
 
 #include "../../template/template.hpp"
-#include "../../segment-tree/range-add-range-max-lazyseg.hpp"
+//
+#include "../../segment-tree/lazy-segment-tree-utility.hpp"
 
-using namespace Nyaan; void Nyaan::solve() {
+using namespace Nyaan;
+void Nyaan::solve() {
   ini(N, Q);
   AddMax_LazySegmentTree<int, -inf> seg{vi(N)};
   rep(_, Q) {

@@ -2,9 +2,11 @@
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F"
 
 #include "../../template/template.hpp"
-#include "../../segment-tree/range-update-range-max-lazyseg.hpp"
+//
+#include "../../segment-tree/lazy-segment-tree-utility.hpp"
 
-using namespace Nyaan; void Nyaan::solve() {
+using namespace Nyaan;
+void Nyaan::solve() {
   ini(N, Q);
   constexpr int I = (1LL << 31) - 1;
   UpdateMax_LazySegmentTree<int, -I> seg(vi(N, -I));
