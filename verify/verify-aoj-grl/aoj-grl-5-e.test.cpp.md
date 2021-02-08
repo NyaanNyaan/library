@@ -4,25 +4,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/lazy-segment-tree-utility.hpp
     title: segment-tree/lazy-segment-tree-utility.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -217,48 +217,51 @@ data:
     \ {\n      if (((k >> i) << i) != k) _push(k >> i);\n    }\n    return val[k];\n\
     \  }\n\n private:\n  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2\
     \ * i + 0] = g(val[2 * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i +\
-    \ 1], laz[i]);\n      if (2 * i < n) {\n        laz[2 * i + 0] = h(laz[i], laz[2\
-    \ * i + 0]);\n        laz[2 * i + 1] = h(laz[i], laz[2 * i + 1]);\n      }\n \
-    \     laz[i] = ei();\n    }\n  }\n  void _update(int i) { val[i] = f(val[2 * i\
-    \ + 0], val[2 * i + 1]); }\n  void _apply(int i, const E& x) {\n    if (x != ei())\
-    \ {\n      val[i] = g(val[i], x);\n      if (i < n) laz[i] = h(laz[i], x);\n \
-    \   }\n  }\n};\n\nnamespace SegmentTreeUtil {\n\ntemplate <typename T>\nstruct\
-    \ Pair {\n  T first, second;\n  Pair() = default;\n  Pair(const T& f, const T&\
-    \ s) : first(f), second(s) {}\n  operator T() const { return first; }\n};\n\n\
+    \ 1], laz[i]);\n      if (2 * i < n) {\n        compose(laz[2 * i + 0], laz[i]);\n\
+    \        compose(laz[2 * i + 1], laz[i]);\n      }\n      laz[i] = ei();\n   \
+    \ }\n  }\n  inline void _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i\
+    \ + 1]); }\n  inline void _apply(int i, const E& x) {\n    if (x != ei()) {\n\
+    \      val[i] = g(val[i], x);\n      if (i < n) compose(laz[i], x);\n    }\n \
+    \ }\n  inline void compose(E& a, const E& b) { a = a == ei() ? b : h(a, b); }\n\
+    };\n\nnamespace SegmentTreeUtil {\n\ntemplate <typename T>\nstruct Pair {\n  T\
+    \ first, second;\n  Pair() = default;\n  Pair(const T& f, const T& s) : first(f),\
+    \ second(s) {}\n  operator T() const { return first; }\n  friend ostream& operator<<(ostream&\
+    \ os, const Pair<T>& p) {\n    os << T(p.first);\n    return os;\n  }\n};\n\n\
     template <typename T>\nT Max(T a, T b) {\n  return max(a, b);\n}\ntemplate <typename\
     \ T>\nT Min(T a, T b) {\n  return min(a, b);\n}\ntemplate <typename T>\nT Update(T,\
     \ T b) {\n  return b;\n}\ntemplate <typename T>\nT Add(T a, T b) {\n  return a\
     \ + b;\n}\ntemplate <typename T>\nPair<T> Psum(Pair<T> a, Pair<T> b) {\n  return\
     \ Pair<T>(a.first + b.first, a.second + b.second);\n}\ntemplate <typename T>\n\
     Pair<T> Padd(Pair<T> a, T b) {\n  return Pair<T>(a.first + a.second * b, a.second);\n\
-    }\ntemplate <typename T>\nPair<T> Pid() {\n  return Pair<T>(0, 0);\n}\ntemplate\
-    \ <typename T>\nT Zero() {\n  return T(0);\n}\ntemplate <typename T, T val>\n\
-    T Const() {\n  return val;\n}\n\ntemplate <typename T, T MINF>\nstruct AddMax_LazySegmentTree\n\
-    \    : LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>>\
-    \ {\n  using base =\n      LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>, Const<T,\
-    \ MINF>, Zero<T>>;\n  AddMax_LazySegmentTree(const vector<T>& v) : base(v) {}\n\
-    };\n\ntemplate <typename T, T INF>\nstruct AddMin_LazySegmentTree\n    : LazySegmentTree<T,\
-    \ T, Min<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>> {\n  using base =\n     \
-    \ LazySegmentTree<T, T, Min<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>>;\n  AddMin_LazySegmentTree(const\
-    \ vector<T>& v) : base(v) {}\n};\n\ntemplate <typename T>\nstruct AddSum_LazySegmentTree\n\
-    \    : LazySegmentTree<Pair<T>, T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>>\
-    \ {\n  using base =\n      LazySegmentTree<Pair<T>, T, Psum<T>, Padd<T>, Add<T>,\
-    \ Pid<T>, Zero<T>>;\n  AddSum_LazySegmentTree(const vector<T>& v) {\n    vector<Pair<T>>\
-    \ w(v.size());\n    for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i],\
-    \ 1);\n    base::init(w);\n  }\n};\n\ntemplate <typename T, T MINF>\nstruct UpdateMax_LazySegmentTree\n\
-    \    : LazySegmentTree<T, T, Max<T>, Update<T>, Update<T>, Const<T, MINF>,\n \
-    \                     Const<T, MINF>> {\n  using base = LazySegmentTree<T, T,\
-    \ Max<T>, Update<T>, Update<T>,\n                               Const<T, MINF>,\
-    \ Const<T, MINF>>;\n  UpdateMax_LazySegmentTree(const vector<T>& v) : base(v)\
-    \ {}\n};\n\ntemplate <typename T, T INF>\nstruct UpdateMin_LazySegmentTree\n \
-    \   : LazySegmentTree<T, T, Min<T>, Update<T>, Update<T>, Const<T, INF>,\n   \
-    \                   Const<T, INF>> {\n  using base = LazySegmentTree<T, T, Min<T>,\
+    }\ntemplate <typename T>\nPair<T> PUpdate(Pair<T> a, T b) {\n  return Pair<T>(a.second\
+    \ * b, a.second);\n}\ntemplate <typename T>\nPair<T> Pid() {\n  return Pair<T>(0,\
+    \ 0);\n}\ntemplate <typename T>\nT Zero() {\n  return T(0);\n}\ntemplate <typename\
+    \ T, T val>\nT Const() {\n  return val;\n}\n\ntemplate <typename T, T MINF>\n\
+    struct AddMax_LazySegmentTree\n    : LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>,\
+    \ Const<T, MINF>, Zero<T>> {\n  using base =\n      LazySegmentTree<T, T, Max<T>,\
+    \ Add<T>, Add<T>, Const<T, MINF>, Zero<T>>;\n  AddMax_LazySegmentTree(const vector<T>&\
+    \ v) : base(v) {}\n};\n\ntemplate <typename T, T INF>\nstruct AddMin_LazySegmentTree\n\
+    \    : LazySegmentTree<T, T, Min<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>> {\n\
+    \  using base =\n      LazySegmentTree<T, T, Min<T>, Add<T>, Add<T>, Const<T,\
+    \ INF>, Zero<T>>;\n  AddMin_LazySegmentTree(const vector<T>& v) : base(v) {}\n\
+    };\n\ntemplate <typename T>\nstruct AddSum_LazySegmentTree\n    : LazySegmentTree<Pair<T>,\
+    \ T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>> {\n  using base =\n      LazySegmentTree<Pair<T>,\
+    \ T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>>;\n  AddSum_LazySegmentTree(const\
+    \ vector<T>& v) {\n    vector<Pair<T>> w(v.size());\n    for (int i = 0; i < (int)v.size();\
+    \ i++) w[i] = Pair<T>(v[i], 1);\n    base::init(w);\n  }\n};\n\ntemplate <typename\
+    \ T, T MINF>\nstruct UpdateMax_LazySegmentTree\n    : LazySegmentTree<T, T, Max<T>,\
+    \ Update<T>, Update<T>, Const<T, MINF>,\n                      Const<T, MINF>>\
+    \ {\n  using base = LazySegmentTree<T, T, Max<T>, Update<T>, Update<T>,\n    \
+    \                           Const<T, MINF>, Const<T, MINF>>;\n  UpdateMax_LazySegmentTree(const\
+    \ vector<T>& v) : base(v) {}\n};\n\ntemplate <typename T, T INF>\nstruct UpdateMin_LazySegmentTree\n\
+    \    : LazySegmentTree<T, T, Min<T>, Update<T>, Update<T>, Const<T, INF>,\n  \
+    \                    Const<T, INF>> {\n  using base = LazySegmentTree<T, T, Min<T>,\
     \ Update<T>, Update<T>,\n                               Const<T, INF>, Const<T,\
     \ INF>>;\n  UpdateMin_LazySegmentTree(const vector<T>& v) : base(v) {}\n};\n\n\
     template <typename T, T UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree\n    :\
-    \ LazySegmentTree<Pair<T>, T, Psum<T>, Padd<T>, Update<T>, Pid<T>,\n         \
-    \             Const<T, UNUSED_VALUE>> {\n  using base = LazySegmentTree<Pair<T>,\
-    \ T, Psum<T>, Padd<T>, Update<T>, Pid<T>,\n                               Const<T,\
+    \ LazySegmentTree<Pair<T>, T, Psum<T>, PUpdate<T>, Update<T>, Pid<T>,\n      \
+    \                Const<T, UNUSED_VALUE>> {\n  using base = LazySegmentTree<Pair<T>,\
+    \ T, Psum<T>, PUpdate<T>, Update<T>,\n                               Pid<T>, Const<T,\
     \ UNUSED_VALUE>>;\n  UpdateSum_LazySegmentTree(const vector<T>& v) {\n    vector<Pair<T>>\
     \ w(v.size());\n    for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i],\
     \ 1);\n    base::init(w);\n  }\n};\n\n}  // namespace SegmentTreeUtil\nusing SegmentTreeUtil::AddMax_LazySegmentTree;\n\
@@ -364,7 +367,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   requiredBy: []
-  timestamp: '2021-02-08 19:11:31+09:00'
+  timestamp: '2021-02-08 20:10:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
