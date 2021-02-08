@@ -30,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -222,6 +225,7 @@ data:
   - verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+  - verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
 documentation_of: segment-tree/lazy-segment-tree-utility.hpp
 layout: document

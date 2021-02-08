@@ -295,6 +295,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -935,6 +938,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp

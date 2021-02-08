@@ -145,6 +145,8 @@ TODO: 森が与えられた時と辺クエリのverifyを書いていないの�
 
 備忘録
 
+- <span style="font-size: 200%; color: red;">アーベル環を載せたパスクエリは$[\mathrm{down}(i)+1,\mathrm{down}(j)+1)$に$\mathrm{lca}(i,j)$を加えたもの！</span>
+
 - LCAを求めるときとパスクエリで記録する値が違う
   - LCAの時は原義のオイラーツアー(たぶん)
   - パスクエリは入る時と出る時を記録
