@@ -6,7 +6,7 @@ data:
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree-beats.hpp
-    title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats
+    title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats!
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -249,7 +249,7 @@ data:
     \    if constexpr (cmd == 1) lx = min(lx, rx);\n    if constexpr (cmd == 2) lx\
     \ = max(lx, rx);\n    if constexpr (cmd == 3) lx += rx;\n    return lx;\n  }\n\
     };\n\n/**\n * @brief Range Chmin Chmax Add Update Range Min Max Sum Segment Tree\
-    \ Beats\n * @docs docs/segment-tree/segment-tree-beats.md\n */\n#line 2 \"misc/fastio.hpp\"\
+    \ Beats!\n * @docs docs/segment-tree/segment-tree-beats.md\n */\n#line 2 \"misc/fastio.hpp\"\
     \n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
     \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
     \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
@@ -311,7 +311,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 18:56:17+09:00'
+  timestamp: '2021-02-10 23:32:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp

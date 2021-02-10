@@ -14,7 +14,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/segment-tree/segment-tree-beats-abstract.md
-    document_title: "\u62BD\u8C61\u5316Segment Tree Beats"
+    document_title: "\u62BD\u8C61\u5316Segment Tree Beats!"
     links: []
   bundledCode: "#line 2 \"segment-tree/segment-tree-beats-abstract.hpp\"\n\ntemplate\
     \ <typename Node>\nstruct Beats {\n  int n, log;\n  vector<Node> v;\n\n  template\
@@ -39,7 +39,7 @@ data:
     \ v[2 * i + 1]); }\n  template <typename T>\n  void _apply(int i, T x) {\n   \
     \ bool res = v[i].apply(x);\n    if (i < n && res == false) {\n      _push(i);\n\
     \      _apply(i * 2 + 0, x);\n      _apply(i * 2 + 1, x);\n      _update(i);\n\
-    \    }\n  }\n};\n\n/**\n * @brief \u62BD\u8C61\u5316Segment Tree Beats\n * @docs\
+    \    }\n  }\n};\n\n/**\n * @brief \u62BD\u8C61\u5316Segment Tree Beats!\n * @docs\
     \ docs/segment-tree/segment-tree-beats-abstract.md\n */\n"
   code: "#pragma once\n\ntemplate <typename Node>\nstruct Beats {\n  int n, log;\n\
     \  vector<Node> v;\n\n  template <typename T>\n  Beats(vector<T>& vc) {\n    n\
@@ -63,13 +63,13 @@ data:
     \ v[2 * i + 1]); }\n  template <typename T>\n  void _apply(int i, T x) {\n   \
     \ bool res = v[i].apply(x);\n    if (i < n && res == false) {\n      _push(i);\n\
     \      _apply(i * 2 + 0, x);\n      _apply(i * 2 + 1, x);\n      _update(i);\n\
-    \    }\n  }\n};\n\n/**\n * @brief \u62BD\u8C61\u5316Segment Tree Beats\n * @docs\
+    \    }\n  }\n};\n\n/**\n * @brief \u62BD\u8C61\u5316Segment Tree Beats!\n * @docs\
     \ docs/segment-tree/segment-tree-beats-abstract.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: segment-tree/segment-tree-beats-abstract.hpp
   requiredBy: []
-  timestamp: '2021-02-02 18:02:32+09:00'
+  timestamp: '2021-02-10 23:32:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0879.test.cpp
@@ -79,7 +79,7 @@ layout: document
 redirect_from:
 - /library/segment-tree/segment-tree-beats-abstract.hpp
 - /library/segment-tree/segment-tree-beats-abstract.hpp.html
-title: "\u62BD\u8C61\u5316Segment Tree Beats"
+title: "\u62BD\u8C61\u5316Segment Tree Beats!"
 ---
 ## 抽象化Segment Tree Beats
 

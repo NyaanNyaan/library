@@ -37,6 +37,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/segment-tree/lazy-segment-tree-utility.md
     document_title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\
       \u30E1\u30F3\u30C8\u6728"
     links: []
@@ -124,7 +125,7 @@ data:
     using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
     using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
     \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    \n */\n"
+    \n * @docs docs/segment-tree/lazy-segment-tree-utility.md\n */\n"
   code: "#pragma once\n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T,\
     \ E), E (*h)(E, E),\n          T (*ti)(), E (*ei)()>\nstruct LazySegmentTree {\n\
     \  int n, log;\n  vector<T> val;\n  vector<E> laz;\n\n  explicit LazySegmentTree()\
@@ -209,12 +210,12 @@ data:
     using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
     using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
     \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    \n */\n"
+    \n * @docs docs/segment-tree/lazy-segment-tree-utility.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: segment-tree/lazy-segment-tree-utility.hpp
   requiredBy: []
-  timestamp: '2021-02-08 20:51:50+09:00'
+  timestamp: '2021-02-10 23:32:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
@@ -235,3 +236,17 @@ redirect_from:
 title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\
   \u30C8\u6728"
 ---
+## 使用頻度の高い遅延セグメント木
+
+使用頻度の高い遅延セグメント木を特殊化してライブラリ化したもの。
+
+#### 使い方
+
+以下の6種類の遅延セグメント木を特殊化している。いずれも`クラス名(初期値の入ったvector)`で初期化、`update(l, r, x)`で`[l, r)`に`x`を作用、`query(l, r)`で`[l, r)`の積を取得できる。
+
+- `AddMax_LazySegmentTree` : Range Add Query & Range Max Query
+- `AddMin_LazySegmentTree` : Range Min Query & Range Min Query
+- `AddSum_LazySegmentTree` : Range Sum Query & Range Sum Query
+- `UpdateMax_LazySegmentTree` : Range Update Query & Range Max Query
+- `UpdateMin_LazySegmentTree` : Range Update Query & Range Min Query
+- `UpdateSum_LazySegmentTree` : Range Update Query & Range Sum Query

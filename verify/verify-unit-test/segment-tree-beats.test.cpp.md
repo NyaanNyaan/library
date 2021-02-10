@@ -6,7 +6,7 @@ data:
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree-beats.hpp
-    title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats
+    title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats!
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -248,7 +248,7 @@ data:
     \      l >>= 1;\n      r >>= 1;\n    }\n    if constexpr (cmd == 1) lx = min(lx,\
     \ rx);\n    if constexpr (cmd == 2) lx = max(lx, rx);\n    if constexpr (cmd ==\
     \ 3) lx += rx;\n    return lx;\n  }\n};\n\n/**\n * @brief Range Chmin Chmax Add\
-    \ Update Range Min Max Sum Segment Tree Beats\n * @docs docs/segment-tree/segment-tree-beats.md\n\
+    \ Update Range Min Max Sum Segment Tree Beats!\n * @docs docs/segment-tree/segment-tree-beats.md\n\
     \ */\n#line 6 \"verify/verify-unit-test/segment-tree-beats.test.cpp\"\n\nusing\
     \ namespace Nyaan;\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0,\
     \ 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
@@ -327,7 +327,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/segment-tree-beats.test.cpp
   requiredBy: []
-  timestamp: '2021-02-02 18:56:17+09:00'
+  timestamp: '2021-02-10 23:32:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/segment-tree-beats.test.cpp

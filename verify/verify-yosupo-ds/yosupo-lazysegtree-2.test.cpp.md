@@ -300,8 +300,8 @@ data:
     using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
     using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
     \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    \n */\n#line 7 \"verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp\"\nusing\
-    \ mint = LazyMontgomeryModInt<998244353>;\n\nusing Pair = pair<mint, mint>;\n\
+    \n * @docs docs/segment-tree/lazy-segment-tree-utility.md\n */\n#line 7 \"verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp\"\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\n\nusing Pair = pair<mint, mint>;\n\
     Pair f(Pair a, Pair b) { return Pair{a.first + b.first, a.second + b.second};\
     \ };\nPair g(Pair a, Pair b) {\n  return Pair{a.first * b.first + a.second * b.second,\
     \ a.second};\n};\nPair h(Pair a, Pair b) {\n  return Pair{a.first * b.first, a.second\
@@ -336,7 +336,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
   requiredBy: []
-  timestamp: '2021-02-09 00:10:31+09:00'
+  timestamp: '2021-02-10 23:32:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp

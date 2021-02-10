@@ -14,7 +14,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/segment-tree/segment-tree-beats.md
-    document_title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats
+    document_title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats!
     links: []
   bundledCode: "#line 2 \"segment-tree/segment-tree-beats.hpp\"\n\nstruct AngelBeats\
     \ {\n  using i64 = long long;\n  static constexpr i64 INF = numeric_limits<i64>::max()\
@@ -82,7 +82,7 @@ data:
     \    if constexpr (cmd == 1) lx = min(lx, rx);\n    if constexpr (cmd == 2) lx\
     \ = max(lx, rx);\n    if constexpr (cmd == 3) lx += rx;\n    return lx;\n  }\n\
     };\n\n/**\n * @brief Range Chmin Chmax Add Update Range Min Max Sum Segment Tree\
-    \ Beats\n * @docs docs/segment-tree/segment-tree-beats.md\n */\n"
+    \ Beats!\n * @docs docs/segment-tree/segment-tree-beats.md\n */\n"
   code: "#pragma once\n\nstruct AngelBeats {\n  using i64 = long long;\n  static constexpr\
     \ i64 INF = numeric_limits<i64>::max() / 2.1;\n\n  struct alignas(32) Node {\n\
     \    i64 sum = 0, g1 = 0, l1 = 0;\n    i64 g2 = -INF, gc = 1, l2 = INF, lc = 1,\
@@ -148,13 +148,13 @@ data:
     \      l >>= 1;\n      r >>= 1;\n    }\n    if constexpr (cmd == 1) lx = min(lx,\
     \ rx);\n    if constexpr (cmd == 2) lx = max(lx, rx);\n    if constexpr (cmd ==\
     \ 3) lx += rx;\n    return lx;\n  }\n};\n\n/**\n * @brief Range Chmin Chmax Add\
-    \ Update Range Min Max Sum Segment Tree Beats\n * @docs docs/segment-tree/segment-tree-beats.md\n\
+    \ Update Range Min Max Sum Segment Tree Beats!\n * @docs docs/segment-tree/segment-tree-beats.md\n\
     \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: segment-tree/segment-tree-beats.hpp
   requiredBy: []
-  timestamp: '2021-02-02 18:56:17+09:00'
+  timestamp: '2021-02-10 23:32:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/segment-tree-beats.test.cpp
@@ -164,7 +164,7 @@ layout: document
 redirect_from:
 - /library/segment-tree/segment-tree-beats.hpp
 - /library/segment-tree/segment-tree-beats.hpp.html
-title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats
+title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats!
 ---
 ## Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats
 

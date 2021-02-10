@@ -264,8 +264,8 @@ data:
     using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
     using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
     \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    \n */\n#line 7 \"verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp\"\n\nusing namespace\
-    \ Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  UpdateSum_LazySegmentTree<ll,\
+    \n * @docs docs/segment-tree/lazy-segment-tree-utility.md\n */\n#line 7 \"verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp\"\
+    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  UpdateSum_LazySegmentTree<ll,\
     \ infLL> seg{vl(N)};\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(s,\
     \ t, x);\n      t++;\n      seg.update(s, t, x);\n    } else {\n      ini(s, t);\n\
     \      t++;\n      out(seg.query(s, t));\n    }\n  }\n}\n"
@@ -286,7 +286,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
   requiredBy: []
-  timestamp: '2021-02-08 20:51:50+09:00'
+  timestamp: '2021-02-10 23:32:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
