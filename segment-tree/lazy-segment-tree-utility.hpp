@@ -236,4 +236,5 @@ using SegmentTreeUtil::UpdateSum_LazySegmentTree;
 
 /**
  * @brief 使用頻度の高い遅延セグメント木
+ * @docs docs/segment-tree/lazy-segment-tree-utility.md
  */
