@@ -377,6 +377,9 @@ data:
     - icon: ':warning:'
       path: misc/int_div.hpp
       title: misc/int_div.hpp
+    - icon: ':warning:'
+      path: misc/interval-union.hpp
+      title: misc/interval-union.hpp
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
@@ -708,6 +711,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: trial/fast-inv.hpp
       title: "\u9AD8\u901Fmodulo\u9006\u5143"
+  - name: verify/verify-unit-test
+    pages:
+    - icon: ':warning:'
+      path: verify/verify-unit-test/interval-union.cpp
+      title: verify/verify-unit-test/interval-union.cpp
   verificationCategories:
   - name: verify/verify-aoj-alds
     pages:

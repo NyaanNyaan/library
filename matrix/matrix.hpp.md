@@ -113,8 +113,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/debug.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document
 redirect_from:

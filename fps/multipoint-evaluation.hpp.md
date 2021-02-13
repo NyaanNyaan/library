@@ -189,9 +189,9 @@ data:
   timestamp: '2021-01-31 00:21:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
 documentation_of: fps/multipoint-evaluation.hpp
 layout: document
 redirect_from:

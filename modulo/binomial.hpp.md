@@ -138,34 +138,34 @@ data:
   path: modulo/binomial.hpp
   requiredBy:
   - modulo/factorial.hpp
-  - fps/sum-of-exponential-times-poly.hpp
-  - fps/utility.hpp
-  - fps/fps-composition.hpp
-  - fps/lagrange-interpolation-point.hpp
   - fps/taylor-shift.hpp
-  - fps/fps-famous-series.hpp
+  - fps/utility.hpp
   - fps/sample-point-shift.hpp
+  - fps/fps-famous-series.hpp
+  - fps/sum-of-exponential-times-poly.hpp
+  - fps/lagrange-interpolation-point.hpp
+  - fps/fps-composition.hpp
   timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-yuki/yuki-0890.test.cpp
-  - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-0117.test.cpp
-  - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-0117.test.cpp
+  - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
 documentation_of: modulo/binomial.hpp
 layout: document
