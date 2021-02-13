@@ -20,3 +20,7 @@ vector<pair<T, T>> interval_union(const vector<pair<T, T>> &v) {
   }
   return res;
 }
+
+/**
+ * @brief 区間の集合の直和
+ */
