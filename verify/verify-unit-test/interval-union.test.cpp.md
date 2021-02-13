@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: misc/interval-union.hpp
-    title: misc/interval-union.hpp
+    title: "\u533A\u9593\u306E\u96C6\u5408\u306E\u76F4\u548C"
   - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
@@ -29,12 +29,14 @@ data:
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/interval-union.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+  bundledCode: "#line 1 \"verify/verify-unit-test/interval-union.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -180,7 +182,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-unit-test/interval-union.cpp\"\n//\n#line 2 \"misc/interval-union.hpp\"\
+    \ 4 \"verify/verify-unit-test/interval-union.test.cpp\"\n//\n#line 2 \"misc/interval-union.hpp\"\
     \n\n// Union of [a_1, b_1), [a_2, b_2), ...\ntemplate <typename T>\nvector<pair<T,\
     \ T>> interval_union(const vector<pair<T, T>> &v) {\n  vector<pair<T, T>> buf{v},\
     \ res;\n  sort(begin(buf), end(buf));\n  for (auto &p : buf) {\n    res.push_back(p);\n\
@@ -188,8 +190,9 @@ data:
     \ - 2].second < res[n - 1].first) break;\n      pair<T, T> q;\n      q.first =\
     \ res[n - 2].first;\n      q.second = max<T>(res[n - 2].second, res[n - 1].second);\n\
     \      res.pop_back();\n      res.pop_back();\n      res.push_back(q);\n    }\n\
-    \  }\n  return res;\n}\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n//\
-    \ [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \  }\n  return res;\n}\n\n/**\n * @brief \u533A\u9593\u306E\u96C6\u5408\u306E\u76F4\
+    \u548C\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 -\
+    \ 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
     \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
     \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
@@ -205,12 +208,12 @@ data:
     \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
     \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
     using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 7 \"verify/verify-unit-test/interval-union.cpp\"\n\nusing namespace Nyaan;\n\
-    \nvoid test(int N) {\n  vector<int> a(N + 1);\n  int t = randint(0, N / 2);\n\
-    \  t = min<int>(t, randint(0, N / 2));\n  vector<pair<int, int>> buf;\n  while\
-    \ (t--) {\n    int l, r;\n    do {\n      l = randint(0, N);\n      r = randint(0,\
-    \ N + 1);\n    } while (l > r or abs(l - r) > 10);\n    buf.emplace_back(l, r);\n\
-    \    reg(i, l, r) a[i] = 1;\n  }\n  auto res = interval_union(buf);\n  rep(i,\
+    #line 7 \"verify/verify-unit-test/interval-union.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nvoid test(int N) {\n  vector<int> a(N + 1);\n  int t = randint(0,\
+    \ N / 2);\n  t = min<int>(t, randint(0, N / 2));\n  vector<pair<int, int>> buf;\n\
+    \  while (t--) {\n    int l, r;\n    do {\n      l = randint(0, N);\n      r =\
+    \ randint(0, N + 1);\n    } while (l > r or abs(l - r) > 10);\n    buf.emplace_back(l,\
+    \ r);\n    reg(i, l, r) a[i] = 1;\n  }\n  auto res = interval_union(buf);\n  rep(i,\
     \ sz(res) - 1) assert(res[i].second < res[i + 1].first);\n  each(p, res) {\n \
     \   reg(i, p.first, p.second) {\n      assert(a[i] == 1);\n      a[i] = 0;\n \
     \   }\n  }\n  assert(accumulate(all(a), 0) == 0);\n}\n\nvoid Nyaan::solve() {\n\
@@ -238,16 +241,16 @@ data:
   - template/macro.hpp
   - misc/interval-union.hpp
   - misc/rng.hpp
-  isVerificationFile: false
-  path: verify/verify-unit-test/interval-union.cpp
+  isVerificationFile: true
+  path: verify/verify-unit-test/interval-union.test.cpp
   requiredBy: []
-  timestamp: '2021-02-14 00:11:20+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-02-14 00:25:36+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/interval-union.cpp
+documentation_of: verify/verify-unit-test/interval-union.test.cpp
 layout: document
 redirect_from:
-- /library/verify/verify-unit-test/interval-union.cpp
-- /library/verify/verify-unit-test/interval-union.cpp.html
-title: verify/verify-unit-test/interval-union.cpp
+- /verify/verify/verify-unit-test/interval-union.test.cpp
+- /verify/verify/verify-unit-test/interval-union.test.cpp.html
+title: verify/verify-unit-test/interval-union.test.cpp
 ---

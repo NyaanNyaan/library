@@ -17,9 +17,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/pruefer-code.hpp
     title: Pruefer Code
-  - icon: ':warning:'
-    path: verify/verify-unit-test/interval-union.cpp
-    title: verify/verify-unit-test/interval-union.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
@@ -27,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/interval-union.test.cpp
+    title: verify/verify-unit-test/interval-union.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/math.test.cpp
     title: verify/verify-unit-test/math.test.cpp
@@ -133,7 +133,6 @@ data:
   - matrix/black-box-linear-algebra.hpp
   - prime/fast-factorize.hpp
   - modulo/mod-kth-root.hpp
-  - verify/verify-unit-test/interval-union.cpp
   - tree/pruefer-code.hpp
   - rbst/treap.hpp
   timestamp: '2020-12-08 00:23:55+09:00'
@@ -143,6 +142,7 @@ data:
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/interval-union.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp

@@ -20,9 +20,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':warning:'
-    path: verify/verify-unit-test/interval-union.cpp
-    title: verify/verify-unit-test/interval-union.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
@@ -216,6 +213,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/hashset.test.cpp
     title: verify/verify-unit-test/hashset.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/interval-union.test.cpp
+    title: verify/verify-unit-test/interval-union.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/math.test.cpp
     title: verify/verify-unit-test/math.test.cpp
@@ -782,7 +782,6 @@ data:
   - set-function/or-convolution.hpp
   - set-function/and-convolution.hpp
   - template/template.hpp
-  - verify/verify-unit-test/interval-union.cpp
   - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
   timestamp: '2020-12-04 23:12:26+09:00'
@@ -800,6 +799,7 @@ data:
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/interval-union.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
