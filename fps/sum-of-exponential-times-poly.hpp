@@ -3,7 +3,7 @@
 #include "../modulo/binomial.hpp"
 
 // given  : f(0)...f(k) (deg(f) = k), a, n
-// return : \sum_{i=0...n-1} a^i f(i)
+// return : sum_{i=0...n-1} a^i f(i)
 template <typename mint>
 mint sum_of_exp(const vector<mint>& f, mint a, long long n,
                 Binomial<mint>& C) {
@@ -29,7 +29,7 @@ mint sum_of_exp(const vector<mint>& f, mint a, long long n,
 }
 
 // given  : f(0)...f(k) (deg(f) = k), a
-// return : \sum_{i=0...infty} a^i f(i)
+// return : sum_{i=0...infty} a^i f(i)
 template <typename mint>
 mint sum_of_exp_limit(const vector<mint>& f, mint a, Binomial<mint>& C) {
   if (a == mint(0)) return f[0];
@@ -71,7 +71,7 @@ vector<mint> exp_enamurate(int p, int n) {
 }
 
 // given  : d, r, n
-// return : \sum_{i=0...n-1} r^i i^d
+// return : sum_{i=0...n-1} r^i i^d
 template <typename mint>
 mint sum_of_exp2(int d, mint r, long long n, Binomial<mint>& C) {
   vector<mint> f = exp_enamurate<mint>(d, d);
@@ -79,7 +79,7 @@ mint sum_of_exp2(int d, mint r, long long n, Binomial<mint>& C) {
 }
 
 // given  : d, r
-// return : \sum_{i=0...infty} r^i i^d
+// return : sum_{i=0...infty} r^i i^d
 template <typename mint>
 mint sum_of_exp_limit2(int d, mint r, Binomial<mint>& C) {
   vector<mint> f = exp_enamurate<mint>(d, d);

@@ -117,6 +117,7 @@ FormalPowerSeries<mint> FormalPowerSeries<mint>::exp(int deg) const {
     z2.resize(2 * m);
     z2.ntt();
     fps x(begin(*this), begin(*this) + min<int>(this->size(), m));
+    x.resize(m);
     inplace_diff(x);
     x.push_back(mint(0));
     x.ntt();

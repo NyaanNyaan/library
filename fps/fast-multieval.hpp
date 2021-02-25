@@ -15,12 +15,12 @@ vector<mint> FastMultiEval(const FormalPowerSeries<mint> &f,
     buf[i + N] = fps{n + 1, n - 1};
   }
   for (int i = N - 1; i > 0; i--) {
-    fps &f(buf[(i << 1) | 0]), &g(buf[(i << 1) | 1]);
-    int n = f.size();
+    fps &g(buf[(i << 1) | 0]), &h(buf[(i << 1) | 1]);
+    int n = g.size();
     int m = n << 1;
     buf[i].reserve(m);
     buf[i].resize(n);
-    for (int j = 0; j < n; j++) buf[i][j] = f[j] * g[j] - mint(1);
+    for (int j = 0; j < n; j++) buf[i][j] = g[j] * h[j] - mint(1);
     if (i != 1) {
       buf[i].ntt_doubling();
       for (int j = 0; j < m; j++) buf[i][j] += j < n ? mint(1) : -mint(1);
@@ -38,20 +38,20 @@ vector<mint> FastMultiEval(const FormalPowerSeries<mint> &f,
 
   vector<mint> ans(s);
 
-  auto calc = [&](auto rec, int i, int l, int r, fps f) -> void {
+  auto calc = [&](auto rec, int i, int l, int r, fps g) -> void {
     if (i >= N) {
-      ans[i - N] = f[0];
+      ans[i - N] = g[0];
       return;
     }
-    int len = f.size(), m = (l + r) >> 1;
-    f.ntt();
+    int len = g.size(), m = (l + r) >> 1;
+    g.ntt();
     fps tmp = buf[i * 2 + 1];
-    for (int j = 0; j < len; j++) tmp[j] *= f[j];
+    for (int j = 0; j < len; j++) tmp[j] *= g[j];
     tmp.intt();
     rec(rec, i * 2 + 0, l, m, fps{begin(tmp) + (len >> 1), end(tmp)});
     if (m >= s) return;
     tmp = buf[i * 2 + 0];
-    for (int j = 0; j < len; j++) tmp[j] *= f[j];
+    for (int j = 0; j < len; j++) tmp[j] *= g[j];
     tmp.intt();
     rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});
   };
