@@ -57,7 +57,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/union-find-with-potential.hpp
       title: data-structure/union-find-with-potential.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/union-find.hpp
       title: Union Find(Disjoint Set Union)
     - icon: ':warning:'
@@ -116,7 +116,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/berlekamp-massey.hpp
       title: fps/berlekamp-massey.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/differential-equation.hpp
       title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
     - icon: ':heavy_check_mark:'
@@ -125,11 +125,11 @@ data:
     - icon: ':warning:'
       path: fps/fft2d.hpp
       title: fps/fft2d.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/formal-power-series.hpp
       title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
         \u30E9\u30EA"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-circular.hpp
       title: "\u4E09\u89D2\u95A2\u6570"
     - icon: ':heavy_check_mark:'
@@ -139,7 +139,7 @@ data:
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-famous-series.hpp
       title: "\u6709\u540D\u306A\u6570\u5217"
     - icon: ':heavy_check_mark:'
@@ -148,37 +148,37 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
     - icon: ':heavy_check_mark:'
       path: fps/mod-pow.hpp
       title: Mod-Pow ($f(x)^k \mod g(x)$)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/multipoint-evaluation.hpp
       title: Multipoint Evaluation
     - icon: ':heavy_check_mark:'
       path: fps/nth-term.hpp
       title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
       path: fps/polynomial-gcd.hpp
       title: "\u591A\u9805\u5F0FGCD"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/polynomial-interpolation.hpp
       title: fps/polynomial-interpolation.hpp
     - icon: ':heavy_check_mark:'
       path: fps/sample-point-shift.hpp
       title: fps/sample-point-shift.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/sum-of-exponential-times-poly.hpp
       title: $\sum_{i}a^i f(i)$
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/taylor-shift.hpp
       title: "\u5E73\u884C\u79FB\u52D5"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/utility.hpp
       title: fps/utility.hpp
   - name: geometry
@@ -356,14 +356,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: matrix/matrix-fast.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: matrix/matrix-tree.hpp
       title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
         \u5217)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: matrix/matrix.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: matrix/polynomial-matrix-determinant.hpp
       title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   - name: misc
@@ -374,7 +374,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -415,15 +415,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
     - icon: ':heavy_check_mark:'
@@ -484,7 +484,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/cooley-turkey-ntt.hpp
       title: ntt/cooley-turkey-ntt.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
     - icon: ':heavy_check_mark:'
@@ -655,22 +655,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1146,16 +1146,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
       title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - name: verify/verify-yosupo-graph
@@ -1401,10 +1401,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0896.test.cpp
       title: verify/verify-yuki/yuki-0896.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0963-circular.test.cpp
       title: verify/verify-yuki/yuki-0963-circular.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0963.test.cpp
       title: verify/verify-yuki/yuki-0963.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1416,7 +1416,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1112.test.cpp
       title: verify/verify-yuki/yuki-1112.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1145.test.cpp
       title: verify/verify-yuki/yuki-1145.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1431,7 +1431,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1283.test.cpp
       title: verify/verify-yuki/yuki-1283.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1303.test.cpp
       title: verify/verify-yuki/yuki-1303.test.cpp
     - icon: ':heavy_check_mark:'
