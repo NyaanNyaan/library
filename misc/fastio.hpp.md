@@ -99,13 +99,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
     title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -168,9 +168,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr\
@@ -239,7 +239,7 @@ data:
   path: misc/fastio.hpp
   requiredBy: []
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp

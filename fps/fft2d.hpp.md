@@ -5,48 +5,18 @@ data:
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':question:'
-    path: modulo/binomial.hpp
-    title: modulo/binomial.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: modulo/factorial.hpp
-    title: "\u968E\u4E57 $\\mod p$"
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0502.test.cpp
-    title: verify/verify-yuki/yuki-0502.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"fps/sample-point-shift.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
-    \n\ntemplate <typename T>\nstruct Binomial {\n  vector<T> fac_, finv_, inv_;\n\
-    \  Binomial(int MAX = 0) : fac_(MAX + 10), finv_(MAX + 10), inv_(MAX + 10) {\n\
-    \    assert(T::get_mod() != 0);\n    MAX += 9;\n    fac_[0] = finv_[0] = inv_[0]\
-    \ = 1;\n    for (int i = 1; i <= MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX]\
-    \ = fac_[MAX].inverse();\n    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i\
-    \ + 1] * (i + 1);\n    for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i\
-    \ - 1];\n  }\n\n  void extend() {\n    int n = fac_.size();\n    T fac = fac_.back()\
-    \ * n;\n    T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv\
-    \ = finv_.back() * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n\
-    \    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n    if(i < 0) return T(0);\n\
-    \    while (i >= (int)fac_.size()) extend();\n    return fac_[i];\n  }\n\n  T\
-    \ finv(int i) {\n    if(i < 0) return T(0);\n    while (i >= (int)finv_.size())\
-    \ extend();\n    return finv_[i];\n  }\n\n  T inv(int i) {\n    if(i < 0) return\
-    \ T(0);\n    while (i >= (int)inv_.size()) extend();\n    return inv_[i];\n  }\n\
-    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
-    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  T C_naive(int n, int r) {\n    if\
-    \ (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n\
-    \ - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n\
-    \  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0\
-    \ || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n\
-    #line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
-    \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
-    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
-    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+  bundledCode: "#line 2 \"fps/fft2d.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+    \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
+    \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
     \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
@@ -106,43 +76,50 @@ data:
     \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
     void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
     \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
-    \ @docs docs/fps/formal-power-series.md\n */\n#line 5 \"fps/sample-point-shift.hpp\"\
-    \n\n// input  : h(0), h(1), ..., h(d - 1)\n// output : h(m), h(m + 1), ..., h(m\
-    \ + d - 1)\ntemplate <typename mint>\nFormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>&\
-    \ ys, mint m) {\n  static Binomial<mint> C;\n  int d = ys.size() - 1;\n  FormalPowerSeries<mint>\
-    \ f(d + 1), g(d * 2 + 1);\n  for (int i = 0; i <= d; i++) {\n    f[i] = ys[i]\
-    \ * C.finv(i) * C.finv(d - i);\n    if ((d - i) & 1) f[i] = -f[i];\n  }\n  for\
-    \ (int i = 0; i <= 2 * d; i++) {\n    assert(m - d + i != mint(0));\n    g[i]\
-    \ = (m - d + i).inverse();\n  }\n  auto h = f * g;\n  mint coeff = 1;\n  for (int\
-    \ i = 0; i <= d; i++) coeff *= (m - d + i);\n  for (int i = 0; i <= d; i++) {\n\
-    \    h[i + d] *= coeff;\n    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
-    \ + d, begin(h) + 2 * d + 1};\n}\n"
-  code: "#pragma once\n\n#include \"../modulo/binomial.hpp\"\n#include \"formal-power-series.hpp\"\
-    \n\n// input  : h(0), h(1), ..., h(d - 1)\n// output : h(m), h(m + 1), ..., h(m\
-    \ + d - 1)\ntemplate <typename mint>\nFormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>&\
-    \ ys, mint m) {\n  static Binomial<mint> C;\n  int d = ys.size() - 1;\n  FormalPowerSeries<mint>\
-    \ f(d + 1), g(d * 2 + 1);\n  for (int i = 0; i <= d; i++) {\n    f[i] = ys[i]\
-    \ * C.finv(i) * C.finv(d - i);\n    if ((d - i) & 1) f[i] = -f[i];\n  }\n  for\
-    \ (int i = 0; i <= 2 * d; i++) {\n    assert(m - d + i != mint(0));\n    g[i]\
-    \ = (m - d + i).inverse();\n  }\n  auto h = f * g;\n  mint coeff = 1;\n  for (int\
-    \ i = 0; i <= d; i++) coeff *= (m - d + i);\n  for (int i = 0; i <= d; i++) {\n\
-    \    h[i + d] *= coeff;\n    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
-    \ + d, begin(h) + 2 * d + 1};\n}\n"
+    \ @docs docs/fps/formal-power-series.md\n */\n#line 4 \"fps/fft2d.hpp\"\n\ntemplate\
+    \ <typename mint>\nvoid fft2d(vector<FormalPowerSeries<mint>>& a) {\n  int H =\
+    \ a.size(), W = a[0].size();\n  assert((H & (H - 1)) == 0);\n  assert((W & (W\
+    \ - 1)) == 0);\n  for (int i = 0; i < H; i++) {\n    bool ok = false;\n    for\
+    \ (auto& x : a[i]) {\n      if (x != mint()) {\n        ok = true;\n        break;\n\
+    \      }\n    }\n    if (ok) a[i].ntt();\n  }\n  FormalPowerSeries<mint> buf(H);\n\
+    \  for (int i = 0; i < W; i++) {\n    for (int j = 0; j < H; j++) buf[j] = a[j][i];\n\
+    \    buf.ntt();\n    for (int j = 0; j < H; j++) a[j][i] = buf[j];\n  }\n}\n\n\
+    template <typename mint>\nvoid ifft2d(vector<FormalPowerSeries<mint>>& a) {\n\
+    \  int H = a.size(), W = a[0].size();\n  assert((H & (H - 1)) == 0);\n  assert((W\
+    \ & (W - 1)) == 0);\n  FormalPowerSeries<mint> buf(H);\n  for (int i = 0; i <\
+    \ W; i++) {\n    for (int j = 0; j < H; j++) buf[j] = a[j][i];\n    buf.intt();\n\
+    \    for (int j = 0; j < H; j++) a[j][i] = buf[j];\n  }\n  for (int i = 0; i <\
+    \ H; i++) {\n    bool ok = false;\n    for (auto& x : a[i]) {\n      if (x !=\
+    \ mint()) {\n        ok = true;\n        break;\n      }\n    }\n    if (ok) a[i].intt();\n\
+    \  }\n}\n"
+  code: "#pragma once\n\n#include \"formal-power-series.hpp\"\n\ntemplate <typename\
+    \ mint>\nvoid fft2d(vector<FormalPowerSeries<mint>>& a) {\n  int H = a.size(),\
+    \ W = a[0].size();\n  assert((H & (H - 1)) == 0);\n  assert((W & (W - 1)) == 0);\n\
+    \  for (int i = 0; i < H; i++) {\n    bool ok = false;\n    for (auto& x : a[i])\
+    \ {\n      if (x != mint()) {\n        ok = true;\n        break;\n      }\n \
+    \   }\n    if (ok) a[i].ntt();\n  }\n  FormalPowerSeries<mint> buf(H);\n  for\
+    \ (int i = 0; i < W; i++) {\n    for (int j = 0; j < H; j++) buf[j] = a[j][i];\n\
+    \    buf.ntt();\n    for (int j = 0; j < H; j++) a[j][i] = buf[j];\n  }\n}\n\n\
+    template <typename mint>\nvoid ifft2d(vector<FormalPowerSeries<mint>>& a) {\n\
+    \  int H = a.size(), W = a[0].size();\n  assert((H & (H - 1)) == 0);\n  assert((W\
+    \ & (W - 1)) == 0);\n  FormalPowerSeries<mint> buf(H);\n  for (int i = 0; i <\
+    \ W; i++) {\n    for (int j = 0; j < H; j++) buf[j] = a[j][i];\n    buf.intt();\n\
+    \    for (int j = 0; j < H; j++) a[j][i] = buf[j];\n  }\n  for (int i = 0; i <\
+    \ H; i++) {\n    bool ok = false;\n    for (auto& x : a[i]) {\n      if (x !=\
+    \ mint()) {\n        ok = true;\n        break;\n      }\n    }\n    if (ok) a[i].intt();\n\
+    \  }\n}\n"
   dependsOn:
-  - modulo/binomial.hpp
   - fps/formal-power-series.hpp
   isVerificationFile: false
-  path: fps/sample-point-shift.hpp
-  requiredBy:
-  - modulo/factorial.hpp
-  timestamp: '2021-02-01 19:31:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/verify-yuki/yuki-0502.test.cpp
-documentation_of: fps/sample-point-shift.hpp
+  path: fps/fft2d.hpp
+  requiredBy: []
+  timestamp: '2021-02-25 20:04:02+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: fps/fft2d.hpp
 layout: document
 redirect_from:
-- /library/fps/sample-point-shift.hpp
-- /library/fps/sample-point-shift.hpp.html
-title: fps/sample-point-shift.hpp
+- /library/fps/fft2d.hpp
+- /library/fps/fft2d.hpp.html
+title: fps/fft2d.hpp
 ---

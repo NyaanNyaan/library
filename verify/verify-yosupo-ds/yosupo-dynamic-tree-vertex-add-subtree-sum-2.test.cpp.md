@@ -4,25 +4,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: lct/link-cut-tree-subtree-add.hpp
     title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []

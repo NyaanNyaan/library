@@ -1,44 +1,44 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/lagrange-interpolation-point.hpp
     title: fps/lagrange-interpolation-point.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/sum-of-exponential-times-poly.hpp
     title: $\sum_{i}a^i f(i)$
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit
@@ -286,7 +286,7 @@ data:
     \  mint tmp = y[i] * dp[i] * pd[i] * C.finv(i) * C.finv(N - i);\n    ret += ((N\
     \ - i) & 1) ? -tmp : tmp;\n  }\n  return ret;\n}\n#line 2 \"fps/sum-of-exponential-times-poly.hpp\"\
     \n\n#line 4 \"fps/sum-of-exponential-times-poly.hpp\"\n\n// given  : f(0)...f(k)\
-    \ (deg(f) = k), a, n\n// return : \\sum_{i=0...n-1} a^i f(i)\ntemplate <typename\
+    \ (deg(f) = k), a, n\n// return : sum_{i=0...n-1} a^i f(i)\ntemplate <typename\
     \ mint>\nmint sum_of_exp(const vector<mint>& f, mint a, long long n,\n       \
     \         Binomial<mint>& C) {\n  if (n == 0) return mint(0);\n  if (a == mint(0))\
     \ return f[0];\n  if (a == mint(1)) {\n    vector<mint> g(f.size() + 1, mint(0));\n\
@@ -299,7 +299,7 @@ data:
     \ = 1, ia = a.inverse();\n  for (int i = 0; i < (int)g.size(); i++) g[i] = (g[i]\
     \ - c) * buf3, buf3 *= ia;\n  mint tn = lagrange_interpolation(g, n - 1, C);\n\
     \  return tn * a.pow(n - 1) + c;\n}\n\n// given  : f(0)...f(k) (deg(f) = k), a\n\
-    // return : \\sum_{i=0...infty} a^i f(i)\ntemplate <typename mint>\nmint sum_of_exp_limit(const\
+    // return : sum_{i=0...infty} a^i f(i)\ntemplate <typename mint>\nmint sum_of_exp_limit(const\
     \ vector<mint>& f, mint a, Binomial<mint>& C) {\n  if (a == mint(0)) return f[0];\n\
     \  int K = f.size() - 1;\n  vector<mint> g(f.size());\n  mint buf = 1;\n  for\
     \ (int i = 0; i < (int)g.size(); i++) g[i] = f[i] * buf, buf *= a;\n  for (int\
@@ -313,10 +313,10 @@ data:
     \     f[i] = mint(i).pow(p);\n      ps.push_back(i);\n    }\n    for (int j =\
     \ 0; j < (int)ps.size() && i * ps[j] <= n; j++) {\n      sieve[i * ps[j]] = 1;\n\
     \      f[i * ps[j]] = f[i] * f[ps[j]];\n      if (i % ps[j] == 0) break;\n   \
-    \ }\n  }\n  return std::move(f);\n}\n\n// given  : d, r, n\n// return : \\sum_{i=0...n-1}\
+    \ }\n  }\n  return std::move(f);\n}\n\n// given  : d, r, n\n// return : sum_{i=0...n-1}\
     \ r^i i^d\ntemplate <typename mint>\nmint sum_of_exp2(int d, mint r, long long\
     \ n, Binomial<mint>& C) {\n  vector<mint> f = exp_enamurate<mint>(d, d);\n  return\
-    \ sum_of_exp(f, r, n, C);\n}\n\n// given  : d, r\n// return : \\sum_{i=0...infty}\
+    \ sum_of_exp(f, r, n, C);\n}\n\n// given  : d, r\n// return : sum_{i=0...infty}\
     \ r^i i^d\ntemplate <typename mint>\nmint sum_of_exp_limit2(int d, mint r, Binomial<mint>&\
     \ C) {\n  vector<mint> f = exp_enamurate<mint>(d, d);\n  return sum_of_exp_limit(f,\
     \ r, C);\n}\n\n/**\n * @brief $\\sum_{i}a^i f(i)$\n * @docs docs/fps/sum-of-exponential-times-poly.md\n\
@@ -346,8 +346,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   requiredBy: []
-  timestamp: '2021-02-01 19:31:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-25 20:04:02+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
 layout: document

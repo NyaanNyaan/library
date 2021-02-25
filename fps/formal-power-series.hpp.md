@@ -5,13 +5,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/differential-equation.hpp
     title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
   - icon: ':heavy_check_mark:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
+    path: fps/fft2d.hpp
+    title: fps/fft2d.hpp
+  - icon: ':question:'
     path: fps/fps-circular.hpp
     title: "\u4E09\u89D2\u95A2\u6570"
   - icon: ':heavy_check_mark:'
@@ -21,7 +24,7 @@ data:
     path: fps/fps-composition.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-famous-series.hpp
     title: "\u6709\u540D\u306A\u6570\u5217"
   - icon: ':heavy_check_mark:'
@@ -33,38 +36,38 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/mod-pow.hpp
     title: Mod-Pow ($f(x)^k \mod g(x)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/multipoint-evaluation.hpp
     title: Multipoint Evaluation
   - icon: ':heavy_check_mark:'
     path: fps/nth-term.hpp
     title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: fps/polynomial-gcd.hpp
     title: "\u591A\u9805\u5F0FGCD"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
   - icon: ':heavy_check_mark:'
     path: fps/sample-point-shift.hpp
     title: fps/sample-point-shift.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/utility.hpp
     title: fps/utility.hpp
   - icon: ':heavy_check_mark:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
       \u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/polynomial-matrix-determinant.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   - icon: ':heavy_check_mark:'
@@ -119,10 +122,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -146,10 +149,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0720.test.cpp
     title: verify/verify-yuki/yuki-0720.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
   - icon: ':heavy_check_mark:'
@@ -161,15 +164,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/fps/formal-power-series.md
     document_title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
@@ -328,11 +331,12 @@ data:
   - fps/fast-multieval.hpp
   - fps/fps-sqrt.hpp
   - fps/fps-composition-fast.hpp
+  - fps/fft2d.hpp
   - fps/fps-composition.hpp
   - fps/arbitrary-fps.hpp
   - fps/ntt-friendly-fps.hpp
   timestamp: '2021-01-31 00:21:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp

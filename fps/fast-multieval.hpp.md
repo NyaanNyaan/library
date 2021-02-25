@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   _extendedRequiredBy: []
@@ -506,7 +506,7 @@ data:
     \ begin(z) + m / 2, mint(0));\n    z.ntt();\n    for (int i = 0; i < m; ++i) z[i]\
     \ *= -z1[i];\n    z.intt();\n    c.insert(end(c), begin(z) + m / 2, end(z));\n\
     \    z2 = c;\n    z2.resize(2 * m);\n    z2.ntt();\n    fps x(begin(*this), begin(*this)\
-    \ + min<int>(this->size(), m));\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
+    \ + min<int>(this->size(), m));\n    x.resize(m);\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
     \    x.ntt();\n    for (int i = 0; i < m; ++i) x[i] *= y[i];\n    x.intt();\n\
     \    x -= b.diff();\n    x.resize(2 * m);\n    for (int i = 0; i < m - 1; ++i)\
     \ x[m + i] = x[i], x[i] = mint(0);\n    x.ntt();\n    for (int i = 0; i < 2 *\
@@ -522,20 +522,20 @@ data:
     \ xs.size();\n  int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));\n\n  vector<FormalPowerSeries<mint>>\
     \ buf(2 * N);\n  for (int i = 0; i < N; i++) {\n    mint n = mint{i < s ? -xs[i]\
     \ : mint(0)};\n    buf[i + N] = fps{n + 1, n - 1};\n  }\n  for (int i = N - 1;\
-    \ i > 0; i--) {\n    fps &f(buf[(i << 1) | 0]), &g(buf[(i << 1) | 1]);\n    int\
-    \ n = f.size();\n    int m = n << 1;\n    buf[i].reserve(m);\n    buf[i].resize(n);\n\
-    \    for (int j = 0; j < n; j++) buf[i][j] = f[j] * g[j] - mint(1);\n    if (i\
+    \ i > 0; i--) {\n    fps &g(buf[(i << 1) | 0]), &h(buf[(i << 1) | 1]);\n    int\
+    \ n = g.size();\n    int m = n << 1;\n    buf[i].reserve(m);\n    buf[i].resize(n);\n\
+    \    for (int j = 0; j < n; j++) buf[i][j] = g[j] * h[j] - mint(1);\n    if (i\
     \ != 1) {\n      buf[i].ntt_doubling();\n      for (int j = 0; j < m; j++) buf[i][j]\
     \ += j < n ? mint(1) : -mint(1);\n    }\n  }\n\n  int fs = f.size();\n  fps root\
     \ = buf[1];\n  root.intt();\n  root.push_back(1);\n  reverse(begin(root), end(root));\n\
     \  root = root.inv(fs).rev() * f;\n  root.erase(begin(root), begin(root) + fs\
     \ - 1);\n  root.resize(N, mint(0));\n\n  vector<mint> ans(s);\n\n  auto calc =\
-    \ [&](auto rec, int i, int l, int r, fps f) -> void {\n    if (i >= N) {\n   \
-    \   ans[i - N] = f[0];\n      return;\n    }\n    int len = f.size(), m = (l +\
-    \ r) >> 1;\n    f.ntt();\n    fps tmp = buf[i * 2 + 1];\n    for (int j = 0; j\
-    \ < len; j++) tmp[j] *= f[j];\n    tmp.intt();\n    rec(rec, i * 2 + 0, l, m,\
+    \ [&](auto rec, int i, int l, int r, fps g) -> void {\n    if (i >= N) {\n   \
+    \   ans[i - N] = g[0];\n      return;\n    }\n    int len = g.size(), m = (l +\
+    \ r) >> 1;\n    g.ntt();\n    fps tmp = buf[i * 2 + 1];\n    for (int j = 0; j\
+    \ < len; j++) tmp[j] *= g[j];\n    tmp.intt();\n    rec(rec, i * 2 + 0, l, m,\
     \ fps{begin(tmp) + (len >> 1), end(tmp)});\n    if (m >= s) return;\n    tmp =\
-    \ buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= f[j];\n    tmp.intt();\n\
+    \ buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= g[j];\n    tmp.intt();\n\
     \    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n  };\n\
     \  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint Evaluation(\u9AD8\
     \u901F\u5316\u7248)\n */\n"
@@ -545,20 +545,20 @@ data:
     \  int s = xs.size();\n  int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));\n\
     \n  vector<FormalPowerSeries<mint>> buf(2 * N);\n  for (int i = 0; i < N; i++)\
     \ {\n    mint n = mint{i < s ? -xs[i] : mint(0)};\n    buf[i + N] = fps{n + 1,\
-    \ n - 1};\n  }\n  for (int i = N - 1; i > 0; i--) {\n    fps &f(buf[(i << 1) |\
-    \ 0]), &g(buf[(i << 1) | 1]);\n    int n = f.size();\n    int m = n << 1;\n  \
+    \ n - 1};\n  }\n  for (int i = N - 1; i > 0; i--) {\n    fps &g(buf[(i << 1) |\
+    \ 0]), &h(buf[(i << 1) | 1]);\n    int n = g.size();\n    int m = n << 1;\n  \
     \  buf[i].reserve(m);\n    buf[i].resize(n);\n    for (int j = 0; j < n; j++)\
-    \ buf[i][j] = f[j] * g[j] - mint(1);\n    if (i != 1) {\n      buf[i].ntt_doubling();\n\
+    \ buf[i][j] = g[j] * h[j] - mint(1);\n    if (i != 1) {\n      buf[i].ntt_doubling();\n\
     \      for (int j = 0; j < m; j++) buf[i][j] += j < n ? mint(1) : -mint(1);\n\
     \    }\n  }\n\n  int fs = f.size();\n  fps root = buf[1];\n  root.intt();\n  root.push_back(1);\n\
     \  reverse(begin(root), end(root));\n  root = root.inv(fs).rev() * f;\n  root.erase(begin(root),\
     \ begin(root) + fs - 1);\n  root.resize(N, mint(0));\n\n  vector<mint> ans(s);\n\
-    \n  auto calc = [&](auto rec, int i, int l, int r, fps f) -> void {\n    if (i\
-    \ >= N) {\n      ans[i - N] = f[0];\n      return;\n    }\n    int len = f.size(),\
-    \ m = (l + r) >> 1;\n    f.ntt();\n    fps tmp = buf[i * 2 + 1];\n    for (int\
-    \ j = 0; j < len; j++) tmp[j] *= f[j];\n    tmp.intt();\n    rec(rec, i * 2 +\
+    \n  auto calc = [&](auto rec, int i, int l, int r, fps g) -> void {\n    if (i\
+    \ >= N) {\n      ans[i - N] = g[0];\n      return;\n    }\n    int len = g.size(),\
+    \ m = (l + r) >> 1;\n    g.ntt();\n    fps tmp = buf[i * 2 + 1];\n    for (int\
+    \ j = 0; j < len; j++) tmp[j] *= g[j];\n    tmp.intt();\n    rec(rec, i * 2 +\
     \ 0, l, m, fps{begin(tmp) + (len >> 1), end(tmp)});\n    if (m >= s) return;\n\
-    \    tmp = buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= f[j];\n\
+    \    tmp = buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= g[j];\n\
     \    tmp.intt();\n    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n\
     \  };\n  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint\
     \ Evaluation(\u9AD8\u901F\u5316\u7248)\n */\n"
@@ -571,7 +571,7 @@ data:
   isVerificationFile: false
   path: fps/fast-multieval.hpp
   requiredBy: []
-  timestamp: '2021-01-31 00:21:53+09:00'
+  timestamp: '2021-02-25 20:04:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp

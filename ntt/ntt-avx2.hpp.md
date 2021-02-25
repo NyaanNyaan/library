@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   _extendedRequiredBy:
@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
@@ -66,10 +66,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -105,10 +105,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0720.test.cpp
     title: verify/verify-yuki/yuki-0720.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0963.test.cpp
     title: verify/verify-yuki/yuki-0963.test.cpp
   - icon: ':heavy_check_mark:'
@@ -120,15 +120,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line 2 \"modint/simd-montgomery.hpp\"\
@@ -783,7 +783,7 @@ data:
   - fps/arbitrary-fps.hpp
   - fps/ntt-friendly-fps.hpp
   timestamp: '2020-12-22 00:51:45+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp

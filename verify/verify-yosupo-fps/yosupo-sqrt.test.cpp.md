@@ -1,47 +1,47 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/mod-sqrt.hpp
     title: mod sqrt(Tonelli-Shanks algorithm)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -679,7 +679,7 @@ data:
     \ begin(z) + m / 2, mint(0));\n    z.ntt();\n    for (int i = 0; i < m; ++i) z[i]\
     \ *= -z1[i];\n    z.intt();\n    c.insert(end(c), begin(z) + m / 2, end(z));\n\
     \    z2 = c;\n    z2.resize(2 * m);\n    z2.ntt();\n    fps x(begin(*this), begin(*this)\
-    \ + min<int>(this->size(), m));\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
+    \ + min<int>(this->size(), m));\n    x.resize(m);\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
     \    x.ntt();\n    for (int i = 0; i < m; ++i) x[i] *= y[i];\n    x.intt();\n\
     \    x -= b.diff();\n    x.resize(2 * m);\n    for (int i = 0; i < m - 1; ++i)\
     \ x[m + i] = x[i], x[i] = mint(0);\n    x.ntt();\n    for (int i = 0; i < 2 *\
@@ -775,7 +775,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   requiredBy: []
-  timestamp: '2021-02-08 19:11:31+09:00'
+  timestamp: '2021-02-25 20:04:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp

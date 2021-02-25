@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/taylor-shift.hpp
     title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u6709\u540D\u306A\u6570\u5217"
     links: []
@@ -171,7 +171,7 @@ data:
   path: fps/fps-famous-series.hpp
   requiredBy: []
   timestamp: '2021-02-01 19:31:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
 documentation_of: fps/fps-famous-series.hpp
