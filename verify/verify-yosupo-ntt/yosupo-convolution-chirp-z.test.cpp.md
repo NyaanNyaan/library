@@ -1,37 +1,37 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/chirp-z.hpp
     title: Chirp Z-transform
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -224,7 +224,7 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\
+    \ { return mod; }\n};\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\
     \n\n#line 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
     \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
     my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
@@ -566,7 +566,7 @@ data:
     \ mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for\
     \ (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2\
     \ * M);\n    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line\
-    \ 7 \"ntt/arbitrary-ntt.hpp\"\n\nnamespace ArbitraryNTT {\nusing i64 = int64_t;\n\
+    \ 5 \"ntt/arbitrary-ntt.hpp\"\n\nnamespace ArbitraryNTT {\nusing i64 = int64_t;\n\
     using u128 = __uint128_t;\nconstexpr int32_t m0 = 167772161;\nconstexpr int32_t\
     \ m1 = 469762049;\nconstexpr int32_t m2 = 754974721;\nusing mint0 = LazyMontgomeryModInt<m0>;\n\
     using mint1 = LazyMontgomeryModInt<m1>;\nusing mint2 = LazyMontgomeryModInt<m2>;\n\
@@ -574,8 +574,8 @@ data:
     constexpr int r12 = mint2(m1).inverse().get();\nconstexpr int r02r12 = i64(r02)\
     \ * r12 % m2;\nconstexpr i64 w1 = m0;\nconstexpr i64 w2 = i64(m0) * m1;\n\ntemplate\
     \ <typename T, typename submint>\nvector<submint> mul(const vector<T> &a, const\
-    \ vector<T> &b) {\n  NTT<submint> ntt;\n  vector<submint> s(a.size()), t(b.size());\n\
-    \  for (int i = 0; i < (int)a.size(); ++i) s[i] = i64(a[i] % submint::get_mod());\n\
+    \ vector<T> &b) {\n  static NTT<submint> ntt;\n  vector<submint> s(a.size()),\
+    \ t(b.size());\n  for (int i = 0; i < (int)a.size(); ++i) s[i] = i64(a[i] % submint::get_mod());\n\
     \  for (int i = 0; i < (int)b.size(); ++i) t[i] = i64(b[i] % submint::get_mod());\n\
     \  return ntt.multiply(s, t);\n}\n\ntemplate <typename T>\nvector<int> multiply(const\
     \ vector<T> &s, const vector<T> &t, int mod) {\n  auto d0 = mul<T, mint0>(s, t);\n\
@@ -611,11 +611,9 @@ data:
     \ iws = 1;\n  wc[0] = 1, iwc[0] = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i]\
     \ = ws * wc[i - 1], ws *= W;\n  for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i\
     \ - 1], iws *= iW;\n  for (int i = 0; i < N; i++) f[i] *= iwc[i];\n  f.push_back(0);\n\
-    \  reverse(begin(f), end(f));\n  vector<mint> g;\n  int s = f.size() + wc.size()\
-    \ - 1;\n  if ((1 << __builtin_ctz(mint::get_mod() - 1)) >= s) {\n    NTT<mint>\
-    \ ntt;\n    g = ntt.multiply(f, wc);\n  } else {\n    g = ArbitraryNTT::multiply<mint>(f,\
-    \ wc);\n  }\n  vector<mint> F{begin(g) + N, begin(g) + 2 * N};\n  for (int i =\
-    \ 0; i < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n\
+    \  reverse(begin(f), end(f));\n  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f,\
+    \ wc);\n  vector<mint> F{begin(g) + N, begin(g) + 2 * N};\n  for (int i = 0; i\
+    \ < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n\
     \ */\n#line 8 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\
     \n\nvoid Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n \
     \ ini(N, M);\n  int S = 1;\n  while (S < N + M - 1) S *= 2;\n  mint pr = mint(3).pow(998244352\
@@ -647,7 +645,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 18:17:34+09:00'
+  timestamp: '2021-02-26 19:49:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp

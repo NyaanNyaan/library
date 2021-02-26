@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   _extendedRequiredBy: []
@@ -25,9 +25,9 @@ data:
     document_title: Chirp Z-transform
     links: []
   bundledCode: "#line 2 \"ntt/chirp-z.hpp\"\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\
-    \n\n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\n\
-    struct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32\
-    \ = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct\
+    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
+    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
     \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
     \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
     \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
@@ -399,7 +399,7 @@ data:
     \ mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for\
     \ (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2\
     \ * M);\n    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line\
-    \ 7 \"ntt/arbitrary-ntt.hpp\"\n\nnamespace ArbitraryNTT {\nusing i64 = int64_t;\n\
+    \ 5 \"ntt/arbitrary-ntt.hpp\"\n\nnamespace ArbitraryNTT {\nusing i64 = int64_t;\n\
     using u128 = __uint128_t;\nconstexpr int32_t m0 = 167772161;\nconstexpr int32_t\
     \ m1 = 469762049;\nconstexpr int32_t m2 = 754974721;\nusing mint0 = LazyMontgomeryModInt<m0>;\n\
     using mint1 = LazyMontgomeryModInt<m1>;\nusing mint2 = LazyMontgomeryModInt<m2>;\n\
@@ -407,8 +407,8 @@ data:
     constexpr int r12 = mint2(m1).inverse().get();\nconstexpr int r02r12 = i64(r02)\
     \ * r12 % m2;\nconstexpr i64 w1 = m0;\nconstexpr i64 w2 = i64(m0) * m1;\n\ntemplate\
     \ <typename T, typename submint>\nvector<submint> mul(const vector<T> &a, const\
-    \ vector<T> &b) {\n  NTT<submint> ntt;\n  vector<submint> s(a.size()), t(b.size());\n\
-    \  for (int i = 0; i < (int)a.size(); ++i) s[i] = i64(a[i] % submint::get_mod());\n\
+    \ vector<T> &b) {\n  static NTT<submint> ntt;\n  vector<submint> s(a.size()),\
+    \ t(b.size());\n  for (int i = 0; i < (int)a.size(); ++i) s[i] = i64(a[i] % submint::get_mod());\n\
     \  for (int i = 0; i < (int)b.size(); ++i) t[i] = i64(b[i] % submint::get_mod());\n\
     \  return ntt.multiply(s, t);\n}\n\ntemplate <typename T>\nvector<int> multiply(const\
     \ vector<T> &s, const vector<T> &t, int mod) {\n  auto d0 = mul<T, mint0>(s, t);\n\
@@ -444,11 +444,9 @@ data:
     \  wc[0] = 1, iwc[0] = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i] = ws * wc[i\
     \ - 1], ws *= W;\n  for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i - 1], iws\
     \ *= iW;\n  for (int i = 0; i < N; i++) f[i] *= iwc[i];\n  f.push_back(0);\n \
-    \ reverse(begin(f), end(f));\n  vector<mint> g;\n  int s = f.size() + wc.size()\
-    \ - 1;\n  if ((1 << __builtin_ctz(mint::get_mod() - 1)) >= s) {\n    NTT<mint>\
-    \ ntt;\n    g = ntt.multiply(f, wc);\n  } else {\n    g = ArbitraryNTT::multiply<mint>(f,\
-    \ wc);\n  }\n  vector<mint> F{begin(g) + N, begin(g) + 2 * N};\n  for (int i =\
-    \ 0; i < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n\
+    \ reverse(begin(f), end(f));\n  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f,\
+    \ wc);\n  vector<mint> F{begin(g) + N, begin(g) + 2 * N};\n  for (int i = 0; i\
+    \ < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n\
     \ */\n"
   code: "#pragma once\n\n#include \"arbitrary-ntt.hpp\"\n\n// return F(n) = sum {k=0...N-1}\
     \ f(k) W^{nk} (W != 0)\ntemplate <typename mint>\nvector<mint> ChirpZ(vector<mint>\
@@ -457,11 +455,9 @@ data:
     \ = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i] = ws * wc[i - 1], ws *= W;\n \
     \ for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i - 1], iws *= iW;\n  for (int\
     \ i = 0; i < N; i++) f[i] *= iwc[i];\n  f.push_back(0);\n  reverse(begin(f), end(f));\n\
-    \  vector<mint> g;\n  int s = f.size() + wc.size() - 1;\n  if ((1 << __builtin_ctz(mint::get_mod()\
-    \ - 1)) >= s) {\n    NTT<mint> ntt;\n    g = ntt.multiply(f, wc);\n  } else {\n\
-    \    g = ArbitraryNTT::multiply<mint>(f, wc);\n  }\n  vector<mint> F{begin(g)\
-    \ + N, begin(g) + 2 * N};\n  for (int i = 0; i < N; i++) F[i] *= iwc[i];\n  return\
-    \ F;\n}\n\n/**\n * @brief Chirp Z-transform\n */\n"
+    \  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f, wc);\n  vector<mint>\
+    \ F{begin(g) + N, begin(g) + 2 * N};\n  for (int i = 0; i < N; i++) F[i] *= iwc[i];\n\
+    \  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n */\n"
   dependsOn:
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
@@ -470,7 +466,7 @@ data:
   isVerificationFile: false
   path: ntt/chirp-z.hpp
   requiredBy: []
-  timestamp: '2021-02-26 17:27:46+09:00'
+  timestamp: '2021-02-26 19:49:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
