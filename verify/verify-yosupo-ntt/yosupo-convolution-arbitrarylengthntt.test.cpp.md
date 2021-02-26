@@ -4,28 +4,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
-    path: ntt/cooley-turkey-ntt.hpp
-    title: ntt/cooley-turkey-ntt.hpp
-  - icon: ':heavy_check_mark:'
+    path: ntt/cooley-tukey-ntt.hpp
+    title: ntt/cooley-tukey-ntt.hpp
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -248,14 +248,14 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"ntt/cooley-turkey-ntt.hpp\"\n\n\n\nnamespace\
-    \ FastFourierTransform {\nusing real = double;\n\nstruct C {\n  real x, y;\n\n\
-    \  C() : x(0), y(0) {}\n\n  C(real x, real y) : x(x), y(y) {}\n\n  inline C operator+(const\
-    \ C &c) const { return C(x + c.x, y + c.y); }\n\n  inline C operator-(const C\
-    \ &c) const { return C(x - c.x, y - c.y); }\n\n  inline C operator*(const C &c)\
-    \ const {\n    return C(x * c.x - y * c.y, x * c.y + y * c.x);\n  }\n\n  inline\
-    \ C conj() const { return C(x, -y); }\n};\n\nconst real PI = acosl(-1);\nint base\
-    \ = 1;\nvector<C> rts = {{0, 0}, {1, 0}};\nvector<int> rev = {0, 1};\n\nvoid ensure_base(int\
+    \ { return mod; }\n};\n#line 2 \"ntt/cooley-tukey-ntt.hpp\"\n\nnamespace FastFourierTransform\
+    \ {\nusing real = double;\n\nstruct C {\n  real x, y;\n\n  C() : x(0), y(0) {}\n\
+    \n  C(real _x, real _y) : x(_x), y(_y) {}\n\n  inline C operator+(const C &c)\
+    \ const { return C(x + c.x, y + c.y); }\n\n  inline C operator-(const C &c) const\
+    \ { return C(x - c.x, y - c.y); }\n\n  inline C operator*(const C &c) const {\n\
+    \    return C(x * c.x - y * c.y, x * c.y + y * c.x);\n  }\n\n  inline C conj()\
+    \ const { return C(x, -y); }\n};\n\nconst real PI = acosl(-1);\nint base = 1;\n\
+    vector<C> rts = {{0, 0}, {1, 0}};\nvector<int> rev = {0, 1};\n\nvoid ensure_base(int\
     \ nbase) {\n  if (nbase <= base) return;\n  rev.resize(1 << nbase);\n  rts.resize(1\
     \ << nbase);\n  for (int i = 0; i < (1 << nbase); i++) {\n    rev[i] = (rev[i\
     \ >> 1] >> 1) + ((i & 1) << (nbase - 1));\n  }\n  while (base < nbase) {\n   \
@@ -360,23 +360,24 @@ data:
     \ {\n    int P = a.size();\n    if (P <= 64) {\n      dft(a);\n      return;\n\
     \    }\n    if (lader.find(P) == end(lader)) lader[P] = new LaderNTT(P);\n   \
     \ lader[P]->ntt(a);\n  }\n\n  static void ntt(vector<mint> &a) {\n    assert(len\
-    \ % a.size() == 0);\n    int N = (int)a.size();\n    if(N <= 1) return;\n    if\
-    \ (N <= 64) {\n      dft(a);\n      return;\n    }\n\n    int P = factor(N);\n\
+    \ % a.size() == 0);\n    int N = (int)a.size();\n    if (N <= 1) return;\n   \
+    \ if (N <= 64) {\n      dft(a);\n      return;\n    }\n\n    int P = factor(N);\n\
     \    if (P == N) {\n      pntt(a);\n      return;\n    }\n    if (P == 2) {\n\
     \      P = 1 << __builtin_ctz(N);\n      if (N == P) {\n        ntt_base2(a);\n\
-    \        return;\n      }\n    }\n\n    int Q = N / P;\n    vector<mint> s(Q),\
-    \ t(N), u(P);\n    for (int p = 0, lN = len / N, d = 0; p < P; p++, d += lN) {\n\
-    \      for (int q = 0, qP = 0; q < Q; q++, qP += P) s[q] = a[qP + p];\n      ntt(s);\n\
-    \      for (int r = 0, n = 0, pQ = p * Q; r < Q; ++r, n += d) {\n        t[pQ\
-    \ + r] = w[n] * s[r];\n      }\n    }\n    for (int r = 0; r < Q; r++) {\n   \
-    \   for (int p = 0, pQ = 0; p < P; p++, pQ += Q) u[p] = t[pQ + r];\n      if (P\
-    \ <= 64)\n        dft(u);\n      else if (P & 1)\n        pntt(u);\n      else\n\
-    \        ntt_base2(u);\n      for (int s = 0, sQ = 0; s < P; s++, sQ += Q) a[sQ\
-    \ + r] = u[s];\n    }\n  }\n\n  static void intt(vector<mint> &a) {\n    reverse(begin(a)\
-    \ + 1, end(a));\n    ntt(a);\n    mint invn = mint(a.size()).inverse();\n    for\
-    \ (auto &x : a) x *= invn;\n  }\n\n  static vector<mint> multiply(const vector<mint>\
-    \ &a, const vector<mint> &b) {\n    int N = (int)a.size() + (int)b.size() - 1;\n\
-    \    assert(N <= len);\n    vector<mint> s(a), t(b);\n    int l = *lower_bound(begin(divisors),\
+    \        return;\n      }\n    }\n\n    int Q = N / P;\n    vector<mint> t(N),\
+    \ u(P);\n    {\n      vector<mint> s(Q);\n      for (int p = 0, lN = len / N,\
+    \ d = 0; p < P; p++, d += lN) {\n        for (int q = 0, qP = 0; q < Q; q++, qP\
+    \ += P) s[q] = a[qP + p];\n        ntt(s);\n        for (int r = 0, n = 0, pQ\
+    \ = p * Q; r < Q; ++r, n += d) {\n          t[pQ + r] = w[n] * s[r];\n       \
+    \ }\n      }\n    }\n    for (int r = 0; r < Q; r++) {\n      for (int p = 0,\
+    \ pQ = 0; p < P; p++, pQ += Q) u[p] = t[pQ + r];\n      if (P <= 64)\n       \
+    \ dft(u);\n      else if (P & 1)\n        pntt(u);\n      else\n        ntt_base2(u);\n\
+    \      for (int s = 0, sQ = 0; s < P; s++, sQ += Q) a[sQ + r] = u[s];\n    }\n\
+    \  }\n\n  static void intt(vector<mint> &a) {\n    reverse(begin(a) + 1, end(a));\n\
+    \    ntt(a);\n    mint invn = mint(a.size()).inverse();\n    for (auto &x : a)\
+    \ x *= invn;\n  }\n\n  static vector<mint> multiply(const vector<mint> &a, const\
+    \ vector<mint> &b) {\n    int N = (int)a.size() + (int)b.size() - 1;\n    assert(N\
+    \ <= len);\n    vector<mint> s(a), t(b);\n    int l = *lower_bound(begin(divisors),\
     \ end(divisors), N);\n    s.resize(l, mint(0));\n    t.resize(l, mint(0));\n \
     \   ntt(s);\n    ntt(t);\n    for (int i = 0; i < l; i++) s[i] *= t[i];\n    intt(s);\n\
     \    s.resize(N);\n    return s;\n  }\n};\ntemplate <typename mint>\nint ArbitraryLengthNTT<mint>::len;\n\
@@ -392,7 +393,7 @@ data:
     \ : ' '));\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n\n#include\
     \ \"../../template/template.hpp\"\n#include \"../../misc/fastio.hpp\"\n#include\
-    \ \"../../modint/montgomery-modint.hpp\"\n#include \"../../ntt/cooley-turkey-ntt.hpp\"\
+    \ \"../../modint/montgomery-modint.hpp\"\n#include \"../../ntt/cooley-tukey-ntt.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
     \  ArbitraryLengthNTT<mint> ntt(7 * 17 * (1 << 14));\n  int N, M;\n  rd(N, M);\n\
     \  V<mint> a(N), b(M);\n  for (int i = 0; i < N; i++) rd(a[i]);\n  for (int i\
@@ -408,11 +409,11 @@ data:
   - template/macro.hpp
   - misc/fastio.hpp
   - modint/montgomery-modint.hpp
-  - ntt/cooley-turkey-ntt.hpp
+  - ntt/cooley-tukey-ntt.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-02-26 17:27:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp

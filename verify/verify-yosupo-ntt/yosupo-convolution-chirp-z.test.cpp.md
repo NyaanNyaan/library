@@ -1,9 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: modint/arbitrary-prime-modint.hpp
-    title: modint/arbitrary-prime-modint.hpp
   - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -13,6 +10,9 @@ data:
   - icon: ':question:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
+  - icon: ':x:'
+    path: ntt/chirp-z.hpp
+    title: Chirp Z-transform
   - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
@@ -36,17 +36,13 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_1000000007
-    links:
-    - https://judge.yosupo.jp/problem/convolution_mod_1000000007
-  bundledCode: "#line 1 \"verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    links: []
+  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -191,65 +187,31 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"modint/arbitrary-prime-modint.hpp\"\n\n\n\nstruct ArbitraryLazyMontgomeryModInt\
-    \ {\n  using mint = ArbitraryLazyMontgomeryModInt;\n  using i32 = int32_t;\n \
-    \ using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static u32 mod;\n  static\
-    \ u32 r;\n  static u32 n2;\n\n  static u32 get_r() {\n    u32 ret = mod;\n   \
-    \ for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n\
-    \  static void set_mod(u32 m) {\n    assert(m < (1 << 30));\n    assert((m & 1)\
-    \ == 1);\n    mod = m;\n    n2 = -u64(m) % m;\n    r = get_r();\n    assert(r\
-    \ * mod == 1);\n  }\n\n  u32 a;\n\n  ArbitraryLazyMontgomeryModInt() : a(0) {}\n\
-    \  ArbitraryLazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b % mod\
-    \ + mod) * n2)){};\n\n  static u32 reduce(const u64 &b) {\n    return (b + u64(u32(b)\
-    \ * u32(-r)) * mod) >> 32;\n  }\n\n  mint &operator+=(const mint &b) {\n    if\
-    \ (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  mint &operator*=(const mint &b) {\n    a = reduce(u64(a)\
-    \ * b.a);\n    return *this;\n  }\n\n  mint &operator/=(const mint &b) {\n   \
-    \ *this *= b.inverse();\n    return *this;\n  }\n\n  mint operator+(const mint\
-    \ &b) const { return mint(*this) += b; }\n  mint operator-(const mint &b) const\
-    \ { return mint(*this) -= b; }\n  mint operator*(const mint &b) const { return\
-    \ mint(*this) *= b; }\n  mint operator/(const mint &b) const { return mint(*this)\
-    \ /= b; }\n  bool operator==(const mint &b) const {\n    return (a >= mod ? a\
-    \ - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  bool operator!=(const\
+    \ 2 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\n//\n#line\
+    \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
+    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
+    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
+    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
+    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
+    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
+    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
+    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
+    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
+    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
+    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
+    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
+    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
+    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
+    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
+    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
+    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
+    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
+    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
+    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
     \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  mint operator-() const { return mint() - mint(*this); }\n\
-    \n  mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
-    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
-    \ ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const mint &b) {\n  \
-    \  return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is, mint\
-    \ &b) {\n    int64_t t;\n    is >> t;\n    b = ArbitraryLazyMontgomeryModInt(t);\n\
-    \    return (is);\n  }\n\n  mint inverse() const { return pow(mod - 2); }\n\n\
-    \  u32 get() const {\n    u32 ret = reduce(a);\n    return ret >= mod ? ret -\
-    \ mod : ret;\n  }\n\n  static u32 get_mod() { return mod; }\n};\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::mod;\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::r;\ntypename ArbitraryLazyMontgomeryModInt::u32\
-    \ ArbitraryLazyMontgomeryModInt::n2;\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n\n\n\
-    #line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct\
-    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
-    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
-    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
-    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
-    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
-    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
-    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
-    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
-    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
-    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
-    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
-    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
-    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
-    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
-    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
-    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
     \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
     \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
@@ -258,16 +220,17 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line 2 \"modint/simd-montgomery.hpp\"\
-    \n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
-    ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
-    \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
-    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
-    \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
-    \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
-    \  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
-    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
-    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ { return mod; }\n};\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n\n\n#line 2 \"ntt/ntt-avx2.hpp\"\
+    \n\n#line 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
+    \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
+    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
+    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
+    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
+    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
+    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
+    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
+    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
     \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
     \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
@@ -637,17 +600,33 @@ data:
     \ i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n    i64 a = d0[i].get();\n\
     \    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2 + m2 - a) * r02r12\
     \ + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n  }\n  return ret;\n\
-    }\n}  // namespace ArbitraryNTT\n#line 6 \"verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp\"\
-    \n\nint MOD = 1000000007;\nusing mint = ArbitraryLazyMontgomeryModInt;\nusing\
-    \ vm = vector<mint>;\n\nusing namespace Nyaan; void Nyaan::solve() {\n  mint::set_mod(MOD);\n\
-    \  ini(N, M);\n  vm a(N), b(M);\n  in(a, b);\n  auto c = ArbitraryNTT::multiply(a,\
-    \ b);\n  out(c);\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../modint/arbitrary-prime-modint.hpp\"\
-    \n#include \"../../ntt/arbitrary-ntt.hpp\"\n\nint MOD = 1000000007;\nusing mint\
-    \ = ArbitraryLazyMontgomeryModInt;\nusing vm = vector<mint>;\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  mint::set_mod(MOD);\n  ini(N, M);\n  vm a(N),\
-    \ b(M);\n  in(a, b);\n  auto c = ArbitraryNTT::multiply(a, b);\n  out(c);\n}"
+    }\n}  // namespace ArbitraryNTT\n#line 2 \"ntt/chirp-z.hpp\"\n\n#line 4 \"ntt/chirp-z.hpp\"\
+    \n\n// return F(n) = sum {k=0...N-1} f(k) W^{nk} (W != 0)\ntemplate <typename\
+    \ mint>\nvector<mint> ChirpZ(vector<mint> f, mint W) {\n  assert(W != mint(0));\n\
+    \  int N = f.size();\n  vector<mint> wc(2 * N), iwc(N);\n  mint ws = 1, iW = W.inverse(),\
+    \ iws = 1;\n  wc[0] = 1, iwc[0] = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i]\
+    \ = ws * wc[i - 1], ws *= W;\n  for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i\
+    \ - 1], iws *= iW;\n  for (int i = 0; i < N; i++) f[i] *= iwc[i];\n  f.push_back(0);\n\
+    \  reverse(begin(f), end(f));\n  vector<mint> g;\n  int s = f.size() + wc.size()\
+    \ - 1;\n  if ((1 << __builtin_ctz(mint::get_mod() - 1)) >= s) {\n    NTT<mint>\
+    \ ntt;\n    g = ntt.multiply(f, wc);\n  } else {\n    g = ArbitraryNTT::multiply<mint>(f,\
+    \ wc);\n  }\n  vector<mint> F{begin(g) + N, begin(g) + 2 * N};\n  for (int i =\
+    \ 0; i < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n\
+    \ */\n#line 6 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\
+    \n\nvoid Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n \
+    \ ini(N, M);\n  int S = 1;\n  while (S < N + M - 1) S *= 2;\n  mint pr = mint(3).pow(998244352\
+    \ / S);\n  vector<mint> a(S), b(S);\n  rep(i, N) in(a[i]);\n  rep(i, M) in(b[i]);\n\
+    \  auto A = ChirpZ(a, pr);\n  auto B = ChirpZ(b, pr);\n  rep(i, S) A[i] *= B[i];\n\
+    \  auto c = ChirpZ(A, pr.inverse());\n  c.resize(N + M - 1);\n  mint invs = mint(S).inverse();\n\
+    \  each(x, c) x *= invs;\n  out(c);\n}\n"
+  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n#include \"../../ntt/arbitrary-ntt.hpp\"\n#include \"../../ntt/chirp-z.hpp\"\
+    \n\nvoid Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n \
+    \ ini(N, M);\n  int S = 1;\n  while (S < N + M - 1) S *= 2;\n  mint pr = mint(3).pow(998244352\
+    \ / S);\n  vector<mint> a(S), b(S);\n  rep(i, N) in(a[i]);\n  rep(i, M) in(b[i]);\n\
+    \  auto A = ChirpZ(a, pr);\n  auto B = ChirpZ(b, pr);\n  rep(i, S) A[i] *= B[i];\n\
+    \  auto c = ChirpZ(A, pr.inverse());\n  c.resize(N + M - 1);\n  mint invs = mint(S).inverse();\n\
+    \  each(x, c) x *= invs;\n  out(c);\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -655,21 +634,21 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - modint/arbitrary-prime-modint.hpp
-  - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
+  - ntt/arbitrary-ntt.hpp
   - ntt/ntt-avx2.hpp
   - modint/simd-montgomery.hpp
+  - ntt/chirp-z.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+  path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
   requiredBy: []
-  timestamp: '2020-12-22 00:51:45+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-02-26 17:27:46+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-- /verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp.html
-title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+- /verify/verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+- /verify/verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp.html
+title: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
 ---

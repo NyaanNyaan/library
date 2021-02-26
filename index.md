@@ -415,10 +415,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
   - name: modulo
@@ -478,13 +478,16 @@ data:
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
   - name: ntt
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ntt/arbitrary-ntt.hpp
       title: ntt/arbitrary-ntt.hpp
+    - icon: ':x:'
+      path: ntt/chirp-z.hpp
+      title: Chirp Z-transform
     - icon: ':heavy_check_mark:'
-      path: ntt/cooley-turkey-ntt.hpp
-      title: ntt/cooley-turkey-ntt.hpp
-    - icon: ':heavy_check_mark:'
+      path: ntt/cooley-tukey-ntt.hpp
+      title: ntt/cooley-tukey-ntt.hpp
+    - icon: ':question:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
     - icon: ':heavy_check_mark:'
@@ -655,22 +658,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1302,6 +1305,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp

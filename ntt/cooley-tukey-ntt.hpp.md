@@ -11,11 +11,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"ntt/cooley-turkey-ntt.hpp\"\n\n\n\nnamespace FastFourierTransform\
+  bundledCode: "#line 2 \"ntt/cooley-tukey-ntt.hpp\"\n\nnamespace FastFourierTransform\
     \ {\nusing real = double;\n\nstruct C {\n  real x, y;\n\n  C() : x(0), y(0) {}\n\
-    \n  C(real x, real y) : x(x), y(y) {}\n\n  inline C operator+(const C &c) const\
-    \ { return C(x + c.x, y + c.y); }\n\n  inline C operator-(const C &c) const {\
-    \ return C(x - c.x, y - c.y); }\n\n  inline C operator*(const C &c) const {\n\
+    \n  C(real _x, real _y) : x(_x), y(_y) {}\n\n  inline C operator+(const C &c)\
+    \ const { return C(x + c.x, y + c.y); }\n\n  inline C operator-(const C &c) const\
+    \ { return C(x - c.x, y - c.y); }\n\n  inline C operator*(const C &c) const {\n\
     \    return C(x * c.x - y * c.y, x * c.y + y * c.x);\n  }\n\n  inline C conj()\
     \ const { return C(x, -y); }\n};\n\nconst real PI = acosl(-1);\nint base = 1;\n\
     vector<C> rts = {{0, 0}, {1, 0}};\nvector<int> rev = {0, 1};\n\nvoid ensure_base(int\
@@ -123,32 +123,33 @@ data:
     \ {\n    int P = a.size();\n    if (P <= 64) {\n      dft(a);\n      return;\n\
     \    }\n    if (lader.find(P) == end(lader)) lader[P] = new LaderNTT(P);\n   \
     \ lader[P]->ntt(a);\n  }\n\n  static void ntt(vector<mint> &a) {\n    assert(len\
-    \ % a.size() == 0);\n    int N = (int)a.size();\n    if(N <= 1) return;\n    if\
-    \ (N <= 64) {\n      dft(a);\n      return;\n    }\n\n    int P = factor(N);\n\
+    \ % a.size() == 0);\n    int N = (int)a.size();\n    if (N <= 1) return;\n   \
+    \ if (N <= 64) {\n      dft(a);\n      return;\n    }\n\n    int P = factor(N);\n\
     \    if (P == N) {\n      pntt(a);\n      return;\n    }\n    if (P == 2) {\n\
     \      P = 1 << __builtin_ctz(N);\n      if (N == P) {\n        ntt_base2(a);\n\
-    \        return;\n      }\n    }\n\n    int Q = N / P;\n    vector<mint> s(Q),\
-    \ t(N), u(P);\n    for (int p = 0, lN = len / N, d = 0; p < P; p++, d += lN) {\n\
-    \      for (int q = 0, qP = 0; q < Q; q++, qP += P) s[q] = a[qP + p];\n      ntt(s);\n\
-    \      for (int r = 0, n = 0, pQ = p * Q; r < Q; ++r, n += d) {\n        t[pQ\
-    \ + r] = w[n] * s[r];\n      }\n    }\n    for (int r = 0; r < Q; r++) {\n   \
-    \   for (int p = 0, pQ = 0; p < P; p++, pQ += Q) u[p] = t[pQ + r];\n      if (P\
-    \ <= 64)\n        dft(u);\n      else if (P & 1)\n        pntt(u);\n      else\n\
-    \        ntt_base2(u);\n      for (int s = 0, sQ = 0; s < P; s++, sQ += Q) a[sQ\
-    \ + r] = u[s];\n    }\n  }\n\n  static void intt(vector<mint> &a) {\n    reverse(begin(a)\
-    \ + 1, end(a));\n    ntt(a);\n    mint invn = mint(a.size()).inverse();\n    for\
-    \ (auto &x : a) x *= invn;\n  }\n\n  static vector<mint> multiply(const vector<mint>\
-    \ &a, const vector<mint> &b) {\n    int N = (int)a.size() + (int)b.size() - 1;\n\
-    \    assert(N <= len);\n    vector<mint> s(a), t(b);\n    int l = *lower_bound(begin(divisors),\
+    \        return;\n      }\n    }\n\n    int Q = N / P;\n    vector<mint> t(N),\
+    \ u(P);\n    {\n      vector<mint> s(Q);\n      for (int p = 0, lN = len / N,\
+    \ d = 0; p < P; p++, d += lN) {\n        for (int q = 0, qP = 0; q < Q; q++, qP\
+    \ += P) s[q] = a[qP + p];\n        ntt(s);\n        for (int r = 0, n = 0, pQ\
+    \ = p * Q; r < Q; ++r, n += d) {\n          t[pQ + r] = w[n] * s[r];\n       \
+    \ }\n      }\n    }\n    for (int r = 0; r < Q; r++) {\n      for (int p = 0,\
+    \ pQ = 0; p < P; p++, pQ += Q) u[p] = t[pQ + r];\n      if (P <= 64)\n       \
+    \ dft(u);\n      else if (P & 1)\n        pntt(u);\n      else\n        ntt_base2(u);\n\
+    \      for (int s = 0, sQ = 0; s < P; s++, sQ += Q) a[sQ + r] = u[s];\n    }\n\
+    \  }\n\n  static void intt(vector<mint> &a) {\n    reverse(begin(a) + 1, end(a));\n\
+    \    ntt(a);\n    mint invn = mint(a.size()).inverse();\n    for (auto &x : a)\
+    \ x *= invn;\n  }\n\n  static vector<mint> multiply(const vector<mint> &a, const\
+    \ vector<mint> &b) {\n    int N = (int)a.size() + (int)b.size() - 1;\n    assert(N\
+    \ <= len);\n    vector<mint> s(a), t(b);\n    int l = *lower_bound(begin(divisors),\
     \ end(divisors), N);\n    s.resize(l, mint(0));\n    t.resize(l, mint(0));\n \
     \   ntt(s);\n    ntt(t);\n    for (int i = 0; i < l; i++) s[i] *= t[i];\n    intt(s);\n\
     \    s.resize(N);\n    return s;\n  }\n};\ntemplate <typename mint>\nint ArbitraryLengthNTT<mint>::len;\n\
     template <typename mint>\nvector<mint> ArbitraryLengthNTT<mint>::w;\ntemplate\
     \ <typename mint>\nvector<int> ArbitraryLengthNTT<mint>::divisors;\ntemplate <typename\
     \ mint>\nmap<int, typename ArbitraryLengthNTT<mint>::LaderNTT *>\n    ArbitraryLengthNTT<mint>::lader;\n"
-  code: "#pragma once\n\n\n\nnamespace FastFourierTransform {\nusing real = double;\n\
-    \nstruct C {\n  real x, y;\n\n  C() : x(0), y(0) {}\n\n  C(real x, real y) : x(x),\
-    \ y(y) {}\n\n  inline C operator+(const C &c) const { return C(x + c.x, y + c.y);\
+  code: "#pragma once\n\nnamespace FastFourierTransform {\nusing real = double;\n\n\
+    struct C {\n  real x, y;\n\n  C() : x(0), y(0) {}\n\n  C(real _x, real _y) : x(_x),\
+    \ y(_y) {}\n\n  inline C operator+(const C &c) const { return C(x + c.x, y + c.y);\
     \ }\n\n  inline C operator-(const C &c) const { return C(x - c.x, y - c.y); }\n\
     \n  inline C operator*(const C &c) const {\n    return C(x * c.x - y * c.y, x\
     \ * c.y + y * c.x);\n  }\n\n  inline C conj() const { return C(x, -y); }\n};\n\
@@ -258,23 +259,24 @@ data:
     \ {\n    int P = a.size();\n    if (P <= 64) {\n      dft(a);\n      return;\n\
     \    }\n    if (lader.find(P) == end(lader)) lader[P] = new LaderNTT(P);\n   \
     \ lader[P]->ntt(a);\n  }\n\n  static void ntt(vector<mint> &a) {\n    assert(len\
-    \ % a.size() == 0);\n    int N = (int)a.size();\n    if(N <= 1) return;\n    if\
-    \ (N <= 64) {\n      dft(a);\n      return;\n    }\n\n    int P = factor(N);\n\
+    \ % a.size() == 0);\n    int N = (int)a.size();\n    if (N <= 1) return;\n   \
+    \ if (N <= 64) {\n      dft(a);\n      return;\n    }\n\n    int P = factor(N);\n\
     \    if (P == N) {\n      pntt(a);\n      return;\n    }\n    if (P == 2) {\n\
     \      P = 1 << __builtin_ctz(N);\n      if (N == P) {\n        ntt_base2(a);\n\
-    \        return;\n      }\n    }\n\n    int Q = N / P;\n    vector<mint> s(Q),\
-    \ t(N), u(P);\n    for (int p = 0, lN = len / N, d = 0; p < P; p++, d += lN) {\n\
-    \      for (int q = 0, qP = 0; q < Q; q++, qP += P) s[q] = a[qP + p];\n      ntt(s);\n\
-    \      for (int r = 0, n = 0, pQ = p * Q; r < Q; ++r, n += d) {\n        t[pQ\
-    \ + r] = w[n] * s[r];\n      }\n    }\n    for (int r = 0; r < Q; r++) {\n   \
-    \   for (int p = 0, pQ = 0; p < P; p++, pQ += Q) u[p] = t[pQ + r];\n      if (P\
-    \ <= 64)\n        dft(u);\n      else if (P & 1)\n        pntt(u);\n      else\n\
-    \        ntt_base2(u);\n      for (int s = 0, sQ = 0; s < P; s++, sQ += Q) a[sQ\
-    \ + r] = u[s];\n    }\n  }\n\n  static void intt(vector<mint> &a) {\n    reverse(begin(a)\
-    \ + 1, end(a));\n    ntt(a);\n    mint invn = mint(a.size()).inverse();\n    for\
-    \ (auto &x : a) x *= invn;\n  }\n\n  static vector<mint> multiply(const vector<mint>\
-    \ &a, const vector<mint> &b) {\n    int N = (int)a.size() + (int)b.size() - 1;\n\
-    \    assert(N <= len);\n    vector<mint> s(a), t(b);\n    int l = *lower_bound(begin(divisors),\
+    \        return;\n      }\n    }\n\n    int Q = N / P;\n    vector<mint> t(N),\
+    \ u(P);\n    {\n      vector<mint> s(Q);\n      for (int p = 0, lN = len / N,\
+    \ d = 0; p < P; p++, d += lN) {\n        for (int q = 0, qP = 0; q < Q; q++, qP\
+    \ += P) s[q] = a[qP + p];\n        ntt(s);\n        for (int r = 0, n = 0, pQ\
+    \ = p * Q; r < Q; ++r, n += d) {\n          t[pQ + r] = w[n] * s[r];\n       \
+    \ }\n      }\n    }\n    for (int r = 0; r < Q; r++) {\n      for (int p = 0,\
+    \ pQ = 0; p < P; p++, pQ += Q) u[p] = t[pQ + r];\n      if (P <= 64)\n       \
+    \ dft(u);\n      else if (P & 1)\n        pntt(u);\n      else\n        ntt_base2(u);\n\
+    \      for (int s = 0, sQ = 0; s < P; s++, sQ += Q) a[sQ + r] = u[s];\n    }\n\
+    \  }\n\n  static void intt(vector<mint> &a) {\n    reverse(begin(a) + 1, end(a));\n\
+    \    ntt(a);\n    mint invn = mint(a.size()).inverse();\n    for (auto &x : a)\
+    \ x *= invn;\n  }\n\n  static vector<mint> multiply(const vector<mint> &a, const\
+    \ vector<mint> &b) {\n    int N = (int)a.size() + (int)b.size() - 1;\n    assert(N\
+    \ <= len);\n    vector<mint> s(a), t(b);\n    int l = *lower_bound(begin(divisors),\
     \ end(divisors), N);\n    s.resize(l, mint(0));\n    t.resize(l, mint(0));\n \
     \   ntt(s);\n    ntt(t);\n    for (int i = 0; i < l; i++) s[i] *= t[i];\n    intt(s);\n\
     \    s.resize(N);\n    return s;\n  }\n};\ntemplate <typename mint>\nint ArbitraryLengthNTT<mint>::len;\n\
@@ -283,16 +285,16 @@ data:
     \ mint>\nmap<int, typename ArbitraryLengthNTT<mint>::LaderNTT *>\n    ArbitraryLengthNTT<mint>::lader;\n"
   dependsOn: []
   isVerificationFile: false
-  path: ntt/cooley-turkey-ntt.hpp
+  path: ntt/cooley-tukey-ntt.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-02-26 17:27:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-documentation_of: ntt/cooley-turkey-ntt.hpp
+documentation_of: ntt/cooley-tukey-ntt.hpp
 layout: document
 redirect_from:
-- /library/ntt/cooley-turkey-ntt.hpp
-- /library/ntt/cooley-turkey-ntt.hpp.html
-title: ntt/cooley-turkey-ntt.hpp
+- /library/ntt/cooley-tukey-ntt.hpp
+- /library/ntt/cooley-tukey-ntt.hpp.html
+title: ntt/cooley-tukey-ntt.hpp
 ---
