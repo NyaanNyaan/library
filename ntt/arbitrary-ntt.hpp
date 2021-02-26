@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../modint/montgomery-modint.hpp"
 #include "./ntt-avx2.hpp"
 
@@ -23,7 +21,7 @@ constexpr i64 w2 = i64(m0) * m1;
 
 template <typename T, typename submint>
 vector<submint> mul(const vector<T> &a, const vector<T> &b) {
-  NTT<submint> ntt;
+  static NTT<submint> ntt;
   vector<submint> s(a.size()), t(b.size());
   for (int i = 0; i < (int)a.size(); ++i) s[i] = i64(a[i] % submint::get_mod());
   for (int i = 0; i < (int)b.size(); ++i) t[i] = i64(b[i] % submint::get_mod());

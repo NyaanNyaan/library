@@ -16,13 +16,7 @@ vector<mint> ChirpZ(vector<mint> f, mint W) {
   f.push_back(0);
   reverse(begin(f), end(f));
   vector<mint> g;
-  int s = f.size() + wc.size() - 1;
-  if ((1 << __builtin_ctz(mint::get_mod() - 1)) >= s) {
-    NTT<mint> ntt;
-    g = ntt.multiply(f, wc);
-  } else {
-    g = ArbitraryNTT::multiply<mint>(f, wc);
-  }
+  g = ArbitraryNTT::multiply<mint>(f, wc);
   vector<mint> F{begin(g) + N, begin(g) + 2 * N};
   for (int i = 0; i < N; i++) F[i] *= iwc[i];
   return F;
