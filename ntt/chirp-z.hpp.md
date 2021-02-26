@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   _extendedRequiredBy: []
@@ -22,7 +22,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: Chirp Z-transform
+    document_title: Chirp Z-transform(Bluestein's algorithm)
     links: []
   bundledCode: "#line 2 \"ntt/chirp-z.hpp\"\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\
     \n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct\
@@ -443,10 +443,10 @@ data:
     \  vector<mint> wc(2 * N), iwc(N);\n  mint ws = 1, iW = W.inverse(), iws = 1;\n\
     \  wc[0] = 1, iwc[0] = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i] = ws * wc[i\
     \ - 1], ws *= W;\n  for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i - 1], iws\
-    \ *= iW;\n  for (int i = 0; i < N; i++) f[i] *= iwc[i];\n  f.push_back(0);\n \
-    \ reverse(begin(f), end(f));\n  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f,\
-    \ wc);\n  vector<mint> F{begin(g) + N, begin(g) + 2 * N};\n  for (int i = 0; i\
-    \ < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n\
+    \ *= iW;\n  for (int i = 0; i < N; i++) f[i] *= iwc[i];\n  reverse(begin(f), end(f));\n\
+    \  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f, wc);\n  vector<mint>\
+    \ F{begin(g) + N - 1, begin(g) + 2 * N - 1};\n  for (int i = 0; i < N; i++) F[i]\
+    \ *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform(Bluestein's algorithm)\n\
     \ */\n"
   code: "#pragma once\n\n#include \"arbitrary-ntt.hpp\"\n\n// return F(n) = sum {k=0...N-1}\
     \ f(k) W^{nk} (W != 0)\ntemplate <typename mint>\nvector<mint> ChirpZ(vector<mint>\
@@ -454,10 +454,10 @@ data:
     \ * N), iwc(N);\n  mint ws = 1, iW = W.inverse(), iws = 1;\n  wc[0] = 1, iwc[0]\
     \ = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i] = ws * wc[i - 1], ws *= W;\n \
     \ for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i - 1], iws *= iW;\n  for (int\
-    \ i = 0; i < N; i++) f[i] *= iwc[i];\n  f.push_back(0);\n  reverse(begin(f), end(f));\n\
-    \  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f, wc);\n  vector<mint>\
-    \ F{begin(g) + N, begin(g) + 2 * N};\n  for (int i = 0; i < N; i++) F[i] *= iwc[i];\n\
-    \  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n */\n"
+    \ i = 0; i < N; i++) f[i] *= iwc[i];\n  reverse(begin(f), end(f));\n  vector<mint>\
+    \ g;\n  g = ArbitraryNTT::multiply<mint>(f, wc);\n  vector<mint> F{begin(g) +\
+    \ N - 1, begin(g) + 2 * N - 1};\n  for (int i = 0; i < N; i++) F[i] *= iwc[i];\n\
+    \  return F;\n}\n\n/**\n * @brief Chirp Z-transform(Bluestein's algorithm)\n */\n"
   dependsOn:
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
@@ -466,7 +466,7 @@ data:
   isVerificationFile: false
   path: ntt/chirp-z.hpp
   requiredBy: []
-  timestamp: '2021-02-26 19:49:47+09:00'
+  timestamp: '2021-02-27 00:51:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
@@ -475,5 +475,5 @@ layout: document
 redirect_from:
 - /library/ntt/chirp-z.hpp
 - /library/ntt/chirp-z.hpp.html
-title: Chirp Z-transform
+title: Chirp Z-transform(Bluestein's algorithm)
 ---

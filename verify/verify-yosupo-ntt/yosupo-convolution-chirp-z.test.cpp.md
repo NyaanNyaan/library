@@ -1,37 +1,37 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/chirp-z.hpp
-    title: Chirp Z-transform
-  - icon: ':question:'
+    title: Chirp Z-transform(Bluestein's algorithm)
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -610,10 +610,10 @@ data:
     \  int N = f.size();\n  vector<mint> wc(2 * N), iwc(N);\n  mint ws = 1, iW = W.inverse(),\
     \ iws = 1;\n  wc[0] = 1, iwc[0] = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i]\
     \ = ws * wc[i - 1], ws *= W;\n  for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i\
-    \ - 1], iws *= iW;\n  for (int i = 0; i < N; i++) f[i] *= iwc[i];\n  f.push_back(0);\n\
-    \  reverse(begin(f), end(f));\n  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f,\
-    \ wc);\n  vector<mint> F{begin(g) + N, begin(g) + 2 * N};\n  for (int i = 0; i\
-    \ < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n\
+    \ - 1], iws *= iW;\n  for (int i = 0; i < N; i++) f[i] *= iwc[i];\n  reverse(begin(f),\
+    \ end(f));\n  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f, wc);\n  vector<mint>\
+    \ F{begin(g) + N - 1, begin(g) + 2 * N - 1};\n  for (int i = 0; i < N; i++) F[i]\
+    \ *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform(Bluestein's algorithm)\n\
     \ */\n#line 8 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\
     \n\nvoid Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n \
     \ ini(N, M);\n  int S = 1;\n  while (S < N + M - 1) S *= 2;\n  mint pr = mint(3).pow(998244352\
@@ -645,7 +645,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 19:49:47+09:00'
+  timestamp: '2021-02-27 00:51:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
