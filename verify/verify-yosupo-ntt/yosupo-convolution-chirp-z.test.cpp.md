@@ -1,49 +1,53 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ntt/chirp-z.hpp
     title: Chirp Z-transform
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
+    links:
+    - https://judge.yosupo.jp/problem/convolution_mod
+  bundledCode: "#line 1 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n\n#line\
+    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
@@ -187,7 +191,7 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\n//\n#line\
+    \ 4 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\n//\n#line\
     \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
     \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
     \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
@@ -612,14 +616,15 @@ data:
     \ ntt;\n    g = ntt.multiply(f, wc);\n  } else {\n    g = ArbitraryNTT::multiply<mint>(f,\
     \ wc);\n  }\n  vector<mint> F{begin(g) + N, begin(g) + 2 * N};\n  for (int i =\
     \ 0; i < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform\n\
-    \ */\n#line 6 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\
+    \ */\n#line 8 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\
     \n\nvoid Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n \
     \ ini(N, M);\n  int S = 1;\n  while (S < N + M - 1) S *= 2;\n  mint pr = mint(3).pow(998244352\
     \ / S);\n  vector<mint> a(S), b(S);\n  rep(i, N) in(a[i]);\n  rep(i, M) in(b[i]);\n\
     \  auto A = ChirpZ(a, pr);\n  auto B = ChirpZ(b, pr);\n  rep(i, S) A[i] *= B[i];\n\
     \  auto c = ChirpZ(A, pr.inverse());\n  c.resize(N + M - 1);\n  mint invs = mint(S).inverse();\n\
     \  each(x, c) x *= invs;\n  out(c);\n}\n"
-  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
     \n#include \"../../ntt/arbitrary-ntt.hpp\"\n#include \"../../ntt/chirp-z.hpp\"\
     \n\nvoid Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n \
     \ ini(N, M);\n  int S = 1;\n  while (S < N + M - 1) S *= 2;\n  mint pr = mint(3).pow(998244352\
@@ -642,8 +647,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
   requiredBy: []
-  timestamp: '2021-02-26 17:27:46+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-02-26 18:17:34+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
 layout: document
