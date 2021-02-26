@@ -3,7 +3,7 @@
 #include "../../template/template.hpp"
 #include "../../misc/fastio.hpp"
 #include "../../modint/montgomery-modint.hpp"
-#include "../../ntt/cooley-turkey-ntt.hpp"
+#include "../../ntt/cooley-tukey-ntt.hpp"
 
 using namespace Nyaan; void Nyaan::solve() {
   using mint = LazyMontgomeryModInt<998244353>;

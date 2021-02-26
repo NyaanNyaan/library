@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 namespace FastFourierTransform {
 using real = double;
 
@@ -10,7 +8,7 @@ struct C {
 
   C() : x(0), y(0) {}
 
-  C(real x, real y) : x(x), y(y) {}
+  C(real _x, real _y) : x(_x), y(_y) {}
 
   inline C operator+(const C &c) const { return C(x + c.x, y + c.y); }
 
@@ -322,7 +320,7 @@ struct ArbitraryLengthNTT {
   static void ntt(vector<mint> &a) {
     assert(len % a.size() == 0);
     int N = (int)a.size();
-    if(N <= 1) return;
+    if (N <= 1) return;
     if (N <= 64) {
       dft(a);
       return;
@@ -342,12 +340,15 @@ struct ArbitraryLengthNTT {
     }
 
     int Q = N / P;
-    vector<mint> s(Q), t(N), u(P);
-    for (int p = 0, lN = len / N, d = 0; p < P; p++, d += lN) {
-      for (int q = 0, qP = 0; q < Q; q++, qP += P) s[q] = a[qP + p];
-      ntt(s);
-      for (int r = 0, n = 0, pQ = p * Q; r < Q; ++r, n += d) {
-        t[pQ + r] = w[n] * s[r];
+    vector<mint> t(N), u(P);
+    {
+      vector<mint> s(Q);
+      for (int p = 0, lN = len / N, d = 0; p < P; p++, d += lN) {
+        for (int q = 0, qP = 0; q < Q; q++, qP += P) s[q] = a[qP + p];
+        ntt(s);
+        for (int r = 0, n = 0, pQ = p * Q; r < Q; ++r, n += d) {
+          t[pQ + r] = w[n] * s[r];
+        }
       }
     }
     for (int r = 0; r < Q; r++) {
