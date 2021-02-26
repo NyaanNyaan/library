@@ -11,6 +11,7 @@ b.py
 buf.cpp
 docs/modint/montgomery-modint.md
 input
+lance-game.cpp
 Makefile
 naive.cpp
 naive.exe

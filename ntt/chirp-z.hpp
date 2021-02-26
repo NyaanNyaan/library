@@ -13,15 +13,14 @@ vector<mint> ChirpZ(vector<mint> f, mint W) {
   for (int i = 1; i < 2 * N; i++) wc[i] = ws * wc[i - 1], ws *= W;
   for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i - 1], iws *= iW;
   for (int i = 0; i < N; i++) f[i] *= iwc[i];
-  f.push_back(0);
   reverse(begin(f), end(f));
   vector<mint> g;
   g = ArbitraryNTT::multiply<mint>(f, wc);
-  vector<mint> F{begin(g) + N, begin(g) + 2 * N};
+  vector<mint> F{begin(g) + N - 1, begin(g) + 2 * N - 1};
   for (int i = 0; i < N; i++) F[i] *= iwc[i];
   return F;
 }
 
 /**
- * @brief Chirp Z-transform
+ * @brief Chirp Z-transform(Bluestein's algorithm)
  */
