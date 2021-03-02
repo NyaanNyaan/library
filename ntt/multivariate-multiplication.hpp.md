@@ -10,7 +10,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: ntt/multivariate-multipliation.md
+    _deprecated_at_docs: ntt/multivariate-multiplication.md
     document_title: Multivariate Multiplication
     links: []
   bundledCode: "#line 2 \"ntt/multivariate-multiplication.hpp\"\n\ntemplate <typename\
@@ -27,7 +27,7 @@ data:
     \ s ? s : 0)] += F[i][k] * G[j][k];\n      }\n    for (int i = 0; i < s; i++)\
     \ F[i][k] = a[i];\n  }\n  for (auto& x : F) x.intt();\n  fps h(n);\n  for (int\
     \ i = 0; i < n; i++) h[i] = F[chi[i]][i];\n  return h;\n}\n\n/**\n * @brief Multivariate\
-    \ Multiplication\n * @docs ntt/multivariate-multipliation.md\n */\n"
+    \ Multiplication\n * @docs ntt/multivariate-multiplication.md\n */\n"
   code: "#pragma once\n\ntemplate <typename fps>\nfps multivariate_multiplication(const\
     \ fps& f, const fps& g,\n                                const vector<int>& base)\
     \ {\n  int n = f.size(), s = base.size(), W = 1;\n  if (s == 0) return fps{f[0]\
@@ -41,13 +41,13 @@ data:
     \  a[i + j - (i + j >= s ? s : 0)] += F[i][k] * G[j][k];\n      }\n    for (int\
     \ i = 0; i < s; i++) F[i][k] = a[i];\n  }\n  for (auto& x : F) x.intt();\n  fps\
     \ h(n);\n  for (int i = 0; i < n; i++) h[i] = F[chi[i]][i];\n  return h;\n}\n\n\
-    /**\n * @brief Multivariate Multiplication\n * @docs ntt/multivariate-multipliation.md\n\
+    /**\n * @brief Multivariate Multiplication\n * @docs ntt/multivariate-multiplication.md\n\
     \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: ntt/multivariate-multiplication.hpp
   requiredBy: []
-  timestamp: '2021-03-03 00:28:16+09:00'
+  timestamp: '2021-03-03 00:41:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp

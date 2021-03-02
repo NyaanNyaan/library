@@ -733,7 +733,7 @@ data:
     \ s ? s : 0)] += F[i][k] * G[j][k];\n      }\n    for (int i = 0; i < s; i++)\
     \ F[i][k] = a[i];\n  }\n  for (auto& x : F) x.intt();\n  fps h(n);\n  for (int\
     \ i = 0; i < n; i++) h[i] = F[chi[i]][i];\n  return h;\n}\n\n/**\n * @brief Multivariate\
-    \ Multiplication\n * @docs ntt/multivariate-multipliation.md\n */\n#line 10 \"\
+    \ Multiplication\n * @docs ntt/multivariate-multiplication.md\n */\n#line 10 \"\
     verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp\"\n\nusing\
     \ mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
     //\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  // verify();\n  int K, N\
@@ -768,7 +768,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   requiredBy: []
-  timestamp: '2021-03-03 00:28:16+09:00'
+  timestamp: '2021-03-03 00:41:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
