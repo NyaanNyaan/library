@@ -36,5 +36,5 @@ fps multivariate_multiplication(const fps& f, const fps& g,
 
 /**
  * @brief Multivariate Multiplication
- * @docs ntt/multivariate-multiplication.md
+ * @docs docs/ntt/multivariate-multiplication.md
  */
