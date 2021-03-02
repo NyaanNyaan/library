@@ -15,8 +15,8 @@ struct Rerooting {
   vector<T> memo, dp;
   T I;
 
-  Rerooting(const G &g, const F1 f1, const F2 f2, const T &I)
-      : g(g), f1(f1), f2(f2), memo(g.size(), I), dp(g.size(), I), I(I) {
+  Rerooting(const G &_g, const F1 _f1, const F2 _f2, const T &I_)
+      : g(_g), f1(_f1), f2(_f2), memo(g.size(), I_), dp(g.size(), I_), I(I_) {
     dfs(0, -1);
     efs(0, -1, I);
   }
