@@ -130,6 +130,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
   - icon: ':heavy_check_mark:'
@@ -311,6 +314,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
 documentation_of: modint/simd-montgomery.hpp
 layout: document

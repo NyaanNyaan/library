@@ -444,6 +444,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/mod-sqrt.hpp
       title: mod sqrt(Tonelli-Shanks algorithm)
+    - icon: ':warning:'
+      path: modulo/quadratic-equation.hpp
+      title: modulo/quadratic-equation.hpp
     - icon: ':heavy_check_mark:'
       path: modulo/strassen.hpp
       title: modulo/strassen.hpp
@@ -490,6 +493,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/cooley-tukey-ntt.hpp
       title: Cooley-Tukey FFT Algorithm
+    - icon: ':warning:'
+      path: ntt/multidimensional-ntt.hpp
+      title: "\u591A\u6B21\u5143FFT"
+    - icon: ':heavy_check_mark:'
+      path: ntt/multivariate-multiplication.hpp
+      title: Multivariate Multiplication
     - icon: ':heavy_check_mark:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
@@ -1329,6 +1338,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - name: verify/verify-yosupo-other
     pages:
     - icon: ':heavy_check_mark:'

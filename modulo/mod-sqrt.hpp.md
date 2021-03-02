@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
+  - icon: ':warning:'
+    path: modulo/quadratic-equation.hpp
+    title: modulo/quadratic-equation.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
@@ -82,6 +85,7 @@ data:
   isVerificationFile: false
   path: modulo/mod-sqrt.hpp
   requiredBy:
+  - modulo/quadratic-equation.hpp
   - fps/fps-sqrt.hpp
   timestamp: '2021-02-08 19:11:31+09:00'
   verificationStatus: LIBRARY_ALL_AC

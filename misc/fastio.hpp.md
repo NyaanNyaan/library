@@ -163,6 +163,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - icon: ':heavy_check_mark:'
@@ -259,6 +262,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp

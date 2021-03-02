@@ -135,6 +135,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
   - icon: ':heavy_check_mark:'
@@ -369,6 +372,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
 documentation_of: fps/formal-power-series.hpp
 layout: document
 redirect_from:

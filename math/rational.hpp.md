@@ -44,14 +44,14 @@ data:
     \  }\n\n  long long toMint(long long mod) {\n    assert(mod != 0);\n    i64 a\
     \ = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n    \
     \  swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return i128((u\
-    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nstruct Binomial {\n  vector<Rational>\
+    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\n/*\nstruct Binomial {\n  vector<Rational>\
     \ fc;\n  Binomial(int = 0) { fc.emplace_back(1); }\n\n  void extend() {\n    int\
     \ n = fc.size();\n    Rational nxt = fc.back() * n;\n    fc.push_back(nxt);\n\
     \  }\n\n  Rational fac(int n) {\n    while ((int)fc.size() <= n) extend();\n \
     \   return fc[n];\n  }\n  Rational finv(int n) { return fac(n).inverse(); }\n\
     \  Rational inv(int n) { return Rational{1, max(n, 1)}; }\n  Rational C(int n,\
     \ int r) {\n    if (n < 0 or r < 0 or n < r) return Rational{0};\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n};\n"
+    \ * finv(n - r) * finv(r);\n  }\n};\n*/\n"
   code: "#pragma once\n\nstruct Rational {\n  using R = Rational;\n  using i128 =\
     \ __int128_t;\n  using i64 = long long;\n  using u64 = unsigned long long;\n \
     \ long long x, y;\n  Rational() : x(0), y(1) {}\n  Rational(long long _x, long\
@@ -88,19 +88,19 @@ data:
     \  }\n\n  long long toMint(long long mod) {\n    assert(mod != 0);\n    i64 a\
     \ = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n    \
     \  swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return i128((u\
-    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nstruct Binomial {\n  vector<Rational>\
+    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\n/*\nstruct Binomial {\n  vector<Rational>\
     \ fc;\n  Binomial(int = 0) { fc.emplace_back(1); }\n\n  void extend() {\n    int\
     \ n = fc.size();\n    Rational nxt = fc.back() * n;\n    fc.push_back(nxt);\n\
     \  }\n\n  Rational fac(int n) {\n    while ((int)fc.size() <= n) extend();\n \
     \   return fc[n];\n  }\n  Rational finv(int n) { return fac(n).inverse(); }\n\
     \  Rational inv(int n) { return Rational{1, max(n, 1)}; }\n  Rational C(int n,\
     \ int r) {\n    if (n < 0 or r < 0 or n < r) return Rational{0};\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n};\n"
+    \ * finv(n - r) * finv(r);\n  }\n};\n*/\n"
   dependsOn: []
   isVerificationFile: false
   path: math/rational.hpp
   requiredBy: []
-  timestamp: '2021-02-25 20:04:02+09:00'
+  timestamp: '2021-03-03 00:28:16+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/rational.hpp

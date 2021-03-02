@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/mod-sqrt.hpp
     title: mod sqrt(Tonelli-Shanks algorithm)
+  - icon: ':warning:'
+    path: modulo/quadratic-equation.hpp
+    title: modulo/quadratic-equation.hpp
   - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
@@ -116,6 +119,7 @@ data:
   path: modint/arbitrary-prime-modint.hpp
   requiredBy:
   - prime/fast-factorize.hpp
+  - modulo/quadratic-equation.hpp
   - modulo/mod-sqrt.hpp
   - modulo/mod-kth-root.hpp
   - fps/fps-sqrt.hpp

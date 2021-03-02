@@ -610,6 +610,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1195,6 +1198,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
