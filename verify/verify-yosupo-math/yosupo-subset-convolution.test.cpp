@@ -20,7 +20,8 @@ using namespace Nyaan; void Nyaan::solve() {
     rd(n);
     b[i] = n;
   }
-  auto c = subset_convolution(a, b);
+  SubsetConvolution<mint,20> sc;
+  auto c = sc.multiply(a, b);
   rep(i, 1 << N) {
     if (i) wt(' ');
     wt(c[i].get());
