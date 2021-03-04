@@ -81,7 +81,7 @@ $$g\equiv2\hat{g}-f\hat{g}^2 \mod x^{2k}$$
 
 $f_0 = 1$を満たす$f$に対して、$e^f \equiv g \mod x^n$を満たす$g$を$g\equiv\log f \mod x^n$として定義する。この時、$g$は
 
-$$\log f \equiv \int \frac{f'}{f} \mod x^n$$
+$$\log f \equiv \int \frac{f'}{f} dx \mod x^n$$
 
 から求まる。(なお、上の式は一見すると不定積分の定数項のズレが心配に見えるが、$g_0 = 0$とおくと$x=0$を代入したとき両辺が等しくなるので問題ない。)
 

@@ -14,55 +14,63 @@ data:
     document_title: Subset Convolution
     links: []
   bundledCode: "#line 2 \"set-function/subset-convolution.hpp\"\n\ntemplate <typename\
-    \ mint>\nvector<mint> subset_convolution(const vector<mint>& a, const vector<mint>&\
-    \ b) {\n  int N = a.size();\n  assert(a.size() == b.size() && (N & (N - 1)) ==\
-    \ 0);\n  int l = __builtin_ctz(N);\n\n  auto conv = [&](vector<mint>& a, vector<mint>&\
-    \ b) -> void {\n    for (int k = l; k >= 0; --k) {\n      mint n = mint(0);\n\
-    \      for (int i = 0; i <= k; ++i) n += a[i] * b[k - i];\n      a[k] = n;\n \
-    \   }\n  };\n\n  vector<vector<mint>> A(N, vector<mint>(l + 1)), B(N, vector<mint>(l\
-    \ + 1));\n  for (int i = 0; i < N; i++) A[i][0] = a[i], B[i][0] = b[i];\n  vector<mint>\
-    \ buf(l + 1);\n\n  for (int n = N / 2, d = 1; n; n >>= 1, ++d) {\n    for (int\
-    \ i = 0; i < N; i += 2 * n) {\n      for (int j = i; j < i + n; j++) {\n     \
-    \   // A[j + n] = A[j] + A[j + n] * x\n        buf[0] = A[j][0];\n        for\
-    \ (int k = 1; k <= d; k++) buf[k] = A[j][k] + A[j + n][k - 1];\n        copy(begin(buf),\
-    \ end(buf), begin(A[j + n]));\n        buf[0] = B[j][0];\n        for (int k =\
-    \ 1; k <= d; k++) buf[k] = B[j][k] + B[j + n][k - 1];\n        copy(begin(buf),\
-    \ end(buf), begin(B[j + n]));\n      }\n    }\n  }\n\n  for (int i = 0; i < N;\
-    \ i++) conv(A[i], B[i]);\n  \n  for (int n = 1, d = 0; n < N; n <<= 1, ++d) {\n\
-    \    for (int i = 0; i < N; i += 2 * n) {\n      for (int j = i; j < i + n; j++)\
-    \ {\n        // A[j + n] -= A[j]\n        for (int k = d; k <= l; k++) A[j + n][k]\
-    \ -= A[j][k];\n        // A[j] *= x\n        for (int k = l; k > d; --k) A[j][k]\
-    \ = A[j][k - 1];\n        A[j][0] = mint(0);\n      }\n    }\n  }\n\n  vector<mint>\
-    \ C(N);\n  for (int i = 0; i < N; i++) C[i] = A[i][l];\n  return C;\n}\n\n/**\n\
-    \ * @brief Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n\
+    \ mint, int _s>\nstruct SubsetConvolution {\n  using fps = array<mint, _s + 1>;\n\
+    \  static constexpr int s = _s;\n  vector<int> pc;\n\n  SubsetConvolution() :\
+    \ pc(1 << s) {\n    for (int i = 1; i < (1 << s); i++) pc[i] = pc[i - (i & -i)]\
+    \ + 1;\n  }\n\n  void add(fps& l, const fps& r, int d) {\n    for (int i = 0;\
+    \ i <= d; ++i) l[i] += r[i];\n  }\n\n  void sub(fps& l, const fps& r, int d) {\n\
+    \    for (int i = d; i <= s; ++i) l[i] -= r[i];\n  }\n\n  void zeta(vector<fps>&\
+    \ a) {\n    int n = a.size();\n    for (int w = 1; w < n; w *= 2) {\n      for\
+    \ (int k = 0; k < n; k += w * 2) {\n        for (int i = 0; i < w; ++i) {\n  \
+    \        add(a[k + w + i], a[k + i], pc[k + w + i]);\n        }\n      }\n   \
+    \ }\n  }\n\n  void mobius(vector<fps>& a) {\n    int n = a.size();\n    for (int\
+    \ w = n >> 1; w; w >>= 1) {\n      for (int k = 0; k < n; k += w * 2) {\n    \
+    \    for (int i = 0; i < w; ++i) {\n          sub(a[k + w + i], a[k + i], pc[k\
+    \ + w + i]);\n        }\n      }\n    }\n  }\n\n  vector<fps> lift(const vector<mint>&\
+    \ a) {\n    vector<fps> A(a.size());\n    for (int i = 0; i < (int)a.size(); i++)\
+    \ {\n      fill(begin(A[i]), end(A[i]), mint());\n      A[i][pc[i]] = a[i];\n\
+    \    }\n    return A;\n  }\n\n  vector<mint> unlift(const vector<fps>& A) {\n\
+    \    vector<mint> a(A.size());\n    for (int i = 0; i < (int)A.size(); i++) a[i]\
+    \ = A[i][pc[i]];\n    return a;\n  }\n\n  void prod(vector<fps>& A, const vector<fps>&\
+    \ B) {\n    int n = A.size(), d = __builtin_ctz(n);\n    for (int i = 0; i < n;\
+    \ i++) {\n      fps c{};\n      for (int j = 0; j <= d; j++) {\n        for (int\
+    \ k = 0; k <= d - j; k++) {\n          c[j + k] += A[i][j] * B[i][k];\n      \
+    \  }\n      }\n      A[i].swap(c);\n    }\n  }\n\n  vector<mint> multiply(const\
+    \ vector<mint>& a, const vector<mint>& b) {\n    vector<fps> A = lift(a), B =\
+    \ lift(b);\n    zeta(A), zeta(B);\n    prod(A, B);\n    mobius(A);\n    return\
+    \ unlift(A);\n  }\n};\n\n/**\n * @brief Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n\
     \ */\n"
-  code: "#pragma once\n\ntemplate <typename mint>\nvector<mint> subset_convolution(const\
-    \ vector<mint>& a, const vector<mint>& b) {\n  int N = a.size();\n  assert(a.size()\
-    \ == b.size() && (N & (N - 1)) == 0);\n  int l = __builtin_ctz(N);\n\n  auto conv\
-    \ = [&](vector<mint>& a, vector<mint>& b) -> void {\n    for (int k = l; k >=\
-    \ 0; --k) {\n      mint n = mint(0);\n      for (int i = 0; i <= k; ++i) n +=\
-    \ a[i] * b[k - i];\n      a[k] = n;\n    }\n  };\n\n  vector<vector<mint>> A(N,\
-    \ vector<mint>(l + 1)), B(N, vector<mint>(l + 1));\n  for (int i = 0; i < N; i++)\
-    \ A[i][0] = a[i], B[i][0] = b[i];\n  vector<mint> buf(l + 1);\n\n  for (int n\
-    \ = N / 2, d = 1; n; n >>= 1, ++d) {\n    for (int i = 0; i < N; i += 2 * n) {\n\
-    \      for (int j = i; j < i + n; j++) {\n        // A[j + n] = A[j] + A[j + n]\
-    \ * x\n        buf[0] = A[j][0];\n        for (int k = 1; k <= d; k++) buf[k]\
-    \ = A[j][k] + A[j + n][k - 1];\n        copy(begin(buf), end(buf), begin(A[j +\
-    \ n]));\n        buf[0] = B[j][0];\n        for (int k = 1; k <= d; k++) buf[k]\
-    \ = B[j][k] + B[j + n][k - 1];\n        copy(begin(buf), end(buf), begin(B[j +\
-    \ n]));\n      }\n    }\n  }\n\n  for (int i = 0; i < N; i++) conv(A[i], B[i]);\n\
-    \  \n  for (int n = 1, d = 0; n < N; n <<= 1, ++d) {\n    for (int i = 0; i <\
-    \ N; i += 2 * n) {\n      for (int j = i; j < i + n; j++) {\n        // A[j +\
-    \ n] -= A[j]\n        for (int k = d; k <= l; k++) A[j + n][k] -= A[j][k];\n \
-    \       // A[j] *= x\n        for (int k = l; k > d; --k) A[j][k] = A[j][k - 1];\n\
-    \        A[j][0] = mint(0);\n      }\n    }\n  }\n\n  vector<mint> C(N);\n  for\
-    \ (int i = 0; i < N; i++) C[i] = A[i][l];\n  return C;\n}\n\n/**\n * @brief Subset\
-    \ Convolution\n * @docs docs/set-function/subset-convolution.md\n */\n"
+  code: "#pragma once\n\ntemplate <typename mint, int _s>\nstruct SubsetConvolution\
+    \ {\n  using fps = array<mint, _s + 1>;\n  static constexpr int s = _s;\n  vector<int>\
+    \ pc;\n\n  SubsetConvolution() : pc(1 << s) {\n    for (int i = 1; i < (1 << s);\
+    \ i++) pc[i] = pc[i - (i & -i)] + 1;\n  }\n\n  void add(fps& l, const fps& r,\
+    \ int d) {\n    for (int i = 0; i <= d; ++i) l[i] += r[i];\n  }\n\n  void sub(fps&\
+    \ l, const fps& r, int d) {\n    for (int i = d; i <= s; ++i) l[i] -= r[i];\n\
+    \  }\n\n  void zeta(vector<fps>& a) {\n    int n = a.size();\n    for (int w =\
+    \ 1; w < n; w *= 2) {\n      for (int k = 0; k < n; k += w * 2) {\n        for\
+    \ (int i = 0; i < w; ++i) {\n          add(a[k + w + i], a[k + i], pc[k + w +\
+    \ i]);\n        }\n      }\n    }\n  }\n\n  void mobius(vector<fps>& a) {\n  \
+    \  int n = a.size();\n    for (int w = n >> 1; w; w >>= 1) {\n      for (int k\
+    \ = 0; k < n; k += w * 2) {\n        for (int i = 0; i < w; ++i) {\n         \
+    \ sub(a[k + w + i], a[k + i], pc[k + w + i]);\n        }\n      }\n    }\n  }\n\
+    \n  vector<fps> lift(const vector<mint>& a) {\n    vector<fps> A(a.size());\n\
+    \    for (int i = 0; i < (int)a.size(); i++) {\n      fill(begin(A[i]), end(A[i]),\
+    \ mint());\n      A[i][pc[i]] = a[i];\n    }\n    return A;\n  }\n\n  vector<mint>\
+    \ unlift(const vector<fps>& A) {\n    vector<mint> a(A.size());\n    for (int\
+    \ i = 0; i < (int)A.size(); i++) a[i] = A[i][pc[i]];\n    return a;\n  }\n\n \
+    \ void prod(vector<fps>& A, const vector<fps>& B) {\n    int n = A.size(), d =\
+    \ __builtin_ctz(n);\n    for (int i = 0; i < n; i++) {\n      fps c{};\n     \
+    \ for (int j = 0; j <= d; j++) {\n        for (int k = 0; k <= d - j; k++) {\n\
+    \          c[j + k] += A[i][j] * B[i][k];\n        }\n      }\n      A[i].swap(c);\n\
+    \    }\n  }\n\n  vector<mint> multiply(const vector<mint>& a, const vector<mint>&\
+    \ b) {\n    vector<fps> A = lift(a), B = lift(b);\n    zeta(A), zeta(B);\n   \
+    \ prod(A, B);\n    mobius(A);\n    return unlift(A);\n  }\n};\n\n/**\n * @brief\
+    \ Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: set-function/subset-convolution.hpp
   requiredBy: []
-  timestamp: '2020-12-07 13:36:10+09:00'
+  timestamp: '2021-03-04 10:35:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp

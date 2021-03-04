@@ -30,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
+  - icon: ':warning:'
+    path: fps/inversion-formula.hpp
+    title: fps/inversion-formula.hpp
   - icon: ':heavy_check_mark:'
     path: fps/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
@@ -333,6 +336,7 @@ data:
   - fps/fps-famous-series.hpp
   - fps/fast-multieval.hpp
   - fps/fps-sqrt.hpp
+  - fps/inversion-formula.hpp
   - fps/fps-composition-fast.hpp
   - fps/fft2d.hpp
   - fps/fps-composition.hpp
@@ -464,7 +468,7 @@ $$g\equiv2\hat{g}-f\hat{g}^2 \mod x^{2k}$$
 
 $f_0 = 1$を満たす$f$に対して、$e^f \equiv g \mod x^n$を満たす$g$を$g\equiv\log f \mod x^n$として定義する。この時、$g$は
 
-$$\log f \equiv \int \frac{f'}{f} \mod x^n$$
+$$\log f \equiv \int \frac{f'}{f} dx \mod x^n$$
 
 から求まる。(なお、上の式は一見すると不定積分の定数項のズレが心配に見えるが、$g_0 = 0$とおくと$x=0$を代入したとき両辺が等しくなるので問題ない。)
 

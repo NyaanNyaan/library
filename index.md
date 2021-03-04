@@ -145,6 +145,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
+    - icon: ':warning:'
+      path: fps/inversion-formula.hpp
+      title: fps/inversion-formula.hpp
     - icon: ':heavy_check_mark:'
       path: fps/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
@@ -412,6 +415,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
+    - icon: ':warning:'
+      path: modint/modint-cpp11.hpp
+      title: modint/modint-cpp11.hpp
     - icon: ':heavy_check_mark:'
       path: modint/modint-montgomery64.hpp
       title: modint/modint-montgomery64.hpp
@@ -502,6 +508,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
+    - icon: ':warning:'
+      path: ntt/ntt-cpp11.hpp
+      title: Number Theory Transform (for c++11)
     - icon: ':heavy_check_mark:'
       path: ntt/ntt-sse42.hpp
       title: ntt/ntt-sse42.hpp
