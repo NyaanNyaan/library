@@ -445,6 +445,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
     title: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
   - icon: ':heavy_check_mark:'
@@ -986,6 +989,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+  - verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
   - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp

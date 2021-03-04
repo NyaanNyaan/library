@@ -197,7 +197,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/biconnected-components.hpp
       title: "\u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/chromatic-number.hpp
       title: "\u5F69\u8272\u6570"
     - icon: ':heavy_check_mark:'
@@ -1190,6 +1190,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
       title: verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
       title: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp

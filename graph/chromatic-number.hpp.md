@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/graph/chromatic-number.md
     document_title: "\u5F69\u8272\u6570"
@@ -47,8 +50,9 @@ data:
   path: graph/chromatic-number.hpp
   requiredBy: []
   timestamp: '2021-01-15 18:15:31+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
 documentation_of: graph/chromatic-number.hpp
 layout: document
 redirect_from:
