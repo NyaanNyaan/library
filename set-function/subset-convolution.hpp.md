@@ -18,7 +18,7 @@ data:
     \  static constexpr int s = _s;\n  vector<int> pc;\n\n  SubsetConvolution() :\
     \ pc(1 << s) {\n    for (int i = 1; i < (1 << s); i++) pc[i] = pc[i - (i & -i)]\
     \ + 1;\n  }\n\n  void add(fps& l, const fps& r, int d) {\n    for (int i = 0;\
-    \ i <= d; ++i) l[i] += r[i];\n  }\n\n  void sub(fps& l, const fps& r, int d) {\n\
+    \ i < d; ++i) l[i] += r[i];\n  }\n\n  void sub(fps& l, const fps& r, int d) {\n\
     \    for (int i = d; i <= s; ++i) l[i] -= r[i];\n  }\n\n  void zeta(vector<fps>&\
     \ a) {\n    int n = a.size();\n    for (int w = 1; w < n; w *= 2) {\n      for\
     \ (int k = 0; k < n; k += w * 2) {\n        for (int i = 0; i < w; ++i) {\n  \
@@ -44,7 +44,7 @@ data:
     \ {\n  using fps = array<mint, _s + 1>;\n  static constexpr int s = _s;\n  vector<int>\
     \ pc;\n\n  SubsetConvolution() : pc(1 << s) {\n    for (int i = 1; i < (1 << s);\
     \ i++) pc[i] = pc[i - (i & -i)] + 1;\n  }\n\n  void add(fps& l, const fps& r,\
-    \ int d) {\n    for (int i = 0; i <= d; ++i) l[i] += r[i];\n  }\n\n  void sub(fps&\
+    \ int d) {\n    for (int i = 0; i < d; ++i) l[i] += r[i];\n  }\n\n  void sub(fps&\
     \ l, const fps& r, int d) {\n    for (int i = d; i <= s; ++i) l[i] -= r[i];\n\
     \  }\n\n  void zeta(vector<fps>& a) {\n    int n = a.size();\n    for (int w =\
     \ 1; w < n; w *= 2) {\n      for (int k = 0; k < n; k += w * 2) {\n        for\
@@ -70,7 +70,7 @@ data:
   isVerificationFile: false
   path: set-function/subset-convolution.hpp
   requiredBy: []
-  timestamp: '2021-03-04 10:35:44+09:00'
+  timestamp: '2021-03-06 19:10:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp

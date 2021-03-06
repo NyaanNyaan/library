@@ -18,15 +18,15 @@ data:
     \  }\n\n  int operator()(vector<int>& a) {\n    int res = a[0], coeff = 1;\n \
     \   for (int i = 1; i < (int)a.size(); i++)\n      coeff *= base[i - 1], res +=\
     \ coeff * a[i];\n    return res;\n  }\n\n  void inner(vector<T>& a, int dim, bool\
-    \ rev = false) {\n    vector<T> f(base[dim]);\n    vector<int> id(base[dim]);\n\
-    \    int i = 0, shift = 1;\n    for (int j = 0; j < dim; j++) shift *= base[j];\n\
-    \    do {\n      if (id[dim] != 0) continue;\n      for (int j = 0, t = i; j <\
-    \ 7; j++, t += shift) f[j] = a[t];\n      dft1d(f, rev);\n      for (int j = 0,\
-    \ t = i; j < 7; j++, t += shift) a[t] = f[j];\n      id[dim] = 0;\n    } while\
-    \ (++i && ascend(id));\n  }\n\n  void fft(vector<T>& a, bool rev = false) {\n\
-    \    if (!rev)\n      for (int i = 0; i < (int)base.size(); i++) inner(a, i);\n\
-    \    else\n      for (int i = (int)base.size(); i--;) inner(a, i, true);\n  }\n\
-    };\n\n/**\n * @brief \u591A\u6B21\u5143FFT\n */\n"
+    \ rev = false) {\n    int i = 0, shift = 1, n = base[dim];\n    vector<T> f(n);\n\
+    \    vector<int> id(base.size());\n    for (int j = 0; j < dim; j++) shift *=\
+    \ base[j];\n    do {\n      if (id[dim] != 0) continue;\n      for (int j = 0,\
+    \ t = i; j < n; j++, t += shift) f[j] = a[t];\n      dft1d(f, rev);\n      for\
+    \ (int j = 0, t = i; j < n; j++, t += shift) a[t] = f[j];\n      id[dim] = 0;\n\
+    \    } while (++i && ascend(id));\n  }\n  void fft(vector<T>& a, bool rev = false)\
+    \ {\n    if (!rev)\n      for (int i = 0; i < (int)base.size(); i++) inner(a,\
+    \ i);\n    else\n      for (int i = (int)base.size(); i--;) inner(a, i, true);\n\
+    \  }\n};\n\n/**\n * @brief \u591A\u6B21\u5143FFT\n */\n"
   code: "#pragma once\n\ntemplate <typename T, typename F>\nstruct MultidimensionalFourierTransform\
     \ {\n  vector<int> base;\n  F dft1d;\n\n  MultidimensionalFourierTransform(const\
     \ vector<int>& bs, const F& f)\n      : base(bs), dft1d(f) {}\n\n  bool ascend(vector<int>&\
@@ -35,20 +35,20 @@ data:
     \    }\n    return true;\n  }\n\n  int operator()(vector<int>& a) {\n    int res\
     \ = a[0], coeff = 1;\n    for (int i = 1; i < (int)a.size(); i++)\n      coeff\
     \ *= base[i - 1], res += coeff * a[i];\n    return res;\n  }\n\n  void inner(vector<T>&\
-    \ a, int dim, bool rev = false) {\n    vector<T> f(base[dim]);\n    vector<int>\
-    \ id(base[dim]);\n    int i = 0, shift = 1;\n    for (int j = 0; j < dim; j++)\
-    \ shift *= base[j];\n    do {\n      if (id[dim] != 0) continue;\n      for (int\
-    \ j = 0, t = i; j < 7; j++, t += shift) f[j] = a[t];\n      dft1d(f, rev);\n \
-    \     for (int j = 0, t = i; j < 7; j++, t += shift) a[t] = f[j];\n      id[dim]\
-    \ = 0;\n    } while (++i && ascend(id));\n  }\n\n  void fft(vector<T>& a, bool\
-    \ rev = false) {\n    if (!rev)\n      for (int i = 0; i < (int)base.size(); i++)\
-    \ inner(a, i);\n    else\n      for (int i = (int)base.size(); i--;) inner(a,\
+    \ a, int dim, bool rev = false) {\n    int i = 0, shift = 1, n = base[dim];\n\
+    \    vector<T> f(n);\n    vector<int> id(base.size());\n    for (int j = 0; j\
+    \ < dim; j++) shift *= base[j];\n    do {\n      if (id[dim] != 0) continue;\n\
+    \      for (int j = 0, t = i; j < n; j++, t += shift) f[j] = a[t];\n      dft1d(f,\
+    \ rev);\n      for (int j = 0, t = i; j < n; j++, t += shift) a[t] = f[j];\n \
+    \     id[dim] = 0;\n    } while (++i && ascend(id));\n  }\n  void fft(vector<T>&\
+    \ a, bool rev = false) {\n    if (!rev)\n      for (int i = 0; i < (int)base.size();\
+    \ i++) inner(a, i);\n    else\n      for (int i = (int)base.size(); i--;) inner(a,\
     \ i, true);\n  }\n};\n\n/**\n * @brief \u591A\u6B21\u5143FFT\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: ntt/multidimensional-ntt.hpp
   requiredBy: []
-  timestamp: '2021-03-03 00:28:16+09:00'
+  timestamp: '2021-03-06 19:10:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ntt/multidimensional-ntt.hpp
