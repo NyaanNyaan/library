@@ -27,19 +27,18 @@ struct MultidimensionalFourierTransform {
   }
 
   void inner(vector<T>& a, int dim, bool rev = false) {
-    vector<T> f(base[dim]);
-    vector<int> id(base[dim]);
-    int i = 0, shift = 1;
+    int i = 0, shift = 1, n = base[dim];
+    vector<T> f(n);
+    vector<int> id(base.size());
     for (int j = 0; j < dim; j++) shift *= base[j];
     do {
       if (id[dim] != 0) continue;
-      for (int j = 0, t = i; j < 7; j++, t += shift) f[j] = a[t];
+      for (int j = 0, t = i; j < n; j++, t += shift) f[j] = a[t];
       dft1d(f, rev);
-      for (int j = 0, t = i; j < 7; j++, t += shift) a[t] = f[j];
+      for (int j = 0, t = i; j < n; j++, t += shift) a[t] = f[j];
       id[dim] = 0;
     } while (++i && ascend(id));
   }
-
   void fft(vector<T>& a, bool rev = false) {
     if (!rev)
       for (int i = 0; i < (int)base.size(); i++) inner(a, i);

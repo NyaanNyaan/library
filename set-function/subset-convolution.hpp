@@ -11,7 +11,7 @@ struct SubsetConvolution {
   }
 
   void add(fps& l, const fps& r, int d) {
-    for (int i = 0; i <= d; ++i) l[i] += r[i];
+    for (int i = 0; i < d; ++i) l[i] += r[i];
   }
 
   void sub(fps& l, const fps& r, int d) {
