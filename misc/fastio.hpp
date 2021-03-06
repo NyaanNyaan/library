@@ -1,6 +1,10 @@
 #pragma once
 
+#include <cstring>
+#include <type_traits>
+#include <utility>
 
+using namespace std;
 
 namespace fastio {
 static constexpr int SZ = 1 << 17;
@@ -30,25 +34,33 @@ inline void flush() {
   por = 0;
 }
 
-inline void rd(char& c) { c = ibuf[pil++]; }
+inline void skip_space() {
+  if (pil + 32 > pir) load();
+  while (ibuf[pil] <= ' ') pil++;
+}
+
+inline void rd(char& c) {
+  if (pil + 32 > pir) load();
+  c = ibuf[pil++];
+}
 template <typename T>
 inline void rd(T& x) {
   if (pil + 32 > pir) load();
   char c;
-  do
-    c = ibuf[pil++];
+  do c = ibuf[pil++];
   while (c < '-');
-  bool minus = 0;
-  if (c == '-') {
-    minus = 1;
-    c = ibuf[pil++];
+  [[maybe_unused]] bool minus = false;
+  if constexpr (is_signed<T>::value == true) {
+    if (c == '-') minus = true, c = ibuf[pil++];
   }
   x = 0;
   while (c >= '0') {
     x = x * 10 + (c & 15);
     c = ibuf[pil++];
   }
-  if (minus) x = -x;
+  if constexpr (is_signed<T>::value == true) {
+    if (minus) x = -x;
+  }
 }
 inline void rd() {}
 template <typename Head, typename... Tail>
@@ -57,7 +69,14 @@ inline void rd(Head& head, Tail&... tail) {
   rd(tail...);
 }
 
-inline void wt(char c) { obuf[por++] = c; }
+inline void wt(char c) {
+  if (por > SZ - 32) flush();
+  obuf[por++] = c;
+}
+inline void wt(bool b) { 
+  if (por > SZ - 32) flush();
+  obuf[por++] = b ? '1' : '0'; 
+}
 template <typename T>
 inline void wt(T x) {
   if (por > SZ - 32) flush();
@@ -65,9 +84,8 @@ inline void wt(T x) {
     obuf[por++] = '0';
     return;
   }
-  if (x < 0) {
-    obuf[por++] = '-';
-    x = -x;
+  if constexpr (is_signed<T>::value == true) {
+    if (x < 0) obuf[por++] = '-', x = -x;
   }
   int i = 12;
   char buf[16];
@@ -78,11 +96,12 @@ inline void wt(T x) {
   }
   if (x < 100) {
     if (x < 10) {
-      wt(char('0' + char(x)));
+      obuf[por] = '0' + x;
+      ++por;
     } else {
       uint32_t q = (uint32_t(x) * 205) >> 11;
       uint32_t r = uint32_t(x) - q * 10;
-      obuf[por + 0] = '0' + q;
+      obuf[por] = '0' + q;
       obuf[por + 1] = '0' + r;
       por += 2;
     }
@@ -101,13 +120,14 @@ inline void wt(T x) {
 
 inline void wt() {}
 template <typename Head, typename... Tail>
-inline void wt(Head head, Tail... tail) {
+inline void wt(Head&& head, Tail&&... tail) {
   wt(head);
-  wt(tail...);
+  wt(forward<Tail>(tail)...);
 }
-template <typename T>
-inline void wtn(T x) {
-  wt(x, '\n');
+template <typename... Args>
+inline void wtn(Args&&... x) {
+  wt(forward<Args>(x)...);
+  wt('\n');
 }
 
 struct Dummy {
@@ -116,5 +136,6 @@ struct Dummy {
 
 }  // namespace fastio
 using fastio::rd;
+using fastio::skip_space;
 using fastio::wt;
 using fastio::wtn;
