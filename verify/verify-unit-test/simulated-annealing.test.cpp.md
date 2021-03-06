@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   - icon: ':question:'

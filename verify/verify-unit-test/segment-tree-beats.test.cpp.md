@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree-beats.hpp
     title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats!
   - icon: ':question:'

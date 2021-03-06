@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: data-structure
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/binary-indexed-tree.hpp
       title: Binary Indexed Tree(Fenwick Tree)
     - icon: ':heavy_check_mark:'
@@ -36,13 +36,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/range-union-find.hpp
       title: data-structure/range-union-find.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/rollback-union-find.hpp
       title: "Rollback\u3064\u304DUnion Find"
     - icon: ':heavy_check_mark:'
       path: data-structure/skew-heap.hpp
       title: Skew Heap
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/slide-window-aggregation.hpp
       title: data-structure/slide-window-aggregation.hpp
     - icon: ':heavy_check_mark:'
@@ -60,7 +60,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/union-find.hpp
       title: Union Find(Disjoint Set Union)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/w-ary-tree.hpp
       title: data-structure/w-ary-tree.hpp
   - name: data-structure-2d
@@ -77,10 +77,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
       title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
       title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -113,7 +113,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/arbitrary-fps.hpp
       title: fps/arbitrary-fps.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/berlekamp-massey.hpp
       title: fps/berlekamp-massey.hpp
     - icon: ':heavy_check_mark:'
@@ -132,10 +132,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/fps-circular.hpp
       title: "\u4E09\u89D2\u95A2\u6570"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-composition-fast.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
@@ -151,7 +151,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
     - icon: ':heavy_check_mark:'
@@ -166,7 +166,7 @@ data:
     - icon: ':question:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/polynomial-gcd.hpp
       title: "\u591A\u9805\u5F0FGCD"
     - icon: ':heavy_check_mark:'
@@ -175,10 +175,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/sample-point-shift.hpp
       title: fps/sample-point-shift.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/sum-of-exponential-times-poly.hpp
       title: $\sum_{i}a^i f(i)$
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/taylor-shift.hpp
       title: "\u5E73\u884C\u79FB\u52D5"
     - icon: ':heavy_check_mark:'
@@ -267,14 +267,14 @@ data:
       title: inner/inner_math.hpp
   - name: lct
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: lct/lazy-reversible-bbst-base.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\
         \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: lct/link-cut-base.hpp
       title: Link/Cut Tree(base)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: lct/link-cut-tree-lazy.hpp
       title: "\u9045\u5EF6\u4F1D\u642CLink/Cut Tree"
     - icon: ':heavy_check_mark:'
@@ -290,10 +290,10 @@ data:
       path: lct/reversible-bbst-base.hpp
       title: "\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\
         \u30E9\u30B9)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: lct/splay-base.hpp
       title: Splay Tree(base)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: lct/splay-lazy-reversible.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDSplay Tree"
     - icon: ':heavy_check_mark:'
@@ -309,7 +309,7 @@ data:
       title: Simulated Annealing
   - name: math
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
     - icon: ':heavy_check_mark:'
@@ -374,7 +374,7 @@ data:
       title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   - name: misc
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
     - icon: ':x:'
@@ -392,7 +392,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/interval-union.hpp
       title: "\u533A\u9593\u306E\u96C6\u5408\u306E\u76F4\u548C"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: misc/mo.hpp
     - icon: ':question:'
@@ -401,7 +401,7 @@ data:
     - icon: ':warning:'
       path: misc/simd.hpp
       title: misc/simd.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/timer.hpp
       title: misc/timer.hpp
     - icon: ':warning:'
@@ -432,7 +432,7 @@ data:
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
     - icon: ':heavy_check_mark:'
@@ -453,7 +453,7 @@ data:
     - icon: ':warning:'
       path: modulo/quadratic-equation.hpp
       title: modulo/quadratic-equation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: modulo/strassen.hpp
       title: modulo/strassen.hpp
     - icon: ':x:'
@@ -586,7 +586,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree-beats-abstract.hpp
       title: "\u62BD\u8C61\u5316Segment Tree Beats!"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree-beats.hpp
       title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats!
     - icon: ':heavy_check_mark:'
@@ -708,20 +708,20 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/cartesian-tree.hpp
       title: Cartesian Tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/centroid-decomposition.hpp
       title: Centroid Decomposition
     - icon: ':heavy_check_mark:'
       path: tree/convert-tree.hpp
       title: "\u6839\u4ED8\u304D\u6728\u30FB\u9006\u8FBA\u304B\u3089\u306A\u308B\u6728\
         \u3078\u306E\u5909\u63DB"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/dsu-on-tree.hpp
       title: DSU on Tree(Guni)
-    - icon: ':x:'
+    - icon: ':question:'
       path: tree/euler-tour.hpp
       title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/frequency-table-of-tree-distance.hpp
       title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
     - icon: ':heavy_check_mark:'
@@ -1072,16 +1072,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
       title: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1090,34 +1090,34 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
       title: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
       title: verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
       title: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
       title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
       title: verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
       title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1128,10 +1128,10 @@ data:
       title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - name: verify/verify-yosupo-fps
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1146,13 +1146,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
       title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1179,13 +1179,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
       title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - name: verify/verify-yosupo-graph
@@ -1205,7 +1205,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
       title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
       title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     - icon: ':x:'
