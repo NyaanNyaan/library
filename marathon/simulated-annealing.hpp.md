@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: marathon/log_table.hpp
     title: marathon/log_table.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   _extendedRequiredBy: []

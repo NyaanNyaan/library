@@ -1,10 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: segment-tree/lazy-segment-tree-utility.hpp
-    title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\
-      \u30F3\u30C8\u6728"
+  - icon: ':x:'
+    path: data-structure/w-ary-tree.hpp
+    title: data-structure/w-ary-tree.hpp
+  - icon: ':question:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
   - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -25,17 +27,17 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E
+    PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E
-  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E\"\n\
-    \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    - https://judge.yosupo.jp/problem/predecessor_problem
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n//\n\
+    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
     \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -180,103 +182,98 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 5 \"verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp\"\n//\n#line 2 \"segment-tree/lazy-segment-tree-utility.hpp\"\
-    \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ti)(), E (*ei)()>\nstruct LazySegmentTree {\n  int n, log;\n  vector<T>\
-    \ val;\n  vector<E> laz;\n\n  explicit LazySegmentTree() {}\n  explicit LazySegmentTree(const\
-    \ vector<T>& vc) { init(vc); }\n\n  void init(const vector<T>& vc) {\n    n =\
-    \ 1, log = 0;\n    while (n < (int)vc.size()) n <<= 1, log++;\n    val.resize(2\
-    \ * n, ti());\n    laz.resize(n, ei());\n    for (int i = 0; i < (int)vc.size();\
-    \ ++i) val[i + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n  }\n\
-    \n  void update(int l, int r, const E& x) {\n    if (l == r) return;\n    l +=\
-    \ n, r += n;\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i)\
-    \ != l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n\
-    \    }\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l\
-    \ & 1) _apply(l++, x);\n        if (r & 1) _apply(--r, x);\n        l >>= 1;\n\
-    \        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n    }\n    for (int\
-    \ i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l) _update(l >> i);\n\
-    \      if (((r >> i) << i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int\
-    \ l, int r) {\n    if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(),\
-    \ R = ti();\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) !=\
-    \ l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n  \
-    \  }\n    while (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r &\
-    \ 1) R = f(val[--r], R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L,\
-    \ R);\n  }\n\n  void set_val(int k, const T& x) {\n    k += n;\n    for (int i\
-    \ = log; i >= 1; i--) {\n      if (((k >> i) << i) != k) _push(k >> i);\n    }\n\
-    \    val[k] = x;\n    for (int i = 1; i <= log; i++) {\n      if (((k >> i) <<\
-    \ i) != k) _update(k >> i);\n    }\n  }\n\n  void update_val(int k, const E& x)\
-    \ {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k >> i) <<\
-    \ i) != k) _push(k >> i);\n    }\n    val[k] = g(val[k], x);\n    for (int i =\
-    \ 1; i <= log; i++) {\n      if (((k >> i) << i) != k) _update(k >> i);\n    }\n\
-    \  }\n\n  T get_val(int k) {\n    k += n;\n    for (int i = log; i >= 1; i--)\
-    \ {\n      if (((k >> i) << i) != k) _push(k >> i);\n    }\n    return val[k];\n\
-    \  }\n\n private:\n  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2\
-    \ * i + 0] = g(val[2 * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i +\
-    \ 1], laz[i]);\n      if (2 * i < n) {\n        compose(laz[2 * i + 0], laz[i]);\n\
-    \        compose(laz[2 * i + 1], laz[i]);\n      }\n      laz[i] = ei();\n   \
-    \ }\n  }\n  inline void _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i\
-    \ + 1]); }\n  inline void _apply(int i, const E& x) {\n    if (x != ei()) {\n\
-    \      val[i] = g(val[i], x);\n      if (i < n) compose(laz[i], x);\n    }\n \
-    \ }\n  inline void compose(E& a, const E& b) { a = a == ei() ? b : h(a, b); }\n\
-    };\n\nnamespace SegmentTreeUtil {\n\ntemplate <typename T>\nstruct Pair {\n  T\
-    \ first, second;\n  Pair() = default;\n  Pair(const T& f, const T& s) : first(f),\
-    \ second(s) {}\n  operator T() const { return first; }\n  friend ostream& operator<<(ostream&\
-    \ os, const Pair<T>& p) {\n    os << T(p.first);\n    return os;\n  }\n};\n\n\
-    template <typename T>\nT Max(T a, T b) {\n  return max(a, b);\n}\ntemplate <typename\
-    \ T>\nT Min(T a, T b) {\n  return min(a, b);\n}\ntemplate <typename T>\nT Update(T,\
-    \ T b) {\n  return b;\n}\ntemplate <typename T>\nT Add(T a, T b) {\n  return a\
-    \ + b;\n}\ntemplate <typename T>\nPair<T> Psum(Pair<T> a, Pair<T> b) {\n  return\
-    \ Pair<T>(a.first + b.first, a.second + b.second);\n}\ntemplate <typename T>\n\
-    Pair<T> Padd(Pair<T> a, T b) {\n  return Pair<T>(a.first + a.second * b, a.second);\n\
-    }\ntemplate <typename T>\nPair<T> PUpdate(Pair<T> a, T b) {\n  return Pair<T>(a.second\
-    \ * b, a.second);\n}\ntemplate <typename T>\nPair<T> Pid() {\n  return Pair<T>(0,\
-    \ 0);\n}\ntemplate <typename T>\nT Zero() {\n  return T(0);\n}\ntemplate <typename\
-    \ T, T val>\nT Const() {\n  return val;\n}\n\ntemplate <typename T, T MINF>\n\
-    struct AddMax_LazySegmentTree\n    : LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>,\
-    \ Const<T, MINF>, Zero<T>> {\n  using base =\n      LazySegmentTree<T, T, Max<T>,\
-    \ Add<T>, Add<T>, Const<T, MINF>, Zero<T>>;\n  AddMax_LazySegmentTree(const vector<T>&\
-    \ v) : base(v) {}\n};\n\ntemplate <typename T, T INF>\nstruct AddMin_LazySegmentTree\n\
-    \    : LazySegmentTree<T, T, Min<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>> {\n\
-    \  using base =\n      LazySegmentTree<T, T, Min<T>, Add<T>, Add<T>, Const<T,\
-    \ INF>, Zero<T>>;\n  AddMin_LazySegmentTree(const vector<T>& v) : base(v) {}\n\
-    };\n\ntemplate <typename T>\nstruct AddSum_LazySegmentTree\n    : LazySegmentTree<Pair<T>,\
-    \ T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>> {\n  using base =\n      LazySegmentTree<Pair<T>,\
-    \ T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>>;\n  AddSum_LazySegmentTree(const\
-    \ vector<T>& v) {\n    vector<Pair<T>> w(v.size());\n    for (int i = 0; i < (int)v.size();\
-    \ i++) w[i] = Pair<T>(v[i], 1);\n    base::init(w);\n  }\n};\n\ntemplate <typename\
-    \ T, T MINF>\nstruct UpdateMax_LazySegmentTree\n    : LazySegmentTree<T, T, Max<T>,\
-    \ Update<T>, Update<T>, Const<T, MINF>,\n                      Const<T, MINF>>\
-    \ {\n  using base = LazySegmentTree<T, T, Max<T>, Update<T>, Update<T>,\n    \
-    \                           Const<T, MINF>, Const<T, MINF>>;\n  UpdateMax_LazySegmentTree(const\
-    \ vector<T>& v) : base(v) {}\n};\n\ntemplate <typename T, T INF>\nstruct UpdateMin_LazySegmentTree\n\
-    \    : LazySegmentTree<T, T, Min<T>, Update<T>, Update<T>, Const<T, INF>,\n  \
-    \                    Const<T, INF>> {\n  using base = LazySegmentTree<T, T, Min<T>,\
-    \ Update<T>, Update<T>,\n                               Const<T, INF>, Const<T,\
-    \ INF>>;\n  UpdateMin_LazySegmentTree(const vector<T>& v) : base(v) {}\n};\n\n\
-    template <typename T, T UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree\n    :\
-    \ LazySegmentTree<Pair<T>, T, Psum<T>, PUpdate<T>, Update<T>, Pid<T>,\n      \
-    \                Const<T, UNUSED_VALUE>> {\n  using base = LazySegmentTree<Pair<T>,\
-    \ T, Psum<T>, PUpdate<T>, Update<T>,\n                               Pid<T>, Const<T,\
-    \ UNUSED_VALUE>>;\n  UpdateSum_LazySegmentTree(const vector<T>& v) {\n    vector<Pair<T>>\
-    \ w(v.size());\n    for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i],\
-    \ 1);\n    base::init(w);\n  }\n};\n\n}  // namespace SegmentTreeUtil\nusing SegmentTreeUtil::AddMax_LazySegmentTree;\n\
-    using SegmentTreeUtil::AddMin_LazySegmentTree;\nusing SegmentTreeUtil::AddSum_LazySegmentTree;\n\
-    using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
-    using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
-    \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    \n * @docs docs/segment-tree/lazy-segment-tree-utility.md\n */\n#line 7 \"verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp\"\
-    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  int I = 0;\n\
-    \  AddSum_LazySegmentTree<int> seg(vi(N, I));\n  rep(_, Q) {\n    ini(c);\n  \
-    \  if (c == 0) {\n      ini(s, t, x);\n      s--;\n      seg.update(s, t, x);\n\
-    \    } else {\n      ini(i);\n      i--;\n      out(seg.query(i, i + 1));\n  \
-    \  }\n  }\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E\"\
-    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/lazy-segment-tree-utility.hpp\"\
-    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  int I = 0;\n\
-    \  AddSum_LazySegmentTree<int> seg(vi(N, I));\n  rep(_, Q) {\n    ini(c);\n  \
-    \  if (c == 0) {\n      ini(s, t, x);\n      s--;\n      seg.update(s, t, x);\n\
-    \    } else {\n      ini(i);\n      i--;\n      out(seg.query(i, i + 1));\n  \
-    \  }\n  }\n}"
+    \ 4 \"verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp\"\n//\n#line\
+    \ 2 \"data-structure/w-ary-tree.hpp\"\n\nnamespace w_ary_tree_impl {\nusing u64\
+    \ = uint64_t;\nstatic constexpr unsigned int lgW = 6;\nstatic constexpr unsigned\
+    \ int W = 1u << lgW;\nstatic constexpr int inf = 1 << 30;\ninline int ctz(u64\
+    \ n) { return n ? __builtin_ctzll(n) : -1; }\ninline int clz(u64 n) { return n\
+    \ ? 63 - __builtin_clzll(n) : -1; }\n\ntemplate <int LOG, class D = void>\nstruct\
+    \ w_ary_tree_node {\n  u64 map;\n  int mn, mx;\n  static constexpr int shift =\
+    \ (LOG - 1) * lgW;\n  array<w_ary_tree_node<LOG - 1>, W> chd;\n  inline int mask(u64\
+    \ key) const { return key & ((1 << shift) - 1); }\n\n  w_ary_tree_node() : map(0),\
+    \ mn(inf), mx(-1) {}\n  void insert(int key) {\n    mn = std::min(mn, key), mx\
+    \ = std::max(mx, key);\n    int pos = key >> shift;\n    map |= 1ULL << pos;\n\
+    \    chd[pos].insert(mask(key));\n  }\n  void erase(int key) {\n    int pos =\
+    \ key >> shift;\n    chd[pos].erase(mask(key));\n    if (chd[pos].map == 0) map\
+    \ &= ~(1ULL << pos);\n    if (mn == mx) {\n      mn = inf, mx = -1;\n    } else\
+    \ if (mn == key) {\n      int p = ctz(map);\n      mn = (p << shift) + chd[p].min();\n\
+    \    } else if (mx == key) {\n      int p = clz(map);\n      mx = (p << shift)\
+    \ + chd[p].max();\n    }\n  }\n  bool contain(int key) const {\n    int pos =\
+    \ key >> shift;\n    return chd[pos].contain(mask(key));\n  }\n  inline int min()\
+    \ const { return mn == inf ? -1 : mn; }\n  inline int max() const { return mx;\
+    \ }\n  int find_next(int key) const {\n    if (key <= min()) return min();\n \
+    \   int pos = key >> shift;\n    if (((map >> pos) & 1) && mask(key) <= chd[pos].max())\
+    \ {\n      return (pos << shift) + chd[pos].find_next(mask(key));\n    }\n   \
+    \ int nxt = ctz(map & ~((1ULL << (pos + 1)) - 1));\n    if (pos == 63 || nxt ==\
+    \ -1) return -1;\n    return (nxt << shift) + chd[nxt].min();\n  }\n  int find_prev(int\
+    \ key) const {\n    if (max() < key) return max();\n    int pos = key >> shift;\n\
+    \    if (((map >> pos) & 1) && chd[pos].min() < mask(key)) {\n      return (pos\
+    \ << shift) + chd[pos].find_prev(mask(key));\n    }\n    int nxt = clz(map & ((1ULL\
+    \ << pos) - 1ULL));\n    if (nxt == -1) return -1;\n    return (nxt << shift)\
+    \ + chd[nxt].max();\n  }\n};\n\ntemplate <int LOG>\nstruct w_ary_tree_node<LOG,\
+    \ typename std::enable_if<LOG == 1>::type> {\n  u64 map;\n  w_ary_tree_node()\
+    \ : map(0) {}\n  void insert(int key) { map |= 1ULL << key; }\n  void erase(int\
+    \ key) { map &= ~(1ULL << key); }\n  bool contain(int key) const { return (map\
+    \ >> key) & 1; }\n  int min() const { return ctz(map); }\n  int max() const {\
+    \ return clz(map); }\n  int find_next(int key) const { return ctz(map & ~((1ULL\
+    \ << key) - 1)); }\n  int find_prev(int key) const { return clz(map & ((1ULL <<\
+    \ key) - 1)); }\n};\n\n}  // namespace w_ary_tree_impl\n\ntemplate <int LOG =\
+    \ 4>\nusing w_ary_tree = w_ary_tree_impl::w_ary_tree_node<LOG>;\n#line 2 \"misc/fastio.hpp\"\
+    \n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace std;\n\nnamespace fastio {\n\
+    static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
+    \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
+    \ {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j\
+    \ = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n\
+    \      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
+    \ ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ -\
+    \ pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1,\
+    \ por, stdout);\n  por = 0;\n}\n\ninline void skip_space() {\n  if (pil + 32 >\
+    \ pir) load();\n  while (ibuf[pil] <= ' ') pil++;\n}\n\ninline void rd(char& c)\
+    \ {\n  if (pil + 32 > pir) load();\n  c = ibuf[pil++];\n}\ntemplate <typename\
+    \ T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do c\
+    \ = ibuf[pil++];\n  while (c < '-');\n  [[maybe_unused]] bool minus = false;\n\
+    \  if constexpr (is_signed<T>::value == true) {\n    if (c == '-') minus = true,\
+    \ c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c &\
+    \ 15);\n    c = ibuf[pil++];\n  }\n  if constexpr (is_signed<T>::value == true)\
+    \ {\n    if (minus) x = -x;\n  }\n}\ninline void rd() {}\ntemplate <typename Head,\
+    \ typename... Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n\
+    \  rd(tail...);\n}\n\ninline void wt(char c) {\n  if (por > SZ - 32) flush();\n\
+    \  obuf[por++] = c;\n}\ninline void wt(bool b) { \n  if (por > SZ - 32) flush();\n\
+    \  obuf[por++] = b ? '1' : '0'; \n}\ntemplate <typename T>\ninline void wt(T x)\
+    \ {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n    return;\n\
+    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x < 0) obuf[por++]\
+    \ = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n\
+    \    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -=\
+    \ 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      obuf[por] = '0' + x;\n \
+    \     ++por;\n    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n  \
+    \    uint32_t r = uint32_t(x) - q * 10;\n      obuf[por] = '0' + q;\n      obuf[por\
+    \ + 1] = '0' + r;\n      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n \
+    \     memcpy(obuf + por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else\
+    \ {\n      memcpy(obuf + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n\
+    \  }\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline\
+    \ void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(Head&&\
+    \ head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n}\ntemplate\
+    \ <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
+    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
+    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
+    using fastio::wtn;\n#line 7 \"verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp\"\
+    \n\nw_ary_tree<> st;\n\nvoid Nyaan::solve() {\n  unsigned int N, Q;\n  rd(N, Q);\n\
+    \n  skip_space();\n  for (unsigned int i = 0; i < N; i++) {\n    char c;\n   \
+    \ rd(c);\n    if (c == '1') st.insert(i);\n  }\n\n  while (Q--) {\n    unsigned\
+    \ int c, k;\n    rd(c, k);\n    if (c == 0) {\n      st.insert(k);\n    } else\
+    \ if (c == 1) {\n      st.erase(k);\n    } else if (c == 2) {\n      wtn(st.contain(k));\n\
+    \    } else if (c == 3) {\n      wtn(st.find_next(k));\n    } else if (c == 4)\
+    \ {\n      wtn(st.find_prev(k + 1));\n    }\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n\
+    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../data-structure/w-ary-tree.hpp\"\
+    \n#include \"../../misc/fastio.hpp\"\n\nw_ary_tree<> st;\n\nvoid Nyaan::solve()\
+    \ {\n  unsigned int N, Q;\n  rd(N, Q);\n\n  skip_space();\n  for (unsigned int\
+    \ i = 0; i < N; i++) {\n    char c;\n    rd(c);\n    if (c == '1') st.insert(i);\n\
+    \  }\n\n  while (Q--) {\n    unsigned int c, k;\n    rd(c, k);\n    if (c == 0)\
+    \ {\n      st.insert(k);\n    } else if (c == 1) {\n      st.erase(k);\n    }\
+    \ else if (c == 2) {\n      wtn(st.contain(k));\n    } else if (c == 3) {\n  \
+    \    wtn(st.find_next(k));\n    } else if (c == 4) {\n      wtn(st.find_prev(k\
+    \ + 1));\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -284,17 +281,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - segment-tree/lazy-segment-tree-utility.hpp
+  - data-structure/w-ary-tree.hpp
+  - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
   requiredBy: []
-  timestamp: '2021-02-10 23:32:16+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-03-07 00:59:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
-- /verify/verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp.html
-title: verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
 ---

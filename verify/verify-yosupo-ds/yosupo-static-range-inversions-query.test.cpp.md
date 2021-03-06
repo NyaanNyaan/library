@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/binary-indexed-tree.hpp
     title: Binary Indexed Tree(Fenwick Tree)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/compress.hpp
     title: misc/compress.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: misc/mo.hpp
     title: misc/mo.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_inversions_query
@@ -215,51 +215,58 @@ data:
     \ xs.end(), x) - xs.begin();\n  }\n  inline int operator()(const T& x) const {\
     \ return get(x); }\n  T operator[](int i) { return xs[i]; }\n  int size() const\
     \ { return xs.size(); }\n};\n\n/**\n * \u5EA7\u6A19\u5727\u7E2E\n */\n#line 2\
-    \ \"misc/fastio.hpp\"\n\n\n\nnamespace fastio {\nstatic constexpr int SZ = 1 <<\
-    \ 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre\
-    \ {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i <\
-    \ 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n    \
-    \    num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n}\
-    \ constexpr pre;\n\ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n\
-    \  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil\
-    \ = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n\
-    }\n\ninline void rd(char& c) { c = ibuf[pil++]; }\ntemplate <typename T>\ninline\
-    \ void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do\n    c = ibuf[pil++];\n\
-    \  while (c < '-');\n  bool minus = 0;\n  if (c == '-') {\n    minus = 1;\n  \
-    \  c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c\
-    \ & 15);\n    c = ibuf[pil++];\n  }\n  if (minus) x = -x;\n}\ninline void rd()\
-    \ {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head, Tail&...\
-    \ tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) { obuf[por++]\
-    \ = c; }\ntemplate <typename T>\ninline void wt(T x) {\n  if (por > SZ - 32) flush();\n\
-    \  if (!x) {\n    obuf[por++] = '0';\n    return;\n  }\n  if (x < 0) {\n    obuf[por++]\
-    \ = '-';\n    x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000)\
-    \ {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n   \
-    \ i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      wt(char('0' + char(x)));\n\
-    \    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r\
-    \ = uint32_t(x) - q * 10;\n      obuf[por + 0] = '0' + q;\n      obuf[por + 1]\
-    \ = '0' + r;\n      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf\
-    \ + por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf\
-    \ + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf +\
-    \ por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate\
-    \ <typename Head, typename... Tail>\ninline void wt(Head head, Tail... tail) {\n\
-    \  wt(head);\n  wt(tail...);\n}\ntemplate <typename T>\ninline void wtn(T x) {\n\
-    \  wt(x, '\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\
-    \n}  // namespace fastio\nusing fastio::rd;\nusing fastio::wt;\nusing fastio::wtn;\n\
-    #line 2 \"misc/mo.hpp\"\n\n\n\nstruct Mo {\n  int width;\n  vector<int> left,\
-    \ right, order;\n\n  Mo(int N, int Q) : order(Q) {\n    width = max(1, N / max<int>(1,\
-    \ sqrt(Q / 3)));\n    iota(begin(order), end(order), 0);\n  }\n\n  void insert(int\
-    \ l, int r) { /* [l, r) */\n    left.emplace_back(l);\n    right.emplace_back(r);\n\
-    \  }\n\n  template <typename AL, typename AR, typename DL, typename DR, typename\
-    \ REM>\n  void run(const AL &add_left, const AR &add_right, const DL &delete_left,\n\
-    \           const DR &delete_right, const REM &rem) {\n    assert(left.size()\
-    \ == order.size());\n    sort(begin(order), end(order), [&](int a, int b) {\n\
-    \      int ablock = left[a] / width, bblock = left[b] / width;\n      if (ablock\
-    \ != bblock) return ablock < bblock;\n      if (ablock & 1) return right[a] <\
-    \ right[b];\n      return right[a] > right[b];\n    });\n    int nl = 0, nr =\
-    \ 0;\n    for (auto idx : order) {\n      while (nl > left[idx]) add_left(--nl);\n\
-    \      while (nr < right[idx]) add_right(nr++);\n      while (nl < left[idx])\
-    \ delete_left(nl++);\n      while (nr > right[idx]) delete_right(--nr);\n    \
-    \  rem(idx);\n    }\n  }\n};\n#line 8 \"verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp\"\
+    \ \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace std;\n\
+    \nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\n\
+    int pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
+    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
+    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
+    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load()\
+    \ {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf +\
+    \ pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n\
+    \  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void skip_space() {\n\
+    \  if (pil + 32 > pir) load();\n  while (ibuf[pil] <= ' ') pil++;\n}\n\ninline\
+    \ void rd(char& c) {\n  if (pil + 32 > pir) load();\n  c = ibuf[pil++];\n}\ntemplate\
+    \ <typename T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char\
+    \ c;\n  do c = ibuf[pil++];\n  while (c < '-');\n  [[maybe_unused]] bool minus\
+    \ = false;\n  if constexpr (is_signed<T>::value == true) {\n    if (c == '-')\
+    \ minus = true, c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x =\
+    \ x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if constexpr (is_signed<T>::value\
+    \ == true) {\n    if (minus) x = -x;\n  }\n}\ninline void rd() {}\ntemplate <typename\
+    \ Head, typename... Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n\
+    \  rd(tail...);\n}\n\ninline void wt(char c) {\n  if (por > SZ - 32) flush();\n\
+    \  obuf[por++] = c;\n}\ninline void wt(bool b) { \n  if (por > SZ - 32) flush();\n\
+    \  obuf[por++] = b ? '1' : '0'; \n}\ntemplate <typename T>\ninline void wt(T x)\
+    \ {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n    return;\n\
+    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x < 0) obuf[por++]\
+    \ = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n\
+    \    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -=\
+    \ 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      obuf[por] = '0' + x;\n \
+    \     ++por;\n    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n  \
+    \    uint32_t r = uint32_t(x) - q * 10;\n      obuf[por] = '0' + q;\n      obuf[por\
+    \ + 1] = '0' + r;\n      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n \
+    \     memcpy(obuf + por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else\
+    \ {\n      memcpy(obuf + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n\
+    \  }\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline\
+    \ void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(Head&&\
+    \ head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n}\ntemplate\
+    \ <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
+    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
+    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
+    using fastio::wtn;\n#line 2 \"misc/mo.hpp\"\n\n\n\nstruct Mo {\n  int width;\n\
+    \  vector<int> left, right, order;\n\n  Mo(int N, int Q) : order(Q) {\n    width\
+    \ = max(1, N / max<int>(1, sqrt(Q / 3)));\n    iota(begin(order), end(order),\
+    \ 0);\n  }\n\n  void insert(int l, int r) { /* [l, r) */\n    left.emplace_back(l);\n\
+    \    right.emplace_back(r);\n  }\n\n  template <typename AL, typename AR, typename\
+    \ DL, typename DR, typename REM>\n  void run(const AL &add_left, const AR &add_right,\
+    \ const DL &delete_left,\n           const DR &delete_right, const REM &rem) {\n\
+    \    assert(left.size() == order.size());\n    sort(begin(order), end(order),\
+    \ [&](int a, int b) {\n      int ablock = left[a] / width, bblock = left[b] /\
+    \ width;\n      if (ablock != bblock) return ablock < bblock;\n      if (ablock\
+    \ & 1) return right[a] < right[b];\n      return right[a] > right[b];\n    });\n\
+    \    int nl = 0, nr = 0;\n    for (auto idx : order) {\n      while (nl > left[idx])\
+    \ add_left(--nl);\n      while (nr < right[idx]) add_right(nr++);\n      while\
+    \ (nl < left[idx]) delete_left(nl++);\n      while (nr > right[idx]) delete_right(--nr);\n\
+    \      rem(idx);\n    }\n  }\n};\n#line 8 \"verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int N, Q;\n  rd(N);\n  rd(Q);\n\
     \  vi a(N);\n  rep(i, N) rd(a[i]);\n  Mo mo(N, Q);\n  rep(i, Q) {\n    int l,\
     \ r;\n    rd(l);\n    rd(r);\n    mo.insert(l, r);\n  }\n  compress<int> zip(a);\n\
@@ -301,8 +308,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   requiredBy: []
-  timestamp: '2021-01-15 18:15:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-03-07 00:59:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
 layout: document
