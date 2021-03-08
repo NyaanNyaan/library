@@ -63,7 +63,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -177,9 +177,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n\n#include <cstring>\n#include <type_traits>\n\
@@ -263,7 +263,7 @@ data:
   path: misc/fastio.hpp
   requiredBy: []
   timestamp: '2021-03-07 00:59:28+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp

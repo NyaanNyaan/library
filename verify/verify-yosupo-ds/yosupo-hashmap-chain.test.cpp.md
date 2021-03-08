@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-chain.hpp
     title: "Hash Map(\u9023\u9396\u6CD5)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'

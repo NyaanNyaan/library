@@ -60,7 +60,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/union-find.hpp
       title: Union Find(Disjoint Set Union)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/van_emde_boas_tree.hpp
       title: data-structure/van_emde_boas_tree.hpp
     - icon: ':heavy_check_mark:'
@@ -383,7 +383,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -1081,7 +1081,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
     - icon: ':heavy_check_mark:'

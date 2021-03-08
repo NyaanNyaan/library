@@ -337,6 +337,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
     title: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
   - icon: ':heavy_check_mark:'
@@ -991,6 +994,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
+  - verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
