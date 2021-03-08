@@ -1,18 +1,13 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 //
-#include <array>
-#include <cstring>
-#include <type_traits>
-#include <utility>
-
-using namespace std;
-
+#include "../../template/template.hpp"
+//
 #include "../../data-structure/van_emde_boas_tree.hpp"
 #include "../../misc/fastio.hpp"
 
 van_Emde_Boas_tree vEB;
 
-int main() {
+void Nyaan::solve() {
   unsigned int N, Q;
   rd(N, Q);
 
