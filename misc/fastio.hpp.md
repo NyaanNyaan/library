@@ -63,6 +63,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
     title: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
@@ -174,9 +177,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n\n#include <cstring>\n#include <type_traits>\n\
@@ -260,7 +263,7 @@ data:
   path: misc/fastio.hpp
   requiredBy: []
   timestamp: '2021-03-07 00:59:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
@@ -297,6 +300,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
+  - verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
