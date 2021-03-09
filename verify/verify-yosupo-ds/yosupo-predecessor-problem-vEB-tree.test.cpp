@@ -2,7 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../data-structure/van_emde_boas_tree.hpp"
+#include "../../data-structure/van-emde-boas-tree.hpp"
 #include "../../misc/fastio.hpp"
 
 van_Emde_Boas_tree vEB;

@@ -30,13 +30,16 @@ struct vEB_tree_node {
 
   void erase(int key) {
     int pos = key >> shift;
+    if (chd[pos].empty()) return;
     chd[pos].erase(mask(key));
     if (chd[pos].empty()) map.erase(pos);
-    if (mn == mx) {
-      mn = inf, mx = -1;
-    } else if (mn == key) {
-      int p = map.min();
-      mn = (p << shift) + chd[p].min();
+    if (mn == key) {
+      if (mx == key) {
+        mn = inf, mx = -1;
+      } else {
+        int p = map.min();
+        mn = (p << shift) + chd[p].min();
+      }
     } else if (mx == key) {
       int p = map.max();
       mx = (p << shift) + chd[p].max();
@@ -94,3 +97,7 @@ struct vEB_tree_node<LOG, typename std::enable_if<LOG == 1>::type> {
 }  // namespace vEB_tree_impl
 
 using van_Emde_Boas_tree = vEB_tree_impl::vEB_tree_node<4>;
+
+/**
+ * @brief van Emde Boas tree
+ */

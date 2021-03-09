@@ -27,11 +27,13 @@ struct w_ary_tree_node {
     int pos = key >> shift;
     chd[pos].erase(mask(key));
     if (chd[pos].map == 0) map &= ~(1ULL << pos);
-    if (mn == mx) {
-      mn = inf, mx = -1;
-    } else if (mn == key) {
-      int p = ctz(map);
-      mn = (p << shift) + chd[p].min();
+    if (mn == key) {
+      if (mx == key) {
+        mn = inf, mx = -1;
+      } else {
+        int p = ctz(map);
+        mn = (p << shift) + chd[p].min();
+      }
     } else if (mx == key) {
       int p = clz(map);
       mx = (p << shift) + chd[p].max();
@@ -82,3 +84,7 @@ struct w_ary_tree_node<LOG, typename std::enable_if<LOG == 1>::type> {
 
 template <int LOG = 4>
 using w_ary_tree = w_ary_tree_impl::w_ary_tree_node<LOG>;
+
+/**
+ * @brief 64-ary tree
+ */
