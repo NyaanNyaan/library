@@ -85,13 +85,13 @@ data:
   isVerificationFile: false
   path: modulo/mod-sqrt.hpp
   requiredBy:
-  - modulo/quadratic-equation.hpp
   - fps/fps-sqrt.hpp
+  - modulo/quadratic-equation.hpp
   timestamp: '2021-02-08 19:11:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
 documentation_of: modulo/mod-sqrt.hpp
 layout: document
 redirect_from:

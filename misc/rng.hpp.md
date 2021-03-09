@@ -130,37 +130,37 @@ data:
   isVerificationFile: false
   path: misc/rng.hpp
   requiredBy:
-  - matrix/black-box-linear-algebra.hpp
-  - prime/fast-factorize.hpp
   - modulo/mod-kth-root.hpp
-  - tree/pruefer-code.hpp
+  - matrix/black-box-linear-algebra.hpp
   - rbst/treap.hpp
+  - prime/fast-factorize.hpp
+  - tree/pruefer-code.hpp
   timestamp: '2020-12-08 00:23:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/dijkstra.test.cpp
-  - verify/verify-unit-test/multiplicative-function.test.cpp
-  - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-unit-test/interval-union.test.cpp
-  - verify/verify-unit-test/segment-tree-beats.test.cpp
-  - verify/verify-unit-test/radix-heap.test.cpp
-  - verify/verify-unit-test/tree-path.test.cpp
-  - verify/verify-unit-test/run-length-encoding.test.cpp
-  - verify/verify-unit-test/simulated-annealing.test.cpp
-  - verify/verify-unit-test/orderedmap.test.cpp
-  - verify/verify-unit-test/math.test.cpp
-  - verify/verify-unit-test/set-function.test.cpp
-  - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/segment-tree-beats.test.cpp
+  - verify/verify-unit-test/interval-union.test.cpp
+  - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/set-function.test.cpp
+  - verify/verify-unit-test/run-length-encoding.test.cpp
+  - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/simulated-annealing.test.cpp
+  - verify/verify-unit-test/tree-path.test.cpp
+  - verify/verify-unit-test/orderedmap.test.cpp
+  - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-unit-test/semiring.test.cpp
+  - verify/verify-unit-test/math.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
 documentation_of: misc/rng.hpp
 layout: document
 redirect_from:

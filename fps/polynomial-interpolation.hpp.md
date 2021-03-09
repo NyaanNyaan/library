@@ -165,8 +165,8 @@ data:
   isVerificationFile: false
   path: fps/polynomial-interpolation.hpp
   requiredBy:
-  - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
+  - matrix/polynomial-matrix-determinant.hpp
   timestamp: '2021-01-31 00:21:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

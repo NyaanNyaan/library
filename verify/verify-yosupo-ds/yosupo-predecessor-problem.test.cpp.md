@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: data-structure/w-ary-tree.hpp
-    title: data-structure/w-ary-tree.hpp
+    title: 64-ary tree
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
@@ -195,68 +195,68 @@ data:
     \ = std::max(mx, key);\n    int pos = key >> shift;\n    map |= 1ULL << pos;\n\
     \    chd[pos].insert(mask(key));\n  }\n  void erase(int key) {\n    int pos =\
     \ key >> shift;\n    chd[pos].erase(mask(key));\n    if (chd[pos].map == 0) map\
-    \ &= ~(1ULL << pos);\n    if (mn == mx) {\n      mn = inf, mx = -1;\n    } else\
-    \ if (mn == key) {\n      int p = ctz(map);\n      mn = (p << shift) + chd[p].min();\n\
-    \    } else if (mx == key) {\n      int p = clz(map);\n      mx = (p << shift)\
-    \ + chd[p].max();\n    }\n  }\n  bool contain(int key) const {\n    int pos =\
-    \ key >> shift;\n    return chd[pos].contain(mask(key));\n  }\n  inline int min()\
-    \ const { return mn == inf ? -1 : mn; }\n  inline int max() const { return mx;\
-    \ }\n  int find_next(int key) const {\n    if (key <= min()) return min();\n \
-    \   int pos = key >> shift;\n    if (((map >> pos) & 1) && mask(key) <= chd[pos].max())\
-    \ {\n      return (pos << shift) + chd[pos].find_next(mask(key));\n    }\n   \
-    \ int nxt = ctz(map & ~((1ULL << (pos + 1)) - 1));\n    if (pos == 63 || nxt ==\
-    \ -1) return -1;\n    return (nxt << shift) + chd[nxt].min();\n  }\n  int find_prev(int\
-    \ key) const {\n    if (max() < key) return max();\n    int pos = key >> shift;\n\
-    \    if (((map >> pos) & 1) && chd[pos].min() < mask(key)) {\n      return (pos\
-    \ << shift) + chd[pos].find_prev(mask(key));\n    }\n    int nxt = clz(map & ((1ULL\
-    \ << pos) - 1ULL));\n    if (nxt == -1) return -1;\n    return (nxt << shift)\
-    \ + chd[nxt].max();\n  }\n};\n\ntemplate <int LOG>\nstruct w_ary_tree_node<LOG,\
-    \ typename std::enable_if<LOG == 1>::type> {\n  u64 map;\n  w_ary_tree_node()\
-    \ : map(0) {}\n  void insert(int key) { map |= 1ULL << key; }\n  void erase(int\
-    \ key) { map &= ~(1ULL << key); }\n  bool contain(int key) const { return (map\
-    \ >> key) & 1; }\n  int min() const { return ctz(map); }\n  int max() const {\
-    \ return clz(map); }\n  int find_next(int key) const { return ctz(map & ~((1ULL\
-    \ << key) - 1)); }\n  int find_prev(int key) const { return clz(map & ((1ULL <<\
-    \ key) - 1)); }\n};\n\n}  // namespace w_ary_tree_impl\n\ntemplate <int LOG =\
-    \ 4>\nusing w_ary_tree = w_ary_tree_impl::w_ary_tree_node<LOG>;\n#line 2 \"misc/fastio.hpp\"\
-    \n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace std;\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir\
-    \ = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
-    \ {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j\
-    \ = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n\
-    \      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
-    \ ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ -\
-    \ pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1,\
-    \ por, stdout);\n  por = 0;\n}\n\ninline void skip_space() {\n  if (pil + 32 >\
-    \ pir) load();\n  while (ibuf[pil] <= ' ') pil++;\n}\n\ninline void rd(char& c)\
-    \ {\n  if (pil + 32 > pir) load();\n  c = ibuf[pil++];\n}\ntemplate <typename\
-    \ T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do c\
-    \ = ibuf[pil++];\n  while (c < '-');\n  [[maybe_unused]] bool minus = false;\n\
-    \  if constexpr (is_signed<T>::value == true) {\n    if (c == '-') minus = true,\
-    \ c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c &\
-    \ 15);\n    c = ibuf[pil++];\n  }\n  if constexpr (is_signed<T>::value == true)\
-    \ {\n    if (minus) x = -x;\n  }\n}\ninline void rd() {}\ntemplate <typename Head,\
-    \ typename... Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n\
-    \  rd(tail...);\n}\n\ninline void wt(char c) {\n  if (por > SZ - 32) flush();\n\
-    \  obuf[por++] = c;\n}\ninline void wt(bool b) { \n  if (por > SZ - 32) flush();\n\
-    \  obuf[por++] = b ? '1' : '0'; \n}\ntemplate <typename T>\ninline void wt(T x)\
-    \ {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n    return;\n\
-    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x < 0) obuf[por++]\
-    \ = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n\
-    \    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -=\
-    \ 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      obuf[por] = '0' + x;\n \
-    \     ++por;\n    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n  \
-    \    uint32_t r = uint32_t(x) - q * 10;\n      obuf[por] = '0' + q;\n      obuf[por\
-    \ + 1] = '0' + r;\n      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n \
-    \     memcpy(obuf + por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else\
-    \ {\n      memcpy(obuf + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n\
-    \  }\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline\
-    \ void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(Head&&\
-    \ head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n}\ntemplate\
-    \ <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
-    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
-    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 7 \"verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp\"\
+    \ &= ~(1ULL << pos);\n    if (mn == key) {\n      if (mx == key) {\n        mn\
+    \ = inf, mx = -1;\n      } else {\n        int p = ctz(map);\n        mn = (p\
+    \ << shift) + chd[p].min();\n      }\n    } else if (mx == key) {\n      int p\
+    \ = clz(map);\n      mx = (p << shift) + chd[p].max();\n    }\n  }\n  bool contain(int\
+    \ key) const {\n    int pos = key >> shift;\n    return chd[pos].contain(mask(key));\n\
+    \  }\n  inline int min() const { return mn == inf ? -1 : mn; }\n  inline int max()\
+    \ const { return mx; }\n  int find_next(int key) const {\n    if (key <= min())\
+    \ return min();\n    int pos = key >> shift;\n    if (((map >> pos) & 1) && mask(key)\
+    \ <= chd[pos].max()) {\n      return (pos << shift) + chd[pos].find_next(mask(key));\n\
+    \    }\n    int nxt = ctz(map & ~((1ULL << (pos + 1)) - 1));\n    if (pos == 63\
+    \ || nxt == -1) return -1;\n    return (nxt << shift) + chd[nxt].min();\n  }\n\
+    \  int find_prev(int key) const {\n    if (max() < key) return max();\n    int\
+    \ pos = key >> shift;\n    if (((map >> pos) & 1) && chd[pos].min() < mask(key))\
+    \ {\n      return (pos << shift) + chd[pos].find_prev(mask(key));\n    }\n   \
+    \ int nxt = clz(map & ((1ULL << pos) - 1ULL));\n    if (nxt == -1) return -1;\n\
+    \    return (nxt << shift) + chd[nxt].max();\n  }\n};\n\ntemplate <int LOG>\n\
+    struct w_ary_tree_node<LOG, typename std::enable_if<LOG == 1>::type> {\n  u64\
+    \ map;\n  w_ary_tree_node() : map(0) {}\n  void insert(int key) { map |= 1ULL\
+    \ << key; }\n  void erase(int key) { map &= ~(1ULL << key); }\n  bool contain(int\
+    \ key) const { return (map >> key) & 1; }\n  int min() const { return ctz(map);\
+    \ }\n  int max() const { return clz(map); }\n  int find_next(int key) const {\
+    \ return ctz(map & ~((1ULL << key) - 1)); }\n  int find_prev(int key) const {\
+    \ return clz(map & ((1ULL << key) - 1)); }\n};\n\n}  // namespace w_ary_tree_impl\n\
+    \ntemplate <int LOG = 4>\nusing w_ary_tree = w_ary_tree_impl::w_ary_tree_node<LOG>;\n\
+    \n/**\n * @brief 64-ary tree\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\
+    \n\nusing namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 <<\
+    \ 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre\
+    \ {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i <\
+    \ 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n    \
+    \    num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n}\
+    \ constexpr pre;\n\ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n\
+    \  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil\
+    \ = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n\
+    }\n\ninline void skip_space() {\n  if (pil + 32 > pir) load();\n  while (ibuf[pil]\
+    \ <= ' ') pil++;\n}\n\ninline void rd(char& c) {\n  if (pil + 32 > pir) load();\n\
+    \  c = ibuf[pil++];\n}\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil\
+    \ + 32 > pir) load();\n  char c;\n  do c = ibuf[pil++];\n  while (c < '-');\n\
+    \  [[maybe_unused]] bool minus = false;\n  if constexpr (is_signed<T>::value ==\
+    \ true) {\n    if (c == '-') minus = true, c = ibuf[pil++];\n  }\n  x = 0;\n \
+    \ while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n\
+    \  if constexpr (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n\
+    }\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void\
+    \ rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void\
+    \ wt(char c) {\n  if (por > SZ - 32) flush();\n  obuf[por++] = c;\n}\ninline void\
+    \ wt(bool b) { \n  if (por > SZ - 32) flush();\n  obuf[por++] = b ? '1' : '0';\
+    \ \n}\ntemplate <typename T>\ninline void wt(T x) {\n  if (por > SZ - 32) flush();\n\
+    \  if (!x) {\n    obuf[por++] = '0';\n    return;\n  }\n  if constexpr (is_signed<T>::value\
+    \ == true) {\n    if (x < 0) obuf[por++] = '-', x = -x;\n  }\n  int i = 12;\n\
+    \  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000)\
+    \ * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10)\
+    \ {\n      obuf[por] = '0' + x;\n      ++por;\n    } else {\n      uint32_t q\
+    \ = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n   \
+    \   obuf[por] = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n  \
+    \  }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x <<\
+    \ 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num\
+    \ + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i +\
+    \ 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename\
+    \ Head, typename... Tail>\ninline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n\
+    \  wt(forward<Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(Args&&...\
+    \ x) {\n  wt(forward<Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy()\
+    \ { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 7 \"verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp\"\
     \n\nw_ary_tree<> st;\n\nvoid Nyaan::solve() {\n  unsigned int N, Q;\n  rd(N, Q);\n\
     \n  skip_space();\n  for (unsigned int i = 0; i < N; i++) {\n    char c;\n   \
     \ rd(c);\n    if (c == '1') st.insert(i);\n  }\n\n  while (Q--) {\n    unsigned\
@@ -286,7 +286,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
   requiredBy: []
-  timestamp: '2021-03-07 00:59:28+09:00'
+  timestamp: '2021-03-09 21:23:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp

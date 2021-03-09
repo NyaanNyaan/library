@@ -61,11 +61,11 @@ data:
       path: data-structure/union-find.hpp
       title: Union Find(Disjoint Set Union)
     - icon: ':heavy_check_mark:'
-      path: data-structure/van_emde_boas_tree.hpp
-      title: data-structure/van_emde_boas_tree.hpp
+      path: data-structure/van-emde-boas-tree.hpp
+      title: van Emde Boas tree
     - icon: ':heavy_check_mark:'
       path: data-structure/w-ary-tree.hpp
-      title: data-structure/w-ary-tree.hpp
+      title: 64-ary tree
   - name: data-structure-2d
     pages:
     - icon: ':heavy_check_mark:'
