@@ -7,10 +7,11 @@ template <typename mint>
 mint factorial(int n) {
   if (n <= 1) return 1;
   using fps = FormalPowerSeries<mint>;
-  constexpr long long v = 32768;
+  long long v = 1;
+  while(v * v < n) v *= 2;
   mint iv = mint(v).inverse();
   fps G{1, v + 1};
-  for (long long d = 1; d * v < mint::get_mod(); d <<= 1) {
+  for (long long d = 1; d != v; d <<= 1) {
     fps G1 = SamplePointShift(G, mint(d) * iv);
     fps G2 = SamplePointShift(G, mint(d * v + v) * iv);
     fps G3 = SamplePointShift(G, mint(d * v + d + v) * iv);

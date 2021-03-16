@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <class T>
 struct Matrix {
   vector<vector<T> > A;
@@ -72,10 +70,26 @@ struct Matrix {
 
   Matrix operator^(const long long k) const { return (Matrix(*this) ^= k); }
 
+  bool operator==(const Matrix &B) const {
+    assert(H() == B.H() && W() == B.W());
+    for (int i = 0; i < H(); i++)
+      for (int j = 0; j < W(); j++)
+        if (A[i][j] != B[i][j]) return false;
+    return true;
+  }
+
+  bool operator!=(const Matrix &B) const {
+    assert(H() == B.H() && W() == B.W());
+    for (int i = 0; i < H(); i++)
+      for (int j = 0; j < W(); j++)
+        if (A[i][j] != B[i][j]) return true;
+    return false;
+  }
+
   friend ostream &operator<<(ostream &os, const Matrix &p) {
     int n = p.H(), m = p.W();
     for (int i = 0; i < n; i++) {
-       os << (i ? "   " : "") << "[";
+      os << (i ? "   " : "") << "[";
       for (int j = 0; j < m; j++) {
         os << p[i][j] << (j + 1 == m ? "]\n" : ",");
       }
