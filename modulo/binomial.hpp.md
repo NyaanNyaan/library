@@ -25,9 +25,15 @@ data:
     path: fps/utility.hpp
     title: fps/utility.hpp
   - icon: ':heavy_check_mark:'
+    path: matrix/polynomial-matrix-prefix-prod.hpp
+    title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
+  - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+    title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
@@ -145,6 +151,7 @@ data:
   - fps/taylor-shift.hpp
   - fps/utility.hpp
   - modulo/factorial.hpp
+  - matrix/polynomial-matrix-prefix-prod.hpp
   timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -165,6 +172,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
 documentation_of: modulo/binomial.hpp

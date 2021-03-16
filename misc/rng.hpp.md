@@ -40,6 +40,9 @@ data:
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+    title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -141,6 +144,7 @@ data:
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp

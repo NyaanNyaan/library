@@ -2,31 +2,24 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: data-structure/union-find.hpp
-    title: Union Find(Disjoint Set Union)
-  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: fps/multipoint-evaluation.hpp
-    title: Multipoint Evaluation
-  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: fps/polynomial-interpolation.hpp
-    title: fps/polynomial-interpolation.hpp
-  - icon: ':heavy_check_mark:'
-    path: matrix/matrix-tree.hpp
-    title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
-      \u5217)"
+    path: fps/sample-point-shift.hpp
+    title: fps/sample-point-shift.hpp
   - icon: ':heavy_check_mark:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: matrix/polynomial-matrix-determinant.hpp
-    title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
+    path: matrix/polynomial-matrix-prefix-prod.hpp
+    title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
+  - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -64,11 +57,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1303
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://yukicoder.me/problems/no/1303
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-1303.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/1303\"\n\n#line 2 \"template/template.hpp\"\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/polynomial-matrix-prod.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -214,28 +207,17 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yuki/yuki-1303.test.cpp\"\n//\n#line 2 \"data-structure/union-find.hpp\"\
-    \n\nstruct UnionFind {\n  vector<int> data;\n  UnionFind(int N) : data(N, -1)\
-    \ {}\n\n  int find(int k) { return data[k] < 0 ? k : data[k] = find(data[k]);\
-    \ }\n\n  int unite(int x, int y) {\n    if ((x = find(x)) == (y = find(y))) return\
-    \ false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x] += data[y];\n  \
-    \  data[y] = x;\n    return true;\n  }\n\n  // f ... merge function\n  template<typename\
-    \ F>\n  int unite(int x, int y,const F &f) {\n    if ((x = find(x)) == (y = find(y)))\
-    \ return false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x] += data[y];\n\
-    \    data[y] = x;\n    f(x, y);\n    return true;\n  }\n\n  int size(int k) {\
-    \ return -data[find(k)]; }\n\n  int same(int x, int y) { return find(x) == find(y);\
-    \ }\n};\n\n/**\n * @brief Union Find(Disjoint Set Union)\n * @docs docs/data-structure/union-find.md\n\
-    \ */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\
-    #line 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
-    \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
-    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
-    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
-    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
-    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
-    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
-    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
-    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ 4 \"verify/verify-unit-test/polynomial-matrix-prod.test.cpp\"\n//\n#line 2 \"\
+    fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
+    ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
+    \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
+    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
+    \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
+    \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
+    \  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
+    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
+    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
     \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
     \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
@@ -681,28 +663,59 @@ data:
     \ i < 2 * m; ++i) x[i] *= y[i];\n    x.intt();\n    b.insert(end(b), begin(x)\
     \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
     \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
-    \ */\n#line 2 \"matrix/matrix-tree.hpp\"\n\n\n\n#line 2 \"matrix/matrix.hpp\"\n\
-    \ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() =\
-    \ default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
-    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
-    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
-    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
-    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
-    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
-    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
-    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
-    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
-    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
-    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
-    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
-    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
-    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
-    \ vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k = 0; k\
-    \ < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] * B[k][j];\n\
-    \    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long long k)\
-    \ {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k & 1) B *=\
-    \ *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n \
-    \   return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
+    \ */\n#line 2 \"matrix/polynomial-matrix-prefix-prod.hpp\"\n\n#line 2 \"fps/sample-point-shift.hpp\"\
+    \n\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial\
+    \ {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX + 10),\
+    \ finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod() != 0);\n    MAX +=\
+    \ 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <= MAX; i++)\
+    \ fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n    for (int\
+    \ i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n    for (int i\
+    \ = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n  void extend()\
+    \ {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n    T inv = (-inv_[T::get_mod()\
+    \ % n]) * (T::get_mod() / n);\n    T finv = finv_.back() * inv;\n    fac_.push_back(fac);\n\
+    \    finv_.push_back(finv);\n    inv_.push_back(inv);\n  }\n\n  T fac(int i) {\n\
+    \    if(i < 0) return T(0);\n    while (i >= (int)fac_.size()) extend();\n   \
+    \ return fac_[i];\n  }\n\n  T finv(int i) {\n    if(i < 0) return T(0);\n    while\
+    \ (i >= (int)finv_.size()) extend();\n    return finv_[i];\n  }\n\n  T inv(int\
+    \ i) {\n    if(i < 0) return T(0);\n    while (i >= (int)inv_.size()) extend();\n\
+    \    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 || n < r ||\
+    \ r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n  T\
+    \ C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n   \
+    \ T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
+    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
+    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
+    \n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"fps/sample-point-shift.hpp\"\n\n\
+    // input  : h(0), h(1), ..., h(d - 1)\n// output : h(m), h(m + 1), ..., h(m +\
+    \ d - 1)\ntemplate <typename mint>\nFormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>&\
+    \ ys, mint m) {\n  static Binomial<mint> C;\n  int d = ys.size() - 1;\n  FormalPowerSeries<mint>\
+    \ f(d + 1), g(d * 2 + 1);\n  for (int i = 0; i <= d; i++) {\n    f[i] = ys[i]\
+    \ * C.finv(i) * C.finv(d - i);\n    if ((d - i) & 1) f[i] = -f[i];\n  }\n  for\
+    \ (int i = 0; i <= 2 * d; i++) {\n    assert(m - d + i != mint(0));\n    g[i]\
+    \ = (m - d + i).inverse();\n  }\n  auto h = f * g;\n  mint coeff = 1;\n  for (int\
+    \ i = 0; i <= d; i++) coeff *= (m - d + i);\n  for (int i = 0; i <= d; i++) {\n\
+    \    h[i + d] *= coeff;\n    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
+    \ + d, begin(h) + 2 * d + 1};\n}\n#line 2 \"matrix/matrix.hpp\"\n\ntemplate <class\
+    \ T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n  Matrix(int\
+    \ n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
+    \ T())){};\n\n  int H() const { return A.size(); }\n\n  int W() const { return\
+    \ A[0].size(); }\n\n  int size() const { return A.size(); }\n\n  inline const\
+    \ vector<T> &operator[](int k) const { return A[k]; }\n\n  inline vector<T> &operator[](int\
+    \ k) { return A[k]; }\n\n  static Matrix I(int n) {\n    Matrix mat(n);\n    for\
+    \ (int i = 0; i < n; i++) mat[i][i] = 1;\n    return (mat);\n  }\n\n  Matrix &operator+=(const\
+    \ Matrix &B) {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n\
+    \    for (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j]\
+    \ += B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B)\
+    \ {\n    int n = H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for\
+    \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
+    \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
+    \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
+    \ > C(n, vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k\
+    \ = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
+    \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
+    \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
+    \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
+    \    return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
     \ (Matrix(*this) += B); }\n\n  Matrix operator-(const Matrix &B) const { return\
     \ (Matrix(*this) -= B); }\n\n  Matrix operator*(const Matrix &B) const { return\
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
@@ -726,106 +739,73 @@ data:
     \ for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a ==\
     \ 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k] -=\
     \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
-    \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 2 \"matrix/polynomial-matrix-determinant.hpp\"\
-    \n\n\n\n#line 2 \"fps/polynomial-interpolation.hpp\"\n\n#line 2 \"fps/multipoint-evaluation.hpp\"\
-    \n\n#line 4 \"fps/multipoint-evaluation.hpp\"\n\ntemplate <typename mint>\nstruct\
-    \ ProductTree {\n  using fps = FormalPowerSeries<mint>;\n  const vector<mint>\
-    \ &xs;\n  vector<fps> buf;\n  int N, xsz;\n  vector<int> l, r;\n  ProductTree(const\
-    \ vector<mint> &xs_) : xs(xs_), xsz(xs.size()) {\n    N = 1;\n    while (N < (int)xs.size())\
-    \ N *= 2;\n    buf.resize(2 * N);\n    l.resize(2 * N, xs.size());\n    r.resize(2\
-    \ * N, xs.size());\n    fps::set_fft();\n    if (fps::ntt_ptr == nullptr)\n  \
-    \    build();\n    else\n      build_ntt();\n  }\n\n  void build() {\n    for\
-    \ (int i = 0; i < xsz; i++) {\n      l[i + N] = i;\n      r[i + N] = i + 1;\n\
-    \      buf[i + N] = {-xs[i], 1};\n    }\n    for (int i = N - 1; i > 0; i--) {\n\
-    \      l[i] = l[(i << 1) | 0];\n      r[i] = r[(i << 1) | 1];\n      if (buf[(i\
-    \ << 1) | 0].empty())\n        continue;\n      else if (buf[(i << 1) | 1].empty())\n\
-    \        buf[i] = buf[(i << 1) | 0];\n      else\n        buf[i] = buf[(i << 1)\
-    \ | 0] * buf[(i << 1) | 1];\n    }\n  }\n\n  void build_ntt() {\n    fps f;\n\
-    \    f.reserve(N * 2);\n    for (int i = 0; i < xsz; i++) {\n      l[i + N] =\
-    \ i;\n      r[i + N] = i + 1;\n      buf[i + N] = {-xs[i] + 1, -xs[i] - 1};\n\
-    \    }\n    for (int i = N - 1; i > 0; i--) {\n      l[i] = l[(i << 1) | 0];\n\
-    \      r[i] = r[(i << 1) | 1];\n      if (buf[(i << 1) | 0].empty())\n       \
-    \ continue;\n      else if (buf[(i << 1) | 1].empty())\n        buf[i] = buf[(i\
-    \ << 1) | 0];\n      else if (buf[(i << 1) | 0].size() == buf[(i << 1) | 1].size())\
-    \ {\n        buf[i] = buf[(i << 1) | 0];\n        f.clear();\n        copy(begin(buf[(i\
-    \ << 1) | 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n    \
-    \    buf[i].ntt_doubling();\n        f.ntt_doubling();\n        for (int j = 0;\
-    \ j < (int)buf[i].size(); j++) buf[i][j] *= f[j];\n      } else {\n        buf[i]\
-    \ = buf[(i << 1) | 0];\n        f.clear();\n        copy(begin(buf[(i << 1) |\
-    \ 1]), end(buf[(i << 1) | 1]),\n             back_inserter(f));\n        buf[i].ntt_doubling();\n\
-    \        f.intt();\n        f.resize(buf[i].size(), mint(0));\n        f.ntt();\n\
-    \        for (int j = 0; j < (int)buf[i].size(); j++) buf[i][j] *= f[j];\n   \
-    \   }\n    }\n    for (int i = 0; i < 2 * N; i++) {\n      buf[i].intt();\n  \
-    \    buf[i].shrink();\n    }\n  }\n};\n\ntemplate <typename mint>\nvector<mint>\
-    \ InnerMultipointEvaluation(const FormalPowerSeries<mint> &f,\n              \
-    \                         const vector<mint> &xs,\n                          \
-    \             const ProductTree<mint> &ptree) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  vector<mint> ret;\n  ret.reserve(xs.size());\n  auto rec = [&](auto self, fps\
-    \ a, int idx) {\n    if (ptree.l[idx] == ptree.r[idx]) return;\n    a %= ptree.buf[idx];\n\
-    \    if ((int)a.size() <= 64) {\n      for (int i = ptree.l[idx]; i < ptree.r[idx];\
-    \ i++)\n        ret.push_back(a.eval(xs[i]));\n      return;\n    }\n    self(self,\
-    \ a, (idx << 1) | 0);\n    self(self, a, (idx << 1) | 1);\n  };\n  rec(rec, f,\
-    \ 1);\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> MultipointEvaluation(const\
-    \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
-    \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
-    }\n\n/**\n * @brief Multipoint Evaluation\n */\n#line 5 \"fps/polynomial-interpolation.hpp\"\
-    \n\ntemplate <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const\
-    \ vector<mint> &xs,\n                                                const vector<mint>\
-    \ &ys) {\n  using fps = FormalPowerSeries<mint>;\n  assert(xs.size() == ys.size());\n\
-    \  ProductTree<mint> ptree(xs);\n  fps w = ptree.buf[1].diff();\n  vector<mint>\
-    \ vs = InnerMultipointEvaluation<mint>(w, xs, ptree);\n  auto rec = [&](auto self,\
-    \ int idx) -> fps {\n    if (idx >= ptree.N) {\n      if (idx - ptree.N < (int)xs.size())\n\
-    \        return {ys[idx - ptree.N] / vs[idx - ptree.N]};\n      else\n       \
-    \ return {mint(1)};\n    }\n    if (ptree.buf[idx << 1 | 0].empty())\n      return\
-    \ {};\n    else if (ptree.buf[idx << 1 | 1].empty())\n      return self(self,\
-    \ idx << 1 | 0);\n    return self(self, idx << 1 | 0) * ptree.buf[idx << 1 | 1]\
-    \ +\n           self(self, idx << 1 | 1) * ptree.buf[idx << 1 | 0];\n  };\n  return\
-    \ rec(rec, 1);\n}\n#line 8 \"matrix/polynomial-matrix-determinant.hpp\"\n\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> PolynomialMatrixDeterminant(\n    const\
-    \ Matrix<FormalPowerSeries<mint>> &m) {\n  int N = m.size();\n  int deg = 0;\n\
-    \  for (int i = 0; i < N; ++i) deg += max<int>(1, m[i][i].size()) - 1;\n  vector<mint>\
-    \ xs(deg + 1);\n  vector<mint> ys(deg + 1);\n  Matrix<mint> M(N);\n  for (int\
-    \ x = 0; x <= deg; x++) {\n    xs[x] = x;\n    for (int i = 0; i < N; ++i)\n \
-    \     for (int j = 0; j < N; ++j) M[i][j] = m[i][j].eval(x);\n    ys[x] = M.determinant();\n\
-    \  }\n  return PolynomialInterpolation<mint>(xs, ys);\n}\n\n/**\n * @brief \u591A\
-    \u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F\n * @docs docs/matrix/polynomial-matrix-determinant.md\n\
-    \ */\n#line 7 \"matrix/matrix-tree.hpp\"\n\ntemplate <typename T>\nstruct MatrixTree\
-    \ {\n  int n;\n  Matrix<T> m;\n  MatrixTree(int _n) : n(_n), m(_n) { assert(n\
-    \ > 0); }\n\n  void add(int i, int j, const T& x) {\n    if (i < n) m[i][i] +=\
-    \ x;\n    if (j < n) m[j][j] += x;\n    if (i < n and j < n) {\n      m[i][j]\
-    \ -= x;\n      m[j][i] -= x;\n    }\n  }\n\n  Matrix<T> get() const { return m;\
-    \ }\n\n  template <typename U, typename = void>\n  struct has_value_type : false_type\
-    \ {};\n  template <typename U>\n  struct has_value_type<\n      U, typename conditional<false,\
-    \ typename U::value_type, void>::type>\n      : true_type {};\n\n  template <typename\
-    \ U = T,\n            enable_if_t<has_value_type<U>::value, nullptr_t> = nullptr>\n\
-    \  T calc() {\n    return PolynomialMatrixDeterminant(m);\n  }\n  template <typename\
-    \ U = T,\n            enable_if_t<!has_value_type<U>::value, nullptr_t> = nullptr>\n\
-    \  T calc() {\n    return m.determinant();\n  }\n};\n\n/**\n * @brief \u884C\u5217\
-    \u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\u5217)\n */\n#line\
-    \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
-    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
-    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
-    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
-    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
-    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
-    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
-    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
-    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
-    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
-    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 6 \"matrix/polynomial-matrix-prefix-prod.hpp\"\
+    \n\n// return m(k-1) * m(k-2) * ... * m(1) * m(0)\ntemplate <typename mint>\n\
+    Matrix<mint> polynomial_matrix_prod(Matrix<FormalPowerSeries<mint>> &m,\n    \
+    \                                long long k) {\n  using Mat = Matrix<mint>;\n\
+    \  using fps = FormalPowerSeries<mint>;\n\n  auto shift = [](vector<Mat> &G, mint\
+    \ x) -> vector<Mat> {\n    int d = G.size(), n = G[0].size();\n    vector<Mat>\
+    \ H(d, Mat(n));\n    for (int i = 0; i < n; i++) {\n      for (int j = 0; j <\
+    \ n; j++) {\n        fps g(d);\n        for (int l = 0; l < d; l++) g[l] = G[l][i][j];\n\
+    \        fps h = SamplePointShift(g, x);\n        for (int l = 0; l < d; l++)\
+    \ H[l][i][j] = h[l];\n      }\n    }\n    return H;\n  };\n\n  int n = m.size();\n\
+    \  int deg = 1;\n  for (auto &_ : m.A) {\n    for (auto &x : _) deg = max<int>(deg,\
+    \ (int)x.size() - 1);\n  }\n  while (deg & (deg - 1)) deg++;\n\n  vector<Mat>\
+    \ G(deg + 1);\n  long long v = 1;\n  while (deg * v * v < k) v *= 2;\n  mint iv\
+    \ = mint(v).inverse();\n\n  for (int i = 0; i < (int)G.size(); i++) {\n    mint\
+    \ x = mint(v) * i;\n    Mat mt(n);\n    for (int j = 0; j < n; j++)\n      for\
+    \ (int l = 0; l < n; l++) mt[j][l] = m[j][l].eval(x);\n    G[i] = mt;\n  }\n\n\
+    \  for (long long w = 1; w != v; w <<= 1) {\n    mint W = w;\n    auto G1 = shift(G,\
+    \ W * iv);\n    auto G2 = shift(G, (W * deg * v + v) * iv);\n    auto G3 = shift(G,\
+    \ (W * deg * v + v + W) * iv);\n    for (int i = 0; i <= w * deg; i++)\n     \
+    \ G[i] = G1[i] * G[i], G2[i] = G3[i] * G2[i];\n    copy(begin(G2), end(G2) - 1,\
+    \ back_inserter(G));\n  }\n\n  Mat res = Mat::I(n);\n  long long i = 0;\n  while\
+    \ (i + v <= k) res = G[i / v] * res, i += v;\n  while (i < k) {\n    Mat mt(n);\n\
+    \    for (int j = 0; j < n; j++)\n      for (int l = 0; l < n; l++) mt[j][l] =\
+    \ m[j][l].eval(i);\n    res = mt * res;\n    i++;\n  }\n  return res;\n}\n\n/**\n\
+    \ * @brief \u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product\n */\n#line 2 \"\
+    misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n\
+    \  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct\
+    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
+    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
+    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
+    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
     \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
     \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
@@ -834,70 +814,33 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\n\
-    struct Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX\
-    \ + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod() != 0);\n \
-    \   MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <=\
-    \ MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
-    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
-    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
-    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
-    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
-    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
-    \  }\n\n  T fac(int i) {\n    if(i < 0) return T(0);\n    while (i >= (int)fac_.size())\
-    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    if(i < 0) return\
-    \ T(0);\n    while (i >= (int)finv_.size()) extend();\n    return finv_[i];\n\
-    \  }\n\n  T inv(int i) {\n    if(i < 0) return T(0);\n    while (i >= (int)inv_.size())\
-    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0\
-    \ || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n\
-    \  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
-    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
-    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
-    \n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 11 \"verify/verify-yuki/yuki-1303.test.cpp\"\
-    \nusing mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\nusing\
-    \ vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\nBinomial<mint> C;\n\
-    \nint a[111][111];\n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, M);\n\
-    \  UnionFind uf(N);\n  rep(i, M) {\n    ini(u, v);\n    --u, --v;\n    a[u][v]\
-    \ = a[v][u] = 1;\n    uf.unite(u, v);\n  }\n\n  using P = pair<mint, int>;\n \
-    \ vvi memo(N);\n  rep(i, N) memo[uf.find(i)].push_back(i);\n  V<P> v;\n  rep(i,\
-    \ N) {\n    if (uf.find(i) == i) {\n      if (sz(memo[i]) == 1) {\n        v.emplace_back(1,\
-    \ 1);\n        continue;\n      }\n      MatrixTree<mint> m(sz(memo[i]) - 1);\n\
-    \      rep(j, sz(memo[i])) rep(k, j) {\n        if (a[memo[i][j]][memo[i][k]])\
-    \ m.add(j, k, 1);\n      }\n      v.emplace_back(m.calc(), sz(memo[i]));\n   \
-    \ }\n  }\n\n  if (sz(v) == 1) {\n    MatrixTree<fps> m(N - 1);\n    rep(i, N)\
-    \ rep(j, i) {\n      if (a[i][j])\n        m.add(i, j, fps{0, 1});\n      else\n\
-    \        m.add(i, j, fps{1});\n    }\n    auto f = m.calc();\n    out(0);\n  \
-    \  out(f[N - 1] + f[N - 2]);\n    return;\n  }\n\n  sort(all(v), [](P a, P b)\
-    \ { return a.second > b.second; });\n  int n1 = v[0].second, n2 = v[1].second;\n\
-    \n  ll h = -n1 * n2 * 2;\n  mint ans = 1;\n  each(p, v) ans *= p.first;\n\n  mint\
-    \ sm = 0;\n  rep(j, sz(v)) rep(i, j) {\n    h += v[i].second * v[j].second * 2;\n\
-    \    if (v[i].second == n1 and v[j].second == n2) {\n      sm += v[i].second *\
-    \ v[j].second;\n    }\n  }\n\n  out(h);\n  out(ans * sm);\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1303\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../data-structure/union-find.hpp\"\
-    \n#include \"../../fps/ntt-friendly-fps.hpp\"\n#include \"../../matrix/matrix-tree.hpp\"\
-    \n#include \"../../matrix/polynomial-matrix-determinant.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../modulo/binomial.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    using vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
-    Binomial<mint> C;\n\nint a[111][111];\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  ini(N, M);\n  UnionFind uf(N);\n  rep(i, M) {\n    ini(u, v);\n    --u,\
-    \ --v;\n    a[u][v] = a[v][u] = 1;\n    uf.unite(u, v);\n  }\n\n  using P = pair<mint,\
-    \ int>;\n  vvi memo(N);\n  rep(i, N) memo[uf.find(i)].push_back(i);\n  V<P> v;\n\
-    \  rep(i, N) {\n    if (uf.find(i) == i) {\n      if (sz(memo[i]) == 1) {\n  \
-    \      v.emplace_back(1, 1);\n        continue;\n      }\n      MatrixTree<mint>\
-    \ m(sz(memo[i]) - 1);\n      rep(j, sz(memo[i])) rep(k, j) {\n        if (a[memo[i][j]][memo[i][k]])\
-    \ m.add(j, k, 1);\n      }\n      v.emplace_back(m.calc(), sz(memo[i]));\n   \
-    \ }\n  }\n\n  if (sz(v) == 1) {\n    MatrixTree<fps> m(N - 1);\n    rep(i, N)\
-    \ rep(j, i) {\n      if (a[i][j])\n        m.add(i, j, fps{0, 1});\n      else\n\
-    \        m.add(i, j, fps{1});\n    }\n    auto f = m.calc();\n    out(0);\n  \
-    \  out(f[N - 1] + f[N - 2]);\n    return;\n  }\n\n  sort(all(v), [](P a, P b)\
-    \ { return a.second > b.second; });\n  int n1 = v[0].second, n2 = v[1].second;\n\
-    \n  ll h = -n1 * n2 * 2;\n  mint ans = 1;\n  each(p, v) ans *= p.first;\n\n  mint\
-    \ sm = 0;\n  rep(j, sz(v)) rep(i, j) {\n    h += v[i].second * v[j].second * 2;\n\
-    \    if (v[i].second == n1 and v[j].second == n2) {\n      sm += v[i].second *\
-    \ v[j].second;\n    }\n  }\n\n  out(h);\n  out(ans * sm);\n}\n"
+    \ { return mod; }\n};\n#line 9 \"verify/verify-unit-test/polynomial-matrix-prod.test.cpp\"\
+    \n//\nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    using fps = FormalPowerSeries<mint>;\nusing fmat = Matrix<fps>;\nusing mat = Matrix<mint>;\n\
+    \nmat eval(fmat& f, mint x) {\n  mat m(f.H(), f.W());\n  rep(i, f.H()) rep(j,\
+    \ f.W()) m[i][j] = f[i][j].eval(x);\n  return m;\n}\n\nvoid test() {\n  int n\
+    \ = randint(1, 6);\n  int d = randint(1, 11);\n  // cerr << \" n : \" << n <<\
+    \ \" d : \" << d << endl;\n  fmat m(n);\n  rep(i, n) rep(j, n) {\n    fps f(d);\n\
+    \    each(x, f) x = rng();\n    m[i][j] = f;\n  }\n\n  mat prod = mat::I(n);\n\
+    \  rep(k, 1000) {\n    // if(k % 200 == 0 and k) cerr << k << \" finished.\" <<\
+    \ endl;\n    mat m2 = polynomial_matrix_prod(m, k);\n    assert(prod == m2);\n\
+    \    prod = eval(m, k) * prod;\n  }\n  // cerr << \"ok\" << endl;\n}\n\nvoid Nyaan::solve()\
+    \ {\n  test();\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n#include \"../../matrix/polynomial-matrix-prefix-prod.hpp\"\n#include \"../../misc/rng.hpp\"\
+    \n#include \"../../modint/montgomery-modint.hpp\"\n//\nusing namespace Nyaan;\n\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
+    using fmat = Matrix<fps>;\nusing mat = Matrix<mint>;\n\nmat eval(fmat& f, mint\
+    \ x) {\n  mat m(f.H(), f.W());\n  rep(i, f.H()) rep(j, f.W()) m[i][j] = f[i][j].eval(x);\n\
+    \  return m;\n}\n\nvoid test() {\n  int n = randint(1, 6);\n  int d = randint(1,\
+    \ 11);\n  // cerr << \" n : \" << n << \" d : \" << d << endl;\n  fmat m(n);\n\
+    \  rep(i, n) rep(j, n) {\n    fps f(d);\n    each(x, f) x = rng();\n    m[i][j]\
+    \ = f;\n  }\n\n  mat prod = mat::I(n);\n  rep(k, 1000) {\n    // if(k % 200 ==\
+    \ 0 and k) cerr << k << \" finished.\" << endl;\n    mat m2 = polynomial_matrix_prod(m,\
+    \ k);\n    assert(prod == m2);\n    prod = eval(m, k) * prod;\n  }\n  // cerr\
+    \ << \"ok\" << endl;\n}\n\nvoid Nyaan::solve() {\n  test();\n  int a, b;\n  cin\
+    \ >> a >> b;\n  cout << a + b << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -905,28 +848,26 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - data-structure/union-find.hpp
   - fps/ntt-friendly-fps.hpp
   - ntt/ntt-avx2.hpp
   - modint/simd-montgomery.hpp
   - fps/formal-power-series.hpp
-  - matrix/matrix-tree.hpp
-  - matrix/matrix.hpp
-  - matrix/polynomial-matrix-determinant.hpp
-  - fps/polynomial-interpolation.hpp
-  - fps/multipoint-evaluation.hpp
-  - modint/montgomery-modint.hpp
+  - matrix/polynomial-matrix-prefix-prod.hpp
+  - fps/sample-point-shift.hpp
   - modulo/binomial.hpp
+  - matrix/matrix.hpp
+  - misc/rng.hpp
+  - modint/montgomery-modint.hpp
   isVerificationFile: true
-  path: verify/verify-yuki/yuki-1303.test.cpp
+  path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   requiredBy: []
   timestamp: '2021-03-16 18:55:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-1303.test.cpp
+documentation_of: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-1303.test.cpp
-- /verify/verify/verify-yuki/yuki-1303.test.cpp.html
-title: verify/verify-yuki/yuki-1303.test.cpp
+- /verify/verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+- /verify/verify/verify-unit-test/polynomial-matrix-prod.test.cpp.html
+title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
 ---

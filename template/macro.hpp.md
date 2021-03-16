@@ -232,6 +232,9 @@ data:
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+    title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -951,6 +954,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp

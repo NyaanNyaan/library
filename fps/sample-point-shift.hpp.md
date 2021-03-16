@@ -10,9 +10,15 @@ data:
     title: modulo/binomial.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: matrix/polynomial-matrix-prefix-prod.hpp
+    title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
+  - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+    title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0502.test.cpp
     title: verify/verify-yuki/yuki-0502.test.cpp
@@ -135,10 +141,12 @@ data:
   path: fps/sample-point-shift.hpp
   requiredBy:
   - modulo/factorial.hpp
+  - matrix/polynomial-matrix-prefix-prod.hpp
   timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0502.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
 documentation_of: fps/sample-point-shift.hpp
 layout: document
 redirect_from:

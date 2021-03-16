@@ -375,6 +375,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: matrix/polynomial-matrix-determinant.hpp
       title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
+    - icon: ':heavy_check_mark:'
+      path: matrix/polynomial-matrix-prefix-prod.hpp
+      title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
   - name: misc
     pages:
     - icon: ':heavy_check_mark:'
@@ -974,6 +977,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/osak.test.cpp
       title: verify/verify-unit-test/osak.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+      title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/radix-heap.test.cpp
       title: verify/verify-unit-test/radix-heap.test.cpp

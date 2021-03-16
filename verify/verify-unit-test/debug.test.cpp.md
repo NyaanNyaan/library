@@ -300,9 +300,9 @@ data:
     hashmap/hashset.hpp\"\n\ntemplate <typename Key>\nstruct HashSet : HashMapImpl::HashMapBase<Key,\
     \ Key> {\n  using HashMapImpl::HashMapBase<Key, Key>::HashMapBase;\n};\n\n/* \n\
     \ * @brief \u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)\n * @docs\
-    \ docs/hashmap/hashset.md\n**/\n#line 2 \"matrix/matrix.hpp\"\n\n\n\ntemplate\
-    \ <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n\
-    \  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
+    \ docs/hashmap/hashset.md\n**/\n#line 2 \"matrix/matrix.hpp\"\n\ntemplate <class\
+    \ T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix() = default;\n  Matrix(int\
+    \ n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int n) : A(n, vector<T>(n,\
     \ T())){};\n\n  int H() const { return A.size(); }\n\n  int W() const { return\
     \ A[0].size(); }\n\n  int size() const { return A.size(); }\n\n  inline const\
     \ vector<T> &operator[](int k) const { return A[k]; }\n\n  inline vector<T> &operator[](int\
@@ -324,21 +324,27 @@ data:
     \ (Matrix(*this) += B); }\n\n  Matrix operator-(const Matrix &B) const { return\
     \ (Matrix(*this) -= B); }\n\n  Matrix operator*(const Matrix &B) const { return\
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
-    \ (Matrix(*this) ^= k); }\n\n  friend ostream &operator<<(ostream &os, const Matrix\
-    \ &p) {\n    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n  \
-    \     os << (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++)\
-    \ {\n        os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n\
-    \    return (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n  \
-    \  assert(H() == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n\
-    \      int idx = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i]\
-    \ != 0) {\n          idx = j;\n          break;\n        }\n      }\n      if\
-    \ (idx == -1) return 0;\n      if (i != idx) {\n        ret *= T(-1);\n      \
-    \  swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n\
-    \      for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n   \
-    \   for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a\
-    \ == 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k]\
-    \ -= B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n\
-    \ * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \ (Matrix(*this) ^= k); }\n\n  bool operator==(const Matrix &B) const {\n    assert(H()\
+    \ == B.H() && W() == B.W());\n    for (int i = 0; i < H(); i++)\n      for (int\
+    \ j = 0; j < W(); j++)\n        if (A[i][j] != B[i][j]) return false;\n    return\
+    \ true;\n  }\n\n  bool operator!=(const Matrix &B) const {\n    assert(H() ==\
+    \ B.H() && W() == B.W());\n    for (int i = 0; i < H(); i++)\n      for (int j\
+    \ = 0; j < W(); j++)\n        if (A[i][j] != B[i][j]) return true;\n    return\
+    \ false;\n  }\n\n  friend ostream &operator<<(ostream &os, const Matrix &p) {\n\
+    \    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n      os <<\
+    \ (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++) {\n      \
+    \  os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n    return\
+    \ (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n    assert(H()\
+    \ == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n      int idx\
+    \ = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i] != 0) {\n\
+    \          idx = j;\n          break;\n        }\n      }\n      if (idx == -1)\
+    \ return 0;\n      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i],\
+    \ B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n  \
+    \    for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n     \
+    \ for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a ==\
+    \ 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k] -=\
+    \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
+    \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 2 \"modint/montgomery-modint.hpp\"\
     \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
     \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
     \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
@@ -453,7 +459,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/debug.test.cpp
   requiredBy: []
-  timestamp: '2021-01-31 22:24:52+09:00'
+  timestamp: '2021-03-16 18:55:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/debug.test.cpp

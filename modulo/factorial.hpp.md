@@ -121,20 +121,20 @@ data:
     \    h[i + d] *= coeff;\n    coeff *= (m + i + 1) * g[i];\n  }\n  return FormalPowerSeries<mint>{begin(h)\
     \ + d, begin(h) + 2 * d + 1};\n}\n#line 5 \"modulo/factorial.hpp\"\n\ntemplate\
     \ <typename mint>\nmint factorial(int n) {\n  if (n <= 1) return 1;\n  using fps\
-    \ = FormalPowerSeries<mint>;\n  constexpr long long v = 32768;\n  mint iv = mint(v).inverse();\n\
-    \  fps G{1, v + 1};\n  for (long long d = 1; d * v < mint::get_mod(); d <<= 1)\
-    \ {\n    fps G1 = SamplePointShift(G, mint(d) * iv);\n    fps G2 = SamplePointShift(G,\
-    \ mint(d * v + v) * iv);\n    fps G3 = SamplePointShift(G, mint(d * v + d + v)\
-    \ * iv);\n    for (int i = 0; i <= d; i++) G[i] *= G1[i], G2[i] *= G3[i];\n  \
-    \  copy(begin(G2), end(G2) - 1, back_inserter(G));\n  }\n  mint res = 1;\n  long\
-    \ long i = 0;\n  while (i + v <= n) res *= G[i / v], i += v;\n  while (i < n)\
-    \ res *= ++i;\n  return res;\n}\n\n/**\n * @brief \u968E\u4E57 $\\mod p$\n * @docs\
-    \ docs/modulo/factorial.md\n */\n"
+    \ = FormalPowerSeries<mint>;\n  long long v = 1;\n  while(v * v < n) v *= 2;\n\
+    \  mint iv = mint(v).inverse();\n  fps G{1, v + 1};\n  for (long long d = 1; d\
+    \ != v; d <<= 1) {\n    fps G1 = SamplePointShift(G, mint(d) * iv);\n    fps G2\
+    \ = SamplePointShift(G, mint(d * v + v) * iv);\n    fps G3 = SamplePointShift(G,\
+    \ mint(d * v + d + v) * iv);\n    for (int i = 0; i <= d; i++) G[i] *= G1[i],\
+    \ G2[i] *= G3[i];\n    copy(begin(G2), end(G2) - 1, back_inserter(G));\n  }\n\
+    \  mint res = 1;\n  long long i = 0;\n  while (i + v <= n) res *= G[i / v], i\
+    \ += v;\n  while (i < n) res *= ++i;\n  return res;\n}\n\n/**\n * @brief \u968E\
+    \u4E57 $\\mod p$\n * @docs docs/modulo/factorial.md\n */\n"
   code: "#pragma once\n\n#include \"../fps/formal-power-series.hpp\"\n#include \"\
     ../fps/sample-point-shift.hpp\"\n\ntemplate <typename mint>\nmint factorial(int\
-    \ n) {\n  if (n <= 1) return 1;\n  using fps = FormalPowerSeries<mint>;\n  constexpr\
-    \ long long v = 32768;\n  mint iv = mint(v).inverse();\n  fps G{1, v + 1};\n \
-    \ for (long long d = 1; d * v < mint::get_mod(); d <<= 1) {\n    fps G1 = SamplePointShift(G,\
+    \ n) {\n  if (n <= 1) return 1;\n  using fps = FormalPowerSeries<mint>;\n  long\
+    \ long v = 1;\n  while(v * v < n) v *= 2;\n  mint iv = mint(v).inverse();\n  fps\
+    \ G{1, v + 1};\n  for (long long d = 1; d != v; d <<= 1) {\n    fps G1 = SamplePointShift(G,\
     \ mint(d) * iv);\n    fps G2 = SamplePointShift(G, mint(d * v + v) * iv);\n  \
     \  fps G3 = SamplePointShift(G, mint(d * v + d + v) * iv);\n    for (int i = 0;\
     \ i <= d; i++) G[i] *= G1[i], G2[i] *= G3[i];\n    copy(begin(G2), end(G2) - 1,\
@@ -149,7 +149,7 @@ data:
   isVerificationFile: false
   path: modulo/factorial.hpp
   requiredBy: []
-  timestamp: '2021-02-01 19:31:03+09:00'
+  timestamp: '2021-03-16 18:55:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0502.test.cpp
@@ -173,7 +173,8 @@ $v \geq \sqrt{p}$である$v$に対して$G_d(i)$を次のように定める。
 - $g_d(x) \equiv (x+1)(x+2)\ldots (x+d) \mod p$を$x=i,v+i\ldots,dv+i$で多点評価した値の組
 
 この時$G_d(0)$の$i$番目の要素$G_d(0)_i$は$(vi+1)(vi+2)\ldots(vi+d) \mod p$になる。ここで、$d = v\geq \sqrt{p}$であるとき、
-$$n! \equiv \left(\prod_{0 \leq i \lt \lfloor\frac{n}{v}\rfloor} G_v(0)_i \right)\cdot \prod_{\lfloor\frac{n}{v}\rfloor \cdot v \lt i \leq n} i\pmod p$$
+
+$$n! \equiv \left(\prod_{0 \leq i \lt \lfloor\frac{n}{v}\rfloor} G_v(0)_i \right) \cdot \prod _ { \lfloor\frac{n}{v}\rfloor \cdot v \lt i \leq n} i\pmod p$$
 になることが容易に確認できる。右辺の第2項は$\mathrm{O}(\sqrt{p})$で計算できるので、$G_v(0)$を高速に計算するアルゴリズムを見つければよい。
 
 $G_v(0)$の計算は$G_d(0)$から$G_{2d}(0)$を$\mathrm{O}(d \log d)$で計算するアルゴリズムを利用する。これを利用すればダブリングの要領で$G_v(0)$を$\mathrm{O}(v \log v)=\mathrm{O}(\sqrt{p} \log p)$で計算できる。
