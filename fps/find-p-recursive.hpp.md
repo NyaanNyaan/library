@@ -32,7 +32,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
+    _deprecated_at_docs: docs/fps/find-p-recursive.md
+    document_title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
     links: []
   bundledCode: "#line 2 \"fps/find-p-recursive.hpp\"\n\n#line 2 \"matrix/polynomial-matrix-prefix-prod.hpp\"\
     \n\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct\
@@ -226,46 +227,20 @@ data:
     \      x[j] = 1;\n      for (int k = 0; k < j; ++k) {\n        if (pivot[k] !=\
     \ -1) x[k] = -a[pivot[k]][j];\n      }\n      res.push_back(x);\n    }\n  }\n\
     \  return res;\n}\n#line 6 \"fps/find-p-recursive.hpp\"\n\n// return polynomial\
-    \ coefficient s.t. sum_{j=0...k} f_j(i) a_{i-j} = 0\ntemplate <typename mint>\n\
-    vector<FormalPowerSeries<mint>> find_p_recursive(vector<mint>& a, int d) {\n \
-    \ using fps = FormalPowerSeries<mint>;\n  int n = a.size();\n  int k = (n + 2)\
-    \ / (d + 2) - 1;\n  if (k <= 0) return {};\n  int m = (k + 1) * (d + 1);\n  vector<vector<mint>>\
-    \ M(m - 1, vector<mint>(m));\n  for (int i = 0; i < m - 1; i++) {\n    for (int\
-    \ j = 0; j <= k; j++) {\n      mint base = 1;\n      for (int l = 0; l <= d; l++)\
-    \ {\n        M[i][(d + 1) * j + l] = base * a[i + j];\n        base *= i + j;\n\
-    \      }\n    }\n  }\n  auto gauss = LinearEquation<mint>(M, vector<mint>(m -\
-    \ 1, 0));\n  if (gauss.size() <= 1) return {};\n  auto c = gauss[1];\n  while\
-    \ (all_of(end(c) - d - 1, end(c), [](mint x) { return x == mint(0); })) {\n  \
-    \  c.erase(end(c) - d - 1, end(c));\n  }\n  k = c.size() / (d + 1) - 1;\n  vector<fps>\
-    \ res;\n  for (int i = 0, j = 0; i < (int)c.size(); i += d + 1, j++) {\n    fps\
-    \ f{1}, base{j, 1};\n    fps sm;\n    for (int l = 0; l <= d; l++) sm += f * c[i\
-    \ + l], f *= base;\n    res.push_back(sm);\n  }\n  reverse(begin(res), end(res));\n\
-    \  return res;\n}\n\ntemplate<typename mint>\nmint kth_term_of_p_recursive(vector<mint>&\
-    \ a, long long k, int d) {\n  if (k < (int)a.size()) return a[k];\n  auto fs =\
-    \ find_p_recursive(a, d);\n  assert(fs.empty() == false);\n  int deg = fs.size()\
-    \ - 1;\n  assert(deg >= 1);\n  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);\n\
-    \  for (int i = 0; i < deg; i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i <\
-    \ deg; i++) m[i][i - 1] = fs[0];\n  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n\
-    \  for (int i = 0; i < deg; i++) a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m,\
-    \ k - deg + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg +\
-    \ 1)[0][0];\n  return res;\n}\n\n/**\n * @brief p-recursive\u306E\u9AD8\u901F\u8A08\
-    \u7B97\n */\n"
-  code: "#pragma once\n\n#include \"../matrix/polynomial-matrix-prefix-prod.hpp\"\n\
-    #include \"formal-power-series.hpp\"\n#include \"../matrix/linear-equation.hpp\"\
-    \n\n// return polynomial coefficient s.t. sum_{j=0...k} f_j(i) a_{i-j} = 0\ntemplate\
-    \ <typename mint>\nvector<FormalPowerSeries<mint>> find_p_recursive(vector<mint>&\
-    \ a, int d) {\n  using fps = FormalPowerSeries<mint>;\n  int n = a.size();\n \
-    \ int k = (n + 2) / (d + 2) - 1;\n  if (k <= 0) return {};\n  int m = (k + 1)\
-    \ * (d + 1);\n  vector<vector<mint>> M(m - 1, vector<mint>(m));\n  for (int i\
-    \ = 0; i < m - 1; i++) {\n    for (int j = 0; j <= k; j++) {\n      mint base\
-    \ = 1;\n      for (int l = 0; l <= d; l++) {\n        M[i][(d + 1) * j + l] =\
-    \ base * a[i + j];\n        base *= i + j;\n      }\n    }\n  }\n  auto gauss\
-    \ = LinearEquation<mint>(M, vector<mint>(m - 1, 0));\n  if (gauss.size() <= 1)\
-    \ return {};\n  auto c = gauss[1];\n  while (all_of(end(c) - d - 1, end(c), [](mint\
-    \ x) { return x == mint(0); })) {\n    c.erase(end(c) - d - 1, end(c));\n  }\n\
-    \  k = c.size() / (d + 1) - 1;\n  vector<fps> res;\n  for (int i = 0, j = 0; i\
-    \ < (int)c.size(); i += d + 1, j++) {\n    fps f{1}, base{j, 1};\n    fps sm;\n\
-    \    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
+    \ coefficient s.t. sum_{j=k...0} f_j(i) a_{i+j} = 0\n// (In more details, read\
+    \ verification code.)\ntemplate <typename mint>\nvector<FormalPowerSeries<mint>>\
+    \ find_p_recursive(vector<mint>& a, int d) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  int n = a.size();\n  int k = (n + 2) / (d + 2) - 1;\n  if (k <= 0) return {};\n\
+    \  int m = (k + 1) * (d + 1);\n  vector<vector<mint>> M(m - 1, vector<mint>(m));\n\
+    \  for (int i = 0; i < m - 1; i++) {\n    for (int j = 0; j <= k; j++) {\n   \
+    \   mint base = 1;\n      for (int l = 0; l <= d; l++) {\n        M[i][(d + 1)\
+    \ * j + l] = base * a[i + j];\n        base *= i + j;\n      }\n    }\n  }\n \
+    \ auto gauss = LinearEquation<mint>(M, vector<mint>(m - 1, 0));\n  if (gauss.size()\
+    \ <= 1) return {};\n  auto c = gauss[1];\n  while (all_of(end(c) - d - 1, end(c),\
+    \ [](mint x) { return x == mint(0); })) {\n    c.erase(end(c) - d - 1, end(c));\n\
+    \  }\n  k = c.size() / (d + 1) - 1;\n  vector<fps> res;\n  for (int i = 0, j =\
+    \ 0; i < (int)c.size(); i += d + 1, j++) {\n    fps f{1}, base{j, 1};\n    fps\
+    \ sm;\n    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
     \  }\n  reverse(begin(res), end(res));\n  return res;\n}\n\ntemplate<typename\
     \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {\n\
     \  if (k < (int)a.size()) return a[k];\n  auto fs = find_p_recursive(a, d);\n\
@@ -275,8 +250,35 @@ data:
     \  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n  for (int i = 0; i < deg; i++)\
     \ a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m, k - deg\
     \ + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];\n\
-    \  return res;\n}\n\n/**\n * @brief p-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n\
-    \ */\n"
+    \  return res;\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n\
+    \ * @docs docs/fps/find-p-recursive.md\n */\n"
+  code: "#pragma once\n\n#include \"../matrix/polynomial-matrix-prefix-prod.hpp\"\n\
+    #include \"formal-power-series.hpp\"\n#include \"../matrix/linear-equation.hpp\"\
+    \n\n// return polynomial coefficient s.t. sum_{j=k...0} f_j(i) a_{i+j} = 0\n//\
+    \ (In more details, read verification code.)\ntemplate <typename mint>\nvector<FormalPowerSeries<mint>>\
+    \ find_p_recursive(vector<mint>& a, int d) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  int n = a.size();\n  int k = (n + 2) / (d + 2) - 1;\n  if (k <= 0) return {};\n\
+    \  int m = (k + 1) * (d + 1);\n  vector<vector<mint>> M(m - 1, vector<mint>(m));\n\
+    \  for (int i = 0; i < m - 1; i++) {\n    for (int j = 0; j <= k; j++) {\n   \
+    \   mint base = 1;\n      for (int l = 0; l <= d; l++) {\n        M[i][(d + 1)\
+    \ * j + l] = base * a[i + j];\n        base *= i + j;\n      }\n    }\n  }\n \
+    \ auto gauss = LinearEquation<mint>(M, vector<mint>(m - 1, 0));\n  if (gauss.size()\
+    \ <= 1) return {};\n  auto c = gauss[1];\n  while (all_of(end(c) - d - 1, end(c),\
+    \ [](mint x) { return x == mint(0); })) {\n    c.erase(end(c) - d - 1, end(c));\n\
+    \  }\n  k = c.size() / (d + 1) - 1;\n  vector<fps> res;\n  for (int i = 0, j =\
+    \ 0; i < (int)c.size(); i += d + 1, j++) {\n    fps f{1}, base{j, 1};\n    fps\
+    \ sm;\n    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
+    \  }\n  reverse(begin(res), end(res));\n  return res;\n}\n\ntemplate<typename\
+    \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {\n\
+    \  if (k < (int)a.size()) return a[k];\n  auto fs = find_p_recursive(a, d);\n\
+    \  assert(fs.empty() == false);\n  int deg = fs.size() - 1;\n  assert(deg >= 1);\n\
+    \  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);\n  for (int i = 0; i < deg;\
+    \ i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i < deg; i++) m[i][i - 1] = fs[0];\n\
+    \  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n  for (int i = 0; i < deg; i++)\
+    \ a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m, k - deg\
+    \ + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];\n\
+    \  return res;\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n\
+    \ * @docs docs/fps/find-p-recursive.md\n */\n"
   dependsOn:
   - matrix/polynomial-matrix-prefix-prod.hpp
   - fps/formal-power-series.hpp
@@ -288,7 +290,7 @@ data:
   isVerificationFile: false
   path: fps/find-p-recursive.hpp
   requiredBy: []
-  timestamp: '2021-03-18 22:05:45+09:00'
+  timestamp: '2021-03-18 23:10:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/p-recursive.test.cpp
@@ -297,5 +299,64 @@ layout: document
 redirect_from:
 - /library/fps/find-p-recursive.hpp
 - /library/fps/find-p-recursive.hpp.html
-title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
+title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
 ---
+## P-recursiveの高速計算
+
+P-recursiveの第$k$項を$\mathrm{O}(\sqrt{k} \log k)$で計算出来たり出来なかったりするライブラリ。
+
+#### 使い方
+
+##### `find_p_recursive`
+
+十分長い数列$a$および次数$d$が与えられたとき、
+
+$$a_{i+n} f_n(i) + \ldots + a_{i}f_0(i) \equiv 0 \pmod {p} $$
+
+を満たす$d$次多項式の列$f_n(i),\ldots,f_1(i),f_0(i)$を返すライブラリ。他のライブラリとの関係上、列が降順($(f_n,\ldots,f_1,f_0)$の順番)になっているのに注意。
+
+適切に立式すれば一次連立方程式に帰着するのでガウスの掃き出し法を使えば求まる。計算量は$\mathrm{O}((dn)^3)$程度。
+
+##### verification codeの出力(一部加筆)
+
+P-recursiveの例も兼ねて貼る。
+
+```
+Constant Function
+a_{k+1} = a_{k}
+Identity Function (a_i = i + 1)
+(k + 1)a_{k+1} = (k + 2)a_{k}
+Factorial
+a_{k+1} = (k + 1)a_{k}
+Inversion of Factorial
+(k + 1)a_{k+1} = a_{k}
+Binomial (a_i = binom(i+1, 3))
+(k + 1)a_{k+1} = (k + 4)a_{k}
+Montmort Number
+a_{k+2} = (k + 1)a_{k+1} + (k + 1)a_{k}
+Catalan Number
+(k + 2)a_{k+1} = (4k + 2)a_{k}
+Motzkin Number
+(k + 4)a_{k+2} = (2k + 5)a_{k+1} + (3k + 3)a_{k}
+Schroder number
+(k + 3)a_{k+2} = (6k + 9)a_{k+1} + (998244352k + 0)a_{k}
+```
+
+##### `kth_term_of_p_recursive`
+
+十分長い数列$a$および次数$d$、整数$k$が与えられたとき、$a_k$を返すライブラリ。
+
+計算量は数列が$n$項間漸化式で表せるときに$\mathrm{O}(n^2 \sqrt{kd} (\log p + \log kd))$程度。
+
+アルゴリズム初出の日本語記事は削除済みだが、[CF 1479E editorial](https://codeforces.com/blog/entry/87598)に関連するアルゴリズムの解説がある。
+
+#### 注意点
+
+バグりやすい上に数列によっては正しい値を求められない。
+
+- $d$に正しい値を指定しないと、バグる(誤った関係式を導出する)
+- $i + k \leq n$について$f_{n}(i) \not \equiv 0$が必要。そうでない場合、バグる(そもそも漸化式から正しい値を求めることが不可能？)
+
+また、P-recursiveで表せない列の第$k$項は当然求められない。
+
+- 例えばBell Numberや$S(n,k)$は二項係数の和で表せるのでP-recursiveのような気がしてくるが、実際は違うので高速計算できない(と思う)。

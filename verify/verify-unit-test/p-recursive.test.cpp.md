@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: fps/find-p-recursive.hpp
-    title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
+    title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
@@ -405,40 +405,41 @@ data:
     \      x[j] = 1;\n      for (int k = 0; k < j; ++k) {\n        if (pivot[k] !=\
     \ -1) x[k] = -a[pivot[k]][j];\n      }\n      res.push_back(x);\n    }\n  }\n\
     \  return res;\n}\n#line 6 \"fps/find-p-recursive.hpp\"\n\n// return polynomial\
-    \ coefficient s.t. sum_{j=0...k} f_j(i) a_{i-j} = 0\ntemplate <typename mint>\n\
-    vector<FormalPowerSeries<mint>> find_p_recursive(vector<mint>& a, int d) {\n \
-    \ using fps = FormalPowerSeries<mint>;\n  int n = a.size();\n  int k = (n + 2)\
-    \ / (d + 2) - 1;\n  if (k <= 0) return {};\n  int m = (k + 1) * (d + 1);\n  vector<vector<mint>>\
-    \ M(m - 1, vector<mint>(m));\n  for (int i = 0; i < m - 1; i++) {\n    for (int\
-    \ j = 0; j <= k; j++) {\n      mint base = 1;\n      for (int l = 0; l <= d; l++)\
-    \ {\n        M[i][(d + 1) * j + l] = base * a[i + j];\n        base *= i + j;\n\
-    \      }\n    }\n  }\n  auto gauss = LinearEquation<mint>(M, vector<mint>(m -\
-    \ 1, 0));\n  if (gauss.size() <= 1) return {};\n  auto c = gauss[1];\n  while\
-    \ (all_of(end(c) - d - 1, end(c), [](mint x) { return x == mint(0); })) {\n  \
-    \  c.erase(end(c) - d - 1, end(c));\n  }\n  k = c.size() / (d + 1) - 1;\n  vector<fps>\
-    \ res;\n  for (int i = 0, j = 0; i < (int)c.size(); i += d + 1, j++) {\n    fps\
-    \ f{1}, base{j, 1};\n    fps sm;\n    for (int l = 0; l <= d; l++) sm += f * c[i\
-    \ + l], f *= base;\n    res.push_back(sm);\n  }\n  reverse(begin(res), end(res));\n\
-    \  return res;\n}\n\ntemplate<typename mint>\nmint kth_term_of_p_recursive(vector<mint>&\
-    \ a, long long k, int d) {\n  if (k < (int)a.size()) return a[k];\n  auto fs =\
-    \ find_p_recursive(a, d);\n  assert(fs.empty() == false);\n  int deg = fs.size()\
-    \ - 1;\n  assert(deg >= 1);\n  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);\n\
-    \  for (int i = 0; i < deg; i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i <\
-    \ deg; i++) m[i][i - 1] = fs[0];\n  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n\
-    \  for (int i = 0; i < deg; i++) a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m,\
-    \ k - deg + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg +\
-    \ 1)[0][0];\n  return res;\n}\n\n/**\n * @brief p-recursive\u306E\u9AD8\u901F\u8A08\
-    \u7B97\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\
-    \n\n#line 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
-    \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
-    my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
-    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
-    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
-    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
-    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
-    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
-    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
+    \ coefficient s.t. sum_{j=k...0} f_j(i) a_{i+j} = 0\n// (In more details, read\
+    \ verification code.)\ntemplate <typename mint>\nvector<FormalPowerSeries<mint>>\
+    \ find_p_recursive(vector<mint>& a, int d) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  int n = a.size();\n  int k = (n + 2) / (d + 2) - 1;\n  if (k <= 0) return {};\n\
+    \  int m = (k + 1) * (d + 1);\n  vector<vector<mint>> M(m - 1, vector<mint>(m));\n\
+    \  for (int i = 0; i < m - 1; i++) {\n    for (int j = 0; j <= k; j++) {\n   \
+    \   mint base = 1;\n      for (int l = 0; l <= d; l++) {\n        M[i][(d + 1)\
+    \ * j + l] = base * a[i + j];\n        base *= i + j;\n      }\n    }\n  }\n \
+    \ auto gauss = LinearEquation<mint>(M, vector<mint>(m - 1, 0));\n  if (gauss.size()\
+    \ <= 1) return {};\n  auto c = gauss[1];\n  while (all_of(end(c) - d - 1, end(c),\
+    \ [](mint x) { return x == mint(0); })) {\n    c.erase(end(c) - d - 1, end(c));\n\
+    \  }\n  k = c.size() / (d + 1) - 1;\n  vector<fps> res;\n  for (int i = 0, j =\
+    \ 0; i < (int)c.size(); i += d + 1, j++) {\n    fps f{1}, base{j, 1};\n    fps\
+    \ sm;\n    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
+    \  }\n  reverse(begin(res), end(res));\n  return res;\n}\n\ntemplate<typename\
+    \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {\n\
+    \  if (k < (int)a.size()) return a[k];\n  auto fs = find_p_recursive(a, d);\n\
+    \  assert(fs.empty() == false);\n  int deg = fs.size() - 1;\n  assert(deg >= 1);\n\
+    \  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);\n  for (int i = 0; i < deg;\
+    \ i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i < deg; i++) m[i][i - 1] = fs[0];\n\
+    \  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n  for (int i = 0; i < deg; i++)\
+    \ a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m, k - deg\
+    \ + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];\n\
+    \  return res;\n}\n\n/**\n * @brief P-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n\
+    \ * @docs docs/fps/find-p-recursive.md\n */\n#line 2 \"fps/ntt-friendly-fps.hpp\"\
+    \n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line 2 \"modint/simd-montgomery.hpp\"\n\n\
+    \n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\")))\
+    \ __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
+    \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
+    sse4.2\"))) __attribute__((always_inline)) __m128i\nmy128_mulhi_epu32(const __m128i\
+    \ &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i\
+    \ b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n\
+    \  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
+    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
+    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
     \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
     \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
@@ -976,7 +977,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/p-recursive.test.cpp
   requiredBy: []
-  timestamp: '2021-03-18 22:05:45+09:00'
+  timestamp: '2021-03-18 23:10:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/p-recursive.test.cpp

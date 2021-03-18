@@ -10,7 +10,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: fps/find-p-recursive.hpp
-    title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
+    title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/gauss-elimination.test.cpp

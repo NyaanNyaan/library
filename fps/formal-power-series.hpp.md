@@ -16,7 +16,7 @@ data:
     title: fps/fft2d.hpp
   - icon: ':heavy_check_mark:'
     path: fps/find-p-recursive.hpp
-    title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
+    title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   - icon: ':heavy_check_mark:'
     path: fps/fps-circular.hpp
     title: "\u4E09\u89D2\u95A2\u6570"
