@@ -46,6 +46,9 @@ data:
     path: verify/verify-unit-test/multiplicative-function.test.cpp
     title: verify/verify-unit-test/multiplicative-function.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -401,6 +404,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/debug.test.cpp

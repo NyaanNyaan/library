@@ -46,6 +46,9 @@ data:
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -320,6 +323,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp

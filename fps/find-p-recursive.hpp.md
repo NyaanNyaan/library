@@ -24,11 +24,15 @@ data:
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
     links: []
   bundledCode: "#line 2 \"fps/find-p-recursive.hpp\"\n\n#line 2 \"matrix/polynomial-matrix-prefix-prod.hpp\"\
     \n\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct\
@@ -239,12 +243,13 @@ data:
     \  return res;\n}\n\ntemplate<typename mint>\nmint kth_term_of_p_recursive(vector<mint>&\
     \ a, long long k, int d) {\n  if (k < (int)a.size()) return a[k];\n  auto fs =\
     \ find_p_recursive(a, d);\n  assert(fs.empty() == false);\n  int deg = fs.size()\
-    \ - 1;\n  assert(deg >= 1);\n  Matrix<fps> m(deg), denom(1);\n  for (int i = 0;\
-    \ i < deg; i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i < deg; i++) m[i][i\
-    \ - 1] = fs[0];\n  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n  for (int i\
-    \ = 0; i < deg; i++) a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m,\
+    \ - 1;\n  assert(deg >= 1);\n  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);\n\
+    \  for (int i = 0; i < deg; i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i <\
+    \ deg; i++) m[i][i - 1] = fs[0];\n  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n\
+    \  for (int i = 0; i < deg; i++) a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m,\
     \ k - deg + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg +\
-    \ 1)[0][0];\n  return res;\n}\n"
+    \ 1)[0][0];\n  return res;\n}\n\n/**\n * @brief p-recursive\u306E\u9AD8\u901F\u8A08\
+    \u7B97\n */\n"
   code: "#pragma once\n\n#include \"../matrix/polynomial-matrix-prefix-prod.hpp\"\n\
     #include \"formal-power-series.hpp\"\n#include \"../matrix/linear-equation.hpp\"\
     \n\n// return polynomial coefficient s.t. sum_{j=0...k} f_j(i) a_{i-j} = 0\ntemplate\
@@ -265,11 +270,13 @@ data:
     \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {\n\
     \  if (k < (int)a.size()) return a[k];\n  auto fs = find_p_recursive(a, d);\n\
     \  assert(fs.empty() == false);\n  int deg = fs.size() - 1;\n  assert(deg >= 1);\n\
-    \  Matrix<fps> m(deg), denom(1);\n  for (int i = 0; i < deg; i++) m[0][i] = -fs[i\
-    \ + 1];\n  for (int i = 1; i < deg; i++) m[i][i - 1] = fs[0];\n  denom[0][0] =\
-    \ fs[0];\n  Matrix<mint> a0(deg);\n  for (int i = 0; i < deg; i++) a0[i][0] =\
-    \ a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m, k - deg + 1) * a0)[0][0];\n\
-    \  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];\n  return res;\n}"
+    \  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);\n  for (int i = 0; i < deg;\
+    \ i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i < deg; i++) m[i][i - 1] = fs[0];\n\
+    \  denom[0][0] = fs[0];\n  Matrix<mint> a0(deg);\n  for (int i = 0; i < deg; i++)\
+    \ a0[i][0] = a[deg - 1 - i];\n  mint res = (polynomial_matrix_prod(m, k - deg\
+    \ + 1) * a0)[0][0];\n  res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];\n\
+    \  return res;\n}\n\n/**\n * @brief p-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n\
+    \ */\n"
   dependsOn:
   - matrix/polynomial-matrix-prefix-prod.hpp
   - fps/formal-power-series.hpp
@@ -281,13 +288,14 @@ data:
   isVerificationFile: false
   path: fps/find-p-recursive.hpp
   requiredBy: []
-  timestamp: '2021-03-18 18:35:03+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-03-18 22:05:45+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-unit-test/p-recursive.test.cpp
 documentation_of: fps/find-p-recursive.hpp
 layout: document
 redirect_from:
 - /library/fps/find-p-recursive.hpp
 - /library/fps/find-p-recursive.hpp.html
-title: fps/find-p-recursive.hpp
+title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
 ---

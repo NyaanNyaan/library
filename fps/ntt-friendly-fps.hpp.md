@@ -17,6 +17,9 @@ data:
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -618,6 +621,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
 documentation_of: fps/ntt-friendly-fps.hpp
 layout: document
 redirect_from:

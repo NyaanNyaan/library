@@ -2,9 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: fps/find-p-recursive.hpp
-    title: fps/find-p-recursive.hpp
+    title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   - icon: ':heavy_check_mark:'
     path: matrix/gauss-elimination.hpp
     title: matrix/gauss-elimination.hpp
@@ -28,6 +28,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
@@ -151,6 +154,7 @@ data:
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp

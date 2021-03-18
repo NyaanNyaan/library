@@ -15,10 +15,13 @@ data:
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: fps/find-p-recursive.hpp
-    title: fps/find-p-recursive.hpp
+    title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
@@ -231,6 +234,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
 documentation_of: matrix/polynomial-matrix-prefix-prod.hpp
 layout: document
 redirect_from:

@@ -14,9 +14,9 @@ data:
   - icon: ':warning:'
     path: fps/fft2d.hpp
     title: fps/fft2d.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: fps/find-p-recursive.hpp
-    title: fps/find-p-recursive.hpp
+    title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   - icon: ':heavy_check_mark:'
     path: fps/fps-circular.hpp
     title: "\u4E09\u89D2\u95A2\u6570"
@@ -86,6 +86,9 @@ data:
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
@@ -387,6 +390,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
 documentation_of: fps/formal-power-series.hpp

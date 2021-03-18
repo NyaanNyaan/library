@@ -235,6 +235,9 @@ data:
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -967,6 +970,7 @@ data:
   - verify/verify-unit-test/wavelet-matrix.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/interval-union.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/factorize.test.cpp

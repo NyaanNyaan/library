@@ -5,9 +5,9 @@ data:
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: fps/find-p-recursive.hpp
-    title: fps/find-p-recursive.hpp
+    title: "p-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   - icon: ':heavy_check_mark:'
     path: matrix/linear-equation.hpp
     title: matrix/linear-equation.hpp
@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/p-recursive.test.cpp
+    title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
@@ -107,6 +110,7 @@ data:
   timestamp: '2021-03-18 18:35:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
 documentation_of: matrix/gauss-elimination.hpp
