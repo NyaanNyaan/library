@@ -7,11 +7,11 @@ uint32_t a_buf_[4096][4096] __attribute__((aligned(64)));
 
 // return value: (rank, (-1) ^ (number of swap time))
 template <typename mint>
-__attribute__((target("avx2"))) pair<int, int> GaussianElimination(
+__attribute__((target("avx2"))) pair<int, mint> GaussianElimination(
     const vector<vector<mint>> &m, int LinearEquation = false) {
   mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);
   int H = m.size(), W = m[0].size(), rank = 0;
-  int det = 1;
+  mint det = 1;
   for (int i = 0; i < H; i++)
     for (int j = 0; j < W; j++) a[i][j].a = m[i][j].a;
 
@@ -25,14 +25,14 @@ __attribute__((target("avx2"))) pair<int, int> GaussianElimination(
     if (rank == H) break;
     int idx = -1;
     for (int i = rank; i < H; i++) {
-      if (a[i][j].get() != 0) idx = i;
-      if (idx != -1) break;
+      if (a[i][j].get() != 0) {
+        idx = i;
+        break;
+      }
     }
     if (idx == -1) {
-      if (LinearEquation)
-        continue;
-      else
-        return {0, 0};
+      det = 0;
+      continue;
     }
 
     // swap
@@ -40,6 +40,7 @@ __attribute__((target("avx2"))) pair<int, int> GaussianElimination(
       det = -det;
       for (int l = j; l < W; l++) swap(a[rank][l], a[idx][l]);
     }
+    det *= a[rank][j];
 
     // normalize
     if (LinearEquation) {
@@ -77,12 +78,7 @@ __attribute__((target("avx2"))) pair<int, int> GaussianElimination(
 // calculate determinant
 template <typename mint>
 mint determinant(const vector<vector<mint>> &mat) {
-  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);
-  auto p = GaussianElimination(mat);
-  if (p.first != (int)mat.size()) return mint(0);
-  mint det = p.second;
-  for (int i = 0; i < (int)mat.size(); i++) det *= a[i][i];
-  return det;
+  return GaussianElimination(mat).second;
 }
 
 // return V<V<mint>>
