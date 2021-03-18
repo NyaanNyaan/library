@@ -4,7 +4,8 @@
 #include "formal-power-series.hpp"
 #include "../matrix/linear-equation.hpp"
 
-// return polynomial coefficient s.t. sum_{j=0...k} f_j(i) a_{i-j} = 0
+// return polynomial coefficient s.t. sum_{j=k...0} f_j(i) a_{i+j} = 0
+// (In more details, read verification code.)
 template <typename mint>
 vector<FormalPowerSeries<mint>> find_p_recursive(vector<mint>& a, int d) {
   using fps = FormalPowerSeries<mint>;
@@ -59,5 +60,6 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {
 }
 
 /**
- * @brief p-recursiveの高速計算
+ * @brief P-recursiveの高速計算
+ * @docs docs/fps/find-p-recursive.md
  */
