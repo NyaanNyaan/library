@@ -15,8 +15,8 @@ data:
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: modulo/gauss-elimination.hpp
-    title: modulo/gauss-elimination.hpp
+    path: modulo/gauss-elimination-fast.hpp
+    title: modulo/gauss-elimination-fast.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
@@ -265,7 +265,7 @@ data:
   - fps/fps-composition-fast.hpp
   - fps/ntt-friendly-fps.hpp
   - fps/fast-multieval.hpp
-  - modulo/gauss-elimination.hpp
+  - modulo/gauss-elimination-fast.hpp
   - modulo/strassen.hpp
   - ntt/cooley-tukey-ntt.hpp
   - ntt/ntt-avx2.hpp

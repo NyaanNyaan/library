@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: fps/fft2d.hpp
     title: fps/fft2d.hpp
+  - icon: ':warning:'
+    path: fps/find-p-recursive.hpp
+    title: fps/find-p-recursive.hpp
   - icon: ':heavy_check_mark:'
     path: fps/fps-circular.hpp
     title: "\u4E09\u89D2\u95A2\u6570"
@@ -332,6 +335,7 @@ data:
   - fps/taylor-shift.hpp
   - fps/inversion-formula.hpp
   - fps/fps-composition-fast.hpp
+  - fps/find-p-recursive.hpp
   - fps/ntt-friendly-fps.hpp
   - fps/kitamasa.hpp
   - fps/fps-sqrt.hpp

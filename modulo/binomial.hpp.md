@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: fps/find-p-recursive.hpp
+    title: fps/find-p-recursive.hpp
   - icon: ':heavy_check_mark:'
     path: fps/fps-composition.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
@@ -149,6 +152,7 @@ data:
   - fps/lagrange-interpolation-point.hpp
   - fps/sample-point-shift.hpp
   - fps/taylor-shift.hpp
+  - fps/find-p-recursive.hpp
   - fps/utility.hpp
   - modulo/factorial.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp

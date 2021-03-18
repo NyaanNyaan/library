@@ -160,6 +160,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
     title: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - icon: ':heavy_check_mark:'
@@ -417,6 +420,7 @@ data:
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
 documentation_of: modint/montgomery-modint.hpp
 layout: document

@@ -8,8 +8,8 @@ data:
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
-    path: modulo/gauss-elimination.hpp
-    title: modulo/gauss-elimination.hpp
+    path: modulo/gauss-elimination-fast.hpp
+    title: modulo/gauss-elimination-fast.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -40,7 +40,7 @@ data:
     - https://judge.yosupo.jp/problem/system_of_linear_equations
   bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-linear-equation.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -185,7 +185,8 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
+    \ 4 \"verify/verify-yosupo-math/yosupo-linear-equation.test.cpp\"\n//\n#line 2\
+    \ \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
     \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
     \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
     \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
@@ -217,9 +218,9 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"modulo/gauss-elimination.hpp\"\n\n\n\n#line 2\
-    \ \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\
-    \n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
+    \ { return mod; }\n};\n#line 2 \"modulo/gauss-elimination-fast.hpp\"\n\n#line\
+    \ 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
+    \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
     my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
     \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
@@ -258,7 +259,7 @@ data:
     ))) __attribute__((always_inline)) __m256i\nmontgomery_sub_256(const __m256i &a,\
     \ const __m256i &b, const __m256i &m2,\n                   const __m256i &m0)\
     \ {\n  __m256i ret = _mm256_sub_epi32(a, b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
-    \ ret), m2),\n                          ret);\n}\n#line 6 \"modulo/gauss-elimination.hpp\"\
+    \ ret), m2),\n                          ret);\n}\n#line 4 \"modulo/gauss-elimination-fast.hpp\"\
     \n\nnamespace Gauss {\nuint32_t a_buf_[4096][4096] __attribute__((aligned(64)));\n\
     \n// return value: (rank, (-1) ^ (number of swap time))\ntemplate <typename mint>\n\
     __attribute__((target(\"avx2\"))) pair<int, int> GaussianElimination(\n    const\
@@ -281,9 +282,9 @@ data:
     \      __m256i RmulC = montgomery_mul_256(R, COEFF, r, m1);\n          _mm256_store_si256((__m256i\
     \ *)(a[rank] + i), RmulC);\n        }\n      }\n    }\n\n    // elimination\n\
     \    for (int k = (LinearEquation ? 0 : rank + 1); k < H; k++) {\n      if (k\
-    \ == rank) continue;\n      if (a[k][rank].get() != 0) {\n        mint coeff =\
-    \ a[k][j] / a[rank][j];\n        __m256i COEFF = _mm256_set1_epi32(coeff.a);\n\
-    \        for (int i = j / 8 * 8; i < W; i += 8) {\n          __m256i R = _mm256_load_si256((__m256i\
+    \ == rank) continue;\n      if (a[k][j].get() != 0) {\n        mint coeff = a[k][j]\
+    \ / a[rank][j];\n        __m256i COEFF = _mm256_set1_epi32(coeff.a);\n       \
+    \ for (int i = j / 8 * 8; i < W; i += 8) {\n          __m256i R = _mm256_load_si256((__m256i\
     \ *)(a[rank] + i));\n          __m256i K = _mm256_load_si256((__m256i *)(a[k]\
     \ + i));\n          __m256i RmulC = montgomery_mul_256(R, COEFF, r, m1);\n   \
     \       __m256i KmnsR = montgomery_sub_256(K, RmulC, m2, m0);\n          _mm256_store_si256((__m256i\
@@ -303,18 +304,18 @@ data:
     \ res(1, vector<mint>(W));\n  vector<int> pivot(W, -1);\n  for (int i = 0, j =\
     \ 0; i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n    res[0][j] = a[i][W],\
     \ pivot[j] = i;\n  }\n  for (int j = 0; j < W; ++j) {\n    if (pivot[j] == -1)\
-    \ {\n      vector<mint> x(W);\n      x[j] = -1;\n      for (int k = 0; k < j;\
-    \ ++k)\n        if (pivot[k] != -1) x[k] = a[pivot[k]][j];\n      res.push_back(x);\n\
-    \    }\n  }\n  return res;\n}\n\n}  // namespace Gauss\nusing namespace Gauss;\n\
-    #line 6 \"verify/verify-yosupo-math/yosupo-linear-equation.test.cpp\"\n\nusing\
-    \ mint = LazyMontgomeryModInt<998244353>;\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  ini(N, M);\n  V<V<mint>> A(N, V<mint>(M));\n  in(A);\n  V<mint> B(N);\n\
-    \  in(B);\n  auto v = LinearEquation<mint>(A, B);\n  out(sz(v) - 1);\n  each(x,\
-    \ v) out(x);\n}\n"
+    \ {\n      vector<mint> x(W);\n      x[j] = 1;\n      for (int k = 0; k < j; ++k)\n\
+    \        if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n      res.push_back(x);\n\
+    \    }\n  }\n  return res;\n}\n\n}  // namespace Gauss\n\nusing Gauss::determinant;\n\
+    using Gauss::LinearEquation;\n#line 7 \"verify/verify-yosupo-math/yosupo-linear-equation.test.cpp\"\
+    \n\nusing mint = LazyMontgomeryModInt<998244353>;\n\nusing namespace Nyaan;\n\
+    void Nyaan::solve() {\n  ini(N, M);\n  V<V<mint>> A(N, V<mint>(M));\n  in(A);\n\
+    \  V<mint> B(N);\n  in(B);\n  auto v = LinearEquation<mint>(A, B);\n  out(sz(v)\
+    \ - 1);\n  each(x, v) out(x);\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../modulo/gauss-elimination.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    \nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, M);\n  V<V<mint>> A(N,\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n#include \"../../modulo/gauss-elimination-fast.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    \nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, M);\n  V<V<mint>> A(N,\
     \ V<mint>(M));\n  in(A);\n  V<mint> B(N);\n  in(B);\n  auto v = LinearEquation<mint>(A,\
     \ B);\n  out(sz(v) - 1);\n  each(x, v) out(x);\n}"
   dependsOn:
@@ -325,12 +326,12 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - modint/montgomery-modint.hpp
-  - modulo/gauss-elimination.hpp
+  - modulo/gauss-elimination-fast.hpp
   - modint/simd-montgomery.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-03-18 18:35:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp

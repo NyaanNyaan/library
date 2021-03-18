@@ -128,6 +128,9 @@ data:
     - icon: ':warning:'
       path: fps/fft2d.hpp
       title: fps/fft2d.hpp
+    - icon: ':warning:'
+      path: fps/find-p-recursive.hpp
+      title: fps/find-p-recursive.hpp
     - icon: ':heavy_check_mark:'
       path: fps/formal-power-series.hpp
       title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
@@ -360,8 +363,14 @@ data:
       path: matrix/black-box-linear-algebra.hpp
       title: Black Box Linear Algebra
     - icon: ':heavy_check_mark:'
+      path: matrix/gauss-elimination.hpp
+      title: matrix/gauss-elimination.hpp
+    - icon: ':heavy_check_mark:'
       path: matrix/hafnian.hpp
       title: matrix/hafnian.hpp
+    - icon: ':heavy_check_mark:'
+      path: matrix/linear-equation.hpp
+      title: matrix/linear-equation.hpp
     - icon: ':heavy_check_mark:'
       path: matrix/matrix-fast.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
@@ -445,8 +454,8 @@ data:
       path: modulo/factorial.hpp
       title: "\u968E\u4E57 $\\mod p$"
     - icon: ':heavy_check_mark:'
-      path: modulo/gauss-elimination.hpp
-      title: modulo/gauss-elimination.hpp
+      path: modulo/gauss-elimination-fast.hpp
+      title: modulo/gauss-elimination-fast.hpp
     - icon: ':heavy_check_mark:'
       path: modulo/mod-kth-root.hpp
       title: kth root(Tonelli-Shanks algorithm)
@@ -1294,6 +1303,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
       title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp

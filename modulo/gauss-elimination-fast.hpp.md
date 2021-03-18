@@ -20,7 +20,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"modulo/gauss-elimination.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+  bundledCode: "#line 2 \"modulo/gauss-elimination-fast.hpp\"\n\n#line 2 \"modint/simd-montgomery.hpp\"\
     \n\n\n#include <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
     \ __m128i\nmy128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
     \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
@@ -60,7 +60,7 @@ data:
     ))) __attribute__((always_inline)) __m256i\nmontgomery_sub_256(const __m256i &a,\
     \ const __m256i &b, const __m256i &m2,\n                   const __m256i &m0)\
     \ {\n  __m256i ret = _mm256_sub_epi32(a, b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
-    \ ret), m2),\n                          ret);\n}\n#line 6 \"modulo/gauss-elimination.hpp\"\
+    \ ret), m2),\n                          ret);\n}\n#line 4 \"modulo/gauss-elimination-fast.hpp\"\
     \n\nnamespace Gauss {\nuint32_t a_buf_[4096][4096] __attribute__((aligned(64)));\n\
     \n// return value: (rank, (-1) ^ (number of swap time))\ntemplate <typename mint>\n\
     __attribute__((target(\"avx2\"))) pair<int, int> GaussianElimination(\n    const\
@@ -83,9 +83,9 @@ data:
     \      __m256i RmulC = montgomery_mul_256(R, COEFF, r, m1);\n          _mm256_store_si256((__m256i\
     \ *)(a[rank] + i), RmulC);\n        }\n      }\n    }\n\n    // elimination\n\
     \    for (int k = (LinearEquation ? 0 : rank + 1); k < H; k++) {\n      if (k\
-    \ == rank) continue;\n      if (a[k][rank].get() != 0) {\n        mint coeff =\
-    \ a[k][j] / a[rank][j];\n        __m256i COEFF = _mm256_set1_epi32(coeff.a);\n\
-    \        for (int i = j / 8 * 8; i < W; i += 8) {\n          __m256i R = _mm256_load_si256((__m256i\
+    \ == rank) continue;\n      if (a[k][j].get() != 0) {\n        mint coeff = a[k][j]\
+    \ / a[rank][j];\n        __m256i COEFF = _mm256_set1_epi32(coeff.a);\n       \
+    \ for (int i = j / 8 * 8; i < W; i += 8) {\n          __m256i R = _mm256_load_si256((__m256i\
     \ *)(a[rank] + i));\n          __m256i K = _mm256_load_si256((__m256i *)(a[k]\
     \ + i));\n          __m256i RmulC = montgomery_mul_256(R, COEFF, r, m1);\n   \
     \       __m256i KmnsR = montgomery_sub_256(K, RmulC, m2, m0);\n          _mm256_store_si256((__m256i\
@@ -105,12 +105,13 @@ data:
     \ res(1, vector<mint>(W));\n  vector<int> pivot(W, -1);\n  for (int i = 0, j =\
     \ 0; i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n    res[0][j] = a[i][W],\
     \ pivot[j] = i;\n  }\n  for (int j = 0; j < W; ++j) {\n    if (pivot[j] == -1)\
-    \ {\n      vector<mint> x(W);\n      x[j] = -1;\n      for (int k = 0; k < j;\
-    \ ++k)\n        if (pivot[k] != -1) x[k] = a[pivot[k]][j];\n      res.push_back(x);\n\
-    \    }\n  }\n  return res;\n}\n\n}  // namespace Gauss\nusing namespace Gauss;\n"
-  code: "#pragma once\n\n\n\n#include \"modint/simd-montgomery.hpp\"\n\nnamespace\
-    \ Gauss {\nuint32_t a_buf_[4096][4096] __attribute__((aligned(64)));\n\n// return\
-    \ value: (rank, (-1) ^ (number of swap time))\ntemplate <typename mint>\n__attribute__((target(\"\
+    \ {\n      vector<mint> x(W);\n      x[j] = 1;\n      for (int k = 0; k < j; ++k)\n\
+    \        if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n      res.push_back(x);\n\
+    \    }\n  }\n  return res;\n}\n\n}  // namespace Gauss\n\nusing Gauss::determinant;\n\
+    using Gauss::LinearEquation;\n"
+  code: "#pragma once\n\n#include \"../modint/simd-montgomery.hpp\"\n\nnamespace Gauss\
+    \ {\nuint32_t a_buf_[4096][4096] __attribute__((aligned(64)));\n\n// return value:\
+    \ (rank, (-1) ^ (number of swap time))\ntemplate <typename mint>\n__attribute__((target(\"\
     avx2\"))) pair<int, int> GaussianElimination(\n    const vector<vector<mint>>\
     \ &m, int LinearEquation = false) {\n  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);\n\
     \  int H = m.size(), W = m[0].size(), rank = 0;\n  int det = 1;\n  for (int i\
@@ -130,7 +131,7 @@ data:
     \ + i));\n          __m256i RmulC = montgomery_mul_256(R, COEFF, r, m1);\n   \
     \       _mm256_store_si256((__m256i *)(a[rank] + i), RmulC);\n        }\n    \
     \  }\n    }\n\n    // elimination\n    for (int k = (LinearEquation ? 0 : rank\
-    \ + 1); k < H; k++) {\n      if (k == rank) continue;\n      if (a[k][rank].get()\
+    \ + 1); k < H; k++) {\n      if (k == rank) continue;\n      if (a[k][j].get()\
     \ != 0) {\n        mint coeff = a[k][j] / a[rank][j];\n        __m256i COEFF =\
     \ _mm256_set1_epi32(coeff.a);\n        for (int i = j / 8 * 8; i < W; i += 8)\
     \ {\n          __m256i R = _mm256_load_si256((__m256i *)(a[rank] + i));\n    \
@@ -153,24 +154,25 @@ data:
     \ res(1, vector<mint>(W));\n  vector<int> pivot(W, -1);\n  for (int i = 0, j =\
     \ 0; i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n    res[0][j] = a[i][W],\
     \ pivot[j] = i;\n  }\n  for (int j = 0; j < W; ++j) {\n    if (pivot[j] == -1)\
-    \ {\n      vector<mint> x(W);\n      x[j] = -1;\n      for (int k = 0; k < j;\
-    \ ++k)\n        if (pivot[k] != -1) x[k] = a[pivot[k]][j];\n      res.push_back(x);\n\
-    \    }\n  }\n  return res;\n}\n\n}  // namespace Gauss\nusing namespace Gauss;\n"
+    \ {\n      vector<mint> x(W);\n      x[j] = 1;\n      for (int k = 0; k < j; ++k)\n\
+    \        if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n      res.push_back(x);\n\
+    \    }\n  }\n  return res;\n}\n\n}  // namespace Gauss\n\nusing Gauss::determinant;\n\
+    using Gauss::LinearEquation;\n"
   dependsOn:
   - modint/simd-montgomery.hpp
   isVerificationFile: false
-  path: modulo/gauss-elimination.hpp
+  path: modulo/gauss-elimination-fast.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-03-18 18:35:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-documentation_of: modulo/gauss-elimination.hpp
+documentation_of: modulo/gauss-elimination-fast.hpp
 layout: document
 redirect_from:
-- /library/modulo/gauss-elimination.hpp
-- /library/modulo/gauss-elimination.hpp.html
-title: modulo/gauss-elimination.hpp
+- /library/modulo/gauss-elimination-fast.hpp
+- /library/modulo/gauss-elimination-fast.hpp.html
+title: modulo/gauss-elimination-fast.hpp
 ---

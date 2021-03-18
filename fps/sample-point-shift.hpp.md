@@ -9,6 +9,9 @@ data:
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: fps/find-p-recursive.hpp
+    title: fps/find-p-recursive.hpp
   - icon: ':heavy_check_mark:'
     path: matrix/polynomial-matrix-prefix-prod.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
@@ -140,6 +143,7 @@ data:
   isVerificationFile: false
   path: fps/sample-point-shift.hpp
   requiredBy:
+  - fps/find-p-recursive.hpp
   - modulo/factorial.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
   timestamp: '2021-02-01 19:31:03+09:00'

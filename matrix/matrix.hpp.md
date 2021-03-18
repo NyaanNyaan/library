@@ -2,6 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: fps/find-p-recursive.hpp
+    title: fps/find-p-recursive.hpp
+  - icon: ':heavy_check_mark:'
+    path: matrix/gauss-elimination.hpp
+    title: matrix/gauss-elimination.hpp
+  - icon: ':heavy_check_mark:'
+    path: matrix/linear-equation.hpp
+    title: matrix/linear-equation.hpp
   - icon: ':heavy_check_mark:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
@@ -22,6 +31,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
@@ -125,7 +137,10 @@ data:
   isVerificationFile: false
   path: matrix/matrix.hpp
   requiredBy:
+  - fps/find-p-recursive.hpp
+  - matrix/gauss-elimination.hpp
   - matrix/matrix-tree.hpp
+  - matrix/linear-equation.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
   - matrix/polynomial-matrix-determinant.hpp
   timestamp: '2021-03-16 18:55:44+09:00'
@@ -135,6 +150,7 @@ data:
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document
 redirect_from:
