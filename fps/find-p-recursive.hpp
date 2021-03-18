@@ -47,7 +47,7 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {
   assert(fs.empty() == false);
   int deg = fs.size() - 1;
   assert(deg >= 1);
-  Matrix<fps> m(deg), denom(1);
+  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);
   for (int i = 0; i < deg; i++) m[0][i] = -fs[i + 1];
   for (int i = 1; i < deg; i++) m[i][i - 1] = fs[0];
   denom[0][0] = fs[0];
@@ -57,3 +57,7 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {
   res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];
   return res;
 }
+
+/**
+ * @brief p-recursiveの高速計算
+ */
