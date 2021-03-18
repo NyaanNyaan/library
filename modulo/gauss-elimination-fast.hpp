@@ -1,8 +1,6 @@
 #pragma once
 
-
-
-#include "modint/simd-montgomery.hpp"
+#include "../modint/simd-montgomery.hpp"
 
 namespace Gauss {
 uint32_t a_buf_[4096][4096] __attribute__((aligned(64)));
@@ -59,7 +57,7 @@ __attribute__((target("avx2"))) pair<int, int> GaussianElimination(
     // elimination
     for (int k = (LinearEquation ? 0 : rank + 1); k < H; k++) {
       if (k == rank) continue;
-      if (a[k][rank].get() != 0) {
+      if (a[k][j].get() != 0) {
         mint coeff = a[k][j] / a[rank][j];
         __m256i COEFF = _mm256_set1_epi32(coeff.a);
         for (int i = j / 8 * 8; i < W; i += 8) {
@@ -114,9 +112,9 @@ vector<vector<mint>> LinearEquation(vector<vector<mint>> A, vector<mint> B) {
   for (int j = 0; j < W; ++j) {
     if (pivot[j] == -1) {
       vector<mint> x(W);
-      x[j] = -1;
+      x[j] = 1;
       for (int k = 0; k < j; ++k)
-        if (pivot[k] != -1) x[k] = a[pivot[k]][j];
+        if (pivot[k] != -1) x[k] = -a[pivot[k]][j];
       res.push_back(x);
     }
   }
@@ -124,4 +122,6 @@ vector<vector<mint>> LinearEquation(vector<vector<mint>> A, vector<mint> B) {
 }
 
 }  // namespace Gauss
-using namespace Gauss;
+
+using Gauss::determinant;
+using Gauss::LinearEquation;

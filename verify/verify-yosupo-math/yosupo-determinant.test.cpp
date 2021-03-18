@@ -2,7 +2,7 @@
 
 #include "../../template/template.hpp"
 #include "../../modint/montgomery-modint.hpp"
-#include "../../modulo/gauss-elimination.hpp"
+#include "../../modulo/gauss-elimination-fast.hpp"
 
 using mint = LazyMontgomeryModInt<998244353>;
 using vm = vector<mint>;
