@@ -330,7 +330,7 @@ Factorial
 a_{k+1} = (k + 1)a_{k}
 Inversion of Factorial
 (k + 1)a_{k+1} = a_{k}
-Binomial (a_i = binom(i+1, 3))
+Binomial (a_i = binom(i + 3, 3))
 (k + 1)a_{k+1} = (k + 4)a_{k}
 Montmort Number
 a_{k+2} = (k + 1)a_{k+1} + (k + 1)a_{k}
