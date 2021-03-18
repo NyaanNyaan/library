@@ -25,6 +25,9 @@ data:
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/gauss-elimination.test.cpp
+    title: verify/verify-unit-test/gauss-elimination.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/interval-union.test.cpp
     title: verify/verify-unit-test/interval-union.test.cpp
   - icon: ':heavy_check_mark:'
@@ -157,6 +160,7 @@ data:
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/math.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp

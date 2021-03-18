@@ -13,6 +13,9 @@ data:
     title: fps/find-p-recursive.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/gauss-elimination.test.cpp
+    title: verify/verify-unit-test/gauss-elimination.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   _isVerificationFailed: false
@@ -111,6 +114,7 @@ data:
   timestamp: '2021-03-18 18:35:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
 documentation_of: matrix/linear-equation.hpp
 layout: document

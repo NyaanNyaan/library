@@ -963,6 +963,9 @@ data:
       path: verify/verify-unit-test/fast-inv-gcd.test.cpp
       title: verify/verify-unit-test/fast-inv-gcd.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/gauss-elimination.test.cpp
+      title: verify/verify-unit-test/gauss-elimination.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashmap.test.cpp
       title: verify/verify-unit-test/hashmap.test.cpp
     - icon: ':heavy_check_mark:'

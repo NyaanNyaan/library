@@ -2,6 +2,18 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: matrix/gauss-elimination.hpp
+    title: matrix/gauss-elimination.hpp
+  - icon: ':heavy_check_mark:'
+    path: matrix/linear-equation.hpp
+    title: matrix/linear-equation.hpp
+  - icon: ':heavy_check_mark:'
+    path: matrix/matrix.hpp
+    title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
+  - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -35,25 +47,25 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/system_of_linear_equations
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-linear-equation.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
-    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
-    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
-    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
-    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
-    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
-    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
-    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/gauss-elimination.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
+    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
+    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
+    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
+    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
+    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
     \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
     \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -185,41 +197,80 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-math/yosupo-linear-equation.test.cpp\"\n//\n#line 2\
-    \ \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
-    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
-    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
-    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
-    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
-    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
-    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
-    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
-    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
-    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
-    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
-    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
-    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
-    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"modulo/gauss-elimination-fast.hpp\"\n\n#line\
-    \ 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
+    \ 4 \"verify/verify-unit-test/gauss-elimination.test.cpp\"\n//\n#line 2 \"matrix/matrix.hpp\"\
+    \n\ntemplate <class T>\nstruct Matrix {\n  vector<vector<T> > A;\n\n  Matrix()\
+    \ = default;\n  Matrix(int n, int m) : A(n, vector<T>(m, T())) {}\n  Matrix(int\
+    \ n) : A(n, vector<T>(n, T())){};\n\n  int H() const { return A.size(); }\n\n\
+    \  int W() const { return A[0].size(); }\n\n  int size() const { return A.size();\
+    \ }\n\n  inline const vector<T> &operator[](int k) const { return A[k]; }\n\n\
+    \  inline vector<T> &operator[](int k) { return A[k]; }\n\n  static Matrix I(int\
+    \ n) {\n    Matrix mat(n);\n    for (int i = 0; i < n; i++) mat[i][i] = 1;\n \
+    \   return (mat);\n  }\n\n  Matrix &operator+=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] += B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator-=(const Matrix &B) {\n    int n =\
+    \ H(), m = W();\n    assert(n == B.H() && m == B.W());\n    for (int i = 0; i\
+    \ < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -= B[i][j];\n   \
+    \ return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B) {\n    int n =\
+    \ H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T> > C(n,\
+    \ vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k = 0; k\
+    \ < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] * B[k][j];\n\
+    \    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long long k)\
+    \ {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k & 1) B *=\
+    \ *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n \
+    \   return (*this);\n  }\n\n  Matrix operator+(const Matrix &B) const { return\
+    \ (Matrix(*this) += B); }\n\n  Matrix operator-(const Matrix &B) const { return\
+    \ (Matrix(*this) -= B); }\n\n  Matrix operator*(const Matrix &B) const { return\
+    \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
+    \ (Matrix(*this) ^= k); }\n\n  bool operator==(const Matrix &B) const {\n    assert(H()\
+    \ == B.H() && W() == B.W());\n    for (int i = 0; i < H(); i++)\n      for (int\
+    \ j = 0; j < W(); j++)\n        if (A[i][j] != B[i][j]) return false;\n    return\
+    \ true;\n  }\n\n  bool operator!=(const Matrix &B) const {\n    assert(H() ==\
+    \ B.H() && W() == B.W());\n    for (int i = 0; i < H(); i++)\n      for (int j\
+    \ = 0; j < W(); j++)\n        if (A[i][j] != B[i][j]) return true;\n    return\
+    \ false;\n  }\n\n  friend ostream &operator<<(ostream &os, const Matrix &p) {\n\
+    \    int n = p.H(), m = p.W();\n    for (int i = 0; i < n; i++) {\n      os <<\
+    \ (i ? \"   \" : \"\") << \"[\";\n      for (int j = 0; j < m; j++) {\n      \
+    \  os << p[i][j] << (j + 1 == m ? \"]\\n\" : \",\");\n      }\n    }\n    return\
+    \ (os);\n  }\n\n  T determinant() const {\n    Matrix B(*this);\n    assert(H()\
+    \ == W());\n    T ret = 1;\n    for (int i = 0; i < H(); i++) {\n      int idx\
+    \ = -1;\n      for (int j = i; j < W(); j++) {\n        if (B[j][i] != 0) {\n\
+    \          idx = j;\n          break;\n        }\n      }\n      if (idx == -1)\
+    \ return 0;\n      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i],\
+    \ B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n  \
+    \    for (int j = 0; j < W(); j++) {\n        B[i][j] *= inv;\n      }\n     \
+    \ for (int j = i + 1; j < H(); j++) {\n        T a = B[j][i];\n        if (a ==\
+    \ 0) continue;\n        for (int k = i; k < W(); k++) {\n          B[j][k] -=\
+    \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
+    \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 6 \"verify/verify-unit-test/gauss-elimination.test.cpp\"\
+    \n//\nnamespace Normal {\n#line 2 \"matrix/gauss-elimination.hpp\"\n\n#line 4\
+    \ \"matrix/gauss-elimination.hpp\"\n\ntemplate <typename mint>\nstd::pair<int,\
+    \ mint> GaussElimination(vector<vector<mint>> &a,\n                          \
+    \            bool LE = false) {\n  int H = a.size(), W = a[0].size();\n  int rank\
+    \ = 0, je = LE ? W - 1 : W;\n  mint det = 1;\n  for (int j = 0; j < je; j++) {\n\
+    \    int idx = -1;\n    for (int i = rank; i < H; i++) {\n      if (a[i][j] !=\
+    \ mint(0)) {\n        idx = i;\n        break;\n      }\n    }\n    if (idx ==\
+    \ -1) {\n      det = 0;\n      continue;\n    }\n    if (rank != idx) {\n    \
+    \  det = -det;\n      swap(a[rank], a[idx]);\n    }\n    det *= a[rank][j];\n\
+    \    if (LE && a[rank][j] != mint(1)) {\n      mint coeff = a[rank][j].inverse();\n\
+    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = LE\
+    \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
+    \      if (a[i][j] != mint(0)) {\n        mint coeff = a[i][j] / a[rank][j];\n\
+    \        for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n\
+    \    }\n    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 2 \"matrix/linear-equation.hpp\"\
+    \n\n#line 4 \"matrix/linear-equation.hpp\"\n\n\ntemplate <typename mint>\nvector<vector<mint>>\
+    \ LinearEquation(vector<vector<mint>> a, vector<mint> b) {\n  int H = a.size(),\
+    \ W = a[0].size();\n  for (int i = 0; i < H; i++) a[i].push_back(b[i]);\n  auto\
+    \ p = GaussElimination(a, true);\n  int rank = p.first;\n\n  for (int i = rank;\
+    \ i < H; ++i) {\n    if (a[i][W] != 0) return vector<vector<mint>>{};\n  }\n\n\
+    \  vector<vector<mint>> res(1, vector<mint>(W));\n  vector<int> pivot(W, -1);\n\
+    \  for (int i = 0, j = 0; i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n  \
+    \  res[0][j] = a[i][W], pivot[j] = i;\n  }\n  for (int j = 0; j < W; ++j) {\n\
+    \    if (pivot[j] == -1) {\n      vector<mint> x(W);\n      x[j] = 1;\n      for\
+    \ (int k = 0; k < j; ++k) {\n        if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n\
+    \      }\n      res.push_back(x);\n    }\n  }\n  return res;\n}\n#line 10 \"verify/verify-unit-test/gauss-elimination.test.cpp\"\
+    \n}  // namespace Normal\nnamespace Fast {\n#line 2 \"modulo/gauss-elimination-fast.hpp\"\
+    \n\n#line 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
     \n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline)) __m128i\n\
     my128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
     \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
@@ -304,17 +355,94 @@ data:
     \ {\n      vector<mint> x(W);\n      x[j] = 1;\n      for (int k = 0; k < j; ++k)\n\
     \        if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n      res.push_back(x);\n\
     \    }\n  }\n  return res;\n}\n\n}  // namespace Gauss\n\nusing Gauss::determinant;\n\
-    using Gauss::LinearEquation;\n#line 7 \"verify/verify-yosupo-math/yosupo-linear-equation.test.cpp\"\
-    \n\nusing mint = LazyMontgomeryModInt<998244353>;\n\nusing namespace Nyaan;\n\
-    void Nyaan::solve() {\n  ini(N, M);\n  V<V<mint>> A(N, V<mint>(M));\n  in(A);\n\
-    \  V<mint> B(N);\n  in(B);\n  auto v = LinearEquation<mint>(A, B);\n  out(sz(v)\
-    \ - 1);\n  each(x, v) out(x);\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
-    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../modulo/gauss-elimination-fast.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    \nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, M);\n  V<V<mint>> A(N,\
-    \ V<mint>(M));\n  in(A);\n  V<mint> B(N);\n  in(B);\n  auto v = LinearEquation<mint>(A,\
-    \ B);\n  out(sz(v) - 1);\n  each(x, v) out(x);\n}"
+    using Gauss::LinearEquation;\n#line 13 \"verify/verify-unit-test/gauss-elimination.test.cpp\"\
+    \n}  // namespace Fast\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n\
+    // [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct\
+    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
+    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
+    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
+    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
+    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
+    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
+    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
+    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
+    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
+    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
+    \ { return mod; }\n};\n#line 17 \"verify/verify-unit-test/gauss-elimination.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\n\
+    void test(int n, int m, bool sparse) {\n  Matrix<mint> a(n, m);\n  each(v, a.A)\
+    \ {\n    each(x, v) {\n      if (sparse) {\n        if (randint(0, m) == 0) x\
+    \ = rng();\n      } else {\n        x = rng();\n      }\n    }\n  }\n  trc(n,\
+    \ m, sparse);\n  // trc(a);\n\n  if (n == m) {\n    mint det1, det2, det3;\n \
+    \   {\n      auto b = a;\n      det1 = b.determinant();\n    }\n    {\n      auto\
+    \ b = a;\n      det2 = Normal::GaussElimination<mint>(b.A, false).second;\n  \
+    \  }\n    {\n      auto b = a;\n      det3 = Fast::determinant(b.A);\n    }\n\
+    \    // trc(det1, det2, det3);\n    assert(det1 == det2 and det2 == det3);\n \
+    \ }\n  vector<mint> c(n);\n  if (rng() & 1) each(x, c) x = rng();\n\n  vector<vector<mint>>\
+    \ sol1, sol2;\n  {\n    auto b = a;\n    sol1 = Normal::LinearEquation<mint>(b.A,\
+    \ c);\n    // trc(sol1);\n  }\n  {\n    auto b = a;\n    sol2 = Fast::LinearEquation<mint>(b.A,\
+    \ c);\n    // trc(sol2);\n  }\n  assert(sol1 == sol2);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  rep(i, TEN(5)) test(randint(1, 17), randint(1, 17), rng() % 2 == 1);\n\n\
+    \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../matrix/matrix.hpp\"\n\
+    //\nnamespace Normal {\n#include \"../../matrix/gauss-elimination.hpp\"\n#include\
+    \ \"../../matrix/linear-equation.hpp\"\n}  // namespace Normal\nnamespace Fast\
+    \ {\n#include \"../../modulo/gauss-elimination-fast.hpp\"\n}  // namespace Fast\n\
+    \n#include \"../../misc/rng.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n\nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\n\
+    void test(int n, int m, bool sparse) {\n  Matrix<mint> a(n, m);\n  each(v, a.A)\
+    \ {\n    each(x, v) {\n      if (sparse) {\n        if (randint(0, m) == 0) x\
+    \ = rng();\n      } else {\n        x = rng();\n      }\n    }\n  }\n  trc(n,\
+    \ m, sparse);\n  // trc(a);\n\n  if (n == m) {\n    mint det1, det2, det3;\n \
+    \   {\n      auto b = a;\n      det1 = b.determinant();\n    }\n    {\n      auto\
+    \ b = a;\n      det2 = Normal::GaussElimination<mint>(b.A, false).second;\n  \
+    \  }\n    {\n      auto b = a;\n      det3 = Fast::determinant(b.A);\n    }\n\
+    \    // trc(det1, det2, det3);\n    assert(det1 == det2 and det2 == det3);\n \
+    \ }\n  vector<mint> c(n);\n  if (rng() & 1) each(x, c) x = rng();\n\n  vector<vector<mint>>\
+    \ sol1, sol2;\n  {\n    auto b = a;\n    sol1 = Normal::LinearEquation<mint>(b.A,\
+    \ c);\n    // trc(sol1);\n  }\n  {\n    auto b = a;\n    sol2 = Fast::LinearEquation<mint>(b.A,\
+    \ c);\n    // trc(sol2);\n  }\n  assert(sol1 == sol2);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  rep(i, TEN(5)) test(randint(1, 17), randint(1, 17), rng() % 2 == 1);\n\n\
+    \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -322,19 +450,23 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - modint/montgomery-modint.hpp
+  - matrix/matrix.hpp
+  - matrix/gauss-elimination.hpp
+  - matrix/linear-equation.hpp
   - modulo/gauss-elimination-fast.hpp
   - modint/simd-montgomery.hpp
+  - misc/rng.hpp
+  - modint/montgomery-modint.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  path: verify/verify-unit-test/gauss-elimination.test.cpp
   requiredBy: []
   timestamp: '2021-03-18 19:05:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+documentation_of: verify/verify-unit-test/gauss-elimination.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-linear-equation.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+- /verify/verify/verify-unit-test/gauss-elimination.test.cpp
+- /verify/verify/verify-unit-test/gauss-elimination.test.cpp.html
+title: verify/verify-unit-test/gauss-elimination.test.cpp
 ---

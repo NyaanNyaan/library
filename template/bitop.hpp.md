@@ -208,6 +208,9 @@ data:
     path: verify/verify-unit-test/fast-inv-gcd.test.cpp
     title: verify/verify-unit-test/fast-inv-gcd.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/gauss-elimination.test.cpp
+    title: verify/verify-unit-test/gauss-elimination.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/hashmap.test.cpp
     title: verify/verify-unit-test/hashmap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -951,6 +954,7 @@ data:
   - verify/verify-unit-test/orderedmap.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
   - verify/verify-unit-test/math.test.cpp

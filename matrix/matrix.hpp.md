@@ -26,6 +26,9 @@ data:
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/gauss-elimination.test.cpp
+    title: verify/verify-unit-test/gauss-elimination.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -149,6 +152,7 @@ data:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
 documentation_of: matrix/matrix.hpp
