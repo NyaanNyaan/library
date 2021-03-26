@@ -212,15 +212,15 @@ data:
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
     \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"shortest-path/warshall-floyd.hpp\"\
     \n\n// i : d[i][i] < 0 exists -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T&\
-    \ d) {\n  int N = d[0].size();\n  for (int i = 0; i < N; i++) d[i][i] = 0;\n \
-    \ for (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n      for (int\
-    \ j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n#line 6 \"\
-    verify/verify-aoj-grl/aoj-grl-1-c.test.cpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  ini(N, E);\n  auto d = adjgraph<ll>(N, E, infLL, true, true, false);\n\
-    \  warshall_floyd(d);\n  rep(i, N) if (d[i][i] < 0) die(\"NEGATIVE CYCLE\");\n\
-    \  rep(i, N) rep(j, N) {\n    if (d[i][j] > TEN(10))\n      cout << \"INF\";\n\
-    \    else\n      cout << d[i][j];\n    cout << (j == N - 1 ? \"\\n\" : \" \");\n\
-    \  }\n}\n"
+    \ d) {\n  if((int)d.size() == 0) return;\n  int N = d[0].size();\n  for (int i\
+    \ = 0; i < N; i++) d[i][i] = 0;\n  for (int k = 0; k < N; k++)\n    for (int i\
+    \ = 0; i < N; i++)\n      for (int j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k]\
+    \ + d[k][j]);\n}\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-c.test.cpp\"\n\nusing\
+    \ namespace Nyaan; void Nyaan::solve() {\n  ini(N, E);\n  auto d = adjgraph<ll>(N,\
+    \ E, infLL, true, true, false);\n  warshall_floyd(d);\n  rep(i, N) if (d[i][i]\
+    \ < 0) die(\"NEGATIVE CYCLE\");\n  rep(i, N) rep(j, N) {\n    if (d[i][j] > TEN(10))\n\
+    \      cout << \"INF\";\n    else\n      cout << d[i][j];\n    cout << (j == N\
+    \ - 1 ? \"\\n\" : \" \");\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_C\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../shortest-path/warshall-floyd.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, E);\n  auto d = adjgraph<ll>(N,\
@@ -240,7 +240,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
   requiredBy: []
-  timestamp: '2020-12-05 08:35:39+09:00'
+  timestamp: '2021-03-26 23:25:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-1-c.test.cpp

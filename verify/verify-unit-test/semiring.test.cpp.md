@@ -251,12 +251,13 @@ data:
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
     \ d;\n}\n#line 6 \"shortest-path/warshall-floyd.hpp\"\n\n// i : d[i][i] < 0 exists\
-    \ -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T& d) {\n  int\
-    \ N = d[0].size();\n  for (int i = 0; i < N; i++) d[i][i] = 0;\n  for (int k =\
-    \ 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n      for (int j = 0; j < N;\
-    \ j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n#line 7 \"verify/verify-unit-test/semiring.test.cpp\"\
-    \nusing namespace Nyaan;\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n\
-    // [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T& d) {\n  if((int)d.size()\
+    \ == 0) return;\n  int N = d[0].size();\n  for (int i = 0; i < N; i++) d[i][i]\
+    \ = 0;\n  for (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n     \
+    \ for (int j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n\
+    #line 7 \"verify/verify-unit-test/semiring.test.cpp\"\nusing namespace Nyaan;\n\
+    \n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
+    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
     \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
     \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
@@ -309,7 +310,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/semiring.test.cpp
   requiredBy: []
-  timestamp: '2021-01-01 23:05:31+09:00'
+  timestamp: '2021-03-26 23:25:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/semiring.test.cpp
