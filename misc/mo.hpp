@@ -1,13 +1,11 @@
 #pragma once
 
-
-
 struct Mo {
   int width;
   vector<int> left, right, order;
 
   Mo(int N, int Q) : order(Q) {
-    width = max(1, N / max<int>(1, sqrt(Q / 3)));
+    width = max<int>(1, 1.0 * N / max<double>(1.0, sqrt(Q * 2.0 / 3.0)));
     iota(begin(order), end(order), 0);
   }
 
@@ -36,3 +34,8 @@ struct Mo {
     }
   }
 };
+
+/**
+ * @brief Mo's algorithm
+ * @docs docs/misc/mo.md
+ */
