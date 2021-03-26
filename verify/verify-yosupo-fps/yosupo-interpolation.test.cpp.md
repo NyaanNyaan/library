@@ -301,7 +301,8 @@ data:
     \      return;\n    }\n    self(self, a, (idx << 1) | 0);\n    self(self, a, (idx\
     \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
     \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
-    \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
+    \                                  const vector<mint> &xs) {\n  if(f.empty() ||\
+    \ xs.empty()) return vector<mint>(xs.size(), mint(0));\n  return InnerMultipointEvaluation(f,\
     \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n\
     #line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line\
     \ 2 \"modint/simd-montgomery.hpp\"\n\n\n#line 5 \"modint/simd-montgomery.hpp\"\
@@ -770,7 +771,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   requiredBy: []
-  timestamp: '2021-02-25 20:04:02+09:00'
+  timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp

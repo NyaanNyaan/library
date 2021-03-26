@@ -153,14 +153,14 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
-  - verify/verify-yuki/yuki-1326.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
 documentation_of: tree/heavy-light-decomposition.hpp
 layout: document
 redirect_from:

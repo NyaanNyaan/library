@@ -49,11 +49,11 @@ data:
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
-  - fps/fps-composition-fast.hpp
-  - trial/fast-gcd.hpp
-  - trial/fast-inv.hpp
-  - modulo/strassen.hpp
   - marathon/simulated-annealing.hpp
+  - trial/fast-inv.hpp
+  - trial/fast-gcd.hpp
+  - fps/fps-composition-fast.hpp
+  - modulo/strassen.hpp
   timestamp: '2020-12-08 00:23:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

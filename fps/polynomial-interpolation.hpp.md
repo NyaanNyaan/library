@@ -132,8 +132,9 @@ data:
     \ a, (idx << 1) | 0);\n    self(self, a, (idx << 1) | 1);\n  };\n  rec(rec, f,\
     \ 1);\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> MultipointEvaluation(const\
     \ FormalPowerSeries<mint> &f,\n                                  const vector<mint>\
-    \ &xs) {\n  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n\
-    }\n\n/**\n * @brief Multipoint Evaluation\n */\n#line 5 \"fps/polynomial-interpolation.hpp\"\
+    \ &xs) {\n  if(f.empty() || xs.empty()) return vector<mint>(xs.size(), mint(0));\n\
+    \  return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));\n}\n\n/**\n\
+    \ * @brief Multipoint Evaluation\n */\n#line 5 \"fps/polynomial-interpolation.hpp\"\
     \n\ntemplate <class mint>\nFormalPowerSeries<mint> PolynomialInterpolation(const\
     \ vector<mint> &xs,\n                                                const vector<mint>\
     \ &ys) {\n  using fps = FormalPowerSeries<mint>;\n  assert(xs.size() == ys.size());\n\
@@ -167,11 +168,11 @@ data:
   requiredBy:
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
-  timestamp: '2021-01-31 00:21:53+09:00'
+  timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
 documentation_of: fps/polynomial-interpolation.hpp
 layout: document
 redirect_from:

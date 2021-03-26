@@ -715,15 +715,16 @@ data:
     #line 4 \"fps/fast-multieval.hpp\"\n\ntemplate <typename mint>\nvector<mint> FastMultiEval(const\
     \ FormalPowerSeries<mint> &f,\n                           const vector<mint> &xs)\
     \ {\n  using fps = FormalPowerSeries<mint>;\n  int s = xs.size();\n  int N = 1\
-    \ << (32 - __builtin_clz((int)xs.size() - 1));\n\n  vector<FormalPowerSeries<mint>>\
-    \ buf(2 * N);\n  for (int i = 0; i < N; i++) {\n    mint n = mint{i < s ? -xs[i]\
-    \ : mint(0)};\n    buf[i + N] = fps{n + 1, n - 1};\n  }\n  for (int i = N - 1;\
-    \ i > 0; i--) {\n    fps &g(buf[(i << 1) | 0]), &h(buf[(i << 1) | 1]);\n    int\
-    \ n = g.size();\n    int m = n << 1;\n    buf[i].reserve(m);\n    buf[i].resize(n);\n\
-    \    for (int j = 0; j < n; j++) buf[i][j] = g[j] * h[j] - mint(1);\n    if (i\
-    \ != 1) {\n      buf[i].ntt_doubling();\n      for (int j = 0; j < m; j++) buf[i][j]\
-    \ += j < n ? mint(1) : -mint(1);\n    }\n  }\n\n  int fs = f.size();\n  fps root\
-    \ = buf[1];\n  root.intt();\n  root.push_back(1);\n  reverse(begin(root), end(root));\n\
+    \ << (32 - __builtin_clz((int)xs.size() - 1));\n  if(f.empty() || xs.empty())\
+    \ return vector<mint>(s, mint(0));\n  vector<FormalPowerSeries<mint>> buf(2 *\
+    \ N);\n  for (int i = 0; i < N; i++) {\n    mint n = mint{i < s ? -xs[i] : mint(0)};\n\
+    \    buf[i + N] = fps{n + 1, n - 1};\n  }\n  for (int i = N - 1; i > 0; i--) {\n\
+    \    fps &g(buf[(i << 1) | 0]), &h(buf[(i << 1) | 1]);\n    int n = g.size();\n\
+    \    int m = n << 1;\n    buf[i].reserve(m);\n    buf[i].resize(n);\n    for (int\
+    \ j = 0; j < n; j++) buf[i][j] = g[j] * h[j] - mint(1);\n    if (i != 1) {\n \
+    \     buf[i].ntt_doubling();\n      for (int j = 0; j < m; j++) buf[i][j] += j\
+    \ < n ? mint(1) : -mint(1);\n    }\n  }\n\n  int fs = f.size();\n  fps root =\
+    \ buf[1];\n  root.intt();\n  root.push_back(1);\n  reverse(begin(root), end(root));\n\
     \  root = root.inv(fs).rev() * f;\n  root.erase(begin(root), begin(root) + fs\
     \ - 1);\n  root.resize(N, mint(0));\n\n  vector<mint> ans(s);\n\n  auto calc =\
     \ [&](auto rec, int i, int l, int r, fps g) -> void {\n    if (i >= N) {\n   \
@@ -763,7 +764,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   requiredBy: []
-  timestamp: '2021-02-25 20:04:02+09:00'
+  timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp

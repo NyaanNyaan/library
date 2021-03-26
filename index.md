@@ -981,6 +981,9 @@ data:
       path: verify/verify-unit-test/mf.test.cpp
       title: verify/verify-unit-test/mf.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/multieval.test.cpp
+      title: verify/verify-unit-test/multieval.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/multiplicative-function.test.cpp
       title: verify/verify-unit-test/multiplicative-function.test.cpp
     - icon: ':heavy_check_mark:'

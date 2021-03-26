@@ -64,8 +64,8 @@ data:
     \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
     \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
     \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
-    \ > C(n, vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k\
-    \ = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
+    \ > C(n, vector<T>(m, T{}));\n    for (int i = 0; i < n; i++)\n      for (int\
+    \ k = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
     \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
     \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
     \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
@@ -109,8 +109,8 @@ data:
     \ (int i = 0; i < n; i++)\n      for (int j = 0; j < m; j++) (*this)[i][j] -=\
     \ B[i][j];\n    return (*this);\n  }\n\n  Matrix &operator*=(const Matrix &B)\
     \ {\n    int n = H(), m = B.W(), p = W();\n    assert(p == B.H());\n    vector<vector<T>\
-    \ > C(n, vector<T>(m, 0));\n    for (int i = 0; i < n; i++)\n      for (int k\
-    \ = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
+    \ > C(n, vector<T>(m, T{}));\n    for (int i = 0; i < n; i++)\n      for (int\
+    \ k = 0; k < p; k++)\n        for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k]\
     \ * B[k][j];\n    A.swap(C);\n    return (*this);\n  }\n\n  Matrix &operator^=(long\
     \ long k) {\n    Matrix B = Matrix::I(H());\n    while (k > 0) {\n      if (k\
     \ & 1) B *= *this;\n      *this *= *this;\n      k >>= 1LL;\n    }\n    A.swap(B.A);\n\
@@ -143,22 +143,22 @@ data:
   isVerificationFile: false
   path: matrix/matrix.hpp
   requiredBy:
-  - fps/find-p-recursive.hpp
-  - matrix/gauss-elimination.hpp
-  - matrix/matrix-tree.hpp
   - matrix/linear-equation.hpp
+  - matrix/gauss-elimination.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
+  - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
-  timestamp: '2021-03-16 18:55:44+09:00'
+  - fps/find-p-recursive.hpp
+  timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document
 redirect_from:

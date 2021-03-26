@@ -18,6 +18,9 @@ data:
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multieval.test.cpp
+    title: verify/verify-unit-test/multieval.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - icon: ':heavy_check_mark:'
@@ -135,7 +138,8 @@ data:
     \      return;\n    }\n    self(self, a, (idx << 1) | 0);\n    self(self, a, (idx\
     \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
     \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
-    \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
+    \                                  const vector<mint> &xs) {\n  if(f.empty() ||\
+    \ xs.empty()) return vector<mint>(xs.size(), mint(0));\n  return InnerMultipointEvaluation(f,\
     \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n"
   code: "#pragma once\n\n#include \"./formal-power-series.hpp\"\n\ntemplate <typename\
     \ mint>\nstruct ProductTree {\n  using fps = FormalPowerSeries<mint>;\n  const\
@@ -176,22 +180,24 @@ data:
     \      return;\n    }\n    self(self, a, (idx << 1) | 0);\n    self(self, a, (idx\
     \ << 1) | 1);\n  };\n  rec(rec, f, 1);\n  return ret;\n}\n\ntemplate <typename\
     \ mint>\nvector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,\n\
-    \                                  const vector<mint> &xs) {\n  return InnerMultipointEvaluation(f,\
+    \                                  const vector<mint> &xs) {\n  if(f.empty() ||\
+    \ xs.empty()) return vector<mint>(xs.size(), mint(0));\n  return InnerMultipointEvaluation(f,\
     \ xs, ProductTree<mint>(xs));\n}\n\n/**\n * @brief Multipoint Evaluation\n */\n"
   dependsOn:
   - fps/formal-power-series.hpp
   isVerificationFile: false
   path: fps/multipoint-evaluation.hpp
   requiredBy:
-  - fps/polynomial-interpolation.hpp
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
-  timestamp: '2021-01-31 00:21:53+09:00'
+  - fps/polynomial-interpolation.hpp
+  timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - verify/verify-unit-test/multieval.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
 documentation_of: fps/multipoint-evaluation.hpp
 layout: document
 redirect_from:

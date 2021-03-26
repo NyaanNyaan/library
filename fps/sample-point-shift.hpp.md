@@ -146,15 +146,15 @@ data:
   isVerificationFile: false
   path: fps/sample-point-shift.hpp
   requiredBy:
+  - matrix/polynomial-matrix-prefix-prod.hpp
   - fps/find-p-recursive.hpp
   - modulo/factorial.hpp
-  - matrix/polynomial-matrix-prefix-prod.hpp
   timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0502.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-yuki/yuki-0502.test.cpp
 documentation_of: fps/sample-point-shift.hpp
 layout: document
 redirect_from:

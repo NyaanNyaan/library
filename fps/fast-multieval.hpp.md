@@ -20,6 +20,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multieval.test.cpp
+    title: verify/verify-unit-test/multieval.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   _isVerificationFailed: false
@@ -519,7 +522,8 @@ data:
     \ */\n#line 4 \"fps/fast-multieval.hpp\"\n\ntemplate <typename mint>\nvector<mint>\
     \ FastMultiEval(const FormalPowerSeries<mint> &f,\n                          \
     \ const vector<mint> &xs) {\n  using fps = FormalPowerSeries<mint>;\n  int s =\
-    \ xs.size();\n  int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));\n\n  vector<FormalPowerSeries<mint>>\
+    \ xs.size();\n  int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));\n  if(f.empty()\
+    \ || xs.empty()) return vector<mint>(s, mint(0));\n  vector<FormalPowerSeries<mint>>\
     \ buf(2 * N);\n  for (int i = 0; i < N; i++) {\n    mint n = mint{i < s ? -xs[i]\
     \ : mint(0)};\n    buf[i + N] = fps{n + 1, n - 1};\n  }\n  for (int i = N - 1;\
     \ i > 0; i--) {\n    fps &g(buf[(i << 1) | 0]), &h(buf[(i << 1) | 1]);\n    int\
@@ -543,25 +547,26 @@ data:
     \n\ntemplate <typename mint>\nvector<mint> FastMultiEval(const FormalPowerSeries<mint>\
     \ &f,\n                           const vector<mint> &xs) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  int s = xs.size();\n  int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));\n\
-    \n  vector<FormalPowerSeries<mint>> buf(2 * N);\n  for (int i = 0; i < N; i++)\
-    \ {\n    mint n = mint{i < s ? -xs[i] : mint(0)};\n    buf[i + N] = fps{n + 1,\
-    \ n - 1};\n  }\n  for (int i = N - 1; i > 0; i--) {\n    fps &g(buf[(i << 1) |\
-    \ 0]), &h(buf[(i << 1) | 1]);\n    int n = g.size();\n    int m = n << 1;\n  \
-    \  buf[i].reserve(m);\n    buf[i].resize(n);\n    for (int j = 0; j < n; j++)\
-    \ buf[i][j] = g[j] * h[j] - mint(1);\n    if (i != 1) {\n      buf[i].ntt_doubling();\n\
-    \      for (int j = 0; j < m; j++) buf[i][j] += j < n ? mint(1) : -mint(1);\n\
-    \    }\n  }\n\n  int fs = f.size();\n  fps root = buf[1];\n  root.intt();\n  root.push_back(1);\n\
-    \  reverse(begin(root), end(root));\n  root = root.inv(fs).rev() * f;\n  root.erase(begin(root),\
-    \ begin(root) + fs - 1);\n  root.resize(N, mint(0));\n\n  vector<mint> ans(s);\n\
-    \n  auto calc = [&](auto rec, int i, int l, int r, fps g) -> void {\n    if (i\
-    \ >= N) {\n      ans[i - N] = g[0];\n      return;\n    }\n    int len = g.size(),\
-    \ m = (l + r) >> 1;\n    g.ntt();\n    fps tmp = buf[i * 2 + 1];\n    for (int\
-    \ j = 0; j < len; j++) tmp[j] *= g[j];\n    tmp.intt();\n    rec(rec, i * 2 +\
-    \ 0, l, m, fps{begin(tmp) + (len >> 1), end(tmp)});\n    if (m >= s) return;\n\
-    \    tmp = buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= g[j];\n\
-    \    tmp.intt();\n    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n\
-    \  };\n  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint\
-    \ Evaluation(\u9AD8\u901F\u5316\u7248)\n */\n"
+    \  if(f.empty() || xs.empty()) return vector<mint>(s, mint(0));\n  vector<FormalPowerSeries<mint>>\
+    \ buf(2 * N);\n  for (int i = 0; i < N; i++) {\n    mint n = mint{i < s ? -xs[i]\
+    \ : mint(0)};\n    buf[i + N] = fps{n + 1, n - 1};\n  }\n  for (int i = N - 1;\
+    \ i > 0; i--) {\n    fps &g(buf[(i << 1) | 0]), &h(buf[(i << 1) | 1]);\n    int\
+    \ n = g.size();\n    int m = n << 1;\n    buf[i].reserve(m);\n    buf[i].resize(n);\n\
+    \    for (int j = 0; j < n; j++) buf[i][j] = g[j] * h[j] - mint(1);\n    if (i\
+    \ != 1) {\n      buf[i].ntt_doubling();\n      for (int j = 0; j < m; j++) buf[i][j]\
+    \ += j < n ? mint(1) : -mint(1);\n    }\n  }\n\n  int fs = f.size();\n  fps root\
+    \ = buf[1];\n  root.intt();\n  root.push_back(1);\n  reverse(begin(root), end(root));\n\
+    \  root = root.inv(fs).rev() * f;\n  root.erase(begin(root), begin(root) + fs\
+    \ - 1);\n  root.resize(N, mint(0));\n\n  vector<mint> ans(s);\n\n  auto calc =\
+    \ [&](auto rec, int i, int l, int r, fps g) -> void {\n    if (i >= N) {\n   \
+    \   ans[i - N] = g[0];\n      return;\n    }\n    int len = g.size(), m = (l +\
+    \ r) >> 1;\n    g.ntt();\n    fps tmp = buf[i * 2 + 1];\n    for (int j = 0; j\
+    \ < len; j++) tmp[j] *= g[j];\n    tmp.intt();\n    rec(rec, i * 2 + 0, l, m,\
+    \ fps{begin(tmp) + (len >> 1), end(tmp)});\n    if (m >= s) return;\n    tmp =\
+    \ buf[i * 2 + 0];\n    for (int j = 0; j < len; j++) tmp[j] *= g[j];\n    tmp.intt();\n\
+    \    rec(rec, i * 2 + 1, m, r, fps{begin(tmp) + (len >> 1), end(tmp)});\n  };\n\
+    \  calc(calc, 1, 0, N, root);\n  return ans;\n}\n\n/**\n * @brief Multipoint Evaluation(\u9AD8\
+    \u901F\u5316\u7248)\n */\n"
   dependsOn:
   - modint/montgomery-modint.hpp
   - fps/ntt-friendly-fps.hpp
@@ -571,10 +576,11 @@ data:
   isVerificationFile: false
   path: fps/fast-multieval.hpp
   requiredBy: []
-  timestamp: '2021-02-25 20:04:02+09:00'
+  timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-unit-test/multieval.test.cpp
 documentation_of: fps/fast-multieval.hpp
 layout: document
 redirect_from:
