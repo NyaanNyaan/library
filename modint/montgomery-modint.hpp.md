@@ -49,6 +49,9 @@ data:
     path: verify/verify-unit-test/multiplicative-function.test.cpp
     title: verify/verify-unit-test/multiplicative-function.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+    title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
@@ -376,6 +379,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-log.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp

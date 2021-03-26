@@ -409,7 +409,7 @@ data:
       title: "\u533A\u9593\u306E\u96C6\u5408\u306E\u76F4\u548C"
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
-      title: misc/mo.hpp
+      title: Mo's algorithm
     - icon: ':heavy_check_mark:'
       path: misc/rng.hpp
       title: misc/rng.hpp
@@ -465,6 +465,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/mod-sqrt.hpp
       title: mod sqrt(Tonelli-Shanks algorithm)
+    - icon: ':heavy_check_mark:'
+      path: modulo/multipoint-binomial-sum.hpp
+      title: "\u4E8C\u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1"
     - icon: ':warning:'
       path: modulo/quadratic-equation.hpp
       title: modulo/quadratic-equation.hpp
@@ -986,6 +989,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/multiplicative-function.test.cpp
       title: verify/verify-unit-test/multiplicative-function.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+      title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/orderedmap.test.cpp
       title: verify/verify-unit-test/orderedmap.test.cpp

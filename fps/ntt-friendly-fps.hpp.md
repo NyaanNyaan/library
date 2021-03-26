@@ -20,6 +20,9 @@ data:
     path: verify/verify-unit-test/multieval.test.cpp
     title: verify/verify-unit-test/multieval.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+    title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
@@ -618,6 +621,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-log.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp

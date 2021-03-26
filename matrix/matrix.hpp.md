@@ -29,6 +29,9 @@ data:
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+    title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
@@ -152,6 +155,7 @@ data:
   timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp

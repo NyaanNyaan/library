@@ -33,7 +33,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
+  - icon: ':heavy_check_mark:'
+    path: modulo/multipoint-binomial-sum.hpp
+    title: "\u4E8C\u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+    title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
@@ -159,6 +165,7 @@ data:
   - fps/sum-of-exponential-times-poly.hpp
   - fps/find-p-recursive.hpp
   - modulo/factorial.hpp
+  - modulo/multipoint-binomial-sum.hpp
   timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -168,6 +175,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

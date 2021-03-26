@@ -12,7 +12,7 @@ data:
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: misc/mo.hpp
-    title: misc/mo.hpp
+    title: Mo's algorithm
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -252,9 +252,9 @@ data:
     \ <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
     \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
     }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 2 \"misc/mo.hpp\"\n\n\n\nstruct Mo {\n  int width;\n\
-    \  vector<int> left, right, order;\n\n  Mo(int N, int Q) : order(Q) {\n    width\
-    \ = max(1, N / max<int>(1, sqrt(Q / 3)));\n    iota(begin(order), end(order),\
+    using fastio::wtn;\n#line 2 \"misc/mo.hpp\"\n\nstruct Mo {\n  int width;\n  vector<int>\
+    \ left, right, order;\n\n  Mo(int N, int Q) : order(Q) {\n    width = max<int>(1,\
+    \ 1.0 * N / max<double>(1.0, sqrt(Q * 2.0 / 3.0)));\n    iota(begin(order), end(order),\
     \ 0);\n  }\n\n  void insert(int l, int r) { /* [l, r) */\n    left.emplace_back(l);\n\
     \    right.emplace_back(r);\n  }\n\n  template <typename AL, typename AR, typename\
     \ DL, typename DR, typename REM>\n  void run(const AL &add_left, const AR &add_right,\
@@ -266,7 +266,8 @@ data:
     \    int nl = 0, nr = 0;\n    for (auto idx : order) {\n      while (nl > left[idx])\
     \ add_left(--nl);\n      while (nr < right[idx]) add_right(nr++);\n      while\
     \ (nl < left[idx]) delete_left(nl++);\n      while (nr > right[idx]) delete_right(--nr);\n\
-    \      rem(idx);\n    }\n  }\n};\n#line 8 \"verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp\"\
+    \      rem(idx);\n    }\n  }\n};\n\n/**\n * @brief Mo's algorithm\n * @docs docs/misc/mo.md\n\
+    \ */\n#line 8 \"verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int N, Q;\n  rd(N);\n  rd(Q);\n\
     \  vi a(N);\n  rep(i, N) rd(a[i]);\n  Mo mo(N, Q);\n  rep(i, Q) {\n    int l,\
     \ r;\n    rd(l);\n    rd(r);\n    mo.insert(l, r);\n  }\n  compress<int> zip(a);\n\
@@ -308,7 +309,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   requiredBy: []
-  timestamp: '2021-03-07 00:59:28+09:00'
+  timestamp: '2021-03-26 19:14:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp

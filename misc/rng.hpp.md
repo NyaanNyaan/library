@@ -40,6 +40,9 @@ data:
     path: verify/verify-unit-test/multiplicative-function.test.cpp
     title: verify/verify-unit-test/multiplicative-function.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+    title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/orderedmap.test.cpp
     title: verify/verify-unit-test/orderedmap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -148,6 +151,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/orderedmap.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp

@@ -25,6 +25,9 @@ data:
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+    title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/simulated-annealing.test.cpp
     title: verify/verify-unit-test/simulated-annealing.test.cpp
   - icon: ':heavy_check_mark:'
@@ -58,6 +61,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
