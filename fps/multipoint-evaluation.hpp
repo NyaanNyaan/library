@@ -107,6 +107,7 @@ vector<mint> InnerMultipointEvaluation(const FormalPowerSeries<mint> &f,
 template <typename mint>
 vector<mint> MultipointEvaluation(const FormalPowerSeries<mint> &f,
                                   const vector<mint> &xs) {
+  if(f.empty() || xs.empty()) return vector<mint>(xs.size(), mint(0));
   return InnerMultipointEvaluation(f, xs, ProductTree<mint>(xs));
 }
 

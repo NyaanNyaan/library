@@ -43,7 +43,7 @@ struct Matrix {
   Matrix &operator*=(const Matrix &B) {
     int n = H(), m = B.W(), p = W();
     assert(p == B.H());
-    vector<vector<T> > C(n, vector<T>(m, 0));
+    vector<vector<T> > C(n, vector<T>(m, T{}));
     for (int i = 0; i < n; i++)
       for (int k = 0; k < p; k++)
         for (int j = 0; j < m; j++) C[i][j] += (*this)[i][k] * B[k][j];

@@ -8,7 +8,7 @@ vector<mint> FastMultiEval(const FormalPowerSeries<mint> &f,
   using fps = FormalPowerSeries<mint>;
   int s = xs.size();
   int N = 1 << (32 - __builtin_clz((int)xs.size() - 1));
-
+  if(f.empty() || xs.empty()) return vector<mint>(s, mint(0));
   vector<FormalPowerSeries<mint>> buf(2 * N);
   for (int i = 0; i < N; i++) {
     mint n = mint{i < s ? -xs[i] : mint(0)};
