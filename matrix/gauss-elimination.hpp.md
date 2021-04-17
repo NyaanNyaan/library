@@ -105,14 +105,14 @@ data:
   isVerificationFile: false
   path: matrix/gauss-elimination.hpp
   requiredBy:
-  - matrix/linear-equation.hpp
   - fps/find-p-recursive.hpp
+  - matrix/linear-equation.hpp
   timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/p-recursive.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
 documentation_of: matrix/gauss-elimination.hpp
 layout: document
 redirect_from:

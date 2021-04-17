@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':question:'
     path: segment-tree/lazy-segment-tree-utility.hpp
     title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\
       \u30F3\u30C8\u6728"
@@ -25,30 +28,30 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H
-  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H\"\n\
-    \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <csetjmp>\n#include <csignal>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <ctime>\n#include <deque>\n#include <exception>\n#include\
-    \ <forward_list>\n#include <fstream>\n#include <functional>\n#include <initializer_list>\n\
-    #include <iomanip>\n#include <ios>\n#include <iosfwd>\n#include <iostream>\n#include\
-    \ <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n#include\
-    \ <locale>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
-    #include <ostream>\n#include <queue>\n#include <random>\n#include <ratio>\n#include\
-    \ <regex>\n#include <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n\
-    #include <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/lazyseg-setval.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <csetjmp>\n#include\
+    \ <csignal>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <ctime>\n#include\
+    \ <deque>\n#include <exception>\n#include <forward_list>\n#include <fstream>\n\
+    #include <functional>\n#include <initializer_list>\n#include <iomanip>\n#include\
+    \ <ios>\n#include <iosfwd>\n#include <iostream>\n#include <istream>\n#include\
+    \ <iterator>\n#include <limits>\n#include <list>\n#include <locale>\n#include\
+    \ <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include <ostream>\n\
+    #include <queue>\n#include <random>\n#include <ratio>\n#include <regex>\n#include\
+    \ <set>\n#include <sstream>\n#include <stack>\n#include <stdexcept>\n#include\
+    \ <streambuf>\n#include <string>\n#include <system_error>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
     \ <unordered_set>\n#include <utility>\n#include <valarray>\n#include <vector>\n\
     \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -180,59 +183,77 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 5 \"verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp\"\n//\n#line 2 \"segment-tree/lazy-segment-tree-utility.hpp\"\
-    \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
-    \          T (*ti)(), E (*ei)()>\nstruct LazySegmentTree {\n  int n, log;\n  vector<T>\
-    \ val;\n  vector<E> laz;\n\n  explicit LazySegmentTree() {}\n  explicit LazySegmentTree(const\
-    \ vector<T>& vc) { init(vc); }\n\n  void init(const vector<T>& vc) {\n    n =\
-    \ 1, log = 0;\n    while (n < (int)vc.size()) n <<= 1, log++;\n    val.resize(2\
-    \ * n, ti());\n    laz.resize(n, ei());\n    for (int i = 0; i < (int)vc.size();\
-    \ ++i) val[i + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n  }\n\
-    \n  void update(int l, int r, const E& x) {\n    if (l == r) return;\n    l +=\
-    \ n, r += n;\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i)\
-    \ != l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n\
-    \    }\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l\
-    \ & 1) _apply(l++, x);\n        if (r & 1) _apply(--r, x);\n        l >>= 1;\n\
-    \        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n    }\n    for (int\
-    \ i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l) _update(l >> i);\n\
-    \      if (((r >> i) << i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int\
-    \ l, int r) {\n    if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(),\
-    \ R = ti();\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) !=\
-    \ l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n  \
-    \  }\n    while (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r &\
-    \ 1) R = f(val[--r], R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L,\
-    \ R);\n  }\n\n  void set_val(int k, const T& x) {\n    k += n;\n    for (int i\
-    \ = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
-    \ i) != (k + 1))\n        _push(k >> i);\n    }\n    val[k] = x;\n    for (int\
-    \ i = 1; i <= log; i++) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
-    \ i) != (k + 1))\n        _update(k >> i);\n    }\n  }\n\n  void update_val(int\
-    \ k, const E& x) {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if\
-    \ (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k\
-    \ >> i);\n    }\n    val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++)\
+    \ 4 \"verify/verify-unit-test/lazyseg-setval.test.cpp\"\n//\n#line 2 \"misc/rng.hpp\"\
+    \n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
+    \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \           .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
+    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
+    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
+    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
+    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
+    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
+    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
+    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
+    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
+    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
+    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    segment-tree/lazy-segment-tree-utility.hpp\"\n\ntemplate <typename T, typename\
+    \ E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n          T (*ti)(), E (*ei)()>\n\
+    struct LazySegmentTree {\n  int n, log;\n  vector<T> val;\n  vector<E> laz;\n\n\
+    \  explicit LazySegmentTree() {}\n  explicit LazySegmentTree(const vector<T>&\
+    \ vc) { init(vc); }\n\n  void init(const vector<T>& vc) {\n    n = 1, log = 0;\n\
+    \    while (n < (int)vc.size()) n <<= 1, log++;\n    val.resize(2 * n, ti());\n\
+    \    laz.resize(n, ei());\n    for (int i = 0; i < (int)vc.size(); ++i) val[i\
+    \ + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n  }\n\n  void update(int\
+    \ l, int r, const E& x) {\n    if (l == r) return;\n    l += n, r += n;\n    for\
+    \ (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) _push(l >> i);\n\
+    \      if (((r >> i) << i) != r) _push((r - 1) >> i);\n    }\n    {\n      int\
+    \ l2 = l, r2 = r;\n      while (l < r) {\n        if (l & 1) _apply(l++, x);\n\
+    \        if (r & 1) _apply(--r, x);\n        l >>= 1;\n        r >>= 1;\n    \
+    \  }\n      l = l2;\n      r = r2;\n    }\n    for (int i = 1; i <= log; i++)\
+    \ {\n      if (((l >> i) << i) != l) _update(l >> i);\n      if (((r >> i) <<\
+    \ i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int l, int r) {\n \
+    \   if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(), R = ti();\n\
+    \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) _push(l\
+    \ >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n    }\n    while\
+    \ (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r & 1) R = f(val[--r],\
+    \ R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L, R);\n  }\n\n  void\
+    \ set_val(int k, const T& x) {\n    k += n;\n    for (int i = log; i >= 1; i--)\
     \ {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n   \
-    \     _update(k >> i);\n    }\n  }\n\n  T get_val(int k) {\n    k += n;\n    for\
-    \ (int i = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >>\
-    \ i) << i) != (k + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\
-    \n private:\n  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2 * i\
-    \ + 0] = g(val[2 * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i + 1],\
-    \ laz[i]);\n      if (2 * i < n) {\n        compose(laz[2 * i + 0], laz[i]);\n\
-    \        compose(laz[2 * i + 1], laz[i]);\n      }\n      laz[i] = ei();\n   \
-    \ }\n  }\n  inline void _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i\
-    \ + 1]); }\n  inline void _apply(int i, const E& x) {\n    if (x != ei()) {\n\
-    \      val[i] = g(val[i], x);\n      if (i < n) compose(laz[i], x);\n    }\n \
-    \ }\n  inline void compose(E& a, const E& b) { a = a == ei() ? b : h(a, b); }\n\
-    };\n\nnamespace SegmentTreeUtil {\n\ntemplate <typename T>\nstruct Pair {\n  T\
-    \ first, second;\n  Pair() = default;\n  Pair(const T& f, const T& s) : first(f),\
-    \ second(s) {}\n  operator T() const { return first; }\n  friend ostream& operator<<(ostream&\
-    \ os, const Pair<T>& p) {\n    os << T(p.first);\n    return os;\n  }\n};\n\n\
-    template <typename T>\nT Max(T a, T b) {\n  return max(a, b);\n}\ntemplate <typename\
-    \ T>\nT Min(T a, T b) {\n  return min(a, b);\n}\ntemplate <typename T>\nT Update(T,\
-    \ T b) {\n  return b;\n}\ntemplate <typename T>\nT Add(T a, T b) {\n  return a\
-    \ + b;\n}\ntemplate <typename T>\nPair<T> Psum(Pair<T> a, Pair<T> b) {\n  return\
-    \ Pair<T>(a.first + b.first, a.second + b.second);\n}\ntemplate <typename T>\n\
-    Pair<T> Padd(Pair<T> a, T b) {\n  return Pair<T>(a.first + a.second * b, a.second);\n\
-    }\ntemplate <typename T>\nPair<T> PUpdate(Pair<T> a, T b) {\n  return Pair<T>(a.second\
-    \ * b, a.second);\n}\ntemplate <typename T>\nPair<T> Pid() {\n  return Pair<T>(0,\
+    \     _push(k >> i);\n    }\n    val[k] = x;\n    for (int i = 1; i <= log; i++)\
+    \ {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n   \
+    \     _update(k >> i);\n    }\n  }\n\n  void update_val(int k, const E& x) {\n\
+    \    k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k >> i) << i)\
+    \ != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k >> i);\n    }\n \
+    \   val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++) {\n      if (((k\
+    \ >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _update(k >>\
+    \ i);\n    }\n  }\n\n  T get_val(int k) {\n    k += n;\n    for (int i = log;\
+    \ i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k\
+    \ + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\n private:\n\
+    \  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2 * i + 0] = g(val[2\
+    \ * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i + 1], laz[i]);\n    \
+    \  if (2 * i < n) {\n        compose(laz[2 * i + 0], laz[i]);\n        compose(laz[2\
+    \ * i + 1], laz[i]);\n      }\n      laz[i] = ei();\n    }\n  }\n  inline void\
+    \ _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i + 1]); }\n  inline void\
+    \ _apply(int i, const E& x) {\n    if (x != ei()) {\n      val[i] = g(val[i],\
+    \ x);\n      if (i < n) compose(laz[i], x);\n    }\n  }\n  inline void compose(E&\
+    \ a, const E& b) { a = a == ei() ? b : h(a, b); }\n};\n\nnamespace SegmentTreeUtil\
+    \ {\n\ntemplate <typename T>\nstruct Pair {\n  T first, second;\n  Pair() = default;\n\
+    \  Pair(const T& f, const T& s) : first(f), second(s) {}\n  operator T() const\
+    \ { return first; }\n  friend ostream& operator<<(ostream& os, const Pair<T>&\
+    \ p) {\n    os << T(p.first);\n    return os;\n  }\n};\n\ntemplate <typename T>\n\
+    T Max(T a, T b) {\n  return max(a, b);\n}\ntemplate <typename T>\nT Min(T a, T\
+    \ b) {\n  return min(a, b);\n}\ntemplate <typename T>\nT Update(T, T b) {\n  return\
+    \ b;\n}\ntemplate <typename T>\nT Add(T a, T b) {\n  return a + b;\n}\ntemplate\
+    \ <typename T>\nPair<T> Psum(Pair<T> a, Pair<T> b) {\n  return Pair<T>(a.first\
+    \ + b.first, a.second + b.second);\n}\ntemplate <typename T>\nPair<T> Padd(Pair<T>\
+    \ a, T b) {\n  return Pair<T>(a.first + a.second * b, a.second);\n}\ntemplate\
+    \ <typename T>\nPair<T> PUpdate(Pair<T> a, T b) {\n  return Pair<T>(a.second *\
+    \ b, a.second);\n}\ntemplate <typename T>\nPair<T> Pid() {\n  return Pair<T>(0,\
     \ 0);\n}\ntemplate <typename T>\nT Zero() {\n  return T(0);\n}\ntemplate <typename\
     \ T, T val>\nT Const() {\n  return val;\n}\n\ntemplate <typename T, T MINF>\n\
     struct AddMax_LazySegmentTree\n    : LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>,\
@@ -267,17 +288,26 @@ data:
     using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
     using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
     \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    \n * @docs docs/segment-tree/lazy-segment-tree-utility.md\n */\n#line 7 \"verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp\"\
-    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  AddMin_LazySegmentTree<int,\
-    \ inf> seg{vi(N)};\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(s,\
-    \ t, x);\n      t++;\n      seg.update(s, t, x);\n    } else {\n      ini(s, t);\n\
-    \      t++;\n      out(seg.query(s, t));\n    }\n  }\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H\"\
-    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/lazy-segment-tree-utility.hpp\"\
-    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  AddMin_LazySegmentTree<int,\
-    \ inf> seg{vi(N)};\n  rep(_, Q) {\n    ini(c);\n    if (c == 0) {\n      ini(s,\
-    \ t, x);\n      t++;\n      seg.update(s, t, x);\n    } else {\n      ini(s, t);\n\
-    \      t++;\n      out(seg.query(s, t));\n    }\n  }\n}"
+    \n * @docs docs/segment-tree/lazy-segment-tree-utility.md\n */\n#line 7 \"verify/verify-unit-test/lazyseg-setval.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int N = 100000;\n  int\
+    \ Q = 1000000;\n  vl init(N);\n  AddSum_LazySegmentTree<ll> seg(init);\n\n  rep(i,\
+    \ Q) {\n    if (rng() & 1) {\n      int l, r;\n      l = randint(0, N);\n    \
+    \  r = randint(0, N);\n      if (l > r) swap(l, r);\n      r++;\n      seg.update(l,\
+    \ r, randint(0, TEN(6)));\n    } else {\n      int x = randint(0, N);\n      ll\
+    \ v = seg.get_val(x);\n      ll w = seg.query(x, x + 1);\n      assert(v == w);\n\
+    \    }\n  }\n\n  {\n    ini(n);\n    rep(i, n) {\n      ini(a, b);\n      out(a\
+    \ + b);\n    }\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include\
+    \ \"../../segment-tree/lazy-segment-tree-utility.hpp\"\n\nusing namespace Nyaan;\n\
+    \nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q = 1000000;\n  vl init(N);\n\
+    \  AddSum_LazySegmentTree<ll> seg(init);\n\n  rep(i, Q) {\n    if (rng() & 1)\
+    \ {\n      int l, r;\n      l = randint(0, N);\n      r = randint(0, N);\n   \
+    \   if (l > r) swap(l, r);\n      r++;\n      seg.update(l, r, randint(0, TEN(6)));\n\
+    \    } else {\n      int x = randint(0, N);\n      ll v = seg.get_val(x);\n  \
+    \    ll w = seg.query(x, x + 1);\n      assert(v == w);\n    }\n  }\n\n  {\n \
+    \   ini(n);\n    rep(i, n) {\n      ini(a, b);\n      out(a + b);\n    }\n  }\n\
+    }"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -285,17 +315,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
+  - misc/rng.hpp
   - segment-tree/lazy-segment-tree-utility.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
+  path: verify/verify-unit-test/lazyseg-setval.test.cpp
   requiredBy: []
   timestamp: '2021-04-18 02:36:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
+documentation_of: verify/verify-unit-test/lazyseg-setval.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
-- /verify/verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp.html
-title: verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
+- /verify/verify/verify-unit-test/lazyseg-setval.test.cpp
+- /verify/verify/verify-unit-test/lazyseg-setval.test.cpp.html
+title: verify/verify-unit-test/lazyseg-setval.test.cpp
 ---

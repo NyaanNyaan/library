@@ -30,12 +30,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/lazyseg-setval.test.cpp
+    title: verify/verify-unit-test/lazyseg-setval.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/segment-tree/lazy-segment-tree-utility.md
     document_title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\
@@ -63,17 +66,20 @@ data:
     \  }\n    while (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r &\
     \ 1) R = f(val[--r], R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L,\
     \ R);\n  }\n\n  void set_val(int k, const T& x) {\n    k += n;\n    for (int i\
-    \ = log; i >= 1; i--) {\n      if (((k >> i) << i) != k) _push(k >> i);\n    }\n\
-    \    val[k] = x;\n    for (int i = 1; i <= log; i++) {\n      if (((k >> i) <<\
-    \ i) != k) _update(k >> i);\n    }\n  }\n\n  void update_val(int k, const E& x)\
-    \ {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k >> i) <<\
-    \ i) != k) _push(k >> i);\n    }\n    val[k] = g(val[k], x);\n    for (int i =\
-    \ 1; i <= log; i++) {\n      if (((k >> i) << i) != k) _update(k >> i);\n    }\n\
-    \  }\n\n  T get_val(int k) {\n    k += n;\n    for (int i = log; i >= 1; i--)\
-    \ {\n      if (((k >> i) << i) != k) _push(k >> i);\n    }\n    return val[k];\n\
-    \  }\n\n private:\n  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2\
-    \ * i + 0] = g(val[2 * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i +\
-    \ 1], laz[i]);\n      if (2 * i < n) {\n        compose(laz[2 * i + 0], laz[i]);\n\
+    \ = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
+    \ i) != (k + 1))\n        _push(k >> i);\n    }\n    val[k] = x;\n    for (int\
+    \ i = 1; i <= log; i++) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
+    \ i) != (k + 1))\n        _update(k >> i);\n    }\n  }\n\n  void update_val(int\
+    \ k, const E& x) {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if\
+    \ (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k\
+    \ >> i);\n    }\n    val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++)\
+    \ {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n   \
+    \     _update(k >> i);\n    }\n  }\n\n  T get_val(int k) {\n    k += n;\n    for\
+    \ (int i = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >>\
+    \ i) << i) != (k + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\
+    \n private:\n  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2 * i\
+    \ + 0] = g(val[2 * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i + 1],\
+    \ laz[i]);\n      if (2 * i < n) {\n        compose(laz[2 * i + 0], laz[i]);\n\
     \        compose(laz[2 * i + 1], laz[i]);\n      }\n      laz[i] = ei();\n   \
     \ }\n  }\n  inline void _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i\
     \ + 1]); }\n  inline void _apply(int i, const E& x) {\n    if (x != ei()) {\n\
@@ -148,20 +154,23 @@ data:
     \ (l & 1) L = f(L, val[l++]);\n      if (r & 1) R = f(val[--r], R);\n      l >>=\
     \ 1;\n      r >>= 1;\n    }\n    return f(L, R);\n  }\n\n  void set_val(int k,\
     \ const T& x) {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k\
-    \ >> i) << i) != k) _push(k >> i);\n    }\n    val[k] = x;\n    for (int i = 1;\
-    \ i <= log; i++) {\n      if (((k >> i) << i) != k) _update(k >> i);\n    }\n\
-    \  }\n\n  void update_val(int k, const E& x) {\n    k += n;\n    for (int i =\
-    \ log; i >= 1; i--) {\n      if (((k >> i) << i) != k) _push(k >> i);\n    }\n\
-    \    val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++) {\n      if (((k\
-    \ >> i) << i) != k) _update(k >> i);\n    }\n  }\n\n  T get_val(int k) {\n   \
-    \ k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k >> i) << i) !=\
-    \ k) _push(k >> i);\n    }\n    return val[k];\n  }\n\n private:\n  void _push(int\
-    \ i) {\n    if (laz[i] != ei()) {\n      val[2 * i + 0] = g(val[2 * i + 0], laz[i]);\n\
-    \      val[2 * i + 1] = g(val[2 * i + 1], laz[i]);\n      if (2 * i < n) {\n \
-    \       compose(laz[2 * i + 0], laz[i]);\n        compose(laz[2 * i + 1], laz[i]);\n\
-    \      }\n      laz[i] = ei();\n    }\n  }\n  inline void _update(int i) { val[i]\
-    \ = f(val[2 * i + 0], val[2 * i + 1]); }\n  inline void _apply(int i, const E&\
-    \ x) {\n    if (x != ei()) {\n      val[i] = g(val[i], x);\n      if (i < n) compose(laz[i],\
+    \ >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k >> i);\n\
+    \    }\n    val[k] = x;\n    for (int i = 1; i <= log; i++) {\n      if (((k >>\
+    \ i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _update(k >> i);\n\
+    \    }\n  }\n\n  void update_val(int k, const E& x) {\n    k += n;\n    for (int\
+    \ i = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
+    \ i) != (k + 1))\n        _push(k >> i);\n    }\n    val[k] = g(val[k], x);\n\
+    \    for (int i = 1; i <= log; i++) {\n      if (((k >> i) << i) != k || (((k\
+    \ + 1) >> i) << i) != (k + 1))\n        _update(k >> i);\n    }\n  }\n\n  T get_val(int\
+    \ k) {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k >> i)\
+    \ << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k >> i);\n  \
+    \  }\n    return val[k];\n  }\n\n private:\n  void _push(int i) {\n    if (laz[i]\
+    \ != ei()) {\n      val[2 * i + 0] = g(val[2 * i + 0], laz[i]);\n      val[2 *\
+    \ i + 1] = g(val[2 * i + 1], laz[i]);\n      if (2 * i < n) {\n        compose(laz[2\
+    \ * i + 0], laz[i]);\n        compose(laz[2 * i + 1], laz[i]);\n      }\n    \
+    \  laz[i] = ei();\n    }\n  }\n  inline void _update(int i) { val[i] = f(val[2\
+    \ * i + 0], val[2 * i + 1]); }\n  inline void _apply(int i, const E& x) {\n  \
+    \  if (x != ei()) {\n      val[i] = g(val[i], x);\n      if (i < n) compose(laz[i],\
     \ x);\n    }\n  }\n  inline void compose(E& a, const E& b) { a = a == ei() ? b\
     \ : h(a, b); }\n};\n\nnamespace SegmentTreeUtil {\n\ntemplate <typename T>\nstruct\
     \ Pair {\n  T first, second;\n  Pair() = default;\n  Pair(const T& f, const T&\
@@ -215,19 +224,20 @@ data:
   isVerificationFile: false
   path: segment-tree/lazy-segment-tree-utility.hpp
   requiredBy: []
-  timestamp: '2021-02-10 23:32:16+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-04-18 02:36:23+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+  - verify/verify-unit-test/lazyseg-setval.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-h-max.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-f.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-2-d.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-g.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-f-max.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
 documentation_of: segment-tree/lazy-segment-tree-utility.hpp
 layout: document
 redirect_from:

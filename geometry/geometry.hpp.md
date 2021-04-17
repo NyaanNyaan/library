@@ -54,8 +54,8 @@ data:
     \u5F62\u306E\u9762\u7A4D\nReal area(const Polygon &p) {\n  Real A = 0;\n  for\
     \ (int i = 0; i < (int)p.size(); ++i) {\n    A += cross(p[i], p[(i + 1) % p.size()]);\n\
     \  }\n  return A * 0.5;\n}\n\nstruct Circle {\n  Point p;\n  Real r;\n\n  Circle()\
-    \ = default;\n  Circle(Point p, Real r) : p(p), r(r) {}\n};\n\nusing Circles =\
-    \ vector<Circle>;\n\nint intersect(Circle c1, Circle c2) {\n  if (c1.r < c2.r)\
+    \ = default;\n  Circle(Point _p, Real _r) : p(_p), r(_r) {}\n};\n\nusing Circles\
+    \ = vector<Circle>;\n\nint intersect(Circle c1, Circle c2) {\n  if (c1.r < c2.r)\
     \ swap(c1, c2);\n  Real d = abs(c1.p - c2.p);\n  if (c1.r + c2.r < d) return 4;\n\
     \  if (eq(c1.r + c2.r, d)) return 3;\n  if (c1.r - c2.r < d) return 2;\n  if (eq(c1.r\
     \ - c2.r, d)) return 1;\n  return 0;\n}\n\npair<Point, Point> crosspoint(const\
@@ -110,8 +110,8 @@ data:
     \ - 1);\n  return ch;\n}\n\n// \u591A\u89D2\u5F62\u306E\u9762\u7A4D\nReal area(const\
     \ Polygon &p) {\n  Real A = 0;\n  for (int i = 0; i < (int)p.size(); ++i) {\n\
     \    A += cross(p[i], p[(i + 1) % p.size()]);\n  }\n  return A * 0.5;\n}\n\nstruct\
-    \ Circle {\n  Point p;\n  Real r;\n\n  Circle() = default;\n  Circle(Point p,\
-    \ Real r) : p(p), r(r) {}\n};\n\nusing Circles = vector<Circle>;\n\nint intersect(Circle\
+    \ Circle {\n  Point p;\n  Real r;\n\n  Circle() = default;\n  Circle(Point _p,\
+    \ Real _r) : p(_p), r(_r) {}\n};\n\nusing Circles = vector<Circle>;\n\nint intersect(Circle\
     \ c1, Circle c2) {\n  if (c1.r < c2.r) swap(c1, c2);\n  Real d = abs(c1.p - c2.p);\n\
     \  if (c1.r + c2.r < d) return 4;\n  if (eq(c1.r + c2.r, d)) return 3;\n  if (c1.r\
     \ - c2.r < d) return 2;\n  if (eq(c1.r - c2.r, d)) return 1;\n  return 0;\n}\n\
@@ -125,7 +125,7 @@ data:
   isVerificationFile: false
   path: geometry/geometry.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-04-18 02:36:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/geometry.hpp
