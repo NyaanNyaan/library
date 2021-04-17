@@ -92,7 +92,7 @@ struct Circle {
   Real r;
 
   Circle() = default;
-  Circle(Point p, Real r) : p(p), r(r) {}
+  Circle(Point _p, Real _r) : p(_p), r(_r) {}
 };
 
 using Circles = vector<Circle>;

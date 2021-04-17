@@ -11,6 +11,7 @@ b.py
 buf.cpp
 docs/modint/montgomery-modint.md
 input
+input1
 lance-game.cpp
 Makefile
 naive.cpp
@@ -25,3 +26,7 @@ segment-tree/lazy-seg-tree-with-index.hpp
 test
 test.cpp
 test.exe
+
+dirchlet.cpp
+mat_prod.cpp
+mat_prod_2.cpp

@@ -63,29 +63,34 @@ struct LazySegmentTree {
   void set_val(int k, const T& x) {
     k += n;
     for (int i = log; i >= 1; i--) {
-      if (((k >> i) << i) != k) _push(k >> i);
+      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))
+        _push(k >> i);
     }
     val[k] = x;
     for (int i = 1; i <= log; i++) {
-      if (((k >> i) << i) != k) _update(k >> i);
+      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))
+        _update(k >> i);
     }
   }
 
   void update_val(int k, const E& x) {
     k += n;
     for (int i = log; i >= 1; i--) {
-      if (((k >> i) << i) != k) _push(k >> i);
+      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))
+        _push(k >> i);
     }
     val[k] = g(val[k], x);
     for (int i = 1; i <= log; i++) {
-      if (((k >> i) << i) != k) _update(k >> i);
+      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))
+        _update(k >> i);
     }
   }
 
   T get_val(int k) {
     k += n;
     for (int i = log; i >= 1; i--) {
-      if (((k >> i) << i) != k) _push(k >> i);
+      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))
+        _push(k >> i);
     }
     return val[k];
   }
