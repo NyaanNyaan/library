@@ -30,10 +30,7 @@ void Nyaan::solve() {
   }
 
   {
-    ini(n);
-    rep(i, n) {
-      ini(a, b);
-      out(a + b);
-    }
+    ini(a, b);
+    out(a + b);
   }
 }
