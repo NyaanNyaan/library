@@ -65,6 +65,7 @@
 "verify/verify-unit-test/hashmap.test.cpp": "2021-01-31 22:24:52 +0900",
 "verify/verify-unit-test/hashset.test.cpp": "2021-01-31 22:24:52 +0900",
 "verify/verify-unit-test/interval-union.test.cpp": "2021-02-14 00:25:36 +0900",
+"verify/verify-unit-test/lazyseg-setval.test.cpp": "2021-04-18 15:02:45 +0900",
 "verify/verify-unit-test/math.test.cpp": "2020-12-08 20:57:43 +0900",
 "verify/verify-unit-test/mf.test.cpp": "2020-12-08 17:24:32 +0900",
 "verify/verify-unit-test/multieval.test.cpp": "2021-03-26 14:37:22 +0900",
