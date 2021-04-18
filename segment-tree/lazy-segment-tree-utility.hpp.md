@@ -30,15 +30,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/lazyseg-setval.test.cpp
     title: verify/verify-unit-test/lazyseg-setval.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/segment-tree/lazy-segment-tree-utility.md
     document_title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\
@@ -225,7 +225,7 @@ data:
   path: segment-tree/lazy-segment-tree-utility.hpp
   requiredBy: []
   timestamp: '2021-04-18 02:36:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/lazyseg-setval.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
