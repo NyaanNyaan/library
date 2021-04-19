@@ -52,6 +52,7 @@
 "verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp": "2020-12-22 00:51:45 +0900",
 "verify/verify-aoj-other/aoj-0304.test.cpp": "2021-01-02 17:08:41 +0900",
 "verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp": "2020-12-05 07:59:51 +0900",
+"verify/verify-aoj-other/aoj-2891.test.cpp": "2021-04-19 17:09:00 +0900",
 "verify/verify-aoj-other/aoj-2945-01bfs.test.cpp": "2020-12-21 18:22:27 +0900",
 "verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp": "2020-12-05 07:59:51 +0900",
 "verify/verify-aoj-other/aoj-2995-hashmap.test.cpp": "2021-03-07 00:59:28 +0900",
