@@ -55,6 +55,7 @@ struct vEB_tree_node {
   inline int min() const { return mn == inf ? -1 : mn; }
   inline int max() const { return mx; }
 
+  // 以上(存在しない時は-1)
   int find_next(int key) const {
     if (key <= min()) return min();
     if (max() < key) return -1;
@@ -67,6 +68,7 @@ struct vEB_tree_node {
     return (nxt << shift) + chd[nxt].min();
   }
 
+  // 未満(存在しない時は-1)
   int find_prev(int key) const {
     if (max() < key) return max();
     if (key <= min()) return -1;
