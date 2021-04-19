@@ -1513,6 +1513,9 @@ data:
       path: verify/verify-yuki/yuki-1220.test.cpp
       title: verify/verify-yuki/yuki-1220.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1254.test.cpp
+      title: verify/verify-yuki/yuki-1254.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1269.test.cpp
       title: verify/verify-yuki/yuki-1269.test.cpp
     - icon: ':heavy_check_mark:'

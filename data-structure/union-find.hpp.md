@@ -31,6 +31,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
     title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1254.test.cpp
+    title: verify/verify-yuki/yuki-1254.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   _isVerificationFailed: false
@@ -80,6 +83,7 @@ data:
   - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-1254.test.cpp
 documentation_of: data-structure/union-find.hpp
 layout: document
 redirect_from:

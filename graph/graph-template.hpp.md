@@ -226,6 +226,9 @@ data:
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1254.test.cpp
+    title: verify/verify-yuki/yuki-1254.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1320.test.cpp
     title: verify/verify-yuki/yuki-1320.test.cpp
   - icon: ':heavy_check_mark:'
@@ -368,6 +371,7 @@ data:
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
