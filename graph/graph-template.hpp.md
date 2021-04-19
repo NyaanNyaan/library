@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/cycle-detection.hpp
     title: "\u9589\u8DEF\u306E\u691C\u51FA"
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/funtional-graph.hpp
     title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -138,6 +138,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-0304.test.cpp
     title: verify/verify-aoj-other/aoj-0304.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2891.test.cpp
+    title: verify/verify-aoj-other/aoj-2891.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
     title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
@@ -341,6 +344,7 @@ data:
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp

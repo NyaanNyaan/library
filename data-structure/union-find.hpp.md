@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/funtional-graph.hpp
     title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2891.test.cpp
+    title: verify/verify-aoj-other/aoj-2891.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
@@ -72,6 +75,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
+  - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp

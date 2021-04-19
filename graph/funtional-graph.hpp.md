@@ -11,10 +11,13 @@ data:
     path: tree/heavy-light-decomposition.hpp
     title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2891.test.cpp
+    title: verify/verify-aoj-other/aoj-2891.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/graph/functional-graph.md
     document_title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\
@@ -201,8 +204,9 @@ data:
   path: graph/funtional-graph.hpp
   requiredBy: []
   timestamp: '2021-04-19 14:26:33+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-aoj-other/aoj-2891.test.cpp
 documentation_of: graph/funtional-graph.hpp
 layout: document
 redirect_from:

@@ -212,7 +212,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dimension-expanded-graph.hpp
       title: "\u6B21\u5143\u62E1\u5F35\u30B0\u30E9\u30D5"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/funtional-graph.hpp
       title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
     - icon: ':heavy_check_mark:'
@@ -939,6 +939,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
       title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-2891.test.cpp
+      title: verify/verify-aoj-other/aoj-2891.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
       title: verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
