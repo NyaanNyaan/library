@@ -199,6 +199,9 @@ data:
     path: verify/verify-aoj-other/aoj-3022.test.cpp
     title: verify/verify-aoj-other/aoj-3022.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bitset-find-prev.test.cpp
+    title: verify/verify-unit-test/bitset-find-prev.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -873,6 +876,7 @@ data:
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp
+  - verify/verify-unit-test/bitset-find-prev.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp

@@ -393,6 +393,9 @@ data:
   - name: misc
     pages:
     - icon: ':heavy_check_mark:'
+      path: misc/bitset-find-prev.hpp
+      title: bitset::find_prev
+    - icon: ':heavy_check_mark:'
       path: misc/compress.hpp
       title: misc/compress.hpp
     - icon: ':heavy_check_mark:'
@@ -959,6 +962,9 @@ data:
       title: verify/verify-aoj-other/aoj-3022.test.cpp
   - name: verify/verify-unit-test
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/bitset-find-prev.test.cpp
+      title: verify/verify-unit-test/bitset-find-prev.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/debug.test.cpp
       title: verify/verify-unit-test/debug.test.cpp
