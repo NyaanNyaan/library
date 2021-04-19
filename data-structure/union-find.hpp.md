@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/funtional-graph.hpp
+    title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: graph/kruskal.hpp
     title: graph/kruskal.hpp
@@ -62,6 +65,7 @@ data:
   path: data-structure/union-find.hpp
   requiredBy:
   - graph/minimum-cost-arborescence.hpp
+  - graph/funtional-graph.hpp
   - graph/kruskal.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC

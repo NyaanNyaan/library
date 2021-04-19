@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/cycle-detection.hpp
     title: "\u9589\u8DEF\u306E\u691C\u51FA"
+  - icon: ':warning:'
+    path: graph/funtional-graph.hpp
+    title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
   - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
@@ -303,6 +306,7 @@ data:
   - graph/graph-utility.hpp
   - graph/biconnected-components.hpp
   - graph/minimum-cost-arborescence.hpp
+  - graph/funtional-graph.hpp
   - graph/lowlink.hpp
   - graph/cycle-detection.hpp
   - graph/kruskal.hpp
