@@ -51,7 +51,7 @@ data:
     links:
     - https://judge.yosupo.jp/problem/aplusb
   bundledCode: "#line 1 \"verify/verify-unit-test/osak.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -197,33 +197,33 @@ data:
     \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
     \   return;                  \\\n  } while (0)\n#line 82 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"prime/fast-factorize.hpp\"\n\n#line 2 \"inner/inner_math.hpp\"\n\nnamespace\
-    \ inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 = int64_t;\n\
-    using u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n  while (b)\
-    \ swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT inv(T a, T p) {\n\
-    \  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n\
-    \    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ? y + p : y;\n\
-    }\n\ntemplate <typename T, typename U>\nT modpow(T a, U n, T p) {\n  T ret = 1\
-    \ % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if (n & 1) ret = U(ret) *\
-    \ a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line 2 \"misc/rng.hpp\"\n\
-    \nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
-    \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
-    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
-    \           .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
-    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
-    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
-    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
-    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
-    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
-    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
-    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
-    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
-    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
-    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
-    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
-    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
-    modint/arbitrary-prime-modint.hpp\"\n\n\n\nstruct ArbitraryLazyMontgomeryModInt\
+    \ 4 \"verify/verify-unit-test/osak.test.cpp\"\n//\n#line 2 \"prime/fast-factorize.hpp\"\
+    \n\n#line 2 \"inner/inner_math.hpp\"\n\nnamespace inner {\n\nusing i32 = int32_t;\n\
+    using u32 = uint32_t;\nusing i64 = int64_t;\nusing u64 = uint64_t;\n\ntemplate\
+    \ <typename T>\nT gcd(T a, T b) {\n  while (b) swap(a %= b, b);\n  return a;\n\
+    }\n\ntemplate <typename T>\nT inv(T a, T p) {\n  T b = p, x = 1, y = 0;\n  while\
+    \ (a) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n\
+    \  assert(b == 1);\n  return y < 0 ? y + p : y;\n}\n\ntemplate <typename T, typename\
+    \ U>\nT modpow(T a, U n, T p) {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a)\
+    \ * a % p)\n    if (n & 1) ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace\
+    \ inner\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\n\
+    uint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 2 \"modint/arbitrary-prime-modint.hpp\"\n\n\n\nstruct ArbitraryLazyMontgomeryModInt\
     \ {\n  using mint = ArbitraryLazyMontgomeryModInt;\n  using i32 = int32_t;\n \
     \ using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static u32 mod;\n  static\
     \ u32 r;\n  static u32 n2;\n\n  static u32 get_r() {\n    u32 ret = mod;\n   \
@@ -332,35 +332,53 @@ data:
     \ {\n      lp[i] = i;\n      pr.push_back(i);\n    }\n    for (int j = 2; j <\
     \ (int)pr.size() && i * pr[j] <= N; ++j) {\n      lp[i * pr[j]] = pr[j];\n   \
     \   if (pr[j] == lp[i]) break;\n    }\n  }\n  return lp;\n}\n#line 4 \"prime/osak.hpp\"\
-    \n\ntemplate<int MAX>\nvector<int> osak(int n){\n  static vector<int> f = factor_enumerate(MAX);\n\
-    \  vector<int> ret;\n  while(f[n]) ret.push_back(f[n]), n /= f[n];\n  return ret;\n\
-    }\n#line 6 \"verify/verify-unit-test/osak.test.cpp\"\n\nunsigned long long rng2()\
-    \ {\n  static unsigned long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \n\ntemplate <int MAX>\nvector<int> osak(int n) {\n  static vector<int> f = factor_enumerate(MAX);\n\
+    \  vector<int> ret;\n  while (f[n]) ret.push_back(f[n]), n /= f[n];\n  return\
+    \ ret;\n}\n\ntemplate <int MAX>\nvector<pair<int, int>> osak_table(int n) {\n\
+    \  static vector<int> f = factor_enumerate(MAX);\n  vector<pair<int, int>> v;\n\
+    \  for (; f[n]; n /= f[n]) {\n    if (v.empty() || v.back().first != f[n]) {\n\
+    \      v.emplace_back(f[n], 1);\n    } else {\n      v.back().second++;\n    }\n\
+    \  }\n  return v;\n}\n\ntemplate <int MAX>\nvector<int> osak_divisors(int n) {\n\
+    \  if(n == 0) return {};\n  if(n == 1) return vector<int>(1, 1);\n  auto p = osak_table<MAX>(n);\n\
+    \  vector<int> ds;\n\n  auto dfs = [&](auto r, int i, int c) {\n    if (i == (int)p.size())\
+    \ {\n      ds.push_back(c);\n      return;\n    }\n    for (int j = 0; j <= p[i].second;\
+    \ j++) {\n      r(r, i + 1, c);\n      c *= p[i].first;\n    }\n  };\n\n  dfs(dfs,\
+    \ 0, 1);\n  sort(begin(ds), end(ds));\n  return ds;\n}\n#line 7 \"verify/verify-unit-test/osak.test.cpp\"\
+    \n\nunsigned long long rng2() {\n  static unsigned long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
-    \  .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nusing\
-    \ namespace Nyaan; void Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout\
-    \ << (a + b) << '\\n';\n\n  rep(i, 100000) {\n    auto f1 = osak<10000000>(i);\n\
-    \    auto f2 = factorize(i);\n    auto end = [&]() {\n      out(f1);\n      out(f2);\n\
-    \      exit(1);\n    };\n    if (sz(f1) != sz(f2)) end();\n    rep(i, sz(f1))\
-    \ if (f1[i] != (int)f2[i]) end();\n  }\n  rep(i, 500000) {\n    int n = rng2()\
-    \ & ((1 << 23) - 1);\n    auto f1 = osak<10000000>(n);\n    auto f2 = factorize(n);\n\
-    \    auto end = [&]() {\n      out(f1);\n      out(f2);\n      exit(1);\n    };\n\
-    \    if (sz(f1) != sz(f2)) end();\n    rep(i, sz(f1)) if (f1[i] != (int)f2[i])\
-    \ end();\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../template/template.hpp\"\n#include \"../../prime/fast-factorize.hpp\"\n#include\
-    \ \"../../prime/osak.hpp\"\n\nunsigned long long rng2() {\n  static unsigned long\
-    \ long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n          chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \          .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n\
-    }\n\nusing namespace Nyaan; void Nyaan::solve() {\n  int a, b;\n  cin >> a >>\
-    \ b;\n  cout << (a + b) << '\\n';\n\n  rep(i, 100000) {\n    auto f1 = osak<10000000>(i);\n\
-    \    auto f2 = factorize(i);\n    auto end = [&]() {\n      out(f1);\n      out(f2);\n\
-    \      exit(1);\n    };\n    if (sz(f1) != sz(f2)) end();\n    rep(i, sz(f1))\
-    \ if (f1[i] != (int)f2[i]) end();\n  }\n  rep(i, 500000) {\n    int n = rng2()\
-    \ & ((1 << 23) - 1);\n    auto f1 = osak<10000000>(n);\n    auto f2 = factorize(n);\n\
-    \    auto end = [&]() {\n      out(f1);\n      out(f2);\n      exit(1);\n    };\n\
-    \    if (sz(f1) != sz(f2)) end();\n    rep(i, sz(f1)) if (f1[i] != (int)f2[i])\
-    \ end();\n  }\n}"
+    \  .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nconstexpr\
+    \ int MX = 10000000;\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  auto\
+    \ end = [](auto x, auto y) {\n    out(x);\n    out(y);\n    exit(1);\n  };\n \
+    \ rep(i, 100000) {\n    auto f1 = osak<MX>(i);\n    auto f2 = factorize(i);\n\
+    \    if (f1.size() != f2.size()) end(f1, f2);\n    rep(i, sz(f1)) if (f1[i] !=\
+    \ (int)f2[i]) end(f1, f2);\n\n    auto d1 = osak_divisors<MX>(i);\n    auto d2\
+    \ = divisors(i);\n    if (d1.size() != d2.size()) end(d1, d2);\n    rep(i, sz(d1))\
+    \ if (d1[i] != (int)d2[i]) end(d1, d2);\n  }\n\n  rep(_, 200000) {\n    int i\
+    \ = rng2() & ((1 << 23) - 1);\n    auto f1 = osak<MX>(i);\n    auto f2 = factorize(i);\n\
+    \    if (f1.size() != f2.size()) end(f1, f2);\n    rep(i, sz(f1)) if (f1[i] !=\
+    \ (int)f2[i]) end(f1, f2);\n\n    auto d1 = osak_divisors<MX>(i);\n    auto d2\
+    \ = divisors(i);\n    if (d1.size() != d2.size()) end(d1, d2);\n    rep(i, sz(d1))\
+    \ if (d1[i] != (int)d2[i]) end(d1, d2);\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << (a + b) << '\\n';\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../prime/fast-factorize.hpp\"\
+    \n#include \"../../prime/osak.hpp\"\n\nunsigned long long rng2() {\n  static unsigned\
+    \ long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n        \
+    \  chrono::high_resolution_clock::now().time_since_epoch())\n          .count();\n\
+    \  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nconstexpr int MX\
+    \ = 10000000;\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  auto end = [](auto\
+    \ x, auto y) {\n    out(x);\n    out(y);\n    exit(1);\n  };\n  rep(i, 100000)\
+    \ {\n    auto f1 = osak<MX>(i);\n    auto f2 = factorize(i);\n    if (f1.size()\
+    \ != f2.size()) end(f1, f2);\n    rep(i, sz(f1)) if (f1[i] != (int)f2[i]) end(f1,\
+    \ f2);\n\n    auto d1 = osak_divisors<MX>(i);\n    auto d2 = divisors(i);\n  \
+    \  if (d1.size() != d2.size()) end(d1, d2);\n    rep(i, sz(d1)) if (d1[i] != (int)d2[i])\
+    \ end(d1, d2);\n  }\n\n  rep(_, 200000) {\n    int i = rng2() & ((1 << 23) - 1);\n\
+    \    auto f1 = osak<MX>(i);\n    auto f2 = factorize(i);\n    if (f1.size() !=\
+    \ f2.size()) end(f1, f2);\n    rep(i, sz(f1)) if (f1[i] != (int)f2[i]) end(f1,\
+    \ f2);\n\n    auto d1 = osak_divisors<MX>(i);\n    auto d2 = divisors(i);\n  \
+    \  if (d1.size() != d2.size()) end(d1, d2);\n    rep(i, sz(d1)) if (d1[i] != (int)d2[i])\
+    \ end(d1, d2);\n  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << '\\\
+    n';\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -378,7 +396,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/osak.test.cpp
   requiredBy: []
-  timestamp: '2020-12-08 00:23:55+09:00'
+  timestamp: '2021-04-20 10:57:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/osak.test.cpp

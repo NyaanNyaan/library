@@ -332,10 +332,19 @@ data:
     \ {\n      lp[i] = i;\n      pr.push_back(i);\n    }\n    for (int j = 2; j <\
     \ (int)pr.size() && i * pr[j] <= N; ++j) {\n      lp[i * pr[j]] = pr[j];\n   \
     \   if (pr[j] == lp[i]) break;\n    }\n  }\n  return lp;\n}\n#line 4 \"prime/osak.hpp\"\
-    \n\ntemplate<int MAX>\nvector<int> osak(int n){\n  static vector<int> f = factor_enumerate(MAX);\n\
-    \  vector<int> ret;\n  while(f[n]) ret.push_back(f[n]), n /= f[n];\n  return ret;\n\
-    }\n#line 6 \"verify/verify-unit-test/factorize.test.cpp\"\n\nunsigned long long\
-    \ rng2() {\n  static unsigned long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \n\ntemplate <int MAX>\nvector<int> osak(int n) {\n  static vector<int> f = factor_enumerate(MAX);\n\
+    \  vector<int> ret;\n  while (f[n]) ret.push_back(f[n]), n /= f[n];\n  return\
+    \ ret;\n}\n\ntemplate <int MAX>\nvector<pair<int, int>> osak_table(int n) {\n\
+    \  static vector<int> f = factor_enumerate(MAX);\n  vector<pair<int, int>> v;\n\
+    \  for (; f[n]; n /= f[n]) {\n    if (v.empty() || v.back().first != f[n]) {\n\
+    \      v.emplace_back(f[n], 1);\n    } else {\n      v.back().second++;\n    }\n\
+    \  }\n  return v;\n}\n\ntemplate <int MAX>\nvector<int> osak_divisors(int n) {\n\
+    \  if(n == 0) return {};\n  if(n == 1) return vector<int>(1, 1);\n  auto p = osak_table<MAX>(n);\n\
+    \  vector<int> ds;\n\n  auto dfs = [&](auto r, int i, int c) {\n    if (i == (int)p.size())\
+    \ {\n      ds.push_back(c);\n      return;\n    }\n    for (int j = 0; j <= p[i].second;\
+    \ j++) {\n      r(r, i + 1, c);\n      c *= p[i].first;\n    }\n  };\n\n  dfs(dfs,\
+    \ 0, 1);\n  sort(begin(ds), end(ds));\n  return ds;\n}\n#line 6 \"verify/verify-unit-test/factorize.test.cpp\"\
+    \n\nunsigned long long rng2() {\n  static unsigned long long x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
     \  .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nusing\
     \ namespace Nyaan; void Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout\
@@ -382,7 +391,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/factorize.test.cpp
   requiredBy: []
-  timestamp: '2020-12-08 00:23:55+09:00'
+  timestamp: '2021-04-20 10:57:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/factorize.test.cpp
