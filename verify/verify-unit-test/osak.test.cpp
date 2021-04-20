@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
-
+//
 #include "../../template/template.hpp"
+//
 #include "../../prime/fast-factorize.hpp"
 #include "../../prime/osak.hpp"
 
@@ -13,32 +14,41 @@ unsigned long long rng2() {
   return x_ = x_ ^ (x_ >> 9);
 }
 
-using namespace Nyaan; void Nyaan::solve() {
+constexpr int MX = 10000000;
+
+using namespace Nyaan;
+void Nyaan::solve() {
+  auto end = [](auto x, auto y) {
+    out(x);
+    out(y);
+    exit(1);
+  };
+  rep(i, 100000) {
+    auto f1 = osak<MX>(i);
+    auto f2 = factorize(i);
+    if (f1.size() != f2.size()) end(f1, f2);
+    rep(i, sz(f1)) if (f1[i] != (int)f2[i]) end(f1, f2);
+
+    auto d1 = osak_divisors<MX>(i);
+    auto d2 = divisors(i);
+    if (d1.size() != d2.size()) end(d1, d2);
+    rep(i, sz(d1)) if (d1[i] != (int)d2[i]) end(d1, d2);
+  }
+
+  rep(_, 200000) {
+    int i = rng2() & ((1 << 23) - 1);
+    auto f1 = osak<MX>(i);
+    auto f2 = factorize(i);
+    if (f1.size() != f2.size()) end(f1, f2);
+    rep(i, sz(f1)) if (f1[i] != (int)f2[i]) end(f1, f2);
+
+    auto d1 = osak_divisors<MX>(i);
+    auto d2 = divisors(i);
+    if (d1.size() != d2.size()) end(d1, d2);
+    rep(i, sz(d1)) if (d1[i] != (int)d2[i]) end(d1, d2);
+  }
+
   int a, b;
   cin >> a >> b;
   cout << (a + b) << '\n';
-
-  rep(i, 100000) {
-    auto f1 = osak<10000000>(i);
-    auto f2 = factorize(i);
-    auto end = [&]() {
-      out(f1);
-      out(f2);
-      exit(1);
-    };
-    if (sz(f1) != sz(f2)) end();
-    rep(i, sz(f1)) if (f1[i] != (int)f2[i]) end();
-  }
-  rep(i, 500000) {
-    int n = rng2() & ((1 << 23) - 1);
-    auto f1 = osak<10000000>(n);
-    auto f2 = factorize(n);
-    auto end = [&]() {
-      out(f1);
-      out(f2);
-      exit(1);
-    };
-    if (sz(f1) != sz(f2)) end();
-    rep(i, sz(f1)) if (f1[i] != (int)f2[i]) end();
-  }
 }
