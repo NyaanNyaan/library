@@ -300,7 +300,7 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 3 \"modulo/strassen.hpp\"\n//\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
+    \ { return mod; }\n};\n#line 3 \"modulo/strassen.hpp\"\n//\n\n#line 2 \"modint/simd-montgomery.hpp\"\
     \n\n\n#line 5 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
     ))) __attribute__((always_inline)) __m128i\nmy128_mullo_epu32(const __m128i &a,\
     \ const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"\
@@ -340,7 +340,7 @@ data:
     ))) __attribute__((always_inline)) __m256i\nmontgomery_sub_256(const __m256i &a,\
     \ const __m256i &b, const __m256i &m2,\n                   const __m256i &m0)\
     \ {\n  __m256i ret = _mm256_sub_epi32(a, b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
-    \ ret), m2),\n                          ret);\n}\n#line 10 \"modulo/strassen.hpp\"\
+    \ ret), m2),\n                          ret);\n}\n#line 8 \"modulo/strassen.hpp\"\
     \n\nnamespace FastMatProd {\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
     using vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
     using u32 = uint32_t;\nusing i32 = int32_t;\nusing u64 = uint64_t;\nusing m256\
@@ -625,23 +625,23 @@ data:
     \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
     \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
     \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
-    \ 635 \"modulo/strassen.hpp\"\nvoid time_test() {\n  int N = 1024;\n  int P =\
+    \ 633 \"modulo/strassen.hpp\"\nvoid time_test() {\n  int N = 1024;\n  int P =\
     \ N, M = N;\n  mt19937 rng(58);\n  vvm s(N, vm(P)), t(P, vm(M));\n  for (int i\
     \ = 0; i < N; i++)\n    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n\
     \  for (int i = 0; i < P; i++)\n    for (int j = 0; j < M; j++) t[i][j] = rng()\
-    \ % 998244353;\n  vvm u, u2;\n  Timer timer;\n\n  int loop = 5;\n  timer.reset();\n\
+    \ % 998244353;\n  vvm u, u2, u3;\n  Timer timer;\n\n  int loop = 5;\n  timer.reset();\n\
     \  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s, t);\n  cout <<\
     \ \"strassen \" << (timer.elapsed() / loop) << endl;\n\n  timer.reset();\n  u2\
-    \ = FastMatProd::naive_mul(s, t);\n  cout << \"naive \" << (timer.elapsed() /\
-    \ loop) << endl;\n\n  timer.reset();\n  auto u3 = FastMatProd::block_dec(s, t);\n\
-    \  cout << \"block dec \" << (timer.elapsed() / loop) << endl;\n\n  assert(u ==\
-    \ u2);\n  assert(u == u3);\n}\n\nvoid debug_test() {\n  // time_test();\n  int\
-    \ N, P, M;\n  mt19937 rng(58);\n  int loop = 1000;\n  while (loop--) {\n    N\
-    \ = rng() % 500 + 1;\n    M = rng() % 500 + 1;\n    P = rng() % 500 + 1;\n   \
-    \ vvm s(N, vm(P)), t(P, vm(M));\n    for (int i = 0; i < N; i++)\n      for (int\
-    \ j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n    for (int i = 0; i < P;\
-    \ i++)\n      for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;\n    auto\
-    \ u = strassen(s, t);\n    auto u2 = naive_mul(s, t);\n    auto u3 = block_dec(s,\
+    \ = FastMatProd::naive_mul(s, t);\n  cout << \"naive \" << timer.elapsed() <<\
+    \ endl;\n\n  timer.reset();\n  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s,\
+    \ t);\n  cout << \"block dec \" << (timer.elapsed() / loop) << endl;\n\n  assert(u\
+    \ == u2);\n  assert(u == u3);\n}\n\nvoid debug_test() {\n  // time_test();\n \
+    \ int N, P, M;\n  mt19937 rng(58);\n  int loop = 1000;\n  while (loop--) {\n \
+    \   N = rng() % 500 + 1;\n    M = rng() % 500 + 1;\n    P = rng() % 500 + 1;\n\
+    \    vvm s(N, vm(P)), t(P, vm(M));\n    for (int i = 0; i < N; i++)\n      for\
+    \ (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n    for (int i = 0; i\
+    \ < P; i++)\n      for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;\n\
+    \    auto u = strassen(s, t);\n    auto u2 = naive_mul(s, t);\n    auto u3 = block_dec(s,\
     \ t);\n    if (u != u2) {\n      cout << \"ng u1 \" << N << \" \" << P << \" \"\
     \ << M << endl;\n      exit(1);\n    } else if (u != u3) {\n      cout << \"ng\
     \ u1 \" << N << \" \" << P << \" \" << M << endl;\n      exit(1);\n    } else\
@@ -1101,7 +1101,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   requiredBy: []
-  timestamp: '2021-03-07 00:59:28+09:00'
+  timestamp: '2021-04-23 23:31:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp

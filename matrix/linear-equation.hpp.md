@@ -118,8 +118,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
 documentation_of: matrix/linear-equation.hpp
 layout: document
 redirect_from:

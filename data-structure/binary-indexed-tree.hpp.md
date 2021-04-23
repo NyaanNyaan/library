@@ -88,15 +88,15 @@ data:
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
 documentation_of: data-structure/binary-indexed-tree.hpp
 layout: document
 redirect_from:

@@ -139,8 +139,8 @@ data:
   timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 documentation_of: fps/taylor-shift.hpp
 layout: document
 redirect_from:

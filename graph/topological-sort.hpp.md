@@ -80,8 +80,8 @@ data:
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: graph/topological-sort.hpp
 layout: document
