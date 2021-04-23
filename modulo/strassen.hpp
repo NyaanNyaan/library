@@ -2,8 +2,6 @@
 #include <immintrin.h>
 //
 
-
-
 #include "../fps/formal-power-series.hpp"
 #include "../modint/montgomery-modint.hpp"
 #include "../modint/simd-montgomery.hpp"
@@ -641,7 +639,7 @@ void time_test() {
     for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;
   for (int i = 0; i < P; i++)
     for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;
-  vvm u, u2;
+  vvm u, u2, u3;
   Timer timer;
 
   int loop = 5;
@@ -651,10 +649,10 @@ void time_test() {
 
   timer.reset();
   u2 = FastMatProd::naive_mul(s, t);
-  cout << "naive " << (timer.elapsed() / loop) << endl;
+  cout << "naive " << timer.elapsed() << endl;
 
   timer.reset();
-  auto u3 = FastMatProd::block_dec(s, t);
+  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s, t);
   cout << "block dec " << (timer.elapsed() / loop) << endl;
 
   assert(u == u2);
