@@ -52,19 +52,19 @@ struct prime_power_binomial {
     }
   }
 
-  mint Lucas(long long n, long long m) {
+  long long Lucas(long long n, long long m) {
     mint res = 1;
     while (n) {
       int n0 = n % p, m0 = m % p;
       n /= p, m /= p;
-      if (n0 < m0) return mint(0);
+      if (n0 < m0) return 0;
       res *= fac[n0] * ifac[m0] * ifac[n0 - m0];
     }
-    return res;
+    return res.val();
   }
 
-  mint C(long long n, long long m) {
-    if (n < m || n < 0 || m < 0) return mint(0);
+  long long C(long long n, long long m) {
+    if (n < m || n < 0 || m < 0) return 0;
     if (mint::mod() != M) mint::set_mod(M);
     if (q == 1) return Lucas(n, m);
     long long r = n - m;
@@ -77,11 +77,11 @@ struct prime_power_binomial {
       n /= p, m /= p, r /= p;
       int eps = n - m - r;
       e0 += eps;
-      if (e0 >= q) return mint(0);
+      if (e0 >= q) return 0;
       if (++i >= q) eq += eps;
     }
     res *= delta.pow(eq) * mint(p).pow(e0);
-    return res;
+    return res.val();
   }
 };
 
@@ -115,7 +115,7 @@ struct arbitrary_mod_binomial {
     if (mod == 1) return 0;
     vector<long long> rem, d;
     for (int i = 0; i < (int)cs.size(); i++) {
-      rem.push_back(cs[i].C(n, m).val());
+      rem.push_back(cs[i].C(n, m));
       d.push_back(M[i]);
     }
     return atcoder::crt(rem, d).first;
