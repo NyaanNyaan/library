@@ -102,25 +102,28 @@ data:
     \      cur->r = rp;\n      this->update(cur);\n      rp = cur;\n    }\n    this->splay(t);\n\
     \    return rp;\n  }\n\n  virtual void link(Ptr u, Ptr v) {\n    evert(u);\n \
     \   expose(v);\n    u->p = v;\n  }\n\n  void cut(Ptr u, Ptr v) {\n    evert(u);\n\
-    \    expose(v);\n    v->l = u->p = nullptr;\n    this->update(v);\n  }\n\n  void\
-    \ evert(Ptr t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n \
-    \ }\n\n  Ptr lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return nullptr;\n\
-    \    expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x, int k) {\n\
-    \    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r && x->r->sz\
-    \ > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -= x->r->sz;\n\
-    \        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n      }\n\
-    \    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
-    \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  virtual void\
-    \ set_key(Ptr t, const decltype(Node::key)& key) {\n    this->splay(t);\n    t->key\
-    \ = key;\n    this->update(t);\n  }\n\n  virtual decltype(Node::key) get_key(Ptr\
-    \ t) { return t->key; }\n\n  decltype(Node::key) fold(Ptr u, Ptr v) {\n    evert(u);\n\
-    \    expose(v);\n    return v->sum;\n  }\n};\n\n/**\n * @brief Link/Cut Tree(base)\n\
-    \ * @docs docs/lct/link-cut-tree.md\n */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\
-    \n\ntemplate <typename T, T (*f)(T, T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n\
-    \    : LinkCutBase<SplayTreeForLCSubtree<T, f, finv>> {\n  using base = LinkCutBase<SplayTreeForLCSubtree<T,\
-    \ f, finv>>;\n  using Node = typename base::Node;\n  using Ptr = typename base::Ptr;\n\
-    \n  Ptr expose(Ptr t) override {\n    Ptr rp = nullptr;\n    for (Ptr cur = t;\
-    \ cur; cur = cur->p) {\n      this->splay(cur);\n      if (cur->r) cur->add(cur->r);\n\
+    \    expose(v);\n    assert(u->p == v);\n    v->l = u->p = nullptr;\n    this->update(v);\n\
+    \  }\n\n  void evert(Ptr t) {\n    expose(t);\n    this->toggle(t);\n    this->push(t);\n\
+    \  }\n\n  Ptr lca(Ptr u, Ptr v) {\n    if (get_root(u) != get_root(v)) return\
+    \ nullptr;\n    expose(u);\n    return expose(v);\n  }\n\n  Ptr get_kth(Ptr x,\
+    \ int k) {\n    expose(x);\n    while (x) {\n      this->push(x);\n      if (x->r\
+    \ && x->r->sz > k) {\n        x = x->r;\n      } else {\n        if (x->r) k -=\
+    \ x->r->sz;\n        if (k == 0) return x;\n        k -= 1;\n        x = x->l;\n\
+    \      }\n    }\n    return nullptr;\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n\
+    \    while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n  Ptr get_parent(Ptr\
+    \ x) {\n    expose(x);\n    Ptr p = x->l;\n    if(p == nullptr) return nullptr;\n\
+    \    while (true) {\n      this->push(p);\n      if (p->r == nullptr) return p;\n\
+    \      p = p->r;\n    }\n    exit(1);\n  }\n\n  virtual void set_key(Ptr t, const\
+    \ decltype(Node::key)& key) {\n    this->splay(t);\n    t->key = key;\n    this->update(t);\n\
+    \  }\n\n  virtual decltype(Node::key) get_key(Ptr t) { return t->key; }\n\n  decltype(Node::key)\
+    \ fold(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    return v->sum;\n  }\n\
+    };\n\n/**\n * @brief Link/Cut Tree(base)\n * @docs docs/lct/link-cut-tree.md\n\
+    \ */\n#line 32 \"lct/link-cut-tree-subtree.hpp\"\n\ntemplate <typename T, T (*f)(T,\
+    \ T), T (*finv)(T, T)>\nstruct LinkCutTreeSubtreeQuery\n    : LinkCutBase<SplayTreeForLCSubtree<T,\
+    \ f, finv>> {\n  using base = LinkCutBase<SplayTreeForLCSubtree<T, f, finv>>;\n\
+    \  using Node = typename base::Node;\n  using Ptr = typename base::Ptr;\n\n  Ptr\
+    \ expose(Ptr t) override {\n    Ptr rp = nullptr;\n    for (Ptr cur = t; cur;\
+    \ cur = cur->p) {\n      this->splay(cur);\n      if (cur->r) cur->add(cur->r);\n\
     \      cur->r = rp;\n      if (cur->r) cur->erase(cur->r);\n      this->update(cur);\n\
     \      rp = cur;\n    }\n    this->splay(t);\n    return rp;\n  }\n\n  void link(Ptr\
     \ u, Ptr v) override {\n    this->evert(u);\n    this->expose(v);\n    u->p =\
@@ -165,7 +168,7 @@ data:
   isVerificationFile: false
   path: lct/link-cut-tree-subtree.hpp
   requiredBy: []
-  timestamp: '2020-12-19 12:07:10+09:00'
+  timestamp: '2021-04-26 00:32:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp

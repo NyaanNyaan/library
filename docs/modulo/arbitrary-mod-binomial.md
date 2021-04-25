@@ -1,6 +1,6 @@
 ## 任意mod二項係数
 
-$\binom{n}{m} \mod M$を前計算$\mathrm{O}(M)$、クエリ$\mathrm{O}(\log n + \log M)$で計算するライブラリ。
+$\binom{n}{m} \mod M$を前計算$\mathrm{O}(\min(n,M))$、クエリ$\mathrm{O}(\frac{\log n \log M}{\log \log M})$で計算するライブラリ。
 
 ### 概要
 
@@ -11,6 +11,8 @@ $\binom{n}{m} \mod p^q$を計算出来ればCRTで$\binom{n}{m} \mod M$を復元
 ### $\binom{n}{m} \pmod p$の公式
 
 $\binom{n}{m} \mod p$は比較的容易に計算できる。
+
+#### Lucasの定理
 
 > $\binom{n}{k} \mod p$は
 > 
@@ -147,4 +149,4 @@ $$\equiv \delta^{\lfloor n / p^{j + q} \rfloor} (N_j !)_p \pmod{p ^ q}$$
 >
 > $$e_j = \sum_{j \lt i}\left(\left\lfloor \frac{n}{p^{i}}\right\rfloor - \left\lfloor \frac{m}{p^{i}}\right\rfloor - \left\lfloor \frac{r}{p^{i}}\right\rfloor\right)$$
 
-$a \lt p^q$に対して$(a!)_p \bmod{p^q}$と$(a!)_p^{-1} \bmod{p^q}$を前計算しておくことで上の式は$\mathrm{O}(\log n)$で計算できる。
+$a \lt \min(n,p^q)$に対して$(a!)_p \bmod{p^q}$と$(a!)_p^{-1} \bmod{p^q}$を前計算しておくことで上の式は$\mathrm{O}(\log n)$で計算できる。
