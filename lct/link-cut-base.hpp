@@ -26,6 +26,7 @@ struct LinkCutBase : Splay {
   void cut(Ptr u, Ptr v) {
     evert(u);
     expose(v);
+    assert(u->p == v);
     v->l = u->p = nullptr;
     this->update(v);
   }
@@ -62,6 +63,18 @@ struct LinkCutBase : Splay {
     expose(x);
     while (x->l) this->push(x), x = x->l;
     return x;
+  }
+
+  Ptr get_parent(Ptr x) {
+    expose(x);
+    Ptr p = x->l;
+    if(p == nullptr) return nullptr;
+    while (true) {
+      this->push(p);
+      if (p->r == nullptr) return p;
+      p = p->r;
+    }
+    exit(1);
   }
 
   virtual void set_key(Ptr t, const decltype(Node::key)& key) {
