@@ -255,17 +255,17 @@ data:
     \ - 1].inv();\n    for (int i = M - 2; i > 1; --i) {\n      if (i % p == 0) {\n\
     \        ifac[i] = ifac[i + 1] * (i + 1);\n        ifac[i - 1] = ifac[i];\n  \
     \      i--;\n      } else {\n        ifac[i] = ifac[i + 1] * (i + 1);\n      }\n\
-    \    }\n  }\n\n  mint Lucas(long long n, long long m) {\n    mint res = 1;\n \
-    \   while (n) {\n      int n0 = n % p, m0 = m % p;\n      n /= p, m /= p;\n  \
-    \    if (n0 < m0) return mint(0);\n      res *= fac[n0] * ifac[m0] * ifac[n0 -\
-    \ m0];\n    }\n    return res;\n  }\n\n  mint C(long long n, long long m) {\n\
-    \    if (n < m || n < 0 || m < 0) return mint(0);\n    if (mint::mod() != M) mint::set_mod(M);\n\
+    \    }\n  }\n\n  long long Lucas(long long n, long long m) {\n    mint res = 1;\n\
+    \    while (n) {\n      int n0 = n % p, m0 = m % p;\n      n /= p, m /= p;\n \
+    \     if (n0 < m0) return 0;\n      res *= fac[n0] * ifac[m0] * ifac[n0 - m0];\n\
+    \    }\n    return res.val();\n  }\n\n  long long C(long long n, long long m)\
+    \ {\n    if (n < m || n < 0 || m < 0) return 0;\n    if (mint::mod() != M) mint::set_mod(M);\n\
     \    if (q == 1) return Lucas(n, m);\n    long long r = n - m;\n    int e0 = 0,\
     \ eq = 0, i = 0;\n    mint res = 1;\n    while (n) {\n      res *= fac[n % M];\n\
     \      res *= ifac[m % M];\n      res *= ifac[r % M];\n      n /= p, m /= p, r\
     \ /= p;\n      int eps = n - m - r;\n      e0 += eps;\n      if (e0 >= q) return\
-    \ mint(0);\n      if (++i >= q) eq += eps;\n    }\n    res *= delta.pow(eq) *\
-    \ mint(p).pow(e0);\n    return res;\n  }\n};\n\n// M <= 10^8\nstruct arbitrary_mod_binomial\
+    \ 0;\n      if (++i >= q) eq += eps;\n    }\n    res *= delta.pow(eq) * mint(p).pow(e0);\n\
+    \    return res.val();\n  }\n};\n\n// M <= 10^8\nstruct arbitrary_mod_binomial\
     \ {\n  using mint = atcoder::dynamic_modint<1333>;\n\n  int mod;\n  vector<int>\
     \ M;\n  vector<prime_power_binomial<mint>> cs;\n\n  arbitrary_mod_binomial(int\
     \ md) : mod(md) {\n    assert(1 <= md && md <= 1e8);\n    for (int i = 2; i *\
@@ -276,7 +276,7 @@ data:
     \ 1);\n    }\n    assert(M.size() == cs.size());\n  }\n\n  long long C(long long\
     \ n, long long m) {\n    if (mod == 1) return 0;\n    vector<long long> rem, d;\n\
     \    for (int i = 0; i < (int)cs.size(); i++) {\n      rem.push_back(cs[i].C(n,\
-    \ m).val());\n      d.push_back(M[i]);\n    }\n    return atcoder::crt(rem, d).first;\n\
+    \ m));\n      d.push_back(M[i]);\n    }\n    return atcoder::crt(rem, d).first;\n\
     \  }\n};\n\n/**\n * @brief \u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n\
     \ */\n"
   code: "#pragma once\n\n#include \"../atcoder/math.hpp\"\n#include \"../atcoder/modint.hpp\"\
@@ -293,36 +293,35 @@ data:
     \ fac[i - 1] * i;\n      }\n    }\n    ifac[M - 1] = fac[M - 1].inv();\n    for\
     \ (int i = M - 2; i > 1; --i) {\n      if (i % p == 0) {\n        ifac[i] = ifac[i\
     \ + 1] * (i + 1);\n        ifac[i - 1] = ifac[i];\n        i--;\n      } else\
-    \ {\n        ifac[i] = ifac[i + 1] * (i + 1);\n      }\n    }\n  }\n\n  mint Lucas(long\
-    \ long n, long long m) {\n    mint res = 1;\n    while (n) {\n      int n0 = n\
-    \ % p, m0 = m % p;\n      n /= p, m /= p;\n      if (n0 < m0) return mint(0);\n\
-    \      res *= fac[n0] * ifac[m0] * ifac[n0 - m0];\n    }\n    return res;\n  }\n\
-    \n  mint C(long long n, long long m) {\n    if (n < m || n < 0 || m < 0) return\
-    \ mint(0);\n    if (mint::mod() != M) mint::set_mod(M);\n    if (q == 1) return\
-    \ Lucas(n, m);\n    long long r = n - m;\n    int e0 = 0, eq = 0, i = 0;\n   \
-    \ mint res = 1;\n    while (n) {\n      res *= fac[n % M];\n      res *= ifac[m\
+    \ {\n        ifac[i] = ifac[i + 1] * (i + 1);\n      }\n    }\n  }\n\n  long long\
+    \ Lucas(long long n, long long m) {\n    mint res = 1;\n    while (n) {\n    \
+    \  int n0 = n % p, m0 = m % p;\n      n /= p, m /= p;\n      if (n0 < m0) return\
+    \ 0;\n      res *= fac[n0] * ifac[m0] * ifac[n0 - m0];\n    }\n    return res.val();\n\
+    \  }\n\n  long long C(long long n, long long m) {\n    if (n < m || n < 0 || m\
+    \ < 0) return 0;\n    if (mint::mod() != M) mint::set_mod(M);\n    if (q == 1)\
+    \ return Lucas(n, m);\n    long long r = n - m;\n    int e0 = 0, eq = 0, i = 0;\n\
+    \    mint res = 1;\n    while (n) {\n      res *= fac[n % M];\n      res *= ifac[m\
     \ % M];\n      res *= ifac[r % M];\n      n /= p, m /= p, r /= p;\n      int eps\
-    \ = n - m - r;\n      e0 += eps;\n      if (e0 >= q) return mint(0);\n      if\
-    \ (++i >= q) eq += eps;\n    }\n    res *= delta.pow(eq) * mint(p).pow(e0);\n\
-    \    return res;\n  }\n};\n\n// M <= 10^8\nstruct arbitrary_mod_binomial {\n \
-    \ using mint = atcoder::dynamic_modint<1333>;\n\n  int mod;\n  vector<int> M;\n\
-    \  vector<prime_power_binomial<mint>> cs;\n\n  arbitrary_mod_binomial(int md)\
-    \ : mod(md) {\n    assert(1 <= md && md <= 1e8);\n    for (int i = 2; i * i <=\
-    \ md; i++) {\n      if (md % i == 0) {\n        int j = 0, k = 1;\n        while\
-    \ (md % i == 0) md /= i, j++, k *= i;\n        M.push_back(k);\n        cs.emplace_back(i,\
-    \ j);\n        assert(M.back() == cs.back().M);\n      }\n    }\n    if (md !=\
-    \ 1) {\n      M.push_back(md);\n      cs.emplace_back(md, 1);\n    }\n    assert(M.size()\
-    \ == cs.size());\n  }\n\n  long long C(long long n, long long m) {\n    if (mod\
-    \ == 1) return 0;\n    vector<long long> rem, d;\n    for (int i = 0; i < (int)cs.size();\
-    \ i++) {\n      rem.push_back(cs[i].C(n, m).val());\n      d.push_back(M[i]);\n\
-    \    }\n    return atcoder::crt(rem, d).first;\n  }\n};\n\n/**\n * @brief \u4EFB\
-    \u610Fmod\u4E8C\u9805\u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n\
-    \ */\n"
+    \ = n - m - r;\n      e0 += eps;\n      if (e0 >= q) return 0;\n      if (++i\
+    \ >= q) eq += eps;\n    }\n    res *= delta.pow(eq) * mint(p).pow(e0);\n    return\
+    \ res.val();\n  }\n};\n\n// M <= 10^8\nstruct arbitrary_mod_binomial {\n  using\
+    \ mint = atcoder::dynamic_modint<1333>;\n\n  int mod;\n  vector<int> M;\n  vector<prime_power_binomial<mint>>\
+    \ cs;\n\n  arbitrary_mod_binomial(int md) : mod(md) {\n    assert(1 <= md && md\
+    \ <= 1e8);\n    for (int i = 2; i * i <= md; i++) {\n      if (md % i == 0) {\n\
+    \        int j = 0, k = 1;\n        while (md % i == 0) md /= i, j++, k *= i;\n\
+    \        M.push_back(k);\n        cs.emplace_back(i, j);\n        assert(M.back()\
+    \ == cs.back().M);\n      }\n    }\n    if (md != 1) {\n      M.push_back(md);\n\
+    \      cs.emplace_back(md, 1);\n    }\n    assert(M.size() == cs.size());\n  }\n\
+    \n  long long C(long long n, long long m) {\n    if (mod == 1) return 0;\n   \
+    \ vector<long long> rem, d;\n    for (int i = 0; i < (int)cs.size(); i++) {\n\
+    \      rem.push_back(cs[i].C(n, m));\n      d.push_back(M[i]);\n    }\n    return\
+    \ atcoder::crt(rem, d).first;\n  }\n};\n\n/**\n * @brief \u4EFB\u610Fmod\u4E8C\
+    \u9805\u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: modulo/arbitrary-mod-binomial.hpp
   requiredBy: []
-  timestamp: '2021-04-25 18:30:55+09:00'
+  timestamp: '2021-04-25 18:48:49+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: modulo/arbitrary-mod-binomial.hpp
