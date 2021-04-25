@@ -453,6 +453,9 @@ data:
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
+    - icon: ':warning:'
+      path: modulo/arbitrary-mod-binomial.hpp
+      title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
     - icon: ':heavy_check_mark:'
       path: modulo/binomial.hpp
       title: modulo/binomial.hpp
