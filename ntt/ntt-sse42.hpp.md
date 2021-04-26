@@ -15,47 +15,43 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"ntt/ntt-sse42.hpp\"\n\n\n\n#line 2 \"modint/simd-montgomery.hpp\"\
-    \n\n\n#include <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmy128_mullo_epu32(const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
-    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmy128_mulhi_epu32(const __m128i &a, const __m128i &b) {\n  __m128i\
-    \ a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n\
-    \  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
-    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
-    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
-    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmontgomery_mul_128(const __m128i &a, const __m128i &b, const __m128i\
-    \ &r,\n                   const __m128i &m1) {\n  return _mm_sub_epi32(\n    \
-    \  _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a,\
-    \ b), r), m1));\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmontgomery_add_128(const __m128i &a, const __m128i &b, const __m128i\
-    \ &m2,\n                   const __m128i &m0) {\n  __m128i ret = _mm_sub_epi32(_mm_add_epi32(a,\
-    \ b), m2);\n  return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0, ret), m2),\
-    \ ret);\n}\n\n__attribute__((target(\"sse4.2\"))) __attribute__((always_inline))\
-    \ __m128i\nmontgomery_sub_128(const __m128i &a, const __m128i &b, const __m128i\
-    \ &m2,\n                   const __m128i &m0) {\n  __m128i ret = _mm_sub_epi32(a,\
-    \ b);\n  return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0, ret), m2), ret);\n\
-    }\n\n__attribute__((target(\"avx2\"))) __attribute__((always_inline)) __m256i\n\
-    my256_mullo_epu32(const __m256i &a, const __m256i &b) {\n  return _mm256_mullo_epi32(a,\
-    \ b);\n}\n\n__attribute__((target(\"avx2\"))) __attribute__((always_inline)) __m256i\n\
-    my256_mulhi_epu32(const __m256i &a, const __m256i &b) {\n  __m256i a13 = _mm256_shuffle_epi32(a,\
+    \n\n#include <immintrin.h>\n\n__attribute__((target(\"sse4.2\"))) inline __m128i\
+    \ my128_mullo_epu32(\n    const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a,\
+    \ b);\n}\n\n__attribute__((target(\"sse4.2\"))) inline __m128i my128_mulhi_epu32(\n\
+    \    const __m128i &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a,\
+    \ 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a,\
+    \ b);\n  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
+    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
+    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) inline __m128i montgomery_mul_128(\n\
+    \    const __m128i &a, const __m128i &b, const __m128i &r, const __m128i &m1)\
+    \ {\n  return _mm_sub_epi32(\n      _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n\
+    \      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a, b), r), m1));\n\
+    }\n\n__attribute__((target(\"sse4.2\"))) inline __m128i montgomery_add_128(\n\
+    \    const __m128i &a, const __m128i &b, const __m128i &m2, const __m128i &m0)\
+    \ {\n  __m128i ret = _mm_sub_epi32(_mm_add_epi32(a, b), m2);\n  return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0,\
+    \ ret), m2), ret);\n}\n\n__attribute__((target(\"sse4.2\"))) inline __m128i montgomery_sub_128(\n\
+    \    const __m128i &a, const __m128i &b, const __m128i &m2, const __m128i &m0)\
+    \ {\n  __m128i ret = _mm_sub_epi32(a, b);\n  return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0,\
+    \ ret), m2), ret);\n}\n\n__attribute__((target(\"avx2\"))) inline __m256i my256_mullo_epu32(\n\
+    \    const __m256i &a, const __m256i &b) {\n  return _mm256_mullo_epi32(a, b);\n\
+    }\n\n__attribute__((target(\"avx2\"))) inline __m256i my256_mulhi_epu32(\n   \
+    \ const __m256i &a, const __m256i &b) {\n  __m256i a13 = _mm256_shuffle_epi32(a,\
     \ 0xF5);\n  __m256i b13 = _mm256_shuffle_epi32(b, 0xF5);\n  __m256i prod02 = _mm256_mul_epu32(a,\
     \ b);\n  __m256i prod13 = _mm256_mul_epu32(a13, b13);\n  __m256i prod = _mm256_unpackhi_epi64(_mm256_unpacklo_epi32(prod02,\
     \ prod13),\n                                       _mm256_unpackhi_epi32(prod02,\
-    \ prod13));\n  return prod;\n}\n\n__attribute__((target(\"avx2\"))) __attribute__((always_inline))\
-    \ __m256i\nmontgomery_mul_256(const __m256i &a, const __m256i &b, const __m256i\
-    \ &r,\n                   const __m256i &m1) {\n  return _mm256_sub_epi32(\n \
-    \     _mm256_add_epi32(my256_mulhi_epu32(a, b), m1),\n      my256_mulhi_epu32(my256_mullo_epu32(my256_mullo_epu32(a,\
-    \ b), r), m1));\n}\n\n__attribute__((target(\"avx2\"))) __attribute__((always_inline))\
-    \ __m256i\nmontgomery_add_256(const __m256i &a, const __m256i &b, const __m256i\
-    \ &m2,\n                   const __m256i &m0) {\n  __m256i ret = _mm256_sub_epi32(_mm256_add_epi32(a,\
-    \ b), m2);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
+    \ prod13));\n  return prod;\n}\n\n__attribute__((target(\"avx2\"))) inline __m256i\
+    \ montgomery_mul_256(\n    const __m256i &a, const __m256i &b, const __m256i &r,\
+    \ const __m256i &m1) {\n  return _mm256_sub_epi32(\n      _mm256_add_epi32(my256_mulhi_epu32(a,\
+    \ b), m1),\n      my256_mulhi_epu32(my256_mullo_epu32(my256_mullo_epu32(a, b),\
+    \ r), m1));\n}\n\n__attribute__((target(\"avx2\"))) inline __m256i montgomery_add_256(\n\
+    \    const __m256i &a, const __m256i &b, const __m256i &m2, const __m256i &m0)\
+    \ {\n  __m256i ret = _mm256_sub_epi32(_mm256_add_epi32(a, b), m2);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
     \ ret), m2),\n                          ret);\n}\n\n__attribute__((target(\"avx2\"\
-    ))) __attribute__((always_inline)) __m256i\nmontgomery_sub_256(const __m256i &a,\
-    \ const __m256i &b, const __m256i &m2,\n                   const __m256i &m0)\
-    \ {\n  __m256i ret = _mm256_sub_epi32(a, b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
-    \ ret), m2),\n                          ret);\n}\n#line 6 \"ntt/ntt-sse42.hpp\"\
-    \n\nconstexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
+    ))) inline __m256i montgomery_sub_256(\n    const __m256i &a, const __m256i &b,\
+    \ const __m256i &m2, const __m256i &m0) {\n  __m256i ret = _mm256_sub_epi32(a,\
+    \ b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret),\
+    \ m2),\n                          ret);\n}\n#line 6 \"ntt/ntt-sse42.hpp\"\n\n\
+    constexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t buf1_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
     uint32_t buf2_[SZ_FFT_BUF] __attribute__((aligned(64)));\n\ntemplate <typename\
     \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t mod\
     \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
@@ -365,7 +361,7 @@ data:
   isVerificationFile: false
   path: ntt/ntt-sse42.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-04-26 16:30:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp

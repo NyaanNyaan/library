@@ -780,45 +780,36 @@ data:
     \ rep1(i, N) for (long long i = 1; i <= (long long)(N); i++)\n#define repr1(i,\
     \ N) for (long long i = (N); (long long)(i) > 0; i--)\n#define reg(i, a, b) for\
     \ (long long i = (a); i < (b); i++)\n#define regr(i, a, b) for (long long i =\
-    \ (b)-1; i >= (a); i--)\n#define repc(i, a, cond) for (long long i = (a); (cond);\
-    \ i++)\n#define enm(i, val, vec)                                  \\\n  for (long\
-    \ long i = 0; i < (long long)(vec).size(); i++) \\\n    if (auto& val = vec[i];\
-    \ false)                        \\\n      ;                                  \
-    \                 \\\n    else\n\n#define ini(...)   \\\n  int __VA_ARGS__; \\\
-    \n  in(__VA_ARGS__)\n#define inl(...)         \\\n  long long __VA_ARGS__; \\\n\
-    \  in(__VA_ARGS__)\n#define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
-    #define inc(...)    \\\n  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s,\
-    \ t)                           \\\n  for (int i = 0; i < (int)s.size(); i++) {\
-    \ \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)\
-    \                        \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
-    \    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)\
-    \                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n   \
-    \ in(s[i], t[i], u[i], v[i]);             \\\n  }\n\n#define die(...)        \
-    \     \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n \
-    \   return;                  \\\n  } while (0)\n"
+    \ (b)-1; i >= (a); i--)\n#define fi first\n#define se second\n#define ini(...)\
+    \   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)         \\\n\
+    \  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...)      \\\n  string\
+    \ __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)                      \
+    \     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i]);\
+    \                         \\\n  }\n#define in3(s, t, u)                      \
+    \  \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i]);\
+    \                   \\\n  }\n#define in4(s, t, u, v)                     \\\n\
+    \  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i], v[i]);\
+    \             \\\n  }\n#define die(...)             \\\n  do {               \
+    \        \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;                  \\\n\
+    \  } while (0)\n"
   code: "#define each(x, v) for (auto&& x : v)\n#define each2(x, y, v) for (auto&&\
     \ [x, y] : v)\n#define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long\
     \ long i = 0; i < (long long)(N); i++)\n#define repr(i, N) for (long long i =\
     \ (long long)(N)-1; i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <=\
     \ (long long)(N); i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i)\
     \ > 0; i--)\n#define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define\
-    \ regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n#define repc(i, a, cond)\
-    \ for (long long i = (a); (cond); i++)\n#define enm(i, val, vec)             \
-    \                     \\\n  for (long long i = 0; i < (long long)(vec).size();\
-    \ i++) \\\n    if (auto& val = vec[i]; false)                        \\\n    \
-    \  ;                                                   \\\n    else\n\n#define\
-    \ ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)  \
-    \       \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...) \
-    \     \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inc(...)    \\\n\
-    \  char __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)                \
-    \           \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i]);\
-    \                         \\\n  }\n#define in3(s, t, u)                      \
-    \  \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i]);\
-    \                   \\\n  }\n#define in4(s, t, u, v)                     \\\n\
-    \  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i], u[i], v[i]);\
-    \             \\\n  }\n\n#define die(...)             \\\n  do {             \
-    \          \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;                  \\\
-    \n  } while (0)\n"
+    \ regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)\n#define fi first\n#define\
+    \ se second\n#define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define inl(...)         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n\
+    #define ins(...)      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define\
+    \ in2(s, t)                           \\\n  for (int i = 0; i < (int)s.size();\
+    \ i++) { \\\n    in(s[i], t[i]);                         \\\n  }\n#define in3(s,\
+    \ t, u)                        \\\n  for (int i = 0; i < (int)s.size(); i++) {\
+    \ \\\n    in(s[i], t[i], u[i]);                   \\\n  }\n#define in4(s, t, u,\
+    \ v)                     \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n\
+    \    in(s[i], t[i], u[i], v[i]);             \\\n  }\n#define die(...)       \
+    \      \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__); \\\n\
+    \    return;                  \\\n  } while (0)\n"
   dependsOn: []
   isVerificationFile: false
   path: template/macro.hpp
@@ -829,7 +820,7 @@ data:
   - multiplicative-function/enamurate-multiplicative-function.hpp
   - multiplicative-function/mf-famous-series.hpp
   - template/template.hpp
-  timestamp: '2020-12-04 23:12:26+09:00'
+  timestamp: '2021-04-26 16:30:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp

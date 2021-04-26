@@ -22,7 +22,7 @@ data:
     _deprecated_at_docs: docs/shortest-path/dijkstra.md
     document_title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
     links: []
-  bundledCode: "#line 2 \"shortest-path/dijkstra.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
+  bundledCode: "#line 2 \"shortest-path/dijkstra.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
     \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
     \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
     \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
@@ -50,7 +50,7 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"shortest-path/dijkstra.hpp\"\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"shortest-path/dijkstra.hpp\"\
     \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T>\
     \ &g, int start = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n\
     \  vector<T> d(N, T(-1));\n  priority_queue<P, vector<P>, greater<P> > Q;\n  d[start]\
@@ -58,9 +58,9 @@ data:
     \   Q.pop();\n    int cur = p.second;\n    if (d[cur] < p.first) continue;\n \
     \   for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost\
     \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.emplace(d[dst],\
-    \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\
-    \u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n**/\n"
-  code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\n// unreachable\
+    \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/**\n * @brief \u30C0\u30A4\u30AF\
+    \u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n */\n"
+  code: "#pragma once\n\n#include \"../graph/graph-template.hpp\"\n\n// unreachable\
     \ -> -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start\
     \ = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n  vector<T> d(N,\
     \ T(-1));\n  priority_queue<P, vector<P>, greater<P> > Q;\n  d[start] = 0;\n \
@@ -68,14 +68,14 @@ data:
     \    int cur = p.second;\n    if (d[cur] < p.first) continue;\n    for (auto dst\
     \ : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {\n  \
     \      d[dst] = d[cur] + dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n\
-    \    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\
-    \u6CD5\n * @docs docs/shortest-path/dijkstra.md\n**/\n"
+    \    }\n  }\n  return d;\n}\n\n/**\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\
+    \u6CD5\n * @docs docs/shortest-path/dijkstra.md\n */\n"
   dependsOn:
   - graph/graph-template.hpp
   isVerificationFile: false
   path: shortest-path/dijkstra.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-04-26 22:25:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp

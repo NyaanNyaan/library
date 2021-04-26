@@ -17,8 +17,8 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"shortest-path/restore-shortest-path.hpp\"\n\n\n\n#line 2\
-    \ \"graph/graph-utility.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate\
+  bundledCode: "#line 2 \"shortest-path/restore-shortest-path.hpp\"\n\n#line 2 \"\
+    graph/graph-utility.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate\
     \ <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T\
     \ _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost)\
     \ : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int &x) {\n\
@@ -72,7 +72,7 @@ data:
     \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
     \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
     \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
-    }\n#line 6 \"shortest-path/restore-shortest-path.hpp\"\n\n// restore shortest\
+    }\n#line 4 \"shortest-path/restore-shortest-path.hpp\"\n\n// restore shortest\
     \ path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
     \ &g, vector<T> &d, int S,\n                                  int G) {\n  int\
     \ N = g.size();\n  WeightedGraph<T> rev(g.size());\n  for (int i = 0; i < N; i++)\n\
@@ -80,27 +80,27 @@ data:
     \ ret;\n  ret.push_back(G);\n  int p = G;\n  T dist = d[G];\n  vector<int> vis(N,\
     \ 0);\n  vis[G] = 1;\n  do {\n    int nxt = -1;\n    T nval = numeric_limits<T>::max()\
     \ / 2;\n    for (auto &e : rev[p]) {\n      if (vis[e.to] || d[e.to] + e.cost\
-    \ != dist) continue;\n      if (d[e.to] < nval) nval = d[e.to], nxt = e.to;\n\
-    \    }\n    ret.push_back((vis[nxt] = 1, dist = nval, p = nxt));\n  } while (p\
-    \ != S);\n  reverse(begin(ret), end(ret));\n  return ret;\n}\n"
-  code: "#pragma once\n\n\n\n#include \"../graph/graph-utility.hpp\"\n\n// restore\
-    \ shortest path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
+    \ != dist) continue;\n      if (d[e.to] != -1 && d[e.to] < nval) nval = d[e.to],\
+    \ nxt = e.to;\n    }\n    ret.push_back((vis[nxt] = 1, dist = nval, p = nxt));\n\
+    \  } while (p != S);\n  reverse(begin(ret), end(ret));\n  return ret;\n}\n"
+  code: "#pragma once\n\n#include \"../graph/graph-utility.hpp\"\n\n// restore shortest\
+    \ path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
     \ &g, vector<T> &d, int S,\n                                  int G) {\n  int\
     \ N = g.size();\n  WeightedGraph<T> rev(g.size());\n  for (int i = 0; i < N; i++)\n\
     \    for (auto &e : g[i]) rev[e.to].emplace_back(e.to, i, e.cost);\n  vector<int>\
     \ ret;\n  ret.push_back(G);\n  int p = G;\n  T dist = d[G];\n  vector<int> vis(N,\
     \ 0);\n  vis[G] = 1;\n  do {\n    int nxt = -1;\n    T nval = numeric_limits<T>::max()\
     \ / 2;\n    for (auto &e : rev[p]) {\n      if (vis[e.to] || d[e.to] + e.cost\
-    \ != dist) continue;\n      if (d[e.to] < nval) nval = d[e.to], nxt = e.to;\n\
-    \    }\n    ret.push_back((vis[nxt] = 1, dist = nval, p = nxt));\n  } while (p\
-    \ != S);\n  reverse(begin(ret), end(ret));\n  return ret;\n}"
+    \ != dist) continue;\n      if (d[e.to] != -1 && d[e.to] < nval) nval = d[e.to],\
+    \ nxt = e.to;\n    }\n    ret.push_back((vis[nxt] = 1, dist = nval, p = nxt));\n\
+    \  } while (p != S);\n  reverse(begin(ret), end(ret));\n  return ret;\n}\n"
   dependsOn:
   - graph/graph-utility.hpp
   - graph/graph-template.hpp
   isVerificationFile: false
   path: shortest-path/restore-shortest-path.hpp
   requiredBy: []
-  timestamp: '2020-12-05 08:35:39+09:00'
+  timestamp: '2021-04-26 22:25:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp

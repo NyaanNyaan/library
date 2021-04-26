@@ -773,28 +773,25 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n\n__attribute__((target(\"\
+  bundledCode: "#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"\
     popcnt\"))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\
-    \n__attribute__((target(\"bmi\"))) inline int lsb(const u64 &a) {\n  return _tzcnt_u64(a);\n\
-    }\n__attribute__((target(\"bmi\"))) inline int ctz(const u64 &a) {\n  return _tzcnt_u64(a);\n\
-    }\n\n__attribute__((target(\"lzcnt\"))) inline int msb(const u64 &a) {\n  return\
-    \ 63 - _lzcnt_u64(a);\n}\n__attribute__((target(\"lzcnt\"))) inline int clz64(const\
-    \ u64 &a) {\n  return _lzcnt_u64(a);\n}\n\ntemplate <typename T>\ninline int gbit(const\
-    \ T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename T>\ninline void\
-    \ sbit(T &a, int i, bool b) {\n  a ^= (gbit(a, i) == b ? 0 : (T(b) << i));\n}\n\
-    \nconstexpr long long PW(int n) { return 1LL << n; }\n\nconstexpr long long MSK(int\
-    \ n) { return (1LL << n) - 1; }\n\n}  // namespace Nyaan\n"
-  code: "namespace Nyaan {\n\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
-    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\n__attribute__((target(\"bmi\")))\
-    \ inline int lsb(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n__attribute__((target(\"\
-    bmi\"))) inline int ctz(const u64 &a) {\n  return _tzcnt_u64(a);\n}\n\n__attribute__((target(\"\
-    lzcnt\"))) inline int msb(const u64 &a) {\n  return 63 - _lzcnt_u64(a);\n}\n__attribute__((target(\"\
-    lzcnt\"))) inline int clz64(const u64 &a) {\n  return _lzcnt_u64(a);\n}\n\ntemplate\
+    inline int lsb(const u64 &a) {\n  return a ? __builtin_ctzll(a) : 64;\n}\ninline\
+    \ int ctz(const u64 &a) {\n  return a ? __builtin_ctzll(a) : 64;\n}\ninline int\
+    \ msb(const u64 &a) {\n  return a ? 63 - __builtin_clzll(a) : -1;\n}\ntemplate\
     \ <typename T>\ninline int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n\
     }\ntemplate <typename T>\ninline void sbit(T &a, int i, bool b) {\n  a ^= (gbit(a,\
-    \ i) == b ? 0 : (T(b) << i));\n}\n\nconstexpr long long PW(int n) { return 1LL\
-    \ << n; }\n\nconstexpr long long MSK(int n) { return (1LL << n) - 1; }\n\n}  //\
-    \ namespace Nyaan\n"
+    \ i) == b ? 0 : (T(b) << i));\n}\nconstexpr long long PW(int n) { return 1LL <<\
+    \ n; }\nconstexpr long long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace\
+    \ Nyaan\n"
+  code: "namespace Nyaan {\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline int lsb(const u64 &a) {\n\
+    \  return a ? __builtin_ctzll(a) : 64;\n}\ninline int ctz(const u64 &a) {\n  return\
+    \ a ? __builtin_ctzll(a) : 64;\n}\ninline int msb(const u64 &a) {\n  return a\
+    \ ? 63 - __builtin_clzll(a) : -1;\n}\ntemplate <typename T>\ninline int gbit(const\
+    \ T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename T>\ninline void\
+    \ sbit(T &a, int i, bool b) {\n  a ^= (gbit(a, i) == b ? 0 : (T(b) << i));\n}\n\
+    constexpr long long PW(int n) { return 1LL << n; }\nconstexpr long long MSK(int\
+    \ n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n"
   dependsOn: []
   isVerificationFile: false
   path: template/bitop.hpp
@@ -805,7 +802,7 @@ data:
   - multiplicative-function/enamurate-multiplicative-function.hpp
   - multiplicative-function/mf-famous-series.hpp
   - template/template.hpp
-  timestamp: '2020-12-03 14:17:09+09:00'
+  timestamp: '2021-04-26 16:30:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
