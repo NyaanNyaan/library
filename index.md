@@ -1041,6 +1041,9 @@ data:
       path: verify/verify-unit-test/simulated-annealing.test.cpp
       title: verify/verify-unit-test/simulated-annealing.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/template.test.cpp
+      title: verify/verify-unit-test/template.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/tree-path.test.cpp
       title: verify/verify-unit-test/tree-path.test.cpp
     - icon: ':heavy_check_mark:'
