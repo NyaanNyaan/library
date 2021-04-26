@@ -7,13 +7,8 @@
 #define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)
 #define reg(i, a, b) for (long long i = (a); i < (b); i++)
 #define regr(i, a, b) for (long long i = (b)-1; i >= (a); i--)
-#define repc(i, a, cond) for (long long i = (a); (cond); i++)
-#define enm(i, val, vec)                                  \
-  for (long long i = 0; i < (long long)(vec).size(); i++) \
-    if (auto& val = vec[i]; false)                        \
-      ;                                                   \
-    else
-
+#define fi first
+#define se second
 #define ini(...)   \
   int __VA_ARGS__; \
   in(__VA_ARGS__)
@@ -22,9 +17,6 @@
   in(__VA_ARGS__)
 #define ins(...)      \
   string __VA_ARGS__; \
-  in(__VA_ARGS__)
-#define inc(...)    \
-  char __VA_ARGS__; \
   in(__VA_ARGS__)
 #define in2(s, t)                           \
   for (int i = 0; i < (int)s.size(); i++) { \
@@ -38,7 +30,6 @@
   for (int i = 0; i < (int)s.size(); i++) { \
     in(s[i], t[i], u[i], v[i]);             \
   }
-
 #define die(...)             \
   do {                       \
     Nyaan::out(__VA_ARGS__); \

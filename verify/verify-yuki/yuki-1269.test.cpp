@@ -22,7 +22,7 @@ void Nyaan::solve() {
   each(x, fs) ss.push_back(to_string(x));
 
   AhoCorasick<10, '0'> aho;
-  enm(i, s, ss) aho.add(s, i);
+  rep(i, sz(ss)) aho.add(ss[i], i);
   aho.build(false);
 
   vm dp(aho.size());

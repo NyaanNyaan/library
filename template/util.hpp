@@ -60,10 +60,6 @@ template <typename T>
 int sz(const T &t) {
   return t.size();
 }
-template <typename T, size_t N>
-void mem(T (&a)[N], int c) {
-  memset(a, c, sizeof(T) * N);
-}
 
 template <typename T, typename U>
 inline bool amin(T &x, U y) {
@@ -72,6 +68,19 @@ inline bool amin(T &x, U y) {
 template <typename T, typename U>
 inline bool amax(T &x, U y) {
   return (x < y) ? (x = y, true) : false;
+}
+
+template <typename T>
+inline T Max(const vector<T> &v) {
+  return *max_element(begin(v), end(v));
+}
+template <typename T>
+inline T Min(const vector<T> &v) {
+  return *min_element(begin(v), end(v));
+}
+template <typename T>
+inline long long Sum(const vector<T> &v) {
+  return accumulate(begin(v), end(v), 0LL);
 }
 
 template <typename T>
@@ -122,23 +131,8 @@ vector<int> mkord(int N, F f) {
 }
 
 template <typename T>
-vector<T> reord(const vector<T> &v, const vector<T> &ord) {
-  int N = v.size();
-  vector<T> ret(N);
-  for (int i = 0; i < N; i++) ret[i] = v[ord[i]];
-  return ret;
-};
-
-template <typename T = int>
-vector<T> mkiota(int N) {
-  vector<T> ret(N);
-  iota(begin(ret), end(ret), 0);
-  return ret;
-}
-
-template <typename T>
-vector<int> mkinv(vector<T> &v, int max_val = -1) {
-  if (max_val < (int)v.size()) max_val = v.size() - 1;
+vector<int> mkinv(vector<T> &v) {
+  int max_val = *max_element(begin(v), end(v));
   vector<int> inv(max_val + 1, -1);
   for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;
   return inv;

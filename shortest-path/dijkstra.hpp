@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../graph/graph-template.hpp"
 
 // unreachable -> -1
@@ -28,7 +26,7 @@ vector<T> dijkstra(WeightedGraph<T> &g, int start = 0) {
   return d;
 }
 
-/*
+/**
  * @brief ダイクストラ法
  * @docs docs/shortest-path/dijkstra.md
-**/
+ */
