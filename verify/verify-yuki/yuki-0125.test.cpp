@@ -1,7 +1,7 @@
 #define PROBLEM "https://yukicoder.me/problems/no/125"
-
+//
 #include "../../template/template.hpp"
-
+//
 #include "../../modint/montgomery-modint.hpp"
 using mint = LazyMontgomeryModInt<1000000007>;
 using vm = vector<mint>;
@@ -21,7 +21,7 @@ void Nyaan::solve() {
   int S = accumulate(all(c), 0LL);
 
   vi ds;
-  repc(i, 1, i * i <= S) {
+  for (long long i = 1; i * i <= S; i++) {
     if (S % i == 0) {
       ds.push_back(i);
       if (i * i != S) ds.push_back(S / i);
@@ -57,7 +57,7 @@ void Nyaan::solve() {
   }
 
   {
-    map<ll,mint> a;
+    map<ll, mint> a;
     each(d, ds) {
       int sd = S / d;
       if (g % sd != 0) {

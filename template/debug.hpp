@@ -18,6 +18,8 @@ void dump(const char& t) { cerr << t; }
 
 void dump(const string& t) { cerr << t; }
 
+void dump(const bool& t) { cerr << (t ? "true" : "false"); }
+
 template <typename U,
           enable_if_t<!is_specialize<U>::value, nullptr_t> = nullptr>
 void dump(const U& t) {
@@ -28,12 +30,14 @@ template <typename T>
 void dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr) {
   string res;
   if (t == Nyaan::inf) res = "inf";
-  if (is_signed<T>::value)
+  if constexpr (is_signed<T>::value) {
     if (t == -Nyaan::inf) res = "-inf";
-  if (sizeof(T) == 8) {
+  }
+  if constexpr (sizeof(T) == 8) {
     if (t == Nyaan::infLL) res = "inf";
-    if (is_signed<T>::value)
+    if constexpr (is_signed<T>::value) {
       if (t == -Nyaan::infLL) res = "-inf";
+    }
   }
   if (res.empty()) res = to_string(t);
   cerr << res;
@@ -92,5 +96,5 @@ void trace(Head&& head, Tail&&... tail) {
     DebugImpl::trace(__VA_ARGS__);          \
   } while (0)
 #else
-#define trc(...)
+#define trc(...) (void(0))
 #endif

@@ -132,11 +132,11 @@ struct Pair {
 };
 
 template <typename T>
-T Max(T a, T b) {
+T Mx(T a, T b) {
   return max(a, b);
 }
 template <typename T>
-T Min(T a, T b) {
+T Mn(T a, T b) {
   return min(a, b);
 }
 template <typename T>
@@ -174,17 +174,17 @@ T Const() {
 
 template <typename T, T MINF>
 struct AddMax_LazySegmentTree
-    : LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>> {
+    : LazySegmentTree<T, T, Mx<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>> {
   using base =
-      LazySegmentTree<T, T, Max<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>>;
+      LazySegmentTree<T, T, Mx<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>>;
   AddMax_LazySegmentTree(const vector<T>& v) : base(v) {}
 };
 
 template <typename T, T INF>
 struct AddMin_LazySegmentTree
-    : LazySegmentTree<T, T, Min<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>> {
+    : LazySegmentTree<T, T, Mn<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>> {
   using base =
-      LazySegmentTree<T, T, Min<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>>;
+      LazySegmentTree<T, T, Mn<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>>;
   AddMin_LazySegmentTree(const vector<T>& v) : base(v) {}
 };
 
@@ -202,18 +202,18 @@ struct AddSum_LazySegmentTree
 
 template <typename T, T MINF>
 struct UpdateMax_LazySegmentTree
-    : LazySegmentTree<T, T, Max<T>, Update<T>, Update<T>, Const<T, MINF>,
+    : LazySegmentTree<T, T, Mx<T>, Update<T>, Update<T>, Const<T, MINF>,
                       Const<T, MINF>> {
-  using base = LazySegmentTree<T, T, Max<T>, Update<T>, Update<T>,
+  using base = LazySegmentTree<T, T, Mx<T>, Update<T>, Update<T>,
                                Const<T, MINF>, Const<T, MINF>>;
   UpdateMax_LazySegmentTree(const vector<T>& v) : base(v) {}
 };
 
 template <typename T, T INF>
 struct UpdateMin_LazySegmentTree
-    : LazySegmentTree<T, T, Min<T>, Update<T>, Update<T>, Const<T, INF>,
+    : LazySegmentTree<T, T, Mn<T>, Update<T>, Update<T>, Const<T, INF>,
                       Const<T, INF>> {
-  using base = LazySegmentTree<T, T, Min<T>, Update<T>, Update<T>,
+  using base = LazySegmentTree<T, T, Mn<T>, Update<T>, Update<T>,
                                Const<T, INF>, Const<T, INF>>;
   UpdateMin_LazySegmentTree(const vector<T>& v) : base(v) {}
 };

@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "../../template/template.hpp"
+//
 #include "../../hashmap/hashmap.hpp"
 #include "../../hashmap/hashset.hpp"
 #include "../../matrix/matrix.hpp"
@@ -8,7 +9,6 @@
 using namespace Nyaan;
 
 void test() {
-
   using DebugImpl::trace;
   // number
   {
@@ -16,6 +16,21 @@ void test() {
     trace(1, 2, 3);
     trace(inf, -inf, infLL);
     trace(-infLL, 1.1, (long double)(1.2));
+  }
+  // unsigned
+  {
+    cerr << "unsigned number" << endl;
+    trace(1u, 2u, 3u);
+    trace(uint32_t(inf), -inf, uint64_t(infLL));
+  }
+  // bool
+  {
+    cerr << "bool" << endl;
+    bool t = true, f = false;
+    trace(t, f);
+    vector<bool> v(4);
+    v[0] = v[3] = true;
+    trace(v);
   }
   // pair
   {
@@ -86,7 +101,7 @@ void test() {
     const char& a3 = a1;
     trace(a0, a1, a2, a3);
   }
-   // cv qualifier (string)
+  // cv qualifier (string)
   {
     cerr << "cv qualifier (char)" << endl;
     string a0 = "abc";
