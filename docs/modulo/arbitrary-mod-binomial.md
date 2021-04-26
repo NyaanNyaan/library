@@ -1,6 +1,6 @@
 ## 任意mod二項係数
 
-$\binom{n}{m} \mod M$を前計算$\mathrm{O}(\min(n,M))$、クエリ$\mathrm{O}(\frac{\log n \log M}{\log \log M})$で計算するライブラリ。
+$\binom{n}{m} \mod M$を前計算$\mathrm{O}(\min(\frac{n\log M}{\log \log M},M))$、クエリ$\mathrm{O}(\frac{\log n \log M}{\log \log M})$で計算するライブラリ。
 
 ### 概要
 
@@ -39,7 +39,7 @@ $$\binom{n}{k} \equiv \lbrack x^k \rbrack (1 + x)^n$$
 
 ### $\binom{n}{m}\mod p^k$の公式
 
-法が素数冪の場合は様々な定理を用いる必要がある。
+法が素数冪の場合は様々な定理を用いて計算する必要がある。
 
 #### Willsonの定理
 
