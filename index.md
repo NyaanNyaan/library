@@ -453,7 +453,7 @@ data:
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: modulo/arbitrary-mod-binomial.hpp
       title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
     - icon: ':heavy_check_mark:'
@@ -1303,6 +1303,9 @@ data:
       title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - name: verify/verify-yosupo-math
     pages:
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+      title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp

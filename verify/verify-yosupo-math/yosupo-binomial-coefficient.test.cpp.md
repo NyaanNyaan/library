@@ -1,49 +1,206 @@
 ---
 data:
-  _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
+  _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
-    title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+    path: modulo/arbitrary-mod-binomial.hpp
+    title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
+  - icon: ':heavy_check_mark:'
+    path: template/bitop.hpp
+    title: template/bitop.hpp
+  - icon: ':heavy_check_mark:'
+    path: template/debug.hpp
+    title: template/debug.hpp
+  - icon: ':heavy_check_mark:'
+    path: template/inout.hpp
+    title: template/inout.hpp
+  - icon: ':heavy_check_mark:'
+    path: template/macro.hpp
+    title: template/macro.hpp
+  - icon: ':heavy_check_mark:'
+    path: template/template.hpp
+    title: template/template.hpp
+  - icon: ':heavy_check_mark:'
+    path: template/util.hpp
+    title: template/util.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/modulo/arbitrary-mod-binomial.md
-    document_title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
-    links: []
-  bundledCode: "#line 2 \"modulo/arbitrary-mod-binomial.hpp\"\n\n#include <vector>\n\
-    \n#line 1 \"atcoder/math.hpp\"\n\n\n\n#include <algorithm>\n#include <cassert>\n\
-    #include <tuple>\n#line 8 \"atcoder/math.hpp\"\n\n#line 1 \"atcoder/internal_math.hpp\"\
-    \n\n\n\n#include <utility>\n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\n\
-    namespace atcoder {\n\nnamespace internal {\n\n// @param m `1 <= m`\n// @return\
-    \ x mod m\nconstexpr long long safe_mod(long long x, long long m) {\n    x %=\
-    \ m;\n    if (x < 0) x += m;\n    return x;\n}\n\n// Fast modular multiplication\
-    \ by barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
-    // NOTE: reconsider after Ice Lake\nstruct barrett {\n    unsigned int _m;\n \
-    \   unsigned long long im;\n\n    // @param m `1 <= m < 2^31`\n    barrett(unsigned\
-    \ int m) : _m(m), im((unsigned long long)(-1) / m + 1) {}\n\n    // @return m\n\
-    \    unsigned int umod() const { return _m; }\n\n    // @param a `0 <= a < m`\n\
-    \    // @param b `0 <= b < m`\n    // @return `a * b % m`\n    unsigned int mul(unsigned\
-    \ int a, unsigned int b) const {\n        // [1] m = 1\n        // a = b = im\
-    \ = 0, so okay\n\n        // [2] m >= 2\n        // im = ceil(2^64 / m)\n    \
-    \    // -> im * m = 2^64 + r (0 <= r < m)\n        // let z = a*b = c*m + d (0\
-    \ <= c, d < m)\n        // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64\
-    \ + c*r + d*im\n        // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64\
-    \ + m * (m + 1) < 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n     \
-    \   unsigned long long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned\
-    \ long long x;\n        _umul128(z, im, &x);\n#else\n        unsigned long long\
-    \ x =\n            (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n\
-    #endif\n        unsigned int v = (unsigned int)(z - x * _m);\n        if (_m <=\
-    \ v) v += _m;\n        return v;\n    }\n};\n\n// @param n `0 <= n`\n// @param\
-    \ m `1 <= m`\n// @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long\
-    \ long x, long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m\
-    \ = (unsigned int)(m);\n    unsigned long long r = 1;\n    unsigned long long\
-    \ y = safe_mod(x, m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n\
-    \        y = (y * y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n\
-    // M. Forisek and J. Jancina,\n// Fast Primality Testing for Integers That Fit\
-    \ into a Machine Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient
+    links:
+    - https://judge.yosupo.jp/problem/binomial_coefficient
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n//\n\
+    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
+    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
+    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
+    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
+    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
+    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
+    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
+    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
+    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
+    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
+    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
+    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
+    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
+    \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
+    \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
+    \ first; }\n  U &y() { return second; }\n  const U &y() const { return second;\
+    \ }\n\n  P &operator+=(const P &r) {\n    first += r.first;\n    second += r.second;\n\
+    \    return *this;\n  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n\
+    \    second -= r.second;\n    return *this;\n  }\n  P &operator*=(const P &r)\
+    \ {\n    first *= r.first;\n    second *= r.second;\n    return *this;\n  }\n\
+    \  P operator+(const P &r) const { return P(*this) += r; }\n  P operator-(const\
+    \ P &r) const { return P(*this) -= r; }\n  P operator*(const P &r) const { return\
+    \ P(*this) *= r; }\n};\n\nusing pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing\
+    \ vp = V<pl>;\n\nconstexpr int inf = 1001001001;\nconstexpr long long infLL =\
+    \ 4004004004004004004LL;\n\ntemplate <typename T>\nint sz(const T &t) {\n  return\
+    \ t.size();\n}\n\ntemplate <typename T, typename U>\ninline bool amin(T &x, U\
+    \ y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate <typename T, typename\
+    \ U>\ninline bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true) : false;\n\
+    }\n\ntemplate <typename T>\ninline T Max(const vector<T> &v) {\n  return *max_element(begin(v),\
+    \ end(v));\n}\ntemplate <typename T>\ninline T Min(const vector<T> &v) {\n  return\
+    \ *min_element(begin(v), end(v));\n}\ntemplate <typename T>\ninline long long\
+    \ Sum(const vector<T> &v) {\n  return accumulate(begin(v), end(v), 0LL);\n}\n\n\
+    template <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
+    \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
+    \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\n\
+    constexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n  for (; n; x\
+    \ *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate <typename\
+    \ T, typename U>\npair<T, U> mkp(const T &t, const U &u) {\n  return make_pair(t,\
+    \ u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const vector<T> &v, bool rev\
+    \ = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for (int i = int(v.size())\
+    \ - 1; i >= 0; i--) ret[i] = v[i] + ret[i + 1];\n  } else {\n    for (int i =\
+    \ 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n\
+    };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
+    \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
+    \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
+    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
+    \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
+    \ &v) {\n  int max_val = *max_element(begin(v), end(v));\n  vector<int> inv(max_val\
+    \ + 1, -1);\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return\
+    \ inv;\n}\n\n}  // namespace Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit\
+    \ operation\n#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"\
+    popcnt\"))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\
+    inline int lsb(const u64 &a) {\n  return a ? __builtin_ctzll(a) : 64;\n}\ninline\
+    \ int ctz(const u64 &a) {\n  return a ? __builtin_ctzll(a) : 64;\n}\ninline int\
+    \ msb(const u64 &a) {\n  return a ? 63 - __builtin_clzll(a) : -1;\n}\ntemplate\
+    \ <typename T>\ninline int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n\
+    }\ntemplate <typename T>\ninline void sbit(T &a, int i, bool b) {\n  a ^= (gbit(a,\
+    \ i) == b ? 0 : (T(b) << i));\n}\nconstexpr long long PW(int n) { return 1LL <<\
+    \ n; }\nconstexpr long long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace\
+    \ Nyaan\n#line 61 \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\
+    \nnamespace Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream\
+    \ &os, const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return\
+    \ os;\n}\ntemplate <typename T, typename U>\nistream &operator>>(istream &is,\
+    \ pair<T, U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate\
+    \ <typename T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int\
+    \ s = (int)v.size();\n  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") <<\
+    \ v[i];\n  return os;\n}\ntemplate <typename T>\nistream &operator>>(istream &is,\
+    \ vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return is;\n}\n\nvoid in()\
+    \ {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n\
+    \  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class...\
+    \ U, char sep = ' '>\nvoid out(const T &t, const U &... u) {\n  cout << t;\n \
+    \ if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nvoid outr() {}\ntemplate\
+    \ <typename T, class... U, char sep = ' '>\nvoid outr(const T &t, const U &...\
+    \ u) {\n  cout << t;\n  outr(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya()\
+    \ {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed\
+    \ << setprecision(15);\n    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\
+    \n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\n\n// debug\n#line\
+    \ 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate <typename U, typename\
+    \ = void>\nstruct is_specialize : false_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, typename U::iterator, void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
+    \ conditional<false, decltype(U::first), void>::type>\n    : true_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value, void>>\
+    \ : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const\
+    \ string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t ? \"true\"\
+    \ : \"false\"); }\n\ntemplate <typename U,\n          enable_if_t<!is_specialize<U>::value,\
+    \ nullptr_t> = nullptr>\nvoid dump(const U& t) {\n  cerr << t;\n}\n\ntemplate\
+    \ <typename T>\nvoid dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr)\
+    \ {\n  string res;\n  if (t == Nyaan::inf) res = \"inf\";\n  if constexpr (is_signed<T>::value)\
+    \ {\n    if (t == -Nyaan::inf) res = \"-inf\";\n  }\n  if constexpr (sizeof(T)\
+    \ == 8) {\n    if (t == Nyaan::infLL) res = \"inf\";\n    if constexpr (is_signed<T>::value)\
+    \ {\n      if (t == -Nyaan::infLL) res = \"-inf\";\n    }\n  }\n  if (res.empty())\
+    \ res = to_string(t);\n  cerr << res;\n}\n\ntemplate <typename T, typename U>\n\
+    void dump(const pair<T, U>&);\ntemplate <typename T>\nvoid dump(const pair<T*,\
+    \ int>&);\n\ntemplate <typename T>\nvoid dump(const T& t,\n          enable_if_t<!is_void<typename\
+    \ T::iterator>::value>* = nullptr) {\n  cerr << \"[ \";\n  for (auto it = t.begin();\
+    \ it != t.end();) {\n    dump(*it);\n    cerr << (++it == t.end() ? \"\" : \"\
+    , \");\n  }\n  cerr << \" ]\";\n}\n\ntemplate <typename T, typename U>\nvoid dump(const\
+    \ pair<T, U>& t) {\n  cerr << \"( \";\n  dump(t.first);\n  cerr << \", \";\n \
+    \ dump(t.second);\n  cerr << \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const\
+    \ pair<T*, int>& t) {\n  cerr << \"[ \";\n  for (int i = 0; i < t.second; i++)\
+    \ {\n    dump(t.first[i]);\n    cerr << (i == t.second - 1 ? \"\" : \", \");\n\
+    \  }\n  cerr << \" ]\";\n}\n\nvoid trace() { cerr << endl; }\ntemplate <typename\
+    \ Head, typename... Tail>\nvoid trace(Head&& head, Tail&&... tail) {\n  cerr <<\
+    \ \" \";\n  dump(head);\n  if (sizeof...(tail) != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n\
+    }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
+    \                    \\\n  do {                                      \\\n    cerr\
+    \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
+    \          \\\n  } while (0)\n#else\n#define trc(...) (void(0))\n#endif\n#line\
+    \ 67 \"template/template.hpp\"\n\n// macro\n#line 1 \"template/macro.hpp\"\n#define\
+    \ each(x, v) for (auto&& x : v)\n#define each2(x, y, v) for (auto&& [x, y] : v)\n\
+    #define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long i = 0;\
+    \ i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1;\
+    \ i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N);\
+    \ i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n\
+    #define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define regr(i, a,\
+    \ b) for (long long i = (b)-1; i >= (a); i--)\n#define fi first\n#define se second\n\
+    #define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)\
+    \         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...)\
+    \      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)    \
+    \                       \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n \
+    \   in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)    \
+    \                    \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
+    \ t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)            \
+    \         \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i],\
+    \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
+    \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
+    \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp\"\
+    \n//\n#line 2 \"modulo/arbitrary-mod-binomial.hpp\"\n\n#line 4 \"modulo/arbitrary-mod-binomial.hpp\"\
+    \n\n#line 1 \"atcoder/math.hpp\"\n\n\n\n#line 8 \"atcoder/math.hpp\"\n\n#line\
+    \ 1 \"atcoder/internal_math.hpp\"\n\n\n\n#line 5 \"atcoder/internal_math.hpp\"\
+    \n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace\
+    \ internal {\n\n// @param m `1 <= m`\n// @return x mod m\nconstexpr long long\
+    \ safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n\
+    \    return x;\n}\n\n// Fast modular multiplication by barrett reduction\n// Reference:\
+    \ https://en.wikipedia.org/wiki/Barrett_reduction\n// NOTE: reconsider after Ice\
+    \ Lake\nstruct barrett {\n    unsigned int _m;\n    unsigned long long im;\n\n\
+    \    // @param m `1 <= m < 2^31`\n    barrett(unsigned int m) : _m(m), im((unsigned\
+    \ long long)(-1) / m + 1) {}\n\n    // @return m\n    unsigned int umod() const\
+    \ { return _m; }\n\n    // @param a `0 <= a < m`\n    // @param b `0 <= b < m`\n\
+    \    // @return `a * b % m`\n    unsigned int mul(unsigned int a, unsigned int\
+    \ b) const {\n        // [1] m = 1\n        // a = b = im = 0, so okay\n\n   \
+    \     // [2] m >= 2\n        // im = ceil(2^64 / m)\n        // -> im * m = 2^64\
+    \ + r (0 <= r < m)\n        // let z = a*b = c*m + d (0 <= c, d < m)\n       \
+    \ // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64 + c*r + d*im\n     \
+    \   // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64 + m * (m + 1) <\
+    \ 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n        unsigned long\
+    \ long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned long long x;\n\
+    \        _umul128(z, im, &x);\n#else\n        unsigned long long x =\n       \
+    \     (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n#endif\n     \
+    \   unsigned int v = (unsigned int)(z - x * _m);\n        if (_m <= v) v += _m;\n\
+    \        return v;\n    }\n};\n\n// @param n `0 <= n`\n// @param m `1 <= m`\n\
+    // @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long long x,\
+    \ long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
+    \ int)(m);\n    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x,\
+    \ m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y *\
+    \ y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n// M.\
+    \ Forisek and J. Jancina,\n// Fast Primality Testing for Integers That Fit into\
+    \ a Machine Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int\
     \ n) {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
     \ true;\n    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while\
     \ (d % 2 == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for\
@@ -113,27 +270,27 @@ data:
     \ - b);\n    if (y_max == 0) return ans;\n    ans += (n - (x_max + a - 1) / a)\
     \ * y_max;\n    ans += floor_sum(y_max, a, m, (a - x_max % a) % a);\n    return\
     \ ans;\n}\n\n}  // namespace atcoder\n\n\n#line 1 \"atcoder/modint.hpp\"\n\n\n\
-    \n#line 5 \"atcoder/modint.hpp\"\n#include <numeric>\n#include <type_traits>\n\
-    \n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\n#line 1 \"atcoder/internal_type_traits.hpp\"\
-    \n\n\n\n#line 7 \"atcoder/internal_type_traits.hpp\"\n\nnamespace atcoder {\n\n\
-    namespace internal {\n\n#ifndef _MSC_VER\ntemplate <class T>\nusing is_signed_int128\
-    \ =\n    typename std::conditional<std::is_same<T, __int128_t>::value ||\n   \
-    \                               std::is_same<T, __int128>::value,\n          \
-    \                    std::true_type,\n                              std::false_type>::type;\n\
-    \ntemplate <class T>\nusing is_unsigned_int128 =\n    typename std::conditional<std::is_same<T,\
-    \ __uint128_t>::value ||\n                                  std::is_same<T, unsigned\
-    \ __int128>::value,\n                              std::true_type,\n         \
-    \                     std::false_type>::type;\n\ntemplate <class T>\nusing make_unsigned_int128\
-    \ =\n    typename std::conditional<std::is_same<T, __int128_t>::value,\n     \
-    \                         __uint128_t,\n                              unsigned\
-    \ __int128>;\n\ntemplate <class T>\nusing is_integral = typename std::conditional<std::is_integral<T>::value\
-    \ ||\n                                                  is_signed_int128<T>::value\
-    \ ||\n                                                  is_unsigned_int128<T>::value,\n\
-    \                                              std::true_type,\n             \
-    \                                 std::false_type>::type;\n\ntemplate <class T>\n\
-    using is_signed_int = typename std::conditional<(is_integral<T>::value &&\n  \
-    \                                               std::is_signed<T>::value) ||\n\
-    \                                                    is_signed_int128<T>::value,\n\
+    \n#line 7 \"atcoder/modint.hpp\"\n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\
+    \n#line 1 \"atcoder/internal_type_traits.hpp\"\n\n\n\n#line 7 \"atcoder/internal_type_traits.hpp\"\
+    \n\nnamespace atcoder {\n\nnamespace internal {\n\n#ifndef _MSC_VER\ntemplate\
+    \ <class T>\nusing is_signed_int128 =\n    typename std::conditional<std::is_same<T,\
+    \ __int128_t>::value ||\n                                  std::is_same<T, __int128>::value,\n\
+    \                              std::true_type,\n                             \
+    \ std::false_type>::type;\n\ntemplate <class T>\nusing is_unsigned_int128 =\n\
+    \    typename std::conditional<std::is_same<T, __uint128_t>::value ||\n      \
+    \                            std::is_same<T, unsigned __int128>::value,\n    \
+    \                          std::true_type,\n                              std::false_type>::type;\n\
+    \ntemplate <class T>\nusing make_unsigned_int128 =\n    typename std::conditional<std::is_same<T,\
+    \ __int128_t>::value,\n                              __uint128_t,\n          \
+    \                    unsigned __int128>;\n\ntemplate <class T>\nusing is_integral\
+    \ = typename std::conditional<std::is_integral<T>::value ||\n                \
+    \                                  is_signed_int128<T>::value ||\n           \
+    \                                       is_unsigned_int128<T>::value,\n      \
+    \                                        std::true_type,\n                   \
+    \                           std::false_type>::type;\n\ntemplate <class T>\nusing\
+    \ is_signed_int = typename std::conditional<(is_integral<T>::value &&\n      \
+    \                                           std::is_signed<T>::value) ||\n   \
+    \                                                 is_signed_int128<T>::value,\n\
     \                                                std::true_type,\n           \
     \                                     std::false_type>::type;\n\ntemplate <class\
     \ T>\nusing is_unsigned_int =\n    typename std::conditional<(is_integral<T>::value\
@@ -286,214 +443,34 @@ data:
     \ i++) {\n      rem.push_back(cs[i].C(n, m));\n      d.push_back(M[i]);\n    }\n\
     \    return atcoder::crt(rem, d).first;\n  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n\
     #undef PRIME_POWER_BINOMIAL_N_MAX\n\n/**\n * @brief \u4EFB\u610Fmod\u4E8C\u9805\
-    \u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n */\n"
-  code: "#pragma once\n\n#include <vector>\n\n#include \"../atcoder/math.hpp\"\n#include\
-    \ \"../atcoder/modint.hpp\"\nusing namespace std;\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
-    \ ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\ntemplate <typename\
-    \ mint>\nstruct prime_power_binomial {\n  int p, q, M;\n  vector<mint> fac, ifac,\
-    \ inv;\n  mint delta;\n\n  prime_power_binomial(int _p, int _q) : p(_p), q(_q)\
-    \ {\n    assert(p <= PRIME_POWER_BINOMIAL_M_MAX);\n    assert(_q > 0);\n    long\
-    \ long m = 1;\n    while (_q--) {\n      m *= p;\n      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n\
-    \    }\n    M = m;\n    mint::set_mod(M);\n    enumerate();\n    delta = (p ==\
-    \ 2 && q >= 3) ? 1 : M - 1;\n  }\n\n  void enumerate() {\n    int MX = min<int>(M,\
-    \ PRIME_POWER_BINOMIAL_N_MAX + 10);\n    fac.resize(MX);\n    ifac.resize(MX);\n\
-    \    inv.resize(MX);\n    fac[0] = ifac[0] = inv[0] = 1;\n    fac[1] = ifac[1]\
-    \ = inv[1] = 1;\n    for (int i = 2; i < MX; i++) {\n      if (i % p == 0) {\n\
-    \        fac[i] = fac[i - 1];\n        fac[i + 1] = fac[i - 1] * (i + 1);\n  \
-    \      i++;\n      } else {\n        fac[i] = fac[i - 1] * i;\n      }\n    }\n\
-    \    ifac[MX - 1] = fac[MX - 1].inv();\n    for (int i = MX - 2; i > 1; --i) {\n\
-    \      if (i % p == 0) {\n        ifac[i] = ifac[i + 1] * (i + 1);\n        ifac[i\
-    \ - 1] = ifac[i];\n        i--;\n      } else {\n        ifac[i] = ifac[i + 1]\
-    \ * (i + 1);\n      }\n    }\n  }\n\n  long long Lucas(long long n, long long\
-    \ m) {\n    mint res = 1;\n    while (n) {\n      int n0 = n % p, m0 = m % p;\n\
-    \      n /= p, m /= p;\n      if (n0 < m0) return 0;\n      res *= fac[n0] * ifac[m0]\
-    \ * ifac[n0 - m0];\n    }\n    return res.val();\n  }\n\n  long long C(long long\
-    \ n, long long m) {\n    if (n < m || n < 0 || m < 0) return 0;\n    if (mint::mod()\
-    \ != M) mint::set_mod(M);\n    if (q == 1) return Lucas(n, m);\n    long long\
-    \ r = n - m;\n    int e0 = 0, eq = 0, i = 0;\n    mint res = 1;\n    while (n)\
-    \ {\n      res *= fac[n % M];\n      res *= ifac[m % M];\n      res *= ifac[r\
-    \ % M];\n      n /= p, m /= p, r /= p;\n      int eps = n - m - r;\n      e0 +=\
-    \ eps;\n      if (e0 >= q) return 0;\n      if (++i >= q) eq += eps;\n    }\n\
-    \    res *= delta.pow(eq) * mint(p).pow(e0);\n    return res.val();\n  }\n};\n\
-    \n// constraints:\n// (M <= 1e7 and max(N) <= 1e18) or (M < 2^30 and max(N) <=\
-    \ 2e7)\nstruct arbitrary_mod_binomial {\n  using mint = atcoder::dynamic_modint<1333>;\n\
-    \n  int mod;\n  vector<int> M;\n  vector<prime_power_binomial<mint>> cs;\n\n \
-    \ arbitrary_mod_binomial(long long md) : mod(md) {\n    assert(1 <= md);\n   \
-    \ assert(md <= PRIME_POWER_BINOMIAL_M_MAX);\n    for (int i = 2; i * i <= md;\
-    \ i++) {\n      if (md % i == 0) {\n        int j = 0, k = 1;\n        while (md\
-    \ % i == 0) md /= i, j++, k *= i;\n        M.push_back(k);\n        cs.emplace_back(i,\
-    \ j);\n        assert(M.back() == cs.back().M);\n      }\n    }\n    if (md !=\
-    \ 1) {\n      M.push_back(md);\n      cs.emplace_back(md, 1);\n    }\n    assert(M.size()\
-    \ == cs.size());\n  }\n\n  long long C(long long n, long long m) {\n    if (mod\
-    \ == 1) return 0;\n    vector<long long> rem, d;\n    for (int i = 0; i < (int)cs.size();\
-    \ i++) {\n      rem.push_back(cs[i].C(n, m));\n      d.push_back(M[i]);\n    }\n\
-    \    return atcoder::crt(rem, d).first;\n  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n\
-    #undef PRIME_POWER_BINOMIAL_N_MAX\n\n/**\n * @brief \u4EFB\u610Fmod\u4E8C\u9805\
-    \u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n */\n"
-  dependsOn: []
-  isVerificationFile: false
-  path: modulo/arbitrary-mod-binomial.hpp
+    \u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n */\n#line 6 \"\
+    verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nvoid Nyaan::solve() {\n  int T, M;\n  cin >> T >> M;\n  arbitrary_mod_binomial\
+    \ C(M);\n  while (T--) {\n    long long n, k;\n    cin >> n >> k;\n    cout <<\
+    \ C.C(n, k) << '\\n';\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n\
+    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../modulo/arbitrary-mod-binomial.hpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int T, M;\n  cin >> T >>\
+    \ M;\n  arbitrary_mod_binomial C(M);\n  while (T--) {\n    long long n, k;\n \
+    \   cin >> n >> k;\n    cout << C.C(n, k) << '\\n';\n  }\n}\n"
+  dependsOn:
+  - template/template.hpp
+  - template/util.hpp
+  - template/bitop.hpp
+  - template/inout.hpp
+  - template/debug.hpp
+  - template/macro.hpp
+  - modulo/arbitrary-mod-binomial.hpp
+  isVerificationFile: true
+  path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 00:32:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
-documentation_of: modulo/arbitrary-mod-binomial.hpp
+  timestamp: '2021-04-27 00:31:52+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
 layout: document
 redirect_from:
-- /library/modulo/arbitrary-mod-binomial.hpp
-- /library/modulo/arbitrary-mod-binomial.hpp.html
-title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
+- /verify/verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
 ---
-## 任意mod二項係数
-
-$\binom{n}{m} \mod M$を前計算$\mathrm{O}(\min(\frac{n\log M}{\log \log M},M))$、クエリ$\mathrm{O}(\frac{\log n \log M}{\log \log M})$で計算するライブラリ。
-
-### 概要
-
-[論文](https://github.com/rishirajsinghjhelumi/Coding-Templates/blob/master/Extras/BinCoeff.pdf)　[ferinさんの記事](https://ferin-tech.hatenablog.com/entry/2018/01/17/010829)　[hly1204さんの記事](https://hly1204.github.io/blog/1-12-2021-Lucas_theorem/)
-
-$\binom{n}{m} \mod p^q$を計算出来ればCRTで$\binom{n}{m} \mod M$を復元できるので、ここでは素数冪に限定して議論する。
-
-### $\binom{n}{m} \pmod p$の公式
-
-$\binom{n}{m} \mod p$は比較的容易に計算できる。
-
-#### Lucasの定理
-
-> $\binom{n}{k} \mod p$は
-> 
-> $$n = a_r p^r + \cdots + a_1 p + a_0$$
-> 
-> $$k = b_r p^r + \cdots + b_1 p + b_0$$
->
->としたとき次の式で表される。
->
->$$\binom{n}{k} \equiv \prod_{i=0}^r \binom{a_i}{b_i} \pmod p$$
->
-
-(証明)
-
-$$(1+x)^n \equiv \prod_{i=0}^r ((1+x)^{p^i})^{a_i}$$
-
-$$\equiv \prod_{i=0}^r (1 + x^{p^i})^{a_i} \equiv \prod_{i=0}^r \left(\sum_j \binom{a_i}{j} x^{jp^i}\right) \pmod p$$
-
-と変形できるので、
-
-$$\binom{n}{k} \equiv \lbrack x^k \rbrack (1 + x)^n$$
-
-と合わせて上式を得る。
-
-### $\binom{n}{m}\mod p^k$の公式
-
-法が素数冪の場合は様々な定理を用いて計算する必要がある。
-
-#### Willsonの定理
-
-> 素数$p$に対して次の合同式が成り立つ。
->
-> $$(p - 1)! \equiv -1 \pmod p$$
-
-(証明) $\mod p$上で$1,\ldots,p-1$は逆元をただ一つ持つ。そのうち$a^2 \equiv 1 \pmod p \iff a \equiv \pm 1 \pmod p$を除いた$a=2,\ldots,p-2$は逆元を$2$から$p-2$の中に持つことから、$\prod_{a=2}^{p-2} a\equiv 1$を得る。よって$(p-1)! \equiv 1 \cdot (-1) \equiv -1 \pmod p$になる。
-
-#### 補題1
-
-> 整数$n$に対して$(n!)_p$を$p$の倍数を除いた$n$以下の正整数の総積と置く。このとき素数冪$p^q$に対して
-> 
-> $$(p^q !)_p \equiv \delta \pmod {p^q}$$
->
-> が成り立つ。ただし$\delta$は$p=2,q\geq 3$の時は$1$、それ以外の時は$-1$とする。
-
-(証明) Willsonの定理と同様に証明する。$\mod p^q$上で$p$と互いに素な数は唯一の逆元を持つため、$a^2 \not \equiv 1 \pmod {p^q}$である$a$の総積は$1$である。$a^2 \equiv 1 \pmod {p^q}$の解は
-
-$$a=\left\lbrace
-\begin{array}{cc} 
-1 & p = 2 \wedge q = 1\newline
-\pm 1, 2^{q-1} \pm 1 & p = 2 \wedge q \geq 3 \newline
-\pm 1 & \mathrm{otherwise}
-\end{array}
-\right.
-$$
-
-であるから、$\delta$は$p=2,q\geq 3$のとき$1$でそれ以外は$-1$になる。
-
-また、$n \geq p^q$である$n$に対して補題を適用すると、$n = N_0 \bmod{p^q}$とおいて
-
-$$(n!)_p \equiv \delta ^{\lfloor n / p^q \rfloor} (N_0!)_p  \pmod{p ^ q}$$
-
-という式が導かれる。
-
-#### Legendreの定理ととKummerの定理
-
-Legendreの定理とは次の有名な定理である。(証明略)
-
-> $n!$が$p$で割り切れる回数$\nu_p(n!)$は次の式で表される。
-> 
-> $$\nu_p(n!) =\sum_{1 \leq i} \left\lfloor \frac{n}{p^i} \right\rfloor $$
-
-ここで次の補題2を考える。
-
-> $n$を$p$進数表示したときの各桁の和を$\sigma_p(n)$とおくと、$\sigma_p(n)$と$\nu_p(n!)$の間には次の関係式が成り立つ。
->
-> $$ \nu_p(n!) = \frac{n - \sigma_p(n)}{p - 1}$$
->
-
-証明は帰納的に行うことが出来る。
-
-この補題を利用すると、次に説明するKummerの定理が証明できる。
-
->
-> $\binom{n}{m}$が$p$で割り切れる回数は$n-m$と$m$を$p$進数表示で足し算した時の繰り上がりの回数と等しい。
->
-
-(証明)
-
-$r = n - m$とおき、$p$進表示を$n = \sum_i n_i p^i$のように表すとする。また、$\epsilon_j$を$j$桁目で繰り上がりが起きた時$1$、起きないとき$0$を表す数とする。このとき、
-
-$$n_j = m_j + r_j + \epsilon _{j-1} - p \epsilon_j$$
-
-であり、
-
-$$\nu_p\left(\frac{n!}{m!r!}\right) = \nu_p(n!) - \nu_p(m!) - \nu_p(r!) $$
-
-$$ = \frac{\sigma_p(m) + \sigma_p(r) - \sigma_p(n)}{p - 1} $$
-
-$$= \sum_j \frac{m_j + r_j - n_j}{p - 1}$$
-
-$$= \sum_j \frac{\epsilon_j - p\epsilon_{j-1}}{p - 1} = \sum_j \epsilon_j$$
-
-を得る。なお、$\epsilon_j$は次の式によって得られる。(Kummerの定理から従う。)
-
-$$\epsilon_j = \left\lfloor \frac{n}{p^{j+1}}\right\rfloor - \left\lfloor \frac{m}{p^{j+1}}\right\rfloor - \left\lfloor \frac{r}{p^{j+1}}\right\rfloor$$
-
-#### $n! \pmod {p^q}$の公式
-
-> 正整数$n$と素数冪$p^q$に対して次の関係式が成り立つ。
-> 
-> $${n!} / {p^{\sum_{j \geq 1} \lfloor n / p^j \rfloor }} \equiv \delta^{\sum_{j \geq q} \lfloor n / p^j \rfloor} \prod_{j \geq 0} (N_j !)_p \pmod{p^q}$$
->
-> ただし$N_j$は$\lfloor n / p^j \rfloor$と$\mod p^q$で合同な最小の非負整数とする。
-
-(証明)
-
-$j \geq 0$のとき
-
-$$\lfloor n / p^j \rfloor ! / (p ^ {\lfloor n / p^{j + 1} \rfloor } \lfloor n / p^{j + 1} \rfloor ! ) \equiv (\lfloor n / p^{j} \rfloor !)_p $$
-
-$$\equiv \delta^{\lfloor n / p^{j + q} \rfloor} (N_j !)_p \pmod{p ^ q}$$
-
-であるから、$j \geq 0$について上式を辺々掛ければ示せる。
-
-#### $\binom{n}{m} \pmod {p^q}$の公式
-
-上の式からただちに二項係数に対する以下の関係式が従う。
-
-> 非負整数$n,m$と素数冪$p^q$について以下の式が成り立つ。
-> 
-> $$\frac{1}{p^{e_0}}\binom{n}{m} = \delta^{e_{q-1}} \prod_{j \geq 0} \frac{(N_j!)_p}{(M_j!)_p (R_j!)_p}$$
-> 
-> ただし$e_j$は$j$桁目以上で繰り上がりが発生した回数で、次の式で表される。
->
-> $$e_j = \sum_{j \lt i}\left(\left\lfloor \frac{n}{p^{i}}\right\rfloor - \left\lfloor \frac{m}{p^{i}}\right\rfloor - \left\lfloor \frac{r}{p^{i}}\right\rfloor\right)$$
-
-$a \lt \min(n,p^q)$に対して$(a!)_p \bmod{p^q}$と$(a!)_p^{-1} \bmod{p^q}$を前計算しておくことで上の式は$\mathrm{O}(\log n)$で計算できる。
