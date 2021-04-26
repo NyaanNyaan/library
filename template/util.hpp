@@ -76,7 +76,7 @@ inline T Max(const vector<T> &v) {
 }
 template <typename T>
 inline T Min(const vector<T> &v) {
-  return *max_element(begin(v), end(v));
+  return *min_element(begin(v), end(v));
 }
 template <typename T>
 inline long long Sum(const vector<T> &v) {
