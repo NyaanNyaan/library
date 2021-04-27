@@ -137,9 +137,17 @@ void verify_util() {
     // mkrui
     auto rui = mkrui(v);
     int buf = 0;
+    assert(rui[0] == 0);
     rep(i, sz(v)) {
       buf += v[i];
       assert(rui[i + 1] == buf);
+    }
+    rui = mkrui(v, true);
+    buf = 0;
+    assert(rui.back() == 0);
+    repr(i, sz(v)) {
+      buf += v[i];
+      assert(rui[i] == buf);
     }
 
     // lb, ub

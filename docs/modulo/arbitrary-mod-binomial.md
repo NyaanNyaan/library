@@ -150,3 +150,31 @@ $$\equiv \delta^{\lfloor n / p^{j + q} \rfloor} (N_j !)_p \pmod{p ^ q}$$
 > $$e_j = \sum_{j \lt i}\left(\left\lfloor \frac{n}{p^{i}}\right\rfloor - \left\lfloor \frac{m}{p^{i}}\right\rfloor - \left\lfloor \frac{r}{p^{i}}\right\rfloor\right)$$
 
 $a \lt \min(n,p^q)$に対して$(a!)_p \bmod{p^q}$と$(a!)_p^{-1} \bmod{p^q}$を前計算しておくことで上の式は$\mathrm{O}(\log n)$で計算できる。
+
+### Barrett Reductionによる高速化
+
+このライブラリではBarrett Reductionによる剰余算の高速化を行っているが、その正当性を示しておく。
+
+[参考: AtCoder Library](https://github.com/atcoder/ac-library/blob/master/atcoder/internal_math.hpp)
+
+> $n \lt B = 2^{64}, 1 \lt m \leq 2^{30}$のとき、
+>
+> $$x = \left\lceil \frac{B}{m} \right\rceil$$
+>
+> とおくと
+> 
+> $$ \left\lfloor \frac{nx}{B} \right\rfloor = \left\lfloor \frac{n}{m} \right\rfloor + \varepsilon $$
+>
+> が成り立つ。($\varepsilon$は$0$または$1$)
+
+(証明) $x$の定義より
+
+$$xm = B + r\ (0 \leq r \lt M)$$
+
+が成り立つので、
+
+$$ 0 > \frac{n}{m} - \frac{nx}{B} = n\left(\frac{1}{m} - \frac{x}{B} \right)$$
+
+$$=-\frac{n}{B}\cdot \frac{r}{M} > -1$$
+
+であることから従う。(実用上は$m = 1$の時に$x$がオーバーフローすることに注意する必要がある。)

@@ -2,21 +2,54 @@
 
 #include <vector>
 
-#include "../atcoder/math.hpp"
-#include "../atcoder/modint.hpp"
+#include "atcoder/math.hpp"
 using namespace std;
 
 #define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)
 #define PRIME_POWER_BINOMIAL_N_MAX 20000000
 
-template <typename mint>
 struct prime_power_binomial {
   int p, q, M;
-  vector<mint> fac, ifac, inv;
-  mint delta;
+  vector<int> fac, ifac, inv;
+  int delta;
+
+  using i64 = long long;
+  using u64 = unsigned long long;
+  u64 iM, ip;
+
+  inline i64 modulo_M(u64 n) {
+    u64 x = u64((__uint128_t(n) * iM) >> 64);
+    i64 r = i64(n - x * M);
+    if (r < 0) r += M;
+    return r;
+  }
+
+  inline i64 divide_p(u64 n) {
+    u64 x = u64((__uint128_t(n) * ip) >> 64);
+    i64 r = i64(n - x * p);
+    if (r < 0) x--;
+    return i64(x);
+  }
+
+  inline pair<i64, int> quorem_p(u64 n) {
+    u64 x = u64((__uint128_t(n) * ip) >> 64);
+    i64 r = i64(n - x * p);
+    if (r < 0) r += M, x--;
+    return make_pair(i64(x), int(r));
+  }
+
+  int modpow(int a, long long e) {
+    int r = 1;
+    while (e) {
+      if (e & 1) r = modulo_M(1LL * r * a);
+      a = modulo_M(1LL * a * a);
+      e >>= 1;
+    }
+    return r;
+  }
 
   prime_power_binomial(int _p, int _q) : p(_p), q(_q) {
-    assert(p <= PRIME_POWER_BINOMIAL_M_MAX);
+    assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);
     assert(_q > 0);
     long long m = 1;
     while (_q--) {
@@ -24,7 +57,8 @@ struct prime_power_binomial {
       assert(m <= PRIME_POWER_BINOMIAL_M_MAX);
     }
     M = m;
-    mint::set_mod(M);
+    iM = u64(-1) / M + 1;
+    ip = u64(-1) / p + 1;
     enumerate();
     delta = (p == 2 && q >= 3) ? 1 : M - 1;
   }
@@ -39,65 +73,68 @@ struct prime_power_binomial {
     for (int i = 2; i < MX; i++) {
       if (i % p == 0) {
         fac[i] = fac[i - 1];
-        fac[i + 1] = fac[i - 1] * (i + 1);
+        fac[i + 1] = modulo_M(1LL * fac[i - 1] * (i + 1));
         i++;
       } else {
-        fac[i] = fac[i - 1] * i;
+        fac[i] = modulo_M(1LL * fac[i - 1] * i);
       }
     }
-    ifac[MX - 1] = fac[MX - 1].inv();
+    ifac[MX - 1] = modpow(fac[MX - 1], M / p * (p - 1) - 1);
     for (int i = MX - 2; i > 1; --i) {
       if (i % p == 0) {
-        ifac[i] = ifac[i + 1] * (i + 1);
+        ifac[i] = modulo_M(1LL * ifac[i + 1] * (i + 1));
         ifac[i - 1] = ifac[i];
         i--;
       } else {
-        ifac[i] = ifac[i + 1] * (i + 1);
+        ifac[i] = modulo_M(1LL * ifac[i + 1] * (i + 1));
       }
     }
   }
 
   long long Lucas(long long n, long long m) {
-    mint res = 1;
+    int res = 1;
     while (n) {
-      int n0 = n % p, m0 = m % p;
-      n /= p, m /= p;
+      int n0, m0;
+      tie(n, n0) = quorem_p(n);
+      tie(m, m0) = quorem_p(m);
       if (n0 < m0) return 0;
-      res *= fac[n0] * ifac[m0] * ifac[n0 - m0];
+      res = modulo_M(1LL * res * fac[n0]);
+      int buf = modulo_M(1LL * ifac[n0 - m0] * ifac[m0]);
+      res = modulo_M(1LL * res * buf);
     }
-    return res.val();
+    return res;
   }
 
   long long C(long long n, long long m) {
     if (n < m || n < 0 || m < 0) return 0;
-    if (mint::mod() != M) mint::set_mod(M);
     if (q == 1) return Lucas(n, m);
     long long r = n - m;
     int e0 = 0, eq = 0, i = 0;
-    mint res = 1;
+    int res = 1;
     while (n) {
-      res *= fac[n % M];
-      res *= ifac[m % M];
-      res *= ifac[r % M];
-      n /= p, m /= p, r /= p;
+      res = modulo_M(1LL * res * fac[modulo_M(n)]);
+      res = modulo_M(1LL * res * ifac[modulo_M(m)]);
+      res = modulo_M(1LL * res * ifac[modulo_M(r)]);
+      n = divide_p(n);
+      m = divide_p(m);
+      r = divide_p(r);
       int eps = n - m - r;
       e0 += eps;
       if (e0 >= q) return 0;
       if (++i >= q) eq += eps;
     }
-    res *= delta.pow(eq) * mint(p).pow(e0);
-    return res.val();
+    res = modulo_M(1LL * res * modpow(delta, eq));
+    res = modulo_M(1LL * res * modpow(p, e0));
+    return res;
   }
 };
 
 // constraints:
 // (M <= 1e7 and max(N) <= 1e18) or (M < 2^30 and max(N) <= 2e7)
 struct arbitrary_mod_binomial {
-  using mint = atcoder::dynamic_modint<1333>;
-
   int mod;
   vector<int> M;
-  vector<prime_power_binomial<mint>> cs;
+  vector<prime_power_binomial> cs;
 
   arbitrary_mod_binomial(long long md) : mod(md) {
     assert(1 <= md);
