@@ -224,35 +224,38 @@ data:
     \ {\n      assert(sz(v) == i);\n      v.push_back(randint(0, 10));\n      assert(Max(v)\
     \ == *max_element(all(v)));\n      assert(Min(v) == *min_element(all(v)));\n \
     \     assert(Sum(v) == accumulate(all(v), 0LL));\n    }\n\n    // mkrui\n    auto\
-    \ rui = mkrui(v);\n    int buf = 0;\n    rep(i, sz(v)) {\n      buf += v[i];\n\
-    \      assert(rui[i + 1] == buf);\n    }\n\n    // lb, ub\n    sort(all(v));\n\
-    \    for (int i = 0; i < sz(v); i++) {\n      if (i != 0 and v[i - 1] == v[i])\
-    \ continue;\n      int x = v[i];\n      assert(lb(v, x) == i);\n      assert(ub(v,\
-    \ x - 1) == i);\n    }\n    for (int x = 0; x < 10; x++) {\n      int l = lb(v,\
-    \ x);\n      int u = ub(v, x);\n      for (int i = 0; i < sz(v); i++) {\n    \
-    \    assert((l <= i) == (x <= v[i]) && \"lb\");\n        assert((u <= i) == (x\
-    \ < v[i]) && \"ub\");\n      }\n    }\n\n    // mkuni\n    set<int> s1, s2;\n\
-    \    for (int i : v) s1.insert(i);\n    v = mkuni(v);\n    for (int i : v) s2.insert(i);\n\
-    \    assert(s1 == s2);\n  }\n\n  // TEN\n  for (long long i = 0, x = 1; i <= 18;\
-    \ i++, x *= 10) {\n    assert(TEN(i) == x);\n  }\n\n  // mkord, mkinv(100\u500B\
-    , 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100) { v.push_back(loop); }\n\
-    \    auto ord = mkord(sz(v), [&v](int i, int j) { return v[i] < v[j]; });\n  \
-    \  rep(i, sz(ord) - 1) { assert(v[ord[i]] <= v[ord[i + 1]] && \"mkord\"); }\n\n\
-    \    randshf(v);\n    auto inv = mkinv(v);\n    assert(inv.size() == 100 && \"\
-    mkinv\");\n    set<int> st;\n    each(x, v) st.insert(x);\n    rep(i, sz(inv))\
-    \ {\n      if (inv[i] == -1) {\n        assert(st.find(i) == st.end() && \"mkinv\"\
-    );\n      } else {\n        assert(0 <= inv[i] && inv[i] < sz(v) && \"mkinv\"\
-    );\n        assert(v[inv[i]] == i);\n      }\n    }\n  }\n\n  // mkord, mkinv(100\u500B\
-    , 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100) { v.push_back(randint(0,\
-    \ 1000)); }\n    auto ord = mkord(sz(v), [&v](int i, int j) { return v[i] < v[j];\
-    \ });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]] <= v[ord[i + 1]] && \"mkord\"\
-    ); }\n\n    v = mkuni(v);\n    randshf(v);\n    auto inv = mkinv(v);\n    assert(sz(inv)\
-    \ == Max(v) + 1 && \"mkinv\");\n    set<int> st;\n    each(x, v) st.insert(x);\n\
-    \    rep(i, sz(inv)) {\n      if (inv[i] == -1) {\n        assert(st.find(i) ==\
-    \ st.end() && \"mkinv\");\n      } else {\n        assert(0 <= inv[i] && inv[i]\
-    \ < sz(v) && \"mkinv\");\n        assert(v[inv[i]] == i);\n      }\n    }\n  }\n\
-    }\n\nvoid Nyaan::solve() {\n  verify_bitop();\n  verify_util();\n\n  int a, b;\n\
-    \  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ rui = mkrui(v);\n    int buf = 0;\n    assert(rui[0] == 0);\n    rep(i, sz(v))\
+    \ {\n      buf += v[i];\n      assert(rui[i + 1] == buf);\n    }\n    rui = mkrui(v,\
+    \ true);\n    buf = 0;\n    assert(rui.back() == 0);\n    repr(i, sz(v)) {\n \
+    \     buf += v[i];\n      assert(rui[i] == buf);\n    }\n\n    // lb, ub\n   \
+    \ sort(all(v));\n    for (int i = 0; i < sz(v); i++) {\n      if (i != 0 and v[i\
+    \ - 1] == v[i]) continue;\n      int x = v[i];\n      assert(lb(v, x) == i);\n\
+    \      assert(ub(v, x - 1) == i);\n    }\n    for (int x = 0; x < 10; x++) {\n\
+    \      int l = lb(v, x);\n      int u = ub(v, x);\n      for (int i = 0; i < sz(v);\
+    \ i++) {\n        assert((l <= i) == (x <= v[i]) && \"lb\");\n        assert((u\
+    \ <= i) == (x < v[i]) && \"ub\");\n      }\n    }\n\n    // mkuni\n    set<int>\
+    \ s1, s2;\n    for (int i : v) s1.insert(i);\n    v = mkuni(v);\n    for (int\
+    \ i : v) s2.insert(i);\n    assert(s1 == s2);\n  }\n\n  // TEN\n  for (long long\
+    \ i = 0, x = 1; i <= 18; i++, x *= 10) {\n    assert(TEN(i) == x);\n  }\n\n  //\
+    \ mkord, mkinv(100\u500B, 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100)\
+    \ { v.push_back(loop); }\n    auto ord = mkord(sz(v), [&v](int i, int j) { return\
+    \ v[i] < v[j]; });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]] <= v[ord[i + 1]]\
+    \ && \"mkord\"); }\n\n    randshf(v);\n    auto inv = mkinv(v);\n    assert(inv.size()\
+    \ == 100 && \"mkinv\");\n    set<int> st;\n    each(x, v) st.insert(x);\n    rep(i,\
+    \ sz(inv)) {\n      if (inv[i] == -1) {\n        assert(st.find(i) == st.end()\
+    \ && \"mkinv\");\n      } else {\n        assert(0 <= inv[i] && inv[i] < sz(v)\
+    \ && \"mkinv\");\n        assert(v[inv[i]] == i);\n      }\n    }\n  }\n\n  //\
+    \ mkord, mkinv(100\u500B, 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100)\
+    \ { v.push_back(randint(0, 1000)); }\n    auto ord = mkord(sz(v), [&v](int i,\
+    \ int j) { return v[i] < v[j]; });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]]\
+    \ <= v[ord[i + 1]] && \"mkord\"); }\n\n    v = mkuni(v);\n    randshf(v);\n  \
+    \  auto inv = mkinv(v);\n    assert(sz(inv) == Max(v) + 1 && \"mkinv\");\n   \
+    \ set<int> st;\n    each(x, v) st.insert(x);\n    rep(i, sz(inv)) {\n      if\
+    \ (inv[i] == -1) {\n        assert(st.find(i) == st.end() && \"mkinv\");\n   \
+    \   } else {\n        assert(0 <= inv[i] && inv[i] < sz(v) && \"mkinv\");\n  \
+    \      assert(v[inv[i]] == i);\n      }\n    }\n  }\n}\n\nvoid Nyaan::solve()\
+    \ {\n  verify_bitop();\n  verify_util();\n\n  int a, b;\n  cin >> a >> b;\n  cout\
+    \ << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n//\nusing\
     \ namespace Nyaan;\n\n// bitop.hpp\n\nvoid verify_bitop() {\n  // popcnt\n  assert(popcnt(7)\
@@ -291,35 +294,38 @@ data:
     \ {\n      assert(sz(v) == i);\n      v.push_back(randint(0, 10));\n      assert(Max(v)\
     \ == *max_element(all(v)));\n      assert(Min(v) == *min_element(all(v)));\n \
     \     assert(Sum(v) == accumulate(all(v), 0LL));\n    }\n\n    // mkrui\n    auto\
-    \ rui = mkrui(v);\n    int buf = 0;\n    rep(i, sz(v)) {\n      buf += v[i];\n\
-    \      assert(rui[i + 1] == buf);\n    }\n\n    // lb, ub\n    sort(all(v));\n\
-    \    for (int i = 0; i < sz(v); i++) {\n      if (i != 0 and v[i - 1] == v[i])\
-    \ continue;\n      int x = v[i];\n      assert(lb(v, x) == i);\n      assert(ub(v,\
-    \ x - 1) == i);\n    }\n    for (int x = 0; x < 10; x++) {\n      int l = lb(v,\
-    \ x);\n      int u = ub(v, x);\n      for (int i = 0; i < sz(v); i++) {\n    \
-    \    assert((l <= i) == (x <= v[i]) && \"lb\");\n        assert((u <= i) == (x\
-    \ < v[i]) && \"ub\");\n      }\n    }\n\n    // mkuni\n    set<int> s1, s2;\n\
-    \    for (int i : v) s1.insert(i);\n    v = mkuni(v);\n    for (int i : v) s2.insert(i);\n\
-    \    assert(s1 == s2);\n  }\n\n  // TEN\n  for (long long i = 0, x = 1; i <= 18;\
-    \ i++, x *= 10) {\n    assert(TEN(i) == x);\n  }\n\n  // mkord, mkinv(100\u500B\
-    , 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100) { v.push_back(loop); }\n\
-    \    auto ord = mkord(sz(v), [&v](int i, int j) { return v[i] < v[j]; });\n  \
-    \  rep(i, sz(ord) - 1) { assert(v[ord[i]] <= v[ord[i + 1]] && \"mkord\"); }\n\n\
-    \    randshf(v);\n    auto inv = mkinv(v);\n    assert(inv.size() == 100 && \"\
-    mkinv\");\n    set<int> st;\n    each(x, v) st.insert(x);\n    rep(i, sz(inv))\
-    \ {\n      if (inv[i] == -1) {\n        assert(st.find(i) == st.end() && \"mkinv\"\
-    );\n      } else {\n        assert(0 <= inv[i] && inv[i] < sz(v) && \"mkinv\"\
-    );\n        assert(v[inv[i]] == i);\n      }\n    }\n  }\n\n  // mkord, mkinv(100\u500B\
-    , 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100) { v.push_back(randint(0,\
-    \ 1000)); }\n    auto ord = mkord(sz(v), [&v](int i, int j) { return v[i] < v[j];\
-    \ });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]] <= v[ord[i + 1]] && \"mkord\"\
-    ); }\n\n    v = mkuni(v);\n    randshf(v);\n    auto inv = mkinv(v);\n    assert(sz(inv)\
-    \ == Max(v) + 1 && \"mkinv\");\n    set<int> st;\n    each(x, v) st.insert(x);\n\
-    \    rep(i, sz(inv)) {\n      if (inv[i] == -1) {\n        assert(st.find(i) ==\
-    \ st.end() && \"mkinv\");\n      } else {\n        assert(0 <= inv[i] && inv[i]\
-    \ < sz(v) && \"mkinv\");\n        assert(v[inv[i]] == i);\n      }\n    }\n  }\n\
-    }\n\nvoid Nyaan::solve() {\n  verify_bitop();\n  verify_util();\n\n  int a, b;\n\
-    \  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ rui = mkrui(v);\n    int buf = 0;\n    assert(rui[0] == 0);\n    rep(i, sz(v))\
+    \ {\n      buf += v[i];\n      assert(rui[i + 1] == buf);\n    }\n    rui = mkrui(v,\
+    \ true);\n    buf = 0;\n    assert(rui.back() == 0);\n    repr(i, sz(v)) {\n \
+    \     buf += v[i];\n      assert(rui[i] == buf);\n    }\n\n    // lb, ub\n   \
+    \ sort(all(v));\n    for (int i = 0; i < sz(v); i++) {\n      if (i != 0 and v[i\
+    \ - 1] == v[i]) continue;\n      int x = v[i];\n      assert(lb(v, x) == i);\n\
+    \      assert(ub(v, x - 1) == i);\n    }\n    for (int x = 0; x < 10; x++) {\n\
+    \      int l = lb(v, x);\n      int u = ub(v, x);\n      for (int i = 0; i < sz(v);\
+    \ i++) {\n        assert((l <= i) == (x <= v[i]) && \"lb\");\n        assert((u\
+    \ <= i) == (x < v[i]) && \"ub\");\n      }\n    }\n\n    // mkuni\n    set<int>\
+    \ s1, s2;\n    for (int i : v) s1.insert(i);\n    v = mkuni(v);\n    for (int\
+    \ i : v) s2.insert(i);\n    assert(s1 == s2);\n  }\n\n  // TEN\n  for (long long\
+    \ i = 0, x = 1; i <= 18; i++, x *= 10) {\n    assert(TEN(i) == x);\n  }\n\n  //\
+    \ mkord, mkinv(100\u500B, 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100)\
+    \ { v.push_back(loop); }\n    auto ord = mkord(sz(v), [&v](int i, int j) { return\
+    \ v[i] < v[j]; });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]] <= v[ord[i + 1]]\
+    \ && \"mkord\"); }\n\n    randshf(v);\n    auto inv = mkinv(v);\n    assert(inv.size()\
+    \ == 100 && \"mkinv\");\n    set<int> st;\n    each(x, v) st.insert(x);\n    rep(i,\
+    \ sz(inv)) {\n      if (inv[i] == -1) {\n        assert(st.find(i) == st.end()\
+    \ && \"mkinv\");\n      } else {\n        assert(0 <= inv[i] && inv[i] < sz(v)\
+    \ && \"mkinv\");\n        assert(v[inv[i]] == i);\n      }\n    }\n  }\n\n  //\
+    \ mkord, mkinv(100\u500B, 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100)\
+    \ { v.push_back(randint(0, 1000)); }\n    auto ord = mkord(sz(v), [&v](int i,\
+    \ int j) { return v[i] < v[j]; });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]]\
+    \ <= v[ord[i + 1]] && \"mkord\"); }\n\n    v = mkuni(v);\n    randshf(v);\n  \
+    \  auto inv = mkinv(v);\n    assert(sz(inv) == Max(v) + 1 && \"mkinv\");\n   \
+    \ set<int> st;\n    each(x, v) st.insert(x);\n    rep(i, sz(inv)) {\n      if\
+    \ (inv[i] == -1) {\n        assert(st.find(i) == st.end() && \"mkinv\");\n   \
+    \   } else {\n        assert(0 <= inv[i] && inv[i] < sz(v) && \"mkinv\");\n  \
+    \      assert(v[inv[i]] == i);\n      }\n    }\n  }\n}\n\nvoid Nyaan::solve()\
+    \ {\n  verify_bitop();\n  verify_util();\n\n  int a, b;\n  cin >> a >> b;\n  cout\
+    \ << a + b << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -331,7 +337,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/template.test.cpp
   requiredBy: []
-  timestamp: '2021-04-27 01:21:47+09:00'
+  timestamp: '2021-04-27 14:30:52+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/template.test.cpp
