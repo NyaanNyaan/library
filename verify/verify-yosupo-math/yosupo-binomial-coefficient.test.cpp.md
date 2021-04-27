@@ -272,63 +272,63 @@ data:
     \ ans;\n}\n\n}  // namespace atcoder\n\n\n#line 6 \"modulo/arbitrary-mod-binomial.hpp\"\
     \nusing namespace std;\n\n#define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)\n\
     #define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\nstruct prime_power_binomial {\n\
-    \  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int delta;\n\n  using i64 =\
-    \ long long;\n  using u64 = unsigned long long;\n  u64 iM, ip;\n\n  inline i64\
-    \ modulo_M(u64 n) {\n    u64 x = u64((__uint128_t(n) * iM) >> 64);\n    i64 r\
-    \ = i64(n - x * M);\n    if (r < 0) r += M;\n    return r;\n  }\n\n  inline i64\
-    \ divide_p(u64 n) {\n    u64 x = u64((__uint128_t(n) * ip) >> 64);\n    i64 r\
-    \ = i64(n - x * p);\n    if (r < 0) x--;\n    return i64(x);\n  }\n\n  inline\
-    \ pair<i64, int> quorem_p(u64 n) {\n    u64 x = u64((__uint128_t(n) * ip) >> 64);\n\
-    \    i64 r = i64(n - x * p);\n    if (r < 0) r += M, x--;\n    return make_pair(i64(x),\
-    \ int(r));\n  }\n\n  int modpow(int a, long long e) {\n    int r = 1;\n    while\
-    \ (e) {\n      if (e & 1) r = modulo_M(1LL * r * a);\n      a = modulo_M(1LL *\
-    \ a * a);\n      e >>= 1;\n    }\n    return r;\n  }\n\n  prime_power_binomial(int\
-    \ _p, int _q) : p(_p), q(_q) {\n    assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n\
-    \    assert(_q > 0);\n    long long m = 1;\n    while (_q--) {\n      m *= p;\n\
-    \      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n    }\n    M = m;\n    iM = u64(-1)\
-    \ / M + 1;\n    ip = u64(-1) / p + 1;\n    enumerate();\n    delta = (p == 2 &&\
-    \ q >= 3) ? 1 : M - 1;\n  }\n\n  void enumerate() {\n    int MX = min<int>(M,\
-    \ PRIME_POWER_BINOMIAL_N_MAX + 10);\n    fac.resize(MX);\n    ifac.resize(MX);\n\
-    \    inv.resize(MX);\n    fac[0] = ifac[0] = inv[0] = 1;\n    fac[1] = ifac[1]\
-    \ = inv[1] = 1;\n    for (int i = 2; i < MX; i++) {\n      if (i % p == 0) {\n\
-    \        fac[i] = fac[i - 1];\n        fac[i + 1] = modulo_M(1LL * fac[i - 1]\
-    \ * (i + 1));\n        i++;\n      } else {\n        fac[i] = modulo_M(1LL * fac[i\
-    \ - 1] * i);\n      }\n    }\n    ifac[MX - 1] = modpow(fac[MX - 1], M / p * (p\
-    \ - 1) - 1);\n    for (int i = MX - 2; i > 1; --i) {\n      if (i % p == 0) {\n\
-    \        ifac[i] = modulo_M(1LL * ifac[i + 1] * (i + 1));\n        ifac[i - 1]\
-    \ = ifac[i];\n        i--;\n      } else {\n        ifac[i] = modulo_M(1LL * ifac[i\
-    \ + 1] * (i + 1));\n      }\n    }\n  }\n\n  long long Lucas(long long n, long\
-    \ long m) {\n    int res = 1;\n    while (n) {\n      int n0, m0;\n      tie(n,\
-    \ n0) = quorem_p(n);\n      tie(m, m0) = quorem_p(m);\n      if (n0 < m0) return\
-    \ 0;\n      res = modulo_M(1LL * res * fac[n0]);\n      int buf = modulo_M(1LL\
-    \ * ifac[n0 - m0] * ifac[m0]);\n      res = modulo_M(1LL * res * buf);\n    }\n\
-    \    return res;\n  }\n\n  long long C(long long n, long long m) {\n    if (n\
-    \ < m || n < 0 || m < 0) return 0;\n    if (q == 1) return Lucas(n, m);\n    long\
-    \ long r = n - m;\n    int e0 = 0, eq = 0, i = 0;\n    int res = 1;\n    while\
-    \ (n) {\n      res = modulo_M(1LL * res * fac[modulo_M(n)]);\n      res = modulo_M(1LL\
-    \ * res * ifac[modulo_M(m)]);\n      res = modulo_M(1LL * res * ifac[modulo_M(r)]);\n\
-    \      n = divide_p(n);\n      m = divide_p(m);\n      r = divide_p(r);\n    \
-    \  int eps = n - m - r;\n      e0 += eps;\n      if (e0 >= q) return 0;\n    \
-    \  if (++i >= q) eq += eps;\n    }\n    res = modulo_M(1LL * res * modpow(delta,\
-    \ eq));\n    res = modulo_M(1LL * res * modpow(p, e0));\n    return res;\n  }\n\
-    };\n\n// constraints:\n// (M <= 1e7 and max(N) <= 1e18) or (M < 2^30 and max(N)\
-    \ <= 2e7)\nstruct arbitrary_mod_binomial {\n  int mod;\n  vector<int> M;\n  vector<prime_power_binomial>\
-    \ cs;\n\n  arbitrary_mod_binomial(long long md) : mod(md) {\n    assert(1 <= md);\n\
-    \    assert(md <= PRIME_POWER_BINOMIAL_M_MAX);\n    for (int i = 2; i * i <= md;\
-    \ i++) {\n      if (md % i == 0) {\n        int j = 0, k = 1;\n        while (md\
-    \ % i == 0) md /= i, j++, k *= i;\n        M.push_back(k);\n        cs.emplace_back(i,\
-    \ j);\n        assert(M.back() == cs.back().M);\n      }\n    }\n    if (md !=\
-    \ 1) {\n      M.push_back(md);\n      cs.emplace_back(md, 1);\n    }\n    assert(M.size()\
-    \ == cs.size());\n  }\n\n  long long C(long long n, long long m) {\n    if (mod\
-    \ == 1) return 0;\n    vector<long long> rem, d;\n    for (int i = 0; i < (int)cs.size();\
-    \ i++) {\n      rem.push_back(cs[i].C(n, m));\n      d.push_back(M[i]);\n    }\n\
-    \    return atcoder::crt(rem, d).first;\n  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n\
-    #undef PRIME_POWER_BINOMIAL_N_MAX\n\n/**\n * @brief \u4EFB\u610Fmod\u4E8C\u9805\
-    \u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n */\n#line 6 \"\
-    verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp\"\n\nusing namespace\
-    \ Nyaan;\n\nvoid Nyaan::solve() {\n  int T, M;\n  cin >> T >> M;\n  arbitrary_mod_binomial\
-    \ C(M);\n  while (T--) {\n    long long n, k;\n    cin >> n >> k;\n    cout <<\
-    \ C.C(n, k) << '\\n';\n  }\n}\n"
+    \  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int delta;\n\n  using u32 =\
+    \ unsigned int;\n  using i64 = long long;\n  using u64 = unsigned long long;\n\
+    \  u64 iM, ip;\n\n  inline i64 modulo_M(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * iM) >> 64);\n    u32 r = n - x * (u32)(M);\n    if (u32(M) <= r) r += M;\n\
+    \    return r;\n  }\n\n  inline i64 divide_p(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * ip) >> 64);\n    u32 r = n - x * (u32)(p);\n    if (u32(p) <= r) x--;\n  \
+    \  return x;\n  }\n\n  inline pair<i64, int> quorem_p(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * ip) >> 64);\n    u32 r = n - x * (u32)(p);\n    if (u32(p) <= r) x--, r +=\
+    \ p;\n    return make_pair(i64(x), int(r));\n  }\n\n  int modpow(int a, long long\
+    \ e) {\n    int r = 1;\n    while (e) {\n      if (e & 1) r = modulo_M(1LL * r\
+    \ * a);\n      a = modulo_M(1LL * a * a);\n      e >>= 1;\n    }\n    return r;\n\
+    \  }\n\n  prime_power_binomial(int _p, int _q) : p(_p), q(_q) {\n    assert(1\
+    \ < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n    assert(_q > 0);\n    long long\
+    \ m = 1;\n    while (_q--) {\n      m *= p;\n      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n\
+    \    }\n    M = m;\n    iM = u64(-1) / M + 1;\n    ip = u64(-1) / p + 1;\n   \
+    \ enumerate();\n    delta = (p == 2 && q >= 3) ? 1 : M - 1;\n  }\n\n  void enumerate()\
+    \ {\n    int MX = min<int>(M, PRIME_POWER_BINOMIAL_N_MAX + 10);\n    fac.resize(MX);\n\
+    \    ifac.resize(MX);\n    inv.resize(MX);\n    fac[0] = ifac[0] = inv[0] = 1;\n\
+    \    fac[1] = ifac[1] = inv[1] = 1;\n    for (int i = 2; i < MX; i++) {\n    \
+    \  if (i % p == 0) {\n        fac[i] = fac[i - 1];\n        fac[i + 1] = modulo_M(1LL\
+    \ * fac[i - 1] * (i + 1));\n        i++;\n      } else {\n        fac[i] = modulo_M(1LL\
+    \ * fac[i - 1] * i);\n      }\n    }\n    ifac[MX - 1] = modpow(fac[MX - 1], M\
+    \ / p * (p - 1) - 1);\n    for (int i = MX - 2; i > 1; --i) {\n      if (i % p\
+    \ == 0) {\n        ifac[i] = modulo_M(1LL * ifac[i + 1] * (i + 1));\n        ifac[i\
+    \ - 1] = ifac[i];\n        i--;\n      } else {\n        ifac[i] = modulo_M(1LL\
+    \ * ifac[i + 1] * (i + 1));\n      }\n    }\n  }\n\n  long long Lucas(long long\
+    \ n, long long m) {\n    int res = 1;\n    while (n) {\n      int n0, m0;\n  \
+    \    tie(n, n0) = quorem_p(n);\n      tie(m, m0) = quorem_p(m);\n      if (n0\
+    \ < m0) return 0;\n      res = modulo_M(1LL * res * fac[n0]);\n      int buf =\
+    \ modulo_M(1LL * ifac[n0 - m0] * ifac[m0]);\n      res = modulo_M(1LL * res *\
+    \ buf);\n    }\n    return res;\n  }\n\n  long long C(long long n, long long m)\
+    \ {\n    if (n < m || n < 0 || m < 0) return 0;\n    if (q == 1) return Lucas(n,\
+    \ m);\n    long long r = n - m;\n    int e0 = 0, eq = 0, i = 0;\n    int res =\
+    \ 1;\n    while (n) {\n      res = modulo_M(1LL * res * fac[modulo_M(n)]);\n \
+    \     res = modulo_M(1LL * res * ifac[modulo_M(m)]);\n      res = modulo_M(1LL\
+    \ * res * ifac[modulo_M(r)]);\n      n = divide_p(n);\n      m = divide_p(m);\n\
+    \      r = divide_p(r);\n      int eps = n - m - r;\n      e0 += eps;\n      if\
+    \ (e0 >= q) return 0;\n      if (++i >= q) eq += eps;\n    }\n    res = modulo_M(1LL\
+    \ * res * modpow(delta, eq));\n    res = modulo_M(1LL * res * modpow(p, e0));\n\
+    \    return res;\n  }\n};\n\n// constraints:\n// (M <= 1e7 and max(N) <= 1e18)\
+    \ or (M < 2^30 and max(N) <= 2e7)\nstruct arbitrary_mod_binomial {\n  int mod;\n\
+    \  vector<int> M;\n  vector<prime_power_binomial> cs;\n\n  arbitrary_mod_binomial(long\
+    \ long md) : mod(md) {\n    assert(1 <= md);\n    assert(md <= PRIME_POWER_BINOMIAL_M_MAX);\n\
+    \    for (int i = 2; i * i <= md; i++) {\n      if (md % i == 0) {\n        int\
+    \ j = 0, k = 1;\n        while (md % i == 0) md /= i, j++, k *= i;\n        M.push_back(k);\n\
+    \        cs.emplace_back(i, j);\n        assert(M.back() == cs.back().M);\n  \
+    \    }\n    }\n    if (md != 1) {\n      M.push_back(md);\n      cs.emplace_back(md,\
+    \ 1);\n    }\n    assert(M.size() == cs.size());\n  }\n\n  long long C(long long\
+    \ n, long long m) {\n    if (mod == 1) return 0;\n    vector<long long> rem, d;\n\
+    \    for (int i = 0; i < (int)cs.size(); i++) {\n      rem.push_back(cs[i].C(n,\
+    \ m));\n      d.push_back(M[i]);\n    }\n    return atcoder::crt(rem, d).first;\n\
+    \  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n#undef PRIME_POWER_BINOMIAL_N_MAX\n\
+    \n/**\n * @brief \u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n\
+    \ */\n#line 6 \"verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int T, M;\n  cin >> T >>\
+    \ M;\n  arbitrary_mod_binomial C(M);\n  while (T--) {\n    long long n, k;\n \
+    \   cin >> n >> k;\n    cout << C.C(n, k) << '\\n';\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n\
     //\n#include \"../../template/template.hpp\"\n//\n#include \"../../modulo/arbitrary-mod-binomial.hpp\"\
     \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int T, M;\n  cin >> T >>\
@@ -345,7 +345,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   requiredBy: []
-  timestamp: '2021-04-27 14:30:52+09:00'
+  timestamp: '2021-04-27 14:39:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
