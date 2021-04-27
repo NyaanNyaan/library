@@ -13,28 +13,29 @@ struct prime_power_binomial {
   vector<int> fac, ifac, inv;
   int delta;
 
+  using u32 = unsigned int;
   using i64 = long long;
   using u64 = unsigned long long;
   u64 iM, ip;
 
   inline i64 modulo_M(u64 n) {
     u64 x = u64((__uint128_t(n) * iM) >> 64);
-    i64 r = i64(n - x * M);
-    if (r < 0) r += M;
+    u32 r = n - x * (u32)(M);
+    if (u32(M) <= r) r += M;
     return r;
   }
 
   inline i64 divide_p(u64 n) {
     u64 x = u64((__uint128_t(n) * ip) >> 64);
-    i64 r = i64(n - x * p);
-    if (r < 0) x--;
-    return i64(x);
+    u32 r = n - x * (u32)(p);
+    if (u32(p) <= r) x--;
+    return x;
   }
 
   inline pair<i64, int> quorem_p(u64 n) {
     u64 x = u64((__uint128_t(n) * ip) >> 64);
-    i64 r = i64(n - x * p);
-    if (r < 0) r += M, x--;
+    u32 r = n - x * (u32)(p);
+    if (u32(p) <= r) x--, r += p;
     return make_pair(i64(x), int(r));
   }
 
