@@ -4,6 +4,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
     title: modint/arbitrary-modint.hpp
+  - icon: ':question:'
+    path: modint/barrett-reduction.hpp
+    title: modint/barrett-reduction.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -182,19 +185,29 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"modint/arbitrary-modint.hpp\"\
-    \n\n\n\nstruct ArbitraryModInt {\n  int x;\n\n  ArbitraryModInt() : x(0) {}\n\n\
-    \  ArbitraryModInt(int64_t y)\n      : x(y >= 0 ? y % get_mod() : (get_mod() -\
-    \ (-y) % get_mod()) % get_mod()) {\n  }\n\n  ArbitraryModInt &operator+=(const\
-    \ ArbitraryModInt &p) {\n    if ((x += p.x) >= get_mod()) x -= get_mod();\n  \
-    \  return *this;\n  }\n\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
-    \ {\n    if ((x += get_mod() - p.x) >= get_mod()) x -= get_mod();\n    return\
-    \ *this;\n  }\n\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n \
-    \   unsigned long long a = (unsigned long long)x * p.x;\n    unsigned xh = (unsigned)(a\
-    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
-    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    x = m;\n    return *this;\n\
-    \  }\n\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n\n  ArbitraryModInt operator-() const\
-    \ { return ArbitraryModInt(-x); }\n\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \n\n#line 2 \"modint/barrett-reduction.hpp\"\n\n#line 4 \"modint/barrett-reduction.hpp\"\
+    \nusing namespace std;\n\nstruct Barrett {\n  using u32 = unsigned int;\n  using\
+    \ i64 = long long;\n  using u64 = unsigned long long;\n  u32 m;\n  u64 im;\n \
+    \ Barrett() : m(), im() {}\n  Barrett(int n) : m(n), im(u64(-1) / m + 1) {}\n\
+    \  constexpr inline i64 quo(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >>\
+    \ 64);\n    u32 r = n - x * m;\n    return m <= r ? x - 1 : x;\n  }\n  constexpr\
+    \ inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n   \
+    \ u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n  constexpr inline\
+    \ pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n\
+    \    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n    return {x,\
+    \ r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32 a = rem(n), r\
+    \ = 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n      a = rem(u64(a)\
+    \ * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line 4 \"modint/arbitrary-modint.hpp\"\
+    \n\nstruct ArbitraryModInt {\n  int x;\n\n  ArbitraryModInt() : x(0) {}\n\n  ArbitraryModInt(int64_t\
+    \ y) {\n    int z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n\
+    \  }\n\n  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {\n    if ((x\
+    \ += p.x) >= get_mod()) x -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModInt\
+    \ &operator-=(const ArbitraryModInt &p) {\n    if ((x += get_mod() - p.x) >= get_mod())\
+    \ x -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModInt &operator*=(const\
+    \ ArbitraryModInt &p) {\n    x = rem((unsigned long long)x * p.x);\n    return\
+    \ *this;\n  }\n\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n \
+    \   *this *= p.inverse();\n    return *this;\n  }\n\n  ArbitraryModInt operator-()\
+    \ const { return ArbitraryModInt(-x); }\n\n  ArbitraryModInt operator+(const ArbitraryModInt\
     \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n\n  ArbitraryModInt\
     \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
     \ -= p;\n  }\n\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
@@ -210,33 +223,37 @@ data:
     \ ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const ArbitraryModInt\
     \ &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream &is,\
     \ ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModInt(t);\n\
-    \    return (is);\n  }\n\n  int get() const { return x; }\n\n  static int &get_mod()\
-    \ {\n    static int mod = 0;\n    return mod;\n  }\n\n  static void set_mod(int\
-    \ md) { get_mod() = md; }\n};\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"\
-    modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
-    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
-    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
-    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
-    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
-    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
-    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
-    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
-    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
-    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
-    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \    return (is);\n  }\n\n  int get() const { return x; }\n\n  inline unsigned\
+    \ int rem(unsigned long long p) { return barrett().rem(p); }\n\n  static inline\
+    \ Barrett &barrett() {\n    static Barrett b;\n    return b;\n  }\n\n  static\
+    \ inline int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\n \
+    \ static void set_mod(int md) {\n    assert(md <= 2000000000 + 10);\n    get_mod()\
+    \ = md;\n    barrett() = Barrett(md);\n  }\n};\n#line 2 \"ntt/arbitrary-ntt.hpp\"\
+    \n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\n\
+    struct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32\
+    \ = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
+    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
+    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
     \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
     \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
@@ -639,6 +656,7 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - modint/arbitrary-modint.hpp
+  - modint/barrett-reduction.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt-avx2.hpp
@@ -646,7 +664,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 17:20:14+09:00'
+  timestamp: '2021-04-29 18:16:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp

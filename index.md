@@ -972,6 +972,9 @@ data:
   - name: verify/verify-unit-test
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/barrett-reduction.test.cpp
+      title: verify/verify-unit-test/barrett-reduction.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/bitset-find-prev.test.cpp
       title: verify/verify-unit-test/bitset-find-prev.test.cpp
     - icon: ':heavy_check_mark:'

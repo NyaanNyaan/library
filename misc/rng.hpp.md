@@ -19,6 +19,9 @@ data:
     title: Pruefer Code
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/barrett-reduction.test.cpp
+    title: verify/verify-unit-test/barrett-reduction.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
@@ -178,6 +181,7 @@ data:
   - verify/verify-unit-test/lazyseg-setval.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/run-length-encoding.test.cpp

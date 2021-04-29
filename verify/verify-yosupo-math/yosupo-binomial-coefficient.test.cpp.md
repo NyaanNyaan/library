@@ -273,25 +273,24 @@ data:
     \ - b);\n    if (y_max == 0) return ans;\n    ans += (n - (x_max + a - 1) / a)\
     \ * y_max;\n    ans += floor_sum(y_max, a, m, (a - x_max % a) % a);\n    return\
     \ ans;\n}\n\n}  // namespace atcoder\n\n\n#line 2 \"modint/barrett-reduction.hpp\"\
-    \n\n#line 5 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
+    \n\n#line 4 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
     \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
     \ long long;\n  u32 m;\n  u64 im;\n  Barrett() : m(), im() {}\n  Barrett(int n)\
-    \ : m(n), im(u64(-1) / m + 1) { assert(1 < n); }\n  constexpr inline i64 quo(u64\
-    \ n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n\
-    \    return m <= r ? x - 1 : x;\n  }\n  constexpr inline i64 rem(u64 n) {\n  \
-    \  u64 x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    return\
-    \ m <= r ? r + m : r;\n  }\n  constexpr inline pair<i64, int> quorem(u64 n) {\n\
-    \    u64 x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    if\
-    \ (m <= r) return {x - 1, r + m};\n    return {x, r};\n  }\n  constexpr inline\
-    \ i64 pow(u64 n, i64 p) {\n    u32 a = rem(n), r = 1;\n    while (p) {\n     \
-    \ if (p & 1) r = rem(u64(r) * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n\
-    \    }\n    return r;\n  }\n};\n#line 7 \"modulo/arbitrary-mod-binomial.hpp\"\n\
-    \nusing namespace std;\n\n#define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)\n\
-    #define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\nstruct prime_power_binomial {\n\
-    \  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int delta;\n  Barrett bm, bp;\n\
-    \n  prime_power_binomial(int _p, int _q) : p(_p), q(_q) {\n    assert(1 < p &&\
-    \ p <= PRIME_POWER_BINOMIAL_M_MAX);\n    assert(_q > 0);\n    long long m = 1;\n\
-    \    while (_q--) {\n      m *= p;\n      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n\
+    \ : m(n), im(u64(-1) / m + 1) {}\n  constexpr inline i64 quo(u64 n) {\n    u64\
+    \ x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    return m\
+    \ <= r ? x - 1 : x;\n  }\n  constexpr inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * im) >> 64);\n    u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n\
+    \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
+    \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
+    \ a = rem(n), r = 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
+    \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
+    \ 7 \"modulo/arbitrary-mod-binomial.hpp\"\n\nusing namespace std;\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
+    \ ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\nstruct prime_power_binomial\
+    \ {\n  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int delta;\n  Barrett bm,\
+    \ bp;\n\n  prime_power_binomial(int _p, int _q) : p(_p), q(_q) {\n    assert(1\
+    \ < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n    assert(_q > 0);\n    long long\
+    \ m = 1;\n    while (_q--) {\n      m *= p;\n      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n\
     \    }\n    M = m;\n    bm = Barrett(M), bp = Barrett(p);\n    enumerate();\n\
     \    delta = (p == 2 && q >= 3) ? 1 : M - 1;\n  }\n\n  void enumerate() {\n  \
     \  int MX = min<int>(M, PRIME_POWER_BINOMIAL_N_MAX + 10);\n    fac.resize(MX);\n\
@@ -352,7 +351,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   requiredBy: []
-  timestamp: '2021-04-29 14:58:50+09:00'
+  timestamp: '2021-04-29 18:16:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp

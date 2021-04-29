@@ -35,10 +35,13 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
+    PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient
+    links:
+    - https://judge.yosupo.jp/problem/binomial_coefficient
   bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n//\n\
+    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -172,7 +175,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 3 \"verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp\"\
     \n//\n#line 2 \"modulo/arbitrary-mod-binomial-large.hpp\"\n\n#line 1 \"atcoder/math.hpp\"\
     \n\n\n\n#line 8 \"atcoder/math.hpp\"\n\n#line 1 \"atcoder/internal_math.hpp\"\n\
     \n\n\n#line 5 \"atcoder/internal_math.hpp\"\n\n#ifdef _MSC_VER\n#include <intrin.h>\n\
@@ -272,55 +275,55 @@ data:
     \ - b);\n    if (y_max == 0) return ans;\n    ans += (n - (x_max + a - 1) / a)\
     \ * y_max;\n    ans += floor_sum(y_max, a, m, (a - x_max % a) % a);\n    return\
     \ ans;\n}\n\n}  // namespace atcoder\n\n\n#line 2 \"modint/barrett-reduction.hpp\"\
-    \n\n#line 5 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
+    \n\n#line 4 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
     \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
     \ long long;\n  u32 m;\n  u64 im;\n  Barrett() : m(), im() {}\n  Barrett(int n)\
-    \ : m(n), im(u64(-1) / m + 1) { assert(1 < n); }\n  constexpr inline i64 quo(u64\
-    \ n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n\
-    \    return m <= r ? x - 1 : x;\n  }\n  constexpr inline i64 rem(u64 n) {\n  \
-    \  u64 x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    return\
-    \ m <= r ? r + m : r;\n  }\n  constexpr inline pair<i64, int> quorem(u64 n) {\n\
-    \    u64 x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    if\
-    \ (m <= r) return {x - 1, r + m};\n    return {x, r};\n  }\n  constexpr inline\
-    \ i64 pow(u64 n, i64 p) {\n    u32 a = rem(n), r = 1;\n    while (p) {\n     \
-    \ if (p & 1) r = rem(u64(r) * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n\
-    \    }\n    return r;\n  }\n};\n#line 5 \"modulo/arbitrary-mod-binomial-large.hpp\"\
-    \n\n#pragma GCC target(\"avx2\")\n#pragma GCC optimize(\"O3,unroll-loops\")\n\n\
-    #define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX\
-    \ 20000000\n\nstruct simd_prime_binomial {\n  using u32 = unsigned int;\n  using\
-    \ i64 = long long;\n  using u64 = unsigned long long;\n  using m256 = __m256i;\n\
-    \n  u32 get_r(u32 _mod) {\n    u32 ret = _mod;\n    for (int i = 0; i < 4; ++i)\
-    \ ret *= 2 - _mod * ret;\n    return ret;\n  }\n  inline u32 reduce(const u64&\
-    \ b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n  inline u32\
-    \ mul(const u32& a, const u32& b) { return reduce(u64(a) * b); }\n  inline u32\
-    \ add(const u32& a, const u32& b) {\n    u32 c = a + b - 2 * mod;\n    if (c >\
-    \ 2 * mod) c += 2 * mod;\n    return c;\n  }\n  inline u32 cast(const i64& b)\
-    \ { return reduce(u64(b % mod + mod) * n2); }\n  inline u32 raw_cast(const u64&\
-    \ b) { return reduce(b * n2); }\n  u64 get(const u32& b) {\n    u32 a = reduce(b);\n\
-    \    return a >= mod ? a - mod : a;\n  }\n  u32 inv(u32 b) {\n    u32 e = mod\
-    \ - 2, a = raw_cast(1);\n    while (e) {\n      if (e & 1) a = mul(a, b);\n  \
-    \    b = mul(b, b);\n      e >>= 1;\n    }\n    return a;\n  }\n\n  inline m256\
-    \ simd_mulhi(const m256& a, const m256& b) {\n    m256 a13 = _mm256_shuffle_epi32(a,\
-    \ 0xF5);\n    m256 b13 = _mm256_shuffle_epi32(b, 0xF5);\n    m256 prod02 = _mm256_mul_epu32(a,\
-    \ b);\n    m256 prod13 = _mm256_mul_epu32(a13, b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02,\
-    \ prod13);\n    m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);\n    m256\
-    \ prod = _mm256_unpackhi_epi64(unpalo, unpahi);\n    return prod;\n  }\n\n  inline\
-    \ m256 simd_sub(const m256& a, const m256& b) {\n    m256 ret = _mm256_sub_epi32(a,\
-    \ b);\n    m256 cmp = _mm256_cmpgt_epi32(M0, ret);\n    m256 add = _mm256_and_si256(cmp,\
-    \ M2);\n    return _mm256_add_epi32(add, ret);\n  }\n\n  inline m256 simd_mul(const\
-    \ m256& A, const m256& B) {\n    m256 a13 = _mm256_shuffle_epi32(A, 0xF5);\n \
-    \   m256 b13 = _mm256_shuffle_epi32(B, 0xF5);\n    m256 prod02 = _mm256_mul_epu32(A,\
-    \ B);\n    m256 prod13 = _mm256_mul_epu32(a13, b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02,\
-    \ prod13);\n    m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);\n    m256\
-    \ prodlo = _mm256_unpacklo_epi64(unpalo, unpahi);\n    m256 prodhi = _mm256_unpackhi_epi64(unpalo,\
-    \ unpahi);\n    m256 hiplm1 = _mm256_add_epi32(prodhi, M1);\n    m256 lomulr =\
-    \ _mm256_mullo_epi32(prodlo, R);\n    m256 lomulrmulm1 = simd_mulhi(lomulr, M1);\n\
-    \    return _mm256_sub_epi32(hiplm1, lomulrmulm1);\n  }\n\n  inline void transpose8_ps(__m256&\
-    \ row0, __m256& row1, __m256& row2,\n                            __m256& row3,\
-    \ __m256& row4, __m256& row5,\n                            __m256& row6, __m256&\
-    \ row7) {\n    __m256 __t0, __t1, __t2, __t3, __t4, __t5, __t6, __t7;\n    __m256\
-    \ __tt0, __tt1, __tt2, __tt3, __tt4, __tt5, __tt6, __tt7;\n    __t0 = _mm256_unpacklo_ps(row0,\
-    \ row1);\n    __t1 = _mm256_unpackhi_ps(row0, row1);\n    __t2 = _mm256_unpacklo_ps(row2,\
+    \ : m(n), im(u64(-1) / m + 1) {}\n  constexpr inline i64 quo(u64 n) {\n    u64\
+    \ x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    return m\
+    \ <= r ? x - 1 : x;\n  }\n  constexpr inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * im) >> 64);\n    u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n\
+    \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
+    \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
+    \ a = rem(n), r = 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
+    \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
+    \ 5 \"modulo/arbitrary-mod-binomial-large.hpp\"\n\n#pragma GCC target(\"avx2\"\
+    )\n#pragma GCC optimize(\"O3,unroll-loops\")\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
+    \ ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\nstruct simd_prime_binomial\
+    \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
+    \ long long;\n  using m256 = __m256i;\n\n  u32 get_r(u32 _mod) {\n    u32 ret\
+    \ = _mod;\n    for (int i = 0; i < 4; ++i) ret *= 2 - _mod * ret;\n    return\
+    \ ret;\n  }\n  inline u32 reduce(const u64& b) {\n    return (b + u64(u32(b) *\
+    \ u32(-r)) * mod) >> 32;\n  }\n  inline u32 mul(const u32& a, const u32& b) {\
+    \ return reduce(u64(a) * b); }\n  inline u32 add(const u32& a, const u32& b) {\n\
+    \    u32 c = a + b - 2 * mod;\n    if (c > 2 * mod) c += 2 * mod;\n    return\
+    \ c;\n  }\n  inline u32 cast(const i64& b) { return reduce(u64(b % mod + mod)\
+    \ * n2); }\n  inline u32 raw_cast(const u64& b) { return reduce(b * n2); }\n \
+    \ u64 get(const u32& b) {\n    u32 a = reduce(b);\n    return a >= mod ? a - mod\
+    \ : a;\n  }\n  u32 inv(u32 b) {\n    u32 e = mod - 2, a = raw_cast(1);\n    while\
+    \ (e) {\n      if (e & 1) a = mul(a, b);\n      b = mul(b, b);\n      e >>= 1;\n\
+    \    }\n    return a;\n  }\n\n  inline m256 simd_mulhi(const m256& a, const m256&\
+    \ b) {\n    m256 a13 = _mm256_shuffle_epi32(a, 0xF5);\n    m256 b13 = _mm256_shuffle_epi32(b,\
+    \ 0xF5);\n    m256 prod02 = _mm256_mul_epu32(a, b);\n    m256 prod13 = _mm256_mul_epu32(a13,\
+    \ b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);\n    m256 unpahi\
+    \ = _mm256_unpackhi_epi32(prod02, prod13);\n    m256 prod = _mm256_unpackhi_epi64(unpalo,\
+    \ unpahi);\n    return prod;\n  }\n\n  inline m256 simd_sub(const m256& a, const\
+    \ m256& b) {\n    m256 ret = _mm256_sub_epi32(a, b);\n    m256 cmp = _mm256_cmpgt_epi32(M0,\
+    \ ret);\n    m256 add = _mm256_and_si256(cmp, M2);\n    return _mm256_add_epi32(add,\
+    \ ret);\n  }\n\n  inline m256 simd_mul(const m256& A, const m256& B) {\n    m256\
+    \ a13 = _mm256_shuffle_epi32(A, 0xF5);\n    m256 b13 = _mm256_shuffle_epi32(B,\
+    \ 0xF5);\n    m256 prod02 = _mm256_mul_epu32(A, B);\n    m256 prod13 = _mm256_mul_epu32(a13,\
+    \ b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);\n    m256 unpahi\
+    \ = _mm256_unpackhi_epi32(prod02, prod13);\n    m256 prodlo = _mm256_unpacklo_epi64(unpalo,\
+    \ unpahi);\n    m256 prodhi = _mm256_unpackhi_epi64(unpalo, unpahi);\n    m256\
+    \ hiplm1 = _mm256_add_epi32(prodhi, M1);\n    m256 lomulr = _mm256_mullo_epi32(prodlo,\
+    \ R);\n    m256 lomulrmulm1 = simd_mulhi(lomulr, M1);\n    return _mm256_sub_epi32(hiplm1,\
+    \ lomulrmulm1);\n  }\n\n  inline void transpose8_ps(__m256& row0, __m256& row1,\
+    \ __m256& row2,\n                            __m256& row3, __m256& row4, __m256&\
+    \ row5,\n                            __m256& row6, __m256& row7) {\n    __m256\
+    \ __t0, __t1, __t2, __t3, __t4, __t5, __t6, __t7;\n    __m256 __tt0, __tt1, __tt2,\
+    \ __tt3, __tt4, __tt5, __tt6, __tt7;\n    __t0 = _mm256_unpacklo_ps(row0, row1);\n\
+    \    __t1 = _mm256_unpackhi_ps(row0, row1);\n    __t2 = _mm256_unpacklo_ps(row2,\
     \ row3);\n    __t3 = _mm256_unpackhi_ps(row2, row3);\n    __t4 = _mm256_unpacklo_ps(row4,\
     \ row5);\n    __t5 = _mm256_unpackhi_ps(row4, row5);\n    __t6 = _mm256_unpacklo_ps(row6,\
     \ row7);\n    __t7 = _mm256_unpackhi_ps(row6, row7);\n    __tt0 = _mm256_shuffle_ps(__t0,\
@@ -420,7 +423,7 @@ data:
     \ m));\n      d.push_back(M1[i]);\n    }\n    for (int i = 0; i < (int)cs2.size();\
     \ i++) {\n      rem.push_back(cs2[i].C(n, m));\n      d.push_back(M2[i]);\n  \
     \  }\n    return atcoder::crt(rem, d).first;\n  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n\
-    #undef PRIME_POWER_BINOMIAL_N_MAX\n\n#line 5 \"verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp\"\
+    #undef PRIME_POWER_BINOMIAL_N_MAX\n\n#line 6 \"verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp\"\
     \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
     \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
@@ -458,7 +461,7 @@ data:
     \ <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
     \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
     }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 7 \"verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp\"\
+    using fastio::wtn;\n#line 8 \"verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp\"\
     \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int T, m;\n  rd(T, m);\n\
     \  arbitrary_mod_binomial C(m);\n  while (T--) {\n    unsigned long long n, k;\n\
     \    rd(n, k);\n    auto ans = C.C(n, k);\n    wtn(ans);\n  }\n}\n\n/*\n#include\
@@ -468,7 +471,8 @@ data:
     \ (int i = 1; i < 998244353; i++) {\n    f *= a;\n    a += one;\n    if (rng()\
     \ % (1u << 16) == 0) {\n      mint f2 = C.fac(i);\n      if (f != f2) exit(1);\n\
     \    }\n  }\n  out(\"OK\");\n  cout.flush();\n  exit(0);\n}\n*/\n"
-  code: "\n#include \"../../template/template.hpp\"\n//\n#include \"../../modulo/arbitrary-mod-binomial-large.hpp\"\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n\
+    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../modulo/arbitrary-mod-binomial-large.hpp\"\
     \n//\n#include \"../../misc/fastio.hpp\"\n\nusing namespace Nyaan;\n\nvoid Nyaan::solve()\
     \ {\n  int T, m;\n  rd(T, m);\n  arbitrary_mod_binomial C(m);\n  while (T--) {\n\
     \    unsigned long long n, k;\n    rd(n, k);\n    auto ans = C.C(n, k);\n    wtn(ans);\n\
@@ -492,7 +496,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   requiredBy: []
-  timestamp: '2021-04-29 17:50:28+09:00'
+  timestamp: '2021-04-29 18:16:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp

@@ -199,6 +199,9 @@ data:
     path: verify/verify-aoj-other/aoj-3022.test.cpp
     title: verify/verify-aoj-other/aoj-3022.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/barrett-reduction.test.cpp
+    title: verify/verify-unit-test/barrett-reduction.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bitset-find-prev.test.cpp
     title: verify/verify-unit-test/bitset-find-prev.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1059,6 +1062,7 @@ data:
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/bitset-find-prev.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
