@@ -3,9 +3,6 @@
 #include "../atcoder/math.hpp"
 #include "../modint/barrett-reduction.hpp"
 
-#pragma GCC target("avx2")
-#pragma GCC optimize("O3,unroll-loops")
-
 #define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)
 #define PRIME_POWER_BINOMIAL_N_MAX 20000000
 
@@ -45,7 +42,8 @@ struct simd_prime_binomial {
     return a;
   }
 
-  inline m256 simd_mulhi(const m256& a, const m256& b) {
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline m256
+  simd_mulhi(const m256& a, const m256& b) {
     m256 a13 = _mm256_shuffle_epi32(a, 0xF5);
     m256 b13 = _mm256_shuffle_epi32(b, 0xF5);
     m256 prod02 = _mm256_mul_epu32(a, b);
@@ -56,14 +54,16 @@ struct simd_prime_binomial {
     return prod;
   }
 
-  inline m256 simd_sub(const m256& a, const m256& b) {
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline m256
+  simd_sub(const m256& a, const m256& b) {
     m256 ret = _mm256_sub_epi32(a, b);
     m256 cmp = _mm256_cmpgt_epi32(M0, ret);
     m256 add = _mm256_and_si256(cmp, M2);
     return _mm256_add_epi32(add, ret);
   }
 
-  inline m256 simd_mul(const m256& A, const m256& B) {
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline m256
+  simd_mul(const m256& A, const m256& B) {
     m256 a13 = _mm256_shuffle_epi32(A, 0xF5);
     m256 b13 = _mm256_shuffle_epi32(B, 0xF5);
     m256 prod02 = _mm256_mul_epu32(A, B);
@@ -78,9 +78,9 @@ struct simd_prime_binomial {
     return _mm256_sub_epi32(hiplm1, lomulrmulm1);
   }
 
-  inline void transpose8_ps(__m256& row0, __m256& row1, __m256& row2,
-                            __m256& row3, __m256& row4, __m256& row5,
-                            __m256& row6, __m256& row7) {
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline void
+  transpose8_ps(__m256& row0, __m256& row1, __m256& row2, __m256& row3,
+                __m256& row4, __m256& row5, __m256& row6, __m256& row7) {
     __m256 __t0, __t1, __t2, __t3, __t4, __t5, __t6, __t7;
     __m256 __tt0, __tt1, __tt2, __tt3, __tt4, __tt5, __tt6, __tt7;
     __t0 = _mm256_unpacklo_ps(row0, row1);
@@ -109,7 +109,8 @@ struct simd_prime_binomial {
     row7 = _mm256_permute2f128_ps(__tt3, __tt7, 0x31);
   }
 
-  void precalc() {
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
+  precalc() {
     __attribute__((aligned(32))) u32 b1[32];
     __attribute__((aligned(32))) __m256 b2[8];
     int max = ((mod / 2) / v + 12) / 8 * 8;
@@ -158,7 +159,9 @@ struct simd_prime_binomial {
 
   simd_prime_binomial() = default;
 
-  simd_prime_binomial(u32 _mod) : mod(_mod) {
+  __attribute__((target("avx2"), optimize("O3", "unroll-loops")))
+  simd_prime_binomial(u32 _mod)
+      : mod(_mod) {
     assert(2 < mod && mod < (1u << 30));
     assert(mod % 2 != 0);
     r = get_r(mod);
@@ -346,4 +349,3 @@ struct arbitrary_mod_binomial {
 
 #undef PRIME_POWER_BINOMIAL_M_MAX
 #undef PRIME_POWER_BINOMIAL_N_MAX
-
