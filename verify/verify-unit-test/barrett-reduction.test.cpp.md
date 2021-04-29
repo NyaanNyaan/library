@@ -239,22 +239,23 @@ data:
     \ 10);\n    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n#line 7 \"\
     verify/verify-unit-test/barrett-reduction.test.cpp\"\nusing namespace Nyaan;\n\
     \nusing mint = ArbitraryModInt;\n\nvoid test(int m) {\n  mint::set_mod(m);\n \
-    \ mint x = 1;\n  int y = 1;\n  rep(loop, TEN(4)) {\n    int z = randint(0, 2 *\
-    \ TEN(9));\n    x *= z;\n    y = 1LL * y * z % m;\n    assert(x.x == y);\n  }\n\
-    }\n\nvoid Nyaan::solve() {\n  test(1);\n  test(2);\n  test(3);\n  test(998244353);\n\
-    \  test(1000000007);\n  test(2 * TEN(9));\n  rep(i, TEN(4)) test(randint(1, 2\
-    \ * TEN(9) + 1));\n  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n\
-    \  cout << a + b << endl;\n}\n"
+    \ mint x = 1;\n  int y = 1;\n  rep(loop, TEN(3)) {\n    int z = randint(0, 2 *\
+    \ TEN(9));\n    if (rng() & 1) z = -z;\n    x *= z;\n    y = 1LL * y * z % m;\n\
+    \    if (y < 0) y += m;\n    assert(x.x == y);\n  }\n}\n\nvoid Nyaan::solve()\
+    \ {\n  test(1);\n  test(2);\n  test(3);\n  test(998244353);\n  test(1000000007);\n\
+    \  test(2 * TEN(9));\n  rep(i, TEN(5)) test(randint(1, 2 * TEN(9) + 1));\n  cerr\
+    \ << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include\
     \ \"../../modint/arbitrary-modint.hpp\"\nusing namespace Nyaan;\n\nusing mint\
     \ = ArbitraryModInt;\n\nvoid test(int m) {\n  mint::set_mod(m);\n  mint x = 1;\n\
-    \  int y = 1;\n  rep(loop, TEN(4)) {\n    int z = randint(0, 2 * TEN(9));\n  \
-    \  x *= z;\n    y = 1LL * y * z % m;\n    assert(x.x == y);\n  }\n}\n\nvoid Nyaan::solve()\
-    \ {\n  test(1);\n  test(2);\n  test(3);\n  test(998244353);\n  test(1000000007);\n\
-    \  test(2 * TEN(9));\n  rep(i, TEN(4)) test(randint(1, 2 * TEN(9) + 1));\n  cerr\
-    \ << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
-    }\n"
+    \  int y = 1;\n  rep(loop, TEN(3)) {\n    int z = randint(0, 2 * TEN(9));\n  \
+    \  if (rng() & 1) z = -z;\n    x *= z;\n    y = 1LL * y * z % m;\n    if (y <\
+    \ 0) y += m;\n    assert(x.x == y);\n  }\n}\n\nvoid Nyaan::solve() {\n  test(1);\n\
+    \  test(2);\n  test(3);\n  test(998244353);\n  test(1000000007);\n  test(2 * TEN(9));\n\
+    \  rep(i, TEN(5)) test(randint(1, 2 * TEN(9) + 1));\n  cerr << \"OK\" << endl;\n\
+    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -268,7 +269,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/barrett-reduction.test.cpp
   requiredBy: []
-  timestamp: '2021-04-29 18:16:59+09:00'
+  timestamp: '2021-04-29 19:38:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/barrett-reduction.test.cpp
