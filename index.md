@@ -436,6 +436,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
+    - icon: ':heavy_check_mark:'
+      path: modint/barrett-reduction.hpp
+      title: modint/barrett-reduction.hpp
     - icon: ':warning:'
       path: modint/modint-cpp11.hpp
       title: modint/modint-cpp11.hpp
