@@ -2,16 +2,22 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':x:'
+    path: modulo/arbitrary-mod-binomial-large.hpp
+    title: modulo/arbitrary-mod-binomial-large.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/arbitrary-mod-binomial.hpp
     title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
+    title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/barrett-reduction.hpp\"\n\n#include <cassert>\n#include\
@@ -44,10 +50,12 @@ data:
   isVerificationFile: false
   path: modint/barrett-reduction.hpp
   requiredBy:
+  - modulo/arbitrary-mod-binomial-large.hpp
   - modulo/arbitrary-mod-binomial.hpp
   timestamp: '2021-04-29 14:58:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
 documentation_of: modint/barrett-reduction.hpp
 layout: document

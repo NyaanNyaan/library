@@ -401,7 +401,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -436,7 +436,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/barrett-reduction.hpp
       title: modint/barrett-reduction.hpp
     - icon: ':warning:'
@@ -456,6 +456,9 @@ data:
       title: modint/simd-montgomery.hpp
   - name: modulo
     pages:
+    - icon: ':x:'
+      path: modulo/arbitrary-mod-binomial-large.hpp
+      title: modulo/arbitrary-mod-binomial-large.hpp
     - icon: ':heavy_check_mark:'
       path: modulo/arbitrary-mod-binomial.hpp
       title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
@@ -712,22 +715,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1309,6 +1312,9 @@ data:
       title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - name: verify/verify-yosupo-math
     pages:
+    - icon: ':x:'
+      path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
+      title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
       title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
