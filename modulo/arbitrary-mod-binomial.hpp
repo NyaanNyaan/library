@@ -2,7 +2,9 @@
 
 #include <vector>
 
-#include "atcoder/math.hpp"
+#include "../atcoder/math.hpp"
+#include "../modint/barrett-reduction.hpp"
+
 using namespace std;
 
 #define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)
@@ -12,42 +14,7 @@ struct prime_power_binomial {
   int p, q, M;
   vector<int> fac, ifac, inv;
   int delta;
-
-  using u32 = unsigned int;
-  using i64 = long long;
-  using u64 = unsigned long long;
-  u64 iM, ip;
-
-  inline i64 modulo_M(u64 n) {
-    u64 x = u64((__uint128_t(n) * iM) >> 64);
-    u32 r = n - x * (u32)(M);
-    if (u32(M) <= r) r += M;
-    return r;
-  }
-
-  inline i64 divide_p(u64 n) {
-    u64 x = u64((__uint128_t(n) * ip) >> 64);
-    u32 r = n - x * (u32)(p);
-    if (u32(p) <= r) x--;
-    return x;
-  }
-
-  inline pair<i64, int> quorem_p(u64 n) {
-    u64 x = u64((__uint128_t(n) * ip) >> 64);
-    u32 r = n - x * (u32)(p);
-    if (u32(p) <= r) x--, r += p;
-    return make_pair(i64(x), int(r));
-  }
-
-  int modpow(int a, long long e) {
-    int r = 1;
-    while (e) {
-      if (e & 1) r = modulo_M(1LL * r * a);
-      a = modulo_M(1LL * a * a);
-      e >>= 1;
-    }
-    return r;
-  }
+  Barrett bm, bp;
 
   prime_power_binomial(int _p, int _q) : p(_p), q(_q) {
     assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);
@@ -58,8 +25,7 @@ struct prime_power_binomial {
       assert(m <= PRIME_POWER_BINOMIAL_M_MAX);
     }
     M = m;
-    iM = u64(-1) / M + 1;
-    ip = u64(-1) / p + 1;
+    bm = Barrett(M), bp = Barrett(p);
     enumerate();
     delta = (p == 2 && q >= 3) ? 1 : M - 1;
   }
@@ -74,20 +40,20 @@ struct prime_power_binomial {
     for (int i = 2; i < MX; i++) {
       if (i % p == 0) {
         fac[i] = fac[i - 1];
-        fac[i + 1] = modulo_M(1LL * fac[i - 1] * (i + 1));
+        fac[i + 1] = bm.rem(1LL * fac[i - 1] * (i + 1));
         i++;
       } else {
-        fac[i] = modulo_M(1LL * fac[i - 1] * i);
+        fac[i] = bm.rem(1LL * fac[i - 1] * i);
       }
     }
-    ifac[MX - 1] = modpow(fac[MX - 1], M / p * (p - 1) - 1);
+    ifac[MX - 1] = bm.pow(fac[MX - 1], M / p * (p - 1) - 1);
     for (int i = MX - 2; i > 1; --i) {
       if (i % p == 0) {
-        ifac[i] = modulo_M(1LL * ifac[i + 1] * (i + 1));
+        ifac[i] = bm.rem(1LL * ifac[i + 1] * (i + 1));
         ifac[i - 1] = ifac[i];
         i--;
       } else {
-        ifac[i] = modulo_M(1LL * ifac[i + 1] * (i + 1));
+        ifac[i] = bm.rem(1LL * ifac[i + 1] * (i + 1));
       }
     }
   }
@@ -96,12 +62,12 @@ struct prime_power_binomial {
     int res = 1;
     while (n) {
       int n0, m0;
-      tie(n, n0) = quorem_p(n);
-      tie(m, m0) = quorem_p(m);
+      tie(n, n0) = bp.quorem(n);
+      tie(m, m0) = bp.quorem(m);
       if (n0 < m0) return 0;
-      res = modulo_M(1LL * res * fac[n0]);
-      int buf = modulo_M(1LL * ifac[n0 - m0] * ifac[m0]);
-      res = modulo_M(1LL * res * buf);
+      res = bm.rem(1LL * res * fac[n0]);
+      int buf = bm.rem(1LL * ifac[n0 - m0] * ifac[m0]);
+      res = bm.rem(1LL * res * buf);
     }
     return res;
   }
@@ -113,19 +79,19 @@ struct prime_power_binomial {
     int e0 = 0, eq = 0, i = 0;
     int res = 1;
     while (n) {
-      res = modulo_M(1LL * res * fac[modulo_M(n)]);
-      res = modulo_M(1LL * res * ifac[modulo_M(m)]);
-      res = modulo_M(1LL * res * ifac[modulo_M(r)]);
-      n = divide_p(n);
-      m = divide_p(m);
-      r = divide_p(r);
+      res = bm.rem(1LL * res * fac[bm.rem(n)]);
+      res = bm.rem(1LL * res * ifac[bm.rem(m)]);
+      res = bm.rem(1LL * res * ifac[bm.rem(r)]);
+      n = bp.quo(n);
+      m = bp.quo(m);
+      r = bp.quo(r);
       int eps = n - m - r;
       e0 += eps;
       if (e0 >= q) return 0;
       if (++i >= q) eq += eps;
     }
-    res = modulo_M(1LL * res * modpow(delta, eq));
-    res = modulo_M(1LL * res * modpow(p, e0));
+    if (eq & 1) res = bm.rem(1LL * res * delta);
+    res = bm.rem(1LL * res * bm.pow(p, e0));
     return res;
   }
 };
