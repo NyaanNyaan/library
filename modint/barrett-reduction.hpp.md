@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
     title: modint/arbitrary-modint.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: modulo/arbitrary-mod-binomial-large.hpp
     title: modulo/arbitrary-mod-binomial-large.hpp
   - icon: ':heavy_check_mark:'
@@ -15,7 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/barrett-reduction.test.cpp
     title: verify/verify-unit-test/barrett-reduction.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,9 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/barrett-reduction.hpp\"\n\n#include <utility>\nusing\
@@ -62,7 +62,7 @@ data:
   - modulo/arbitrary-mod-binomial-large.hpp
   - modulo/arbitrary-mod-binomial.hpp
   timestamp: '2021-04-29 18:16:59+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp

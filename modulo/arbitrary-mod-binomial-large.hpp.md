@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modulo/arbitrary-mod-binomial-large.hpp\"\n\n#line 1 \"\
@@ -126,8 +126,7 @@ data:
     \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
     \ a = rem(n), r = 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
     \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
-    \ 5 \"modulo/arbitrary-mod-binomial-large.hpp\"\n\n#pragma GCC target(\"avx2\"\
-    )\n#pragma GCC optimize(\"O3,unroll-loops\")\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
+    \ 5 \"modulo/arbitrary-mod-binomial-large.hpp\"\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
     \ ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\nstruct simd_prime_binomial\
     \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
     \ long long;\n  using m256 = __m256i;\n\n  u32 get_r(u32 _mod) {\n    u32 ret\
@@ -141,84 +140,88 @@ data:
     \ u64 get(const u32& b) {\n    u32 a = reduce(b);\n    return a >= mod ? a - mod\
     \ : a;\n  }\n  u32 inv(u32 b) {\n    u32 e = mod - 2, a = raw_cast(1);\n    while\
     \ (e) {\n      if (e & 1) a = mul(a, b);\n      b = mul(b, b);\n      e >>= 1;\n\
-    \    }\n    return a;\n  }\n\n  inline m256 simd_mulhi(const m256& a, const m256&\
-    \ b) {\n    m256 a13 = _mm256_shuffle_epi32(a, 0xF5);\n    m256 b13 = _mm256_shuffle_epi32(b,\
+    \    }\n    return a;\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\"\
+    , \"unroll-loops\"))) inline m256\n  simd_mulhi(const m256& a, const m256& b)\
+    \ {\n    m256 a13 = _mm256_shuffle_epi32(a, 0xF5);\n    m256 b13 = _mm256_shuffle_epi32(b,\
     \ 0xF5);\n    m256 prod02 = _mm256_mul_epu32(a, b);\n    m256 prod13 = _mm256_mul_epu32(a13,\
     \ b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);\n    m256 unpahi\
     \ = _mm256_unpackhi_epi32(prod02, prod13);\n    m256 prod = _mm256_unpackhi_epi64(unpalo,\
-    \ unpahi);\n    return prod;\n  }\n\n  inline m256 simd_sub(const m256& a, const\
-    \ m256& b) {\n    m256 ret = _mm256_sub_epi32(a, b);\n    m256 cmp = _mm256_cmpgt_epi32(M0,\
+    \ unpahi);\n    return prod;\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline m256\n  simd_sub(const m256& a, const m256& b)\
+    \ {\n    m256 ret = _mm256_sub_epi32(a, b);\n    m256 cmp = _mm256_cmpgt_epi32(M0,\
     \ ret);\n    m256 add = _mm256_and_si256(cmp, M2);\n    return _mm256_add_epi32(add,\
-    \ ret);\n  }\n\n  inline m256 simd_mul(const m256& A, const m256& B) {\n    m256\
-    \ a13 = _mm256_shuffle_epi32(A, 0xF5);\n    m256 b13 = _mm256_shuffle_epi32(B,\
-    \ 0xF5);\n    m256 prod02 = _mm256_mul_epu32(A, B);\n    m256 prod13 = _mm256_mul_epu32(a13,\
-    \ b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);\n    m256 unpahi\
-    \ = _mm256_unpackhi_epi32(prod02, prod13);\n    m256 prodlo = _mm256_unpacklo_epi64(unpalo,\
-    \ unpahi);\n    m256 prodhi = _mm256_unpackhi_epi64(unpalo, unpahi);\n    m256\
-    \ hiplm1 = _mm256_add_epi32(prodhi, M1);\n    m256 lomulr = _mm256_mullo_epi32(prodlo,\
-    \ R);\n    m256 lomulrmulm1 = simd_mulhi(lomulr, M1);\n    return _mm256_sub_epi32(hiplm1,\
-    \ lomulrmulm1);\n  }\n\n  inline void transpose8_ps(__m256& row0, __m256& row1,\
-    \ __m256& row2,\n                            __m256& row3, __m256& row4, __m256&\
-    \ row5,\n                            __m256& row6, __m256& row7) {\n    __m256\
-    \ __t0, __t1, __t2, __t3, __t4, __t5, __t6, __t7;\n    __m256 __tt0, __tt1, __tt2,\
-    \ __tt3, __tt4, __tt5, __tt6, __tt7;\n    __t0 = _mm256_unpacklo_ps(row0, row1);\n\
-    \    __t1 = _mm256_unpackhi_ps(row0, row1);\n    __t2 = _mm256_unpacklo_ps(row2,\
-    \ row3);\n    __t3 = _mm256_unpackhi_ps(row2, row3);\n    __t4 = _mm256_unpacklo_ps(row4,\
-    \ row5);\n    __t5 = _mm256_unpackhi_ps(row4, row5);\n    __t6 = _mm256_unpacklo_ps(row6,\
-    \ row7);\n    __t7 = _mm256_unpackhi_ps(row6, row7);\n    __tt0 = _mm256_shuffle_ps(__t0,\
-    \ __t2, _MM_SHUFFLE(1, 0, 1, 0));\n    __tt1 = _mm256_shuffle_ps(__t0, __t2, _MM_SHUFFLE(3,\
-    \ 2, 3, 2));\n    __tt2 = _mm256_shuffle_ps(__t1, __t3, _MM_SHUFFLE(1, 0, 1, 0));\n\
-    \    __tt3 = _mm256_shuffle_ps(__t1, __t3, _MM_SHUFFLE(3, 2, 3, 2));\n    __tt4\
-    \ = _mm256_shuffle_ps(__t4, __t6, _MM_SHUFFLE(1, 0, 1, 0));\n    __tt5 = _mm256_shuffle_ps(__t4,\
-    \ __t6, _MM_SHUFFLE(3, 2, 3, 2));\n    __tt6 = _mm256_shuffle_ps(__t5, __t7, _MM_SHUFFLE(1,\
-    \ 0, 1, 0));\n    __tt7 = _mm256_shuffle_ps(__t5, __t7, _MM_SHUFFLE(3, 2, 3, 2));\n\
-    \    row0 = _mm256_permute2f128_ps(__tt0, __tt4, 0x20);\n    row1 = _mm256_permute2f128_ps(__tt1,\
-    \ __tt5, 0x20);\n    row2 = _mm256_permute2f128_ps(__tt2, __tt6, 0x20);\n    row3\
-    \ = _mm256_permute2f128_ps(__tt3, __tt7, 0x20);\n    row4 = _mm256_permute2f128_ps(__tt0,\
-    \ __tt4, 0x31);\n    row5 = _mm256_permute2f128_ps(__tt1, __tt5, 0x31);\n    row6\
-    \ = _mm256_permute2f128_ps(__tt2, __tt6, 0x31);\n    row7 = _mm256_permute2f128_ps(__tt3,\
-    \ __tt7, 0x31);\n  }\n\n  void precalc() {\n    __attribute__((aligned(32))) u32\
-    \ b1[32];\n    __attribute__((aligned(32))) __m256 b2[8];\n    int max = ((mod\
-    \ / 2) / v + 12) / 8 * 8;\n    f.resize(max + 1, raw_cast(1));\n    for (int i\
-    \ = 0; i < 32; i++) b1[i] = raw_cast(i + 1);\n    m256 A0 = _mm256_set1_epi32(b1[0]);\n\
-    \    m256 A1 = _mm256_set1_epi32(b1[0]);\n    m256 A2 = _mm256_set1_epi32(b1[0]);\n\
-    \    m256 A3 = _mm256_set1_epi32(b1[0]);\n    m256 B0 = _mm256_load_si256((m256*)(b1\
-    \ + 0));\n    m256 B1 = _mm256_load_si256((m256*)(b1 + 8));\n    m256 B2 = _mm256_load_si256((m256*)(b1\
-    \ + 16));\n    m256 B3 = _mm256_load_si256((m256*)(b1 + 24));\n    m256 DI = _mm256_set1_epi32(mod\
-    \ * 2 - b1[31]);\n    for (int i = 1; i < (int)f.size(); i += 8) {\n      for\
-    \ (int j = 0; j < 8; j++) {\n        for (u32 loop = 0; loop < v / 32; loop++)\
-    \ {\n          A0 = simd_mul(A0, B0), A1 = simd_mul(A1, B1);\n          A2 = simd_mul(A2,\
-    \ B2), A3 = simd_mul(A3, B3);\n          B0 = simd_sub(B0, DI), B1 = simd_sub(B1,\
-    \ DI);\n          B2 = simd_sub(B2, DI), B3 = simd_sub(B3, DI);\n        }\n \
-    \       m256 C0 = simd_mul(A0, A1);\n        m256 C1 = simd_mul(A2, A3);\n   \
-    \     m256 C2 = simd_mul(C0, C1);\n        _mm256_store_si256((m256*)(b2 + j),\
-    \ C2);\n      }\n      transpose8_ps(b2[0], b2[1], b2[2], b2[3], b2[4], b2[5],\
-    \ b2[6], b2[7]);\n      m256 D0 = simd_mul(m256(b2[0]), m256(b2[1]));\n      m256\
-    \ D1 = simd_mul(m256(b2[2]), m256(b2[3]));\n      m256 D2 = simd_mul(m256(b2[4]),\
-    \ m256(b2[5]));\n      m256 D3 = simd_mul(m256(b2[6]), m256(b2[7]));\n      m256\
-    \ D4 = simd_mul(D0, D1);\n      m256 D5 = simd_mul(D2, D3);\n      m256 D6 = simd_mul(D4,\
-    \ D5);\n      _mm256_storeu_si256((m256*)(f.data() + i), D6);\n    }\n  }\n\n\
-    \  u32 mod, r, n2;\n  Barrett bm;\n  m256 R, M0, M1, M2;\n  static constexpr u32\
-    \ v = 128;\n  static_assert(v % 32 == 0);\n  vector<u32> f;\n\n  simd_prime_binomial()\
-    \ = default;\n\n  simd_prime_binomial(u32 _mod) : mod(_mod) {\n    assert(2 <\
-    \ mod && mod < (1u << 30));\n    assert(mod % 2 != 0);\n    r = get_r(mod);\n\
-    \    n2 = -u64(mod) % mod;\n    bm = Barrett(mod);\n    R = _mm256_set1_epi32(r);\n\
-    \    M0 = _mm256_set1_epi32(0);\n    M1 = _mm256_set1_epi32(mod);\n    M2 = _mm256_set1_epi32(mod\
-    \ * 2);\n    precalc();\n  }\n\n  u32 raw_fac(u64 n) {\n    assert(n < mod);\n\
-    \    if (n * 2 > mod + 2) {\n      u64 x = raw_fac(mod - 1 - n);\n      if (n\
-    \ % 2 == 0) x = mod * 2 - x;\n      return inv(x);\n    }\n    u32 a = f[n / v],\
-    \ i = n / v * v + 1;\n    u32 j = raw_cast(i), o = raw_cast(1);\n    while (i++\
-    \ <= n) {\n      a = mul(a, j), j = add(j, o);\n    }\n    return a;\n  }\n\n\
-    \  inline u32 fac(u64 n) {\n    if (n >= mod) return 0;\n    return get(raw_fac(n));\n\
-    \  }\n\n  u32 C(long long n, long long m) {\n    if (n < 0 or m < 0 or n < m)\
-    \ return 0;\n    u32 num = raw_cast(1), denom = raw_cast(1);\n    while (n) {\n\
-    \      long long n0, m0;\n      tie(n, n0) = bm.quorem(n);\n      tie(m, m0) =\
-    \ bm.quorem(m);\n      if (n0 < m0) return 0;\n      num = mul(num, raw_fac(n0));\n\
-    \      denom = mul(denom, raw_fac(n0 - m0));\n      denom = mul(denom, raw_fac(m0));\n\
-    \    }\n    return get(mul(num, inv(denom)));\n  }\n};\n\nstruct prime_power_binomial\
-    \ {\n  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int delta;\n  Barrett bm,\
-    \ bp;\n\n  prime_power_binomial() = default;\n\n  prime_power_binomial(int _p,\
-    \ int _q) : p(_p), q(_q) {\n    assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n\
+    \ ret);\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) inline m256\n  simd_mul(const m256& A, const m256& B) {\n    m256 a13 = _mm256_shuffle_epi32(A,\
+    \ 0xF5);\n    m256 b13 = _mm256_shuffle_epi32(B, 0xF5);\n    m256 prod02 = _mm256_mul_epu32(A,\
+    \ B);\n    m256 prod13 = _mm256_mul_epu32(a13, b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02,\
+    \ prod13);\n    m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);\n    m256\
+    \ prodlo = _mm256_unpacklo_epi64(unpalo, unpahi);\n    m256 prodhi = _mm256_unpackhi_epi64(unpalo,\
+    \ unpahi);\n    m256 hiplm1 = _mm256_add_epi32(prodhi, M1);\n    m256 lomulr =\
+    \ _mm256_mullo_epi32(prodlo, R);\n    m256 lomulrmulm1 = simd_mulhi(lomulr, M1);\n\
+    \    return _mm256_sub_epi32(hiplm1, lomulrmulm1);\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  transpose8_ps(__m256&\
+    \ row0, __m256& row1, __m256& row2, __m256& row3,\n                __m256& row4,\
+    \ __m256& row5, __m256& row6, __m256& row7) {\n    __m256 __t0, __t1, __t2, __t3,\
+    \ __t4, __t5, __t6, __t7;\n    __m256 __tt0, __tt1, __tt2, __tt3, __tt4, __tt5,\
+    \ __tt6, __tt7;\n    __t0 = _mm256_unpacklo_ps(row0, row1);\n    __t1 = _mm256_unpackhi_ps(row0,\
+    \ row1);\n    __t2 = _mm256_unpacklo_ps(row2, row3);\n    __t3 = _mm256_unpackhi_ps(row2,\
+    \ row3);\n    __t4 = _mm256_unpacklo_ps(row4, row5);\n    __t5 = _mm256_unpackhi_ps(row4,\
+    \ row5);\n    __t6 = _mm256_unpacklo_ps(row6, row7);\n    __t7 = _mm256_unpackhi_ps(row6,\
+    \ row7);\n    __tt0 = _mm256_shuffle_ps(__t0, __t2, _MM_SHUFFLE(1, 0, 1, 0));\n\
+    \    __tt1 = _mm256_shuffle_ps(__t0, __t2, _MM_SHUFFLE(3, 2, 3, 2));\n    __tt2\
+    \ = _mm256_shuffle_ps(__t1, __t3, _MM_SHUFFLE(1, 0, 1, 0));\n    __tt3 = _mm256_shuffle_ps(__t1,\
+    \ __t3, _MM_SHUFFLE(3, 2, 3, 2));\n    __tt4 = _mm256_shuffle_ps(__t4, __t6, _MM_SHUFFLE(1,\
+    \ 0, 1, 0));\n    __tt5 = _mm256_shuffle_ps(__t4, __t6, _MM_SHUFFLE(3, 2, 3, 2));\n\
+    \    __tt6 = _mm256_shuffle_ps(__t5, __t7, _MM_SHUFFLE(1, 0, 1, 0));\n    __tt7\
+    \ = _mm256_shuffle_ps(__t5, __t7, _MM_SHUFFLE(3, 2, 3, 2));\n    row0 = _mm256_permute2f128_ps(__tt0,\
+    \ __tt4, 0x20);\n    row1 = _mm256_permute2f128_ps(__tt1, __tt5, 0x20);\n    row2\
+    \ = _mm256_permute2f128_ps(__tt2, __tt6, 0x20);\n    row3 = _mm256_permute2f128_ps(__tt3,\
+    \ __tt7, 0x20);\n    row4 = _mm256_permute2f128_ps(__tt0, __tt4, 0x31);\n    row5\
+    \ = _mm256_permute2f128_ps(__tt1, __tt5, 0x31);\n    row6 = _mm256_permute2f128_ps(__tt2,\
+    \ __tt6, 0x31);\n    row7 = _mm256_permute2f128_ps(__tt3, __tt7, 0x31);\n  }\n\
+    \n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n\
+    \  precalc() {\n    __attribute__((aligned(32))) u32 b1[32];\n    __attribute__((aligned(32)))\
+    \ __m256 b2[8];\n    int max = ((mod / 2) / v + 12) / 8 * 8;\n    f.resize(max\
+    \ + 1, raw_cast(1));\n    for (int i = 0; i < 32; i++) b1[i] = raw_cast(i + 1);\n\
+    \    m256 A0 = _mm256_set1_epi32(b1[0]);\n    m256 A1 = _mm256_set1_epi32(b1[0]);\n\
+    \    m256 A2 = _mm256_set1_epi32(b1[0]);\n    m256 A3 = _mm256_set1_epi32(b1[0]);\n\
+    \    m256 B0 = _mm256_load_si256((m256*)(b1 + 0));\n    m256 B1 = _mm256_load_si256((m256*)(b1\
+    \ + 8));\n    m256 B2 = _mm256_load_si256((m256*)(b1 + 16));\n    m256 B3 = _mm256_load_si256((m256*)(b1\
+    \ + 24));\n    m256 DI = _mm256_set1_epi32(mod * 2 - b1[31]);\n    for (int i\
+    \ = 1; i < (int)f.size(); i += 8) {\n      for (int j = 0; j < 8; j++) {\n   \
+    \     for (u32 loop = 0; loop < v / 32; loop++) {\n          A0 = simd_mul(A0,\
+    \ B0), A1 = simd_mul(A1, B1);\n          A2 = simd_mul(A2, B2), A3 = simd_mul(A3,\
+    \ B3);\n          B0 = simd_sub(B0, DI), B1 = simd_sub(B1, DI);\n          B2\
+    \ = simd_sub(B2, DI), B3 = simd_sub(B3, DI);\n        }\n        m256 C0 = simd_mul(A0,\
+    \ A1);\n        m256 C1 = simd_mul(A2, A3);\n        m256 C2 = simd_mul(C0, C1);\n\
+    \        _mm256_store_si256((m256*)(b2 + j), C2);\n      }\n      transpose8_ps(b2[0],\
+    \ b2[1], b2[2], b2[3], b2[4], b2[5], b2[6], b2[7]);\n      m256 D0 = simd_mul(m256(b2[0]),\
+    \ m256(b2[1]));\n      m256 D1 = simd_mul(m256(b2[2]), m256(b2[3]));\n      m256\
+    \ D2 = simd_mul(m256(b2[4]), m256(b2[5]));\n      m256 D3 = simd_mul(m256(b2[6]),\
+    \ m256(b2[7]));\n      m256 D4 = simd_mul(D0, D1);\n      m256 D5 = simd_mul(D2,\
+    \ D3);\n      m256 D6 = simd_mul(D4, D5);\n      _mm256_storeu_si256((m256*)(f.data()\
+    \ + i), D6);\n    }\n  }\n\n  u32 mod, r, n2;\n  Barrett bm;\n  m256 R, M0, M1,\
+    \ M2;\n  static constexpr u32 v = 128;\n  static_assert(v % 32 == 0);\n  vector<u32>\
+    \ f;\n\n  simd_prime_binomial() = default;\n\n  __attribute__((target(\"avx2\"\
+    ), optimize(\"O3\", \"unroll-loops\")))\n  simd_prime_binomial(u32 _mod)\n   \
+    \   : mod(_mod) {\n    assert(2 < mod && mod < (1u << 30));\n    assert(mod %\
+    \ 2 != 0);\n    r = get_r(mod);\n    n2 = -u64(mod) % mod;\n    bm = Barrett(mod);\n\
+    \    R = _mm256_set1_epi32(r);\n    M0 = _mm256_set1_epi32(0);\n    M1 = _mm256_set1_epi32(mod);\n\
+    \    M2 = _mm256_set1_epi32(mod * 2);\n    precalc();\n  }\n\n  u32 raw_fac(u64\
+    \ n) {\n    assert(n < mod);\n    if (n * 2 > mod + 2) {\n      u64 x = raw_fac(mod\
+    \ - 1 - n);\n      if (n % 2 == 0) x = mod * 2 - x;\n      return inv(x);\n  \
+    \  }\n    u32 a = f[n / v], i = n / v * v + 1;\n    u32 j = raw_cast(i), o = raw_cast(1);\n\
+    \    while (i++ <= n) {\n      a = mul(a, j), j = add(j, o);\n    }\n    return\
+    \ a;\n  }\n\n  inline u32 fac(u64 n) {\n    if (n >= mod) return 0;\n    return\
+    \ get(raw_fac(n));\n  }\n\n  u32 C(long long n, long long m) {\n    if (n < 0\
+    \ or m < 0 or n < m) return 0;\n    u32 num = raw_cast(1), denom = raw_cast(1);\n\
+    \    while (n) {\n      long long n0, m0;\n      tie(n, n0) = bm.quorem(n);\n\
+    \      tie(m, m0) = bm.quorem(m);\n      if (n0 < m0) return 0;\n      num = mul(num,\
+    \ raw_fac(n0));\n      denom = mul(denom, raw_fac(n0 - m0));\n      denom = mul(denom,\
+    \ raw_fac(m0));\n    }\n    return get(mul(num, inv(denom)));\n  }\n};\n\nstruct\
+    \ prime_power_binomial {\n  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int\
+    \ delta;\n  Barrett bm, bp;\n\n  prime_power_binomial() = default;\n\n  prime_power_binomial(int\
+    \ _p, int _q) : p(_p), q(_q) {\n    assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n\
     \    assert(_q > 0);\n    long long m = 1;\n    while (_q--) {\n      m *= p;\n\
     \      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n    }\n    M = m;\n    bm = Barrett(M),\
     \ bp = Barrett(p);\n    enumerate();\n    delta = (p == 2 && q >= 3) ? 1 : M -\
@@ -262,10 +265,9 @@ data:
     \ m));\n      d.push_back(M1[i]);\n    }\n    for (int i = 0; i < (int)cs2.size();\
     \ i++) {\n      rem.push_back(cs2[i].C(n, m));\n      d.push_back(M2[i]);\n  \
     \  }\n    return atcoder::crt(rem, d).first;\n  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n\
-    #undef PRIME_POWER_BINOMIAL_N_MAX\n\n"
+    #undef PRIME_POWER_BINOMIAL_N_MAX\n"
   code: "#pragma once\n\n#include \"../atcoder/math.hpp\"\n#include \"../modint/barrett-reduction.hpp\"\
-    \n\n#pragma GCC target(\"avx2\")\n#pragma GCC optimize(\"O3,unroll-loops\")\n\n\
-    #define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX\
+    \n\n#define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX\
     \ 20000000\n\nstruct simd_prime_binomial {\n  using u32 = unsigned int;\n  using\
     \ i64 = long long;\n  using u64 = unsigned long long;\n  using m256 = __m256i;\n\
     \n  u32 get_r(u32 _mod) {\n    u32 ret = _mod;\n    for (int i = 0; i < 4; ++i)\
@@ -278,84 +280,89 @@ data:
     \ b) { return reduce(b * n2); }\n  u64 get(const u32& b) {\n    u32 a = reduce(b);\n\
     \    return a >= mod ? a - mod : a;\n  }\n  u32 inv(u32 b) {\n    u32 e = mod\
     \ - 2, a = raw_cast(1);\n    while (e) {\n      if (e & 1) a = mul(a, b);\n  \
-    \    b = mul(b, b);\n      e >>= 1;\n    }\n    return a;\n  }\n\n  inline m256\
-    \ simd_mulhi(const m256& a, const m256& b) {\n    m256 a13 = _mm256_shuffle_epi32(a,\
-    \ 0xF5);\n    m256 b13 = _mm256_shuffle_epi32(b, 0xF5);\n    m256 prod02 = _mm256_mul_epu32(a,\
+    \    b = mul(b, b);\n      e >>= 1;\n    }\n    return a;\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline m256\n  simd_mulhi(const\
+    \ m256& a, const m256& b) {\n    m256 a13 = _mm256_shuffle_epi32(a, 0xF5);\n \
+    \   m256 b13 = _mm256_shuffle_epi32(b, 0xF5);\n    m256 prod02 = _mm256_mul_epu32(a,\
     \ b);\n    m256 prod13 = _mm256_mul_epu32(a13, b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02,\
     \ prod13);\n    m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);\n    m256\
-    \ prod = _mm256_unpackhi_epi64(unpalo, unpahi);\n    return prod;\n  }\n\n  inline\
-    \ m256 simd_sub(const m256& a, const m256& b) {\n    m256 ret = _mm256_sub_epi32(a,\
-    \ b);\n    m256 cmp = _mm256_cmpgt_epi32(M0, ret);\n    m256 add = _mm256_and_si256(cmp,\
-    \ M2);\n    return _mm256_add_epi32(add, ret);\n  }\n\n  inline m256 simd_mul(const\
-    \ m256& A, const m256& B) {\n    m256 a13 = _mm256_shuffle_epi32(A, 0xF5);\n \
-    \   m256 b13 = _mm256_shuffle_epi32(B, 0xF5);\n    m256 prod02 = _mm256_mul_epu32(A,\
-    \ B);\n    m256 prod13 = _mm256_mul_epu32(a13, b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02,\
+    \ prod = _mm256_unpackhi_epi64(unpalo, unpahi);\n    return prod;\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline m256\n  simd_sub(const m256&\
+    \ a, const m256& b) {\n    m256 ret = _mm256_sub_epi32(a, b);\n    m256 cmp =\
+    \ _mm256_cmpgt_epi32(M0, ret);\n    m256 add = _mm256_and_si256(cmp, M2);\n  \
+    \  return _mm256_add_epi32(add, ret);\n  }\n\n  __attribute__((target(\"avx2\"\
+    ), optimize(\"O3\", \"unroll-loops\"))) inline m256\n  simd_mul(const m256& A,\
+    \ const m256& B) {\n    m256 a13 = _mm256_shuffle_epi32(A, 0xF5);\n    m256 b13\
+    \ = _mm256_shuffle_epi32(B, 0xF5);\n    m256 prod02 = _mm256_mul_epu32(A, B);\n\
+    \    m256 prod13 = _mm256_mul_epu32(a13, b13);\n    m256 unpalo = _mm256_unpacklo_epi32(prod02,\
     \ prod13);\n    m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);\n    m256\
     \ prodlo = _mm256_unpacklo_epi64(unpalo, unpahi);\n    m256 prodhi = _mm256_unpackhi_epi64(unpalo,\
     \ unpahi);\n    m256 hiplm1 = _mm256_add_epi32(prodhi, M1);\n    m256 lomulr =\
     \ _mm256_mullo_epi32(prodlo, R);\n    m256 lomulrmulm1 = simd_mulhi(lomulr, M1);\n\
-    \    return _mm256_sub_epi32(hiplm1, lomulrmulm1);\n  }\n\n  inline void transpose8_ps(__m256&\
-    \ row0, __m256& row1, __m256& row2,\n                            __m256& row3,\
-    \ __m256& row4, __m256& row5,\n                            __m256& row6, __m256&\
-    \ row7) {\n    __m256 __t0, __t1, __t2, __t3, __t4, __t5, __t6, __t7;\n    __m256\
-    \ __tt0, __tt1, __tt2, __tt3, __tt4, __tt5, __tt6, __tt7;\n    __t0 = _mm256_unpacklo_ps(row0,\
-    \ row1);\n    __t1 = _mm256_unpackhi_ps(row0, row1);\n    __t2 = _mm256_unpacklo_ps(row2,\
-    \ row3);\n    __t3 = _mm256_unpackhi_ps(row2, row3);\n    __t4 = _mm256_unpacklo_ps(row4,\
-    \ row5);\n    __t5 = _mm256_unpackhi_ps(row4, row5);\n    __t6 = _mm256_unpacklo_ps(row6,\
-    \ row7);\n    __t7 = _mm256_unpackhi_ps(row6, row7);\n    __tt0 = _mm256_shuffle_ps(__t0,\
-    \ __t2, _MM_SHUFFLE(1, 0, 1, 0));\n    __tt1 = _mm256_shuffle_ps(__t0, __t2, _MM_SHUFFLE(3,\
-    \ 2, 3, 2));\n    __tt2 = _mm256_shuffle_ps(__t1, __t3, _MM_SHUFFLE(1, 0, 1, 0));\n\
-    \    __tt3 = _mm256_shuffle_ps(__t1, __t3, _MM_SHUFFLE(3, 2, 3, 2));\n    __tt4\
-    \ = _mm256_shuffle_ps(__t4, __t6, _MM_SHUFFLE(1, 0, 1, 0));\n    __tt5 = _mm256_shuffle_ps(__t4,\
-    \ __t6, _MM_SHUFFLE(3, 2, 3, 2));\n    __tt6 = _mm256_shuffle_ps(__t5, __t7, _MM_SHUFFLE(1,\
-    \ 0, 1, 0));\n    __tt7 = _mm256_shuffle_ps(__t5, __t7, _MM_SHUFFLE(3, 2, 3, 2));\n\
-    \    row0 = _mm256_permute2f128_ps(__tt0, __tt4, 0x20);\n    row1 = _mm256_permute2f128_ps(__tt1,\
-    \ __tt5, 0x20);\n    row2 = _mm256_permute2f128_ps(__tt2, __tt6, 0x20);\n    row3\
-    \ = _mm256_permute2f128_ps(__tt3, __tt7, 0x20);\n    row4 = _mm256_permute2f128_ps(__tt0,\
-    \ __tt4, 0x31);\n    row5 = _mm256_permute2f128_ps(__tt1, __tt5, 0x31);\n    row6\
-    \ = _mm256_permute2f128_ps(__tt2, __tt6, 0x31);\n    row7 = _mm256_permute2f128_ps(__tt3,\
-    \ __tt7, 0x31);\n  }\n\n  void precalc() {\n    __attribute__((aligned(32))) u32\
-    \ b1[32];\n    __attribute__((aligned(32))) __m256 b2[8];\n    int max = ((mod\
-    \ / 2) / v + 12) / 8 * 8;\n    f.resize(max + 1, raw_cast(1));\n    for (int i\
-    \ = 0; i < 32; i++) b1[i] = raw_cast(i + 1);\n    m256 A0 = _mm256_set1_epi32(b1[0]);\n\
-    \    m256 A1 = _mm256_set1_epi32(b1[0]);\n    m256 A2 = _mm256_set1_epi32(b1[0]);\n\
-    \    m256 A3 = _mm256_set1_epi32(b1[0]);\n    m256 B0 = _mm256_load_si256((m256*)(b1\
-    \ + 0));\n    m256 B1 = _mm256_load_si256((m256*)(b1 + 8));\n    m256 B2 = _mm256_load_si256((m256*)(b1\
-    \ + 16));\n    m256 B3 = _mm256_load_si256((m256*)(b1 + 24));\n    m256 DI = _mm256_set1_epi32(mod\
-    \ * 2 - b1[31]);\n    for (int i = 1; i < (int)f.size(); i += 8) {\n      for\
-    \ (int j = 0; j < 8; j++) {\n        for (u32 loop = 0; loop < v / 32; loop++)\
-    \ {\n          A0 = simd_mul(A0, B0), A1 = simd_mul(A1, B1);\n          A2 = simd_mul(A2,\
-    \ B2), A3 = simd_mul(A3, B3);\n          B0 = simd_sub(B0, DI), B1 = simd_sub(B1,\
-    \ DI);\n          B2 = simd_sub(B2, DI), B3 = simd_sub(B3, DI);\n        }\n \
-    \       m256 C0 = simd_mul(A0, A1);\n        m256 C1 = simd_mul(A2, A3);\n   \
-    \     m256 C2 = simd_mul(C0, C1);\n        _mm256_store_si256((m256*)(b2 + j),\
-    \ C2);\n      }\n      transpose8_ps(b2[0], b2[1], b2[2], b2[3], b2[4], b2[5],\
-    \ b2[6], b2[7]);\n      m256 D0 = simd_mul(m256(b2[0]), m256(b2[1]));\n      m256\
-    \ D1 = simd_mul(m256(b2[2]), m256(b2[3]));\n      m256 D2 = simd_mul(m256(b2[4]),\
-    \ m256(b2[5]));\n      m256 D3 = simd_mul(m256(b2[6]), m256(b2[7]));\n      m256\
-    \ D4 = simd_mul(D0, D1);\n      m256 D5 = simd_mul(D2, D3);\n      m256 D6 = simd_mul(D4,\
-    \ D5);\n      _mm256_storeu_si256((m256*)(f.data() + i), D6);\n    }\n  }\n\n\
-    \  u32 mod, r, n2;\n  Barrett bm;\n  m256 R, M0, M1, M2;\n  static constexpr u32\
-    \ v = 128;\n  static_assert(v % 32 == 0);\n  vector<u32> f;\n\n  simd_prime_binomial()\
-    \ = default;\n\n  simd_prime_binomial(u32 _mod) : mod(_mod) {\n    assert(2 <\
-    \ mod && mod < (1u << 30));\n    assert(mod % 2 != 0);\n    r = get_r(mod);\n\
-    \    n2 = -u64(mod) % mod;\n    bm = Barrett(mod);\n    R = _mm256_set1_epi32(r);\n\
-    \    M0 = _mm256_set1_epi32(0);\n    M1 = _mm256_set1_epi32(mod);\n    M2 = _mm256_set1_epi32(mod\
-    \ * 2);\n    precalc();\n  }\n\n  u32 raw_fac(u64 n) {\n    assert(n < mod);\n\
-    \    if (n * 2 > mod + 2) {\n      u64 x = raw_fac(mod - 1 - n);\n      if (n\
-    \ % 2 == 0) x = mod * 2 - x;\n      return inv(x);\n    }\n    u32 a = f[n / v],\
-    \ i = n / v * v + 1;\n    u32 j = raw_cast(i), o = raw_cast(1);\n    while (i++\
-    \ <= n) {\n      a = mul(a, j), j = add(j, o);\n    }\n    return a;\n  }\n\n\
-    \  inline u32 fac(u64 n) {\n    if (n >= mod) return 0;\n    return get(raw_fac(n));\n\
-    \  }\n\n  u32 C(long long n, long long m) {\n    if (n < 0 or m < 0 or n < m)\
-    \ return 0;\n    u32 num = raw_cast(1), denom = raw_cast(1);\n    while (n) {\n\
-    \      long long n0, m0;\n      tie(n, n0) = bm.quorem(n);\n      tie(m, m0) =\
-    \ bm.quorem(m);\n      if (n0 < m0) return 0;\n      num = mul(num, raw_fac(n0));\n\
-    \      denom = mul(denom, raw_fac(n0 - m0));\n      denom = mul(denom, raw_fac(m0));\n\
-    \    }\n    return get(mul(num, inv(denom)));\n  }\n};\n\nstruct prime_power_binomial\
-    \ {\n  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int delta;\n  Barrett bm,\
-    \ bp;\n\n  prime_power_binomial() = default;\n\n  prime_power_binomial(int _p,\
-    \ int _q) : p(_p), q(_q) {\n    assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n\
+    \    return _mm256_sub_epi32(hiplm1, lomulrmulm1);\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  transpose8_ps(__m256&\
+    \ row0, __m256& row1, __m256& row2, __m256& row3,\n                __m256& row4,\
+    \ __m256& row5, __m256& row6, __m256& row7) {\n    __m256 __t0, __t1, __t2, __t3,\
+    \ __t4, __t5, __t6, __t7;\n    __m256 __tt0, __tt1, __tt2, __tt3, __tt4, __tt5,\
+    \ __tt6, __tt7;\n    __t0 = _mm256_unpacklo_ps(row0, row1);\n    __t1 = _mm256_unpackhi_ps(row0,\
+    \ row1);\n    __t2 = _mm256_unpacklo_ps(row2, row3);\n    __t3 = _mm256_unpackhi_ps(row2,\
+    \ row3);\n    __t4 = _mm256_unpacklo_ps(row4, row5);\n    __t5 = _mm256_unpackhi_ps(row4,\
+    \ row5);\n    __t6 = _mm256_unpacklo_ps(row6, row7);\n    __t7 = _mm256_unpackhi_ps(row6,\
+    \ row7);\n    __tt0 = _mm256_shuffle_ps(__t0, __t2, _MM_SHUFFLE(1, 0, 1, 0));\n\
+    \    __tt1 = _mm256_shuffle_ps(__t0, __t2, _MM_SHUFFLE(3, 2, 3, 2));\n    __tt2\
+    \ = _mm256_shuffle_ps(__t1, __t3, _MM_SHUFFLE(1, 0, 1, 0));\n    __tt3 = _mm256_shuffle_ps(__t1,\
+    \ __t3, _MM_SHUFFLE(3, 2, 3, 2));\n    __tt4 = _mm256_shuffle_ps(__t4, __t6, _MM_SHUFFLE(1,\
+    \ 0, 1, 0));\n    __tt5 = _mm256_shuffle_ps(__t4, __t6, _MM_SHUFFLE(3, 2, 3, 2));\n\
+    \    __tt6 = _mm256_shuffle_ps(__t5, __t7, _MM_SHUFFLE(1, 0, 1, 0));\n    __tt7\
+    \ = _mm256_shuffle_ps(__t5, __t7, _MM_SHUFFLE(3, 2, 3, 2));\n    row0 = _mm256_permute2f128_ps(__tt0,\
+    \ __tt4, 0x20);\n    row1 = _mm256_permute2f128_ps(__tt1, __tt5, 0x20);\n    row2\
+    \ = _mm256_permute2f128_ps(__tt2, __tt6, 0x20);\n    row3 = _mm256_permute2f128_ps(__tt3,\
+    \ __tt7, 0x20);\n    row4 = _mm256_permute2f128_ps(__tt0, __tt4, 0x31);\n    row5\
+    \ = _mm256_permute2f128_ps(__tt1, __tt5, 0x31);\n    row6 = _mm256_permute2f128_ps(__tt2,\
+    \ __tt6, 0x31);\n    row7 = _mm256_permute2f128_ps(__tt3, __tt7, 0x31);\n  }\n\
+    \n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n\
+    \  precalc() {\n    __attribute__((aligned(32))) u32 b1[32];\n    __attribute__((aligned(32)))\
+    \ __m256 b2[8];\n    int max = ((mod / 2) / v + 12) / 8 * 8;\n    f.resize(max\
+    \ + 1, raw_cast(1));\n    for (int i = 0; i < 32; i++) b1[i] = raw_cast(i + 1);\n\
+    \    m256 A0 = _mm256_set1_epi32(b1[0]);\n    m256 A1 = _mm256_set1_epi32(b1[0]);\n\
+    \    m256 A2 = _mm256_set1_epi32(b1[0]);\n    m256 A3 = _mm256_set1_epi32(b1[0]);\n\
+    \    m256 B0 = _mm256_load_si256((m256*)(b1 + 0));\n    m256 B1 = _mm256_load_si256((m256*)(b1\
+    \ + 8));\n    m256 B2 = _mm256_load_si256((m256*)(b1 + 16));\n    m256 B3 = _mm256_load_si256((m256*)(b1\
+    \ + 24));\n    m256 DI = _mm256_set1_epi32(mod * 2 - b1[31]);\n    for (int i\
+    \ = 1; i < (int)f.size(); i += 8) {\n      for (int j = 0; j < 8; j++) {\n   \
+    \     for (u32 loop = 0; loop < v / 32; loop++) {\n          A0 = simd_mul(A0,\
+    \ B0), A1 = simd_mul(A1, B1);\n          A2 = simd_mul(A2, B2), A3 = simd_mul(A3,\
+    \ B3);\n          B0 = simd_sub(B0, DI), B1 = simd_sub(B1, DI);\n          B2\
+    \ = simd_sub(B2, DI), B3 = simd_sub(B3, DI);\n        }\n        m256 C0 = simd_mul(A0,\
+    \ A1);\n        m256 C1 = simd_mul(A2, A3);\n        m256 C2 = simd_mul(C0, C1);\n\
+    \        _mm256_store_si256((m256*)(b2 + j), C2);\n      }\n      transpose8_ps(b2[0],\
+    \ b2[1], b2[2], b2[3], b2[4], b2[5], b2[6], b2[7]);\n      m256 D0 = simd_mul(m256(b2[0]),\
+    \ m256(b2[1]));\n      m256 D1 = simd_mul(m256(b2[2]), m256(b2[3]));\n      m256\
+    \ D2 = simd_mul(m256(b2[4]), m256(b2[5]));\n      m256 D3 = simd_mul(m256(b2[6]),\
+    \ m256(b2[7]));\n      m256 D4 = simd_mul(D0, D1);\n      m256 D5 = simd_mul(D2,\
+    \ D3);\n      m256 D6 = simd_mul(D4, D5);\n      _mm256_storeu_si256((m256*)(f.data()\
+    \ + i), D6);\n    }\n  }\n\n  u32 mod, r, n2;\n  Barrett bm;\n  m256 R, M0, M1,\
+    \ M2;\n  static constexpr u32 v = 128;\n  static_assert(v % 32 == 0);\n  vector<u32>\
+    \ f;\n\n  simd_prime_binomial() = default;\n\n  __attribute__((target(\"avx2\"\
+    ), optimize(\"O3\", \"unroll-loops\")))\n  simd_prime_binomial(u32 _mod)\n   \
+    \   : mod(_mod) {\n    assert(2 < mod && mod < (1u << 30));\n    assert(mod %\
+    \ 2 != 0);\n    r = get_r(mod);\n    n2 = -u64(mod) % mod;\n    bm = Barrett(mod);\n\
+    \    R = _mm256_set1_epi32(r);\n    M0 = _mm256_set1_epi32(0);\n    M1 = _mm256_set1_epi32(mod);\n\
+    \    M2 = _mm256_set1_epi32(mod * 2);\n    precalc();\n  }\n\n  u32 raw_fac(u64\
+    \ n) {\n    assert(n < mod);\n    if (n * 2 > mod + 2) {\n      u64 x = raw_fac(mod\
+    \ - 1 - n);\n      if (n % 2 == 0) x = mod * 2 - x;\n      return inv(x);\n  \
+    \  }\n    u32 a = f[n / v], i = n / v * v + 1;\n    u32 j = raw_cast(i), o = raw_cast(1);\n\
+    \    while (i++ <= n) {\n      a = mul(a, j), j = add(j, o);\n    }\n    return\
+    \ a;\n  }\n\n  inline u32 fac(u64 n) {\n    if (n >= mod) return 0;\n    return\
+    \ get(raw_fac(n));\n  }\n\n  u32 C(long long n, long long m) {\n    if (n < 0\
+    \ or m < 0 or n < m) return 0;\n    u32 num = raw_cast(1), denom = raw_cast(1);\n\
+    \    while (n) {\n      long long n0, m0;\n      tie(n, n0) = bm.quorem(n);\n\
+    \      tie(m, m0) = bm.quorem(m);\n      if (n0 < m0) return 0;\n      num = mul(num,\
+    \ raw_fac(n0));\n      denom = mul(denom, raw_fac(n0 - m0));\n      denom = mul(denom,\
+    \ raw_fac(m0));\n    }\n    return get(mul(num, inv(denom)));\n  }\n};\n\nstruct\
+    \ prime_power_binomial {\n  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int\
+    \ delta;\n  Barrett bm, bp;\n\n  prime_power_binomial() = default;\n\n  prime_power_binomial(int\
+    \ _p, int _q) : p(_p), q(_q) {\n    assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n\
     \    assert(_q > 0);\n    long long m = 1;\n    while (_q--) {\n      m *= p;\n\
     \      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n    }\n    M = m;\n    bm = Barrett(M),\
     \ bp = Barrett(p);\n    enumerate();\n    delta = (p == 2 && q >= 3) ? 1 : M -\
@@ -399,14 +406,14 @@ data:
     \ m));\n      d.push_back(M1[i]);\n    }\n    for (int i = 0; i < (int)cs2.size();\
     \ i++) {\n      rem.push_back(cs2[i].C(n, m));\n      d.push_back(M2[i]);\n  \
     \  }\n    return atcoder::crt(rem, d).first;\n  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n\
-    #undef PRIME_POWER_BINOMIAL_N_MAX\n\n"
+    #undef PRIME_POWER_BINOMIAL_N_MAX\n"
   dependsOn:
   - modint/barrett-reduction.hpp
   isVerificationFile: false
   path: modulo/arbitrary-mod-binomial-large.hpp
   requiredBy: []
-  timestamp: '2021-04-29 18:16:59+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-04-29 19:14:32+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
 documentation_of: modulo/arbitrary-mod-binomial-large.hpp
