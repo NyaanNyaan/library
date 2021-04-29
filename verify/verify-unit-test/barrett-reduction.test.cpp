@@ -12,10 +12,12 @@ void test(int m) {
   mint::set_mod(m);
   mint x = 1;
   int y = 1;
-  rep(loop, TEN(4)) {
+  rep(loop, TEN(3)) {
     int z = randint(0, 2 * TEN(9));
+    if (rng() & 1) z = -z;
     x *= z;
     y = 1LL * y * z % m;
+    if (y < 0) y += m;
     assert(x.x == y);
   }
 }
@@ -27,7 +29,7 @@ void Nyaan::solve() {
   test(998244353);
   test(1000000007);
   test(2 * TEN(9));
-  rep(i, TEN(4)) test(randint(1, 2 * TEN(9) + 1));
+  rep(i, TEN(5)) test(randint(1, 2 * TEN(9) + 1));
   cerr << "OK" << endl;
 
   int a, b;
