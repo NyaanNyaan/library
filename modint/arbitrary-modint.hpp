@@ -1,14 +1,16 @@
 #pragma once
 
-
+#include "barrett-reduction.hpp"
 
 struct ArbitraryModInt {
   int x;
 
   ArbitraryModInt() : x(0) {}
 
-  ArbitraryModInt(int64_t y)
-      : x(y >= 0 ? y % get_mod() : (get_mod() - (-y) % get_mod()) % get_mod()) {
+  ArbitraryModInt(int64_t y) {
+    int z = y % get_mod();
+    if (z < 0) z += get_mod();
+    x = z;
   }
 
   ArbitraryModInt &operator+=(const ArbitraryModInt &p) {
@@ -22,10 +24,7 @@ struct ArbitraryModInt {
   }
 
   ArbitraryModInt &operator*=(const ArbitraryModInt &p) {
-    unsigned long long a = (unsigned long long)x * p.x;
-    unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;
-    asm("divl %4; \n\t" : "=a"(d), "=d"(m) : "d"(xh), "a"(xl), "r"(get_mod()));
-    x = m;
+    x = rem((unsigned long long)x * p.x);
     return *this;
   }
 
@@ -89,10 +88,21 @@ struct ArbitraryModInt {
 
   int get() const { return x; }
 
-  static int &get_mod() {
+  inline unsigned int rem(unsigned long long p) { return barrett().rem(p); }
+
+  static inline Barrett &barrett() {
+    static Barrett b;
+    return b;
+  }
+
+  static inline int &get_mod() {
     static int mod = 0;
     return mod;
   }
 
-  static void set_mod(int md) { get_mod() = md; }
+  static void set_mod(int md) {
+    assert(md <= 2000000000 + 10);
+    get_mod() = md;
+    barrett() = Barrett(md);
+  }
 };

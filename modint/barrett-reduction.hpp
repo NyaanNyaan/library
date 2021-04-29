@@ -1,6 +1,5 @@
 #pragma once
 
-#include <cassert>
 #include <utility>
 using namespace std;
 
@@ -11,7 +10,7 @@ struct Barrett {
   u32 m;
   u64 im;
   Barrett() : m(), im() {}
-  Barrett(int n) : m(n), im(u64(-1) / m + 1) { assert(1 < n); }
+  Barrett(int n) : m(n), im(u64(-1) / m + 1) {}
   constexpr inline i64 quo(u64 n) {
     u64 x = u64((__uint128_t(n) * im) >> 64);
     u32 r = n - x * m;
