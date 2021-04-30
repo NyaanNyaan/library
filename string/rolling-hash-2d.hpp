@@ -1,10 +1,8 @@
 #pragma once
 
-
-
 #include "../inner/inner-hash.hpp"
 
-template <typename Str, int BASE_NUM = 1>
+template <typename Str, int BASE_NUM = 2>
 struct RollingHash2D {
   using Hash = inner::Hash<BASE_NUM>;
   using u64 = unsigned long long;
@@ -30,7 +28,7 @@ struct RollingHash2D {
     for (int i = 1; i <= h; i++) {
       hs[i][0] = Hash::set(0);
       for (int j = 1; j <= w; j++)
-        hs[i][j] = pfma(hs[i][j - 1], basis[1], Hash::cast(S[i - 1][j - 1]));
+        hs[i][j] = pfma(hs[i][j - 1], basis[1], S[i - 1][j - 1]);
     }
     for (int j = 1; j <= w; j++) {
       hs[0][j] = Hash::set(0);
@@ -48,18 +46,18 @@ struct RollingHash2D {
     Hash ret = Hash::set(0);
     for (int i = 0; i < (int)T.size(); i++) {
       Hash h = Hash::set(0);
-      for(int j = 0; j < (int)T[0].size(); j++) 
-        h = pfma(h, basis[1], Hash::cast(T[i][j]));
+      for (int j = 0; j < (int)T[0].size(); j++)
+        h = pfma(h, basis[1], T[i][j]);
       ret = pfma(ret, basis[0], h);
     }
     return ret;
   }
-
 };
 
 template <typename Str, int BASE_NUM>
-typename RollingHash2D<Str, BASE_NUM>::Hash RollingHash2D<Str, BASE_NUM>::basis[2] =
-    {inner::Hash<BASE_NUM>::get_basis(), inner::Hash<BASE_NUM>::get_basis()};
+typename RollingHash2D<Str, BASE_NUM>::Hash
+    RollingHash2D<Str, BASE_NUM>::basis[2] = {
+        inner::Hash<BASE_NUM>::get_basis(), inner::Hash<BASE_NUM>::get_basis()};
 using roriha2d = RollingHash2D<string, 1>;
 
 /**

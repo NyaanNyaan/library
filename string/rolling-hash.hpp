@@ -1,10 +1,8 @@
 #pragma once
 
-
-
 #include "../inner/inner-hash.hpp"
 
-template <typename Str, int BASE_NUM = 1>
+template <typename Str, int BASE_NUM = 2>
 struct RollingHash {
   using Hash = inner::Hash<BASE_NUM>;
   Str data;
@@ -23,7 +21,7 @@ struct RollingHash {
     hs[0] = Hash::set(0);
     for (int i = 1; i <= s; i++) {
       pw[i] = pw[i - 1] * basis;
-      hs[i] = pfma(hs[i - 1], basis, Hash::cast(S[i - 1]));
+      hs[i] = pfma(hs[i - 1], basis, S[i - 1]);
     }
   }
 
@@ -34,8 +32,7 @@ struct RollingHash {
 
   static Hash get_hash(const Str &T) {
     Hash ret = Hash::set(0);
-    for (int i = 0; i < (int)T.size(); i++)
-      ret = pfma(ret, basis, Hash::cast(T[i]));
+    for (int i = 0; i < (int)T.size(); i++) ret = pfma(ret, basis, T[i]);
     return ret;
   }
 
@@ -60,9 +57,10 @@ struct RollingHash {
     if (ar == -1) ar = a.size();
     if (br == -1) br = b.size();
     int n = min<int>({LCP(a, b, al, bl), ar - al, br - bl});
-    return al + n == ar
-               ? bl + n == br ? 0 : 1
-               : bl + n == br ? -1 : a.data[al + n] < b.data[bl + n] ? 1 : -1;
+    return al + n == ar                      ? bl + n == br ? 0 : 1
+           : bl + n == br                    ? -1
+           : a.data[al + n] < b.data[bl + n] ? 1
+                                             : -1;
   }
 
   int size() const { return s; }
@@ -71,7 +69,7 @@ struct RollingHash {
 template <typename Str, int BASE_NUM>
 typename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =
     inner::Hash<BASE_NUM>::get_basis();
-using roriha = RollingHash<string, 1>;
+using roriha = RollingHash<string, 2>;
 
 /**
  * @brief Rolling Hash
