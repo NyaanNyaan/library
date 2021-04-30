@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: inner/inner-hash.hpp
-    title: inner/inner-hash.hpp
+    title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
   - icon: ':heavy_check_mark:'
     path: string/rolling-hash-2d.hpp
     title: "\u4E8C\u6B21\u5143Rolling Hash"
@@ -173,49 +173,50 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"string/rolling-hash-2d.hpp\"\
-    \n\n\n\n#line 2 \"inner/inner-hash.hpp\"\n\nnamespace inner {\nusing u64 = unsigned\
-    \ long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM>\nstruct Hash\
-    \ : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n  static\
-    \ constexpr int n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\n  static\
-    \ constexpr u64 md = (1ull << 61) - 1;\n\n  static u64 cast(const int64_t &a)\
-    \ { return a < 0 ? a + md : a; }\n\n  static inline constexpr u64 modmul(const\
-    \ u64 &a, const u64 &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) +\
-    \ (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr\
-    \ u64 modfma(const u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a)\
-    \ * b + c;\n    ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret -\
-    \ md : ret;\n  }\n  constexpr static Hash set(u64 a) {\n    Hash res;\n    for\
-    \ (int i = 0; i < n; i++) res[i] = a;\n    return res;\n  }\n  Hash &operator+=(const\
-    \ Hash &r) {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i])\
-    \ >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator+=(const u64\
-    \ &r) {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += r) >= md) (*this)[i]\
-    \ -= md;\n    return *this;\n  }\n  Hash &operator-=(const Hash &r) {\n    for\
-    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md) (*this)[i]\
-    \ -= md;\n    return *this;\n  }\n  Hash &operator-=(const u64 &r) {\n    for\
-    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r) >= md) (*this)[i]\
-    \ -= md;\n    return *this;\n  }\n  inline Hash &operator*=(const Hash &r) {\n\
-    \    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i], r[i]);\n    return\
-    \ *this;\n  }\n  Hash operator+(const Hash &r) { return Hash(*this) += r; }\n\
-    \  Hash operator+(const u64 &r) { return Hash(*this) += r; }\n  Hash operator-(const\
-    \ Hash &r) { return Hash(*this) -= r; }\n  Hash operator-(const u64 &r) { return\
-    \ Hash(*this) -= r; }\n  inline Hash operator*(const Hash &r) { return Hash(*this)\
-    \ *= r; }\n  Hash operator-() const {\n    Hash res;\n    for (int i = 0; i <\
-    \ n; i++) res[i] = (*this)[i] == 0 ? 0 : md - (*this)[i];\n    return res;\n \
-    \ }\n  friend Hash pfma(const Hash &a, const Hash &b, const Hash &c) {\n    Hash\
-    \ res;\n    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], c[i]);\n \
-    \   return res;\n  }\n  friend Hash pfma(const Hash &a, const Hash &b, const u64\
-    \ &c) {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = modfma(a[i],\
-    \ b[i], c);\n    return res;\n  }\n\n  static Hash get_basis() {\n    constexpr\
-    \ u64 ds[] = {2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331, 1321};\n    static auto\
-    \ rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n         \
-    \   chrono::high_resolution_clock::now().time_since_epoch())\n            .count();\n\
-    \    static mt19937_64 rng(rand_time);\n\n    auto modpow = [&](u64 a, u64 b)\
-    \ {\n      u64 r = 1;\n      for (a %= md; b; a = modmul(a, a), b >>= 1) r = modmul(r,\
-    \ a);\n      return r;\n    };\n    auto isPrimitive = [&](u64 x) {\n      for\
-    \ (auto &d : ds)\n        if (modpow(x, (md - 1) / d) <= 1) return false;\n  \
-    \    return true;\n    };\n\n    Hash h;\n    for (int i = 0; i < n; i++) {\n\
-    \      while (isPrimitive(h[i] = rng() % (md - 1) + 1) == false)\n        ;\n\
-    \    }\n    return h;\n  }\n};\n\n}  // namespace inner\n#line 6 \"string/rolling-hash-2d.hpp\"\
-    \n\ntemplate <typename Str, int BASE_NUM = 1>\nstruct RollingHash2D {\n  using\
+    \n\n#line 2 \"inner/inner-hash.hpp\"\n\nnamespace inner {\nusing u64 = unsigned\
+    \ long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct\
+    \ Hash : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n \
+    \ static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\
+    \n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr static Hash set(const\
+    \ long long &a) {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = cast(a);\n\
+    \    return res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for (int i = 0;\
+    \ i < n; i++)\n      if (((*this)[i] += r[i]) >= md) (*this)[i] -= md;\n    return\
+    \ *this;\n  }\n  Hash &operator+=(const u64 &r) {\n    for (int i = 0; i < n;\
+    \ i++)\n      if (((*this)[i] += r) >= md) (*this)[i] -= md;\n    return *this;\n\
+    \  }\n  Hash &operator-=(const Hash &r) {\n    for (int i = 0; i < n; i++)\n \
+    \     if (((*this)[i] += md - r[i]) >= md) (*this)[i] -= md;\n    return *this;\n\
+    \  }\n  Hash &operator-=(const u64 &r) {\n    for (int i = 0; i < n; i++)\n  \
+    \    if (((*this)[i] += md - r) >= md) (*this)[i] -= md;\n    return *this;\n\
+    \  }\n  inline Hash &operator*=(const Hash &r) {\n    for (int i = 0; i < n; i++)\
+    \ (*this)[i] = modmul((*this)[i], r[i]);\n    return *this;\n  }\n  Hash operator+(const\
+    \ Hash &r) { return Hash(*this) += r; }\n  Hash operator+(const u64 &r) { return\
+    \ Hash(*this) += r; }\n  Hash operator-(const Hash &r) { return Hash(*this) -=\
+    \ r; }\n  Hash operator-(const u64 &r) { return Hash(*this) -= r; }\n  inline\
+    \ Hash operator*(const Hash &r) { return Hash(*this) *= r; }\n  Hash operator-()\
+    \ const {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = (*this)[i]\
+    \ == 0 ? 0 : md - (*this)[i];\n    return res;\n  }\n  friend Hash pfma(const\
+    \ Hash &a, const Hash &b, const Hash &c) {\n    Hash res;\n    for (int i = 0;\
+    \ i < n; i++) res[i] = modfma(a[i], b[i], c[i]);\n    return res;\n  }\n  friend\
+    \ Hash pfma(const Hash &a, const Hash &b, const long long &c) {\n    Hash res;\n\
+    \    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], cast(c));\n    return\
+    \ res;\n  }\n\n  static Hash get_basis() {\n    static auto rand_time =\n    \
+    \    chrono::duration_cast<chrono::nanoseconds>(\n            chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \            .count();\n    static mt19937_64 rng(rand_time);\n    Hash h;\n \
+    \   for (int i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md\
+    \ - 1) + 1) == false)\n        ;\n    }\n    return h;\n  }\n\n private:\n  static\
+    \ u64 modpow(u64 a, u64 b) {\n    u64 r = 1;\n    for (a %= md; b; a = modmul(a,\
+    \ a), b >>= 1) r = modmul(r, a);\n    return r;\n  }\n  static bool isPrimitive(u64\
+    \ x) {\n    for (auto &d : vector<u64>{2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331,\
+    \ 1321})\n      if (modpow(x, (md - 1) / d) <= 1) return false;\n    return true;\n\
+    \  }\n  static inline constexpr u64 cast(const long long &a) {\n    return a <\
+    \ 0 ? a + md : a;\n  }\n  static inline constexpr u64 modmul(const u64 &a, const\
+    \ u64 &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) + (ret >> 61);\n\
+    \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
+    \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
+    \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
+    };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
+    \u4F53\n * @docs docs/inner/inner-hash.md\n */\n#line 4 \"string/rolling-hash-2d.hpp\"\
+    \n\ntemplate <typename Str, int BASE_NUM = 2>\nstruct RollingHash2D {\n  using\
     \ Hash = inner::Hash<BASE_NUM>;\n  using u64 = unsigned long long;\n  vector<Str>\
     \ data;\n  vector<vector<Hash>> hs;\n  vector<Hash> pw[2];\n  int h, w;\n  static\
     \ Hash basis[2];\n\n  RollingHash2D(const vector<Str> &S = vector<Str>()) { build(S);\
@@ -226,17 +227,17 @@ data:
     \ - 1] * basis[1];\n    hs.resize(h + 1, vector<Hash>(w + 1));\n    hs[0][0] =\
     \ Hash::set(0);\n    for (int i = 1; i <= h; i++) {\n      hs[i][0] = Hash::set(0);\n\
     \      for (int j = 1; j <= w; j++)\n        hs[i][j] = pfma(hs[i][j - 1], basis[1],\
-    \ Hash::cast(S[i - 1][j - 1]));\n    }\n    for (int j = 1; j <= w; j++) {\n \
-    \     hs[0][j] = Hash::set(0);\n      for (int i = 1; i <= h; i++)\n        hs[i][j]\
-    \ = pfma(hs[i - 1][j], basis[0], hs[i][j]);\n    }\n  }\n\n  Hash get(int u, int\
-    \ l, int d, int r) {\n    return hs[d][r] - hs[u][r] * pw[0][d - u] - hs[d][l]\
-    \ * pw[1][r - l] +\n           hs[u][l] * pw[0][d - u] * pw[1][r - l];\n  }\n\n\
-    \  static Hash get_hash(const vector<Str> &T) {\n    Hash ret = Hash::set(0);\n\
-    \    for (int i = 0; i < (int)T.size(); i++) {\n      Hash h = Hash::set(0);\n\
-    \      for(int j = 0; j < (int)T[0].size(); j++) \n        h = pfma(h, basis[1],\
-    \ Hash::cast(T[i][j]));\n      ret = pfma(ret, basis[0], h);\n    }\n    return\
-    \ ret;\n  }\n\n};\n\ntemplate <typename Str, int BASE_NUM>\ntypename RollingHash2D<Str,\
-    \ BASE_NUM>::Hash RollingHash2D<Str, BASE_NUM>::basis[2] =\n    {inner::Hash<BASE_NUM>::get_basis(),\
+    \ S[i - 1][j - 1]);\n    }\n    for (int j = 1; j <= w; j++) {\n      hs[0][j]\
+    \ = Hash::set(0);\n      for (int i = 1; i <= h; i++)\n        hs[i][j] = pfma(hs[i\
+    \ - 1][j], basis[0], hs[i][j]);\n    }\n  }\n\n  Hash get(int u, int l, int d,\
+    \ int r) {\n    return hs[d][r] - hs[u][r] * pw[0][d - u] - hs[d][l] * pw[1][r\
+    \ - l] +\n           hs[u][l] * pw[0][d - u] * pw[1][r - l];\n  }\n\n  static\
+    \ Hash get_hash(const vector<Str> &T) {\n    Hash ret = Hash::set(0);\n    for\
+    \ (int i = 0; i < (int)T.size(); i++) {\n      Hash h = Hash::set(0);\n      for\
+    \ (int j = 0; j < (int)T[0].size(); j++)\n        h = pfma(h, basis[1], T[i][j]);\n\
+    \      ret = pfma(ret, basis[0], h);\n    }\n    return ret;\n  }\n};\n\ntemplate\
+    \ <typename Str, int BASE_NUM>\ntypename RollingHash2D<Str, BASE_NUM>::Hash\n\
+    \    RollingHash2D<Str, BASE_NUM>::basis[2] = {\n        inner::Hash<BASE_NUM>::get_basis(),\
     \ inner::Hash<BASE_NUM>::get_basis()};\nusing roriha2d = RollingHash2D<string,\
     \ 1>;\n\n/**\n * @brief \u4E8C\u6B21\u5143Rolling Hash\n * @docs docs/string/rolling-hash-2d.md\n\
     \ */\n#line 6 \"verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp\"\n\nusing\
@@ -262,7 +263,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 17:20:14+09:00'
+  timestamp: '2021-04-30 22:00:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp

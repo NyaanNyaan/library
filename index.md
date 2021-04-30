@@ -270,7 +270,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: inner/inner-hash.hpp
-      title: inner/inner-hash.hpp
+      title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
     - icon: ':heavy_check_mark:'
       path: inner/inner_math.hpp
       title: inner/inner_math.hpp
