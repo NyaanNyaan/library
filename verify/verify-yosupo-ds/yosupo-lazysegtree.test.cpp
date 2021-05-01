@@ -21,7 +21,7 @@ using namespace Nyaan; void Nyaan::solve() {
   V<P> a(N, {0, 1});
   rep(i, N) in(a[i].first);
 
-  LST<P, P, decltype(f), decltype(g), decltype(h)> seg(a, f, g, h, ti, ei);
+  LazySegmentTree<P, P, decltype(f), decltype(g), decltype(h)> seg(a, f, g, h, ti, ei);
 
   rep(_, Q) {
     ini(cmd);

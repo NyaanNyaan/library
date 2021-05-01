@@ -2,7 +2,7 @@
 
 // LazySegmentTree
 template <typename T, typename E, typename F, typename G, typename H>
-struct LST {
+struct LazySegmentTree {
   int n, height;
   F f;
   G g;
@@ -11,26 +11,26 @@ struct LST {
   E ei;
   vector<T> dat;
   vector<E> laz;
-  LST(int n, F f, G g, H h, T ti, E ei) : f(f), g(g), h(h), ti(ti), ei(ei) {
+  LazySegmentTree(int n, F _f, G _g, H _h, T _ti, E _ei)
+      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {
     init(n);
   }
-  LST(const vector<T> &v, F f, G g, H h, T ti, E ei)
-      : f(f), g(g), h(h), ti(ti), ei(ei) {
+  LazySegmentTree(const vector<T> &v, F _f, G _g, H _h, T _ti, E _ei)
+      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {
     init((int)v.size());
     build(v);
   }
-
-  void init(int n_) {
+  void init(int _n) {
     n = 1;
     height = 0;
-    while (n < n_) n <<= 1, height++;
+    while (n < _n) n <<= 1, height++;
     dat.assign(2 * n, ti);
     laz.assign(2 * n, ei);
   }
   void build(const vector<T> &v) {
-    int n_ = v.size();
-    init(n_);
-    for (int i = 0; i < n_; i++) dat[n + i] = v[i];
+    int _n = v.size();
+    init(_n);
+    for (int i = 0; i < _n; i++) dat[n + i] = v[i];
     for (int i = n - 1; i; i--)
       dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);
   }
