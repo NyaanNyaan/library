@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/rolling-hash.hpp
     title: Rolling Hash
+  - icon: ':warning:'
+    path: tree/tree-hash.hpp
+    title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
@@ -117,6 +120,7 @@ data:
   requiredBy:
   - string/rolling-hash-2d.hpp
   - string/rolling-hash.hpp
+  - tree/tree-hash.hpp
   timestamp: '2021-04-30 22:00:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

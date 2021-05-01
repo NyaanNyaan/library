@@ -766,6 +766,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
+    - icon: ':warning:'
+      path: tree/tree-hash.hpp
+      title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
     - icon: ':heavy_check_mark:'
       path: tree/tree-query.hpp
       title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
