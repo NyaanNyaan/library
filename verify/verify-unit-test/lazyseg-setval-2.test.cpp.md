@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/lazy-segment-tree.hpp
     title: segment-tree/lazy-segment-tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -219,11 +219,11 @@ data:
     \ 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) vl = f(vl, reflect(l++));\n\
     \      if (r & 1) vr = f(reflect(--r), vr);\n    }\n    return f(vl, vr);\n  }\n\
     };\n#line 7 \"verify/verify-unit-test/lazyseg-setval-2.test.cpp\"\n\nusing namespace\
-    \ Nyaan;\n\nauto f = [&](pl a, pl b) { return pl(a.first + b.first, a.second +\
-    \ b.second); };\nauto g = [&](pl a, ll b) { return pl(a.first + a.second * b,\
-    \ b); };\nauto h = [&](ll a, ll b) { return a + b; };\npl ti{0, 0};\nll ei{0};\n\
-    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q\
-    \ = 1000000;\n  vl init(N);\n  LazySegmentTree<pl, ll, decltype(f), decltype(g),\
+    \ Nyaan;\n\nauto f = [](pl a, pl b) { return pl(a.first + b.first, a.second +\
+    \ b.second); };\nauto g = [](pl a, ll b) { return pl(a.first + a.second * b, b);\
+    \ };\nauto h = [](ll a, ll b) { return a + b; };\npl ti{0, 0};\nll ei{0};\n\n\
+    using namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q =\
+    \ 1000000;\n  vl init(N);\n  LazySegmentTree<pl, ll, decltype(f), decltype(g),\
     \ decltype(h)> seg(\n      vp(N), f, g, h, ti, ei);\n\n  rep(i, Q) {\n    if (rng()\
     \ & 1) {\n      int l, r;\n      l = randint(0, N);\n      r = randint(0, N);\n\
     \      if (l > r) swap(l, r);\n      r++;\n      seg.update(l, r, randint(0, TEN(6)));\n\
@@ -233,17 +233,17 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include\
     \ \"../../segment-tree/lazy-segment-tree.hpp\"\n\nusing namespace Nyaan;\n\nauto\
-    \ f = [&](pl a, pl b) { return pl(a.first + b.first, a.second + b.second); };\n\
-    auto g = [&](pl a, ll b) { return pl(a.first + a.second * b, b); };\nauto h =\
-    \ [&](ll a, ll b) { return a + b; };\npl ti{0, 0};\nll ei{0};\n\nusing namespace\
-    \ Nyaan;\n\nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q = 1000000;\n  vl\
-    \ init(N);\n  LazySegmentTree<pl, ll, decltype(f), decltype(g), decltype(h)> seg(\n\
-    \      vp(N), f, g, h, ti, ei);\n\n  rep(i, Q) {\n    if (rng() & 1) {\n     \
-    \ int l, r;\n      l = randint(0, N);\n      r = randint(0, N);\n      if (l >\
-    \ r) swap(l, r);\n      r++;\n      seg.update(l, r, randint(0, TEN(6)));\n  \
-    \  } else {\n      int x = randint(0, N);\n      ll v = seg.get_val(x).first;\n\
-    \      ll w = seg.query(x, x + 1).first;\n      assert(v == w);\n    }\n  }\n\n\
-    \  {\n    ini(a, b);\n    out(a + b);\n  }\n}"
+    \ f = [](pl a, pl b) { return pl(a.first + b.first, a.second + b.second); };\n\
+    auto g = [](pl a, ll b) { return pl(a.first + a.second * b, b); };\nauto h = [](ll\
+    \ a, ll b) { return a + b; };\npl ti{0, 0};\nll ei{0};\n\nusing namespace Nyaan;\n\
+    \nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q = 1000000;\n  vl init(N);\n\
+    \  LazySegmentTree<pl, ll, decltype(f), decltype(g), decltype(h)> seg(\n     \
+    \ vp(N), f, g, h, ti, ei);\n\n  rep(i, Q) {\n    if (rng() & 1) {\n      int l,\
+    \ r;\n      l = randint(0, N);\n      r = randint(0, N);\n      if (l > r) swap(l,\
+    \ r);\n      r++;\n      seg.update(l, r, randint(0, TEN(6)));\n    } else {\n\
+    \      int x = randint(0, N);\n      ll v = seg.get_val(x).first;\n      ll w\
+    \ = seg.query(x, x + 1).first;\n      assert(v == w);\n    }\n  }\n\n  {\n   \
+    \ ini(a, b);\n    out(a + b);\n  }\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -256,8 +256,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
   requiredBy: []
-  timestamp: '2021-05-01 16:47:41+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-01 17:18:43+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/lazyseg-setval-2.test.cpp
 layout: document

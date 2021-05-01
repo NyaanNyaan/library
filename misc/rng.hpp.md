@@ -33,7 +33,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/interval-union.test.cpp
     title: verify/verify-unit-test/interval-union.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
     title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -111,9 +111,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\n\
@@ -160,7 +160,7 @@ data:
   - tree/pruefer-code.hpp
   - prime/fast-factorize.hpp
   timestamp: '2020-12-08 00:23:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
