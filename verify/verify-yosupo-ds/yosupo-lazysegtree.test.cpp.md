@@ -207,14 +207,15 @@ data:
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\n\
     template <typename T, typename E, typename F, typename G, typename H>\nstruct\
-    \ LST {\n  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n  vector<T>\
-    \ dat;\n  vector<E> laz;\n  LST(int n, F f, G g, H h, T ti, E ei) : f(f), g(g),\
-    \ h(h), ti(ti), ei(ei) {\n    init(n);\n  }\n  LST(const vector<T> &v, F f, G\
-    \ g, H h, T ti, E ei)\n      : f(f), g(g), h(h), ti(ti), ei(ei) {\n    init((int)v.size());\n\
-    \    build(v);\n  }\n\n  void init(int n_) {\n    n = 1;\n    height = 0;\n  \
-    \  while (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2\
-    \ * n, ei);\n  }\n  void build(const vector<T> &v) {\n    int n_ = v.size();\n\
-    \    init(n_);\n    for (int i = 0; i < n_; i++) dat[n + i] = v[i];\n    for (int\
+    \ LazySegmentTree {\n  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n\
+    \  vector<T> dat;\n  vector<E> laz;\n  LazySegmentTree(int n, F _f, G _g, H _h,\
+    \ T _ti, E _ei)\n      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init(n);\n\
+    \  }\n  LazySegmentTree(const vector<T> &v, F _f, G _g, H _h, T _ti, E _ei)\n\
+    \      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init((int)v.size());\n \
+    \   build(v);\n  }\n  void init(int _n) {\n    n = 1;\n    height = 0;\n    while\
+    \ (n < _n) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2 *\
+    \ n, ei);\n  }\n  void build(const vector<T> &v) {\n    int _n = v.size();\n \
+    \   init(_n);\n    for (int i = 0; i < _n; i++) dat[n + i] = v[i];\n    for (int\
     \ i = n - 1; i; i--)\n      dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);\n\
     \  }\n  inline T reflect(int k) { return laz[k] == ei ? dat[k] : g(dat[k], laz[k]);\
     \ }\n  inline void eval(int k) {\n    if (laz[k] == ei) return;\n    laz[(k <<\
@@ -239,10 +240,10 @@ data:
     \   return P{a.first * b.first + a.second * b.second, a.second};\n  };\n  auto\
     \ h = [](P a, P b) {\n    return P{a.first * b.first, a.second * b.first + b.second};\n\
     \  };\n  P ti = {0, 0};\n  P ei = {1, 0};\n  ini(N, Q);\n  V<P> a(N, {0, 1});\n\
-    \  rep(i, N) in(a[i].first);\n\n  LST<P, P, decltype(f), decltype(g), decltype(h)>\
-    \ seg(a, f, g, h, ti, ei);\n\n  rep(_, Q) {\n    ini(cmd);\n    if (!cmd) {\n\
-    \      inl(l, r, b, c);\n      seg.update(l, r, {b, c});\n    } else {\n     \
-    \ inl(l, r);\n      out(seg.query(l, r).first);\n    }\n  }\n}\n"
+    \  rep(i, N) in(a[i].first);\n\n  LazySegmentTree<P, P, decltype(f), decltype(g),\
+    \ decltype(h)> seg(a, f, g, h, ti, ei);\n\n  rep(_, Q) {\n    ini(cmd);\n    if\
+    \ (!cmd) {\n      inl(l, r, b, c);\n      seg.update(l, r, {b, c});\n    } else\
+    \ {\n      inl(l, r);\n      out(seg.query(l, r).first);\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
     \n#include \"../../segment-tree/lazy-segment-tree.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
@@ -251,8 +252,8 @@ data:
     \  auto g = [](P a, P b) {\n    return P{a.first * b.first + a.second * b.second,\
     \ a.second};\n  };\n  auto h = [](P a, P b) {\n    return P{a.first * b.first,\
     \ a.second * b.first + b.second};\n  };\n  P ti = {0, 0};\n  P ei = {1, 0};\n\
-    \  ini(N, Q);\n  V<P> a(N, {0, 1});\n  rep(i, N) in(a[i].first);\n\n  LST<P, P,\
-    \ decltype(f), decltype(g), decltype(h)> seg(a, f, g, h, ti, ei);\n\n  rep(_,\
+    \  ini(N, Q);\n  V<P> a(N, {0, 1});\n  rep(i, N) in(a[i].first);\n\n  LazySegmentTree<P,\
+    \ P, decltype(f), decltype(g), decltype(h)> seg(a, f, g, h, ti, ei);\n\n  rep(_,\
     \ Q) {\n    ini(cmd);\n    if (!cmd) {\n      inl(l, r, b, c);\n      seg.update(l,\
     \ r, {b, c});\n    } else {\n      inl(l, r);\n      out(seg.query(l, r).first);\n\
     \    }\n  }\n}"
@@ -268,7 +269,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 17:20:14+09:00'
+  timestamp: '2021-05-01 09:18:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
