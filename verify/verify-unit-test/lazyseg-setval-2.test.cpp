@@ -7,9 +7,9 @@
 
 using namespace Nyaan;
 
-auto f = [&](pl a, pl b) { return pl(a.first + b.first, a.second + b.second); };
-auto g = [&](pl a, ll b) { return pl(a.first + a.second * b, b); };
-auto h = [&](ll a, ll b) { return a + b; };
+auto f = [](pl a, pl b) { return pl(a.first + b.first, a.second + b.second); };
+auto g = [](pl a, ll b) { return pl(a.first + a.second * b, b); };
+auto h = [](ll a, ll b) { return a + b; };
 pl ti{0, 0};
 ll ei{0};
 
