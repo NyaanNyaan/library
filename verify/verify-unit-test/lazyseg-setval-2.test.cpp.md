@@ -1,9 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: data-structure/sliding-window-minimum.hpp
-    title: data-structure/sliding-window-minimum.hpp
+  - icon: ':question:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':question:'
+    path: segment-tree/lazy-segment-tree.hpp
+    title: segment-tree/lazy-segment-tree.hpp
   - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -24,35 +27,35 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D
-  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\n\
-    \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/lazyseg-setval-2.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
@@ -169,27 +172,78 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"data-structure/sliding-window-minimum.hpp\"\
-    \n\n// return dat | dat[i] := ( answer of range [i - K, i) )\n// T : data type\n\
-    // f : compare function\n// K : width of window\ntemplate <typename T, typename\
-    \ F>\nvector<T> SlideWindowMinimum(vector<T> &v, F f, int K) {\n  vector<T> dat;\n\
-    \  int N = v.size();\n  dat.resize(N + 1);\n  dat[0] = 0;\n  deque<int> q;\n \
-    \ for (int i = 0; i < K - 1; i++) {\n    while (!q.empty() && (f(v[i], v[q.back()])\
-    \ == v[i])) q.pop_back();\n    q.push_back(i);\n    dat[i + 1] = v[q.front()];\n\
-    \  }\n  for (int i = K; i < N + 1; i++) {\n    T cur = v[i - 1];\n    while (!q.empty()\
-    \ && (f(cur, v[q.back()]) == cur)) q.pop_back();\n    q.push_back(i - 1);\n  \
-    \  dat[i] = v[q.front()];\n    if (q.front() == i - K) q.pop_front();\n  }\n \
-    \ return dat;\n}\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp\"\n\nusing\
-    \ namespace Nyaan; void Nyaan::solve() {\n  ini(N, L);\n  vi a(N);\n  in(a);\n\
-    \  auto f = [](int a, int b) { return min(a, b); };\n  auto dat = SlideWindowMinimum<int,\
-    \ decltype(f)>(a, f, L);\n  dat.erase(begin(dat), begin(dat) + L);\n  out(dat);\n\
-    }\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure/sliding-window-minimum.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, L);\n  vi a(N);\n \
-    \ in(a);\n  auto f = [](int a, int b) { return min(a, b); };\n  auto dat = SlideWindowMinimum<int,\
-    \ decltype(f)>(a, f, L);\n  dat.erase(begin(dat), begin(dat) + L);\n  out(dat);\n\
-    }"
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/lazyseg-setval-2.test.cpp\"\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
+    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\ntemplate\
+    \ <typename T, typename E, typename F, typename G, typename H>\nstruct LazySegmentTree\
+    \ {\n  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n  vector<T> dat;\n\
+    \  vector<E> laz;\n  LazySegmentTree(int n, F _f, G _g, H _h, T _ti, E _ei)\n\
+    \      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init(n);\n  }\n  LazySegmentTree(const\
+    \ vector<T> &v, F _f, G _g, H _h, T _ti, E _ei)\n      : f(_f), g(_g), h(_h),\
+    \ ti(_ti), ei(_ei) {\n    init((int)v.size());\n    build(v);\n  }\n  void init(int\
+    \ _n) {\n    n = 1;\n    height = 0;\n    while (n < _n) n <<= 1, height++;\n\
+    \    dat.assign(2 * n, ti);\n    laz.assign(2 * n, ei);\n  }\n  void build(const\
+    \ vector<T> &v) {\n    int _n = v.size();\n    init(_n);\n    for (int i = 0;\
+    \ i < _n; i++) dat[n + i] = v[i];\n    for (int i = n - 1; i; i--)\n      dat[i]\
+    \ = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);\n  }\n  inline T reflect(int k) {\
+    \ return laz[k] == ei ? dat[k] : g(dat[k], laz[k]); }\n  inline void eval(int\
+    \ k) {\n    if (laz[k] == ei) return;\n    laz[(k << 1) | 0] = h(laz[(k << 1)\
+    \ | 0], laz[k]);\n    laz[(k << 1) | 1] = h(laz[(k << 1) | 1], laz[k]);\n    dat[k]\
+    \ = reflect(k);\n    laz[k] = ei;\n  }\n  inline void thrust(int k) {\n    for\
+    \ (int i = height; i; i--) eval(k >> i);\n  }\n  inline void recalc(int k) {\n\
+    \    while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1) | 1));\n\
+    \  }\n  void update(int a, int b, E x) {\n    if (a >= b) return;\n    thrust(a\
+    \ += n);\n    thrust(b += n - 1);\n    for (int l = a, r = b + 1; l < r; l >>=\
+    \ 1, r >>= 1) {\n      if (l & 1) laz[l] = h(laz[l], x), l++;\n      if (r & 1)\
+    \ --r, laz[r] = h(laz[r], x);\n    }\n    recalc(a);\n    recalc(b);\n  }\n  void\
+    \ set_val(int a, T x) {\n    thrust(a += n);\n    dat[a] = x;\n    laz[a] = ei;\n\
+    \    recalc(a);\n  }\n  T get_val(int a) {\n    thrust(a += n);\n    return reflect(a);\n\
+    \  }\n  T query(int a, int b) {\n    if (a >= b) return ti;\n    thrust(a += n);\n\
+    \    thrust(b += n - 1);\n    T vl = ti, vr = ti;\n    for (int l = a, r = b +\
+    \ 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) vl = f(vl, reflect(l++));\n\
+    \      if (r & 1) vr = f(reflect(--r), vr);\n    }\n    return f(vl, vr);\n  }\n\
+    };\n#line 7 \"verify/verify-unit-test/lazyseg-setval-2.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nauto f = [&](pl a, pl b) { return pl(a.first + b.first, a.second +\
+    \ b.second); };\nauto g = [&](pl a, ll b) { return pl(a.first + a.second * b,\
+    \ b); };\nauto h = [&](ll a, ll b) { return a + b; };\npl ti{0, 0};\nll ei{0};\n\
+    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q\
+    \ = 1000000;\n  vl init(N);\n  LazySegmentTree<pl, ll, decltype(f), decltype(g),\
+    \ decltype(h)> seg(\n      vp(N), f, g, h, ti, ei);\n\n  rep(i, Q) {\n    if (rng()\
+    \ & 1) {\n      int l, r;\n      l = randint(0, N);\n      r = randint(0, N);\n\
+    \      if (l > r) swap(l, r);\n      r++;\n      seg.update(l, r, randint(0, TEN(6)));\n\
+    \    } else {\n      int x = randint(0, N);\n      ll v = seg.get_val(x).first;\n\
+    \      ll w = seg.query(x, x + 1).first;\n      assert(v == w);\n    }\n  }\n\n\
+    \  {\n    ini(a, b);\n    out(a + b);\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include\
+    \ \"../../segment-tree/lazy-segment-tree.hpp\"\n\nusing namespace Nyaan;\n\nauto\
+    \ f = [&](pl a, pl b) { return pl(a.first + b.first, a.second + b.second); };\n\
+    auto g = [&](pl a, ll b) { return pl(a.first + a.second * b, b); };\nauto h =\
+    \ [&](ll a, ll b) { return a + b; };\npl ti{0, 0};\nll ei{0};\n\nusing namespace\
+    \ Nyaan;\n\nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q = 1000000;\n  vl\
+    \ init(N);\n  LazySegmentTree<pl, ll, decltype(f), decltype(g), decltype(h)> seg(\n\
+    \      vp(N), f, g, h, ti, ei);\n\n  rep(i, Q) {\n    if (rng() & 1) {\n     \
+    \ int l, r;\n      l = randint(0, N);\n      r = randint(0, N);\n      if (l >\
+    \ r) swap(l, r);\n      r++;\n      seg.update(l, r, randint(0, TEN(6)));\n  \
+    \  } else {\n      int x = randint(0, N);\n      ll v = seg.get_val(x).first;\n\
+    \      ll w = seg.query(x, x + 1).first;\n      assert(v == w);\n    }\n  }\n\n\
+    \  {\n    ini(a, b);\n    out(a + b);\n  }\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -197,17 +251,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - data-structure/sliding-window-minimum.hpp
+  - misc/rng.hpp
+  - segment-tree/lazy-segment-tree.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
+  path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 17:20:14+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-05-01 16:47:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
+documentation_of: verify/verify-unit-test/lazyseg-setval-2.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
-- /verify/verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp.html
-title: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
+- /verify/verify/verify-unit-test/lazyseg-setval-2.test.cpp
+- /verify/verify/verify-unit-test/lazyseg-setval-2.test.cpp.html
+title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
 ---

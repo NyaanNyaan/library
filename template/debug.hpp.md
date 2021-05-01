@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
     title: XOR Convoluion
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -228,6 +228,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/interval-union.test.cpp
     title: verify/verify-unit-test/interval-union.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
+    title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/lazyseg-setval.test.cpp
     title: verify/verify-unit-test/lazyseg-setval.test.cpp
@@ -780,9 +783,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
@@ -860,7 +863,7 @@ data:
   - multiplicative-function/mf-famous-series.hpp
   - template/template.hpp
   timestamp: '2021-04-26 16:30:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - verify/verify-yosupo-string/yosupo-number-of-substrings-suffixautomaton.test.cpp
@@ -1062,6 +1065,7 @@ data:
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/bitset-find-prev.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
