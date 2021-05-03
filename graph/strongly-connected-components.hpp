@@ -17,7 +17,7 @@ struct StronglyConnectedComponents {
 
  public:
   vector<vector<int>> dag;
-  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }
+  StronglyConnectedComponents(G &_g) : g(_g), used(g.size(), 0) { build(); }
 
   int operator[](int k) { return comp[k]; }
 
