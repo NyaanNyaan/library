@@ -93,40 +93,39 @@ data:
     \ inv;\n}\n\n}  // namespace Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit\
     \ operation\n#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"\
     popcnt\"))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\
-    inline int lsb(const u64 &a) {\n  return a ? __builtin_ctzll(a) : 64;\n}\ninline\
-    \ int ctz(const u64 &a) {\n  return a ? __builtin_ctzll(a) : 64;\n}\ninline int\
-    \ msb(const u64 &a) {\n  return a ? 63 - __builtin_clzll(a) : -1;\n}\ntemplate\
-    \ <typename T>\ninline int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n\
-    }\ntemplate <typename T>\ninline void sbit(T &a, int i, bool b) {\n  a ^= (gbit(a,\
-    \ i) == b ? 0 : (T(b) << i));\n}\nconstexpr long long PW(int n) { return 1LL <<\
-    \ n; }\nconstexpr long long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace\
-    \ Nyaan\n#line 61 \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\
-    \nnamespace Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream\
-    \ &os, const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return\
-    \ os;\n}\ntemplate <typename T, typename U>\nistream &operator>>(istream &is,\
-    \ pair<T, U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate\
-    \ <typename T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int\
-    \ s = (int)v.size();\n  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") <<\
-    \ v[i];\n  return os;\n}\ntemplate <typename T>\nistream &operator>>(istream &is,\
-    \ vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return is;\n}\n\nvoid in()\
-    \ {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n\
-    \  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class...\
-    \ U, char sep = ' '>\nvoid out(const T &t, const U &... u) {\n  cout << t;\n \
-    \ if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nvoid outr() {}\ntemplate\
-    \ <typename T, class... U, char sep = ' '>\nvoid outr(const T &t, const U &...\
-    \ u) {\n  cout << t;\n  outr(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya()\
-    \ {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed\
-    \ << setprecision(15);\n    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\
-    \n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\n\n// debug\n#line\
-    \ 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate <typename U, typename\
-    \ = void>\nstruct is_specialize : false_type {};\ntemplate <typename U>\nstruct\
-    \ is_specialize<\n    U, typename conditional<false, typename U::iterator, void>::type>\n\
-    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
-    \ conditional<false, decltype(U::first), void>::type>\n    : true_type {};\ntemplate\
-    \ <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value, void>>\
-    \ : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const\
-    \ string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t ? \"true\"\
-    \ : \"false\"); }\n\ntemplate <typename U,\n          enable_if_t<!is_specialize<U>::value,\
+    inline int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int\
+    \ ctz(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const\
+    \ u64 &a) { return a ? 63 - __builtin_clzll(a) : -1; }\ntemplate <typename T>\n\
+    inline int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename\
+    \ T>\ninline void sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1)\
+    \ << i;\n}\nconstexpr long long PW(int n) { return 1LL << n; }\nconstexpr long\
+    \ long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n#line 61\
+    \ \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\nnamespace\
+    \ Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
+    \ const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return os;\n\
+    }\ntemplate <typename T, typename U>\nistream &operator>>(istream &is, pair<T,\
+    \ U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate <typename\
+    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
+    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
+    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
+    \ for (auto &x : v) is >> x;\n  return is;\n}\n\nvoid in() {}\ntemplate <typename\
+    \ T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n  in(u...);\n}\n\nvoid\
+    \ out() { cout << \"\\n\"; }\ntemplate <typename T, class... U, char sep = ' '>\n\
+    void out(const T &t, const U &... u) {\n  cout << t;\n  if (sizeof...(u)) cout\
+    \ << sep;\n  out(u...);\n}\n\nvoid outr() {}\ntemplate <typename T, class... U,\
+    \ char sep = ' '>\nvoid outr(const T &t, const U &... u) {\n  cout << t;\n  outr(u...);\n\
+    }\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
+    \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
+    \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\
+    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
+    \ <typename U, typename = void>\nstruct is_specialize : false_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<\n    U, typename conditional<false, typename\
+    \ U::iterator, void>::type>\n    : true_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, decltype(U::first), void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value,\
+    \ void>> : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid\
+    \ dump(const string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t\
+    \ ? \"true\" : \"false\"); }\n\ntemplate <typename U,\n          enable_if_t<!is_specialize<U>::value,\
     \ nullptr_t> = nullptr>\nvoid dump(const U& t) {\n  cerr << t;\n}\n\ntemplate\
     \ <typename T>\nvoid dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr)\
     \ {\n  string res;\n  if (t == Nyaan::inf) res = \"inf\";\n  if constexpr (is_signed<T>::value)\
@@ -206,16 +205,16 @@ data:
     \  assert(gbit(5, 1) == 0);\n  assert(gbit(5, 2) == 1);\n  assert(gbit(1LL <<\
     \ 40, 40) == 1);\n\n  rep(loop, 100) {\n    u64 x = rng();\n    for (int i = 0;\
     \ i < 64; i++) {\n      u64 g = gbit(x, i);\n      assert(((x >> i) & 1) == g\
-    \ && \"gbit\");\n      /*\n      sbit(x, i, 1);\n      assert(((x >> i) & 1) ==\
-    \ 1u && \"sbit\");\n      sbit(x, i, 0);\n      assert(((x >> i) & 1) == 0u &&\
-    \ \"sbit\");\n      sbit(x, i, g);\n      */\n    }\n  }\n\n  // PW,MSK\n  rep(i,\
-    \ 63) {\n    assert(1LL << i == PW(i));\n    assert(1LL << i == MSK(i) + 1);\n\
-    \  }\n}\n\nvoid verify_util() {\n  // P, mkp\n  {\n    pl x(3, 2);\n    pl y(2,\
-    \ 3);\n    assert(x + y == pl(5, 5));\n    assert(x - y == pl(1, -1));\n    assert(x\
-    \ * y == pl(6, 6));\n    x += y;\n    assert(x == pl(5, 5));\n    x -= y;\n  \
-    \  assert(x == pl(3, 2));\n    x *= y;\n    assert(x == pl(6, 6));\n\n    // mkp\n\
-    \    auto p0 = mkp(1, 1);\n    static_assert(is_same<decltype(p0), pair<int, int>>::value);\n\
-    \    auto p1 = mkp(1LL, double(2.0));\n    static_assert(is_same<decltype(p1),\
+    \ && \"gbit\");\n      sbit(x, i, 1);\n      assert(((x >> i) & 1) == 1u && \"\
+    sbit\");\n      sbit(x, i, 0);\n      assert(((x >> i) & 1) == 0u && \"sbit\"\
+    );\n      sbit(x, i, g);\n      assert(((x >> i) & 1) == g && \"sbit\");\n   \
+    \ }\n  }\n\n  // PW,MSK\n  rep(i, 63) {\n    assert(1LL << i == PW(i));\n    assert(1LL\
+    \ << i == MSK(i) + 1);\n  }\n}\n\nvoid verify_util() {\n  // P, mkp\n  {\n   \
+    \ pl x(3, 2);\n    pl y(2, 3);\n    assert(x + y == pl(5, 5));\n    assert(x -\
+    \ y == pl(1, -1));\n    assert(x * y == pl(6, 6));\n    x += y;\n    assert(x\
+    \ == pl(5, 5));\n    x -= y;\n    assert(x == pl(3, 2));\n    x *= y;\n    assert(x\
+    \ == pl(6, 6));\n\n    // mkp\n    auto p0 = mkp(1, 1);\n    static_assert(is_same<decltype(p0),\
+    \ pair<int, int>>::value);\n    auto p1 = mkp(1LL, double(2.0));\n    static_assert(is_same<decltype(p1),\
     \ pair<long long, double>>::value);\n    assert(p0.first == 1 && p0.second ==\
     \ 1);\n    assert(p1.first == 1LL && p1.second == 2.0);\n  }\n\n  // amin, amax\n\
     \  {\n    int x = 5;\n    amin(x, 4);\n    assert(x == 4);\n    amax(x, 5);\n\
@@ -276,16 +275,16 @@ data:
     \  assert(gbit(5, 1) == 0);\n  assert(gbit(5, 2) == 1);\n  assert(gbit(1LL <<\
     \ 40, 40) == 1);\n\n  rep(loop, 100) {\n    u64 x = rng();\n    for (int i = 0;\
     \ i < 64; i++) {\n      u64 g = gbit(x, i);\n      assert(((x >> i) & 1) == g\
-    \ && \"gbit\");\n      /*\n      sbit(x, i, 1);\n      assert(((x >> i) & 1) ==\
-    \ 1u && \"sbit\");\n      sbit(x, i, 0);\n      assert(((x >> i) & 1) == 0u &&\
-    \ \"sbit\");\n      sbit(x, i, g);\n      */\n    }\n  }\n\n  // PW,MSK\n  rep(i,\
-    \ 63) {\n    assert(1LL << i == PW(i));\n    assert(1LL << i == MSK(i) + 1);\n\
-    \  }\n}\n\nvoid verify_util() {\n  // P, mkp\n  {\n    pl x(3, 2);\n    pl y(2,\
-    \ 3);\n    assert(x + y == pl(5, 5));\n    assert(x - y == pl(1, -1));\n    assert(x\
-    \ * y == pl(6, 6));\n    x += y;\n    assert(x == pl(5, 5));\n    x -= y;\n  \
-    \  assert(x == pl(3, 2));\n    x *= y;\n    assert(x == pl(6, 6));\n\n    // mkp\n\
-    \    auto p0 = mkp(1, 1);\n    static_assert(is_same<decltype(p0), pair<int, int>>::value);\n\
-    \    auto p1 = mkp(1LL, double(2.0));\n    static_assert(is_same<decltype(p1),\
+    \ && \"gbit\");\n      sbit(x, i, 1);\n      assert(((x >> i) & 1) == 1u && \"\
+    sbit\");\n      sbit(x, i, 0);\n      assert(((x >> i) & 1) == 0u && \"sbit\"\
+    );\n      sbit(x, i, g);\n      assert(((x >> i) & 1) == g && \"sbit\");\n   \
+    \ }\n  }\n\n  // PW,MSK\n  rep(i, 63) {\n    assert(1LL << i == PW(i));\n    assert(1LL\
+    \ << i == MSK(i) + 1);\n  }\n}\n\nvoid verify_util() {\n  // P, mkp\n  {\n   \
+    \ pl x(3, 2);\n    pl y(2, 3);\n    assert(x + y == pl(5, 5));\n    assert(x -\
+    \ y == pl(1, -1));\n    assert(x * y == pl(6, 6));\n    x += y;\n    assert(x\
+    \ == pl(5, 5));\n    x -= y;\n    assert(x == pl(3, 2));\n    x *= y;\n    assert(x\
+    \ == pl(6, 6));\n\n    // mkp\n    auto p0 = mkp(1, 1);\n    static_assert(is_same<decltype(p0),\
+    \ pair<int, int>>::value);\n    auto p1 = mkp(1LL, double(2.0));\n    static_assert(is_same<decltype(p1),\
     \ pair<long long, double>>::value);\n    assert(p0.first == 1 && p0.second ==\
     \ 1);\n    assert(p1.first == 1LL && p1.second == 2.0);\n  }\n\n  // amin, amax\n\
     \  {\n    int x = 5;\n    amin(x, 4);\n    assert(x == 4);\n    amax(x, 5);\n\
@@ -337,7 +336,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/template.test.cpp
   requiredBy: []
-  timestamp: '2021-04-27 14:30:52+09:00'
+  timestamp: '2021-05-04 19:34:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/template.test.cpp
