@@ -214,13 +214,47 @@ data:
     \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
     \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
     using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"tree/convert-tree.hpp\"\n\nvector<vector<int>> inverse_tree(const vector<vector<int>>&\
-    \ g, int root = 0) {\n  int N = (int)g.size();\n  vector<vector<int>> rg(N);\n\
-    \  vector<char> v(N);\n  for (int i = 0; i < N; i++)\n    for (auto& j : g[i])\
-    \ {\n      rg[j].push_back(i);\n    }\n  return rg;\n}\n\nvector<vector<int>>\
-    \ rooted_tree(const vector<vector<int>>& g, int root = 0) {\n  int N = (int)g.size();\n\
-    \  vector<vector<int>> rg(N);\n  vector<bool> v(N, false);\n  v[root] = 1;\n \
-    \ queue<int> que;\n  que.emplace(root);\n  while (!que.empty()) {\n    auto p\
+    #line 2 \"tree/convert-tree.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\n\n\
+    template <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
+    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
+    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
+    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
+    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
+    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
+    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
+    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
+    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
+    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
+    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
+    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
+    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
+    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
+    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
+    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
+    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
+    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
+    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
+    \                       bool is_directed = false, bool is_1origin = true) {\n\
+    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
+    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
+    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"tree/convert-tree.hpp\"\
+    \n\ntemplate <typename T>\nstruct has_cost {\n private:\n  template <typename\
+    \ U>\n  static auto confirm(U u) -> decltype(u.cost, std::true_type());\n  static\
+    \ auto confirm(...) -> std::false_type;\n\n public:\n  enum : bool { value = decltype(confirm(std::declval<T>()))::value\
+    \ };\n};\n\ntemplate <typename T>\nvector<vector<T>> inverse_tree(const vector<vector<T>>&\
+    \ g) {\n  int N = (int)g.size();\n  vector<vector<T>> rg(N);\n  for (int i = 0;\
+    \ i < N; i++) {\n    for (auto& e : g[i]) {\n      if constexpr (is_same<T, int>::value)\
+    \ {\n        rg[e].push_back(i);\n      } else if constexpr (has_cost<T>::value)\
+    \ {\n        rg[e].emplace_back(e.to, i, e.cost);\n      } else {\n        assert(0);\n\
+    \      }\n    }\n  }\n  return rg;\n}\n\ntemplate <typename T>\nvector<vector<T>>\
+    \ rooted_tree(const vector<vector<T>>& g, int root = 0) {\n  int N = (int)g.size();\n\
+    \  vector<vector<T>> rg(N);\n  vector<char> v(N, false);\n  v[root] = true;\n\
+    \  queue<int> que;\n  que.emplace(root);\n  while (!que.empty()) {\n    auto p\
     \ = que.front();\n    que.pop();\n    for (auto& e : g[p]) {\n      if (v[e] ==\
     \ false) {\n        v[e] = true;\n        que.push(e);\n        rg[p].push_back(e);\n\
     \      }\n    }\n  }\n  return rg;\n}\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\
@@ -239,123 +273,106 @@ data:
     \    g[0].push_back(1);\n      g[1].push_back(0);\n    }\n    return g;\n  }\n\
     \  vector<int> pruefer(n - 2);\n  for (auto& x : pruefer) x = randint(0, n);\n\
     \  return pruefer_code(pruefer);\n}\n\n/**\n * @brief Pruefer Code\n */\n#line\
-    \ 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct edge {\n  int\
-    \ src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost)\
-    \ {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\
-    \n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\n \
-    \ operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
-    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
-    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
-    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
-    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
-    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
-    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
-    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
-    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
-    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
-    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
-    \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
-    \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
-    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
-    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
-    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
-    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
-    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
-    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
-    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
-    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
-    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 3 \"tree/tree-query.hpp\"\n\ntemplate <typename G>\nstruct Tree\
-    \ {\n private:\n  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int>\
-    \ dp;\n  void build() {\n    bl.resize(g.size());\n    dp.resize(g.size());\n\
-    \    dfs(root, -1, 0);\n  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c]\
-    \ = _dp;\n    for (int i = p, x = -1; i != -1;) {\n      bl[c].push_back(i);\n\
-    \      i = ++x < (int)bl[i].size() ? bl[i][x] : -1;\n    }\n    for (auto& d :\
-    \ g[c]) {\n      if (d == p) continue;\n      dfs(d, c, _dp + 1);\n    }\n  }\n\
-    \n public:\n  Tree(G& _g, int _r = 0) : g(_g), root(_r) { build(); }\n\n  int\
-    \ depth(int u) const { return dp[u]; }\n\n  int par(int u) const { return u ==\
-    \ root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int u, int k) const {\n    if\
-    \ (dp[u] < k) return -1;\n    for (int i = k ? __lg(k) : -1; i >= 0; --i) {\n\
-    \      if ((k >> i) & 1) u = bl[u][i];\n    }\n    return u;\n  }\n\n  int nxt(int\
-    \ s, int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n    int u = kth_ancestor(t,\
-    \ dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u : bl[s][0];\n  }\n\n  vector<int>\
-    \ path(int s, int t) const {\n    vector<int> pre, suf;\n    while (dp[s] > dp[t])\
-    \ {\n      pre.push_back(s);\n      s = bl[s][0];\n    }\n    while (dp[s] < dp[t])\
-    \ {\n      suf.push_back(t);\n      t = bl[t][0];\n    }\n    while (s != t) {\n\
-    \      pre.push_back(s);\n      suf.push_back(t);\n      s = bl[s][0];\n     \
-    \ t = bl[t][0];\n    }\n    pre.push_back(s);\n    reverse(begin(suf), end(suf));\n\
-    \    copy(begin(suf), end(suf), back_inserter(pre));\n    return pre;\n  }\n\n\
-    \  int lca(int u, int v) {\n    if (dp[u] != dp[v]) {\n      if (dp[u] > dp[v])\
-    \ swap(u, v);\n      v = kth_ancestor(v, dp[v] - dp[u]);\n    }\n    if (u ==\
-    \ v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u]\
-    \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
-    \    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\
-    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n * @docs docs/tree/tree-query.md\n\
+    \ 3 \"tree/tree-query.hpp\"\n\ntemplate <typename G>\nstruct Tree {\n private:\n\
+    \  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int> dp;\n  void build()\
+    \ {\n    bl.resize(g.size());\n    dp.resize(g.size());\n    dfs(root, -1, 0);\n\
+    \  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c] = _dp;\n    for (int i\
+    \ = p, x = -1; i != -1;) {\n      bl[c].push_back(i);\n      i = ++x < (int)bl[i].size()\
+    \ ? bl[i][x] : -1;\n    }\n    for (auto& d : g[c]) {\n      if (d == p) continue;\n\
+    \      dfs(d, c, _dp + 1);\n    }\n  }\n\n public:\n  Tree(G& _g, int _r = 0)\
+    \ : g(_g), root(_r) { build(); }\n\n  int depth(int u) const { return dp[u]; }\n\
+    \n  int par(int u) const { return u == root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int\
+    \ u, int k) const {\n    if (dp[u] < k) return -1;\n    for (int i = k ? __lg(k)\
+    \ : -1; i >= 0; --i) {\n      if ((k >> i) & 1) u = bl[u][i];\n    }\n    return\
+    \ u;\n  }\n\n  int nxt(int s, int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n\
+    \    int u = kth_ancestor(t, dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u\
+    \ : bl[s][0];\n  }\n\n  vector<int> path(int s, int t) const {\n    vector<int>\
+    \ pre, suf;\n    while (dp[s] > dp[t]) {\n      pre.push_back(s);\n      s = bl[s][0];\n\
+    \    }\n    while (dp[s] < dp[t]) {\n      suf.push_back(t);\n      t = bl[t][0];\n\
+    \    }\n    while (s != t) {\n      pre.push_back(s);\n      suf.push_back(t);\n\
+    \      s = bl[s][0];\n      t = bl[t][0];\n    }\n    pre.push_back(s);\n    reverse(begin(suf),\
+    \ end(suf));\n    copy(begin(suf), end(suf), back_inserter(pre));\n    return\
+    \ pre;\n  }\n\n  int lca(int u, int v) {\n    if (dp[u] != dp[v]) {\n      if\
+    \ (dp[u] > dp[v]) swap(u, v);\n      v = kth_ancestor(v, dp[v] - dp[u]);\n   \
+    \ }\n    if (u == v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n\
+    \      if (dp[u] < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i],\
+    \ v = bl[v][i];\n    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\
+    \u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n * @docs docs/tree/tree-query.md\n\
     \ */\n#line 10 \"verify/verify-unit-test/tree-path.test.cpp\"\n\nusing namespace\
-    \ Nyaan;\n\nbool is_tree(vvi& g, bool directed = false) {\n  int n = g.size();\n\
-    \  UnionFind uf(n);\n  rep(i, n) each(j, g[i]) {\n    if (!directed and i > j)\
-    \ continue;\n    if (!uf.unite(i, j)) return false;\n  }\n  return uf.size(0)\
-    \ == n;\n}\n\nbool is_rooted_tree(vvi& g, int root) {\n  int n = g.size();\n \
-    \ vector<bool> vis(n, false);\n  auto dfs = [&](auto rc, int c) -> void {\n  \
-    \  vis[c] = true;\n    each(d, g[c]) {\n      assert(vis[d] == false);\n     \
-    \ rc(rc, d);\n    }\n  };\n  dfs(dfs, root);\n  int sm = 0;\n  each(b, vis) sm\
-    \ += !!b;\n  return sm == n;\n}\n\nbool is_inverse_tree(vvi& g, vvi& rg) {\n \
-    \ set<pair<int, int>> s, t;\n  int n = g.size();\n  for (int i = 0; i < n; i++)\
-    \ {\n    for (int& j : g[i]) s.emplace(i, j);\n    for (int& j : rg[i]) t.emplace(j,\
-    \ i);\n  }\n  return s == t;\n}\n\nvoid test_tree_query(vvi& g, int root = 0)\
-    \ {\n  Tree<vvi> tree(g, root);\n  int N = sz(g);\n  rep(i, N) rep(j, N) {\n \
-    \   vi p1 = tree.path(i, j);\n    vi p2{int(i)};\n    for (int k = i; k != j;)\
-    \ {\n      p2.push_back(k = tree.nxt(k, j));\n    }\n    assert(p1 == p2);\n \
-    \   int l = i, ld = tree.depth(i);\n    each(x, p1) if (amin(ld, tree.depth(x)))\
-    \ l = x;\n    assert(l == tree.lca(i, j));\n  }\n}\n\nusing namespace Nyaan;\n\
-    void Nyaan::solve() {\n  \n  // Random Tree\n  for (int N : vi{2, 3, 4, 5, 10,\
-    \ 100}) {\n    vvi g = random_tree(N);\n    assert(is_tree(g) && \"random tree\"\
-    );\n    test_tree_query(g);\n\n    int root = randint(0, N);\n    vvi rg = rooted_tree(g,\
-    \ root);\n    assert(is_tree(rg, true) && \"rooted tree\");\n    test_tree_query(rg,\
-    \ root);\n\n    vvi rh = inverse_tree(rg);\n    assert(is_inverse_tree(rg, rh)\
-    \ && \"inverse tree\");\n  }\n\n  // Line Tree\n  for (int N : vi{2, 3, 4, 5,\
-    \ 10, 100}) {\n    vvi g(N);\n    rep1(i, N - 1) g[i - 1].push_back(i);\n    test_tree_query(g);\n\
-    \  }\n\n  // Preufer Code\n  {\n    V<vvi> gs(125);\n    rep(i, 125) {\n     \
-    \ vi pr(3);\n      for (int j = i, k = 0; k < 3; j /= 5, k++) {\n        pr[k]\
-    \ = j % 5;\n      }\n      gs[i] = pruefer_code(pr);\n      for (auto& es : gs[i])\
-    \ sort(begin(es), end(es));\n    }\n    rep(i, 125) assert(is_tree(gs[i]));\n\
-    \    rep(i, 125) rep(j, i) assert(gs[i] != gs[j]);\n  }\n\n  int a, b;\n  cin\
-    \ >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ Nyaan;\n\ntemplate <typename G>\nbool is_tree(G& g, bool directed = false) {\n\
+    \  int n = g.size();\n  UnionFind uf(n);\n  rep(i, n) each(j, g[i]) {\n    if\
+    \ (!directed and i > j) continue;\n    if (!uf.unite(i, j)) return false;\n  }\n\
+    \  return uf.size(0) == n;\n}\n\ntemplate <typename G>\nbool is_rooted_tree(G&\
+    \ g, int root) {\n  int n = g.size();\n  vector<char> vis(n, false);\n  auto dfs\
+    \ = [&](auto rc, int c) -> void {\n    vis[c] = true;\n    each(d, g[c]) {\n \
+    \     assert(vis[d] == false);\n      rc(rc, d);\n    }\n  };\n  dfs(dfs, root);\n\
+    \  int sm = 0;\n  each(b, vis) sm += !!b;\n  return sm == n;\n}\n\ntemplate <typename\
+    \ G>\nbool is_inverse_tree(G& g, G& rg) {\n  set<pair<int, int>> s, t;\n  int\
+    \ n = g.size();\n  for (int i = 0; i < n; i++) {\n    for (auto& j : g[i]) s.emplace(i,\
+    \ int(j));\n    for (auto& j : rg[i]) t.emplace(j, int(i));\n  }\n  return s ==\
+    \ t;\n}\n\nvoid test_tree_query(vvi& g, int root = 0) {\n  Tree<vvi> tree(g, root);\n\
+    \  int N = sz(g);\n  rep(i, N) rep(j, N) {\n    vi p1 = tree.path(i, j);\n   \
+    \ vi p2{int(i)};\n    for (int k = i; k != j;) {\n      p2.push_back(k = tree.nxt(k,\
+    \ j));\n    }\n    assert(p1 == p2);\n    int l = i, ld = tree.depth(i);\n   \
+    \ each(x, p1) if (amin(ld, tree.depth(x))) l = x;\n    assert(l == tree.lca(i,\
+    \ j));\n  }\n}\n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  // Random\
+    \ Tree\n  for (int N : vi{2, 3, 4, 5, 10, 100}) {\n    vvi g = random_tree(N);\n\
+    \    assert(is_tree(g) && \"random tree\");\n    test_tree_query(g);\n\n    int\
+    \ root = randint(0, N);\n    vvi rg = rooted_tree(g, root);\n    assert(is_tree(rg,\
+    \ true) && \"rooted tree\");\n    test_tree_query(rg, root);\n\n    vvi rh = inverse_tree(rg);\n\
+    \    assert(is_inverse_tree(rg, rh) && \"inverse tree\");\n  }\n\n  for (int N\
+    \ : vi{2, 3, 4, 5, 10, 100}) {\n    vvi _g = random_tree(N);\n    assert(is_tree(_g)\
+    \ && \"random tree\");\n    WeightedGraph<ll> g(N);\n    rep(i, N) each(j, _g[i])\
+    \ { g[i].emplace_back(i, j, rng() & 15); }\n\n    int root = randint(0, N);\n\
+    \    auto rg = rooted_tree(g, root);\n    assert(is_tree(rg, true) && \"rooted\
+    \ tree\");\n\n    auto rh = inverse_tree(rg);\n    assert(is_inverse_tree(rg,\
+    \ rh) && \"inverse tree\");\n  }\n\n  // Line Tree\n  for (int N : vi{2, 3, 4,\
+    \ 5, 10, 100}) {\n    vvi g(N);\n    rep1(i, N - 1) g[i - 1].push_back(i);\n \
+    \   test_tree_query(g);\n  }\n\n  // Preufer Code\n  {\n    V<vvi> gs(125);\n\
+    \    rep(i, 125) {\n      vi pr(3);\n      for (int j = i, k = 0; k < 3; j /=\
+    \ 5, k++) {\n        pr[k] = j % 5;\n      }\n      gs[i] = pruefer_code(pr);\n\
+    \      for (auto& es : gs[i]) sort(begin(es), end(es));\n    }\n    rep(i, 125)\
+    \ assert(is_tree(gs[i]));\n    rep(i, 125) rep(j, i) assert(gs[i] != gs[j]);\n\
+    \  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../data-structure/union-find.hpp\"\
     \n#include \"../../misc/rng.hpp\"\n#include \"../../tree/convert-tree.hpp\"\n\
     #include \"../../tree/pruefer-code.hpp\"\n#include \"../../tree/tree-query.hpp\"\
-    \n\nusing namespace Nyaan;\n\nbool is_tree(vvi& g, bool directed = false) {\n\
-    \  int n = g.size();\n  UnionFind uf(n);\n  rep(i, n) each(j, g[i]) {\n    if\
-    \ (!directed and i > j) continue;\n    if (!uf.unite(i, j)) return false;\n  }\n\
-    \  return uf.size(0) == n;\n}\n\nbool is_rooted_tree(vvi& g, int root) {\n  int\
-    \ n = g.size();\n  vector<bool> vis(n, false);\n  auto dfs = [&](auto rc, int\
-    \ c) -> void {\n    vis[c] = true;\n    each(d, g[c]) {\n      assert(vis[d] ==\
-    \ false);\n      rc(rc, d);\n    }\n  };\n  dfs(dfs, root);\n  int sm = 0;\n \
-    \ each(b, vis) sm += !!b;\n  return sm == n;\n}\n\nbool is_inverse_tree(vvi& g,\
-    \ vvi& rg) {\n  set<pair<int, int>> s, t;\n  int n = g.size();\n  for (int i =\
-    \ 0; i < n; i++) {\n    for (int& j : g[i]) s.emplace(i, j);\n    for (int& j\
-    \ : rg[i]) t.emplace(j, i);\n  }\n  return s == t;\n}\n\nvoid test_tree_query(vvi&\
-    \ g, int root = 0) {\n  Tree<vvi> tree(g, root);\n  int N = sz(g);\n  rep(i, N)\
-    \ rep(j, N) {\n    vi p1 = tree.path(i, j);\n    vi p2{int(i)};\n    for (int\
-    \ k = i; k != j;) {\n      p2.push_back(k = tree.nxt(k, j));\n    }\n    assert(p1\
-    \ == p2);\n    int l = i, ld = tree.depth(i);\n    each(x, p1) if (amin(ld, tree.depth(x)))\
-    \ l = x;\n    assert(l == tree.lca(i, j));\n  }\n}\n\nusing namespace Nyaan;\n\
-    void Nyaan::solve() {\n  \n  // Random Tree\n  for (int N : vi{2, 3, 4, 5, 10,\
-    \ 100}) {\n    vvi g = random_tree(N);\n    assert(is_tree(g) && \"random tree\"\
-    );\n    test_tree_query(g);\n\n    int root = randint(0, N);\n    vvi rg = rooted_tree(g,\
-    \ root);\n    assert(is_tree(rg, true) && \"rooted tree\");\n    test_tree_query(rg,\
-    \ root);\n\n    vvi rh = inverse_tree(rg);\n    assert(is_inverse_tree(rg, rh)\
-    \ && \"inverse tree\");\n  }\n\n  // Line Tree\n  for (int N : vi{2, 3, 4, 5,\
-    \ 10, 100}) {\n    vvi g(N);\n    rep1(i, N - 1) g[i - 1].push_back(i);\n    test_tree_query(g);\n\
-    \  }\n\n  // Preufer Code\n  {\n    V<vvi> gs(125);\n    rep(i, 125) {\n     \
-    \ vi pr(3);\n      for (int j = i, k = 0; k < 3; j /= 5, k++) {\n        pr[k]\
-    \ = j % 5;\n      }\n      gs[i] = pruefer_code(pr);\n      for (auto& es : gs[i])\
-    \ sort(begin(es), end(es));\n    }\n    rep(i, 125) assert(is_tree(gs[i]));\n\
-    \    rep(i, 125) rep(j, i) assert(gs[i] != gs[j]);\n  }\n\n  int a, b;\n  cin\
-    \ >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \n\nusing namespace Nyaan;\n\ntemplate <typename G>\nbool is_tree(G& g, bool directed\
+    \ = false) {\n  int n = g.size();\n  UnionFind uf(n);\n  rep(i, n) each(j, g[i])\
+    \ {\n    if (!directed and i > j) continue;\n    if (!uf.unite(i, j)) return false;\n\
+    \  }\n  return uf.size(0) == n;\n}\n\ntemplate <typename G>\nbool is_rooted_tree(G&\
+    \ g, int root) {\n  int n = g.size();\n  vector<char> vis(n, false);\n  auto dfs\
+    \ = [&](auto rc, int c) -> void {\n    vis[c] = true;\n    each(d, g[c]) {\n \
+    \     assert(vis[d] == false);\n      rc(rc, d);\n    }\n  };\n  dfs(dfs, root);\n\
+    \  int sm = 0;\n  each(b, vis) sm += !!b;\n  return sm == n;\n}\n\ntemplate <typename\
+    \ G>\nbool is_inverse_tree(G& g, G& rg) {\n  set<pair<int, int>> s, t;\n  int\
+    \ n = g.size();\n  for (int i = 0; i < n; i++) {\n    for (auto& j : g[i]) s.emplace(i,\
+    \ int(j));\n    for (auto& j : rg[i]) t.emplace(j, int(i));\n  }\n  return s ==\
+    \ t;\n}\n\nvoid test_tree_query(vvi& g, int root = 0) {\n  Tree<vvi> tree(g, root);\n\
+    \  int N = sz(g);\n  rep(i, N) rep(j, N) {\n    vi p1 = tree.path(i, j);\n   \
+    \ vi p2{int(i)};\n    for (int k = i; k != j;) {\n      p2.push_back(k = tree.nxt(k,\
+    \ j));\n    }\n    assert(p1 == p2);\n    int l = i, ld = tree.depth(i);\n   \
+    \ each(x, p1) if (amin(ld, tree.depth(x))) l = x;\n    assert(l == tree.lca(i,\
+    \ j));\n  }\n}\n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  // Random\
+    \ Tree\n  for (int N : vi{2, 3, 4, 5, 10, 100}) {\n    vvi g = random_tree(N);\n\
+    \    assert(is_tree(g) && \"random tree\");\n    test_tree_query(g);\n\n    int\
+    \ root = randint(0, N);\n    vvi rg = rooted_tree(g, root);\n    assert(is_tree(rg,\
+    \ true) && \"rooted tree\");\n    test_tree_query(rg, root);\n\n    vvi rh = inverse_tree(rg);\n\
+    \    assert(is_inverse_tree(rg, rh) && \"inverse tree\");\n  }\n\n  for (int N\
+    \ : vi{2, 3, 4, 5, 10, 100}) {\n    vvi _g = random_tree(N);\n    assert(is_tree(_g)\
+    \ && \"random tree\");\n    WeightedGraph<ll> g(N);\n    rep(i, N) each(j, _g[i])\
+    \ { g[i].emplace_back(i, j, rng() & 15); }\n\n    int root = randint(0, N);\n\
+    \    auto rg = rooted_tree(g, root);\n    assert(is_tree(rg, true) && \"rooted\
+    \ tree\");\n\n    auto rh = inverse_tree(rg);\n    assert(is_inverse_tree(rg,\
+    \ rh) && \"inverse tree\");\n  }\n\n  // Line Tree\n  for (int N : vi{2, 3, 4,\
+    \ 5, 10, 100}) {\n    vvi g(N);\n    rep1(i, N - 1) g[i - 1].push_back(i);\n \
+    \   test_tree_query(g);\n  }\n\n  // Preufer Code\n  {\n    V<vvi> gs(125);\n\
+    \    rep(i, 125) {\n      vi pr(3);\n      for (int j = i, k = 0; k < 3; j /=\
+    \ 5, k++) {\n        pr[k] = j % 5;\n      }\n      gs[i] = pruefer_code(pr);\n\
+    \      for (auto& es : gs[i]) sort(begin(es), end(es));\n    }\n    rep(i, 125)\
+    \ assert(is_tree(gs[i]));\n    rep(i, 125) rep(j, i) assert(gs[i] != gs[j]);\n\
+    \  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -366,13 +383,13 @@ data:
   - data-structure/union-find.hpp
   - misc/rng.hpp
   - tree/convert-tree.hpp
+  - graph/graph-template.hpp
   - tree/pruefer-code.hpp
   - tree/tree-query.hpp
-  - graph/graph-template.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/tree-path.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 17:20:14+09:00'
+  timestamp: '2021-05-04 16:26:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/tree-path.test.cpp
