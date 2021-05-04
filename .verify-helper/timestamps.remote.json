@@ -246,5 +246,14 @@
 "verify/verify-yuki/yuki-1145.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yuki/yuki-1170.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yuki/yuki-1220.test.cpp": "2021-05-04 19:34:35 +0900",
-"verify/verify-yuki/yuki-1254.test.cpp": "2021-05-04 19:34:35 +0900"
+"verify/verify-yuki/yuki-1254.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1269.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1283.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1303.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1320.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1323.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1326.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1340-bitmatrix.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1340-semiring.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-helloworld.test.cpp": "2021-05-04 19:34:35 +0900"
 }
