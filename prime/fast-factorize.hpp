@@ -67,46 +67,52 @@ T pollard_rho(T n) {
   exit(1);
 }
 
-vector<u64> inner_factorize(u64 n) {
+using i64 = long long;
+
+vector<i64> inner_factorize(u64 n) {
   if (n <= 1) return {};
   u64 p;
   if (n <= (1LL << 30))
     p = pollard_rho<ArbitraryLazyMontgomeryModInt, uint32_t>(n);
   else
     p = pollard_rho<montgomery64, uint64_t>(n);
-  if (p == n) return {p};
+  if (p == n) return {i64(p)};
   auto l = inner_factorize(p);
   auto r = inner_factorize(n / p);
   copy(begin(r), end(r), back_inserter(l));
   return l;
 }
 
-vector<u64> factorize(u64 n) {
+vector<i64> factorize(u64 n) {
   auto ret = inner_factorize(n);
   sort(begin(ret), end(ret));
   return ret;
 }
 
-using i64 = int64_t;
-
-map<u64, i64> factor_count(u64 n) {
-  map<u64, i64> mp;
+map<i64, i64> factor_count(u64 n) {
+  map<i64, i64> mp;
   for (auto &x : factorize(n)) mp[x]++;
   return mp;
 }
 
-vector<u64> divisors(u64 n) {
+vector<i64> divisors(u64 n) {
   if (n == 0) return {};
-  vector<pair<u64, i64>> v;
-  for (auto &p : factor_count(n)) v.push_back(p);
-  vector<u64> ret;
-  auto f = [&](auto rec, int i, u64 x) -> void {
+  vector<pair<i64, i64>> v;
+  for (auto &p : factorize(n)) {
+    if (v.empty() || v.back().first != p) {
+      v.emplace_back(p, 1);
+    } else {
+      v.back().second++;
+    }
+  }
+  vector<i64> ret;
+  auto f = [&](auto rc, int i, i64 x) -> void {
     if (i == (int)v.size()) {
       ret.push_back(x);
       return;
     }
     for (int j = v[i].second;; --j) {
-      rec(rec, i + 1, x);
+      rc(rc, i + 1, x);
       if (j == 0) break;
       x *= v[i].first;
     }
