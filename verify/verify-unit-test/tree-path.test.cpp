@@ -10,7 +10,8 @@
 
 using namespace Nyaan;
 
-bool is_tree(vvi& g, bool directed = false) {
+template <typename G>
+bool is_tree(G& g, bool directed = false) {
   int n = g.size();
   UnionFind uf(n);
   rep(i, n) each(j, g[i]) {
@@ -20,9 +21,10 @@ bool is_tree(vvi& g, bool directed = false) {
   return uf.size(0) == n;
 }
 
-bool is_rooted_tree(vvi& g, int root) {
+template <typename G>
+bool is_rooted_tree(G& g, int root) {
   int n = g.size();
-  vector<bool> vis(n, false);
+  vector<char> vis(n, false);
   auto dfs = [&](auto rc, int c) -> void {
     vis[c] = true;
     each(d, g[c]) {
@@ -36,12 +38,13 @@ bool is_rooted_tree(vvi& g, int root) {
   return sm == n;
 }
 
-bool is_inverse_tree(vvi& g, vvi& rg) {
+template <typename G>
+bool is_inverse_tree(G& g, G& rg) {
   set<pair<int, int>> s, t;
   int n = g.size();
   for (int i = 0; i < n; i++) {
-    for (int& j : g[i]) s.emplace(i, j);
-    for (int& j : rg[i]) t.emplace(j, i);
+    for (auto& j : g[i]) s.emplace(i, int(j));
+    for (auto& j : rg[i]) t.emplace(j, int(i));
   }
   return s == t;
 }
@@ -63,8 +66,8 @@ void test_tree_query(vvi& g, int root = 0) {
 }
 
 using namespace Nyaan;
+
 void Nyaan::solve() {
-  
   // Random Tree
   for (int N : vi{2, 3, 4, 5, 10, 100}) {
     vvi g = random_tree(N);
@@ -77,6 +80,20 @@ void Nyaan::solve() {
     test_tree_query(rg, root);
 
     vvi rh = inverse_tree(rg);
+    assert(is_inverse_tree(rg, rh) && "inverse tree");
+  }
+
+  for (int N : vi{2, 3, 4, 5, 10, 100}) {
+    vvi _g = random_tree(N);
+    assert(is_tree(_g) && "random tree");
+    WeightedGraph<ll> g(N);
+    rep(i, N) each(j, _g[i]) { g[i].emplace_back(i, j, rng() & 15); }
+
+    int root = randint(0, N);
+    auto rg = rooted_tree(g, root);
+    assert(is_tree(rg, true) && "rooted tree");
+
+    auto rh = inverse_tree(rg);
     assert(is_inverse_tree(rg, rh) && "inverse tree");
   }
 
