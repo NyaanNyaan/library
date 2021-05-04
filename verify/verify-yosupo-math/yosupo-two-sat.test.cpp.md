@@ -210,18 +210,18 @@ data:
     template <typename G>\nstruct StronglyConnectedComponents {\n private:\n  const\
     \ G &g;\n  vector<vector<int>> rg;\n  vector<int> comp, order;\n  vector<char>\
     \ used;\n  vector<vector<int>> blng;\n\n public:\n  vector<vector<int>> dag;\n\
-    \  StronglyConnectedComponents(G &g) : g(g), used(g.size(), 0) { build(); }\n\n\
-    \  int operator[](int k) { return comp[k]; }\n\n  vector<int> &belong(int i) {\
-    \ return blng[i]; }\n\n private:\n  void dfs(int idx) {\n    if (used[idx]) return;\n\
-    \    used[idx] = true;\n    for (auto to : g[idx]) dfs(int(to));\n    order.push_back(idx);\n\
-    \  }\n\n  void rdfs(int idx, int cnt) {\n    if (comp[idx] != -1) return;\n  \
-    \  comp[idx] = cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n  }\n\n  void\
-    \ build() {\n    for (int i = 0; i < (int)g.size(); i++) dfs(i);\n    reverse(begin(order),\
-    \ end(order));\n    used.clear();\n    used.shrink_to_fit();\n\n    comp.resize(g.size(),\
-    \ -1);\n\n    rg.resize(g.size());\n    for (int i = 0; i < (int)g.size(); i++)\
-    \ {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n      }\n\
-    \    }\n    int ptr = 0;\n    for (int i : order)\n      if (comp[i] == -1) rdfs(i,\
-    \ ptr), ptr++;\n    rg.clear();\n    rg.shrink_to_fit();\n    order.clear();\n\
+    \  StronglyConnectedComponents(G &_g) : g(_g), used(g.size(), 0) { build(); }\n\
+    \n  int operator[](int k) { return comp[k]; }\n\n  vector<int> &belong(int i)\
+    \ { return blng[i]; }\n\n private:\n  void dfs(int idx) {\n    if (used[idx])\
+    \ return;\n    used[idx] = true;\n    for (auto to : g[idx]) dfs(int(to));\n \
+    \   order.push_back(idx);\n  }\n\n  void rdfs(int idx, int cnt) {\n    if (comp[idx]\
+    \ != -1) return;\n    comp[idx] = cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n\
+    \  }\n\n  void build() {\n    for (int i = 0; i < (int)g.size(); i++) dfs(i);\n\
+    \    reverse(begin(order), end(order));\n    used.clear();\n    used.shrink_to_fit();\n\
+    \n    comp.resize(g.size(), -1);\n\n    rg.resize(g.size());\n    for (int i =\
+    \ 0; i < (int)g.size(); i++) {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n\
+    \      }\n    }\n    int ptr = 0;\n    for (int i : order)\n      if (comp[i]\
+    \ == -1) rdfs(i, ptr), ptr++;\n    rg.clear();\n    rg.shrink_to_fit();\n    order.clear();\n\
     \    order.shrink_to_fit();\n\n    dag.resize(ptr);\n    blng.resize(ptr);\n \
     \   for (int i = 0; i < (int)g.size(); i++) {\n      blng[comp[i]].push_back(i);\n\
     \      for (auto &to : g[i]) {\n        int x = comp[i], y = comp[to];\n     \
@@ -262,7 +262,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 17:20:14+09:00'
+  timestamp: '2021-05-03 14:16:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-two-sat.test.cpp

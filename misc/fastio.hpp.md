@@ -172,6 +172,12 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - icon: ':heavy_check_mark:'
@@ -326,8 +332,10 @@ data:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp

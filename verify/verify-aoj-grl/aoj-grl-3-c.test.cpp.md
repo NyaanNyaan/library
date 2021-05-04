@@ -207,7 +207,7 @@ data:
     \ G>\nstruct StronglyConnectedComponents {\n private:\n  const G &g;\n  vector<vector<int>>\
     \ rg;\n  vector<int> comp, order;\n  vector<char> used;\n  vector<vector<int>>\
     \ blng;\n\n public:\n  vector<vector<int>> dag;\n  StronglyConnectedComponents(G\
-    \ &g) : g(g), used(g.size(), 0) { build(); }\n\n  int operator[](int k) { return\
+    \ &_g) : g(_g), used(g.size(), 0) { build(); }\n\n  int operator[](int k) { return\
     \ comp[k]; }\n\n  vector<int> &belong(int i) { return blng[i]; }\n\n private:\n\
     \  void dfs(int idx) {\n    if (used[idx]) return;\n    used[idx] = true;\n  \
     \  for (auto to : g[idx]) dfs(int(to));\n    order.push_back(idx);\n  }\n\n  void\
@@ -244,7 +244,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 17:20:14+09:00'
+  timestamp: '2021-05-03 14:16:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp

@@ -54,7 +54,7 @@ data:
     \ G>\nstruct StronglyConnectedComponents {\n private:\n  const G &g;\n  vector<vector<int>>\
     \ rg;\n  vector<int> comp, order;\n  vector<char> used;\n  vector<vector<int>>\
     \ blng;\n\n public:\n  vector<vector<int>> dag;\n  StronglyConnectedComponents(G\
-    \ &g) : g(g), used(g.size(), 0) { build(); }\n\n  int operator[](int k) { return\
+    \ &_g) : g(_g), used(g.size(), 0) { build(); }\n\n  int operator[](int k) { return\
     \ comp[k]; }\n\n  vector<int> &belong(int i) { return blng[i]; }\n\n private:\n\
     \  void dfs(int idx) {\n    if (used[idx]) return;\n    used[idx] = true;\n  \
     \  for (auto to : g[idx]) dfs(int(to));\n    order.push_back(idx);\n  }\n\n  void\
@@ -94,7 +94,7 @@ data:
   isVerificationFile: false
   path: math/two-sat.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-05-03 14:16:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
