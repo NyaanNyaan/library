@@ -32,9 +32,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
     title: XOR Convoluion
-  - icon: ':warning:'
-    path: verify/verify-unit-test/real-fft-test.cpp
-    title: verify/verify-unit-test/real-fft-test.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
@@ -279,6 +276,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/real-fft.test.cpp
+    title: verify/verify-unit-test/real-fft.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
@@ -1098,7 +1098,6 @@ data:
   - set-function/and-convolution.hpp
   - set-function/or-convolution.hpp
   - set-function/xor-convolution.hpp
-  - verify/verify-unit-test/real-fft-test.cpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
   - multiplicative-function/mf-famous-series.hpp
   timestamp: '2021-04-26 17:20:14+09:00'
@@ -1304,6 +1303,7 @@ data:
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/bitset-find-prev.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/real-fft.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp

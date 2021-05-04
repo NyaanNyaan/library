@@ -17,9 +17,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/pruefer-code.hpp
     title: Pruefer Code
-  - icon: ':warning:'
-    path: verify/verify-unit-test/real-fft-test.cpp
-    title: verify/verify-unit-test/real-fft-test.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/barrett-reduction.test.cpp
@@ -66,6 +63,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/real-fft.test.cpp
+    title: verify/verify-unit-test/real-fft.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
@@ -157,7 +157,6 @@ data:
   isVerificationFile: false
   path: misc/rng.hpp
   requiredBy:
-  - verify/verify-unit-test/real-fft-test.cpp
   - rbst/treap.hpp
   - matrix/black-box-linear-algebra.hpp
   - modulo/mod-kth-root.hpp
@@ -188,6 +187,7 @@ data:
   - verify/verify-unit-test/lazyseg-setval.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/real-fft.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp

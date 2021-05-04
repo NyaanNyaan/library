@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: verify/verify-unit-test/real-fft-test.cpp
-    title: verify/verify-unit-test/real-fft-test.cpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/real-fft.test.cpp
+    title: verify/verify-unit-test/real-fft.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
@@ -263,11 +263,11 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ntt/real-fft.hpp
-  requiredBy:
-  - verify/verify-unit-test/real-fft-test.cpp
+  requiredBy: []
   timestamp: '2021-05-04 09:32:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/real-fft.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
 documentation_of: ntt/real-fft.hpp

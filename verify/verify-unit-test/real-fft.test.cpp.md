@@ -29,11 +29,13 @@ data:
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/real-fft-test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"verify/verify-unit-test/real-fft.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
@@ -170,7 +172,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/real-fft-test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/real-fft.test.cpp\"\
     \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
     \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
@@ -308,7 +310,7 @@ data:
     \ r4;\n    r1 -= r3;\n\n    long long ret = r4 % MOD * 1048576;\n    ret += r3\
     \ % MOD * 1024 + r2;\n    ret = ret % MOD * 1048576;\n    ret += r1 % MOD * 1024\
     \ + r0;\n    ret %= MOD;\n    if (ret < 0) ret += MOD;\n\n    c[i] = ret;\n  }\n\
-    \  return c;\n}\n}  // namespace ArbitraryModConvolution\n#line 7 \"verify/verify-unit-test/real-fft-test.cpp\"\
+    \  return c;\n}\n}  // namespace ArbitraryModConvolution\n#line 7 \"verify/verify-unit-test/real-fft.test.cpp\"\
     \n\nusing namespace Nyaan;\n\nvl naive(vi a, vi b) {\n  int n = sz(a), m = sz(b);\n\
     \  vl c(n + m - 1);\n  rep(i, n) rep(j, m) { c[i + j] += 1LL * a[i] * b[j]; }\n\
     \  return c;\n}\n\nvi naive_mod(vi a, vi b, int mod) {\n  int n = sz(a), m = sz(b);\n\
@@ -356,16 +358,16 @@ data:
   - template/macro.hpp
   - misc/rng.hpp
   - ntt/real-fft.hpp
-  isVerificationFile: false
-  path: verify/verify-unit-test/real-fft-test.cpp
+  isVerificationFile: true
+  path: verify/verify-unit-test/real-fft.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 14:49:59+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-05-04 15:44:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/real-fft-test.cpp
+documentation_of: verify/verify-unit-test/real-fft.test.cpp
 layout: document
 redirect_from:
-- /library/verify/verify-unit-test/real-fft-test.cpp
-- /library/verify/verify-unit-test/real-fft-test.cpp.html
-title: verify/verify-unit-test/real-fft-test.cpp
+- /verify/verify/verify-unit-test/real-fft.test.cpp
+- /verify/verify/verify-unit-test/real-fft.test.cpp.html
+title: verify/verify-unit-test/real-fft.test.cpp
 ---
