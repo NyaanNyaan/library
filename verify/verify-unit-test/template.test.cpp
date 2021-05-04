@@ -72,13 +72,12 @@ void verify_bitop() {
     for (int i = 0; i < 64; i++) {
       u64 g = gbit(x, i);
       assert(((x >> i) & 1) == g && "gbit");
-      /*
       sbit(x, i, 1);
       assert(((x >> i) & 1) == 1u && "sbit");
       sbit(x, i, 0);
       assert(((x >> i) & 1) == 0u && "sbit");
       sbit(x, i, g);
-      */
+      assert(((x >> i) & 1) == g && "sbit");
     }
   }
 
