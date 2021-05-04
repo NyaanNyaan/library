@@ -297,19 +297,20 @@ data:
     \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = inner::gcd<T>(q.get(),\
     \ n);\n      }\n    }\n    if (g == n) do\n        g = inner::gcd<T>((x - (ys\
     \ = f(ys))).get(), n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n\
-    \  exit(1);\n}\n\nvector<u64> inner_factorize(u64 n) {\n  if (n <= 1) return {};\n\
-    \  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
+    \  exit(1);\n}\n\nusing i64 = long long;\n\nvector<i64> inner_factorize(u64 n)\
+    \ {\n  if (n <= 1) return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
     \ uint32_t>(n);\n  else\n    p = pollard_rho<montgomery64, uint64_t>(n);\n  if\
-    \ (p == n) return {p};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
-    \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<u64>\
+    \ (p == n) return {i64(p)};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
+    \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<i64>\
     \ factorize(u64 n) {\n  auto ret = inner_factorize(n);\n  sort(begin(ret), end(ret));\n\
-    \  return ret;\n}\n\nusing i64 = int64_t;\n\nmap<u64, i64> factor_count(u64 n)\
-    \ {\n  map<u64, i64> mp;\n  for (auto &x : factorize(n)) mp[x]++;\n  return mp;\n\
-    }\n\nvector<u64> divisors(u64 n) {\n  if (n == 0) return {};\n  vector<pair<u64,\
-    \ i64>> v;\n  for (auto &p : factor_count(n)) v.push_back(p);\n  vector<u64> ret;\n\
-    \  auto f = [&](auto rec, int i, u64 x) -> void {\n    if (i == (int)v.size())\
+    \  return ret;\n}\n\nmap<i64, i64> factor_count(u64 n) {\n  map<i64, i64> mp;\n\
+    \  for (auto &x : factorize(n)) mp[x]++;\n  return mp;\n}\n\nvector<i64> divisors(u64\
+    \ n) {\n  if (n == 0) return {};\n  vector<pair<i64, i64>> v;\n  for (auto &p\
+    \ : factorize(n)) {\n    if (v.empty() || v.back().first != p) {\n      v.emplace_back(p,\
+    \ 1);\n    } else {\n      v.back().second++;\n    }\n  }\n  vector<i64> ret;\n\
+    \  auto f = [&](auto rc, int i, i64 x) -> void {\n    if (i == (int)v.size())\
     \ {\n      ret.push_back(x);\n      return;\n    }\n    for (int j = v[i].second;;\
-    \ --j) {\n      rec(rec, i + 1, x);\n      if (j == 0) break;\n      x *= v[i].first;\n\
+    \ --j) {\n      rc(rc, i + 1, x);\n      if (j == 0) break;\n      x *= v[i].first;\n\
     \    }\n  };\n  f(f, 0, 1);\n  sort(begin(ret), end(ret));\n  return ret;\n}\n\
     \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
     using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
@@ -339,10 +340,10 @@ data:
     \  .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n}\n\nusing\
     \ namespace Nyaan; void Nyaan::solve() {\n  int a, b;\n  cin >> a >> b;\n  cout\
     \ << (a + b) << '\\n';\n\n  using u64 = fast_factorize::u64;\n  using i64 = fast_factorize::i64;\n\
-    \n  auto test = [](uint32_t n) {\n    vector<u64> naive_ds;\n    for (uint32_t\
+    \n  auto test = [](uint32_t n) {\n    vector<i64> naive_ds;\n    for (uint32_t\
     \ i = 1; i * i <= n; ++i) {\n      if (n % i == 0) {\n        naive_ds.push_back(i);\n\
     \        if (i * i != n) naive_ds.push_back(n / i);\n      }\n    }\n    sort(all(naive_ds));\n\
-    \    assert(naive_ds == fast_factorize::divisors(n));\n\n    map<u64, i64> naive_factor;\n\
+    \    assert(naive_ds == fast_factorize::divisors(n));\n\n    map<i64, i64> naive_factor;\n\
     \    uint32_t m = n;\n    for (uint32_t i = 2; i * i <= n; ++i) {\n      while\
     \ (m % i == 0) {\n        naive_factor[i]++;\n        m /= i;\n      }\n    }\n\
     \    if (m > 1) naive_factor[m]++;\n\n    assert(naive_factor == fast_factorize::factor_count(n));\n\
@@ -355,11 +356,11 @@ data:
     \          .count();\n  x_ = x_ ^ (x_ << 7);\n  return x_ = x_ ^ (x_ >> 9);\n\
     }\n\nusing namespace Nyaan; void Nyaan::solve() {\n  int a, b;\n  cin >> a >>\
     \ b;\n  cout << (a + b) << '\\n';\n\n  using u64 = fast_factorize::u64;\n  using\
-    \ i64 = fast_factorize::i64;\n\n  auto test = [](uint32_t n) {\n    vector<u64>\
+    \ i64 = fast_factorize::i64;\n\n  auto test = [](uint32_t n) {\n    vector<i64>\
     \ naive_ds;\n    for (uint32_t i = 1; i * i <= n; ++i) {\n      if (n % i == 0)\
     \ {\n        naive_ds.push_back(i);\n        if (i * i != n) naive_ds.push_back(n\
     \ / i);\n      }\n    }\n    sort(all(naive_ds));\n    assert(naive_ds == fast_factorize::divisors(n));\n\
-    \n    map<u64, i64> naive_factor;\n    uint32_t m = n;\n    for (uint32_t i =\
+    \n    map<i64, i64> naive_factor;\n    uint32_t m = n;\n    for (uint32_t i =\
     \ 2; i * i <= n; ++i) {\n      while (m % i == 0) {\n        naive_factor[i]++;\n\
     \        m /= i;\n      }\n    }\n    if (m > 1) naive_factor[m]++;\n\n    assert(naive_factor\
     \ == fast_factorize::factor_count(n));\n  };\n\n  rep(i, 10000) { \n    uint32_t\
@@ -381,7 +382,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/factorize.test.cpp
   requiredBy: []
-  timestamp: '2021-04-26 17:20:14+09:00'
+  timestamp: '2021-05-04 17:56:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/factorize.test.cpp
