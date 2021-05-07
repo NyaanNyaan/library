@@ -5,7 +5,7 @@ struct UnionFindWithPotential {
   vector<int> dat;
   vector<T> pot;
 
-  UnionFindWithPotential(int N, T I_ = 0) : dat(N, -1), pot(N, T()) {}
+  UnionFindWithPotential(int N) : dat(N, -1), pot(N, T()) {}
 
   int root(int x) {
     if (dat[x] < 0) return x;
