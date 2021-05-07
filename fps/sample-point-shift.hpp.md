@@ -147,8 +147,8 @@ data:
   path: fps/sample-point-shift.hpp
   requiredBy:
   - fps/find-p-recursive.hpp
-  - matrix/polynomial-matrix-prefix-prod.hpp
   - modulo/factorial.hpp
+  - matrix/polynomial-matrix-prefix-prod.hpp
   timestamp: '2021-02-01 19:31:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

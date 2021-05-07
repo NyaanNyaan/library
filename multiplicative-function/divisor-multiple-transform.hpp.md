@@ -110,8 +110,8 @@ data:
   verifiedWith:
   - verify/verify-yuki/yuki-0896.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
-  - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-0125.test.cpp
+  - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
 documentation_of: multiplicative-function/divisor-multiple-transform.hpp

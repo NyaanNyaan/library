@@ -117,9 +117,9 @@ data:
   timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
 documentation_of: matrix/linear-equation.hpp
 layout: document
 redirect_from:

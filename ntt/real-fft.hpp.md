@@ -268,8 +268,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/real-fft.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
 documentation_of: ntt/real-fft.hpp
 layout: document
 redirect_from:

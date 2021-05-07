@@ -170,12 +170,12 @@ data:
   timestamp: '2021-01-31 22:24:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/hashmap.test.cpp
+  - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
-  - verify/verify-unit-test/debug.test.cpp
-  - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
-  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
 documentation_of: hashmap/hashmap.hpp
 layout: document
 redirect_from:

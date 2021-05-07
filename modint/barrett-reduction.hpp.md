@@ -58,16 +58,16 @@ data:
   isVerificationFile: false
   path: modint/barrett-reduction.hpp
   requiredBy:
-  - modint/arbitrary-modint.hpp
   - modulo/arbitrary-mod-binomial-large.hpp
   - modulo/arbitrary-mod-binomial.hpp
+  - modint/arbitrary-modint.hpp
   timestamp: '2021-04-29 18:16:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
-  - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+  - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+  - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
 documentation_of: modint/barrett-reduction.hpp
 layout: document
 redirect_from:

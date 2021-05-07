@@ -170,8 +170,8 @@ data:
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"data-structure/union-find-with-potential.hpp\"\
     \n\ntemplate <class T>\nstruct UnionFindWithPotential {\n  vector<int> dat;\n\
-    \  vector<T> pot;\n\n  UnionFindWithPotential(int N, T I_ = 0) : dat(N, -1), pot(N,\
-    \ T()) {}\n\n  int root(int x) {\n    if (dat[x] < 0) return x;\n    int r = root(dat[x]);\n\
+    \  vector<T> pot;\n\n  UnionFindWithPotential(int N) : dat(N, -1), pot(N, T())\
+    \ {}\n\n  int root(int x) {\n    if (dat[x] < 0) return x;\n    int r = root(dat[x]);\n\
     \    pot[x] += pot[dat[x]];\n    return dat[x] = r;\n  }\n\n  // return P(x) -\
     \ P(root(x))\n  T potential(int x) {\n    root(x);\n    return pot[x];\n  }\n\n\
     \  bool same(int x, int y) { return root(x) == root(y); }\n\n  // return P(x)\
@@ -205,7 +205,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-05-08 00:29:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-1-b.test.cpp
