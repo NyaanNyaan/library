@@ -18,6 +18,75 @@ u32 a[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));
 u32 b[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));
 u32 c[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));
 
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline m256
+normalize_m256(const m256& x, const m256& M1) {
+  m256 CMP = _mm256_cmpgt_epi32(x, M1);
+  return _mm256_sub_epi32(x, _mm256_and_si256(CMP, M1));
+}
+
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline m256
+simd_mulhi(const m256& _a, const m256& _b) {
+  m256 a13 = _mm256_shuffle_epi32(_a, 0xF5);
+  m256 b13 = _mm256_shuffle_epi32(_b, 0xF5);
+  m256 prod02 = _mm256_mul_epu32(_a, _b);
+  m256 prod13 = _mm256_mul_epu32(a13, b13);
+  m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);
+  m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);
+  m256 prod = _mm256_unpackhi_epi64(unpalo, unpahi);
+  return prod;
+}
+
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline m256
+simd_reduct(const m256& prod02, const m256& prod13, const m256& R,
+            const m256& M1) {
+  m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);
+  m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);
+  m256 prodlo = _mm256_unpacklo_epi64(unpalo, unpahi);
+  m256 prodhi = _mm256_unpackhi_epi64(unpalo, unpahi);
+  m256 hiplm1 = _mm256_add_epi32(prodhi, M1);
+  m256 lomulr = _mm256_mullo_epi32(prodlo, R);
+  m256 lomulrmulm1 = simd_mulhi(lomulr, M1);
+  return _mm256_sub_epi32(hiplm1, lomulrmulm1);
+}
+
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) inline m256
+mul4(const m256& A00, const m256& A01, const m256& A02, const m256& A03,
+     const m256& B00, const m256& B10, const m256& B20, const m256& B30,
+     const m256& R, const m256& M1) {
+  const m256 A00n = normalize_m256(A00, M1);
+  const m256 A01n = normalize_m256(A01, M1);
+  const m256 A02n = normalize_m256(A02, M1);
+  const m256 A03n = normalize_m256(A03, M1);
+  const m256 B00n = normalize_m256(B00, M1);
+  const m256 B10n = normalize_m256(B10, M1);
+  const m256 B20n = normalize_m256(B20, M1);
+  const m256 B30n = normalize_m256(B30, M1);
+
+  m256 a013 = _mm256_shuffle_epi32(A00n, 0xF5);
+  m256 b013 = _mm256_shuffle_epi32(B00n, 0xF5);
+  m256 a113 = _mm256_shuffle_epi32(A01n, 0xF5);
+  m256 b113 = _mm256_shuffle_epi32(B10n, 0xF5);
+  m256 a213 = _mm256_shuffle_epi32(A02n, 0xF5);
+  m256 b213 = _mm256_shuffle_epi32(B20n, 0xF5);
+  m256 a313 = _mm256_shuffle_epi32(A03n, 0xF5);
+  m256 b313 = _mm256_shuffle_epi32(B30n, 0xF5);
+  m256 p0_02 = _mm256_mul_epu32(A00n, B00n);
+  m256 p0_13 = _mm256_mul_epu32(a013, b013);
+  m256 p1_02 = _mm256_mul_epu32(A01n, B10n);
+  m256 p1_13 = _mm256_mul_epu32(a113, b113);
+  m256 p2_02 = _mm256_mul_epu32(A02n, B20n);
+  m256 p2_13 = _mm256_mul_epu32(a213, b213);
+  m256 p3_02 = _mm256_mul_epu32(A03n, B30n);
+  m256 p3_13 = _mm256_mul_epu32(a313, b313);
+  m256 p02_02 = _mm256_add_epi64(p0_02, p2_02);
+  m256 p13_02 = _mm256_add_epi64(p1_02, p3_02);
+  m256 prod02 = _mm256_add_epi64(p02_02, p13_02);
+  m256 p02_13 = _mm256_add_epi64(p0_13, p2_13);
+  m256 p13_13 = _mm256_add_epi64(p1_13, p3_13);
+  m256 prod13 = _mm256_add_epi64(p02_13, p13_13);
+  return simd_reduct(prod02, prod13, R, M1);
+}
+
 __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) void
 inner_simd_mul(u32 n, u32 m, u32 p) {
   memset(c, 0, sizeof(c));
@@ -42,17 +111,11 @@ inner_simd_mul(u32 n, u32 m, u32 p) {
         const m256 A01 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k1]);
         const m256 A02 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k2]);
         const m256 A03 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k3]);
-        const m256 A00B00 = montgomery_mul_256(A00, B00, R, M1);
-        const m256 A01B10 = montgomery_mul_256(A01, B10, R, M1);
-        const m256 A02B20 = montgomery_mul_256(A02, B20, R, M1);
-        const m256 A03B30 = montgomery_mul_256(A03, B30, R, M1);
         const u32* pc00 = c + (i0 << SHIFT_) + j0;
         const m256 C00 = _mm256_load_si256((m256*)pc00);
-        const m256 C00_01 = montgomery_add_256(A00B00, A01B10, M2, M0);
-        const m256 C00_23 = montgomery_add_256(A02B20, A03B30, M2, M0);
-        const m256 C00_al = montgomery_add_256(C00_01, C00_23, M2, M0);
-        const m256 C00_ad = montgomery_add_256(C00, C00_al, M2, M0);
-        _mm256_store_si256((m256*)pc00, C00_ad);
+        const m256 C00_ad = mul4(A00, A01, A02, A03, B00, B10, B20, B30, R, M1);
+        const m256 C00sum = montgomery_add_256(C00, C00_ad, M2, M0);
+        _mm256_store_si256((m256*)pc00, C00sum);
       }
     }
     for (; j0 < m; j0++) {

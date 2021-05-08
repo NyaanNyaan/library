@@ -2,7 +2,6 @@
 
 #include "../../template/template.hpp"
 //
-#include "../../misc/timer.hpp"
 #include "../../modulo/strassen.hpp"
 
 namespace FastMatProd {
@@ -21,14 +20,15 @@ naive_mul(const vector<fps>& _a, const vector<fps>& _b) {
 
 }  // namespace FastMatProd
 
-using namespace FastMatProd;
+#include "../../misc/rng.hpp"
+#include "../../misc/timer.hpp"
 
+using namespace FastMatProd;
 using fps = vector<mint>;
 
 void time_test() {
   int N = 1024;
   int P = N, M = N;
-  mt19937 rng(58);
   vector<fps> s(N, fps(P)), t(P, fps(M));
   for (int i = 0; i < N; i++)
     for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;
@@ -75,9 +75,7 @@ void debug_test(int max = 500, int loop = 10) {
     } else if (u != u3) {
       cerr << "ng u1 " << N << " " << P << " " << M << endl;
       exit(1);
-    } else {
-      // cerr << "ok " << N << " " << P << " " << M << "\n";
-    }
+    } 
   }
   cerr << "all ok" << endl;
 }
