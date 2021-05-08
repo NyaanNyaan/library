@@ -5,18 +5,36 @@
 #include "../../misc/timer.hpp"
 #include "../../modulo/strassen.hpp"
 
+namespace FastMatProd {
+// for debug
+template <typename fps>
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vector<fps>
+naive_mul(const vector<fps>& _a, const vector<fps>& _b) {
+  int n = _a.size(), m = _b[0].size(), p = _b.size();
+  assert(p == (int)_a[0].size());
+  vector<fps> _c(n, fps(m, 0));
+  for (int i = 0; i < n; i++)
+    for (int k = 0; k < p; k++)
+      for (int j = 0; j < m; j++) _c[i][j] += _a[i][k] * _b[k][j];
+  return _c;
+}
+
+}  // namespace FastMatProd
+
 using namespace FastMatProd;
+
+using fps = vector<mint>;
 
 void time_test() {
   int N = 1024;
   int P = N, M = N;
   mt19937 rng(58);
-  vvm s(N, vm(P)), t(P, vm(M));
+  vector<fps> s(N, fps(P)), t(P, fps(M));
   for (int i = 0; i < N; i++)
     for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;
   for (int i = 0; i < P; i++)
     for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;
-  vvm u, u2, u3;
+  vector<fps> u, u2, u3;
   Timer timer;
 
   int loop = 5;
@@ -36,14 +54,14 @@ void time_test() {
   assert(u == u3);
 }
 
-void debug_test(int max = 500, int loop = 20) {
+void debug_test(int max = 500, int loop = 10) {
   int N, P, M;
   mt19937 rng(58);
   while (loop--) {
     N = rng() % max + 1;
     M = rng() % max + 1;
     P = rng() % max + 1;
-    vvm s(N, vm(P)), t(P, vm(M));
+    vector<fps> s(N, fps(P)), t(P, fps(M));
     for (int i = 0; i < N; i++)
       for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;
     for (int i = 0; i < P; i++)
@@ -58,18 +76,18 @@ void debug_test(int max = 500, int loop = 20) {
       cerr << "ng u1 " << N << " " << P << " " << M << endl;
       exit(1);
     } else {
-      cerr << "ok " << N << " " << P << " " << M << endl;
+      // cerr << "ok " << N << " " << P << " " << M << "\n";
     }
   }
   cerr << "all ok" << endl;
 }
 
 void Nyaan::solve() {
-  // time_test();
   debug_test();
-  debug_test(32, 1000);
+  debug_test(32, 2000);
+  time_test();
 
   int a, b;
   cin >> a >> b;
-  cerr << a + b << endl;
+  cout << a + b << endl;
 }

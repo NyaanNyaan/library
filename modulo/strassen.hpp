@@ -2,16 +2,12 @@
 #include <immintrin.h>
 //
 
-#include "../fps/formal-power-series.hpp"
 #include "../modint/montgomery-modint.hpp"
 #include "../modint/simd-montgomery.hpp"
 
 namespace FastMatProd {
 
 using mint = LazyMontgomeryModInt<998244353>;
-using vm = vector<mint>;
-using vvm = vector<vm>;
-using fps = FormalPowerSeries<mint>;
 using u32 = uint32_t;
 using i32 = int32_t;
 using u64 = uint64_t;
@@ -100,18 +96,6 @@ inner_simd_mul(u32 n, u32 m, u32 p) {
       }
     }
   }
-}
-
-// for debug
-__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm naive_mul(
-    const vvm& _a, const vvm& _b) {
-  int n = _a.size(), m = _b[0].size(), p = _b.size();
-  assert(p == (int)_a[0].size());
-  vvm _c(n, fps(m, 0));
-  for (int i = 0; i < n; i++)
-    for (int k = 0; k < p; k++)
-      for (int j = 0; j < m; j++) _c[i][j] += _a[i][k] * _b[k][j];
-  return _c;
 }
 
 struct Mat {
@@ -413,7 +397,7 @@ struct Mat {
 };
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE (1 << 21)
+#define BUFFER_SIZE (1 << 23)
 #endif
 mint A[BUFFER_SIZE] __attribute__((aligned(64)));
 mint B[BUFFER_SIZE] __attribute__((aligned(64)));
@@ -542,10 +526,9 @@ inner_strassen(const Mat* _a, const Mat* _b, const Mat* _c) {
   _c->opaddA11(u.a);
 }
 
-using vfps = vector<fps>;
-
-__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm block_dec(
-    const vvm& s, const vvm& t) {
+template <typename fps>
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vector<fps>
+block_dec(const vector<fps>& s, const vector<fps>& t) {
   int n = s.size(), p = s[0].size(), m = t[0].size();
   assert(int(n * p * 1.4) <= BUFFER_SIZE);
   assert(int(p * m * 1.4) <= BUFFER_SIZE);
@@ -559,33 +542,14 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm block_dec(
 
   Mat S(n, p, A), T(p, m, B), U(n, m, C);
   inner_block_dec_mul(&S, &T, &U);
-  vvm u(n, vm(m));
+  vector<fps> u(n, fps(m));
   for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
   return std::move(u);
 }
 
-__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vfps block_dec(
-    const vfps& s, const vfps& t) {
-  int n = s.size(), p = s[0].size(), m = t[0].size();
-  assert(int(n * p * 1.4) <= BUFFER_SIZE);
-  assert(int(p * m * 1.4) <= BUFFER_SIZE);
-  assert(int(n * m * 1.4) <= BUFFER_SIZE);
-  memset(A, 0, int(n * p * 1.4) * sizeof(int));
-  memset(B, 0, int(p * m * 1.4) * sizeof(int));
-  memset(C, 0, int(m * n * 1.4) * sizeof(int));
-
-  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(), p * sizeof(int));
-  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(), m * sizeof(int));
-
-  Mat S(n, p, A), T(p, m, B), U(n, m, C);
-  inner_block_dec_mul(&S, &T, &U);
-  vfps u(n, fps(m));
-  for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
-  return std::move(u);
-}
-
-__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm strassen(
-    const vvm& s, const vvm& t) {
+template <typename fps>
+__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vector<fps>
+strassen(const vector<fps>& s, const vector<fps>& t) {
   int n = s.size(), p = s[0].size(), m = t[0].size();
   assert(int(n * p * 1.4) <= BUFFER_SIZE);
   assert(int(p * m * 1.4) <= BUFFER_SIZE);
@@ -599,27 +563,7 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vvm strassen(
 
   Mat S(n, p, A), T(p, m, B), U(n, m, C);
   inner_strassen(&S, &T, &U);
-  vvm u(n, vm(m));
-  for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
-  return std::move(u);
-}
-
-__attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vfps strassen(
-    const vfps& s, const vfps& t) {
-  int n = s.size(), p = s[0].size(), m = t[0].size();
-  assert(int(n * p * 1.4) <= BUFFER_SIZE);
-  assert(int(p * m * 1.4) <= BUFFER_SIZE);
-  assert(int(n * m * 1.4) <= BUFFER_SIZE);
-  memset(A, 0, int(n * p * 1.4) * sizeof(int));
-  memset(B, 0, int(p * m * 1.4) * sizeof(int));
-  memset(C, 0, int(m * n * 1.4) * sizeof(int));
-
-  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(), p * sizeof(int));
-  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(), m * sizeof(int));
-
-  Mat S(n, p, A), T(p, m, B), U(n, m, C);
-  inner_strassen(&S, &T, &U);
-  vfps u(n, fps(m));
+  vector<fps> u(n, fps(m));
   for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));
   return std::move(u);
 }
