@@ -82,9 +82,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
-  - icon: ':question:'
-    path: modulo/strassen.hpp
-    title: modulo/strassen.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multieval.test.cpp
@@ -98,9 +95,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - icon: ':x:'
-    path: verify/verify-unit-test/strassen.test.cpp
-    title: verify/verify-unit-test/strassen.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
@@ -197,9 +191,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/fps/formal-power-series.md
     document_title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\
@@ -359,14 +353,13 @@ data:
   - fps/arbitrary-fps.hpp
   - fps/inversion-formula.hpp
   - fps/find-p-recursive.hpp
-  - modulo/strassen.hpp
   - modulo/factorial.hpp
   - matrix/black-box-linear-algebra.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
   timestamp: '2021-01-31 00:21:53+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
@@ -382,7 +375,6 @@ data:
   - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
@@ -14,34 +14,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -324,11 +324,10 @@ data:
     ))) inline __m256i montgomery_sub_256(\n    const __m256i &a, const __m256i &b,\
     \ const __m256i &m2, const __m256i &m0) {\n  __m256i ret = _mm256_sub_epi32(a,\
     \ b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret),\
-    \ m2),\n                          ret);\n}\n#line 8 \"modulo/strassen.hpp\"\n\n\
+    \ m2),\n                          ret);\n}\n#line 7 \"modulo/strassen.hpp\"\n\n\
     namespace FastMatProd {\n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing\
-    \ vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
-    using u32 = uint32_t;\nusing i32 = int32_t;\nusing u64 = uint64_t;\nusing m256\
-    \ = __m256i;\n\nconstexpr u32 SHIFT_ = 6;\nu32 a[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\n\
+    \ u32 = uint32_t;\nusing i32 = int32_t;\nusing u64 = uint64_t;\nusing m256 = __m256i;\n\
+    \nconstexpr u32 SHIFT_ = 6;\nu32 a[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\n\
     u32 b[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\nu32 c[1 << (SHIFT_ * 2)]\
     \ __attribute__((aligned(64)));\n\n__attribute__((target(\"avx2\"), optimize(\"\
     O3\", \"unroll-loops\"))) void\ninner_simd_mul(u32 n, u32 m, u32 p) {\n  memset(c,\
@@ -376,16 +375,11 @@ data:
     \       u32 ab0 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k0]) * b[(k0\
     \ << SHIFT_) | j0]);\n        if ((c[(i0 << SHIFT_) | j0] += ab0) >= 2 * mint::get_mod())\n\
     \          c[(i0 << SHIFT_) | j0] -= 2 * mint::get_mod();\n      }\n    }\n  }\n\
-    }\n\n// for debug\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) vvm naive_mul(\n    const vvm& _a, const vvm& _b) {\n  int n = _a.size(),\
-    \ m = _b[0].size(), p = _b.size();\n  assert(p == (int)_a[0].size());\n  vvm _c(n,\
-    \ fps(m, 0));\n  for (int i = 0; i < n; i++)\n    for (int k = 0; k < p; k++)\n\
-    \      for (int j = 0; j < m; j++) _c[i][j] += _a[i][k] * _b[k][j];\n  return\
-    \ _c;\n}\n\nstruct Mat {\n  int H, W, HM, WM;\n  mint* a;\n\n  Mat(int H_, int\
-    \ W_, mint* a_) : H(H_), W(W_), a(a_) {\n    HM = (H >> 1) + (H & 1);\n    WM\
-    \ = (W >> 1) + (W & 1);\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) void\n  range_add(mint* _b, int as, int ae, int bs)\
-    \ const {\n    const m256 M0 = _mm256_set1_epi32(0);\n    const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
+    }\n\nstruct Mat {\n  int H, W, HM, WM;\n  mint* a;\n\n  Mat(int H_, int W_, mint*\
+    \ a_) : H(H_), W(W_), a(a_) {\n    HM = (H >> 1) + (H & 1);\n    WM = (W >> 1)\
+    \ + (W & 1);\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) void\n  range_add(mint* _b, int as, int ae, int bs) const {\n    const m256\
+    \ M0 = _mm256_set1_epi32(0);\n    const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
     \ * 2);\n    for (; as < ae - 31; as += 32, bs += 32) {\n      int a0 = as;\n\
     \      int a1 = as + 8;\n      int a2 = as + 16;\n      int a3 = as + 24;\n  \
     \    int b0 = bs;\n      int b1 = bs + 8;\n      int b2 = bs + 16;\n      int\
@@ -515,7 +509,7 @@ data:
     \ as, ae, bs);\n    }\n  }\n\n  void dump() const {\n    cerr << \"[ \" << endl\
     \ << \" \";\n    for (int i = 0; i < H; i++)\n      for (int j = 0; j < W; j++)\n\
     \        cerr << a[i * W + j] << (j == W - 1 ? \",\\n \" : \" \");\n    cerr <<\
-    \ \"] \" << endl;\n  }\n};\n\n#ifndef BUFFER_SIZE\n#define BUFFER_SIZE (1 << 21)\n\
+    \ \"] \" << endl;\n  }\n};\n\n#ifndef BUFFER_SIZE\n#define BUFFER_SIZE (1 << 23)\n\
     #endif\nmint A[BUFFER_SIZE] __attribute__((aligned(64)));\nmint B[BUFFER_SIZE]\
     \ __attribute__((aligned(64)));\nmint C[BUFFER_SIZE] __attribute__((aligned(64)));\n\
     \n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n\
@@ -565,47 +559,27 @@ data:
     \ (B21 + B22)\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n  _a->A12(s.a);\n\
     \  _a->subA22(s.a);\n  memset((int*)t.a + (pm - 1) * mm, 0, mm * sizeof(int));\n\
     \  _b->A21(t.a);\n  _b->addA22(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->opaddA11(u.a);\n\
-    }\n\nusing vfps = vector<fps>;\n\n__attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) vvm block_dec(\n    const vvm& s, const vvm& t) {\n\
-    \  int n = s.size(), p = s[0].size(), m = t[0].size();\n  assert(int(n * p * 1.4)\
-    \ <= BUFFER_SIZE);\n  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n  assert(int(n\
+    }\n\ntemplate <typename fps>\n__attribute__((target(\"avx2\"), optimize(\"O3\"\
+    , \"unroll-loops\"))) vector<fps>\nblock_dec(const vector<fps>& s, const vector<fps>&\
+    \ t) {\n  int n = s.size(), p = s[0].size(), m = t[0].size();\n  assert(int(n\
+    \ * p * 1.4) <= BUFFER_SIZE);\n  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n  assert(int(n\
     \ * m * 1.4) <= BUFFER_SIZE);\n  memset(A, 0, int(n * p * 1.4) * sizeof(int));\n\
     \  memset(B, 0, int(p * m * 1.4) * sizeof(int));\n  memset(C, 0, int(m * n * 1.4)\
     \ * sizeof(int));\n\n  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(),\
     \ p * sizeof(int));\n  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(),\
     \ m * sizeof(int));\n\n  Mat S(n, p, A), T(p, m, B), U(n, m, C);\n  inner_block_dec_mul(&S,\
-    \ &T, &U);\n  vvm u(n, vm(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
-    \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\n__attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) vfps block_dec(\n    const vfps&\
-    \ s, const vfps& t) {\n  int n = s.size(), p = s[0].size(), m = t[0].size();\n\
-    \  assert(int(n * p * 1.4) <= BUFFER_SIZE);\n  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n\
-    \  assert(int(n * m * 1.4) <= BUFFER_SIZE);\n  memset(A, 0, int(n * p * 1.4) *\
-    \ sizeof(int));\n  memset(B, 0, int(p * m * 1.4) * sizeof(int));\n  memset(C,\
-    \ 0, int(m * n * 1.4) * sizeof(int));\n\n  for (int i = 0; i < n; i++) memcpy(A\
-    \ + i * p, s[i].data(), p * sizeof(int));\n  for (int i = 0; i < p; i++) memcpy(B\
-    \ + i * m, t[i].data(), m * sizeof(int));\n\n  Mat S(n, p, A), T(p, m, B), U(n,\
-    \ m, C);\n  inner_block_dec_mul(&S, &T, &U);\n  vfps u(n, fps(m));\n  for (int\
-    \ i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));\n  return\
-    \ std::move(u);\n}\n\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) vvm strassen(\n    const vvm& s, const vvm& t) {\n  int n = s.size(), p =\
-    \ s[0].size(), m = t[0].size();\n  assert(int(n * p * 1.4) <= BUFFER_SIZE);\n\
-    \  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n  assert(int(n * m * 1.4) <= BUFFER_SIZE);\n\
-    \  memset(A, 0, int(n * p * 1.4) * sizeof(int));\n  memset(B, 0, int(p * m * 1.4)\
-    \ * sizeof(int));\n  memset(C, 0, int(m * n * 1.4) * sizeof(int));\n\n  for (int\
-    \ i = 0; i < n; i++) memcpy(A + i * p, s[i].data(), p * sizeof(int));\n  for (int\
-    \ i = 0; i < p; i++) memcpy(B + i * m, t[i].data(), m * sizeof(int));\n\n  Mat\
-    \ S(n, p, A), T(p, m, B), U(n, m, C);\n  inner_strassen(&S, &T, &U);\n  vvm u(n,\
-    \ vm(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(), C + i * m, m * sizeof(int));\n\
-    \  return std::move(u);\n}\n\n__attribute__((target(\"avx2\"), optimize(\"O3\"\
-    , \"unroll-loops\"))) vfps strassen(\n    const vfps& s, const vfps& t) {\n  int\
-    \ n = s.size(), p = s[0].size(), m = t[0].size();\n  assert(int(n * p * 1.4) <=\
+    \ &T, &U);\n  vector<fps> u(n, fps(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
+    \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\ntemplate <typename\
+    \ fps>\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\")))\
+    \ vector<fps>\nstrassen(const vector<fps>& s, const vector<fps>& t) {\n  int n\
+    \ = s.size(), p = s[0].size(), m = t[0].size();\n  assert(int(n * p * 1.4) <=\
     \ BUFFER_SIZE);\n  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n  assert(int(n *\
     \ m * 1.4) <= BUFFER_SIZE);\n  memset(A, 0, int(n * p * 1.4) * sizeof(int));\n\
     \  memset(B, 0, int(p * m * 1.4) * sizeof(int));\n  memset(C, 0, int(m * n * 1.4)\
     \ * sizeof(int));\n\n  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(),\
     \ p * sizeof(int));\n  for (int i = 0; i < p; i++) memcpy(B + i * m, t[i].data(),\
     \ m * sizeof(int));\n\n  Mat S(n, p, A), T(p, m, B), U(n, m, C);\n  inner_strassen(&S,\
-    \ &T, &U);\n  vfps u(n, fps(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
+    \ &T, &U);\n  vector<fps> u(n, fps(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
     \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\n#ifdef BUFFER_SIZE\n\
     #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast.hpp\"\
     \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
@@ -1061,7 +1035,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   requiredBy: []
-  timestamp: '2021-05-08 12:51:05+09:00'
+  timestamp: '2021-05-08 13:17:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp

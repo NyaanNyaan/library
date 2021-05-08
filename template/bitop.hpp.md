@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
     title: XOR Convoluion
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -282,7 +282,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/simulated-annealing.test.cpp
     title: verify/verify-unit-test/simulated-annealing.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
   - icon: ':heavy_check_mark:'
@@ -795,9 +795,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"\
@@ -829,7 +829,7 @@ data:
   - multiplicative-function/enamurate-multiplicative-function.hpp
   - multiplicative-function/mf-famous-series.hpp
   timestamp: '2021-05-04 19:34:35+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp

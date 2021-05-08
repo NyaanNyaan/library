@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/gauss-elimination-fast.hpp
     title: modulo/gauss-elimination-fast.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   - icon: ':heavy_check_mark:'
@@ -57,7 +57,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
   - icon: ':heavy_check_mark:'
@@ -186,9 +186,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/simd-montgomery.hpp\"\n\n#include <immintrin.h>\n\
@@ -283,7 +283,7 @@ data:
   - modulo/strassen.hpp
   - modulo/gauss-elimination-fast.hpp
   timestamp: '2021-04-26 16:30:13+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
