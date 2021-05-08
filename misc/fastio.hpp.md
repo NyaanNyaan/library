@@ -154,6 +154,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - icon: ':heavy_check_mark:'
@@ -305,6 +308,7 @@ data:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp

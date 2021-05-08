@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   - icon: ':heavy_check_mark:'
@@ -178,11 +181,7 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/strassen.test.cpp\"\
-    \n//\n#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 3 \"modulo/strassen.hpp\"\n//\n\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \n//\n#line 3 \"modulo/strassen.hpp\"\n//\n\n#line 2 \"modint/montgomery-modint.hpp\"\
     \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
     \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
     \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
@@ -257,46 +256,76 @@ data:
     \nconstexpr u32 SHIFT_ = 6;\nu32 a[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\n\
     u32 b[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\nu32 c[1 << (SHIFT_ * 2)]\
     \ __attribute__((aligned(64)));\n\n__attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) void\ninner_simd_mul(u32 n, u32 m, u32 p) {\n  memset(c,\
-    \ 0, sizeof(c));\n  const m256 R = _mm256_set1_epi32(mint::r);\n  const m256 M0\
-    \ = _mm256_set1_epi32(0);\n  const m256 M1 = _mm256_set1_epi32(mint::get_mod());\n\
-    \  const m256 M2 = _mm256_set1_epi32(mint::get_mod() << 1);\n\n  u32 k0 = 0;\n\
-    \  for (; i32(k0) < i32(p) - 3; k0 += 4) {\n    const u32 k1 = k0 + 1;\n    const\
-    \ u32 k2 = k0 + 2;\n    const u32 k3 = k0 + 3;\n    u32 j0 = 0;\n    for (; i32(j0)\
-    \ < i32(m) - 7; j0 += 8) {\n      const m256 B00 = _mm256_load_si256((m256*)(b\
-    \ + (k0 << SHIFT_) + j0));\n      const m256 B10 = _mm256_load_si256((m256*)(b\
-    \ + (k1 << SHIFT_) + j0));\n      const m256 B20 = _mm256_load_si256((m256*)(b\
-    \ + (k2 << SHIFT_) + j0));\n      const m256 B30 = _mm256_load_si256((m256*)(b\
-    \ + (k3 << SHIFT_) + j0));\n      for (u32 i0 = 0; i0 < n; ++i0) {\n        const\
-    \ m256 A00 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k0]);\n        const m256 A01\
-    \ = _mm256_set1_epi32(a[(i0 << SHIFT_) | k1]);\n        const m256 A02 = _mm256_set1_epi32(a[(i0\
-    \ << SHIFT_) | k2]);\n        const m256 A03 = _mm256_set1_epi32(a[(i0 << SHIFT_)\
-    \ | k3]);\n        const m256 A00B00 = montgomery_mul_256(A00, B00, R, M1);\n\
-    \        const m256 A01B10 = montgomery_mul_256(A01, B10, R, M1);\n        const\
-    \ m256 A02B20 = montgomery_mul_256(A02, B20, R, M1);\n        const m256 A03B30\
-    \ = montgomery_mul_256(A03, B30, R, M1);\n        const u32* pc00 = c + (i0 <<\
-    \ SHIFT_) + j0;\n        const m256 C00 = _mm256_load_si256((m256*)pc00);\n  \
-    \      const m256 C00_01 = montgomery_add_256(A00B00, A01B10, M2, M0);\n     \
-    \   const m256 C00_23 = montgomery_add_256(A02B20, A03B30, M2, M0);\n        const\
-    \ m256 C00_al = montgomery_add_256(C00_01, C00_23, M2, M0);\n        const m256\
-    \ C00_ad = montgomery_add_256(C00, C00_al, M2, M0);\n        _mm256_store_si256((m256*)pc00,\
-    \ C00_ad);\n      }\n    }\n    for (; j0 < m; j0++) {\n      for (u32 i0 = 0;\
-    \ i0 < n; ++i0) {\n        u32 ab0 =\n            mint::reduce(u64(a[(i0 << SHIFT_)\
-    \ | k0]) * b[(k0 << SHIFT_) | j0]);\n        u32 ab1 =\n            mint::reduce(u64(a[(i0\
-    \ << SHIFT_) | k1]) * b[(k1 << SHIFT_) | j0]);\n        u32 ab2 =\n          \
-    \  mint::reduce(u64(a[(i0 << SHIFT_) | k2]) * b[(k2 << SHIFT_) | j0]);\n     \
-    \   u32 ab3 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k3]) * b[(k3 <<\
-    \ SHIFT_) | j0]);\n        if ((ab0 += ab1) >= 2 * mint::get_mod()) ab0 -= 2 *\
-    \ mint::get_mod();\n        if ((ab2 += ab3) >= 2 * mint::get_mod()) ab2 -= 2\
-    \ * mint::get_mod();\n        if ((ab0 += ab2) >= 2 * mint::get_mod()) ab0 -=\
-    \ 2 * mint::get_mod();\n        if ((c[(i0 << SHIFT_) | j0] += ab0) >= 2 * mint::get_mod())\n\
-    \          c[(i0 << SHIFT_) | j0] -= 2 * mint::get_mod();\n      }\n    }\n  }\n\
-    \n  for (; k0 < p; k0++) {\n    u32 j0 = 0;\n    for (; i32(j0) < i32(m) - 7;\
-    \ j0 += 8) {\n      const m256 B00 = _mm256_load_si256((m256*)(b + (k0 << SHIFT_)\
-    \ + j0));\n      for (u32 i0 = 0; i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0\
-    \ << SHIFT_) | k0]);\n        const m256 A00B00 = montgomery_mul_256(A00, B00,\
-    \ R, M1);\n        const u32* pc00 = c + (i0 << SHIFT_) + j0;\n        const m256\
-    \ C00 = _mm256_load_si256((m256*)pc00);\n        const m256 C00_ad = montgomery_add_256(C00,\
+    O3\", \"unroll-loops\"))) inline m256\nnormalize_m256(const m256& x, const m256&\
+    \ M1) {\n  m256 CMP = _mm256_cmpgt_epi32(x, M1);\n  return _mm256_sub_epi32(x,\
+    \ _mm256_and_si256(CMP, M1));\n}\n\n__attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline m256\nsimd_mulhi(const m256& _a, const m256&\
+    \ _b) {\n  m256 a13 = _mm256_shuffle_epi32(_a, 0xF5);\n  m256 b13 = _mm256_shuffle_epi32(_b,\
+    \ 0xF5);\n  m256 prod02 = _mm256_mul_epu32(_a, _b);\n  m256 prod13 = _mm256_mul_epu32(a13,\
+    \ b13);\n  m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);\n  m256 unpahi\
+    \ = _mm256_unpackhi_epi32(prod02, prod13);\n  m256 prod = _mm256_unpackhi_epi64(unpalo,\
+    \ unpahi);\n  return prod;\n}\n\n__attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline m256\nsimd_reduct(const m256& prod02, const m256&\
+    \ prod13, const m256& R,\n            const m256& M1) {\n  m256 unpalo = _mm256_unpacklo_epi32(prod02,\
+    \ prod13);\n  m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);\n  m256 prodlo\
+    \ = _mm256_unpacklo_epi64(unpalo, unpahi);\n  m256 prodhi = _mm256_unpackhi_epi64(unpalo,\
+    \ unpahi);\n  m256 hiplm1 = _mm256_add_epi32(prodhi, M1);\n  m256 lomulr = _mm256_mullo_epi32(prodlo,\
+    \ R);\n  m256 lomulrmulm1 = simd_mulhi(lomulr, M1);\n  return _mm256_sub_epi32(hiplm1,\
+    \ lomulrmulm1);\n}\n\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) inline m256\nmul4(const m256& A00, const m256& A01, const m256& A02, const\
+    \ m256& A03,\n     const m256& B00, const m256& B10, const m256& B20, const m256&\
+    \ B30,\n     const m256& R, const m256& M1) {\n  const m256 A00n = normalize_m256(A00,\
+    \ M1);\n  const m256 A01n = normalize_m256(A01, M1);\n  const m256 A02n = normalize_m256(A02,\
+    \ M1);\n  const m256 A03n = normalize_m256(A03, M1);\n  const m256 B00n = normalize_m256(B00,\
+    \ M1);\n  const m256 B10n = normalize_m256(B10, M1);\n  const m256 B20n = normalize_m256(B20,\
+    \ M1);\n  const m256 B30n = normalize_m256(B30, M1);\n\n  m256 a013 = _mm256_shuffle_epi32(A00n,\
+    \ 0xF5);\n  m256 b013 = _mm256_shuffle_epi32(B00n, 0xF5);\n  m256 a113 = _mm256_shuffle_epi32(A01n,\
+    \ 0xF5);\n  m256 b113 = _mm256_shuffle_epi32(B10n, 0xF5);\n  m256 a213 = _mm256_shuffle_epi32(A02n,\
+    \ 0xF5);\n  m256 b213 = _mm256_shuffle_epi32(B20n, 0xF5);\n  m256 a313 = _mm256_shuffle_epi32(A03n,\
+    \ 0xF5);\n  m256 b313 = _mm256_shuffle_epi32(B30n, 0xF5);\n  m256 p0_02 = _mm256_mul_epu32(A00n,\
+    \ B00n);\n  m256 p0_13 = _mm256_mul_epu32(a013, b013);\n  m256 p1_02 = _mm256_mul_epu32(A01n,\
+    \ B10n);\n  m256 p1_13 = _mm256_mul_epu32(a113, b113);\n  m256 p2_02 = _mm256_mul_epu32(A02n,\
+    \ B20n);\n  m256 p2_13 = _mm256_mul_epu32(a213, b213);\n  m256 p3_02 = _mm256_mul_epu32(A03n,\
+    \ B30n);\n  m256 p3_13 = _mm256_mul_epu32(a313, b313);\n  m256 p02_02 = _mm256_add_epi64(p0_02,\
+    \ p2_02);\n  m256 p13_02 = _mm256_add_epi64(p1_02, p3_02);\n  m256 prod02 = _mm256_add_epi64(p02_02,\
+    \ p13_02);\n  m256 p02_13 = _mm256_add_epi64(p0_13, p2_13);\n  m256 p13_13 = _mm256_add_epi64(p1_13,\
+    \ p3_13);\n  m256 prod13 = _mm256_add_epi64(p02_13, p13_13);\n  return simd_reduct(prod02,\
+    \ prod13, R, M1);\n}\n\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) void\ninner_simd_mul(u32 n, u32 m, u32 p) {\n  memset(c, 0, sizeof(c));\n\
+    \  const m256 R = _mm256_set1_epi32(mint::r);\n  const m256 M0 = _mm256_set1_epi32(0);\n\
+    \  const m256 M1 = _mm256_set1_epi32(mint::get_mod());\n  const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
+    \ << 1);\n\n  u32 k0 = 0;\n  for (; i32(k0) < i32(p) - 3; k0 += 4) {\n    const\
+    \ u32 k1 = k0 + 1;\n    const u32 k2 = k0 + 2;\n    const u32 k3 = k0 + 3;\n \
+    \   u32 j0 = 0;\n    for (; i32(j0) < i32(m) - 7; j0 += 8) {\n      const m256\
+    \ B00 = _mm256_load_si256((m256*)(b + (k0 << SHIFT_) + j0));\n      const m256\
+    \ B10 = _mm256_load_si256((m256*)(b + (k1 << SHIFT_) + j0));\n      const m256\
+    \ B20 = _mm256_load_si256((m256*)(b + (k2 << SHIFT_) + j0));\n      const m256\
+    \ B30 = _mm256_load_si256((m256*)(b + (k3 << SHIFT_) + j0));\n      for (u32 i0\
+    \ = 0; i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0 << SHIFT_)\
+    \ | k0]);\n        const m256 A01 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k1]);\n\
+    \        const m256 A02 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k2]);\n       \
+    \ const m256 A03 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k3]);\n        const u32*\
+    \ pc00 = c + (i0 << SHIFT_) + j0;\n        const m256 C00 = _mm256_load_si256((m256*)pc00);\n\
+    \        const m256 C00_ad = mul4(A00, A01, A02, A03, B00, B10, B20, B30, R, M1);\n\
+    \        const m256 C00sum = montgomery_add_256(C00, C00_ad, M2, M0);\n      \
+    \  _mm256_store_si256((m256*)pc00, C00sum);\n      }\n    }\n    for (; j0 < m;\
+    \ j0++) {\n      for (u32 i0 = 0; i0 < n; ++i0) {\n        u32 ab0 =\n       \
+    \     mint::reduce(u64(a[(i0 << SHIFT_) | k0]) * b[(k0 << SHIFT_) | j0]);\n  \
+    \      u32 ab1 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k1]) * b[(k1\
+    \ << SHIFT_) | j0]);\n        u32 ab2 =\n            mint::reduce(u64(a[(i0 <<\
+    \ SHIFT_) | k2]) * b[(k2 << SHIFT_) | j0]);\n        u32 ab3 =\n            mint::reduce(u64(a[(i0\
+    \ << SHIFT_) | k3]) * b[(k3 << SHIFT_) | j0]);\n        if ((ab0 += ab1) >= 2\
+    \ * mint::get_mod()) ab0 -= 2 * mint::get_mod();\n        if ((ab2 += ab3) >=\
+    \ 2 * mint::get_mod()) ab2 -= 2 * mint::get_mod();\n        if ((ab0 += ab2) >=\
+    \ 2 * mint::get_mod()) ab0 -= 2 * mint::get_mod();\n        if ((c[(i0 << SHIFT_)\
+    \ | j0] += ab0) >= 2 * mint::get_mod())\n          c[(i0 << SHIFT_) | j0] -= 2\
+    \ * mint::get_mod();\n      }\n    }\n  }\n\n  for (; k0 < p; k0++) {\n    u32\
+    \ j0 = 0;\n    for (; i32(j0) < i32(m) - 7; j0 += 8) {\n      const m256 B00 =\
+    \ _mm256_load_si256((m256*)(b + (k0 << SHIFT_) + j0));\n      for (u32 i0 = 0;\
+    \ i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0 << SHIFT_)\
+    \ | k0]);\n        const m256 A00B00 = montgomery_mul_256(A00, B00, R, M1);\n\
+    \        const u32* pc00 = c + (i0 << SHIFT_) + j0;\n        const m256 C00 =\
+    \ _mm256_load_si256((m256*)pc00);\n        const m256 C00_ad = montgomery_add_256(C00,\
     \ A00B00, M2, M0);\n        _mm256_store_si256((m256*)pc00, C00_ad);\n      }\n\
     \    }\n    for (; j0 < m; j0++) {\n      for (u32 i0 = 0; i0 < n; ++i0) {\n \
     \       u32 ab0 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k0]) * b[(k0\
@@ -508,23 +537,44 @@ data:
     \ m * sizeof(int));\n\n  Mat S(n, p, A), T(p, m, B), U(n, m, C);\n  inner_strassen(&S,\
     \ &T, &U);\n  vector<fps> u(n, fps(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
     \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\n#ifdef BUFFER_SIZE\n\
-    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 7 \"verify/verify-unit-test/strassen.test.cpp\"\
+    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 6 \"verify/verify-unit-test/strassen.test.cpp\"\
     \n\nnamespace FastMatProd {\n// for debug\ntemplate <typename fps>\n__attribute__((target(\"\
     avx2\"), optimize(\"O3\", \"unroll-loops\"))) vector<fps>\nnaive_mul(const vector<fps>&\
     \ _a, const vector<fps>& _b) {\n  int n = _a.size(), m = _b[0].size(), p = _b.size();\n\
     \  assert(p == (int)_a[0].size());\n  vector<fps> _c(n, fps(m, 0));\n  for (int\
     \ i = 0; i < n; i++)\n    for (int k = 0; k < p; k++)\n      for (int j = 0; j\
     \ < m; j++) _c[i][j] += _a[i][k] * _b[k][j];\n  return _c;\n}\n\n}  // namespace\
-    \ FastMatProd\n\nusing namespace FastMatProd;\n\nusing fps = vector<mint>;\n\n\
-    void time_test() {\n  int N = 1024;\n  int P = N, M = N;\n  mt19937 rng(58);\n\
-    \  vector<fps> s(N, fps(P)), t(P, fps(M));\n  for (int i = 0; i < N; i++)\n  \
-    \  for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n  for (int i = 0;\
-    \ i < P; i++)\n    for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;\n\
-    \  vector<fps> u, u2, u3;\n  Timer timer;\n\n  int loop = 5;\n  timer.reset();\n\
-    \  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s, t);\n  cerr <<\
-    \ \"strassen \" << (timer.elapsed() / loop) << endl;\n\n  timer.reset();\n  u2\
-    \ = FastMatProd::naive_mul(s, t);\n  cerr << \"naive \" << timer.elapsed() <<\
-    \ endl;\n\n  timer.reset();\n  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s,\
+    \ FastMatProd\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64\
+    \ - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
+    };\n#line 25 \"verify/verify-unit-test/strassen.test.cpp\"\n\nusing namespace\
+    \ FastMatProd;\nusing fps = vector<mint>;\n\nvoid time_test() {\n  int N = 1024;\n\
+    \  int P = N, M = N;\n  vector<fps> s(N, fps(P)), t(P, fps(M));\n  for (int i\
+    \ = 0; i < N; i++)\n    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n\
+    \  for (int i = 0; i < P; i++)\n    for (int j = 0; j < M; j++) t[i][j] = rng()\
+    \ % 998244353;\n  vector<fps> u, u2, u3;\n  Timer timer;\n\n  int loop = 5;\n\
+    \  timer.reset();\n  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s,\
+    \ t);\n  cerr << \"strassen \" << (timer.elapsed() / loop) << endl;\n\n  timer.reset();\n\
+    \  u2 = FastMatProd::naive_mul(s, t);\n  cerr << \"naive \" << timer.elapsed()\
+    \ << endl;\n\n  timer.reset();\n  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s,\
     \ t);\n  cerr << \"block dec \" << (timer.elapsed() / loop) << endl;\n\n  assert(u\
     \ == u2);\n  assert(u == u3);\n}\n\nvoid debug_test(int max = 500, int loop =\
     \ 10) {\n  int N, P, M;\n  mt19937 rng(58);\n  while (loop--) {\n    N = rng()\
@@ -535,22 +585,21 @@ data:
     \ u = strassen(s, t);\n    auto u2 = naive_mul(s, t);\n    auto u3 = block_dec(s,\
     \ t);\n    if (u != u2) {\n      cerr << \"ng u1 \" << N << \" \" << P << \" \"\
     \ << M << endl;\n      exit(1);\n    } else if (u != u3) {\n      cerr << \"ng\
-    \ u1 \" << N << \" \" << P << \" \" << M << endl;\n      exit(1);\n    } else\
-    \ {\n      // cerr << \"ok \" << N << \" \" << P << \" \" << M << \"\\n\";\n \
-    \   }\n  }\n  cerr << \"all ok\" << endl;\n}\n\nvoid Nyaan::solve() {\n  debug_test();\n\
+    \ u1 \" << N << \" \" << P << \" \" << M << endl;\n      exit(1);\n    } \n  }\n\
+    \  cerr << \"all ok\" << endl;\n}\n\nvoid Nyaan::solve() {\n  debug_test();\n\
     \  debug_test(32, 2000);\n  time_test();\n\n  int a, b;\n  cin >> a >> b;\n  cout\
     \ << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../misc/timer.hpp\"\n#include\
-    \ \"../../modulo/strassen.hpp\"\n\nnamespace FastMatProd {\n// for debug\ntemplate\
-    \ <typename fps>\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) vector<fps>\nnaive_mul(const vector<fps>& _a, const vector<fps>& _b) {\n \
-    \ int n = _a.size(), m = _b[0].size(), p = _b.size();\n  assert(p == (int)_a[0].size());\n\
-    \  vector<fps> _c(n, fps(m, 0));\n  for (int i = 0; i < n; i++)\n    for (int\
-    \ k = 0; k < p; k++)\n      for (int j = 0; j < m; j++) _c[i][j] += _a[i][k] *\
-    \ _b[k][j];\n  return _c;\n}\n\n}  // namespace FastMatProd\n\nusing namespace\
-    \ FastMatProd;\n\nusing fps = vector<mint>;\n\nvoid time_test() {\n  int N = 1024;\n\
-    \  int P = N, M = N;\n  mt19937 rng(58);\n  vector<fps> s(N, fps(P)), t(P, fps(M));\n\
+    ../../template/template.hpp\"\n//\n#include \"../../modulo/strassen.hpp\"\n\n\
+    namespace FastMatProd {\n// for debug\ntemplate <typename fps>\n__attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) vector<fps>\nnaive_mul(const vector<fps>&\
+    \ _a, const vector<fps>& _b) {\n  int n = _a.size(), m = _b[0].size(), p = _b.size();\n\
+    \  assert(p == (int)_a[0].size());\n  vector<fps> _c(n, fps(m, 0));\n  for (int\
+    \ i = 0; i < n; i++)\n    for (int k = 0; k < p; k++)\n      for (int j = 0; j\
+    \ < m; j++) _c[i][j] += _a[i][k] * _b[k][j];\n  return _c;\n}\n\n}  // namespace\
+    \ FastMatProd\n\n#include \"../../misc/rng.hpp\"\n#include \"../../misc/timer.hpp\"\
+    \n\nusing namespace FastMatProd;\nusing fps = vector<mint>;\n\nvoid time_test()\
+    \ {\n  int N = 1024;\n  int P = N, M = N;\n  vector<fps> s(N, fps(P)), t(P, fps(M));\n\
     \  for (int i = 0; i < N; i++)\n    for (int j = 0; j < P; j++) s[i][j] = rng()\
     \ % 998244353;\n  for (int i = 0; i < P; i++)\n    for (int j = 0; j < M; j++)\
     \ t[i][j] = rng() % 998244353;\n  vector<fps> u, u2, u3;\n  Timer timer;\n\n \
@@ -568,9 +617,8 @@ data:
     \ u = strassen(s, t);\n    auto u2 = naive_mul(s, t);\n    auto u3 = block_dec(s,\
     \ t);\n    if (u != u2) {\n      cerr << \"ng u1 \" << N << \" \" << P << \" \"\
     \ << M << endl;\n      exit(1);\n    } else if (u != u3) {\n      cerr << \"ng\
-    \ u1 \" << N << \" \" << P << \" \" << M << endl;\n      exit(1);\n    } else\
-    \ {\n      // cerr << \"ok \" << N << \" \" << P << \" \" << M << \"\\n\";\n \
-    \   }\n  }\n  cerr << \"all ok\" << endl;\n}\n\nvoid Nyaan::solve() {\n  debug_test();\n\
+    \ u1 \" << N << \" \" << P << \" \" << M << endl;\n      exit(1);\n    } \n  }\n\
+    \  cerr << \"all ok\" << endl;\n}\n\nvoid Nyaan::solve() {\n  debug_test();\n\
     \  debug_test(32, 2000);\n  time_test();\n\n  int a, b;\n  cin >> a >> b;\n  cout\
     \ << a + b << endl;\n}"
   dependsOn:
@@ -580,14 +628,15 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - misc/timer.hpp
   - modulo/strassen.hpp
   - modint/montgomery-modint.hpp
   - modint/simd-montgomery.hpp
+  - misc/rng.hpp
+  - misc/timer.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/strassen.test.cpp
   requiredBy: []
-  timestamp: '2021-05-08 13:17:01+09:00'
+  timestamp: '2021-05-08 13:51:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/strassen.test.cpp

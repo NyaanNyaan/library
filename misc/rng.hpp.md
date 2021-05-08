@@ -82,6 +82,9 @@ data:
     path: verify/verify-unit-test/simulated-annealing.test.cpp
     title: verify/verify-unit-test/simulated-annealing.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/strassen.test.cpp
+    title: verify/verify-unit-test/strassen.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/template.test.cpp
     title: verify/verify-unit-test/template.test.cpp
   - icon: ':heavy_check_mark:'
@@ -184,6 +187,7 @@ data:
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/template.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/math.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp

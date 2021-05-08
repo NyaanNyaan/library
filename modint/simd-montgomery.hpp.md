@@ -121,6 +121,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - icon: ':heavy_check_mark:'
@@ -331,6 +334,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
 documentation_of: modint/simd-montgomery.hpp

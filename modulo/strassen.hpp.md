@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -98,46 +101,76 @@ data:
     \nconstexpr u32 SHIFT_ = 6;\nu32 a[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\n\
     u32 b[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\nu32 c[1 << (SHIFT_ * 2)]\
     \ __attribute__((aligned(64)));\n\n__attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) void\ninner_simd_mul(u32 n, u32 m, u32 p) {\n  memset(c,\
-    \ 0, sizeof(c));\n  const m256 R = _mm256_set1_epi32(mint::r);\n  const m256 M0\
-    \ = _mm256_set1_epi32(0);\n  const m256 M1 = _mm256_set1_epi32(mint::get_mod());\n\
-    \  const m256 M2 = _mm256_set1_epi32(mint::get_mod() << 1);\n\n  u32 k0 = 0;\n\
-    \  for (; i32(k0) < i32(p) - 3; k0 += 4) {\n    const u32 k1 = k0 + 1;\n    const\
-    \ u32 k2 = k0 + 2;\n    const u32 k3 = k0 + 3;\n    u32 j0 = 0;\n    for (; i32(j0)\
-    \ < i32(m) - 7; j0 += 8) {\n      const m256 B00 = _mm256_load_si256((m256*)(b\
-    \ + (k0 << SHIFT_) + j0));\n      const m256 B10 = _mm256_load_si256((m256*)(b\
-    \ + (k1 << SHIFT_) + j0));\n      const m256 B20 = _mm256_load_si256((m256*)(b\
-    \ + (k2 << SHIFT_) + j0));\n      const m256 B30 = _mm256_load_si256((m256*)(b\
-    \ + (k3 << SHIFT_) + j0));\n      for (u32 i0 = 0; i0 < n; ++i0) {\n        const\
-    \ m256 A00 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k0]);\n        const m256 A01\
-    \ = _mm256_set1_epi32(a[(i0 << SHIFT_) | k1]);\n        const m256 A02 = _mm256_set1_epi32(a[(i0\
-    \ << SHIFT_) | k2]);\n        const m256 A03 = _mm256_set1_epi32(a[(i0 << SHIFT_)\
-    \ | k3]);\n        const m256 A00B00 = montgomery_mul_256(A00, B00, R, M1);\n\
-    \        const m256 A01B10 = montgomery_mul_256(A01, B10, R, M1);\n        const\
-    \ m256 A02B20 = montgomery_mul_256(A02, B20, R, M1);\n        const m256 A03B30\
-    \ = montgomery_mul_256(A03, B30, R, M1);\n        const u32* pc00 = c + (i0 <<\
-    \ SHIFT_) + j0;\n        const m256 C00 = _mm256_load_si256((m256*)pc00);\n  \
-    \      const m256 C00_01 = montgomery_add_256(A00B00, A01B10, M2, M0);\n     \
-    \   const m256 C00_23 = montgomery_add_256(A02B20, A03B30, M2, M0);\n        const\
-    \ m256 C00_al = montgomery_add_256(C00_01, C00_23, M2, M0);\n        const m256\
-    \ C00_ad = montgomery_add_256(C00, C00_al, M2, M0);\n        _mm256_store_si256((m256*)pc00,\
-    \ C00_ad);\n      }\n    }\n    for (; j0 < m; j0++) {\n      for (u32 i0 = 0;\
-    \ i0 < n; ++i0) {\n        u32 ab0 =\n            mint::reduce(u64(a[(i0 << SHIFT_)\
-    \ | k0]) * b[(k0 << SHIFT_) | j0]);\n        u32 ab1 =\n            mint::reduce(u64(a[(i0\
-    \ << SHIFT_) | k1]) * b[(k1 << SHIFT_) | j0]);\n        u32 ab2 =\n          \
-    \  mint::reduce(u64(a[(i0 << SHIFT_) | k2]) * b[(k2 << SHIFT_) | j0]);\n     \
-    \   u32 ab3 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k3]) * b[(k3 <<\
-    \ SHIFT_) | j0]);\n        if ((ab0 += ab1) >= 2 * mint::get_mod()) ab0 -= 2 *\
-    \ mint::get_mod();\n        if ((ab2 += ab3) >= 2 * mint::get_mod()) ab2 -= 2\
-    \ * mint::get_mod();\n        if ((ab0 += ab2) >= 2 * mint::get_mod()) ab0 -=\
-    \ 2 * mint::get_mod();\n        if ((c[(i0 << SHIFT_) | j0] += ab0) >= 2 * mint::get_mod())\n\
-    \          c[(i0 << SHIFT_) | j0] -= 2 * mint::get_mod();\n      }\n    }\n  }\n\
-    \n  for (; k0 < p; k0++) {\n    u32 j0 = 0;\n    for (; i32(j0) < i32(m) - 7;\
-    \ j0 += 8) {\n      const m256 B00 = _mm256_load_si256((m256*)(b + (k0 << SHIFT_)\
-    \ + j0));\n      for (u32 i0 = 0; i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0\
-    \ << SHIFT_) | k0]);\n        const m256 A00B00 = montgomery_mul_256(A00, B00,\
-    \ R, M1);\n        const u32* pc00 = c + (i0 << SHIFT_) + j0;\n        const m256\
-    \ C00 = _mm256_load_si256((m256*)pc00);\n        const m256 C00_ad = montgomery_add_256(C00,\
+    O3\", \"unroll-loops\"))) inline m256\nnormalize_m256(const m256& x, const m256&\
+    \ M1) {\n  m256 CMP = _mm256_cmpgt_epi32(x, M1);\n  return _mm256_sub_epi32(x,\
+    \ _mm256_and_si256(CMP, M1));\n}\n\n__attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline m256\nsimd_mulhi(const m256& _a, const m256&\
+    \ _b) {\n  m256 a13 = _mm256_shuffle_epi32(_a, 0xF5);\n  m256 b13 = _mm256_shuffle_epi32(_b,\
+    \ 0xF5);\n  m256 prod02 = _mm256_mul_epu32(_a, _b);\n  m256 prod13 = _mm256_mul_epu32(a13,\
+    \ b13);\n  m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);\n  m256 unpahi\
+    \ = _mm256_unpackhi_epi32(prod02, prod13);\n  m256 prod = _mm256_unpackhi_epi64(unpalo,\
+    \ unpahi);\n  return prod;\n}\n\n__attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline m256\nsimd_reduct(const m256& prod02, const m256&\
+    \ prod13, const m256& R,\n            const m256& M1) {\n  m256 unpalo = _mm256_unpacklo_epi32(prod02,\
+    \ prod13);\n  m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);\n  m256 prodlo\
+    \ = _mm256_unpacklo_epi64(unpalo, unpahi);\n  m256 prodhi = _mm256_unpackhi_epi64(unpalo,\
+    \ unpahi);\n  m256 hiplm1 = _mm256_add_epi32(prodhi, M1);\n  m256 lomulr = _mm256_mullo_epi32(prodlo,\
+    \ R);\n  m256 lomulrmulm1 = simd_mulhi(lomulr, M1);\n  return _mm256_sub_epi32(hiplm1,\
+    \ lomulrmulm1);\n}\n\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) inline m256\nmul4(const m256& A00, const m256& A01, const m256& A02, const\
+    \ m256& A03,\n     const m256& B00, const m256& B10, const m256& B20, const m256&\
+    \ B30,\n     const m256& R, const m256& M1) {\n  const m256 A00n = normalize_m256(A00,\
+    \ M1);\n  const m256 A01n = normalize_m256(A01, M1);\n  const m256 A02n = normalize_m256(A02,\
+    \ M1);\n  const m256 A03n = normalize_m256(A03, M1);\n  const m256 B00n = normalize_m256(B00,\
+    \ M1);\n  const m256 B10n = normalize_m256(B10, M1);\n  const m256 B20n = normalize_m256(B20,\
+    \ M1);\n  const m256 B30n = normalize_m256(B30, M1);\n\n  m256 a013 = _mm256_shuffle_epi32(A00n,\
+    \ 0xF5);\n  m256 b013 = _mm256_shuffle_epi32(B00n, 0xF5);\n  m256 a113 = _mm256_shuffle_epi32(A01n,\
+    \ 0xF5);\n  m256 b113 = _mm256_shuffle_epi32(B10n, 0xF5);\n  m256 a213 = _mm256_shuffle_epi32(A02n,\
+    \ 0xF5);\n  m256 b213 = _mm256_shuffle_epi32(B20n, 0xF5);\n  m256 a313 = _mm256_shuffle_epi32(A03n,\
+    \ 0xF5);\n  m256 b313 = _mm256_shuffle_epi32(B30n, 0xF5);\n  m256 p0_02 = _mm256_mul_epu32(A00n,\
+    \ B00n);\n  m256 p0_13 = _mm256_mul_epu32(a013, b013);\n  m256 p1_02 = _mm256_mul_epu32(A01n,\
+    \ B10n);\n  m256 p1_13 = _mm256_mul_epu32(a113, b113);\n  m256 p2_02 = _mm256_mul_epu32(A02n,\
+    \ B20n);\n  m256 p2_13 = _mm256_mul_epu32(a213, b213);\n  m256 p3_02 = _mm256_mul_epu32(A03n,\
+    \ B30n);\n  m256 p3_13 = _mm256_mul_epu32(a313, b313);\n  m256 p02_02 = _mm256_add_epi64(p0_02,\
+    \ p2_02);\n  m256 p13_02 = _mm256_add_epi64(p1_02, p3_02);\n  m256 prod02 = _mm256_add_epi64(p02_02,\
+    \ p13_02);\n  m256 p02_13 = _mm256_add_epi64(p0_13, p2_13);\n  m256 p13_13 = _mm256_add_epi64(p1_13,\
+    \ p3_13);\n  m256 prod13 = _mm256_add_epi64(p02_13, p13_13);\n  return simd_reduct(prod02,\
+    \ prod13, R, M1);\n}\n\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) void\ninner_simd_mul(u32 n, u32 m, u32 p) {\n  memset(c, 0, sizeof(c));\n\
+    \  const m256 R = _mm256_set1_epi32(mint::r);\n  const m256 M0 = _mm256_set1_epi32(0);\n\
+    \  const m256 M1 = _mm256_set1_epi32(mint::get_mod());\n  const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
+    \ << 1);\n\n  u32 k0 = 0;\n  for (; i32(k0) < i32(p) - 3; k0 += 4) {\n    const\
+    \ u32 k1 = k0 + 1;\n    const u32 k2 = k0 + 2;\n    const u32 k3 = k0 + 3;\n \
+    \   u32 j0 = 0;\n    for (; i32(j0) < i32(m) - 7; j0 += 8) {\n      const m256\
+    \ B00 = _mm256_load_si256((m256*)(b + (k0 << SHIFT_) + j0));\n      const m256\
+    \ B10 = _mm256_load_si256((m256*)(b + (k1 << SHIFT_) + j0));\n      const m256\
+    \ B20 = _mm256_load_si256((m256*)(b + (k2 << SHIFT_) + j0));\n      const m256\
+    \ B30 = _mm256_load_si256((m256*)(b + (k3 << SHIFT_) + j0));\n      for (u32 i0\
+    \ = 0; i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0 << SHIFT_)\
+    \ | k0]);\n        const m256 A01 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k1]);\n\
+    \        const m256 A02 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k2]);\n       \
+    \ const m256 A03 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k3]);\n        const u32*\
+    \ pc00 = c + (i0 << SHIFT_) + j0;\n        const m256 C00 = _mm256_load_si256((m256*)pc00);\n\
+    \        const m256 C00_ad = mul4(A00, A01, A02, A03, B00, B10, B20, B30, R, M1);\n\
+    \        const m256 C00sum = montgomery_add_256(C00, C00_ad, M2, M0);\n      \
+    \  _mm256_store_si256((m256*)pc00, C00sum);\n      }\n    }\n    for (; j0 < m;\
+    \ j0++) {\n      for (u32 i0 = 0; i0 < n; ++i0) {\n        u32 ab0 =\n       \
+    \     mint::reduce(u64(a[(i0 << SHIFT_) | k0]) * b[(k0 << SHIFT_) | j0]);\n  \
+    \      u32 ab1 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k1]) * b[(k1\
+    \ << SHIFT_) | j0]);\n        u32 ab2 =\n            mint::reduce(u64(a[(i0 <<\
+    \ SHIFT_) | k2]) * b[(k2 << SHIFT_) | j0]);\n        u32 ab3 =\n            mint::reduce(u64(a[(i0\
+    \ << SHIFT_) | k3]) * b[(k3 << SHIFT_) | j0]);\n        if ((ab0 += ab1) >= 2\
+    \ * mint::get_mod()) ab0 -= 2 * mint::get_mod();\n        if ((ab2 += ab3) >=\
+    \ 2 * mint::get_mod()) ab2 -= 2 * mint::get_mod();\n        if ((ab0 += ab2) >=\
+    \ 2 * mint::get_mod()) ab0 -= 2 * mint::get_mod();\n        if ((c[(i0 << SHIFT_)\
+    \ | j0] += ab0) >= 2 * mint::get_mod())\n          c[(i0 << SHIFT_) | j0] -= 2\
+    \ * mint::get_mod();\n      }\n    }\n  }\n\n  for (; k0 < p; k0++) {\n    u32\
+    \ j0 = 0;\n    for (; i32(j0) < i32(m) - 7; j0 += 8) {\n      const m256 B00 =\
+    \ _mm256_load_si256((m256*)(b + (k0 << SHIFT_) + j0));\n      for (u32 i0 = 0;\
+    \ i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0 << SHIFT_)\
+    \ | k0]);\n        const m256 A00B00 = montgomery_mul_256(A00, B00, R, M1);\n\
+    \        const u32* pc00 = c + (i0 << SHIFT_) + j0;\n        const m256 C00 =\
+    \ _mm256_load_si256((m256*)pc00);\n        const m256 C00_ad = montgomery_add_256(C00,\
     \ A00B00, M2, M0);\n        _mm256_store_si256((m256*)pc00, C00_ad);\n      }\n\
     \    }\n    for (; j0 < m; j0++) {\n      for (u32 i0 = 0; i0 < n; ++i0) {\n \
     \       u32 ab0 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k0]) * b[(k0\
@@ -356,10 +389,45 @@ data:
     \ int32_t;\nusing u64 = uint64_t;\nusing m256 = __m256i;\n\nconstexpr u32 SHIFT_\
     \ = 6;\nu32 a[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\nu32 b[1 << (SHIFT_\
     \ * 2)] __attribute__((aligned(64)));\nu32 c[1 << (SHIFT_ * 2)] __attribute__((aligned(64)));\n\
-    \n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n\
-    inner_simd_mul(u32 n, u32 m, u32 p) {\n  memset(c, 0, sizeof(c));\n  const m256\
-    \ R = _mm256_set1_epi32(mint::r);\n  const m256 M0 = _mm256_set1_epi32(0);\n \
-    \ const m256 M1 = _mm256_set1_epi32(mint::get_mod());\n  const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
+    \n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline\
+    \ m256\nnormalize_m256(const m256& x, const m256& M1) {\n  m256 CMP = _mm256_cmpgt_epi32(x,\
+    \ M1);\n  return _mm256_sub_epi32(x, _mm256_and_si256(CMP, M1));\n}\n\n__attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline m256\nsimd_mulhi(const m256&\
+    \ _a, const m256& _b) {\n  m256 a13 = _mm256_shuffle_epi32(_a, 0xF5);\n  m256\
+    \ b13 = _mm256_shuffle_epi32(_b, 0xF5);\n  m256 prod02 = _mm256_mul_epu32(_a,\
+    \ _b);\n  m256 prod13 = _mm256_mul_epu32(a13, b13);\n  m256 unpalo = _mm256_unpacklo_epi32(prod02,\
+    \ prod13);\n  m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);\n  m256 prod\
+    \ = _mm256_unpackhi_epi64(unpalo, unpahi);\n  return prod;\n}\n\n__attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline m256\nsimd_reduct(const m256&\
+    \ prod02, const m256& prod13, const m256& R,\n            const m256& M1) {\n\
+    \  m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);\n  m256 unpahi = _mm256_unpackhi_epi32(prod02,\
+    \ prod13);\n  m256 prodlo = _mm256_unpacklo_epi64(unpalo, unpahi);\n  m256 prodhi\
+    \ = _mm256_unpackhi_epi64(unpalo, unpahi);\n  m256 hiplm1 = _mm256_add_epi32(prodhi,\
+    \ M1);\n  m256 lomulr = _mm256_mullo_epi32(prodlo, R);\n  m256 lomulrmulm1 = simd_mulhi(lomulr,\
+    \ M1);\n  return _mm256_sub_epi32(hiplm1, lomulrmulm1);\n}\n\n__attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline m256\nmul4(const m256& A00,\
+    \ const m256& A01, const m256& A02, const m256& A03,\n     const m256& B00, const\
+    \ m256& B10, const m256& B20, const m256& B30,\n     const m256& R, const m256&\
+    \ M1) {\n  const m256 A00n = normalize_m256(A00, M1);\n  const m256 A01n = normalize_m256(A01,\
+    \ M1);\n  const m256 A02n = normalize_m256(A02, M1);\n  const m256 A03n = normalize_m256(A03,\
+    \ M1);\n  const m256 B00n = normalize_m256(B00, M1);\n  const m256 B10n = normalize_m256(B10,\
+    \ M1);\n  const m256 B20n = normalize_m256(B20, M1);\n  const m256 B30n = normalize_m256(B30,\
+    \ M1);\n\n  m256 a013 = _mm256_shuffle_epi32(A00n, 0xF5);\n  m256 b013 = _mm256_shuffle_epi32(B00n,\
+    \ 0xF5);\n  m256 a113 = _mm256_shuffle_epi32(A01n, 0xF5);\n  m256 b113 = _mm256_shuffle_epi32(B10n,\
+    \ 0xF5);\n  m256 a213 = _mm256_shuffle_epi32(A02n, 0xF5);\n  m256 b213 = _mm256_shuffle_epi32(B20n,\
+    \ 0xF5);\n  m256 a313 = _mm256_shuffle_epi32(A03n, 0xF5);\n  m256 b313 = _mm256_shuffle_epi32(B30n,\
+    \ 0xF5);\n  m256 p0_02 = _mm256_mul_epu32(A00n, B00n);\n  m256 p0_13 = _mm256_mul_epu32(a013,\
+    \ b013);\n  m256 p1_02 = _mm256_mul_epu32(A01n, B10n);\n  m256 p1_13 = _mm256_mul_epu32(a113,\
+    \ b113);\n  m256 p2_02 = _mm256_mul_epu32(A02n, B20n);\n  m256 p2_13 = _mm256_mul_epu32(a213,\
+    \ b213);\n  m256 p3_02 = _mm256_mul_epu32(A03n, B30n);\n  m256 p3_13 = _mm256_mul_epu32(a313,\
+    \ b313);\n  m256 p02_02 = _mm256_add_epi64(p0_02, p2_02);\n  m256 p13_02 = _mm256_add_epi64(p1_02,\
+    \ p3_02);\n  m256 prod02 = _mm256_add_epi64(p02_02, p13_02);\n  m256 p02_13 =\
+    \ _mm256_add_epi64(p0_13, p2_13);\n  m256 p13_13 = _mm256_add_epi64(p1_13, p3_13);\n\
+    \  m256 prod13 = _mm256_add_epi64(p02_13, p13_13);\n  return simd_reduct(prod02,\
+    \ prod13, R, M1);\n}\n\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) void\ninner_simd_mul(u32 n, u32 m, u32 p) {\n  memset(c, 0, sizeof(c));\n\
+    \  const m256 R = _mm256_set1_epi32(mint::r);\n  const m256 M0 = _mm256_set1_epi32(0);\n\
+    \  const m256 M1 = _mm256_set1_epi32(mint::get_mod());\n  const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
     \ << 1);\n\n  u32 k0 = 0;\n  for (; i32(k0) < i32(p) - 3; k0 += 4) {\n    const\
     \ u32 k1 = k0 + 1;\n    const u32 k2 = k0 + 2;\n    const u32 k3 = k0 + 3;\n \
     \   u32 j0 = 0;\n    for (; i32(j0) < i32(m) - 7; j0 += 8) {\n      const m256\
@@ -370,32 +438,28 @@ data:
     \ = 0; i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0 << SHIFT_)\
     \ | k0]);\n        const m256 A01 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k1]);\n\
     \        const m256 A02 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k2]);\n       \
-    \ const m256 A03 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k3]);\n        const m256\
-    \ A00B00 = montgomery_mul_256(A00, B00, R, M1);\n        const m256 A01B10 = montgomery_mul_256(A01,\
-    \ B10, R, M1);\n        const m256 A02B20 = montgomery_mul_256(A02, B20, R, M1);\n\
-    \        const m256 A03B30 = montgomery_mul_256(A03, B30, R, M1);\n        const\
-    \ u32* pc00 = c + (i0 << SHIFT_) + j0;\n        const m256 C00 = _mm256_load_si256((m256*)pc00);\n\
-    \        const m256 C00_01 = montgomery_add_256(A00B00, A01B10, M2, M0);\n   \
-    \     const m256 C00_23 = montgomery_add_256(A02B20, A03B30, M2, M0);\n      \
-    \  const m256 C00_al = montgomery_add_256(C00_01, C00_23, M2, M0);\n        const\
-    \ m256 C00_ad = montgomery_add_256(C00, C00_al, M2, M0);\n        _mm256_store_si256((m256*)pc00,\
-    \ C00_ad);\n      }\n    }\n    for (; j0 < m; j0++) {\n      for (u32 i0 = 0;\
-    \ i0 < n; ++i0) {\n        u32 ab0 =\n            mint::reduce(u64(a[(i0 << SHIFT_)\
-    \ | k0]) * b[(k0 << SHIFT_) | j0]);\n        u32 ab1 =\n            mint::reduce(u64(a[(i0\
-    \ << SHIFT_) | k1]) * b[(k1 << SHIFT_) | j0]);\n        u32 ab2 =\n          \
-    \  mint::reduce(u64(a[(i0 << SHIFT_) | k2]) * b[(k2 << SHIFT_) | j0]);\n     \
-    \   u32 ab3 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k3]) * b[(k3 <<\
-    \ SHIFT_) | j0]);\n        if ((ab0 += ab1) >= 2 * mint::get_mod()) ab0 -= 2 *\
-    \ mint::get_mod();\n        if ((ab2 += ab3) >= 2 * mint::get_mod()) ab2 -= 2\
-    \ * mint::get_mod();\n        if ((ab0 += ab2) >= 2 * mint::get_mod()) ab0 -=\
-    \ 2 * mint::get_mod();\n        if ((c[(i0 << SHIFT_) | j0] += ab0) >= 2 * mint::get_mod())\n\
-    \          c[(i0 << SHIFT_) | j0] -= 2 * mint::get_mod();\n      }\n    }\n  }\n\
-    \n  for (; k0 < p; k0++) {\n    u32 j0 = 0;\n    for (; i32(j0) < i32(m) - 7;\
-    \ j0 += 8) {\n      const m256 B00 = _mm256_load_si256((m256*)(b + (k0 << SHIFT_)\
-    \ + j0));\n      for (u32 i0 = 0; i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0\
-    \ << SHIFT_) | k0]);\n        const m256 A00B00 = montgomery_mul_256(A00, B00,\
-    \ R, M1);\n        const u32* pc00 = c + (i0 << SHIFT_) + j0;\n        const m256\
-    \ C00 = _mm256_load_si256((m256*)pc00);\n        const m256 C00_ad = montgomery_add_256(C00,\
+    \ const m256 A03 = _mm256_set1_epi32(a[(i0 << SHIFT_) | k3]);\n        const u32*\
+    \ pc00 = c + (i0 << SHIFT_) + j0;\n        const m256 C00 = _mm256_load_si256((m256*)pc00);\n\
+    \        const m256 C00_ad = mul4(A00, A01, A02, A03, B00, B10, B20, B30, R, M1);\n\
+    \        const m256 C00sum = montgomery_add_256(C00, C00_ad, M2, M0);\n      \
+    \  _mm256_store_si256((m256*)pc00, C00sum);\n      }\n    }\n    for (; j0 < m;\
+    \ j0++) {\n      for (u32 i0 = 0; i0 < n; ++i0) {\n        u32 ab0 =\n       \
+    \     mint::reduce(u64(a[(i0 << SHIFT_) | k0]) * b[(k0 << SHIFT_) | j0]);\n  \
+    \      u32 ab1 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k1]) * b[(k1\
+    \ << SHIFT_) | j0]);\n        u32 ab2 =\n            mint::reduce(u64(a[(i0 <<\
+    \ SHIFT_) | k2]) * b[(k2 << SHIFT_) | j0]);\n        u32 ab3 =\n            mint::reduce(u64(a[(i0\
+    \ << SHIFT_) | k3]) * b[(k3 << SHIFT_) | j0]);\n        if ((ab0 += ab1) >= 2\
+    \ * mint::get_mod()) ab0 -= 2 * mint::get_mod();\n        if ((ab2 += ab3) >=\
+    \ 2 * mint::get_mod()) ab2 -= 2 * mint::get_mod();\n        if ((ab0 += ab2) >=\
+    \ 2 * mint::get_mod()) ab0 -= 2 * mint::get_mod();\n        if ((c[(i0 << SHIFT_)\
+    \ | j0] += ab0) >= 2 * mint::get_mod())\n          c[(i0 << SHIFT_) | j0] -= 2\
+    \ * mint::get_mod();\n      }\n    }\n  }\n\n  for (; k0 < p; k0++) {\n    u32\
+    \ j0 = 0;\n    for (; i32(j0) < i32(m) - 7; j0 += 8) {\n      const m256 B00 =\
+    \ _mm256_load_si256((m256*)(b + (k0 << SHIFT_) + j0));\n      for (u32 i0 = 0;\
+    \ i0 < n; ++i0) {\n        const m256 A00 = _mm256_set1_epi32(a[(i0 << SHIFT_)\
+    \ | k0]);\n        const m256 A00B00 = montgomery_mul_256(A00, B00, R, M1);\n\
+    \        const u32* pc00 = c + (i0 << SHIFT_) + j0;\n        const m256 C00 =\
+    \ _mm256_load_si256((m256*)pc00);\n        const m256 C00_ad = montgomery_add_256(C00,\
     \ A00B00, M2, M0);\n        _mm256_store_si256((m256*)pc00, C00_ad);\n      }\n\
     \    }\n    for (; j0 < m; j0++) {\n      for (u32 i0 = 0; i0 < n; ++i0) {\n \
     \       u32 ab0 =\n            mint::reduce(u64(a[(i0 << SHIFT_) | k0]) * b[(k0\
@@ -615,11 +679,12 @@ data:
   path: modulo/strassen.hpp
   requiredBy:
   - fps/fps-composition-fast.hpp
-  timestamp: '2021-05-08 13:17:01+09:00'
+  timestamp: '2021-05-08 13:51:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
 documentation_of: modulo/strassen.hpp
 layout: document
 redirect_from:

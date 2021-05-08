@@ -1376,6 +1376,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+      title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
       title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     - icon: ':heavy_check_mark:'
