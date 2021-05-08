@@ -6,25 +6,22 @@ data:
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':question:'
-    path: misc/timer.hpp
-    title: misc/timer.hpp
-  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
     links: []
@@ -230,20 +227,20 @@ data:
     \ b3 = bs + 24;\n      const m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n\
     \      const m256 A1 = _mm256_loadu_si256((m256*)(a + a1));\n      const m256\
     \ A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const m256 A3 = _mm256_loadu_si256((m256*)(a\
-    \ + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(b + b0));\n      const\
-    \ m256 B1 = _mm256_loadu_si256((m256*)(b + b1));\n      const m256 B2 = _mm256_loadu_si256((m256*)(b\
-    \ + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));\n      const\
-    \ m256 BA0 = montgomery_add_256(B0, A0, M2, M0);\n      const m256 BA1 = montgomery_add_256(B1,\
-    \ A1, M2, M0);\n      const m256 BA2 = montgomery_add_256(B2, A2, M2, M0);\n \
-    \     const m256 BA3 = montgomery_add_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(_b\
-    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(_b + b1), BA1);\n      _mm256_storeu_si256((m256*)(_b\
-    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(_b + b3), BA3);\n    }\n   \
-    \ for (; as < ae; ++as, ++bs) _b[bs] += a[as];\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n  range_sub(mint* _b, int\
-    \ as, int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n   \
-    \ const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae\
-    \ - 31; as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n  \
-    \    int a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int\
+    \ + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(_b + b0));\n     \
+    \ const m256 B1 = _mm256_loadu_si256((m256*)(_b + b1));\n      const m256 B2 =\
+    \ _mm256_loadu_si256((m256*)(_b + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(_b\
+    \ + b3));\n      const m256 BA0 = montgomery_add_256(B0, A0, M2, M0);\n      const\
+    \ m256 BA1 = montgomery_add_256(B1, A1, M2, M0);\n      const m256 BA2 = montgomery_add_256(B2,\
+    \ A2, M2, M0);\n      const m256 BA3 = montgomery_add_256(B3, A3, M2, M0);\n \
+    \     _mm256_storeu_si256((m256*)(_b + b0), BA0);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b1), BA1);\n      _mm256_storeu_si256((m256*)(_b + b2), BA2);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b3), BA3);\n    }\n    for (; as < ae; ++as, ++bs) _b[bs] += a[as];\n  }\n\
+    \n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n\
+    \  range_sub(mint* _b, int as, int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n\
+    \    const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as <\
+    \ ae - 31; as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n\
+    \      int a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int\
     \ b1 = bs + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const\
     \ m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
     \ + a1));\n      const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const\
@@ -445,33 +442,7 @@ data:
     \ m * sizeof(int));\n\n  Mat S(n, p, A), T(p, m, B), U(n, m, C);\n  inner_strassen(&S,\
     \ &T, &U);\n  vfps u(n, fps(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
     \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\n#ifdef BUFFER_SIZE\n\
-    #undef BUFFER_SIZE\n#endif\n\n#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n \
-    \ chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\n\
-    \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
-    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
-    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
-    \ 632 \"modulo/strassen.hpp\"\nvoid time_test() {\n  int N = 1024;\n  int P =\
-    \ N, M = N;\n  mt19937 rng(58);\n  vvm s(N, vm(P)), t(P, vm(M));\n  for (int i\
-    \ = 0; i < N; i++)\n    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n\
-    \  for (int i = 0; i < P; i++)\n    for (int j = 0; j < M; j++) t[i][j] = rng()\
-    \ % 998244353;\n  vvm u, u2, u3;\n  Timer timer;\n\n  int loop = 5;\n  timer.reset();\n\
-    \  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s, t);\n  cout <<\
-    \ \"strassen \" << (timer.elapsed() / loop) << endl;\n\n  timer.reset();\n  u2\
-    \ = FastMatProd::naive_mul(s, t);\n  cout << \"naive \" << timer.elapsed() <<\
-    \ endl;\n\n  timer.reset();\n  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s,\
-    \ t);\n  cout << \"block dec \" << (timer.elapsed() / loop) << endl;\n\n  assert(u\
-    \ == u2);\n  assert(u == u3);\n}\n\nvoid debug_test() {\n  // time_test();\n \
-    \ int N, P, M;\n  mt19937 rng(58);\n  int loop = 1000;\n  while (loop--) {\n \
-    \   N = rng() % 500 + 1;\n    M = rng() % 500 + 1;\n    P = rng() % 500 + 1;\n\
-    \    vvm s(N, vm(P)), t(P, vm(M));\n    for (int i = 0; i < N; i++)\n      for\
-    \ (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n    for (int i = 0; i\
-    \ < P; i++)\n      for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;\n\
-    \    auto u = strassen(s, t);\n    auto u2 = naive_mul(s, t);\n    auto u3 = block_dec(s,\
-    \ t);\n    if (u != u2) {\n      cout << \"ng u1 \" << N << \" \" << P << \" \"\
-    \ << M << endl;\n      exit(1);\n    } else if (u != u3) {\n      cout << \"ng\
-    \ u1 \" << N << \" \" << P << \" \" << M << endl;\n      exit(1);\n    } else\
-    \ {\n      cout << \"ok \" << N << \" \" << P << \" \" << M << endl;\n    }\n\
-    \  }\n  cout << \"all ok\";\n}\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast.hpp\"\
+    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast.hpp\"\
     \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
     \n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) fps Composition(\n\
     \    fps P, fps Q, int deg = -1) {\n  int N = (deg == -1) ? min(P.size(), Q.size())\
@@ -539,12 +510,11 @@ data:
   - modint/montgomery-modint.hpp
   - modulo/strassen.hpp
   - modint/simd-montgomery.hpp
-  - misc/timer.hpp
   isVerificationFile: false
   path: fps/fps-composition-fast.hpp
   requiredBy: []
-  timestamp: '2021-05-08 12:43:13+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-05-08 12:51:05+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
 documentation_of: fps/fps-composition-fast.hpp

@@ -2,15 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
-    path: fps/fps-composition-fast.hpp
-    title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   - icon: ':heavy_check_mark:'
     path: marathon/simulated-annealing.hpp
     title: Simulated Annealing
-  - icon: ':x:'
-    path: modulo/strassen.hpp
-    title: modulo/strassen.hpp
   - icon: ':heavy_check_mark:'
     path: trial/fast-gcd.hpp
     title: "\u9AD8\u901FGCD"
@@ -31,8 +25,8 @@ data:
     path: verify/verify-unit-test/simulated-annealing.test.cpp
     title: verify/verify-unit-test/simulated-annealing.test.cpp
   - icon: ':x:'
-    path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-    title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+    path: verify/verify-unit-test/strassen.test.cpp
+    title: verify/verify-unit-test/strassen.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -52,8 +46,6 @@ data:
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
-  - fps/fps-composition-fast.hpp
-  - modulo/strassen.hpp
   - trial/fast-gcd.hpp
   - trial/fast-inv.hpp
   - marathon/simulated-annealing.hpp
@@ -64,7 +56,7 @@ data:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
 documentation_of: misc/timer.hpp
 layout: document
 redirect_from:

@@ -5,15 +5,9 @@ data:
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: fps/fps-composition-fast.hpp
-    title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-  - icon: ':heavy_check_mark:'
-    path: fps/ntt-friendly-fps.hpp
-    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
+  - icon: ':question:'
+    path: misc/timer.hpp
+    title: misc/timer.hpp
   - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -23,9 +17,6 @@ data:
   - icon: ':question:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
-  - icon: ':heavy_check_mark:'
-    path: ntt/ntt-avx2.hpp
-    title: ntt/ntt-avx2.hpp
   - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -46,35 +37,35 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/composition_of_formal_power_series
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/composition_of_formal_power_series
-  bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/composition_of_formal_power_series\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/strassen.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
@@ -190,7 +181,12 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"fps/formal-power-series.hpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/strassen.test.cpp\"\
+    \n//\n#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
+    };\n#line 3 \"modulo/strassen.hpp\"\n//\n\n#line 2 \"fps/formal-power-series.hpp\"\
     \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
     \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
@@ -287,16 +283,15 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 3 \"modulo/strassen.hpp\"\n//\n\n#line 2 \"modint/simd-montgomery.hpp\"\
-    \n\n#line 4 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
-    ))) inline __m128i my128_mullo_epu32(\n    const __m128i &a, const __m128i &b)\
-    \ {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"sse4.2\")))\
-    \ inline __m128i my128_mulhi_epu32(\n    const __m128i &a, const __m128i &b) {\n\
-    \  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b,\
-    \ 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
-    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
-    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
-    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) inline __m128i montgomery_mul_128(\n\
+    \ { return mod; }\n};\n#line 2 \"modint/simd-montgomery.hpp\"\n\n#line 4 \"modint/simd-montgomery.hpp\"\
+    \n\n__attribute__((target(\"sse4.2\"))) inline __m128i my128_mullo_epu32(\n  \
+    \  const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\
+    \n__attribute__((target(\"sse4.2\"))) inline __m128i my128_mulhi_epu32(\n    const\
+    \ __m128i &a, const __m128i &b) {\n  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n\
+    \  __m128i b13 = _mm_shuffle_epi32(b, 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a,\
+    \ b);\n  __m128i prod13 = _mm_mul_epu32(a13, b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02,\
+    \ prod13),\n                                    _mm_unpackhi_epi32(prod02, prod13));\n\
+    \  return prod;\n}\n\n__attribute__((target(\"sse4.2\"))) inline __m128i montgomery_mul_128(\n\
     \    const __m128i &a, const __m128i &b, const __m128i &r, const __m128i &m1)\
     \ {\n  return _mm_sub_epi32(\n      _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n\
     \      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a, b), r), m1));\n\
@@ -607,442 +602,57 @@ data:
     \ m * sizeof(int));\n\n  Mat S(n, p, A), T(p, m, B), U(n, m, C);\n  inner_strassen(&S,\
     \ &T, &U);\n  vfps u(n, fps(m));\n  for (int i = 0; i < n; i++) memcpy(u[i].data(),\
     \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\n#ifdef BUFFER_SIZE\n\
-    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast.hpp\"\
-    \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
-    \n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) fps Composition(\n\
-    \    fps P, fps Q, int deg = -1) {\n  int N = (deg == -1) ? min(P.size(), Q.size())\
-    \ : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n  if (P.size() == 0) {\n\
-    \    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0) : Q[0];\n    return R;\n\
-    \  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  int K = max<int>(ceil(sqrt(N)),\
-    \ 2);\n  assert(N <= K * K);\n\n  vector<fps> PS(K + 1);\n  {\n    // step 1\n\
-    \    PS[0].resize(N, mint());\n    PS[0][0] = 1;\n    PS[1] = P;\n    fps::set_fft();\n\
-    \    if (fps::ntt_ptr == nullptr) {\n      for (int i = 2; i <= K; i++) PS[i]\
-    \ = (PS[i - 1] * P).pre(N);\n    } else {\n      int len = 1 << (32 - __builtin_clz(2\
-    \ * N - 2));\n      fps Pomega = P;\n      Pomega.resize(len);\n      Pomega.ntt();\n\
-    \      for (int i = 2; i <= K; i++) {\n        PS[i].resize(len);\n        for\
-    \ (int j = 0; j < N; j++) PS[i][j] = PS[i - 1][j];\n        PS[i].ntt();\n   \
-    \     for (int j = 0; j < len; j++) PS[i][j] *= Pomega[j];\n        PS[i].intt();\n\
-    \        PS[i].resize(N);\n        PS[i].shrink_to_fit();\n      }\n    }\n  }\n\
-    \n  vector<fps> TS(K);\n  {\n    // step 2\n    TS[0].resize(N, mint());\n   \
-    \ TS[0][0] = 1;\n    TS[1] = PS[K];\n    if (fps::ntt_ptr == nullptr) {\n    \
-    \  for (int i = 2; i < K; i++) TS[i] = (TS[i - 1] * TS[1]).pre(N);\n    } else\
-    \ {\n      int len = 1 << (32 - __builtin_clz(2 * N - 2));\n      fps Tomega =\
-    \ TS[1];\n      Tomega.resize(len);\n      Tomega.ntt();\n      for (int i = 2;\
-    \ i < K; i++) {\n        TS[i].resize(len);\n        for (int j = 0; j < N; j++)\
-    \ TS[i][j] = TS[i - 1][j];\n        TS[i].ntt();\n        for (int j = 0; j <\
-    \ len; j++) TS[i][j] *= Tomega[j];\n        TS[i].intt();\n        TS[i].resize(N);\n\
-    \        TS[i].shrink_to_fit();\n      }\n    }\n  }\n\n  // step 3\n  vector<fps>\
-    \ QP;\n  {\n    PS.pop_back();\n    vector<fps> QS(K, fps(K, mint()));\n    for\
-    \ (int i = 0; i < K; i++)\n      for (int j = 0; j < K; j++) {\n        QS[i][j]\
-    \ = (i * K + j) < (int)Q.size() ? Q[i * K + j] : mint();\n      }\n    QP = FastMatProd::strassen(QS,\
-    \ PS);\n  }\n\n  fps ans(N, mint());\n  {\n    // step 4,5\n    for (int i = 0;\
-    \ i < K; i++) ans += (QP[i] * TS[i]).pre(N);\n  }\n  return ans;\n}\n\n/**\n *\
-    \ @brief \u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )\n */\n#line 2 \"\
-    fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line 4 \"ntt/ntt-avx2.hpp\"\
-    \n\nnamespace ntt_inner {\nusing u64 = uint64_t;\nconstexpr uint32_t get_pr(uint32_t\
-    \ mod) {\n  if (mod == 2) return 1;\n  u64 ds[32] = {};\n  int idx = 0;\n  u64\
-    \ m = mod - 1;\n  for (u64 i = 2; i * i <= m; ++i) {\n    if (m % i == 0) {\n\
-    \      ds[idx++] = i;\n      while (m % i == 0) m /= i;\n    }\n  }\n  if (m !=\
-    \ 1) ds[idx++] = m;\n\n  uint32_t pr = 2;\n  while (1) {\n    int flg = 1;\n \
-    \   for (int i = 0; i < idx; ++i) {\n      u64 a = pr, b = (mod - 1) / ds[i],\
-    \ r = 1;\n      while (b) {\n        if (b & 1) r = r * a % mod;\n        a =\
-    \ a * a % mod;\n        b >>= 1;\n      }\n      if (r == 1) {\n        flg =\
-    \ 0;\n        break;\n      }\n    }\n    if (flg == 1) break;\n    ++pr;\n  }\n\
-    \  return pr;\n}\n\nconstexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t _buf1[SZ_FFT_BUF]\
-    \ __attribute__((aligned(64)));\nuint32_t _buf2[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
-    }  // namespace ntt_inner\n\ntemplate <typename mint>\nstruct NTT {\n  static\
-    \ constexpr uint32_t mod = mint::get_mod();\n  static constexpr uint32_t pr =\
-    \ ntt_inner::get_pr(mint::get_mod());\n  static constexpr int level = __builtin_ctzll(mod\
-    \ - 1);\n  mint dw[level], dy[level];\n  mint *buf1, *buf2;\n\n  constexpr NTT()\
-    \ {\n    setwy(level);\n    union raw_cast {\n      mint dat;\n      uint32_t\
-    \ _;\n    };\n    buf1 = &(((raw_cast *)(ntt_inner::_buf1))->dat);\n    buf2 =\
-    \ &(((raw_cast *)(ntt_inner::_buf2))->dat);\n  }\n\n  constexpr void setwy(int\
-    \ k) {\n    mint w[level], y[level];\n    w[k - 1] = mint(pr).pow((mod - 1) /\
-    \ (1 << k));\n    y[k - 1] = w[k - 1].inverse();\n    for (int i = k - 2; i >\
-    \ 0; --i)\n      w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];\n   \
-    \ dw[0] = dy[0] = w[1] * w[1];\n    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2],\
-    \ dy[2] = y[2];\n    for (int i = 3; i < k; ++i) {\n      dw[i] = dw[i - 1] *\
-    \ y[i - 2] * w[i];\n      dy[i] = dy[i - 1] * w[i - 2] * y[i];\n    }\n  }\n\n\
-    \  __attribute__((target(\"avx2\"))) void ntt(mint *a, int n) {\n    int k = n\
-    \ ? __builtin_ctz(n) : 0;\n    if (k == 0) return;\n    if (k == 1) {\n      mint\
-    \ a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n\
-    \    }\n    if (k & 1) {\n      int v = 1 << (k - 1);\n      if (v < 8) {\n  \
-    \      for (int j = 0; j < v; ++j) {\n          mint ajv = a[j + v];\n       \
-    \   a[j + v] = a[j] - ajv;\n          a[j] += ajv;\n        }\n      } else {\n\
-    \        const __m256i m0 = _mm256_set1_epi32(0);\n        const __m256i m2 =\
-    \ _mm256_set1_epi32(mod + mod);\n        int j0 = 0;\n        int j1 = v;\n  \
-    \      for (; j0 < v; j0 += 8, j1 += 8) {\n          __m256i T0 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j0));\n          __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));\n\
-    \          __m256i naj = montgomery_add_256(T0, T1, m2, m0);\n          __m256i\
-    \ najv = montgomery_sub_256(T0, T1, m2, m0);\n          _mm256_storeu_si256((__m256i\
-    \ *)(a + j0), naj);\n          _mm256_storeu_si256((__m256i *)(a + j1), najv);\n\
-    \        }\n      }\n    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 <<\
-    \ (k - 2 - (k & 1));\n    mint one = mint(1);\n    mint imag = dw[1];\n    while\
-    \ (v) {\n      if (v == 1) {\n        mint ww = one, xx = one, wx = one;\n   \
-    \     for (int jh = 0; jh < u;) {\n          ww = xx * xx, wx = ww * xx;\n   \
-    \       mint t0 = a[jh + 0], t1 = a[jh + 1] * xx;\n          mint t2 = a[jh +\
-    \ 2] * ww, t3 = a[jh + 3] * wx;\n          mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n\
-    \          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;\n          a[jh + 0]\
-    \ = t0p2 + t1p3, a[jh + 1] = t0p2 - t1p3;\n          a[jh + 2] = t0m2 + t1m3,\
-    \ a[jh + 3] = t0m2 - t1m3;\n          xx *= dw[__builtin_ctz((jh += 4))];\n  \
-    \      }\n      } else if (v == 4) {\n        const __m128i m0 = _mm_set1_epi32(0);\n\
-    \        const __m128i m1 = _mm_set1_epi32(mod);\n        const __m128i m2 = _mm_set1_epi32(mod\
-    \ + mod);\n        const __m128i r = _mm_set1_epi32(mint::r);\n        const __m128i\
-    \ Imag = _mm_set1_epi32(imag.a);\n        mint ww = one, xx = one, wx = one;\n\
-    \        for (int jh = 0; jh < u;) {\n          if (jh == 0) {\n            int\
-    \ j0 = 0;\n            int j1 = v;\n            int j2 = j1 + v;\n           \
-    \ int j3 = j2 + v;\n            int je = v;\n            for (; j0 < je; j0 +=\
-    \ 4, j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
-    \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
-    \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
-    \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
-    \          const __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);\n        \
-    \      const __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);\n            \
-    \  const __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);\n              const\
-    \ __m128i T1M3 = montgomery_mul_128(\n                  montgomery_sub_128(T1,\
-    \ T3, m2, m0), Imag, r, m1);\n              _mm_storeu_si128((__m128i *)(a + j0),\n\
-    \                               montgomery_add_128(T0P2, T1P3, m2, m0));\n   \
-    \           _mm_storeu_si128((__m128i *)(a + j1),\n                          \
-    \     montgomery_sub_128(T0P2, T1P3, m2, m0));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j2),\n                               montgomery_add_128(T0M2, T1M3, m2,\
-    \ m0));\n              _mm_storeu_si128((__m128i *)(a + j3),\n               \
-    \                montgomery_sub_128(T0M2, T1M3, m2, m0));\n            }\n   \
-    \       } else {\n            ww = xx * xx, wx = ww * xx;\n            const __m128i\
-    \ WW = _mm_set1_epi32(ww.a);\n            const __m128i WX = _mm_set1_epi32(wx.a);\n\
-    \            const __m128i XX = _mm_set1_epi32(xx.a);\n            int j0 = jh\
-    \ * v;\n            int j1 = j0 + v;\n            int j2 = j1 + v;\n         \
-    \   int j3 = j2 + v;\n            int je = j1;\n            for (; j0 < je; j0\
-    \ += 4, j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
-    \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
-    \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
-    \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
-    \          const __m128i MT1 = montgomery_mul_128(T1, XX, r, m1);\n          \
-    \    const __m128i MT2 = montgomery_mul_128(T2, WW, r, m1);\n              const\
-    \ __m128i MT3 = montgomery_mul_128(T3, WX, r, m1);\n              const __m128i\
-    \ T0P2 = montgomery_add_128(T0, MT2, m2, m0);\n              const __m128i T1P3\
-    \ = montgomery_add_128(MT1, MT3, m2, m0);\n              const __m128i T0M2 =\
-    \ montgomery_sub_128(T0, MT2, m2, m0);\n              const __m128i T1M3 = montgomery_mul_128(\n\
-    \                  montgomery_sub_128(MT1, MT3, m2, m0), Imag, r, m1);\n     \
-    \         _mm_storeu_si128((__m128i *)(a + j0),\n                            \
-    \   montgomery_add_128(T0P2, T1P3, m2, m0));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j1),\n                               montgomery_sub_128(T0P2, T1P3, m2,\
-    \ m0));\n              _mm_storeu_si128((__m128i *)(a + j2),\n               \
-    \                montgomery_add_128(T0M2, T1M3, m2, m0));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j3),\n                               montgomery_sub_128(T0M2, T1M3, m2,\
-    \ m0));\n            }\n          }\n          xx *= dw[__builtin_ctz((jh += 4))];\n\
-    \        }\n      } else {\n        const __m256i m0 = _mm256_set1_epi32(0);\n\
-    \        const __m256i m1 = _mm256_set1_epi32(mod);\n        const __m256i m2\
-    \ = _mm256_set1_epi32(mod + mod);\n        const __m256i r = _mm256_set1_epi32(mint::r);\n\
-    \        const __m256i Imag = _mm256_set1_epi32(imag.a);\n        mint ww = one,\
-    \ xx = one, wx = one;\n        for (int jh = 0; jh < u;) {\n          if (jh ==\
-    \ 0) {\n            int j0 = 0;\n            int j1 = v;\n            int j2 =\
-    \ j1 + v;\n            int j3 = j2 + v;\n            int je = v;\n           \
-    \ for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {\n              const __m256i\
-    \ T0 = _mm256_loadu_si256((__m256i *)(a + j0));\n              const __m256i T1\
-    \ = _mm256_loadu_si256((__m256i *)(a + j1));\n              const __m256i T2 =\
-    \ _mm256_loadu_si256((__m256i *)(a + j2));\n              const __m256i T3 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j3));\n              const __m256i T0P2 = montgomery_add_256(T0, T2,\
-    \ m2, m0);\n              const __m256i T1P3 = montgomery_add_256(T1, T3, m2,\
-    \ m0);\n              const __m256i T0M2 = montgomery_sub_256(T0, T2, m2, m0);\n\
-    \              const __m256i T1M3 = montgomery_mul_256(\n                  montgomery_sub_256(T1,\
-    \ T3, m2, m0), Imag, r, m1);\n              _mm256_storeu_si256((__m256i *)(a\
-    \ + j0),\n                                  montgomery_add_256(T0P2, T1P3, m2,\
-    \ m0));\n              _mm256_storeu_si256((__m256i *)(a + j1),\n            \
-    \                      montgomery_sub_256(T0P2, T1P3, m2, m0));\n            \
-    \  _mm256_storeu_si256((__m256i *)(a + j2),\n                                \
-    \  montgomery_add_256(T0M2, T1M3, m2, m0));\n              _mm256_storeu_si256((__m256i\
-    \ *)(a + j3),\n                                  montgomery_sub_256(T0M2, T1M3,\
-    \ m2, m0));\n            }\n          } else {\n            ww = xx * xx, wx =\
-    \ ww * xx;\n            const __m256i WW = _mm256_set1_epi32(ww.a);\n        \
-    \    const __m256i WX = _mm256_set1_epi32(wx.a);\n            const __m256i XX\
-    \ = _mm256_set1_epi32(xx.a);\n            int j0 = jh * v;\n            int j1\
-    \ = j0 + v;\n            int j2 = j1 + v;\n            int j3 = j2 + v;\n    \
-    \        int je = j1;\n            for (; j0 < je; j0 += 8, j1 += 8, j2 += 8,\
-    \ j3 += 8) {\n              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a\
-    \ + j0));\n              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a +\
-    \ j1));\n              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));\n\
-    \              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));\n \
-    \             const __m256i MT1 = montgomery_mul_256(T1, XX, r, m1);\n       \
-    \       const __m256i MT2 = montgomery_mul_256(T2, WW, r, m1);\n             \
-    \ const __m256i MT3 = montgomery_mul_256(T3, WX, r, m1);\n              const\
-    \ __m256i T0P2 = montgomery_add_256(T0, MT2, m2, m0);\n              const __m256i\
-    \ T1P3 = montgomery_add_256(MT1, MT3, m2, m0);\n              const __m256i T0M2\
-    \ = montgomery_sub_256(T0, MT2, m2, m0);\n              const __m256i T1M3 = montgomery_mul_256(\n\
-    \                  montgomery_sub_256(MT1, MT3, m2, m0), Imag, r, m1);\n     \
-    \         _mm256_storeu_si256((__m256i *)(a + j0),\n                         \
-    \         montgomery_add_256(T0P2, T1P3, m2, m0));\n              _mm256_storeu_si256((__m256i\
-    \ *)(a + j1),\n                                  montgomery_sub_256(T0P2, T1P3,\
-    \ m2, m0));\n              _mm256_storeu_si256((__m256i *)(a + j2),\n        \
-    \                          montgomery_add_256(T0M2, T1M3, m2, m0));\n        \
-    \      _mm256_storeu_si256((__m256i *)(a + j3),\n                            \
-    \      montgomery_sub_256(T0M2, T1M3, m2, m0));\n            }\n          }\n\
-    \          xx *= dw[__builtin_ctz((jh += 4))];\n        }\n      }\n      u <<=\
-    \ 2;\n      v >>= 2;\n    }\n  }\n\n  __attribute__((target(\"avx2\"))) void intt(mint\
-    \ *a, int n,\n                                            int normalize = true)\
-    \ {\n    int k = n ? __builtin_ctz(n) : 0;\n    if (k == 0) return;\n    if (k\
-    \ == 1) {\n      mint a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0]\
-    \ + a1;\n      if (normalize) {\n        a[0] *= mint(2).inverse();\n        a[1]\
-    \ *= mint(2).inverse();\n      }\n      return;\n    }\n    int u = 1 << (k -\
-    \ 2);\n    int v = 1;\n    mint one = mint(1);\n    mint imag = dy[1];\n    while\
-    \ (u) {\n      if (v == 1) {\n        mint ww = one, xx = one, yy = one;\n   \
-    \     u <<= 2;\n        for (int jh = 0; jh < u;) {\n          ww = xx * xx, yy\
-    \ = xx * imag;\n          mint t0 = a[jh + 0], t1 = a[jh + 1];\n          mint\
-    \ t2 = a[jh + 2], t3 = a[jh + 3];\n          mint t0p1 = t0 + t1, t2p3 = t2 +\
-    \ t3;\n          mint t0m1 = (t0 - t1) * xx, t2m3 = (t2 - t3) * yy;\n        \
-    \  a[jh + 0] = t0p1 + t2p3, a[jh + 2] = (t0p1 - t2p3) * ww;\n          a[jh +\
-    \ 1] = t0m1 + t2m3, a[jh + 3] = (t0m1 - t2m3) * ww;\n          xx *= dy[__builtin_ctz(jh\
-    \ += 4)];\n        }\n      } else if (v == 4) {\n        const __m128i m0 = _mm_set1_epi32(0);\n\
-    \        const __m128i m1 = _mm_set1_epi32(mod);\n        const __m128i m2 = _mm_set1_epi32(mod\
-    \ + mod);\n        const __m128i r = _mm_set1_epi32(mint::r);\n        const __m128i\
-    \ Imag = _mm_set1_epi32(imag.a);\n        mint ww = one, xx = one, yy = one;\n\
-    \        u <<= 2;\n        for (int jh = 0; jh < u;) {\n          if (jh == 0)\
-    \ {\n            int j0 = 0;\n            int j1 = v;\n            int j2 = v\
-    \ + v;\n            int j3 = j2 + v;\n            for (; j0 < v; j0 += 4, j1 +=\
-    \ 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
-    \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
-    \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
-    \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
-    \          const __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);\n        \
-    \      const __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);\n            \
-    \  const __m128i T0M1 = montgomery_sub_128(T0, T1, m2, m0);\n              const\
-    \ __m128i T2M3 = montgomery_mul_128(\n                  montgomery_sub_128(T2,\
-    \ T3, m2, m0), Imag, r, m1);\n              _mm_storeu_si128((__m128i *)(a + j0),\n\
-    \                               montgomery_add_128(T0P1, T2P3, m2, m0));\n   \
-    \           _mm_storeu_si128((__m128i *)(a + j2),\n                          \
-    \     montgomery_sub_128(T0P1, T2P3, m2, m0));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j1),\n                               montgomery_add_128(T0M1, T2M3, m2,\
-    \ m0));\n              _mm_storeu_si128((__m128i *)(a + j3),\n               \
-    \                montgomery_sub_128(T0M1, T2M3, m2, m0));\n            }\n   \
-    \       } else {\n            ww = xx * xx, yy = xx * imag;\n            const\
-    \ __m128i WW = _mm_set1_epi32(ww.a);\n            const __m128i XX = _mm_set1_epi32(xx.a);\n\
-    \            const __m128i YY = _mm_set1_epi32(yy.a);\n            int j0 = jh\
-    \ * v;\n            int j1 = j0 + v;\n            int j2 = j1 + v;\n         \
-    \   int j3 = j2 + v;\n            int je = j1;\n            for (; j0 < je; j0\
-    \ += 4, j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
-    \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
-    \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
-    \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
-    \          const __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);\n        \
-    \      const __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);\n            \
-    \  const __m128i T0M1 = montgomery_mul_128(\n                  montgomery_sub_128(T0,\
-    \ T1, m2, m0), XX, r, m1);\n              __m128i T2M3 = montgomery_mul_128(\n\
-    \                  montgomery_sub_128(T2, T3, m2, m0), YY, r, m1);\n         \
-    \     _mm_storeu_si128((__m128i *)(a + j0),\n                               montgomery_add_128(T0P1,\
-    \ T2P3, m2, m0));\n              _mm_storeu_si128(\n                  (__m128i\
-    \ *)(a + j2),\n                  montgomery_mul_128(montgomery_sub_128(T0P1, T2P3,\
-    \ m2, m0), WW,\n                                     r, m1));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j1),\n                               montgomery_add_128(T0M1, T2M3, m2,\
-    \ m0));\n              _mm_storeu_si128(\n                  (__m128i *)(a + j3),\n\
-    \                  montgomery_mul_128(montgomery_sub_128(T0M1, T2M3, m2, m0),\
-    \ WW,\n                                     r, m1));\n            }\n        \
-    \  }\n          xx *= dy[__builtin_ctz(jh += 4)];\n        }\n      } else {\n\
-    \        const __m256i m0 = _mm256_set1_epi32(0);\n        const __m256i m1 =\
-    \ _mm256_set1_epi32(mod);\n        const __m256i m2 = _mm256_set1_epi32(mod +\
-    \ mod);\n        const __m256i r = _mm256_set1_epi32(mint::r);\n        const\
-    \ __m256i Imag = _mm256_set1_epi32(imag.a);\n        mint ww = one, xx = one,\
-    \ yy = one;\n        u <<= 2;\n        for (int jh = 0; jh < u;) {\n         \
-    \ if (jh == 0) {\n            int j0 = 0;\n            int j1 = v;\n         \
-    \   int j2 = v + v;\n            int j3 = j2 + v;\n            for (; j0 < v;\
-    \ j0 += 8, j1 += 8, j2 += 8, j3 += 8) {\n              const __m256i T0 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j0));\n              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a\
-    \ + j1));\n              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a +\
-    \ j2));\n              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));\n\
-    \              const __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);\n    \
-    \          const __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);\n        \
-    \      const __m256i T0M1 = montgomery_sub_256(T0, T1, m2, m0);\n            \
-    \  const __m256i T2M3 = montgomery_mul_256(\n                  montgomery_sub_256(T2,\
-    \ T3, m2, m0), Imag, r, m1);\n              _mm256_storeu_si256((__m256i *)(a\
-    \ + j0),\n                                  montgomery_add_256(T0P1, T2P3, m2,\
-    \ m0));\n              _mm256_storeu_si256((__m256i *)(a + j2),\n            \
-    \                      montgomery_sub_256(T0P1, T2P3, m2, m0));\n            \
-    \  _mm256_storeu_si256((__m256i *)(a + j1),\n                                \
-    \  montgomery_add_256(T0M1, T2M3, m2, m0));\n              _mm256_storeu_si256((__m256i\
-    \ *)(a + j3),\n                                  montgomery_sub_256(T0M1, T2M3,\
-    \ m2, m0));\n            }\n          } else {\n            ww = xx * xx, yy =\
-    \ xx * imag;\n            const __m256i WW = _mm256_set1_epi32(ww.a);\n      \
-    \      const __m256i XX = _mm256_set1_epi32(xx.a);\n            const __m256i\
-    \ YY = _mm256_set1_epi32(yy.a);\n            int j0 = jh * v;\n            int\
-    \ j1 = j0 + v;\n            int j2 = j1 + v;\n            int j3 = j2 + v;\n \
-    \           int je = j1;\n            for (; j0 < je; j0 += 8, j1 += 8, j2 +=\
-    \ 8, j3 += 8) {\n              const __m256i T0 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j0));\n              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a\
-    \ + j1));\n              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a +\
-    \ j2));\n              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));\n\
-    \              const __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);\n    \
-    \          const __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);\n        \
-    \      const __m256i T0M1 = montgomery_mul_256(\n                  montgomery_sub_256(T0,\
-    \ T1, m2, m0), XX, r, m1);\n              const __m256i T2M3 = montgomery_mul_256(\n\
-    \                  montgomery_sub_256(T2, T3, m2, m0), YY, r, m1);\n         \
-    \     _mm256_storeu_si256((__m256i *)(a + j0),\n                             \
-    \     montgomery_add_256(T0P1, T2P3, m2, m0));\n              _mm256_storeu_si256(\n\
-    \                  (__m256i *)(a + j2),\n                  montgomery_mul_256(montgomery_sub_256(T0P1,\
-    \ T2P3, m2, m0), WW,\n                                     r, m1));\n        \
-    \      _mm256_storeu_si256((__m256i *)(a + j1),\n                            \
-    \      montgomery_add_256(T0M1, T2M3, m2, m0));\n              _mm256_storeu_si256(\n\
-    \                  (__m256i *)(a + j3),\n                  montgomery_mul_256(montgomery_sub_256(T0M1,\
-    \ T2M3, m2, m0), WW,\n                                     r, m1));\n        \
-    \    }\n          }\n          xx *= dy[__builtin_ctz(jh += 4)];\n        }\n\
-    \      }\n      u >>= 4;\n      v <<= 2;\n    }\n    if (k & 1) {\n      v = 1\
-    \ << (k - 1);\n      if (v < 8) {\n        for (int j = 0; j < v; ++j) {\n   \
-    \       mint ajv = a[j] - a[j + v];\n          a[j] += a[j + v];\n          a[j\
-    \ + v] = ajv;\n        }\n      } else {\n        const __m256i m0 = _mm256_set1_epi32(0);\n\
-    \        const __m256i m2 = _mm256_set1_epi32(mod + mod);\n        int j0 = 0;\n\
-    \        int j1 = v;\n        for (; j0 < v; j0 += 8, j1 += 8) {\n          const\
-    \ __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));\n          const __m256i\
-    \ T1 = _mm256_loadu_si256((__m256i *)(a + j1));\n          __m256i naj = montgomery_add_256(T0,\
-    \ T1, m2, m0);\n          __m256i najv = montgomery_sub_256(T0, T1, m2, m0);\n\
-    \          _mm256_storeu_si256((__m256i *)(a + j0), naj);\n          _mm256_storeu_si256((__m256i\
-    \ *)(a + j1), najv);\n        }\n      }\n    }\n    if (normalize) {\n      mint\
-    \ invn = mint(n).inverse();\n      for (int i = 0; i < n; i++) a[i] *= invn;\n\
-    \    }\n  }\n\n  __attribute__((target(\"avx2\"))) void inplace_multiply(\n  \
-    \    int l1, int l2, int zero_padding = true) {\n    int l = l1 + l2 - 1;\n  \
-    \  int M = 4;\n    while (M < l) M <<= 1;\n    if (zero_padding) {\n      for\
-    \ (int i = l1; i < M; i++) ntt_inner::_buf1[i] = 0;\n      for (int i = l2; i\
-    \ < M; i++) ntt_inner::_buf2[i] = 0;\n    }\n    const __m256i m0 = _mm256_set1_epi32(0);\n\
-    \    const __m256i m1 = _mm256_set1_epi32(mod);\n    const __m256i r = _mm256_set1_epi32(mint::r);\n\
-    \    const __m256i N2 = _mm256_set1_epi32(mint::n2);\n    for (int i = 0; i <\
-    \ l1; i += 8) {\n      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf1\
-    \ + i));\n      __m256i b = montgomery_mul_256(a, N2, r, m1);\n      _mm256_storeu_si256((__m256i\
-    \ *)(ntt_inner::_buf1 + i), b);\n    }\n    for (int i = 0; i < l2; i += 8) {\n\
-    \      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf2 + i));\n  \
-    \    __m256i b = montgomery_mul_256(a, N2, r, m1);\n      _mm256_storeu_si256((__m256i\
-    \ *)(ntt_inner::_buf2 + i), b);\n    }\n    ntt(buf1, M);\n    ntt(buf2, M);\n\
-    \    for (int i = 0; i < M; i += 8) {\n      __m256i a = _mm256_loadu_si256((__m256i\
-    \ *)(ntt_inner::_buf1 + i));\n      __m256i b = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf2\
-    \ + i));\n      __m256i c = montgomery_mul_256(a, b, r, m1);\n      _mm256_storeu_si256((__m256i\
-    \ *)(ntt_inner::_buf1 + i), c);\n    }\n    intt(buf1, M, false);\n    const __m256i\
-    \ INVM = _mm256_set1_epi32((mint(M).inverse()).a);\n    for (int i = 0; i < l;\
-    \ i += 8) {\n      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf1\
-    \ + i));\n      __m256i b = montgomery_mul_256(a, INVM, r, m1);\n      __m256i\
-    \ c = my256_mulhi_epu32(my256_mullo_epu32(b, r), m1);\n      __m256i d = _mm256_and_si256(_mm256_cmpgt_epi32(c,\
-    \ m0), m1);\n      __m256i e = _mm256_sub_epi32(d, c);\n      _mm256_storeu_si256((__m256i\
-    \ *)(ntt_inner::_buf1 + i), e);\n    }\n  }\n\n  void ntt(vector<mint> &a) {\n\
-    \    int M = (int)a.size();\n    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;\n\
-    \    ntt(buf1, M);\n    for (int i = 0; i < M; i++) a[i].a = buf1[i].a;\n  }\n\
-    \n  void intt(vector<mint> &a) {\n    int M = (int)a.size();\n    for (int i =\
-    \ 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M, true);\n    for (int i\
-    \ = 0; i < M; i++) a[i].a = buf1[i].a;\n  }\n\n  vector<mint> multiply(const vector<mint>\
-    \ &a, const vector<mint> &b) {\n    if (a.size() == 0 && b.size() == 0) return\
-    \ vector<mint>{};\n    int l = a.size() + b.size() - 1;\n    if (min<int>(a.size(),\
-    \ b.size()) <= 40) {\n      vector<mint> s(l);\n      for (int i = 0; i < (int)a.size();\
-    \ ++i)\n        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];\n\
-    \      return s;\n    }\n    assert(l <= ntt_inner::SZ_FFT_BUF);\n    int M =\
-    \ 4;\n    while (M < l) M <<= 1;\n    for (int i = 0; i < (int)a.size(); ++i)\
-    \ buf1[i].a = a[i].a;\n    for (int i = (int)a.size(); i < M; ++i) buf1[i].a =\
-    \ 0;\n    for (int i = 0; i < (int)b.size(); ++i) buf2[i].a = b[i].a;\n    for\
-    \ (int i = (int)b.size(); i < M; ++i) buf2[i].a = 0;\n    ntt(buf1, M);\n    ntt(buf2,\
-    \ M);\n    for (int i = 0; i < M; ++i)\n      buf1[i].a = mint::reduce(uint64_t(buf1[i].a)\
-    \ * buf2[i].a);\n    intt(buf1, M, false);\n    vector<mint> s(l);\n    mint invm\
-    \ = mint(M).inverse();\n    for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;\n\
-    \    return s;\n  }\n\n  void ntt_doubling(vector<mint> &a) {\n    int M = (int)a.size();\n\
-    \    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n   \
-    \ mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for\
-    \ (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2\
-    \ * M);\n    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line\
-    \ 5 \"fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
-    \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
-    \ r) {\n  if (this->empty() || r.empty()) {\n    this->clear();\n    return *this;\n\
-    \  }\n  set_fft();\n  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this,\
-    \ r);\n  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());\n}\n\n\
-    template <typename mint>\nvoid FormalPowerSeries<mint>::ntt() {\n  set_fft();\n\
-    \  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);\n}\n\ntemplate <typename mint>\n\
-    void FormalPowerSeries<mint>::intt() {\n  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling() {\n\
-    \  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);\n}\n\n\
-    template <typename mint>\nint FormalPowerSeries<mint>::ntt_pr() {\n  set_fft();\n\
-    \  return static_cast<NTT<mint>*>(ntt_ptr)->pr;\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {\n  assert((*this)[0]\
-    \ != mint(0));\n  if (deg == -1) deg = (int)this->size();\n  FormalPowerSeries<mint>\
-    \ res(deg);\n  res[0] = {mint(1) / (*this)[0]};\n  for (int d = 1; d < deg; d\
-    \ <<= 1) {\n    FormalPowerSeries<mint> f(2 * d), g(2 * d);\n    for (int j =\
-    \ 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];\n    for (int\
-    \ j = 0; j < d; j++) g[j] = res[j];\n    f.ntt();\n    g.ntt();\n    for (int\
-    \ j = 0; j < 2 * d; j++) f[j] *= g[j];\n    f.intt();\n    for (int j = 0; j <\
-    \ d; j++) f[j] = 0;\n    f.ntt();\n    for (int j = 0; j < 2 * d; j++) f[j] *=\
-    \ g[j];\n    f.intt();\n    for (int j = d; j < min(2 * d, deg); j++) res[j] =\
-    \ -f[j];\n  }\n  return res.pre(deg);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ FormalPowerSeries<mint>::exp(int deg) const {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  assert((*this).size() == 0 || (*this)[0] == mint(0));\n  if (deg == -1) deg\
-    \ = this->size();\n\n  fps inv;\n  inv.reserve(deg + 1);\n  inv.push_back(mint(0));\n\
-    \  inv.push_back(mint(1));\n\n  auto inplace_integral = [&](fps& F) -> void {\n\
-    \    const int n = (int)F.size();\n    auto mod = mint::get_mod();\n    while\
-    \ ((int)inv.size() <= n) {\n      int i = inv.size();\n      inv.push_back((-inv[mod\
-    \ % i]) * (mod / i));\n    }\n    F.insert(begin(F), mint(0));\n    for (int i\
-    \ = 1; i <= n; i++) F[i] *= inv[i];\n  };\n\n  auto inplace_diff = [](fps& F)\
-    \ -> void {\n    if (F.empty()) return;\n    F.erase(begin(F));\n    mint coeff\
-    \ = 1, one = 1;\n    for (int i = 0; i < (int)F.size(); i++) {\n      F[i] *=\
-    \ coeff;\n      coeff += one;\n    }\n  };\n\n  fps b{1, 1 < (int)this->size()\
-    \ ? (*this)[1] : 0}, c{1}, z1, z2{1, 1};\n  for (int m = 2; m < deg; m *= 2) {\n\
-    \    auto y = b;\n    y.resize(2 * m);\n    y.ntt();\n    z1 = z2;\n    fps z(m);\n\
-    \    for (int i = 0; i < m; ++i) z[i] = y[i] * z1[i];\n    z.intt();\n    fill(begin(z),\
-    \ begin(z) + m / 2, mint(0));\n    z.ntt();\n    for (int i = 0; i < m; ++i) z[i]\
-    \ *= -z1[i];\n    z.intt();\n    c.insert(end(c), begin(z) + m / 2, end(z));\n\
-    \    z2 = c;\n    z2.resize(2 * m);\n    z2.ntt();\n    fps x(begin(*this), begin(*this)\
-    \ + min<int>(this->size(), m));\n    x.resize(m);\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
-    \    x.ntt();\n    for (int i = 0; i < m; ++i) x[i] *= y[i];\n    x.intt();\n\
-    \    x -= b.diff();\n    x.resize(2 * m);\n    for (int i = 0; i < m - 1; ++i)\
-    \ x[m + i] = x[i], x[i] = mint(0);\n    x.ntt();\n    for (int i = 0; i < 2 *\
-    \ m; ++i) x[i] *= z2[i];\n    x.intt();\n    x.pop_back();\n    inplace_integral(x);\n\
-    \    for (int i = m; i < min<int>(this->size(), 2 * m); ++i) x[i] += (*this)[i];\n\
-    \    fill(begin(x), begin(x) + m, mint(0));\n    x.ntt();\n    for (int i = 0;\
-    \ i < 2 * m; ++i) x[i] *= y[i];\n    x.intt();\n    b.insert(end(b), begin(x)\
-    \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
-    \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
-    \ */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
-    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar ibuf[SZ],\
-    \ obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre {\n  char num[40000];\n\
-    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
-    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
-    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
-    \ load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf\
-    \ + pir - pil, 1, SZ - pir + pil, stdin);\n  pil = 0;\n}\ninline void flush()\
-    \ {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n}\n\ninline void skip_space()\
-    \ {\n  if (pil + 32 > pir) load();\n  while (ibuf[pil] <= ' ') pil++;\n}\n\ninline\
-    \ void rd(char& c) {\n  if (pil + 32 > pir) load();\n  c = ibuf[pil++];\n}\ntemplate\
-    \ <typename T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char\
-    \ c;\n  do c = ibuf[pil++];\n  while (c < '-');\n  [[maybe_unused]] bool minus\
-    \ = false;\n  if constexpr (is_signed<T>::value == true) {\n    if (c == '-')\
-    \ minus = true, c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x =\
-    \ x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n  if constexpr (is_signed<T>::value\
-    \ == true) {\n    if (minus) x = -x;\n  }\n}\ninline void rd() {}\ntemplate <typename\
-    \ Head, typename... Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n\
-    \  rd(tail...);\n}\n\ninline void wt(char c) {\n  if (por > SZ - 32) flush();\n\
-    \  obuf[por++] = c;\n}\ninline void wt(bool b) { \n  if (por > SZ - 32) flush();\n\
-    \  obuf[por++] = b ? '1' : '0'; \n}\ntemplate <typename T>\ninline void wt(T x)\
-    \ {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n    return;\n\
-    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x < 0) obuf[por++]\
-    \ = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n\
-    \    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -=\
-    \ 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      obuf[por] = '0' + x;\n \
-    \     ++por;\n    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n  \
-    \    uint32_t r = uint32_t(x) - q * 10;\n      obuf[por] = '0' + q;\n      obuf[por\
-    \ + 1] = '0' + r;\n      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n \
-    \     memcpy(obuf + por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else\
-    \ {\n      memcpy(obuf + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n\
-    \  }\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline\
-    \ void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(Head&&\
-    \ head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n}\ntemplate\
-    \ <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
-    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
-    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 10 \"verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
-    \  using fps = FormalPowerSeries<mint>;\n  int N;\n  rd(N);\n  fps f(N), g(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n    f[i] = n;\n  }\n\
-    \  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n    g[i] = n;\n  }\n\
-    \  fps R = Composition(g, f);\n  for (int i = 0; i < (int)R.size(); i++) {\n \
-    \   if (i) wt(' ');\n    wt(R[i].get());\n  }\n  wt('\\n');\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/composition_of_formal_power_series\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../fps/formal-power-series.hpp\"\
-    \n#include \"../../fps/fps-composition-fast.hpp\"\n#include \"../../fps/ntt-friendly-fps.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
-    \  using fps = FormalPowerSeries<mint>;\n  int N;\n  rd(N);\n  fps f(N), g(N);\n\
-    \  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n    f[i] = n;\n  }\n\
-    \  for (int i = 0; i < N; i++) {\n    int n;\n    rd(n);\n    g[i] = n;\n  }\n\
-    \  fps R = Composition(g, f);\n  for (int i = 0; i < (int)R.size(); i++) {\n \
-    \   if (i) wt(' ');\n    wt(R[i].get());\n  }\n  wt('\\n');\n}"
+    #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 7 \"verify/verify-unit-test/strassen.test.cpp\"\
+    \n\nusing namespace FastMatProd;\n\nvoid time_test() {\n  int N = 1024;\n  int\
+    \ P = N, M = N;\n  mt19937 rng(58);\n  vvm s(N, vm(P)), t(P, vm(M));\n  for (int\
+    \ i = 0; i < N; i++)\n    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n\
+    \  for (int i = 0; i < P; i++)\n    for (int j = 0; j < M; j++) t[i][j] = rng()\
+    \ % 998244353;\n  vvm u, u2, u3;\n  Timer timer;\n\n  int loop = 5;\n  timer.reset();\n\
+    \  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s, t);\n  cerr <<\
+    \ \"strassen \" << (timer.elapsed() / loop) << endl;\n\n  timer.reset();\n  u2\
+    \ = FastMatProd::naive_mul(s, t);\n  cerr << \"naive \" << timer.elapsed() <<\
+    \ endl;\n\n  timer.reset();\n  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s,\
+    \ t);\n  cerr << \"block dec \" << (timer.elapsed() / loop) << endl;\n\n  assert(u\
+    \ == u2);\n  assert(u == u3);\n}\n\nvoid debug_test(int max = 500, int loop =\
+    \ 20) {\n  int N, P, M;\n  mt19937 rng(58);\n  while (loop--) {\n    N = rng()\
+    \ % max + 1;\n    M = rng() % max + 1;\n    P = rng() % max + 1;\n    vvm s(N,\
+    \ vm(P)), t(P, vm(M));\n    for (int i = 0; i < N; i++)\n      for (int j = 0;\
+    \ j < P; j++) s[i][j] = rng() % 998244353;\n    for (int i = 0; i < P; i++)\n\
+    \      for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;\n    auto u =\
+    \ strassen(s, t);\n    auto u2 = naive_mul(s, t);\n    auto u3 = block_dec(s,\
+    \ t);\n    if (u != u2) {\n      cerr << \"ng u1 \" << N << \" \" << P << \" \"\
+    \ << M << endl;\n      exit(1);\n    } else if (u != u3) {\n      cerr << \"ng\
+    \ u1 \" << N << \" \" << P << \" \" << M << endl;\n      exit(1);\n    } else\
+    \ {\n      cerr << \"ok \" << N << \" \" << P << \" \" << M << endl;\n    }\n\
+    \  }\n  cerr << \"all ok\" << endl;\n}\n\nvoid Nyaan::solve() {\n  // time_test();\n\
+    \  debug_test();\n  debug_test(32, 1000);\n\n  int a, b;\n  cin >> a >> b;\n \
+    \ cerr << a + b << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../template/template.hpp\"\n//\n#include \"../../misc/timer.hpp\"\n#include\
+    \ \"../../modulo/strassen.hpp\"\n\nusing namespace FastMatProd;\n\nvoid time_test()\
+    \ {\n  int N = 1024;\n  int P = N, M = N;\n  mt19937 rng(58);\n  vvm s(N, vm(P)),\
+    \ t(P, vm(M));\n  for (int i = 0; i < N; i++)\n    for (int j = 0; j < P; j++)\
+    \ s[i][j] = rng() % 998244353;\n  for (int i = 0; i < P; i++)\n    for (int j\
+    \ = 0; j < M; j++) t[i][j] = rng() % 998244353;\n  vvm u, u2, u3;\n  Timer timer;\n\
+    \n  int loop = 5;\n  timer.reset();\n  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s,\
+    \ t);\n  cerr << \"strassen \" << (timer.elapsed() / loop) << endl;\n\n  timer.reset();\n\
+    \  u2 = FastMatProd::naive_mul(s, t);\n  cerr << \"naive \" << timer.elapsed()\
+    \ << endl;\n\n  timer.reset();\n  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s,\
+    \ t);\n  cerr << \"block dec \" << (timer.elapsed() / loop) << endl;\n\n  assert(u\
+    \ == u2);\n  assert(u == u3);\n}\n\nvoid debug_test(int max = 500, int loop =\
+    \ 20) {\n  int N, P, M;\n  mt19937 rng(58);\n  while (loop--) {\n    N = rng()\
+    \ % max + 1;\n    M = rng() % max + 1;\n    P = rng() % max + 1;\n    vvm s(N,\
+    \ vm(P)), t(P, vm(M));\n    for (int i = 0; i < N; i++)\n      for (int j = 0;\
+    \ j < P; j++) s[i][j] = rng() % 998244353;\n    for (int i = 0; i < P; i++)\n\
+    \      for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;\n    auto u =\
+    \ strassen(s, t);\n    auto u2 = naive_mul(s, t);\n    auto u3 = block_dec(s,\
+    \ t);\n    if (u != u2) {\n      cerr << \"ng u1 \" << N << \" \" << P << \" \"\
+    \ << M << endl;\n      exit(1);\n    } else if (u != u3) {\n      cerr << \"ng\
+    \ u1 \" << N << \" \" << P << \" \" << M << endl;\n      exit(1);\n    } else\
+    \ {\n      cerr << \"ok \" << N << \" \" << P << \" \" << M << endl;\n    }\n\
+    \  }\n  cerr << \"all ok\" << endl;\n}\n\nvoid Nyaan::solve() {\n  // time_test();\n\
+    \  debug_test();\n  debug_test(32, 1000);\n\n  int a, b;\n  cin >> a >> b;\n \
+    \ cerr << a + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -1050,24 +660,21 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - fps/formal-power-series.hpp
-  - fps/fps-composition-fast.hpp
-  - modint/montgomery-modint.hpp
+  - misc/timer.hpp
   - modulo/strassen.hpp
+  - fps/formal-power-series.hpp
+  - modint/montgomery-modint.hpp
   - modint/simd-montgomery.hpp
-  - fps/ntt-friendly-fps.hpp
-  - ntt/ntt-avx2.hpp
-  - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  path: verify/verify-unit-test/strassen.test.cpp
   requiredBy: []
   timestamp: '2021-05-08 12:51:05+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+documentation_of: verify/verify-unit-test/strassen.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-- /verify/verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp.html
-title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+- /verify/verify/verify-unit-test/strassen.test.cpp
+- /verify/verify/verify-unit-test/strassen.test.cpp.html
+title: verify/verify-unit-test/strassen.test.cpp
 ---
