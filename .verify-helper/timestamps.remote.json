@@ -133,7 +133,6 @@
 "verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp": "2021-05-04 19:34:35 +0900",
-"verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-fps/yosupo-composition.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-fps/yosupo-exp.test.cpp": "2021-05-04 19:34:35 +0900",
