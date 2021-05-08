@@ -131,14 +131,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/find-p-recursive.hpp
       title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/formal-power-series.hpp
       title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
         \u30E9\u30EA"
     - icon: ':heavy_check_mark:'
       path: fps/fps-circular.hpp
       title: "\u4E09\u89D2\u95A2\u6570"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: fps/fps-composition-fast.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
     - icon: ':heavy_check_mark:'
@@ -169,7 +169,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/nth-term.hpp
       title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
@@ -401,7 +401,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -422,7 +422,7 @@ data:
     - icon: ':warning:'
       path: misc/simd.hpp
       title: misc/simd.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/timer.hpp
       title: misc/timer.hpp
     - icon: ':warning:'
@@ -448,10 +448,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
   - name: modulo
@@ -486,7 +486,7 @@ data:
     - icon: ':warning:'
       path: modulo/quadratic-equation.hpp
       title: modulo/quadratic-equation.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: modulo/strassen.hpp
       title: modulo/strassen.hpp
     - icon: ':heavy_check_mark:'
@@ -538,7 +538,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/multivariate-multiplication.hpp
       title: Multivariate Multiplication
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ntt/ntt-avx2.hpp
       title: ntt/ntt-avx2.hpp
     - icon: ':warning:'
@@ -718,22 +718,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1206,7 +1206,7 @@ data:
       title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - name: verify/verify-yosupo-fps
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     - icon: ':heavy_check_mark:'

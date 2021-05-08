@@ -1,30 +1,30 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modulo/strassen.hpp\"\n#include <immintrin.h>\n//\n\n#line\
@@ -213,15 +213,15 @@ data:
     \ << SHIFT_) | j0]);\n        if ((c[(i0 << SHIFT_) | j0] += ab0) >= 2 * mint::get_mod())\n\
     \          c[(i0 << SHIFT_) | j0] -= 2 * mint::get_mod();\n      }\n    }\n  }\n\
     }\n\n// for debug\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) vvm naive_mul(\n    const vvm& a, const vvm& b) {\n  int n = a.size(), m =\
-    \ b[0].size(), p = b.size();\n  assert(p == (int)a[0].size());\n  vvm c(n, fps(m,\
-    \ 0));\n  for (int i = 0; i < n; i++)\n    for (int k = 0; k < p; k++)\n     \
-    \ for (int j = 0; j < m; j++) c[i][j] += a[i][k] * b[k][j];\n  return c;\n}\n\n\
-    struct Mat {\n  int H, W, HM, WM;\n  mint* a;\n\n  Mat(int H_, int W_, mint* a_)\
-    \ : H(H_), W(W_), a(a_) {\n    HM = (H >> 1) + (H & 1);\n    WM = (W >> 1) + (W\
-    \ & 1);\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) void\n  range_add(mint* b, int as, int ae, int bs) const {\n    const m256\
-    \ M0 = _mm256_set1_epi32(0);\n    const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
+    ))) vvm naive_mul(\n    const vvm& _a, const vvm& _b) {\n  int n = _a.size(),\
+    \ m = _b[0].size(), p = _b.size();\n  assert(p == (int)_a[0].size());\n  vvm _c(n,\
+    \ fps(m, 0));\n  for (int i = 0; i < n; i++)\n    for (int k = 0; k < p; k++)\n\
+    \      for (int j = 0; j < m; j++) _c[i][j] += _a[i][k] * _b[k][j];\n  return\
+    \ _c;\n}\n\nstruct Mat {\n  int H, W, HM, WM;\n  mint* a;\n\n  Mat(int H_, int\
+    \ W_, mint* a_) : H(H_), W(W_), a(a_) {\n    HM = (H >> 1) + (H & 1);\n    WM\
+    \ = (W >> 1) + (W & 1);\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) void\n  range_add(mint* _b, int as, int ae, int bs)\
+    \ const {\n    const m256 M0 = _mm256_set1_epi32(0);\n    const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
     \ * 2);\n    for (; as < ae - 31; as += 32, bs += 32) {\n      int a0 = as;\n\
     \      int a1 = as + 8;\n      int a2 = as + 16;\n      int a3 = as + 24;\n  \
     \    int b0 = bs;\n      int b1 = bs + 8;\n      int b2 = bs + 16;\n      int\
@@ -233,119 +233,121 @@ data:
     \ + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));\n      const\
     \ m256 BA0 = montgomery_add_256(B0, A0, M2, M0);\n      const m256 BA1 = montgomery_add_256(B1,\
     \ A1, M2, M0);\n      const m256 BA2 = montgomery_add_256(B2, A2, M2, M0);\n \
-    \     const m256 BA3 = montgomery_add_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(b\
-    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(b + b1), BA1);\n      _mm256_storeu_si256((m256*)(b\
-    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(b + b3), BA3);\n    }\n    for\
-    \ (; as < ae; ++as, ++bs) b[bs] += a[as];\n  }\n\n  __attribute__((target(\"avx2\"\
-    ), optimize(\"O3\", \"unroll-loops\"))) void\n  range_sub(mint* b, int as, int\
-    \ ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n    const m256\
-    \ M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae - 31; as +=\
-    \ 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n      int a2 =\
-    \ as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int b1 = bs + 8;\n\
-    \      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const m256 A0 = _mm256_loadu_si256((m256*)(a\
-    \ + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a + a1));\n      const\
-    \ m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const m256 A3 = _mm256_loadu_si256((m256*)(a\
-    \ + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(b + b0));\n      const\
-    \ m256 B1 = _mm256_loadu_si256((m256*)(b + b1));\n      const m256 B2 = _mm256_loadu_si256((m256*)(b\
-    \ + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));\n      const\
-    \ m256 BA0 = montgomery_sub_256(B0, A0, M2, M0);\n      const m256 BA1 = montgomery_sub_256(B1,\
-    \ A1, M2, M0);\n      const m256 BA2 = montgomery_sub_256(B2, A2, M2, M0);\n \
-    \     const m256 BA3 = montgomery_sub_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(b\
-    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(b + b1), BA1);\n      _mm256_storeu_si256((m256*)(b\
-    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(b + b3), BA3);\n    }\n    for\
-    \ (; as < ae; ++as, ++bs) b[bs] -= a[as];\n  }\n\n  __attribute__((target(\"avx2\"\
-    ), optimize(\"O3\", \"unroll-loops\"))) void\n  op_range_add(mint* b, int as,\
-    \ int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n    const\
-    \ m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae - 31;\
-    \ as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n      int\
-    \ a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int b1 = bs\
-    \ + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const m256 A0\
-    \ = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
+    \     const m256 BA3 = montgomery_add_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(_b + b1), BA1);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(_b + b3), BA3);\n    }\n   \
+    \ for (; as < ae; ++as, ++bs) _b[bs] += a[as];\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n  range_sub(mint* _b, int\
+    \ as, int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n   \
+    \ const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae\
+    \ - 31; as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n  \
+    \    int a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int\
+    \ b1 = bs + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const\
+    \ m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
     \ + a1));\n      const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const\
-    \ m256 A3 = _mm256_loadu_si256((m256*)(a + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(b\
-    \ + b0));\n      const m256 B1 = _mm256_loadu_si256((m256*)(b + b1));\n      const\
-    \ m256 B2 = _mm256_loadu_si256((m256*)(b + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b\
-    \ + b3));\n      const m256 BA0 = montgomery_add_256(B0, A0, M2, M0);\n      const\
-    \ m256 BA1 = montgomery_add_256(B1, A1, M2, M0);\n      const m256 BA2 = montgomery_add_256(B2,\
-    \ A2, M2, M0);\n      const m256 BA3 = montgomery_add_256(B3, A3, M2, M0);\n \
-    \     _mm256_storeu_si256((m256*)(a + a0), BA0);\n      _mm256_storeu_si256((m256*)(a\
-    \ + a1), BA1);\n      _mm256_storeu_si256((m256*)(a + a2), BA2);\n      _mm256_storeu_si256((m256*)(a\
-    \ + a3), BA3);\n    }\n    for (; as < ae; ++as, ++bs) a[as] += b[bs];\n  }\n\n\
-    \  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n\
-    \  op_range_sub(mint* b, int as, int ae, int bs) const {\n    const m256 M0 =\
-    \ _mm256_set1_epi32(0);\n    const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
-    \ * 2);\n    for (; as < ae - 31; as += 32, bs += 32) {\n      int a0 = as;\n\
-    \      int a1 = as + 8;\n      int a2 = as + 16;\n      int a3 = as + 24;\n  \
-    \    int b0 = bs;\n      int b1 = bs + 8;\n      int b2 = bs + 16;\n      int\
-    \ b3 = bs + 24;\n      const m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n\
-    \      const m256 A1 = _mm256_loadu_si256((m256*)(a + a1));\n      const m256\
-    \ A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const m256 A3 = _mm256_loadu_si256((m256*)(a\
-    \ + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(b + b0));\n      const\
-    \ m256 B1 = _mm256_loadu_si256((m256*)(b + b1));\n      const m256 B2 = _mm256_loadu_si256((m256*)(b\
-    \ + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));\n      const\
-    \ m256 BA0 = montgomery_sub_256(A0, B0, M2, M0);\n      const m256 BA1 = montgomery_sub_256(A1,\
-    \ B1, M2, M0);\n      const m256 BA2 = montgomery_sub_256(A2, B2, M2, M0);\n \
-    \     const m256 BA3 = montgomery_sub_256(A3, B3, M2, M0);\n      _mm256_storeu_si256((m256*)(a\
-    \ + a0), BA0);\n      _mm256_storeu_si256((m256*)(a + a1), BA1);\n      _mm256_storeu_si256((m256*)(a\
+    \ m256 A3 = _mm256_loadu_si256((m256*)(a + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(_b\
+    \ + b0));\n      const m256 B1 = _mm256_loadu_si256((m256*)(_b + b1));\n     \
+    \ const m256 B2 = _mm256_loadu_si256((m256*)(_b + b2));\n      const m256 B3 =\
+    \ _mm256_loadu_si256((m256*)(_b + b3));\n      const m256 BA0 = montgomery_sub_256(B0,\
+    \ A0, M2, M0);\n      const m256 BA1 = montgomery_sub_256(B1, A1, M2, M0);\n \
+    \     const m256 BA2 = montgomery_sub_256(B2, A2, M2, M0);\n      const m256 BA3\
+    \ = montgomery_sub_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(_b + b1), BA1);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(_b + b3), BA3);\n    }\n   \
+    \ for (; as < ae; ++as, ++bs) _b[bs] -= a[as];\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n  op_range_add(mint* _b, int\
+    \ as, int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n   \
+    \ const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae\
+    \ - 31; as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n  \
+    \    int a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int\
+    \ b1 = bs + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const\
+    \ m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
+    \ + a1));\n      const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const\
+    \ m256 A3 = _mm256_loadu_si256((m256*)(a + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(_b\
+    \ + b0));\n      const m256 B1 = _mm256_loadu_si256((m256*)(_b + b1));\n     \
+    \ const m256 B2 = _mm256_loadu_si256((m256*)(_b + b2));\n      const m256 B3 =\
+    \ _mm256_loadu_si256((m256*)(_b + b3));\n      const m256 BA0 = montgomery_add_256(B0,\
+    \ A0, M2, M0);\n      const m256 BA1 = montgomery_add_256(B1, A1, M2, M0);\n \
+    \     const m256 BA2 = montgomery_add_256(B2, A2, M2, M0);\n      const m256 BA3\
+    \ = montgomery_add_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(a +\
+    \ a0), BA0);\n      _mm256_storeu_si256((m256*)(a + a1), BA1);\n      _mm256_storeu_si256((m256*)(a\
     \ + a2), BA2);\n      _mm256_storeu_si256((m256*)(a + a3), BA3);\n    }\n    for\
-    \ (; as < ae; ++as, ++bs) a[as] -= b[bs];\n  }\n\n  __attribute__((target(\"avx2\"\
-    ), optimize(\"O3\", \"unroll-loops\"))) inline void\n  A11(mint* b) const {\n\
-    \    for (int i = 0; i < HM; i++)\n      memcpy(b + i * WM, a + i * W, WM * sizeof(int));\n\
+    \ (; as < ae; ++as, ++bs) a[as] += _b[bs];\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n  op_range_sub(mint* _b, int\
+    \ as, int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n   \
+    \ const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae\
+    \ - 31; as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n  \
+    \    int a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int\
+    \ b1 = bs + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const\
+    \ m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
+    \ + a1));\n      const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const\
+    \ m256 A3 = _mm256_loadu_si256((m256*)(a + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(_b\
+    \ + b0));\n      const m256 B1 = _mm256_loadu_si256((m256*)(_b + b1));\n     \
+    \ const m256 B2 = _mm256_loadu_si256((m256*)(_b + b2));\n      const m256 B3 =\
+    \ _mm256_loadu_si256((m256*)(_b + b3));\n      const m256 BA0 = montgomery_sub_256(A0,\
+    \ B0, M2, M0);\n      const m256 BA1 = montgomery_sub_256(A1, B1, M2, M0);\n \
+    \     const m256 BA2 = montgomery_sub_256(A2, B2, M2, M0);\n      const m256 BA3\
+    \ = montgomery_sub_256(A3, B3, M2, M0);\n      _mm256_storeu_si256((m256*)(a +\
+    \ a0), BA0);\n      _mm256_storeu_si256((m256*)(a + a1), BA1);\n      _mm256_storeu_si256((m256*)(a\
+    \ + a2), BA2);\n      _mm256_storeu_si256((m256*)(a + a3), BA3);\n    }\n    for\
+    \ (; as < ae; ++as, ++bs) a[as] -= _b[bs];\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  A11(mint* _b) const\
+    \ {\n    for (int i = 0; i < HM; i++)\n      memcpy(_b + i * WM, a + i * W, WM\
+    \ * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\",\
+    \ \"unroll-loops\"))) inline void\n  A12(mint* _b) const {\n    for (int i = 0;\
+    \ i < HM; i++)\n      memcpy(_b + i * WM, a + i * W + WM, (W - WM) * sizeof(int));\n\
     \  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\")))\
-    \ inline void\n  A12(mint* b) const {\n    for (int i = 0; i < HM; i++)\n    \
-    \  memcpy(b + i * WM, a + i * W + WM, (W - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  A21(mint* b) const\
-    \ {\n    for (int i = 0; i < H - HM; i++)\n      memcpy(b + i * WM, a + (i + HM)\
-    \ * W, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) inline void\n  A22(mint* b) const {\n    for (int i\
-    \ = 0; i < H - HM; i++)\n      memcpy(b + i * WM, a + (i + HM) * W + WM, (W -\
-    \ WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\"\
-    , \"unroll-loops\"))) inline void\n  subA11(mint* b) const {\n    for (int i =\
-    \ 0; i < HM; i++) {\n      int as = i * W;\n      int ae = i * W + WM;\n     \
-    \ int bs = i * WM;\n      range_sub(b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  addA12(mint* b) const\
-    \ {\n    for (int i = 0; i < HM; i++) {\n      int as = i * W + WM;\n      int\
-    \ ae = i * W + W;\n      int bs = i * WM;\n      range_add(b, as, ae, bs);\n \
-    \   }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) inline void\n  addA22(mint* b) const {\n    for (int i = 0; i < H - HM; i++)\
-    \ {\n      int as = (i + HM) * W + WM;\n      int ae = as + W - WM;\n      int\
-    \ bs = i * WM;\n      range_add(b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  subA22(mint* b) const\
+    \ inline void\n  A21(mint* _b) const {\n    for (int i = 0; i < H - HM; i++)\n\
+    \      memcpy(_b + i * WM, a + (i + HM) * W, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  A22(mint* _b) const\
+    \ {\n    for (int i = 0; i < H - HM; i++)\n      memcpy(_b + i * WM, a + (i +\
+    \ HM) * W + WM, (W - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"\
+    ), optimize(\"O3\", \"unroll-loops\"))) inline void\n  subA11(mint* _b) const\
+    \ {\n    for (int i = 0; i < HM; i++) {\n      int as = i * W;\n      int ae =\
+    \ i * W + WM;\n      int bs = i * WM;\n      range_sub(_b, as, ae, bs);\n    }\n\
+    \  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\")))\
+    \ inline void\n  addA12(mint* _b) const {\n    for (int i = 0; i < HM; i++) {\n\
+    \      int as = i * W + WM;\n      int ae = i * W + W;\n      int bs = i * WM;\n\
+    \      range_add(_b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"\
+    ), optimize(\"O3\", \"unroll-loops\"))) inline void\n  addA22(mint* _b) const\
     \ {\n    for (int i = 0; i < H - HM; i++) {\n      int as = (i + HM) * W + WM;\n\
-    \      int ae = as + W - WM;\n      int bs = i * WM;\n      range_sub(b, as, ae,\
-    \ bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) inline void\n  updA11(mint* b) const {\n    for (int i = 0; i < HM; i++)\n\
-    \      memcpy(a + i * W, b + i * WM, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  updA12(mint* b) const\
-    \ {\n    for (int i = 0; i < HM; i++)\n      memcpy(a + i * W + WM, b + i * WM,\
-    \ (W - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) inline void\n  updA21(mint* b) const {\n    for (int\
-    \ i = 0; i < H - HM; i++)\n      memcpy(a + (i + HM) * W, b + i * WM, WM * sizeof(int));\n\
+    \      int ae = as + W - WM;\n      int bs = i * WM;\n      range_add(_b, as,\
+    \ ae, bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\",\
+    \ \"unroll-loops\"))) inline void\n  subA22(mint* _b) const {\n    for (int i\
+    \ = 0; i < H - HM; i++) {\n      int as = (i + HM) * W + WM;\n      int ae = as\
+    \ + W - WM;\n      int bs = i * WM;\n      range_sub(_b, as, ae, bs);\n    }\n\
     \  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\")))\
-    \ inline void\n  updA22(mint* b) const {\n    for (int i = 0; i < H - HM; i++)\n\
-    \      memcpy(a + (i + HM) * W + WM, b + i * WM, (W - WM) * sizeof(int));\n  }\n\
-    \n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline\
-    \ void\n  opaddA11(mint* b) const {\n    for (int i = 0; i < HM; i++) {\n    \
-    \  int as = i * W;\n      int ae = i * W + WM;\n      int bs = i * WM;\n     \
-    \ op_range_add(b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"\
-    ), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opaddA12(mint* b) const\
-    \ {\n    for (int i = 0; i < HM; i++) {\n      int as = i * W + WM;\n      int\
-    \ ae = i * W + W;\n      int bs = i * WM;\n      op_range_add(b, as, ae, bs);\n\
-    \    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) inline void\n  opaddA21(mint* b) const {\n    for (int i = 0; i < H - HM;\
+    \ inline void\n  updA11(mint* _b) const {\n    for (int i = 0; i < HM; i++)\n\
+    \      memcpy(a + i * W, _b + i * WM, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  updA12(mint* _b)\
+    \ const {\n    for (int i = 0; i < HM; i++)\n      memcpy(a + i * W + WM, _b +\
+    \ i * WM, (W - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"),\
+    \ optimize(\"O3\", \"unroll-loops\"))) inline void\n  updA21(mint* _b) const {\n\
+    \    for (int i = 0; i < H - HM; i++)\n      memcpy(a + (i + HM) * W, _b + i *\
+    \ WM, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline void\n  updA22(mint* _b) const {\n    for (int\
+    \ i = 0; i < H - HM; i++)\n      memcpy(a + (i + HM) * W + WM, _b + i * WM, (W\
+    \ - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline void\n  opaddA11(mint* _b) const {\n    for (int\
+    \ i = 0; i < HM; i++) {\n      int as = i * W;\n      int ae = i * W + WM;\n \
+    \     int bs = i * WM;\n      op_range_add(_b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opaddA12(mint* _b)\
+    \ const {\n    for (int i = 0; i < HM; i++) {\n      int as = i * W + WM;\n  \
+    \    int ae = i * W + W;\n      int bs = i * WM;\n      op_range_add(_b, as, ae,\
+    \ bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) inline void\n  opaddA21(mint* _b) const {\n    for (int i = 0; i < H - HM;\
     \ i++) {\n      int as = (i + HM) * W;\n      int ae = (i + HM) * W + WM;\n  \
-    \    int bs = i * WM;\n      op_range_add(b, as, ae, bs);\n    }\n    //  for\
-    \ (int j = 0; j < WM; j++) a[(i + HM) * W + j] += b[i * WM + j];\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opaddA22(mint* b)\
+    \    int bs = i * WM;\n      op_range_add(_b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opaddA22(mint* _b)\
     \ const {\n    for (int i = 0; i < H - HM; i++) {\n      int as = (i + HM) * W\
-    \ + WM;\n      int ae = (i + HM) * W + W;\n      int bs = i * WM;\n      op_range_add(b,\
+    \ + WM;\n      int ae = (i + HM) * W + W;\n      int bs = i * WM;\n      op_range_add(_b,\
     \ as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\"\
-    , \"unroll-loops\"))) inline void\n  opsubA11(mint* b) const {\n    for (int i\
-    \ = 0; i < HM; i++) {\n      int as = i * W;\n      int ae = i * W + WM;\n   \
-    \   int bs = i * WM;\n      op_range_sub(b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opsubA22(mint* b)\
+    , \"unroll-loops\"))) inline void\n  opsubA11(mint* _b) const {\n    for (int\
+    \ i = 0; i < HM; i++) {\n      int as = i * W;\n      int ae = i * W + WM;\n \
+    \     int bs = i * WM;\n      op_range_sub(_b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opsubA22(mint* _b)\
     \ const {\n    for (int i = 0; i < H - HM; i++) {\n      int as = (i + HM) * W\
-    \ + WM;\n      int ae = (i + HM) * W + W;\n      int bs = i * WM;\n      op_range_sub(b,\
+    \ + WM;\n      int ae = (i + HM) * W + W;\n      int bs = i * WM;\n      op_range_sub(_b,\
     \ as, ae, bs);\n    }\n  }\n\n  void dump() const {\n    cerr << \"[ \" << endl\
     \ << \" \";\n    for (int i = 0; i < H; i++)\n      for (int j = 0; j < W; j++)\n\
     \        cerr << a[i * W + j] << (j == W - 1 ? \",\\n \" : \" \");\n    cerr <<\
@@ -374,34 +376,35 @@ data:
     \ * m + ll] +=\n                *reinterpret_cast<mint*>(c + ((l - is) << SHIFT_)\
     \ + (ll - js));\n          }\n        }\n      }\n}\n\n__attribute__((target(\"\
     avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\ninner_strassen(const Mat*\
-    \ a, const Mat* b, const Mat* c) {\n  int n = a->H, m = b->W, p = a->W;\n  if\
-    \ (max({n, m, p}) <= (1 << SHIFT_)) {\n    inner_fast_mul(a, b, c);\n    return;\n\
-    \  }\n  if (min({n, m, p}) <= (1 << (SHIFT_ - 2))) {\n    inner_block_dec_mul(a,\
-    \ b, c);\n    return;\n  }\n  int nm = n / 2 + (n & 1);\n  int mm = m / 2 + (m\
-    \ & 1);\n  int pm = p / 2 + (p & 1);\n\n  Mat s(nm, pm, a->a + n * p);\n  Mat\
-    \ t(pm, mm, b->a + p * m);\n  Mat u(nm, mm, c->a + n * m);\n\n  // P1 = (A11 +\
-    \ A22) * (B11 + B22)\n  a->A11(s.a);\n  a->addA22(s.a);\n  b->A11(t.a);\n  b->addA22(t.a);\n\
-    \  inner_strassen(&s, &t, &u);\n  c->updA11(u.a);\n  c->updA22(u.a);\n\n  // P2\
-    \ = (A21 + A22) * B11\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n  a->A21(s.a);\n\
-    \  a->addA22(s.a);\n  b->A11(t.a);\n  inner_strassen(&s, &t, &u);\n  c->updA21(u.a);\n\
-    \  c->opsubA22(u.a);\n\n  // P3 = A11 (B12 - B22)\n  a->A11(s.a);\n  memset((int*)t.a,\
-    \ 0, pm * mm * sizeof(int));\n  b->A12(t.a);\n  b->subA22(t.a);\n  inner_strassen(&s,\
-    \ &t, &u);\n  c->updA12(u.a);\n  c->opaddA22(u.a);\n\n  // P4 = A22 (B21 - B11)\n\
-    \  memset((int*)s.a, 0, nm * pm * sizeof(int));\n  a->A22(s.a);\n  memset((int*)t.a\
-    \ + (pm - 1) * mm, 0, mm * sizeof(int));\n  b->A21(t.a);\n  b->subA11(t.a);\n\
-    \  inner_strassen(&s, &t, &u);\n  c->opaddA11(u.a);\n  c->opaddA21(u.a);\n\n \
-    \ // P5 = (A11 + A12) B22\n  memset((int*)t.a, 0, pm * mm * sizeof(int));\n  a->A11(s.a);\n\
-    \  a->addA12(s.a);\n  b->A22(t.a);\n  inner_strassen(&s, &t, &u);\n  c->opsubA11(u.a);\n\
-    \  c->opaddA12(u.a);\n\n  // P6 = (A21 - A11) (B11 + B12)\n  memset((int*)s.a\
-    \ + (nm - 1) * pm, 0, pm * sizeof(int));\n  a->A21(s.a);\n  a->subA11(s.a);\n\
-    \  b->A11(t.a);\n  b->addA12(t.a);\n  inner_strassen(&s, &t, &u);\n  c->opaddA22(u.a);\n\
-    \n  // P7 = (A12 - A22) (B21 + B22)\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n\
-    \  a->A12(s.a);\n  a->subA22(s.a);\n  memset((int*)t.a + (pm - 1) * mm, 0, mm\
-    \ * sizeof(int));\n  b->A21(t.a);\n  b->addA22(t.a);\n  inner_strassen(&s, &t,\
-    \ &u);\n  c->opaddA11(u.a);\n}\n\nusing vfps = vector<fps>;\n\n__attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) vvm block_dec(\n    const vvm& s,\
-    \ const vvm& t) {\n  int n = s.size(), p = s[0].size(), m = t[0].size();\n  assert(int(n\
-    \ * p * 1.4) <= BUFFER_SIZE);\n  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n  assert(int(n\
+    \ _a, const Mat* _b, const Mat* _c) {\n  int n = _a->H, m = _b->W, p = _a->W;\n\
+    \  if (max({n, m, p}) <= (1 << SHIFT_)) {\n    inner_fast_mul(_a, _b, _c);\n \
+    \   return;\n  }\n  if (min({n, m, p}) <= (1 << (SHIFT_ - 2))) {\n    inner_block_dec_mul(_a,\
+    \ _b, _c);\n    return;\n  }\n  int nm = n / 2 + (n & 1);\n  int mm = m / 2 +\
+    \ (m & 1);\n  int pm = p / 2 + (p & 1);\n\n  Mat s(nm, pm, _a->a + n * p);\n \
+    \ Mat t(pm, mm, _b->a + p * m);\n  Mat u(nm, mm, _c->a + n * m);\n\n  // P1 =\
+    \ (A11 + A22) * (B11 + B22)\n  _a->A11(s.a);\n  _a->addA22(s.a);\n  _b->A11(t.a);\n\
+    \  _b->addA22(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->updA11(u.a);\n  _c->updA22(u.a);\n\
+    \n  // P2 = (A21 + A22) * B11\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n\
+    \  _a->A21(s.a);\n  _a->addA22(s.a);\n  _b->A11(t.a);\n  inner_strassen(&s, &t,\
+    \ &u);\n  _c->updA21(u.a);\n  _c->opsubA22(u.a);\n\n  // P3 = A11 (B12 - B22)\n\
+    \  _a->A11(s.a);\n  memset((int*)t.a, 0, pm * mm * sizeof(int));\n  _b->A12(t.a);\n\
+    \  _b->subA22(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->updA12(u.a);\n  _c->opaddA22(u.a);\n\
+    \n  // P4 = A22 (B21 - B11)\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n\
+    \  _a->A22(s.a);\n  memset((int*)t.a + (pm - 1) * mm, 0, mm * sizeof(int));\n\
+    \  _b->A21(t.a);\n  _b->subA11(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->opaddA11(u.a);\n\
+    \  _c->opaddA21(u.a);\n\n  // P5 = (A11 + A12) B22\n  memset((int*)t.a, 0, pm\
+    \ * mm * sizeof(int));\n  _a->A11(s.a);\n  _a->addA12(s.a);\n  _b->A22(t.a);\n\
+    \  inner_strassen(&s, &t, &u);\n  _c->opsubA11(u.a);\n  _c->opaddA12(u.a);\n\n\
+    \  // P6 = (A21 - A11) (B11 + B12)\n  memset((int*)s.a + (nm - 1) * pm, 0, pm\
+    \ * sizeof(int));\n  _a->A21(s.a);\n  _a->subA11(s.a);\n  _b->A11(t.a);\n  _b->addA12(t.a);\n\
+    \  inner_strassen(&s, &t, &u);\n  _c->opaddA22(u.a);\n\n  // P7 = (A12 - A22)\
+    \ (B21 + B22)\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n  _a->A12(s.a);\n\
+    \  _a->subA22(s.a);\n  memset((int*)t.a + (pm - 1) * mm, 0, mm * sizeof(int));\n\
+    \  _b->A21(t.a);\n  _b->addA22(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->opaddA11(u.a);\n\
+    }\n\nusing vfps = vector<fps>;\n\n__attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) vvm block_dec(\n    const vvm& s, const vvm& t) {\n\
+    \  int n = s.size(), p = s[0].size(), m = t[0].size();\n  assert(int(n * p * 1.4)\
+    \ <= BUFFER_SIZE);\n  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n  assert(int(n\
     \ * m * 1.4) <= BUFFER_SIZE);\n  memset(A, 0, int(n * p * 1.4) * sizeof(int));\n\
     \  memset(B, 0, int(p * m * 1.4) * sizeof(int));\n  memset(C, 0, int(m * n * 1.4)\
     \ * sizeof(int));\n\n  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(),\
@@ -445,7 +448,7 @@ data:
     \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
     \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
     \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
-    \ 633 \"modulo/strassen.hpp\"\nvoid time_test() {\n  int N = 1024;\n  int P =\
+    \ 632 \"modulo/strassen.hpp\"\nvoid time_test() {\n  int N = 1024;\n  int P =\
     \ N, M = N;\n  mt19937 rng(58);\n  vvm s(N, vm(P)), t(P, vm(M));\n  for (int i\
     \ = 0; i < N; i++)\n    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n\
     \  for (int i = 0; i < P; i++)\n    for (int j = 0; j < M; j++) t[i][j] = rng()\
@@ -521,15 +524,15 @@ data:
     \ << SHIFT_) | j0]);\n        if ((c[(i0 << SHIFT_) | j0] += ab0) >= 2 * mint::get_mod())\n\
     \          c[(i0 << SHIFT_) | j0] -= 2 * mint::get_mod();\n      }\n    }\n  }\n\
     }\n\n// for debug\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) vvm naive_mul(\n    const vvm& a, const vvm& b) {\n  int n = a.size(), m =\
-    \ b[0].size(), p = b.size();\n  assert(p == (int)a[0].size());\n  vvm c(n, fps(m,\
-    \ 0));\n  for (int i = 0; i < n; i++)\n    for (int k = 0; k < p; k++)\n     \
-    \ for (int j = 0; j < m; j++) c[i][j] += a[i][k] * b[k][j];\n  return c;\n}\n\n\
-    struct Mat {\n  int H, W, HM, WM;\n  mint* a;\n\n  Mat(int H_, int W_, mint* a_)\
-    \ : H(H_), W(W_), a(a_) {\n    HM = (H >> 1) + (H & 1);\n    WM = (W >> 1) + (W\
-    \ & 1);\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) void\n  range_add(mint* b, int as, int ae, int bs) const {\n    const m256\
-    \ M0 = _mm256_set1_epi32(0);\n    const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
+    ))) vvm naive_mul(\n    const vvm& _a, const vvm& _b) {\n  int n = _a.size(),\
+    \ m = _b[0].size(), p = _b.size();\n  assert(p == (int)_a[0].size());\n  vvm _c(n,\
+    \ fps(m, 0));\n  for (int i = 0; i < n; i++)\n    for (int k = 0; k < p; k++)\n\
+    \      for (int j = 0; j < m; j++) _c[i][j] += _a[i][k] * _b[k][j];\n  return\
+    \ _c;\n}\n\nstruct Mat {\n  int H, W, HM, WM;\n  mint* a;\n\n  Mat(int H_, int\
+    \ W_, mint* a_) : H(H_), W(W_), a(a_) {\n    HM = (H >> 1) + (H & 1);\n    WM\
+    \ = (W >> 1) + (W & 1);\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) void\n  range_add(mint* _b, int as, int ae, int bs)\
+    \ const {\n    const m256 M0 = _mm256_set1_epi32(0);\n    const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
     \ * 2);\n    for (; as < ae - 31; as += 32, bs += 32) {\n      int a0 = as;\n\
     \      int a1 = as + 8;\n      int a2 = as + 16;\n      int a3 = as + 24;\n  \
     \    int b0 = bs;\n      int b1 = bs + 8;\n      int b2 = bs + 16;\n      int\
@@ -541,119 +544,121 @@ data:
     \ + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));\n      const\
     \ m256 BA0 = montgomery_add_256(B0, A0, M2, M0);\n      const m256 BA1 = montgomery_add_256(B1,\
     \ A1, M2, M0);\n      const m256 BA2 = montgomery_add_256(B2, A2, M2, M0);\n \
-    \     const m256 BA3 = montgomery_add_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(b\
-    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(b + b1), BA1);\n      _mm256_storeu_si256((m256*)(b\
-    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(b + b3), BA3);\n    }\n    for\
-    \ (; as < ae; ++as, ++bs) b[bs] += a[as];\n  }\n\n  __attribute__((target(\"avx2\"\
-    ), optimize(\"O3\", \"unroll-loops\"))) void\n  range_sub(mint* b, int as, int\
-    \ ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n    const m256\
-    \ M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae - 31; as +=\
-    \ 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n      int a2 =\
-    \ as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int b1 = bs + 8;\n\
-    \      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const m256 A0 = _mm256_loadu_si256((m256*)(a\
-    \ + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a + a1));\n      const\
-    \ m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const m256 A3 = _mm256_loadu_si256((m256*)(a\
-    \ + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(b + b0));\n      const\
-    \ m256 B1 = _mm256_loadu_si256((m256*)(b + b1));\n      const m256 B2 = _mm256_loadu_si256((m256*)(b\
-    \ + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));\n      const\
-    \ m256 BA0 = montgomery_sub_256(B0, A0, M2, M0);\n      const m256 BA1 = montgomery_sub_256(B1,\
-    \ A1, M2, M0);\n      const m256 BA2 = montgomery_sub_256(B2, A2, M2, M0);\n \
-    \     const m256 BA3 = montgomery_sub_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(b\
-    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(b + b1), BA1);\n      _mm256_storeu_si256((m256*)(b\
-    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(b + b3), BA3);\n    }\n    for\
-    \ (; as < ae; ++as, ++bs) b[bs] -= a[as];\n  }\n\n  __attribute__((target(\"avx2\"\
-    ), optimize(\"O3\", \"unroll-loops\"))) void\n  op_range_add(mint* b, int as,\
-    \ int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n    const\
-    \ m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae - 31;\
-    \ as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n      int\
-    \ a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int b1 = bs\
-    \ + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const m256 A0\
-    \ = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
+    \     const m256 BA3 = montgomery_add_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(_b + b1), BA1);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(_b + b3), BA3);\n    }\n   \
+    \ for (; as < ae; ++as, ++bs) _b[bs] += a[as];\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n  range_sub(mint* _b, int\
+    \ as, int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n   \
+    \ const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae\
+    \ - 31; as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n  \
+    \    int a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int\
+    \ b1 = bs + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const\
+    \ m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
     \ + a1));\n      const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const\
-    \ m256 A3 = _mm256_loadu_si256((m256*)(a + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(b\
-    \ + b0));\n      const m256 B1 = _mm256_loadu_si256((m256*)(b + b1));\n      const\
-    \ m256 B2 = _mm256_loadu_si256((m256*)(b + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b\
-    \ + b3));\n      const m256 BA0 = montgomery_add_256(B0, A0, M2, M0);\n      const\
-    \ m256 BA1 = montgomery_add_256(B1, A1, M2, M0);\n      const m256 BA2 = montgomery_add_256(B2,\
-    \ A2, M2, M0);\n      const m256 BA3 = montgomery_add_256(B3, A3, M2, M0);\n \
-    \     _mm256_storeu_si256((m256*)(a + a0), BA0);\n      _mm256_storeu_si256((m256*)(a\
-    \ + a1), BA1);\n      _mm256_storeu_si256((m256*)(a + a2), BA2);\n      _mm256_storeu_si256((m256*)(a\
-    \ + a3), BA3);\n    }\n    for (; as < ae; ++as, ++bs) a[as] += b[bs];\n  }\n\n\
-    \  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n\
-    \  op_range_sub(mint* b, int as, int ae, int bs) const {\n    const m256 M0 =\
-    \ _mm256_set1_epi32(0);\n    const m256 M2 = _mm256_set1_epi32(mint::get_mod()\
-    \ * 2);\n    for (; as < ae - 31; as += 32, bs += 32) {\n      int a0 = as;\n\
-    \      int a1 = as + 8;\n      int a2 = as + 16;\n      int a3 = as + 24;\n  \
-    \    int b0 = bs;\n      int b1 = bs + 8;\n      int b2 = bs + 16;\n      int\
-    \ b3 = bs + 24;\n      const m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n\
-    \      const m256 A1 = _mm256_loadu_si256((m256*)(a + a1));\n      const m256\
-    \ A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const m256 A3 = _mm256_loadu_si256((m256*)(a\
-    \ + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(b + b0));\n      const\
-    \ m256 B1 = _mm256_loadu_si256((m256*)(b + b1));\n      const m256 B2 = _mm256_loadu_si256((m256*)(b\
-    \ + b2));\n      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));\n      const\
-    \ m256 BA0 = montgomery_sub_256(A0, B0, M2, M0);\n      const m256 BA1 = montgomery_sub_256(A1,\
-    \ B1, M2, M0);\n      const m256 BA2 = montgomery_sub_256(A2, B2, M2, M0);\n \
-    \     const m256 BA3 = montgomery_sub_256(A3, B3, M2, M0);\n      _mm256_storeu_si256((m256*)(a\
-    \ + a0), BA0);\n      _mm256_storeu_si256((m256*)(a + a1), BA1);\n      _mm256_storeu_si256((m256*)(a\
+    \ m256 A3 = _mm256_loadu_si256((m256*)(a + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(_b\
+    \ + b0));\n      const m256 B1 = _mm256_loadu_si256((m256*)(_b + b1));\n     \
+    \ const m256 B2 = _mm256_loadu_si256((m256*)(_b + b2));\n      const m256 B3 =\
+    \ _mm256_loadu_si256((m256*)(_b + b3));\n      const m256 BA0 = montgomery_sub_256(B0,\
+    \ A0, M2, M0);\n      const m256 BA1 = montgomery_sub_256(B1, A1, M2, M0);\n \
+    \     const m256 BA2 = montgomery_sub_256(B2, A2, M2, M0);\n      const m256 BA3\
+    \ = montgomery_sub_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b0), BA0);\n      _mm256_storeu_si256((m256*)(_b + b1), BA1);\n      _mm256_storeu_si256((m256*)(_b\
+    \ + b2), BA2);\n      _mm256_storeu_si256((m256*)(_b + b3), BA3);\n    }\n   \
+    \ for (; as < ae; ++as, ++bs) _b[bs] -= a[as];\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n  op_range_add(mint* _b, int\
+    \ as, int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n   \
+    \ const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae\
+    \ - 31; as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n  \
+    \    int a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int\
+    \ b1 = bs + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const\
+    \ m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
+    \ + a1));\n      const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const\
+    \ m256 A3 = _mm256_loadu_si256((m256*)(a + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(_b\
+    \ + b0));\n      const m256 B1 = _mm256_loadu_si256((m256*)(_b + b1));\n     \
+    \ const m256 B2 = _mm256_loadu_si256((m256*)(_b + b2));\n      const m256 B3 =\
+    \ _mm256_loadu_si256((m256*)(_b + b3));\n      const m256 BA0 = montgomery_add_256(B0,\
+    \ A0, M2, M0);\n      const m256 BA1 = montgomery_add_256(B1, A1, M2, M0);\n \
+    \     const m256 BA2 = montgomery_add_256(B2, A2, M2, M0);\n      const m256 BA3\
+    \ = montgomery_add_256(B3, A3, M2, M0);\n      _mm256_storeu_si256((m256*)(a +\
+    \ a0), BA0);\n      _mm256_storeu_si256((m256*)(a + a1), BA1);\n      _mm256_storeu_si256((m256*)(a\
     \ + a2), BA2);\n      _mm256_storeu_si256((m256*)(a + a3), BA3);\n    }\n    for\
-    \ (; as < ae; ++as, ++bs) a[as] -= b[bs];\n  }\n\n  __attribute__((target(\"avx2\"\
-    ), optimize(\"O3\", \"unroll-loops\"))) inline void\n  A11(mint* b) const {\n\
-    \    for (int i = 0; i < HM; i++)\n      memcpy(b + i * WM, a + i * W, WM * sizeof(int));\n\
+    \ (; as < ae; ++as, ++bs) a[as] += _b[bs];\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\n  op_range_sub(mint* _b, int\
+    \ as, int ae, int bs) const {\n    const m256 M0 = _mm256_set1_epi32(0);\n   \
+    \ const m256 M2 = _mm256_set1_epi32(mint::get_mod() * 2);\n    for (; as < ae\
+    \ - 31; as += 32, bs += 32) {\n      int a0 = as;\n      int a1 = as + 8;\n  \
+    \    int a2 = as + 16;\n      int a3 = as + 24;\n      int b0 = bs;\n      int\
+    \ b1 = bs + 8;\n      int b2 = bs + 16;\n      int b3 = bs + 24;\n      const\
+    \ m256 A0 = _mm256_loadu_si256((m256*)(a + a0));\n      const m256 A1 = _mm256_loadu_si256((m256*)(a\
+    \ + a1));\n      const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));\n      const\
+    \ m256 A3 = _mm256_loadu_si256((m256*)(a + a3));\n      const m256 B0 = _mm256_loadu_si256((m256*)(_b\
+    \ + b0));\n      const m256 B1 = _mm256_loadu_si256((m256*)(_b + b1));\n     \
+    \ const m256 B2 = _mm256_loadu_si256((m256*)(_b + b2));\n      const m256 B3 =\
+    \ _mm256_loadu_si256((m256*)(_b + b3));\n      const m256 BA0 = montgomery_sub_256(A0,\
+    \ B0, M2, M0);\n      const m256 BA1 = montgomery_sub_256(A1, B1, M2, M0);\n \
+    \     const m256 BA2 = montgomery_sub_256(A2, B2, M2, M0);\n      const m256 BA3\
+    \ = montgomery_sub_256(A3, B3, M2, M0);\n      _mm256_storeu_si256((m256*)(a +\
+    \ a0), BA0);\n      _mm256_storeu_si256((m256*)(a + a1), BA1);\n      _mm256_storeu_si256((m256*)(a\
+    \ + a2), BA2);\n      _mm256_storeu_si256((m256*)(a + a3), BA3);\n    }\n    for\
+    \ (; as < ae; ++as, ++bs) a[as] -= _b[bs];\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  A11(mint* _b) const\
+    \ {\n    for (int i = 0; i < HM; i++)\n      memcpy(_b + i * WM, a + i * W, WM\
+    \ * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\",\
+    \ \"unroll-loops\"))) inline void\n  A12(mint* _b) const {\n    for (int i = 0;\
+    \ i < HM; i++)\n      memcpy(_b + i * WM, a + i * W + WM, (W - WM) * sizeof(int));\n\
     \  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\")))\
-    \ inline void\n  A12(mint* b) const {\n    for (int i = 0; i < HM; i++)\n    \
-    \  memcpy(b + i * WM, a + i * W + WM, (W - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  A21(mint* b) const\
-    \ {\n    for (int i = 0; i < H - HM; i++)\n      memcpy(b + i * WM, a + (i + HM)\
-    \ * W, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) inline void\n  A22(mint* b) const {\n    for (int i\
-    \ = 0; i < H - HM; i++)\n      memcpy(b + i * WM, a + (i + HM) * W + WM, (W -\
-    \ WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\"\
-    , \"unroll-loops\"))) inline void\n  subA11(mint* b) const {\n    for (int i =\
-    \ 0; i < HM; i++) {\n      int as = i * W;\n      int ae = i * W + WM;\n     \
-    \ int bs = i * WM;\n      range_sub(b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  addA12(mint* b) const\
-    \ {\n    for (int i = 0; i < HM; i++) {\n      int as = i * W + WM;\n      int\
-    \ ae = i * W + W;\n      int bs = i * WM;\n      range_add(b, as, ae, bs);\n \
-    \   }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) inline void\n  addA22(mint* b) const {\n    for (int i = 0; i < H - HM; i++)\
-    \ {\n      int as = (i + HM) * W + WM;\n      int ae = as + W - WM;\n      int\
-    \ bs = i * WM;\n      range_add(b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  subA22(mint* b) const\
+    \ inline void\n  A21(mint* _b) const {\n    for (int i = 0; i < H - HM; i++)\n\
+    \      memcpy(_b + i * WM, a + (i + HM) * W, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  A22(mint* _b) const\
+    \ {\n    for (int i = 0; i < H - HM; i++)\n      memcpy(_b + i * WM, a + (i +\
+    \ HM) * W + WM, (W - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"\
+    ), optimize(\"O3\", \"unroll-loops\"))) inline void\n  subA11(mint* _b) const\
+    \ {\n    for (int i = 0; i < HM; i++) {\n      int as = i * W;\n      int ae =\
+    \ i * W + WM;\n      int bs = i * WM;\n      range_sub(_b, as, ae, bs);\n    }\n\
+    \  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\")))\
+    \ inline void\n  addA12(mint* _b) const {\n    for (int i = 0; i < HM; i++) {\n\
+    \      int as = i * W + WM;\n      int ae = i * W + W;\n      int bs = i * WM;\n\
+    \      range_add(_b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"\
+    ), optimize(\"O3\", \"unroll-loops\"))) inline void\n  addA22(mint* _b) const\
     \ {\n    for (int i = 0; i < H - HM; i++) {\n      int as = (i + HM) * W + WM;\n\
-    \      int ae = as + W - WM;\n      int bs = i * WM;\n      range_sub(b, as, ae,\
-    \ bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) inline void\n  updA11(mint* b) const {\n    for (int i = 0; i < HM; i++)\n\
-    \      memcpy(a + i * W, b + i * WM, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  updA12(mint* b) const\
-    \ {\n    for (int i = 0; i < HM; i++)\n      memcpy(a + i * W + WM, b + i * WM,\
-    \ (W - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) inline void\n  updA21(mint* b) const {\n    for (int\
-    \ i = 0; i < H - HM; i++)\n      memcpy(a + (i + HM) * W, b + i * WM, WM * sizeof(int));\n\
+    \      int ae = as + W - WM;\n      int bs = i * WM;\n      range_add(_b, as,\
+    \ ae, bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\",\
+    \ \"unroll-loops\"))) inline void\n  subA22(mint* _b) const {\n    for (int i\
+    \ = 0; i < H - HM; i++) {\n      int as = (i + HM) * W + WM;\n      int ae = as\
+    \ + W - WM;\n      int bs = i * WM;\n      range_sub(_b, as, ae, bs);\n    }\n\
     \  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\")))\
-    \ inline void\n  updA22(mint* b) const {\n    for (int i = 0; i < H - HM; i++)\n\
-    \      memcpy(a + (i + HM) * W + WM, b + i * WM, (W - WM) * sizeof(int));\n  }\n\
-    \n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline\
-    \ void\n  opaddA11(mint* b) const {\n    for (int i = 0; i < HM; i++) {\n    \
-    \  int as = i * W;\n      int ae = i * W + WM;\n      int bs = i * WM;\n     \
-    \ op_range_add(b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"\
-    ), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opaddA12(mint* b) const\
-    \ {\n    for (int i = 0; i < HM; i++) {\n      int as = i * W + WM;\n      int\
-    \ ae = i * W + W;\n      int bs = i * WM;\n      op_range_add(b, as, ae, bs);\n\
-    \    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
-    ))) inline void\n  opaddA21(mint* b) const {\n    for (int i = 0; i < H - HM;\
+    \ inline void\n  updA11(mint* _b) const {\n    for (int i = 0; i < HM; i++)\n\
+    \      memcpy(a + i * W, _b + i * WM, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  updA12(mint* _b)\
+    \ const {\n    for (int i = 0; i < HM; i++)\n      memcpy(a + i * W + WM, _b +\
+    \ i * WM, (W - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"),\
+    \ optimize(\"O3\", \"unroll-loops\"))) inline void\n  updA21(mint* _b) const {\n\
+    \    for (int i = 0; i < H - HM; i++)\n      memcpy(a + (i + HM) * W, _b + i *\
+    \ WM, WM * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline void\n  updA22(mint* _b) const {\n    for (int\
+    \ i = 0; i < H - HM; i++)\n      memcpy(a + (i + HM) * W + WM, _b + i * WM, (W\
+    \ - WM) * sizeof(int));\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) inline void\n  opaddA11(mint* _b) const {\n    for (int\
+    \ i = 0; i < HM; i++) {\n      int as = i * W;\n      int ae = i * W + WM;\n \
+    \     int bs = i * WM;\n      op_range_add(_b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opaddA12(mint* _b)\
+    \ const {\n    for (int i = 0; i < HM; i++) {\n      int as = i * W + WM;\n  \
+    \    int ae = i * W + W;\n      int bs = i * WM;\n      op_range_add(_b, as, ae,\
+    \ bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) inline void\n  opaddA21(mint* _b) const {\n    for (int i = 0; i < H - HM;\
     \ i++) {\n      int as = (i + HM) * W;\n      int ae = (i + HM) * W + WM;\n  \
-    \    int bs = i * WM;\n      op_range_add(b, as, ae, bs);\n    }\n    //  for\
-    \ (int j = 0; j < WM; j++) a[(i + HM) * W + j] += b[i * WM + j];\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opaddA22(mint* b)\
+    \    int bs = i * WM;\n      op_range_add(_b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opaddA22(mint* _b)\
     \ const {\n    for (int i = 0; i < H - HM; i++) {\n      int as = (i + HM) * W\
-    \ + WM;\n      int ae = (i + HM) * W + W;\n      int bs = i * WM;\n      op_range_add(b,\
+    \ + WM;\n      int ae = (i + HM) * W + W;\n      int bs = i * WM;\n      op_range_add(_b,\
     \ as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"avx2\"), optimize(\"O3\"\
-    , \"unroll-loops\"))) inline void\n  opsubA11(mint* b) const {\n    for (int i\
-    \ = 0; i < HM; i++) {\n      int as = i * W;\n      int ae = i * W + WM;\n   \
-    \   int bs = i * WM;\n      op_range_sub(b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opsubA22(mint* b)\
+    , \"unroll-loops\"))) inline void\n  opsubA11(mint* _b) const {\n    for (int\
+    \ i = 0; i < HM; i++) {\n      int as = i * W;\n      int ae = i * W + WM;\n \
+    \     int bs = i * WM;\n      op_range_sub(_b, as, ae, bs);\n    }\n  }\n\n  __attribute__((target(\"\
+    avx2\"), optimize(\"O3\", \"unroll-loops\"))) inline void\n  opsubA22(mint* _b)\
     \ const {\n    for (int i = 0; i < H - HM; i++) {\n      int as = (i + HM) * W\
-    \ + WM;\n      int ae = (i + HM) * W + W;\n      int bs = i * WM;\n      op_range_sub(b,\
+    \ + WM;\n      int ae = (i + HM) * W + W;\n      int bs = i * WM;\n      op_range_sub(_b,\
     \ as, ae, bs);\n    }\n  }\n\n  void dump() const {\n    cerr << \"[ \" << endl\
     \ << \" \";\n    for (int i = 0; i < H; i++)\n      for (int j = 0; j < W; j++)\n\
     \        cerr << a[i * W + j] << (j == W - 1 ? \",\\n \" : \" \");\n    cerr <<\
@@ -682,34 +687,35 @@ data:
     \ * m + ll] +=\n                *reinterpret_cast<mint*>(c + ((l - is) << SHIFT_)\
     \ + (ll - js));\n          }\n        }\n      }\n}\n\n__attribute__((target(\"\
     avx2\"), optimize(\"O3\", \"unroll-loops\"))) void\ninner_strassen(const Mat*\
-    \ a, const Mat* b, const Mat* c) {\n  int n = a->H, m = b->W, p = a->W;\n  if\
-    \ (max({n, m, p}) <= (1 << SHIFT_)) {\n    inner_fast_mul(a, b, c);\n    return;\n\
-    \  }\n  if (min({n, m, p}) <= (1 << (SHIFT_ - 2))) {\n    inner_block_dec_mul(a,\
-    \ b, c);\n    return;\n  }\n  int nm = n / 2 + (n & 1);\n  int mm = m / 2 + (m\
-    \ & 1);\n  int pm = p / 2 + (p & 1);\n\n  Mat s(nm, pm, a->a + n * p);\n  Mat\
-    \ t(pm, mm, b->a + p * m);\n  Mat u(nm, mm, c->a + n * m);\n\n  // P1 = (A11 +\
-    \ A22) * (B11 + B22)\n  a->A11(s.a);\n  a->addA22(s.a);\n  b->A11(t.a);\n  b->addA22(t.a);\n\
-    \  inner_strassen(&s, &t, &u);\n  c->updA11(u.a);\n  c->updA22(u.a);\n\n  // P2\
-    \ = (A21 + A22) * B11\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n  a->A21(s.a);\n\
-    \  a->addA22(s.a);\n  b->A11(t.a);\n  inner_strassen(&s, &t, &u);\n  c->updA21(u.a);\n\
-    \  c->opsubA22(u.a);\n\n  // P3 = A11 (B12 - B22)\n  a->A11(s.a);\n  memset((int*)t.a,\
-    \ 0, pm * mm * sizeof(int));\n  b->A12(t.a);\n  b->subA22(t.a);\n  inner_strassen(&s,\
-    \ &t, &u);\n  c->updA12(u.a);\n  c->opaddA22(u.a);\n\n  // P4 = A22 (B21 - B11)\n\
-    \  memset((int*)s.a, 0, nm * pm * sizeof(int));\n  a->A22(s.a);\n  memset((int*)t.a\
-    \ + (pm - 1) * mm, 0, mm * sizeof(int));\n  b->A21(t.a);\n  b->subA11(t.a);\n\
-    \  inner_strassen(&s, &t, &u);\n  c->opaddA11(u.a);\n  c->opaddA21(u.a);\n\n \
-    \ // P5 = (A11 + A12) B22\n  memset((int*)t.a, 0, pm * mm * sizeof(int));\n  a->A11(s.a);\n\
-    \  a->addA12(s.a);\n  b->A22(t.a);\n  inner_strassen(&s, &t, &u);\n  c->opsubA11(u.a);\n\
-    \  c->opaddA12(u.a);\n\n  // P6 = (A21 - A11) (B11 + B12)\n  memset((int*)s.a\
-    \ + (nm - 1) * pm, 0, pm * sizeof(int));\n  a->A21(s.a);\n  a->subA11(s.a);\n\
-    \  b->A11(t.a);\n  b->addA12(t.a);\n  inner_strassen(&s, &t, &u);\n  c->opaddA22(u.a);\n\
-    \n  // P7 = (A12 - A22) (B21 + B22)\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n\
-    \  a->A12(s.a);\n  a->subA22(s.a);\n  memset((int*)t.a + (pm - 1) * mm, 0, mm\
-    \ * sizeof(int));\n  b->A21(t.a);\n  b->addA22(t.a);\n  inner_strassen(&s, &t,\
-    \ &u);\n  c->opaddA11(u.a);\n}\n\nusing vfps = vector<fps>;\n\n__attribute__((target(\"\
-    avx2\"), optimize(\"O3\", \"unroll-loops\"))) vvm block_dec(\n    const vvm& s,\
-    \ const vvm& t) {\n  int n = s.size(), p = s[0].size(), m = t[0].size();\n  assert(int(n\
-    \ * p * 1.4) <= BUFFER_SIZE);\n  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n  assert(int(n\
+    \ _a, const Mat* _b, const Mat* _c) {\n  int n = _a->H, m = _b->W, p = _a->W;\n\
+    \  if (max({n, m, p}) <= (1 << SHIFT_)) {\n    inner_fast_mul(_a, _b, _c);\n \
+    \   return;\n  }\n  if (min({n, m, p}) <= (1 << (SHIFT_ - 2))) {\n    inner_block_dec_mul(_a,\
+    \ _b, _c);\n    return;\n  }\n  int nm = n / 2 + (n & 1);\n  int mm = m / 2 +\
+    \ (m & 1);\n  int pm = p / 2 + (p & 1);\n\n  Mat s(nm, pm, _a->a + n * p);\n \
+    \ Mat t(pm, mm, _b->a + p * m);\n  Mat u(nm, mm, _c->a + n * m);\n\n  // P1 =\
+    \ (A11 + A22) * (B11 + B22)\n  _a->A11(s.a);\n  _a->addA22(s.a);\n  _b->A11(t.a);\n\
+    \  _b->addA22(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->updA11(u.a);\n  _c->updA22(u.a);\n\
+    \n  // P2 = (A21 + A22) * B11\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n\
+    \  _a->A21(s.a);\n  _a->addA22(s.a);\n  _b->A11(t.a);\n  inner_strassen(&s, &t,\
+    \ &u);\n  _c->updA21(u.a);\n  _c->opsubA22(u.a);\n\n  // P3 = A11 (B12 - B22)\n\
+    \  _a->A11(s.a);\n  memset((int*)t.a, 0, pm * mm * sizeof(int));\n  _b->A12(t.a);\n\
+    \  _b->subA22(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->updA12(u.a);\n  _c->opaddA22(u.a);\n\
+    \n  // P4 = A22 (B21 - B11)\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n\
+    \  _a->A22(s.a);\n  memset((int*)t.a + (pm - 1) * mm, 0, mm * sizeof(int));\n\
+    \  _b->A21(t.a);\n  _b->subA11(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->opaddA11(u.a);\n\
+    \  _c->opaddA21(u.a);\n\n  // P5 = (A11 + A12) B22\n  memset((int*)t.a, 0, pm\
+    \ * mm * sizeof(int));\n  _a->A11(s.a);\n  _a->addA12(s.a);\n  _b->A22(t.a);\n\
+    \  inner_strassen(&s, &t, &u);\n  _c->opsubA11(u.a);\n  _c->opaddA12(u.a);\n\n\
+    \  // P6 = (A21 - A11) (B11 + B12)\n  memset((int*)s.a + (nm - 1) * pm, 0, pm\
+    \ * sizeof(int));\n  _a->A21(s.a);\n  _a->subA11(s.a);\n  _b->A11(t.a);\n  _b->addA12(t.a);\n\
+    \  inner_strassen(&s, &t, &u);\n  _c->opaddA22(u.a);\n\n  // P7 = (A12 - A22)\
+    \ (B21 + B22)\n  memset((int*)s.a, 0, nm * pm * sizeof(int));\n  _a->A12(s.a);\n\
+    \  _a->subA22(s.a);\n  memset((int*)t.a + (pm - 1) * mm, 0, mm * sizeof(int));\n\
+    \  _b->A21(t.a);\n  _b->addA22(t.a);\n  inner_strassen(&s, &t, &u);\n  _c->opaddA11(u.a);\n\
+    }\n\nusing vfps = vector<fps>;\n\n__attribute__((target(\"avx2\"), optimize(\"\
+    O3\", \"unroll-loops\"))) vvm block_dec(\n    const vvm& s, const vvm& t) {\n\
+    \  int n = s.size(), p = s[0].size(), m = t[0].size();\n  assert(int(n * p * 1.4)\
+    \ <= BUFFER_SIZE);\n  assert(int(p * m * 1.4) <= BUFFER_SIZE);\n  assert(int(n\
     \ * m * 1.4) <= BUFFER_SIZE);\n  memset(A, 0, int(n * p * 1.4) * sizeof(int));\n\
     \  memset(B, 0, int(p * m * 1.4) * sizeof(int));\n  memset(C, 0, int(m * n * 1.4)\
     \ * sizeof(int));\n\n  for (int i = 0; i < n; i++) memcpy(A + i * p, s[i].data(),\
@@ -779,8 +785,8 @@ data:
   path: modulo/strassen.hpp
   requiredBy:
   - fps/fps-composition-fast.hpp
-  timestamp: '2021-04-26 16:30:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-05-08 12:43:13+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
 documentation_of: modulo/strassen.hpp
