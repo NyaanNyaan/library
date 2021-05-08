@@ -140,10 +140,10 @@ struct Mat {
       const m256 A1 = _mm256_loadu_si256((m256*)(a + a1));
       const m256 A2 = _mm256_loadu_si256((m256*)(a + a2));
       const m256 A3 = _mm256_loadu_si256((m256*)(a + a3));
-      const m256 B0 = _mm256_loadu_si256((m256*)(b + b0));
-      const m256 B1 = _mm256_loadu_si256((m256*)(b + b1));
-      const m256 B2 = _mm256_loadu_si256((m256*)(b + b2));
-      const m256 B3 = _mm256_loadu_si256((m256*)(b + b3));
+      const m256 B0 = _mm256_loadu_si256((m256*)(_b + b0));
+      const m256 B1 = _mm256_loadu_si256((m256*)(_b + b1));
+      const m256 B2 = _mm256_loadu_si256((m256*)(_b + b2));
+      const m256 B3 = _mm256_loadu_si256((m256*)(_b + b3));
       const m256 BA0 = montgomery_add_256(B0, A0, M2, M0);
       const m256 BA1 = montgomery_add_256(B1, A1, M2, M0);
       const m256 BA2 = montgomery_add_256(B2, A2, M2, M0);
@@ -627,64 +627,4 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) vfps strassen(
 #ifdef BUFFER_SIZE
 #undef BUFFER_SIZE
 #endif
-
-#include "../misc/timer.hpp"
-void time_test() {
-  int N = 1024;
-  int P = N, M = N;
-  mt19937 rng(58);
-  vvm s(N, vm(P)), t(P, vm(M));
-  for (int i = 0; i < N; i++)
-    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;
-  for (int i = 0; i < P; i++)
-    for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;
-  vvm u, u2, u3;
-  Timer timer;
-
-  int loop = 5;
-  timer.reset();
-  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s, t);
-  cout << "strassen " << (timer.elapsed() / loop) << endl;
-
-  timer.reset();
-  u2 = FastMatProd::naive_mul(s, t);
-  cout << "naive " << timer.elapsed() << endl;
-
-  timer.reset();
-  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s, t);
-  cout << "block dec " << (timer.elapsed() / loop) << endl;
-
-  assert(u == u2);
-  assert(u == u3);
-}
-
-void debug_test() {
-  // time_test();
-  int N, P, M;
-  mt19937 rng(58);
-  int loop = 1000;
-  while (loop--) {
-    N = rng() % 500 + 1;
-    M = rng() % 500 + 1;
-    P = rng() % 500 + 1;
-    vvm s(N, vm(P)), t(P, vm(M));
-    for (int i = 0; i < N; i++)
-      for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;
-    for (int i = 0; i < P; i++)
-      for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;
-    auto u = strassen(s, t);
-    auto u2 = naive_mul(s, t);
-    auto u3 = block_dec(s, t);
-    if (u != u2) {
-      cout << "ng u1 " << N << " " << P << " " << M << endl;
-      exit(1);
-    } else if (u != u3) {
-      cout << "ng u1 " << N << " " << P << " " << M << endl;
-      exit(1);
-    } else {
-      cout << "ok " << N << " " << P << " " << M << endl;
-    }
-  }
-  cout << "all ok";
-}
 }  // namespace FastMatProd
