@@ -8,5 +8,5 @@ exclude:
 plugins:
 - jemoji
 - jekyll-redirect-from
-theme: jekyll-theme-minimal
+theme: jekyll-theme-hacker
 title: Nyaan's Library
