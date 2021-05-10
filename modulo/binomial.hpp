@@ -13,7 +13,7 @@ struct Binomial {
     f.resize(m);
     g.resize(m);
     h.resize(m);
-    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(n);
+    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);
     g[m - 1] = f[m - 1].inverse();
     h[m - 1] = g[m - 1] * f[m - 2];
     for (int i = m - 2; i >= n; i--) {
