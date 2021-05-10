@@ -252,27 +252,25 @@ data:
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\n\
-    struct Binomial {\n  vector<T> fac_, finv_, inv_;\n  Binomial(int MAX = 0) : fac_(MAX\
-    \ + 10), finv_(MAX + 10), inv_(MAX + 10) {\n    assert(T::get_mod() != 0);\n \
-    \   MAX += 9;\n    fac_[0] = finv_[0] = inv_[0] = 1;\n    for (int i = 1; i <=\
-    \ MAX; i++) fac_[i] = fac_[i - 1] * i;\n    finv_[MAX] = fac_[MAX].inverse();\n\
-    \    for (int i = MAX - 1; i > 0; i--) finv_[i] = finv_[i + 1] * (i + 1);\n  \
-    \  for (int i = 1; i <= MAX; i++) inv_[i] = finv_[i] * fac_[i - 1];\n  }\n\n \
-    \ void extend() {\n    int n = fac_.size();\n    T fac = fac_.back() * n;\n  \
-    \  T inv = (-inv_[T::get_mod() % n]) * (T::get_mod() / n);\n    T finv = finv_.back()\
-    \ * inv;\n    fac_.push_back(fac);\n    finv_.push_back(finv);\n    inv_.push_back(inv);\n\
-    \  }\n\n  T fac(int i) {\n    if(i < 0) return T(0);\n    while (i >= (int)fac_.size())\
-    \ extend();\n    return fac_[i];\n  }\n\n  T finv(int i) {\n    if(i < 0) return\
-    \ T(0);\n    while (i >= (int)finv_.size()) extend();\n    return finv_[i];\n\
-    \  }\n\n  T inv(int i) {\n    if(i < 0) return T(0);\n    while (i >= (int)inv_.size())\
-    \ extend();\n    return inv_[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0\
-    \ || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n\
-    \  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
-    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
-    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
-    \n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"fps/lagrange-interpolation-point.hpp\"\
+    struct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) : f(1, T(1)),\
+    \ g(1, T(1)), h(1, T(1)) {\n    while (MAX >= (int)f.size()) extend();\n  }\n\n\
+    \  void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
+    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
+    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
+    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
+    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
+    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
+    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
+    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
+    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
+    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
+    \ { return C(n, r); }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r ||\
+    \ r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
+    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
+    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
+    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
+    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"fps/lagrange-interpolation-point.hpp\"\
     \n\n#line 4 \"fps/lagrange-interpolation-point.hpp\"\n\n// given  : y(x=0) , y(x=1)\
     \ , ... , y(k)\n// return : y(x)\ntemplate <typename mint>\nmint lagrange_interpolation(const\
     \ vector<mint>& y, long long x,\n                            Binomial<mint>& C)\
@@ -343,7 +341,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-05-10 21:37:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
