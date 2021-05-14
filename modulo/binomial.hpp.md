@@ -16,6 +16,10 @@ data:
     path: fps/lagrange-interpolation-point.hpp
     title: fps/lagrange-interpolation-point.hpp
   - icon: ':heavy_check_mark:'
+    path: fps/partial-fraction-decomposition.hpp
+    title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
+      \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
+  - icon: ':heavy_check_mark:'
     path: fps/sample-point-shift.hpp
     title: fps/sample-point-shift.hpp
   - icon: ':heavy_check_mark:'
@@ -103,6 +107,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1510.test.cpp
+    title: verify/verify-yuki/yuki-1510.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -154,6 +161,7 @@ data:
   requiredBy:
   - fps/taylor-shift.hpp
   - fps/fps-famous-series.hpp
+  - fps/partial-fraction-decomposition.hpp
   - fps/utility.hpp
   - fps/fps-composition.hpp
   - fps/sample-point-shift.hpp
@@ -168,6 +176,7 @@ data:
   verifiedWith:
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp

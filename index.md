@@ -173,6 +173,10 @@ data:
       path: fps/ntt-friendly-fps.hpp
       title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
+      path: fps/partial-fraction-decomposition.hpp
+      title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\
+        \u306E\u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
+    - icon: ':heavy_check_mark:'
       path: fps/polynomial-gcd.hpp
       title: "\u591A\u9805\u5F0FGCD"
     - icon: ':heavy_check_mark:'
@@ -357,6 +361,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/two-sat.hpp
       title: 2-SAT
+  - name: math-fast
+    pages:
+    - icon: ':x:'
+      path: math-fast/gcd.hpp
+      title: binary GCD
   - name: matrix
     pages:
     - icon: ':heavy_check_mark:'
@@ -718,22 +727,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1013,6 +1022,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/lazyseg-setval.test.cpp
       title: verify/verify-unit-test/lazyseg-setval.test.cpp
+    - icon: ':x:'
+      path: verify/verify-unit-test/math-fast.test.cpp
+      title: verify/verify-unit-test/math-fast.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/math.test.cpp
       title: verify/verify-unit-test/math.test.cpp
@@ -1590,6 +1602,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1340-semiring.test.cpp
       title: verify/verify-yuki/yuki-1340-semiring.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1510.test.cpp
+      title: verify/verify-yuki/yuki-1510.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-helloworld.test.cpp
       title: verify/verify-yuki/yuki-helloworld.test.cpp
