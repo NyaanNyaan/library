@@ -257,5 +257,6 @@
 "verify/verify-yuki/yuki-1326.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yuki/yuki-1340-bitmatrix.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yuki/yuki-1340-semiring.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1510.test.cpp": "2021-05-15 01:48:03 +0900",
 "verify/verify-yuki/yuki-helloworld.test.cpp": "2021-05-04 19:34:35 +0900"
 }
