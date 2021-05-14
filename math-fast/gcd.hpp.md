@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/math-fast.test.cpp
     title: verify/verify-unit-test/math-fast.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: binary GCD
     links: []
@@ -37,7 +37,7 @@ data:
   path: math-fast/gcd.hpp
   requiredBy: []
   timestamp: '2021-05-15 01:48:03+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/math-fast.test.cpp
 documentation_of: math-fast/gcd.hpp

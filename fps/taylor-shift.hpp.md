@@ -18,6 +18,9 @@ data:
       \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+    title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
@@ -147,6 +150,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1510.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
 documentation_of: fps/taylor-shift.hpp

@@ -26,6 +26,9 @@ data:
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+    title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -614,6 +617,7 @@ data:
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp

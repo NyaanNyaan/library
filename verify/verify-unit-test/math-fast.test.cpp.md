@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math-fast/gcd.hpp
     title: binary GCD
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -194,7 +194,7 @@ data:
     \       P(0, -1),\n                     P(-1, 0),\n                     P(-1,\
     \ -1)};\n  for (i64 i = 1000; i--;)\n    for (i64 j = 1000; j--;) testcase.emplace_back(i,\
     \ j);\n  rng_init();\n  for (i64 n = 10000; n--;) {\n    i64 i = rng(), j = rng();\n\
-    \    testcase.emplace_back(i, j);\n  }\n\n  vector<F> functions{std::__gcd<int64_t>,\
+    \    testcase.emplace_back(i, j);\n  }\n\n  vector<F> functions{std::__gcd<i64>,\
     \ naive_gcd, gcd};\n\n  for (auto p : testcase) {\n    unordered_set<i64> s;\n\
     \    for (auto &f : functions) {\n      s.insert(abs(f(p.first, p.second)));\n\
     \    }\n    if (s.size() != 1u) {\n      cerr << \"verify failed.\" << endl;\n\
@@ -221,7 +221,7 @@ data:
     \                   P(-1, 0),\n                     P(-1, -1)};\n  for (i64 i\
     \ = 1000; i--;)\n    for (i64 j = 1000; j--;) testcase.emplace_back(i, j);\n \
     \ rng_init();\n  for (i64 n = 10000; n--;) {\n    i64 i = rng(), j = rng();\n\
-    \    testcase.emplace_back(i, j);\n  }\n\n  vector<F> functions{std::__gcd<int64_t>,\
+    \    testcase.emplace_back(i, j);\n  }\n\n  vector<F> functions{std::__gcd<i64>,\
     \ naive_gcd, gcd};\n\n  for (auto p : testcase) {\n    unordered_set<i64> s;\n\
     \    for (auto &f : functions) {\n      s.insert(abs(f(p.first, p.second)));\n\
     \    }\n    if (s.size() != 1u) {\n      cerr << \"verify failed.\" << endl;\n\
@@ -242,8 +242,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/math-fast.test.cpp
   requiredBy: []
-  timestamp: '2021-05-15 01:48:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-15 02:06:53+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/math-fast.test.cpp
 layout: document

@@ -14,6 +14,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+    title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1510.test.cpp
     title: verify/verify-yuki/yuki-1510.test.cpp
   _isVerificationFailed: false
@@ -173,6 +176,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1510.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
 documentation_of: fps/partial-fraction-decomposition.hpp
 layout: document
 redirect_from:

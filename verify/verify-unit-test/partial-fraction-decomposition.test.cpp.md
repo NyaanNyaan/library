@@ -2,14 +2,34 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: fps/formal-power-series.hpp
+    title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
+      \u30E9\u30EA"
+  - icon: ':heavy_check_mark:'
+    path: fps/ntt-friendly-fps.hpp
+    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
+  - icon: ':heavy_check_mark:'
+    path: fps/partial-fraction-decomposition.hpp
+    title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
+      \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
+  - icon: ':heavy_check_mark:'
+    path: fps/taylor-shift.hpp
+    title: "\u5E73\u884C\u79FB\u52D5"
+  - icon: ':heavy_check_mark:'
+    path: fps/utility.hpp
+    title: fps/utility.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
-    path: ntt/arbitrary-ntt.hpp
-    title: ntt/arbitrary-ntt.hpp
+    path: modulo/binomial.hpp
+    title: modulo/binomial.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
@@ -38,30 +58,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_1000000007
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/convolution_mod_1000000007
-  bundledCode: "#line 1 \"verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/partial-fraction-decomposition.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
@@ -177,41 +197,9 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"modint/montgomery-modint.hpp\"\
-    \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
-    \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
-    \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
-    \  for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n\
-    \  static constexpr u32 r = get_r();\n  static constexpr u32 n2 = -u64(mod) %\
-    \ mod;\n  static_assert(r * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod\
-    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
-    invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() :\
-    \ a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
-    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
-    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
-    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
-    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
-    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\
-    \n\n#line 2 \"modint/simd-montgomery.hpp\"\n\n#line 4 \"modint/simd-montgomery.hpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/partial-fraction-decomposition.test.cpp\"\
+    \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\
+    #line 2 \"modint/simd-montgomery.hpp\"\n\n#line 4 \"modint/simd-montgomery.hpp\"\
     \n\n__attribute__((target(\"sse4.2\"))) inline __m128i my128_mullo_epu32(\n  \
     \  const __m128i &a, const __m128i &b) {\n  return _mm_mullo_epi32(a, b);\n}\n\
     \n__attribute__((target(\"sse4.2\"))) inline __m128i my128_mulhi_epu32(\n    const\
@@ -547,55 +535,286 @@ data:
     \ mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for\
     \ (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2\
     \ * M);\n    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line\
-    \ 5 \"ntt/arbitrary-ntt.hpp\"\n\nnamespace ArbitraryNTT {\nusing i64 = int64_t;\n\
-    using u128 = __uint128_t;\nconstexpr int32_t m0 = 167772161;\nconstexpr int32_t\
-    \ m1 = 469762049;\nconstexpr int32_t m2 = 754974721;\nusing mint0 = LazyMontgomeryModInt<m0>;\n\
-    using mint1 = LazyMontgomeryModInt<m1>;\nusing mint2 = LazyMontgomeryModInt<m2>;\n\
-    constexpr int r01 = mint1(m0).inverse().get();\nconstexpr int r02 = mint2(m0).inverse().get();\n\
-    constexpr int r12 = mint2(m1).inverse().get();\nconstexpr int r02r12 = i64(r02)\
-    \ * r12 % m2;\nconstexpr i64 w1 = m0;\nconstexpr i64 w2 = i64(m0) * m1;\n\ntemplate\
-    \ <typename T, typename submint>\nvector<submint> mul(const vector<T> &a, const\
-    \ vector<T> &b) {\n  static NTT<submint> ntt;\n  vector<submint> s(a.size()),\
-    \ t(b.size());\n  for (int i = 0; i < (int)a.size(); ++i) s[i] = i64(a[i] % submint::get_mod());\n\
-    \  for (int i = 0; i < (int)b.size(); ++i) t[i] = i64(b[i] % submint::get_mod());\n\
-    \  return ntt.multiply(s, t);\n}\n\ntemplate <typename T>\nvector<int> multiply(const\
-    \ vector<T> &s, const vector<T> &t, int mod) {\n  auto d0 = mul<T, mint0>(s, t);\n\
-    \  auto d1 = mul<T, mint1>(s, t);\n  auto d2 = mul<T, mint2>(s, t);\n  int n =\
-    \ d0.size();\n  vector<int> ret(n);\n  const int W1 = w1 % mod;\n  const int W2\
-    \ = w2 % mod;\n  for (int i = 0; i < n; i++) {\n    int n1 = d1[i].get(), n2 =\
-    \ d2[i].get(), a = d0[i].get();\n    int b = i64(n1 + m1 - a) * r01 % m1;\n  \
-    \  int c = (i64(n2 + m2 - a) * r02r12 + i64(m2 - b) * r12) % m2;\n    ret[i] =\
-    \ (i64(a) + i64(b) * W1 + i64(c) * W2) % mod;\n  }\n  return ret;\n}\n\ntemplate\
-    \ <typename mint>\nvector<mint> multiply(const vector<mint> &a, const vector<mint>\
-    \ &b) {\n  if (a.size() == 0 && b.size() == 0) return {};\n  if (min<int>(a.size(),\
-    \ b.size()) < 128) {\n    vector<mint> ret(a.size() + b.size() - 1);\n    for\
-    \ (int i = 0; i < (int)a.size(); ++i)\n      for (int j = 0; j < (int)b.size();\
-    \ ++j) ret[i + j] += a[i] * b[j];\n    return ret;\n  }\n  vector<int> s(a.size()),\
-    \ t(b.size());\n  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();\n\
-    \  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();\n  vector<int> u\
-    \ = multiply<int>(s, t, mint::get_mod());\n  vector<mint> ret(u.size());\n  for\
-    \ (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);\n  return ret;\n}\n\
-    \ntemplate <typename T>\nvector<u128> multiply_u128(const vector<T> &s, const\
-    \ vector<T> &t) {\n  if (s.size() == 0 && t.size() == 0) return {};\n  if (min<int>(s.size(),\
-    \ t.size()) < 128) {\n    vector<u128> ret(s.size() + t.size() - 1);\n    for\
-    \ (int i = 0; i < (int)s.size(); ++i)\n      for (int j = 0; j < (int)t.size();\
-    \ ++j) ret[i + j] += i64(s[i]) * t[j];\n    return ret;\n  }\n  auto d0 = mul<T,\
-    \ mint0>(s, t);\n  auto d1 = mul<T, mint1>(s, t);\n  auto d2 = mul<T, mint2>(s,\
-    \ t);\n  int n = d0.size();\n  vector<u128> ret(n);\n  for (int i = 0; i < n;\
-    \ i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n    i64 a = d0[i].get();\n\
-    \    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2 + m2 - a) * r02r12\
-    \ + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n  }\n  return ret;\n\
-    }\n}  // namespace ArbitraryNTT\n#line 6 \"verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp\"\
-    \n\nconstexpr int MOD = 1000000007;\nusing mint = LazyMontgomeryModInt<MOD>;\n\
-    using vm = vector<mint>;\n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N,\
-    \ M);\n  vm a(N), b(M);\n  in(a, b);\n  auto c = ArbitraryNTT::multiply(a, b);\n\
-    \  out(c);\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../ntt/arbitrary-ntt.hpp\"\n\nconstexpr int MOD = 1000000007;\n\
-    using mint = LazyMontgomeryModInt<MOD>;\nusing vm = vector<mint>;\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  ini(N, M);\n  vm a(N), b(M);\n  in(a, b);\n\
-    \  auto c = ArbitraryNTT::multiply(a, b);\n  out(c);\n}"
+    \ 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
+    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
+    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
+    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
+    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
+    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
+    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
+    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
+    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
+    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
+    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
+    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
+    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
+    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
+    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
+    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
+    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
+    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
+    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
+    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
+    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
+    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
+    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
+    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
+    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
+    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
+    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
+    \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
+    \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
+    \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
+    \ operator<<(int sz) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(),\
+    \ sz, mint(0));\n    return ret;\n  }\n\n  FPS diff() const {\n    const int n\
+    \ = (int)this->size();\n    FPS ret(max(0, n - 1));\n    mint one(1), coeff(1);\n\
+    \    for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n \
+    \     coeff += one;\n    }\n    return ret;\n  }\n\n  FPS integral() const {\n\
+    \    const int n = (int)this->size();\n    FPS ret(n + 1);\n    ret[0] = mint(0);\n\
+    \    if (n > 0) ret[1] = mint(1);\n    auto mod = mint::get_mod();\n    for (int\
+    \ i = 2; i <= n; i++) ret[i] = (-ret[mod % i]) * (mod / i);\n    for (int i =\
+    \ 0; i < n; i++) ret[i + 1] *= (*this)[i];\n    return ret;\n  }\n\n  mint eval(mint\
+    \ x) const {\n    mint r = 0, w = 1;\n    for (auto &v : *this) r += w * v, w\
+    \ *= x;\n    return r;\n  }\n\n  FPS log(int deg = -1) const {\n    assert((*this)[0]\
+    \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
+    \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
+    \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
+    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
+    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
+    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
+    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
+    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
+    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
+    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
+    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
+    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
+    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
+    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
+    \ @docs docs/fps/formal-power-series.md\n */\n#line 5 \"fps/ntt-friendly-fps.hpp\"\
+    \n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  if\
+    \ (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>&\
+    \ FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>& r)\
+    \ {\n  if (this->empty() || r.empty()) {\n    this->clear();\n    return *this;\n\
+    \  }\n  set_fft();\n  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this,\
+    \ r);\n  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());\n}\n\n\
+    template <typename mint>\nvoid FormalPowerSeries<mint>::ntt() {\n  set_fft();\n\
+    \  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);\n}\n\ntemplate <typename mint>\n\
+    void FormalPowerSeries<mint>::intt() {\n  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);\n\
+    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling() {\n\
+    \  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);\n}\n\n\
+    template <typename mint>\nint FormalPowerSeries<mint>::ntt_pr() {\n  set_fft();\n\
+    \  return static_cast<NTT<mint>*>(ntt_ptr)->pr;\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {\n  assert((*this)[0]\
+    \ != mint(0));\n  if (deg == -1) deg = (int)this->size();\n  FormalPowerSeries<mint>\
+    \ res(deg);\n  res[0] = {mint(1) / (*this)[0]};\n  for (int d = 1; d < deg; d\
+    \ <<= 1) {\n    FormalPowerSeries<mint> f(2 * d), g(2 * d);\n    for (int j =\
+    \ 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];\n    for (int\
+    \ j = 0; j < d; j++) g[j] = res[j];\n    f.ntt();\n    g.ntt();\n    for (int\
+    \ j = 0; j < 2 * d; j++) f[j] *= g[j];\n    f.intt();\n    for (int j = 0; j <\
+    \ d; j++) f[j] = 0;\n    f.ntt();\n    for (int j = 0; j < 2 * d; j++) f[j] *=\
+    \ g[j];\n    f.intt();\n    for (int j = d; j < min(2 * d, deg); j++) res[j] =\
+    \ -f[j];\n  }\n  return res.pre(deg);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ FormalPowerSeries<mint>::exp(int deg) const {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  assert((*this).size() == 0 || (*this)[0] == mint(0));\n  if (deg == -1) deg\
+    \ = this->size();\n\n  fps inv;\n  inv.reserve(deg + 1);\n  inv.push_back(mint(0));\n\
+    \  inv.push_back(mint(1));\n\n  auto inplace_integral = [&](fps& F) -> void {\n\
+    \    const int n = (int)F.size();\n    auto mod = mint::get_mod();\n    while\
+    \ ((int)inv.size() <= n) {\n      int i = inv.size();\n      inv.push_back((-inv[mod\
+    \ % i]) * (mod / i));\n    }\n    F.insert(begin(F), mint(0));\n    for (int i\
+    \ = 1; i <= n; i++) F[i] *= inv[i];\n  };\n\n  auto inplace_diff = [](fps& F)\
+    \ -> void {\n    if (F.empty()) return;\n    F.erase(begin(F));\n    mint coeff\
+    \ = 1, one = 1;\n    for (int i = 0; i < (int)F.size(); i++) {\n      F[i] *=\
+    \ coeff;\n      coeff += one;\n    }\n  };\n\n  fps b{1, 1 < (int)this->size()\
+    \ ? (*this)[1] : 0}, c{1}, z1, z2{1, 1};\n  for (int m = 2; m < deg; m *= 2) {\n\
+    \    auto y = b;\n    y.resize(2 * m);\n    y.ntt();\n    z1 = z2;\n    fps z(m);\n\
+    \    for (int i = 0; i < m; ++i) z[i] = y[i] * z1[i];\n    z.intt();\n    fill(begin(z),\
+    \ begin(z) + m / 2, mint(0));\n    z.ntt();\n    for (int i = 0; i < m; ++i) z[i]\
+    \ *= -z1[i];\n    z.intt();\n    c.insert(end(c), begin(z) + m / 2, end(z));\n\
+    \    z2 = c;\n    z2.resize(2 * m);\n    z2.ntt();\n    fps x(begin(*this), begin(*this)\
+    \ + min<int>(this->size(), m));\n    x.resize(m);\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
+    \    x.ntt();\n    for (int i = 0; i < m; ++i) x[i] *= y[i];\n    x.intt();\n\
+    \    x -= b.diff();\n    x.resize(2 * m);\n    for (int i = 0; i < m - 1; ++i)\
+    \ x[m + i] = x[i], x[i] = mint(0);\n    x.ntt();\n    for (int i = 0; i < 2 *\
+    \ m; ++i) x[i] *= z2[i];\n    x.intt();\n    x.pop_back();\n    inplace_integral(x);\n\
+    \    for (int i = m; i < min<int>(this->size(), 2 * m); ++i) x[i] += (*this)[i];\n\
+    \    fill(begin(x), begin(x) + m, mint(0));\n    x.ntt();\n    for (int i = 0;\
+    \ i < 2 * m; ++i) x[i] *= y[i];\n    x.intt();\n    b.insert(end(b), begin(x)\
+    \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
+    \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
+    \ */\n#line 2 \"fps/partial-fraction-decomposition.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
+    \n\ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int\
+    \ MAX = 0) : f(1, T(1)), g(1, T(1)), h(1, T(1)) {\n    while (MAX >= (int)f.size())\
+    \ extend();\n  }\n\n  void extend() {\n    int n = f.size();\n    int m = n *\
+    \ 2;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n;\
+    \ i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n  \
+    \  h[m - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n \
+    \     g[i] = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\
+    \n  T fac(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)f.size())\
+    \ extend();\n    return f[i];\n  }\n\n  T finv(int i) {\n    if (i < 0) return\
+    \ T(0);\n    while (i >= (int)g.size()) extend();\n    return g[i];\n  }\n\n \
+    \ T inv(int i) {\n    if (i < 0) return -inv(-i);\n    while (i >= (int)h.size())\
+    \ extend();\n    return h[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 ||\
+    \ n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n \
+    \ }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\n  T C_naive(int\
+    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n\
+    \    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n\
+    \    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r <\
+    \ 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r)\
+    \ {\n    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1,\
+    \ r);\n  }\n};\n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
+    \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
+    \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
+    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
+    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
+    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
+    \ */\n#line 6 \"fps/partial-fraction-decomposition.hpp\"\n\ntemplate <typename\
+    \ mint>\nvector<pair<mint, vector<mint>>> PartialFractionDecomposition(\n    FormalPowerSeries<mint>\
+    \ numer, vector<pair<mint, int>> denom) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \n  if (denom.empty()) return {};\n\n  sort(begin(denom), end(denom),\n      \
+    \ [](auto p1, auto p2) { return p1.second < p2.second; });\n  Binomial<mint> C(denom[0].second\
+    \ + 1);\n\n  int s = 1;\n  while (s < (int)denom.size()) s *= 2;\n  vector<fps>\
+    \ fs(2 * s);\n  for (int i = 0; i < s; i++) {\n    if ((int)denom.size() <= i)\
+    \ {\n      fs[s + i] = fps{1};\n      continue;\n    }\n    auto [m, d] = denom[i];\n\
+    \    fps f(denom[i].second + 1);\n    mint buf = 1;\n    for (int j = d; j >=\
+    \ 0; j--) {\n      f[j] = buf * C(d, j);\n      buf *= m;\n    }\n    fs[s + i]\
+    \ = f;\n  }\n  for (int i = s - 1; i; i--) {\n    fs[i] = fs[2 * i + 0] * fs[2\
+    \ * i + 1];\n  }\n\n  vector<fps> F(2 * s);\n  vector<fps> G(2 * s);\n  F[1] =\
+    \ numer % fs[1];\n  G[1] = fps{1};\n  for (int i = 1; i < s; i++) {\n    F[i *\
+    \ 2 + 0] = F[i] % fs[i * 2 + 0];\n    F[i * 2 + 1] = F[i] % fs[i * 2 + 1];\n \
+    \   G[i * 2 + 0] = G[i] * fs[i * 2 + 1] % fs[i * 2 + 0];\n    G[i * 2 + 1] = G[i]\
+    \ * fs[i * 2 + 0] % fs[i * 2 + 1];\n  }\n\n  vector<pair<mint, vector<mint>>>\
+    \ res;\n  for (int i = s; i - s < (int)denom.size(); i++) {\n    auto [m, d] =\
+    \ denom[i - s];\n    F[i] = TaylorShift<mint>(F[i], -m, C);\n    G[i] = TaylorShift<mint>(G[i],\
+    \ -m, C);\n    fps f = (F[i] * G[i].inv()).pre(d);\n    if ((int)f.size() < d)\
+    \ f.resize(d);\n    f = f.rev();\n    res.emplace_back(m, vector<mint>{begin(f),\
+    \ end(f)});\n  }\n  return res;\n}\n\n/**\n * @brief \u90E8\u5206\u5206\u6570\u5206\
+    \u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\u7A4D\u3067\u8868\u305B\u308B\u5834\
+    \u5408)\n */\n#line 4 \"fps/utility.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ Pi(vector<FormalPowerSeries<mint>> v) {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  if ((int)v.size() == 0) return fps{mint(1)};\n  sort(begin(v), end(v), [](fps&\
+    \ a, fps& b) { return a.size() < b.size(); });\n  queue<fps> q;\n  for (auto&\
+    \ f : v) q.push(f);\n  while ((int)q.size() > 1) {\n    fps a = q.front();\n \
+    \   q.pop();\n    fps b = q.front();\n    q.pop();\n    q.push(a * b);\n  }\n\
+    \  return q.front();\n}\n\ntemplate <typename mint>\nvoid OGFtoEGF(FormalPowerSeries<mint>&\
+    \ f, Binomial<mint>& C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n\
+    }\n\ntemplate <typename mint>\nvoid EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>&\
+    \ C) {\n  for (int i = 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n\
+    \  while ((int)C.g.size() < deg) C.extend();\n  FormalPowerSeries<mint> ret{begin(C.g),\
+    \ begin(C.g) + deg};\n  return std::move(ret);\n}\n\n// f *= (1 + c x^n)\ntemplate\
+    \ <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>& f, int n, mint c,\
+    \ int expand = true) {\n  if (expand) f.resize(f.size() + n);\n  for (int i =\
+    \ (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] += f[i - n] * c;\n\
+    \  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_div(FormalPowerSeries<mint>&\
+    \ f, int n, mint c) {\n  for (int i = 0; i < (int)f.size(); ++i) {\n    if (i\
+    \ + n < (int)f.size()) f[i + n] -= f[i] * c;\n  }\n}\n#line 2 \"misc/rng.hpp\"\
+    \n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
+    \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \           .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
+    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
+    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
+    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
+    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
+    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
+    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
+    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
+    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
+    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
+    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"\
+    modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
+    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
+    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
+    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
+    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
+    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
+    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
+    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
+    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
+    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
+    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
+    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
+    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
+    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
+    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
+    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
+    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
+    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
+    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
+    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
+    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
+    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
+    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
+    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
+    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
+    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
+    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
+    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
+    \ { return mod; }\n};\n#line 11 \"verify/verify-unit-test/partial-fraction-decomposition.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    // #include \"fps/arbitrary-fps.hpp\"\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
+    Binomial<mint> C;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps\
+    \ = FormalPowerSeries<mint>;\n\nvoid verify() {\n  vector<pair<mint, int>> denom;\n\
+    \  vector<fps> fs;\n\n  int size1 = 100;\n  int size2 = 10;\n\n  vector<int> xs(size1);\n\
+    \  for (int i = 0; i < size1; i++) {\n    do {\n      xs[i] = rng() % 998244353;\n\
+    \      int c = true;\n      for (int j = 0; j < i; j++) {\n        if (!c) break;\n\
+    \        if (xs[j] == xs[i]) c = false;\n      }\n      if (!c) continue;\n  \
+    \  } while (0);\n  }\n\n  for (int i = 0; i < size1; i++) {\n    mint m = xs[i];\n\
+    \    int d = randint(1, size2);\n    denom.emplace_back(m, d);\n    fps f(d +\
+    \ 1);\n    f[0] = m, f[1] = 1;\n    fs.emplace_back(f.pow(d));\n  }\n  auto pi\
+    \ = Pi<mint>(fs);\n\n  fps numer;\n  vector<pair<mint, vm>> part1;\n  rep(i, size1)\
+    \ {\n    auto [m, d] = denom[i];\n    vm coeff(d);\n    each(x, coeff) x = rng();\n\
+    \    fps f, buf{1};\n    for (int j = d - 1; j >= 0; j--) {\n      f += buf *\
+    \ coeff[j];\n      buf *= fps{m, 1};\n    }\n    numer += f * (pi / buf);\n  \
+    \  part1.emplace_back(m, coeff);\n  }\n\n  auto part2 = PartialFractionDecomposition<mint>(numer,\
+    \ denom);\n\n  sort(all(part1),\n       [](auto a, auto b) { return a.first.get()\
+    \ < b.first.get(); });\n  sort(all(part2),\n       [](auto a, auto b) { return\
+    \ a.first.get() < b.first.get(); });\n\n  assert(part1 == part2);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  rep(loop, 100) verify();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a\
+    \ + b << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n#include \"../../fps/partial-fraction-decomposition.hpp\"\n#include \"../../fps/utility.hpp\"\
+    \n#include \"../../misc/rng.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n#include \"../../modulo/binomial.hpp\"\n\nusing namespace Nyaan;\n\nusing mint\
+    \ = LazyMontgomeryModInt<998244353>;\n// #include \"fps/arbitrary-fps.hpp\"\n\
+    // using mint = LazyMontgomeryModInt<1000000007>;\nBinomial<mint> C;\nusing vm\
+    \ = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
+    \nvoid verify() {\n  vector<pair<mint, int>> denom;\n  vector<fps> fs;\n\n  int\
+    \ size1 = 100;\n  int size2 = 10;\n\n  vector<int> xs(size1);\n  for (int i =\
+    \ 0; i < size1; i++) {\n    do {\n      xs[i] = rng() % 998244353;\n      int\
+    \ c = true;\n      for (int j = 0; j < i; j++) {\n        if (!c) break;\n   \
+    \     if (xs[j] == xs[i]) c = false;\n      }\n      if (!c) continue;\n    }\
+    \ while (0);\n  }\n\n  for (int i = 0; i < size1; i++) {\n    mint m = xs[i];\n\
+    \    int d = randint(1, size2);\n    denom.emplace_back(m, d);\n    fps f(d +\
+    \ 1);\n    f[0] = m, f[1] = 1;\n    fs.emplace_back(f.pow(d));\n  }\n  auto pi\
+    \ = Pi<mint>(fs);\n\n  fps numer;\n  vector<pair<mint, vm>> part1;\n  rep(i, size1)\
+    \ {\n    auto [m, d] = denom[i];\n    vm coeff(d);\n    each(x, coeff) x = rng();\n\
+    \    fps f, buf{1};\n    for (int j = d - 1; j >= 0; j--) {\n      f += buf *\
+    \ coeff[j];\n      buf *= fps{m, 1};\n    }\n    numer += f * (pi / buf);\n  \
+    \  part1.emplace_back(m, coeff);\n  }\n\n  auto part2 = PartialFractionDecomposition<mint>(numer,\
+    \ denom);\n\n  sort(all(part1),\n       [](auto a, auto b) { return a.first.get()\
+    \ < b.first.get(); });\n  sort(all(part2),\n       [](auto a, auto b) { return\
+    \ a.first.get() < b.first.get(); });\n\n  assert(part1 == part2);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  rep(loop, 100) verify();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a\
+    \ + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -603,20 +822,26 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - modint/montgomery-modint.hpp
-  - ntt/arbitrary-ntt.hpp
+  - fps/ntt-friendly-fps.hpp
   - ntt/ntt-avx2.hpp
   - modint/simd-montgomery.hpp
+  - fps/formal-power-series.hpp
+  - fps/partial-fraction-decomposition.hpp
+  - fps/taylor-shift.hpp
+  - modulo/binomial.hpp
+  - fps/utility.hpp
+  - misc/rng.hpp
+  - modint/montgomery-modint.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+  path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-05-15 02:06:53+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+documentation_of: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
-- /verify/verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp.html
-title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+- /verify/verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+- /verify/verify/verify-unit-test/partial-fraction-decomposition.test.cpp.html
+title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
 ---

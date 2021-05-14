@@ -363,7 +363,7 @@ data:
       title: 2-SAT
   - name: math-fast
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: math-fast/gcd.hpp
       title: binary GCD
   - name: matrix
@@ -727,22 +727,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1022,7 +1022,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/lazyseg-setval.test.cpp
       title: verify/verify-unit-test/lazyseg-setval.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/math-fast.test.cpp
       title: verify/verify-unit-test/math-fast.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1049,6 +1049,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/p-recursive.test.cpp
       title: verify/verify-unit-test/p-recursive.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+      title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
       title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp

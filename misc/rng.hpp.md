@@ -58,6 +58,9 @@ data:
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+    title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -189,6 +192,7 @@ data:
   - verify/verify-unit-test/template.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/math.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
