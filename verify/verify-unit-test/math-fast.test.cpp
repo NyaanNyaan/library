@@ -45,7 +45,7 @@ void unit_test() {
     testcase.emplace_back(i, j);
   }
 
-  vector<F> functions{std::__gcd<int64_t>, naive_gcd, gcd};
+  vector<F> functions{std::__gcd<i64>, naive_gcd, gcd};
 
   for (auto p : testcase) {
     unordered_set<i64> s;
