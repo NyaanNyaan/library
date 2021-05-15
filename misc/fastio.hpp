@@ -8,8 +8,8 @@ using namespace std;
 
 namespace fastio {
 static constexpr int SZ = 1 << 17;
-char ibuf[SZ], obuf[SZ];
-int pil = 0, pir = 0, por = 0;
+char inbuf[SZ], outbuf[SZ];
+int in_left = 0, in_right = 0, out_right = 0;
 
 struct Pre {
   char num[40000];
@@ -25,38 +25,40 @@ struct Pre {
 } constexpr pre;
 
 inline void load() {
-  memcpy(ibuf, ibuf + pil, pir - pil);
-  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);
-  pil = 0;
+  int len = in_right - in_left;
+  memmove(inbuf, inbuf + in_left, len);
+  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);
+  in_left = 0;
 }
+
 inline void flush() {
-  fwrite(obuf, 1, por, stdout);
-  por = 0;
+  fwrite(outbuf, 1, out_right, stdout);
+  out_right = 0;
 }
 
 inline void skip_space() {
-  if (pil + 32 > pir) load();
-  while (ibuf[pil] <= ' ') pil++;
+  if (in_left + 32 > in_right) load();
+  while (inbuf[in_left] <= ' ') in_left++;
 }
 
 inline void rd(char& c) {
-  if (pil + 32 > pir) load();
-  c = ibuf[pil++];
+  if (in_left + 32 > in_right) load();
+  c = inbuf[in_left++];
 }
 template <typename T>
 inline void rd(T& x) {
-  if (pil + 32 > pir) load();
+  if (in_left + 32 > in_right) load();
   char c;
-  do c = ibuf[pil++];
+  do c = inbuf[in_left++];
   while (c < '-');
   [[maybe_unused]] bool minus = false;
   if constexpr (is_signed<T>::value == true) {
-    if (c == '-') minus = true, c = ibuf[pil++];
+    if (c == '-') minus = true, c = inbuf[in_left++];
   }
   x = 0;
   while (c >= '0') {
     x = x * 10 + (c & 15);
-    c = ibuf[pil++];
+    c = inbuf[in_left++];
   }
   if constexpr (is_signed<T>::value == true) {
     if (minus) x = -x;
@@ -70,22 +72,22 @@ inline void rd(Head& head, Tail&... tail) {
 }
 
 inline void wt(char c) {
-  if (por > SZ - 32) flush();
-  obuf[por++] = c;
+  if (out_right > SZ - 32) flush();
+  outbuf[out_right++] = c;
 }
-inline void wt(bool b) { 
-  if (por > SZ - 32) flush();
-  obuf[por++] = b ? '1' : '0'; 
+inline void wt(bool b) {
+  if (out_right > SZ - 32) flush();
+  outbuf[out_right++] = b ? '1' : '0';
 }
 template <typename T>
 inline void wt(T x) {
-  if (por > SZ - 32) flush();
+  if (out_right > SZ - 32) flush();
   if (!x) {
-    obuf[por++] = '0';
+    outbuf[out_right++] = '0';
     return;
   }
   if constexpr (is_signed<T>::value == true) {
-    if (x < 0) obuf[por++] = '-', x = -x;
+    if (x < 0) outbuf[out_right++] = '-', x = -x;
   }
   int i = 12;
   char buf[16];
@@ -96,28 +98,27 @@ inline void wt(T x) {
   }
   if (x < 100) {
     if (x < 10) {
-      obuf[por] = '0' + x;
-      ++por;
+      outbuf[out_right] = '0' + x;
+      ++out_right;
     } else {
       uint32_t q = (uint32_t(x) * 205) >> 11;
       uint32_t r = uint32_t(x) - q * 10;
-      obuf[por] = '0' + q;
-      obuf[por + 1] = '0' + r;
-      por += 2;
+      outbuf[out_right] = '0' + q;
+      outbuf[out_right + 1] = '0' + r;
+      out_right += 2;
     }
   } else {
     if (x < 1000) {
-      memcpy(obuf + por, pre.num + (x << 2) + 1, 3);
-      por += 3;
+      memcpy(outbuf + out_right, pre.num + (x << 2) + 1, 3);
+      out_right += 3;
     } else {
-      memcpy(obuf + por, pre.num + (x << 2), 4);
-      por += 4;
+      memcpy(outbuf + out_right, pre.num + (x << 2), 4);
+      out_right += 4;
     }
   }
-  memcpy(obuf + por, buf + i + 4, 12 - i);
-  por += 12 - i;
+  memcpy(outbuf + out_right, buf + i + 4, 12 - i);
+  out_right += 12 - i;
 }
-
 inline void wt() {}
 template <typename Head, typename... Tail>
 inline void wt(Head&& head, Tail&&... tail) {
