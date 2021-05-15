@@ -197,43 +197,45 @@ data:
     \ = BinaryLifting<T>;\n\n/**\n * @brief Binary Lifting(\u30C0\u30D6\u30EA\u30F3\
     \u30B0)\n * @docs docs/misc/doubling.md\n */\n#line 2 \"misc/fastio.hpp\"\n\n\
     #line 6 \"misc/fastio.hpp\"\n\nusing namespace std;\n\nnamespace fastio {\nstatic\
-    \ constexpr int SZ = 1 << 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0,\
-    \ por = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n\
-    \    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3;\
-    \ j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n \
-    \     }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  memcpy(ibuf,\
-    \ ibuf + pil, pir - pil);\n  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ -\
-    \ pir + pil, stdin);\n  pil = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1,\
-    \ por, stdout);\n  por = 0;\n}\n\ninline void skip_space() {\n  if (pil + 32 >\
-    \ pir) load();\n  while (ibuf[pil] <= ' ') pil++;\n}\n\ninline void rd(char& c)\
-    \ {\n  if (pil + 32 > pir) load();\n  c = ibuf[pil++];\n}\ntemplate <typename\
-    \ T>\ninline void rd(T& x) {\n  if (pil + 32 > pir) load();\n  char c;\n  do c\
-    \ = ibuf[pil++];\n  while (c < '-');\n  [[maybe_unused]] bool minus = false;\n\
+    \ constexpr int SZ = 1 << 17;\nchar inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right\
+    \ = 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() :\
+    \ num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for\
+    \ (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n       \
+    \ n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  int\
+    \ len = in_right - in_left;\n  memmove(inbuf, inbuf + in_left, len);\n  in_right\
+    \ = len + fread(inbuf + len, 1, SZ - len, stdin);\n  in_left = 0;\n}\n\ninline\
+    \ void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n  out_right = 0;\n\
+    }\n\ninline void skip_space() {\n  if (in_left + 32 > in_right) load();\n  while\
+    \ (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char& c) {\n  if (in_left\
+    \ + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate <typename T>\n\
+    inline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n  char c;\n  do\
+    \ c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]] bool minus = false;\n\
     \  if constexpr (is_signed<T>::value == true) {\n    if (c == '-') minus = true,\
-    \ c = ibuf[pil++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c &\
-    \ 15);\n    c = ibuf[pil++];\n  }\n  if constexpr (is_signed<T>::value == true)\
-    \ {\n    if (minus) x = -x;\n  }\n}\ninline void rd() {}\ntemplate <typename Head,\
-    \ typename... Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n\
-    \  rd(tail...);\n}\n\ninline void wt(char c) {\n  if (por > SZ - 32) flush();\n\
-    \  obuf[por++] = c;\n}\ninline void wt(bool b) { \n  if (por > SZ - 32) flush();\n\
-    \  obuf[por++] = b ? '1' : '0'; \n}\ntemplate <typename T>\ninline void wt(T x)\
-    \ {\n  if (por > SZ - 32) flush();\n  if (!x) {\n    obuf[por++] = '0';\n    return;\n\
-    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x < 0) obuf[por++]\
-    \ = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n\
-    \    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -=\
-    \ 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      obuf[por] = '0' + x;\n \
-    \     ++por;\n    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n  \
-    \    uint32_t r = uint32_t(x) - q * 10;\n      obuf[por] = '0' + q;\n      obuf[por\
-    \ + 1] = '0' + r;\n      por += 2;\n    }\n  } else {\n    if (x < 1000) {\n \
-    \     memcpy(obuf + por, pre.num + (x << 2) + 1, 3);\n      por += 3;\n    } else\
-    \ {\n      memcpy(obuf + por, pre.num + (x << 2), 4);\n      por += 4;\n    }\n\
-    \  }\n  memcpy(obuf + por, buf + i + 4, 12 - i);\n  por += 12 - i;\n}\n\ninline\
-    \ void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(Head&&\
-    \ head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n}\ntemplate\
-    \ <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
-    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
-    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 7 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp\"\
+    \ c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 +\
+    \ (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr (is_signed<T>::value\
+    \ == true) {\n    if (minus) x = -x;\n  }\n}\ninline void rd() {}\ntemplate <typename\
+    \ Head, typename... Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n\
+    \  rd(tail...);\n}\n\ninline void wt(char c) {\n  if (out_right > SZ - 32) flush();\n\
+    \  outbuf[out_right++] = c;\n}\ninline void wt(bool b) {\n  if (out_right > SZ\
+    \ - 32) flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ntemplate <typename\
+    \ T>\ninline void wt(T x) {\n  if (out_right > SZ - 32) flush();\n  if (!x) {\n\
+    \    outbuf[out_right++] = '0';\n    return;\n  }\n  if constexpr (is_signed<T>::value\
+    \ == true) {\n    if (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i\
+    \ = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num\
+    \ + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n\
+    \    if (x < 10) {\n      outbuf[out_right] = '0' + x;\n      ++out_right;\n \
+    \   } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r\
+    \ = uint32_t(x) - q * 10;\n      outbuf[out_right] = '0' + q;\n      outbuf[out_right\
+    \ + 1] = '0' + r;\n      out_right += 2;\n    }\n  } else {\n    if (x < 1000)\
+    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2) + 1, 3);\n      out_right\
+    \ += 3;\n    } else {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n\
+    \      out_right += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4,\
+    \ 12 - i);\n  out_right += 12 - i;\n}\ninline void wt() {}\ntemplate <typename\
+    \ Head, typename... Tail>\ninline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n\
+    \  wt(forward<Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(Args&&...\
+    \ x) {\n  wt(forward<Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy()\
+    \ { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 7 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp\"\
     \n\nvoid Nyaan::solve() {\n  int N, Q;\n  rd(N, Q);\n  Doubling<int> db(N, N,\
     \ 0);\n  for (int i = 1; i < N; i++) {\n    int p;\n    rd(p);\n    db.set_next(i,\
     \ p, 1);\n  }\n  db.build();\n\n  while (Q--) {\n    int u, v;\n    rd(u, v);\n\
@@ -270,7 +272,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-05-15 20:18:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp

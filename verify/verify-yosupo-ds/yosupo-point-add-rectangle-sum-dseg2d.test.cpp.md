@@ -186,65 +186,68 @@ data:
     \ i) { return xs[i]; }\n  int size() const { return xs.size(); }\n};\n\n/**\n\
     \ * \u5EA7\u6A19\u5727\u7E2E\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\
     \n\nusing namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 <<\
-    \ 17;\nchar ibuf[SZ], obuf[SZ];\nint pil = 0, pir = 0, por = 0;\n\nstruct Pre\
-    \ {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i <\
-    \ 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n    \
-    \    num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n}\
-    \ constexpr pre;\n\ninline void load() {\n  memcpy(ibuf, ibuf + pil, pir - pil);\n\
-    \  pir = pir - pil + fread(ibuf + pir - pil, 1, SZ - pir + pil, stdin);\n  pil\
-    \ = 0;\n}\ninline void flush() {\n  fwrite(obuf, 1, por, stdout);\n  por = 0;\n\
-    }\n\ninline void skip_space() {\n  if (pil + 32 > pir) load();\n  while (ibuf[pil]\
-    \ <= ' ') pil++;\n}\n\ninline void rd(char& c) {\n  if (pil + 32 > pir) load();\n\
-    \  c = ibuf[pil++];\n}\ntemplate <typename T>\ninline void rd(T& x) {\n  if (pil\
-    \ + 32 > pir) load();\n  char c;\n  do c = ibuf[pil++];\n  while (c < '-');\n\
-    \  [[maybe_unused]] bool minus = false;\n  if constexpr (is_signed<T>::value ==\
-    \ true) {\n    if (c == '-') minus = true, c = ibuf[pil++];\n  }\n  x = 0;\n \
-    \ while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = ibuf[pil++];\n  }\n\
-    \  if constexpr (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n\
-    }\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void\
-    \ rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void\
-    \ wt(char c) {\n  if (por > SZ - 32) flush();\n  obuf[por++] = c;\n}\ninline void\
-    \ wt(bool b) { \n  if (por > SZ - 32) flush();\n  obuf[por++] = b ? '1' : '0';\
-    \ \n}\ntemplate <typename T>\ninline void wt(T x) {\n  if (por > SZ - 32) flush();\n\
-    \  if (!x) {\n    obuf[por++] = '0';\n    return;\n  }\n  if constexpr (is_signed<T>::value\
-    \ == true) {\n    if (x < 0) obuf[por++] = '-', x = -x;\n  }\n  int i = 12;\n\
-    \  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000)\
-    \ * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10)\
-    \ {\n      obuf[por] = '0' + x;\n      ++por;\n    } else {\n      uint32_t q\
-    \ = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n   \
-    \   obuf[por] = '0' + q;\n      obuf[por + 1] = '0' + r;\n      por += 2;\n  \
-    \  }\n  } else {\n    if (x < 1000) {\n      memcpy(obuf + por, pre.num + (x <<\
-    \ 2) + 1, 3);\n      por += 3;\n    } else {\n      memcpy(obuf + por, pre.num\
-    \ + (x << 2), 4);\n      por += 4;\n    }\n  }\n  memcpy(obuf + por, buf + i +\
-    \ 4, 12 - i);\n  por += 12 - i;\n}\n\ninline void wt() {}\ntemplate <typename\
-    \ Head, typename... Tail>\ninline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n\
-    \  wt(forward<Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(Args&&...\
-    \ x) {\n  wt(forward<Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy()\
-    \ { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 2 \"data-structure-2d/segment-tree-on-range-tree.hpp\"\
-    \n\n\n\n#line 2 \"segment-tree/segment-tree.hpp\"\n\n\n\ntemplate <typename T,\
-    \ typename F>\nstruct SegmentTree {\n  int size;\n  vector<T> seg;\n  const F\
-    \ f;\n  const T I;\n\n  SegmentTree(F _f, const T &I_) : size(0), f(_f), I(I_)\
-    \ {}\n\n  SegmentTree(int N, F _f, const T &I_) : f(_f), I(I_) { init(N); }\n\n\
-    \  SegmentTree(const vector<T> &v, F _f, T I_) : f(_f), I(I_) {\n    init(v.size());\n\
-    \    for (int i = 0; i < (int)v.size(); i++) {\n      seg[i + size] = v[i];\n\
-    \    }\n    build();\n  }\n\n  void init(int N) {\n    size = 1;\n    while (size\
-    \ < N) size <<= 1;\n    seg.assign(2 * size, I);\n  }\n\n  void set(int k, T x)\
-    \ { seg[k + size] = x; }\n\n  void build() {\n    for (int k = size - 1; k > 0;\
-    \ k--) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\n  void\
-    \ update(int k, T x) {\n    k += size;\n    seg[k] = x;\n    while (k >>= 1) {\n\
-    \      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\n  void add(int k,\
-    \ T x) {\n    k += size;\n    seg[k] += x;\n    while (k >>= 1) {\n      seg[k]\
-    \ = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\n  // query to [a, b)\n  T query(int\
-    \ a, int b) {\n    T L = I, R = I;\n    for (a += size, b += size; a < b; a >>=\
-    \ 1, b >>= 1) {\n      if (a & 1) L = f(L, seg[a++]);\n      if (b & 1) R = f(seg[--b],\
-    \ R);\n    }\n    return f(L, R);\n  }\n\n  T &operator[](const int &k) { return\
-    \ seg[k + size]; }\n\n  template <typename C>\n  int find_subtree(int a, const\
-    \ C &check, T &M, bool type) {\n    while (a < size) {\n      T nxt = type ? f(seg[2\
-    \ * a + type], M) : f(M, seg[2 * a + type]);\n      if (check(nxt))\n        a\
-    \ = 2 * a + type;\n      else\n        M = nxt, a = 2 * a + 1 - type;\n    }\n\
-    \    return a - size;\n  }\n\n  template <typename C>\n  int find_first(int a,\
-    \ const C &check) {\n    T L = I;\n    if (a <= 0) {\n      if (check(f(L, seg[1])))\
+    \ 17;\nchar inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right = 0, out_right =\
+    \ 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for\
+    \ (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >=\
+    \ 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n\
+    \    }\n  }\n} constexpr pre;\n\ninline void load() {\n  int len = in_right -\
+    \ in_left;\n  memmove(inbuf, inbuf + in_left, len);\n  in_right = len + fread(inbuf\
+    \ + len, 1, SZ - len, stdin);\n  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf,\
+    \ 1, out_right, stdout);\n  out_right = 0;\n}\n\ninline void skip_space() {\n\
+    \  if (in_left + 32 > in_right) load();\n  while (inbuf[in_left] <= ' ') in_left++;\n\
+    }\n\ninline void rd(char& c) {\n  if (in_left + 32 > in_right) load();\n  c =\
+    \ inbuf[in_left++];\n}\ntemplate <typename T>\ninline void rd(T& x) {\n  if (in_left\
+    \ + 32 > in_right) load();\n  char c;\n  do c = inbuf[in_left++];\n  while (c\
+    \ < '-');\n  [[maybe_unused]] bool minus = false;\n  if constexpr (is_signed<T>::value\
+    \ == true) {\n    if (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x\
+    \ = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n\
+    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (minus) x = -x;\n\
+    \  }\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline\
+    \ void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline\
+    \ void wt(char c) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
+    \ = c;\n}\ninline void wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
+    \ = b ? '1' : '0';\n}\ntemplate <typename T>\ninline void wt(T x) {\n  if (out_right\
+    \ > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n    return;\n\
+    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x < 0) outbuf[out_right++]\
+    \ = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n\
+    \    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -=\
+    \ 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] = '0'\
+    \ + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x) * 205)\
+    \ >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right] =\
+    \ '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n  \
+    \  }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
+    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
+    \ + out_right, buf + i + 4, 12 - i);\n  out_right += 12 - i;\n}\ninline void wt()\
+    \ {}\ntemplate <typename Head, typename... Tail>\ninline void wt(Head&& head,\
+    \ Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n}\ntemplate <typename...\
+    \ Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n  wt('\\\
+    n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
+    \ fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\nusing\
+    \ fastio::wtn;\n#line 2 \"data-structure-2d/segment-tree-on-range-tree.hpp\"\n\
+    \n\n\n#line 2 \"segment-tree/segment-tree.hpp\"\n\n\n\ntemplate <typename T, typename\
+    \ F>\nstruct SegmentTree {\n  int size;\n  vector<T> seg;\n  const F f;\n  const\
+    \ T I;\n\n  SegmentTree(F _f, const T &I_) : size(0), f(_f), I(I_) {}\n\n  SegmentTree(int\
+    \ N, F _f, const T &I_) : f(_f), I(I_) { init(N); }\n\n  SegmentTree(const vector<T>\
+    \ &v, F _f, T I_) : f(_f), I(I_) {\n    init(v.size());\n    for (int i = 0; i\
+    \ < (int)v.size(); i++) {\n      seg[i + size] = v[i];\n    }\n    build();\n\
+    \  }\n\n  void init(int N) {\n    size = 1;\n    while (size < N) size <<= 1;\n\
+    \    seg.assign(2 * size, I);\n  }\n\n  void set(int k, T x) { seg[k + size] =\
+    \ x; }\n\n  void build() {\n    for (int k = size - 1; k > 0; k--) {\n      seg[k]\
+    \ = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\n  void update(int k, T x) {\n\
+    \    k += size;\n    seg[k] = x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2\
+    \ * k], seg[2 * k + 1]);\n    }\n  }\n\n  void add(int k, T x) {\n    k += size;\n\
+    \    seg[k] += x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 *\
+    \ k + 1]);\n    }\n  }\n\n  // query to [a, b)\n  T query(int a, int b) {\n  \
+    \  T L = I, R = I;\n    for (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n\
+    \      if (a & 1) L = f(L, seg[a++]);\n      if (b & 1) R = f(seg[--b], R);\n\
+    \    }\n    return f(L, R);\n  }\n\n  T &operator[](const int &k) { return seg[k\
+    \ + size]; }\n\n  template <typename C>\n  int find_subtree(int a, const C &check,\
+    \ T &M, bool type) {\n    while (a < size) {\n      T nxt = type ? f(seg[2 * a\
+    \ + type], M) : f(M, seg[2 * a + type]);\n      if (check(nxt))\n        a = 2\
+    \ * a + type;\n      else\n        M = nxt, a = 2 * a + 1 - type;\n    }\n   \
+    \ return a - size;\n  }\n\n  template <typename C>\n  int find_first(int a, const\
+    \ C &check) {\n    T L = I;\n    if (a <= 0) {\n      if (check(f(L, seg[1])))\
     \ return find_subtree(1, check, L, false);\n      return -1;\n    }\n    int b\
     \ = size;\n    for (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n      if\
     \ (a & 1) {\n        T nxt = f(L, seg[a]);\n        if (check(nxt)) return find_subtree(a,\
@@ -315,7 +318,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-05-15 20:18:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
