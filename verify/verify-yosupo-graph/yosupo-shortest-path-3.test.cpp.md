@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/static-graph.hpp
     title: Static Graph
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'

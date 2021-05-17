@@ -5,19 +5,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: math-fast/mat-prod.hpp
     title: math-fast/mat-prod.hpp
+  - icon: ':x:'
+    path: math-fast/subset-convolution.hpp
+    title: math-fast/subset-convolution.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
     title: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+    title: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: vectorize modint
     links: []
   bundledCode: "#line 2 \"modint/vectorize-modint.hpp\"\n\n#pragma GCC optimize(\"\
     O3,unroll-loops\")\n#pragma GCC target(\"avx2\")\n\nusing m256 = __m256i;\nstruct\
-    \ alignas(32) mmint {\n  m256 x;\n  static m256 R, mR, M0, M1, M2, N2;\n\n  mmint()\
+    \ alignas(32) mmint {\n  m256 x;\n  static mmint R, mR, M0, M1, M2, N2;\n\n  mmint()\
     \ : x() {}\n  inline mmint(const m256& _x) : x(_x) {}\n  inline mmint(int a) :\
     \ x(_mm256_set1_epi32(a)) {}\n  inline mmint(int a0, int a1, int a2, int a3, int\
     \ a4, int a5, int a6, int a7)\n      : x(_mm256_set_epi32(a7, a6, a5, a4, a3,\
@@ -66,12 +72,12 @@ data:
     \ mmint& A) { return (*this) = (*this) * A; }\n\n  bool operator==(const mmint&\
     \ A) {\n    m256 sub = _mm256_sub_epi32(x, A.x);\n    return _mm256_testz_si256(sub,\
     \ sub) == 1;\n  }\n  bool operator!=(const mmint& A) { return !((*this) == A);\
-    \ }\n};\n__attribute__((aligned(32))) __m256i mmint::R, mmint::mR;\n__attribute__((aligned(32)))\
-    \ __m256i mmint::M0, mmint::M1, mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize\
+    \ }\n};\n__attribute__((aligned(32))) mmint mmint::R, mmint::mR;\n__attribute__((aligned(32)))\
+    \ mmint mmint::M0, mmint::M1, mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize\
     \ modint\n */\n"
   code: "#pragma once\n\n#pragma GCC optimize(\"O3,unroll-loops\")\n#pragma GCC target(\"\
     avx2\")\n\nusing m256 = __m256i;\nstruct alignas(32) mmint {\n  m256 x;\n  static\
-    \ m256 R, mR, M0, M1, M2, N2;\n\n  mmint() : x() {}\n  inline mmint(const m256&\
+    \ mmint R, mR, M0, M1, M2, N2;\n\n  mmint() : x() {}\n  inline mmint(const m256&\
     \ _x) : x(_x) {}\n  inline mmint(int a) : x(_mm256_set1_epi32(a)) {}\n  inline\
     \ mmint(int a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7)\n    \
     \  : x(_mm256_set_epi32(a7, a6, a5, a4, a3, a2, a1, a0)) {}\n  inline operator\
@@ -119,18 +125,20 @@ data:
     \ = (*this) - A; }\n  inline mmint& operator*=(const mmint& A) { return (*this)\
     \ = (*this) * A; }\n\n  bool operator==(const mmint& A) {\n    m256 sub = _mm256_sub_epi32(x,\
     \ A.x);\n    return _mm256_testz_si256(sub, sub) == 1;\n  }\n  bool operator!=(const\
-    \ mmint& A) { return !((*this) == A); }\n};\n__attribute__((aligned(32))) __m256i\
-    \ mmint::R, mmint::mR;\n__attribute__((aligned(32))) __m256i mmint::M0, mmint::M1,\
+    \ mmint& A) { return !((*this) == A); }\n};\n__attribute__((aligned(32))) mmint\
+    \ mmint::R, mmint::mR;\n__attribute__((aligned(32))) mmint mmint::M0, mmint::M1,\
     \ mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize modint\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: modint/vectorize-modint.hpp
   requiredBy:
   - math-fast/mat-prod.hpp
-  timestamp: '2021-05-17 12:37:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - math-fast/subset-convolution.hpp
+  timestamp: '2021-05-17 18:16:32+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
 documentation_of: modint/vectorize-modint.hpp
 layout: document
 redirect_from:

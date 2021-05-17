@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'

@@ -168,6 +168,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - icon: ':x:'
+    path: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+    title: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
@@ -195,9 +198,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n\n#include <cstring>\n#include <type_traits>\n\
@@ -287,7 +290,7 @@ data:
   path: misc/fastio.hpp
   requiredBy: []
   timestamp: '2021-05-15 20:18:13+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
@@ -324,6 +327,7 @@ data:
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp

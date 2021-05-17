@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: math-fast/mat-prod.hpp
     title: math-fast/mat-prod.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/vectorize-modint.hpp
     title: vectorize modint
   _extendedRequiredBy: []
@@ -105,7 +105,7 @@ data:
     \ { return mod; }\n};\n#line 22 \"verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp\"\
     \n//\n#line 2 \"math-fast/mat-prod.hpp\"\n\n#line 2 \"modint/vectorize-modint.hpp\"\
     \n\n#pragma GCC optimize(\"O3,unroll-loops\")\n#pragma GCC target(\"avx2\")\n\n\
-    using m256 = __m256i;\nstruct alignas(32) mmint {\n  m256 x;\n  static m256 R,\
+    using m256 = __m256i;\nstruct alignas(32) mmint {\n  m256 x;\n  static mmint R,\
     \ mR, M0, M1, M2, N2;\n\n  mmint() : x() {}\n  inline mmint(const m256& _x) :\
     \ x(_x) {}\n  inline mmint(int a) : x(_mm256_set1_epi32(a)) {}\n  inline mmint(int\
     \ a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7)\n      : x(_mm256_set_epi32(a7,\
@@ -154,8 +154,8 @@ data:
     \ mmint& A) { return (*this) = (*this) * A; }\n\n  bool operator==(const mmint&\
     \ A) {\n    m256 sub = _mm256_sub_epi32(x, A.x);\n    return _mm256_testz_si256(sub,\
     \ sub) == 1;\n  }\n  bool operator!=(const mmint& A) { return !((*this) == A);\
-    \ }\n};\n__attribute__((aligned(32))) __m256i mmint::R, mmint::mR;\n__attribute__((aligned(32)))\
-    \ __m256i mmint::M0, mmint::M1, mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize\
+    \ }\n};\n__attribute__((aligned(32))) mmint mmint::R, mmint::mR;\n__attribute__((aligned(32)))\
+    \ mmint mmint::M0, mmint::M1, mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize\
     \ modint\n */\n#line 4 \"math-fast/mat-prod.hpp\"\n\n// B*B\u306E\u6B63\u65B9\u884C\
     \u5217\u3092\u9AD8\u901F\u306B\u4E57\u7B97\u3059\u308B\u30E9\u30A4\u30D6\u30E9\
     \u30EA\u3002\n// B*B\u884C\u5217a,b\u3092 \u30BF\u30C6B\u884C \u30E8\u30B3B/8\u884C\
@@ -308,7 +308,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   requiredBy: []
-  timestamp: '2021-05-17 14:14:03+09:00'
+  timestamp: '2021-05-17 18:16:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp

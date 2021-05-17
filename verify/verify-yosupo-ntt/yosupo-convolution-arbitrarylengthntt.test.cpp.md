@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/primitive-root.hpp
     title: "\u539F\u59CB\u6839"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'

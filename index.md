@@ -369,6 +369,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math-fast/mat-prod.hpp
       title: math-fast/mat-prod.hpp
+    - icon: ':x:'
+      path: math-fast/subset-convolution.hpp
+      title: math-fast/subset-convolution.hpp
   - name: matrix
     pages:
     - icon: ':heavy_check_mark:'
@@ -413,7 +416,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -460,13 +463,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
     - icon: ':heavy_check_mark:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modint/vectorize-modint.hpp
       title: vectorize modint
   - name: modulo
@@ -1420,6 +1423,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
+    - icon: ':x:'
+      path: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+      title: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
       title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
