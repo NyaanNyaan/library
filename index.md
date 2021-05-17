@@ -366,6 +366,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math-fast/gcd.hpp
       title: binary GCD
+    - icon: ':heavy_check_mark:'
+      path: math-fast/mat-prod.hpp
+      title: math-fast/mat-prod.hpp
   - name: matrix
     pages:
     - icon: ':heavy_check_mark:'
@@ -463,7 +466,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: modint/vectorize-modint.hpp
       title: vectorize modint
   - name: modulo
@@ -1396,6 +1399,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
       title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+      title: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
       title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp

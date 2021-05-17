@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: math-fast/mat-prod.hpp
+    title: math-fast/mat-prod.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: vectorize modint
     links: []
@@ -119,10 +125,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: modint/vectorize-modint.hpp
-  requiredBy: []
+  requiredBy:
+  - math-fast/mat-prod.hpp
   timestamp: '2021-05-17 12:37:17+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
 documentation_of: modint/vectorize-modint.hpp
 layout: document
 redirect_from:

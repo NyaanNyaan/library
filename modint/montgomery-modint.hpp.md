@@ -187,6 +187,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
     title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+    title: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - icon: ':heavy_check_mark:'
@@ -435,6 +438,7 @@ data:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
