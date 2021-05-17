@@ -20,7 +20,7 @@ using namespace std;
 //
 #include "../../modint/montgomery-modint.hpp"
 //
-#include "../../math-fast/mat-prod.hpp"
+#include "../../math-fast/mat-prod-strassen.hpp"
 #include "../../modint/vectorize-modint.hpp"
 
 int main() {
