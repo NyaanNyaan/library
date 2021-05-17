@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: math-fast/mat-prod.hpp
     title: math-fast/mat-prod.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/vectorize-modint.hpp
     title: vectorize modint
   _extendedRequiredBy: []

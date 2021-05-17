@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/vectorize-modint.hpp
     title: vectorize modint
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
     title: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math-fast/subset-convolution.hpp\"\n\n#line 2 \"modint/vectorize-modint.hpp\"\
@@ -67,9 +67,9 @@ data:
     \ sub) == 1;\n  }\n  bool operator!=(const mmint& A) { return !((*this) == A);\
     \ }\n};\n__attribute__((aligned(32))) mmint mmint::R, mmint::mR;\n__attribute__((aligned(32)))\
     \ mmint mmint::M0, mmint::M1, mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize\
-    \ modint\n */\n#line 4 \"math-fast/subset-convolution.hpp\"\n//\ntemplate <typename\
+    \ modint\n */\n#line 4 \"math-fast/subset-convolution.hpp\"\n\ntemplate <typename\
     \ mint>\nvector<mint> fast_multiply(const vector<mint>& a, const vector<mint>&\
-    \ b) {\n  int n = a.size();\n  int d = __builtin_ctz(n);\n  assert(n <= 23);\n\
+    \ b) {\n  int n = a.size();\n  int d = __builtin_ctz(n);\n  assert(d <= 23);\n\
     \  mmint* a1 = new mmint[max(n, 8) * 3];\n  mmint* a2 = new mmint[max(n, 8) *\
     \ 3];\n  memset((void*)a1, 0, max(n, 8) * 3 * sizeof(mmint));\n  memset((void*)a2,\
     \ 0, max(n, 8) * 3 * sizeof(mmint));\n  mmint b1[24], b2[24], b3[24];\n\n  for\
@@ -119,9 +119,9 @@ data:
     \ vector<mint> c(n);\n  for (int i = 0; i < n; i++) {\n    unsigned int pc = __builtin_popcount(i);\n\
     \    c[i].a = a1[i * 3 + pc / 8][pc % 8];\n  }\n\n  delete[](a1);\n  delete[](a2);\n\
     \  return c;\n}\n"
-  code: "#pragma once\n\n#include \"../modint/vectorize-modint.hpp\"\n//\ntemplate\
-    \ <typename mint>\nvector<mint> fast_multiply(const vector<mint>& a, const vector<mint>&\
-    \ b) {\n  int n = a.size();\n  int d = __builtin_ctz(n);\n  assert(n <= 23);\n\
+  code: "#pragma once\n\n#include \"../modint/vectorize-modint.hpp\"\n\ntemplate <typename\
+    \ mint>\nvector<mint> fast_multiply(const vector<mint>& a, const vector<mint>&\
+    \ b) {\n  int n = a.size();\n  int d = __builtin_ctz(n);\n  assert(d <= 23);\n\
     \  mmint* a1 = new mmint[max(n, 8) * 3];\n  mmint* a2 = new mmint[max(n, 8) *\
     \ 3];\n  memset((void*)a1, 0, max(n, 8) * 3 * sizeof(mmint));\n  memset((void*)a2,\
     \ 0, max(n, 8) * 3 * sizeof(mmint));\n  mmint b1[24], b2[24], b3[24];\n\n  for\
@@ -170,14 +170,14 @@ data:
     \ i++) {\n        a1[ri * 3 + i] -= a1[li * 3 + i];\n      }\n    }\n  }\n\n \
     \ vector<mint> c(n);\n  for (int i = 0; i < n; i++) {\n    unsigned int pc = __builtin_popcount(i);\n\
     \    c[i].a = a1[i * 3 + pc / 8][pc % 8];\n  }\n\n  delete[](a1);\n  delete[](a2);\n\
-    \  return c;\n}"
+    \  return c;\n}\n"
   dependsOn:
   - modint/vectorize-modint.hpp
   isVerificationFile: false
   path: math-fast/subset-convolution.hpp
   requiredBy: []
-  timestamp: '2021-05-17 18:16:32+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2021-05-17 19:08:44+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
 documentation_of: math-fast/subset-convolution.hpp

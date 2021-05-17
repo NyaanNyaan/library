@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math-fast/subset-convolution.hpp
     title: math-fast/subset-convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/vectorize-modint.hpp
     title: vectorize modint
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
@@ -123,9 +123,9 @@ data:
     \ sub) == 1;\n  }\n  bool operator!=(const mmint& A) { return !((*this) == A);\
     \ }\n};\n__attribute__((aligned(32))) mmint mmint::R, mmint::mR;\n__attribute__((aligned(32)))\
     \ mmint mmint::M0, mmint::M1, mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize\
-    \ modint\n */\n#line 4 \"math-fast/subset-convolution.hpp\"\n//\ntemplate <typename\
+    \ modint\n */\n#line 4 \"math-fast/subset-convolution.hpp\"\n\ntemplate <typename\
     \ mint>\nvector<mint> fast_multiply(const vector<mint>& a, const vector<mint>&\
-    \ b) {\n  int n = a.size();\n  int d = __builtin_ctz(n);\n  assert(n <= 23);\n\
+    \ b) {\n  int n = a.size();\n  int d = __builtin_ctz(n);\n  assert(d <= 23);\n\
     \  mmint* a1 = new mmint[max(n, 8) * 3];\n  mmint* a2 = new mmint[max(n, 8) *\
     \ 3];\n  memset((void*)a1, 0, max(n, 8) * 3 * sizeof(mmint));\n  memset((void*)a2,\
     \ 0, max(n, 8) * 3 * sizeof(mmint));\n  mmint b1[24], b2[24], b3[24];\n\n  for\
@@ -239,8 +239,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   requiredBy: []
-  timestamp: '2021-05-17 18:16:32+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-17 19:08:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
 layout: document

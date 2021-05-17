@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/max-independent-set.hpp
     title: graph/max-independent-set.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
