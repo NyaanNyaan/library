@@ -198,6 +198,7 @@
 "verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-math/yosupo-prime-table.test.cpp": "2021-05-15 20:18:13 +0900",
 "verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp": "2021-05-17 19:08:44 +0900",
 "verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp": "2021-05-15 20:18:13 +0900",
 "verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp": "2021-05-04 19:34:35 +0900",
