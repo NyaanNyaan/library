@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../modint/vectorize-modint.hpp"
-//
+
 template <typename mint>
 vector<mint> fast_multiply(const vector<mint>& a, const vector<mint>& b) {
   int n = a.size();
   int d = __builtin_ctz(n);
-  assert(n <= 23);
+  assert(d <= 23);
   mmint* a1 = new mmint[max(n, 8) * 3];
   mmint* a2 = new mmint[max(n, 8) * 3];
   memset((void*)a1, 0, max(n, 8) * 3 * sizeof(mmint));
