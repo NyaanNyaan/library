@@ -6,7 +6,7 @@
 using m256 = __m256i;
 struct alignas(32) mmint {
   m256 x;
-  static m256 R, mR, M0, M1, M2, N2;
+  static mmint R, mR, M0, M1, M2, N2;
 
   mmint() : x() {}
   inline mmint(const m256& _x) : x(_x) {}
@@ -106,8 +106,8 @@ struct alignas(32) mmint {
   }
   bool operator!=(const mmint& A) { return !((*this) == A); }
 };
-__attribute__((aligned(32))) __m256i mmint::R, mmint::mR;
-__attribute__((aligned(32))) __m256i mmint::M0, mmint::M1, mmint::M2, mmint::N2;
+__attribute__((aligned(32))) mmint mmint::R, mmint::mR;
+__attribute__((aligned(32))) mmint mmint::M0, mmint::M1, mmint::M2, mmint::N2;
 
 /**
  * @brief vectorize modint
