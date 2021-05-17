@@ -279,13 +279,13 @@ data:
     \ t, reinterpret_cast<mmint*>(b));\n  for (int i = 0; i < S * S8; i++) s[i] =\
     \ mmint::itom(s[i]);\n  for (int i = 0; i < S * S8; i++) t[i] = mmint::itom(t[i]);\n\
     \  strassen(S, s, t, u);\n  for (int i = 0; i < S * S8; i++) u[i] = mmint::mtoi(u[i]);\n\
-    \  place_rev(S, 0, 0, u, reinterpret_cast<mmint*>(c));\n}\n\n}  // namespace fast_mat_prod_impl"
+    \  place_rev(S, 0, 0, u, reinterpret_cast<mmint*>(c));\n}\n\n}  // namespace fast_mat_prod_impl\n"
   dependsOn:
   - modint/vectorize-modint.hpp
   isVerificationFile: false
   path: math-fast/mat-prod.hpp
   requiredBy: []
-  timestamp: '2021-05-17 14:05:56+09:00'
+  timestamp: '2021-05-17 14:14:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp

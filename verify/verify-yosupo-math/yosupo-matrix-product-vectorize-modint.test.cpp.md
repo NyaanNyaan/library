@@ -308,7 +308,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   requiredBy: []
-  timestamp: '2021-05-17 14:05:56+09:00'
+  timestamp: '2021-05-17 14:14:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
