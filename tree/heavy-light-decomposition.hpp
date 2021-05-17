@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 #include "../graph/graph-template.hpp"
 
 template <typename G>
@@ -114,6 +112,8 @@ struct HeavyLightDecomposition {
     }
     return depth[a] < depth[b] ? a : b;
   }
+
+  int dist(int a, int b) { return depth[a] + depth[b] - depth[lca(a, b)] * 2; }
 };
 
 /**

@@ -1,0 +1,438 @@
+#include "template/template.hpp"
+//
+#include "misc/fastio.hpp"
+#include "misc/rng.hpp"
+#include "misc/timer.hpp"
+//
+using namespace Nyaan;
+
+#include "modint/montgomery-modint.hpp"
+
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2")
+
+using m256 = __m256i;
+struct alignas(32) mmint {
+  m256 x;
+  static m256 R, M0, M1, M2;
+
+  mmint() : x() {}
+  inline mmint(const m256& _x) : x(_x) {}
+  inline mmint(int a) : x(_mm256_set1_epi32(a)) {}
+  inline operator m256&() { return x; }
+  inline operator const m256&() const { return x; }
+  inline int& operator[](int i) { return *(reinterpret_cast<int*>(&x) + i); }
+  inline const int& operator[](int i) const {
+    return *(reinterpret_cast<const int*>(&x) + i);
+  }
+
+  friend ostream& operator<<(ostream& os, const mmint& m) {
+    unsigned r = R[0], mod = M1[0];
+    auto reduce1 = [&](const uint64_t& b) {
+      unsigned res = (b + uint64_t(unsigned(b) * unsigned(-r)) * mod) >> 32;
+      return res >= mod ? res - mod : res;
+    };
+    for (int i = 0; i < 8; i++) {
+      os << reduce1(m[i]) << (i == 7 ? "" : " ");
+    }
+    return os;
+  }
+
+  template <typename mint>
+  static void set_mod() {
+    mmint::R = _mm256_set1_epi32(mint::r);
+    mmint::M0 = _mm256_setzero_si256();
+    mmint::M1 = _mm256_set1_epi32(mint::get_mod());
+    mmint::M2 = _mm256_set1_epi32(mint::get_mod() * 2);
+  }
+
+  static inline mmint reduce(const mmint& prod02, const mmint& prod13) {
+    m256 unpalo = _mm256_unpacklo_epi32(prod02, prod13);
+    m256 unpahi = _mm256_unpackhi_epi32(prod02, prod13);
+    m256 prodlo = _mm256_unpacklo_epi64(unpalo, unpahi);
+    m256 prodhi = _mm256_unpackhi_epi64(unpalo, unpahi);
+    m256 hiplm1 = _mm256_add_epi32(prodhi, M1);
+    m256 lomulr = _mm256_mullo_epi32(prodlo, R);
+    m256 a13 = _mm256_shuffle_epi32(lomulr, 0xF5);
+    m256 prod02_ = _mm256_mul_epu32(lomulr, M1);
+    m256 prod13_ = _mm256_mul_epu32(a13, M1);
+    m256 unpalo_ = _mm256_unpacklo_epi32(prod02_, prod13_);
+    m256 unpahi_ = _mm256_unpackhi_epi32(prod02_, prod13_);
+    m256 prod = _mm256_unpackhi_epi64(unpalo_, unpahi_);
+    return _mm256_sub_epi32(hiplm1, prod);
+  }
+
+  friend inline mmint operator+(const mmint& A, const mmint& B) {
+    m256 apb = _mm256_add_epi32(A, B);
+    m256 ret = _mm256_sub_epi32(apb, M2);
+    m256 cmp = _mm256_cmpgt_epi32(M0, ret);
+    m256 add = _mm256_and_si256(cmp, M2);
+    return _mm256_add_epi32(add, ret);
+  }
+
+  friend inline mmint operator-(const mmint& A, const mmint& B) {
+    m256 ret = _mm256_sub_epi32(A, B);
+    m256 cmp = _mm256_cmpgt_epi32(M0, ret);
+    m256 add = _mm256_and_si256(cmp, M2);
+    return _mm256_add_epi32(add, ret);
+  }
+
+  friend inline mmint operator*(const mmint& A, const mmint& B) {
+    m256 a13 = _mm256_shuffle_epi32(A, 0xF5);
+    m256 b13 = _mm256_shuffle_epi32(B, 0xF5);
+    m256 prod02 = _mm256_mul_epu32(A, B);
+    m256 prod13 = _mm256_mul_epu32(a13, b13);
+    return reduce(prod02, prod13);
+  }
+
+  inline mmint& operator+=(const mmint& A) { return (*this) = (*this) + A; }
+  inline mmint& operator-=(const mmint& A) { return (*this) = (*this) - A; }
+  inline mmint& operator*=(const mmint& A) { return (*this) = (*this) * A; }
+};
+__attribute__((aligned(32))) __m256i mmint::R, mmint::M0, mmint::M1, mmint::M2;
+
+/**
+ *  NTT
+ */
+
+using mint = LazyMontgomeryModInt<998244353>;
+
+constexpr uint32_t get_pr() {
+  uint32_t _mod = mint::get_mod();
+  using u64 = uint64_t;
+  u64 ds[32] = {};
+  int idx = 0;
+  u64 m = _mod - 1;
+  for (u64 i = 2; i * i <= m; ++i) {
+    if (m % i == 0) {
+      ds[idx++] = i;
+      while (m % i == 0) m /= i;
+    }
+  }
+  if (m != 1) ds[idx++] = m;
+
+  uint32_t _pr = 2;
+  while (1) {
+    int flg = 1;
+    for (int i = 0; i < idx; ++i) {
+      u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;
+      while (b) {
+        if (b & 1) r = r * a % _mod;
+        a = a * a % _mod;
+        b >>= 1;
+      }
+      if (r == 1) {
+        flg = 0;
+        break;
+      }
+    }
+    if (flg == 1) break;
+    ++_pr;
+  }
+  return _pr;
+}
+
+constexpr uint32_t mod = mint::get_mod();
+constexpr uint32_t pr = get_pr();
+constexpr int level = __builtin_ctzll(mod - 1);
+mint dw[level], dy[level];
+
+void setwy(int k) {
+  mint w[level], y[level];
+  w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));
+  y[k - 1] = w[k - 1].inverse();
+  for (int i = k - 2; i > 0; --i)
+    w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];
+  dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];
+  for (int i = 3; i < k; ++i) {
+    dw[i] = dw[i - 1] * y[i - 2] * w[i];
+    dy[i] = dy[i - 1] * w[i - 2] * y[i];
+  }
+}
+
+void ntt(vector<mmint>& a, int k) {
+  assert(k > 4);
+  if (k & 1) {
+    int v = 1 << (k - 1 - 3);
+    for (int j = 0; j < v; ++j) {
+      mmint ajv = a[j + v];
+      a[j + v] = a[j] - ajv;
+      a[j] += ajv;
+    }
+  }
+  int u = 1 << (2 + (k & 1));
+  int v = 1 << (k - 2 - (k & 1));
+  mint one = mint(1), imag = dw[1];
+  mmint ONE{one.a}, IMAG{dw[1].a};
+
+  while (v) {
+    assert(v != 2);
+    if (v == 1) {
+    } else if (v == 4) {
+      mint W = one, X = one, WX = one;
+      mmint IMAG = _mm256_set_epi32(one.a, one.a, one.a, one.a, imag.a, imag.a,
+                                    imag.a, imag.a);
+      for (int jh = 0; jh < u; jh++) {
+        W = X * X, WX = W * X;
+        mmint dif =
+            _mm256_set_epi32(W.a, W.a, W.a, W.a, WX.a, WX.a, WX.a, WX.a);
+        for (int jh = 0; jh < u;) {
+          mmint t01 = a[(jh >> 1) + 0];
+          mmint t23 = a[(jh >> 1) + 1] * dif;
+          mmint tp = t01 + t23;
+          mmint tm = (t01 - t23) * IMAG;
+         // mmint tplo =  _mm256_unpacklo_epi64(tp, )
+        }
+        X *= dw[__builtin_ctzll((jh += 4))];
+      }
+
+    }
+    /*
+    mint ww = one, xx = one, wx = one;
+    for (int jh = 0; jh < u;) {
+      ww = xx * xx, wx = ww * xx;
+      int j0 = jh * v;
+      int je = j0 + v;
+      int j2 = je + v;
+      for (; j0 < je; ++j0, ++j2) {
+        mint t0 = a[j0], t1 = a[j0 + v] * xx, t2 = a[j2] * ww,
+             t3 = a[j2 + v] * wx;
+        mint t0p2 = t0 + t2, t1p3 = t1 + t3;
+        mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;
+        a[j0] = t0p2 + t1p3, a[j0 + v] = t0p2 - t1p3;
+        a[j2] = t0m2 + t1m3, a[j2 + v] = t0m2 - t1m3;
+      }
+      xx *= dw[__builtin_ctzll((jh += 4))];
+    }
+    */
+    else {
+      mmint W{1}, X{1}, WX{1};
+      int v8 = v / 8;
+      for (int jh = 0; jh < u; jh++) {
+        W = X * X, WX = W * X;
+        int j0 = jh * v8;
+        int j2 = j0 + v8 * 2;
+        int je = j0 + v8;
+        for (; j0 < je; ++j0) {
+          mmint t0 = a[j0], t1 = a[j0 + v8];
+          mmint t2 = a[j2], t3 = a[j0 + v8];
+          t2 *= W, t3 *= WX;
+          mmint t0p2 = t0 + t2, t1p3 = t1 + t3;
+          mmint t0m2 = t0 - t2, t1m3 = (t1 - t3) * IMAG;
+          a[j0] = t0p2 + t1p3, a[j0 + v8] = t0p2 - t1p3;
+          a[j2] = t0m2 + t1m3, a[j2 + v8] = t0m2 - t1m3;
+        }
+        X *= mmint{dw[__builtin_ctzll((jh += 4))].a};
+      }
+    }
+    u <<= 2;
+    v >>= 2;
+  }
+}
+
+template <typename mint>
+struct NTT {
+  static constexpr uint32_t get_pr() {
+    uint32_t _mod = mint::get_mod();
+    using u64 = uint64_t;
+    u64 ds[32] = {};
+    int idx = 0;
+    u64 m = _mod - 1;
+    for (u64 i = 2; i * i <= m; ++i) {
+      if (m % i == 0) {
+        ds[idx++] = i;
+        while (m % i == 0) m /= i;
+      }
+    }
+    if (m != 1) ds[idx++] = m;
+
+    uint32_t _pr = 2;
+    while (1) {
+      int flg = 1;
+      for (int i = 0; i < idx; ++i) {
+        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;
+        while (b) {
+          if (b & 1) r = r * a % _mod;
+          a = a * a % _mod;
+          b >>= 1;
+        }
+        if (r == 1) {
+          flg = 0;
+          break;
+        }
+      }
+      if (flg == 1) break;
+      ++_pr;
+    }
+    return _pr;
+  };
+
+  static constexpr uint32_t mod = mint::get_mod();
+  static constexpr uint32_t pr = get_pr();
+  static constexpr int level = __builtin_ctzll(mod - 1);
+  mint dw[level], dy[level];
+
+  void setwy(int k) {
+    mint w[level], y[level];
+    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));
+    y[k - 1] = w[k - 1].inverse();
+    for (int i = k - 2; i > 0; --i)
+      w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];
+    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] = y[2];
+    for (int i = 3; i < k; ++i) {
+      dw[i] = dw[i - 1] * y[i - 2] * w[i];
+      dy[i] = dy[i - 1] * w[i - 2] * y[i];
+    }
+  }
+
+  NTT() { setwy(level); }
+
+  void fft4(vector<mint>& a, int k) {
+    if ((int)a.size() <= 1) return;
+    if (k == 1) {
+      mint a1 = a[1];
+      a[1] = a[0] - a[1];
+      a[0] = a[0] + a1;
+      return;
+    }
+    if (k & 1) {
+      int v = 1 << (k - 1);
+      for (int j = 0; j < v; ++j) {
+        mint ajv = a[j + v];
+        a[j + v] = a[j] - ajv;
+        a[j] += ajv;
+      }
+    }
+    int u = 1 << (2 + (k & 1));
+    int v = 1 << (k - 2 - (k & 1));
+    mint one = mint(1);
+    mint imag = dw[1];
+    while (v) {
+      // jh = 0
+      {
+        int j0 = 0;
+        int j1 = v;
+        int j2 = j1 + v;
+        int j3 = j2 + v;
+        for (; j0 < v; ++j0, ++j1, ++j2, ++j3) {
+          mint t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];
+          mint t0p2 = t0 + t2, t1p3 = t1 + t3;
+          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;
+          a[j0] = t0p2 + t1p3, a[j1] = t0p2 - t1p3;
+          a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;
+        }
+      }
+      // jh >= 1
+      mint ww = one, xx = one * dw[2], wx = one;
+      for (int jh = 4; jh < u;) {
+        ww = xx * xx, wx = ww * xx;
+        int j0 = jh * v;
+        int je = j0 + v;
+        int j2 = je + v;
+        for (; j0 < je; ++j0, ++j2) {
+          mint t0 = a[j0], t1 = a[j0 + v] * xx, t2 = a[j2] * ww,
+               t3 = a[j2 + v] * wx;
+          mint t0p2 = t0 + t2, t1p3 = t1 + t3;
+          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;
+          a[j0] = t0p2 + t1p3, a[j0 + v] = t0p2 - t1p3;
+          a[j2] = t0m2 + t1m3, a[j2 + v] = t0m2 - t1m3;
+        }
+        xx *= dw[__builtin_ctzll((jh += 4))];
+      }
+      u <<= 2;
+      v >>= 2;
+    }
+  }
+
+  void ifft4(vector<mint>& a, int k) {
+    if ((int)a.size() <= 1) return;
+    if (k == 1) {
+      mint a1 = a[1];
+      a[1] = a[0] - a[1];
+      a[0] = a[0] + a1;
+      return;
+    }
+    int u = 1 << (k - 2);
+    int v = 1;
+    mint one = mint(1);
+    mint imag = dy[1];
+    while (u) {
+      // jh = 0
+      {
+        int j0 = 0;
+        int j1 = v;
+        int j2 = v + v;
+        int j3 = j2 + v;
+        for (; j0 < v; ++j0, ++j1, ++j2, ++j3) {
+          mint t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];
+          mint t0p1 = t0 + t1, t2p3 = t2 + t3;
+          mint t0m1 = t0 - t1, t2m3 = (t2 - t3) * imag;
+          a[j0] = t0p1 + t2p3, a[j2] = t0p1 - t2p3;
+          a[j1] = t0m1 + t2m3, a[j3] = t0m1 - t2m3;
+        }
+      }
+      // jh >= 1
+      mint ww = one, xx = one * dy[2], yy = one;
+      u <<= 2;
+      for (int jh = 4; jh < u;) {
+        ww = xx * xx, yy = xx * imag;
+        int j0 = jh * v;
+        int je = j0 + v;
+        int j2 = je + v;
+        for (; j0 < je; ++j0, ++j2) {
+          mint t0 = a[j0], t1 = a[j0 + v], t2 = a[j2], t3 = a[j2 + v];
+          mint t0p1 = t0 + t1, t2p3 = t2 + t3;
+          mint t0m1 = (t0 - t1) * xx, t2m3 = (t2 - t3) * yy;
+          a[j0] = t0p1 + t2p3, a[j2] = (t0p1 - t2p3) * ww;
+          a[j0 + v] = t0m1 + t2m3, a[j2 + v] = (t0m1 - t2m3) * ww;
+        }
+        xx *= dy[__builtin_ctzll(jh += 4)];
+      }
+      u >>= 4;
+      v <<= 2;
+    }
+    if (k & 1) {
+      u = 1 << (k - 1);
+      for (int j = 0; j < u; ++j) {
+        mint ajv = a[j] - a[j + u];
+        a[j] += a[j + u];
+        a[j + u] = ajv;
+      }
+    }
+  }
+
+  vector<mint> multiply(const vector<mint>& a, const vector<mint>& b) {
+    int l = a.size() + b.size() - 1;
+    if (min<int>(a.size(), b.size()) <= 40) {
+      vector<mint> s(l);
+      for (int i = 0; i < (int)a.size(); ++i)
+        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];
+      return s;
+    }
+    int k = 2, M = 4;
+    while (M < l) M <<= 1, ++k;
+    setwy(k);
+    vector<mint> s(M), t(M);
+    for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
+    for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
+    fft4(s, k);
+    fft4(t, k);
+    for (int i = 0; i < M; ++i) s[i] *= t[i];
+    ifft4(s, k);
+    s.resize(l);
+    mint invm = mint(M).inverse();
+    for (int i = 0; i < l; ++i) s[i] *= invm;
+    return s;
+  }
+};
+
+using namespace Nyaan;
+
+#include "template/template.hpp"
+//
+
+using namespace Nyaan;
+
+using mint = LazyMontgomeryModInt<998244353>;
+
+void Nyaan::solve() { mmint::set_mod<mint>(); }

@@ -31,3 +31,5 @@ dirchlet.cpp
 mat_prod.cpp
 mat_prod_2.cpp
 z.bat
+gmon.out
+test.jpg
