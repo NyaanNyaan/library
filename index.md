@@ -367,8 +367,8 @@ data:
       path: math-fast/gcd.hpp
       title: binary GCD
     - icon: ':heavy_check_mark:'
-      path: math-fast/mat-prod.hpp
-      title: math-fast/mat-prod.hpp
+      path: math-fast/mat-prod-strassen.hpp
+      title: math-fast/mat-prod-strassen.hpp
     - icon: ':heavy_check_mark:'
       path: math-fast/subset-convolution.hpp
       title: math-fast/subset-convolution.hpp

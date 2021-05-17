@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math-fast/mat-prod.hpp
-    title: math-fast/mat-prod.hpp
+    path: math-fast/mat-prod-strassen.hpp
+    title: math-fast/mat-prod-strassen.hpp
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
@@ -103,7 +103,7 @@ data:
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 22 \"verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp\"\
-    \n//\n#line 2 \"math-fast/mat-prod.hpp\"\n\n#line 2 \"modint/vectorize-modint.hpp\"\
+    \n//\n#line 2 \"math-fast/mat-prod-strassen.hpp\"\n\n#line 2 \"modint/vectorize-modint.hpp\"\
     \n\n#pragma GCC optimize(\"O3,unroll-loops\")\n#pragma GCC target(\"avx2\")\n\n\
     using m256 = __m256i;\nstruct alignas(32) mmint {\n  m256 x;\n  static mmint R,\
     \ mR, M0, M1, M2, N2;\n\n  mmint() : x() {}\n  inline mmint(const m256& _x) :\
@@ -156,25 +156,25 @@ data:
     \ sub) == 1;\n  }\n  bool operator!=(const mmint& A) { return !((*this) == A);\
     \ }\n};\n__attribute__((aligned(32))) mmint mmint::R, mmint::mR;\n__attribute__((aligned(32)))\
     \ mmint mmint::M0, mmint::M1, mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize\
-    \ modint\n */\n#line 4 \"math-fast/mat-prod.hpp\"\n\n// B*B\u306E\u6B63\u65B9\u884C\
-    \u5217\u3092\u9AD8\u901F\u306B\u4E57\u7B97\u3059\u308B\u30E9\u30A4\u30D6\u30E9\
-    \u30EA\u3002\n// B*B\u884C\u5217a,b\u3092 \u30BF\u30C6B\u884C \u30E8\u30B3B/8\u884C\
-    \u306E\u884C\u5217\u3068\u898B\u306A\u3059.\n// s : \u6B63\u9806\u306B\u914D\u7F6E\
-    \u3002\u3059\u306A\u308F\u3061a_{i,k}\u3092s[i * (B / 8) + k]\u306B\u914D\u7F6E\
-    \u3059\u308B\u3002\n// t : \u9006\u9806\u306B\u914D\u7F6E\u3002\u3059\u306A\u308F\
-    \u3061b_{k,j}\u3092t[j * B + k]\u306B\u914D\u7F6E\u3059\u308B\u3002\n// u : \u6B63\
-    \u9806\u306B\u914D\u7F6E\u3002\u3059\u306A\u308F\u3061c_{i,j}\u3092u[i * (B /\
-    \ 8) + j]\u306B\u914D\u7F6E\u3059\u308B\u3002\nnamespace fast_mat_prod_impl {\n\
-    constexpr int B = 1 << 7;\nconstexpr int B8 = B / 8;\n\nvoid mul_simd(mmint* __restrict__\
-    \ s, mmint* __restrict__ t,\n              mmint* __restrict__ u) {\n  for (int\
-    \ i = 0; i < B * B8; i++) {\n    const m256 cmpS = _mm256_cmpgt_epi32(s[i], mmint::M1);\n\
-    \    const m256 cmpT = _mm256_cmpgt_epi32(t[i], mmint::M1);\n    const m256 difS\
-    \ = _mm256_and_si256(cmpS, mmint::M1);\n    const m256 difT = _mm256_and_si256(cmpT,\
-    \ mmint::M1);\n    s[i] = _mm256_sub_epi32(s[i], difS);\n    t[i] = _mm256_sub_epi32(t[i],\
-    \ difT);\n  }\n\n  mmint th1, th2, zero = _mm256_setzero_si256();\n  th1[1] =\
-    \ th1[3] = th1[5] = th1[7] = mmint::M1[0];\n  th2[1] = th2[3] = th2[5] = th2[7]\
-    \ = mmint::M2[0];\n\n#define INIT_X(x, y)                          \\\n  m256\
-    \ prod02##x##y = _mm256_setzero_si256(); \\\n  m256 prod13##x##y = _mm256_setzero_si256()\n\
+    \ modint\n */\n#line 4 \"math-fast/mat-prod-strassen.hpp\"\n\n// B*B\u306E\u6B63\
+    \u65B9\u884C\u5217\u3092\u9AD8\u901F\u306B\u4E57\u7B97\u3059\u308B\u30E9\u30A4\
+    \u30D6\u30E9\u30EA\u3002\n// B*B\u884C\u5217a,b\u3092 \u30BF\u30C6B\u884C \u30E8\
+    \u30B3B/8\u884C\u306E\u884C\u5217\u3068\u898B\u306A\u3059.\n// s : \u6B63\u9806\
+    \u306B\u914D\u7F6E\u3002\u3059\u306A\u308F\u3061a_{i,k}\u3092s[i * (B / 8) + k]\u306B\
+    \u914D\u7F6E\u3059\u308B\u3002\n// t : \u9006\u9806\u306B\u914D\u7F6E\u3002\u3059\
+    \u306A\u308F\u3061b_{k,j}\u3092t[j * B + k]\u306B\u914D\u7F6E\u3059\u308B\u3002\
+    \n// u : \u6B63\u9806\u306B\u914D\u7F6E\u3002\u3059\u306A\u308F\u3061c_{i,j}\u3092\
+    u[i * (B / 8) + j]\u306B\u914D\u7F6E\u3059\u308B\u3002\nnamespace fast_mat_prod_impl\
+    \ {\nconstexpr int B = 1 << 7;\nconstexpr int B8 = B / 8;\n\nvoid mul_simd(mmint*\
+    \ __restrict__ s, mmint* __restrict__ t,\n              mmint* __restrict__ u)\
+    \ {\n  for (int i = 0; i < B * B8; i++) {\n    const m256 cmpS = _mm256_cmpgt_epi32(s[i],\
+    \ mmint::M1);\n    const m256 cmpT = _mm256_cmpgt_epi32(t[i], mmint::M1);\n  \
+    \  const m256 difS = _mm256_and_si256(cmpS, mmint::M1);\n    const m256 difT =\
+    \ _mm256_and_si256(cmpT, mmint::M1);\n    s[i] = _mm256_sub_epi32(s[i], difS);\n\
+    \    t[i] = _mm256_sub_epi32(t[i], difT);\n  }\n\n  mmint th1, th2, zero = _mm256_setzero_si256();\n\
+    \  th1[1] = th1[3] = th1[5] = th1[7] = mmint::M1[0];\n  th2[1] = th2[3] = th2[5]\
+    \ = th2[7] = mmint::M2[0];\n\n#define INIT_X(x, y)                          \\\
+    \n  m256 prod02##x##y = _mm256_setzero_si256(); \\\n  m256 prod13##x##y = _mm256_setzero_si256()\n\
     \n#define INIT_Y(j, k, l, y)            \\\n  m256 T##y = t[(j + y) * B + k +\
     \ l]; \\\n  const m256 T13##y = _mm256_shuffle_epi32(T##y, 0xF5);\n\n#define PROD(x,\
     \ y)                                              \\\n  m256 S##x##y = _mm256_set1_epi32(s[(i\
@@ -283,7 +283,7 @@ data:
     \ <chrono>\n#include <cstdint>\n#include <cstdio>\n#include <cstring>\n#include\
     \ <iostream>\n#include <random>\n#include <type_traits>\n#include <utility>\n\
     #include <vector>\n\nusing namespace std;\n\n#include \"../../misc/fastio.hpp\"\
-    \n//\n#include \"../../modint/montgomery-modint.hpp\"\n//\n#include \"../../math-fast/mat-prod.hpp\"\
+    \n//\n#include \"../../modint/montgomery-modint.hpp\"\n//\n#include \"../../math-fast/mat-prod-strassen.hpp\"\
     \n#include \"../../modint/vectorize-modint.hpp\"\n\nint main() {\n  using mint\
     \ = LazyMontgomeryModInt<998244353>;\n  mmint::set_mod<mint>();\n\n  using namespace\
     \ fast_mat_prod_impl;\n\n#ifdef PROFILER\n  {\n    unsigned int* a = reinterpret_cast<unsigned\
@@ -303,12 +303,12 @@ data:
   dependsOn:
   - misc/fastio.hpp
   - modint/montgomery-modint.hpp
-  - math-fast/mat-prod.hpp
+  - math-fast/mat-prod-strassen.hpp
   - modint/vectorize-modint.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   requiredBy: []
-  timestamp: '2021-05-17 18:16:32+09:00'
+  timestamp: '2021-05-17 19:16:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp

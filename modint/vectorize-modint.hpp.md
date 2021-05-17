@@ -3,8 +3,8 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: math-fast/mat-prod.hpp
-    title: math-fast/mat-prod.hpp
+    path: math-fast/mat-prod-strassen.hpp
+    title: math-fast/mat-prod-strassen.hpp
   - icon: ':heavy_check_mark:'
     path: math-fast/subset-convolution.hpp
     title: math-fast/subset-convolution.hpp
@@ -132,7 +132,7 @@ data:
   isVerificationFile: false
   path: modint/vectorize-modint.hpp
   requiredBy:
-  - math-fast/mat-prod.hpp
+  - math-fast/mat-prod-strassen.hpp
   - math-fast/subset-convolution.hpp
   timestamp: '2021-05-17 18:16:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
