@@ -49,7 +49,7 @@ data:
     _deprecated_at_docs: docs/tree/heavy-light-decomposition.md
     document_title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
     links: []
-  bundledCode: "#line 2 \"tree/heavy-light-decomposition.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\
+  bundledCode: "#line 2 \"tree/heavy-light-decomposition.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
     \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
     \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
     \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
@@ -77,7 +77,7 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"tree/heavy-light-decomposition.hpp\"\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"tree/heavy-light-decomposition.hpp\"\
     \n\ntemplate <typename G>\nstruct HeavyLightDecomposition {\n private:\n  void\
     \ dfs_sz(int cur) {\n    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n    \
     \  if (dst == par[cur]) {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n\
@@ -113,14 +113,15 @@ data:
     \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
     \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
     \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
+    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n"
-  code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\ntemplate\
-    \ <typename G>\nstruct HeavyLightDecomposition {\n private:\n  void dfs_sz(int\
-    \ cur) {\n    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n      if (dst ==\
-    \ par[cur]) {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n\
-    \          swap(g[cur][0], g[cur][1]);\n        else\n          continue;\n  \
-    \    }\n      depth[dst] = depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n\
+  code: "#pragma once\n\n#include \"../graph/graph-template.hpp\"\n\ntemplate <typename\
+    \ G>\nstruct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n\
+    \    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur])\
+    \ {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n         \
+    \ swap(g[cur][0], g[cur][1]);\n        else\n          continue;\n      }\n  \
+    \    depth[dst] = depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n\
     \      size[cur] += size[dst];\n      if (size[dst] > size[g[cur][0]]) {\n   \
     \     swap(dst, g[cur][0]);\n      }\n    }\n  }\n\n  void dfs_hld(int cur) {\n\
     \    down[cur] = id++;\n    for (auto dst : g[cur]) {\n      if (dst == par[cur])\
@@ -151,7 +152,8 @@ data:
     \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
     \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
     \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
+    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n"
   dependsOn:
   - graph/graph-template.hpp
@@ -159,7 +161,7 @@ data:
   path: tree/heavy-light-decomposition.hpp
   requiredBy:
   - graph/funtional-graph.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-05-17 12:37:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1254.test.cpp

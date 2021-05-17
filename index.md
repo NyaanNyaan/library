@@ -463,6 +463,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
+    - icon: ':warning:'
+      path: modint/vectorize-modint.hpp
+      title: vectorize modint
   - name: modulo
     pages:
     - icon: ':heavy_check_mark:'

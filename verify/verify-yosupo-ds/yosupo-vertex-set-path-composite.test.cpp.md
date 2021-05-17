@@ -310,7 +310,7 @@ data:
     \ < b; a >>= 1, b >>= 1) {\n      if (b & 1) {\n        T nxt = f(seg[--b], R);\n\
     \        if (check(nxt)) return find_subtree(b, check, R, true);\n        R =\
     \ nxt;\n      }\n    }\n    return -1;\n  }\n};\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
-    \n\n\n\n#line 6 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename G>\n\
+    \n\n#line 4 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename G>\n\
     struct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n    size[cur]\
     \ = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur]) {\n       \
     \ if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n          swap(g[cur][0],\
@@ -346,7 +346,8 @@ data:
     \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
     \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
     \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
+    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
     \ 16 \"verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp\"\n//\n\
     using namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n, q);\n  vm a(n), b(n);\n\
@@ -397,7 +398,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2021-05-10 21:37:34+09:00'
+  timestamp: '2021-05-17 12:37:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

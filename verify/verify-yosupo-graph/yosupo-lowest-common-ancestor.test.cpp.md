@@ -229,7 +229,7 @@ data:
     \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
     \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
     \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
-    }\n#line 2 \"tree/heavy-light-decomposition.hpp\"\n\n\n\n#line 6 \"tree/heavy-light-decomposition.hpp\"\
+    }\n#line 2 \"tree/heavy-light-decomposition.hpp\"\n\n#line 4 \"tree/heavy-light-decomposition.hpp\"\
     \n\ntemplate <typename G>\nstruct HeavyLightDecomposition {\n private:\n  void\
     \ dfs_sz(int cur) {\n    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n    \
     \  if (dst == par[cur]) {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n\
@@ -265,7 +265,8 @@ data:
     \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
     \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
     \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
+    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
     \ 7 \"verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp\"\n\n\
     using namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  vvi g(N);\n  rep1(i,\
@@ -289,7 +290,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-05-17 12:37:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp

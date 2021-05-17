@@ -208,8 +208,8 @@ data:
     \ < b; a >>= 1, b >>= 1) {\n      if (b & 1) {\n        T nxt = f(seg[--b], R);\n\
     \        if (check(nxt)) return find_subtree(b, check, R, true);\n        R =\
     \ nxt;\n      }\n    }\n    return -1;\n  }\n};\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
-    \n\n\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct\
-    \ edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
+    \n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct edge\
+    \ {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
     \ cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost)\
     \ {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\
     \n  operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
@@ -236,7 +236,7 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename\
+    \ d;\n}\n#line 4 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename\
     \ G>\nstruct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n\
     \    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur])\
     \ {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n         \
@@ -272,7 +272,8 @@ data:
     \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
     \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
     \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
+    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
+    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
     \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
     \ 7 \"verify/verify-aoj-grl/aoj-grl-5-d.test.cpp\"\nusing namespace Nyaan; void\
     \ Nyaan::solve() {\n  ini(N);\n  vvi g(N);\n  rep(i, N) {\n    ini(n);\n    g[i].resize(n);\n\
@@ -306,7 +307,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-05-17 12:37:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
