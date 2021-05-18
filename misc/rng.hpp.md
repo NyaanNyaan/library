@@ -64,6 +64,9 @@ data:
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/primitive-root.test.cpp
+    title: verify/verify-unit-test/primitive-root.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -190,6 +193,7 @@ data:
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/template.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/math.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp

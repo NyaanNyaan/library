@@ -16,6 +16,9 @@ data:
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/primitive-root.test.cpp
+    title: verify/verify-unit-test/primitive-root.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
@@ -101,6 +104,7 @@ data:
   verifiedWith:
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp

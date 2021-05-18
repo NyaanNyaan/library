@@ -326,6 +326,9 @@ data:
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
     - icon: ':heavy_check_mark:'
+      path: math/constexpr-primitiveroot.hpp
+      title: math/constexpr-primitiveroot.hpp
+    - icon: ':heavy_check_mark:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
     - icon: ':warning:'
@@ -1064,6 +1067,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
       title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/primitive-root.test.cpp
+      title: verify/verify-unit-test/primitive-root.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/radix-heap.test.cpp
       title: verify/verify-unit-test/radix-heap.test.cpp

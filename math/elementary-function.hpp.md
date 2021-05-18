@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/primitive-root.test.cpp
+    title: verify/verify-unit-test/primitive-root.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -124,6 +127,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
 documentation_of: math/elementary-function.hpp
 layout: document
 redirect_from:
