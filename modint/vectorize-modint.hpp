@@ -6,12 +6,14 @@
 using m256 = __m256i;
 struct alignas(32) mmint {
   m256 x;
-  static mmint R, mR, M0, M1, M2, N2;
+  static mmint R, M0, M1, M2, N2;
 
   mmint() : x() {}
   inline mmint(const m256& _x) : x(_x) {}
-  inline mmint(int a) : x(_mm256_set1_epi32(a)) {}
-  inline mmint(int a0, int a1, int a2, int a3, int a4, int a5, int a6, int a7)
+  inline mmint(unsigned int a) : x(_mm256_set1_epi32(a)) {}
+  inline mmint(unsigned int a0, unsigned int a1, unsigned int a2,
+               unsigned int a3, unsigned int a4, unsigned int a5,
+               unsigned int a6, unsigned int a7)
       : x(_mm256_set_epi32(a7, a6, a5, a4, a3, a2, a1, a0)) {}
   inline operator m256&() { return x; }
   inline operator const m256&() const { return x; }
@@ -39,7 +41,6 @@ struct alignas(32) mmint {
     M1 = _mm256_set1_epi32(mint::get_mod());
     M2 = _mm256_set1_epi32(mint::get_mod() * 2);
     N2 = _mm256_set1_epi32(mint::n2);
-    mR = _mm256_sub_epi32(M0, R);
   }
 
   static inline mmint reduce(const mmint& prod02, const mmint& prod13) {
@@ -48,10 +49,11 @@ struct alignas(32) mmint {
     m256 prodlo = _mm256_unpacklo_epi64(unpalo, unpahi);
     m256 prodhi = _mm256_unpackhi_epi64(unpalo, unpahi);
     m256 hiplm1 = _mm256_add_epi32(prodhi, M1);
-    m256 lomulr = _mm256_mullo_epi32(prodlo, R);
-    m256 a13 = _mm256_shuffle_epi32(lomulr, 0xF5);
-    m256 prod02_ = _mm256_mul_epu32(lomulr, M1);
-    m256 prod13_ = _mm256_mul_epu32(a13, M1);
+    m256 prodlohi = _mm256_shuffle_epi32(prodlo, 0xF5);
+    m256 lmlr02 = _mm256_mul_epu32(prodlo, R);
+    m256 lmlr13 = _mm256_mul_epu32(prodlohi, R);
+    m256 prod02_ = _mm256_mul_epu32(lmlr02, M1);
+    m256 prod13_ = _mm256_mul_epu32(lmlr13, M1);
     m256 unpalo_ = _mm256_unpacklo_epi32(prod02_, prod13_);
     m256 unpahi_ = _mm256_unpackhi_epi32(prod02_, prod13_);
     m256 prod = _mm256_unpackhi_epi64(unpalo_, unpahi_);
@@ -61,16 +63,17 @@ struct alignas(32) mmint {
   static inline mmint itom(const mmint& A) { return A * N2; }
 
   static inline mmint mtoi(const mmint& A) {
-    m256 lomulr = _mm256_mullo_epi32(A, mR);
-    m256 a13 = _mm256_shuffle_epi32(lomulr, 0xF5);
-    m256 prod02_ = _mm256_mul_epu32(lomulr, M1);
-    m256 prod13_ = _mm256_mul_epu32(a13, M1);
+    m256 A13 = _mm256_shuffle_epi32(A, 0xF5);
+    m256 lmlr02 = _mm256_mul_epu32(A, R);
+    m256 lmlr13 = _mm256_mul_epu32(A13, R);
+    m256 prod02_ = _mm256_mul_epu32(lmlr02, M1);
+    m256 prod13_ = _mm256_mul_epu32(lmlr13, M1);
     m256 unpalo_ = _mm256_unpacklo_epi32(prod02_, prod13_);
     m256 unpahi_ = _mm256_unpackhi_epi32(prod02_, prod13_);
     m256 prod = _mm256_unpackhi_epi64(unpalo_, unpahi_);
-    m256 cmpA = _mm256_cmpgt_epi32(A, M0);
-    m256 addA = _mm256_and_si256(cmpA, mmint(1));
-    return _mm256_add_epi32(prod, addA);
+    m256 cmp = _mm256_cmpgt_epi32(prod, M0);
+    m256 dif = _mm256_and_si256(cmp, M1);
+    return _mm256_sub_epi32(dif, prod);
   }
 
   friend inline mmint operator+(const mmint& A, const mmint& B) {
@@ -106,7 +109,7 @@ struct alignas(32) mmint {
   }
   bool operator!=(const mmint& A) { return !((*this) == A); }
 };
-__attribute__((aligned(32))) mmint mmint::R, mmint::mR;
+__attribute__((aligned(32))) mmint mmint::R;
 __attribute__((aligned(32))) mmint mmint::M0, mmint::M1, mmint::M2, mmint::N2;
 
 /**
