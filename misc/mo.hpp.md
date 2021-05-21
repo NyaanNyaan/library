@@ -59,8 +59,8 @@ data:
   timestamp: '2021-03-26 19:14:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
 documentation_of: misc/mo.hpp
 layout: document
 redirect_from:

@@ -110,11 +110,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
 documentation_of: segment-tree/segment-tree.hpp

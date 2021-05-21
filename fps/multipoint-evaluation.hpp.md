@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
@@ -188,9 +188,9 @@ data:
   isVerificationFile: false
   path: fps/multipoint-evaluation.hpp
   requiredBy:
-  - fps/polynomial-interpolation.hpp
-  - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
+  - matrix/matrix-tree.hpp
+  - fps/polynomial-interpolation.hpp
   timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

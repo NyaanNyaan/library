@@ -105,8 +105,8 @@ data:
   isVerificationFile: false
   path: matrix/gauss-elimination.hpp
   requiredBy:
-  - fps/find-p-recursive.hpp
   - matrix/linear-equation.hpp
+  - fps/find-p-recursive.hpp
   timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
