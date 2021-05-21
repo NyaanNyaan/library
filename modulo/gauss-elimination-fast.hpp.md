@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   _extendedRequiredBy: []

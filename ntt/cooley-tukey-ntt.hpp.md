@@ -4,16 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/primitive-root.hpp
     title: "\u539F\u59CB\u6839"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
   - icon: ':heavy_check_mark:'

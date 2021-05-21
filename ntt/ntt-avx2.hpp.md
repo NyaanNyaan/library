@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   _extendedRequiredBy:
@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
@@ -30,7 +30,7 @@ data:
     path: tree/frequency-table-of-tree-distance.hpp
     title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
@@ -165,9 +165,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1510.test.cpp
     title: verify/verify-yuki/yuki-1510.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line 2 \"modint/simd-montgomery.hpp\"\
@@ -820,7 +820,7 @@ data:
   - fps/ntt-friendly-fps.hpp
   - tree/frequency-table-of-tree-distance.hpp
   timestamp: '2021-04-26 16:30:13+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1510.test.cpp

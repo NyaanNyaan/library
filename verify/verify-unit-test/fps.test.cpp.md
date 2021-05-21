@@ -1,70 +1,74 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    links:
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/fps.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
@@ -180,7 +184,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"verify/verify-unit-test/fps.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/fps.test.cpp\"\
     \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n\
     #line 2 \"modint/simd-montgomery.hpp\"\n\n#line 4 \"modint/simd-montgomery.hpp\"\
     \n\n__attribute__((target(\"sse4.2\"))) inline __m128i my128_mullo_epu32(\n  \
@@ -665,7 +669,7 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 5 \"verify/verify-unit-test/fps.test.cpp\"\n\nusing\
+    \ { return mod; }\n};\n#line 7 \"verify/verify-unit-test/fps.test.cpp\"\n\nusing\
     \ mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
     \n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
     \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
@@ -684,7 +688,7 @@ data:
     \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
     \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
     using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 10 \"verify/verify-unit-test/fps.test.cpp\"\n\nusing namespace Nyaan;\n\n\
+    #line 12 \"verify/verify-unit-test/fps.test.cpp\"\n\nusing namespace Nyaan;\n\n\
     void test_div(int n, int m) {\n  trc(\"test div\");\n  assert(n > 0 and m > 0);\n\
     \  fps f(n), g(m);\n  each(x, f) x = rng();\n  each(x, g) x = rng();\n  do {\n\
     \    f.back() = rng();\n    g.back() = rng();\n  } while (f.back() == 0 or g.back()\
@@ -703,7 +707,8 @@ data:
     \ {\n  rep1(i, 100) rep1(j, 100) {\n    test_div(i, j);\n    test_pow(i, j);\n\
     \    test_exp(i, j);\n    test_inv(i, j);\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
     \  cout << a + b << endl;\n}\n"
-  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
     using fps = FormalPowerSeries<mint>;\n\n#include \"../../misc/rng.hpp\"\n\nusing\
     \ namespace Nyaan;\n\nvoid test_div(int n, int m) {\n  trc(\"test div\");\n  assert(n\
@@ -740,8 +745,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/fps.test.cpp
   requiredBy: []
-  timestamp: '2021-05-21 21:14:44+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-21 21:19:24+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/fps.test.cpp
 layout: document

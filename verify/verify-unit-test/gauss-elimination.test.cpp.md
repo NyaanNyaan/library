@@ -10,34 +10,34 @@ data:
   - icon: ':heavy_check_mark:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/gauss-elimination-fast.hpp
     title: modulo/gauss-elimination-fast.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
