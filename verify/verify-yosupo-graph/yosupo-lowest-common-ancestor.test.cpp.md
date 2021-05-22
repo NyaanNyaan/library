@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -210,41 +210,47 @@ data:
     \ -1);\n  ds[start] = 0;\n  queue<int> q;\n  q.push(start);\n  while (!q.empty())\
     \ {\n    int c = q.front();\n    q.pop();\n    int dc = ds[c];\n    for (auto\
     \ &d : g[c]) {\n      if (ds[d] == -1) {\n        ds[d] = dc + 1;\n        q.push(d);\n\
-    \      }\n    }\n  }\n  return ds;\n}\n\n// Diameter of Tree\n// return value\
-    \ : { {u, v}, length }\npair<pair<int, int>, int> Diameter(const UnweightedGraph\
-    \ &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n\
-    \  d = Depth(g, u);\n  int v = max_element(begin(d), end(d)) - begin(d);\n  return\
-    \ make_pair(make_pair(u, v), d[v]);\n}\n\n// Diameter of Weighted Tree\n// return\
-    \ value : { {u, v}, length }\ntemplate <typename T>\npair<pair<int, int>, T> Diameter(const\
-    \ WeightedGraph<T> &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d),\
+    \      }\n    }\n  }\n  return ds;\n}\n\n// Depth of Rooted Weighted Tree\n//\
+    \ unvisited nodes : d = -1\ntemplate <typename T>\nvector<T> Depth(const WeightedGraph<T>\
+    \ &g, int start = 0) {\n  vector<T> d(g.size(), -1);\n  auto dfs = [&](auto rec,\
+    \ int cur, T val, int par = -1) -> void {\n    d[cur] = val;\n    for (auto &dst\
+    \ : g[cur]) {\n      if (dst == par) continue;\n      rec(rec, dst, val + dst.cost,\
+    \ cur);\n    }\n  };\n  dfs(dfs, start, 0);\n  return d;\n}\n\n// Diameter of\
+    \ Tree\n// return value : { {u, v}, length }\npair<pair<int, int>, int> Diameter(const\
+    \ UnweightedGraph &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d),\
     \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
-    \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
-    \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
-    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
-    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
-    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
-    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
-    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
-    }\n#line 2 \"tree/heavy-light-decomposition.hpp\"\n\n#line 4 \"tree/heavy-light-decomposition.hpp\"\
-    \n\ntemplate <typename G>\nstruct HeavyLightDecomposition {\n private:\n  void\
-    \ dfs_sz(int cur) {\n    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n    \
-    \  if (dst == par[cur]) {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n\
-    \          swap(g[cur][0], g[cur][1]);\n        else\n          continue;\n  \
-    \    }\n      depth[dst] = depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n\
-    \      size[cur] += size[dst];\n      if (size[dst] > size[g[cur][0]]) {\n   \
-    \     swap(dst, g[cur][0]);\n      }\n    }\n  }\n\n  void dfs_hld(int cur) {\n\
-    \    down[cur] = id++;\n    for (auto dst : g[cur]) {\n      if (dst == par[cur])\
-    \ continue;\n      nxt[dst] = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));\n\
-    \      dfs_hld(dst);\n    }\n    up[cur] = id;\n  }\n\n  // [u, v)\n  vector<pair<int,\
-    \ int>> ascend(int u, int v) const {\n    vector<pair<int, int>> res;\n    while\
-    \ (nxt[u] != nxt[v]) {\n      res.emplace_back(down[u], down[nxt[u]]);\n     \
-    \ u = par[nxt[u]];\n    }\n    if (u != v) res.emplace_back(down[u], down[v] +\
-    \ 1);\n    return res;\n  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int\
-    \ u, int v) const {\n    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return\
-    \ {{down[u] + 1, down[v]}};\n    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]],\
-    \ down[v]);\n    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int>\
-    \ size, depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root\
-    \ = 0)\n      : g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
+    \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// Diameter of\
+    \ Weighted Tree\n// return value : { {u, v}, length }\ntemplate <typename T>\n\
+    pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {\n  auto d = Depth(g,\
+    \ 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n  d = Depth(g, u);\n\
+    \  int v = max_element(begin(d), end(d)) - begin(d);\n  return make_pair(make_pair(u,\
+    \ v), d[v]);\n}\n\n// nodes on the path u-v ( O(N) )\ntemplate <typename G>\n\
+    vector<int> Path(G &g, int u, int v) {\n  vector<int> ret;\n  int end = 0;\n \
+    \ auto dfs = [&](auto rec, int cur, int par = -1) -> void {\n    ret.push_back(cur);\n\
+    \    if (cur == v) {\n      end = 1;\n      return;\n    }\n    for (int dst :\
+    \ g[cur]) {\n      if (dst == par) continue;\n      rec(rec, dst, cur);\n    \
+    \  if (end) return;\n    }\n    if (end) return;\n    ret.pop_back();\n  };\n\
+    \  dfs(dfs, u);\n  return ret;\n}\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
+    \n\n#line 4 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename G>\n\
+    struct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n    size[cur]\
+    \ = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur]) {\n       \
+    \ if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n          swap(g[cur][0],\
+    \ g[cur][1]);\n        else\n          continue;\n      }\n      depth[dst] =\
+    \ depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n      size[cur]\
+    \ += size[dst];\n      if (size[dst] > size[g[cur][0]]) {\n        swap(dst, g[cur][0]);\n\
+    \      }\n    }\n  }\n\n  void dfs_hld(int cur) {\n    down[cur] = id++;\n   \
+    \ for (auto dst : g[cur]) {\n      if (dst == par[cur]) continue;\n      nxt[dst]\
+    \ = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));\n      dfs_hld(dst);\n\
+    \    }\n    up[cur] = id;\n  }\n\n  // [u, v)\n  vector<pair<int, int>> ascend(int\
+    \ u, int v) const {\n    vector<pair<int, int>> res;\n    while (nxt[u] != nxt[v])\
+    \ {\n      res.emplace_back(down[u], down[nxt[u]]);\n      u = par[nxt[u]];\n\
+    \    }\n    if (u != v) res.emplace_back(down[u], down[v] + 1);\n    return res;\n\
+    \  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int u, int v) const {\n\
+    \    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return {{down[u] + 1, down[v]}};\n\
+    \    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]], down[v]);\n\
+    \    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int> size, depth,\
+    \ down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root = 0)\n      :\
+    \ g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
     \ 0),\n        down(g.size(), -1),\n        up(g.size(), -1),\n        nxt(g.size(),\
     \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
     \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
@@ -286,7 +292,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   requiredBy: []
-  timestamp: '2021-05-22 10:59:11+09:00'
+  timestamp: '2021-05-22 11:12:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp

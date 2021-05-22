@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
   - icon: ':heavy_check_mark:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -210,39 +210,44 @@ data:
     \ q;\n  q.push(start);\n  while (!q.empty()) {\n    int c = q.front();\n    q.pop();\n\
     \    int dc = ds[c];\n    for (auto &d : g[c]) {\n      if (ds[d] == -1) {\n \
     \       ds[d] = dc + 1;\n        q.push(d);\n      }\n    }\n  }\n  return ds;\n\
-    }\n\n// Diameter of Tree\n// return value : { {u, v}, length }\npair<pair<int,\
-    \ int>, int> Diameter(const UnweightedGraph &g) {\n  auto d = Depth(g, 0);\n \
-    \ int u = max_element(begin(d), end(d)) - begin(d);\n  d = Depth(g, u);\n  int\
-    \ v = max_element(begin(d), end(d)) - begin(d);\n  return make_pair(make_pair(u,\
-    \ v), d[v]);\n}\n\n// Diameter of Weighted Tree\n// return value : { {u, v}, length\
-    \ }\ntemplate <typename T>\npair<pair<int, int>, T> Diameter(const WeightedGraph<T>\
-    \ &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n\
+    }\n\n// Depth of Rooted Weighted Tree\n// unvisited nodes : d = -1\ntemplate <typename\
+    \ T>\nvector<T> Depth(const WeightedGraph<T> &g, int start = 0) {\n  vector<T>\
+    \ d(g.size(), -1);\n  auto dfs = [&](auto rec, int cur, T val, int par = -1) ->\
+    \ void {\n    d[cur] = val;\n    for (auto &dst : g[cur]) {\n      if (dst ==\
+    \ par) continue;\n      rec(rec, dst, val + dst.cost, cur);\n    }\n  };\n  dfs(dfs,\
+    \ start, 0);\n  return d;\n}\n\n// Diameter of Tree\n// return value : { {u, v},\
+    \ length }\npair<pair<int, int>, int> Diameter(const UnweightedGraph &g) {\n \
+    \ auto d = Depth(g, 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n\
     \  d = Depth(g, u);\n  int v = max_element(begin(d), end(d)) - begin(d);\n  return\
-    \ make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the path u-v ( O(N) )\n\
-    template <typename G>\nvector<int> Path(G &g, int u, int v) {\n  vector<int> ret;\n\
-    \  int end = 0;\n  auto dfs = [&](auto rec, int cur, int par = -1) -> void {\n\
-    \    ret.push_back(cur);\n    if (cur == v) {\n      end = 1;\n      return;\n\
-    \    }\n    for (int dst : g[cur]) {\n      if (dst == par) continue;\n      rec(rec,\
-    \ dst, cur);\n      if (end) return;\n    }\n    if (end) return;\n    ret.pop_back();\n\
-    \  };\n  dfs(dfs, u);\n  return ret;\n}\n#line 2 \"graph/strongly-connected-components.hpp\"\
-    \n\n#line 4 \"graph/strongly-connected-components.hpp\"\n\n// Strongly Connected\
-    \ Components\n// DAG of SC graph   ... scc.dag (including multiedges)\n// new\
-    \ node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\ntemplate <typename\
-    \ G>\nstruct StronglyConnectedComponents {\n private:\n  const G &g;\n  vector<vector<int>>\
-    \ rg;\n  vector<int> comp, order;\n  vector<char> used;\n  vector<vector<int>>\
-    \ blng;\n\n public:\n  vector<vector<int>> dag;\n  StronglyConnectedComponents(G\
-    \ &_g) : g(_g), used(g.size(), 0) { build(); }\n\n  int operator[](int k) { return\
-    \ comp[k]; }\n\n  vector<int> &belong(int i) { return blng[i]; }\n\n private:\n\
-    \  void dfs(int idx) {\n    if (used[idx]) return;\n    used[idx] = true;\n  \
-    \  for (auto to : g[idx]) dfs(int(to));\n    order.push_back(idx);\n  }\n\n  void\
-    \ rdfs(int idx, int cnt) {\n    if (comp[idx] != -1) return;\n    comp[idx] =\
-    \ cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n  }\n\n  void build() {\n \
-    \   for (int i = 0; i < (int)g.size(); i++) dfs(i);\n    reverse(begin(order),\
-    \ end(order));\n    used.clear();\n    used.shrink_to_fit();\n\n    comp.resize(g.size(),\
-    \ -1);\n\n    rg.resize(g.size());\n    for (int i = 0; i < (int)g.size(); i++)\
-    \ {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n      }\n\
-    \    }\n    int ptr = 0;\n    for (int i : order)\n      if (comp[i] == -1) rdfs(i,\
-    \ ptr), ptr++;\n    rg.clear();\n    rg.shrink_to_fit();\n    order.clear();\n\
+    \ make_pair(make_pair(u, v), d[v]);\n}\n\n// Diameter of Weighted Tree\n// return\
+    \ value : { {u, v}, length }\ntemplate <typename T>\npair<pair<int, int>, T> Diameter(const\
+    \ WeightedGraph<T> &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d),\
+    \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
+    \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
+    \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n#line 2 \"graph/strongly-connected-components.hpp\"\n\n#line 4 \"graph/strongly-connected-components.hpp\"\
+    \n\n// Strongly Connected Components\n// DAG of SC graph   ... scc.dag (including\
+    \ multiedges)\n// new node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\n\
+    template <typename G>\nstruct StronglyConnectedComponents {\n private:\n  const\
+    \ G &g;\n  vector<vector<int>> rg;\n  vector<int> comp, order;\n  vector<char>\
+    \ used;\n  vector<vector<int>> blng;\n\n public:\n  vector<vector<int>> dag;\n\
+    \  StronglyConnectedComponents(G &_g) : g(_g), used(g.size(), 0) { build(); }\n\
+    \n  int operator[](int k) { return comp[k]; }\n\n  vector<int> &belong(int i)\
+    \ { return blng[i]; }\n\n private:\n  void dfs(int idx) {\n    if (used[idx])\
+    \ return;\n    used[idx] = true;\n    for (auto to : g[idx]) dfs(int(to));\n \
+    \   order.push_back(idx);\n  }\n\n  void rdfs(int idx, int cnt) {\n    if (comp[idx]\
+    \ != -1) return;\n    comp[idx] = cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n\
+    \  }\n\n  void build() {\n    for (int i = 0; i < (int)g.size(); i++) dfs(i);\n\
+    \    reverse(begin(order), end(order));\n    used.clear();\n    used.shrink_to_fit();\n\
+    \n    comp.resize(g.size(), -1);\n\n    rg.resize(g.size());\n    for (int i =\
+    \ 0; i < (int)g.size(); i++) {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n\
+    \      }\n    }\n    int ptr = 0;\n    for (int i : order)\n      if (comp[i]\
+    \ == -1) rdfs(i, ptr), ptr++;\n    rg.clear();\n    rg.shrink_to_fit();\n    order.clear();\n\
     \    order.shrink_to_fit();\n\n    dag.resize(ptr);\n    blng.resize(ptr);\n \
     \   for (int i = 0; i < (int)g.size(); i++) {\n      blng[comp[i]].push_back(i);\n\
     \      for (auto &to : g[i]) {\n        int x = comp[i], y = comp[to];\n     \
@@ -271,7 +276,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   requiredBy: []
-  timestamp: '2021-05-22 10:59:11+09:00'
+  timestamp: '2021-05-22 11:12:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp

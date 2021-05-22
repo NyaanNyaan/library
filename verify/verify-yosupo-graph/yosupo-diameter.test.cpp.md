@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-template.hpp
     title: graph/graph-template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/graph-utility.hpp
     title: graph/graph-utility.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tree_diameter
@@ -207,25 +207,30 @@ data:
     \ q;\n  q.push(start);\n  while (!q.empty()) {\n    int c = q.front();\n    q.pop();\n\
     \    int dc = ds[c];\n    for (auto &d : g[c]) {\n      if (ds[d] == -1) {\n \
     \       ds[d] = dc + 1;\n        q.push(d);\n      }\n    }\n  }\n  return ds;\n\
-    }\n\n// Diameter of Tree\n// return value : { {u, v}, length }\npair<pair<int,\
-    \ int>, int> Diameter(const UnweightedGraph &g) {\n  auto d = Depth(g, 0);\n \
-    \ int u = max_element(begin(d), end(d)) - begin(d);\n  d = Depth(g, u);\n  int\
-    \ v = max_element(begin(d), end(d)) - begin(d);\n  return make_pair(make_pair(u,\
-    \ v), d[v]);\n}\n\n// Diameter of Weighted Tree\n// return value : { {u, v}, length\
-    \ }\ntemplate <typename T>\npair<pair<int, int>, T> Diameter(const WeightedGraph<T>\
-    \ &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n\
+    }\n\n// Depth of Rooted Weighted Tree\n// unvisited nodes : d = -1\ntemplate <typename\
+    \ T>\nvector<T> Depth(const WeightedGraph<T> &g, int start = 0) {\n  vector<T>\
+    \ d(g.size(), -1);\n  auto dfs = [&](auto rec, int cur, T val, int par = -1) ->\
+    \ void {\n    d[cur] = val;\n    for (auto &dst : g[cur]) {\n      if (dst ==\
+    \ par) continue;\n      rec(rec, dst, val + dst.cost, cur);\n    }\n  };\n  dfs(dfs,\
+    \ start, 0);\n  return d;\n}\n\n// Diameter of Tree\n// return value : { {u, v},\
+    \ length }\npair<pair<int, int>, int> Diameter(const UnweightedGraph &g) {\n \
+    \ auto d = Depth(g, 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n\
     \  d = Depth(g, u);\n  int v = max_element(begin(d), end(d)) - begin(d);\n  return\
-    \ make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the path u-v ( O(N) )\n\
-    template <typename G>\nvector<int> Path(G &g, int u, int v) {\n  vector<int> ret;\n\
-    \  int end = 0;\n  auto dfs = [&](auto rec, int cur, int par = -1) -> void {\n\
-    \    ret.push_back(cur);\n    if (cur == v) {\n      end = 1;\n      return;\n\
-    \    }\n    for (int dst : g[cur]) {\n      if (dst == par) continue;\n      rec(rec,\
-    \ dst, cur);\n      if (end) return;\n    }\n    if (end) return;\n    ret.pop_back();\n\
-    \  };\n  dfs(dfs, u);\n  return ret;\n}\n#line 5 \"verify/verify-yosupo-graph/yosupo-diameter.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<ll>(N,\
-    \ N - 1, false, false);\n  auto diam = Diameter<ll>(g);\n  auto path = Path(g,\
-    \ diam.first.first, diam.first.second);\n  out(diam.second, path.size());\n  out(path);\n\
-    }\n"
+    \ make_pair(make_pair(u, v), d[v]);\n}\n\n// Diameter of Weighted Tree\n// return\
+    \ value : { {u, v}, length }\ntemplate <typename T>\npair<pair<int, int>, T> Diameter(const\
+    \ WeightedGraph<T> &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d),\
+    \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
+    \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
+    \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n#line 5 \"verify/verify-yosupo-graph/yosupo-diameter.test.cpp\"\n\nusing namespace\
+    \ Nyaan; void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<ll>(N, N - 1, false,\
+    \ false);\n  auto diam = Diameter<ll>(g);\n  auto path = Path(g, diam.first.first,\
+    \ diam.first.second);\n  out(diam.second, path.size());\n  out(path);\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\n\n#include\
     \ \"../../template/template.hpp\"\n#include \"../../graph/graph-utility.hpp\"\n\
     \nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<ll>(N,\
@@ -244,8 +249,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
   requiredBy: []
-  timestamp: '2021-05-22 10:59:11+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-05-22 11:12:35+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
 layout: document
