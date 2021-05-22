@@ -219,10 +219,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/funtional-graph.hpp
       title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/graph-template.hpp
       title: graph/graph-template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/graph-utility.hpp
       title: graph/graph-utility.hpp
     - icon: ':heavy_check_mark:'
@@ -739,22 +739,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -930,7 +930,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
       title: verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1313,7 +1313,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
       title: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
       title: verify/verify-yosupo-graph/yosupo-diameter.test.cpp
     - icon: ':heavy_check_mark:'
