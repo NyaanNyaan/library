@@ -2,35 +2,26 @@
 
 #include "./graph-template.hpp"
 
-// Depth of Rooted Tree
+// 一般のグラフのstからの距離！！！！
 // unvisited nodes : d = -1
 vector<int> Depth(const UnweightedGraph &g, int start = 0) {
-  vector<int> d(g.size(), -1);
-  auto dfs = [&](auto rec, int cur, int par = -1) -> void {
-    d[cur] = par == -1 ? 0 : d[par] + 1;
-    for (auto &dst : g[cur]) {
-      if (dst == par) continue;
-      rec(rec, dst, cur);
+  int n = g.size();
+  vector<int> ds(n, -1);
+  ds[start] = 0;
+  queue<int> q;
+  q.push(start);
+  while (!q.empty()) {
+    int c = q.front();
+    q.pop();
+    int dc = ds[c];
+    for (auto &d : g[c]) {
+      if (ds[d] == -1) {
+        ds[d] = dc + 1;
+        q.push(d);
+      }
     }
-  };
-  dfs(dfs, start);
-  return d;
-}
-
-// Depth of Rooted Weighted Tree
-// unvisited nodes : d = -1
-template <typename T>
-vector<T> Depth(const WeightedGraph<T> &g, int start = 0) {
-  vector<T> d(g.size(), -1);
-  auto dfs = [&](auto rec, int cur, T val, int par = -1) -> void {
-    d[cur] = val;
-    for (auto &dst : g[cur]) {
-      if (dst == par) continue;
-      rec(rec, dst, val + dst.cost, cur);
-    }
-  };
-  dfs(dfs, start, 0);
-  return d;
+  }
+  return ds;
 }
 
 // Diameter of Tree
