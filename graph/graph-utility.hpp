@@ -24,6 +24,22 @@ vector<int> Depth(const UnweightedGraph &g, int start = 0) {
   return ds;
 }
 
+// Depth of Rooted Weighted Tree
+// unvisited nodes : d = -1
+template <typename T>
+vector<T> Depth(const WeightedGraph<T> &g, int start = 0) {
+  vector<T> d(g.size(), -1);
+  auto dfs = [&](auto rec, int cur, T val, int par = -1) -> void {
+    d[cur] = val;
+    for (auto &dst : g[cur]) {
+      if (dst == par) continue;
+      rec(rec, dst, val + dst.cost, cur);
+    }
+  };
+  dfs(dfs, start, 0);
+  return d;
+}
+
 // Diameter of Tree
 // return value : { {u, v}, length }
 pair<pair<int, int>, int> Diameter(const UnweightedGraph &g) {
