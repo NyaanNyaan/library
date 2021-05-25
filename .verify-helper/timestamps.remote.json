@@ -62,6 +62,7 @@
 "verify/verify-unit-test/bitset-find-prev.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-unit-test/debug.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-unit-test/dijkstra.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-unit-test/dual-fps.test.cpp": "2021-05-25 16:58:09 +0900",
 "verify/verify-unit-test/factorize.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-unit-test/fast-inv-gcd.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-unit-test/fps.test.cpp": "2021-05-21 21:19:24 +0900",
@@ -263,6 +264,7 @@
 "verify/verify-yuki/yuki-1326.test.cpp": "2021-05-17 12:37:17 +0900",
 "verify/verify-yuki/yuki-1340-bitmatrix.test.cpp": "2021-05-15 20:18:13 +0900",
 "verify/verify-yuki/yuki-1340-semiring.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yuki/yuki-1504.test.cpp": "2021-05-25 16:58:09 +0900",
 "verify/verify-yuki/yuki-1510.test.cpp": "2021-05-15 01:48:03 +0900",
 "verify/verify-yuki/yuki-helloworld.test.cpp": "2021-05-04 19:34:35 +0900"
 }
