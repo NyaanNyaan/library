@@ -48,6 +48,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/sliding-window-minimum.hpp
       title: data-structure/sliding-window-minimum.hpp
+    - icon: ':warning:'
+      path: data-structure/slope-trick.hpp
+      title: data-structure/slope-trick.hpp
     - icon: ':heavy_check_mark:'
       path: data-structure/sparse-table.hpp
       title: data-structure/sparse-table.hpp
@@ -122,6 +125,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/differential-equation.hpp
       title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
+    - icon: ':heavy_check_mark:'
+      path: fps/dual-fps.hpp
+      title: "\u5468\u6CE2\u6570\u9818\u57DF\u3067\u306E\u5024\u3092\u4FDD\u6301\u3059\
+        \u308BFPS"
     - icon: ':heavy_check_mark:'
       path: fps/fast-multieval.hpp
       title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
@@ -1011,6 +1018,9 @@ data:
       path: verify/verify-unit-test/dijkstra.test.cpp
       title: verify/verify-unit-test/dijkstra.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/dual-fps.test.cpp
+      title: verify/verify-unit-test/dual-fps.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/factorize.test.cpp
       title: verify/verify-unit-test/factorize.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1629,6 +1639,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1340-semiring.test.cpp
       title: verify/verify-yuki/yuki-1340-semiring.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1504.test.cpp
+      title: verify/verify-yuki/yuki-1504.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1510.test.cpp
       title: verify/verify-yuki/yuki-1510.test.cpp

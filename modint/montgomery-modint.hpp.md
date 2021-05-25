@@ -37,6 +37,9 @@ data:
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dual-fps.test.cpp
+    title: verify/verify-unit-test/dual-fps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
@@ -289,6 +292,9 @@ data:
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1504.test.cpp
+    title: verify/verify-yuki/yuki-1504.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1510.test.cpp
     title: verify/verify-yuki/yuki-1510.test.cpp
   _isVerificationFailed: false
@@ -394,6 +400,7 @@ data:
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-yuki/yuki-1269.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp
@@ -420,6 +427,7 @@ data:
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp

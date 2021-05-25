@@ -42,6 +42,9 @@ data:
     title: "\u4E8C\u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dual-fps.test.cpp
+    title: verify/verify-unit-test/dual-fps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -110,6 +113,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1504.test.cpp
+    title: verify/verify-yuki/yuki-1504.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1510.test.cpp
     title: verify/verify-yuki/yuki-1510.test.cpp
@@ -189,9 +195,11 @@ data:
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp

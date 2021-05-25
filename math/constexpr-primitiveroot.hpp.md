@@ -1,11 +1,21 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: fps/dual-fps.hpp
+    title: "\u5468\u6CE2\u6570\u9818\u57DF\u3067\u306E\u5024\u3092\u4FDD\u6301\u3059\
+      \u308BFPS"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/dual-fps.test.cpp
+    title: verify/verify-unit-test/dual-fps.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/primitive-root.test.cpp
     title: verify/verify-unit-test/primitive-root.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1504.test.cpp
+    title: verify/verify-yuki/yuki-1504.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -33,11 +43,14 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: math/constexpr-primitiveroot.hpp
-  requiredBy: []
+  requiredBy:
+  - fps/dual-fps.hpp
   timestamp: '2021-05-18 09:24:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/dual-fps.test.cpp
 documentation_of: math/constexpr-primitiveroot.hpp
 layout: document
 redirect_from:
