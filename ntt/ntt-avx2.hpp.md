@@ -160,6 +160,9 @@ data:
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1145-frac.test.cpp
+    title: verify/verify-yuki/yuki-1145-frac.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
   - icon: ':heavy_check_mark:'
@@ -835,6 +838,7 @@ data:
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-1145-frac.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp

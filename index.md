@@ -156,6 +156,9 @@ data:
       path: fps/fps-famous-series.hpp
       title: "\u6709\u540D\u306A\u6570\u5217"
     - icon: ':heavy_check_mark:'
+      path: fps/fps-fraction.hpp
+      title: fps/fps-fraction.hpp
+    - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
     - icon: ':warning:'
@@ -1603,6 +1606,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1112.test.cpp
       title: verify/verify-yuki/yuki-1112.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1145-frac.test.cpp
+      title: verify/verify-yuki/yuki-1145-frac.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1145.test.cpp
       title: verify/verify-yuki/yuki-1145.test.cpp
