@@ -252,6 +252,7 @@
 "verify/verify-yuki/yuki-1080.test.cpp": "2021-05-10 21:37:34 +0900",
 "verify/verify-yuki/yuki-1112-sparse.test.cpp": "2021-05-10 21:37:34 +0900",
 "verify/verify-yuki/yuki-1112.test.cpp": "2021-05-10 21:37:34 +0900",
+"verify/verify-yuki/yuki-1145-frac.test.cpp": "2021-05-29 08:05:15 +0900",
 "verify/verify-yuki/yuki-1145.test.cpp": "2021-05-10 21:37:34 +0900",
 "verify/verify-yuki/yuki-1170.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yuki/yuki-1220.test.cpp": "2021-05-10 21:26:10 +0900",
