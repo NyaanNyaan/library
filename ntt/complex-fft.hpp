@@ -227,7 +227,7 @@ struct CooleyTukey {
   }
 
   template <unsigned int MOD>
-  static vector<int> karatsuba(const vector<int>& a, const vector<int>& b) {
+  static vector<int> multiply_15bit(const vector<int>& a, const vector<int>& b) {
     using u64 = unsigned long long;
     constexpr u64 B = 32000;
     int l = a.size() + b.size() - 1;

@@ -3,7 +3,7 @@
 #include "../../template/template.hpp"
 //
 #include "../../misc/fastio.hpp"
-#include "../../ntt/real-fft.hpp"
+#include "../../ntt/complex-fft.hpp"
 
 void Nyaan::solve() {
   using namespace ArbitraryModConvolution;

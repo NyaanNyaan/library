@@ -3,7 +3,7 @@
 #include "../../template/template.hpp"
 //
 #include "../../misc/rng.hpp"
-#include "../../ntt/real-fft.hpp"
+#include "../../ntt/complex-fft.hpp"
 
 using namespace Nyaan;
 
@@ -37,7 +37,8 @@ void is_same_negative(vi a, vi b) {
 }
 
 void is_same_mod(vi a, vi b) {
-  auto c1 = ArbitraryModConvolution::CooleyTukey::karatsuba<TEN(9) + 7>(a, b);
+  auto c1 =
+      ArbitraryModConvolution::CooleyTukey::multiply_15bit<TEN(9) + 7>(a, b);
   auto c2 = naive_mod(a, b, TEN(9) + 7);
   if (c1 != c2) {
     out(a);
