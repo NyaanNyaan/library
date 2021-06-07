@@ -1262,6 +1262,9 @@ data:
       path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
     - icon: ':heavy_check_mark:'
