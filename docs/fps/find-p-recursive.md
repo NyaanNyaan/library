@@ -24,7 +24,7 @@ $$a_{i+n} f_n(i) + \ldots + a_{i}f_0(i) \equiv 0 \pmod {p} $$
 
 - `kth_term_of_p_recursive(a, k)`
 
-エスパー用の関数。実用性は不明
+エスパー用の関数。
 
 ##### verification codeの出力(一部加筆)
 
