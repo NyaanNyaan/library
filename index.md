@@ -1655,6 +1655,9 @@ data:
       path: verify/verify-yuki/yuki-1510.test.cpp
       title: verify/verify-yuki/yuki-1510.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1533.test.cpp
+      title: verify/verify-yuki/yuki-1533.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-helloworld.test.cpp
       title: verify/verify-yuki/yuki-helloworld.test.cpp
 layout: toppage

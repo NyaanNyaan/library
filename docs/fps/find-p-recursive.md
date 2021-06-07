@@ -22,6 +22,10 @@ $$a_{i+n} f_n(i) + \ldots + a_{i}f_0(i) \equiv 0 \pmod {p} $$
 
 アルゴリズム初出の日本語記事は削除済みだが、[CF 1479E editorial](https://codeforces.com/blog/entry/87598)に関連するアルゴリズムの解説がある。
 
+- `kth_term_of_p_recursive(a, k)`
+
+エスパー用の関数。
+
 ##### verification codeの出力(一部加筆)
 
 P-recursiveの例も兼ねて貼る。

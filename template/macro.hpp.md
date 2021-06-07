@@ -823,6 +823,9 @@ data:
     path: verify/verify-yuki/yuki-1510.test.cpp
     title: verify/verify-yuki/yuki-1510.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1533.test.cpp
+    title: verify/verify-yuki/yuki-1533.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _isVerificationFailed: false
@@ -900,6 +903,7 @@ data:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yuki/yuki-1145-frac.test.cpp
+  - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yuki/yuki-0697.test.cpp
