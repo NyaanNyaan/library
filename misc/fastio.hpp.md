@@ -184,8 +184,8 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
+    path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
@@ -358,9 +358,9 @@ data:
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
 documentation_of: misc/fastio.hpp
 layout: document
 redirect_from:

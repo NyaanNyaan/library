@@ -5,8 +5,8 @@ data:
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
-    path: ntt/real-fft.hpp
-    title: ntt/real-fft.hpp
+    path: ntt/complex-fft.hpp
+    title: ntt/complex-fft.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -212,7 +212,7 @@ data:
     \ Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n  wt('\\\
     n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace\
     \ fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\nusing\
-    \ fastio::wtn;\n#line 2 \"ntt/real-fft.hpp\"\n\nnamespace ArbitraryModConvolution\
+    \ fastio::wtn;\n#line 2 \"ntt/complex-fft.hpp\"\n\nnamespace ArbitraryModConvolution\
     \ {\n\ntemplate <typename T>\nstruct Cp {\n  T x, y;\n  constexpr Cp() : x(0),\
     \ y(0) {}\n  constexpr Cp(T _x, T _y) : x(_x), y(_y) {}\n  constexpr inline Cp\
     \ operator+(const Cp& c) const {\n    return Cp(x + c.x, y + c.y);\n  }\n  constexpr\
@@ -297,7 +297,7 @@ data:
     \ long> u(l);\n    for (int i = 0; i < l; i++) {\n      if (i & 1) {\n       \
     \ u[i] = round(-b[i >> 1].x / (4.0 * M));\n      } else {\n        u[i] = round(b[i\
     \ >> 1].y / (4.0 * M));\n      }\n    }\n    return u;\n  }\n\n  template <unsigned\
-    \ int MOD>\n  static vector<int> karatsuba(const vector<int>& a, const vector<int>&\
+    \ int MOD>\n  static vector<int> multiply_15bit(const vector<int>& a, const vector<int>&\
     \ b) {\n    using u64 = unsigned long long;\n    constexpr u64 B = 32000;\n  \
     \  int l = a.size() + b.size() - 1;\n    int k = 2, M = 4;\n    while (M < l)\
     \ M <<= 1, ++k;\n    setw(k);\n    auto round = [](double x) -> u64 { return u64(x\
@@ -341,7 +341,7 @@ data:
     \ i++) {\n    wt(c[i], \" \\n\"[i == N + M - 2]);\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
     \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../misc/fastio.hpp\"\
-    \n#include \"../../ntt/real-fft.hpp\"\n\nvoid Nyaan::solve() {\n  using namespace\
+    \n#include \"../../ntt/complex-fft.hpp\"\n\nvoid Nyaan::solve() {\n  using namespace\
     \ ArbitraryModConvolution;\n  int N, M;\n  rd(N, M);\n  vector<int> a(N), b(M);\n\
     \  for (auto& x : a) rd(x);\n  for (auto& x : b) rd(x);\n\n  auto c = toom_3<1000000007>(a,\
     \ b);\n  // auto c = CooleyTukey::karatsuba<1000000007>(a, b);\n  for (int i =\
@@ -354,11 +354,11 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - misc/fastio.hpp
-  - ntt/real-fft.hpp
+  - ntt/complex-fft.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
   requiredBy: []
-  timestamp: '2021-05-15 20:18:13+09:00'
+  timestamp: '2021-06-07 19:17:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp

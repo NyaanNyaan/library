@@ -4,11 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/real-fft.test.cpp
-    title: verify/verify-unit-test/real-fft.test.cpp
+    path: verify/verify-unit-test/complex-fft.test.cpp
+    title: verify/verify-unit-test/complex-fft.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
+    path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
@@ -17,7 +17,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"ntt/real-fft.hpp\"\n\nnamespace ArbitraryModConvolution\
+  bundledCode: "#line 2 \"ntt/complex-fft.hpp\"\n\nnamespace ArbitraryModConvolution\
     \ {\n\ntemplate <typename T>\nstruct Cp {\n  T x, y;\n  constexpr Cp() : x(0),\
     \ y(0) {}\n  constexpr Cp(T _x, T _y) : x(_x), y(_y) {}\n  constexpr inline Cp\
     \ operator+(const Cp& c) const {\n    return Cp(x + c.x, y + c.y);\n  }\n  constexpr\
@@ -102,7 +102,7 @@ data:
     \ long> u(l);\n    for (int i = 0; i < l; i++) {\n      if (i & 1) {\n       \
     \ u[i] = round(-b[i >> 1].x / (4.0 * M));\n      } else {\n        u[i] = round(b[i\
     \ >> 1].y / (4.0 * M));\n      }\n    }\n    return u;\n  }\n\n  template <unsigned\
-    \ int MOD>\n  static vector<int> karatsuba(const vector<int>& a, const vector<int>&\
+    \ int MOD>\n  static vector<int> multiply_15bit(const vector<int>& a, const vector<int>&\
     \ b) {\n    using u64 = unsigned long long;\n    constexpr u64 B = 32000;\n  \
     \  int l = a.size() + b.size() - 1;\n    int k = 2, M = 4;\n    while (M < l)\
     \ M <<= 1, ++k;\n    setw(k);\n    auto round = [](double x) -> u64 { return u64(x\
@@ -223,14 +223,14 @@ data:
     \n    vector<long long> u(l);\n    for (int i = 0; i < l; i++) {\n      if (i\
     \ & 1) {\n        u[i] = round(-b[i >> 1].x / (4.0 * M));\n      } else {\n  \
     \      u[i] = round(b[i >> 1].y / (4.0 * M));\n      }\n    }\n    return u;\n\
-    \  }\n\n  template <unsigned int MOD>\n  static vector<int> karatsuba(const vector<int>&\
-    \ a, const vector<int>& b) {\n    using u64 = unsigned long long;\n    constexpr\
-    \ u64 B = 32000;\n    int l = a.size() + b.size() - 1;\n    int k = 2, M = 4;\n\
-    \    while (M < l) M <<= 1, ++k;\n    setw(k);\n    auto round = [](double x)\
-    \ -> u64 { return u64(x + 0.5); };\n\n    vector<C> AL(M), AH(M), BL(M), BH(M);\n\
-    \    for (int i = 0; i < (int)a.size(); i++) {\n      AL[i] = C{double(a[i] %\
-    \ B), double(a[i] / B)};\n    }\n    for (int i = 0; i < (int)b.size(); i++) {\n\
-    \      BL[i] = C{double(b[i] % B), double(b[i] / B)};\n    }\n\n    fft_real(AL,\
+    \  }\n\n  template <unsigned int MOD>\n  static vector<int> multiply_15bit(const\
+    \ vector<int>& a, const vector<int>& b) {\n    using u64 = unsigned long long;\n\
+    \    constexpr u64 B = 32000;\n    int l = a.size() + b.size() - 1;\n    int k\
+    \ = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n    setw(k);\n    auto round =\
+    \ [](double x) -> u64 { return u64(x + 0.5); };\n\n    vector<C> AL(M), AH(M),\
+    \ BL(M), BH(M);\n    for (int i = 0; i < (int)a.size(); i++) {\n      AL[i] =\
+    \ C{double(a[i] % B), double(a[i] / B)};\n    }\n    for (int i = 0; i < (int)b.size();\
+    \ i++) {\n      BL[i] = C{double(b[i] % B), double(b[i] / B)};\n    }\n\n    fft_real(AL,\
     \ AH, k);\n    fft_real(BL, BH, k);\n\n    for (int i = 0; i < M; i++) {\n   \
     \   C tmp = AL[i] * BL[i] + (AH[i] * BH[i]).rotl();\n      BH[i] = AL[i] * BH[i]\
     \ + (AH[i] * BL[i]).rotl();\n      BL[i] = tmp;\n    }\n\n    ifft(BL, k);\n \
@@ -262,18 +262,18 @@ data:
     \  return c;\n}\n}  // namespace ArbitraryModConvolution\n"
   dependsOn: []
   isVerificationFile: false
-  path: ntt/real-fft.hpp
+  path: ntt/complex-fft.hpp
   requiredBy: []
-  timestamp: '2021-05-04 09:32:16+09:00'
+  timestamp: '2021-06-07 19:17:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/real-fft.test.cpp
+  - verify/verify-unit-test/complex-fft.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-karatsuba.test.cpp
-documentation_of: ntt/real-fft.hpp
+documentation_of: ntt/complex-fft.hpp
 layout: document
 redirect_from:
-- /library/ntt/real-fft.hpp
-- /library/ntt/real-fft.hpp.html
-title: ntt/real-fft.hpp
+- /library/ntt/complex-fft.hpp
+- /library/ntt/complex-fft.hpp.html
+title: ntt/complex-fft.hpp
 ---

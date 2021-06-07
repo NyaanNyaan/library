@@ -5,8 +5,8 @@ data:
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
-    path: ntt/real-fft.hpp
-    title: ntt/real-fft.hpp
+    path: ntt/complex-fft.hpp
+    title: ntt/complex-fft.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -35,8 +35,8 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/real-fft.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+  bundledCode: "#line 1 \"verify/verify-unit-test/complex-fft.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -171,7 +171,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/real-fft.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/complex-fft.test.cpp\"\
     \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
     \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
@@ -189,7 +189,7 @@ data:
     \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
     \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
     using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"ntt/real-fft.hpp\"\n\nnamespace ArbitraryModConvolution {\n\ntemplate\
+    #line 2 \"ntt/complex-fft.hpp\"\n\nnamespace ArbitraryModConvolution {\n\ntemplate\
     \ <typename T>\nstruct Cp {\n  T x, y;\n  constexpr Cp() : x(0), y(0) {}\n  constexpr\
     \ Cp(T _x, T _y) : x(_x), y(_y) {}\n  constexpr inline Cp operator+(const Cp&\
     \ c) const {\n    return Cp(x + c.x, y + c.y);\n  }\n  constexpr inline Cp operator-(const\
@@ -273,14 +273,14 @@ data:
     \n    vector<long long> u(l);\n    for (int i = 0; i < l; i++) {\n      if (i\
     \ & 1) {\n        u[i] = round(-b[i >> 1].x / (4.0 * M));\n      } else {\n  \
     \      u[i] = round(b[i >> 1].y / (4.0 * M));\n      }\n    }\n    return u;\n\
-    \  }\n\n  template <unsigned int MOD>\n  static vector<int> karatsuba(const vector<int>&\
-    \ a, const vector<int>& b) {\n    using u64 = unsigned long long;\n    constexpr\
-    \ u64 B = 32000;\n    int l = a.size() + b.size() - 1;\n    int k = 2, M = 4;\n\
-    \    while (M < l) M <<= 1, ++k;\n    setw(k);\n    auto round = [](double x)\
-    \ -> u64 { return u64(x + 0.5); };\n\n    vector<C> AL(M), AH(M), BL(M), BH(M);\n\
-    \    for (int i = 0; i < (int)a.size(); i++) {\n      AL[i] = C{double(a[i] %\
-    \ B), double(a[i] / B)};\n    }\n    for (int i = 0; i < (int)b.size(); i++) {\n\
-    \      BL[i] = C{double(b[i] % B), double(b[i] / B)};\n    }\n\n    fft_real(AL,\
+    \  }\n\n  template <unsigned int MOD>\n  static vector<int> multiply_15bit(const\
+    \ vector<int>& a, const vector<int>& b) {\n    using u64 = unsigned long long;\n\
+    \    constexpr u64 B = 32000;\n    int l = a.size() + b.size() - 1;\n    int k\
+    \ = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n    setw(k);\n    auto round =\
+    \ [](double x) -> u64 { return u64(x + 0.5); };\n\n    vector<C> AL(M), AH(M),\
+    \ BL(M), BH(M);\n    for (int i = 0; i < (int)a.size(); i++) {\n      AL[i] =\
+    \ C{double(a[i] % B), double(a[i] / B)};\n    }\n    for (int i = 0; i < (int)b.size();\
+    \ i++) {\n      BL[i] = C{double(b[i] % B), double(b[i] / B)};\n    }\n\n    fft_real(AL,\
     \ AH, k);\n    fft_real(BL, BH, k);\n\n    for (int i = 0; i < M; i++) {\n   \
     \   C tmp = AL[i] * BL[i] + (AH[i] * BH[i]).rotl();\n      BH[i] = AL[i] * BH[i]\
     \ + (AH[i] * BL[i]).rotl();\n      BL[i] = tmp;\n    }\n\n    ifft(BL, k);\n \
@@ -309,7 +309,7 @@ data:
     \ r4;\n    r1 -= r3;\n\n    long long ret = r4 % MOD * 1048576;\n    ret += r3\
     \ % MOD * 1024 + r2;\n    ret = ret % MOD * 1048576;\n    ret += r1 % MOD * 1024\
     \ + r0;\n    ret %= MOD;\n    if (ret < 0) ret += MOD;\n\n    c[i] = ret;\n  }\n\
-    \  return c;\n}\n}  // namespace ArbitraryModConvolution\n#line 7 \"verify/verify-unit-test/real-fft.test.cpp\"\
+    \  return c;\n}\n}  // namespace ArbitraryModConvolution\n#line 7 \"verify/verify-unit-test/complex-fft.test.cpp\"\
     \n\nusing namespace Nyaan;\n\nvl naive(vi a, vi b) {\n  int n = sz(a), m = sz(b);\n\
     \  vl c(n + m - 1);\n  rep(i, n) rep(j, m) { c[i + j] += 1LL * a[i] * b[j]; }\n\
     \  return c;\n}\n\nvi naive_mod(vi a, vi b, int mod) {\n  int n = sz(a), m = sz(b);\n\
@@ -318,7 +318,7 @@ data:
     \ a, vi b) {\n  auto c1 = ArbitraryModConvolution::CooleyTukey::multiply(a, b);\n\
     \  auto c2 = naive(a, b);\n  if (c1 != c2) {\n    out(sz(a), sz(b));\n    rep(i,\
     \ sz(c1)) {\n      if (c1[i] != c2[i]) out(i, c1[i], c2[i]);\n    }\n    exit(1);\n\
-    \  }\n}\n\nvoid is_same_mod(vi a, vi b) {\n  auto c1 = ArbitraryModConvolution::CooleyTukey::karatsuba<TEN(9)\
+    \  }\n}\n\nvoid is_same_mod(vi a, vi b) {\n  auto c1 =\n      ArbitraryModConvolution::CooleyTukey::multiply_15bit<TEN(9)\
     \ + 7>(a, b);\n  auto c2 = naive_mod(a, b, TEN(9) + 7);\n  if (c1 != c2) {\n \
     \   out(a);\n    out(b);\n    out(c1);\n    out(c2);\n    exit(1);\n  }\n}\n\n\
     void test() {\n  // negative\n  rep(loop, 100) {\n    vi a(randint(1, TEN(3)));\n\
@@ -330,15 +330,15 @@ data:
     \n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include\
-    \ \"../../ntt/real-fft.hpp\"\n\nusing namespace Nyaan;\n\nvl naive(vi a, vi b)\
-    \ {\n  int n = sz(a), m = sz(b);\n  vl c(n + m - 1);\n  rep(i, n) rep(j, m) {\
-    \ c[i + j] += 1LL * a[i] * b[j]; }\n  return c;\n}\n\nvi naive_mod(vi a, vi b,\
-    \ int mod) {\n  int n = sz(a), m = sz(b);\n  vi c(n + m - 1);\n  rep(i, n) rep(j,\
-    \ m) {\n    ll x = c[i + j] + 1LL * a[i] * b[j];\n    c[i + j] = x % mod;\n  }\n\
-    \  return c;\n}\n\nvoid is_same_negative(vi a, vi b) {\n  auto c1 = ArbitraryModConvolution::CooleyTukey::multiply(a,\
+    \ \"../../ntt/complex-fft.hpp\"\n\nusing namespace Nyaan;\n\nvl naive(vi a, vi\
+    \ b) {\n  int n = sz(a), m = sz(b);\n  vl c(n + m - 1);\n  rep(i, n) rep(j, m)\
+    \ { c[i + j] += 1LL * a[i] * b[j]; }\n  return c;\n}\n\nvi naive_mod(vi a, vi\
+    \ b, int mod) {\n  int n = sz(a), m = sz(b);\n  vi c(n + m - 1);\n  rep(i, n)\
+    \ rep(j, m) {\n    ll x = c[i + j] + 1LL * a[i] * b[j];\n    c[i + j] = x % mod;\n\
+    \  }\n  return c;\n}\n\nvoid is_same_negative(vi a, vi b) {\n  auto c1 = ArbitraryModConvolution::CooleyTukey::multiply(a,\
     \ b);\n  auto c2 = naive(a, b);\n  if (c1 != c2) {\n    out(sz(a), sz(b));\n \
     \   rep(i, sz(c1)) {\n      if (c1[i] != c2[i]) out(i, c1[i], c2[i]);\n    }\n\
-    \    exit(1);\n  }\n}\n\nvoid is_same_mod(vi a, vi b) {\n  auto c1 = ArbitraryModConvolution::CooleyTukey::karatsuba<TEN(9)\
+    \    exit(1);\n  }\n}\n\nvoid is_same_mod(vi a, vi b) {\n  auto c1 =\n      ArbitraryModConvolution::CooleyTukey::multiply_15bit<TEN(9)\
     \ + 7>(a, b);\n  auto c2 = naive_mod(a, b, TEN(9) + 7);\n  if (c1 != c2) {\n \
     \   out(a);\n    out(b);\n    out(c1);\n    out(c2);\n    exit(1);\n  }\n}\n\n\
     void test() {\n  // negative\n  rep(loop, 100) {\n    vi a(randint(1, TEN(3)));\n\
@@ -356,17 +356,17 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - misc/rng.hpp
-  - ntt/real-fft.hpp
+  - ntt/complex-fft.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/real-fft.test.cpp
+  path: verify/verify-unit-test/complex-fft.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-06-07 19:17:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/real-fft.test.cpp
+documentation_of: verify/verify-unit-test/complex-fft.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/real-fft.test.cpp
-- /verify/verify/verify-unit-test/real-fft.test.cpp.html
-title: verify/verify-unit-test/real-fft.test.cpp
+- /verify/verify/verify-unit-test/complex-fft.test.cpp
+- /verify/verify/verify-unit-test/complex-fft.test.cpp.html
+title: verify/verify-unit-test/complex-fft.test.cpp
 ---
