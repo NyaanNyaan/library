@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename T>
 struct BinaryLifting {
   using Data = pair<int, T>;
@@ -55,6 +53,23 @@ struct BinaryLifting {
     for (int k = LOG - 1; k >= 0; k--) {
       int nxt = table[thres][k].first;
       if (nxt != -1 && nxt <= t) {
+        d = d + table[thres][k].second;
+        thres = nxt;
+        times += 1LL << k;
+      }
+    }
+    return make_pair(times, Data(thres, d));
+  }
+
+  // assuming graph is DAG ( edge(u, v) <-> u < v )
+  // find min j | j >= t, path from i to j exists
+  inline pair<uint64_t, Data> binary_search2(int i, int t) {
+    int thres = i;
+    T d = I;
+    uint64_t times = 0;
+    for (int k = LOG - 1; k >= 0; k--) {
+      int nxt = table[thres][k].first;
+      if (nxt != -1 && nxt >= t) {
         d = d + table[thres][k].second;
         thres = nxt;
         times += 1LL << k;
