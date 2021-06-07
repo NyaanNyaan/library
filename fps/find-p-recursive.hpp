@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../matrix/linear-equation.hpp"
 #include "../matrix/polynomial-matrix-prefix-prod.hpp"
 #include "formal-power-series.hpp"
-#include "../matrix/linear-equation.hpp"
 
 // return polynomial coefficient s.t. sum_{j=k...0} f_j(i) a_{i+j} = 0
 // (In more details, read verification code.)
@@ -41,7 +41,7 @@ vector<FormalPowerSeries<mint>> find_p_recursive(vector<mint>& a, int d) {
   return res;
 }
 
-template<typename mint>
+template <typename mint>
 mint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {
   if (k < (int)a.size()) return a[k];
   auto fs = find_p_recursive(a, d);
@@ -57,6 +57,24 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {
   mint res = (polynomial_matrix_prod(m, k - deg + 1) * a0)[0][0];
   res /= polynomial_matrix_prod(denom, k - deg + 1)[0][0];
   return res;
+}
+
+template <typename mint>
+mint kth_term_of_p_recursive(vector<mint>& a, long long k) {
+  if (k < (int)a.size()) return a[k];
+  if (all_of(begin(a), end(a), [](mint x) { return x == mint(0); })) return 0;
+
+  int n = a.size() - 1;
+  vector<mint> b{begin(a), end(a) - 1};
+
+  for (int d = 0;; d++) {
+    if ((n + 2) / (d + 2) <= 1) break;
+    if (kth_term_of_p_recursive(b, n, d) == a.back()) {
+      return kth_term_of_p_recursive(a, k, d);
+    }
+  }
+  cerr << "Failed." << endl;
+  exit(1);
 }
 
 /**
