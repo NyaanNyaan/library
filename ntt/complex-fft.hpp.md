@@ -119,26 +119,7 @@ data:
     \ round(BH[i].y)) % MOD * B % MOD;\n      int x3 = u64(round(BL[i].y)) % MOD *\
     \ (B * B % MOD) % MOD;\n      if ((x1 += x2) >= (int)MOD) x1 -= MOD;\n      if\
     \ ((x1 += x3) >= (int)MOD) x1 -= MOD;\n      u[i] = x1;\n    }\n    return u;\n\
-    \  }\n};\nvector<C> CooleyTukey::w;\n\n// naive Toom-3\ntemplate <unsigned int\
-    \ MOD>\nvector<int> toom_3(const vector<int>& a, const vector<int>& b) {\n  auto\
-    \ precalc = [](const vector<int>& _a) -> array<vector<int>, 5> {\n    int n =\
-    \ _a.size();\n    vector<int> p0(n), p1(n), pm1(n), pm2(n), pinf(n);\n    for\
-    \ (int i = 0; i < n; i++) {\n      int m0 = _a[i] & 1023;\n      int m1 = (_a[i]\
-    \ >> 10) & 1023;\n      int m2 = (_a[i] >> 20) & 1023;\n      p0[i] = m0;\n  \
-    \    p1[i] = m0 + m1 + m2;\n      pm1[i] = m0 - m1 + m2;\n      pm2[i] = m0 -\
-    \ 2 * m1 + 4 * m2;\n      pinf[i] = m2;\n    }\n    return {{p0, p1, pm1, pm2,\
-    \ pinf}};\n  };\n  auto [a0, a1, am1, am2, ainf] = precalc(a);\n  auto [b0, b1,\
-    \ bm1, bm2, binf] = precalc(b);\n  auto c0 = CooleyTukey::multiply(a0, b0);\n\
-    \  auto c1 = CooleyTukey::multiply(a1, b1);\n  auto cm1 = CooleyTukey::multiply(am1,\
-    \ bm1);\n  auto cm2 = CooleyTukey::multiply(am2, bm2);\n  auto cinf = CooleyTukey::multiply(ainf,\
-    \ binf);\n\n  vector<int> c(c0.size());\n  for (int i = 0; i < (int)c.size();\
-    \ i++) {\n    long long r0 = c0[i];\n    long long r4 = cinf[i];\n    long long\
-    \ r3 = (cm2[i] - c1[i]) / 3;\n    long long r1 = (c1[i] - cm1[i]) / 2;\n    long\
-    \ long r2 = cm1[i] - c0[i];\n    r3 = (r2 - r3) / 2 + r4 * 2;\n    r2 += r1 -\
-    \ r4;\n    r1 -= r3;\n\n    long long ret = r4 % MOD * 1048576;\n    ret += r3\
-    \ % MOD * 1024 + r2;\n    ret = ret % MOD * 1048576;\n    ret += r1 % MOD * 1024\
-    \ + r0;\n    ret %= MOD;\n    if (ret < 0) ret += MOD;\n\n    c[i] = ret;\n  }\n\
-    \  return c;\n}\n}  // namespace ArbitraryModConvolution\n"
+    \  }\n};\nvector<C> CooleyTukey::w;\n\n}  // namespace ArbitraryModConvolution\n"
   code: "#pragma once\n\nnamespace ArbitraryModConvolution {\n\ntemplate <typename\
     \ T>\nstruct Cp {\n  T x, y;\n  constexpr Cp() : x(0), y(0) {}\n  constexpr Cp(T\
     \ _x, T _y) : x(_x), y(_y) {}\n  constexpr inline Cp operator+(const Cp& c) const\
@@ -240,31 +221,13 @@ data:
     \      int x2 = u64(round(BH[i].x) + round(BH[i].y)) % MOD * B % MOD;\n      int\
     \ x3 = u64(round(BL[i].y)) % MOD * (B * B % MOD) % MOD;\n      if ((x1 += x2)\
     \ >= (int)MOD) x1 -= MOD;\n      if ((x1 += x3) >= (int)MOD) x1 -= MOD;\n    \
-    \  u[i] = x1;\n    }\n    return u;\n  }\n};\nvector<C> CooleyTukey::w;\n\n//\
-    \ naive Toom-3\ntemplate <unsigned int MOD>\nvector<int> toom_3(const vector<int>&\
-    \ a, const vector<int>& b) {\n  auto precalc = [](const vector<int>& _a) -> array<vector<int>,\
-    \ 5> {\n    int n = _a.size();\n    vector<int> p0(n), p1(n), pm1(n), pm2(n),\
-    \ pinf(n);\n    for (int i = 0; i < n; i++) {\n      int m0 = _a[i] & 1023;\n\
-    \      int m1 = (_a[i] >> 10) & 1023;\n      int m2 = (_a[i] >> 20) & 1023;\n\
-    \      p0[i] = m0;\n      p1[i] = m0 + m1 + m2;\n      pm1[i] = m0 - m1 + m2;\n\
-    \      pm2[i] = m0 - 2 * m1 + 4 * m2;\n      pinf[i] = m2;\n    }\n    return\
-    \ {{p0, p1, pm1, pm2, pinf}};\n  };\n  auto [a0, a1, am1, am2, ainf] = precalc(a);\n\
-    \  auto [b0, b1, bm1, bm2, binf] = precalc(b);\n  auto c0 = CooleyTukey::multiply(a0,\
-    \ b0);\n  auto c1 = CooleyTukey::multiply(a1, b1);\n  auto cm1 = CooleyTukey::multiply(am1,\
-    \ bm1);\n  auto cm2 = CooleyTukey::multiply(am2, bm2);\n  auto cinf = CooleyTukey::multiply(ainf,\
-    \ binf);\n\n  vector<int> c(c0.size());\n  for (int i = 0; i < (int)c.size();\
-    \ i++) {\n    long long r0 = c0[i];\n    long long r4 = cinf[i];\n    long long\
-    \ r3 = (cm2[i] - c1[i]) / 3;\n    long long r1 = (c1[i] - cm1[i]) / 2;\n    long\
-    \ long r2 = cm1[i] - c0[i];\n    r3 = (r2 - r3) / 2 + r4 * 2;\n    r2 += r1 -\
-    \ r4;\n    r1 -= r3;\n\n    long long ret = r4 % MOD * 1048576;\n    ret += r3\
-    \ % MOD * 1024 + r2;\n    ret = ret % MOD * 1048576;\n    ret += r1 % MOD * 1024\
-    \ + r0;\n    ret %= MOD;\n    if (ret < 0) ret += MOD;\n\n    c[i] = ret;\n  }\n\
-    \  return c;\n}\n}  // namespace ArbitraryModConvolution\n"
+    \  u[i] = x1;\n    }\n    return u;\n  }\n};\nvector<C> CooleyTukey::w;\n\n} \
+    \ // namespace ArbitraryModConvolution\n"
   dependsOn: []
   isVerificationFile: false
   path: ntt/complex-fft.hpp
   requiredBy: []
-  timestamp: '2021-06-07 19:17:54+09:00'
+  timestamp: '2021-06-08 22:54:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/complex-fft.test.cpp
