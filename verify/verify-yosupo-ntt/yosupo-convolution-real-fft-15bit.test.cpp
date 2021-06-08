@@ -13,7 +13,6 @@ void Nyaan::solve() {
   for (auto& x : a) rd(x);
   for (auto& x : b) rd(x);
 
-  // auto c = toom_3<1000000007>(a, b);
   auto c = CooleyTukey::multiply_15bit<1000000007>(a, b);
   for (int i = 0; i < N + M - 1; i++) {
     wt(c[i], " \n"[i == N + M - 2]);
