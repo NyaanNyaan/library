@@ -280,42 +280,63 @@ data:
     \ y = 2; y < (1 << k); y <<= 1) {\n      for (; i < 2 * y; i += 2) {\n       \
     \ int j = i ^ (y - 1);\n        AH[i] = (AL[j].conj() - AL[i]).rotl();\n     \
     \   AL[i] = (AL[j].conj() + AL[i]);\n        AH[j] = AH[i].conj();\n        AL[j]\
-    \ = AL[i].conj();\n      }\n    }\n  }\n\n  // naive convolution\n  template <typename\
-    \ T>\n  static vector<long long> multiply(const vector<T>& s, const vector<T>&\
-    \ t) {\n    int l = s.size() + t.size() - 1;\n    int k = 2, M = 4;\n    while\
-    \ (M < l) M <<= 1, ++k;\n    setw(k);\n    auto round = [](double x) -> long long\
-    \ {\n      return (long long)(x + (x > 0 ? 0.5 : -0.5));\n    };\n\n    vector<C>\
-    \ a(M);\n    for (int i = 0; i < (int)s.size(); i++) a[i].x = s[i];\n    for (int\
-    \ i = 0; i < (int)t.size(); i++) a[i].y = t[i];\n    fft(a, k);\n\n    a[0].y\
-    \ = 4.0 * a[0].x * a[0].y;\n    a[1].y = 4.0 * a[1].x * a[1].y;\n    a[0].x =\
-    \ a[1].x = 0.0;\n    for (int i = 2; i < M; i += 2) {\n      int c = 1 << (31\
-    \ - __builtin_clz(i));\n      int j = i ^ (c - 1);\n      a[i] = (a[i] + a[j].conj())\
-    \ * (a[i] - a[j].conj());\n      a[j] = -a[i].conj();\n    }\n\n    vector<C>\
-    \ b(M / 2);\n    for (int j = 0; j < M / 2; j++) {\n      C tmp1 = a[j * 2 + 0]\
-    \ + a[j * 2 + 1];\n      C tmp2 = (a[j * 2 + 0] - a[j * 2 + 1]) * w[j].conj();\n\
-    \      b[j] = tmp1 + tmp2.rotl();\n    }\n    ifft(b, k - 1);\n\n    vector<long\
-    \ long> u(l);\n    for (int i = 0; i < l; i++) {\n      if (i & 1) {\n       \
-    \ u[i] = round(-b[i >> 1].x / (4.0 * M));\n      } else {\n        u[i] = round(b[i\
-    \ >> 1].y / (4.0 * M));\n      }\n    }\n    return u;\n  }\n\n  template <unsigned\
-    \ int MOD>\n  static vector<int> multiply_15bit(const vector<int>& a, const vector<int>&\
-    \ b) {\n    using u64 = unsigned long long;\n    constexpr u64 B = 32000;\n  \
-    \  int l = a.size() + b.size() - 1;\n    int k = 2, M = 4;\n    while (M < l)\
-    \ M <<= 1, ++k;\n    setw(k);\n    auto round = [](double x) -> u64 { return u64(x\
-    \ + 0.5); };\n\n    vector<C> AL(M), AH(M), BL(M), BH(M);\n    for (int i = 0;\
-    \ i < (int)a.size(); i++) {\n      AL[i] = C{double(a[i] % B), double(a[i] / B)};\n\
-    \    }\n    for (int i = 0; i < (int)b.size(); i++) {\n      BL[i] = C{double(b[i]\
-    \ % B), double(b[i] / B)};\n    }\n\n    fft_real(AL, AH, k);\n    fft_real(BL,\
-    \ BH, k);\n\n    for (int i = 0; i < M; i++) {\n      C tmp = AL[i] * BL[i] +\
-    \ (AH[i] * BH[i]).rotl();\n      BH[i] = AL[i] * BH[i] + (AH[i] * BL[i]).rotl();\n\
-    \      BL[i] = tmp;\n    }\n\n    ifft(BL, k);\n    ifft(BH, k);\n\n    vector<int>\
-    \ u(l);\n    double im = 1.0 / (4.0 * M);\n    for (int i = 0; i < l; i++) {\n\
-    \      BL[i].x *= im, BL[i].y *= im;\n      BH[i].x *= im, BH[i].y *= im;\n  \
-    \    int x1 = u64(round(BL[i].x)) % MOD;\n      int x2 = u64(round(BH[i].x) +\
-    \ round(BH[i].y)) % MOD * B % MOD;\n      int x3 = u64(round(BL[i].y)) % MOD *\
-    \ (B * B % MOD) % MOD;\n      if ((x1 += x2) >= (int)MOD) x1 -= MOD;\n      if\
-    \ ((x1 += x3) >= (int)MOD) x1 -= MOD;\n      u[i] = x1;\n    }\n    return u;\n\
-    \  }\n};\nvector<C> CooleyTukey::w;\n\n}  // namespace ArbitraryModConvolution\n\
-    #line 7 \"verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp\"\
+    \ = AL[i].conj();\n      }\n    }\n  }\n\n  // naive convolution for int\n  template\
+    \ <typename T, enable_if_t<is_integral<T>::value, nullptr_t> = nullptr>\n  static\
+    \ vector<long long> multiply(const vector<T>& s, const vector<T>& t) {\n    int\
+    \ l = s.size() + t.size() - 1;\n    if (min(s.size(), t.size()) <= 40) {\n   \
+    \   vector<long long> u(l);\n      for (int i = 0; i < (int)s.size(); i++) {\n\
+    \        for (int j = 0; j < (int)t.size(); j++) u[i + j] += 1LL * s[i] * t[j];\n\
+    \      }\n      return u;\n    }\n\n    int k = 2, M = 4;\n    while (M < l) M\
+    \ <<= 1, ++k;\n    setw(k);\n    auto round = [](double x) -> long long {\n  \
+    \    return (long long)(x + (x > 0 ? 0.5 : -0.5));\n    };\n\n    vector<C> a(M);\n\
+    \    for (int i = 0; i < (int)s.size(); i++) a[i].x = s[i];\n    for (int i =\
+    \ 0; i < (int)t.size(); i++) a[i].y = t[i];\n    fft(a, k);\n\n    a[0].y = 4.0\
+    \ * a[0].x * a[0].y;\n    a[1].y = 4.0 * a[1].x * a[1].y;\n    a[0].x = a[1].x\
+    \ = 0.0;\n    for (int i = 2; i < M; i += 2) {\n      int c = 1 << (31 - __builtin_clz(i));\n\
+    \      int j = i ^ (c - 1);\n      a[i] = (a[i] + a[j].conj()) * (a[i] - a[j].conj());\n\
+    \      a[j] = -a[i].conj();\n    }\n\n    vector<C> b(M / 2);\n    for (int j\
+    \ = 0; j < M / 2; j++) {\n      C tmp1 = a[j * 2 + 0] + a[j * 2 + 1];\n      C\
+    \ tmp2 = (a[j * 2 + 0] - a[j * 2 + 1]) * w[j].conj();\n      b[j] = tmp1 + tmp2.rotl();\n\
+    \    }\n    ifft(b, k - 1);\n\n    vector<long long> u(l);\n    for (int i = 0;\
+    \ i < l; i++) {\n      if (i & 1) {\n        u[i] = round(-b[i >> 1].x / (4.0\
+    \ * M));\n      } else {\n        u[i] = round(b[i >> 1].y / (4.0 * M));\n   \
+    \   }\n    }\n    return u;\n  }\n\n  static vector<double> multiply(const vector<double>&\
+    \ s,\n                                 const vector<double>& t) {\n    int l =\
+    \ s.size() + t.size() - 1;\n    if (min(s.size(), t.size()) <= 40) {\n      vector<double>\
+    \ u(l);\n      for (int i = 0; i < (int)s.size(); i++) {\n        for (int j =\
+    \ 0; j < (int)t.size(); j++) u[i + j] += s[i] * t[j];\n      }\n      return u;\n\
+    \    }\n\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n    setw(k);\n\
+    \n    vector<C> a(M);\n    for (int i = 0; i < (int)s.size(); i++) a[i].x = s[i];\n\
+    \    for (int i = 0; i < (int)t.size(); i++) a[i].y = t[i];\n    fft(a, k);\n\n\
+    \    a[0].y = 4.0 * a[0].x * a[0].y;\n    a[1].y = 4.0 * a[1].x * a[1].y;\n  \
+    \  a[0].x = a[1].x = 0.0;\n    for (int i = 2; i < M; i += 2) {\n      int c =\
+    \ 1 << (31 - __builtin_clz(i));\n      int j = i ^ (c - 1);\n      a[i] = (a[i]\
+    \ + a[j].conj()) * (a[i] - a[j].conj());\n      a[j] = -a[i].conj();\n    }\n\n\
+    \    vector<C> b(M / 2);\n    for (int j = 0; j < M / 2; j++) {\n      C tmp1\
+    \ = a[j * 2 + 0] + a[j * 2 + 1];\n      C tmp2 = (a[j * 2 + 0] - a[j * 2 + 1])\
+    \ * w[j].conj();\n      b[j] = tmp1 + tmp2.rotl();\n    }\n    ifft(b, k - 1);\n\
+    \n    vector<double> u(l);\n    for (int i = 0; i < l; i++) {\n      if (i & 1)\
+    \ {\n        u[i] = -b[i >> 1].x / (4.0 * M);\n      } else {\n        u[i] =\
+    \ b[i >> 1].y / (4.0 * M);\n      }\n    }\n    return u;\n  }\n\n  template <unsigned\
+    \ int MOD>\n  static vector<int> multiply_15bit(const vector<int>& a,\n      \
+    \                              const vector<int>& b) {\n    using u64 = unsigned\
+    \ long long;\n    constexpr u64 B = 32000;\n    int l = a.size() + b.size() -\
+    \ 1;\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n    setw(k);\n \
+    \   auto round = [](double x) -> u64 { return u64(x + 0.5); };\n\n    vector<C>\
+    \ AL(M), AH(M), BL(M), BH(M);\n    for (int i = 0; i < (int)a.size(); i++) {\n\
+    \      AL[i] = C{double(a[i] % B), double(a[i] / B)};\n    }\n    for (int i =\
+    \ 0; i < (int)b.size(); i++) {\n      BL[i] = C{double(b[i] % B), double(b[i]\
+    \ / B)};\n    }\n\n    fft_real(AL, AH, k);\n    fft_real(BL, BH, k);\n\n    for\
+    \ (int i = 0; i < M; i++) {\n      C tmp = AL[i] * BL[i] + (AH[i] * BH[i]).rotl();\n\
+    \      BH[i] = AL[i] * BH[i] + (AH[i] * BL[i]).rotl();\n      BL[i] = tmp;\n \
+    \   }\n\n    ifft(BL, k);\n    ifft(BH, k);\n\n    vector<int> u(l);\n    double\
+    \ im = 1.0 / (4.0 * M);\n    for (int i = 0; i < l; i++) {\n      BL[i].x *= im,\
+    \ BL[i].y *= im;\n      BH[i].x *= im, BH[i].y *= im;\n      int x1 = u64(round(BL[i].x))\
+    \ % MOD;\n      int x2 = u64(round(BH[i].x) + round(BH[i].y)) % MOD * B % MOD;\n\
+    \      int x3 = u64(round(BL[i].y)) % MOD * (B * B % MOD) % MOD;\n      if ((x1\
+    \ += x2) >= (int)MOD) x1 -= MOD;\n      if ((x1 += x3) >= (int)MOD) x1 -= MOD;\n\
+    \      u[i] = x1;\n    }\n    return u;\n  }\n};\nvector<C> CooleyTukey::w;\n\n\
+    }  // namespace ArbitraryModConvolution\n#line 7 \"verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp\"\
     \n\nnamespace ArbitraryModConvolution {\n\n// naive Toom-3\ntemplate <unsigned\
     \ int MOD>\nvector<int> toom_3(const vector<int>& a, const vector<int>& b) {\n\
     \  auto precalc = [](const vector<int>& _a) -> array<vector<int>, 5> {\n    int\
@@ -380,7 +401,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
   requiredBy: []
-  timestamp: '2021-06-08 22:54:13+09:00'
+  timestamp: '2021-06-10 13:30:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
