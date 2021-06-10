@@ -181,10 +181,18 @@ struct CooleyTukey {
     }
   }
 
-  // naive convolution
-  template <typename T>
+  // naive convolution for int
+  template <typename T, enable_if_t<is_integral<T>::value, nullptr_t> = nullptr>
   static vector<long long> multiply(const vector<T>& s, const vector<T>& t) {
     int l = s.size() + t.size() - 1;
+    if (min(s.size(), t.size()) <= 40) {
+      vector<long long> u(l);
+      for (int i = 0; i < (int)s.size(); i++) {
+        for (int j = 0; j < (int)t.size(); j++) u[i + j] += 1LL * s[i] * t[j];
+      }
+      return u;
+    }
+
     int k = 2, M = 4;
     while (M < l) M <<= 1, ++k;
     setw(k);
@@ -226,8 +234,58 @@ struct CooleyTukey {
     return u;
   }
 
+  static vector<double> multiply(const vector<double>& s,
+                                 const vector<double>& t) {
+    int l = s.size() + t.size() - 1;
+    if (min(s.size(), t.size()) <= 40) {
+      vector<double> u(l);
+      for (int i = 0; i < (int)s.size(); i++) {
+        for (int j = 0; j < (int)t.size(); j++) u[i + j] += s[i] * t[j];
+      }
+      return u;
+    }
+
+    int k = 2, M = 4;
+    while (M < l) M <<= 1, ++k;
+    setw(k);
+
+    vector<C> a(M);
+    for (int i = 0; i < (int)s.size(); i++) a[i].x = s[i];
+    for (int i = 0; i < (int)t.size(); i++) a[i].y = t[i];
+    fft(a, k);
+
+    a[0].y = 4.0 * a[0].x * a[0].y;
+    a[1].y = 4.0 * a[1].x * a[1].y;
+    a[0].x = a[1].x = 0.0;
+    for (int i = 2; i < M; i += 2) {
+      int c = 1 << (31 - __builtin_clz(i));
+      int j = i ^ (c - 1);
+      a[i] = (a[i] + a[j].conj()) * (a[i] - a[j].conj());
+      a[j] = -a[i].conj();
+    }
+
+    vector<C> b(M / 2);
+    for (int j = 0; j < M / 2; j++) {
+      C tmp1 = a[j * 2 + 0] + a[j * 2 + 1];
+      C tmp2 = (a[j * 2 + 0] - a[j * 2 + 1]) * w[j].conj();
+      b[j] = tmp1 + tmp2.rotl();
+    }
+    ifft(b, k - 1);
+
+    vector<double> u(l);
+    for (int i = 0; i < l; i++) {
+      if (i & 1) {
+        u[i] = -b[i >> 1].x / (4.0 * M);
+      } else {
+        u[i] = b[i >> 1].y / (4.0 * M);
+      }
+    }
+    return u;
+  }
+
   template <unsigned int MOD>
-  static vector<int> multiply_15bit(const vector<int>& a, const vector<int>& b) {
+  static vector<int> multiply_15bit(const vector<int>& a,
+                                    const vector<int>& b) {
     using u64 = unsigned long long;
     constexpr u64 B = 32000;
     int l = a.size() + b.size() - 1;
