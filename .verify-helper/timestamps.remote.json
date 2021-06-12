@@ -220,6 +220,7 @@
 "verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp": "2021-06-10 13:30:55 +0900",
 "verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp": "2021-06-10 13:30:55 +0900",
+"verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp": "2021-06-12 11:33:00 +0900",
 "verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp": "2021-05-15 20:18:13 +0900",
 "verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp": "2021-05-15 20:18:13 +0900",
 "verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp": "2021-05-04 19:34:35 +0900",
