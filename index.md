@@ -587,6 +587,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/rader-ntt.hpp
       title: Rader's FFT Algorithm
+    - icon: ':heavy_check_mark:'
+      path: ntt/schoenhage-strassen-radix2.hpp
+      title: "Sch\xF6nhage-Strassen Algorithm(radix-2)"
   - name: orderedmap
     pages:
     - icon: ':heavy_check_mark:'
@@ -1504,6 +1507,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
