@@ -27,7 +27,7 @@ std::pair<int, mint> GaussElimination(vector<vector<mint>> &a,
       swap(a[rank], a[idx]);
     }
     det *= a[rank][j];
-    if (LE && a[rank][j] != mint(1)) {
+    if (diagonalize && a[rank][j] != mint(1)) {
       mint coeff = a[rank][j].inverse();
       for (int k = j; k < W; k++) a[rank][k] *= coeff;
     }
