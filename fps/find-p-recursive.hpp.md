@@ -86,65 +86,66 @@ data:
     \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
     \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 4 \"matrix/gauss-elimination.hpp\"\
     \n\ntemplate <typename mint>\nstd::pair<int, mint> GaussElimination(vector<vector<mint>>\
-    \ &a,\n                                      bool LE = false) {\n  int H = a.size(),\
-    \ W = a[0].size();\n  int rank = 0, je = LE ? W - 1 : W;\n  mint det = 1;\n  for\
-    \ (int j = 0; j < je; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
-    \ i++) {\n      if (a[i][j] != mint(0)) {\n        idx = i;\n        break;\n\
-    \      }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n\
-    \    if (rank != idx) {\n      det = -det;\n      swap(a[rank], a[idx]);\n   \
-    \ }\n    det *= a[rank][j];\n    if (LE && a[rank][j] != mint(1)) {\n      mint\
-    \ coeff = a[rank][j].inverse();\n      for (int k = j; k < W; k++) a[rank][k]\
-    \ *= coeff;\n    }\n    int is = LE ? 0 : rank + 1;\n    for (int i = is; i <\
-    \ H; i++) {\n      if (i == rank) continue;\n      if (a[i][j] != mint(0)) {\n\
-    \        mint coeff = a[i][j] / a[rank][j];\n        for (int k = j; k < W; k++)\
-    \ a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n    rank++;\n  }\n  return make_pair(rank,\
-    \ det);\n}\n#line 4 \"matrix/linear-equation.hpp\"\n\n\ntemplate <typename mint>\n\
-    vector<vector<mint>> LinearEquation(vector<vector<mint>> a, vector<mint> b) {\n\
-    \  int H = a.size(), W = a[0].size();\n  for (int i = 0; i < H; i++) a[i].push_back(b[i]);\n\
-    \  auto p = GaussElimination(a, true);\n  int rank = p.first;\n\n  for (int i\
-    \ = rank; i < H; ++i) {\n    if (a[i][W] != 0) return vector<vector<mint>>{};\n\
-    \  }\n\n  vector<vector<mint>> res(1, vector<mint>(W));\n  vector<int> pivot(W,\
-    \ -1);\n  for (int i = 0, j = 0; i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n\
-    \    res[0][j] = a[i][W], pivot[j] = i;\n  }\n  for (int j = 0; j < W; ++j) {\n\
-    \    if (pivot[j] == -1) {\n      vector<mint> x(W);\n      x[j] = 1;\n      for\
-    \ (int k = 0; k < j; ++k) {\n        if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n\
-    \      }\n      res.push_back(x);\n    }\n  }\n  return res;\n}\n#line 2 \"matrix/polynomial-matrix-prefix-prod.hpp\"\
-    \n\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct\
-    \ FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using FPS\
-    \ = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
-    \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n  FPS &operator-=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] -= r;\n\
-    \    return *this;\n  }\n\n  FPS &operator*=(const mint &v) {\n    for (int k\
-    \ = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n    return *this;\n  }\n\n\
-    \  FPS &operator/=(const FPS &r) {\n    if (this->size() < r.size()) {\n     \
-    \ this->clear();\n      return *this;\n    }\n    int n = this->size() - r.size()\
-    \ + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this), g(r);\n      g.shrink();\n\
-    \      mint coeff = g.back().inverse();\n      for (auto &x : g) x *= coeff;\n\
-    \      int deg = (int)f.size() - (int)g.size() + 1;\n      int gs = g.size();\n\
-    \      FPS quo(deg);\n      for (int i = deg - 1; i >= 0; i--) {\n        quo[i]\
-    \ = f[i + gs - 1];\n        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] *\
-    \ g[j];\n      }\n      *this = quo * coeff;\n      this->resize(n, mint(0));\n\
-    \      return *this;\n    }\n    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();\n\
-    \  }\n\n  FPS &operator%=(const FPS &r) {\n    *this -= *this / r * r;\n    shrink();\n\
-    \    return *this;\n  }\n\n  FPS operator+(const FPS &r) const { return FPS(*this)\
-    \ += r; }\n  FPS operator+(const mint &v) const { return FPS(*this) += v; }\n\
-    \  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator-(const\
-    \ mint &v) const { return FPS(*this) -= v; }\n  FPS operator*(const FPS &r) const\
-    \ { return FPS(*this) *= r; }\n  FPS operator*(const mint &v) const { return FPS(*this)\
-    \ *= v; }\n  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }\n \
-    \ FPS operator%(const FPS &r) const { return FPS(*this) %= r; }\n  FPS operator-()\
-    \ const {\n    FPS ret(this->size());\n    for (int i = 0; i < (int)this->size();\
-    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
-    \ (this->size() && this->back() == mint(0)) this->pop_back();\n  }\n\n  FPS rev()\
-    \ const {\n    FPS ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
-    \ ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(), r.size()));\n\
-    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
-    \   return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
+    \ &a,\n                                      int pivot_end = -1,\n           \
+    \                           bool diagonalize = false) {\n  int H = a.size(), W\
+    \ = a[0].size();\n  int rank = 0, je = pivot_end;\n  if (je == -1) je = W;\n \
+    \ mint det = 1;\n  for (int j = 0; j < je; j++) {\n    int idx = -1;\n    for\
+    \ (int i = rank; i < H; i++) {\n      if (a[i][j] != mint(0)) {\n        idx =\
+    \ i;\n        break;\n      }\n    }\n    if (idx == -1) {\n      det = 0;\n \
+    \     continue;\n    }\n    if (rank != idx) {\n      det = -det;\n      swap(a[rank],\
+    \ a[idx]);\n    }\n    det *= a[rank][j];\n    if (diagonalize && a[rank][j] !=\
+    \ mint(1)) {\n      mint coeff = a[rank][j].inverse();\n      for (int k = j;\
+    \ k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize ? 0 : rank\
+    \ + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n \
+    \     if (a[i][j] != mint(0)) {\n        mint coeff = a[i][j] / a[rank][j];\n\
+    \        for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n\
+    \    }\n    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 4 \"matrix/linear-equation.hpp\"\
+    \n\n\ntemplate <typename mint>\nvector<vector<mint>> LinearEquation(vector<vector<mint>>\
+    \ a, vector<mint> b) {\n  int H = a.size(), W = a[0].size();\n  for (int i = 0;\
+    \ i < H; i++) a[i].push_back(b[i]);\n  auto p = GaussElimination(a, W, true);\n\
+    \  int rank = p.first;\n\n  for (int i = rank; i < H; ++i) {\n    if (a[i][W]\
+    \ != 0) return vector<vector<mint>>{};\n  }\n\n  vector<vector<mint>> res(1, vector<mint>(W));\n\
+    \  vector<int> pivot(W, -1);\n  for (int i = 0, j = 0; i < rank; ++i) {\n    while\
+    \ (a[i][j] == 0) ++j;\n    res[0][j] = a[i][W], pivot[j] = i;\n  }\n  for (int\
+    \ j = 0; j < W; ++j) {\n    if (pivot[j] == -1) {\n      vector<mint> x(W);\n\
+    \      x[j] = 1;\n      for (int k = 0; k < j; ++k) {\n        if (pivot[k] !=\
+    \ -1) x[k] = -a[pivot[k]][j];\n      }\n      res.push_back(x);\n    }\n  }\n\
+    \  return res;\n}\n#line 2 \"matrix/polynomial-matrix-prefix-prod.hpp\"\n\n#line\
+    \ 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
+    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
+    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
+    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
+    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
+    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
+    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
+    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
+    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
+    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
+    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
+    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
+    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
+    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
+    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
+    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
+    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
+    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
+    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
+    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
+    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
+    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
+    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
+    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
+    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
+    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
+    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
     \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
     \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
     \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
@@ -304,7 +305,7 @@ data:
   isVerificationFile: false
   path: fps/find-p-recursive.hpp
   requiredBy: []
-  timestamp: '2021-06-07 17:01:41+09:00'
+  timestamp: '2021-06-17 12:56:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1533.test.cpp

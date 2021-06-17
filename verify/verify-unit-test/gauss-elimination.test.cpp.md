@@ -235,14 +235,15 @@ data:
     \n//\nnamespace Normal {\n#line 2 \"matrix/gauss-elimination.hpp\"\n\n#line 4\
     \ \"matrix/gauss-elimination.hpp\"\n\ntemplate <typename mint>\nstd::pair<int,\
     \ mint> GaussElimination(vector<vector<mint>> &a,\n                          \
-    \            bool LE = false) {\n  int H = a.size(), W = a[0].size();\n  int rank\
-    \ = 0, je = LE ? W - 1 : W;\n  mint det = 1;\n  for (int j = 0; j < je; j++) {\n\
+    \            int pivot_end = -1,\n                                      bool diagonalize\
+    \ = false) {\n  int H = a.size(), W = a[0].size();\n  int rank = 0, je = pivot_end;\n\
+    \  if (je == -1) je = W;\n  mint det = 1;\n  for (int j = 0; j < je; j++) {\n\
     \    int idx = -1;\n    for (int i = rank; i < H; i++) {\n      if (a[i][j] !=\
     \ mint(0)) {\n        idx = i;\n        break;\n      }\n    }\n    if (idx ==\
     \ -1) {\n      det = 0;\n      continue;\n    }\n    if (rank != idx) {\n    \
     \  det = -det;\n      swap(a[rank], a[idx]);\n    }\n    det *= a[rank][j];\n\
-    \    if (LE && a[rank][j] != mint(1)) {\n      mint coeff = a[rank][j].inverse();\n\
-    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = LE\
+    \    if (diagonalize && a[rank][j] != mint(1)) {\n      mint coeff = a[rank][j].inverse();\n\
+    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize\
     \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
     \      if (a[i][j] != mint(0)) {\n        mint coeff = a[i][j] / a[rank][j];\n\
     \        for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n\
@@ -250,7 +251,7 @@ data:
     \n\n#line 4 \"matrix/linear-equation.hpp\"\n\n\ntemplate <typename mint>\nvector<vector<mint>>\
     \ LinearEquation(vector<vector<mint>> a, vector<mint> b) {\n  int H = a.size(),\
     \ W = a[0].size();\n  for (int i = 0; i < H; i++) a[i].push_back(b[i]);\n  auto\
-    \ p = GaussElimination(a, true);\n  int rank = p.first;\n\n  for (int i = rank;\
+    \ p = GaussElimination(a, W, true);\n  int rank = p.first;\n\n  for (int i = rank;\
     \ i < H; ++i) {\n    if (a[i][W] != 0) return vector<vector<mint>>{};\n  }\n\n\
     \  vector<vector<mint>> res(1, vector<mint>(W));\n  vector<int> pivot(W, -1);\n\
     \  for (int i = 0, j = 0; i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n  \
@@ -395,15 +396,15 @@ data:
     \n\nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\n\
     void test(int n, int m, bool sparse) {\n  Matrix<mint> a(n, m);\n  each(v, a.A)\
     \ {\n    each(x, v) {\n      if (sparse) {\n        if (randint(0, m) == 0) x\
-    \ = rng();\n      } else {\n        x = rng();\n      }\n    }\n  }\n  trc(n,\
+    \ = rng();\n      } else {\n        x = rng();\n      }\n    }\n  }\n  // trc(n,\
     \ m, sparse);\n  // trc(a);\n\n  if (n == m) {\n    mint det1, det2, det3;\n \
     \   {\n      auto b = a;\n      det1 = b.determinant();\n    }\n    {\n      auto\
-    \ b = a;\n      det2 = Normal::GaussElimination<mint>(b.A, false).second;\n  \
-    \  }\n    {\n      auto b = a;\n      det3 = Fast::determinant(b.A);\n    }\n\
-    \    // trc(det1, det2, det3);\n    assert(det1 == det2 and det2 == det3);\n \
-    \ }\n  vector<mint> c(n);\n  if (rng() & 1) each(x, c) x = rng();\n\n  vector<vector<mint>>\
-    \ sol1, sol2;\n  {\n    auto b = a;\n    sol1 = Normal::LinearEquation<mint>(b.A,\
-    \ c);\n    // trc(sol1);\n  }\n  {\n    auto b = a;\n    sol2 = Fast::LinearEquation<mint>(b.A,\
+    \ b = a;\n      det2 = Normal::GaussElimination<mint>(b.A).second;\n    }\n  \
+    \  {\n      auto b = a;\n      det3 = Fast::determinant(b.A);\n    }\n    // trc(det1,\
+    \ det2, det3);\n    assert(det1 == det2 and det2 == det3);\n  }\n  vector<mint>\
+    \ c(n);\n  if (rng() & 1) each(x, c) x = rng();\n\n  vector<vector<mint>> sol1,\
+    \ sol2;\n  {\n    auto b = a;\n    sol1 = Normal::LinearEquation<mint>(b.A, c);\n\
+    \    // trc(sol1);\n  }\n  {\n    auto b = a;\n    sol2 = Fast::LinearEquation<mint>(b.A,\
     \ c);\n    // trc(sol2);\n  }\n  assert(sol1 == sol2);\n}\n\nvoid Nyaan::solve()\
     \ {\n  rep(i, TEN(5)) test(randint(1, 17), randint(1, 17), rng() % 2 == 1);\n\n\
     \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
@@ -416,15 +417,15 @@ data:
     \n\nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\n\
     void test(int n, int m, bool sparse) {\n  Matrix<mint> a(n, m);\n  each(v, a.A)\
     \ {\n    each(x, v) {\n      if (sparse) {\n        if (randint(0, m) == 0) x\
-    \ = rng();\n      } else {\n        x = rng();\n      }\n    }\n  }\n  trc(n,\
+    \ = rng();\n      } else {\n        x = rng();\n      }\n    }\n  }\n  // trc(n,\
     \ m, sparse);\n  // trc(a);\n\n  if (n == m) {\n    mint det1, det2, det3;\n \
     \   {\n      auto b = a;\n      det1 = b.determinant();\n    }\n    {\n      auto\
-    \ b = a;\n      det2 = Normal::GaussElimination<mint>(b.A, false).second;\n  \
-    \  }\n    {\n      auto b = a;\n      det3 = Fast::determinant(b.A);\n    }\n\
-    \    // trc(det1, det2, det3);\n    assert(det1 == det2 and det2 == det3);\n \
-    \ }\n  vector<mint> c(n);\n  if (rng() & 1) each(x, c) x = rng();\n\n  vector<vector<mint>>\
-    \ sol1, sol2;\n  {\n    auto b = a;\n    sol1 = Normal::LinearEquation<mint>(b.A,\
-    \ c);\n    // trc(sol1);\n  }\n  {\n    auto b = a;\n    sol2 = Fast::LinearEquation<mint>(b.A,\
+    \ b = a;\n      det2 = Normal::GaussElimination<mint>(b.A).second;\n    }\n  \
+    \  {\n      auto b = a;\n      det3 = Fast::determinant(b.A);\n    }\n    // trc(det1,\
+    \ det2, det3);\n    assert(det1 == det2 and det2 == det3);\n  }\n  vector<mint>\
+    \ c(n);\n  if (rng() & 1) each(x, c) x = rng();\n\n  vector<vector<mint>> sol1,\
+    \ sol2;\n  {\n    auto b = a;\n    sol1 = Normal::LinearEquation<mint>(b.A, c);\n\
+    \    // trc(sol1);\n  }\n  {\n    auto b = a;\n    sol2 = Fast::LinearEquation<mint>(b.A,\
     \ c);\n    // trc(sol2);\n  }\n  assert(sol1 == sol2);\n}\n\nvoid Nyaan::solve()\
     \ {\n  rep(i, TEN(5)) test(randint(1, 17), randint(1, 17), rng() % 2 == 1);\n\n\
     \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}"
@@ -445,7 +446,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/gauss-elimination.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-06-17 12:56:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/gauss-elimination.test.cpp

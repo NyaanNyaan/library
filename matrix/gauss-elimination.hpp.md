@@ -76,29 +76,31 @@ data:
     \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
     \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 4 \"matrix/gauss-elimination.hpp\"\
     \n\ntemplate <typename mint>\nstd::pair<int, mint> GaussElimination(vector<vector<mint>>\
-    \ &a,\n                                      bool LE = false) {\n  int H = a.size(),\
-    \ W = a[0].size();\n  int rank = 0, je = LE ? W - 1 : W;\n  mint det = 1;\n  for\
-    \ (int j = 0; j < je; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
-    \ i++) {\n      if (a[i][j] != mint(0)) {\n        idx = i;\n        break;\n\
-    \      }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n\
-    \    if (rank != idx) {\n      det = -det;\n      swap(a[rank], a[idx]);\n   \
-    \ }\n    det *= a[rank][j];\n    if (LE && a[rank][j] != mint(1)) {\n      mint\
-    \ coeff = a[rank][j].inverse();\n      for (int k = j; k < W; k++) a[rank][k]\
-    \ *= coeff;\n    }\n    int is = LE ? 0 : rank + 1;\n    for (int i = is; i <\
-    \ H; i++) {\n      if (i == rank) continue;\n      if (a[i][j] != mint(0)) {\n\
-    \        mint coeff = a[i][j] / a[rank][j];\n        for (int k = j; k < W; k++)\
-    \ a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n    rank++;\n  }\n  return make_pair(rank,\
-    \ det);\n}\n"
+    \ &a,\n                                      int pivot_end = -1,\n           \
+    \                           bool diagonalize = false) {\n  int H = a.size(), W\
+    \ = a[0].size();\n  int rank = 0, je = pivot_end;\n  if (je == -1) je = W;\n \
+    \ mint det = 1;\n  for (int j = 0; j < je; j++) {\n    int idx = -1;\n    for\
+    \ (int i = rank; i < H; i++) {\n      if (a[i][j] != mint(0)) {\n        idx =\
+    \ i;\n        break;\n      }\n    }\n    if (idx == -1) {\n      det = 0;\n \
+    \     continue;\n    }\n    if (rank != idx) {\n      det = -det;\n      swap(a[rank],\
+    \ a[idx]);\n    }\n    det *= a[rank][j];\n    if (diagonalize && a[rank][j] !=\
+    \ mint(1)) {\n      mint coeff = a[rank][j].inverse();\n      for (int k = j;\
+    \ k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize ? 0 : rank\
+    \ + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n \
+    \     if (a[i][j] != mint(0)) {\n        mint coeff = a[i][j] / a[rank][j];\n\
+    \        for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n\
+    \    }\n    rank++;\n  }\n  return make_pair(rank, det);\n}\n"
   code: "#pragma once\n\n#include \"matrix.hpp\"\n\ntemplate <typename mint>\nstd::pair<int,\
     \ mint> GaussElimination(vector<vector<mint>> &a,\n                          \
-    \            bool LE = false) {\n  int H = a.size(), W = a[0].size();\n  int rank\
-    \ = 0, je = LE ? W - 1 : W;\n  mint det = 1;\n  for (int j = 0; j < je; j++) {\n\
+    \            int pivot_end = -1,\n                                      bool diagonalize\
+    \ = false) {\n  int H = a.size(), W = a[0].size();\n  int rank = 0, je = pivot_end;\n\
+    \  if (je == -1) je = W;\n  mint det = 1;\n  for (int j = 0; j < je; j++) {\n\
     \    int idx = -1;\n    for (int i = rank; i < H; i++) {\n      if (a[i][j] !=\
     \ mint(0)) {\n        idx = i;\n        break;\n      }\n    }\n    if (idx ==\
     \ -1) {\n      det = 0;\n      continue;\n    }\n    if (rank != idx) {\n    \
     \  det = -det;\n      swap(a[rank], a[idx]);\n    }\n    det *= a[rank][j];\n\
-    \    if (LE && a[rank][j] != mint(1)) {\n      mint coeff = a[rank][j].inverse();\n\
-    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = LE\
+    \    if (diagonalize && a[rank][j] != mint(1)) {\n      mint coeff = a[rank][j].inverse();\n\
+    \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize\
     \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
     \      if (a[i][j] != mint(0)) {\n        mint coeff = a[i][j] / a[rank][j];\n\
     \        for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n\
@@ -110,7 +112,7 @@ data:
   requiredBy:
   - matrix/linear-equation.hpp
   - fps/find-p-recursive.hpp
-  timestamp: '2021-03-26 14:37:22+09:00'
+  timestamp: '2021-06-17 12:56:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1533.test.cpp

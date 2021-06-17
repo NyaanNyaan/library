@@ -228,30 +228,31 @@ data:
     \ B[i][k] * a;\n        }\n      }\n    }\n    return ret;\n  }\n};\n\n/**\n *\
     \ @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA\n */\n#line 4 \"matrix/gauss-elimination.hpp\"\
     \n\ntemplate <typename mint>\nstd::pair<int, mint> GaussElimination(vector<vector<mint>>\
-    \ &a,\n                                      bool LE = false) {\n  int H = a.size(),\
-    \ W = a[0].size();\n  int rank = 0, je = LE ? W - 1 : W;\n  mint det = 1;\n  for\
-    \ (int j = 0; j < je; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
-    \ i++) {\n      if (a[i][j] != mint(0)) {\n        idx = i;\n        break;\n\
-    \      }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n\
-    \    if (rank != idx) {\n      det = -det;\n      swap(a[rank], a[idx]);\n   \
-    \ }\n    det *= a[rank][j];\n    if (LE && a[rank][j] != mint(1)) {\n      mint\
-    \ coeff = a[rank][j].inverse();\n      for (int k = j; k < W; k++) a[rank][k]\
-    \ *= coeff;\n    }\n    int is = LE ? 0 : rank + 1;\n    for (int i = is; i <\
-    \ H; i++) {\n      if (i == rank) continue;\n      if (a[i][j] != mint(0)) {\n\
-    \        mint coeff = a[i][j] / a[rank][j];\n        for (int k = j; k < W; k++)\
-    \ a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n    rank++;\n  }\n  return make_pair(rank,\
-    \ det);\n}\n#line 2 \"matrix/linear-equation.hpp\"\n\n#line 4 \"matrix/linear-equation.hpp\"\
-    \n\n\ntemplate <typename mint>\nvector<vector<mint>> LinearEquation(vector<vector<mint>>\
-    \ a, vector<mint> b) {\n  int H = a.size(), W = a[0].size();\n  for (int i = 0;\
-    \ i < H; i++) a[i].push_back(b[i]);\n  auto p = GaussElimination(a, true);\n \
-    \ int rank = p.first;\n\n  for (int i = rank; i < H; ++i) {\n    if (a[i][W] !=\
-    \ 0) return vector<vector<mint>>{};\n  }\n\n  vector<vector<mint>> res(1, vector<mint>(W));\n\
-    \  vector<int> pivot(W, -1);\n  for (int i = 0, j = 0; i < rank; ++i) {\n    while\
-    \ (a[i][j] == 0) ++j;\n    res[0][j] = a[i][W], pivot[j] = i;\n  }\n  for (int\
-    \ j = 0; j < W; ++j) {\n    if (pivot[j] == -1) {\n      vector<mint> x(W);\n\
-    \      x[j] = 1;\n      for (int k = 0; k < j; ++k) {\n        if (pivot[k] !=\
-    \ -1) x[k] = -a[pivot[k]][j];\n      }\n      res.push_back(x);\n    }\n  }\n\
-    \  return res;\n}\n#line 7 \"verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp\"\
+    \ &a,\n                                      int pivot_end = -1,\n           \
+    \                           bool diagonalize = false) {\n  int H = a.size(), W\
+    \ = a[0].size();\n  int rank = 0, je = pivot_end;\n  if (je == -1) je = W;\n \
+    \ mint det = 1;\n  for (int j = 0; j < je; j++) {\n    int idx = -1;\n    for\
+    \ (int i = rank; i < H; i++) {\n      if (a[i][j] != mint(0)) {\n        idx =\
+    \ i;\n        break;\n      }\n    }\n    if (idx == -1) {\n      det = 0;\n \
+    \     continue;\n    }\n    if (rank != idx) {\n      det = -det;\n      swap(a[rank],\
+    \ a[idx]);\n    }\n    det *= a[rank][j];\n    if (diagonalize && a[rank][j] !=\
+    \ mint(1)) {\n      mint coeff = a[rank][j].inverse();\n      for (int k = j;\
+    \ k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize ? 0 : rank\
+    \ + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n \
+    \     if (a[i][j] != mint(0)) {\n        mint coeff = a[i][j] / a[rank][j];\n\
+    \        for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n\
+    \    }\n    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 2 \"matrix/linear-equation.hpp\"\
+    \n\n#line 4 \"matrix/linear-equation.hpp\"\n\n\ntemplate <typename mint>\nvector<vector<mint>>\
+    \ LinearEquation(vector<vector<mint>> a, vector<mint> b) {\n  int H = a.size(),\
+    \ W = a[0].size();\n  for (int i = 0; i < H; i++) a[i].push_back(b[i]);\n  auto\
+    \ p = GaussElimination(a, W, true);\n  int rank = p.first;\n\n  for (int i = rank;\
+    \ i < H; ++i) {\n    if (a[i][W] != 0) return vector<vector<mint>>{};\n  }\n\n\
+    \  vector<vector<mint>> res(1, vector<mint>(W));\n  vector<int> pivot(W, -1);\n\
+    \  for (int i = 0, j = 0; i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n  \
+    \  res[0][j] = a[i][W], pivot[j] = i;\n  }\n  for (int j = 0; j < W; ++j) {\n\
+    \    if (pivot[j] == -1) {\n      vector<mint> x(W);\n      x[j] = 1;\n      for\
+    \ (int k = 0; k < j; ++k) {\n        if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n\
+    \      }\n      res.push_back(x);\n    }\n  }\n  return res;\n}\n#line 7 \"verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp\"\
     \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
     \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
@@ -358,7 +359,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   requiredBy: []
-  timestamp: '2021-05-15 20:18:13+09:00'
+  timestamp: '2021-06-17 12:56:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
