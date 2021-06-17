@@ -7,7 +7,7 @@ template <typename mint>
 vector<vector<mint>> LinearEquation(vector<vector<mint>> a, vector<mint> b) {
   int H = a.size(), W = a[0].size();
   for (int i = 0; i < H; i++) a[i].push_back(b[i]);
-  auto p = GaussElimination(a, true);
+  auto p = GaussElimination(a, W, true);
   int rank = p.first;
 
   for (int i = rank; i < H; ++i) {

@@ -1,5 +1,14 @@
 #pragma once
 
+struct Three {
+  int t[20];
+  constexpr Three() : t() {
+    t[0] = 1;
+    for (int i = 1; i < 20; i++) t[i] = t[i - 1] * 3;
+  }
+  constexpr int operator[](int i) { return t[i]; }
+} constexpr three;
+
 template <typename R>
 struct SchoenHage_Strassen_radix3 {
   struct T {
@@ -55,7 +64,9 @@ struct SchoenHage_Strassen_radix3 {
   }
 
   // R[x] / (1+x^(3^m)+x^(2*(3^m))) 上の長さLのFFT
-  void fft(T* a,int l,int m) {
+  void fft(T* a, int l, int m) {
+    assert(buf != nullptr);
+
     
   }
 };
