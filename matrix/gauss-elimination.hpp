@@ -1,7 +1,5 @@
 #pragma once
 
-#include "matrix.hpp"
-
 template <typename mint>
 std::pair<int, mint> GaussElimination(vector<vector<mint>> &a,
                                       int pivot_end = -1,
