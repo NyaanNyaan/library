@@ -4,11 +4,11 @@
 
 template <typename mint>
 std::pair<int, mint> GaussElimination(vector<vector<mint>> &a,
-                                      int pivot_max = -1,
+                                      int pivot_end = -1,
                                       bool diagonalize = false) {
   int H = a.size(), W = a[0].size();
-  int rank = 0, je = pivot_max;
-  if (pivot_max == -1) pivot_max = W - 1;
+  int rank = 0, je = pivot_end;
+  if (je == -1) je = W;
   mint det = 1;
   for (int j = 0; j < je; j++) {
     int idx = -1;

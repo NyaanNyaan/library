@@ -30,7 +30,7 @@ void test(int n, int m, bool sparse) {
       }
     }
   }
-  trc(n, m, sparse);
+  // trc(n, m, sparse);
   // trc(a);
 
   if (n == m) {
@@ -41,7 +41,7 @@ void test(int n, int m, bool sparse) {
     }
     {
       auto b = a;
-      det2 = Normal::GaussElimination<mint>(b.A, false).second;
+      det2 = Normal::GaussElimination<mint>(b.A).second;
     }
     {
       auto b = a;
