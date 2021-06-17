@@ -6,12 +6,6 @@ data:
     path: fps/find-p-recursive.hpp
     title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   - icon: ':heavy_check_mark:'
-    path: matrix/gauss-elimination.hpp
-    title: matrix/gauss-elimination.hpp
-  - icon: ':heavy_check_mark:'
-    path: matrix/linear-equation.hpp
-    title: matrix/linear-equation.hpp
-  - icon: ':heavy_check_mark:'
     path: matrix/matrix-tree.hpp
     title: "\u884C\u5217\u6728\u5B9A\u7406(\u30E9\u30D7\u30E9\u30B7\u30A2\u30F3\u884C\
       \u5217)"
@@ -40,9 +34,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-    title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1303.test.cpp
     title: verify/verify-yuki/yuki-1303.test.cpp
@@ -149,24 +140,21 @@ data:
   isVerificationFile: false
   path: matrix/matrix.hpp
   requiredBy:
-  - matrix/polynomial-matrix-prefix-prod.hpp
-  - matrix/linear-equation.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
-  - matrix/gauss-elimination.hpp
+  - matrix/polynomial-matrix-prefix-prod.hpp
   - fps/find-p-recursive.hpp
   timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/debug.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
-  - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document
 redirect_from:

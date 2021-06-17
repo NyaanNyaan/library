@@ -400,6 +400,9 @@ data:
       path: matrix/hafnian.hpp
       title: matrix/hafnian.hpp
     - icon: ':heavy_check_mark:'
+      path: matrix/inverse-matrix.hpp
+      title: matrix/inverse-matrix.hpp
+    - icon: ':heavy_check_mark:'
       path: matrix/linear-equation.hpp
       title: matrix/linear-equation.hpp
     - icon: ':heavy_check_mark:'
@@ -1050,6 +1053,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/interval-union.test.cpp
       title: verify/verify-unit-test/interval-union.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/inverse-matrix.test.cpp
+      title: verify/verify-unit-test/inverse-matrix.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
       title: verify/verify-unit-test/lazyseg-setval-2.test.cpp

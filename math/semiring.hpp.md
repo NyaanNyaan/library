@@ -90,8 +90,8 @@ data:
   timestamp: '2021-01-01 23:05:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1340-semiring.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
+  - verify/verify-yuki/yuki-1340-semiring.test.cpp
 documentation_of: math/semiring.hpp
 layout: document
 redirect_from:
