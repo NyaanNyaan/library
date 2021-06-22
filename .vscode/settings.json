@@ -72,7 +72,6 @@
     "limits": "cpp",
     "typeinfo": "cpp"
   },
-  "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
   "C_Cpp.suggestSnippets": false,
   "python.linting.enabled": true,
   "python.formatting.provider": "autopep8",
