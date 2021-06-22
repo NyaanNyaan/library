@@ -22,6 +22,9 @@ data:
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
+    title: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -77,6 +80,7 @@ data:
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
 documentation_of: matrix/gauss-elimination.hpp
 layout: document

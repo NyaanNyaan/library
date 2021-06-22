@@ -598,6 +598,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
     title: verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
+    title: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1089,6 +1092,7 @@ data:
   - verify/verify-yuki/yuki-0117.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+  - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp

@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/inverse-matrix.test.cpp
     title: verify/verify-unit-test/inverse-matrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
+    title: verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -54,6 +57,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/inverse-matrix.test.cpp
+  - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
 documentation_of: matrix/inverse-matrix.hpp
 layout: document
 redirect_from:
