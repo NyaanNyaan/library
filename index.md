@@ -394,6 +394,9 @@ data:
       path: matrix/black-box-linear-algebra.hpp
       title: Black Box Linear Algebra
     - icon: ':heavy_check_mark:'
+      path: matrix/characteristric-polynomial.hpp
+      title: matrix/characteristric-polynomial.hpp
+    - icon: ':heavy_check_mark:'
       path: matrix/gauss-elimination.hpp
       title: matrix/gauss-elimination.hpp
     - icon: ':heavy_check_mark:'
@@ -1394,6 +1397,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
       title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
+      title: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp

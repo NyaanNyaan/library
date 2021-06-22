@@ -568,6 +568,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
+    title: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1144,6 +1147,7 @@ data:
   - verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+  - verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp

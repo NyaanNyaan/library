@@ -175,6 +175,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
+    title: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - icon: ':heavy_check_mark:'
@@ -465,6 +468,7 @@ data:
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
