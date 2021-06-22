@@ -182,6 +182,7 @@
 "verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp": "2021-05-15 20:18:13 +0900",
 "verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp": "2021-06-22 17:18:34 +0900",
 "verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yosupo-math/yosupo-counting-primes.test.cpp": "2021-05-04 19:34:35 +0900",
