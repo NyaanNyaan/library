@@ -8,9 +8,6 @@ data:
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
   - icon: ':heavy_check_mark:'
-    path: modulo/arbitrary-mod-binomial-large.hpp
-    title: modulo/arbitrary-mod-binomial-large.hpp
-  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
   - icon: ':heavy_check_mark:'
@@ -495,7 +492,6 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - modulo/arbitrary-mod-binomial-large.hpp
   - modint/barrett-reduction.hpp
   - misc/fastio.hpp
   isVerificationFile: true

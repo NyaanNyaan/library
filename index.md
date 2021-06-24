@@ -494,9 +494,6 @@ data:
   - name: modulo
     pages:
     - icon: ':heavy_check_mark:'
-      path: modulo/arbitrary-mod-binomial-large.hpp
-      title: modulo/arbitrary-mod-binomial-large.hpp
-    - icon: ':heavy_check_mark:'
       path: modulo/arbitrary-mod-binomial.hpp
       title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
     - icon: ':heavy_check_mark:'

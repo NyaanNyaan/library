@@ -5,6 +5,7 @@ exclude:
 - competitive-template.hpp
 - compress.py
 - unused
+- modulo/arbitrary-mod-binomial-large.hpp
 plugins:
 - jemoji
 - jekyll-redirect-from
