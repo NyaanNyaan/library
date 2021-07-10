@@ -36,7 +36,14 @@ print(" */")
 print()
 print("#define NDEBUG")
 cmd = ["oj-bundle", "-I", library_path, buffer]
-src = subprocess.check_output(cmd).decode("utf-8")
+proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+if proc.returncode != 0:
+  msg = proc.stderr.decode("utf-8").split('\n')
+  msg = msg[max(0, len(msg) - 20):]
+  print("\n".join(msg), file=sys.stderr)
+  print('\033[31m' + 'bundle Failed.' + '\033[0m', file=sys.stderr)
+  exit(1)
+src = proc.stdout.decode("utf-8")
 lines = src.split('\n')
 for line in lines:
   if not re.match('^#line', line):

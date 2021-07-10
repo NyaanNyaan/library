@@ -85,6 +85,24 @@ struct HashMapBase {
     b *= 10150724397891781847ULL;
     return u32((a + b) >> shift);
   }
+  template <typename K,
+            enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,
+            enable_if_t<is_integral<typename K::value_type>::value, nullptr_t> =
+                nullptr>
+  inline u32 inner_hash(const K& key) const {
+    static constexpr u64 mod = (1LL << 61) - 1;
+    static constexpr u64 base = 950699498548472943ULL;
+    u64 res = 0;
+    for (auto& elem : key) {
+      __uint128_t x = __uint128_t(res) * base + elem;
+      res = (x & mod) + (x >> 61);
+    }
+    __uint128_t x = __uint128_t(res) * base;
+    res = (x & mod) + (x >> 61);
+    if(res >= mod) res -= mod;
+    return res >> (shift - 3);
+  }
+
   template <typename D = Data,
             enable_if_t<is_same<D, Key>::value, nullptr_t> = nullptr>
   inline u32 hash(const D& dat) const {
@@ -117,7 +135,7 @@ struct HashMapBase {
       if (flag[i] == true && dflag[i] == false) {
         u32 h = hash(data[i]);
         while (nf[h]) h = (h + 1) & (ncap - 1);
-        ndata[h] = data[i];
+        ndata[h] = move(data[i]);
         nf[h] = true;
       }
     }
