@@ -68,22 +68,26 @@ struct HashMapBase {
   using itr = iterator;
 
  protected:
+  template <typename K>
+  inline u64 randomized(const K& key) const {
+    return u64(key) ^ r;
+  }
+
   template <typename K,
             enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,
             enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>
   inline u32 inner_hash(const K& key) const {
-    return u32((u64(key ^ r) * 11995408973635179863ULL) >> shift);
+    return (randomized(key) * 11995408973635179863ULL) >> shift;
   }
   template <
       typename K, enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,
       enable_if_t<is_integral<decltype(K::first)>::value, nullptr_t> = nullptr,
       enable_if_t<is_integral<decltype(K::second)>::value, nullptr_t> = nullptr>
   inline u32 inner_hash(const K& key) const {
-    u64 a = key.first ^ r;
-    u64 b = key.second ^ r;
+    u64 a = randomized(key.first), b = randomized(key.second);
     a *= 11995408973635179863ULL;
     b *= 10150724397891781847ULL;
-    return u32((a + b) >> shift);
+    return (a + b) >> shift;
   }
   template <typename K,
             enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,
@@ -94,12 +98,12 @@ struct HashMapBase {
     static constexpr u64 base = 950699498548472943ULL;
     u64 res = 0;
     for (auto& elem : key) {
-      __uint128_t x = __uint128_t(res) * base + elem;
+      __uint128_t x = __uint128_t(res) * base + (randomized(elem) & mod);
       res = (x & mod) + (x >> 61);
     }
     __uint128_t x = __uint128_t(res) * base;
     res = (x & mod) + (x >> 61);
-    if(res >= mod) res -= mod;
+    if (res >= mod) res -= mod;
     return res >> (shift - 3);
   }
 
