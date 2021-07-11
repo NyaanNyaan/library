@@ -69,7 +69,7 @@ struct HashMapBase {
 
  protected:
   template <typename K>
-  u64 randomized(const K& key) {
+  inline u64 randomized(const K& key) const {
     return u64(key) ^ r;
   }
 
