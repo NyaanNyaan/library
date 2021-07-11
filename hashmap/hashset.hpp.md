@@ -45,29 +45,30 @@ data:
     \  }\n  itrB operator--(int) {\n    itrB it(*this);\n    --(*this);\n    return\
     \ it;\n  }\n};\n\ntemplate <typename Key, typename Data>\nstruct HashMapBase {\n\
     \  using u32 = uint32_t;\n  using u64 = uint64_t;\n  using iterator = itrB<Key,\
-    \ Data>;\n  using itr = iterator;\n\n protected:\n  template <typename K,\n  \
-    \          enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n       \
-    \     enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline u32 inner_hash(const\
-    \ K& key) const {\n    return u32((u64(key ^ r) * 11995408973635179863ULL) >>\
-    \ shift);\n  }\n  template <\n      typename K, enable_if_t<is_same<K, Key>::value,\
+    \ Data>;\n  using itr = iterator;\n\n protected:\n  template <typename K>\n  inline\
+    \ u64 randomized(const K& key) const {\n    return u64(key) ^ r;\n  }\n\n  template\
+    \ <typename K,\n            enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n\
+    \            enable_if_t<is_integral<K>::value, nullptr_t> = nullptr>\n  inline\
+    \ u32 inner_hash(const K& key) const {\n    return (randomized(key) * 11995408973635179863ULL)\
+    \ >> shift;\n  }\n  template <\n      typename K, enable_if_t<is_same<K, Key>::value,\
     \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::first)>::value,\
     \ nullptr_t> = nullptr,\n      enable_if_t<is_integral<decltype(K::second)>::value,\
     \ nullptr_t> = nullptr>\n  inline u32 inner_hash(const K& key) const {\n    u64\
-    \ a = key.first ^ r;\n    u64 b = key.second ^ r;\n    a *= 11995408973635179863ULL;\n\
-    \    b *= 10150724397891781847ULL;\n    return u32((a + b) >> shift);\n  }\n \
-    \ template <typename K,\n            enable_if_t<is_same<K, Key>::value, nullptr_t>\
-    \ = nullptr,\n            enable_if_t<is_integral<typename K::value_type>::value,\
-    \ nullptr_t> =\n                nullptr>\n  inline u32 inner_hash(const K& key)\
-    \ const {\n    static constexpr u64 mod = (1LL << 61) - 1;\n    static constexpr\
-    \ u64 base = 950699498548472943ULL;\n    u64 res = 0;\n    for (auto& elem : key)\
-    \ {\n      __uint128_t x = __uint128_t(res) * base + elem;\n      res = (x & mod)\
-    \ + (x >> 61);\n    }\n    __uint128_t x = __uint128_t(res) * base;\n    res =\
-    \ (x & mod) + (x >> 61);\n    if(res >= mod) res -= mod;\n    return res >> (shift\
-    \ - 3);\n  }\n\n  template <typename D = Data,\n            enable_if_t<is_same<D,\
-    \ Key>::value, nullptr_t> = nullptr>\n  inline u32 hash(const D& dat) const {\n\
-    \    return inner_hash(dat);\n  }\n  template <\n      typename D = Data,\n  \
-    \    enable_if_t<is_same<decltype(D::first), Key>::value, nullptr_t> = nullptr>\n\
-    \  inline u32 hash(const D& dat) const {\n    return inner_hash(dat.first);\n\
+    \ a = randomized(key.first), b = randomized(key.second);\n    a *= 11995408973635179863ULL;\n\
+    \    b *= 10150724397891781847ULL;\n    return (a + b) >> shift;\n  }\n  template\
+    \ <typename K,\n            enable_if_t<is_same<K, Key>::value, nullptr_t> = nullptr,\n\
+    \            enable_if_t<is_integral<typename K::value_type>::value, nullptr_t>\
+    \ =\n                nullptr>\n  inline u32 inner_hash(const K& key) const {\n\
+    \    static constexpr u64 mod = (1LL << 61) - 1;\n    static constexpr u64 base\
+    \ = 950699498548472943ULL;\n    u64 res = 0;\n    for (auto& elem : key) {\n \
+    \     __uint128_t x = __uint128_t(res) * base + (randomized(elem) & mod);\n  \
+    \    res = (x & mod) + (x >> 61);\n    }\n    __uint128_t x = __uint128_t(res)\
+    \ * base;\n    res = (x & mod) + (x >> 61);\n    if (res >= mod) res -= mod;\n\
+    \    return res >> (shift - 3);\n  }\n\n  template <typename D = Data,\n     \
+    \       enable_if_t<is_same<D, Key>::value, nullptr_t> = nullptr>\n  inline u32\
+    \ hash(const D& dat) const {\n    return inner_hash(dat);\n  }\n  template <\n\
+    \      typename D = Data,\n      enable_if_t<is_same<decltype(D::first), Key>::value,\
+    \ nullptr_t> = nullptr>\n  inline u32 hash(const D& dat) const {\n    return inner_hash(dat.first);\n\
     \  }\n\n  template <typename D = Data,\n            enable_if_t<is_same<D, Key>::value,\
     \ nullptr_t> = nullptr>\n  inline Key dtok(const D& dat) const {\n    return dat;\n\
     \  }\n  template <\n      typename D = Data,\n      enable_if_t<is_same<decltype(D::first),\
@@ -131,7 +132,7 @@ data:
   isVerificationFile: false
   path: hashmap/hashset.hpp
   requiredBy: []
-  timestamp: '2021-07-11 08:39:39+09:00'
+  timestamp: '2021-07-11 22:37:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/hashset.test.cpp
