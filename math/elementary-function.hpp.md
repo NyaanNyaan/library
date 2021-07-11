@@ -125,9 +125,9 @@ data:
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-1-a.test.cpp
 documentation_of: math/elementary-function.hpp
 layout: document
 redirect_from:

@@ -148,9 +148,9 @@ data:
   isVerificationFile: false
   path: fps/sample-point-shift.hpp
   requiredBy:
+  - fps/find-p-recursive.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
   - modulo/factorial.hpp
-  - fps/find-p-recursive.hpp
   timestamp: '2021-05-10 21:37:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -17,8 +17,8 @@ data:
   bundledCode: "#line 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\n\
     template <typename T, typename E, typename F, typename G, typename H>\nstruct\
     \ LazySegmentTree {\n  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n\
-    \  vector<T> dat;\n  vector<E> laz;\n  LazySegmentTree(int n, F _f, G _g, H _h,\
-    \ T _ti, E _ei)\n      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init(n);\n\
+    \  vector<T> dat;\n  vector<E> laz;\n  LazySegmentTree(int _n, F _f, G _g, H _h,\
+    \ T _ti, E _ei)\n      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init(_n);\n\
     \  }\n  LazySegmentTree(const vector<T> &v, F _f, G _g, H _h, T _ti, E _ei)\n\
     \      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init((int)v.size());\n \
     \   build(v);\n  }\n  void init(int _n) {\n    n = 1;\n    height = 0;\n    while\
@@ -46,8 +46,8 @@ data:
   code: "#pragma once\n\n// LazySegmentTree\ntemplate <typename T, typename E, typename\
     \ F, typename G, typename H>\nstruct LazySegmentTree {\n  int n, height;\n  F\
     \ f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n  vector<T> dat;\n  vector<E> laz;\n \
-    \ LazySegmentTree(int n, F _f, G _g, H _h, T _ti, E _ei)\n      : f(_f), g(_g),\
-    \ h(_h), ti(_ti), ei(_ei) {\n    init(n);\n  }\n  LazySegmentTree(const vector<T>\
+    \ LazySegmentTree(int _n, F _f, G _g, H _h, T _ti, E _ei)\n      : f(_f), g(_g),\
+    \ h(_h), ti(_ti), ei(_ei) {\n    init(_n);\n  }\n  LazySegmentTree(const vector<T>\
     \ &v, F _f, G _g, H _h, T _ti, E _ei)\n      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei)\
     \ {\n    init((int)v.size());\n    build(v);\n  }\n  void init(int _n) {\n   \
     \ n = 1;\n    height = 0;\n    while (n < _n) n <<= 1, height++;\n    dat.assign(2\
@@ -76,11 +76,11 @@ data:
   isVerificationFile: false
   path: segment-tree/lazy-segment-tree.hpp
   requiredBy: []
-  timestamp: '2021-05-01 09:18:53+09:00'
+  timestamp: '2021-07-11 08:39:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
 documentation_of: segment-tree/lazy-segment-tree.hpp
 layout: document
 redirect_from:

@@ -207,8 +207,8 @@ data:
     \ { return mod; }\n};\n#line 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\n\
     template <typename T, typename E, typename F, typename G, typename H>\nstruct\
     \ LazySegmentTree {\n  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n\
-    \  vector<T> dat;\n  vector<E> laz;\n  LazySegmentTree(int n, F _f, G _g, H _h,\
-    \ T _ti, E _ei)\n      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init(n);\n\
+    \  vector<T> dat;\n  vector<E> laz;\n  LazySegmentTree(int _n, F _f, G _g, H _h,\
+    \ T _ti, E _ei)\n      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init(_n);\n\
     \  }\n  LazySegmentTree(const vector<T> &v, F _f, G _g, H _h, T _ti, E _ei)\n\
     \      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init((int)v.size());\n \
     \   build(v);\n  }\n  void init(int _n) {\n    n = 1;\n    height = 0;\n    while\
@@ -268,7 +268,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-07-11 08:39:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp

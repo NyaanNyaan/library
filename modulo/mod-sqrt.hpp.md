@@ -85,8 +85,8 @@ data:
   isVerificationFile: false
   path: modulo/mod-sqrt.hpp
   requiredBy:
-  - modulo/quadratic-equation.hpp
   - fps/fps-sqrt.hpp
+  - modulo/quadratic-equation.hpp
   timestamp: '2021-02-08 19:11:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

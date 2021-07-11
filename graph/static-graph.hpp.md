@@ -97,21 +97,21 @@ data:
   isVerificationFile: false
   path: graph/static-graph.hpp
   requiredBy:
-  - shortest-path/dijkstra-skew-heap.hpp
   - shortest-path/dijkstra-fast.hpp
+  - shortest-path/dijkstra-skew-heap.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
-  - verify/verify-yuki/yuki-1320.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
 documentation_of: graph/static-graph.hpp
 layout: document
 redirect_from:
