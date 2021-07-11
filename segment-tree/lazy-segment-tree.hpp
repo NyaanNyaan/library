@@ -11,9 +11,9 @@ struct LazySegmentTree {
   E ei;
   vector<T> dat;
   vector<E> laz;
-  LazySegmentTree(int n, F _f, G _g, H _h, T _ti, E _ei)
+  LazySegmentTree(int _n, F _f, G _g, H _h, T _ti, E _ei)
       : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {
-    init(n);
+    init(_n);
   }
   LazySegmentTree(const vector<T> &v, F _f, G _g, H _h, T _ti, E _ei)
       : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {
