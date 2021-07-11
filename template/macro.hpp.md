@@ -826,6 +826,9 @@ data:
     path: verify/verify-yuki/yuki-1340-semiring.test.cpp
     title: verify/verify-yuki/yuki-1340-semiring.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1460.test.cpp
+    title: verify/verify-yuki/yuki-1460.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1504.test.cpp
     title: verify/verify-yuki/yuki-1504.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1086,6 +1089,7 @@ data:
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp
+  - verify/verify-yuki/yuki-1460.test.cpp
   - verify/verify-yuki/yuki-1340-semiring.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-1323.test.cpp

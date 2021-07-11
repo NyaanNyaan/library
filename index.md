@@ -366,6 +366,9 @@ data:
       path: math/rational.hpp
       title: math/rational.hpp
     - icon: ':heavy_check_mark:'
+      path: math/semiring-linear-recursive.hpp
+      title: math/semiring-linear-recursive.hpp
+    - icon: ':heavy_check_mark:'
       path: math/semiring.hpp
       title: "\u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
@@ -1666,6 +1669,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1340-semiring.test.cpp
       title: verify/verify-yuki/yuki-1340-semiring.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1460.test.cpp
+      title: verify/verify-yuki/yuki-1460.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1504.test.cpp
       title: verify/verify-yuki/yuki-1504.test.cpp
