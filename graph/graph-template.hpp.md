@@ -36,9 +36,6 @@ data:
     path: math/grundy-number.hpp
     title: Grundy Number
   - icon: ':heavy_check_mark:'
-    path: math/two-sat.hpp
-    title: 2-SAT
-  - icon: ':heavy_check_mark:'
     path: shortest-path/bellman-ford.hpp
     title: shortest-path/bellman-ford.hpp
   - icon: ':heavy_check_mark:'
@@ -224,9 +221,6 @@ data:
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
-    title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
-  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   - icon: ':heavy_check_mark:'
@@ -314,7 +308,6 @@ data:
   - graph/strongly-connected-components.hpp
   - graph/cycle-detection.hpp
   - graph/topological-sort.hpp
-  - math/two-sat.hpp
   - math/grundy-number.hpp
   - tree/rerooting.hpp
   - tree/heavy-light-decomposition.hpp
@@ -347,7 +340,6 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/semiring.test.cpp

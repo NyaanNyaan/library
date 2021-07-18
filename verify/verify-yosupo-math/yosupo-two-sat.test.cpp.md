@@ -2,12 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/strongly-connected-components.hpp
-    title: graph/strongly-connected-components.hpp
-  - icon: ':heavy_check_mark:'
     path: math/two-sat.hpp
     title: 2-SAT
   - icon: ':heavy_check_mark:'
@@ -39,9 +33,59 @@ data:
     links:
     - https://judge.yosupo.jp/problem/two_sat
   bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-two-sat.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n\n#line 2 \"math/two-sat.hpp\"\
+    \n\n#include <algorithm>\n#include <cassert>\n#include <utility>\n#include <vector>\n\
+    \nusing namespace std;\n\nnamespace TwoSatImpl {\nnamespace internal {\n\ntemplate\
+    \ <class E>\nstruct csr {\n  vector<int> start;\n  vector<E> elist;\n  csr(int\
+    \ n, const vector<pair<int, E>>& edges)\n      : start(n + 1), elist(edges.size())\
+    \ {\n    for (auto e : edges) {\n      start[e.first + 1]++;\n    }\n    for (int\
+    \ i = 1; i <= n; i++) {\n      start[i] += start[i - 1];\n    }\n    auto counter\
+    \ = start;\n    for (auto e : edges) {\n      elist[counter[e.first]++] = e.second;\n\
+    \    }\n  }\n};\n\nstruct scc_graph {\n public:\n  scc_graph(int n) : _n(n) {}\n\
+    \n  int num_vertices() { return _n; }\n\n  void add_edge(int from, int to) { edges.push_back({from,\
+    \ {to}}); }\n\n  pair<int, vector<int>> scc_ids() {\n    auto g = csr<edge>(_n,\
+    \ edges);\n    int now_ord = 0, group_num = 0;\n    vector<int> visited, low(_n),\
+    \ ord(_n, -1), ids(_n);\n    visited.reserve(_n);\n    auto dfs = [&](auto self,\
+    \ int v) -> void {\n      low[v] = ord[v] = now_ord++;\n      visited.push_back(v);\n\
+    \      for (int i = g.start[v]; i < g.start[v + 1]; i++) {\n        auto to =\
+    \ g.elist[i].to;\n        if (ord[to] == -1) {\n          self(self, to);\n  \
+    \        low[v] = min(low[v], low[to]);\n        } else {\n          low[v] =\
+    \ min(low[v], ord[to]);\n        }\n      }\n      if (low[v] == ord[v]) {\n \
+    \       while (true) {\n          int u = visited.back();\n          visited.pop_back();\n\
+    \          ord[u] = _n;\n          ids[u] = group_num;\n          if (u == v)\
+    \ break;\n        }\n        group_num++;\n      }\n    };\n    for (int i = 0;\
+    \ i < _n; i++) {\n      if (ord[i] == -1) dfs(dfs, i);\n    }\n    for (auto&\
+    \ x : ids) {\n      x = group_num - 1 - x;\n    }\n    return {group_num, ids};\n\
+    \  }\n\n  vector<vector<int>> scc() {\n    auto ids = scc_ids();\n    int group_num\
+    \ = ids.first;\n    vector<int> counts(group_num);\n    for (auto x : ids.second)\
+    \ counts[x]++;\n    vector<vector<int>> groups(ids.first);\n    for (int i = 0;\
+    \ i < group_num; i++) {\n      groups[i].reserve(counts[i]);\n    }\n    for (int\
+    \ i = 0; i < _n; i++) {\n      groups[ids.second[i]].push_back(i);\n    }\n  \
+    \  return groups;\n  }\n\n  void add_node_size(int m) { _n += m; }\n  int size()\
+    \ { return _n; }\n\n private:\n  int _n;\n  struct edge {\n    int to;\n  };\n\
+    \  vector<pair<int, edge>> edges;\n};\n\n}  // namespace internal\n\nstruct two_sat\
+    \ {\n public:\n  two_sat() : _n(0), built(false), scc(0) {}\n  two_sat(int n)\
+    \ : _n(n), built(false), scc(2 * n) {}\n\n  int add_var() {\n    scc.add_node_size(2);\n\
+    \    return _n++;\n  }\n\n  // (not i) \u306F ~i \u3067\u6E21\u3059\n  void add_clause(int\
+    \ i, int j) {\n    i = max(2 * i, -1 - 2 * i);\n    j = max(2 * j, -1 - 2 * j);\n\
+    \    assert(0 <= i && i < 2 * _n);\n    assert(0 <= j && j < 2 * _n);\n    scc.add_edge(i,\
+    \ j ^ 1);\n    scc.add_edge(j, i ^ 1);\n  }\n  void if_then(int i, int j) { add_clause(~i,\
+    \ j); }\n  void set_val(int i) { add_clause(i, i); }\n\n  // (not i) \u306F ~i\
+    \ \u3067\u6E21\u3059\n  void at_most_one(const vector<int>& nodes) {\n    if ((int)nodes.size()\
+    \ <= 1) return;\n    int cur = ~nodes[0];\n    for (int i = 2; i < (int)nodes.size();\
+    \ i++) {\n      int nxt = add_var(), n_i = ~nodes[i];\n      add_clause(cur, n_i);\n\
+    \      add_clause(cur, nxt);\n      add_clause(n_i, nxt);\n      cur = ~nxt;\n\
+    \    }\n    add_clause(cur, ~nodes[1]);\n  }\n\n  bool satisfiable() {\n    _answer.resize(_n);\n\
+    \    built = true;\n    auto id = scc.scc_ids().second;\n    for (int i = 0; i\
+    \ < _n; i++) {\n      if (id[2 * i] == id[2 * i + 1]) {\n        _answer.clear();\n\
+    \        return false;\n      }\n      _answer[i] = id[2 * i] < id[2 * i + 1];\n\
+    \    }\n    return true;\n  }\n  vector<bool> answer() {\n    if (!built) satisfiable();\n\
+    \    return _answer;\n  }\n\n private:\n  int _n;\n  vector<bool> _answer;\n \
+    \ bool built;\n  internal::scc_graph scc;\n};\n\n}  // namespace TwoSatImpl\n\n\
+    using TwoSatImpl::two_sat;\n\n/**\n * @brief 2-SAT\n * @docs docs/math/two-sat.md\n\
+    \ */\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#line 8 \"template/template.hpp\"\n#include <array>\n\
+    #include <bitset>\n#line 11 \"template/template.hpp\"\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
     \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
     \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
@@ -52,41 +96,41 @@ data:
     \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
     #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
     #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
-    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
-    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
-    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
-    \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
-    \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
-    \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
-    \ first; }\n  U &y() { return second; }\n  const U &y() const { return second;\
-    \ }\n\n  P &operator+=(const P &r) {\n    first += r.first;\n    second += r.second;\n\
-    \    return *this;\n  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n\
-    \    second -= r.second;\n    return *this;\n  }\n  P &operator*=(const P &r)\
-    \ {\n    first *= r.first;\n    second *= r.second;\n    return *this;\n  }\n\
-    \  P operator+(const P &r) const { return P(*this) += r; }\n  P operator-(const\
-    \ P &r) const { return P(*this) -= r; }\n  P operator*(const P &r) const { return\
-    \ P(*this) *= r; }\n};\n\nusing pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing\
-    \ vp = V<pl>;\n\nconstexpr int inf = 1001001001;\nconstexpr long long infLL =\
-    \ 4004004004004004004LL;\n\ntemplate <typename T>\nint sz(const T &t) {\n  return\
-    \ t.size();\n}\n\ntemplate <typename T, typename U>\ninline bool amin(T &x, U\
-    \ y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate <typename T, typename\
-    \ U>\ninline bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true) : false;\n\
-    }\n\ntemplate <typename T>\ninline T Max(const vector<T> &v) {\n  return *max_element(begin(v),\
-    \ end(v));\n}\ntemplate <typename T>\ninline T Min(const vector<T> &v) {\n  return\
-    \ *min_element(begin(v), end(v));\n}\ntemplate <typename T>\ninline long long\
-    \ Sum(const vector<T> &v) {\n  return accumulate(begin(v), end(v), 0LL);\n}\n\n\
-    template <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
-    \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\n\
-    constexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n  for (; n; x\
-    \ *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate <typename\
-    \ T, typename U>\npair<T, U> mkp(const T &t, const U &u) {\n  return make_pair(t,\
-    \ u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const vector<T> &v, bool rev\
-    \ = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for (int i = int(v.size())\
+    \ <unordered_set>\n#line 55 \"template/template.hpp\"\n\n// utility\n#line 1 \"\
+    template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64 = long\
+    \ long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing u128\
+    \ = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate <typename\
+    \ T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing vl = vector<long\
+    \ long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing vvi = vector<vector<int>>;\n\
+    using vvl = vector<vector<long long>>;\n\ntemplate <typename T, typename U>\n\
+    struct P : pair<T, U> {\n  template <typename... Args>\n  P(Args... args) : pair<T,\
+    \ U>(args...) {}\n\n  using pair<T, U>::first;\n  using pair<T, U>::second;\n\n\
+    \  T &x() { return first; }\n  const T &x() const { return first; }\n  U &y()\
+    \ { return second; }\n  const U &y() const { return second; }\n\n  P &operator+=(const\
+    \ P &r) {\n    first += r.first;\n    second += r.second;\n    return *this;\n\
+    \  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n    second -= r.second;\n\
+    \    return *this;\n  }\n  P &operator*=(const P &r) {\n    first *= r.first;\n\
+    \    second *= r.second;\n    return *this;\n  }\n  P operator+(const P &r) const\
+    \ { return P(*this) += r; }\n  P operator-(const P &r) const { return P(*this)\
+    \ -= r; }\n  P operator*(const P &r) const { return P(*this) *= r; }\n};\n\nusing\
+    \ pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing vp = V<pl>;\n\nconstexpr int\
+    \ inf = 1001001001;\nconstexpr long long infLL = 4004004004004004004LL;\n\ntemplate\
+    \ <typename T>\nint sz(const T &t) {\n  return t.size();\n}\n\ntemplate <typename\
+    \ T, typename U>\ninline bool amin(T &x, U y) {\n  return (y < x) ? (x = y, true)\
+    \ : false;\n}\ntemplate <typename T, typename U>\ninline bool amax(T &x, U y)\
+    \ {\n  return (x < y) ? (x = y, true) : false;\n}\n\ntemplate <typename T>\ninline\
+    \ T Max(const vector<T> &v) {\n  return *max_element(begin(v), end(v));\n}\ntemplate\
+    \ <typename T>\ninline T Min(const vector<T> &v) {\n  return *min_element(begin(v),\
+    \ end(v));\n}\ntemplate <typename T>\ninline long long Sum(const vector<T> &v)\
+    \ {\n  return accumulate(begin(v), end(v), 0LL);\n}\n\ntemplate <typename T>\n\
+    int lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v), end(v),\
+    \ a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v, const T\
+    \ &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\nconstexpr\
+    \ long long TEN(int n) {\n  long long ret = 1, x = 10;\n  for (; n; x *= x, n\
+    \ >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate <typename T, typename\
+    \ U>\npair<T, U> mkp(const T &t, const U &u) {\n  return make_pair(t, u);\n}\n\
+    \ntemplate <typename T>\nvector<T> mkrui(const vector<T> &v, bool rev = false)\
+    \ {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for (int i = int(v.size())\
     \ - 1; i >= 0; i--) ret[i] = v[i] + ret[i + 1];\n  } else {\n    for (int i =\
     \ 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n\
     };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
@@ -174,94 +218,33 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"math/two-sat.hpp\"\
-    \n\n\n\n#line 2 \"graph/strongly-connected-components.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
-    \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
-    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
-    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
-    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
-    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
-    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
-    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
-    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
-    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
-    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
-    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
-    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
-    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
-    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
-    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
-    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
-    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
-    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
-    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
-    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
-    \                       bool is_directed = false, bool is_1origin = true) {\n\
-    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
-    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
-    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"graph/strongly-connected-components.hpp\"\
-    \n\n// Strongly Connected Components\n// DAG of SC graph   ... scc.dag (including\
-    \ multiedges)\n// new node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\n\
-    template <typename G>\nstruct StronglyConnectedComponents {\n private:\n  const\
-    \ G &g;\n  vector<vector<int>> rg;\n  vector<int> comp, order;\n  vector<char>\
-    \ used;\n  vector<vector<int>> blng;\n\n public:\n  vector<vector<int>> dag;\n\
-    \  StronglyConnectedComponents(G &_g) : g(_g), used(g.size(), 0) { build(); }\n\
-    \n  int operator[](int k) { return comp[k]; }\n\n  vector<int> &belong(int i)\
-    \ { return blng[i]; }\n\n private:\n  void dfs(int idx) {\n    if (used[idx])\
-    \ return;\n    used[idx] = true;\n    for (auto to : g[idx]) dfs(int(to));\n \
-    \   order.push_back(idx);\n  }\n\n  void rdfs(int idx, int cnt) {\n    if (comp[idx]\
-    \ != -1) return;\n    comp[idx] = cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n\
-    \  }\n\n  void build() {\n    for (int i = 0; i < (int)g.size(); i++) dfs(i);\n\
-    \    reverse(begin(order), end(order));\n    used.clear();\n    used.shrink_to_fit();\n\
-    \n    comp.resize(g.size(), -1);\n\n    rg.resize(g.size());\n    for (int i =\
-    \ 0; i < (int)g.size(); i++) {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n\
-    \      }\n    }\n    int ptr = 0;\n    for (int i : order)\n      if (comp[i]\
-    \ == -1) rdfs(i, ptr), ptr++;\n    rg.clear();\n    rg.shrink_to_fit();\n    order.clear();\n\
-    \    order.shrink_to_fit();\n\n    dag.resize(ptr);\n    blng.resize(ptr);\n \
-    \   for (int i = 0; i < (int)g.size(); i++) {\n      blng[comp[i]].push_back(i);\n\
-    \      for (auto &to : g[i]) {\n        int x = comp[i], y = comp[to];\n     \
-    \   if (x == y) continue;\n        dag[x].push_back(y);\n      }\n    }\n  }\n\
-    };\n#line 6 \"math/two-sat.hpp\"\n\nstruct TwoSAT {\n  int N;\n  vector<vector<int>>\
-    \ g;\n\n  TwoSAT(int n) : N(n), g(2 * n) {}\n\n  inline int id(int node, int cond)\
-    \ { return node + (cond ? N : 0); }\n\n  void add_cond(int s, int fs, int t, int\
-    \ ft) {\n    g[id(s, !(fs))].push_back(id(t, ft));\n    g[id(t, !(ft))].push_back(id(s,\
-    \ fs));\n  };\n\n  vector<int> run() {\n    StronglyConnectedComponents<decltype(g)>\
-    \ scc(g);\n    vector<int> ret(N);\n    for (int i = 0; i < N; i++) {\n      if\
-    \ (scc[i] == scc[N + i])\n        return {};\n      else\n        ret[i] = scc[i]\
-    \ < scc[N + i];\n    }\n    return ret;\n  }\n};\n\n/**\n * @brief 2-SAT\n * @docs\
-    \ docs/math/two-sat.md\n */\n#line 5 \"verify/verify-yosupo-math/yosupo-two-sat.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ins(p, cnf);\n  ini(N, M);\n\
-    \  TwoSAT sat(N);\n  rep(_, M) {\n    ini(a, b, c);\n    sat.add_cond(abs(a) -\
-    \ 1, a > 0, abs(b) - 1, b > 0);\n  }\n  auto ans = sat.run();\n  if (ans.empty())\
-    \ {\n    out(\"s UNSATISFIABLE\");\n    return;\n  }\n  out(\"s SATISFIABLE\"\
-    );\n  cout << \"v \";\n  rep(i, N) cout << (ans[i] ? (i + 1) : -(i + 1)) << \"\
-    \ \";\n  cout << \"0\\n\";\n}\n"
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 5 \"verify/verify-yosupo-math/yosupo-two-sat.test.cpp\"\
+    \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ins(p, cnf);\n  ini(N, M);\n\
+    \  two_sat sat(N);\n  rep(_, M) {\n    ini(a, b, c);\n    int A = abs(a) - 1,\
+    \ B = abs(b) - 1;\n    if (a < 0) A = ~A;\n    if (b < 0) B = ~B;\n    sat.add_clause(A,\
+    \ B);\n  }\n\n  auto ans = sat.answer();\n  if (ans.empty()) {\n    out(\"s UNSATISFIABLE\"\
+    );\n    return;\n  }\n  out(\"s SATISFIABLE\");\n  cout << \"v \";\n  rep(i, N)\
+    \ cout << (ans[i] ? (i + 1) : -(i + 1)) << \" \";\n  cout << \"0\\n\";\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\n\n#include \"\
-    ../../template/template.hpp\"\n#include \"../../math/two-sat.hpp\"\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  ins(p, cnf);\n  ini(N, M);\n  TwoSAT sat(N);\n\
-    \  rep(_, M) {\n    ini(a, b, c);\n    sat.add_cond(abs(a) - 1, a > 0, abs(b)\
-    \ - 1, b > 0);\n  }\n  auto ans = sat.run();\n  if (ans.empty()) {\n    out(\"\
-    s UNSATISFIABLE\");\n    return;\n  }\n  out(\"s SATISFIABLE\");\n  cout << \"\
-    v \";\n  rep(i, N) cout << (ans[i] ? (i + 1) : -(i + 1)) << \" \";\n  cout <<\
-    \ \"0\\n\";\n}"
+    ../../math/two-sat.hpp\"\n#include \"../../template/template.hpp\"\n\nusing namespace\
+    \ Nyaan;\nvoid Nyaan::solve() {\n  ins(p, cnf);\n  ini(N, M);\n  two_sat sat(N);\n\
+    \  rep(_, M) {\n    ini(a, b, c);\n    int A = abs(a) - 1, B = abs(b) - 1;\n \
+    \   if (a < 0) A = ~A;\n    if (b < 0) B = ~B;\n    sat.add_clause(A, B);\n  }\n\
+    \n  auto ans = sat.answer();\n  if (ans.empty()) {\n    out(\"s UNSATISFIABLE\"\
+    );\n    return;\n  }\n  out(\"s SATISFIABLE\");\n  cout << \"v \";\n  rep(i, N)\
+    \ cout << (ans[i] ? (i + 1) : -(i + 1)) << \" \";\n  cout << \"0\\n\";\n}\n"
   dependsOn:
+  - math/two-sat.hpp
   - template/template.hpp
   - template/util.hpp
   - template/bitop.hpp
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - math/two-sat.hpp
-  - graph/strongly-connected-components.hpp
-  - graph/graph-template.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-07-18 18:42:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-two-sat.test.cpp

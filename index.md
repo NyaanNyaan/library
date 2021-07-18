@@ -12,6 +12,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: "\u52D5\u7684Binary Indexed Tree"
+    - icon: ':warning:'
+      path: data-structure/dynamic-bitset.hpp
+      title: "\u52D5\u7684bitset"
     - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-union-find.hpp
       title: "\u52D5\u7684Union Find"
@@ -262,6 +265,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/two-edge-connected-components.hpp
       title: graph/two-edge-connected-components.hpp
+    - icon: ':warning:'
+      path: graph/two-sat.hpp
+      title: graph/two-sat.hpp
   - name: hashmap
     pages:
     - icon: ':heavy_check_mark:'
