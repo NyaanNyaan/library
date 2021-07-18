@@ -1,17 +1,22 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
-#include "../../template/template.hpp"
 #include "../../math/two-sat.hpp"
+#include "../../template/template.hpp"
 
-using namespace Nyaan; void Nyaan::solve() {
+using namespace Nyaan;
+void Nyaan::solve() {
   ins(p, cnf);
   ini(N, M);
-  TwoSAT sat(N);
+  two_sat sat(N);
   rep(_, M) {
     ini(a, b, c);
-    sat.add_cond(abs(a) - 1, a > 0, abs(b) - 1, b > 0);
+    int A = abs(a) - 1, B = abs(b) - 1;
+    if (a < 0) A = ~A;
+    if (b < 0) B = ~B;
+    sat.add_clause(A, B);
   }
-  auto ans = sat.run();
+
+  auto ans = sat.answer();
   if (ans.empty()) {
     out("s UNSATISFIABLE");
     return;

@@ -104,8 +104,8 @@ struct scc_graph {
 
 struct two_sat {
  public:
-  two_sat() : _n(0), built(false), scc(0) {}
-  two_sat(int n) : _n(n), built(false), scc(2 * n) {}
+  two_sat() : _n(0), scc(0) {}
+  two_sat(int n) : _n(n), scc(2 * n) {}
 
   int add_var() {
     scc.add_node_size(2);
@@ -118,8 +118,8 @@ struct two_sat {
     j = max(2 * j, -1 - 2 * j);
     assert(0 <= i && i < 2 * _n);
     assert(0 <= j && j < 2 * _n);
-    scc.add_edge(i, j ^ 1);
-    scc.add_edge(j, i ^ 1);
+    scc.add_edge(i ^ 1, j);
+    scc.add_edge(j ^ 1, i);
   }
   void if_then(int i, int j) { add_clause(~i, j); }
   void set_val(int i) { add_clause(i, i); }
@@ -140,34 +140,24 @@ struct two_sat {
 
   bool satisfiable() {
     _answer.resize(_n);
-    built = true;
     auto id = scc.scc_ids().second;
     for (int i = 0; i < _n; i++) {
-      if (id[2 * i] == id[2 * i + 1]) {
-        _answer.clear();
-        return false;
-      }
+      if (id[2 * i] == id[2 * i + 1]) return false;
       _answer[i] = id[2 * i] < id[2 * i + 1];
     }
     return true;
   }
   vector<bool> answer() {
-    if (!built) satisfiable();
+    assert((int)_answer.size() == _n);
     return _answer;
   }
 
  private:
   int _n;
   vector<bool> _answer;
-  bool built;
   internal::scc_graph scc;
 };
 
 }  // namespace TwoSatImpl
 
 using TwoSatImpl::two_sat;
-
-/**
- * @brief 2-SAT
- * @docs docs/math/two-sat.md
- */
