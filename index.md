@@ -265,9 +265,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/two-edge-connected-components.hpp
       title: graph/two-edge-connected-components.hpp
-    - icon: ':warning:'
-      path: graph/two-sat.hpp
-      title: graph/two-sat.hpp
   - name: hashmap
     pages:
     - icon: ':heavy_check_mark:'
