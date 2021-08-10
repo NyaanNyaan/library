@@ -723,12 +723,17 @@ data:
     \    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
     \ * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return\
-    \ C(n, r); }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
-    \ return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1;\
-    \ i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int\
-    \ r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n\
-    \ - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n\
-    \    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"verify/verify-yuki/yuki-0963-circular.test.cpp\"\
+    \ C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>& r) {\n\
+    \    static_assert(is_integral<I>::value == true);\n    int n = 0;\n    for (auto&\
+    \ x : r) {\n      if(x < 0) return T(0);\n      n += x;\n    }\n    T res = fac(n);\n\
+    \    for (auto& x : r) res *= finv(x);\n    return res;\n  }\n\n  template <typename\
+    \ I>\n  T operator()(const vector<I>& r) {\n    return multinomial(r);\n  }\n\n\
+    \  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
+    \    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
+    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
+    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
+    \n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"verify/verify-yuki/yuki-0963-circular.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<1012924417>;\n\
     \  using fps = FormalPowerSeries<mint>;\n  Binomial<mint> C(1001001);\n  ini(N);\n\
     \  auto [cos, sin] = circular(fps{0, 1}, fps(), N + 1);\n  out(((sin + 1) * cos.inv(N\
@@ -757,7 +762,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-0963-circular.test.cpp
   requiredBy: []
-  timestamp: '2021-05-10 21:37:34+09:00'
+  timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-0963-circular.test.cpp

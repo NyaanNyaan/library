@@ -43,6 +43,9 @@ data:
       path: data-structure/rollback-union-find.hpp
       title: "Rollback\u3064\u304DUnion Find"
     - icon: ':heavy_check_mark:'
+      path: data-structure/segment-set.hpp
+      title: data-structure/segment-set.hpp
+    - icon: ':heavy_check_mark:'
       path: data-structure/skew-heap.hpp
       title: Skew Heap
     - icon: ':heavy_check_mark:'
@@ -344,6 +347,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/enumerate-quotient.hpp
+      title: "\u5546\u306E\u5217\u6319"
     - icon: ':warning:'
       path: math/f2.hpp
       title: math/f2.hpp
@@ -447,7 +453,7 @@ data:
     - icon: ':warning:'
       path: misc/fixpoint.hpp
       title: misc/fixpoint.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: misc/int_div.hpp
       title: misc/int_div.hpp
     - icon: ':heavy_check_mark:'
@@ -625,6 +631,17 @@ data:
     - icon: ':heavy_check_mark:'
       path: prime/prime-sieve.hpp
       title: prime/prime-sieve.hpp
+  - name: random_graph
+    pages:
+    - icon: ':warning:'
+      path: random_graph/gen.hpp
+      title: random_graph/gen.hpp
+    - icon: ':warning:'
+      path: random_graph/graph.hpp
+      title: random_graph/graph.hpp
+    - icon: ':warning:'
+      path: random_graph/random.hpp
+      title: random_graph/random.hpp
   - name: rbst
     pages:
     - icon: ':heavy_check_mark:'
@@ -730,6 +747,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: shortest-path/warshall-floyd.hpp
       title: shortest-path/warshall-floyd.hpp
+  - name: .
+    pages:
+    - icon: ':warning:'
+      path: simple_template.hpp
+      title: simple_template.hpp
   - name: string
     pages:
     - icon: ':heavy_check_mark:'
@@ -1039,6 +1061,9 @@ data:
       path: verify/verify-unit-test/dual-fps.test.cpp
       title: verify/verify-unit-test/dual-fps.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/enumerate-quotient.test.cpp
+      title: verify/verify-unit-test/enumerate-quotient.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/factorize.test.cpp
       title: verify/verify-unit-test/factorize.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1056,6 +1081,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/hashset.test.cpp
       title: verify/verify-unit-test/hashset.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/int-div.test.cpp
+      title: verify/verify-unit-test/int-div.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/interval-union.test.cpp
       title: verify/verify-unit-test/interval-union.test.cpp
@@ -1110,6 +1138,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/run-length-encoding.test.cpp
       title: verify/verify-unit-test/run-length-encoding.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/segment-set.test.cpp
+      title: verify/verify-unit-test/segment-set.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/segment-tree-beats.test.cpp
       title: verify/verify-unit-test/segment-tree-beats.test.cpp
@@ -1409,6 +1440,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
+      title: verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp

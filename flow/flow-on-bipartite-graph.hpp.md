@@ -78,27 +78,36 @@ data:
     \ int>> pos;\n    std::vector<std::vector<_edge>> g;\n};\n\n}  // namespace atcoder\n\
     \n\n#line 4 \"flow/flow-on-bipartite-graph.hpp\"\n\nnamespace BipartiteGraphImpl\
     \ {\nusing namespace atcoder;\nstruct BipartiteGraph : mf_graph<long long> {\n\
-    \  int L, R, s, t;\n\n  explicit BipartiteGraph(int N, int M)\n      : mf_graph<long\
-    \ long>(N + M + 2), L(N), R(M), s(N + M), t(N + M + 1) {\n    for (int i = 0;\
-    \ i < L; i++) mf_graph<long long>::add_edge(s, i, 1);\n    for (int i = 0; i <\
-    \ R; i++) mf_graph<long long>::add_edge(i + L, t, 1);\n  }\n\n  int add_edge(int\
+    \  int L, R, s, t;\n  bool is_flow;\n\n  explicit BipartiteGraph(int N, int M)\n\
+    \      : mf_graph<long long>(N + M + 2),\n        L(N),\n        R(M),\n     \
+    \   s(N + M),\n        t(N + M + 1),\n        is_flow(false) {\n    for (int i\
+    \ = 0; i < L; i++) mf_graph<long long>::add_edge(s, i, 1);\n    for (int i = 0;\
+    \ i < R; i++) mf_graph<long long>::add_edge(i + L, t, 1);\n  }\n\n  int add_edge(int\
     \ n, int m, long long cap = 1) override {\n    assert(0 <= n && n < L);\n    assert(0\
     \ <= m && m < R);\n    return mf_graph<long long>::add_edge(n, m + L, cap);\n\
-    \  }\n\n  long long flow() { return mf_graph<long long>::flow(s, t); }\n\n  vector<pair<int,\
-    \ int>> MaximumMatching() {\n    auto es = mf_graph<long long>::edges();\n   \
-    \ vector<pair<int, int>> ret;\n    for (auto &e : es) {\n      if (e.flow > 0\
-    \ && e.from != s && e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n\
-    \      }\n    }\n    return ret;\n  }\n\n  // call after calclating flow !\n \
-    \ pair<vector<int>, vector<int>> MinimumVertexCover() {\n    auto colored = PreCalc();\n\
+    \  }\n\n  long long flow() {\n    is_flow = true;\n    return mf_graph<long long>::flow(s,\
+    \ t);\n  }\n\n  vector<pair<int, int>> MaximumMatching() {\n    if (!is_flow)\
+    \ flow();\n    auto es = mf_graph<long long>::edges();\n    vector<pair<int, int>>\
+    \ ret;\n    for (auto &e : es) {\n      if (e.flow > 0 && e.from != s && e.to\
+    \ != t) {\n        ret.emplace_back(e.from, e.to - L);\n      }\n    }\n    return\
+    \ ret;\n  }\n\n  // call after calclating flow !\n  pair<vector<int>, vector<int>>\
+    \ MinimumVertexCover() {\n    if (!is_flow) flow();\n    auto colored = PreCalc();\n\
     \    vector<int> nl, nr;\n    for (int i = 0; i < L; i++)\n      if (!colored[i])\
     \ nl.push_back(i);\n    for (int i = 0; i < R; i++)\n      if (colored[i + L])\
     \ nr.push_back(i);\n    return make_pair(nl, nr);\n  }\n\n  // call after calclating\
-    \ flow !\n  pair<vector<int>, vector<int>> MaximumIndependentSet() {\n    auto\
-    \ colored = PreCalc();\n    vector<int> nl, nr;\n    for (int i = 0; i < L; i++)\n\
-    \      if (colored[i]) nl.push_back(i);\n    for (int i = 0; i < R; i++)\n   \
-    \   if (!colored[i + L]) nr.push_back(i);\n    return make_pair(nl, nr);\n  }\n\
-    \n private:\n  vector<bool> PreCalc() {\n    vector<vector<int>> ag(L + R);\n\
-    \    vector<bool> used(L, false);\n    for (auto &e : mf_graph<long long>::edges())\
+    \ flow !\n  pair<vector<int>, vector<int>> MaximumIndependentSet() {\n    if (!is_flow)\
+    \ flow();\n    auto colored = PreCalc();\n    vector<int> nl, nr;\n    for (int\
+    \ i = 0; i < L; i++)\n      if (colored[i]) nl.push_back(i);\n    for (int i =\
+    \ 0; i < R; i++)\n      if (!colored[i + L]) nr.push_back(i);\n    return make_pair(nl,\
+    \ nr);\n  }\n\n  vector<pair<int, int>> MinimumEdgeCover() {\n    if (!is_flow)\
+    \ flow();\n    auto es = MaximumMatching();\n    vector<bool> useL(L), useR(R);\n\
+    \    for (auto &p : es) {\n      useL[p.first] = true;\n      useR[p.second] =\
+    \ true;\n    }\n    for (auto &e : mf_graph<long long>::edges()) {\n      if (e.flow\
+    \ > 0 || e.from == s || e.to == t) continue;\n      if (useL[e.from] == false\
+    \ || useR[e.to - L] == false) {\n        es.emplace_back(e.from, e.to - L);\n\
+    \        useL[e.from] = useR[e.to - L] = true;\n      }\n    }\n    return es;\n\
+    \  }\n\n private:\n  vector<bool> PreCalc() {\n    vector<vector<int>> ag(L +\
+    \ R);\n    vector<bool> used(L, false);\n    for (auto &e : mf_graph<long long>::edges())\
     \ {\n      if (e.from == s || e.to == t) continue;\n      if (e.flow > 0) {\n\
     \        ag[e.to].push_back(e.from);\n        used[e.from] = true;\n      } else\
     \ {\n        ag[e.from].push_back(e.to);\n      }\n    }\n    vector<bool> colored(L\
@@ -111,27 +120,36 @@ data:
     \ */\n"
   code: "#pragma once\n\n#include \"../atcoder/maxflow.hpp\"\n\nnamespace BipartiteGraphImpl\
     \ {\nusing namespace atcoder;\nstruct BipartiteGraph : mf_graph<long long> {\n\
-    \  int L, R, s, t;\n\n  explicit BipartiteGraph(int N, int M)\n      : mf_graph<long\
-    \ long>(N + M + 2), L(N), R(M), s(N + M), t(N + M + 1) {\n    for (int i = 0;\
-    \ i < L; i++) mf_graph<long long>::add_edge(s, i, 1);\n    for (int i = 0; i <\
-    \ R; i++) mf_graph<long long>::add_edge(i + L, t, 1);\n  }\n\n  int add_edge(int\
+    \  int L, R, s, t;\n  bool is_flow;\n\n  explicit BipartiteGraph(int N, int M)\n\
+    \      : mf_graph<long long>(N + M + 2),\n        L(N),\n        R(M),\n     \
+    \   s(N + M),\n        t(N + M + 1),\n        is_flow(false) {\n    for (int i\
+    \ = 0; i < L; i++) mf_graph<long long>::add_edge(s, i, 1);\n    for (int i = 0;\
+    \ i < R; i++) mf_graph<long long>::add_edge(i + L, t, 1);\n  }\n\n  int add_edge(int\
     \ n, int m, long long cap = 1) override {\n    assert(0 <= n && n < L);\n    assert(0\
     \ <= m && m < R);\n    return mf_graph<long long>::add_edge(n, m + L, cap);\n\
-    \  }\n\n  long long flow() { return mf_graph<long long>::flow(s, t); }\n\n  vector<pair<int,\
-    \ int>> MaximumMatching() {\n    auto es = mf_graph<long long>::edges();\n   \
-    \ vector<pair<int, int>> ret;\n    for (auto &e : es) {\n      if (e.flow > 0\
-    \ && e.from != s && e.to != t) {\n        ret.emplace_back(e.from, e.to - L);\n\
-    \      }\n    }\n    return ret;\n  }\n\n  // call after calclating flow !\n \
-    \ pair<vector<int>, vector<int>> MinimumVertexCover() {\n    auto colored = PreCalc();\n\
+    \  }\n\n  long long flow() {\n    is_flow = true;\n    return mf_graph<long long>::flow(s,\
+    \ t);\n  }\n\n  vector<pair<int, int>> MaximumMatching() {\n    if (!is_flow)\
+    \ flow();\n    auto es = mf_graph<long long>::edges();\n    vector<pair<int, int>>\
+    \ ret;\n    for (auto &e : es) {\n      if (e.flow > 0 && e.from != s && e.to\
+    \ != t) {\n        ret.emplace_back(e.from, e.to - L);\n      }\n    }\n    return\
+    \ ret;\n  }\n\n  // call after calclating flow !\n  pair<vector<int>, vector<int>>\
+    \ MinimumVertexCover() {\n    if (!is_flow) flow();\n    auto colored = PreCalc();\n\
     \    vector<int> nl, nr;\n    for (int i = 0; i < L; i++)\n      if (!colored[i])\
     \ nl.push_back(i);\n    for (int i = 0; i < R; i++)\n      if (colored[i + L])\
     \ nr.push_back(i);\n    return make_pair(nl, nr);\n  }\n\n  // call after calclating\
-    \ flow !\n  pair<vector<int>, vector<int>> MaximumIndependentSet() {\n    auto\
-    \ colored = PreCalc();\n    vector<int> nl, nr;\n    for (int i = 0; i < L; i++)\n\
-    \      if (colored[i]) nl.push_back(i);\n    for (int i = 0; i < R; i++)\n   \
-    \   if (!colored[i + L]) nr.push_back(i);\n    return make_pair(nl, nr);\n  }\n\
-    \n private:\n  vector<bool> PreCalc() {\n    vector<vector<int>> ag(L + R);\n\
-    \    vector<bool> used(L, false);\n    for (auto &e : mf_graph<long long>::edges())\
+    \ flow !\n  pair<vector<int>, vector<int>> MaximumIndependentSet() {\n    if (!is_flow)\
+    \ flow();\n    auto colored = PreCalc();\n    vector<int> nl, nr;\n    for (int\
+    \ i = 0; i < L; i++)\n      if (colored[i]) nl.push_back(i);\n    for (int i =\
+    \ 0; i < R; i++)\n      if (!colored[i + L]) nr.push_back(i);\n    return make_pair(nl,\
+    \ nr);\n  }\n\n  vector<pair<int, int>> MinimumEdgeCover() {\n    if (!is_flow)\
+    \ flow();\n    auto es = MaximumMatching();\n    vector<bool> useL(L), useR(R);\n\
+    \    for (auto &p : es) {\n      useL[p.first] = true;\n      useR[p.second] =\
+    \ true;\n    }\n    for (auto &e : mf_graph<long long>::edges()) {\n      if (e.flow\
+    \ > 0 || e.from == s || e.to == t) continue;\n      if (useL[e.from] == false\
+    \ || useR[e.to - L] == false) {\n        es.emplace_back(e.from, e.to - L);\n\
+    \        useL[e.from] = useR[e.to - L] = true;\n      }\n    }\n    return es;\n\
+    \  }\n\n private:\n  vector<bool> PreCalc() {\n    vector<vector<int>> ag(L +\
+    \ R);\n    vector<bool> used(L, false);\n    for (auto &e : mf_graph<long long>::edges())\
     \ {\n      if (e.from == s || e.to == t) continue;\n      if (e.flow > 0) {\n\
     \        ag[e.to].push_back(e.from);\n        used[e.from] = true;\n      } else\
     \ {\n        ag[e.from].push_back(e.to);\n      }\n    }\n    vector<bool> colored(L\
@@ -146,7 +164,7 @@ data:
   isVerificationFile: false
   path: flow/flow-on-bipartite-graph.hpp
   requiredBy: []
-  timestamp: '2020-12-21 18:22:27+09:00'
+  timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp

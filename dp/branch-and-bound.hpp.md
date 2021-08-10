@@ -55,8 +55,8 @@ data:
   timestamp: '2021-01-24 17:40:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
   - verify/verify-aoj-dpl/aoj-dpl-1-h-bandb.test.cpp
+  - verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
 documentation_of: dp/branch-and-bound.hpp
 layout: document
 redirect_from:

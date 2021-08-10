@@ -176,9 +176,8 @@ data:
     \ n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u64 d = a - b;\n \
     \   i8 s = __builtin_ctzll(d);\n    bool f = a > b;\n    b = f ? b : a;\n    a\
     \ = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n}  // namespace BinaryGCDImpl\n\
-    \nlong long gcd(long long a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a),\
-    \ abs(b));\n}\nlong long lcm(long long a, long long b) { return a / gcd(a, b)\
-    \ * b; }\n\n/**\n * @brief binary GCD\n */\n#line 6 \"verify/verify-unit-test/math-fast.test.cpp\"\
+    \nlong long fgcd(long long a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a),\
+    \ abs(b));\n}\n\n/**\n * @brief binary GCD\n */\n#line 6 \"verify/verify-unit-test/math-fast.test.cpp\"\
     \n\nnamespace fast_gcd_verify {\n\nusing i64 = long long;\n\ni64 naive_gcd(i64\
     \ a, i64 b) {\n  while (b) swap(a %= b, b);\n  return a;\n}\n\ni64 x_;\nvoid rng_init()\
     \ { x_ = 88172645463325252ULL; }\ni64 rng() { return x_ = x_ ^ (x_ << 7), x_ =\
@@ -242,7 +241,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/math-fast.test.cpp
   requiredBy: []
-  timestamp: '2021-05-15 02:06:53+09:00'
+  timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/math-fast.test.cpp

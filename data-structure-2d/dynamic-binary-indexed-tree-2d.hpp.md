@@ -60,9 +60,9 @@ data:
     \      ret += p ? *p : T();\n    }\n    return ret;\n  }\n\n  // [a, b)\n  T sum(S\
     \ a, S b) const { return sum(b) - sum(a); }\n\n  T operator[](S k) const { return\
     \ sum(k + 1) - sum(k); }\n\n  S lower_bound(T w) {\n    if (w <= 0) return 0;\n\
-    \    S x = 0;\n    for (S k = 1 << __lg(x); k > 0; k >>= 1) {\n      if (x + k\
-    \ <= N - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n\
-    \      }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed\
+    \    S x = 0;\n    for (S k = 1 << __lg(N); k; k >>= 1) {\n      if (x + k <=\
+    \ N - 1 && data[x + k] < w) {\n        w -= data[x + k];\n        x += k;\n  \
+    \    }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief \u52D5\u7684Binary Indexed\
     \ Tree\n * @docs docs/data-structure/dynamic-binary-indexed-tree.md\n */\n#line\
     \ 4 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\n\ntemplate <typename\
     \ T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int, T>;\n\
@@ -99,7 +99,7 @@ data:
   isVerificationFile: false
   path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp

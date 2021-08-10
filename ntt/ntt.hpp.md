@@ -179,8 +179,8 @@ data:
   timestamp: '2021-01-21 03:21:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
 documentation_of: ntt/ntt.hpp
 layout: document
 redirect_from:
