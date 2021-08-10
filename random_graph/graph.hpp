@@ -99,4 +99,9 @@ struct Graph {
     os << n << " " << m << "\n";
     print_edge(os, origin_0);
   }
+
+  friend ostream& operator<<(ostream& os, const Graph& g) {
+    g.print(os);
+    return os;
+  }
 };

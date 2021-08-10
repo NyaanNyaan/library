@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <array>
 #include <cassert>
+#include <chrono>
 #include <cstdint>
 #include <functional>
 #include <iostream>
@@ -35,23 +36,47 @@ struct UndirectedGraphGenerator {
 
   W _w_min, _w_max;
 
+  // 辺の重みを設定
   void set_weight(bool weighted, W w_min, W w_max) {
     _w_min = w_min, _w_max = w_max;
     if (!weighted) _w_min = _w_max = 1;
   }
 
+  // 辺を追加
   void add_edge(Graph& g, int i, int j) {
     W w = _w_min == _w_max ? _w_min : random(_w_min, _w_max);
     g.add_undirected_edge(i, j, w);
   }
 
+  // 乱数生成s
+  unsigned long long random_seed() const {
+    unsigned long long seed =
+        chrono::duration_cast<chrono::nanoseconds>(
+            chrono::high_resolution_clock::now().time_since_epoch())
+            .count();
+    return seed;
+  }
+
  public:
-  UndirectedGraphGenerator(unsigned long long seed) : _w_min(1), _w_max(1) {
+  UndirectedGraphGenerator(unsigned long long seed = 0) : _w_min(1), _w_max(1) {
+    if (seed == 0) seed = random_seed();
     set_seed(seed);
   }
 
   // シードを設定する
   void set_seed(unsigned long long seed) { _gen() = Random{seed ^ 1333uLL}; }
+
+  /**
+   * ランダムケース生成用。
+   *  条件を満たす全ての関数の中からランダムに1つを選んでグラフを生成。
+   */
+  Graph test(int n, bool is_tree = true, bool weighted = false, W w_min = 1,
+             W w_max = 1) {
+    using F = Graph (UndirectedGraphGenerator::*)(int, bool, W, W);
+    vector<F> f{tree, path, star, perfect, simple, namori, simple_sparse};
+    int mx = is_tree ? 2 : 6;
+    return (this->*f[random(0, mx)])(n, weighted, w_min, w_max);
+  }
 
   // ランダムな無向の木を出力
   Graph tree(int n, bool weighted = false, W w_min = 1, W w_max = 1) {
@@ -152,4 +177,4 @@ struct UndirectedGraphGenerator {
     for (auto& [i, j] : es) add_edge(g, i, j);
     return g;
   }
-} undirected{998244353};
+} undirected;
