@@ -61,8 +61,6 @@ $$h(S) = \sum_{T \mid U = S} f(T) g(U) x ^{|T| + |U|}$$
 >
 > $N \leq 17$
 
-この記事を書くために解き直したのだがかなり時間がかかってしまった、厳しい…
-
 [Elegia氏(EntropyIncreaser氏)](https://codeforces.com/blog/entry/83535?#comment-709269)のコメントにより日本にSubset Convolutionが広まるきっかけとなった問題である。
 
 まず、$e(S)$を$u,v \in S$である辺の本数と置く。これは$\mathrm{O}(M + N 2^N)$で求まる。
