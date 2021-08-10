@@ -6,9 +6,15 @@ namespace BipartiteGraphImpl {
 using namespace atcoder;
 struct BipartiteGraph : mf_graph<long long> {
   int L, R, s, t;
+  bool is_flow;
 
   explicit BipartiteGraph(int N, int M)
-      : mf_graph<long long>(N + M + 2), L(N), R(M), s(N + M), t(N + M + 1) {
+      : mf_graph<long long>(N + M + 2),
+        L(N),
+        R(M),
+        s(N + M),
+        t(N + M + 1),
+        is_flow(false) {
     for (int i = 0; i < L; i++) mf_graph<long long>::add_edge(s, i, 1);
     for (int i = 0; i < R; i++) mf_graph<long long>::add_edge(i + L, t, 1);
   }
@@ -19,9 +25,13 @@ struct BipartiteGraph : mf_graph<long long> {
     return mf_graph<long long>::add_edge(n, m + L, cap);
   }
 
-  long long flow() { return mf_graph<long long>::flow(s, t); }
+  long long flow() {
+    is_flow = true;
+    return mf_graph<long long>::flow(s, t);
+  }
 
   vector<pair<int, int>> MaximumMatching() {
+    if (!is_flow) flow();
     auto es = mf_graph<long long>::edges();
     vector<pair<int, int>> ret;
     for (auto &e : es) {
@@ -34,6 +44,7 @@ struct BipartiteGraph : mf_graph<long long> {
 
   // call after calclating flow !
   pair<vector<int>, vector<int>> MinimumVertexCover() {
+    if (!is_flow) flow();
     auto colored = PreCalc();
     vector<int> nl, nr;
     for (int i = 0; i < L; i++)
@@ -45,6 +56,7 @@ struct BipartiteGraph : mf_graph<long long> {
 
   // call after calclating flow !
   pair<vector<int>, vector<int>> MaximumIndependentSet() {
+    if (!is_flow) flow();
     auto colored = PreCalc();
     vector<int> nl, nr;
     for (int i = 0; i < L; i++)
@@ -52,6 +64,24 @@ struct BipartiteGraph : mf_graph<long long> {
     for (int i = 0; i < R; i++)
       if (!colored[i + L]) nr.push_back(i);
     return make_pair(nl, nr);
+  }
+
+  vector<pair<int, int>> MinimumEdgeCover() {
+    if (!is_flow) flow();
+    auto es = MaximumMatching();
+    vector<bool> useL(L), useR(R);
+    for (auto &p : es) {
+      useL[p.first] = true;
+      useR[p.second] = true;
+    }
+    for (auto &e : mf_graph<long long>::edges()) {
+      if (e.flow > 0 || e.from == s || e.to == t) continue;
+      if (useL[e.from] == false || useR[e.to - L] == false) {
+        es.emplace_back(e.from, e.to - L);
+        useL[e.from] = useR[e.to - L] = true;
+      }
+    }
+    return es;
   }
 
  private:

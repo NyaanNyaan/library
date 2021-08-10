@@ -70,7 +70,8 @@
     "iomanip": "cpp",
     "iostream": "cpp",
     "limits": "cpp",
-    "typeinfo": "cpp"
+    "typeinfo": "cpp",
+    "cassert": "cpp"
   },
   "C_Cpp.suggestSnippets": false,
   "python.linting.enabled": true,
