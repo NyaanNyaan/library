@@ -12,58 +12,6 @@
   // ],
   // "description": "Log output to console"
   // }
-  "fps": {
-    "prefix": "_fps",
-    "body": [
-      "#include \"modint/montgomery-modint.hpp\"",
-      "#include \"modulo/binomial.hpp\"",
-      "#include \"fps/ntt-friendly-fps.hpp\"",
-      "using mint = LazyMontgomeryModInt<998244353>;",
-      "// #include \"fps/arbitrary-fps.hpp\"",
-      "// using mint = LazyMontgomeryModInt<1000000007>;",
-      "Binomial<mint> C;",
-      "using vm = vector<mint>;",
-      "using vvm = vector<vm>;",
-      "using fps = FormalPowerSeries<mint>;"
-    ],
-    "description": "fps"
-  },
-  "dfs": {
-    "prefix": "_dfs",
-    "body": [
-      "auto ${1:dfs} = [&](auto rec,int cur,int par = -1) -> void{",
-      "  $0  ",
-      "  each(dst , g[cur]){",
-      "    if(dst == par) continue;",
-      "    rec(rec , dst , cur);",
-      "  }",
-      "",
-      "};",
-      "${1:dfs}(${1:dfs} , 0);"
-    ],
-    "description": "dfs"
-  },
-  "bfs": {
-    "prefix": "_bfs",
-    "body": [
-      "auto bfs = [&](int start = 0) {",
-      "  queue<int> Q;",
-      "  Q.push(start);",
-      "  while (!Q.empty()) {",
-      "    int cur = Q.front();",
-      "    Q.pop();",
-      "    for (auto dst : g[cur]) {",
-      "      if (/* already visited */) continue;",
-      "      // write down here",
-      "",
-      "      Q.push(dst);",
-      "    }",
-      "  }",
-      "};",
-      "bfs();"
-    ],
-    "description": "bfs"
-  },
   "solve_function": {
     "prefix": "_sol",
     "body": [
@@ -78,128 +26,53 @@
     ],
     "description": "solve_function"
   },
-  "solve_function_for_multitest": {
-    "prefix": "_solve_for_multitest",
-    "body": [
-      "#include \"template/template.hpp\"",
-      "",
-      "using namespace Nyaan;",
-      "",
-      "void q(){",
-      "  $0",
-      "}",
-      "void Nyaan::solve(){",
-      "  int T;",
-      "  cin >> T;",
-      "  while(T--) q();",
-      "}"
-    ],
-    "description": "solve_function_for_multitest"
-  },"Square_Decomposition": {
-    "prefix": "_SquareRootDecomposition",
-    "body": [
-      "struct block {",
-      "  // S 作用素の型 T 要素の型",
-      "  using S = ;",
-      "  using T = ;",
-      "",
-      "  int i;",
-      "",
-      "  block() {}",
-      "",
-      "  // i ... 何個目のブロックか",
-      "  // i * B + j ... (jをブロック内のidxとして)全体でのidx",
-      "  int idx(int j) const { return i * B + j; }",
-      "  ",
-      "  // 変数とブロックの初期化を忘れない！",
-      "  void init(int _) { ",
-      "    i = _; ",
-      "  }",
-      "",
-      "  void build() {",
-      "",
-      "  }",
-      "",
-      "  void update_all(S x) {",
-      "",
-      "  }",
-      "",
-      "  void update_part(int l, int r, S x) { ",
-      "    ",
-      "    build(); ",
-      "  }",
-      "",
-      "  T query_all() {",
-      "",
-      "  }",
-      "",
-      "  T query_part(int l, int r) {",
-      "",
-      "  }",
-      "};",
-      ""
-    ],
-    "description": "Square_Decomposition"
-  },
   "_mint": {
     "prefix": "_mint",
     "body": [
       "#include \"modint/montgomery-modint.hpp\"",
+      "#include \"modulo/binomial.hpp\"",
+      "//",
+      "using namespace Nyaan;",
       "using mint = LazyMontgomeryModInt<998244353>;",
+      "// using mint = LazyMontgomeryModInt<1000000007>;",
       "using vm = vector<mint>;",
       "using vvm = vector<vm>;",
-      "#include \"modulo/binomial.hpp\"",
       "Binomial<mint> C;",
       ""
     ],
     "description": "_mint"
   },
-  "dsu_on_tree": {
-    "prefix": "_dsu",
+  "fps": {
+    "prefix": "_fps",
     "body": [
-      "  // reflect data of node i",
-      "  auto update = [&](int i) {",
-      "",
-      "  };",
-      "  // answer queries of subtree i",
-      "  auto query = [&](int i) {",
-      "",
-      "  };",
-      "  // below two function are called if all data must be deleted",
-      "  // delete data of node i (if necesarry)",
-      "  auto clear = [&](int i) {",
-      "",
-      "  };",
-      "  // delete data related to all (if necesarry)",
-      "  auto reset = [&]() {",
-      "",
-      "  };",
-      "  DSUonTree<decltype(g)> dsu(g, 0);",
-      "  dsu.run(update, query, clear, reset);",
-      ""
+      "#include \"modint/montgomery-modint.hpp\"",
+      "#include \"modulo/binomial.hpp\"",
+      "#include \"fps/ntt-friendly-fps.hpp\"",
+      "// #include \"fps/arbitrary-fps.hpp\"",
+      "//",
+      "using namespace Nyaan;",
+      "using mint = LazyMontgomeryModInt<998244353>;",
+      "// using mint = LazyMontgomeryModInt<1000000007>;",
+      "using vm = vector<mint>;",
+      "using vvm = vector<vm>;",
+      "Binomial<mint> C;",
+      "using fps = FormalPowerSeries<mint>;"
     ],
-    "description": "dsu_on_tree"
+    "description": "fps"
   },
-  "rerooting": {
-    "prefix": "_rerooting",
-    "body": [
-      "using T = ;",
-      "// identify element of f1, and answer of leaf",
-      "T I = ;",
-      "",
-      "// merge value of child node",
-      "auto f1 = [&](T x, T y) -> T {",
-      "",
-      "};",
-      "",
-      "// return value from child node to parent node",
-      "auto f2 = [&](T x, int chd, int par) -> T {",
-      "",
-      "};",
-      "",
-      "Rerooting<T, decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);",
-      ""
-    ],
-    "description": "rerooting"
-  }
+  "_dijkstra": {
+    "prefix": "_dijkstra",
+    "body": "// H, W, gは決め打ち\r\n// T : 辺の重みの型\r\nV<vl> d(H, vl(W, -1));\r\nusing T = long long;\r\nusing Data = pair<T, pair<int, int>>;\r\npriority_queue<Data, vector<Data>, greater<Data>> Q;\r\n\r\n// 上下左右 (UDLR) の順番\r\nint di[] = {-1, 1, 0, 0};\r\nint dj[] = {0, 0, -1, 1};\r\nauto ok = [&](int i, int j) -> bool {\r\n  return 0 <= i and i < H and 0 <= j and j < W;\r\n};\r\n// c != ' ' の場合、g[i][j] が c のときのみ遷移する\r\nauto add = [&](int i, int j, T cost, char c = ' ') -> void {\r\n  if (!ok(i, j)) return;\r\n  if (c != ' ' and c != g[i][j]) return;\r\n  if (d[i][j] == -1 or cost < d[i][j]) {\r\n    Q.emplace(cost, make_pair(i, j));\r\n    d[i][j] = cost;\r\n  }\r\n};\r\n\r\n// 始点の設定\r\nint SX = 0, SY = 0;\r\nadd(SX, SY, 0);\r\n\r\nwhile (!Q.empty()) {\r\n  auto [cost, pa] = Q.top();\r\n  auto [i, j] = pa;\r\n  Q.pop();\r\n  if (d[i][j] != cost) continue;\r\n\r\n  /*\r\n  for (int k = 0; k < 4; k++) {\r\n    int ni = i + di[k], nj = j + dj[k];\r\n\r\n    add(ni, nj, , );\r\n  }\r\n  */\r\n}",
+    "description": ""
+  },
+  "_dfs": {
+    "prefix": "_dfs",
+    "body": "auto dfs = [&](auto rc, int c, int p = -1,\r\n                [[maybe_unused]] ll dat = 0) -> void {\r\n  \r\n  for (auto& d : g[c]) {\r\n    if (d == p) continue;\r\n    rc(rc, d, c);\r\n  }\r\n};\r\ndfs(dfs, 0);",
+    "description": ""
+  },
+  "_bfs": {
+    "prefix": "_bfs",
+    "body": "auto bfs = [&](int st) {\r\n  queue<int> Q;\r\n  Q.push(st);\r\n  while (!Q.empty()) {\r\n    int c = Q.front();\r\n    Q.pop();\r\n    for (auto d : g[c]) {\r\n      if (/* already visited */ false) continue;\r\n      Q.push(d);\r\n      \r\n      // write down here\r\n      \r\n    }\r\n  }\r\n};\r\nbfs(0);",
+    "description": ""
+  },
 }

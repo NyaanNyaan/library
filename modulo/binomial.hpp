@@ -47,6 +47,24 @@ struct Binomial {
 
   inline T operator()(int n, int r) { return C(n, r); }
 
+  template <typename I>
+  T multinomial(const vector<I>& r) {
+    static_assert(is_integral<I>::value == true);
+    int n = 0;
+    for (auto& x : r) {
+      if(x < 0) return T(0);
+      n += x;
+    }
+    T res = fac(n);
+    for (auto& x : r) res *= finv(x);
+    return res;
+  }
+
+  template <typename I>
+  T operator()(const vector<I>& r) {
+    return multinomial(r);
+  }
+
   T C_naive(int n, int r) {
     if (n < 0 || n < r || r < 0) return T(0);
     T ret = T(1);

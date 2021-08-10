@@ -32,7 +32,7 @@ struct DynamicFenwickTree {
   S lower_bound(T w) {
     if (w <= 0) return 0;
     S x = 0;
-    for (S k = 1 << __lg(x); k > 0; k >>= 1) {
+    for (S k = 1 << __lg(N); k; k >>= 1) {
       if (x + k <= N - 1 && data[x + k] < w) {
         w -= data[x + k];
         x += k;
