@@ -60,14 +60,15 @@ data:
     \      os << \"\\n\";\n    }\n  }\n\n  // \u30B0\u30E9\u30D5\u3092\u4E00\u822C\
     \u7684\u306A\u5F62\u5F0F\u3067\u51FA\u529B\n  void print(ostream& os, bool origin_0\
     \ = false) const {\n    os << n << \" \" << m << \"\\n\";\n    print_edge(os,\
-    \ origin_0);\n  }\n};\n"
+    \ origin_0);\n  }\n\n  friend ostream& operator<<(ostream& os, const Graph& g)\
+    \ {\n    g.print(os);\n    return os;\n  }\n};\n"
   dependsOn:
   - random_graph/random.hpp
   isVerificationFile: false
   path: random_graph/graph.hpp
   requiredBy:
   - random_graph/gen.hpp
-  timestamp: '2021-08-10 23:14:36+09:00'
+  timestamp: '2021-08-11 08:31:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: random_graph/graph.hpp
