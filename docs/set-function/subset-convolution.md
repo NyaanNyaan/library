@@ -35,15 +35,15 @@ $$= \sum_{(T \cup U) \subseteq S} A(T) B(U)$$
 
 このアルゴリズムに一工夫を加えることでsubset convolutionを計算できるようにしたい。(もちろんそのままだと両方1が立っているbitの部分で壊れるので、何らかの情報を加えることでアルゴリズムが上手く回るようにしたい。)
 
-そこで、subset convolutionが$H = F \mid G$かつ$|H| = |F| + |G|$なのに注目して、集合の大きさの情報を加えたランク付き集合関数を考える。すなわち、集合関数$f$を
+そこで、subset convolutionが$H = F \mid G$かつ$\vert H \vert = \vert F \vert + \vert G \vert$なのに注目して、集合の大きさの情報を加えたランク付き集合関数を考える。すなわち、集合関数$f$を
 
-$$f \leftarrow \sum_{S \in \lbrack n \rbrack} f(S) x^{|S|}$$
+$$f \leftarrow \sum_{S \in \lbrack n \rbrack} f(S) x^{\vert S \vert}$$
 
 のようにランクの情報を付け加えた状態に置き換える。こうして得られた$f,g$に対してbitwise or convolutionを行うと、得られた結果は
 
-$$h(S) = \sum_{T \mid U = S} f(T) g(U) x ^{|T| + |U|}$$
+$$h(S) = \sum_{T \mid U = S} f(T) g(U) x ^{\vert T \vert + \vert U \vert}$$
 
-のようにランクの情報が付加されたものになるので、$x^{|S|}$次の項が求める答えとなる。計算量は$\mathrm{O}(n^2 2^n)$である。
+のようにランクの情報が付加されたものになるので、$x^{\vert S \vert}$次の項が求める答えとなる。計算量は$\mathrm{O}(n^2 2^n)$である。
 
 [verify用問題](https://judge.yosupo.jp/problem/subset_convolution) $N=2^{20}$だとSIMDを使わない実装で1.0s程度が相場のようだ。
 
