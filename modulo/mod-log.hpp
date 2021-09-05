@@ -2,7 +2,7 @@
 
 
 
-#include "../data-structure/hash-map-variable-length.hpp"
+#include "../hashmap/hashmap.hpp"
 #include "../inner/inner_math.hpp"
 
 int64_t mod_log(int64_t a, int64_t b, int64_t p) {
@@ -22,12 +22,12 @@ int64_t mod_log(int64_t a, int64_t b, int64_t p) {
   int64_t k = 0, ak = 1;
   HashMap<int64_t, int64_t> baby;
   for (; k * k < p; ++k) {
-    if(!baby.find(ak)) baby[ak] = k;
+    if(baby.find(ak) == baby.end()) baby[ak] = k;
     (ak *= a) %= p;
   }
   int64_t iak = inv(ak, p);
   for (int64_t i = 0; i < k; ++i) {
-    if (baby.find(b)) return f + i * k + baby[b];
+    if (baby.find(b) != baby.end()) return f + i * k + baby[b];
     (b *= iak) %= p;
   }
   return -1;

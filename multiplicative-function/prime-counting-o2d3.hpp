@@ -7,6 +7,8 @@
 inline int64_t my_div(int64_t n, int64_t p) { return double(n) / p; };
 
 int64_t prime_counting(long long N) {
+  if(N < 2) return 0;
+
   using i64 = long long;
 
   i64 N6, N3, N2, N23, nsz;

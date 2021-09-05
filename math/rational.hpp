@@ -103,7 +103,6 @@ struct Rational {
   }
 };
 
-/*
 struct Binomial {
   vector<Rational> fc;
   Binomial(int = 0) { fc.emplace_back(1); }
@@ -125,4 +124,3 @@ struct Binomial {
     return fac(n) * finv(n - r) * finv(r);
   }
 };
-*/
