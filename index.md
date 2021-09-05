@@ -54,9 +54,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/sliding-window-minimum.hpp
       title: data-structure/sliding-window-minimum.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/slope-trick.hpp
-      title: data-structure/slope-trick.hpp
+      title: Slope Trick
     - icon: ':heavy_check_mark:'
       path: data-structure/sparse-table.hpp
       title: data-structure/sparse-table.hpp
@@ -1709,6 +1709,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1460.test.cpp
       title: verify/verify-yuki/yuki-1460.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1467.test.cpp
+      title: verify/verify-yuki/yuki-1467.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1504.test.cpp
       title: verify/verify-yuki/yuki-1504.test.cpp

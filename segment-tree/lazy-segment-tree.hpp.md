@@ -79,8 +79,8 @@ data:
   timestamp: '2021-07-11 08:39:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
 documentation_of: segment-tree/lazy-segment-tree.hpp
 layout: document
 redirect_from:

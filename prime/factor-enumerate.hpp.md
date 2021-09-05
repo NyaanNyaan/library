@@ -39,8 +39,8 @@ data:
   timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
 documentation_of: prime/factor-enumerate.hpp
 layout: document
 redirect_from:

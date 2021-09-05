@@ -169,7 +169,7 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"geometry/integer-geometry.hpp\"\
-    \n\nstruct Point {\n  using T = long long;\n  T x, y;\n  Point() : x(0), y(0)\
+    \n\nstruct Point {\n  using T = __int128_t;\n  T x, y;\n  Point() : x(0), y(0)\
     \ {}\n  Point(T x_, T y_) : x(x_), y(y_) {}\n\n  Point &operator+=(const Point\
     \ &p) {\n    this->x += p.x;\n    this->y += p.y;\n    return *this;\n  }\n\n\
     \  Point &operator-=(const Point &p) {\n    this->x -= p.x;\n    this->y -= p.y;\n\
@@ -181,8 +181,9 @@ data:
     \ x == p.x && y == p.y; }\n  bool operator!=(const Point &p) const { return x\
     \ != p.x || y != p.y; }\n  bool operator<(const Point &p) const { return x ==\
     \ p.x ? y < p.y : x < p.x; }\n\n  friend istream &operator>>(istream &is, Point\
-    \ &p) {\n    cin >> p.x >> p.y;\n    return is;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const Point &p) {\n    os << p.x << \" \" << p.y;\n    return os;\n  }\n\
+    \ &p) {\n    long long x, y;\n    is >> x >> y;\n    p.x = x, p.y = y;\n    return\
+    \ is;\n  }\n\n  friend ostream &operator<<(ostream &os, const Point &p) {\n  \
+    \  os << (long long)(p.x) << \" \" << (long long)(p.y);\n    return os;\n  }\n\
     };\nusing Points = vector<Point>;\n\nPoint::T dot(const Point &a, const Point\
     \ &b) { return a.x * b.x + a.y * b.y; }\nPoint::T cross(const Point &a, const\
     \ Point &b) { return a.x * b.y - a.y * b.x; }\n\n// sort by argument (-Pi ~ Pi)\n\
@@ -224,7 +225,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-09-05 14:15:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-other/yosupo-argument-sort.test.cpp

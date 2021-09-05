@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: hashmap/hashset.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
+  - icon: ':heavy_check_mark:'
+    path: modulo/mod-log.hpp
+    title: modulo/mod-log.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
@@ -36,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
     title: verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+    title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -247,18 +253,20 @@ data:
   requiredBy:
   - data-structure/dynamic-union-find.hpp
   - graph/offline-dynamic-connectivity.hpp
+  - modulo/mod-log.hpp
   - hashmap/hashmap.hpp
   - hashmap/hashset.hpp
   timestamp: '2021-07-11 22:37:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+  - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
   - verify/verify-unit-test/debug.test.cpp
-  - verify/verify-unit-test/hashmap.test.cpp
-  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
 documentation_of: hashmap/hashmap-base.hpp
 layout: document
 redirect_from:

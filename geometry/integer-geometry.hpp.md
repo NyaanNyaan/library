@@ -12,7 +12,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"geometry/integer-geometry.hpp\"\n\nstruct Point {\n  using\
-    \ T = long long;\n  T x, y;\n  Point() : x(0), y(0) {}\n  Point(T x_, T y_) :\
+    \ T = __int128_t;\n  T x, y;\n  Point() : x(0), y(0) {}\n  Point(T x_, T y_) :\
     \ x(x_), y(y_) {}\n\n  Point &operator+=(const Point &p) {\n    this->x += p.x;\n\
     \    this->y += p.y;\n    return *this;\n  }\n\n  Point &operator-=(const Point\
     \ &p) {\n    this->x -= p.x;\n    this->y -= p.y;\n    return *this;\n  }\n\n\
@@ -23,11 +23,12 @@ data:
     \ Point &p) const { return x == p.x && y == p.y; }\n  bool operator!=(const Point\
     \ &p) const { return x != p.x || y != p.y; }\n  bool operator<(const Point &p)\
     \ const { return x == p.x ? y < p.y : x < p.x; }\n\n  friend istream &operator>>(istream\
-    \ &is, Point &p) {\n    cin >> p.x >> p.y;\n    return is;\n  }\n\n  friend ostream\
-    \ &operator<<(ostream &os, const Point &p) {\n    os << p.x << \" \" << p.y;\n\
-    \    return os;\n  }\n};\nusing Points = vector<Point>;\n\nPoint::T dot(const\
-    \ Point &a, const Point &b) { return a.x * b.x + a.y * b.y; }\nPoint::T cross(const\
-    \ Point &a, const Point &b) { return a.x * b.y - a.y * b.x; }\n\n// sort by argument\
+    \ &is, Point &p) {\n    long long x, y;\n    is >> x >> y;\n    p.x = x, p.y =\
+    \ y;\n    return is;\n  }\n\n  friend ostream &operator<<(ostream &os, const Point\
+    \ &p) {\n    os << (long long)(p.x) << \" \" << (long long)(p.y);\n    return\
+    \ os;\n  }\n};\nusing Points = vector<Point>;\n\nPoint::T dot(const Point &a,\
+    \ const Point &b) { return a.x * b.x + a.y * b.y; }\nPoint::T cross(const Point\
+    \ &a, const Point &b) { return a.x * b.y - a.y * b.x; }\n\n// sort by argument\
     \ (-Pi ~ Pi)\nvoid ArgumentSort(Points &v) {\n  sort(begin(v), end(v), [](Point\
     \ a, Point b) {\n    if (a.pos() != b.pos()) return a.pos() < b.pos();\n    return\
     \ cross(a, b) > 0;\n  });\n}\n\n// 1 ... counterclockwise / 0 straight / -1 clockwise\n\
@@ -49,7 +50,7 @@ data:
     \ - 1], ps[i]) <= 0) --k;\n  }\n  for (int i = N - 2, t = k + 1; i >= 0; convex[k++]\
     \ = ps[i--]) {\n    while (k >= t && ccw(convex[k - 2], convex[k - 1], ps[i])\
     \ <= 0) --k;\n  }\n  convex.resize(k - 1);\n  return convex;\n}\n"
-  code: "#pragma once\n\nstruct Point {\n  using T = long long;\n  T x, y;\n  Point()\
+  code: "#pragma once\n\nstruct Point {\n  using T = __int128_t;\n  T x, y;\n  Point()\
     \ : x(0), y(0) {}\n  Point(T x_, T y_) : x(x_), y(y_) {}\n\n  Point &operator+=(const\
     \ Point &p) {\n    this->x += p.x;\n    this->y += p.y;\n    return *this;\n \
     \ }\n\n  Point &operator-=(const Point &p) {\n    this->x -= p.x;\n    this->y\
@@ -61,8 +62,9 @@ data:
     \ x == p.x && y == p.y; }\n  bool operator!=(const Point &p) const { return x\
     \ != p.x || y != p.y; }\n  bool operator<(const Point &p) const { return x ==\
     \ p.x ? y < p.y : x < p.x; }\n\n  friend istream &operator>>(istream &is, Point\
-    \ &p) {\n    cin >> p.x >> p.y;\n    return is;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const Point &p) {\n    os << p.x << \" \" << p.y;\n    return os;\n  }\n\
+    \ &p) {\n    long long x, y;\n    is >> x >> y;\n    p.x = x, p.y = y;\n    return\
+    \ is;\n  }\n\n  friend ostream &operator<<(ostream &os, const Point &p) {\n  \
+    \  os << (long long)(p.x) << \" \" << (long long)(p.y);\n    return os;\n  }\n\
     };\nusing Points = vector<Point>;\n\nPoint::T dot(const Point &a, const Point\
     \ &b) { return a.x * b.x + a.y * b.y; }\nPoint::T cross(const Point &a, const\
     \ Point &b) { return a.x * b.y - a.y * b.x; }\n\n// sort by argument (-Pi ~ Pi)\n\
@@ -91,7 +93,7 @@ data:
   isVerificationFile: false
   path: geometry/integer-geometry.hpp
   requiredBy: []
-  timestamp: '2020-12-05 15:21:15+09:00'
+  timestamp: '2021-09-05 14:15:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
