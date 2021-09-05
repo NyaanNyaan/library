@@ -1,7 +1,7 @@
 #pragma once
 
 struct Point {
-  using T = long long;
+  using T = __int128_t;
   T x, y;
   Point() : x(0), y(0) {}
   Point(T x_, T y_) : x(x_), y(y_) {}
@@ -31,13 +31,8 @@ struct Point {
   bool operator!=(const Point &p) const { return x != p.x || y != p.y; }
   bool operator<(const Point &p) const { return x == p.x ? y < p.y : x < p.x; }
 
-  friend istream &operator>>(istream &is, Point &p) {
-    cin >> p.x >> p.y;
-    return is;
-  }
-
   friend ostream &operator<<(ostream &os, const Point &p) {
-    os << p.x << " " << p.y;
+    os << (long long)(p.x) << " " << (long long)(p.y);
     return os;
   }
 };
