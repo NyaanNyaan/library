@@ -1,6 +1,5 @@
 #pragma once
 
-// Don't Forget to call build() !!!!!
 template <class T>
 struct CumulativeSum2D {
   vector<vector<T> > data;
@@ -13,12 +12,12 @@ struct CumulativeSum2D {
     data[i][j] += z;
   }
 
-  // add [ [i1,j1], [i2,j2] )
-  void imos(int i1, int j1, int i2, int j2, T z) {
-    add(i1, j1, 1);
-    add(i1, j2, -1);
-    add(i2, j1, -1);
-    add(i2, j2, 1);
+  // 半開
+  void imos(int i1, int j1, int i2, int j2, T z = 1) {
+    add(i1, j1, z);
+    add(i1, j2, -z);
+    add(i2, j1, -z);
+    add(i2, j2, z);
   }
 
   void build() {
@@ -29,6 +28,10 @@ struct CumulativeSum2D {
     }
   }
 
+  // imos (i,j) を get
+  T imos_get(int i, int j) { return data[i + 1][j + 1]; }
+
+  // 半開
   T query(int i1, int j1, int i2, int j2) {
     return (data[i2][j2] - data[i1][j2] - data[i2][j1] + data[i1][j1]);
   }

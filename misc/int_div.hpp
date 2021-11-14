@@ -24,3 +24,9 @@ long long over(long long a, long long b) {
   if (b < 0) a = -a, b = -b;
   return a / b + (a % b >= 0);
 }
+// a mod b (b > 0)
+long long modulo(long long a, long long b) {
+  assert(b >= 0);
+  long long c = a % b;
+  return c < 0 ? c + b : c;
+}

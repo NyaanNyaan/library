@@ -79,6 +79,11 @@ inline void wt(bool b) {
   if (out_right > SZ - 32) flush();
   outbuf[out_right++] = b ? '1' : '0';
 }
+inline void wt(const string &s) {
+  if (out_right + s.size() > SZ - 32) flush();
+  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());
+  out_right += s.size();
+}
 template <typename T>
 inline void wt(T x) {
   if (out_right > SZ - 32) flush();
