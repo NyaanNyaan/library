@@ -3,6 +3,9 @@
 #include "../modulo/binomial.hpp"
 #include "formal-power-series.hpp"
 
+// input : y(0), y(1), ..., y(n - 1)
+// output : y(t), y(t + 1), ..., y(t + m - 1)
+// (if m is default, m = n)
 template <typename mint>
 FormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>& y, mint t,
                                          int m = -1) {
