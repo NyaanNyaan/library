@@ -2,7 +2,6 @@
 
 #include <immintrin.h>
 
-
 struct bit_vector {
   using u32 = uint32_t;
   using i64 = int64_t;
@@ -46,7 +45,7 @@ struct WaveletMatrix {
   vector<T> a;
   vector<bit_vector> bv;
 
-  WaveletMatrix(u32 _n) : n(_n), a(_n) {}
+  WaveletMatrix(u32 _n) : n(max<u32>(_n, 1)), a(n) {}
   WaveletMatrix(const vector<T>& _a) : n(_a.size()), a(_a) { build(); }
 
   __attribute__((optimize("O3"))) void build() {
@@ -112,7 +111,7 @@ struct WaveletMatrix {
 
   // count i s.t. (l <= i < r) && (v[i] < upper)
   int range_freq(int l, int r, T upper) {
-    if(upper >= (T(1) << lg)) return r - l;
+    if (upper >= (T(1) << lg)) return r - l;
     int ret = 0;
     for (int h = lg - 1; h >= 0; --h) {
       bool f = (upper >> h) & 1;
