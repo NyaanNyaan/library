@@ -18,6 +18,6 @@ Slide Window Aggrigation は、モノイド$(S,\bull,I)$の$S$の要素の列$A$
 - `pop()`: $A$から先頭の要素を削除する。計算量均し$\mathrm{O(1)}$。
 - `query()`: 集約値$A_0 \bull A_1 \bull A_2 \bull \cdots \bull A_{|A|-1}$を返す。計算量$\mathrm{O(1)}$。
 
-#### 要件
+#### 注意点
 
 - $A$が空のときに`pop`を呼んではならない。
