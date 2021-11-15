@@ -4,7 +4,7 @@ template <typename T>
 struct BinaryIndexedTree2D {
   int H, W;
   vector<vector<T>> bit;
-  BinaryIndexedTree2D(int H, int W) : H(H + 1), W(W + 1) {
+  BinaryIndexedTree2D(int _H, int _W) : H(_H + 1), W(_W + 1) {
     bit.resize(H + 3, vector<T>(W + 3, 0));
   }
   // 関数の入力のindexは0-originを想定

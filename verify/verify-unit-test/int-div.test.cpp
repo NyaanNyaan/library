@@ -25,6 +25,11 @@ void Nyaan::solve() {
   assert(test(4, -2) == vl({-2, -3, -2, -1}));
   assert(test(5, -2) == vl({-3, -3, -2, -2}));
 
+  assert(modulo(3, 3) == 0);
+  assert(modulo(4, 3) == 1);
+  assert(modulo(-3, 3) == 0);
+  assert(modulo(-4, 3) == 2);
+
   int a, b;
   cin >> a >> b;
   cout << a + b << endl;

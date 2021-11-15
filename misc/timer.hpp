@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 struct Timer {
   chrono::high_resolution_clock::time_point st;
 
