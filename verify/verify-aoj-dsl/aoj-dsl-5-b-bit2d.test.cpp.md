@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/2d-binary-indexed-tree.hpp
     title: "\u4E8C\u6B21\u5143Binary Indexed Tree"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -170,7 +170,7 @@ data:
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"data-structure-2d/2d-binary-indexed-tree.hpp\"\
     \n\ntemplate <typename T>\nstruct BinaryIndexedTree2D {\n  int H, W;\n  vector<vector<T>>\
-    \ bit;\n  BinaryIndexedTree2D(int H, int W) : H(H + 1), W(W + 1) {\n    bit.resize(H\
+    \ bit;\n  BinaryIndexedTree2D(int _H, int _W) : H(_H + 1), W(_W + 1) {\n    bit.resize(H\
     \ + 3, vector<T>(W + 3, 0));\n  }\n  // \u95A2\u6570\u306E\u5165\u529B\u306Eindex\u306F\
     0-origin\u3092\u60F3\u5B9A\n\n  // (x,y)\u306Bw\u3092\u8DB3\u3059\n  // \u7BC4\
     \u56F2\u5916\u306E\u6642\u306F\u8DB3\u3055\u306A\u3044\n  void add(int x, int\
@@ -213,7 +213,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp

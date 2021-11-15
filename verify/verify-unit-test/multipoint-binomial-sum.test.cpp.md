@@ -4,14 +4,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fast-multieval.hpp
     title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
@@ -23,37 +23,37 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/multipoint-binomial-sum.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -824,29 +824,30 @@ data:
     \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
     \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
     using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 14 \"verify/verify-unit-test/multipoint-binomial-sum.test.cpp\"\n\n\
-    using namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing\
-    \ vm = vector<mint>;\nusing vpi = vector<pair<int, int>>;\n\nBinomial<mint> C(1101010);\n\
-    \n// naive O(N^2)\n\nmint presum(int n, int m) {\n  assert(n >= m);\n  mint res\
-    \ = 1;\n  rep1(i, m) res += C.C(n, i);\n  return res;\n}\nvm naive(vpi qs) {\n\
-    \  vm ans(sz(qs));\n  rep(i, sz(qs)) ans[i] = presum(qs[i].first, qs[i].second);\n\
-    \  return ans;\n}\n\n// multipoint_binomial_sum O(N ^ 1.5)\n\nvector<mint> solve2(vpi\
-    \ qs) {\n  using fps = FormalPowerSeries<mint>;\n  int Q = qs.size();\n\n  int\
-    \ m_max = 0, B = 2;\n  for (auto& p : qs) {\n    assert(p.first >= p.second);\n\
-    \    m_max = max<int>(m_max, p.second);\n  }\n  while (B <= m_max) B *= 2;\n\n\
-    \  using Mat = Matrix<fps>;\n  vector<vector<Mat>> ms(__lg(B));\n  ms[0].resize(B,\
-    \ Mat(2));\n  for (int m = 0; m < B; m++) {\n    ms[0][m][0][0] = fps{m + 1};\n\
-    \    ms[0][m][0][1] = fps{-m, 1};\n    ms[0][m][1][1] = fps{-m, 1};\n  }\n  for\
-    \ (int i = 1; i < (int)ms.size(); i++) {\n    for (int j = 0; j < (int)ms[i -\
-    \ 1].size(); j += 2) {\n      ms[i].push_back(ms[i - 1][j + 1] * ms[i - 1][j]);\n\
-    \    }\n  }\n\n  vector<pair<mint, mint>> v(Q, make_pair(mint(1), mint(1)));\n\
-    \  for (int l = __lg(B) - 1; l >= 0; l--) {\n    vector<vector<mint>> xs(ms[l].size());\n\
-    \    for (int i = 0; i < Q; i++) {\n      if ((qs[i].second >> l) & 1) {\n   \
-    \     int m = (qs[i].second >> l) - 1;\n        xs[m].push_back(qs[i].first);\n\
+    #line 2 \"misc/timer.hpp\"\n\n#line 4 \"misc/timer.hpp\"\n\nstruct Timer {\n \
+    \ chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\n\
+    \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
+    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
+    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
+    \ 14 \"verify/verify-unit-test/multipoint-binomial-sum.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\n\
+    using vpi = vector<pair<int, int>>;\n\nBinomial<mint> C(1101010);\n\n// naive\
+    \ O(N^2)\n\nmint presum(int n, int m) {\n  assert(n >= m);\n  mint res = 1;\n\
+    \  rep1(i, m) res += C.C(n, i);\n  return res;\n}\nvm naive(vpi qs) {\n  vm ans(sz(qs));\n\
+    \  rep(i, sz(qs)) ans[i] = presum(qs[i].first, qs[i].second);\n  return ans;\n\
+    }\n\n// multipoint_binomial_sum O(N ^ 1.5)\n\nvector<mint> solve2(vpi qs) {\n\
+    \  using fps = FormalPowerSeries<mint>;\n  int Q = qs.size();\n\n  int m_max =\
+    \ 0, B = 2;\n  for (auto& p : qs) {\n    assert(p.first >= p.second);\n    m_max\
+    \ = max<int>(m_max, p.second);\n  }\n  while (B <= m_max) B *= 2;\n\n  using Mat\
+    \ = Matrix<fps>;\n  vector<vector<Mat>> ms(__lg(B));\n  ms[0].resize(B, Mat(2));\n\
+    \  for (int m = 0; m < B; m++) {\n    ms[0][m][0][0] = fps{m + 1};\n    ms[0][m][0][1]\
+    \ = fps{-m, 1};\n    ms[0][m][1][1] = fps{-m, 1};\n  }\n  for (int i = 1; i <\
+    \ (int)ms.size(); i++) {\n    for (int j = 0; j < (int)ms[i - 1].size(); j +=\
+    \ 2) {\n      ms[i].push_back(ms[i - 1][j + 1] * ms[i - 1][j]);\n    }\n  }\n\n\
+    \  vector<pair<mint, mint>> v(Q, make_pair(mint(1), mint(1)));\n  for (int l =\
+    \ __lg(B) - 1; l >= 0; l--) {\n    vector<vector<mint>> xs(ms[l].size());\n  \
+    \  for (int i = 0; i < Q; i++) {\n      if ((qs[i].second >> l) & 1) {\n     \
+    \   int m = (qs[i].second >> l) - 1;\n        xs[m].push_back(qs[i].first);\n\
     \      }\n    }\n    vector<vector<Matrix<mint>>> ys(ms[l].size());\n    for (int\
     \ i = 0; i < (int)ms[l].size(); i++) {\n      if (!xs[i].empty()) {\n        ys[i].resize(xs[i].size(),\
     \ Matrix<mint>(2));\n        for (int u = 0; u < 2; u++) {\n          for (int\
@@ -952,7 +953,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   requiredBy: []
-  timestamp: '2021-08-10 23:14:36+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/multipoint-binomial-sum.test.cpp

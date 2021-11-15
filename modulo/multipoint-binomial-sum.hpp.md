@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/mo.hpp
     title: Mo's algorithm
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []

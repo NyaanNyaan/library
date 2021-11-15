@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/int_div.hpp
     title: misc/int_div.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -178,20 +178,23 @@ data:
     long long ceil(long long a, long long b) {\n  assert(b != 0);\n  if (b < 0) a\
     \ = -a, b = -b;\n  return a / b + (a % b > 0);\n}\n// a/b \u8D85\u904E\u306E\u6700\
     \u5C0F\u306E\u6574\u6570\nlong long over(long long a, long long b) {\n  assert(b\
-    \ != 0);\n  if (b < 0) a = -a, b = -b;\n  return a / b + (a % b >= 0);\n}\n#line\
-    \ 6 \"verify/verify-unit-test/int-div.test.cpp\"\nusing namespace Nyaan;\n\nvector<long\
-    \ long> test(long long a, long long b) {\n  cerr << \"floor(\" << a << \", \"\
-    \ << b << \") = \" << floor(a, b) << \"\\n\";\n  cerr << \"under(\" << a << \"\
-    , \" << b << \") = \" << under(a, b) << \"\\n\";\n  cerr << \"ceil(\" << a <<\
-    \ \", \" << b << \") = \" << ceil(a, b) << \"\\n\";\n  cerr << \"over(\" << a\
-    \ << \", \" << b << \") = \" << over(a, b) << \"\\n\";\n  cerr << endl;\n  return\
-    \ vl{floor(a, b), under(a, b), ceil(a, b), over(a, b)};\n}\n\nvoid Nyaan::solve()\
-    \ {\n  assert(test(4, 2) == vl({2, 1, 2, 3}));\n  assert(test(5, 2) == vl({2,\
-    \ 2, 3, 3}));\n  assert(test(-4, 2) == vl({-2, -3, -2, -1}));\n  assert(test(-5,\
-    \ 2) == vl({-3, -3, -2, -2}));\n\n  assert(test(-4, -2) == vl({2, 1, 2, 3}));\n\
-    \  assert(test(-5, -2) == vl({2, 2, 3, 3}));\n  assert(test(4, -2) == vl({-2,\
-    \ -3, -2, -1}));\n  assert(test(5, -2) == vl({-3, -3, -2, -2}));\n\n  int a, b;\n\
-    \  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ != 0);\n  if (b < 0) a = -a, b = -b;\n  return a / b + (a % b >= 0);\n}\n//\
+    \ a mod b (b > 0)\nlong long modulo(long long a, long long b) {\n  assert(b >=\
+    \ 0);\n  long long c = a % b;\n  return c < 0 ? c + b : c;\n}\n#line 6 \"verify/verify-unit-test/int-div.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvector<long long> test(long long a, long long b) {\n\
+    \  cerr << \"floor(\" << a << \", \" << b << \") = \" << floor(a, b) << \"\\n\"\
+    ;\n  cerr << \"under(\" << a << \", \" << b << \") = \" << under(a, b) << \"\\\
+    n\";\n  cerr << \"ceil(\" << a << \", \" << b << \") = \" << ceil(a, b) << \"\\\
+    n\";\n  cerr << \"over(\" << a << \", \" << b << \") = \" << over(a, b) << \"\\\
+    n\";\n  cerr << endl;\n  return vl{floor(a, b), under(a, b), ceil(a, b), over(a,\
+    \ b)};\n}\n\nvoid Nyaan::solve() {\n  assert(test(4, 2) == vl({2, 1, 2, 3}));\n\
+    \  assert(test(5, 2) == vl({2, 2, 3, 3}));\n  assert(test(-4, 2) == vl({-2, -3,\
+    \ -2, -1}));\n  assert(test(-5, 2) == vl({-3, -3, -2, -2}));\n\n  assert(test(-4,\
+    \ -2) == vl({2, 1, 2, 3}));\n  assert(test(-5, -2) == vl({2, 2, 3, 3}));\n  assert(test(4,\
+    \ -2) == vl({-2, -3, -2, -1}));\n  assert(test(5, -2) == vl({-3, -3, -2, -2}));\n\
+    \n  assert(modulo(3, 3) == 0);\n  assert(modulo(4, 3) == 1);\n  assert(modulo(-3,\
+    \ 3) == 0);\n  assert(modulo(-4, 3) == 2);\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../misc/int_div.hpp\"\nusing\
     \ namespace Nyaan;\n\nvector<long long> test(long long a, long long b) {\n  cerr\
@@ -205,7 +208,9 @@ data:
     \ -2, -1}));\n  assert(test(-5, 2) == vl({-3, -3, -2, -2}));\n\n  assert(test(-4,\
     \ -2) == vl({2, 1, 2, 3}));\n  assert(test(-5, -2) == vl({2, 2, 3, 3}));\n  assert(test(4,\
     \ -2) == vl({-2, -3, -2, -1}));\n  assert(test(5, -2) == vl({-3, -3, -2, -2}));\n\
-    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \n  assert(modulo(3, 3) == 0);\n  assert(modulo(4, 3) == 1);\n  assert(modulo(-3,\
+    \ 3) == 0);\n  assert(modulo(-4, 3) == 2);\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << a + b << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -217,7 +222,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/int-div.test.cpp
   requiredBy: []
-  timestamp: '2021-08-10 23:14:36+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/int-div.test.cpp

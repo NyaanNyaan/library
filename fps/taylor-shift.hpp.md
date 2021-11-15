@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy:
@@ -159,10 +159,10 @@ data:
   timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - verify/verify-yuki/yuki-1510.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
+  - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
 documentation_of: fps/taylor-shift.hpp

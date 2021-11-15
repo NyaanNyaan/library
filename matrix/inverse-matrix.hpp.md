@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/gauss-elimination.hpp
     title: matrix/gauss-elimination.hpp
   _extendedRequiredBy: []

@@ -14,7 +14,7 @@ data:
     document_title: Wavelet Matrix
     links: []
   bundledCode: "#line 2 \"data-structure-2d/wavelet-matrix.hpp\"\n\n#include <immintrin.h>\n\
-    \n\nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using\
+    \nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n  using\
     \ u64 = uint64_t;\n\n  static constexpr u32 w = 64;\n  vector<u64> block;\n  vector<u32>\
     \ count;\n  u32 n, zeros;\n\n  inline u32 get(u32 i) const { return u32(block[i\
     \ / w] >> (i % w)) & 1u; }\n  inline void set(u32 i) { block[i / w] |= 1LL <<\
@@ -28,7 +28,7 @@ data:
     \ / w], i % w));\n  }\n};\n\ntemplate <typename T>\nstruct WaveletMatrix {\n \
     \ using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\n \
     \ int n, lg;\n  vector<T> a;\n  vector<bit_vector> bv;\n\n  WaveletMatrix(u32\
-    \ _n) : n(_n), a(_n) {}\n  WaveletMatrix(const vector<T>& _a) : n(_a.size()),\
+    \ _n) : n(max<u32>(_n, 1)), a(n) {}\n  WaveletMatrix(const vector<T>& _a) : n(_a.size()),\
     \ a(_a) { build(); }\n\n  __attribute__((optimize(\"O3\"))) void build() {\n \
     \   lg = __lg(max<T>(*max_element(begin(a), end(a)), 1)) + 1;\n    bv.assign(lg,\
     \ n);\n    vector<T> cur = a, nxt(n);\n    for (int h = lg - 1; h >= 0; --h) {\n\
@@ -52,7 +52,7 @@ data:
     \n  // k-th (0-indexed) largest number in a[l, r)\n  T kth_largest(int l, int\
     \ r, int k) {\n    return kth_smallest(l, r, r - l - k - 1);\n  }\n\n  // count\
     \ i s.t. (l <= i < r) && (v[i] < upper)\n  int range_freq(int l, int r, T upper)\
-    \ {\n    if(upper >= (T(1) << lg)) return r - l;\n    int ret = 0;\n    for (int\
+    \ {\n    if (upper >= (T(1) << lg)) return r - l;\n    int ret = 0;\n    for (int\
     \ h = lg - 1; h >= 0; --h) {\n      bool f = (upper >> h) & 1;\n      u32 l0 =\
     \ bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if (f) {\n        ret += r0 - l0;\n\
     \        l += bv[h].zeros - l0;\n        r += bv[h].zeros - r0;\n      } else\
@@ -65,11 +65,11 @@ data:
     \ r, T lower) {\n    int cnt = range_freq(l, r, lower);\n    return cnt == r -\
     \ l ? T(-1) : kth_smallest(l, r, cnt);\n  }\n};\n\n/*\n * @brief Wavelet Matrix\n\
     \ * @docs docs/data-structure-2d/wavelet-matrix.md\n */\n"
-  code: "#pragma once\n\n#include <immintrin.h>\n\n\nstruct bit_vector {\n  using\
-    \ u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\n  static\
-    \ constexpr u32 w = 64;\n  vector<u64> block;\n  vector<u32> count;\n  u32 n,\
-    \ zeros;\n\n  inline u32 get(u32 i) const { return u32(block[i / w] >> (i % w))\
-    \ & 1u; }\n  inline void set(u32 i) { block[i / w] |= 1LL << (i % w); }\n\n  bit_vector()\
+  code: "#pragma once\n\n#include <immintrin.h>\n\nstruct bit_vector {\n  using u32\
+    \ = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 w = 64;\n  vector<u64> block;\n  vector<u32> count;\n  u32 n, zeros;\n\n\
+    \  inline u32 get(u32 i) const { return u32(block[i / w] >> (i % w)) & 1u; }\n\
+    \  inline void set(u32 i) { block[i / w] |= 1LL << (i % w); }\n\n  bit_vector()\
     \ {}\n  bit_vector(int _n) { init(_n); }\n  __attribute__((optimize(\"O3\", \"\
     unroll-loops\"))) void init(int _n) {\n    n = zeros = _n;\n    block.resize(n\
     \ / w + 1, 0);\n    count.resize(block.size(), 0);\n  }\n\n  __attribute__((target(\"\
@@ -80,7 +80,7 @@ data:
     \ / w], i % w));\n  }\n};\n\ntemplate <typename T>\nstruct WaveletMatrix {\n \
     \ using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\n \
     \ int n, lg;\n  vector<T> a;\n  vector<bit_vector> bv;\n\n  WaveletMatrix(u32\
-    \ _n) : n(_n), a(_n) {}\n  WaveletMatrix(const vector<T>& _a) : n(_a.size()),\
+    \ _n) : n(max<u32>(_n, 1)), a(n) {}\n  WaveletMatrix(const vector<T>& _a) : n(_a.size()),\
     \ a(_a) { build(); }\n\n  __attribute__((optimize(\"O3\"))) void build() {\n \
     \   lg = __lg(max<T>(*max_element(begin(a), end(a)), 1)) + 1;\n    bv.assign(lg,\
     \ n);\n    vector<T> cur = a, nxt(n);\n    for (int h = lg - 1; h >= 0; --h) {\n\
@@ -104,7 +104,7 @@ data:
     \n  // k-th (0-indexed) largest number in a[l, r)\n  T kth_largest(int l, int\
     \ r, int k) {\n    return kth_smallest(l, r, r - l - k - 1);\n  }\n\n  // count\
     \ i s.t. (l <= i < r) && (v[i] < upper)\n  int range_freq(int l, int r, T upper)\
-    \ {\n    if(upper >= (T(1) << lg)) return r - l;\n    int ret = 0;\n    for (int\
+    \ {\n    if (upper >= (T(1) << lg)) return r - l;\n    int ret = 0;\n    for (int\
     \ h = lg - 1; h >= 0; --h) {\n      bool f = (upper >> h) & 1;\n      u32 l0 =\
     \ bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if (f) {\n        ret += r0 - l0;\n\
     \        l += bv[h].zeros - l0;\n        r += bv[h].zeros - r0;\n      } else\
@@ -121,7 +121,7 @@ data:
   isVerificationFile: false
   path: data-structure-2d/wavelet-matrix.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-11-15 21:11:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/wavelet-matrix.test.cpp

@@ -4,28 +4,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/slide-window-aggregation.hpp
     title: data-structure/slide-window-aggregation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -207,14 +207,16 @@ data:
     \ Head, typename... Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n\
     \  rd(tail...);\n}\n\ninline void wt(char c) {\n  if (out_right > SZ - 32) flush();\n\
     \  outbuf[out_right++] = c;\n}\ninline void wt(bool b) {\n  if (out_right > SZ\
-    \ - 32) flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ntemplate <typename\
-    \ T>\ninline void wt(T x) {\n  if (out_right > SZ - 32) flush();\n  if (!x) {\n\
-    \    outbuf[out_right++] = '0';\n    return;\n  }\n  if constexpr (is_signed<T>::value\
-    \ == true) {\n    if (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i\
-    \ = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf + i, pre.num\
-    \ + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n\
-    \    if (x < 10) {\n      outbuf[out_right] = '0' + x;\n      ++out_right;\n \
-    \   } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r\
+    \ - 32) flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void wt(const\
+    \ string &s) {\n  if (out_right + s.size() > SZ - 32) flush();\n  memcpy(outbuf\
+    \ + out_right, s.data(), sizeof(char) * s.size());\n  out_right += s.size();\n\
+    }\ntemplate <typename T>\ninline void wt(T x) {\n  if (out_right > SZ - 32) flush();\n\
+    \  if (!x) {\n    outbuf[out_right++] = '0';\n    return;\n  }\n  if constexpr\
+    \ (is_signed<T>::value == true) {\n    if (x < 0) outbuf[out_right++] = '-', x\
+    \ = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf\
+    \ + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if\
+    \ (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] = '0' + x;\n      ++out_right;\n\
+    \    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r\
     \ = uint32_t(x) - q * 10;\n      outbuf[out_right] = '0' + q;\n      outbuf[out_right\
     \ + 1] = '0' + r;\n      out_right += 2;\n    }\n  } else {\n    if (x < 1000)\
     \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2) + 1, 3);\n      out_right\
@@ -291,7 +293,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
   requiredBy: []
-  timestamp: '2021-05-15 20:18:13+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-swag.test.cpp

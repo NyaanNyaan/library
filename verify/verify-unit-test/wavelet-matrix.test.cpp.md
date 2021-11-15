@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/wavelet-matrix.hpp
     title: Wavelet Matrix
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -169,7 +169,7 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"data-structure-2d/wavelet-matrix.hpp\"\
-    \n\n#line 4 \"data-structure-2d/wavelet-matrix.hpp\"\n\n\nstruct bit_vector {\n\
+    \n\n#line 4 \"data-structure-2d/wavelet-matrix.hpp\"\n\nstruct bit_vector {\n\
     \  using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\n\
     \  static constexpr u32 w = 64;\n  vector<u64> block;\n  vector<u32> count;\n\
     \  u32 n, zeros;\n\n  inline u32 get(u32 i) const { return u32(block[i / w] >>\
@@ -184,7 +184,7 @@ data:
     \ / w], i % w));\n  }\n};\n\ntemplate <typename T>\nstruct WaveletMatrix {\n \
     \ using u32 = uint32_t;\n  using i64 = int64_t;\n  using u64 = uint64_t;\n\n \
     \ int n, lg;\n  vector<T> a;\n  vector<bit_vector> bv;\n\n  WaveletMatrix(u32\
-    \ _n) : n(_n), a(_n) {}\n  WaveletMatrix(const vector<T>& _a) : n(_a.size()),\
+    \ _n) : n(max<u32>(_n, 1)), a(n) {}\n  WaveletMatrix(const vector<T>& _a) : n(_a.size()),\
     \ a(_a) { build(); }\n\n  __attribute__((optimize(\"O3\"))) void build() {\n \
     \   lg = __lg(max<T>(*max_element(begin(a), end(a)), 1)) + 1;\n    bv.assign(lg,\
     \ n);\n    vector<T> cur = a, nxt(n);\n    for (int h = lg - 1; h >= 0; --h) {\n\
@@ -208,7 +208,7 @@ data:
     \n  // k-th (0-indexed) largest number in a[l, r)\n  T kth_largest(int l, int\
     \ r, int k) {\n    return kth_smallest(l, r, r - l - k - 1);\n  }\n\n  // count\
     \ i s.t. (l <= i < r) && (v[i] < upper)\n  int range_freq(int l, int r, T upper)\
-    \ {\n    if(upper >= (T(1) << lg)) return r - l;\n    int ret = 0;\n    for (int\
+    \ {\n    if (upper >= (T(1) << lg)) return r - l;\n    int ret = 0;\n    for (int\
     \ h = lg - 1; h >= 0; --h) {\n      bool f = (upper >> h) & 1;\n      u32 l0 =\
     \ bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if (f) {\n        ret += r0 - l0;\n\
     \        l += bv[h].zeros - l0;\n        r += bv[h].zeros - r0;\n      } else\
@@ -308,7 +308,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/wavelet-matrix.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-15 21:11:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/wavelet-matrix.test.cpp

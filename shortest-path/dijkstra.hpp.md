@@ -79,8 +79,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
 documentation_of: shortest-path/dijkstra.hpp
 layout: document
 redirect_from:

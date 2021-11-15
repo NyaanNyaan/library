@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/2d-cumulative-sum.hpp
     title: "\u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -169,23 +169,24 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"data-structure-2d/2d-cumulative-sum.hpp\"\
-    \n\n// Don't Forget to call build() !!!!!\ntemplate <class T>\nstruct CumulativeSum2D\
-    \ {\n  vector<vector<T> > data;\n\n  CumulativeSum2D(int H, int W) : data(H +\
-    \ 3, vector<int>(W + 3, 0)) {}\n\n  void add(int i, int j, T z) {\n    ++i, ++j;\n\
-    \    if (i >= (int)data.size() || j >= (int)data[0].size()) return;\n    data[i][j]\
-    \ += z;\n  }\n\n  // add [ [i1,j1], [i2,j2] )\n  void imos(int i1, int j1, int\
-    \ i2, int j2, T z) {\n    add(i1, j1, 1);\n    add(i1, j2, -1);\n    add(i2, j1,\
-    \ -1);\n    add(i2, j2, 1);\n  }\n\n  void build() {\n    for (int i = 1; i <\
-    \ (int)data.size(); i++) {\n      for (int j = 1; j < (int)data[i].size(); j++)\
-    \ {\n        data[i][j] += data[i][j - 1] + data[i - 1][j] - data[i - 1][j - 1];\n\
-    \      }\n    }\n  }\n\n  T query(int i1, int j1, int i2, int j2) {\n    return\
-    \ (data[i2][j2] - data[i1][j2] - data[i2][j1] + data[i1][j1]);\n  }\n};\n\n/*\n\
-    \ * @brief \u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C\n * @docs docs/data-structure-2d/ds-2d.md\n\
-    \ */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp\"\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n  CumulativeSum2D<int>\
-    \ ruiseki(L, L);\n  rep(i, N) {\n    ini(x1, y1, x2, y2);\n    ruiseki.imos(x1,\
-    \ y1, x2 , y2, 1);\n  }\n  ruiseki.build();\n  int ans = 0;\n  rep(i, L) rep(j,\
-    \ L) { amax(ans, ruiseki.data[i + 1][j + 1]); }\n  out(ans);\n}\n"
+    \n\ntemplate <class T>\nstruct CumulativeSum2D {\n  vector<vector<T> > data;\n\
+    \n  CumulativeSum2D(int H, int W) : data(H + 3, vector<int>(W + 3, 0)) {}\n\n\
+    \  void add(int i, int j, T z) {\n    ++i, ++j;\n    if (i >= (int)data.size()\
+    \ || j >= (int)data[0].size()) return;\n    data[i][j] += z;\n  }\n\n  // \u534A\
+    \u958B\n  void imos(int i1, int j1, int i2, int j2, T z = 1) {\n    add(i1, j1,\
+    \ z);\n    add(i1, j2, -z);\n    add(i2, j1, -z);\n    add(i2, j2, z);\n  }\n\n\
+    \  void build() {\n    for (int i = 1; i < (int)data.size(); i++) {\n      for\
+    \ (int j = 1; j < (int)data[i].size(); j++) {\n        data[i][j] += data[i][j\
+    \ - 1] + data[i - 1][j] - data[i - 1][j - 1];\n      }\n    }\n  }\n\n  // imos\
+    \ (i,j) \u3092 get\n  T imos_get(int i, int j) { return data[i + 1][j + 1]; }\n\
+    \n  // \u534A\u958B\n  T query(int i1, int j1, int i2, int j2) {\n    return (data[i2][j2]\
+    \ - data[i1][j2] - data[i2][j1] + data[i1][j1]);\n  }\n};\n\n/*\n * @brief \u4E8C\
+    \u6B21\u5143\u7D2F\u7A4D\u548C\n * @docs docs/data-structure-2d/ds-2d.md\n */\n\
+    #line 6 \"verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp\"\n\nusing namespace Nyaan;\
+    \ void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n  CumulativeSum2D<int> ruiseki(L,\
+    \ L);\n  rep(i, N) {\n    ini(x1, y1, x2, y2);\n    ruiseki.imos(x1, y1, x2 ,\
+    \ y2, 1);\n  }\n  ruiseki.build();\n  int ans = 0;\n  rep(i, L) rep(j, L) { amax(ans,\
+    \ ruiseki.data[i + 1][j + 1]); }\n  out(ans);\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure-2d/2d-cumulative-sum.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n\
@@ -204,7 +205,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp

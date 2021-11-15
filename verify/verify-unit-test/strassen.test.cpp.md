@@ -7,31 +7,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -561,20 +561,21 @@ data:
     \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
     \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
     using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 25 \"verify/verify-unit-test/strassen.test.cpp\"\n\nusing namespace\
-    \ FastMatProd;\nusing fps = vector<mint>;\n\nvoid time_test() {\n  int N = 1024;\n\
-    \  int P = N, M = N;\n  vector<fps> s(N, fps(P)), t(P, fps(M));\n  for (int i\
-    \ = 0; i < N; i++)\n    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n\
-    \  for (int i = 0; i < P; i++)\n    for (int j = 0; j < M; j++) t[i][j] = rng()\
-    \ % 998244353;\n  vector<fps> u, u2, u3;\n  Timer timer;\n\n  int loop = 5;\n\
-    \  timer.reset();\n  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s,\
-    \ t);\n  cerr << \"strassen \" << (timer.elapsed() / loop) << endl;\n\n  timer.reset();\n\
-    \  u2 = FastMatProd::naive_mul(s, t);\n  cerr << \"naive \" << timer.elapsed()\
-    \ << endl;\n\n  timer.reset();\n  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s,\
+    #line 2 \"misc/timer.hpp\"\n\n#line 4 \"misc/timer.hpp\"\n\nstruct Timer {\n \
+    \ chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\n\
+    \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
+    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
+    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
+    \ 25 \"verify/verify-unit-test/strassen.test.cpp\"\n\nusing namespace FastMatProd;\n\
+    using fps = vector<mint>;\n\nvoid time_test() {\n  int N = 1024;\n  int P = N,\
+    \ M = N;\n  vector<fps> s(N, fps(P)), t(P, fps(M));\n  for (int i = 0; i < N;\
+    \ i++)\n    for (int j = 0; j < P; j++) s[i][j] = rng() % 998244353;\n  for (int\
+    \ i = 0; i < P; i++)\n    for (int j = 0; j < M; j++) t[i][j] = rng() % 998244353;\n\
+    \  vector<fps> u, u2, u3;\n  Timer timer;\n\n  int loop = 5;\n  timer.reset();\n\
+    \  for (int i = 0; i < loop; i++) u = FastMatProd::strassen(s, t);\n  cerr <<\
+    \ \"strassen \" << (timer.elapsed() / loop) << endl;\n\n  timer.reset();\n  u2\
+    \ = FastMatProd::naive_mul(s, t);\n  cerr << \"naive \" << timer.elapsed() <<\
+    \ endl;\n\n  timer.reset();\n  for (int i = 0; i < loop; i++) u3 = FastMatProd::block_dec(s,\
     \ t);\n  cerr << \"block dec \" << (timer.elapsed() / loop) << endl;\n\n  assert(u\
     \ == u2);\n  assert(u == u3);\n}\n\nvoid debug_test(int max = 500, int loop =\
     \ 10) {\n  int N, P, M;\n  mt19937 rng(58);\n  while (loop--) {\n    N = rng()\
@@ -636,7 +637,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/strassen.test.cpp
   requiredBy: []
-  timestamp: '2021-05-08 13:51:26+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/strassen.test.cpp

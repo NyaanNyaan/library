@@ -15,7 +15,7 @@ data:
     links: []
   bundledCode: "#line 2 \"data-structure-2d/2d-binary-indexed-tree.hpp\"\n\ntemplate\
     \ <typename T>\nstruct BinaryIndexedTree2D {\n  int H, W;\n  vector<vector<T>>\
-    \ bit;\n  BinaryIndexedTree2D(int H, int W) : H(H + 1), W(W + 1) {\n    bit.resize(H\
+    \ bit;\n  BinaryIndexedTree2D(int _H, int _W) : H(_H + 1), W(_W + 1) {\n    bit.resize(H\
     \ + 3, vector<T>(W + 3, 0));\n  }\n  // \u95A2\u6570\u306E\u5165\u529B\u306Eindex\u306F\
     0-origin\u3092\u60F3\u5B9A\n\n  // (x,y)\u306Bw\u3092\u8DB3\u3059\n  // \u7BC4\
     \u56F2\u5916\u306E\u6642\u306F\u8DB3\u3055\u306A\u3044\n  void add(int x, int\
@@ -38,8 +38,8 @@ data:
     \ - 1, y1 - 1);\n  }\n};\n\n/*\n * @brief \u4E8C\u6B21\u5143Binary Indexed Tree\n\
     \ * @docs docs/data-structure-2d/ds-2d.md\n */\n"
   code: "#pragma once\n\ntemplate <typename T>\nstruct BinaryIndexedTree2D {\n  int\
-    \ H, W;\n  vector<vector<T>> bit;\n  BinaryIndexedTree2D(int H, int W) : H(H +\
-    \ 1), W(W + 1) {\n    bit.resize(H + 3, vector<T>(W + 3, 0));\n  }\n  // \u95A2\
+    \ H, W;\n  vector<vector<T>> bit;\n  BinaryIndexedTree2D(int _H, int _W) : H(_H\
+    \ + 1), W(_W + 1) {\n    bit.resize(H + 3, vector<T>(W + 3, 0));\n  }\n  // \u95A2\
     \u6570\u306E\u5165\u529B\u306Eindex\u306F0-origin\u3092\u60F3\u5B9A\n\n  // (x,y)\u306B\
     w\u3092\u8DB3\u3059\n  // \u7BC4\u56F2\u5916\u306E\u6642\u306F\u8DB3\u3055\u306A\
     \u3044\n  void add(int x, int y, T w) {\n    if (x < 0 || x >= H || y < 0 || y\
@@ -64,7 +64,7 @@ data:
   isVerificationFile: false
   path: data-structure-2d/2d-binary-indexed-tree.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp

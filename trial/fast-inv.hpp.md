@@ -17,8 +17,8 @@ data:
     document_title: "\u9AD8\u901Fmodulo\u9006\u5143"
     links: []
   bundledCode: "#line 2 \"trial/fast-inv.hpp\"\n\n\n\n#line 2 \"misc/timer.hpp\"\n\
-    \nstruct Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer()\
-    \ { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \n#include <chrono>\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
     };\n#line 6 \"trial/fast-inv.hpp\"\n\nnamespace fast_inv {\nusing u64 = uint64_t;\n\
@@ -120,7 +120,7 @@ data:
   isVerificationFile: false
   path: trial/fast-inv.hpp
   requiredBy: []
-  timestamp: '2020-12-08 00:23:55+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp

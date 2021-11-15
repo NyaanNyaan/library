@@ -21,7 +21,8 @@ data:
     \ a = -a, b = -b;\n  return a / b + (a % b > 0);\n}\n// a/b \u8D85\u904E\u306E\
     \u6700\u5C0F\u306E\u6574\u6570\nlong long over(long long a, long long b) {\n \
     \ assert(b != 0);\n  if (b < 0) a = -a, b = -b;\n  return a / b + (a % b >= 0);\n\
-    }\n"
+    }\n// a mod b (b > 0)\nlong long modulo(long long a, long long b) {\n  assert(b\
+    \ >= 0);\n  long long c = a % b;\n  return c < 0 ? c + b : c;\n}\n"
   code: "#pragma once\n\n// a/b \u4EE5\u4E0B\u306E\u6700\u5927\u306E\u6574\u6570\n\
     long long floor(long long a, long long b) {\n  assert(b != 0);\n  if (b < 0) a\
     \ = -a, b = -b;\n  return a / b - (a % b < 0);\n}\n// a/b \u672A\u6E80\u306E\u6700\
@@ -31,12 +32,14 @@ data:
     \ a, long long b) {\n  assert(b != 0);\n  if (b < 0) a = -a, b = -b;\n  return\
     \ a / b + (a % b > 0);\n}\n// a/b \u8D85\u904E\u306E\u6700\u5C0F\u306E\u6574\u6570\
     \nlong long over(long long a, long long b) {\n  assert(b != 0);\n  if (b < 0)\
-    \ a = -a, b = -b;\n  return a / b + (a % b >= 0);\n}"
+    \ a = -a, b = -b;\n  return a / b + (a % b >= 0);\n}\n// a mod b (b > 0)\nlong\
+    \ long modulo(long long a, long long b) {\n  assert(b >= 0);\n  long long c =\
+    \ a % b;\n  return c < 0 ? c + b : c;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: misc/int_div.hpp
   requiredBy: []
-  timestamp: '2021-08-10 23:14:36+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/int-div.test.cpp

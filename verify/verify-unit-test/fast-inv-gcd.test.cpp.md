@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -175,16 +175,17 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"trial/fast-inv.hpp\"\
-    \n\n\n\n#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 6 \"trial/fast-inv.hpp\"\n\nnamespace fast_inv {\nusing u64 = uint64_t;\n\
-    using u32 = uint32_t;\nusing i32 = int32_t;\nconstexpr u32 MOD = 998244353;\n\n\
-    struct Pre {\n  u32 a[64];\n  constexpr Pre() : a() {\n    static_assert(MOD &\
-    \ 1);\n    a[0] = 1;\n    for (int i = 1; i < 64; i++) a[i] = u64(a[i - 1]) *\
-    \ ((MOD + 1) >> 1) % MOD;\n  }\n} constexpr pre;\n\n__attribute__((target(\"bmi\"\
-    ))) u32 bgcd_inv(u32 a) {\n  u32 b = MOD, s = 1, t = 0;\n  int n = __builtin_ctz(a);\n\
+    \n\n\n\n#line 2 \"misc/timer.hpp\"\n\n#line 4 \"misc/timer.hpp\"\n\nstruct Timer\
+    \ {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\
+    \n  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
+    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
+    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
+    \ 6 \"trial/fast-inv.hpp\"\n\nnamespace fast_inv {\nusing u64 = uint64_t;\nusing\
+    \ u32 = uint32_t;\nusing i32 = int32_t;\nconstexpr u32 MOD = 998244353;\n\nstruct\
+    \ Pre {\n  u32 a[64];\n  constexpr Pre() : a() {\n    static_assert(MOD & 1);\n\
+    \    a[0] = 1;\n    for (int i = 1; i < 64; i++) a[i] = u64(a[i - 1]) * ((MOD\
+    \ + 1) >> 1) % MOD;\n  }\n} constexpr pre;\n\n__attribute__((target(\"bmi\")))\
+    \ u32 bgcd_inv(u32 a) {\n  u32 b = MOD, s = 1, t = 0;\n  int n = __builtin_ctz(a);\n\
     \  a >>= n;\n  if (__builtin_expect(a < 1 << 20, false)) {\n    if (a == 1) return\
     \ pre.a[n];\n    t = -(b / a);\n    b %= a;\n    int m = __builtin_ctz(b);\n \
     \   b >>= m;\n    s = 1u << m;\n    n += m;\n  }\n  while (a != b) {\n    int\
@@ -284,7 +285,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/fast-inv-gcd.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/fast-inv-gcd.test.cpp

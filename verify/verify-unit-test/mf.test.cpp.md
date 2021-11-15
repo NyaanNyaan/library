@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -19,22 +19,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -283,31 +283,32 @@ data:
     \ multiplicative_function::totient<T>> em(\n      n);\n  return em.run();\n}\n\
     \n/**\n * @brief \u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
     \ */\n#line 9 \"verify/verify-unit-test/mf.test.cpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    \n#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 12 \"verify/verify-unit-test/mf.test.cpp\"\n\nusing namespace Nyaan;\n\
-    \n#include <cxxabi.h>\nstring get_name(const type_info& id) {\n  int stat;\n \
-    \ char* name = abi::__cxa_demangle(id.name(), 0, 0, &stat);\n  assert(name !=\
-    \ NULL && stat == 0);\n  string res = string(name);\n  free(name);\n  return res;\n\
-    }\n\ntemplate <typename T>\nvoid test_moebius(int n = TEN(7)) {\n  Timer timer;\n\
-    \  // moebius function\n  {\n    // cerr << \"moebius, \" << get_name(typeid(T))\
-    \ << endl;\n    timer.reset();\n    auto m1 = mobius_function<T>(n);\n    // cerr\
-    \ << \"emf : \" << timer.elapsed() << endl;\n\n    timer.reset();\n    vector<T>\
-    \ m2(n + 1);\n    m2[1] = 1;\n    divisor_transform::mobius_transform(m2);\n \
-    \   // cerr << \"dmt : \" << timer.elapsed() << endl;\n    assert(m1 == m2);\n\
-    \  }\n}\n\ntemplate <typename T>\nvoid test_sigma0(int n = TEN(7)) {\n  Timer\
-    \ timer;\n  // divisor function\n  {\n    // cerr << \"sigma0, \" << get_name(typeid(T))\
-    \ << endl;\n    timer.reset();\n    auto m1 = sigma0<T>(n);\n    // cerr << \"\
-    emf : \" << timer.elapsed() << endl;\n\n    timer.reset();\n    vector<T> m2(n\
-    \ + 1, 1);\n    m2[0] = 0;\n    divisor_transform::zeta_transform(m2);\n    //\
-    \ cerr << \"dzt : \" << timer.elapsed() << endl;\n    assert(m1 == m2);\n  }\n\
-    }\n\ntemplate <typename T>\nvoid test_sigma1(int n = TEN(7)) {\n  Timer timer;\n\
-    \  // divisor function\n  {\n    // cerr << \"sigma1, \" << get_name(typeid(T))\
-    \ << endl;\n    timer.reset();\n    auto m1 = sigma1<T>(n);\n    // cerr << \"\
-    emf : \" << timer.elapsed() << endl;\n\n    timer.reset();\n    vector<T> m2(n\
-    \ + 1);\n    rep(i, n + 1) m2[i] = i;\n    divisor_transform::zeta_transform(m2);\n\
+    \n#line 2 \"misc/timer.hpp\"\n\n#line 4 \"misc/timer.hpp\"\n\nstruct Timer {\n\
+    \  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\n\
+    \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
+    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
+    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n#line\
+    \ 12 \"verify/verify-unit-test/mf.test.cpp\"\n\nusing namespace Nyaan;\n\n#include\
+    \ <cxxabi.h>\nstring get_name(const type_info& id) {\n  int stat;\n  char* name\
+    \ = abi::__cxa_demangle(id.name(), 0, 0, &stat);\n  assert(name != NULL && stat\
+    \ == 0);\n  string res = string(name);\n  free(name);\n  return res;\n}\n\ntemplate\
+    \ <typename T>\nvoid test_moebius(int n = TEN(7)) {\n  Timer timer;\n  // moebius\
+    \ function\n  {\n    // cerr << \"moebius, \" << get_name(typeid(T)) << endl;\n\
+    \    timer.reset();\n    auto m1 = mobius_function<T>(n);\n    // cerr << \"emf\
+    \ : \" << timer.elapsed() << endl;\n\n    timer.reset();\n    vector<T> m2(n +\
+    \ 1);\n    m2[1] = 1;\n    divisor_transform::mobius_transform(m2);\n    // cerr\
+    \ << \"dmt : \" << timer.elapsed() << endl;\n    assert(m1 == m2);\n  }\n}\n\n\
+    template <typename T>\nvoid test_sigma0(int n = TEN(7)) {\n  Timer timer;\n  //\
+    \ divisor function\n  {\n    // cerr << \"sigma0, \" << get_name(typeid(T)) <<\
+    \ endl;\n    timer.reset();\n    auto m1 = sigma0<T>(n);\n    // cerr << \"emf\
+    \ : \" << timer.elapsed() << endl;\n\n    timer.reset();\n    vector<T> m2(n +\
+    \ 1, 1);\n    m2[0] = 0;\n    divisor_transform::zeta_transform(m2);\n    // cerr\
+    \ << \"dzt : \" << timer.elapsed() << endl;\n    assert(m1 == m2);\n  }\n}\n\n\
+    template <typename T>\nvoid test_sigma1(int n = TEN(7)) {\n  Timer timer;\n  //\
+    \ divisor function\n  {\n    // cerr << \"sigma1, \" << get_name(typeid(T)) <<\
+    \ endl;\n    timer.reset();\n    auto m1 = sigma1<T>(n);\n    // cerr << \"emf\
+    \ : \" << timer.elapsed() << endl;\n\n    timer.reset();\n    vector<T> m2(n +\
+    \ 1);\n    rep(i, n + 1) m2[i] = i;\n    divisor_transform::zeta_transform(m2);\n\
     \    // cerr << \"dzt : \" << timer.elapsed() << endl;\n    assert(m1 == m2);\n\
     \  }\n}\n\ntemplate <typename T>\nvoid test_totient(int n = TEN(7)) {\n  Timer\
     \ timer;\n  // divisor function\n  {\n    // cerr << \"totient, \" << get_name(typeid(T))\
@@ -376,7 +377,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/mf.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/mf.test.cpp

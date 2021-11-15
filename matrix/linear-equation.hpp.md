@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/gauss-elimination.hpp
     title: matrix/gauss-elimination.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/find-p-recursive.hpp
     title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
   _extendedVerifiedWith:
@@ -18,12 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"matrix/linear-equation.hpp\"\n\n#line 2 \"matrix/gauss-elimination.hpp\"\
@@ -71,12 +71,12 @@ data:
   requiredBy:
   - fps/find-p-recursive.hpp
   timestamp: '2021-06-17 21:43:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-  - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
 documentation_of: matrix/linear-equation.hpp
 layout: document
 redirect_from:

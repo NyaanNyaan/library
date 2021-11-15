@@ -32,12 +32,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
-    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n"
-  code: "#pragma once\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+  bundledCode: "#line 2 \"misc/timer.hpp\"\n\n#include <chrono>\n\nstruct Timer {\n\
+    \  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\n\
+    \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
+    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
+    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n"
+  code: "#pragma once\n\n#include <chrono>\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
     \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
@@ -49,13 +49,13 @@ data:
   - marathon/simulated-annealing.hpp
   - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
-  timestamp: '2020-12-08 00:23:55+09:00'
+  timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/mf.test.cpp
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
 documentation_of: misc/timer.hpp
 layout: document
