@@ -50,7 +50,7 @@ data:
       title: Skew Heap
     - icon: ':heavy_check_mark:'
       path: data-structure/slide-window-aggregation.hpp
-      title: data-structure/slide-window-aggregation.hpp
+      title: Slide Window Aggrigation
     - icon: ':heavy_check_mark:'
       path: data-structure/sliding-window-minimum.hpp
       title: data-structure/sliding-window-minimum.hpp
