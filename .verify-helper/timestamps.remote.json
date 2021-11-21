@@ -89,6 +89,7 @@
 "verify/verify-unit-test/polynomial-matrix-prod.test.cpp": "2021-11-15 19:19:58 +0900",
 "verify/verify-unit-test/primitive-root.test.cpp": "2021-05-18 09:24:09 +0900",
 "verify/verify-unit-test/radix-heap.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-unit-test/rational-number.test.cpp": "2021-11-21 20:53:39 +0900",
 "verify/verify-unit-test/run-length-encoding.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-unit-test/segment-set.test.cpp": "2021-09-05 13:40:06 +0900",
 "verify/verify-unit-test/segment-tree-beats.test.cpp": "2021-05-04 19:34:35 +0900",
