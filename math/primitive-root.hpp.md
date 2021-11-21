@@ -42,8 +42,8 @@ data:
   isVerificationFile: false
   path: math/primitive-root.hpp
   requiredBy:
-  - ntt/cooley-tukey-ntt.hpp
   - ntt/rader-ntt.hpp
+  - ntt/cooley-tukey-ntt.hpp
   timestamp: '2021-02-27 00:51:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

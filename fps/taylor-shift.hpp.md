@@ -154,8 +154,8 @@ data:
   isVerificationFile: false
   path: fps/taylor-shift.hpp
   requiredBy:
-  - fps/partial-fraction-decomposition.hpp
   - fps/fps-famous-series.hpp
+  - fps/partial-fraction-decomposition.hpp
   timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -163,8 +163,8 @@ data:
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-yuki/yuki-1510.test.cpp
-  - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - verify/verify-unit-test/dual-fps.test.cpp
 documentation_of: fps/taylor-shift.hpp
 layout: document
 redirect_from:

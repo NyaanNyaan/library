@@ -273,9 +273,9 @@ data:
   timestamp: '2021-06-10 13:30:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
-  - verify/verify-unit-test/complex-fft.test.cpp
 documentation_of: ntt/complex-fft.hpp
 layout: document
 redirect_from:

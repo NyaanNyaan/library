@@ -302,81 +302,81 @@ data:
   isVerificationFile: false
   path: modint/simd-montgomery.hpp
   requiredBy:
-  - tree/frequency-table-of-tree-distance.hpp
-  - fps/ntt-friendly-fps.hpp
-  - fps/fps-composition-fast.hpp
-  - fps/fast-multieval.hpp
   - fps/arbitrary-fps.hpp
-  - ntt/ntt-avx2.hpp
-  - ntt/arbitrary-ntt.hpp
+  - fps/ntt-friendly-fps.hpp
+  - fps/fast-multieval.hpp
+  - fps/fps-composition-fast.hpp
   - ntt/chirp-z.hpp
-  - ntt/cooley-tukey-ntt.hpp
+  - ntt/arbitrary-ntt.hpp
+  - ntt/ntt-avx2.hpp
   - ntt/ntt-sse42.hpp
   - ntt/rader-ntt.hpp
-  - modulo/gauss-elimination-fast.hpp
+  - ntt/cooley-tukey-ntt.hpp
+  - tree/frequency-table-of-tree-distance.hpp
   - modulo/strassen.hpp
+  - modulo/gauss-elimination-fast.hpp
   timestamp: '2021-04-26 16:30:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
-  - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
-  - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-pow.test.cpp
-  - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
-  - verify/verify-yosupo-fps/yosupo-log.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp.test.cpp
-  - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-inv.test.cpp
-  - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
+  - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
-  - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
-  - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-log.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-pow.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv.test.cpp
+  - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp.test.cpp
+  - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-yuki/yuki-0963.test.cpp
+  - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-yuki/yuki-1504.test.cpp
+  - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
-  - verify/verify-yuki/yuki-0214.test.cpp
+  - verify/verify-yuki/yuki-1145-frac.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-0502.test.cpp
-  - verify/verify-yuki/yuki-1504.test.cpp
-  - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-0215.test.cpp
-  - verify/verify-yuki/yuki-0963.test.cpp
-  - verify/verify-yuki/yuki-1533.test.cpp
-  - verify/verify-yuki/yuki-1080.test.cpp
-  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - verify/verify-yuki/yuki-1145.test.cpp
-  - verify/verify-yuki/yuki-1510.test.cpp
+  - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-yuki/yuki-1145-frac.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
-  - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
+  - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-unit-test/dual-fps.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
-  - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/dual-fps.test.cpp
+  - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
 documentation_of: modint/simd-montgomery.hpp
 layout: document
 redirect_from:

@@ -371,7 +371,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/primitive-root.hpp
       title: "\u539F\u59CB\u6839"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: math/rational.hpp
       title: math/rational.hpp
     - icon: ':heavy_check_mark:'
@@ -1138,6 +1138,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/radix-heap.test.cpp
       title: verify/verify-unit-test/radix-heap.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/rational-number.test.cpp
+      title: verify/verify-unit-test/rational-number.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/run-length-encoding.test.cpp
       title: verify/verify-unit-test/run-length-encoding.test.cpp

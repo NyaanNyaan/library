@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/rational-number.test.cpp
+    title: verify/verify-unit-test/rational-number.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"math/rational.hpp\"\n\nstruct Rational {\n  using R = Rational;\n\
@@ -31,7 +34,7 @@ data:
     \ r;\n  }\n  R inverse() const {\n    assert(x != 0);\n    R r;\n    r.x = y,\
     \ r.y = x;\n    if (x < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long\
     \ long p) const {\n    R res(1), base(*this);\n    while (p) {\n      if (p &\
-    \ 1) res *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return p;\n\
+    \ 1) res *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n\
     \  }\n\n  friend bool operator==(const R& l, const R& r) {\n    return l.x ==\
     \ r.x && l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n\
     \    return l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R&\
@@ -44,14 +47,14 @@ data:
     \  }\n\n  long long toMint(long long mod) {\n    assert(mod != 0);\n    i64 a\
     \ = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n    \
     \  swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return i128((u\
-    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nstruct Binomial {\n  vector<Rational>\
-    \ fc;\n  Binomial(int = 0) { fc.emplace_back(1); }\n\n  void extend() {\n    int\
-    \ n = fc.size();\n    Rational nxt = fc.back() * n;\n    fc.push_back(nxt);\n\
-    \  }\n\n  Rational fac(int n) {\n    while ((int)fc.size() <= n) extend();\n \
-    \   return fc[n];\n  }\n  Rational finv(int n) { return fac(n).inverse(); }\n\
-    \  Rational inv(int n) { return Rational{1, max(n, 1)}; }\n  Rational C(int n,\
-    \ int r) {\n    if (n < 0 or r < 0 or n < r) return Rational{0};\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n};\n"
+    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\ntemplate <typename R = Rational>\n\
+    struct Binomial {\n  vector<R> fc;\n  Binomial(int = 0) { fc.emplace_back(1);\
+    \ }\n  void extend() {\n    int n = fc.size();\n    R nxt = fc.back() * n;\n \
+    \   fc.push_back(nxt);\n  }\n  R fac(int n) {\n    while ((int)fc.size() <= n)\
+    \ extend();\n    return fc[n];\n  }\n  R finv(int n) { return fac(n).inverse();\
+    \ }\n  R inv(int n) { return R{1, max(n, 1)}; }\n  R C(int n, int r) {\n    if\
+    \ (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n) * finv(n - r) * finv(r);\n\
+    \  }\n  R operator()(int n, int r) { return C(n, r); }\n};\n"
   code: "#pragma once\n\nstruct Rational {\n  using R = Rational;\n  using i128 =\
     \ __int128_t;\n  using i64 = long long;\n  using u64 = unsigned long long;\n \
     \ long long x, y;\n  Rational() : x(0), y(1) {}\n  Rational(long long _x, long\
@@ -75,7 +78,7 @@ data:
     \ r;\n  }\n  R inverse() const {\n    assert(x != 0);\n    R r;\n    r.x = y,\
     \ r.y = x;\n    if (x < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long\
     \ long p) const {\n    R res(1), base(*this);\n    while (p) {\n      if (p &\
-    \ 1) res *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return p;\n\
+    \ 1) res *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n\
     \  }\n\n  friend bool operator==(const R& l, const R& r) {\n    return l.x ==\
     \ r.x && l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n\
     \    return l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R&\
@@ -88,21 +91,22 @@ data:
     \  }\n\n  long long toMint(long long mod) {\n    assert(mod != 0);\n    i64 a\
     \ = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n    \
     \  swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return i128((u\
-    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\nstruct Binomial {\n  vector<Rational>\
-    \ fc;\n  Binomial(int = 0) { fc.emplace_back(1); }\n\n  void extend() {\n    int\
-    \ n = fc.size();\n    Rational nxt = fc.back() * n;\n    fc.push_back(nxt);\n\
-    \  }\n\n  Rational fac(int n) {\n    while ((int)fc.size() <= n) extend();\n \
-    \   return fc[n];\n  }\n  Rational finv(int n) { return fac(n).inverse(); }\n\
-    \  Rational inv(int n) { return Rational{1, max(n, 1)}; }\n  Rational C(int n,\
-    \ int r) {\n    if (n < 0 or r < 0 or n < r) return Rational{0};\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n};\n"
+    \ % mod + mod) % mod) * x % mod;\n  }\n};\n\ntemplate <typename R = Rational>\n\
+    struct Binomial {\n  vector<R> fc;\n  Binomial(int = 0) { fc.emplace_back(1);\
+    \ }\n  void extend() {\n    int n = fc.size();\n    R nxt = fc.back() * n;\n \
+    \   fc.push_back(nxt);\n  }\n  R fac(int n) {\n    while ((int)fc.size() <= n)\
+    \ extend();\n    return fc[n];\n  }\n  R finv(int n) { return fac(n).inverse();\
+    \ }\n  R inv(int n) { return R{1, max(n, 1)}; }\n  R C(int n, int r) {\n    if\
+    \ (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n) * finv(n - r) * finv(r);\n\
+    \  }\n  R operator()(int n, int r) { return C(n, r); }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: math/rational.hpp
   requiredBy: []
-  timestamp: '2021-09-05 13:40:06+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-11-21 20:53:39+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-unit-test/rational-number.test.cpp
 documentation_of: math/rational.hpp
 layout: document
 redirect_from:

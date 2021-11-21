@@ -188,9 +188,9 @@ data:
   isVerificationFile: false
   path: fps/multipoint-evaluation.hpp
   requiredBy:
+  - fps/polynomial-interpolation.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
-  - fps/polynomial-interpolation.hpp
   timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
