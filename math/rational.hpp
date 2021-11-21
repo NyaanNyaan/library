@@ -68,7 +68,7 @@ struct Rational {
       base *= base;
       p >>= 1;
     }
-    return p;
+    return res;
   }
 
   friend bool operator==(const R& l, const R& r) {
@@ -103,24 +103,24 @@ struct Rational {
   }
 };
 
+template <typename R = Rational>
 struct Binomial {
-  vector<Rational> fc;
+  vector<R> fc;
   Binomial(int = 0) { fc.emplace_back(1); }
-
   void extend() {
     int n = fc.size();
-    Rational nxt = fc.back() * n;
+    R nxt = fc.back() * n;
     fc.push_back(nxt);
   }
-
-  Rational fac(int n) {
+  R fac(int n) {
     while ((int)fc.size() <= n) extend();
     return fc[n];
   }
-  Rational finv(int n) { return fac(n).inverse(); }
-  Rational inv(int n) { return Rational{1, max(n, 1)}; }
-  Rational C(int n, int r) {
-    if (n < 0 or r < 0 or n < r) return Rational{0};
+  R finv(int n) { return fac(n).inverse(); }
+  R inv(int n) { return R{1, max(n, 1)}; }
+  R C(int n, int r) {
+    if (n < 0 or r < 0 or n < r) return R{0};
     return fac(n) * finv(n - r) * finv(r);
   }
+  R operator()(int n, int r) { return C(n, r); }
 };
