@@ -83,3 +83,8 @@ vector<int> Path(G &g, int u, int v) {
   dfs(dfs, u);
   return ret;
 }
+
+/**
+ * @brief グラフユーティリティ
+ * @docs docs/graph/graph-utility.md
+ */
