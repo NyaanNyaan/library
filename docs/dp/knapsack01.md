@@ -8,4 +8,4 @@
 
 #### 使い方
 
-- `knapsack01(v,w,W)`: `v`で数列$v=\{v_i\}$、`w`で数列$w=\{w_i\}$、`W`で値$W$を与える。解$V_{\mathrm{max}}$を返す。計算量$\mathrm{O}(\min \lbrace N W , N \sum v_i , N 2^{\frac{N}{2}} \rbrace )$
+- `knapsack01(v,w,W)`: 数列$v=\{v_i\}$,$w=\{w_i\}$と値$W$を与えると、0-1ナップサック問題を解いて解$V_{\mathrm{max}}$を返す。計算量$\mathrm{O}(\min \lbrace N W , N \sum v_i , N 2^{\frac{N}{2}} \rbrace )$
