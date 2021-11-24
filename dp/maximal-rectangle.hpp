@@ -24,3 +24,8 @@ long long MaximalRectangle(vector<long long> buf) {
   }
   return mx;
 }
+
+/**
+ * @brief 最大長方形
+ * @docs docs/dp/maximal-rectangle.md
+ */
