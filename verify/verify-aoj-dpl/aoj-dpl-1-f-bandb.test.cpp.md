@@ -3,7 +3,8 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: dp/branch-and-bound.hpp
-    title: dp/branch-and-bound.hpp
+    title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\u306E\u3001\u5206\u5C90\
+      \u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -185,7 +186,9 @@ data:
     \    best = max(best, V(rel));\n      return;\n    }\n    if (V(rel) < best) return;\n\
     \    if (w >= c[i].second) dfs(i + 1, v + c[i].first, w - c[i].second);\n    dfs(i\
     \ + 1, v, w);\n    return;\n  }\n\n  V run(W w) {\n    dfs(0, best = 0, w);\n\
-    \    return best;\n  }\n};\n#line 6 \"verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp\"\
+    \    return best;\n  }\n};\n\n/**\n * @brief 0-1\u30CA\u30C3\u30D7\u30B5\u30C3\
+    \u30AF\u554F\u984C\u306E\u3001\u5206\u5C90\u9650\u5B9A\u6CD5\u306B\u3088\u308B\
+    \u89E3\u6CD5\n * @docs docs/dp/branch-and-bound.md\n */\n#line 6 \"verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp\"\
     \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  inl(N, W);\n  vl v(N),\
     \ w(N);\n  in2(v, w);\n  BranchAndBound<ll, ll> bb(v, w);\n  out(bb.run(W));\n\
     }\n"
@@ -205,7 +208,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-17 23:54:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp

@@ -16,6 +16,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/dp/knapsack01.md
+    document_title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C"
     links: []
   bundledCode: "#line 2 \"dp/knapsack01.hpp\"\n\nlong long knapsack01(const vector<long\
     \ long>& v, const vector<long long>& w,\n                     long long W) {\n\
@@ -42,7 +44,8 @@ data:
     \ / 2);\n  auto b = enumerate(v.size() / 2, v.size());\n  reverse(begin(a), end(a));\n\
     \  b.emplace_back(inf, inf);\n  long long ans = 0, id = -1;\n  for (auto& [t,\
     \ s] : a) {\n    while (t + b[id + 1].first <= W) ++id;\n    if (id != -1) ans\
-    \ = max(ans, s + b[id].second);\n  }\n  return ans;\n}\n"
+    \ = max(ans, s + b[id].second);\n  }\n  return ans;\n}\n\n/**\n * @brief 0-1\u30CA\
+    \u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\n * @docs docs/dp/knapsack01.md\n */\n"
   code: "#pragma once\n\nlong long knapsack01(const vector<long long>& v, const vector<long\
     \ long>& w,\n                     long long W) {\n  double v_sum = 0;\n  for (auto&\
     \ x : v) v_sum += x;\n  double cond1 = log2(double(W) * (v.size() + 1));\n  double\
@@ -68,12 +71,13 @@ data:
     \ / 2, v.size());\n  reverse(begin(a), end(a));\n  b.emplace_back(inf, inf);\n\
     \  long long ans = 0, id = -1;\n  for (auto& [t, s] : a) {\n    while (t + b[id\
     \ + 1].first <= W) ++id;\n    if (id != -1) ans = max(ans, s + b[id].second);\n\
-    \  }\n  return ans;\n}\n"
+    \  }\n  return ans;\n}\n\n/**\n * @brief 0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\
+    \u554F\u984C\n * @docs docs/dp/knapsack01.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: dp/knapsack01.hpp
   requiredBy: []
-  timestamp: '2021-01-24 16:32:15+09:00'
+  timestamp: '2021-11-17 23:54:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
@@ -84,5 +88,16 @@ layout: document
 redirect_from:
 - /library/dp/knapsack01.hpp
 - /library/dp/knapsack01.hpp.html
-title: dp/knapsack01.hpp
+title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C"
 ---
+## 0-1ナップサック問題
+
+### 概要
+
+> 0-1ナップサック問題
+>
+> 品物が$N$個(品物$0$から品物$N-1$)あり、品物$i$は価値$v_i$重さ$w_i$である。重さの総和が$W$以下となるようにいくつかの品物を選んだとき、選んだ品物の価値の総和の最大値$V_{\max}$を求めよ。
+
+### 使い方
+
+- `knapsack01(v,w,W)`: 数列$v=\{v_i\}$,$w=\{w_i\}$と値$W$を与えると、0-1ナップサック問題を解いて解$V_{\max}$を返す。計算量$\mathrm{O}(\min \lbrace N W , N \sum v_i , N 2^{\frac{N}{2}} \rbrace )$

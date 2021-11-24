@@ -13,6 +13,9 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    _deprecated_at_docs: docs/dp/branch-and-bound.md
+    document_title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\u306E\u3001\
+      \u5206\u5C90\u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5"
     links: []
   bundledCode: "#line 2 \"dp/branch-and-bound.hpp\"\n\ntemplate <typename V, typename\
     \ W, typename D = long double>\nstruct BranchAndBound {\n  vector<pair<V, W>>\
@@ -30,7 +33,9 @@ data:
     \    best = max(best, V(rel));\n      return;\n    }\n    if (V(rel) < best) return;\n\
     \    if (w >= c[i].second) dfs(i + 1, v + c[i].first, w - c[i].second);\n    dfs(i\
     \ + 1, v, w);\n    return;\n  }\n\n  V run(W w) {\n    dfs(0, best = 0, w);\n\
-    \    return best;\n  }\n};\n"
+    \    return best;\n  }\n};\n\n/**\n * @brief 0-1\u30CA\u30C3\u30D7\u30B5\u30C3\
+    \u30AF\u554F\u984C\u306E\u3001\u5206\u5C90\u9650\u5B9A\u6CD5\u306B\u3088\u308B\
+    \u89E3\u6CD5\n * @docs docs/dp/branch-and-bound.md\n */\n"
   code: "#pragma once\n\ntemplate <typename V, typename W, typename D = long double>\n\
     struct BranchAndBound {\n  vector<pair<V, W>> c;\n  V best;\n\n  BranchAndBound(const\
     \ vector<V>& v, const vector<W>& w) {\n    assert(v.size() == w.size());\n   \
@@ -47,12 +52,14 @@ data:
     \ V(rel));\n      return;\n    }\n    if (V(rel) < best) return;\n    if (w >=\
     \ c[i].second) dfs(i + 1, v + c[i].first, w - c[i].second);\n    dfs(i + 1, v,\
     \ w);\n    return;\n  }\n\n  V run(W w) {\n    dfs(0, best = 0, w);\n    return\
-    \ best;\n  }\n};\n"
+    \ best;\n  }\n};\n\n/**\n * @brief 0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\
+    \u984C\u306E\u3001\u5206\u5C90\u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5\
+    \n * @docs docs/dp/branch-and-bound.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: dp/branch-and-bound.hpp
   requiredBy: []
-  timestamp: '2021-01-24 17:40:08+09:00'
+  timestamp: '2021-11-17 23:54:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dpl/aoj-dpl-1-f-bandb.test.cpp
@@ -62,5 +69,24 @@ layout: document
 redirect_from:
 - /library/dp/branch-and-bound.hpp
 - /library/dp/branch-and-bound.hpp.html
-title: dp/branch-and-bound.hpp
+title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\u306E\u3001\u5206\u5C90\
+  \u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5"
 ---
+## 0-1ナップサック問題の、分枝限定法による解法
+
+### 概要
+
+> 0-1ナップサック問題
+>
+> 品物が$N$個(品物$0$から品物$N-1$)あり、品物$i$は価値$v_i$重さ$w_i$である。重さの総和が$W$以下となるようにいくつかの品物を選んだとき、選んだ品物の価値の総和の最大値$V_{\max}$を求めよ。
+
+いくつかの品物について選択が決まったとき、残りの品物で[有理ナップサック問題](https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_15_B)を解いて最適解の上界とする。再帰関数で探索するが、現在のノードでの最適解の上界が既知の解以下になった場合は、その先の探索を行わない（分枝限定法）。
+
+### 使い方
+
+- `BranchAndBound<V,W>(v,w)`: コンストラクタ。数列$v=\{v_i\}$,$w=\{w_i\}$を与える。計算量$\mathrm{O}(N\log N)$
+- `run(w)`: `w`で値$W$を与える。0-1ナップサック問題の解$V_{\max}$を返す。計算量$\mathrm{O}(2^N)$
+
+### 注意点
+
+- このライブラリは、弱いテストケースを狙う嘘解法での利用を想定したものである。

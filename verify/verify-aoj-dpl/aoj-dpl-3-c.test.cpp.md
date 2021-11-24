@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: dp/maximal-rectangle.hpp
-    title: dp/maximal-rectangle.hpp
+    title: "\u6700\u5927\u9577\u65B9\u5F62"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -177,7 +177,8 @@ data:
     \ (!st.empty() and st.top().first >= rect.first) {\n        P pre = st.top();\n\
     \        st.pop();\n        mx = max(mx, pre.first * (i - pre.second));\n    \
     \    j = pre.second;\n      }\n      rect.second = j;\n      st.push(rect);\n\
-    \    }\n  }\n  return mx;\n}\n#line 6 \"verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp\"\
+    \    }\n  }\n  return mx;\n}\n\n/**\n * @brief \u6700\u5927\u9577\u65B9\u5F62\n\
+    \ * @docs docs/dp/maximal-rectangle.md\n */\n#line 6 \"verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp\"\
     \n//\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(N);\n  vl a(N);\n\
     \  in(a);\n  out(MaximalRectangle(a));\n}\n"
   code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DPL_3_C\"\
@@ -195,7 +196,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-17 23:54:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dpl/aoj-dpl-3-c.test.cpp
