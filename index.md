@@ -108,8 +108,8 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: dp/branch-and-bound.hpp
-      title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\u306E\u3001\u5206\
-        \u5C90\u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5"
+      title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\u306E\u5206\u679D\
+        \u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5"
     - icon: ':heavy_check_mark:'
       path: dp/knapsack01.hpp
       title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C"

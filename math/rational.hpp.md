@@ -103,7 +103,7 @@ data:
   isVerificationFile: false
   path: math/rational.hpp
   requiredBy: []
-  timestamp: '2021-11-21 20:53:39+09:00'
+  timestamp: '2021-11-21 20:50:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/rational-number.test.cpp
