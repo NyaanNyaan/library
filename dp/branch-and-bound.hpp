@@ -52,6 +52,6 @@ struct BranchAndBound {
 };
 
 /**
- * @brief 0-1ナップサック問題の、分岐限定法による解法
+ * @brief 0-1ナップサック問題の分枝限定法による解法
  * @docs docs/dp/branch-and-bound.md
  */
