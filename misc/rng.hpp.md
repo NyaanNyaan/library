@@ -19,6 +19,9 @@ data:
     title: Pruefer Code
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1068.test.cpp
+    title: verify/verify-aoj-other/aoj-1068.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/barrett-reduction.test.cpp
     title: verify/verify-unit-test/barrett-reduction.test.cpp
   - icon: ':heavy_check_mark:'
@@ -189,6 +192,7 @@ data:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-aoj-other/aoj-1068.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp

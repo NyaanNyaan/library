@@ -178,6 +178,9 @@ data:
     path: verify/verify-aoj-other/aoj-0304.test.cpp
     title: verify/verify-aoj-other/aoj-0304.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1068.test.cpp
+    title: verify/verify-aoj-other/aoj-1068.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
     title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1023,6 +1026,7 @@ data:
   - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
+  - verify/verify-aoj-other/aoj-1068.test.cpp
   - verify/verify-aoj-other/aoj-0304.test.cpp
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp

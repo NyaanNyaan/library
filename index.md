@@ -84,6 +84,9 @@ data:
       path: data-structure-2d/2d-cumulative-sum.hpp
       title: "\u4E8C\u6B21\u5143\u7D2F\u7A4D\u548C"
     - icon: ':heavy_check_mark:'
+      path: data-structure-2d/2d-segment-tree.hpp
+      title: "\u4E8C\u6B21\u5143\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/abstract-range-tree.hpp
       title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
     - icon: ':heavy_check_mark:'
@@ -1023,6 +1026,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-0304.test.cpp
       title: verify/verify-aoj-other/aoj-0304.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-1068.test.cpp
+      title: verify/verify-aoj-other/aoj-1068.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
       title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
