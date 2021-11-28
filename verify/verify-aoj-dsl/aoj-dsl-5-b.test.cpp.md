@@ -181,12 +181,12 @@ data:
     \ (i,j) \u3092 get\n  T imos_get(int i, int j) { return data[i + 1][j + 1]; }\n\
     \n  // \u534A\u958B\n  T query(int i1, int j1, int i2, int j2) {\n    return (data[i2][j2]\
     \ - data[i1][j2] - data[i2][j1] + data[i1][j1]);\n  }\n};\n\n/*\n * @brief \u4E8C\
-    \u6B21\u5143\u7D2F\u7A4D\u548C\n * @docs docs/data-structure-2d/ds-2d.md\n */\n\
-    #line 6 \"verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp\"\n\nusing namespace Nyaan;\
-    \ void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n  CumulativeSum2D<int> ruiseki(L,\
-    \ L);\n  rep(i, N) {\n    ini(x1, y1, x2, y2);\n    ruiseki.imos(x1, y1, x2 ,\
-    \ y2, 1);\n  }\n  ruiseki.build();\n  int ans = 0;\n  rep(i, L) rep(j, L) { amax(ans,\
-    \ ruiseki.data[i + 1][j + 1]); }\n  out(ans);\n}\n"
+    \u6B21\u5143\u7D2F\u7A4D\u548C\n */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp\"\
+    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n\
+    \  CumulativeSum2D<int> ruiseki(L, L);\n  rep(i, N) {\n    ini(x1, y1, x2, y2);\n\
+    \    ruiseki.imos(x1, y1, x2 , y2, 1);\n  }\n  ruiseki.build();\n  int ans = 0;\n\
+    \  rep(i, L) rep(j, L) { amax(ans, ruiseki.data[i + 1][j + 1]); }\n  out(ans);\n\
+    }\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure-2d/2d-cumulative-sum.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n\
@@ -205,7 +205,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2021-11-27 22:15:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-5-b.test.cpp

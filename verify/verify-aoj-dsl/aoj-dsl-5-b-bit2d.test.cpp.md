@@ -191,11 +191,11 @@ data:
     \ x1, int y1, int x2, int y2) {\n    if (x1 > x2 || y1 > y2) return T(0);\n  \
     \  return sum(x2, y2) - sum(x2, y1 - 1) - sum(x1 - 1, y2) +\n           sum(x1\
     \ - 1, y1 - 1);\n  }\n};\n\n/*\n * @brief \u4E8C\u6B21\u5143Binary Indexed Tree\n\
-    \ * @docs docs/data-structure-2d/ds-2d.md\n */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n\
-    \  BinaryIndexedTree2D<int> bit(L + 1, L + 1);\n  rep(i, N) {\n    ini(x1, y1,\
-    \ x2, y2);\n    bit.imos(x1, y1, x2 - 1, y2 - 1, 1);\n  }\n  int ans = 0;\n  rep(i,\
-    \ L) rep(j, L) { amax(ans, bit.sum(i, j)); }\n  out(ans);\n}\n"
+    \ */\n#line 6 \"verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp\"\n\nusing namespace\
+    \ Nyaan; void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n  BinaryIndexedTree2D<int>\
+    \ bit(L + 1, L + 1);\n  rep(i, N) {\n    ini(x1, y1, x2, y2);\n    bit.imos(x1,\
+    \ y1, x2 - 1, y2 - 1, 1);\n  }\n  int ans = 0;\n  rep(i, L) rep(j, L) { amax(ans,\
+    \ bit.sum(i, j)); }\n  out(ans);\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure-2d/2d-binary-indexed-tree.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  int L = 1000;\n\
@@ -213,7 +213,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2021-11-27 22:15:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp

@@ -16,7 +16,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
     document_title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
     links: []
   bundledCode: "#line 2 \"data-structure-2d/dynamic-binary-indexed-tree-2d.hpp\"\n\
@@ -77,7 +76,7 @@ data:
     \      ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr & -nr;\n      } else {\n\
     \        ret -= (*bit[nl]).sum(ml, mr);\n        nl -= nl & -nl;\n      }\n  \
     \  }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684\u4E8C\u6B21\u5143\
-    Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    Binary Indexed Tree\n */\n"
   code: "#pragma once\n\n#include \"../data-structure/dynamic-binary-indexed-tree.hpp\"\
     \n\ntemplate <typename T>\nstruct DynamicFenwickTree2D {\n  using BIT = DynamicFenwickTree<int,\
     \ T>;\n  int N, M;\n  vector<BIT*> bit;\n  DynamicFenwickTree2D() = default;\n\
@@ -91,15 +90,14 @@ data:
     \  if (nl < nr) {\n        ret += (*bit[nr]).sum(ml, mr);\n        nr -= nr &\
     \ -nr;\n      } else {\n        ret -= (*bit[nl]).sum(ml, mr);\n        nl -=\
     \ nl & -nl;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief \u52D5\u7684\
-    \u4E8C\u6B21\u5143Binary Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n\
-    \ */\n"
+    \u4E8C\u6B21\u5143Binary Indexed Tree\n */\n"
   dependsOn:
   - data-structure/dynamic-binary-indexed-tree.hpp
   - data-structure/hash-map-variable-length.hpp
   isVerificationFile: false
   path: data-structure-2d/dynamic-binary-indexed-tree-2d.hpp
   requiredBy: []
-  timestamp: '2021-08-10 23:14:36+09:00'
+  timestamp: '2021-11-27 22:15:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
@@ -110,21 +108,3 @@ redirect_from:
 - /library/data-structure-2d/dynamic-binary-indexed-tree-2d.hpp.html
 title: "\u52D5\u7684\u4E8C\u6B21\u5143Binary Indexed Tree"
 ---
-## 領域木
-
-TODO: 書く
-TODO: Merge Treeと領域木の呼び方が良くわかっていないので調べる
-
-- 矩形和クエリ
-  - 2D累積和
-  - 永続セグメント木
-  - Merge Tree
-  - Wavelet Matrix
-- 一点更新・矩形和クエリ
-  - 2D Fenwick Tree
-  - 2D Segment Tree
-  - 動的 2D Fenwick Tree
-  - 領域木(Segment Tree)
-  - 抽象化領域木
-  - 領域木(Fenwick Tree)
-  - 動的Wavelet Matrix

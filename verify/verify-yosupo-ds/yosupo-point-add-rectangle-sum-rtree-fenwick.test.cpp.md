@@ -206,37 +206,36 @@ data:
     \ (a < b) {\n        ret += bit[b].sum(id(b, yl), id(b, yr));\n        b -= b\
     \ & -b;\n      } else {\n        ret -= bit[a].sum(id(a, yl), id(a, yr));\n  \
     \      a -= a & -a;\n      }\n    }\n    return ret;\n  }\n};\n\n/*\n * @brief\
-    \ \u9818\u57DF\u6728(Binary Indexed Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n\
-    \ */\n#line 2 \"misc/compress.hpp\"\n\ntemplate <class T>\nstruct compress {\n\
-    \  vector<T> xs;\n  compress(const vector<T>& v) {\n    xs.reserve(v.size());\n\
-    \    for (T x : v) xs.push_back(x);\n    sort(xs.begin(), xs.end());\n    xs.erase(unique(xs.begin(),\
-    \ xs.end()), xs.end());\n  }\n  int get(const T& x) const {\n    return lower_bound(xs.begin(),\
-    \ xs.end(), x) - xs.begin();\n  }\n  inline int operator()(const T& x) const {\
-    \ return get(x); }\n  T operator[](int i) { return xs[i]; }\n  int size() const\
-    \ { return xs.size(); }\n};\n\n/**\n * \u5EA7\u6A19\u5727\u7E2E\n */\n#line 2\
-    \ \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace std;\n\
-    \nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ], outbuf[SZ];\n\
-    int in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n\
-    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
-    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
-    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
-    \ load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf + in_left,\
-    \ len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n  in_left\
-    \ = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
-    \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
-    \ <typename T>\ninline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n\
-    \  char c;\n  do c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]]\
-    \ bool minus = false;\n  if constexpr (is_signed<T>::value == true) {\n    if\
-    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
-    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n}\ninline void\
-    \ rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head,\
-    \ Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) {\n\
-    \  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = c;\n}\ninline void\
-    \ wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = b\
-    \ ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
+    \ \u9818\u57DF\u6728(Binary Indexed Tree)\n */\n#line 2 \"misc/compress.hpp\"\n\
+    \ntemplate <class T>\nstruct compress {\n  vector<T> xs;\n  compress(const vector<T>&\
+    \ v) {\n    xs.reserve(v.size());\n    for (T x : v) xs.push_back(x);\n    sort(xs.begin(),\
+    \ xs.end());\n    xs.erase(unique(xs.begin(), xs.end()), xs.end());\n  }\n  int\
+    \ get(const T& x) const {\n    return lower_bound(xs.begin(), xs.end(), x) - xs.begin();\n\
+    \  }\n  inline int operator()(const T& x) const { return get(x); }\n  T operator[](int\
+    \ i) { return xs[i]; }\n  int size() const { return xs.size(); }\n};\n\n/**\n\
+    \ * \u5EA7\u6A19\u5727\u7E2E\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\
+    \n\nusing namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 <<\
+    \ 17;\nchar inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right = 0, out_right =\
+    \ 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for\
+    \ (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >=\
+    \ 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n\
+    \    }\n  }\n} constexpr pre;\n\ninline void load() {\n  int len = in_right -\
+    \ in_left;\n  memmove(inbuf, inbuf + in_left, len);\n  in_right = len + fread(inbuf\
+    \ + len, 1, SZ - len, stdin);\n  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf,\
+    \ 1, out_right, stdout);\n  out_right = 0;\n}\n\ninline void skip_space() {\n\
+    \  if (in_left + 32 > in_right) load();\n  while (inbuf[in_left] <= ' ') in_left++;\n\
+    }\n\ninline void rd(char& c) {\n  if (in_left + 32 > in_right) load();\n  c =\
+    \ inbuf[in_left++];\n}\ntemplate <typename T>\ninline void rd(T& x) {\n  if (in_left\
+    \ + 32 > in_right) load();\n  char c;\n  do c = inbuf[in_left++];\n  while (c\
+    \ < '-');\n  [[maybe_unused]] bool minus = false;\n  if constexpr (is_signed<T>::value\
+    \ == true) {\n    if (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x\
+    \ = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n\
+    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (minus) x = -x;\n\
+    \  }\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline\
+    \ void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline\
+    \ void wt(char c) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
+    \ = c;\n}\ninline void wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
+    \ = b ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
     \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
     \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
     \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
@@ -288,7 +287,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2021-11-27 22:15:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp

@@ -285,8 +285,7 @@ data:
     \    for (a += N, b += N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = f(L,\
     \ seg[a].query(id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = f(seg[b].query(id(b,\
     \ yl), id(b, yr)), R);\n    }\n    return f(L, R);\n  }\n};\n\n/*\n * @brief \u9818\
-    \u57DF\u6728(Segment Tree)\n * @docs docs/data-structure-2d/ds-2d.md\n */\n#line\
-    \ 7 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp\"\
+    \u57DF\u6728(Segment Tree)\n */\n#line 7 \"verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  auto f = [](ll a, ll b) {\
     \ return a + b; };\n\n  RangeTree<int, ll, decltype(f)> rtree(f, 0);\n\n  int\
     \ N, Q;\n  rd(N, Q);\n  vector<int> X(N), Y(N), W(N), c(Q), s(Q), t(Q), u(Q),\
@@ -320,7 +319,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2021-11-27 22:15:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp

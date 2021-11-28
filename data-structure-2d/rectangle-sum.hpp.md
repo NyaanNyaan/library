@@ -13,7 +13,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
     document_title: "\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\
       \u6728)"
     links: []
@@ -83,7 +82,7 @@ data:
     \ end(ys), y1) - begin(ys);\n    int u = lower_bound(begin(ys), end(ys), y2) -\
     \ begin(ys);\n    return seg.query(u, l, r) - seg.query(d, l, r);\n  }\n};\n\n\
     /*\n * @brief \u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    )\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    )\n */\n"
   code: "#pragma once\n\n\n\n#include \"../segment-tree/persistent-segment-tree.hpp\"\
     \n\ntemplate <typename T, typename U, typename F>\nstruct RectangleSum {\n  PersistentSegmentTree<U,\
     \ F> seg;\n  vector<T> xs, ys;\n  vector<U> ws;\n  vector<int> ord;\n\n  RectangleSum(const\
@@ -106,13 +105,13 @@ data:
     \ end(ys), y1) - begin(ys);\n    int u = lower_bound(begin(ys), end(ys), y2) -\
     \ begin(ys);\n    return seg.query(u, l, r) - seg.query(d, l, r);\n  }\n};\n\n\
     /*\n * @brief \u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
-    )\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    )\n */\n"
   dependsOn:
   - segment-tree/persistent-segment-tree.hpp
   isVerificationFile: false
   path: data-structure-2d/rectangle-sum.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-11-27 22:15:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
@@ -123,21 +122,3 @@ redirect_from:
 - /library/data-structure-2d/rectangle-sum.hpp.html
 title: "\u77E9\u5F62\u548C(\u6C38\u7D9A\u30BB\u30B0\u30E1\u30F3\u30C8\u6728)"
 ---
-## 領域木
-
-TODO: 書く
-TODO: Merge Treeと領域木の呼び方が良くわかっていないので調べる
-
-- 矩形和クエリ
-  - 2D累積和
-  - 永続セグメント木
-  - Merge Tree
-  - Wavelet Matrix
-- 一点更新・矩形和クエリ
-  - 2D Fenwick Tree
-  - 2D Segment Tree
-  - 動的 2D Fenwick Tree
-  - 領域木(Segment Tree)
-  - 抽象化領域木
-  - 領域木(Fenwick Tree)
-  - 動的Wavelet Matrix

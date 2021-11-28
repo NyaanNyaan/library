@@ -10,7 +10,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
     document_title: "\u4E8C\u6B21\u5143Binary Indexed Tree"
     links: []
   bundledCode: "#line 2 \"data-structure-2d/2d-binary-indexed-tree.hpp\"\n\ntemplate\
@@ -36,7 +35,7 @@ data:
     \ x1, int y1, int x2, int y2) {\n    if (x1 > x2 || y1 > y2) return T(0);\n  \
     \  return sum(x2, y2) - sum(x2, y1 - 1) - sum(x1 - 1, y2) +\n           sum(x1\
     \ - 1, y1 - 1);\n  }\n};\n\n/*\n * @brief \u4E8C\u6B21\u5143Binary Indexed Tree\n\
-    \ * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    \ */\n"
   code: "#pragma once\n\ntemplate <typename T>\nstruct BinaryIndexedTree2D {\n  int\
     \ H, W;\n  vector<vector<T>> bit;\n  BinaryIndexedTree2D(int _H, int _W) : H(_H\
     \ + 1), W(_W + 1) {\n    bit.resize(H + 3, vector<T>(W + 3, 0));\n  }\n  // \u95A2\
@@ -59,12 +58,12 @@ data:
     swap\n  T sum(int x1, int y1, int x2, int y2) {\n    if (x1 > x2 || y1 > y2) return\
     \ T(0);\n    return sum(x2, y2) - sum(x2, y1 - 1) - sum(x1 - 1, y2) +\n      \
     \     sum(x1 - 1, y1 - 1);\n  }\n};\n\n/*\n * @brief \u4E8C\u6B21\u5143Binary\
-    \ Indexed Tree\n * @docs docs/data-structure-2d/ds-2d.md\n */\n"
+    \ Indexed Tree\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure-2d/2d-binary-indexed-tree.hpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2021-11-27 22:15:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
@@ -75,21 +74,3 @@ redirect_from:
 - /library/data-structure-2d/2d-binary-indexed-tree.hpp.html
 title: "\u4E8C\u6B21\u5143Binary Indexed Tree"
 ---
-## 領域木
-
-TODO: 書く
-TODO: Merge Treeと領域木の呼び方が良くわかっていないので調べる
-
-- 矩形和クエリ
-  - 2D累積和
-  - 永続セグメント木
-  - Merge Tree
-  - Wavelet Matrix
-- 一点更新・矩形和クエリ
-  - 2D Fenwick Tree
-  - 2D Segment Tree
-  - 動的 2D Fenwick Tree
-  - 領域木(Segment Tree)
-  - 抽象化領域木
-  - 領域木(Fenwick Tree)
-  - 動的Wavelet Matrix

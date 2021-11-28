@@ -10,7 +10,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/data-structure-2d/ds-2d.md
     document_title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
     links: []
   bundledCode: "#line 2 \"data-structure-2d/abstract-range-tree.hpp\"\n\n// DS ...\
@@ -42,8 +41,7 @@ data:
     \ N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = t_merge(L, ds_sum(*ds[a],\
     \ id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = t_merge(ds_sum(*ds[b],\
     \ id(b, yl), id(b, yr)), R);\n    }\n    return t_merge(L, R);\n  }\n};\n\n/*\n\
-    \ * @brief \u62BD\u8C61\u5316\u9818\u57DF\u6728\n * @docs docs/data-structure-2d/ds-2d.md\n\
-    \ */\n"
+    \ * @brief \u62BD\u8C61\u5316\u9818\u57DF\u6728\n */\n"
   code: "#pragma once\n\n// DS ... data_structure_type\n// S ... size_type\n// T ...\
     \ value_type\ntemplate <typename DS, typename S, typename T>\nstruct RangeTree\
     \ {\n  using NEW = function<DS*(int)>;\n  using ADD = function<void(DS&, int,\
@@ -73,13 +71,12 @@ data:
     \ N; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = t_merge(L, ds_sum(*ds[a],\
     \ id(a, yl), id(a, yr))), ++a;\n      if (b & 1) --b, R = t_merge(ds_sum(*ds[b],\
     \ id(b, yl), id(b, yr)), R);\n    }\n    return t_merge(L, R);\n  }\n};\n\n/*\n\
-    \ * @brief \u62BD\u8C61\u5316\u9818\u57DF\u6728\n * @docs docs/data-structure-2d/ds-2d.md\n\
-    \ */\n"
+    \ * @brief \u62BD\u8C61\u5316\u9818\u57DF\u6728\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure-2d/abstract-range-tree.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-11-27 22:15:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
@@ -90,21 +87,3 @@ redirect_from:
 - /library/data-structure-2d/abstract-range-tree.hpp.html
 title: "\u62BD\u8C61\u5316\u9818\u57DF\u6728"
 ---
-## 領域木
-
-TODO: 書く
-TODO: Merge Treeと領域木の呼び方が良くわかっていないので調べる
-
-- 矩形和クエリ
-  - 2D累積和
-  - 永続セグメント木
-  - Merge Tree
-  - Wavelet Matrix
-- 一点更新・矩形和クエリ
-  - 2D Fenwick Tree
-  - 2D Segment Tree
-  - 動的 2D Fenwick Tree
-  - 領域木(Segment Tree)
-  - 抽象化領域木
-  - 領域木(Fenwick Tree)
-  - 動的Wavelet Matrix
