@@ -4,25 +4,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/chromatic-number.hpp
     title: "\u5F69\u8272\u6570"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -216,7 +216,8 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 7 \"verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp\"\
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 7 \"verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp\"\
     \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, M);\n  auto g = graph(N,\
     \ M, false, false);\n  out(ChromaticNumber<vvi>(g));\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/chromatic_number\"\n\n\
@@ -236,7 +237,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp

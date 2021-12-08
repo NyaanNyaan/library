@@ -17,16 +17,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/mo.hpp
     title: Mo's algorithm
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   - icon: ':heavy_check_mark:'
@@ -35,25 +35,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/multipoint-binomial-sum.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ntt/ntt-avx2.hpp
     title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []

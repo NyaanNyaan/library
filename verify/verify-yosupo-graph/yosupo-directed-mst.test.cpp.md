@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure/skew-heap.hpp
     title: Skew Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/union-find.hpp
     title: Union Find(Disjoint Set Union)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':x:'
     path: graph/minimum-cost-arborescence.hpp
     title: graph/minimum-cost-arborescence.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/directedmst
@@ -234,17 +234,18 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"graph/minimum-cost-arborescence.hpp\"\n\ntemplate <typename\
-    \ T>\nEdges<T> MinimumCostArborescence(int N, int root, const Edges<T> &es) {\n\
-    \  using Heap = SkewHeap<T>;\n  using Ptr = typename Heap::Ptr;\n  UnionFind uf(N);\n\
-    \  vector<int> used(N, -1), from(N);\n  vector<T> from_cost(N);\n  vector<Ptr>\
-    \ come(N, nullptr);\n\n  used[root] = root;\n  vector<int> par_e(es.size(), -1),\
-    \ stem(N, -1), idxs;\n\n  for (int i = 0; i < (int)es.size(); i++) {\n    auto\
-    \ &e = es[i];\n    come[e] = Heap::push(come[e], e.cost, i);\n  }\n\n  T costs\
-    \ = 0;\n\n  for (int start = 0; start < N; start++) {\n    if (used[start] !=\
-    \ -1) continue;\n    int cur = start;\n    vector<int> chi_e;\n    int cycle =\
-    \ 0;\n    while (used[cur] == -1 || used[cur] == start) {\n      used[cur] = start;\n\
-    \      if (come[cur] == nullptr) return {};\n      int src = uf.find(es[come[cur]->idx].src);\n\
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 6 \"graph/minimum-cost-arborescence.hpp\"\
+    \n\ntemplate <typename T>\nEdges<T> MinimumCostArborescence(int N, int root, const\
+    \ Edges<T> &es) {\n  using Heap = SkewHeap<T>;\n  using Ptr = typename Heap::Ptr;\n\
+    \  UnionFind uf(N);\n  vector<int> used(N, -1), from(N);\n  vector<T> from_cost(N);\n\
+    \  vector<Ptr> come(N, nullptr);\n\n  used[root] = root;\n  vector<int> par_e(es.size(),\
+    \ -1), stem(N, -1), idxs;\n\n  for (int i = 0; i < (int)es.size(); i++) {\n  \
+    \  auto &e = es[i];\n    come[e] = Heap::push(come[e], e.cost, i);\n  }\n\n  T\
+    \ costs = 0;\n\n  for (int start = 0; start < N; start++) {\n    if (used[start]\
+    \ != -1) continue;\n    int cur = start;\n    vector<int> chi_e;\n    int cycle\
+    \ = 0;\n    while (used[cur] == -1 || used[cur] == start) {\n      used[cur] =\
+    \ start;\n      if (come[cur] == nullptr) return {};\n      int src = uf.find(es[come[cur]->idx].src);\n\
     \      T cost = come[cur]->key + come[cur]->laz;\n      int idx = come[cur]->idx;\n\
     \      come[cur] = Heap::pop(come[cur]);\n      if (src == cur) continue;\n\n\
     \      from[cur] = src;\n      from_cost[cur] = cost;\n      if (stem[cur] ==\
@@ -287,8 +288,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
 layout: document

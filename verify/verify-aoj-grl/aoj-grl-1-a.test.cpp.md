@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: shortest-path/dijkstra.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -200,19 +200,21 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 4 \"shortest-path/dijkstra.hpp\"\n\n// unreachable -> -1\ntemplate\
-    \ <typename T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start = 0) {\n  using\
-    \ P = pair<T, int>;\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  priority_queue<P,\
-    \ vector<P>, greater<P> > Q;\n  d[start] = 0;\n  Q.emplace(0, start);\n  while\
-    \ (!Q.empty()) {\n    P p = Q.top();\n    Q.pop();\n    int cur = p.second;\n\
-    \    if (d[cur] < p.first) continue;\n    for (auto dst : g[cur]) {\n      if\
-    \ (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
-    \ dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n    }\n  }\n  return d;\n\
-    }\n\n/**\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n\
-    \ */\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-a.test.cpp\"\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  ini(N, E, S);\n  auto g = wgraph<int>(N, E,\
-    \ true, false);\n  auto d = dijkstra<int>(g, S);\n  each(x, d) {\n    if (x ==\
-    \ -1)\n      out(\"INF\");\n    else\n      out(x);\n  }\n}\n"
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 4 \"shortest-path/dijkstra.hpp\"\
+    \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T>\
+    \ &g, int start = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n\
+    \  vector<T> d(N, T(-1));\n  priority_queue<P, vector<P>, greater<P> > Q;\n  d[start]\
+    \ = 0;\n  Q.emplace(0, start);\n  while (!Q.empty()) {\n    P p = Q.top();\n \
+    \   Q.pop();\n    int cur = p.second;\n    if (d[cur] < p.first) continue;\n \
+    \   for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost\
+    \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.emplace(d[dst],\
+    \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/**\n * @brief \u30C0\u30A4\u30AF\
+    \u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n */\n#line\
+    \ 6 \"verify/verify-aoj-grl/aoj-grl-1-a.test.cpp\"\n\nusing namespace Nyaan; void\
+    \ Nyaan::solve() {\n  ini(N, E, S);\n  auto g = wgraph<int>(N, E, true, false);\n\
+    \  auto d = dijkstra<int>(g, S);\n  each(x, d) {\n    if (x == -1)\n      out(\"\
+    INF\");\n    else\n      out(x);\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_A\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../shortest-path/dijkstra.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, E, S);\n  auto g =\
@@ -230,7 +232,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp

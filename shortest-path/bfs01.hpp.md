@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -42,14 +42,15 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"shortest-path/bfs01.hpp\"\
-    \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> bfs01(WeightedGraph<T>&\
-    \ g, int start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, -1);\n  deque<int>\
-    \ Q;\n  d[start] = 0;\n  Q.push_back(start);\n  while (!Q.empty()) {\n    int\
-    \ cur = Q.front();\n    Q.pop_front();\n    for (auto& dst : g[cur]) {\n     \
-    \ if (d[dst] != -1) continue;\n      d[dst] = d[cur] + dst.cost;\n      if (dst.cost\
-    \ == 0)\n        Q.push_front(dst);\n      else\n        Q.push_back(dst);\n \
-    \   }\n  }\n  return d;\n}\n"
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 4 \"shortest-path/bfs01.hpp\"\n\n// unreachable -> -1\ntemplate <typename\
+    \ T>\nvector<T> bfs01(WeightedGraph<T>& g, int start = 0) {\n  int N = (int)g.size();\n\
+    \  vector<T> d(N, -1);\n  deque<int> Q;\n  d[start] = 0;\n  Q.push_back(start);\n\
+    \  while (!Q.empty()) {\n    int cur = Q.front();\n    Q.pop_front();\n    for\
+    \ (auto& dst : g[cur]) {\n      if (d[dst] != -1) continue;\n      d[dst] = d[cur]\
+    \ + dst.cost;\n      if (dst.cost == 0)\n        Q.push_front(dst);\n      else\n\
+    \        Q.push_back(dst);\n    }\n  }\n  return d;\n}\n"
   code: "#pragma once\n\n#include \"../graph/graph-template.hpp\"\n\n// unreachable\
     \ -> -1\ntemplate <typename T>\nvector<T> bfs01(WeightedGraph<T>& g, int start\
     \ = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, -1);\n  deque<int> Q;\n \
@@ -63,7 +64,7 @@ data:
   isVerificationFile: false
   path: shortest-path/bfs01.hpp
   requiredBy: []
-  timestamp: '2020-12-21 18:22:27+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp

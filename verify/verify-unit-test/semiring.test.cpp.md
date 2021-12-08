@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: math/semiring.hpp
     title: "\u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: shortest-path/warshall-floyd.hpp
     title: shortest-path/warshall-floyd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -239,14 +239,16 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"shortest-path/warshall-floyd.hpp\"\
-    \n\n// i : d[i][i] < 0 exists -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T&\
-    \ d) {\n  if((int)d.size() == 0) return;\n  int N = d[0].size();\n  for (int i\
-    \ = 0; i < N; i++) d[i][i] = 0;\n  for (int k = 0; k < N; k++)\n    for (int i\
-    \ = 0; i < N; i++)\n      for (int j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k]\
-    \ + d[k][j]);\n}\n#line 7 \"verify/verify-unit-test/semiring.test.cpp\"\nusing\
-    \ namespace Nyaan;\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0,\
-    \ 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 6 \"shortest-path/warshall-floyd.hpp\"\n\n// i : d[i][i] < 0 exists\
+    \ -> negative cycle\ntemplate <typename T>\nvoid warshall_floyd(T& d) {\n  if((int)d.size()\
+    \ == 0) return;\n  int N = d[0].size();\n  for (int i = 0; i < N; i++) d[i][i]\
+    \ = 0;\n  for (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n     \
+    \ for (int j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n\
+    #line 7 \"verify/verify-unit-test/semiring.test.cpp\"\nusing namespace Nyaan;\n\
+    \n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
+    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
     \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
     \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
@@ -299,7 +301,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/semiring.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/semiring.test.cpp

@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure/skew-heap.hpp
     title: Skew Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/union-find.hpp
     title: Union Find(Disjoint Set Union)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
     title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/minimum-cost-arborescence.hpp\"\n\n#line 2 \"data-structure/skew-heap.hpp\"\
@@ -76,17 +76,18 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"graph/minimum-cost-arborescence.hpp\"\n\ntemplate <typename\
-    \ T>\nEdges<T> MinimumCostArborescence(int N, int root, const Edges<T> &es) {\n\
-    \  using Heap = SkewHeap<T>;\n  using Ptr = typename Heap::Ptr;\n  UnionFind uf(N);\n\
-    \  vector<int> used(N, -1), from(N);\n  vector<T> from_cost(N);\n  vector<Ptr>\
-    \ come(N, nullptr);\n\n  used[root] = root;\n  vector<int> par_e(es.size(), -1),\
-    \ stem(N, -1), idxs;\n\n  for (int i = 0; i < (int)es.size(); i++) {\n    auto\
-    \ &e = es[i];\n    come[e] = Heap::push(come[e], e.cost, i);\n  }\n\n  T costs\
-    \ = 0;\n\n  for (int start = 0; start < N; start++) {\n    if (used[start] !=\
-    \ -1) continue;\n    int cur = start;\n    vector<int> chi_e;\n    int cycle =\
-    \ 0;\n    while (used[cur] == -1 || used[cur] == start) {\n      used[cur] = start;\n\
-    \      if (come[cur] == nullptr) return {};\n      int src = uf.find(es[come[cur]->idx].src);\n\
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 6 \"graph/minimum-cost-arborescence.hpp\"\
+    \n\ntemplate <typename T>\nEdges<T> MinimumCostArborescence(int N, int root, const\
+    \ Edges<T> &es) {\n  using Heap = SkewHeap<T>;\n  using Ptr = typename Heap::Ptr;\n\
+    \  UnionFind uf(N);\n  vector<int> used(N, -1), from(N);\n  vector<T> from_cost(N);\n\
+    \  vector<Ptr> come(N, nullptr);\n\n  used[root] = root;\n  vector<int> par_e(es.size(),\
+    \ -1), stem(N, -1), idxs;\n\n  for (int i = 0; i < (int)es.size(); i++) {\n  \
+    \  auto &e = es[i];\n    come[e] = Heap::push(come[e], e.cost, i);\n  }\n\n  T\
+    \ costs = 0;\n\n  for (int start = 0; start < N; start++) {\n    if (used[start]\
+    \ != -1) continue;\n    int cur = start;\n    vector<int> chi_e;\n    int cycle\
+    \ = 0;\n    while (used[cur] == -1 || used[cur] == start) {\n      used[cur] =\
+    \ start;\n      if (come[cur] == nullptr) return {};\n      int src = uf.find(es[come[cur]->idx].src);\n\
     \      T cost = come[cur]->key + come[cur]->laz;\n      int idx = come[cur]->idx;\n\
     \      come[cur] = Heap::pop(come[cur]);\n      if (src == cur) continue;\n\n\
     \      from[cur] = src;\n      from_cost[cur] = cost;\n      if (stem[cur] ==\
@@ -138,8 +139,8 @@ data:
   isVerificationFile: false
   path: graph/minimum-cost-arborescence.hpp
   requiredBy: []
-  timestamp: '2021-02-04 22:39:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
 documentation_of: graph/minimum-cost-arborescence.hpp

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/radix-heap.hpp
     title: Radix Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/static-graph.hpp
     title: Static Graph
   _extendedRequiredBy: []
@@ -18,12 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1320.test.cpp
     title: verify/verify-yuki/yuki-1320.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/shortest-path/dijkstra-fast.md
     document_title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\
@@ -121,11 +121,11 @@ data:
   path: shortest-path/dijkstra-fast.hpp
   requiredBy: []
   timestamp: '2020-12-17 01:20:11+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-yuki/yuki-1320.test.cpp
-  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
 documentation_of: shortest-path/dijkstra-fast.hpp
 layout: document

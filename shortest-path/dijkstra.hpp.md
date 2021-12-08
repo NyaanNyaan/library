@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/shortest-path/dijkstra.md
     document_title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
@@ -50,16 +50,18 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"shortest-path/dijkstra.hpp\"\
-    \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T>\
-    \ &g, int start = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n\
-    \  vector<T> d(N, T(-1));\n  priority_queue<P, vector<P>, greater<P> > Q;\n  d[start]\
-    \ = 0;\n  Q.emplace(0, start);\n  while (!Q.empty()) {\n    P p = Q.top();\n \
-    \   Q.pop();\n    int cur = p.second;\n    if (d[cur] < p.first) continue;\n \
-    \   for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost\
-    \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.emplace(d[dst],\
-    \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/**\n * @brief \u30C0\u30A4\u30AF\
-    \u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n */\n"
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 4 \"shortest-path/dijkstra.hpp\"\n\n// unreachable -> -1\ntemplate\
+    \ <typename T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start = 0) {\n  using\
+    \ P = pair<T, int>;\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  priority_queue<P,\
+    \ vector<P>, greater<P> > Q;\n  d[start] = 0;\n  Q.emplace(0, start);\n  while\
+    \ (!Q.empty()) {\n    P p = Q.top();\n    Q.pop();\n    int cur = p.second;\n\
+    \    if (d[cur] < p.first) continue;\n    for (auto dst : g[cur]) {\n      if\
+    \ (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
+    \ dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n    }\n  }\n  return d;\n\
+    }\n\n/**\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n\
+    \ */\n"
   code: "#pragma once\n\n#include \"../graph/graph-template.hpp\"\n\n// unreachable\
     \ -> -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start\
     \ = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n  vector<T> d(N,\
@@ -75,11 +77,11 @@ data:
   isVerificationFile: false
   path: shortest-path/dijkstra.hpp
   requiredBy: []
-  timestamp: '2021-04-26 22:25:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
 documentation_of: shortest-path/dijkstra.hpp
 layout: document

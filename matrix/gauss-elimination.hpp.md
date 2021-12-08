@@ -70,18 +70,18 @@ data:
   isVerificationFile: false
   path: matrix/gauss-elimination.hpp
   requiredBy:
-  - fps/find-p-recursive.hpp
   - matrix/inverse-matrix.hpp
   - matrix/linear-equation.hpp
+  - fps/find-p-recursive.hpp
   timestamp: '2021-06-17 21:43:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
-  - verify/verify-yuki/yuki-1533.test.cpp
-  - verify/verify-unit-test/inverse-matrix.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/inverse-matrix.test.cpp
+  - verify/verify-yuki/yuki-1533.test.cpp
 documentation_of: matrix/gauss-elimination.hpp
 layout: document
 redirect_from:

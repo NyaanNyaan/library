@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/union-find.hpp
     title: Union Find(Disjoint Set Union)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: graph/kruskal.hpp
     title: graph/kruskal.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -203,17 +203,18 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 2 \"data-structure/union-find.hpp\"\n\nstruct UnionFind {\n  vector<int>\
-    \ data;\n  UnionFind(int N) : data(N, -1) {}\n\n  int find(int k) { return data[k]\
-    \ < 0 ? k : data[k] = find(data[k]); }\n\n  int unite(int x, int y) {\n    if\
-    \ ((x = find(x)) == (y = find(y))) return false;\n    if (data[x] > data[y]) swap(x,\
-    \ y);\n    data[x] += data[y];\n    data[y] = x;\n    return true;\n  }\n\n  //\
-    \ f ... merge function\n  template<typename F>\n  int unite(int x, int y,const\
-    \ F &f) {\n    if ((x = find(x)) == (y = find(y))) return false;\n    if (data[x]\
-    \ > data[y]) swap(x, y);\n    data[x] += data[y];\n    data[y] = x;\n    f(x,\
-    \ y);\n    return true;\n  }\n\n  int size(int k) { return -data[find(k)]; }\n\
-    \n  int same(int x, int y) { return find(x) == find(y); }\n};\n\n/**\n * @brief\
-    \ Union Find(Disjoint Set Union)\n * @docs docs/data-structure/union-find.md\n\
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 2 \"data-structure/union-find.hpp\"\
+    \n\nstruct UnionFind {\n  vector<int> data;\n  UnionFind(int N) : data(N, -1)\
+    \ {}\n\n  int find(int k) { return data[k] < 0 ? k : data[k] = find(data[k]);\
+    \ }\n\n  int unite(int x, int y) {\n    if ((x = find(x)) == (y = find(y))) return\
+    \ false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x] += data[y];\n  \
+    \  data[y] = x;\n    return true;\n  }\n\n  // f ... merge function\n  template<typename\
+    \ F>\n  int unite(int x, int y,const F &f) {\n    if ((x = find(x)) == (y = find(y)))\
+    \ return false;\n    if (data[x] > data[y]) swap(x, y);\n    data[x] += data[y];\n\
+    \    data[y] = x;\n    f(x, y);\n    return true;\n  }\n\n  int size(int k) {\
+    \ return -data[find(k)]; }\n\n  int same(int x, int y) { return find(x) == find(y);\
+    \ }\n};\n\n/**\n * @brief Union Find(Disjoint Set Union)\n * @docs docs/data-structure/union-find.md\n\
     \ */\n#line 5 \"graph/kruskal.hpp\"\n\ntemplate <typename T>\nT kruskal(int N,\
     \ Edges<T> &es) {\n  sort(begin(es), end(es),\n       [&](edge<T> a, edge<T> b)\
     \ { return a.cost < b.cost; });\n  UnionFind uf(N);\n  T ret = 0;\n  for (edge<T>\
@@ -238,7 +239,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-2-a.test.cpp

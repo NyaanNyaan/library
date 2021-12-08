@@ -1,44 +1,44 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/radix-heap.hpp
     title: Radix Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: graph/static-graph.hpp
     title: Static Graph
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: shortest-path/dijkstra-fast.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\
       \u5316)"
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: shortest-path/dijkstra.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -294,15 +294,17 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 7 \"shortest-path/dijkstra-radix-heap.hpp\"\
-    \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra_radix_heap(WeightedGraph<T>\
-    \ &g, int start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n \
-    \ RadixHeap<T, int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty())\
-    \ {\n    auto p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first))\
-    \ continue;\n    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur]\
-    \ + dst.cost < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst],\
-    \ dst);\n      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\
-    \u30B9\u30C8\u30E9\u6CD5(Radix Heap)\n * @docs docs/shortest-path/dijkstra-radix-heap.md\n\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 7 \"shortest-path/dijkstra-radix-heap.hpp\"\n\n// unreachable -> -1\n\
+    template <typename T>\nvector<T> dijkstra_radix_heap(WeightedGraph<T> &g, int\
+    \ start = 0) {\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  RadixHeap<T,\
+    \ int> Q;\n  d[start] = 0;\n  Q.push(0, start);\n  while (!Q.empty()) {\n    auto\
+    \ p = Q.pop();\n    int cur = p.second;\n    if (d[cur] < T(p.first)) continue;\n\
+    \    for (auto dst : g[cur]) {\n      if (d[dst] == T(-1) || d[cur] + dst.cost\
+    \ < d[dst]) {\n        d[dst] = d[cur] + dst.cost;\n        Q.push(d[dst], dst);\n\
+    \      }\n    }\n  }\n  return d;\n}\n\n/*\n * @brief \u30C0\u30A4\u30AF\u30B9\
+    \u30C8\u30E9\u6CD5(Radix Heap)\n * @docs docs/shortest-path/dijkstra-radix-heap.md\n\
     **/\n#line 2 \"shortest-path/dijkstra.hpp\"\n\n#line 4 \"shortest-path/dijkstra.hpp\"\
     \n\n// unreachable -> -1\ntemplate <typename T>\nvector<T> dijkstra(WeightedGraph<T>\
     \ &g, int start = 0) {\n  using P = pair<T, int>;\n  int N = (int)g.size();\n\
@@ -371,7 +373,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/dijkstra.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/dijkstra.test.cpp

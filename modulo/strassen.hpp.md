@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
   _extendedRequiredBy:
@@ -682,8 +682,8 @@ data:
   timestamp: '2021-05-08 13:51:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
 documentation_of: modulo/strassen.hpp
 layout: document

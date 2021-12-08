@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/funtional-graph.hpp
     title: "Functional Graph(\u306A\u3082\u308A\u30B0\u30E9\u30D5)\u306E\u5206\u89E3"
   _extendedVerifiedWith:
@@ -33,18 +33,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1254.test.cpp
     title: verify/verify-yuki/yuki-1254.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1326.test.cpp
     title: verify/verify-yuki/yuki-1326.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/tree/heavy-light-decomposition.md
     document_title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
@@ -77,26 +77,28 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"tree/heavy-light-decomposition.hpp\"\
-    \n\ntemplate <typename G>\nstruct HeavyLightDecomposition {\n private:\n  void\
-    \ dfs_sz(int cur) {\n    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n    \
-    \  if (dst == par[cur]) {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n\
-    \          swap(g[cur][0], g[cur][1]);\n        else\n          continue;\n  \
-    \    }\n      depth[dst] = depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n\
-    \      size[cur] += size[dst];\n      if (size[dst] > size[g[cur][0]]) {\n   \
-    \     swap(dst, g[cur][0]);\n      }\n    }\n  }\n\n  void dfs_hld(int cur) {\n\
-    \    down[cur] = id++;\n    for (auto dst : g[cur]) {\n      if (dst == par[cur])\
-    \ continue;\n      nxt[dst] = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));\n\
-    \      dfs_hld(dst);\n    }\n    up[cur] = id;\n  }\n\n  // [u, v)\n  vector<pair<int,\
-    \ int>> ascend(int u, int v) const {\n    vector<pair<int, int>> res;\n    while\
-    \ (nxt[u] != nxt[v]) {\n      res.emplace_back(down[u], down[nxt[u]]);\n     \
-    \ u = par[nxt[u]];\n    }\n    if (u != v) res.emplace_back(down[u], down[v] +\
-    \ 1);\n    return res;\n  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int\
-    \ u, int v) const {\n    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return\
-    \ {{down[u] + 1, down[v]}};\n    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]],\
-    \ down[v]);\n    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int>\
-    \ size, depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root\
-    \ = 0)\n      : g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 4 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename G>\n\
+    struct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n    size[cur]\
+    \ = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur]) {\n       \
+    \ if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n          swap(g[cur][0],\
+    \ g[cur][1]);\n        else\n          continue;\n      }\n      depth[dst] =\
+    \ depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n      size[cur]\
+    \ += size[dst];\n      if (size[dst] > size[g[cur][0]]) {\n        swap(dst, g[cur][0]);\n\
+    \      }\n    }\n  }\n\n  void dfs_hld(int cur) {\n    down[cur] = id++;\n   \
+    \ for (auto dst : g[cur]) {\n      if (dst == par[cur]) continue;\n      nxt[dst]\
+    \ = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));\n      dfs_hld(dst);\n\
+    \    }\n    up[cur] = id;\n  }\n\n  // [u, v)\n  vector<pair<int, int>> ascend(int\
+    \ u, int v) const {\n    vector<pair<int, int>> res;\n    while (nxt[u] != nxt[v])\
+    \ {\n      res.emplace_back(down[u], down[nxt[u]]);\n      u = par[nxt[u]];\n\
+    \    }\n    if (u != v) res.emplace_back(down[u], down[v] + 1);\n    return res;\n\
+    \  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int u, int v) const {\n\
+    \    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return {{down[u] + 1, down[v]}};\n\
+    \    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]], down[v]);\n\
+    \    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int> size, depth,\
+    \ down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root = 0)\n      :\
+    \ g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
     \ 0),\n        down(g.size(), -1),\n        up(g.size(), -1),\n        nxt(g.size(),\
     \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
     \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
@@ -161,19 +163,19 @@ data:
   path: tree/heavy-light-decomposition.hpp
   requiredBy:
   - graph/funtional-graph.hpp
-  timestamp: '2021-05-17 12:37:17+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
-  - verify/verify-aoj-other/aoj-2891.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-  - verify/verify-yuki/yuki-1326.test.cpp
-  - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+  - verify/verify-aoj-other/aoj-2891.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
+  - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
 documentation_of: tree/heavy-light-decomposition.hpp
 layout: document

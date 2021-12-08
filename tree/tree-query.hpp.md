@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
     title: verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/tree/tree-query.md
     document_title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\
@@ -48,9 +48,10 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 3 \"tree/tree-query.hpp\"\n\ntemplate <typename G>\nstruct Tree\
-    \ {\n private:\n  G& g;\n  int root;\n  vector<vector<int>> bl;\n  vector<int>\
-    \ dp;\n  void build() {\n    bl.resize(g.size());\n    dp.resize(g.size());\n\
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 3 \"tree/tree-query.hpp\"\n\
+    \ntemplate <typename G>\nstruct Tree {\n private:\n  G& g;\n  int root;\n  vector<vector<int>>\
+    \ bl;\n  vector<int> dp;\n  void build() {\n    bl.resize(g.size());\n    dp.resize(g.size());\n\
     \    dfs(root, -1, 0);\n  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c]\
     \ = _dp;\n    for (int i = p, x = -1; i != -1;) {\n      bl[c].push_back(i);\n\
     \      i = ++x < (int)bl[i].size() ? bl[i][x] : -1;\n    }\n    for (auto& d :\
@@ -107,8 +108,8 @@ data:
   isVerificationFile: false
   path: tree/tree-query.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp

@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/dynamic-union-find.hpp
     title: "\u52D5\u7684Union Find"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: graph/static-graph.hpp
     title: Static Graph
   - icon: ':heavy_check_mark:'
@@ -17,25 +17,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -409,18 +409,19 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"tree/dsu-on-tree.hpp\"\
-    \n\ntemplate <typename G>\nstruct DSUonTree {\n private:\n  G &g;\n  int N;\n\
-    \  vector<int> sub_sz, euler, down, up;\n  int idx_;\n  int root;\n\n  int dfs1(int\
-    \ cur, int par = -1) {\n    sub_sz[cur] = 1;\n    if ((int)g[cur].size() >= 2\
-    \ and g[cur][0] == par) {\n      swap(g[cur][0], g[cur][1]);\n    }\n    for (auto\
-    \ &dst : g[cur]) {\n      if (dst == par) continue;\n      sub_sz[cur] += dfs1(dst,\
-    \ cur);\n      if (sub_sz[dst] > sub_sz[g[cur][0]]) swap(dst, g[cur][0]);\n  \
-    \  }\n    return sub_sz[cur];\n  }\n\n  void dfs2(int cur, int par = -1) {\n \
-    \   euler[idx_] = cur;\n    down[cur] = idx_++;\n    for (auto &dst : g[cur])\
-    \ {\n      if (dst == par) continue;\n      dfs2(dst, cur);\n    }\n    up[cur]\
-    \ = idx_;\n  }\n\n public:\n  DSUonTree(G &_g,int _root = 0)\n      : g(_g),\n\
-    \        N(_g.size()),\n        sub_sz(_g.size()),\n        euler(_g.size()),\n\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 6 \"tree/dsu-on-tree.hpp\"\n\ntemplate <typename G>\nstruct DSUonTree\
+    \ {\n private:\n  G &g;\n  int N;\n  vector<int> sub_sz, euler, down, up;\n  int\
+    \ idx_;\n  int root;\n\n  int dfs1(int cur, int par = -1) {\n    sub_sz[cur] =\
+    \ 1;\n    if ((int)g[cur].size() >= 2 and g[cur][0] == par) {\n      swap(g[cur][0],\
+    \ g[cur][1]);\n    }\n    for (auto &dst : g[cur]) {\n      if (dst == par) continue;\n\
+    \      sub_sz[cur] += dfs1(dst, cur);\n      if (sub_sz[dst] > sub_sz[g[cur][0]])\
+    \ swap(dst, g[cur][0]);\n    }\n    return sub_sz[cur];\n  }\n\n  void dfs2(int\
+    \ cur, int par = -1) {\n    euler[idx_] = cur;\n    down[cur] = idx_++;\n    for\
+    \ (auto &dst : g[cur]) {\n      if (dst == par) continue;\n      dfs2(dst, cur);\n\
+    \    }\n    up[cur] = idx_;\n  }\n\n public:\n  DSUonTree(G &_g,int _root = 0)\n\
+    \      : g(_g),\n        N(_g.size()),\n        sub_sz(_g.size()),\n        euler(_g.size()),\n\
     \        down(_g.size()),\n        up(_g.size()),\n        idx_(0),\n        root(_root)\
     \ {\n    dfs1(root);\n    dfs2(root);\n  }\n\n  int idx(int u) const { return\
     \ down[u]; }\n\n  template <typename UPDATE, typename QUERY, typename CLEAR, typename\
@@ -483,7 +484,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp

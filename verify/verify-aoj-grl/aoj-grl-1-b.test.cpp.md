@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: shortest-path/bellman-ford.hpp
     title: shortest-path/bellman-ford.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -200,27 +200,28 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 6 \"shortest-path/bellman-ford.hpp\"\n\n// bellman-ford\u6CD5\n\
-    // goal\u304C\u5B58\u5728\u3057\u306A\u3044\u3068\u304D-> \u8CA0\u9589\u8DEF\u304C\
-    \u5B58\u5728\u3059\u308B\u3068\u304D\u306F\u7A7A\u5217\u3092\u8FD4\u3059\n// goal\u304C\
-    \u5B58\u5728\u3059\u308B\u3068\u304D  -> start\u3068goal\u306E\u9593\u306B\u8CA0\
-    \u9589\u8DEF\u304C\u5B58\u5728\u3059\u308B\u6642\u306B\u8CA0\u9589\u8DEF\u3092\
-    \u8FD4\u3059\ntemplate <typename T>\nvector<T> bellman_ford(int N, Edges<T> &es,\
-    \ int start = 0, int goal = -1) {\n  T INF = numeric_limits<T>::max() / 2;\n \
-    \ vector<T> d(N, INF);\n  d[start] = 0;\n  for (int i = 0; i < N; i++) {\n   \
-    \ bool update = false;\n    for (auto &e : es) {\n      if (d[e.src] == INF) continue;\n\
-    \      if (d[e.to] > d[e.src] + e.cost) {\n        update = true, d[e.to] = d[e.src]\
-    \ + e.cost;\n      }\n    }\n    if (!update) return d;\n  }\n\n  if (goal ==\
-    \ -1) return vector<T>();\n  vector<bool> negative(N, false);\n  for (int i =\
-    \ 0; i < N; i++) {\n    for (auto &e : es) {\n      if (d[e.src] == INF) continue;\n\
-    \      if (d[e.to] > d[e.src] + e.cost)\n        negative[e.to] = true, d[e.to]\
-    \ = d[e.src] + e.cost;\n      if (negative[e.src] == true) negative[e.to] = true;\n\
-    \    }\n  }\n\n  if (negative[goal] == true)\n    return vector<T>();\n  else\n\
-    \    return d;\n}\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-b.test.cpp\"\n\n\
-    using namespace Nyaan; void Nyaan::solve() {\n  ini(N, E, S);\n  auto es = esgraph<int>(N,\
-    \ E, true, false);\n  auto d = bellman_ford<int>(N, es, S);\n  if (!sz(d)) die(\"\
-    NEGATIVE CYCLE\");\n  each(x, d) {\n    if (x > TEN(9))\n      out(\"INF\");\n\
-    \    else\n      out(x);\n  }\n}\n"
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 6 \"shortest-path/bellman-ford.hpp\"\
+    \n\n// bellman-ford\u6CD5\n// goal\u304C\u5B58\u5728\u3057\u306A\u3044\u3068\u304D\
+    -> \u8CA0\u9589\u8DEF\u304C\u5B58\u5728\u3059\u308B\u3068\u304D\u306F\u7A7A\u5217\
+    \u3092\u8FD4\u3059\n// goal\u304C\u5B58\u5728\u3059\u308B\u3068\u304D  -> start\u3068\
+    goal\u306E\u9593\u306B\u8CA0\u9589\u8DEF\u304C\u5B58\u5728\u3059\u308B\u6642\u306B\
+    \u8CA0\u9589\u8DEF\u3092\u8FD4\u3059\ntemplate <typename T>\nvector<T> bellman_ford(int\
+    \ N, Edges<T> &es, int start = 0, int goal = -1) {\n  T INF = numeric_limits<T>::max()\
+    \ / 2;\n  vector<T> d(N, INF);\n  d[start] = 0;\n  for (int i = 0; i < N; i++)\
+    \ {\n    bool update = false;\n    for (auto &e : es) {\n      if (d[e.src] ==\
+    \ INF) continue;\n      if (d[e.to] > d[e.src] + e.cost) {\n        update = true,\
+    \ d[e.to] = d[e.src] + e.cost;\n      }\n    }\n    if (!update) return d;\n \
+    \ }\n\n  if (goal == -1) return vector<T>();\n  vector<bool> negative(N, false);\n\
+    \  for (int i = 0; i < N; i++) {\n    for (auto &e : es) {\n      if (d[e.src]\
+    \ == INF) continue;\n      if (d[e.to] > d[e.src] + e.cost)\n        negative[e.to]\
+    \ = true, d[e.to] = d[e.src] + e.cost;\n      if (negative[e.src] == true) negative[e.to]\
+    \ = true;\n    }\n  }\n\n  if (negative[goal] == true)\n    return vector<T>();\n\
+    \  else\n    return d;\n}\n#line 6 \"verify/verify-aoj-grl/aoj-grl-1-b.test.cpp\"\
+    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, E, S);\n  auto es =\
+    \ esgraph<int>(N, E, true, false);\n  auto d = bellman_ford<int>(N, es, S);\n\
+    \  if (!sz(d)) die(\"NEGATIVE CYCLE\");\n  each(x, d) {\n    if (x > TEN(9))\n\
+    \      out(\"INF\");\n    else\n      out(x);\n  }\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_1_B\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../shortest-path/bellman-ford.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, E, S);\n  auto es =\
@@ -239,7 +240,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-1-b.test.cpp

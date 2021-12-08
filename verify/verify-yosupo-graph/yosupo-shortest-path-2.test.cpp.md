@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/radix-heap.hpp
     title: Radix Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: shortest-path/dijkstra-with-restore.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
@@ -222,8 +222,9 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 7 \"shortest-path/dijkstra-with-restore.hpp\"\n\n// unreachable\
-    \ -> {-1, -1}\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(WeightedGraph<T>\
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 7 \"shortest-path/dijkstra-with-restore.hpp\"\
+    \n\n// unreachable -> {-1, -1}\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(WeightedGraph<T>\
     \ &g, int start = 0) {\n  int N = (int)g.size();\n  using P = pair<T, int>;\n\
     \  vector<P> d(N, P{-1, -1});\n  RadixHeap<T, int> Q;\n  d[start].first = 0;\n\
     \  Q.push(0, start);\n  while (!Q.empty()) {\n    auto p = Q.pop();\n    int cur\
@@ -305,8 +306,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
 layout: document

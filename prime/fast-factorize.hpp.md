@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
   _extendedRequiredBy:
@@ -33,12 +33,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/prime/fast-factorize.md
     document_title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's\
@@ -224,14 +224,14 @@ data:
   requiredBy:
   - modulo/mod-kth-root.hpp
   timestamp: '2021-05-04 17:56:16+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: prime/fast-factorize.hpp
 layout: document
 redirect_from:

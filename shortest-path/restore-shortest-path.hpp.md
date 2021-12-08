@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: graph/graph-utility.hpp
-    title: graph/graph-utility.hpp
+    title: "\u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"shortest-path/restore-shortest-path.hpp\"\n\n#line 2 \"\
@@ -46,34 +46,37 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"graph/graph-utility.hpp\"\
-    \n\n// \u4E00\u822C\u306E\u30B0\u30E9\u30D5\u306Est\u304B\u3089\u306E\u8DDD\u96E2\
-    \uFF01\uFF01\uFF01\uFF01\n// unvisited nodes : d = -1\nvector<int> Depth(const\
-    \ UnweightedGraph &g, int start = 0) {\n  int n = g.size();\n  vector<int> ds(n,\
-    \ -1);\n  ds[start] = 0;\n  queue<int> q;\n  q.push(start);\n  while (!q.empty())\
-    \ {\n    int c = q.front();\n    q.pop();\n    int dc = ds[c];\n    for (auto\
-    \ &d : g[c]) {\n      if (ds[d] == -1) {\n        ds[d] = dc + 1;\n        q.push(d);\n\
-    \      }\n    }\n  }\n  return ds;\n}\n\n// Depth of Rooted Weighted Tree\n//\
-    \ unvisited nodes : d = -1\ntemplate <typename T>\nvector<T> Depth(const WeightedGraph<T>\
-    \ &g, int start = 0) {\n  vector<T> d(g.size(), -1);\n  auto dfs = [&](auto rec,\
-    \ int cur, T val, int par = -1) -> void {\n    d[cur] = val;\n    for (auto &dst\
-    \ : g[cur]) {\n      if (dst == par) continue;\n      rec(rec, dst, val + dst.cost,\
-    \ cur);\n    }\n  };\n  dfs(dfs, start, 0);\n  return d;\n}\n\n// Diameter of\
-    \ Tree\n// return value : { {u, v}, length }\npair<pair<int, int>, int> Diameter(const\
-    \ UnweightedGraph &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d),\
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 4 \"graph/graph-utility.hpp\"\n\n// \u4E00\u822C\u306E\u30B0\u30E9\
+    \u30D5\u306Est\u304B\u3089\u306E\u8DDD\u96E2\uFF01\uFF01\uFF01\uFF01\n// unvisited\
+    \ nodes : d = -1\nvector<int> Depth(const UnweightedGraph &g, int start = 0) {\n\
+    \  int n = g.size();\n  vector<int> ds(n, -1);\n  ds[start] = 0;\n  queue<int>\
+    \ q;\n  q.push(start);\n  while (!q.empty()) {\n    int c = q.front();\n    q.pop();\n\
+    \    int dc = ds[c];\n    for (auto &d : g[c]) {\n      if (ds[d] == -1) {\n \
+    \       ds[d] = dc + 1;\n        q.push(d);\n      }\n    }\n  }\n  return ds;\n\
+    }\n\n// Depth of Rooted Weighted Tree\n// unvisited nodes : d = -1\ntemplate <typename\
+    \ T>\nvector<T> Depth(const WeightedGraph<T> &g, int start = 0) {\n  vector<T>\
+    \ d(g.size(), -1);\n  auto dfs = [&](auto rec, int cur, T val, int par = -1) ->\
+    \ void {\n    d[cur] = val;\n    for (auto &dst : g[cur]) {\n      if (dst ==\
+    \ par) continue;\n      rec(rec, dst, val + dst.cost, cur);\n    }\n  };\n  dfs(dfs,\
+    \ start, 0);\n  return d;\n}\n\n// Diameter of Tree\n// return value : { {u, v},\
+    \ length }\npair<pair<int, int>, int> Diameter(const UnweightedGraph &g) {\n \
+    \ auto d = Depth(g, 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n\
+    \  d = Depth(g, u);\n  int v = max_element(begin(d), end(d)) - begin(d);\n  return\
+    \ make_pair(make_pair(u, v), d[v]);\n}\n\n// Diameter of Weighted Tree\n// return\
+    \ value : { {u, v}, length }\ntemplate <typename T>\npair<pair<int, int>, T> Diameter(const\
+    \ WeightedGraph<T> &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d),\
     \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
-    \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// Diameter of\
-    \ Weighted Tree\n// return value : { {u, v}, length }\ntemplate <typename T>\n\
-    pair<pair<int, int>, T> Diameter(const WeightedGraph<T> &g) {\n  auto d = Depth(g,\
-    \ 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n  d = Depth(g, u);\n\
-    \  int v = max_element(begin(d), end(d)) - begin(d);\n  return make_pair(make_pair(u,\
-    \ v), d[v]);\n}\n\n// nodes on the path u-v ( O(N) )\ntemplate <typename G>\n\
-    vector<int> Path(G &g, int u, int v) {\n  vector<int> ret;\n  int end = 0;\n \
-    \ auto dfs = [&](auto rec, int cur, int par = -1) -> void {\n    ret.push_back(cur);\n\
-    \    if (cur == v) {\n      end = 1;\n      return;\n    }\n    for (int dst :\
-    \ g[cur]) {\n      if (dst == par) continue;\n      rec(rec, dst, cur);\n    \
-    \  if (end) return;\n    }\n    if (end) return;\n    ret.pop_back();\n  };\n\
-    \  dfs(dfs, u);\n  return ret;\n}\n#line 4 \"shortest-path/restore-shortest-path.hpp\"\
+    \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
+    \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\
+    \n * @docs docs/graph/graph-utility.md\n */\n#line 4 \"shortest-path/restore-shortest-path.hpp\"\
     \n\n// restore shortest path from S to G\ntemplate <typename T>\nvector<int> restore_shortest_path(WeightedGraph<T>\
     \ &g, vector<T> &d, int S,\n                                  int G) {\n  int\
     \ N = g.size();\n  WeightedGraph<T> rev(g.size());\n  for (int i = 0; i < N; i++)\n\
@@ -101,8 +104,8 @@ data:
   isVerificationFile: false
   path: shortest-path/restore-shortest-path.hpp
   requiredBy: []
-  timestamp: '2021-05-22 11:12:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
 documentation_of: shortest-path/restore-shortest-path.hpp

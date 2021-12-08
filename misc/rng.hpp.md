@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   - icon: ':heavy_check_mark:'
@@ -126,7 +126,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   - icon: ':heavy_check_mark:'
@@ -135,9 +135,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\n\
@@ -179,52 +179,52 @@ data:
   path: misc/rng.hpp
   requiredBy:
   - prime/fast-factorize.hpp
-  - tree/pruefer-code.hpp
-  - matrix/black-box-linear-algebra.hpp
-  - rbst/treap.hpp
   - modulo/mod-kth-root.hpp
+  - matrix/black-box-linear-algebra.hpp
+  - tree/pruefer-code.hpp
+  - rbst/treap.hpp
   timestamp: '2020-12-08 00:23:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-aoj-other/aoj-1068.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-unit-test/orderedmap.test.cpp
+  - verify/verify-unit-test/set-function.test.cpp
+  - verify/verify-unit-test/semiring.test.cpp
+  - verify/verify-unit-test/lazyseg-setval.test.cpp
+  - verify/verify-unit-test/interval-union.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/tree-path.test.cpp
+  - verify/verify-unit-test/template.test.cpp
+  - verify/verify-unit-test/simulated-annealing.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/enumerate-quotient.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/segment-tree-beats.test.cpp
+  - verify/verify-unit-test/run-length-encoding.test.cpp
+  - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/segment-set.test.cpp
-  - verify/verify-unit-test/enumerate-quotient.test.cpp
-  - verify/verify-unit-test/set-function.test.cpp
-  - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-unit-test/multieval.test.cpp
-  - verify/verify-unit-test/multiplicative-function.test.cpp
-  - verify/verify-unit-test/semiring.test.cpp
-  - verify/verify-unit-test/run-length-encoding.test.cpp
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-unit-test/strassen.test.cpp
-  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
-  - verify/verify-unit-test/template.test.cpp
-  - verify/verify-unit-test/tree-path.test.cpp
-  - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-unit-test/interval-union.test.cpp
-  - verify/verify-unit-test/segment-tree-beats.test.cpp
-  - verify/verify-unit-test/math.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
-  - verify/verify-unit-test/dijkstra.test.cpp
-  - verify/verify-unit-test/lazyseg-setval.test.cpp
   - verify/verify-unit-test/fps.test.cpp
-  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
-  - verify/verify-unit-test/simulated-annealing.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/complex-fft.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/orderedmap.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/math.test.cpp
+  - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
 documentation_of: misc/rng.hpp
 layout: document
 redirect_from:

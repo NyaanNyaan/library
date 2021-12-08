@@ -129,8 +129,8 @@ data:
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
 documentation_of: fps/mod-pow.hpp
 layout: document
 redirect_from:

@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/strongly-connected-components.hpp\"\n\n#line 2 \"\
@@ -45,24 +45,26 @@ data:
     \ {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++)\
     \ {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n     \
     \ cin >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y]\
-    \ = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"graph/strongly-connected-components.hpp\"\
-    \n\n// Strongly Connected Components\n// DAG of SC graph   ... scc.dag (including\
-    \ multiedges)\n// new node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\n\
-    template <typename G>\nstruct StronglyConnectedComponents {\n private:\n  const\
-    \ G &g;\n  vector<vector<int>> rg;\n  vector<int> comp, order;\n  vector<char>\
-    \ used;\n  vector<vector<int>> blng;\n\n public:\n  vector<vector<int>> dag;\n\
-    \  StronglyConnectedComponents(G &_g) : g(_g), used(g.size(), 0) { build(); }\n\
-    \n  int operator[](int k) { return comp[k]; }\n\n  vector<int> &belong(int i)\
-    \ { return blng[i]; }\n\n private:\n  void dfs(int idx) {\n    if (used[idx])\
-    \ return;\n    used[idx] = true;\n    for (auto to : g[idx]) dfs(int(to));\n \
-    \   order.push_back(idx);\n  }\n\n  void rdfs(int idx, int cnt) {\n    if (comp[idx]\
-    \ != -1) return;\n    comp[idx] = cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n\
-    \  }\n\n  void build() {\n    for (int i = 0; i < (int)g.size(); i++) dfs(i);\n\
-    \    reverse(begin(order), end(order));\n    used.clear();\n    used.shrink_to_fit();\n\
-    \n    comp.resize(g.size(), -1);\n\n    rg.resize(g.size());\n    for (int i =\
-    \ 0; i < (int)g.size(); i++) {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n\
-    \      }\n    }\n    int ptr = 0;\n    for (int i : order)\n      if (comp[i]\
-    \ == -1) rdfs(i, ptr), ptr++;\n    rg.clear();\n    rg.shrink_to_fit();\n    order.clear();\n\
+    \ = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 4 \"graph/strongly-connected-components.hpp\"\n\n// Strongly Connected\
+    \ Components\n// DAG of SC graph   ... scc.dag (including multiedges)\n// new\
+    \ node of k     ... scc[k]\n// inv of scc[k] = i ... scc.belong(i)\ntemplate <typename\
+    \ G>\nstruct StronglyConnectedComponents {\n private:\n  const G &g;\n  vector<vector<int>>\
+    \ rg;\n  vector<int> comp, order;\n  vector<char> used;\n  vector<vector<int>>\
+    \ blng;\n\n public:\n  vector<vector<int>> dag;\n  StronglyConnectedComponents(G\
+    \ &_g) : g(_g), used(g.size(), 0) { build(); }\n\n  int operator[](int k) { return\
+    \ comp[k]; }\n\n  vector<int> &belong(int i) { return blng[i]; }\n\n private:\n\
+    \  void dfs(int idx) {\n    if (used[idx]) return;\n    used[idx] = true;\n  \
+    \  for (auto to : g[idx]) dfs(int(to));\n    order.push_back(idx);\n  }\n\n  void\
+    \ rdfs(int idx, int cnt) {\n    if (comp[idx] != -1) return;\n    comp[idx] =\
+    \ cnt;\n    for (int to : rg[idx]) rdfs(to, cnt);\n  }\n\n  void build() {\n \
+    \   for (int i = 0; i < (int)g.size(); i++) dfs(i);\n    reverse(begin(order),\
+    \ end(order));\n    used.clear();\n    used.shrink_to_fit();\n\n    comp.resize(g.size(),\
+    \ -1);\n\n    rg.resize(g.size());\n    for (int i = 0; i < (int)g.size(); i++)\
+    \ {\n      for (auto e : g[i]) {\n        rg[(int)e].emplace_back(i);\n      }\n\
+    \    }\n    int ptr = 0;\n    for (int i : order)\n      if (comp[i] == -1) rdfs(i,\
+    \ ptr), ptr++;\n    rg.clear();\n    rg.shrink_to_fit();\n    order.clear();\n\
     \    order.shrink_to_fit();\n\n    dag.resize(ptr);\n    blng.resize(ptr);\n \
     \   for (int i = 0; i < (int)g.size(); i++) {\n      blng[comp[i]].push_back(i);\n\
     \      for (auto &to : g[i]) {\n        int x = comp[i], y = comp[to];\n     \
@@ -96,8 +98,8 @@ data:
   isVerificationFile: false
   path: graph/strongly-connected-components.hpp
   requiredBy: []
-  timestamp: '2021-05-03 14:16:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp

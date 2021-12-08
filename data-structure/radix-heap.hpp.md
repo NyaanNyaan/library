@@ -2,14 +2,14 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: shortest-path/dijkstra-fast.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\
       \u5316)"
   - icon: ':heavy_check_mark:'
     path: shortest-path/dijkstra-radix-heap.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Radix Heap)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: shortest-path/dijkstra-with-restore.hpp
     title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
   _extendedVerifiedWith:
@@ -25,18 +25,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1320.test.cpp
     title: verify/verify-yuki/yuki-1320.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/data-structure/radix-heap.md
     document_title: Radix Heap
@@ -78,17 +78,17 @@ data:
   isVerificationFile: false
   path: data-structure/radix-heap.hpp
   requiredBy:
+  - shortest-path/dijkstra-fast.hpp
   - shortest-path/dijkstra-radix-heap.hpp
   - shortest-path/dijkstra-with-restore.hpp
-  - shortest-path/dijkstra-fast.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-yuki/yuki-1320.test.cpp
-  - verify/verify-unit-test/radix-heap.test.cpp
-  - verify/verify-unit-test/dijkstra.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
+  - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
 documentation_of: data-structure/radix-heap.hpp

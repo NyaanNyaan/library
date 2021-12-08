@@ -1,9 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -47,16 +47,18 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 6 \"tree/cartesian-tree.hpp\"\
-    \n\n// return value : pair<graph, root>\ntemplate <typename T>\npair<vector<vector<int>>,\
-    \ int> CartesianTree(vector<T> &a) {\n  int N = (int)a.size();\n  vector<vector<int>>\
-    \ g(N);\n  vector<int> p(N, -1), st;\n  st.reserve(N);\n  for (int i = 0; i <\
-    \ N; i++) {\n    int prv = -1;\n    while (!st.empty() && a[i] < a[st.back()])\
-    \ {\n      prv = st.back();\n      st.pop_back();\n    }\n    if (prv != -1) p[prv]\
-    \ = i;\n    if (!st.empty()) p[i] = st.back();\n    st.push_back(i);\n  }\n  int\
-    \ root = -1;\n  for (int i = 0; i < N; i++) {\n    if (p[i] != -1)\n      g[p[i]].push_back(i);\n\
-    \    else\n      root = i;\n  }\n  return make_pair(g, root);\n}\n\n/**\n * @brief\
-    \ Cartesian Tree\n * @docs docs/tree/cartesian-tree.md\n */\n"
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 6 \"tree/cartesian-tree.hpp\"\n\n// return value : pair<graph, root>\n\
+    template <typename T>\npair<vector<vector<int>>, int> CartesianTree(vector<T>\
+    \ &a) {\n  int N = (int)a.size();\n  vector<vector<int>> g(N);\n  vector<int>\
+    \ p(N, -1), st;\n  st.reserve(N);\n  for (int i = 0; i < N; i++) {\n    int prv\
+    \ = -1;\n    while (!st.empty() && a[i] < a[st.back()]) {\n      prv = st.back();\n\
+    \      st.pop_back();\n    }\n    if (prv != -1) p[prv] = i;\n    if (!st.empty())\
+    \ p[i] = st.back();\n    st.push_back(i);\n  }\n  int root = -1;\n  for (int i\
+    \ = 0; i < N; i++) {\n    if (p[i] != -1)\n      g[p[i]].push_back(i);\n    else\n\
+    \      root = i;\n  }\n  return make_pair(g, root);\n}\n\n/**\n * @brief Cartesian\
+    \ Tree\n * @docs docs/tree/cartesian-tree.md\n */\n"
   code: "#pragma once\n\n\n\n#include \"../graph/graph-template.hpp\"\n\n// return\
     \ value : pair<graph, root>\ntemplate <typename T>\npair<vector<vector<int>>,\
     \ int> CartesianTree(vector<T> &a) {\n  int N = (int)a.size();\n  vector<vector<int>>\
@@ -72,7 +74,7 @@ data:
   isVerificationFile: false
   path: tree/cartesian-tree.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp

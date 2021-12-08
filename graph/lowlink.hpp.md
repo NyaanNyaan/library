@@ -1,17 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/biconnected-components.hpp
     title: "\u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/two-edge-connected-components.hpp
     title: graph/two-edge-connected-components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/block-cut-tree.hpp
     title: Block Cut Tree
   _extendedVerifiedWith:
@@ -24,15 +24,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-3022.test.cpp
     title: verify/verify-aoj-other/aoj-3022.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1326.test.cpp
     title: verify/verify-yuki/yuki-1326.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/lowlink.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
@@ -63,21 +63,23 @@ data:
     \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
     \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n#line 4 \"graph/lowlink.hpp\"\
-    \n\n// LowLink ... enumerate bridge and articulation point\n// bridge ... \u6A4B\
-    \ articulation point ... \u95A2\u7BC0\u70B9\ntemplate <typename G>\nstruct LowLink\
-    \ {\n  int N;\n  const G &g;\n  vector<int> ord, low, articulation;\n  vector<pair<int,\
-    \ int> > bridge;\n\n  LowLink(const G &_g) : g(_g) {\n    N = g.size();\n    ord.resize(N,\
-    \ -1);\n    low.resize(N, -1);\n    int k = 0;\n    for (int i = 0; i < N; i++)\n\
-    \      if (ord[i] == -1) k = dfs(i, k, -1);\n  }\n\n  int dfs(int idx, int k,\
-    \ int par) {\n    low[idx] = (ord[idx] = k++);\n    int cnt = 0;\n    bool is_arti\
-    \ = false, flg = false;\n    for (auto &to : g[idx]) {\n      if (ord[to] == -1)\
-    \ {\n        cnt++;\n        k = dfs(to, k, idx);\n        low[idx] = min(low[idx],\
-    \ low[to]);\n        is_arti |= (par != -1) && (low[to] >= ord[idx]);\n      \
-    \  if (ord[idx] < low[to]) {\n          bridge.emplace_back(minmax(idx, (int)to));\n\
-    \        }\n      } else if (to != par || exchange(flg, true)) {\n        low[idx]\
-    \ = min(low[idx], ord[to]);\n      }\n    }\n    is_arti |= par == -1 && cnt >\
-    \ 1;\n    if (is_arti) articulation.push_back(idx);\n    return k;\n  }\n};\n"
+    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 4 \"graph/lowlink.hpp\"\n\n// LowLink ... enumerate bridge and articulation\
+    \ point\n// bridge ... \u6A4B articulation point ... \u95A2\u7BC0\u70B9\ntemplate\
+    \ <typename G>\nstruct LowLink {\n  int N;\n  const G &g;\n  vector<int> ord,\
+    \ low, articulation;\n  vector<pair<int, int> > bridge;\n\n  LowLink(const G &_g)\
+    \ : g(_g) {\n    N = g.size();\n    ord.resize(N, -1);\n    low.resize(N, -1);\n\
+    \    int k = 0;\n    for (int i = 0; i < N; i++)\n      if (ord[i] == -1) k =\
+    \ dfs(i, k, -1);\n  }\n\n  int dfs(int idx, int k, int par) {\n    low[idx] =\
+    \ (ord[idx] = k++);\n    int cnt = 0;\n    bool is_arti = false, flg = false;\n\
+    \    for (auto &to : g[idx]) {\n      if (ord[to] == -1) {\n        cnt++;\n \
+    \       k = dfs(to, k, idx);\n        low[idx] = min(low[idx], low[to]);\n   \
+    \     is_arti |= (par != -1) && (low[to] >= ord[idx]);\n        if (ord[idx] <\
+    \ low[to]) {\n          bridge.emplace_back(minmax(idx, (int)to));\n        }\n\
+    \      } else if (to != par || exchange(flg, true)) {\n        low[idx] = min(low[idx],\
+    \ ord[to]);\n      }\n    }\n    is_arti |= par == -1 && cnt > 1;\n    if (is_arti)\
+    \ articulation.push_back(idx);\n    return k;\n  }\n};\n"
   code: "#pragma once\n\n#include \"./graph-template.hpp\"\n\n// LowLink ... enumerate\
     \ bridge and articulation point\n// bridge ... \u6A4B articulation point ... \u95A2\
     \u7BC0\u70B9\ntemplate <typename G>\nstruct LowLink {\n  int N;\n  const G &g;\n\
@@ -98,16 +100,16 @@ data:
   isVerificationFile: false
   path: graph/lowlink.hpp
   requiredBy:
-  - graph/biconnected-components.hpp
   - graph/two-edge-connected-components.hpp
+  - graph/biconnected-components.hpp
   - tree/block-cut-tree.hpp
-  timestamp: '2020-12-23 11:33:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-11-23 10:22:25+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-aoj-other/aoj-3022.test.cpp
-  - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
+  - verify/verify-aoj-other/aoj-3022.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
 documentation_of: graph/lowlink.hpp
 layout: document

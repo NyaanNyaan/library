@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
-    title: graph/graph-template.hpp
-  - icon: ':heavy_check_mark:'
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   - icon: ':heavy_check_mark:'
@@ -200,37 +200,38 @@ data:
     \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
     \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
     \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n#line 4 \"tree/rerooting.hpp\"\n\n// Rerooting\n// f1(c1, c2) ... merge\
-    \ value of child node\n// f2(memo[i], chd, par) ... return value from child node\
-    \ to parent node\n// memo[i] ... result of subtree rooted i\n// dp[i] ... result\
-    \ of tree rooted i\ntemplate <typename T, typename G, typename F1, typename F2>\n\
-    struct Rerooting {\n  const G &g;\n  const F1 f1;\n  const F2 f2;\n  vector<T>\
-    \ memo, dp;\n  T I;\n\n  Rerooting(const G &_g, const F1 _f1, const F2 _f2, const\
-    \ T &I_)\n      : g(_g), f1(_f1), f2(_f2), memo(g.size(), I_), dp(g.size(), I_),\
-    \ I(I_) {\n    dfs(0, -1);\n    efs(0, -1, I);\n  }\n\n  const T &operator[](int\
-    \ i) const { return dp[i]; }\n\n  void dfs(int cur, int par) {\n    for (auto\
-    \ &dst : g[cur]) {\n      if (dst == par) continue;\n      dfs(dst, cur);\n  \
-    \    memo[cur] = f1(memo[cur], f2(memo[dst], dst, cur));\n    }\n  }\n\n  void\
-    \ efs(int cur, int par, const T &pval) {\n    // get cumulative sum\n    vector<T>\
-    \ buf;\n    for (auto dst : g[cur]) {\n      if (dst == par) continue;\n     \
-    \ buf.push_back(f2(memo[dst], dst, cur));\n    }\n    vector<T> head(buf.size()\
-    \ + 1), tail(buf.size() + 1);\n    head[0] = tail[buf.size()] = I;\n    for (int\
-    \ i = 0; i < (int)buf.size(); i++) head[i + 1] = f1(head[i], buf[i]);\n    for\
-    \ (int i = (int)buf.size() - 1; i >= 0; i--)\n      tail[i] = f1(tail[i + 1],\
-    \ buf[i]);\n\n    // update\n    dp[cur] = par == -1 ? head.back() : f1(pval,\
-    \ head.back());\n\n    // propagate\n    int idx = 0;\n    for (auto &dst : g[cur])\
-    \ {\n      if (dst == par) continue;\n      efs(dst, cur, f2(f1(pval, f1(head[idx],\
-    \ tail[idx + 1])), cur, dst));\n      idx++;\n    }\n  }\n};\n\n/**\n * @brief\
-    \ Rerooting(\u5168\u65B9\u4F4D\u6728DP)\n * @docs docs/tree/rerooting.md\n */\n\
-    #line 6 \"verify/verify-aoj-grl/aoj-grl-5-b.test.cpp\"\n\nusing namespace Nyaan;\
-    \ void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<int>(N, N - 1, false, false);\n\
-    \  map<pair<int, int>, int> es;\n  rep(i, N) each(e, g[i]) es[{e.src, e.to}] =\
-    \ e.cost;\n\n  using T = int;\n  // identify element of f1, and answer of leaf\n\
-    \  T I = 0;\n  // merge value of child node\n  auto f1 = [&](T x, T y) -> T {\
-    \ return max(x, y); };\n  // return value from child node to parent node\n  auto\
-    \ f2 = [&](T x, int chd, int par) -> T { return x + es[{chd, par}]; };\n  Rerooting<T,\
-    \ decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);\n\n  rep(i,N) out(dp.dp[i]);\n\
-    }\n"
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 4 \"tree/rerooting.hpp\"\n\
+    \n// Rerooting\n// f1(c1, c2) ... merge value of child node\n// f2(memo[i], chd,\
+    \ par) ... return value from child node to parent node\n// memo[i] ... result\
+    \ of subtree rooted i\n// dp[i] ... result of tree rooted i\ntemplate <typename\
+    \ T, typename G, typename F1, typename F2>\nstruct Rerooting {\n  const G &g;\n\
+    \  const F1 f1;\n  const F2 f2;\n  vector<T> memo, dp;\n  T I;\n\n  Rerooting(const\
+    \ G &_g, const F1 _f1, const F2 _f2, const T &I_)\n      : g(_g), f1(_f1), f2(_f2),\
+    \ memo(g.size(), I_), dp(g.size(), I_), I(I_) {\n    dfs(0, -1);\n    efs(0, -1,\
+    \ I);\n  }\n\n  const T &operator[](int i) const { return dp[i]; }\n\n  void dfs(int\
+    \ cur, int par) {\n    for (auto &dst : g[cur]) {\n      if (dst == par) continue;\n\
+    \      dfs(dst, cur);\n      memo[cur] = f1(memo[cur], f2(memo[dst], dst, cur));\n\
+    \    }\n  }\n\n  void efs(int cur, int par, const T &pval) {\n    // get cumulative\
+    \ sum\n    vector<T> buf;\n    for (auto dst : g[cur]) {\n      if (dst == par)\
+    \ continue;\n      buf.push_back(f2(memo[dst], dst, cur));\n    }\n    vector<T>\
+    \ head(buf.size() + 1), tail(buf.size() + 1);\n    head[0] = tail[buf.size()]\
+    \ = I;\n    for (int i = 0; i < (int)buf.size(); i++) head[i + 1] = f1(head[i],\
+    \ buf[i]);\n    for (int i = (int)buf.size() - 1; i >= 0; i--)\n      tail[i]\
+    \ = f1(tail[i + 1], buf[i]);\n\n    // update\n    dp[cur] = par == -1 ? head.back()\
+    \ : f1(pval, head.back());\n\n    // propagate\n    int idx = 0;\n    for (auto\
+    \ &dst : g[cur]) {\n      if (dst == par) continue;\n      efs(dst, cur, f2(f1(pval,\
+    \ f1(head[idx], tail[idx + 1])), cur, dst));\n      idx++;\n    }\n  }\n};\n\n\
+    /**\n * @brief Rerooting(\u5168\u65B9\u4F4D\u6728DP)\n * @docs docs/tree/rerooting.md\n\
+    \ */\n#line 6 \"verify/verify-aoj-grl/aoj-grl-5-b.test.cpp\"\n\nusing namespace\
+    \ Nyaan; void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<int>(N, N - 1, false,\
+    \ false);\n  map<pair<int, int>, int> es;\n  rep(i, N) each(e, g[i]) es[{e.src,\
+    \ e.to}] = e.cost;\n\n  using T = int;\n  // identify element of f1, and answer\
+    \ of leaf\n  T I = 0;\n  // merge value of child node\n  auto f1 = [&](T x, T\
+    \ y) -> T { return max(x, y); };\n  // return value from child node to parent\
+    \ node\n  auto f2 = [&](T x, int chd, int par) -> T { return x + es[{chd, par}];\
+    \ };\n  Rerooting<T, decltype(g), decltype(f1), decltype(f2)> dp(g, f1, f2, I);\n\
+    \n  rep(i,N) out(dp.dp[i]);\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_B\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../tree/rerooting.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N);\n  auto g = wgraph<int>(N,\
@@ -253,7 +254,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
