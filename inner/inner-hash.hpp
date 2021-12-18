@@ -1,6 +1,7 @@
 #pragma once
 
 namespace inner {
+using i64 = long long;
 using u64 = unsigned long long;
 using u128 = __uint128_t;
 
@@ -13,9 +14,9 @@ struct Hash : array<u64, BASE_NUM> {
 
   static constexpr u64 md = (1ull << 61) - 1;
 
-  constexpr static Hash set(const long long &a) {
+  constexpr static Hash set(const i64 &a) {
     Hash res;
-    for (int i = 0; i < n; i++) res[i] = cast(a);
+    fill(begin(res), end(res), cast(a));
     return res;
   }
   Hash &operator+=(const Hash &r) {
@@ -23,9 +24,10 @@ struct Hash : array<u64, BASE_NUM> {
       if (((*this)[i] += r[i]) >= md) (*this)[i] -= md;
     return *this;
   }
-  Hash &operator+=(const u64 &r) {
+  Hash &operator+=(const i64 &r) {
+    u64 s = cast(r);
     for (int i = 0; i < n; i++)
-      if (((*this)[i] += r) >= md) (*this)[i] -= md;
+      if (((*this)[i] += s) >= md) (*this)[i] -= md;
     return *this;
   }
   Hash &operator-=(const Hash &r) {
@@ -33,20 +35,28 @@ struct Hash : array<u64, BASE_NUM> {
       if (((*this)[i] += md - r[i]) >= md) (*this)[i] -= md;
     return *this;
   }
-  Hash &operator-=(const u64 &r) {
+  Hash &operator-=(const i64 &r) {
+    u64 s = cast(r);
     for (int i = 0; i < n; i++)
-      if (((*this)[i] += md - r) >= md) (*this)[i] -= md;
+      if (((*this)[i] += md - s) >= md) (*this)[i] -= md;
     return *this;
   }
-  inline Hash &operator*=(const Hash &r) {
+  Hash &operator*=(const Hash &r) {
     for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i], r[i]);
     return *this;
   }
+  Hash &operator*=(const i64 &r) {
+    u64 s = cast(r);
+    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i], s);
+    return *this;
+  }
+
   Hash operator+(const Hash &r) { return Hash(*this) += r; }
-  Hash operator+(const u64 &r) { return Hash(*this) += r; }
+  Hash operator+(const i64 &r) { return Hash(*this) += r; }
   Hash operator-(const Hash &r) { return Hash(*this) -= r; }
-  Hash operator-(const u64 &r) { return Hash(*this) -= r; }
-  inline Hash operator*(const Hash &r) { return Hash(*this) *= r; }
+  Hash operator-(const i64 &r) { return Hash(*this) -= r; }
+  Hash operator*(const Hash &r) { return Hash(*this) *= r; }
+  Hash operator*(const i64 &r) { return Hash(*this) *= r; }
   Hash operator-() const {
     Hash res;
     for (int i = 0; i < n; i++) res[i] = (*this)[i] == 0 ? 0 : md - (*this)[i];
@@ -57,9 +67,10 @@ struct Hash : array<u64, BASE_NUM> {
     for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], c[i]);
     return res;
   }
-  friend Hash pfma(const Hash &a, const Hash &b, const long long &c) {
+  friend Hash pfma(const Hash &a, const Hash &b, const i64 &c) {
     Hash res;
-    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], cast(c));
+    u64 s = cast(c);
+    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], s);
     return res;
   }
 
