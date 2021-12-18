@@ -579,8 +579,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/multieval.test.cpp
 documentation_of: fps/fast-multieval.hpp
 layout: document
 redirect_from:

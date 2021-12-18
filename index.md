@@ -1092,6 +1092,9 @@ data:
       path: verify/verify-unit-test/hashset.test.cpp
       title: verify/verify-unit-test/hashset.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/inner-hash.test.cpp
+      title: verify/verify-unit-test/inner-hash.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/int-div.test.cpp
       title: verify/verify-unit-test/int-div.test.cpp
     - icon: ':heavy_check_mark:'

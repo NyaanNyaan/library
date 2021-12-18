@@ -61,9 +61,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-  - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
-  - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
+  - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+  - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
 documentation_of: modint/barrett-reduction.hpp
 layout: document
 redirect_from:

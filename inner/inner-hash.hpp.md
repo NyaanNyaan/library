@@ -16,6 +16,9 @@ data:
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
     title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/inner-hash.test.cpp
+    title: verify/verify-unit-test/inner-hash.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - icon: ':heavy_check_mark:'
@@ -28,37 +31,41 @@ data:
     _deprecated_at_docs: docs/inner/inner-hash.md
     document_title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
     links: []
-  bundledCode: "#line 2 \"inner/inner-hash.hpp\"\n\nnamespace inner {\nusing u64 =\
-    \ unsigned long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\n\
-    struct Hash : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n\
-    \  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\
-    \n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr static Hash set(const\
-    \ long long &a) {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = cast(a);\n\
-    \    return res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for (int i = 0;\
-    \ i < n; i++)\n      if (((*this)[i] += r[i]) >= md) (*this)[i] -= md;\n    return\
-    \ *this;\n  }\n  Hash &operator+=(const u64 &r) {\n    for (int i = 0; i < n;\
-    \ i++)\n      if (((*this)[i] += r) >= md) (*this)[i] -= md;\n    return *this;\n\
-    \  }\n  Hash &operator-=(const Hash &r) {\n    for (int i = 0; i < n; i++)\n \
-    \     if (((*this)[i] += md - r[i]) >= md) (*this)[i] -= md;\n    return *this;\n\
-    \  }\n  Hash &operator-=(const u64 &r) {\n    for (int i = 0; i < n; i++)\n  \
-    \    if (((*this)[i] += md - r) >= md) (*this)[i] -= md;\n    return *this;\n\
-    \  }\n  inline Hash &operator*=(const Hash &r) {\n    for (int i = 0; i < n; i++)\
-    \ (*this)[i] = modmul((*this)[i], r[i]);\n    return *this;\n  }\n  Hash operator+(const\
-    \ Hash &r) { return Hash(*this) += r; }\n  Hash operator+(const u64 &r) { return\
-    \ Hash(*this) += r; }\n  Hash operator-(const Hash &r) { return Hash(*this) -=\
-    \ r; }\n  Hash operator-(const u64 &r) { return Hash(*this) -= r; }\n  inline\
-    \ Hash operator*(const Hash &r) { return Hash(*this) *= r; }\n  Hash operator-()\
-    \ const {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = (*this)[i]\
-    \ == 0 ? 0 : md - (*this)[i];\n    return res;\n  }\n  friend Hash pfma(const\
-    \ Hash &a, const Hash &b, const Hash &c) {\n    Hash res;\n    for (int i = 0;\
-    \ i < n; i++) res[i] = modfma(a[i], b[i], c[i]);\n    return res;\n  }\n  friend\
-    \ Hash pfma(const Hash &a, const Hash &b, const long long &c) {\n    Hash res;\n\
-    \    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], cast(c));\n    return\
-    \ res;\n  }\n\n  static Hash get_basis() {\n    static auto rand_time =\n    \
-    \    chrono::duration_cast<chrono::nanoseconds>(\n            chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \            .count();\n    static mt19937_64 rng(rand_time);\n    Hash h;\n \
-    \   for (int i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md\
-    \ - 1) + 1) == false)\n        ;\n    }\n    return h;\n  }\n\n private:\n  static\
+  bundledCode: "#line 2 \"inner/inner-hash.hpp\"\n\nnamespace inner {\nusing i64 =\
+    \ long long;\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\ntemplate\
+    \ <int BASE_NUM = 2>\nstruct Hash : array<u64, BASE_NUM> {\n  using array<u64,\
+    \ BASE_NUM>::operator[];\n  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64,\
+    \ BASE_NUM>() {}\n\n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr\
+    \ static Hash set(const i64 &a) {\n    Hash res;\n    fill(begin(res), end(res),\
+    \ cast(a));\n    return res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for\
+    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i]) >= md) (*this)[i] -=\
+    \ md;\n    return *this;\n  }\n  Hash &operator+=(const i64 &r) {\n    u64 s =\
+    \ cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += s) >= md)\
+    \ (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const Hash &r)\
+    \ {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md)\
+    \ (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const i64 &r)\
+    \ {\n    u64 s = cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i]\
+    \ += md - s) >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator*=(const\
+    \ Hash &r) {\n    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i],\
+    \ r[i]);\n    return *this;\n  }\n  Hash &operator*=(const i64 &r) {\n    u64\
+    \ s = cast(r);\n    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i],\
+    \ s);\n    return *this;\n  }\n\n  Hash operator+(const Hash &r) { return Hash(*this)\
+    \ += r; }\n  Hash operator+(const i64 &r) { return Hash(*this) += r; }\n  Hash\
+    \ operator-(const Hash &r) { return Hash(*this) -= r; }\n  Hash operator-(const\
+    \ i64 &r) { return Hash(*this) -= r; }\n  Hash operator*(const Hash &r) { return\
+    \ Hash(*this) *= r; }\n  Hash operator*(const i64 &r) { return Hash(*this) *=\
+    \ r; }\n  Hash operator-() const {\n    Hash res;\n    for (int i = 0; i < n;\
+    \ i++) res[i] = (*this)[i] == 0 ? 0 : md - (*this)[i];\n    return res;\n  }\n\
+    \  friend Hash pfma(const Hash &a, const Hash &b, const Hash &c) {\n    Hash res;\n\
+    \    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], c[i]);\n    return\
+    \ res;\n  }\n  friend Hash pfma(const Hash &a, const Hash &b, const i64 &c) {\n\
+    \    Hash res;\n    u64 s = cast(c);\n    for (int i = 0; i < n; i++) res[i] =\
+    \ modfma(a[i], b[i], s);\n    return res;\n  }\n\n  static Hash get_basis() {\n\
+    \    static auto rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
+    \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
+    \      .count();\n    static mt19937_64 rng(rand_time);\n    Hash h;\n    for\
+    \ (int i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md - 1)\
+    \ + 1) == false)\n        ;\n    }\n    return h;\n  }\n\n private:\n  static\
     \ u64 modpow(u64 a, u64 b) {\n    u64 r = 1;\n    for (a %= md; b; a = modmul(a,\
     \ a), b >>= 1) r = modmul(r, a);\n    return r;\n  }\n  static bool isPrimitive(u64\
     \ x) {\n    for (auto &d : vector<u64>{2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331,\
@@ -71,37 +78,40 @@ data:
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
     };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
     \u4F53\n * @docs docs/inner/inner-hash.md\n */\n"
-  code: "#pragma once\n\nnamespace inner {\nusing u64 = unsigned long long;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64,\
-    \ BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n  static constexpr int\
-    \ n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\n  static constexpr\
-    \ u64 md = (1ull << 61) - 1;\n\n  constexpr static Hash set(const long long &a)\
-    \ {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = cast(a);\n    return\
+  code: "#pragma once\n\nnamespace inner {\nusing i64 = long long;\nusing u64 = unsigned\
+    \ long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct\
+    \ Hash : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n \
+    \ static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\
+    \n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr static Hash set(const\
+    \ i64 &a) {\n    Hash res;\n    fill(begin(res), end(res), cast(a));\n    return\
     \ res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for (int i = 0; i < n; i++)\n\
     \      if (((*this)[i] += r[i]) >= md) (*this)[i] -= md;\n    return *this;\n\
-    \  }\n  Hash &operator+=(const u64 &r) {\n    for (int i = 0; i < n; i++)\n  \
-    \    if (((*this)[i] += r) >= md) (*this)[i] -= md;\n    return *this;\n  }\n\
-    \  Hash &operator-=(const Hash &r) {\n    for (int i = 0; i < n; i++)\n      if\
-    \ (((*this)[i] += md - r[i]) >= md) (*this)[i] -= md;\n    return *this;\n  }\n\
-    \  Hash &operator-=(const u64 &r) {\n    for (int i = 0; i < n; i++)\n      if\
-    \ (((*this)[i] += md - r) >= md) (*this)[i] -= md;\n    return *this;\n  }\n \
-    \ inline Hash &operator*=(const Hash &r) {\n    for (int i = 0; i < n; i++) (*this)[i]\
-    \ = modmul((*this)[i], r[i]);\n    return *this;\n  }\n  Hash operator+(const\
-    \ Hash &r) { return Hash(*this) += r; }\n  Hash operator+(const u64 &r) { return\
-    \ Hash(*this) += r; }\n  Hash operator-(const Hash &r) { return Hash(*this) -=\
-    \ r; }\n  Hash operator-(const u64 &r) { return Hash(*this) -= r; }\n  inline\
-    \ Hash operator*(const Hash &r) { return Hash(*this) *= r; }\n  Hash operator-()\
-    \ const {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = (*this)[i]\
-    \ == 0 ? 0 : md - (*this)[i];\n    return res;\n  }\n  friend Hash pfma(const\
-    \ Hash &a, const Hash &b, const Hash &c) {\n    Hash res;\n    for (int i = 0;\
-    \ i < n; i++) res[i] = modfma(a[i], b[i], c[i]);\n    return res;\n  }\n  friend\
-    \ Hash pfma(const Hash &a, const Hash &b, const long long &c) {\n    Hash res;\n\
-    \    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], cast(c));\n    return\
-    \ res;\n  }\n\n  static Hash get_basis() {\n    static auto rand_time =\n    \
-    \    chrono::duration_cast<chrono::nanoseconds>(\n            chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \            .count();\n    static mt19937_64 rng(rand_time);\n    Hash h;\n \
-    \   for (int i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md\
-    \ - 1) + 1) == false)\n        ;\n    }\n    return h;\n  }\n\n private:\n  static\
+    \  }\n  Hash &operator+=(const i64 &r) {\n    u64 s = cast(r);\n    for (int i\
+    \ = 0; i < n; i++)\n      if (((*this)[i] += s) >= md) (*this)[i] -= md;\n   \
+    \ return *this;\n  }\n  Hash &operator-=(const Hash &r) {\n    for (int i = 0;\
+    \ i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md) (*this)[i] -= md;\n\
+    \    return *this;\n  }\n  Hash &operator-=(const i64 &r) {\n    u64 s = cast(r);\n\
+    \    for (int i = 0; i < n; i++)\n      if (((*this)[i] += md - s) >= md) (*this)[i]\
+    \ -= md;\n    return *this;\n  }\n  Hash &operator*=(const Hash &r) {\n    for\
+    \ (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i], r[i]);\n    return *this;\n\
+    \  }\n  Hash &operator*=(const i64 &r) {\n    u64 s = cast(r);\n    for (int i\
+    \ = 0; i < n; i++) (*this)[i] = modmul((*this)[i], s);\n    return *this;\n  }\n\
+    \n  Hash operator+(const Hash &r) { return Hash(*this) += r; }\n  Hash operator+(const\
+    \ i64 &r) { return Hash(*this) += r; }\n  Hash operator-(const Hash &r) { return\
+    \ Hash(*this) -= r; }\n  Hash operator-(const i64 &r) { return Hash(*this) -=\
+    \ r; }\n  Hash operator*(const Hash &r) { return Hash(*this) *= r; }\n  Hash operator*(const\
+    \ i64 &r) { return Hash(*this) *= r; }\n  Hash operator-() const {\n    Hash res;\n\
+    \    for (int i = 0; i < n; i++) res[i] = (*this)[i] == 0 ? 0 : md - (*this)[i];\n\
+    \    return res;\n  }\n  friend Hash pfma(const Hash &a, const Hash &b, const\
+    \ Hash &c) {\n    Hash res;\n    for (int i = 0; i < n; i++) res[i] = modfma(a[i],\
+    \ b[i], c[i]);\n    return res;\n  }\n  friend Hash pfma(const Hash &a, const\
+    \ Hash &b, const i64 &c) {\n    Hash res;\n    u64 s = cast(c);\n    for (int\
+    \ i = 0; i < n; i++) res[i] = modfma(a[i], b[i], s);\n    return res;\n  }\n\n\
+    \  static Hash get_basis() {\n    static auto rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
+    \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
+    \      .count();\n    static mt19937_64 rng(rand_time);\n    Hash h;\n    for\
+    \ (int i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md - 1)\
+    \ + 1) == false)\n        ;\n    }\n    return h;\n  }\n\n private:\n  static\
     \ u64 modpow(u64 a, u64 b) {\n    u64 r = 1;\n    for (a %= md; b; a = modmul(a,\
     \ a), b >>= 1) r = modmul(r, a);\n    return r;\n  }\n  static bool isPrimitive(u64\
     \ x) {\n    for (auto &d : vector<u64>{2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331,\
@@ -118,12 +128,13 @@ data:
   isVerificationFile: false
   path: inner/inner-hash.hpp
   requiredBy:
-  - string/rolling-hash.hpp
   - string/rolling-hash-2d.hpp
+  - string/rolling-hash.hpp
   - tree/tree-hash.hpp
-  timestamp: '2021-04-30 22:00:26+09:00'
+  timestamp: '2021-12-18 14:04:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/inner-hash.test.cpp
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
@@ -136,11 +147,13 @@ title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
 ---
 ## ハッシュ構造体
 
-$2^{61}-1$を法とするハッシュのライブラリ。
+$2^{61}-1$ を法とするハッシュのライブラリ。
 
-#### 使い方
+ハッシュは単位的環としていて実装されている。また、ハッシュに $\mathbb{Z} / (2^{61} - 1) \mathbb{Z}$ 上の要素を作用させることもできる。
+
+#### 関数
 
 - `Hash set(long long a)`: `a`に対応するハッシュを生成。
-- `Hash get_basis()`: ランダムなハッシュを生成。(要素は原始根でないことが保証される。)
+- `Hash get_basis()`: ランダムなハッシュを生成。(要素は原始根であることが保証される。)
 - `+,-,*,+=,-=,*=`: 加算・減算・乗算用の関数。
-- `Hash pfma(Hash a,Hash b,T c)`: `fma`用の関数。(あまり効果はない)`T`は`hash`または`long long`。
+- `Hash pfma(Hash a, Hash b, T c)`: `fma` 用の関数。`T` は` hash` または `long long` 。

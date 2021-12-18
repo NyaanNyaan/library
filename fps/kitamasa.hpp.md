@@ -173,9 +173,9 @@ data:
   timestamp: '2021-01-31 00:21:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
+  - verify/verify-yuki/yuki-0214.test.cpp
 documentation_of: fps/kitamasa.hpp
 layout: document
 redirect_from:

@@ -186,8 +186,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
-  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
 documentation_of: fps/sample-point-shift.hpp
