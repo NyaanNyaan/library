@@ -209,11 +209,11 @@ data:
     \ * @brief \u62BD\u8C61\u5316\u9818\u57DF\u6728\n */\n#line 2 \"data-structure/binary-indexed-tree.hpp\"\
     \n\ntemplate <typename T>\nstruct BinaryIndexedTree {\n  int N;\n  vector<T> data;\n\
     \n  BinaryIndexedTree() = default;\n\n  BinaryIndexedTree(int size) { init(size);\
-    \ }\n\n  void init(int size) {\n    N = size + 2;\n    data.assign(N + 1, 0);\n\
-    \  }\n\n  // get sum of [0,k]\n  T sum(int k) const {\n    if (k < 0) return 0;\
-    \  // return 0 if k < 0\n    T ret = 0;\n    for (++k; k > 0; k -= k & -k) ret\
-    \ += data[k];\n    return ret;\n  }\n\n  // getsum of [l,r]\n  inline T sum(int\
-    \ l, int r) const { return sum(r) - sum(l - 1); }\n\n  // get value of k\n  inline\
+    \ }\n\n  void init(int size) {\n    N = size + 2;\n    data.assign(N + 1, {});\n\
+    \  }\n\n  // get sum of [0,k]\n  T sum(int k) const {\n    if (k < 0) return T{};\
+    \  // return 0 if k < 0\n    T ret{};\n    for (++k; k > 0; k -= k & -k) ret +=\
+    \ data[k];\n    return ret;\n  }\n\n  // getsum of [l,r]\n  inline T sum(int l,\
+    \ int r) const { return sum(r) - sum(l - 1); }\n\n  // get value of k\n  inline\
     \ T operator[](int k) const { return sum(k) - sum(k - 1); }\n\n  // data[k] +=\
     \ x\n  void add(int k, T x) {\n    for (++k; k < N; k += k & -k) data[k] += x;\n\
     \  }\n\n  // range add x to [l,r]\n  void imos(int l, int r, T x) {\n    add(l,\
@@ -317,7 +317,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
   requiredBy: []
-  timestamp: '2021-11-27 22:15:37+09:00'
+  timestamp: '2021-12-20 22:10:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp

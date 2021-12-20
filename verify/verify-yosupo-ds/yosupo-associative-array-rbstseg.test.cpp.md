@@ -174,8 +174,7 @@ data:
     \ T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTree {\n  struct Node {\n    Node *l,\
     \ *r;\n    I index;\n    T key, sum;\n    E lazy;\n    int cnt;\n    Node(const\
     \ I &i, const T &t = ti())\n        : l(), r(), index(i), key(t), sum(t), lazy(ei()),\
-    \ cnt(1) {}\n  };\n\n protected:\n  using Ptr = Node *;\n  // \u547C\u3093\u3060\
-    \u3042\u3068\u5FC5\u305A update \u3059\u308B\u3053\u3068\uFF01\n  template <typename...\
+    \ cnt(1) {}\n  };\n\n protected:\n  using Ptr = Node *;\n  template <typename...\
     \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
     \  }\n  inline void my_del(Ptr t) { delete t; }\n\n  inline int count(const Ptr\
     \ t) const { return t ? t->cnt : 0; }\n\n  static uint64_t rng() {\n    static\
@@ -325,7 +324,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
   requiredBy: []
-  timestamp: '2021-12-20 21:00:40+09:00'
+  timestamp: '2021-12-20 22:10:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp

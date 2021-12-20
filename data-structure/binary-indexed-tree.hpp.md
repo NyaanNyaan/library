@@ -43,9 +43,9 @@ data:
   bundledCode: "#line 2 \"data-structure/binary-indexed-tree.hpp\"\n\ntemplate <typename\
     \ T>\nstruct BinaryIndexedTree {\n  int N;\n  vector<T> data;\n\n  BinaryIndexedTree()\
     \ = default;\n\n  BinaryIndexedTree(int size) { init(size); }\n\n  void init(int\
-    \ size) {\n    N = size + 2;\n    data.assign(N + 1, 0);\n  }\n\n  // get sum\
-    \ of [0,k]\n  T sum(int k) const {\n    if (k < 0) return 0;  // return 0 if k\
-    \ < 0\n    T ret = 0;\n    for (++k; k > 0; k -= k & -k) ret += data[k];\n   \
+    \ size) {\n    N = size + 2;\n    data.assign(N + 1, {});\n  }\n\n  // get sum\
+    \ of [0,k]\n  T sum(int k) const {\n    if (k < 0) return T{};  // return 0 if\
+    \ k < 0\n    T ret{};\n    for (++k; k > 0; k -= k & -k) ret += data[k];\n   \
     \ return ret;\n  }\n\n  // getsum of [l,r]\n  inline T sum(int l, int r) const\
     \ { return sum(r) - sum(l - 1); }\n\n  // get value of k\n  inline T operator[](int\
     \ k) const { return sum(k) - sum(k - 1); }\n\n  // data[k] += x\n  void add(int\
@@ -63,8 +63,8 @@ data:
   code: "#pragma once\n\ntemplate <typename T>\nstruct BinaryIndexedTree {\n  int\
     \ N;\n  vector<T> data;\n\n  BinaryIndexedTree() = default;\n\n  BinaryIndexedTree(int\
     \ size) { init(size); }\n\n  void init(int size) {\n    N = size + 2;\n    data.assign(N\
-    \ + 1, 0);\n  }\n\n  // get sum of [0,k]\n  T sum(int k) const {\n    if (k <\
-    \ 0) return 0;  // return 0 if k < 0\n    T ret = 0;\n    for (++k; k > 0; k -=\
+    \ + 1, {});\n  }\n\n  // get sum of [0,k]\n  T sum(int k) const {\n    if (k <\
+    \ 0) return T{};  // return 0 if k < 0\n    T ret{};\n    for (++k; k > 0; k -=\
     \ k & -k) ret += data[k];\n    return ret;\n  }\n\n  // getsum of [l,r]\n  inline\
     \ T sum(int l, int r) const { return sum(r) - sum(l - 1); }\n\n  // get value\
     \ of k\n  inline T operator[](int k) const { return sum(k) - sum(k - 1); }\n\n\
@@ -85,7 +85,7 @@ data:
   path: data-structure/binary-indexed-tree.hpp
   requiredBy:
   - data-structure/range-sum-range-add-bit.hpp
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-12-20 22:10:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp

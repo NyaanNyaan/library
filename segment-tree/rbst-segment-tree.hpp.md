@@ -29,8 +29,7 @@ data:
     \ E), T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTree {\n  struct Node {\n    Node\
     \ *l, *r;\n    I index;\n    T key, sum;\n    E lazy;\n    int cnt;\n    Node(const\
     \ I &i, const T &t = ti())\n        : l(), r(), index(i), key(t), sum(t), lazy(ei()),\
-    \ cnt(1) {}\n  };\n\n protected:\n  using Ptr = Node *;\n  // \u547C\u3093\u3060\
-    \u3042\u3068\u5FC5\u305A update \u3059\u308B\u3053\u3068\uFF01\n  template <typename...\
+    \ cnt(1) {}\n  };\n\n protected:\n  using Ptr = Node *;\n  template <typename...\
     \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
     \  }\n  inline void my_del(Ptr t) { delete t; }\n\n  inline int count(const Ptr\
     \ t) const { return t ? t->cnt : 0; }\n\n  static uint64_t rng() {\n    static\
@@ -162,13 +161,12 @@ data:
     \ {\n  struct Node {\n    Node *l, *r;\n    I index;\n    T key, sum;\n    E lazy;\n\
     \    int cnt;\n    Node(const I &i, const T &t = ti())\n        : l(), r(), index(i),\
     \ key(t), sum(t), lazy(ei()), cnt(1) {}\n  };\n\n protected:\n  using Ptr = Node\
-    \ *;\n  // \u547C\u3093\u3060\u3042\u3068\u5FC5\u305A update \u3059\u308B\u3053\
-    \u3068\uFF01\n  template <typename... Args>\n  inline Ptr my_new(Args... args)\
-    \ {\n    return new Node(args...);\n  }\n  inline void my_del(Ptr t) { delete\
-    \ t; }\n\n  inline int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n\
-    \  static uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n \
-    \   return x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n  }\n\n  Ptr merge(Ptr\
-    \ l, Ptr r) {\n    if (!l || !r) return l ? l : r;\n    if (int((rng() * (l->cnt\
+    \ *;\n  template <typename... Args>\n  inline Ptr my_new(Args... args) {\n   \
+    \ return new Node(args...);\n  }\n  inline void my_del(Ptr t) { delete t; }\n\n\
+    \  inline int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  static\
+    \ uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n    return\
+    \ x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n  }\n\n  Ptr merge(Ptr l,\
+    \ Ptr r) {\n    if (!l || !r) return l ? l : r;\n    if (int((rng() * (l->cnt\
     \ + r->cnt)) >> 32) < l->cnt) {\n      push(l);\n      l->r = merge(l->r, r);\n\
     \      return update(l);\n    } else {\n      push(r);\n      r->l = merge(l,\
     \ r->l);\n      return update(r);\n    }\n  }\n\n  Ptr build(int l, int r, const\
@@ -294,7 +292,7 @@ data:
   isVerificationFile: false
   path: segment-tree/rbst-segment-tree.hpp
   requiredBy: []
-  timestamp: '2021-12-20 21:00:40+09:00'
+  timestamp: '2021-12-20 22:10:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp

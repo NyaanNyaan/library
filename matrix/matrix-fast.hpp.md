@@ -33,21 +33,26 @@ data:
     \ operator+(const Matrix &B) const { return (Matrix(*this) += B); }\n\n  Matrix\
     \ operator-(const Matrix &B) const { return (Matrix(*this) -= B); }\n\n  Matrix\
     \ operator*(const Matrix &B) const { return (Matrix(*this) *= B); }\n\n  Matrix\
-    \ operator^(const long long k) const { return (Matrix(*this) ^= k); }\n\n  friend\
-    \ ostream &operator<<(ostream &os, Matrix &p) {\n    for (int i = 0; i < H; i++)\
-    \ {\n      os << \"[\";\n      for (int j = 0; j < W; j++) {\n        os << p[i][j]\
-    \ << (j + 1 == W ? \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\
-    \n  T determinant(int n = -1) {\n    if (n == -1) n = H;\n    Matrix B(*this);\n\
-    \    T ret = 1;\n    for (int i = 0; i < n; i++) {\n      int idx = -1;\n    \
-    \  for (int j = i; j < n; j++) {\n        if (B[j][i] != 0) {\n          idx =\
-    \ j;\n          break;\n        }\n      }\n      if (idx == -1) return 0;\n \
-    \     if (i != idx) {\n        ret *= T(-1);\n        swap(B[i], B[idx]);\n  \
-    \    }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n      for (int j\
-    \ = 0; j < n; j++) {\n        B[i][j] *= inv;\n      }\n      for (int j = i +\
-    \ 1; j < n; j++) {\n        T a = B[j][i];\n        if (a == 0) continue;\n  \
-    \      for (int k = i; k < n; k++) {\n          B[j][k] -= B[i][k] * a;\n    \
-    \    }\n      }\n    }\n    return (ret);\n  }\n};\n\n/**\n * @brief \u884C\u5217\
-    \u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)\n */\n"
+    \ operator^(const long long k) const { return (Matrix(*this) ^= k); }\n\n  bool\
+    \ operator==(const Matrix &B) const {\n    for (int i = 0; i < H; i++)\n     \
+    \ for (int j = 0; j < W; j++)\n        if (A[i][j] != B[i][j]) return false;\n\
+    \    return true;\n  }\n\n  bool operator!=(const Matrix &B) const {\n    for\
+    \ (int i = 0; i < H; i++)\n      for (int j = 0; j < W; j++)\n        if (A[i][j]\
+    \ != B[i][j]) return true;\n    return false;\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, Matrix &p) {\n    for (int i = 0; i < H; i++) {\n      os << \"[\";\n \
+    \     for (int j = 0; j < W; j++) {\n        os << p[i][j] << (j + 1 == W ? \"\
+    ]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\n  T determinant(int\
+    \ n = -1) {\n    if (n == -1) n = H;\n    Matrix B(*this);\n    T ret = 1;\n \
+    \   for (int i = 0; i < n; i++) {\n      int idx = -1;\n      for (int j = i;\
+    \ j < n; j++) {\n        if (B[j][i] != 0) {\n          idx = j;\n          break;\n\
+    \        }\n      }\n      if (idx == -1) return 0;\n      if (i != idx) {\n \
+    \       ret *= T(-1);\n        swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n\
+    \      T inv = T(1) / B[i][i];\n      for (int j = 0; j < n; j++) {\n        B[i][j]\
+    \ *= inv;\n      }\n      for (int j = i + 1; j < n; j++) {\n        T a = B[j][i];\n\
+    \        if (a == 0) continue;\n        for (int k = i; k < n; k++) {\n      \
+    \    B[j][k] -= B[i][k] * a;\n        }\n      }\n    }\n    return (ret);\n \
+    \ }\n};\n\n/**\n * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248\
+    )\n */\n"
   code: "#pragma once\n\ntemplate <typename T, int H, int W>\nstruct Matrix {\n  using\
     \ Array = array<array<T, W>, H>;\n  Array A;\n\n  Matrix() : A() {\n    for (int\
     \ i = 0; i < H; i++)\n      for (int j = 0; j < W; j++) (*this)[i][j] = T();\n\
@@ -69,26 +74,30 @@ data:
     \ (Matrix(*this) += B); }\n\n  Matrix operator-(const Matrix &B) const { return\
     \ (Matrix(*this) -= B); }\n\n  Matrix operator*(const Matrix &B) const { return\
     \ (Matrix(*this) *= B); }\n\n  Matrix operator^(const long long k) const { return\
-    \ (Matrix(*this) ^= k); }\n\n  friend ostream &operator<<(ostream &os, Matrix\
-    \ &p) {\n    for (int i = 0; i < H; i++) {\n      os << \"[\";\n      for (int\
-    \ j = 0; j < W; j++) {\n        os << p[i][j] << (j + 1 == W ? \"]\\n\" : \",\"\
-    );\n      }\n    }\n    return (os);\n  }\n\n  T determinant(int n = -1) {\n \
-    \   if (n == -1) n = H;\n    Matrix B(*this);\n    T ret = 1;\n    for (int i\
-    \ = 0; i < n; i++) {\n      int idx = -1;\n      for (int j = i; j < n; j++) {\n\
-    \        if (B[j][i] != 0) {\n          idx = j;\n          break;\n        }\n\
-    \      }\n      if (idx == -1) return 0;\n      if (i != idx) {\n        ret *=\
-    \ T(-1);\n        swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n      T\
-    \ inv = T(1) / B[i][i];\n      for (int j = 0; j < n; j++) {\n        B[i][j]\
-    \ *= inv;\n      }\n      for (int j = i + 1; j < n; j++) {\n        T a = B[j][i];\n\
-    \        if (a == 0) continue;\n        for (int k = i; k < n; k++) {\n      \
-    \    B[j][k] -= B[i][k] * a;\n        }\n      }\n    }\n    return (ret);\n \
-    \ }\n};\n\n/**\n * @brief \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248\
-    )\n */\n"
+    \ (Matrix(*this) ^= k); }\n\n  bool operator==(const Matrix &B) const {\n    for\
+    \ (int i = 0; i < H; i++)\n      for (int j = 0; j < W; j++)\n        if (A[i][j]\
+    \ != B[i][j]) return false;\n    return true;\n  }\n\n  bool operator!=(const\
+    \ Matrix &B) const {\n    for (int i = 0; i < H; i++)\n      for (int j = 0; j\
+    \ < W; j++)\n        if (A[i][j] != B[i][j]) return true;\n    return false;\n\
+    \  }\n\n  friend ostream &operator<<(ostream &os, Matrix &p) {\n    for (int i\
+    \ = 0; i < H; i++) {\n      os << \"[\";\n      for (int j = 0; j < W; j++) {\n\
+    \        os << p[i][j] << (j + 1 == W ? \"]\\n\" : \",\");\n      }\n    }\n \
+    \   return (os);\n  }\n\n  T determinant(int n = -1) {\n    if (n == -1) n = H;\n\
+    \    Matrix B(*this);\n    T ret = 1;\n    for (int i = 0; i < n; i++) {\n   \
+    \   int idx = -1;\n      for (int j = i; j < n; j++) {\n        if (B[j][i] !=\
+    \ 0) {\n          idx = j;\n          break;\n        }\n      }\n      if (idx\
+    \ == -1) return 0;\n      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i],\
+    \ B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n  \
+    \    for (int j = 0; j < n; j++) {\n        B[i][j] *= inv;\n      }\n      for\
+    \ (int j = i + 1; j < n; j++) {\n        T a = B[j][i];\n        if (a == 0) continue;\n\
+    \        for (int k = i; k < n; k++) {\n          B[j][k] -= B[i][k] * a;\n  \
+    \      }\n      }\n    }\n    return (ret);\n  }\n};\n\n/**\n * @brief \u884C\u5217\
+    \u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: matrix/matrix-fast.hpp
   requiredBy: []
-  timestamp: '2020-12-08 01:05:40+09:00'
+  timestamp: '2021-12-20 22:10:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp

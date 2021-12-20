@@ -261,7 +261,8 @@ data:
     \    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
     \  }\n  reverse(begin(res), end(res));\n  return res;\n}\n\ntemplate <typename\
     \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {\n\
-    \  if (k < (int)a.size()) return a[k];\n  auto fs = find_p_recursive(a, d);\n\
+    \  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a), end(a), [](mint\
+    \ x) { return x == mint(0); })) return 0;\n  auto fs = find_p_recursive(a, d);\n\
     \  assert(fs.empty() == false);\n  int deg = fs.size() - 1;\n  assert(deg >= 1);\n\
     \  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);\n  for (int i = 0; i < deg;\
     \ i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i < deg; i++) m[i][i - 1] = fs[0];\n\
@@ -294,7 +295,8 @@ data:
     \    for (int l = 0; l <= d; l++) sm += f * c[i + l], f *= base;\n    res.push_back(sm);\n\
     \  }\n  reverse(begin(res), end(res));\n  return res;\n}\n\ntemplate <typename\
     \ mint>\nmint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {\n\
-    \  if (k < (int)a.size()) return a[k];\n  auto fs = find_p_recursive(a, d);\n\
+    \  if (k < (int)a.size()) return a[k];\n  if (all_of(begin(a), end(a), [](mint\
+    \ x) { return x == mint(0); })) return 0;\n  auto fs = find_p_recursive(a, d);\n\
     \  assert(fs.empty() == false);\n  int deg = fs.size() - 1;\n  assert(deg >= 1);\n\
     \  Matrix<FormalPowerSeries<mint>> m(deg), denom(1);\n  for (int i = 0; i < deg;\
     \ i++) m[0][i] = -fs[i + 1];\n  for (int i = 1; i < deg; i++) m[i][i - 1] = fs[0];\n\
@@ -320,7 +322,7 @@ data:
   isVerificationFile: false
   path: fps/find-p-recursive.hpp
   requiredBy: []
-  timestamp: '2021-11-15 19:19:58+09:00'
+  timestamp: '2021-12-20 22:10:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/p-recursive.test.cpp

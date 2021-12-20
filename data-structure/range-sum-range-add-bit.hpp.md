@@ -18,9 +18,9 @@ data:
     \ \"data-structure/binary-indexed-tree.hpp\"\n\ntemplate <typename T>\nstruct\
     \ BinaryIndexedTree {\n  int N;\n  vector<T> data;\n\n  BinaryIndexedTree() =\
     \ default;\n\n  BinaryIndexedTree(int size) { init(size); }\n\n  void init(int\
-    \ size) {\n    N = size + 2;\n    data.assign(N + 1, 0);\n  }\n\n  // get sum\
-    \ of [0,k]\n  T sum(int k) const {\n    if (k < 0) return 0;  // return 0 if k\
-    \ < 0\n    T ret = 0;\n    for (++k; k > 0; k -= k & -k) ret += data[k];\n   \
+    \ size) {\n    N = size + 2;\n    data.assign(N + 1, {});\n  }\n\n  // get sum\
+    \ of [0,k]\n  T sum(int k) const {\n    if (k < 0) return T{};  // return 0 if\
+    \ k < 0\n    T ret{};\n    for (++k; k > 0; k -= k & -k) ret += data[k];\n   \
     \ return ret;\n  }\n\n  // getsum of [l,r]\n  inline T sum(int l, int r) const\
     \ { return sum(r) - sum(l - 1); }\n\n  // get value of k\n  inline T operator[](int\
     \ k) const { return sum(k) - sum(k - 1); }\n\n  // data[k] += x\n  void add(int\
@@ -39,22 +39,22 @@ data:
     \ RangeAddRangeSumBIT {\n  BinaryIndexedTree<T> a, b;\n  RangeAddRangeSumBIT(int\
     \ N) : a(N + 1), b(N + 1) {}\n\n  // add x to [l, r)\n  void add(int l, int r,\
     \ T x) {\n    a.add(l, x);\n    a.add(r, -x);\n    b.add(l, x * (1 - l));\n  \
-    \  b.add(r, x * (r - 1));\n  }\n\n  // return sum of [l, r)\n  T sum(T l, T r)\
-    \ {\n    --r, --l;\n    return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);\n\
+    \  b.add(r, x * (r - 1));\n  }\n\n  // return sum of [l, r)\n  T sum(int l, int\
+    \ r) {\n    --r, --l;\n    return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);\n\
     \  }\n};\n"
   code: "#pragma once\n\n#include \"binary-indexed-tree.hpp\"\n\ntemplate <typename\
     \ T>\nstruct RangeAddRangeSumBIT {\n  BinaryIndexedTree<T> a, b;\n  RangeAddRangeSumBIT(int\
     \ N) : a(N + 1), b(N + 1) {}\n\n  // add x to [l, r)\n  void add(int l, int r,\
     \ T x) {\n    a.add(l, x);\n    a.add(r, -x);\n    b.add(l, x * (1 - l));\n  \
-    \  b.add(r, x * (r - 1));\n  }\n\n  // return sum of [l, r)\n  T sum(T l, T r)\
-    \ {\n    --r, --l;\n    return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);\n\
+    \  b.add(r, x * (r - 1));\n  }\n\n  // return sum of [l, r)\n  T sum(int l, int\
+    \ r) {\n    --r, --l;\n    return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);\n\
     \  }\n};"
   dependsOn:
   - data-structure/binary-indexed-tree.hpp
   isVerificationFile: false
   path: data-structure/range-sum-range-add-bit.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2021-12-20 22:10:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
