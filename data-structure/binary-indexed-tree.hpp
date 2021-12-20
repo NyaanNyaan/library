@@ -11,13 +11,13 @@ struct BinaryIndexedTree {
 
   void init(int size) {
     N = size + 2;
-    data.assign(N + 1, 0);
+    data.assign(N + 1, {});
   }
 
   // get sum of [0,k]
   T sum(int k) const {
-    if (k < 0) return 0;  // return 0 if k < 0
-    T ret = 0;
+    if (k < 0) return T{};  // return 0 if k < 0
+    T ret{};
     for (++k; k > 0; k -= k & -k) ret += data[k];
     return ret;
   }
