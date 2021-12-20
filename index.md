@@ -841,7 +841,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/rerooting.hpp
       title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: tree/tree-hash.hpp
       title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
     - icon: ':heavy_check_mark:'
@@ -1032,6 +1032,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
       title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-1613.test.cpp
+      title: verify/verify-aoj-other/aoj-1613.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2891.test.cpp
       title: verify/verify-aoj-other/aoj-2891.test.cpp
@@ -1743,6 +1746,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1533.test.cpp
       title: verify/verify-yuki/yuki-1533.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1789.test.cpp
+      title: verify/verify-yuki/yuki-1789.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-helloworld.test.cpp
       title: verify/verify-yuki/yuki-helloworld.test.cpp

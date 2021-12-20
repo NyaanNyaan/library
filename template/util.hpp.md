@@ -184,6 +184,9 @@ data:
     path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
     title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1613.test.cpp
+    title: verify/verify-aoj-other/aoj-1613.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2891.test.cpp
     title: verify/verify-aoj-other/aoj-2891.test.cpp
   - icon: ':heavy_check_mark:'
@@ -868,6 +871,9 @@ data:
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1789.test.cpp
+    title: verify/verify-yuki/yuki-1789.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _isVerificationFailed: false
@@ -1103,6 +1109,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+  - verify/verify-aoj-other/aoj-1613.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-aoj-other/aoj-1068.test.cpp
   - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
@@ -1229,6 +1236,7 @@ data:
   - verify/verify-yuki/yuki-1170.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - verify/verify-yuki/yuki-1460.test.cpp
+  - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-yuki/yuki-helloworld.test.cpp
   - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yuki/yuki-1220.test.cpp

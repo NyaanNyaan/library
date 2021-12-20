@@ -5,10 +5,16 @@ data:
     path: inner/inner-hash.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1613.test.cpp
+    title: verify/verify-aoj-other/aoj-1613.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1789.test.cpp
+    title: verify/verify-yuki/yuki-1789.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
     links: []
@@ -59,41 +65,39 @@ data:
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
     };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
     \u4F53\n * @docs docs/inner/inner-hash.md\n */\n#line 4 \"tree/tree-hash.hpp\"\
-    \n\ntemplate <typename G>\nstruct TreeHash {\n  using H = inner::Hash<8>;\n  using\
-    \ u64 = unsigned long long;\n\n  const G& g;\n  int n;\n  vector<H> hash;\n  vector<u64>\
-    \ xs;\n  vector<int> depth;\n\n  TreeHash(const G& _g, int root = 0) : g(_g),\
-    \ n(g.size()) {\n    auto rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
-    \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
-    \      .count();\n    mt19937_64 rng(rand_time);\n\n    hash.resize(n);\n    depth.resize(n,\
-    \ 0);\n    xs.resize(n);\n    for (auto& i : xs) i = rng() % H::md;\n    dfs(root,\
-    \ -1);\n  }\n\n private:\n  int dfs(int c, int p) {\n    int dep = 0;\n    for\
-    \ (auto& d : g[c]) {\n      if (d != p) dep = max(dep, dfs(d, c) + 1);\n    }\n\
-    \    H x = H::set(xs[dep]), h = H::set(1);\n    for (auto& d : g[c]) {\n     \
-    \ if (d != p) h = h * (x + hash[d]);\n    }\n    hash[c] = h;\n    return depth[c]\
-    \ = dep;\n  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\
-    \u30B7\u30E5\n */\n"
+    \n\ntemplate <typename G>\nstruct TreeHash {\n  using Hash = inner::Hash<3>;\n\
+    \n  const G& g;\n  int n;\n  vector<Hash> hash;\n  vector<int> depth;\n\n  static\
+    \ vector<Hash>& xs() {\n    static vector<Hash> _xs;\n    return _xs;\n  }\n\n\
+    \  TreeHash(const G& _g, int root = 0) : g(_g), n(g.size()) {\n    hash.resize(n);\n\
+    \    depth.resize(n, 0);\n    while ((int)xs().size() <= n) xs().push_back(Hash::get_basis());\n\
+    \    dfs(root, -1);\n  }\n\n private:\n  int dfs(int c, int p) {\n    int dep\
+    \ = 0;\n    for (auto& d : g[c]) {\n      if (d != p) dep = max(dep, dfs(d, c)\
+    \ + 1);\n    }\n    Hash x = xs()[dep], h = Hash::set(1);\n    for (auto& d :\
+    \ g[c]) {\n      if (d != p) h = h * (x + hash[d]);\n    }\n    hash[c] = h;\n\
+    \    return depth[c] = dep;\n  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\
+    \u306E\u30CF\u30C3\u30B7\u30E5\n */\n"
   code: "#pragma once\n\n#include \"../inner/inner-hash.hpp\"\n\ntemplate <typename\
-    \ G>\nstruct TreeHash {\n  using H = inner::Hash<8>;\n  using u64 = unsigned long\
-    \ long;\n\n  const G& g;\n  int n;\n  vector<H> hash;\n  vector<u64> xs;\n  vector<int>\
-    \ depth;\n\n  TreeHash(const G& _g, int root = 0) : g(_g), n(g.size()) {\n   \
-    \ auto rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n    \
-    \        chrono::high_resolution_clock::now().time_since_epoch())\n          \
-    \  .count();\n    mt19937_64 rng(rand_time);\n\n    hash.resize(n);\n    depth.resize(n,\
-    \ 0);\n    xs.resize(n);\n    for (auto& i : xs) i = rng() % H::md;\n    dfs(root,\
-    \ -1);\n  }\n\n private:\n  int dfs(int c, int p) {\n    int dep = 0;\n    for\
-    \ (auto& d : g[c]) {\n      if (d != p) dep = max(dep, dfs(d, c) + 1);\n    }\n\
-    \    H x = H::set(xs[dep]), h = H::set(1);\n    for (auto& d : g[c]) {\n     \
-    \ if (d != p) h = h * (x + hash[d]);\n    }\n    hash[c] = h;\n    return depth[c]\
-    \ = dep;\n  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\
-    \u30B7\u30E5\n */\n"
+    \ G>\nstruct TreeHash {\n  using Hash = inner::Hash<3>;\n\n  const G& g;\n  int\
+    \ n;\n  vector<Hash> hash;\n  vector<int> depth;\n\n  static vector<Hash>& xs()\
+    \ {\n    static vector<Hash> _xs;\n    return _xs;\n  }\n\n  TreeHash(const G&\
+    \ _g, int root = 0) : g(_g), n(g.size()) {\n    hash.resize(n);\n    depth.resize(n,\
+    \ 0);\n    while ((int)xs().size() <= n) xs().push_back(Hash::get_basis());\n\
+    \    dfs(root, -1);\n  }\n\n private:\n  int dfs(int c, int p) {\n    int dep\
+    \ = 0;\n    for (auto& d : g[c]) {\n      if (d != p) dep = max(dep, dfs(d, c)\
+    \ + 1);\n    }\n    Hash x = xs()[dep], h = Hash::set(1);\n    for (auto& d :\
+    \ g[c]) {\n      if (d != p) h = h * (x + hash[d]);\n    }\n    hash[c] = h;\n\
+    \    return depth[c] = dep;\n  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\
+    \u306E\u30CF\u30C3\u30B7\u30E5\n */\n"
   dependsOn:
   - inner/inner-hash.hpp
   isVerificationFile: false
   path: tree/tree-hash.hpp
   requiredBy: []
-  timestamp: '2021-12-18 14:04:11+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-12-20 09:50:12+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-aoj-other/aoj-1613.test.cpp
+  - verify/verify-yuki/yuki-1789.test.cpp
 documentation_of: tree/tree-hash.hpp
 layout: document
 redirect_from:

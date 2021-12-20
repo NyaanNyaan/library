@@ -8,13 +8,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: string/rolling-hash.hpp
     title: Rolling Hash
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: tree/tree-hash.hpp
     title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
     title: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1613.test.cpp
+    title: verify/verify-aoj-other/aoj-1613.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/inner-hash.test.cpp
     title: verify/verify-unit-test/inner-hash.test.cpp
@@ -24,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
     title: verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1789.test.cpp
+    title: verify/verify-yuki/yuki-1789.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -134,10 +140,12 @@ data:
   timestamp: '2021-12-18 14:04:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-aoj-other/aoj-1613.test.cpp
   - verify/verify-unit-test/inner-hash.test.cpp
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
+  - verify/verify-yuki/yuki-1789.test.cpp
 documentation_of: inner/inner-hash.hpp
 layout: document
 redirect_from:
