@@ -57,6 +57,9 @@ data:
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sum-of-mf.test.cpp
+    title: verify/verify-unit-test/sum-of-mf.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -86,6 +89,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
@@ -134,6 +140,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1781.test.cpp
+    title: verify/verify-yuki/yuki-1781.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -222,8 +231,11 @@ data:
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
+  - verify/verify-yuki/yuki-1781.test.cpp
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp

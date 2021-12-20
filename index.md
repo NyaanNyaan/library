@@ -570,7 +570,10 @@ data:
         log N})$ )"
     - icon: ':heavy_check_mark:'
       path: multiplicative-function/sum-of-multiplicative-function.hpp
-      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u548C"
+      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
+    - icon: ':heavy_check_mark:'
+      path: multiplicative-function/sum-of-totient.hpp
+      title: "\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\u6570\u306E\u548C"
   - name: ntt
     pages:
     - icon: ':heavy_check_mark:'
@@ -1179,6 +1182,9 @@ data:
       path: verify/verify-unit-test/strassen.test.cpp
       title: verify/verify-unit-test/strassen.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/sum-of-mf.test.cpp
+      title: verify/verify-unit-test/sum-of-mf.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/template.test.cpp
       title: verify/verify-unit-test/template.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1550,6 +1556,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
       title: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
       title: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1761,6 +1770,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1533.test.cpp
       title: verify/verify-yuki/yuki-1533.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1781.test.cpp
+      title: verify/verify-yuki/yuki-1781.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1786.test.cpp
       title: verify/verify-yuki/yuki-1786.test.cpp

@@ -2,8 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: multiplicative-function/enamurate-multiplicative-function.hpp
-    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
+    path: modint/montgomery-modint.hpp
+    title: modint/montgomery-modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/binomial.hpp
+    title: modulo/binomial.hpp
+  - icon: ':heavy_check_mark:'
+    path: multiplicative-function/sum-of-multiplicative-function.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
   - icon: ':heavy_check_mark:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
@@ -26,23 +32,19 @@ data:
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/mf.test.cpp
-    title: verify/verify-unit-test/mf.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/sum-of-mf.test.cpp
-    title: verify/verify-unit-test/sum-of-mf.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/multiplicative-function/mf-famous-series.md
-    document_title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
-    links: []
-  bundledCode: "#line 2 \"multiplicative-function/mf-famous-series.hpp\"\n\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
+    links:
+    - https://judge.yosupo.jp/problem/sum_of_totient_function
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\n\
+    //\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -175,7 +177,65 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp\"\
+    \n//\nusing namespace Nyaan;\n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\
+    \ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
+    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
+    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
+    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
+    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r\
+    \ * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"\
+    invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2\
+    \ == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr\
+    \ LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b % mod + mod)\
+    \ * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n    return (b +\
+    \ u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
+    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
+    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
+    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
+    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
+    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
+    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
+    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
+    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
+    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
+    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
+    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
+    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
+    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
+    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
+    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
+    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
+    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
+    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
+    \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\n\
+    struct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) : f(1, T(1)),\
+    \ g(1, T(1)), h(1, T(1)) {\n    while (MAX >= (int)f.size()) extend();\n  }\n\n\
+    \  void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
+    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
+    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
+    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
+    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
+    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
+    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
+    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
+    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
+    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
+    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if(x < 0) return T(0);\n      n += x;\n    }\n \
+    \   T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
+    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
+    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
+    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
+    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
+    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"multiplicative-function/sum-of-multiplicative-function.hpp\"\
     \n\n#line 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11, 13,\
     \ 17, ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N / 3 +\
     \ 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d = 6\
@@ -184,50 +244,73 @@ data:
     \       q < qe; q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2,\
     \ 3};\n  for (int p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i])\
     \ ret.push_back(p);\n  while (!ret.empty() && ret.back() > N) ret.pop_back();\n\
-    \  return ret;\n}\n#line 5 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\
-    \n\n// f(n, p, c) : n = pow(p, c), f is multiplicative function\n\ntemplate <typename\
-    \ T, T (*f)(int, int, int)>\nstruct enamurate_multiplicative_function {\n  enamurate_multiplicative_function(int\
-    \ _n)\n      : ps(prime_enumerate(_n)), a(_n + 1, T()), n(_n), p(ps.size()) {}\n\
-    \n  vector<T> run() {\n    a[1] = 1;\n    dfs(-1, 1, 1);\n    return a;\n  }\n\
-    \n private:\n  vector<int> ps;\n  vector<T> a;\n  int n, p;\n  void dfs(int i,\
-    \ long long x, T y) {\n    a[x] = y;\n    if (y == T()) return;\n    for (int\
-    \ j = i + 1; j < p; j++) {\n      long long nx = x * ps[j];\n      long long dx\
-    \ = ps[j];\n      if (nx > n) break;\n      for (int c = 1; nx <= n; nx *= ps[j],\
-    \ dx *= ps[j], ++c) {\n        dfs(j, nx, y * f(dx, ps[j], c));\n      }\n   \
-    \ }\n  }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319\
-    \n */\n#line 5 \"multiplicative-function/mf-famous-series.hpp\"\n\nnamespace multiplicative_function\
-    \ {\ntemplate <typename T>\nT moebius(int, int, int c) {\n  return c == 0 ? 1\
-    \ : c == 1 ? -1 : 0;\n}\ntemplate <typename T>\nT sigma0(int, int, int c) {\n\
-    \  return c + 1;\n}\ntemplate <typename T>\nT sigma1(int n, int p, int) {\n  return\
-    \ (n - 1) / (p - 1) + n;\n}\ntemplate <typename T>\nT totient(int n, int p, int)\
-    \ {\n  return n - n / p;\n}\n}  // namespace multiplicative_function\n\ntemplate\
-    \ <typename T>\nstatic constexpr vector<T> mobius_function(int n) {\n  enamurate_multiplicative_function<T,\
-    \ multiplicative_function::moebius<T>> em(\n      n);\n  return em.run();\n}\n\
-    \ntemplate <typename T>\nstatic constexpr vector<T> sigma0(int n) {\n  enamurate_multiplicative_function<T,\
-    \ multiplicative_function::sigma0<T>> em(\n      n);\n  return em.run();\n}\n\n\
-    template <typename T>\nstatic constexpr vector<T> sigma1(int n) {\n  enamurate_multiplicative_function<T,\
-    \ multiplicative_function::sigma1<T>> em(\n      n);\n  return em.run();\n}\n\n\
-    template <typename T>\nstatic constexpr vector<T> totient(int n) {\n  enamurate_multiplicative_function<T,\
-    \ multiplicative_function::totient<T>> em(\n      n);\n  return em.run();\n}\n\
-    \n/**\n * @brief \u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
-    \ */\n"
-  code: "#pragma once\n\n#include \"../template/template.hpp\"\n#include \"enamurate-multiplicative-function.hpp\"\
-    \n\nnamespace multiplicative_function {\ntemplate <typename T>\nT moebius(int,\
-    \ int, int c) {\n  return c == 0 ? 1 : c == 1 ? -1 : 0;\n}\ntemplate <typename\
-    \ T>\nT sigma0(int, int, int c) {\n  return c + 1;\n}\ntemplate <typename T>\n\
-    T sigma1(int n, int p, int) {\n  return (n - 1) / (p - 1) + n;\n}\ntemplate <typename\
-    \ T>\nT totient(int n, int p, int) {\n  return n - n / p;\n}\n}  // namespace\
-    \ multiplicative_function\n\ntemplate <typename T>\nstatic constexpr vector<T>\
-    \ mobius_function(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::moebius<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> sigma0(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::sigma0<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> sigma1(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::sigma1<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\ntemplate <typename T>\nstatic constexpr\
-    \ vector<T> totient(int n) {\n  enamurate_multiplicative_function<T, multiplicative_function::totient<T>>\
-    \ em(\n      n);\n  return em.run();\n}\n\n/**\n * @brief \u6709\u540D\u306A\u4E57\
-    \u6CD5\u7684\u95A2\u6570\n * @docs docs/multiplicative-function/mf-famous-series.md\n\
-    \ */\n"
+    \  return ret;\n}\n#line 4 \"multiplicative-function/sum-of-multiplicative-function.hpp\"\
+    \n\n// f(p, c) : f(p^c) \u306E\u5024\u3092\u8FD4\u3059\ntemplate <typename T,\
+    \ T (*f)(long long, long long)>\nstruct mf_prefix_sum {\n  using i64 = long long;\n\
+    \n  i64 M, sq, s;\n  vector<int> p;\n  int ps;\n  vector<T> buf;\n  T ans;\n\n\
+    \  mf_prefix_sum(i64 m) : M(m) {\n    assert(m < (1LL << 42));\n    sq = sqrt(M);\n\
+    \    while (sq * sq > M) sq--;\n    while ((sq + 1) * (sq + 1) <= M) sq++;\n\n\
+    \    if (M != 0) {\n      i64 hls = md(M, sq);\n      if (hls != 1 && md(M, hls\
+    \ - 1) == sq) hls--;\n      s = hls + sq;\n\n      p = prime_enumerate(sq);\n\
+    \      ps = p.size();\n      ans = T{};\n    }\n  }\n\n  // \u7D20\u6570\u306E\
+    \u500B\u6570\u95A2\u6570\u306B\u95A2\u3059\u308B\u30C6\u30FC\u30D6\u30EB\n  vector<T>\
+    \ pi_table() {\n    if (M == 0) return {};\n    i64 hls = md(M, sq);\n    if (hls\
+    \ != 1 && md(M, hls - 1) == sq) hls--;\n\n    vector<i64> hl(hls);\n    for (int\
+    \ i = 1; i < hls; i++) hl[i] = md(M, i) - 1;\n\n    vector<int> hs(sq + 1);\n\
+    \    iota(begin(hs), end(hs), -1);\n\n    int pi = 0;\n    for (auto& x : p) {\n\
+    \      i64 x2 = i64(x) * x;\n      i64 imax = min<i64>(hls, md(M, x2) + 1);\n\
+    \      for (i64 i = 1, ix = x; i < imax; ++i, ix += x) {\n        hl[i] -= (ix\
+    \ < hls ? hl[ix] : hs[md(M, ix)]) - pi;\n      }\n      for (int n = sq; n >=\
+    \ x2; n--) hs[n] -= hs[md(n, x)] - pi;\n      pi++;\n    }\n\n    vector<T> res;\n\
+    \    res.reserve(2 * sq + 10);\n    for (auto& x : hl) res.push_back(x);\n   \
+    \ for (int i = hs.size(); --i;) res.push_back(hs[i]);\n    assert((int)res.size()\
+    \ == s);\n    return res;\n  }\n\n  // \u7D20\u6570\u306E prefix sum \u306B\u95A2\
+    \u3059\u308B\u30C6\u30FC\u30D6\u30EB\n  vector<T> prime_sum_table() {\n    if\
+    \ (M == 0) return {};\n    i64 hls = md(M, sq);\n    if (hls != 1 && md(M, hls\
+    \ - 1) == sq) hls--;\n\n    vector<T> h(s);\n    T inv2 = T{2}.inverse();\n  \
+    \  for (int i = 1; i < hls; i++) {\n      T x = md(M, i);\n      h[i] = x * (x\
+    \ + 1) * inv2 - 1;\n    }\n    for (int i = 1; i <= sq; i++) {\n      T x = i;\n\
+    \      h[s - i] = x * (x + 1) / 2 - 1;\n    }\n\n    for (auto& x : p) {\n   \
+    \   T xt = x;\n      T pi = h[s - x + 1];\n      i64 x2 = i64(x) * x;\n      i64\
+    \ imax = min<i64>(hls, md(M, x2) + 1);\n      i64 ix = x;\n      for (i64 i =\
+    \ 1; i < imax; ++i, ix += x) {\n        h[i] -= ((ix < hls ? h[ix] : h[s - md(M,\
+    \ ix)]) - pi) * xt;\n      }\n      for (int n = sq; n >= x2; n--) {\n       \
+    \ h[s - n] -= (h[s - md(n, x)] - pi) * xt;\n      }\n    }\n\n    assert((int)h.size()\
+    \ == s);\n    return h;\n  }\n\n  void dfs(int i, int c, i64 prod, T cur) {\n\
+    \    ans += cur * f(p[i], c + 1);\n    i64 lim = md(M, prod);\n    if (lim >=\
+    \ 1LL * p[i] * p[i]) dfs(i, c + 1, p[i] * prod, cur);\n    cur *= f(p[i], c);\n\
+    \    ans += cur * (buf[idx(lim)] - buf[idx(p[i])]);\n    int j = i + 1;\n    //\
+    \ M < 2**42 -> p_j < 2**21 -> (p_j)^3 < 2**63\n    for (; j < ps && 1LL * p[j]\
+    \ * p[j] * p[j] <= lim; j++) {\n      dfs(j, 1, prod * p[j], cur);\n    }\n  \
+    \  for (; j < ps && 1LL * p[j] * p[j] <= lim; j++) {\n      T sm = f(p[j], 2);\n\
+    \      int id1 = idx(md(lim, p[j])), id2 = idx(p[j]);\n      sm += f(p[j], 1)\
+    \ * (buf[id1] - buf[id2]);\n      ans += cur * sm;\n    }\n  }\n\n  // fprime\
+    \ \u7834\u58CA\u7684\n  T run(vector<T>& fprime) {\n    if (M == 0) return {};\n\
+    \    set_buf(fprime);\n    assert((int)buf.size() == s);\n    ans = buf[idx(M)]\
+    \ + 1;\n    for (int i = 0; i < ps; i++) dfs(i, 1, p[i], 1);\n    return ans;\n\
+    \  }\n\n private:\n  i64 md(i64 n, i64 d) { return double(n) / d; }\n  i64 idx(i64\
+    \ n) { return n <= sq ? s - n : md(M, n); }\n  void set_buf(vector<T>& _buf) {\
+    \ swap(buf, _buf); }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\
+    prefix sum\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.md\n\
+    \ */\n#line 10 \"verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp\"\n\
+    //\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n//\
+    \ using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
+    \ vvm = vector<vm>;\nBinomial<mint> C;\n\nmint f(ll p, ll c) {\n  ll res = 1;\n\
+    \  while (--c) res = res * p;\n  return res * (p - 1);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  inl(N);\n  mf_prefix_sum<mint, f> mf(N);\n  auto h1 = mf.prime_sum_table();\n\
+    \  auto h0 = mf.pi_table();\n  rep(i, sz(h1)) h1[i] -= h0[i];\n  out(mf.run(h1));\n\
+    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\nusing namespace Nyaan;\n\n\
+    #include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
+    \n#include \"../../multiplicative-function/sum-of-multiplicative-function.hpp\"\
+    \n//\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    // using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\n\
+    using vvm = vector<vm>;\nBinomial<mint> C;\n\nmint f(ll p, ll c) {\n  ll res =\
+    \ 1;\n  while (--c) res = res * p;\n  return res * (p - 1);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  inl(N);\n  mf_prefix_sum<mint, f> mf(N);\n  auto h1 = mf.prime_sum_table();\n\
+    \  auto h0 = mf.pi_table();\n  rep(i, sz(h1)) h1[i] -= h0[i];\n  out(mf.run(h1));\n\
+    }\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -235,110 +318,20 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - multiplicative-function/enamurate-multiplicative-function.hpp
+  - modint/montgomery-modint.hpp
+  - modulo/binomial.hpp
+  - multiplicative-function/sum-of-multiplicative-function.hpp
   - prime/prime-enumerate.hpp
-  isVerificationFile: false
-  path: multiplicative-function/mf-famous-series.hpp
+  isVerificationFile: true
+  path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/verify-unit-test/sum-of-mf.test.cpp
-  - verify/verify-unit-test/mf.test.cpp
-documentation_of: multiplicative-function/mf-famous-series.hpp
+  timestamp: '2021-12-20 21:46:33+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
 layout: document
 redirect_from:
-- /library/multiplicative-function/mf-famous-series.hpp
-- /library/multiplicative-function/mf-famous-series.hpp.html
-title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
+- /verify/verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
 ---
-## 有名な乗法的関数
-
-来るべきDGF(ディリクレ母関数)の流行に備えて(本当に流行るのか？)、自分が理解していることをメモしておく…
-
-#### 乗法的関数
-
-$f(n)$が任意の$\gcd(a,b) = 1$である自然数$a,b$に対して$f(ab) = f(a)f(b)$となる時、$f(n)$は乗法的であると呼ぶ。特に任意の$a,b$について$f(ab)=f(a)f(b)$が成り立つ時は完全乗法的であると呼ぶ。
-
-乗法的関数の重要な性質は以下のようなものが挙げられる。
-
-- $f(n),g(n)$が乗法的である時、$h(n)=f(n)g(n)$も乗法的である。
-- $f(n),g(n)$が乗法的である時、ディリクレの畳み込みで得られる関数$h(n)=\sum_{d\mid n}f(d)g\left(\frac{n}{d}\right)$も乗法的である。
-
-また、乗法的関数に関するアルゴリズムは以下のものが知られている。
-
-- $f(n)$が乗法的であり、かつ$f(p^k)$が$\mathrm{O}(1)$で求まるとき、
-  - $f(n)$の計算が$\mathrm{O}(n^{\frac{1}{4}})$　(Pollard's Rho法)
-  - $f(n)$の初め$n$項の列挙が$\mathrm{O}(n)$　([実装](https://nyaannyaan.github.io/library/multiplicative-function/enamurate-multiplicative-function.hpp))
-  - $f(n)$の初め$n$項のprefix sumが$\mathrm{O}(n^{\frac{2}{3}})$　([実装](https://nyaannyaan.github.io/library/multiplicative-function/enamurate-multiplicative-function.hpp))
-  - $g(n)=\sum_{d\mid n}\mu\left(\frac{n}{d}\right)f(d)$の初め$n$項の列挙が$\mathrm{O}(n \log \log n)$　([実装](https://nyaannyaan.github.io/library/multiplicative-function/divisor-multiple-transform.hpp))
-
-#### 有名な乗法的関数
-
-- 定数関数　$\mathrm{I}(n)=c$
-- 恒等写像　$\mathrm{Id}(n)=n$
-- 指数関数　$\mathrm{Id}_a(n)=n^a$
-- Unit Function $\epsilon(n)=[n = 1]$
-- メビウス関数　$\mu(p^k) =[k = 0]-[k = 1]$
-- 約数関数 $\sigma_a(p^k) = \sum_{i=0}^k p^{ai}$
-- トーシェント関数　$\phi(p^k) = p^k - p^{k-1}$
-
-このうち下の3つは次の畳み込みの関係が知られている。
-
-- メビウス関数　$\sum_{d \mid n} \mu(n) = \epsilon(n)$
-- 約数関数 $\sum_{d \mid n} d^a = \sigma_a(n)$
-- トーシェント関数　$\sum_{d \mid n} \phi(d) = n$
-
-#### メビウス関数　$\mu(n)$
-
-メビウス関数に関する説明は[ここ](https://nyaannyaan.github.io/library/multiplicative-function/divisor-multiple-transform.hpp)に詳しく書いた。
-
-競技プログラミングにおいてのメビウス関数の利用法は(雑に説明すると)包除原理の$(-1)^k$と似た使い方をすることが多い。実際に具体例を見てみる。
-
-##### 例題1
-
-- $N$の約数$n$に対して$g(n)=\sum_{d\mid n}f(d)$と$\mu(n)$がわかっているとする。この時$f(N)$を$\mathrm{O}(\sigma(N))$で計算せよ。
-
-約数系包除を使えば$\mathrm{O}(\sigma(N)^2)$で解けるがより高速な解法を考えたい。
-まずは反転公式を使わずに考察してみる。具体的な$N$についていくつか実験してみると、
-
-$$f(16)=g(16)-g(8)$$
-
-$$f(12)=g(12)-g(6)-g(4)+g(2)$$
-
-$$f(30)=g(30)-g(15)-g(10)-g(6)+g(5)+g(3)+g(2)-g(1)$$
-
-のようになり、これは包除原理+BIT全探索で解くことが出来る。([tsutajさんの非常にわかりやすい包除PDF](https://compro.tsutaj.com//archive/181015_incexc.pdf)に類題の詳しい説明がある。)
-
-一方、反転公式を使うと、例えば$n=12$の時は
-
-$$f(12) = \sum_{d \in \lbrace 1,2,3,4,6,12\rbrace}\mu\left(\frac{n}{d}\right)g(d)=g(12)-g(6)-g(4)+g(2)$$
-
-となり包除原理によって得られる結果と一致する。
-
-下位集合に対するゼータ変換が包除原理で解けることと、約数集合に対するゼータ変換がメビウス関数で解けることは同じような関係にある(？)と言える。
-
-##### 例題2：[Cube-loving Numbers　(HackerRank)](https://www.hackerrank.com/contests/university-codesprint-5/challenges)
-
-- $N$が与えられるので、「自然数$a>1,b\geq 1$を用いて$a^3\times b$と表せる$N$以下の自然数の個数」を$\mathrm{O}(\sqrt[3]{N})$で計算せよ。
-
-$1\leq n\leq N$において自然数$a,b$を用いて$n=a^3\times b$と表せる$n$の個数$g(a)$は$g(a)=\lfloor\frac{N}{a^3}\rfloor$と容易に表せるので、この式をうまく利用して答えを求めたい。(直感的には、$g(n)$は一つの自然数を複数回カウントする関数なのでメビウス変換したいという気持ちになる。)
-
-対象を重複なく数え上げるために、自然数$n$に一対一対応する$(a,b)$を決定したい。具体的には、「$n=A^3\times B$を満たす自然数の組$(A,B)$の中で最も$B$が小さい組」を$n$に対応する組$(a,b)$とおく。そして、$f(a)$を「$(a,\frac{n}{a^3})$と対応している$N$以下の自然数$n$の個数」とおく。
-
-$f$と$g$の関係式を得るために、$g(a)$でカウントされている自然数$n$が$f$のどこでカウントされているかを考える。$n=a^3\times b$としたとき、$b$に一対一対応する整数の組を$(c,d)$とおくと、$n$に対応する組は$(ca,d)$であるから$f(ca)$で数え上げられていることが分かる。逆に$f(ca)$で数え上げられた$n$が$g(a)$で数えられていることも示せる。よって$f(a)$と$g(a)$の間には
-
-$$g(a)=\sum_{a\mid m}f(m) \leftrightarrow f(a)=\sum_{a\mid m}\mu\left(\frac{m}{a}\right)g(m)$$
-
-という倍数変換の関係式が成り立つことがわかる。また、求める答えは$M=\lfloor\sqrt[3]{N}\rfloor$と置いたとき$\sum_{a=2}^Mf(a)$である。
-($M\lt a$のとき$f(a)=g(a)=0$である事実を利用している。)
-
-よって倍数メビウス変換を用いれば$\mathrm{O}(M\log \log M)$で計算できることが示せたが、メビウス関数を用いることでさらなる高速化を図りたい。$\sum_{a=2}^Mf(a)$を$g(m)$の線形和に分解したときの$g(m)$の寄与を考察すると、
-
-$$\sum_{a=2}^M f(a)=\sum_{2\leq a\leq M, a\mid m} \left( \mu\left(\frac{m}{a}\right)g(m)\right)$$
-
-$$=\sum_{2\leq m\leq M} g(m)\left(\sum_{a\mid m,a\neq 1}\mu\left(\frac{m}{a}\right)\right)$$
-
-$$=\sum_{2\leq m\leq M} g(m)(-\mu(m)+\sum_{a\mid m}\mu(a))=-\sum_{2\leq m\leq M} g(m)\mu(m)$$
-
-と非常にきれいな式になる。$\mu(m)$および$g(m)$は線形で列挙できるため、求める答えも線形で列挙できる。以上よりこの問題を$\mathrm{O}(\sqrt[3]{N})$で解くことが出来た。

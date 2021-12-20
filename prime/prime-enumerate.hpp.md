@@ -18,6 +18,9 @@ data:
     path: multiplicative-function/prime-counting-o2d3.hpp
     title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(N^{\\frac{2}{3}})$\
       \ )"
+  - icon: ':heavy_check_mark:'
+    path: multiplicative-function/sum-of-multiplicative-function.hpp
+    title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
@@ -29,11 +32,17 @@ data:
     path: verify/verify-unit-test/primitive-root.test.cpp
     title: verify/verify-unit-test/primitive-root.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sum-of-mf.test.cpp
+    title: verify/verify-unit-test/sum-of-mf.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0125.test.cpp
     title: verify/verify-yuki/yuki-0125.test.cpp
@@ -46,6 +55,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0896.test.cpp
     title: verify/verify-yuki/yuki-0896.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1781.test.cpp
+    title: verify/verify-yuki/yuki-1781.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -74,6 +86,7 @@ data:
   requiredBy:
   - multiplicative-function/mf-famous-series.hpp
   - multiplicative-function/enamurate-multiplicative-function.hpp
+  - multiplicative-function/sum-of-multiplicative-function.hpp
   - multiplicative-function/prime-counting-o2d3.hpp
   - multiplicative-function/divisor-multiple-transform.hpp
   - multiplicative-function/gcd-convolution.hpp
@@ -82,9 +95,12 @@ data:
   verifiedWith:
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
+  - verify/verify-yuki/yuki-1781.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp

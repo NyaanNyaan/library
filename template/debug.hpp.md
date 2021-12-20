@@ -322,6 +322,9 @@ data:
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sum-of-mf.test.cpp
+    title: verify/verify-unit-test/sum-of-mf.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/template.test.cpp
     title: verify/verify-unit-test/template.test.cpp
   - icon: ':heavy_check_mark:'
@@ -679,6 +682,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
     title: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
     title: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   - icon: ':heavy_check_mark:'
@@ -882,6 +888,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1781.test.cpp
+    title: verify/verify-yuki/yuki-1781.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1786.test.cpp
     title: verify/verify-yuki/yuki-1786.test.cpp
@@ -1145,6 +1154,7 @@ data:
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
+  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
@@ -1180,6 +1190,7 @@ data:
   - verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
   - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
+  - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
@@ -1229,6 +1240,7 @@ data:
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-1170.test.cpp
+  - verify/verify-yuki/yuki-1781.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - verify/verify-yuki/yuki-1460.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp

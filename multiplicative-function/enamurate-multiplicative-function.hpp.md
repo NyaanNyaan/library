@@ -30,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sum-of-mf.test.cpp
+    title: verify/verify-unit-test/sum-of-mf.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -218,6 +221,7 @@ data:
   timestamp: '2021-05-04 19:34:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/mf.test.cpp
 documentation_of: multiplicative-function/enamurate-multiplicative-function.hpp
 layout: document
