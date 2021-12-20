@@ -1,54 +1,137 @@
 #pragma once
 
+#include "../prime/prime-enumerate.hpp"
 
-
-template <typename T>
-T sum_of_totient(long long N) {
-  if (N < 2) return N;
+// f(p, c) : f(p^c) の値を返す
+template <typename T, T (*f)(long long, long long)>
+struct mf_prefix_sum {
   using i64 = long long;
 
-  auto f = [](i64 v, i64 p, i64) -> i64 { return v / p * (p - 1); };
-  vector<i64> ns{0}, p;
-  for (i64 i = N; i > 0; i = N / (N / i + 1)) ns.push_back(i);
-  i64 s = ns.size(), sq = sqrt(N);
-  auto idx = [&](i64 n) { return n <= sq ? s - n : N / n; };
+  i64 M, sq, s;
+  vector<int> p;
+  int ps;
+  vector<T> buf;
+  T ans;
 
-  vector<T> h0(s), h1(s), buf(s);
-  for (int i = 0; i < s; i++) {
-    T x = ns[i];
-    h0[i] = x - 1;
-    h1[i] = x * (x + 1) / 2 - 1;
-  }
+  mf_prefix_sum(i64 m) : M(m) {
+    assert(m < (1LL << 42));
+    sq = sqrt(M);
+    while (sq * sq > M) sq--;
+    while ((sq + 1) * (sq + 1) <= M) sq++;
 
-  for (i64 x = 2; x <= sq; ++x) {
-    if (h0[s - x] == h0[s - x + 1]) continue;
-    p.push_back(x);
-    i64 x2 = x * x;
-    for (i64 i = 1, n = ns[i]; i < s && n >= x2; n = ns[++i]) {
-      int id = (i * x <= sq ? i * x : s - n / x);
-      h0[i] -= h0[id] - h0[s - x + 1];
-      h1[i] -= (h1[id] - h1[s - x + 1]) * x;
+    if (M != 0) {
+      i64 hls = md(M, sq);
+      if (hls != 1 && md(M, hls - 1) == sq) hls--;
+      s = hls + sq;
+
+      p = prime_enumerate(sq);
+      ps = p.size();
+      ans = T{};
     }
   }
 
-  for (int i = 0; i < s; i++) buf[i] = h1[i] - h0[i];
-  T ans = buf[idx(N)] + 1;
+  // 素数の個数関数に関するテーブル
+  vector<T> pi_table() {
+    if (M == 0) return {};
+    i64 hls = md(M, sq);
+    if (hls != 1 && md(M, hls - 1) == sq) hls--;
 
-  auto dfs = [&](auto rec, int i, int c, i64 v, i64 lim, T cur) -> void {
-    ans += cur * f(p[i] * v, p[i], c + 1);
-    if (lim >= p[i] * p[i]) rec(rec, i, c + 1, p[i] * v, lim / p[i], cur);
-    cur *= f(v, p[i], c);
+    vector<i64> hl(hls);
+    for (int i = 1; i < hls; i++) hl[i] = md(M, i) - 1;
+
+    vector<int> hs(sq + 1);
+    iota(begin(hs), end(hs), -1);
+
+    int pi = 0;
+    for (auto& x : p) {
+      i64 x2 = i64(x) * x;
+      i64 imax = min<i64>(hls, md(M, x2) + 1);
+      for (i64 i = 1, ix = x; i < imax; ++i, ix += x) {
+        hl[i] -= (ix < hls ? hl[ix] : hs[md(M, ix)]) - pi;
+      }
+      for (int n = sq; n >= x2; n--) hs[n] -= hs[md(n, x)] - pi;
+      pi++;
+    }
+
+    vector<T> res;
+    res.reserve(2 * sq + 10);
+    for (auto& x : hl) res.push_back(x);
+    for (int i = hs.size(); --i;) res.push_back(hs[i]);
+    assert((int)res.size() == s);
+    return res;
+  }
+
+  // 素数の prefix sum に関するテーブル
+  vector<T> prime_sum_table() {
+    if (M == 0) return {};
+    i64 hls = md(M, sq);
+    if (hls != 1 && md(M, hls - 1) == sq) hls--;
+
+    vector<T> h(s);
+    T inv2 = T{2}.inverse();
+    for (int i = 1; i < hls; i++) {
+      T x = md(M, i);
+      h[i] = x * (x + 1) * inv2 - 1;
+    }
+    for (int i = 1; i <= sq; i++) {
+      T x = i;
+      h[s - i] = x * (x + 1) / 2 - 1;
+    }
+
+    for (auto& x : p) {
+      T xt = x;
+      T pi = h[s - x + 1];
+      i64 x2 = i64(x) * x;
+      i64 imax = min<i64>(hls, md(M, x2) + 1);
+      i64 ix = x;
+      for (i64 i = 1; i < imax; ++i, ix += x) {
+        h[i] -= ((ix < hls ? h[ix] : h[s - md(M, ix)]) - pi) * xt;
+      }
+      for (int n = sq; n >= x2; n--) {
+        h[s - n] -= (h[s - md(n, x)] - pi) * xt;
+      }
+    }
+
+    assert((int)h.size() == s);
+    return h;
+  }
+
+  void dfs(int i, int c, i64 prod, T cur) {
+    ans += cur * f(p[i], c + 1);
+    i64 lim = md(M, prod);
+    if (lim >= 1LL * p[i] * p[i]) dfs(i, c + 1, p[i] * prod, cur);
+    cur *= f(p[i], c);
     ans += cur * (buf[idx(lim)] - buf[idx(p[i])]);
-    for (int j = i + 1; j < (int)p.size() && p[j] * p[j] <= lim; j++) {
-      rec(rec, j, 1, p[j], lim / p[j], cur);
+    int j = i + 1;
+    // M < 2**42 -> p_j < 2**21 -> (p_j)^3 < 2**63
+    for (; j < ps && 1LL * p[j] * p[j] * p[j] <= lim; j++) {
+      dfs(j, 1, prod * p[j], cur);
     }
-  };
+    for (; j < ps && 1LL * p[j] * p[j] <= lim; j++) {
+      T sm = f(p[j], 2);
+      int id1 = idx(md(lim, p[j])), id2 = idx(p[j]);
+      sm += f(p[j], 1) * (buf[id1] - buf[id2]);
+      ans += cur * sm;
+    }
+  }
 
-  for (int i = 0; i < (int)p.size(); i++) dfs(dfs, i, 1, p[i], N / p[i], 1);
-  return ans;
-}
+  // fprime 破壊的
+  T run(vector<T>& fprime) {
+    if (M == 0) return {};
+    set_buf(fprime);
+    assert((int)buf.size() == s);
+    ans = buf[idx(M)] + 1;
+    for (int i = 0; i < ps; i++) dfs(i, 1, p[i], 1);
+    return ans;
+  }
+
+ private:
+  i64 md(i64 n, i64 d) { return double(n) / d; }
+  i64 idx(i64 n) { return n <= sq ? s - n : md(M, n); }
+  void set_buf(vector<T>& _buf) { swap(buf, _buf); }
+};
 
 /**
- * @brief 乗法的関数の和
+ * @brief 乗法的関数のprefix sum
  * @docs docs/multiplicative-function/sum-of-multiplicative-function.md
  */
