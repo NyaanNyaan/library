@@ -328,3 +328,7 @@ struct RBSTSegmentTree {
 
   void dump() { inner_dump(root); }
 };
+
+/**
+ * @brief RBST-based Dynamic Lazy Segment Tree
+ */
