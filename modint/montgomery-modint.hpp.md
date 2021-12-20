@@ -97,8 +97,14 @@ data:
     path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
@@ -459,6 +465,8 @@ data:
   - verify/verify-yosupo-ds/yosupo-swag.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp

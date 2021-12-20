@@ -687,6 +687,9 @@ data:
       path: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
       title: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
     - icon: ':heavy_check_mark:'
+      path: segment-tree/rbst-segment-tree.hpp
+      title: RBST-based Dynamic Lazy Segment Tree
+    - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree-beats-abstract.hpp
       title: "\u62BD\u8C61\u5316Segment Tree Beats!"
     - icon: ':heavy_check_mark:'
@@ -1187,6 +1190,9 @@ data:
   - name: verify/verify-yosupo-ds
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
       title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1268,14 +1274,23 @@ data:
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
       title: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
@@ -1746,6 +1761,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1533.test.cpp
       title: verify/verify-yuki/yuki-1533.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1786.test.cpp
+      title: verify/verify-yuki/yuki-1786.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1789.test.cpp
       title: verify/verify-yuki/yuki-1789.test.cpp
