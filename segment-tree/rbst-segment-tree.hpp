@@ -15,7 +15,6 @@ struct RBSTSegmentTree {
 
  protected:
   using Ptr = Node *;
-  // 呼んだあと必ず update すること！
   template <typename... Args>
   inline Ptr my_new(Args... args) {
     return new Node(args...);
