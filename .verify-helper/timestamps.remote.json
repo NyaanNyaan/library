@@ -53,6 +53,7 @@
 "verify/verify-aoj-other/aoj-0304.test.cpp": "2021-11-23 10:22:25 +0900",
 "verify/verify-aoj-other/aoj-1068.test.cpp": "2021-11-25 22:20:29 +0900",
 "verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp": "2021-05-04 19:34:35 +0900",
+"verify/verify-aoj-other/aoj-1613.test.cpp": "2021-12-20 10:11:25 +0900",
 "verify/verify-aoj-other/aoj-2891.test.cpp": "2021-11-23 10:22:25 +0900",
 "verify/verify-aoj-other/aoj-2945-01bfs.test.cpp": "2021-11-23 10:22:25 +0900",
 "verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp": "2021-05-04 19:34:35 +0900",
@@ -284,5 +285,6 @@
 "verify/verify-yuki/yuki-1504.test.cpp": "2021-08-10 23:14:36 +0900",
 "verify/verify-yuki/yuki-1510.test.cpp": "2021-08-10 23:14:36 +0900",
 "verify/verify-yuki/yuki-1533.test.cpp": "2021-11-15 19:19:58 +0900",
+"verify/verify-yuki/yuki-1789.test.cpp": "2021-12-20 09:50:12 +0900",
 "verify/verify-yuki/yuki-helloworld.test.cpp": "2021-05-04 19:34:35 +0900"
 }
