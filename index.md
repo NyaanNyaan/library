@@ -1137,6 +1137,9 @@ data:
       path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
       title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/nimber.test.cpp
+      title: verify/verify-unit-test/nimber.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/orderedmap.test.cpp
       title: verify/verify-unit-test/orderedmap.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1770,6 +1773,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1533.test.cpp
       title: verify/verify-yuki/yuki-1533.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1775.test.cpp
+      title: verify/verify-yuki/yuki-1775.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1781.test.cpp
       title: verify/verify-yuki/yuki-1781.test.cpp

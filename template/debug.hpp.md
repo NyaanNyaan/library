@@ -277,6 +277,9 @@ data:
     path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/nimber.test.cpp
+    title: verify/verify-unit-test/nimber.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/orderedmap.test.cpp
     title: verify/verify-unit-test/orderedmap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -889,6 +892,9 @@ data:
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1775.test.cpp
+    title: verify/verify-yuki/yuki-1775.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1781.test.cpp
     title: verify/verify-yuki/yuki-1781.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1124,6 +1130,7 @@ data:
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
   - verify/verify-unit-test/hashset.test.cpp
+  - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/run-length-encoding.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
@@ -1256,6 +1263,7 @@ data:
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-yuki/yuki-1283.test.cpp
+  - verify/verify-yuki/yuki-1775.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp

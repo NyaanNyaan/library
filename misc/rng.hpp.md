@@ -64,6 +64,9 @@ data:
     path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/nimber.test.cpp
+    title: verify/verify-unit-test/nimber.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/orderedmap.test.cpp
     title: verify/verify-unit-test/orderedmap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -135,6 +138,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1775.test.cpp
+    title: verify/verify-yuki/yuki-1775.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -189,6 +195,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-aoj-other/aoj-1068.test.cpp
+  - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/run-length-encoding.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
@@ -222,6 +229,7 @@ data:
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yuki/yuki-1775.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
