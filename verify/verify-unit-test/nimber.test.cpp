@@ -1,4 +1,4 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/nim_product_64"
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 //
 #include "../../template/template.hpp"
 //
