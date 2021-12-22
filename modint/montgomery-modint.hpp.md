@@ -49,6 +49,9 @@ data:
     path: verify/verify-unit-test/inverse-matrix.test.cpp
     title: verify/verify-unit-test/inverse-matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/karatsuba.test.cpp
+    title: verify/verify-unit-test/karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
   - icon: ':heavy_check_mark:'
@@ -489,6 +492,7 @@ data:
   - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
+  - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp

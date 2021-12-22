@@ -46,6 +46,9 @@ data:
     path: verify/verify-unit-test/interval-union.test.cpp
     title: verify/verify-unit-test/interval-union.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/karatsuba.test.cpp
+    title: verify/verify-unit-test/karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
     title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -224,6 +227,7 @@ data:
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/template.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp

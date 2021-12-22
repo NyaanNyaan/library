@@ -253,6 +253,9 @@ data:
     path: verify/verify-unit-test/interval-union.test.cpp
     title: verify/verify-unit-test/interval-union.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/karatsuba.test.cpp
+    title: verify/verify-unit-test/karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
     title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -700,6 +703,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
     title: verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-2-64-karatsuba.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-2-64-karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -968,6 +974,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-2-64-karatsuba.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
@@ -1125,6 +1132,7 @@ data:
   - verify/verify-unit-test/template.test.cpp
   - verify/verify-unit-test/inner-hash.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
+  - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp

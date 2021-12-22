@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/karatsuba.test.cpp
+    title: verify/verify-unit-test/karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/nimber.test.cpp
     title: verify/verify-unit-test/nimber.test.cpp
   - icon: ':heavy_check_mark:'
@@ -144,6 +147,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/nimber.test.cpp
+  - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yuki/yuki-1775.test.cpp
 documentation_of: math/nim-product.hpp
