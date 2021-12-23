@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: math/nimber-to-field.hpp
+    title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
+  - icon: ':heavy_check_mark:'
     path: math/nimber.hpp
     title: Nim Product
   _extendedVerifiedWith:
@@ -12,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/karatsuba.test.cpp
     title: verify/verify-unit-test/karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/nimber-to-field.test.cpp
+    title: verify/verify-unit-test/nimber-to-field.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/nimber.test.cpp
     title: verify/verify-unit-test/nimber.test.cpp
@@ -72,10 +78,12 @@ data:
   path: math/garner.hpp
   requiredBy:
   - math/nimber.hpp
+  - math/nimber-to-field.hpp
   timestamp: '2021-12-23 18:55:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/nimber.test.cpp
+  - verify/verify-unit-test/nimber-to-field.test.cpp
   - verify/verify-unit-test/garner.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp

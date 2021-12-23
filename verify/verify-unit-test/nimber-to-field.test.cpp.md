@@ -5,17 +5,14 @@ data:
     path: math/garner.hpp
     title: Garner's algorithm
   - icon: ':heavy_check_mark:'
+    path: math/nimber-to-field.hpp
+    title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
+  - icon: ':heavy_check_mark:'
     path: math/nimber.hpp
     title: Nim Product
   - icon: ':heavy_check_mark:'
-    path: misc/rng.hpp
-    title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: ntt/karatsuba.hpp
-    title: ntt/karatsuba.hpp
+    path: math/sweep.hpp
+    title: "\u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -44,8 +41,8 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/karatsuba.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+  bundledCode: "#line 1 \"verify/verify-unit-test/nimber-to-field.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -180,35 +177,35 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/karatsuba.test.cpp\"\
-    \n//\n#line 2 \"math/nimber.hpp\"\n\n#line 2 \"math/garner.hpp\"\n\n// input \
-    \ : a, M (0 < a < M)\n// output : pair(g, x) s.t. g = gcd(a, M), xa = g (mod M),\
-    \ 0 <= x < b/g\ntemplate <typename uint>\npair<uint, uint> gcd_inv(uint a, uint\
-    \ M) {\n  assert(M != 0 && 0 < a);\n  a %= M;\n  uint b = M, s = 1, t = 0;\n \
-    \ while (true) {\n    if (a == 0) return {b, t + M};\n    t -= b / a * s;\n  \
-    \  b %= a;\n    if (b == 0) return {a, s};\n    s -= a / b * t;\n    a %= b;\n\
-    \  }\n}\n\n// \u5165\u529B : 0 <= rem[i] < mod[i], 1 <= mod[i]\n// \u5B58\u5728\
-    \u3059\u308B\u3068\u304D   : return {rem, mod}\n// \u5B58\u5728\u3057\u306A\u3044\
-    \u3068\u304D : return {0, 0}\ntemplate <typename T, typename U>\npair<unsigned\
-    \ long long, unsigned long long> garner(const vector<T>& rem,\n              \
-    \                                      const vector<U>& mod) {\n  assert(rem.size()\
-    \ == mod.size());\n  using u64 = unsigned long long;\n  u64 r0 = 0, m0 = 1;\n\
-    \  for (int i = 0; i < (int)rem.size(); i++) {\n    assert(1 <= mod[i]);\n   \
-    \ assert(0 <= rem[i] && rem[i] < mod[i]);\n    u64 m1 = mod[i], r1 = rem[i] %\
-    \ m1;\n    if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0 % m1 == 0) {\n\
-    \      if (r0 % m1 != r1) return {0, 0};\n      continue;\n    }\n    u64 g, im;\n\
-    \    tie(g, im) = gcd_inv(m0, m1);\n    u64 y = r0 < r1 ? r1 - r0 : r0 - r1;\n\
-    \    if (y % g != 0) return {0, 0};\n    u64 u1 = m1 / g;\n    y = y / g % u1;\n\
-    \    if (r0 > r1 && y != 0) y = u1 - y;\n    u64 x = y * im % u1;\n    r0 += x\
-    \ * m0;\n    m0 *= u1;\n  }\n  return {r0, m0};\n}\n\n/**\n * @brief Garner's\
-    \ algorithm\n */\n#line 4 \"math/nimber.hpp\"\n\nnamespace NimberImpl {\nusing\
-    \ u16 = uint16_t;\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\nstruct calc8\
-    \ {\n  u16 dp[1 << 8][1 << 8];\n  constexpr calc8() : dp() {\n    dp[0][0] = dp[0][1]\
-    \ = dp[1][0] = 0;\n    dp[1][1] = 1;\n    for (int e = 1; e <= 3; e++) {\n   \
-    \   int p = 1 << e, q = p >> 1;\n      u16 ep = 1u << p, eq = 1u << q;\n     \
-    \ for (u16 i = 0; i < ep; i++) {\n        for (u16 j = i; j < ep; j++) {\n   \
-    \       if (i < eq && j < eq) continue;\n          if (min(i, j) <= 1u) {\n  \
-    \          dp[i][j] = dp[j][i] = i * j;\n            continue;\n          }\n\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/nimber-to-field.test.cpp\"\
+    \n//\n#line 2 \"math/nimber-to-field.hpp\"\n\n#line 2 \"math/nimber.hpp\"\n\n\
+    #line 2 \"math/garner.hpp\"\n\n// input  : a, M (0 < a < M)\n// output : pair(g,\
+    \ x) s.t. g = gcd(a, M), xa = g (mod M), 0 <= x < b/g\ntemplate <typename uint>\n\
+    pair<uint, uint> gcd_inv(uint a, uint M) {\n  assert(M != 0 && 0 < a);\n  a %=\
+    \ M;\n  uint b = M, s = 1, t = 0;\n  while (true) {\n    if (a == 0) return {b,\
+    \ t + M};\n    t -= b / a * s;\n    b %= a;\n    if (b == 0) return {a, s};\n\
+    \    s -= a / b * t;\n    a %= b;\n  }\n}\n\n// \u5165\u529B : 0 <= rem[i] < mod[i],\
+    \ 1 <= mod[i]\n// \u5B58\u5728\u3059\u308B\u3068\u304D   : return {rem, mod}\n\
+    // \u5B58\u5728\u3057\u306A\u3044\u3068\u304D : return {0, 0}\ntemplate <typename\
+    \ T, typename U>\npair<unsigned long long, unsigned long long> garner(const vector<T>&\
+    \ rem,\n                                                    const vector<U>& mod)\
+    \ {\n  assert(rem.size() == mod.size());\n  using u64 = unsigned long long;\n\
+    \  u64 r0 = 0, m0 = 1;\n  for (int i = 0; i < (int)rem.size(); i++) {\n    assert(1\
+    \ <= mod[i]);\n    assert(0 <= rem[i] && rem[i] < mod[i]);\n    u64 m1 = mod[i],\
+    \ r1 = rem[i] % m1;\n    if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0\
+    \ % m1 == 0) {\n      if (r0 % m1 != r1) return {0, 0};\n      continue;\n   \
+    \ }\n    u64 g, im;\n    tie(g, im) = gcd_inv(m0, m1);\n    u64 y = r0 < r1 ?\
+    \ r1 - r0 : r0 - r1;\n    if (y % g != 0) return {0, 0};\n    u64 u1 = m1 / g;\n\
+    \    y = y / g % u1;\n    if (r0 > r1 && y != 0) y = u1 - y;\n    u64 x = y *\
+    \ im % u1;\n    r0 += x * m0;\n    m0 *= u1;\n  }\n  return {r0, m0};\n}\n\n/**\n\
+    \ * @brief Garner's algorithm\n */\n#line 4 \"math/nimber.hpp\"\n\nnamespace NimberImpl\
+    \ {\nusing u16 = uint16_t;\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\nstruct\
+    \ calc8 {\n  u16 dp[1 << 8][1 << 8];\n  constexpr calc8() : dp() {\n    dp[0][0]\
+    \ = dp[0][1] = dp[1][0] = 0;\n    dp[1][1] = 1;\n    for (int e = 1; e <= 3; e++)\
+    \ {\n      int p = 1 << e, q = p >> 1;\n      u16 ep = 1u << p, eq = 1u << q;\n\
+    \      for (u16 i = 0; i < ep; i++) {\n        for (u16 j = i; j < ep; j++) {\n\
+    \          if (i < eq && j < eq) continue;\n          if (min(i, j) <= 1u) {\n\
+    \            dp[i][j] = dp[j][i] = i * j;\n            continue;\n          }\n\
     \          u16 iu = i >> q, il = i & (eq - 1);\n          u16 ju = j >> q, jl\
     \ = j & (eq - 1);\n          u16 u = dp[iu][ju], l = dp[il][jl];\n          u16\
     \ ul = dp[iu ^ il][ju ^ jl];\n          u16 uq = dp[u][eq >> 1];\n          dp[i][j]\
@@ -280,106 +277,53 @@ data:
     \  }\n};\n\nusing Nimber16 = NimberBase<uint16_t, NimberImpl::product16>;\nusing\
     \ Nimber32 = NimberBase<uint32_t, NimberImpl::product32>;\nusing Nimber64 = NimberBase<uint64_t,\
     \ NimberImpl::product64>;\nusing Nimber = Nimber64;\n\n/**\n * @brief Nim Product\n\
-    \ * @docs docs/math/nimber.md\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand\
-    \ {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct\
-    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
-    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
-    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
-    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
-    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
-    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
-    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
-    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
-    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
-    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
-    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
-    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
-    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
-    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
-    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
-    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
-    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
-    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
-    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"ntt/karatsuba.hpp\"\n\nnamespace KaratsubaImpl\
-    \ {\n  \ntemplate <typename T>\nvector<T> naive(const vector<T>& a, const vector<T>&\
-    \ b) {\n  if (a.empty() and b.empty()) return {};\n  if (a.size() < b.size())\
-    \ return naive(b, a);\n  int s = a.size(), t = b.size();\n  vector<T> c(s + t\
-    \ - 1);\n  for (int i = 0; i < s; i++) {\n    for (int j = 0; j < t; j++) c[i\
-    \ + j] += a[i] * b[j];\n  }\n  return c;\n}\n\ntemplate <typename T>\nvoid add(vector<T>&\
-    \ a, const vector<T>& b) {\n  if (a.size() < b.size()) a.resize(b.size());\n \
-    \ for (int i = 0; i < (int)b.size(); i++) a[i] += b[i];\n}\ntemplate <typename\
-    \ T>\nvoid sub(vector<T>& a, const vector<T>& b) {\n  if (a.size() < b.size())\
-    \ a.resize(b.size());\n  for (int i = 0; i < (int)b.size(); i++) a[i] -= b[i];\n\
-    }\n\ntemplate <typename T>\nvector<T> karatsuba(const vector<T>& a, const vector<T>&\
-    \ b) {\n  if (a.empty() and b.empty()) return {};\n  if (a.size() < b.size())\
-    \ return karatsuba(b, a);\n  if (a.size() < 32) return naive(a, b);\n  int d =\
-    \ a.size() / 2;\n  vector<T> al{begin(a), begin(a) + d}, au{begin(a) + d, end(a)};\n\
-    \  if ((int)b.size() < d + 10) {\n    auto cl = karatsuba(al, b);\n    auto cu\
-    \ = karatsuba(au, b);\n    vector<T> c(a.size() + b.size() - 1);\n    for (int\
-    \ i = 0; i < (int)cl.size(); i++) c[i] = cl[i];\n    for (int i = 0; i < (int)cu.size();\
-    \ i++) c[i + d] += cu[i];\n    return c;\n  }\n  vector<T> bl{begin(b), begin(b)\
-    \ + d}, bu{begin(b) + d, end(b)};\n  vector<T> alu{al}, blu{bl};\n  add(alu, au),\
-    \ add(blu, bu);\n  auto cll = karatsuba(al, bl);\n  auto cuu = karatsuba(au, bu);\n\
-    \  auto clu = karatsuba(alu, blu);\n  sub(clu, cll), sub(clu, cuu);\n  vector<T>\
-    \ c(d);\n  copy(begin(clu), end(clu), back_inserter(c));\n  c.resize(a.size()\
-    \ + b.size() - 1);\n  add(c, cll);\n  for (int i = 0; i < (int)cuu.size(); i++)\
-    \ c[i + 2 * d] += cuu[i];\n  c.resize(a.size() + b.size() - 1);\n  return c;\n\
-    }\n\n}  // namespace KaratsubaImpl\nusing KaratsubaImpl::karatsuba;\n#line 9 \"\
-    verify/verify-unit-test/karatsuba.test.cpp\"\n\nusing namespace Nyaan;\n\ntemplate\
-    \ <typename T>\nvector<T> naive(vector<T>& a, vector<T>& b) {\n  vector<T> c(a.size()\
-    \ + b.size() - 1);\n  rep(i, sz(a)) rep(j, sz(b)) c[i + j] += a[i] * b[j];\n \
-    \ return c;\n}\n\ntemplate <typename T>\nvoid test() {\n  int mx = 500;\n  rep(_,\
-    \ 100) {\n    int s = randint(1, mx);\n    int t = randint(1, mx);\n    vector<T>\
-    \ a(s), b(t);\n    each(x, a) x = rng();\n    each(x, b) x = rng();\n    auto\
-    \ c = karatsuba(a, b);\n    auto d = naive(a, b);\n    assert(c == d);\n  }\n\
-    \  cerr << \"OK\" << endl;\n}\n\nvoid Nyaan::solve() {\n  test<LazyMontgomeryModInt<998244353>>();\n\
-    \  test<Nimber64>();\n  test<Nimber32>();\n  test<Nimber16>();\n  test<uint32_t>();\n\
-    \  test<uint64_t>();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
-    }\n"
+    \ * @docs docs/math/nimber.md\n */\n#line 2 \"math/sweep.hpp\"\n\ntemplate <typename\
+    \ T>\nstruct Sweep {\n  using P = pair<T, unordered_set<int>>;\n  vector<P> basis;\n\
+    \  int num;\n\n  Sweep() : num(0) {}\n  Sweep(const vector<T>& v) : num(0) {\n\
+    \    for (auto& x : v) add(x, num++);\n  }\n\n  void apply(P& p, const P& o) {\n\
+    \    p.first ^= o.first;\n    for (auto& x : o.second) apply(p.second, x);\n \
+    \ }\n  void apply(unordered_set<int>& s, int x) {\n    if (s.count(x)) {\n   \
+    \   s.erase(x);\n    } else {\n      s.insert(x);\n    }\n  }\n\n  void add(T\
+    \ x, int id) {\n    P v{x, {id}};\n    for (P& b : basis) {\n      if (v.first\
+    \ > (v.first ^ b.first)) apply(v, b);\n    }\n    if (v.first != T{}) basis.push_back(v);\n\
+    \  }\n\n  pair<bool, vector<int>> restore(T x) {\n    P v{x, {}};\n    for (P&\
+    \ b : basis) {\n      if (v.first > (v.first ^ b.first)) apply(v, b);\n    }\n\
+    \    if (v.first != T{}) return {false, {}};\n    vector<int> res;\n    for (auto&\
+    \ n : v.second) res.push_back(n);\n    sort(begin(res), end(res));\n    return\
+    \ {true, res};\n  }\n};\n\n/**\n * @brief \u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\
+    \u5143\u4ED8\u304D)\n */\n#line 5 \"math/nimber-to-field.hpp\"\n\ntemplate <typename\
+    \ N>\nstruct NimberToField {\n  using uint = decltype(N::x);\n  static constexpr\
+    \ int S = sizeof(uint) * 8;\n  vector<uint> ftn, ntf;\n  NimberToField(N proot)\
+    \ {\n    ftn.resize(S);\n    N cur = 1;\n    for (int i = 0; i < S; i++) {\n \
+    \     ftn[i] = cur.x;\n      cur *= proot;\n    }\n    Sweep sweep{ftn};\n   \
+    \ ntf.resize(S);\n    for (int i = 0; i < S; i++) {\n      auto ans = sweep.restore(1\
+    \ << i);\n      uint bit{};\n      for (auto& x : ans.second) bit ^= uint{1} <<\
+    \ x;\n      ntf[i] = bit;\n    }\n  }\n  uint nimber2field(N n) {\n    uint res\
+    \ = 0, x = n.x;\n    for (; x; x &= x - 1) res ^= ntf[__builtin_ctzll(x)];\n \
+    \   return res;\n  }\n  N field2nimber(uint x) {\n    uint res = 0;\n    for (;\
+    \ x; x &= x - 1) res ^= ftn[__builtin_ctzll(x)];\n    return res;\n  }\n};\n\n\
+    /**\n * @brief Nimber <-> \u591A\u9805\u5F0F\u74B0\n */\n#line 8 \"verify/verify-unit-test/nimber-to-field.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  using nim = Nimber16;\n\
+    \  using u16 = uint16_t;\n  nim proot = NimberImpl::c16.proot;\n  vector<u16>\
+    \ ntf{0x0001u, 0x8ff5u, 0x6cbfu, 0xa5beu, 0x761au, 0x8238u,\n                \
+    \  0x4f08u, 0x95acu, 0xf340u, 0x1336u, 0x7d5eu, 0x86e7u,\n                  0x3a47u,\
+    \ 0xe796u, 0xb7c3u, 0x0008u};\n  NimberToField<nim> mp(proot);\n  rep(i, 16) {\n\
+    \    assert(ntf[i] == mp.nimber2field(1 << i));\n    assert(mp.field2nimber(1\
+    \ << i) == proot.pow(i));\n  }\n  nim p16 = proot.pow(16);\n  u16 f16 = mp.nimber2field(p16);\n\
+    \  unsigned ppoly = (unsigned(1) << 16) ^ f16;\n  assert(ppoly == NimberImpl::c16.ppoly);\n\
+    \n  {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b << endl;\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
-    \ \"../../template/template.hpp\"\n//\n#include \"../../math/nimber.hpp\"\n#include\
-    \ \"../../misc/rng.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\n#include\
-    \ \"../../ntt/karatsuba.hpp\"\n\nusing namespace Nyaan;\n\ntemplate <typename\
-    \ T>\nvector<T> naive(vector<T>& a, vector<T>& b) {\n  vector<T> c(a.size() +\
-    \ b.size() - 1);\n  rep(i, sz(a)) rep(j, sz(b)) c[i + j] += a[i] * b[j];\n  return\
-    \ c;\n}\n\ntemplate <typename T>\nvoid test() {\n  int mx = 500;\n  rep(_, 100)\
-    \ {\n    int s = randint(1, mx);\n    int t = randint(1, mx);\n    vector<T> a(s),\
-    \ b(t);\n    each(x, a) x = rng();\n    each(x, b) x = rng();\n    auto c = karatsuba(a,\
-    \ b);\n    auto d = naive(a, b);\n    assert(c == d);\n  }\n  cerr << \"OK\" <<\
-    \ endl;\n}\n\nvoid Nyaan::solve() {\n  test<LazyMontgomeryModInt<998244353>>();\n\
-    \  test<Nimber64>();\n  test<Nimber32>();\n  test<Nimber16>();\n  test<uint32_t>();\n\
-    \  test<uint64_t>();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
-    }\n"
+    \ \"../../template/template.hpp\"\n//\n#include \"../../math/nimber-to-field.hpp\"\
+    \n#include \"../../math/nimber.hpp\"\n#include \"../../math/sweep.hpp\"\n\nusing\
+    \ namespace Nyaan;\n\nvoid Nyaan::solve() {\n  using nim = Nimber16;\n  using\
+    \ u16 = uint16_t;\n  nim proot = NimberImpl::c16.proot;\n  vector<u16> ntf{0x0001u,\
+    \ 0x8ff5u, 0x6cbfu, 0xa5beu, 0x761au, 0x8238u,\n                  0x4f08u, 0x95acu,\
+    \ 0xf340u, 0x1336u, 0x7d5eu, 0x86e7u,\n                  0x3a47u, 0xe796u, 0xb7c3u,\
+    \ 0x0008u};\n  NimberToField<nim> mp(proot);\n  rep(i, 16) {\n    assert(ntf[i]\
+    \ == mp.nimber2field(1 << i));\n    assert(mp.field2nimber(1 << i) == proot.pow(i));\n\
+    \  }\n  nim p16 = proot.pow(16);\n  u16 f16 = mp.nimber2field(p16);\n  unsigned\
+    \ ppoly = (unsigned(1) << 16) ^ f16;\n  assert(ppoly == NimberImpl::c16.ppoly);\n\
+    \n  {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b << endl;\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -387,21 +331,20 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
+  - math/nimber-to-field.hpp
   - math/nimber.hpp
   - math/garner.hpp
-  - misc/rng.hpp
-  - modint/montgomery-modint.hpp
-  - ntt/karatsuba.hpp
+  - math/sweep.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/karatsuba.test.cpp
+  path: verify/verify-unit-test/nimber-to-field.test.cpp
   requiredBy: []
   timestamp: '2021-12-23 23:20:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/karatsuba.test.cpp
+documentation_of: verify/verify-unit-test/nimber-to-field.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/karatsuba.test.cpp
-- /verify/verify/verify-unit-test/karatsuba.test.cpp.html
-title: verify/verify-unit-test/karatsuba.test.cpp
+- /verify/verify/verify-unit-test/nimber-to-field.test.cpp
+- /verify/verify/verify-unit-test/nimber-to-field.test.cpp.html
+title: verify/verify-unit-test/nimber-to-field.test.cpp
 ---

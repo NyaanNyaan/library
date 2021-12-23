@@ -373,6 +373,9 @@ data:
       path: math/kth-root-integral.hpp
       title: $\mathrm{floor}(a^{\frac{1}{k}})$
     - icon: ':heavy_check_mark:'
+      path: math/nimber-to-field.hpp
+      title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
+    - icon: ':heavy_check_mark:'
       path: math/nimber.hpp
       title: Nim Product
     - icon: ':heavy_check_mark:'
@@ -390,6 +393,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/sum-of-floor.hpp
       title: math/sum-of-floor.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/sweep.hpp
+      title: "\u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
     - icon: ':heavy_check_mark:'
       path: math/two-sat.hpp
       title: 2-SAT
@@ -1148,6 +1154,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
       title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/nimber-to-field.test.cpp
+      title: verify/verify-unit-test/nimber-to-field.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/nimber.test.cpp
       title: verify/verify-unit-test/nimber.test.cpp

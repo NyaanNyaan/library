@@ -283,6 +283,9 @@ data:
     path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/nimber-to-field.test.cpp
+    title: verify/verify-unit-test/nimber-to-field.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/nimber.test.cpp
     title: verify/verify-unit-test/nimber.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1096,6 +1099,7 @@ data:
   - verify/verify-unit-test/hashset.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/run-length-encoding.test.cpp
+  - verify/verify-unit-test/nimber-to-field.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp

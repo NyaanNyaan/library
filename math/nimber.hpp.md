@@ -4,11 +4,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/garner.hpp
     title: Garner's algorithm
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: math/nimber-to-field.hpp
+    title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/karatsuba.test.cpp
     title: verify/verify-unit-test/karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/nimber-to-field.test.cpp
+    title: verify/verify-unit-test/nimber-to-field.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/nimber.test.cpp
     title: verify/verify-unit-test/nimber.test.cpp
@@ -57,10 +63,10 @@ data:
     \ = j & (eq - 1);\n          u16 u = dp[iu][ju], l = dp[il][jl];\n          u16\
     \ ul = dp[iu ^ il][ju ^ jl];\n          u16 uq = dp[u][eq >> 1];\n          dp[i][j]\
     \ = ((ul ^ l) << q) ^ uq ^ l;\n          dp[j][i] = dp[i][j];\n        }\n   \
-    \   }\n    }\n  }\n} constexpr c8;\n\nstruct calc16 {\n private:\n  static constexpr\
-    \ u16 proot = 10279;\n  static constexpr u32 ppoly = 92191;\n  static constexpr\
-    \ int order = 65535;\n\n  u16 base[16], exp[(1 << 18) + 100];\n  int log[1 <<\
-    \ 16];\n\n  constexpr u16 d(u32 x) { return (x << 1) ^ (x < 32768u ? 0 : ppoly);\
+    \   }\n    }\n  }\n} constexpr c8;\n\nstruct calc16 {\n  static constexpr u16\
+    \ proot = 10279;\n  static constexpr u32 ppoly = 92191;\n  static constexpr int\
+    \ order = 65535;\n\n  u16 base[16], exp[(1 << 18) + 100];\n  int log[1 << 16];\n\
+    \n private:\n  constexpr u16 d(u32 x) { return (x << 1) ^ (x < 32768u ? 0 : ppoly);\
     \ }\n\n  constexpr u16 naive(u16 i, u16 j) {\n    if (min(i, j) <= 1u) return\
     \ i * j;\n    u16 q = 8, eq = 1u << 8;\n    u16 iu = i >> q, il = i & (eq - 1);\n\
     \    u16 ju = j >> q, jl = j & (eq - 1);\n    u16 u = c8.dp[iu][ju];\n    u16\
@@ -137,10 +143,10 @@ data:
     \ = j & (eq - 1);\n          u16 u = dp[iu][ju], l = dp[il][jl];\n          u16\
     \ ul = dp[iu ^ il][ju ^ jl];\n          u16 uq = dp[u][eq >> 1];\n          dp[i][j]\
     \ = ((ul ^ l) << q) ^ uq ^ l;\n          dp[j][i] = dp[i][j];\n        }\n   \
-    \   }\n    }\n  }\n} constexpr c8;\n\nstruct calc16 {\n private:\n  static constexpr\
-    \ u16 proot = 10279;\n  static constexpr u32 ppoly = 92191;\n  static constexpr\
-    \ int order = 65535;\n\n  u16 base[16], exp[(1 << 18) + 100];\n  int log[1 <<\
-    \ 16];\n\n  constexpr u16 d(u32 x) { return (x << 1) ^ (x < 32768u ? 0 : ppoly);\
+    \   }\n    }\n  }\n} constexpr c8;\n\nstruct calc16 {\n  static constexpr u16\
+    \ proot = 10279;\n  static constexpr u32 ppoly = 92191;\n  static constexpr int\
+    \ order = 65535;\n\n  u16 base[16], exp[(1 << 18) + 100];\n  int log[1 << 16];\n\
+    \n private:\n  constexpr u16 d(u32 x) { return (x << 1) ^ (x < 32768u ? 0 : ppoly);\
     \ }\n\n  constexpr u16 naive(u16 i, u16 j) {\n    if (min(i, j) <= 1u) return\
     \ i * j;\n    u16 q = 8, eq = 1u << 8;\n    u16 iu = i >> q, il = i & (eq - 1);\n\
     \    u16 ju = j >> q, jl = j & (eq - 1);\n    u16 u = c8.dp[iu][ju];\n    u16\
@@ -209,11 +215,13 @@ data:
   - math/garner.hpp
   isVerificationFile: false
   path: math/nimber.hpp
-  requiredBy: []
-  timestamp: '2021-12-23 18:55:42+09:00'
+  requiredBy:
+  - math/nimber-to-field.hpp
+  timestamp: '2021-12-23 23:20:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/nimber.test.cpp
+  - verify/verify-unit-test/nimber-to-field.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yuki/yuki-1775.test.cpp
