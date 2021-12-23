@@ -361,6 +361,9 @@ data:
       path: math/float-binomial.hpp
       title: math/float-binomial.hpp
     - icon: ':heavy_check_mark:'
+      path: math/garner.hpp
+      title: Garner's algorithm
+    - icon: ':heavy_check_mark:'
       path: math/gray-code.hpp
       title: Gray code
     - icon: ':heavy_check_mark:'
@@ -370,7 +373,7 @@ data:
       path: math/kth-root-integral.hpp
       title: $\mathrm{floor}(a^{\frac{1}{k}})$
     - icon: ':heavy_check_mark:'
-      path: math/nim-product.hpp
+      path: math/nimber.hpp
       title: Nim Product
     - icon: ':heavy_check_mark:'
       path: math/primitive-root.hpp
@@ -1094,6 +1097,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fps.test.cpp
       title: verify/verify-unit-test/fps.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/garner.test.cpp
+      title: verify/verify-unit-test/garner.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/gauss-elimination.test.cpp
       title: verify/verify-unit-test/gauss-elimination.test.cpp

@@ -40,6 +40,9 @@ data:
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/garner.test.cpp
+    title: verify/verify-unit-test/garner.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
   - icon: ':heavy_check_mark:'
@@ -211,6 +214,7 @@ data:
   - verify/verify-unit-test/orderedmap.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/garner.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp

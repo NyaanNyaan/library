@@ -2,7 +2,10 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math/nim-product.hpp
+    path: math/garner.hpp
+    title: Garner's algorithm
+  - icon: ':heavy_check_mark:'
+    path: math/nimber.hpp
     title: Nim Product
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
@@ -172,9 +175,29 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-math/yosupo-nim-product.test.cpp\"\
-    \n//\n#line 2 \"math/nim-product.hpp\"\n\nnamespace NimberImpl {\nusing u16 =\
-    \ uint16_t;\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\nstruct calc8 {\n\
-    \  u16 dp[1 << 8][1 << 8];\n  constexpr calc8() : dp() {\n    dp[0][0] = dp[0][1]\
+    \n//\n#line 2 \"math/nimber.hpp\"\n\n#line 2 \"math/garner.hpp\"\n\n// input \
+    \ : a, M (0 < a < M)\n// output : pair(g, x) s.t. g = gcd(a, M), xa = g (mod M),\
+    \ 0 <= x < b/g\ntemplate <typename uint>\npair<uint, uint> gcd_inv(uint a, uint\
+    \ M) {\n  assert(M != 0 && 0 < a);\n  a %= M;\n  uint b = M, s = 1, t = 0;\n \
+    \ while (true) {\n    if (a == 0) return {b, t + M};\n    t -= b / a * s;\n  \
+    \  b %= a;\n    if (b == 0) return {a, s};\n    s -= a / b * t;\n    a %= b;\n\
+    \  }\n}\n\n// \u5165\u529B : 0 <= rem[i] < mod[i], 1 <= mod[i]\n// \u5B58\u5728\
+    \u3059\u308B\u3068\u304D   : return {rem, mod}\n// \u5B58\u5728\u3057\u306A\u3044\
+    \u3068\u304D : return {0, 0}\ntemplate <typename T, typename U>\npair<unsigned\
+    \ long long, unsigned long long> garner(const vector<T>& rem,\n              \
+    \                                      const vector<U>& mod) {\n  assert(rem.size()\
+    \ == mod.size());\n  using u64 = unsigned long long;\n  u64 r0 = 0, m0 = 1;\n\
+    \  for (int i = 0; i < (int)rem.size(); i++) {\n    assert(1 <= mod[i]);\n   \
+    \ assert(0 <= rem[i] && rem[i] < mod[i]);\n    u64 m1 = mod[i], r1 = rem[i] %\
+    \ m1;\n    if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0 % m1 == 0) {\n\
+    \      if (r0 % m1 != r1) return {0, 0};\n      continue;\n    }\n    u64 g, im;\n\
+    \    tie(g, im) = gcd_inv(m0, m1);\n    u64 y = r0 < r1 ? r1 - r0 : r0 - r1;\n\
+    \    if (y % g != 0) return {0, 0};\n    u64 u1 = m1 / g;\n    y = y / g % u1;\n\
+    \    if (r0 > r1 && y != 0) y = u1 - y;\n    u64 x = y * im % u1;\n    r0 += x\
+    \ * m0;\n    m0 *= u1;\n  }\n  return {r0, m0};\n}\n\n/**\n * @brief Garner's\
+    \ algorithm\n */\n#line 4 \"math/nimber.hpp\"\n\nnamespace NimberImpl {\nusing\
+    \ u16 = uint16_t;\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\nstruct calc8\
+    \ {\n  u16 dp[1 << 8][1 << 8];\n  constexpr calc8() : dp() {\n    dp[0][0] = dp[0][1]\
     \ = dp[1][0] = 0;\n    dp[1][1] = 1;\n    for (int e = 1; e <= 3; e++) {\n   \
     \   int p = 1 << e, q = p >> 1;\n      u16 ep = 1u << p, eq = 1u << q;\n     \
     \ for (u16 i = 0; i < ep; i++) {\n        for (u16 j = i; j < ep; j++) {\n   \
@@ -205,82 +228,103 @@ data:
     \ j) const { return exp[log[i] + log[j]]; }\n\n  // exp[3] = 2^{15} = 32768\n\
     \  constexpr u16 Hprod(u16 i, u16 j) const { return exp[log[i] + log[j] + 3];\
     \ }\n  constexpr u16 H(u16 i) const { return exp[log[i] + 3]; }\n  constexpr u16\
-    \ H2(u16 i) const { return exp[log[i] + 6]; }\n} constexpr c16;\n\nconstexpr u32\
-    \ product32(u32 i, u32 j) {\n  u16 iu = i >> 16, il = i & 65535;\n  u16 ju = j\
-    \ >> 16, jl = j & 65535;\n  u16 l = c16.prod(il, jl);\n  u16 ul = c16.prod(iu\
-    \ ^ il, ju ^ jl);\n  u16 uq = c16.Hprod(iu, ju);\n  return (u32(ul ^ l) << 16)\
-    \ ^ uq ^ l;\n}\n\n// (+ : xor, x : nim product, * : integer product)\n// i x j\n\
-    // = (iu x ju + il x ju + iu x ji) * 2^{16}\n// + (iu x ju x 2^{15}) + il x jl\n\
-    //\n// assign ju = 2^{15}, jl = 0s\n// -> i x j\n// = ((iu + il) x 2^{15}) * 2^{16}\
-    \ + (iu x 2^{15} x 2^{15})\nconstexpr u32 H(u32 i) {\n  u16 iu = i >> 16;\n  u16\
-    \ il = i & 65535;\n  return (u32(c16.H(iu ^ il)) << 16) ^ c16.H2(iu);\n}\n\nconstexpr\
-    \ u64 product64(u64 i, u64 j) {\n  u32 iu = i >> 32, il = i & u32(-1);\n  u32\
-    \ ju = j >> 32, jl = j & u32(-1);\n  u32 l = product32(il, jl);\n  u32 ul = product32(iu\
-    \ ^ il, ju ^ jl);\n  u32 uq = H(product32(iu, ju));\n  return (u64(ul ^ l) <<\
-    \ 32) ^ uq ^ l;\n}\n}  // namespace NimberImpl\n\ntemplate <typename uint, uint\
-    \ (*prod)(uint, uint)>\nstruct NimberBase {\n  using N = NimberBase;\n  uint x;\n\
-    \  NimberBase() : x(0) {}\n  NimberBase(uint _x) : x(_x) {}\n  static N id0()\
-    \ { return {}; }\n  static N id1() { return {1}; }\n\n  N& operator+=(const N&\
-    \ p) {\n    x ^= p.x;\n    return *this;\n  }\n  N& operator-=(const N& p) {\n\
-    \    x ^= p.x;\n    return *this;\n  }\n  N& operator*=(const N& p) {\n    x =\
-    \ prod(x, p.x);\n    return *this;\n  }\n  N operator+(const N& p) const { return\
-    \ x ^ p.x; }\n  N operator-(const N& p) const { return x ^ p.x; }\n  N operator*(const\
-    \ N& p) const { return prod(x, p.x); }\n  bool operator==(const N& p) const {\
-    \ return x == p.x; }\n  bool operator!=(const N& p) const { return x != p.x; }\n\
-    \  friend ostream& operator<<(ostream& os, const N& p) { return os << p.x; }\n\
-    };\n\nusing Nimber32 = NimberBase<uint32_t, NimberImpl::product32>;\nusing Nimber64\
-    \ = NimberBase<uint64_t, NimberImpl::product64>;\n\n/**\n * @brief Nim Product\n\
-    \ * @docs docs/math/nim-product.md\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line\
-    \ 6 \"misc/fastio.hpp\"\n\nusing namespace std;\n\nnamespace fastio {\nstatic\
-    \ constexpr int SZ = 1 << 17;\nchar inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right\
-    \ = 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() :\
-    \ num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for\
-    \ (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n       \
-    \ n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  int\
-    \ len = in_right - in_left;\n  memmove(inbuf, inbuf + in_left, len);\n  in_right\
-    \ = len + fread(inbuf + len, 1, SZ - len, stdin);\n  in_left = 0;\n}\n\ninline\
-    \ void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n  out_right = 0;\n\
-    }\n\ninline void skip_space() {\n  if (in_left + 32 > in_right) load();\n  while\
-    \ (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char& c) {\n  if (in_left\
-    \ + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate <typename T>\n\
-    inline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n  char c;\n  do\
-    \ c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]] bool minus = false;\n\
-    \  if constexpr (is_signed<T>::value == true) {\n    if (c == '-') minus = true,\
-    \ c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 +\
-    \ (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr (is_signed<T>::value\
-    \ == true) {\n    if (minus) x = -x;\n  }\n}\ninline void rd() {}\ntemplate <typename\
-    \ Head, typename... Tail>\ninline void rd(Head& head, Tail&... tail) {\n  rd(head);\n\
-    \  rd(tail...);\n}\n\ninline void wt(char c) {\n  if (out_right > SZ - 32) flush();\n\
-    \  outbuf[out_right++] = c;\n}\ninline void wt(bool b) {\n  if (out_right > SZ\
-    \ - 32) flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void wt(const\
-    \ string &s) {\n  if (out_right + s.size() > SZ - 32) flush();\n  memcpy(outbuf\
-    \ + out_right, s.data(), sizeof(char) * s.size());\n  out_right += s.size();\n\
-    }\ntemplate <typename T>\ninline void wt(T x) {\n  if (out_right > SZ - 32) flush();\n\
-    \  if (!x) {\n    outbuf[out_right++] = '0';\n    return;\n  }\n  if constexpr\
-    \ (is_signed<T>::value == true) {\n    if (x < 0) outbuf[out_right++] = '-', x\
-    \ = -x;\n  }\n  int i = 12;\n  char buf[16];\n  while (x >= 10000) {\n    memcpy(buf\
-    \ + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n    i -= 4;\n  }\n  if\
-    \ (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] = '0' + x;\n      ++out_right;\n\
-    \    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n      uint32_t r\
-    \ = uint32_t(x) - q * 10;\n      outbuf[out_right] = '0' + q;\n      outbuf[out_right\
-    \ + 1] = '0' + r;\n      out_right += 2;\n    }\n  } else {\n    if (x < 1000)\
-    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2) + 1, 3);\n      out_right\
-    \ += 3;\n    } else {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n\
-    \      out_right += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4,\
-    \ 12 - i);\n  out_right += 12 - i;\n}\ninline void wt() {}\ntemplate <typename\
-    \ Head, typename... Tail>\ninline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n\
-    \  wt(forward<Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(Args&&...\
-    \ x) {\n  wt(forward<Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy()\
-    \ { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 7 \"verify/verify-yosupo-math/yosupo-nim-product.test.cpp\"\
+    \ H2(u16 i) const { return exp[log[i] + 6]; }\n} constexpr c16;\n\nu16 product16(u16\
+    \ i, u16 j) { return c16.prod(i, j); }\n\nconstexpr u32 product32(u32 i, u32 j)\
+    \ {\n  u16 iu = i >> 16, il = i & 65535;\n  u16 ju = j >> 16, jl = j & 65535;\n\
+    \  u16 l = c16.prod(il, jl);\n  u16 ul = c16.prod(iu ^ il, ju ^ jl);\n  u16 uq\
+    \ = c16.Hprod(iu, ju);\n  return (u32(ul ^ l) << 16) ^ uq ^ l;\n}\n\n// (+ : xor,\
+    \ x : nim product, * : integer product)\n// i x j\n// = (iu x ju + il x ju + iu\
+    \ x ji) * 2^{16}\n// + (iu x ju x 2^{15}) + il x jl\n// (assign ju = 2^{15}, jl\
+    \ = 0)\n// = ((iu + il) x 2^{15}) * 2^{16} + (iu x 2^{15} x 2^{15})\nconstexpr\
+    \ u32 H(u32 i) {\n  u16 iu = i >> 16;\n  u16 il = i & 65535;\n  return (u32(c16.H(iu\
+    \ ^ il)) << 16) ^ c16.H2(iu);\n}\n\nconstexpr u64 product64(u64 i, u64 j) {\n\
+    \  u32 iu = i >> 32, il = i & u32(-1);\n  u32 ju = j >> 32, jl = j & u32(-1);\n\
+    \  u32 l = product32(il, jl);\n  u32 ul = product32(iu ^ il, ju ^ jl);\n  u32\
+    \ uq = H(product32(iu, ju));\n  return (u64(ul ^ l) << 32) ^ uq ^ l;\n}\n}  //\
+    \ namespace NimberImpl\n\ntemplate <typename uint, uint (*prod)(uint, uint)>\n\
+    struct NimberBase {\n  using N = NimberBase;\n  uint x;\n  NimberBase() : x(0)\
+    \ {}\n  NimberBase(uint _x) : x(_x) {}\n  static N id0() { return {}; }\n  static\
+    \ N id1() { return {1}; }\n\n  N& operator+=(const N& p) {\n    x ^= p.x;\n  \
+    \  return *this;\n  }\n  N& operator-=(const N& p) {\n    x ^= p.x;\n    return\
+    \ *this;\n  }\n  N& operator*=(const N& p) {\n    x = prod(x, p.x);\n    return\
+    \ *this;\n  }\n  N operator+(const N& p) const { return x ^ p.x; }\n  N operator-(const\
+    \ N& p) const { return x ^ p.x; }\n  N operator*(const N& p) const { return prod(x,\
+    \ p.x); }\n  bool operator==(const N& p) const { return x == p.x; }\n  bool operator!=(const\
+    \ N& p) const { return x != p.x; }\n  N pow(uint64_t n) const {\n    N a = *this,\
+    \ r = 1;\n    for (; n; a *= a, n >>= 1)\n      if (n & 1) r *= a;\n    return\
+    \ r;\n  }\n  friend ostream& operator<<(ostream& os, const N& p) { return os <<\
+    \ p.x; }\n\n  // calculate log_a (b)\n  uint discrete_logarithm(N y) const {\n\
+    \    assert(x != 0 && y != 0);\n    vector<uint> rem, mod;\n    for (uint p :\
+    \ {3, 5, 17, 257, 641, 65537, 6700417}) {\n      if (uint(-1) % p) continue;\n\
+    \      uint q = uint(-1) / p;\n      uint STEP = 1;\n      while (4 * STEP * STEP\
+    \ < p) STEP *= 2;\n      // a^m = z \u3092\u6E80\u305F\u3059 1 \u4EE5\u4E0A\u306E\
+    \u6574\u6570 m \u3092\u8FD4\u3059\n      auto inside = [&](N a, N z) -> uint {\n\
+    \        unordered_map<uint, int> mp;\n        N big = 1, now = 1;  // x^m\n \
+    \       for (int i = 0; i < int(STEP); i++) {\n          mp[z.x] = i, z *= a,\
+    \ big *= a;\n        }\n        for (int step = 0; step < int(p + 10); step +=\
+    \ STEP) {\n          now *= big;\n          if (mp.find(now.x) != mp.end()) return\
+    \ (step + STEP) - mp[now.x];\n        }\n        return uint(-1);\n      };\n\
+    \      N xq = (*this).pow(q), yq = y.pow(q);\n      if (xq == 1 and yq == 1) continue;\n\
+    \      if (xq == 1 and yq != 1) return uint(-1);\n      uint res = inside(xq,\
+    \ yq);\n      if (res == uint(-1)) return uint(-1);\n      rem.push_back(res %\
+    \ p);\n      mod.push_back(p);\n    }\n    return garner(rem, mod).first;\n  }\n\
+    \n  uint is_primitive_root() const {\n    if (x == 0) return false;\n    for (uint\
+    \ p : {3, 5, 17, 257, 641, 65537, 6700417}) {\n      if (uint(-1) % p != 0) continue;\n\
+    \      if ((*this).pow(uint(-1) / p) == 1) return false;\n    }\n    return true;\n\
+    \  }\n};\n\nusing Nimber16 = NimberBase<uint16_t, NimberImpl::product16>;\nusing\
+    \ Nimber32 = NimberBase<uint32_t, NimberImpl::product32>;\nusing Nimber64 = NimberBase<uint64_t,\
+    \ NimberImpl::product64>;\nusing Nimber = Nimber64;\n\n/**\n * @brief Nim Product\n\
+    \ * @docs docs/math/nimber.md\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"\
+    misc/fastio.hpp\"\n\nusing namespace std;\n\nnamespace fastio {\nstatic constexpr\
+    \ int SZ = 1 << 17;\nchar inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right =\
+    \ 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
+    \ {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j\
+    \ = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n\
+    \      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  int len = in_right\
+    \ - in_left;\n  memmove(inbuf, inbuf + in_left, len);\n  in_right = len + fread(inbuf\
+    \ + len, 1, SZ - len, stdin);\n  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf,\
+    \ 1, out_right, stdout);\n  out_right = 0;\n}\n\ninline void skip_space() {\n\
+    \  if (in_left + 32 > in_right) load();\n  while (inbuf[in_left] <= ' ') in_left++;\n\
+    }\n\ninline void rd(char& c) {\n  if (in_left + 32 > in_right) load();\n  c =\
+    \ inbuf[in_left++];\n}\ntemplate <typename T>\ninline void rd(T& x) {\n  if (in_left\
+    \ + 32 > in_right) load();\n  char c;\n  do c = inbuf[in_left++];\n  while (c\
+    \ < '-');\n  [[maybe_unused]] bool minus = false;\n  if constexpr (is_signed<T>::value\
+    \ == true) {\n    if (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x\
+    \ = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n\
+    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (minus) x = -x;\n\
+    \  }\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline\
+    \ void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline\
+    \ void wt(char c) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
+    \ = c;\n}\ninline void wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
+    \ = b ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
+    \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
+    \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
+    \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
+    \    return;\n  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x <\
+    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n\
+    \  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n\
+    \    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n    \
+    \  outbuf[out_right] = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t\
+    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
+    \     outbuf[out_right] = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n \
+    \     out_right += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2) + 1, 3);\n      out_right += 3;\n    } else\
+    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n      out_right\
+    \ += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4, 12 - i);\n  out_right\
+    \ += 12 - i;\n}\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n\
+    }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
+    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
+    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
+    using fastio::wtn;\n#line 7 \"verify/verify-yosupo-math/yosupo-nim-product.test.cpp\"\
     \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  int T;\n  rd(T);\n  rep(i,\
     \ T) {\n    uint64_t a, b;\n    rd(a, b);\n    wtn(NimberImpl::product64(a, b));\n\
     \  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/nim_product_64\"\n\n#include\
-    \ \"../../template/template.hpp\"\n//\n#include \"../../math/nim-product.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n\nusing namespace Nyaan;\nvoid Nyaan::solve()\
-    \ {\n  int T;\n  rd(T);\n  rep(i, T) {\n    uint64_t a, b;\n    rd(a, b);\n  \
-    \  wtn(NimberImpl::product64(a, b));\n  }\n}\n"
+    \ \"../../template/template.hpp\"\n//\n#include \"../../math/nimber.hpp\"\n#include\
+    \ \"../../misc/fastio.hpp\"\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n\
+    \  int T;\n  rd(T);\n  rep(i, T) {\n    uint64_t a, b;\n    rd(a, b);\n    wtn(NimberImpl::product64(a,\
+    \ b));\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -288,12 +332,13 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - math/nim-product.hpp
+  - math/nimber.hpp
+  - math/garner.hpp
   - misc/fastio.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   requiredBy: []
-  timestamp: '2021-12-21 23:20:54+09:00'
+  timestamp: '2021-12-23 18:55:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-nim-product.test.cpp

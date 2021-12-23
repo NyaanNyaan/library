@@ -5,9 +5,6 @@ data:
     path: math/garner.hpp
     title: Garner's algorithm
   - icon: ':heavy_check_mark:'
-    path: math/nimber.hpp
-    title: Nim Product
-  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
@@ -38,7 +35,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/nimber.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"verify/verify-unit-test/garner.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
@@ -174,13 +171,111 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/nimber.test.cpp\"\
-    \n//\n#line 2 \"math/nimber.hpp\"\n\n#line 2 \"math/garner.hpp\"\n\n// input \
-    \ : a, M (0 < a < M)\n// output : pair(g, x) s.t. g = gcd(a, M), xa = g (mod M),\
-    \ 0 <= x < b/g\ntemplate <typename uint>\npair<uint, uint> gcd_inv(uint a, uint\
-    \ M) {\n  assert(M != 0 && 0 < a);\n  a %= M;\n  uint b = M, s = 1, t = 0;\n \
-    \ while (true) {\n    if (a == 0) return {b, t + M};\n    t -= b / a * s;\n  \
-    \  b %= a;\n    if (b == 0) return {a, s};\n    s -= a / b * t;\n    a %= b;\n\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/garner.test.cpp\"\
+    \n//\n#line 1 \"atcoder/math.hpp\"\n\n\n\n#line 8 \"atcoder/math.hpp\"\n\n#line\
+    \ 1 \"atcoder/internal_math.hpp\"\n\n\n\n#line 5 \"atcoder/internal_math.hpp\"\
+    \n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace\
+    \ internal {\n\n// @param m `1 <= m`\n// @return x mod m\nconstexpr long long\
+    \ safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n\
+    \    return x;\n}\n\n// Fast modular multiplication by barrett reduction\n// Reference:\
+    \ https://en.wikipedia.org/wiki/Barrett_reduction\n// NOTE: reconsider after Ice\
+    \ Lake\nstruct barrett {\n    unsigned int _m;\n    unsigned long long im;\n\n\
+    \    // @param m `1 <= m < 2^31`\n    barrett(unsigned int m) : _m(m), im((unsigned\
+    \ long long)(-1) / m + 1) {}\n\n    // @return m\n    unsigned int umod() const\
+    \ { return _m; }\n\n    // @param a `0 <= a < m`\n    // @param b `0 <= b < m`\n\
+    \    // @return `a * b % m`\n    unsigned int mul(unsigned int a, unsigned int\
+    \ b) const {\n        // [1] m = 1\n        // a = b = im = 0, so okay\n\n   \
+    \     // [2] m >= 2\n        // im = ceil(2^64 / m)\n        // -> im * m = 2^64\
+    \ + r (0 <= r < m)\n        // let z = a*b = c*m + d (0 <= c, d < m)\n       \
+    \ // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64 + c*r + d*im\n     \
+    \   // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64 + m * (m + 1) <\
+    \ 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n        unsigned long\
+    \ long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned long long x;\n\
+    \        _umul128(z, im, &x);\n#else\n        unsigned long long x =\n       \
+    \     (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n#endif\n     \
+    \   unsigned int v = (unsigned int)(z - x * _m);\n        if (_m <= v) v += _m;\n\
+    \        return v;\n    }\n};\n\n// @param n `0 <= n`\n// @param m `1 <= m`\n\
+    // @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long long x,\
+    \ long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
+    \ int)(m);\n    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x,\
+    \ m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y *\
+    \ y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n// M.\
+    \ Forisek and J. Jancina,\n// Fast Primality Testing for Integers That Fit into\
+    \ a Machine Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int\
+    \ n) {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
+    \ true;\n    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while\
+    \ (d % 2 == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for\
+    \ (long long a : bases) {\n        long long t = d;\n        long long y = pow_mod_constexpr(a,\
+    \ t, n);\n        while (t != n - 1 && y != 1 && y != n - 1) {\n            y\
+    \ = y * y % n;\n            t <<= 1;\n        }\n        if (y != n - 1 && t %\
+    \ 2 == 0) {\n            return false;\n        }\n    }\n    return true;\n}\n\
+    template <int n> constexpr bool is_prime = is_prime_constexpr(n);\n\n// @param\
+    \ b `1 <= b`\n// @return pair(g, x) s.t. g = gcd(a, b), xa = g (mod b), 0 <= x\
+    \ < b/g\nconstexpr std::pair<long long, long long> inv_gcd(long long a, long long\
+    \ b) {\n    a = safe_mod(a, b);\n    if (a == 0) return {b, 0};\n\n    // Contracts:\n\
+    \    // [1] s - m0 * a = 0 (mod b)\n    // [2] t - m1 * a = 0 (mod b)\n    //\
+    \ [3] s * |m1| + t * |m0| <= b\n    long long s = b, t = a;\n    long long m0\
+    \ = 0, m1 = 1;\n\n    while (t) {\n        long long u = s / t;\n        s -=\
+    \ t * u;\n        m0 -= m1 * u;  // |m1 * u| <= |m1| * s <= b\n\n        // [3]:\n\
+    \        // (s - t * u) * |m1| + t * |m0 - m1 * u|\n        // <= s * |m1| - t\
+    \ * u * |m1| + t * (|m0| + |m1| * u)\n        // = s * |m1| + t * |m0| <= b\n\n\
+    \        auto tmp = s;\n        s = t;\n        t = tmp;\n        tmp = m0;\n\
+    \        m0 = m1;\n        m1 = tmp;\n    }\n    // by [3]: |m0| <= b/g\n    //\
+    \ by g != b: |m0| < b/g\n    if (m0 < 0) m0 += b / s;\n    return {s, m0};\n}\n\
+    \n// Compile time primitive root\n// @param m must be prime\n// @return primitive\
+    \ root (and minimum in now)\nconstexpr int primitive_root_constexpr(int m) {\n\
+    \    if (m == 2) return 1;\n    if (m == 167772161) return 3;\n    if (m == 469762049)\
+    \ return 3;\n    if (m == 754974721) return 11;\n    if (m == 998244353) return\
+    \ 3;\n    int divs[20] = {};\n    divs[0] = 2;\n    int cnt = 1;\n    int x =\
+    \ (m - 1) / 2;\n    while (x % 2 == 0) x /= 2;\n    for (int i = 3; (long long)(i)*i\
+    \ <= x; i += 2) {\n        if (x % i == 0) {\n            divs[cnt++] = i;\n \
+    \           while (x % i == 0) {\n                x /= i;\n            }\n   \
+    \     }\n    }\n    if (x > 1) {\n        divs[cnt++] = x;\n    }\n    for (int\
+    \ g = 2;; g++) {\n        bool ok = true;\n        for (int i = 0; i < cnt; i++)\
+    \ {\n            if (pow_mod_constexpr(g, (m - 1) / divs[i], m) == 1) {\n    \
+    \            ok = false;\n                break;\n            }\n        }\n \
+    \       if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int primitive_root\
+    \ = primitive_root_constexpr(m);\n\n}  // namespace internal\n\n}  // namespace\
+    \ atcoder\n\n\n#line 10 \"atcoder/math.hpp\"\n\nnamespace atcoder {\n\nlong long\
+    \ pow_mod(long long x, long long n, int m) {\n    assert(0 <= n && 1 <= m);\n\
+    \    if (m == 1) return 0;\n    internal::barrett bt((unsigned int)(m));\n   \
+    \ unsigned int r = 1, y = (unsigned int)(internal::safe_mod(x, m));\n    while\
+    \ (n) {\n        if (n & 1) r = bt.mul(r, y);\n        y = bt.mul(y, y);\n   \
+    \     n >>= 1;\n    }\n    return r;\n}\n\nlong long inv_mod(long long x, long\
+    \ long m) {\n    assert(1 <= m);\n    auto z = internal::inv_gcd(x, m);\n    assert(z.first\
+    \ == 1);\n    return z.second;\n}\n\n// (rem, mod)\nstd::pair<long long, long\
+    \ long> crt(const std::vector<long long>& r,\n                               \
+    \     const std::vector<long long>& m) {\n    assert(r.size() == m.size());\n\
+    \    int n = int(r.size());\n    // Contracts: 0 <= r0 < m0\n    long long r0\
+    \ = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n        assert(1 <= m[i]);\n\
+    \        long long r1 = internal::safe_mod(r[i], m[i]), m1 = m[i];\n        if\
+    \ (m0 < m1) {\n            std::swap(r0, r1);\n            std::swap(m0, m1);\n\
+    \        }\n        if (m0 % m1 == 0) {\n            if (r0 % m1 != r1) return\
+    \ {0, 0};\n            continue;\n        }\n        // assume: m0 > m1, lcm(m0,\
+    \ m1) >= 2 * max(m0, m1)\n\n        // (r0, m0), (r1, m1) -> (r2, m2 = lcm(m0,\
+    \ m1));\n        // r2 % m0 = r0\n        // r2 % m1 = r1\n        // -> (r0 +\
+    \ x*m0) % m1 = r1\n        // -> x*u0*g % (u1*g) = (r1 - r0) (u0*g = m0, u1*g\
+    \ = m1)\n        // -> x = (r1 - r0) / g * inv(u0) (mod u1)\n\n        // im =\
+    \ inv(u0) (mod u1) (0 <= im < u1)\n        long long g, im;\n        std::tie(g,\
+    \ im) = internal::inv_gcd(m0, m1);\n\n        long long u1 = (m1 / g);\n     \
+    \   // |r1 - r0| < (m0 + m1) <= lcm(m0, m1)\n        if ((r1 - r0) % g) return\
+    \ {0, 0};\n\n        // u1 * u1 <= m1 * m1 / g / g <= m0 * m1 / g = lcm(m0, m1)\n\
+    \        long long x = (r1 - r0) / g % u1 * im % u1;\n\n        // |r0| + |m0\
+    \ * x|\n        // < m0 + m0 * (u1 - 1)\n        // = m0 + m0 * m1 / g - m0\n\
+    \        // = lcm(m0, m1)\n        r0 += x * m0;\n        m0 *= u1;  // -> lcm(m0,\
+    \ m1)\n        if (r0 < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\nlong long\
+    \ floor_sum(long long n, long long m, long long a, long long b) {\n    long long\
+    \ ans = 0;\n    if (a >= m) {\n        ans += (n - 1) * n * (a / m) / 2;\n   \
+    \     a %= m;\n    }\n    if (b >= m) {\n        ans += n * (b / m);\n       \
+    \ b %= m;\n    }\n\n    long long y_max = (a * n + b) / m, x_max = (y_max * m\
+    \ - b);\n    if (y_max == 0) return ans;\n    ans += (n - (x_max + a - 1) / a)\
+    \ * y_max;\n    ans += floor_sum(y_max, a, m, (a - x_max % a) % a);\n    return\
+    \ ans;\n}\n\n}  // namespace atcoder\n\n\n#line 2 \"math/garner.hpp\"\n\n// input\
+    \  : a, M (0 < a < M)\n// output : pair(g, x) s.t. g = gcd(a, M), xa = g (mod\
+    \ M), 0 <= x < b/g\ntemplate <typename uint>\npair<uint, uint> gcd_inv(uint a,\
+    \ uint M) {\n  assert(M != 0 && 0 < a);\n  a %= M;\n  uint b = M, s = 1, t = 0;\n\
+    \  while (true) {\n    if (a == 0) return {b, t + M};\n    t -= b / a * s;\n \
+    \   b %= a;\n    if (b == 0) return {a, s};\n    s -= a / b * t;\n    a %= b;\n\
     \  }\n}\n\n// \u5165\u529B : 0 <= rem[i] < mod[i], 1 <= mod[i]\n// \u5B58\u5728\
     \u3059\u308B\u3068\u304D   : return {rem, mod}\n// \u5B58\u5728\u3057\u306A\u3044\
     \u3068\u304D : return {0, 0}\ntemplate <typename T, typename U>\npair<unsigned\
@@ -195,87 +290,8 @@ data:
     \    if (y % g != 0) return {0, 0};\n    u64 u1 = m1 / g;\n    y = y / g % u1;\n\
     \    if (r0 > r1 && y != 0) y = u1 - y;\n    u64 x = y * im % u1;\n    r0 += x\
     \ * m0;\n    m0 *= u1;\n  }\n  return {r0, m0};\n}\n\n/**\n * @brief Garner's\
-    \ algorithm\n */\n#line 4 \"math/nimber.hpp\"\n\nnamespace NimberImpl {\nusing\
-    \ u16 = uint16_t;\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\nstruct calc8\
-    \ {\n  u16 dp[1 << 8][1 << 8];\n  constexpr calc8() : dp() {\n    dp[0][0] = dp[0][1]\
-    \ = dp[1][0] = 0;\n    dp[1][1] = 1;\n    for (int e = 1; e <= 3; e++) {\n   \
-    \   int p = 1 << e, q = p >> 1;\n      u16 ep = 1u << p, eq = 1u << q;\n     \
-    \ for (u16 i = 0; i < ep; i++) {\n        for (u16 j = i; j < ep; j++) {\n   \
-    \       if (i < eq && j < eq) continue;\n          if (min(i, j) <= 1u) {\n  \
-    \          dp[i][j] = dp[j][i] = i * j;\n            continue;\n          }\n\
-    \          u16 iu = i >> q, il = i & (eq - 1);\n          u16 ju = j >> q, jl\
-    \ = j & (eq - 1);\n          u16 u = dp[iu][ju], l = dp[il][jl];\n          u16\
-    \ ul = dp[iu ^ il][ju ^ jl];\n          u16 uq = dp[u][eq >> 1];\n          dp[i][j]\
-    \ = ((ul ^ l) << q) ^ uq ^ l;\n          dp[j][i] = dp[i][j];\n        }\n   \
-    \   }\n    }\n  }\n} constexpr c8;\n\nstruct calc16 {\n private:\n  static constexpr\
-    \ u16 proot = 10279;\n  static constexpr u32 ppoly = 92191;\n  static constexpr\
-    \ int order = 65535;\n\n  u16 base[16], exp[(1 << 18) + 100];\n  int log[1 <<\
-    \ 16];\n\n  constexpr u16 d(u32 x) { return (x << 1) ^ (x < 32768u ? 0 : ppoly);\
-    \ }\n\n  constexpr u16 naive(u16 i, u16 j) {\n    if (min(i, j) <= 1u) return\
-    \ i * j;\n    u16 q = 8, eq = 1u << 8;\n    u16 iu = i >> q, il = i & (eq - 1);\n\
-    \    u16 ju = j >> q, jl = j & (eq - 1);\n    u16 u = c8.dp[iu][ju];\n    u16\
-    \ l = c8.dp[il][jl];\n    u16 ul = c8.dp[iu ^ il][ju ^ jl];\n    u16 uq = c8.dp[u][eq\
-    \ >> 1];\n    return ((ul ^ l) << q) ^ uq ^ l;\n  }\n\n public:\n  constexpr calc16()\
-    \ : base(), exp(), log() {\n    base[0] = 1;\n    for (int i = 1; i < 16; i++)\
-    \ base[i] = naive(base[i - 1], proot);\n    exp[0] = 1;\n    for (int i = 1; i\
-    \ < order; i++) exp[i] = d(exp[i - 1]);\n    u16* pre = exp + order + 1;\n   \
-    \ pre[0] = 0;\n    for (int b = 0; b < 16; b++) {\n      int is = 1 << b, ie =\
-    \ is << 1;\n      for (int i = is; i < ie; i++) pre[i] = pre[i - is] ^ base[b];\n\
-    \    }\n    for (int i = 0; i < order; i++) exp[i] = pre[exp[i]], log[exp[i]]\
-    \ = i;\n\n    int ie = 2 * order + 30;\n    for (int i = order; i < ie; i++) exp[i]\
-    \ = exp[i - order];\n    for (unsigned int i = ie; i < sizeof(exp) / sizeof(u16);\
-    \ i++) exp[i] = 0;\n    log[0] = ie + 1;\n  }\n\n  constexpr u16 prod(u16 i, u16\
-    \ j) const { return exp[log[i] + log[j]]; }\n\n  // exp[3] = 2^{15} = 32768\n\
-    \  constexpr u16 Hprod(u16 i, u16 j) const { return exp[log[i] + log[j] + 3];\
-    \ }\n  constexpr u16 H(u16 i) const { return exp[log[i] + 3]; }\n  constexpr u16\
-    \ H2(u16 i) const { return exp[log[i] + 6]; }\n} constexpr c16;\n\nu16 product16(u16\
-    \ i, u16 j) { return c16.prod(i, j); }\n\nconstexpr u32 product32(u32 i, u32 j)\
-    \ {\n  u16 iu = i >> 16, il = i & 65535;\n  u16 ju = j >> 16, jl = j & 65535;\n\
-    \  u16 l = c16.prod(il, jl);\n  u16 ul = c16.prod(iu ^ il, ju ^ jl);\n  u16 uq\
-    \ = c16.Hprod(iu, ju);\n  return (u32(ul ^ l) << 16) ^ uq ^ l;\n}\n\n// (+ : xor,\
-    \ x : nim product, * : integer product)\n// i x j\n// = (iu x ju + il x ju + iu\
-    \ x ji) * 2^{16}\n// + (iu x ju x 2^{15}) + il x jl\n// (assign ju = 2^{15}, jl\
-    \ = 0)\n// = ((iu + il) x 2^{15}) * 2^{16} + (iu x 2^{15} x 2^{15})\nconstexpr\
-    \ u32 H(u32 i) {\n  u16 iu = i >> 16;\n  u16 il = i & 65535;\n  return (u32(c16.H(iu\
-    \ ^ il)) << 16) ^ c16.H2(iu);\n}\n\nconstexpr u64 product64(u64 i, u64 j) {\n\
-    \  u32 iu = i >> 32, il = i & u32(-1);\n  u32 ju = j >> 32, jl = j & u32(-1);\n\
-    \  u32 l = product32(il, jl);\n  u32 ul = product32(iu ^ il, ju ^ jl);\n  u32\
-    \ uq = H(product32(iu, ju));\n  return (u64(ul ^ l) << 32) ^ uq ^ l;\n}\n}  //\
-    \ namespace NimberImpl\n\ntemplate <typename uint, uint (*prod)(uint, uint)>\n\
-    struct NimberBase {\n  using N = NimberBase;\n  uint x;\n  NimberBase() : x(0)\
-    \ {}\n  NimberBase(uint _x) : x(_x) {}\n  static N id0() { return {}; }\n  static\
-    \ N id1() { return {1}; }\n\n  N& operator+=(const N& p) {\n    x ^= p.x;\n  \
-    \  return *this;\n  }\n  N& operator-=(const N& p) {\n    x ^= p.x;\n    return\
-    \ *this;\n  }\n  N& operator*=(const N& p) {\n    x = prod(x, p.x);\n    return\
-    \ *this;\n  }\n  N operator+(const N& p) const { return x ^ p.x; }\n  N operator-(const\
-    \ N& p) const { return x ^ p.x; }\n  N operator*(const N& p) const { return prod(x,\
-    \ p.x); }\n  bool operator==(const N& p) const { return x == p.x; }\n  bool operator!=(const\
-    \ N& p) const { return x != p.x; }\n  N pow(uint64_t n) const {\n    N a = *this,\
-    \ r = 1;\n    for (; n; a *= a, n >>= 1)\n      if (n & 1) r *= a;\n    return\
-    \ r;\n  }\n  friend ostream& operator<<(ostream& os, const N& p) { return os <<\
-    \ p.x; }\n\n  // calculate log_a (b)\n  uint discrete_logarithm(N y) const {\n\
-    \    assert(x != 0 && y != 0);\n    vector<uint> rem, mod;\n    for (uint p :\
-    \ {3, 5, 17, 257, 641, 65537, 6700417}) {\n      if (uint(-1) % p) continue;\n\
-    \      uint q = uint(-1) / p;\n      uint STEP = 1;\n      while (4 * STEP * STEP\
-    \ < p) STEP *= 2;\n      // a^m = z \u3092\u6E80\u305F\u3059 1 \u4EE5\u4E0A\u306E\
-    \u6574\u6570 m \u3092\u8FD4\u3059\n      auto inside = [&](N a, N z) -> uint {\n\
-    \        unordered_map<uint, int> mp;\n        N big = 1, now = 1;  // x^m\n \
-    \       for (int i = 0; i < int(STEP); i++) {\n          mp[z.x] = i, z *= a,\
-    \ big *= a;\n        }\n        for (int step = 0; step < int(p + 10); step +=\
-    \ STEP) {\n          now *= big;\n          if (mp.find(now.x) != mp.end()) return\
-    \ (step + STEP) - mp[now.x];\n        }\n        return uint(-1);\n      };\n\
-    \      N xq = (*this).pow(q), yq = y.pow(q);\n      if (xq == 1 and yq == 1) continue;\n\
-    \      if (xq == 1 and yq != 1) return uint(-1);\n      uint res = inside(xq,\
-    \ yq);\n      if (res == uint(-1)) return uint(-1);\n      rem.push_back(res %\
-    \ p);\n      mod.push_back(p);\n    }\n    return garner(rem, mod).first;\n  }\n\
-    \n  uint is_primitive_root() const {\n    if (x == 0) return false;\n    for (uint\
-    \ p : {3, 5, 17, 257, 641, 65537, 6700417}) {\n      if (uint(-1) % p != 0) continue;\n\
-    \      if ((*this).pow(uint(-1) / p) == 1) return false;\n    }\n    return true;\n\
-    \  }\n};\n\nusing Nimber16 = NimberBase<uint16_t, NimberImpl::product16>;\nusing\
-    \ Nimber32 = NimberBase<uint32_t, NimberImpl::product32>;\nusing Nimber64 = NimberBase<uint64_t,\
-    \ NimberImpl::product64>;\nusing Nimber = Nimber64;\n\n/**\n * @brief Nim Product\n\
-    \ * @docs docs/math/nimber.md\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand\
-    \ {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ algorithm\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64\
+    \ - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
     \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
     \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
     \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
@@ -291,62 +307,58 @@ data:
     \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
     \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
     using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 7 \"verify/verify-unit-test/nimber.test.cpp\"\n\n// \u53E4\u3044\u5B9F\u88C5\
-    \nnamespace nimber {\nusing u64 = uint64_t;\n\nu64 calc(u64, u64, int p, int pre);\n\
-    \nstruct Precalc {\n  u64 dp[256][256];\n  Precalc() {\n    for (int i = 0; i\
-    \ < 256; i++)\n      for (int j = 0; j <= i; j++) {\n        dp[i][j] = dp[j][i]\
-    \ = calc(i, j, 8, true);\n      }\n  }\n\n} precalc;\n\nu64 calc(u64 a, u64 b,\
-    \ int p = 64, int pre = false) {\n  if (min(a, b) <= 1) return a * b;\n  while\
-    \ (max(a, b) < 1ull << (p >> 1)) p >>= 1;\n  if (!pre && p <= 8) return precalc.dp[a][b];\n\
-    \  p >>= 1;\n  u64 a1 = a >> p, a2 = a & ((1ull << p) - 1);\n  u64 b1 = b >> p,\
-    \ b2 = b & ((1ull << p) - 1);\n  u64 c = calc(a1, b1, p, pre);\n  u64 d = calc(a2,\
-    \ b2, p, pre);\n  u64 e = calc(a1 ^ a2, b1 ^ b2, p, pre);\n  return calc(c, 1ull\
-    \ << (p - 1), p, pre) ^ d ^ ((d ^ e) << p);\n}\n\nu64 nim_product(u64 a, u64 b)\
-    \ { return calc(a, b); }\n\n}  // namespace nimber\nusing nimber::nim_product;\n\
-    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  using namespace NimberImpl;\n\
-    \n  rep(i, 256) rep(j, 256) {\n    auto x1 = nim_product(i, j);\n    auto x2 =\
-    \ c8.dp[i][j];\n    auto x3 = c16.prod(i, j);\n    auto x4 = product32(i, j);\n\
-    \    auto x5 = product64(i, j);\n    assert(x1 == x2);\n    assert(x1 == x3);\n\
-    \    assert(x1 == x4);\n    assert(x1 == x5);\n  }\n  cerr << \"256 OK\" << endl;\n\
-    \n  rep(t, TEN(6)) {\n    u16 i = rng();\n    u16 j = rng();\n    auto x1 = nim_product(i,\
-    \ j);\n    auto x3 = c16.prod(i, j);\n    auto x4 = product32(i, j);\n    auto\
-    \ x5 = product64(i, j);\n    assert(x1 == x3);\n    assert(x1 == x4);\n    assert(x1\
-    \ == x5);\n  }\n  cerr << \"65536 OK\" << endl;\n\n  rep(t, TEN(6)) {\n    u32\
-    \ i = rng();\n    u32 j = rng();\n    auto x1 = nim_product(i, j);\n    auto x4\
-    \ = product32(i, j);\n    auto x5 = product64(i, j);\n    assert(x1 == x4);\n\
-    \    assert(x1 == x5);\n  }\n  cerr << \"2^32 OK\" << endl;\n\n  rep(t, TEN(6))\
-    \ {\n    u64 i = rng();\n    u64 j = rng();\n    auto x1 = nim_product(i, j);\n\
-    \    auto x5 = product64(i, j);\n    assert(x1 == x5);\n  }\n  cerr << \"2^64\
-    \ OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    #line 8 \"verify/verify-unit-test/garner.test.cpp\"\n\nusing namespace Nyaan;\n\
+    \nvoid Nyaan::solve() {\n  {\n    V<u64> m{3, 5, 17, 257, 65537}, r;\n    each(x,\
+    \ m) r.push_back(x - 1);\n    auto [R, M] = garner(r, m);\n    assert(R + 1 ==\
+    \ M && M == unsigned(-1));\n  }\n  {\n    V<u64> m{3, 5, 17, 257, 65537, 641,\
+    \ 6700417}, r;\n    each(x, m) r.push_back(x - 1);\n    auto [R, M] = garner(r,\
+    \ m);\n    assert(R + 1 == M && M == u64(-1));\n  }\n  {\n    V<u64> base{3, 5,\
+    \ 17, 257, 65537, 641, 6700417};\n    vl bs(128);\n    iota(all(bs), 0);\n   \
+    \ rep(t, 10000) {\n      V<u64> m, r;\n      u64 x = rng();\n      randshf(bs);\n\
+    \      u64 th = rng();\n      u64 l = 1;\n      each(b, bs) {\n        if (b ==\
+    \ 0 or rng() > th) continue;\n        u64 md = 1;\n        rep(j, 7) if (gbit(b,\
+    \ j)) md *= base[j];\n        m.push_back(md);\n        r.push_back(x % md);\n\
+    \        l = lcm(l, md);\n      }\n      if (m.empty()) continue;\n      auto\
+    \ [R, M] = garner(r, m);\n      assert(M != 0 && u64(-1) % M == 0);\n      assert(R\
+    \ == x % M && M == l);\n    }\n  }\n  rep(t, 30030) {\n    vl m{2, 3, 5, 7, 11,\
+    \ 13}, r;\n    each(x, m) r.push_back(t % x);\n    auto [R, M] = garner(r, m);\n\
+    \    assert(int(R) == t and M == 30030);\n  }\n  rep(t, 10000) {\n    vl r, m;\n\
+    \    ll x = randint(1, 2 * TEN(17));\n    reg(y, 2, 42) {\n      r.push_back(x\
+    \ % y);\n      m.push_back(y);\n    }\n    auto [r0, m0] = atcoder::crt(r, m);\n\
+    \    auto [r1, m1] = garner(r, m);\n    assert(r0 == i64(r1));\n    assert(r0\
+    \ == x);\n    assert(m0 == i64(m1));\n  }\n  rep(t, 100000) {\n    vl r, m;\n\
+    \    rep(i, 3) {\n      ll x = randint(1 << 20, 1 << 21);\n      ll y = randint(0,\
+    \ x);\n      r.push_back(y);\n      m.push_back(x);\n    }\n    auto [r0, m0]\
+    \ = atcoder::crt(r, m);\n    auto [r1, m1] = garner(r, m);\n    assert(r0 == i64(r1));\n\
+    \    assert(m0 == i64(m1));\n  }\n  {\n    int a, b;\n    cin >> a >> b;\n   \
+    \ cout << a + b << endl;\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
-    \ \"../../template/template.hpp\"\n//\n#include \"../../math/nimber.hpp\"\n#include\
-    \ \"../../misc/rng.hpp\"\n\n// \u53E4\u3044\u5B9F\u88C5\nnamespace nimber {\n\
-    using u64 = uint64_t;\n\nu64 calc(u64, u64, int p, int pre);\n\nstruct Precalc\
-    \ {\n  u64 dp[256][256];\n  Precalc() {\n    for (int i = 0; i < 256; i++)\n \
-    \     for (int j = 0; j <= i; j++) {\n        dp[i][j] = dp[j][i] = calc(i, j,\
-    \ 8, true);\n      }\n  }\n\n} precalc;\n\nu64 calc(u64 a, u64 b, int p = 64,\
-    \ int pre = false) {\n  if (min(a, b) <= 1) return a * b;\n  while (max(a, b)\
-    \ < 1ull << (p >> 1)) p >>= 1;\n  if (!pre && p <= 8) return precalc.dp[a][b];\n\
-    \  p >>= 1;\n  u64 a1 = a >> p, a2 = a & ((1ull << p) - 1);\n  u64 b1 = b >> p,\
-    \ b2 = b & ((1ull << p) - 1);\n  u64 c = calc(a1, b1, p, pre);\n  u64 d = calc(a2,\
-    \ b2, p, pre);\n  u64 e = calc(a1 ^ a2, b1 ^ b2, p, pre);\n  return calc(c, 1ull\
-    \ << (p - 1), p, pre) ^ d ^ ((d ^ e) << p);\n}\n\nu64 nim_product(u64 a, u64 b)\
-    \ { return calc(a, b); }\n\n}  // namespace nimber\nusing nimber::nim_product;\n\
-    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  using namespace NimberImpl;\n\
-    \n  rep(i, 256) rep(j, 256) {\n    auto x1 = nim_product(i, j);\n    auto x2 =\
-    \ c8.dp[i][j];\n    auto x3 = c16.prod(i, j);\n    auto x4 = product32(i, j);\n\
-    \    auto x5 = product64(i, j);\n    assert(x1 == x2);\n    assert(x1 == x3);\n\
-    \    assert(x1 == x4);\n    assert(x1 == x5);\n  }\n  cerr << \"256 OK\" << endl;\n\
-    \n  rep(t, TEN(6)) {\n    u16 i = rng();\n    u16 j = rng();\n    auto x1 = nim_product(i,\
-    \ j);\n    auto x3 = c16.prod(i, j);\n    auto x4 = product32(i, j);\n    auto\
-    \ x5 = product64(i, j);\n    assert(x1 == x3);\n    assert(x1 == x4);\n    assert(x1\
-    \ == x5);\n  }\n  cerr << \"65536 OK\" << endl;\n\n  rep(t, TEN(6)) {\n    u32\
-    \ i = rng();\n    u32 j = rng();\n    auto x1 = nim_product(i, j);\n    auto x4\
-    \ = product32(i, j);\n    auto x5 = product64(i, j);\n    assert(x1 == x4);\n\
-    \    assert(x1 == x5);\n  }\n  cerr << \"2^32 OK\" << endl;\n\n  rep(t, TEN(6))\
-    \ {\n    u64 i = rng();\n    u64 j = rng();\n    auto x1 = nim_product(i, j);\n\
-    \    auto x5 = product64(i, j);\n    assert(x1 == x5);\n  }\n  cerr << \"2^64\
-    \ OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ \"../../template/template.hpp\"\n//\n#include \"../../atcoder/math.hpp\"\n#include\
+    \ \"../../math/garner.hpp\"\n#include \"../../misc/rng.hpp\"\n\nusing namespace\
+    \ Nyaan;\n\nvoid Nyaan::solve() {\n  {\n    V<u64> m{3, 5, 17, 257, 65537}, r;\n\
+    \    each(x, m) r.push_back(x - 1);\n    auto [R, M] = garner(r, m);\n    assert(R\
+    \ + 1 == M && M == unsigned(-1));\n  }\n  {\n    V<u64> m{3, 5, 17, 257, 65537,\
+    \ 641, 6700417}, r;\n    each(x, m) r.push_back(x - 1);\n    auto [R, M] = garner(r,\
+    \ m);\n    assert(R + 1 == M && M == u64(-1));\n  }\n  {\n    V<u64> base{3, 5,\
+    \ 17, 257, 65537, 641, 6700417};\n    vl bs(128);\n    iota(all(bs), 0);\n   \
+    \ rep(t, 10000) {\n      V<u64> m, r;\n      u64 x = rng();\n      randshf(bs);\n\
+    \      u64 th = rng();\n      u64 l = 1;\n      each(b, bs) {\n        if (b ==\
+    \ 0 or rng() > th) continue;\n        u64 md = 1;\n        rep(j, 7) if (gbit(b,\
+    \ j)) md *= base[j];\n        m.push_back(md);\n        r.push_back(x % md);\n\
+    \        l = lcm(l, md);\n      }\n      if (m.empty()) continue;\n      auto\
+    \ [R, M] = garner(r, m);\n      assert(M != 0 && u64(-1) % M == 0);\n      assert(R\
+    \ == x % M && M == l);\n    }\n  }\n  rep(t, 30030) {\n    vl m{2, 3, 5, 7, 11,\
+    \ 13}, r;\n    each(x, m) r.push_back(t % x);\n    auto [R, M] = garner(r, m);\n\
+    \    assert(int(R) == t and M == 30030);\n  }\n  rep(t, 10000) {\n    vl r, m;\n\
+    \    ll x = randint(1, 2 * TEN(17));\n    reg(y, 2, 42) {\n      r.push_back(x\
+    \ % y);\n      m.push_back(y);\n    }\n    auto [r0, m0] = atcoder::crt(r, m);\n\
+    \    auto [r1, m1] = garner(r, m);\n    assert(r0 == i64(r1));\n    assert(r0\
+    \ == x);\n    assert(m0 == i64(m1));\n  }\n  rep(t, 100000) {\n    vl r, m;\n\
+    \    rep(i, 3) {\n      ll x = randint(1 << 20, 1 << 21);\n      ll y = randint(0,\
+    \ x);\n      r.push_back(y);\n      m.push_back(x);\n    }\n    auto [r0, m0]\
+    \ = atcoder::crt(r, m);\n    auto [r1, m1] = garner(r, m);\n    assert(r0 == i64(r1));\n\
+    \    assert(m0 == i64(m1));\n  }\n  {\n    int a, b;\n    cin >> a >> b;\n   \
+    \ cout << a + b << endl;\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -354,19 +366,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - math/nimber.hpp
   - math/garner.hpp
   - misc/rng.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/nimber.test.cpp
+  path: verify/verify-unit-test/garner.test.cpp
   requiredBy: []
   timestamp: '2021-12-23 18:55:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/nimber.test.cpp
+documentation_of: verify/verify-unit-test/garner.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/nimber.test.cpp
-- /verify/verify/verify-unit-test/nimber.test.cpp.html
-title: verify/verify-unit-test/nimber.test.cpp
+- /verify/verify/verify-unit-test/garner.test.cpp
+- /verify/verify/verify-unit-test/garner.test.cpp.html
+title: verify/verify-unit-test/garner.test.cpp
 ---
