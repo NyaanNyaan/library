@@ -2,7 +2,7 @@
 
 #include "../../template/template.hpp"
 //
-#include "../../math/nim-product.hpp"
+#include "../../math/nimber.hpp"
 #include "../../misc/fastio.hpp"
 
 using namespace Nyaan;

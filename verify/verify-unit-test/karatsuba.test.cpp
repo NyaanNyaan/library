@@ -2,7 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../math/nim-product.hpp"
+#include "../../math/nimber.hpp"
 #include "../../misc/rng.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../ntt/karatsuba.hpp"
@@ -36,6 +36,7 @@ void Nyaan::solve() {
   test<LazyMontgomeryModInt<998244353>>();
   test<Nimber64>();
   test<Nimber32>();
+  test<Nimber16>();
   test<uint32_t>();
   test<uint64_t>();
 
