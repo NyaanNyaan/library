@@ -36,7 +36,6 @@ struct calc8 {
 } constexpr c8;
 
 struct calc16 {
- private:
   static constexpr u16 proot = 10279;
   static constexpr u32 ppoly = 92191;
   static constexpr int order = 65535;
@@ -44,6 +43,7 @@ struct calc16 {
   u16 base[16], exp[(1 << 18) + 100];
   int log[1 << 16];
 
+ private:
   constexpr u16 d(u32 x) { return (x << 1) ^ (x < 32768u ? 0 : ppoly); }
 
   constexpr u16 naive(u16 i, u16 j) {
