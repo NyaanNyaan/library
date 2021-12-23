@@ -1,5 +1,7 @@
 #pragma once
 
+#include "garner.hpp"
+
 namespace NimberImpl {
 using u16 = uint16_t;
 using u32 = uint32_t;
@@ -84,6 +86,8 @@ struct calc16 {
   constexpr u16 H2(u16 i) const { return exp[log[i] + 6]; }
 } constexpr c16;
 
+u16 product16(u16 i, u16 j) { return c16.prod(i, j); }
+
 constexpr u32 product32(u32 i, u32 j) {
   u16 iu = i >> 16, il = i & 65535;
   u16 ju = j >> 16, jl = j & 65535;
@@ -97,9 +101,7 @@ constexpr u32 product32(u32 i, u32 j) {
 // i x j
 // = (iu x ju + il x ju + iu x ji) * 2^{16}
 // + (iu x ju x 2^{15}) + il x jl
-//
-// assign ju = 2^{15}, jl = 0s
-// -> i x j
+// (assign ju = 2^{15}, jl = 0)
 // = ((iu + il) x 2^{15}) * 2^{16} + (iu x 2^{15} x 2^{15})
 constexpr u32 H(u32 i) {
   u16 iu = i >> 16;
@@ -143,13 +145,63 @@ struct NimberBase {
   N operator*(const N& p) const { return prod(x, p.x); }
   bool operator==(const N& p) const { return x == p.x; }
   bool operator!=(const N& p) const { return x != p.x; }
+  N pow(uint64_t n) const {
+    N a = *this, r = 1;
+    for (; n; a *= a, n >>= 1)
+      if (n & 1) r *= a;
+    return r;
+  }
   friend ostream& operator<<(ostream& os, const N& p) { return os << p.x; }
+
+  // calculate log_a (b)
+  uint discrete_logarithm(N y) const {
+    assert(x != 0 && y != 0);
+    vector<uint> rem, mod;
+    for (uint p : {3, 5, 17, 257, 641, 65537, 6700417}) {
+      if (uint(-1) % p) continue;
+      uint q = uint(-1) / p;
+      uint STEP = 1;
+      while (4 * STEP * STEP < p) STEP *= 2;
+      // a^m = z を満たす 1 以上の整数 m を返す
+      auto inside = [&](N a, N z) -> uint {
+        unordered_map<uint, int> mp;
+        N big = 1, now = 1;  // x^m
+        for (int i = 0; i < int(STEP); i++) {
+          mp[z.x] = i, z *= a, big *= a;
+        }
+        for (int step = 0; step < int(p + 10); step += STEP) {
+          now *= big;
+          if (mp.find(now.x) != mp.end()) return (step + STEP) - mp[now.x];
+        }
+        return uint(-1);
+      };
+      N xq = (*this).pow(q), yq = y.pow(q);
+      if (xq == 1 and yq == 1) continue;
+      if (xq == 1 and yq != 1) return uint(-1);
+      uint res = inside(xq, yq);
+      if (res == uint(-1)) return uint(-1);
+      rem.push_back(res % p);
+      mod.push_back(p);
+    }
+    return garner(rem, mod).first;
+  }
+
+  uint is_primitive_root() const {
+    if (x == 0) return false;
+    for (uint p : {3, 5, 17, 257, 641, 65537, 6700417}) {
+      if (uint(-1) % p != 0) continue;
+      if ((*this).pow(uint(-1) / p) == 1) return false;
+    }
+    return true;
+  }
 };
 
+using Nimber16 = NimberBase<uint16_t, NimberImpl::product16>;
 using Nimber32 = NimberBase<uint32_t, NimberImpl::product32>;
 using Nimber64 = NimberBase<uint64_t, NimberImpl::product64>;
+using Nimber = Nimber64;
 
 /**
  * @brief Nim Product
- * @docs docs/math/nim-product.md
+ * @docs docs/math/nimber.md
  */
