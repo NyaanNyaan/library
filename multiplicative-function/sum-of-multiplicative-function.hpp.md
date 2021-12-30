@@ -149,20 +149,24 @@ title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
 
 ## 乗法的関数の和
 
-乗法的関数のprefix sumを $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ で求めるアルゴリズムを実装したライブラリ。
-(ただし、素数 $p$ について $f(p)=g(p)$ を満たす多項式が存在するとする。)
+乗法的関数 $f(p)$ のprefix sum 
+
+$$S(N) = \sum_{i=1}^N f(i)$$
+
+を $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ で求めるアルゴリズムを実装したライブラリ。
+(ただし、素数 $p$ について $f(p)=g(p)$ を満たす多項式 $g(p)$ が存在するとする。)
 
 #### アルゴリズムの概要
 
-前計算として $S(N) = \sum_{i=1}^N f(i)$ を求めるアルゴリズムを以下に説明する。
+前計算として 
 
-まず初めに、$1\leq k\leq N$ に対して
+$$S_p(n) = \sum_{p \leq n | p : \mathrm{prime}} f(i)$$
 
-$$S_p(\left\lfloor \frac{N}{k} \right\rfloor) = \sum_{p\ \mathrm{is}\ \mathrm{prime},1\leq p\leq \left\lfloor \frac{N}{k} \right\rfloor} f(p)$$
+を $n = k, \left\lfloor \frac{N}{k} \right\rfloor$ $(1\leq k\leq N)$ に対して列挙するアルゴリズムを以下に説明する。
 
-を列挙したい。 $p$ が素数の時 $f(p)$ は多項式なので、 $p$ の次数ごとに分解すると $f(N)$ は
+$p$ が素数の時 $f(p)$ は多項式なので、 $p$ の次数ごとに分解すると $f(N)$ は
 
-$$S_c(N) = \sum_{p\ \mathrm{is}\ \mathrm{prime},1\leq p\leq N} p^c$$
+$$S_c(N) = \sum_{p\leq N | p : \mathrm{prime}} p^c$$
 
 の線形和で表すことが出来る。 $S_c(\lfloor \frac{N}{k} \rfloor)$ は[素数カウント](https://nyaannyaan.github.io/library/library/multiplicative-function/prime-counting.hpp.html)のアルゴリズム (いわゆる Lucy DP) を一般的に拡張した方法で高速に求められる。(素数カウントの時に求めた $\pi(n)$ は $c=0$ の時の場合であると言える。)
 
@@ -190,9 +194,9 @@ h(0,n) &= -1 + \sum_{0 \leq m \leq n}m^c
 h(x,n) = \begin{cases} h(x-1,n) & \mathrm{if}\ x\ \mathrm{is}\ \mathrm{not}\  \mathrm{prime}\ \cup\ n < x^2 \\ h(x-1,n) - \lbrace h(x-1,\lfloor\frac{n}{x}\rfloor) - S_c(x-1) \rbrace x^c& \mathrm{otherwise} \end{cases}
 $$
 
-を得る。(なお、 $S_c(x-1)=h(x-1,x-1)$ である。)以上より、素数カウントと同様のアルゴリズムで DP を行うことで $\mathrm{O}(\frac{N^\frac{3}{4}}{\log N})$ で前計算ができる。
+を得る。(なお、 $S_c(x-1)=h(x-1,x-1)$ である。)以上より、素数カウントと同様のアルゴリズムで DP を行うことで $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ で前計算ができる。
 
-以上に説明したアルゴリズムによって $S_p(\left\lfloor \frac{N}{k} \right\rfloor)$ を列挙することが出来た。$S_p(\left\lfloor\frac{N}{k}\right\rfloor)$ から $S(N)$ を求めるアルゴリズムには洲閣篩(Zhouge sieve) や [min_25篩](https://min-25.hatenablog.com/entry/2018/11/11/172216) などが有名だが、ここではBlack Algorithmを用いた解法を説明する。 [参考文献](http://baihacker.github.io/main/2020/The_prefix-sum_of_multiplicative_function_the_black_algorithm.html)
+以上に説明したアルゴリズムによって $S_p(\left\lfloor \frac{N}{k} \right\rfloor)$ を列挙することが出来た。$S_p(\left\lfloor\frac{N}{k}\right\rfloor)$ から $S(N)$ を求めるアルゴリズムには洲閣篩(Zhouge sieve) や [min_25篩](https://min-25.hatenablog.com/entry/2018/11/11/172216) などが知られているが、ここでは Black Algorithm を用いた解法を説明する。 [参考文献](http://baihacker.github.io/main/2020/The_prefix-sum_of_multiplicative_function_the_black_algorithm.html)
 
 まず、以下の条件を満たす $1$ から $N$ の頂点ラベルがついた木を考える。
 - 頂点 $1$ を根とする。
@@ -212,7 +216,7 @@ $$\sum_{i+1\leq j\leq l} f(np_{j})=f(n)\sum_{i+1\leq j\leq l} f(p_{j})=f(n)\left
 
 以上のアルゴリズムを用いれば、$N$ 頂点の木の葉でない頂点を適切な情報をもってDFSすることで高速に $S(N)$ を求めることが出来る。
 
-DFS の計算量は葉でないノードの個数に一致して $\mathrm{O}(\frac{N^{\frac{3}{4}}}{\log N})$ らしい。(参考文献のリンク先に書いてあるが中国語なので読めていない…)
+DFS の計算量は葉でないノードの個数に一致して $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ らしい。(参考文献のリンク先に書いてあるが中国語なので読めていない…) 以上より $S(N)$ を全体で $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ で求めることができた。
 
 関連：[yukicoder No.1322 Totient Bound](https://yukicoder.me/problems/no/1322) $\pi(N)$ の列挙と木上の DFS を使うとかなり見通しよく解くことが出来る。[提出](https://yukicoder.me/submissions/595840)
 
