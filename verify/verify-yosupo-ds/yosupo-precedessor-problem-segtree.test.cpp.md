@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/graph-template.hpp
-    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
     path: segment-tree/segment-tree.hpp
     title: segment-tree/segment-tree.hpp
   - icon: ':heavy_check_mark:'
@@ -25,9 +22,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':heavy_check_mark:'
-    path: tree/heavy-light-decomposition.hpp
-    title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -35,12 +29,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
+    PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
     links:
-    - https://judge.yosupo.jp/problem/vertex_add_subtree_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\n\
-    \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    - https://judge.yosupo.jp/problem/predecessor_problem
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n//\n\
+    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
     \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -174,133 +168,63 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"segment-tree/segment-tree.hpp\"\
-    \n\ntemplate <typename T, typename F>\nstruct SegmentTree {\n  int N;\n  int size;\n\
-    \  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree(F _f, const T &I_)\
-    \ : N(0), size(0), f(_f), I(I_) {}\n\n  SegmentTree(int _N, F _f, const T &I_)\
-    \ : f(_f), I(I_) { init(_N); }\n\n  SegmentTree(const vector<T> &v, F _f, T I_)\
-    \ : f(_f), I(I_) {\n    init(v.size());\n    for (int i = 0; i < (int)v.size();\
-    \ i++) {\n      seg[i + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int\
-    \ _N) {\n    N = _N;\n    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2\
-    \ * size, I);\n  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void\
-    \ build() {\n    for (int k = size - 1; k > 0; k--) {\n      seg[k] = f(seg[2\
-    \ * k], seg[2 * k + 1]);\n    }\n  }\n\n  void update(int k, T x) {\n    k +=\
-    \ size;\n    seg[k] = x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k],\
-    \ seg[2 * k + 1]);\n    }\n  }\n\n  void add(int k, T x) {\n    k += size;\n \
-    \   seg[k] += x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 *\
-    \ k + 1]);\n    }\n  }\n\n  // query to [a, b)\n  T query(int a, int b) {\n  \
-    \  T L = I, R = I;\n    for (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n\
-    \      if (a & 1) L = f(L, seg[a++]);\n      if (b & 1) R = f(seg[--b], R);\n\
-    \    }\n    return f(L, R);\n  }\n\n  T &operator[](const int &k) { return seg[k\
-    \ + size]; }\n\n  // check(a[l] * ...  * a[r-1]) \u304C true \u3068\u306A\u308B\
-    \u6700\u5927\u306E r\n  // (\u53F3\u7AEF\u307E\u3067\u3059\u3079\u3066 true \u306A\
-    \u3089 N \u3092\u8FD4\u3059)\n  template <class C>\n  int max_right(int l, C check)\
-    \ {\n    assert(0 <= l && l <= N);\n    assert(check(I) == true);\n    if (l ==\
-    \ N) return N;\n    l += size;\n    T sm = I;\n    do {\n      while (l % 2 ==\
-    \ 0) l >>= 1;\n      if (!check(f(sm, seg[l]))) {\n        while (l < size) {\n\
-    \          l = (2 * l);\n          if (check(f(sm, seg[l]))) {\n            sm\
-    \ = f(sm, seg[l]);\n            l++;\n          }\n        }\n        return l\
-    \ - size;\n      }\n      sm = f(sm, seg[l]);\n      l++;\n    } while ((l & -l)\
-    \ != l);\n    return N;\n  }\n\n  // check(a[l] * ... * a[r-1]) \u304C true \u3068\
-    \u306A\u308B\u6700\u5C0F\u306E l\n  // (\u5DE6\u7AEF\u307E\u3067 true \u306A\u3089\
-    \ 0 \u3092\u8FD4\u3059)\n  template <typename C>\n  int min_left(int r, C check)\
-    \ {\n    assert(0 <= r && r <= N);\n    assert(check(I) == true);\n    if (r ==\
-    \ 0) return 0;\n    r += size;\n    T sm = I;\n    do {\n      r--;\n      while\
-    \ (r > 1 && (r % 2)) r >>= 1;\n      if (!check(f(seg[r], sm))) {\n        while\
-    \ (r < size) {\n          r = (2 * r + 1);\n          if (check(f(seg[r], sm)))\
-    \ {\n            sm = f(seg[r], sm);\n            r--;\n          }\n        }\n\
-    \        return r + 1 - size;\n      }\n      sm = f(seg[r], sm);\n    } while\
-    \ ((r & -r) != r);\n    return 0;\n  }\n};\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
-    \n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct edge\
-    \ {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to),\
-    \ cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost)\
-    \ {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\
-    \n  operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
-    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
-    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
-    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
-    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
-    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
-    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
-    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
-    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
-    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
-    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
-    \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
-    \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
-    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
-    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
-    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
-    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
-    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
-    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
-    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
-    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
-    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
-    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
-    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
-    \n * @docs docs/graph/graph-template.md\n */\n#line 4 \"tree/heavy-light-decomposition.hpp\"\
-    \n\ntemplate <typename G>\nstruct HeavyLightDecomposition {\n private:\n  void\
-    \ dfs_sz(int cur) {\n    size[cur] = 1;\n    for (auto& dst : g[cur]) {\n    \
-    \  if (dst == par[cur]) {\n        if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n\
-    \          swap(g[cur][0], g[cur][1]);\n        else\n          continue;\n  \
-    \    }\n      depth[dst] = depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n\
-    \      size[cur] += size[dst];\n      if (size[dst] > size[g[cur][0]]) {\n   \
-    \     swap(dst, g[cur][0]);\n      }\n    }\n  }\n\n  void dfs_hld(int cur) {\n\
-    \    down[cur] = id++;\n    for (auto dst : g[cur]) {\n      if (dst == par[cur])\
-    \ continue;\n      nxt[dst] = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));\n\
-    \      dfs_hld(dst);\n    }\n    up[cur] = id;\n  }\n\n  // [u, v)\n  vector<pair<int,\
-    \ int>> ascend(int u, int v) const {\n    vector<pair<int, int>> res;\n    while\
-    \ (nxt[u] != nxt[v]) {\n      res.emplace_back(down[u], down[nxt[u]]);\n     \
-    \ u = par[nxt[u]];\n    }\n    if (u != v) res.emplace_back(down[u], down[v] +\
-    \ 1);\n    return res;\n  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int\
-    \ u, int v) const {\n    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return\
-    \ {{down[u] + 1, down[v]}};\n    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]],\
-    \ down[v]);\n    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int>\
-    \ size, depth, down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root\
-    \ = 0)\n      : g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
-    \ 0),\n        down(g.size(), -1),\n        up(g.size(), -1),\n        nxt(g.size(),\
-    \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
-    \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
-    \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
-    \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
-    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n   \
-    \   int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if (vertex)\
-    \ f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n      int\
-    \ s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n  template\
-    \ <typename F>\n  void path_noncommutative_query(int u, int v, bool vertex, const\
-    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
-    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
-    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
-    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
-    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
-    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
-    \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
-    \ 6 \"verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp\"\n\nusing\
-    \ namespace Nyaan; void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n\
-    \  vvi g(N);\n  rep1(u, N - 1) {\n    ini(v);\n    g[u].push_back(v);\n    g[v].push_back(u);\n\
-    \  }\n\n  HeavyLightDecomposition<vvi> hld(g);\n  auto f = [](ll a, ll b) { return\
-    \ a + b; };\n  SegmentTree<ll, decltype(f)> seg(N, f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first,\
-    \ a[i]); }\n  seg.build();\n\n  ll ans = 0;\n  auto que = [&](int u, int v) {\
-    \ ans += seg.query(u, v); };\n\n  rep(_, Q) {\n    ini(cmd);\n    if (cmd) {\n\
-    \      ini(u);\n      ans = 0;\n      hld.subtree_query(u, true, que);\n     \
-    \ out(ans);\n    } else {\n      inl(k, x);\n      seg.add(hld.idx(k).first, x);\n\
-    \    }\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../segment-tree/segment-tree.hpp\"\
-    \n#include \"../../tree/heavy-light-decomposition.hpp\"\n\nusing namespace Nyaan;\
-    \ void Nyaan::solve() {\n  ini(N, Q);\n  vl a(N);\n  in(a);\n  vvi g(N);\n  rep1(u,\
-    \ N - 1) {\n    ini(v);\n    g[u].push_back(v);\n    g[v].push_back(u);\n  }\n\
-    \n  HeavyLightDecomposition<vvi> hld(g);\n  auto f = [](ll a, ll b) { return a\
-    \ + b; };\n  SegmentTree<ll, decltype(f)> seg(N, f, 0);\n  rep(i, N) { seg.set(hld.idx(i).first,\
-    \ a[i]); }\n  seg.build();\n\n  ll ans = 0;\n  auto que = [&](int u, int v) {\
-    \ ans += seg.query(u, v); };\n\n  rep(_, Q) {\n    ini(cmd);\n    if (cmd) {\n\
-    \      ini(u);\n      ans = 0;\n      hld.subtree_query(u, true, que);\n     \
-    \ out(ans);\n    } else {\n      inl(k, x);\n      seg.add(hld.idx(k).first, x);\n\
-    \    }\n  }\n}"
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp\"\
+    \n//\n#line 2 \"segment-tree/segment-tree.hpp\"\n\ntemplate <typename T, typename\
+    \ F>\nstruct SegmentTree {\n  int N;\n  int size;\n  vector<T> seg;\n  const F\
+    \ f;\n  const T I;\n\n  SegmentTree(F _f, const T &I_) : N(0), size(0), f(_f),\
+    \ I(I_) {}\n\n  SegmentTree(int _N, F _f, const T &I_) : f(_f), I(I_) { init(_N);\
+    \ }\n\n  SegmentTree(const vector<T> &v, F _f, T I_) : f(_f), I(I_) {\n    init(v.size());\n\
+    \    for (int i = 0; i < (int)v.size(); i++) {\n      seg[i + size] = v[i];\n\
+    \    }\n    build();\n  }\n\n  void init(int _N) {\n    N = _N;\n    size = 1;\n\
+    \    while (size < N) size <<= 1;\n    seg.assign(2 * size, I);\n  }\n\n  void\
+    \ set(int k, T x) { seg[k + size] = x; }\n\n  void build() {\n    for (int k =\
+    \ size - 1; k > 0; k--) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n   \
+    \ }\n  }\n\n  void update(int k, T x) {\n    k += size;\n    seg[k] = x;\n   \
+    \ while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\
+    \n  void add(int k, T x) {\n    k += size;\n    seg[k] += x;\n    while (k >>=\
+    \ 1) {\n      seg[k] = f(seg[2 * k], seg[2 * k + 1]);\n    }\n  }\n\n  // query\
+    \ to [a, b)\n  T query(int a, int b) {\n    T L = I, R = I;\n    for (a += size,\
+    \ b += size; a < b; a >>= 1, b >>= 1) {\n      if (a & 1) L = f(L, seg[a++]);\n\
+    \      if (b & 1) R = f(seg[--b], R);\n    }\n    return f(L, R);\n  }\n\n  T\
+    \ &operator[](const int &k) { return seg[k + size]; }\n\n  // check(a[l] * ...\
+    \  * a[r-1]) \u304C true \u3068\u306A\u308B\u6700\u5927\u306E r\n  // (\u53F3\u7AEF\
+    \u307E\u3067\u3059\u3079\u3066 true \u306A\u3089 N \u3092\u8FD4\u3059)\n  template\
+    \ <class C>\n  int max_right(int l, C check) {\n    assert(0 <= l && l <= N);\n\
+    \    assert(check(I) == true);\n    if (l == N) return N;\n    l += size;\n  \
+    \  T sm = I;\n    do {\n      while (l % 2 == 0) l >>= 1;\n      if (!check(f(sm,\
+    \ seg[l]))) {\n        while (l < size) {\n          l = (2 * l);\n          if\
+    \ (check(f(sm, seg[l]))) {\n            sm = f(sm, seg[l]);\n            l++;\n\
+    \          }\n        }\n        return l - size;\n      }\n      sm = f(sm, seg[l]);\n\
+    \      l++;\n    } while ((l & -l) != l);\n    return N;\n  }\n\n  // check(a[l]\
+    \ * ... * a[r-1]) \u304C true \u3068\u306A\u308B\u6700\u5C0F\u306E l\n  // (\u5DE6\
+    \u7AEF\u307E\u3067 true \u306A\u3089 0 \u3092\u8FD4\u3059)\n  template <typename\
+    \ C>\n  int min_left(int r, C check) {\n    assert(0 <= r && r <= N);\n    assert(check(I)\
+    \ == true);\n    if (r == 0) return 0;\n    r += size;\n    T sm = I;\n    do\
+    \ {\n      r--;\n      while (r > 1 && (r % 2)) r >>= 1;\n      if (!check(f(seg[r],\
+    \ sm))) {\n        while (r < size) {\n          r = (2 * r + 1);\n          if\
+    \ (check(f(seg[r], sm))) {\n            sm = f(seg[r], sm);\n            r--;\n\
+    \          }\n        }\n        return r + 1 - size;\n      }\n      sm = f(seg[r],\
+    \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n};\n#line 6 \"verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  inl(N, Q);\n  ins(S);\n \
+    \ using i8 = char;\n  SegmentTree seg(\n      V<i8>(N), [](i8 a, i8 b) { return\
+    \ a | b; }, i8{0});\n  rep(i, N) if (S[i] == '1') seg.set(i, 1);\n  seg.build();\n\
+    \  while (Q--) {\n    inl(c, k);\n    if (c == 0) {\n      seg.update(k, 1);\n\
+    \    } else if (c == 1) {\n      seg.update(k, 0);\n    } else if (c == 2) {\n\
+    \      out(int(seg[k]));\n    } else if (c == 3) {\n      int ans = seg.max_right(k,\
+    \ [](i8 b) { return !b; });\n      if (ans == N) ans = -1;\n      out(ans);\n\
+    \    } else if (c == 4) {\n      int ans = seg.min_left(k + 1, [](i8 b) { return\
+    \ !b; });\n      --ans;\n      out(ans);\n    }\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n\
+    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/segment-tree.hpp\"\
+    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  inl(N, Q);\n  ins(S);\n \
+    \ using i8 = char;\n  SegmentTree seg(\n      V<i8>(N), [](i8 a, i8 b) { return\
+    \ a | b; }, i8{0});\n  rep(i, N) if (S[i] == '1') seg.set(i, 1);\n  seg.build();\n\
+    \  while (Q--) {\n    inl(c, k);\n    if (c == 0) {\n      seg.update(k, 1);\n\
+    \    } else if (c == 1) {\n      seg.update(k, 0);\n    } else if (c == 2) {\n\
+    \      out(int(seg[k]));\n    } else if (c == 3) {\n      int ans = seg.max_right(k,\
+    \ [](i8 b) { return !b; });\n      if (ans == N) ans = -1;\n      out(ans);\n\
+    \    } else if (c == 4) {\n      int ans = seg.min_left(k + 1, [](i8 b) { return\
+    \ !b; });\n      --ans;\n      out(ans);\n    }\n  }\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -309,18 +233,16 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - segment-tree/segment-tree.hpp
-  - tree/heavy-light-decomposition.hpp
-  - graph/graph-template.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
   requiredBy: []
   timestamp: '2021-12-30 19:20:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
 ---

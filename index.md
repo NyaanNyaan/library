@@ -1307,6 +1307,9 @@ data:
       path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
     - icon: ':heavy_check_mark:'
