@@ -18,7 +18,7 @@ $$P(x)=Q(x)(a_0+a_1x+a_2x^2+\ldots) \mod x^k$$
 
 $$a_N = [x^N]\frac{P(x)}{Q(x)}$$
 
-になり、これはBostan-Mori Algorithmを使って$\mathrm{O}(N \log k \log N)$で計算できる。
+になり、これはBostan-Mori Algorithmを使って$\mathrm{O}(k \log k \log N)$で計算できる。
 
 - [論文](https://arxiv.org/abs/2008.08822) [日本語での解説](http://q.c.titech.ac.jp/docs/progs/polynomial_division.html) [解説2](https://qiita.com/ryuhe1/items/da5acbcce4ac1911f47a)
 
