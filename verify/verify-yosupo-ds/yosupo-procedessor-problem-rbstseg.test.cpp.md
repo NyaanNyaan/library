@@ -171,8 +171,8 @@ data:
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp\"\
     \n//\n#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\ntemplate <typename I,\
     \ typename T, typename E, T (*f)(T, T), T (*g)(T, E),\n          E (*h)(E, E),\
-    \ T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTree {\n  struct Node {\n    Node *l,\
-    \ *r;\n    I index;\n    T key, sum;\n    E lazy;\n    int cnt;\n    Node(const\
+    \ T (*ti)(), E (*ei)()>\nstruct RBSTLazySegmentTree {\n  struct Node {\n    Node\
+    \ *l, *r;\n    I index;\n    T key, sum;\n    E lazy;\n    int cnt;\n    Node(const\
     \ I &i, const T &t = ti())\n        : l(), r(), index(i), key(t), sum(t), lazy(ei()),\
     \ cnt(1) {}\n  };\n\n protected:\n  using Ptr = Node *;\n  template <typename...\
     \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
@@ -256,8 +256,8 @@ data:
     \   cerr << \"( \" << (t->l ? to_string(t->l->index) : \"nil\");\n    cerr <<\
     \ \", \";\n    cerr << (t->r ? to_string(t->r->index) : \"nil\");\n    cerr <<\
     \ \" )\" << endl;\n    if (t->r) inner_dump(t->r);\n  }\n\n public:\n  Ptr root;\n\
-    \n  RBSTSegmentTree() : root(nullptr) {}\n  RBSTSegmentTree(const vector<T> xs,\
-    \ const vector<I> &is = {}) {\n    if (!is.empty()) assert(xs.size() == is.size());\n\
+    \n  RBSTLazySegmentTree() : root(nullptr) {}\n  RBSTLazySegmentTree(const vector<T>\
+    \ xs, const vector<I> &is = {}) {\n    if (!is.empty()) assert(xs.size() == is.size());\n\
     \    int n = xs.size();\n    vector<pair<I, T>> dat(n);\n    for (int i = 0; i\
     \ < n; i++) dat[i] = {is.empty() ? i : is[i], xs[i]};\n    root = build(0, n,\
     \ dat);\n  }\n\n  // 1 \u70B9 \u5024\u306E\u66F8\u304D\u63DB\u3048\n  void set_val(I\
@@ -299,37 +299,39 @@ data:
     \u8FD4\u3059)\n  template <typename C>\n  I max_right_inclusive(I n, C check,\
     \ I failed) {\n    assert(check(ti()) == true);\n    auto [x, y] = split_left(root,\
     \ n);\n    I res = _max_right<C, false>(y, check, failed);\n    root = merge(x,\
-    \ y);\n    return res;\n  }\n\n  void dump() { inner_dump(root); }\n};\n\n/**\n\
-    \ * @brief RBST-based Dynamic Lazy Segment Tree\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp\"\
+    \ y);\n    return res;\n  }\n\n  void dump() { inner_dump(root); }\n};\n\nnamespace\
+    \ RBSTSegmentTreeImpl {\n\ntemplate <typename T>\nT g(T l, bool) {\n  return l;\n\
+    }\nbool h(bool, bool) { return false; }\nbool ei() { return false; }\n\ntemplate\
+    \ <typename I, typename T, T (*f)(T, T), T (*ti)()>\nusing RBSTSegmentTree = RBSTLazySegmentTree<I,\
+    \ T, bool, f, g, h, ti, ei>;\n}  // namespace RBSTSegmentTreeImpl\n\nusing RBSTSegmentTreeImpl::RBSTSegmentTree;\n\
+    \n/**\n * @brief RBST-based Dynamic Lazy Segment Tree\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp\"\
     \n//\nusing namespace Nyaan;\n\nbool f(bool a, bool b) { return a | b; }\nbool\
-    \ ti() { return false; }\nusing Seg = RBSTSegmentTree<ll, bool, bool, f, f, f,\
-    \ ti, ti>;\n\nvoid Nyaan::solve() {\n  inl(N, Q);\n  string T;\n  in(T);\n\n \
-    \ vector<bool> v(N);\n  rep(i, N) v[i] = T[i] == '1';\n\n  Seg seg{v};\n  while\
-    \ (Q--) {\n    ini(cmd, k);\n    if (cmd == 0) {\n      seg.set_val(k, true);\n\
-    \    } else if (cmd == 1) {\n      seg.set_val(k, false);\n    } else if (cmd\
-    \ == 2) {\n      out(seg.get_val(k));\n    } else if (cmd == 3) {\n      int r\
-    \ = seg.max_right(\n          k, [](bool b) { return !b; }, N);\n      int r2\
-    \ = seg.max_right_inclusive(\n          k, [](bool b) { return !b; }, k - 1);\n\
-    \      if (r2 + 1 != r) exit(1);\n      if (r == N) r = -1;\n      out(r);\n \
-    \   } else if (cmd == 4) {\n      int l = seg.min_left_exclusive(\n          k\
-    \ + 1, [](bool b) { return !b; }, -1);\n      int l2 = seg.min_left(\n       \
-    \   k + 1, [](bool b) { return !b; }, k + 1);\n      if (l + 1 != l2) exit(1);\n\
+    \ ti() { return false; }\nusing Seg = RBSTSegmentTree<ll, bool, f, ti>;\n\nvoid\
+    \ Nyaan::solve() {\n  inl(N, Q);\n  string T;\n  in(T);\n\n  vector<bool> v(N);\n\
+    \  rep(i, N) v[i] = T[i] == '1';\n\n  Seg seg{v};\n  while (Q--) {\n    ini(cmd,\
+    \ k);\n    if (cmd == 0) {\n      seg.set_val(k, true);\n    } else if (cmd ==\
+    \ 1) {\n      seg.set_val(k, false);\n    } else if (cmd == 2) {\n      out(seg.get_val(k));\n\
+    \    } else if (cmd == 3) {\n      int r = seg.max_right(\n          k, [](bool\
+    \ b) { return !b; }, N);\n      int r2 = seg.max_right_inclusive(\n          k,\
+    \ [](bool b) { return !b; }, k - 1);\n      if (r2 + 1 != r) exit(1);\n      if\
+    \ (r == N) r = -1;\n      out(r);\n    } else if (cmd == 4) {\n      int l = seg.min_left_exclusive(\n\
+    \          k + 1, [](bool b) { return !b; }, -1);\n      int l2 = seg.min_left(\n\
+    \          k + 1, [](bool b) { return !b; }, k + 1);\n      if (l + 1 != l2) exit(1);\n\
     \      out(l);\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n\
     //\n#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
     \n//\nusing namespace Nyaan;\n\nbool f(bool a, bool b) { return a | b; }\nbool\
-    \ ti() { return false; }\nusing Seg = RBSTSegmentTree<ll, bool, bool, f, f, f,\
-    \ ti, ti>;\n\nvoid Nyaan::solve() {\n  inl(N, Q);\n  string T;\n  in(T);\n\n \
-    \ vector<bool> v(N);\n  rep(i, N) v[i] = T[i] == '1';\n\n  Seg seg{v};\n  while\
-    \ (Q--) {\n    ini(cmd, k);\n    if (cmd == 0) {\n      seg.set_val(k, true);\n\
-    \    } else if (cmd == 1) {\n      seg.set_val(k, false);\n    } else if (cmd\
-    \ == 2) {\n      out(seg.get_val(k));\n    } else if (cmd == 3) {\n      int r\
-    \ = seg.max_right(\n          k, [](bool b) { return !b; }, N);\n      int r2\
-    \ = seg.max_right_inclusive(\n          k, [](bool b) { return !b; }, k - 1);\n\
-    \      if (r2 + 1 != r) exit(1);\n      if (r == N) r = -1;\n      out(r);\n \
-    \   } else if (cmd == 4) {\n      int l = seg.min_left_exclusive(\n          k\
-    \ + 1, [](bool b) { return !b; }, -1);\n      int l2 = seg.min_left(\n       \
-    \   k + 1, [](bool b) { return !b; }, k + 1);\n      if (l + 1 != l2) exit(1);\n\
+    \ ti() { return false; }\nusing Seg = RBSTSegmentTree<ll, bool, f, ti>;\n\nvoid\
+    \ Nyaan::solve() {\n  inl(N, Q);\n  string T;\n  in(T);\n\n  vector<bool> v(N);\n\
+    \  rep(i, N) v[i] = T[i] == '1';\n\n  Seg seg{v};\n  while (Q--) {\n    ini(cmd,\
+    \ k);\n    if (cmd == 0) {\n      seg.set_val(k, true);\n    } else if (cmd ==\
+    \ 1) {\n      seg.set_val(k, false);\n    } else if (cmd == 2) {\n      out(seg.get_val(k));\n\
+    \    } else if (cmd == 3) {\n      int r = seg.max_right(\n          k, [](bool\
+    \ b) { return !b; }, N);\n      int r2 = seg.max_right_inclusive(\n          k,\
+    \ [](bool b) { return !b; }, k - 1);\n      if (r2 + 1 != r) exit(1);\n      if\
+    \ (r == N) r = -1;\n      out(r);\n    } else if (cmd == 4) {\n      int l = seg.min_left_exclusive(\n\
+    \          k + 1, [](bool b) { return !b; }, -1);\n      int l2 = seg.min_left(\n\
+    \          k + 1, [](bool b) { return !b; }, k + 1);\n      if (l + 1 != l2) exit(1);\n\
     \      out(l);\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
@@ -342,7 +344,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
   requiredBy: []
-  timestamp: '2021-12-20 22:10:59+09:00'
+  timestamp: '2022-01-13 00:32:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp

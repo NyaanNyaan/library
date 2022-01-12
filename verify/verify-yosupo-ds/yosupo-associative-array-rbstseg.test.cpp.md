@@ -171,8 +171,8 @@ data:
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp\"\
     \n//\n#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\ntemplate <typename I,\
     \ typename T, typename E, T (*f)(T, T), T (*g)(T, E),\n          E (*h)(E, E),\
-    \ T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTree {\n  struct Node {\n    Node *l,\
-    \ *r;\n    I index;\n    T key, sum;\n    E lazy;\n    int cnt;\n    Node(const\
+    \ T (*ti)(), E (*ei)()>\nstruct RBSTLazySegmentTree {\n  struct Node {\n    Node\
+    \ *l, *r;\n    I index;\n    T key, sum;\n    E lazy;\n    int cnt;\n    Node(const\
     \ I &i, const T &t = ti())\n        : l(), r(), index(i), key(t), sum(t), lazy(ei()),\
     \ cnt(1) {}\n  };\n\n protected:\n  using Ptr = Node *;\n  template <typename...\
     \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
@@ -256,8 +256,8 @@ data:
     \   cerr << \"( \" << (t->l ? to_string(t->l->index) : \"nil\");\n    cerr <<\
     \ \", \";\n    cerr << (t->r ? to_string(t->r->index) : \"nil\");\n    cerr <<\
     \ \" )\" << endl;\n    if (t->r) inner_dump(t->r);\n  }\n\n public:\n  Ptr root;\n\
-    \n  RBSTSegmentTree() : root(nullptr) {}\n  RBSTSegmentTree(const vector<T> xs,\
-    \ const vector<I> &is = {}) {\n    if (!is.empty()) assert(xs.size() == is.size());\n\
+    \n  RBSTLazySegmentTree() : root(nullptr) {}\n  RBSTLazySegmentTree(const vector<T>\
+    \ xs, const vector<I> &is = {}) {\n    if (!is.empty()) assert(xs.size() == is.size());\n\
     \    int n = xs.size();\n    vector<pair<I, T>> dat(n);\n    for (int i = 0; i\
     \ < n; i++) dat[i] = {is.empty() ? i : is[i], xs[i]};\n    root = build(0, n,\
     \ dat);\n  }\n\n  // 1 \u70B9 \u5024\u306E\u66F8\u304D\u63DB\u3048\n  void set_val(I\
@@ -299,20 +299,24 @@ data:
     \u8FD4\u3059)\n  template <typename C>\n  I max_right_inclusive(I n, C check,\
     \ I failed) {\n    assert(check(ti()) == true);\n    auto [x, y] = split_left(root,\
     \ n);\n    I res = _max_right<C, false>(y, check, failed);\n    root = merge(x,\
-    \ y);\n    return res;\n  }\n\n  void dump() { inner_dump(root); }\n};\n\n/**\n\
-    \ * @brief RBST-based Dynamic Lazy Segment Tree\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp\"\
+    \ y);\n    return res;\n  }\n\n  void dump() { inner_dump(root); }\n};\n\nnamespace\
+    \ RBSTSegmentTreeImpl {\n\ntemplate <typename T>\nT g(T l, bool) {\n  return l;\n\
+    }\nbool h(bool, bool) { return false; }\nbool ei() { return false; }\n\ntemplate\
+    \ <typename I, typename T, T (*f)(T, T), T (*ti)()>\nusing RBSTSegmentTree = RBSTLazySegmentTree<I,\
+    \ T, bool, f, g, h, ti, ei>;\n}  // namespace RBSTSegmentTreeImpl\n\nusing RBSTSegmentTreeImpl::RBSTSegmentTree;\n\
+    \n/**\n * @brief RBST-based Dynamic Lazy Segment Tree\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp\"\
     \n//\nusing namespace Nyaan;\n\nll f(ll, ll) { return 0; }\nll ti() { return 0;\
-    \ }\nusing Seg = RBSTSegmentTree<ll, ll, ll, f, f, f, ti, ti>;\n\nvoid Nyaan::solve()\
-    \ {\n  Seg seg;\n  inl(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0)\
-    \ {\n      inl(k, v);\n      seg.set_val(k, v);\n    } else {\n      inl(k);\n\
-    \      out(seg.get_val(k));\n    }\n  }\n}\n"
+    \ }\nusing Seg = RBSTSegmentTree<ll, ll, f, ti>;\n\nvoid Nyaan::solve() {\n  Seg\
+    \ seg;\n  inl(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0) {\n     \
+    \ inl(k, v);\n      seg.set_val(k, v);\n    } else {\n      inl(k);\n      out(seg.get_val(k));\n\
+    \    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n//\n\
     #include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
     \n//\nusing namespace Nyaan;\n\nll f(ll, ll) { return 0; }\nll ti() { return 0;\
-    \ }\nusing Seg = RBSTSegmentTree<ll, ll, ll, f, f, f, ti, ti>;\n\nvoid Nyaan::solve()\
-    \ {\n  Seg seg;\n  inl(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0)\
-    \ {\n      inl(k, v);\n      seg.set_val(k, v);\n    } else {\n      inl(k);\n\
-    \      out(seg.get_val(k));\n    }\n  }\n}\n"
+    \ }\nusing Seg = RBSTSegmentTree<ll, ll, f, ti>;\n\nvoid Nyaan::solve() {\n  Seg\
+    \ seg;\n  inl(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0) {\n     \
+    \ inl(k, v);\n      seg.set_val(k, v);\n    } else {\n      inl(k);\n      out(seg.get_val(k));\n\
+    \    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -324,7 +328,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
   requiredBy: []
-  timestamp: '2021-12-20 22:10:59+09:00'
+  timestamp: '2022-01-13 00:32:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
