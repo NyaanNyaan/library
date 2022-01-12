@@ -854,6 +854,9 @@ data:
       path: tree/heavy-light-decomposition.hpp
       title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
     - icon: ':heavy_check_mark:'
+      path: tree/inclusion-tree.hpp
+      title: tree/inclusion-tree.hpp
+    - icon: ':heavy_check_mark:'
       path: tree/pruefer-code.hpp
       title: Pruefer Code
     - icon: ':heavy_check_mark:'
@@ -1803,6 +1806,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1775.test.cpp
       title: verify/verify-yuki/yuki-1775.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1778.test.cpp
+      title: verify/verify-yuki/yuki-1778.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1781.test.cpp
       title: verify/verify-yuki/yuki-1781.test.cpp

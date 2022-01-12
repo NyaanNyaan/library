@@ -233,6 +233,9 @@ data:
     path: verify/verify-yuki/yuki-1326.test.cpp
     title: verify/verify-yuki/yuki-1326.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1778.test.cpp
+    title: verify/verify-yuki/yuki-1778.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1789.test.cpp
     title: verify/verify-yuki/yuki-1789.test.cpp
   _isVerificationFailed: false
@@ -381,6 +384,7 @@ data:
   - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
+  - verify/verify-yuki/yuki-1778.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp

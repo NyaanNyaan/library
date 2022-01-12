@@ -910,6 +910,9 @@ data:
     path: verify/verify-yuki/yuki-1775.test.cpp
     title: verify/verify-yuki/yuki-1775.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1778.test.cpp
+    title: verify/verify-yuki/yuki-1778.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1781.test.cpp
     title: verify/verify-yuki/yuki-1781.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1236,6 +1239,7 @@ data:
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-yuki/yuki-1778.test.cpp
   - verify/verify-yuki/yuki-1170.test.cpp
   - verify/verify-yuki/yuki-1781.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
