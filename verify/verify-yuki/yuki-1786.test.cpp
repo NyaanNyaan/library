@@ -10,7 +10,7 @@ int f(int a, int b) { return max(a, b); }
 int g(int a, int b) { return a + b; }
 int ti() { return -inf; }
 int ei() { return 0; }
-using Seg = RBSTSegmentTree<ll, int, int, f, g, g, ti, ei>;
+using Seg = RBSTLazySegmentTree<ll, int, int, f, g, g, ti, ei>;
 
 void Nyaan::solve() {
   inl(N);

@@ -16,7 +16,7 @@ T g(T a, E b) { return T(a.first * b.a + a.second * b.b, a.second); }
 E h(E a, E b) { return a * b; };
 T ti() { return T{}; }
 E ei() { return E{}; }
-using Seg = RBSTSegmentTree<ll, T, E, f, g, h, ti, ei>;
+using Seg = RBSTLazySegmentTree<ll, T, E, f, g, h, ti, ei>;
 
 void Nyaan::solve() {
   inl(N, Q);

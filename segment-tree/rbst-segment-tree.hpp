@@ -2,7 +2,7 @@
 
 template <typename I, typename T, typename E, T (*f)(T, T), T (*g)(T, E),
           E (*h)(E, E), T (*ti)(), E (*ei)()>
-struct RBSTSegmentTree {
+struct RBSTLazySegmentTree {
   struct Node {
     Node *l, *r;
     I index;
@@ -229,8 +229,8 @@ struct RBSTSegmentTree {
  public:
   Ptr root;
 
-  RBSTSegmentTree() : root(nullptr) {}
-  RBSTSegmentTree(const vector<T> xs, const vector<I> &is = {}) {
+  RBSTLazySegmentTree() : root(nullptr) {}
+  RBSTLazySegmentTree(const vector<T> xs, const vector<I> &is = {}) {
     if (!is.empty()) assert(xs.size() == is.size());
     int n = xs.size();
     vector<pair<I, T>> dat(n);
@@ -327,6 +327,21 @@ struct RBSTSegmentTree {
 
   void dump() { inner_dump(root); }
 };
+
+namespace RBSTSegmentTreeImpl {
+
+template <typename T>
+T g(T l, bool) {
+  return l;
+}
+bool h(bool, bool) { return false; }
+bool ei() { return false; }
+
+template <typename I, typename T, T (*f)(T, T), T (*ti)()>
+using RBSTSegmentTree = RBSTLazySegmentTree<I, T, bool, f, g, h, ti, ei>;
+}  // namespace RBSTSegmentTreeImpl
+
+using RBSTSegmentTreeImpl::RBSTSegmentTree;
 
 /**
  * @brief RBST-based Dynamic Lazy Segment Tree
