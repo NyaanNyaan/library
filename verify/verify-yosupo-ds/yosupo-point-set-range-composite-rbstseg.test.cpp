@@ -14,7 +14,7 @@ using A = Affine<mint>;
 A f(A a, A b) { return a * b; }
 A ti() { return A{}; }
 bool ei() { return false; }
-using Seg = RBSTSegmentTree<int, A, bool, f, nullptr, nullptr, ti, ei>;
+using Seg = RBSTLazySegmentTree<int, A, bool, f, nullptr, nullptr, ti, ei>;
 
 void Nyaan::solve() {
   inl(N, Q);

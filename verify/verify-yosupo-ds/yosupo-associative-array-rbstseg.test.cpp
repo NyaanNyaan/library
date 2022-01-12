@@ -8,7 +8,7 @@ using namespace Nyaan;
 
 ll f(ll, ll) { return 0; }
 ll ti() { return 0; }
-using Seg = RBSTSegmentTree<ll, ll, ll, f, f, f, ti, ti>;
+using Seg = RBSTSegmentTree<ll, ll, f, ti>;
 
 void Nyaan::solve() {
   Seg seg;

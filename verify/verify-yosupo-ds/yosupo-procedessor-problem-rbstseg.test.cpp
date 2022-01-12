@@ -8,7 +8,7 @@ using namespace Nyaan;
 
 bool f(bool a, bool b) { return a | b; }
 bool ti() { return false; }
-using Seg = RBSTSegmentTree<ll, bool, bool, f, f, f, ti, ti>;
+using Seg = RBSTSegmentTree<ll, bool, f, ti>;
 
 void Nyaan::solve() {
   inl(N, Q);
