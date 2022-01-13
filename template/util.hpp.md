@@ -433,6 +433,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1133,6 +1136,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp
   - verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp

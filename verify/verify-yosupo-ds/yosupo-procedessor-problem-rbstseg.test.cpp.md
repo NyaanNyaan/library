@@ -189,14 +189,18 @@ data:
     \ build(m, r, dat));\n  };\n\n  void push(Ptr t) {\n    if (!t) return;\n    if\
     \ (t->lazy != ei()) {\n      if (t->l) propagate(t->l, t->lazy);\n      if (t->r)\
     \ propagate(t->r, t->lazy);\n      t->lazy = ei();\n    }\n  }\n\n  Ptr update(Ptr\
-    \ t) {\n    if (!t) return t;\n    push(t);\n    t->cnt = 1;\n    t->sum = t->key;\n\
+    \ t) {\n    if (!t) return t;\n    //push(t);\n    t->cnt = 1;\n    t->sum = t->key;\n\
     \    if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n    if (t->r)\
     \ t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);\n    return t;\n  }\n\n\
     \  void propagate(Ptr t, const E &x) {\n    if (!t) return;\n    t->lazy = h(t->lazy,\
-    \ x);\n    t->key = g(t->key, x);\n    t->sum = g(t->sum, x);\n  }\n\n  // [k\
-    \ \u672A\u6E80, k \u4EE5\u4E0A]\n  pair<Ptr, Ptr> split_left(Ptr t, I k) {\n \
-    \   if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k == t->index) {\n\
-    \      Ptr tl = t->l;\n      t->l = nullptr;\n      return {tl, update(t)};\n\
+    \ x);\n    t->key = g(t->key, x);\n    t->sum = g(t->sum, x);\n  }\n\n  // index\
+    \ \u304C k \u3067\u3042\u308B\u30CE\u30FC\u30C9\u3092\u63A2\u3059, \u306A\u3051\
+    \u308C\u3070 nullptr\n  Ptr find(Ptr t, I k) {\n    while (t) {\n      push(t);\n\
+    \      if (k == t->index) return t;\n      if (k < t->index) {\n        t = t->l;\n\
+    \      } else {\n        t = t->r;\n      }\n    }\n    return nullptr;\n  }\n\
+    \n  // [k \u672A\u6E80, k \u4EE5\u4E0A]\n  pair<Ptr, Ptr> split_left(Ptr t, I\
+    \ k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k == t->index)\
+    \ {\n      Ptr tl = t->l;\n      t->l = nullptr;\n      return {tl, update(t)};\n\
     \    } else if (k < t->index) {\n      auto s = split_left(t->l, k);\n      t->l\
     \ = s.second;\n      return {s.first, update(t)};\n    } else {\n      auto s\
     \ = split_left(t->r, k);\n      t->r = s.first;\n      return {update(t), s.second};\n\
@@ -207,6 +211,19 @@ data:
     \ {\n      auto s = split_by_index(t->l, k);\n      t->l = s[2];\n      return\
     \ {{s[0], s[1], update(t)}};\n    } else {\n      auto s = split_by_index(t->r,\
     \ k);\n      t->r = s[0];\n      return {{update(t), s[1], s[2]}};\n    }\n  }\n\
+    \n  // r \u672A\u6E80\n  T _fold_left(Ptr t, I r) {\n    if (!t) return ti();\n\
+    \    push(t);\n    if (t->index == r) {\n      return t->l ? t->l->sum : ti();\n\
+    \    } else if (t->index > r) {\n      return _fold_left(t->l, r);\n    } else\
+    \ {\n      T l = t->l ? t->l->sum : ti();\n      l = f(l, t->key);\n      return\
+    \ f(l, _fold_left(t->r, r));\n    }\n  }\n\n  // l \u4EE5\u4E0A\n  T _fold_right(Ptr\
+    \ t, I l) {\n    if (!t) return ti();\n    push(t);\n    if (t->index == l) {\n\
+    \      T r = t->r ? t->r->sum : ti();\n      return f(t->key, r);\n    } else\
+    \ if (t->index < l) {\n      return _fold_right(t->r, l);\n    } else {\n    \
+    \  T r = t->r ? t->r->sum : ti();\n      r = f(t->key, r);\n      return f(_fold_right(t->l,\
+    \ l), r);\n    }\n  }\n\n  T _fold(Ptr t, I l, I r) {\n    if (!t) return ti();\n\
+    \    push(t);\n    if (t->index < l) return _fold(t->r, l, r);\n    if (t->index\
+    \ >= r) return _fold(t->l, l, r);\n    // l <= t->index < r\n    T tl = _fold_right(t->l,\
+    \ l);\n    T tr = _fold_left(t->r, r);\n    return f(f(tl, t->key), tr);\n  }\n\
     \n  // t \u3092\u6839\u3068\u3059\u308B\u6728\u306E\u4E0A\u3067\u6700\u5C0F\u306E\
     \ index \u306F\uFF1F (t \u304C\u7A7A\u306E\u5834\u5408\u306F failed)\n  I _min_index(Ptr\
     \ t, const I &failed) {\n    if (t == nullptr) return failed;\n    while (t->l)\
@@ -263,22 +280,29 @@ data:
     \ dat);\n  }\n\n  // 1 \u70B9 \u5024\u306E\u66F8\u304D\u63DB\u3048\n  void set_val(I\
     \ i, T x) {\n    auto s = split_by_index(root, i);\n    if (s[1] == nullptr) {\n\
     \      s[1] = my_new(i, x);\n    } else {\n      s[1]->key = x;\n    }\n    root\
-    \ = merge(merge(s[0], update(s[1])), s[2]);\n  }\n\n  // 1 \u70B9\u53D6\u5F97\n\
-    \  T get_val(I i) {\n    auto s = split_by_index(root, i);\n    T res = s[1] ?\
-    \ s[1]->key : ti();\n    root = merge(merge(s[0], s[1]), s[2]);\n    return res;\n\
-    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  void erase(I i) {\n    auto s =\
-    \ split_by_index(root, i);\n    if (s[1]) my_del(s[1]);\n    root = merge(s[0],\
-    \ s[2]);\n  }\n\n  // \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E\
-    \ &e) {\n    auto [x, aux] = split_left(root, l);\n    auto [y, z] = split_left(aux,\
-    \ r);\n    propagate(y, e);\n    root = merge(merge(x, y), z);\n  }\n\n  // \u7BC4\
-    \u56F2\u53D6\u5F97\n  T fold(I l, I r) {\n    auto [x, aux] = split_left(root,\
-    \ l);\n    auto [y, z] = split_left(aux, r);\n    T res = y ? y->sum : ti();\n\
-    \    root = merge(merge(x, y), z);\n    return res;\n  }\n\n  // n \u672A\u6E80\
-    \u306E i \u306E\u3046\u3061\u3001[i, n) \u306E\u533A\u9593 fold \u304C true \u306B\
-    \u306A\u308B\u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\n  // (\u5B58\u5728\u3057\
-    \u306A\u3044\u5834\u5408\u306F failed \u3092\u8FD4\u3059)\n  template <typename\
-    \ C>\n  I min_left(I n, C check, I failed) {\n    assert(check(ti()) == true);\n\
-    \    auto [x, y] = split_left(root, n);\n    I res = _min_left<C, true>(x, check,\
+    \ = merge(merge(s[0], update(s[1])), s[2]);\n  }\n\n  // \u3059\u3067\u306B\u8981\
+    \u7D20\u304C\u5B58\u5728\u3059\u308B\u3068\u304D\u306B\u5024\u3092 set \u3059\u308B\
+    \u3002\u304A\u305D\u3089\u304F\u5C11\u3057\u65E9\u3044\n  void set_val_fast(I\
+    \ i, T x) {\n    static vector<Ptr> ps;\n    ps.clear();\n\n    Ptr t = root;\n\
+    \    while (t) {\n      push(t);\n      ps.push_back(t);\n      if (i == t->index)\
+    \ break;\n      if (i < t->index) {\n        t = t->l;\n      } else {\n     \
+    \   t = t->r;\n      }\n    }\n    if (!t) {\n      set_val(i, x);\n      return;\n\
+    \    }\n    t->key = x;\n    for (int j = ps.size() - 1; j >= 0; j--) update(ps[j]);\n\
+    \  }\n\n  // 1 \u70B9\u53D6\u5F97\n  T get_val(I i) {\n    Ptr p = find(root,\
+    \ i);\n    return p ? p->key : ti();\n  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\
+    \n  void erase(I i) {\n    auto s = split_by_index(root, i);\n    if (s[1]) my_del(s[1]);\n\
+    \    root = merge(s[0], s[2]);\n  }\n\n  // \u7BC4\u56F2\u4F5C\u7528\n  void apply(I\
+    \ l, I r, const E &e) {\n    auto [x, aux] = split_left(root, l);\n    auto [y,\
+    \ z] = split_left(aux, r);\n    propagate(y, e);\n    root = merge(merge(x, y),\
+    \ z);\n  }\n\n  // \u7BC4\u56F2\u53D6\u5F97\n  T fold(I l, I r) {\n    return\
+    \ _fold(root, l, r);\n    // auto [x, aux] = split_left(root, l);\n    // auto\
+    \ [y, z] = split_left(aux, r);\n    // T res = y ? y->sum : ti();\n    // root\
+    \ = merge(merge(x, y), z);\n    // return res;\n  }\n\n  // n \u672A\u6E80\u306E\
+    \ i \u306E\u3046\u3061\u3001[i, n) \u306E\u533A\u9593 fold \u304C true \u306B\u306A\
+    \u308B\u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\n  // (\u5B58\u5728\u3057\u306A\
+    \u3044\u5834\u5408\u306F failed \u3092\u8FD4\u3059)\n  template <typename C>\n\
+    \  I min_left(I n, C check, I failed) {\n    assert(check(ti()) == true);\n  \
+    \  auto [x, y] = split_left(root, n);\n    I res = _min_left<C, true>(x, check,\
     \ failed);\n    root = merge(x, y);\n    return res;\n  }\n\n  // n \u672A\u6E80\
     \u306E i \u306E\u3046\u3061\u3001(i, n) \u306E\u533A\u9593 fold \u304C true \u306B\
     \u306A\u308B\u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\n  // (\u7A7A\u3060\u3063\
@@ -344,7 +368,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
   requiredBy: []
-  timestamp: '2022-01-13 00:32:16+09:00'
+  timestamp: '2022-01-13 15:07:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp

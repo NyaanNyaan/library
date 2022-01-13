@@ -38,7 +38,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
     links:
     - https://judge.yosupo.jp/problem/point_set_range_composite
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp\"\
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
@@ -174,7 +174,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp\"\
     \n//\n#line 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\n\
     struct Affine {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr\
     \ Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return\
@@ -377,14 +377,14 @@ data:
     }\nbool h(bool, bool) { return false; }\nbool ei() { return false; }\n\ntemplate\
     \ <typename I, typename T, T (*f)(T, T), T (*ti)()>\nusing RBSTSegmentTree = RBSTLazySegmentTree<I,\
     \ T, bool, f, g, h, ti, ei>;\n}  // namespace RBSTSegmentTreeImpl\n\nusing RBSTSegmentTreeImpl::RBSTSegmentTree;\n\
-    \n/**\n * @brief RBST-based Dynamic Lazy Segment Tree\n */\n#line 8 \"verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp\"\
+    \n/**\n * @brief RBST-based Dynamic Lazy Segment Tree\n */\n#line 8 \"verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp\"\
     \n//\nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
     using A = Affine<mint>;\n\nA f(A a, A b) { return a * b; }\nA ti() { return A{};\
     \ }\nusing Seg = RBSTSegmentTree<int, A, f, ti>;\n\nvoid Nyaan::solve() {\n  inl(N,\
     \ Q);\n  V<A> a(N);\n  rep(i, N) {\n    inl(c, d);\n    a[i] = {c, d};\n  }\n\
     \  Seg seg{a};\n  rep(_, Q) {\n    inl(cmd);\n    if (cmd == 0) {\n      inl(p,\
-    \ c, d);\n      seg.set_val(p, {c, d});\n    } else {\n      inl(l, r, x);\n \
-    \     out(seg.fold(l, r)(x));\n    }\n  }\n}\n"
+    \ c, d);\n      seg.set_val_fast(p, {c, d});\n    } else {\n      inl(l, r, x);\n\
+    \      out(seg.fold(l, r)(x));\n    }\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../math/affine-transformation.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
@@ -393,8 +393,8 @@ data:
     \ }\nusing Seg = RBSTSegmentTree<int, A, f, ti>;\n\nvoid Nyaan::solve() {\n  inl(N,\
     \ Q);\n  V<A> a(N);\n  rep(i, N) {\n    inl(c, d);\n    a[i] = {c, d};\n  }\n\
     \  Seg seg{a};\n  rep(_, Q) {\n    inl(cmd);\n    if (cmd == 0) {\n      inl(p,\
-    \ c, d);\n      seg.set_val(p, {c, d});\n    } else {\n      inl(l, r, x);\n \
-    \     out(seg.fold(l, r)(x));\n    }\n  }\n}\n"
+    \ c, d);\n      seg.set_val_fast(p, {c, d});\n    } else {\n      inl(l, r, x);\n\
+    \      out(seg.fold(l, r)(x));\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -406,15 +406,15 @@ data:
   - modint/montgomery-modint.hpp
   - segment-tree/rbst-segment-tree.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   requiredBy: []
   timestamp: '2022-01-13 15:07:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
 ---
