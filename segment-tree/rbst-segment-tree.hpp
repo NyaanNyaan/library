@@ -59,7 +59,7 @@ struct RBSTLazySegmentTree {
 
   Ptr update(Ptr t) {
     if (!t) return t;
-    push(t);
+    //push(t);
     t->cnt = 1;
     t->sum = t->key;
     if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);
@@ -72,6 +72,20 @@ struct RBSTLazySegmentTree {
     t->lazy = h(t->lazy, x);
     t->key = g(t->key, x);
     t->sum = g(t->sum, x);
+  }
+
+  // index が k であるノードを探す, なければ nullptr
+  Ptr find(Ptr t, I k) {
+    while (t) {
+      push(t);
+      if (k == t->index) return t;
+      if (k < t->index) {
+        t = t->l;
+      } else {
+        t = t->r;
+      }
+    }
+    return nullptr;
   }
 
   // [k 未満, k 以上]
@@ -110,6 +124,48 @@ struct RBSTLazySegmentTree {
       t->r = s[0];
       return {{update(t), s[1], s[2]}};
     }
+  }
+
+  // r 未満
+  T _fold_left(Ptr t, I r) {
+    if (!t) return ti();
+    push(t);
+    if (t->index == r) {
+      return t->l ? t->l->sum : ti();
+    } else if (t->index > r) {
+      return _fold_left(t->l, r);
+    } else {
+      T l = t->l ? t->l->sum : ti();
+      l = f(l, t->key);
+      return f(l, _fold_left(t->r, r));
+    }
+  }
+
+  // l 以上
+  T _fold_right(Ptr t, I l) {
+    if (!t) return ti();
+    push(t);
+    if (t->index == l) {
+      T r = t->r ? t->r->sum : ti();
+      return f(t->key, r);
+    } else if (t->index < l) {
+      return _fold_right(t->r, l);
+    } else {
+      T r = t->r ? t->r->sum : ti();
+      r = f(t->key, r);
+      return f(_fold_right(t->l, l), r);
+    }
+  }
+
+  T _fold(Ptr t, I l, I r) {
+    if (!t) return ti();
+    push(t);
+    if (t->index < l) return _fold(t->r, l, r);
+    if (t->index >= r) return _fold(t->l, l, r);
+    // l <= t->index < r
+    T tl = _fold_right(t->l, l);
+    T tr = _fold_left(t->r, r);
+    return f(f(tl, t->key), tr);
   }
 
   // t を根とする木の上で最小の index は？ (t が空の場合は failed)
@@ -249,12 +305,34 @@ struct RBSTLazySegmentTree {
     root = merge(merge(s[0], update(s[1])), s[2]);
   }
 
+  // すでに要素が存在するときに値を set する。おそらく少し早い
+  void set_val_fast(I i, T x) {
+    static vector<Ptr> ps;
+    ps.clear();
+
+    Ptr t = root;
+    while (t) {
+      push(t);
+      ps.push_back(t);
+      if (i == t->index) break;
+      if (i < t->index) {
+        t = t->l;
+      } else {
+        t = t->r;
+      }
+    }
+    if (!t) {
+      set_val(i, x);
+      return;
+    }
+    t->key = x;
+    for (int j = ps.size() - 1; j >= 0; j--) update(ps[j]);
+  }
+
   // 1 点取得
   T get_val(I i) {
-    auto s = split_by_index(root, i);
-    T res = s[1] ? s[1]->key : ti();
-    root = merge(merge(s[0], s[1]), s[2]);
-    return res;
+    Ptr p = find(root, i);
+    return p ? p->key : ti();
   }
 
   // 頂点の削除
@@ -274,11 +352,12 @@ struct RBSTLazySegmentTree {
 
   // 範囲取得
   T fold(I l, I r) {
-    auto [x, aux] = split_left(root, l);
-    auto [y, z] = split_left(aux, r);
-    T res = y ? y->sum : ti();
-    root = merge(merge(x, y), z);
-    return res;
+    return _fold(root, l, r);
+    // auto [x, aux] = split_left(root, l);
+    // auto [y, z] = split_left(aux, r);
+    // T res = y ? y->sum : ti();
+    // root = merge(merge(x, y), z);
+    // return res;
   }
 
   // n 未満の i のうち、[i, n) の区間 fold が true になる最小の i は何か？

@@ -27,7 +27,7 @@ void Nyaan::solve() {
     inl(cmd);
     if (cmd == 0) {
       inl(p, c, d);
-      seg.set_val(p, {c, d});
+      seg.set_val_fast(p, {c, d});
     } else {
       inl(l, r, x);
       out(seg.fold(l, r)(x));
