@@ -47,8 +47,8 @@ data:
   path: misc/timer.hpp
   requiredBy:
   - marathon/simulated-annealing.hpp
-  - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
+  - trial/fast-inv.hpp
   timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

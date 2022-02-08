@@ -203,11 +203,11 @@ data:
     \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
     \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
     \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
-    \ a = rem(n), r = 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
-    \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
-    \ 4 \"modint/arbitrary-modint.hpp\"\n\nstruct ArbitraryModInt {\n  int x;\n\n\
-    \  ArbitraryModInt() : x(0) {}\n\n  ArbitraryModInt(int64_t y) {\n    int z =\
-    \ y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n  }\n\n  ArbitraryModInt\
+    \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
+    \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
+    };\n#line 4 \"modint/arbitrary-modint.hpp\"\n\nstruct ArbitraryModInt {\n  int\
+    \ x;\n\n  ArbitraryModInt() : x(0) {}\n\n  ArbitraryModInt(int64_t y) {\n    int\
+    \ z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n  }\n\n  ArbitraryModInt\
     \ &operator+=(const ArbitraryModInt &p) {\n    if ((x += p.x) >= get_mod()) x\
     \ -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModInt &operator-=(const\
     \ ArbitraryModInt &p) {\n    if ((x += get_mod() - p.x) >= get_mod()) x -= get_mod();\n\
@@ -234,27 +234,46 @@ data:
     \ x; }\n\n  inline unsigned int rem(unsigned long long p) { return barrett().rem(p);\
     \ }\n\n  static inline Barrett &barrett() {\n    static Barrett b;\n    return\
     \ b;\n  }\n\n  static inline int &get_mod() {\n    static int mod = 0;\n    return\
-    \ mod;\n  }\n\n  static void set_mod(int md) {\n    assert(md <= 2000000000 +\
-    \ 10);\n    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n#line 7 \"\
-    verify/verify-unit-test/barrett-reduction.test.cpp\"\nusing namespace Nyaan;\n\
+    \ mod;\n  }\n\n  static void set_mod(int md) {\n    assert(0 < md && md <= (1LL\
+    \ << 30) - 1);\n    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n#line\
+    \ 7 \"verify/verify-unit-test/barrett-reduction.test.cpp\"\nusing namespace Nyaan;\n\
     \nusing mint = ArbitraryModInt;\n\nvoid test(int m) {\n  mint::set_mod(m);\n \
     \ mint x = 1;\n  int y = 1;\n  rep(loop, TEN(3)) {\n    int z = randint(0, 2 *\
     \ TEN(9));\n    if (rng() & 1) z = -z;\n    x *= z;\n    y = 1LL * y * z % m;\n\
-    \    if (y < 0) y += m;\n    assert(x.x == y);\n  }\n}\n\nvoid Nyaan::solve()\
-    \ {\n  test(1);\n  test(2);\n  test(3);\n  test(998244353);\n  test(1000000007);\n\
-    \  test(2 * TEN(9));\n  rep(i, TEN(5)) test(randint(1, 2 * TEN(9) + 1));\n  cerr\
-    \ << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
-    }\n"
+    \    if (y < 0) y += m;\n    assert(x.x == y);\n  }\n\n  Barrett barrett(m);\n\
+    \n  // m!=1 \u3067\u6B63\u3057\u304F\u52D5\u4F5C\u3059\u308B\u306F\u305A\n  if\
+    \ (m != 1) {\n    rep(loop, TEN(3)) {\n      u64 i = rng();\n      auto [quo,\
+    \ rem] = barrett.quorem(i);\n      assert(quo == barrett.quo(i));\n      assert(rem\
+    \ == barrett.rem(i));\n      i64 quo2 = i / m;\n      i64 rem2 = i % m;\n    \
+    \  assert(quo == quo2);\n      assert(rem == rem2);\n    }\n  }\n\n  rep(loop,\
+    \ TEN(3)) {\n    int p = randint(0, m);\n    long long e = randint(0, 10);\n \
+    \   mint r1 = mint{p}.pow(e);\n    int r2 = barrett.pow(p, e);\n    /*\n    if\
+    \ (r1.get() != r2) {\n      cerr << p << \" \" << e << \" \" << m << endl;\n \
+    \     cerr << r1 << \" \" << r2 << endl;\n    }\n    */\n    assert(r1.get() ==\
+    \ r2);\n  }\n}\n\nvoid Nyaan::solve() {\n  int mod_max = (1LL << 30) - 1;\n  rep1(m,\
+    \ 10) test(m);\n  test(998244353);\n  test(1000000007);\n  rep(t, 10) test(mod_max\
+    \ - t);\n  rep(i, TEN(4)) test(randint(1, mod_max + 1));\n  cerr << \"OK\" <<\
+    \ endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include\
     \ \"../../modint/arbitrary-modint.hpp\"\nusing namespace Nyaan;\n\nusing mint\
     \ = ArbitraryModInt;\n\nvoid test(int m) {\n  mint::set_mod(m);\n  mint x = 1;\n\
     \  int y = 1;\n  rep(loop, TEN(3)) {\n    int z = randint(0, 2 * TEN(9));\n  \
     \  if (rng() & 1) z = -z;\n    x *= z;\n    y = 1LL * y * z % m;\n    if (y <\
-    \ 0) y += m;\n    assert(x.x == y);\n  }\n}\n\nvoid Nyaan::solve() {\n  test(1);\n\
-    \  test(2);\n  test(3);\n  test(998244353);\n  test(1000000007);\n  test(2 * TEN(9));\n\
-    \  rep(i, TEN(5)) test(randint(1, 2 * TEN(9) + 1));\n  cerr << \"OK\" << endl;\n\
-    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ 0) y += m;\n    assert(x.x == y);\n  }\n\n  Barrett barrett(m);\n\n  // m!=1\
+    \ \u3067\u6B63\u3057\u304F\u52D5\u4F5C\u3059\u308B\u306F\u305A\n  if (m != 1)\
+    \ {\n    rep(loop, TEN(3)) {\n      u64 i = rng();\n      auto [quo, rem] = barrett.quorem(i);\n\
+    \      assert(quo == barrett.quo(i));\n      assert(rem == barrett.rem(i));\n\
+    \      i64 quo2 = i / m;\n      i64 rem2 = i % m;\n      assert(quo == quo2);\n\
+    \      assert(rem == rem2);\n    }\n  }\n\n  rep(loop, TEN(3)) {\n    int p =\
+    \ randint(0, m);\n    long long e = randint(0, 10);\n    mint r1 = mint{p}.pow(e);\n\
+    \    int r2 = barrett.pow(p, e);\n    /*\n    if (r1.get() != r2) {\n      cerr\
+    \ << p << \" \" << e << \" \" << m << endl;\n      cerr << r1 << \" \" << r2 <<\
+    \ endl;\n    }\n    */\n    assert(r1.get() == r2);\n  }\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int mod_max = (1LL << 30) - 1;\n  rep1(m, 10) test(m);\n  test(998244353);\n\
+    \  test(1000000007);\n  rep(t, 10) test(mod_max - t);\n  rep(i, TEN(4)) test(randint(1,\
+    \ mod_max + 1));\n  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << a + b << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -268,7 +287,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/barrett-reduction.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2022-02-08 14:09:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/barrett-reduction.test.cpp

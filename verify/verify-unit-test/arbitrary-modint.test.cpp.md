@@ -2,11 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
+    path: modint/arbitrary-modint.hpp
+    title: modint/arbitrary-modint.hpp
+  - icon: ':heavy_check_mark:'
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
-  - icon: ':heavy_check_mark:'
-    path: modulo/arbitrary-mod-binomial.hpp
-    title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -32,30 +35,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/binomial_coefficient
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/binomial_coefficient
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n//\n\
-    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/arbitrary-modint.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
@@ -171,10 +174,8 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp\"\
-    \n//\n#line 2 \"modulo/arbitrary-mod-binomial.hpp\"\n\n#line 4 \"modulo/arbitrary-mod-binomial.hpp\"\
-    \n\n#line 1 \"atcoder/math.hpp\"\n\n\n\n#line 8 \"atcoder/math.hpp\"\n\n#line\
-    \ 1 \"atcoder/internal_math.hpp\"\n\n\n\n#line 5 \"atcoder/internal_math.hpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/arbitrary-modint.test.cpp\"\
+    \n//\n#line 1 \"atcoder/internal_math.hpp\"\n\n\n\n#line 5 \"atcoder/internal_math.hpp\"\
     \n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace\
     \ internal {\n\n// @param m `1 <= m`\n// @return x mod m\nconstexpr long long\
     \ safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n\
@@ -237,41 +238,24 @@ data:
     \            ok = false;\n                break;\n            }\n        }\n \
     \       if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int primitive_root\
     \ = primitive_root_constexpr(m);\n\n}  // namespace internal\n\n}  // namespace\
-    \ atcoder\n\n\n#line 10 \"atcoder/math.hpp\"\n\nnamespace atcoder {\n\nlong long\
-    \ pow_mod(long long x, long long n, int m) {\n    assert(0 <= n && 1 <= m);\n\
-    \    if (m == 1) return 0;\n    internal::barrett bt((unsigned int)(m));\n   \
-    \ unsigned int r = 1, y = (unsigned int)(internal::safe_mod(x, m));\n    while\
-    \ (n) {\n        if (n & 1) r = bt.mul(r, y);\n        y = bt.mul(y, y);\n   \
-    \     n >>= 1;\n    }\n    return r;\n}\n\nlong long inv_mod(long long x, long\
-    \ long m) {\n    assert(1 <= m);\n    auto z = internal::inv_gcd(x, m);\n    assert(z.first\
-    \ == 1);\n    return z.second;\n}\n\n// (rem, mod)\nstd::pair<long long, long\
-    \ long> crt(const std::vector<long long>& r,\n                               \
-    \     const std::vector<long long>& m) {\n    assert(r.size() == m.size());\n\
-    \    int n = int(r.size());\n    // Contracts: 0 <= r0 < m0\n    long long r0\
-    \ = 0, m0 = 1;\n    for (int i = 0; i < n; i++) {\n        assert(1 <= m[i]);\n\
-    \        long long r1 = internal::safe_mod(r[i], m[i]), m1 = m[i];\n        if\
-    \ (m0 < m1) {\n            std::swap(r0, r1);\n            std::swap(m0, m1);\n\
-    \        }\n        if (m0 % m1 == 0) {\n            if (r0 % m1 != r1) return\
-    \ {0, 0};\n            continue;\n        }\n        // assume: m0 > m1, lcm(m0,\
-    \ m1) >= 2 * max(m0, m1)\n\n        // (r0, m0), (r1, m1) -> (r2, m2 = lcm(m0,\
-    \ m1));\n        // r2 % m0 = r0\n        // r2 % m1 = r1\n        // -> (r0 +\
-    \ x*m0) % m1 = r1\n        // -> x*u0*g % (u1*g) = (r1 - r0) (u0*g = m0, u1*g\
-    \ = m1)\n        // -> x = (r1 - r0) / g * inv(u0) (mod u1)\n\n        // im =\
-    \ inv(u0) (mod u1) (0 <= im < u1)\n        long long g, im;\n        std::tie(g,\
-    \ im) = internal::inv_gcd(m0, m1);\n\n        long long u1 = (m1 / g);\n     \
-    \   // |r1 - r0| < (m0 + m1) <= lcm(m0, m1)\n        if ((r1 - r0) % g) return\
-    \ {0, 0};\n\n        // u1 * u1 <= m1 * m1 / g / g <= m0 * m1 / g = lcm(m0, m1)\n\
-    \        long long x = (r1 - r0) / g % u1 * im % u1;\n\n        // |r0| + |m0\
-    \ * x|\n        // < m0 + m0 * (u1 - 1)\n        // = m0 + m0 * m1 / g - m0\n\
-    \        // = lcm(m0, m1)\n        r0 += x * m0;\n        m0 *= u1;  // -> lcm(m0,\
-    \ m1)\n        if (r0 < 0) r0 += m0;\n    }\n    return {r0, m0};\n}\n\nlong long\
-    \ floor_sum(long long n, long long m, long long a, long long b) {\n    long long\
-    \ ans = 0;\n    if (a >= m) {\n        ans += (n - 1) * n * (a / m) / 2;\n   \
-    \     a %= m;\n    }\n    if (b >= m) {\n        ans += n * (b / m);\n       \
-    \ b %= m;\n    }\n\n    long long y_max = (a * n + b) / m, x_max = (y_max * m\
-    \ - b);\n    if (y_max == 0) return ans;\n    ans += (n - (x_max + a - 1) / a)\
-    \ * y_max;\n    ans += floor_sum(y_max, a, m, (a - x_max % a) % a);\n    return\
-    \ ans;\n}\n\n}  // namespace atcoder\n\n\n#line 2 \"modint/barrett-reduction.hpp\"\
+    \ atcoder\n\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64\
+    \ - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
+    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
+    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
+    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
+    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
+    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
+    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
+    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
+    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
+    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
+    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
+    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
+    #line 2 \"modint/arbitrary-modint.hpp\"\n\n#line 2 \"modint/barrett-reduction.hpp\"\
     \n\n#line 4 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
     \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
     \ long long;\n  u32 m;\n  u64 im;\n  Barrett() : m(), im() {}\n  Barrett(int n)\
@@ -284,60 +268,96 @@ data:
     \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
     \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
     \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
-    };\n#line 7 \"modulo/arbitrary-mod-binomial.hpp\"\n\nusing namespace std;\n\n\
-    #define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX\
-    \ 20000000\n\nstruct prime_power_binomial {\n  int p, q, M;\n  vector<int> fac,\
-    \ ifac, inv;\n  int delta;\n  Barrett bm, bp;\n\n  prime_power_binomial(int _p,\
-    \ int _q) : p(_p), q(_q) {\n    assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n\
-    \    assert(_q > 0);\n    long long m = 1;\n    while (_q--) {\n      m *= p;\n\
-    \      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n    }\n    M = m;\n    bm = Barrett(M),\
-    \ bp = Barrett(p);\n    enumerate();\n    delta = (p == 2 && q >= 3) ? 1 : M -\
-    \ 1;\n  }\n\n  void enumerate() {\n    int MX = min<int>(M, PRIME_POWER_BINOMIAL_N_MAX\
-    \ + 10);\n    fac.resize(MX);\n    ifac.resize(MX);\n    inv.resize(MX);\n   \
-    \ fac[0] = ifac[0] = inv[0] = 1;\n    fac[1] = ifac[1] = inv[1] = 1;\n    for\
-    \ (int i = 2; i < MX; i++) {\n      if (i % p == 0) {\n        fac[i] = fac[i\
-    \ - 1];\n        fac[i + 1] = bm.rem(1LL * fac[i - 1] * (i + 1));\n        i++;\n\
-    \      } else {\n        fac[i] = bm.rem(1LL * fac[i - 1] * i);\n      }\n   \
-    \ }\n    ifac[MX - 1] = bm.pow(fac[MX - 1], M / p * (p - 1) - 1);\n    for (int\
-    \ i = MX - 2; i > 1; --i) {\n      if (i % p == 0) {\n        ifac[i] = bm.rem(1LL\
-    \ * ifac[i + 1] * (i + 1));\n        ifac[i - 1] = ifac[i];\n        i--;\n  \
-    \    } else {\n        ifac[i] = bm.rem(1LL * ifac[i + 1] * (i + 1));\n      }\n\
-    \    }\n  }\n\n  long long Lucas(long long n, long long m) {\n    int res = 1;\n\
-    \    while (n) {\n      int n0, m0;\n      tie(n, n0) = bp.quorem(n);\n      tie(m,\
-    \ m0) = bp.quorem(m);\n      if (n0 < m0) return 0;\n      res = bm.rem(1LL *\
-    \ res * fac[n0]);\n      int buf = bm.rem(1LL * ifac[n0 - m0] * ifac[m0]);\n \
-    \     res = bm.rem(1LL * res * buf);\n    }\n    return res;\n  }\n\n  long long\
-    \ C(long long n, long long m) {\n    if (n < m || n < 0 || m < 0) return 0;\n\
-    \    if (q == 1) return Lucas(n, m);\n    long long r = n - m;\n    int e0 = 0,\
-    \ eq = 0, i = 0;\n    int res = 1;\n    while (n) {\n      res = bm.rem(1LL *\
-    \ res * fac[bm.rem(n)]);\n      res = bm.rem(1LL * res * ifac[bm.rem(m)]);\n \
-    \     res = bm.rem(1LL * res * ifac[bm.rem(r)]);\n      n = bp.quo(n);\n     \
-    \ m = bp.quo(m);\n      r = bp.quo(r);\n      int eps = n - m - r;\n      e0 +=\
-    \ eps;\n      if (e0 >= q) return 0;\n      if (++i >= q) eq += eps;\n    }\n\
-    \    if (eq & 1) res = bm.rem(1LL * res * delta);\n    res = bm.rem(1LL * res\
-    \ * bm.pow(p, e0));\n    return res;\n  }\n};\n\n// constraints:\n// (M <= 1e7\
-    \ and max(N) <= 1e18) or (M < 2^30 and max(N) <= 2e7)\nstruct arbitrary_mod_binomial\
-    \ {\n  int mod;\n  vector<int> M;\n  vector<prime_power_binomial> cs;\n\n  arbitrary_mod_binomial(long\
-    \ long md) : mod(md) {\n    assert(1 <= md);\n    assert(md <= PRIME_POWER_BINOMIAL_M_MAX);\n\
-    \    for (int i = 2; i * i <= md; i++) {\n      if (md % i == 0) {\n        int\
-    \ j = 0, k = 1;\n        while (md % i == 0) md /= i, j++, k *= i;\n        M.push_back(k);\n\
-    \        cs.emplace_back(i, j);\n        assert(M.back() == cs.back().M);\n  \
-    \    }\n    }\n    if (md != 1) {\n      M.push_back(md);\n      cs.emplace_back(md,\
-    \ 1);\n    }\n    assert(M.size() == cs.size());\n  }\n\n  long long C(long long\
-    \ n, long long m) {\n    if (mod == 1) return 0;\n    vector<long long> rem, d;\n\
-    \    for (int i = 0; i < (int)cs.size(); i++) {\n      rem.push_back(cs[i].C(n,\
-    \ m));\n      d.push_back(M[i]);\n    }\n    return atcoder::crt(rem, d).first;\n\
-    \  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n#undef PRIME_POWER_BINOMIAL_N_MAX\n\
-    \n/**\n * @brief \u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n\
-    \ */\n#line 6 \"verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp\"\
-    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int T, M;\n  cin >> T >>\
-    \ M;\n  arbitrary_mod_binomial C(M);\n  while (T--) {\n    long long n, k;\n \
-    \   cin >> n >> k;\n    cout << C.C(n, k) << '\\n';\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/binomial_coefficient\"\n\
-    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../modulo/arbitrary-mod-binomial.hpp\"\
-    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int T, M;\n  cin >> T >>\
-    \ M;\n  arbitrary_mod_binomial C(M);\n  while (T--) {\n    long long n, k;\n \
-    \   cin >> n >> k;\n    cout << C.C(n, k) << '\\n';\n  }\n}\n"
+    };\n#line 4 \"modint/arbitrary-modint.hpp\"\n\nstruct ArbitraryModInt {\n  int\
+    \ x;\n\n  ArbitraryModInt() : x(0) {}\n\n  ArbitraryModInt(int64_t y) {\n    int\
+    \ z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n  }\n\n  ArbitraryModInt\
+    \ &operator+=(const ArbitraryModInt &p) {\n    if ((x += p.x) >= get_mod()) x\
+    \ -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModInt &operator-=(const\
+    \ ArbitraryModInt &p) {\n    if ((x += get_mod() - p.x) >= get_mod()) x -= get_mod();\n\
+    \    return *this;\n  }\n\n  ArbitraryModInt &operator*=(const ArbitraryModInt\
+    \ &p) {\n    x = rem((unsigned long long)x * p.x);\n    return *this;\n  }\n\n\
+    \  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *= p.inverse();\n\
+    \    return *this;\n  }\n\n  ArbitraryModInt operator-() const { return ArbitraryModInt(-x);\
+    \ }\n\n  ArbitraryModInt operator+(const ArbitraryModInt &p) const {\n    return\
+    \ ArbitraryModInt(*this) += p;\n  }\n\n  ArbitraryModInt operator-(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) -= p;\n  }\n\n  ArbitraryModInt\
+    \ operator*(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ *= p;\n  }\n\n  ArbitraryModInt operator/(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) /= p;\n  }\n\n  bool operator==(const ArbitraryModInt\
+    \ &p) const { return x == p.x; }\n\n  bool operator!=(const ArbitraryModInt &p)\
+    \ const { return x != p.x; }\n\n  ArbitraryModInt inverse() const {\n    int a\
+    \ = x, b = get_mod(), u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
+    \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n\
+    \  }\n\n  ArbitraryModInt pow(int64_t n) const {\n    ArbitraryModInt ret(1),\
+    \ mul(x);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n\
+    \      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, const ArbitraryModInt &p) {\n    return os << p.x;\n  }\n\n  friend istream\
+    \ &operator>>(istream &is, ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n\
+    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n\n  int get() const { return\
+    \ x; }\n\n  inline unsigned int rem(unsigned long long p) { return barrett().rem(p);\
+    \ }\n\n  static inline Barrett &barrett() {\n    static Barrett b;\n    return\
+    \ b;\n  }\n\n  static inline int &get_mod() {\n    static int mod = 0;\n    return\
+    \ mod;\n  }\n\n  static void set_mod(int md) {\n    assert(0 < md && md <= (1LL\
+    \ << 30) - 1);\n    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n#line\
+    \ 8 \"verify/verify-unit-test/arbitrary-modint.test.cpp\"\nusing namespace Nyaan;\n\
+    \nvoid test(int mod, int testcases) {\n  assert(0 < mod and mod <= (1 << 30) -\
+    \ 1);\n  using mint = ArbitraryModInt;\n  mint::set_mod(mod);\n\n  rep(t, testcases)\
+    \ {\n    int a = randint(0, mod);\n    if (rng() % 10 == 0) a = (mod - 1) % mod;\n\
+    \    if (rng() % 10 == 0) a = 0;\n    mint A = a;\n    assert(A.get() == a);\n\
+    \n    int b = randint(0, mod);\n    if (rng() % 10 == 0) b = (mod - 1) % mod;\n\
+    \    if (rng() % 10 == 0) b = 0;\n    mint B = b;\n    assert(B.get() == b);\n\
+    \n    int c = (a + b) % mod;\n    mint C = A + B;\n    assert(C.get() == c);\n\
+    \n    int d = (a + mod - b) % mod;\n    mint D = A - B;\n    assert(D.get() ==\
+    \ d);\n\n    int e = (1LL * a * b) % mod;\n    mint E = A * B;\n    assert(E.get()\
+    \ == e);\n\n    // \u9006\u5143 : f * g = 1\n    int f, g = -1;\n    do {\n  \
+    \    f = randint(0, mod);\n      auto [gc, invf] = atcoder::internal::inv_gcd(f,\
+    \ mod);\n      g = invf;\n    } while (1LL * f * g % mod != 1LL % mod);\n    mint\
+    \ F = f;\n    mint G = F.inverse();\n    assert(F.get() == f);\n    assert(G.get()\
+    \ == g);\n    assert(F * G == 1);\n\n    int h = 1LL * e * g % mod;\n    mint\
+    \ H = E / F;\n    assert(H.get() == h);\n\n    int i = randint(0, mod);\n    if\
+    \ (rng() % 10 == 0) i = (mod - 1) % mod;\n    if (rng() % 10 == 0) i = 0;\n  \
+    \  long long ex = randint(0, TEN(18));\n    if (rng() % 10 == 0) ex = randint(0,\
+    \ 2);\n    int j = 1 % mod;\n    {\n      int i2 = i;\n      long long e2 = ex;\n\
+    \      while (e2) {\n        if (e2 & 1) j = 1LL * j * i2 % mod;\n        i2 =\
+    \ 1LL * i2 * i2 % mod;\n        e2 >>= 1;\n      }\n    }\n    mint I = i;\n \
+    \   mint J = I.pow(ex);\n    assert(I.get() == i);\n    assert(J.get() == j);\n\
+    \n    int k = (mod - a) % mod;\n    mint K = -A;\n    assert(K.get() == k);\n\
+    \  }\n}\n\nvoid Nyaan::solve() {\n  int mod_max = (1LL << 30) - 1;\n  // \u5C0F\
+    \u3055\u3044\u65B9\n  rep1(m, 10) test(m, 10000);\n  test(998244353, 10000);\n\
+    \  test(1000000007, 10000);\n  rep(t, 10) test(mod_max - t, 10000);\n  rep(t,\
+    \ 1000) {\n    int mod = randint(1, mod_max + 1);\n    test(mod, 1000);\n  }\n\
+    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << \"\\n\";\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../atcoder/internal_math.hpp\"\
+    \n#include \"../../misc/rng.hpp\"\n#include \"../../modint/arbitrary-modint.hpp\"\
+    \nusing namespace Nyaan;\n\nvoid test(int mod, int testcases) {\n  assert(0 <\
+    \ mod and mod <= (1 << 30) - 1);\n  using mint = ArbitraryModInt;\n  mint::set_mod(mod);\n\
+    \n  rep(t, testcases) {\n    int a = randint(0, mod);\n    if (rng() % 10 == 0)\
+    \ a = (mod - 1) % mod;\n    if (rng() % 10 == 0) a = 0;\n    mint A = a;\n   \
+    \ assert(A.get() == a);\n\n    int b = randint(0, mod);\n    if (rng() % 10 ==\
+    \ 0) b = (mod - 1) % mod;\n    if (rng() % 10 == 0) b = 0;\n    mint B = b;\n\
+    \    assert(B.get() == b);\n\n    int c = (a + b) % mod;\n    mint C = A + B;\n\
+    \    assert(C.get() == c);\n\n    int d = (a + mod - b) % mod;\n    mint D = A\
+    \ - B;\n    assert(D.get() == d);\n\n    int e = (1LL * a * b) % mod;\n    mint\
+    \ E = A * B;\n    assert(E.get() == e);\n\n    // \u9006\u5143 : f * g = 1\n \
+    \   int f, g = -1;\n    do {\n      f = randint(0, mod);\n      auto [gc, invf]\
+    \ = atcoder::internal::inv_gcd(f, mod);\n      g = invf;\n    } while (1LL * f\
+    \ * g % mod != 1LL % mod);\n    mint F = f;\n    mint G = F.inverse();\n    assert(F.get()\
+    \ == f);\n    assert(G.get() == g);\n    assert(F * G == 1);\n\n    int h = 1LL\
+    \ * e * g % mod;\n    mint H = E / F;\n    assert(H.get() == h);\n\n    int i\
+    \ = randint(0, mod);\n    if (rng() % 10 == 0) i = (mod - 1) % mod;\n    if (rng()\
+    \ % 10 == 0) i = 0;\n    long long ex = randint(0, TEN(18));\n    if (rng() %\
+    \ 10 == 0) ex = randint(0, 2);\n    int j = 1 % mod;\n    {\n      int i2 = i;\n\
+    \      long long e2 = ex;\n      while (e2) {\n        if (e2 & 1) j = 1LL * j\
+    \ * i2 % mod;\n        i2 = 1LL * i2 * i2 % mod;\n        e2 >>= 1;\n      }\n\
+    \    }\n    mint I = i;\n    mint J = I.pow(ex);\n    assert(I.get() == i);\n\
+    \    assert(J.get() == j);\n\n    int k = (mod - a) % mod;\n    mint K = -A;\n\
+    \    assert(K.get() == k);\n  }\n}\n\nvoid Nyaan::solve() {\n  int mod_max = (1LL\
+    \ << 30) - 1;\n  // \u5C0F\u3055\u3044\u65B9\n  rep1(m, 10) test(m, 10000);\n\
+    \  test(998244353, 10000);\n  test(1000000007, 10000);\n  rep(t, 10) test(mod_max\
+    \ - t, 10000);\n  rep(t, 1000) {\n    int mod = randint(1, mod_max + 1);\n   \
+    \ test(mod, 1000);\n  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << \"\
+    \\n\";\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -345,18 +365,19 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - modulo/arbitrary-mod-binomial.hpp
+  - misc/rng.hpp
+  - modint/arbitrary-modint.hpp
   - modint/barrett-reduction.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+  path: verify/verify-unit-test/arbitrary-modint.test.cpp
   requiredBy: []
   timestamp: '2022-02-08 14:09:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+documentation_of: verify/verify-unit-test/arbitrary-modint.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
+- /verify/verify/verify-unit-test/arbitrary-modint.test.cpp
+- /verify/verify/verify-unit-test/arbitrary-modint.test.cpp.html
+title: verify/verify-unit-test/arbitrary-modint.test.cpp
 ---

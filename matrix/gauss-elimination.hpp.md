@@ -70,8 +70,8 @@ data:
   isVerificationFile: false
   path: matrix/gauss-elimination.hpp
   requiredBy:
-  - matrix/inverse-matrix.hpp
   - matrix/linear-equation.hpp
+  - matrix/inverse-matrix.hpp
   - fps/find-p-recursive.hpp
   timestamp: '2021-06-17 21:43:35+09:00'
   verificationStatus: LIBRARY_ALL_AC

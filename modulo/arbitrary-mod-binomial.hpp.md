@@ -126,53 +126,54 @@ data:
     \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
     \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
     \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
-    \ a = rem(n), r = 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
-    \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
-    \ 7 \"modulo/arbitrary-mod-binomial.hpp\"\n\nusing namespace std;\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
-    \ ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\nstruct prime_power_binomial\
-    \ {\n  int p, q, M;\n  vector<int> fac, ifac, inv;\n  int delta;\n  Barrett bm,\
-    \ bp;\n\n  prime_power_binomial(int _p, int _q) : p(_p), q(_q) {\n    assert(1\
-    \ < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n    assert(_q > 0);\n    long long\
-    \ m = 1;\n    while (_q--) {\n      m *= p;\n      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n\
-    \    }\n    M = m;\n    bm = Barrett(M), bp = Barrett(p);\n    enumerate();\n\
-    \    delta = (p == 2 && q >= 3) ? 1 : M - 1;\n  }\n\n  void enumerate() {\n  \
-    \  int MX = min<int>(M, PRIME_POWER_BINOMIAL_N_MAX + 10);\n    fac.resize(MX);\n\
-    \    ifac.resize(MX);\n    inv.resize(MX);\n    fac[0] = ifac[0] = inv[0] = 1;\n\
-    \    fac[1] = ifac[1] = inv[1] = 1;\n    for (int i = 2; i < MX; i++) {\n    \
-    \  if (i % p == 0) {\n        fac[i] = fac[i - 1];\n        fac[i + 1] = bm.rem(1LL\
-    \ * fac[i - 1] * (i + 1));\n        i++;\n      } else {\n        fac[i] = bm.rem(1LL\
-    \ * fac[i - 1] * i);\n      }\n    }\n    ifac[MX - 1] = bm.pow(fac[MX - 1], M\
-    \ / p * (p - 1) - 1);\n    for (int i = MX - 2; i > 1; --i) {\n      if (i % p\
-    \ == 0) {\n        ifac[i] = bm.rem(1LL * ifac[i + 1] * (i + 1));\n        ifac[i\
-    \ - 1] = ifac[i];\n        i--;\n      } else {\n        ifac[i] = bm.rem(1LL\
-    \ * ifac[i + 1] * (i + 1));\n      }\n    }\n  }\n\n  long long Lucas(long long\
-    \ n, long long m) {\n    int res = 1;\n    while (n) {\n      int n0, m0;\n  \
-    \    tie(n, n0) = bp.quorem(n);\n      tie(m, m0) = bp.quorem(m);\n      if (n0\
-    \ < m0) return 0;\n      res = bm.rem(1LL * res * fac[n0]);\n      int buf = bm.rem(1LL\
-    \ * ifac[n0 - m0] * ifac[m0]);\n      res = bm.rem(1LL * res * buf);\n    }\n\
-    \    return res;\n  }\n\n  long long C(long long n, long long m) {\n    if (n\
-    \ < m || n < 0 || m < 0) return 0;\n    if (q == 1) return Lucas(n, m);\n    long\
-    \ long r = n - m;\n    int e0 = 0, eq = 0, i = 0;\n    int res = 1;\n    while\
-    \ (n) {\n      res = bm.rem(1LL * res * fac[bm.rem(n)]);\n      res = bm.rem(1LL\
-    \ * res * ifac[bm.rem(m)]);\n      res = bm.rem(1LL * res * ifac[bm.rem(r)]);\n\
-    \      n = bp.quo(n);\n      m = bp.quo(m);\n      r = bp.quo(r);\n      int eps\
-    \ = n - m - r;\n      e0 += eps;\n      if (e0 >= q) return 0;\n      if (++i\
-    \ >= q) eq += eps;\n    }\n    if (eq & 1) res = bm.rem(1LL * res * delta);\n\
-    \    res = bm.rem(1LL * res * bm.pow(p, e0));\n    return res;\n  }\n};\n\n//\
-    \ constraints:\n// (M <= 1e7 and max(N) <= 1e18) or (M < 2^30 and max(N) <= 2e7)\n\
-    struct arbitrary_mod_binomial {\n  int mod;\n  vector<int> M;\n  vector<prime_power_binomial>\
-    \ cs;\n\n  arbitrary_mod_binomial(long long md) : mod(md) {\n    assert(1 <= md);\n\
-    \    assert(md <= PRIME_POWER_BINOMIAL_M_MAX);\n    for (int i = 2; i * i <= md;\
-    \ i++) {\n      if (md % i == 0) {\n        int j = 0, k = 1;\n        while (md\
-    \ % i == 0) md /= i, j++, k *= i;\n        M.push_back(k);\n        cs.emplace_back(i,\
-    \ j);\n        assert(M.back() == cs.back().M);\n      }\n    }\n    if (md !=\
-    \ 1) {\n      M.push_back(md);\n      cs.emplace_back(md, 1);\n    }\n    assert(M.size()\
-    \ == cs.size());\n  }\n\n  long long C(long long n, long long m) {\n    if (mod\
-    \ == 1) return 0;\n    vector<long long> rem, d;\n    for (int i = 0; i < (int)cs.size();\
-    \ i++) {\n      rem.push_back(cs[i].C(n, m));\n      d.push_back(M[i]);\n    }\n\
-    \    return atcoder::crt(rem, d).first;\n  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n\
-    #undef PRIME_POWER_BINOMIAL_N_MAX\n\n/**\n * @brief \u4EFB\u610Fmod\u4E8C\u9805\
-    \u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n */\n"
+    \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
+    \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
+    };\n#line 7 \"modulo/arbitrary-mod-binomial.hpp\"\n\nusing namespace std;\n\n\
+    #define PRIME_POWER_BINOMIAL_M_MAX ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX\
+    \ 20000000\n\nstruct prime_power_binomial {\n  int p, q, M;\n  vector<int> fac,\
+    \ ifac, inv;\n  int delta;\n  Barrett bm, bp;\n\n  prime_power_binomial(int _p,\
+    \ int _q) : p(_p), q(_q) {\n    assert(1 < p && p <= PRIME_POWER_BINOMIAL_M_MAX);\n\
+    \    assert(_q > 0);\n    long long m = 1;\n    while (_q--) {\n      m *= p;\n\
+    \      assert(m <= PRIME_POWER_BINOMIAL_M_MAX);\n    }\n    M = m;\n    bm = Barrett(M),\
+    \ bp = Barrett(p);\n    enumerate();\n    delta = (p == 2 && q >= 3) ? 1 : M -\
+    \ 1;\n  }\n\n  void enumerate() {\n    int MX = min<int>(M, PRIME_POWER_BINOMIAL_N_MAX\
+    \ + 10);\n    fac.resize(MX);\n    ifac.resize(MX);\n    inv.resize(MX);\n   \
+    \ fac[0] = ifac[0] = inv[0] = 1;\n    fac[1] = ifac[1] = inv[1] = 1;\n    for\
+    \ (int i = 2; i < MX; i++) {\n      if (i % p == 0) {\n        fac[i] = fac[i\
+    \ - 1];\n        fac[i + 1] = bm.rem(1LL * fac[i - 1] * (i + 1));\n        i++;\n\
+    \      } else {\n        fac[i] = bm.rem(1LL * fac[i - 1] * i);\n      }\n   \
+    \ }\n    ifac[MX - 1] = bm.pow(fac[MX - 1], M / p * (p - 1) - 1);\n    for (int\
+    \ i = MX - 2; i > 1; --i) {\n      if (i % p == 0) {\n        ifac[i] = bm.rem(1LL\
+    \ * ifac[i + 1] * (i + 1));\n        ifac[i - 1] = ifac[i];\n        i--;\n  \
+    \    } else {\n        ifac[i] = bm.rem(1LL * ifac[i + 1] * (i + 1));\n      }\n\
+    \    }\n  }\n\n  long long Lucas(long long n, long long m) {\n    int res = 1;\n\
+    \    while (n) {\n      int n0, m0;\n      tie(n, n0) = bp.quorem(n);\n      tie(m,\
+    \ m0) = bp.quorem(m);\n      if (n0 < m0) return 0;\n      res = bm.rem(1LL *\
+    \ res * fac[n0]);\n      int buf = bm.rem(1LL * ifac[n0 - m0] * ifac[m0]);\n \
+    \     res = bm.rem(1LL * res * buf);\n    }\n    return res;\n  }\n\n  long long\
+    \ C(long long n, long long m) {\n    if (n < m || n < 0 || m < 0) return 0;\n\
+    \    if (q == 1) return Lucas(n, m);\n    long long r = n - m;\n    int e0 = 0,\
+    \ eq = 0, i = 0;\n    int res = 1;\n    while (n) {\n      res = bm.rem(1LL *\
+    \ res * fac[bm.rem(n)]);\n      res = bm.rem(1LL * res * ifac[bm.rem(m)]);\n \
+    \     res = bm.rem(1LL * res * ifac[bm.rem(r)]);\n      n = bp.quo(n);\n     \
+    \ m = bp.quo(m);\n      r = bp.quo(r);\n      int eps = n - m - r;\n      e0 +=\
+    \ eps;\n      if (e0 >= q) return 0;\n      if (++i >= q) eq += eps;\n    }\n\
+    \    if (eq & 1) res = bm.rem(1LL * res * delta);\n    res = bm.rem(1LL * res\
+    \ * bm.pow(p, e0));\n    return res;\n  }\n};\n\n// constraints:\n// (M <= 1e7\
+    \ and max(N) <= 1e18) or (M < 2^30 and max(N) <= 2e7)\nstruct arbitrary_mod_binomial\
+    \ {\n  int mod;\n  vector<int> M;\n  vector<prime_power_binomial> cs;\n\n  arbitrary_mod_binomial(long\
+    \ long md) : mod(md) {\n    assert(1 <= md);\n    assert(md <= PRIME_POWER_BINOMIAL_M_MAX);\n\
+    \    for (int i = 2; i * i <= md; i++) {\n      if (md % i == 0) {\n        int\
+    \ j = 0, k = 1;\n        while (md % i == 0) md /= i, j++, k *= i;\n        M.push_back(k);\n\
+    \        cs.emplace_back(i, j);\n        assert(M.back() == cs.back().M);\n  \
+    \    }\n    }\n    if (md != 1) {\n      M.push_back(md);\n      cs.emplace_back(md,\
+    \ 1);\n    }\n    assert(M.size() == cs.size());\n  }\n\n  long long C(long long\
+    \ n, long long m) {\n    if (mod == 1) return 0;\n    vector<long long> rem, d;\n\
+    \    for (int i = 0; i < (int)cs.size(); i++) {\n      rem.push_back(cs[i].C(n,\
+    \ m));\n      d.push_back(M[i]);\n    }\n    return atcoder::crt(rem, d).first;\n\
+    \  }\n};\n\n#undef PRIME_POWER_BINOMIAL_M_MAX\n#undef PRIME_POWER_BINOMIAL_N_MAX\n\
+    \n/**\n * @brief \u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570\n * @docs docs/modulo/arbitrary-mod-binomial.md\n\
+    \ */\n"
   code: "#pragma once\n\n#include <vector>\n\n#include \"../atcoder/math.hpp\"\n#include\
     \ \"../modint/barrett-reduction.hpp\"\n\nusing namespace std;\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
     \ ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\nstruct prime_power_binomial\
@@ -224,7 +225,7 @@ data:
   isVerificationFile: false
   path: modulo/arbitrary-mod-binomial.hpp
   requiredBy: []
-  timestamp: '2021-04-29 18:16:59+09:00'
+  timestamp: '2022-02-08 14:09:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp

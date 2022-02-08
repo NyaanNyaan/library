@@ -281,9 +281,9 @@ data:
     \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
     \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
     \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
-    \ a = rem(n), r = 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
-    \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
-    \ 5 \"modulo/arbitrary-mod-binomial-large.hpp\"\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
+    \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
+    \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
+    };\n#line 5 \"modulo/arbitrary-mod-binomial-large.hpp\"\n\n#define PRIME_POWER_BINOMIAL_M_MAX\
     \ ((1LL << 30) - 1)\n#define PRIME_POWER_BINOMIAL_N_MAX 20000000\n\nstruct simd_prime_binomial\
     \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
     \ long long;\n  using m256 = __m256i;\n\n  u32 get_r(u32 _mod) {\n    u32 ret\
@@ -499,7 +499,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2022-02-08 14:09:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp

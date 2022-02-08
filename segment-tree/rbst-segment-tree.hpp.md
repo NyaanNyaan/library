@@ -355,9 +355,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
   - verify/verify-yuki/yuki-1786.test.cpp
 documentation_of: segment-tree/rbst-segment-tree.hpp
