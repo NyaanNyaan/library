@@ -28,7 +28,7 @@ struct Barrett {
     return {x, r};
   }
   constexpr inline i64 pow(u64 n, i64 p) {
-    u32 a = rem(n), r = 1;
+    u32 a = rem(n), r = m == 1 ? 0 : 1;
     while (p) {
       if (p & 1) r = rem(u64(r) * a);
       a = rem(u64(a) * a);

@@ -20,16 +20,45 @@ void test(int m) {
     if (y < 0) y += m;
     assert(x.x == y);
   }
+
+  Barrett barrett(m);
+
+  // m!=1 で正しく動作するはず
+  if (m != 1) {
+    rep(loop, TEN(3)) {
+      u64 i = rng();
+      auto [quo, rem] = barrett.quorem(i);
+      assert(quo == barrett.quo(i));
+      assert(rem == barrett.rem(i));
+      i64 quo2 = i / m;
+      i64 rem2 = i % m;
+      assert(quo == quo2);
+      assert(rem == rem2);
+    }
+  }
+
+  rep(loop, TEN(3)) {
+    int p = randint(0, m);
+    long long e = randint(0, 10);
+    mint r1 = mint{p}.pow(e);
+    int r2 = barrett.pow(p, e);
+    /*
+    if (r1.get() != r2) {
+      cerr << p << " " << e << " " << m << endl;
+      cerr << r1 << " " << r2 << endl;
+    }
+    */
+    assert(r1.get() == r2);
+  }
 }
 
 void Nyaan::solve() {
-  test(1);
-  test(2);
-  test(3);
+  int mod_max = (1LL << 30) - 1;
+  rep1(m, 10) test(m);
   test(998244353);
   test(1000000007);
-  test(2 * TEN(9));
-  rep(i, TEN(5)) test(randint(1, 2 * TEN(9) + 1));
+  rep(t, 10) test(mod_max - t);
+  rep(i, TEN(4)) test(randint(1, mod_max + 1));
   cerr << "OK" << endl;
 
   int a, b;
