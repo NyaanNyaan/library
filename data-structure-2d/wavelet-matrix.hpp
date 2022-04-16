@@ -63,7 +63,10 @@ struct WaveletMatrix {
     return;
   }
 
-  void set(u32 i, const T& x) { a[i] = x; }
+  void set(u32 i, const T& x) { 
+    assert(x >= 0);
+    a[i] = x; 
+  }
 
   inline pair<u32, u32> succ0(int l, int r, int h) const {
     return make_pair(bv[h].rank0(l), bv[h].rank0(r));
