@@ -104,8 +104,8 @@ data:
   timestamp: '2022-02-08 14:09:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
+  - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
 documentation_of: modint/arbitrary-modint.hpp
 layout: document

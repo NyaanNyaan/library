@@ -122,8 +122,8 @@ data:
   timestamp: '2020-12-18 23:44:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
 documentation_of: lct/splay-lazy-reversible.hpp
 layout: document
 redirect_from:

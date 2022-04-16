@@ -354,12 +354,12 @@ data:
   timestamp: '2022-01-13 15:07:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
-  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
-  - verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
-  - verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
   - verify/verify-yuki/yuki-1786.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
+  - verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
 documentation_of: segment-tree/rbst-segment-tree.hpp
 layout: document
 redirect_from:

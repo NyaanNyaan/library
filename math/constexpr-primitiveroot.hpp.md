@@ -48,9 +48,9 @@ data:
   timestamp: '2021-05-18 09:24:09+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/dual-fps.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/dual-fps.test.cpp
 documentation_of: math/constexpr-primitiveroot.hpp
 layout: document
 redirect_from:

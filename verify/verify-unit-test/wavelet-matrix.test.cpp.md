@@ -192,36 +192,37 @@ data:
     \      bv[h].build();\n      array<decltype(begin(nxt)), 2> it{begin(nxt), begin(nxt)\
     \ + bv[h].zeros};\n      for (int i = 0; i < n; ++i) *it[bv[h].get(i)]++ = cur[i];\n\
     \      swap(cur, nxt);\n    }\n    return;\n  }\n\n  void set(u32 i, const T&\
-    \ x) { a[i] = x; }\n\n  inline pair<u32, u32> succ0(int l, int r, int h) const\
-    \ {\n    return make_pair(bv[h].rank0(l), bv[h].rank0(r));\n  }\n\n  inline pair<u32,\
-    \ u32> succ1(int l, int r, int h) const {\n    u32 l0 = bv[h].rank0(l);\n    u32\
-    \ r0 = bv[h].rank0(r);\n    u32 zeros = bv[h].zeros;\n    return make_pair(l +\
-    \ zeros - l0, r + zeros - r0);\n  }\n\n  // return a[k]\n  T access(u32 k) const\
-    \ {\n    T ret = 0;\n    for (int h = lg - 1; h >= 0; --h) {\n      u32 f = bv[h].get(k);\n\
-    \      ret |= f ? T(1) << h : 0;\n      k = f ? bv[h].rank1(k) + bv[h].zeros :\
-    \ bv[h].rank0(k);\n    }\n    return ret;\n  }\n\n  // k-th (0-indexed) smallest\
-    \ number in a[l, r)\n  T kth_smallest(u32 l, u32 r, u32 k) const {\n    T res\
-    \ = 0;\n    for (int h = lg - 1; h >= 0; --h) {\n      u32 l0 = bv[h].rank0(l),\
-    \ r0 = bv[h].rank0(r);\n      if (k < r0 - l0)\n        l = l0, r = r0;\n    \
-    \  else {\n        k -= r0 - l0;\n        res |= (T)1 << h;\n        l += bv[h].zeros\
-    \ - l0;\n        r += bv[h].zeros - r0;\n      }\n    }\n    return res;\n  }\n\
-    \n  // k-th (0-indexed) largest number in a[l, r)\n  T kth_largest(int l, int\
-    \ r, int k) {\n    return kth_smallest(l, r, r - l - k - 1);\n  }\n\n  // count\
-    \ i s.t. (l <= i < r) && (v[i] < upper)\n  int range_freq(int l, int r, T upper)\
-    \ {\n    if (upper >= (T(1) << lg)) return r - l;\n    int ret = 0;\n    for (int\
-    \ h = lg - 1; h >= 0; --h) {\n      bool f = (upper >> h) & 1;\n      u32 l0 =\
-    \ bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if (f) {\n        ret += r0 - l0;\n\
-    \        l += bv[h].zeros - l0;\n        r += bv[h].zeros - r0;\n      } else\
-    \ {\n        l = l0;\n        r = r0;\n      }\n    }\n    return ret;\n  }\n\n\
-    \  int range_freq(int l, int r, T lower, T upper) {\n    return range_freq(l,\
-    \ r, upper) - range_freq(l, r, lower);\n  }\n\n  // max v[i] s.t. (l <= i < r)\
-    \ && (v[i] < upper)\n  T prev_value(int l, int r, T upper) {\n    int cnt = range_freq(l,\
-    \ r, upper);\n    return cnt == 0 ? T(-1) : kth_smallest(l, r, cnt - 1);\n  }\n\
-    \n  // min v[i] s.t. (l <= i < r) && (lower <= v[i])\n  T next_value(int l, int\
-    \ r, T lower) {\n    int cnt = range_freq(l, r, lower);\n    return cnt == r -\
-    \ l ? T(-1) : kth_smallest(l, r, cnt);\n  }\n};\n\n/*\n * @brief Wavelet Matrix\n\
-    \ * @docs docs/data-structure-2d/wavelet-matrix.md\n */\n#line 5 \"verify/verify-unit-test/wavelet-matrix.test.cpp\"\
-    \n\nuint64_t rng() {\n  static uint64_t x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ x) { \n    assert(x >= 0);\n    a[i] = x; \n  }\n\n  inline pair<u32, u32> succ0(int\
+    \ l, int r, int h) const {\n    return make_pair(bv[h].rank0(l), bv[h].rank0(r));\n\
+    \  }\n\n  inline pair<u32, u32> succ1(int l, int r, int h) const {\n    u32 l0\
+    \ = bv[h].rank0(l);\n    u32 r0 = bv[h].rank0(r);\n    u32 zeros = bv[h].zeros;\n\
+    \    return make_pair(l + zeros - l0, r + zeros - r0);\n  }\n\n  // return a[k]\n\
+    \  T access(u32 k) const {\n    T ret = 0;\n    for (int h = lg - 1; h >= 0; --h)\
+    \ {\n      u32 f = bv[h].get(k);\n      ret |= f ? T(1) << h : 0;\n      k = f\
+    \ ? bv[h].rank1(k) + bv[h].zeros : bv[h].rank0(k);\n    }\n    return ret;\n \
+    \ }\n\n  // k-th (0-indexed) smallest number in a[l, r)\n  T kth_smallest(u32\
+    \ l, u32 r, u32 k) const {\n    T res = 0;\n    for (int h = lg - 1; h >= 0; --h)\
+    \ {\n      u32 l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if (k < r0 - l0)\n\
+    \        l = l0, r = r0;\n      else {\n        k -= r0 - l0;\n        res |=\
+    \ (T)1 << h;\n        l += bv[h].zeros - l0;\n        r += bv[h].zeros - r0;\n\
+    \      }\n    }\n    return res;\n  }\n\n  // k-th (0-indexed) largest number\
+    \ in a[l, r)\n  T kth_largest(int l, int r, int k) {\n    return kth_smallest(l,\
+    \ r, r - l - k - 1);\n  }\n\n  // count i s.t. (l <= i < r) && (v[i] < upper)\n\
+    \  int range_freq(int l, int r, T upper) {\n    if (upper >= (T(1) << lg)) return\
+    \ r - l;\n    int ret = 0;\n    for (int h = lg - 1; h >= 0; --h) {\n      bool\
+    \ f = (upper >> h) & 1;\n      u32 l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\n\
+    \      if (f) {\n        ret += r0 - l0;\n        l += bv[h].zeros - l0;\n   \
+    \     r += bv[h].zeros - r0;\n      } else {\n        l = l0;\n        r = r0;\n\
+    \      }\n    }\n    return ret;\n  }\n\n  int range_freq(int l, int r, T lower,\
+    \ T upper) {\n    return range_freq(l, r, upper) - range_freq(l, r, lower);\n\
+    \  }\n\n  // max v[i] s.t. (l <= i < r) && (v[i] < upper)\n  T prev_value(int\
+    \ l, int r, T upper) {\n    int cnt = range_freq(l, r, upper);\n    return cnt\
+    \ == 0 ? T(-1) : kth_smallest(l, r, cnt - 1);\n  }\n\n  // min v[i] s.t. (l <=\
+    \ i < r) && (lower <= v[i])\n  T next_value(int l, int r, T lower) {\n    int\
+    \ cnt = range_freq(l, r, lower);\n    return cnt == r - l ? T(-1) : kth_smallest(l,\
+    \ r, cnt);\n  }\n};\n\n/*\n * @brief Wavelet Matrix\n * @docs docs/data-structure-2d/wavelet-matrix.md\n\
+    \ */\n#line 5 \"verify/verify-unit-test/wavelet-matrix.test.cpp\"\n\nuint64_t\
+    \ rng() {\n  static uint64_t x_ =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
     \  .count();\n  return x_ ^= (x_ << 7), x_ ^= (x_ >> 9);\n}\n\nint randint(int\
     \ l, int r) {\n  assert(l < r);\n  return rng() % (r - l) + l;\n}\n\nvoid test(int\
@@ -308,7 +309,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/wavelet-matrix.test.cpp
   requiredBy: []
-  timestamp: '2021-11-15 21:11:20+09:00'
+  timestamp: '2022-04-16 23:19:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/wavelet-matrix.test.cpp

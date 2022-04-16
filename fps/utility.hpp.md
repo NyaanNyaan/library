@@ -158,8 +158,8 @@ data:
   timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
 documentation_of: fps/utility.hpp
 layout: document
 redirect_from:
