@@ -167,3 +167,8 @@ struct SA_manager {
 };
 
 #undef debug
+
+/**
+ * @brief Multipoint Simulated Annealing
+ * @docs docs/marathon/sa-manager.md
+ */
