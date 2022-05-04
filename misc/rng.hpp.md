@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: marathon/sa-manager.hpp
-    title: marathon/sa-manager.hpp
+    title: Multipoint Simulated Annealing
   - icon: ':heavy_check_mark:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra

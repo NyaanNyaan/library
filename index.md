@@ -339,7 +339,7 @@ data:
       title: marathon/log_table.hpp
     - icon: ':warning:'
       path: marathon/sa-manager.hpp
-      title: marathon/sa-manager.hpp
+      title: Multipoint Simulated Annealing
     - icon: ':heavy_check_mark:'
       path: marathon/simulated-annealing.hpp
       title: Simulated Annealing

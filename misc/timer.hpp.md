@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':warning:'
     path: marathon/sa-manager.hpp
-    title: marathon/sa-manager.hpp
+    title: Multipoint Simulated Annealing
   - icon: ':heavy_check_mark:'
     path: marathon/simulated-annealing.hpp
     title: Simulated Annealing
