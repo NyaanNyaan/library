@@ -683,8 +683,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/strassen.test.cpp
-  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
 documentation_of: modulo/strassen.hpp
 layout: document
 redirect_from:

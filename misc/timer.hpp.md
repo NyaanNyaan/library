@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: marathon/sa-manager.hpp
+    title: marathon/sa-manager.hpp
   - icon: ':heavy_check_mark:'
     path: marathon/simulated-annealing.hpp
     title: Simulated Annealing
@@ -46,16 +49,17 @@ data:
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
-  - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
+  - trial/fast-inv.hpp
+  - marathon/sa-manager.hpp
   - marathon/simulated-annealing.hpp
   timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
 documentation_of: misc/timer.hpp
 layout: document

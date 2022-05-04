@@ -106,11 +106,11 @@ data:
   timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1326.test.cpp
-  - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-  - verify/verify-aoj-other/aoj-3022.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+  - verify/verify-aoj-other/aoj-3022.test.cpp
+  - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
 documentation_of: graph/lowlink.hpp
 layout: document
 redirect_from:
