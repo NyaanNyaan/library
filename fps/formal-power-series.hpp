@@ -150,13 +150,12 @@ struct FormalPowerSeries : vector<mint> {
     const int n = (int)this->size();
     if (deg == -1) deg = n;
     if (k == 0) {
-      FPS ret(n);
-      if (n) ret[0] = 1;
+      FPS ret(deg);
+      if (deg) ret[0] = 1;
       return ret;
     }
     for (int i = 0; i < n; i++) {
       if ((*this)[i] != mint(0)) {
-        if (max<int64_t>(k, i * k) >= deg) return FPS(deg, mint(0));
         mint rev = mint(1) / (*this)[i];
         FPS ret = (((*this * rev) >> i).log(deg) * k).exp(deg);
         ret *= (*this)[i].pow(k);
@@ -164,7 +163,7 @@ struct FormalPowerSeries : vector<mint> {
         if ((int)ret.size() < deg) ret.resize(deg, mint(0));
         return ret;
       }
-      if (max<int64_t>(k, i * k) >= deg) return FPS(deg, mint(0));
+      if (__int128_t(i + 1) * k >= deg) return FPS(deg, mint(0));
     }
     return FPS(deg, mint(0));
   }
