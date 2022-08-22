@@ -1,14 +1,6 @@
 ---
 data:
   libraryCategories:
-  - name: .
-    pages:
-    - icon: ':warning:'
-      path: auto_submit.py
-      title: auto_submit.py
-    - icon: ':warning:'
-      path: simple_template.hpp
-      title: simple_template.hpp
   - name: data-structure
     pages:
     - icon: ':heavy_check_mark:'
@@ -725,7 +717,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/dynamic-li-chao-tree.hpp
       title: segment-tree/dynamic-li-chao-tree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/dynamic-segment-tree.hpp
       title: Dynamic Segment Tree
     - icon: ':heavy_check_mark:'
@@ -846,22 +838,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1784,7 +1776,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0720.test.cpp
       title: verify/verify-yuki/yuki-0720.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0789.test.cpp
       title: verify/verify-yuki/yuki-0789.test.cpp
     - icon: ':heavy_check_mark:'

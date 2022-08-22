@@ -7,6 +7,8 @@ exclude:
 - compress.py
 - unused
 - modulo/arbitrary-mod-binomial-large.hpp
+- auto_submit.py
+- simple_template.hpp
 plugins:
 - jemoji
 - jekyll-redirect-from
