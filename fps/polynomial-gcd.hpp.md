@@ -7,12 +7,12 @@ data:
       \u30E9\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/fps/polynomial-gcd.md
     document_title: "\u591A\u9805\u5F0FGCD"
@@ -179,7 +179,7 @@ data:
   path: fps/polynomial-gcd.hpp
   requiredBy: []
   timestamp: '2021-01-31 00:21:53+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
 documentation_of: fps/polynomial-gcd.hpp

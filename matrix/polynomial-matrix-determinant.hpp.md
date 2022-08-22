@@ -8,7 +8,7 @@ data:
   - icon: ':question:'
     path: fps/multipoint-evaluation.hpp
     title: Multipoint Evaluation
-  - icon: ':x:'
+  - icon: ':question:'
     path: fps/polynomial-interpolation.hpp
     title: fps/polynomial-interpolation.hpp
   - icon: ':question:'

@@ -300,23 +300,25 @@ data:
     \ i) {\n    Ptr p = find(root, i);\n    return p ? p->key : ti();\n  }\n\n  //\
     \ \u9802\u70B9\u306E\u524A\u9664\n  void erase(I i) {\n    auto s = split_by_index(root,\
     \ i);\n    if (s[1]) my_del(s[1]);\n    root = merge(s[0], s[2]);\n  }\n\n  //\
-    \ \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E &e) { _apply(root,\
-    \ l, r, e); }\n\n  // \u7BC4\u56F2\u53D6\u5F97\n  T fold(I l, I r) { return _fold(root,\
-    \ l, r); }\n\n  // index \u6700\u5927\u3092\u53D6\u5F97\n  I max_index(I failed\
-    \ = -1) { return _max_index(root, failed); }\n\n  // n \u672A\u6E80\u306E i \u306E\
-    \u3046\u3061\u3001[i, n) \u306E\u533A\u9593 fold \u304C true \u306B\u306A\u308B\
-    \u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\n  // (\u5B58\u5728\u3057\u306A\u3044\
-    \u5834\u5408\u306F failed \u3092\u8FD4\u3059)\n  template <typename C>\n  I min_left(I\
-    \ n, C check, I failed) {\n    assert(check(ti()) == true);\n    auto [x, y] =\
-    \ split_left(root, n);\n    I res = _min_left<C, true>(x, check, failed);\n  \
-    \  root = merge(x, y);\n    return res;\n  }\n\n  // n \u672A\u6E80\u306E i \u306E\
-    \u3046\u3061\u3001(i, n) \u306E\u533A\u9593 fold \u304C true \u306B\u306A\u308B\
-    \u6700\u5C0F\u306E i \u306F\u4F55\u304B\uFF1F\n  // (\u7A7A\u3060\u3063\u305F\u308A\
-    \ (\u5DE6\u7AEF, n) \u304C \u771F\u306E\u5834\u5408\u306F minus_infty \u3092\u8FD4\
-    \u3059)\n  template <typename C>\n  I min_left_exclusive(I n, C check, I minus_infty)\
-    \ {\n    assert(check(ti()) == true);\n    auto [x, y] = split_left(root, n);\n\
-    \    I res = _min_left<C, false>(x, check, minus_infty);\n    root = merge(x,\
-    \ y);\n    return res;\n  }\n\n  // n \u4EE5\u4E0A\u306E i \u306E\u3046\u3061\u3001\
+    \ \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E &e) {\n    // _apply(root,\
+    \ l, r, e);\n    auto [x, yz] = split_left(root, l);\n    auto [y, z] = split_left(yz,\
+    \ r);\n    propagate(y, e);\n    root = merge(merge(x, y), z);\n  }\n\n  // \u7BC4\
+    \u56F2\u53D6\u5F97\n  T fold(I l, I r) { return _fold(root, l, r); }\n\n  // index\
+    \ \u6700\u5927\u3092\u53D6\u5F97\n  I max_index(I failed = -1) { return _max_index(root,\
+    \ failed); }\n\n  // n \u672A\u6E80\u306E i \u306E\u3046\u3061\u3001[i, n) \u306E\
+    \u533A\u9593 fold \u304C true \u306B\u306A\u308B\u6700\u5C0F\u306E i \u306F\u4F55\
+    \u304B\uFF1F\n  // (\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F failed \u3092\
+    \u8FD4\u3059)\n  template <typename C>\n  I min_left(I n, C check, I failed) {\n\
+    \    assert(check(ti()) == true);\n    auto [x, y] = split_left(root, n);\n  \
+    \  I res = _min_left<C, true>(x, check, failed);\n    root = merge(x, y);\n  \
+    \  return res;\n  }\n\n  // n \u672A\u6E80\u306E i \u306E\u3046\u3061\u3001(i,\
+    \ n) \u306E\u533A\u9593 fold \u304C true \u306B\u306A\u308B\u6700\u5C0F\u306E\
+    \ i \u306F\u4F55\u304B\uFF1F\n  // (\u7A7A\u3060\u3063\u305F\u308A (\u5DE6\u7AEF\
+    , n) \u304C \u771F\u306E\u5834\u5408\u306F minus_infty \u3092\u8FD4\u3059)\n \
+    \ template <typename C>\n  I min_left_exclusive(I n, C check, I minus_infty) {\n\
+    \    assert(check(ti()) == true);\n    auto [x, y] = split_left(root, n);\n  \
+    \  I res = _min_left<C, false>(x, check, minus_infty);\n    root = merge(x, y);\n\
+    \    return res;\n  }\n\n  // n \u4EE5\u4E0A\u306E i \u306E\u3046\u3061\u3001\
     [n, i) \u306E\u533A\u9593 fold \u304C true \u306B\u306A\u308B\u6700\u5927\u306E\
     \ i \u306F\u4F55\u304B\uFF1F\n  // (\u7A7A\u3060\u3063\u305F\u308A [n, \u53F3\u7AEF\
     ] \u304C true \u306E\u5834\u5408\u306F infty \u3092\u8FD4\u3059)\n  template <typename\
@@ -376,7 +378,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 20:44:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp

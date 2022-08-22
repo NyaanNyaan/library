@@ -17,7 +17,7 @@ data:
     path: matrix/polynomial-matrix-determinant.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306E\u884C\u5217\u5F0F"
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
     title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
   - icon: ':x:'
@@ -25,7 +25,7 @@ data:
     title: verify/verify-yuki/yuki-1303.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"fps/polynomial-interpolation.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
@@ -169,7 +169,7 @@ data:
   - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
   timestamp: '2021-03-26 14:37:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp

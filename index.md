@@ -11,7 +11,7 @@ data:
       title: simple_template.hpp
   - name: data-structure
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/binary-indexed-tree.hpp
       title: Binary Indexed Tree(Fenwick Tree)
     - icon: ':heavy_check_mark:'
@@ -146,7 +146,7 @@ data:
       title: "\u4E8C\u90E8\u30B0\u30E9\u30D5\u306E\u30D5\u30ED\u30FC"
   - name: fps
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: fps/arbitrary-fps.hpp
       title: fps/arbitrary-fps.hpp
     - icon: ':question:'
@@ -175,10 +175,10 @@ data:
     - icon: ':x:'
       path: fps/fps-circular.hpp
       title: "\u4E09\u89D2\u95A2\u6570"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-composition-fast.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
@@ -216,10 +216,10 @@ data:
       path: fps/partial-fraction-decomposition.hpp
       title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\
         \u306E\u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/polynomial-gcd.hpp
       title: "\u591A\u9805\u5F0FGCD"
-    - icon: ':x:'
+    - icon: ':question:'
       path: fps/polynomial-interpolation.hpp
       title: fps/polynomial-interpolation.hpp
     - icon: ':question:'
@@ -288,7 +288,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/offline-dynamic-connectivity.hpp
       title: graph/offline-dynamic-connectivity.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/static-graph.hpp
       title: Static Graph
     - icon: ':heavy_check_mark:'
@@ -373,7 +373,7 @@ data:
       title: Simulated Annealing
   - name: math
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
     - icon: ':question:'
@@ -585,7 +585,7 @@ data:
     - icon: ':warning:'
       path: modulo/quadratic-equation.hpp
       title: modulo/quadratic-equation.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/strassen.hpp
       title: modulo/strassen.hpp
     - icon: ':heavy_check_mark:'
@@ -625,7 +625,7 @@ data:
       title: "\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\u6570\u306E\u548C"
   - name: ntt
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: ntt/arbitrary-ntt.hpp
       title: ntt/arbitrary-ntt.hpp
     - icon: ':x:'
@@ -750,7 +750,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree-beats.hpp
       title: Range Chmin Chmax Add Update Range Min Max Sum Segment Tree Beats!
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/segment-tree.hpp
       title: segment-tree/segment-tree.hpp
   - name: set-function
@@ -879,7 +879,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/dsu-on-tree.hpp
       title: DSU on Tree(Guni)
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/euler-tour.hpp
       title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
     - icon: ':x:'
@@ -1371,7 +1371,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1398,7 +1398,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
       title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1413,33 +1413,33 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
       title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - name: verify/verify-yosupo-fps
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
       title: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
       title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
       title: verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     - icon: ':x:'

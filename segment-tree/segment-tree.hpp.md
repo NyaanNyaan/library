@@ -27,15 +27,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
     title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segment-tree/segment-tree.hpp\"\n\ntemplate <typename T,\
@@ -117,7 +117,7 @@ data:
   requiredBy:
   - data-structure-2d/segment-tree-on-range-tree.hpp
   timestamp: '2021-12-30 19:20:16+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
