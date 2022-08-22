@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/biconnected-components.hpp
     title: "\u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3"
   - icon: ':heavy_check_mark:'
@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/kruskal.hpp
     title: graph/kruskal.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
   - icon: ':heavy_check_mark:'
@@ -26,13 +26,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/strongly-connected-components.hpp
     title: graph/strongly-connected-components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/topological-sort.hpp
     title: graph/topological-sort.hpp
   - icon: ':heavy_check_mark:'
     path: graph/two-edge-connected-components.hpp
     title: graph/two-edge-connected-components.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/grundy-number.hpp
     title: Grundy Number
   - icon: ':heavy_check_mark:'
@@ -59,29 +59,29 @@ data:
   - icon: ':heavy_check_mark:'
     path: shortest-path/warshall-floyd.hpp
     title: shortest-path/warshall-floyd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/block-cut-tree.hpp
     title: Block Cut Tree
   - icon: ':heavy_check_mark:'
     path: tree/cartesian-tree.hpp
     title: Cartesian Tree
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/convert-tree.hpp
     title: "\u6839\u4ED8\u304D\u6728\u30FB\u9006\u8FBA\u304B\u3089\u306A\u308B\u6728\
       \u3078\u306E\u5909\u63DB"
   - icon: ':heavy_check_mark:'
     path: tree/dsu-on-tree.hpp
     title: DSU on Tree(Guni)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/euler-tour.hpp
     title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/heavy-light-decomposition.hpp
     title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   - icon: ':heavy_check_mark:'
     path: tree/rerooting.hpp
     title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/tree-query.hpp
     title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedVerifiedWith:
@@ -160,10 +160,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/semiring.test.cpp
     title: verify/verify-unit-test/semiring.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - icon: ':heavy_check_mark:'
@@ -178,7 +178,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
@@ -196,7 +196,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
     title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':heavy_check_mark:'
@@ -220,7 +220,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   - icon: ':heavy_check_mark:'
@@ -229,7 +229,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1320.test.cpp
     title: verify/verify-yuki/yuki-1320.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1326.test.cpp
     title: verify/verify-yuki/yuki-1326.test.cpp
   - icon: ':heavy_check_mark:'
@@ -238,9 +238,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1789.test.cpp
     title: verify/verify-yuki/yuki-1789.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/graph/graph-template.md
     document_title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
@@ -309,87 +309,87 @@ data:
   isVerificationFile: false
   path: graph/graph-template.hpp
   requiredBy:
-  - graph/kruskal.hpp
-  - graph/topological-sort.hpp
-  - graph/two-edge-connected-components.hpp
-  - graph/strongly-connected-components.hpp
-  - graph/biconnected-components.hpp
-  - graph/cycle-detection.hpp
-  - graph/minimum-cost-arborescence.hpp
-  - graph/graph-utility.hpp
-  - graph/lowlink.hpp
-  - graph/funtional-graph.hpp
+  - tree/block-cut-tree.hpp
+  - tree/euler-tour.hpp
+  - tree/tree-query.hpp
+  - tree/dsu-on-tree.hpp
+  - tree/rerooting.hpp
+  - tree/cartesian-tree.hpp
   - tree/heavy-light-decomposition.hpp
   - tree/convert-tree.hpp
-  - tree/euler-tour.hpp
-  - tree/block-cut-tree.hpp
-  - tree/cartesian-tree.hpp
-  - tree/rerooting.hpp
-  - tree/dsu-on-tree.hpp
-  - tree/tree-query.hpp
-  - shortest-path/warshall-floyd.hpp
+  - graph/kruskal.hpp
+  - graph/cycle-detection.hpp
+  - graph/strongly-connected-components.hpp
+  - graph/graph-utility.hpp
+  - graph/lowlink.hpp
+  - graph/topological-sort.hpp
+  - graph/biconnected-components.hpp
+  - graph/minimum-cost-arborescence.hpp
+  - graph/two-edge-connected-components.hpp
+  - graph/funtional-graph.hpp
+  - math/grundy-number.hpp
+  - shortest-path/dijkstra.hpp
+  - shortest-path/bellman-ford.hpp
   - shortest-path/restore-shortest-path.hpp
   - shortest-path/bfs01.hpp
-  - shortest-path/bellman-ford.hpp
-  - shortest-path/dijkstra.hpp
+  - shortest-path/dijkstra-radix-heap.hpp
+  - shortest-path/warshall-floyd.hpp
   - shortest-path/dual-of-shortest-path.hpp
   - shortest-path/dijkstra-with-restore.hpp
-  - shortest-path/dijkstra-radix-heap.hpp
-  - math/grundy-number.hpp
   timestamp: '2021-11-23 10:22:25+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
-  - verify/verify-aoj-other/aoj-0304.test.cpp
-  - verify/verify-aoj-other/aoj-2995.test.cpp
-  - verify/verify-aoj-other/aoj-3022.test.cpp
-  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - verify/verify-aoj-other/aoj-2891.test.cpp
-  - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
+  - verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
+  - verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
+  - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+  - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
+  - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+  - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+  - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
-  - verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
-  - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
-  - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
-  - verify/verify-yosupo-graph/yosupo-cartesian.test.cpp
-  - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
-  - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
-  - verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
-  - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
-  - verify/verify-yuki/yuki-1320.test.cpp
-  - verify/verify-yuki/yuki-1326.test.cpp
-  - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yuki/yuki-1789.test.cpp
-  - verify/verify-yuki/yuki-1254.test.cpp
-  - verify/verify-yuki/yuki-1778.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-3022.test.cpp
+  - verify/verify-aoj-other/aoj-2995.test.cpp
+  - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
+  - verify/verify-aoj-other/aoj-2891.test.cpp
+  - verify/verify-aoj-other/aoj-0304.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - verify/verify-yuki/yuki-1778.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-1254.test.cpp
+  - verify/verify-yuki/yuki-1326.test.cpp
+  - verify/verify-yuki/yuki-1320.test.cpp
+  - verify/verify-yuki/yuki-1789.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-2-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-b.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-a-rerooting.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-c.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-b.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-c.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
 documentation_of: graph/graph-template.hpp
 layout: document
 redirect_from:

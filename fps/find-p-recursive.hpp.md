@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/sample-point-shift.hpp
     title: fps/sample-point-shift.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/gauss-elimination.hpp
     title: matrix/gauss-elimination.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/linear-equation.hpp
     title: matrix/linear-equation.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/polynomial-matrix-prefix-prod.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
@@ -28,12 +28,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/p-recursive.test.cpp
     title: verify/verify-unit-test/p-recursive.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/fps/find-p-recursive.md
     document_title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
@@ -130,32 +130,33 @@ data:
     \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
     \ @docs docs/fps/formal-power-series.md\n */\n#line 2 \"fps/sample-point-shift.hpp\"\
     \n\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial\
-    \ {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) : f(1, T(1)), g(1, T(1)), h(1,\
-    \ T(1)) {\n    while (MAX >= (int)f.size()) extend();\n  }\n\n  void extend()\
-    \ {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n    g.resize(m);\n\
-    \    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n \
-    \   g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for\
-    \ (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i]\
-    \ = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n\
-    \    while (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int\
-    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n\
-    \    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n\
-    \    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int\
+    \ {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
+    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
+    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
+    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
+    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
+    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
+    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
+    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
+    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
+    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
+    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
+    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
+    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
+    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
+    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
+    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
+    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return\
-    \ C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>& r) {\n\
-    \    static_assert(is_integral<I>::value == true);\n    int n = 0;\n    for (auto&\
-    \ x : r) {\n      if(x < 0) return T(0);\n      n += x;\n    }\n    T res = fac(n);\n\
-    \    for (auto& x : r) res *= finv(x);\n    return res;\n  }\n\n  template <typename\
-    \ I>\n  T operator()(const vector<I>& r) {\n    return multinomial(r);\n  }\n\n\
-    \  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
-    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
-    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
-    \n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"fps/sample-point-shift.hpp\"\n\n\
-    // input : y(0), y(1), ..., y(n - 1)\n// output : y(t), y(t + 1), ..., y(t + m\
-    \ - 1)\n// (if m is default, m = n)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
+    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"fps/sample-point-shift.hpp\"\
+    \n\n// input : y(0), y(1), ..., y(n - 1)\n// output : y(t), y(t + 1), ..., y(t\
+    \ + m - 1)\n// (if m is default, m = n)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ SamplePointShift(FormalPowerSeries<mint>& y, mint t,\n                     \
     \                    int m = -1) {\n  if (m == -1) m = y.size();\n  long long\
     \ T = t.get();\n  int k = (int)y.size() - 1;\n  T %= mint::get_mod();\n  if (T\
@@ -274,9 +275,11 @@ data:
     \ end(a), [](mint x) { return x == mint(0); })) return 0;\n\n  int n = a.size()\
     \ - 1;\n  vector<mint> b{begin(a), end(a) - 1};\n\n  for (int d = 0;; d++) {\n\
     \    if ((n + 2) / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n,\
-    \ d) == a.back()) {\n      return kth_term_of_p_recursive(a, k, d);\n    }\n \
-    \ }\n  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n/**\n * @brief P-recursive\u306E\
-    \u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n"
+    \ d) == a.back()) {\n#ifdef NyaanLocal\n      cerr << \"d : \" << d << endl;\n\
+    \      cerr << find_p_recursive(b, d) << endl;\n#endif\n      return kth_term_of_p_recursive(a,\
+    \ k, d);\n    }\n  }\n  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n/**\n *\
+    \ @brief P-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n\
+    \ */\n"
   code: "#pragma once\n\n#include \"../matrix/linear-equation.hpp\"\n#include \"../matrix/polynomial-matrix-prefix-prod.hpp\"\
     \n#include \"formal-power-series.hpp\"\n\n// return polynomial coefficient s.t.\
     \ sum_{j=k...0} f_j(i) a_{i+j} = 0\n// (In more details, read verification code.)\n\
@@ -308,9 +311,11 @@ data:
     \ end(a), [](mint x) { return x == mint(0); })) return 0;\n\n  int n = a.size()\
     \ - 1;\n  vector<mint> b{begin(a), end(a) - 1};\n\n  for (int d = 0;; d++) {\n\
     \    if ((n + 2) / (d + 2) <= 1) break;\n    if (kth_term_of_p_recursive(b, n,\
-    \ d) == a.back()) {\n      return kth_term_of_p_recursive(a, k, d);\n    }\n \
-    \ }\n  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n/**\n * @brief P-recursive\u306E\
-    \u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n */\n"
+    \ d) == a.back()) {\n#ifdef NyaanLocal\n      cerr << \"d : \" << d << endl;\n\
+    \      cerr << find_p_recursive(b, d) << endl;\n#endif\n      return kth_term_of_p_recursive(a,\
+    \ k, d);\n    }\n  }\n  cerr << \"Failed.\" << endl;\n  exit(1);\n}\n\n/**\n *\
+    \ @brief P-recursive\u306E\u9AD8\u901F\u8A08\u7B97\n * @docs docs/fps/find-p-recursive.md\n\
+    \ */\n"
   dependsOn:
   - matrix/linear-equation.hpp
   - matrix/gauss-elimination.hpp
@@ -322,8 +327,8 @@ data:
   isVerificationFile: false
   path: fps/find-p-recursive.hpp
   requiredBy: []
-  timestamp: '2021-12-20 22:10:59+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp

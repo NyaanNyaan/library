@@ -1,52 +1,51 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
     links: []
   bundledCode: "#line 2 \"rbst/treap.hpp\"\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace\
-    \ my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n  \
-    \    uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n                  \
-    \ chrono::high_resolution_clock::now().time_since_epoch())\n                 \
-    \  .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return x_\
-    \ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
-    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
-    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
-    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
-    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
-    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
-    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
-    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
-    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
-    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
-    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
-    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"\
-    rbst/treap.hpp\"\n\ntemplate <typename Node>\nstruct TreapBase {\n  using Ptr\
-    \ = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args... args)\
-    \ {\n    return new Node(args...);\n  }\n  Ptr make_tree() { return nullptr; }\n\
-    \n  // for avoiding memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n\
-    \  template <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return\
-    \ make_shared<Node>(args...);\n  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n\
-    \  int size(Ptr t) const { return count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n\
-    \    if (!l || !r) return l ? l : r;\n    if (l->pr >= r->pr) {\n      push(l);\n\
-    \      l->r = merge(l->r, r);\n      return update(l);\n    } else {\n      push(r);\n\
-    \      r->l = merge(l, r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr,\
-    \ Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n\
-    \    if (k <= count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n\
-    \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
-    \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
+    \ my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\n// [0,\
+    \ 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"rbst/treap.hpp\"\n\ntemplate\
+    \ <typename Node>\nstruct TreapBase {\n  using Ptr = Node *;\n  template <typename...\
+    \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
+    \  }\n  Ptr make_tree() { return nullptr; }\n\n  // for avoiding memory leak,\
+    \ activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template <typename...\
+    \ Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
+    \  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr t) const { return\
+    \ count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l :\
+    \ r;\n    if (l->pr >= r->pr) {\n      push(l);\n      l->r = merge(l->r, r);\n\
+    \      return update(l);\n    } else {\n      push(r);\n      r->l = merge(l,\
+    \ r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t,\
+    \ int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k <=\
+    \ count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n   \
+    \   return {s.first, update(t)};\n    } else {\n      auto s = split(t->r, k -\
+    \ count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
     \    }\n  }\n\n  Ptr build(const vector<decltype(Node::key)> &v) {\n    int n\
     \ = v.size();\n    vector<Ptr> ps;\n    ps.reserve(n);\n    for (int i = 0; i\
     \ < n; i++) ps.push_back(my_new(v[i]));\n    vector<int> p(n, -1), st;\n    for\
@@ -158,8 +157,8 @@ data:
   isVerificationFile: false
   path: rbst/treap.hpp
   requiredBy: []
-  timestamp: '2020-12-11 17:45:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
 documentation_of: rbst/treap.hpp

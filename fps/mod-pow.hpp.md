@@ -1,33 +1,33 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0720.test.cpp
     title: verify/verify-yuki/yuki-0720.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1112-sparse.test.cpp
     title: verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: Mod-Pow ($f(x)^k \mod g(x)$)
     links: []
@@ -124,13 +124,13 @@ data:
   requiredBy:
   - matrix/black-box-linear-algebra.hpp
   timestamp: '2021-01-31 00:21:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
-  - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
 documentation_of: fps/mod-pow.hpp
 layout: document
 redirect_from:

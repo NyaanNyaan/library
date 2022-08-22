@@ -54,7 +54,12 @@ data:
     \ extend();\n    return fc[n];\n  }\n  R finv(int n) { return fac(n).inverse();\
     \ }\n  R inv(int n) { return R{1, max(n, 1)}; }\n  R C(int n, int r) {\n    if\
     \ (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n) * finv(n - r) * finv(r);\n\
-    \  }\n  R operator()(int n, int r) { return C(n, r); }\n};\n"
+    \  }\n  R operator()(int n, int r) { return C(n, r); }\n  template <typename I>\n\
+    \  R multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ R{0};\n      n += x;\n    }\n    R res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  R operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n};\n"
   code: "#pragma once\n\nstruct Rational {\n  using R = Rational;\n  using i128 =\
     \ __int128_t;\n  using i64 = long long;\n  using u64 = unsigned long long;\n \
     \ long long x, y;\n  Rational() : x(0), y(1) {}\n  Rational(long long _x, long\
@@ -98,12 +103,17 @@ data:
     \ extend();\n    return fc[n];\n  }\n  R finv(int n) { return fac(n).inverse();\
     \ }\n  R inv(int n) { return R{1, max(n, 1)}; }\n  R C(int n, int r) {\n    if\
     \ (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n) * finv(n - r) * finv(r);\n\
-    \  }\n  R operator()(int n, int r) { return C(n, r); }\n};\n"
+    \  }\n  R operator()(int n, int r) { return C(n, r); }\n  template <typename I>\n\
+    \  R multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ R{0};\n      n += x;\n    }\n    R res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  R operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: math/rational.hpp
   requiredBy: []
-  timestamp: '2021-11-21 20:50:36+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/rational-number.test.cpp

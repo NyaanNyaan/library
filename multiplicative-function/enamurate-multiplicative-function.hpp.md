@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: multiplicative-function/mf-famous-series.hpp
     title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
     links: []
@@ -219,10 +219,10 @@ data:
   requiredBy:
   - multiplicative-function/mf-famous-series.hpp
   timestamp: '2021-05-04 19:34:35+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/sum-of-mf.test.cpp
+  - verify/verify-unit-test/mf.test.cpp
 documentation_of: multiplicative-function/enamurate-multiplicative-function.hpp
 layout: document
 redirect_from:

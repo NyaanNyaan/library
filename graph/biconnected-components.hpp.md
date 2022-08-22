@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/block-cut-tree.hpp
     title: Block Cut Tree
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-3022.test.cpp
     title: verify/verify-aoj-other/aoj-3022.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1326.test.cpp
     title: verify/verify-yuki/yuki-1326.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "\u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3"
     links: []
@@ -77,13 +77,14 @@ data:
     \ i++) {\n      if (!used[i]) dfs(i, -1);\n    }\n  }\n\n  void dfs(int idx, int\
     \ par) {\n    used[idx] = true;\n    for (auto &to : this->g[idx]) {\n      if\
     \ (to == par) continue;\n      if (!used[to] || this->ord[to] < this->ord[idx])\
-    \ {\n        tmp.emplace_back(minmax(idx, to));\n      }\n      if (!used[to])\
+    \ {\n        tmp.emplace_back(minmax<int>(idx, to));\n      }\n      if (!used[to])\
     \ {\n        dfs(to, idx);\n        if (this->low[to] >= this->ord[idx]) {\n \
     \         bc.emplace_back();\n          while(true) {\n            auto e = tmp.back();\n\
     \            bc.back().emplace_back(e);\n            tmp.pop_back();\n       \
-    \     if (e.first == min(idx, to) && e.second == max(idx, to)) {\n           \
-    \   break;\n            }\n          }\n        }\n      }\n    }\n  }\n};\n\n\
-    /**\n * @brief \u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3\n */\n"
+    \     if (e.first == min<int>(idx, to) && e.second == max<int>(idx, to)) {\n \
+    \             break;\n            }\n          }\n        }\n      }\n    }\n\
+    \  }\n};\n\n/**\n * @brief \u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3\n\
+    \ */\n"
   code: "#pragma once\n\n#include \"lowlink.hpp\"\n\ntemplate <typename G>\nstruct\
     \ BiConnectedComponents : LowLink<G> {\n  using LL = LowLink<G>;\n\n  vector<int>\
     \ used;\n  vector<vector<pair<int, int> > > bc;\n  vector<pair<int, int> > tmp;\n\
@@ -92,13 +93,14 @@ data:
     \ i++) {\n      if (!used[i]) dfs(i, -1);\n    }\n  }\n\n  void dfs(int idx, int\
     \ par) {\n    used[idx] = true;\n    for (auto &to : this->g[idx]) {\n      if\
     \ (to == par) continue;\n      if (!used[to] || this->ord[to] < this->ord[idx])\
-    \ {\n        tmp.emplace_back(minmax(idx, to));\n      }\n      if (!used[to])\
+    \ {\n        tmp.emplace_back(minmax<int>(idx, to));\n      }\n      if (!used[to])\
     \ {\n        dfs(to, idx);\n        if (this->low[to] >= this->ord[idx]) {\n \
     \         bc.emplace_back();\n          while(true) {\n            auto e = tmp.back();\n\
     \            bc.back().emplace_back(e);\n            tmp.pop_back();\n       \
-    \     if (e.first == min(idx, to) && e.second == max(idx, to)) {\n           \
-    \   break;\n            }\n          }\n        }\n      }\n    }\n  }\n};\n\n\
-    /**\n * @brief \u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3\n */\n"
+    \     if (e.first == min<int>(idx, to) && e.second == max<int>(idx, to)) {\n \
+    \             break;\n            }\n          }\n        }\n      }\n    }\n\
+    \  }\n};\n\n/**\n * @brief \u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3\n\
+    \ */\n"
   dependsOn:
   - graph/lowlink.hpp
   - graph/graph-template.hpp
@@ -106,8 +108,8 @@ data:
   path: graph/biconnected-components.hpp
   requiredBy:
   - tree/block-cut-tree.hpp
-  timestamp: '2021-11-23 10:22:25+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp

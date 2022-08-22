@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/skew-heap.hpp
     title: Skew Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/union-find.hpp
     title: Union Find(Disjoint Set Union)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []

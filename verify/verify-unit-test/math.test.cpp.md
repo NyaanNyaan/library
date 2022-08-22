@@ -7,25 +7,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/sum-of-floor.hpp
     title: math/sum-of-floor.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -187,35 +187,34 @@ data:
     // count x : ax + b mod m < yr, 0 <= x < xr\ntemplate <typename T>\nT mod_affine_range_counting(T\
     \ a, T b, T m, T xr, T yr) {\n  assert(0 <= yr && yr <= m);\n  return sum_of_floor(xr,\
     \ m, a, b + m) - sum_of_floor(xr, m, a, b + m - yr);\n}\n#line 2 \"misc/rng.hpp\"\
-    \n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t\
-    \ x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n         \
-    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
-    \           .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
-    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
-    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
-    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
-    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
-    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
-    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
-    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
-    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
-    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
-    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
-    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
-    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"\
-    verify/verify-unit-test/math.test.cpp\"\nusing namespace Nyaan;\n\nvoid gray_code_test()\
-    \ {\n  for (int i = 0; i < 20; i++) {\n    auto g = gray_code(i);\n    int s =\
-    \ (int)g.size();\n    for (int j = 0; j < s; j++) {\n      int d = g[j] ^ g[j\
-    \ ? j - 1 : s - 1];\n      assert(d == (d & -d));\n    }\n  }\n}\n\n// count x\
-    \ : ax + b mod m < yr, 0 <= x < xr\nvoid mod_affine_range_counting_test() {\n\
-    \  int M = 100000;\n  rep(_, 100) {\n    int a = randint(0, M);\n    int b = randint(0,\
-    \ M);\n    int m = randint(1, M + 1);\n    int xr = randint(100, 100 + M + 1);\n\
-    \    int yr = randint(0, m + 1);\n    int a1 = mod_affine_range_counting<long\
-    \ long>(a, b, m, xr, yr);\n    int a2 = 0;\n    rep(x, xr) {\n      int X = (a\
-    \ * x + b) % m;\n      a2 += X < yr;\n    }\n    assert(a1 == a2);\n  }\n}\n\n\
-    void Nyaan::solve() {\n  gray_code_test();\n  mod_affine_range_counting_test();\n\
-    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \n\nnamespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
+    \n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"verify/verify-unit-test/math.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid gray_code_test() {\n  for (int i = 0; i < 20;\
+    \ i++) {\n    auto g = gray_code(i);\n    int s = (int)g.size();\n    for (int\
+    \ j = 0; j < s; j++) {\n      int d = g[j] ^ g[j ? j - 1 : s - 1];\n      assert(d\
+    \ == (d & -d));\n    }\n  }\n}\n\n// count x : ax + b mod m < yr, 0 <= x < xr\n\
+    void mod_affine_range_counting_test() {\n  int M = 100000;\n  rep(_, 100) {\n\
+    \    int a = randint(0, M);\n    int b = randint(0, M);\n    int m = randint(1,\
+    \ M + 1);\n    int xr = randint(100, 100 + M + 1);\n    int yr = randint(0, m\
+    \ + 1);\n    int a1 = mod_affine_range_counting<long long>(a, b, m, xr, yr);\n\
+    \    int a2 = 0;\n    rep(x, xr) {\n      int X = (a * x + b) % m;\n      a2 +=\
+    \ X < yr;\n    }\n    assert(a1 == a2);\n  }\n}\n\nvoid Nyaan::solve() {\n  gray_code_test();\n\
+    \  mod_affine_range_counting_test();\n\n  int a, b;\n  cin >> a >> b;\n  cout\
+    \ << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/gray-code.hpp\"\n#include\
     \ \"../../math/sum-of-floor.hpp\"\n#include \"../../misc/rng.hpp\"\nusing namespace\
@@ -243,7 +242,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/math.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/math.test.cpp

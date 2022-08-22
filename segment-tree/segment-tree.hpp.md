@@ -27,15 +27,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
     title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segment-tree/segment-tree.hpp\"\n\ntemplate <typename T,\
@@ -117,17 +117,17 @@ data:
   requiredBy:
   - data-structure-2d/segment-tree-on-range-tree.hpp
   timestamp: '2021-12-30 19:20:16+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
-  - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
-  - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
+  - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
 documentation_of: segment-tree/segment-tree.hpp
 layout: document
 redirect_from:

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/biconnected-components.hpp
     title: "\u4E8C\u91CD\u9802\u70B9\u9023\u7D50\u5206\u89E3"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/lowlink.hpp
     title: graph/lowlink.hpp
   _extendedRequiredBy: []
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-3022.test.cpp
     title: verify/verify-aoj-other/aoj-3022.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1326.test.cpp
     title: verify/verify-yuki/yuki-1326.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Block Cut Tree
     links: []
@@ -77,31 +77,32 @@ data:
     \    for (int i = 0; i < (int)used.size(); i++) {\n      if (!used[i]) dfs(i,\
     \ -1);\n    }\n  }\n\n  void dfs(int idx, int par) {\n    used[idx] = true;\n\
     \    for (auto &to : this->g[idx]) {\n      if (to == par) continue;\n      if\
-    \ (!used[to] || this->ord[to] < this->ord[idx]) {\n        tmp.emplace_back(minmax(idx,\
+    \ (!used[to] || this->ord[to] < this->ord[idx]) {\n        tmp.emplace_back(minmax<int>(idx,\
     \ to));\n      }\n      if (!used[to]) {\n        dfs(to, idx);\n        if (this->low[to]\
     \ >= this->ord[idx]) {\n          bc.emplace_back();\n          while(true) {\n\
     \            auto e = tmp.back();\n            bc.back().emplace_back(e);\n  \
-    \          tmp.pop_back();\n            if (e.first == min(idx, to) && e.second\
-    \ == max(idx, to)) {\n              break;\n            }\n          }\n     \
-    \   }\n      }\n    }\n  }\n};\n\n/**\n * @brief \u4E8C\u91CD\u9802\u70B9\u9023\
-    \u7D50\u5206\u89E3\n */\n#line 4 \"tree/block-cut-tree.hpp\"\n\n// aux : block\
-    \ cut tree\n// id(V) : new id of node V\n// is_arti(V) : return if V is articulation\n\
-    template <typename G>\nstruct BlockCutTree {\n  const G& g;\n  BiConnectedComponents<G>\
-    \ bcc;\n  vector<vector<int>> aux;\n  vector<int> idar, idcc;\n\n  BlockCutTree(const\
-    \ G& _g) : g(_g), bcc(g) { build(); }\n\n  void build() {\n    auto ar = bcc.articulation;\n\
-    \    idar.resize(g.size(), -1);\n    idcc.resize(g.size(), -1);\n    for (int\
-    \ i = 0; i < (int)ar.size(); i++) idar[ar[i]] = i;\n\n    aux.resize(ar.size()\
-    \ + bcc.bc.size());\n    vector<int> last(g.size(), -1);\n    for (int i = 0;\
-    \ i < (int)bcc.bc.size(); i++) {\n      vector<int> st;\n      for (auto& [u,\
-    \ v] : bcc.bc[i]) st.push_back(u), st.push_back(v);\n      for (auto& u : st)\
-    \ {\n        if (idar[u] == -1) idcc[u] = i + ar.size();\n        else if(last[u]\
-    \ != i){\n          add(i + ar.size(), idar[u]);\n          last[u] = i;\n   \
-    \     }\n      }\n    }\n  }\n\n  vector<int>& operator[](int i) { return aux[i];\
-    \ }\n\n  int size() const { return aux.size(); }\n\n  int id(int i) { return idar[i]\
-    \ == -1 ? idcc[i] : idar[i]; }\n\n  bool is_arti(int i) { return idar[i] != -1;\
-    \ }\n\n  int arti() const { return bcc.articulation.size(); }\n\n private:\n \
-    \ void add(int i, int j) {\n    if (i == -1 or j == -1) return;\n    aux[i].push_back(j);\n\
-    \    aux[j].push_back(i);\n  };\n};\n\n/**\n * @brief Block Cut Tree\n */\n"
+    \          tmp.pop_back();\n            if (e.first == min<int>(idx, to) && e.second\
+    \ == max<int>(idx, to)) {\n              break;\n            }\n          }\n\
+    \        }\n      }\n    }\n  }\n};\n\n/**\n * @brief \u4E8C\u91CD\u9802\u70B9\
+    \u9023\u7D50\u5206\u89E3\n */\n#line 4 \"tree/block-cut-tree.hpp\"\n\n// aux :\
+    \ block cut tree\n// id(V) : new id of node V\n// is_arti(V) : return if V is\
+    \ articulation\ntemplate <typename G>\nstruct BlockCutTree {\n  const G& g;\n\
+    \  BiConnectedComponents<G> bcc;\n  vector<vector<int>> aux;\n  vector<int> idar,\
+    \ idcc;\n\n  BlockCutTree(const G& _g) : g(_g), bcc(g) { build(); }\n\n  void\
+    \ build() {\n    auto ar = bcc.articulation;\n    idar.resize(g.size(), -1);\n\
+    \    idcc.resize(g.size(), -1);\n    for (int i = 0; i < (int)ar.size(); i++)\
+    \ idar[ar[i]] = i;\n\n    aux.resize(ar.size() + bcc.bc.size());\n    vector<int>\
+    \ last(g.size(), -1);\n    for (int i = 0; i < (int)bcc.bc.size(); i++) {\n  \
+    \    vector<int> st;\n      for (auto& [u, v] : bcc.bc[i]) st.push_back(u), st.push_back(v);\n\
+    \      for (auto& u : st) {\n        if (idar[u] == -1) idcc[u] = i + ar.size();\n\
+    \        else if(last[u] != i){\n          add(i + ar.size(), idar[u]);\n    \
+    \      last[u] = i;\n        }\n      }\n    }\n  }\n\n  vector<int>& operator[](int\
+    \ i) { return aux[i]; }\n\n  int size() const { return aux.size(); }\n\n  int\
+    \ id(int i) { return idar[i] == -1 ? idcc[i] : idar[i]; }\n\n  bool is_arti(int\
+    \ i) { return idar[i] != -1; }\n\n  int arti() const { return bcc.articulation.size();\
+    \ }\n\n private:\n  void add(int i, int j) {\n    if (i == -1 or j == -1) return;\n\
+    \    aux[i].push_back(j);\n    aux[j].push_back(i);\n  };\n};\n\n/**\n * @brief\
+    \ Block Cut Tree\n */\n"
   code: "#pragma once\n\n#include \"../graph/biconnected-components.hpp\"\n\n// aux\
     \ : block cut tree\n// id(V) : new id of node V\n// is_arti(V) : return if V is\
     \ articulation\ntemplate <typename G>\nstruct BlockCutTree {\n  const G& g;\n\
@@ -128,8 +129,8 @@ data:
   isVerificationFile: false
   path: tree/block-cut-tree.hpp
   requiredBy: []
-  timestamp: '2021-11-23 10:22:25+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp

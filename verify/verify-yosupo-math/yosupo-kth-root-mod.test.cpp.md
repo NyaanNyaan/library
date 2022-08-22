@@ -1,47 +1,47 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/kth_root_mod
@@ -256,31 +256,29 @@ data:
     \ get() const {\n    u64 ret = reduce(a);\n    return ret >= mod ? ret - mod :\
     \ ret;\n  }\n\n  static u64 get_mod() { return mod; }\n};\ntypename montgomery64::u64\
     \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 2 \"prime/fast-factorize.hpp\"\
-    \n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 7 \"prime/fast-factorize.hpp\"\n\nnamespace fast_factorize {\nusing u64\
-    \ = uint64_t;\n\ntemplate <typename mint>\nbool miller_rabin(u64 n, vector<u64>\
-    \ as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n  u64 d = n - 1;\n  while\
-    \ (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n  for (u64 a : as) {\n\
-    \    if (n <= a) break;\n    u64 t = d;\n    mint y = mint(a).pow(t);\n    while\
-    \ (t != n - 1 && y != e && y != rev) {\n      y *= y;\n      t *= 2;\n    }\n\
-    \    if (y != rev && t % 2 == 0) return false;\n  }\n  return true;\n}\n\nbool\
-    \ is_prime(u64 n) {\n  if (~n & 1) return n == 2;\n  if (n <= 1) return false;\n\
+    \n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"prime/fast-factorize.hpp\"\
+    \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
+    bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
+    \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
+    \  for (u64 a : as) {\n    if (n <= a) break;\n    u64 t = d;\n    mint y = mint(a).pow(t);\n\
+    \    while (t != n - 1 && y != e && y != rev) {\n      y *= y;\n      t *= 2;\n\
+    \    }\n    if (y != rev && t % 2 == 0) return false;\n  }\n  return true;\n}\n\
+    \nbool is_prime(u64 n) {\n  if (~n & 1) return n == 2;\n  if (n <= 1) return false;\n\
     \  if (n < (1LL << 30))\n    return miller_rabin<ArbitraryLazyMontgomeryModInt>(n,\
     \ {2, 7, 61});\n  else\n    return miller_rabin<montgomery64>(\n        n, {2,\
     \ 325, 9375, 28178, 450775, 9780504, 1795265022});\n}\n\ntemplate <typename mint,\
@@ -380,8 +378,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
 layout: document

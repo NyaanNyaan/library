@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/garner.hpp
     title: Garner's algorithm
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -290,48 +290,47 @@ data:
     \    if (y % g != 0) return {0, 0};\n    u64 u1 = m1 / g;\n    y = y / g % u1;\n\
     \    if (r0 > r1 && y != 0) y = u1 - y;\n    u64 x = y * im % u1;\n    r0 += x\
     \ * m0;\n    m0 *= u1;\n  }\n  return {r0, m0};\n}\n\n/**\n * @brief Garner's\
-    \ algorithm\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64\
-    \ - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 8 \"verify/verify-unit-test/garner.test.cpp\"\n\nusing namespace Nyaan;\n\
-    \nvoid Nyaan::solve() {\n  {\n    V<u64> m{3, 5, 17, 257, 65537}, r;\n    each(x,\
-    \ m) r.push_back(x - 1);\n    auto [R, M] = garner(r, m);\n    assert(R + 1 ==\
-    \ M && M == unsigned(-1));\n  }\n  {\n    V<u64> m{3, 5, 17, 257, 65537, 641,\
-    \ 6700417}, r;\n    each(x, m) r.push_back(x - 1);\n    auto [R, M] = garner(r,\
-    \ m);\n    assert(R + 1 == M && M == u64(-1));\n  }\n  {\n    V<u64> base{3, 5,\
-    \ 17, 257, 65537, 641, 6700417};\n    vl bs(128);\n    iota(all(bs), 0);\n   \
-    \ rep(t, 10000) {\n      V<u64> m, r;\n      u64 x = rng();\n      randshf(bs);\n\
-    \      u64 th = rng();\n      u64 l = 1;\n      each(b, bs) {\n        if (b ==\
-    \ 0 or rng() > th) continue;\n        u64 md = 1;\n        rep(j, 7) if (gbit(b,\
-    \ j)) md *= base[j];\n        m.push_back(md);\n        r.push_back(x % md);\n\
-    \        l = lcm(l, md);\n      }\n      if (m.empty()) continue;\n      auto\
-    \ [R, M] = garner(r, m);\n      assert(M != 0 && u64(-1) % M == 0);\n      assert(R\
-    \ == x % M && M == l);\n    }\n  }\n  rep(t, 30030) {\n    vl m{2, 3, 5, 7, 11,\
-    \ 13}, r;\n    each(x, m) r.push_back(t % x);\n    auto [R, M] = garner(r, m);\n\
-    \    assert(int(R) == t and M == 30030);\n  }\n  rep(t, 10000) {\n    vl r, m;\n\
-    \    ll x = randint(1, 2 * TEN(17));\n    reg(y, 2, 42) {\n      r.push_back(x\
-    \ % y);\n      m.push_back(y);\n    }\n    auto [r0, m0] = atcoder::crt(r, m);\n\
-    \    auto [r1, m1] = garner(r, m);\n    assert(r0 == i64(r1));\n    assert(r0\
-    \ == x);\n    assert(m0 == i64(m1));\n  }\n  rep(t, 100000) {\n    vl r, m;\n\
-    \    rep(i, 3) {\n      ll x = randint(1 << 20, 1 << 21);\n      ll y = randint(0,\
-    \ x);\n      r.push_back(y);\n      m.push_back(x);\n    }\n    auto [r0, m0]\
-    \ = atcoder::crt(r, m);\n    auto [r1, m1] = garner(r, m);\n    assert(r0 == i64(r1));\n\
-    \    assert(m0 == i64(m1));\n  }\n  {\n    int a, b;\n    cin >> a >> b;\n   \
-    \ cout << a + b << endl;\n  }\n}\n"
+    \ algorithm\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 =\
+    \ long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n\
+    \  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n  \
+    \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
+    \        .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"verify/verify-unit-test/garner.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  {\n    V<u64> m{3, 5, 17,\
+    \ 257, 65537}, r;\n    each(x, m) r.push_back(x - 1);\n    auto [R, M] = garner(r,\
+    \ m);\n    assert(R + 1 == M && M == unsigned(-1));\n  }\n  {\n    V<u64> m{3,\
+    \ 5, 17, 257, 65537, 641, 6700417}, r;\n    each(x, m) r.push_back(x - 1);\n \
+    \   auto [R, M] = garner(r, m);\n    assert(R + 1 == M && M == u64(-1));\n  }\n\
+    \  {\n    V<u64> base{3, 5, 17, 257, 65537, 641, 6700417};\n    vl bs(128);\n\
+    \    iota(all(bs), 0);\n    rep(t, 10000) {\n      V<u64> m, r;\n      u64 x =\
+    \ rng();\n      randshf(bs);\n      u64 th = rng();\n      u64 l = 1;\n      each(b,\
+    \ bs) {\n        if (b == 0 or rng() > th) continue;\n        u64 md = 1;\n  \
+    \      rep(j, 7) if (gbit(b, j)) md *= base[j];\n        m.push_back(md);\n  \
+    \      r.push_back(x % md);\n        l = lcm(l, md);\n      }\n      if (m.empty())\
+    \ continue;\n      auto [R, M] = garner(r, m);\n      assert(M != 0 && u64(-1)\
+    \ % M == 0);\n      assert(R == x % M && M == l);\n    }\n  }\n  rep(t, 30030)\
+    \ {\n    vl m{2, 3, 5, 7, 11, 13}, r;\n    each(x, m) r.push_back(t % x);\n  \
+    \  auto [R, M] = garner(r, m);\n    assert(int(R) == t and M == 30030);\n  }\n\
+    \  rep(t, 10000) {\n    vl r, m;\n    ll x = randint(1, 2 * TEN(17));\n    reg(y,\
+    \ 2, 42) {\n      r.push_back(x % y);\n      m.push_back(y);\n    }\n    auto\
+    \ [r0, m0] = atcoder::crt(r, m);\n    auto [r1, m1] = garner(r, m);\n    assert(r0\
+    \ == i64(r1));\n    assert(r0 == x);\n    assert(m0 == i64(m1));\n  }\n  rep(t,\
+    \ 100000) {\n    vl r, m;\n    rep(i, 3) {\n      ll x = randint(1 << 20, 1 <<\
+    \ 21);\n      ll y = randint(0, x);\n      r.push_back(y);\n      m.push_back(x);\n\
+    \    }\n    auto [r0, m0] = atcoder::crt(r, m);\n    auto [r1, m1] = garner(r,\
+    \ m);\n    assert(r0 == i64(r1));\n    assert(m0 == i64(m1));\n  }\n  {\n    int\
+    \ a, b;\n    cin >> a >> b;\n    cout << a + b << endl;\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../atcoder/math.hpp\"\n#include\
     \ \"../../math/garner.hpp\"\n#include \"../../misc/rng.hpp\"\n\nusing namespace\
@@ -371,7 +370,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/garner.test.cpp
   requiredBy: []
-  timestamp: '2021-12-23 18:55:42+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/garner.test.cpp

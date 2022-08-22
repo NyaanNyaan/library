@@ -1,51 +1,51 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/berlekamp-massey.hpp
     title: fps/berlekamp-massey.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/mod-pow.hpp
     title: Mod-Pow ($f(x)^k \mod g(x)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
@@ -224,9 +224,10 @@ data:
     \ { return mod; }\n};\n#line 6 \"verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\nusing\
     \ vvm = vector<vm>;\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\n\
-    struct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) : f(1, T(1)),\
-    \ g(1, T(1)), h(1, T(1)) {\n    while (MAX >= (int)f.size()) extend();\n  }\n\n\
-    \  void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    struct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
+    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
+    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
+    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
     \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
     \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
     \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
@@ -239,8 +240,8 @@ data:
     \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
     \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
     \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
-    \  for (auto& x : r) {\n      if(x < 0) return T(0);\n      n += x;\n    }\n \
-    \   T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
+    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
     \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
     \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
@@ -335,51 +336,50 @@ data:
     \ quo(b) * d;\n    b.shrink();\n    k >>= 1;\n    assert(b.size() + 1 <= d.size());\n\
     \    assert(res.size() + 1 <= d.size());\n  }\n  return res;\n}\n\n/**\n * @brief\
     \ Mod-Pow ($f(x)^k \\mod g(x)$)\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand\
-    \ {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 6 \"matrix/black-box-linear-algebra.hpp\"\n//\nnamespace BBLAImpl {\n\n\
-    template <typename mint>\nmint inner_product(const FormalPowerSeries<mint>& a,\n\
-    \                   const FormalPowerSeries<mint>& b) {\n  mint res = 0;\n  int\
-    \ n = a.size();\n  assert(n == (int)b.size());\n  for (int i = 0; i < n; i++)\
-    \ res += a[i] * b[i];\n  return res;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ random_poly(int n) {\n  FormalPowerSeries<mint> res(n);\n  for (auto& x : res)\
-    \ x = randint(0, mint::get_mod());\n  return res;\n}\n\ntemplate <typename mint>\n\
-    struct ModMatrix : vector<FormalPowerSeries<mint>> {\n  using fps = FormalPowerSeries<mint>;\n\
-    \n  ModMatrix(int n) : vector<fps>(n, fps(n)) {}\n\n  inline void add(int i, int\
-    \ j, mint x) { (*this)[i][j] += x; }\n\n  friend fps operator*(const ModMatrix&\
-    \ m, const fps& r) {\n    int n = m.size();\n    assert(n == (int)r.size());\n\
-    \    fps res(n);\n    for (int i = 0; i < n; i++)\n      for (int j = 0; j < n;\
-    \ j++) res[i] += m[i][j] * r[j];\n    return res;\n  }\n\n  void apply(int i,\
-    \ mint r) {\n    int n = (*this).size();\n    for (int j = 0; j < n; j++) (*this)[i][j]\
-    \ *= r;\n  }\n};\n\ntemplate <typename mint>\nstruct SparseMatrix : vector<vector<pair<int,\
-    \ mint>>> {\n  using fps = FormalPowerSeries<mint>;\n\n  template <typename...\
-    \ Args>\n  SparseMatrix(Args... args) : vector<vector<pair<int, mint>>>(args...)\
-    \ {}\n\n  inline void add(int i, int j, mint x) { (*this)[i].emplace_back(j, x);\
-    \ }\n\n  friend fps operator*(const SparseMatrix& m, const fps& r) {\n    int\
-    \ n = m.size();\n    assert(n == (int)r.size());\n    fps res(n);\n    for (int\
-    \ i = 0; i < n; i++)\n      for (auto&& [j, x] : m[i]) res[i] += x * r[j];\n \
-    \   return res;\n  }\n\n  void apply(int i, mint r) {\n    for (auto&& [_, x]\
-    \ : (*this)[i]) x *= r;\n  }\n};\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ vector_minpoly(\n    const vector<FormalPowerSeries<mint>>& b) {\n  assert(!b.empty());\n\
-    \  int n = b.size(), m = b[0].size();\n  FormalPowerSeries<mint> u = random_poly<mint>(m),\
-    \ a(n);\n  for (int i = 0; i < n; i++) a[i] = inner_product(b[i], u);\n  auto\
-    \ mp = BerlekampMassey<mint>(a);\n  return {mp.begin(), mp.end()};\n}\n\ntemplate\
-    \ <typename mint, typename Mat>\nFormalPowerSeries<mint> mat_minpoly(const Mat&\
-    \ A) {\n  int n = A.size();\n  FormalPowerSeries<mint> u = random_poly<mint>(n);\n\
+    \ {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 -\
+    \ 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"matrix/black-box-linear-algebra.hpp\"\
+    \n//\nnamespace BBLAImpl {\n\ntemplate <typename mint>\nmint inner_product(const\
+    \ FormalPowerSeries<mint>& a,\n                   const FormalPowerSeries<mint>&\
+    \ b) {\n  mint res = 0;\n  int n = a.size();\n  assert(n == (int)b.size());\n\
+    \  for (int i = 0; i < n; i++) res += a[i] * b[i];\n  return res;\n}\n\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> random_poly(int n) {\n  FormalPowerSeries<mint>\
+    \ res(n);\n  for (auto& x : res) x = randint(0, mint::get_mod());\n  return res;\n\
+    }\n\ntemplate <typename mint>\nstruct ModMatrix : vector<FormalPowerSeries<mint>>\
+    \ {\n  using fps = FormalPowerSeries<mint>;\n\n  ModMatrix(int n) : vector<fps>(n,\
+    \ fps(n)) {}\n\n  inline void add(int i, int j, mint x) { (*this)[i][j] += x;\
+    \ }\n\n  friend fps operator*(const ModMatrix& m, const fps& r) {\n    int n =\
+    \ m.size();\n    assert(n == (int)r.size());\n    fps res(n);\n    for (int i\
+    \ = 0; i < n; i++)\n      for (int j = 0; j < n; j++) res[i] += m[i][j] * r[j];\n\
+    \    return res;\n  }\n\n  void apply(int i, mint r) {\n    int n = (*this).size();\n\
+    \    for (int j = 0; j < n; j++) (*this)[i][j] *= r;\n  }\n};\n\ntemplate <typename\
+    \ mint>\nstruct SparseMatrix : vector<vector<pair<int, mint>>> {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n\n  template <typename... Args>\n  SparseMatrix(Args...\
+    \ args) : vector<vector<pair<int, mint>>>(args...) {}\n\n  inline void add(int\
+    \ i, int j, mint x) { (*this)[i].emplace_back(j, x); }\n\n  friend fps operator*(const\
+    \ SparseMatrix& m, const fps& r) {\n    int n = m.size();\n    assert(n == (int)r.size());\n\
+    \    fps res(n);\n    for (int i = 0; i < n; i++)\n      for (auto&& [j, x] :\
+    \ m[i]) res[i] += x * r[j];\n    return res;\n  }\n\n  void apply(int i, mint\
+    \ r) {\n    for (auto&& [_, x] : (*this)[i]) x *= r;\n  }\n};\n\ntemplate <typename\
+    \ mint>\nFormalPowerSeries<mint> vector_minpoly(\n    const vector<FormalPowerSeries<mint>>&\
+    \ b) {\n  assert(!b.empty());\n  int n = b.size(), m = b[0].size();\n  FormalPowerSeries<mint>\
+    \ u = random_poly<mint>(m), a(n);\n  for (int i = 0; i < n; i++) a[i] = inner_product(b[i],\
+    \ u);\n  auto mp = BerlekampMassey<mint>(a);\n  return {mp.begin(), mp.end()};\n\
+    }\n\ntemplate <typename mint, typename Mat>\nFormalPowerSeries<mint> mat_minpoly(const\
+    \ Mat& A) {\n  int n = A.size();\n  FormalPowerSeries<mint> u = random_poly<mint>(n);\n\
     \  vector<FormalPowerSeries<mint>> b(n * 2 + 1);\n  for (int i = 0; i < (int)b.size();\
     \ i++) b[i] = u, u = A * u;\n  FormalPowerSeries<mint> mp = vector_minpoly(b);\n\
     \  return mp;\n}\n\n// calculate A^k b\ntemplate <typename mint, typename Mat>\n\
@@ -431,8 +431,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   requiredBy: []
-  timestamp: '2021-08-10 23:14:36+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
 layout: document

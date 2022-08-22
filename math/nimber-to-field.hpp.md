@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/garner.hpp
     title: Garner's algorithm
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/nimber.hpp
     title: Nim Product
   - icon: ':heavy_check_mark:'

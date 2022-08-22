@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/radix-heap.hpp
     title: Radix Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/static-graph.hpp
     title: Static Graph
   _extendedRequiredBy: []
@@ -123,10 +123,10 @@ data:
   timestamp: '2020-12-17 01:20:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
-  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-yuki/yuki-1320.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
 documentation_of: shortest-path/dijkstra-fast.hpp
 layout: document
 redirect_from:

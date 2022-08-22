@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-famous-series.hpp
     title: "\u6709\u540D\u306A\u6570\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/partial-fraction-decomposition.hpp
     title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
       \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
@@ -23,21 +23,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
     title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1504.test.cpp
     title: verify/verify-yuki/yuki-1504.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1510.test.cpp
     title: verify/verify-yuki/yuki-1510.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/fps/fps-taylor-shift.md
     document_title: "\u5E73\u884C\u79FB\u52D5"
@@ -108,7 +108,8 @@ data:
     \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
     \ @docs docs/fps/formal-power-series.md\n */\n#line 2 \"modulo/binomial.hpp\"\n\
     \ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int\
-    \ MAX = 0) : f(1, T(1)), g(1, T(1)), h(1, T(1)) {\n    while (MAX >= (int)f.size())\
+    \ MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1,\
+    \ T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n    while (MAX >= (int)f.size())\
     \ extend();\n  }\n\n  void extend() {\n    int n = f.size();\n    int m = n *\
     \ 2;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n;\
     \ i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n  \
@@ -122,23 +123,24 @@ data:
     \ n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n \
     \ }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\n  template <typename\
     \ I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
-    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if(x < 0) return T(0);\n\
-    \      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n\
-    \    return res;\n  }\n\n  template <typename I>\n  T operator()(const vector<I>&\
-    \ r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if\
-    \ (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n\
-    \ - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n\
-    \  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0\
-    \ || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n\
-    #line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate <typename\
-    \ mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,\n\
-    \                                    Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  int N = f.size();\n  for (int i = 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f),\
-    \ end(f));\n  fps g(N, mint(1));\n  for (int i = 1; i < N; i++) g[i] = g[i - 1]\
-    \ * a * C.inv(i);\n  f = (f * g).pre(N);\n  reverse(begin(f), end(f));\n  for\
-    \ (int i = 0; i < N; i++) f[i] *= C.finv(i);\n  return f;\n}\n\n/**\n * @brief\
-    \ \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n */\n"
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
+    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
+    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
+    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n\
+    \    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n\
+    \  }\n};\n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
+    \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
+    \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
+    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
+    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
+    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
+    \ */\n"
   code: "#pragma once\n#include \"./formal-power-series.hpp\"\n#include \"../modulo/binomial.hpp\"\
     \n\n// calculate F(x + a)\ntemplate <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
     \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
@@ -154,17 +156,17 @@ data:
   isVerificationFile: false
   path: fps/taylor-shift.hpp
   requiredBy:
-  - fps/fps-famous-series.hpp
   - fps/partial-fraction-decomposition.hpp
-  timestamp: '2021-08-10 23:14:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - fps/fps-famous-series.hpp
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 documentation_of: fps/taylor-shift.hpp
 layout: document
 redirect_from:

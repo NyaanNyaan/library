@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
@@ -15,22 +15,22 @@ data:
     path: rbst/rbst-base.hpp
     title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
       )"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -180,49 +180,48 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/orderedmap.test.cpp\"\
-    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"orderedmap/orderedmap.hpp\"\n\n#line 2 \"orderedmap/orderedmap-base.hpp\"\
-    \n\n#line 2 \"rbst/rbst-base.hpp\"\n\ntemplate <typename Node>\nstruct RBSTBase\
-    \ {\n  using Ptr = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args...\
-    \ args) {\n    return new Node(args...);\n  }\n  inline void my_del(Ptr t) { delete\
-    \ t; }\n  inline Ptr make_tree() const { return nullptr; }\n\n  // for avoiding\
-    \ memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template\
-    \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
-    \  }\n  inline void my_del(Ptr t) {}\n  Ptr make_tree() {return Ptr();}\n  */\n\
-    \n  int size(Ptr t) const { return count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n\
-    \    if (!l || !r) return l ? l : r;\n    if (int((rng() * (l->cnt + r->cnt))\
-    \ >> 32) < l->cnt) {\n      push(l);\n      l->r = merge(l->r, r);\n      return\
-    \ update(l);\n    } else {\n      push(r);\n      r->l = merge(l, r->l);\n   \
-    \   return update(r);\n    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t, int k) {\n\
-    \    if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k <= count(t->l))\
-    \ {\n      auto s = split(t->l, k);\n      t->l = s.second;\n      return {s.first,\
-    \ update(t)};\n    } else {\n      auto s = split(t->r, k - count(t->l) - 1);\n\
-    \      t->r = s.first;\n      return {update(t), s.second};\n    }\n  }\n\n  Ptr\
-    \ build(int l, int r, const vector<decltype(Node::key)> &v) {\n    if (l + 1 ==\
-    \ r) return my_new(v[l]);\n    int m = (l + r) >> 1;\n    Ptr pm = my_new(v[m]);\n\
-    \    if (l < m) pm->l = build(l, m, v);\n    if (m + 1 < r) pm->r = build(m +\
-    \ 1, r, v);\n    return update(pm);\n  }\n\n  Ptr build(const vector<decltype(Node::key)>\
-    \ &v) {\n    return build(0, (int)v.size(), v);\n  }\n\n  template <typename...\
-    \ Args>\n  void insert(Ptr &t, int k, const Args &... args) {\n    auto x = split(t,\
-    \ k);\n    t = merge(merge(x.first, my_new(args...)), x.second);\n  }\n\n  void\
-    \ erase(Ptr &t, int k) {\n    auto x = split(t, k);\n    auto y = split(x.second,\
-    \ 1);\n    my_del(y.first);\n    t = merge(x.first, y.second);\n  }\n\n protected:\n\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"orderedmap/orderedmap.hpp\"\
+    \n\n#line 2 \"orderedmap/orderedmap-base.hpp\"\n\n#line 2 \"rbst/rbst-base.hpp\"\
+    \n\ntemplate <typename Node>\nstruct RBSTBase {\n  using Ptr = Node *;\n  template\
+    \ <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
+    \  }\n  inline void my_del(Ptr t) { delete t; }\n  inline Ptr make_tree() const\
+    \ { return nullptr; }\n\n  // for avoiding memory leak, activate below\n  /*\n\
+    \  using Ptr = shared_ptr<Node>;\n  template <typename... Args>\n  inline Ptr\
+    \ my_new(Args... args) {\n    return make_shared<Node>(args...);\n  }\n  inline\
+    \ void my_del(Ptr t) {}\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr\
+    \ t) const { return count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l ||\
+    \ !r) return l ? l : r;\n    if (int((rng() * (l->cnt + r->cnt)) >> 32) < l->cnt)\
+    \ {\n      push(l);\n      l->r = merge(l->r, r);\n      return update(l);\n \
+    \   } else {\n      push(r);\n      r->l = merge(l, r->l);\n      return update(r);\n\
+    \    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr,\
+    \ nullptr};\n    push(t);\n    if (k <= count(t->l)) {\n      auto s = split(t->l,\
+    \ k);\n      t->l = s.second;\n      return {s.first, update(t)};\n    } else\
+    \ {\n      auto s = split(t->r, k - count(t->l) - 1);\n      t->r = s.first;\n\
+    \      return {update(t), s.second};\n    }\n  }\n\n  Ptr build(int l, int r,\
+    \ const vector<decltype(Node::key)> &v) {\n    if (l + 1 == r) return my_new(v[l]);\n\
+    \    int m = (l + r) >> 1;\n    Ptr pm = my_new(v[m]);\n    if (l < m) pm->l =\
+    \ build(l, m, v);\n    if (m + 1 < r) pm->r = build(m + 1, r, v);\n    return\
+    \ update(pm);\n  }\n\n  Ptr build(const vector<decltype(Node::key)> &v) {\n  \
+    \  return build(0, (int)v.size(), v);\n  }\n\n  template <typename... Args>\n\
+    \  void insert(Ptr &t, int k, const Args &... args) {\n    auto x = split(t, k);\n\
+    \    t = merge(merge(x.first, my_new(args...)), x.second);\n  }\n\n  void erase(Ptr\
+    \ &t, int k) {\n    auto x = split(t, k);\n    auto y = split(x.second, 1);\n\
+    \    my_del(y.first);\n    t = merge(x.first, y.second);\n  }\n\n protected:\n\
     \  static uint64_t rng() {\n    static uint64_t x_ = 88172645463325252ULL;\n \
     \   return x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n  }\n\n  inline\
     \ int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n  virtual void push(Ptr)\
@@ -333,7 +332,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/orderedmap.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/orderedmap.test.cpp

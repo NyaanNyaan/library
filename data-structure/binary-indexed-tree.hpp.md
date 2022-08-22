@@ -5,6 +5,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/range-sum-range-add-bit.hpp
     title: data-structure/range-sum-range-add-bit.hpp
+  - icon: ':warning:'
+    path: dp/inversion-counting.hpp
+    title: dp/inversion-counting.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
@@ -24,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
     title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - icon: ':heavy_check_mark:'
@@ -33,9 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/data-structure/binary-indexed-tree.md
     document_title: Binary Indexed Tree(Fenwick Tree)
@@ -85,18 +88,19 @@ data:
   path: data-structure/binary-indexed-tree.hpp
   requiredBy:
   - data-structure/range-sum-range-add-bit.hpp
+  - dp/inversion-counting.hpp
   timestamp: '2021-12-20 22:10:59+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
 documentation_of: data-structure/binary-indexed-tree.hpp
 layout: document
 redirect_from:

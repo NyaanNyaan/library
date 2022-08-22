@@ -4,22 +4,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/rational.hpp
     title: math/rational.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -212,7 +212,12 @@ data:
     \ extend();\n    return fc[n];\n  }\n  R finv(int n) { return fac(n).inverse();\
     \ }\n  R inv(int n) { return R{1, max(n, 1)}; }\n  R C(int n, int r) {\n    if\
     \ (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n) * finv(n - r) * finv(r);\n\
-    \  }\n  R operator()(int n, int r) { return C(n, r); }\n};\n#line 6 \"verify/verify-unit-test/rational-number.test.cpp\"\
+    \  }\n  R operator()(int n, int r) { return C(n, r); }\n  template <typename I>\n\
+    \  R multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ R{0};\n      n += x;\n    }\n    R res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  R operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n};\n#line 6 \"verify/verify-unit-test/rational-number.test.cpp\"\
     \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  Rational a{4, 3}, b{2,\
     \ 3};\n\n  trc(a + b);\n  assert(a + b == 2);\n  trc(a - b);\n  assert(a - b ==\
     \ Rational(2, 3));\n  trc(a * b);\n  assert(a * b == Rational(8, 9));\n  trc(a\
@@ -221,8 +226,9 @@ data:
     \ b);\n  assert(a > b == true);\n  trc(a >= b);\n  assert(a >= b == true);\n \
     \ trc(a < b);\n  assert(a < b == false);\n  trc(a <= b);\n  assert(a <= b == false);\n\
     \n  Binomial<Rational> C;\n  assert(C.fac(3) == 6);\n  assert(C.finv(3) == Rational(1,\
-    \ 6));\n  assert(C(4, 2) == 6);\n  trc(\"OK\");\n\n  {\n    int s, t;\n    cin\
-    \ >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
+    \ 6));\n  assert(C(4, 2) == 6);\n  assert(C(vi{3, 2}) == 10);\n  trc(\"OK\");\n\
+    \n  {\n    int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/rational.hpp\"\n\nusing\
     \ namespace Nyaan;\n\nvoid Nyaan::solve() {\n  Rational a{4, 3}, b{2, 3};\n\n\
@@ -233,8 +239,9 @@ data:
     \  assert(a > b == true);\n  trc(a >= b);\n  assert(a >= b == true);\n  trc(a\
     \ < b);\n  assert(a < b == false);\n  trc(a <= b);\n  assert(a <= b == false);\n\
     \n  Binomial<Rational> C;\n  assert(C.fac(3) == 6);\n  assert(C.finv(3) == Rational(1,\
-    \ 6));\n  assert(C(4, 2) == 6);\n  trc(\"OK\");\n\n  {\n    int s, t;\n    cin\
-    \ >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}"
+    \ 6));\n  assert(C(4, 2) == 6);\n  assert(C(vi{3, 2}) == 10);\n  trc(\"OK\");\n\
+    \n  {\n    int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n\
+    }"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -246,7 +253,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rational-number.test.cpp
   requiredBy: []
-  timestamp: '2021-11-21 20:50:36+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rational-number.test.cpp

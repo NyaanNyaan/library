@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/garner.hpp
     title: Garner's algorithm
   _extendedRequiredBy:
@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
     title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1775.test.cpp
     title: verify/verify-yuki/yuki-1775.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/math/nimber.md
     document_title: Nim Product
@@ -218,13 +218,13 @@ data:
   requiredBy:
   - math/nimber-to-field.hpp
   timestamp: '2021-12-23 23:20:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/nimber.test.cpp
-  - verify/verify-unit-test/nimber-to-field.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
-  - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+  - verify/verify-unit-test/nimber-to-field.test.cpp
   - verify/verify-yuki/yuki-1775.test.cpp
+  - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
 documentation_of: math/nimber.hpp
 layout: document
 redirect_from:

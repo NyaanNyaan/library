@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/complex-fft.hpp
     title: ntt/complex-fft.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -172,93 +172,92 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/complex-fft.test.cpp\"\
-    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"ntt/complex-fft.hpp\"\n\nnamespace ArbitraryModConvolution {\n\ntemplate\
-    \ <typename T>\nstruct Cp {\n  T x, y;\n  constexpr Cp() : x(0), y(0) {}\n  constexpr\
-    \ Cp(T _x, T _y) : x(_x), y(_y) {}\n  constexpr inline Cp operator+(const Cp&\
-    \ c) const {\n    return Cp(x + c.x, y + c.y);\n  }\n  constexpr inline Cp operator-(const\
-    \ Cp& c) const {\n    return Cp(x - c.x, y - c.y);\n  }\n  constexpr inline Cp\
-    \ operator*(const Cp& c) const {\n    return Cp(x * c.x - y * c.y, x * c.y + y\
-    \ * c.x);\n  }\n  constexpr inline Cp operator-() const { return Cp(-x, -y); }\n\
-    \  constexpr inline Cp conj() const { return Cp(x, -y); }\n  constexpr inline\
-    \ Cp rotl() const { return Cp(-y, x); }\n  friend ostream& operator<<(ostream&\
-    \ os, const Cp& c) {\n    os << \"(\" << c.x << \", \" << c.y << \")\" << endl;\n\
-    \    return os;\n  }\n};\n\nusing C = Cp<double>;\nconst long double PI = acosl(-1);\n\
-    \nstruct CooleyTukey {\n  static vector<C> w;\n\n  static void setw(int k) {\n\
-    \    --k;\n    if ((int)w.size() >= (1 << k)) return;\n    w.resize(1 << k);\n\
-    \    vector<Cp<long double>> base(k);\n    const long double arg = PI / (1 <<\
-    \ k);\n    for (int i = 0, j = 1 << (k - 1); j; i++, j >>= 1) {\n      complex<long\
-    \ double> z = exp(complex<long double>(1i) * (arg * j));\n      base[i] = Cp<long\
-    \ double>{z.real(), z.imag()};\n    }\n    genw(0, k - 1, Cp<long double>{1, 0},\
-    \ base);\n  }\n\n  static void genw(int i, int b, Cp<long double> z,\n       \
-    \            const vector<Cp<long double>>& base) {\n    if (b == -1) {\n    \
-    \  w[i].x = z.x, w[i].y = z.y;\n    } else {\n      genw(i, b - 1, z, base);\n\
-    \      genw(i | (1 << b), b - 1, z * base[b], base);\n    }\n  }\n\n  static void\
-    \ fft(vector<C>& a, int k) {\n    if (k <= 0) return;\n    if (k == 1) {\n   \
-    \   C a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n\
-    \    }\n    if (k & 1) {\n      int v = 1 << (k - 1);\n      for (int j = 0; j\
-    \ < v; ++j) {\n        C ajv = a[j + v];\n        a[j + v] = a[j] - ajv;\n   \
-    \     a[j] = a[j] + ajv;\n      }\n    }\n    int u = 1 << (k & 1), v = 1 << (k\
-    \ - 2 - (k & 1));\n    while (v) {\n      {\n        int j0 = 0;\n        int\
-    \ j1 = v;\n        int j2 = j1 + v;\n        int j3 = j2 + v;\n        int je\
-    \ = v;\n        for (; j0 < je; ++j0, ++j1, ++j2, ++j3) {\n          C t0 = a[j0],\
-    \ t1 = a[j1], t2 = a[j2], t3 = a[j3];\n          C t0p2 = t0 + t2, t1p3 = t1 +\
-    \ t3;\n          C t0m2 = t0 - t2, t1m3 = (t1 - t3) * w[1];\n          a[j0] =\
-    \ t0p2 + t1p3, a[j1] = t0p2 - t1p3;\n          a[j2] = t0m2 + t1m3, a[j3] = t0m2\
-    \ - t1m3;\n        }\n      }\n      // jh >= 1\n      for (int jh = 1; jh < u;\
-    \ ++jh) {\n        int j0 = jh * v * 4;\n        int j1 = j0 + v;\n        int\
-    \ j2 = j1 + v;\n        int j3 = j2 + v;\n        int je = j1;\n        C ww =\
-    \ w[jh];\n        C xx = w[jh << 1];\n        C wx = ww * xx;\n        for (;\
-    \ j0 < je; ++j0, ++j1, ++j2, ++j3) {\n          C t0 = a[j0], t1 = a[j1] * xx,\
-    \ t2 = a[j2] * ww, t3 = a[j3] * wx;\n          C t0p2 = t0 + t2, t1p3 = t1 + t3;\n\
-    \          C t0m2 = t0 - t2, t1m3 = (t1 - t3) * w[1];\n          a[j0] = t0p2\
-    \ + t1p3, a[j1] = t0p2 - t1p3;\n          a[j2] = t0m2 + t1m3, a[j3] = t0m2 -\
-    \ t1m3;\n        }\n      }\n      u <<= 2, v >>= 2;\n    }\n  }\n\n  static void\
-    \ ifft(vector<C>& a, int k) {\n    if ((int)a.size() <= 1) return;\n    if (k\
-    \ == 1) {\n      C a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0] +\
-    \ a1;\n      return;\n    }\n    int u = 1 << (k - 2);\n    int v = 1;\n    while\
-    \ (u) {\n      // jh = 0\n      {\n        int j0 = 0;\n        int j1 = v;\n\
-    \        int j2 = j1 + v;\n        int j3 = j2 + v;\n        for (; j0 < v; ++j0,\
-    \ ++j1, ++j2, ++j3) {\n          C t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];\n\
-    \          C t0p1 = t0 + t1, t2p3 = t2 + t3;\n          C t0m1 = t0 - t1, t2m3\
-    \ = (t2 - t3) * w[1].conj();\n          a[j0] = t0p1 + t2p3, a[j2] = t0p1 - t2p3;\n\
-    \          a[j1] = t0m1 + t2m3, a[j3] = t0m1 - t2m3;\n        }\n      }\n   \
-    \   // jh >= 1\n      for (int jh = 1; jh < u; ++jh) {\n        int j0 = (jh *\
-    \ v) << 2;\n        int j1 = j0 + v;\n        int j2 = j1 + v;\n        int j3\
-    \ = j2 + v;\n        int je = j1;\n        C ww = w[jh].conj();\n        C xx\
-    \ = w[jh << 1].conj();\n        C yy = w[(jh << 1) + 1].conj();\n        for (;\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"ntt/complex-fft.hpp\"\n\n\
+    namespace ArbitraryModConvolution {\n\ntemplate <typename T>\nstruct Cp {\n  T\
+    \ x, y;\n  constexpr Cp() : x(0), y(0) {}\n  constexpr Cp(T _x, T _y) : x(_x),\
+    \ y(_y) {}\n  constexpr inline Cp operator+(const Cp& c) const {\n    return Cp(x\
+    \ + c.x, y + c.y);\n  }\n  constexpr inline Cp operator-(const Cp& c) const {\n\
+    \    return Cp(x - c.x, y - c.y);\n  }\n  constexpr inline Cp operator*(const\
+    \ Cp& c) const {\n    return Cp(x * c.x - y * c.y, x * c.y + y * c.x);\n  }\n\
+    \  constexpr inline Cp operator-() const { return Cp(-x, -y); }\n  constexpr inline\
+    \ Cp conj() const { return Cp(x, -y); }\n  constexpr inline Cp rotl() const {\
+    \ return Cp(-y, x); }\n  friend ostream& operator<<(ostream& os, const Cp& c)\
+    \ {\n    os << \"(\" << c.x << \", \" << c.y << \")\" << endl;\n    return os;\n\
+    \  }\n};\n\nusing C = Cp<double>;\nconst long double PI = acosl(-1);\n\nstruct\
+    \ CooleyTukey {\n  static vector<C> w;\n\n  static void setw(int k) {\n    --k;\n\
+    \    if ((int)w.size() >= (1 << k)) return;\n    w.resize(1 << k);\n    vector<Cp<long\
+    \ double>> base(k);\n    const long double arg = PI / (1 << k);\n    for (int\
+    \ i = 0, j = 1 << (k - 1); j; i++, j >>= 1) {\n      complex<long double> z =\
+    \ exp(complex<long double>(1i) * (arg * j));\n      base[i] = Cp<long double>{z.real(),\
+    \ z.imag()};\n    }\n    genw(0, k - 1, Cp<long double>{1, 0}, base);\n  }\n\n\
+    \  static void genw(int i, int b, Cp<long double> z,\n                   const\
+    \ vector<Cp<long double>>& base) {\n    if (b == -1) {\n      w[i].x = z.x, w[i].y\
+    \ = z.y;\n    } else {\n      genw(i, b - 1, z, base);\n      genw(i | (1 << b),\
+    \ b - 1, z * base[b], base);\n    }\n  }\n\n  static void fft(vector<C>& a, int\
+    \ k) {\n    if (k <= 0) return;\n    if (k == 1) {\n      C a1 = a[1];\n     \
+    \ a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n    }\n    if (k\
+    \ & 1) {\n      int v = 1 << (k - 1);\n      for (int j = 0; j < v; ++j) {\n \
+    \       C ajv = a[j + v];\n        a[j + v] = a[j] - ajv;\n        a[j] = a[j]\
+    \ + ajv;\n      }\n    }\n    int u = 1 << (k & 1), v = 1 << (k - 2 - (k & 1));\n\
+    \    while (v) {\n      {\n        int j0 = 0;\n        int j1 = v;\n        int\
+    \ j2 = j1 + v;\n        int j3 = j2 + v;\n        int je = v;\n        for (;\
     \ j0 < je; ++j0, ++j1, ++j2, ++j3) {\n          C t0 = a[j0], t1 = a[j1], t2 =\
-    \ a[j2], t3 = a[j3];\n          C t0p1 = t0 + t1, t2p3 = t2 + t3;\n          C\
-    \ t0m1 = (t0 - t1) * xx, t2m3 = (t2 - t3) * yy;\n          a[j0] = t0p1 + t2p3,\
-    \ a[j2] = (t0p1 - t2p3) * ww;\n          a[j1] = t0m1 + t2m3, a[j3] = (t0m1 -\
-    \ t2m3) * ww;\n        }\n      }\n      u >>= 2;\n      v <<= 2;\n    }\n   \
-    \ if (k & 1) {\n      u = 1 << (k - 1);\n      for (int j = 0; j < u; j++) {\n\
-    \        C ajv = a[j] - a[j + u];\n        a[j] = a[j] + a[j + u];\n        a[j\
-    \ + u] = ajv;\n      }\n    }\n  }\n\n  static void fft_real(vector<C>& AL, vector<C>&\
-    \ AH, int k) {\n    fft(AL, k);\n    AH[0] = C{AL[0].y * 2.0, 0};\n    AL[0] =\
-    \ C{AL[0].x * 2.0, 0};\n    AH[1] = C{AL[1].y * 2.0, 0};\n    AL[1] = C{AL[1].x\
-    \ * 2.0, 0};\n    for (int i = 2, y = 2; y < (1 << k); y <<= 1) {\n      for (;\
-    \ i < 2 * y; i += 2) {\n        int j = i ^ (y - 1);\n        AH[i] = (AL[j].conj()\
-    \ - AL[i]).rotl();\n        AL[i] = (AL[j].conj() + AL[i]);\n        AH[j] = AH[i].conj();\n\
-    \        AL[j] = AL[i].conj();\n      }\n    }\n  }\n\n  // naive convolution\
-    \ for int\n  template <typename T, enable_if_t<is_integral<T>::value, nullptr_t>\
-    \ = nullptr>\n  static vector<long long> multiply(const vector<T>& s, const vector<T>&\
+    \ a[j2], t3 = a[j3];\n          C t0p2 = t0 + t2, t1p3 = t1 + t3;\n          C\
+    \ t0m2 = t0 - t2, t1m3 = (t1 - t3) * w[1];\n          a[j0] = t0p2 + t1p3, a[j1]\
+    \ = t0p2 - t1p3;\n          a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;\n      \
+    \  }\n      }\n      // jh >= 1\n      for (int jh = 1; jh < u; ++jh) {\n    \
+    \    int j0 = jh * v * 4;\n        int j1 = j0 + v;\n        int j2 = j1 + v;\n\
+    \        int j3 = j2 + v;\n        int je = j1;\n        C ww = w[jh];\n     \
+    \   C xx = w[jh << 1];\n        C wx = ww * xx;\n        for (; j0 < je; ++j0,\
+    \ ++j1, ++j2, ++j3) {\n          C t0 = a[j0], t1 = a[j1] * xx, t2 = a[j2] * ww,\
+    \ t3 = a[j3] * wx;\n          C t0p2 = t0 + t2, t1p3 = t1 + t3;\n          C t0m2\
+    \ = t0 - t2, t1m3 = (t1 - t3) * w[1];\n          a[j0] = t0p2 + t1p3, a[j1] =\
+    \ t0p2 - t1p3;\n          a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;\n        }\n\
+    \      }\n      u <<= 2, v >>= 2;\n    }\n  }\n\n  static void ifft(vector<C>&\
+    \ a, int k) {\n    if ((int)a.size() <= 1) return;\n    if (k == 1) {\n      C\
+    \ a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n\
+    \    }\n    int u = 1 << (k - 2);\n    int v = 1;\n    while (u) {\n      // jh\
+    \ = 0\n      {\n        int j0 = 0;\n        int j1 = v;\n        int j2 = j1\
+    \ + v;\n        int j3 = j2 + v;\n        for (; j0 < v; ++j0, ++j1, ++j2, ++j3)\
+    \ {\n          C t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];\n          C\
+    \ t0p1 = t0 + t1, t2p3 = t2 + t3;\n          C t0m1 = t0 - t1, t2m3 = (t2 - t3)\
+    \ * w[1].conj();\n          a[j0] = t0p1 + t2p3, a[j2] = t0p1 - t2p3;\n      \
+    \    a[j1] = t0m1 + t2m3, a[j3] = t0m1 - t2m3;\n        }\n      }\n      // jh\
+    \ >= 1\n      for (int jh = 1; jh < u; ++jh) {\n        int j0 = (jh * v) << 2;\n\
+    \        int j1 = j0 + v;\n        int j2 = j1 + v;\n        int j3 = j2 + v;\n\
+    \        int je = j1;\n        C ww = w[jh].conj();\n        C xx = w[jh << 1].conj();\n\
+    \        C yy = w[(jh << 1) + 1].conj();\n        for (; j0 < je; ++j0, ++j1,\
+    \ ++j2, ++j3) {\n          C t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];\n\
+    \          C t0p1 = t0 + t1, t2p3 = t2 + t3;\n          C t0m1 = (t0 - t1) * xx,\
+    \ t2m3 = (t2 - t3) * yy;\n          a[j0] = t0p1 + t2p3, a[j2] = (t0p1 - t2p3)\
+    \ * ww;\n          a[j1] = t0m1 + t2m3, a[j3] = (t0m1 - t2m3) * ww;\n        }\n\
+    \      }\n      u >>= 2;\n      v <<= 2;\n    }\n    if (k & 1) {\n      u = 1\
+    \ << (k - 1);\n      for (int j = 0; j < u; j++) {\n        C ajv = a[j] - a[j\
+    \ + u];\n        a[j] = a[j] + a[j + u];\n        a[j + u] = ajv;\n      }\n \
+    \   }\n  }\n\n  static void fft_real(vector<C>& AL, vector<C>& AH, int k) {\n\
+    \    fft(AL, k);\n    AH[0] = C{AL[0].y * 2.0, 0};\n    AL[0] = C{AL[0].x * 2.0,\
+    \ 0};\n    AH[1] = C{AL[1].y * 2.0, 0};\n    AL[1] = C{AL[1].x * 2.0, 0};\n  \
+    \  for (int i = 2, y = 2; y < (1 << k); y <<= 1) {\n      for (; i < 2 * y; i\
+    \ += 2) {\n        int j = i ^ (y - 1);\n        AH[i] = (AL[j].conj() - AL[i]).rotl();\n\
+    \        AL[i] = (AL[j].conj() + AL[i]);\n        AH[j] = AH[i].conj();\n    \
+    \    AL[j] = AL[i].conj();\n      }\n    }\n  }\n\n  // naive convolution for\
+    \ int\n  template <typename T, enable_if_t<is_integral<T>::value, nullptr_t> =\
+    \ nullptr>\n  static vector<long long> multiply(const vector<T>& s, const vector<T>&\
     \ t) {\n    int l = s.size() + t.size() - 1;\n    if (min(s.size(), t.size())\
     \ <= 40) {\n      vector<long long> u(l);\n      for (int i = 0; i < (int)s.size();\
     \ i++) {\n        for (int j = 0; j < (int)t.size(); j++) u[i + j] += 1LL * s[i]\
@@ -363,7 +362,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/complex-fft.test.cpp
   requiredBy: []
-  timestamp: '2021-06-10 13:30:55+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/complex-fft.test.cpp

@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -169,84 +169,82 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/template.test.cpp\"\
-    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 6 \"verify/verify-unit-test/template.test.cpp\"\n//\nusing namespace Nyaan;\n\
-    \n// bitop.hpp\n\nvoid verify_bitop() {\n  // popcnt\n  assert(popcnt(7) == 3);\n\
-    \  assert(popcnt(0) == 0);\n  assert(popcnt(1LL << 40) == 1);\n  rep(loop, 100)\
-    \ {\n    u64 x = rng();\n    int pc = popcnt(x);\n    rep(i, 64) if ((x >> i)\
-    \ & 1) pc--;\n    assert(pc == 0 && \"popcnt\");\n  }\n\n  // lsb\n  assert(lsb(0)\
-    \ == 64);\n  assert(lsb(1) == 0);\n  assert(lsb(1LL << 40) == 40);\n  assert(lsb(100)\
-    \ == 2);\n\n  // ctz\n  assert(ctz(0) == 64);\n  assert(ctz(1) == 0);\n  assert(ctz(1LL\
-    \ << 40) == 40);\n  assert(ctz(100) == 2);\n\n  rep(loop, 100) {\n    u64 x =\
-    \ rng();\n    int n = lsb(x);\n    assert(ctz(x) == n);\n    while (n--) {\n \
-    \     assert((x & 1) == 0 && \"lsb\");\n      x >>= 1;\n    }\n    assert((x &\
-    \ 1) == 1 && \"lsb\");\n  }\n\n  // msb\n  assert(msb(0) == -1);\n  assert(msb(1)\
-    \ == 0);\n  assert(msb(1LL << 40) == 40);\n  assert(msb(100) == 6);\n\n  rep(loop,\
-    \ 100) {\n    u64 x = rng();\n    int m = msb(x);\n    if (m != -1) {\n      assert(((x\
-    \ >> m) & 1) == 1 && \"msb\");\n    }\n    for (int i = m + 1; i < 64; i++) {\n\
-    \      assert(((x >> i) & 1) == 0 && \"msb\");\n    }\n  }\n\n  // gbit, sbit\n\
-    \  // sbit\u306F\u73FE\u5728\u30D0\u30B0\u308A\u4E2D\n  assert(gbit(5, 0) == 1);\n\
-    \  assert(gbit(5, 1) == 0);\n  assert(gbit(5, 2) == 1);\n  assert(gbit(1LL <<\
-    \ 40, 40) == 1);\n\n  rep(loop, 100) {\n    u64 x = rng();\n    for (int i = 0;\
-    \ i < 64; i++) {\n      u64 g = gbit(x, i);\n      assert(((x >> i) & 1) == g\
-    \ && \"gbit\");\n      sbit(x, i, 1);\n      assert(((x >> i) & 1) == 1u && \"\
-    sbit\");\n      sbit(x, i, 0);\n      assert(((x >> i) & 1) == 0u && \"sbit\"\
-    );\n      sbit(x, i, g);\n      assert(((x >> i) & 1) == g && \"sbit\");\n   \
-    \ }\n  }\n\n  // PW,MSK\n  rep(i, 63) {\n    assert(1LL << i == PW(i));\n    assert(1LL\
-    \ << i == MSK(i) + 1);\n  }\n}\n\nvoid verify_util() {\n  // P, mkp\n  {\n   \
-    \ pl x(3, 2);\n    pl y(2, 3);\n    assert(x + y == pl(5, 5));\n    assert(x -\
-    \ y == pl(1, -1));\n    assert(x * y == pl(6, 6));\n    x += y;\n    assert(x\
-    \ == pl(5, 5));\n    x -= y;\n    assert(x == pl(3, 2));\n    x *= y;\n    assert(x\
-    \ == pl(6, 6));\n\n    // mkp\n    auto p0 = mkp(1, 1);\n    static_assert(is_same<decltype(p0),\
-    \ pair<int, int>>::value);\n    auto p1 = mkp(1LL, double(2.0));\n    static_assert(is_same<decltype(p1),\
-    \ pair<long long, double>>::value);\n    assert(p0.first == 1 && p0.second ==\
-    \ 1);\n    assert(p1.first == 1LL && p1.second == 2.0);\n  }\n\n  // amin, amax\n\
-    \  {\n    int x = 5;\n    amin(x, 4);\n    assert(x == 4);\n    amax(x, 5);\n\
-    \    assert(x == 5);\n  }\n\n  // sz, Max, Min, Sum, mkrui, lb, ub, mkuni\n  {\n\
-    \    // sz, Max, Min, Sum\n    vector<int> v;\n    for (int i = 0; i < 100; i++)\
-    \ {\n      assert(sz(v) == i);\n      v.push_back(randint(0, 10));\n      assert(Max(v)\
-    \ == *max_element(all(v)));\n      assert(Min(v) == *min_element(all(v)));\n \
-    \     assert(Sum(v) == accumulate(all(v), 0LL));\n    }\n\n    // mkrui\n    auto\
-    \ rui = mkrui(v);\n    int buf = 0;\n    assert(rui[0] == 0);\n    rep(i, sz(v))\
-    \ {\n      buf += v[i];\n      assert(rui[i + 1] == buf);\n    }\n    rui = mkrui(v,\
-    \ true);\n    buf = 0;\n    assert(rui.back() == 0);\n    repr(i, sz(v)) {\n \
-    \     buf += v[i];\n      assert(rui[i] == buf);\n    }\n\n    // lb, ub\n   \
-    \ sort(all(v));\n    for (int i = 0; i < sz(v); i++) {\n      if (i != 0 and v[i\
-    \ - 1] == v[i]) continue;\n      int x = v[i];\n      assert(lb(v, x) == i);\n\
-    \      assert(ub(v, x - 1) == i);\n    }\n    for (int x = 0; x < 10; x++) {\n\
-    \      int l = lb(v, x);\n      int u = ub(v, x);\n      for (int i = 0; i < sz(v);\
-    \ i++) {\n        assert((l <= i) == (x <= v[i]) && \"lb\");\n        assert((u\
-    \ <= i) == (x < v[i]) && \"ub\");\n      }\n    }\n\n    // mkuni\n    set<int>\
-    \ s1, s2;\n    for (int i : v) s1.insert(i);\n    v = mkuni(v);\n    for (int\
-    \ i : v) s2.insert(i);\n    assert(s1 == s2);\n  }\n\n  // TEN\n  for (long long\
-    \ i = 0, x = 1; i <= 18; i++, x *= 10) {\n    assert(TEN(i) == x);\n  }\n\n  //\
-    \ mkord, mkinv(100\u500B, 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100)\
-    \ { v.push_back(loop); }\n    auto ord = mkord(sz(v), [&v](int i, int j) { return\
-    \ v[i] < v[j]; });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]] <= v[ord[i + 1]]\
-    \ && \"mkord\"); }\n\n    randshf(v);\n    auto inv = mkinv(v);\n    assert(inv.size()\
-    \ == 100 && \"mkinv\");\n    set<int> st;\n    each(x, v) st.insert(x);\n    rep(i,\
-    \ sz(inv)) {\n      if (inv[i] == -1) {\n        assert(st.find(i) == st.end()\
-    \ && \"mkinv\");\n      } else {\n        assert(0 <= inv[i] && inv[i] < sz(v)\
-    \ && \"mkinv\");\n        assert(v[inv[i]] == i);\n      }\n    }\n  }\n\n  //\
-    \ mkord, mkinv(100\u500B, 1~1000)\n  {\n    vector<int> v;\n    rep(loop, 100)\
-    \ { v.push_back(randint(0, 1000)); }\n    auto ord = mkord(sz(v), [&v](int i,\
-    \ int j) { return v[i] < v[j]; });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]]\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/template.test.cpp\"\
+    \n//\nusing namespace Nyaan;\n\n// bitop.hpp\n\nvoid verify_bitop() {\n  // popcnt\n\
+    \  assert(popcnt(7) == 3);\n  assert(popcnt(0) == 0);\n  assert(popcnt(1LL <<\
+    \ 40) == 1);\n  rep(loop, 100) {\n    u64 x = rng();\n    int pc = popcnt(x);\n\
+    \    rep(i, 64) if ((x >> i) & 1) pc--;\n    assert(pc == 0 && \"popcnt\");\n\
+    \  }\n\n  // lsb\n  assert(lsb(0) == 64);\n  assert(lsb(1) == 0);\n  assert(lsb(1LL\
+    \ << 40) == 40);\n  assert(lsb(100) == 2);\n\n  // ctz\n  assert(ctz(0) == 64);\n\
+    \  assert(ctz(1) == 0);\n  assert(ctz(1LL << 40) == 40);\n  assert(ctz(100) ==\
+    \ 2);\n\n  rep(loop, 100) {\n    u64 x = rng();\n    int n = lsb(x);\n    assert(ctz(x)\
+    \ == n);\n    while (n--) {\n      assert((x & 1) == 0 && \"lsb\");\n      x >>=\
+    \ 1;\n    }\n    assert((x & 1) == 1 && \"lsb\");\n  }\n\n  // msb\n  assert(msb(0)\
+    \ == -1);\n  assert(msb(1) == 0);\n  assert(msb(1LL << 40) == 40);\n  assert(msb(100)\
+    \ == 6);\n\n  rep(loop, 100) {\n    u64 x = rng();\n    int m = msb(x);\n    if\
+    \ (m != -1) {\n      assert(((x >> m) & 1) == 1 && \"msb\");\n    }\n    for (int\
+    \ i = m + 1; i < 64; i++) {\n      assert(((x >> i) & 1) == 0 && \"msb\");\n \
+    \   }\n  }\n\n  // gbit, sbit\n  // sbit\u306F\u73FE\u5728\u30D0\u30B0\u308A\u4E2D\
+    \n  assert(gbit(5, 0) == 1);\n  assert(gbit(5, 1) == 0);\n  assert(gbit(5, 2)\
+    \ == 1);\n  assert(gbit(1LL << 40, 40) == 1);\n\n  rep(loop, 100) {\n    u64 x\
+    \ = rng();\n    for (int i = 0; i < 64; i++) {\n      u64 g = gbit(x, i);\n  \
+    \    assert(((x >> i) & 1) == g && \"gbit\");\n      sbit(x, i, 1);\n      assert(((x\
+    \ >> i) & 1) == 1u && \"sbit\");\n      sbit(x, i, 0);\n      assert(((x >> i)\
+    \ & 1) == 0u && \"sbit\");\n      sbit(x, i, g);\n      assert(((x >> i) & 1)\
+    \ == g && \"sbit\");\n    }\n  }\n\n  // PW,MSK\n  rep(i, 63) {\n    assert(1LL\
+    \ << i == PW(i));\n    assert(1LL << i == MSK(i) + 1);\n  }\n}\n\nvoid verify_util()\
+    \ {\n  // P, mkp\n  {\n    pl x(3, 2);\n    pl y(2, 3);\n    assert(x + y == pl(5,\
+    \ 5));\n    assert(x - y == pl(1, -1));\n    assert(x * y == pl(6, 6));\n    x\
+    \ += y;\n    assert(x == pl(5, 5));\n    x -= y;\n    assert(x == pl(3, 2));\n\
+    \    x *= y;\n    assert(x == pl(6, 6));\n\n    // mkp\n    auto p0 = mkp(1, 1);\n\
+    \    static_assert(is_same<decltype(p0), pair<int, int>>::value);\n    auto p1\
+    \ = mkp(1LL, double(2.0));\n    static_assert(is_same<decltype(p1), pair<long\
+    \ long, double>>::value);\n    assert(p0.first == 1 && p0.second == 1);\n    assert(p1.first\
+    \ == 1LL && p1.second == 2.0);\n  }\n\n  // amin, amax\n  {\n    int x = 5;\n\
+    \    amin(x, 4);\n    assert(x == 4);\n    amax(x, 5);\n    assert(x == 5);\n\
+    \  }\n\n  // sz, Max, Min, Sum, mkrui, lb, ub, mkuni\n  {\n    // sz, Max, Min,\
+    \ Sum\n    vector<int> v;\n    for (int i = 0; i < 100; i++) {\n      assert(sz(v)\
+    \ == i);\n      v.push_back(randint(0, 10));\n      assert(Max(v) == *max_element(all(v)));\n\
+    \      assert(Min(v) == *min_element(all(v)));\n      assert(Sum(v) == accumulate(all(v),\
+    \ 0LL));\n    }\n\n    // mkrui\n    auto rui = mkrui(v);\n    int buf = 0;\n\
+    \    assert(rui[0] == 0);\n    rep(i, sz(v)) {\n      buf += v[i];\n      assert(rui[i\
+    \ + 1] == buf);\n    }\n    rui = mkrui(v, true);\n    buf = 0;\n    assert(rui.back()\
+    \ == 0);\n    repr(i, sz(v)) {\n      buf += v[i];\n      assert(rui[i] == buf);\n\
+    \    }\n\n    // lb, ub\n    sort(all(v));\n    for (int i = 0; i < sz(v); i++)\
+    \ {\n      if (i != 0 and v[i - 1] == v[i]) continue;\n      int x = v[i];\n \
+    \     assert(lb(v, x) == i);\n      assert(ub(v, x - 1) == i);\n    }\n    for\
+    \ (int x = 0; x < 10; x++) {\n      int l = lb(v, x);\n      int u = ub(v, x);\n\
+    \      for (int i = 0; i < sz(v); i++) {\n        assert((l <= i) == (x <= v[i])\
+    \ && \"lb\");\n        assert((u <= i) == (x < v[i]) && \"ub\");\n      }\n  \
+    \  }\n\n    // mkuni\n    set<int> s1, s2;\n    for (int i : v) s1.insert(i);\n\
+    \    v = mkuni(v);\n    for (int i : v) s2.insert(i);\n    assert(s1 == s2);\n\
+    \  }\n\n  // TEN\n  for (long long i = 0, x = 1; i <= 18; i++, x *= 10) {\n  \
+    \  assert(TEN(i) == x);\n  }\n\n  // mkord, mkinv(100\u500B, 1~1000)\n  {\n  \
+    \  vector<int> v;\n    rep(loop, 100) { v.push_back(loop); }\n    auto ord = mkord(sz(v),\
+    \ [&v](int i, int j) { return v[i] < v[j]; });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]]\
+    \ <= v[ord[i + 1]] && \"mkord\"); }\n\n    randshf(v);\n    auto inv = mkinv(v);\n\
+    \    assert(inv.size() == 100 && \"mkinv\");\n    set<int> st;\n    each(x, v)\
+    \ st.insert(x);\n    rep(i, sz(inv)) {\n      if (inv[i] == -1) {\n        assert(st.find(i)\
+    \ == st.end() && \"mkinv\");\n      } else {\n        assert(0 <= inv[i] && inv[i]\
+    \ < sz(v) && \"mkinv\");\n        assert(v[inv[i]] == i);\n      }\n    }\n  }\n\
+    \n  // mkord, mkinv(100\u500B, 1~1000)\n  {\n    vector<int> v;\n    rep(loop,\
+    \ 100) { v.push_back(randint(0, 1000)); }\n    auto ord = mkord(sz(v), [&v](int\
+    \ i, int j) { return v[i] < v[j]; });\n    rep(i, sz(ord) - 1) { assert(v[ord[i]]\
     \ <= v[ord[i + 1]] && \"mkord\"); }\n\n    v = mkuni(v);\n    randshf(v);\n  \
     \  auto inv = mkinv(v);\n    assert(sz(inv) == Max(v) + 1 && \"mkinv\");\n   \
     \ set<int> st;\n    each(x, v) st.insert(x);\n    rep(i, sz(inv)) {\n      if\
@@ -336,8 +334,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/template.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-unit-test/template.test.cpp
 layout: document

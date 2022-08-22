@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
   _extendedRequiredBy: []
@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/barrett-reduction.test.cpp
     title: verify/verify-unit-test/barrett-reduction.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/arbitrary-modint.hpp\"\n\n#line 2 \"modint/barrett-reduction.hpp\"\
@@ -102,7 +102,7 @@ data:
   path: modint/arbitrary-modint.hpp
   requiredBy: []
   timestamp: '2022-02-08 14:09:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp

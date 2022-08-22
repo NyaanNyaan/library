@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/mo.hpp
     title: Mo's algorithm
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy: []
@@ -36,30 +36,31 @@ data:
     \ delete_left(nl++);\n      while (nr > right[idx]) delete_right(--nr);\n    \
     \  rem(idx);\n    }\n  }\n};\n\n/**\n * @brief Mo's algorithm\n * @docs docs/misc/mo.md\n\
     \ */\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial\
-    \ {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) : f(1, T(1)), g(1, T(1)), h(1,\
-    \ T(1)) {\n    while (MAX >= (int)f.size()) extend();\n  }\n\n  void extend()\
-    \ {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n    g.resize(m);\n\
-    \    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n \
-    \   g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for\
-    \ (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i]\
-    \ = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n\
-    \    while (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int\
-    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n\
-    \    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n\
-    \    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int\
+    \ {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
+    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
+    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
+    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
+    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
+    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
+    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
+    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
+    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
+    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
+    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
+    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
+    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
+    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
+    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
+    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
+    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return\
-    \ C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>& r) {\n\
-    \    static_assert(is_integral<I>::value == true);\n    int n = 0;\n    for (auto&\
-    \ x : r) {\n      if(x < 0) return T(0);\n      n += x;\n    }\n    T res = fac(n);\n\
-    \    for (auto& x : r) res *= finv(x);\n    return res;\n  }\n\n  template <typename\
-    \ I>\n  T operator()(const vector<I>& r) {\n    return multinomial(r);\n  }\n\n\
-    \  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
-    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
-    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
-    \n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"modulo/multipoint-binomial-sum.hpp\"\
+    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
+    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"modulo/multipoint-binomial-sum.hpp\"\
     \n\ntemplate <typename mint>\nvector<mint> multipoint_binomial_sum(const vector<pair<int,\
     \ int>>& qs) {\n  int N = 2;\n  for (auto& p : qs) N = max(N, p.first);\n  Binomial<mint>\
     \ b(N + 1);\n  int Q = qs.size();\n  Mo mo(N, Q);\n  for (auto& p : qs) {\n  \
@@ -89,7 +90,7 @@ data:
   isVerificationFile: false
   path: modulo/multipoint-binomial-sum.hpp
   requiredBy: []
-  timestamp: '2021-08-10 23:14:36+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp

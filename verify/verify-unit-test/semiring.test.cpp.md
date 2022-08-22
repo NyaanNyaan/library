@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: math/semiring.hpp
     title: "\u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: shortest-path/warshall-floyd.hpp
     title: shortest-path/warshall-floyd.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -247,33 +247,32 @@ data:
     \ = 0;\n  for (int k = 0; k < N; k++)\n    for (int i = 0; i < N; i++)\n     \
     \ for (int j = 0; j < N; j++) d[i][j] = min(d[i][j], d[i][k] + d[k][j]);\n}\n\
     #line 7 \"verify/verify-unit-test/semiring.test.cpp\"\nusing namespace Nyaan;\n\
-    \n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 10 \"verify/verify-unit-test/semiring.test.cpp\"\n\nll f(ll a, ll b) { return\
-    \ min(a, b); }\nll g(ll a, ll b) { return a + b; }\nll i0() { return -1; }\nll\
-    \ i1() { return 0; }\nusing rig = semiring<ll, f, g, i0, i1>;\n\nvoid test() {\n\
-    \  constexpr int n = 100;\n  vvl d(n, vl(n, infLL));\n  rep(i, n) d[i][i] = 0;\n\
-    \n  int ratio = (n / 3) * pow(2, randint(0, 5));\n  rep(i, n) rep(j, i) {\n  \
-    \  if (randint(0, ratio) == 0) d[i][j] = d[j][i] = randint(0, 100);\n  }\n\n \
-    \ Mat<rig, n> m;\n  rep(i, n) rep(j, n) m[i][j] = d[i][j] == infLL ? i0() : d[i][j];\n\
-    \  m ^= n - 1;\n\n  warshall_floyd(d);\n  rep(i, n) rep(j, n) assert(m[i][j] ==\
-    \ (d[i][j] == infLL ? i0() : d[i][j]));\n}\n\nvoid Nyaan::solve() {\n  rep(i,\
-    \ 50) test();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\nusing\
+    \ u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x\
+    \ =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 10 \"verify/verify-unit-test/semiring.test.cpp\"\
+    \n\nll f(ll a, ll b) { return min(a, b); }\nll g(ll a, ll b) { return a + b; }\n\
+    ll i0() { return -1; }\nll i1() { return 0; }\nusing rig = semiring<ll, f, g,\
+    \ i0, i1>;\n\nvoid test() {\n  constexpr int n = 100;\n  vvl d(n, vl(n, infLL));\n\
+    \  rep(i, n) d[i][i] = 0;\n\n  int ratio = (n / 3) * pow(2, randint(0, 5));\n\
+    \  rep(i, n) rep(j, i) {\n    if (randint(0, ratio) == 0) d[i][j] = d[j][i] =\
+    \ randint(0, 100);\n  }\n\n  Mat<rig, n> m;\n  rep(i, n) rep(j, n) m[i][j] = d[i][j]\
+    \ == infLL ? i0() : d[i][j];\n  m ^= n - 1;\n\n  warshall_floyd(d);\n  rep(i,\
+    \ n) rep(j, n) assert(m[i][j] == (d[i][j] == infLL ? i0() : d[i][j]));\n}\n\n\
+    void Nyaan::solve() {\n  rep(i, 50) test();\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/semiring.hpp\"\n#include\
     \ \"../../shortest-path/warshall-floyd.hpp\"\nusing namespace Nyaan;\n\n#include\
@@ -301,7 +300,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/semiring.test.cpp
   requiredBy: []
-  timestamp: '2021-11-23 10:22:25+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/semiring.test.cpp

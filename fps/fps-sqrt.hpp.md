@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/mod-sqrt.hpp
     title: mod sqrt(Tonelli-Shanks algorithm)
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/fps/fps-sqrt.md
     document_title: "\u5E73\u65B9\u6839"
@@ -168,7 +168,7 @@ data:
   path: fps/fps-sqrt.hpp
   requiredBy: []
   timestamp: '2021-02-08 19:11:31+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
 documentation_of: fps/fps-sqrt.hpp

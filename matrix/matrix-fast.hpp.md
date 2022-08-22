@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
     links: []
@@ -39,9 +39,9 @@ data:
     \    return true;\n  }\n\n  bool operator!=(const Matrix &B) const {\n    for\
     \ (int i = 0; i < H; i++)\n      for (int j = 0; j < W; j++)\n        if (A[i][j]\
     \ != B[i][j]) return true;\n    return false;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, Matrix &p) {\n    for (int i = 0; i < H; i++) {\n      os << \"[\";\n \
-    \     for (int j = 0; j < W; j++) {\n        os << p[i][j] << (j + 1 == W ? \"\
-    ]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\n  T determinant(int\
+    \ &os,const Matrix &p) {\n    for (int i = 0; i < H; i++) {\n      os << \"[\"\
+    ;\n      for (int j = 0; j < W; j++) {\n        os << p[i][j] << (j + 1 == W ?\
+    \ \"]\\n\" : \",\");\n      }\n    }\n    return (os);\n  }\n\n  T determinant(int\
     \ n = -1) {\n    if (n == -1) n = H;\n    Matrix B(*this);\n    T ret = 1;\n \
     \   for (int i = 0; i < n; i++) {\n      int idx = -1;\n      for (int j = i;\
     \ j < n; j++) {\n        if (B[j][i] != 0) {\n          idx = j;\n          break;\n\
@@ -79,26 +79,26 @@ data:
     \ != B[i][j]) return false;\n    return true;\n  }\n\n  bool operator!=(const\
     \ Matrix &B) const {\n    for (int i = 0; i < H; i++)\n      for (int j = 0; j\
     \ < W; j++)\n        if (A[i][j] != B[i][j]) return true;\n    return false;\n\
-    \  }\n\n  friend ostream &operator<<(ostream &os, Matrix &p) {\n    for (int i\
-    \ = 0; i < H; i++) {\n      os << \"[\";\n      for (int j = 0; j < W; j++) {\n\
-    \        os << p[i][j] << (j + 1 == W ? \"]\\n\" : \",\");\n      }\n    }\n \
-    \   return (os);\n  }\n\n  T determinant(int n = -1) {\n    if (n == -1) n = H;\n\
-    \    Matrix B(*this);\n    T ret = 1;\n    for (int i = 0; i < n; i++) {\n   \
-    \   int idx = -1;\n      for (int j = i; j < n; j++) {\n        if (B[j][i] !=\
-    \ 0) {\n          idx = j;\n          break;\n        }\n      }\n      if (idx\
-    \ == -1) return 0;\n      if (i != idx) {\n        ret *= T(-1);\n        swap(B[i],\
-    \ B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n  \
-    \    for (int j = 0; j < n; j++) {\n        B[i][j] *= inv;\n      }\n      for\
-    \ (int j = i + 1; j < n; j++) {\n        T a = B[j][i];\n        if (a == 0) continue;\n\
-    \        for (int k = i; k < n; k++) {\n          B[j][k] -= B[i][k] * a;\n  \
-    \      }\n      }\n    }\n    return (ret);\n  }\n};\n\n/**\n * @brief \u884C\u5217\
-    \u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)\n */\n"
+    \  }\n\n  friend ostream &operator<<(ostream &os,const Matrix &p) {\n    for (int\
+    \ i = 0; i < H; i++) {\n      os << \"[\";\n      for (int j = 0; j < W; j++)\
+    \ {\n        os << p[i][j] << (j + 1 == W ? \"]\\n\" : \",\");\n      }\n    }\n\
+    \    return (os);\n  }\n\n  T determinant(int n = -1) {\n    if (n == -1) n =\
+    \ H;\n    Matrix B(*this);\n    T ret = 1;\n    for (int i = 0; i < n; i++) {\n\
+    \      int idx = -1;\n      for (int j = i; j < n; j++) {\n        if (B[j][i]\
+    \ != 0) {\n          idx = j;\n          break;\n        }\n      }\n      if\
+    \ (idx == -1) return 0;\n      if (i != idx) {\n        ret *= T(-1);\n      \
+    \  swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n      T inv = T(1) / B[i][i];\n\
+    \      for (int j = 0; j < n; j++) {\n        B[i][j] *= inv;\n      }\n     \
+    \ for (int j = i + 1; j < n; j++) {\n        T a = B[j][i];\n        if (a ==\
+    \ 0) continue;\n        for (int k = i; k < n; k++) {\n          B[j][k] -= B[i][k]\
+    \ * a;\n        }\n      }\n    }\n    return (ret);\n  }\n};\n\n/**\n * @brief\
+    \ \u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: matrix/matrix-fast.hpp
   requiredBy: []
-  timestamp: '2021-12-20 22:10:59+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
 documentation_of: matrix/matrix-fast.hpp

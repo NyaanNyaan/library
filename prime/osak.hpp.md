@@ -58,8 +58,8 @@ data:
   timestamp: '2021-04-20 10:57:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
 documentation_of: prime/osak.hpp
 layout: document
 redirect_from:

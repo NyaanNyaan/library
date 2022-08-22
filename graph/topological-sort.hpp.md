@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: math/grundy-number.hpp
     title: Grundy Number
   _extendedVerifiedWith:
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/topological-sort.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
@@ -80,11 +80,11 @@ data:
   requiredBy:
   - math/grundy-number.hpp
   timestamp: '2021-11-23 10:22:25+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
 documentation_of: graph/topological-sort.hpp
 layout: document
 redirect_from:

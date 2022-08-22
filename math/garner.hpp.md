@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/nimber-to-field.hpp
     title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/nimber.hpp
     title: Nim Product
   _extendedVerifiedWith:
@@ -24,12 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
     title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1775.test.cpp
     title: verify/verify-yuki/yuki-1775.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: Garner's algorithm
     links: []
@@ -77,17 +77,17 @@ data:
   isVerificationFile: false
   path: math/garner.hpp
   requiredBy:
-  - math/nimber.hpp
   - math/nimber-to-field.hpp
+  - math/nimber.hpp
   timestamp: '2021-12-23 18:55:42+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/nimber.test.cpp
-  - verify/verify-unit-test/nimber-to-field.test.cpp
   - verify/verify-unit-test/garner.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
-  - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+  - verify/verify-unit-test/nimber-to-field.test.cpp
   - verify/verify-yuki/yuki-1775.test.cpp
+  - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
 documentation_of: math/garner.hpp
 layout: document
 redirect_from:

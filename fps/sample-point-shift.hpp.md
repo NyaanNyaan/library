@@ -1,21 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/find-p-recursive.hpp
     title: "P-recursive\u306E\u9AD8\u901F\u8A08\u7B97"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/polynomial-matrix-prefix-prod.hpp
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
   _extendedVerifiedWith:
@@ -25,23 +25,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0502.test.cpp
     title: verify/verify-yuki/yuki-0502.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"fps/sample-point-shift.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\
     \n\ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int\
-    \ MAX = 0) : f(1, T(1)), g(1, T(1)), h(1, T(1)) {\n    while (MAX >= (int)f.size())\
+    \ MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1,\
+    \ T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n    while (MAX >= (int)f.size())\
     \ extend();\n  }\n\n  void extend() {\n    int n = f.size();\n    int m = n *\
     \ 2;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n;\
     \ i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n  \
@@ -55,50 +56,51 @@ data:
     \ n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n \
     \ }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\n  template <typename\
     \ I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
-    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if(x < 0) return T(0);\n\
-    \      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n\
-    \    return res;\n  }\n\n  template <typename I>\n  T operator()(const vector<I>&\
-    \ r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if\
-    \ (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n\
-    \ - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n\
-    \  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0\
-    \ || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n\
-    #line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
-    \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
-    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
-    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
-    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
-    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
-    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
-    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
-    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
-    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
-    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
-    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
-    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
-    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
-    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
-    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
-    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
-    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
-    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
-    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
-    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
-    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
-    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
-    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
-    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
-    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
-    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
-    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
-    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
-    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
-    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
-    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
-    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
-    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
-    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
+    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
+    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
+    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n\
+    \    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n\
+    \  }\n};\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\n\
+    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
+    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
+    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
+    \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
+    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
+    \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
+    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
+    \ i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n  FPS &operator-=(const\
+    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] -= r;\n\
+    \    return *this;\n  }\n\n  FPS &operator*=(const mint &v) {\n    for (int k\
+    \ = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n    return *this;\n  }\n\n\
+    \  FPS &operator/=(const FPS &r) {\n    if (this->size() < r.size()) {\n     \
+    \ this->clear();\n      return *this;\n    }\n    int n = this->size() - r.size()\
+    \ + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this), g(r);\n      g.shrink();\n\
+    \      mint coeff = g.back().inverse();\n      for (auto &x : g) x *= coeff;\n\
+    \      int deg = (int)f.size() - (int)g.size() + 1;\n      int gs = g.size();\n\
+    \      FPS quo(deg);\n      for (int i = deg - 1; i >= 0; i--) {\n        quo[i]\
+    \ = f[i + gs - 1];\n        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] *\
+    \ g[j];\n      }\n      *this = quo * coeff;\n      this->resize(n, mint(0));\n\
+    \      return *this;\n    }\n    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();\n\
+    \  }\n\n  FPS &operator%=(const FPS &r) {\n    *this -= *this / r * r;\n    shrink();\n\
+    \    return *this;\n  }\n\n  FPS operator+(const FPS &r) const { return FPS(*this)\
+    \ += r; }\n  FPS operator+(const mint &v) const { return FPS(*this) += v; }\n\
+    \  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator-(const\
+    \ mint &v) const { return FPS(*this) -= v; }\n  FPS operator*(const FPS &r) const\
+    \ { return FPS(*this) *= r; }\n  FPS operator*(const mint &v) const { return FPS(*this)\
+    \ *= v; }\n  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }\n \
+    \ FPS operator%(const FPS &r) const { return FPS(*this) %= r; }\n  FPS operator-()\
+    \ const {\n    FPS ret(this->size());\n    for (int i = 0; i < (int)this->size();\
+    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
+    \ (this->size() && this->back() == mint(0)) this->pop_back();\n  }\n\n  FPS rev()\
+    \ const {\n    FPS ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
+    \ ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(), r.size()));\n\
+    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
+    \   return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
     \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
     \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
     \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
@@ -182,14 +184,14 @@ data:
   - modulo/factorial.hpp
   - fps/find-p-recursive.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
-  timestamp: '2021-11-15 19:19:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
 documentation_of: fps/sample-point-shift.hpp
 layout: document
 redirect_from:

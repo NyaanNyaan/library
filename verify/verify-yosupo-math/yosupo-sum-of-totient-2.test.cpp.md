@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: multiplicative-function/sum-of-multiplicative-function.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
@@ -212,9 +212,10 @@ data:
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\n\
-    struct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) : f(1, T(1)),\
-    \ g(1, T(1)), h(1, T(1)) {\n    while (MAX >= (int)f.size()) extend();\n  }\n\n\
-    \  void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    struct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
+    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
+    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
+    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
     \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
     \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
     \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
@@ -227,8 +228,8 @@ data:
     \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
     \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
     \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
-    \  for (auto& x : r) {\n      if(x < 0) return T(0);\n      n += x;\n    }\n \
-    \   T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
+    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
     \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
     \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
@@ -288,18 +289,17 @@ data:
     \ \u7834\u58CA\u7684\n  T run(vector<T>& fprime) {\n    if (M == 0) return {};\n\
     \    set_buf(fprime);\n    assert((int)buf.size() == s);\n    ans = buf[idx(M)]\
     \ + 1;\n    for (int i = 0; i < ps; i++) dfs(i, 1, p[i], 1);\n    return ans;\n\
-    \  }\n\n private:\n  i64 md(i64 n, i64 d) { return double(n) / d; }\n  i64 idx(i64\
-    \ n) { return n <= sq ? s - n : md(M, n); }\n  void set_buf(vector<T>& _buf) {\
-    \ swap(buf, _buf); }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306E\
-    prefix sum\n * @docs docs/multiplicative-function/sum-of-multiplicative-function.md\n\
-    \ */\n#line 10 \"verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp\"\n\
-    //\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n//\
-    \ using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
-    \ vvm = vector<vm>;\nBinomial<mint> C;\n\nmint f(ll p, ll c) {\n  ll res = 1;\n\
-    \  while (--c) res = res * p;\n  return res * (p - 1);\n}\n\nvoid Nyaan::solve()\
-    \ {\n  inl(N);\n  mf_prefix_sum<mint, f> mf(N);\n  auto h1 = mf.prime_sum_table();\n\
-    \  auto h0 = mf.pi_table();\n  rep(i, sz(h1)) h1[i] -= h0[i];\n  out(mf.run(h1));\n\
-    }\n"
+    \  }\n\n  i64 md(i64 n, i64 d) { return double(n) / d; }\n  i64 idx(i64 n) { return\
+    \ n <= sq ? s - n : md(M, n); }\n  void set_buf(vector<T>& _buf) { swap(buf, _buf);\
+    \ }\n};\n\n/**\n * @brief \u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum\n * @docs\
+    \ docs/multiplicative-function/sum-of-multiplicative-function.md\n */\n#line 10\
+    \ \"verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp\"\n//\nusing namespace\
+    \ Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
+    using vm = vector<mint>;\nusing vvm = vector<vm>;\nBinomial<mint> C;\n\nmint f(ll\
+    \ p, ll c) {\n  ll res = 1;\n  while (--c) res = res * p;\n  return res * (p -\
+    \ 1);\n}\n\nvoid Nyaan::solve() {\n  inl(N);\n  mf_prefix_sum<mint, f> mf(N);\n\
+    \  auto h1 = mf.prime_sum_table();\n  auto h0 = mf.pi_table();\n  rep(i, sz(h1))\
+    \ h1[i] -= h0[i];\n  out(mf.run(h1));\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
     \n//\n#include \"../../template/template.hpp\"\n//\nusing namespace Nyaan;\n\n\
     #include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
@@ -325,8 +325,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   requiredBy: []
-  timestamp: '2021-12-20 21:46:33+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
 layout: document

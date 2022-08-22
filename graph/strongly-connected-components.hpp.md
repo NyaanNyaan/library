@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   _extendedRequiredBy: []
@@ -101,8 +101,8 @@ data:
   timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-3-c.test.cpp
 documentation_of: graph/strongly-connected-components.hpp
 layout: document
 redirect_from:

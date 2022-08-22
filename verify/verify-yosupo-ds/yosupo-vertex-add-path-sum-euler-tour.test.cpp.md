@@ -1,47 +1,47 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: data-structure/binary-indexed-tree.hpp
     title: Binary Indexed Tree(Fenwick Tree)
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/static-graph.hpp
     title: Static Graph
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: tree/euler-tour.hpp
     title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -267,85 +267,85 @@ data:
     }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
     \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
     }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0,\
-    \ 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"tree/euler-tour.hpp\"\n\n\n\n#line 2 \"graph/graph-template.hpp\"\n\n\
-    template <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
-    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
-    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
-    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
-    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
-    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
-    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+    using fastio::wtn;\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng()\
+    \ {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"tree/euler-tour.hpp\"\n\n\n\
+    \n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct edge {\n\
+    \  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost)\
+    \ {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\
+    \n  edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\n \
+    \ operator int() const { return to; }\n};\ntemplate <typename T>\nusing Edges\
+    \ = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph = vector<Edges<T>>;\n\
+    using UnweightedGraph = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\n\
+    UnweightedGraph graph(int N, int M = -1, bool is_directed = false,\n         \
+    \             bool is_1origin = true) {\n  UnweightedGraph g(N);\n  if (M == -1)\
+    \ M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >>\
+    \ y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n    if (!is_directed)\
+    \ g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of Weighted Graph\ntemplate\
+    \ <typename T>\nWeightedGraph<T> wgraph(int N, int M = -1, bool is_directed =\
+    \ false,\n                        bool is_1origin = true) {\n  WeightedGraph<T>\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
-    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
-    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
-    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
-    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
-    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
-    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
-    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
-    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
-    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
-    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
-    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
-    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
-    \                       bool is_directed = false, bool is_1origin = true) {\n\
-    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
-    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
-    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
-    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
-    \ */\n#line 6 \"tree/euler-tour.hpp\"\n\ntemplate <typename G>\nstruct EulerTour\
-    \ {\n private:\n  struct RMQ {\n    int n, s;\n    using P = pair<int, int>;\n\
-    \    vector<P> seg;\n    P UNIT = P(1 << 30, -1);\n\n    RMQ(int N) : n(N), s(1)\
-    \ {\n      while (s < N) s <<= 1;\n      seg.assign(2 * s, UNIT);\n    }\n\n \
-    \   void set(int k, P x) { seg[k + s] = x; }\n\n    P operator[](int k) const\
-    \ { return seg[k + s]; }\n\n    void build() {\n      for (int k = s - 1; k >\
-    \ 0; k--) {\n        seg[k] = min(seg[2 * k], seg[2 * k + 1]);\n      }\n    }\n\
-    \n    P query(int a, int b) const {\n      P R = UNIT;\n      for (a += s, b +=\
-    \ s; a < b; a >>= 1, b >>= 1) {\n        if (a & 1) R = min(R, seg[a++]);\n  \
-    \      if (b & 1) R = min(R, seg[--b]);\n      }\n      return R;\n    }\n\n \
-    \   int size() const { return n; }\n  };\n\n  vector<int> down, up;\n  int id;\n\
-    \  RMQ rmq;\n\n  void init(G &g, int root) {\n    dfs(g, root, -1, 0);\n    if\
-    \ (id < rmq.size()) rmq.set(id++, {-1, -1});\n    for (int i = 0; i < (int)g.size();\
-    \ i++) {\n      if (down[i] == -1) {\n        rmq.set(id++, {-1, -1});\n     \
-    \   dfs(g, i, -1, 0);\n        if (id < rmq.size()) rmq.set(id++, {-1, -1});\n\
-    \      }\n    }\n    rmq.build();\n  }\n\n  void dfs(G &g, int c, int p, int dp)\
-    \ {\n    down[c] = id;\n    rmq.set(id++, {dp, c});\n    for (auto &d : g[c])\
-    \ {\n      if (d == p) continue;\n      dfs(g, d, c, dp + 1);\n    }\n    up[c]\
-    \ = id;\n    if (p != -1) rmq.set(id++, {dp - 1, p});\n  }\n\n public:\n  // remind\
-    \ : because of additional node,\n  // DS on tour should reserve 2 * n nodes.\n\
-    \  EulerTour(G &g, int root = 0)\n      : down(g.size(), -1), up(g.size(), -1),\
-    \ id(0), rmq(2 * g.size()) {\n    init(g, root);\n  }\n\n  pair<int, int> idx(int\
-    \ i) const { return {down[i], up[i]}; }\n\n  int lca(int a, int b) const {\n \
-    \   if (down[a] > down[b]) swap(a, b);\n    return rmq.query(down[a], down[b]\
-    \ + 1).second;\n  }\n\n  template <typename F>\n  void node_query(int a, int b,\
-    \ const F &f) {\n    int l = lca(a, b);\n    f(down[l], down[a] + 1);\n    f(down[l]\
-    \ + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void edge_query(int a,\
-    \ int b, const F &f) {\n    int l = lca(a, b);\n    f(down[l] + 1, down[a] + 1);\n\
-    \    f(down[l] + 1, down[b] + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ a, const F &f) {\n    f(down[a], up[a]);\n  }\n\n  int size() const { return\
-    \ int(rmq.size()); }\n};\n\n/**\n * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\
-    \u30FC\n * @docs docs/tree/euler-tour.md\n */\n#line 9 \"verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp\"\
+    \ y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n\
+    \    g[x].emplace_back(x, y, c);\n    if (!is_directed) g[y].emplace_back(y, x,\
+    \ c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate <typename T>\nEdges<T>\
+    \ esgraph(int N, int M, int is_weighted = true, bool is_1origin = true) {\n  Edges<T>\
+    \ es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n  \
+    \  T c;\n    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if\
+    \ (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n  }\n  return es;\n}\n\
+    \n// Input of Adjacency Matrix\ntemplate <typename T>\nvector<vector<T>> adjgraph(int\
+    \ N, int M, T INF, int is_weighted = true,\n                           bool is_directed\
+    \ = false, bool is_1origin = true) {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n\
+    \  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n\
+    \    if (is_weighted)\n      cin >> c;\n    else\n      c = 1;\n    if (is_1origin)\
+    \ x--, y--;\n    d[x][y] = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return\
+    \ d;\n}\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\
+    \n * @docs docs/graph/graph-template.md\n */\n#line 6 \"tree/euler-tour.hpp\"\n\
+    \ntemplate <typename G>\nstruct EulerTour {\n private:\n  struct RMQ {\n    int\
+    \ n, s;\n    using P = pair<int, int>;\n    vector<P> seg;\n    P UNIT = P(1 <<\
+    \ 30, -1);\n\n    RMQ(int N) : n(N), s(1) {\n      while (s < N) s <<= 1;\n  \
+    \    seg.assign(2 * s, UNIT);\n    }\n\n    void set(int k, P x) { seg[k + s]\
+    \ = x; }\n\n    P operator[](int k) const { return seg[k + s]; }\n\n    void build()\
+    \ {\n      for (int k = s - 1; k > 0; k--) {\n        seg[k] = min(seg[2 * k],\
+    \ seg[2 * k + 1]);\n      }\n    }\n\n    P query(int a, int b) const {\n    \
+    \  P R = UNIT;\n      for (a += s, b += s; a < b; a >>= 1, b >>= 1) {\n      \
+    \  if (a & 1) R = min(R, seg[a++]);\n        if (b & 1) R = min(R, seg[--b]);\n\
+    \      }\n      return R;\n    }\n\n    int size() const { return n; }\n  };\n\
+    \n  vector<int> down, up;\n  int id;\n  RMQ rmq;\n\n  void init(G &g, int root)\
+    \ {\n    dfs(g, root, -1, 0);\n    if (id < rmq.size()) rmq.set(id++, {-1, -1});\n\
+    \    for (int i = 0; i < (int)g.size(); i++) {\n      if (down[i] == -1) {\n \
+    \       rmq.set(id++, {-1, -1});\n        dfs(g, i, -1, 0);\n        if (id <\
+    \ rmq.size()) rmq.set(id++, {-1, -1});\n      }\n    }\n    rmq.build();\n  }\n\
+    \n  void dfs(G &g, int c, int p, int dp) {\n    down[c] = id;\n    rmq.set(id++,\
+    \ {dp, c});\n    for (auto &d : g[c]) {\n      if (d == p) continue;\n      dfs(g,\
+    \ d, c, dp + 1);\n    }\n    up[c] = id;\n    if (p != -1) rmq.set(id++, {dp -\
+    \ 1, p});\n  }\n\n public:\n  // remind : because of additional node,\n  // DS\
+    \ on tour should reserve 2 * n nodes.\n  EulerTour(G &g, int root = 0)\n     \
+    \ : down(g.size(), -1), up(g.size(), -1), id(0), rmq(2 * g.size()) {\n    init(g,\
+    \ root);\n  }\n\n  pair<int, int> idx(int i) const { return {down[i], up[i]};\
+    \ }\n\n  int lca(int a, int b) const {\n    if (down[a] > down[b]) swap(a, b);\n\
+    \    return rmq.query(down[a], down[b] + 1).second;\n  }\n\n  template <typename\
+    \ F>\n  void node_query(int a, int b, const F &f) {\n    int l = lca(a, b);\n\
+    \    f(down[l], down[a] + 1);\n    f(down[l] + 1, down[b] + 1);\n  }\n\n  template\
+    \ <typename F>\n  void edge_query(int a, int b, const F &f) {\n    int l = lca(a,\
+    \ b);\n    f(down[l] + 1, down[a] + 1);\n    f(down[l] + 1, down[b] + 1);\n  }\n\
+    \n  template <typename F>\n  void subtree_query(int a, const F &f) {\n    f(down[a],\
+    \ up[a]);\n  }\n\n  int size() const { return int(rmq.size()); }\n};\n\n/**\n\
+    \ * @brief \u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC\n * @docs docs/tree/euler-tour.md\n\
+    \ */\n#line 9 \"verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int N, Q;\n  rd(N, Q);\n \
     \ vector<int> a(N);\n  rep(i, N) rd(a[i]);\n\n  StaticGraph<void> g(N, 2 * N -\
     \ 2);\n  rep(i, N - 1) {\n    int u, v;\n    rd(u, v);\n    g.add_edge(u, v);\n\
@@ -386,8 +386,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   requiredBy: []
-  timestamp: '2021-12-20 22:10:59+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
 layout: document

@@ -1,38 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/matrix-fast.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: matrix/matrix.hpp
     title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_det
@@ -201,16 +201,16 @@ data:
     \ < W; j++)\n        if (A[i][j] != B[i][j]) return false;\n    return true;\n\
     \  }\n\n  bool operator!=(const Matrix &B) const {\n    for (int i = 0; i < H;\
     \ i++)\n      for (int j = 0; j < W; j++)\n        if (A[i][j] != B[i][j]) return\
-    \ true;\n    return false;\n  }\n\n  friend ostream &operator<<(ostream &os, Matrix\
-    \ &p) {\n    for (int i = 0; i < H; i++) {\n      os << \"[\";\n      for (int\
-    \ j = 0; j < W; j++) {\n        os << p[i][j] << (j + 1 == W ? \"]\\n\" : \",\"\
-    );\n      }\n    }\n    return (os);\n  }\n\n  T determinant(int n = -1) {\n \
-    \   if (n == -1) n = H;\n    Matrix B(*this);\n    T ret = 1;\n    for (int i\
-    \ = 0; i < n; i++) {\n      int idx = -1;\n      for (int j = i; j < n; j++) {\n\
-    \        if (B[j][i] != 0) {\n          idx = j;\n          break;\n        }\n\
-    \      }\n      if (idx == -1) return 0;\n      if (i != idx) {\n        ret *=\
-    \ T(-1);\n        swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n      T\
-    \ inv = T(1) / B[i][i];\n      for (int j = 0; j < n; j++) {\n        B[i][j]\
+    \ true;\n    return false;\n  }\n\n  friend ostream &operator<<(ostream &os,const\
+    \ Matrix &p) {\n    for (int i = 0; i < H; i++) {\n      os << \"[\";\n      for\
+    \ (int j = 0; j < W; j++) {\n        os << p[i][j] << (j + 1 == W ? \"]\\n\" :\
+    \ \",\");\n      }\n    }\n    return (os);\n  }\n\n  T determinant(int n = -1)\
+    \ {\n    if (n == -1) n = H;\n    Matrix B(*this);\n    T ret = 1;\n    for (int\
+    \ i = 0; i < n; i++) {\n      int idx = -1;\n      for (int j = i; j < n; j++)\
+    \ {\n        if (B[j][i] != 0) {\n          idx = j;\n          break;\n     \
+    \   }\n      }\n      if (idx == -1) return 0;\n      if (i != idx) {\n      \
+    \  ret *= T(-1);\n        swap(B[i], B[idx]);\n      }\n      ret *= B[i][i];\n\
+    \      T inv = T(1) / B[i][i];\n      for (int j = 0; j < n; j++) {\n        B[i][j]\
     \ *= inv;\n      }\n      for (int j = i + 1; j < n; j++) {\n        T a = B[j][i];\n\
     \        if (a == 0) continue;\n        for (int k = i; k < n; k++) {\n      \
     \    B[j][k] -= B[i][k] * a;\n        }\n      }\n    }\n    return (ret);\n \
@@ -323,8 +323,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   requiredBy: []
-  timestamp: '2021-12-20 22:10:59+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
 layout: document

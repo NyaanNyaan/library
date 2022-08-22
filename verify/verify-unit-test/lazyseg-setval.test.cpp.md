@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: segment-tree/lazy-segment-tree-utility.hpp
     title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\
       \u30F3\u30C8\u6728"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -173,76 +173,74 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/lazyseg-setval.test.cpp\"\
-    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"segment-tree/lazy-segment-tree-utility.hpp\"\n\ntemplate <typename T,\
-    \ typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n          T (*ti)(),\
-    \ E (*ei)()>\nstruct LazySegmentTree {\n  int n, log;\n  vector<T> val;\n  vector<E>\
-    \ laz;\n\n  explicit LazySegmentTree() {}\n  explicit LazySegmentTree(const vector<T>&\
-    \ vc) { init(vc); }\n\n  void init(const vector<T>& vc) {\n    n = 1, log = 0;\n\
-    \    while (n < (int)vc.size()) n <<= 1, log++;\n    val.resize(2 * n, ti());\n\
-    \    laz.resize(n, ei());\n    for (int i = 0; i < (int)vc.size(); ++i) val[i\
-    \ + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n  }\n\n  void update(int\
-    \ l, int r, const E& x) {\n    if (l == r) return;\n    l += n, r += n;\n    for\
-    \ (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) _push(l >> i);\n\
-    \      if (((r >> i) << i) != r) _push((r - 1) >> i);\n    }\n    {\n      int\
-    \ l2 = l, r2 = r;\n      while (l < r) {\n        if (l & 1) _apply(l++, x);\n\
-    \        if (r & 1) _apply(--r, x);\n        l >>= 1;\n        r >>= 1;\n    \
-    \  }\n      l = l2;\n      r = r2;\n    }\n    for (int i = 1; i <= log; i++)\
-    \ {\n      if (((l >> i) << i) != l) _update(l >> i);\n      if (((r >> i) <<\
-    \ i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int l, int r) {\n \
-    \   if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(), R = ti();\n\
-    \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) _push(l\
-    \ >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n    }\n    while\
-    \ (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r & 1) R = f(val[--r],\
-    \ R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L, R);\n  }\n\n  void\
-    \ set_val(int k, const T& x) {\n    k += n;\n    for (int i = log; i >= 1; i--)\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"segment-tree/lazy-segment-tree-utility.hpp\"\
+    \n\ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
+    \          T (*ti)(), E (*ei)()>\nstruct LazySegmentTree {\n  int n, log;\n  vector<T>\
+    \ val;\n  vector<E> laz;\n\n  explicit LazySegmentTree() {}\n  explicit LazySegmentTree(const\
+    \ vector<T>& vc) { init(vc); }\n\n  void init(const vector<T>& vc) {\n    n =\
+    \ 1, log = 0;\n    while (n < (int)vc.size()) n <<= 1, log++;\n    val.resize(2\
+    \ * n, ti());\n    laz.resize(n, ei());\n    for (int i = 0; i < (int)vc.size();\
+    \ ++i) val[i + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n  }\n\
+    \n  void update(int l, int r, const E& x) {\n    if (l == r) return;\n    l +=\
+    \ n, r += n;\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i)\
+    \ != l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n\
+    \    }\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l\
+    \ & 1) _apply(l++, x);\n        if (r & 1) _apply(--r, x);\n        l >>= 1;\n\
+    \        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n    }\n    for (int\
+    \ i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l) _update(l >> i);\n\
+    \      if (((r >> i) << i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int\
+    \ l, int r) {\n    if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(),\
+    \ R = ti();\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) !=\
+    \ l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n  \
+    \  }\n    while (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r &\
+    \ 1) R = f(val[--r], R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L,\
+    \ R);\n  }\n\n  void set_val(int k, const T& x) {\n    k += n;\n    for (int i\
+    \ = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
+    \ i) != (k + 1))\n        _push(k >> i);\n    }\n    val[k] = x;\n    for (int\
+    \ i = 1; i <= log; i++) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
+    \ i) != (k + 1))\n        _update(k >> i);\n    }\n  }\n\n  void update_val(int\
+    \ k, const E& x) {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if\
+    \ (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k\
+    \ >> i);\n    }\n    val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++)\
     \ {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n   \
-    \     _push(k >> i);\n    }\n    val[k] = x;\n    for (int i = 1; i <= log; i++)\
-    \ {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n   \
-    \     _update(k >> i);\n    }\n  }\n\n  void update_val(int k, const E& x) {\n\
-    \    k += n;\n    for (int i = log; i >= 1; i--) {\n      if (((k >> i) << i)\
-    \ != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k >> i);\n    }\n \
-    \   val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++) {\n      if (((k\
-    \ >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _update(k >>\
-    \ i);\n    }\n  }\n\n  T get_val(int k) {\n    k += n;\n    for (int i = log;\
-    \ i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k\
-    \ + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\n private:\n\
-    \  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2 * i + 0] = g(val[2\
-    \ * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i + 1], laz[i]);\n    \
-    \  if (2 * i < n) {\n        compose(laz[2 * i + 0], laz[i]);\n        compose(laz[2\
-    \ * i + 1], laz[i]);\n      }\n      laz[i] = ei();\n    }\n  }\n  inline void\
-    \ _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i + 1]); }\n  inline void\
-    \ _apply(int i, const E& x) {\n    if (x != ei()) {\n      val[i] = g(val[i],\
-    \ x);\n      if (i < n) compose(laz[i], x);\n    }\n  }\n  inline void compose(E&\
-    \ a, const E& b) { a = a == ei() ? b : h(a, b); }\n};\n\nnamespace SegmentTreeUtil\
-    \ {\n\ntemplate <typename T>\nstruct Pair {\n  T first, second;\n  Pair() = default;\n\
-    \  Pair(const T& f, const T& s) : first(f), second(s) {}\n  operator T() const\
-    \ { return first; }\n  friend ostream& operator<<(ostream& os, const Pair<T>&\
-    \ p) {\n    os << T(p.first);\n    return os;\n  }\n};\n\ntemplate <typename T>\n\
-    T Mx(T a, T b) {\n  return max(a, b);\n}\ntemplate <typename T>\nT Mn(T a, T b)\
-    \ {\n  return min(a, b);\n}\ntemplate <typename T>\nT Update(T, T b) {\n  return\
-    \ b;\n}\ntemplate <typename T>\nT Add(T a, T b) {\n  return a + b;\n}\ntemplate\
-    \ <typename T>\nPair<T> Psum(Pair<T> a, Pair<T> b) {\n  return Pair<T>(a.first\
-    \ + b.first, a.second + b.second);\n}\ntemplate <typename T>\nPair<T> Padd(Pair<T>\
-    \ a, T b) {\n  return Pair<T>(a.first + a.second * b, a.second);\n}\ntemplate\
-    \ <typename T>\nPair<T> PUpdate(Pair<T> a, T b) {\n  return Pair<T>(a.second *\
-    \ b, a.second);\n}\ntemplate <typename T>\nPair<T> Pid() {\n  return Pair<T>(0,\
+    \     _update(k >> i);\n    }\n  }\n\n  T get_val(int k) {\n    k += n;\n    for\
+    \ (int i = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >>\
+    \ i) << i) != (k + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\
+    \n private:\n  void _push(int i) {\n    if (laz[i] != ei()) {\n      val[2 * i\
+    \ + 0] = g(val[2 * i + 0], laz[i]);\n      val[2 * i + 1] = g(val[2 * i + 1],\
+    \ laz[i]);\n      if (2 * i < n) {\n        compose(laz[2 * i + 0], laz[i]);\n\
+    \        compose(laz[2 * i + 1], laz[i]);\n      }\n      laz[i] = ei();\n   \
+    \ }\n  }\n  inline void _update(int i) { val[i] = f(val[2 * i + 0], val[2 * i\
+    \ + 1]); }\n  inline void _apply(int i, const E& x) {\n    if (x != ei()) {\n\
+    \      val[i] = g(val[i], x);\n      if (i < n) compose(laz[i], x);\n    }\n \
+    \ }\n  inline void compose(E& a, const E& b) { a = a == ei() ? b : h(a, b); }\n\
+    };\n\nnamespace SegmentTreeUtil {\n\ntemplate <typename T>\nstruct Pair {\n  T\
+    \ first, second;\n  Pair() = default;\n  Pair(const T& f, const T& s) : first(f),\
+    \ second(s) {}\n  operator T() const { return first; }\n  friend ostream& operator<<(ostream&\
+    \ os, const Pair<T>& p) {\n    os << T(p.first);\n    return os;\n  }\n};\n\n\
+    template <typename T>\nT Mx(T a, T b) {\n  return max(a, b);\n}\ntemplate <typename\
+    \ T>\nT Mn(T a, T b) {\n  return min(a, b);\n}\ntemplate <typename T>\nT Update(T,\
+    \ T b) {\n  return b;\n}\ntemplate <typename T>\nT Add(T a, T b) {\n  return a\
+    \ + b;\n}\ntemplate <typename T>\nPair<T> Psum(Pair<T> a, Pair<T> b) {\n  return\
+    \ Pair<T>(a.first + b.first, a.second + b.second);\n}\ntemplate <typename T>\n\
+    Pair<T> Padd(Pair<T> a, T b) {\n  return Pair<T>(a.first + a.second * b, a.second);\n\
+    }\ntemplate <typename T>\nPair<T> PUpdate(Pair<T> a, T b) {\n  return Pair<T>(a.second\
+    \ * b, a.second);\n}\ntemplate <typename T>\nPair<T> Pid() {\n  return Pair<T>(0,\
     \ 0);\n}\ntemplate <typename T>\nT Zero() {\n  return T(0);\n}\ntemplate <typename\
     \ T, T val>\nT Const() {\n  return val;\n}\n\ntemplate <typename T, T MINF>\n\
     struct AddMax_LazySegmentTree\n    : LazySegmentTree<T, T, Mx<T>, Add<T>, Add<T>,\
@@ -307,7 +305,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/lazyseg-setval.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/lazyseg-setval.test.cpp

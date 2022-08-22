@@ -1,28 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: segment-tree/lazy-segment-tree.hpp
     title: segment-tree/lazy-segment-tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -172,57 +172,55 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/lazyseg-setval-2.test.cpp\"\
-    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\ntemplate\
-    \ <typename T, typename E, typename F, typename G, typename H>\nstruct LazySegmentTree\
-    \ {\n  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n  vector<T> dat;\n\
-    \  vector<E> laz;\n  LazySegmentTree(int _n, F _f, G _g, H _h, T _ti, E _ei)\n\
-    \      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init(_n);\n  }\n  LazySegmentTree(const\
-    \ vector<T> &v, F _f, G _g, H _h, T _ti, E _ei)\n      : f(_f), g(_g), h(_h),\
-    \ ti(_ti), ei(_ei) {\n    init((int)v.size());\n    build(v);\n  }\n  void init(int\
-    \ _n) {\n    n = 1;\n    height = 0;\n    while (n < _n) n <<= 1, height++;\n\
-    \    dat.assign(2 * n, ti);\n    laz.assign(2 * n, ei);\n  }\n  void build(const\
-    \ vector<T> &v) {\n    int _n = v.size();\n    init(_n);\n    for (int i = 0;\
-    \ i < _n; i++) dat[n + i] = v[i];\n    for (int i = n - 1; i; i--)\n      dat[i]\
-    \ = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);\n  }\n  inline T reflect(int k) {\
-    \ return laz[k] == ei ? dat[k] : g(dat[k], laz[k]); }\n  inline void eval(int\
-    \ k) {\n    if (laz[k] == ei) return;\n    laz[(k << 1) | 0] = h(laz[(k << 1)\
-    \ | 0], laz[k]);\n    laz[(k << 1) | 1] = h(laz[(k << 1) | 1], laz[k]);\n    dat[k]\
-    \ = reflect(k);\n    laz[k] = ei;\n  }\n  inline void thrust(int k) {\n    for\
-    \ (int i = height; i; i--) eval(k >> i);\n  }\n  inline void recalc(int k) {\n\
-    \    while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1) | 1));\n\
-    \  }\n  void update(int a, int b, E x) {\n    if (a >= b) return;\n    thrust(a\
-    \ += n);\n    thrust(b += n - 1);\n    for (int l = a, r = b + 1; l < r; l >>=\
-    \ 1, r >>= 1) {\n      if (l & 1) laz[l] = h(laz[l], x), l++;\n      if (r & 1)\
-    \ --r, laz[r] = h(laz[r], x);\n    }\n    recalc(a);\n    recalc(b);\n  }\n  void\
-    \ set_val(int a, T x) {\n    thrust(a += n);\n    dat[a] = x;\n    laz[a] = ei;\n\
-    \    recalc(a);\n  }\n  T get_val(int a) {\n    thrust(a += n);\n    return reflect(a);\n\
-    \  }\n  T query(int a, int b) {\n    if (a >= b) return ti;\n    thrust(a += n);\n\
-    \    thrust(b += n - 1);\n    T vl = ti, vr = ti;\n    for (int l = a, r = b +\
-    \ 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) vl = f(vl, reflect(l++));\n\
-    \      if (r & 1) vr = f(reflect(--r), vr);\n    }\n    return f(vl, vr);\n  }\n\
-    };\n#line 7 \"verify/verify-unit-test/lazyseg-setval-2.test.cpp\"\n\nusing namespace\
-    \ Nyaan;\n\nauto f = [](pl a, pl b) { return pl(a.first + b.first, a.second +\
-    \ b.second); };\nauto g = [](pl a, ll b) { return pl(a.first + a.second * b, b);\
-    \ };\nauto h = [](ll a, ll b) { return a + b; };\npl ti{0, 0};\nll ei{0};\n\n\
-    using namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q =\
-    \ 1000000;\n  vl init(N);\n  LazySegmentTree<pl, ll, decltype(f), decltype(g),\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"segment-tree/lazy-segment-tree.hpp\"\
+    \n\n// LazySegmentTree\ntemplate <typename T, typename E, typename F, typename\
+    \ G, typename H>\nstruct LazySegmentTree {\n  int n, height;\n  F f;\n  G g;\n\
+    \  H h;\n  T ti;\n  E ei;\n  vector<T> dat;\n  vector<E> laz;\n  LazySegmentTree(int\
+    \ _n, F _f, G _g, H _h, T _ti, E _ei)\n      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei)\
+    \ {\n    init(_n);\n  }\n  LazySegmentTree(const vector<T> &v, F _f, G _g, H _h,\
+    \ T _ti, E _ei)\n      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init((int)v.size());\n\
+    \    build(v);\n  }\n  void init(int _n) {\n    n = 1;\n    height = 0;\n    while\
+    \ (n < _n) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2 *\
+    \ n, ei);\n  }\n  void build(const vector<T> &v) {\n    int _n = v.size();\n \
+    \   init(_n);\n    for (int i = 0; i < _n; i++) dat[n + i] = v[i];\n    for (int\
+    \ i = n - 1; i; i--)\n      dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);\n\
+    \  }\n  inline T reflect(int k) { return laz[k] == ei ? dat[k] : g(dat[k], laz[k]);\
+    \ }\n  inline void eval(int k) {\n    if (laz[k] == ei) return;\n    laz[(k <<\
+    \ 1) | 0] = h(laz[(k << 1) | 0], laz[k]);\n    laz[(k << 1) | 1] = h(laz[(k <<\
+    \ 1) | 1], laz[k]);\n    dat[k] = reflect(k);\n    laz[k] = ei;\n  }\n  inline\
+    \ void thrust(int k) {\n    for (int i = height; i; i--) eval(k >> i);\n  }\n\
+    \  inline void recalc(int k) {\n    while (k >>= 1) dat[k] = f(reflect((k << 1)\
+    \ | 0), reflect((k << 1) | 1));\n  }\n  void update(int a, int b, E x) {\n   \
+    \ if (a >= b) return;\n    thrust(a += n);\n    thrust(b += n - 1);\n    for (int\
+    \ l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) laz[l] = h(laz[l],\
+    \ x), l++;\n      if (r & 1) --r, laz[r] = h(laz[r], x);\n    }\n    recalc(a);\n\
+    \    recalc(b);\n  }\n  void set_val(int a, T x) {\n    thrust(a += n);\n    dat[a]\
+    \ = x;\n    laz[a] = ei;\n    recalc(a);\n  }\n  T get_val(int a) {\n    thrust(a\
+    \ += n);\n    return reflect(a);\n  }\n  T query(int a, int b) {\n    if (a >=\
+    \ b) return ti;\n    thrust(a += n);\n    thrust(b += n - 1);\n    T vl = ti,\
+    \ vr = ti;\n    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {\n      if\
+    \ (l & 1) vl = f(vl, reflect(l++));\n      if (r & 1) vr = f(reflect(--r), vr);\n\
+    \    }\n    return f(vl, vr);\n  }\n};\n#line 7 \"verify/verify-unit-test/lazyseg-setval-2.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nauto f = [](pl a, pl b) { return pl(a.first + b.first,\
+    \ a.second + b.second); };\nauto g = [](pl a, ll b) { return pl(a.first + a.second\
+    \ * b, b); };\nauto h = [](ll a, ll b) { return a + b; };\npl ti{0, 0};\nll ei{0};\n\
+    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  int N = 100000;\n  int Q\
+    \ = 1000000;\n  vl init(N);\n  LazySegmentTree<pl, ll, decltype(f), decltype(g),\
     \ decltype(h)> seg(\n      vp(N), f, g, h, ti, ei);\n\n  rep(i, Q) {\n    if (rng()\
     \ & 1) {\n      int l, r;\n      l = randint(0, N);\n      r = randint(0, N);\n\
     \      if (l > r) swap(l, r);\n      r++;\n      seg.update(l, r, randint(0, TEN(6)));\n\
@@ -255,7 +253,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
   requiredBy: []
-  timestamp: '2021-07-11 08:39:39+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/lazyseg-setval-2.test.cpp

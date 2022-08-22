@@ -1,20 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: multiplicative-function/divisor-multiple-transform.hpp
     title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
+    title: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0886.test.cpp
     title: verify/verify-yuki/yuki-0886.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     document_title: "GCD\u7573\u307F\u8FBC\u307F"
     links: []
@@ -75,9 +78,10 @@ data:
   path: multiplicative-function/gcd-convolution.hpp
   requiredBy: []
   timestamp: '2020-12-05 08:35:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
 documentation_of: multiplicative-function/gcd-convolution.hpp
 layout: document
 redirect_from:

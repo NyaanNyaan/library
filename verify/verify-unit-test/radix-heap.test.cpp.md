@@ -4,25 +4,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/radix-heap.hpp
     title: Radix Heap
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -188,41 +188,39 @@ data:
     \      vs[idx].clear();\n      ms[idx] = uint(-1);\n    }\n    --s;\n    auto\
     \ res = vs[0].back();\n    vs[0].pop_back();\n    if (vs[0].empty()) ms[0] = uint(-1);\n\
     \    return res;\n  }\n};\n\n/**\n * @brief Radix Heap\n * @docs docs/data-structure/radix-heap.md\n\
-    \ */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 7 \"verify/verify-unit-test/radix-heap.test.cpp\"\n\nusing namespace Nyaan;\n\
-    template <typename Key, typename Val>\nvoid test() {\n  auto t = [](Key mx, Key\
-    \ d, double ratio) {\n    RadixHeap<Key, Val> q1;\n    map<Key, Val> q2;\n   \
-    \ Key i = 0;\n    while (i < mx) {\n      assert(q1.empty() == q2.empty());\n\
-    \      assert(q1.size() == (int)q2.size());\n      if (q1.empty() || rnd() < ratio)\
-    \ {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n        Val j{rng()};\n#pragma\
-    \ GCC diagnostic warning \"-Wnarrowing\"\n        q1.push(i, j);\n        q2.emplace(i,\
-    \ j);\n      } else {\n        auto t1 = q1.pop();\n        decltype(t1) t2 =\
-    \ *begin(q2);\n        assert(t1 == t2);\n        q2.erase(begin(q2));\n     \
-    \ }\n      i += d;\n    }\n    while (q1.size() != 0) {\n      auto t1 = q1.pop();\n\
-    \      decltype(t1) t2 = *begin(q2);\n      assert(t1 == t2);\n      q2.erase(begin(q2));\n\
-    \    }\n  };\n  t(10, 1, 0.5);\n  t(10, 1, 0.7);\n  t(10, 1, 0.9);\n  t(1000,\
-    \ 1, 0.5);\n  t(1000, 1, 0.7);\n  t(1000, 1, 0.9);\n  t(TEN(8), 334, 0.5);\n \
-    \ t(TEN(8), 1333, 0.9);\n  t(TEN(9), 13333, 0.7);\n}\n\nusing namespace Nyaan;\n\
-    void Nyaan::solve() {\n  test<int32_t, int64_t>();\n  test<int64_t, int64_t>();\n\
-    \  test<uint32_t, int64_t>();\n  test<uint64_t, int64_t>();\n  test<uint64_t,\
-    \ uint64_t>();\n  test<uint64_t, vector<int> >();\n\n  int a, b;\n  cin >> a >>\
-    \ b;\n  cout << (a + b) << endl;\n}\n"
+    \ */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"verify/verify-unit-test/radix-heap.test.cpp\"\
+    \n\nusing namespace Nyaan;\ntemplate <typename Key, typename Val>\nvoid test()\
+    \ {\n  auto t = [](Key mx, Key d, double ratio) {\n    RadixHeap<Key, Val> q1;\n\
+    \    map<Key, Val> q2;\n    Key i = 0;\n    while (i < mx) {\n      assert(q1.empty()\
+    \ == q2.empty());\n      assert(q1.size() == (int)q2.size());\n      if (q1.empty()\
+    \ || rnd() < ratio) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n      \
+    \  Val j{rng()};\n#pragma GCC diagnostic warning \"-Wnarrowing\"\n        q1.push(i,\
+    \ j);\n        q2.emplace(i, j);\n      } else {\n        auto t1 = q1.pop();\n\
+    \        decltype(t1) t2 = *begin(q2);\n        assert(t1 == t2);\n        q2.erase(begin(q2));\n\
+    \      }\n      i += d;\n    }\n    while (q1.size() != 0) {\n      auto t1 =\
+    \ q1.pop();\n      decltype(t1) t2 = *begin(q2);\n      assert(t1 == t2);\n  \
+    \    q2.erase(begin(q2));\n    }\n  };\n  t(10, 1, 0.5);\n  t(10, 1, 0.7);\n \
+    \ t(10, 1, 0.9);\n  t(1000, 1, 0.5);\n  t(1000, 1, 0.7);\n  t(1000, 1, 0.9);\n\
+    \  t(TEN(8), 334, 0.5);\n  t(TEN(8), 1333, 0.9);\n  t(TEN(9), 13333, 0.7);\n}\n\
+    \nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  test<int32_t, int64_t>();\n\
+    \  test<int64_t, int64_t>();\n  test<uint32_t, int64_t>();\n  test<uint64_t, int64_t>();\n\
+    \  test<uint64_t, uint64_t>();\n  test<uint64_t, vector<int> >();\n\n  int a,\
+    \ b;\n  cin >> a >> b;\n  cout << (a + b) << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../data-structure/radix-heap.hpp\"\
     \n#include \"../../misc/rng.hpp\"\n\nusing namespace Nyaan;\ntemplate <typename\
@@ -255,7 +253,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/radix-heap.test.cpp
   requiredBy: []
-  timestamp: '2021-05-04 19:34:35+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/radix-heap.test.cpp

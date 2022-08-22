@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
     title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -172,7 +172,7 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp\"\
-    \n//\n\n\n\n\nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n\
+    \n//\n\nstruct bit_vector {\n  using u32 = uint32_t;\n  using i64 = int64_t;\n\
     \  using u64 = uint64_t;\n\n  static constexpr u32 w = 64;\n  vector<u64> block;\n\
     \  vector<u32> count;\n  u32 n, zeros;\n\n  inline u32 get(u32 i) const { return\
     \ u32(block[i / w] >> (i % w)) & 1u; }\n  inline void set(u32 i) { block[i / w]\
@@ -219,31 +219,31 @@ data:
     \ h--;) {\n      int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\n      if ((upper\
     \ >> h) & 1) {\n        res += bit[h].sum(l0, r0);\n        l += bv[h].zeros -\
     \ l0;\n        r += bv[h].zeros - r0;\n      } else {\n        l = l0, r = r0;\n\
-    \      }\n    }\n    return res;\n  }\n\n  T sum(S lx, S ly, S rx, S ry) const\
-    \ {\n    int l = xid(lx), r = xid(rx);\n    return sum(l, r, yid(ry)) - sum(l,\
-    \ r, yid(ly));\n  }\n};\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\
-    \n\nusing namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 <<\
-    \ 17;\nchar inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right = 0, out_right =\
-    \ 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for\
-    \ (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >=\
-    \ 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n\
-    \    }\n  }\n} constexpr pre;\n\ninline void load() {\n  int len = in_right -\
-    \ in_left;\n  memmove(inbuf, inbuf + in_left, len);\n  in_right = len + fread(inbuf\
-    \ + len, 1, SZ - len, stdin);\n  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf,\
-    \ 1, out_right, stdout);\n  out_right = 0;\n}\n\ninline void skip_space() {\n\
-    \  if (in_left + 32 > in_right) load();\n  while (inbuf[in_left] <= ' ') in_left++;\n\
-    }\n\ninline void rd(char& c) {\n  if (in_left + 32 > in_right) load();\n  c =\
-    \ inbuf[in_left++];\n}\ntemplate <typename T>\ninline void rd(T& x) {\n  if (in_left\
-    \ + 32 > in_right) load();\n  char c;\n  do c = inbuf[in_left++];\n  while (c\
-    \ < '-');\n  [[maybe_unused]] bool minus = false;\n  if constexpr (is_signed<T>::value\
-    \ == true) {\n    if (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x\
-    \ = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n\
-    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (minus) x = -x;\n\
-    \  }\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline\
-    \ void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline\
-    \ void wt(char c) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
-    \ = c;\n}\ninline void wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
-    \ = b ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
+    \      }\n    }\n    return res;\n  }\n\n  T sum(S L, S D, S R, S U) const {\n\
+    \    int l = xid(L), r = xid(R);\n    return sum(l, r, yid(U)) - sum(l, r, yid(D));\n\
+    \  }\n};\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing\
+    \ namespace std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar\
+    \ inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct\
+    \ Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0;\
+    \ i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n\
+    \        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n\
+    } constexpr pre;\n\ninline void load() {\n  int len = in_right - in_left;\n  memmove(inbuf,\
+    \ inbuf + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
+    \  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
+    \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
+    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
+    \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
+    \ <typename T>\ninline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n\
+    \  char c;\n  do c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]]\
+    \ bool minus = false;\n  if constexpr (is_signed<T>::value == true) {\n    if\
+    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
+    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n}\ninline void\
+    \ rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head,\
+    \ Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) {\n\
+    \  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = c;\n}\ninline void\
+    \ wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = b\
+    \ ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
     \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
     \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
     \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
@@ -294,8 +294,8 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
 layout: document

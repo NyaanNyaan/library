@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-1467.test.cpp
     title: verify/verify-yuki/yuki-1467.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: Slope Trick
     links: []
@@ -54,11 +54,12 @@ data:
     \ {\n      auto [x, c] = r.getL();\n      r.popL();\n      add_amx(x, c);\n  \
     \  }\n    while (!r.R.empty()) {\n      auto [x, c] = r.getR();\n      r.popR();\n\
     \      add_xma(x, c);\n    }\n    shift_y(r.min_y);\n  }\n\n  // eval f(x) O(|L|\
-    \ + |R|)\n  ll eval(ll x) {\n    ll y = min_y;\n    auto LL{L};\n    while (!LL.empty())\
-    \ {\n      auto [X, C] = LL.top();\n      if ((X += addL) <= x) break;\n     \
-    \ y += (X - x) * C;\n    }\n    auto RR{R};\n    while (!RR.empty()) {\n     \
-    \ auto [X, C] = RR.top();\n      if ((X += addR) >= x) break;\n      y += (x -\
-    \ X) * C;\n    }\n    return y;\n  }\n};\n\n/**\n * @brief Slope Trick\n */\n"
+    \ + |R|) TODO : verify\n  ll eval(ll x) {\n    ll y = min_y;\n    auto LL{L};\n\
+    \    while (!LL.empty()) {\n      auto [X, C] = LL.top();\n      X += addL;\n\
+    \      if(X < x) break;\n      y += (X - x) * C;\n      LL.pop();\n    }\n   \
+    \ auto RR{R};\n    while (!RR.empty()) {\n      auto [X, C] = RR.top();\n    \
+    \  X += addR;\n      if(x < X) break;\n      y += (x - X) * C;\n      RR.pop();\n\
+    \    }\n    return y;\n  }\n};\n\n/**\n * @brief Slope Trick\n */\n"
   code: "#pragma once\n\nstruct SlopeTrick {\n private:\n  using ll = long long;\n\
     \  // x : \u5EA7\u6A19, c : \u50BE\u304D\u306E\u5909\u5316\u91CF\n  struct P {\n\
     \    ll x, c;\n    P(ll _x, ll _c) : x(_x), c(_c) {}\n    friend bool operator<(const\
@@ -100,18 +101,19 @@ data:
     \ swap(*this, r);\n    while (!r.L.empty()) {\n      auto [x, c] = r.getL();\n\
     \      r.popL();\n      add_amx(x, c);\n    }\n    while (!r.R.empty()) {\n  \
     \    auto [x, c] = r.getR();\n      r.popR();\n      add_xma(x, c);\n    }\n \
-    \   shift_y(r.min_y);\n  }\n\n  // eval f(x) O(|L| + |R|)\n  ll eval(ll x) {\n\
-    \    ll y = min_y;\n    auto LL{L};\n    while (!LL.empty()) {\n      auto [X,\
-    \ C] = LL.top();\n      if ((X += addL) <= x) break;\n      y += (X - x) * C;\n\
-    \    }\n    auto RR{R};\n    while (!RR.empty()) {\n      auto [X, C] = RR.top();\n\
-    \      if ((X += addR) >= x) break;\n      y += (x - X) * C;\n    }\n    return\
-    \ y;\n  }\n};\n\n/**\n * @brief Slope Trick\n */\n"
+    \   shift_y(r.min_y);\n  }\n\n  // eval f(x) O(|L| + |R|) TODO : verify\n  ll\
+    \ eval(ll x) {\n    ll y = min_y;\n    auto LL{L};\n    while (!LL.empty()) {\n\
+    \      auto [X, C] = LL.top();\n      X += addL;\n      if(X < x) break;\n   \
+    \   y += (X - x) * C;\n      LL.pop();\n    }\n    auto RR{R};\n    while (!RR.empty())\
+    \ {\n      auto [X, C] = RR.top();\n      X += addR;\n      if(x < X) break;\n\
+    \      y += (x - X) * C;\n      RR.pop();\n    }\n    return y;\n  }\n};\n\n/**\n\
+    \ * @brief Slope Trick\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/slope-trick.hpp
   requiredBy: []
-  timestamp: '2021-09-05 13:40:06+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-1467.test.cpp
 documentation_of: data-structure/slope-trick.hpp

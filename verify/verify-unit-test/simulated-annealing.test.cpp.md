@@ -7,28 +7,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: marathon/simulated-annealing.hpp
     title: Simulated Annealing
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -210,55 +210,54 @@ data:
     \      input.scan();\n      auto res = run(input);\n      scores += res.score();\n\
     \    }\n    return scores;\n  }\n};\n\n/**\n * @brief Simulated Annealing\n *\
     \ @docs docs/marathon/simulated-annealing.md\n */\n#line 2 \"misc/rng.hpp\"\n\n\
-    namespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_\
-    \ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n            \
-    \       chrono::high_resolution_clock::now().time_since_epoch())\n           \
-    \        .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ << 7;\n  return\
-    \ x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t r) {\n  assert(l\
-    \ < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without\
-    \ overlapping\nvector<int64_t> randset(int64_t l, int64_t r, int64_t n) {\n  assert(l\
-    \ <= r && n <= r - l);\n  unordered_set<int64_t> s;\n  for (int64_t i = n; i;\
-    \ --i) {\n    int64_t m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
-    \ m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t> ret;\n  for (auto& x :\
-    \ s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() {\n  union\
-    \ raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr uint64_t p = uint64_t(1023\
-    \ - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n}\n\ntemplate <typename\
-    \ T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int loop = 0;\
-    \ loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);\n\
-    }\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"\
-    verify/verify-unit-test/simulated-annealing.test.cpp\"\n\nusing namespace Nyaan;\n\
-    \nusing score_t = double;\nstruct Input {\n  int N;\n  V<P<double, double>> ps;\n\
-    \  Input() = default;\n  void scan() {\n    in(N);\n    ps.resize(N);\n    in(ps);\n\
-    \  }\n};\n\nstruct State {\n  int N;\n  V<P<double, double>> ps;\n  vi used;\n\
-    \  P<double, double> res;\n\n  struct Diff {\n    const State *st;\n    int n;\n\
-    \    P<double, double> res;\n    double d;\n    Diff() = default;\n    Diff(const\
-    \ State &state) : st(&state), res(state.res) {\n      n = rng() % state.N;\n \
-    \     if (state.used[n]) {\n        res -= state.ps[n];\n      } else {\n    \
-    \    res += state.ps[n];\n      }\n      d = res.x() * res.x() + res.y() * res.y()\
-    \ - state.score();\n    }\n    double diff() const { return d; }\n  };\n\n  State()\
-    \ = default;\n  State(const Input &input) : N(input.N), ps(input.ps) {\n    used.resize(N);\n\
-    \    rep(i, N) used[i] = rng() & 1;\n    res = P<double, double>(0, 0);\n    rep(i,\
-    \ N) {\n      if (used[i]) res += ps[i];\n    }\n  }\n  void update(const Diff\
-    \ &b) {\n    res = b.res;\n    used[b.n] ^= 1;\n  }\n  void undo(const Diff &)\
-    \ {}\n  score_t score() const { return res.x() * res.x() + res.y() * res.y();\
-    \ }\n\n  bool operator>(const State &s) { return score() > s.score(); };\n  void\
-    \ dump() {}\n};\nusing SA = Simulated_Annealing<Input, State, typename State::Diff>;\n\
-    \nusing pd = Nyaan::P<double, double>;\n\ndouble yakinamashi(int n, V<pd> ps)\
-    \ {\n  Input ip;\n  ip.N = n;\n  ip.ps = ps;\n  SA sa(10, 1000, 1);\n  State ans{};\n\
-    \  rep(i, 10) {\n    sa.reset();\n    auto s = sa.run(ip);\n    if (s > ans) swap(ans,\
-    \ s);\n  }\n  return sqrt(ans.score());\n}\n\ndouble argsort(int N, V<pd> v) {\n\
-    \  repr(i, N) {\n    if (v[i] == pd(0, 0)) v.erase(v.begin() + i);\n  }\n  N =\
-    \ sz(v);\n  sort(all(v), [](pd a, pd b) {\n    return atan2(double(a.y()), double(a.x()))\
-    \ <\n           atan2(double(b.y()), double(b.x()));\n  });\n  double ans = 0;\n\
-    \  rep(i, N) rep(j, N) {\n    double cx = 0, cy = 0;\n    for (int ii = i;; ii\
-    \ = (ii + 1) % N) {\n      cx += v[ii].x(), cy += v[ii].y();\n      if (ii ==\
-    \ j) break;\n    }\n    amax(ans, sqrt(cx * cx + cy * cy));\n  }\n  return ans;\n\
-    }\n\nvoid Nyaan::solve() {\n  rep(i, 20) {\n    int n = 100;\n    V<pd> v(n);\n\
-    \    rep(j, n) v[j] = pd(randint(0, 2 * TEN(6) + 1) + TEN(6),\n              \
-    \          randint(0, 2 * TEN(6) + 1) + TEN(6));\n    auto ans1 = argsort(n, v);\n\
-    \    auto ans2 = yakinamashi(n, v);\n    cerr << abs(ans1 - ans2) << endl;\n \
-    \ }\n\n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << endl;\n}\n"
+    namespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
+    \n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"verify/verify-unit-test/simulated-annealing.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nusing score_t = double;\nstruct Input {\n  int N;\n\
+    \  V<P<double, double>> ps;\n  Input() = default;\n  void scan() {\n    in(N);\n\
+    \    ps.resize(N);\n    in(ps);\n  }\n};\n\nstruct State {\n  int N;\n  V<P<double,\
+    \ double>> ps;\n  vi used;\n  P<double, double> res;\n\n  struct Diff {\n    const\
+    \ State *st;\n    int n;\n    P<double, double> res;\n    double d;\n    Diff()\
+    \ = default;\n    Diff(const State &state) : st(&state), res(state.res) {\n  \
+    \    n = rng() % state.N;\n      if (state.used[n]) {\n        res -= state.ps[n];\n\
+    \      } else {\n        res += state.ps[n];\n      }\n      d = res.first * res.first\
+    \ + res.second * res.second - state.score();\n    }\n    double diff() const {\
+    \ return d; }\n  };\n\n  State() = default;\n  State(const Input &input) : N(input.N),\
+    \ ps(input.ps) {\n    used.resize(N);\n    rep(i, N) used[i] = rng() & 1;\n  \
+    \  res = P<double, double>(0, 0);\n    rep(i, N) {\n      if (used[i]) res +=\
+    \ ps[i];\n    }\n  }\n  void update(const Diff &b) {\n    res = b.res;\n    used[b.n]\
+    \ ^= 1;\n  }\n  void undo(const Diff &) {}\n  score_t score() const {\n    return\
+    \ res.first * res.first + res.second * res.second;\n  }\n\n  bool operator>(const\
+    \ State &s) { return score() > s.score(); };\n  void dump() {}\n};\nusing SA =\
+    \ Simulated_Annealing<Input, State, typename State::Diff>;\n\nusing pd = Nyaan::P<double,\
+    \ double>;\n\ndouble yakinamashi(int n, V<pd> ps) {\n  Input ip;\n  ip.N = n;\n\
+    \  ip.ps = ps;\n  SA sa(10, 1000, 1);\n  State ans{};\n  rep(i, 10) {\n    sa.reset();\n\
+    \    auto s = sa.run(ip);\n    if (s > ans) swap(ans, s);\n  }\n  return sqrt(ans.score());\n\
+    }\n\ndouble argsort(int N, V<pd> v) {\n  repr(i, N) {\n    if (v[i] == pd(0, 0))\
+    \ v.erase(v.begin() + i);\n  }\n  N = sz(v);\n  sort(all(v), [](pd a, pd b) {\n\
+    \    return atan2(double(a.second), double(a.first)) <\n           atan2(double(b.second),\
+    \ double(b.first));\n  });\n  double ans = 0;\n  rep(i, N) rep(j, N) {\n    double\
+    \ cx = 0, cy = 0;\n    for (int ii = i;; ii = (ii + 1) % N) {\n      cx += v[ii].first,\
+    \ cy += v[ii].second;\n      if (ii == j) break;\n    }\n    amax(ans, sqrt(cx\
+    \ * cx + cy * cy));\n  }\n  return ans;\n}\n\nvoid Nyaan::solve() {\n  rep(i,\
+    \ 20) {\n    int n = 100;\n    V<pd> v(n);\n    rep(j, n) v[j] = pd(randint(0,\
+    \ 2 * TEN(6) + 1) + TEN(6),\n                        randint(0, 2 * TEN(6) + 1)\
+    \ + TEN(6));\n    auto ans1 = argsort(n, v);\n    auto ans2 = yakinamashi(n, v);\n\
+    \    cerr << abs(ans1 - ans2) << endl;\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << (a + b) << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../marathon/simulated-annealing.hpp\"\
     \n#include \"../../misc/rng.hpp\"\n\nusing namespace Nyaan;\n\nusing score_t =\
@@ -269,30 +268,31 @@ data:
     \ res;\n    double d;\n    Diff() = default;\n    Diff(const State &state) : st(&state),\
     \ res(state.res) {\n      n = rng() % state.N;\n      if (state.used[n]) {\n \
     \       res -= state.ps[n];\n      } else {\n        res += state.ps[n];\n   \
-    \   }\n      d = res.x() * res.x() + res.y() * res.y() - state.score();\n    }\n\
-    \    double diff() const { return d; }\n  };\n\n  State() = default;\n  State(const\
-    \ Input &input) : N(input.N), ps(input.ps) {\n    used.resize(N);\n    rep(i,\
-    \ N) used[i] = rng() & 1;\n    res = P<double, double>(0, 0);\n    rep(i, N) {\n\
-    \      if (used[i]) res += ps[i];\n    }\n  }\n  void update(const Diff &b) {\n\
-    \    res = b.res;\n    used[b.n] ^= 1;\n  }\n  void undo(const Diff &) {}\n  score_t\
-    \ score() const { return res.x() * res.x() + res.y() * res.y(); }\n\n  bool operator>(const\
-    \ State &s) { return score() > s.score(); };\n  void dump() {}\n};\nusing SA =\
-    \ Simulated_Annealing<Input, State, typename State::Diff>;\n\nusing pd = Nyaan::P<double,\
-    \ double>;\n\ndouble yakinamashi(int n, V<pd> ps) {\n  Input ip;\n  ip.N = n;\n\
-    \  ip.ps = ps;\n  SA sa(10, 1000, 1);\n  State ans{};\n  rep(i, 10) {\n    sa.reset();\n\
-    \    auto s = sa.run(ip);\n    if (s > ans) swap(ans, s);\n  }\n  return sqrt(ans.score());\n\
-    }\n\ndouble argsort(int N, V<pd> v) {\n  repr(i, N) {\n    if (v[i] == pd(0, 0))\
-    \ v.erase(v.begin() + i);\n  }\n  N = sz(v);\n  sort(all(v), [](pd a, pd b) {\n\
-    \    return atan2(double(a.y()), double(a.x())) <\n           atan2(double(b.y()),\
-    \ double(b.x()));\n  });\n  double ans = 0;\n  rep(i, N) rep(j, N) {\n    double\
-    \ cx = 0, cy = 0;\n    for (int ii = i;; ii = (ii + 1) % N) {\n      cx += v[ii].x(),\
-    \ cy += v[ii].y();\n      if (ii == j) break;\n    }\n    amax(ans, sqrt(cx *\
-    \ cx + cy * cy));\n  }\n  return ans;\n}\n\nvoid Nyaan::solve() {\n  rep(i, 20)\
-    \ {\n    int n = 100;\n    V<pd> v(n);\n    rep(j, n) v[j] = pd(randint(0, 2 *\
-    \ TEN(6) + 1) + TEN(6),\n                        randint(0, 2 * TEN(6) + 1) +\
-    \ TEN(6));\n    auto ans1 = argsort(n, v);\n    auto ans2 = yakinamashi(n, v);\n\
-    \    cerr << abs(ans1 - ans2) << endl;\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
-    \  cout << (a + b) << endl;\n}\n"
+    \   }\n      d = res.first * res.first + res.second * res.second - state.score();\n\
+    \    }\n    double diff() const { return d; }\n  };\n\n  State() = default;\n\
+    \  State(const Input &input) : N(input.N), ps(input.ps) {\n    used.resize(N);\n\
+    \    rep(i, N) used[i] = rng() & 1;\n    res = P<double, double>(0, 0);\n    rep(i,\
+    \ N) {\n      if (used[i]) res += ps[i];\n    }\n  }\n  void update(const Diff\
+    \ &b) {\n    res = b.res;\n    used[b.n] ^= 1;\n  }\n  void undo(const Diff &)\
+    \ {}\n  score_t score() const {\n    return res.first * res.first + res.second\
+    \ * res.second;\n  }\n\n  bool operator>(const State &s) { return score() > s.score();\
+    \ };\n  void dump() {}\n};\nusing SA = Simulated_Annealing<Input, State, typename\
+    \ State::Diff>;\n\nusing pd = Nyaan::P<double, double>;\n\ndouble yakinamashi(int\
+    \ n, V<pd> ps) {\n  Input ip;\n  ip.N = n;\n  ip.ps = ps;\n  SA sa(10, 1000, 1);\n\
+    \  State ans{};\n  rep(i, 10) {\n    sa.reset();\n    auto s = sa.run(ip);\n \
+    \   if (s > ans) swap(ans, s);\n  }\n  return sqrt(ans.score());\n}\n\ndouble\
+    \ argsort(int N, V<pd> v) {\n  repr(i, N) {\n    if (v[i] == pd(0, 0)) v.erase(v.begin()\
+    \ + i);\n  }\n  N = sz(v);\n  sort(all(v), [](pd a, pd b) {\n    return atan2(double(a.second),\
+    \ double(a.first)) <\n           atan2(double(b.second), double(b.first));\n \
+    \ });\n  double ans = 0;\n  rep(i, N) rep(j, N) {\n    double cx = 0, cy = 0;\n\
+    \    for (int ii = i;; ii = (ii + 1) % N) {\n      cx += v[ii].first, cy += v[ii].second;\n\
+    \      if (ii == j) break;\n    }\n    amax(ans, sqrt(cx * cx + cy * cy));\n \
+    \ }\n  return ans;\n}\n\nvoid Nyaan::solve() {\n  rep(i, 20) {\n    int n = 100;\n\
+    \    V<pd> v(n);\n    rep(j, n) v[j] = pd(randint(0, 2 * TEN(6) + 1) + TEN(6),\n\
+    \                        randint(0, 2 * TEN(6) + 1) + TEN(6));\n    auto ans1\
+    \ = argsort(n, v);\n    auto ans2 = yakinamashi(n, v);\n    cerr << abs(ans1 -\
+    \ ans2) << endl;\n  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << (a + b) << endl;\n\
+    }\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -307,7 +307,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/simulated-annealing.test.cpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/simulated-annealing.test.cpp

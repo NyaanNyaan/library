@@ -1,63 +1,60 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/berlekamp-massey.hpp
     title: fps/berlekamp-massey.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/mod-pow.hpp
     title: Mod-Pow ($f(x)^k \mod g(x)$)
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
-    path: modint/simd-montgomery.hpp
-    title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: ntt/ntt-avx2.hpp
-    title: ntt/ntt-avx2.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: ntt/ntt.hpp
+    title: ntt/ntt.hpp
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1112
@@ -288,51 +285,50 @@ data:
     \ quo(b) * d;\n    b.shrink();\n    k >>= 1;\n    assert(b.size() + 1 <= d.size());\n\
     \    assert(res.size() + 1 <= d.size());\n  }\n  return res;\n}\n\n/**\n * @brief\
     \ Mod-Pow ($f(x)^k \\mod g(x)$)\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand\
-    \ {\n\n// [0, 2^64 - 1)\nuint64_t rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 6 \"matrix/black-box-linear-algebra.hpp\"\n//\nnamespace BBLAImpl {\n\n\
-    template <typename mint>\nmint inner_product(const FormalPowerSeries<mint>& a,\n\
-    \                   const FormalPowerSeries<mint>& b) {\n  mint res = 0;\n  int\
-    \ n = a.size();\n  assert(n == (int)b.size());\n  for (int i = 0; i < n; i++)\
-    \ res += a[i] * b[i];\n  return res;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ random_poly(int n) {\n  FormalPowerSeries<mint> res(n);\n  for (auto& x : res)\
-    \ x = randint(0, mint::get_mod());\n  return res;\n}\n\ntemplate <typename mint>\n\
-    struct ModMatrix : vector<FormalPowerSeries<mint>> {\n  using fps = FormalPowerSeries<mint>;\n\
-    \n  ModMatrix(int n) : vector<fps>(n, fps(n)) {}\n\n  inline void add(int i, int\
-    \ j, mint x) { (*this)[i][j] += x; }\n\n  friend fps operator*(const ModMatrix&\
-    \ m, const fps& r) {\n    int n = m.size();\n    assert(n == (int)r.size());\n\
-    \    fps res(n);\n    for (int i = 0; i < n; i++)\n      for (int j = 0; j < n;\
-    \ j++) res[i] += m[i][j] * r[j];\n    return res;\n  }\n\n  void apply(int i,\
-    \ mint r) {\n    int n = (*this).size();\n    for (int j = 0; j < n; j++) (*this)[i][j]\
-    \ *= r;\n  }\n};\n\ntemplate <typename mint>\nstruct SparseMatrix : vector<vector<pair<int,\
-    \ mint>>> {\n  using fps = FormalPowerSeries<mint>;\n\n  template <typename...\
-    \ Args>\n  SparseMatrix(Args... args) : vector<vector<pair<int, mint>>>(args...)\
-    \ {}\n\n  inline void add(int i, int j, mint x) { (*this)[i].emplace_back(j, x);\
-    \ }\n\n  friend fps operator*(const SparseMatrix& m, const fps& r) {\n    int\
-    \ n = m.size();\n    assert(n == (int)r.size());\n    fps res(n);\n    for (int\
-    \ i = 0; i < n; i++)\n      for (auto&& [j, x] : m[i]) res[i] += x * r[j];\n \
-    \   return res;\n  }\n\n  void apply(int i, mint r) {\n    for (auto&& [_, x]\
-    \ : (*this)[i]) x *= r;\n  }\n};\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ vector_minpoly(\n    const vector<FormalPowerSeries<mint>>& b) {\n  assert(!b.empty());\n\
-    \  int n = b.size(), m = b[0].size();\n  FormalPowerSeries<mint> u = random_poly<mint>(m),\
-    \ a(n);\n  for (int i = 0; i < n; i++) a[i] = inner_product(b[i], u);\n  auto\
-    \ mp = BerlekampMassey<mint>(a);\n  return {mp.begin(), mp.end()};\n}\n\ntemplate\
-    \ <typename mint, typename Mat>\nFormalPowerSeries<mint> mat_minpoly(const Mat&\
-    \ A) {\n  int n = A.size();\n  FormalPowerSeries<mint> u = random_poly<mint>(n);\n\
+    \ {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 -\
+    \ 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"matrix/black-box-linear-algebra.hpp\"\
+    \n//\nnamespace BBLAImpl {\n\ntemplate <typename mint>\nmint inner_product(const\
+    \ FormalPowerSeries<mint>& a,\n                   const FormalPowerSeries<mint>&\
+    \ b) {\n  mint res = 0;\n  int n = a.size();\n  assert(n == (int)b.size());\n\
+    \  for (int i = 0; i < n; i++) res += a[i] * b[i];\n  return res;\n}\n\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> random_poly(int n) {\n  FormalPowerSeries<mint>\
+    \ res(n);\n  for (auto& x : res) x = randint(0, mint::get_mod());\n  return res;\n\
+    }\n\ntemplate <typename mint>\nstruct ModMatrix : vector<FormalPowerSeries<mint>>\
+    \ {\n  using fps = FormalPowerSeries<mint>;\n\n  ModMatrix(int n) : vector<fps>(n,\
+    \ fps(n)) {}\n\n  inline void add(int i, int j, mint x) { (*this)[i][j] += x;\
+    \ }\n\n  friend fps operator*(const ModMatrix& m, const fps& r) {\n    int n =\
+    \ m.size();\n    assert(n == (int)r.size());\n    fps res(n);\n    for (int i\
+    \ = 0; i < n; i++)\n      for (int j = 0; j < n; j++) res[i] += m[i][j] * r[j];\n\
+    \    return res;\n  }\n\n  void apply(int i, mint r) {\n    int n = (*this).size();\n\
+    \    for (int j = 0; j < n; j++) (*this)[i][j] *= r;\n  }\n};\n\ntemplate <typename\
+    \ mint>\nstruct SparseMatrix : vector<vector<pair<int, mint>>> {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n\n  template <typename... Args>\n  SparseMatrix(Args...\
+    \ args) : vector<vector<pair<int, mint>>>(args...) {}\n\n  inline void add(int\
+    \ i, int j, mint x) { (*this)[i].emplace_back(j, x); }\n\n  friend fps operator*(const\
+    \ SparseMatrix& m, const fps& r) {\n    int n = m.size();\n    assert(n == (int)r.size());\n\
+    \    fps res(n);\n    for (int i = 0; i < n; i++)\n      for (auto&& [j, x] :\
+    \ m[i]) res[i] += x * r[j];\n    return res;\n  }\n\n  void apply(int i, mint\
+    \ r) {\n    for (auto&& [_, x] : (*this)[i]) x *= r;\n  }\n};\n\ntemplate <typename\
+    \ mint>\nFormalPowerSeries<mint> vector_minpoly(\n    const vector<FormalPowerSeries<mint>>&\
+    \ b) {\n  assert(!b.empty());\n  int n = b.size(), m = b[0].size();\n  FormalPowerSeries<mint>\
+    \ u = random_poly<mint>(m), a(n);\n  for (int i = 0; i < n; i++) a[i] = inner_product(b[i],\
+    \ u);\n  auto mp = BerlekampMassey<mint>(a);\n  return {mp.begin(), mp.end()};\n\
+    }\n\ntemplate <typename mint, typename Mat>\nFormalPowerSeries<mint> mat_minpoly(const\
+    \ Mat& A) {\n  int n = A.size();\n  FormalPowerSeries<mint> u = random_poly<mint>(n);\n\
     \  vector<FormalPowerSeries<mint>> b(n * 2 + 1);\n  for (int i = 0; i < (int)b.size();\
     \ i++) b[i] = u, u = A * u;\n  FormalPowerSeries<mint> mp = vector_minpoly(b);\n\
     \  return mp;\n}\n\n// calculate A^k b\ntemplate <typename mint, typename Mat>\n\
@@ -390,387 +386,128 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"ntt/ntt-avx2.hpp\"\n\n#line 2 \"modint/simd-montgomery.hpp\"\
-    \n\n#line 4 \"modint/simd-montgomery.hpp\"\n\n__attribute__((target(\"sse4.2\"\
-    ))) inline __m128i my128_mullo_epu32(\n    const __m128i &a, const __m128i &b)\
-    \ {\n  return _mm_mullo_epi32(a, b);\n}\n\n__attribute__((target(\"sse4.2\")))\
-    \ inline __m128i my128_mulhi_epu32(\n    const __m128i &a, const __m128i &b) {\n\
-    \  __m128i a13 = _mm_shuffle_epi32(a, 0xF5);\n  __m128i b13 = _mm_shuffle_epi32(b,\
-    \ 0xF5);\n  __m128i prod02 = _mm_mul_epu32(a, b);\n  __m128i prod13 = _mm_mul_epu32(a13,\
-    \ b13);\n  __m128i prod = _mm_unpackhi_epi64(_mm_unpacklo_epi32(prod02, prod13),\n\
-    \                                    _mm_unpackhi_epi32(prod02, prod13));\n  return\
-    \ prod;\n}\n\n__attribute__((target(\"sse4.2\"))) inline __m128i montgomery_mul_128(\n\
-    \    const __m128i &a, const __m128i &b, const __m128i &r, const __m128i &m1)\
-    \ {\n  return _mm_sub_epi32(\n      _mm_add_epi32(my128_mulhi_epu32(a, b), m1),\n\
-    \      my128_mulhi_epu32(my128_mullo_epu32(my128_mullo_epu32(a, b), r), m1));\n\
-    }\n\n__attribute__((target(\"sse4.2\"))) inline __m128i montgomery_add_128(\n\
-    \    const __m128i &a, const __m128i &b, const __m128i &m2, const __m128i &m0)\
-    \ {\n  __m128i ret = _mm_sub_epi32(_mm_add_epi32(a, b), m2);\n  return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0,\
-    \ ret), m2), ret);\n}\n\n__attribute__((target(\"sse4.2\"))) inline __m128i montgomery_sub_128(\n\
-    \    const __m128i &a, const __m128i &b, const __m128i &m2, const __m128i &m0)\
-    \ {\n  __m128i ret = _mm_sub_epi32(a, b);\n  return _mm_add_epi32(_mm_and_si128(_mm_cmpgt_epi32(m0,\
-    \ ret), m2), ret);\n}\n\n__attribute__((target(\"avx2\"))) inline __m256i my256_mullo_epu32(\n\
-    \    const __m256i &a, const __m256i &b) {\n  return _mm256_mullo_epi32(a, b);\n\
-    }\n\n__attribute__((target(\"avx2\"))) inline __m256i my256_mulhi_epu32(\n   \
-    \ const __m256i &a, const __m256i &b) {\n  __m256i a13 = _mm256_shuffle_epi32(a,\
-    \ 0xF5);\n  __m256i b13 = _mm256_shuffle_epi32(b, 0xF5);\n  __m256i prod02 = _mm256_mul_epu32(a,\
-    \ b);\n  __m256i prod13 = _mm256_mul_epu32(a13, b13);\n  __m256i prod = _mm256_unpackhi_epi64(_mm256_unpacklo_epi32(prod02,\
-    \ prod13),\n                                       _mm256_unpackhi_epi32(prod02,\
-    \ prod13));\n  return prod;\n}\n\n__attribute__((target(\"avx2\"))) inline __m256i\
-    \ montgomery_mul_256(\n    const __m256i &a, const __m256i &b, const __m256i &r,\
-    \ const __m256i &m1) {\n  return _mm256_sub_epi32(\n      _mm256_add_epi32(my256_mulhi_epu32(a,\
-    \ b), m1),\n      my256_mulhi_epu32(my256_mullo_epu32(my256_mullo_epu32(a, b),\
-    \ r), m1));\n}\n\n__attribute__((target(\"avx2\"))) inline __m256i montgomery_add_256(\n\
-    \    const __m256i &a, const __m256i &b, const __m256i &m2, const __m256i &m0)\
-    \ {\n  __m256i ret = _mm256_sub_epi32(_mm256_add_epi32(a, b), m2);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0,\
-    \ ret), m2),\n                          ret);\n}\n\n__attribute__((target(\"avx2\"\
-    ))) inline __m256i montgomery_sub_256(\n    const __m256i &a, const __m256i &b,\
-    \ const __m256i &m2, const __m256i &m0) {\n  __m256i ret = _mm256_sub_epi32(a,\
-    \ b);\n  return _mm256_add_epi32(_mm256_and_si256(_mm256_cmpgt_epi32(m0, ret),\
-    \ m2),\n                          ret);\n}\n#line 4 \"ntt/ntt-avx2.hpp\"\n\nnamespace\
-    \ ntt_inner {\nusing u64 = uint64_t;\nconstexpr uint32_t get_pr(uint32_t mod)\
-    \ {\n  if (mod == 2) return 1;\n  u64 ds[32] = {};\n  int idx = 0;\n  u64 m =\
-    \ mod - 1;\n  for (u64 i = 2; i * i <= m; ++i) {\n    if (m % i == 0) {\n    \
-    \  ds[idx++] = i;\n      while (m % i == 0) m /= i;\n    }\n  }\n  if (m != 1)\
-    \ ds[idx++] = m;\n\n  uint32_t pr = 2;\n  while (1) {\n    int flg = 1;\n    for\
-    \ (int i = 0; i < idx; ++i) {\n      u64 a = pr, b = (mod - 1) / ds[i], r = 1;\n\
-    \      while (b) {\n        if (b & 1) r = r * a % mod;\n        a = a * a % mod;\n\
-    \        b >>= 1;\n      }\n      if (r == 1) {\n        flg = 0;\n        break;\n\
-    \      }\n    }\n    if (flg == 1) break;\n    ++pr;\n  }\n  return pr;\n}\n\n\
-    constexpr int SZ_FFT_BUF = 1 << 23;\nuint32_t _buf1[SZ_FFT_BUF] __attribute__((aligned(64)));\n\
-    uint32_t _buf2[SZ_FFT_BUF] __attribute__((aligned(64)));\n}  // namespace ntt_inner\n\
-    \ntemplate <typename mint>\nstruct NTT {\n  static constexpr uint32_t mod = mint::get_mod();\n\
-    \  static constexpr uint32_t pr = ntt_inner::get_pr(mint::get_mod());\n  static\
-    \ constexpr int level = __builtin_ctzll(mod - 1);\n  mint dw[level], dy[level];\n\
-    \  mint *buf1, *buf2;\n\n  constexpr NTT() {\n    setwy(level);\n    union raw_cast\
-    \ {\n      mint dat;\n      uint32_t _;\n    };\n    buf1 = &(((raw_cast *)(ntt_inner::_buf1))->dat);\n\
-    \    buf2 = &(((raw_cast *)(ntt_inner::_buf2))->dat);\n  }\n\n  constexpr void\
-    \ setwy(int k) {\n    mint w[level], y[level];\n    w[k - 1] = mint(pr).pow((mod\
-    \ - 1) / (1 << k));\n    y[k - 1] = w[k - 1].inverse();\n    for (int i = k -\
-    \ 2; i > 0; --i)\n      w[i] = w[i + 1] * w[i + 1], y[i] = y[i + 1] * y[i + 1];\n\
-    \    dw[0] = dy[0] = w[1] * w[1];\n    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2],\
-    \ dy[2] = y[2];\n    for (int i = 3; i < k; ++i) {\n      dw[i] = dw[i - 1] *\
-    \ y[i - 2] * w[i];\n      dy[i] = dy[i - 1] * w[i - 2] * y[i];\n    }\n  }\n\n\
-    \  __attribute__((target(\"avx2\"))) void ntt(mint *a, int n) {\n    int k = n\
-    \ ? __builtin_ctz(n) : 0;\n    if (k == 0) return;\n    if (k == 1) {\n      mint\
-    \ a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n\
-    \    }\n    if (k & 1) {\n      int v = 1 << (k - 1);\n      if (v < 8) {\n  \
-    \      for (int j = 0; j < v; ++j) {\n          mint ajv = a[j + v];\n       \
-    \   a[j + v] = a[j] - ajv;\n          a[j] += ajv;\n        }\n      } else {\n\
-    \        const __m256i m0 = _mm256_set1_epi32(0);\n        const __m256i m2 =\
-    \ _mm256_set1_epi32(mod + mod);\n        int j0 = 0;\n        int j1 = v;\n  \
-    \      for (; j0 < v; j0 += 8, j1 += 8) {\n          __m256i T0 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j0));\n          __m256i T1 = _mm256_loadu_si256((__m256i *)(a + j1));\n\
-    \          __m256i naj = montgomery_add_256(T0, T1, m2, m0);\n          __m256i\
-    \ najv = montgomery_sub_256(T0, T1, m2, m0);\n          _mm256_storeu_si256((__m256i\
-    \ *)(a + j0), naj);\n          _mm256_storeu_si256((__m256i *)(a + j1), najv);\n\
-    \        }\n      }\n    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 <<\
-    \ (k - 2 - (k & 1));\n    mint one = mint(1);\n    mint imag = dw[1];\n    while\
-    \ (v) {\n      if (v == 1) {\n        mint ww = one, xx = one, wx = one;\n   \
-    \     for (int jh = 0; jh < u;) {\n          ww = xx * xx, wx = ww * xx;\n   \
-    \       mint t0 = a[jh + 0], t1 = a[jh + 1] * xx;\n          mint t2 = a[jh +\
-    \ 2] * ww, t3 = a[jh + 3] * wx;\n          mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n\
-    \          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;\n          a[jh + 0]\
-    \ = t0p2 + t1p3, a[jh + 1] = t0p2 - t1p3;\n          a[jh + 2] = t0m2 + t1m3,\
-    \ a[jh + 3] = t0m2 - t1m3;\n          xx *= dw[__builtin_ctz((jh += 4))];\n  \
-    \      }\n      } else if (v == 4) {\n        const __m128i m0 = _mm_set1_epi32(0);\n\
-    \        const __m128i m1 = _mm_set1_epi32(mod);\n        const __m128i m2 = _mm_set1_epi32(mod\
-    \ + mod);\n        const __m128i r = _mm_set1_epi32(mint::r);\n        const __m128i\
-    \ Imag = _mm_set1_epi32(imag.a);\n        mint ww = one, xx = one, wx = one;\n\
-    \        for (int jh = 0; jh < u;) {\n          if (jh == 0) {\n            int\
-    \ j0 = 0;\n            int j1 = v;\n            int j2 = j1 + v;\n           \
-    \ int j3 = j2 + v;\n            int je = v;\n            for (; j0 < je; j0 +=\
-    \ 4, j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
-    \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
-    \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
-    \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
-    \          const __m128i T0P2 = montgomery_add_128(T0, T2, m2, m0);\n        \
-    \      const __m128i T1P3 = montgomery_add_128(T1, T3, m2, m0);\n            \
-    \  const __m128i T0M2 = montgomery_sub_128(T0, T2, m2, m0);\n              const\
-    \ __m128i T1M3 = montgomery_mul_128(\n                  montgomery_sub_128(T1,\
-    \ T3, m2, m0), Imag, r, m1);\n              _mm_storeu_si128((__m128i *)(a + j0),\n\
-    \                               montgomery_add_128(T0P2, T1P3, m2, m0));\n   \
-    \           _mm_storeu_si128((__m128i *)(a + j1),\n                          \
-    \     montgomery_sub_128(T0P2, T1P3, m2, m0));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j2),\n                               montgomery_add_128(T0M2, T1M3, m2,\
-    \ m0));\n              _mm_storeu_si128((__m128i *)(a + j3),\n               \
-    \                montgomery_sub_128(T0M2, T1M3, m2, m0));\n            }\n   \
-    \       } else {\n            ww = xx * xx, wx = ww * xx;\n            const __m128i\
-    \ WW = _mm_set1_epi32(ww.a);\n            const __m128i WX = _mm_set1_epi32(wx.a);\n\
-    \            const __m128i XX = _mm_set1_epi32(xx.a);\n            int j0 = jh\
-    \ * v;\n            int j1 = j0 + v;\n            int j2 = j1 + v;\n         \
-    \   int j3 = j2 + v;\n            int je = j1;\n            for (; j0 < je; j0\
-    \ += 4, j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
-    \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
-    \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
-    \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
-    \          const __m128i MT1 = montgomery_mul_128(T1, XX, r, m1);\n          \
-    \    const __m128i MT2 = montgomery_mul_128(T2, WW, r, m1);\n              const\
-    \ __m128i MT3 = montgomery_mul_128(T3, WX, r, m1);\n              const __m128i\
-    \ T0P2 = montgomery_add_128(T0, MT2, m2, m0);\n              const __m128i T1P3\
-    \ = montgomery_add_128(MT1, MT3, m2, m0);\n              const __m128i T0M2 =\
-    \ montgomery_sub_128(T0, MT2, m2, m0);\n              const __m128i T1M3 = montgomery_mul_128(\n\
-    \                  montgomery_sub_128(MT1, MT3, m2, m0), Imag, r, m1);\n     \
-    \         _mm_storeu_si128((__m128i *)(a + j0),\n                            \
-    \   montgomery_add_128(T0P2, T1P3, m2, m0));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j1),\n                               montgomery_sub_128(T0P2, T1P3, m2,\
-    \ m0));\n              _mm_storeu_si128((__m128i *)(a + j2),\n               \
-    \                montgomery_add_128(T0M2, T1M3, m2, m0));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j3),\n                               montgomery_sub_128(T0M2, T1M3, m2,\
-    \ m0));\n            }\n          }\n          xx *= dw[__builtin_ctz((jh += 4))];\n\
-    \        }\n      } else {\n        const __m256i m0 = _mm256_set1_epi32(0);\n\
-    \        const __m256i m1 = _mm256_set1_epi32(mod);\n        const __m256i m2\
-    \ = _mm256_set1_epi32(mod + mod);\n        const __m256i r = _mm256_set1_epi32(mint::r);\n\
-    \        const __m256i Imag = _mm256_set1_epi32(imag.a);\n        mint ww = one,\
-    \ xx = one, wx = one;\n        for (int jh = 0; jh < u;) {\n          if (jh ==\
-    \ 0) {\n            int j0 = 0;\n            int j1 = v;\n            int j2 =\
-    \ j1 + v;\n            int j3 = j2 + v;\n            int je = v;\n           \
-    \ for (; j0 < je; j0 += 8, j1 += 8, j2 += 8, j3 += 8) {\n              const __m256i\
-    \ T0 = _mm256_loadu_si256((__m256i *)(a + j0));\n              const __m256i T1\
-    \ = _mm256_loadu_si256((__m256i *)(a + j1));\n              const __m256i T2 =\
-    \ _mm256_loadu_si256((__m256i *)(a + j2));\n              const __m256i T3 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j3));\n              const __m256i T0P2 = montgomery_add_256(T0, T2,\
-    \ m2, m0);\n              const __m256i T1P3 = montgomery_add_256(T1, T3, m2,\
-    \ m0);\n              const __m256i T0M2 = montgomery_sub_256(T0, T2, m2, m0);\n\
-    \              const __m256i T1M3 = montgomery_mul_256(\n                  montgomery_sub_256(T1,\
-    \ T3, m2, m0), Imag, r, m1);\n              _mm256_storeu_si256((__m256i *)(a\
-    \ + j0),\n                                  montgomery_add_256(T0P2, T1P3, m2,\
-    \ m0));\n              _mm256_storeu_si256((__m256i *)(a + j1),\n            \
-    \                      montgomery_sub_256(T0P2, T1P3, m2, m0));\n            \
-    \  _mm256_storeu_si256((__m256i *)(a + j2),\n                                \
-    \  montgomery_add_256(T0M2, T1M3, m2, m0));\n              _mm256_storeu_si256((__m256i\
-    \ *)(a + j3),\n                                  montgomery_sub_256(T0M2, T1M3,\
-    \ m2, m0));\n            }\n          } else {\n            ww = xx * xx, wx =\
-    \ ww * xx;\n            const __m256i WW = _mm256_set1_epi32(ww.a);\n        \
-    \    const __m256i WX = _mm256_set1_epi32(wx.a);\n            const __m256i XX\
-    \ = _mm256_set1_epi32(xx.a);\n            int j0 = jh * v;\n            int j1\
-    \ = j0 + v;\n            int j2 = j1 + v;\n            int j3 = j2 + v;\n    \
-    \        int je = j1;\n            for (; j0 < je; j0 += 8, j1 += 8, j2 += 8,\
-    \ j3 += 8) {\n              const __m256i T0 = _mm256_loadu_si256((__m256i *)(a\
-    \ + j0));\n              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a +\
-    \ j1));\n              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a + j2));\n\
-    \              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));\n \
-    \             const __m256i MT1 = montgomery_mul_256(T1, XX, r, m1);\n       \
-    \       const __m256i MT2 = montgomery_mul_256(T2, WW, r, m1);\n             \
-    \ const __m256i MT3 = montgomery_mul_256(T3, WX, r, m1);\n              const\
-    \ __m256i T0P2 = montgomery_add_256(T0, MT2, m2, m0);\n              const __m256i\
-    \ T1P3 = montgomery_add_256(MT1, MT3, m2, m0);\n              const __m256i T0M2\
-    \ = montgomery_sub_256(T0, MT2, m2, m0);\n              const __m256i T1M3 = montgomery_mul_256(\n\
-    \                  montgomery_sub_256(MT1, MT3, m2, m0), Imag, r, m1);\n     \
-    \         _mm256_storeu_si256((__m256i *)(a + j0),\n                         \
-    \         montgomery_add_256(T0P2, T1P3, m2, m0));\n              _mm256_storeu_si256((__m256i\
-    \ *)(a + j1),\n                                  montgomery_sub_256(T0P2, T1P3,\
-    \ m2, m0));\n              _mm256_storeu_si256((__m256i *)(a + j2),\n        \
-    \                          montgomery_add_256(T0M2, T1M3, m2, m0));\n        \
-    \      _mm256_storeu_si256((__m256i *)(a + j3),\n                            \
-    \      montgomery_sub_256(T0M2, T1M3, m2, m0));\n            }\n          }\n\
-    \          xx *= dw[__builtin_ctz((jh += 4))];\n        }\n      }\n      u <<=\
-    \ 2;\n      v >>= 2;\n    }\n  }\n\n  __attribute__((target(\"avx2\"))) void intt(mint\
-    \ *a, int n,\n                                            int normalize = true)\
-    \ {\n    int k = n ? __builtin_ctz(n) : 0;\n    if (k == 0) return;\n    if (k\
-    \ == 1) {\n      mint a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0]\
-    \ + a1;\n      if (normalize) {\n        a[0] *= mint(2).inverse();\n        a[1]\
-    \ *= mint(2).inverse();\n      }\n      return;\n    }\n    int u = 1 << (k -\
-    \ 2);\n    int v = 1;\n    mint one = mint(1);\n    mint imag = dy[1];\n    while\
-    \ (u) {\n      if (v == 1) {\n        mint ww = one, xx = one, yy = one;\n   \
-    \     u <<= 2;\n        for (int jh = 0; jh < u;) {\n          ww = xx * xx, yy\
-    \ = xx * imag;\n          mint t0 = a[jh + 0], t1 = a[jh + 1];\n          mint\
-    \ t2 = a[jh + 2], t3 = a[jh + 3];\n          mint t0p1 = t0 + t1, t2p3 = t2 +\
-    \ t3;\n          mint t0m1 = (t0 - t1) * xx, t2m3 = (t2 - t3) * yy;\n        \
-    \  a[jh + 0] = t0p1 + t2p3, a[jh + 2] = (t0p1 - t2p3) * ww;\n          a[jh +\
-    \ 1] = t0m1 + t2m3, a[jh + 3] = (t0m1 - t2m3) * ww;\n          xx *= dy[__builtin_ctz(jh\
-    \ += 4)];\n        }\n      } else if (v == 4) {\n        const __m128i m0 = _mm_set1_epi32(0);\n\
-    \        const __m128i m1 = _mm_set1_epi32(mod);\n        const __m128i m2 = _mm_set1_epi32(mod\
-    \ + mod);\n        const __m128i r = _mm_set1_epi32(mint::r);\n        const __m128i\
-    \ Imag = _mm_set1_epi32(imag.a);\n        mint ww = one, xx = one, yy = one;\n\
-    \        u <<= 2;\n        for (int jh = 0; jh < u;) {\n          if (jh == 0)\
-    \ {\n            int j0 = 0;\n            int j1 = v;\n            int j2 = v\
-    \ + v;\n            int j3 = j2 + v;\n            for (; j0 < v; j0 += 4, j1 +=\
-    \ 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
-    \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
-    \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
-    \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
-    \          const __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);\n        \
-    \      const __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);\n            \
-    \  const __m128i T0M1 = montgomery_sub_128(T0, T1, m2, m0);\n              const\
-    \ __m128i T2M3 = montgomery_mul_128(\n                  montgomery_sub_128(T2,\
-    \ T3, m2, m0), Imag, r, m1);\n              _mm_storeu_si128((__m128i *)(a + j0),\n\
-    \                               montgomery_add_128(T0P1, T2P3, m2, m0));\n   \
-    \           _mm_storeu_si128((__m128i *)(a + j2),\n                          \
-    \     montgomery_sub_128(T0P1, T2P3, m2, m0));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j1),\n                               montgomery_add_128(T0M1, T2M3, m2,\
-    \ m0));\n              _mm_storeu_si128((__m128i *)(a + j3),\n               \
-    \                montgomery_sub_128(T0M1, T2M3, m2, m0));\n            }\n   \
-    \       } else {\n            ww = xx * xx, yy = xx * imag;\n            const\
-    \ __m128i WW = _mm_set1_epi32(ww.a);\n            const __m128i XX = _mm_set1_epi32(xx.a);\n\
-    \            const __m128i YY = _mm_set1_epi32(yy.a);\n            int j0 = jh\
-    \ * v;\n            int j1 = j0 + v;\n            int j2 = j1 + v;\n         \
-    \   int j3 = j2 + v;\n            int je = j1;\n            for (; j0 < je; j0\
-    \ += 4, j1 += 4, j2 += 4, j3 += 4) {\n              const __m128i T0 = _mm_loadu_si128((__m128i\
-    \ *)(a + j0));\n              const __m128i T1 = _mm_loadu_si128((__m128i *)(a\
-    \ + j1));\n              const __m128i T2 = _mm_loadu_si128((__m128i *)(a + j2));\n\
-    \              const __m128i T3 = _mm_loadu_si128((__m128i *)(a + j3));\n    \
-    \          const __m128i T0P1 = montgomery_add_128(T0, T1, m2, m0);\n        \
-    \      const __m128i T2P3 = montgomery_add_128(T2, T3, m2, m0);\n            \
-    \  const __m128i T0M1 = montgomery_mul_128(\n                  montgomery_sub_128(T0,\
-    \ T1, m2, m0), XX, r, m1);\n              __m128i T2M3 = montgomery_mul_128(\n\
-    \                  montgomery_sub_128(T2, T3, m2, m0), YY, r, m1);\n         \
-    \     _mm_storeu_si128((__m128i *)(a + j0),\n                               montgomery_add_128(T0P1,\
-    \ T2P3, m2, m0));\n              _mm_storeu_si128(\n                  (__m128i\
-    \ *)(a + j2),\n                  montgomery_mul_128(montgomery_sub_128(T0P1, T2P3,\
-    \ m2, m0), WW,\n                                     r, m1));\n              _mm_storeu_si128((__m128i\
-    \ *)(a + j1),\n                               montgomery_add_128(T0M1, T2M3, m2,\
-    \ m0));\n              _mm_storeu_si128(\n                  (__m128i *)(a + j3),\n\
-    \                  montgomery_mul_128(montgomery_sub_128(T0M1, T2M3, m2, m0),\
-    \ WW,\n                                     r, m1));\n            }\n        \
-    \  }\n          xx *= dy[__builtin_ctz(jh += 4)];\n        }\n      } else {\n\
-    \        const __m256i m0 = _mm256_set1_epi32(0);\n        const __m256i m1 =\
-    \ _mm256_set1_epi32(mod);\n        const __m256i m2 = _mm256_set1_epi32(mod +\
-    \ mod);\n        const __m256i r = _mm256_set1_epi32(mint::r);\n        const\
-    \ __m256i Imag = _mm256_set1_epi32(imag.a);\n        mint ww = one, xx = one,\
-    \ yy = one;\n        u <<= 2;\n        for (int jh = 0; jh < u;) {\n         \
-    \ if (jh == 0) {\n            int j0 = 0;\n            int j1 = v;\n         \
-    \   int j2 = v + v;\n            int j3 = j2 + v;\n            for (; j0 < v;\
-    \ j0 += 8, j1 += 8, j2 += 8, j3 += 8) {\n              const __m256i T0 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j0));\n              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a\
-    \ + j1));\n              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a +\
-    \ j2));\n              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));\n\
-    \              const __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);\n    \
-    \          const __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);\n        \
-    \      const __m256i T0M1 = montgomery_sub_256(T0, T1, m2, m0);\n            \
-    \  const __m256i T2M3 = montgomery_mul_256(\n                  montgomery_sub_256(T2,\
-    \ T3, m2, m0), Imag, r, m1);\n              _mm256_storeu_si256((__m256i *)(a\
-    \ + j0),\n                                  montgomery_add_256(T0P1, T2P3, m2,\
-    \ m0));\n              _mm256_storeu_si256((__m256i *)(a + j2),\n            \
-    \                      montgomery_sub_256(T0P1, T2P3, m2, m0));\n            \
-    \  _mm256_storeu_si256((__m256i *)(a + j1),\n                                \
-    \  montgomery_add_256(T0M1, T2M3, m2, m0));\n              _mm256_storeu_si256((__m256i\
-    \ *)(a + j3),\n                                  montgomery_sub_256(T0M1, T2M3,\
-    \ m2, m0));\n            }\n          } else {\n            ww = xx * xx, yy =\
-    \ xx * imag;\n            const __m256i WW = _mm256_set1_epi32(ww.a);\n      \
-    \      const __m256i XX = _mm256_set1_epi32(xx.a);\n            const __m256i\
-    \ YY = _mm256_set1_epi32(yy.a);\n            int j0 = jh * v;\n            int\
-    \ j1 = j0 + v;\n            int j2 = j1 + v;\n            int j3 = j2 + v;\n \
-    \           int je = j1;\n            for (; j0 < je; j0 += 8, j1 += 8, j2 +=\
-    \ 8, j3 += 8) {\n              const __m256i T0 = _mm256_loadu_si256((__m256i\
-    \ *)(a + j0));\n              const __m256i T1 = _mm256_loadu_si256((__m256i *)(a\
-    \ + j1));\n              const __m256i T2 = _mm256_loadu_si256((__m256i *)(a +\
-    \ j2));\n              const __m256i T3 = _mm256_loadu_si256((__m256i *)(a + j3));\n\
-    \              const __m256i T0P1 = montgomery_add_256(T0, T1, m2, m0);\n    \
-    \          const __m256i T2P3 = montgomery_add_256(T2, T3, m2, m0);\n        \
-    \      const __m256i T0M1 = montgomery_mul_256(\n                  montgomery_sub_256(T0,\
-    \ T1, m2, m0), XX, r, m1);\n              const __m256i T2M3 = montgomery_mul_256(\n\
-    \                  montgomery_sub_256(T2, T3, m2, m0), YY, r, m1);\n         \
-    \     _mm256_storeu_si256((__m256i *)(a + j0),\n                             \
-    \     montgomery_add_256(T0P1, T2P3, m2, m0));\n              _mm256_storeu_si256(\n\
-    \                  (__m256i *)(a + j2),\n                  montgomery_mul_256(montgomery_sub_256(T0P1,\
-    \ T2P3, m2, m0), WW,\n                                     r, m1));\n        \
-    \      _mm256_storeu_si256((__m256i *)(a + j1),\n                            \
-    \      montgomery_add_256(T0M1, T2M3, m2, m0));\n              _mm256_storeu_si256(\n\
-    \                  (__m256i *)(a + j3),\n                  montgomery_mul_256(montgomery_sub_256(T0M1,\
-    \ T2M3, m2, m0), WW,\n                                     r, m1));\n        \
-    \    }\n          }\n          xx *= dy[__builtin_ctz(jh += 4)];\n        }\n\
-    \      }\n      u >>= 4;\n      v <<= 2;\n    }\n    if (k & 1) {\n      v = 1\
-    \ << (k - 1);\n      if (v < 8) {\n        for (int j = 0; j < v; ++j) {\n   \
-    \       mint ajv = a[j] - a[j + v];\n          a[j] += a[j + v];\n          a[j\
-    \ + v] = ajv;\n        }\n      } else {\n        const __m256i m0 = _mm256_set1_epi32(0);\n\
-    \        const __m256i m2 = _mm256_set1_epi32(mod + mod);\n        int j0 = 0;\n\
-    \        int j1 = v;\n        for (; j0 < v; j0 += 8, j1 += 8) {\n          const\
-    \ __m256i T0 = _mm256_loadu_si256((__m256i *)(a + j0));\n          const __m256i\
-    \ T1 = _mm256_loadu_si256((__m256i *)(a + j1));\n          __m256i naj = montgomery_add_256(T0,\
-    \ T1, m2, m0);\n          __m256i najv = montgomery_sub_256(T0, T1, m2, m0);\n\
-    \          _mm256_storeu_si256((__m256i *)(a + j0), naj);\n          _mm256_storeu_si256((__m256i\
-    \ *)(a + j1), najv);\n        }\n      }\n    }\n    if (normalize) {\n      mint\
-    \ invn = mint(n).inverse();\n      for (int i = 0; i < n; i++) a[i] *= invn;\n\
-    \    }\n  }\n\n  __attribute__((target(\"avx2\"))) void inplace_multiply(\n  \
-    \    int l1, int l2, int zero_padding = true) {\n    int l = l1 + l2 - 1;\n  \
-    \  int M = 4;\n    while (M < l) M <<= 1;\n    if (zero_padding) {\n      for\
-    \ (int i = l1; i < M; i++) ntt_inner::_buf1[i] = 0;\n      for (int i = l2; i\
-    \ < M; i++) ntt_inner::_buf2[i] = 0;\n    }\n    const __m256i m0 = _mm256_set1_epi32(0);\n\
-    \    const __m256i m1 = _mm256_set1_epi32(mod);\n    const __m256i r = _mm256_set1_epi32(mint::r);\n\
-    \    const __m256i N2 = _mm256_set1_epi32(mint::n2);\n    for (int i = 0; i <\
-    \ l1; i += 8) {\n      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf1\
-    \ + i));\n      __m256i b = montgomery_mul_256(a, N2, r, m1);\n      _mm256_storeu_si256((__m256i\
-    \ *)(ntt_inner::_buf1 + i), b);\n    }\n    for (int i = 0; i < l2; i += 8) {\n\
-    \      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf2 + i));\n  \
-    \    __m256i b = montgomery_mul_256(a, N2, r, m1);\n      _mm256_storeu_si256((__m256i\
-    \ *)(ntt_inner::_buf2 + i), b);\n    }\n    ntt(buf1, M);\n    ntt(buf2, M);\n\
-    \    for (int i = 0; i < M; i += 8) {\n      __m256i a = _mm256_loadu_si256((__m256i\
-    \ *)(ntt_inner::_buf1 + i));\n      __m256i b = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf2\
-    \ + i));\n      __m256i c = montgomery_mul_256(a, b, r, m1);\n      _mm256_storeu_si256((__m256i\
-    \ *)(ntt_inner::_buf1 + i), c);\n    }\n    intt(buf1, M, false);\n    const __m256i\
-    \ INVM = _mm256_set1_epi32((mint(M).inverse()).a);\n    for (int i = 0; i < l;\
-    \ i += 8) {\n      __m256i a = _mm256_loadu_si256((__m256i *)(ntt_inner::_buf1\
-    \ + i));\n      __m256i b = montgomery_mul_256(a, INVM, r, m1);\n      __m256i\
-    \ c = my256_mulhi_epu32(my256_mullo_epu32(b, r), m1);\n      __m256i d = _mm256_and_si256(_mm256_cmpgt_epi32(c,\
-    \ m0), m1);\n      __m256i e = _mm256_sub_epi32(d, c);\n      _mm256_storeu_si256((__m256i\
-    \ *)(ntt_inner::_buf1 + i), e);\n    }\n  }\n\n  void ntt(vector<mint> &a) {\n\
-    \    int M = (int)a.size();\n    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;\n\
-    \    ntt(buf1, M);\n    for (int i = 0; i < M; i++) a[i].a = buf1[i].a;\n  }\n\
-    \n  void intt(vector<mint> &a) {\n    int M = (int)a.size();\n    for (int i =\
-    \ 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M, true);\n    for (int i\
-    \ = 0; i < M; i++) a[i].a = buf1[i].a;\n  }\n\n  vector<mint> multiply(const vector<mint>\
-    \ &a, const vector<mint> &b) {\n    if (a.size() == 0 && b.size() == 0) return\
-    \ vector<mint>{};\n    int l = a.size() + b.size() - 1;\n    if (min<int>(a.size(),\
+    \ { return mod; }\n};\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename mint>\nstruct\
+    \ NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t _mod = mint::get_mod();\n\
+    \    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int idx = 0;\n    u64 m\
+    \ = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n      if (m % i == 0) {\n\
+    \        ds[idx++] = i;\n        while (m % i == 0) m /= i;\n      }\n    }\n\
+    \    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr = 2;\n    while (1) {\n  \
+    \    int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n        u64 a = _pr,\
+    \ b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n          if (b & 1) r\
+    \ = r * a % _mod;\n          a = a * a % _mod;\n          b >>= 1;\n        }\n\
+    \        if (r == 1) {\n          flg = 0;\n          break;\n        }\n    \
+    \  }\n      if (flg == 1) break;\n      ++_pr;\n    }\n    return _pr;\n  };\n\
+    \n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr uint32_t\
+    \ pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod - 1);\n \
+    \ mint dw[level], dy[level];\n\n  void setwy(int k) {\n    mint w[level], y[level];\n\
+    \    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1] = w[k - 1].inverse();\n\
+    \    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i + 1] * w[i + 1], y[i] =\
+    \ y[i + 1] * y[i + 1];\n    dw[1] = w[1], dy[1] = y[1], dw[2] = w[2], dy[2] =\
+    \ y[2];\n    for (int i = 3; i < k; ++i) {\n      dw[i] = dw[i - 1] * y[i - 2]\
+    \ * w[i];\n      dy[i] = dy[i - 1] * w[i - 2] * y[i];\n    }\n  }\n\n  NTT() {\
+    \ setwy(level); }\n\n  void fft4(vector<mint> &a, int k) {\n    if ((int)a.size()\
+    \ <= 1) return;\n    if (k == 1) {\n      mint a1 = a[1];\n      a[1] = a[0] -\
+    \ a[1];\n      a[0] = a[0] + a1;\n      return;\n    }\n    if (k & 1) {\n   \
+    \   int v = 1 << (k - 1);\n      for (int j = 0; j < v; ++j) {\n        mint ajv\
+    \ = a[j + v];\n        a[j + v] = a[j] - ajv;\n        a[j] += ajv;\n      }\n\
+    \    }\n    int u = 1 << (2 + (k & 1));\n    int v = 1 << (k - 2 - (k & 1));\n\
+    \    mint one = mint(1);\n    mint imag = dw[1];\n    while (v) {\n      // jh\
+    \ = 0\n      {\n        int j0 = 0;\n        int j1 = v;\n        int j2 = j1\
+    \ + v;\n        int j3 = j2 + v;\n        for (; j0 < v; ++j0, ++j1, ++j2, ++j3)\
+    \ {\n          mint t0 = a[j0], t1 = a[j1], t2 = a[j2], t3 = a[j3];\n        \
+    \  mint t0p2 = t0 + t2, t1p3 = t1 + t3;\n          mint t0m2 = t0 - t2, t1m3 =\
+    \ (t1 - t3) * imag;\n          a[j0] = t0p2 + t1p3, a[j1] = t0p2 - t1p3;\n   \
+    \       a[j2] = t0m2 + t1m3, a[j3] = t0m2 - t1m3;\n        }\n      }\n      //\
+    \ jh >= 1\n      mint ww = one, xx = one * dw[2], wx = one;\n      for (int jh\
+    \ = 4; jh < u;) {\n        ww = xx * xx, wx = ww * xx;\n        int j0 = jh *\
+    \ v;\n        int je = j0 + v;\n        int j2 = je + v;\n        for (; j0 <\
+    \ je; ++j0, ++j2) {\n          mint t0 = a[j0], t1 = a[j0 + v] * xx, t2 = a[j2]\
+    \ * ww,\n               t3 = a[j2 + v] * wx;\n          mint t0p2 = t0 + t2, t1p3\
+    \ = t1 + t3;\n          mint t0m2 = t0 - t2, t1m3 = (t1 - t3) * imag;\n      \
+    \    a[j0] = t0p2 + t1p3, a[j0 + v] = t0p2 - t1p3;\n          a[j2] = t0m2 + t1m3,\
+    \ a[j2 + v] = t0m2 - t1m3;\n        }\n        xx *= dw[__builtin_ctzll((jh +=\
+    \ 4))];\n      }\n      u <<= 2;\n      v >>= 2;\n    }\n  }\n\n  void ifft4(vector<mint>\
+    \ &a, int k) {\n    if ((int)a.size() <= 1) return;\n    if (k == 1) {\n     \
+    \ mint a1 = a[1];\n      a[1] = a[0] - a[1];\n      a[0] = a[0] + a1;\n      return;\n\
+    \    }\n    int u = 1 << (k - 2);\n    int v = 1;\n    mint one = mint(1);\n \
+    \   mint imag = dy[1];\n    while (u) {\n      // jh = 0\n      {\n        int\
+    \ j0 = 0;\n        int j1 = v;\n        int j2 = v + v;\n        int j3 = j2 +\
+    \ v;\n        for (; j0 < v; ++j0, ++j1, ++j2, ++j3) {\n          mint t0 = a[j0],\
+    \ t1 = a[j1], t2 = a[j2], t3 = a[j3];\n          mint t0p1 = t0 + t1, t2p3 = t2\
+    \ + t3;\n          mint t0m1 = t0 - t1, t2m3 = (t2 - t3) * imag;\n          a[j0]\
+    \ = t0p1 + t2p3, a[j2] = t0p1 - t2p3;\n          a[j1] = t0m1 + t2m3, a[j3] =\
+    \ t0m1 - t2m3;\n        }\n      }\n      // jh >= 1\n      mint ww = one, xx\
+    \ = one * dy[2], yy = one;\n      u <<= 2;\n      for (int jh = 4; jh < u;) {\n\
+    \        ww = xx * xx, yy = xx * imag;\n        int j0 = jh * v;\n        int\
+    \ je = j0 + v;\n        int j2 = je + v;\n        for (; j0 < je; ++j0, ++j2)\
+    \ {\n          mint t0 = a[j0], t1 = a[j0 + v], t2 = a[j2], t3 = a[j2 + v];\n\
+    \          mint t0p1 = t0 + t1, t2p3 = t2 + t3;\n          mint t0m1 = (t0 - t1)\
+    \ * xx, t2m3 = (t2 - t3) * yy;\n          a[j0] = t0p1 + t2p3, a[j2] = (t0p1 -\
+    \ t2p3) * ww;\n          a[j0 + v] = t0m1 + t2m3, a[j2 + v] = (t0m1 - t2m3) *\
+    \ ww;\n        }\n        xx *= dy[__builtin_ctzll(jh += 4)];\n      }\n     \
+    \ u >>= 4;\n      v <<= 2;\n    }\n    if (k & 1) {\n      u = 1 << (k - 1);\n\
+    \      for (int j = 0; j < u; ++j) {\n        mint ajv = a[j] - a[j + u];\n  \
+    \      a[j] += a[j + u];\n        a[j + u] = ajv;\n      }\n    }\n  }\n\n  void\
+    \ ntt(vector<mint> &a) {\n    if ((int)a.size() <= 1) return;\n    fft4(a, __builtin_ctz(a.size()));\n\
+    \  }\n\n  void intt(vector<mint> &a) {\n    if ((int)a.size() <= 1) return;\n\
+    \    ifft4(a, __builtin_ctz(a.size()));\n    mint iv = mint(a.size()).inverse();\n\
+    \    for (auto &x : a) x *= iv;\n  }\n\n  vector<mint> multiply(const vector<mint>\
+    \ &a, const vector<mint> &b) {\n    int l = a.size() + b.size() - 1;\n    if (min<int>(a.size(),\
     \ b.size()) <= 40) {\n      vector<mint> s(l);\n      for (int i = 0; i < (int)a.size();\
     \ ++i)\n        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];\n\
-    \      return s;\n    }\n    assert(l <= ntt_inner::SZ_FFT_BUF);\n    int M =\
-    \ 4;\n    while (M < l) M <<= 1;\n    for (int i = 0; i < (int)a.size(); ++i)\
-    \ buf1[i].a = a[i].a;\n    for (int i = (int)a.size(); i < M; ++i) buf1[i].a =\
-    \ 0;\n    for (int i = 0; i < (int)b.size(); ++i) buf2[i].a = b[i].a;\n    for\
-    \ (int i = (int)b.size(); i < M; ++i) buf2[i].a = 0;\n    ntt(buf1, M);\n    ntt(buf2,\
-    \ M);\n    for (int i = 0; i < M; ++i)\n      buf1[i].a = mint::reduce(uint64_t(buf1[i].a)\
-    \ * buf2[i].a);\n    intt(buf1, M, false);\n    vector<mint> s(l);\n    mint invm\
-    \ = mint(M).inverse();\n    for (int i = 0; i < l; ++i) s[i] = buf1[i] * invm;\n\
-    \    return s;\n  }\n\n  void ntt_doubling(vector<mint> &a) {\n    int M = (int)a.size();\n\
-    \    for (int i = 0; i < M; i++) buf1[i].a = a[i].a;\n    intt(buf1, M);\n   \
-    \ mint r = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for\
-    \ (int i = 0; i < M; i++) buf1[i] *= r, r *= zeta;\n    ntt(buf1, M);\n    a.resize(2\
-    \ * M);\n    for (int i = 0; i < M; i++) a[M + i].a = buf1[i].a;\n  }\n};\n#line\
-    \ 5 \"ntt/arbitrary-ntt.hpp\"\n\nnamespace ArbitraryNTT {\nusing i64 = int64_t;\n\
-    using u128 = __uint128_t;\nconstexpr int32_t m0 = 167772161;\nconstexpr int32_t\
-    \ m1 = 469762049;\nconstexpr int32_t m2 = 754974721;\nusing mint0 = LazyMontgomeryModInt<m0>;\n\
-    using mint1 = LazyMontgomeryModInt<m1>;\nusing mint2 = LazyMontgomeryModInt<m2>;\n\
-    constexpr int r01 = mint1(m0).inverse().get();\nconstexpr int r02 = mint2(m0).inverse().get();\n\
-    constexpr int r12 = mint2(m1).inverse().get();\nconstexpr int r02r12 = i64(r02)\
-    \ * r12 % m2;\nconstexpr i64 w1 = m0;\nconstexpr i64 w2 = i64(m0) * m1;\n\ntemplate\
-    \ <typename T, typename submint>\nvector<submint> mul(const vector<T> &a, const\
-    \ vector<T> &b) {\n  static NTT<submint> ntt;\n  vector<submint> s(a.size()),\
-    \ t(b.size());\n  for (int i = 0; i < (int)a.size(); ++i) s[i] = i64(a[i] % submint::get_mod());\n\
-    \  for (int i = 0; i < (int)b.size(); ++i) t[i] = i64(b[i] % submint::get_mod());\n\
-    \  return ntt.multiply(s, t);\n}\n\ntemplate <typename T>\nvector<int> multiply(const\
-    \ vector<T> &s, const vector<T> &t, int mod) {\n  auto d0 = mul<T, mint0>(s, t);\n\
-    \  auto d1 = mul<T, mint1>(s, t);\n  auto d2 = mul<T, mint2>(s, t);\n  int n =\
-    \ d0.size();\n  vector<int> ret(n);\n  const int W1 = w1 % mod;\n  const int W2\
-    \ = w2 % mod;\n  for (int i = 0; i < n; i++) {\n    int n1 = d1[i].get(), n2 =\
-    \ d2[i].get(), a = d0[i].get();\n    int b = i64(n1 + m1 - a) * r01 % m1;\n  \
-    \  int c = (i64(n2 + m2 - a) * r02r12 + i64(m2 - b) * r12) % m2;\n    ret[i] =\
-    \ (i64(a) + i64(b) * W1 + i64(c) * W2) % mod;\n  }\n  return ret;\n}\n\ntemplate\
-    \ <typename mint>\nvector<mint> multiply(const vector<mint> &a, const vector<mint>\
-    \ &b) {\n  if (a.size() == 0 && b.size() == 0) return {};\n  if (min<int>(a.size(),\
-    \ b.size()) < 128) {\n    vector<mint> ret(a.size() + b.size() - 1);\n    for\
-    \ (int i = 0; i < (int)a.size(); ++i)\n      for (int j = 0; j < (int)b.size();\
-    \ ++j) ret[i + j] += a[i] * b[j];\n    return ret;\n  }\n  vector<int> s(a.size()),\
-    \ t(b.size());\n  for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i].get();\n\
-    \  for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i].get();\n  vector<int> u\
-    \ = multiply<int>(s, t, mint::get_mod());\n  vector<mint> ret(u.size());\n  for\
-    \ (int i = 0; i < (int)u.size(); ++i) ret[i] = mint(u[i]);\n  return ret;\n}\n\
-    \ntemplate <typename T>\nvector<u128> multiply_u128(const vector<T> &s, const\
-    \ vector<T> &t) {\n  if (s.size() == 0 && t.size() == 0) return {};\n  if (min<int>(s.size(),\
-    \ t.size()) < 128) {\n    vector<u128> ret(s.size() + t.size() - 1);\n    for\
-    \ (int i = 0; i < (int)s.size(); ++i)\n      for (int j = 0; j < (int)t.size();\
-    \ ++j) ret[i + j] += i64(s[i]) * t[j];\n    return ret;\n  }\n  auto d0 = mul<T,\
-    \ mint0>(s, t);\n  auto d1 = mul<T, mint1>(s, t);\n  auto d2 = mul<T, mint2>(s,\
-    \ t);\n  int n = d0.size();\n  vector<u128> ret(n);\n  for (int i = 0; i < n;\
-    \ i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n    i64 a = d0[i].get();\n\
-    \    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2 + m2 - a) * r02r12\
-    \ + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n  }\n  return ret;\n\
-    }\n}  // namespace ArbitraryNTT\n#line 5 \"fps/arbitrary-fps.hpp\"\n\ntemplate\
-    \ <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  ntt_ptr = nullptr;\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt() {\n  exit(1);\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::intt() {\n  exit(1);\n\
-    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling() {\n\
-    \  exit(1);\n}\n\ntemplate <typename mint>\nint FormalPowerSeries<mint>::ntt_pr()\
+    \      return s;\n    }\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n\
+    \    setwy(k);\n    vector<mint> s(M), t(M);\n    for (int i = 0; i < (int)a.size();\
+    \ ++i) s[i] = a[i];\n    for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];\n\
+    \    fft4(s, k);\n    fft4(t, k);\n    for (int i = 0; i < M; ++i) s[i] *= t[i];\n\
+    \    ifft4(s, k);\n    s.resize(l);\n    mint invm = mint(M).inverse();\n    for\
+    \ (int i = 0; i < l; ++i) s[i] *= invm;\n    return s;\n  }\n\n  void ntt_doubling(vector<mint>\
+    \ &a) {\n    int M = (int)a.size();\n    auto b = a;\n    intt(b);\n    mint r\
+    \ = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i\
+    \ = 0; i < M; i++) b[i] *= r, r *= zeta;\n    ntt(b);\n    copy(begin(b), end(b),\
+    \ back_inserter(a));\n  }\n};\n#line 5 \"ntt/arbitrary-ntt.hpp\"\n\nnamespace\
+    \ ArbitraryNTT {\nusing i64 = int64_t;\nusing u128 = __uint128_t;\nconstexpr int32_t\
+    \ m0 = 167772161;\nconstexpr int32_t m1 = 469762049;\nconstexpr int32_t m2 = 754974721;\n\
+    using mint0 = LazyMontgomeryModInt<m0>;\nusing mint1 = LazyMontgomeryModInt<m1>;\n\
+    using mint2 = LazyMontgomeryModInt<m2>;\nconstexpr int r01 = mint1(m0).inverse().get();\n\
+    constexpr int r02 = mint2(m0).inverse().get();\nconstexpr int r12 = mint2(m1).inverse().get();\n\
+    constexpr int r02r12 = i64(r02) * r12 % m2;\nconstexpr i64 w1 = m0;\nconstexpr\
+    \ i64 w2 = i64(m0) * m1;\n\ntemplate <typename T, typename submint>\nvector<submint>\
+    \ mul(const vector<T> &a, const vector<T> &b) {\n  static NTT<submint> ntt;\n\
+    \  vector<submint> s(a.size()), t(b.size());\n  for (int i = 0; i < (int)a.size();\
+    \ ++i) s[i] = i64(a[i] % submint::get_mod());\n  for (int i = 0; i < (int)b.size();\
+    \ ++i) t[i] = i64(b[i] % submint::get_mod());\n  return ntt.multiply(s, t);\n\
+    }\n\ntemplate <typename T>\nvector<int> multiply(const vector<T> &s, const vector<T>\
+    \ &t, int mod) {\n  auto d0 = mul<T, mint0>(s, t);\n  auto d1 = mul<T, mint1>(s,\
+    \ t);\n  auto d2 = mul<T, mint2>(s, t);\n  int n = d0.size();\n  vector<int> ret(n);\n\
+    \  const int W1 = w1 % mod;\n  const int W2 = w2 % mod;\n  for (int i = 0; i <\
+    \ n; i++) {\n    int n1 = d1[i].get(), n2 = d2[i].get(), a = d0[i].get();\n  \
+    \  int b = i64(n1 + m1 - a) * r01 % m1;\n    int c = (i64(n2 + m2 - a) * r02r12\
+    \ + i64(m2 - b) * r12) % m2;\n    ret[i] = (i64(a) + i64(b) * W1 + i64(c) * W2)\
+    \ % mod;\n  }\n  return ret;\n}\n\ntemplate <typename mint>\nvector<mint> multiply(const\
+    \ vector<mint> &a, const vector<mint> &b) {\n  if (a.size() == 0 && b.size() ==\
+    \ 0) return {};\n  if (min<int>(a.size(), b.size()) < 128) {\n    vector<mint>\
+    \ ret(a.size() + b.size() - 1);\n    for (int i = 0; i < (int)a.size(); ++i)\n\
+    \      for (int j = 0; j < (int)b.size(); ++j) ret[i + j] += a[i] * b[j];\n  \
+    \  return ret;\n  }\n  vector<int> s(a.size()), t(b.size());\n  for (int i = 0;\
+    \ i < (int)a.size(); ++i) s[i] = a[i].get();\n  for (int i = 0; i < (int)b.size();\
+    \ ++i) t[i] = b[i].get();\n  vector<int> u = multiply<int>(s, t, mint::get_mod());\n\
+    \  vector<mint> ret(u.size());\n  for (int i = 0; i < (int)u.size(); ++i) ret[i]\
+    \ = mint(u[i]);\n  return ret;\n}\n\ntemplate <typename T>\nvector<u128> multiply_u128(const\
+    \ vector<T> &s, const vector<T> &t) {\n  if (s.size() == 0 && t.size() == 0) return\
+    \ {};\n  if (min<int>(s.size(), t.size()) < 128) {\n    vector<u128> ret(s.size()\
+    \ + t.size() - 1);\n    for (int i = 0; i < (int)s.size(); ++i)\n      for (int\
+    \ j = 0; j < (int)t.size(); ++j) ret[i + j] += i64(s[i]) * t[j];\n    return ret;\n\
+    \  }\n  auto d0 = mul<T, mint0>(s, t);\n  auto d1 = mul<T, mint1>(s, t);\n  auto\
+    \ d2 = mul<T, mint2>(s, t);\n  int n = d0.size();\n  vector<u128> ret(n);\n  for\
+    \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
+    \ i64 a = d0[i].get();\n    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2\
+    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n\
+    \  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 5 \"fps/arbitrary-fps.hpp\"\
+    \n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  ntt_ptr\
+    \ = nullptr;\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt()\
+    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::intt()\
+    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling()\
+    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nint FormalPowerSeries<mint>::ntt_pr()\
     \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n\
     \    const FormalPowerSeries<mint>& r) {\n  if (this->empty() || r.empty()) {\n\
     \    this->clear();\n    return *this;\n  }\n  auto ret = ArbitraryNTT::multiply(*this,\
@@ -785,30 +522,31 @@ data:
     \ ret({mint(1)});\n  for (int i = 1; i < deg; i <<= 1) {\n    ret = (ret * (pre(i\
     \ << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);\n  }\n  return ret.pre(deg);\n\
     }\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial {\n\
-    \  vector<T> f, g, h;\n  Binomial(int MAX = 0) : f(1, T(1)), g(1, T(1)), h(1,\
-    \ T(1)) {\n    while (MAX >= (int)f.size()) extend();\n  }\n\n  void extend()\
-    \ {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n    g.resize(m);\n\
-    \    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n \
-    \   g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for\
-    \ (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i]\
-    \ = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n\
-    \    while (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int\
-    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n\
-    \    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n\
-    \    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int\
+    \  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod() != 0\
+    \ && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
+    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
+    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
+    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
+    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
+    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
+    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
+    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
+    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
+    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
+    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
+    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
+    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
+    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
+    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
+    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return\
-    \ C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>& r) {\n\
-    \    static_assert(is_integral<I>::value == true);\n    int n = 0;\n    for (auto&\
-    \ x : r) {\n      if(x < 0) return T(0);\n      n += x;\n    }\n    T res = fac(n);\n\
-    \    for (auto& x : r) res *= finv(x);\n    return res;\n  }\n\n  template <typename\
-    \ I>\n  T operator()(const vector<I>& r) {\n    return multinomial(r);\n  }\n\n\
-    \  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
-    \    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
-    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
-    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
-    \n  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 12 \"verify/verify-yuki/yuki-1112-sparse.test.cpp\"\
+    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
+    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 12 \"verify/verify-yuki/yuki-1112-sparse.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<1000000007>;\nBinomial<mint> C;\nusing vm\
     \ = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
     \nvoid Nyaan::solve() {\n  inl(K, M, N);\n  SparseMatrix<mint> m(K * K);\n  rep(i,\
@@ -840,14 +578,13 @@ data:
   - fps/arbitrary-fps.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
-  - ntt/ntt-avx2.hpp
-  - modint/simd-montgomery.hpp
+  - ntt/ntt.hpp
   - modulo/binomial.hpp
   isVerificationFile: true
   path: verify/verify-yuki/yuki-1112-sparse.test.cpp
   requiredBy: []
-  timestamp: '2021-08-10 23:14:36+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-1112-sparse.test.cpp
 layout: document

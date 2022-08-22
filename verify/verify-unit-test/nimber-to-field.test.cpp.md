@@ -1,34 +1,34 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/garner.hpp
     title: Garner's algorithm
   - icon: ':heavy_check_mark:'
     path: math/nimber-to-field.hpp
     title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/nimber.hpp
     title: Nim Product
   - icon: ':heavy_check_mark:'
     path: math/sweep.hpp
     title: "\u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []

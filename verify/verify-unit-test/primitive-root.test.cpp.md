@@ -1,46 +1,46 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: math/constexpr-primitiveroot.hpp
     title: math/constexpr-primitiveroot.hpp
   - icon: ':heavy_check_mark:'
     path: math/elementary-function.hpp
     title: math/elementary-function.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/modint-montgomery64.hpp
     title: modint/modint-montgomery64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: prime/prime-enumerate.hpp
     title: prime/prime-enumerate.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
@@ -190,52 +190,51 @@ data:
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
     \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/primitive-root.test.cpp\"\
-    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\n// [0, 2^64 - 1)\nuint64_t\
-    \ rng() {\n  static uint64_t x_ =\n      uint64_t(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                   chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \                   .count()) *\n      10150724397891781847ULL;\n  x_ ^= x_ <<\
-    \ 7;\n  return x_ ^= x_ >> 9;\n}\n\n// [l, r)\nint64_t randint(int64_t l, int64_t\
-    \ r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<int64_t> randset(int64_t l, int64_t\
-    \ r, int64_t n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<int64_t> s;\n\
-    \  for (int64_t i = n; i; --i) {\n    int64_t m = randint(l, r + 1 - i);\n   \
-    \ if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<int64_t>\
-    \ ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\n\
-    double rnd() {\n  union raw_cast {\n    double t;\n    uint64_t u;\n  };\n  constexpr\
-    \ uint64_t p = uint64_t(1023 - 64) << 52;\n  return rng() * ((raw_cast*)(&p))->t;\n\
-    }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int loop = 0; loop < 2; loop++)\n    for (int i = 0; i < n; i++) swap(v[i],\
-    \ v[randint(0, n)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\n\
-    using my_rand::randset;\nusing my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n\
-    #line 6 \"verify/verify-unit-test/primitive-root.test.cpp\"\n//\n#line 1 \"atcoder/internal_math.hpp\"\
-    \n\n\n\n#line 5 \"atcoder/internal_math.hpp\"\n\n#ifdef _MSC_VER\n#include <intrin.h>\n\
-    #endif\n\nnamespace atcoder {\n\nnamespace internal {\n\n// @param m `1 <= m`\n\
-    // @return x mod m\nconstexpr long long safe_mod(long long x, long long m) {\n\
-    \    x %= m;\n    if (x < 0) x += m;\n    return x;\n}\n\n// Fast modular multiplication\
-    \ by barrett reduction\n// Reference: https://en.wikipedia.org/wiki/Barrett_reduction\n\
-    // NOTE: reconsider after Ice Lake\nstruct barrett {\n    unsigned int _m;\n \
-    \   unsigned long long im;\n\n    // @param m `1 <= m < 2^31`\n    barrett(unsigned\
-    \ int m) : _m(m), im((unsigned long long)(-1) / m + 1) {}\n\n    // @return m\n\
-    \    unsigned int umod() const { return _m; }\n\n    // @param a `0 <= a < m`\n\
-    \    // @param b `0 <= b < m`\n    // @return `a * b % m`\n    unsigned int mul(unsigned\
-    \ int a, unsigned int b) const {\n        // [1] m = 1\n        // a = b = im\
-    \ = 0, so okay\n\n        // [2] m >= 2\n        // im = ceil(2^64 / m)\n    \
-    \    // -> im * m = 2^64 + r (0 <= r < m)\n        // let z = a*b = c*m + d (0\
-    \ <= c, d < m)\n        // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64\
-    \ + c*r + d*im\n        // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64\
-    \ + m * (m + 1) < 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n     \
-    \   unsigned long long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned\
-    \ long long x;\n        _umul128(z, im, &x);\n#else\n        unsigned long long\
-    \ x =\n            (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n\
-    #endif\n        unsigned int v = (unsigned int)(z - x * _m);\n        if (_m <=\
-    \ v) v += _m;\n        return v;\n    }\n};\n\n// @param n `0 <= n`\n// @param\
-    \ m `1 <= m`\n// @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long\
-    \ long x, long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m\
-    \ = (unsigned int)(m);\n    unsigned long long r = 1;\n    unsigned long long\
-    \ y = safe_mod(x, m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n\
-    \        y = (y * y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n\
-    // M. Forisek and J. Jancina,\n// Fast Primality Testing for Integers That Fit\
-    \ into a Machine Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/primitive-root.test.cpp\"\
+    \n//\n#line 1 \"atcoder/internal_math.hpp\"\n\n\n\n#line 5 \"atcoder/internal_math.hpp\"\
+    \n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace\
+    \ internal {\n\n// @param m `1 <= m`\n// @return x mod m\nconstexpr long long\
+    \ safe_mod(long long x, long long m) {\n    x %= m;\n    if (x < 0) x += m;\n\
+    \    return x;\n}\n\n// Fast modular multiplication by barrett reduction\n// Reference:\
+    \ https://en.wikipedia.org/wiki/Barrett_reduction\n// NOTE: reconsider after Ice\
+    \ Lake\nstruct barrett {\n    unsigned int _m;\n    unsigned long long im;\n\n\
+    \    // @param m `1 <= m < 2^31`\n    barrett(unsigned int m) : _m(m), im((unsigned\
+    \ long long)(-1) / m + 1) {}\n\n    // @return m\n    unsigned int umod() const\
+    \ { return _m; }\n\n    // @param a `0 <= a < m`\n    // @param b `0 <= b < m`\n\
+    \    // @return `a * b % m`\n    unsigned int mul(unsigned int a, unsigned int\
+    \ b) const {\n        // [1] m = 1\n        // a = b = im = 0, so okay\n\n   \
+    \     // [2] m >= 2\n        // im = ceil(2^64 / m)\n        // -> im * m = 2^64\
+    \ + r (0 <= r < m)\n        // let z = a*b = c*m + d (0 <= c, d < m)\n       \
+    \ // a*b * im = (c*m + d) * im = c*(im*m) + d*im = c*2^64 + c*r + d*im\n     \
+    \   // c*r + d*im < m * m + m * im < m * m + 2^64 + m <= 2^64 + m * (m + 1) <\
+    \ 2^64 * 2\n        // ((ab * im) >> 64) == c or c + 1\n        unsigned long\
+    \ long z = a;\n        z *= b;\n#ifdef _MSC_VER\n        unsigned long long x;\n\
+    \        _umul128(z, im, &x);\n#else\n        unsigned long long x =\n       \
+    \     (unsigned long long)(((unsigned __int128)(z)*im) >> 64);\n#endif\n     \
+    \   unsigned int v = (unsigned int)(z - x * _m);\n        if (_m <= v) v += _m;\n\
+    \        return v;\n    }\n};\n\n// @param n `0 <= n`\n// @param m `1 <= m`\n\
+    // @return `(x ** n) % m`\nconstexpr long long pow_mod_constexpr(long long x,\
+    \ long long n, int m) {\n    if (m == 1) return 0;\n    unsigned int _m = (unsigned\
+    \ int)(m);\n    unsigned long long r = 1;\n    unsigned long long y = safe_mod(x,\
+    \ m);\n    while (n) {\n        if (n & 1) r = (r * y) % _m;\n        y = (y *\
+    \ y) % _m;\n        n >>= 1;\n    }\n    return r;\n}\n\n// Reference:\n// M.\
+    \ Forisek and J. Jancina,\n// Fast Primality Testing for Integers That Fit into\
+    \ a Machine Word\n// @param n `0 <= n`\nconstexpr bool is_prime_constexpr(int\
     \ n) {\n    if (n <= 1) return false;\n    if (n == 2 || n == 7 || n == 61) return\
     \ true;\n    if (n % 2 == 0) return false;\n    long long d = n - 1;\n    while\
     \ (d % 2 == 0) d /= 2;\n    constexpr long long bases[3] = {2, 7, 61};\n    for\
@@ -482,7 +481,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/primitive-root.test.cpp
   requiredBy: []
-  timestamp: '2021-05-18 09:24:09+09:00'
+  timestamp: '2022-08-22 19:21:10+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/primitive-root.test.cpp

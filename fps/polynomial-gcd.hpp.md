@@ -1,18 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     _deprecated_at_docs: docs/fps/polynomial-gcd.md
     document_title: "\u591A\u9805\u5F0FGCD"
@@ -179,7 +179,7 @@ data:
   path: fps/polynomial-gcd.hpp
   requiredBy: []
   timestamp: '2021-01-31 00:21:53+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
 documentation_of: fps/polynomial-gcd.hpp

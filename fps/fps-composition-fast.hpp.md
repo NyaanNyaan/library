@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/simd-montgomery.hpp
     title: modint/simd-montgomery.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modulo/strassen.hpp
     title: modulo/strassen.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     document_title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
     links: []
@@ -452,7 +452,7 @@ data:
     \    fps P, fps Q, int deg = -1) {\n  int N = (deg == -1) ? min(P.size(), Q.size())\
     \ : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n  if (P.size() == 0) {\n\
     \    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0) : Q[0];\n    return R;\n\
-    \  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  int K = max<int>(ceil(sqrt(N)),\
+    \  }\n  if (N == 1) return fps{Q.eval(P[0])};\n  P.resize(N);\n\n  int K = max<int>(ceil(sqrt(N)),\
     \ 2);\n  assert(N <= K * K);\n\n  vector<fps> PS(K + 1);\n  {\n    // step 1\n\
     \    PS[0].resize(N, mint());\n    PS[0][0] = 1;\n    PS[1] = P;\n    fps::set_fft();\n\
     \    if (fps::ntt_ptr == nullptr) {\n      for (int i = 2; i <= K; i++) PS[i]\
@@ -484,15 +484,15 @@ data:
     \  int N = (deg == -1) ? min(P.size(), Q.size()) : deg;\n  if (N == 0) return\
     \ fps{};\n  P.shrink();\n  if (P.size() == 0) {\n    fps R(N, mint(0));\n    R[0]\
     \ = Q.empty() ? mint(0) : Q[0];\n    return R;\n  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\
-    \n  int K = max<int>(ceil(sqrt(N)), 2);\n  assert(N <= K * K);\n\n  vector<fps>\
-    \ PS(K + 1);\n  {\n    // step 1\n    PS[0].resize(N, mint());\n    PS[0][0] =\
-    \ 1;\n    PS[1] = P;\n    fps::set_fft();\n    if (fps::ntt_ptr == nullptr) {\n\
-    \      for (int i = 2; i <= K; i++) PS[i] = (PS[i - 1] * P).pre(N);\n    } else\
-    \ {\n      int len = 1 << (32 - __builtin_clz(2 * N - 2));\n      fps Pomega =\
-    \ P;\n      Pomega.resize(len);\n      Pomega.ntt();\n      for (int i = 2; i\
-    \ <= K; i++) {\n        PS[i].resize(len);\n        for (int j = 0; j < N; j++)\
-    \ PS[i][j] = PS[i - 1][j];\n        PS[i].ntt();\n        for (int j = 0; j <\
-    \ len; j++) PS[i][j] *= Pomega[j];\n        PS[i].intt();\n        PS[i].resize(N);\n\
+    \  P.resize(N);\n\n  int K = max<int>(ceil(sqrt(N)), 2);\n  assert(N <= K * K);\n\
+    \n  vector<fps> PS(K + 1);\n  {\n    // step 1\n    PS[0].resize(N, mint());\n\
+    \    PS[0][0] = 1;\n    PS[1] = P;\n    fps::set_fft();\n    if (fps::ntt_ptr\
+    \ == nullptr) {\n      for (int i = 2; i <= K; i++) PS[i] = (PS[i - 1] * P).pre(N);\n\
+    \    } else {\n      int len = 1 << (32 - __builtin_clz(2 * N - 2));\n      fps\
+    \ Pomega = P;\n      Pomega.resize(len);\n      Pomega.ntt();\n      for (int\
+    \ i = 2; i <= K; i++) {\n        PS[i].resize(len);\n        for (int j = 0; j\
+    \ < N; j++) PS[i][j] = PS[i - 1][j];\n        PS[i].ntt();\n        for (int j\
+    \ = 0; j < len; j++) PS[i][j] *= Pomega[j];\n        PS[i].intt();\n        PS[i].resize(N);\n\
     \        PS[i].shrink_to_fit();\n      }\n    }\n  }\n\n  vector<fps> TS(K);\n\
     \  {\n    // step 2\n    TS[0].resize(N, mint());\n    TS[0][0] = 1;\n    TS[1]\
     \ = PS[K];\n    if (fps::ntt_ptr == nullptr) {\n      for (int i = 2; i < K; i++)\
@@ -517,8 +517,8 @@ data:
   isVerificationFile: false
   path: fps/fps-composition-fast.hpp
   requiredBy: []
-  timestamp: '2021-05-08 13:51:26+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-08-22 19:21:10+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
 documentation_of: fps/fps-composition-fast.hpp
