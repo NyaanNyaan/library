@@ -87,12 +87,12 @@ data:
     \ (State& st : gs) ns.push_back(get_from_state(st));\n    sort(begin(ns), end(ns));\n\
     \    ns.erase(unique(begin(ns), end(ns)), end(ns));\n    for (int i = 0; i < (int)ns.size();\
     \ i++) {\n      if (ns[i] != i) return i;\n    }\n    return ns.size();\n  }\n\
-    };\n\n/**\n * @brief \u975E\u4E0D\u504F\u30B2\u30FC\u30E0\n */"
+    };\n\n/**\n * @brief \u975E\u4E0D\u504F\u30B2\u30FC\u30E0\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: game/impartial-game.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 20:09:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: game/impartial-game.hpp

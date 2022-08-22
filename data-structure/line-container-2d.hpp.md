@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':x:'
     path: data-structure/line-container.hpp
-    title: data-structure/line-container.hpp
+    title: Line container
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
@@ -38,22 +38,23 @@ data:
     \  T query(T x) {\n    assert(!empty());\n    auto l = *lower_bound(x);\n    return\
     \ (l.k * x + l.m) * objective;\n  }\n};\ntemplate <typename T>\nusing MinLineContainer\
     \ = LineContainer<T, Objective::MINIMIZE>;\ntemplate <typename T>\nusing MaxLineContainer\
-    \ = LineContainer<T, Objective::MAXIMIZE>;\n#line 6 \"data-structure/line-container-2d.hpp\"\
-    \n\nstruct LineContainer2D {\n  using ld = long double;\n  using ll = long long;\n\
-    \n  ld Xmax, Xmin, Ymax, Ymin;\n  static constexpr ld INF = 4.1e18;\n  MinLineContainer<ld>\
-    \ minlc;\n  MaxLineContainer<ld> maxlc;\n  LineContainer2D() : Xmax(-INF), Xmin(INF),\
-    \ Ymax(-INF), Ymin(INF) {}\n\n  void add(ld x, ld y) {\n    Xmax = max(Xmax, x),\
-    \ Xmin = min(Xmin, x);\n    Ymax = max(Ymax, y), Ymin = min(Ymin, y);\n    minlc.add(y,\
-    \ x), maxlc.add(y, x);\n  }\n\n  ld max_ld(ld a, ld b) {\n    if (a == 0) return\
-    \ b * (b > 0 ? Ymax : Ymin);\n    if (b == 0) return a * (a > 0 ? Xmax : Xmin);\n\
-    \    ld c = b / a;\n    if (a > 0) {\n      auto l = maxlc.lower_bound(c);\n \
-    \     ld x = l->m, y = l->k;\n      return a * x + b * y;\n    } else {\n    \
-    \  auto l = minlc.lower_bound(c);\n      ld x = -l->m, y = -l->k;\n      return\
-    \ a * x + b * y;\n    }\n  }\n  ld min_ld(ld a, ld b) { return -max_ld(-a, -b);\
-    \ }\n  ll max_ll(ll a, ll b) { return round(clamp<ll>(max_ld(a, b), -INF, INF));\
-    \ }\n  ll min_ll(ll a, ll b) { return round(clamp<ll>(min_ld(a, b), -INF, INF));\
-    \ }\n\n private:\n  ll round(ld a) { return a >= 0.0 ? a + 0.5 : a - 0.5; }\n\
-    };\n\n/**\n * @brief Line container (for max(ax + by) query)\n */\n"
+    \ = LineContainer<T, Objective::MAXIMIZE>;\n\n/**\n * @brief Line container\n\
+    \ */\n#line 6 \"data-structure/line-container-2d.hpp\"\n\nstruct LineContainer2D\
+    \ {\n  using ld = long double;\n  using ll = long long;\n\n  ld Xmax, Xmin, Ymax,\
+    \ Ymin;\n  static constexpr ld INF = 4.1e18;\n  MinLineContainer<ld> minlc;\n\
+    \  MaxLineContainer<ld> maxlc;\n  LineContainer2D() : Xmax(-INF), Xmin(INF), Ymax(-INF),\
+    \ Ymin(INF) {}\n\n  void add(ld x, ld y) {\n    Xmax = max(Xmax, x), Xmin = min(Xmin,\
+    \ x);\n    Ymax = max(Ymax, y), Ymin = min(Ymin, y);\n    minlc.add(y, x), maxlc.add(y,\
+    \ x);\n  }\n\n  ld max_ld(ld a, ld b) {\n    if (a == 0) return b * (b > 0 ? Ymax\
+    \ : Ymin);\n    if (b == 0) return a * (a > 0 ? Xmax : Xmin);\n    ld c = b /\
+    \ a;\n    if (a > 0) {\n      auto l = maxlc.lower_bound(c);\n      ld x = l->m,\
+    \ y = l->k;\n      return a * x + b * y;\n    } else {\n      auto l = minlc.lower_bound(c);\n\
+    \      ld x = -l->m, y = -l->k;\n      return a * x + b * y;\n    }\n  }\n  ld\
+    \ min_ld(ld a, ld b) { return -max_ld(-a, -b); }\n  ll max_ll(ll a, ll b) { return\
+    \ round(clamp<ll>(max_ld(a, b), -INF, INF)); }\n  ll min_ll(ll a, ll b) { return\
+    \ round(clamp<ll>(min_ld(a, b), -INF, INF)); }\n\n private:\n  ll round(ld a)\
+    \ { return a >= 0.0 ? a + 0.5 : a - 0.5; }\n};\n\n/**\n * @brief Line container\
+    \ (for max(ax + by) query)\n */\n"
   code: "#pragma once\n#include <algorithm>\nusing namespace std;\n\n#include \"line-container.hpp\"\
     \n\nstruct LineContainer2D {\n  using ld = long double;\n  using ll = long long;\n\
     \n  ld Xmax, Xmin, Ymax, Ymin;\n  static constexpr ld INF = 4.1e18;\n  MinLineContainer<ld>\
@@ -75,7 +76,7 @@ data:
   isVerificationFile: false
   path: data-structure/line-container-2d.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 20:09:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-2012.test.cpp

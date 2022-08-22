@@ -75,12 +75,12 @@ data:
     \ % u1;\n\n    // |r0| + |m0 * x|\n    // < m0 + m0 * (u1 - 1)\n    // = m0 +\
     \ m0 * m1 / g - m0\n    // = lcm(m0, m1)\n    r0 += x * m0;\n    m0 *= u1;  //\
     \ -> lcm(m0, m1)\n    if (r0 < 0) r0 += m0;\n  }\n  return {r0, m0};\n}\n}  //\
-    \ namespace atcoder"
+    \ namespace atcoder\n"
   dependsOn: []
   isVerificationFile: false
   path: math/crt_i128.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 20:09:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/crt_i128.hpp

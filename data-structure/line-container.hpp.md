@@ -13,6 +13,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
+    document_title: Line container
     links: []
   bundledCode: "#line 2 \"data-structure/line-container.hpp\"\n\n#include <cassert>\n\
     #include <set>\nusing namespace std;\n\nenum Objective {\n  MAXIMIZE = +1,\n \
@@ -36,7 +37,8 @@ data:
     \  T query(T x) {\n    assert(!empty());\n    auto l = *lower_bound(x);\n    return\
     \ (l.k * x + l.m) * objective;\n  }\n};\ntemplate <typename T>\nusing MinLineContainer\
     \ = LineContainer<T, Objective::MINIMIZE>;\ntemplate <typename T>\nusing MaxLineContainer\
-    \ = LineContainer<T, Objective::MAXIMIZE>;\n"
+    \ = LineContainer<T, Objective::MAXIMIZE>;\n\n/**\n * @brief Line container\n\
+    \ */\n"
   code: "#pragma once\n\n#include <cassert>\n#include <set>\nusing namespace std;\n\
     \nenum Objective {\n  MAXIMIZE = +1,\n  MINIMIZE = -1,\n};\n\ntemplate <typename\
     \ T>\nstruct Line {\n  mutable T k, m, p;\n  bool operator<(const Line& o) const\
@@ -58,13 +60,14 @@ data:
     \ y->p) insect(x, erase(y));\n  }\n  T query(T x) {\n    assert(!empty());\n \
     \   auto l = *lower_bound(x);\n    return (l.k * x + l.m) * objective;\n  }\n\
     };\ntemplate <typename T>\nusing MinLineContainer = LineContainer<T, Objective::MINIMIZE>;\n\
-    template <typename T>\nusing MaxLineContainer = LineContainer<T, Objective::MAXIMIZE>;"
+    template <typename T>\nusing MaxLineContainer = LineContainer<T, Objective::MAXIMIZE>;\n\
+    \n/**\n * @brief Line container\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: data-structure/line-container.hpp
   requiredBy:
   - data-structure/line-container-2d.hpp
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 20:09:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yuki/yuki-2012.test.cpp
@@ -73,5 +76,5 @@ layout: document
 redirect_from:
 - /library/data-structure/line-container.hpp
 - /library/data-structure/line-container.hpp.html
-title: data-structure/line-container.hpp
+title: Line container
 ---

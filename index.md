@@ -34,7 +34,7 @@ data:
       title: Line container (for max(ax + by) query)
     - icon: ':x:'
       path: data-structure/line-container.hpp
-      title: data-structure/line-container.hpp
+      title: Line container
     - icon: ':heavy_check_mark:'
       path: data-structure/persistent-array.hpp
       title: "\u6C38\u7D9A\u914D\u5217"
@@ -109,7 +109,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Binary Indexed Tree)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
       title: data-structure-2d/fenwick-tree-on-wavelet-matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -118,7 +118,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure-2d/segment-tree-on-range-tree.hpp
       title: "\u9818\u57DF\u6728(Segment Tree)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure-2d/segment-tree-on-wavelet-matrix.hpp
       title: data-structure-2d/segment-tree-on-wavelet-matrix.hpp
     - icon: ':heavy_check_mark:'
@@ -714,7 +714,7 @@ data:
       path: rbst/rbst-base.hpp
       title: "\u4E71\u629E\u5E73\u8861\u4E8C\u5206\u6728(\u57FA\u5E95\u30AF\u30E9\u30B9\
         )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: rbst/treap.hpp
       title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
   - name: segment-tree
@@ -1275,7 +1275,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1344,16 +1344,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1365,7 +1365,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
       title: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
     - icon: ':heavy_check_mark:'
