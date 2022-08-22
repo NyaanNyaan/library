@@ -159,7 +159,7 @@ data:
       path: fps/dual-fps.hpp
       title: "\u5468\u6CE2\u6570\u9818\u57DF\u3067\u306E\u5024\u3092\u4FDD\u6301\u3059\
         \u308BFPS"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: fps/fast-multieval.hpp
       title: "Multipoint Evaluation(\u9AD8\u901F\u5316\u7248)"
     - icon: ':warning:'
@@ -182,13 +182,13 @@ data:
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-famous-series.hpp
       title: "\u6709\u540D\u306A\u6570\u5217"
     - icon: ':x:'
       path: fps/fps-fraction.hpp
       title: fps/fps-fraction.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
     - icon: ':warning:'
@@ -197,10 +197,10 @@ data:
     - icon: ':x:'
       path: fps/kitamasa.hpp
       title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: fps/mod-pow.hpp
       title: Mod-Pow ($f(x)^k \mod g(x)$)
     - icon: ':question:'
@@ -225,7 +225,7 @@ data:
     - icon: ':question:'
       path: fps/sample-point-shift.hpp
       title: fps/sample-point-shift.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/sum-of-exponential-times-poly.hpp
       title: $\sum_{i}a^i f(i)$
     - icon: ':question:'
@@ -449,7 +449,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: matrix/bitmatrix.hpp
       title: matrix/bitmatrix.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: matrix/black-box-linear-algebra.hpp
       title: Black Box Linear Algebra
     - icon: ':heavy_check_mark:'
@@ -470,7 +470,7 @@ data:
     - icon: ':question:'
       path: matrix/linear-equation.hpp
       title: matrix/linear-equation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: matrix/matrix-fast.hpp
       title: "\u884C\u5217\u30E9\u30A4\u30D6\u30E9\u30EA(std::array\u7248)"
     - icon: ':x:'
@@ -576,7 +576,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/mod-sqrt.hpp
       title: mod sqrt(Tonelli-Shanks algorithm)
     - icon: ':heavy_check_mark:'
@@ -869,7 +869,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/cartesian-tree.hpp
       title: Cartesian Tree
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/centroid-decomposition.hpp
       title: Centroid Decomposition
     - icon: ':heavy_check_mark:'
@@ -882,7 +882,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/euler-tour.hpp
       title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/frequency-table-of-tree-distance.hpp
       title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
     - icon: ':question:'
@@ -1442,22 +1442,22 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
       title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-log.test.cpp
       title: verify/verify-yosupo-fps/yosupo-log.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
       title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
       title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
     - icon: ':x:'
@@ -1466,22 +1466,22 @@ data:
     - icon: ':x:'
       path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
       title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
       title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - name: verify/verify-yosupo-graph
@@ -1501,7 +1501,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
       title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
       title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1566,10 +1566,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     - icon: ':x:'
