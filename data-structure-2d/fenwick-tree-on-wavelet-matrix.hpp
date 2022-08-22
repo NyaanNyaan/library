@@ -1,6 +1,9 @@
 #include <immintrin.h>
 //
 
+
+
+
 struct bit_vector {
   using u32 = uint32_t;
   using i64 = int64_t;
@@ -149,8 +152,8 @@ struct WaveletMatrix {
     return res;
   }
 
-  T sum(S L, S D, S R, S U) const {
-    int l = xid(L), r = xid(R);
-    return sum(l, r, yid(U)) - sum(l, r, yid(D));
+  T sum(S lx, S ly, S rx, S ry) const {
+    int l = xid(lx), r = xid(rx);
+    return sum(l, r, yid(ry)) - sum(l, r, yid(ly));
   }
 };

@@ -38,7 +38,7 @@ struct State {
       } else {
         res += state.ps[n];
       }
-      d = res.first * res.first + res.second * res.second - state.score();
+      d = res.x() * res.x() + res.y() * res.y() - state.score();
     }
     double diff() const { return d; }
   };
@@ -57,9 +57,7 @@ struct State {
     used[b.n] ^= 1;
   }
   void undo(const Diff &) {}
-  score_t score() const {
-    return res.first * res.first + res.second * res.second;
-  }
+  score_t score() const { return res.x() * res.x() + res.y() * res.y(); }
 
   bool operator>(const State &s) { return score() > s.score(); };
   void dump() {}
@@ -88,14 +86,14 @@ double argsort(int N, V<pd> v) {
   }
   N = sz(v);
   sort(all(v), [](pd a, pd b) {
-    return atan2(double(a.second), double(a.first)) <
-           atan2(double(b.second), double(b.first));
+    return atan2(double(a.y()), double(a.x())) <
+           atan2(double(b.y()), double(b.x()));
   });
   double ans = 0;
   rep(i, N) rep(j, N) {
     double cx = 0, cy = 0;
     for (int ii = i;; ii = (ii + 1) % N) {
-      cx += v[ii].first, cy += v[ii].second;
+      cx += v[ii].x(), cy += v[ii].y();
       if (ii == j) break;
     }
     amax(ans, sqrt(cx * cx + cy * cy));
