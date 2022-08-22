@@ -13,7 +13,7 @@
   // "description": "Log output to console"
   // }
   "solve_function": {
-    "prefix": "_sol",
+    "prefix": "_sol_old",
     "body": [
       "#include \"template/template.hpp\"",
       "//",
@@ -26,6 +26,11 @@
     ],
     "description": "solve_function"
   },
+  "sol2": {
+		"prefix": "_sol",
+		"body": "#include \"template/template.hpp\"\r\n//\r\n\r\nusing namespace Nyaan;\r\n\r\nvoid q() {\r\n  $0\r\n}\r\n\r\nvoid Nyaan::solve() {\r\n  int T = 1;\r\n  // in(T);\r\n  while (T--) q();\r\n}",
+		"description": ""
+	},
   "_mint": {
     "prefix": "_mint",
     "body": [

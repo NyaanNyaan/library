@@ -71,7 +71,10 @@
     "iostream": "cpp",
     "limits": "cpp",
     "typeinfo": "cpp",
-    "cassert": "cpp"
+    "cassert": "cpp",
+    "input*": "txt",
+    "output*": "txt",
+    "queue": "cpp"
   },
   "C_Cpp.suggestSnippets": false,
   "python.linting.enabled": true,

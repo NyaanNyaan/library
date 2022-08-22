@@ -123,4 +123,21 @@ struct Binomial {
     return fac(n) * finv(n - r) * finv(r);
   }
   R operator()(int n, int r) { return C(n, r); }
+  template <typename I>
+  R multinomial(const vector<I>& r) {
+    static_assert(is_integral<I>::value == true);
+    int n = 0;
+    for (auto& x : r) {
+      if (x < 0) return R{0};
+      n += x;
+    }
+    R res = fac(n);
+    for (auto& x : r) res *= finv(x);
+    return res;
+  }
+
+  template <typename I>
+  R operator()(const vector<I>& r) {
+    return multinomial(r);
+  }
 };

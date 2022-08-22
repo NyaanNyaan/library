@@ -33,7 +33,7 @@ template <typename mint>
 FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {
   while ((int)C.g.size() < deg) C.extend();
   FormalPowerSeries<mint> ret{begin(C.g), begin(C.g) + deg};
-  return std::move(ret);
+  return ret;
 }
 
 // f *= (1 + c x^n)

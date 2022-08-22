@@ -80,7 +80,7 @@ struct Matrix {
     return false;
   }
 
-  friend ostream &operator<<(ostream &os, Matrix &p) {
+  friend ostream &operator<<(ostream &os,const Matrix &p) {
     for (int i = 0; i < H; i++) {
       os << "[";
       for (int j = 0; j < W; j++) {
