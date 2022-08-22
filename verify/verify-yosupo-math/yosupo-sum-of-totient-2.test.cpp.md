@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: multiplicative-function/sum-of-multiplicative-function.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
   - icon: ':question:'
@@ -325,7 +325,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp

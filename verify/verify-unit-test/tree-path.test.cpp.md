@@ -28,21 +28,21 @@ data:
   - icon: ':question:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/convert-tree.hpp
     title: "\u6839\u4ED8\u304D\u6728\u30FB\u9006\u8FBA\u304B\u3089\u306A\u308B\u6728\
       \u3078\u306E\u5909\u63DB"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/pruefer-code.hpp
     title: Pruefer Code
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/tree-query.hpp
     title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -388,8 +388,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/tree-path.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-08-22 19:46:43+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/tree-path.test.cpp
 layout: document

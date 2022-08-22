@@ -17,10 +17,10 @@ data:
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/enamurate-multiplicative-function.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/mf-famous-series.hpp
     title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
   - icon: ':heavy_check_mark:'
@@ -348,19 +348,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/template.test.cpp
     title: verify/verify-unit-test/template.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/wavelet-matrix.test.cpp
     title: verify/verify-unit-test/wavelet-matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
     title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
   - icon: ':heavy_check_mark:'

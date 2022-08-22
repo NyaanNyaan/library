@@ -249,7 +249,7 @@ data:
   isVerificationFile: false
   path: tree/frequency-table-of-tree-distance.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp

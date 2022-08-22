@@ -386,7 +386,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp

@@ -184,7 +184,7 @@ data:
   - modulo/factorial.hpp
   - fps/find-p-recursive.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/p-recursive.test.cpp

@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: segment-tree/rbst-segment-tree.hpp
     title: RBST-based Dynamic Lazy Segment Tree
   - icon: ':question:'
@@ -415,7 +415,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp

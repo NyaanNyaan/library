@@ -6,7 +6,7 @@ data:
     title: prime/prime-enumerate.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
   - icon: ':x:'
@@ -17,7 +17,7 @@ data:
     title: verify/verify-yuki/yuki-1781.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     _deprecated_at_docs: docs/multiplicative-function/sum-of-multiplicative-function.md
     document_title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
@@ -132,8 +132,8 @@ data:
   isVerificationFile: false
   path: multiplicative-function/sum-of-multiplicative-function.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-08-22 19:46:43+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-yuki/yuki-1781.test.cpp

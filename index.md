@@ -596,13 +596,13 @@ data:
     - icon: ':question:'
       path: multiplicative-function/divisor-multiple-transform.hpp
       title: "\u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/enamurate-multiplicative-function.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
     - icon: ':question:'
       path: multiplicative-function/gcd-convolution.hpp
       title: "GCD\u7573\u307F\u8FBC\u307F"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/mf-famous-series.hpp
       title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
     - icon: ':heavy_check_mark:'
@@ -617,10 +617,10 @@ data:
       path: multiplicative-function/prime-counting.hpp
       title: "\u7D20\u6570\u30AB\u30A6\u30F3\u30C8( $\\mathrm{O}(\\frac{N^{\\frac{3}{4}}}{\\\
         log N})$ )"
-    - icon: ':x:'
+    - icon: ':question:'
       path: multiplicative-function/sum-of-multiplicative-function.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/sum-of-totient.hpp
       title: "\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\u6570\u306E\u548C"
   - name: ntt
@@ -741,7 +741,7 @@ data:
     - icon: ':warning:'
       path: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
       title: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: segment-tree/rbst-segment-tree.hpp
       title: RBST-based Dynamic Lazy Segment Tree
     - icon: ':heavy_check_mark:'
@@ -872,7 +872,7 @@ data:
     - icon: ':x:'
       path: tree/centroid-decomposition.hpp
       title: Centroid Decomposition
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/convert-tree.hpp
       title: "\u6839\u4ED8\u304D\u6728\u30FB\u9006\u8FBA\u304B\u3089\u306A\u308B\u6728\
         \u3078\u306E\u5909\u63DB"
@@ -894,7 +894,7 @@ data:
     - icon: ':warning:'
       path: tree/process-of-merging-tree.hpp
       title: tree/process-of-merging-tree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: tree/pruefer-code.hpp
       title: Pruefer Code
     - icon: ':heavy_check_mark:'
@@ -903,7 +903,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/tree-hash.hpp
       title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: tree/tree-query.hpp
       title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   - name: trial
@@ -1249,13 +1249,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/strassen.test.cpp
       title: verify/verify-unit-test/strassen.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/sum-of-mf.test.cpp
       title: verify/verify-unit-test/sum-of-mf.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/template.test.cpp
       title: verify/verify-unit-test/template.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/tree-path.test.cpp
       title: verify/verify-unit-test/tree-path.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1263,7 +1263,7 @@ data:
       title: verify/verify-unit-test/wavelet-matrix.test.cpp
   - name: verify/verify-yosupo-ds
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
     - icon: ':heavy_check_mark:'

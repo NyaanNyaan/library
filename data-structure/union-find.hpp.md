@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':heavy_check_mark:'

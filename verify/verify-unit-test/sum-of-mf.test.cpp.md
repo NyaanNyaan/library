@@ -7,16 +7,16 @@ data:
   - icon: ':question:'
     path: modulo/binomial.hpp
     title: modulo/binomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/enamurate-multiplicative-function.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/mf-famous-series.hpp
     title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
-  - icon: ':x:'
+  - icon: ':question:'
     path: multiplicative-function/sum-of-multiplicative-function.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/sum-of-totient.hpp
     title: "\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\u6570\u306E\u548C"
   - icon: ':question:'
@@ -42,9 +42,9 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -392,8 +392,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/sum-of-mf.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-08-22 19:46:43+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/sum-of-mf.test.cpp
 layout: document

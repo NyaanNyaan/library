@@ -65,7 +65,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/cartesian-tree.hpp
     title: Cartesian Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/convert-tree.hpp
     title: "\u6839\u4ED8\u304D\u6728\u30FB\u9006\u8FBA\u304B\u3089\u306A\u308B\u6728\
       \u3078\u306E\u5909\u63DB"
@@ -81,7 +81,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/rerooting.hpp
     title: "Rerooting(\u5168\u65B9\u4F4D\u6728DP)"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: tree/tree-query.hpp
     title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedVerifiedWith:
@@ -160,7 +160,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/semiring.test.cpp
     title: verify/verify-unit-test/semiring.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':x:'

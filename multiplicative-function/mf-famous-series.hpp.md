@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/enamurate-multiplicative-function.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
   - icon: ':question:'
@@ -30,12 +30,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/multiplicative-function/mf-famous-series.md
     document_title: "\u6709\u540D\u306A\u4E57\u6CD5\u7684\u95A2\u6570"
@@ -241,7 +241,7 @@ data:
   path: multiplicative-function/mf-famous-series.hpp
   requiredBy: []
   timestamp: '2021-05-04 19:34:35+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/mf.test.cpp

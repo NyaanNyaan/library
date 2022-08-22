@@ -95,7 +95,7 @@ data:
   isVerificationFile: false
   path: game/partisan-game.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: game/partisan-game.hpp

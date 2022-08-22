@@ -24,9 +24,9 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
@@ -334,8 +334,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/template.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-08-22 19:46:43+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/template.test.cpp
 layout: document

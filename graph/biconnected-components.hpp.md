@@ -108,7 +108,7 @@ data:
   path: graph/biconnected-components.hpp
   requiredBy:
   - tree/block-cut-tree.hpp
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-aoj-other/aoj-3022.test.cpp

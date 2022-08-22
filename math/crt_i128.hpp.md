@@ -80,7 +80,7 @@ data:
   isVerificationFile: false
   path: math/crt_i128.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: math/crt_i128.hpp

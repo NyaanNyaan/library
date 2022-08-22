@@ -56,7 +56,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
   - icon: ':x:'
@@ -216,7 +216,7 @@ data:
   - fps/sum-of-exponential-times-poly.hpp
   - fps/lagrange-interpolation-point.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/dual-fps.test.cpp

@@ -78,7 +78,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sum-of-mf.test.cpp
     title: verify/verify-unit-test/sum-of-mf.test.cpp
   - icon: ':heavy_check_mark:'

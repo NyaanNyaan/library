@@ -17,7 +17,7 @@ data:
   - icon: ':x:'
     path: rbst/treap.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: tree/pruefer-code.hpp
     title: Pruefer Code
   _extendedVerifiedWith:
@@ -117,10 +117,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/template.test.cpp
     title: verify/verify-unit-test/template.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/tree-path.test.cpp
     title: verify/verify-unit-test/tree-path.test.cpp
   - icon: ':x:'
@@ -201,7 +201,7 @@ data:
   - prime/fast-factorize.hpp
   - marathon/sa-manager.hpp
   - rbst/treap.hpp
-  timestamp: '2022-08-22 19:21:10+09:00'
+  timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/strassen.test.cpp
