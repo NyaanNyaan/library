@@ -2,12 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: marathon/sa-manager.hpp
     title: Multipoint Simulated Annealing
   - icon: ':heavy_check_mark:'
     path: marathon/simulated-annealing.hpp
     title: Simulated Annealing
+  - icon: ':warning:'
+    path: misc/all.hpp
+    title: misc/all.hpp
   - icon: ':heavy_check_mark:'
     path: trial/fast-gcd.hpp
     title: "\u9AD8\u901FGCD"
@@ -24,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sa-manager.test.cpp
+    title: verify/verify-unit-test/sa-manager.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/simulated-annealing.test.cpp
     title: verify/verify-unit-test/simulated-annealing.test.cpp
@@ -51,12 +57,14 @@ data:
   requiredBy:
   - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
+  - misc/all.hpp
   - marathon/simulated-annealing.hpp
   - marathon/sa-manager.hpp
   timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/sa-manager.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp

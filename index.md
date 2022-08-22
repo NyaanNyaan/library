@@ -365,7 +365,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: marathon/log_table.hpp
       title: marathon/log_table.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: marathon/sa-manager.hpp
       title: Multipoint Simulated Annealing
     - icon: ':heavy_check_mark:'
@@ -488,6 +488,9 @@ data:
       title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
   - name: misc
     pages:
+    - icon: ':warning:'
+      path: misc/all.hpp
+      title: misc/all.hpp
     - icon: ':heavy_check_mark:'
       path: misc/bitset-find-prev.hpp
       title: bitset::find_prev
@@ -1231,6 +1234,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/run-length-encoding.test.cpp
       title: verify/verify-unit-test/run-length-encoding.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/sa-manager.test.cpp
+      title: verify/verify-unit-test/sa-manager.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/segment-set.test.cpp
       title: verify/verify-unit-test/segment-set.test.cpp

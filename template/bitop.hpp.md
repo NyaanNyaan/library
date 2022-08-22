@@ -319,6 +319,9 @@ data:
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sa-manager.test.cpp
+    title: verify/verify-unit-test/sa-manager.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/segment-set.test.cpp
     title: verify/verify-unit-test/segment-set.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1007,6 +1010,7 @@ data:
   - verify/verify-unit-test/wavelet-matrix.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
+  - verify/verify-unit-test/sa-manager.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/int-div.test.cpp

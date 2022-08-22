@@ -290,7 +290,7 @@ data:
     \  wm.build();\n  rep(i, N) { wm.add(X[i], Y[i], W[i]); }\n  rep(i, Q) {\n   \
     \ if (c[i]) {\n      out(wm.sum(s[i], t[i], u[i], v[i]));\n    } else {\n    \
     \  wm.add(s[i], t[i], u[i]);\n    }\n  }\n}\n\nvoid Nyaan::solve() {\n  int T\
-    \ = 1;\n\n  // in(T);\n\n  while (T--) q();\n}"
+    \ = 1;\n\n  // in(T);\n\n  while (T--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -303,7 +303,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 23:51:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp

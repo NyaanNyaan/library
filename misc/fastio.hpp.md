@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: misc/all.hpp
+    title: misc/all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
@@ -307,7 +310,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: misc/fastio.hpp
-  requiredBy: []
+  requiredBy:
+  - misc/all.hpp
   timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

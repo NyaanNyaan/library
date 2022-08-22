@@ -8,10 +8,13 @@ data:
     path: misc/timer.hpp
     title: misc/timer.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sa-manager.test.cpp
+    title: verify/verify-unit-test/sa-manager.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     _deprecated_at_docs: docs/marathon/sa-manager.md
     document_title: Multipoint Simulated Annealing
@@ -198,8 +201,9 @@ data:
   path: marathon/sa-manager.hpp
   requiredBy: []
   timestamp: '2022-08-22 19:46:43+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-unit-test/sa-manager.test.cpp
 documentation_of: marathon/sa-manager.hpp
 layout: document
 redirect_from:

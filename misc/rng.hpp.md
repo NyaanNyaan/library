@@ -2,12 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: marathon/sa-manager.hpp
     title: Multipoint Simulated Annealing
   - icon: ':heavy_check_mark:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
+  - icon: ':warning:'
+    path: misc/all.hpp
+    title: misc/all.hpp
   - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
@@ -99,6 +102,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sa-manager.test.cpp
+    title: verify/verify-unit-test/sa-manager.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/segment-set.test.cpp
     title: verify/verify-unit-test/segment-set.test.cpp
@@ -199,12 +205,14 @@ data:
   - modulo/mod-kth-root.hpp
   - matrix/black-box-linear-algebra.hpp
   - prime/fast-factorize.hpp
+  - misc/all.hpp
   - marathon/sa-manager.hpp
   - rbst/treap.hpp
   timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/sa-manager.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
