@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: matrix/characteristric-polynomial.hpp
     title: matrix/characteristric-polynomial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':question:'

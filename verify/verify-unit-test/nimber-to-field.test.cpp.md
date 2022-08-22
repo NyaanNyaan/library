@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/garner.hpp
     title: Garner's algorithm
   - icon: ':heavy_check_mark:'
     path: math/nimber-to-field.hpp
     title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/nimber.hpp
     title: Nim Product
   - icon: ':heavy_check_mark:'

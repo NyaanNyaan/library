@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/enumerate-quotient.hpp
     title: "\u5546\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':question:'

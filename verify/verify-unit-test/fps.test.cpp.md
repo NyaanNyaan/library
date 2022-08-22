@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
   - icon: ':question:'
@@ -434,18 +434,20 @@ data:
     \  } while (f.back() == 0 or g.back() == 0);\n\n  auto q = f / g;\n  auto r =\
     \ f % g;\n  assert(g * q + r == f);\n  assert(r.size() < g.size());\n}\n\nvoid\
     \ test_pow(int n, int deg) {\n  trc(\"test pow\", n, deg);\n  assert(n > 0 &&\
-    \ deg > 0);\n  fps f(n);\n  each(x, f) x = rng();\n\n  int r = randint(0, 100);\n\
-    \n  fps g = f.pow(r, deg);\n  fps h(deg);\n  h[0] = 1;\n  while (r) {\n    if\
-    \ (r & 1) h = (f * h).pre(deg);\n    f = (f * f).pre(deg);\n    r >>= 1;\n  }\n\
-    \  assert(g == h);\n}\n\nvoid test_exp(int n, int deg) {\n  trc(\"test exp\",\
-    \ n, deg);\n  assert(n > 0 and deg > 0);\n  fps f(n);\n  each(x, f) x = rng();\n\
-    \  f[0] = 1;\n\n  fps g = f.log(deg);\n  fps h = g.exp(deg);\n  f.resize(deg);\n\
-    \  assert(f == h);\n}\n\nvoid test_inv(int n, int deg) {\n  trc(\"test inv\");\n\
-    \  assert(n > 0 and deg > 0);\n  fps f(n);\n  each(x, f) x = rng();\n  while (f[0]\
-    \ == 0) f[0] = rng();\n\n  fps g = f.inv(deg);\n  fps h = g.inv(deg);\n  f.resize(deg);\n\
-    \  assert(f == h);\n}\n\nvoid Nyaan::solve() {\n  rep1(i, 100) rep1(j, 100) {\n\
-    \    test_div(i, j);\n    test_pow(i, j);\n    test_exp(i, j);\n    test_inv(i,\
-    \ j);\n  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ deg > 0);\n  fps f(n);\n  each(x, f) x = rng();\n  int r = randint(0, 100);\n\
+    \  fps g = f.pow(r, deg);\n  fps h(deg), base(f);\n  h[0] = 1;\n  for (int e =\
+    \ r; e; e >>= 1) {\n    if (e & 1) h = (base * h).pre(deg);\n    base = (base\
+    \ * base).pre(deg);\n  }\n  if (g != h) {\n    trc(f, r, deg);\n    trc(g);\n\
+    \    trc(h);\n  }\n  assert(g == h);\n}\n\nvoid test_exp(int n, int deg) {\n \
+    \ trc(\"test exp\", n, deg);\n  assert(n > 0 and deg > 0);\n  fps f(n);\n  each(x,\
+    \ f) x = rng();\n  f[0] = 1;\n\n  fps g = f.log(deg);\n  fps h = g.exp(deg);\n\
+    \  f.resize(deg);\n  assert(f == h);\n}\n\nvoid test_inv(int n, int deg) {\n \
+    \ trc(\"test inv\");\n  assert(n > 0 and deg > 0);\n  fps f(n);\n  each(x, f)\
+    \ x = rng();\n  while (f[0] == 0) f[0] = rng();\n\n  fps g = f.inv(deg);\n  fps\
+    \ h = g.inv(deg);\n  f.resize(deg);\n  assert(f == h);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  rep1(i, 100) rep1(j, 100) {\n    test_div(i, j);\n    test_pow(i, j);\n\
+    \    test_exp(i, j);\n    test_inv(i, j);\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
+    \  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
     \n#include \"../../modint/montgomery-modint.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
@@ -456,18 +458,19 @@ data:
     \ == 0 or g.back() == 0);\n\n  auto q = f / g;\n  auto r = f % g;\n  assert(g\
     \ * q + r == f);\n  assert(r.size() < g.size());\n}\n\nvoid test_pow(int n, int\
     \ deg) {\n  trc(\"test pow\", n, deg);\n  assert(n > 0 && deg > 0);\n  fps f(n);\n\
-    \  each(x, f) x = rng();\n\n  int r = randint(0, 100);\n\n  fps g = f.pow(r, deg);\n\
-    \  fps h(deg);\n  h[0] = 1;\n  while (r) {\n    if (r & 1) h = (f * h).pre(deg);\n\
-    \    f = (f * f).pre(deg);\n    r >>= 1;\n  }\n  assert(g == h);\n}\n\nvoid test_exp(int\
-    \ n, int deg) {\n  trc(\"test exp\", n, deg);\n  assert(n > 0 and deg > 0);\n\
-    \  fps f(n);\n  each(x, f) x = rng();\n  f[0] = 1;\n\n  fps g = f.log(deg);\n\
-    \  fps h = g.exp(deg);\n  f.resize(deg);\n  assert(f == h);\n}\n\nvoid test_inv(int\
-    \ n, int deg) {\n  trc(\"test inv\");\n  assert(n > 0 and deg > 0);\n  fps f(n);\n\
-    \  each(x, f) x = rng();\n  while (f[0] == 0) f[0] = rng();\n\n  fps g = f.inv(deg);\n\
-    \  fps h = g.inv(deg);\n  f.resize(deg);\n  assert(f == h);\n}\n\nvoid Nyaan::solve()\
-    \ {\n  rep1(i, 100) rep1(j, 100) {\n    test_div(i, j);\n    test_pow(i, j);\n\
-    \    test_exp(i, j);\n    test_inv(i, j);\n  }\n\n  int a, b;\n  cin >> a >> b;\n\
-    \  cout << a + b << endl;\n}\n"
+    \  each(x, f) x = rng();\n  int r = randint(0, 100);\n  fps g = f.pow(r, deg);\n\
+    \  fps h(deg), base(f);\n  h[0] = 1;\n  for (int e = r; e; e >>= 1) {\n    if\
+    \ (e & 1) h = (base * h).pre(deg);\n    base = (base * base).pre(deg);\n  }\n\
+    \  if (g != h) {\n    trc(f, r, deg);\n    trc(g);\n    trc(h);\n  }\n  assert(g\
+    \ == h);\n}\n\nvoid test_exp(int n, int deg) {\n  trc(\"test exp\", n, deg);\n\
+    \  assert(n > 0 and deg > 0);\n  fps f(n);\n  each(x, f) x = rng();\n  f[0] =\
+    \ 1;\n\n  fps g = f.log(deg);\n  fps h = g.exp(deg);\n  f.resize(deg);\n  assert(f\
+    \ == h);\n}\n\nvoid test_inv(int n, int deg) {\n  trc(\"test inv\");\n  assert(n\
+    \ > 0 and deg > 0);\n  fps f(n);\n  each(x, f) x = rng();\n  while (f[0] == 0)\
+    \ f[0] = rng();\n\n  fps g = f.inv(deg);\n  fps h = g.inv(deg);\n  f.resize(deg);\n\
+    \  assert(f == h);\n}\n\nvoid Nyaan::solve() {\n  rep1(i, 100) rep1(j, 100) {\n\
+    \    test_div(i, j);\n    test_pow(i, j);\n    test_exp(i, j);\n    test_inv(i,\
+    \ j);\n  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -483,7 +486,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/fps.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 22:01:20+09:00'
+  timestamp: '2022-08-22 22:39:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/fps.test.cpp

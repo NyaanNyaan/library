@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/sum-of-floor.hpp
     title: math/sum-of-floor.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':question:'

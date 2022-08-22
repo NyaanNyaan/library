@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure-2d/segment-tree-on-wavelet-matrix.hpp
     title: data-structure-2d/segment-tree-on-wavelet-matrix.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':question:'

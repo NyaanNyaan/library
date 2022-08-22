@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/interval-union.hpp
     title: "\u533A\u9593\u306E\u96C6\u5408\u306E\u76F4\u548C"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':question:'
