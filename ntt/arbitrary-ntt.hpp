@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../modint/montgomery-modint.hpp"
-#include "./ntt.hpp"
+#include "./ntt-avx2.hpp"
 
 namespace ArbitraryNTT {
 using i64 = int64_t;

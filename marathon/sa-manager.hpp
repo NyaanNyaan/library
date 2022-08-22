@@ -1,12 +1,12 @@
-#pragma once
+#pragma once 
 
 #include <cassert>
 #include <iostream>
 #include <vector>
 using namespace std;
 
-#include "../misc/rng.hpp"
-#include "../misc/timer.hpp"
+#include "misc/rng.hpp"
+#include "misc/timer.hpp"
 
 template <typename state_t, typename score_t>
 struct SA_manager {
@@ -52,8 +52,8 @@ struct SA_manager {
   // 焼きなましで持つ状態の個数の max を代入する関数
   void set_state_size() {
     double passed_time = max(0., cur_time - start_time);
-    double n = 1.0 - max(0.0, passed_time * inv_time * 1.05 - 0.05);
-    state_size = int(max(1., state_max * n) + 0.5);
+    double n = 1.0 - passed_time * inv_time;
+    state_size = llround(max(1., state_max * n));
   }
 
   // update すべきかどうかのしきい値を計算する
@@ -61,50 +61,17 @@ struct SA_manager {
 
  public:
   using pair_t = pair<state_t, score_t>;
-  long long iter = 0, loop_count = 0;
+  long long iter = 0;
   vector<pair_t> states;
 
-#ifdef NyaanLocal
+#ifdef NyaanDebug
 #define debug true
 #else
 #define debug false
 #endif
 
-  void dump() {
-    // 重いので適宜コメントアウトする
-    /**/
-    if constexpr (debug) {
-      if ((loop_count & 0x3FFF) == 0) {
-        if (loop_count == 0) {
-          cerr << "     iter | ";
-          cerr << "    loops | ";
-          cerr << "   time | ";
-          cerr << "  cur temp | ";
-          cerr << "size | ";
-          cerr << "      cur score | ";
-          cerr << endl;
-        }
-        cerr << setprecision(3);
-        cerr << setw(9) << iter << " | ";
-        cerr << setw(9) << loop_count << " | ";
-        cerr << setw(7) << int(cur_time) << " | ";
-        cerr << setw(10) << cur_temp << " | ";
-        cerr << setw(4) << states.size() << " | ";
-        auto comp_pair = [](const pair_t& lhs, const pair_t& rhs) {
-          return lhs.second > rhs.second;
-        };
-        sort(begin(states), end(states), comp_pair);
-        for (int i = 0; i < min<int>(states.size(), 5); i++) {
-          cerr << " " << setw(14) << states[i].second << " | ";
-        }
-        cerr << endl;
-      }
-    }
-    //*/
-  }
-
   template <pair_t (*get_init_state)(),
-            void (*update_state)(state_t&, score_t&, double)>
+            pair_t (*update_state)(const state_t&, const score_t&)>
   pair_t run() {
     auto comp_pair = [](const pair_t& lhs, const pair_t& rhs) {
       return lhs.second > rhs.second;
@@ -120,42 +87,56 @@ struct SA_manager {
     // 時間・温度の初期化
     init_time(), set_temp();
     if constexpr (debug) cerr << "SA start   : " << int(cur_time) << endl;
-    if (end_time <= cur_time) return states[0];
+    if (end_time <= start_time) return states[0];
 
-    iter = loop_count = 0;
-    state_size = state_max;  // 現在の states のサイズ
-    constexpr int L = 256;
-
-    while (state_size != 1) {
-      if ((loop_count & (L - 1)) == 0) {
-        set_time();
-        if (cur_time >= end_time) break;
-        set_temp();
+    // iteration を行う
+    iter = 0;                  // update を行った回数
+    state_size = state_max;    // 現在の states のサイズ
+    long long loop_count = 0;  // 外側の loop をカウント
+    bool end_flag = false;     // loop の終了条件
+    for (; !end_flag; loop_count++) {
+      // 暫定スコアを出力。重いので適宜コメントアウトしてよい
+      /**/
+      if constexpr (debug) {
+        if ((loop_count & 0xFFFF) == 0) {
+          if (loop_count == 0) {
+            cerr << "iter     | ";
+            cerr << "loops    | ";
+            cerr << "cur_time | ";
+            cerr << "cur_temp   | ";
+            cerr << "size | ";
+            cerr << "cur_score       | ";
+            cerr << endl;
+          }
+          cerr << setprecision(3);
+          cerr << setw(8) << iter << " | ";
+          cerr << setw(8) << loop_count << " | ";
+          cerr << setw(8) << int(cur_time) << " | ";
+          cerr << setw(10) << cur_temp << " | ";
+          cerr << setw(4) << states.size() << " | ";
+          sort(begin(states), end(states), comp_pair);
+          for (int i = 0; i < min<int>(states.size(), 3); i++) {
+            cerr << " " << setw(14) << states[i].second << " | ";
+          }
+          cerr << endl;
+        }
       }
-      dump();
-      loop_count++;
+      //*/
       for (auto& state : states) {
-        iter++;
-        double thresfold = get_thresfold();
-        update_state(state.first, state.second, thresfold);
+        if ((iter++ & 0xFF) == 0) {
+          set_time(), set_temp();
+          if (cur_time >= end_time) end_flag = true;
+          if (end_flag) break;
+        }
+        pair_t nxt = update_state(state.first, state.second);
+        score_t diff = nxt.second - state.second;
+        if (diff > get_thresfold()) state = nxt;
       }
       set_state_size();
       while (state_size < (int)states.size()) {
         sort(begin(states), end(states), comp_pair);
         states.pop_back();
       }
-    }
-    loop_count &= ~(L - 1);
-    while (true) {
-      set_time();
-      if (cur_time >= end_time) break;
-      set_temp();
-      dump();
-      for (int t = 0; t < L; t++) {
-        double thresfold = get_thresfold();
-        update_state(states[0].first, states[0].second, thresfold);
-      }
-      loop_count += L, iter += L;
     }
     sort(begin(states), end(states), comp_pair);
     if constexpr (debug) {
@@ -180,7 +161,7 @@ struct SA_manager {
         cur_temp(_start_temp),
         state_max(_state_max),
         state_size(_state_max) {
-    assert(_start_temp >= _end_temp);
+    assert(_start_temp > _end_temp);
     assert(_state_max > 0);
   }
 };
