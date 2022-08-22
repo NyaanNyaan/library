@@ -1,3 +1,3 @@
-exclude: ['ahc.py', 'atcoder', 'bundle.py','competitive-template.hpp', 'compress.py', 'unused','modulo/arbitrary-mod-binomial-large.hpp']
+exclude: ['ahc.py', 'atcoder', 'bundle.py','competitive-template.hpp', 'compress.py', 'unused','modulo/arbitrary-mod-binomial-large.hpp', 'auto_submit.py', 'simple_template.hpp']
 title: Nyaan's Library
 theme: jekyll-theme-hacker
