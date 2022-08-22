@@ -368,7 +368,13 @@ struct RBSTLazySegmentTree {
   }
 
   // 範囲作用
-  void apply(I l, I r, const E &e) { _apply(root, l, r, e); }
+  void apply(I l, I r, const E &e) {
+    // _apply(root, l, r, e);
+    auto [x, yz] = split_left(root, l);
+    auto [y, z] = split_left(yz, r);
+    propagate(y, e);
+    root = merge(merge(x, y), z);
+  }
 
   // 範囲取得
   T fold(I l, I r) { return _fold(root, l, r); }
