@@ -79,34 +79,36 @@ data:
     \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
     \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
-    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
-    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
-    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
-    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
-    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
-    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
-    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
-    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
-    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
-    \ @docs docs/fps/formal-power-series.md\n */\n#line 2 \"modulo/binomial.hpp\"\n\
-    \ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int\
-    \ MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1,\
-    \ T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n    while (MAX >= (int)f.size())\
-    \ extend();\n  }\n\n  void extend() {\n    int n = f.size();\n    int m = n *\
-    \ 2;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n;\
-    \ i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n  \
-    \  h[m - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n \
-    \     g[i] = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\
-    \n  T fac(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)f.size())\
-    \ extend();\n    return f[i];\n  }\n\n  T finv(int i) {\n    if (i < 0) return\
-    \ T(0);\n    while (i >= (int)g.size()) extend();\n    return g[i];\n  }\n\n \
-    \ T inv(int i) {\n    if (i < 0) return -inv(-i);\n    while (i >= (int)h.size())\
-    \ extend();\n    return h[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 ||\
-    \ n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n \
-    \ }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\n  template <typename\
-    \ I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ deg = n;\n    if (k == 0) {\n      FPS ret(n);\n      if (n) ret[0] = 1;\n \
+    \     return ret;\n    }\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i]\
+    \ != mint(0)) {\n        if (max<int64_t>(k, i * k) >= deg) return FPS(deg, mint(0));\n\
+    \        mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this * rev) >>\
+    \ i).log(deg) * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n        ret =\
+    \ (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg,\
+    \ mint(0));\n        return ret;\n      }\n      if (max<int64_t>(k, i * k) >=\
+    \ deg) return FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n\
+    \  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS\
+    \ &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n\
+    \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
+    \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
+    \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
+    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 2 \"\
+    modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial {\n  vector<T>\
+    \ f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\"\
+    );\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n \
+    \   while (MAX >= (int)f.size()) extend();\n  }\n\n  void extend() {\n    int\
+    \ n = f.size();\n    int m = n * 2;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n\
+    \    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m -\
+    \ 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2;\
+    \ i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i -\
+    \ 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n    while\
+    \ (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int i) {\n\
+    \    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n    return\
+    \ g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n    while (i\
+    \ >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int n, int r) {\n\
+    \    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r)\
+    \ * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\
+    \n  template <typename I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
     \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
     \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
     \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
@@ -178,7 +180,7 @@ data:
   isVerificationFile: false
   path: fps/partial-fraction-decomposition.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 21:35:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp

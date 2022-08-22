@@ -182,13 +182,13 @@ data:
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: fps/fps-famous-series.hpp
       title: "\u6709\u540D\u306A\u6570\u5217"
     - icon: ':x:'
       path: fps/fps-fraction.hpp
       title: fps/fps-fraction.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
     - icon: ':warning:'
@@ -200,7 +200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: fps/mod-pow.hpp
       title: Mod-Pow ($f(x)^k \mod g(x)$)
     - icon: ':question:'
@@ -449,7 +449,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: matrix/bitmatrix.hpp
       title: matrix/bitmatrix.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: matrix/black-box-linear-algebra.hpp
       title: Black Box Linear Algebra
     - icon: ':heavy_check_mark:'
@@ -576,7 +576,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: modulo/mod-sqrt.hpp
       title: mod sqrt(Tonelli-Shanks algorithm)
     - icon: ':heavy_check_mark:'
@@ -1144,7 +1144,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fast-inv-gcd.test.cpp
       title: verify/verify-unit-test/fast-inv-gcd.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-unit-test/fps.test.cpp
       title: verify/verify-unit-test/fps.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1466,13 +1466,13 @@ data:
     - icon: ':x:'
       path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
       title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
       title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1481,7 +1481,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - name: verify/verify-yosupo-graph
@@ -1569,7 +1569,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     - icon: ':x:'

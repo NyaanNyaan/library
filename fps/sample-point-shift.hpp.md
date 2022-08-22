@@ -25,7 +25,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - icon: ':x:'
@@ -118,28 +118,30 @@ data:
     \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
     \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
-    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
-    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
-    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
-    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
-    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
-    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
-    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
-    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
-    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
-    \ @docs docs/fps/formal-power-series.md\n */\n#line 5 \"fps/sample-point-shift.hpp\"\
-    \n\n// input : y(0), y(1), ..., y(n - 1)\n// output : y(t), y(t + 1), ..., y(t\
-    \ + m - 1)\n// (if m is default, m = n)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ SamplePointShift(FormalPowerSeries<mint>& y, mint t,\n                     \
-    \                    int m = -1) {\n  if (m == -1) m = y.size();\n  long long\
-    \ T = t.get();\n  int k = (int)y.size() - 1;\n  T %= mint::get_mod();\n  if (T\
-    \ <= k) {\n    FormalPowerSeries<mint> ret(m);\n    int ptr = 0;\n    for (int64_t\
-    \ i = T; i <= k and ptr < m; i++) {\n      ret[ptr++] = y[i];\n    }\n    if (k\
-    \ + 1 < T + m) {\n      auto suf = SamplePointShift<mint>(y, k + 1, m - ptr);\n\
-    \      for (int i = k + 1; i < T + m; i++) {\n        ret[ptr++] = suf[i - (k\
-    \ + 1)];\n      }\n    }\n    return ret;\n  }\n  if (T + m > mint::get_mod())\
+    \ deg = n;\n    if (k == 0) {\n      FPS ret(n);\n      if (n) ret[0] = 1;\n \
+    \     return ret;\n    }\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i]\
+    \ != mint(0)) {\n        if (max<int64_t>(k, i * k) >= deg) return FPS(deg, mint(0));\n\
+    \        mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this * rev) >>\
+    \ i).log(deg) * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n        ret =\
+    \ (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg,\
+    \ mint(0));\n        return ret;\n      }\n      if (max<int64_t>(k, i * k) >=\
+    \ deg) return FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n\
+    \  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS\
+    \ &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n\
+    \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
+    \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
+    \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
+    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 5 \"\
+    fps/sample-point-shift.hpp\"\n\n// input : y(0), y(1), ..., y(n - 1)\n// output\
+    \ : y(t), y(t + 1), ..., y(t + m - 1)\n// (if m is default, m = n)\ntemplate <typename\
+    \ mint>\nFormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>& y,\
+    \ mint t,\n                                         int m = -1) {\n  if (m ==\
+    \ -1) m = y.size();\n  long long T = t.get();\n  int k = (int)y.size() - 1;\n\
+    \  T %= mint::get_mod();\n  if (T <= k) {\n    FormalPowerSeries<mint> ret(m);\n\
+    \    int ptr = 0;\n    for (int64_t i = T; i <= k and ptr < m; i++) {\n      ret[ptr++]\
+    \ = y[i];\n    }\n    if (k + 1 < T + m) {\n      auto suf = SamplePointShift<mint>(y,\
+    \ k + 1, m - ptr);\n      for (int i = k + 1; i < T + m; i++) {\n        ret[ptr++]\
+    \ = suf[i - (k + 1)];\n      }\n    }\n    return ret;\n  }\n  if (T + m > mint::get_mod())\
     \ {\n    auto pref = SamplePointShift<mint>(y, T, mint::get_mod() - T);\n    auto\
     \ suf = SamplePointShift<mint>(y, 0, m - pref.size());\n    copy(begin(suf), end(suf),\
     \ back_inserter(pref));\n    return pref;\n  }\n\n  FormalPowerSeries<mint> finv(k\
@@ -184,7 +186,7 @@ data:
   - modulo/factorial.hpp
   - fps/find-p-recursive.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 21:35:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/p-recursive.test.cpp

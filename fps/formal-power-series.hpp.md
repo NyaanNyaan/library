@@ -27,10 +27,10 @@ data:
     path: fps/fps-composition.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-famous-series.hpp
     title: "\u6709\u540D\u306A\u6570\u5217"
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: fps/fps-sqrt.hpp
     title: "\u5E73\u65B9\u6839"
   - icon: ':warning:'
@@ -39,7 +39,7 @@ data:
   - icon: ':x:'
     path: fps/kitamasa.hpp
     title: "\u7DDA\u5F62\u6F38\u5316\u5F0F\u306E\u9AD8\u901F\u8A08\u7B97"
-  - icon: ':question:'
+  - icon: ':x:'
     path: fps/mod-pow.hpp
     title: Mod-Pow ($f(x)^k \mod g(x)$)
   - icon: ':question:'
@@ -70,7 +70,7 @@ data:
   - icon: ':question:'
     path: fps/utility.hpp
     title: fps/utility.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
   - icon: ':x:'
@@ -90,7 +90,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dual-fps.test.cpp
     title: verify/verify-unit-test/dual-fps.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
@@ -153,19 +153,19 @@ data:
   - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - icon: ':x:'
@@ -286,18 +286,20 @@ data:
     \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
     \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
-    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
-    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
-    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
-    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
-    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
-    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
-    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
-    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
-    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
-    \ @docs docs/fps/formal-power-series.md\n */\n"
+    \ deg = n;\n    if (k == 0) {\n      FPS ret(n);\n      if (n) ret[0] = 1;\n \
+    \     return ret;\n    }\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i]\
+    \ != mint(0)) {\n        if (max<int64_t>(k, i * k) >= deg) return FPS(deg, mint(0));\n\
+    \        mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this * rev) >>\
+    \ i).log(deg) * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n        ret =\
+    \ (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg,\
+    \ mint(0));\n        return ret;\n      }\n      if (max<int64_t>(k, i * k) >=\
+    \ deg) return FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n\
+    \  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS\
+    \ &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n\
+    \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
+    \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
+    \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
+    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n"
   code: "#pragma once\n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint>\
     \ {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS\
     \ &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
@@ -350,18 +352,20 @@ data:
     \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
     \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
-    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
-    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
-    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
-    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
-    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
-    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
-    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
-    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
-    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
-    \ @docs docs/fps/formal-power-series.md\n */\n"
+    \ deg = n;\n    if (k == 0) {\n      FPS ret(n);\n      if (n) ret[0] = 1;\n \
+    \     return ret;\n    }\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i]\
+    \ != mint(0)) {\n        if (max<int64_t>(k, i * k) >= deg) return FPS(deg, mint(0));\n\
+    \        mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this * rev) >>\
+    \ i).log(deg) * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n        ret =\
+    \ (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg,\
+    \ mint(0));\n        return ret;\n      }\n      if (max<int64_t>(k, i * k) >=\
+    \ deg) return FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n\
+    \  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS\
+    \ &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n\
+    \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
+    \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
+    \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
+    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: fps/formal-power-series.hpp
@@ -393,7 +397,7 @@ data:
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/black-box-linear-algebra.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
-  timestamp: '2021-01-31 00:21:53+09:00'
+  timestamp: '2022-08-22 21:35:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-unit-test/dual-fps.test.cpp

@@ -241,64 +241,67 @@ data:
     \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
     \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
-    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
-    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
-    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
-    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
-    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
-    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
-    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
-    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
-    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
-    \ @docs docs/fps/formal-power-series.md\n */\n#line 2 \"fps/fps-composition.hpp\"\
-    \n\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial\
-    \ {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
-    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
-    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
-    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
-    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
-    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
-    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
-    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
-    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
-    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
-    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
-    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
-    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
-    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
-    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
-    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
-    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
-    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
-    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
-    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
-    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
-    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
-    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"fps/fps-composition.hpp\"\
-    \n\n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ Composition(FormalPowerSeries<mint> P,\n                                   \
-    \ FormalPowerSeries<mint> Q,\n                                    Binomial<mint>&\
-    \ C, int deg = -1) {\n  using fps = FormalPowerSeries<mint>;\n  int N = (deg ==\
-    \ -1) ? min(P.size(), Q.size()) : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n\
-    \  if (P.size() == 0) {\n    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0)\
-    \ : Q[0];\n    return R;\n  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  P.resize(N,\
-    \ mint(0));\n  Q.resize(N, mint(0));\n  int M = max<int>(1, sqrt(N / log2(N)));\n\
-    \  int L = (N + M - 1) / M;\n  fps Pm = fps{begin(P), begin(P) + M};\n  fps Pr\
-    \ = fps{begin(P) + M, end(P)};\n\n  int J = 31 - __builtin_clz(N - 1) + 1;\n \
-    \ vector<fps> pms(J);\n  pms[0] = Pm;\n  for (int i = 1; i < J; i++) pms[i] =\
-    \ (pms[i - 1] * pms[i - 1]).pre(N);\n\n  auto comp = [&](auto rec, int left, int\
-    \ j) -> fps {\n    if (j == 1) {\n      mint Q1 = left + 0 < (int)Q.size() ? Q[left\
-    \ + 0] : mint(0);\n      mint Q2 = left + 1 < (int)Q.size() ? Q[left + 1] : mint(0);\n\
-    \      return (pms[0].pre(N) * Q2 + Q1).pre(N);\n    }\n    if (N <= left) return\
-    \ fps{};\n    fps Q1 = rec(rec, left, j - 1);\n    fps Q2 = rec(rec, left + (1\
-    \ << (j - 1)), j - 1);\n    return (Q1 + pms[j - 1].pre(N) * Q2).pre(N);\n  };\n\
-    \n  fps QPm = comp(comp, 0, J);\n  fps R = QPm;\n  fps pw_Pr{mint(1)};\n  fps\
-    \ dPm = Pm.diff();\n  dPm.shrink();\n  // if dPm[0] == 0, dPm.inv() is undefined\n\
-    \  int deg_dPm = 0;\n  while (deg_dPm != (int)dPm.size() && dPm[deg_dPm] == mint(0))\
+    \ deg = n;\n    if (k == 0) {\n      FPS ret(n);\n      if (n) ret[0] = 1;\n \
+    \     return ret;\n    }\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i]\
+    \ != mint(0)) {\n        if (max<int64_t>(k, i * k) >= deg) return FPS(deg, mint(0));\n\
+    \        mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this * rev) >>\
+    \ i).log(deg) * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n        ret =\
+    \ (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg,\
+    \ mint(0));\n        return ret;\n      }\n      if (max<int64_t>(k, i * k) >=\
+    \ deg) return FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n\
+    \  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS\
+    \ &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n\
+    \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
+    \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
+    \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
+    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 2 \"\
+    fps/fps-composition.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename\
+    \ T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n   \
+    \ assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n\
+    \    g.resize(1, T{1});\n    h.resize(1, T{1});\n    while (MAX >= (int)f.size())\
+    \ extend();\n  }\n\n  void extend() {\n    int n = f.size();\n    int m = n *\
+    \ 2;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n;\
+    \ i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n  \
+    \  h[m - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n \
+    \     g[i] = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\
+    \n  T fac(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)f.size())\
+    \ extend();\n    return f[i];\n  }\n\n  T finv(int i) {\n    if (i < 0) return\
+    \ T(0);\n    while (i >= (int)g.size()) extend();\n    return g[i];\n  }\n\n \
+    \ T inv(int i) {\n    if (i < 0) return -inv(-i);\n    while (i >= (int)h.size())\
+    \ extend();\n    return h[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 ||\
+    \ n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n \
+    \ }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\n  template <typename\
+    \ I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
+    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
+    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
+    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n\
+    \    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n\
+    \  }\n};\n#line 5 \"fps/fps-composition.hpp\"\n\n// find Q(P(x)) mod x ^ min(deg(P),\
+    \ deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint> Composition(FormalPowerSeries<mint>\
+    \ P,\n                                    FormalPowerSeries<mint> Q,\n       \
+    \                             Binomial<mint>& C, int deg = -1) {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  int N = (deg == -1) ? min(P.size(), Q.size())\
+    \ : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n  if (P.size() == 0) {\n\
+    \    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0) : Q[0];\n    return R;\n\
+    \  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  P.resize(N, mint(0));\n  Q.resize(N,\
+    \ mint(0));\n  int M = max<int>(1, sqrt(N / log2(N)));\n  int L = (N + M - 1)\
+    \ / M;\n  fps Pm = fps{begin(P), begin(P) + M};\n  fps Pr = fps{begin(P) + M,\
+    \ end(P)};\n\n  int J = 31 - __builtin_clz(N - 1) + 1;\n  vector<fps> pms(J);\n\
+    \  pms[0] = Pm;\n  for (int i = 1; i < J; i++) pms[i] = (pms[i - 1] * pms[i -\
+    \ 1]).pre(N);\n\n  auto comp = [&](auto rec, int left, int j) -> fps {\n    if\
+    \ (j == 1) {\n      mint Q1 = left + 0 < (int)Q.size() ? Q[left + 0] : mint(0);\n\
+    \      mint Q2 = left + 1 < (int)Q.size() ? Q[left + 1] : mint(0);\n      return\
+    \ (pms[0].pre(N) * Q2 + Q1).pre(N);\n    }\n    if (N <= left) return fps{};\n\
+    \    fps Q1 = rec(rec, left, j - 1);\n    fps Q2 = rec(rec, left + (1 << (j -\
+    \ 1)), j - 1);\n    return (Q1 + pms[j - 1].pre(N) * Q2).pre(N);\n  };\n\n  fps\
+    \ QPm = comp(comp, 0, J);\n  fps R = QPm;\n  fps pw_Pr{mint(1)};\n  fps dPm =\
+    \ Pm.diff();\n  dPm.shrink();\n  // if dPm[0] == 0, dPm.inv() is undefined\n \
+    \ int deg_dPm = 0;\n  while (deg_dPm != (int)dPm.size() && dPm[deg_dPm] == mint(0))\
     \ deg_dPm++;\n  fps idPm = dPm.empty() ? fps{} : (dPm >> deg_dPm).inv(N);\n\n\
     \  for (int l = 1, d = M; l <= L && d < N; l++, d += M) {\n    pw_Pr = (pw_Pr\
     \ * Pr).pre(N - d);\n    if (dPm.empty()) {\n      R += (pw_Pr * Q[l]) << d;\n\
@@ -547,7 +550,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-08-22 21:35:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-composition.test.cpp

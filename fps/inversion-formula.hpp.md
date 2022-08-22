@@ -65,31 +65,33 @@ data:
     \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
     \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
     \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0))\
-    \ {\n        if (i * k > deg) return FPS(deg, mint(0));\n        mint rev = mint(1)\
-    \ / (*this)[i];\n        FPS ret =\n            (((*this * rev) >> i).log(deg)\
-    \ * k).exp(deg) * ((*this)[i].pow(k));\n        ret = (ret << (i * k)).pre(deg);\n\
-    \        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return\
-    \ ret;\n      }\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n\
-    \  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n \
-    \ void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int\
-    \ deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\n\
-    void *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\u9805\
-    \u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n *\
-    \ @docs docs/fps/formal-power-series.md\n */\n#line 4 \"fps/inversion-formula.hpp\"\
-    \n\ntemplate <typename mint>\nFormalPowerSeries<mint> n2_inv(const FormalPowerSeries<mint>&\
-    \ f) {\n  assert(f.empty() == false && f[0] != mint(0));\n  int n = f.size();\n\
-    \  mint if0 = f[0].inverse();\n  FormalPowerSeries<mint> g(n);\n  g[0] = if0;\n\
-    \  for (int k = 1; k < n; k++) {\n    for (int i = 0; i < k; i++) g[k] += g[i]\
-    \ * f[k - i];\n    g[k] *= -if0;\n  }\n  return g;\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> n2_log(const FormalPowerSeries<mint>& f) {\n  assert(f.empty()\
-    \ == false && f[0] == 1);\n  int n = f.size(), mod = mint::get_mod();\n\n  static\
-    \ vector<mint> invs{mint(1), mint(1)};\n  while ((int)invs.size() <= n) {\n  \
-    \  int i = invs.size();\n    invs.push_back((-invs[mod % i]) * (mod / i));\n \
-    \ }\n\n  FormalPowerSeries<mint> g(n);\n  for (int k = 0; k < n - 1; k++) {\n\
-    \    for (int i = 0; i < k; i++) g[k + 1] -= g[i + 1] * f[k - i] * (i + 1);\n\
-    \    g[k + 1] *= invs[k + 1];\n    g[k + 1] += f[k + 1];\n  }\n  return g;\n}\n\
-    \ntemplate <typename mint>\nFormalPowerSeries<mint> n2_exp(const FormalPowerSeries<mint>&\
+    \ deg = n;\n    if (k == 0) {\n      FPS ret(n);\n      if (n) ret[0] = 1;\n \
+    \     return ret;\n    }\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i]\
+    \ != mint(0)) {\n        if (max<int64_t>(k, i * k) >= deg) return FPS(deg, mint(0));\n\
+    \        mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this * rev) >>\
+    \ i).log(deg) * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n        ret =\
+    \ (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg,\
+    \ mint(0));\n        return ret;\n      }\n      if (max<int64_t>(k, i * k) >=\
+    \ deg) return FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n\
+    \  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS\
+    \ &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n\
+    \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
+    \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
+    \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
+    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 4 \"\
+    fps/inversion-formula.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ n2_inv(const FormalPowerSeries<mint>& f) {\n  assert(f.empty() == false && f[0]\
+    \ != mint(0));\n  int n = f.size();\n  mint if0 = f[0].inverse();\n  FormalPowerSeries<mint>\
+    \ g(n);\n  g[0] = if0;\n  for (int k = 1; k < n; k++) {\n    for (int i = 0; i\
+    \ < k; i++) g[k] += g[i] * f[k - i];\n    g[k] *= -if0;\n  }\n  return g;\n}\n\
+    \ntemplate <typename mint>\nFormalPowerSeries<mint> n2_log(const FormalPowerSeries<mint>&\
+    \ f) {\n  assert(f.empty() == false && f[0] == 1);\n  int n = f.size(), mod =\
+    \ mint::get_mod();\n\n  static vector<mint> invs{mint(1), mint(1)};\n  while ((int)invs.size()\
+    \ <= n) {\n    int i = invs.size();\n    invs.push_back((-invs[mod % i]) * (mod\
+    \ / i));\n  }\n\n  FormalPowerSeries<mint> g(n);\n  for (int k = 0; k < n - 1;\
+    \ k++) {\n    for (int i = 0; i < k; i++) g[k + 1] -= g[i + 1] * f[k - i] * (i\
+    \ + 1);\n    g[k + 1] *= invs[k + 1];\n    g[k + 1] += f[k + 1];\n  }\n  return\
+    \ g;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> n2_exp(const FormalPowerSeries<mint>&\
     \ f) {\n  assert(f.empty() == false && f[0] == 0);\n  int n = f.size(), mod =\
     \ mint::get_mod();\n\n  static vector<mint> invs{mint(1), mint(1)};\n  while ((int)invs.size()\
     \ <= n) {\n    int i = invs.size();\n    invs.push_back((-invs[mod % i]) * (mod\
@@ -131,7 +133,7 @@ data:
   isVerificationFile: false
   path: fps/inversion-formula.hpp
   requiredBy: []
-  timestamp: '2021-03-04 10:35:44+09:00'
+  timestamp: '2022-08-22 21:35:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: fps/inversion-formula.hpp
