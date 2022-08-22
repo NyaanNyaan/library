@@ -277,6 +277,7 @@
 "verify/verify-yuki/yuki-0502.test.cpp": "2022-08-22 22:01:20 +0900",
 "verify/verify-yuki/yuki-0697.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yuki/yuki-0720.test.cpp": "2022-08-22 22:01:20 +0900",
+"verify/verify-yuki/yuki-0789.test.cpp": "2022-08-23 00:54:36 +0900",
 "verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp": "2021-12-30 19:20:16 +0900",
 "verify/verify-yuki/yuki-0879.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yuki/yuki-0880.test.cpp": "2021-05-04 19:34:35 +0900",
