@@ -64,3 +64,7 @@ template <typename T>
 using MinLineContainer = LineContainer<T, Objective::MINIMIZE>;
 template <typename T>
 using MaxLineContainer = LineContainer<T, Objective::MAXIMIZE>;
+
+/**
+ * @brief Line container
+ */
