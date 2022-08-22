@@ -59,7 +59,6 @@ struct RBSTLazySegmentTree {
 
   Ptr update(Ptr t) {
     if (!t) return t;
-    //push(t);
     t->cnt = 1;
     t->sum = t->key;
     if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);
@@ -155,6 +154,25 @@ struct RBSTLazySegmentTree {
       r = f(t->key, r);
       return f(_fold_right(t->l, l), r);
     }
+  }
+
+  void _apply(Ptr t, I l, I r, const E &e) {
+    if (!t) return;
+    push(t);
+    if (t->index < l) {
+      _apply(t->r, l, r, e);
+      update(t);
+      return;
+    }
+    if (r <= t->index) {
+      _apply(t->l, l, r, e);
+      update(t);
+      return;
+    }
+    t->key = g(t->key, e);
+    if (t->index != l) _apply(t->l, l, t->index, e);
+    _apply(t->r, t->index, r, e);
+    update(t);
   }
 
   T _fold(Ptr t, I l, I r) {
@@ -282,6 +300,13 @@ struct RBSTLazySegmentTree {
     if (t->r) inner_dump(t->r);
   }
 
+  void inner_make_array(Ptr t, vector<pair<I, T>> &v) {
+    push(t);
+    if (t->l) inner_make_array(t->l, v);
+    v.emplace_back(t->index, t->key);
+    if (t->r) inner_make_array(t->r, v);
+  }
+
  public:
   Ptr root;
 
@@ -343,22 +368,13 @@ struct RBSTLazySegmentTree {
   }
 
   // 範囲作用
-  void apply(I l, I r, const E &e) {
-    auto [x, aux] = split_left(root, l);
-    auto [y, z] = split_left(aux, r);
-    propagate(y, e);
-    root = merge(merge(x, y), z);
-  }
+  void apply(I l, I r, const E &e) { _apply(root, l, r, e); }
 
   // 範囲取得
-  T fold(I l, I r) {
-    return _fold(root, l, r);
-    // auto [x, aux] = split_left(root, l);
-    // auto [y, z] = split_left(aux, r);
-    // T res = y ? y->sum : ti();
-    // root = merge(merge(x, y), z);
-    // return res;
-  }
+  T fold(I l, I r) { return _fold(root, l, r); }
+
+  // index 最大を取得
+  I max_index(I failed = -1) { return _max_index(root, failed); }
 
   // n 未満の i のうち、[i, n) の区間 fold が true になる最小の i は何か？
   // (存在しない場合は failed を返す)
@@ -405,6 +421,13 @@ struct RBSTLazySegmentTree {
   }
 
   void dump() { inner_dump(root); }
+
+  // 列を配列に変換して返す
+  vector<pair<I, T>> make_array() {
+    vector<pair<I, T>> res;
+    inner_make_array(root, res);
+    return res;
+  }
 };
 
 namespace RBSTSegmentTreeImpl {

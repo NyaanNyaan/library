@@ -45,6 +45,27 @@ if proc.returncode != 0:
   exit(1)
 src = proc.stdout.decode("utf-8")
 lines = src.split('\n')
+debug_flag = False
+debug_ifdef_flag = False
 for line in lines:
+  # namespace DebugImpl を適切に削除
+  if re.search('namespace DebugImpl', line):
+    debug_flag = not debug_flag
+    continue
+
+  # define trc からはじまる行を適切に置換
+  if re.search('define trc', line):
+    if re.search('void', line) == None:
+      assert debug_ifdef_flag == False
+      debug_ifdef_flag = True
+      continue
+  if debug_ifdef_flag == True and re.search('while', line):
+    assert debug_ifdef_flag == True
+    debug_ifdef_flag = False
+    print('#define trc(...) (void(0))')
+    continue
+
+  if debug_flag == True or debug_ifdef_flag == True:
+    continue
   if not re.match('^#line', line):
     print(line, end='')

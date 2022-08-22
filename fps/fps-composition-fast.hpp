@@ -17,6 +17,7 @@ __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) fps Composition(
     return R;
   }
   if (N == 1) return fps{Q.eval(P[0])};
+  P.resize(N);
 
   int K = max<int>(ceil(sqrt(N)), 2);
   assert(N <= K * K);
