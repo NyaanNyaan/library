@@ -18,12 +18,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1786.test.cpp
     title: verify/verify-yuki/yuki-1786.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: RBST-based Dynamic Lazy Segment Tree
     links: []
@@ -371,7 +371,7 @@ data:
   path: segment-tree/rbst-segment-tree.hpp
   requiredBy: []
   timestamp: '2022-08-22 20:44:10+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp

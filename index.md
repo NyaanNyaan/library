@@ -29,10 +29,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: data-structure/hash-map-variable-length.hpp
       title: "Hash Map(\u53EF\u5909\u9577\u7248)"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/line-container-2d.hpp
       title: Line container (for max(ax + by) query)
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: data-structure/line-container.hpp
       title: Line container
     - icon: ':heavy_check_mark:'
@@ -741,7 +741,7 @@ data:
     - icon: ':warning:'
       path: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
       title: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/rbst-segment-tree.hpp
       title: RBST-based Dynamic Lazy Segment Tree
     - icon: ':heavy_check_mark:'
@@ -843,22 +843,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1865,13 +1865,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1781.test.cpp
       title: verify/verify-yuki/yuki-1781.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1786.test.cpp
       title: verify/verify-yuki/yuki-1786.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1789.test.cpp
       title: verify/verify-yuki/yuki-1789.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-2012.test.cpp
       title: verify/verify-yuki/yuki-2012.test.cpp
     - icon: ':heavy_check_mark:'
