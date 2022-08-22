@@ -2,19 +2,19 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ntt/cooley-tukey-ntt.hpp
     title: Cooley-Tukey FFT Algorithm
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ntt/rader-ntt.hpp
     title: Rader's FFT Algorithm
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u539F\u59CB\u6839"
     links: []
@@ -45,7 +45,7 @@ data:
   - ntt/cooley-tukey-ntt.hpp
   - ntt/rader-ntt.hpp
   timestamp: '2021-02-27 00:51:38+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
 documentation_of: math/primitive-root.hpp

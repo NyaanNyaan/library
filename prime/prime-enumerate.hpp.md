@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: multiplicative-function/enamurate-multiplicative-function.hpp
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: multiplicative-function/gcd-convolution.hpp
     title: "GCD\u7573\u307F\u8FBC\u307F"
   - icon: ':heavy_check_mark:'
@@ -37,16 +37,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - icon: ':x:'

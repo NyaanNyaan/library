@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
     title: modint/arbitrary-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
   - icon: ':question:'

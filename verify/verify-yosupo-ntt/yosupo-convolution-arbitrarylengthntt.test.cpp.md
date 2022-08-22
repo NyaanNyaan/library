@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: math/primitive-root.hpp
     title: "\u539F\u59CB\u6839"
   - icon: ':question:'
@@ -13,13 +13,13 @@ data:
   - icon: ':question:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ntt/cooley-tukey-ntt.hpp
     title: Cooley-Tukey FFT Algorithm
   - icon: ':question:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ntt/rader-ntt.hpp
     title: Rader's FFT Algorithm
   - icon: ':question:'
@@ -42,9 +42,9 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
@@ -494,7 +494,7 @@ data:
   path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   requiredBy: []
   timestamp: '2022-08-22 19:46:43+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
 layout: document

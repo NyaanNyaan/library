@@ -182,13 +182,13 @@ data:
       path: fps/fps-composition.hpp
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-famous-series.hpp
       title: "\u6709\u540D\u306A\u6570\u5217"
     - icon: ':x:'
       path: fps/fps-fraction.hpp
       title: fps/fps-fraction.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
     - icon: ':warning:'
@@ -200,7 +200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/lagrange-interpolation-point.hpp
       title: fps/lagrange-interpolation-point.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: fps/mod-pow.hpp
       title: Mod-Pow ($f(x)^k \mod g(x)$)
     - icon: ':question:'
@@ -412,7 +412,7 @@ data:
     - icon: ':question:'
       path: math/nimber.hpp
       title: Nim Product
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: math/primitive-root.hpp
       title: "\u539F\u59CB\u6839"
     - icon: ':heavy_check_mark:'
@@ -449,7 +449,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: matrix/bitmatrix.hpp
       title: matrix/bitmatrix.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: matrix/black-box-linear-algebra.hpp
       title: Black Box Linear Algebra
     - icon: ':heavy_check_mark:'
@@ -526,13 +526,13 @@ data:
       title: misc/vector-pool.hpp
   - name: modint
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/arbitrary-modint.hpp
       title: modint/arbitrary-modint.hpp
     - icon: ':question:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/barrett-reduction.hpp
       title: modint/barrett-reduction.hpp
     - icon: ':warning:'
@@ -547,7 +547,7 @@ data:
     - icon: ':question:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/simd-montgomery.hpp
       title: modint/simd-montgomery.hpp
     - icon: ':heavy_check_mark:'
@@ -567,16 +567,16 @@ data:
     - icon: ':warning:'
       path: modulo/fastpow.hpp
       title: modulo/fastpow.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/gauss-elimination-fast.hpp
       title: modulo/gauss-elimination-fast.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: modulo/mod-kth-root.hpp
       title: kth root(Tonelli-Shanks algorithm)
     - icon: ':heavy_check_mark:'
       path: modulo/mod-log.hpp
       title: modulo/mod-log.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modulo/mod-sqrt.hpp
       title: mod sqrt(Tonelli-Shanks algorithm)
     - icon: ':heavy_check_mark:'
@@ -599,7 +599,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: multiplicative-function/enamurate-multiplicative-function.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: multiplicative-function/gcd-convolution.hpp
       title: "GCD\u7573\u307F\u8FBC\u307F"
     - icon: ':heavy_check_mark:'
@@ -637,7 +637,7 @@ data:
     - icon: ':x:'
       path: ntt/convolution-large.hpp
       title: ntt/convolution-large.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: ntt/cooley-tukey-ntt.hpp
       title: Cooley-Tukey FFT Algorithm
     - icon: ':heavy_check_mark:'
@@ -661,7 +661,7 @@ data:
     - icon: ':question:'
       path: ntt/ntt.hpp
       title: ntt/ntt.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: ntt/rader-ntt.hpp
       title: Rader's FFT Algorithm
     - icon: ':heavy_check_mark:'
@@ -1460,19 +1460,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
       title: verify/verify-yosupo-fps/yosupo-multieval.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
       title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
       title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1481,7 +1481,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - name: verify/verify-yosupo-graph
@@ -1569,19 +1569,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
       title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
       title: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1593,16 +1593,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
       title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
       title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
       title: verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1626,7 +1626,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
       title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1638,7 +1638,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
       title: verify/verify-yosupo-math/yosupo-sum-of-floor.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1658,10 +1658,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-2-64-karatsuba.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-2-64-karatsuba.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
     - icon: ':x:'

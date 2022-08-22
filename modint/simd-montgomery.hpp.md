@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modulo/gauss-elimination-fast.hpp
     title: modulo/gauss-elimination-fast.hpp
   - icon: ':heavy_check_mark:'
@@ -27,16 +27,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
     title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - icon: ':heavy_check_mark:'
@@ -48,9 +48,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/simd-montgomery.hpp\"\n\n#include <immintrin.h>\n\
@@ -137,7 +137,7 @@ data:
   - ntt/ntt-avx2.hpp
   - fps/fps-composition-fast.hpp
   timestamp: '2021-04-26 16:30:13+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp

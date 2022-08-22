@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
     title: modint/arbitrary-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -21,12 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/barrett-reduction.hpp\"\n\n#include <utility>\nusing\
@@ -62,7 +62,7 @@ data:
   - modulo/arbitrary-mod-binomial.hpp
   - modint/arbitrary-modint.hpp
   timestamp: '2022-02-08 14:09:38+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp

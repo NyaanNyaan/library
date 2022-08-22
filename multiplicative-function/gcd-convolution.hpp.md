@@ -9,15 +9,15 @@ data:
     title: prime/prime-enumerate.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0886.test.cpp
     title: verify/verify-yuki/yuki-0886.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "GCD\u7573\u307F\u8FBC\u307F"
     links: []
@@ -78,7 +78,7 @@ data:
   path: multiplicative-function/gcd-convolution.hpp
   requiredBy: []
   timestamp: '2020-12-05 08:35:39+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
