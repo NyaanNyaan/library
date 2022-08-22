@@ -1,3 +1,4 @@
+
 #include <immintrin.h>
 //
 
@@ -35,53 +36,65 @@ struct bit_vector {
   }
 };
 
-template <typename S, typename T>
+template <typename S, typename T, T (*f)(T, T), T (*I)()>
 struct WaveletMatrix {
   using u32 = uint32_t;
   using i64 = int64_t;
   using u64 = uint64_t;
 
-  struct BIT {
-    u32 N;
+  struct SegTree {
+    int N;
+    int size;
     vector<T> data;
 
-    BIT() = default;
-    BIT(int size) { init(size); }
+    SegTree(int _n) { init(_n); }
 
-    void init(int size) {
-      N = size;
-      data.assign(N + 1, 0);
+    void init(int _N) {
+      N = _N;
+      size = 1;
+      while (size < N) size <<= 1;
+      data.assign(2 * size, I());
     }
 
-    __attribute__((target("bmi"))) void add(u32 k, T x) {
-      for (++k; k <= N; k += _blsi_u32(k)) data[k] += x;
-    }
+    void set(int k, T x) { data[k + size] = x; }
 
-    __attribute__((target("bmi"))) T sum(u32 k) const {
-      T ret = T();
-      for (; k; k = _blsr_u32(k)) ret += data[k];
-      return ret;
-    }
-
-    __attribute__((target("bmi"))) T sum(int l, int r) const {
-      T ret = T();
-      while (l != r) {
-        if (l < r) {
-          ret += data[r];
-          r = _blsr_u32(r);
-        } else {
-          ret -= data[l];
-          l = _blsr_u32(l);
-        }
+    void build() {
+      for (int k = size - 1; k > 0; k--) {
+        data[k] = f(data[2 * k], data[2 * k + 1]);
       }
-      return ret;
+    }
+
+    void update(int k, T x) {
+      k += size;
+      data[k] = x;
+      while (k >>= 1) {
+        data[k] = f(data[2 * k], data[2 * k + 1]);
+      }
+    }
+
+    void add(int k, T x) {
+      k += size;
+      data[k] += x;
+      while (k >>= 1) {
+        data[k] = f(data[2 * k], data[2 * k + 1]);
+      }
+    }
+
+    // query to [a, b)
+    T query(int a, int b) const {
+      T L = I(), R = I();
+      for (a += size, b += size; a < b; a >>= 1, b >>= 1) {
+        if (a & 1) L = f(L, data[a++]);
+        if (b & 1) R = f(data[--b], R);
+      }
+      return f(L, R);
     }
   };
 
   using P = pair<S, S>;
   int n, lg;
   vector<bit_vector> bv;
-  vector<BIT> bit;
+  vector<SegTree> seg;
   vector<P> ps;
   vector<S> ys;
 
@@ -92,7 +105,7 @@ struct WaveletMatrix {
     ys.emplace_back(y);
   }
 
-  __attribute__((optimize("O3"))) void build() {
+  void build() {
     sort(begin(ps), end(ps));
     ps.erase(unique(begin(ps), end(ps)), end(ps));
     n = ps.size();
@@ -102,7 +115,7 @@ struct WaveletMatrix {
     for (int i = 0; i < n; ++i) cur[i] = yid(ps[i].second);
     lg = __lg(max(n, 1)) + 1;
     bv.assign(lg, n);
-    bit.assign(lg, n);
+    seg.assign(lg, n);
     for (int h = lg - 1; h >= 0; --h) {
       for (int i = 0; i < n; ++i)
         if ((cur[i] >> h) & 1) bv[h].set(i);
@@ -130,16 +143,16 @@ struct WaveletMatrix {
         i += bv[h].zeros - i0;
       else
         i = i0;
-      bit[h].add(i, val);
+      seg[h].add(i, val);
     }
   }
 
   T sum(int l, int r, u32 upper) const {
-    T res = 0;
+    T res = I();
     for (int h = lg; h--;) {
       int l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);
       if ((upper >> h) & 1) {
-        res += bit[h].sum(l0, r0);
+        res = f(res, seg[h].query(l0, r0));
         l += bv[h].zeros - l0;
         r += bv[h].zeros - r0;
       } else {

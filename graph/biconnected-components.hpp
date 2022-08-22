@@ -24,7 +24,7 @@ struct BiConnectedComponents : LowLink<G> {
     for (auto &to : this->g[idx]) {
       if (to == par) continue;
       if (!used[to] || this->ord[to] < this->ord[idx]) {
-        tmp.emplace_back(minmax(idx, to));
+        tmp.emplace_back(minmax<int>(idx, to));
       }
       if (!used[to]) {
         dfs(to, idx);
@@ -34,7 +34,7 @@ struct BiConnectedComponents : LowLink<G> {
             auto e = tmp.back();
             bc.back().emplace_back(e);
             tmp.pop_back();
-            if (e.first == min(idx, to) && e.second == max(idx, to)) {
+            if (e.first == min<int>(idx, to) && e.second == max<int>(idx, to)) {
               break;
             }
           }

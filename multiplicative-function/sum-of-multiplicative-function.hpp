@@ -125,7 +125,6 @@ struct mf_prefix_sum {
     return ans;
   }
 
- private:
   i64 md(i64 n, i64 d) { return double(n) / d; }
   i64 idx(i64 n) { return n <= sq ? s - n : md(M, n); }
   void set_buf(vector<T>& _buf) { swap(buf, _buf); }

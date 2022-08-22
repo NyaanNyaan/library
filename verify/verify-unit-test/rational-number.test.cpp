@@ -35,6 +35,7 @@ void Nyaan::solve() {
   assert(C.fac(3) == 6);
   assert(C.finv(3) == Rational(1, 6));
   assert(C(4, 2) == 6);
+  assert(C(vi{3, 2}) == 10);
   trc("OK");
 
   {

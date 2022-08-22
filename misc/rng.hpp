@@ -1,53 +1,53 @@
 #pragma once
 
 namespace my_rand {
+using i64 = long long;
+using u64 = unsigned long long;
 
 // [0, 2^64 - 1)
-uint64_t rng() {
-  static uint64_t x_ =
-      uint64_t(chrono::duration_cast<chrono::nanoseconds>(
-                   chrono::high_resolution_clock::now().time_since_epoch())
-                   .count()) *
+u64 rng() {
+  static u64 _x =
+      u64(chrono::duration_cast<chrono::nanoseconds>(
+              chrono::high_resolution_clock::now().time_since_epoch())
+              .count()) *
       10150724397891781847ULL;
-  x_ ^= x_ << 7;
-  return x_ ^= x_ >> 9;
+  _x ^= _x << 7;
+  return _x ^= _x >> 9;
+}
+
+// [l, r]
+i64 rng(i64 l, i64 r) {
+  assert(l <= r);
+  return l + rng() % (r - l + 1);
 }
 
 // [l, r)
-int64_t randint(int64_t l, int64_t r) {
+i64 randint(i64 l, i64 r) {
   assert(l < r);
   return l + rng() % (r - l);
 }
 
 // choose n numbers from [l, r) without overlapping
-vector<int64_t> randset(int64_t l, int64_t r, int64_t n) {
+vector<i64> randset(i64 l, i64 r, i64 n) {
   assert(l <= r && n <= r - l);
-  unordered_set<int64_t> s;
-  for (int64_t i = n; i; --i) {
-    int64_t m = randint(l, r + 1 - i);
+  unordered_set<i64> s;
+  for (i64 i = n; i; --i) {
+    i64 m = randint(l, r + 1 - i);
     if (s.find(m) != s.end()) m = r - i;
     s.insert(m);
   }
-  vector<int64_t> ret;
+  vector<i64> ret;
   for (auto& x : s) ret.push_back(x);
   return ret;
 }
 
 // [0.0, 1.0)
-double rnd() {
-  union raw_cast {
-    double t;
-    uint64_t u;
-  };
-  constexpr uint64_t p = uint64_t(1023 - 64) << 52;
-  return rng() * ((raw_cast*)(&p))->t;
-}
+double rnd() { return rng() * 5.42101086242752217004e-20; }
 
 template <typename T>
 void randshf(vector<T>& v) {
   int n = v.size();
-  for (int loop = 0; loop < 2; loop++)
-    for (int i = 0; i < n; i++) swap(v[i], v[randint(0, n)]);
+  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);
 }
 
 }  // namespace my_rand

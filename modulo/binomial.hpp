@@ -3,7 +3,11 @@
 template <typename T>
 struct Binomial {
   vector<T> f, g, h;
-  Binomial(int MAX = 0) : f(1, T(1)), g(1, T(1)), h(1, T(1)) {
+  Binomial(int MAX = 0) {
+    assert(T::get_mod() != 0 && "Binomial<mint>()");
+    f.resize(1, T{1});
+    g.resize(1, T{1});
+    h.resize(1, T{1});
     while (MAX >= (int)f.size()) extend();
   }
 
@@ -52,7 +56,7 @@ struct Binomial {
     static_assert(is_integral<I>::value == true);
     int n = 0;
     for (auto& x : r) {
-      if(x < 0) return T(0);
+      if (x < 0) return T(0);
       n += x;
     }
     T res = fac(n);
