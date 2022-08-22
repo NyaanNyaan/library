@@ -17,7 +17,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: set-function/xor-convolution.hpp
     title: XOR Convoluion
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: template/template.hpp
     title: template/template.hpp
   _extendedVerifiedWith:
@@ -352,6 +352,9 @@ data:
     path: verify/verify-unit-test/wavelet-matrix.test.cpp
     title: verify/verify-unit-test/wavelet-matrix.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-associative-array-dynamic-segtree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-associative-array-dynamic-segtree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
     title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -418,6 +421,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
     title: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-add-range-sum-dynamic-segtree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-add-range-sum-dynamic-segtree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -439,6 +445,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -459,6 +468,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
@@ -834,7 +846,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0720.test.cpp
     title: verify/verify-yuki/yuki-0720.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: verify/verify-yuki/yuki-0789.test.cpp
     title: verify/verify-yuki/yuki-0789.test.cpp
   - icon: ':heavy_check_mark:'
@@ -945,9 +957,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
@@ -1049,7 +1061,7 @@ data:
   - multiplicative-function/enamurate-multiplicative-function.hpp
   - template/template.hpp
   timestamp: '2021-04-26 17:20:14+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
@@ -1185,8 +1197,10 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-range-sum-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
@@ -1219,6 +1233,8 @@ data:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-associative-array-dynamic-segtree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp

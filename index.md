@@ -725,9 +725,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: segment-tree/dynamic-li-chao-tree.hpp
       title: segment-tree/dynamic-li-chao-tree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: segment-tree/dynamic-segment-tree.hpp
-      title: segment-tree/dynamic-segment-tree.hpp
+      title: Dynamic Segment Tree
     - icon: ':heavy_check_mark:'
       path: segment-tree/lazy-segment-tree-utility.hpp
       title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\
@@ -846,22 +846,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1270,6 +1270,9 @@ data:
   - name: verify/verify-yosupo-ds
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-associative-array-dynamic-segtree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-associative-array-dynamic-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1336,6 +1339,9 @@ data:
       path: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
       title: verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-point-add-range-sum-dynamic-segtree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-add-range-sum-dynamic-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-range-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1357,6 +1363,9 @@ data:
       path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1377,6 +1386,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
@@ -1772,7 +1784,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0720.test.cpp
       title: verify/verify-yuki/yuki-0720.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: verify/verify-yuki/yuki-0789.test.cpp
       title: verify/verify-yuki/yuki-0789.test.cpp
     - icon: ':heavy_check_mark:'
