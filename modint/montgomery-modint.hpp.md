@@ -72,7 +72,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -360,9 +360,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1781.test.cpp
     title: verify/verify-yuki/yuki-1781.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t\
@@ -447,7 +447,7 @@ data:
   - fps/fps-composition-fast.hpp
   - tree/frequency-table-of-tree-distance.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp

@@ -17,13 +17,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/mo.hpp
     title: Mo's algorithm
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -35,22 +35,22 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []

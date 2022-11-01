@@ -3,7 +3,7 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -24,9 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1786.test.cpp
     title: verify/verify-yuki/yuki-1786.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: RBST-based Dynamic Lazy Segment Tree
     links: []
@@ -495,7 +495,7 @@ data:
   path: segment-tree/rbst-segment-tree.hpp
   requiredBy: []
   timestamp: '2022-11-01 22:31:56+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1786.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp

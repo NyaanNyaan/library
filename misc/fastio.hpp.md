@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: misc/all.hpp
     title: misc/all.hpp
   _extendedVerifiedWith:
@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -219,9 +219,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n\n#include <cstring>\n#include <type_traits>\n\
@@ -316,7 +316,7 @@ data:
   requiredBy:
   - misc/all.hpp
   timestamp: '2021-11-14 23:34:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp

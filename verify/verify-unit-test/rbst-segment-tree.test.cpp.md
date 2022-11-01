@@ -1,75 +1,79 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: math/affine-transformation.hpp
     title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: misc/all.hpp
     title: misc/all.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/lazy-segment-tree.hpp
     title: segment-tree/lazy-segment-tree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: segment-tree/rbst-segment-tree.hpp
     title: RBST-based Dynamic Lazy Segment Tree
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/debug.hpp
     title: template/debug.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/inout.hpp
     title: template/inout.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/macro.hpp
     title: template/macro.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/template.hpp
     title: template/template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    links:
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
@@ -185,7 +189,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
     \n//\n#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\ntemplate <typename I,\
     \ typename T, typename E, T (*f)(T, T), T (*g)(T, E),\n          E (*h)(E, E),\
     \ T (*ti)(), E (*ei)()>\nstruct RBSTLazySegmentTree {\n  struct Node {\n    Node\
@@ -415,7 +419,7 @@ data:
     \ T, T (*f)(T, T), T (*ti)()>\nusing RBSTSegmentTree =\n    RBSTLazySegmentTree<I,\
     \ T, bool, f, nullptr, nullptr, ti, ei>;\n}  // namespace RBSTSegmentTreeImpl\n\
     using RBSTSegmentTreeImpl::RBSTSegmentTree;\n\n/**\n * @brief RBST-based Dynamic\
-    \ Lazy Segment Tree\n */\n#line 4 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
+    \ Lazy Segment Tree\n */\n#line 6 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
     \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
     \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
@@ -479,7 +483,7 @@ data:
     \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 6 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n//\n#line\
+    };\n#line 8 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n//\n#line\
     \ 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\ntemplate <typename\
     \ T, typename E, typename F, typename G, typename H>\nstruct LazySegmentTree {\n\
     \  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n  vector<T> dat;\n\
@@ -508,7 +512,7 @@ data:
     \    thrust(b += n - 1);\n    T vl = ti, vr = ti;\n    for (int l = a, r = b +\
     \ 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) vl = f(vl, reflect(l++));\n\
     \      if (r & 1) vr = f(reflect(--r), vr);\n    }\n    return f(vl, vr);\n  }\n\
-    };\n#line 8 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n//\n#line\
+    };\n#line 10 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n//\n#line\
     \ 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\nstruct Affine\
     \ {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr Affine(mint\
     \ _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return a * x + b;\
@@ -551,7 +555,7 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 11 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
+    \ { return mod; }\n};\n#line 13 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
     \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing T = pair<mint, mint>;\n\
     using E = Affine<mint>;\nT f(T a, T b) { return T(a.first + b.first, a.second\
     \ + b.second); }\nT g(T a, E b) { return T(a.first * b.a + a.second * b.b, a.second);\
@@ -657,8 +661,10 @@ data:
     \ TEN(4));\n  //\n  rep(t, 2) test(TEN(4), TEN(2));\n  //\n  test(10, TEN(4));\n\
     \  test(2, TEN(4));\n  test(1, TEN(4));\n  cerr << \"test OK\" << endl;\n\n  Timer\
     \ timer;\n  test_tl();\n  cerr << \"test_tl OK\" << endl;\n  cerr << \"time :\
-    \ \" << timer.elapsed() << endl;\n}\n\nvoid Nyaan::solve() { q(); }\n"
-  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
+    \ \" << timer.elapsed() << endl;\n}\n\nvoid Nyaan::solve() {\n  q();\n  int a,\
+    \ b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
     \n//\n#include \"../../misc/all.hpp\"\n//\n#include \"../../segment-tree/lazy-segment-tree.hpp\"\
     \n//\n#include \"../../math/affine-transformation.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
     \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing T = pair<mint, mint>;\n\
@@ -766,7 +772,8 @@ data:
     \ TEN(4));\n  //\n  rep(t, 2) test(TEN(4), TEN(2));\n  //\n  test(10, TEN(4));\n\
     \  test(2, TEN(4));\n  test(1, TEN(4));\n  cerr << \"test OK\" << endl;\n\n  Timer\
     \ timer;\n  test_tl();\n  cerr << \"test_tl OK\" << endl;\n  cerr << \"time :\
-    \ \" << timer.elapsed() << endl;\n}\n\nvoid Nyaan::solve() { q(); }"
+    \ \" << timer.elapsed() << endl;\n}\n\nvoid Nyaan::solve() {\n  q();\n  int a,\
+    \ b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -785,8 +792,8 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rbst-segment-tree.test.cpp
   requiredBy: []
-  timestamp: '2022-11-01 22:31:56+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-11-01 22:47:53+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rbst-segment-tree.test.cpp
 layout: document

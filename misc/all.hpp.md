@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: misc/timer.hpp
     title: misc/timer.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n\n#include <cstring>\n#include <type_traits>\n\
@@ -101,7 +101,7 @@ data:
   path: misc/all.hpp
   requiredBy: []
   timestamp: '2022-08-22 23:51:29+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
 documentation_of: misc/all.hpp

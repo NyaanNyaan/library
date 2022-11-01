@@ -365,7 +365,7 @@ data:
       title: Simulated Annealing
   - name: math
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
     - icon: ':heavy_check_mark:'
@@ -480,7 +480,7 @@ data:
       title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
   - name: misc
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: misc/all.hpp
       title: misc/all.hpp
     - icon: ':heavy_check_mark:'
@@ -492,7 +492,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/doubling.hpp
       title: "Binary Lifting(\u30C0\u30D6\u30EA\u30F3\u30B0)"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/fastio.hpp
       title: misc/fastio.hpp
     - icon: ':warning:'
@@ -507,13 +507,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/mo.hpp
       title: Mo's algorithm
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/rng.hpp
       title: misc/rng.hpp
     - icon: ':warning:'
       path: misc/simd.hpp
       title: misc/simd.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: misc/timer.hpp
       title: misc/timer.hpp
     - icon: ':warning:'
@@ -539,7 +539,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: modint/modint.hpp
       title: modint/modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: modint/montgomery-modint.hpp
       title: modint/montgomery-modint.hpp
     - icon: ':heavy_check_mark:'
@@ -724,7 +724,7 @@ data:
       path: segment-tree/lazy-segment-tree-utility.hpp
       title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\
         \u30F3\u30C8\u6728"
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/lazy-segment-tree.hpp
       title: segment-tree/lazy-segment-tree.hpp
     - icon: ':heavy_check_mark:'
@@ -736,7 +736,7 @@ data:
     - icon: ':warning:'
       path: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
       title: segment-tree/range-weighted-add-range-sum-lazyseg.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: segment-tree/rbst-segment-tree.hpp
       title: RBST-based Dynamic Lazy Segment Tree
     - icon: ':heavy_check_mark:'
@@ -838,22 +838,22 @@ data:
       title: Z algorithm
   - name: template
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/bitop.hpp
       title: template/bitop.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/debug.hpp
       title: template/debug.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/inout.hpp
       title: template/inout.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/macro.hpp
       title: template/macro.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/template.hpp
       title: template/template.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: template/util.hpp
       title: template/util.hpp
   - name: tree
@@ -1223,7 +1223,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/rational-number.test.cpp
       title: verify/verify-unit-test/rational-number.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/rbst-segment-tree.test.cpp
       title: verify/verify-unit-test/rbst-segment-tree.test.cpp
     - icon: ':heavy_check_mark:'

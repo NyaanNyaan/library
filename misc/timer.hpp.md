@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: marathon/simulated-annealing.hpp
     title: Simulated Annealing
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: misc/all.hpp
     title: misc/all.hpp
   - icon: ':heavy_check_mark:'
@@ -27,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -39,9 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/timer.hpp\"\n\n#include <chrono>\n\nstruct Timer {\n\
@@ -64,7 +64,7 @@ data:
   - trial/fast-gcd.hpp
   - misc/all.hpp
   timestamp: '2021-11-14 23:34:55+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
