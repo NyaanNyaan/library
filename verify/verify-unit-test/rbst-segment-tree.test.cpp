@@ -1,3 +1,5 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
+//
 #include "../../template/template.hpp"
 //
 #include "../../segment-tree/rbst-segment-tree.hpp"
@@ -297,4 +299,9 @@ void q() {
   cerr << "time : " << timer.elapsed() << endl;
 }
 
-void Nyaan::solve() { q(); }
+void Nyaan::solve() {
+  q();
+  int a, b;
+  cin >> a >> b;
+  cout << a + b << endl;
+}
