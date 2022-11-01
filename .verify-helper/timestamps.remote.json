@@ -98,6 +98,7 @@
 "verify/verify-unit-test/primitive-root.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/radix-heap.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/rational-number.test.cpp": "2022-08-22 19:46:43 +0900",
+"verify/verify-unit-test/rbst-segment-tree.test.cpp": "2022-11-01 22:47:53 +0900",
 "verify/verify-unit-test/run-length-encoding.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/sa-manager.test.cpp": "2022-08-22 23:51:29 +0900",
 "verify/verify-unit-test/segment-set.test.cpp": "2022-08-22 19:46:43 +0900",
