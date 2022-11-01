@@ -5,12 +5,12 @@ template <typename I, typename T, typename E, T (*f)(T, T), T (*g)(T, E),
 struct RBSTLazySegmentTree {
   struct Node {
     Node *l, *r;
-    I index;
-    T key, sum;
+    I key;
+    T val, sum;
     E lazy;
     int cnt;
     Node(const I &i, const T &t = ti())
-        : l(), r(), index(i), key(t), sum(t), lazy(ei()), cnt(1) {}
+        : l(), r(), key(i), val(t), sum(t), lazy(ei()), cnt(1) {}
   };
 
  protected:
@@ -48,41 +48,45 @@ struct RBSTLazySegmentTree {
     return merge(build(l, m, dat), build(m, r, dat));
   };
 
-  void push(Ptr t) {
-    if (!t) return;
-    if (t->lazy != ei()) {
-      if (t->l) propagate(t->l, t->lazy);
-      if (t->r) propagate(t->r, t->lazy);
-      t->lazy = ei();
+  void push([[maybe_unused]] Ptr t) {
+#pragma GCC diagnostic ignored "-Waddress"
+    if constexpr (g != nullptr) {
+#pragma GCC diagnostic warning "-Waddress"
+      if (!t) return;
+      if (t->lazy != ei()) {
+        if (t->l) propagate(t->l, t->lazy);
+        if (t->r) propagate(t->r, t->lazy);
+        t->lazy = ei();
+      }
     }
   }
 
   Ptr update(Ptr t) {
     if (!t) return t;
     t->cnt = 1;
-    t->sum = t->key;
+    t->sum = t->val;
     if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);
     if (t->r) t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);
     return t;
   }
 
-  void propagate(Ptr t, const E &x) {
-    if (!t) return;
-    t->lazy = h(t->lazy, x);
-    t->key = g(t->key, x);
-    t->sum = g(t->sum, x);
+  void propagate([[maybe_unused]] Ptr t, [[maybe_unused]] const E &x) {
+#pragma GCC diagnostic ignored "-Waddress"
+    if constexpr (g != nullptr) {
+#pragma GCC diagnostic warning "-Waddress"
+      if (!t) return;
+      t->lazy = h(t->lazy, x);
+      t->val = g(t->val, x);
+      t->sum = g(t->sum, x);
+    }
   }
 
-  // index が k であるノードを探す, なければ nullptr
+  // key が k であるノードを探す, なければ nullptr
   Ptr find(Ptr t, I k) {
     while (t) {
       push(t);
-      if (k == t->index) return t;
-      if (k < t->index) {
-        t = t->l;
-      } else {
-        t = t->r;
-      }
+      if (k == t->key) return t;
+      t = k < t->key ? t->l : t->r;
     }
     return nullptr;
   }
@@ -91,11 +95,11 @@ struct RBSTLazySegmentTree {
   pair<Ptr, Ptr> split_left(Ptr t, I k) {
     if (!t) return {nullptr, nullptr};
     push(t);
-    if (k == t->index) {
+    if (k == t->key) {
       Ptr tl = t->l;
       t->l = nullptr;
       return {tl, update(t)};
-    } else if (k < t->index) {
+    } else if (k < t->key) {
       auto s = split_left(t->l, k);
       t->l = s.second;
       return {s.first, update(t)};
@@ -107,97 +111,181 @@ struct RBSTLazySegmentTree {
   }
 
   // [k 未満, k, k 超過]
-  array<Ptr, 3> split_by_index(Ptr t, I k) {
+  array<Ptr, 3> split_by_key(Ptr t, I k) {
     if (!t) return {{nullptr, nullptr, nullptr}};
     push(t);
-    if (k == t->index) {
+    if (k == t->key) {
       Ptr tl = t->l, tr = t->r;
       t->l = t->r = nullptr;
       return {{tl, update(t), tr}};
-    } else if (k < t->index) {
-      auto s = split_by_index(t->l, k);
+    } else if (k < t->key) {
+      auto s = split_by_key(t->l, k);
       t->l = s[2];
       return {{s[0], s[1], update(t)}};
     } else {
-      auto s = split_by_index(t->r, k);
+      auto s = split_by_key(t->r, k);
       t->r = s[0];
       return {{update(t), s[1], s[2]}};
     }
   }
 
-  // r 未満
-  T _fold_left(Ptr t, I r) {
-    if (!t) return ti();
-    push(t);
-    if (t->index == r) {
-      return t->l ? t->l->sum : ti();
-    } else if (t->index > r) {
-      return _fold_left(t->l, r);
-    } else {
-      T l = t->l ? t->l->sum : ti();
-      l = f(l, t->key);
-      return f(l, _fold_left(t->r, r));
+  // x 以上の key 最小。存在しない場合は infty
+  I _lower_bound_key(Ptr t, I i, I infty) {
+    I res = infty;
+    while (!t) {
+      if (i == t->key) return i;
+      if (i < t->key) {
+        res = min(res, t->key);
+        t = t->l;
+      } else {
+        t = t->l;
+      }
     }
+    return res;
   }
 
-  // l 以上
-  T _fold_right(Ptr t, I l) {
-    if (!t) return ti();
-    push(t);
-    if (t->index == l) {
-      T r = t->r ? t->r->sum : ti();
-      return f(t->key, r);
-    } else if (t->index < l) {
-      return _fold_right(t->r, l);
-    } else {
-      T r = t->r ? t->r->sum : ti();
-      r = f(t->key, r);
-      return f(_fold_right(t->l, l), r);
+  // x 超過の key 最小。存在しない場合は infty
+  I _upper_bound_key(Ptr t, I i, I infty) {
+    I res = infty;
+    while (!t) {
+      if (i == t->key) return i;
+      if (i < t->key) {
+        res = min(res, t->key);
+        t = t->l;
+      } else {
+        t = t->l;
+      }
     }
+    return res;
+  }
+
+  // [l, inf) である地点に apply
+  void _apply_left(Ptr t, I l, const E &e) {
+    if (!t) return;
+    push(t);
+    if (t->key < l) {
+      _apply_left(t->r, l, e);
+    } else if (t->key == l) {
+      t->val = g(t->val, e);
+      propagate(t->r, e);
+    } else {
+      _apply_left(t->l, l, e);
+      t->val = g(t->val, e);
+      propagate(t->r, e);
+    }
+    update(t);
+  }
+
+  // [-inf, r) である地点に apply
+  void _apply_right(Ptr t, I r, const E &e) {
+    if (!t) return;
+    push(t);
+    if (t->key < r) {
+      propagate(t->l, e);
+      t->val = g(t->val, e);
+      _apply_right(t->r, r, e);
+    } else if (t->key == r) {
+      propagate(t->l, e);
+    } else {
+      _apply_right(t->l, r, e);
+    }
+    update(t);
   }
 
   void _apply(Ptr t, I l, I r, const E &e) {
     if (!t) return;
     push(t);
-    if (t->index < l) {
+    if (t->key < l) {
       _apply(t->r, l, r, e);
-      update(t);
-      return;
-    }
-    if (r <= t->index) {
+    } else if (t->key == l) {
+      t->val = g(t->val, e);
+      _apply_right(t->r, r, e);
+    } else if (t->key < r) {
+      _apply_left(t->l, l, e);
+      t->val = g(t->val, e);
+      _apply_right(t->r, r, e);
+    } else if (t->key == r) {
+      _apply_left(t->l, l, e);
+    } else {
       _apply(t->l, l, r, e);
-      update(t);
-      return;
     }
-    t->key = g(t->key, e);
-    if (t->index != l) _apply(t->l, l, t->index, e);
-    _apply(t->r, t->index, r, e);
     update(t);
+  }
+
+  T _sum(const Ptr &t) { return t ? t->sum : ti(); }
+
+  // l 以上
+  T _fold_left(Ptr t, I l) {
+    if (!t) return ti();
+    push(t);
+    if (t->key < l) {
+      return _fold_left(t->r, l);
+    } else if (t->key == l) {
+      return f(t->val, _fold_left(t->r, l));
+    } else {
+      T tl = _fold_left(t->l, l);
+      return f(f(tl, t->val), _sum(t->r));
+    }
+  }
+
+  // r 未満
+  T _fold_right(Ptr t, I r) {
+    if (!t) return ti();
+    push(t);
+    if (t->key < r) {
+      T tr = _fold_right(t->r, r);
+      return f(f(_sum(t->l), t->val), tr);
+    } else if (t->key == r) {
+      return _sum(t->l);
+    } else {
+      return _fold_right(t->l, r);
+    }
   }
 
   T _fold(Ptr t, I l, I r) {
     if (!t) return ti();
     push(t);
-    if (t->index < l) return _fold(t->r, l, r);
-    if (t->index >= r) return _fold(t->l, l, r);
-    // l <= t->index < r
-    T tl = _fold_right(t->l, l);
-    T tr = _fold_left(t->r, r);
-    return f(f(tl, t->key), tr);
+    if (t->key < l) {
+      return _fold(t->r, l, r);
+    } else if (t->key == l) {
+      return f(t->val, _fold_right(t->r, r));
+    } else if (t->key < r) {
+      T tl = _fold_left(t->l, l);
+      T tr = _fold_right(t->r, r);
+      return f(f(tl, t->val), tr);
+    } else if (t->key == r) {
+      return _fold_left(t->l, l);
+    } else {
+      return _fold(t->l, l, r);
+    }
   }
 
-  // t を根とする木の上で最小の index は？ (t が空の場合は failed)
-  I _min_index(Ptr t, const I &failed) {
+  // t を根とする木の上で最小の key は？ (t が空の場合は failed)
+  I _get_min_key(Ptr t, const I &failed) {
     if (t == nullptr) return failed;
     while (t->l) t = t->l;
-    return t->index;
+    return t->key;
   }
 
-  // t を根とする木の上で最大の index は？ (t が空の場合は failed)
-  I _max_index(Ptr t, const I &failed) {
+  // t を根とする木の上で最大の key は？ (t が空の場合は failed)
+  I _get_max_key(Ptr t, const I &failed) {
     if (t == nullptr) return failed;
     while (t->r) t = t->r;
-    return t->index;
+    return t->key;
+  }
+
+  // t を根とする木の上で最小の key は？ (t が空の場合は failed)
+  pair<I, T> _get_min_keyval(Ptr t, const I &failed) {
+    if (t == nullptr) return {failed, ti()};
+    while (t->l) push(t), t = t->l;
+    return {t->key, t->val};
+  }
+
+  // t を根とする木の上で最小の key は？ (t が空の場合は failed)
+  pair<I, T> _get_max_keyval(Ptr t, const I &failed) {
+    if (t == nullptr) return {failed, ti()};
+    while (t->r) push(t), t = t->r;
+    return {t->key, t->val};
   }
 
   // t を根とする木のうち、[0, i の区間 fold が true になる最大の i は何か？
@@ -221,12 +309,12 @@ struct RBSTLazySegmentTree {
           continue;
         }
       }
-      auto pl = f(prod_now, now->key);
+      auto pl = f(prod_now, now->val);
       if (!check(pl)) {
         if constexpr (exclusive) {
-          return now->index;
+          return now->key;
         } else {
-          return now->l ? _max_index(now->l, failed) : prev;
+          return now->l ? _get_max_key(now->l, failed) : prev;
         }
       }
       prod_now = pl;
@@ -234,11 +322,11 @@ struct RBSTLazySegmentTree {
         if constexpr (exclusive) {
           return failed;
         } else {
-          return now->index;
+          return now->key;
         }
       }
       push(now->r);
-      if constexpr (!exclusive) prev = now->index;
+      if constexpr (!exclusive) prev = now->key;
       now = now->r;
     }
   }
@@ -264,46 +352,54 @@ struct RBSTLazySegmentTree {
           continue;
         }
       }
-      auto pr = f(now->key, prod_now);
+      auto pr = f(now->val, prod_now);
       if (!check(pr)) {
         if constexpr (inclusive) {
-          return now->r ? _min_index(now->r, failed) : prev;
+          return now->r ? _get_min_key(now->r, failed) : prev;
         } else {
-          return now->index;
+          return now->key;
         }
       }
       prod_now = pr;
       if (now->l == nullptr) {
         if constexpr (inclusive) {
-          return now->index;
+          return now->key;
         } else {
           return failed;
         }
       }
       push(now->l);
-      if constexpr (inclusive) prev = now->index;
+      if constexpr (inclusive) prev = now->key;
       now = now->l;
     }
+  }
+
+  void _clear(Ptr t) {
+    if (!t) return;
+    if (t->l) _clear(t->l);
+    if (t->r) _clear(t->r);
+    my_del(t);
   }
 
   void inner_dump(Ptr t) {
     push(t);
     if (t->l) inner_dump(t->l);
-    cerr << "## i = " << t->index << ", ";
-    cerr << "\tkey = " << t->key << ", ";
+    cerr << "## i = " << t->key << ", ";
+    cerr << "\tkey = " << t->val << ", ";
     cerr << "\tsum = " << t->sum << ", ";
     cerr << "\tchild = ";
-    cerr << "( " << (t->l ? to_string(t->l->index) : "nil");
+    cerr << "( " << (t->l ? to_string(t->l->key) : "nil");
     cerr << ", ";
-    cerr << (t->r ? to_string(t->r->index) : "nil");
+    cerr << (t->r ? to_string(t->r->key) : "nil");
     cerr << " )" << endl;
     if (t->r) inner_dump(t->r);
   }
 
   void inner_make_array(Ptr t, vector<pair<I, T>> &v) {
+    if (!t) return;
     push(t);
     if (t->l) inner_make_array(t->l, v);
-    v.emplace_back(t->index, t->key);
+    v.emplace_back(t->key, t->val);
     if (t->r) inner_make_array(t->r, v);
   }
 
@@ -321,11 +417,11 @@ struct RBSTLazySegmentTree {
 
   // 1 点 値の書き換え
   void set_val(I i, T x) {
-    auto s = split_by_index(root, i);
+    auto s = split_by_key(root, i);
     if (s[1] == nullptr) {
       s[1] = my_new(i, x);
     } else {
-      s[1]->key = x;
+      s[1]->val = x;
     }
     root = merge(merge(s[0], update(s[1])), s[2]);
   }
@@ -339,8 +435,8 @@ struct RBSTLazySegmentTree {
     while (t) {
       push(t);
       ps.push_back(t);
-      if (i == t->index) break;
-      if (i < t->index) {
+      if (i == t->key) break;
+      if (i < t->key) {
         t = t->l;
       } else {
         t = t->r;
@@ -350,37 +446,93 @@ struct RBSTLazySegmentTree {
       set_val(i, x);
       return;
     }
-    t->key = x;
+    t->val = x;
     for (int j = ps.size() - 1; j >= 0; j--) update(ps[j]);
   }
 
   // 1 点取得
   T get_val(I i) {
     Ptr p = find(root, i);
-    return p ? p->key : ti();
+    return p ? p->val : ti();
+  }
+
+  // 1 点 値の書き換え
+  // func の返り値は void !!!!!!(参照された値を直接更新する)
+  void apply_val(I i, const function<void(T &)> &func) {
+    auto s = split_by_key(root, i);
+    if (s[1] == nullptr) s[1] = my_new(i);
+    func(s[1]->val);
+    root = merge(merge(s[0], update(s[1])), s[2]);
+  }
+  // 1 点 値の書き換え 値が既に存在するときに早い
+  // func の返り値は void !!!!!!(参照された値を直接更新する)
+  void apply_val_fast(I i, const function<void(T &)> &func) {
+    static vector<Ptr> ps;
+    ps.clear();
+    Ptr t = root;
+    while (t) {
+      push(t);
+      ps.push_back(t);
+      if (i == t->key) break;
+      if (i < t->key) {
+        t = t->l;
+      } else {
+        t = t->r;
+      }
+    }
+    if (!t) {
+      apply_val(i, func);
+      return;
+    }
+    func(t->val);
+    for (int j = ps.size() - 1; j >= 0; j--) update(ps[j]);
   }
 
   // 頂点の削除
   void erase(I i) {
-    auto s = split_by_index(root, i);
+    auto s = split_by_key(root, i);
     if (s[1]) my_del(s[1]);
     root = merge(s[0], s[2]);
   }
 
   // 範囲作用
   void apply(I l, I r, const E &e) {
-    // _apply(root, l, r, e);
-    auto [x, yz] = split_left(root, l);
-    auto [y, z] = split_left(yz, r);
-    propagate(y, e);
-    root = merge(merge(x, y), z);
+    if (l >= r) return;
+    _apply(root, l, r, e);
   }
 
   // 範囲取得
-  T fold(I l, I r) { return _fold(root, l, r); }
+  T fold(I l, I r) {
+    if (l >= r) return ti();
+    return _fold(root, l, r);
+  }
 
-  // index 最大を取得
-  I max_index(I failed = -1) { return _max_index(root, failed); }
+  // key 最小を取得
+  I get_min_key(I failed = -1) { return _get_min_key(root, failed); }
+  // key 最大を取得
+  I get_max_key(I failed = -1) { return _get_max_key(root, failed); }
+  // (key, val) 最小を取得
+  pair<I, T> get_min_keyval(I failed = -1) {
+    return _get_min_keyval(root, failed);
+  }
+  // (key, val) 最大を取得
+  pair<I, T> get_max_keyval(I failed = -1) {
+    return _get_max_keyval(root, failed);
+  }
+  // (key, val) 最小を pop
+  pair<I, T> pop_min_keyval(I failed = -1) {
+    assert(root != nullptr);
+    auto kv = _get_min_keyval(root, failed);
+    erase(kv.first);
+    return kv;
+  }
+  // (key, val) 最大を取得
+  pair<I, T> pop_max_keyval(I failed = -1) {
+    assert(root != nullptr);
+    auto kv = _get_max_keyval(root, failed);
+    erase(kv.first);
+    return kv;
+  }
 
   // n 未満の i のうち、[i, n) の区間 fold が true になる最小の i は何か？
   // (存在しない場合は failed を返す)
@@ -426,6 +578,9 @@ struct RBSTLazySegmentTree {
     return res;
   }
 
+  void clear() { _clear(root), root = nullptr; }
+  int size() { return count(root); }
+  bool empty() { return !root; }
   void dump() { inner_dump(root); }
 
   // 列を配列に変換して返す
@@ -437,18 +592,11 @@ struct RBSTLazySegmentTree {
 };
 
 namespace RBSTSegmentTreeImpl {
-
-template <typename T>
-T g(T l, bool) {
-  return l;
-}
-bool h(bool, bool) { return false; }
 bool ei() { return false; }
-
 template <typename I, typename T, T (*f)(T, T), T (*ti)()>
-using RBSTSegmentTree = RBSTLazySegmentTree<I, T, bool, f, g, h, ti, ei>;
+using RBSTSegmentTree =
+    RBSTLazySegmentTree<I, T, bool, f, nullptr, nullptr, ti, ei>;
 }  // namespace RBSTSegmentTreeImpl
-
 using RBSTSegmentTreeImpl::RBSTSegmentTree;
 
 /**
