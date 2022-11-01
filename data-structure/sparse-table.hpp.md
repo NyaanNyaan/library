@@ -55,10 +55,10 @@ data:
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
-  - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
-  - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
+  - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+  - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
 documentation_of: data-structure/sparse-table.hpp
 layout: document
 redirect_from:

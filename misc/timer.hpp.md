@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: marathon/simulated-annealing.hpp
     title: Simulated Annealing
-  - icon: ':warning:'
+  - icon: ':x:'
     path: misc/all.hpp
     title: misc/all.hpp
   - icon: ':heavy_check_mark:'
@@ -27,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/rbst-segment-tree.test.cpp
+    title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sa-manager.test.cpp
     title: verify/verify-unit-test/sa-manager.test.cpp
@@ -36,9 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/strassen.test.cpp
     title: verify/verify-unit-test/strassen.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/timer.hpp\"\n\n#include <chrono>\n\nstruct Timer {\n\
@@ -55,19 +58,20 @@ data:
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
+  - marathon/sa-manager.hpp
+  - marathon/simulated-annealing.hpp
   - trial/fast-inv.hpp
   - trial/fast-gcd.hpp
   - misc/all.hpp
-  - marathon/simulated-annealing.hpp
-  - marathon/sa-manager.hpp
   timestamp: '2021-11-14 23:34:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-unit-test/strassen.test.cpp
-  - verify/verify-unit-test/sa-manager.test.cpp
-  - verify/verify-unit-test/simulated-annealing.test.cpp
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/simulated-annealing.test.cpp
+  - verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - verify/verify-unit-test/sa-manager.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/mf.test.cpp
 documentation_of: misc/timer.hpp
 layout: document

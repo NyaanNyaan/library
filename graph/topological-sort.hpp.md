@@ -83,8 +83,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-b.test.cpp
+  - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
 documentation_of: graph/topological-sort.hpp
 layout: document
 redirect_from:

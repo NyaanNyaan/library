@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: math-fast/subset-convolution.hpp
     title: math-fast/subset-convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'

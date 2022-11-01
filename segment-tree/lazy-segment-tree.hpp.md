@@ -6,12 +6,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
     title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/rbst-segment-tree.test.cpp
+    title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\n\
@@ -77,10 +80,11 @@ data:
   path: segment-tree/lazy-segment-tree.hpp
   requiredBy: []
   timestamp: '2021-07-11 08:39:39+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+  - verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - verify/verify-unit-test/lazyseg-setval-2.test.cpp
 documentation_of: segment-tree/lazy-segment-tree.hpp
 layout: document
 redirect_from:

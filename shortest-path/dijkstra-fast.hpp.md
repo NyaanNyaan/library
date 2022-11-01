@@ -124,9 +124,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
-  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-fast-dijkstra.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
 documentation_of: shortest-path/dijkstra-fast.hpp
 layout: document
 redirect_from:

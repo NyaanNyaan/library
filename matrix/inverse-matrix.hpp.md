@@ -56,8 +56,8 @@ data:
   timestamp: '2021-06-17 21:43:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/inverse-matrix.test.cpp
   - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
+  - verify/verify-unit-test/inverse-matrix.test.cpp
 documentation_of: matrix/inverse-matrix.hpp
 layout: document
 redirect_from:

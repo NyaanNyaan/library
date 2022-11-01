@@ -2,6 +2,27 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: math/affine-transformation.hpp
+    title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
+  - icon: ':x:'
+    path: misc/all.hpp
+    title: misc/all.hpp
+  - icon: ':question:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
+  - icon: ':question:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':question:'
+    path: misc/timer.hpp
+    title: misc/timer.hpp
+  - icon: ':question:'
+    path: modint/montgomery-modint.hpp
+    title: modint/montgomery-modint.hpp
+  - icon: ':question:'
+    path: segment-tree/lazy-segment-tree.hpp
+    title: segment-tree/lazy-segment-tree.hpp
+  - icon: ':question:'
     path: segment-tree/rbst-segment-tree.hpp
     title: RBST-based Dynamic Lazy Segment Tree
   - icon: ':question:'
@@ -24,18 +45,14 @@ data:
     title: template/util.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
-    links:
-    - https://judge.yosupo.jp/problem/predecessor_problem
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n//\n\
-    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    links: []
+  bundledCode: "#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -168,7 +185,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 2 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
     \n//\n#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\ntemplate <typename I,\
     \ typename T, typename E, T (*f)(T, T), T (*g)(T, E),\n          E (*h)(E, E),\
     \ T (*ti)(), E (*ei)()>\nstruct RBSTLazySegmentTree {\n  struct Node {\n    Node\
@@ -398,35 +415,358 @@ data:
     \ T, T (*f)(T, T), T (*ti)()>\nusing RBSTSegmentTree =\n    RBSTLazySegmentTree<I,\
     \ T, bool, f, nullptr, nullptr, ti, ei>;\n}  // namespace RBSTSegmentTreeImpl\n\
     using RBSTSegmentTreeImpl::RBSTSegmentTree;\n\n/**\n * @brief RBST-based Dynamic\
-    \ Lazy Segment Tree\n */\n#line 6 \"verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp\"\
-    \n//\nusing namespace Nyaan;\n\nbool f(bool a, bool b) { return a | b; }\nbool\
-    \ ti() { return false; }\nusing Seg = RBSTSegmentTree<ll, bool, f, ti>;\n\nvoid\
-    \ Nyaan::solve() {\n  inl(N, Q);\n  string T;\n  in(T);\n\n  vector<bool> v(N);\n\
-    \  rep(i, N) v[i] = T[i] == '1';\n\n  Seg seg{v};\n  while (Q--) {\n    ini(cmd,\
-    \ k);\n    if (cmd == 0) {\n      seg.set_val(k, true);\n    } else if (cmd ==\
-    \ 1) {\n      seg.set_val(k, false);\n    } else if (cmd == 2) {\n      out(seg.get_val(k));\n\
-    \    } else if (cmd == 3) {\n      int r = seg.max_right(\n          k, [](bool\
-    \ b) { return !b; }, N);\n      int r2 = seg.max_right_inclusive(\n          k,\
-    \ [](bool b) { return !b; }, k - 1);\n      if (r2 + 1 != r) exit(1);\n      if\
-    \ (r == N) r = -1;\n      out(r);\n    } else if (cmd == 4) {\n      int l = seg.min_left_exclusive(\n\
-    \          k + 1, [](bool b) { return !b; }, -1);\n      int l2 = seg.min_left(\n\
-    \          k + 1, [](bool b) { return !b; }, k + 1);\n      if (l + 1 != l2) exit(1);\n\
-    \      out(l);\n    }\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n\
-    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
-    \n//\nusing namespace Nyaan;\n\nbool f(bool a, bool b) { return a | b; }\nbool\
-    \ ti() { return false; }\nusing Seg = RBSTSegmentTree<ll, bool, f, ti>;\n\nvoid\
-    \ Nyaan::solve() {\n  inl(N, Q);\n  string T;\n  in(T);\n\n  vector<bool> v(N);\n\
-    \  rep(i, N) v[i] = T[i] == '1';\n\n  Seg seg{v};\n  while (Q--) {\n    ini(cmd,\
-    \ k);\n    if (cmd == 0) {\n      seg.set_val(k, true);\n    } else if (cmd ==\
-    \ 1) {\n      seg.set_val(k, false);\n    } else if (cmd == 2) {\n      out(seg.get_val(k));\n\
-    \    } else if (cmd == 3) {\n      int r = seg.max_right(\n          k, [](bool\
-    \ b) { return !b; }, N);\n      int r2 = seg.max_right_inclusive(\n          k,\
-    \ [](bool b) { return !b; }, k - 1);\n      if (r2 + 1 != r) exit(1);\n      if\
-    \ (r == N) r = -1;\n      out(r);\n    } else if (cmd == 4) {\n      int l = seg.min_left_exclusive(\n\
-    \          k + 1, [](bool b) { return !b; }, -1);\n      int l2 = seg.min_left(\n\
-    \          k + 1, [](bool b) { return !b; }, k + 1);\n      if (l + 1 != l2) exit(1);\n\
-    \      out(l);\n    }\n  }\n}\n"
+    \ Lazy Segment Tree\n */\n#line 4 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
+    \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
+    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
+    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
+    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
+    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
+    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
+    \ pre;\n\ninline void load() {\n  int len = in_right - in_left;\n  memmove(inbuf,\
+    \ inbuf + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
+    \  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
+    \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
+    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
+    \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
+    \ <typename T>\ninline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n\
+    \  char c;\n  do c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]]\
+    \ bool minus = false;\n  if constexpr (is_signed<T>::value == true) {\n    if\
+    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
+    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n}\ninline void\
+    \ rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head,\
+    \ Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) {\n\
+    \  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = c;\n}\ninline void\
+    \ wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = b\
+    \ ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
+    \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
+    \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
+    \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
+    \    return;\n  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x <\
+    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n\
+    \  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n\
+    \    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n    \
+    \  outbuf[out_right] = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t\
+    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
+    \     outbuf[out_right] = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n \
+    \     out_right += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2) + 1, 3);\n      out_right += 3;\n    } else\
+    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n      out_right\
+    \ += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4, 12 - i);\n  out_right\
+    \ += 12 - i;\n}\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n\
+    }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
+    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
+    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
+    using fastio::wtn;\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng()\
+    \ {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"misc/timer.hpp\"\n\n#line\
+    \ 4 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
+    };\n#line 6 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n//\n#line\
+    \ 2 \"segment-tree/lazy-segment-tree.hpp\"\n\n// LazySegmentTree\ntemplate <typename\
+    \ T, typename E, typename F, typename G, typename H>\nstruct LazySegmentTree {\n\
+    \  int n, height;\n  F f;\n  G g;\n  H h;\n  T ti;\n  E ei;\n  vector<T> dat;\n\
+    \  vector<E> laz;\n  LazySegmentTree(int _n, F _f, G _g, H _h, T _ti, E _ei)\n\
+    \      : f(_f), g(_g), h(_h), ti(_ti), ei(_ei) {\n    init(_n);\n  }\n  LazySegmentTree(const\
+    \ vector<T> &v, F _f, G _g, H _h, T _ti, E _ei)\n      : f(_f), g(_g), h(_h),\
+    \ ti(_ti), ei(_ei) {\n    init((int)v.size());\n    build(v);\n  }\n  void init(int\
+    \ _n) {\n    n = 1;\n    height = 0;\n    while (n < _n) n <<= 1, height++;\n\
+    \    dat.assign(2 * n, ti);\n    laz.assign(2 * n, ei);\n  }\n  void build(const\
+    \ vector<T> &v) {\n    int _n = v.size();\n    init(_n);\n    for (int i = 0;\
+    \ i < _n; i++) dat[n + i] = v[i];\n    for (int i = n - 1; i; i--)\n      dat[i]\
+    \ = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);\n  }\n  inline T reflect(int k) {\
+    \ return laz[k] == ei ? dat[k] : g(dat[k], laz[k]); }\n  inline void eval(int\
+    \ k) {\n    if (laz[k] == ei) return;\n    laz[(k << 1) | 0] = h(laz[(k << 1)\
+    \ | 0], laz[k]);\n    laz[(k << 1) | 1] = h(laz[(k << 1) | 1], laz[k]);\n    dat[k]\
+    \ = reflect(k);\n    laz[k] = ei;\n  }\n  inline void thrust(int k) {\n    for\
+    \ (int i = height; i; i--) eval(k >> i);\n  }\n  inline void recalc(int k) {\n\
+    \    while (k >>= 1) dat[k] = f(reflect((k << 1) | 0), reflect((k << 1) | 1));\n\
+    \  }\n  void update(int a, int b, E x) {\n    if (a >= b) return;\n    thrust(a\
+    \ += n);\n    thrust(b += n - 1);\n    for (int l = a, r = b + 1; l < r; l >>=\
+    \ 1, r >>= 1) {\n      if (l & 1) laz[l] = h(laz[l], x), l++;\n      if (r & 1)\
+    \ --r, laz[r] = h(laz[r], x);\n    }\n    recalc(a);\n    recalc(b);\n  }\n  void\
+    \ set_val(int a, T x) {\n    thrust(a += n);\n    dat[a] = x;\n    laz[a] = ei;\n\
+    \    recalc(a);\n  }\n  T get_val(int a) {\n    thrust(a += n);\n    return reflect(a);\n\
+    \  }\n  T query(int a, int b) {\n    if (a >= b) return ti;\n    thrust(a += n);\n\
+    \    thrust(b += n - 1);\n    T vl = ti, vr = ti;\n    for (int l = a, r = b +\
+    \ 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) vl = f(vl, reflect(l++));\n\
+    \      if (r & 1) vr = f(reflect(--r), vr);\n    }\n    return f(vl, vr);\n  }\n\
+    };\n#line 8 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\n//\n#line\
+    \ 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\nstruct Affine\
+    \ {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr Affine(mint\
+    \ _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return a * x + b;\
+    \ }\n  friend Affine operator*(const Affine& l, const Affine& r) {\n    return\
+    \ Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const Affine& r)\
+    \ const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine& r) const\
+    \ { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream& os,\
+    \ const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n  \
+    \  return os;\n  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n\
+    \ */\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\n\
+    struct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32\
+    \ = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
+    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
+    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
+    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
+    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
+    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
+    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
+    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
+    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
+    \ { return mod; }\n};\n#line 11 \"verify/verify-unit-test/rbst-segment-tree.test.cpp\"\
+    \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing T = pair<mint, mint>;\n\
+    using E = Affine<mint>;\nT f(T a, T b) { return T(a.first + b.first, a.second\
+    \ + b.second); }\nT g(T a, E b) { return T(a.first * b.a + a.second * b.b, a.second);\
+    \ }\nE h(E a, E b) { return a * b; };\nT ti() { return T{}; }\nE ei() { return\
+    \ E{}; }\n\nusing namespace Nyaan;\n\n// \u3059\u3079\u3066\u306E\u95A2\u6570\u306E\
+    \u30C6\u30B9\u30C8\u3002\u305F\u3060\u3057\u30BB\u30B0\u6728\u306B\u3076\u305F\
+    \u3093\u7CFB\u306F\u5225\u9014 verify \u3059\u308B\nvoid test(const int N = 100,\
+    \ const int Q = 100) {\n  RBSTLazySegmentTree<int, T, E, f, g, h, ti, ei> seg1;\n\
+    \  LazySegmentTree seg2(N, f, g, h, ti(), ei());\n\n  ll MOD = 998244353;\n  vector<function<void(void)>>\
+    \ funcs{\n      [&]() {\n        // set_val\n        int i = rng(0, N - 1);\n\
+    \        T x{rng(0, MOD - 1), 1};\n        seg1.set_val(i, x);\n        seg2.set_val(i,\
+    \ x);\n      },\n      [&]() {\n        // set_val_fast\n        int i = rng(0,\
+    \ N - 1);\n        T x{rng(0, MOD - 1), 1};\n        seg1.set_val_fast(i, x);\n\
+    \        seg2.set_val(i, x);\n      },\n      [&]() {\n        // get_val\n  \
+    \      int i = rng(0, N - 1);\n        T v1 = seg1.get_val(i);\n        T v2 =\
+    \ seg2.get_val(i);\n        assert(v1 == v2 and \"get_val\");\n      },\n    \
+    \  [&]() {\n        // apply_val\n        int i = rng(0, N - 1);\n        E x{rng(0,\
+    \ MOD - 1), rng(0, MOD - 1)};\n        seg1.apply_val(i, [&](T& t) { t = g(t,\
+    \ x); });\n        seg2.update(i, i + 1, x);\n      },\n      [&]() {\n      \
+    \  // apply_val_fast\n        int i = rng(0, N - 1);\n        E x{rng(0, MOD -\
+    \ 1), rng(0, MOD - 1)};\n        seg1.apply_val_fast(i, [&](T& t) { t = g(t, x);\
+    \ });\n        seg2.update(i, i + 1, x);\n      },\n      [&]() {\n        //\
+    \ erase\n        int i = rng(0, N - 1);\n        seg1.erase(i);\n        seg2.set_val(i,\
+    \ T{});\n      },\n      [&]() {\n        // apply\n        int l = rng(0, N -\
+    \ 1);\n        int r = rng(0, N - 1);\n        if (l > r) swap(l, r);\n      \
+    \  r++;\n        E x{rng(0, MOD - 1), rng(0, MOD - 1)};\n        seg1.apply(l,\
+    \ r, x);\n        seg2.update(l, r, x);\n      },\n      [&]() {\n        // fold\n\
+    \        int l = rng(0, N - 1);\n        int r = rng(0, N - 1);\n        if (l\
+    \ > r) swap(l, r);\n        r++;\n        auto v1 = seg1.fold(l, r);\n       \
+    \ auto v2 = seg2.query(l, r);\n        assert(v1 == v2 and \"fold\");\n      },\n\
+    \      [&]() {\n        // get_min_key, get_min_keyval\n        int v1 = -1;\n\
+    \        while (true) {\n          v1 = seg1.get_min_key();\n          if (v1\
+    \ == -1) break;\n          T val = seg2.get_val(v1);\n          if (val.second\
+    \ == 1) break;\n          if (val.second == 0) {\n            seg1.erase(v1);\n\
+    \            seg2.set_val(v1, T{});\n          } else {\n            assert(false\
+    \ and \"get_min_key\");\n          }\n        }\n\n        int v2 = -1;\n    \
+    \    if (seg2.query(0, N).second != 0) {\n          // [0, n) \u306F\u975E\u30BC\
+    \u30ED\u3067\u3059\u304B\uFF1F\n          int ng = 0, ok = N;\n          while\
+    \ (ng + 1 < ok) {\n            int m = (ng + ok) / 2;\n            mint x = seg2.query(0,\
+    \ m).second;\n            (x == 0 ? ng : ok) = m;\n          }\n          v2 =\
+    \ ok - 1;\n        }\n        assert(v1 == v2 && \"get_min_key\");\n\n       \
+    \ if (v1 == -1) {\n          auto kv1 = seg1.get_min_keyval();\n          assert(kv1.second\
+    \ == T{} && \"get_min_keyval\");\n        } else {\n          auto kv1 = seg1.get_min_keyval();\n\
+    \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
+    \ kv2 && \"get_min_keyval\");\n        }\n      },\n      [&]() {\n        //\
+    \ get_max_key, get_max_keyval\n        int v1 = -1;\n        while (true) {\n\
+    \          v1 = seg1.get_max_key();\n          if (v1 == -1) break;\n        \
+    \  T val = seg2.get_val(v1);\n          if (val.second == 1) break;\n        \
+    \  if (val.second == 0) {\n            seg1.erase(v1);\n            seg2.set_val(v1,\
+    \ T{});\n          } else {\n            assert(false and \"get_max_key\");\n\
+    \          }\n        }\n\n        int v2 = -1;\n        if (seg2.query(0, N).second\
+    \ != 0) {\n          // [i, N) \u306F\u975E\u30BC\u30ED\u3067\u3059\u304B\uFF1F\
+    \n          int ok = 0, ng = N;\n          while (ok + 1 < ng) {\n           \
+    \ int m = (ng + ok) / 2;\n            mint x = seg2.query(m, N).second;\n    \
+    \        (x == 0 ? ng : ok) = m;\n          }\n          v2 = ok;\n        }\n\
+    \        assert(v1 == v2 && \"get_max_key\");\n\n        if (v1 == -1) {\n   \
+    \       auto kv1 = seg1.get_max_keyval();\n          assert(kv1.second == T{}\
+    \ && \"get_max_keyval\");\n        } else {\n          auto kv1 = seg1.get_max_keyval();\n\
+    \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
+    \ kv2 && \"get_mix_keyval\");\n        }\n      },\n      [&]() {\n        //\
+    \ pop_min_key\n        int v2 = -1;\n        if (seg2.query(0, N).second != 0)\
+    \ {\n          // [0, n) \u306F\u975E\u30BC\u30ED\u3067\u3059\u304B\uFF1F\n  \
+    \        int ng = 0, ok = N;\n          while (ng + 1 < ok) {\n            int\
+    \ m = (ng + ok) / 2;\n            mint x = seg2.query(0, m).second;\n        \
+    \    (x == 0 ? ng : ok) = m;\n          }\n          v2 = ok - 1;\n        }\n\
+    \        if (v2 != -1) {\n          pair<int, T> kv1;\n          do {\n      \
+    \      kv1 = seg1.pop_min_keyval();\n          } while (kv1.second.second == 0);\n\
+    \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
+    \ kv2 && \"pop_min_keyval\");\n          seg2.set_val(v2, T{});\n        }\n \
+    \     },\n      [&]() {\n        // pop_max_key\n        int v2 = -1;\n      \
+    \  if (seg2.query(0, N).second != 0) {\n          // [i, N) \u306F\u975E\u30BC\
+    \u30ED\u3067\u3059\u304B\uFF1F\n          int ok = 0, ng = N;\n          while\
+    \ (ok + 1 < ng) {\n            int m = (ng + ok) / 2;\n            mint x = seg2.query(m,\
+    \ N).second;\n            (x == 0 ? ng : ok) = m;\n          }\n          v2 =\
+    \ ok;\n        }\n        if (v2 != -1) {\n          pair<int, T> kv1;\n     \
+    \     do {\n            kv1 = seg1.pop_max_keyval();\n          } while (kv1.second.second\
+    \ == 0);\n          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1\
+    \ == kv2 && \"pop_max_keyval\");\n          seg2.set_val(v2, T{});\n        }\n\
+    \      },\n  };\n\n  rep(_, 10) {\n    int qq = vector<ll>{0LL, rng(1, 10), rng(1,\
+    \ Q)}[rng(0, 2)];\n    rep(qnum, qq) {\n      int c = rng(0, sz(funcs) - 1);\n\
+    \      // trc(c, \"cmd\");\n      funcs[c]();\n    }\n    {\n      // make_array\n\
+    \      auto vec1 = seg1.make_array();\n      vector<pair<int, T>> vec2;\n    \
+    \  rep(i, N) {\n        T val = seg2.get_val(i);\n        if (val != T{}) vec2.push_back({i,\
+    \ val});\n      }\n      // trc(vec1);\n      // trc(vec2);\n      int i1 = 0,\
+    \ i2 = 0;\n      while (i1 != sz(vec1) and i2 != sz(vec2)) {\n        while (i1\
+    \ != sz(vec1) and vec1[i1].second == T{}) i1++;\n        if (i1 == sz(vec1)) break;\n\
+    \        assert(vec1[i1] == vec2[i2] and \"make_array\");\n        i1++, i2++;\n\
+    \      }\n      while (i1 != sz(vec1) and vec1[i1].second == T{}) i1++;\n    \
+    \  assert(i1 == sz(vec1) and i2 == sz(vec2) and \"make_array\");\n      // trc(\"\
+    make_array ok\");\n    }\n    seg1.clear();\n    rep(i, N) seg2.set_val(i, T{});\n\
+    \  }\n}\n\nvoid test_tl(const int N = 5 * TEN(5), const int Q = 5 * TEN(5)) {\n\
+    \  ll MOD = 998244353;\n  V<T> init;\n  rep(i, N) init.emplace_back(rng(0, MOD\
+    \ - 1), rng(0, MOD - 1));\n\n  RBSTLazySegmentTree<int, T, E, f, g, h, ti, ei>\
+    \ seg1(init);\n  LazySegmentTree seg2(init, f, g, h, ti(), ei());\n\n  vector<function<void(void)>>\
+    \ funcs{\n      [&]() {\n        // apply\n        int l = +rng(0, 10);\n    \
+    \    int r = -rng(0, 10) + N;\n        E x{rng(0, MOD - 1), rng(0, MOD - 1)};\n\
+    \        seg1.apply(l, r, x);\n        seg2.update(l, r, x);\n      },\n     \
+    \ [&]() {\n        // fold\n        int l = +rng(0, 10);\n        int r = -rng(0,\
+    \ 10) + N;\n        auto v1 = seg1.fold(l, r);\n        auto v2 = seg2.query(l,\
+    \ r);\n        assert(v1 == v2 and \"fold\");\n      },\n  };\n\n  rep(qnum, Q)\
+    \ {\n    int c = rng(0, sz(funcs) - 1);\n    // trc(c, \"cmd\");\n    funcs[c]();\n\
+    \  }\n}\n\nvoid q() {\n  rep(t, 10) test(10, TEN(4));\n  //\n  rep(t, 10) test(100,\
+    \ TEN(4));\n  //\n  rep(t, 2) test(TEN(4), TEN(2));\n  //\n  test(10, TEN(4));\n\
+    \  test(2, TEN(4));\n  test(1, TEN(4));\n  cerr << \"test OK\" << endl;\n\n  Timer\
+    \ timer;\n  test_tl();\n  cerr << \"test_tl OK\" << endl;\n  cerr << \"time :\
+    \ \" << timer.elapsed() << endl;\n}\n\nvoid Nyaan::solve() { q(); }\n"
+  code: "#include \"../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
+    \n//\n#include \"../../misc/all.hpp\"\n//\n#include \"../../segment-tree/lazy-segment-tree.hpp\"\
+    \n//\n#include \"../../math/affine-transformation.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing T = pair<mint, mint>;\n\
+    using E = Affine<mint>;\nT f(T a, T b) { return T(a.first + b.first, a.second\
+    \ + b.second); }\nT g(T a, E b) { return T(a.first * b.a + a.second * b.b, a.second);\
+    \ }\nE h(E a, E b) { return a * b; };\nT ti() { return T{}; }\nE ei() { return\
+    \ E{}; }\n\nusing namespace Nyaan;\n\n// \u3059\u3079\u3066\u306E\u95A2\u6570\u306E\
+    \u30C6\u30B9\u30C8\u3002\u305F\u3060\u3057\u30BB\u30B0\u6728\u306B\u3076\u305F\
+    \u3093\u7CFB\u306F\u5225\u9014 verify \u3059\u308B\nvoid test(const int N = 100,\
+    \ const int Q = 100) {\n  RBSTLazySegmentTree<int, T, E, f, g, h, ti, ei> seg1;\n\
+    \  LazySegmentTree seg2(N, f, g, h, ti(), ei());\n\n  ll MOD = 998244353;\n  vector<function<void(void)>>\
+    \ funcs{\n      [&]() {\n        // set_val\n        int i = rng(0, N - 1);\n\
+    \        T x{rng(0, MOD - 1), 1};\n        seg1.set_val(i, x);\n        seg2.set_val(i,\
+    \ x);\n      },\n      [&]() {\n        // set_val_fast\n        int i = rng(0,\
+    \ N - 1);\n        T x{rng(0, MOD - 1), 1};\n        seg1.set_val_fast(i, x);\n\
+    \        seg2.set_val(i, x);\n      },\n      [&]() {\n        // get_val\n  \
+    \      int i = rng(0, N - 1);\n        T v1 = seg1.get_val(i);\n        T v2 =\
+    \ seg2.get_val(i);\n        assert(v1 == v2 and \"get_val\");\n      },\n    \
+    \  [&]() {\n        // apply_val\n        int i = rng(0, N - 1);\n        E x{rng(0,\
+    \ MOD - 1), rng(0, MOD - 1)};\n        seg1.apply_val(i, [&](T& t) { t = g(t,\
+    \ x); });\n        seg2.update(i, i + 1, x);\n      },\n      [&]() {\n      \
+    \  // apply_val_fast\n        int i = rng(0, N - 1);\n        E x{rng(0, MOD -\
+    \ 1), rng(0, MOD - 1)};\n        seg1.apply_val_fast(i, [&](T& t) { t = g(t, x);\
+    \ });\n        seg2.update(i, i + 1, x);\n      },\n      [&]() {\n        //\
+    \ erase\n        int i = rng(0, N - 1);\n        seg1.erase(i);\n        seg2.set_val(i,\
+    \ T{});\n      },\n      [&]() {\n        // apply\n        int l = rng(0, N -\
+    \ 1);\n        int r = rng(0, N - 1);\n        if (l > r) swap(l, r);\n      \
+    \  r++;\n        E x{rng(0, MOD - 1), rng(0, MOD - 1)};\n        seg1.apply(l,\
+    \ r, x);\n        seg2.update(l, r, x);\n      },\n      [&]() {\n        // fold\n\
+    \        int l = rng(0, N - 1);\n        int r = rng(0, N - 1);\n        if (l\
+    \ > r) swap(l, r);\n        r++;\n        auto v1 = seg1.fold(l, r);\n       \
+    \ auto v2 = seg2.query(l, r);\n        assert(v1 == v2 and \"fold\");\n      },\n\
+    \      [&]() {\n        // get_min_key, get_min_keyval\n        int v1 = -1;\n\
+    \        while (true) {\n          v1 = seg1.get_min_key();\n          if (v1\
+    \ == -1) break;\n          T val = seg2.get_val(v1);\n          if (val.second\
+    \ == 1) break;\n          if (val.second == 0) {\n            seg1.erase(v1);\n\
+    \            seg2.set_val(v1, T{});\n          } else {\n            assert(false\
+    \ and \"get_min_key\");\n          }\n        }\n\n        int v2 = -1;\n    \
+    \    if (seg2.query(0, N).second != 0) {\n          // [0, n) \u306F\u975E\u30BC\
+    \u30ED\u3067\u3059\u304B\uFF1F\n          int ng = 0, ok = N;\n          while\
+    \ (ng + 1 < ok) {\n            int m = (ng + ok) / 2;\n            mint x = seg2.query(0,\
+    \ m).second;\n            (x == 0 ? ng : ok) = m;\n          }\n          v2 =\
+    \ ok - 1;\n        }\n        assert(v1 == v2 && \"get_min_key\");\n\n       \
+    \ if (v1 == -1) {\n          auto kv1 = seg1.get_min_keyval();\n          assert(kv1.second\
+    \ == T{} && \"get_min_keyval\");\n        } else {\n          auto kv1 = seg1.get_min_keyval();\n\
+    \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
+    \ kv2 && \"get_min_keyval\");\n        }\n      },\n      [&]() {\n        //\
+    \ get_max_key, get_max_keyval\n        int v1 = -1;\n        while (true) {\n\
+    \          v1 = seg1.get_max_key();\n          if (v1 == -1) break;\n        \
+    \  T val = seg2.get_val(v1);\n          if (val.second == 1) break;\n        \
+    \  if (val.second == 0) {\n            seg1.erase(v1);\n            seg2.set_val(v1,\
+    \ T{});\n          } else {\n            assert(false and \"get_max_key\");\n\
+    \          }\n        }\n\n        int v2 = -1;\n        if (seg2.query(0, N).second\
+    \ != 0) {\n          // [i, N) \u306F\u975E\u30BC\u30ED\u3067\u3059\u304B\uFF1F\
+    \n          int ok = 0, ng = N;\n          while (ok + 1 < ng) {\n           \
+    \ int m = (ng + ok) / 2;\n            mint x = seg2.query(m, N).second;\n    \
+    \        (x == 0 ? ng : ok) = m;\n          }\n          v2 = ok;\n        }\n\
+    \        assert(v1 == v2 && \"get_max_key\");\n\n        if (v1 == -1) {\n   \
+    \       auto kv1 = seg1.get_max_keyval();\n          assert(kv1.second == T{}\
+    \ && \"get_max_keyval\");\n        } else {\n          auto kv1 = seg1.get_max_keyval();\n\
+    \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
+    \ kv2 && \"get_mix_keyval\");\n        }\n      },\n      [&]() {\n        //\
+    \ pop_min_key\n        int v2 = -1;\n        if (seg2.query(0, N).second != 0)\
+    \ {\n          // [0, n) \u306F\u975E\u30BC\u30ED\u3067\u3059\u304B\uFF1F\n  \
+    \        int ng = 0, ok = N;\n          while (ng + 1 < ok) {\n            int\
+    \ m = (ng + ok) / 2;\n            mint x = seg2.query(0, m).second;\n        \
+    \    (x == 0 ? ng : ok) = m;\n          }\n          v2 = ok - 1;\n        }\n\
+    \        if (v2 != -1) {\n          pair<int, T> kv1;\n          do {\n      \
+    \      kv1 = seg1.pop_min_keyval();\n          } while (kv1.second.second == 0);\n\
+    \          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1 ==\
+    \ kv2 && \"pop_min_keyval\");\n          seg2.set_val(v2, T{});\n        }\n \
+    \     },\n      [&]() {\n        // pop_max_key\n        int v2 = -1;\n      \
+    \  if (seg2.query(0, N).second != 0) {\n          // [i, N) \u306F\u975E\u30BC\
+    \u30ED\u3067\u3059\u304B\uFF1F\n          int ok = 0, ng = N;\n          while\
+    \ (ok + 1 < ng) {\n            int m = (ng + ok) / 2;\n            mint x = seg2.query(m,\
+    \ N).second;\n            (x == 0 ? ng : ok) = m;\n          }\n          v2 =\
+    \ ok;\n        }\n        if (v2 != -1) {\n          pair<int, T> kv1;\n     \
+    \     do {\n            kv1 = seg1.pop_max_keyval();\n          } while (kv1.second.second\
+    \ == 0);\n          auto kv2 = make_pair(v2, seg2.get_val(v2));\n          assert(kv1\
+    \ == kv2 && \"pop_max_keyval\");\n          seg2.set_val(v2, T{});\n        }\n\
+    \      },\n  };\n\n  rep(_, 10) {\n    int qq = vector<ll>{0LL, rng(1, 10), rng(1,\
+    \ Q)}[rng(0, 2)];\n    rep(qnum, qq) {\n      int c = rng(0, sz(funcs) - 1);\n\
+    \      // trc(c, \"cmd\");\n      funcs[c]();\n    }\n    {\n      // make_array\n\
+    \      auto vec1 = seg1.make_array();\n      vector<pair<int, T>> vec2;\n    \
+    \  rep(i, N) {\n        T val = seg2.get_val(i);\n        if (val != T{}) vec2.push_back({i,\
+    \ val});\n      }\n      // trc(vec1);\n      // trc(vec2);\n      int i1 = 0,\
+    \ i2 = 0;\n      while (i1 != sz(vec1) and i2 != sz(vec2)) {\n        while (i1\
+    \ != sz(vec1) and vec1[i1].second == T{}) i1++;\n        if (i1 == sz(vec1)) break;\n\
+    \        assert(vec1[i1] == vec2[i2] and \"make_array\");\n        i1++, i2++;\n\
+    \      }\n      while (i1 != sz(vec1) and vec1[i1].second == T{}) i1++;\n    \
+    \  assert(i1 == sz(vec1) and i2 == sz(vec2) and \"make_array\");\n      // trc(\"\
+    make_array ok\");\n    }\n    seg1.clear();\n    rep(i, N) seg2.set_val(i, T{});\n\
+    \  }\n}\n\nvoid test_tl(const int N = 5 * TEN(5), const int Q = 5 * TEN(5)) {\n\
+    \  ll MOD = 998244353;\n  V<T> init;\n  rep(i, N) init.emplace_back(rng(0, MOD\
+    \ - 1), rng(0, MOD - 1));\n\n  RBSTLazySegmentTree<int, T, E, f, g, h, ti, ei>\
+    \ seg1(init);\n  LazySegmentTree seg2(init, f, g, h, ti(), ei());\n\n  vector<function<void(void)>>\
+    \ funcs{\n      [&]() {\n        // apply\n        int l = +rng(0, 10);\n    \
+    \    int r = -rng(0, 10) + N;\n        E x{rng(0, MOD - 1), rng(0, MOD - 1)};\n\
+    \        seg1.apply(l, r, x);\n        seg2.update(l, r, x);\n      },\n     \
+    \ [&]() {\n        // fold\n        int l = +rng(0, 10);\n        int r = -rng(0,\
+    \ 10) + N;\n        auto v1 = seg1.fold(l, r);\n        auto v2 = seg2.query(l,\
+    \ r);\n        assert(v1 == v2 and \"fold\");\n      },\n  };\n\n  rep(qnum, Q)\
+    \ {\n    int c = rng(0, sz(funcs) - 1);\n    // trc(c, \"cmd\");\n    funcs[c]();\n\
+    \  }\n}\n\nvoid q() {\n  rep(t, 10) test(10, TEN(4));\n  //\n  rep(t, 10) test(100,\
+    \ TEN(4));\n  //\n  rep(t, 2) test(TEN(4), TEN(2));\n  //\n  test(10, TEN(4));\n\
+    \  test(2, TEN(4));\n  test(1, TEN(4));\n  cerr << \"test OK\" << endl;\n\n  Timer\
+    \ timer;\n  test_tl();\n  cerr << \"test_tl OK\" << endl;\n  cerr << \"time :\
+    \ \" << timer.elapsed() << endl;\n}\n\nvoid Nyaan::solve() { q(); }"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -435,16 +775,23 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - segment-tree/rbst-segment-tree.hpp
+  - misc/all.hpp
+  - misc/fastio.hpp
+  - misc/rng.hpp
+  - misc/timer.hpp
+  - segment-tree/lazy-segment-tree.hpp
+  - math/affine-transformation.hpp
+  - modint/montgomery-modint.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+  path: verify/verify-unit-test/rbst-segment-tree.test.cpp
   requiredBy: []
   timestamp: '2022-11-01 22:31:56+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+documentation_of: verify/verify-unit-test/rbst-segment-tree.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+- /verify/verify/verify-unit-test/rbst-segment-tree.test.cpp
+- /verify/verify/verify-unit-test/rbst-segment-tree.test.cpp.html
+title: verify/verify-unit-test/rbst-segment-tree.test.cpp
 ---

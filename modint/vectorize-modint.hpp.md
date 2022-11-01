@@ -134,8 +134,8 @@ data:
   isVerificationFile: false
   path: modint/vectorize-modint.hpp
   requiredBy:
-  - math-fast/mat-prod-strassen.hpp
   - math-fast/subset-convolution.hpp
+  - math-fast/mat-prod-strassen.hpp
   timestamp: '2021-05-19 02:04:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

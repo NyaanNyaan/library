@@ -167,13 +167,13 @@ data:
   isVerificationFile: false
   path: fps/polynomial-interpolation.hpp
   requiredBy:
-  - matrix/matrix-tree.hpp
   - matrix/polynomial-matrix-determinant.hpp
+  - matrix/matrix-tree.hpp
   timestamp: '2022-08-22 22:01:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
 documentation_of: fps/polynomial-interpolation.hpp
 layout: document
 redirect_from:

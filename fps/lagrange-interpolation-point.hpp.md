@@ -69,8 +69,8 @@ data:
   timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
 documentation_of: fps/lagrange-interpolation-point.hpp
 layout: document
 redirect_from:

@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: misc/all.hpp
     title: misc/all.hpp
   _extendedVerifiedWith:
@@ -12,6 +12,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
+  - icon: ':x:'
+    path: verify/verify-unit-test/rbst-segment-tree.test.cpp
+    title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
@@ -216,9 +219,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"misc/fastio.hpp\"\n\n#include <cstring>\n#include <type_traits>\n\
@@ -313,78 +316,79 @@ data:
   requiredBy:
   - misc/all.hpp
   timestamp: '2021-11-14 23:34:55+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
-  - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
+  - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
   - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
+  - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
-  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - verify/verify-aoj-other/aoj-2995.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
-  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
-  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
-  - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-  - verify/verify-yosupo-ds/yosupo-swag.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
-  - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
-  - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-  - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
+  - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
+  - verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
+  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
+  - verify/verify-yosupo-ds/yosupo-swag.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+  - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+  - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
-  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
-  - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
-  - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
-  - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+  - verify/verify-aoj-other/aoj-2995.test.cpp
+  - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
+  - verify/verify-unit-test/rbst-segment-tree.test.cpp
 documentation_of: misc/fastio.hpp
 layout: document
 redirect_from:
