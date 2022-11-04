@@ -62,6 +62,7 @@
 "verify/verify-aoj-other/aoj-3022.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/arbitrary-modint.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/barrett-reduction.test.cpp": "2022-08-22 19:46:43 +0900",
+"verify/verify-unit-test/bigint.test.cpp": "2022-11-05 02:06:24 +0900",
 "verify/verify-unit-test/bitset-find-prev.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-unit-test/complex-fft.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/debug.test.cpp": "2021-07-11 22:37:56 +0900",
