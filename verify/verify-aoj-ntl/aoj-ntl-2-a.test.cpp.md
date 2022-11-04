@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math/multiprecision_integer.hpp
+    path: math/multiprecision-integer.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
@@ -25,7 +25,7 @@ data:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_A
   bundledCode: "#line 1 \"verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp\"\n#define PROBLEM\
     \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_A\"\n\
-    \n#line 2 \"math/multiprecision_integer.hpp\"\n\n#include <algorithm>\n#include\
+    \n#line 2 \"math/multiprecision-integer.hpp\"\n\n#include <algorithm>\n#include\
     \ <cassert>\n#include <cmath>\n#include <iostream>\n#include <utility>\n#include\
     \ <vector>\nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line\
     \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
@@ -176,7 +176,7 @@ data:
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
     \ i64 a = d0[i].get();\n    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2\
     \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n\
-    \  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 12 \"math/multiprecision_integer.hpp\"\
+    \  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 12 \"math/multiprecision-integer.hpp\"\
     \n\nnamespace MultiPrecisionIntegerImpl {\nstruct TENS {\n  static constexpr int\
     \ offset = 30;\n  constexpr TENS() : _ten(), _tend() {\n    _ten[0] = 1;\n   \
     \ for (int i = 1; i < 20; i++) _ten[i] = _ten[i - 1] * 10;\n    _tend[offset]\
@@ -364,17 +364,17 @@ data:
     \ */\n#line 5 \"verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp\"\n//\nint main() {\n\
     \  bigint a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_A\"\
-    \n\n#include \"../../math/multiprecision_integer.hpp\"\n//\nint main() {\n  bigint\
+    \n\n#include \"../../math/multiprecision-integer.hpp\"\n//\nint main() {\n  bigint\
     \ a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   dependsOn:
-  - math/multiprecision_integer.hpp
+  - math/multiprecision-integer.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
   requiredBy: []
-  timestamp: '2022-11-05 02:19:30+09:00'
+  timestamp: '2022-11-05 03:23:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp

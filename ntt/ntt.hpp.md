@@ -12,7 +12,10 @@ data:
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
-    path: math/multiprecision_integer.hpp
+    path: math/garner-bigint.hpp
+    title: math/garner-bigint.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/multiprecision-integer.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
@@ -57,6 +60,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/garner-bigint.test.cpp
+    title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multieval.test.cpp
     title: verify/verify-unit-test/multieval.test.cpp
@@ -381,7 +387,8 @@ data:
   - fps/ntt-friendly-fps.hpp
   - fps/arbitrary-fps.hpp
   - fps/fast-multieval.hpp
-  - math/multiprecision_integer.hpp
+  - math/multiprecision-integer.hpp
+  - math/garner-bigint.hpp
   - tree/frequency-table-of-tree-distance.hpp
   timestamp: '2021-01-21 03:21:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -438,6 +445,7 @@ data:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp

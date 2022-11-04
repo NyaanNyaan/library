@@ -13,6 +13,9 @@ data:
     path: verify/verify-unit-test/barrett-reduction.test.cpp
     title: verify/verify-unit-test/barrett-reduction.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/garner-bigint.test.cpp
+    title: verify/verify-unit-test/garner-bigint.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   _isVerificationFailed: false
@@ -106,6 +109,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
 documentation_of: modint/arbitrary-modint.hpp
 layout: document

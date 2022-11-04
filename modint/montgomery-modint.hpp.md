@@ -15,7 +15,10 @@ data:
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   - icon: ':heavy_check_mark:'
-    path: math/multiprecision_integer.hpp
+    path: math/garner-bigint.hpp
+    title: math/garner-bigint.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/multiprecision-integer.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: modulo/strassen.hpp
@@ -66,6 +69,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/garner-bigint.test.cpp
+    title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
@@ -469,7 +475,8 @@ data:
   - fps/arbitrary-fps.hpp
   - fps/fast-multieval.hpp
   - fps/fps-composition-fast.hpp
-  - math/multiprecision_integer.hpp
+  - math/multiprecision-integer.hpp
+  - math/garner-bigint.hpp
   - tree/frequency-table-of-tree-distance.hpp
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -576,6 +583,7 @@ data:
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp

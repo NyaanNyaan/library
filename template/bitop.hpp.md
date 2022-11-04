@@ -241,6 +241,9 @@ data:
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/garner-bigint.test.cpp
+    title: verify/verify-unit-test/garner-bigint.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner.test.cpp
     title: verify/verify-unit-test/garner.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1277,6 +1280,7 @@ data:
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp

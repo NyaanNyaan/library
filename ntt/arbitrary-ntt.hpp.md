@@ -12,7 +12,10 @@ data:
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
   - icon: ':heavy_check_mark:'
-    path: math/multiprecision_integer.hpp
+    path: math/garner-bigint.hpp
+    title: math/garner-bigint.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/multiprecision-integer.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: ntt/chirp-z.hpp
@@ -48,6 +51,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint.test.cpp
     title: verify/verify-unit-test/bigint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/garner-bigint.test.cpp
+    title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
@@ -307,7 +313,8 @@ data:
   - ntt/cooley-tukey-ntt.hpp
   - ntt/rader-ntt.hpp
   - fps/arbitrary-fps.hpp
-  - math/multiprecision_integer.hpp
+  - math/multiprecision-integer.hpp
+  - math/garner-bigint.hpp
   - tree/frequency-table-of-tree-distance.hpp
   timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -336,6 +343,7 @@ data:
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
 documentation_of: ntt/arbitrary-ntt.hpp
 layout: document

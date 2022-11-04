@@ -387,6 +387,9 @@ data:
       path: math/float-binomial.hpp
       title: math/float-binomial.hpp
     - icon: ':heavy_check_mark:'
+      path: math/garner-bigint.hpp
+      title: math/garner-bigint.hpp
+    - icon: ':heavy_check_mark:'
       path: math/garner.hpp
       title: Garner's algorithm
     - icon: ':heavy_check_mark:'
@@ -399,7 +402,7 @@ data:
       path: math/kth-root-integral.hpp
       title: $\mathrm{floor}(a^{\frac{1}{k}})$
     - icon: ':heavy_check_mark:'
-      path: math/multiprecision_integer.hpp
+      path: math/multiprecision-integer.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
     - icon: ':heavy_check_mark:'
       path: math/nimber-to-field.hpp
@@ -1166,6 +1169,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fps.test.cpp
       title: verify/verify-unit-test/fps.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/garner-bigint.test.cpp
+      title: verify/verify-unit-test/garner-bigint.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/garner.test.cpp
       title: verify/verify-unit-test/garner.test.cpp
