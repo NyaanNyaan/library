@@ -2,7 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../math/multiprecision_integer.hpp"
+#include "../../math/multiprecision-integer.hpp"
 //
 #include "../../misc/rng.hpp"
 
