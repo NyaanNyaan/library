@@ -12,6 +12,9 @@ data:
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
+    path: math/multiprecision_integer.hpp
+    title: "\u591A\u500D\u9577\u6574\u6570"
+  - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
   - icon: ':heavy_check_mark:'
@@ -27,6 +30,27 @@ data:
     path: tree/frequency-table-of-tree-distance.hpp
     title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint.test.cpp
+    title: verify/verify-unit-test/bigint.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dual-fps.test.cpp
     title: verify/verify-unit-test/dual-fps.test.cpp
@@ -357,11 +381,18 @@ data:
   - fps/ntt-friendly-fps.hpp
   - fps/arbitrary-fps.hpp
   - fps/fast-multieval.hpp
+  - math/multiprecision_integer.hpp
   - tree/frequency-table-of-tree-distance.hpp
   timestamp: '2021-01-21 03:21:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
@@ -407,6 +438,7 @@ data:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp

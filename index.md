@@ -399,6 +399,9 @@ data:
       path: math/kth-root-integral.hpp
       title: $\mathrm{floor}(a^{\frac{1}{k}})$
     - icon: ':heavy_check_mark:'
+      path: math/multiprecision_integer.hpp
+      title: "\u591A\u500D\u9577\u6574\u6570"
+    - icon: ':heavy_check_mark:'
       path: math/nimber-to-field.hpp
       title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
     - icon: ':heavy_check_mark:'
@@ -1075,6 +1078,24 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
       title: verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+      title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
   - name: verify/verify-aoj-other
     pages:
     - icon: ':heavy_check_mark:'
@@ -1115,6 +1136,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/barrett-reduction.test.cpp
       title: verify/verify-unit-test/barrett-reduction.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/bigint.test.cpp
+      title: verify/verify-unit-test/bigint.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/bitset-find-prev.test.cpp
       title: verify/verify-unit-test/bitset-find-prev.test.cpp

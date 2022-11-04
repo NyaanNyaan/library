@@ -12,6 +12,9 @@ data:
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
   - icon: ':heavy_check_mark:'
+    path: math/multiprecision_integer.hpp
+    title: "\u591A\u500D\u9577\u6574\u6570"
+  - icon: ':heavy_check_mark:'
     path: ntt/chirp-z.hpp
     title: Chirp Z-transform(Bluestein's algorithm)
   - icon: ':heavy_check_mark:'
@@ -24,6 +27,27 @@ data:
     path: tree/frequency-table-of-tree-distance.hpp
     title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint.test.cpp
+    title: verify/verify-unit-test/bigint.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
@@ -283,11 +307,18 @@ data:
   - ntt/cooley-tukey-ntt.hpp
   - ntt/rader-ntt.hpp
   - fps/arbitrary-fps.hpp
+  - math/multiprecision_integer.hpp
   - tree/frequency-table-of-tree-distance.hpp
   timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
@@ -305,6 +336,7 @@ data:
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-unit-test/bigint.test.cpp
 documentation_of: ntt/arbitrary-ntt.hpp
 layout: document
 redirect_from:
