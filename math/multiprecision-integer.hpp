@@ -13,42 +13,19 @@ using namespace std;
 namespace MultiPrecisionIntegerImpl {
 struct TENS {
   static constexpr int offset = 30;
-  constexpr TENS() : _ten(), _tend() {
-    _ten[0] = 1;
-    for (int i = 1; i < 20; i++) _ten[i] = _ten[i - 1] * 10;
+  constexpr TENS() : _tend() {
     _tend[offset] = 1;
     for (int i = 1; i <= offset; i++) {
       _tend[offset + i] = _tend[offset + i - 1] * 10.0;
       _tend[offset - i] = 1.0 / _tend[offset + i];
     }
   }
-  unsigned long long ten_ull(int n) const {
-    assert(0 <= n and n < 20);
-    return _ten[n];
-  }
   long double ten_ld(int n) const {
     assert(-offset <= n and n <= offset);
     return _tend[n + offset];
   }
-  // 桁数
-  template <typename I, enable_if_t<is_unsigned_v<I>>* = nullptr>
-  int digit(I n) const {
-    int l = 0, r = 20;
-    while (l + 1 < r) {
-      int m = (l + r) / 2;
-      (_ten[m] <= n ? l : r) = m;
-    }
-    return l + 1;
-  }
-  template <typename I,
-            enable_if_t<is_signed_v<I> || is_same_v<I, __int128_t>>* = nullptr>
-  int digit(I n) const {
-    assert(n >= 0);
-    return digit((unsigned long long)(n));
-  }
 
  private:
-  unsigned long long _ten[20];
   long double _tend[offset * 2 + 1];
 };
 }  // namespace MultiPrecisionIntegerImpl
@@ -70,7 +47,7 @@ struct MultiPrecisionInteger {
   template <typename I, enable_if_t<is_integral_v<I> ||
                                     is_same_v<I, __int128_t>>* = nullptr>
   MultiPrecisionInteger(I x) : neg(false) {
-    if constexpr (is_signed_v<I> or is_same_v<I, __int128_t>) {
+    if constexpr (is_signed_v<I> || is_same_v<I, __int128_t>) {
       if (x < 0) neg = true, x = -x;
     }
     while (x) dat.push_back(x % D), x /= D;
@@ -78,7 +55,7 @@ struct MultiPrecisionInteger {
 
   MultiPrecisionInteger(const string& S) : neg(false) {
     assert(!S.empty());
-    if (S.size() == 1u and S[0] == '0') return;
+    if (S.size() == 1u && S[0] == '0') return;
     int l = 0;
     if (S[0] == '-') ++l, neg = true;
     for (int ie = S.size(); l < ie; ie -= logD) {
@@ -109,7 +86,7 @@ struct MultiPrecisionInteger {
     return {n, c};
   }
   friend pair<M, M> divmod(const M& lhs, const M& rhs) {
-    auto dm = _divmod(lhs.dat, rhs.dat);
+    auto dm = _divmod_naive(lhs.dat, rhs.dat);
     bool dn = _is_zero(dm.first) ? false : lhs.neg != rhs.neg;
     bool mn = _is_zero(dm.second) ? false : lhs.neg;
     return {M{dn, dm.first}, M{mn, dm.second}};
@@ -171,7 +148,7 @@ struct MultiPrecisionInteger {
     b += prefix.size() - 1;
     long double a = 0;
     for (auto& c : prefix) a = a * 10.0 + (c - '0');
-    a *= tens.ten_ld(-prefix.size() + 1);
+    a *= tens.ten_ld(-((int)prefix.size()) + 1);
     a = clamp<long double>(a, 1.0, nextafterl(10.0, 1.0));
     if (neg) a = -a;
     return {a, b};
@@ -244,7 +221,7 @@ struct MultiPrecisionInteger {
   static bool _is_zero(const vector<int>& a) { return a.empty(); }
   // a == 1
   static bool _is_one(const vector<int>& a) {
-    return (int)a.size() == 1 and a[0] == 1;
+    return (int)a.size() == 1 && a[0] == 1;
   }
   // 末尾 0 を削除
   static void _shrink(vector<int>& a) {
@@ -303,8 +280,11 @@ struct MultiPrecisionInteger {
     for (int i = 0; i < (int)a.size(); i++) {
       for (int j = 0; j < (int)b.size(); j++) {
         long long p = 1LL * a[i] * b[j];
-        prod[i + j + 0] += p % D;
-        prod[i + j + 1] += p / D;
+        prod[i + j] += p;
+        if (prod[i + j] >= (4LL * D * D)) {
+          prod[i + j] -= 4LL * D * D;
+          prod[i + j + 1] += 4LL * D;
+        }
       }
     }
     vector<int> c;
@@ -320,7 +300,7 @@ struct MultiPrecisionInteger {
   }
   // a * b
   static vector<int> _mul(const vector<int>& a, const vector<int>& b) {
-    if (_is_zero(a) or _is_zero(b)) return {};
+    if (_is_zero(a) || _is_zero(b)) return {};
     if (_is_one(a)) return b;
     if (_is_one(b)) return a;
     if (min<int>(a.size(), b.size()) <= 128) {
@@ -331,7 +311,7 @@ struct MultiPrecisionInteger {
   // 0 <= A < 1e18, 1 <= B < 1e9
   static pair<vector<int>, vector<int>> _divmod_li(const vector<int>& a,
                                                    const vector<int>& b) {
-    assert(0 <= (int)a.size() and (int) a.size() <= 2);
+    assert(0 <= (int)a.size() && (int)a.size() <= 2);
     assert((int)b.size() == 1);
     long long va = _to_ll(a);
     int vb = b[0];
@@ -340,8 +320,8 @@ struct MultiPrecisionInteger {
   // 0 <= A < 1e18, 1 <= B < 1e18
   static pair<vector<int>, vector<int>> _divmod_ll(const vector<int>& a,
                                                    const vector<int>& b) {
-    assert(0 <= (int)a.size() and (int) a.size() <= 2);
-    assert(1 <= (int)b.size() and (int) b.size() <= 2);
+    assert(0 <= (int)a.size() && (int)a.size() <= 2);
+    assert(1 <= (int)b.size() && (int)b.size() <= 2);
     long long va = _to_ll(a), vb = _to_ll(b);
     return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};
   }
@@ -364,8 +344,8 @@ struct MultiPrecisionInteger {
     return {quo, d ? vector<int>{int(d)} : vector<int>{}};
   }
   // 0 <= A, 1 <= B
-  static pair<vector<int>, vector<int>> _divmod(const vector<int>& a,
-                                                const vector<int>& b) {
+  static pair<vector<int>, vector<int>> _divmod_naive(const vector<int>& a,
+                                                      const vector<int>& b) {
     if (_is_zero(b)) {
       cerr << "Divide by Zero Exception" << endl;
       exit(1);
@@ -392,12 +372,14 @@ struct MultiPrecisionInteger {
         assert(y.size() + 1 == rem.size());
         long long rb = 1LL * rem[rem.size() - 1] * D + rem[rem.size() - 2];
         int q = rb / yb;
+        [[maybe_unused]] int old_q = q;
         vector<int> yq = _mul(y, {q});
         // 真の商は q-2 以上 q+1 以下だが自信が無いので念のため while を回す
         while (_lt(rem, yq)) q--, yq = _sub(yq, y);
         rem = _sub(rem, yq);
         while (_leq(y, rem)) q++, rem = _sub(rem, y);
         quo[i] = q;
+        assert(-2 <= (q - old_q) and (q - old_q) <= 1);
       }
       if (i) rem.insert(begin(rem), x[i - 1]);
     }
@@ -410,7 +392,7 @@ struct MultiPrecisionInteger {
   // int -> string
   // 先頭かどうかに応じて zero padding するかを決める
   static string _itos(int x, bool zero_padding) {
-    assert(0 <= x and x < D);
+    assert(0 <= x && x < D);
     string res;
     for (int i = 0; i < logD; i++) {
       res.push_back('0' + x % 10), x /= 10;
@@ -427,7 +409,7 @@ struct MultiPrecisionInteger {
   template <typename I, enable_if_t<is_integral_v<I> ||
                                     is_same_v<I, __int128_t>>* = nullptr>
   static vector<int> _integer_to_vec(I x) {
-    if constexpr (is_signed_v<I> or is_same_v<I, __int128_t>) {
+    if constexpr (is_signed_v<I> || is_same_v<I, __int128_t>) {
       assert(x >= 0);
     }
     vector<int> res;
