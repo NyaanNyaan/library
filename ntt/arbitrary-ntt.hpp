@@ -81,9 +81,9 @@ vector<u128> multiply_u128(const vector<T> &s, const vector<T> &t) {
   for (int i = 0; i < n; i++) {
     i64 n1 = d1[i].get(), n2 = d2[i].get();
     i64 a = d0[i].get();
-    u128 b = (n1 + m1 - a) * r01 % m1;
-    u128 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
-    ret[i] = a + b * w1 + c * w2;
+    i64 b = (n1 + m1 - a) * r01 % m1;
+    i64 c = ((n2 + m2 - a) * r02r12 + (m2 - b) * r12) % m2;
+    ret[i] = a + b * w1 + u128(c) * w2;
   }
   return ret;
 }
