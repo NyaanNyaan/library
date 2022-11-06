@@ -388,7 +388,6 @@ struct MultiPrecisionInteger {
     return {quo, q2};
   }
 
-  // TODO : verify
   // 0 <= A, 1 <= B
   static pair<vector<int>, vector<int>> _divmod_dc(const vector<int>& a,
                                                    const vector<int>& b) {
@@ -404,19 +403,7 @@ struct MultiPrecisionInteger {
     vector<int> y = _mul(b, {norm});
 
     int s = x.size(), t = y.size();
-    // y.size() >= 10
-    // u : 上位桁の桁数, v : 下位桁の桁数
     int yu = (t + 1) / 2, yv = t - yu;
-    // trc(s, t, yu, yv);
-    /**
-     *                      o o o
-     *            ___________________________
-     *  Y Y Y Y Y ) X X X X X X X X X X X X X
-     *  [ h ] [l]   [   h   ] [l]
-     *
-     *  XXXXXXX/YYYYY を XXXXX/YYY で近似する方針
-     *  再帰が書きやすいか
-     */
     vector<int> yh{end(y) - yu, end(y)};
     int xv = max<int>(yv, s - (yu * 2 - 1));
     int xu = s - xv;
