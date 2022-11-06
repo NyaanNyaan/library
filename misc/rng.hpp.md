@@ -37,6 +37,9 @@ data:
     path: verify/verify-unit-test/bigint.test.cpp
     title: verify/verify-unit-test/bigint.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint2.test.cpp
+    title: verify/verify-unit-test/bigint2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/complex-fft.test.cpp
     title: verify/verify-unit-test/complex-fft.test.cpp
   - icon: ':heavy_check_mark:'
@@ -261,6 +264,7 @@ data:
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
+  - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
   - verify/verify-unit-test/multieval.test.cpp

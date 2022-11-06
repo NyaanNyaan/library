@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0303.test.cpp
+    title: verify/verify-yuki/yuki-0303.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -100,6 +103,7 @@ data:
   timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
 documentation_of: matrix/matrix-fast.hpp
 layout: document

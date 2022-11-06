@@ -61,6 +61,9 @@ data:
     path: verify/verify-unit-test/bigint.test.cpp
     title: verify/verify-unit-test/bigint.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint2.test.cpp
+    title: verify/verify-unit-test/bigint2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -337,6 +340,9 @@ data:
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0303.test.cpp
+    title: verify/verify-yuki/yuki-0303.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0502.test.cpp
     title: verify/verify-yuki/yuki-0502.test.cpp
   - icon: ':heavy_check_mark:'
@@ -533,6 +539,7 @@ data:
   - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
@@ -594,6 +601,7 @@ data:
   - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/debug.test.cpp

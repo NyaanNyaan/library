@@ -1143,6 +1143,9 @@ data:
       path: verify/verify-unit-test/bigint.test.cpp
       title: verify/verify-unit-test/bigint.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/bigint2.test.cpp
+      title: verify/verify-unit-test/bigint2.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/bitset-find-prev.test.cpp
       title: verify/verify-unit-test/bitset-find-prev.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1800,6 +1803,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0215.test.cpp
       title: verify/verify-yuki/yuki-0215.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0303.test.cpp
+      title: verify/verify-yuki/yuki-0303.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0502.test.cpp
       title: verify/verify-yuki/yuki-0502.test.cpp

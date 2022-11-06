@@ -52,6 +52,9 @@ data:
     path: verify/verify-unit-test/bigint.test.cpp
     title: verify/verify-unit-test/bigint.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint2.test.cpp
+    title: verify/verify-unit-test/bigint2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -93,6 +96,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0215.test.cpp
     title: verify/verify-yuki/yuki-0215.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0303.test.cpp
+    title: verify/verify-yuki/yuki-0303.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0502.test.cpp
     title: verify/verify-yuki/yuki-0502.test.cpp
@@ -337,6 +343,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
+  - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
@@ -345,6 +352,7 @@ data:
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/bigint2.test.cpp
 documentation_of: ntt/arbitrary-ntt.hpp
 layout: document
 redirect_from:

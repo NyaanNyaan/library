@@ -5,8 +5,17 @@ data:
     path: math/multiprecision-integer.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
+    path: misc/all.hpp
+    title: misc/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/timer.hpp
+    title: misc/timer.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -44,7 +53,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/bigint.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"verify/verify-unit-test/bigint2.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
@@ -180,7 +189,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/bigint.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/bigint2.test.cpp\"\
     \n//\n#line 2 \"math/multiprecision-integer.hpp\"\n\n#line 10 \"math/multiprecision-integer.hpp\"\
     \nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
     \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
@@ -533,257 +542,169 @@ data:
     \ \"\") {\n    if (!s.empty()) cerr << s << \" : \";\n    cerr << \"{ \";\n  \
     \  for (int i = 0; i < (int)a.size(); i++) cerr << a[i] << \", \";\n    cerr <<\
     \ \"}\" << endl;\n  }\n};\n\nusing bigint = MultiPrecisionInteger;\n\n/**\n *\
-    \ @brief \u591A\u500D\u9577\u6574\u6570\n */\n#line 6 \"verify/verify-unit-test/bigint.test.cpp\"\
-    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
-    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
-    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
-    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
-    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
-    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
-    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
-    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
-    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
-    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \ @brief \u591A\u500D\u9577\u6574\u6570\n */\n#line 6 \"verify/verify-unit-test/bigint2.test.cpp\"\
+    \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
+    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
+    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
+    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
+    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
+    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
+    \ pre;\n\ninline void load() {\n  int len = in_right - in_left;\n  memmove(inbuf,\
+    \ inbuf + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
+    \  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
+    \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
+    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
+    \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
+    \ <typename T>\ninline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n\
+    \  char c;\n  do c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]]\
+    \ bool minus = false;\n  if constexpr (is_signed<T>::value == true) {\n    if\
+    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
+    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n}\ninline void\
+    \ rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head,\
+    \ Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) {\n\
+    \  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = c;\n}\ninline void\
+    \ wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = b\
+    \ ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
+    \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
+    \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
+    \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
+    \    return;\n  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x <\
+    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n\
+    \  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n\
+    \    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n    \
+    \  outbuf[out_right] = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t\
+    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
+    \     outbuf[out_right] = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n \
+    \     out_right += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2) + 1, 3);\n      out_right += 3;\n    } else\
+    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n      out_right\
+    \ += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4, 12 - i);\n  out_right\
+    \ += 12 - i;\n}\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n\
+    }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
+    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
+    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
+    using fastio::wtn;\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng()\
+    \ {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
     \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
     \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
     \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
     \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"verify/verify-unit-test/bigint.test.cpp\"\
-    \n\nvoid MultiPrecisionInteger::_test_private_function(const M& A, const M& B)\
-    \ {\n  const vector<int>& a = A.dat;\n  const vector<int>& b = B.dat;\n  {\n \
-    \   auto m1 = _mul_naive(a, b);\n    auto m2 = _mul_fft(a, b);\n    assert(m1\
-    \ == m2 && \"_mul_test\");\n  }\n}\n\n//\n\nusing namespace Nyaan;\n\nusing ll\
-    \ = long long;\nusing i128 = __int128_t;\n\nvoid test() {\n  auto i128_to_string\
-    \ = [](i128 x) -> string {\n    if (x == 0) return \"0\";\n    string S;\n   \
-    \ bool neg = false;\n    if (x < 0) neg = true, x = -x;\n    while (x) S.push_back('0'\
-    \ + x % 10), x /= 10;\n    if (neg) S.push_back('-');\n    reverse(begin(S), end(S));\n\
-    \    return S;\n  };\n  // [0, 10^i)\n  auto rng128 = [&](int i = 37) {\n    assert(0\
-    \ <= i and i <= 37);\n    i128 res = 0;\n    rep(_, i) res = res * 10 + rng(0,\
-    \ 9);\n    return res;\n  };\n  auto TEN128 = [&](int i = 37) {\n    assert(0\
-    \ <= i and i <= 37);\n    i128 res = 1;\n    rep(_, i) res *= 10;\n    return\
-    \ res;\n  };\n\n  rep(t, 10000) {\n    int loga = rng(1, 37);\n    int logb =\
-    \ rng(1, 37);\n    i128 a = rng128(loga);\n    i128 b = rng128(logb);\n    if\
-    \ (rng() % 50 == 0) a = 0;\n    if (rng() % 50 == 0) b = 0;\n    if (rng() % 50\
-    \ == 0) a = TEN128(loga);\n    if (rng() % 50 == 0) a = TEN128(loga) - 1;\n  \
-    \  if (rng() % 50 == 0) b = TEN128(logb);\n    if (rng() % 50 == 0) b = TEN128(logb)\
-    \ - 1;\n    if (rng() % 50 == 0) a = b + TEN128(loga);\n    if (rng() % 50 ==\
-    \ 0) a = b + TEN128(loga) - 1;\n    if (rng() & 1) a = -a;\n    if (rng() & 1)\
-    \ b = -b;\n    bigint A{a};\n    bigint B{b};\n\n    assert(a == A and A == a);\n\
-    \    assert(!(a != A) and !(A != a));\n    assert(!(a < A) and !(A < a));\n  \
-    \  assert(a <= A and A <= a);\n    assert(!(a > A) and !(A > a));\n    assert(a\
-    \ >= A and A >= a);\n\n    assert((a < b) == (A < B));\n    assert((a > b) ==\
-    \ (A > B));\n    assert((a <= b) == (A <= B));\n    assert((a >= b) == (A >= B));\n\
-    \    assert((a == b) == (A == B));\n    assert((a != b) == (A != B));\n\n    assert(+A\
-    \ == +a and -A == -a);\n    assert(+B == +b and -B == -b);\n    assert(abs(A)\
-    \ == (a >= 0 ? a : -a));\n    assert(abs(B) == (b >= 0 ? b : -b));\n    assert(A.is_zero()\
-    \ == (a == 0));\n    assert(B.is_zero() == (b == 0));\n\n    if (LONG_LONG_MIN\
-    \ <= a and a <= LONG_LONG_MAX) {\n      assert(A.to_ll() == a);\n    }\n    if\
-    \ (LONG_LONG_MIN <= b and b <= LONG_LONG_MAX) {\n      assert(B.to_ll() == b);\n\
-    \    }\n    assert(A.to_i128() == a);\n    assert(B.to_i128() == b);\n\n    bigint\
-    \ C{i128_to_string(a)};\n    bigint D{i128_to_string(b)};\n    if (A != C or B\
-    \ != D) {\n      trc(a, b, A, B, C, D);\n    }\n    assert(A == C and B == D);\n\
-    \    if (A.to_string() != i128_to_string(a)) {\n      trc(A);\n      trc(a);\n\
-    \    }\n    assert(A.to_string() == i128_to_string(a));\n    assert(B.to_string()\
-    \ == i128_to_string(b));\n\n    assert(a + b == A + B);\n    assert(a + b == B\
-    \ + A);\n    assert(A + B == B + A);\n    assert(a - b == A - B);\n    assert(b\
-    \ - a == B - A);\n\n    bigint E{A};\n    E += B;\n    assert(E == a + b);\n \
-    \   E = B;\n    E += A;\n    assert(E == a + b);\n    E = A;\n    E -= B;\n  \
-    \  assert(E == a - b);\n    E = B;\n    E -= A;\n    assert(E == b - a);\n  }\n\
-    \n  // *\n  rep(t, 1000) {\n    ll a = randint(-TEN(18), TEN(18));\n    ll b =\
-    \ randint(-TEN(18), TEN(18));\n    if (rng() % 100 == 0) a = 0;\n    if (rng()\
-    \ % 100 == 0) b = 0;\n    if (rng() % 10 == 0) a = b + rng() % 11;\n    bigint\
-    \ A{a}, B{b};\n\n    i128 p = i128(a) * b;\n    auto S = i128_to_string(p);\n\
-    \    auto C = A * B;\n    auto D = B * A;\n\n    assert(C == D);\n    assert(C.to_string()\
-    \ == S);\n    assert(D.to_string() == S);\n    assert(C == p and p == C);\n  \
-    \  assert(D == p and p == D);\n    assert(C.to_i128() == p);\n    assert(D.to_i128()\
-    \ == p);\n  }\n\n  // _mul_naive, _mul_fft\n  rep(t, 1000) {\n    vector<int>\
-    \ a, b;\n    a.resize(rng(0, 20));\n    b.resize(rng(0, 20));\n    for (auto&\
-    \ x : a) x = rng(0, TEN(9) - 1);\n    for (auto& x : b) x = rng(0, TEN(9) - 1);\n\
-    \    while (!a.empty() and a.back() == 0) a.pop_back();\n    while (!b.empty()\
-    \ and b.back() == 0) b.pop_back();\n    bigint::_test_private_function({false,\
-    \ a}, {false, b});\n  }\n\n  // dfp\n  {\n    cerr << fixed << setprecision(21);\n\
-    \    auto test_dfp = [&](string S, long double acc = 1e-18) {\n      bigint A{S};\n\
-    \      auto [a, b] = A.dfp();\n      // trc(a, b, A.to_ld());\n      if (a ==\
-    \ 0) {\n        assert(b == 0 and S == \"0\");\n        return;\n      }\n   \
-    \   assert(1.0 <= abs(a) and abs(a) < 10.0);\n      if (S[0] == '-') {\n     \
-    \   assert(b + 2 == (int)S.size());\n      } else {\n        assert(b + 1 == (int)S.size());\n\
-    \      }\n      long double t1 = A.to_ld();\n      long double t2 = strtold(S.c_str(),\
-    \ 0);\n      long double d = abs(t1 - t2);\n      assert(d / t2 < acc);\n    };\n\
-    \    test_dfp(\"998244353\");\n    test_dfp(\"1000000000000000000\");\n    test_dfp(\"\
-    123456789012345678901234567890\");\n    for (int i = -111; i <= 111; i++) {\n\
-    \      test_dfp(to_string(i));\n    }\n    rep(t, 1000) {\n      long long x =\
-    \ rng(-TEN(18), TEN(18));\n      test_dfp(to_string(x));\n    }\n    for (int\
-    \ k = 20; k <= 60; k++) {\n      test_dfp(\"1\" + string(k, '0'));\n      test_dfp(string(k,\
-    \ '9'));\n    }\n    rep(t, 1000) {\n      string s;\n      int b = rng(1, 100);\n\
-    \      rep(i, 100) s.push_back(rng('0' + (i == 0), '9'));\n      if (rng() % 2)\
-    \ s.insert(begin(s), '-');\n      test_dfp(s, 1e-17);\n    }\n  }\n\n  // to_ld\n\
-    \  rep(t, 1000) {\n    long long x = rng(-TEN(16), TEN(16));\n    bigint A{x};\n\
-    \    ll y = llround(A.to_ld());\n    assert(x == y);\n  }\n\n  // _tens\n  {\n\
-    \    bigint _m;\n    /*\n    unsigned long long x = 1;\n    for (int i = 0; i\
-    \ < 20; i++) {\n      assert(x == _m.tens.ten_ull(i));\n      assert(_m.tens.digit(x)\
-    \ == i + 1);\n      assert(_m.tens.digit(x - 1) == (x == 1 ? 1 : i));\n      x\
-    \ *= 10;\n    }\n    assert(_m.tens.digit(0) == 1);\n    assert(_m.tens.digit(1)\
-    \ == 1);\n    */\n    for (int i = -_m.tens.offset; i <= _m.tens.offset; i++)\
-    \ {\n      long double t1 = _m.tens.ten_ld(i);\n      long double t2 = powl(10,\
-    \ i);\n      long double d = abs(t1 - t2);\n      // trc(i, t1, t2, d / t1);\n\
-    \      // i < 0 -> \u6841\u843D\u3061\u304C\u767A\u751F\u3059\u308B\u305F\u3081\
-    \u5C11\u3057\u9762\u5012\n      if (i <= 0) assert(d / t1 < 1e-17);\n      if\
-    \ (i >= 0) assert(d / t2 < 1e-19);\n    }\n  }\n\n  {\n    auto validate_divmod\
-    \ = [&](bigint a, bigint b) {\n      auto [q, r] = divmod(a, b);\n\n      i128\
-    \ a2 = a.to_i128();\n      i128 b2 = b.to_i128();\n      i128 q2 = a2 / b2, r2\
-    \ = a2 % b2;\n      assert(a == a2 and b == b2 and q == q2 and r == r2);\n\n \
-    \     assert(q * b + r == a);\n      assert(0 <= abs(r) and abs(r) < abs(b));\n\
-    \      if (a >= 0 and b > 0) {\n        assert(q >= 0 and r >= 0);\n      }\n\
-    \      if (a >= 0 and b < 0) {\n        assert(q <= 0 and r >= 0);\n      }\n\
-    \      if (a < 0 and b > 0) {\n        assert(q <= 0 and r <= 0);\n      }\n \
-    \     if (a < 0 and b < 0) {\n        assert(q >= 0 and r <= 0);\n      }\n  \
-    \  };\n    auto wrapper = [&](bigint a, bigint b) {\n      validate_divmod(+a,\
-    \ +b);\n      validate_divmod(+a, -b);\n      validate_divmod(-a, +b);\n     \
-    \ validate_divmod(-a, -b);\n    };\n\n    rep(t, 1000) {\n      i128 a = 0;\n\
-    \      if (t < 37) {\n        a = TEN128(t);\n      } else if (t < 74) {\n   \
-    \     a = TEN128(t - 37) - 1;\n      } else if (t < 100) {\n        a = t - 87;\n\
-    \      } else {\n        a = rng();\n        a = (a << 63) + rng();\n      }\n\
-    \      bigint A = a;\n      for (int i = 1; i <= 18; i++) {\n        wrapper(A,\
-    \ i);\n        wrapper(A, TEN(i) - 1);\n      }\n      rep(_, 10) wrapper(A, rng(1,\
-    \ TEN(9)));\n      rep(_, 10) wrapper(A, rng(1, TEN(18)));\n      rep(_, 10) wrapper(A,\
-    \ rng128(27));\n    }\n  }\n\n  // divmod\n  {\n    auto validate_divmod2 = [&](bigint\
-    \ a, bigint b) {\n      auto [q, r] = divmod(a, b);\n\n      bigint a2 = bigint(a.to_string());\n\
-    \      bigint b2 = bigint(b.to_string());\n      bigint q2 = bigint(q.to_string());\n\
-    \      bigint r2 = bigint(r.to_string());\n      assert(a == a2 and b == b2 and\
-    \ q == q2 and r == r2);\n\n      assert(q * b + r == a);\n      assert(0 <= abs(r)\
-    \ and abs(r) < abs(b));\n      if (a >= 0 and b > 0) {\n        assert(q >= 0\
-    \ and r >= 0);\n      }\n      if (a >= 0 and b < 0) {\n        assert(q <= 0\
-    \ and r >= 0);\n      }\n      if (a < 0 and b > 0) {\n        assert(q <= 0 and\
-    \ r <= 0);\n      }\n      if (a < 0 and b < 0) {\n        assert(q >= 0 and r\
-    \ <= 0);\n      }\n    };\n    auto wrapper = [&](bigint a, bigint b) {\n    \
-    \  validate_divmod2(+a, +b);\n      validate_divmod2(+a, -b);\n      validate_divmod2(-a,\
-    \ +b);\n      validate_divmod2(-a, -b);\n    };\n\n    rep(t, 1000) {\n      vector<int>\
-    \ a, b;\n      a.resize(rng(0, 20));\n      b.resize(rng(0, 20));\n      for (auto&\
-    \ x : a) x = rng(0, TEN(9) - 1);\n      for (auto& x : b) x = rng(0, TEN(9) -\
-    \ 1);\n      while (!a.empty() and a.back() == 0) a.pop_back();\n      while (!b.empty()\
-    \ and b.back() == 0) b.pop_back();\n      bigint A{false, a}, B{false, b};\n \
-    \     if (!A.is_zero()) wrapper(B, A);\n      if (!B.is_zero()) wrapper(A, B);\n\
-    \    }\n  }\n  cerr << \"OK\" << endl;\n}\n\nvoid Nyaan::solve() {\n  test();\n\
-    \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"misc/timer.hpp\"\n\n#line\
+    \ 4 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
+    };\n#line 8 \"verify/verify-unit-test/bigint2.test.cpp\"\nusing namespace Nyaan;\n\
+    \nvoid MultiPrecisionInteger::_test_private_function(const M& A, const M& B) {\n\
+    \  long long naive_complexity =\n      max<long long>(A._size(), B._size()) *\
+    \ abs(A._size() - B._size());\n  if (naive_complexity > 100000) return;\n\n  const\
+    \ vector<int>& a = A.dat;\n  const vector<int>& b = B.dat;\n  if (!B.is_zero())\
+    \ {\n    auto qr1 = _divmod_naive(a, b);\n    auto qr2 = _divmod_dc(a, b);\n \
+    \   assert(qr1 == qr2 && \"_div_test\");\n  }\n  if (!A.is_zero()) {\n    auto\
+    \ qr1 = _divmod_naive(b, a);\n    auto qr2 = _divmod_dc(b, a);\n    assert(qr1\
+    \ == qr2 && \"_div_test\");\n  }\n}\n\nvoid q() {\n  auto gen = [&](int d) {\n\
+    \    string S;\n    S.push_back(rng('1', '9'));\n    rep(_, d - 1) S.push_back(rng('0',\
+    \ '9'));\n    if (rng() & 1) S.insert(begin(S), '-');\n    return S;\n  };\n \
+    \ auto validate_divmod2 = [&](bigint a, bigint b) {\n    auto [q, r] = divmod(a,\
+    \ b);\n\n    bigint a2 = bigint(a.to_string());\n    bigint b2 = bigint(b.to_string());\n\
+    \    bigint q2 = bigint(q.to_string());\n    bigint r2 = bigint(r.to_string());\n\
+    \    assert(a == a2 and b == b2 and q == q2 and r == r2);\n\n    assert(q * b\
+    \ + r == a);\n    assert(0 <= abs(r) and abs(r) < abs(b));\n\n    if (a >= 0 and\
+    \ b > 0) {\n      assert(q >= 0 and r >= 0);\n    }\n    if (a >= 0 and b < 0)\
+    \ {\n      assert(q <= 0 and r >= 0);\n    }\n    if (a < 0 and b > 0) {\n   \
+    \   assert(q <= 0 and r <= 0);\n    }\n    if (a < 0 and b < 0) {\n      assert(q\
+    \ >= 0 and r <= 0);\n    }\n\n    bigint::_test_private_function(a, b);\n  };\n\
+    \n  validate_divmod2(gen(1000), gen(500));\n\n  // small\n  rep(i, 150) rep(j,\
+    \ 150) {\n    string S = gen(i * 9);\n    string T = gen(j * 9);\n    bigint A{S},\
+    \ B{T};\n    validate_divmod2(A, B);\n  }\n  // random\n  rep(_, 100) {\n    string\
+    \ S = gen(rng(1, 10000));\n    string T = gen(rng(1, 10000));\n    if (sz(S) <\
+    \ sz(T)) swap(S, T);\n    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n\
+    \  // 100000000...\n  rep(_, 100) {\n    string S = gen(rng(1, 10000));\n    string\
+    \ T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S, T);\n    T[0] = '1';\n\
+    \    rep1(i, sz(T) - 1) T[i] = '0';\n\n    bigint A{S}, B{T};\n    validate_divmod2(A,\
+    \ B);\n  }\n  // 100000000... + noise\n  rep(_, 100) {\n    string S = gen(rng(1,\
+    \ 10000));\n    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S,\
+    \ T);\n    T[0] = '1';\n    rep1(i, sz(T) - 1) T[i] = '0';\n    T[rng(0, sz(T)\
+    \ - 1)] = rng('1', '9');\n\n    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n\
+    \  }\n  // 999999999...\n  rep(_, 100) {\n    string S = gen(rng(1, 10000));\n\
+    \    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S, T);\n    rep(i,\
+    \ sz(T)) T[i] = '9';\n\n    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n\
+    \  }\n  // 999999999... + noise\n  rep(_, 100) {\n    string S = gen(rng(1, 10000));\n\
+    \    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S, T);\n    rep(i,\
+    \ sz(T)) T[i] = '9';\n    T[rng(0, sz(T) - 1)] = rng('1', '8');\n\n    bigint\
+    \ A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n  // time\n  {\n    Timer timer;\n\
+    \    auto S = bigint{gen(1 << 20)};\n    auto T = bigint{gen(1 << 19)};\n    auto\
+    \ [q, r] = divmod(S, T);\n    auto U = q * T + r;\n    assert(S == U);\n    cerr\
+    \ << \"time : \" << timer.elapsed() << endl;\n  }\n  /*\n  for (int b = 1; b <=\
+    \ 22; b++) {\n    Timer timer;\n    rep(_, 10) {\n      auto S = bigint{gen(1\
+    \ << b)};\n      auto T = bigint{gen(1 << (b - 1))};\n      timer.elapsed();\n\
+    \      auto [q, r] = divmod(S, T);\n      auto U = q * T + r;\n      assert(S\
+    \ == U);\n    }\n    cerr << \"b : 2^\" << b << \", \";\n    cerr << \"div time\
+    \ : \" << timer.elapsed() << endl;\n  }\n  */\n\n  cerr << \"OK\" << endl;\n}\n\
+    \nvoid Nyaan::solve() {\n  q();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a\
+    \ + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../math/multiprecision-integer.hpp\"\
-    \n//\n#include \"../../misc/rng.hpp\"\n\nvoid MultiPrecisionInteger::_test_private_function(const\
-    \ M& A, const M& B) {\n  const vector<int>& a = A.dat;\n  const vector<int>& b\
-    \ = B.dat;\n  {\n    auto m1 = _mul_naive(a, b);\n    auto m2 = _mul_fft(a, b);\n\
-    \    assert(m1 == m2 && \"_mul_test\");\n  }\n}\n\n//\n\nusing namespace Nyaan;\n\
-    \nusing ll = long long;\nusing i128 = __int128_t;\n\nvoid test() {\n  auto i128_to_string\
-    \ = [](i128 x) -> string {\n    if (x == 0) return \"0\";\n    string S;\n   \
-    \ bool neg = false;\n    if (x < 0) neg = true, x = -x;\n    while (x) S.push_back('0'\
-    \ + x % 10), x /= 10;\n    if (neg) S.push_back('-');\n    reverse(begin(S), end(S));\n\
-    \    return S;\n  };\n  // [0, 10^i)\n  auto rng128 = [&](int i = 37) {\n    assert(0\
-    \ <= i and i <= 37);\n    i128 res = 0;\n    rep(_, i) res = res * 10 + rng(0,\
-    \ 9);\n    return res;\n  };\n  auto TEN128 = [&](int i = 37) {\n    assert(0\
-    \ <= i and i <= 37);\n    i128 res = 1;\n    rep(_, i) res *= 10;\n    return\
-    \ res;\n  };\n\n  rep(t, 10000) {\n    int loga = rng(1, 37);\n    int logb =\
-    \ rng(1, 37);\n    i128 a = rng128(loga);\n    i128 b = rng128(logb);\n    if\
-    \ (rng() % 50 == 0) a = 0;\n    if (rng() % 50 == 0) b = 0;\n    if (rng() % 50\
-    \ == 0) a = TEN128(loga);\n    if (rng() % 50 == 0) a = TEN128(loga) - 1;\n  \
-    \  if (rng() % 50 == 0) b = TEN128(logb);\n    if (rng() % 50 == 0) b = TEN128(logb)\
-    \ - 1;\n    if (rng() % 50 == 0) a = b + TEN128(loga);\n    if (rng() % 50 ==\
-    \ 0) a = b + TEN128(loga) - 1;\n    if (rng() & 1) a = -a;\n    if (rng() & 1)\
-    \ b = -b;\n    bigint A{a};\n    bigint B{b};\n\n    assert(a == A and A == a);\n\
-    \    assert(!(a != A) and !(A != a));\n    assert(!(a < A) and !(A < a));\n  \
-    \  assert(a <= A and A <= a);\n    assert(!(a > A) and !(A > a));\n    assert(a\
-    \ >= A and A >= a);\n\n    assert((a < b) == (A < B));\n    assert((a > b) ==\
-    \ (A > B));\n    assert((a <= b) == (A <= B));\n    assert((a >= b) == (A >= B));\n\
-    \    assert((a == b) == (A == B));\n    assert((a != b) == (A != B));\n\n    assert(+A\
-    \ == +a and -A == -a);\n    assert(+B == +b and -B == -b);\n    assert(abs(A)\
-    \ == (a >= 0 ? a : -a));\n    assert(abs(B) == (b >= 0 ? b : -b));\n    assert(A.is_zero()\
-    \ == (a == 0));\n    assert(B.is_zero() == (b == 0));\n\n    if (LONG_LONG_MIN\
-    \ <= a and a <= LONG_LONG_MAX) {\n      assert(A.to_ll() == a);\n    }\n    if\
-    \ (LONG_LONG_MIN <= b and b <= LONG_LONG_MAX) {\n      assert(B.to_ll() == b);\n\
-    \    }\n    assert(A.to_i128() == a);\n    assert(B.to_i128() == b);\n\n    bigint\
-    \ C{i128_to_string(a)};\n    bigint D{i128_to_string(b)};\n    if (A != C or B\
-    \ != D) {\n      trc(a, b, A, B, C, D);\n    }\n    assert(A == C and B == D);\n\
-    \    if (A.to_string() != i128_to_string(a)) {\n      trc(A);\n      trc(a);\n\
-    \    }\n    assert(A.to_string() == i128_to_string(a));\n    assert(B.to_string()\
-    \ == i128_to_string(b));\n\n    assert(a + b == A + B);\n    assert(a + b == B\
-    \ + A);\n    assert(A + B == B + A);\n    assert(a - b == A - B);\n    assert(b\
-    \ - a == B - A);\n\n    bigint E{A};\n    E += B;\n    assert(E == a + b);\n \
-    \   E = B;\n    E += A;\n    assert(E == a + b);\n    E = A;\n    E -= B;\n  \
-    \  assert(E == a - b);\n    E = B;\n    E -= A;\n    assert(E == b - a);\n  }\n\
-    \n  // *\n  rep(t, 1000) {\n    ll a = randint(-TEN(18), TEN(18));\n    ll b =\
-    \ randint(-TEN(18), TEN(18));\n    if (rng() % 100 == 0) a = 0;\n    if (rng()\
-    \ % 100 == 0) b = 0;\n    if (rng() % 10 == 0) a = b + rng() % 11;\n    bigint\
-    \ A{a}, B{b};\n\n    i128 p = i128(a) * b;\n    auto S = i128_to_string(p);\n\
-    \    auto C = A * B;\n    auto D = B * A;\n\n    assert(C == D);\n    assert(C.to_string()\
-    \ == S);\n    assert(D.to_string() == S);\n    assert(C == p and p == C);\n  \
-    \  assert(D == p and p == D);\n    assert(C.to_i128() == p);\n    assert(D.to_i128()\
-    \ == p);\n  }\n\n  // _mul_naive, _mul_fft\n  rep(t, 1000) {\n    vector<int>\
-    \ a, b;\n    a.resize(rng(0, 20));\n    b.resize(rng(0, 20));\n    for (auto&\
-    \ x : a) x = rng(0, TEN(9) - 1);\n    for (auto& x : b) x = rng(0, TEN(9) - 1);\n\
-    \    while (!a.empty() and a.back() == 0) a.pop_back();\n    while (!b.empty()\
-    \ and b.back() == 0) b.pop_back();\n    bigint::_test_private_function({false,\
-    \ a}, {false, b});\n  }\n\n  // dfp\n  {\n    cerr << fixed << setprecision(21);\n\
-    \    auto test_dfp = [&](string S, long double acc = 1e-18) {\n      bigint A{S};\n\
-    \      auto [a, b] = A.dfp();\n      // trc(a, b, A.to_ld());\n      if (a ==\
-    \ 0) {\n        assert(b == 0 and S == \"0\");\n        return;\n      }\n   \
-    \   assert(1.0 <= abs(a) and abs(a) < 10.0);\n      if (S[0] == '-') {\n     \
-    \   assert(b + 2 == (int)S.size());\n      } else {\n        assert(b + 1 == (int)S.size());\n\
-    \      }\n      long double t1 = A.to_ld();\n      long double t2 = strtold(S.c_str(),\
-    \ 0);\n      long double d = abs(t1 - t2);\n      assert(d / t2 < acc);\n    };\n\
-    \    test_dfp(\"998244353\");\n    test_dfp(\"1000000000000000000\");\n    test_dfp(\"\
-    123456789012345678901234567890\");\n    for (int i = -111; i <= 111; i++) {\n\
-    \      test_dfp(to_string(i));\n    }\n    rep(t, 1000) {\n      long long x =\
-    \ rng(-TEN(18), TEN(18));\n      test_dfp(to_string(x));\n    }\n    for (int\
-    \ k = 20; k <= 60; k++) {\n      test_dfp(\"1\" + string(k, '0'));\n      test_dfp(string(k,\
-    \ '9'));\n    }\n    rep(t, 1000) {\n      string s;\n      int b = rng(1, 100);\n\
-    \      rep(i, 100) s.push_back(rng('0' + (i == 0), '9'));\n      if (rng() % 2)\
-    \ s.insert(begin(s), '-');\n      test_dfp(s, 1e-17);\n    }\n  }\n\n  // to_ld\n\
-    \  rep(t, 1000) {\n    long long x = rng(-TEN(16), TEN(16));\n    bigint A{x};\n\
-    \    ll y = llround(A.to_ld());\n    assert(x == y);\n  }\n\n  // _tens\n  {\n\
-    \    bigint _m;\n    /*\n    unsigned long long x = 1;\n    for (int i = 0; i\
-    \ < 20; i++) {\n      assert(x == _m.tens.ten_ull(i));\n      assert(_m.tens.digit(x)\
-    \ == i + 1);\n      assert(_m.tens.digit(x - 1) == (x == 1 ? 1 : i));\n      x\
-    \ *= 10;\n    }\n    assert(_m.tens.digit(0) == 1);\n    assert(_m.tens.digit(1)\
-    \ == 1);\n    */\n    for (int i = -_m.tens.offset; i <= _m.tens.offset; i++)\
-    \ {\n      long double t1 = _m.tens.ten_ld(i);\n      long double t2 = powl(10,\
-    \ i);\n      long double d = abs(t1 - t2);\n      // trc(i, t1, t2, d / t1);\n\
-    \      // i < 0 -> \u6841\u843D\u3061\u304C\u767A\u751F\u3059\u308B\u305F\u3081\
-    \u5C11\u3057\u9762\u5012\n      if (i <= 0) assert(d / t1 < 1e-17);\n      if\
-    \ (i >= 0) assert(d / t2 < 1e-19);\n    }\n  }\n\n  {\n    auto validate_divmod\
-    \ = [&](bigint a, bigint b) {\n      auto [q, r] = divmod(a, b);\n\n      i128\
-    \ a2 = a.to_i128();\n      i128 b2 = b.to_i128();\n      i128 q2 = a2 / b2, r2\
-    \ = a2 % b2;\n      assert(a == a2 and b == b2 and q == q2 and r == r2);\n\n \
-    \     assert(q * b + r == a);\n      assert(0 <= abs(r) and abs(r) < abs(b));\n\
-    \      if (a >= 0 and b > 0) {\n        assert(q >= 0 and r >= 0);\n      }\n\
-    \      if (a >= 0 and b < 0) {\n        assert(q <= 0 and r >= 0);\n      }\n\
-    \      if (a < 0 and b > 0) {\n        assert(q <= 0 and r <= 0);\n      }\n \
-    \     if (a < 0 and b < 0) {\n        assert(q >= 0 and r <= 0);\n      }\n  \
-    \  };\n    auto wrapper = [&](bigint a, bigint b) {\n      validate_divmod(+a,\
-    \ +b);\n      validate_divmod(+a, -b);\n      validate_divmod(-a, +b);\n     \
-    \ validate_divmod(-a, -b);\n    };\n\n    rep(t, 1000) {\n      i128 a = 0;\n\
-    \      if (t < 37) {\n        a = TEN128(t);\n      } else if (t < 74) {\n   \
-    \     a = TEN128(t - 37) - 1;\n      } else if (t < 100) {\n        a = t - 87;\n\
-    \      } else {\n        a = rng();\n        a = (a << 63) + rng();\n      }\n\
-    \      bigint A = a;\n      for (int i = 1; i <= 18; i++) {\n        wrapper(A,\
-    \ i);\n        wrapper(A, TEN(i) - 1);\n      }\n      rep(_, 10) wrapper(A, rng(1,\
-    \ TEN(9)));\n      rep(_, 10) wrapper(A, rng(1, TEN(18)));\n      rep(_, 10) wrapper(A,\
-    \ rng128(27));\n    }\n  }\n\n  // divmod\n  {\n    auto validate_divmod2 = [&](bigint\
-    \ a, bigint b) {\n      auto [q, r] = divmod(a, b);\n\n      bigint a2 = bigint(a.to_string());\n\
-    \      bigint b2 = bigint(b.to_string());\n      bigint q2 = bigint(q.to_string());\n\
-    \      bigint r2 = bigint(r.to_string());\n      assert(a == a2 and b == b2 and\
-    \ q == q2 and r == r2);\n\n      assert(q * b + r == a);\n      assert(0 <= abs(r)\
-    \ and abs(r) < abs(b));\n      if (a >= 0 and b > 0) {\n        assert(q >= 0\
-    \ and r >= 0);\n      }\n      if (a >= 0 and b < 0) {\n        assert(q <= 0\
-    \ and r >= 0);\n      }\n      if (a < 0 and b > 0) {\n        assert(q <= 0 and\
-    \ r <= 0);\n      }\n      if (a < 0 and b < 0) {\n        assert(q >= 0 and r\
-    \ <= 0);\n      }\n    };\n    auto wrapper = [&](bigint a, bigint b) {\n    \
-    \  validate_divmod2(+a, +b);\n      validate_divmod2(+a, -b);\n      validate_divmod2(-a,\
-    \ +b);\n      validate_divmod2(-a, -b);\n    };\n\n    rep(t, 1000) {\n      vector<int>\
-    \ a, b;\n      a.resize(rng(0, 20));\n      b.resize(rng(0, 20));\n      for (auto&\
-    \ x : a) x = rng(0, TEN(9) - 1);\n      for (auto& x : b) x = rng(0, TEN(9) -\
-    \ 1);\n      while (!a.empty() and a.back() == 0) a.pop_back();\n      while (!b.empty()\
-    \ and b.back() == 0) b.pop_back();\n      bigint A{false, a}, B{false, b};\n \
-    \     if (!A.is_zero()) wrapper(B, A);\n      if (!B.is_zero()) wrapper(A, B);\n\
-    \    }\n  }\n  cerr << \"OK\" << endl;\n}\n\nvoid Nyaan::solve() {\n  test();\n\
-    \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \n//\n#include \"../../misc/all.hpp\"\nusing namespace Nyaan;\n\nvoid MultiPrecisionInteger::_test_private_function(const\
+    \ M& A, const M& B) {\n  long long naive_complexity =\n      max<long long>(A._size(),\
+    \ B._size()) * abs(A._size() - B._size());\n  if (naive_complexity > 100000) return;\n\
+    \n  const vector<int>& a = A.dat;\n  const vector<int>& b = B.dat;\n  if (!B.is_zero())\
+    \ {\n    auto qr1 = _divmod_naive(a, b);\n    auto qr2 = _divmod_dc(a, b);\n \
+    \   assert(qr1 == qr2 && \"_div_test\");\n  }\n  if (!A.is_zero()) {\n    auto\
+    \ qr1 = _divmod_naive(b, a);\n    auto qr2 = _divmod_dc(b, a);\n    assert(qr1\
+    \ == qr2 && \"_div_test\");\n  }\n}\n\nvoid q() {\n  auto gen = [&](int d) {\n\
+    \    string S;\n    S.push_back(rng('1', '9'));\n    rep(_, d - 1) S.push_back(rng('0',\
+    \ '9'));\n    if (rng() & 1) S.insert(begin(S), '-');\n    return S;\n  };\n \
+    \ auto validate_divmod2 = [&](bigint a, bigint b) {\n    auto [q, r] = divmod(a,\
+    \ b);\n\n    bigint a2 = bigint(a.to_string());\n    bigint b2 = bigint(b.to_string());\n\
+    \    bigint q2 = bigint(q.to_string());\n    bigint r2 = bigint(r.to_string());\n\
+    \    assert(a == a2 and b == b2 and q == q2 and r == r2);\n\n    assert(q * b\
+    \ + r == a);\n    assert(0 <= abs(r) and abs(r) < abs(b));\n\n    if (a >= 0 and\
+    \ b > 0) {\n      assert(q >= 0 and r >= 0);\n    }\n    if (a >= 0 and b < 0)\
+    \ {\n      assert(q <= 0 and r >= 0);\n    }\n    if (a < 0 and b > 0) {\n   \
+    \   assert(q <= 0 and r <= 0);\n    }\n    if (a < 0 and b < 0) {\n      assert(q\
+    \ >= 0 and r <= 0);\n    }\n\n    bigint::_test_private_function(a, b);\n  };\n\
+    \n  validate_divmod2(gen(1000), gen(500));\n\n  // small\n  rep(i, 150) rep(j,\
+    \ 150) {\n    string S = gen(i * 9);\n    string T = gen(j * 9);\n    bigint A{S},\
+    \ B{T};\n    validate_divmod2(A, B);\n  }\n  // random\n  rep(_, 100) {\n    string\
+    \ S = gen(rng(1, 10000));\n    string T = gen(rng(1, 10000));\n    if (sz(S) <\
+    \ sz(T)) swap(S, T);\n    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n\
+    \  // 100000000...\n  rep(_, 100) {\n    string S = gen(rng(1, 10000));\n    string\
+    \ T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S, T);\n    T[0] = '1';\n\
+    \    rep1(i, sz(T) - 1) T[i] = '0';\n\n    bigint A{S}, B{T};\n    validate_divmod2(A,\
+    \ B);\n  }\n  // 100000000... + noise\n  rep(_, 100) {\n    string S = gen(rng(1,\
+    \ 10000));\n    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S,\
+    \ T);\n    T[0] = '1';\n    rep1(i, sz(T) - 1) T[i] = '0';\n    T[rng(0, sz(T)\
+    \ - 1)] = rng('1', '9');\n\n    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n\
+    \  }\n  // 999999999...\n  rep(_, 100) {\n    string S = gen(rng(1, 10000));\n\
+    \    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S, T);\n    rep(i,\
+    \ sz(T)) T[i] = '9';\n\n    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n\
+    \  }\n  // 999999999... + noise\n  rep(_, 100) {\n    string S = gen(rng(1, 10000));\n\
+    \    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S, T);\n    rep(i,\
+    \ sz(T)) T[i] = '9';\n    T[rng(0, sz(T) - 1)] = rng('1', '8');\n\n    bigint\
+    \ A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n  // time\n  {\n    Timer timer;\n\
+    \    auto S = bigint{gen(1 << 20)};\n    auto T = bigint{gen(1 << 19)};\n    auto\
+    \ [q, r] = divmod(S, T);\n    auto U = q * T + r;\n    assert(S == U);\n    cerr\
+    \ << \"time : \" << timer.elapsed() << endl;\n  }\n  /*\n  for (int b = 1; b <=\
+    \ 22; b++) {\n    Timer timer;\n    rep(_, 10) {\n      auto S = bigint{gen(1\
+    \ << b)};\n      auto T = bigint{gen(1 << (b - 1))};\n      timer.elapsed();\n\
+    \      auto [q, r] = divmod(S, T);\n      auto U = q * T + r;\n      assert(S\
+    \ == U);\n    }\n    cerr << \"b : 2^\" << b << \", \";\n    cerr << \"div time\
+    \ : \" << timer.elapsed() << endl;\n  }\n  */\n\n  cerr << \"OK\" << endl;\n}\n\
+    \nvoid Nyaan::solve() {\n  q();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a\
+    \ + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -795,17 +716,20 @@ data:
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
+  - misc/all.hpp
+  - misc/fastio.hpp
   - misc/rng.hpp
+  - misc/timer.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/bigint.test.cpp
+  path: verify/verify-unit-test/bigint2.test.cpp
   requiredBy: []
   timestamp: '2022-11-06 13:47:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/bigint.test.cpp
+documentation_of: verify/verify-unit-test/bigint2.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/bigint.test.cpp
-- /verify/verify/verify-unit-test/bigint.test.cpp.html
-title: verify/verify-unit-test/bigint.test.cpp
+- /verify/verify/verify-unit-test/bigint2.test.cpp
+- /verify/verify/verify-unit-test/bigint2.test.cpp.html
+title: verify/verify-unit-test/bigint2.test.cpp
 ---
