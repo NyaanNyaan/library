@@ -334,30 +334,24 @@ data:
     \ yq)) q--, yq = _sub(yq, y);\n        rem = _sub(rem, yq);\n        while (_leq(y,\
     \ rem)) q++, rem = _sub(rem, y);\n        quo[i] = q;\n      }\n      if (i) rem.insert(begin(rem),\
     \ x[i - 1]);\n    }\n    _shrink(quo), _shrink(rem);\n    auto [q2, r2] = _divmod_1e9(rem,\
-    \ {norm});\n    assert(_is_zero(r2));\n    return {quo, q2};\n  }\n\n  // TODO\
-    \ : verify\n  // 0 <= A, 1 <= B\n  static pair<vector<int>, vector<int>> _divmod_dc(const\
-    \ vector<int>& a,\n                                                   const vector<int>&\
-    \ b) {\n    if (_is_zero(b)) {\n      cerr << \"Divide by Zero Exception\" <<\
-    \ endl;\n      exit(1);\n    }\n    if ((int)b.size() <= 64) return _divmod_naive(a,\
-    \ b);\n    if ((int)a.size() - (int)b.size() <= 64) return _divmod_naive(a, b);\n\
-    \n    int norm = D / (b.back() + 1);\n    vector<int> x = _mul(a, {norm});\n \
-    \   vector<int> y = _mul(b, {norm});\n\n    int s = x.size(), t = y.size();\n\
-    \    // y.size() >= 10\n    // u : \u4E0A\u4F4D\u6841\u306E\u6841\u6570, v : \u4E0B\
-    \u4F4D\u6841\u306E\u6841\u6570\n    int yu = (t + 1) / 2, yv = t - yu;\n    //\
-    \ trc(s, t, yu, yv);\n    /**\n     *                      o o o\n     *     \
-    \       ___________________________\n     *  Y Y Y Y Y ) X X X X X X X X X X X\
-    \ X X\n     *  [ h ] [l]   [   h   ] [l]\n     *\n     *  XXXXXXX/YYYYY \u3092\
-    \ XXXXX/YYY \u3067\u8FD1\u4F3C\u3059\u308B\u65B9\u91DD\n     *  \u518D\u5E30\u304C\
-    \u66F8\u304D\u3084\u3059\u3044\u304B\n     */\n    vector<int> yh{end(y) - yu,\
-    \ end(y)};\n    int xv = max<int>(yv, s - (yu * 2 - 1));\n    int xu = s - xv;\n\
-    \    vector<int> xh{end(x) - xu, end(x)};\n    vector<int> rem{end(x) - xu - yv,\
-    \ end(x)};\n    auto [qh, _unused] = _divmod_dc(xh, yh);\n    vector<int> yqh\
-    \ = _mul(y, qh);\n    while (_lt(rem, yqh)) _sub(qh, {1}), yqh = _sub(yqh, y);\n\
-    \    rem = _sub(rem, yqh);\n    while (_leq(y, rem)) _add(qh, {1}), rem = _sub(rem,\
-    \ y);\n    vector<int> q, r;\n    if (xu + yv == s) {\n      swap(q, qh), swap(r,\
-    \ rem);\n    } else {\n      vector<int> xnxt{begin(x), end(x) - xu - yv};\n \
-    \     copy(begin(rem), end(rem), back_inserter(xnxt));\n      tie(q, r) = _divmod_dc(xnxt,\
-    \ y);\n      q.resize(s - xu - yv, 0);\n      copy(begin(qh), end(qh), back_inserter(q));\n\
+    \ {norm});\n    assert(_is_zero(r2));\n    return {quo, q2};\n  }\n\n  // 0 <=\
+    \ A, 1 <= B\n  static pair<vector<int>, vector<int>> _divmod_dc(const vector<int>&\
+    \ a,\n                                                   const vector<int>& b)\
+    \ {\n    if (_is_zero(b)) {\n      cerr << \"Divide by Zero Exception\" << endl;\n\
+    \      exit(1);\n    }\n    if ((int)b.size() <= 64) return _divmod_naive(a, b);\n\
+    \    if ((int)a.size() - (int)b.size() <= 64) return _divmod_naive(a, b);\n\n\
+    \    int norm = D / (b.back() + 1);\n    vector<int> x = _mul(a, {norm});\n  \
+    \  vector<int> y = _mul(b, {norm});\n\n    int s = x.size(), t = y.size();\n \
+    \   int yu = (t + 1) / 2, yv = t - yu;\n    vector<int> yh{end(y) - yu, end(y)};\n\
+    \    int xv = max<int>(yv, s - (yu * 2 - 1));\n    int xu = s - xv;\n    vector<int>\
+    \ xh{end(x) - xu, end(x)};\n    vector<int> rem{end(x) - xu - yv, end(x)};\n \
+    \   auto [qh, _unused] = _divmod_dc(xh, yh);\n    vector<int> yqh = _mul(y, qh);\n\
+    \    while (_lt(rem, yqh)) _sub(qh, {1}), yqh = _sub(yqh, y);\n    rem = _sub(rem,\
+    \ yqh);\n    while (_leq(y, rem)) _add(qh, {1}), rem = _sub(rem, y);\n    vector<int>\
+    \ q, r;\n    if (xu + yv == s) {\n      swap(q, qh), swap(r, rem);\n    } else\
+    \ {\n      vector<int> xnxt{begin(x), end(x) - xu - yv};\n      copy(begin(rem),\
+    \ end(rem), back_inserter(xnxt));\n      tie(q, r) = _divmod_dc(xnxt, y);\n  \
+    \    q.resize(s - xu - yv, 0);\n      copy(begin(qh), end(qh), back_inserter(q));\n\
     \    }\n    _shrink(q), _shrink(r);\n    auto [q2, r2] = _divmod_1e9(r, {norm});\n\
     \    assert(_is_zero(r2));\n    return {q, q2};\n  }\n\n  // int -> string\n \
     \ // \u5148\u982D\u304B\u3069\u3046\u304B\u306B\u5FDC\u3058\u3066 zero padding\
@@ -393,7 +387,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   requiredBy: []
-  timestamp: '2022-11-06 13:47:25+09:00'
+  timestamp: '2022-11-06 14:01:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
