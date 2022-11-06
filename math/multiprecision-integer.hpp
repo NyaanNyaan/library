@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cmath>
 #include <iostream>
+#include <tuple>
 #include <utility>
 #include <vector>
 using namespace std;
@@ -86,7 +87,7 @@ struct MultiPrecisionInteger {
     return {n, c};
   }
   friend pair<M, M> divmod(const M& lhs, const M& rhs) {
-    auto dm = _divmod_naive(lhs.dat, rhs.dat);
+    auto dm = _divmod_dc(lhs.dat, rhs.dat);
     bool dn = _is_zero(dm.first) ? false : lhs.neg != rhs.neg;
     bool mn = _is_zero(dm.second) ? false : lhs.neg;
     return {M{dn, dm.first}, M{mn, dm.second}};
@@ -372,14 +373,12 @@ struct MultiPrecisionInteger {
         assert(y.size() + 1 == rem.size());
         long long rb = 1LL * rem[rem.size() - 1] * D + rem[rem.size() - 2];
         int q = rb / yb;
-        [[maybe_unused]] int old_q = q;
         vector<int> yq = _mul(y, {q});
         // 真の商は q-2 以上 q+1 以下だが自信が無いので念のため while を回す
         while (_lt(rem, yq)) q--, yq = _sub(yq, y);
         rem = _sub(rem, yq);
         while (_leq(y, rem)) q++, rem = _sub(rem, y);
         quo[i] = q;
-        assert(-2 <= (q - old_q) and (q - old_q) <= 1);
       }
       if (i) rem.insert(begin(rem), x[i - 1]);
     }
@@ -387,6 +386,63 @@ struct MultiPrecisionInteger {
     auto [q2, r2] = _divmod_1e9(rem, {norm});
     assert(_is_zero(r2));
     return {quo, q2};
+  }
+
+  // TODO : verify
+  // 0 <= A, 1 <= B
+  static pair<vector<int>, vector<int>> _divmod_dc(const vector<int>& a,
+                                                   const vector<int>& b) {
+    if (_is_zero(b)) {
+      cerr << "Divide by Zero Exception" << endl;
+      exit(1);
+    }
+    if ((int)b.size() <= 64) return _divmod_naive(a, b);
+    if ((int)a.size() - (int)b.size() <= 64) return _divmod_naive(a, b);
+
+    int norm = D / (b.back() + 1);
+    vector<int> x = _mul(a, {norm});
+    vector<int> y = _mul(b, {norm});
+
+    int s = x.size(), t = y.size();
+    // y.size() >= 10
+    // u : 上位桁の桁数, v : 下位桁の桁数
+    int yu = (t + 1) / 2, yv = t - yu;
+    // trc(s, t, yu, yv);
+    /**
+     *                      o o o
+     *            ___________________________
+     *  Y Y Y Y Y ) X X X X X X X X X X X X X
+     *  [ h ] [l]   [   h   ] [l]
+     *
+     *  XXXXXXX/YYYYY を XXXXX/YYY で近似する方針
+     *  再帰が書きやすいか
+     */
+    vector<int> yh{end(y) - yu, end(y)};
+    int xv = max<int>(yv, s - (yu * 2 - 1));
+    int xu = s - xv;
+    vector<int> xh{end(x) - xu, end(x)};
+    vector<int> rem{end(x) - xu - yv, end(x)};
+    auto [qh, _unused] = _divmod_dc(xh, yh);
+    vector<int> yqh = _mul(y, qh);
+    int q_diff=0;
+    while (_lt(rem, yqh)) _sub(qh, {1}), q_diff--,yqh = _sub(yqh, y);
+    rem = _sub(rem, yqh);
+    while (_leq(y, rem)) _add(qh, {1}), q_diff++,rem = _sub(rem, y);
+    if(abs(q_diff)>1)cerr<<"q_diff : "<<q_diff<<endl;
+    vector<int> q, r;
+    if (xu + yv == s) {
+      swap(q, qh), swap(r, rem);
+    } else {
+      vector<int> xnxt{begin(x), end(x) - xu - yv};
+      copy(begin(rem), end(rem), back_inserter(xnxt));
+      tie(q, r) = _divmod_dc(xnxt, y);
+      q.resize(s - xu - yv, 0);
+      copy(begin(qh), end(qh), back_inserter(q));
+    }
+    _shrink(q), _shrink(r);
+    auto [q2, r2] = _divmod_1e9(r, {norm});
+    assert(_is_zero(r2));
+    return {q, q2};
   }
 
   // int -> string
