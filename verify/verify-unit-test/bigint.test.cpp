@@ -167,7 +167,7 @@ void test() {
   // dfp
   {
     cerr << fixed << setprecision(21);
-    auto test_dfp = [&](string S) {
+    auto test_dfp = [&](string S, long double acc = 1e-18) {
       bigint A{S};
       auto [a, b] = A.dfp();
       // trc(a, b, A.to_ld());
@@ -181,6 +181,10 @@ void test() {
       } else {
         assert(b + 1 == (int)S.size());
       }
+      long double t1 = A.to_ld();
+      long double t2 = strtold(S.c_str(), 0);
+      long double d = abs(t1 - t2);
+      assert(d / t2 < acc);
     };
     test_dfp("998244353");
     test_dfp("1000000000000000000");
@@ -196,6 +200,13 @@ void test() {
       test_dfp("1" + string(k, '0'));
       test_dfp(string(k, '9'));
     }
+    rep(t, 1000) {
+      string s;
+      int b = rng(1, 100);
+      rep(i, 100) s.push_back(rng('0' + (i == 0), '9'));
+      if (rng() % 2) s.insert(begin(s), '-');
+      test_dfp(s, 1e-17);
+    }
   }
 
   // to_ld
@@ -209,6 +220,7 @@ void test() {
   // _tens
   {
     bigint _m;
+    /*
     unsigned long long x = 1;
     for (int i = 0; i < 20; i++) {
       assert(x == _m.tens.ten_ull(i));
@@ -218,6 +230,7 @@ void test() {
     }
     assert(_m.tens.digit(0) == 1);
     assert(_m.tens.digit(1) == 1);
+    */
     for (int i = -_m.tens.offset; i <= _m.tens.offset; i++) {
       long double t1 = _m.tens.ten_ld(i);
       long double t2 = powl(10, i);
@@ -272,13 +285,61 @@ void test() {
         a = rng();
         a = (a << 63) + rng();
       }
-      bigint A = bigint{i128_to_string(a)};
+      bigint A = a;
       for (int i = 1; i <= 18; i++) {
         wrapper(A, i);
         wrapper(A, TEN(i) - 1);
       }
       rep(_, 10) wrapper(A, rng(1, TEN(9)));
       rep(_, 10) wrapper(A, rng(1, TEN(18)));
+      rep(_, 10) wrapper(A, rng128(27));
+    }
+  }
+
+  // divmod
+  {
+    auto validate_divmod2 = [&](bigint a, bigint b) {
+      auto [q, r] = divmod(a, b);
+
+      bigint a2 = bigint(a.to_string());
+      bigint b2 = bigint(b.to_string());
+      bigint q2 = bigint(q.to_string());
+      bigint r2 = bigint(r.to_string());
+      assert(a == a2 and b == b2 and q == q2 and r == r2);
+
+      assert(q * b + r == a);
+      assert(0 <= abs(r) and abs(r) < abs(b));
+      if (a >= 0 and b > 0) {
+        assert(q >= 0 and r >= 0);
+      }
+      if (a >= 0 and b < 0) {
+        assert(q <= 0 and r >= 0);
+      }
+      if (a < 0 and b > 0) {
+        assert(q <= 0 and r <= 0);
+      }
+      if (a < 0 and b < 0) {
+        assert(q >= 0 and r <= 0);
+      }
+    };
+    auto wrapper = [&](bigint a, bigint b) {
+      validate_divmod2(+a, +b);
+      validate_divmod2(+a, -b);
+      validate_divmod2(-a, +b);
+      validate_divmod2(-a, -b);
+    };
+
+    rep(t, 1000) {
+      vector<int> a, b;
+      a.resize(rng(0, 20));
+      b.resize(rng(0, 20));
+      for (auto& x : a) x = rng(0, TEN(9) - 1);
+      for (auto& x : b) x = rng(0, TEN(9) - 1);
+      while (!a.empty() and a.back() == 0) a.pop_back();
+      while (!b.empty() and b.back() == 0) b.pop_back();
+      bigint A{false, a}, B{false, b};
+      if (!A.is_zero()) wrapper(B, A);
+      if (!B.is_zero()) wrapper(A, B);
     }
   }
   cerr << "OK" << endl;
