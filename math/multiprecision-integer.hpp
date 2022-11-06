@@ -424,11 +424,9 @@ struct MultiPrecisionInteger {
     vector<int> rem{end(x) - xu - yv, end(x)};
     auto [qh, _unused] = _divmod_dc(xh, yh);
     vector<int> yqh = _mul(y, qh);
-    int q_diff=0;
-    while (_lt(rem, yqh)) _sub(qh, {1}), q_diff--,yqh = _sub(yqh, y);
+    while (_lt(rem, yqh)) _sub(qh, {1}), yqh = _sub(yqh, y);
     rem = _sub(rem, yqh);
-    while (_leq(y, rem)) _add(qh, {1}), q_diff++,rem = _sub(rem, y);
-    if(abs(q_diff)>1)cerr<<"q_diff : "<<q_diff<<endl;
+    while (_leq(y, rem)) _add(qh, {1}), rem = _sub(rem, y);
     vector<int> q, r;
     if (xu + yv == s) {
       swap(q, qh), swap(r, rem);

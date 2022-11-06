@@ -16,7 +16,7 @@ T power(const T& a, U n, const T& I) {
   if (n == 0) return I;
   T half = power(a, n / 2, I);
   T res = half * half;
-  return n % 2 ? f(res, a) : res;
+  return n % 2 ? res * a : res;
 }
 
 void Nyaan::solve() {
