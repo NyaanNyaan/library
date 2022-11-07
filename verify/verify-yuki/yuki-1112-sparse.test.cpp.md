@@ -501,9 +501,9 @@ data:
     \  }\n  auto d0 = mul<T, mint0>(s, t);\n  auto d1 = mul<T, mint1>(s, t);\n  auto\
     \ d2 = mul<T, mint2>(s, t);\n  int n = d0.size();\n  vector<u128> ret(n);\n  for\
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
-    \ i64 a = d0[i].get();\n    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2\
-    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n\
-    \  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 5 \"fps/arbitrary-fps.hpp\"\
+    \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
+    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 5 \"fps/arbitrary-fps.hpp\"\
     \n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft() {\n  ntt_ptr\
     \ = nullptr;\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt()\
     \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::intt()\
@@ -584,7 +584,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-1112-sparse.test.cpp
   requiredBy: []
-  timestamp: '2022-08-22 22:01:20+09:00'
+  timestamp: '2022-11-06 23:28:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-1112-sparse.test.cpp

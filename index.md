@@ -388,7 +388,7 @@ data:
       title: math/float-binomial.hpp
     - icon: ':heavy_check_mark:'
       path: math/garner-bigint.hpp
-      title: math/garner-bigint.hpp
+      title: Garner's algorithm for bigint
     - icon: ':heavy_check_mark:'
       path: math/garner.hpp
       title: Garner's algorithm

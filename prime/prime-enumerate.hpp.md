@@ -23,6 +23,9 @@ data:
     title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/garner-bigint.test.cpp
+    title: verify/verify-unit-test/garner-bigint.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
   - icon: ':heavy_check_mark:'
@@ -109,6 +112,7 @@ data:
   - verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
   - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp

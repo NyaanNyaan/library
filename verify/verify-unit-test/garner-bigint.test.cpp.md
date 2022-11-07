@@ -6,13 +6,22 @@ data:
     title: inner/inner_math.hpp
   - icon: ':heavy_check_mark:'
     path: math/garner-bigint.hpp
-    title: math/garner-bigint.hpp
+    title: Garner's algorithm for bigint
   - icon: ':heavy_check_mark:'
     path: math/multiprecision-integer.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
+    path: misc/all.hpp
+    title: misc/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/timer.hpp
+    title: misc/timer.hpp
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
     title: modint/arbitrary-modint.hpp
@@ -37,6 +46,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+  - icon: ':heavy_check_mark:'
+    path: prime/prime-enumerate.hpp
+    title: prime/prime-enumerate.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -351,9 +363,9 @@ data:
     \  }\n  auto d0 = mul<T, mint0>(s, t);\n  auto d1 = mul<T, mint1>(s, t);\n  auto\
     \ d2 = mul<T, mint2>(s, t);\n  int n = d0.size();\n  vector<u128> ret(n);\n  for\
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
-    \ i64 a = d0[i].get();\n    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2\
-    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n\
-    \  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/multiprecision-integer.hpp\"\
+    \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
+    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/multiprecision-integer.hpp\"\
     \n\nnamespace MultiPrecisionIntegerImpl {\nstruct TENS {\n  static constexpr int\
     \ offset = 30;\n  constexpr TENS() : _tend() {\n    _tend[offset] = 1;\n    for\
     \ (int i = 1; i <= offset; i++) {\n      _tend[offset + i] = _tend[offset + i\
@@ -550,43 +562,56 @@ data:
     \  for (int i = 0; i < (int)a.size(); i++) cerr << a[i] << \", \";\n    cerr <<\
     \ \"}\" << endl;\n  }\n};\n\nusing bigint = MultiPrecisionInteger;\n\n/**\n *\
     \ @brief \u591A\u500D\u9577\u6574\u6570\n */\n#line 3 \"math/garner-bigint.hpp\"\
-    \n\nnamespace GarnerImpl {\ntemplate <typename T>\nconstexpr T safe_mod(T x, T\
-    \ m) {\n  x %= m;\n  if (x < 0) x += m;\n  return x;\n}\ntemplate <typename T>\n\
-    constexpr std::pair<T, T> inv_gcd(T a, T b) {\n  a = safe_mod(a, b);\n  if (a\
-    \ == 0) return {b, 0};\n  T s = b, t = a;\n  T m0 = 0, m1 = 1;\n  while (t) {\n\
-    \    T u = s / t;\n    s -= t * u;\n    m0 -= m1 * u;\n    auto tmp = s;\n   \
-    \ s = t;\n    t = tmp;\n    tmp = m0;\n    m0 = m1;\n    m1 = tmp;\n  }\n  if\
-    \ (m0 < 0) m0 += b / s;\n  return {s, m0};\n}\ntemplate <typename T>\nT inv_mod(T\
-    \ x, T m) {\n  assert(1 <= m);\n  auto z = inv_gcd(x, m);\n  assert(z.first ==\
-    \ 1);\n  return z.second;\n}\nbigint garner_bigint(const vector<long long>& a,\
-    \ const vector<long long>& m) {\n  int ms = a.size();\n  vector<long long> coffs(ms,\
-    \ 1), constants(ms), digs(ms);\n  for (int i = 0; i < ms; ++i) {\n    long long\
-    \ v = (a[i] - constants[i]) * inv_mod(coffs[i], m[i]) % m[i];\n    if (v < 0)\
-    \ v += m[i];\n    digs[i] = v;\n    for (int j = i + 1; j < ms; j++) {\n     \
-    \ constants[j] += coffs[j] * v;\n      constants[j] %= m[j];\n      coffs[j] *=\
-    \ m[i];\n      coffs[j] %= m[j];\n    }\n  }\n  bigint ans = bigint{0}, c = bigint{1};\n\
-    \  for (int i = ms - 1; i >= 0; --i) {\n    c *= bigint{m[i]};\n    ans *= bigint{m[i]};\n\
-    \    ans += bigint{digs[i]};\n  }\n  if (ans > c / 2) ans -= c;\n  if (ans < 0)\
-    \ ans += c;\n  return ans;\n}\n\nbigint crt_bigint(const vector<long long>& a,\
-    \ const vector<long long>& m) {\n  return garner_bigint(a, m);\n}\n}  // namespace\
-    \ Garner\n\nusing GarnerImpl::crt_bigint;\nusing GarnerImpl::garner_bigint;\n\
-    #line 6 \"verify/verify-unit-test/garner-bigint.test.cpp\"\n//\n#line 2 \"modint/arbitrary-modint.hpp\"\
-    \n\n#line 2 \"modint/barrett-reduction.hpp\"\n\n#line 4 \"modint/barrett-reduction.hpp\"\
-    \nusing namespace std;\n\nstruct Barrett {\n  using u32 = unsigned int;\n  using\
-    \ i64 = long long;\n  using u64 = unsigned long long;\n  u32 m;\n  u64 im;\n \
-    \ Barrett() : m(), im() {}\n  Barrett(int n) : m(n), im(u64(-1) / m + 1) {}\n\
-    \  constexpr inline i64 quo(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >>\
-    \ 64);\n    u32 r = n - x * m;\n    return m <= r ? x - 1 : x;\n  }\n  constexpr\
-    \ inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n   \
-    \ u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n  constexpr inline\
-    \ pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n\
-    \    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n    return {x,\
-    \ r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32 a = rem(n), r\
-    \ = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
-    \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
-    \ 4 \"modint/arbitrary-modint.hpp\"\n\nstruct ArbitraryModInt {\n  int x;\n\n\
-    \  ArbitraryModInt() : x(0) {}\n\n  ArbitraryModInt(int64_t y) {\n    int z =\
-    \ y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n  }\n\n  ArbitraryModInt\
+    \n\nnamespace GarnerImpl {\n\ntemplate <typename T,\n          enable_if_t<is_integral_v<T>\
+    \ || is_same_v<T, __int128_t>>* = nullptr>\nT inv_mod(T a, T m) {\n  assert(0\
+    \ <= a);\n  if (a >= m) a %= m;\n  T b = m, s = 1, t = 0;\n  while (true) {\n\
+    \    if (a == 1) return s;\n    t -= b / a * s;\n    b %= a;\n    if (b == 1)\
+    \ return t + m;\n    s -= a / b * t;\n    a %= b;\n  }\n}\n\npair<bigint, bigint>\
+    \ garner_dc(const vector<int>& r, const vector<int>& m) {\n  int N = m.size();\n\
+    \  if (N == 0) return {0, 1};\n  int B = 1;\n  while (B < N) B *= 2;\n  vector<bigint>\
+    \ tree(2 * B);\n  for (int i = 0; i < B; i++) tree[B + i] = i < (int)m.size()\
+    \ ? m[i] : 1;\n  for (int i = B - 1; i; i--) tree[i] = tree[i * 2 + 0] * tree[i\
+    \ * 2 + 1];\n  auto calc = [&](auto&& rc, int ti, bigint X, bigint Y, int L,\n\
+    \                  int R) -> bigint {\n    if (N <= L) return 0;\n    X %= tree[ti],\
+    \ Y %= tree[ti];\n    if (L + 1 == R) {\n      int xl = X.to_ll(), yl = Y.to_ll();\n\
+    \      int t = (1LL * (r[L] - xl) * inv_mod(yl, m[L])) % m[L];\n      return t\
+    \ < 0 ? t + m[L] : t;\n    }\n    auto& prod = tree[ti * 2 + 0];\n    int M =\
+    \ (L + R) / 2;\n    auto xl = rc(rc, ti * 2 + 0, X, Y, L, M);\n    auto xr = rc(rc,\
+    \ ti * 2 + 1, X + xl * Y, Y * prod, M, R);\n    return xl + xr * prod;\n  };\n\
+    \  bigint ans = calc(calc, 1, 0, 1, 0, B);\n  return {ans, tree[1]};\n}\n\npair<bigint,\
+    \ bigint> garner_naive(const vector<int>& r, const vector<int>& m) {\n  int N\
+    \ = r.size();\n  if (N == 0) return {0, 1};\n  vector<int> y(N), x(N), t(N);\n\
+    \  for (int i = 0; i < N; i++) y[i] = 1 % m[i];\n  for (int i = 0; i < N; ++i)\
+    \ {\n    t[i] = (1LL * (r[i] - x[i]) * inv_mod(y[i], m[i])) % m[i];\n    if (t[i]\
+    \ < 0) t[i] += m[i];\n    for (int j = i + 1; j < N; j++) {\n      x[j] = (x[j]\
+    \ + 1LL * y[j] * t[i]) % m[j];\n      y[j] = 1LL * y[j] * m[i] % m[j];\n    }\n\
+    \  }\n  bigint ans = 0, mod = 1;\n  for (int i = N - 1; i >= 0; --i) ans = ans\
+    \ * m[i] + t[i], mod *= m[i];\n  return {ans, mod};\n}\n\n// 1 <= m[i] <= 2 *\
+    \ 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\uFF1A\
+    \u672A\u5B9A\u7FA9\npair<bigint, bigint> garner_bigint(const vector<int>& r, const\
+    \ vector<int>& m) {\n  assert(r.size() == m.size());\n  if ((int)m.size() <= 3000)\
+    \ return garner_naive(r, m);\n  return garner_dc(r, m);\n}\n// 1 <= m[i] <= 2\
+    \ * 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\uFF1A\
+    \u672A\u5B9A\u7FA9\npair<bigint, bigint> crt_bigint(const vector<int>& r, const\
+    \ vector<int>& m) {\n  return garner_bigint(r, m);\n}\n}  // namespace GarnerImpl\n\
+    \nusing GarnerImpl::crt_bigint;\nusing GarnerImpl::garner_bigint;\n\n/**\n * @brief\
+    \ Garner's algorithm for bigint\n */\n#line 6 \"verify/verify-unit-test/garner-bigint.test.cpp\"\
+    \n//\n#line 2 \"modint/arbitrary-modint.hpp\"\n\n#line 2 \"modint/barrett-reduction.hpp\"\
+    \n\n#line 4 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
+    \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
+    \ long long;\n  u32 m;\n  u64 im;\n  Barrett() : m(), im() {}\n  Barrett(int n)\
+    \ : m(n), im(u64(-1) / m + 1) {}\n  constexpr inline i64 quo(u64 n) {\n    u64\
+    \ x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    return m\
+    \ <= r ? x - 1 : x;\n  }\n  constexpr inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * im) >> 64);\n    u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n\
+    \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
+    \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
+    \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
+    \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
+    };\n#line 4 \"modint/arbitrary-modint.hpp\"\n\nstruct ArbitraryModInt {\n  int\
+    \ x;\n\n  ArbitraryModInt() : x(0) {}\n\n  ArbitraryModInt(int64_t y) {\n    int\
+    \ z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n  }\n\n  ArbitraryModInt\
     \ &operator+=(const ArbitraryModInt &p) {\n    if ((x += p.x) >= get_mod()) x\
     \ -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModInt &operator-=(const\
     \ ArbitraryModInt &p) {\n    if ((x += get_mod() - p.x) >= get_mod()) x -= get_mod();\n\
@@ -615,26 +640,26 @@ data:
     \ b;\n  }\n\n  static inline int &get_mod() {\n    static int mod = 0;\n    return\
     \ mod;\n  }\n\n  static void set_mod(int md) {\n    assert(0 < md && md <= (1LL\
     \ << 30) - 1);\n    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n#line\
-    \ 2 \"prime/fast-factorize.hpp\"\n\n#line 2 \"inner/inner_math.hpp\"\n\nnamespace\
-    \ inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 = int64_t;\n\
-    using u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n  while (b)\
-    \ swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT inv(T a, T p) {\n\
-    \  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n\
-    \    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ? y + p : y;\n\
-    }\n\ntemplate <typename T, typename U>\nT modpow(T a, U n, T p) {\n  T ret = 1\
-    \ % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if (n & 1) ret = U(ret) *\
-    \ a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line 2 \"misc/rng.hpp\"\n\
-    \nnamespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
-    \n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
-    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
-    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
-    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
-    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
-    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
-    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
-    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \ 8 \"verify/verify-unit-test/garner-bigint.test.cpp\"\n//\n#line 2 \"prime/fast-factorize.hpp\"\
+    \n\n#line 2 \"inner/inner_math.hpp\"\n\nnamespace inner {\n\nusing i32 = int32_t;\n\
+    using u32 = uint32_t;\nusing i64 = int64_t;\nusing u64 = uint64_t;\n\ntemplate\
+    \ <typename T>\nT gcd(T a, T b) {\n  while (b) swap(a %= b, b);\n  return a;\n\
+    }\n\ntemplate <typename T>\nT inv(T a, T p) {\n  T b = p, x = 1, y = 0;\n  while\
+    \ (a) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n\
+    \  assert(b == 1);\n  return y < 0 ? y + p : y;\n}\n\ntemplate <typename T, typename\
+    \ U>\nT modpow(T a, U n, T p) {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a)\
+    \ * a % p)\n    if (n & 1) ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace\
+    \ inner\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
     \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
     \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
     \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
@@ -741,34 +766,125 @@ data:
     \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
     using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
-    \ docs/prime/fast-factorize.md\n */\n#line 9 \"verify/verify-unit-test/garner-bigint.test.cpp\"\
-    \n\nusing namespace Nyaan;\nusing mint = ArbitraryModInt;\n\n// n^e\nbigint pow1(ll\
-    \ n, int e) {\n  assert(1 <= n);\n  if (e == 0) return 1;\n  bigint half = pow1(n,\
-    \ e / 2);\n  bigint res = half * half;\n  if (e & 1) res *= n;\n  return res;\n\
-    }\nbigint pow2(ll n, int e) {\n  assert(1 <= n);\n  int pnum = int(log10(n) *\
-    \ double(e) / 9.0) + 2;\n  vector<long long> ps, as;\n  for (int p = 1000000007;\
-    \ sz(ps) < pnum; p += 2) {\n    if (is_prime(p)) ps.push_back(p);\n  }\n  for\
-    \ (auto& p : ps) {\n    mint::set_mod(p);\n    as.push_back(mint{n}.pow(e).get());\n\
-    \  }\n  return garner_bigint(as, ps);\n}\n\nvoid Nyaan::solve() {\n  rep1(n, 50)\
-    \ rep(e, 50) {\n    bigint ans1 = pow1(n, e);\n    bigint ans2 = pow2(n, e);\n\
-    \    if (ans1 != ans2) {\n      trc(n, e, ans1, ans2);\n    }\n    assert(ans1\
-    \ == ans2);\n  }\n  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n\
-    \  cout << a + b << endl;\n}\n"
+    \ docs/prime/fast-factorize.md\n */\n#line 2 \"prime/prime-enumerate.hpp\"\n\n\
+    // Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<int> prime_enumerate(int\
+    \ N) {\n  vector<bool> sieve(N / 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn\
+    \ = sqrt(N); p <= sqn; p += d = 6 - d, i++) {\n    if (!sieve[i]) continue;\n\
+    \    for (int q = p * p / 3, r = d * p / 3 + (d * p % 3 == 2), s = 2 * p,\n  \
+    \           qe = sieve.size();\n         q < qe; q += r = s - r)\n      sieve[q]\
+    \ = 0;\n  }\n  vector<int> ret{2, 3};\n  for (int p = 5, d = 4, i = 1; p <= N;\
+    \ p += d = 6 - d, i++)\n    if (sieve[i]) ret.push_back(p);\n  while (!ret.empty()\
+    \ && ret.back() > N) ret.pop_back();\n  return ret;\n}\n#line 11 \"verify/verify-unit-test/garner-bigint.test.cpp\"\
+    \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
+    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
+    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
+    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
+    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
+    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
+    \ pre;\n\ninline void load() {\n  int len = in_right - in_left;\n  memmove(inbuf,\
+    \ inbuf + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
+    \  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
+    \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
+    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
+    \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
+    \ <typename T>\ninline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n\
+    \  char c;\n  do c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]]\
+    \ bool minus = false;\n  if constexpr (is_signed<T>::value == true) {\n    if\
+    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
+    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n}\ninline void\
+    \ rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head,\
+    \ Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) {\n\
+    \  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = c;\n}\ninline void\
+    \ wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = b\
+    \ ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
+    \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
+    \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
+    \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
+    \    return;\n  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x <\
+    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n\
+    \  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n\
+    \    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n    \
+    \  outbuf[out_right] = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t\
+    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
+    \     outbuf[out_right] = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n \
+    \     out_right += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2) + 1, 3);\n      out_right += 3;\n    } else\
+    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n      out_right\
+    \ += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4, 12 - i);\n  out_right\
+    \ += 12 - i;\n}\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n\
+    }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
+    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
+    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
+    using fastio::wtn;\n#line 2 \"misc/timer.hpp\"\n\n#line 4 \"misc/timer.hpp\"\n\
+    \nstruct Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer()\
+    \ { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
+    };\n#line 13 \"verify/verify-unit-test/garner-bigint.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\nusing mint = ArbitraryModInt;\n\n// n^e\nbigint pow1(ll n, int e) {\n\
+    \  assert(1 <= n);\n  if (e == 0) return 1;\n  bigint half = pow1(n, e / 2);\n\
+    \  bigint res = half * half;\n  if (e & 1) res *= n;\n  return res;\n}\nbigint\
+    \ pow2(ll n, int e) {\n  assert(1 <= n);\n  int pnum = int(log10(n) * double(e)\
+    \ / 8.8) + 2;\n  vector<int> ps, as;\n  for (int p = 1000000007; sz(ps) < pnum;\
+    \ p += 2) {\n    if (is_prime(p)) ps.push_back(p);\n  }\n  for (auto& p : ps)\
+    \ {\n    mint::set_mod(p);\n    as.push_back(mint{n}.pow(e).get());\n  }\n  auto\
+    \ ans1 = GarnerImpl::garner_naive(as, ps).first;\n  auto ans2 = GarnerImpl::garner_dc(as,\
+    \ ps).first;\n  assert(ans1 == ans2);\n  return ans1;\n}\n\nvoid Nyaan::solve()\
+    \ {\n  {\n    auto ps = prime_enumerate(1000);\n    for (int n = 1; n <= sz(ps);\
+    \ n++) {\n      vector<int> rem, mod;\n      for (int i = 0; i < n; i++) {\n \
+    \       rem.push_back(rng(0, ps[i] - 1));\n        mod.push_back(ps[i]);\n   \
+    \   }\n      trc(rem, mod);\n      auto ans1 = GarnerImpl::garner_naive(rem, mod);\n\
+    \      trc(ans1);\n      auto ans2 = GarnerImpl::garner_dc(rem, mod);\n      trc(ans2);\n\
+    \      if (ans1 != ans2) exit(1);\n    }\n  }\n  rep1(n, 100) rep(e, 100) {\n\
+    \    bigint ans1 = pow1(n, e);\n    bigint ans2 = pow2(n, e);\n    if (ans1 !=\
+    \ ans2) {\n      trc(n, e, ans1, ans2);\n    }\n    assert(ans1 == ans2);\n  }\n\
+    \n  /**\n  {\n    int nmax = 1 << 15;\n    vector<int> ps;\n    for (int p = TEN(9);\
+    \ sz(ps) < nmax; p--) {\n      if (is_prime(p)) ps.push_back(p);\n    }\n    for\
+    \ (int n = 1; n <= nmax; n *= 2) {\n      vector<int> rem, mod;\n      for (int\
+    \ i = 0; i < n; i++) {\n        rem.push_back(rng(0, ps[i] - 1));\n        mod.push_back(ps[i]);\n\
+    \      }\n      trc(rem, mod);\n      Timer timer;\n\n      timer.reset();\n \
+    \     auto ans1 = GarnerImpl::garner_naive(rem, mod);\n      int t1 = timer.elapsed();\n\
+    \n      timer.reset();\n      auto ans2 = GarnerImpl::garner_dc(rem, mod);\n \
+    \     int t2 = timer.elapsed();\n\n      if (ans1 != ans2) exit(1);\n      cerr\
+    \ << \"n : \" << n << \", \";\n      cerr << \"naive : \" << t1 << \" ms , \"\
+    ;\n      cerr << \"dc : \" << t2 << \" ms\" << endl;\n    }\n  }\n  //*/\n  cerr\
+    \ << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../math/garner-bigint.hpp\"\
-    \n//\n#include \"../../modint/arbitrary-modint.hpp\"\n#include \"../../prime/fast-factorize.hpp\"\
+    \n//\n#include \"../../modint/arbitrary-modint.hpp\"\n//\n#include \"../../prime/fast-factorize.hpp\"\
+    \n#include \"../../prime/prime-enumerate.hpp\"\n//\n#include \"../../misc/all.hpp\"\
     \n\nusing namespace Nyaan;\nusing mint = ArbitraryModInt;\n\n// n^e\nbigint pow1(ll\
     \ n, int e) {\n  assert(1 <= n);\n  if (e == 0) return 1;\n  bigint half = pow1(n,\
     \ e / 2);\n  bigint res = half * half;\n  if (e & 1) res *= n;\n  return res;\n\
     }\nbigint pow2(ll n, int e) {\n  assert(1 <= n);\n  int pnum = int(log10(n) *\
-    \ double(e) / 9.0) + 2;\n  vector<long long> ps, as;\n  for (int p = 1000000007;\
-    \ sz(ps) < pnum; p += 2) {\n    if (is_prime(p)) ps.push_back(p);\n  }\n  for\
-    \ (auto& p : ps) {\n    mint::set_mod(p);\n    as.push_back(mint{n}.pow(e).get());\n\
-    \  }\n  return garner_bigint(as, ps);\n}\n\nvoid Nyaan::solve() {\n  rep1(n, 50)\
-    \ rep(e, 50) {\n    bigint ans1 = pow1(n, e);\n    bigint ans2 = pow2(n, e);\n\
-    \    if (ans1 != ans2) {\n      trc(n, e, ans1, ans2);\n    }\n    assert(ans1\
-    \ == ans2);\n  }\n  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n\
-    \  cout << a + b << endl;\n}\n"
+    \ double(e) / 8.8) + 2;\n  vector<int> ps, as;\n  for (int p = 1000000007; sz(ps)\
+    \ < pnum; p += 2) {\n    if (is_prime(p)) ps.push_back(p);\n  }\n  for (auto&\
+    \ p : ps) {\n    mint::set_mod(p);\n    as.push_back(mint{n}.pow(e).get());\n\
+    \  }\n  auto ans1 = GarnerImpl::garner_naive(as, ps).first;\n  auto ans2 = GarnerImpl::garner_dc(as,\
+    \ ps).first;\n  assert(ans1 == ans2);\n  return ans1;\n}\n\nvoid Nyaan::solve()\
+    \ {\n  {\n    auto ps = prime_enumerate(1000);\n    for (int n = 1; n <= sz(ps);\
+    \ n++) {\n      vector<int> rem, mod;\n      for (int i = 0; i < n; i++) {\n \
+    \       rem.push_back(rng(0, ps[i] - 1));\n        mod.push_back(ps[i]);\n   \
+    \   }\n      trc(rem, mod);\n      auto ans1 = GarnerImpl::garner_naive(rem, mod);\n\
+    \      trc(ans1);\n      auto ans2 = GarnerImpl::garner_dc(rem, mod);\n      trc(ans2);\n\
+    \      if (ans1 != ans2) exit(1);\n    }\n  }\n  rep1(n, 100) rep(e, 100) {\n\
+    \    bigint ans1 = pow1(n, e);\n    bigint ans2 = pow2(n, e);\n    if (ans1 !=\
+    \ ans2) {\n      trc(n, e, ans1, ans2);\n    }\n    assert(ans1 == ans2);\n  }\n\
+    \n  /**\n  {\n    int nmax = 1 << 15;\n    vector<int> ps;\n    for (int p = TEN(9);\
+    \ sz(ps) < nmax; p--) {\n      if (is_prime(p)) ps.push_back(p);\n    }\n    for\
+    \ (int n = 1; n <= nmax; n *= 2) {\n      vector<int> rem, mod;\n      for (int\
+    \ i = 0; i < n; i++) {\n        rem.push_back(rng(0, ps[i] - 1));\n        mod.push_back(ps[i]);\n\
+    \      }\n      trc(rem, mod);\n      Timer timer;\n\n      timer.reset();\n \
+    \     auto ans1 = GarnerImpl::garner_naive(rem, mod);\n      int t1 = timer.elapsed();\n\
+    \n      timer.reset();\n      auto ans2 = GarnerImpl::garner_dc(rem, mod);\n \
+    \     int t2 = timer.elapsed();\n\n      if (ans1 != ans2) exit(1);\n      cerr\
+    \ << \"n : \" << n << \", \";\n      cerr << \"naive : \" << t1 << \" ms , \"\
+    ;\n      cerr << \"dc : \" << t2 << \" ms\" << endl;\n    }\n  }\n  //*/\n  cerr\
+    \ << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
+    }\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -788,10 +904,14 @@ data:
   - misc/rng.hpp
   - modint/arbitrary-prime-modint.hpp
   - modint/modint-montgomery64.hpp
+  - prime/prime-enumerate.hpp
+  - misc/all.hpp
+  - misc/fastio.hpp
+  - misc/timer.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/garner-bigint.test.cpp
   requiredBy: []
-  timestamp: '2022-11-06 14:01:35+09:00'
+  timestamp: '2022-11-06 23:28:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/garner-bigint.test.cpp

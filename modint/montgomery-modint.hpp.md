@@ -16,7 +16,7 @@ data:
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
   - icon: ':heavy_check_mark:'
     path: math/garner-bigint.hpp
-    title: math/garner-bigint.hpp
+    title: Garner's algorithm for bigint
   - icon: ':heavy_check_mark:'
     path: math/multiprecision-integer.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"

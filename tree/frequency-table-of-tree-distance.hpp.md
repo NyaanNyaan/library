@@ -173,9 +173,9 @@ data:
     \  }\n  auto d0 = mul<T, mint0>(s, t);\n  auto d1 = mul<T, mint1>(s, t);\n  auto\
     \ d2 = mul<T, mint2>(s, t);\n  int n = d0.size();\n  vector<u128> ret(n);\n  for\
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
-    \ i64 a = d0[i].get();\n    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2\
-    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n\
-    \  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 2 \"tree/centroid-decomposition.hpp\"\
+    \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
+    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 2 \"tree/centroid-decomposition.hpp\"\
     \n\n\n\ntemplate <typename G>\nstruct CentroidDecomposition {\n  const G &g;\n\
     \  vector<int> sub;\n  vector<bool> v;\n  vector<vector<int>> tree;\n  int root;\n\
     \n  CentroidDecomposition(const G &g_, int isbuild = true) : g(g_) {\n    sub.resize(g.size(),\
@@ -249,7 +249,7 @@ data:
   isVerificationFile: false
   path: tree/frequency-table-of-tree-distance.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2022-11-06 23:28:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp

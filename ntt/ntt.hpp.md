@@ -13,7 +13,7 @@ data:
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
   - icon: ':heavy_check_mark:'
     path: math/garner-bigint.hpp
-    title: math/garner-bigint.hpp
+    title: Garner's algorithm for bigint
   - icon: ':heavy_check_mark:'
     path: math/multiprecision-integer.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"

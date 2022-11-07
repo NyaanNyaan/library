@@ -25,6 +25,9 @@ data:
     path: verify/verify-unit-test/fast-inv-gcd.test.cpp
     title: verify/verify-unit-test/fast-inv-gcd.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/garner-bigint.test.cpp
+    title: verify/verify-unit-test/garner-bigint.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/mf.test.cpp
     title: verify/verify-unit-test/mf.test.cpp
   - icon: ':heavy_check_mark:'
@@ -71,6 +74,7 @@ data:
   verifiedWith:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/sa-manager.test.cpp

@@ -22,6 +22,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: Garner's algorithm for bigint
     links: []
   bundledCode: "#line 1 \"math/garner-bigint.hpp\"\n\n#line 2 \"math/multiprecision-integer.hpp\"\
     \n\n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iostream>\n\
@@ -173,9 +174,9 @@ data:
     \  }\n  auto d0 = mul<T, mint0>(s, t);\n  auto d1 = mul<T, mint1>(s, t);\n  auto\
     \ d2 = mul<T, mint2>(s, t);\n  int n = d0.size();\n  vector<u128> ret(n);\n  for\
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
-    \ i64 a = d0[i].get();\n    u128 b = (n1 + m1 - a) * r01 % m1;\n    u128 c = ((n2\
-    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + c * w2;\n\
-    \  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/multiprecision-integer.hpp\"\
+    \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
+    \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/multiprecision-integer.hpp\"\
     \n\nnamespace MultiPrecisionIntegerImpl {\nstruct TENS {\n  static constexpr int\
     \ offset = 30;\n  constexpr TENS() : _tend() {\n    _tend[offset] = 1;\n    for\
     \ (int i = 1; i <= offset; i++) {\n      _tend[offset + i] = _tend[offset + i\
@@ -372,47 +373,75 @@ data:
     \  for (int i = 0; i < (int)a.size(); i++) cerr << a[i] << \", \";\n    cerr <<\
     \ \"}\" << endl;\n  }\n};\n\nusing bigint = MultiPrecisionInteger;\n\n/**\n *\
     \ @brief \u591A\u500D\u9577\u6574\u6570\n */\n#line 3 \"math/garner-bigint.hpp\"\
-    \n\nnamespace GarnerImpl {\ntemplate <typename T>\nconstexpr T safe_mod(T x, T\
-    \ m) {\n  x %= m;\n  if (x < 0) x += m;\n  return x;\n}\ntemplate <typename T>\n\
-    constexpr std::pair<T, T> inv_gcd(T a, T b) {\n  a = safe_mod(a, b);\n  if (a\
-    \ == 0) return {b, 0};\n  T s = b, t = a;\n  T m0 = 0, m1 = 1;\n  while (t) {\n\
-    \    T u = s / t;\n    s -= t * u;\n    m0 -= m1 * u;\n    auto tmp = s;\n   \
-    \ s = t;\n    t = tmp;\n    tmp = m0;\n    m0 = m1;\n    m1 = tmp;\n  }\n  if\
-    \ (m0 < 0) m0 += b / s;\n  return {s, m0};\n}\ntemplate <typename T>\nT inv_mod(T\
-    \ x, T m) {\n  assert(1 <= m);\n  auto z = inv_gcd(x, m);\n  assert(z.first ==\
-    \ 1);\n  return z.second;\n}\nbigint garner_bigint(const vector<long long>& a,\
-    \ const vector<long long>& m) {\n  int ms = a.size();\n  vector<long long> coffs(ms,\
-    \ 1), constants(ms), digs(ms);\n  for (int i = 0; i < ms; ++i) {\n    long long\
-    \ v = (a[i] - constants[i]) * inv_mod(coffs[i], m[i]) % m[i];\n    if (v < 0)\
-    \ v += m[i];\n    digs[i] = v;\n    for (int j = i + 1; j < ms; j++) {\n     \
-    \ constants[j] += coffs[j] * v;\n      constants[j] %= m[j];\n      coffs[j] *=\
-    \ m[i];\n      coffs[j] %= m[j];\n    }\n  }\n  bigint ans = bigint{0}, c = bigint{1};\n\
-    \  for (int i = ms - 1; i >= 0; --i) {\n    c *= bigint{m[i]};\n    ans *= bigint{m[i]};\n\
-    \    ans += bigint{digs[i]};\n  }\n  if (ans > c / 2) ans -= c;\n  if (ans < 0)\
-    \ ans += c;\n  return ans;\n}\n\nbigint crt_bigint(const vector<long long>& a,\
-    \ const vector<long long>& m) {\n  return garner_bigint(a, m);\n}\n}  // namespace\
-    \ Garner\n\nusing GarnerImpl::crt_bigint;\nusing GarnerImpl::garner_bigint;\n"
-  code: "\n#include \"multiprecision-integer.hpp\"\n\nnamespace GarnerImpl {\ntemplate\
-    \ <typename T>\nconstexpr T safe_mod(T x, T m) {\n  x %= m;\n  if (x < 0) x +=\
-    \ m;\n  return x;\n}\ntemplate <typename T>\nconstexpr std::pair<T, T> inv_gcd(T\
-    \ a, T b) {\n  a = safe_mod(a, b);\n  if (a == 0) return {b, 0};\n  T s = b, t\
-    \ = a;\n  T m0 = 0, m1 = 1;\n  while (t) {\n    T u = s / t;\n    s -= t * u;\n\
-    \    m0 -= m1 * u;\n    auto tmp = s;\n    s = t;\n    t = tmp;\n    tmp = m0;\n\
-    \    m0 = m1;\n    m1 = tmp;\n  }\n  if (m0 < 0) m0 += b / s;\n  return {s, m0};\n\
-    }\ntemplate <typename T>\nT inv_mod(T x, T m) {\n  assert(1 <= m);\n  auto z =\
-    \ inv_gcd(x, m);\n  assert(z.first == 1);\n  return z.second;\n}\nbigint garner_bigint(const\
-    \ vector<long long>& a, const vector<long long>& m) {\n  int ms = a.size();\n\
-    \  vector<long long> coffs(ms, 1), constants(ms), digs(ms);\n  for (int i = 0;\
-    \ i < ms; ++i) {\n    long long v = (a[i] - constants[i]) * inv_mod(coffs[i],\
-    \ m[i]) % m[i];\n    if (v < 0) v += m[i];\n    digs[i] = v;\n    for (int j =\
-    \ i + 1; j < ms; j++) {\n      constants[j] += coffs[j] * v;\n      constants[j]\
-    \ %= m[j];\n      coffs[j] *= m[i];\n      coffs[j] %= m[j];\n    }\n  }\n  bigint\
-    \ ans = bigint{0}, c = bigint{1};\n  for (int i = ms - 1; i >= 0; --i) {\n   \
-    \ c *= bigint{m[i]};\n    ans *= bigint{m[i]};\n    ans += bigint{digs[i]};\n\
-    \  }\n  if (ans > c / 2) ans -= c;\n  if (ans < 0) ans += c;\n  return ans;\n\
-    }\n\nbigint crt_bigint(const vector<long long>& a, const vector<long long>& m)\
-    \ {\n  return garner_bigint(a, m);\n}\n}  // namespace Garner\n\nusing GarnerImpl::crt_bigint;\n\
-    using GarnerImpl::garner_bigint;"
+    \n\nnamespace GarnerImpl {\n\ntemplate <typename T,\n          enable_if_t<is_integral_v<T>\
+    \ || is_same_v<T, __int128_t>>* = nullptr>\nT inv_mod(T a, T m) {\n  assert(0\
+    \ <= a);\n  if (a >= m) a %= m;\n  T b = m, s = 1, t = 0;\n  while (true) {\n\
+    \    if (a == 1) return s;\n    t -= b / a * s;\n    b %= a;\n    if (b == 1)\
+    \ return t + m;\n    s -= a / b * t;\n    a %= b;\n  }\n}\n\npair<bigint, bigint>\
+    \ garner_dc(const vector<int>& r, const vector<int>& m) {\n  int N = m.size();\n\
+    \  if (N == 0) return {0, 1};\n  int B = 1;\n  while (B < N) B *= 2;\n  vector<bigint>\
+    \ tree(2 * B);\n  for (int i = 0; i < B; i++) tree[B + i] = i < (int)m.size()\
+    \ ? m[i] : 1;\n  for (int i = B - 1; i; i--) tree[i] = tree[i * 2 + 0] * tree[i\
+    \ * 2 + 1];\n  auto calc = [&](auto&& rc, int ti, bigint X, bigint Y, int L,\n\
+    \                  int R) -> bigint {\n    if (N <= L) return 0;\n    X %= tree[ti],\
+    \ Y %= tree[ti];\n    if (L + 1 == R) {\n      int xl = X.to_ll(), yl = Y.to_ll();\n\
+    \      int t = (1LL * (r[L] - xl) * inv_mod(yl, m[L])) % m[L];\n      return t\
+    \ < 0 ? t + m[L] : t;\n    }\n    auto& prod = tree[ti * 2 + 0];\n    int M =\
+    \ (L + R) / 2;\n    auto xl = rc(rc, ti * 2 + 0, X, Y, L, M);\n    auto xr = rc(rc,\
+    \ ti * 2 + 1, X + xl * Y, Y * prod, M, R);\n    return xl + xr * prod;\n  };\n\
+    \  bigint ans = calc(calc, 1, 0, 1, 0, B);\n  return {ans, tree[1]};\n}\n\npair<bigint,\
+    \ bigint> garner_naive(const vector<int>& r, const vector<int>& m) {\n  int N\
+    \ = r.size();\n  if (N == 0) return {0, 1};\n  vector<int> y(N), x(N), t(N);\n\
+    \  for (int i = 0; i < N; i++) y[i] = 1 % m[i];\n  for (int i = 0; i < N; ++i)\
+    \ {\n    t[i] = (1LL * (r[i] - x[i]) * inv_mod(y[i], m[i])) % m[i];\n    if (t[i]\
+    \ < 0) t[i] += m[i];\n    for (int j = i + 1; j < N; j++) {\n      x[j] = (x[j]\
+    \ + 1LL * y[j] * t[i]) % m[j];\n      y[j] = 1LL * y[j] * m[i] % m[j];\n    }\n\
+    \  }\n  bigint ans = 0, mod = 1;\n  for (int i = N - 1; i >= 0; --i) ans = ans\
+    \ * m[i] + t[i], mod *= m[i];\n  return {ans, mod};\n}\n\n// 1 <= m[i] <= 2 *\
+    \ 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\uFF1A\
+    \u672A\u5B9A\u7FA9\npair<bigint, bigint> garner_bigint(const vector<int>& r, const\
+    \ vector<int>& m) {\n  assert(r.size() == m.size());\n  if ((int)m.size() <= 3000)\
+    \ return garner_naive(r, m);\n  return garner_dc(r, m);\n}\n// 1 <= m[i] <= 2\
+    \ * 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\uFF1A\
+    \u672A\u5B9A\u7FA9\npair<bigint, bigint> crt_bigint(const vector<int>& r, const\
+    \ vector<int>& m) {\n  return garner_bigint(r, m);\n}\n}  // namespace GarnerImpl\n\
+    \nusing GarnerImpl::crt_bigint;\nusing GarnerImpl::garner_bigint;\n\n/**\n * @brief\
+    \ Garner's algorithm for bigint\n */\n"
+  code: "\n#include \"multiprecision-integer.hpp\"\n\nnamespace GarnerImpl {\n\ntemplate\
+    \ <typename T,\n          enable_if_t<is_integral_v<T> || is_same_v<T, __int128_t>>*\
+    \ = nullptr>\nT inv_mod(T a, T m) {\n  assert(0 <= a);\n  if (a >= m) a %= m;\n\
+    \  T b = m, s = 1, t = 0;\n  while (true) {\n    if (a == 1) return s;\n    t\
+    \ -= b / a * s;\n    b %= a;\n    if (b == 1) return t + m;\n    s -= a / b *\
+    \ t;\n    a %= b;\n  }\n}\n\npair<bigint, bigint> garner_dc(const vector<int>&\
+    \ r, const vector<int>& m) {\n  int N = m.size();\n  if (N == 0) return {0, 1};\n\
+    \  int B = 1;\n  while (B < N) B *= 2;\n  vector<bigint> tree(2 * B);\n  for (int\
+    \ i = 0; i < B; i++) tree[B + i] = i < (int)m.size() ? m[i] : 1;\n  for (int i\
+    \ = B - 1; i; i--) tree[i] = tree[i * 2 + 0] * tree[i * 2 + 1];\n  auto calc =\
+    \ [&](auto&& rc, int ti, bigint X, bigint Y, int L,\n                  int R)\
+    \ -> bigint {\n    if (N <= L) return 0;\n    X %= tree[ti], Y %= tree[ti];\n\
+    \    if (L + 1 == R) {\n      int xl = X.to_ll(), yl = Y.to_ll();\n      int t\
+    \ = (1LL * (r[L] - xl) * inv_mod(yl, m[L])) % m[L];\n      return t < 0 ? t +\
+    \ m[L] : t;\n    }\n    auto& prod = tree[ti * 2 + 0];\n    int M = (L + R) /\
+    \ 2;\n    auto xl = rc(rc, ti * 2 + 0, X, Y, L, M);\n    auto xr = rc(rc, ti *\
+    \ 2 + 1, X + xl * Y, Y * prod, M, R);\n    return xl + xr * prod;\n  };\n  bigint\
+    \ ans = calc(calc, 1, 0, 1, 0, B);\n  return {ans, tree[1]};\n}\n\npair<bigint,\
+    \ bigint> garner_naive(const vector<int>& r, const vector<int>& m) {\n  int N\
+    \ = r.size();\n  if (N == 0) return {0, 1};\n  vector<int> y(N), x(N), t(N);\n\
+    \  for (int i = 0; i < N; i++) y[i] = 1 % m[i];\n  for (int i = 0; i < N; ++i)\
+    \ {\n    t[i] = (1LL * (r[i] - x[i]) * inv_mod(y[i], m[i])) % m[i];\n    if (t[i]\
+    \ < 0) t[i] += m[i];\n    for (int j = i + 1; j < N; j++) {\n      x[j] = (x[j]\
+    \ + 1LL * y[j] * t[i]) % m[j];\n      y[j] = 1LL * y[j] * m[i] % m[j];\n    }\n\
+    \  }\n  bigint ans = 0, mod = 1;\n  for (int i = N - 1; i >= 0; --i) ans = ans\
+    \ * m[i] + t[i], mod *= m[i];\n  return {ans, mod};\n}\n\n// 1 <= m[i] <= 2 *\
+    \ 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\uFF1A\
+    \u672A\u5B9A\u7FA9\npair<bigint, bigint> garner_bigint(const vector<int>& r, const\
+    \ vector<int>& m) {\n  assert(r.size() == m.size());\n  if ((int)m.size() <= 3000)\
+    \ return garner_naive(r, m);\n  return garner_dc(r, m);\n}\n// 1 <= m[i] <= 2\
+    \ * 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\uFF1A\
+    \u672A\u5B9A\u7FA9\npair<bigint, bigint> crt_bigint(const vector<int>& r, const\
+    \ vector<int>& m) {\n  return garner_bigint(r, m);\n}\n}  // namespace GarnerImpl\n\
+    \nusing GarnerImpl::crt_bigint;\nusing GarnerImpl::garner_bigint;\n\n/**\n * @brief\
+    \ Garner's algorithm for bigint\n */\n"
   dependsOn:
   - math/multiprecision-integer.hpp
   - ntt/arbitrary-ntt.hpp
@@ -421,7 +450,7 @@ data:
   isVerificationFile: false
   path: math/garner-bigint.hpp
   requiredBy: []
-  timestamp: '2022-11-06 14:01:35+09:00'
+  timestamp: '2022-11-06 23:28:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/garner-bigint.test.cpp
@@ -430,5 +459,5 @@ layout: document
 redirect_from:
 - /library/math/garner-bigint.hpp
 - /library/math/garner-bigint.hpp.html
-title: math/garner-bigint.hpp
+title: Garner's algorithm for bigint
 ---
