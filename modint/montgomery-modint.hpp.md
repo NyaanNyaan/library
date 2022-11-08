@@ -64,6 +64,9 @@ data:
     path: verify/verify-unit-test/bigint2.test.cpp
     title: verify/verify-unit-test/bigint2.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint3.test.cpp
+    title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -594,6 +597,7 @@ data:
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp

@@ -16,6 +16,9 @@ data:
     path: verify/verify-unit-test/bigint2.test.cpp
     title: verify/verify-unit-test/bigint2.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint3.test.cpp
+    title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -395,6 +398,7 @@ data:
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
 documentation_of: misc/fastio.hpp

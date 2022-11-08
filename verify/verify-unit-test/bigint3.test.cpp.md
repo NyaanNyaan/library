@@ -53,7 +53,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/bigint2.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"verify/verify-unit-test/bigint3.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
@@ -189,7 +189,7 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/bigint2.test.cpp\"\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/bigint3.test.cpp\"\
     \n//\n#line 2 \"math/multiprecision-integer.hpp\"\n\n#line 10 \"math/multiprecision-integer.hpp\"\
     \nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
     \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
@@ -560,7 +560,7 @@ data:
     \ s << \" : \";\n    cerr << \"{ \";\n    for (int i = 0; i < (int)a.size(); i++)\
     \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
     \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
-    \ */\n#line 6 \"verify/verify-unit-test/bigint2.test.cpp\"\n//\n#line 2 \"misc/fastio.hpp\"\
+    \ */\n#line 6 \"verify/verify-unit-test/bigint3.test.cpp\"\n//\n#line 2 \"misc/fastio.hpp\"\
     \n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace std;\n\nnamespace fastio {\n\
     static constexpr int SZ = 1 << 17;\nchar inbuf[SZ], outbuf[SZ];\nint in_left =\
     \ 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
@@ -624,115 +624,42 @@ data:
     \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 8 \"verify/verify-unit-test/bigint2.test.cpp\"\n\nusing namespace Nyaan;\n\
+    };\n#line 8 \"verify/verify-unit-test/bigint3.test.cpp\"\nusing namespace Nyaan;\n\
     \nvoid MultiPrecisionInteger::_test_private_function(const M& A, const M& B) {\n\
-    \  long long naive_complexity =\n      max<long long>(A._size(), B._size()) *\
-    \ abs(A._size() - B._size());\n  if (naive_complexity > 100000) return;\n\n  const\
-    \ vector<int>& a = A.dat;\n  const vector<int>& b = B.dat;\n  if (!B.is_zero())\
-    \ {\n    auto qr1 = _divmod_naive(a, b);\n    auto qr2 = _divmod_dc(a, b);\n \
-    \   auto qr3 = _divmod_newton(a, b);\n    assert(qr1 == qr2 && \"_div_test\");\n\
-    \    assert(qr1 == qr3 && \"_div_test\");\n  }\n  if (!A.is_zero()) {\n    auto\
-    \ qr1 = _divmod_naive(b, a);\n    auto qr2 = _divmod_dc(b, a);\n    auto qr3 =\
-    \ _divmod_newton(b, a);\n    assert(qr1 == qr2 && \"_div_test\");\n    assert(qr1\
-    \ == qr3 && \"_div_test\");\n  }\n}\n\nvoid q() {\n  auto gen = [&](int d) {\n\
-    \    string S;\n    S.push_back(rng('1', '9'));\n    rep(_, d - 1) S.push_back(rng('0',\
-    \ '9'));\n    if (rng() & 1) S.insert(begin(S), '-');\n    return S;\n  };\n \
-    \ auto validate_divmod2 = [&](bigint a, bigint b) {\n    auto [q, r] = divmod(a,\
-    \ b);\n\n    bigint a2 = bigint(a.to_string());\n    bigint b2 = bigint(b.to_string());\n\
-    \    bigint q2 = bigint(q.to_string());\n    bigint r2 = bigint(r.to_string());\n\
-    \    assert(a == a2 and b == b2 and q == q2 and r == r2);\n\n    assert(q * b\
-    \ + r == a);\n    assert(0 <= abs(r) and abs(r) < abs(b));\n\n    if (a >= 0 and\
-    \ b > 0) {\n      assert(q >= 0 and r >= 0);\n    }\n    if (a >= 0 and b < 0)\
-    \ {\n      assert(q <= 0 and r >= 0);\n    }\n    if (a < 0 and b > 0) {\n   \
-    \   assert(q <= 0 and r <= 0);\n    }\n    if (a < 0 and b < 0) {\n      assert(q\
-    \ >= 0 and r <= 0);\n    }\n\n    bigint::_test_private_function(a, b);\n  };\n\
-    \n  // random\n  rep(_, 200) {\n    string S = gen(rng(1, 10000));\n    string\
-    \ T = gen(rng(1, 10000));\n    if (rng() % 2 and sz(S) < sz(T)) swap(S, T);\n\
-    \    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n  rep(_, 200) {\n \
-    \   string S = gen(rng(2000, 2500));\n    string T = gen(rng(1000, 1500));\n \
-    \   bigint A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n  cerr << \"random ok\"\
-    \ << endl;\n  // 100000000...\n  rep(_, 100) {\n    string S = gen(rng(1, 10000));\n\
-    \    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S, T);\n    T[0]\
-    \ = '1';\n    rep1(i, sz(T) - 1) T[i] = '0';\n\n    bigint A{S}, B{T};\n    validate_divmod2(A,\
-    \ B);\n  }\n  // 100000000... + noise\n  rep(_, 100) {\n    string S = gen(rng(1,\
-    \ 10000));\n    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S,\
-    \ T);\n    T[0] = '1';\n    rep1(i, sz(T) - 1) T[i] = '0';\n    T[rng(0, sz(T)\
-    \ - 1)] = rng('1', '9');\n\n    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n\
-    \  }\n  cerr << \"100000000 ok\" << endl;\n  // 999999999...\n  rep(_, 100) {\n\
-    \    string S = gen(rng(1, 10000));\n    string T = gen(rng(1, 10000));\n    if\
-    \ (sz(S) < sz(T)) swap(S, T);\n    rep(i, sz(T)) T[i] = '9';\n\n    bigint A{S},\
-    \ B{T};\n    validate_divmod2(A, B);\n  }\n  // 999999999... + noise\n  rep(_,\
-    \ 100) {\n    string S = gen(rng(1, 10000));\n    string T = gen(rng(1, 10000));\n\
-    \    if (sz(S) < sz(T)) swap(S, T);\n    rep(i, sz(T)) T[i] = '9';\n    T[rng(0,\
-    \ sz(T) - 1)] = rng('1', '8');\n\n    bigint A{S}, B{T};\n    validate_divmod2(A,\
-    \ B);\n  }\n  cerr << \"999999999 ok\" << endl;\n\n  // small\n  reg(i, 50, 150)\
-    \ reg(j, 50, 150) {\n    string S = gen(i * 9);\n    string T = gen(j * 9);\n\
-    \    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n  cerr << \"small ok\"\
-    \ << endl;\n\n  // time\n  {\n    Timer timer;\n    auto S = bigint{gen(1 << 20)};\n\
-    \    auto T = bigint{gen(1 << 19)};\n    auto [q, r] = divmod(S, T);\n    auto\
-    \ U = q * T + r;\n    assert(S == U);\n    cerr << \"time : \" << timer.elapsed()\
-    \ << endl;\n  }\n  /*\n  for (int b = 1; b <= 22; b++) {\n    Timer timer;\n \
-    \   rep(_, 10) {\n      auto S = bigint{gen(1 << b)};\n      auto T = bigint{gen(1\
-    \ << (b - 1))};\n      timer.elapsed();\n      auto [q, r] = divmod(S, T);\n \
-    \     auto U = q * T + r;\n      assert(S == U);\n    }\n    cerr << \"b : 2^\"\
-    \ << b << \", \";\n    cerr << \"div time : \" << timer.elapsed() << endl;\n \
-    \ }\n  */\n\n  cerr << \"OK\" << endl;\n}\n\nvoid Nyaan::solve() {\n  q();\n\n\
-    \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \  Timer timer;\n  const vector<int>& a = A.dat;\n  const vector<int>& b = B.dat;\n\
+    \n  cerr << \"size : \" << b.size() << \", \";\n\n  timer.reset();\n  auto qr3\
+    \ = _divmod_newton(a, b);\n  cerr << \"nt : \" << timer.elapsed() << \", \";\n\
+    \n  timer.reset();\n  auto qr2 = _divmod_dc(a, b);\n  cerr << \"dc : \" << timer.elapsed()\
+    \ << \", \";\n  assert(qr2 == qr3);\n\n  long long naive_complexity =\n      max<long\
+    \ long>(A._size(), B._size()) * abs(A._size() - B._size());\n  if (naive_complexity\
+    \ <= TEN(6)) {\n    timer.reset();\n    auto qr1 = _divmod_naive(a, b);\n    assert(qr1\
+    \ == qr3 && \"_div_test\");\n    cerr << \"na : \" << timer.elapsed() << \", \"\
+    ;\n  }\n  cerr << endl;\n}\n\nvoid q() {\n  auto gen = [&](int d) {\n    string\
+    \ S;\n    S.push_back(rng('1', '9'));\n    rep(_, d - 1) S.push_back(rng('0',\
+    \ '9'));\n    if (rng() & 1) S.insert(begin(S), '-');\n    return S;\n  };\n\n\
+    \  // time\n  for (int b = 1; b <= 21; b++) {\n    auto S = bigint{gen(1 << b)};\n\
+    \    auto T = bigint{gen(1 << (b - 1))};\n    bigint::_test_private_function(S,\
+    \ T);\n  }\n  cerr << \"OK\" << endl;\n}\n\nvoid Nyaan::solve() {\n  q();\n  int\
+    \ a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../math/multiprecision-integer.hpp\"\
-    \n//\n#include \"../../misc/all.hpp\"\n\nusing namespace Nyaan;\n\nvoid MultiPrecisionInteger::_test_private_function(const\
-    \ M& A, const M& B) {\n  long long naive_complexity =\n      max<long long>(A._size(),\
-    \ B._size()) * abs(A._size() - B._size());\n  if (naive_complexity > 100000) return;\n\
-    \n  const vector<int>& a = A.dat;\n  const vector<int>& b = B.dat;\n  if (!B.is_zero())\
-    \ {\n    auto qr1 = _divmod_naive(a, b);\n    auto qr2 = _divmod_dc(a, b);\n \
-    \   auto qr3 = _divmod_newton(a, b);\n    assert(qr1 == qr2 && \"_div_test\");\n\
-    \    assert(qr1 == qr3 && \"_div_test\");\n  }\n  if (!A.is_zero()) {\n    auto\
-    \ qr1 = _divmod_naive(b, a);\n    auto qr2 = _divmod_dc(b, a);\n    auto qr3 =\
-    \ _divmod_newton(b, a);\n    assert(qr1 == qr2 && \"_div_test\");\n    assert(qr1\
-    \ == qr3 && \"_div_test\");\n  }\n}\n\nvoid q() {\n  auto gen = [&](int d) {\n\
-    \    string S;\n    S.push_back(rng('1', '9'));\n    rep(_, d - 1) S.push_back(rng('0',\
-    \ '9'));\n    if (rng() & 1) S.insert(begin(S), '-');\n    return S;\n  };\n \
-    \ auto validate_divmod2 = [&](bigint a, bigint b) {\n    auto [q, r] = divmod(a,\
-    \ b);\n\n    bigint a2 = bigint(a.to_string());\n    bigint b2 = bigint(b.to_string());\n\
-    \    bigint q2 = bigint(q.to_string());\n    bigint r2 = bigint(r.to_string());\n\
-    \    assert(a == a2 and b == b2 and q == q2 and r == r2);\n\n    assert(q * b\
-    \ + r == a);\n    assert(0 <= abs(r) and abs(r) < abs(b));\n\n    if (a >= 0 and\
-    \ b > 0) {\n      assert(q >= 0 and r >= 0);\n    }\n    if (a >= 0 and b < 0)\
-    \ {\n      assert(q <= 0 and r >= 0);\n    }\n    if (a < 0 and b > 0) {\n   \
-    \   assert(q <= 0 and r <= 0);\n    }\n    if (a < 0 and b < 0) {\n      assert(q\
-    \ >= 0 and r <= 0);\n    }\n\n    bigint::_test_private_function(a, b);\n  };\n\
-    \n  // random\n  rep(_, 200) {\n    string S = gen(rng(1, 10000));\n    string\
-    \ T = gen(rng(1, 10000));\n    if (rng() % 2 and sz(S) < sz(T)) swap(S, T);\n\
-    \    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n  rep(_, 200) {\n \
-    \   string S = gen(rng(2000, 2500));\n    string T = gen(rng(1000, 1500));\n \
-    \   bigint A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n  cerr << \"random ok\"\
-    \ << endl;\n  // 100000000...\n  rep(_, 100) {\n    string S = gen(rng(1, 10000));\n\
-    \    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S, T);\n    T[0]\
-    \ = '1';\n    rep1(i, sz(T) - 1) T[i] = '0';\n\n    bigint A{S}, B{T};\n    validate_divmod2(A,\
-    \ B);\n  }\n  // 100000000... + noise\n  rep(_, 100) {\n    string S = gen(rng(1,\
-    \ 10000));\n    string T = gen(rng(1, 10000));\n    if (sz(S) < sz(T)) swap(S,\
-    \ T);\n    T[0] = '1';\n    rep1(i, sz(T) - 1) T[i] = '0';\n    T[rng(0, sz(T)\
-    \ - 1)] = rng('1', '9');\n\n    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n\
-    \  }\n  cerr << \"100000000 ok\" << endl;\n  // 999999999...\n  rep(_, 100) {\n\
-    \    string S = gen(rng(1, 10000));\n    string T = gen(rng(1, 10000));\n    if\
-    \ (sz(S) < sz(T)) swap(S, T);\n    rep(i, sz(T)) T[i] = '9';\n\n    bigint A{S},\
-    \ B{T};\n    validate_divmod2(A, B);\n  }\n  // 999999999... + noise\n  rep(_,\
-    \ 100) {\n    string S = gen(rng(1, 10000));\n    string T = gen(rng(1, 10000));\n\
-    \    if (sz(S) < sz(T)) swap(S, T);\n    rep(i, sz(T)) T[i] = '9';\n    T[rng(0,\
-    \ sz(T) - 1)] = rng('1', '8');\n\n    bigint A{S}, B{T};\n    validate_divmod2(A,\
-    \ B);\n  }\n  cerr << \"999999999 ok\" << endl;\n\n  // small\n  reg(i, 50, 150)\
-    \ reg(j, 50, 150) {\n    string S = gen(i * 9);\n    string T = gen(j * 9);\n\
-    \    bigint A{S}, B{T};\n    validate_divmod2(A, B);\n  }\n  cerr << \"small ok\"\
-    \ << endl;\n\n  // time\n  {\n    Timer timer;\n    auto S = bigint{gen(1 << 20)};\n\
-    \    auto T = bigint{gen(1 << 19)};\n    auto [q, r] = divmod(S, T);\n    auto\
-    \ U = q * T + r;\n    assert(S == U);\n    cerr << \"time : \" << timer.elapsed()\
-    \ << endl;\n  }\n  /*\n  for (int b = 1; b <= 22; b++) {\n    Timer timer;\n \
-    \   rep(_, 10) {\n      auto S = bigint{gen(1 << b)};\n      auto T = bigint{gen(1\
-    \ << (b - 1))};\n      timer.elapsed();\n      auto [q, r] = divmod(S, T);\n \
-    \     auto U = q * T + r;\n      assert(S == U);\n    }\n    cerr << \"b : 2^\"\
-    \ << b << \", \";\n    cerr << \"div time : \" << timer.elapsed() << endl;\n \
-    \ }\n  */\n\n  cerr << \"OK\" << endl;\n}\n\nvoid Nyaan::solve() {\n  q();\n\n\
-    \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \n//\n#include \"../../misc/all.hpp\"\nusing namespace Nyaan;\n\nvoid MultiPrecisionInteger::_test_private_function(const\
+    \ M& A, const M& B) {\n  Timer timer;\n  const vector<int>& a = A.dat;\n  const\
+    \ vector<int>& b = B.dat;\n\n  cerr << \"size : \" << b.size() << \", \";\n\n\
+    \  timer.reset();\n  auto qr3 = _divmod_newton(a, b);\n  cerr << \"nt : \" <<\
+    \ timer.elapsed() << \", \";\n\n  timer.reset();\n  auto qr2 = _divmod_dc(a, b);\n\
+    \  cerr << \"dc : \" << timer.elapsed() << \", \";\n  assert(qr2 == qr3);\n\n\
+    \  long long naive_complexity =\n      max<long long>(A._size(), B._size()) *\
+    \ abs(A._size() - B._size());\n  if (naive_complexity <= TEN(6)) {\n    timer.reset();\n\
+    \    auto qr1 = _divmod_naive(a, b);\n    assert(qr1 == qr3 && \"_div_test\");\n\
+    \    cerr << \"na : \" << timer.elapsed() << \", \";\n  }\n  cerr << endl;\n}\n\
+    \nvoid q() {\n  auto gen = [&](int d) {\n    string S;\n    S.push_back(rng('1',\
+    \ '9'));\n    rep(_, d - 1) S.push_back(rng('0', '9'));\n    if (rng() & 1) S.insert(begin(S),\
+    \ '-');\n    return S;\n  };\n\n  // time\n  for (int b = 1; b <= 21; b++) {\n\
+    \    auto S = bigint{gen(1 << b)};\n    auto T = bigint{gen(1 << (b - 1))};\n\
+    \    bigint::_test_private_function(S, T);\n  }\n  cerr << \"OK\" << endl;\n}\n\
+    \nvoid Nyaan::solve() {\n  q();\n  int a, b;\n  cin >> a >> b;\n  cout << a +\
+    \ b << endl;\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -749,15 +676,15 @@ data:
   - misc/rng.hpp
   - misc/timer.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/bigint2.test.cpp
+  path: verify/verify-unit-test/bigint3.test.cpp
   requiredBy: []
   timestamp: '2022-11-08 13:26:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/bigint2.test.cpp
+documentation_of: verify/verify-unit-test/bigint3.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/bigint2.test.cpp
-- /verify/verify/verify-unit-test/bigint2.test.cpp.html
-title: verify/verify-unit-test/bigint2.test.cpp
+- /verify/verify/verify-unit-test/bigint3.test.cpp
+- /verify/verify/verify-unit-test/bigint3.test.cpp.html
+title: verify/verify-unit-test/bigint3.test.cpp
 ---

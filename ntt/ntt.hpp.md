@@ -58,6 +58,9 @@ data:
     path: verify/verify-unit-test/bigint2.test.cpp
     title: verify/verify-unit-test/bigint2.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint3.test.cpp
+    title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dual-fps.test.cpp
     title: verify/verify-unit-test/dual-fps.test.cpp
   - icon: ':heavy_check_mark:'
@@ -455,6 +458,7 @@ data:
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp

@@ -217,6 +217,9 @@ data:
     path: verify/verify-unit-test/bigint2.test.cpp
     title: verify/verify-unit-test/bigint2.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint3.test.cpp
+    title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bitset-find-prev.test.cpp
     title: verify/verify-unit-test/bitset-find-prev.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1294,6 +1297,7 @@ data:
   - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/interval-union.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
