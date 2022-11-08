@@ -349,7 +349,7 @@ struct RBSTSegmentTreeBase {
         if constexpr (exclusive) {
           return now->key;
         } else {
-          return now->l ? _get_max_key(now->l, failed) : prev;
+          return now->l ? _get_max_keyval(now->l, failed).first : prev;
         }
       }
       prod_now = pl;
@@ -390,7 +390,7 @@ struct RBSTSegmentTreeBase {
       auto pr = f(now->val, prod_now);
       if (!check(pr)) {
         if constexpr (inclusive) {
-          return now->r ? _get_min_key(now->r, failed) : prev;
+          return now->r ? _get_min_keyval(now->r, failed).first : prev;
         } else {
           return now->key;
         }
