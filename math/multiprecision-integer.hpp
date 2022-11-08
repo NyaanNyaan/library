@@ -87,7 +87,7 @@ struct MultiPrecisionInteger {
     return {n, c};
   }
   friend pair<M, M> divmod(const M& lhs, const M& rhs) {
-    auto dm = _divmod_dc(lhs.dat, rhs.dat);
+    auto dm = _divmod_newton(lhs.dat, rhs.dat);
     bool dn = _is_zero(dm.first) ? false : lhs.neg != rhs.neg;
     bool mn = _is_zero(dm.second) ? false : lhs.neg;
     return {M{dn, dm.first}, M{mn, dm.second}};
@@ -424,6 +424,57 @@ struct MultiPrecisionInteger {
       q.resize(s - xu - yv, 0);
       copy(begin(qh), end(qh), back_inserter(q));
     }
+    _shrink(q), _shrink(r);
+    auto [q2, r2] = _divmod_1e9(r, {norm});
+    assert(_is_zero(r2));
+    return {q, q2};
+  }
+
+  // 1 / a を 絶対誤差 B^{-deg} で求める
+  static vector<int> _calc_inv(const vector<int>& a, int deg) {
+    assert(!a.empty() && D / 2 <= a.back() and a.back() < D);
+    int k = deg, c = a.size();
+    while (k > 64) k = (k + 1) / 2;
+    vector<int> z(c + k + 1);
+    z.back() = 1;
+    z = _divmod_naive(z, a).first;
+    while (k < deg) {
+      vector<int> s = _mul(z, z);
+      s.insert(begin(s), 0);
+      vector<int> t(2 * k + 1);
+      copy(end(a) - min(c, 2 * k + 1), end(a), end(t) - min(c, 2 * k + 1));
+      vector<int> u = _mul(s, t);
+      u.erase(begin(u), begin(u) + 2 * k + 1);
+      vector<int> w(k + 1, 0), w2 = _add(z, z);
+      copy(begin(w2), end(w2), back_inserter(w));
+      z = _sub(w, u);
+      z.erase(begin(z));
+      k *= 2;
+    }
+    z.erase(begin(z), begin(z) + k - deg);
+    return z;
+  }
+
+  static pair<vector<int>, vector<int>> _divmod_newton(const vector<int>& a,
+                                                       const vector<int>& b) {
+    if (_is_zero(b)) {
+      cerr << "Divide by Zero Exception" << endl;
+      exit(1);
+    }
+    if ((int)b.size() <= 64) return _divmod_naive(a, b);
+    if ((int)a.size() - (int)b.size() <= 64) return _divmod_naive(a, b);
+    int norm = D / (b.back() + 1);
+    vector<int> x = _mul(a, {norm});
+    vector<int> y = _mul(b, {norm});
+    int s = x.size(), t = y.size();
+    int deg = s - t + 2;
+    vector<int> z = _calc_inv(y, deg);
+    vector<int> q = _mul(x, z);
+    q.erase(begin(q), begin(q) + t + deg);
+    vector<int> yq = _mul(y, {q});
+    while (_lt(x, yq)) q = _sub(q, {1}), yq = _sub(yq, y);
+    vector<int> r = _sub(x, yq);
+    while (_leq(y, r)) q = _add(q, {1}), r = _sub(r, y);
     _shrink(q), _shrink(r);
     auto [q2, r2] = _divmod_1e9(r, {norm});
     assert(_is_zero(r2));
