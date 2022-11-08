@@ -10,7 +10,9 @@
                                                              \
    public:                                                   \
     static constexpr bool value = decltype(check(t))::value; \
-  };
+  };                                                         \
+  template <typename T>                                      \
+  inline constexpr bool has_##var##_v = has_##var<T>::value;
 
 ENABLE_HAS_VAR(lazy);
 
@@ -55,13 +57,22 @@ struct RBSTSegmentTreeBase {
   };
 
   void _push([[maybe_unused]] Ptr t) {
-    if constexpr (has_lazy<Node>::value) {
+    if constexpr (has_lazy_v<Node>) {
       if (!t) return;
       if (t->lazy != ei()) {
         if (t->l) _propagate(t->l, t->lazy);
         if (t->r) _propagate(t->r, t->lazy);
         t->lazy = ei();
       }
+    }
+  }
+
+  void _propagate([[maybe_unused]] Ptr t, [[maybe_unused]] const E &x) {
+    if constexpr (has_lazy_v<Node>) {
+      if (!t) return;
+      t->lazy = h(t->lazy, x);
+      t->val = g(t->val, x);
+      t->sum = g(t->sum, x);
     }
   }
 
@@ -72,15 +83,6 @@ struct RBSTSegmentTreeBase {
     if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);
     if (t->r) t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);
     return t;
-  }
-
-  void _propagate([[maybe_unused]] Ptr t, [[maybe_unused]] const E &x) {
-    if constexpr (has_lazy<Node>::value) {
-      if (!t) return;
-      t->lazy = h(t->lazy, x);
-      t->val = g(t->val, x);
-      t->sum = g(t->sum, x);
-    }
   }
 
   // key が k であるノードを探す, なければ nullptr
@@ -207,21 +209,6 @@ struct RBSTSegmentTreeBase {
     }
   }
 
-  // x 以上の key 最小。存在しない場合は infty
-  I _lower_bound_key(Ptr t, I i, I infty) {
-    I res = infty;
-    while (!t) {
-      if (i == t->key) return i;
-      if (i < t->key) {
-        res = min(res, t->key);
-        t = t->l;
-      } else {
-        t = t->l;
-      }
-    }
-    return res;
-  }
-
   // [l, inf) である地点に apply
   void _apply_left(Ptr t, I l, const E &e) {
     if (!t) return;
@@ -255,6 +242,7 @@ struct RBSTSegmentTreeBase {
     _update(t);
   }
 
+  // [l, r) に apply
   void _apply(Ptr t, I l, I r, const E &e) {
     if (!t) return;
     _push(t);
@@ -319,20 +307,6 @@ struct RBSTSegmentTreeBase {
     } else {
       return _fold(t->l, l, r);
     }
-  }
-
-  // t を根とする木の上で最小の key は？ (t が空の場合は failed)
-  I _get_min_key(Ptr t, const I &failed) {
-    if (t == nullptr) return failed;
-    while (t->l) _push(t), t = t->l;
-    return t->key;
-  }
-
-  // t を根とする木の上で最大の key は？ (t が空の場合は failed)
-  I _get_max_key(Ptr t, const I &failed) {
-    if (t == nullptr) return failed;
-    while (t->r) _push(t), t = t->r;
-    return t->key;
   }
 
   // t を根とする木の上で最小の key は？ (t が空の場合は failed)
@@ -445,8 +419,8 @@ struct RBSTSegmentTreeBase {
   Ptr _copy(Ptr t) {
     if (!t) return nullptr;
     Ptr u = _my_new(*t);
-    if (u->l) u->l = Ptr(u->l);
-    if (u->r) u->r = Ptr(u->r);
+    if (u->l) u->l = _copy(u->l);
+    if (u->r) u->r = _copy(u->r);
     return u;
   }
 
@@ -569,11 +543,7 @@ struct RBSTSegmentTreeBase {
       _push(t);
       ps.push_back(t);
       if (i == t->key) break;
-      if (i < t->key) {
-        t = t->l;
-      } else {
-        t = t->r;
-      }
+      t = i < t->key ? t->l : t->r;
     }
     if (!t) {
       apply_val(i, func);
@@ -600,9 +570,9 @@ struct RBSTSegmentTreeBase {
   T fold_all() { return _sum(root); }
 
   // key 最小を取得
-  I get_min_key(I failed = -1) { return _get_min_key(root, failed); }
+  I get_min_key(I failed = -1) { return _get_min_keyval(root, failed).first; }
   // key 最大を取得
-  I get_max_key(I failed = -1) { return _get_max_key(root, failed); }
+  I get_max_key(I failed = -1) { return _get_max_keyval(root, failed).first; }
   // (key, val) 最小を取得
   pair<I, T> get_min_keyval(I failed = -1) {
     return _get_min_keyval(root, failed);
@@ -703,7 +673,6 @@ using RBSTLazySegmentTree =
                         ti, ei>;
 
 bool ei() { return false; }
-
 template <typename I, typename T, T (*f)(T, T), T (*ti)()>
 struct SegNode {
   SegNode *l, *r;
@@ -715,7 +684,7 @@ struct SegNode {
 };
 template <typename I, typename T, T (*f)(T, T), T (*ti)()>
 using RBSTSegmentTree = RBSTSegmentTreeBase<SegNode<I, T, f, ti>, I, T, bool, f,
-                                            nullptr, nullptr, ti, nullptr>;
+                                            nullptr, nullptr, ti, ei>;
 
 }  // namespace RBSTSegmentTreeImpl
 
