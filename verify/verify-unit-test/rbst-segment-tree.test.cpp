@@ -224,6 +224,8 @@ void test(const int N = 100, const int Q = 100) {
     {
       // make_array
       auto vec1 = seg1.make_array();
+      rep(i, sz(vec1) - 1) assert(vec1[i].fi < vec1[i + 1].fi); 
+
       vector<pair<int, T>> vec2;
       rep(i, N) {
         T val = seg2.get_val(i);
