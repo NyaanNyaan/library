@@ -5,6 +5,7 @@
 #include "../../math/multiprecision-integer.hpp"
 //
 #include "../../misc/all.hpp"
+
 using namespace Nyaan;
 
 void MultiPrecisionInteger::_test_private_function(const M& A, const M& B) {
@@ -17,12 +18,16 @@ void MultiPrecisionInteger::_test_private_function(const M& A, const M& B) {
   if (!B.is_zero()) {
     auto qr1 = _divmod_naive(a, b);
     auto qr2 = _divmod_dc(a, b);
+    auto qr3 = _divmod_newton(a, b);
     assert(qr1 == qr2 && "_div_test");
+    assert(qr1 == qr3 && "_div_test");
   }
   if (!A.is_zero()) {
     auto qr1 = _divmod_naive(b, a);
     auto qr2 = _divmod_dc(b, a);
+    auto qr3 = _divmod_newton(b, a);
     assert(qr1 == qr2 && "_div_test");
+    assert(qr1 == qr3 && "_div_test");
   }
 }
 
@@ -62,23 +67,21 @@ void q() {
     bigint::_test_private_function(a, b);
   };
 
-  validate_divmod2(gen(1000), gen(500));
-
-  // small
-  rep(i, 150) rep(j, 150) {
-    string S = gen(i * 9);
-    string T = gen(j * 9);
-    bigint A{S}, B{T};
-    validate_divmod2(A, B);
-  }
   // random
-  rep(_, 100) {
+  rep(_, 200) {
     string S = gen(rng(1, 10000));
     string T = gen(rng(1, 10000));
-    if (sz(S) < sz(T)) swap(S, T);
+    if (rng() % 2 and sz(S) < sz(T)) swap(S, T);
     bigint A{S}, B{T};
     validate_divmod2(A, B);
   }
+  rep(_, 200) {
+    string S = gen(rng(2000, 2500));
+    string T = gen(rng(1000, 1500));
+    bigint A{S}, B{T};
+    validate_divmod2(A, B);
+  }
+  cerr << "random ok" << endl;
   // 100000000...
   rep(_, 100) {
     string S = gen(rng(1, 10000));
@@ -102,6 +105,7 @@ void q() {
     bigint A{S}, B{T};
     validate_divmod2(A, B);
   }
+  cerr << "100000000 ok" << endl;
   // 999999999...
   rep(_, 100) {
     string S = gen(rng(1, 10000));
@@ -123,6 +127,17 @@ void q() {
     bigint A{S}, B{T};
     validate_divmod2(A, B);
   }
+  cerr << "999999999 ok" << endl;
+
+  // small
+  reg(i, 50, 150) reg(j, 50, 150) {
+    string S = gen(i * 9);
+    string T = gen(j * 9);
+    bigint A{S}, B{T};
+    validate_divmod2(A, B);
+  }
+  cerr << "small ok" << endl;
+
   // time
   {
     Timer timer;
