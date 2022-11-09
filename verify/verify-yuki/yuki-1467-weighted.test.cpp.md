@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: data-structure/slope-trick-weighted.hpp
+    title: Weighted Slope Trick
+  - icon: ':heavy_check_mark:'
     path: segment-tree/rbst-segment-tree.hpp
     title: RBST-based Dynamic Lazy Segment Tree
   - icon: ':heavy_check_mark:'
@@ -29,11 +32,16 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1786
+    PROBLEM: https://yukicoder.me/problems/no/1467
     links:
-    - https://yukicoder.me/problems/no/1786
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-1786.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/1786\"\n\n#line 2 \"template/template.hpp\"\
+    - https://atcoder.jp/contests/abc127/tasks/abc127_f
+    - https://atcoder.jp/contests/abc275/tasks/abc275_h
+    - https://atcoder.jp/contests/arc070/tasks/arc070_c
+    - https://atcoder.jp/contests/dwango2016-prelims/tasks/dwango2016qual_e
+    - https://atcoder.jp/contests/utpc2012/tasks/utpc2012_12
+    - https://yukicoder.me/problems/no/1467
+  bundledCode: "#line 1 \"verify/verify-yuki/yuki-1467-weighted.test.cpp\"\n#define\
+    \ PROBLEM \"https://yukicoder.me/problems/no/1467\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -168,16 +176,17 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yuki/yuki-1786.test.cpp\"\
-    \n//\n#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\n#define ENABLE_HAS_VAR(var)\
-    \                                  \\\n  template <typename T>               \
-    \                       \\\n  class has_##var {                              \
-    \            \\\n    template <typename U, int = (&U::var, 0)>               \
-    \ \\\n    static true_type check(U *);                             \\\n    static\
-    \ false_type check(...);                            \\\n    static T *t;     \
-    \                                        \\\n                                \
-    \                             \\\n   public:                                 \
-    \                  \\\n    static constexpr bool value = decltype(check(t))::value;\
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yuki/yuki-1467-weighted.test.cpp\"\
+    \n//\n#line 2 \"data-structure/slope-trick-weighted.hpp\"\n\n#line 6 \"data-structure/slope-trick-weighted.hpp\"\
+    \nusing namespace std;\n\n#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\n#define\
+    \ ENABLE_HAS_VAR(var)                                  \\\n  template <typename\
+    \ T>                                      \\\n  class has_##var {            \
+    \                              \\\n    template <typename U, int = (&U::var, 0)>\
+    \                \\\n    static true_type check(U *);                        \
+    \     \\\n    static false_type check(...);                            \\\n  \
+    \  static T *t;                                             \\\n             \
+    \                                                \\\n   public:              \
+    \                                     \\\n    static constexpr bool value = decltype(check(t))::value;\
     \ \\\n  };                                                         \\\n  template\
     \ <typename T>                                      \\\n  inline constexpr bool\
     \ has_##var##_v = has_##var<T>::value;\n\nENABLE_HAS_VAR(lazy);\nENABLE_HAS_VAR(shift);\n\
@@ -472,25 +481,164 @@ data:
     \                             nullptr, nullptr, ti, _ei>;\n\n}  // namespace RBSTSegmentTreeImpl\n\
     \nusing RBSTSegmentTreeImpl::RBSTLazySegmentTree;\nusing RBSTSegmentTreeImpl::RBSTSegmentTree;\n\
     using RBSTSegmentTreeImpl::RBSTShiftableLazySegmentTree;\n\n/**\n * @brief RBST-based\
-    \ Dynamic Lazy Segment Tree\n */\n#line 6 \"verify/verify-yuki/yuki-1786.test.cpp\"\
-    \n//\nusing namespace Nyaan;\n\nint f(int a, int b) { return max(a, b); }\nint\
-    \ g(int a, int b) { return a + b; }\nint ti() { return -inf; }\nint ei() { return\
-    \ 0; }\nusing Seg = RBSTLazySegmentTree<ll, int, int, f, g, g, ti, ei>;\n\nvoid\
-    \ Nyaan::solve() {\n  inl(N);\n  int pre = 0;\n  Seg seg;\n  rep(i, N) {\n   \
-    \ inl(A);\n    A ^= pre;\n    int mx = seg.fold(A, infLL);\n    int sc = max(0,\
-    \ mx + 1);\n    seg.apply(0, A, 1);\n    seg.apply(A, infLL, -1);\n    seg.set_val(A,\
-    \ sc);\n    ll ans = seg.min_left_exclusive(\n        infLL, [](int x) { return\
-    \ x < 0; }, -infLL);\n    out(ans);\n    pre = ans;\n  }\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1786\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
-    \n//\nusing namespace Nyaan;\n\nint f(int a, int b) { return max(a, b); }\nint\
-    \ g(int a, int b) { return a + b; }\nint ti() { return -inf; }\nint ei() { return\
-    \ 0; }\nusing Seg = RBSTLazySegmentTree<ll, int, int, f, g, g, ti, ei>;\n\nvoid\
-    \ Nyaan::solve() {\n  inl(N);\n  int pre = 0;\n  Seg seg;\n  rep(i, N) {\n   \
-    \ inl(A);\n    A ^= pre;\n    int mx = seg.fold(A, infLL);\n    int sc = max(0,\
-    \ mx + 1);\n    seg.apply(0, A, 1);\n    seg.apply(A, infLL, -1);\n    seg.set_val(A,\
-    \ sc);\n    ll ans = seg.min_left_exclusive(\n        infLL, [](int x) { return\
-    \ x < 0; }, -infLL);\n    out(ans);\n    pre = ans;\n  }\n}\n"
+    \ Dynamic Lazy Segment Tree\n */\n#line 9 \"data-structure/slope-trick-weighted.hpp\"\
+    \n\nnamespace SlopeTrickImpl {\n\ntemplate <typename Int>\nusing T = pair<Int,\
+    \ Int>;\ntemplate <typename Int>\nusing E = Int;\ntemplate <typename Int>\nT<Int>\
+    \ f(T<Int> a, T<Int> b) {\n  return {a.first + b.first, a.second + b.second};\n\
+    }\ntemplate <typename Int>\nT<Int> g(T<Int> a, E<Int> b) {\n  return {a.first,\
+    \ a.second + a.first * b};\n}\ntemplate <typename Int>\nE<Int> h(E<Int> a, E<Int>\
+    \ b) {\n  return a + b;\n}\ntemplate <typename Int>\nT<Int> ti() {\n  return {};\n\
+    }\ntemplate <typename Int>\nE<Int> ei() {\n  return {};\n}\ntemplate <typename\
+    \ Int>\nusing SegTree = RBSTShiftableLazySegmentTree<Int, T<Int>, E<Int>, f<Int>,\n\
+    \                                             g<Int>, h<Int>, ti<Int>, ei<Int>>;\n\
+    }  // namespace SlopeTrickImpl\n\ntemplate <typename I>\nstruct WeightedSlopeTrick\
+    \ {\n  static constexpr I inf = (I{1} << (sizeof(I) * 8 - 2)) - 1;\n  using Seg\
+    \ = typename SlopeTrickImpl::SegTree<I>;\n  using T = SlopeTrickImpl::T<I>;\n\
+    \  using E = SlopeTrickImpl::E<I>;\n\n  // x : \u5EA7\u6A19, c : \u50BE\u304D\u306E\
+    \u5909\u5316\u91CF\n  struct P {\n    I x, c;\n    P(I _x, I _c) : x(_x), c(_c)\
+    \ {}\n  };\n\n private:\n  Seg L, R;\n  I min_y;\n\n  // seg[x] += c\n  void _apply(Seg&\
+    \ seg, I x, I c) {\n    if (c == 0) return;\n    seg.apply_val_fast(x, [&](T&\
+    \ t) {\n      t.first += c;\n      t.second += x * c;\n    });\n  }\n  void _push_L(I\
+    \ x, I c = 1) { _apply(L, x, c); }\n  void _push_R(I x, I c = 1) { _apply(R, x,\
+    \ c); }\n  P _get_L() {\n    assert(!L.empty());\n    auto kv = L.get_max_keyval();\n\
+    \    return P{kv.first, kv.second.first};\n  }\n  P _get_R() {\n    assert(!R.empty());\n\
+    \    auto kv = R.get_min_keyval();\n    return P{kv.first, kv.second.first};\n\
+    \  }\n  P _getpop_L() {\n    assert(!L.empty());\n    auto kv = L.pop_max_keyval();\n\
+    \    return P{kv.first, kv.second.first};\n  }\n  P _getpop_R() {\n    assert(!R.empty());\n\
+    \    auto kv = R.pop_min_keyval();\n    return P{kv.first, kv.second.first};\n\
+    \  }\n  pair<Seg, Seg> _split_L(I c) {\n    assert(L.fold_all().first >= c);\n\
+    \    pair<Seg, Seg> res =\n        L.split_min_left([&](const T& t) { return t.first\
+    \ <= c; });\n    c -= res.second.fold_all().first;\n    if (c != 0) {\n      I\
+    \ k = res.first.get_max_key();\n      _apply(res.first, k, -c);\n      _apply(res.second,\
+    \ k, c);\n    }\n    return res;\n  }\n  pair<Seg, Seg> _split_R(I c) {\n    assert(R.fold_all().first\
+    \ >= c);\n    pair<Seg, Seg> res =\n        R.split_max_right([&](const T& t)\
+    \ { return t.first <= c; });\n    c -= res.first.fold_all().first;\n    if (c\
+    \ != 0) {\n      I k = res.second.get_min_key();\n      _apply(res.first, k, c);\n\
+    \      _apply(res.second, k, -c);\n    }\n    return res;\n  }\n  // destructive\
+    \ merge\n  Seg _unite(Seg& lhs, Seg& rhs) {\n    if (lhs.empty()) return rhs;\n\
+    \    if (rhs.empty()) return lhs;\n    assert(lhs.get_max_key() <= rhs.get_min_key()\
+    \ && \"WeightSlopTrick::_unite\");\n    if (lhs.get_max_key() == rhs.get_min_key())\
+    \ {\n      auto [x, p] = lhs.pop_max_keyval();\n      _apply(rhs, x, p.first);\n\
+    \    }\n    if (lhs.empty()) return rhs;\n    if (rhs.empty()) return lhs;\n \
+    \   return ordered_merge(lhs, rhs);\n  }\n\n public:\n  WeightedSlopeTrick() :\
+    \ min_y(0) {}\n\n  void debug() {\n    auto LL = L.make_array(), RR = R.make_array();\n\
+    \    cerr << \"L : \";\n    for (auto& [k, v] : LL) cerr << \"( \" << k << \"\
+    , \" << v.first << \" ), \";\n    cerr << endl << \"R : \";\n    for (auto& [k,\
+    \ v] : RR) cerr << \"( \" << k << \", \" << v.first << \" ), \";\n    cerr <<\
+    \ endl << \"min : ( \";\n    cerr << get_min().first << \", \" << get_min().second\
+    \ << \" )\" << endl;\n  }\n\n  // return {x, y} s.t. {argmin, min}\n  pair<I,\
+    \ I> get_min() {\n    I x = L.empty() ? R.empty() ? 0 : _get_R().x : _get_L().x;\n\
+    \    return {x, min_y};\n  }\n\n  void shift_L(I a) { L.shift(a), L.apply_all(a);\
+    \ }\n  void shift_R(I a) { R.shift(a), R.apply_all(a); }\n  // f(x) <- f(x - a)\n\
+    \  void shift_x(I a) { shift_L(a), shift_R(a); }\n  // f(x) <- f(x) + a\n  void\
+    \ shift_y(I a) { min_y += a; }\n\n  // add (x-a)_+   _____/\n  void add_xma(I\
+    \ a, I c = 1) {\n    _apply(L, a, c);\n    auto [L1, L2] = _split_L(c);\n    auto\
+    \ [c_sum, ac_sum] = L2.fold(a, inf);\n    min_y += ac_sum - c_sum * a;\n    auto\
+    \ c2 = L2.get_val(a);\n    L2.erase(a);\n    R = _unite(L2, R);\n    _apply(R,\
+    \ a, c2.first);\n    L = L1;\n  }\n\n  // add (a-x)_+   \\_____\n  void add_amx(I\
+    \ a, I c = 1) {\n    _apply(R, a, c);\n    auto [R1, R2] = _split_R(c);\n    auto\
+    \ [c_sum, ac_sum] = R1.fold(-inf, a);\n    min_y += c_sum * a - ac_sum;\n    auto\
+    \ c2 = R1.get_val(a);\n    R1.erase(a);\n    L = _unite(L, R1);\n    _apply(L,\
+    \ a, c2.first);\n    R = R2;\n  }\n\n  // add |x-a|     \\____/\n  void add_abs_xma(I\
+    \ a, I c = 1) {\n    add_xma(a, c);\n    add_amx(a, c);\n  }\n\n  //  chmin right\
+    \ side \\_/ -> \\__\n  void chmin_right() { R.clear(); }\n  //  chmin left side\
+    \  \\_/ -> __/\n  void chmin_left() { L.clear(); }\n\n  // destructive merge\n\
+    \  void merge(WeightedSlopeTrick& r) {\n    if (L.size() + R.size() < r.L.size()\
+    \ + r.R.size()) swap(*this, r);\n    for (auto& [x, t] : r.L.make_array()) add_amx(x,\
+    \ t.first);\n    for (auto& [x, t] : r.R.make_array()) add_xma(x, t.first);\n\
+    \    shift_y(r.min_y);\n  }\n\n  I eval(I x) {\n    I res = min_y;\n    if (!L.empty()\
+    \ && _get_L().x > x) {\n      auto [L1, L2] = L.split_by_key(x);\n      auto [c_sum,\
+    \ xc_sum] = L2.fold_all();\n      res += xc_sum - c_sum * x;\n      L = _unite(L1,\
+    \ L2);\n    }\n    if (!R.empty() && _get_R().x < x) {\n      auto [R1, R2] =\
+    \ R.split_by_key(x);\n      auto [c_sum, xc_sum] = R1.fold_all();\n      res +=\
+    \ c_sum * x - xc_sum;\n      R = _unite(R1, R2);\n    }\n    return res;\n  }\n\
+    \n  void clear() { L.clear(), R.clear(), min_y = 0; }\n};\n\nusing SlopeTrick\
+    \ = WeightedSlopeTrick<__int128_t>;\n\n/**\n * @brief Weighted Slope Trick\n */\n\
+    #line 6 \"verify/verify-yuki/yuki-1467-weighted.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\n/*\n\n// https://atcoder.jp/contests/abc127/tasks/abc127_f\nvoid ABC127F()\
+    \ {\n  ini(Q);\n  SlopeTrick st;\n  rep(i, Q) {\n    ini(c);\n    if (c == 1)\
+    \ {\n      inl(a, b);\n      st.add_abs_xma(a);\n      st.shift_y(b);\n    } else\
+    \ {\n      out(st.get_min());\n    }\n  }\n}\n\n// https://atcoder.jp/contests/dwango2016-prelims/tasks/dwango2016qual_e\n\
+    void dwacon2016qual_E() {\n  ini(N, L);\n  vvi ls(TEN(5) + 10);\n  rep(i, N) {\n\
+    \    ini(t, l);\n    ls[t].push_back(l);\n  }\n  SlopeTrick st;\n  rep(i, sz(ls))\
+    \ {\n    if (ls.empty()) continue;\n    st.chmin_right();\n    each(x, ls[i])\
+    \ st.add_abs_xma(x);\n  }\n  out(st.get_min().second);\n}\n\n// https://atcoder.jp/contests/utpc2012/tasks/utpc2012_12\n\
+    void utpc2012_L() {\n  ini(N, C0);\n  vl C(N);\n  C[0] = C0;\n  vvi g(N);\n  rep1(i,\
+    \ N - 1) {\n    ini(p, c);\n    --p;\n    g[p].push_back(i);\n    C[i] = c;\n\
+    \  }\n  auto dfs = [&](auto rc, int c) -> SlopeTrick {\n    SlopeTrick st;\n \
+    \   each(d, g[c]) {\n      SlopeTrick stc = rc(rc, d);\n      stc.shift_x(1);\n\
+    \      st.merge(stc);\n    }\n    st.add_abs_xma(C[c]);\n    st.chmin_right();\n\
+    \    return move(st);\n  };\n  out(dfs(dfs, 0).get_min().second);\n}\n\n// https://atcoder.jp/contests/arc070/tasks/arc070_c\n\
+    void ARC070C() {\n  inl(N);\n  vl a(N), b(N);\n  in2(a, b);\n  SlopeTrick st;\n\
+    \  rep(i, N) {\n    if (i) {\n      st.shift_L(a[i] - b[i]);\n      st.shift_R(b[i\
+    \ - 1] - a[i - 1]);\n    }\n    st.add_abs_xma(a[i]);\n  }\n  out(st.get_min().second);\n\
+    }\n\n#include \"../../segment-tree/segment-tree.hpp\"\n\n// https://atcoder.jp/contests/abc275/tasks/abc275_h\n\
+    void ABC275Ex() {\n  inl(N);\n  vl A(N), B(N);\n  in(A, B);\n  vp init(N);\n \
+    \ rep(i, N) init[i] = {B[i], i};\n  SegmentTree seg(\n      init, [](pl a, pl\
+    \ b) { return max(a, b); }, pl{-infLL, -1});\n  i128 ans = 0;\n  auto dfs = [&](auto\
+    \ rc, int l, int r) -> SlopeTrick {\n    if (l == r) return {};\n    auto [v,\
+    \ m] = seg.query(l, r);\n    SlopeTrick L = rc(rc, l, m + 0);\n    SlopeTrick\
+    \ R = rc(rc, m + 1, r);\n    L.merge(R);\n    L.add_amx(A[m], infLL);\n    L.add_xma(0,\
+    \ v);\n    L.chmin_left();\n    L.add_amx(inf, v);\n    ans += -ll(inf) * v;\n\
+    \    return L;\n  };\n  auto f0 = dfs(dfs, 0, N);\n  out(ans + f0.eval(0));\n\
+    }\n\nvoid ABC217H() {\n  inl(N);\n  SlopeTrick st;\n  st.add_abs_xma(0, 1e6);\n\
+    \  ll last = 0;\n  rep(i, N) {\n    inl(t, d, x);\n    st.shift_L(-(t - last));\n\
+    \    st.shift_R(t - last);\n    last = t;\n    if (d == 0) {\n      st.add_amx(x);\n\
+    \    } else {\n      st.add_xma(x);\n    }\n  }\n  out(st.get_min().second);\n\
+    }\n\n*/\n\n// https://yukicoder.me/problems/no/1467\nvoid yuki1467() {\n  ini(M,\
+    \ N);\n  vl A(M), B(N);\n  in(A, B);\n  vl zip{A};\n  each(x, B) zip.push_back(x);\n\
+    \  zip = mkuni(zip);\n  vl as(sz(zip)), bs(sz(zip));\n  each(x, A) as[lb(zip,\
+    \ x)]++;\n  each(x, B) bs[lb(zip, x)]++;\n  rep1(k, M) {\n    SlopeTrick st;\n\
+    \    st.add_amx(0, TEN(10));\n    rep(i, sz(zip)) {\n      st.shift_x(as[i] -\
+    \ bs[i] * k);\n      st.chmin_right();\n      if (i != sz(zip) - 1) {\n      \
+    \  st.add_abs_xma(0, zip[i + 1] - zip[i]);\n      } else {\n        st.add_xma(0,\
+    \ 1e10);\n      }\n    }\n    out(ll(st.get_min().second));\n    st.clear();\n\
+    \  }\n}\n\nvoid Nyaan::solve() {\n  // ABC127F();\n  // dwacon2016qual_E();\n\
+    \  // utpc2012_L();\n  // ARC070C();\n  yuki1467();\n  // ABC275Ex();\n  // ABC217H();\n\
+    }\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1467\"\n//\n#include \"\
+    ../../template/template.hpp\"\n//\n#include \"../../data-structure/slope-trick-weighted.hpp\"\
+    \n\nusing namespace Nyaan;\n\n/*\n\n// https://atcoder.jp/contests/abc127/tasks/abc127_f\n\
+    void ABC127F() {\n  ini(Q);\n  SlopeTrick st;\n  rep(i, Q) {\n    ini(c);\n  \
+    \  if (c == 1) {\n      inl(a, b);\n      st.add_abs_xma(a);\n      st.shift_y(b);\n\
+    \    } else {\n      out(st.get_min());\n    }\n  }\n}\n\n// https://atcoder.jp/contests/dwango2016-prelims/tasks/dwango2016qual_e\n\
+    void dwacon2016qual_E() {\n  ini(N, L);\n  vvi ls(TEN(5) + 10);\n  rep(i, N) {\n\
+    \    ini(t, l);\n    ls[t].push_back(l);\n  }\n  SlopeTrick st;\n  rep(i, sz(ls))\
+    \ {\n    if (ls.empty()) continue;\n    st.chmin_right();\n    each(x, ls[i])\
+    \ st.add_abs_xma(x);\n  }\n  out(st.get_min().second);\n}\n\n// https://atcoder.jp/contests/utpc2012/tasks/utpc2012_12\n\
+    void utpc2012_L() {\n  ini(N, C0);\n  vl C(N);\n  C[0] = C0;\n  vvi g(N);\n  rep1(i,\
+    \ N - 1) {\n    ini(p, c);\n    --p;\n    g[p].push_back(i);\n    C[i] = c;\n\
+    \  }\n  auto dfs = [&](auto rc, int c) -> SlopeTrick {\n    SlopeTrick st;\n \
+    \   each(d, g[c]) {\n      SlopeTrick stc = rc(rc, d);\n      stc.shift_x(1);\n\
+    \      st.merge(stc);\n    }\n    st.add_abs_xma(C[c]);\n    st.chmin_right();\n\
+    \    return move(st);\n  };\n  out(dfs(dfs, 0).get_min().second);\n}\n\n// https://atcoder.jp/contests/arc070/tasks/arc070_c\n\
+    void ARC070C() {\n  inl(N);\n  vl a(N), b(N);\n  in2(a, b);\n  SlopeTrick st;\n\
+    \  rep(i, N) {\n    if (i) {\n      st.shift_L(a[i] - b[i]);\n      st.shift_R(b[i\
+    \ - 1] - a[i - 1]);\n    }\n    st.add_abs_xma(a[i]);\n  }\n  out(st.get_min().second);\n\
+    }\n\n#include \"../../segment-tree/segment-tree.hpp\"\n\n// https://atcoder.jp/contests/abc275/tasks/abc275_h\n\
+    void ABC275Ex() {\n  inl(N);\n  vl A(N), B(N);\n  in(A, B);\n  vp init(N);\n \
+    \ rep(i, N) init[i] = {B[i], i};\n  SegmentTree seg(\n      init, [](pl a, pl\
+    \ b) { return max(a, b); }, pl{-infLL, -1});\n  i128 ans = 0;\n  auto dfs = [&](auto\
+    \ rc, int l, int r) -> SlopeTrick {\n    if (l == r) return {};\n    auto [v,\
+    \ m] = seg.query(l, r);\n    SlopeTrick L = rc(rc, l, m + 0);\n    SlopeTrick\
+    \ R = rc(rc, m + 1, r);\n    L.merge(R);\n    L.add_amx(A[m], infLL);\n    L.add_xma(0,\
+    \ v);\n    L.chmin_left();\n    L.add_amx(inf, v);\n    ans += -ll(inf) * v;\n\
+    \    return L;\n  };\n  auto f0 = dfs(dfs, 0, N);\n  out(ans + f0.eval(0));\n\
+    }\n\nvoid ABC217H() {\n  inl(N);\n  SlopeTrick st;\n  st.add_abs_xma(0, 1e6);\n\
+    \  ll last = 0;\n  rep(i, N) {\n    inl(t, d, x);\n    st.shift_L(-(t - last));\n\
+    \    st.shift_R(t - last);\n    last = t;\n    if (d == 0) {\n      st.add_amx(x);\n\
+    \    } else {\n      st.add_xma(x);\n    }\n  }\n  out(st.get_min().second);\n\
+    }\n\n*/\n\n// https://yukicoder.me/problems/no/1467\nvoid yuki1467() {\n  ini(M,\
+    \ N);\n  vl A(M), B(N);\n  in(A, B);\n  vl zip{A};\n  each(x, B) zip.push_back(x);\n\
+    \  zip = mkuni(zip);\n  vl as(sz(zip)), bs(sz(zip));\n  each(x, A) as[lb(zip,\
+    \ x)]++;\n  each(x, B) bs[lb(zip, x)]++;\n  rep1(k, M) {\n    SlopeTrick st;\n\
+    \    st.add_amx(0, TEN(10));\n    rep(i, sz(zip)) {\n      st.shift_x(as[i] -\
+    \ bs[i] * k);\n      st.chmin_right();\n      if (i != sz(zip) - 1) {\n      \
+    \  st.add_abs_xma(0, zip[i + 1] - zip[i]);\n      } else {\n        st.add_xma(0,\
+    \ 1e10);\n      }\n    }\n    out(ll(st.get_min().second));\n    st.clear();\n\
+    \  }\n}\n\nvoid Nyaan::solve() {\n  // ABC127F();\n  // dwacon2016qual_E();\n\
+    \  // utpc2012_L();\n  // ARC070C();\n  yuki1467();\n  // ABC275Ex();\n  // ABC217H();\n\
+    }\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -498,17 +646,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
+  - data-structure/slope-trick-weighted.hpp
   - segment-tree/rbst-segment-tree.hpp
   isVerificationFile: true
-  path: verify/verify-yuki/yuki-1786.test.cpp
+  path: verify/verify-yuki/yuki-1467-weighted.test.cpp
   requiredBy: []
-  timestamp: '2022-11-10 01:01:58+09:00'
+  timestamp: '2022-11-10 01:24:21+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-1786.test.cpp
+documentation_of: verify/verify-yuki/yuki-1467-weighted.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-1786.test.cpp
-- /verify/verify/verify-yuki/yuki-1786.test.cpp.html
-title: verify/verify-yuki/yuki-1786.test.cpp
+- /verify/verify/verify-yuki/yuki-1467-weighted.test.cpp
+- /verify/verify/verify-yuki/yuki-1467-weighted.test.cpp.html
+title: verify/verify-yuki/yuki-1467-weighted.test.cpp
 ---

@@ -4,185 +4,33 @@ data:
   - icon: ':heavy_check_mark:'
     path: segment-tree/rbst-segment-tree.hpp
     title: RBST-based Dynamic Lazy Segment Tree
-  - icon: ':heavy_check_mark:'
-    path: template/bitop.hpp
-    title: template/bitop.hpp
-  - icon: ':heavy_check_mark:'
-    path: template/debug.hpp
-    title: template/debug.hpp
-  - icon: ':heavy_check_mark:'
-    path: template/inout.hpp
-    title: template/inout.hpp
-  - icon: ':heavy_check_mark:'
-    path: template/macro.hpp
-    title: template/macro.hpp
-  - icon: ':heavy_check_mark:'
-    path: template/template.hpp
-    title: template/template.hpp
-  - icon: ':heavy_check_mark:'
-    path: template/util.hpp
-    title: template/util.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1467-weighted.test.cpp
+    title: verify/verify-yuki/yuki-1467-weighted.test.cpp
   _isVerificationFailed: false
-  _pathExtension: cpp
+  _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1786
-    links:
-    - https://yukicoder.me/problems/no/1786
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-1786.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/1786\"\n\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
-    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
-    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
-    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
-    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
-    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
-    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
-    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
-    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
-    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
-    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
-    \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
-    \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
-    \ pair<T, U>::second;\n\n  T &x() { return first; }\n  const T &x() const { return\
-    \ first; }\n  U &y() { return second; }\n  const U &y() const { return second;\
-    \ }\n\n  P &operator+=(const P &r) {\n    first += r.first;\n    second += r.second;\n\
-    \    return *this;\n  }\n  P &operator-=(const P &r) {\n    first -= r.first;\n\
-    \    second -= r.second;\n    return *this;\n  }\n  P &operator*=(const P &r)\
-    \ {\n    first *= r.first;\n    second *= r.second;\n    return *this;\n  }\n\
-    \  P operator+(const P &r) const { return P(*this) += r; }\n  P operator-(const\
-    \ P &r) const { return P(*this) -= r; }\n  P operator*(const P &r) const { return\
-    \ P(*this) *= r; }\n};\n\nusing pl = P<ll, ll>;\nusing pi = P<int, int>;\nusing\
-    \ vp = V<pl>;\n\nconstexpr int inf = 1001001001;\nconstexpr long long infLL =\
-    \ 4004004004004004004LL;\n\ntemplate <typename T>\nint sz(const T &t) {\n  return\
-    \ t.size();\n}\n\ntemplate <typename T, typename U>\ninline bool amin(T &x, U\
-    \ y) {\n  return (y < x) ? (x = y, true) : false;\n}\ntemplate <typename T, typename\
-    \ U>\ninline bool amax(T &x, U y) {\n  return (x < y) ? (x = y, true) : false;\n\
-    }\n\ntemplate <typename T>\ninline T Max(const vector<T> &v) {\n  return *max_element(begin(v),\
-    \ end(v));\n}\ntemplate <typename T>\ninline T Min(const vector<T> &v) {\n  return\
-    \ *min_element(begin(v), end(v));\n}\ntemplate <typename T>\ninline long long\
-    \ Sum(const vector<T> &v) {\n  return accumulate(begin(v), end(v), 0LL);\n}\n\n\
-    template <typename T>\nint lb(const vector<T> &v, const T &a) {\n  return lower_bound(begin(v),\
-    \ end(v), a) - begin(v);\n}\ntemplate <typename T>\nint ub(const vector<T> &v,\
-    \ const T &a) {\n  return upper_bound(begin(v), end(v), a) - begin(v);\n}\n\n\
-    constexpr long long TEN(int n) {\n  long long ret = 1, x = 10;\n  for (; n; x\
-    \ *= x, n >>= 1) ret *= (n & 1 ? x : 1);\n  return ret;\n}\n\ntemplate <typename\
-    \ T, typename U>\npair<T, U> mkp(const T &t, const U &u) {\n  return make_pair(t,\
-    \ u);\n}\n\ntemplate <typename T>\nvector<T> mkrui(const vector<T> &v, bool rev\
-    \ = false) {\n  vector<T> ret(v.size() + 1);\n  if (rev) {\n    for (int i = int(v.size())\
-    \ - 1; i >= 0; i--) ret[i] = v[i] + ret[i + 1];\n  } else {\n    for (int i =\
-    \ 0; i < int(v.size()); i++) ret[i + 1] = ret[i] + v[i];\n  }\n  return ret;\n\
-    };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
-    \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
-    \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
-    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
-    \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
-    \ &v) {\n  int max_val = *max_element(begin(v), end(v));\n  vector<int> inv(max_val\
-    \ + 1, -1);\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return\
-    \ inv;\n}\n\n}  // namespace Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit\
-    \ operation\n#line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"\
-    popcnt\"))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\n\
-    inline int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int\
-    \ ctz(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const\
-    \ u64 &a) { return a ? 63 - __builtin_clzll(a) : -1; }\ntemplate <typename T>\n\
-    inline int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename\
-    \ T>\ninline void sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1)\
-    \ << i;\n}\nconstexpr long long PW(int n) { return 1LL << n; }\nconstexpr long\
-    \ long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n#line 61\
-    \ \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\nnamespace\
-    \ Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
-    \ const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return os;\n\
-    }\ntemplate <typename T, typename U>\nistream &operator>>(istream &is, pair<T,\
-    \ U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\n\nvoid in() {}\ntemplate <typename\
-    \ T, class... U>\nvoid in(T &t, U &... u) {\n  cin >> t;\n  in(u...);\n}\n\nvoid\
-    \ out() { cout << \"\\n\"; }\ntemplate <typename T, class... U, char sep = ' '>\n\
-    void out(const T &t, const U &... u) {\n  cout << t;\n  if (sizeof...(u)) cout\
-    \ << sep;\n  out(u...);\n}\n\nvoid outr() {}\ntemplate <typename T, class... U,\
-    \ char sep = ' '>\nvoid outr(const T &t, const U &... u) {\n  cout << t;\n  outr(u...);\n\
-    }\n\nstruct IoSetupNya {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
-    \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
-    \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\
-    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
-    \ <typename U, typename = void>\nstruct is_specialize : false_type {};\ntemplate\
-    \ <typename U>\nstruct is_specialize<\n    U, typename conditional<false, typename\
-    \ U::iterator, void>::type>\n    : true_type {};\ntemplate <typename U>\nstruct\
-    \ is_specialize<\n    U, typename conditional<false, decltype(U::first), void>::type>\n\
-    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value,\
-    \ void>> : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid\
-    \ dump(const string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t\
-    \ ? \"true\" : \"false\"); }\n\ntemplate <typename U,\n          enable_if_t<!is_specialize<U>::value,\
-    \ nullptr_t> = nullptr>\nvoid dump(const U& t) {\n  cerr << t;\n}\n\ntemplate\
-    \ <typename T>\nvoid dump(const T& t, enable_if_t<is_integral<T>::value>* = nullptr)\
-    \ {\n  string res;\n  if (t == Nyaan::inf) res = \"inf\";\n  if constexpr (is_signed<T>::value)\
-    \ {\n    if (t == -Nyaan::inf) res = \"-inf\";\n  }\n  if constexpr (sizeof(T)\
-    \ == 8) {\n    if (t == Nyaan::infLL) res = \"inf\";\n    if constexpr (is_signed<T>::value)\
-    \ {\n      if (t == -Nyaan::infLL) res = \"-inf\";\n    }\n  }\n  if (res.empty())\
-    \ res = to_string(t);\n  cerr << res;\n}\n\ntemplate <typename T, typename U>\n\
-    void dump(const pair<T, U>&);\ntemplate <typename T>\nvoid dump(const pair<T*,\
-    \ int>&);\n\ntemplate <typename T>\nvoid dump(const T& t,\n          enable_if_t<!is_void<typename\
-    \ T::iterator>::value>* = nullptr) {\n  cerr << \"[ \";\n  for (auto it = t.begin();\
-    \ it != t.end();) {\n    dump(*it);\n    cerr << (++it == t.end() ? \"\" : \"\
-    , \");\n  }\n  cerr << \" ]\";\n}\n\ntemplate <typename T, typename U>\nvoid dump(const\
-    \ pair<T, U>& t) {\n  cerr << \"( \";\n  dump(t.first);\n  cerr << \", \";\n \
-    \ dump(t.second);\n  cerr << \" )\";\n}\n\ntemplate <typename T>\nvoid dump(const\
-    \ pair<T*, int>& t) {\n  cerr << \"[ \";\n  for (int i = 0; i < t.second; i++)\
-    \ {\n    dump(t.first[i]);\n    cerr << (i == t.second - 1 ? \"\" : \", \");\n\
-    \  }\n  cerr << \" ]\";\n}\n\nvoid trace() { cerr << endl; }\ntemplate <typename\
-    \ Head, typename... Tail>\nvoid trace(Head&& head, Tail&&... tail) {\n  cerr <<\
-    \ \" \";\n  dump(head);\n  if (sizeof...(tail) != 0) cerr << \",\";\n  trace(forward<Tail>(tail)...);\n\
-    }\n\n}  // namespace DebugImpl\n\n#ifdef NyaanDebug\n#define trc(...)        \
-    \                    \\\n  do {                                      \\\n    cerr\
-    \ << \"## \" << #__VA_ARGS__ << \" = \"; \\\n    DebugImpl::trace(__VA_ARGS__);\
-    \          \\\n  } while (0)\n#else\n#define trc(...) (void(0))\n#endif\n#line\
-    \ 67 \"template/template.hpp\"\n\n// macro\n#line 1 \"template/macro.hpp\"\n#define\
-    \ each(x, v) for (auto&& x : v)\n#define each2(x, y, v) for (auto&& [x, y] : v)\n\
-    #define all(v) (v).begin(), (v).end()\n#define rep(i, N) for (long long i = 0;\
-    \ i < (long long)(N); i++)\n#define repr(i, N) for (long long i = (long long)(N)-1;\
-    \ i >= 0; i--)\n#define rep1(i, N) for (long long i = 1; i <= (long long)(N);\
-    \ i++)\n#define repr1(i, N) for (long long i = (N); (long long)(i) > 0; i--)\n\
-    #define reg(i, a, b) for (long long i = (a); i < (b); i++)\n#define regr(i, a,\
-    \ b) for (long long i = (b)-1; i >= (a); i--)\n#define fi first\n#define se second\n\
-    #define ini(...)   \\\n  int __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define inl(...)\
-    \         \\\n  long long __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define ins(...)\
-    \      \\\n  string __VA_ARGS__; \\\n  in(__VA_ARGS__)\n#define in2(s, t)    \
-    \                       \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n \
-    \   in(s[i], t[i]);                         \\\n  }\n#define in3(s, t, u)    \
-    \                    \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i],\
-    \ t[i], u[i]);                   \\\n  }\n#define in4(s, t, u, v)            \
-    \         \\\n  for (int i = 0; i < (int)s.size(); i++) { \\\n    in(s[i], t[i],\
-    \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
-    \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
-    \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-yuki/yuki-1786.test.cpp\"\
-    \n//\n#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\n#define ENABLE_HAS_VAR(var)\
-    \                                  \\\n  template <typename T>               \
-    \                       \\\n  class has_##var {                              \
-    \            \\\n    template <typename U, int = (&U::var, 0)>               \
-    \ \\\n    static true_type check(U *);                             \\\n    static\
-    \ false_type check(...);                            \\\n    static T *t;     \
-    \                                        \\\n                                \
-    \                             \\\n   public:                                 \
-    \                  \\\n    static constexpr bool value = decltype(check(t))::value;\
-    \ \\\n  };                                                         \\\n  template\
-    \ <typename T>                                      \\\n  inline constexpr bool\
-    \ has_##var##_v = has_##var<T>::value;\n\nENABLE_HAS_VAR(lazy);\nENABLE_HAS_VAR(shift);\n\
-    \ntemplate <typename Node, typename I, typename T, typename E, T (*f)(T, T),\n\
-    \          T (*g)(T, E), E (*h)(E, E), T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTreeBase\
+    document_title: Weighted Slope Trick
+    links: []
+  bundledCode: "#line 2 \"data-structure/slope-trick-weighted.hpp\"\n\n#include <cassert>\n\
+    #include <iostream>\n#include <type_traits>\nusing namespace std;\n\n#line 2 \"\
+    segment-tree/rbst-segment-tree.hpp\"\n\n#define ENABLE_HAS_VAR(var)          \
+    \                        \\\n  template <typename T>                         \
+    \             \\\n  class has_##var {                                        \
+    \  \\\n    template <typename U, int = (&U::var, 0)>                \\\n    static\
+    \ true_type check(U *);                             \\\n    static false_type\
+    \ check(...);                            \\\n    static T *t;                \
+    \                             \\\n                                           \
+    \                  \\\n   public:                                            \
+    \       \\\n    static constexpr bool value = decltype(check(t))::value; \\\n\
+    \  };                                                         \\\n  template <typename\
+    \ T>                                      \\\n  inline constexpr bool has_##var##_v\
+    \ = has_##var<T>::value;\n\nENABLE_HAS_VAR(lazy);\nENABLE_HAS_VAR(shift);\n\n\
+    template <typename Node, typename I, typename T, typename E, T (*f)(T, T),\n \
+    \         T (*g)(T, E), E (*h)(E, E), T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTreeBase\
     \ {\n protected:\n  using Ptr = Node *;\n  template <typename... Args>\n  static\
     \ Ptr _my_new(Args... args) {\n    return new Node(args...);\n  }\n  static void\
     \ _my_del(Ptr t) { delete t; }\n\n  static int _count(const Ptr t) { return t\
@@ -472,43 +320,166 @@ data:
     \                             nullptr, nullptr, ti, _ei>;\n\n}  // namespace RBSTSegmentTreeImpl\n\
     \nusing RBSTSegmentTreeImpl::RBSTLazySegmentTree;\nusing RBSTSegmentTreeImpl::RBSTSegmentTree;\n\
     using RBSTSegmentTreeImpl::RBSTShiftableLazySegmentTree;\n\n/**\n * @brief RBST-based\
-    \ Dynamic Lazy Segment Tree\n */\n#line 6 \"verify/verify-yuki/yuki-1786.test.cpp\"\
-    \n//\nusing namespace Nyaan;\n\nint f(int a, int b) { return max(a, b); }\nint\
-    \ g(int a, int b) { return a + b; }\nint ti() { return -inf; }\nint ei() { return\
-    \ 0; }\nusing Seg = RBSTLazySegmentTree<ll, int, int, f, g, g, ti, ei>;\n\nvoid\
-    \ Nyaan::solve() {\n  inl(N);\n  int pre = 0;\n  Seg seg;\n  rep(i, N) {\n   \
-    \ inl(A);\n    A ^= pre;\n    int mx = seg.fold(A, infLL);\n    int sc = max(0,\
-    \ mx + 1);\n    seg.apply(0, A, 1);\n    seg.apply(A, infLL, -1);\n    seg.set_val(A,\
-    \ sc);\n    ll ans = seg.min_left_exclusive(\n        infLL, [](int x) { return\
-    \ x < 0; }, -infLL);\n    out(ans);\n    pre = ans;\n  }\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1786\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../segment-tree/rbst-segment-tree.hpp\"\
-    \n//\nusing namespace Nyaan;\n\nint f(int a, int b) { return max(a, b); }\nint\
-    \ g(int a, int b) { return a + b; }\nint ti() { return -inf; }\nint ei() { return\
-    \ 0; }\nusing Seg = RBSTLazySegmentTree<ll, int, int, f, g, g, ti, ei>;\n\nvoid\
-    \ Nyaan::solve() {\n  inl(N);\n  int pre = 0;\n  Seg seg;\n  rep(i, N) {\n   \
-    \ inl(A);\n    A ^= pre;\n    int mx = seg.fold(A, infLL);\n    int sc = max(0,\
-    \ mx + 1);\n    seg.apply(0, A, 1);\n    seg.apply(A, infLL, -1);\n    seg.set_val(A,\
-    \ sc);\n    ll ans = seg.min_left_exclusive(\n        infLL, [](int x) { return\
-    \ x < 0; }, -infLL);\n    out(ans);\n    pre = ans;\n  }\n}\n"
+    \ Dynamic Lazy Segment Tree\n */\n#line 9 \"data-structure/slope-trick-weighted.hpp\"\
+    \n\nnamespace SlopeTrickImpl {\n\ntemplate <typename Int>\nusing T = pair<Int,\
+    \ Int>;\ntemplate <typename Int>\nusing E = Int;\ntemplate <typename Int>\nT<Int>\
+    \ f(T<Int> a, T<Int> b) {\n  return {a.first + b.first, a.second + b.second};\n\
+    }\ntemplate <typename Int>\nT<Int> g(T<Int> a, E<Int> b) {\n  return {a.first,\
+    \ a.second + a.first * b};\n}\ntemplate <typename Int>\nE<Int> h(E<Int> a, E<Int>\
+    \ b) {\n  return a + b;\n}\ntemplate <typename Int>\nT<Int> ti() {\n  return {};\n\
+    }\ntemplate <typename Int>\nE<Int> ei() {\n  return {};\n}\ntemplate <typename\
+    \ Int>\nusing SegTree = RBSTShiftableLazySegmentTree<Int, T<Int>, E<Int>, f<Int>,\n\
+    \                                             g<Int>, h<Int>, ti<Int>, ei<Int>>;\n\
+    }  // namespace SlopeTrickImpl\n\ntemplate <typename I>\nstruct WeightedSlopeTrick\
+    \ {\n  static constexpr I inf = (I{1} << (sizeof(I) * 8 - 2)) - 1;\n  using Seg\
+    \ = typename SlopeTrickImpl::SegTree<I>;\n  using T = SlopeTrickImpl::T<I>;\n\
+    \  using E = SlopeTrickImpl::E<I>;\n\n  // x : \u5EA7\u6A19, c : \u50BE\u304D\u306E\
+    \u5909\u5316\u91CF\n  struct P {\n    I x, c;\n    P(I _x, I _c) : x(_x), c(_c)\
+    \ {}\n  };\n\n private:\n  Seg L, R;\n  I min_y;\n\n  // seg[x] += c\n  void _apply(Seg&\
+    \ seg, I x, I c) {\n    if (c == 0) return;\n    seg.apply_val_fast(x, [&](T&\
+    \ t) {\n      t.first += c;\n      t.second += x * c;\n    });\n  }\n  void _push_L(I\
+    \ x, I c = 1) { _apply(L, x, c); }\n  void _push_R(I x, I c = 1) { _apply(R, x,\
+    \ c); }\n  P _get_L() {\n    assert(!L.empty());\n    auto kv = L.get_max_keyval();\n\
+    \    return P{kv.first, kv.second.first};\n  }\n  P _get_R() {\n    assert(!R.empty());\n\
+    \    auto kv = R.get_min_keyval();\n    return P{kv.first, kv.second.first};\n\
+    \  }\n  P _getpop_L() {\n    assert(!L.empty());\n    auto kv = L.pop_max_keyval();\n\
+    \    return P{kv.first, kv.second.first};\n  }\n  P _getpop_R() {\n    assert(!R.empty());\n\
+    \    auto kv = R.pop_min_keyval();\n    return P{kv.first, kv.second.first};\n\
+    \  }\n  pair<Seg, Seg> _split_L(I c) {\n    assert(L.fold_all().first >= c);\n\
+    \    pair<Seg, Seg> res =\n        L.split_min_left([&](const T& t) { return t.first\
+    \ <= c; });\n    c -= res.second.fold_all().first;\n    if (c != 0) {\n      I\
+    \ k = res.first.get_max_key();\n      _apply(res.first, k, -c);\n      _apply(res.second,\
+    \ k, c);\n    }\n    return res;\n  }\n  pair<Seg, Seg> _split_R(I c) {\n    assert(R.fold_all().first\
+    \ >= c);\n    pair<Seg, Seg> res =\n        R.split_max_right([&](const T& t)\
+    \ { return t.first <= c; });\n    c -= res.first.fold_all().first;\n    if (c\
+    \ != 0) {\n      I k = res.second.get_min_key();\n      _apply(res.first, k, c);\n\
+    \      _apply(res.second, k, -c);\n    }\n    return res;\n  }\n  // destructive\
+    \ merge\n  Seg _unite(Seg& lhs, Seg& rhs) {\n    if (lhs.empty()) return rhs;\n\
+    \    if (rhs.empty()) return lhs;\n    assert(lhs.get_max_key() <= rhs.get_min_key()\
+    \ && \"WeightSlopTrick::_unite\");\n    if (lhs.get_max_key() == rhs.get_min_key())\
+    \ {\n      auto [x, p] = lhs.pop_max_keyval();\n      _apply(rhs, x, p.first);\n\
+    \    }\n    if (lhs.empty()) return rhs;\n    if (rhs.empty()) return lhs;\n \
+    \   return ordered_merge(lhs, rhs);\n  }\n\n public:\n  WeightedSlopeTrick() :\
+    \ min_y(0) {}\n\n  void debug() {\n    auto LL = L.make_array(), RR = R.make_array();\n\
+    \    cerr << \"L : \";\n    for (auto& [k, v] : LL) cerr << \"( \" << k << \"\
+    , \" << v.first << \" ), \";\n    cerr << endl << \"R : \";\n    for (auto& [k,\
+    \ v] : RR) cerr << \"( \" << k << \", \" << v.first << \" ), \";\n    cerr <<\
+    \ endl << \"min : ( \";\n    cerr << get_min().first << \", \" << get_min().second\
+    \ << \" )\" << endl;\n  }\n\n  // return {x, y} s.t. {argmin, min}\n  pair<I,\
+    \ I> get_min() {\n    I x = L.empty() ? R.empty() ? 0 : _get_R().x : _get_L().x;\n\
+    \    return {x, min_y};\n  }\n\n  void shift_L(I a) { L.shift(a), L.apply_all(a);\
+    \ }\n  void shift_R(I a) { R.shift(a), R.apply_all(a); }\n  // f(x) <- f(x - a)\n\
+    \  void shift_x(I a) { shift_L(a), shift_R(a); }\n  // f(x) <- f(x) + a\n  void\
+    \ shift_y(I a) { min_y += a; }\n\n  // add (x-a)_+   _____/\n  void add_xma(I\
+    \ a, I c = 1) {\n    _apply(L, a, c);\n    auto [L1, L2] = _split_L(c);\n    auto\
+    \ [c_sum, ac_sum] = L2.fold(a, inf);\n    min_y += ac_sum - c_sum * a;\n    auto\
+    \ c2 = L2.get_val(a);\n    L2.erase(a);\n    R = _unite(L2, R);\n    _apply(R,\
+    \ a, c2.first);\n    L = L1;\n  }\n\n  // add (a-x)_+   \\_____\n  void add_amx(I\
+    \ a, I c = 1) {\n    _apply(R, a, c);\n    auto [R1, R2] = _split_R(c);\n    auto\
+    \ [c_sum, ac_sum] = R1.fold(-inf, a);\n    min_y += c_sum * a - ac_sum;\n    auto\
+    \ c2 = R1.get_val(a);\n    R1.erase(a);\n    L = _unite(L, R1);\n    _apply(L,\
+    \ a, c2.first);\n    R = R2;\n  }\n\n  // add |x-a|     \\____/\n  void add_abs_xma(I\
+    \ a, I c = 1) {\n    add_xma(a, c);\n    add_amx(a, c);\n  }\n\n  //  chmin right\
+    \ side \\_/ -> \\__\n  void chmin_right() { R.clear(); }\n  //  chmin left side\
+    \  \\_/ -> __/\n  void chmin_left() { L.clear(); }\n\n  // destructive merge\n\
+    \  void merge(WeightedSlopeTrick& r) {\n    if (L.size() + R.size() < r.L.size()\
+    \ + r.R.size()) swap(*this, r);\n    for (auto& [x, t] : r.L.make_array()) add_amx(x,\
+    \ t.first);\n    for (auto& [x, t] : r.R.make_array()) add_xma(x, t.first);\n\
+    \    shift_y(r.min_y);\n  }\n\n  I eval(I x) {\n    I res = min_y;\n    if (!L.empty()\
+    \ && _get_L().x > x) {\n      auto [L1, L2] = L.split_by_key(x);\n      auto [c_sum,\
+    \ xc_sum] = L2.fold_all();\n      res += xc_sum - c_sum * x;\n      L = _unite(L1,\
+    \ L2);\n    }\n    if (!R.empty() && _get_R().x < x) {\n      auto [R1, R2] =\
+    \ R.split_by_key(x);\n      auto [c_sum, xc_sum] = R1.fold_all();\n      res +=\
+    \ c_sum * x - xc_sum;\n      R = _unite(R1, R2);\n    }\n    return res;\n  }\n\
+    \n  void clear() { L.clear(), R.clear(), min_y = 0; }\n};\n\nusing SlopeTrick\
+    \ = WeightedSlopeTrick<__int128_t>;\n\n/**\n * @brief Weighted Slope Trick\n */\n"
+  code: "#pragma once\n\n#include <cassert>\n#include <iostream>\n#include <type_traits>\n\
+    using namespace std;\n\n#include \"../segment-tree/rbst-segment-tree.hpp\"\n\n\
+    namespace SlopeTrickImpl {\n\ntemplate <typename Int>\nusing T = pair<Int, Int>;\n\
+    template <typename Int>\nusing E = Int;\ntemplate <typename Int>\nT<Int> f(T<Int>\
+    \ a, T<Int> b) {\n  return {a.first + b.first, a.second + b.second};\n}\ntemplate\
+    \ <typename Int>\nT<Int> g(T<Int> a, E<Int> b) {\n  return {a.first, a.second\
+    \ + a.first * b};\n}\ntemplate <typename Int>\nE<Int> h(E<Int> a, E<Int> b) {\n\
+    \  return a + b;\n}\ntemplate <typename Int>\nT<Int> ti() {\n  return {};\n}\n\
+    template <typename Int>\nE<Int> ei() {\n  return {};\n}\ntemplate <typename Int>\n\
+    using SegTree = RBSTShiftableLazySegmentTree<Int, T<Int>, E<Int>, f<Int>,\n  \
+    \                                           g<Int>, h<Int>, ti<Int>, ei<Int>>;\n\
+    }  // namespace SlopeTrickImpl\n\ntemplate <typename I>\nstruct WeightedSlopeTrick\
+    \ {\n  static constexpr I inf = (I{1} << (sizeof(I) * 8 - 2)) - 1;\n  using Seg\
+    \ = typename SlopeTrickImpl::SegTree<I>;\n  using T = SlopeTrickImpl::T<I>;\n\
+    \  using E = SlopeTrickImpl::E<I>;\n\n  // x : \u5EA7\u6A19, c : \u50BE\u304D\u306E\
+    \u5909\u5316\u91CF\n  struct P {\n    I x, c;\n    P(I _x, I _c) : x(_x), c(_c)\
+    \ {}\n  };\n\n private:\n  Seg L, R;\n  I min_y;\n\n  // seg[x] += c\n  void _apply(Seg&\
+    \ seg, I x, I c) {\n    if (c == 0) return;\n    seg.apply_val_fast(x, [&](T&\
+    \ t) {\n      t.first += c;\n      t.second += x * c;\n    });\n  }\n  void _push_L(I\
+    \ x, I c = 1) { _apply(L, x, c); }\n  void _push_R(I x, I c = 1) { _apply(R, x,\
+    \ c); }\n  P _get_L() {\n    assert(!L.empty());\n    auto kv = L.get_max_keyval();\n\
+    \    return P{kv.first, kv.second.first};\n  }\n  P _get_R() {\n    assert(!R.empty());\n\
+    \    auto kv = R.get_min_keyval();\n    return P{kv.first, kv.second.first};\n\
+    \  }\n  P _getpop_L() {\n    assert(!L.empty());\n    auto kv = L.pop_max_keyval();\n\
+    \    return P{kv.first, kv.second.first};\n  }\n  P _getpop_R() {\n    assert(!R.empty());\n\
+    \    auto kv = R.pop_min_keyval();\n    return P{kv.first, kv.second.first};\n\
+    \  }\n  pair<Seg, Seg> _split_L(I c) {\n    assert(L.fold_all().first >= c);\n\
+    \    pair<Seg, Seg> res =\n        L.split_min_left([&](const T& t) { return t.first\
+    \ <= c; });\n    c -= res.second.fold_all().first;\n    if (c != 0) {\n      I\
+    \ k = res.first.get_max_key();\n      _apply(res.first, k, -c);\n      _apply(res.second,\
+    \ k, c);\n    }\n    return res;\n  }\n  pair<Seg, Seg> _split_R(I c) {\n    assert(R.fold_all().first\
+    \ >= c);\n    pair<Seg, Seg> res =\n        R.split_max_right([&](const T& t)\
+    \ { return t.first <= c; });\n    c -= res.first.fold_all().first;\n    if (c\
+    \ != 0) {\n      I k = res.second.get_min_key();\n      _apply(res.first, k, c);\n\
+    \      _apply(res.second, k, -c);\n    }\n    return res;\n  }\n  // destructive\
+    \ merge\n  Seg _unite(Seg& lhs, Seg& rhs) {\n    if (lhs.empty()) return rhs;\n\
+    \    if (rhs.empty()) return lhs;\n    assert(lhs.get_max_key() <= rhs.get_min_key()\
+    \ && \"WeightSlopTrick::_unite\");\n    if (lhs.get_max_key() == rhs.get_min_key())\
+    \ {\n      auto [x, p] = lhs.pop_max_keyval();\n      _apply(rhs, x, p.first);\n\
+    \    }\n    if (lhs.empty()) return rhs;\n    if (rhs.empty()) return lhs;\n \
+    \   return ordered_merge(lhs, rhs);\n  }\n\n public:\n  WeightedSlopeTrick() :\
+    \ min_y(0) {}\n\n  void debug() {\n    auto LL = L.make_array(), RR = R.make_array();\n\
+    \    cerr << \"L : \";\n    for (auto& [k, v] : LL) cerr << \"( \" << k << \"\
+    , \" << v.first << \" ), \";\n    cerr << endl << \"R : \";\n    for (auto& [k,\
+    \ v] : RR) cerr << \"( \" << k << \", \" << v.first << \" ), \";\n    cerr <<\
+    \ endl << \"min : ( \";\n    cerr << get_min().first << \", \" << get_min().second\
+    \ << \" )\" << endl;\n  }\n\n  // return {x, y} s.t. {argmin, min}\n  pair<I,\
+    \ I> get_min() {\n    I x = L.empty() ? R.empty() ? 0 : _get_R().x : _get_L().x;\n\
+    \    return {x, min_y};\n  }\n\n  void shift_L(I a) { L.shift(a), L.apply_all(a);\
+    \ }\n  void shift_R(I a) { R.shift(a), R.apply_all(a); }\n  // f(x) <- f(x - a)\n\
+    \  void shift_x(I a) { shift_L(a), shift_R(a); }\n  // f(x) <- f(x) + a\n  void\
+    \ shift_y(I a) { min_y += a; }\n\n  // add (x-a)_+   _____/\n  void add_xma(I\
+    \ a, I c = 1) {\n    _apply(L, a, c);\n    auto [L1, L2] = _split_L(c);\n    auto\
+    \ [c_sum, ac_sum] = L2.fold(a, inf);\n    min_y += ac_sum - c_sum * a;\n    auto\
+    \ c2 = L2.get_val(a);\n    L2.erase(a);\n    R = _unite(L2, R);\n    _apply(R,\
+    \ a, c2.first);\n    L = L1;\n  }\n\n  // add (a-x)_+   \\_____\n  void add_amx(I\
+    \ a, I c = 1) {\n    _apply(R, a, c);\n    auto [R1, R2] = _split_R(c);\n    auto\
+    \ [c_sum, ac_sum] = R1.fold(-inf, a);\n    min_y += c_sum * a - ac_sum;\n    auto\
+    \ c2 = R1.get_val(a);\n    R1.erase(a);\n    L = _unite(L, R1);\n    _apply(L,\
+    \ a, c2.first);\n    R = R2;\n  }\n\n  // add |x-a|     \\____/\n  void add_abs_xma(I\
+    \ a, I c = 1) {\n    add_xma(a, c);\n    add_amx(a, c);\n  }\n\n  //  chmin right\
+    \ side \\_/ -> \\__\n  void chmin_right() { R.clear(); }\n  //  chmin left side\
+    \  \\_/ -> __/\n  void chmin_left() { L.clear(); }\n\n  // destructive merge\n\
+    \  void merge(WeightedSlopeTrick& r) {\n    if (L.size() + R.size() < r.L.size()\
+    \ + r.R.size()) swap(*this, r);\n    for (auto& [x, t] : r.L.make_array()) add_amx(x,\
+    \ t.first);\n    for (auto& [x, t] : r.R.make_array()) add_xma(x, t.first);\n\
+    \    shift_y(r.min_y);\n  }\n\n  I eval(I x) {\n    I res = min_y;\n    if (!L.empty()\
+    \ && _get_L().x > x) {\n      auto [L1, L2] = L.split_by_key(x);\n      auto [c_sum,\
+    \ xc_sum] = L2.fold_all();\n      res += xc_sum - c_sum * x;\n      L = _unite(L1,\
+    \ L2);\n    }\n    if (!R.empty() && _get_R().x < x) {\n      auto [R1, R2] =\
+    \ R.split_by_key(x);\n      auto [c_sum, xc_sum] = R1.fold_all();\n      res +=\
+    \ c_sum * x - xc_sum;\n      R = _unite(R1, R2);\n    }\n    return res;\n  }\n\
+    \n  void clear() { L.clear(), R.clear(), min_y = 0; }\n};\n\nusing SlopeTrick\
+    \ = WeightedSlopeTrick<__int128_t>;\n\n/**\n * @brief Weighted Slope Trick\n */\n"
   dependsOn:
-  - template/template.hpp
-  - template/util.hpp
-  - template/bitop.hpp
-  - template/inout.hpp
-  - template/debug.hpp
-  - template/macro.hpp
   - segment-tree/rbst-segment-tree.hpp
-  isVerificationFile: true
-  path: verify/verify-yuki/yuki-1786.test.cpp
+  isVerificationFile: false
+  path: data-structure/slope-trick-weighted.hpp
   requiredBy: []
   timestamp: '2022-11-10 01:01:58+09:00'
-  verificationStatus: TEST_ACCEPTED
-  verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-1786.test.cpp
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yuki/yuki-1467-weighted.test.cpp
+documentation_of: data-structure/slope-trick-weighted.hpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-1786.test.cpp
-- /verify/verify/verify-yuki/yuki-1786.test.cpp.html
-title: verify/verify-yuki/yuki-1786.test.cpp
+- /library/data-structure/slope-trick-weighted.hpp
+- /library/data-structure/slope-trick-weighted.hpp.html
+title: Weighted Slope Trick
 ---

@@ -943,6 +943,9 @@ data:
     path: verify/verify-yuki/yuki-1460.test.cpp
     title: verify/verify-yuki/yuki-1460.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1467-weighted.test.cpp
+    title: verify/verify-yuki/yuki-1467-weighted.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1467.test.cpp
     title: verify/verify-yuki/yuki-1467.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1162,6 +1165,7 @@ data:
   - verify/verify-yuki/yuki-1460.test.cpp
   - verify/verify-yuki/yuki-1786.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
+  - verify/verify-yuki/yuki-1467-weighted.test.cpp
   - verify/verify-yuki/yuki-0880.test.cpp
   - verify/verify-yuki/yuki-1775.test.cpp
   - verify/verify-yuki/yuki-1340-semiring.test.cpp

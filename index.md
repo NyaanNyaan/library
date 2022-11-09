@@ -61,6 +61,9 @@ data:
       path: data-structure/sliding-window-minimum.hpp
       title: data-structure/sliding-window-minimum.hpp
     - icon: ':heavy_check_mark:'
+      path: data-structure/slope-trick-weighted.hpp
+      title: Weighted Slope Trick
+    - icon: ':heavy_check_mark:'
       path: data-structure/slope-trick.hpp
       title: Slope Trick
     - icon: ':heavy_check_mark:'
@@ -1896,6 +1899,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1460.test.cpp
       title: verify/verify-yuki/yuki-1460.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1467-weighted.test.cpp
+      title: verify/verify-yuki/yuki-1467-weighted.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1467.test.cpp
       title: verify/verify-yuki/yuki-1467.test.cpp
