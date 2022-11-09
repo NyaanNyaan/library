@@ -104,7 +104,7 @@ void yuki1467() {
         st.add_xma(0, 1e10);
       }
     }
-    out(st.get_min().second);
+    out(ll(st.get_min().second));
     st.clear();
   }
 }
