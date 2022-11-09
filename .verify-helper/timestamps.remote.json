@@ -315,6 +315,7 @@
 "verify/verify-yuki/yuki-1340-bitmatrix.test.cpp": "2021-11-14 23:34:55 +0900",
 "verify/verify-yuki/yuki-1340-semiring.test.cpp": "2021-05-04 19:34:35 +0900",
 "verify/verify-yuki/yuki-1460.test.cpp": "2021-07-11 22:59:33 +0900",
+"verify/verify-yuki/yuki-1467-weighted.test.cpp": "2022-11-10 01:24:21 +0900",
 "verify/verify-yuki/yuki-1467.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-yuki/yuki-1504.test.cpp": "2022-08-22 22:01:20 +0900",
 "verify/verify-yuki/yuki-1510.test.cpp": "2022-08-22 22:01:20 +0900",
