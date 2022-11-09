@@ -6,6 +6,8 @@
 
 using namespace Nyaan;
 
+/*
+
 // https://atcoder.jp/contests/abc127/tasks/abc127_f
 void ABC127F() {
   ini(Q);
@@ -81,34 +83,6 @@ void ARC070C() {
   out(st.get_min().second);
 }
 
-// https://yukicoder.me/problems/no/1467
-void yuki1467() {
-  ini(M, N);
-  vl A(M), B(N);
-  in(A, B);
-  vl zip{A};
-  each(x, B) zip.push_back(x);
-  zip = mkuni(zip);
-  vl as(sz(zip)), bs(sz(zip));
-  each(x, A) as[lb(zip, x)]++;
-  each(x, B) bs[lb(zip, x)]++;
-  rep1(k, M) {
-    SlopeTrick st;
-    st.add_amx(0, TEN(10));
-    rep(i, sz(zip)) {
-      st.shift_x(as[i] - bs[i] * k);
-      st.chmin_right();
-      if (i != sz(zip) - 1) {
-        st.add_abs_xma(0, zip[i + 1] - zip[i]);
-      } else {
-        st.add_xma(0, 1e10);
-      }
-    }
-    out(ll(st.get_min().second));
-    st.clear();
-  }
-}
-
 #include "../../segment-tree/segment-tree.hpp"
 
 // https://atcoder.jp/contests/abc275/tasks/abc275_h
@@ -155,6 +129,36 @@ void ABC217H() {
     }
   }
   out(st.get_min().second);
+}
+
+*/
+
+// https://yukicoder.me/problems/no/1467
+void yuki1467() {
+  ini(M, N);
+  vl A(M), B(N);
+  in(A, B);
+  vl zip{A};
+  each(x, B) zip.push_back(x);
+  zip = mkuni(zip);
+  vl as(sz(zip)), bs(sz(zip));
+  each(x, A) as[lb(zip, x)]++;
+  each(x, B) bs[lb(zip, x)]++;
+  rep1(k, M) {
+    SlopeTrick st;
+    st.add_amx(0, TEN(10));
+    rep(i, sz(zip)) {
+      st.shift_x(as[i] - bs[i] * k);
+      st.chmin_right();
+      if (i != sz(zip) - 1) {
+        st.add_abs_xma(0, zip[i + 1] - zip[i]);
+      } else {
+        st.add_xma(0, 1e10);
+      }
+    }
+    out(ll(st.get_min().second));
+    st.clear();
+  }
 }
 
 void Nyaan::solve() {
