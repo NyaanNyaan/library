@@ -3,7 +3,7 @@
 
 #### 問題
 
-$k$次多項式$f(n)$に$f(0),f(1),\ldots,f(k)$を代入したものが与えられる。$\sum_{0\leq i<n}f(i)a^i$を求めよ。
+$k$次多項式$f(n)$に$f(0),f(1),\ldots,f(k)$を代入したものが与えられる。$\sum_{0\leq i \lt n}f(i)a^i$を求めよ。
 
 [出題例(codechef)](https://www.codechef.com/problems/QPOLYSUM)
 

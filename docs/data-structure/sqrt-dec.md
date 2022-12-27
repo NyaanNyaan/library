@@ -6,7 +6,7 @@
 
 - `add(l,r,x)` : $[a_l,a_r)$に$x$を足す
 - `count[l,r,x)` : $[a_l,a_r)$内にある$x$の個数を数える
-- $1 \leq l < r \leq N=10^5,$クエリ数$Q=10^5,a_i \leq 10^9, x \leq 10^9$
+- $1 \leq l \lt r \leq N=10^5,$クエリ数$Q=10^5,a_i \leq 10^9, x \leq 10^9$
 
 この問題にセグメント木を適用するとノード上に大量のhashmapを乗せることになり計算量が悪化するが、平方分割ならばhashmapの空間計算量が$\mathrm{O}(N)$で抑えられるため$\mathrm{O}((N+Q)\sqrt{N})$で解くことが出来る。(range addは適切に遅延評価すればよい。)
 
