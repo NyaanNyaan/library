@@ -118,20 +118,24 @@ struct SlopeTrick {
     shift_y(r.min_y);
   }
 
-  // eval f(x) O(|L| + |R|)
+  // eval f(x) O(|L| + |R|) TODO : verify
   ll eval(ll x) {
     ll y = min_y;
     auto LL{L};
     while (!LL.empty()) {
       auto [X, C] = LL.top();
-      if ((X += addL) <= x) break;
+      X += addL;
+      if(X < x) break;
       y += (X - x) * C;
+      LL.pop();
     }
     auto RR{R};
     while (!RR.empty()) {
       auto [X, C] = RR.top();
-      if ((X += addR) >= x) break;
+      X += addR;
+      if(x < X) break;
       y += (x - X) * C;
+      RR.pop();
     }
     return y;
   }

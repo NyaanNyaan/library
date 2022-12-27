@@ -66,7 +66,21 @@ struct Matrix {
 
   Matrix operator^(const long long k) const { return (Matrix(*this) ^= k); }
 
-  friend ostream &operator<<(ostream &os, Matrix &p) {
+  bool operator==(const Matrix &B) const {
+    for (int i = 0; i < H; i++)
+      for (int j = 0; j < W; j++)
+        if (A[i][j] != B[i][j]) return false;
+    return true;
+  }
+
+  bool operator!=(const Matrix &B) const {
+    for (int i = 0; i < H; i++)
+      for (int j = 0; j < W; j++)
+        if (A[i][j] != B[i][j]) return true;
+    return false;
+  }
+
+  friend ostream &operator<<(ostream &os,const Matrix &p) {
     for (int i = 0; i < H; i++) {
       os << "[";
       for (int j = 0; j < W; j++) {

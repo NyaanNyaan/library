@@ -33,3 +33,12 @@ mat_prod_2.cpp
 z.bat
 gmon.out
 test.jpg
+
+lemon/*
+modint/modint-utility.hpp
+mfps/multivariate-formal-power-series.hpp
+ahc.py
+convolution.hpp
+judge.py
+nai.exe
+test.py

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../ntt/ntt-avx2.hpp"
+#include "../ntt/ntt.hpp"
 #include "./formal-power-series.hpp"
 
 template <typename mint>

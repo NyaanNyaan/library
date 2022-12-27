@@ -101,7 +101,7 @@ struct ArbitraryModInt {
   }
 
   static void set_mod(int md) {
-    assert(md <= 2000000000 + 10);
+    assert(0 < md && md <= (1LL << 30) - 1);
     get_mod() = md;
     barrett() = Barrett(md);
   }

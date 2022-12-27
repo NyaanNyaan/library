@@ -16,7 +16,7 @@ struct RangeAddRangeSumBIT {
   }
 
   // return sum of [l, r)
-  T sum(T l, T r) {
+  T sum(int l, int r) {
     --r, --l;
     return a.sum(r) * r + b.sum(r) - a.sum(l) * l - b.sum(l);
   }

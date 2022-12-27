@@ -4,26 +4,22 @@
 
 template <typename G>
 struct TreeHash {
-  using H = inner::Hash<8>;
-  using u64 = unsigned long long;
+  using Hash = inner::Hash<3>;
 
   const G& g;
   int n;
-  vector<H> hash;
-  vector<u64> xs;
+  vector<Hash> hash;
   vector<int> depth;
 
-  TreeHash(const G& _g, int root = 0) : g(_g), n(g.size()) {
-    auto rand_time =
-        chrono::duration_cast<chrono::nanoseconds>(
-            chrono::high_resolution_clock::now().time_since_epoch())
-            .count();
-    mt19937_64 rng(rand_time);
+  static vector<Hash>& xs() {
+    static vector<Hash> _xs;
+    return _xs;
+  }
 
+  TreeHash(const G& _g, int root = 0) : g(_g), n(g.size()) {
     hash.resize(n);
     depth.resize(n, 0);
-    xs.resize(n);
-    for (auto& i : xs) i = rng() % H::md;
+    while ((int)xs().size() <= n) xs().push_back(Hash::get_basis());
     dfs(root, -1);
   }
 
@@ -33,7 +29,7 @@ struct TreeHash {
     for (auto& d : g[c]) {
       if (d != p) dep = max(dep, dfs(d, c) + 1);
     }
-    H x = H::set(xs[dep]), h = H::set(1);
+    Hash x = xs()[dep], h = Hash::set(1);
     for (auto& d : g[c]) {
       if (d != p) h = h * (x + hash[d]);
     }

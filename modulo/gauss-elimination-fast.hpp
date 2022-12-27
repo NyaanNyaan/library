@@ -2,14 +2,17 @@
 
 #include "../modint/simd-montgomery.hpp"
 
+
 namespace Gauss {
-uint32_t a_buf_[4096][4096] __attribute__((aligned(64)));
+  
+constexpr int MAT_SIZE = 4096;
+uint32_t a_buf_[MAT_SIZE][MAT_SIZE] __attribute__((aligned(64)));
 
 // return value: (rank, (-1) ^ (number of swap time))
 template <typename mint>
 __attribute__((target("avx2"))) pair<int, mint> GaussianElimination(
     const vector<vector<mint>> &m, int LinearEquation = false) {
-  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);
+  mint(&a)[MAT_SIZE][MAT_SIZE] = *reinterpret_cast<mint(*)[MAT_SIZE][MAT_SIZE]>(a_buf_);
   int H = m.size(), W = m[0].size(), rank = 0;
   mint det = 1;
   for (int i = 0; i < H; i++)
@@ -92,7 +95,7 @@ vector<vector<mint>> LinearEquation(vector<vector<mint>> A, vector<mint> B) {
 
   auto p = GaussianElimination(A, true);
 
-  mint(&a)[4096][4096] = *reinterpret_cast<mint(*)[4096][4096]>(a_buf_);
+  mint(&a)[MAT_SIZE][MAT_SIZE] = *reinterpret_cast<mint(*)[MAT_SIZE][MAT_SIZE]>(a_buf_);
   int rank = p.first;
 
   // check if solutions exist

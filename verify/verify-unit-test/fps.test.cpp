@@ -34,16 +34,18 @@ void test_pow(int n, int deg) {
   assert(n > 0 && deg > 0);
   fps f(n);
   each(x, f) x = rng();
-
   int r = randint(0, 100);
-
   fps g = f.pow(r, deg);
-  fps h(deg);
+  fps h(deg), base(f);
   h[0] = 1;
-  while (r) {
-    if (r & 1) h = (f * h).pre(deg);
-    f = (f * f).pre(deg);
-    r >>= 1;
+  for (int e = r; e; e >>= 1) {
+    if (e & 1) h = (base * h).pre(deg);
+    base = (base * base).pre(deg);
+  }
+  if (g != h) {
+    trc(f, r, deg);
+    trc(g);
+    trc(h);
   }
   assert(g == h);
 }

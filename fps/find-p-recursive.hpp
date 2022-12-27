@@ -44,6 +44,7 @@ vector<FormalPowerSeries<mint>> find_p_recursive(vector<mint>& a, int d) {
 template <typename mint>
 mint kth_term_of_p_recursive(vector<mint>& a, long long k, int d) {
   if (k < (int)a.size()) return a[k];
+  if (all_of(begin(a), end(a), [](mint x) { return x == mint(0); })) return 0;
   auto fs = find_p_recursive(a, d);
   assert(fs.empty() == false);
   int deg = fs.size() - 1;
@@ -70,6 +71,10 @@ mint kth_term_of_p_recursive(vector<mint>& a, long long k) {
   for (int d = 0;; d++) {
     if ((n + 2) / (d + 2) <= 1) break;
     if (kth_term_of_p_recursive(b, n, d) == a.back()) {
+#ifdef NyaanLocal
+      cerr << "d : " << d << endl;
+      cerr << find_p_recursive(b, d) << endl;
+#endif
       return kth_term_of_p_recursive(a, k, d);
     }
   }

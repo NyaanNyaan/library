@@ -149,16 +149,21 @@ struct FormalPowerSeries : vector<mint> {
   FPS pow(int64_t k, int deg = -1) const {
     const int n = (int)this->size();
     if (deg == -1) deg = n;
+    if (k == 0) {
+      FPS ret(deg);
+      if (deg) ret[0] = 1;
+      return ret;
+    }
     for (int i = 0; i < n; i++) {
       if ((*this)[i] != mint(0)) {
-        if (i * k > deg) return FPS(deg, mint(0));
         mint rev = mint(1) / (*this)[i];
-        FPS ret =
-            (((*this * rev) >> i).log(deg) * k).exp(deg) * ((*this)[i].pow(k));
+        FPS ret = (((*this * rev) >> i).log(deg) * k).exp(deg);
+        ret *= (*this)[i].pow(k);
         ret = (ret << (i * k)).pre(deg);
         if ((int)ret.size() < deg) ret.resize(deg, mint(0));
         return ret;
       }
+      if (__int128_t(i + 1) * k >= deg) return FPS(deg, mint(0));
     }
     return FPS(deg, mint(0));
   }

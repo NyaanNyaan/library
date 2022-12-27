@@ -44,3 +44,8 @@ struct SlideWindowAggregation {
   }
   T query() { return f(f0, f1); }
 };
+
+/**
+ * @brief Slide Window Aggrigation
+ * @docs docs/data-structure/slide-window-aggregation.md
+ */

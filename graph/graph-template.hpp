@@ -91,3 +91,8 @@ vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,
   }
   return d;
 }
+
+/**
+ * @brief グラフテンプレート
+ * @docs docs/graph/graph-template.md
+ */
