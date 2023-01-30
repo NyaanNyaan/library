@@ -2,8 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: inner/inner-hash.hpp
-    title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
+    path: data-structure/sparse-table.hpp
+    title: Sparse Table
+  - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
+    path: segment-tree/segment-tree.hpp
+    title: segment-tree/segment-tree.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -32,8 +38,8 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/inner-hash.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+  bundledCode: "#line 1 \"verify/verify-unit-test/sparse-table.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
     \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
@@ -168,84 +174,90 @@ data:
     \ u[i], v[i]);             \\\n  }\n#define die(...)             \\\n  do {  \
     \                     \\\n    Nyaan::out(__VA_ARGS__); \\\n    return;       \
     \           \\\n  } while (0)\n#line 70 \"template/template.hpp\"\n\nnamespace\
-    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/inner-hash.test.cpp\"\
-    \n//\n#line 2 \"inner/inner-hash.hpp\"\n\nnamespace inner {\nusing i64 = long\
-    \ long;\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\ntemplate\
-    \ <int BASE_NUM = 2>\nstruct Hash : array<u64, BASE_NUM> {\n  using array<u64,\
-    \ BASE_NUM>::operator[];\n  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64,\
-    \ BASE_NUM>() {}\n\n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr\
-    \ static Hash set(const i64 &a) {\n    Hash res;\n    fill(begin(res), end(res),\
-    \ cast(a));\n    return res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for\
-    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i]) >= md) (*this)[i] -=\
-    \ md;\n    return *this;\n  }\n  Hash &operator+=(const i64 &r) {\n    u64 s =\
-    \ cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += s) >= md)\
-    \ (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const Hash &r)\
-    \ {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md)\
-    \ (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const i64 &r)\
-    \ {\n    u64 s = cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i]\
-    \ += md - s) >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator*=(const\
-    \ Hash &r) {\n    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i],\
-    \ r[i]);\n    return *this;\n  }\n  Hash &operator*=(const i64 &r) {\n    u64\
-    \ s = cast(r);\n    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i],\
-    \ s);\n    return *this;\n  }\n\n  Hash operator+(const Hash &r) { return Hash(*this)\
-    \ += r; }\n  Hash operator+(const i64 &r) { return Hash(*this) += r; }\n  Hash\
-    \ operator-(const Hash &r) { return Hash(*this) -= r; }\n  Hash operator-(const\
-    \ i64 &r) { return Hash(*this) -= r; }\n  Hash operator*(const Hash &r) { return\
-    \ Hash(*this) *= r; }\n  Hash operator*(const i64 &r) { return Hash(*this) *=\
-    \ r; }\n  Hash operator-() const {\n    Hash res;\n    for (int i = 0; i < n;\
-    \ i++) res[i] = (*this)[i] == 0 ? 0 : md - (*this)[i];\n    return res;\n  }\n\
-    \  friend Hash pfma(const Hash &a, const Hash &b, const Hash &c) {\n    Hash res;\n\
-    \    for (int i = 0; i < n; i++) res[i] = modfma(a[i], b[i], c[i]);\n    return\
-    \ res;\n  }\n  friend Hash pfma(const Hash &a, const Hash &b, const i64 &c) {\n\
-    \    Hash res;\n    u64 s = cast(c);\n    for (int i = 0; i < n; i++) res[i] =\
-    \ modfma(a[i], b[i], s);\n    return res;\n  }\n\n  Hash pow(long long e) {\n\
-    \    Hash a{*this}, res{Hash::set(1)};\n    for (; e; a *= a, e >>= 1) {\n   \
-    \   if (e & 1) res *= a;\n    }\n    return res;\n  }\n\n  static Hash get_basis()\
-    \ {\n    static auto rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
-    \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
-    \      .count();\n    static mt19937_64 rng(rand_time);\n    Hash h;\n    for\
-    \ (int i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md - 1)\
-    \ + 1) == false)\n        ;\n    }\n    return h;\n  }\n\n private:\n  static\
-    \ u64 modpow(u64 a, u64 b) {\n    u64 r = 1;\n    for (a %= md; b; a = modmul(a,\
-    \ a), b >>= 1) r = modmul(r, a);\n    return r;\n  }\n  static bool isPrimitive(u64\
-    \ x) {\n    for (auto &d : vector<u64>{2, 3, 5, 7, 11, 13, 31, 41, 61, 151, 331,\
-    \ 1321})\n      if (modpow(x, (md - 1) / d) <= 1) return false;\n    return true;\n\
-    \  }\n  static inline constexpr u64 cast(const long long &a) {\n    return a <\
-    \ 0 ? a + md : a;\n  }\n  static inline constexpr u64 modmul(const u64 &a, const\
-    \ u64 &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) + (ret >> 61);\n\
-    \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
-    \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
-    \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
-    \u4F53\n * @docs docs/inner/inner-hash.md\n */\n#line 6 \"verify/verify-unit-test/inner-hash.test.cpp\"\
-    \nusing namespace Nyaan;\n\nusing Hash = inner::Hash<3>;\n\nvoid Nyaan::solve()\
-    \ {\n  u64 mod = (1uLL << 61) - 1;\n\n  Hash a;\n  a[0] = 3, a[1] = 4, a[2] =\
-    \ 5;\n  trc(a);\n  Hash b = Hash::set(2);\n  trc(b);\n\n  auto c = a + b;\n  trc(c);\n\
-    \  assert(c[0] == 5 and c[1] == 6 and c[2] == 7);\n  auto d = a + 2;\n  trc(d);\n\
-    \  assert(c == d);\n\n  auto e = a - b;\n  trc(e);\n  assert(e[0] == 1 and e[1]\
-    \ == 2 and e[2] == 3);\n  auto f = a - 2;\n  trc(f);\n  assert(e == f);\n\n  auto\
-    \ g = a * b;\n  trc(g);\n  assert(g[0] == 6 and g[1] == 8 and g[2] == 10);\n \
-    \ auto h = a * 2;\n  trc(h);\n  assert(g == h);\n\n  auto i = -a;\n  trc(i);\n\
-    \  assert(i[0] == mod - 3);\n  auto j = a + i;\n  trc(j);\n  assert(j == Hash::set(0));\n\
-    \n  auto k = pfma(a, b, b);\n  trc(k);\n  auto l = pfma(a, b, 2);\n  trc(l);\n\
-    \  auto m = a * b + b;\n  trc(m);\n  assert(k[0] == 8 and k[1] == 10 and k[2]\
-    \ == 12);\n  assert(k == l and l == m);\n\n  int A, B;\n  cin >> A >> B;\n  cout\
-    \ << A + B << endl;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../inner/inner-hash.hpp\"\nusing\
-    \ namespace Nyaan;\n\nusing Hash = inner::Hash<3>;\n\nvoid Nyaan::solve() {\n\
-    \  u64 mod = (1uLL << 61) - 1;\n\n  Hash a;\n  a[0] = 3, a[1] = 4, a[2] = 5;\n\
-    \  trc(a);\n  Hash b = Hash::set(2);\n  trc(b);\n\n  auto c = a + b;\n  trc(c);\n\
-    \  assert(c[0] == 5 and c[1] == 6 and c[2] == 7);\n  auto d = a + 2;\n  trc(d);\n\
-    \  assert(c == d);\n\n  auto e = a - b;\n  trc(e);\n  assert(e[0] == 1 and e[1]\
-    \ == 2 and e[2] == 3);\n  auto f = a - 2;\n  trc(f);\n  assert(e == f);\n\n  auto\
-    \ g = a * b;\n  trc(g);\n  assert(g[0] == 6 and g[1] == 8 and g[2] == 10);\n \
-    \ auto h = a * 2;\n  trc(h);\n  assert(g == h);\n\n  auto i = -a;\n  trc(i);\n\
-    \  assert(i[0] == mod - 3);\n  auto j = a + i;\n  trc(j);\n  assert(j == Hash::set(0));\n\
-    \n  auto k = pfma(a, b, b);\n  trc(k);\n  auto l = pfma(a, b, 2);\n  trc(l);\n\
-    \  auto m = a * b + b;\n  trc(m);\n  assert(k[0] == 8 and k[1] == 10 and k[2]\
-    \ == 12);\n  assert(k == l and l == m);\n\n  int A, B;\n  cin >> A >> B;\n  cout\
-    \ << A + B << endl;\n}\n"
+    \ Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line 4 \"verify/verify-unit-test/sparse-table.test.cpp\"\
+    \n//\n#line 2 \"data-structure/sparse-table.hpp\"\n\n#line 6 \"data-structure/sparse-table.hpp\"\
+    \nusing namespace std;\n\ntemplate <typename T>\nstruct SparseTable {\n  inline\
+    \ static constexpr T INF = numeric_limits<T>::max() / 2;\n  int N;\n  vector<vector<T>\
+    \ > table;\n  T f(T a, T b) { return min(a, b); }\n  SparseTable() {}\n  SparseTable(const\
+    \ vector<T> &v) : N(v.size()) {\n    int b = 1;\n    while ((1 << b) <= N) ++b;\n\
+    \    table.push_back(v);\n    for (int i = 1; i < b; i++) {\n      table.push_back(vector<T>(N,\
+    \ INF));\n      for (int j = 0; j + (1 << i) <= N; j++) {\n        table[i][j]\
+    \ = f(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);\n      }\n    }\n  }\n\
+    \  // [l, r)\n  T query(int l, int r) {\n    assert(0 <= l and l <= r and r <=\
+    \ N);\n    if (l == r) return INF;\n    int b = 31 - __builtin_clz(r - l);\n \
+    \   return f(table[b][l], table[b][r - (1 << b)]);\n  }\n};\n\n/**\n * @brief\
+    \ Sparse Table\n */\n#line 2 \"segment-tree/segment-tree.hpp\"\n\ntemplate <typename\
+    \ T, typename F>\nstruct SegmentTree {\n  int N;\n  int size;\n  vector<T> seg;\n\
+    \  const F f;\n  const T I;\n\n  SegmentTree(F _f, const T &I_) : N(0), size(0),\
+    \ f(_f), I(I_) {}\n\n  SegmentTree(int _N, F _f, const T &I_) : f(_f), I(I_) {\
+    \ init(_N); }\n\n  SegmentTree(const vector<T> &v, F _f, T I_) : f(_f), I(I_)\
+    \ {\n    init(v.size());\n    for (int i = 0; i < (int)v.size(); i++) {\n    \
+    \  seg[i + size] = v[i];\n    }\n    build();\n  }\n\n  void init(int _N) {\n\
+    \    N = _N;\n    size = 1;\n    while (size < N) size <<= 1;\n    seg.assign(2\
+    \ * size, I);\n  }\n\n  void set(int k, T x) { seg[k + size] = x; }\n\n  void\
+    \ build() {\n    for (int k = size - 1; k > 0; k--) {\n      seg[k] = f(seg[2\
+    \ * k], seg[2 * k + 1]);\n    }\n  }\n\n  void update(int k, T x) {\n    k +=\
+    \ size;\n    seg[k] = x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k],\
+    \ seg[2 * k + 1]);\n    }\n  }\n\n  void add(int k, T x) {\n    k += size;\n \
+    \   seg[k] += x;\n    while (k >>= 1) {\n      seg[k] = f(seg[2 * k], seg[2 *\
+    \ k + 1]);\n    }\n  }\n\n  // query to [a, b)\n  T query(int a, int b) {\n  \
+    \  T L = I, R = I;\n    for (a += size, b += size; a < b; a >>= 1, b >>= 1) {\n\
+    \      if (a & 1) L = f(L, seg[a++]);\n      if (b & 1) R = f(seg[--b], R);\n\
+    \    }\n    return f(L, R);\n  }\n\n  T &operator[](const int &k) { return seg[k\
+    \ + size]; }\n\n  // check(a[l] * ...  * a[r-1]) \u304C true \u3068\u306A\u308B\
+    \u6700\u5927\u306E r\n  // (\u53F3\u7AEF\u307E\u3067\u3059\u3079\u3066 true \u306A\
+    \u3089 N \u3092\u8FD4\u3059)\n  template <class C>\n  int max_right(int l, C check)\
+    \ {\n    assert(0 <= l && l <= N);\n    assert(check(I) == true);\n    if (l ==\
+    \ N) return N;\n    l += size;\n    T sm = I;\n    do {\n      while (l % 2 ==\
+    \ 0) l >>= 1;\n      if (!check(f(sm, seg[l]))) {\n        while (l < size) {\n\
+    \          l = (2 * l);\n          if (check(f(sm, seg[l]))) {\n            sm\
+    \ = f(sm, seg[l]);\n            l++;\n          }\n        }\n        return l\
+    \ - size;\n      }\n      sm = f(sm, seg[l]);\n      l++;\n    } while ((l & -l)\
+    \ != l);\n    return N;\n  }\n\n  // check(a[l] * ... * a[r-1]) \u304C true \u3068\
+    \u306A\u308B\u6700\u5C0F\u306E l\n  // (\u5DE6\u7AEF\u307E\u3067 true \u306A\u3089\
+    \ 0 \u3092\u8FD4\u3059)\n  template <typename C>\n  int min_left(int r, C check)\
+    \ {\n    assert(0 <= r && r <= N);\n    assert(check(I) == true);\n    if (r ==\
+    \ 0) return 0;\n    r += size;\n    T sm = I;\n    do {\n      r--;\n      while\
+    \ (r > 1 && (r % 2)) r >>= 1;\n      if (!check(f(seg[r], sm))) {\n        while\
+    \ (r < size) {\n          r = (2 * r + 1);\n          if (check(f(seg[r], sm)))\
+    \ {\n            sm = f(seg[r], sm);\n            r--;\n          }\n        }\n\
+    \        return r + 1 - size;\n      }\n      sm = f(seg[r], sm);\n    } while\
+    \ ((r & -r) != r);\n    return 0;\n  }\n};\n#line 7 \"verify/verify-unit-test/sparse-table.test.cpp\"\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 9 \"verify/verify-unit-test/sparse-table.test.cpp\"\
+    \n//\nusing namespace Nyaan;\n\ntemplate <typename T>\nvoid test(int N) {\n  vector<T>\
+    \ v(N);\n  T INF = numeric_limits<T>::max() / 2;\n  each(x, v) x = rng(-INF, INF);\n\
+    \n  SparseTable<T> s{v};\n  SegmentTree seg(\n      v, [](T a, T b) { return min(a,\
+    \ b); }, INF);\n  rep(i, N) reg(j, i, N + 1) {\n    ll a1 = s.query(i, j);\n \
+    \   ll a2 = seg.query(i, j);\n    assert(a1 == a2);\n  }\n}\n\nusing namespace\
+    \ Nyaan;\nvoid Nyaan::solve() {\n  rep(t, 100) {\n    rep(N, 100) {\n      test<int>(N);\n\
+    \      test<ll>(N);\n    }\n  }\n  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin\
+    \ >> a >> b;\n  cout << a + b << endl;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../data-structure/sparse-table.hpp\"\
+    \n#include \"../../segment-tree/segment-tree.hpp\"\n//\n#include \"../../misc/rng.hpp\"\
+    \n//\nusing namespace Nyaan;\n\ntemplate <typename T>\nvoid test(int N) {\n  vector<T>\
+    \ v(N);\n  T INF = numeric_limits<T>::max() / 2;\n  each(x, v) x = rng(-INF, INF);\n\
+    \n  SparseTable<T> s{v};\n  SegmentTree seg(\n      v, [](T a, T b) { return min(a,\
+    \ b); }, INF);\n  rep(i, N) reg(j, i, N + 1) {\n    ll a1 = s.query(i, j);\n \
+    \   ll a2 = seg.query(i, j);\n    assert(a1 == a2);\n  }\n}\n\nusing namespace\
+    \ Nyaan;\nvoid Nyaan::solve() {\n  rep(t, 100) {\n    rep(N, 100) {\n      test<int>(N);\n\
+    \      test<ll>(N);\n    }\n  }\n  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin\
+    \ >> a >> b;\n  cout << a + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -253,17 +265,19 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - inner/inner-hash.hpp
+  - data-structure/sparse-table.hpp
+  - segment-tree/segment-tree.hpp
+  - misc/rng.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/inner-hash.test.cpp
+  path: verify/verify-unit-test/sparse-table.test.cpp
   requiredBy: []
   timestamp: '2023-01-31 00:28:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/inner-hash.test.cpp
+documentation_of: verify/verify-unit-test/sparse-table.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/inner-hash.test.cpp
-- /verify/verify/verify-unit-test/inner-hash.test.cpp.html
-title: verify/verify-unit-test/inner-hash.test.cpp
+- /verify/verify/verify-unit-test/sparse-table.test.cpp
+- /verify/verify/verify-unit-test/sparse-table.test.cpp.html
+title: verify/verify-unit-test/sparse-table.test.cpp
 ---

@@ -108,9 +108,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+  - verify/verify-unit-test/arbitrary-modint.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/arbitrary-modint.test.cpp
 documentation_of: modint/arbitrary-modint.hpp
 layout: document
 redirect_from:

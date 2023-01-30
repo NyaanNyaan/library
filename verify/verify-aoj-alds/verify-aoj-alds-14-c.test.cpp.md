@@ -201,7 +201,9 @@ data:
     \ b[i], c[i]);\n    return res;\n  }\n  friend Hash pfma(const Hash &a, const\
     \ Hash &b, const i64 &c) {\n    Hash res;\n    u64 s = cast(c);\n    for (int\
     \ i = 0; i < n; i++) res[i] = modfma(a[i], b[i], s);\n    return res;\n  }\n\n\
-    \  static Hash get_basis() {\n    static auto rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
+    \  Hash pow(long long e) {\n    Hash a{*this}, res{Hash::set(1)};\n    for (;\
+    \ e; a *= a, e >>= 1) {\n      if (e & 1) res *= a;\n    }\n    return res;\n\
+    \  }\n\n  static Hash get_basis() {\n    static auto rand_time =\n        chrono::duration_cast<chrono::nanoseconds>(\n\
     \            chrono::high_resolution_clock::now().time_since_epoch())\n      \
     \      .count();\n    static mt19937_64 rng(rand_time);\n    Hash h;\n    for\
     \ (int i = 0; i < n; i++) {\n      while (isPrimitive(h[i] = rng() % (md - 1)\
@@ -265,7 +267,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   requiredBy: []
-  timestamp: '2021-12-18 14:04:11+09:00'
+  timestamp: '2023-01-31 00:28:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp

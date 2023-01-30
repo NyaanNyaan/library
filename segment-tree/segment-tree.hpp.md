@@ -16,6 +16,9 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/sparse-table.test.cpp
+    title: verify/verify-unit-test/sparse-table.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -119,15 +122,16 @@ data:
   timestamp: '2021-12-30 19:20:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp
-  - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
+  - verify/verify-unit-test/sparse-table.test.cpp
+  - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
 documentation_of: segment-tree/segment-tree.hpp
 layout: document
 redirect_from:

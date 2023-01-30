@@ -68,7 +68,7 @@ data:
       title: Slope Trick
     - icon: ':heavy_check_mark:'
       path: data-structure/sparse-table.hpp
-      title: data-structure/sparse-table.hpp
+      title: Sparse Table
     - icon: ':heavy_check_mark:'
       path: data-structure/square-root-decomposition.hpp
       title: "\u5E73\u65B9\u5206\u5272"
@@ -822,6 +822,9 @@ data:
       path: string/aho-corasick.hpp
       title: string/aho-corasick.hpp
     - icon: ':heavy_check_mark:'
+      path: string/manacher.hpp
+      title: Manacher's algorithm
+    - icon: ':heavy_check_mark:'
       path: string/rolling-hash-2d.hpp
       title: "\u4E8C\u6B21\u5143Rolling Hash"
     - icon: ':heavy_check_mark:'
@@ -830,9 +833,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/run-length-encoding.hpp
       title: "Run Length Encoding(\u9023\u9577\u5727\u7E2E)"
-    - icon: ':warning:'
-      path: string/subsequence-dp.hpp
-      title: "\u90E8\u5206\u5217DP"
+    - icon: ':heavy_check_mark:'
+      path: string/string-search.hpp
+      title: string/string-search.hpp
     - icon: ':heavy_check_mark:'
       path: string/suffix-array.hpp
       title: string/suffix-array.hpp
@@ -1215,6 +1218,9 @@ data:
       path: verify/verify-unit-test/lazyseg-setval.test.cpp
       title: verify/verify-unit-test/lazyseg-setval.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/manacher.test.cpp
+      title: verify/verify-unit-test/manacher.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/math-fast.test.cpp
       title: verify/verify-unit-test/math-fast.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1287,8 +1293,14 @@ data:
       path: verify/verify-unit-test/simulated-annealing.test.cpp
       title: verify/verify-unit-test/simulated-annealing.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/sparse-table.test.cpp
+      title: verify/verify-unit-test/sparse-table.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/strassen.test.cpp
       title: verify/verify-unit-test/strassen.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/string-search.test.cpp
+      title: verify/verify-unit-test/string-search.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/sum-of-mf.test.cpp
       title: verify/verify-unit-test/sum-of-mf.test.cpp

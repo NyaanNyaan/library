@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: data-structure/sparse-table.hpp
-    title: data-structure/sparse-table.hpp
+    title: Sparse Table
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -26,20 +26,21 @@ data:
     - https://judge.yosupo.jp/submission/241
     - https://onlinejudge.u-aizu.ac.jp/status/users/NyaanNyaan/submissions/1/ALDS1_14_D/judge/3874273/C++14
   bundledCode: "#line 2 \"string/suffix-array.hpp\"\n\n\n\n#line 2 \"data-structure/sparse-table.hpp\"\
-    \n\ntemplate <typename T>\nstruct SparseTable {\n  vector<vector<T> > table;\n\
-    \  vector<int> log_table;\n\n  inline T f(T a, T b) { return min(a, b); }\n\n\
-    \  SparseTable(const vector<T> &v) {\n    int b = 0;\n    while ((1 << b) <= (int)v.size())\
-    \ ++b;\n    table.assign(b, vector<T>(1 << b));\n    for (int i = 0; i < (int)v.size();\
-    \ i++) {\n      table[0][i] = v[i];\n    }\n    for (int i = 1; i < b; i++) {\n\
-    \      for (int j = 0; j + (1 << i) <= (1 << b); j++) {\n        table[i][j] =\
-    \ f(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);\n      }\n    }\n    log_table.resize(v.size()\
-    \ + 1);\n    for (int i = 2; i < (int)log_table.size(); i++) {\n      log_table[i]\
-    \ = log_table[i >> 1] + 1;\n    }\n  }\n\n  // [l, r)\n  inline T query(int l,\
-    \ int r) {\n    int b = log_table[r - l];\n    return f(table[b][l], table[b][r\
-    \ - (1 << b)]);\n  }\n};\n#line 6 \"string/suffix-array.hpp\"\n\n// remind: SA\
-    \ including empty string\n// verify https://judge.yosupo.jp/submission/240\nstruct\
-    \ SuffixArray {\n  int _size;\n  vector<int> sa;\n  string &s;\n  SuffixArray(string\
-    \ &str) : _size(str.size()), s(str) {\n    s.push_back(0);\n    sa.resize(s.size());\n\
+    \n\n#include <cassert>\n#include <limits>\n#include <vector>\nusing namespace\
+    \ std;\n\ntemplate <typename T>\nstruct SparseTable {\n  inline static constexpr\
+    \ T INF = numeric_limits<T>::max() / 2;\n  int N;\n  vector<vector<T> > table;\n\
+    \  T f(T a, T b) { return min(a, b); }\n  SparseTable() {}\n  SparseTable(const\
+    \ vector<T> &v) : N(v.size()) {\n    int b = 1;\n    while ((1 << b) <= N) ++b;\n\
+    \    table.push_back(v);\n    for (int i = 1; i < b; i++) {\n      table.push_back(vector<T>(N,\
+    \ INF));\n      for (int j = 0; j + (1 << i) <= N; j++) {\n        table[i][j]\
+    \ = f(table[i - 1][j], table[i - 1][j + (1 << (i - 1))]);\n      }\n    }\n  }\n\
+    \  // [l, r)\n  T query(int l, int r) {\n    assert(0 <= l and l <= r and r <=\
+    \ N);\n    if (l == r) return INF;\n    int b = 31 - __builtin_clz(r - l);\n \
+    \   return f(table[b][l], table[b][r - (1 << b)]);\n  }\n};\n\n/**\n * @brief\
+    \ Sparse Table\n */\n#line 6 \"string/suffix-array.hpp\"\n\n// remind: SA including\
+    \ empty string\n// verify https://judge.yosupo.jp/submission/240\nstruct SuffixArray\
+    \ {\n  int _size;\n  vector<int> sa;\n  string &s;\n  SuffixArray(string &str)\
+    \ : _size(str.size()), s(str) {\n    s.push_back(0);\n    sa.resize(s.size());\n\
     \    iota(begin(sa), end(sa), 0);\n    sort(begin(sa), end(sa),\n         [&](int\
     \ a, int b) { return s[a] == s[b] ? a > b : s[a] < s[b]; });\n    vector<int>\
     \ classes(s.size()), c(s.begin(), s.end()), cnt(s.size());\n    for (int len =\
@@ -183,12 +184,12 @@ data:
   isVerificationFile: false
   path: string/suffix-array.hpp
   requiredBy: []
-  timestamp: '2020-12-05 07:59:51+09:00'
+  timestamp: '2023-01-31 00:28:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
-  - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+  - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+  - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
 documentation_of: string/suffix-array.hpp
 layout: document
 redirect_from:
