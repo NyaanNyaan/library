@@ -119,6 +119,7 @@
 "verify/verify-unit-test/simulated-annealing.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/sparse-table.test.cpp": "2023-01-31 00:28:06 +0900",
 "verify/verify-unit-test/strassen.test.cpp": "2022-08-22 19:46:43 +0900",
+"verify/verify-unit-test/string-search.test.cpp": "2023-01-31 01:13:24 +0900",
 "verify/verify-unit-test/sum-of-mf.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/template.test.cpp": "2022-08-22 19:46:43 +0900",
 "verify/verify-unit-test/tree-path.test.cpp": "2022-08-22 19:46:43 +0900",
