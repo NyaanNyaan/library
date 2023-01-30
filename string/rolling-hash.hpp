@@ -30,10 +30,17 @@ struct RollingHash {
     return pfma(hs[l], -pw[r - l], hs[r]);
   }
 
+  // T の hash を返す
   static Hash get_hash(const Str &T) {
     Hash ret = Hash::set(0);
     for (int i = 0; i < (int)T.size(); i++) ret = pfma(ret, basis, T[i]);
     return ret;
+  }
+
+  // a + b の hash を返す
+  // 引数 : a, b, b の長さ
+  static Hash unite(Hash a, Hash b, long long bsize) {
+    return pfma(a, basis.pow(bsize), b);
   }
 
   int find(Str &T, int lower = 0) const {
@@ -43,7 +50,7 @@ struct RollingHash {
     return -1;
   }
 
-  friend int LCP(const RollingHash &a, const RollingHash &b, int al, int bl) {
+  static int lcp(const RollingHash &a, const RollingHash &b, int al, int bl) {
     int ok = 0, ng = min(a.size() - al, b.size() - bl) + 1;
     while (ok + 1 < ng) {
       int med = (ok + ng) / 2;
@@ -52,15 +59,15 @@ struct RollingHash {
     return ok;
   }
 
-  friend int strcmp(const RollingHash &a, const RollingHash &b, int al, int bl,
+  static int strcmp(const RollingHash &a, const RollingHash &b, int al, int bl,
                     int ar = -1, int br = -1) {
     if (ar == -1) ar = a.size();
     if (br == -1) br = b.size();
-    int n = min<int>({LCP(a, b, al, bl), ar - al, br - bl});
-    return al + n == ar                      ? bl + n == br ? 0 : 1
-           : bl + n == br                    ? -1
-           : a.data[al + n] < b.data[bl + n] ? 1
-                                             : -1;
+    int n = min<int>({lcp(a, b, al, bl), ar - al, br - bl});
+    return al + n == ar                      ? bl + n == br ? 0 : -1
+           : bl + n == br                    ? 1
+           : a.data[al + n] < b.data[bl + n] ? -1
+                                             : 1;
   }
 
   int size() const { return s; }
