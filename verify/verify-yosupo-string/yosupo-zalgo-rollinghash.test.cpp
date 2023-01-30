@@ -8,8 +8,8 @@ using namespace Nyaan;
 void Nyaan::solve() {
   string s;
   in(s);
-  RollingHash<string,2> rori(s);
+  RollingHash<string, 2> rori(s);
   vi ans(sz(s));
-  rep(i,sz(s))ans[i]=LCP(rori,rori,0,i);
+  rep(i, sz(s)) ans[i] = decltype(rori)::lcp(rori, rori, 0, i);
   out(ans);
 }

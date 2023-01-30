@@ -74,6 +74,14 @@ struct Hash : array<u64, BASE_NUM> {
     return res;
   }
 
+  Hash pow(long long e) {
+    Hash a{*this}, res{Hash::set(1)};
+    for (; e; a *= a, e >>= 1) {
+      if (e & 1) res *= a;
+    }
+    return res;
+  }
+
   static Hash get_basis() {
     static auto rand_time =
         chrono::duration_cast<chrono::nanoseconds>(
