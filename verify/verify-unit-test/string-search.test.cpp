@@ -42,13 +42,12 @@ void test() {
 
     // strcmp
     {
-      int c1 = strcmp(s1.c_str(), s2.c_str());
       int c2 = s1 < s2 ? -1 : s1 == s2 ? 0 : 1;
       int c3 = ss.strcmp(p.fi, p.se, q.fi, q.se);
       int c4 = ss.strcmp(p, q);
       int c5 = rh.strcmp(rh, rh, p.fi, q.fi, p.se, q.se);
-      assert(c1 == c2 and c2 == c3 and c3 == c4);
-      if (p.se == N and q.se == N) assert(ss.strcmp(p.fi, q.fi) == c1);
+      assert(c2 == c3 and c3 == c4 and c4 == c5);
+      if (p.se == N and q.se == N) assert(ss.strcmp(p.fi, q.fi) == c2);
     }
   }
 }
