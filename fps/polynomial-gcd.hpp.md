@@ -208,7 +208,7 @@ $\gcd(a,b)$は通常のgcdと同様にユークリッドの互除法で求まる
 $$\left(
     \begin{array}{cc}
       0 & 1  \\
-     1 & \mathrm{quo}(a,b) 
+     1 & -\mathrm{quo}(a,b) 
     \end{array}
   \right)
   \left(
@@ -244,7 +244,7 @@ $$
 
 Half-GCD法とは次に示す性質を生かして、より少ない計算量で行列の列$M$のおよそ前半分を求めるアルゴリズムである。
   
-- $a = a_0 + a_1x^k, b=b_0+b_1x^k$とおく。($k < \deg(a))$この時、$(a1,b1)$にユークリッドの互除法を適用したときに得られる行列$L_1,L_2,\dots$は$M_1,M_2\ldots$の先頭部分と一致する。
+- $a = a_0 + a_1x^k, b=b_0+b_1x^k$とおく。($k \lt \deg(a))$この時、$(a1,b1)$にユークリッドの互除法を適用したときに得られる行列$L_1,L_2,\dots$と$M_1,M_2\ldots$は、先頭から順に一部が一致する。
 
 証明は参考文献を参照のこと。(~~ちゃんと理解していない...直感的な理解としては、多項式の除算のプロセスを考えると商が上位の次に依存しそう。~~)
 
@@ -254,7 +254,7 @@ Half-GCD法とは次に示す性質を生かして、より少ない計算量で
 
 [inv of polynomials(Library Checker)](https://judge.yosupo.jp/problem/inv_of_polynomials)は多項式GCDのverify用問題である。問題概要は次の通りである。
 
-- 多項式$f(x),g(x)$に対して$f(x)h(x) \equiv 1 \mod g(x)$を満たす$h(x)$を求めよ。(ただし$\deg (h(x)) < \deg g(x)$)
+- 多項式$f(x),g(x)$に対して$f(x)h(x) \equiv 1 \mod g(x)$を満たす$h(x)$を求めよ。(ただし$\deg (h(x)) \lt \deg g(x)$)
 
 この問題はいわゆる拡張ユークリッド法と同様のアルゴリズムで解くことが出来る。まず、$\gcd(f,g) \neq 1$のとき$fh \equiv 0 \not \equiv 1 \mod \gcd(f,g)$より$h$は解なしとなる。次に$\gcd(f,g) = 1$の時、題意を満たす$h$と$f,g$の関係式は、適当な多項式$s$を用いて次のように表される。
 

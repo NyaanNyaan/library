@@ -63,6 +63,6 @@ $e=t-t'$となる。$e$が分かったら、$z^{ {p_i}^{t'-1}}\equiv 1$を満た
 
 このままだとTonelli-Shanksのループ一回あたり最大$p_i-1$回の乗算が必要となるが、最後の$\mathrm{pow}(v^s,2^{e-e_i})$を掛ける所でBaby Step Giant Stepを利用することで、ループあたりの乗算回数を$\mathrm{O}(\sqrt{p_i})$回に落とすことが出来る。
 
-また、Tonelli-Shanksのループ回数は高々$\lfloor\log_{p_i}p\rfloor - 1$回となる。つまり、$t=e_i=1$の時($g$と$p-1$がともに$p_i$で1回ずつしか割り切れないとき)はループに入らないので、$p_i > \sqrt{p-1}$である素数に対しては高速に解が計算できるとわかる。よって、全体の計算量は$g=\gcd(k,p-1)$が$\mathrm{O}(\sqrt{p})$程度の重複度2の素因数を含む時が最大で、この時$\mathrm{O}(g^{\frac{1}{4}})=\mathrm{O}(\min (p,k)^{\frac{1}{4}})$となる。
+また、Tonelli-Shanksのループ回数は高々$\lfloor\log_{p_i}p\rfloor - 1$回となる。つまり、$t=e_i=1$の時($g$と$p-1$がともに$p_i$で1回ずつしか割り切れないとき)はループに入らないので、$p_i \gt \sqrt{p-1}$である素数に対しては高速に解が計算できるとわかる。よって、全体の計算量は$g=\gcd(k,p-1)$が$\mathrm{O}(\sqrt{p})$程度の重複度2の素因数を含む時が最大で、この時$\mathrm{O}(g^{\frac{1}{4}})=\mathrm{O}(\min (p,k)^{\frac{1}{4}})$となる。
 
 $g$の素因数分解も[Millar-rabinとPollardの$\rho$法](https://nyaannyaan.github.io/library/prime/fast-factorize.hpp)を利用すれば$\mathrm{O}(g^{\frac{1}{4}})$で計算できるので、全体の計算量は$\mathrm{O}(\min (p,k)^{\frac{1}{4}})$となる。

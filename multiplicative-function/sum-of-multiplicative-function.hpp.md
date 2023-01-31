@@ -178,9 +178,9 @@ $$S_c(N) = \sum_{p\leq N | p : \mathrm{prime}} p^c$$
 
 $$f(x,n) = f(x - 1, n) - f(x-1,\left\lfloor\frac{n}{x}\right\rfloor)x^c$$
 
-が成り立つ。ここで $n < x$ のとき $f(x,n) = f(x-1,n)$ 、$x \leq n < x^2$ のとき$ f(x,n) = f(x-1,n) - x^c$ となることを利用して $g(x,n) = f(x, n) + S_c(\min(x,n))$ とおくと、 $x$ が素数の時に
+が成り立つ。ここで $n \lt x$ のとき $f(x,n) = f(x-1,n)$ 、$x \leq n \lt x^2$ のとき$ f(x,n) = f(x-1,n) - x^c$ となることを利用して $g(x,n) = f(x, n) + S_c(\min(x,n))$ とおくと、 $x$ が素数の時に
 
-$$g(x,n) = \begin{cases} g(x-1,n) & \mathrm{if}\ n < x^2 \\ g(x-1,n) - \lbrace g(x-1,\lfloor\frac{n}{x}\rfloor) - S_c(x-1) - 1 \rbrace x^c& \mathrm{otherwise} \end{cases}$$
+$$g(x,n) = \begin{cases} g(x-1,n) & \mathrm{if}\ n \lt x^2 \\ g(x-1,n) - \lbrace g(x-1,\lfloor\frac{n}{x}\rfloor) - S_c(x-1) - 1 \rbrace x^c& \mathrm{otherwise} \end{cases}$$
 
 となる。 
 
@@ -193,7 +193,7 @@ $$
 S_c(N) &= h(\lfloor\sqrt{N}\rfloor,N)\\
 h(0,n) &= -1 + \sum_{0 \leq m \leq n}m^c
 \end{aligned}\\
-h(x,n) = \begin{cases} h(x-1,n) & \mathrm{if}\ x\ \mathrm{is}\ \mathrm{not}\  \mathrm{prime}\ \cup\ n < x^2 \\ h(x-1,n) - \lbrace h(x-1,\lfloor\frac{n}{x}\rfloor) - S_c(x-1) \rbrace x^c& \mathrm{otherwise} \end{cases}
+h(x,n) = \begin{cases} h(x-1,n) & \mathrm{if}\ x\ \mathrm{is}\ \mathrm{not}\  \mathrm{prime}\ \cup\ n \lt x^2 \\ h(x-1,n) - \lbrace h(x-1,\lfloor\frac{n}{x}\rfloor) - S_c(x-1) \rbrace x^c& \mathrm{otherwise} \end{cases}
 $$
 
 を得る。(なお、 $S_c(x-1)=h(x-1,x-1)$ である。)以上より、素数カウントと同様のアルゴリズムで DP を行うことで $\mathrm{O}\left(\frac{N^{\frac{3}{4}}}{\log N}\right)$ で前計算ができる。

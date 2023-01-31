@@ -173,8 +173,8 @@ $$xm = B + r\ (0 \leq r \lt M)$$
 
 が成り立つので、
 
-$$ 0 > \frac{n}{m} - \frac{nx}{B} = n\left(\frac{1}{m} - \frac{x}{B} \right)$$
+$$ 0 \gt \frac{n}{m} - \frac{nx}{B} = n\left(\frac{1}{m} - \frac{x}{B} \right)$$
 
-$$=-\frac{n}{B}\cdot \frac{r}{M} > -1$$
+$$=-\frac{n}{B}\cdot \frac{r}{M} \gt -1$$
 
 であることから従う。(実用上は$m = 1$の時に$x$がオーバーフローすることに注意する必要がある。)
