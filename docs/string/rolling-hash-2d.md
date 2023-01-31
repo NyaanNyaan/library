@@ -4,7 +4,7 @@
 
 #### 使い方
 
-- `RollingHash<Str>(S)`: コンストラクタ。Sを対象としたRollingHashを構築する。$\mathrm{O}(\lvert S\lvert)$
-- `build(S)`: Sを対象としたRollingHashを構築する。$\mathrm{O}(\lvert S\lvert)$
+- `RollingHash<Str>(S)`: コンストラクタ。Sを対象としたRollingHashを構築する。$\mathrm{O}(\lvert S\rvert)$
+- `build(S)`: Sを対象としたRollingHashを構築する。$\mathrm{O}(\lvert S\rvert)$
 - `get(l, r)`: 区間[l, r)のハッシュを返す。$\mathrm{O}(1)$
-- `get_hash(T)`: Tのハッシュ値を返す。$\mathrm{O}(\lvert T\lvert)$
+- `get_hash(T)`: Tのハッシュ値を返す。$\mathrm{O}(\lvert T\rvert)$
