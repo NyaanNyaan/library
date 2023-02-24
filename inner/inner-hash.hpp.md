@@ -147,13 +147,13 @@ data:
   timestamp: '2023-01-31 00:28:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+  - verify/verify-unit-test/string-search.test.cpp
+  - verify/verify-unit-test/inner-hash.test.cpp
+  - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
-  - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
-  - verify/verify-unit-test/inner-hash.test.cpp
-  - verify/verify-unit-test/string-search.test.cpp
-  - verify/verify-yuki/yuki-1789.test.cpp
 documentation_of: inner/inner-hash.hpp
 layout: document
 redirect_from:

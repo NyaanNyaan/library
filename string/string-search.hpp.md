@@ -124,34 +124,10 @@ data:
     \  // [l, r)\n  T query(int l, int r) {\n    assert(0 <= l and l <= r and r <=\
     \ N);\n    if (l == r) return INF;\n    int b = 31 - __builtin_clz(r - l);\n \
     \   return f(table[b][l], table[b][r - (1 << b)]);\n  }\n};\n\n/**\n * @brief\
-    \ Sparse Table\n */\n#line 5 \"string/string-search.hpp\"\n\nstruct StringSearch\
-    \ {\n  const string& S;\n  int N;\n  vector<int> sa, la, invsa;\n  SparseTable<int>\
-    \ sparse;\n\n  StringSearch(const string& _s) : S(_s), N(S.size()) {\n    sa =\
-    \ atcoder::suffix_array(S);\n    la = atcoder::lcp_array(S, sa);\n    invsa.resize(N);\n\
-    \    for (int i = 0; i < N; i++) invsa[sa[i]] = i;\n    sparse = SparseTable<int>{la};\n\
-    \  }\n\n  // lcp(s[i, N), s[j, N))\n  int lcp(int i, int j) {\n    assert(0 <=\
-    \ min(i, j) and max(i, j) < N);\n    if (i == j) return N - i;\n    int x = min(invsa[i],\
-    \ invsa[j]);\n    int y = max(invsa[i], invsa[j]);\n    return sparse.query(x,\
-    \ y);\n  }\n  // lcp(s[a, b), s[c, d))\n  int lcp(int a, int b, int c, int d)\
-    \ {\n    assert(0 <= a and a <= b and b <= N);\n    assert(0 <= c and c <= d and\
-    \ d <= N);\n    int l = lcp(a, c);\n    return min({l, b - a, d - c});\n  }\n\
-    \  // lcp(s[a, b), s[c, d))\n  template <typename Int>\n  int lcp(pair<Int, Int>\
-    \ p, pair<Int, Int> q) {\n    return lcp(p.first, p.second, q.first, q.second);\n\
-    \  }\n\n  // s[i, N) > s[j, N) : 1\n  // s[i, N) = s[j, N) : 0\n  // s[i, N) <\
-    \ s[j, N) : -1\n  int strcmp(int i, int j) {\n    assert(0 <= min(i, j) and max(i,\
-    \ j) < N);\n    if (i == j) return 0;\n    return invsa[i] < invsa[j] ? -1 : 1;\n\
-    \  }\n\n  // s[a, b) > s[c, d) : 1\n  // s[a, b) = s[c, d) : 0\n  // s[a, b) <\
-    \ s[c, d) : -1\n  int strcmp(int a, int b, int c, int d) {\n    int l = lcp(a,\
-    \ b, c, d);\n    return a + l == b            ? (c + l == d ? 0 : -1)\n      \
-    \     : c + l == d          ? 1\n           : S[a + l] < S[c + l] ? -1\n     \
-    \                            : 1;\n  }\n  // s[a, b) > s[c, d) : 1\n  // s[a,\
-    \ b) = s[c, d) : 0\n  // s[a, b) < s[c, d) : -1\n  template <typename Int>\n \
-    \ int strcmp(pair<Int, Int> p, pair<Int, Int> q) {\n    return strcmp(p.first,\
-    \ p.second, q.first, q.second);\n  }\n};\n"
-  code: "#pragma once\n\n#include \"../atcoder/string.hpp\"\n#include \"../data-structure/sparse-table.hpp\"\
-    \n\nstruct StringSearch {\n  const string& S;\n  int N;\n  vector<int> sa, la,\
-    \ invsa;\n  SparseTable<int> sparse;\n\n  StringSearch(const string& _s) : S(_s),\
-    \ N(S.size()) {\n    sa = atcoder::suffix_array(S);\n    la = atcoder::lcp_array(S,\
+    \ Sparse Table\n */\n#line 5 \"string/string-search.hpp\"\n\ntemplate <typename\
+    \ Container>\nstruct StringSearch {\n  const Container& S;\n  int N;\n  vector<int>\
+    \ sa, la, invsa;\n  SparseTable<int> sparse;\n\n  StringSearch(const Container&\
+    \ _s) : S(_s), N(S.size()) {\n    sa = atcoder::suffix_array(S);\n    la = atcoder::lcp_array(S,\
     \ sa);\n    invsa.resize(N);\n    for (int i = 0; i < N; i++) invsa[sa[i]] = i;\n\
     \    sparse = SparseTable<int>{la};\n  }\n\n  // lcp(s[i, N), s[j, N))\n  int\
     \ lcp(int i, int j) {\n    assert(0 <= min(i, j) and max(i, j) < N);\n    if (i\
@@ -172,12 +148,37 @@ data:
     \  }\n  // s[a, b) > s[c, d) : 1\n  // s[a, b) = s[c, d) : 0\n  // s[a, b) < s[c,\
     \ d) : -1\n  template <typename Int>\n  int strcmp(pair<Int, Int> p, pair<Int,\
     \ Int> q) {\n    return strcmp(p.first, p.second, q.first, q.second);\n  }\n};\n"
+  code: "#pragma once\n\n#include \"../atcoder/string.hpp\"\n#include \"../data-structure/sparse-table.hpp\"\
+    \n\ntemplate <typename Container>\nstruct StringSearch {\n  const Container& S;\n\
+    \  int N;\n  vector<int> sa, la, invsa;\n  SparseTable<int> sparse;\n\n  StringSearch(const\
+    \ Container& _s) : S(_s), N(S.size()) {\n    sa = atcoder::suffix_array(S);\n\
+    \    la = atcoder::lcp_array(S, sa);\n    invsa.resize(N);\n    for (int i = 0;\
+    \ i < N; i++) invsa[sa[i]] = i;\n    sparse = SparseTable<int>{la};\n  }\n\n \
+    \ // lcp(s[i, N), s[j, N))\n  int lcp(int i, int j) {\n    assert(0 <= min(i,\
+    \ j) and max(i, j) < N);\n    if (i == j) return N - i;\n    int x = min(invsa[i],\
+    \ invsa[j]);\n    int y = max(invsa[i], invsa[j]);\n    return sparse.query(x,\
+    \ y);\n  }\n  // lcp(s[a, b), s[c, d))\n  int lcp(int a, int b, int c, int d)\
+    \ {\n    assert(0 <= a and a <= b and b <= N);\n    assert(0 <= c and c <= d and\
+    \ d <= N);\n    int l = lcp(a, c);\n    return min({l, b - a, d - c});\n  }\n\
+    \  // lcp(s[a, b), s[c, d))\n  template <typename Int>\n  int lcp(pair<Int, Int>\
+    \ p, pair<Int, Int> q) {\n    return lcp(p.first, p.second, q.first, q.second);\n\
+    \  }\n\n  // s[i, N) > s[j, N) : 1\n  // s[i, N) = s[j, N) : 0\n  // s[i, N) <\
+    \ s[j, N) : -1\n  int strcmp(int i, int j) {\n    assert(0 <= min(i, j) and max(i,\
+    \ j) < N);\n    if (i == j) return 0;\n    return invsa[i] < invsa[j] ? -1 : 1;\n\
+    \  }\n\n  // s[a, b) > s[c, d) : 1\n  // s[a, b) = s[c, d) : 0\n  // s[a, b) <\
+    \ s[c, d) : -1\n  int strcmp(int a, int b, int c, int d) {\n    int l = lcp(a,\
+    \ b, c, d);\n    return a + l == b            ? (c + l == d ? 0 : -1)\n      \
+    \     : c + l == d          ? 1\n           : S[a + l] < S[c + l] ? -1\n     \
+    \                            : 1;\n  }\n  // s[a, b) > s[c, d) : 1\n  // s[a,\
+    \ b) = s[c, d) : 0\n  // s[a, b) < s[c, d) : -1\n  template <typename Int>\n \
+    \ int strcmp(pair<Int, Int> p, pair<Int, Int> q) {\n    return strcmp(p.first,\
+    \ p.second, q.first, q.second);\n  }\n};\n"
   dependsOn:
   - data-structure/sparse-table.hpp
   isVerificationFile: false
   path: string/string-search.hpp
   requiredBy: []
-  timestamp: '2023-01-31 00:28:06+09:00'
+  timestamp: '2023-02-24 23:55:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/string-search.test.cpp

@@ -98,8 +98,8 @@ data:
   timestamp: '2023-01-31 00:28:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-1613.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
+  - verify/verify-aoj-other/aoj-1613.test.cpp
 documentation_of: tree/tree-hash.hpp
 layout: document
 redirect_from:

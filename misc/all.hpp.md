@@ -114,8 +114,8 @@ data:
   verifiedWith:
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
 documentation_of: misc/all.hpp
 layout: document
 redirect_from:

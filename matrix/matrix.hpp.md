@@ -140,21 +140,21 @@ data:
   isVerificationFile: false
   path: matrix/matrix.hpp
   requiredBy:
-  - fps/find-p-recursive.hpp
-  - matrix/polynomial-matrix-prefix-prod.hpp
   - matrix/polynomial-matrix-determinant.hpp
+  - matrix/polynomial-matrix-prefix-prod.hpp
   - matrix/matrix-tree.hpp
+  - fps/find-p-recursive.hpp
   timestamp: '2021-03-26 14:37:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-unit-test/debug.test.cpp
-  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document
 redirect_from:

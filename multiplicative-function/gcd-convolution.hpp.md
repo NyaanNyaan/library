@@ -80,8 +80,8 @@ data:
   timestamp: '2020-12-05 08:35:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
 documentation_of: multiplicative-function/gcd-convolution.hpp
 layout: document
 redirect_from:

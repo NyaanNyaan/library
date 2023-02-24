@@ -159,10 +159,10 @@ data:
   timestamp: '2022-08-22 19:46:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant.test.cpp
-  - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
 documentation_of: modulo/gauss-elimination-fast.hpp
 layout: document
 redirect_from:

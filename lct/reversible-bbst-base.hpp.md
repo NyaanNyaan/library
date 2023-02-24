@@ -70,9 +70,9 @@ data:
   isVerificationFile: false
   path: lct/reversible-bbst-base.hpp
   requiredBy:
-  - lct/link-cut-tree.hpp
   - lct/link-cut-tree-subtree.hpp
   - lct/splay-reversible.hpp
+  - lct/link-cut-tree.hpp
   timestamp: '2020-12-17 20:54:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

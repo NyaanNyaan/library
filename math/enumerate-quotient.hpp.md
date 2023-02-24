@@ -38,8 +38,8 @@ data:
   timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
   - verify/verify-unit-test/enumerate-quotient.test.cpp
+  - verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
 documentation_of: math/enumerate-quotient.hpp
 layout: document
 redirect_from:

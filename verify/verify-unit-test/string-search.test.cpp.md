@@ -290,13 +290,13 @@ data:
     \  T query(int l, int r) {\n    assert(0 <= l and l <= r and r <= N);\n    if\
     \ (l == r) return INF;\n    int b = 31 - __builtin_clz(r - l);\n    return f(table[b][l],\
     \ table[b][r - (1 << b)]);\n  }\n};\n\n/**\n * @brief Sparse Table\n */\n#line\
-    \ 5 \"string/string-search.hpp\"\n\nstruct StringSearch {\n  const string& S;\n\
-    \  int N;\n  vector<int> sa, la, invsa;\n  SparseTable<int> sparse;\n\n  StringSearch(const\
-    \ string& _s) : S(_s), N(S.size()) {\n    sa = atcoder::suffix_array(S);\n   \
-    \ la = atcoder::lcp_array(S, sa);\n    invsa.resize(N);\n    for (int i = 0; i\
-    \ < N; i++) invsa[sa[i]] = i;\n    sparse = SparseTable<int>{la};\n  }\n\n  //\
-    \ lcp(s[i, N), s[j, N))\n  int lcp(int i, int j) {\n    assert(0 <= min(i, j)\
-    \ and max(i, j) < N);\n    if (i == j) return N - i;\n    int x = min(invsa[i],\
+    \ 5 \"string/string-search.hpp\"\n\ntemplate <typename Container>\nstruct StringSearch\
+    \ {\n  const Container& S;\n  int N;\n  vector<int> sa, la, invsa;\n  SparseTable<int>\
+    \ sparse;\n\n  StringSearch(const Container& _s) : S(_s), N(S.size()) {\n    sa\
+    \ = atcoder::suffix_array(S);\n    la = atcoder::lcp_array(S, sa);\n    invsa.resize(N);\n\
+    \    for (int i = 0; i < N; i++) invsa[sa[i]] = i;\n    sparse = SparseTable<int>{la};\n\
+    \  }\n\n  // lcp(s[i, N), s[j, N))\n  int lcp(int i, int j) {\n    assert(0 <=\
+    \ min(i, j) and max(i, j) < N);\n    if (i == j) return N - i;\n    int x = min(invsa[i],\
     \ invsa[j]);\n    int y = max(invsa[i], invsa[j]);\n    return sparse.query(x,\
     \ y);\n  }\n  // lcp(s[a, b), s[c, d))\n  int lcp(int a, int b, int c, int d)\
     \ {\n    assert(0 <= a and a <= b and b <= N);\n    assert(0 <= c and c <= d and\
@@ -457,7 +457,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/string-search.test.cpp
   requiredBy: []
-  timestamp: '2023-01-31 01:13:24+09:00'
+  timestamp: '2023-02-24 23:55:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/string-search.test.cpp
