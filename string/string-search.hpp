@@ -3,13 +3,14 @@
 #include "../atcoder/string.hpp"
 #include "../data-structure/sparse-table.hpp"
 
+template <typename Container>
 struct StringSearch {
-  const string& S;
+  const Container& S;
   int N;
   vector<int> sa, la, invsa;
   SparseTable<int> sparse;
 
-  StringSearch(const string& _s) : S(_s), N(S.size()) {
+  StringSearch(const Container& _s) : S(_s), N(S.size()) {
     sa = atcoder::suffix_array(S);
     la = atcoder::lcp_array(S, sa);
     invsa.resize(N);
