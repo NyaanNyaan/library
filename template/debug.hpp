@@ -20,6 +20,23 @@ void dump(const string& t) { cerr << t; }
 
 void dump(const bool& t) { cerr << (t ? "true" : "false"); }
 
+void dump(__int128_t t) {
+  if (t == 0) cerr << 0;
+  if (t < 0) cerr << '-', t = -t;
+  string S;
+  while (t) S.push_back('0' + t % 10), t /= 10;
+  reverse(begin(S), end(S));
+  cerr << S;
+}
+
+void dump(__uint128_t t) {
+  if (t == 0) cerr << 0;
+  string S;
+  while (t) S.push_back('0' + t % 10), t /= 10;
+  reverse(begin(S), end(S));
+  cerr << S;
+}
+
 template <typename U,
           enable_if_t<!is_specialize<U>::value, nullptr_t> = nullptr>
 void dump(const U& t) {
@@ -97,4 +114,14 @@ void trace(Head&& head, Tail&&... tail) {
   } while (0)
 #else
 #define trc(...) (void(0))
+#endif
+
+#ifdef NyaanLocal
+#define trc2(...)                           \
+  do {                                      \
+    cerr << "## " << #__VA_ARGS__ << " = "; \
+    DebugImpl::trace(__VA_ARGS__);          \
+  } while (0)
+#else
+#define trc2(...) (void(0))
 #endif

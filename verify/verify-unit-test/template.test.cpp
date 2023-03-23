@@ -2,6 +2,8 @@
 //
 #include "../../template/template.hpp"
 //
+#include "../../modint/montgomery-modint.hpp"
+//
 #include "../../misc/rng.hpp"
 //
 using namespace Nyaan;
@@ -102,6 +104,8 @@ void verify_util() {
     assert(x == pl(3, 2));
     x *= y;
     assert(x == pl(6, 6));
+    x *= -3;
+    assert(x == pl(-18, -18));
 
     // mkp
     auto p0 = mkp(1, 1);
@@ -110,6 +114,27 @@ void verify_util() {
     static_assert(is_same<decltype(p1), pair<long long, double>>::value);
     assert(p0.first == 1 && p0.second == 1);
     assert(p1.first == 1LL && p1.second == 2.0);
+  }
+
+  // P, modint
+  {
+    using mint = LazyMontgomeryModInt<998244353>;
+    using pm = P<mint, mint>;
+    pm x(3, 2);
+    pm y(2, 3);
+    assert(x + y == pm(5, 5));
+    assert(x - y == pm(1, -1));
+    assert(x * y == pm(6, 6));
+    x += y;
+    assert(x == pm(5, 5));
+    x -= y;
+    assert(x == pm(3, 2));
+    x *= y;
+    assert(x == pm(6, 6));
+    x *= -3;
+    assert(x == pm(-18, -18));
+    x *= mint{-3}.inverse();
+    assert(x == pm(6, 6));
   }
 
   // amin, amax
@@ -196,7 +221,7 @@ void verify_util() {
         assert(st.find(i) == st.end() && "mkinv");
       } else {
         assert(0 <= inv[i] && inv[i] < sz(v) && "mkinv");
-        assert(v[inv[i]] == i);
+        assert(v[inv[i]] == i && "mkinv");
       }
     }
   }
@@ -221,6 +246,49 @@ void verify_util() {
         assert(0 <= inv[i] && inv[i] < sz(v) && "mkinv");
         assert(v[inv[i]] == i);
       }
+    }
+  }
+
+  // mkiota
+  {
+    for (int n = 0; n < 100; n++) {
+      auto v = mkiota(n);
+      rep(i, n) assert(v[i] == i && "mkiota");
+    }
+  }
+
+  // mkrev
+  {
+    for (int n = 0; n < 100; n++) {
+      vi v(n);
+      each(x, v) x = randint(0, TEN(9));
+      vi w{v};
+      reverse(all(w));
+      assert(mkrev(v) == w && "mkrev");
+    }
+
+    for (int n = 0; n < 100; n++) {
+      string s;
+      rep(t, n) s.push_back(rng() % 26 + 'a');
+      string t{s};
+      reverse(all(t));
+      assert(mkrev(s) == t && "mkrev");
+    }
+  }
+
+  // nxp
+  {
+    for (int n = 0; n <= 6; n++) {
+      vvi v, w;
+      vi o = mkiota(n);
+      do {
+        v.push_back(o);
+      } while (nxp(o));
+      o = mkiota(n);
+      do {
+        w.push_back(o);
+      } while (next_permutation(all(o)));
+      assert(v == w && "nxp");
     }
   }
 }

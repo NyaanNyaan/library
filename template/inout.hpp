@@ -23,26 +23,63 @@ istream &operator>>(istream &is, vector<T> &v) {
   return is;
 }
 
+istream &operator>>(istream &is, __int128_t &x) {
+  string S;
+  is >> S;
+  x = 0;
+  int flag = 0;
+  for (auto &c : S) {
+    if (c == '-') {
+      flag = true;
+      continue;
+    }
+    x *= 10;
+    x += c - '0';
+  }
+  if (flag) x = -x;
+  return is;
+}
+
+istream &operator>>(istream &is, __uint128_t &x) {
+  string S;
+  is >> S;
+  x = 0;
+  for (auto &c : S) {
+    x *= 10;
+    x += c - '0';
+  }
+  return is;
+}
+
+ostream &operator<<(ostream &os, __int128_t x) {
+  if (x == 0) return os << 0;
+  if (x < 0) os << '-', x = -x;
+  string S;
+  while (x) S.push_back('0' + x % 10), x /= 10;
+  reverse(begin(S), end(S));
+  return os << S;
+}
+ostream &operator<<(ostream &os, __uint128_t x) {
+  if (x == 0) return os << 0;
+  string S;
+  while (x) S.push_back('0' + x % 10), x /= 10;
+  reverse(begin(S), end(S));
+  return os << S;
+}
+
 void in() {}
 template <typename T, class... U>
-void in(T &t, U &... u) {
+void in(T &t, U &...u) {
   cin >> t;
   in(u...);
 }
 
 void out() { cout << "\n"; }
 template <typename T, class... U, char sep = ' '>
-void out(const T &t, const U &... u) {
+void out(const T &t, const U &...u) {
   cout << t;
   if (sizeof...(u)) cout << sep;
   out(u...);
-}
-
-void outr() {}
-template <typename T, class... U, char sep = ' '>
-void outr(const T &t, const U &... u) {
-  cout << t;
-  outr(u...);
 }
 
 struct IoSetupNya {
