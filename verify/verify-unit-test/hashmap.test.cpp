@@ -42,7 +42,7 @@ void same_map(HM& hm, M& m, int mx) {
   // ensure empty space in hash table
   {
     uint32_t s = 0;
-    for (uint32_t i = 0; i < hm.cap; ++i) s += hm.flag[i];
+    for (uint32_t i = 0; i < hm.cap; ++i) s += hm.occupied_flag[i];
     assert(s != hm.cap && "hash table is full!");
   }
 
