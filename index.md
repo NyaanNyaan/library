@@ -846,6 +846,9 @@ data:
       path: string/trie.hpp
       title: string/trie.hpp
     - icon: ':heavy_check_mark:'
+      path: string/wildcard-pattern-matching.hpp
+      title: Wildcard Pattern Matching
+    - icon: ':heavy_check_mark:'
       path: string/z-algorithm.hpp
       title: Z algorithm
   - name: template
@@ -1944,6 +1947,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-2012.test.cpp
       title: verify/verify-yuki/yuki-2012.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-2231.test.cpp
+      title: verify/verify-yuki/yuki-2231.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-helloworld.test.cpp
       title: verify/verify-yuki/yuki-helloworld.test.cpp

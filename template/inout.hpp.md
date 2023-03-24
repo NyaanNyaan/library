@@ -985,6 +985,9 @@ data:
     path: verify/verify-yuki/yuki-2012.test.cpp
     title: verify/verify-yuki/yuki-2012.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2231.test.cpp
+    title: verify/verify-yuki/yuki-2231.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-helloworld.test.cpp
     title: verify/verify-yuki/yuki-helloworld.test.cpp
   _isVerificationFailed: false
@@ -1155,6 +1158,7 @@ data:
   - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-2231.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-yuki/yuki-1340-semiring.test.cpp

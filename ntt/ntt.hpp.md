@@ -30,6 +30,9 @@ data:
     path: ntt/rader-ntt.hpp
     title: Rader's FFT Algorithm
   - icon: ':heavy_check_mark:'
+    path: string/wildcard-pattern-matching.hpp
+    title: Wildcard Pattern Matching
+  - icon: ':heavy_check_mark:'
     path: tree/frequency-table-of-tree-distance.hpp
     title: "\u9802\u70B9\u9593\u306E\u8DDD\u96E2\u306E\u5EA6\u6570\u5206\u5E03"
   _extendedVerifiedWith:
@@ -222,6 +225,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2231.test.cpp
+    title: verify/verify-yuki/yuki-2231.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -389,6 +395,7 @@ data:
   isVerificationFile: false
   path: ntt/ntt.hpp
   requiredBy:
+  - string/wildcard-pattern-matching.hpp
   - tree/frequency-table-of-tree-distance.hpp
   - ntt/arbitrary-ntt.hpp
   - ntt/cooley-tukey-ntt.hpp
@@ -439,6 +446,7 @@ data:
   - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-2231.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp

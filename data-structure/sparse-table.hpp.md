@@ -27,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
     title: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2231.test.cpp
+    title: verify/verify-yuki/yuki-2231.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -69,6 +72,7 @@ data:
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
+  - verify/verify-yuki/yuki-2231.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
   - verify/verify-unit-test/sparse-table.test.cpp
   - verify/verify-unit-test/string-search.test.cpp

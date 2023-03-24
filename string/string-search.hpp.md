@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/string-search.test.cpp
     title: verify/verify-unit-test/string-search.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2231.test.cpp
+    title: verify/verify-yuki/yuki-2231.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -181,6 +184,7 @@ data:
   timestamp: '2023-02-24 23:55:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-2231.test.cpp
   - verify/verify-unit-test/string-search.test.cpp
 documentation_of: string/string-search.hpp
 layout: document
