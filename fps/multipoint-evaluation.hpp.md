@@ -190,16 +190,16 @@ data:
   isVerificationFile: false
   path: fps/multipoint-evaluation.hpp
   requiredBy:
-  - matrix/polynomial-matrix-determinant.hpp
   - matrix/matrix-tree.hpp
+  - matrix/polynomial-matrix-determinant.hpp
   - fps/polynomial-interpolation.hpp
   timestamp: '2022-08-22 22:01:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/multieval.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-unit-test/multieval.test.cpp
 documentation_of: fps/multipoint-evaluation.hpp
 layout: document
 redirect_from:

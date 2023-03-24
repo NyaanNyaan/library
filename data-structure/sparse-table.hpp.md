@@ -61,17 +61,17 @@ data:
   isVerificationFile: false
   path: data-structure/sparse-table.hpp
   requiredBy:
-  - string/suffix-array.hpp
   - string/string-search.hpp
+  - string/suffix-array.hpp
   timestamp: '2023-01-31 00:28:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/string-search.test.cpp
-  - verify/verify-unit-test/sparse-table.test.cpp
-  - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
+  - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-string/yosupo-suffix-array.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+  - verify/verify-unit-test/sparse-table.test.cpp
+  - verify/verify-unit-test/string-search.test.cpp
 documentation_of: data-structure/sparse-table.hpp
 layout: document
 redirect_from:

@@ -63,8 +63,8 @@ data:
   timestamp: '2021-12-20 21:46:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
+  - verify/verify-unit-test/sum-of-mf.test.cpp
 documentation_of: multiplicative-function/sum-of-totient.hpp
 layout: document
 redirect_from:

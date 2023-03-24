@@ -97,8 +97,8 @@ data:
   timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a-radix-heap.test.cpp
+  - verify/verify-unit-test/dijkstra.test.cpp
 documentation_of: shortest-path/dijkstra-radix-heap.hpp
 layout: document
 redirect_from:
