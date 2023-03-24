@@ -5,7 +5,9 @@
 #include <functional>
 #include <iomanip>
 #include <iostream>
+#include <list>
 #include <map>
+#include <new>
 #include <numeric>
 #include <queue>
 #include <random>

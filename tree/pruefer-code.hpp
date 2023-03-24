@@ -10,16 +10,20 @@ vector<vector<int>> pruefer_code(const vector<int>& code) {
   vector<int> deg(n, 1);
   int e = 0;
   for (auto& x : code) deg[x]++;
+  set<int> ps;
+  for (int j = 0; j < n; j++) {
+    if (deg[j] == 1) ps.insert(j);
+  }
   for (auto& i : code) {
-    for (int j = 0; j < n; j++) {
-      if (deg[j] == 1) {
-        g[i].push_back(j);
-        g[j].push_back(i);
-        deg[i]--, deg[j]--;
-        e++;
-        break;
-      }
-    }
+    if (ps.empty()) break;
+    int j = *begin(ps);
+    ps.erase(j);
+    g[i].push_back(j);
+    g[j].push_back(i);
+    if (deg[i] == 1) ps.erase(i);
+    deg[i]--, deg[j]--;
+    if (deg[i] == 1) ps.insert(i);
+    e++;
   }
   int u = -1, v = -1;
   for (int i = 0; i < n; i++) {

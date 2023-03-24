@@ -82,6 +82,7 @@ struct Binomial {
     return fac(n) * finv(n - r);
   }
 
+  // [x^r] 1 / (1-x)^n
   T H(int n, int r) {
     if (n < 0 || r < 0) return T(0);
     return r == 0 ? 1 : C(n + r - 1, r);

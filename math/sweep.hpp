@@ -11,18 +11,6 @@ struct Sweep {
     for (auto& x : v) add(x, num++);
   }
 
-  void apply(P& p, const P& o) {
-    p.first ^= o.first;
-    for (auto& x : o.second) apply(p.second, x);
-  }
-  void apply(unordered_set<int>& s, int x) {
-    if (s.count(x)) {
-      s.erase(x);
-    } else {
-      s.insert(x);
-    }
-  }
-
   void add(T x, int id) {
     P v{x, {id}};
     for (P& b : basis) {
@@ -41,6 +29,19 @@ struct Sweep {
     for (auto& n : v.second) res.push_back(n);
     sort(begin(res), end(res));
     return {true, res};
+  }
+
+ private:
+  void apply(P& p, const P& o) {
+    p.first ^= o.first;
+    for (auto& x : o.second) apply(p.second, x);
+  }
+  void apply(unordered_set<int>& s, int x) {
+    if (s.count(x)) {
+      s.erase(x);
+    } else {
+      s.insert(x);
+    }
   }
 };
 

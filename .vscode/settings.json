@@ -74,7 +74,8 @@
     "cassert": "cpp",
     "input*": "txt",
     "output*": "txt",
-    "queue": "cpp"
+    "queue": "cpp",
+    "climits": "cpp"
   },
   "C_Cpp.suggestSnippets": false,
   "python.linting.enabled": true,

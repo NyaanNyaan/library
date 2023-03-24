@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <typename T,typename ptr_t = int>
 struct VectorPool {
   vector<T> pool;
