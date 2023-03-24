@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cstdint>
+using namespace std;
+
 namespace HashMapImpl {
 using u32 = uint32_t;
 using u64 = uint64_t;
@@ -36,7 +39,7 @@ struct itrB
     do {
       i++;
       if (i == p->cap) break;
-      if (p->flag[i] == true && p->dflag[i] == false) break;
+      if (p->occupied_flag[i] && !p->deleted_flag[i]) break;
     } while (true);
     return (*this);
   }
@@ -48,7 +51,7 @@ struct itrB
   itrB& operator--() {
     do {
       i--;
-      if (p->flag[i] == true && p->dflag[i] == false) break;
+      if (p->occupied_flag[i] && !p->deleted_flag[i]) break;
       assert(i != 0 && "itr::operator--()");
     } while (true);
     return (*this);
@@ -121,13 +124,13 @@ struct HashMapBase {
 
   template <typename D = Data,
             enable_if_t<is_same<D, Key>::value, nullptr_t> = nullptr>
-  inline Key dtok(const D& dat) const {
+  inline Key data_to_key(const D& dat) const {
     return dat;
   }
   template <
       typename D = Data,
       enable_if_t<is_same<decltype(D::first), Key>::value, nullptr_t> = nullptr>
-  inline Key dtok(const D& dat) const {
+  inline Key data_to_key(const D& dat) const {
     return dat.first;
   }
 
@@ -136,7 +139,7 @@ struct HashMapBase {
     vector<bool> nf(ncap);
     shift = 64 - __lg(ncap);
     for (u32 i = 0; i < cap; i++) {
-      if (flag[i] == true && dflag[i] == false) {
+      if (occupied_flag[i] && !deleted_flag[i]) {
         u32 h = hash(data[i]);
         while (nf[h]) h = (h + 1) & (ncap - 1);
         ndata[h] = move(data[i]);
@@ -144,10 +147,11 @@ struct HashMapBase {
       }
     }
     data.swap(ndata);
-    flag.swap(nf);
+    occupied_flag.swap(nf);
     cap = ncap;
-    dflag.resize(cap);
-    fill(std::begin(dflag), std::end(dflag), false);
+    occupied = s;
+    deleted_flag.resize(cap);
+    fill(std::begin(deleted_flag), std::end(deleted_flag), false);
   }
 
   inline bool extend_rate(u32 x) const { return x * 2 >= cap; }
@@ -161,9 +165,9 @@ struct HashMapBase {
   inline void shrink() { reallocate(cap >> 1); }
 
  public:
-  u32 cap, s;
+  u32 cap, s, occupied;
   vector<Data> data;
-  vector<bool> flag, dflag;
+  vector<bool> occupied_flag, deleted_flag;
   u32 shift;
   static u64 r;
   static constexpr uint32_t HASHMAP_DEFAULT_SIZE = 4;
@@ -171,15 +175,16 @@ struct HashMapBase {
   explicit HashMapBase()
       : cap(HASHMAP_DEFAULT_SIZE),
         s(0),
+        occupied(0),
         data(cap),
-        flag(cap),
-        dflag(cap),
+        occupied_flag(cap),
+        deleted_flag(cap),
         shift(64 - __lg(cap)) {}
 
   itr begin() const {
     u32 h = 0;
     while (h != cap) {
-      if (flag[h] == true && dflag[h] == false) break;
+      if (occupied_flag[h] && !deleted_flag[h]) break;
       h++;
     }
     return itr(h, this);
@@ -192,9 +197,9 @@ struct HashMapBase {
   itr find(const Key& key) const {
     u32 h = inner_hash(key);
     while (true) {
-      if (flag[h] == false) return this->end();
-      if (dtok(data[h]) == key) {
-        if (dflag[h] == true) return this->end();
+      if (occupied_flag[h] == false) return this->end();
+      if (data_to_key(data[h]) == key) {
+        if (deleted_flag[h] == true) return this->end();
         return itr(h, this);
       }
       h = (h + 1) & (cap - 1);
@@ -206,21 +211,21 @@ struct HashMapBase {
   itr insert(const Data& d) {
     u32 h = hash(d);
     while (true) {
-      if (flag[h] == false) {
-        if (extend_rate(s + 1)) {
+      if (occupied_flag[h] == false) {
+        if (extend_rate(occupied + 1)) {
           extend();
           h = hash(d);
           continue;
         }
         data[h] = d;
-        flag[h] = true;
-        ++s;
+        occupied_flag[h] = true;
+        ++occupied, ++s;
         return itr(h, this);
       }
-      if (dtok(data[h]) == dtok(d)) {
-        if (dflag[h] == true) {
+      if (data_to_key(data[h]) == data_to_key(d)) {
+        if (deleted_flag[h] == true) {
           data[h] = d;
-          dflag[h] = false;
+          deleted_flag[h] = false;
           ++s;
         }
         return itr(h, this);
@@ -234,31 +239,34 @@ struct HashMapBase {
   itr erase(itr it, bool get_next = true) {
     if (it == this->end()) return this->end();
     s--;
+    if (!get_next) {
+      this->deleted_flag[it.i] = true;
+      if (shrink_rate(s)) shrink();
+      return this->end();
+    }
+    itr nxt = it;
+    nxt++;
+    this->deleted_flag[it.i] = true;
     if (shrink_rate(s)) {
-      Data d = data[it.i];
+      Data d = data[nxt.i];
       shrink();
-      it = find(dtok(d));
+      it = find(data_to_key(d));
     }
-    int ni = (it.i + 1) & (cap - 1);
-    if (this->flag[ni]) {
-      this->dflag[it.i] = true;
-    } else {
-      this->flag[it.i] = false;
-    }
-    if (get_next) ++it;
-    return it;
+    return nxt;
   }
 
   itr erase(const Key& key) { return erase(find(key)); }
+
+  int count(const Key& key) { return find(key) == end() ? 0 : 1; }
 
   bool empty() const { return s == 0; }
 
   int size() const { return s; }
 
   void clear() {
-    fill(std::begin(flag), std::end(flag), false);
-    fill(std::begin(dflag), std::end(dflag), false);
-    s = 0;
+    fill(std::begin(occupied_flag), std::end(occupied_flag), false);
+    fill(std::begin(deleted_flag), std::end(deleted_flag), false);
+    s = occupied = 0;
   }
 
   void reserve(int n) {

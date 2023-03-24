@@ -11,20 +11,24 @@ struct HashMap : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {
   Val& operator[](const Key& k) {
     typename base::u32 h = base::inner_hash(k);
     while (true) {
-      if (base::flag[h] == false) {
-        if (base::extend_rate(base::s + 1)) {
+      if (base::occupied_flag[h] == false) {
+        if (base::extend_rate(base::occupied + 1)) {
           base::extend();
           h = base::hash(k);
           continue;
         }
         base::data[h].first = k;
         base::data[h].second = Val();
-        base::flag[h] = true;
-        ++base::s;
+        base::occupied_flag[h] = true;
+        ++base::occupied, ++base::s;
         return base::data[h].second;
       }
       if (base::data[h].first == k) {
-        if (base::dflag[h] == true) base::data[h].second = Val();
+        if (base::deleted_flag[h] == true) {
+          base::data[h].second = Val();
+          base::deleted_flag[h] = false;
+          ++base::s;
+        }
         return base::data[h].second;
       }
       h = (h + 1) & (base::cap - 1);
@@ -36,7 +40,7 @@ struct HashMap : HashMapImpl::HashMapBase<Key, pair<Key, Val>> {
   }
 };
 
-/* 
+/*
  * @brief ハッシュマップ(連想配列)
  * @docs docs/hashmap/hashmap.md
-**/
+ **/

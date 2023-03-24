@@ -1,14 +1,11 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/aplusb"
 
 #include "../../template/template.hpp"
-
-
+//
 #include "../../hashmap/hashset.hpp"
+
 uint64_t rng() {
-  static uint64_t x_ =
-      chrono::duration_cast<chrono::nanoseconds>(
-          chrono::high_resolution_clock::now().time_since_epoch())
-          .count();
+  static uint64_t x_ = 10150724397891781847ULL;
   return x_ ^= (x_ << 7), x_ ^= (x_ >> 9);
 }
 // [l, r)
@@ -63,7 +60,7 @@ void same_set(HS& hs, set<Data_t>& us, int mx) {
   // ensure empty space in hash table
   {
     uint32_t s = 0;
-    for (uint32_t i = 0; i < hs.cap; ++i) s += hs.flag[i];
+    for (uint32_t i = 0; i < hs.cap; ++i) s += hs.occupied_flag[i];
     assert(s != hs.cap && "hash table is full!");
   }
 
@@ -142,6 +139,35 @@ void stress_test(int mx, int loop_time) {
     assert(hs.size() == 0 && "erase(k)");
   }
 
+  // insert, erase
+  for (int _ = 0; _ < 20; _++) {
+    double ratio = rng() * pow(2, -64);
+    for (int t = 0; t < loop_time / 5 * mx; t++) {
+      T i{};
+      if constexpr (is_integral<T>::value) {
+        i = rng() % mx;
+      } else {
+        i = T{rng() % mx, rng() % mx};
+      }
+      double th = rng() * pow(2, -64);
+      if (th < ratio) {
+        // if constexpr (is_integral<T>::value)  cerr<<"insert "<<i<<endl;
+        hs.insert(i);
+        us.insert(i);
+        same_set<HashSet<T>, T>(hs, us, mx);
+        same_set<const HashSet<T>, T>(hs, us, mx);
+      } else {
+        // if constexpr (is_integral<T>::value) cerr<<"erase "<<i<<endl;
+        hs.erase(i);
+        us.erase(i);
+        same_set<HashSet<T>, T>(hs, us, mx);
+        same_set<const HashSet<T>, T>(hs, us, mx);
+      }
+    }
+  }
+  hs.clear();
+  us.clear();
+
   // clear
   for (int _ = 0; _ < loop_time; _++) {
     shuffle(begin(ord), end(ord), mt);
@@ -196,7 +222,7 @@ void unit_test() {
 void Nyaan::solve() {
   HashSetTest::unit_test<int>();
   HashSetTest::unit_test<int64_t>();
-  HashSetTest::unit_test<pair<int,int>>();
+  HashSetTest::unit_test<pair<int, int>>();
   int64_t a, b;
   cin >> a >> b;
   cout << (a + b) << endl;
