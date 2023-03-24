@@ -20,8 +20,7 @@ void q() {
 
   auto comp = [&](vp a, vp b) {
     reverse(all(a)), reverse(all(b));
-    while (sz(a)) {
-      assert(sz(b));
+    while (sz(a) and sz(b)) {
       auto p = a.back();
       auto q = b.back();
       int m = min(p.se - p.fi, q.se - q.fi);
@@ -32,6 +31,7 @@ void q() {
       int c = ss.strcmp(p.fi, p.fi + m, q.fi, q.fi + m);
       if (c != 0) return c < 0;
     }
+    if (sz(b)) return true;
     return false;
   };
 
