@@ -439,18 +439,18 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"fps/sample-point-shift.hpp\"\
-    \n\n// input : y(0), y(1), ..., y(n - 1)\n// output : y(t), y(t + 1), ..., y(t\
-    \ + m - 1)\n// (if m is default, m = n)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ SamplePointShift(FormalPowerSeries<mint>& y, mint t,\n                     \
-    \                    int m = -1) {\n  if (m == -1) m = y.size();\n  long long\
-    \ T = t.get();\n  int k = (int)y.size() - 1;\n  T %= mint::get_mod();\n  if (T\
-    \ <= k) {\n    FormalPowerSeries<mint> ret(m);\n    int ptr = 0;\n    for (int64_t\
-    \ i = T; i <= k and ptr < m; i++) {\n      ret[ptr++] = y[i];\n    }\n    if (k\
-    \ + 1 < T + m) {\n      auto suf = SamplePointShift<mint>(y, k + 1, m - ptr);\n\
-    \      for (int i = k + 1; i < T + m; i++) {\n        ret[ptr++] = suf[i - (k\
-    \ + 1)];\n      }\n    }\n    return ret;\n  }\n  if (T + m > mint::get_mod())\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 5 \"fps/sample-point-shift.hpp\"\n\n// input : y(0), y(1), ..., y(n\
+    \ - 1)\n// output : y(t), y(t + 1), ..., y(t + m - 1)\n// (if m is default, m\
+    \ = n)\ntemplate <typename mint>\nFormalPowerSeries<mint> SamplePointShift(FormalPowerSeries<mint>&\
+    \ y, mint t,\n                                         int m = -1) {\n  if (m\
+    \ == -1) m = y.size();\n  long long T = t.get();\n  int k = (int)y.size() - 1;\n\
+    \  T %= mint::get_mod();\n  if (T <= k) {\n    FormalPowerSeries<mint> ret(m);\n\
+    \    int ptr = 0;\n    for (int64_t i = T; i <= k and ptr < m; i++) {\n      ret[ptr++]\
+    \ = y[i];\n    }\n    if (k + 1 < T + m) {\n      auto suf = SamplePointShift<mint>(y,\
+    \ k + 1, m - ptr);\n      for (int i = k + 1; i < T + m; i++) {\n        ret[ptr++]\
+    \ = suf[i - (k + 1)];\n      }\n    }\n    return ret;\n  }\n  if (T + m > mint::get_mod())\
     \ {\n    auto pref = SamplePointShift<mint>(y, T, mint::get_mod() - T);\n    auto\
     \ suf = SamplePointShift<mint>(y, 0, m - pref.size());\n    copy(begin(suf), end(suf),\
     \ back_inserter(pref));\n    return pref;\n  }\n\n  FormalPowerSeries<mint> finv(k\
@@ -625,7 +625,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/polynomial-matrix-prod.test.cpp

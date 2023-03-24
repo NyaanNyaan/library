@@ -115,8 +115,14 @@ data:
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/radix-sort.test.cpp
+    title: verify/verify-unit-test/radix-sort.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/rbst-sequence.test.cpp
+    title: verify/verify-unit-test/rbst-sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
@@ -268,6 +274,7 @@ data:
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
+  - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/fps.test.cpp
@@ -280,6 +287,7 @@ data:
   - verify/verify-unit-test/sparse-table.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/string-search.test.cpp

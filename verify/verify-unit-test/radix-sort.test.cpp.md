@@ -2,20 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: fps/lagrange-interpolation-point.hpp
-    title: fps/lagrange-interpolation-point.hpp
+    path: math-fast/radix-sort.hpp
+    title: radix sort
   - icon: ':heavy_check_mark:'
-    path: fps/sum-of-exponential-times-poly.hpp
-    title: $\sum_{i}a^i f(i)$
+    path: misc/all.hpp
+    title: misc/all.hpp
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
+    path: misc/rng.hpp
+    title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
-    path: modulo/binomial.hpp
-    title: modulo/binomial.hpp
+    path: misc/timer.hpp
+    title: misc/timer.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -41,30 +41,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
-  bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/radix-sort.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -206,15 +206,88 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace std;\n\
-    \nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ], outbuf[SZ];\n\
-    int in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n\
-    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
-    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
-    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\ninline void\
-    \ load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf + in_left,\
-    \ len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n  in_left\
-    \ = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
+    \ 4 \"verify/verify-unit-test/radix-sort.test.cpp\"\n//\n#line 2 \"math-fast/radix-sort.hpp\"\
+    \n\n#line 6 \"math-fast/radix-sort.hpp\"\nusing namespace std;\n\nnamespace RadixSortImpl\
+    \ {\nconstexpr int b = 8;\nconstexpr int powb = 1 << b;\nconstexpr int mask =\
+    \ powb - 1;\n\nint cnt0[powb];\nint cnt1[powb];\nint cnt2[powb];\nint cnt3[powb];\n\
+    \ntemplate <typename T>\nvoid radix_sort(int N, T* p) {\n  static_assert(sizeof(T)\
+    \ == 4 or sizeof(T) == 8);\n  if (!N) return;\n  if (N <= 64) {\n    sort(p, p\
+    \ + N);\n    return;\n  }\n  static T* tmp = nullptr;\n  static int tmp_size =\
+    \ 0;\n  if (!tmp or tmp_size < N) {\n    if (tmp) delete[] tmp;\n    tmp_size\
+    \ = 1;\n    while (tmp_size < N) tmp_size *= 2;\n    tmp = new T[tmp_size];\n\
+    \  }\n\n  memset(cnt0, 0, sizeof(cnt0));\n  memset(cnt1, 0, sizeof(cnt1));\n \
+    \ memset(cnt2, 0, sizeof(cnt2));\n  memset(cnt3, 0, sizeof(cnt3));\n  for (int\
+    \ i = 0; i < N; i++) {\n    cnt0[p[i] & mask]++;\n    cnt1[(p[i] >> b) & mask]++;\n\
+    \    cnt2[(p[i] >> b * 2) & mask]++;\n    cnt3[(p[i] >> b * 3) & mask]++;\n  }\n\
+    \  for (int i = 0; i < powb - 1; i++) {\n    cnt0[i + 1] += cnt0[i];\n    cnt1[i\
+    \ + 1] += cnt1[i];\n    cnt2[i + 1] += cnt2[i];\n    cnt3[i + 1] += cnt3[i];\n\
+    \  }\n  for (int i = N; i--;) tmp[--cnt0[p[i] & mask]] = p[i];\n  for (int i =\
+    \ N; i--;) p[--cnt1[tmp[i] >> b & mask]] = tmp[i];\n  for (int i = N; i--;) tmp[--cnt2[p[i]\
+    \ >> b * 2 & mask]] = p[i];\n  for (int i = N; i--;) p[--cnt3[tmp[i] >> b * 3\
+    \ & mask]] = tmp[i];\n\n  if constexpr (sizeof(T) == 8) {\n    memset(cnt0, 0,\
+    \ sizeof(cnt0));\n    for (int i = 0; i < N; i++) cnt0[p[i] >> b * 4 & mask]++;\n\
+    \    for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n    for (int\
+    \ i = N; i--;) tmp[--cnt0[p[i] >> b * 4 & mask]] = p[i];\n    memset(cnt0, 0,\
+    \ sizeof(cnt0));\n    for (int i = 0; i < N; i++) cnt0[tmp[i] >> b * 5 & mask]++;\n\
+    \    for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n    for (int\
+    \ i = N; i--;) p[--cnt0[tmp[i] >> b * 5 & mask]] = tmp[i];\n    memset(cnt0, 0,\
+    \ sizeof(cnt0));\n    for (int i = 0; i < N; i++) cnt0[p[i] >> b * 6 & mask]++;\n\
+    \    for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n    for (int\
+    \ i = N; i--;) tmp[--cnt0[p[i] >> b * 6 & mask]] = p[i];\n    memset(cnt0, 0,\
+    \ sizeof(cnt0));\n    for (int i = 0; i < N; i++) cnt0[tmp[i] >> b * 7 & mask]++;\n\
+    \    for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n    for (int\
+    \ i = N; i--;) p[--cnt0[tmp[i] >> b * 7 & mask]] = tmp[i];\n  }\n  if constexpr\
+    \ (is_signed<T>::value) {\n    int i = N;\n    while (i and p[i - 1] < 0) i--;\n\
+    \    rotate(p, p + i, p + N);\n  }\n}\n\n// N 10^7 int :  90 ms\n// N 10^7 ll\
+    \  : 220 ms\ntemplate <typename T>\nvoid radix_sort(vector<T>& v) {\n  radix_sort(v.size(),\
+    \ v.data());\n}\n\n// first \u306E\u9806\u306B\u30BD\u30FC\u30C8, second \u306F\
+    \u4E0D\u554F\ntemplate <typename T, typename U>\nvoid radix_sort_compare_first(int\
+    \ N, pair<T, U>* p) {\n  static_assert(sizeof(T) == 4 or sizeof(T) == 8);\n\n\
+    \  if (!N) return;\n  if (N <= 64) {\n    stable_sort(p, p + N, [](const pair<T,\
+    \ U>& s, const pair<T, U>& t) {\n      return s.first < t.first;\n    });\n  \
+    \  return;\n  }\n  static pair<T, U>* tmp = nullptr;\n  static int tmp_size =\
+    \ 0;\n  if (!tmp or tmp_size < N) {\n    if (tmp) delete[] tmp;\n    tmp_size\
+    \ = 1;\n    while (tmp_size < N) tmp_size *= 2;\n    tmp = new pair<T, U>[tmp_size];\n\
+    \  }\n\n  memset(cnt0, 0, sizeof(cnt0));\n  for (int i = 0; i < N; i++) cnt0[p[i].first\
+    \ & mask]++;\n  for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n \
+    \ for (int i = N; i--;) tmp[--cnt0[p[i].first & mask]] = p[i];\n  memset(cnt0,\
+    \ 0, sizeof(cnt0));\n  for (int i = 0; i < N; i++) cnt0[tmp[i].first >> b & mask]++;\n\
+    \  for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n  for (int i =\
+    \ N; i--;) p[--cnt0[tmp[i].first >> b & mask]] = tmp[i];\n  memset(cnt0, 0, sizeof(cnt0));\n\
+    \  for (int i = 0; i < N; i++) cnt0[p[i].first >> b * 2 & mask]++;\n  for (int\
+    \ i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n  for (int i = N; i--;) tmp[--cnt0[p[i].first\
+    \ >> b * 2 & mask]] = p[i];\n  memset(cnt0, 0, sizeof(cnt0));\n  for (int i =\
+    \ 0; i < N; i++) cnt0[tmp[i].first >> b * 3 & mask]++;\n  for (int i = 0; i <\
+    \ powb - 1; i++) cnt0[i + 1] += cnt0[i];\n  for (int i = N; i--;) p[--cnt0[tmp[i].first\
+    \ >> b * 3 & mask]] = tmp[i];\n\n  if constexpr (sizeof(T) == 8) {\n    memset(cnt0,\
+    \ 0, sizeof(cnt0));\n    for (int i = 0; i < N; i++) cnt0[p[i].first >> b * 4\
+    \ & mask]++;\n    for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n\
+    \    for (int i = N; i--;) tmp[--cnt0[p[i].first >> b * 4 & mask]] = p[i];\n \
+    \   memset(cnt0, 0, sizeof(cnt0));\n    for (int i = 0; i < N; i++) cnt0[tmp[i].first\
+    \ >> b * 5 & mask]++;\n    for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n\
+    \    for (int i = N; i--;) p[--cnt0[tmp[i].first >> b * 5 & mask]] = tmp[i];\n\
+    \    memset(cnt0, 0, sizeof(cnt0));\n    for (int i = 0; i < N; i++) cnt0[p[i].first\
+    \ >> b * 6 & mask]++;\n    for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n\
+    \    for (int i = N; i--;) tmp[--cnt0[p[i].first >> b * 6 & mask]] = p[i];\n \
+    \   memset(cnt0, 0, sizeof(cnt0));\n    for (int i = 0; i < N; i++) cnt0[tmp[i].first\
+    \ >> b * 7 & mask]++;\n    for (int i = 0; i < powb - 1; i++) cnt0[i + 1] += cnt0[i];\n\
+    \    for (int i = N; i--;) p[--cnt0[tmp[i].first >> b * 7 & mask]] = tmp[i];\n\
+    \  }\n\n  if constexpr (is_signed<T>::value) {\n    int i = N;\n    while (i and\
+    \ p[i - 1].first < 0) i--;\n    rotate(p, p + i, p + N);\n  }\n}\n\n// first \u306E\
+    \u9806\u306B\u30BD\u30FC\u30C8, second \u306F\u4E0D\u554F\n// N 10^7 int : 130\
+    \ ms\n// N 10^7 ll  : 370 ms\ntemplate <typename T, typename U>\nvoid radix_sort_compare_first(vector<pair<T,\
+    \ U>>& v) {\n  radix_sort_compare_first(v.size(), v.data());\n}\n\n}  // namespace\
+    \ RadixSortImpl\n\nusing RadixSortImpl::radix_sort;\nusing RadixSortImpl::radix_sort_compare_first;\n\
+    \n/*\n  @brief radix sort\n*/\n#line 6 \"verify/verify-unit-test/radix-sort.test.cpp\"\
+    \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
+    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
+    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
+    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
+    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
+    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
+    \ pre;\n\ninline void load() {\n  int len = in_right - in_left;\n  memmove(inbuf,\
+    \ inbuf + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
+    \  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
     \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
     \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
     \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
@@ -248,121 +321,77 @@ data:
     }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
     \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
     }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t\
-    \ mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r\
-    \ * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"\
-    invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2\
-    \ == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr\
-    \ LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b % mod + mod)\
-    \ * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n    return (b +\
-    \ u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
-    \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
-    \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
-    \ pow(mod - 2); }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
-    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\n\
-    struct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
-    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
-    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
-    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
-    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
-    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
-    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
-    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
-    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
-    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
-    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
-    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
-    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
-    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
-    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
-    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
-    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
-    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
-    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
-    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
-    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
-    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
-    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
-    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
-    };\n#line 2 \"fps/lagrange-interpolation-point.hpp\"\n\n#line 4 \"fps/lagrange-interpolation-point.hpp\"\
-    \n\n// given  : y(x=0) , y(x=1) , ... , y(k)\n// return : y(x)\ntemplate <typename\
-    \ mint>\nmint lagrange_interpolation(const vector<mint>& y, long long x,\n   \
-    \                         Binomial<mint>& C) {\n  int N = (int)y.size() - 1;\n\
-    \  if (x <= N) return y[x];\n  mint ret = 0;\n  vector<mint> dp(N + 1, 1), pd(N\
-    \ + 1, 1);\n  mint a = x, one = 1;\n  for (int i = 0; i < N; i++) dp[i + 1] =\
-    \ dp[i] * a, a -= one;\n  for (int i = N; i > 0; i--) pd[i - 1] = pd[i] * a, a\
-    \ += one;\n  for (int i = 0; i <= N; i++) {\n    mint tmp = y[i] * dp[i] * pd[i]\
-    \ * C.finv(i) * C.finv(N - i);\n    ret += ((N - i) & 1) ? -tmp : tmp;\n  }\n\
-    \  return ret;\n}\n#line 2 \"fps/sum-of-exponential-times-poly.hpp\"\n\n#line\
-    \ 4 \"fps/sum-of-exponential-times-poly.hpp\"\n\n// given  : f(0)...f(k) (deg(f)\
-    \ = k), a, n\n// return : sum_{i=0...n-1} a^i f(i)\ntemplate <typename mint>\n\
-    mint sum_of_exp(const vector<mint>& f, mint a, long long n,\n                Binomial<mint>&\
-    \ C) {\n  if (n == 0) return mint(0);\n  if (a == mint(0)) return f[0];\n  if\
-    \ (a == mint(1)) {\n    vector<mint> g(f.size() + 1, mint(0));\n    for (int i\
-    \ = 1; i < (int)g.size(); i++) g[i] = g[i - 1] + f[i - 1];\n    return lagrange_interpolation(g,\
-    \ n, C);\n  }\n  int K = f.size() - 1;\n  vector<mint> g(f.size());\n  mint buf\
-    \ = 1;\n  for (int i = 0; i < (int)g.size(); i++) g[i] = f[i] * buf, buf *= a;\n\
-    \  for (int i = 1; i < (int)g.size(); i++) g[i] += g[i - 1];\n  mint c = 0, buf2\
-    \ = 1;\n  for (int i = 0; i <= K; i++) c += C.C(K + 1, i) * buf2 * g[K - i], buf2\
-    \ *= -a;\n  c /= (-a + 1).pow(K + 1);\n  mint buf3 = 1, ia = a.inverse();\n  for\
-    \ (int i = 0; i < (int)g.size(); i++) g[i] = (g[i] - c) * buf3, buf3 *= ia;\n\
-    \  mint tn = lagrange_interpolation(g, n - 1, C);\n  return tn * a.pow(n - 1)\
-    \ + c;\n}\n\n// given  : f(0)...f(k) (deg(f) = k), a\n// return : sum_{i=0...infty}\
-    \ a^i f(i)\ntemplate <typename mint>\nmint sum_of_exp_limit(const vector<mint>&\
-    \ f, mint a, Binomial<mint>& C) {\n  if (a == mint(0)) return f[0];\n  int K =\
-    \ f.size() - 1;\n  vector<mint> g(f.size());\n  mint buf = 1;\n  for (int i =\
-    \ 0; i < (int)g.size(); i++) g[i] = f[i] * buf, buf *= a;\n  for (int i = 1; i\
-    \ < (int)g.size(); i++) g[i] += g[i - 1];\n  mint c = 0, buf2 = 1;\n  for (int\
-    \ i = 0; i <= K; i++) c += C.C(K + 1, i) * buf2 * g[K - i], buf2 *= -a;\n  c /=\
-    \ (-a + 1).pow(K + 1);\n  return c;\n}\n\n// given  : p, n\n// return : (0^p,\
-    \ 1^p, ... , n^p)\ntemplate <typename mint>\nvector<mint> exp_enamurate(int p,\
-    \ int n) {\n  vector<mint> f(n + 1, mint(0));\n  if (!p) {\n    f[0] = 1;\n  \
-    \  return std::move(f);\n  }\n  f[1] = 1;\n  vector<bool> sieve(n + 1, false);\n\
-    \  vector<int> ps;\n  for (int i = 2; i <= n; i++) {\n    if (!sieve[i]) {\n \
-    \     f[i] = mint(i).pow(p);\n      ps.push_back(i);\n    }\n    for (int j =\
-    \ 0; j < (int)ps.size() && i * ps[j] <= n; j++) {\n      sieve[i * ps[j]] = 1;\n\
-    \      f[i * ps[j]] = f[i] * f[ps[j]];\n      if (i % ps[j] == 0) break;\n   \
-    \ }\n  }\n  return std::move(f);\n}\n\n// given  : d, r, n\n// return : sum_{i=0...n-1}\
-    \ r^i i^d\ntemplate <typename mint>\nmint sum_of_exp2(int d, mint r, long long\
-    \ n, Binomial<mint>& C) {\n  vector<mint> f = exp_enamurate<mint>(d, d);\n  return\
-    \ sum_of_exp(f, r, n, C);\n}\n\n// given  : d, r\n// return : sum_{i=0...infty}\
-    \ r^i i^d\ntemplate <typename mint>\nmint sum_of_exp_limit2(int d, mint r, Binomial<mint>&\
-    \ C) {\n  vector<mint> f = exp_enamurate<mint>(d, d);\n  return sum_of_exp_limit(f,\
-    \ r, C);\n}\n\n/**\n * @brief $\\sum_{i}a^i f(i)$\n * @docs docs/fps/sum-of-exponential-times-poly.md\n\
-    \ */\n#line 9 \"verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp\"\n\n\
-    using namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
-    \  Binomial<mint> C(10001000);\n  long long r, d, n;\n  rd(r, d, n);\n  wtn(sum_of_exp2<mint>(d,\
-    \ r, n, C).get());\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../misc/fastio.hpp\"\
-    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
-    \n#include \"../../fps/lagrange-interpolation-point.hpp\"\n#include \"../../fps/sum-of-exponential-times-poly.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
-    \  Binomial<mint> C(10001000);\n  long long r, d, n;\n  rd(r, d, n);\n  wtn(sum_of_exp2<mint>(d,\
-    \ r, n, C).get());\n}"
+    using fastio::wtn;\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng()\
+    \ {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"misc/timer.hpp\"\n\n#line\
+    \ 4 \"misc/timer.hpp\"\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+    \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
+    };\n#line 8 \"verify/verify-unit-test/radix-sort.test.cpp\"\nusing namespace Nyaan;\n\
+    \ntemplate <typename T>\nvoid test(int N) {\n  ll mx = numeric_limits<T>::max();\n\
+    \  if (N <= 300) {\n    mx = pow(2.0, rnd() * log2(numeric_limits<T>::max()));\n\
+    \    mx = clamp<T>(mx, 1, numeric_limits<T>::max());\n  }\n\n  Timer timer;\n\
+    \  {\n    V<T> v(N);\n    each(x, v) x = rng(-mx, mx);\n\n    auto w = v;\n\n\
+    \    timer.reset();\n    radix_sort(v);\n    ll t1 = timer.elapsed();\n\n    timer.reset();\n\
+    \    sort(all(w));\n    ll t2 = timer.elapsed();\n\n    assert(v == w);\n    if\
+    \ (N >= TEN(8)) DebugImpl::trace(\"N\", N, \"radix\", t1, \"std\", t2);\n  }\n\
+    \n  if (N <= 300) {\n    V<pair<T, T>> v(N);\n    each(x, v) {\n      x.fi = rng(-mx,\
+    \ mx);\n      x.se = rng(-mx, mx);\n    }\n\n    auto w = v;\n    radix_sort_compare_first(v);\n\
+    \    stable_sort(all(w), [](const pair<T, T>& a, const pair<T, T>& b) {\n    \
+    \  return a.first < b.first;\n    });\n\n    if (v != w) {\n      trc2(v);\n \
+    \     trc2(w);\n    }\n    assert(v == w);\n  }\n}\n\nvoid q() {\n  {\n    vector<int>\
+    \ v{2, 0, 1, -1, -2};\n    radix_sort(v);\n    vector<int> w{-2, -1, 0, 1, 2};\n\
+    \    assert(v == w);\n  }\n  {\n    vector<int> v{2, 0, 2, -1, 1, 2, 0, -1, -2};\n\
+    \    radix_sort(v);\n    vector<int> w{-2, -1, -1, 0, 0, 1, 2, 2, 2};\n    assert(v\
+    \ == w);\n  }\n  {\n    vector<ll> v{2, 0, 2, -1, 1, 2, 0, -1, -2};\n    radix_sort(v);\n\
+    \    vector<ll> w{-2, -1, -1, 0, 0, 1, 2, 2, 2};\n    assert(v == w);\n  }\n\n\
+    \  rep(N, 200) rep(t, 200) {\n    test<int>(N);\n    test<uint32_t>(N);\n    test<ll>(N);\n\
+    \  }\n  rep(e, 6) {\n    test<int>(TEN(e));\n    test<uint32_t>(TEN(e));\n   \
+    \ test<ll>(TEN(e));\n  }\n  cerr << \"OK\" << endl;\n\n  /*\n  cerr << \"OK\"\
+    \ << endl;\n  rep(t, 3) test<int>(TEN(7));\n  rep(t, 3) test<ll>(TEN(7));\n  */\n\
+    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../math-fast/radix-sort.hpp\"\
+    \n//\n#include \"../../misc/all.hpp\"\nusing namespace Nyaan;\n\ntemplate <typename\
+    \ T>\nvoid test(int N) {\n  ll mx = numeric_limits<T>::max();\n  if (N <= 300)\
+    \ {\n    mx = pow(2.0, rnd() * log2(numeric_limits<T>::max()));\n    mx = clamp<T>(mx,\
+    \ 1, numeric_limits<T>::max());\n  }\n\n  Timer timer;\n  {\n    V<T> v(N);\n\
+    \    each(x, v) x = rng(-mx, mx);\n\n    auto w = v;\n\n    timer.reset();\n \
+    \   radix_sort(v);\n    ll t1 = timer.elapsed();\n\n    timer.reset();\n    sort(all(w));\n\
+    \    ll t2 = timer.elapsed();\n\n    assert(v == w);\n    if (N >= TEN(8)) DebugImpl::trace(\"\
+    N\", N, \"radix\", t1, \"std\", t2);\n  }\n\n  if (N <= 300) {\n    V<pair<T,\
+    \ T>> v(N);\n    each(x, v) {\n      x.fi = rng(-mx, mx);\n      x.se = rng(-mx,\
+    \ mx);\n    }\n\n    auto w = v;\n    radix_sort_compare_first(v);\n    stable_sort(all(w),\
+    \ [](const pair<T, T>& a, const pair<T, T>& b) {\n      return a.first < b.first;\n\
+    \    });\n\n    if (v != w) {\n      trc2(v);\n      trc2(w);\n    }\n    assert(v\
+    \ == w);\n  }\n}\n\nvoid q() {\n  {\n    vector<int> v{2, 0, 1, -1, -2};\n   \
+    \ radix_sort(v);\n    vector<int> w{-2, -1, 0, 1, 2};\n    assert(v == w);\n \
+    \ }\n  {\n    vector<int> v{2, 0, 2, -1, 1, 2, 0, -1, -2};\n    radix_sort(v);\n\
+    \    vector<int> w{-2, -1, -1, 0, 0, 1, 2, 2, 2};\n    assert(v == w);\n  }\n\
+    \  {\n    vector<ll> v{2, 0, 2, -1, 1, 2, 0, -1, -2};\n    radix_sort(v);\n  \
+    \  vector<ll> w{-2, -1, -1, 0, 0, 1, 2, 2, 2};\n    assert(v == w);\n  }\n\n \
+    \ rep(N, 200) rep(t, 200) {\n    test<int>(N);\n    test<uint32_t>(N);\n    test<ll>(N);\n\
+    \  }\n  rep(e, 6) {\n    test<int>(TEN(e));\n    test<uint32_t>(TEN(e));\n   \
+    \ test<ll>(TEN(e));\n  }\n  cerr << \"OK\" << endl;\n\n  /*\n  cerr << \"OK\"\
+    \ << endl;\n  rep(t, 3) test<int>(TEN(7));\n  rep(t, 3) test<ll>(TEN(7));\n  */\n\
+    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -370,21 +399,21 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
+  - math-fast/radix-sort.hpp
+  - misc/all.hpp
   - misc/fastio.hpp
-  - modint/montgomery-modint.hpp
-  - modulo/binomial.hpp
-  - fps/lagrange-interpolation-point.hpp
-  - fps/sum-of-exponential-times-poly.hpp
+  - misc/rng.hpp
+  - misc/timer.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+  path: verify/verify-unit-test/radix-sort.test.cpp
   requiredBy: []
   timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+documentation_of: verify/verify-unit-test/radix-sort.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-- /verify/verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp.html
-title: verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+- /verify/verify/verify-unit-test/radix-sort.test.cpp
+- /verify/verify/verify-unit-test/radix-sort.test.cpp.html
+title: verify/verify-unit-test/radix-sort.test.cpp
 ---

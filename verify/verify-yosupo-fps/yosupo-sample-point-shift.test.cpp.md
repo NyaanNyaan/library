@@ -463,9 +463,10 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp\"\
-    \n//\n#line 2 \"fps/sample-point-shift.hpp\"\n\n#line 5 \"fps/sample-point-shift.hpp\"\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 9 \"verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp\"\n\
+    //\n#line 2 \"fps/sample-point-shift.hpp\"\n\n#line 5 \"fps/sample-point-shift.hpp\"\
     \n\n// input : y(0), y(1), ..., y(n - 1)\n// output : y(t), y(t + 1), ..., y(t\
     \ + m - 1)\n// (if m is default, m = n)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ SamplePointShift(FormalPowerSeries<mint>& y, mint t,\n                     \
@@ -517,7 +518,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp

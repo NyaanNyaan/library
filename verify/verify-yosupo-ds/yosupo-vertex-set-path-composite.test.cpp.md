@@ -269,8 +269,9 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 10 \"verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp\"\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 10 \"verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp\"\
     \nBinomial<mint> C;\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename\
     \ T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1),\
     \ to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to),\
@@ -304,8 +305,8 @@ data:
     \ */\n#line 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\n\
     struct Affine {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr\
     \ Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return\
-    \ a * x + b; }\n  friend Affine operator*(const Affine& l, const Affine& r) {\n\
-    \    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
+    \ a * x + b; }\n  // R(L(x))\n  friend Affine operator*(const Affine& l, const\
+    \ Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
     \ Affine& r) const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine&\
     \ r) const { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream&\
     \ os, const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n\
@@ -434,7 +435,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp

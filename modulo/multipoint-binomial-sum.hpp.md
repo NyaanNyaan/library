@@ -59,19 +59,19 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 5 \"modulo/multipoint-binomial-sum.hpp\"\
-    \n\ntemplate <typename mint>\nvector<mint> multipoint_binomial_sum(const vector<pair<int,\
-    \ int>>& qs) {\n  int N = 2;\n  for (auto& p : qs) N = max(N, p.first);\n  Binomial<mint>\
-    \ b(N + 1);\n  int Q = qs.size();\n  Mo mo(N, Q);\n  for (auto& p : qs) {\n  \
-    \  assert(p.second <= p.first);\n    assert(p.first <= N);\n    mo.insert(p.second,\
-    \ p.first);\n  }\n  vector<mint> ans(Q);\n  mint cur = 1;\n  int n = 0, m = 0;\n\
-    \  auto al = [&](int) { cur -= b.C(n, m--); };\n  auto ar = [&](int) { cur +=\
-    \ cur - b.C(n++, m); };\n  auto el = [&](int) { cur += b.C(n, ++m); };\n  auto\
-    \ er = [&](int) { cur = (cur + b.C(--n, m)) * b.inv(2); };\n  auto q = [&](int\
-    \ i) { ans[i] = cur; };\n  mo.run(al, ar, el, er, q);\n  return ans;\n}\n\n/**\n\
-    \ * @brief \u4E8C\u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1\
-    \n */\n"
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 5 \"modulo/multipoint-binomial-sum.hpp\"\n\ntemplate <typename mint>\n\
+    vector<mint> multipoint_binomial_sum(const vector<pair<int, int>>& qs) {\n  int\
+    \ N = 2;\n  for (auto& p : qs) N = max(N, p.first);\n  Binomial<mint> b(N + 1);\n\
+    \  int Q = qs.size();\n  Mo mo(N, Q);\n  for (auto& p : qs) {\n    assert(p.second\
+    \ <= p.first);\n    assert(p.first <= N);\n    mo.insert(p.second, p.first);\n\
+    \  }\n  vector<mint> ans(Q);\n  mint cur = 1;\n  int n = 0, m = 0;\n  auto al\
+    \ = [&](int) { cur -= b.C(n, m--); };\n  auto ar = [&](int) { cur += cur - b.C(n++,\
+    \ m); };\n  auto el = [&](int) { cur += b.C(n, ++m); };\n  auto er = [&](int)\
+    \ { cur = (cur + b.C(--n, m)) * b.inv(2); };\n  auto q = [&](int i) { ans[i] =\
+    \ cur; };\n  mo.run(al, ar, el, er, q);\n  return ans;\n}\n\n/**\n * @brief \u4E8C\
+    \u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1\n */\n"
   code: "#pragma once\n\n#include \"../misc/mo.hpp\"\n#include \"binomial.hpp\"\n\n\
     template <typename mint>\nvector<mint> multipoint_binomial_sum(const vector<pair<int,\
     \ int>>& qs) {\n  int N = 2;\n  for (auto& p : qs) N = max(N, p.first);\n  Binomial<mint>\
@@ -90,7 +90,7 @@ data:
   isVerificationFile: false
   path: modulo/multipoint-binomial-sum.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp

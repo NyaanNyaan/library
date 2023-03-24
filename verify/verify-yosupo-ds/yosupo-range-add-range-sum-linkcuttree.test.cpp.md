@@ -255,13 +255,13 @@ data:
     \ 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\nstruct Affine\
     \ {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr Affine(mint\
     \ _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return a * x + b;\
-    \ }\n  friend Affine operator*(const Affine& l, const Affine& r) {\n    return\
-    \ Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const Affine& r)\
-    \ const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine& r) const\
-    \ { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream& os,\
-    \ const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n  \
-    \  return os;\n  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\n\
-    \ */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
+    \ }\n  // R(L(x))\n  friend Affine operator*(const Affine& l, const Affine& r)\
+    \ {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
+    \ Affine& r) const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine&\
+    \ r) const { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream&\
+    \ os, const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n\
+    \    return os;\n  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\
+    \n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
     \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
     \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
     \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
@@ -459,7 +459,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp

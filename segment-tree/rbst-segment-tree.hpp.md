@@ -5,10 +5,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/slope-trick-weighted.hpp
     title: Weighted Slope Trick
+  - icon: ':heavy_check_mark:'
+    path: segment-tree/rbst-sequence.hpp
+    title: segment-tree/rbst-sequence.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/rbst-sequence.test.cpp
+    title: verify/verify-unit-test/rbst-sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
     title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
@@ -249,7 +255,7 @@ data:
     \      ps.push_back(t);\n      if (i == t->key) break;\n      t = i < t->key ?\
     \ t->l : t->r;\n    }\n    if (!t) {\n      apply_val(i, func);\n      return;\n\
     \    }\n    func(t->val);\n    for (int j = ps.size() - 1; j >= 0; j--) _update(ps[j]);\n\
-    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  void erase(I i) { _erase(root,\
+    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  virtual void erase(I i) { _erase(root,\
     \ i); }\n\n  // \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E &e) {\n\
     \    if (l >= r) return;\n    _apply(root, l, r, e);\n  }\n  void apply_all(const\
     \ E &e) { _propagate(root, e); }\n\n  // \u7BC4\u56F2\u53D6\u5F97\n  T fold(I\
@@ -553,7 +559,7 @@ data:
     \      ps.push_back(t);\n      if (i == t->key) break;\n      t = i < t->key ?\
     \ t->l : t->r;\n    }\n    if (!t) {\n      apply_val(i, func);\n      return;\n\
     \    }\n    func(t->val);\n    for (int j = ps.size() - 1; j >= 0; j--) _update(ps[j]);\n\
-    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  void erase(I i) { _erase(root,\
+    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  virtual void erase(I i) { _erase(root,\
     \ i); }\n\n  // \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E &e) {\n\
     \    if (l >= r) return;\n    _apply(root, l, r, e);\n  }\n  void apply_all(const\
     \ E &e) { _propagate(root, e); }\n\n  // \u7BC4\u56F2\u53D6\u5F97\n  T fold(I\
@@ -649,7 +655,8 @@ data:
   path: segment-tree/rbst-segment-tree.hpp
   requiredBy:
   - data-structure/slope-trick-weighted.hpp
-  timestamp: '2022-11-10 01:01:58+09:00'
+  - segment-tree/rbst-sequence.hpp
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1786.test.cpp
@@ -659,6 +666,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+  - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
 documentation_of: segment-tree/rbst-segment-tree.hpp
 layout: document

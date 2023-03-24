@@ -131,10 +131,10 @@ data:
     \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
     \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
     \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
-    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n\
-    \    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n\
-    \  }\n};\n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
+    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate\
+    \ F(x + a)\ntemplate <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
     \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
     \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
     \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
@@ -159,7 +159,7 @@ data:
   requiredBy:
   - fps/fps-famous-series.hpp
   - fps/partial-fraction-decomposition.hpp
-  timestamp: '2022-08-22 22:01:20+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp

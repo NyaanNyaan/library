@@ -273,8 +273,9 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 10 \"verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp\"\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 10 \"verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp\"\
     \nBinomial<mint> C;\n\n#line 1 \"matrix/black-box-linear-algebra.hpp\"\n\n#line\
     \ 2 \"fps/berlekamp-massey.hpp\"\n\ntemplate <typename mint>\nvector<mint> BerlekampMassey(const\
     \ vector<mint> &s) {\n  const int N = (int)s.size();\n  vector<mint> b, c;\n \
@@ -458,7 +459,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp

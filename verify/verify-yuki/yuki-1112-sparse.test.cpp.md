@@ -571,14 +571,15 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 12 \"verify/verify-yuki/yuki-1112-sparse.test.cpp\"\
-    \nusing mint = LazyMontgomeryModInt<1000000007>;\nBinomial<mint> C;\nusing vm\
-    \ = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
-    \nvoid Nyaan::solve() {\n  inl(K, M, N);\n  SparseMatrix<mint> m(K * K);\n  rep(i,\
-    \ M) {\n    ini(p, q, r);\n    p--, q--, r--;\n    m.add(p * K + q, q * K + r,\
-    \ 1);\n  }\n  fps b(K * K);\n  rep(i, K) b[i * K] = 1;\n  auto res = fast_pow(m,\
-    \ b, N - 2);\n  out(accumulate(begin(res), begin(res) + K, mint(0)));\n}\n"
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 12 \"verify/verify-yuki/yuki-1112-sparse.test.cpp\"\nusing mint = LazyMontgomeryModInt<1000000007>;\n\
+    Binomial<mint> C;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps\
+    \ = FormalPowerSeries<mint>;\n\nvoid Nyaan::solve() {\n  inl(K, M, N);\n  SparseMatrix<mint>\
+    \ m(K * K);\n  rep(i, M) {\n    ini(p, q, r);\n    p--, q--, r--;\n    m.add(p\
+    \ * K + q, q * K + r, 1);\n  }\n  fps b(K * K);\n  rep(i, K) b[i * K] = 1;\n \
+    \ auto res = fast_pow(m, b, N - 2);\n  out(accumulate(begin(res), begin(res) +\
+    \ K, mint(0)));\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1112\"\n\n#include \"\
     ../../template/template.hpp\"\n\nusing namespace Nyaan;\n\n#include \"../../matrix/black-box-linear-algebra.hpp\"\
     \n//\n#include \"../../fps/arbitrary-fps.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
@@ -609,7 +610,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-1112-sparse.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-1112-sparse.test.cpp

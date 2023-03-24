@@ -37,6 +37,9 @@ data:
     path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
     title: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/radix-sort.test.cpp
+    title: verify/verify-unit-test/radix-sort.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -84,6 +87,7 @@ data:
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/sa-manager.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
 documentation_of: misc/timer.hpp
 layout: document

@@ -41,17 +41,18 @@ data:
     \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
     \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
     \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
-    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n\
-    \    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n\
-    \  }\n};\n#line 4 \"fps/lagrange-interpolation-point.hpp\"\n\n// given  : y(x=0)\
-    \ , y(x=1) , ... , y(k)\n// return : y(x)\ntemplate <typename mint>\nmint lagrange_interpolation(const\
-    \ vector<mint>& y, long long x,\n                            Binomial<mint>& C)\
-    \ {\n  int N = (int)y.size() - 1;\n  if (x <= N) return y[x];\n  mint ret = 0;\n\
-    \  vector<mint> dp(N + 1, 1), pd(N + 1, 1);\n  mint a = x, one = 1;\n  for (int\
-    \ i = 0; i < N; i++) dp[i + 1] = dp[i] * a, a -= one;\n  for (int i = N; i > 0;\
-    \ i--) pd[i - 1] = pd[i] * a, a += one;\n  for (int i = 0; i <= N; i++) {\n  \
-    \  mint tmp = y[i] * dp[i] * pd[i] * C.finv(i) * C.finv(N - i);\n    ret += ((N\
-    \ - i) & 1) ? -tmp : tmp;\n  }\n  return ret;\n}\n"
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
+    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 4 \"fps/lagrange-interpolation-point.hpp\"\
+    \n\n// given  : y(x=0) , y(x=1) , ... , y(k)\n// return : y(x)\ntemplate <typename\
+    \ mint>\nmint lagrange_interpolation(const vector<mint>& y, long long x,\n   \
+    \                         Binomial<mint>& C) {\n  int N = (int)y.size() - 1;\n\
+    \  if (x <= N) return y[x];\n  mint ret = 0;\n  vector<mint> dp(N + 1, 1), pd(N\
+    \ + 1, 1);\n  mint a = x, one = 1;\n  for (int i = 0; i < N; i++) dp[i + 1] =\
+    \ dp[i] * a, a -= one;\n  for (int i = N; i > 0; i--) pd[i - 1] = pd[i] * a, a\
+    \ += one;\n  for (int i = 0; i <= N; i++) {\n    mint tmp = y[i] * dp[i] * pd[i]\
+    \ * C.finv(i) * C.finv(N - i);\n    ret += ((N - i) & 1) ? -tmp : tmp;\n  }\n\
+    \  return ret;\n}\n"
   code: "#pragma once\n\n#include \"../modulo/binomial.hpp\"\n\n// given  : y(x=0)\
     \ , y(x=1) , ... , y(k)\n// return : y(x)\ntemplate <typename mint>\nmint lagrange_interpolation(const\
     \ vector<mint>& y, long long x,\n                            Binomial<mint>& C)\
@@ -66,7 +67,7 @@ data:
   isVerificationFile: false
   path: fps/lagrange-interpolation-point.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp

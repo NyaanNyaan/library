@@ -417,7 +417,7 @@ data:
     \      ps.push_back(t);\n      if (i == t->key) break;\n      t = i < t->key ?\
     \ t->l : t->r;\n    }\n    if (!t) {\n      apply_val(i, func);\n      return;\n\
     \    }\n    func(t->val);\n    for (int j = ps.size() - 1; j >= 0; j--) _update(ps[j]);\n\
-    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  void erase(I i) { _erase(root,\
+    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  virtual void erase(I i) { _erase(root,\
     \ i); }\n\n  // \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E &e) {\n\
     \    if (l >= r) return;\n    _apply(root, l, r, e);\n  }\n  void apply_all(const\
     \ E &e) { _propagate(root, e); }\n\n  // \u7BC4\u56F2\u53D6\u5F97\n  T fold(I\
@@ -677,7 +677,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-1467-weighted.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-1467-weighted.test.cpp

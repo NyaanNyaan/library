@@ -505,8 +505,9 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp\"\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 9 \"verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp\"\
     \nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\nBinomial<mint>\
     \ C;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
     \nvoid Nyaan::solve() {\n  int N, M;\n  rd(N, M);\n  fps f(N), g(M);\n  unsigned\
@@ -543,7 +544,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp

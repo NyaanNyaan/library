@@ -204,8 +204,8 @@ data:
     \n//\n#line 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\n\
     struct Affine {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr\
     \ Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return\
-    \ a * x + b; }\n  friend Affine operator*(const Affine& l, const Affine& r) {\n\
-    \    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
+    \ a * x + b; }\n  // R(L(x))\n  friend Affine operator*(const Affine& l, const\
+    \ Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
     \ Affine& r) const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine&\
     \ r) const { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream&\
     \ os, const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n\
@@ -327,7 +327,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp

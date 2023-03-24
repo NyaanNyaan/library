@@ -374,18 +374,19 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 11 \"verify/verify-unit-test/sum-of-mf.test.cpp\"\
-    \n//\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    // using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\n\
-    using vvm = vector<vm>;\nBinomial<mint> C;\n\nusing namespace Nyaan;\n\nmint f(ll\
-    \ p, ll c) {\n  ll res = 1;\n  while (--c) res *= p;\n  return res * (p - 1);\n\
-    }\n\nvoid Nyaan::solve() {\n  int N = 1000;\n  auto tot = totient<mint>(N);\n\n\
-    \  rep(i, N) tot[i + 1] += tot[i];\n  rep1(i, N) {\n    assert(tot[i] == sum_of_totient<mint>(i));\n\
-    \    mf_prefix_sum<mint, f> mf(i);\n    auto h1 = mf.prime_sum_table();\n    auto\
-    \ h0 = mf.pi_table();\n    assert(sz(h1) == sz(h0));\n    rep(i, sz(h1)) h1[i]\
-    \ -= h0[i];\n    mint ans = mf.run(h1);\n    assert(tot[i] == ans);\n  }\n\n \
-    \ int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 11 \"verify/verify-unit-test/sum-of-mf.test.cpp\"\n//\nusing namespace\
+    \ Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
+    using vm = vector<mint>;\nusing vvm = vector<vm>;\nBinomial<mint> C;\n\nusing\
+    \ namespace Nyaan;\n\nmint f(ll p, ll c) {\n  ll res = 1;\n  while (--c) res *=\
+    \ p;\n  return res * (p - 1);\n}\n\nvoid Nyaan::solve() {\n  int N = 1000;\n \
+    \ auto tot = totient<mint>(N);\n\n  rep(i, N) tot[i + 1] += tot[i];\n  rep1(i,\
+    \ N) {\n    assert(tot[i] == sum_of_totient<mint>(i));\n    mf_prefix_sum<mint,\
+    \ f> mf(i);\n    auto h1 = mf.prime_sum_table();\n    auto h0 = mf.pi_table();\n\
+    \    assert(sz(h1) == sz(h0));\n    rep(i, sz(h1)) h1[i] -= h0[i];\n    mint ans\
+    \ = mf.run(h1);\n    assert(tot[i] == ans);\n  }\n\n  int a, b;\n  cin >> a >>\
+    \ b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../multiplicative-function/mf-famous-series.hpp\"\
     \n#include \"../../multiplicative-function/sum-of-multiplicative-function.hpp\"\
@@ -418,7 +419,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/sum-of-mf.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/sum-of-mf.test.cpp

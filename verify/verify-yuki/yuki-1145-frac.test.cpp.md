@@ -486,25 +486,25 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"verify/verify-yuki/yuki-1145-frac.test.cpp\"\
-    \n\nusing namespace Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    Binomial<mint> C;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps\
-    \ = FormalPowerSeries<mint>;\n\nusing frac = fps_fraction<fps>;\n\nvoid test()\
-    \ {\n  frac f(fps{2, 1}, fps{3, 1});\n  frac g(fps{5, 1}, fps{4, 1});\n\n  {\n\
-    \    auto h = f + g;\n    h.shrink();\n    assert((h.p == fps{23, 14, 2}));\n\
-    \    assert((h.q == fps{12, 7, 1}));\n  }\n\n  {\n    auto h = f - g;\n    h.shrink();\n\
-    \    assert((h.p == fps{-7, -2}));\n    assert((h.q == fps{12, 7, 1}));\n  }\n\
-    \n  {\n    auto h = f * g;\n    h.shrink();\n    assert((h.p == fps{10, 7, 1}));\n\
-    \    assert((h.q == fps{12, 7, 1}));\n  }\n\n  {\n    auto h = f / g;\n    h.shrink();\n\
-    \    assert((h.p == fps{8, 6, 1}));\n    assert((h.q == fps{15, 8, 1}));\n  }\n\
-    }\nvoid Nyaan::solve() {\n  ini(N, M);\n  vi a(N);\n  in(a);\n\n  test();\n\n\
-    \  V<frac> v(N);\n  rep(i, N) v[i] = frac{fps{1}, fps{1, -a[i]}};\n\n  auto dd\
-    \ = [&](auto rc, int l, int r) -> frac {\n    if (l + 1 == r) return v[l];\n \
-    \   int m = (l + r) / 2;\n    auto L = rc(rc, l, m);\n    auto R = rc(rc, m, r);\n\
-    \    return L + R;\n  };\n\n  auto fr = dd(dd, 0, N);\n  fr.p.resize(M + 1);\n\
-    \  auto f = fr.p * fr.q.inv(M + 1);\n  out(fps{begin(f) + 1, begin(f) + M + 1});\n\
-    }\n"
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 9 \"verify/verify-yuki/yuki-1145-frac.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nusing mint = LazyMontgomeryModInt<998244353>;\nBinomial<mint> C;\n\
+    using vm = vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
+    \nusing frac = fps_fraction<fps>;\n\nvoid test() {\n  frac f(fps{2, 1}, fps{3,\
+    \ 1});\n  frac g(fps{5, 1}, fps{4, 1});\n\n  {\n    auto h = f + g;\n    h.shrink();\n\
+    \    assert((h.p == fps{23, 14, 2}));\n    assert((h.q == fps{12, 7, 1}));\n \
+    \ }\n\n  {\n    auto h = f - g;\n    h.shrink();\n    assert((h.p == fps{-7, -2}));\n\
+    \    assert((h.q == fps{12, 7, 1}));\n  }\n\n  {\n    auto h = f * g;\n    h.shrink();\n\
+    \    assert((h.p == fps{10, 7, 1}));\n    assert((h.q == fps{12, 7, 1}));\n  }\n\
+    \n  {\n    auto h = f / g;\n    h.shrink();\n    assert((h.p == fps{8, 6, 1}));\n\
+    \    assert((h.q == fps{15, 8, 1}));\n  }\n}\nvoid Nyaan::solve() {\n  ini(N,\
+    \ M);\n  vi a(N);\n  in(a);\n\n  test();\n\n  V<frac> v(N);\n  rep(i, N) v[i]\
+    \ = frac{fps{1}, fps{1, -a[i]}};\n\n  auto dd = [&](auto rc, int l, int r) ->\
+    \ frac {\n    if (l + 1 == r) return v[l];\n    int m = (l + r) / 2;\n    auto\
+    \ L = rc(rc, l, m);\n    auto R = rc(rc, m, r);\n    return L + R;\n  };\n\n \
+    \ auto fr = dd(dd, 0, N);\n  fr.p.resize(M + 1);\n  auto f = fr.p * fr.q.inv(M\
+    \ + 1);\n  out(fps{begin(f) + 1, begin(f) + M + 1});\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1145\"\n//\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../fps/fps-fraction.hpp\"\n#include\
     \ \"../../fps/ntt-friendly-fps.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
@@ -541,7 +541,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yuki/yuki-1145-frac.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-1145-frac.test.cpp

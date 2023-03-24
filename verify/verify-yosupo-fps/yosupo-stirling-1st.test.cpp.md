@@ -465,14 +465,15 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\
-    \nusing mint = LazyMontgomeryModInt<998244353>;\nBinomial<mint> C;\nusing vm =\
-    \ vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
-    // \n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate <typename\
-    \ mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,\n\
-    \                                    Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  int N = f.size();\n  for (int i = 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f),\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 9 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\nusing mint\
+    \ = LazyMontgomeryModInt<998244353>;\nBinomial<mint> C;\nusing vm = vector<mint>;\n\
+    using vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n// \n#line 4 \"\
+    fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ TaylorShift(FormalPowerSeries<mint> f, mint a,\n                           \
+    \         Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n  int\
+    \ N = f.size();\n  for (int i = 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f),\
     \ end(f));\n  fps g(N, mint(1));\n  for (int i = 1; i < N; i++) g[i] = g[i - 1]\
     \ * a * C.inv(i);\n  f = (f * g).pre(N);\n  reverse(begin(f), end(f));\n  for\
     \ (int i = 0; i < N; i++) f[i] *= C.finv(i);\n  return f;\n}\n\n/**\n * @brief\
@@ -527,7 +528,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp

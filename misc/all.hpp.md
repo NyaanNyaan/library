@@ -22,6 +22,9 @@ data:
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/radix-sort.test.cpp
+    title: verify/verify-unit-test/radix-sort.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   _isVerificationFailed: false
@@ -115,6 +118,7 @@ data:
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
+  - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
 documentation_of: misc/all.hpp
 layout: document

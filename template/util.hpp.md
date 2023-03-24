@@ -328,11 +328,17 @@ data:
     path: verify/verify-unit-test/radix-heap.test.cpp
     title: verify/verify-unit-test/radix-heap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/radix-sort.test.cpp
+    title: verify/verify-unit-test/radix-sort.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rational-number.test.cpp
     title: verify/verify-unit-test/rational-number.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/rbst-sequence.test.cpp
+    title: verify/verify-unit-test/rbst-sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
@@ -513,6 +519,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
     title: verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
     title: verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
@@ -1264,6 +1273,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
@@ -1399,6 +1409,7 @@ data:
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
+  - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
@@ -1416,6 +1427,7 @@ data:
   - verify/verify-unit-test/sparse-table.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
   - verify/verify-unit-test/string-search.test.cpp

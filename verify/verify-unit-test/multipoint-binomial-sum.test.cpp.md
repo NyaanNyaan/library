@@ -544,24 +544,24 @@ data:
     \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
     \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
     \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
-    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  T H(int n, int r) {\n\
-    \    if (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n\
-    \  }\n};\n#line 2 \"modulo/multipoint-binomial-sum.hpp\"\n\n#line 2 \"misc/mo.hpp\"\
-    \n\nstruct Mo {\n  int width;\n  vector<int> left, right, order;\n\n  Mo(int N,\
-    \ int Q) : order(Q) {\n    width = max<int>(1, 1.0 * N / max<double>(1.0, sqrt(Q\
-    \ * 2.0 / 3.0)));\n    iota(begin(order), end(order), 0);\n  }\n\n  void insert(int\
-    \ l, int r) { /* [l, r) */\n    left.emplace_back(l);\n    right.emplace_back(r);\n\
-    \  }\n\n  template <typename AL, typename AR, typename DL, typename DR, typename\
-    \ REM>\n  void run(const AL &add_left, const AR &add_right, const DL &delete_left,\n\
-    \           const DR &delete_right, const REM &rem) {\n    assert(left.size()\
-    \ == order.size());\n    sort(begin(order), end(order), [&](int a, int b) {\n\
-    \      int ablock = left[a] / width, bblock = left[b] / width;\n      if (ablock\
-    \ != bblock) return ablock < bblock;\n      if (ablock & 1) return right[a] <\
-    \ right[b];\n      return right[a] > right[b];\n    });\n    int nl = 0, nr =\
-    \ 0;\n    for (auto idx : order) {\n      while (nl > left[idx]) add_left(--nl);\n\
-    \      while (nr < right[idx]) add_right(nr++);\n      while (nl < left[idx])\
-    \ delete_left(nl++);\n      while (nr > right[idx]) delete_right(--nr);\n    \
-    \  rem(idx);\n    }\n  }\n};\n\n/**\n * @brief Mo's algorithm\n * @docs docs/misc/mo.md\n\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
+    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"modulo/multipoint-binomial-sum.hpp\"\
+    \n\n#line 2 \"misc/mo.hpp\"\n\nstruct Mo {\n  int width;\n  vector<int> left,\
+    \ right, order;\n\n  Mo(int N, int Q) : order(Q) {\n    width = max<int>(1, 1.0\
+    \ * N / max<double>(1.0, sqrt(Q * 2.0 / 3.0)));\n    iota(begin(order), end(order),\
+    \ 0);\n  }\n\n  void insert(int l, int r) { /* [l, r) */\n    left.emplace_back(l);\n\
+    \    right.emplace_back(r);\n  }\n\n  template <typename AL, typename AR, typename\
+    \ DL, typename DR, typename REM>\n  void run(const AL &add_left, const AR &add_right,\
+    \ const DL &delete_left,\n           const DR &delete_right, const REM &rem) {\n\
+    \    assert(left.size() == order.size());\n    sort(begin(order), end(order),\
+    \ [&](int a, int b) {\n      int ablock = left[a] / width, bblock = left[b] /\
+    \ width;\n      if (ablock != bblock) return ablock < bblock;\n      if (ablock\
+    \ & 1) return right[a] < right[b];\n      return right[a] > right[b];\n    });\n\
+    \    int nl = 0, nr = 0;\n    for (auto idx : order) {\n      while (nl > left[idx])\
+    \ add_left(--nl);\n      while (nr < right[idx]) add_right(nr++);\n      while\
+    \ (nl < left[idx]) delete_left(nl++);\n      while (nr > right[idx]) delete_right(--nr);\n\
+    \      rem(idx);\n    }\n  }\n};\n\n/**\n * @brief Mo's algorithm\n * @docs docs/misc/mo.md\n\
     \ */\n#line 5 \"modulo/multipoint-binomial-sum.hpp\"\n\ntemplate <typename mint>\n\
     vector<mint> multipoint_binomial_sum(const vector<pair<int, int>>& qs) {\n  int\
     \ N = 2;\n  for (auto& p : qs) N = max(N, p.first);\n  Binomial<mint> b(N + 1);\n\
@@ -717,7 +717,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/multipoint-binomial-sum.test.cpp

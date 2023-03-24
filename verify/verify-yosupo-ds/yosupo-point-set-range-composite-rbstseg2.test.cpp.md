@@ -204,8 +204,8 @@ data:
     \n//\n#line 2 \"math/affine-transformation.hpp\"\n\ntemplate <typename mint>\n\
     struct Affine {\n  mint a, b;\n  constexpr Affine() : a(1), b(0) {}\n  constexpr\
     \ Affine(mint _a, mint _b) : a(_a), b(_b) {}\n  mint operator()(mint x) { return\
-    \ a * x + b; }\n  friend Affine operator*(const Affine& l, const Affine& r) {\n\
-    \    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
+    \ a * x + b; }\n  // R(L(x))\n  friend Affine operator*(const Affine& l, const\
+    \ Affine& r) {\n    return Affine(l.a * r.a, l.b * r.a + r.b);\n  }\n  bool operator==(const\
     \ Affine& r) const { return a == r.a && b == r.b; }\n  bool operator!=(const Affine&\
     \ r) const { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream&\
     \ os, const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n\
@@ -456,7 +456,7 @@ data:
     \      ps.push_back(t);\n      if (i == t->key) break;\n      t = i < t->key ?\
     \ t->l : t->r;\n    }\n    if (!t) {\n      apply_val(i, func);\n      return;\n\
     \    }\n    func(t->val);\n    for (int j = ps.size() - 1; j >= 0; j--) _update(ps[j]);\n\
-    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  void erase(I i) { _erase(root,\
+    \  }\n\n  // \u9802\u70B9\u306E\u524A\u9664\n  virtual void erase(I i) { _erase(root,\
     \ i); }\n\n  // \u7BC4\u56F2\u4F5C\u7528\n  void apply(I l, I r, const E &e) {\n\
     \    if (l >= r) return;\n    _apply(root, l, r, e);\n  }\n  void apply_all(const\
     \ E &e) { _propagate(root, e); }\n\n  // \u7BC4\u56F2\u53D6\u5F97\n  T fold(I\
@@ -577,7 +577,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp

@@ -508,23 +508,24 @@ data:
     \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
     \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
     \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
-    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"ntt/convolution-large.hpp\"\
-    \n\ntemplate <typename fps>\nfps convolution_large(const fps &a, const fps &b)\
-    \ {\n  using mint = typename fps::value_type;\n  int len = 1LL << __builtin_ctz(mint::get_mod()\
-    \ - 1);\n  if (a.empty() || b.empty()) return fps{};\n  if ((int)a.size() + (int)b.size()\
-    \ - 1 <= len) return a * b;\n  vector<fps> as, bs;\n  for (int i = 0; i < (int)a.size();\
-    \ i += len / 2) {\n    fps v{begin(a) + i, begin(a) + min<int>(i + len / 2, a.size())};\n\
-    \    v.resize(len);\n    v.ntt();\n    as.push_back(v);\n  }\n  for (int i = 0;\
-    \ i < (int)b.size(); i += len / 2) {\n    fps v{begin(b) + i, begin(b) + min<int>(i\
-    \ + len / 2, b.size())};\n    v.resize(len);\n    v.ntt();\n    bs.push_back(v);\n\
-    \  }\n  vector<fps> cs(as.size() + bs.size() - 1, fps(len));\n  for (int i = 0;\
-    \ i < (int)as.size(); i++) {\n    for (int j = 0; j < (int)bs.size(); j++) {\n\
-    \      for (int k = 0; k < len; k++) cs[i + j][k] += as[i][k] * bs[j][k];\n  \
-    \  }\n  }\n  for (auto &v : cs) v.intt();\n\n  fps c(a.size() + b.size() - 1);\n\
-    \  for (int i = 0; i < (int)cs.size(); i++) {\n    int offset = len / 2 * i;\n\
-    \    int je = min<int>(len, c.size() - offset);\n    for (int j = 0; j < je; j++)\
-    \ c[j + offset] += cs[i][j];\n  }\n  return c;\n}\n#line 10 \"verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp\"\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 2 \"ntt/convolution-large.hpp\"\n\ntemplate <typename fps>\nfps convolution_large(const\
+    \ fps &a, const fps &b) {\n  using mint = typename fps::value_type;\n  int len\
+    \ = 1LL << __builtin_ctz(mint::get_mod() - 1);\n  if (a.empty() || b.empty())\
+    \ return fps{};\n  if ((int)a.size() + (int)b.size() - 1 <= len) return a * b;\n\
+    \  vector<fps> as, bs;\n  for (int i = 0; i < (int)a.size(); i += len / 2) {\n\
+    \    fps v{begin(a) + i, begin(a) + min<int>(i + len / 2, a.size())};\n    v.resize(len);\n\
+    \    v.ntt();\n    as.push_back(v);\n  }\n  for (int i = 0; i < (int)b.size();\
+    \ i += len / 2) {\n    fps v{begin(b) + i, begin(b) + min<int>(i + len / 2, b.size())};\n\
+    \    v.resize(len);\n    v.ntt();\n    bs.push_back(v);\n  }\n  vector<fps> cs(as.size()\
+    \ + bs.size() - 1, fps(len));\n  for (int i = 0; i < (int)as.size(); i++) {\n\
+    \    for (int j = 0; j < (int)bs.size(); j++) {\n      for (int k = 0; k < len;\
+    \ k++) cs[i + j][k] += as[i][k] * bs[j][k];\n    }\n  }\n  for (auto &v : cs)\
+    \ v.intt();\n\n  fps c(a.size() + b.size() - 1);\n  for (int i = 0; i < (int)cs.size();\
+    \ i++) {\n    int offset = len / 2 * i;\n    int je = min<int>(len, c.size() -\
+    \ offset);\n    for (int j = 0; j < je; j++) c[j + offset] += cs[i][j];\n  }\n\
+    \  return c;\n}\n#line 10 \"verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp\"\
     \n\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n//\
     \ using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\nusing\
     \ vvm = vector<vm>;\nBinomial<mint> C;\nusing fps = FormalPowerSeries<mint>;\n\
@@ -560,7 +561,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp

@@ -227,25 +227,25 @@ data:
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
     \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
     \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
-    \ */\n#line 4 \"graph/lowlink.hpp\"\n\n// LowLink ... enumerate bridge and articulation\
-    \ point\n// bridge ... \u6A4B articulation point ... \u95A2\u7BC0\u70B9\ntemplate\
-    \ <typename G>\nstruct LowLink {\n  int N;\n  const G &g;\n  vector<int> ord,\
-    \ low, articulation;\n  vector<pair<int, int> > bridge;\n\n  LowLink(const G &_g)\
-    \ : g(_g) {\n    N = g.size();\n    ord.resize(N, -1);\n    low.resize(N, -1);\n\
-    \    int k = 0;\n    for (int i = 0; i < N; i++)\n      if (ord[i] == -1) k =\
-    \ dfs(i, k, -1);\n  }\n\n  int dfs(int idx, int k, int par) {\n    low[idx] =\
-    \ (ord[idx] = k++);\n    int cnt = 0;\n    bool is_arti = false, flg = false;\n\
-    \    for (auto &to : g[idx]) {\n      if (ord[to] == -1) {\n        cnt++;\n \
-    \       k = dfs(to, k, idx);\n        low[idx] = min(low[idx], low[to]);\n   \
-    \     is_arti |= (par != -1) && (low[to] >= ord[idx]);\n        if (ord[idx] <\
-    \ low[to]) {\n          bridge.emplace_back(minmax(idx, (int)to));\n        }\n\
-    \      } else if (to != par || exchange(flg, true)) {\n        low[idx] = min(low[idx],\
-    \ ord[to]);\n      }\n    }\n    is_arti |= par == -1 && cnt > 1;\n    if (is_arti)\
-    \ articulation.push_back(idx);\n    return k;\n  }\n};\n#line 6 \"verify/verify-aoj-grl/aoj-grl-3-b.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, E);\n  auto g = graph(N,\
-    \ E, false, false);\n  LowLink<vvi> lowlink(g);\n  each(p, lowlink.bridge) if\
-    \ (p.first > p.second) swap(p.first, p.second);\n  sort(all(lowlink.bridge));\n\
-    \  each(p, lowlink.bridge) out(p);\n}\n"
+    \ */\n#line 4 \"graph/lowlink.hpp\"\n\n// bridge ... \u6A4B (\u8FBA (u, v) \u304C\
+    \ u < v \u3068\u306A\u308B\u3088\u3046\u306B\u683C\u7D0D)\n// articulation point\
+    \ ... \u95A2\u7BC0\u70B9\ntemplate <typename G>\nstruct LowLink {\n  const G &g;\n\
+    \  int N;\n  vector<int> ord, low, articulation;\n  vector<pair<int, int> > bridge;\n\
+    \n  LowLink(const G &_g) : g(_g), N(g.size()), ord(N, -1), low(N, -1) {\n    for\
+    \ (int i = 0, k = 0; i < N; i++) {\n      if (ord[i] == -1) k = dfs(i, k, -1);\n\
+    \    }\n  }\n\n  int dfs(int idx, int k, int par) {\n    low[idx] = (ord[idx]\
+    \ = k++);\n    int cnt = 0;\n    bool arti = false, second = false;\n    for (auto\
+    \ &to : g[idx]) {\n      if (ord[to] == -1) {\n        cnt++;\n        k = dfs(to,\
+    \ k, idx);\n        low[idx] = min(low[idx], low[to]);\n        arti |= (par !=\
+    \ -1) && (low[to] >= ord[idx]);\n        if (ord[idx] < low[to]) {\n         \
+    \ bridge.emplace_back(minmax(idx, (int)to));\n        }\n      } else if (to !=\
+    \ par || second) {\n        low[idx] = min(low[idx], ord[to]);\n      } else {\n\
+    \        second = true;\n      }\n    }\n    arti |= par == -1 && cnt > 1;\n \
+    \   if (arti) articulation.push_back(idx);\n    return k;\n  }\n};\n#line 6 \"\
+    verify/verify-aoj-grl/aoj-grl-3-b.test.cpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
+    \ {\n  ini(N, E);\n  auto g = graph(N, E, false, false);\n  LowLink<vvi> lowlink(g);\n\
+    \  each(p, lowlink.bridge) if (p.first > p.second) swap(p.first, p.second);\n\
+    \  sort(all(lowlink.bridge));\n  each(p, lowlink.bridge) out(p);\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_B\"\
     \n\n#include \"../../template/template.hpp\"\n#include \"../../graph/lowlink.hpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, E);\n  auto g = graph(N,\
@@ -264,7 +264,7 @@ data:
   isVerificationFile: true
   path: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-grl/aoj-grl-3-b.test.cpp

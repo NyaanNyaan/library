@@ -2,11 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/graph-template.hpp
-    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
+    path: data-structure/binary-indexed-tree.hpp
+    title: Binary Indexed Tree(Fenwick Tree)
   - icon: ':heavy_check_mark:'
-    path: graph/lowlink.hpp
-    title: graph/lowlink.hpp
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/mo-fast.hpp
+    title: misc/mo-fast.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -32,13 +35,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A
+    PROBLEM: https://judge.yosupo.jp/problem/static_range_inversions_query
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A
-  bundledCode: "#line 1 \"verify/verify-aoj-grl/aoj-grl-3-a.test.cpp\"\n#define PROBLEM\
-    \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A\"\n\
-    \n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    - https://judge.yosupo.jp/problem/static_range_inversions_query
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -197,60 +200,135 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"graph/lowlink.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate\
-    \ <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T\
-    \ _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost)\
-    \ : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int &x) {\n\
-    \    to = x;\n    return *this;\n  }\n\n  operator int() const { return to; }\n\
-    };\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
-    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
-    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
-    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
-    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
-    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
-    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
-    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
-    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
-    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
-    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
-    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
-    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
-    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
-    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
-    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
-    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
-    \                       bool is_directed = false, bool is_1origin = true) {\n\
-    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
-    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
-    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
-    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
-    \ */\n#line 4 \"graph/lowlink.hpp\"\n\n// bridge ... \u6A4B (\u8FBA (u, v) \u304C\
-    \ u < v \u3068\u306A\u308B\u3088\u3046\u306B\u683C\u7D0D)\n// articulation point\
-    \ ... \u95A2\u7BC0\u70B9\ntemplate <typename G>\nstruct LowLink {\n  const G &g;\n\
-    \  int N;\n  vector<int> ord, low, articulation;\n  vector<pair<int, int> > bridge;\n\
-    \n  LowLink(const G &_g) : g(_g), N(g.size()), ord(N, -1), low(N, -1) {\n    for\
-    \ (int i = 0, k = 0; i < N; i++) {\n      if (ord[i] == -1) k = dfs(i, k, -1);\n\
-    \    }\n  }\n\n  int dfs(int idx, int k, int par) {\n    low[idx] = (ord[idx]\
-    \ = k++);\n    int cnt = 0;\n    bool arti = false, second = false;\n    for (auto\
-    \ &to : g[idx]) {\n      if (ord[to] == -1) {\n        cnt++;\n        k = dfs(to,\
-    \ k, idx);\n        low[idx] = min(low[idx], low[to]);\n        arti |= (par !=\
-    \ -1) && (low[to] >= ord[idx]);\n        if (ord[idx] < low[to]) {\n         \
-    \ bridge.emplace_back(minmax(idx, (int)to));\n        }\n      } else if (to !=\
-    \ par || second) {\n        low[idx] = min(low[idx], ord[to]);\n      } else {\n\
-    \        second = true;\n      }\n    }\n    arti |= par == -1 && cnt > 1;\n \
-    \   if (arti) articulation.push_back(idx);\n    return k;\n  }\n};\n#line 6 \"\
-    verify/verify-aoj-grl/aoj-grl-3-a.test.cpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  ini(N, E);\n  auto g = graph(N, E, false, false);\n  LowLink<vvi> lowlink(g);\n\
-    \  sort(all(lowlink.articulation));\n  each(x, lowlink.articulation) out(x);\n\
-    }\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_3_A\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../graph/lowlink.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  ini(N, E);\n  auto g = graph(N,\
-    \ E, false, false);\n  LowLink<vvi> lowlink(g);\n  sort(all(lowlink.articulation));\n\
-    \  each(x, lowlink.articulation) out(x);\n}\n"
+    \ 4 \"verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp\"\
+    \n//\n#line 2 \"data-structure/binary-indexed-tree.hpp\"\n\ntemplate <typename\
+    \ T>\nstruct BinaryIndexedTree {\n  int N;\n  vector<T> data;\n\n  BinaryIndexedTree()\
+    \ = default;\n\n  BinaryIndexedTree(int size) { init(size); }\n\n  void init(int\
+    \ size) {\n    N = size + 2;\n    data.assign(N + 1, {});\n  }\n\n  // get sum\
+    \ of [0,k]\n  T sum(int k) const {\n    if (k < 0) return T{};  // return 0 if\
+    \ k < 0\n    T ret{};\n    for (++k; k > 0; k -= k & -k) ret += data[k];\n   \
+    \ return ret;\n  }\n\n  // getsum of [l,r]\n  inline T sum(int l, int r) const\
+    \ { return sum(r) - sum(l - 1); }\n\n  // get value of k\n  inline T operator[](int\
+    \ k) const { return sum(k) - sum(k - 1); }\n\n  // data[k] += x\n  void add(int\
+    \ k, T x) {\n    for (++k; k < N; k += k & -k) data[k] += x;\n  }\n\n  // range\
+    \ add x to [l,r]\n  void imos(int l, int r, T x) {\n    add(l, x);\n    add(r\
+    \ + 1, -x);\n  }\n\n  // minimize i s.t. sum(i) >= w\n  int lower_bound(T w) {\n\
+    \    if (w <= 0) return 0;\n    int x = 0;\n    for (int k = 1 << __lg(N); k;\
+    \ k >>= 1) {\n      if (x + k <= N - 1 && data[x + k] < w) {\n        w -= data[x\
+    \ + k];\n        x += k;\n      }\n    }\n    return x;\n  }\n\n  // minimize\
+    \ i s.t. sum(i) > w\n  int upper_bound(T w) {\n    if (w < 0) return 0;\n    int\
+    \ x = 0;\n    for (int k = 1 << __lg(N); k; k >>= 1) {\n      if (x + k <= N -\
+    \ 1 && data[x + k] <= w) {\n        w -= data[x + k];\n        x += k;\n     \
+    \ }\n    }\n    return x;\n  }\n};\n\n/**\n * @brief Binary Indexed Tree(Fenwick\
+    \ Tree)\n * @docs docs/data-structure/binary-indexed-tree.md\n */\n#line 6 \"\
+    verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp\"\n//\n\
+    #line 2 \"misc/mo-fast.hpp\"\n\n#line 8 \"misc/mo-fast.hpp\"\nusing namespace\
+    \ std;\n\nstruct Fast_Mo {\n  int N, Q, width;\n  vector<int> L, R, order;\n \
+    \ bool is_build;\n\n  Fast_Mo(int _n, int _q) : N(_n), Q(_q), order(Q), is_build(false)\
+    \ {\n    width = max<int>(1, 1.0 * N / max<double>(1.0, sqrt(Q / 2.0)));\n   \
+    \ iota(begin(order), end(order), 0);\n  }\n  // [l, r)\n  void insert(int l, int\
+    \ r) {\n    assert(0 <= l and l <= r and r <= N);\n    L.push_back(l), R.push_back(r);\n\
+    \  }\n\n  void build() { sort(), climb(), is_build = true; }\n\n  template <typename\
+    \ AL, typename AR, typename DL, typename DR, typename REM>\n  void run(const AL\
+    \ &add_left, const AR &add_right, const DL &delete_left,\n           const DR\
+    \ &delete_right, const REM &rem) {\n    if (!is_build) build();\n    int nl =\
+    \ 0, nr = 0;\n    for (auto idx : order) {\n      while (nl > L[idx]) add_left(--nl);\n\
+    \      while (nr < R[idx]) add_right(nr++);\n      while (nl < L[idx]) delete_left(nl++);\n\
+    \      while (nr > R[idx]) delete_right(--nr);\n      rem(idx);\n    }\n  }\n\n\
+    \ private:\n  void sort() {\n    assert((int)order.size() == Q);\n    vector<int>\
+    \ cnt(N + 1), buf(Q);\n    for (int i = 0; i < Q; i++) cnt[R[i]]++;\n    for (int\
+    \ i = 1; i < (int)cnt.size(); i++) cnt[i] += cnt[i - 1];\n    for (int i = 0;\
+    \ i < Q; i++) buf[--cnt[R[i]]] = i;\n    vector<int> b(Q);\n    for (int i = 0;\
+    \ i < Q; i++) b[i] = L[i] / width;\n    cnt.resize(N / width + 1);\n    fill(begin(cnt),\
+    \ end(cnt), 0);\n    for (int i = 0; i < Q; i++) cnt[b[i]]++;\n    for (int i\
+    \ = 1; i < (int)cnt.size(); i++) cnt[i] += cnt[i - 1];\n    for (int i = 0; i\
+    \ < Q; i++) order[--cnt[b[buf[i]]]] = buf[i];\n    for (int i = 0, j = 0; i <\
+    \ Q; i = j) {\n      int bi = b[order[i]];\n      j = i + 1;\n      while (j !=\
+    \ Q and bi == b[order[j]]) j++;\n      if (!(bi & 1)) reverse(begin(order) + i,\
+    \ begin(order) + j);\n    }\n  }\n\n  int dist(int i, int j) { return abs(L[i]\
+    \ - L[j]) + abs(R[i] - R[j]); }\n  \n  void climb(int iter = 3, int interval =\
+    \ 5) {\n    vector<int> d(Q - 1);\n    for (int i = 0; i < Q - 1; i++) d[i] =\
+    \ dist(order[i], order[i + 1]);\n    while (iter--) {\n      for (int i = 1; i\
+    \ < Q; i++) {\n        int pre1 = d[i - 1];\n        int js = i + 1, je = min<int>(i\
+    \ + interval, Q - 1);\n        for (int j = je - 1; j >= js; j--) {\n        \
+    \  int pre2 = d[j];\n          int now1 = dist(order[i - 1], order[j]);\n    \
+    \      int now2 = dist(order[i], order[j + 1]);\n          if (now1 + now2 < pre1\
+    \ + pre2) {\n            reverse(begin(order) + i, begin(order) + j + 1);\n  \
+    \          reverse(begin(d) + i, begin(d) + j);\n            d[i - 1] = pre1 =\
+    \ now1;\n            d[j] = now2;\n          }\n        }\n      }\n    }\n  }\n\
+    };\n#line 8 \"verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp\"\
+    \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
+    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
+    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
+    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
+    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
+    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
+    \ pre;\n\ninline void load() {\n  int len = in_right - in_left;\n  memmove(inbuf,\
+    \ inbuf + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
+    \  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
+    \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
+    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
+    \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
+    \ <typename T>\ninline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n\
+    \  char c;\n  do c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]]\
+    \ bool minus = false;\n  if constexpr (is_signed<T>::value == true) {\n    if\
+    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
+    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n}\ninline void\
+    \ rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head,\
+    \ Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) {\n\
+    \  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = c;\n}\ninline void\
+    \ wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = b\
+    \ ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
+    \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
+    \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
+    \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
+    \    return;\n  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x <\
+    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n\
+    \  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n\
+    \    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n    \
+    \  outbuf[out_right] = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t\
+    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
+    \     outbuf[out_right] = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n \
+    \     out_right += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2) + 1, 3);\n      out_right += 3;\n    } else\
+    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n      out_right\
+    \ += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4, 12 - i);\n  out_right\
+    \ += 12 - i;\n}\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
+    inline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n\
+    }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
+    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
+    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
+    using fastio::wtn;\n#line 10 \"verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  int N, Q;\n  rd(N);\n  rd(Q);\n  vi\
+    \ a(N);\n  rep(i, N) rd(a[i]);\n  Fast_Mo mo(N, Q);\n  rep(i, Q) {\n    int l,\
+    \ r;\n    rd(l);\n    rd(r);\n    mo.insert(l, r);\n  }\n  auto zip = mkuni(a);\n\
+    \  BinaryIndexedTree<int> bit(zip.size() + 1);\n  rep(i, N) a[i] = lb(zip, a[i]);\n\
+    \n  ll cnt = 0;\n  vl ans(Q);\n  auto addleft = [&](int idx) {\n    cnt += bit.sum(0,\
+    \ a[idx] - 1);\n    bit.add(a[idx], 1);\n  };\n  auto addright = [&](int idx)\
+    \ {\n    cnt += bit.sum(a[idx] + 1, zip.size());\n    bit.add(a[idx], 1);\n  };\n\
+    \  auto delleft = [&](int idx) {\n    cnt -= bit.sum(0, a[idx] - 1);\n    bit.add(a[idx],\
+    \ -1);\n  };\n  auto delright = [&](int idx) {\n    cnt -= bit.sum(a[idx] + 1,\
+    \ zip.size());\n    bit.add(a[idx], -1);\n  };\n  auto rem = [&](int idx) { ans[idx]\
+    \ = cnt; };\n  mo.run(addleft, addright, delleft, delright, rem);\n  each(x, ans)\
+    \ {\n    wt(x);\n    wt('\\n');\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
+    \  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../data-structure/binary-indexed-tree.hpp\"\
+    \n//\n#include \"../../misc/mo-fast.hpp\"\n//\n#include \"../../misc/fastio.hpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  int N, Q;\n  rd(N);\n  rd(Q);\n  vi\
+    \ a(N);\n  rep(i, N) rd(a[i]);\n  Fast_Mo mo(N, Q);\n  rep(i, Q) {\n    int l,\
+    \ r;\n    rd(l);\n    rd(r);\n    mo.insert(l, r);\n  }\n  auto zip = mkuni(a);\n\
+    \  BinaryIndexedTree<int> bit(zip.size() + 1);\n  rep(i, N) a[i] = lb(zip, a[i]);\n\
+    \n  ll cnt = 0;\n  vl ans(Q);\n  auto addleft = [&](int idx) {\n    cnt += bit.sum(0,\
+    \ a[idx] - 1);\n    bit.add(a[idx], 1);\n  };\n  auto addright = [&](int idx)\
+    \ {\n    cnt += bit.sum(a[idx] + 1, zip.size());\n    bit.add(a[idx], 1);\n  };\n\
+    \  auto delleft = [&](int idx) {\n    cnt -= bit.sum(0, a[idx] - 1);\n    bit.add(a[idx],\
+    \ -1);\n  };\n  auto delright = [&](int idx) {\n    cnt -= bit.sum(a[idx] + 1,\
+    \ zip.size());\n    bit.add(a[idx], -1);\n  };\n  auto rem = [&](int idx) { ans[idx]\
+    \ = cnt; };\n  mo.run(addleft, addright, delleft, delright, rem);\n  each(x, ans)\
+    \ {\n    wt(x);\n    wt('\\n');\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
+    \  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -258,18 +336,19 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - graph/lowlink.hpp
-  - graph/graph-template.hpp
+  - data-structure/binary-indexed-tree.hpp
+  - misc/mo-fast.hpp
+  - misc/fastio.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
   requiredBy: []
   timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
-- /verify/verify/verify-aoj-grl/aoj-grl-3-a.test.cpp.html
-title: verify/verify-aoj-grl/aoj-grl-3-a.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
 ---
