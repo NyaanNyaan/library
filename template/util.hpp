@@ -24,11 +24,6 @@ struct P : pair<T, U> {
   using pair<T, U>::first;
   using pair<T, U>::second;
 
-  T &x() { return first; }
-  const T &x() const { return first; }
-  U &y() { return second; }
-  const U &y() const { return second; }
-
   P &operator+=(const P &r) {
     first += r.first;
     second += r.second;
@@ -44,9 +39,19 @@ struct P : pair<T, U> {
     second *= r.second;
     return *this;
   }
+  template <typename S>
+  P &operator*=(const S &r) {
+    first *= r, second *= r;
+    return *this;
+  }
   P operator+(const P &r) const { return P(*this) += r; }
   P operator-(const P &r) const { return P(*this) -= r; }
   P operator*(const P &r) const { return P(*this) *= r; }
+  template <typename S>
+  P operator*(const S &r) const {
+    return P(*this) *= r;
+  }
+  P operator-() const { return P{-first, -second}; }
 };
 
 using pl = P<ll, ll>;
@@ -123,7 +128,7 @@ vector<T> mkuni(const vector<T> &v) {
 }
 
 template <typename F>
-vector<int> mkord(int N, F f) {
+vector<int> mkord(int N,F f) {
   vector<int> ord(N);
   iota(begin(ord), end(ord), 0);
   sort(begin(ord), end(ord), f);
@@ -137,5 +142,26 @@ vector<int> mkinv(vector<T> &v) {
   for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;
   return inv;
 }
+
+vector<int> mkiota(int n) {
+  vector<int> ret(n);
+  iota(begin(ret), end(ret), 0);
+  return ret;
+}
+
+template <typename T>
+T mkrev(const T &v) {
+  T w{v};
+  reverse(begin(w), end(w));
+  return w;
+}
+
+template <typename T>
+bool nxp(vector<T> &v) {
+  return next_permutation(begin(v), end(v));
+}
+
+template <typename T>
+using minpq = priority_queue<T, vector<T>, greater<T>>;
 
 }  // namespace Nyaan
