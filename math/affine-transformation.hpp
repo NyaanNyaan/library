@@ -6,6 +6,7 @@ struct Affine {
   constexpr Affine() : a(1), b(0) {}
   constexpr Affine(mint _a, mint _b) : a(_a), b(_b) {}
   mint operator()(mint x) { return a * x + b; }
+  // R(L(x))
   friend Affine operator*(const Affine& l, const Affine& r) {
     return Affine(l.a * r.a, l.b * r.a + r.b);
   }

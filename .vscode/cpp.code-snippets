@@ -28,7 +28,7 @@
   },
   "sol2": {
 		"prefix": "_sol",
-		"body": "#include \"template/template.hpp\"\r\n//\r\n\r\nusing namespace Nyaan;\r\n\r\nvoid q() {\r\n  $0\r\n}\r\n\r\nvoid Nyaan::solve() {\r\n  int T = 1;\r\n  // in(T);\r\n  while (T--) q();\r\n}",
+		"body": "#include \"template/template.hpp\"\r\n//\r\n\r\nusing namespace Nyaan;\r\n\r\nvoid q() {\r\n  $0\r\n}\r\n\r\nvoid Nyaan::solve() {\r\n  int t = 1;\r\n  // in(t);\r\n  while (t--) q();\r\n}",
 		"description": ""
 	},
   "_mint": {

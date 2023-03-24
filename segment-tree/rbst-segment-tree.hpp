@@ -565,7 +565,7 @@ struct RBSTSegmentTreeBase {
   }
 
   // 頂点の削除
-  void erase(I i) { _erase(root, i); }
+  virtual void erase(I i) { _erase(root, i); }
 
   // 範囲作用
   void apply(I l, I r, const E &e) {
