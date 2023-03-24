@@ -19,6 +19,7 @@ void Nyaan::solve() {
   rep(i, Q) {
     in(cmd[i], X[i]);
     if (cmd[i] != 3) in(Y[i]);
+    if (cmd[i] < 2 and X[i] > Y[i]) swap(X[i], Y[i]);
   }
 
   using LCT = LinkCutTreeSubtreeQuery<ll, add, sub>;
