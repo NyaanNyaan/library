@@ -143,6 +143,7 @@
 "verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp": "2023-03-23 17:00:44 +0900",
+"verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp": "2023-03-24 18:06:49 +0900",
 "verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yosupo-ds/yosupo-persistent-queue.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp": "2023-03-23 17:00:44 +0900",
