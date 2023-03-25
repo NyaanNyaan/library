@@ -1982,5 +1982,3 @@ layout: toppage
 バグや解説の誤りなどを発見した方がいましたら[こちら](https://github.com/NyaanNyaan/library/issues/new/choose)からご一報いただけると助かります。
 
 動作確認はg++/C++17で行っています。また、一部のライブラリはavx2命令が実行できる環境でのみ動作します。
-
-[![GitHub Pages](https://img.shields.io/static/v1?label=GitHub+Pages&message=Homepage+&color=brightgreen&logo=github)](https://nyaannyaan.github.io/)
