@@ -32,7 +32,28 @@ pl calc(ll N, ll K) {
 }
 
 void q() {
-  
+  inl(N, K);
+  auto g = [](ll n) -> ll { return n; };
+  auto h = [](ll n) -> ll { return n * (n + 1) / 2; };
+  enumerate_mf_prefix_sum<ll, decltype(g), decltype(h)> tot(N, g, h);
+
+  ll s = tot(N) - 1;
+  trc(s);
+  ll p = -1, q = -1;
+  if (K <= s) {
+    tie(p, q) = calc(N, K);
+  } else if (K == s + 1) {
+    p = q = 1;
+  } else if (K <= s * 2 + 1) {
+    tie(q, p) = calc(N, 2 * s + 1 - (K - 1));
+  } else {
+    // do nothing
+  }
+  if (p == -1) {
+    out(-1);
+  } else {
+    cout << p << "/" << q << "\n";
+  }
 }
 
 void Nyaan::solve() {
