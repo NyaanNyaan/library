@@ -25,7 +25,7 @@ inline u64 binary_gcd(u64 a, u64 b) {
 }
 }  // namespace BinaryGCDImpl
 
-long long fgcd(long long a, long long b) {
+long long binary_gcd(long long a, long long b) {
   return BinaryGCDImpl::binary_gcd(abs(a), abs(b));
 }
 
