@@ -1,5 +1,7 @@
 #pragma once
 
+#include "isqrt.hpp"
+
 namespace EnumerateQuotientImpl {
 long long fast_div(long long a, long long b) { return 1.0 * a / b; };
 long long slow_div(long long a, long long b) { return a / b; };
@@ -10,9 +12,7 @@ long long slow_div(long long a, long long b) { return a / b; };
 // 商は小さい方から走査する
 template <typename T, typename F>
 void enumerate_quotient(T N, const F& f) {
-  T sq = sqrt(N);
-  while ((sq + 1) * (sq + 1) <= N) sq++;
-  while (sq * sq > N) sq--;
+  T sq = isqrt(N);
 
 #define FUNC(d)                       \
   T upper = N, quo = 0;               \
