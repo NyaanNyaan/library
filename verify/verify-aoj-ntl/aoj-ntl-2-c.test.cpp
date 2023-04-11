@@ -1,7 +1,7 @@
 #define PROBLEM \
   "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_C"
 
-#include "../../math/multiprecision-integer.hpp"
+#include "../../math/bigint.hpp"
 //
 int main() {
   bigint a, b;

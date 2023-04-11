@@ -1,5 +1,5 @@
 
-#include "multiprecision-integer.hpp"
+#include "bigint.hpp"
 
 namespace GarnerImpl {
 

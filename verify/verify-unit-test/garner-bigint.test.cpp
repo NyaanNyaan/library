@@ -2,7 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../math/garner-bigint.hpp"
+#include "../../math/bigint-garner.hpp"
 //
 #include "../../modint/arbitrary-modint.hpp"
 //

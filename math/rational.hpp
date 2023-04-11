@@ -1,68 +1,62 @@
 #pragma once
 
-struct Rational {
-  using R = Rational;
-  using i128 = __int128_t;
-  using i64 = long long;
-  using u64 = unsigned long long;
-  long long x, y;
-  Rational() : x(0), y(1) {}
-  Rational(long long _x, long long _y = 1) : x(_x), y(_y) {
+#include <cassert>
+#include <numeric>
+#include <vector>
+using namespace std;
+
+#include "../math-fast/gcd.hpp"
+
+// T : 値, U : 比較用
+template <typename T, typename U>
+struct RationalBase {
+  using R = RationalBase;
+  using Key = T;
+  T x, y;
+  RationalBase() : x(0), y(1) {}
+  RationalBase(T _x, T _y = 1) : x(_x), y(_y) {
     assert(y != 0);
-    if (_y != 1) {
-      long long g = gcd(x, y);
+    if (y == -1) x = -x, y = -y;
+    if (y != 1) {
+      T g;
+      if constexpr (is_same_v<T, int> || is_same_v<T, long long>) {
+        g = binary_gcd(abs(x), abs(y));
+      } else {
+        assert(false);
+      }
       if (g != 0) x /= g, y /= g;
       if (y < 0) x = -x, y = -y;
     }
   }
-
-  u64 gcd(i64 A, i64 B) {
-    u64 a = A >= 0 ? A : -A;
-    u64 b = B >= 0 ? B : -B;
-    if (a == 0 || b == 0) return a + b;
-    int n = __builtin_ctzll(a);
-    int m = __builtin_ctzll(b);
-    a >>= n;
-    b >>= m;
-    while (a != b) {
-      int d = __builtin_ctzll(a - b);
-      bool f = a > b;
-      u64 c = f ? a : b;
-      b = f ? b : a;
-      a = (c - b) >> d;
-    }
-    return a << min(n, m);
+  // y = 0 の代入も認める
+  static R raw(T _x, T _y) {
+    R r;
+    r.x = _x, r.y = _y;
+    return r;
   }
-
   friend R operator+(const R& l, const R& r) {
-    return R(l.x * r.y + l.y * r.x, l.y * r.y);
+    if (l.y == r.y) return R{l.x + r.x, l.y};
+    return R{l.x * r.y + l.y * r.x, l.y * r.y};
   }
   friend R operator-(const R& l, const R& r) {
-    return R(l.x * r.y - l.y * r.x, l.y * r.y);
+    if (l.y == r.y) return R{l.x - r.x, l.y};
+    return R{l.x * r.y - l.y * r.x, l.y * r.y};
   }
-  friend R operator*(const R& l, const R& r) { return R(l.x * r.x, l.y * r.y); }
-  friend R operator/(const R& l, const R& r) {
-    assert(r.x != 0);
-    return R(l.x * r.y, l.y * r.x);
-  }
+  friend R operator*(const R& l, const R& r) { return R{l.x * r.x, l.y * r.y}; }
+  friend R operator/(const R& l, const R& r) { return R{l.x * r.y, l.y * r.x}; }
   R& operator+=(const R& r) { return (*this) = (*this) + r; }
   R& operator-=(const R& r) { return (*this) = (*this) - r; }
   R& operator*=(const R& r) { return (*this) = (*this) * r; }
   R& operator/=(const R& r) { return (*this) = (*this) / r; }
-  R operator-() const {
-    R r;
-    r.x = -x, r.y = y;
-    return r;
-  }
+  R operator-() const { return raw(-x, y); }
   R inverse() const {
     assert(x != 0);
-    R r;
-    r.x = y, r.y = x;
-    if (x < 0) r.x = -r.x, r.y = -r.y;
+    R r = raw(y, x);
+    if (r.y < 0) r.x = -r.x, r.y = -r.y;
     return r;
   }
   R pow(long long p) const {
-    R res(1), base(*this);
+    R res{1}, base{*this};
     while (p) {
       if (p & 1) res *= base;
       base *= base;
@@ -70,7 +64,6 @@ struct Rational {
     }
     return res;
   }
-
   friend bool operator==(const R& l, const R& r) {
     return l.x == r.x && l.y == r.y;
   };
@@ -78,11 +71,11 @@ struct Rational {
     return l.x != r.x || l.y != r.y;
   };
   friend bool operator<(const R& l, const R& r) {
-    return i128(l.x) * r.y < i128(l.y) * r.x;
+    return U{l.x} * r.y < U{l.y} * r.x;
   };
   friend bool operator<=(const R& l, const R& r) { return l < r || l == r; }
   friend bool operator>(const R& l, const R& r) {
-    return i128(l.x) * r.y > i128(l.y) * r.x;
+    return U{l.x} * r.y > U{l.y} * r.x;
   };
   friend bool operator>=(const R& l, const R& r) { return l > r || l == r; }
   friend ostream& operator<<(ostream& os, const R& r) {
@@ -91,17 +84,19 @@ struct Rational {
     return os;
   }
 
-  long long toMint(long long mod) {
+  T toMint(T mod) {
     assert(mod != 0);
-    i64 a = y, b = mod, u = 1, v = 0, t;
+    T a = y, b = mod, u = 1, v = 0, t;
     while (b > 0) {
       t = a / b;
       swap(a -= t * b, b);
       swap(u -= t * v, v);
     }
-    return i128((u % mod + mod) % mod) * x % mod;
+    return U((u % mod + mod) % mod) * x % mod;
   }
 };
+
+using Rational = RationalBase<long long, __int128_t>;
 
 template <typename R = Rational>
 struct Binomial {
@@ -113,11 +108,18 @@ struct Binomial {
     fc.push_back(nxt);
   }
   R fac(int n) {
+    if (n < 0) return 0;
     while ((int)fc.size() <= n) extend();
     return fc[n];
   }
-  R finv(int n) { return fac(n).inverse(); }
-  R inv(int n) { return R{1, max(n, 1)}; }
+  R finv(int n) {
+    if (n < 0) return 0;
+    return fac(n).inverse();
+  }
+  R inv(int n) {
+    if (n < 0) return -inv(-n);
+    return R{1, max(n, 1)};
+  }
   R C(int n, int r) {
     if (n < 0 or r < 0 or n < r) return R{0};
     return fac(n) * finv(n - r) * finv(r);

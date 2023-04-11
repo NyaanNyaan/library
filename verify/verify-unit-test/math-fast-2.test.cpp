@@ -4,22 +4,26 @@
 //
 #include "../../math-fast/gcd.hpp"
 
-namespace fast_gcd_verify {
+using namespace Nyaan;
 
-using i64 = long long;
-
-i64 naive_gcd(i64 a, i64 b) {
+i128 naive_gcd(i128 a, i128 b) {
+  if (a < 0) a = -a;
+  if (b < 0) b = -b;
   while (b) swap(a %= b, b);
   return a;
 }
 
-i64 x_;
+ll x_;
 void rng_init() { x_ = 88172645463325252ULL; }
-i64 rng() { return x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9); }
+i128 rng() {
+  ll a = (x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9));
+  ll b = (x_ = x_ ^ (x_ << 7), x_ = x_ ^ (x_ >> 9));
+  return (i128(a) << 64) + b;
+}
 
 void unit_test() {
-  using P = pair<i64, i64>;
-  using F = i64 (*)(i64, i64);
+  using P = pair<i128, i128>;
+  using F = i128 (*)(i128, i128);
 
   vector<P> testcase{P(2, 4),
                      P(100000, 10000),
@@ -37,20 +41,22 @@ void unit_test() {
                      P(0, -1),
                      P(-1, 0),
                      P(-1, -1)};
-  for (i64 i = 1000; i--;)
-    for (i64 j = 1000; j--;) testcase.emplace_back(i, j);
+  for (i128 i = 1000; i--;)
+    for (i128 j = 1000; j--;) testcase.emplace_back(i, j);
   rng_init();
-  for (i64 n = 10000; n--;) {
-    i64 i = rng(), j = rng();
+  for (i128 n = 10000; n--;) {
+    i128 i = rng(), j = rng();
     testcase.emplace_back(i, j);
   }
 
-  vector<F> functions{std::__gcd<i64>, naive_gcd, binary_gcd};
+  vector<F> functions{naive_gcd, binary_gcd128};
 
   for (auto p : testcase) {
-    unordered_set<i64> s;
+    set<i128> s;
     for (auto &f : functions) {
-      s.insert(abs(f(p.first, p.second)));
+      i128 x = f(p.first, p.second);
+      if (x < 0) x = -x;
+      s.insert(x);
     }
     if (s.size() != 1u) {
       cerr << "verify failed." << endl;
@@ -63,12 +69,9 @@ void unit_test() {
   }
   cerr << "verify passed." << endl;
 }
-}  // namespace fast_gcd_verify
-
-using namespace Nyaan;
 
 void Nyaan::solve() {
-  fast_gcd_verify::unit_test();
+  unit_test();
 
   int a, b;
   cin >> a >> b;
