@@ -2,7 +2,7 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../math/multiprecision-integer.hpp"
+#include "../../math/bigint.hpp"
 //
 #include "../../matrix/matrix-fast.hpp"
 

@@ -288,14 +288,11 @@ struct MultiPrecisionInteger {
         }
       }
     }
-    vector<int> c;
+    vector<int> c(prod.size() + 1);
     long long x = 0;
-    for (int i = 0;; i++) {
-      if (i >= (int)prod.size() && x == 0) break;
-      if (i < (int)prod.size()) x += prod[i];
-      c.push_back(x % D);
-      x /= D;
-    }
+    int i = 0;
+    for (; i < (int)prod.size(); i++) x += prod[i], c[i] = x % D, x /= D;
+    while (x) c[i] = x % D, x /= D, i++;
     _shrink(c);
     return c;
   }

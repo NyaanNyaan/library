@@ -3,6 +3,8 @@
 #include "../../template/template.hpp"
 //
 #include "../../math/gray-code.hpp"
+#include "../../math/inv-mod.hpp"
+#include "../../math/isqrt.hpp"
 #include "../../math/sum-of-floor.hpp"
 #include "../../misc/rng.hpp"
 using namespace Nyaan;
@@ -37,9 +39,50 @@ void mod_affine_range_counting_test() {
   }
 }
 
+void isqrt_test() {
+  auto check = [&](long long x) -> void {
+    ll y = isqrt(x);
+    assert(y * y <= x);
+    assert(x < (y + 1) * (y + 1));
+  };
+
+  rep(i, TEN(4)) check(i);
+  rep(_, 100) {
+    ll x = rng(100, 2e9);
+    x = x * x;
+    reg(i, x - 50, x + 50) check(i);
+  }
+}
+
+void inv_mod_test() {
+  rep1(mod, 100) {
+    rep(a, mod * 10) {
+      if (gcd(a, mod) != 1) continue;
+      int b = inv_mod(a, mod);
+      assert(a * b % mod == 1 % mod);
+    }
+  }
+
+  rep(_, 1000) {
+    ll mod = rng(2, TEN(18));
+    ll x = 0;
+    do {
+      x = rng(1, mod - 1);
+    } while (gcd(mod, x) != 1);
+    ll y = inv_mod(x, mod);
+    assert(i128(x) * y % mod == 1);
+  }
+}
+
 void Nyaan::solve() {
   gray_code_test();
+  cerr << "OK gray code" << endl;
   mod_affine_range_counting_test();
+  cerr << "OK mod affine" << endl;
+  isqrt_test();
+  cerr << "OK isqrt" << endl;
+  inv_mod_test();
+  cerr << "OK inv mod" << endl;
 
   int a, b;
   cin >> a >> b;
