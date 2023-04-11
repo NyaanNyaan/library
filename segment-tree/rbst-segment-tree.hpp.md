@@ -654,20 +654,20 @@ data:
   isVerificationFile: false
   path: segment-tree/rbst-segment-tree.hpp
   requiredBy:
-  - data-structure/slope-trick-weighted.hpp
   - segment-tree/rbst-sequence.hpp
+  - data-structure/slope-trick-weighted.hpp
   timestamp: '2023-03-24 20:50:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1786.test.cpp
   - verify/verify-yuki/yuki-1467-weighted.test.cpp
-  - verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
-  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
-  - verify/verify-unit-test/rbst-sequence.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - verify/verify-unit-test/rbst-sequence.test.cpp
 documentation_of: segment-tree/rbst-segment-tree.hpp
 layout: document
 redirect_from:

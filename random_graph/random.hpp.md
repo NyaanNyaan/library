@@ -82,8 +82,8 @@ data:
   isVerificationFile: false
   path: random_graph/random.hpp
   requiredBy:
-  - random_graph/graph.hpp
   - random_graph/gen.hpp
+  - random_graph/graph.hpp
   timestamp: '2021-08-10 23:14:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

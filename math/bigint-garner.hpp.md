@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: math/bigint.hpp
+    title: "\u591A\u500D\u9577\u6574\u6570"
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -10,78 +13,45 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: math/garner-bigint.hpp
-    title: Garner's algorithm for bigint
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigint.test.cpp
-    title: verify/verify-unit-test/bigint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigint2.test.cpp
-    title: verify/verify-unit-test/bigint2.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigint3.test.cpp
-    title: verify/verify-unit-test/bigint3.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0303.test.cpp
-    title: verify/verify-yuki/yuki-0303.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u591A\u500D\u9577\u6574\u6570"
+    document_title: Garner's algorithm for bigint
     links: []
-  bundledCode: "#line 2 \"math/multiprecision-integer.hpp\"\n\n#include <algorithm>\n\
-    #include <cassert>\n#include <cmath>\n#include <iostream>\n#include <tuple>\n\
-    #include <utility>\n#include <vector>\nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\
-    \n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\n\
-    struct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32\
-    \ = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
-    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
-    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
-    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
-    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
-    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
-    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
-    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
-    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
-    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
-    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
-    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
-    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
-    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
-    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+  bundledCode: "#line 1 \"math/bigint-garner.hpp\"\n\n#line 2 \"math/bigint.hpp\"\n\
+    \n#include <algorithm>\n#include <cassert>\n#include <cmath>\n#include <iostream>\n\
+    #include <tuple>\n#include <utility>\n#include <vector>\nusing namespace std;\n\
+    \n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
+    \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
+    \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
+    \  for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n\
+    \  static constexpr u32 r = get_r();\n  static constexpr u32 n2 = -u64(mod) %\
+    \ mod;\n  static_assert(r * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod\
+    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
+    invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() :\
+    \ a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
+    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
+    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
+    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
+    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
+    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
+    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
+    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
+    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
+    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
+    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
+    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
+    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
+    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
     \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
     \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
@@ -206,7 +176,7 @@ data:
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
     \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
     \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
-    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/multiprecision-integer.hpp\"\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/bigint.hpp\"\
     \n\nnamespace MultiPrecisionIntegerImpl {\nstruct TENS {\n  static constexpr int\
     \ offset = 30;\n  constexpr TENS() : _tend() {\n    _tend[offset] = 1;\n    for\
     \ (int i = 1; i <= offset; i++) {\n      _tend[offset + i] = _tend[offset + i\
@@ -317,28 +287,27 @@ data:
     \ {\n        long long p = 1LL * a[i] * b[j];\n        prod[i + j] += p;\n   \
     \     if (prod[i + j] >= (4LL * D * D)) {\n          prod[i + j] -= 4LL * D *\
     \ D;\n          prod[i + j + 1] += 4LL * D;\n        }\n      }\n    }\n    vector<int>\
-    \ c;\n    long long x = 0;\n    for (int i = 0;; i++) {\n      if (i >= (int)prod.size()\
-    \ && x == 0) break;\n      if (i < (int)prod.size()) x += prod[i];\n      c.push_back(x\
-    \ % D);\n      x /= D;\n    }\n    _shrink(c);\n    return c;\n  }\n  // a * b\n\
-    \  static vector<int> _mul(const vector<int>& a, const vector<int>& b) {\n   \
-    \ if (_is_zero(a) || _is_zero(b)) return {};\n    if (_is_one(a)) return b;\n\
-    \    if (_is_one(b)) return a;\n    if (min<int>(a.size(), b.size()) <= 128) {\n\
-    \      return a.size() < b.size() ? _mul_naive(b, a) : _mul_naive(a, b);\n   \
-    \ }\n    return _mul_fft(a, b);\n  }\n  // 0 <= A < 1e18, 1 <= B < 1e9\n  static\
-    \ pair<vector<int>, vector<int>> _divmod_li(const vector<int>& a,\n          \
-    \                                         const vector<int>& b) {\n    assert(0\
-    \ <= (int)a.size() && (int)a.size() <= 2);\n    assert((int)b.size() == 1);\n\
-    \    long long va = _to_ll(a);\n    int vb = b[0];\n    return {_integer_to_vec(va\
-    \ / vb), _integer_to_vec(va % vb)};\n  }\n  // 0 <= A < 1e18, 1 <= B < 1e18\n\
-    \  static pair<vector<int>, vector<int>> _divmod_ll(const vector<int>& a,\n  \
-    \                                                 const vector<int>& b) {\n  \
-    \  assert(0 <= (int)a.size() && (int)a.size() <= 2);\n    assert(1 <= (int)b.size()\
-    \ && (int)b.size() <= 2);\n    long long va = _to_ll(a), vb = _to_ll(b);\n   \
-    \ return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};\n  }\n  // 1 <=\
-    \ B < 1e9\n  static pair<vector<int>, vector<int>> _divmod_1e9(const vector<int>&\
-    \ a,\n                                                    const vector<int>& b)\
-    \ {\n    assert((int)b.size() == 1);\n    if (b[0] == 1) return {a, {}};\n   \
-    \ if ((int)a.size() <= 2) return _divmod_li(a, b);\n    vector<int> quo(a.size());\n\
+    \ c(prod.size() + 1);\n    long long x = 0;\n    int i = 0;\n    for (; i < (int)prod.size();\
+    \ i++) x += prod[i], c[i] = x % D, x /= D;\n    while (x) c[i] = x % D, x /= D,\
+    \ i++;\n    _shrink(c);\n    return c;\n  }\n  // a * b\n  static vector<int>\
+    \ _mul(const vector<int>& a, const vector<int>& b) {\n    if (_is_zero(a) || _is_zero(b))\
+    \ return {};\n    if (_is_one(a)) return b;\n    if (_is_one(b)) return a;\n \
+    \   if (min<int>(a.size(), b.size()) <= 128) {\n      return a.size() < b.size()\
+    \ ? _mul_naive(b, a) : _mul_naive(a, b);\n    }\n    return _mul_fft(a, b);\n\
+    \  }\n  // 0 <= A < 1e18, 1 <= B < 1e9\n  static pair<vector<int>, vector<int>>\
+    \ _divmod_li(const vector<int>& a,\n                                         \
+    \          const vector<int>& b) {\n    assert(0 <= (int)a.size() && (int)a.size()\
+    \ <= 2);\n    assert((int)b.size() == 1);\n    long long va = _to_ll(a);\n   \
+    \ int vb = b[0];\n    return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};\n\
+    \  }\n  // 0 <= A < 1e18, 1 <= B < 1e18\n  static pair<vector<int>, vector<int>>\
+    \ _divmod_ll(const vector<int>& a,\n                                         \
+    \          const vector<int>& b) {\n    assert(0 <= (int)a.size() && (int)a.size()\
+    \ <= 2);\n    assert(1 <= (int)b.size() && (int)b.size() <= 2);\n    long long\
+    \ va = _to_ll(a), vb = _to_ll(b);\n    return {_integer_to_vec(va / vb), _integer_to_vec(va\
+    \ % vb)};\n  }\n  // 1 <= B < 1e9\n  static pair<vector<int>, vector<int>> _divmod_1e9(const\
+    \ vector<int>& a,\n                                                    const vector<int>&\
+    \ b) {\n    assert((int)b.size() == 1);\n    if (b[0] == 1) return {a, {}};\n\
+    \    if ((int)a.size() <= 2) return _divmod_li(a, b);\n    vector<int> quo(a.size());\n\
     \    long long d = 0;\n    int b0 = b[0];\n    for (int i = a.size() - 1; i >=\
     \ 0; i--) {\n      d = d * D + a[i];\n      assert(d < 1LL * D * b0);\n      int\
     \ q = d / b0, r = d % b0;\n      quo[i] = q, d = r;\n    }\n    _shrink(quo);\n\
@@ -426,255 +395,91 @@ data:
     \ s << \" : \";\n    cerr << \"{ \";\n    for (int i = 0; i < (int)a.size(); i++)\
     \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
     \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
-    \ */\n"
-  code: "#pragma once\n\n#include <algorithm>\n#include <cassert>\n#include <cmath>\n\
-    #include <iostream>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
-    using namespace std;\n\n#include \"../ntt/arbitrary-ntt.hpp\"\n\nnamespace MultiPrecisionIntegerImpl\
-    \ {\nstruct TENS {\n  static constexpr int offset = 30;\n  constexpr TENS() :\
-    \ _tend() {\n    _tend[offset] = 1;\n    for (int i = 1; i <= offset; i++) {\n\
-    \      _tend[offset + i] = _tend[offset + i - 1] * 10.0;\n      _tend[offset -\
-    \ i] = 1.0 / _tend[offset + i];\n    }\n  }\n  long double ten_ld(int n) const\
-    \ {\n    assert(-offset <= n and n <= offset);\n    return _tend[n + offset];\n\
-    \  }\n\n private:\n  long double _tend[offset * 2 + 1];\n};\n}  // namespace MultiPrecisionIntegerImpl\n\
-    \n// 0 \u306F neg=false, dat={} \u3068\u3057\u3066\u6271\u3046\nstruct MultiPrecisionInteger\
-    \ {\n  using M = MultiPrecisionInteger;\n  inline constexpr static MultiPrecisionIntegerImpl::TENS\
-    \ tens = {};\n\n  static constexpr int D = 1000000000;\n  static constexpr int\
-    \ logD = 9;\n  bool neg;\n  vector<int> dat;\n\n  MultiPrecisionInteger() : neg(false),\
-    \ dat() {}\n\n  MultiPrecisionInteger(bool n, const vector<int>& d) : neg(n),\
-    \ dat(d) {}\n\n  template <typename I, enable_if_t<is_integral_v<I> ||\n     \
-    \                               is_same_v<I, __int128_t>>* = nullptr>\n  MultiPrecisionInteger(I\
-    \ x) : neg(false) {\n    if constexpr (is_signed_v<I> || is_same_v<I, __int128_t>)\
-    \ {\n      if (x < 0) neg = true, x = -x;\n    }\n    while (x) dat.push_back(x\
-    \ % D), x /= D;\n  }\n\n  MultiPrecisionInteger(const string& S) : neg(false)\
-    \ {\n    assert(!S.empty());\n    if (S.size() == 1u && S[0] == '0') return;\n\
-    \    int l = 0;\n    if (S[0] == '-') ++l, neg = true;\n    for (int ie = S.size();\
-    \ l < ie; ie -= logD) {\n      int is = max(l, ie - logD);\n      long long x\
-    \ = 0;\n      for (int i = is; i < ie; i++) x = x * 10 + S[i] - '0';\n      dat.push_back(x);\n\
-    \    }\n  }\n\n  friend M operator+(const M& lhs, const M& rhs) {\n    if (lhs.neg\
-    \ == rhs.neg) return {lhs.neg, _add(lhs.dat, rhs.dat)};\n    if (_leq(lhs.dat,\
-    \ rhs.dat)) {\n      // |l| <= |r|\n      auto c = _sub(rhs.dat, lhs.dat);\n \
-    \     bool n = _is_zero(c) ? false : rhs.neg;\n      return {n, c};\n    }\n \
-    \   auto c = _sub(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false : lhs.neg;\n\
-    \    return {n, c};\n  }\n  friend M operator-(const M& lhs, const M& rhs) { return\
-    \ lhs + (-rhs); }\n\n  friend M operator*(const M& lhs, const M& rhs) {\n    auto\
-    \ c = _mul(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false : (lhs.neg ^ rhs.neg);\n\
-    \    return {n, c};\n  }\n  friend pair<M, M> divmod(const M& lhs, const M& rhs)\
-    \ {\n    auto dm = _divmod_newton(lhs.dat, rhs.dat);\n    bool dn = _is_zero(dm.first)\
-    \ ? false : lhs.neg != rhs.neg;\n    bool mn = _is_zero(dm.second) ? false : lhs.neg;\n\
-    \    return {M{dn, dm.first}, M{mn, dm.second}};\n  }\n  friend M operator/(const\
-    \ M& lhs, const M& rhs) {\n    return divmod(lhs, rhs).first;\n  }\n  friend M\
-    \ operator%(const M& lhs, const M& rhs) {\n    return divmod(lhs, rhs).second;\n\
-    \  }\n\n  M& operator+=(const M& rhs) { return (*this) = (*this) + rhs; }\n  M&\
-    \ operator-=(const M& rhs) { return (*this) = (*this) - rhs; }\n  M& operator*=(const\
-    \ M& rhs) { return (*this) = (*this) * rhs; }\n  M& operator/=(const M& rhs) {\
-    \ return (*this) = (*this) / rhs; }\n  M& operator%=(const M& rhs) { return (*this)\
-    \ = (*this) % rhs; }\n\n  M operator-() const {\n    if (is_zero()) return *this;\n\
-    \    return {!neg, dat};\n  }\n  M operator+() const { return *this; }\n  friend\
-    \ M abs(const M& m) { return {false, m.dat}; }\n  bool is_zero() const { return\
-    \ _is_zero(dat); }\n\n  friend bool operator==(const M& lhs, const M& rhs) {\n\
-    \    return lhs.neg == rhs.neg && lhs.dat == rhs.dat;\n  }\n  friend bool operator!=(const\
-    \ M& lhs, const M& rhs) {\n    return lhs.neg != rhs.neg || lhs.dat != rhs.dat;\n\
-    \  }\n  friend bool operator<(const M& lhs, const M& rhs) {\n    if (lhs == rhs)\
-    \ return false;\n    return _neq_lt(lhs, rhs);\n  }\n  friend bool operator<=(const\
-    \ M& lhs, const M& rhs) {\n    if (lhs == rhs) return true;\n    return _neq_lt(lhs,\
-    \ rhs);\n  }\n  friend bool operator>(const M& lhs, const M& rhs) {\n    if (lhs\
-    \ == rhs) return false;\n    return _neq_lt(rhs, lhs);\n  }\n  friend bool operator>=(const\
-    \ M& lhs, const M& rhs) {\n    if (lhs == rhs) return true;\n    return _neq_lt(rhs,\
-    \ lhs);\n  }\n\n  // a * 10^b (1 <= |a| < 10) \u306E\u5F62\u3067\u6E21\u3059\n\
-    \  // \u76F8\u5BFE\u8AA4\u5DEE\uFF1A10^{-16} ~ 10^{-19} \u7A0B\u5EA6 (\u51E6\u7406\
-    \u7CFB\u4F9D\u5B58)\n  pair<long double, int> dfp() const {\n    if (is_zero())\
-    \ return {0, 0};\n    int l = max<int>(0, _size() - 3);\n    int b = logD * l;\n\
-    \    string prefix{};\n    for (int i = _size() - 1; i >= l; i--) {\n      prefix\
-    \ += _itos(dat[i], i != _size() - 1);\n    }\n    b += prefix.size() - 1;\n  \
-    \  long double a = 0;\n    for (auto& c : prefix) a = a * 10.0 + (c - '0');\n\
-    \    a *= tens.ten_ld(-((int)prefix.size()) + 1);\n    a = clamp<long double>(a,\
-    \ 1.0, nextafterl(10.0, 1.0));\n    if (neg) a = -a;\n    return {a, b};\n  }\n\
-    \  string to_string() const {\n    if (is_zero()) return \"0\";\n    string res;\n\
-    \    if (neg) res.push_back('-');\n    for (int i = _size() - 1; i >= 0; i--)\
-    \ {\n      res += _itos(dat[i], i != _size() - 1);\n    }\n    return res;\n \
-    \ }\n  long double to_ld() const {\n    auto [a, b] = dfp();\n    if (-tens.offset\
-    \ <= b and b <= tens.offset) {\n      return a * tens.ten_ld(b);\n    }\n    return\
-    \ a * powl(10, b);\n  }\n  long long to_ll() const {\n    long long res = _to_ll(dat);\n\
-    \    return neg ? -res : res;\n  }\n  __int128_t to_i128() const {\n    __int128_t\
-    \ res = _to_i128(dat);\n    return neg ? -res : res;\n  }\n\n  friend istream&\
-    \ operator>>(istream& is, M& m) {\n    string s;\n    is >> s;\n    m = M{s};\n\
-    \    return is;\n  }\n\n  friend ostream& operator<<(ostream& os, const M& m)\
-    \ {\n    return os << m.to_string();\n  }\n\n  // \u5185\u90E8\u306E\u95A2\u6570\
-    \u3092\u30C6\u30B9\u30C8\n  static void _test_private_function(const M&, const\
-    \ M&);\n\n private:\n  // size\n  int _size() const { return dat.size(); }\n \
-    \ // a == b\n  static bool _eq(const vector<int>& a, const vector<int>& b) { return\
-    \ a == b; }\n  // a < b\n  static bool _lt(const vector<int>& a, const vector<int>&\
-    \ b) {\n    if (a.size() != b.size()) return a.size() < b.size();\n    for (int\
-    \ i = a.size() - 1; i >= 0; i--) {\n      if (a[i] != b[i]) return a[i] < b[i];\n\
-    \    }\n    return false;\n  }\n  // a <= b\n  static bool _leq(const vector<int>&\
-    \ a, const vector<int>& b) {\n    return _eq(a, b) || _lt(a, b);\n  }\n  // a\
-    \ < b (s.t. a != b)\n  static bool _neq_lt(const M& lhs, const M& rhs) {\n   \
-    \ assert(lhs != rhs);\n    if (lhs.neg != rhs.neg) return lhs.neg;\n    bool f\
-    \ = _lt(lhs.dat, rhs.dat);\n    if (f) return !lhs.neg;\n    return lhs.neg;\n\
-    \  }\n  // a == 0\n  static bool _is_zero(const vector<int>& a) { return a.empty();\
-    \ }\n  // a == 1\n  static bool _is_one(const vector<int>& a) {\n    return (int)a.size()\
-    \ == 1 && a[0] == 1;\n  }\n  // \u672B\u5C3E 0 \u3092\u524A\u9664\n  static void\
-    \ _shrink(vector<int>& a) {\n    while (a.size() && a.back() == 0) a.pop_back();\n\
-    \  }\n  // \u672B\u5C3E 0 \u3092\u524A\u9664\n  void _shrink() {\n    while (_size()\
-    \ && dat.back() == 0) dat.pop_back();\n  }\n  // a + b\n  static vector<int> _add(const\
-    \ vector<int>& a, const vector<int>& b) {\n    vector<int> c(max(a.size(), b.size())\
-    \ + 1);\n    for (int i = 0; i < (int)a.size(); i++) c[i] += a[i];\n    for (int\
-    \ i = 0; i < (int)b.size(); i++) c[i] += b[i];\n    for (int i = 0; i < (int)c.size()\
-    \ - 1; i++) {\n      if (c[i] >= D) c[i] -= D, c[i + 1]++;\n    }\n    _shrink(c);\n\
-    \    return c;\n  }\n  // a - b\n  static vector<int> _sub(const vector<int>&\
-    \ a, const vector<int>& b) {\n    assert(_leq(b, a));\n    vector<int> c{a};\n\
-    \    int borrow = 0;\n    for (int i = 0; i < (int)a.size(); i++) {\n      if\
-    \ (i < (int)b.size()) borrow += b[i];\n      c[i] -= borrow;\n      borrow = 0;\n\
-    \      if (c[i] < 0) c[i] += D, borrow = 1;\n    }\n    assert(borrow == 0);\n\
-    \    _shrink(c);\n    return c;\n  }\n  // a * b (fft)\n  static vector<int> _mul_fft(const\
-    \ vector<int>& a, const vector<int>& b) {\n    if (a.empty() || b.empty()) return\
-    \ {};\n    auto m = ArbitraryNTT::multiply_u128(a, b);\n    vector<int> c;\n \
-    \   c.reserve(m.size() + 3);\n    __uint128_t x = 0;\n    for (int i = 0;; i++)\
-    \ {\n      if (i >= (int)m.size() && x == 0) break;\n      if (i < (int)m.size())\
-    \ x += m[i];\n      c.push_back(x % D);\n      x /= D;\n    }\n    _shrink(c);\n\
-    \    return c;\n  }\n  // a * b (naive)\n  static vector<int> _mul_naive(const\
-    \ vector<int>& a, const vector<int>& b) {\n    if (a.empty() || b.empty()) return\
-    \ {};\n    vector<long long> prod(a.size() + b.size() - 1 + 1);\n    for (int\
-    \ i = 0; i < (int)a.size(); i++) {\n      for (int j = 0; j < (int)b.size(); j++)\
-    \ {\n        long long p = 1LL * a[i] * b[j];\n        prod[i + j] += p;\n   \
-    \     if (prod[i + j] >= (4LL * D * D)) {\n          prod[i + j] -= 4LL * D *\
-    \ D;\n          prod[i + j + 1] += 4LL * D;\n        }\n      }\n    }\n    vector<int>\
-    \ c;\n    long long x = 0;\n    for (int i = 0;; i++) {\n      if (i >= (int)prod.size()\
-    \ && x == 0) break;\n      if (i < (int)prod.size()) x += prod[i];\n      c.push_back(x\
-    \ % D);\n      x /= D;\n    }\n    _shrink(c);\n    return c;\n  }\n  // a * b\n\
-    \  static vector<int> _mul(const vector<int>& a, const vector<int>& b) {\n   \
-    \ if (_is_zero(a) || _is_zero(b)) return {};\n    if (_is_one(a)) return b;\n\
-    \    if (_is_one(b)) return a;\n    if (min<int>(a.size(), b.size()) <= 128) {\n\
-    \      return a.size() < b.size() ? _mul_naive(b, a) : _mul_naive(a, b);\n   \
-    \ }\n    return _mul_fft(a, b);\n  }\n  // 0 <= A < 1e18, 1 <= B < 1e9\n  static\
-    \ pair<vector<int>, vector<int>> _divmod_li(const vector<int>& a,\n          \
-    \                                         const vector<int>& b) {\n    assert(0\
-    \ <= (int)a.size() && (int)a.size() <= 2);\n    assert((int)b.size() == 1);\n\
-    \    long long va = _to_ll(a);\n    int vb = b[0];\n    return {_integer_to_vec(va\
-    \ / vb), _integer_to_vec(va % vb)};\n  }\n  // 0 <= A < 1e18, 1 <= B < 1e18\n\
-    \  static pair<vector<int>, vector<int>> _divmod_ll(const vector<int>& a,\n  \
-    \                                                 const vector<int>& b) {\n  \
-    \  assert(0 <= (int)a.size() && (int)a.size() <= 2);\n    assert(1 <= (int)b.size()\
-    \ && (int)b.size() <= 2);\n    long long va = _to_ll(a), vb = _to_ll(b);\n   \
-    \ return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};\n  }\n  // 1 <=\
-    \ B < 1e9\n  static pair<vector<int>, vector<int>> _divmod_1e9(const vector<int>&\
-    \ a,\n                                                    const vector<int>& b)\
-    \ {\n    assert((int)b.size() == 1);\n    if (b[0] == 1) return {a, {}};\n   \
-    \ if ((int)a.size() <= 2) return _divmod_li(a, b);\n    vector<int> quo(a.size());\n\
-    \    long long d = 0;\n    int b0 = b[0];\n    for (int i = a.size() - 1; i >=\
-    \ 0; i--) {\n      d = d * D + a[i];\n      assert(d < 1LL * D * b0);\n      int\
-    \ q = d / b0, r = d % b0;\n      quo[i] = q, d = r;\n    }\n    _shrink(quo);\n\
-    \    return {quo, d ? vector<int>{int(d)} : vector<int>{}};\n  }\n  // 0 <= A,\
-    \ 1 <= B\n  static pair<vector<int>, vector<int>> _divmod_naive(const vector<int>&\
-    \ a,\n                                                      const vector<int>&\
-    \ b) {\n    if (_is_zero(b)) {\n      cerr << \"Divide by Zero Exception\" <<\
-    \ endl;\n      exit(1);\n    }\n    assert(1 <= (int)b.size());\n    if ((int)b.size()\
-    \ == 1) return _divmod_1e9(a, b);\n    if (max<int>(a.size(), b.size()) <= 2)\
-    \ return _divmod_ll(a, b);\n    if (_lt(a, b)) return {{}, a};\n    // B >= 1e9,\
-    \ A >= B\n    int norm = D / (b.back() + 1);\n    vector<int> x = _mul(a, {norm});\n\
-    \    vector<int> y = _mul(b, {norm});\n    int yb = y.back();\n    vector<int>\
-    \ quo(x.size() - y.size() + 1);\n    vector<int> rem(x.end() - y.size(), x.end());\n\
-    \    for (int i = quo.size() - 1; i >= 0; i--) {\n      if (rem.size() < y.size())\
-    \ {\n        // do nothing\n      } else if (rem.size() == y.size()) {\n     \
-    \   if (_leq(y, rem)) {\n          quo[i] = 1, rem = _sub(rem, y);\n        }\n\
-    \      } else {\n        assert(y.size() + 1 == rem.size());\n        long long\
-    \ rb = 1LL * rem[rem.size() - 1] * D + rem[rem.size() - 2];\n        int q = rb\
-    \ / yb;\n        vector<int> yq = _mul(y, {q});\n        // \u771F\u306E\u5546\
-    \u306F q-2 \u4EE5\u4E0A q+1 \u4EE5\u4E0B\u3060\u304C\u81EA\u4FE1\u304C\u7121\u3044\
-    \u306E\u3067\u5FF5\u306E\u305F\u3081 while \u3092\u56DE\u3059\n        while (_lt(rem,\
-    \ yq)) q--, yq = _sub(yq, y);\n        rem = _sub(rem, yq);\n        while (_leq(y,\
-    \ rem)) q++, rem = _sub(rem, y);\n        quo[i] = q;\n      }\n      if (i) rem.insert(begin(rem),\
-    \ x[i - 1]);\n    }\n    _shrink(quo), _shrink(rem);\n    auto [q2, r2] = _divmod_1e9(rem,\
-    \ {norm});\n    assert(_is_zero(r2));\n    return {quo, q2};\n  }\n\n  // 0 <=\
-    \ A, 1 <= B\n  static pair<vector<int>, vector<int>> _divmod_dc(const vector<int>&\
-    \ a,\n                                                   const vector<int>& b)\
-    \ {\n    if (_is_zero(b)) {\n      cerr << \"Divide by Zero Exception\" << endl;\n\
-    \      exit(1);\n    }\n    if ((int)b.size() <= 64) return _divmod_naive(a, b);\n\
-    \    if ((int)a.size() - (int)b.size() <= 64) return _divmod_naive(a, b);\n\n\
-    \    int norm = D / (b.back() + 1);\n    vector<int> x = _mul(a, {norm});\n  \
-    \  vector<int> y = _mul(b, {norm});\n\n    int s = x.size(), t = y.size();\n \
-    \   int yu = (t + 1) / 2, yv = t - yu;\n    vector<int> yh{end(y) - yu, end(y)};\n\
-    \    int xv = max<int>(yv, s - (yu * 2 - 1));\n    int xu = s - xv;\n    vector<int>\
-    \ xh{end(x) - xu, end(x)};\n    vector<int> rem{end(x) - xu - yv, end(x)};\n \
-    \   auto [qh, _unused] = _divmod_dc(xh, yh);\n    vector<int> yqh = _mul(y, qh);\n\
-    \    while (_lt(rem, yqh)) _sub(qh, {1}), yqh = _sub(yqh, y);\n    rem = _sub(rem,\
-    \ yqh);\n    while (_leq(y, rem)) _add(qh, {1}), rem = _sub(rem, y);\n    vector<int>\
-    \ q, r;\n    if (xu + yv == s) {\n      swap(q, qh), swap(r, rem);\n    } else\
-    \ {\n      vector<int> xnxt{begin(x), end(x) - xu - yv};\n      copy(begin(rem),\
-    \ end(rem), back_inserter(xnxt));\n      tie(q, r) = _divmod_dc(xnxt, y);\n  \
-    \    q.resize(s - xu - yv, 0);\n      copy(begin(qh), end(qh), back_inserter(q));\n\
-    \    }\n    _shrink(q), _shrink(r);\n    auto [q2, r2] = _divmod_1e9(r, {norm});\n\
-    \    assert(_is_zero(r2));\n    return {q, q2};\n  }\n\n  // 1 / a \u3092 \u7D76\
-    \u5BFE\u8AA4\u5DEE B^{-deg} \u3067\u6C42\u3081\u308B\n  static vector<int> _calc_inv(const\
-    \ vector<int>& a, int deg) {\n    assert(!a.empty() && D / 2 <= a.back() and a.back()\
-    \ < D);\n    int k = deg, c = a.size();\n    while (k > 64) k = (k + 1) / 2;\n\
-    \    vector<int> z(c + k + 1);\n    z.back() = 1;\n    z = _divmod_naive(z, a).first;\n\
-    \    while (k < deg) {\n      vector<int> s = _mul(z, z);\n      s.insert(begin(s),\
-    \ 0);\n      vector<int> t(2 * k + 1);\n      copy(end(a) - min(c, 2 * k + 1),\
-    \ end(a), end(t) - min(c, 2 * k + 1));\n      vector<int> u = _mul(s, t);\n  \
-    \    u.erase(begin(u), begin(u) + 2 * k + 1);\n      vector<int> w(k + 1, 0),\
-    \ w2 = _add(z, z);\n      copy(begin(w2), end(w2), back_inserter(w));\n      z\
-    \ = _sub(w, u);\n      z.erase(begin(z));\n      k *= 2;\n    }\n    z.erase(begin(z),\
-    \ begin(z) + k - deg);\n    return z;\n  }\n\n  static pair<vector<int>, vector<int>>\
-    \ _divmod_newton(const vector<int>& a,\n                                     \
-    \                  const vector<int>& b) {\n    if (_is_zero(b)) {\n      cerr\
-    \ << \"Divide by Zero Exception\" << endl;\n      exit(1);\n    }\n    if ((int)b.size()\
-    \ <= 64) return _divmod_naive(a, b);\n    if ((int)a.size() - (int)b.size() <=\
-    \ 64) return _divmod_naive(a, b);\n    int norm = D / (b.back() + 1);\n    vector<int>\
-    \ x = _mul(a, {norm});\n    vector<int> y = _mul(b, {norm});\n    int s = x.size(),\
-    \ t = y.size();\n    int deg = s - t + 2;\n    vector<int> z = _calc_inv(y, deg);\n\
-    \    vector<int> q = _mul(x, z);\n    q.erase(begin(q), begin(q) + t + deg);\n\
-    \    vector<int> yq = _mul(y, {q});\n    while (_lt(x, yq)) q = _sub(q, {1}),\
-    \ yq = _sub(yq, y);\n    vector<int> r = _sub(x, yq);\n    while (_leq(y, r))\
-    \ q = _add(q, {1}), r = _sub(r, y);\n    _shrink(q), _shrink(r);\n    auto [q2,\
-    \ r2] = _divmod_1e9(r, {norm});\n    assert(_is_zero(r2));\n    return {q, q2};\n\
-    \  }\n\n  // int -> string\n  // \u5148\u982D\u304B\u3069\u3046\u304B\u306B\u5FDC\
-    \u3058\u3066 zero padding \u3059\u308B\u304B\u3092\u6C7A\u3081\u308B\n  static\
-    \ string _itos(int x, bool zero_padding) {\n    assert(0 <= x && x < D);\n   \
-    \ string res;\n    for (int i = 0; i < logD; i++) {\n      res.push_back('0' +\
-    \ x % 10), x /= 10;\n    }\n    if (!zero_padding) {\n      while (res.size()\
-    \ && res.back() == '0') res.pop_back();\n      assert(!res.empty());\n    }\n\
-    \    reverse(begin(res), end(res));\n    return res;\n  }\n\n  // convert ll to\
-    \ vec\n  template <typename I, enable_if_t<is_integral_v<I> ||\n             \
-    \                       is_same_v<I, __int128_t>>* = nullptr>\n  static vector<int>\
-    \ _integer_to_vec(I x) {\n    if constexpr (is_signed_v<I> || is_same_v<I, __int128_t>)\
-    \ {\n      assert(x >= 0);\n    }\n    vector<int> res;\n    while (x) res.push_back(x\
-    \ % D), x /= D;\n    return res;\n  }\n\n  static long long _to_ll(const vector<int>&\
-    \ a) {\n    long long res = 0;\n    for (int i = (int)a.size() - 1; i >= 0; i--)\
-    \ res = res * D + a[i];\n    return res;\n  }\n\n  static __int128_t _to_i128(const\
-    \ vector<int>& a) {\n    __int128_t res = 0;\n    for (int i = (int)a.size() -\
-    \ 1; i >= 0; i--) res = res * D + a[i];\n    return res;\n  }\n\n  static void\
-    \ _dump(const vector<int>& a, string s = \"\") {\n    if (!s.empty()) cerr <<\
-    \ s << \" : \";\n    cerr << \"{ \";\n    for (int i = 0; i < (int)a.size(); i++)\
-    \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
-    \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
-    \ */\n"
+    \ */\n#line 3 \"math/bigint-garner.hpp\"\n\nnamespace GarnerImpl {\n\ntemplate\
+    \ <typename T,\n          enable_if_t<is_integral_v<T> || is_same_v<T, __int128_t>>*\
+    \ = nullptr>\nT inv_mod(T a, T m) {\n  assert(0 <= a);\n  if (a >= m) a %= m;\n\
+    \  T b = m, s = 1, t = 0;\n  while (true) {\n    if (a == 1) return s;\n    t\
+    \ -= b / a * s;\n    b %= a;\n    if (b == 1) return t + m;\n    s -= a / b *\
+    \ t;\n    a %= b;\n  }\n}\n\npair<bigint, bigint> garner_dc(const vector<int>&\
+    \ r, const vector<int>& m) {\n  int N = m.size();\n  if (N == 0) return {0, 1};\n\
+    \  int B = 1;\n  while (B < N) B *= 2;\n  vector<bigint> tree(2 * B);\n  for (int\
+    \ i = 0; i < B; i++) tree[B + i] = i < (int)m.size() ? m[i] : 1;\n  for (int i\
+    \ = B - 1; i; i--) tree[i] = tree[i * 2 + 0] * tree[i * 2 + 1];\n  auto calc =\
+    \ [&](auto&& rc, int ti, bigint X, bigint Y, int L,\n                  int R)\
+    \ -> bigint {\n    if (N <= L) return 0;\n    X %= tree[ti], Y %= tree[ti];\n\
+    \    if (L + 1 == R) {\n      int xl = X.to_ll(), yl = Y.to_ll();\n      int t\
+    \ = (1LL * (r[L] - xl) * inv_mod(yl, m[L])) % m[L];\n      return t < 0 ? t +\
+    \ m[L] : t;\n    }\n    auto& prod = tree[ti * 2 + 0];\n    int M = (L + R) /\
+    \ 2;\n    auto xl = rc(rc, ti * 2 + 0, X, Y, L, M);\n    auto xr = rc(rc, ti *\
+    \ 2 + 1, X + xl * Y, Y * prod, M, R);\n    return xl + xr * prod;\n  };\n  bigint\
+    \ ans = calc(calc, 1, 0, 1, 0, B);\n  return {ans, tree[1]};\n}\n\npair<bigint,\
+    \ bigint> garner_naive(const vector<int>& r, const vector<int>& m) {\n  int N\
+    \ = r.size();\n  if (N == 0) return {0, 1};\n  vector<int> y(N), x(N), t(N);\n\
+    \  for (int i = 0; i < N; i++) y[i] = 1 % m[i];\n  for (int i = 0; i < N; ++i)\
+    \ {\n    t[i] = (1LL * (r[i] - x[i]) * inv_mod(y[i], m[i])) % m[i];\n    if (t[i]\
+    \ < 0) t[i] += m[i];\n    for (int j = i + 1; j < N; j++) {\n      x[j] = (x[j]\
+    \ + 1LL * y[j] * t[i]) % m[j];\n      y[j] = 1LL * y[j] * m[i] % m[j];\n    }\n\
+    \  }\n  bigint ans = 0, mod = 1;\n  for (int i = N - 1; i >= 0; --i) ans = ans\
+    \ * m[i] + t[i], mod *= m[i];\n  return {ans, mod};\n}\n\n// 1 <= m[i] <= 2 *\
+    \ 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\uFF1A\
+    \u672A\u5B9A\u7FA9\npair<bigint, bigint> garner_bigint(const vector<int>& r, const\
+    \ vector<int>& m) {\n  assert(r.size() == m.size());\n  if ((int)m.size() <= 3000)\
+    \ return garner_naive(r, m);\n  return garner_dc(r, m);\n}\n// 1 <= m[i] <= 2\
+    \ * 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\uFF1A\
+    \u672A\u5B9A\u7FA9\npair<bigint, bigint> crt_bigint(const vector<int>& r, const\
+    \ vector<int>& m) {\n  return garner_bigint(r, m);\n}\n}  // namespace GarnerImpl\n\
+    \nusing GarnerImpl::crt_bigint;\nusing GarnerImpl::garner_bigint;\n\n/**\n * @brief\
+    \ Garner's algorithm for bigint\n */\n"
+  code: "\n#include \"bigint.hpp\"\n\nnamespace GarnerImpl {\n\ntemplate <typename\
+    \ T,\n          enable_if_t<is_integral_v<T> || is_same_v<T, __int128_t>>* = nullptr>\n\
+    T inv_mod(T a, T m) {\n  assert(0 <= a);\n  if (a >= m) a %= m;\n  T b = m, s\
+    \ = 1, t = 0;\n  while (true) {\n    if (a == 1) return s;\n    t -= b / a * s;\n\
+    \    b %= a;\n    if (b == 1) return t + m;\n    s -= a / b * t;\n    a %= b;\n\
+    \  }\n}\n\npair<bigint, bigint> garner_dc(const vector<int>& r, const vector<int>&\
+    \ m) {\n  int N = m.size();\n  if (N == 0) return {0, 1};\n  int B = 1;\n  while\
+    \ (B < N) B *= 2;\n  vector<bigint> tree(2 * B);\n  for (int i = 0; i < B; i++)\
+    \ tree[B + i] = i < (int)m.size() ? m[i] : 1;\n  for (int i = B - 1; i; i--) tree[i]\
+    \ = tree[i * 2 + 0] * tree[i * 2 + 1];\n  auto calc = [&](auto&& rc, int ti, bigint\
+    \ X, bigint Y, int L,\n                  int R) -> bigint {\n    if (N <= L) return\
+    \ 0;\n    X %= tree[ti], Y %= tree[ti];\n    if (L + 1 == R) {\n      int xl =\
+    \ X.to_ll(), yl = Y.to_ll();\n      int t = (1LL * (r[L] - xl) * inv_mod(yl, m[L]))\
+    \ % m[L];\n      return t < 0 ? t + m[L] : t;\n    }\n    auto& prod = tree[ti\
+    \ * 2 + 0];\n    int M = (L + R) / 2;\n    auto xl = rc(rc, ti * 2 + 0, X, Y,\
+    \ L, M);\n    auto xr = rc(rc, ti * 2 + 1, X + xl * Y, Y * prod, M, R);\n    return\
+    \ xl + xr * prod;\n  };\n  bigint ans = calc(calc, 1, 0, 1, 0, B);\n  return {ans,\
+    \ tree[1]};\n}\n\npair<bigint, bigint> garner_naive(const vector<int>& r, const\
+    \ vector<int>& m) {\n  int N = r.size();\n  if (N == 0) return {0, 1};\n  vector<int>\
+    \ y(N), x(N), t(N);\n  for (int i = 0; i < N; i++) y[i] = 1 % m[i];\n  for (int\
+    \ i = 0; i < N; ++i) {\n    t[i] = (1LL * (r[i] - x[i]) * inv_mod(y[i], m[i]))\
+    \ % m[i];\n    if (t[i] < 0) t[i] += m[i];\n    for (int j = i + 1; j < N; j++)\
+    \ {\n      x[j] = (x[j] + 1LL * y[j] * t[i]) % m[j];\n      y[j] = 1LL * y[j]\
+    \ * m[i] % m[j];\n    }\n  }\n  bigint ans = 0, mod = 1;\n  for (int i = N - 1;\
+    \ i >= 0; --i) ans = ans * m[i] + t[i], mod *= m[i];\n  return {ans, mod};\n}\n\
+    \n// 1 <= m[i] <= 2 * 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\
+    \u5834\u5408\uFF1A\u672A\u5B9A\u7FA9\npair<bigint, bigint> garner_bigint(const\
+    \ vector<int>& r, const vector<int>& m) {\n  assert(r.size() == m.size());\n \
+    \ if ((int)m.size() <= 3000) return garner_naive(r, m);\n  return garner_dc(r,\
+    \ m);\n}\n// 1 <= m[i] <= 2 * 10^9\n// m \u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\
+    \u3044\u5834\u5408\uFF1A\u672A\u5B9A\u7FA9\npair<bigint, bigint> crt_bigint(const\
+    \ vector<int>& r, const vector<int>& m) {\n  return garner_bigint(r, m);\n}\n\
+    }  // namespace GarnerImpl\n\nusing GarnerImpl::crt_bigint;\nusing GarnerImpl::garner_bigint;\n\
+    \n/**\n * @brief Garner's algorithm for bigint\n */\n"
   dependsOn:
+  - math/bigint.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
   isVerificationFile: false
-  path: math/multiprecision-integer.hpp
-  requiredBy:
-  - math/garner-bigint.hpp
-  timestamp: '2022-11-08 13:26:50+09:00'
+  path: math/bigint-garner.hpp
+  requiredBy: []
+  timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
-  - verify/verify-unit-test/bigint2.test.cpp
-  - verify/verify-unit-test/bigint.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
-documentation_of: math/multiprecision-integer.hpp
+documentation_of: math/bigint-garner.hpp
 layout: document
 redirect_from:
-- /library/math/multiprecision-integer.hpp
-- /library/math/multiprecision-integer.hpp.html
-title: "\u591A\u500D\u9577\u6574\u6570"
+- /library/math/bigint-garner.hpp
+- /library/math/bigint-garner.hpp.html
+title: Garner's algorithm for bigint
 ---

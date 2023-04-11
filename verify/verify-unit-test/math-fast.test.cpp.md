@@ -196,32 +196,40 @@ data:
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-unit-test/math-fast.test.cpp\"\n//\n#line 2 \"math-fast/gcd.hpp\"\
     \n\n#line 4 \"math-fast/gcd.hpp\"\nusing namespace std;\n\nnamespace BinaryGCDImpl\
-    \ {\nusing u64 = unsigned long long;\nusing i8 = char;\n\ninline u64 binary_gcd(u64\
-    \ a, u64 b) {\n  if (a == 0 || b == 0) return a + b;\n  i8 n = __builtin_ctzll(a);\n\
+    \ {\nusing u64 = unsigned long long;\nusing i8 = char;\n\nu64 binary_gcd(u64 a,\
+    \ u64 b) {\n  if (a == 0 || b == 0) return a + b;\n  i8 n = __builtin_ctzll(a);\n\
     \  i8 m = __builtin_ctzll(b);\n  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while\
     \ (a != b) {\n    u64 d = a - b;\n    i8 s = __builtin_ctzll(d);\n    bool f =\
     \ a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return a << n;\n\
-    }\n}  // namespace BinaryGCDImpl\n\nlong long fgcd(long long a, long long b) {\n\
-    \  return BinaryGCDImpl::binary_gcd(abs(a), abs(b));\n}\n\n/**\n * @brief binary\
-    \ GCD\n */\n#line 6 \"verify/verify-unit-test/math-fast.test.cpp\"\n\nnamespace\
-    \ fast_gcd_verify {\n\nusing i64 = long long;\n\ni64 naive_gcd(i64 a, i64 b) {\n\
-    \  while (b) swap(a %= b, b);\n  return a;\n}\n\ni64 x_;\nvoid rng_init() { x_\
-    \ = 88172645463325252ULL; }\ni64 rng() { return x_ = x_ ^ (x_ << 7), x_ = x_ ^\
-    \ (x_ >> 9); }\n\nvoid unit_test() {\n  using P = pair<i64, i64>;\n  using F =\
-    \ i64 (*)(i64, i64);\n\n  vector<P> testcase{P(2, 4),\n                     P(100000,\
-    \ 10000),\n                     P(998244353, 1000000007),\n                  \
-    \   P(1LL << 40, 1LL << 60),\n                     P((1LL << 61) - 1, 11111111111111111),\n\
-    \                     P((1LL << 60) + 1, (1LL << 59) + 1),\n                 \
-    \    P(1LL << 62, 1LL << 62),\n                     P(1LL << 62, 1LL << 61),\n\
-    \                     P(3LL << 61, 9LL << 60),\n                     P((1uLL <<\
-    \ 63) - 1, (1LL << 62)),\n                     P(0, 1),\n                    \
-    \ P(1, 0),\n                     P(0, 0),\n                     P(0, -1),\n  \
-    \                   P(-1, 0),\n                     P(-1, -1)};\n  for (i64 i\
-    \ = 1000; i--;)\n    for (i64 j = 1000; j--;) testcase.emplace_back(i, j);\n \
-    \ rng_init();\n  for (i64 n = 10000; n--;) {\n    i64 i = rng(), j = rng();\n\
+    }\n\nusing u128 = __uint128_t;\n// a > 0\nint ctz128(u128 a) {\n  u64 lo = a &\
+    \ u64(-1);\n  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n\
+    }\nu128 binary_gcd128(u128 a, u128 b) {\n  if (a == 0 || b == 0) return a + b;\n\
+    \  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n  a >>= n;\n  b >>= m;\n  n = min(n,\
+    \ m);\n  while (a != b) {\n    u128 d = a - b;\n    i8 s = ctz128(d);\n    bool\
+    \ f = a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return a\
+    \ << n;\n}\n\n}  // namespace BinaryGCDImpl\n\nlong long binary_gcd(long long\
+    \ a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a), abs(b));\n}\n\
+    __int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a < 0) a = -a;\n\
+    \  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a, b);\n}\n\n/**\n\
+    \ * @brief binary GCD\n */\n#line 6 \"verify/verify-unit-test/math-fast.test.cpp\"\
+    \n\nnamespace fast_gcd_verify {\n\nusing i64 = long long;\n\ni64 naive_gcd(i64\
+    \ a, i64 b) {\n  while (b) swap(a %= b, b);\n  return a;\n}\n\ni64 x_;\nvoid rng_init()\
+    \ { x_ = 88172645463325252ULL; }\ni64 rng() { return x_ = x_ ^ (x_ << 7), x_ =\
+    \ x_ ^ (x_ >> 9); }\n\nvoid unit_test() {\n  using P = pair<i64, i64>;\n  using\
+    \ F = i64 (*)(i64, i64);\n\n  vector<P> testcase{P(2, 4),\n                  \
+    \   P(100000, 10000),\n                     P(998244353, 1000000007),\n      \
+    \               P(1LL << 40, 1LL << 60),\n                     P((1LL << 61) -\
+    \ 1, 11111111111111111),\n                     P((1LL << 60) + 1, (1LL << 59)\
+    \ + 1),\n                     P(1LL << 62, 1LL << 62),\n                     P(1LL\
+    \ << 62, 1LL << 61),\n                     P(3LL << 61, 9LL << 60),\n        \
+    \             P((1uLL << 63) - 1, (1LL << 62)),\n                     P(0, 1),\n\
+    \                     P(1, 0),\n                     P(0, 0),\n              \
+    \       P(0, -1),\n                     P(-1, 0),\n                     P(-1,\
+    \ -1)};\n  for (i64 i = 1000; i--;)\n    for (i64 j = 1000; j--;) testcase.emplace_back(i,\
+    \ j);\n  rng_init();\n  for (i64 n = 10000; n--;) {\n    i64 i = rng(), j = rng();\n\
     \    testcase.emplace_back(i, j);\n  }\n\n  vector<F> functions{std::__gcd<i64>,\
-    \ naive_gcd, gcd};\n\n  for (auto p : testcase) {\n    unordered_set<i64> s;\n\
-    \    for (auto &f : functions) {\n      s.insert(abs(f(p.first, p.second)));\n\
+    \ naive_gcd, binary_gcd};\n\n  for (auto p : testcase) {\n    unordered_set<i64>\
+    \ s;\n    for (auto &f : functions) {\n      s.insert(abs(f(p.first, p.second)));\n\
     \    }\n    if (s.size() != 1u) {\n      cerr << \"verify failed.\" << endl;\n\
     \      cerr << \"case : \" << p.first << \" \" << p.second << endl;\n      cerr\
     \ << \"output : \";\n      for (auto &f : functions) cerr << f(p.first, p.second)\
@@ -247,8 +255,8 @@ data:
     \ = 1000; i--;)\n    for (i64 j = 1000; j--;) testcase.emplace_back(i, j);\n \
     \ rng_init();\n  for (i64 n = 10000; n--;) {\n    i64 i = rng(), j = rng();\n\
     \    testcase.emplace_back(i, j);\n  }\n\n  vector<F> functions{std::__gcd<i64>,\
-    \ naive_gcd, gcd};\n\n  for (auto p : testcase) {\n    unordered_set<i64> s;\n\
-    \    for (auto &f : functions) {\n      s.insert(abs(f(p.first, p.second)));\n\
+    \ naive_gcd, binary_gcd};\n\n  for (auto p : testcase) {\n    unordered_set<i64>\
+    \ s;\n    for (auto &f : functions) {\n      s.insert(abs(f(p.first, p.second)));\n\
     \    }\n    if (s.size() != 1u) {\n      cerr << \"verify failed.\" << endl;\n\
     \      cerr << \"case : \" << p.first << \" \" << p.second << endl;\n      cerr\
     \ << \"output : \";\n      for (auto &f : functions) cerr << f(p.first, p.second)\
@@ -267,7 +275,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/math-fast.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/math-fast.test.cpp

@@ -92,11 +92,11 @@ data:
   timestamp: '2021-04-26 00:32:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
-  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
 documentation_of: lct/link-cut-base.hpp
 layout: document
 redirect_from:

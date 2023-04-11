@@ -5,6 +5,12 @@ data:
     path: math/gray-code.hpp
     title: Gray code
   - icon: ':heavy_check_mark:'
+    path: math/inv-mod.hpp
+    title: math/inv-mod.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/isqrt.hpp
+    title: math/isqrt.hpp
+  - icon: ':heavy_check_mark:'
     path: math/sum-of-floor.hpp
     title: math/sum-of-floor.hpp
   - icon: ':heavy_check_mark:'
@@ -203,15 +209,25 @@ data:
     \ 4 \"verify/verify-unit-test/math.test.cpp\"\n//\n#line 2 \"math/gray-code.hpp\"\
     \n\n\n\nvector<int> gray_code(int n) {\n  vector<int> ret(1 << n);\n  for (int\
     \ i = 0; i < (int)ret.size(); i++) ret[i] = i ^ (i >> 1);\n  return ret;\n};\n\
-    \n/**\n * @brief Gray code\n */ \n#line 2 \"math/sum-of-floor.hpp\"\n\n\n\n//\
-    \ sum_{0 <= i < N} (ai + b) // m\ntemplate <typename T>\nT sum_of_floor(T n, T\
-    \ m, T a, T b) {\n  T ret = 0;\n  if (a >= m) ret += (n - 1) * n * (a / m) / 2,\
-    \ a %= m;\n  if (b >= m) ret += n * (b / m), b %= m;\n  T y = (a * n + b) / m;\n\
-    \  if (y == 0) return ret;\n  T x = y * m - b;\n  ret += (n - (x + a - 1) / a)\
-    \ * y;\n  ret += sum_of_floor(y, a, m, (a - x % a) % a);\n  return ret;\n}\n\n\
-    // verify www.codechef.com/viewsolution/36222026\n// count x : ax + b mod m <\
-    \ yr, 0 <= x < xr\ntemplate <typename T>\nT mod_affine_range_counting(T a, T b,\
-    \ T m, T xr, T yr) {\n  assert(0 <= yr && yr <= m);\n  return sum_of_floor(xr,\
+    \n/**\n * @brief Gray code\n */ \n#line 2 \"math/inv-mod.hpp\"\n\n#line 5 \"math/inv-mod.hpp\"\
+    \nusing namespace std;\n\n// gcd(a, m) != 1 \u306E\u3068\u304D 0 \u9664\u7B97\u3067\
+    \ RE \u3059\u308B\ntemplate <typename T>\nT inv_mod(T a, T m) {\n  if (m == 1)\
+    \ return 0;\n  if (a >= m) a %= m;\n  if (a < 0) a += m;\n  T b = m, s = 1, t\
+    \ = 0;\n  while (true) {\n    if (a == 1) return s;\n    t -= b / a * s;\n   \
+    \ b %= a;\n    if (b == 1) return t + m;\n    s -= a / b * t;\n    a %= b;\n \
+    \ }\n}\n#line 2 \"math/isqrt.hpp\"\n\n#line 4 \"math/isqrt.hpp\"\nusing namespace\
+    \ std;\n\n// floor(sqrt(n)) \u3092\u8FD4\u3059 (\u305F\u3060\u3057 n \u304C\u8CA0\
+    \u306E\u5834\u5408\u306F 0 \u3092\u8FD4\u3059)\nlong long isqrt(long long n) {\n\
+    \  if (n <= 0) return 0;\n  long long x = sqrt(n);\n  while ((x + 1) * (x + 1)\
+    \ <= n) x++;\n  while (x * x > n) x--;\n  return x;\n}\n#line 2 \"math/sum-of-floor.hpp\"\
+    \n\n\n\n// sum_{0 <= i < N} (ai + b) // m\ntemplate <typename T>\nT sum_of_floor(T\
+    \ n, T m, T a, T b) {\n  T ret = 0;\n  if (a >= m) ret += (n - 1) * n * (a / m)\
+    \ / 2, a %= m;\n  if (b >= m) ret += n * (b / m), b %= m;\n  T y = (a * n + b)\
+    \ / m;\n  if (y == 0) return ret;\n  T x = y * m - b;\n  ret += (n - (x + a -\
+    \ 1) / a) * y;\n  ret += sum_of_floor(y, a, m, (a - x % a) % a);\n  return ret;\n\
+    }\n\n// verify www.codechef.com/viewsolution/36222026\n// count x : ax + b mod\
+    \ m < yr, 0 <= x < xr\ntemplate <typename T>\nT mod_affine_range_counting(T a,\
+    \ T b, T m, T xr, T yr) {\n  assert(0 <= yr && yr <= m);\n  return sum_of_floor(xr,\
     \ m, a, b + m) - sum_of_floor(xr, m, a, b + m - yr);\n}\n#line 2 \"misc/rng.hpp\"\
     \n\nnamespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     \n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
@@ -228,7 +244,7 @@ data:
     \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
     \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
     \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 8 \"verify/verify-unit-test/math.test.cpp\"\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 10 \"verify/verify-unit-test/math.test.cpp\"\
     \nusing namespace Nyaan;\n\nvoid gray_code_test() {\n  for (int i = 0; i < 20;\
     \ i++) {\n    auto g = gray_code(i);\n    int s = (int)g.size();\n    for (int\
     \ j = 0; j < s; j++) {\n      int d = g[j] ^ g[j ? j - 1 : s - 1];\n      assert(d\
@@ -238,23 +254,46 @@ data:
     \ M + 1);\n    int xr = randint(100, 100 + M + 1);\n    int yr = randint(0, m\
     \ + 1);\n    int a1 = mod_affine_range_counting<long long>(a, b, m, xr, yr);\n\
     \    int a2 = 0;\n    rep(x, xr) {\n      int X = (a * x + b) % m;\n      a2 +=\
-    \ X < yr;\n    }\n    assert(a1 == a2);\n  }\n}\n\nvoid Nyaan::solve() {\n  gray_code_test();\n\
-    \  mod_affine_range_counting_test();\n\n  int a, b;\n  cin >> a >> b;\n  cout\
-    \ << a + b << endl;\n}\n"
+    \ X < yr;\n    }\n    assert(a1 == a2);\n  }\n}\n\nvoid isqrt_test() {\n  auto\
+    \ check = [&](long long x) -> void {\n    ll y = isqrt(x);\n    assert(y * y <=\
+    \ x);\n    assert(x < (y + 1) * (y + 1));\n  };\n\n  rep(i, TEN(4)) check(i);\n\
+    \  rep(_, 100) {\n    ll x = rng(100, 2e9);\n    x = x * x;\n    reg(i, x - 50,\
+    \ x + 50) check(i);\n  }\n}\n\nvoid inv_mod_test() {\n  rep1(mod, 100) {\n   \
+    \ rep(a, mod * 10) {\n      if (gcd(a, mod) != 1) continue;\n      int b = inv_mod(a,\
+    \ mod);\n      assert(a * b % mod == 1 % mod);\n    }\n  }\n\n  rep(_, 1000) {\n\
+    \    ll mod = rng(2, TEN(18));\n    ll x = 0;\n    do {\n      x = rng(1, mod\
+    \ - 1);\n    } while (gcd(mod, x) != 1);\n    ll y = inv_mod(x, mod);\n    assert(i128(x)\
+    \ * y % mod == 1);\n  }\n}\n\nvoid Nyaan::solve() {\n  gray_code_test();\n  cerr\
+    \ << \"OK gray code\" << endl;\n  mod_affine_range_counting_test();\n  cerr <<\
+    \ \"OK mod affine\" << endl;\n  isqrt_test();\n  cerr << \"OK isqrt\" << endl;\n\
+    \  inv_mod_test();\n  cerr << \"OK inv mod\" << endl;\n\n  int a, b;\n  cin >>\
+    \ a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n//\n#include \"../../math/gray-code.hpp\"\n#include\
-    \ \"../../math/sum-of-floor.hpp\"\n#include \"../../misc/rng.hpp\"\nusing namespace\
-    \ Nyaan;\n\nvoid gray_code_test() {\n  for (int i = 0; i < 20; i++) {\n    auto\
-    \ g = gray_code(i);\n    int s = (int)g.size();\n    for (int j = 0; j < s; j++)\
-    \ {\n      int d = g[j] ^ g[j ? j - 1 : s - 1];\n      assert(d == (d & -d));\n\
-    \    }\n  }\n}\n\n// count x : ax + b mod m < yr, 0 <= x < xr\nvoid mod_affine_range_counting_test()\
-    \ {\n  int M = 100000;\n  rep(_, 100) {\n    int a = randint(0, M);\n    int b\
-    \ = randint(0, M);\n    int m = randint(1, M + 1);\n    int xr = randint(100,\
-    \ 100 + M + 1);\n    int yr = randint(0, m + 1);\n    int a1 = mod_affine_range_counting<long\
+    \ \"../../math/inv-mod.hpp\"\n#include \"../../math/isqrt.hpp\"\n#include \"../../math/sum-of-floor.hpp\"\
+    \n#include \"../../misc/rng.hpp\"\nusing namespace Nyaan;\n\nvoid gray_code_test()\
+    \ {\n  for (int i = 0; i < 20; i++) {\n    auto g = gray_code(i);\n    int s =\
+    \ (int)g.size();\n    for (int j = 0; j < s; j++) {\n      int d = g[j] ^ g[j\
+    \ ? j - 1 : s - 1];\n      assert(d == (d & -d));\n    }\n  }\n}\n\n// count x\
+    \ : ax + b mod m < yr, 0 <= x < xr\nvoid mod_affine_range_counting_test() {\n\
+    \  int M = 100000;\n  rep(_, 100) {\n    int a = randint(0, M);\n    int b = randint(0,\
+    \ M);\n    int m = randint(1, M + 1);\n    int xr = randint(100, 100 + M + 1);\n\
+    \    int yr = randint(0, m + 1);\n    int a1 = mod_affine_range_counting<long\
     \ long>(a, b, m, xr, yr);\n    int a2 = 0;\n    rep(x, xr) {\n      int X = (a\
     \ * x + b) % m;\n      a2 += X < yr;\n    }\n    assert(a1 == a2);\n  }\n}\n\n\
-    void Nyaan::solve() {\n  gray_code_test();\n  mod_affine_range_counting_test();\n\
-    \n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}"
+    void isqrt_test() {\n  auto check = [&](long long x) -> void {\n    ll y = isqrt(x);\n\
+    \    assert(y * y <= x);\n    assert(x < (y + 1) * (y + 1));\n  };\n\n  rep(i,\
+    \ TEN(4)) check(i);\n  rep(_, 100) {\n    ll x = rng(100, 2e9);\n    x = x * x;\n\
+    \    reg(i, x - 50, x + 50) check(i);\n  }\n}\n\nvoid inv_mod_test() {\n  rep1(mod,\
+    \ 100) {\n    rep(a, mod * 10) {\n      if (gcd(a, mod) != 1) continue;\n    \
+    \  int b = inv_mod(a, mod);\n      assert(a * b % mod == 1 % mod);\n    }\n  }\n\
+    \n  rep(_, 1000) {\n    ll mod = rng(2, TEN(18));\n    ll x = 0;\n    do {\n \
+    \     x = rng(1, mod - 1);\n    } while (gcd(mod, x) != 1);\n    ll y = inv_mod(x,\
+    \ mod);\n    assert(i128(x) * y % mod == 1);\n  }\n}\n\nvoid Nyaan::solve() {\n\
+    \  gray_code_test();\n  cerr << \"OK gray code\" << endl;\n  mod_affine_range_counting_test();\n\
+    \  cerr << \"OK mod affine\" << endl;\n  isqrt_test();\n  cerr << \"OK isqrt\"\
+    \ << endl;\n  inv_mod_test();\n  cerr << \"OK inv mod\" << endl;\n\n  int a, b;\n\
+    \  cin >> a >> b;\n  cout << a + b << endl;\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -263,12 +302,14 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - math/gray-code.hpp
+  - math/inv-mod.hpp
+  - math/isqrt.hpp
   - math/sum-of-floor.hpp
   - misc/rng.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/math.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/math.test.cpp

@@ -5,6 +5,9 @@ data:
     path: math/enumerate-quotient.hpp
     title: "\u5546\u306E\u5217\u6319"
   - icon: ':heavy_check_mark:'
+    path: math/isqrt.hpp
+    title: math/isqrt.hpp
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
   - icon: ':heavy_check_mark:'
@@ -195,21 +198,35 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp\"\n//\n#line\
-    \ 2 \"math/enumerate-quotient.hpp\"\n\n// { (q, l, r) : forall x in (l,r], floor(N/x)\
-    \ = q }\n// \u3092\u5F15\u6570\u306B\u53D6\u308B\u95A2\u6570f(q, l, r)\u3092\u6E21\
+    \ 2 \"math/enumerate-quotient.hpp\"\n\n#line 2 \"math/isqrt.hpp\"\n\n#line 4 \"\
+    math/isqrt.hpp\"\nusing namespace std;\n\n// floor(sqrt(n)) \u3092\u8FD4\u3059\
+    \ (\u305F\u3060\u3057 n \u304C\u8CA0\u306E\u5834\u5408\u306F 0 \u3092\u8FD4\u3059\
+    )\nlong long isqrt(long long n) {\n  if (n <= 0) return 0;\n  long long x = sqrt(n);\n\
+    \  while ((x + 1) * (x + 1) <= n) x++;\n  while (x * x > n) x--;\n  return x;\n\
+    }\n#line 4 \"math/enumerate-quotient.hpp\"\n\nnamespace EnumerateQuotientImpl\
+    \ {\nlong long fast_div(long long a, long long b) { return 1.0 * a / b; };\nlong\
+    \ long slow_div(long long a, long long b) { return a / b; };\n}  // namespace\
+    \ EnumerateQuotientImpl\n\n// { (q, l, r) : forall x in (l,r], floor(N/x) = q\
+    \ }\n// \u3092\u5F15\u6570\u306B\u53D6\u308B\u95A2\u6570f(q, l, r)\u3092\u6E21\
     \u3059\u3002\u7BC4\u56F2\u304C\u5DE6\u306B\u534A\u958B\u306A\u306E\u306B\u6CE8\
-    \u610F\ntemplate <typename T, typename F>\nvoid enumerate_quotient(T N, const\
-    \ F& f) {\n  T sq = sqrt(N), upper = N, quo = 0;\n  while (upper > sq) {\n   \
-    \ T thres = N / (++quo + 1);\n    f(quo, thres, upper);\n    upper = thres;\n\
-    \  }\n  while (upper > 0) {\n    f(N / upper, upper - 1, upper);\n    upper--;\n\
-    \  }\n}\n\n/**\n *  @brief \u5546\u306E\u5217\u6319\n */\n#line 6 \"verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp\"\
-    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  inl(N);\n  vl ns{0};\n\
-    \  enumerate_quotient(N, [&](ll, ll, ll r) { ns.push_back(r); });\n  vector<i64>\
-    \ h(ns);\n  for (auto& x : h) --x;\n  for (i64 x = 2, sq = sqrtl(N), nsz = ns.size();\
-    \ x <= sq; ++x) {\n    if (h[nsz - x] == h[nsz - x + 1]) continue;\n    i64 x2\
-    \ = x * x, pi = h[nsz - x + 1];\n    for (i64 i = 1, n = ns[i]; i < nsz && n >=\
-    \ x2; n = ns[++i])\n      h[i] -= h[i * x <= sq ? i * x : nsz - n / x] - pi;\n\
-    \  }\n  out(h[1]);\n}\n"
+    \u610F\n// \u5546\u306F\u5C0F\u3055\u3044\u65B9\u304B\u3089\u8D70\u67FB\u3059\u308B\
+    \ntemplate <typename T, typename F>\nvoid enumerate_quotient(T N, const F& f)\
+    \ {\n  T sq = isqrt(N);\n\n#define FUNC(d)                       \\\n  T upper\
+    \ = N, quo = 0;               \\\n  while (upper > sq) {                \\\n \
+    \   T thres = d(N, (++quo + 1));      \\\n    f(quo, thres, upper);          \
+    \   \\\n    upper = thres;                    \\\n  }                        \
+    \           \\\n  while (upper > 0) {                 \\\n    f(d(N, upper), upper\
+    \ - 1, upper); \\\n    upper--;                          \\\n  }\n\n  if (N <=\
+    \ 1e12) {\n    FUNC(EnumerateQuotientImpl::fast_div);\n  } else {\n    FUNC(EnumerateQuotientImpl::slow_div);\n\
+    \  }\n#undef FUNC\n}\n\n/**\n *  @brief \u5546\u306E\u5217\u6319\n */\n#line 6\
+    \ \"verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nvoid Nyaan::solve() {\n  inl(N);\n  vl ns{0};\n  enumerate_quotient(N,\
+    \ [&](ll, ll, ll r) { ns.push_back(r); });\n  vector<i64> h(ns);\n  for (auto&\
+    \ x : h) --x;\n  for (i64 x = 2, sq = sqrtl(N), nsz = ns.size(); x <= sq; ++x)\
+    \ {\n    if (h[nsz - x] == h[nsz - x + 1]) continue;\n    i64 x2 = x * x, pi =\
+    \ h[nsz - x + 1];\n    for (i64 i = 1, n = ns[i]; i < nsz && n >= x2; n = ns[++i])\n\
+    \      h[i] -= h[i * x <= sq ? i * x : nsz - n / x] - pi;\n  }\n  out(h[1]);\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\n//\n\
     #include \"../../template/template.hpp\"\n//\n#include \"../../math/enumerate-quotient.hpp\"\
     \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  inl(N);\n  vl ns{0};\n\
@@ -227,10 +244,11 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - math/enumerate-quotient.hpp
+  - math/isqrt.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-04-10 23:43:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp

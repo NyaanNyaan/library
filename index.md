@@ -372,6 +372,12 @@ data:
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
     - icon: ':heavy_check_mark:'
+      path: math/bigint-garner.hpp
+      title: Garner's algorithm for bigint
+    - icon: ':heavy_check_mark:'
+      path: math/bigint.hpp
+      title: "\u591A\u500D\u9577\u6574\u6570"
+    - icon: ':heavy_check_mark:'
       path: math/constexpr-primitiveroot.hpp
       title: math/constexpr-primitiveroot.hpp
     - icon: ':warning:'
@@ -390,9 +396,6 @@ data:
       path: math/float-binomial.hpp
       title: math/float-binomial.hpp
     - icon: ':heavy_check_mark:'
-      path: math/garner-bigint.hpp
-      title: Garner's algorithm for bigint
-    - icon: ':heavy_check_mark:'
       path: math/garner.hpp
       title: Garner's algorithm
     - icon: ':heavy_check_mark:'
@@ -402,11 +405,14 @@ data:
       path: math/grundy-number.hpp
       title: Grundy Number
     - icon: ':heavy_check_mark:'
+      path: math/inv-mod.hpp
+      title: math/inv-mod.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/isqrt.hpp
+      title: math/isqrt.hpp
+    - icon: ':heavy_check_mark:'
       path: math/kth-root-integral.hpp
       title: $\mathrm{floor}(a^{\frac{1}{k}})$
-    - icon: ':heavy_check_mark:'
-      path: math/multiprecision-integer.hpp
-      title: "\u591A\u500D\u9577\u6574\u6570"
     - icon: ':heavy_check_mark:'
       path: math/nimber-to-field.hpp
       title: "Nimber <-> \u591A\u9805\u5F0F\u74B0"
@@ -425,6 +431,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/semiring.hpp
       title: "\u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA"
+    - icon: ':heavy_check_mark:'
+      path: math/stern-brocot-tree.hpp
+      title: math/stern-brocot-tree.hpp
     - icon: ':heavy_check_mark:'
       path: math/sum-of-floor.hpp
       title: math/sum-of-floor.hpp
@@ -495,6 +504,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: misc/all.hpp
       title: misc/all.hpp
+    - icon: ':heavy_check_mark:'
+      path: misc/base64.hpp
+      title: "Base64 (\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9\u306B\u6570\u5217\u3092\
+        \u5727\u7E2E\u3057\u3066\u57CB\u3081\u8FBC\u3080\u7528\u306E\u7B26\u53F7\u5316\
+        \u30FB\u5FA9\u53F7\u5316\u30E9\u30A4\u30D6\u30E9\u30EA)"
     - icon: ':heavy_check_mark:'
       path: misc/bitset-find-prev.hpp
       title: bitset::find_prev
@@ -609,6 +623,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: multiplicative-function/enamurate-multiplicative-function.hpp
       title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306E\u5217\u6319"
+    - icon: ':heavy_check_mark:'
+      path: multiplicative-function/enumerate-sum-of-multiplicative-function.hpp
+      title: "\u4E57\u6CD5\u7684\u95A2\u6570\u306Eprefix sum \u306E\u5217\u6319"
     - icon: ':heavy_check_mark:'
       path: multiplicative-function/gcd-convolution.hpp
       title: "GCD\u7573\u307F\u8FBC\u307F"
@@ -1233,6 +1250,9 @@ data:
       path: verify/verify-unit-test/manacher.test.cpp
       title: verify/verify-unit-test/manacher.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/math-fast-2.test.cpp
+      title: verify/verify-unit-test/math-fast-2.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/math-fast.test.cpp
       title: verify/verify-unit-test/math-fast.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1727,6 +1747,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
+      title: verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
       title: verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1791,6 +1814,12 @@ data:
   - name: verify/verify-yosupo-other
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
+      title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit.test.cpp
+      title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
       title: verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1845,6 +1874,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0303.test.cpp
       title: verify/verify-yuki/yuki-0303.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0502-base64.test.cpp
+      title: verify/verify-yuki/yuki-0502-base64.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0502.test.cpp
       title: verify/verify-yuki/yuki-0502.test.cpp
@@ -1968,6 +2000,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-2231.test.cpp
       title: verify/verify-yuki/yuki-2231.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-2266.test.cpp
+      title: verify/verify-yuki/yuki-2266.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-helloworld.test.cpp
       title: verify/verify-yuki/yuki-helloworld.test.cpp

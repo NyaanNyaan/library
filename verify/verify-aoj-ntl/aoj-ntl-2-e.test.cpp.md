@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math/multiprecision-integer.hpp
+    path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
@@ -25,34 +25,33 @@ data:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_E
   bundledCode: "#line 1 \"verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp\"\n#define PROBLEM\
     \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_E\"\n\
-    \n#line 2 \"math/multiprecision-integer.hpp\"\n\n#include <algorithm>\n#include\
-    \ <cassert>\n#include <cmath>\n#include <iostream>\n#include <tuple>\n#include\
-    \ <utility>\n#include <vector>\nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\
-    \n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\n\
-    struct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32\
-    \ = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
-    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
-    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
-    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"\
-    invalid, r * mod != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
-    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n\n\
-    \  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
-    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
-    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
-    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
-    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
-    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
-    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
-    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
-    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \n#line 2 \"math/bigint.hpp\"\n\n#include <algorithm>\n#include <cassert>\n#include\
+    \ <cmath>\n#include <iostream>\n#include <tuple>\n#include <utility>\n#include\
+    \ <vector>\nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line\
+    \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
+    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
+    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
+    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
+    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
+    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
+    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
+    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
+    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
+    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
+    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
+    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
+    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
+    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
+    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
+    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
+    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
+    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
+    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
+    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
+    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
+    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n\n  constexpr mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n   \
     \ while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>=\
     \ 1;\n    }\n    return ret;\n  }\n  \n  constexpr mint inverse() const { return\
@@ -177,7 +176,7 @@ data:
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
     \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
     \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
-    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/multiprecision-integer.hpp\"\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/bigint.hpp\"\
     \n\nnamespace MultiPrecisionIntegerImpl {\nstruct TENS {\n  static constexpr int\
     \ offset = 30;\n  constexpr TENS() : _tend() {\n    _tend[offset] = 1;\n    for\
     \ (int i = 1; i <= offset; i++) {\n      _tend[offset + i] = _tend[offset + i\
@@ -288,28 +287,27 @@ data:
     \ {\n        long long p = 1LL * a[i] * b[j];\n        prod[i + j] += p;\n   \
     \     if (prod[i + j] >= (4LL * D * D)) {\n          prod[i + j] -= 4LL * D *\
     \ D;\n          prod[i + j + 1] += 4LL * D;\n        }\n      }\n    }\n    vector<int>\
-    \ c;\n    long long x = 0;\n    for (int i = 0;; i++) {\n      if (i >= (int)prod.size()\
-    \ && x == 0) break;\n      if (i < (int)prod.size()) x += prod[i];\n      c.push_back(x\
-    \ % D);\n      x /= D;\n    }\n    _shrink(c);\n    return c;\n  }\n  // a * b\n\
-    \  static vector<int> _mul(const vector<int>& a, const vector<int>& b) {\n   \
-    \ if (_is_zero(a) || _is_zero(b)) return {};\n    if (_is_one(a)) return b;\n\
-    \    if (_is_one(b)) return a;\n    if (min<int>(a.size(), b.size()) <= 128) {\n\
-    \      return a.size() < b.size() ? _mul_naive(b, a) : _mul_naive(a, b);\n   \
-    \ }\n    return _mul_fft(a, b);\n  }\n  // 0 <= A < 1e18, 1 <= B < 1e9\n  static\
-    \ pair<vector<int>, vector<int>> _divmod_li(const vector<int>& a,\n          \
-    \                                         const vector<int>& b) {\n    assert(0\
-    \ <= (int)a.size() && (int)a.size() <= 2);\n    assert((int)b.size() == 1);\n\
-    \    long long va = _to_ll(a);\n    int vb = b[0];\n    return {_integer_to_vec(va\
-    \ / vb), _integer_to_vec(va % vb)};\n  }\n  // 0 <= A < 1e18, 1 <= B < 1e18\n\
-    \  static pair<vector<int>, vector<int>> _divmod_ll(const vector<int>& a,\n  \
-    \                                                 const vector<int>& b) {\n  \
-    \  assert(0 <= (int)a.size() && (int)a.size() <= 2);\n    assert(1 <= (int)b.size()\
-    \ && (int)b.size() <= 2);\n    long long va = _to_ll(a), vb = _to_ll(b);\n   \
-    \ return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};\n  }\n  // 1 <=\
-    \ B < 1e9\n  static pair<vector<int>, vector<int>> _divmod_1e9(const vector<int>&\
-    \ a,\n                                                    const vector<int>& b)\
-    \ {\n    assert((int)b.size() == 1);\n    if (b[0] == 1) return {a, {}};\n   \
-    \ if ((int)a.size() <= 2) return _divmod_li(a, b);\n    vector<int> quo(a.size());\n\
+    \ c(prod.size() + 1);\n    long long x = 0;\n    int i = 0;\n    for (; i < (int)prod.size();\
+    \ i++) x += prod[i], c[i] = x % D, x /= D;\n    while (x) c[i] = x % D, x /= D,\
+    \ i++;\n    _shrink(c);\n    return c;\n  }\n  // a * b\n  static vector<int>\
+    \ _mul(const vector<int>& a, const vector<int>& b) {\n    if (_is_zero(a) || _is_zero(b))\
+    \ return {};\n    if (_is_one(a)) return b;\n    if (_is_one(b)) return a;\n \
+    \   if (min<int>(a.size(), b.size()) <= 128) {\n      return a.size() < b.size()\
+    \ ? _mul_naive(b, a) : _mul_naive(a, b);\n    }\n    return _mul_fft(a, b);\n\
+    \  }\n  // 0 <= A < 1e18, 1 <= B < 1e9\n  static pair<vector<int>, vector<int>>\
+    \ _divmod_li(const vector<int>& a,\n                                         \
+    \          const vector<int>& b) {\n    assert(0 <= (int)a.size() && (int)a.size()\
+    \ <= 2);\n    assert((int)b.size() == 1);\n    long long va = _to_ll(a);\n   \
+    \ int vb = b[0];\n    return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};\n\
+    \  }\n  // 0 <= A < 1e18, 1 <= B < 1e18\n  static pair<vector<int>, vector<int>>\
+    \ _divmod_ll(const vector<int>& a,\n                                         \
+    \          const vector<int>& b) {\n    assert(0 <= (int)a.size() && (int)a.size()\
+    \ <= 2);\n    assert(1 <= (int)b.size() && (int)b.size() <= 2);\n    long long\
+    \ va = _to_ll(a), vb = _to_ll(b);\n    return {_integer_to_vec(va / vb), _integer_to_vec(va\
+    \ % vb)};\n  }\n  // 1 <= B < 1e9\n  static pair<vector<int>, vector<int>> _divmod_1e9(const\
+    \ vector<int>& a,\n                                                    const vector<int>&\
+    \ b) {\n    assert((int)b.size() == 1);\n    if (b[0] == 1) return {a, {}};\n\
+    \    if ((int)a.size() <= 2) return _divmod_li(a, b);\n    vector<int> quo(a.size());\n\
     \    long long d = 0;\n    int b0 = b[0];\n    for (int i = a.size() - 1; i >=\
     \ 0; i--) {\n      d = d * D + a[i];\n      assert(d < 1LL * D * b0);\n      int\
     \ q = d / b0, r = d % b0;\n      quo[i] = q, d = r;\n    }\n    _shrink(quo);\n\
@@ -400,17 +398,17 @@ data:
     \ */\n#line 5 \"verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp\"\n//\nint main() {\n\
     \  bigint a, b;\n  cin >> a >> b;\n  cout << a % b << endl;\n}\n"
   code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_E\"\
-    \n\n#include \"../../math/multiprecision-integer.hpp\"\n//\nint main() {\n  bigint\
-    \ a, b;\n  cin >> a >> b;\n  cout << a % b << endl;\n}\n"
+    \n\n#include \"../../math/bigint.hpp\"\n//\nint main() {\n  bigint a, b;\n  cin\
+    \ >> a >> b;\n  cout << a % b << endl;\n}\n"
   dependsOn:
-  - math/multiprecision-integer.hpp
+  - math/bigint.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
   requiredBy: []
-  timestamp: '2022-11-08 13:26:50+09:00'
+  timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp

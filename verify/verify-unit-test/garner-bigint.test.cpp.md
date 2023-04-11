@@ -5,10 +5,10 @@ data:
     path: inner/inner_math.hpp
     title: inner/inner_math.hpp
   - icon: ':heavy_check_mark:'
-    path: math/garner-bigint.hpp
+    path: math/bigint-garner.hpp
     title: Garner's algorithm for bigint
   - icon: ':heavy_check_mark:'
-    path: math/multiprecision-integer.hpp
+    path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: misc/all.hpp
@@ -239,9 +239,9 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-unit-test/garner-bigint.test.cpp\"\n//\n#line 1 \"math/garner-bigint.hpp\"\
-    \n\n#line 2 \"math/multiprecision-integer.hpp\"\n\n#line 10 \"math/multiprecision-integer.hpp\"\
-    \nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \ 4 \"verify/verify-unit-test/garner-bigint.test.cpp\"\n//\n#line 1 \"math/bigint-garner.hpp\"\
+    \n\n#line 2 \"math/bigint.hpp\"\n\n#line 10 \"math/bigint.hpp\"\nusing namespace\
+    \ std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
     \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
     \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
     \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
@@ -390,7 +390,7 @@ data:
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
     \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
     \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
-    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/multiprecision-integer.hpp\"\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/bigint.hpp\"\
     \n\nnamespace MultiPrecisionIntegerImpl {\nstruct TENS {\n  static constexpr int\
     \ offset = 30;\n  constexpr TENS() : _tend() {\n    _tend[offset] = 1;\n    for\
     \ (int i = 1; i <= offset; i++) {\n      _tend[offset + i] = _tend[offset + i\
@@ -501,28 +501,27 @@ data:
     \ {\n        long long p = 1LL * a[i] * b[j];\n        prod[i + j] += p;\n   \
     \     if (prod[i + j] >= (4LL * D * D)) {\n          prod[i + j] -= 4LL * D *\
     \ D;\n          prod[i + j + 1] += 4LL * D;\n        }\n      }\n    }\n    vector<int>\
-    \ c;\n    long long x = 0;\n    for (int i = 0;; i++) {\n      if (i >= (int)prod.size()\
-    \ && x == 0) break;\n      if (i < (int)prod.size()) x += prod[i];\n      c.push_back(x\
-    \ % D);\n      x /= D;\n    }\n    _shrink(c);\n    return c;\n  }\n  // a * b\n\
-    \  static vector<int> _mul(const vector<int>& a, const vector<int>& b) {\n   \
-    \ if (_is_zero(a) || _is_zero(b)) return {};\n    if (_is_one(a)) return b;\n\
-    \    if (_is_one(b)) return a;\n    if (min<int>(a.size(), b.size()) <= 128) {\n\
-    \      return a.size() < b.size() ? _mul_naive(b, a) : _mul_naive(a, b);\n   \
-    \ }\n    return _mul_fft(a, b);\n  }\n  // 0 <= A < 1e18, 1 <= B < 1e9\n  static\
-    \ pair<vector<int>, vector<int>> _divmod_li(const vector<int>& a,\n          \
-    \                                         const vector<int>& b) {\n    assert(0\
-    \ <= (int)a.size() && (int)a.size() <= 2);\n    assert((int)b.size() == 1);\n\
-    \    long long va = _to_ll(a);\n    int vb = b[0];\n    return {_integer_to_vec(va\
-    \ / vb), _integer_to_vec(va % vb)};\n  }\n  // 0 <= A < 1e18, 1 <= B < 1e18\n\
-    \  static pair<vector<int>, vector<int>> _divmod_ll(const vector<int>& a,\n  \
-    \                                                 const vector<int>& b) {\n  \
-    \  assert(0 <= (int)a.size() && (int)a.size() <= 2);\n    assert(1 <= (int)b.size()\
-    \ && (int)b.size() <= 2);\n    long long va = _to_ll(a), vb = _to_ll(b);\n   \
-    \ return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};\n  }\n  // 1 <=\
-    \ B < 1e9\n  static pair<vector<int>, vector<int>> _divmod_1e9(const vector<int>&\
-    \ a,\n                                                    const vector<int>& b)\
-    \ {\n    assert((int)b.size() == 1);\n    if (b[0] == 1) return {a, {}};\n   \
-    \ if ((int)a.size() <= 2) return _divmod_li(a, b);\n    vector<int> quo(a.size());\n\
+    \ c(prod.size() + 1);\n    long long x = 0;\n    int i = 0;\n    for (; i < (int)prod.size();\
+    \ i++) x += prod[i], c[i] = x % D, x /= D;\n    while (x) c[i] = x % D, x /= D,\
+    \ i++;\n    _shrink(c);\n    return c;\n  }\n  // a * b\n  static vector<int>\
+    \ _mul(const vector<int>& a, const vector<int>& b) {\n    if (_is_zero(a) || _is_zero(b))\
+    \ return {};\n    if (_is_one(a)) return b;\n    if (_is_one(b)) return a;\n \
+    \   if (min<int>(a.size(), b.size()) <= 128) {\n      return a.size() < b.size()\
+    \ ? _mul_naive(b, a) : _mul_naive(a, b);\n    }\n    return _mul_fft(a, b);\n\
+    \  }\n  // 0 <= A < 1e18, 1 <= B < 1e9\n  static pair<vector<int>, vector<int>>\
+    \ _divmod_li(const vector<int>& a,\n                                         \
+    \          const vector<int>& b) {\n    assert(0 <= (int)a.size() && (int)a.size()\
+    \ <= 2);\n    assert((int)b.size() == 1);\n    long long va = _to_ll(a);\n   \
+    \ int vb = b[0];\n    return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};\n\
+    \  }\n  // 0 <= A < 1e18, 1 <= B < 1e18\n  static pair<vector<int>, vector<int>>\
+    \ _divmod_ll(const vector<int>& a,\n                                         \
+    \          const vector<int>& b) {\n    assert(0 <= (int)a.size() && (int)a.size()\
+    \ <= 2);\n    assert(1 <= (int)b.size() && (int)b.size() <= 2);\n    long long\
+    \ va = _to_ll(a), vb = _to_ll(b);\n    return {_integer_to_vec(va / vb), _integer_to_vec(va\
+    \ % vb)};\n  }\n  // 1 <= B < 1e9\n  static pair<vector<int>, vector<int>> _divmod_1e9(const\
+    \ vector<int>& a,\n                                                    const vector<int>&\
+    \ b) {\n    assert((int)b.size() == 1);\n    if (b[0] == 1) return {a, {}};\n\
+    \    if ((int)a.size() <= 2) return _divmod_li(a, b);\n    vector<int> quo(a.size());\n\
     \    long long d = 0;\n    int b0 = b[0];\n    for (int i = a.size() - 1; i >=\
     \ 0; i--) {\n      d = d * D + a[i];\n      assert(d < 1LL * D * b0);\n      int\
     \ q = d / b0, r = d % b0;\n      quo[i] = q, d = r;\n    }\n    _shrink(quo);\n\
@@ -610,7 +609,7 @@ data:
     \ s << \" : \";\n    cerr << \"{ \";\n    for (int i = 0; i < (int)a.size(); i++)\
     \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
     \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
-    \ */\n#line 3 \"math/garner-bigint.hpp\"\n\nnamespace GarnerImpl {\n\ntemplate\
+    \ */\n#line 3 \"math/bigint-garner.hpp\"\n\nnamespace GarnerImpl {\n\ntemplate\
     \ <typename T,\n          enable_if_t<is_integral_v<T> || is_same_v<T, __int128_t>>*\
     \ = nullptr>\nT inv_mod(T a, T m) {\n  assert(0 <= a);\n  if (a >= m) a %= m;\n\
     \  T b = m, s = 1, t = 0;\n  while (true) {\n    if (a == 1) return s;\n    t\
@@ -902,7 +901,7 @@ data:
     \ << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n\
     }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
-    \ \"../../template/template.hpp\"\n//\n#include \"../../math/garner-bigint.hpp\"\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../math/bigint-garner.hpp\"\
     \n//\n#include \"../../modint/arbitrary-modint.hpp\"\n//\n#include \"../../prime/fast-factorize.hpp\"\
     \n#include \"../../prime/prime-enumerate.hpp\"\n//\n#include \"../../misc/all.hpp\"\
     \n\nusing namespace Nyaan;\nusing mint = ArbitraryModInt;\n\n// n^e\nbigint pow1(ll\
@@ -941,8 +940,8 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - math/garner-bigint.hpp
-  - math/multiprecision-integer.hpp
+  - math/bigint-garner.hpp
+  - math/bigint.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
@@ -960,7 +959,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/garner-bigint.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/garner-bigint.test.cpp

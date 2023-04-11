@@ -243,46 +243,46 @@ data:
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 2 \"multiplicative-function/divisor-multiple-transform.hpp\"\
-    \n\n\n\n#line 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11,\
-    \ 13, 17, ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N /\
-    \ 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d\
-    \ = 6 - d, i++) {\n    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r\
-    \ = d * p / 3 + (d * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n\
-    \         q < qe; q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2,\
+    \n\n#line 2 \"prime/prime-enumerate.hpp\"\n\n// Prime Sieve {2, 3, 5, 7, 11, 13,\
+    \ 17, ...}\nvector<int> prime_enumerate(int N) {\n  vector<bool> sieve(N / 3 +\
+    \ 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn = sqrt(N); p <= sqn; p += d = 6\
+    \ - d, i++) {\n    if (!sieve[i]) continue;\n    for (int q = p * p / 3, r = d\
+    \ * p / 3 + (d * p % 3 == 2), s = 2 * p,\n             qe = sieve.size();\n  \
+    \       q < qe; q += r = s - r)\n      sieve[q] = 0;\n  }\n  vector<int> ret{2,\
     \ 3};\n  for (int p = 5, d = 4, i = 1; p <= N; p += d = 6 - d, i++)\n    if (sieve[i])\
     \ ret.push_back(p);\n  while (!ret.empty() && ret.back() > N) ret.pop_back();\n\
-    \  return ret;\n}\n#line 6 \"multiplicative-function/divisor-multiple-transform.hpp\"\
+    \  return ret;\n}\n#line 4 \"multiplicative-function/divisor-multiple-transform.hpp\"\
     \n\nstruct divisor_transform {\n  template <typename T>\n  static void zeta_transform(vector<T>\
     \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
     \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];\n\
     \  }\n  template <typename T>\n  static void mobius_transform(T &a) {\n    int\
     \ N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p :\
     \ sieve)\n      for (int k = N / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n  template\
-    \ <typename T>\n  static void zeta_transform(map<long long, T> &a) {\n    for\
-    \ (auto p = rbegin(a); p != rend(a); p++)\n      for (auto &x : a) {\n       \
-    \ if (p->first == x.first) break;\n        if (p->first % x.first == 0) p->second\
-    \ += x.second;\n      }\n  }\n  template <typename T>\n  static void mobius_transform(map<long\
-    \ long, T> &a) {\n    for (auto &x : a)\n      for (auto p = rbegin(a); p != rend(a);\
-    \ p++) {\n        if (x.first == p->first) break;\n        if (p->first % x.first\
-    \ == 0) p->second -= x.second;\n      }\n  }\n};\n\nstruct multiple_transform\
-    \ {\n  template <typename T>\n  static void zeta_transform(vector<T> &a) {\n \
-    \   int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto\
-    \ &p : sieve)\n      for (int k = N / p; k > 0; --k) a[k] += a[k * p];\n  }\n\
-    \  template <typename T>\n  static void mobius_transform(vector<T> &a) {\n   \
-    \ int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p\
-    \ : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k] -= a[k * p];\n  }\n\n\
-    \  template <typename T>\n  static void zeta_transform(map<long long, T> &a) {\n\
-    \    for (auto &x : a)\n      for (auto p = rbegin(a); p->first != x.first; p++)\n\
-    \        if (p->first % x.first == 0) x.second += p->second;\n  }\n  template\
-    \ <typename T>\n  static void mobius_transform(map<long long, T> &a) {\n    for\
-    \ (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto p2 = rbegin(a);\
-    \ p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second -= p2->second;\n\
-    \  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\u6570\u5909\u63DB\
-    \n * @docs docs/multiplicative-function/divisor-multiple-transform.md\n */\n#line\
-    \ 2 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\n\n#line\
-    \ 5 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\n\n// f(n,\
-    \ p, c) : n = pow(p, c), f is multiplicative function\n\ntemplate <typename T,\
-    \ T (*f)(int, int, int)>\nstruct enamurate_multiplicative_function {\n  enamurate_multiplicative_function(int\
+    \ <typename I, typename T>\n  static void zeta_transform(map<I, T> &a) {\n   \
+    \ for (auto p = rbegin(a); p != rend(a); p++)\n      for (auto &x : a) {\n   \
+    \     if (p->first == x.first) break;\n        if (p->first % x.first == 0) p->second\
+    \ += x.second;\n      }\n  }\n  template <typename I, typename T>\n  static void\
+    \ mobius_transform(map<I, T> &a) {\n    for (auto &x : a) {\n      for (auto p\
+    \ = rbegin(a); p != rend(a); p++) {\n        if (x.first == p->first) break;\n\
+    \        if (p->first % x.first == 0) p->second -= x.second;\n      }\n    }\n\
+    \  }\n};\n\nstruct multiple_transform {\n  template <typename T>\n  static void\
+    \ zeta_transform(vector<T> &a) {\n    int N = a.size() - 1;\n    auto sieve =\
+    \ prime_enumerate(N);\n    for (auto &p : sieve)\n      for (int k = N / p; k\
+    \ > 0; --k) a[k] += a[k * p];\n  }\n  template <typename T>\n  static void mobius_transform(vector<T>\
+    \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
+    \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k] -= a[k *\
+    \ p];\n  }\n\n  template <typename I, typename T>\n  static void zeta_transform(map<I,\
+    \ T> &a) {\n    for (auto &x : a)\n      for (auto p = rbegin(a); p->first !=\
+    \ x.first; p++)\n        if (p->first % x.first == 0) x.second += p->second;\n\
+    \  }\n  template <typename I, typename T>\n  static void mobius_transform(map<I,\
+    \ T> &a) {\n    for (auto p1 = rbegin(a); p1 != rend(a); p1++)\n      for (auto\
+    \ p2 = rbegin(a); p2 != p1; p2++)\n        if (p2->first % p1->first == 0) p1->second\
+    \ -= p2->second;\n  }\n};\n\n/**\n * @brief \u500D\u6570\u5909\u63DB\u30FB\u7D04\
+    \u6570\u5909\u63DB\n * @docs docs/multiplicative-function/divisor-multiple-transform.md\n\
+    \ */\n#line 2 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\
+    \n\n#line 5 \"multiplicative-function/enamurate-multiplicative-function.hpp\"\n\
+    \n// f(n, p, c) : n = pow(p, c), f is multiplicative function\n\ntemplate <typename\
+    \ T, T (*f)(int, int, int)>\nstruct enamurate_multiplicative_function {\n  enamurate_multiplicative_function(int\
     \ _n)\n      : ps(prime_enumerate(_n)), a(_n + 1, T()), n(_n), p(ps.size()) {}\n\
     \n  vector<T> run() {\n    a[1] = 1;\n    dfs(-1, 1, 1);\n    return a;\n  }\n\
     \n private:\n  vector<int> ps;\n  vector<T> a;\n  int n, p;\n  void dfs(int i,\
@@ -402,7 +402,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/mf.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-04-10 22:57:51+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/mf.test.cpp

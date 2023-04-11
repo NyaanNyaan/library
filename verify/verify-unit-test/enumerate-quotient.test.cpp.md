@@ -5,6 +5,9 @@ data:
     path: math/enumerate-quotient.hpp
     title: "\u5546\u306E\u5217\u6319"
   - icon: ':heavy_check_mark:'
+    path: math/isqrt.hpp
+    title: math/isqrt.hpp
+  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
@@ -198,28 +201,41 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-unit-test/enumerate-quotient.test.cpp\"\n//\n#line 2 \"math/enumerate-quotient.hpp\"\
-    \n\n// { (q, l, r) : forall x in (l,r], floor(N/x) = q }\n// \u3092\u5F15\u6570\
-    \u306B\u53D6\u308B\u95A2\u6570f(q, l, r)\u3092\u6E21\u3059\u3002\u7BC4\u56F2\u304C\
-    \u5DE6\u306B\u534A\u958B\u306A\u306E\u306B\u6CE8\u610F\ntemplate <typename T,\
-    \ typename F>\nvoid enumerate_quotient(T N, const F& f) {\n  T sq = sqrt(N), upper\
-    \ = N, quo = 0;\n  while (upper > sq) {\n    T thres = N / (++quo + 1);\n    f(quo,\
-    \ thres, upper);\n    upper = thres;\n  }\n  while (upper > 0) {\n    f(N / upper,\
-    \ upper - 1, upper);\n    upper--;\n  }\n}\n\n/**\n *  @brief \u5546\u306E\u5217\
-    \u6319\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long\
-    \ long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static\
-    \ u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n          \
-    \    chrono::high_resolution_clock::now().time_since_epoch())\n              .count())\
-    \ *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return _x ^= _x >> 9;\n\
-    }\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n  return l + rng()\
-    \ % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r) {\n  assert(l < r);\n\
-    \  return l + rng() % (r - l);\n}\n\n// choose n numbers from [l, r) without overlapping\n\
-    vector<i64> randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n\
-    \  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l,\
-    \ r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n\
-    \  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\
-    \n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20; }\n\
-    \ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n \
-    \ for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \n\n#line 2 \"math/isqrt.hpp\"\n\n#line 4 \"math/isqrt.hpp\"\nusing namespace\
+    \ std;\n\n// floor(sqrt(n)) \u3092\u8FD4\u3059 (\u305F\u3060\u3057 n \u304C\u8CA0\
+    \u306E\u5834\u5408\u306F 0 \u3092\u8FD4\u3059)\nlong long isqrt(long long n) {\n\
+    \  if (n <= 0) return 0;\n  long long x = sqrt(n);\n  while ((x + 1) * (x + 1)\
+    \ <= n) x++;\n  while (x * x > n) x--;\n  return x;\n}\n#line 4 \"math/enumerate-quotient.hpp\"\
+    \n\nnamespace EnumerateQuotientImpl {\nlong long fast_div(long long a, long long\
+    \ b) { return 1.0 * a / b; };\nlong long slow_div(long long a, long long b) {\
+    \ return a / b; };\n}  // namespace EnumerateQuotientImpl\n\n// { (q, l, r) :\
+    \ forall x in (l,r], floor(N/x) = q }\n// \u3092\u5F15\u6570\u306B\u53D6\u308B\
+    \u95A2\u6570f(q, l, r)\u3092\u6E21\u3059\u3002\u7BC4\u56F2\u304C\u5DE6\u306B\u534A\
+    \u958B\u306A\u306E\u306B\u6CE8\u610F\n// \u5546\u306F\u5C0F\u3055\u3044\u65B9\u304B\
+    \u3089\u8D70\u67FB\u3059\u308B\ntemplate <typename T, typename F>\nvoid enumerate_quotient(T\
+    \ N, const F& f) {\n  T sq = isqrt(N);\n\n#define FUNC(d)                    \
+    \   \\\n  T upper = N, quo = 0;               \\\n  while (upper > sq) {     \
+    \           \\\n    T thres = d(N, (++quo + 1));      \\\n    f(quo, thres, upper);\
+    \             \\\n    upper = thres;                    \\\n  }              \
+    \                     \\\n  while (upper > 0) {                 \\\n    f(d(N,\
+    \ upper), upper - 1, upper); \\\n    upper--;                          \\\n  }\n\
+    \n  if (N <= 1e12) {\n    FUNC(EnumerateQuotientImpl::fast_div);\n  } else {\n\
+    \    FUNC(EnumerateQuotientImpl::slow_div);\n  }\n#undef FUNC\n}\n\n/**\n *  @brief\
+    \ \u5546\u306E\u5217\u6319\n */\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand\
+    \ {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 -\
+    \ 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
     \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
     using my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"verify/verify-unit-test/enumerate-quotient.test.cpp\"\
     \nusing namespace Nyaan;\n\nV<vl> naive(ll N) {\n  vl q, l, r;\n  ll upper = N;\n\
@@ -251,11 +267,12 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - math/enumerate-quotient.hpp
+  - math/isqrt.hpp
   - misc/rng.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/enumerate-quotient.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-04-10 23:43:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/enumerate-quotient.test.cpp
