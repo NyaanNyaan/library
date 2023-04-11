@@ -15,6 +15,9 @@ data:
     path: math/bigint-garner.hpp
     title: Garner's algorithm for bigint
   - icon: ':heavy_check_mark:'
+    path: math/bigint-gcd.hpp
+    title: math/bigint-gcd.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
@@ -48,6 +51,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint-gcd.test.cpp
+    title: verify/verify-unit-test/bigint-gcd.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint.test.cpp
     title: verify/verify-unit-test/bigint.test.cpp
@@ -325,6 +331,7 @@ data:
   - tree/frequency-table-of-tree-distance.hpp
   - math/bigint.hpp
   - math/bigint-garner.hpp
+  - math/bigint-gcd.hpp
   - ntt/chirp-z.hpp
   - ntt/rader-ntt.hpp
   - ntt/cooley-tukey-ntt.hpp
@@ -355,6 +362,7 @@ data:
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp

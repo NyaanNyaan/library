@@ -375,6 +375,9 @@ data:
       path: math/bigint-garner.hpp
       title: Garner's algorithm for bigint
     - icon: ':heavy_check_mark:'
+      path: math/bigint-gcd.hpp
+      title: math/bigint-gcd.hpp
+    - icon: ':heavy_check_mark:'
       path: math/bigint.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
     - icon: ':heavy_check_mark:'
@@ -1174,6 +1177,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/barrett-reduction.test.cpp
       title: verify/verify-unit-test/barrett-reduction.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/bigint-gcd.test.cpp
+      title: verify/verify-unit-test/bigint-gcd.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/bigint.test.cpp
       title: verify/verify-unit-test/bigint.test.cpp

@@ -17,6 +17,9 @@ data:
     title: "\u591A\u9805\u5F0F\u884C\u5217\u306Eprefix product"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint-gcd.test.cpp
+    title: verify/verify-unit-test/bigint-gcd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/debug.test.cpp
     title: verify/verify-unit-test/debug.test.cpp
   - icon: ':heavy_check_mark:'
@@ -154,6 +157,7 @@ data:
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/debug.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
 documentation_of: matrix/matrix.hpp
 layout: document

@@ -211,6 +211,9 @@ data:
     path: verify/verify-unit-test/barrett-reduction.test.cpp
     title: verify/verify-unit-test/barrett-reduction.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint-gcd.test.cpp
+    title: verify/verify-unit-test/bigint-gcd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint.test.cpp
     title: verify/verify-unit-test/bigint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1330,6 +1333,7 @@ data:
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/interval-union.test.cpp

@@ -19,6 +19,9 @@ data:
     title: "\u9AD8\u901Fmodulo\u9006\u5143"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint-gcd.test.cpp
+    title: verify/verify-unit-test/bigint-gcd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint2.test.cpp
     title: verify/verify-unit-test/bigint2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -87,6 +90,7 @@ data:
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/mf.test.cpp
 documentation_of: misc/timer.hpp

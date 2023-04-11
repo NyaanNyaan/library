@@ -3,12 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: math/bigint-gcd.hpp
+    title: math/bigint-gcd.hpp
+  - icon: ':heavy_check_mark:'
     path: math/rational.hpp
     title: math/rational.hpp
   - icon: ':heavy_check_mark:'
     path: math/stern-brocot-tree.hpp
     title: math/stern-brocot-tree.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint-gcd.test.cpp
+    title: verify/verify-unit-test/bigint-gcd.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/math-fast-2.test.cpp
     title: verify/verify-unit-test/math-fast-2.test.cpp
@@ -67,10 +73,12 @@ data:
   requiredBy:
   - math/stern-brocot-tree.hpp
   - math/rational.hpp
+  - math/bigint-gcd.hpp
   timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-2266.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/math-fast-2.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
