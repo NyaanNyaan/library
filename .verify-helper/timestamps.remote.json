@@ -296,6 +296,7 @@
 "verify/verify-yuki/yuki-0215-nth-term.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yuki/yuki-0215.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yuki/yuki-0303.test.cpp": "2023-04-11 20:58:11 +0900",
+"verify/verify-yuki/yuki-0502-base64.test.cpp": "2023-04-11 21:34:35 +0900",
 "verify/verify-yuki/yuki-0502.test.cpp": "2023-03-24 20:50:25 +0900",
 "verify/verify-yuki/yuki-0697.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yuki/yuki-0720.test.cpp": "2023-03-24 20:50:25 +0900",
