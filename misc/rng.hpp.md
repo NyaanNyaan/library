@@ -130,6 +130,9 @@ data:
     path: verify/verify-unit-test/rbst-sequence.test.cpp
     title: verify/verify-unit-test/rbst-sequence.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/relaxed-convolution.test.cpp
+    title: verify/verify-unit-test/relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
   - icon: ':heavy_check_mark:'
@@ -290,6 +293,7 @@ data:
   - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
+  - verify/verify-unit-test/relaxed-convolution.test.cpp
   - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/semiring.test.cpp

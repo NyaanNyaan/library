@@ -223,6 +223,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - icon: ':heavy_check_mark:'
@@ -394,6 +397,7 @@ data:
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp

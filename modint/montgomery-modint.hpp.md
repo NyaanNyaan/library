@@ -124,6 +124,9 @@ data:
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/relaxed-convolution.test.cpp
+    title: verify/verify-unit-test/relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/set-function.test.cpp
     title: verify/verify-unit-test/set-function.test.cpp
   - icon: ':heavy_check_mark:'
@@ -336,6 +339,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
@@ -621,6 +627,7 @@ data:
   - verify/verify-unit-test/set-function.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - verify/verify-unit-test/relaxed-convolution.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
@@ -629,6 +636,7 @@ data:
   - verify/verify-unit-test/template.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp

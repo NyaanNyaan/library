@@ -94,6 +94,9 @@ data:
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/relaxed-convolution.test.cpp
+    title: verify/verify-unit-test/relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - icon: ':heavy_check_mark:'
@@ -177,6 +180,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
@@ -472,10 +478,12 @@ data:
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - verify/verify-unit-test/relaxed-convolution.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp

@@ -346,6 +346,9 @@ data:
     path: verify/verify-unit-test/rbst-sequence.test.cpp
     title: verify/verify-unit-test/rbst-sequence.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/relaxed-convolution.test.cpp
+    title: verify/verify-unit-test/relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/run-length-encoding.test.cpp
     title: verify/verify-unit-test/run-length-encoding.test.cpp
   - icon: ':heavy_check_mark:'
@@ -822,6 +825,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
@@ -1387,6 +1393,7 @@ data:
   - verify/verify-unit-test/karatsuba.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
+  - verify/verify-unit-test/relaxed-convolution.test.cpp
   - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/semiring.test.cpp
@@ -1415,6 +1422,7 @@ data:
   - verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - verify/verify-yosupo-string/yosupo-number-of-substrings.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp

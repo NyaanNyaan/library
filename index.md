@@ -695,6 +695,9 @@ data:
       path: ntt/rader-ntt.hpp
       title: Rader's FFT Algorithm
     - icon: ':heavy_check_mark:'
+      path: ntt/relaxed-convolution.hpp
+      title: Relaxed Convolution
+    - icon: ':heavy_check_mark:'
       path: ntt/schoenhage-strassen-radix2.hpp
       title: "Sch\xF6nhage-Strassen Algorithm(radix-2)"
   - name: orderedmap
@@ -1316,6 +1319,9 @@ data:
       path: verify/verify-unit-test/rbst-sequence.test.cpp
       title: verify/verify-unit-test/rbst-sequence.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/relaxed-convolution.test.cpp
+      title: verify/verify-unit-test/relaxed-convolution.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/run-length-encoding.test.cpp
       title: verify/verify-unit-test/run-length-encoding.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1808,6 +1814,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
