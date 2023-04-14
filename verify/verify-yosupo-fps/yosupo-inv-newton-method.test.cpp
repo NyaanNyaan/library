@@ -1,5 +1,5 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/inv_of_polynomials"
-
+#define PROBLEM "https://judge.yosupo.jp/problem/inv_of_formal_power_series"
+//
 #include "../../template/template.hpp"
 //
 #include "../../fps/newton-method.hpp"
