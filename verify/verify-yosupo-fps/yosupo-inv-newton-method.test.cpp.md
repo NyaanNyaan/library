@@ -6,20 +6,20 @@ data:
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
+    path: fps/newton-method.hpp
+    title: "\u30CB\u30E5\u30FC\u30C8\u30F3\u6CD5"
+  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: misc/rng.hpp
-    title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
+    path: modulo/binomial.hpp
+    title: modulo/binomial.hpp
+  - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: ntt/relaxed-convolution.hpp
-    title: Relaxed Convolution
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -45,30 +45,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/aplusb
+    PROBLEM: https://judge.yosupo.jp/problem/inv_of_formal_power_series
     links:
-    - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-unit-test/relaxed-convolution.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
-    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
-    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
-    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
-    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
-    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
-    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
-    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
-    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
-    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
-    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    - https://judge.yosupo.jp/problem/inv_of_formal_power_series
+  bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
+    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
+    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
+    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
+    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
+    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
+    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
+    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
+    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
+    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
+    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
+    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
+    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -210,67 +210,37 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-unit-test/relaxed-convolution.test.cpp\"\n//\n#line 2 \"misc/rng.hpp\"\
-    \n\nnamespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
-    \n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
-    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
-    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
-    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
-    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
-    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
-    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
-    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
-    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/relaxed-convolution.test.cpp\"\
-    \n//\n#line 2 \"ntt/relaxed-convolution.hpp\"\n\n#line 5 \"ntt/relaxed-convolution.hpp\"\
-    \nusing namespace std;\n\n// x^0, x^1, ..., x^N \u3092\u30AA\u30F3\u30E9\u30A4\
-    \u30F3\u3067\u8A08\u7B97\u3059\u308B\n// x^{n-1} \u307E\u3067\u3092\u78BA\u5B9A\
-    \u3055\u305B\u305F\u6642\u70B9\u3067, c[n] \u306B\u306F a_0 b_n \u3068\n// a_n\
-    \ b_0 \u4EE5\u5916\u306E\u5BC4\u4E0E\u306E\u548C\u304C\u5165\u3063\u3066\u3044\
-    \u308B\u306E\u3067, \u305D\u308C\u3092\u5229\u7528\u3059\u308B\u3053\u3068\u3082\
-    \u3067\u304D\u308B\ntemplate <typename fps>\nstruct RelaxedConvolution {\n  using\
-    \ mint = typename fps::value_type;\n  int N, q;\n  vector<mint> a, b, c;\n  fps\
-    \ f, g;\n  vector<fps> as, bs;\n\n  RelaxedConvolution(int _n) : N(_n), q(0) {\n\
-    \    a.resize(N + 1), b.resize(N + 1), c.resize(N + 1);\n  }\n\n  // a[q] = x,\
-    \ b[q] = y \u3067\u3042\u308B\u3068\u304D c[q] \u3092 get\n  mint get(mint x,\
-    \ mint y) {\n    assert(q <= N);\n    a[q] = x, b[q] = y;\n    c[q] += a[q] *\
-    \ b[0] + (q ? b[q] * a[0] : 0);\n\n    auto precalc = [&](int lg) {\n      if\
-    \ ((int)as.size() <= lg) as.resize(lg + 1), bs.resize(lg + 1);\n      if (!as[lg].empty())\
-    \ return;\n      int d = 1 << lg;\n      fps s{begin(a), begin(a) + d * 2};\n\
-    \      fps t{begin(b), begin(b) + d * 2};\n      s.ntt(), t.ntt();\n      as[lg]\
-    \ = s, bs[lg] = t;\n    };\n\n    q++;\n    if (q > N) return c[q - 1];\n    for\
-    \ (int d = 1, lg = 0; d <= q; d *= 2, lg++) {\n      if (q % (2 * d) != d) continue;\n\
-    \      if (q == d) {\n        f.assign(2 * d, mint{});\n        g.assign(2 * d,\
-    \ mint{});\n        for (int i = 0; i < d; i++) f[i] = a[i];\n        for (int\
-    \ i = 0; i < d; i++) g[i] = b[i];\n        f.ntt(), g.ntt();\n        for (int\
-    \ i = 0; i < d * 2; i++) f[i] *= g[i];\n        f.intt();\n        for (int i\
-    \ = q; i < min(q + d, N + 1); i++) c[i] += f[d + i - q];\n      } else {\n   \
-    \     precalc(lg);\n        f.assign(2 * d, mint{});\n        g.assign(2 * d,\
-    \ mint{});\n        for (int i = 0; i < d; i++) f[i] = a[q - d + i];\n       \
-    \ for (int i = 0; i < d; i++) g[i] = b[q - d + i];\n        f.ntt(), g.ntt();\n\
-    \        fps& s = as[lg];\n        fps& t = bs[lg];\n        for (int i = 0; i\
-    \ < d * 2; i++) f[i] = f[i] * t[i] + g[i] * s[i];\n        f.intt();\n       \
-    \ for (int i = q; i < min(q + d, N + 1); i++) c[i] += f[d + i - q];\n      }\n\
-    \    }\n    return c[q - 1];\n  }\n};\n\n/**\n * @brief Relaxed Convolution\n\
-    \ */\n#line 8 \"verify/verify-unit-test/relaxed-convolution.test.cpp\"\n//\n#line\
-    \ 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename\
-    \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t _mod\
-    \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
-    \ idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n  \
-    \    if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i == 0) m /=\
-    \ i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr = 2;\n\
-    \    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n\
-    \        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n  \
-    \        if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n         \
-    \ b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n          break;\n\
-    \        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n    }\n    return\
-    \ _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr\
-    \ uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
+    \ 4 \"verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp\"\n//\n#line\
+    \ 2 \"fps/newton-method.hpp\"\n\n#line 4 \"fps/newton-method.hpp\"\nusing namespace\
+    \ std;\n\n// G(f) = 0 mod x^{deg} \u3092\u6E80\u305F\u3059 f \u3092\u8FD4\u3059\
+    \n// f0 : \u521D\u671F\u89E3, \u975E\u7A7A\u306A fps \u304B mint \u3092\u5165\u308C\
+    \u308B\n// g : (g(f), g'(f)) \u3092\u8FD4\u3059\ntemplate <typename fps>\nfps\
+    \ newton_method(function<pair<fps, fps>(fps, int)> calc_g, fps f0, int deg) {\n\
+    \  assert(!f0.empty());\n  fps f{f0};\n  for (int d = f.size(); d < deg; d *=\
+    \ 2) {\n    // \u5C11\u3057\u591A\u3081\u306B\u8A08\u7B97\u3057\u3066\u304A\u304F\
+    \n    const int extra = d + 5;\n    auto [g, dgdf] = calc_g(f, d * 2 + extra);\n\
+    \    int offset = 0;\n    while (offset < (int)dgdf.size() && dgdf[offset] ==\
+    \ 0) offset++;\n    assert(offset <= extra);\n    dgdf = dgdf >> offset;\n   \
+    \ g = g >> offset;\n    f = (f - g * dgdf.inv()).pre(d * 2);\n  }\n  return f.pre(deg);\n\
+    }\n// G(f) = 0 mod x^{deg} \u3092\u6E80\u305F\u3059 f \u3092\u8FD4\u3059\n// f0\
+    \ : \u521D\u671F\u89E3, \u975E\u7A7A\u306A fps \u304B mint \u3092\u5165\u308C\u308B\
+    \n// g : (g(f), g'(f)) \u3092\u8FD4\u3059\ntemplate <typename fps>\nfps newton_method(function<pair<fps,\
+    \ fps>(fps, int)> calc_g,\n                  typename fps::value_type f0, int\
+    \ deg) {\n  return newton_method(calc_g, fps{f0}, deg);\n}\n\n/**\n * @brief \u30CB\
+    \u30E5\u30FC\u30C8\u30F3\u6CD5\n */\n#line 6 \"verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp\"\
+    \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate\
+    \ <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t\
+    \ _mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n \
+    \   int idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i)\
+    \ {\n      if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i ==\
+    \ 0) m /= i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr\
+    \ = 2;\n    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i)\
+    \ {\n        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n\
+    \          if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n       \
+    \   b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n         \
+    \ break;\n        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n    }\n\
+    \    return _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n\
+    \  static constexpr uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
     \ - 1);\n  mint dw[level], dy[level];\n\n  void setwy(int k) {\n    mint w[level],\
     \ y[level];\n    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1]\
     \ = w[k - 1].inverse();\n    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i\
@@ -486,36 +456,54 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 11 \"verify/verify-unit-test/relaxed-convolution.test.cpp\"\
-    \n// #include \"fps/arbitrary-fps.hpp\"\nusing namespace Nyaan;\nusing mint =\
-    \ LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\nusing\
-    \ namespace Nyaan;\n\nvoid q() {\n  rep(N, 100) rep(M, 100) {\n    fps a(N), b(M);\n\
-    \    each(x, a) x = rng(0, 998244352);\n    each(x, b) x = rng(0, 998244352);\n\
-    \    // [0, L) \u306B\u30AF\u30A8\u30EA\u3092\u6295\u3052\u308B\n    int ls =\
-    \ max<int>(1, N + M - 1);\n    reg(L, ls, ls + 10) {\n      RelaxedConvolution<fps>\
-    \ conv(L - 1);\n      fps c = a * b;\n      c.resize(L);\n      rep(i, L) {\n\
-    \        mint s = i < N ? a[i] : 0;\n        mint t = i < M ? b[i] : 0;\n    \
-    \    mint x = c[i];\n        mint y = conv.get(s, t);\n        if (x != y) {\n\
-    \          trc(i, s, t, x, y);\n        }\n        assert(x == y);\n      }\n\
-    \    }\n  }\n  cerr << \"OK\" << endl;\n\n  {\n    int a, b;\n    cin >> a >>\
-    \ b;\n    cout << a + b << endl;\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
-    \  // in(t);\n  while (t--) q();\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
-    \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n//\n#include\
-    \ \"../../ntt/relaxed-convolution.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
-    \n#include \"../../modint/montgomery-modint.hpp\"\n// #include \"fps/arbitrary-fps.hpp\"\
-    \nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\nusing\
-    \ fps = FormalPowerSeries<mint>;\n\nusing namespace Nyaan;\n\nvoid q() {\n  rep(N,\
-    \ 100) rep(M, 100) {\n    fps a(N), b(M);\n    each(x, a) x = rng(0, 998244352);\n\
-    \    each(x, b) x = rng(0, 998244352);\n    // [0, L) \u306B\u30AF\u30A8\u30EA\
-    \u3092\u6295\u3052\u308B\n    int ls = max<int>(1, N + M - 1);\n    reg(L, ls,\
-    \ ls + 10) {\n      RelaxedConvolution<fps> conv(L - 1);\n      fps c = a * b;\n\
-    \      c.resize(L);\n      rep(i, L) {\n        mint s = i < N ? a[i] : 0;\n \
-    \       mint t = i < M ? b[i] : 0;\n        mint x = c[i];\n        mint y = conv.get(s,\
-    \ t);\n        if (x != y) {\n          trc(i, s, t, x, y);\n        }\n     \
-    \   assert(x == y);\n      }\n    }\n  }\n  cerr << \"OK\" << endl;\n\n  {\n \
-    \   int a, b;\n    cin >> a >> b;\n    cout << a + b << endl;\n  }\n}\n\nvoid\
-    \ Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+    \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\n\
+    struct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
+    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
+    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
+    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
+    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
+    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
+    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
+    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
+    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
+    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
+    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
+    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
+    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
+    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
+    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
+    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
+    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
+    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 10 \"verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp\"\n\
+    // #include \"fps/arbitrary-fps.hpp\"\n//\nusing namespace Nyaan;\nusing mint\
+    \ = LazyMontgomeryModInt<998244353>;\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
+    using vm = vector<mint>;\nusing vvm = vector<vm>;\nBinomial<mint> C;\nusing fps\
+    \ = FormalPowerSeries<mint>;\nusing namespace Nyaan;\n\nvoid q() {\n  inl(N);\n\
+    \  fps f(N);\n  in(f);\n  auto ans = newton_method<fps>(\n      [&](fps g, int\
+    \ deg) {\n        fps s = f * g - fps{1};\n        fps t = f;\n        s.resize(deg);\n\
+    \        t.resize(deg);\n        return make_pair(s, t);\n      },\n      f[0].inverse(),\
+    \ N);\n  out(ans);\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while\
+    \ (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../fps/newton-method.hpp\"\
+    \n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n#include \"../../modulo/binomial.hpp\"\n// #include \"fps/arbitrary-fps.hpp\"\
+    \n//\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    // using mint = LazyMontgomeryModInt<1000000007>;\nusing vm = vector<mint>;\n\
+    using vvm = vector<vm>;\nBinomial<mint> C;\nusing fps = FormalPowerSeries<mint>;\n\
+    using namespace Nyaan;\n\nvoid q() {\n  inl(N);\n  fps f(N);\n  in(f);\n  auto\
+    \ ans = newton_method<fps>(\n      [&](fps g, int deg) {\n        fps s = f *\
+    \ g - fps{1};\n        fps t = f;\n        s.resize(deg);\n        t.resize(deg);\n\
+    \        return make_pair(s, t);\n      },\n      f[0].inverse(), N);\n  out(ans);\n\
+    }\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -523,22 +511,22 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - misc/rng.hpp
-  - ntt/relaxed-convolution.hpp
+  - fps/newton-method.hpp
   - fps/ntt-friendly-fps.hpp
   - ntt/ntt.hpp
   - fps/formal-power-series.hpp
   - modint/montgomery-modint.hpp
+  - modulo/binomial.hpp
   isVerificationFile: true
-  path: verify/verify-unit-test/relaxed-convolution.test.cpp
+  path: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
   requiredBy: []
-  timestamp: '2023-04-15 00:09:58+09:00'
+  timestamp: '2023-04-15 00:31:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-unit-test/relaxed-convolution.test.cpp
+documentation_of: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-unit-test/relaxed-convolution.test.cpp
-- /verify/verify/verify-unit-test/relaxed-convolution.test.cpp.html
-title: verify/verify-unit-test/relaxed-convolution.test.cpp
+- /verify/verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+- /verify/verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp.html
+title: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
 ---

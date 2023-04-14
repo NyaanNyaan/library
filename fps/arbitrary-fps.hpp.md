@@ -29,6 +29,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
     title: verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
   - icon: ':heavy_check_mark:'
@@ -335,6 +338,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
 documentation_of: fps/arbitrary-fps.hpp
 layout: document
 redirect_from:

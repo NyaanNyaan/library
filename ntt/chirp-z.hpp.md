@@ -15,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -172,25 +175,33 @@ data:
     \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
     \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
     \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 4 \"ntt/chirp-z.hpp\"\
-    \n\n// return F(n) = sum {k=0...N-1} f(k) W^{nk} (W != 0)\ntemplate <typename\
-    \ mint>\nvector<mint> ChirpZ(vector<mint> f, mint W) {\n  assert(W != mint(0));\n\
-    \  int N = f.size();\n  vector<mint> wc(2 * N), iwc(N);\n  mint ws = 1, iW = W.inverse(),\
-    \ iws = 1;\n  wc[0] = 1, iwc[0] = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i]\
-    \ = ws * wc[i - 1], ws *= W;\n  for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i\
-    \ - 1], iws *= iW;\n  for (int i = 0; i < N; i++) f[i] *= iwc[i];\n  reverse(begin(f),\
-    \ end(f));\n  vector<mint> g;\n  g = ArbitraryNTT::multiply<mint>(f, wc);\n  vector<mint>\
-    \ F{begin(g) + N - 1, begin(g) + 2 * N - 1};\n  for (int i = 0; i < N; i++) F[i]\
-    \ *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform(Bluestein's algorithm)\n\
-    \ */\n"
-  code: "#pragma once\n\n#include \"arbitrary-ntt.hpp\"\n\n// return F(n) = sum {k=0...N-1}\
-    \ f(k) W^{nk} (W != 0)\ntemplate <typename mint>\nvector<mint> ChirpZ(vector<mint>\
-    \ f, mint W) {\n  assert(W != mint(0));\n  int N = f.size();\n  vector<mint> wc(2\
-    \ * N), iwc(N);\n  mint ws = 1, iW = W.inverse(), iws = 1;\n  wc[0] = 1, iwc[0]\
-    \ = 1;\n  for (int i = 1; i < 2 * N; i++) wc[i] = ws * wc[i - 1], ws *= W;\n \
-    \ for (int i = 1; i < N; i++) iwc[i] = iws * iwc[i - 1], iws *= iW;\n  for (int\
-    \ i = 0; i < N; i++) f[i] *= iwc[i];\n  reverse(begin(f), end(f));\n  vector<mint>\
-    \ g;\n  g = ArbitraryNTT::multiply<mint>(f, wc);\n  vector<mint> F{begin(g) +\
-    \ N - 1, begin(g) + 2 * N - 1};\n  for (int i = 0; i < N; i++) F[i] *= iwc[i];\n\
+    \n\n// f(A W^0), f(A W^1), ..., f(A W^{N-1}) \u3092\u8FD4\u3059\ntemplate <typename\
+    \ fps>\nfps ChirpZ(fps f, typename fps::value_type W, int N = -1,\n          \
+    \ typename fps::value_type A = 1) {\n  using mint = typename fps::value_type;\n\
+    \  if (N == -1) N = f.size();\n  if (f.empty() or N == 0) return fps(N, mint{});\n\
+    \  int M = f.size();\n  if (A != 1) {\n    mint x = 1;\n    for (int i = 0; i\
+    \ < M; i++) f[i] *= x, x *= A;\n  }\n  if (W == 0) {\n    fps F(N, f[0]);\n  \
+    \  for (int i = 1; i < M; i++) F[0] += f[i];\n    return F;\n  }\n  fps wc(N +\
+    \ M), iwc(max(N, M));\n  mint ws = 1, iW = W.inverse(), iws = 1;\n  wc[0] = 1,\
+    \ iwc[0] = 1;\n  for (int i = 1; i < N + M; i++) wc[i] = ws * wc[i - 1], ws *=\
+    \ W;\n  for (int i = 1; i < max(N, M); i++) iwc[i] = iws * iwc[i - 1], iws *=\
+    \ iW;\n  for (int i = 0; i < M; i++) f[i] *= iwc[i];\n  reverse(begin(f), end(f));\n\
+    \  fps g = f * wc;\n  fps F{begin(g) + M - 1, begin(g) + M + N - 1};\n  for (int\
+    \ i = 0; i < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform(Bluestein's\
+    \ algorithm)\n */\n"
+  code: "#pragma once\n\n#include \"arbitrary-ntt.hpp\"\n\n// f(A W^0), f(A W^1),\
+    \ ..., f(A W^{N-1}) \u3092\u8FD4\u3059\ntemplate <typename fps>\nfps ChirpZ(fps\
+    \ f, typename fps::value_type W, int N = -1,\n           typename fps::value_type\
+    \ A = 1) {\n  using mint = typename fps::value_type;\n  if (N == -1) N = f.size();\n\
+    \  if (f.empty() or N == 0) return fps(N, mint{});\n  int M = f.size();\n  if\
+    \ (A != 1) {\n    mint x = 1;\n    for (int i = 0; i < M; i++) f[i] *= x, x *=\
+    \ A;\n  }\n  if (W == 0) {\n    fps F(N, f[0]);\n    for (int i = 1; i < M; i++)\
+    \ F[0] += f[i];\n    return F;\n  }\n  fps wc(N + M), iwc(max(N, M));\n  mint\
+    \ ws = 1, iW = W.inverse(), iws = 1;\n  wc[0] = 1, iwc[0] = 1;\n  for (int i =\
+    \ 1; i < N + M; i++) wc[i] = ws * wc[i - 1], ws *= W;\n  for (int i = 1; i < max(N,\
+    \ M); i++) iwc[i] = iws * iwc[i - 1], iws *= iW;\n  for (int i = 0; i < M; i++)\
+    \ f[i] *= iwc[i];\n  reverse(begin(f), end(f));\n  fps g = f * wc;\n  fps F{begin(g)\
+    \ + M - 1, begin(g) + M + N - 1};\n  for (int i = 0; i < N; i++) F[i] *= iwc[i];\n\
     \  return F;\n}\n\n/**\n * @brief Chirp Z-transform(Bluestein's algorithm)\n */\n"
   dependsOn:
   - ntt/arbitrary-ntt.hpp
@@ -199,9 +210,10 @@ data:
   isVerificationFile: false
   path: ntt/chirp-z.hpp
   requiredBy: []
-  timestamp: '2022-11-06 23:28:25+09:00'
+  timestamp: '2023-04-15 00:09:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
 documentation_of: ntt/chirp-z.hpp
 layout: document

@@ -187,6 +187,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   - icon: ':heavy_check_mark:'
@@ -308,6 +311,7 @@ data:
   - verify/verify-unit-test/run-length-encoding.test.cpp
   - verify/verify-unit-test/string-search.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
 documentation_of: misc/rng.hpp
 layout: document
 redirect_from:

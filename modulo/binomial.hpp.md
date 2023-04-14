@@ -72,6 +72,21 @@ data:
     path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
     title: verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - icon: ':heavy_check_mark:'
@@ -101,6 +116,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0117.test.cpp
     title: verify/verify-yuki/yuki-0117.test.cpp
@@ -248,11 +266,16 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/p-recursive.test.cpp
@@ -262,6 +285,7 @@ data:
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
 documentation_of: modulo/binomial.hpp
 layout: document
 redirect_from:

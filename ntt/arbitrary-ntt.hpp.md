@@ -82,6 +82,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -96,6 +99,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
@@ -338,6 +344,7 @@ data:
   timestamp: '2022-11-06 23:28:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - verify/verify-yuki/yuki-1112-sparse.test.cpp
@@ -364,6 +371,7 @@ data:
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp

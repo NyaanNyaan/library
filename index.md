@@ -202,6 +202,9 @@ data:
       path: fps/multipoint-evaluation.hpp
       title: Multipoint Evaluation
     - icon: ':heavy_check_mark:'
+      path: fps/newton-method.hpp
+      title: "\u30CB\u30E5\u30FC\u30C8\u30F3\u6CD5"
+    - icon: ':heavy_check_mark:'
       path: fps/nth-term.hpp
       title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
     - icon: ':heavy_check_mark:'
@@ -1548,6 +1551,15 @@ data:
       path: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-exp.test.cpp
       title: verify/verify-yosupo-fps/yosupo-exp.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1557,8 +1569,14 @@ data:
       path: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-inv.test.cpp
       title: verify/verify-yosupo-fps/yosupo-inv.test.cpp
@@ -1696,6 +1714,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+      title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
       title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1826,6 +1847,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - name: verify/verify-yosupo-other
     pages:
     - icon: ':heavy_check_mark:'

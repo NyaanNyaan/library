@@ -2,15 +2,21 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: fps/arbitrary-fps.hpp
-    title: fps/arbitrary-fps.hpp
-  - icon: ':heavy_check_mark:'
     path: fps/formal-power-series.hpp
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
+    path: fps/ntt-friendly-fps.hpp
+    title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
+  - icon: ':heavy_check_mark:'
+    path: misc/rng.hpp
+    title: misc/rng.hpp
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/binomial.hpp
+    title: modulo/binomial.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
@@ -45,13 +51,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
+    PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation_on_geometric_sequence
     links:
-    - https://judge.yosupo.jp/problem/convolution_mod
-  bundledCode: "#line 1 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    - https://judge.yosupo.jp/problem/multipoint_evaluation_on_geometric_sequence
+  bundledCode: "#line 1 \"verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation_on_geometric_sequence\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -210,9 +216,25 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\n//\n#line\
-    \ 2 \"fps/arbitrary-fps.hpp\"\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2\
-    \ \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
+    \ 4 \"verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp\"\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
+    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp\"\
+    \n//\n#line 2 \"ntt/chirp-z.hpp\"\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line\
+    \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
     \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
     \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
     \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
@@ -360,7 +382,22 @@ data:
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
     \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
     \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
-    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 2 \"fps/formal-power-series.hpp\"\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 4 \"ntt/chirp-z.hpp\"\
+    \n\n// f(A W^0), f(A W^1), ..., f(A W^{N-1}) \u3092\u8FD4\u3059\ntemplate <typename\
+    \ fps>\nfps ChirpZ(fps f, typename fps::value_type W, int N = -1,\n          \
+    \ typename fps::value_type A = 1) {\n  using mint = typename fps::value_type;\n\
+    \  if (N == -1) N = f.size();\n  if (f.empty() or N == 0) return fps(N, mint{});\n\
+    \  int M = f.size();\n  if (A != 1) {\n    mint x = 1;\n    for (int i = 0; i\
+    \ < M; i++) f[i] *= x, x *= A;\n  }\n  if (W == 0) {\n    fps F(N, f[0]);\n  \
+    \  for (int i = 1; i < M; i++) F[0] += f[i];\n    return F;\n  }\n  fps wc(N +\
+    \ M), iwc(max(N, M));\n  mint ws = 1, iW = W.inverse(), iws = 1;\n  wc[0] = 1,\
+    \ iwc[0] = 1;\n  for (int i = 1; i < N + M; i++) wc[i] = ws * wc[i - 1], ws *=\
+    \ W;\n  for (int i = 1; i < max(N, M); i++) iwc[i] = iws * iwc[i - 1], iws *=\
+    \ iW;\n  for (int i = 0; i < M; i++) f[i] *= iwc[i];\n  reverse(begin(f), end(f));\n\
+    \  fps g = f * wc;\n  fps F{begin(g) + M - 1, begin(g) + M + N - 1};\n  for (int\
+    \ i = 0; i < N; i++) F[i] *= iwc[i];\n  return F;\n}\n\n/**\n * @brief Chirp Z-transform(Bluestein's\
+    \ algorithm)\n */\n#line 8 \"verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp\"\
+    \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"fps/formal-power-series.hpp\"\
     \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
     \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
     \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
@@ -426,56 +463,107 @@ data:
     \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
     \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
     \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 5 \"\
-    fps/arbitrary-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
-    \ {\n  ntt_ptr = nullptr;\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt()\
-    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::intt()\
-    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling()\
-    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nint FormalPowerSeries<mint>::ntt_pr()\
-    \ {\n  exit(1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n\
-    \    const FormalPowerSeries<mint>& r) {\n  if (this->empty() || r.empty()) {\n\
-    \    this->clear();\n    return *this;\n  }\n  auto ret = ArbitraryNTT::multiply(*this,\
+    fps/ntt-friendly-fps.hpp\"\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::set_fft()\
+    \ {\n  if (!ntt_ptr) ntt_ptr = new NTT<mint>;\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint>& FormalPowerSeries<mint>::operator*=(\n    const FormalPowerSeries<mint>&\
+    \ r) {\n  if (this->empty() || r.empty()) {\n    this->clear();\n    return *this;\n\
+    \  }\n  set_fft();\n  auto ret = static_cast<NTT<mint>*>(ntt_ptr)->multiply(*this,\
     \ r);\n  return *this = FormalPowerSeries<mint>(ret.begin(), ret.end());\n}\n\n\
-    template <typename mint>\nFormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int\
-    \ deg) const {\n  assert((*this)[0] != mint(0));\n  if (deg == -1) deg = (*this).size();\n\
-    \  FormalPowerSeries<mint> ret({mint(1) / (*this)[0]});\n  for (int i = 1; i <\
-    \ deg; i <<= 1)\n    ret = (ret + ret - ret * ret * (*this).pre(i << 1)).pre(i\
-    \ << 1);\n  return ret.pre(deg);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
-    \ FormalPowerSeries<mint>::exp(int deg) const {\n  assert((*this).size() == 0\
-    \ || (*this)[0] == mint(0));\n  if (deg == -1) deg = (int)this->size();\n  FormalPowerSeries<mint>\
-    \ ret({mint(1)});\n  for (int i = 1; i < deg; i <<= 1) {\n    ret = (ret * (pre(i\
-    \ << 1) + mint(1) - ret.log(i << 1))).pre(i << 1);\n  }\n  return ret.pre(deg);\n\
-    }\n#line 2 \"ntt/chirp-z.hpp\"\n\n#line 4 \"ntt/chirp-z.hpp\"\n\n// f(A W^0),\
-    \ f(A W^1), ..., f(A W^{N-1}) \u3092\u8FD4\u3059\ntemplate <typename fps>\nfps\
-    \ ChirpZ(fps f, typename fps::value_type W, int N = -1,\n           typename fps::value_type\
-    \ A = 1) {\n  using mint = typename fps::value_type;\n  if (N == -1) N = f.size();\n\
-    \  if (f.empty() or N == 0) return fps(N, mint{});\n  int M = f.size();\n  if\
-    \ (A != 1) {\n    mint x = 1;\n    for (int i = 0; i < M; i++) f[i] *= x, x *=\
-    \ A;\n  }\n  if (W == 0) {\n    fps F(N, f[0]);\n    for (int i = 1; i < M; i++)\
-    \ F[0] += f[i];\n    return F;\n  }\n  fps wc(N + M), iwc(max(N, M));\n  mint\
-    \ ws = 1, iW = W.inverse(), iws = 1;\n  wc[0] = 1, iwc[0] = 1;\n  for (int i =\
-    \ 1; i < N + M; i++) wc[i] = ws * wc[i - 1], ws *= W;\n  for (int i = 1; i < max(N,\
-    \ M); i++) iwc[i] = iws * iwc[i - 1], iws *= iW;\n  for (int i = 0; i < M; i++)\
-    \ f[i] *= iwc[i];\n  reverse(begin(f), end(f));\n  fps g = f * wc;\n  fps F{begin(g)\
-    \ + M - 1, begin(g) + M + N - 1};\n  for (int i = 0; i < N; i++) F[i] *= iwc[i];\n\
-    \  return F;\n}\n\n/**\n * @brief Chirp Z-transform(Bluestein's algorithm)\n */\n\
-    #line 9 \"verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp\"\n\nusing\
-    \ mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
-    void Nyaan::solve() {\n  ini(N, M);\n  int S = 1;\n  while (S < N + M - 1) S *=\
-    \ 2;\n  mint pr = mint(3).pow(998244352 / S);\n  fps a(S), b(S);\n  rep(i, N)\
-    \ in(a[i]);\n  rep(i, M) in(b[i]);\n  auto A = ChirpZ(a, pr);\n  auto B = ChirpZ(b,\
-    \ pr);\n  rep(i, S) A[i] *= B[i];\n  auto c = ChirpZ(A, pr.inverse());\n  c.resize(N\
-    \ + M - 1);\n  mint invs = mint(S).inverse();\n  each(x, c) x *= invs;\n  out(c);\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\n\n#include\
-    \ \"../../template/template.hpp\"\n//\n#include \"../../fps/arbitrary-fps.hpp\"\
-    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../ntt/arbitrary-ntt.hpp\"\
-    \n#include \"../../ntt/chirp-z.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    using fps = FormalPowerSeries<mint>;\nvoid Nyaan::solve() {\n  ini(N, M);\n  int\
-    \ S = 1;\n  while (S < N + M - 1) S *= 2;\n  mint pr = mint(3).pow(998244352 /\
-    \ S);\n  fps a(S), b(S);\n  rep(i, N) in(a[i]);\n  rep(i, M) in(b[i]);\n  auto\
-    \ A = ChirpZ(a, pr);\n  auto B = ChirpZ(b, pr);\n  rep(i, S) A[i] *= B[i];\n \
-    \ auto c = ChirpZ(A, pr.inverse());\n  c.resize(N + M - 1);\n  mint invs = mint(S).inverse();\n\
-    \  each(x, c) x *= invs;\n  out(c);\n}"
+    template <typename mint>\nvoid FormalPowerSeries<mint>::ntt() {\n  set_fft();\n\
+    \  static_cast<NTT<mint>*>(ntt_ptr)->ntt(*this);\n}\n\ntemplate <typename mint>\n\
+    void FormalPowerSeries<mint>::intt() {\n  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->intt(*this);\n\
+    }\n\ntemplate <typename mint>\nvoid FormalPowerSeries<mint>::ntt_doubling() {\n\
+    \  set_fft();\n  static_cast<NTT<mint>*>(ntt_ptr)->ntt_doubling(*this);\n}\n\n\
+    template <typename mint>\nint FormalPowerSeries<mint>::ntt_pr() {\n  set_fft();\n\
+    \  return static_cast<NTT<mint>*>(ntt_ptr)->pr;\n}\n\ntemplate <typename mint>\n\
+    FormalPowerSeries<mint> FormalPowerSeries<mint>::inv(int deg) const {\n  assert((*this)[0]\
+    \ != mint(0));\n  if (deg == -1) deg = (int)this->size();\n  FormalPowerSeries<mint>\
+    \ res(deg);\n  res[0] = {mint(1) / (*this)[0]};\n  for (int d = 1; d < deg; d\
+    \ <<= 1) {\n    FormalPowerSeries<mint> f(2 * d), g(2 * d);\n    for (int j =\
+    \ 0; j < min((int)this->size(), 2 * d); j++) f[j] = (*this)[j];\n    for (int\
+    \ j = 0; j < d; j++) g[j] = res[j];\n    f.ntt();\n    g.ntt();\n    for (int\
+    \ j = 0; j < 2 * d; j++) f[j] *= g[j];\n    f.intt();\n    for (int j = 0; j <\
+    \ d; j++) f[j] = 0;\n    f.ntt();\n    for (int j = 0; j < 2 * d; j++) f[j] *=\
+    \ g[j];\n    f.intt();\n    for (int j = d; j < min(2 * d, deg); j++) res[j] =\
+    \ -f[j];\n  }\n  return res.pre(deg);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ FormalPowerSeries<mint>::exp(int deg) const {\n  using fps = FormalPowerSeries<mint>;\n\
+    \  assert((*this).size() == 0 || (*this)[0] == mint(0));\n  if (deg == -1) deg\
+    \ = this->size();\n\n  fps inv;\n  inv.reserve(deg + 1);\n  inv.push_back(mint(0));\n\
+    \  inv.push_back(mint(1));\n\n  auto inplace_integral = [&](fps& F) -> void {\n\
+    \    const int n = (int)F.size();\n    auto mod = mint::get_mod();\n    while\
+    \ ((int)inv.size() <= n) {\n      int i = inv.size();\n      inv.push_back((-inv[mod\
+    \ % i]) * (mod / i));\n    }\n    F.insert(begin(F), mint(0));\n    for (int i\
+    \ = 1; i <= n; i++) F[i] *= inv[i];\n  };\n\n  auto inplace_diff = [](fps& F)\
+    \ -> void {\n    if (F.empty()) return;\n    F.erase(begin(F));\n    mint coeff\
+    \ = 1, one = 1;\n    for (int i = 0; i < (int)F.size(); i++) {\n      F[i] *=\
+    \ coeff;\n      coeff += one;\n    }\n  };\n\n  fps b{1, 1 < (int)this->size()\
+    \ ? (*this)[1] : 0}, c{1}, z1, z2{1, 1};\n  for (int m = 2; m < deg; m *= 2) {\n\
+    \    auto y = b;\n    y.resize(2 * m);\n    y.ntt();\n    z1 = z2;\n    fps z(m);\n\
+    \    for (int i = 0; i < m; ++i) z[i] = y[i] * z1[i];\n    z.intt();\n    fill(begin(z),\
+    \ begin(z) + m / 2, mint(0));\n    z.ntt();\n    for (int i = 0; i < m; ++i) z[i]\
+    \ *= -z1[i];\n    z.intt();\n    c.insert(end(c), begin(z) + m / 2, end(z));\n\
+    \    z2 = c;\n    z2.resize(2 * m);\n    z2.ntt();\n    fps x(begin(*this), begin(*this)\
+    \ + min<int>(this->size(), m));\n    x.resize(m);\n    inplace_diff(x);\n    x.push_back(mint(0));\n\
+    \    x.ntt();\n    for (int i = 0; i < m; ++i) x[i] *= y[i];\n    x.intt();\n\
+    \    x -= b.diff();\n    x.resize(2 * m);\n    for (int i = 0; i < m - 1; ++i)\
+    \ x[m + i] = x[i], x[i] = mint(0);\n    x.ntt();\n    for (int i = 0; i < 2 *\
+    \ m; ++i) x[i] *= z2[i];\n    x.intt();\n    x.pop_back();\n    inplace_integral(x);\n\
+    \    for (int i = m; i < min<int>(this->size(), 2 * m); ++i) x[i] += (*this)[i];\n\
+    \    fill(begin(x), begin(x) + m, mint(0));\n    x.ntt();\n    for (int i = 0;\
+    \ i < 2 * m; ++i) x[i] *= y[i];\n    x.intt();\n    b.insert(end(b), begin(x)\
+    \ + m, end(x));\n  }\n  return fps{begin(b), begin(b) + deg};\n}\n\n/**\n * @brief\
+    \ NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/ntt-friendly-fps.md\n\
+    \ */\n#line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial\
+    \ {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
+    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
+    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
+    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
+    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
+    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
+    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
+    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
+    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
+    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
+    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
+    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
+    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
+    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
+    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
+    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
+    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
+    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
+    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
+    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
+    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
+    };\n#line 12 \"verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp\"\
+    \n// #include \"fps/arbitrary-fps.hpp\"\nusing namespace Nyaan;\nusing mint =\
+    \ LazyMontgomeryModInt<998244353>;\nBinomial<mint> C;\nusing fps = FormalPowerSeries<mint>;\n\
+    \nvoid test() {\n  rep(N, 50) rep(fdeg, 50) rep(W, 3) rep(A, 3) {\n    fps f(fdeg);\n\
+    \    each(x, f) x = rng(0, 998244352);\n    fps ys1 = ChirpZ(f, W, N, A);\n  \
+    \  fps ys2(N);\n    rep(i, N) ys2[i] = f.eval(mint{W}.pow(i) * A);\n    if (ys1\
+    \ != ys2) {\n      trc(N, fdeg, W, A);\n      trc(f);\n      trc(ys1);\n     \
+    \ trc(ys2);\n    }\n    assert(ys1 == ys2);\n  }\n  cerr << \"OK\" << endl;\n\
+    }\n\nvoid q() {\n  test();\n  int N, M, A, R, x;\n  in(N, M, A, R);\n  fps c(N);\n\
+    \  rep(i, N) in(x), c[i] = x;\n  auto ps = ChirpZ(c, R, M, A);\n  out(ps);\n}\n\
+    \nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation_on_geometric_sequence\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\
+    \n//\n#include \"../../ntt/chirp-z.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
+    \n// #include \"fps/arbitrary-fps.hpp\"\nusing namespace Nyaan;\nusing mint =\
+    \ LazyMontgomeryModInt<998244353>;\nBinomial<mint> C;\nusing fps = FormalPowerSeries<mint>;\n\
+    \nvoid test() {\n  rep(N, 50) rep(fdeg, 50) rep(W, 3) rep(A, 3) {\n    fps f(fdeg);\n\
+    \    each(x, f) x = rng(0, 998244352);\n    fps ys1 = ChirpZ(f, W, N, A);\n  \
+    \  fps ys2(N);\n    rep(i, N) ys2[i] = f.eval(mint{W}.pow(i) * A);\n    if (ys1\
+    \ != ys2) {\n      trc(N, fdeg, W, A);\n      trc(f);\n      trc(ys1);\n     \
+    \ trc(ys2);\n    }\n    assert(ys1 == ys2);\n  }\n  cerr << \"OK\" << endl;\n\
+    }\n\nvoid q() {\n  test();\n  int N, M, A, R, x;\n  in(N, M, A, R);\n  fps c(N);\n\
+    \  rep(i, N) in(x), c[i] = x;\n  auto ps = ChirpZ(c, R, M, A);\n  out(ps);\n}\n\
+    \nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -483,22 +571,24 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - fps/arbitrary-fps.hpp
+  - misc/rng.hpp
+  - ntt/chirp-z.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
+  - fps/ntt-friendly-fps.hpp
   - fps/formal-power-series.hpp
-  - ntt/chirp-z.hpp
+  - modulo/binomial.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+  path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   requiredBy: []
-  timestamp: '2023-04-15 00:09:58+09:00'
+  timestamp: '2023-04-15 00:36:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+documentation_of: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
-- /verify/verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp.html
-title: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+- /verify/verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+- /verify/verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp.html
+title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
 ---

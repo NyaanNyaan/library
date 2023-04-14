@@ -127,8 +127,14 @@ data:
     path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
     title: verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
@@ -385,9 +391,11 @@ data:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
