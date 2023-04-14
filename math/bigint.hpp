@@ -387,45 +387,7 @@ struct MultiPrecisionInteger {
 
   // 0 <= A, 1 <= B
   static pair<vector<int>, vector<int>> _divmod_dc(const vector<int>& a,
-                                                   const vector<int>& b) {
-    if (_is_zero(b)) {
-      cerr << "Divide by Zero Exception" << endl;
-      exit(1);
-    }
-    if ((int)b.size() <= 64) return _divmod_naive(a, b);
-    if ((int)a.size() - (int)b.size() <= 64) return _divmod_naive(a, b);
-
-    int norm = D / (b.back() + 1);
-    vector<int> x = _mul(a, {norm});
-    vector<int> y = _mul(b, {norm});
-
-    int s = x.size(), t = y.size();
-    int yu = (t + 1) / 2, yv = t - yu;
-    vector<int> yh{end(y) - yu, end(y)};
-    int xv = max<int>(yv, s - (yu * 2 - 1));
-    int xu = s - xv;
-    vector<int> xh{end(x) - xu, end(x)};
-    vector<int> rem{end(x) - xu - yv, end(x)};
-    auto [qh, _unused] = _divmod_dc(xh, yh);
-    vector<int> yqh = _mul(y, qh);
-    while (_lt(rem, yqh)) _sub(qh, {1}), yqh = _sub(yqh, y);
-    rem = _sub(rem, yqh);
-    while (_leq(y, rem)) _add(qh, {1}), rem = _sub(rem, y);
-    vector<int> q, r;
-    if (xu + yv == s) {
-      swap(q, qh), swap(r, rem);
-    } else {
-      vector<int> xnxt{begin(x), end(x) - xu - yv};
-      copy(begin(rem), end(rem), back_inserter(xnxt));
-      tie(q, r) = _divmod_dc(xnxt, y);
-      q.resize(s - xu - yv, 0);
-      copy(begin(qh), end(qh), back_inserter(q));
-    }
-    _shrink(q), _shrink(r);
-    auto [q2, r2] = _divmod_1e9(r, {norm});
-    assert(_is_zero(r2));
-    return {q, q2};
-  }
+                                                   const vector<int>& b);
 
   // 1 / a を 絶対誤差 B^{-deg} で求める
   static vector<int> _calc_inv(const vector<int>& a, int deg) {
@@ -438,11 +400,10 @@ struct MultiPrecisionInteger {
     while (k < deg) {
       vector<int> s = _mul(z, z);
       s.insert(begin(s), 0);
-      vector<int> t(2 * k + 1);
-      copy(end(a) - min(c, 2 * k + 1), end(a), end(t) - min(c, 2 * k + 1));
-      vector<int> u = _mul(s, t);
-      u.erase(begin(u), begin(u) + 2 * k + 1);
-      vector<int> w(k + 1, 0), w2 = _add(z, z);
+      int d = min(c, 2 * k + 1);
+      vector<int> t{end(a) - d, end(a)}, u = _mul(s, t);
+      u.erase(begin(u), begin(u) + d);
+      vector<int> w(k + 1), w2 = _add(z, z);
       copy(begin(w2), end(w2), back_inserter(w));
       z = _sub(w, u);
       z.erase(begin(z));

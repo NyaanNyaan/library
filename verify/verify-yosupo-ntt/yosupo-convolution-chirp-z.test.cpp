@@ -2,17 +2,19 @@
 
 #include "../../template/template.hpp"
 //
+#include "../../fps/arbitrary-fps.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../ntt/arbitrary-ntt.hpp"
 #include "../../ntt/chirp-z.hpp"
 
+using mint = LazyMontgomeryModInt<998244353>;
+using fps = FormalPowerSeries<mint>;
 void Nyaan::solve() {
-  using mint = LazyMontgomeryModInt<998244353>;
   ini(N, M);
   int S = 1;
   while (S < N + M - 1) S *= 2;
   mint pr = mint(3).pow(998244352 / S);
-  vector<mint> a(S), b(S);
+  fps a(S), b(S);
   rep(i, N) in(a[i]);
   rep(i, M) in(b[i]);
   auto A = ChirpZ(a, pr);

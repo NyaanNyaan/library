@@ -5,6 +5,8 @@
 using namespace std;
 
 // x^0, x^1, ..., x^N をオンラインで計算する
+// x^{n-1} までを確定させた時点で, c[n] には a_0 b_n と
+// a_n b_0 以外の寄与の和が入っているので, それを利用することもできる
 template <typename fps>
 struct RelaxedConvolution {
   using mint = typename fps::value_type;
