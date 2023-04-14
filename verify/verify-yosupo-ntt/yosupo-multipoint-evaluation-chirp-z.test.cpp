@@ -1,6 +1,4 @@
-#define PROBLEM                      \
-  "https://judge.yosupo.jp/problem/" \
-  "multipoint_evaluation_on_geometric_sequence"
+#define PROBLEM "https://judge.yosupo.jp/problem/multipoint_evaluation_on_geometric_sequence"
 //
 #include "../../template/template.hpp"
 //
