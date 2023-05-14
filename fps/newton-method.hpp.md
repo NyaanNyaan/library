@@ -59,9 +59,9 @@ data:
   timestamp: '2023-04-15 00:09:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
 documentation_of: fps/newton-method.hpp
 layout: document
 redirect_from:

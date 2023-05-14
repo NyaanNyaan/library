@@ -212,8 +212,8 @@ data:
   timestamp: '2021-11-23 10:22:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-other/aoj-2891.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
+  - verify/verify-aoj-other/aoj-2891.test.cpp
 documentation_of: graph/funtional-graph.hpp
 layout: document
 redirect_from:

@@ -632,25 +632,25 @@ data:
   isVerificationFile: false
   path: math/bigint.hpp
   requiredBy:
-  - math/bigint-garner.hpp
   - math/bigint-gcd.hpp
+  - math/bigint-garner.hpp
   timestamp: '2023-04-15 00:09:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
-  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
+  - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/bigint2.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
-  - verify/verify-unit-test/bigint2.test.cpp
-  - verify/verify-unit-test/bigint.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
 documentation_of: math/bigint.hpp
 layout: document
 redirect_from:

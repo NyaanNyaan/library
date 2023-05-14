@@ -79,8 +79,8 @@ data:
   timestamp: '2023-04-10 22:57:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
 documentation_of: multiplicative-function/gcd-convolution.hpp
 layout: document
 redirect_from:

@@ -72,15 +72,15 @@ data:
   path: math-fast/gcd.hpp
   requiredBy:
   - math/stern-brocot-tree.hpp
-  - math/rational.hpp
   - math/bigint-gcd.hpp
+  - math/rational.hpp
   timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
-  - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/math-fast-2.test.cpp
+  - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
 documentation_of: math-fast/gcd.hpp
 layout: document
