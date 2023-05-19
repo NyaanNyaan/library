@@ -1,10 +1,14 @@
 #pragma once
 
-#include "../inner/inner-hash.hpp"
+#include <string>
+#include <vector>
+using namespace std;
+
+#include "../internal/internal-hash.hpp"
 
 template <typename Str, int BASE_NUM = 2>
 struct RollingHash2D {
-  using Hash = inner::Hash<BASE_NUM>;
+  using Hash = internal::Hash<BASE_NUM>;
   using u64 = unsigned long long;
   vector<Str> data;
   vector<vector<Hash>> hs;
@@ -46,8 +50,7 @@ struct RollingHash2D {
     Hash ret = Hash::set(0);
     for (int i = 0; i < (int)T.size(); i++) {
       Hash h = Hash::set(0);
-      for (int j = 0; j < (int)T[0].size(); j++)
-        h = pfma(h, basis[1], T[i][j]);
+      for (int j = 0; j < (int)T[0].size(); j++) h = pfma(h, basis[1], T[i][j]);
       ret = pfma(ret, basis[0], h);
     }
     return ret;
@@ -57,7 +60,8 @@ struct RollingHash2D {
 template <typename Str, int BASE_NUM>
 typename RollingHash2D<Str, BASE_NUM>::Hash
     RollingHash2D<Str, BASE_NUM>::basis[2] = {
-        inner::Hash<BASE_NUM>::get_basis(), inner::Hash<BASE_NUM>::get_basis()};
+        internal::Hash<BASE_NUM>::get_basis(),
+        internal::Hash<BASE_NUM>::get_basis()};
 using roriha2d = RollingHash2D<string, 1>;
 
 /**

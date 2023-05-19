@@ -2,10 +2,10 @@
 
 #include "../../template/template.hpp"
 //
-#include "../../inner/inner-hash.hpp"
+#include "../../internal/internal-hash.hpp"
 using namespace Nyaan;
 
-using Hash = inner::Hash<3>;
+using Hash = internal::Hash<3>;
 
 void Nyaan::solve() {
   u64 mod = (1uLL << 61) - 1;

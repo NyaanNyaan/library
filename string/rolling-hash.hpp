@@ -1,10 +1,14 @@
 #pragma once
 
-#include "../inner/inner-hash.hpp"
+#include <string>
+#include <vector>
+using namespace std;
+
+#include "../internal/internal-hash.hpp"
 
 template <typename Str, int BASE_NUM = 2>
 struct RollingHash {
-  using Hash = inner::Hash<BASE_NUM>;
+  using Hash = internal::Hash<BASE_NUM>;
   Str data;
   vector<Hash> hs, pw;
   int s;
@@ -75,7 +79,7 @@ struct RollingHash {
 
 template <typename Str, int BASE_NUM>
 typename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =
-    inner::Hash<BASE_NUM>::get_basis();
+    internal::Hash<BASE_NUM>::get_basis();
 using roriha = RollingHash<string, 2>;
 
 /**
