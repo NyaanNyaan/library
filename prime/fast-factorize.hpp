@@ -1,5 +1,10 @@
 #pragma once
 
+#include <cstdint>
+#include <numeric>
+#include <vector>
+using namespace std;
+
 #include "../internal/internal-math.hpp"
 #include "../misc/rng.hpp"
 #include "../modint/arbitrary-prime-modint.hpp"
@@ -56,11 +61,11 @@ T pollard_rho(T n) {
       for (int k = 0; g == 1 && k < r; k += m) {
         ys = y;
         for (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));
-        g = gcd<T>(q.get(), n);
+        g = gcd(q.get(), n);
       }
     }
     if (g == n) do
-        g = gcd<T>((x - (ys = f(ys))).get(), n);
+        g = gcd((x - (ys = f(ys))).get(), n);
       while (g == 1);
     if (g != n) return g;
   }
