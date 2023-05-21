@@ -29,7 +29,7 @@ ENABLE_VALUE(is_broadly_signed);
 ENABLE_VALUE(is_broadly_unsigned);
 #undef ENABLE_VALUE
 
-#define ENABLE_HAS_VAR(var)                                              \
+#define ENABLE_HAS_TYPE(var)                                              \
   template <class, class = void>                                         \
   struct has_##var : std::false_type {};                                 \
   template <class T>                                                     \

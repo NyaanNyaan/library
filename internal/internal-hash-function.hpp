@@ -12,9 +12,9 @@ namespace internal {
 using u64 = unsigned long long;
 using u128 = __uint128_t;
 
-ENABLE_HAS_VAR(first);
-ENABLE_HAS_VAR(second);
-ENABLE_HAS_VAR(iterator);
+ENABLE_HAS_TYPE(first_type);
+ENABLE_HAS_TYPE(second_type);
+ENABLE_HAS_TYPE(iterator);
 
 template <typename T>
 u64 hash_function(const T& x) {
@@ -23,14 +23,10 @@ u64 hash_function(const T& x) {
   if constexpr (is_broadly_integral_v<T>) {
     // Integral
     return (u64(x) ^ r) * z1;
-  } else if constexpr (has_first_v<T> && has_second_v<T>) {
+  } else if constexpr (has_first_type_v<T> && has_second_type_v<T>) {
     // pair
-    if constexpr (is_broadly_integral_v<decltype(T::first)> &&
-                  is_broadly_integral_v<decltype(T::second)>) {
-      // pair<Integral, Integral>
-      constexpr u64 z2 = 10150724397891781847ULL;
-      return hash_function(x.first) + hash_function(x.second) * z2;
-    }
+    constexpr u64 z2 = 10150724397891781847ULL;
+    return hash_function(x.first) + hash_function(x.second) * z2;
   } else if constexpr (has_iterator_v<T>) {
     // Container
     constexpr u64 mod = (1LL << 61) - 1;

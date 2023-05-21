@@ -80,7 +80,7 @@ struct UnerasableHashMap {
     return vals[i];
   }
 
-  Val& get(const Key& k) {
+  Val get(const Key& k) {
     int i = hint(k);
     return flag[i] ? vals[i] : default_value;
   }
