@@ -1,6 +1,6 @@
 #pragma once
 
-template <typename Key, typename Val, uint32_t N = 1 << 20,
+template <typename Key, typename Val, unsigned int N = 1 << 20,
           Val DefaultValue = Val()>
 struct HashMap {
   using u32 = uint32_t;
