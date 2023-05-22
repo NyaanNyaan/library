@@ -28,8 +28,14 @@ data:
     path: verify/verify-aoj-other/aoj-1068.test.cpp
     title: verify/verify-aoj-other/aoj-1068.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/arbitrary-modint.test.cpp
     title: verify/verify-unit-test/arbitrary-modint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+    title: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/barrett-reduction.test.cpp
     title: verify/verify-unit-test/barrett-reduction.test.cpp
@@ -57,6 +63,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-bs.test.cpp
+    title: verify/verify-unit-test/fast-bs.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
@@ -265,6 +274,7 @@ data:
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp
   - verify/verify-unit-test/rbst-sequence.test.cpp
@@ -302,6 +312,7 @@ data:
   - verify/verify-unit-test/multiplicative-function.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/fast-bs.test.cpp
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/sparse-table.test.cpp
@@ -316,6 +327,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-aoj-other/aoj-1068.test.cpp
+  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
 documentation_of: misc/rng.hpp
 layout: document
 redirect_from:

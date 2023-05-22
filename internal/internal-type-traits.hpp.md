@@ -18,8 +18,17 @@ data:
     path: math/bigint-gcd.hpp
     title: math/bigint-gcd.hpp
   - icon: ':heavy_check_mark:'
+    path: math/bigint-rational.hpp
+    title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
+  - icon: ':heavy_check_mark:'
+    path: math/rational.hpp
+    title: math/rational.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/stern-brocot-tree.hpp
+    title: math/stern-brocot-tree.hpp
   - icon: ':heavy_check_mark:'
     path: misc/all.hpp
     title: misc/all.hpp
@@ -55,11 +64,17 @@ data:
     path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+    title: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint-gcd.test.cpp
     title: verify/verify-unit-test/bigint-gcd.test.cpp
@@ -90,6 +105,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-sort.test.cpp
     title: verify/verify-unit-test/radix-sort.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/rational-number.test.cpp
+    title: verify/verify-unit-test/rational-number.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
@@ -324,6 +342,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2266.test.cpp
+    title: verify/verify-yuki/yuki-2266.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -373,8 +394,11 @@ data:
   requiredBy:
   - misc/all.hpp
   - misc/fastio.hpp
+  - math/stern-brocot-tree.hpp
   - math/bigint-gcd.hpp
+  - math/rational.hpp
   - math/bigint-garner.hpp
+  - math/bigint-rational.hpp
   - math/bigint.hpp
   - hashmap/hashmap-unerasable.hpp
   - prime/fast-factorize.hpp
@@ -393,6 +417,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
@@ -414,12 +439,14 @@ data:
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
@@ -469,6 +496,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp

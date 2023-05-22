@@ -140,6 +140,12 @@ data:
     path: verify/verify-aoj-other/aoj-0304.test.cpp
     title: verify/verify-aoj-other/aoj-0304.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171.test.cpp
+    title: verify/verify-aoj-other/aoj-2171.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2891.test.cpp
     title: verify/verify-aoj-other/aoj-2891.test.cpp
   - icon: ':heavy_check_mark:'
@@ -387,6 +393,8 @@ data:
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-aoj-other/aoj-2891.test.cpp
+  - verify/verify-aoj-other/aoj-2171.test.cpp
+  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-0304.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp

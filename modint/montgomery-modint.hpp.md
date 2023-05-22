@@ -21,6 +21,9 @@ data:
     path: math/bigint-gcd.hpp
     title: math/bigint-gcd.hpp
   - icon: ':heavy_check_mark:'
+    path: math/bigint-rational.hpp
+    title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
@@ -63,6 +66,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+    title: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint-gcd.test.cpp
     title: verify/verify-unit-test/bigint-gcd.test.cpp
@@ -537,6 +546,7 @@ data:
   - fps/fps-composition-fast.hpp
   - math/bigint-gcd.hpp
   - math/bigint-garner.hpp
+  - math/bigint-rational.hpp
   - math/bigint.hpp
   - modulo/strassen.hpp
   - string/wildcard-pattern-matching.hpp
@@ -603,6 +613,7 @@ data:
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
@@ -651,6 +662,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp

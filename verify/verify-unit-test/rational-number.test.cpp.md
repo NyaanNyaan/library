@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
+  - icon: ':heavy_check_mark:'
     path: math-fast/gcd.hpp
     title: binary GCD
   - icon: ':heavy_check_mark:'
@@ -207,75 +210,95 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-unit-test/rational-number.test.cpp\"\n\n//\n#line 2 \"math/rational.hpp\"\
-    \n\n#line 6 \"math/rational.hpp\"\nusing namespace std;\n\n#line 2 \"math-fast/gcd.hpp\"\
-    \n\n#line 4 \"math-fast/gcd.hpp\"\nusing namespace std;\n\nnamespace BinaryGCDImpl\
-    \ {\nusing u64 = unsigned long long;\nusing i8 = char;\n\nu64 binary_gcd(u64 a,\
-    \ u64 b) {\n  if (a == 0 || b == 0) return a + b;\n  i8 n = __builtin_ctzll(a);\n\
-    \  i8 m = __builtin_ctzll(b);\n  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while\
-    \ (a != b) {\n    u64 d = a - b;\n    i8 s = __builtin_ctzll(d);\n    bool f =\
-    \ a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return a << n;\n\
-    }\n\nusing u128 = __uint128_t;\n// a > 0\nint ctz128(u128 a) {\n  u64 lo = a &\
-    \ u64(-1);\n  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n\
-    }\nu128 binary_gcd128(u128 a, u128 b) {\n  if (a == 0 || b == 0) return a + b;\n\
-    \  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n  a >>= n;\n  b >>= m;\n  n = min(n,\
-    \ m);\n  while (a != b) {\n    u128 d = a - b;\n    i8 s = ctz128(d);\n    bool\
-    \ f = a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return a\
-    \ << n;\n}\n\n}  // namespace BinaryGCDImpl\n\nlong long binary_gcd(long long\
-    \ a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a), abs(b));\n}\n\
-    __int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a < 0) a = -a;\n\
-    \  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a, b);\n}\n\n/**\n\
-    \ * @brief binary GCD\n */\n#line 9 \"math/rational.hpp\"\n\n// T : \u5024, U\
-    \ : \u6BD4\u8F03\u7528\ntemplate <typename T, typename U>\nstruct RationalBase\
-    \ {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
-    \ : x(0), y(1) {}\n  RationalBase(T _x, T _y = 1) : x(_x), y(_y) {\n    assert(y\
-    \ != 0);\n    if (y == -1) x = -x, y = -y;\n    if (y != 1) {\n      T g;\n  \
-    \    if constexpr (is_same_v<T, int> || is_same_v<T, long long>) {\n        g\
-    \ = binary_gcd(abs(x), abs(y));\n      } else {\n        assert(false);\n    \
-    \  }\n      if (g != 0) x /= g, y /= g;\n      if (y < 0) x = -x, y = -y;\n  \
-    \  }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\u8A8D\u3081\u308B\n  static R raw(T\
-    \ _x, T _y) {\n    R r;\n    r.x = _x, r.y = _y;\n    return r;\n  }\n  friend\
-    \ R operator+(const R& l, const R& r) {\n    if (l.y == r.y) return R{l.x + r.x,\
-    \ l.y};\n    return R{l.x * r.y + l.y * r.x, l.y * r.y};\n  }\n  friend R operator-(const\
-    \ R& l, const R& r) {\n    if (l.y == r.y) return R{l.x - r.x, l.y};\n    return\
-    \ R{l.x * r.y - l.y * r.x, l.y * r.y};\n  }\n  friend R operator*(const R& l,\
-    \ const R& r) { return R{l.x * r.x, l.y * r.y}; }\n  friend R operator/(const\
-    \ R& l, const R& r) { return R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const\
-    \ R& r) { return (*this) = (*this) + r; }\n  R& operator-=(const R& r) { return\
-    \ (*this) = (*this) - r; }\n  R& operator*=(const R& r) { return (*this) = (*this)\
-    \ * r; }\n  R& operator/=(const R& r) { return (*this) = (*this) / r; }\n  R operator-()\
-    \ const { return raw(-x, y); }\n  R inverse() const {\n    assert(x != 0);\n \
-    \   R r = raw(y, x);\n    if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n\
-    \  }\n  R pow(long long p) const {\n    R res{1}, base{*this};\n    while (p)\
-    \ {\n      if (p & 1) res *= base;\n      base *= base;\n      p >>= 1;\n    }\n\
-    \    return res;\n  }\n  friend bool operator==(const R& l, const R& r) {\n  \
-    \  return l.x == r.x && l.y == r.y;\n  };\n  friend bool operator!=(const R& l,\
-    \ const R& r) {\n    return l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const\
-    \ R& l, const R& r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend\
-    \ bool operator<=(const R& l, const R& r) { return l < r || l == r; }\n  friend\
-    \ bool operator>(const R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} *\
-    \ r.x;\n  };\n  friend bool operator>=(const R& l, const R& r) { return l > r\
-    \ || l == r; }\n  friend ostream& operator<<(ostream& os, const R& r) {\n    os\
-    \ << r.x;\n    if (r.x != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n\
-    \  }\n\n  T toMint(T mod) {\n    assert(mod != 0);\n    T a = y, b = mod, u =\
-    \ 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b,\
-    \ b);\n      swap(u -= t * v, v);\n    }\n    return U((u % mod + mod) % mod)\
-    \ * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long long, __int128_t>;\n\
-    \ntemplate <typename R = Rational>\nstruct Binomial {\n  vector<R> fc;\n  Binomial(int\
-    \ = 0) { fc.emplace_back(1); }\n  void extend() {\n    int n = fc.size();\n  \
-    \  R nxt = fc.back() * n;\n    fc.push_back(nxt);\n  }\n  R fac(int n) {\n   \
-    \ if (n < 0) return 0;\n    while ((int)fc.size() <= n) extend();\n    return\
-    \ fc[n];\n  }\n  R finv(int n) {\n    if (n < 0) return 0;\n    return fac(n).inverse();\n\
-    \  }\n  R inv(int n) {\n    if (n < 0) return -inv(-n);\n    return R{1, max(n,\
-    \ 1)};\n  }\n  R C(int n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n\
-    \    return fac(n) * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r)\
-    \ { return C(n, r); }\n  template <typename I>\n  R multinomial(const vector<I>&\
-    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
-    \  for (auto& x : r) {\n      if (x < 0) return R{0};\n      n += x;\n    }\n\
-    \    R res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
-    \  }\n\n  template <typename I>\n  R operator()(const vector<I>& r) {\n    return\
-    \ multinomial(r);\n  }\n};\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\
-    using i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\n\
-    u64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \n\n#line 6 \"math/rational.hpp\"\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
+    \n\n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
+    \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
+    \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
+    \                   is_same_v<T, __uint128_t>,\n                           true_type,\
+    \ false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed =\n   \
+    \ typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n       \
+    \                    true_type, false_type>::type;\n\ntemplate <typename T>\n\
+    using is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T> || is_same_v<T,\
+    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
+    #define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 2 \"math-fast/gcd.hpp\"\n\n#line 4 \"math-fast/gcd.hpp\"\
+    \nusing namespace std;\n\nnamespace BinaryGCDImpl {\nusing u64 = unsigned long\
+    \ long;\nusing i8 = char;\n\nu64 binary_gcd(u64 a, u64 b) {\n  if (a == 0 || b\
+    \ == 0) return a + b;\n  i8 n = __builtin_ctzll(a);\n  i8 m = __builtin_ctzll(b);\n\
+    \  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u64 d = a -\
+    \ b;\n    i8 s = __builtin_ctzll(d);\n    bool f = a > b;\n    b = f ? b : a;\n\
+    \    a = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n\nusing u128 = __uint128_t;\n\
+    // a > 0\nint ctz128(u128 a) {\n  u64 lo = a & u64(-1);\n  return lo ? __builtin_ctzll(lo)\
+    \ : 64 + __builtin_ctzll(a >> 64);\n}\nu128 binary_gcd128(u128 a, u128 b) {\n\
+    \  if (a == 0 || b == 0) return a + b;\n  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n\
+    \  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u128 d = a\
+    \ - b;\n    i8 s = ctz128(d);\n    bool f = a > b;\n    b = f ? b : a;\n    a\
+    \ = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n\n}  // namespace BinaryGCDImpl\n\
+    \nlong long binary_gcd(long long a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a),\
+    \ abs(b));\n}\n__int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a\
+    \ < 0) a = -a;\n  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a,\
+    \ b);\n}\n\n/**\n * @brief binary GCD\n */\n#line 10 \"math/rational.hpp\"\n\n\
+    // T : \u5024, U : \u6BD4\u8F03\u7528\ntemplate <typename T, typename U>\nstruct\
+    \ RationalBase {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
+    \ : x(0), y(1) {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
+    \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
+    \ T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y != 0);\n    if (y == -1)\
+    \ x = -x, y = -y;\n    if (y != 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>)\
+    \ {\n        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x,\
+    \ y);\n        } else {\n          g = binary_gcd(x, y);\n        }\n      } else\
+    \ {\n        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n    \
+    \  if (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\
+    \u8A8D\u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y\
+    \ = _y;\n    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n\
+    \    if (l.y == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y *\
+    \ r.x, l.y * r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if\
+    \ (l.y == r.y) return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x,\
+    \ l.y * r.y};\n  }\n  friend R operator*(const R& l, const R& r) { return R{l.x\
+    \ * r.x, l.y * r.y}; }\n  friend R operator/(const R& l, const R& r) { return\
+    \ R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this)\
+    \ + r; }\n  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R&\
+    \ operator*=(const R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const\
+    \ R& r) { return (*this) = (*this) / r; }\n  R operator-() const { return raw(-x,\
+    \ y); }\n  R inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n  \
+    \  if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long\
+    \ p) const {\n    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res\
+    \ *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n\
+    \  friend bool operator==(const R& l, const R& r) {\n    return l.x == r.x &&\
+    \ l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n    return\
+    \ l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R&\
+    \ r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const\
+    \ R& l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const\
+    \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
+    \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
+    \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
+    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  T to_mint(T\
+    \ mod) const {\n    assert(mod != 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n\
+    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u\
+    \ -= t * v, v);\n    }\n    return U((u % mod + mod) % mod) * x % mod;\n  }\n\
+    };\n\nusing Rational = RationalBase<long long, __int128_t>;\n\ntemplate <typename\
+    \ R = Rational>\nstruct Binomial {\n  vector<R> fc;\n  Binomial(int = 0) { fc.emplace_back(1);\
+    \ }\n  void extend() {\n    int n = fc.size();\n    R nxt = fc.back() * n;\n \
+    \   fc.push_back(nxt);\n  }\n  R fac(int n) {\n    if (n < 0) return 0;\n    while\
+    \ ((int)fc.size() <= n) extend();\n    return fc[n];\n  }\n  R finv(int n) {\n\
+    \    if (n < 0) return 0;\n    return fac(n).inverse();\n  }\n  R inv(int n) {\n\
+    \    if (n < 0) return -inv(-n);\n    return R{1, max(n, 1)};\n  }\n  R C(int\
+    \ n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n)\
+    \ * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r) { return C(n, r);\
+    \ }\n  template <typename I>\n  R multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ R{0};\n      n += x;\n    }\n    R res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  R operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n};\n#line 2 \"misc/rng.hpp\"\
+    \n\nnamespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
+    \n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
     \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
     \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
     \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
@@ -324,58 +347,64 @@ data:
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 9 \"verify/verify-unit-test/rational-number.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\n\nnamespace mint_binom {\n\n\
-    #line 2 \"modulo/binomial.hpp\"\n\ntemplate <typename T>\nstruct Binomial {\n\
-    \  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod() != 0\
-    \ && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
-    \    h.resize(1, T{1});\n    while (MAX >= (int)f.size()) extend();\n  }\n\n \
-    \ void extend() {\n    int n = f.size();\n    int m = n * 2;\n    f.resize(m);\n\
-    \    g.resize(m);\n    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i\
-    \ - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] *\
-    \ f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i\
-    \ + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if\
-    \ (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n    return f[i];\n\
-    \  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size())\
-    \ extend();\n    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return\
-    \ -inv(-i);\n    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\
-    \n  T C(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return\
-    \ fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r)\
-    \ { return C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>&\
-    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
-    \  for (auto& x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n\
-    \    T res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
-    \  }\n\n  template <typename I>\n  T operator()(const vector<I>& r) {\n    return\
-    \ multinomial(r);\n  }\n\n  T C_naive(int n, int r) {\n    if (n < 0 || n < r\
-    \ || r < 0) return T(0);\n    T ret = T(1);\n    r = min(r, n - r);\n    for (int\
-    \ i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int\
-    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
-    \ * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if\
-    \ (n < 0 || r < 0) return T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n\
-    };\n#line 14 \"verify/verify-unit-test/rational-number.test.cpp\"\n\n}\n\nusing\
-    \ namespace Nyaan;\n\nvoid Nyaan::solve() {\n  Rational a{4, 3}, b{2, 3};\n\n\
-    \  trc(a + b);\n  assert(a + b == 2);\n  trc(a - b);\n  assert(a - b == Rational(2,\
-    \ 3));\n  trc(a * b);\n  assert(a * b == Rational(8, 9));\n  trc(a / b);\n  assert(a\
-    \ / b == 2);\n  trc(a.inverse());\n  assert(a.inverse() == Rational(3, 4));\n\
-    \  trc(a.pow(3));\n  assert(a.pow(3) == Rational(64, 27));\n\n  trc(a > b);\n\
-    \  assert(a > b == true);\n  trc(a >= b);\n  assert(a >= b == true);\n  trc(a\
-    \ < b);\n  assert(a < b == false);\n  trc(a <= b);\n  assert(a <= b == false);\n\
-    \n  Binomial<Rational> C;\n  assert(C.fac(3) == 6);\n  assert(C.finv(3) == Rational(1,\
-    \ 6));\n  assert(C(4, 2) == 6);\n  assert(C(vi{3, 2}) == 10);\n\n  auto comp =\
-    \ [&](int i, int j, int k, int l) {\n    rep(b, 16) {\n      int ii = (b >> 0)\
-    \ % 2 ? -i : +i;\n      int jj = (b >> 1) % 2 ? -j : +j;\n      int kk = (b >>\
-    \ 2) % 2 ? -k : +k;\n      int ll = (b >> 3) % 2 ? -l : +l;\n      Rational x{ii,\
-    \ jj}, y{kk, ll};\n      mint X = mint{ii} / jj;\n      mint Y = mint{kk} / ll;\n\
-    \      assert(X + Y == (x + y).toMint(998244353));\n      assert(X - Y == (x -\
-    \ y).toMint(998244353));\n      assert(X * Y == (x * y).toMint(998244353));\n\
-    \      if (Y != 0) {\n        assert(X / Y == (x / y).toMint(998244353));\n  \
-    \    }\n    }\n  };\n  rep(i, 20) rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i, j,\
-    \ k, l);\n  rep(t, 10000) {\n    int lower = t % 2 ? 1 : 32000;\n    ll i = rng(lower,\
-    \ 35000);\n    ll j = rng(lower, 35000);\n    ll k = rng(lower, 35000);\n    ll\
-    \ l = rng(lower, 35000);\n    comp(i, j, k, l);\n  }\n\n  Binomial<Rational> C1;\n\
-    \  mint_binom::Binomial<mint> C2;\n  reg(i, -15, 15) {\n    assert(C2.fac(i) ==\
-    \ C1.fac(i).toMint(998244353));\n    assert(C2.finv(i) == C1.finv(i).toMint(998244353));\n\
-    \    assert(C2.inv(i) == C1.inv(i).toMint(998244353));\n    reg(j, -15, 15) assert(C2(i,\
-    \ j) == C1(i, j).toMint(998244353));\n  }\n  cerr << \"OK\" << endl;\n  {\n  \
-    \  int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
+    #line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\nusing namespace\
+    \ std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B \u300C\
+    C(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\u308B\u6700\u5927\
+    \u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\u304F\u3089\u3044\
+    \u306B\u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\u7B97\u3057\u3066\
+    \ 0 \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\u6E08\u307F\n\
+    template <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int\
+    \ MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1,\
+    \ T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n    if (MAX > 0) extend(MAX\
+    \ + 1);\n  }\n\n  void extend(int m = -1) {\n    int n = f.size();\n    if (m\
+    \ == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n    if (n >= m) return;\n\
+    \    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n; i <\
+    \ m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m\
+    \ - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i]\
+    \ = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int\
+    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n\
+    \    return f[i];\n  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n   \
+    \ while (i >= (int)g.size()) extend();\n    return g[i];\n  }\n\n  T inv(int i)\
+    \ {\n    if (i < 0) return -inv(-i);\n    while (i >= (int)h.size()) extend();\n\
+    \    return h[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 || n < r || r <\
+    \ 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline\
+    \ T operator()(int n, int r) { return C(n, r); }\n\n  template <typename I>\n\
+    \  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
+    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
+    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
+    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
+    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 14 \"verify/verify-unit-test/rational-number.test.cpp\"\
+    \n\n}\n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  Rational a{4, 3},\
+    \ b{2, 3};\n\n  trc(a + b);\n  assert(a + b == 2);\n  trc(a - b);\n  assert(a\
+    \ - b == Rational(2, 3));\n  trc(a * b);\n  assert(a * b == Rational(8, 9));\n\
+    \  trc(a / b);\n  assert(a / b == 2);\n  trc(a.inverse());\n  assert(a.inverse()\
+    \ == Rational(3, 4));\n  trc(a.pow(3));\n  assert(a.pow(3) == Rational(64, 27));\n\
+    \n  trc(a > b);\n  assert(a > b == true);\n  trc(a >= b);\n  assert(a >= b ==\
+    \ true);\n  trc(a < b);\n  assert(a < b == false);\n  trc(a <= b);\n  assert(a\
+    \ <= b == false);\n\n  Binomial<Rational> C;\n  assert(C.fac(3) == 6);\n  assert(C.finv(3)\
+    \ == Rational(1, 6));\n  assert(C(4, 2) == 6);\n  assert(C(vi{3, 2}) == 10);\n\
+    \n  auto comp = [&](int i, int j, int k, int l) {\n    rep(b, 16) {\n      int\
+    \ ii = (b >> 0) % 2 ? -i : +i;\n      int jj = (b >> 1) % 2 ? -j : +j;\n     \
+    \ int kk = (b >> 2) % 2 ? -k : +k;\n      int ll = (b >> 3) % 2 ? -l : +l;\n \
+    \     Rational x{ii, jj}, y{kk, ll};\n      mint X = mint{ii} / jj;\n      mint\
+    \ Y = mint{kk} / ll;\n      assert(X + Y == (x + y).to_mint(998244353));\n   \
+    \   assert(X - Y == (x - y).to_mint(998244353));\n      assert(X * Y == (x * y).to_mint(998244353));\n\
+    \      if (Y != 0) {\n        assert(X / Y == (x / y).to_mint(998244353));\n \
+    \     }\n    }\n  };\n  rep(i, 20) rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i,\
+    \ j, k, l);\n  rep(t, 10000) {\n    int lower = t % 2 ? 1 : 32000;\n    ll i =\
+    \ rng(lower, 35000);\n    ll j = rng(lower, 35000);\n    ll k = rng(lower, 35000);\n\
+    \    ll l = rng(lower, 35000);\n    comp(i, j, k, l);\n  }\n\n  Binomial<Rational>\
+    \ C1;\n  mint_binom::Binomial<mint> C2;\n  reg(i, -15, 15) {\n    assert(C2.fac(i)\
+    \ == C1.fac(i).to_mint(998244353));\n    assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n\
+    \    assert(C2.inv(i) == C1.inv(i).to_mint(998244353));\n    reg(j, -15, 15) assert(C2(i,\
+    \ j) == C1(i, j).to_mint(998244353));\n  }\n  cerr << \"OK\" << endl;\n  {\n \
+    \   int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
     ../../template/template.hpp\"\n\n//\n#include \"../../math/rational.hpp\"\n#include\
     \ \"../../misc/rng.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\nusing\
@@ -393,18 +422,19 @@ data:
     \ {\n      int ii = (b >> 0) % 2 ? -i : +i;\n      int jj = (b >> 1) % 2 ? -j\
     \ : +j;\n      int kk = (b >> 2) % 2 ? -k : +k;\n      int ll = (b >> 3) % 2 ?\
     \ -l : +l;\n      Rational x{ii, jj}, y{kk, ll};\n      mint X = mint{ii} / jj;\n\
-    \      mint Y = mint{kk} / ll;\n      assert(X + Y == (x + y).toMint(998244353));\n\
-    \      assert(X - Y == (x - y).toMint(998244353));\n      assert(X * Y == (x *\
-    \ y).toMint(998244353));\n      if (Y != 0) {\n        assert(X / Y == (x / y).toMint(998244353));\n\
-    \      }\n    }\n  };\n  rep(i, 20) rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i,\
-    \ j, k, l);\n  rep(t, 10000) {\n    int lower = t % 2 ? 1 : 32000;\n    ll i =\
-    \ rng(lower, 35000);\n    ll j = rng(lower, 35000);\n    ll k = rng(lower, 35000);\n\
-    \    ll l = rng(lower, 35000);\n    comp(i, j, k, l);\n  }\n\n  Binomial<Rational>\
-    \ C1;\n  mint_binom::Binomial<mint> C2;\n  reg(i, -15, 15) {\n    assert(C2.fac(i)\
-    \ == C1.fac(i).toMint(998244353));\n    assert(C2.finv(i) == C1.finv(i).toMint(998244353));\n\
-    \    assert(C2.inv(i) == C1.inv(i).toMint(998244353));\n    reg(j, -15, 15) assert(C2(i,\
-    \ j) == C1(i, j).toMint(998244353));\n  }\n  cerr << \"OK\" << endl;\n  {\n  \
-    \  int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
+    \      mint Y = mint{kk} / ll;\n      assert(X + Y == (x + y).to_mint(998244353));\n\
+    \      assert(X - Y == (x - y).to_mint(998244353));\n      assert(X * Y == (x\
+    \ * y).to_mint(998244353));\n      if (Y != 0) {\n        assert(X / Y == (x /\
+    \ y).to_mint(998244353));\n      }\n    }\n  };\n  rep(i, 20) rep1(j, 20) rep(k,\
+    \ 20) rep1(l, 20) comp(i, j, k, l);\n  rep(t, 10000) {\n    int lower = t % 2\
+    \ ? 1 : 32000;\n    ll i = rng(lower, 35000);\n    ll j = rng(lower, 35000);\n\
+    \    ll k = rng(lower, 35000);\n    ll l = rng(lower, 35000);\n    comp(i, j,\
+    \ k, l);\n  }\n\n  Binomial<Rational> C1;\n  mint_binom::Binomial<mint> C2;\n\
+    \  reg(i, -15, 15) {\n    assert(C2.fac(i) == C1.fac(i).to_mint(998244353));\n\
+    \    assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n    assert(C2.inv(i)\
+    \ == C1.inv(i).to_mint(998244353));\n    reg(j, -15, 15) assert(C2(i, j) == C1(i,\
+    \ j).to_mint(998244353));\n  }\n  cerr << \"OK\" << endl;\n  {\n    int s, t;\n\
+    \    cin >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -413,6 +443,7 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - math/rational.hpp
+  - internal/internal-type-traits.hpp
   - math-fast/gcd.hpp
   - misc/rng.hpp
   - modint/montgomery-modint.hpp
@@ -420,7 +451,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/rational-number.test.cpp
   requiredBy: []
-  timestamp: '2023-04-11 20:58:11+09:00'
+  timestamp: '2023-05-22 22:29:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rational-number.test.cpp

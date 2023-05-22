@@ -6,12 +6,18 @@ data:
     path: math/bigint-gcd.hpp
     title: math/bigint-gcd.hpp
   - icon: ':heavy_check_mark:'
+    path: math/bigint-rational.hpp
+    title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
     path: math/rational.hpp
     title: math/rational.hpp
   - icon: ':heavy_check_mark:'
     path: math/stern-brocot-tree.hpp
     title: math/stern-brocot-tree.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint-gcd.test.cpp
     title: verify/verify-unit-test/bigint-gcd.test.cpp
@@ -74,6 +80,7 @@ data:
   - math/stern-brocot-tree.hpp
   - math/bigint-gcd.hpp
   - math/rational.hpp
+  - math/bigint-rational.hpp
   timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -82,6 +89,7 @@ data:
   - verify/verify-unit-test/math-fast-2.test.cpp
   - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
+  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
 documentation_of: math-fast/gcd.hpp
 layout: document
 redirect_from:

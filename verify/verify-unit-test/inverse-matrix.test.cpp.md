@@ -23,21 +23,24 @@ data:
   bundledCode: "#line 1 \"verify/verify-unit-test/inverse-matrix.test.cpp\"\n#define\
     \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include <cassert>\n\
     #include <cstdint>\n#include <iostream>\n#include <vector>\nusing namespace std;\n\
-    \n#line 2 \"matrix/gauss-elimination.hpp\"\n\ntemplate <typename mint>\nstd::pair<int,\
-    \ mint> GaussElimination(vector<vector<mint>> &a,\n                          \
-    \            int pivot_end = -1,\n                                      bool diagonalize\
-    \ = false) {\n  int H = a.size(), W = a[0].size();\n  int rank = 0, je = pivot_end;\n\
-    \  if (je == -1) je = W;\n  mint det = 1;\n  for (int j = 0; j < je; j++) {\n\
-    \    int idx = -1;\n    for (int i = rank; i < H; i++) {\n      if (a[i][j] !=\
-    \ mint(0)) {\n        idx = i;\n        break;\n      }\n    }\n    if (idx ==\
-    \ -1) {\n      det = 0;\n      continue;\n    }\n    if (rank != idx) {\n    \
-    \  det = -det;\n      swap(a[rank], a[idx]);\n    }\n    det *= a[rank][j];\n\
-    \    if (diagonalize && a[rank][j] != mint(1)) {\n      mint coeff = a[rank][j].inverse();\n\
+    \n#line 2 \"matrix/gauss-elimination.hpp\"\n\n#include <utility>\n#line 5 \"matrix/gauss-elimination.hpp\"\
+    \nusing namespace std;\n\n// {rank, det(\u975E\u6B63\u65B9\u884C\u5217\u306E\u5834\
+    \u5408\u306F\u672A\u5B9A\u7FA9)} \u3092\u8FD4\u3059\n// \u578B\u304C double \u3084\
+    \ Rational \u3067\u3082\u52D5\u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\n//\n\
+    // pivot \u5019\u88DC : [0, pivot_end)\ntemplate <typename T>\nstd::pair<int,\
+    \ T> GaussElimination(vector<vector<T>> &a, int pivot_end = -1,\n            \
+    \                       bool diagonalize = false) {\n  int H = a.size(), W = a[0].size(),\
+    \ rank = 0;\n  if (pivot_end == -1) pivot_end = W;\n  T det = 1;\n  for (int j\
+    \ = 0; j < pivot_end; j++) {\n    int idx = -1;\n    for (int i = rank; i < H;\
+    \ i++) {\n      if (a[i][j] != T(0)) {\n        idx = i;\n        break;\n   \
+    \   }\n    }\n    if (idx == -1) {\n      det = 0;\n      continue;\n    }\n \
+    \   if (rank != idx) det = -det, swap(a[rank], a[idx]);\n    det *= a[rank][j];\n\
+    \    if (diagonalize && a[rank][j] != T(1)) {\n      T coeff = T(1) / a[rank][j];\n\
     \      for (int k = j; k < W; k++) a[rank][k] *= coeff;\n    }\n    int is = diagonalize\
     \ ? 0 : rank + 1;\n    for (int i = is; i < H; i++) {\n      if (i == rank) continue;\n\
-    \      if (a[i][j] != mint(0)) {\n        mint coeff = a[i][j] / a[rank][j];\n\
-    \        for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n\
-    \    }\n    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \      if (a[i][j] != T(0)) {\n        T coeff = a[i][j] / a[rank][j];\n     \
+    \   for (int k = j; k < W; k++) a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n\
+    \    rank++;\n  }\n  return make_pair(rank, det);\n}\n#line 2 \"modint/montgomery-modint.hpp\"\
     \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
     \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
     \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
@@ -123,7 +126,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/inverse-matrix.test.cpp
   requiredBy: []
-  timestamp: '2021-06-17 21:43:35+09:00'
+  timestamp: '2023-05-22 22:29:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/inverse-matrix.test.cpp

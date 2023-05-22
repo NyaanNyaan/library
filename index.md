@@ -387,6 +387,9 @@ data:
       path: math/bigint-gcd.hpp
       title: math/bigint-gcd.hpp
     - icon: ':heavy_check_mark:'
+      path: math/bigint-rational.hpp
+      title: math/bigint-rational.hpp
+    - icon: ':heavy_check_mark:'
       path: math/bigint.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
     - icon: ':heavy_check_mark:'
@@ -457,6 +460,9 @@ data:
       title: 2-SAT
   - name: math-fast
     pages:
+    - icon: ':heavy_check_mark:'
+      path: math-fast/binary-search.hpp
+      title: math-fast/binary-search.hpp
     - icon: ':heavy_check_mark:'
       path: math-fast/gcd.hpp
       title: binary GCD
@@ -664,6 +670,9 @@ data:
       title: "\u30C8\u30FC\u30B7\u30A7\u30F3\u30C8\u95A2\u6570\u306E\u548C"
   - name: ntt
     pages:
+    - icon: ':heavy_check_mark:'
+      path: ntt/arbitrary-ntt-mod18446744069414584321.hpp
+      title: ntt/arbitrary-ntt-mod18446744069414584321.hpp
     - icon: ':heavy_check_mark:'
       path: ntt/arbitrary-ntt.hpp
       title: ntt/arbitrary-ntt.hpp
@@ -1164,6 +1173,12 @@ data:
       path: verify/verify-aoj-other/aoj-1613.test.cpp
       title: verify/verify-aoj-other/aoj-1613.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+      title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-2171.test.cpp
+      title: verify/verify-aoj-other/aoj-2171.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-2891.test.cpp
       title: verify/verify-aoj-other/aoj-2891.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1186,6 +1201,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/arbitrary-modint.test.cpp
       title: verify/verify-unit-test/arbitrary-modint.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+      title: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/barrett-reduction.test.cpp
       title: verify/verify-unit-test/barrett-reduction.test.cpp
@@ -1222,6 +1240,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/factorize.test.cpp
       title: verify/verify-unit-test/factorize.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/fast-bs.test.cpp
+      title: verify/verify-unit-test/fast-bs.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fast-inv-gcd.test.cpp
       title: verify/verify-unit-test/fast-inv-gcd.test.cpp
@@ -1689,6 +1710,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
       title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
+      title: verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
       title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp

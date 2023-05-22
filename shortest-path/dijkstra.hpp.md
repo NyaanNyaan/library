@@ -10,6 +10,12 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171.test.cpp
+    title: verify/verify-aoj-other/aoj-2171.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
@@ -83,6 +89,8 @@ data:
   - verify/verify-unit-test/dijkstra.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - verify/verify-aoj-grl/aoj-grl-1-a.test.cpp
+  - verify/verify-aoj-other/aoj-2171.test.cpp
+  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
 documentation_of: shortest-path/dijkstra.hpp
 layout: document
 redirect_from:

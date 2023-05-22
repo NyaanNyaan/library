@@ -16,6 +16,9 @@ data:
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
+    title: verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   _isVerificationFailed: false
@@ -108,6 +111,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+  - verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp

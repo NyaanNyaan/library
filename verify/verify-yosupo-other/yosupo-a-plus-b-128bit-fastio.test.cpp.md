@@ -276,7 +276,7 @@ data:
     //\n#include \"../../template/template.hpp\"\n//\n#include \"../../misc/fastio.hpp\"\
     \nusing namespace Nyaan;\n\nvoid q() {\n  int T;\n  rd(T);\n  while (T--) {\n\
     \    i128 a, b;\n    rd(a, b);\n    wtn(a + b);\n  }\n}\n\nvoid Nyaan::solve()\
-    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}"
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -289,7 +289,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
   requiredBy: []
-  timestamp: '2023-05-21 20:49:42+09:00'
+  timestamp: '2023-05-22 23:05:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp

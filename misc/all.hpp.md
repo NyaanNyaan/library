@@ -16,6 +16,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+    title: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint2.test.cpp
     title: verify/verify-unit-test/bigint2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -148,6 +151,7 @@ data:
   timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp

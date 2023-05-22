@@ -18,6 +18,9 @@ data:
     path: math/bigint-gcd.hpp
     title: math/bigint-gcd.hpp
   - icon: ':heavy_check_mark:'
+    path: math/bigint-rational.hpp
+    title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
@@ -51,6 +54,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+    title: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint-gcd.test.cpp
     title: verify/verify-unit-test/bigint-gcd.test.cpp
@@ -240,11 +249,13 @@ data:
     \ b.size()) <= 40) {\n      vector<mint> s(l);\n      for (int i = 0; i < (int)a.size();\
     \ ++i)\n        for (int j = 0; j < (int)b.size(); ++j) s[i + j] += a[i] * b[j];\n\
     \      return s;\n    }\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n\
-    \    setwy(k);\n    vector<mint> s(M), t(M);\n    for (int i = 0; i < (int)a.size();\
-    \ ++i) s[i] = a[i];\n    for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];\n\
-    \    fft4(s, k);\n    fft4(t, k);\n    for (int i = 0; i < M; ++i) s[i] *= t[i];\n\
-    \    ifft4(s, k);\n    s.resize(l);\n    mint invm = mint(M).inverse();\n    for\
-    \ (int i = 0; i < l; ++i) s[i] *= invm;\n    return s;\n  }\n\n  void ntt_doubling(vector<mint>\
+    \    setwy(k);\n    vector<mint> s(M);\n    for (int i = 0; i < (int)a.size();\
+    \ ++i) s[i] = a[i];\n    fft4(s, k);\n    if (a.size() == b.size() && a == b)\
+    \ {\n      for (int i = 0; i < M; ++i) s[i] *= s[i];\n    } else {\n      vector<mint>\
+    \ t(M);\n      for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];\n      fft4(t,\
+    \ k);\n      for (int i = 0; i < M; ++i) s[i] *= t[i];\n    }\n    ifft4(s, k);\n\
+    \    s.resize(l);\n    mint invm = mint(M).inverse();\n    for (int i = 0; i <\
+    \ l; ++i) s[i] *= invm;\n    return s;\n  }\n\n  void ntt_doubling(vector<mint>\
     \ &a) {\n    int M = (int)a.size();\n    auto b = a;\n    intt(b);\n    mint r\
     \ = 1, zeta = mint(pr).pow((mint::get_mod() - 1) / (M << 1));\n    for (int i\
     \ = 0; i < M; i++) b[i] *= r, r *= zeta;\n    ntt(b);\n    copy(begin(b), end(b),\
@@ -340,8 +351,9 @@ data:
   - fps/arbitrary-fps.hpp
   - math/bigint-gcd.hpp
   - math/bigint-garner.hpp
+  - math/bigint-rational.hpp
   - math/bigint.hpp
-  timestamp: '2022-11-06 23:28:25+09:00'
+  timestamp: '2023-05-22 22:29:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
@@ -361,6 +373,7 @@ data:
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/bigint3.test.cpp
@@ -373,6 +386,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp

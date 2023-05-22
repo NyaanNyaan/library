@@ -19,6 +19,9 @@ data:
     title: "\u9AD8\u901Fmodulo\u9006\u5143"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+    title: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint-gcd.test.cpp
     title: verify/verify-unit-test/bigint-gcd.test.cpp
   - icon: ':heavy_check_mark:'
@@ -27,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-bs.test.cpp
+    title: verify/verify-unit-test/fast-bs.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fast-inv-gcd.test.cpp
     title: verify/verify-unit-test/fast-inv-gcd.test.cpp
@@ -81,6 +87,7 @@ data:
   timestamp: '2021-11-14 23:34:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
@@ -90,6 +97,7 @@ data:
   - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/fast-inv-gcd.test.cpp
+  - verify/verify-unit-test/fast-bs.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
