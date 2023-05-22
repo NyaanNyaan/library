@@ -1,8 +1,6 @@
 #pragma once
 
-
-
-#include "../inner/inner_math.hpp"
+#include "../internal/internal-math.hpp"
 #include "../modint/arbitrary-prime-modint.hpp"
 #include "../modint/modint-montgomery64.hpp"
 #include "../prime/fast-factorize.hpp"
@@ -43,9 +41,6 @@ struct Memo {
   vector<int> os;
 };
 
-using inner::gcd;
-using inner::inv;
-using inner::modpow;
 template <typename INT, typename LINT, typename mint>
 mint pe_root(INT c, INT pi, INT ei, INT p) {
   if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);
@@ -54,13 +49,13 @@ mint pe_root(INT c, INT pi, INT ei, INT p) {
   INT pe = 1;
   for (INT _ = 0; _ < ei; ++_) pe *= pi;
 
-  INT u = inv(pe - s % pe, pe);
+  INT u = internal::inv(pe - s % pe, pe);
   mint mc = c, one = 1;
   mint z = mc.pow((s * u + 1) / pe);
   mint zpe = mc.pow(s * u);
   if (zpe == one) return z;
   assert(t > ei);
-  
+
   mint vs;
   {
     INT ptm1 = 1;
@@ -107,8 +102,8 @@ INT inner_kth_root(INT a, INT k, INT p) {
   assert(p > 2);
   if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);
   INT g = gcd(p - 1, k);
-  if (modpow<INT, LINT>(a, (p - 1) / g, p) != 1) return -1;
-  a = mint(a).pow(inv(k / g, (p - 1) / g)).get();
+  if (internal::modpow<INT, LINT>(a, (p - 1) / g, p) != 1) return -1;
+  a = mint(a).pow(internal::inv(k / g, (p - 1) / g)).get();
   unordered_map<INT, int> fac;
   for (auto &f : factorize(g)) fac[f]++;
   if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);

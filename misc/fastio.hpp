@@ -1,13 +1,18 @@
 #pragma once
 
+#include <cstdio>
 #include <cstring>
+#include <string>
 #include <type_traits>
 #include <utility>
 
 using namespace std;
 
+#include "../internal/internal-type-traits.hpp"
+
 namespace fastio {
 static constexpr int SZ = 1 << 17;
+static constexpr int offset = 64;
 char inbuf[SZ], outbuf[SZ];
 int in_left = 0, in_right = 0, out_right = 0;
 
@@ -24,35 +29,47 @@ struct Pre {
   }
 } constexpr pre;
 
-inline void load() {
+void load() {
   int len = in_right - in_left;
   memmove(inbuf, inbuf + in_left, len);
   in_right = len + fread(inbuf + len, 1, SZ - len, stdin);
   in_left = 0;
 }
-
-inline void flush() {
+void flush() {
   fwrite(outbuf, 1, out_right, stdout);
   out_right = 0;
 }
-
-inline void skip_space() {
-  if (in_left + 32 > in_right) load();
+void skip_space() {
+  if (in_left + offset > in_right) load();
   while (inbuf[in_left] <= ' ') in_left++;
 }
 
-inline void rd(char& c) {
-  if (in_left + 32 > in_right) load();
+void single_read(char& c) {
+  if (in_left + offset > in_right) load();
+  skip_space();
   c = inbuf[in_left++];
 }
-template <typename T>
-inline void rd(T& x) {
-  if (in_left + 32 > in_right) load();
-  char c;
-  do c = inbuf[in_left++];
-  while (c < '-');
+void single_read(string& S) {
+  skip_space();
+  while (true) {
+    if (in_left == in_right) load();
+    int i = in_left;
+    for (; i != in_right; i++) {
+      if (inbuf[i] <= ' ') break;
+    }
+    copy(inbuf + in_left, inbuf + i, back_inserter(S));
+    in_left = i;
+    if (i != in_right) break;
+  }
+}
+template <typename T,
+          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>
+inline void single_read(T& x) {
+  if (in_left + offset > in_right) load();
+  skip_space();
+  char c = inbuf[in_left++];
   [[maybe_unused]] bool minus = false;
-  if constexpr (is_signed<T>::value == true) {
+  if constexpr (internal::is_broadly_signed_v<T>) {
     if (c == '-') minus = true, c = inbuf[in_left++];
   }
   x = 0;
@@ -60,46 +77,53 @@ inline void rd(T& x) {
     x = x * 10 + (c & 15);
     c = inbuf[in_left++];
   }
-  if constexpr (is_signed<T>::value == true) {
+  if constexpr (internal::is_broadly_signed_v<T>) {
     if (minus) x = -x;
   }
 }
 inline void rd() {}
 template <typename Head, typename... Tail>
 inline void rd(Head& head, Tail&... tail) {
-  rd(head);
+  single_read(head);
   rd(tail...);
 }
 
-inline void wt(char c) {
-  if (out_right > SZ - 32) flush();
+inline void single_write(const char& c) {
+  if (out_right > SZ - offset) flush();
   outbuf[out_right++] = c;
 }
-inline void wt(bool b) {
-  if (out_right > SZ - 32) flush();
+inline void single_write(const bool& b) {
+  if (out_right > SZ - offset) flush();
   outbuf[out_right++] = b ? '1' : '0';
 }
-inline void wt(const string &s) {
-  if (out_right + s.size() > SZ - 32) flush();
-  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());
-  out_right += s.size();
+inline void single_write(const string& S) {
+  int i = 0;
+  while (i != (int)S.size()) {
+    if (out_right == SZ) flush();
+    int len = min((int)S.size() - i, SZ - out_right);
+    memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);
+    i += len, out_right += len;
+  }
 }
-template <typename T>
-inline void wt(T x) {
-  if (out_right > SZ - 32) flush();
-  if (!x) {
+template <typename T,
+          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>
+inline void single_write(const T& _x) {
+  if (out_right > SZ - offset) flush();
+  if (_x == 0) {
     outbuf[out_right++] = '0';
     return;
   }
-  if constexpr (is_signed<T>::value == true) {
+  T x = _x;
+  if constexpr (internal::is_broadly_signed_v<T>) {
     if (x < 0) outbuf[out_right++] = '-', x = -x;
   }
-  int i = 12;
-  char buf[16];
+  constexpr int buffer_size = sizeof(T) * 10 / 4;
+  char buf[buffer_size];
+  int i = buffer_size;
   while (x >= 10000) {
+    i -= 4;
     memcpy(buf + i, pre.num + (x % 10000) * 4, 4);
     x /= 10000;
-    i -= 4;
   }
   if (x < 100) {
     if (x < 10) {
@@ -121,18 +145,18 @@ inline void wt(T x) {
       out_right += 4;
     }
   }
-  memcpy(outbuf + out_right, buf + i + 4, 12 - i);
-  out_right += 12 - i;
+  memcpy(outbuf + out_right, buf + i, buffer_size - i);
+  out_right += buffer_size - i;
 }
 inline void wt() {}
 template <typename Head, typename... Tail>
-inline void wt(Head&& head, Tail&&... tail) {
-  wt(head);
-  wt(forward<Tail>(tail)...);
+inline void wt(const Head& head, const Tail&... tail) {
+  single_write(head);
+  wt(forward<const Tail>(tail)...);
 }
 template <typename... Args>
-inline void wtn(Args&&... x) {
-  wt(forward<Args>(x)...);
+inline void wtn(const Args&... x) {
+  wt(forward<const Args>(x)...);
   wt('\n');
 }
 

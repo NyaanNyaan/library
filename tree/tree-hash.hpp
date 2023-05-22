@@ -1,10 +1,16 @@
 #pragma once
 
-#include "../inner/inner-hash.hpp"
+#include <array>
+#include <chrono>
+#include <random>
+#include <vector>
+using namespace std;
+
+#include "../internal/internal-hash.hpp"
 
 template <typename G>
 struct TreeHash {
-  using Hash = inner::Hash<3>;
+  using Hash = internal::Hash<3>;
 
   const G& g;
   int n;

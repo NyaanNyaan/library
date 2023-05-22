@@ -1,6 +1,6 @@
 #pragma once
 
-namespace inner {
+namespace internal {
 using i64 = long long;
 using u64 = unsigned long long;
 using u128 = __uint128_t;
@@ -122,9 +122,9 @@ struct Hash : array<u64, BASE_NUM> {
   }
 };
 
-}  // namespace inner
+}  // namespace internal
 
 /**
  * @brief ハッシュ構造体
- * @docs docs/inner/inner-hash.md
+ * @docs docs/internal/internal-hash.md
  */
