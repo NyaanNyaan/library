@@ -194,12 +194,17 @@ struct NTT {
     int k = 2, M = 4;
     while (M < l) M <<= 1, ++k;
     setwy(k);
-    vector<mint> s(M), t(M);
+    vector<mint> s(M);
     for (int i = 0; i < (int)a.size(); ++i) s[i] = a[i];
-    for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
     fft4(s, k);
-    fft4(t, k);
-    for (int i = 0; i < M; ++i) s[i] *= t[i];
+    if (a.size() == b.size() && a == b) {
+      for (int i = 0; i < M; ++i) s[i] *= s[i];
+    } else {
+      vector<mint> t(M);
+      for (int i = 0; i < (int)b.size(); ++i) t[i] = b[i];
+      fft4(t, k);
+      for (int i = 0; i < M; ++i) s[i] *= t[i];
+    }
     ifft4(s, k);
     s.resize(l);
     mint invm = mint(M).inverse();
