@@ -1,7 +1,6 @@
 #pragma once
 
-
-
+#include "../ntt/arbitrary-ntt-mod18446744069414584321.hpp"
 #include "../ntt/arbitrary-ntt.hpp"
 #include "./centroid-decomposition.hpp"
 
@@ -12,8 +11,8 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
   using CentroidDecomposition<G>::get_size;
   using CentroidDecomposition<G>::get_centroid;
 
-  FrequencyTableOfTreeDistance(const G &g)
-      : CentroidDecomposition<G>(g, false) {}
+  FrequencyTableOfTreeDistance(const G &_g)
+      : CentroidDecomposition<G>(_g, false) {}
 
   vector<long long> count, self;
 
@@ -30,8 +29,7 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
 
   vector<long long> get(int start = 0) {
     queue<int> Q;
-    int root = get_centroid(start, -1, get_size(start, -1) / 2);
-    Q.push(root);
+    Q.push(get_centroid(start, -1, get_size(start, -1) / 2));
     vector<long long> ans;
     ans.reserve(g.size());
     count.reserve(g.size());
@@ -47,13 +45,13 @@ struct FrequencyTableOfTreeDistance : CentroidDecomposition<G> {
         self.clear();
         Q.emplace(get_centroid(c, -1, get_size(c, -1) / 2));
         dfs_depth(c, r, 1);
-        auto self2 = ArbitraryNTT::multiply_u128(self, self);
+        auto self2 = ntt18446744069414584321.multiply(self, self);
         while (self2.size() > ans.size()) ans.emplace_back(0);
         for (int i = 0; i < (int)self2.size(); i++) ans[i] -= self2[i];
       }
       if (count.empty()) continue;
       ++count[0];
-      auto count2 = ArbitraryNTT::multiply_u128(count, count);
+      auto count2 = ntt18446744069414584321.multiply(count, count);
       while (count2.size() > ans.size()) ans.emplace_back(0);
       for (int i = 0; i < (int)count2.size(); i++) ans[i] += count2[i];
     }

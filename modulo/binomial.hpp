@@ -1,5 +1,13 @@
 #pragma once
 
+#include <cassert>
+#include <type_traits>
+#include <vector>
+using namespace std;
+
+// コンストラクタの MAX に 「C(n, r) や fac(n) でクエリを投げる最大の n 」
+// を入れると倍速くらいになる
+// mod を超えて前計算して 0 割りを踏むバグは対策済み
 template <typename T>
 struct Binomial {
   vector<T> f, g, h;
@@ -8,12 +16,14 @@ struct Binomial {
     f.resize(1, T{1});
     g.resize(1, T{1});
     h.resize(1, T{1});
-    while (MAX >= (int)f.size()) extend();
+    if (MAX > 0) extend(MAX + 1);
   }
 
-  void extend() {
+  void extend(int m = -1) {
     int n = f.size();
-    int m = n * 2;
+    if (m == -1) m = n * 2;
+    m = min<int>(m, T::get_mod());
+    if (n >= m) return;
     f.resize(m);
     g.resize(m);
     h.resize(m);

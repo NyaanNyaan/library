@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 
+#include "../internal/internal-type-traits.hpp"
 #include "../math-fast/gcd.hpp"
 
 // T : 値, U : 比較用
@@ -14,15 +15,22 @@ struct RationalBase {
   using Key = T;
   T x, y;
   RationalBase() : x(0), y(1) {}
-  RationalBase(T _x, T _y = 1) : x(_x), y(_y) {
+  template <typename T1>
+  RationalBase(const T1& _x) : RationalBase<T, U>(_x, T1{1}) {}
+  template <typename T1, typename T2>
+  RationalBase(const T1& _x, const T2& _y) : x(_x), y(_y) {
     assert(y != 0);
     if (y == -1) x = -x, y = -y;
     if (y != 1) {
       T g;
-      if constexpr (is_same_v<T, int> || is_same_v<T, long long>) {
-        g = binary_gcd(abs(x), abs(y));
+      if constexpr (internal::is_broadly_integral_v<T>) {
+        if constexpr (sizeof(T) == 16) {
+          g = binary_gcd128(x, y);
+        } else {
+          g = binary_gcd(x, y);
+        }
       } else {
-        assert(false);
+        g = gcd(x, y);
       }
       if (g != 0) x /= g, y /= g;
       if (y < 0) x = -x, y = -y;
@@ -84,7 +92,7 @@ struct RationalBase {
     return os;
   }
 
-  T toMint(T mod) {
+  T to_mint(T mod) const {
     assert(mod != 0);
     T a = y, b = mod, u = 1, v = 0, t;
     while (b > 0) {

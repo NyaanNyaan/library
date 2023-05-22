@@ -28,7 +28,7 @@ import subprocess
 import re
 import time
 
-url = "https://atcoder.jp/contests/ahc012/tasks/ahc012_a"
+url = "https://atcoder.jp/contests/ahc015/tasks/ahc015_a"
 cmd = ["oj", "submit", "--no-open", "--yes", url, "./unused/a.cpp"]
 overhead = 2.5
 interval = 300.0
