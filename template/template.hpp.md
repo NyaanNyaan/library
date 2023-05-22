@@ -283,6 +283,9 @@ data:
     path: verify/verify-unit-test/int-div.test.cpp
     title: verify/verify-unit-test/int-div.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/internal-type-traits.test.cpp
+    title: verify/verify-unit-test/internal-type-traits.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/interval-union.test.cpp
     title: verify/verify-unit-test/interval-union.test.cpp
   - icon: ':heavy_check_mark:'
@@ -409,6 +412,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
     title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
   - icon: ':heavy_check_mark:'
@@ -441,12 +447,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
-    title: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
@@ -873,6 +873,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
+    title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit.test.cpp
@@ -1457,6 +1460,7 @@ data:
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yuki/yuki-1775.test.cpp
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
+  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b.test.cpp
   - verify/verify-yosupo-other/yosupo-argument-sort.test.cpp
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
@@ -1554,6 +1558,7 @@ data:
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-unit-test/bitset-find-prev.test.cpp
   - verify/verify-unit-test/hashmap.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
@@ -1650,11 +1655,11 @@ data:
   - verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-persistent-unionfind.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-dynamic-segtree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-range-sum-dynamic-segtree.test.cpp
@@ -1671,7 +1676,6 @@ data:
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
   - verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp

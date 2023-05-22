@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
+  - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
@@ -27,16 +30,34 @@ data:
     \ \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_2_A\"\n\
     \n#line 2 \"math/bigint.hpp\"\n\n#include <algorithm>\n#include <cassert>\n#include\
     \ <cmath>\n#include <iostream>\n#include <tuple>\n#include <utility>\n#include\
-    \ <vector>\nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line\
-    \ 2 \"modint/montgomery-modint.hpp\"\n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
-    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
-    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
-    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
-    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
-    \ u32 n2 = -u64(mod) % mod;\n  static_assert(r * mod == 1, \"invalid, r * mod\
-    \ != 1\");\n  static_assert(mod < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod\
-    \ & 1) == 1, \"invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
-    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ <vector>\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
+    \n\n#include <type_traits>\nusing namespace std;\n\nnamespace internal {\ntemplate\
+    \ <typename T>\nusing is_broadly_integral =\n    typename conditional_t<is_integral_v<T>\
+    \ || is_same_v<T, __int128_t> ||\n                               is_same_v<T,\
+    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
+    template <typename T>\nusing is_broadly_signed =\n    typename conditional_t<is_signed_v<T>\
+    \ || is_same_v<T, __int128_t>,\n                           true_type, false_type>::type;\n\
+    \ntemplate <typename T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
+    \n\n\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint =\
+    \ LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32 = uint32_t;\n  using\
+    \ u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n    u32 ret = mod;\n  \
+    \  for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n\
+    \  static constexpr u32 r = get_r();\n  static constexpr u32 n2 = -u64(mod) %\
+    \ mod;\n  static_assert(r * mod == 1, \"invalid, r * mod != 1\");\n  static_assert(mod\
+    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
+    invalid, mod % 2 == 0\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() :\
+    \ a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
     \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
     \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
     \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
@@ -176,7 +197,7 @@ data:
     \ (int i = 0; i < n; i++) {\n    i64 n1 = d1[i].get(), n2 = d2[i].get();\n   \
     \ i64 a = d0[i].get();\n    i64 b = (n1 + m1 - a) * r01 % m1;\n    i64 c = ((n2\
     \ + m2 - a) * r02r12 + (m2 - b) * r12) % m2;\n    ret[i] = a + b * w1 + u128(c)\
-    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 13 \"math/bigint.hpp\"\
+    \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 14 \"math/bigint.hpp\"\
     \n\nnamespace MultiPrecisionIntegerImpl {\nstruct TENS {\n  static constexpr int\
     \ offset = 30;\n  constexpr TENS() : _tend() {\n    _tend[offset] = 1;\n    for\
     \ (int i = 1; i <= offset; i++) {\n      _tend[offset + i] = _tend[offset + i\
@@ -189,9 +210,8 @@ data:
     \ tens = {};\n\n  static constexpr int D = 1000000000;\n  static constexpr int\
     \ logD = 9;\n  bool neg;\n  vector<int> dat;\n\n  MultiPrecisionInteger() : neg(false),\
     \ dat() {}\n\n  MultiPrecisionInteger(bool n, const vector<int>& d) : neg(n),\
-    \ dat(d) {}\n\n  template <typename I, enable_if_t<is_integral_v<I> ||\n     \
-    \                               is_same_v<I, __int128_t>>* = nullptr>\n  MultiPrecisionInteger(I\
-    \ x) : neg(false) {\n    if constexpr (is_signed_v<I> || is_same_v<I, __int128_t>)\
+    \ dat(d) {}\n\n  template <typename I,\n            enable_if_t<internal::is_broadly_integral_v<I>>*\
+    \ = nullptr>\n  MultiPrecisionInteger(I x) : neg(false) {\n    if constexpr (internal::is_broadly_signed_v<I>)\
     \ {\n      if (x < 0) neg = true, x = -x;\n    }\n    while (x) dat.push_back(x\
     \ % D), x /= D;\n  }\n\n  MultiPrecisionInteger(const string& S) : neg(false)\
     \ {\n    assert(!S.empty());\n    if (S.size() == 1u && S[0] == '0') return;\n\
@@ -365,13 +385,12 @@ data:
     \    }\n    if (!zero_padding) {\n      while (res.size() && res.back() == '0')\
     \ res.pop_back();\n      assert(!res.empty());\n    }\n    reverse(begin(res),\
     \ end(res));\n    return res;\n  }\n\n  // convert ll to vec\n  template <typename\
-    \ I, enable_if_t<is_integral_v<I> ||\n                                    is_same_v<I,\
-    \ __int128_t>>* = nullptr>\n  static vector<int> _integer_to_vec(I x) {\n    if\
-    \ constexpr (is_signed_v<I> || is_same_v<I, __int128_t>) {\n      assert(x >=\
-    \ 0);\n    }\n    vector<int> res;\n    while (x) res.push_back(x % D), x /= D;\n\
-    \    return res;\n  }\n\n  static long long _to_ll(const vector<int>& a) {\n \
-    \   long long res = 0;\n    for (int i = (int)a.size() - 1; i >= 0; i--) res =\
-    \ res * D + a[i];\n    return res;\n  }\n\n  static __int128_t _to_i128(const\
+    \ I,\n            enable_if_t<internal::is_broadly_integral_v<I>>* = nullptr>\n\
+    \  static vector<int> _integer_to_vec(I x) {\n    if constexpr (internal::is_broadly_signed_v<I>)\
+    \ {\n      assert(x >= 0);\n    }\n    vector<int> res;\n    while (x) res.push_back(x\
+    \ % D), x /= D;\n    return res;\n  }\n\n  static long long _to_ll(const vector<int>&\
+    \ a) {\n    long long res = 0;\n    for (int i = (int)a.size() - 1; i >= 0; i--)\
+    \ res = res * D + a[i];\n    return res;\n  }\n\n  static __int128_t _to_i128(const\
     \ vector<int>& a) {\n    __int128_t res = 0;\n    for (int i = (int)a.size() -\
     \ 1; i >= 0; i--) res = res * D + a[i];\n    return res;\n  }\n\n  static void\
     \ _dump(const vector<int>& a, string s = \"\") {\n    if (!s.empty()) cerr <<\
@@ -385,13 +404,14 @@ data:
     \ >> a >> b;\n  cout << a + b << endl;\n}\n"
   dependsOn:
   - math/bigint.hpp
+  - internal/internal-type-traits.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
   isVerificationFile: true
   path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
   requiredBy: []
-  timestamp: '2023-04-15 00:09:58+09:00'
+  timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp

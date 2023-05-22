@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
+  - icon: ':heavy_check_mark:'
     path: lct/lazy-reversible-bbst-base.hpp
     title: "\u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FD\u5E73\u8861\u4E8C\u5206\
       \u6728(\u57FA\u5E95\u30AF\u30E9\u30B9)"
@@ -255,49 +258,78 @@ data:
     \ r) const { return a != r.a || b != r.b; }\n  friend ostream& operator<<(ostream&\
     \ os, const Affine& r) {\n    os << \"( \" << r.a << \", \" << r.b << \" )\";\n\
     \    return os;\n  }\n};\n\n/**\n * @brief \u30A2\u30D5\u30A3\u30F3\u5909\u63DB\
-    \n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
-    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
+    \n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace\
+    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
+    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\n\
+    static constexpr int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ],\
     \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
     \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
     \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
     \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
-    \ pre;\n\ninline void load() {\n  int len = in_right - in_left;\n  memmove(inbuf,\
-    \ inbuf + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
-    \  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
-    \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
-    \ <typename T>\ninline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n\
-    \  char c;\n  do c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]]\
-    \ bool minus = false;\n  if constexpr (is_signed<T>::value == true) {\n    if\
+    \ pre;\n\nvoid load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf\
+    \ + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
+    \  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
+    \  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left + offset > in_right)\
+    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\nvoid single_read(char&\
+    \ c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n\
+    }\nvoid single_read(string& S) {\n  skip_space();\n  while (true) {\n    if (in_left\
+    \ == in_right) load();\n    int i = in_left;\n    for (; i != in_right; i++) {\n\
+    \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
+    \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
+    template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
+    \ = nullptr>\ninline void single_read(T& x) {\n  if (in_left + offset > in_right)\
+    \ load();\n  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool\
+    \ minus = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
     \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
     \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n}\ninline void\
-    \ rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head,\
-    \ Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) {\n\
-    \  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = c;\n}\ninline void\
-    \ wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = b\
-    \ ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
-    \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
-    \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
-    \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
-    \    return;\n  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x <\
-    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n\
-    \  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n\
-    \    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n    \
-    \  outbuf[out_right] = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t\
-    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
-    \     outbuf[out_right] = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n \
-    \     out_right += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2) + 1, 3);\n      out_right += 3;\n    } else\
-    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n      out_right\
-    \ += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4, 12 - i);\n  out_right\
-    \ += 12 - i;\n}\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
-    inline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
-    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
-    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 13 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp\"\
+    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\ninline\
+    \ void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head&\
+    \ head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\ninline void\
+    \ single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++]\
+    \ = c;\n}\ninline void single_write(const bool& b) {\n  if (out_right > SZ - offset)\
+    \ flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void single_write(const\
+    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
+    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
+    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
+    \ out_right += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
+    \ = nullptr>\ninline void single_write(const T& _x) {\n  if (out_right > SZ -\
+    \ offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n\
+    \  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
+    \ (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
+    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
+    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
+    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
+    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
+    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
+    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
+    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
+    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
+    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
+    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
+    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
+    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 13 \"\
+    verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp\"\
     \n//\n#line 2 \"lct/splay-lazy-reversible.hpp\"\n\n#line 2 \"lct/lazy-reversible-bbst-base.hpp\"\
     \n\ntemplate <typename Tree, typename Node, typename T, typename E, T (*f)(T,\
     \ T),\n          T (*g)(T, E), E (*h)(E, E), T (*ts)(T)>\nstruct LazyReversibleBBST\
@@ -418,13 +450,14 @@ data:
   - modint/montgomery-modint.hpp
   - math/affine-transformation.hpp
   - misc/fastio.hpp
+  - internal/internal-type-traits.hpp
   - lct/splay-lazy-reversible.hpp
   - lct/lazy-reversible-bbst-base.hpp
   - lct/splay-base.hpp
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   requiredBy: []
-  timestamp: '2023-03-24 20:50:25+09:00'
+  timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp

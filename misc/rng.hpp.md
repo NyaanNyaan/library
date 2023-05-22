@@ -70,6 +70,9 @@ data:
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/internal-type-traits.test.cpp
+    title: verify/verify-unit-test/internal-type-traits.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/interval-union.test.cpp
     title: verify/verify-unit-test/interval-union.test.cpp
   - icon: ':heavy_check_mark:'
@@ -293,6 +296,7 @@ data:
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
   - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-unit-test/segment-tree-beats.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-unit-test/multiplicative-function.test.cpp

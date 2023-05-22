@@ -1,14 +1,59 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: internal/internal-type-traits.hpp
-    title: internal/internal-type-traits.hpp
+  _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: hashmap/hashmap-unerasable.hpp
+    title: hashmap/hashmap-unerasable.hpp
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-hash-function.hpp
+    title: "\u30CF\u30C3\u30B7\u30E5\u95A2\u6570"
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-math.hpp
+    title: internal/internal-math.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-garner.hpp
+    title: Garner's algorithm for bigint
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-gcd.hpp
+    title: math/bigint-gcd.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint.hpp
+    title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
     path: misc/all.hpp
     title: misc/all.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
+  - icon: ':heavy_check_mark:'
+    path: modulo/mod-kth-root.hpp
+    title: kth root(Tonelli-Shanks algorithm)
+  - icon: ':heavy_check_mark:'
+    path: modulo/mod-log.hpp
+    title: modulo/mod-log.hpp
+  - icon: ':heavy_check_mark:'
+    path: prime/fast-factorize.hpp
+    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+    title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
     title: verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
@@ -16,20 +61,41 @@ data:
     path: verify/verify-aoj-other/aoj-2995.test.cpp
     title: verify/verify-aoj-other/aoj-2995.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint-gcd.test.cpp
+    title: verify/verify-unit-test/bigint-gcd.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigint.test.cpp
+    title: verify/verify-unit-test/bigint.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint2.test.cpp
     title: verify/verify-unit-test/bigint2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/factorize.test.cpp
+    title: verify/verify-unit-test/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/internal-type-traits.test.cpp
+    title: verify/verify-unit-test/internal-type-traits.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/osak.test.cpp
+    title: verify/verify-unit-test/osak.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/primitive-root.test.cpp
+    title: verify/verify-unit-test/primitive-root.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/radix-sort.test.cpp
     title: verify/verify-unit-test/radix-sort.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
@@ -175,6 +241,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - icon: ':heavy_check_mark:'
@@ -183,6 +252,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+    title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
@@ -235,11 +307,20 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
+    title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0103.test.cpp
+    title: verify/verify-yuki/yuki-0103.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0303.test.cpp
+    title: verify/verify-yuki/yuki-0303.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
     title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
@@ -248,10 +329,8 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"misc/fastio.hpp\"\n\n#include <cstdio>\n#include <cstring>\n\
-    #include <string>\n#include <type_traits>\n#include <utility>\n\nusing namespace\
-    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
-    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+  bundledCode: "#line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\n\
+    using namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
     \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
     \                               is_same_v<T, __uint128_t>,\n                 \
     \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
@@ -268,118 +347,41 @@ data:
     \                                      \\\n  struct has_##var<T, std::void_t<typename\
     \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
     \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ],\
-    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
-    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
-    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
-    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
-    \ pre;\n\nvoid load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf\
-    \ + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
-    \  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left + offset > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\nvoid single_read(char&\
-    \ c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n\
-    }\nvoid single_read(string& S) {\n  skip_space();\n  while (true) {\n    if (in_left\
-    \ == in_right) load();\n    int i = in_left;\n    for (; i != in_right; i++) {\n\
-    \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
-    \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
-    template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_read(T& x) {\n  if (in_left + offset > in_right)\
-    \ load();\n  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool\
-    \ minus = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
-    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\ninline\
-    \ void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head&\
-    \ head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\ninline void\
-    \ single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++]\
-    \ = c;\n}\ninline void single_write(const bool& b) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void single_write(const\
-    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
-    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
-    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
-    \ out_right += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_write(const T& _x) {\n  if (out_right > SZ -\
-    \ offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n\
-    \  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
-    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
-    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
-    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
-    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
-    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
-    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
-    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
-    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
-    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
-    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
-    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
-    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n"
-  code: "#pragma once\n\n#include <cstdio>\n#include <cstring>\n#include <string>\n\
-    #include <type_traits>\n#include <utility>\n\nusing namespace std;\n\n#include\
-    \ \"../internal/internal-type-traits.hpp\"\n\nnamespace fastio {\nstatic constexpr\
-    \ int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ], outbuf[SZ];\n\
-    int in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n\
-    \  constexpr Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int\
-    \ n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10\
-    \ + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\nvoid load()\
-    \ {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf + in_left, len);\n\
-    \  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n  in_left = 0;\n\
-    }\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n  out_right = 0;\n\
-    }\nvoid skip_space() {\n  if (in_left + offset > in_right) load();\n  while (inbuf[in_left]\
-    \ <= ' ') in_left++;\n}\n\nvoid single_read(char& c) {\n  if (in_left + offset\
-    \ > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n}\nvoid single_read(string&\
-    \ S) {\n  skip_space();\n  while (true) {\n    if (in_left == in_right) load();\n\
-    \    int i = in_left;\n    for (; i != in_right; i++) {\n      if (inbuf[i] <=\
-    \ ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i, back_inserter(S));\n\
-    \    in_left = i;\n    if (i != in_right) break;\n  }\n}\ntemplate <typename T,\n\
-    \          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\ninline\
-    \ void single_read(T& x) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n\
-    \  char c = inbuf[in_left++];\n  [[maybe_unused]] bool minus = false;\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (c == '-') minus = true, c = inbuf[in_left++];\n\
-    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n\
-    \  }\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (minus) x =\
-    \ -x;\n  }\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\n\
-    inline void rd(Head& head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n\
-    }\n\ninline void single_write(const char& c) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  outbuf[out_right++] = c;\n}\ninline void single_write(const bool&\
-    \ b) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++] = b ? '1'\
-    \ : '0';\n}\ninline void single_write(const string& S) {\n  int i = 0;\n  while\
-    \ (i != (int)S.size()) {\n    if (out_right == SZ) flush();\n    int len = min((int)S.size()\
-    \ - i, SZ - out_right);\n    memcpy(outbuf + out_right, S.data() + i, sizeof(char)\
-    \ * len);\n    i += len, out_right += len;\n  }\n}\ntemplate <typename T,\n  \
-    \        enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\ninline void\
-    \ single_write(const T& _x) {\n  if (out_right > SZ - offset) flush();\n  if (_x\
-    \ == 0) {\n    outbuf[out_right++] = '0';\n    return;\n  }\n  T x = _x;\n  if\
-    \ constexpr (internal::is_broadly_signed_v<T>) {\n    if (x < 0) outbuf[out_right++]\
-    \ = '-', x = -x;\n  }\n  constexpr int buffer_size = sizeof(T) * 10 / 4;\n  char\
-    \ buf[buffer_size];\n  int i = buffer_size;\n  while (x >= 10000) {\n    i -=\
-    \ 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /= 10000;\n  }\n\
-    \  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] = '0' + x;\n   \
-    \   ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x) * 205) >> 11;\n\
-    \      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right] = '0' + q;\n\
-    \      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n    }\n  } else\
-    \ {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num + (x << 2)\
-    \ + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf + out_right,\
-    \ pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
-    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
-    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
-    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
-    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
-    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n"
-  dependsOn:
-  - internal/internal-type-traits.hpp
+    \n}  // namespace internal\n"
+  code: "#pragma once\n\n#include <type_traits>\nusing namespace std;\n\nnamespace\
+    \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
+    \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
+    \                   is_same_v<T, __uint128_t>,\n                           true_type,\
+    \ false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed =\n   \
+    \ typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n       \
+    \                    true_type, false_type>::type;\n\ntemplate <typename T>\n\
+    using is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T> || is_same_v<T,\
+    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
+    #define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n"
+  dependsOn: []
   isVerificationFile: false
-  path: misc/fastio.hpp
+  path: internal/internal-type-traits.hpp
   requiredBy:
   - misc/all.hpp
+  - misc/fastio.hpp
+  - math/bigint-gcd.hpp
+  - math/bigint-garner.hpp
+  - math/bigint.hpp
+  - hashmap/hashmap-unerasable.hpp
+  - prime/fast-factorize.hpp
+  - internal/internal-math.hpp
+  - internal/internal-hash-function.hpp
+  - modulo/mod-kth-root.hpp
+  - modulo/mod-log.hpp
   timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -390,9 +392,12 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
   - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
+  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
@@ -400,16 +405,24 @@ data:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/factorize.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - verify/verify-unit-test/internal-type-traits.test.cpp
+  - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
@@ -436,6 +449,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
@@ -449,6 +463,12 @@ data:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
@@ -461,10 +481,10 @@ data:
   - verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
-documentation_of: misc/fastio.hpp
+documentation_of: internal/internal-type-traits.hpp
 layout: document
 redirect_from:
-- /library/misc/fastio.hpp
-- /library/misc/fastio.hpp.html
-title: misc/fastio.hpp
+- /library/internal/internal-type-traits.hpp
+- /library/internal/internal-type-traits.hpp.html
+title: internal/internal-type-traits.hpp
 ---

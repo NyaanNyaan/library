@@ -2,14 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: hashmap/hashmap-unerasable.hpp
+    title: hashmap/hashmap-unerasable.hpp
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-hash-function.hpp
+    title: "\u30CF\u30C3\u30B7\u30E5\u95A2\u6570"
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-seed.hpp
+    title: internal/internal-seed.hpp
+  - icon: ':heavy_check_mark:'
     path: internal/internal-type-traits.hpp
     title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
-    path: lct/link-cut-tree-subtree-add.hpp
-    title: "\u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree"
-  - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
+    path: misc/rng.hpp
+    title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -35,30 +41,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum
+    PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
-    - https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp\"\
-    \n#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
-    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
-    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
-    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
-    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
-    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
-    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
-    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
-    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
-    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
-    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
-    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
-    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
-    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
-    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
-    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
-    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    - https://judge.yosupo.jp/problem/aplusb
+  bundledCode: "#line 1 \"verify/verify-unit-test/internal-type-traits.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
+    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
+    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
+    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
+    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
+    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
+    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
+    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
+    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
+    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
+    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
+    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
+    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
+    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
+    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
+    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
+    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -200,65 +206,38 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 5 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp\"\
-    \n//\n#line 2 \"lct/link-cut-tree-subtree-add.hpp\"\n\ntemplate <typename T, T\
-    \ (*add)(T, T), T (*sub)(T, T), T (*mul)(T, long long)>\nstruct LinkCutForSubtreeNode\
-    \ {\n  using Node = LinkCutForSubtreeNode;\n  using Ptr = LinkCutForSubtreeNode*;\n\
-    \  Ptr l, r, p;\n  T key, sum, lazy, cancel, subsum;\n  int cnt, subcnt;\n  bool\
-    \ rev;\n\n  LinkCutForSubtreeNode(const T& t = T())\n      : l(),\n        r(),\n\
-    \        p(),\n        key(t),\n        sum(t),\n        lazy(T()),\n        cancel(T()),\n\
-    \        subsum(T()),\n        cnt(1),\n        subcnt(0),\n        rev(false)\
-    \ {}\n  void make_normal(Ptr other) {\n    subsum = add(subsum, other->sum);\n\
-    \    subcnt += other->cnt;\n  }\n  void make_prefer(Ptr other) {\n    subsum =\
-    \ sub(subsum, other->sum);\n    subcnt -= other->cnt;\n  }\n  void merge(Ptr n1,\
-    \ Ptr n2) {\n    sum = add(add(n1 ? n1->sum : T(), key), add(subsum, n2 ? n2->sum\
-    \ : T()));\n    cnt = 1 + (n1 ? n1->cnt : 0) + (n2 ? n2->cnt : 0) + subcnt;\n\
-    \    if (n1) n1->cancel = lazy;\n    if (n2) n2->cancel = lazy;\n  }\n  void apply(const\
-    \ T& add_val) {\n    key = add(key, add_val);\n    sum = add(sum, mul(add_val,\
-    \ cnt));\n    lazy = add(lazy, add_val);\n    subsum = add(subsum, mul(add_val,\
-    \ subcnt));\n  }\n  void fetch() {\n    if (!p) return;\n    apply(p->lazy - cancel);\n\
-    \    cancel = p->lazy;\n  }\n};\n\ntemplate <typename T, T (*add)(T, T), T (*sub)(T,\
-    \ T), T (*mul)(T, long long)>\nstruct LinkCutTreeSubtreeQuery {\n  using Node\
-    \ = LinkCutForSubtreeNode<T, add, sub, mul>;\n  using Ptr = Node*;\n\n  void push_rev(Ptr\
-    \ t) {\n    if (!t) return;\n    if (t->rev) {\n      if (t->l) toggle(t->l);\n\
-    \      if (t->r) toggle(t->r);\n      t->rev = false;\n    }\n  }\n\n  void push(Ptr\
-    \ t) {\n    if (!t) return;\n    if (t->rev) {\n      if (t->l) toggle(t->l);\n\
-    \      if (t->r) toggle(t->r);\n      t->rev = false;\n    }\n    if (t->l) t->l->fetch();\n\
-    \    if (t->r) t->r->fetch();\n  }\n\n  Ptr update(Ptr t) {\n    if (!t) return\
-    \ t;\n    t->merge(t->l, t->r);\n    return t;\n  }\n\n  void splay(Ptr t) {\n\
-    \    push(t);\n    while (!is_root(t)) {\n      Ptr q = t->p;\n      if (is_root(q))\
-    \ {\n        push_rev(q), push_rev(t);\n        rot(t);\n      } else {\n    \
-    \    Ptr r = q->p;\n        push_rev(r), push_rev(q), push_rev(t);\n        if\
-    \ (pos(q) == pos(t))\n          rot(q), rot(t);\n        else\n          rot(t),\
-    \ rot(t);\n      }\n    }\n  }\n\n  Ptr expose(Ptr t) {\n    Ptr rp = nullptr;\n\
-    \    for (Ptr cur = t; cur; cur = cur->p) {\n      splay(cur), push(cur);\n  \
-    \    if (cur->r) cur->make_normal(cur->r);\n      if (rp) rp->fetch(), cur->make_prefer(rp);\n\
-    \      cur->r = rp;\n      rp = cur;\n    }\n    splay(t);\n    return rp;\n \
-    \ }\n\n  void evert(Ptr t) {\n    expose(t);\n    toggle(t);\n    push(t);\n \
-    \ }\n\n  void link(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    u->p =\
-    \ v, v->r = u;\n    update(v);\n  }\n\n  void cut(Ptr u, Ptr v) {\n    evert(u);\n\
-    \    expose(v);\n    v->l = u->p = nullptr;\n    update(v);\n  }\n\n  void toggle(Ptr\
-    \ t) {\n    swap(t->l, t->r);\n    t->rev ^= true;\n  }\n\n  T get_key(Ptr t)\
-    \ {\n    expose(t);\n    return t->key;\n  }\n\n  void set_key(Ptr t, const T&\
-    \ key) {\n    expose(t);\n    t->key = key;\n    update(t);\n  }\n\n  void subtree_add(Ptr\
-    \ t, const T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) t->l =\
-    \ nullptr, update(t);\n    t->apply(add_val);\n    if (l) t->l = l, update(t);\n\
-    \  }\n\n  T subtree_sum(Ptr t) {\n    expose(t);\n    return add(t->key, t->subsum);\n\
-    \  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n    while (x->l) this->push(x),\
-    \ x = x->l;\n    return x;\n  }\n\n protected:\n  bool is_root(Ptr t) { return\
-    \ !(t->p) || (t->p->l != t && t->p->r != t); }\n\n  inline int pos(Ptr t) {\n\
-    \    if (t->p) {\n      if (t->p->l == t) return -1;\n      if (t->p->r == t)\
-    \ return 1;\n    }\n    return 0;\n  }\n\n  void rot(Ptr t) {\n    Ptr x = t->p,\
-    \ y = x->p;\n    push(x), push(t);\n    if (pos(t) == -1) {\n      if ((x->l =\
-    \ t->r)) t->r->p = x;\n      t->r = x, x->p = t;\n    } else {\n      if ((x->r\
-    \ = t->l)) t->l->p = x;\n      t->l = x, x->p = t;\n    }\n    T xc = x->cancel;\n\
-    \    update(x), update(t);\n    t->cancel = xc;\n    if ((t->p = y)) {\n     \
-    \ if (y->l == x) y->l = t;\n      if (y->r == x) y->r = t;\n    }\n  }\n};\n\n\
-    /**\n * @brief \u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree\n\
-    \ */\n#line 7 \"verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp\"\
-    \n\nusing namespace Nyaan;\nll add(ll a, ll b) { return a + b; }\nll sub(ll a,\
-    \ ll b) { return a - b; }\nll mul(ll a, ll b) { return a * b; }\n\n#line 2 \"\
-    misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace std;\n\n#line\
+    \ 4 \"verify/verify-unit-test/internal-type-traits.test.cpp\"\n//\n#line 2 \"\
+    misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned\
+    \ long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
+    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
+    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"verify/verify-unit-test/internal-type-traits.test.cpp\"\
+    \n//\n#line 2 \"hashmap/hashmap-unerasable.hpp\"\n\n#line 6 \"hashmap/hashmap-unerasable.hpp\"\
+    \nusing namespace std;\n\n#line 2 \"internal/internal-hash-function.hpp\"\n\n\
+    #line 4 \"internal/internal-hash-function.hpp\"\nusing namespace std;\n\n#line\
+    \ 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\n\
+    using namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
+    \ {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \  .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >> 31, m\
+    \ ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() { return\
+    \ 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210 (\u624B\
+    \u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\u51FA\
+    \u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\u304F\
+    \u308B\u306E\u3067\u6CE8\u610F\nunsigned long long seed() {\n#if defined(NyaanLocal)\
+    \ && !defined(NON_DETERMINISTIC_SEED)\n  return deterministic_seed();\n#else\n\
+    \  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n#line\
     \ 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
     \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
     \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
@@ -277,83 +256,113 @@ data:
     \                                      \\\n  struct has_##var<T, std::void_t<typename\
     \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
     \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ],\
-    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
-    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
-    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
-    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
-    \ pre;\n\nvoid load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf\
-    \ + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
-    \  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left + offset > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\nvoid single_read(char&\
-    \ c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n\
-    }\nvoid single_read(string& S) {\n  skip_space();\n  while (true) {\n    if (in_left\
-    \ == in_right) load();\n    int i = in_left;\n    for (; i != in_right; i++) {\n\
-    \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
-    \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
-    template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_read(T& x) {\n  if (in_left + offset > in_right)\
-    \ load();\n  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool\
-    \ minus = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
-    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\ninline\
-    \ void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head&\
-    \ head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\ninline void\
-    \ single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++]\
-    \ = c;\n}\ninline void single_write(const bool& b) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void single_write(const\
-    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
-    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
-    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
-    \ out_right += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_write(const T& _x) {\n  if (out_right > SZ -\
-    \ offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n\
-    \  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
-    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
-    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
-    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
-    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
-    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
-    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
-    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
-    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
-    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
-    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
-    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
-    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 14 \"\
-    verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp\"\
-    \nvoid Nyaan::solve() {\n  using LCT = LinkCutTreeSubtreeQuery<ll, add, sub, mul>;\n\
-    \  LCT lct;\n\n  int N, Q;\n  rd(N, Q);\n\n  vector<LCT::Ptr> vs(N);\n  rep(i,\
-    \ N) {\n    int a;\n    rd(a);\n    vs[i] = new LCT::Node(a);\n  }\n  for (int\
-    \ i = 1; i < N; i++) {\n    int a, b;\n    rd(a, b);\n    lct.link(vs[a], vs[b]);\n\
-    \  }\n\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd == 0) {\n   \
-    \   int u, v, w, x;\n      rd(u, v, w, x);\n      lct.cut(vs[u], vs[v]);\n   \
-    \   lct.link(vs[w], vs[x]);\n    } else if (cmd == 1) {\n      int v, p, x;\n\
-    \      rd(v, p, x);\n      lct.evert(vs[p]);\n      lct.subtree_add(vs[v], x);\n\
-    \    } else {\n      int v, p;\n      rd(v, p);\n      lct.evert(vs[p]);\n   \
-    \   wtn(lct.subtree_sum(vs[v]));\n    }\n  }\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.yosupo.jp/problem/dynamic_tree_subtree_add_subtree_sum\"\
-    \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../lct/link-cut-tree-subtree-add.hpp\"\
-    \n\nusing namespace Nyaan;\nll add(ll a, ll b) { return a + b; }\nll sub(ll a,\
-    \ ll b) { return a - b; }\nll mul(ll a, ll b) { return a * b; }\n\n#include \"\
-    ../../misc/fastio.hpp\"\nvoid Nyaan::solve() {\n  using LCT = LinkCutTreeSubtreeQuery<ll,\
-    \ add, sub, mul>;\n  LCT lct;\n\n  int N, Q;\n  rd(N, Q);\n\n  vector<LCT::Ptr>\
-    \ vs(N);\n  rep(i, N) {\n    int a;\n    rd(a);\n    vs[i] = new LCT::Node(a);\n\
-    \  }\n  for (int i = 1; i < N; i++) {\n    int a, b;\n    rd(a, b);\n    lct.link(vs[a],\
-    \ vs[b]);\n  }\n\n  while (Q--) {\n    int cmd;\n    rd(cmd);\n    if (cmd ==\
-    \ 0) {\n      int u, v, w, x;\n      rd(u, v, w, x);\n      lct.cut(vs[u], vs[v]);\n\
-    \      lct.link(vs[w], vs[x]);\n    } else if (cmd == 1) {\n      int v, p, x;\n\
-    \      rd(v, p, x);\n      lct.evert(vs[p]);\n      lct.subtree_add(vs[v], x);\n\
-    \    } else {\n      int v, p;\n      rd(v, p);\n      lct.evert(vs[p]);\n   \
-    \   wtn(lct.subtree_sum(vs[v]));\n    }\n  }\n}\n"
+    \n}  // namespace internal\n#line 8 \"internal/internal-hash-function.hpp\"\n\n\
+    namespace internal {\n// \u6574\u6570, \u6574\u6570\u5217\u3092 64 bit unsigned\
+    \ int \u3078\u79FB\u3059\n\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
+    \nENABLE_HAS_TYPE(first_type);\nENABLE_HAS_TYPE(second_type);\nENABLE_HAS_TYPE(iterator);\n\
+    \ntemplate <typename T>\nu64 hash_function(const T& x) {\n  static u64 r = seed();\n\
+    \  constexpr u64 z1 = 11995408973635179863ULL;\n  if constexpr (is_broadly_integral_v<T>)\
+    \ {\n    // Integral\n    return (u64(x) ^ r) * z1;\n  } else if constexpr (has_first_type_v<T>\
+    \ && has_second_type_v<T>) {\n    // pair\n    constexpr u64 z2 = 10150724397891781847ULL;\n\
+    \    return hash_function(x.first) + hash_function(x.second) * z2;\n  } else if\
+    \ constexpr (has_iterator_v<T>) {\n    // Container\n    constexpr u64 mod = (1LL\
+    \ << 61) - 1;\n    constexpr u64 base = 950699498548472943ULL;\n    u64 m = 0;\n\
+    \    for (auto& z : x) {\n      u64 w;\n      if constexpr (is_broadly_integral_v<T>)\
+    \ {\n        w = u64(z) ^ r;\n      } else {\n        w = hash_function(z);\n\
+    \      }\n      u128 y = u128(m) * base + (w & mod);\n      m = (y & mod) + (y\
+    \ >> 61);\n      if (m >= mod) m -= mod;\n    }\n    m ^= m << 24, m ^= m >> 31,\
+    \ m ^= m << 35;\n    return m;\n  } else {\n    static_assert([]() { return false;\
+    \ }());\n  }\n}\n\ntemplate <typename Key>\nstruct HashObject {\n  size_t operator()(const\
+    \ Key& x) const { return hash_function(x); }\n};\n\n}  // namespace internal\n\
+    \n/*\n@brief \u30CF\u30C3\u30B7\u30E5\u95A2\u6570\n*/\n#line 9 \"hashmap/hashmap-unerasable.hpp\"\
+    \n\n// \u524A\u9664\u4E0D\u53EF\u80FD\u306A hashmap\n//\n// \u30C6\u30F3\u30D7\
+    \u30EC\u30FC\u30C8\u5F15\u6570\n// Key : Int, string, vector \u8FBA\u308A\u306F\
+    \u4F55\u3067\u3082 (\u5C0F\u6570\u7CFB\u306F\u7121\u7406)\n// Val : \u4F55\u3067\
+    \u3082\n// init_size : \u521D\u671F\u30D0\u30B1\u30C3\u30C8\u30B5\u30A4\u30BA\n\
+    // fixed_size : \u3053\u308C\u3092 true \u306B\u3059\u308B\u3059\u308B\u3068\u30D0\
+    \u30B1\u30C3\u30C8\u30B5\u30A4\u30BA\u304C\u56FA\u5B9A\u306B\u306A\u308B\n// \u5F15\
+    \u6570\n// _default_value : Val \u306E\u521D\u671F\u5024, \u3053\u306E\u5024\u3067\
+    \u521D\u671F\u5316\u3055\u308C\u308B\ntemplate <typename Key, typename Val, int\
+    \ init_size = 4,\n          bool fixed_size = false>\nstruct UnerasableHashMap\
+    \ {\n  static_assert(init_size >= 1 && (init_size & (init_size - 1)) == 0);\n\n\
+    \ private:\n  int N, occupied_num;\n  vector<Key> keys;\n  vector<Val> vals;\n\
+    \  vector<char> flag;\n  int shift;\n  const Val default_value;\n\n  // 64 bit\
+    \ \u306E hash \u3092\u8FD4\u3059\n  static unsigned long long get_hash(const Key&\
+    \ x) {\n    return internal::hash_function(x);\n  }\n\n  // \u30B5\u30A4\u30BA\
+    \u3092 n \u306B\u62E1\u5F35\u3059\u308B\n  void init(int n = init_size, bool reset\
+    \ = false) {\n    vector<Key> keys2(n);\n    vector<Val> vals2(n, default_value);\n\
+    \    vector<char> flag2(n);\n    int shift2 = 64 - __builtin_ctz(n);\n    swap(N,\
+    \ n), swap(keys, keys2);\n    swap(vals, vals2), swap(flag, flag2), swap(shift,\
+    \ shift2);\n    if (reset == false) {\n      for (int i = 0; i < (int)flag2.size();\
+    \ i++) {\n        if (flag2[i]) {\n          int j = hint(keys2[i]);\n       \
+    \   keys[j] = keys2[i];\n          vals[j] = vals2[i];\n          flag[j] = 1;\n\
+    \        }\n      }\n    }\n  }\n\n  int hint(const Key& k) {\n    int hash =\
+    \ get_hash(k) >> shift;\n    while (flag[hash] && keys[hash] != k) hash = (hash\
+    \ + 1) & (N - 1);\n    return hash;\n  }\n\n public:\n  UnerasableHashMap(const\
+    \ Val& _default_value = Val{})\n      : occupied_num(0), default_value(_default_value)\
+    \ {\n    init(init_size, true);\n  }\n\n  // key \u304C i \u3067\u3042\u308B\u8981\
+    \u7D20\u3078\u306E\u53C2\u7167\u3092\u8FD4\u3059\n  Val& operator[](const Key&\
+    \ k) {\n    int i = hint(k);\n    if (!flag[i]) {\n      if constexpr (fixed_size\
+    \ == false) {\n        if (occupied_num * 2 >= N) {\n          init(2 * N), i\
+    \ = hint(k);\n        }\n      }\n      keys[i] = k, flag[i] = 1, occupied_num++;\n\
+    \    }\n    return vals[i];\n  }\n\n  Val get(const Key& k) {\n    int i = hint(k);\n\
+    \    return flag[i] ? vals[i] : default_value;\n  }\n\n  // \u8D70\u67FB, f \u306B\
+    \u95A2\u6570 f(key, val) \u3092\u5165\u308C\u308B\n  template <typename F>\n \
+    \ void enumerate(const F f) {\n    for (int i = 0; i < (int)flag.size(); i++)\
+    \ {\n      if (flag[i]) f(keys[i], vals[i]);\n    }\n  }\n\n  int count(const\
+    \ Key& k) { return flag[hint(k)]; }\n  bool contain(const Key& k) { return flag[hint(k)];\
+    \ }\n  int size() const { return occupied_num; }\n  void reset() { init(init_size,\
+    \ true); }\n  void clear() { init(init_size, true); }\n};\n#line 10 \"verify/verify-unit-test/internal-type-traits.test.cpp\"\
+    \nusing namespace Nyaan;\n\ntemplate <typename T, bool low>\nT gen() {\n  if constexpr\
+    \ (internal::is_broadly_integral_v<T>) {\n    if (low) return rng(0, 5);\n   \
+    \ if constexpr (sizeof(T) == 16) {\n      return T(rng(0, TEN(18))) * TEN(18)\
+    \ + rng(0, TEN(18));\n    } else {\n      return rng(0, numeric_limits<T>::max()\
+    \ / 2);\n    }\n  } else if constexpr (internal::has_first_type_v<T> &&\n    \
+    \                   internal::has_second_type_v<T>) {\n    return T{gen<decltype(T::first),\
+    \ low>(), gen<decltype(T::second), low>()};\n  } else {\n    static_assert(internal::has_iterator_v<T>);\n\
+    \    T t;\n    int n = rng(0, 10);\n    rep(_, n) t.push_back(gen<typename T::value_type,\
+    \ low>());\n    return t;\n  }\n}\n\ntemplate <typename T, bool low>\nvoid test()\
+    \ {\n  map<T, int> mp1;\n  UnerasableHashMap<T, int> mp2(-1);\n  assert(mp2.get(T{})\
+    \ == -1);\n\n  rep(t, 3000) {\n    int cmd = rng(0, 1);\n    if (cmd == 0) {\n\
+    \      T x = gen<T, low>();\n      mp1[x] = mp2[x] = t;\n    } else {\n      T\
+    \ x = gen<T, low>();\n      int u = mp2.get(x);\n      int v = mp1.count(x) ?\
+    \ mp1[x] : -1;\n      assert(u == v);\n    }\n    assert(sz(mp1) == sz(mp2));\n\
+    \  }\n}\n\ntemplate <typename T>\nvoid test2() {\n  test<T, true>(), test<T, false>();\n\
+    }\n\nvoid q() {\n  test2<char>();\n  test2<unsigned char>();\n  test2<short>();\n\
+    \  test2<unsigned short>();\n  test2<int>();\n  test2<unsigned int>();\n  test2<long\
+    \ long>();\n  test2<unsigned long long>();\n  test2<__int128_t>();\n  test2<__uint128_t>();\n\
+    \n  test2<vector<int>>();\n\n  test2<pair<int, int>>();\n  test2<pair<__int128_t,\
+    \ __int128_t>>();\n\n  test2<vvi>();\n  test2<VV<vvi>>();\n  test2<V<pl>>();\n\
+    \  test2<pair<VV<pl>, V<pl>>>();\n  cerr << \"OK\" << endl;\n\n  int a, b;\n \
+    \ cin >> a >> b;\n  cout << a + b << endl;\n}\n\nvoid Nyaan::solve() {\n  int\
+    \ t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n//\n#include\
+    \ \"../../hashmap/hashmap-unerasable.hpp\"\n#include \"../../internal/internal-hash-function.hpp\"\
+    \n#include \"../../internal/internal-type-traits.hpp\"\nusing namespace Nyaan;\n\
+    \ntemplate <typename T, bool low>\nT gen() {\n  if constexpr (internal::is_broadly_integral_v<T>)\
+    \ {\n    if (low) return rng(0, 5);\n    if constexpr (sizeof(T) == 16) {\n  \
+    \    return T(rng(0, TEN(18))) * TEN(18) + rng(0, TEN(18));\n    } else {\n  \
+    \    return rng(0, numeric_limits<T>::max() / 2);\n    }\n  } else if constexpr\
+    \ (internal::has_first_type_v<T> &&\n                       internal::has_second_type_v<T>)\
+    \ {\n    return T{gen<decltype(T::first), low>(), gen<decltype(T::second), low>()};\n\
+    \  } else {\n    static_assert(internal::has_iterator_v<T>);\n    T t;\n    int\
+    \ n = rng(0, 10);\n    rep(_, n) t.push_back(gen<typename T::value_type, low>());\n\
+    \    return t;\n  }\n}\n\ntemplate <typename T, bool low>\nvoid test() {\n  map<T,\
+    \ int> mp1;\n  UnerasableHashMap<T, int> mp2(-1);\n  assert(mp2.get(T{}) == -1);\n\
+    \n  rep(t, 3000) {\n    int cmd = rng(0, 1);\n    if (cmd == 0) {\n      T x =\
+    \ gen<T, low>();\n      mp1[x] = mp2[x] = t;\n    } else {\n      T x = gen<T,\
+    \ low>();\n      int u = mp2.get(x);\n      int v = mp1.count(x) ? mp1[x] : -1;\n\
+    \      assert(u == v);\n    }\n    assert(sz(mp1) == sz(mp2));\n  }\n}\n\ntemplate\
+    \ <typename T>\nvoid test2() {\n  test<T, true>(), test<T, false>();\n}\n\nvoid\
+    \ q() {\n  test2<char>();\n  test2<unsigned char>();\n  test2<short>();\n  test2<unsigned\
+    \ short>();\n  test2<int>();\n  test2<unsigned int>();\n  test2<long long>();\n\
+    \  test2<unsigned long long>();\n  test2<__int128_t>();\n  test2<__uint128_t>();\n\
+    \n  test2<vector<int>>();\n\n  test2<pair<int, int>>();\n  test2<pair<__int128_t,\
+    \ __int128_t>>();\n\n  test2<vvi>();\n  test2<VV<vvi>>();\n  test2<V<pl>>();\n\
+    \  test2<pair<VV<pl>, V<pl>>>();\n  cerr << \"OK\" << endl;\n\n  int a, b;\n \
+    \ cin >> a >> b;\n  cout << a + b << endl;\n}\n\nvoid Nyaan::solve() {\n  int\
+    \ t = 1;\n  // in(t);\n  while (t--) q();\n}"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -361,19 +370,21 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - lct/link-cut-tree-subtree-add.hpp
-  - misc/fastio.hpp
+  - misc/rng.hpp
+  - hashmap/hashmap-unerasable.hpp
+  - internal/internal-hash-function.hpp
+  - internal/internal-seed.hpp
   - internal/internal-type-traits.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
+  path: verify/verify-unit-test/internal-type-traits.test.cpp
   requiredBy: []
-  timestamp: '2023-05-21 20:49:42+09:00'
+  timestamp: '2023-05-22 18:09:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
+documentation_of: verify/verify-unit-test/internal-type-traits.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
+- /verify/verify/verify-unit-test/internal-type-traits.test.cpp
+- /verify/verify/verify-unit-test/internal-type-traits.test.cpp.html
+title: verify/verify-unit-test/internal-type-traits.test.cpp
 ---

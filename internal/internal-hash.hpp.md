@@ -37,12 +37,12 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/inner/inner-hash.md
+    _deprecated_at_docs: docs/internal/internal-hash.md
     document_title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
     links: []
-  bundledCode: "#line 2 \"inner/inner-hash.hpp\"\n\nnamespace inner {\nusing i64 =\
-    \ long long;\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\ntemplate\
-    \ <int BASE_NUM = 2>\nstruct Hash : array<u64, BASE_NUM> {\n  using array<u64,\
+  bundledCode: "#line 2 \"internal/internal-hash.hpp\"\n\nnamespace internal {\nusing\
+    \ i64 = long long;\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
+    \ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64, BASE_NUM> {\n  using array<u64,\
     \ BASE_NUM>::operator[];\n  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64,\
     \ BASE_NUM>() {}\n\n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr\
     \ static Hash set(const i64 &a) {\n    Hash res;\n    fill(begin(res), end(res),\
@@ -87,12 +87,12 @@ data:
     \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
     \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
-    \u4F53\n * @docs docs/inner/inner-hash.md\n */\n"
-  code: "#pragma once\n\nnamespace inner {\nusing i64 = long long;\nusing u64 = unsigned\
-    \ long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct\
-    \ Hash : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n \
-    \ static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\
+    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
+    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n"
+  code: "#pragma once\n\nnamespace internal {\nusing i64 = long long;\nusing u64 =\
+    \ unsigned long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\n\
+    struct Hash : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n\
+    \  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\
     \n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr static Hash set(const\
     \ i64 &a) {\n    Hash res;\n    fill(begin(res), end(res), cast(a));\n    return\
     \ res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for (int i = 0; i < n; i++)\n\
@@ -135,16 +135,16 @@ data:
     \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
     \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
-    \u4F53\n * @docs docs/inner/inner-hash.md\n */\n"
+    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
+    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n"
   dependsOn: []
   isVerificationFile: false
-  path: inner/inner-hash.hpp
+  path: internal/internal-hash.hpp
   requiredBy:
   - tree/tree-hash.hpp
   - string/rolling-hash.hpp
   - string/rolling-hash-2d.hpp
-  timestamp: '2023-01-31 00:28:06+09:00'
+  timestamp: '2023-05-19 10:25:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
@@ -154,11 +154,11 @@ data:
   - verify/verify-unit-test/string-search.test.cpp
   - verify/verify-unit-test/inner-hash.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
-documentation_of: inner/inner-hash.hpp
+documentation_of: internal/internal-hash.hpp
 layout: document
 redirect_from:
-- /library/inner/inner-hash.hpp
-- /library/inner/inner-hash.hpp.html
+- /library/internal/internal-hash.hpp
+- /library/internal/internal-hash.hpp.html
 title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
 ---
 ## ハッシュ構造体

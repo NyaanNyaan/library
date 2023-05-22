@@ -2,8 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: inner/inner_math.hpp
-    title: inner/inner_math.hpp
+    path: internal/internal-math.hpp
+    title: internal/internal-math.hpp
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
@@ -28,16 +31,37 @@ data:
     _deprecated_at_docs: docs/modulo/mod-kth-root.md
     document_title: kth root(Tonelli-Shanks algorithm)
     links: []
-  bundledCode: "#line 2 \"modulo/mod-kth-root.hpp\"\n\n\n\n#line 2 \"inner/inner_math.hpp\"\
-    \n\nnamespace inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64\
-    \ = int64_t;\nusing u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b)\
-    \ {\n  while (b) swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT\
-    \ inv(T a, T p) {\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n\
-    \    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return\
-    \ y < 0 ? y + p : y;\n}\n\ntemplate <typename T, typename U>\nT modpow(T a, U\
-    \ n, T p) {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if\
-    \ (n & 1) ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line\
-    \ 2 \"modint/arbitrary-prime-modint.hpp\"\n\n\n\nstruct ArbitraryLazyMontgomeryModInt\
+  bundledCode: "#line 2 \"modulo/mod-kth-root.hpp\"\n\n#line 2 \"internal/internal-math.hpp\"\
+    \n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\n\
+    using namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace\
+    \ internal {\n\n#include <cassert>\nusing namespace std;\n\n// a^{-1} mod p \u3092\
+    \u8A08\u7B97\u3002gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\nT\
+    \ inv(T a, T p) {\n  a = a % p;\n  if constexpr (is_broadly_signed_v<T>) {\n \
+    \   if (a < 0) a += p;\n  }\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q\
+    \ = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b ==\
+    \ 1);\n  return y < 0 ? y + p : y;\n}\n\n// T : \u5024\u306E\u578B\n// U : T*T\
+    \ \u304C\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044\u578B\ntemplate\
+    \ <typename T, typename U>\nT modpow(T a, __int128_t n, T p) {\n  T ret = 1 %\
+    \ p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a %\
+    \ p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n}  // namespace internal\n#line 2\
+    \ \"modint/arbitrary-prime-modint.hpp\"\n\n\n\nstruct ArbitraryLazyMontgomeryModInt\
     \ {\n  using mint = ArbitraryLazyMontgomeryModInt;\n  using i32 = int32_t;\n \
     \ using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static u32 mod;\n  static\
     \ u32 r;\n  static u32 n2;\n\n  static u32 get_r() {\n    u32 ret = mod;\n   \
@@ -101,7 +125,8 @@ data:
     \ get() const {\n    u64 ret = reduce(a);\n    return ret >= mod ? ret - mod :\
     \ ret;\n  }\n\n  static u64 get_mod() { return mod; }\n};\ntypename montgomery64::u64\
     \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 2 \"prime/fast-factorize.hpp\"\
-    \n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
+    \n\n#include <cstdint>\n#include <numeric>\n#include <vector>\nusing namespace\
+    \ std;\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
     using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
     \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
     \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
@@ -116,7 +141,7 @@ data:
     \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
     \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
     \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"prime/fast-factorize.hpp\"\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 12 \"prime/fast-factorize.hpp\"\
     \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
     bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
     \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
@@ -134,11 +159,11 @@ data:
     \ y = rnd_();\n    T g = 1;\n    constexpr int m = 128;\n    for (int r = 1; g\
     \ == 1; r <<= 1) {\n      x = y;\n      for (int i = 0; i < r; ++i) y = f(y);\n\
     \      for (int k = 0; g == 1 && k < r; k += m) {\n        ys = y;\n        for\
-    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = inner::gcd<T>(q.get(),\
-    \ n);\n      }\n    }\n    if (g == n) do\n        g = inner::gcd<T>((x - (ys\
-    \ = f(ys))).get(), n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n\
-    \  exit(1);\n}\n\nusing i64 = long long;\n\nvector<i64> inner_factorize(u64 n)\
-    \ {\n  if (n <= 1) return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
+    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = gcd(q.get(),\
+    \ n);\n      }\n    }\n    if (g == n) do\n        g = gcd((x - (ys = f(ys))).get(),\
+    \ n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n  exit(1);\n}\n\n\
+    using i64 = long long;\n\nvector<i64> inner_factorize(u64 n) {\n  if (n <= 1)\
+    \ return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
     \ uint32_t>(n);\n  else\n    p = pollard_rho<montgomery64, uint64_t>(n);\n  if\
     \ (p == n) return {i64(p)};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
     \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<i64>\
@@ -155,7 +180,7 @@ data:
     \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
     using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
-    \ docs/prime/fast-factorize.md\n */\n#line 9 \"modulo/mod-kth-root.hpp\"\n\nnamespace\
+    \ docs/prime/fast-factorize.md\n */\n#line 7 \"modulo/mod-kth-root.hpp\"\n\nnamespace\
     \ kth_root_mod {\n\n// fast BS-GS\ntemplate <typename T>\nstruct Memo {\n  Memo(const\
     \ T &g, int s, int period)\n      : size(1 << __lg(min(s, period))),\n       \
     \ mask(size - 1),\n        period(period),\n        vs(size),\n        os(size\
@@ -167,41 +192,40 @@ data:
     \ i = os[m]; i < os[m + 1]; ++i) {\n        if (x == vs[i].first) {\n        \
     \  int ret = vs[i].second - t;\n          return ret < 0 ? ret + period : ret;\n\
     \        }\n      }\n    }\n    assert(0);\n  }\n  T gpow;\n  int size, mask,\
-    \ period;\n  vector<pair<T, int> > vs;\n  vector<int> os;\n};\n\nusing inner::gcd;\n\
-    using inner::inv;\nusing inner::modpow;\ntemplate <typename INT, typename LINT,\
-    \ typename mint>\nmint pe_root(INT c, INT pi, INT ei, INT p) {\n  if (mint::get_mod()\
-    \ != decltype(mint::a)(p)) mint::set_mod(p);\n  INT s = p - 1, t = 0;\n  while\
-    \ (s % pi == 0) s /= pi, ++t;\n  INT pe = 1;\n  for (INT _ = 0; _ < ei; ++_) pe\
-    \ *= pi;\n\n  INT u = inv(pe - s % pe, pe);\n  mint mc = c, one = 1;\n  mint z\
-    \ = mc.pow((s * u + 1) / pe);\n  mint zpe = mc.pow(s * u);\n  if (zpe == one)\
-    \ return z;\n  assert(t > ei);\n  \n  mint vs;\n  {\n    INT ptm1 = 1;\n    for\
-    \ (INT _ = 0; _ < t - 1; ++_) ptm1 *= pi;\n    for (mint v = 2;; v += one) {\n\
-    \      vs = v.pow(s);\n      if (vs.pow(ptm1) != one) break;\n    }\n  }\n\n \
-    \ mint vspe = vs.pow(pe);\n  INT vs_e = ei;\n  mint base = vspe;\n  for (INT _\
-    \ = 0; _ < t - ei - 1; _++) base = base.pow(pi);\n  Memo<mint> memo(base, (INT)(sqrt(t\
-    \ - ei) * sqrt(pi)) + 1, pi);\n\n  while (zpe != one) {\n    mint tmp = zpe;\n\
-    \    INT td = 0;\n    while (tmp != 1) ++td, tmp = tmp.pow(pi);\n    INT e = t\
-    \ - td;\n    while (vs_e != e) {\n      vs = vs.pow(pi);\n      vspe = vspe.pow(pi);\n\
-    \      ++vs_e;\n    }\n\n    // BS-GS ... find (zpe * ( vspe ^ n ) ) ^( p_i ^\
-    \ (td - 1) ) = 1\n    mint base_zpe = zpe.inverse();\n    for (INT _ = 0; _ <\
-    \ td - 1; _++) base_zpe = base_zpe.pow(pi);\n    INT bsgs = memo.find(base_zpe);\n\
+    \ period;\n  vector<pair<T, int> > vs;\n  vector<int> os;\n};\n\ntemplate <typename\
+    \ INT, typename LINT, typename mint>\nmint pe_root(INT c, INT pi, INT ei, INT\
+    \ p) {\n  if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n  INT\
+    \ s = p - 1, t = 0;\n  while (s % pi == 0) s /= pi, ++t;\n  INT pe = 1;\n  for\
+    \ (INT _ = 0; _ < ei; ++_) pe *= pi;\n\n  INT u = internal::inv(pe - s % pe, pe);\n\
+    \  mint mc = c, one = 1;\n  mint z = mc.pow((s * u + 1) / pe);\n  mint zpe = mc.pow(s\
+    \ * u);\n  if (zpe == one) return z;\n  assert(t > ei);\n\n  mint vs;\n  {\n \
+    \   INT ptm1 = 1;\n    for (INT _ = 0; _ < t - 1; ++_) ptm1 *= pi;\n    for (mint\
+    \ v = 2;; v += one) {\n      vs = v.pow(s);\n      if (vs.pow(ptm1) != one) break;\n\
+    \    }\n  }\n\n  mint vspe = vs.pow(pe);\n  INT vs_e = ei;\n  mint base = vspe;\n\
+    \  for (INT _ = 0; _ < t - ei - 1; _++) base = base.pow(pi);\n  Memo<mint> memo(base,\
+    \ (INT)(sqrt(t - ei) * sqrt(pi)) + 1, pi);\n\n  while (zpe != one) {\n    mint\
+    \ tmp = zpe;\n    INT td = 0;\n    while (tmp != 1) ++td, tmp = tmp.pow(pi);\n\
+    \    INT e = t - td;\n    while (vs_e != e) {\n      vs = vs.pow(pi);\n      vspe\
+    \ = vspe.pow(pi);\n      ++vs_e;\n    }\n\n    // BS-GS ... find (zpe * ( vspe\
+    \ ^ n ) ) ^( p_i ^ (td - 1) ) = 1\n    mint base_zpe = zpe.inverse();\n    for\
+    \ (INT _ = 0; _ < td - 1; _++) base_zpe = base_zpe.pow(pi);\n    INT bsgs = memo.find(base_zpe);\n\
     \n    z *= vs.pow(bsgs);\n    zpe *= vspe.pow(bsgs);\n  }\n  return z;\n}\n\n\
     template <typename INT, typename LINT, typename mint>\nINT inner_kth_root(INT\
     \ a, INT k, INT p) {\n  a %= p;\n  if (k == 0) return a == 1 ? a : -1;\n  if (a\
     \ <= 1 || k <= 1) return a;\n  assert(p > 2);\n  if (mint::get_mod() != decltype(mint::a)(p))\
-    \ mint::set_mod(p);\n  INT g = gcd(p - 1, k);\n  if (modpow<INT, LINT>(a, (p -\
-    \ 1) / g, p) != 1) return -1;\n  a = mint(a).pow(inv(k / g, (p - 1) / g)).get();\n\
-    \  unordered_map<INT, int> fac;\n  for (auto &f : factorize(g)) fac[f]++;\n  if\
-    \ (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n  for (auto pp\
-    \ : fac)\n    a = pe_root<INT, LINT, mint>(a, pp.first, pp.second, p).get();\n\
-    \  return a;\n}\n\nint64_t kth_root(int64_t a, int64_t k, int64_t p) {\n  if (max({a,\
-    \ k, p}) < (1LL << 30))\n    return inner_kth_root<int32_t, int64_t, ArbitraryLazyMontgomeryModInt>(a,\
-    \ k,\n                                                                       \
-    \    p);\n  else\n    return inner_kth_root<int64_t, __int128_t, montgomery64>(a,\
-    \ k, p);\n}\n\n}  // namespace kth_root_mod\nusing kth_root_mod::kth_root;\n\n\
-    /**\n * @brief kth root(Tonelli-Shanks algorithm)\n * @docs docs/modulo/mod-kth-root.md\n\
-    \ */\n"
-  code: "#pragma once\n\n\n\n#include \"../inner/inner_math.hpp\"\n#include \"../modint/arbitrary-prime-modint.hpp\"\
+    \ mint::set_mod(p);\n  INT g = gcd(p - 1, k);\n  if (internal::modpow<INT, LINT>(a,\
+    \ (p - 1) / g, p) != 1) return -1;\n  a = mint(a).pow(internal::inv(k / g, (p\
+    \ - 1) / g)).get();\n  unordered_map<INT, int> fac;\n  for (auto &f : factorize(g))\
+    \ fac[f]++;\n  if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n\
+    \  for (auto pp : fac)\n    a = pe_root<INT, LINT, mint>(a, pp.first, pp.second,\
+    \ p).get();\n  return a;\n}\n\nint64_t kth_root(int64_t a, int64_t k, int64_t\
+    \ p) {\n  if (max({a, k, p}) < (1LL << 30))\n    return inner_kth_root<int32_t,\
+    \ int64_t, ArbitraryLazyMontgomeryModInt>(a, k,\n                            \
+    \                                               p);\n  else\n    return inner_kth_root<int64_t,\
+    \ __int128_t, montgomery64>(a, k, p);\n}\n\n}  // namespace kth_root_mod\nusing\
+    \ kth_root_mod::kth_root;\n\n/**\n * @brief kth root(Tonelli-Shanks algorithm)\n\
+    \ * @docs docs/modulo/mod-kth-root.md\n */\n"
+  code: "#pragma once\n\n#include \"../internal/internal-math.hpp\"\n#include \"../modint/arbitrary-prime-modint.hpp\"\
     \n#include \"../modint/modint-montgomery64.hpp\"\n#include \"../prime/fast-factorize.hpp\"\
     \n\nnamespace kth_root_mod {\n\n// fast BS-GS\ntemplate <typename T>\nstruct Memo\
     \ {\n  Memo(const T &g, int s, int period)\n      : size(1 << __lg(min(s, period))),\n\
@@ -214,42 +238,42 @@ data:
     \ & mask), i = os[m]; i < os[m + 1]; ++i) {\n        if (x == vs[i].first) {\n\
     \          int ret = vs[i].second - t;\n          return ret < 0 ? ret + period\
     \ : ret;\n        }\n      }\n    }\n    assert(0);\n  }\n  T gpow;\n  int size,\
-    \ mask, period;\n  vector<pair<T, int> > vs;\n  vector<int> os;\n};\n\nusing inner::gcd;\n\
-    using inner::inv;\nusing inner::modpow;\ntemplate <typename INT, typename LINT,\
-    \ typename mint>\nmint pe_root(INT c, INT pi, INT ei, INT p) {\n  if (mint::get_mod()\
-    \ != decltype(mint::a)(p)) mint::set_mod(p);\n  INT s = p - 1, t = 0;\n  while\
-    \ (s % pi == 0) s /= pi, ++t;\n  INT pe = 1;\n  for (INT _ = 0; _ < ei; ++_) pe\
-    \ *= pi;\n\n  INT u = inv(pe - s % pe, pe);\n  mint mc = c, one = 1;\n  mint z\
-    \ = mc.pow((s * u + 1) / pe);\n  mint zpe = mc.pow(s * u);\n  if (zpe == one)\
-    \ return z;\n  assert(t > ei);\n  \n  mint vs;\n  {\n    INT ptm1 = 1;\n    for\
-    \ (INT _ = 0; _ < t - 1; ++_) ptm1 *= pi;\n    for (mint v = 2;; v += one) {\n\
-    \      vs = v.pow(s);\n      if (vs.pow(ptm1) != one) break;\n    }\n  }\n\n \
-    \ mint vspe = vs.pow(pe);\n  INT vs_e = ei;\n  mint base = vspe;\n  for (INT _\
-    \ = 0; _ < t - ei - 1; _++) base = base.pow(pi);\n  Memo<mint> memo(base, (INT)(sqrt(t\
-    \ - ei) * sqrt(pi)) + 1, pi);\n\n  while (zpe != one) {\n    mint tmp = zpe;\n\
-    \    INT td = 0;\n    while (tmp != 1) ++td, tmp = tmp.pow(pi);\n    INT e = t\
-    \ - td;\n    while (vs_e != e) {\n      vs = vs.pow(pi);\n      vspe = vspe.pow(pi);\n\
-    \      ++vs_e;\n    }\n\n    // BS-GS ... find (zpe * ( vspe ^ n ) ) ^( p_i ^\
-    \ (td - 1) ) = 1\n    mint base_zpe = zpe.inverse();\n    for (INT _ = 0; _ <\
-    \ td - 1; _++) base_zpe = base_zpe.pow(pi);\n    INT bsgs = memo.find(base_zpe);\n\
-    \n    z *= vs.pow(bsgs);\n    zpe *= vspe.pow(bsgs);\n  }\n  return z;\n}\n\n\
-    template <typename INT, typename LINT, typename mint>\nINT inner_kth_root(INT\
-    \ a, INT k, INT p) {\n  a %= p;\n  if (k == 0) return a == 1 ? a : -1;\n  if (a\
-    \ <= 1 || k <= 1) return a;\n  assert(p > 2);\n  if (mint::get_mod() != decltype(mint::a)(p))\
-    \ mint::set_mod(p);\n  INT g = gcd(p - 1, k);\n  if (modpow<INT, LINT>(a, (p -\
-    \ 1) / g, p) != 1) return -1;\n  a = mint(a).pow(inv(k / g, (p - 1) / g)).get();\n\
-    \  unordered_map<INT, int> fac;\n  for (auto &f : factorize(g)) fac[f]++;\n  if\
-    \ (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n  for (auto pp\
-    \ : fac)\n    a = pe_root<INT, LINT, mint>(a, pp.first, pp.second, p).get();\n\
-    \  return a;\n}\n\nint64_t kth_root(int64_t a, int64_t k, int64_t p) {\n  if (max({a,\
-    \ k, p}) < (1LL << 30))\n    return inner_kth_root<int32_t, int64_t, ArbitraryLazyMontgomeryModInt>(a,\
-    \ k,\n                                                                       \
-    \    p);\n  else\n    return inner_kth_root<int64_t, __int128_t, montgomery64>(a,\
-    \ k, p);\n}\n\n}  // namespace kth_root_mod\nusing kth_root_mod::kth_root;\n\n\
-    /**\n * @brief kth root(Tonelli-Shanks algorithm)\n * @docs docs/modulo/mod-kth-root.md\n\
-    \ */\n"
+    \ mask, period;\n  vector<pair<T, int> > vs;\n  vector<int> os;\n};\n\ntemplate\
+    \ <typename INT, typename LINT, typename mint>\nmint pe_root(INT c, INT pi, INT\
+    \ ei, INT p) {\n  if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n\
+    \  INT s = p - 1, t = 0;\n  while (s % pi == 0) s /= pi, ++t;\n  INT pe = 1;\n\
+    \  for (INT _ = 0; _ < ei; ++_) pe *= pi;\n\n  INT u = internal::inv(pe - s %\
+    \ pe, pe);\n  mint mc = c, one = 1;\n  mint z = mc.pow((s * u + 1) / pe);\n  mint\
+    \ zpe = mc.pow(s * u);\n  if (zpe == one) return z;\n  assert(t > ei);\n\n  mint\
+    \ vs;\n  {\n    INT ptm1 = 1;\n    for (INT _ = 0; _ < t - 1; ++_) ptm1 *= pi;\n\
+    \    for (mint v = 2;; v += one) {\n      vs = v.pow(s);\n      if (vs.pow(ptm1)\
+    \ != one) break;\n    }\n  }\n\n  mint vspe = vs.pow(pe);\n  INT vs_e = ei;\n\
+    \  mint base = vspe;\n  for (INT _ = 0; _ < t - ei - 1; _++) base = base.pow(pi);\n\
+    \  Memo<mint> memo(base, (INT)(sqrt(t - ei) * sqrt(pi)) + 1, pi);\n\n  while (zpe\
+    \ != one) {\n    mint tmp = zpe;\n    INT td = 0;\n    while (tmp != 1) ++td,\
+    \ tmp = tmp.pow(pi);\n    INT e = t - td;\n    while (vs_e != e) {\n      vs =\
+    \ vs.pow(pi);\n      vspe = vspe.pow(pi);\n      ++vs_e;\n    }\n\n    // BS-GS\
+    \ ... find (zpe * ( vspe ^ n ) ) ^( p_i ^ (td - 1) ) = 1\n    mint base_zpe =\
+    \ zpe.inverse();\n    for (INT _ = 0; _ < td - 1; _++) base_zpe = base_zpe.pow(pi);\n\
+    \    INT bsgs = memo.find(base_zpe);\n\n    z *= vs.pow(bsgs);\n    zpe *= vspe.pow(bsgs);\n\
+    \  }\n  return z;\n}\n\ntemplate <typename INT, typename LINT, typename mint>\n\
+    INT inner_kth_root(INT a, INT k, INT p) {\n  a %= p;\n  if (k == 0) return a ==\
+    \ 1 ? a : -1;\n  if (a <= 1 || k <= 1) return a;\n  assert(p > 2);\n  if (mint::get_mod()\
+    \ != decltype(mint::a)(p)) mint::set_mod(p);\n  INT g = gcd(p - 1, k);\n  if (internal::modpow<INT,\
+    \ LINT>(a, (p - 1) / g, p) != 1) return -1;\n  a = mint(a).pow(internal::inv(k\
+    \ / g, (p - 1) / g)).get();\n  unordered_map<INT, int> fac;\n  for (auto &f :\
+    \ factorize(g)) fac[f]++;\n  if (mint::get_mod() != decltype(mint::a)(p)) mint::set_mod(p);\n\
+    \  for (auto pp : fac)\n    a = pe_root<INT, LINT, mint>(a, pp.first, pp.second,\
+    \ p).get();\n  return a;\n}\n\nint64_t kth_root(int64_t a, int64_t k, int64_t\
+    \ p) {\n  if (max({a, k, p}) < (1LL << 30))\n    return inner_kth_root<int32_t,\
+    \ int64_t, ArbitraryLazyMontgomeryModInt>(a, k,\n                            \
+    \                                               p);\n  else\n    return inner_kth_root<int64_t,\
+    \ __int128_t, montgomery64>(a, k, p);\n}\n\n}  // namespace kth_root_mod\nusing\
+    \ kth_root_mod::kth_root;\n\n/**\n * @brief kth root(Tonelli-Shanks algorithm)\n\
+    \ * @docs docs/modulo/mod-kth-root.md\n */\n"
   dependsOn:
-  - inner/inner_math.hpp
+  - internal/internal-math.hpp
+  - internal/internal-type-traits.hpp
   - modint/arbitrary-prime-modint.hpp
   - modint/modint-montgomery64.hpp
   - prime/fast-factorize.hpp
@@ -257,7 +281,7 @@ data:
   isVerificationFile: false
   path: modulo/mod-kth-root.hpp
   requiredBy: []
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp

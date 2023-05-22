@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: inner/inner-hash.hpp
+    path: internal/internal-hash.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
@@ -18,8 +18,9 @@ data:
   attributes:
     document_title: "\u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5"
     links: []
-  bundledCode: "#line 2 \"tree/tree-hash.hpp\"\n\n#line 2 \"inner/inner-hash.hpp\"\
-    \n\nnamespace inner {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
+  bundledCode: "#line 2 \"tree/tree-hash.hpp\"\n\n#include <array>\n#include <chrono>\n\
+    #include <random>\n#include <vector>\nusing namespace std;\n\n#line 2 \"internal/internal-hash.hpp\"\
+    \n\nnamespace internal {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64,\
     \ BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n  static constexpr int\
     \ n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\n  static constexpr\
@@ -65,9 +66,9 @@ data:
     \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
     \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
-    \u4F53\n * @docs docs/inner/inner-hash.md\n */\n#line 4 \"tree/tree-hash.hpp\"\
-    \n\ntemplate <typename G>\nstruct TreeHash {\n  using Hash = inner::Hash<3>;\n\
+    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
+    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n#line 10 \"tree/tree-hash.hpp\"\
+    \n\ntemplate <typename G>\nstruct TreeHash {\n  using Hash = internal::Hash<3>;\n\
     \n  const G& g;\n  int n;\n  vector<Hash> hash;\n  vector<int> depth;\n\n  static\
     \ vector<Hash>& xs() {\n    static vector<Hash> _xs;\n    return _xs;\n  }\n\n\
     \  TreeHash(const G& _g, int root = 0) : g(_g), n(g.size()) {\n    hash.resize(n);\n\
@@ -78,12 +79,13 @@ data:
     \ g[c]) {\n      if (d != p) h = h * (x + hash[d]);\n    }\n    hash[c] = h;\n\
     \    return depth[c] = dep;\n  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\
     \u306E\u30CF\u30C3\u30B7\u30E5\n */\n"
-  code: "#pragma once\n\n#include \"../inner/inner-hash.hpp\"\n\ntemplate <typename\
-    \ G>\nstruct TreeHash {\n  using Hash = inner::Hash<3>;\n\n  const G& g;\n  int\
-    \ n;\n  vector<Hash> hash;\n  vector<int> depth;\n\n  static vector<Hash>& xs()\
-    \ {\n    static vector<Hash> _xs;\n    return _xs;\n  }\n\n  TreeHash(const G&\
-    \ _g, int root = 0) : g(_g), n(g.size()) {\n    hash.resize(n);\n    depth.resize(n,\
-    \ 0);\n    while ((int)xs().size() <= n) xs().push_back(Hash::get_basis());\n\
+  code: "#pragma once\n\n#include <array>\n#include <chrono>\n#include <random>\n\
+    #include <vector>\nusing namespace std;\n\n#include \"../internal/internal-hash.hpp\"\
+    \n\ntemplate <typename G>\nstruct TreeHash {\n  using Hash = internal::Hash<3>;\n\
+    \n  const G& g;\n  int n;\n  vector<Hash> hash;\n  vector<int> depth;\n\n  static\
+    \ vector<Hash>& xs() {\n    static vector<Hash> _xs;\n    return _xs;\n  }\n\n\
+    \  TreeHash(const G& _g, int root = 0) : g(_g), n(g.size()) {\n    hash.resize(n);\n\
+    \    depth.resize(n, 0);\n    while ((int)xs().size() <= n) xs().push_back(Hash::get_basis());\n\
     \    dfs(root, -1);\n  }\n\n private:\n  int dfs(int c, int p) {\n    int dep\
     \ = 0;\n    for (auto& d : g[c]) {\n      if (d != p) dep = max(dep, dfs(d, c)\
     \ + 1);\n    }\n    Hash x = xs()[dep], h = Hash::set(1);\n    for (auto& d :\
@@ -91,11 +93,11 @@ data:
     \    return depth[c] = dep;\n  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\
     \u306E\u30CF\u30C3\u30B7\u30E5\n */\n"
   dependsOn:
-  - inner/inner-hash.hpp
+  - internal/internal-hash.hpp
   isVerificationFile: false
   path: tree/tree-hash.hpp
   requiredBy: []
-  timestamp: '2023-01-31 00:28:06+09:00'
+  timestamp: '2023-05-19 10:25:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1789.test.cpp

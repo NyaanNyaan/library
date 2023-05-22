@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: inner/inner-hash.hpp
+    path: internal/internal-hash.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
@@ -22,8 +22,9 @@ data:
     _deprecated_at_docs: docs/string/rolling-hash.md
     document_title: Rolling Hash
     links: []
-  bundledCode: "#line 2 \"string/rolling-hash.hpp\"\n\n#line 2 \"inner/inner-hash.hpp\"\
-    \n\nnamespace inner {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
+  bundledCode: "#line 2 \"string/rolling-hash.hpp\"\n\n#include <string>\n#include\
+    \ <vector>\nusing namespace std;\n\n#line 2 \"internal/internal-hash.hpp\"\n\n\
+    namespace internal {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64,\
     \ BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n  static constexpr int\
     \ n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\n  static constexpr\
@@ -69,41 +70,42 @@ data:
     \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
     \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
-    \u4F53\n * @docs docs/inner/inner-hash.md\n */\n#line 4 \"string/rolling-hash.hpp\"\
+    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
+    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n#line 8 \"string/rolling-hash.hpp\"\
     \n\ntemplate <typename Str, int BASE_NUM = 2>\nstruct RollingHash {\n  using Hash\
-    \ = inner::Hash<BASE_NUM>;\n  Str data;\n  vector<Hash> hs, pw;\n  int s;\n  static\
-    \ Hash basis;\n\n  RollingHash(const Str &S = Str()) { build(S); }\n\n  void build(const\
-    \ Str &S) {\n    data = S;\n    s = S.size();\n    hs.resize(s + 1);\n    pw.resize(s\
-    \ + 1);\n    pw[0] = Hash::set(1);\n    hs[0] = Hash::set(0);\n    for (int i\
-    \ = 1; i <= s; i++) {\n      pw[i] = pw[i - 1] * basis;\n      hs[i] = pfma(hs[i\
-    \ - 1], basis, S[i - 1]);\n    }\n  }\n\n  Hash get(int l, int r = -1) const {\n\
-    \    if (r == -1) r = s;\n    return pfma(hs[l], -pw[r - l], hs[r]);\n  }\n\n\
-    \  // T \u306E hash \u3092\u8FD4\u3059\n  static Hash get_hash(const Str &T) {\n\
-    \    Hash ret = Hash::set(0);\n    for (int i = 0; i < (int)T.size(); i++) ret\
-    \ = pfma(ret, basis, T[i]);\n    return ret;\n  }\n\n  // a + b \u306E hash \u3092\
-    \u8FD4\u3059\n  // \u5F15\u6570 : a, b, b \u306E\u9577\u3055\n  static Hash unite(Hash\
-    \ a, Hash b, long long bsize) {\n    return pfma(a, basis.pow(bsize), b);\n  }\n\
-    \n  int find(Str &T, int lower = 0) const {\n    auto ths = get_hash(T);\n   \
-    \ for (int i = lower; i <= s - (int)T.size(); i++)\n      if (ths == get(i, i\
-    \ + (int)T.size())) return i;\n    return -1;\n  }\n\n  static int lcp(const RollingHash\
-    \ &a, const RollingHash &b, int al, int bl) {\n    int ok = 0, ng = min(a.size()\
-    \ - al, b.size() - bl) + 1;\n    while (ok + 1 < ng) {\n      int med = (ok +\
-    \ ng) / 2;\n      (a.get(al, med + al) == b.get(bl, med + bl) ? ok : ng) = med;\n\
-    \    }\n    return ok;\n  }\n\n  static int strcmp(const RollingHash &a, const\
-    \ RollingHash &b, int al, int bl,\n                    int ar = -1, int br = -1)\
-    \ {\n    if (ar == -1) ar = a.size();\n    if (br == -1) br = b.size();\n    int\
-    \ n = min<int>({lcp(a, b, al, bl), ar - al, br - bl});\n    return al + n == ar\
-    \                      ? bl + n == br ? 0 : -1\n           : bl + n == br    \
-    \                ? 1\n           : a.data[al + n] < b.data[bl + n] ? -1\n    \
-    \                                         : 1;\n  }\n\n  int size() const { return\
-    \ s; }\n};\n\ntemplate <typename Str, int BASE_NUM>\ntypename RollingHash<Str,\
-    \ BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =\n    inner::Hash<BASE_NUM>::get_basis();\n\
+    \ = internal::Hash<BASE_NUM>;\n  Str data;\n  vector<Hash> hs, pw;\n  int s;\n\
+    \  static Hash basis;\n\n  RollingHash(const Str &S = Str()) { build(S); }\n\n\
+    \  void build(const Str &S) {\n    data = S;\n    s = S.size();\n    hs.resize(s\
+    \ + 1);\n    pw.resize(s + 1);\n    pw[0] = Hash::set(1);\n    hs[0] = Hash::set(0);\n\
+    \    for (int i = 1; i <= s; i++) {\n      pw[i] = pw[i - 1] * basis;\n      hs[i]\
+    \ = pfma(hs[i - 1], basis, S[i - 1]);\n    }\n  }\n\n  Hash get(int l, int r =\
+    \ -1) const {\n    if (r == -1) r = s;\n    return pfma(hs[l], -pw[r - l], hs[r]);\n\
+    \  }\n\n  // T \u306E hash \u3092\u8FD4\u3059\n  static Hash get_hash(const Str\
+    \ &T) {\n    Hash ret = Hash::set(0);\n    for (int i = 0; i < (int)T.size();\
+    \ i++) ret = pfma(ret, basis, T[i]);\n    return ret;\n  }\n\n  // a + b \u306E\
+    \ hash \u3092\u8FD4\u3059\n  // \u5F15\u6570 : a, b, b \u306E\u9577\u3055\n  static\
+    \ Hash unite(Hash a, Hash b, long long bsize) {\n    return pfma(a, basis.pow(bsize),\
+    \ b);\n  }\n\n  int find(Str &T, int lower = 0) const {\n    auto ths = get_hash(T);\n\
+    \    for (int i = lower; i <= s - (int)T.size(); i++)\n      if (ths == get(i,\
+    \ i + (int)T.size())) return i;\n    return -1;\n  }\n\n  static int lcp(const\
+    \ RollingHash &a, const RollingHash &b, int al, int bl) {\n    int ok = 0, ng\
+    \ = min(a.size() - al, b.size() - bl) + 1;\n    while (ok + 1 < ng) {\n      int\
+    \ med = (ok + ng) / 2;\n      (a.get(al, med + al) == b.get(bl, med + bl) ? ok\
+    \ : ng) = med;\n    }\n    return ok;\n  }\n\n  static int strcmp(const RollingHash\
+    \ &a, const RollingHash &b, int al, int bl,\n                    int ar = -1,\
+    \ int br = -1) {\n    if (ar == -1) ar = a.size();\n    if (br == -1) br = b.size();\n\
+    \    int n = min<int>({lcp(a, b, al, bl), ar - al, br - bl});\n    return al +\
+    \ n == ar                      ? bl + n == br ? 0 : -1\n           : bl + n ==\
+    \ br                    ? 1\n           : a.data[al + n] < b.data[bl + n] ? -1\n\
+    \                                             : 1;\n  }\n\n  int size() const\
+    \ { return s; }\n};\n\ntemplate <typename Str, int BASE_NUM>\ntypename RollingHash<Str,\
+    \ BASE_NUM>::Hash RollingHash<Str, BASE_NUM>::basis =\n    internal::Hash<BASE_NUM>::get_basis();\n\
     using roriha = RollingHash<string, 2>;\n\n/**\n * @brief Rolling Hash\n * @docs\
     \ docs/string/rolling-hash.md\n */\n"
-  code: "#pragma once\n\n#include \"../inner/inner-hash.hpp\"\n\ntemplate <typename\
-    \ Str, int BASE_NUM = 2>\nstruct RollingHash {\n  using Hash = inner::Hash<BASE_NUM>;\n\
-    \  Str data;\n  vector<Hash> hs, pw;\n  int s;\n  static Hash basis;\n\n  RollingHash(const\
+  code: "#pragma once\n\n#include <string>\n#include <vector>\nusing namespace std;\n\
+    \n#include \"../internal/internal-hash.hpp\"\n\ntemplate <typename Str, int BASE_NUM\
+    \ = 2>\nstruct RollingHash {\n  using Hash = internal::Hash<BASE_NUM>;\n  Str\
+    \ data;\n  vector<Hash> hs, pw;\n  int s;\n  static Hash basis;\n\n  RollingHash(const\
     \ Str &S = Str()) { build(S); }\n\n  void build(const Str &S) {\n    data = S;\n\
     \    s = S.size();\n    hs.resize(s + 1);\n    pw.resize(s + 1);\n    pw[0] =\
     \ Hash::set(1);\n    hs[0] = Hash::set(0);\n    for (int i = 1; i <= s; i++) {\n\
@@ -129,15 +131,15 @@ data:
     \           : a.data[al + n] < b.data[bl + n] ? -1\n                         \
     \                    : 1;\n  }\n\n  int size() const { return s; }\n};\n\ntemplate\
     \ <typename Str, int BASE_NUM>\ntypename RollingHash<Str, BASE_NUM>::Hash RollingHash<Str,\
-    \ BASE_NUM>::basis =\n    inner::Hash<BASE_NUM>::get_basis();\nusing roriha =\
-    \ RollingHash<string, 2>;\n\n/**\n * @brief Rolling Hash\n * @docs docs/string/rolling-hash.md\n\
+    \ BASE_NUM>::basis =\n    internal::Hash<BASE_NUM>::get_basis();\nusing roriha\
+    \ = RollingHash<string, 2>;\n\n/**\n * @brief Rolling Hash\n * @docs docs/string/rolling-hash.md\n\
     \ */\n"
   dependsOn:
-  - inner/inner-hash.hpp
+  - internal/internal-hash.hpp
   isVerificationFile: false
   path: string/rolling-hash.hpp
   requiredBy: []
-  timestamp: '2023-01-31 00:28:06+09:00'
+  timestamp: '2023-05-19 10:25:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp

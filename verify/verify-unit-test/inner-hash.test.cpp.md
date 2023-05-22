@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: inner/inner-hash.hpp
+    path: internal/internal-hash.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
@@ -194,8 +194,8 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-unit-test/inner-hash.test.cpp\"\n//\n#line 2 \"inner/inner-hash.hpp\"\
-    \n\nnamespace inner {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
+    \ 4 \"verify/verify-unit-test/inner-hash.test.cpp\"\n//\n#line 2 \"internal/internal-hash.hpp\"\
+    \n\nnamespace internal {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
     using u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64,\
     \ BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n  static constexpr int\
     \ n = BASE_NUM;\n\n  Hash() : array<u64, BASE_NUM>() {}\n\n  static constexpr\
@@ -241,9 +241,9 @@ data:
     \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
     \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
-    \u4F53\n * @docs docs/inner/inner-hash.md\n */\n#line 6 \"verify/verify-unit-test/inner-hash.test.cpp\"\
-    \nusing namespace Nyaan;\n\nusing Hash = inner::Hash<3>;\n\nvoid Nyaan::solve()\
+    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
+    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n#line 6 \"verify/verify-unit-test/inner-hash.test.cpp\"\
+    \nusing namespace Nyaan;\n\nusing Hash = internal::Hash<3>;\n\nvoid Nyaan::solve()\
     \ {\n  u64 mod = (1uLL << 61) - 1;\n\n  Hash a;\n  a[0] = 3, a[1] = 4, a[2] =\
     \ 5;\n  trc(a);\n  Hash b = Hash::set(2);\n  trc(b);\n\n  auto c = a + b;\n  trc(c);\n\
     \  assert(c[0] == 5 and c[1] == 6 and c[2] == 7);\n  auto d = a + 2;\n  trc(d);\n\
@@ -257,10 +257,10 @@ data:
     \ == 12);\n  assert(k == l and l == m);\n\n  int A, B;\n  cin >> A >> B;\n  cout\
     \ << A + B << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../inner/inner-hash.hpp\"\nusing\
-    \ namespace Nyaan;\n\nusing Hash = inner::Hash<3>;\n\nvoid Nyaan::solve() {\n\
-    \  u64 mod = (1uLL << 61) - 1;\n\n  Hash a;\n  a[0] = 3, a[1] = 4, a[2] = 5;\n\
-    \  trc(a);\n  Hash b = Hash::set(2);\n  trc(b);\n\n  auto c = a + b;\n  trc(c);\n\
+    ../../template/template.hpp\"\n//\n#include \"../../internal/internal-hash.hpp\"\
+    \nusing namespace Nyaan;\n\nusing Hash = internal::Hash<3>;\n\nvoid Nyaan::solve()\
+    \ {\n  u64 mod = (1uLL << 61) - 1;\n\n  Hash a;\n  a[0] = 3, a[1] = 4, a[2] =\
+    \ 5;\n  trc(a);\n  Hash b = Hash::set(2);\n  trc(b);\n\n  auto c = a + b;\n  trc(c);\n\
     \  assert(c[0] == 5 and c[1] == 6 and c[2] == 7);\n  auto d = a + 2;\n  trc(d);\n\
     \  assert(c == d);\n\n  auto e = a - b;\n  trc(e);\n  assert(e[0] == 1 and e[1]\
     \ == 2 and e[2] == 3);\n  auto f = a - 2;\n  trc(f);\n  assert(e == f);\n\n  auto\
@@ -278,11 +278,11 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - inner/inner-hash.hpp
+  - internal/internal-hash.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/inner-hash.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-05-19 10:25:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/inner-hash.test.cpp

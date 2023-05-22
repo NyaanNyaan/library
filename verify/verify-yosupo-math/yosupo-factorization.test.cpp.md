@@ -2,8 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: inner/inner_math.hpp
-    title: inner/inner_math.hpp
+    path: internal/internal-math.hpp
+    title: internal/internal-math.hpp
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
     path: misc/fastio.hpp
     title: misc/fastio.hpp
@@ -209,26 +212,48 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"prime/fast-factorize.hpp\"\n\n#line 2 \"inner/inner_math.hpp\"\n\nnamespace\
-    \ inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 = int64_t;\n\
-    using u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n  while (b)\
-    \ swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT inv(T a, T p) {\n\
-    \  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n\
-    \    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ? y + p : y;\n\
-    }\n\ntemplate <typename T, typename U>\nT modpow(T a, U n, T p) {\n  T ret = 1\
-    \ % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if (n & 1) ret = U(ret) *\
-    \ a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line 2 \"misc/rng.hpp\"\n\
-    \nnamespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
-    \n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
-    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
-    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
-    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
-    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
-    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
-    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
-    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \ 2 \"prime/fast-factorize.hpp\"\n\n#line 6 \"prime/fast-factorize.hpp\"\nusing\
+    \ namespace std;\n\n#line 2 \"internal/internal-math.hpp\"\n\n#line 2 \"internal/internal-type-traits.hpp\"\
+    \n\n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
+    \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
+    \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
+    \                   is_same_v<T, __uint128_t>,\n                           true_type,\
+    \ false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed =\n   \
+    \ typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n       \
+    \                    true_type, false_type>::type;\n\ntemplate <typename T>\n\
+    using is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T> || is_same_v<T,\
+    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
+    #define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace\
+    \ internal {\n\n#line 8 \"internal/internal-math.hpp\"\nusing namespace std;\n\
+    \n// a^{-1} mod p \u3092\u8A08\u7B97\u3002gcd(a, p) != 1 \u304C\u5FC5\u8981\n\
+    template <typename T>\nT inv(T a, T p) {\n  a = a % p;\n  if constexpr (is_broadly_signed_v<T>)\
+    \ {\n    if (a < 0) a += p;\n  }\n  T b = p, x = 1, y = 0;\n  while (a) {\n  \
+    \  T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b\
+    \ == 1);\n  return y < 0 ? y + p : y;\n}\n\n// T : \u5024\u306E\u578B\n// U :\
+    \ T*T \u304C\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044\u578B\
+    \ntemplate <typename T, typename U>\nT modpow(T a, __int128_t n, T p) {\n  T ret\
+    \ = 1 % p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a)\
+    \ * a % p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n}  // namespace internal\n\
+    #line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\nusing\
+    \ u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x\
+    \ =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
+    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
+    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
+    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
+    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
+    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
+    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
+    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
     \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
     \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
     \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
@@ -296,7 +321,7 @@ data:
     \  return (is);\n  }\n\n  mint inverse() const { return pow(mod - 2); }\n\n  u64\
     \ get() const {\n    u64 ret = reduce(a);\n    return ret >= mod ? ret - mod :\
     \ ret;\n  }\n\n  static u64 get_mod() { return mod; }\n};\ntypename montgomery64::u64\
-    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 7 \"prime/fast-factorize.hpp\"\
+    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 12 \"prime/fast-factorize.hpp\"\
     \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
     bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
     \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
@@ -314,11 +339,11 @@ data:
     \ y = rnd_();\n    T g = 1;\n    constexpr int m = 128;\n    for (int r = 1; g\
     \ == 1; r <<= 1) {\n      x = y;\n      for (int i = 0; i < r; ++i) y = f(y);\n\
     \      for (int k = 0; g == 1 && k < r; k += m) {\n        ys = y;\n        for\
-    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = inner::gcd<T>(q.get(),\
-    \ n);\n      }\n    }\n    if (g == n) do\n        g = inner::gcd<T>((x - (ys\
-    \ = f(ys))).get(), n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n\
-    \  exit(1);\n}\n\nusing i64 = long long;\n\nvector<i64> inner_factorize(u64 n)\
-    \ {\n  if (n <= 1) return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
+    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = gcd(q.get(),\
+    \ n);\n      }\n    }\n    if (g == n) do\n        g = gcd((x - (ys = f(ys))).get(),\
+    \ n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n  exit(1);\n}\n\n\
+    using i64 = long long;\n\nvector<i64> inner_factorize(u64 n) {\n  if (n <= 1)\
+    \ return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
     \ uint32_t>(n);\n  else\n    p = pollard_rho<montgomery64, uint64_t>(n);\n  if\
     \ (p == n) return {i64(p)};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
     \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<i64>\
@@ -335,49 +360,59 @@ data:
     \n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\n\
     using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
-    \ docs/prime/fast-factorize.md\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"\
-    misc/fastio.hpp\"\n\nusing namespace std;\n\nnamespace fastio {\nstatic constexpr\
-    \ int SZ = 1 << 17;\nchar inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right =\
-    \ 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num()\
-    \ {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j\
-    \ = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n\
-    \      }\n    }\n  }\n} constexpr pre;\n\ninline void load() {\n  int len = in_right\
-    \ - in_left;\n  memmove(inbuf, inbuf + in_left, len);\n  in_right = len + fread(inbuf\
-    \ + len, 1, SZ - len, stdin);\n  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf,\
-    \ 1, out_right, stdout);\n  out_right = 0;\n}\n\ninline void skip_space() {\n\
-    \  if (in_left + 32 > in_right) load();\n  while (inbuf[in_left] <= ' ') in_left++;\n\
-    }\n\ninline void rd(char& c) {\n  if (in_left + 32 > in_right) load();\n  c =\
-    \ inbuf[in_left++];\n}\ntemplate <typename T>\ninline void rd(T& x) {\n  if (in_left\
-    \ + 32 > in_right) load();\n  char c;\n  do c = inbuf[in_left++];\n  while (c\
-    \ < '-');\n  [[maybe_unused]] bool minus = false;\n  if constexpr (is_signed<T>::value\
-    \ == true) {\n    if (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x\
-    \ = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n\
-    \  }\n  if constexpr (is_signed<T>::value == true) {\n    if (minus) x = -x;\n\
-    \  }\n}\ninline void rd() {}\ntemplate <typename Head, typename... Tail>\ninline\
-    \ void rd(Head& head, Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline\
-    \ void wt(char c) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
-    \ = c;\n}\ninline void wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++]\
-    \ = b ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
-    \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
-    \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
-    \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
-    \    return;\n  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x <\
-    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n\
-    \  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n\
-    \    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n    \
-    \  outbuf[out_right] = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t\
-    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
-    \     outbuf[out_right] = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n \
-    \     out_right += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2) + 1, 3);\n      out_right += 3;\n    } else\
-    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n      out_right\
-    \ += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4, 12 - i);\n  out_right\
-    \ += 12 - i;\n}\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
-    inline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
-    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
-    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 6 \"verify/verify-yosupo-math/yosupo-factorization.test.cpp\"\
+    \ docs/prime/fast-factorize.md\n */\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"\
+    misc/fastio.hpp\"\n\nusing namespace std;\n\n#line 12 \"misc/fastio.hpp\"\n\n\
+    namespace fastio {\nstatic constexpr int SZ = 1 << 17;\nstatic constexpr int offset\
+    \ = 64;\nchar inbuf[SZ], outbuf[SZ];\nint in_left = 0, in_right = 0, out_right\
+    \ = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr Pre() : num() {\n    for\
+    \ (int i = 0; i < 10000; i++) {\n      int n = i;\n      for (int j = 3; j >=\
+    \ 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n\
+    \    }\n  }\n} constexpr pre;\n\nvoid load() {\n  int len = in_right - in_left;\n\
+    \  memmove(inbuf, inbuf + in_left, len);\n  in_right = len + fread(inbuf + len,\
+    \ 1, SZ - len, stdin);\n  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1,\
+    \ out_right, stdout);\n  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left\
+    \ + offset > in_right) load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\
+    \nvoid single_read(char& c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n\
+    \  c = inbuf[in_left++];\n}\nvoid single_read(string& S) {\n  skip_space();\n\
+    \  while (true) {\n    if (in_left == in_right) load();\n    int i = in_left;\n\
+    \    for (; i != in_right; i++) {\n      if (inbuf[i] <= ' ') break;\n    }\n\
+    \    copy(inbuf + in_left, inbuf + i, back_inserter(S));\n    in_left = i;\n \
+    \   if (i != in_right) break;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
+    \ = nullptr>\ninline void single_read(T& x) {\n  if (in_left + offset > in_right)\
+    \ load();\n  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool\
+    \ minus = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
+    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
+    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\ninline\
+    \ void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head&\
+    \ head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\ninline void\
+    \ single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++]\
+    \ = c;\n}\ninline void single_write(const bool& b) {\n  if (out_right > SZ - offset)\
+    \ flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void single_write(const\
+    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
+    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
+    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
+    \ out_right += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
+    \ = nullptr>\ninline void single_write(const T& _x) {\n  if (out_right > SZ -\
+    \ offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n\
+    \  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
+    \ (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
+    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
+    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
+    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
+    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
+    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
+    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
+    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
+    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
+    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
+    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
+    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
+    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 6 \"verify/verify-yosupo-math/yosupo-factorization.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int Q;\n  rd(Q);\n  rep(_,\
     \ Q) {\n    int64_t n;\n    rd(n);\n    auto prime = factorize(n);\n    wt(sz(prime));\n\
     \    rep(i, sz(prime)) {\n      wt(' ');\n      wt(prime[i]);\n    }\n    wt('\\\
@@ -396,7 +431,8 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - prime/fast-factorize.hpp
-  - inner/inner_math.hpp
+  - internal/internal-math.hpp
+  - internal/internal-type-traits.hpp
   - misc/rng.hpp
   - modint/arbitrary-prime-modint.hpp
   - modint/modint-montgomery64.hpp
@@ -404,7 +440,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-factorization.test.cpp

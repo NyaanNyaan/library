@@ -305,25 +305,31 @@ data:
       title: "Hash Map(base)\u3000(\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7\u30FB\
         \u57FA\u5E95\u30AF\u30E9\u30B9)"
     - icon: ':heavy_check_mark:'
-      path: hashmap/hashmap-chain.hpp
-      title: "Hash Map(\u9023\u9396\u6CD5)"
-    - icon: ':heavy_check_mark:'
-      path: hashmap/hashmap-open-address.hpp
-      title: "Hash Map(\u958B\u756A\u5730\u6CD5)"
+      path: hashmap/hashmap-unerasable.hpp
+      title: hashmap/hashmap-unerasable.hpp
     - icon: ':heavy_check_mark:'
       path: hashmap/hashmap.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
     - icon: ':heavy_check_mark:'
       path: hashmap/hashset.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u30BB\u30C3\u30C8(\u96C6\u5408)"
-  - name: inner
+  - name: internal
     pages:
     - icon: ':heavy_check_mark:'
-      path: inner/inner-hash.hpp
+      path: internal/internal-hash-function.hpp
+      title: "\u30CF\u30C3\u30B7\u30E5\u95A2\u6570"
+    - icon: ':heavy_check_mark:'
+      path: internal/internal-hash.hpp
       title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
     - icon: ':heavy_check_mark:'
-      path: inner/inner_math.hpp
-      title: inner/inner_math.hpp
+      path: internal/internal-math.hpp
+      title: internal/internal-math.hpp
+    - icon: ':heavy_check_mark:'
+      path: internal/internal-seed.hpp
+      title: internal/internal-seed.hpp
+    - icon: ':heavy_check_mark:'
+      path: internal/internal-type-traits.hpp
+      title: internal/internal-type-traits.hpp
   - name: lct
     pages:
     - icon: ':heavy_check_mark:'
@@ -1244,6 +1250,9 @@ data:
       path: verify/verify-unit-test/int-div.test.cpp
       title: verify/verify-unit-test/int-div.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/internal-type-traits.test.cpp
+      title: verify/verify-unit-test/internal-type-traits.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/interval-union.test.cpp
       title: verify/verify-unit-test/interval-union.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1375,6 +1384,9 @@ data:
       path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
       title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
       title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1407,12 +1419,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
-      title: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
-    - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
-      title: verify/verify-yosupo-ds/yosupo-hashmap-open-address.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
       title: verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
@@ -1855,6 +1861,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
       title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
+      title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit.test.cpp
       title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit.test.cpp

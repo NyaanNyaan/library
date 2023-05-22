@@ -2,8 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: inner/inner_math.hpp
-    title: inner/inner_math.hpp
+    path: internal/internal-math.hpp
+    title: internal/internal-math.hpp
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
@@ -47,18 +50,40 @@ data:
     document_title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's\
       \ Rho)"
     links: []
-  bundledCode: "#line 2 \"prime/fast-factorize.hpp\"\n\n#line 2 \"inner/inner_math.hpp\"\
-    \n\nnamespace inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64\
-    \ = int64_t;\nusing u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b)\
-    \ {\n  while (b) swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT\
-    \ inv(T a, T p) {\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n\
-    \    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return\
-    \ y < 0 ? y + p : y;\n}\n\ntemplate <typename T, typename U>\nT modpow(T a, U\
-    \ n, T p) {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if\
-    \ (n & 1) ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line\
-    \ 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\nusing u64\
-    \ = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n\
-    \      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
+  bundledCode: "#line 2 \"prime/fast-factorize.hpp\"\n\n#include <cstdint>\n#include\
+    \ <numeric>\n#include <vector>\nusing namespace std;\n\n#line 2 \"internal/internal-math.hpp\"\
+    \n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\n\
+    using namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace\
+    \ internal {\n\n#include <cassert>\nusing namespace std;\n\n// a^{-1} mod p \u3092\
+    \u8A08\u7B97\u3002gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\nT\
+    \ inv(T a, T p) {\n  a = a % p;\n  if constexpr (is_broadly_signed_v<T>) {\n \
+    \   if (a < 0) a += p;\n  }\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q\
+    \ = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b ==\
+    \ 1);\n  return y < 0 ? y + p : y;\n}\n\n// T : \u5024\u306E\u578B\n// U : T*T\
+    \ \u304C\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044\u578B\ntemplate\
+    \ <typename T, typename U>\nT modpow(T a, __int128_t n, T p) {\n  T ret = 1 %\
+    \ p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a %\
+    \ p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n}  // namespace internal\n#line 2\
+    \ \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\nusing u64 =\
+    \ unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n  \
+    \    u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
     \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
     \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
     \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
@@ -134,7 +159,7 @@ data:
     \  return (is);\n  }\n\n  mint inverse() const { return pow(mod - 2); }\n\n  u64\
     \ get() const {\n    u64 ret = reduce(a);\n    return ret >= mod ? ret - mod :\
     \ ret;\n  }\n\n  static u64 get_mod() { return mod; }\n};\ntypename montgomery64::u64\
-    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 7 \"prime/fast-factorize.hpp\"\
+    \ montgomery64::mod, montgomery64::r, montgomery64::n2;\n#line 12 \"prime/fast-factorize.hpp\"\
     \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
     bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
     \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
@@ -152,11 +177,11 @@ data:
     \ y = rnd_();\n    T g = 1;\n    constexpr int m = 128;\n    for (int r = 1; g\
     \ == 1; r <<= 1) {\n      x = y;\n      for (int i = 0; i < r; ++i) y = f(y);\n\
     \      for (int k = 0; g == 1 && k < r; k += m) {\n        ys = y;\n        for\
-    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = inner::gcd<T>(q.get(),\
-    \ n);\n      }\n    }\n    if (g == n) do\n        g = inner::gcd<T>((x - (ys\
-    \ = f(ys))).get(), n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n\
-    \  exit(1);\n}\n\nusing i64 = long long;\n\nvector<i64> inner_factorize(u64 n)\
-    \ {\n  if (n <= 1) return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
+    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = gcd(q.get(),\
+    \ n);\n      }\n    }\n    if (g == n) do\n        g = gcd((x - (ys = f(ys))).get(),\
+    \ n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n  exit(1);\n}\n\n\
+    using i64 = long long;\n\nvector<i64> inner_factorize(u64 n) {\n  if (n <= 1)\
+    \ return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
     \ uint32_t>(n);\n  else\n    p = pollard_rho<montgomery64, uint64_t>(n);\n  if\
     \ (p == n) return {i64(p)};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
     \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<i64>\
@@ -174,15 +199,17 @@ data:
     using fast_factorize::factorize;\nusing fast_factorize::is_prime;\n\n/**\n * @brief\
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
     \ docs/prime/fast-factorize.md\n */\n"
-  code: "#pragma once\n\n#include \"../inner/inner_math.hpp\"\n#include \"../misc/rng.hpp\"\
-    \n#include \"../modint/arbitrary-prime-modint.hpp\"\n#include \"../modint/modint-montgomery64.hpp\"\
-    \n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\ntemplate <typename mint>\n\
-    bool miller_rabin(u64 n, vector<u64> as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
-    \  u64 d = n - 1;\n  while (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n\
-    \  for (u64 a : as) {\n    if (n <= a) break;\n    u64 t = d;\n    mint y = mint(a).pow(t);\n\
-    \    while (t != n - 1 && y != e && y != rev) {\n      y *= y;\n      t *= 2;\n\
-    \    }\n    if (y != rev && t % 2 == 0) return false;\n  }\n  return true;\n}\n\
-    \nbool is_prime(u64 n) {\n  if (~n & 1) return n == 2;\n  if (n <= 1) return false;\n\
+  code: "#pragma once\n\n#include <cstdint>\n#include <numeric>\n#include <vector>\n\
+    using namespace std;\n\n#include \"../internal/internal-math.hpp\"\n#include \"\
+    ../misc/rng.hpp\"\n#include \"../modint/arbitrary-prime-modint.hpp\"\n#include\
+    \ \"../modint/modint-montgomery64.hpp\"\n\nnamespace fast_factorize {\nusing u64\
+    \ = uint64_t;\n\ntemplate <typename mint>\nbool miller_rabin(u64 n, vector<u64>\
+    \ as) {\n  if (mint::get_mod() != n) mint::set_mod(n);\n  u64 d = n - 1;\n  while\
+    \ (~d & 1) d >>= 1;\n  mint e{1}, rev{int64_t(n - 1)};\n  for (u64 a : as) {\n\
+    \    if (n <= a) break;\n    u64 t = d;\n    mint y = mint(a).pow(t);\n    while\
+    \ (t != n - 1 && y != e && y != rev) {\n      y *= y;\n      t *= 2;\n    }\n\
+    \    if (y != rev && t % 2 == 0) return false;\n  }\n  return true;\n}\n\nbool\
+    \ is_prime(u64 n) {\n  if (~n & 1) return n == 2;\n  if (n <= 1) return false;\n\
     \  if (n < (1LL << 30))\n    return miller_rabin<ArbitraryLazyMontgomeryModInt>(n,\
     \ {2, 7, 61});\n  else\n    return miller_rabin<montgomery64>(\n        n, {2,\
     \ 325, 9375, 28178, 450775, 9780504, 1795265022});\n}\n\ntemplate <typename mint,\
@@ -193,11 +220,11 @@ data:
     \ y = rnd_();\n    T g = 1;\n    constexpr int m = 128;\n    for (int r = 1; g\
     \ == 1; r <<= 1) {\n      x = y;\n      for (int i = 0; i < r; ++i) y = f(y);\n\
     \      for (int k = 0; g == 1 && k < r; k += m) {\n        ys = y;\n        for\
-    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = inner::gcd<T>(q.get(),\
-    \ n);\n      }\n    }\n    if (g == n) do\n        g = inner::gcd<T>((x - (ys\
-    \ = f(ys))).get(), n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n\
-    \  exit(1);\n}\n\nusing i64 = long long;\n\nvector<i64> inner_factorize(u64 n)\
-    \ {\n  if (n <= 1) return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
+    \ (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n        g = gcd(q.get(),\
+    \ n);\n      }\n    }\n    if (g == n) do\n        g = gcd((x - (ys = f(ys))).get(),\
+    \ n);\n      while (g == 1);\n    if (g != n) return g;\n  }\n  exit(1);\n}\n\n\
+    using i64 = long long;\n\nvector<i64> inner_factorize(u64 n) {\n  if (n <= 1)\
+    \ return {};\n  u64 p;\n  if (n <= (1LL << 30))\n    p = pollard_rho<ArbitraryLazyMontgomeryModInt,\
     \ uint32_t>(n);\n  else\n    p = pollard_rho<montgomery64, uint64_t>(n);\n  if\
     \ (p == n) return {i64(p)};\n  auto l = inner_factorize(p);\n  auto r = inner_factorize(n\
     \ / p);\n  copy(begin(r), end(r), back_inserter(l));\n  return l;\n}\n\nvector<i64>\
@@ -216,7 +243,8 @@ data:
     \ \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n * @docs\
     \ docs/prime/fast-factorize.md\n */\n"
   dependsOn:
-  - inner/inner_math.hpp
+  - internal/internal-math.hpp
+  - internal/internal-type-traits.hpp
   - misc/rng.hpp
   - modint/arbitrary-prime-modint.hpp
   - modint/modint-montgomery64.hpp
@@ -224,7 +252,7 @@ data:
   path: prime/fast-factorize.hpp
   requiredBy:
   - modulo/mod-kth-root.hpp
-  timestamp: '2022-08-22 19:46:43+09:00'
+  timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0103.test.cpp

@@ -2,11 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: hashmap/hashmap-chain.hpp
-    title: "Hash Map(\u9023\u9396\u6CD5)"
+    path: hashmap/hashmap-unerasable.hpp
+    title: hashmap/hashmap-unerasable.hpp
   - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
+    path: internal/internal-hash-function.hpp
+    title: "\u30CF\u30C3\u30B7\u30E5\u95A2\u6570"
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-seed.hpp
+    title: internal/internal-seed.hpp
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -35,9 +41,9 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/associative_array
     links:
     - https://judge.yosupo.jp/problem/associative_array
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n//\n\
+    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
     \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -197,75 +203,115 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"hashmap/hashmap-chain.hpp\"\n\ntemplate <typename Key, typename Val, uint32_t\
-    \ N = 1 << 20,\n          Val DefaultValue = Val()>\nstruct HashMap {\n  using\
-    \ u32 = uint32_t;\n  using u64 = uint64_t;\n\n private:\n  struct Node {\n   \
-    \ Key key;\n    Val val;\n    Node* nxt;\n    Node() = default;\n  };\n\n  u32\
-    \ mask;\n  Node** table;\n  Node* pool;\n  int pid;\n  static constexpr u32 shift\
-    \ = 64 - __lg(N);\n\n  Node* my_new(const Key& key, const Val& val) {\n    pool[pid].key\
-    \ = key;\n    pool[pid].val = val;\n    pool[pid].nxt = nullptr;\n    return &(pool[pid++]);\n\
-    \  }\n\n  static u64 rng() {\n    u64 m = chrono::duration_cast<chrono::nanoseconds>(\n\
-    \                chrono::high_resolution_clock::now().time_since_epoch())\n  \
-    \              .count();\n    m ^= m >> 16;\n    m ^= m << 32;\n    return m;\n\
-    \  }\n\n public:\n  HashMap() : mask(N - 1), table(new Node*[N]()), pool(new Node[N]),\
-    \ pid(0) {}\n\n  Val& operator[](const Key& key) {\n    static u64 r = rng();\n\
-    \    u32 h = (u64(key) * r) >> shift;\n    Node** pp = &(table[h]);\n    while\
-    \ (*pp != nullptr && (*pp)->key != key) pp = &((*pp)->nxt);\n    if (*pp == nullptr)\
-    \ *pp = my_new(key, DefaultValue);\n    return (*pp)->val;\n  }\n};\n\n/**\n *\
-    \ @brief Hash Map(\u9023\u9396\u6CD5)\n * @docs docs/hashmap/hashmap_all.md\n\
-    \ */\n#line 2 \"misc/fastio.hpp\"\n\n#line 6 \"misc/fastio.hpp\"\n\nusing namespace\
-    \ std;\n\nnamespace fastio {\nstatic constexpr int SZ = 1 << 17;\nchar inbuf[SZ],\
-    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
-    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
-    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
-    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
-    \ pre;\n\ninline void load() {\n  int len = in_right - in_left;\n  memmove(inbuf,\
-    \ inbuf + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
-    \  in_left = 0;\n}\n\ninline void flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\n\ninline void skip_space() {\n  if (in_left + 32 > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\ninline void rd(char&\
-    \ c) {\n  if (in_left + 32 > in_right) load();\n  c = inbuf[in_left++];\n}\ntemplate\
-    \ <typename T>\ninline void rd(T& x) {\n  if (in_left + 32 > in_right) load();\n\
-    \  char c;\n  do c = inbuf[in_left++];\n  while (c < '-');\n  [[maybe_unused]]\
-    \ bool minus = false;\n  if constexpr (is_signed<T>::value == true) {\n    if\
-    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
-    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (is_signed<T>::value == true) {\n    if (minus) x = -x;\n  }\n}\ninline void\
-    \ rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head& head,\
-    \ Tail&... tail) {\n  rd(head);\n  rd(tail...);\n}\n\ninline void wt(char c) {\n\
-    \  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = c;\n}\ninline void\
-    \ wt(bool b) {\n  if (out_right > SZ - 32) flush();\n  outbuf[out_right++] = b\
-    \ ? '1' : '0';\n}\ninline void wt(const string &s) {\n  if (out_right + s.size()\
-    \ > SZ - 32) flush();\n  memcpy(outbuf + out_right, s.data(), sizeof(char) * s.size());\n\
-    \  out_right += s.size();\n}\ntemplate <typename T>\ninline void wt(T x) {\n \
-    \ if (out_right > SZ - 32) flush();\n  if (!x) {\n    outbuf[out_right++] = '0';\n\
-    \    return;\n  }\n  if constexpr (is_signed<T>::value == true) {\n    if (x <\
-    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  int i = 12;\n  char buf[16];\n\
-    \  while (x >= 10000) {\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n\
-    \    x /= 10000;\n    i -= 4;\n  }\n  if (x < 100) {\n    if (x < 10) {\n    \
-    \  outbuf[out_right] = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t\
-    \ q = (uint32_t(x) * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n \
-    \     outbuf[out_right] = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n \
-    \     out_right += 2;\n    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2) + 1, 3);\n      out_right += 3;\n    } else\
-    \ {\n      memcpy(outbuf + out_right, pre.num + (x << 2), 4);\n      out_right\
-    \ += 4;\n    }\n  }\n  memcpy(outbuf + out_right, buf + i + 4, 12 - i);\n  out_right\
-    \ += 12 - i;\n}\ninline void wt() {}\ntemplate <typename Head, typename... Tail>\n\
-    inline void wt(Head&& head, Tail&&... tail) {\n  wt(head);\n  wt(forward<Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\ninline void wtn(Args&&... x) {\n  wt(forward<Args>(x)...);\n\
-    \  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush); }\n} dummy;\n\n\
-    }  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\nusing fastio::wt;\n\
-    using fastio::wtn;\n#line 6 \"verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  HashMap<ll, ll, 1 << 20> m;\n\
-    \  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_, Q) {\n    rd(c);\n    if (c) {\n\
-    \      rd(k);\n      wtn(m[k]);\n    } else {\n      rd(k, v);\n      m[k] = v;\n\
-    \    }\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n\n\
-    #include \"../../template/template.hpp\"\n#include \"../../hashmap/hashmap-chain.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n\nusing namespace Nyaan; void Nyaan::solve()\
-    \ {\n  HashMap<ll, ll, 1 << 20> m;\n  int Q;\n  ll c, k, v;\n  rd(Q);\n  rep(_,\
-    \ Q) {\n    rd(c);\n    if (c) {\n      rd(k);\n      wtn(m[k]);\n    } else {\n\
-    \      rd(k, v);\n      m[k] = v;\n    }\n  }\n}\n"
+    \ 4 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
+    \n//\n#line 2 \"hashmap/hashmap-unerasable.hpp\"\n\n#line 6 \"hashmap/hashmap-unerasable.hpp\"\
+    \nusing namespace std;\n\n#line 2 \"internal/internal-hash-function.hpp\"\n\n\
+    #line 4 \"internal/internal-hash-function.hpp\"\nusing namespace std;\n\n#line\
+    \ 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\n\
+    using namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
+    \ {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \  .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >> 31, m\
+    \ ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() { return\
+    \ 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210 (\u624B\
+    \u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\u51FA\
+    \u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\u304F\
+    \u308B\u306E\u3067\u6CE8\u610F\nunsigned long long seed() {\n#if defined(NyaanLocal)\
+    \ && !defined(NON_DETERMINISTIC_SEED)\n  return deterministic_seed();\n#else\n\
+    \  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n#line\
+    \ 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
+    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 8 \"internal/internal-hash-function.hpp\"\n\n\
+    namespace internal {\n// \u6574\u6570, \u6574\u6570\u5217\u3092 64 bit unsigned\
+    \ int \u3078\u79FB\u3059\n\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
+    \nENABLE_HAS_TYPE(first_type);\nENABLE_HAS_TYPE(second_type);\nENABLE_HAS_TYPE(iterator);\n\
+    \ntemplate <typename T>\nu64 hash_function(const T& x) {\n  static u64 r = seed();\n\
+    \  constexpr u64 z1 = 11995408973635179863ULL;\n  if constexpr (is_broadly_integral_v<T>)\
+    \ {\n    // Integral\n    return (u64(x) ^ r) * z1;\n  } else if constexpr (has_first_type_v<T>\
+    \ && has_second_type_v<T>) {\n    // pair\n    constexpr u64 z2 = 10150724397891781847ULL;\n\
+    \    return hash_function(x.first) + hash_function(x.second) * z2;\n  } else if\
+    \ constexpr (has_iterator_v<T>) {\n    // Container\n    constexpr u64 mod = (1LL\
+    \ << 61) - 1;\n    constexpr u64 base = 950699498548472943ULL;\n    u64 m = 0;\n\
+    \    for (auto& z : x) {\n      u64 w;\n      if constexpr (is_broadly_integral_v<T>)\
+    \ {\n        w = u64(z) ^ r;\n      } else {\n        w = hash_function(z);\n\
+    \      }\n      u128 y = u128(m) * base + (w & mod);\n      m = (y & mod) + (y\
+    \ >> 61);\n      if (m >= mod) m -= mod;\n    }\n    m ^= m << 24, m ^= m >> 31,\
+    \ m ^= m << 35;\n    return m;\n  } else {\n    static_assert([]() { return false;\
+    \ }());\n  }\n}\n\ntemplate <typename Key>\nstruct HashObject {\n  size_t operator()(const\
+    \ Key& x) const { return hash_function(x); }\n};\n\n}  // namespace internal\n\
+    \n/*\n@brief \u30CF\u30C3\u30B7\u30E5\u95A2\u6570\n*/\n#line 9 \"hashmap/hashmap-unerasable.hpp\"\
+    \n\n// \u524A\u9664\u4E0D\u53EF\u80FD\u306A hashmap\n//\n// \u30C6\u30F3\u30D7\
+    \u30EC\u30FC\u30C8\u5F15\u6570\n// Key : Int, string, vector \u8FBA\u308A\u306F\
+    \u4F55\u3067\u3082 (\u5C0F\u6570\u7CFB\u306F\u7121\u7406)\n// Val : \u4F55\u3067\
+    \u3082\n// init_size : \u521D\u671F\u30D0\u30B1\u30C3\u30C8\u30B5\u30A4\u30BA\n\
+    // fixed_size : \u3053\u308C\u3092 true \u306B\u3059\u308B\u3059\u308B\u3068\u30D0\
+    \u30B1\u30C3\u30C8\u30B5\u30A4\u30BA\u304C\u56FA\u5B9A\u306B\u306A\u308B\n// \u5F15\
+    \u6570\n// _default_value : Val \u306E\u521D\u671F\u5024, \u3053\u306E\u5024\u3067\
+    \u521D\u671F\u5316\u3055\u308C\u308B\ntemplate <typename Key, typename Val, int\
+    \ init_size = 4,\n          bool fixed_size = false>\nstruct UnerasableHashMap\
+    \ {\n  static_assert(init_size >= 1 && (init_size & (init_size - 1)) == 0);\n\n\
+    \ private:\n  int N, occupied_num;\n  vector<Key> keys;\n  vector<Val> vals;\n\
+    \  vector<char> flag;\n  int shift;\n  const Val default_value;\n\n  // 64 bit\
+    \ \u306E hash \u3092\u8FD4\u3059\n  static unsigned long long get_hash(const Key&\
+    \ x) {\n    return internal::hash_function(x);\n  }\n\n  // \u30B5\u30A4\u30BA\
+    \u3092 n \u306B\u62E1\u5F35\u3059\u308B\n  void init(int n = init_size, bool reset\
+    \ = false) {\n    vector<Key> keys2(n);\n    vector<Val> vals2(n, default_value);\n\
+    \    vector<char> flag2(n);\n    int shift2 = 64 - __builtin_ctz(n);\n    swap(N,\
+    \ n), swap(keys, keys2);\n    swap(vals, vals2), swap(flag, flag2), swap(shift,\
+    \ shift2);\n    if (reset == false) {\n      for (int i = 0; i < (int)flag2.size();\
+    \ i++) {\n        if (flag2[i]) {\n          int j = hint(keys2[i]);\n       \
+    \   keys[j] = keys2[i];\n          vals[j] = vals2[i];\n          flag[j] = 1;\n\
+    \        }\n      }\n    }\n  }\n\n  int hint(const Key& k) {\n    int hash =\
+    \ get_hash(k) >> shift;\n    while (flag[hash] && keys[hash] != k) hash = (hash\
+    \ + 1) & (N - 1);\n    return hash;\n  }\n\n public:\n  UnerasableHashMap(const\
+    \ Val& _default_value = Val{})\n      : occupied_num(0), default_value(_default_value)\
+    \ {\n    init(init_size, true);\n  }\n\n  // key \u304C i \u3067\u3042\u308B\u8981\
+    \u7D20\u3078\u306E\u53C2\u7167\u3092\u8FD4\u3059\n  Val& operator[](const Key&\
+    \ k) {\n    int i = hint(k);\n    if (!flag[i]) {\n      if constexpr (fixed_size\
+    \ == false) {\n        if (occupied_num * 2 >= N) {\n          init(2 * N), i\
+    \ = hint(k);\n        }\n      }\n      keys[i] = k, flag[i] = 1, occupied_num++;\n\
+    \    }\n    return vals[i];\n  }\n\n  Val get(const Key& k) {\n    int i = hint(k);\n\
+    \    return flag[i] ? vals[i] : default_value;\n  }\n\n  // \u8D70\u67FB, f \u306B\
+    \u95A2\u6570 f(key, val) \u3092\u5165\u308C\u308B\n  template <typename F>\n \
+    \ void enumerate(const F f) {\n    for (int i = 0; i < (int)flag.size(); i++)\
+    \ {\n      if (flag[i]) f(keys[i], vals[i]);\n    }\n  }\n\n  int count(const\
+    \ Key& k) { return flag[hint(k)]; }\n  bool contain(const Key& k) { return flag[hint(k)];\
+    \ }\n  int size() const { return occupied_num; }\n  void reset() { init(init_size,\
+    \ true); }\n  void clear() { init(init_size, true); }\n};\n#line 6 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  UnerasableHashMap<ll, ll> mp;\n  UnerasableHashMap<ll,\
+    \ ll, 1 << 20, false> mp2;\n  UnerasableHashMap<i128, ll> mp3;\n  UnerasableHashMap<u128,\
+    \ ll> mp4;\n\n  ini(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0) {\n\
+    \      inl(k, v);\n      mp[k] = mp2[k] = mp3[k] = mp4[k] = v;\n    } else {\n\
+    \      inl(k);\n      ll a1 = mp[k];\n      ll a2 = mp2[k];\n      ll a3 = mp3[k];\n\
+    \      ll a4 = mp4[k];\n      assert(a1 == a2 and a2 == a3 and a3 == a4);\n  \
+    \    out(a1);\n    }\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n\
+    \  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n//\n\
+    #include \"../../template/template.hpp\"\n//\n#include \"../../hashmap/hashmap-unerasable.hpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  UnerasableHashMap<ll, ll> mp;\n  UnerasableHashMap<ll,\
+    \ ll, 1 << 20, false> mp2;\n  UnerasableHashMap<i128, ll> mp3;\n  UnerasableHashMap<u128,\
+    \ ll> mp4;\n\n  ini(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0) {\n\
+    \      inl(k, v);\n      mp[k] = mp2[k] = mp3[k] = mp4[k] = v;\n    } else {\n\
+    \      inl(k);\n      ll a1 = mp[k];\n      ll a2 = mp2[k];\n      ll a3 = mp3[k];\n\
+    \      ll a4 = mp4[k];\n      assert(a1 == a2 and a2 == a3 and a3 == a4);\n  \
+    \    out(a1);\n    }\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n\
+    \  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -273,18 +319,20 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - hashmap/hashmap-chain.hpp
-  - misc/fastio.hpp
+  - hashmap/hashmap-unerasable.hpp
+  - internal/internal-hash-function.hpp
+  - internal/internal-seed.hpp
+  - internal/internal-type-traits.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-hashmap-chain.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
 ---

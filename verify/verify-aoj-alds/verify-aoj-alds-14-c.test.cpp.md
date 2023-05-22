@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: inner/inner-hash.hpp
+    path: internal/internal-hash.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u69CB\u9020\u4F53"
   - icon: ':heavy_check_mark:'
     path: string/rolling-hash-2d.hpp
@@ -197,20 +197,21 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"string/rolling-hash-2d.hpp\"\n\n#line 2 \"inner/inner-hash.hpp\"\n\nnamespace\
-    \ inner {\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing u128\
-    \ = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64, BASE_NUM>\
-    \ {\n  using array<u64, BASE_NUM>::operator[];\n  static constexpr int n = BASE_NUM;\n\
-    \n  Hash() : array<u64, BASE_NUM>() {}\n\n  static constexpr u64 md = (1ull <<\
-    \ 61) - 1;\n\n  constexpr static Hash set(const i64 &a) {\n    Hash res;\n   \
-    \ fill(begin(res), end(res), cast(a));\n    return res;\n  }\n  Hash &operator+=(const\
-    \ Hash &r) {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i])\
-    \ >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator+=(const i64\
-    \ &r) {\n    u64 s = cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i]\
-    \ += s) >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const\
-    \ Hash &r) {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r[i])\
-    \ >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const i64\
-    \ &r) {\n    u64 s = cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i]\
+    \ 2 \"string/rolling-hash-2d.hpp\"\n\n#line 5 \"string/rolling-hash-2d.hpp\"\n\
+    using namespace std;\n\n#line 2 \"internal/internal-hash.hpp\"\n\nnamespace internal\
+    \ {\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
+    \ntemplate <int BASE_NUM = 2>\nstruct Hash : array<u64, BASE_NUM> {\n  using array<u64,\
+    \ BASE_NUM>::operator[];\n  static constexpr int n = BASE_NUM;\n\n  Hash() : array<u64,\
+    \ BASE_NUM>() {}\n\n  static constexpr u64 md = (1ull << 61) - 1;\n\n  constexpr\
+    \ static Hash set(const i64 &a) {\n    Hash res;\n    fill(begin(res), end(res),\
+    \ cast(a));\n    return res;\n  }\n  Hash &operator+=(const Hash &r) {\n    for\
+    \ (int i = 0; i < n; i++)\n      if (((*this)[i] += r[i]) >= md) (*this)[i] -=\
+    \ md;\n    return *this;\n  }\n  Hash &operator+=(const i64 &r) {\n    u64 s =\
+    \ cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += s) >= md)\
+    \ (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const Hash &r)\
+    \ {\n    for (int i = 0; i < n; i++)\n      if (((*this)[i] += md - r[i]) >= md)\
+    \ (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator-=(const i64 &r)\
+    \ {\n    u64 s = cast(r);\n    for (int i = 0; i < n; i++)\n      if (((*this)[i]\
     \ += md - s) >= md) (*this)[i] -= md;\n    return *this;\n  }\n  Hash &operator*=(const\
     \ Hash &r) {\n    for (int i = 0; i < n; i++) (*this)[i] = modmul((*this)[i],\
     \ r[i]);\n    return *this;\n  }\n  Hash &operator*=(const i64 &r) {\n    u64\
@@ -244,10 +245,10 @@ data:
     \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
     \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
     \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace inner\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\u9020\
-    \u4F53\n * @docs docs/inner/inner-hash.md\n */\n#line 4 \"string/rolling-hash-2d.hpp\"\
+    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
+    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n#line 8 \"string/rolling-hash-2d.hpp\"\
     \n\ntemplate <typename Str, int BASE_NUM = 2>\nstruct RollingHash2D {\n  using\
-    \ Hash = inner::Hash<BASE_NUM>;\n  using u64 = unsigned long long;\n  vector<Str>\
+    \ Hash = internal::Hash<BASE_NUM>;\n  using u64 = unsigned long long;\n  vector<Str>\
     \ data;\n  vector<vector<Hash>> hs;\n  vector<Hash> pw[2];\n  int h, w;\n  static\
     \ Hash basis[2];\n\n  RollingHash2D(const vector<Str> &S = vector<Str>()) { build(S);\
     \ }\n\n  void build(const vector<Str> &S) {\n    data = S;\n    h = S.size();\n\
@@ -264,11 +265,11 @@ data:
     \ - l] +\n           hs[u][l] * pw[0][d - u] * pw[1][r - l];\n  }\n\n  static\
     \ Hash get_hash(const vector<Str> &T) {\n    Hash ret = Hash::set(0);\n    for\
     \ (int i = 0; i < (int)T.size(); i++) {\n      Hash h = Hash::set(0);\n      for\
-    \ (int j = 0; j < (int)T[0].size(); j++)\n        h = pfma(h, basis[1], T[i][j]);\n\
-    \      ret = pfma(ret, basis[0], h);\n    }\n    return ret;\n  }\n};\n\ntemplate\
+    \ (int j = 0; j < (int)T[0].size(); j++) h = pfma(h, basis[1], T[i][j]);\n   \
+    \   ret = pfma(ret, basis[0], h);\n    }\n    return ret;\n  }\n};\n\ntemplate\
     \ <typename Str, int BASE_NUM>\ntypename RollingHash2D<Str, BASE_NUM>::Hash\n\
-    \    RollingHash2D<Str, BASE_NUM>::basis[2] = {\n        inner::Hash<BASE_NUM>::get_basis(),\
-    \ inner::Hash<BASE_NUM>::get_basis()};\nusing roriha2d = RollingHash2D<string,\
+    \    RollingHash2D<Str, BASE_NUM>::basis[2] = {\n        internal::Hash<BASE_NUM>::get_basis(),\n\
+    \        internal::Hash<BASE_NUM>::get_basis()};\nusing roriha2d = RollingHash2D<string,\
     \ 1>;\n\n/**\n * @brief \u4E8C\u6B21\u5143Rolling Hash\n * @docs docs/string/rolling-hash-2d.md\n\
     \ */\n#line 6 \"verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp\"\n\nusing\
     \ namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(H, W);\n  vs S(H);\n  in(S);\n\
@@ -289,11 +290,11 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - string/rolling-hash-2d.hpp
-  - inner/inner-hash.hpp
+  - internal/internal-hash.hpp
   isVerificationFile: true
   path: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
   requiredBy: []
-  timestamp: '2023-03-23 17:00:44+09:00'
+  timestamp: '2023-05-19 10:25:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp

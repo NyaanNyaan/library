@@ -9,8 +9,11 @@ data:
     path: hashmap/hashmap.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217)"
   - icon: ':heavy_check_mark:'
-    path: inner/inner_math.hpp
-    title: inner/inner_math.hpp
+    path: internal/internal-math.hpp
+    title: internal/internal-math.hpp
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -21,8 +24,8 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"modulo/mod-log.hpp\"\n\n\n\n#line 2 \"hashmap/hashmap.hpp\"\
-    \n\n#line 2 \"hashmap/hashmap-base.hpp\"\n\n#include <cstdint>\nusing namespace\
+  bundledCode: "#line 2 \"modulo/mod-log.hpp\"\n\n#line 2 \"hashmap/hashmap.hpp\"\n\
+    \n#line 2 \"hashmap/hashmap-base.hpp\"\n\n#include <cstdint>\nusing namespace\
     \ std;\n\nnamespace HashMapImpl {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\
     \ntemplate <typename Key, typename Data>\nstruct HashMapBase;\n\ntemplate <typename\
     \ Key, typename Data>\nstruct itrB\n    : iterator<bidirectional_iterator_tag,\
@@ -141,44 +144,65 @@ data:
     \ (base::cap - 1);\n    }\n  }\n\n  typename base::itr emplace(const Key& key,\
     \ const Val& val) {\n    return base::insert(Data(key, val));\n  }\n};\n\n/*\n\
     \ * @brief \u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217\
-    )\n * @docs docs/hashmap/hashmap.md\n **/\n#line 2 \"inner/inner_math.hpp\"\n\n\
-    namespace inner {\n\nusing i32 = int32_t;\nusing u32 = uint32_t;\nusing i64 =\
-    \ int64_t;\nusing u64 = uint64_t;\n\ntemplate <typename T>\nT gcd(T a, T b) {\n\
-    \  while (b) swap(a %= b, b);\n  return a;\n}\n\ntemplate <typename T>\nT inv(T\
-    \ a, T p) {\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a,\
-    \ b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ?\
-    \ y + p : y;\n}\n\ntemplate <typename T, typename U>\nT modpow(T a, U n, T p)\
-    \ {\n  T ret = 1 % p;\n  for (; n; n >>= 1, a = U(a) * a % p)\n    if (n & 1)\
-    \ ret = U(ret) * a % p;\n  return ret;\n}\n\n}  // namespace inner\n#line 7 \"\
-    modulo/mod-log.hpp\"\n\nint64_t mod_log(int64_t a, int64_t b, int64_t p) {\n \
-    \ using namespace inner;\n  if ((a %= p) < 0) a += p;\n  if ((b %= p) < 0) b +=\
-    \ p;\n  int64_t f, g, r = 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1; ++f) {\n\
-    \    if (b % g) return (r == b) ? f : -1;\n    b /= g;\n    p /= g;\n    (r *=\
-    \ (a / g)) %= p;\n  }\n  if (p == 1) return f;\n  int64_t ir = inv(r, p);\n  (b\
-    \ *= ir) %= p;\n  int64_t k = 0, ak = 1;\n  HashMap<int64_t, int64_t> baby;\n\
-    \  for (; k * k < p; ++k) {\n    if(baby.find(ak) == baby.end()) baby[ak] = k;\n\
-    \    (ak *= a) %= p;\n  }\n  int64_t iak = inv(ak, p);\n  for (int64_t i = 0;\
-    \ i < k; ++i) {\n    if (baby.find(b) != baby.end()) return f + i * k + baby[b];\n\
-    \    (b *= iak) %= p;\n  }\n  return -1;\n}\n"
-  code: "#pragma once\n\n\n\n#include \"../hashmap/hashmap.hpp\"\n#include \"../inner/inner_math.hpp\"\
-    \n\nint64_t mod_log(int64_t a, int64_t b, int64_t p) {\n  using namespace inner;\n\
+    )\n * @docs docs/hashmap/hashmap.md\n **/\n#line 2 \"internal/internal-math.hpp\"\
+    \n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\n\
+    using namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace\
+    \ internal {\n\n#include <cassert>\nusing namespace std;\n\n// a^{-1} mod p \u3092\
+    \u8A08\u7B97\u3002gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\nT\
+    \ inv(T a, T p) {\n  a = a % p;\n  if constexpr (is_broadly_signed_v<T>) {\n \
+    \   if (a < 0) a += p;\n  }\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q\
+    \ = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b ==\
+    \ 1);\n  return y < 0 ? y + p : y;\n}\n\n// T : \u5024\u306E\u578B\n// U : T*T\
+    \ \u304C\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044\u578B\ntemplate\
+    \ <typename T, typename U>\nT modpow(T a, __int128_t n, T p) {\n  T ret = 1 %\
+    \ p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a %\
+    \ p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n}  // namespace internal\n#line 5\
+    \ \"modulo/mod-log.hpp\"\n\nint64_t mod_log(int64_t a, int64_t b, int64_t p) {\n\
     \  if ((a %= p) < 0) a += p;\n  if ((b %= p) < 0) b += p;\n  int64_t f, g, r =\
     \ 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1; ++f) {\n    if (b % g) return (r\
     \ == b) ? f : -1;\n    b /= g;\n    p /= g;\n    (r *= (a / g)) %= p;\n  }\n \
-    \ if (p == 1) return f;\n  int64_t ir = inv(r, p);\n  (b *= ir) %= p;\n  int64_t\
-    \ k = 0, ak = 1;\n  HashMap<int64_t, int64_t> baby;\n  for (; k * k < p; ++k)\
-    \ {\n    if(baby.find(ak) == baby.end()) baby[ak] = k;\n    (ak *= a) %= p;\n\
-    \  }\n  int64_t iak = inv(ak, p);\n  for (int64_t i = 0; i < k; ++i) {\n    if\
-    \ (baby.find(b) != baby.end()) return f + i * k + baby[b];\n    (b *= iak) %=\
-    \ p;\n  }\n  return -1;\n}"
+    \ if (p == 1) return f;\n  int64_t ir = internal::inv(r, p);\n  (b *= ir) %= p;\n\
+    \  int64_t k = 0, ak = 1;\n  HashMap<int64_t, int64_t> baby;\n  for (; k * k <\
+    \ p; ++k) {\n    if(baby.find(ak) == baby.end()) baby[ak] = k;\n    (ak *= a)\
+    \ %= p;\n  }\n  int64_t iak = internal::inv(ak, p);\n  for (int64_t i = 0; i <\
+    \ k; ++i) {\n    if (baby.find(b) != baby.end()) return f + i * k + baby[b];\n\
+    \    (b *= iak) %= p;\n  }\n  return -1;\n}\n"
+  code: "#pragma once\n\n#include \"../hashmap/hashmap.hpp\"\n#include \"../internal/internal-math.hpp\"\
+    \n\nint64_t mod_log(int64_t a, int64_t b, int64_t p) {\n  if ((a %= p) < 0) a\
+    \ += p;\n  if ((b %= p) < 0) b += p;\n  int64_t f, g, r = 1 % p;\n  for (f = 0;\
+    \ (g = gcd(a, p)) > 1; ++f) {\n    if (b % g) return (r == b) ? f : -1;\n    b\
+    \ /= g;\n    p /= g;\n    (r *= (a / g)) %= p;\n  }\n  if (p == 1) return f;\n\
+    \  int64_t ir = internal::inv(r, p);\n  (b *= ir) %= p;\n  int64_t k = 0, ak =\
+    \ 1;\n  HashMap<int64_t, int64_t> baby;\n  for (; k * k < p; ++k) {\n    if(baby.find(ak)\
+    \ == baby.end()) baby[ak] = k;\n    (ak *= a) %= p;\n  }\n  int64_t iak = internal::inv(ak,\
+    \ p);\n  for (int64_t i = 0; i < k; ++i) {\n    if (baby.find(b) != baby.end())\
+    \ return f + i * k + baby[b];\n    (b *= iak) %= p;\n  }\n  return -1;\n}"
   dependsOn:
   - hashmap/hashmap.hpp
   - hashmap/hashmap-base.hpp
-  - inner/inner_math.hpp
+  - internal/internal-math.hpp
+  - internal/internal-type-traits.hpp
   isVerificationFile: false
   path: modulo/mod-log.hpp
   requiredBy: []
-  timestamp: '2023-03-25 00:28:17+09:00'
+  timestamp: '2023-05-21 20:49:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
