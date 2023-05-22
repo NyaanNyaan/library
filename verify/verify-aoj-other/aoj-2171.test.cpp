@@ -1,4 +1,5 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2171"
+#define ERROR 0.0000001
 
 #include "../../template/template.hpp"
 //
