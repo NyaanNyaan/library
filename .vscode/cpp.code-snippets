@@ -66,7 +66,7 @@
     "description": "fps"
   },
   "_dijkstra": {
-    "prefix": "_dijkstra",
+    "prefix": "_grid_dijkstra",
     "body": "// H, W, gは決め打ち\r\n// T : 辺の重みの型\r\nV<vl> d(H, vl(W, -1));\r\nusing T = long long;\r\nusing Data = pair<T, pair<int, int>>;\r\npriority_queue<Data, vector<Data>, greater<Data>> Q;\r\n\r\n// 上下左右 (UDLR) の順番\r\nint di[] = {-1, 1, 0, 0};\r\nint dj[] = {0, 0, -1, 1};\r\nauto ok = [&](int i, int j) -> bool {\r\n  return 0 <= i and i < H and 0 <= j and j < W;\r\n};\r\n// c != ' ' の場合、g[i][j] が c のときのみ遷移する\r\nauto add = [&](int i, int j, T cost, char c = ' ') -> void {\r\n  if (!ok(i, j)) return;\r\n  if (c != ' ' and c != g[i][j]) return;\r\n  if (d[i][j] == -1 or cost < d[i][j]) {\r\n    Q.emplace(cost, make_pair(i, j));\r\n    d[i][j] = cost;\r\n  }\r\n};\r\n\r\n// 始点の設定\r\nint SX = 0, SY = 0;\r\nadd(SX, SY, 0);\r\n\r\nwhile (!Q.empty()) {\r\n  auto [cost, pa] = Q.top();\r\n  auto [i, j] = pa;\r\n  Q.pop();\r\n  if (d[i][j] != cost) continue;\r\n\r\n  /*\r\n  for (int k = 0; k < 4; k++) {\r\n    int ni = i + di[k], nj = j + dj[k];\r\n\r\n    add(ni, nj, , );\r\n  }\r\n  */\r\n}",
     "description": ""
   },

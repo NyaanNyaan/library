@@ -1,6 +1,8 @@
 #pragma once
 
-
+#include <utility>
+#include <vector>
+using namespace std;
 
 #include "../graph/graph-template.hpp"
 

@@ -1,11 +1,16 @@
 #pragma once
 
-
+#include <algorithm>
+#include <cmath>
+#include <complex>
+#include <iostream>
+#include <vector>
+using namespace std;
 
 using Real = long double;
 using Point = complex<Real>;
 using Points = vector<Point>;
-constexpr Real EPS = 1e-8;  // 問題によって変える！
+constexpr Real EPS = 1e-8;
 constexpr Real pi = 3.141592653589793238462643383279L;
 istream &operator>>(istream &is, Point &p) {
   Real a, b;
@@ -17,6 +22,7 @@ ostream &operator<<(ostream &os, Point &p) {
   return os << real(p) << " " << imag(p);
 }
 inline bool eq(Real a, Real b) { return fabs(b - a) < EPS; }
+int sign(Real a) { return eq(a, 0) ? 0 : a > 0 ? 1 : -1; }
 
 Point operator*(const Point &p, const Real &d) {
   return Point(real(p) * d, imag(p) * d);
@@ -57,7 +63,7 @@ Real get_angle(const Point &a, const Point &b, const Point &c) {
   return min(theta, 2 * acos(-1) - theta);
 }
 
-//　反時計回りである自己交差のない多角形のclass
+// 　反時計回りである自己交差のない多角形のclass
 using Polygon = vector<Point>;
 
 // 凸包
