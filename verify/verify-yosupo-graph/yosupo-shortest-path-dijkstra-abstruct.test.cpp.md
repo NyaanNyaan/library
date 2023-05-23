@@ -5,6 +5,12 @@ data:
     path: graph/graph-template.hpp
     title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
+    path: graph/graph-utility.hpp
+    title: "\u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3"
+  - icon: ':heavy_check_mark:'
+    path: shortest-path/dijkstra-abstruct.hpp
+    title: shortest-path/dijkstra-abstruct.hpp
+  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
   - icon: ':heavy_check_mark:'
@@ -22,12 +28,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
-  - icon: ':heavy_check_mark:'
-    path: tree/cartesian-tree.hpp
-    title: Cartesian Tree
-  - icon: ':heavy_check_mark:'
-    path: tree/heavy-light-decomposition.hpp
-    title: "Heavy Light Decomposition(\u91CD\u8EFD\u5206\u89E3)"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -35,13 +35,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D
+    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
     links:
-    - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D
-  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp\"\
-    \n#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\
-    \n\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
-    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    - https://judge.yosupo.jp/problem/shortest_path
+  bundledCode: "#line 1 \"verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n//\n#line\
+    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -200,16 +200,16 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"tree/cartesian-tree.hpp\"\n\n#line 5 \"tree/cartesian-tree.hpp\"\nusing\
-    \ namespace std;\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename\
-    \ T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1),\
-    \ to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to),\
-    \ cost(_cost) {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return\
-    \ *this;\n  }\n\n  operator int() const { return to; }\n};\ntemplate <typename\
-    \ T>\nusing Edges = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph\
-    \ = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\n// Input\
-    \ of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool is_directed\
-    \ = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+    \ 4 \"verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp\"\
+    \n//\n#line 2 \"graph/graph-utility.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
+    \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
+    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
+    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
+    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
+    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
+    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
+    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
+    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
     \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
     \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
@@ -231,67 +231,65 @@ data:
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
     \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
     \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
-    \ */\n#line 8 \"tree/cartesian-tree.hpp\"\n\n// return value : pair<graph, root>\n\
-    template <typename T>\npair<vector<vector<int>>, int> CartesianTree(vector<T>\
-    \ &a) {\n  int N = (int)a.size();\n  vector<vector<int>> g(N);\n  vector<int>\
-    \ p(N, -1), st;\n  st.reserve(N);\n  for (int i = 0; i < N; i++) {\n    int prv\
-    \ = -1;\n    while (!st.empty() && a[i] < a[st.back()]) {\n      prv = st.back();\n\
-    \      st.pop_back();\n    }\n    if (prv != -1) p[prv] = i;\n    if (!st.empty())\
-    \ p[i] = st.back();\n    st.push_back(i);\n  }\n  int root = -1;\n  for (int i\
-    \ = 0; i < N; i++) {\n    if (p[i] != -1)\n      g[p[i]].push_back(i);\n    else\n\
-    \      root = i;\n  }\n  return make_pair(g, root);\n}\n\n/**\n * @brief Cartesian\
-    \ Tree\n * @docs docs/tree/cartesian-tree.md\n */\n#line 2 \"tree/heavy-light-decomposition.hpp\"\
-    \n\n#line 4 \"tree/heavy-light-decomposition.hpp\"\n\ntemplate <typename G>\n\
-    struct HeavyLightDecomposition {\n private:\n  void dfs_sz(int cur) {\n    size[cur]\
-    \ = 1;\n    for (auto& dst : g[cur]) {\n      if (dst == par[cur]) {\n       \
-    \ if (g[cur].size() >= 2 && int(dst) == int(g[cur][0]))\n          swap(g[cur][0],\
-    \ g[cur][1]);\n        else\n          continue;\n      }\n      depth[dst] =\
-    \ depth[cur] + 1;\n      par[dst] = cur;\n      dfs_sz(dst);\n      size[cur]\
-    \ += size[dst];\n      if (size[dst] > size[g[cur][0]]) {\n        swap(dst, g[cur][0]);\n\
-    \      }\n    }\n  }\n\n  void dfs_hld(int cur) {\n    down[cur] = id++;\n   \
-    \ for (auto dst : g[cur]) {\n      if (dst == par[cur]) continue;\n      nxt[dst]\
-    \ = (int(dst) == int(g[cur][0]) ? nxt[cur] : int(dst));\n      dfs_hld(dst);\n\
-    \    }\n    up[cur] = id;\n  }\n\n  // [u, v)\n  vector<pair<int, int>> ascend(int\
-    \ u, int v) const {\n    vector<pair<int, int>> res;\n    while (nxt[u] != nxt[v])\
-    \ {\n      res.emplace_back(down[u], down[nxt[u]]);\n      u = par[nxt[u]];\n\
-    \    }\n    if (u != v) res.emplace_back(down[u], down[v] + 1);\n    return res;\n\
-    \  }\n\n  // (u, v]\n  vector<pair<int, int>> descend(int u, int v) const {\n\
-    \    if (u == v) return {};\n    if (nxt[u] == nxt[v]) return {{down[u] + 1, down[v]}};\n\
-    \    auto res = descend(u, par[nxt[v]]);\n    res.emplace_back(down[nxt[v]], down[v]);\n\
-    \    return res;\n  }\n\n public:\n  G& g;\n  int id;\n  vector<int> size, depth,\
-    \ down, up, nxt, par;\n  HeavyLightDecomposition(G& _g, int root = 0)\n      :\
-    \ g(_g),\n        id(0),\n        size(g.size(), 0),\n        depth(g.size(),\
-    \ 0),\n        down(g.size(), -1),\n        up(g.size(), -1),\n        nxt(g.size(),\
-    \ root),\n        par(g.size(), root) {\n    dfs_sz(root);\n    dfs_hld(root);\n\
-    \  }\n\n  void build(int root) {\n    dfs_sz(root);\n    dfs_hld(root);\n  }\n\
-    \n  pair<int, int> idx(int i) const { return make_pair(down[i], up[i]); }\n\n\
-    \  template <typename F>\n  void path_query(int u, int v, bool vertex, const F&\
-    \ f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) {\n   \
-    \   int s = a + 1, t = b;\n      s > t ? f(t, s) : f(s, t);\n    }\n    if (vertex)\
-    \ f(down[l], down[l] + 1);\n    for (auto&& [a, b] : descend(l, v)) {\n      int\
-    \ s = a, t = b + 1;\n      s > t ? f(t, s) : f(s, t);\n    }\n  }\n\n  template\
-    \ <typename F>\n  void path_noncommutative_query(int u, int v, bool vertex, const\
-    \ F& f) {\n    int l = lca(u, v);\n    for (auto&& [a, b] : ascend(u, l)) f(a\
-    \ + 1, b);\n    if (vertex) f(down[l], down[l] + 1);\n    for (auto&& [a, b] :\
-    \ descend(l, v)) f(a, b + 1);\n  }\n\n  template <typename F>\n  void subtree_query(int\
-    \ u, bool vertex, const F& f) {\n    f(down[u] + int(!vertex), up[u]);\n  }\n\n\
-    \  int lca(int a, int b) {\n    while (nxt[a] != nxt[b]) {\n      if (down[a]\
-    \ < down[b]) swap(a, b);\n      a = par[nxt[a]];\n    }\n    return depth[a] <\
-    \ depth[b] ? a : b;\n  }\n\n  int dist(int a, int b) { return depth[a] + depth[b]\
-    \ - depth[lca(a, b)] * 2; }\n};\n\n/**\n * @brief Heavy Light Decomposition(\u91CD\
-    \u8EFD\u5206\u89E3)\n * @docs docs/tree/heavy-light-decomposition.md\n */\n#line\
-    \ 7 \"verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp\"\n\nusing namespace\
-    \ Nyaan; void Nyaan::solve() {\n  ini(N, L);\n  vi a(N);\n  in(a);\n  vvi g;\n\
-    \  int root;\n  tie(g, root) = CartesianTree<int>(a);\n  HeavyLightDecomposition<vvi>\
-    \ hld(g, root);\n  vi ans(N - L + 1);\n  rep(i, N - L + 1) ans[i] = a[hld.lca(i,\
-    \ i + L - 1)];\n  out(ans);\n}\n"
-  code: "#define PROBLEM \\\n  \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_3_D\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../tree/cartesian-tree.hpp\"\
-    \n#include \"../../tree/heavy-light-decomposition.hpp\"\n\nusing namespace Nyaan;\
-    \ void Nyaan::solve() {\n  ini(N, L);\n  vi a(N);\n  in(a);\n  vvi g;\n  int root;\n\
-    \  tie(g, root) = CartesianTree<int>(a);\n  HeavyLightDecomposition<vvi> hld(g,\
-    \ root);\n  vi ans(N - L + 1);\n  rep(i, N - L + 1) ans[i] = a[hld.lca(i, i +\
-    \ L - 1)];\n  out(ans);\n}"
+    \ */\n#line 4 \"graph/graph-utility.hpp\"\n\n// \u4E00\u822C\u306E\u30B0\u30E9\
+    \u30D5\u306Est\u304B\u3089\u306E\u8DDD\u96E2\uFF01\uFF01\uFF01\uFF01\n// unvisited\
+    \ nodes : d = -1\nvector<int> Depth(const UnweightedGraph &g, int start = 0) {\n\
+    \  int n = g.size();\n  vector<int> ds(n, -1);\n  ds[start] = 0;\n  queue<int>\
+    \ q;\n  q.push(start);\n  while (!q.empty()) {\n    int c = q.front();\n    q.pop();\n\
+    \    int dc = ds[c];\n    for (auto &d : g[c]) {\n      if (ds[d] == -1) {\n \
+    \       ds[d] = dc + 1;\n        q.push(d);\n      }\n    }\n  }\n  return ds;\n\
+    }\n\n// Depth of Rooted Weighted Tree\n// unvisited nodes : d = -1\ntemplate <typename\
+    \ T>\nvector<T> Depth(const WeightedGraph<T> &g, int start = 0) {\n  vector<T>\
+    \ d(g.size(), -1);\n  auto dfs = [&](auto rec, int cur, T val, int par = -1) ->\
+    \ void {\n    d[cur] = val;\n    for (auto &dst : g[cur]) {\n      if (dst ==\
+    \ par) continue;\n      rec(rec, dst, val + dst.cost, cur);\n    }\n  };\n  dfs(dfs,\
+    \ start, 0);\n  return d;\n}\n\n// Diameter of Tree\n// return value : { {u, v},\
+    \ length }\npair<pair<int, int>, int> Diameter(const UnweightedGraph &g) {\n \
+    \ auto d = Depth(g, 0);\n  int u = max_element(begin(d), end(d)) - begin(d);\n\
+    \  d = Depth(g, u);\n  int v = max_element(begin(d), end(d)) - begin(d);\n  return\
+    \ make_pair(make_pair(u, v), d[v]);\n}\n\n// Diameter of Weighted Tree\n// return\
+    \ value : { {u, v}, length }\ntemplate <typename T>\npair<pair<int, int>, T> Diameter(const\
+    \ WeightedGraph<T> &g) {\n  auto d = Depth(g, 0);\n  int u = max_element(begin(d),\
+    \ end(d)) - begin(d);\n  d = Depth(g, u);\n  int v = max_element(begin(d), end(d))\
+    \ - begin(d);\n  return make_pair(make_pair(u, v), d[v]);\n}\n\n// nodes on the\
+    \ path u-v ( O(N) )\ntemplate <typename G>\nvector<int> Path(G &g, int u, int\
+    \ v) {\n  vector<int> ret;\n  int end = 0;\n  auto dfs = [&](auto rec, int cur,\
+    \ int par = -1) -> void {\n    ret.push_back(cur);\n    if (cur == v) {\n    \
+    \  end = 1;\n      return;\n    }\n    for (int dst : g[cur]) {\n      if (dst\
+    \ == par) continue;\n      rec(rec, dst, cur);\n      if (end) return;\n    }\n\
+    \    if (end) return;\n    ret.pop_back();\n  };\n  dfs(dfs, u);\n  return ret;\n\
+    }\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\
+    \n * @docs docs/graph/graph-utility.md\n */\n#line 6 \"verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp\"\
+    \n//\n#line 2 \"shortest-path/dijkstra-abstruct.hpp\"\n\n#line 8 \"shortest-path/dijkstra-abstruct.hpp\"\
+    \nusing namespace std;\n\n// (start \u304B\u3089\u306E\u8DDD\u96E2, 1 \u500B\u524D\
+    \u306E\u9802\u70B9) \u3092\u683C\u7D0D\u3059\u308B map \u3092\u8FD4\u3059\n//\
+    \ \u305F\u3060\u3057\u59CB\u70B9\u306F d[start] = {0, Index{}}\ntemplate <typename\
+    \ Index, typename Cost, bool has_goal = true>\nmap<Index, pair<Cost, Index>> dijkstra_abstruct(\n\
+    \    const function<void(Index, Cost, function<void(Index, Cost)>)>& f,\n    const\
+    \ Index& start, const Index& goal) {\n  using P = pair<Cost, Index>;\n\n  map<Index,\
+    \ P> d;\n  priority_queue<P, vector<P>, greater<P>> Q;\n  d[start] = P(0, Index{});\n\
+    \  Q.emplace(0, start);\n\n  while (!Q.empty()) {\n    auto [u, t] = Q.top();\n\
+    \    Q.pop();\n    if (d[t].first != u) continue;\n    if (has_goal && t == goal)\
+    \ return d;\n    auto add = [&](Index nt, Cost nu) {\n      if (d.count(nt) ==\
+    \ 0 or nu < d[nt].first) {\n        d[nt] = P(nu, t);\n        Q.emplace(nu, nt);\n\
+    \      }\n    };\n    f(t, u, add);\n  }\n  return d;\n}\n#line 8 \"verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  inl(N, M, S, T);\n  auto g = wgraph<ll>(N,\
+    \ M, true, false);\n\n  auto d = dijkstra_abstruct<int, ll>(\n      [&](int c,\
+    \ ll cd, auto add) { each(e, g[c]) add(e.to, cd + e.cost); }, S,\n      T);\n\
+    \  if (d.count(T) == 0) die(-1);\n  vi path;\n  for (int x = T; x != S; x = d[x].second)\
+    \ path.push_back(x);\n  path.push_back(S);\n  reverse(all(path));\n\n  out(d[T].first,\
+    \ sz(path) - 1);\n  rep(i, sz(path) - 1) out(path[i], path[i + 1]);\n}\n\nvoid\
+    \ Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../graph/graph-utility.hpp\"\
+    \n//\n#include \"../../shortest-path/dijkstra-abstruct.hpp\"\nusing namespace\
+    \ Nyaan;\n\nvoid q() {\n  inl(N, M, S, T);\n  auto g = wgraph<ll>(N, M, true,\
+    \ false);\n\n  auto d = dijkstra_abstruct<int, ll>(\n      [&](int c, ll cd, auto\
+    \ add) { each(e, g[c]) add(e.to, cd + e.cost); }, S,\n      T);\n  if (d.count(T)\
+    \ == 0) die(-1);\n  vi path;\n  for (int x = T; x != S; x = d[x].second) path.push_back(x);\n\
+    \  path.push_back(S);\n  reverse(all(path));\n\n  out(d[T].first, sz(path) - 1);\n\
+    \  rep(i, sz(path) - 1) out(path[i], path[i + 1]);\n}\n\nvoid Nyaan::solve() {\n\
+    \  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -299,19 +297,19 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - tree/cartesian-tree.hpp
+  - graph/graph-utility.hpp
   - graph/graph-template.hpp
-  - tree/heavy-light-decomposition.hpp
+  - shortest-path/dijkstra-abstruct.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+  path: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
   requiredBy: []
   timestamp: '2023-05-23 20:26:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
-- /verify/verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp.html
-title: verify/verify-aoj-dsl/aoj-dsl-3-d-cartesiantree.test.cpp
+- /verify/verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
+- /verify/verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp.html
+title: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
 ---

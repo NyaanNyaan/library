@@ -126,6 +126,9 @@ data:
       title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\u306E\u5206\u679D\
         \u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5"
     - icon: ':warning:'
+      path: dp/golden-section-search.hpp
+      title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
+    - icon: ':warning:'
       path: dp/inversion-counting.hpp
       title: dp/inversion-counting.hpp
     - icon: ':heavy_check_mark:'
@@ -134,6 +137,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: dp/maximal-rectangle.hpp
       title: "\u6700\u5927\u9577\u65B9\u5F62"
+    - icon: ':warning:'
+      path: dp/monge-d-edge-shortest-path.hpp
+      title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E d-\u8FBA\u6700\u77ED\u8DEF"
+    - icon: ':heavy_check_mark:'
+      path: dp/monge-shortest-path.hpp
+      title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E\u6700\u77ED\u8DEF"
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -842,6 +851,9 @@ data:
       path: shortest-path/bfs01.hpp
       title: shortest-path/bfs01.hpp
     - icon: ':heavy_check_mark:'
+      path: shortest-path/dijkstra-abstruct.hpp
+      title: shortest-path/dijkstra-abstruct.hpp
+    - icon: ':heavy_check_mark:'
       path: shortest-path/dijkstra-fast.hpp
       title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(\u5B9A\u6570\u500D\u9AD8\u901F\
         \u5316)"
@@ -1196,6 +1208,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-3022.test.cpp
       title: verify/verify-aoj-other/aoj-3022.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-3086.test.cpp
+      title: verify/verify-aoj-other/aoj-3086.test.cpp
   - name: verify/verify-unit-test
     pages:
     - icon: ':heavy_check_mark:'
@@ -1697,6 +1712,9 @@ data:
       path: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
       title: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
       title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1955,6 +1973,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0697.test.cpp
       title: verify/verify-yuki/yuki-0697.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0703.test.cpp
+      title: verify/verify-yuki/yuki-0703.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0704.test.cpp
+      title: verify/verify-yuki/yuki-0704.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0705.test.cpp
+      title: verify/verify-yuki/yuki-0705.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0720.test.cpp
       title: verify/verify-yuki/yuki-0720.test.cpp

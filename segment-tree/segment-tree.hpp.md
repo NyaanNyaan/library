@@ -16,6 +16,9 @@ data:
     path: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
     title: verify/verify-aoj-grl/aoj-grl-5-d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-3086.test.cpp
+    title: verify/verify-aoj-other/aoj-3086.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/sparse-table.test.cpp
     title: verify/verify-unit-test/sparse-table.test.cpp
   - icon: ':heavy_check_mark:'
@@ -132,6 +135,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
+  - verify/verify-aoj-other/aoj-3086.test.cpp
 documentation_of: segment-tree/segment-tree.hpp
 layout: document
 redirect_from:

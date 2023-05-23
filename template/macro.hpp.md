@@ -211,6 +211,9 @@ data:
     path: verify/verify-aoj-other/aoj-3022.test.cpp
     title: verify/verify-aoj-other/aoj-3022.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-3086.test.cpp
+    title: verify/verify-aoj-other/aoj-3086.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/arbitrary-modint.test.cpp
     title: verify/verify-unit-test/arbitrary-modint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -700,6 +703,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - icon: ':heavy_check_mark:'
@@ -940,6 +946,15 @@ data:
     path: verify/verify-yuki/yuki-0697.test.cpp
     title: verify/verify-yuki/yuki-0697.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0703.test.cpp
+    title: verify/verify-yuki/yuki-0703.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0704.test.cpp
+    title: verify/verify-yuki/yuki-0704.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0705.test.cpp
+    title: verify/verify-yuki/yuki-0705.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0720.test.cpp
     title: verify/verify-yuki/yuki-0720.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1148,6 +1163,7 @@ data:
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-2231.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-0705.test.cpp
   - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
   - verify/verify-yuki/yuki-1283.test.cpp
@@ -1162,6 +1178,7 @@ data:
   - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-1320.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
+  - verify/verify-yuki/yuki-0703.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-1326.test.cpp
   - verify/verify-yuki/yuki-1781.test.cpp
@@ -1186,6 +1203,7 @@ data:
   - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-1323.test.cpp
   - verify/verify-yuki/yuki-0879.test.cpp
+  - verify/verify-yuki/yuki-0704.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yuki/yuki-0214.test.cpp
   - verify/verify-yuki/yuki-2012.test.cpp
@@ -1334,6 +1352,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - verify/verify-yosupo-graph/yosupo-chromatic-number.test.cpp
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
@@ -1426,6 +1445,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
   - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
+  - verify/verify-aoj-other/aoj-3086.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
