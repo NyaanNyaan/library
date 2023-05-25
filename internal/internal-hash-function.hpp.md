@@ -13,6 +13,9 @@ data:
     title: hashmap/hashmap-unerasable.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1377.test.cpp
+    title: verify/verify-aoj-other/aoj-1377.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/internal-type-traits.test.cpp
     title: verify/verify-unit-test/internal-type-traits.test.cpp
   - icon: ':heavy_check_mark:'
@@ -106,6 +109,7 @@ data:
   verifiedWith:
   - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-1377.test.cpp
 documentation_of: internal/internal-hash-function.hpp
 layout: document
 redirect_from:

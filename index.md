@@ -243,12 +243,15 @@ data:
       title: fps/utility.hpp
   - name: game
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: game/impartial-game.hpp
       title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: game/partisan-game.hpp
-      title: game/partisan-game.hpp
+      title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0"
+    - icon: ':heavy_check_mark:'
+      path: game/surreal-number.hpp
+      title: "\u8D85\u73FE\u5B9F\u6570"
   - name: geometry
     pages:
     - icon: ':warning:'
@@ -1182,6 +1185,9 @@ data:
       path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
       title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-1377.test.cpp
+      title: verify/verify-aoj-other/aoj-1377.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-1613.test.cpp
       title: verify/verify-aoj-other/aoj-1613.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1944,6 +1950,12 @@ data:
   - name: verify/verify-yuki
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0002.test.cpp
+      title: verify/verify-yuki/yuki-0002.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0102.test.cpp
+      title: verify/verify-yuki/yuki-0102.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0103.test.cpp
       title: verify/verify-yuki/yuki-0103.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1964,6 +1976,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0303.test.cpp
       title: verify/verify-yuki/yuki-0303.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0361.test.cpp
+      title: verify/verify-yuki/yuki-0361.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0502-base64.test.cpp
       title: verify/verify-yuki/yuki-0502-base64.test.cpp

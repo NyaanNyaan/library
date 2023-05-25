@@ -28,6 +28,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0002.test.cpp
+    title: verify/verify-yuki/yuki-0002.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   _isVerificationFailed: false
@@ -106,6 +109,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0103.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp

@@ -184,6 +184,9 @@ data:
     path: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
     title: verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1377.test.cpp
+    title: verify/verify-aoj-other/aoj-1377.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-1613.test.cpp
     title: verify/verify-aoj-other/aoj-1613.test.cpp
   - icon: ':heavy_check_mark:'
@@ -919,6 +922,12 @@ data:
     path: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
     title: verify/verify-yosupo-string/yosupo-zalgo-suffixarray.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0002.test.cpp
+    title: verify/verify-yuki/yuki-0002.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0102.test.cpp
+    title: verify/verify-yuki/yuki-0102.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   - icon: ':heavy_check_mark:'
@@ -939,6 +948,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0303.test.cpp
     title: verify/verify-yuki/yuki-0303.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0361.test.cpp
+    title: verify/verify-yuki/yuki-0361.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0502.test.cpp
     title: verify/verify-yuki/yuki-0502.test.cpp
@@ -1248,6 +1260,7 @@ data:
   - verify/verify-yuki/yuki-1781.test.cpp
   - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-helloworld.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-yuki/yuki-0880.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
@@ -1263,9 +1276,11 @@ data:
   - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+  - verify/verify-yuki/yuki-0361.test.cpp
   - verify/verify-yuki/yuki-1467.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-1323.test.cpp
+  - verify/verify-yuki/yuki-0102.test.cpp
   - verify/verify-yuki/yuki-0879.test.cpp
   - verify/verify-yuki/yuki-0704.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
@@ -1508,6 +1523,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
+  - verify/verify-aoj-other/aoj-1377.test.cpp
   - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   - verify/verify-aoj-other/aoj-3086.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp

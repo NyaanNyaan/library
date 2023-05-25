@@ -10,6 +10,9 @@ data:
     title: "\u30CF\u30C3\u30B7\u30E5\u95A2\u6570"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1377.test.cpp
+    title: verify/verify-aoj-other/aoj-1377.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/internal-type-traits.test.cpp
     title: verify/verify-unit-test/internal-type-traits.test.cpp
   - icon: ':heavy_check_mark:'
@@ -54,6 +57,7 @@ data:
   verifiedWith:
   - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+  - verify/verify-aoj-other/aoj-1377.test.cpp
 documentation_of: internal/internal-seed.hpp
 layout: document
 redirect_from:

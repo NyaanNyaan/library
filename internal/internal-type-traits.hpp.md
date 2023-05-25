@@ -64,6 +64,9 @@ data:
     path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
     title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-1377.test.cpp
+    title: verify/verify-aoj-other/aoj-1377.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
     title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - icon: ':heavy_check_mark:'
@@ -334,6 +337,9 @@ data:
     path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0002.test.cpp
+    title: verify/verify-yuki/yuki-0002.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0103.test.cpp
     title: verify/verify-yuki/yuki-0103.test.cpp
   - icon: ':heavy_check_mark:'
@@ -418,6 +424,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-2266.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
   - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
@@ -496,6 +503,7 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - verify/verify-aoj-other/aoj-1377.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
