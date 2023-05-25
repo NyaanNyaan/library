@@ -8,33 +8,40 @@
 using namespace std;
 
 /**
- * Board は盤面の型, Move は着手の型 (void OK)
+ * ゲームの遷移が DAG で表せる不偏ゲームの solver
  *
- * Game は vector<Board> (ゲームが分割される場合に対応)
- * State は次のような型
- * - Move が void の場合, Game
- * - Move が 非 void の場合, pair<Game, Move>
- * Games は vector<State>
+ * Board：盤面の型
+ * Move は着手の型 or void
+ * Game は
  *
- * F は Board を引数, Games を返り値に取る関数。
- * 1 手前の情報が必要かどうか応じて Move の引数を変える
+ * - splittable = true の場合は vector<Board> (ゲームの分割に対応)
+ * - splittable = falseの場合は Board
+ *
+ * State は次
+ *
+ * - Move が void である場合, Game
+ * - Move が void でない場合, pair<Game, Move>
+ *
+ * States は vector<State>
+ *
+ * F は Board を引数, States を返り値に取る関数。つまり
+ *
+ * - デフォルトの場合   : function<vector<Board>(Board)>
+ * - splittable の場合 : function<vector<vector<Board>(Board)>
+ * - Move != void の場合は返り値の value_type が pair(*, move) になる
+ *
+ * 雑にゲームの勝敗を知りたいときはデフォルトでよい
+ * 最善手の情報が欲しいときは Move の引数を変えて頑張る
  */
 
-template <typename Board, typename Move = void>
+template <typename Board, typename Move = void, bool splittable = false>
 struct ImpartialGameSolver {
-  using Game = vector<Board>;
+  using Boards = vector<Board>;
+  using Game = conditional_t<splittable, vector<Board>, Board>;
   using State = conditional_t<is_void_v<Move>, Game, pair<Game, Move>>;
-  using Games = vector<State>;
+  using States = vector<State>;
   using Nimber = long long;
-  using F = function<Games(Board)>;
-
-  const Game& get_game(const State& s) {
-    if constexpr (is_void_v<Move>) {
-      return s;
-    } else {
-      return s.first;
-    }
-  }
+  using F = function<States(Board)>;
 
   map<Board, Nimber> mp;
   F f;
@@ -43,61 +50,63 @@ struct ImpartialGameSolver {
   ImpartialGameSolver(const F& _f) : f(_f) {}
   void set_func(const F& _f) { f = _f; }
 
-  Nimber get(const Board& b) {
-    if (mp.count(b)) return mp[b];
-    return mp[b] = _get(b);
-  }
-  Nimber get(const Game& g) {
-    Nimber n = 0;
-    for (const Board& s : g) n ^= get(s);
-    return n;
-  }
-  Nimber get_from_state(const State& s) { return get(get_game(s)); }
-
-  Move get_best_move(const Board& b) {
-    assert(is_void_v<Move> == false);
-    Nimber n = get(b);
-    assert(n != 0 and "get_best_move(const Board& b)");
-    Games gs = f(b);
-    for (State& st : gs) {
-      if (get_from_state(st) == 0) return st.second;
+  template <typename T>
+  Nimber get(const T& t) {
+    if constexpr (is_same_v<T, Board>) {
+      if (mp.count(t)) return mp[t];
+      return mp[t] = _get(t);
+    } else if constexpr (is_same_v<T, Boards>) {
+      Nimber n = 0;
+      for (const Board& s : t) n ^= get(s);
+      return n;
+    } else {
+      static_assert(is_same_v<T, pair<Game, Move>>);
+      return get(t.first);
     }
-    assert(false and "get_best_move(const Board& b)");
-    exit(1);
   }
 
-  // 選ぶ Board の index, および Move を返す
-  pair<int, Move> get_best_move(const Game& g) {
-    assert(is_void_v<Move> == false);
-    Nimber n = get(g);
-    assert(n != 0 and "get_best_move(const Game& g)");
-    for (int i = 0; i < (int)g.size(); i++) {
-      Board& b = g[i];
-      Nimber bn = get(b);
-      if (bn < (n ^ bn)) continue;
-      Games gs = f(b);
-      for (State& cur_st : gs) {
-        if (get_from_state(cur_st) == (n ^ bn)) {
-          return {b, g.second};
-        }
+  template <typename T>
+  conditional_t<is_same_v<T, Board>, Move, pair<int, Move>> get_best_move(
+      const T& t) {
+    static_assert(is_void_v<Move> == false);
+    Nimber n = get(t);
+    assert(n != 0 and "No Best Move.");
+    if (is_same_v<T, Board>) {
+      auto res = change_x(t, n);
+      if (res.first) return res.second;
+    } else {
+      static_assert(is_same_v<T, Boards>);
+      for (int i = 0; i < (int)t.size(); i++) {
+        auto res = change_x(t[i], n);
+        if (res.first) return {i, res.second};
       }
     }
-    assert(false and "get_best_move(const Game& g)");
+    assert(false and "Error in get_best_move().");
     exit(1);
   }
 
  private:
   Nimber _get(const Board& b) {
-    Games gs = f(b);
+    States gs = f(b);
     if (gs.empty()) return {};
     vector<Nimber> ns;
-    for (State& st : gs) ns.push_back(get_from_state(st));
+    for (State& st : gs) ns.push_back(get(st));
     sort(begin(ns), end(ns));
     ns.erase(unique(begin(ns), end(ns)), end(ns));
     for (int i = 0; i < (int)ns.size(); i++) {
       if (ns[i] != i) return i;
     }
     return ns.size();
+  }
+
+  // nimber が x 変わるような着手を返す
+  pair<bool, Move> change_x(const Board& b, Nimber x) {
+    assert(is_void_v<Move> == false);
+    Nimber n = get(b);
+    for (auto& st : f(b)) {
+      if (get(st) == (x ^ n)) return {true, st.second};
+    }
+    return {false, Move{}};
   }
 };
 

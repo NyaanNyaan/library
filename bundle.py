@@ -2,13 +2,9 @@ import subprocess
 import sys
 import re
 import io
+import os
+import datetime
 
-# oj-bundleを使用した際、Windows環境だと
-# 「#line 3 "ntt\ntt.hpp"」のような行が発生してしまい、
-# yosupo judgeでは'\n'が改行文字と認識されるのかCEになる
-# それを防ぐために作った雑なラッパー
-
-# 出力をutf-8にする(これをしないとwinでは文字化けする)
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 args = sys.argv
@@ -21,17 +17,17 @@ with open(args[1], mode='r', encoding='utf-8') as f:
   lines = f.readlines()
   for line in lines:
     buf.write(line)
-    # #include同士は1行空ける
+    # `#include` 同士は 1 行空ける
     if len(line) > 8 and line[:8] == '#include':
       buf.write('\n')
 buf.close()
 
-library_path = "C:/Users/denjo/Desktop/ABC/library"
+library_path = os.getcwd()
 
-import datetime
 nw = datetime.datetime.now()
 print("/**")
-print(" *  date : " + nw.strftime("%Y-%m-%d %H:%M:%S"))
+print(" * date   : " + nw.strftime("%Y-%m-%d %H:%M:%S"))
+print(" * author : Nyaan")
 print(" */")
 print()
 print("#define NDEBUG")
@@ -85,3 +81,5 @@ for line in lines:
 
   if not re.match('^#line', line):
     print(line, end='')
+  else:
+    print()
