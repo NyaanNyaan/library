@@ -1,3 +1,4 @@
+import os
 from enum import Enum
 
 class State(Enum):
@@ -63,7 +64,7 @@ def remove_garbage(text):
 
 
 if __name__ == '__main__':
-  p = "C:\\Users\\denjo\\Desktop\\ABC\\library\\unused\\a.cpp"
+  p = os.path.join(os.getcwd(), "unused", "a.cpp")
   with open(p, "r", encoding='utf-8') as f:
     content = f.read()
     compressed = remove_garbage(content)
