@@ -22,7 +22,7 @@ void Nyaan::solve() {
   ini(N, Q);
   V<Pair> a(N, {0, 1});
   rep(i, N) in(a[i].first);
-  LazySegmentTree<Pair, Pair, f, g, h, ti, ei> seg(a);
+  LazySegmentTreeBase<Pair, Pair, f, g, h, ti, ei> seg(a);
 
   rep(_, Q) {
     ini(cmd);
