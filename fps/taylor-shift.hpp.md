@@ -16,6 +16,9 @@ data:
     path: fps/partial-fraction-decomposition.hpp
     title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
       \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
+  - icon: ':heavy_check_mark:'
+    path: set-function/egf-composite-set-power-series.hpp
+    title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dual-fps.test.cpp
@@ -29,6 +32,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1504.test.cpp
     title: verify/verify-yuki/yuki-1504.test.cpp
@@ -166,11 +172,13 @@ data:
   requiredBy:
   - fps/fps-famous-series.hpp
   - fps/partial-fraction-decomposition.hpp
+  - set-function/egf-composite-set-power-series.hpp
   timestamp: '2023-05-22 22:29:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp

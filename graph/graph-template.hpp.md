@@ -161,6 +161,9 @@ data:
     path: verify/verify-aoj-other/aoj-3022.test.cpp
     title: verify/verify-aoj-other/aoj-3022.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-3506.test.cpp
+    title: verify/verify-aoj-other/aoj-3506.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dijkstra.test.cpp
     title: verify/verify-unit-test/dijkstra.test.cpp
   - icon: ':heavy_check_mark:'
@@ -394,6 +397,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-aoj-other/aoj-3506.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-aoj-other/aoj-2891.test.cpp

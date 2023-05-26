@@ -10,6 +10,9 @@ data:
       path: data-structure/binary-trie.hpp
       title: Binary Trie
     - icon: ':heavy_check_mark:'
+      path: data-structure/divide-interval.hpp
+      title: data-structure/divide-interval.hpp
+    - icon: ':heavy_check_mark:'
       path: data-structure/dynamic-binary-indexed-tree.hpp
       title: "\u52D5\u7684Binary Indexed Tree"
     - icon: ':warning:'
@@ -465,8 +468,11 @@ data:
       path: math/sum-of-floor.hpp
       title: math/sum-of-floor.hpp
     - icon: ':heavy_check_mark:'
-      path: math/sweep.hpp
+      path: math/sweep-restore.hpp
       title: "\u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
+    - icon: ':heavy_check_mark:'
+      path: math/sweep.hpp
+      title: "\u6383\u304D\u51FA\u3057\u6CD5"
     - icon: ':heavy_check_mark:'
       path: math/two-sat.hpp
       title: 2-SAT
@@ -824,6 +830,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: set-function/and-convolution.hpp
       title: AND Convoluion
+    - icon: ':heavy_check_mark:'
+      path: set-function/egf-composite-set-power-series.hpp
+      title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
     - icon: ':heavy_check_mark:'
       path: set-function/enumerate-set.hpp
       title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319"
@@ -1217,6 +1226,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-other/aoj-3086.test.cpp
       title: verify/verify-aoj-other/aoj-3086.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-3277.test.cpp
+      title: verify/verify-aoj-other/aoj-3277.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-other/aoj-3506.test.cpp
+      title: verify/verify-aoj-other/aoj-3506.test.cpp
   - name: verify/verify-unit-test
     pages:
     - icon: ':heavy_check_mark:'
@@ -1303,6 +1318,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/karatsuba.test.cpp
       title: verify/verify-unit-test/karatsuba.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/lazyseg-bsearch.test.cpp
+      title: verify/verify-unit-test/lazyseg-bsearch.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
       title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
@@ -1813,6 +1831,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
       title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+      title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
       title: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2042,6 +2063,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1145.test.cpp
       title: verify/verify-yuki/yuki-1145.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+      title: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1170.test.cpp
       title: verify/verify-yuki/yuki-1170.test.cpp

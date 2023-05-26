@@ -217,6 +217,12 @@ data:
     path: verify/verify-aoj-other/aoj-3086.test.cpp
     title: verify/verify-aoj-other/aoj-3086.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-3277.test.cpp
+    title: verify/verify-aoj-other/aoj-3277.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-other/aoj-3506.test.cpp
+    title: verify/verify-aoj-other/aoj-3506.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/arbitrary-modint.test.cpp
     title: verify/verify-unit-test/arbitrary-modint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -297,6 +303,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/karatsuba.test.cpp
     title: verify/verify-unit-test/karatsuba.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/lazyseg-bsearch.test.cpp
+    title: verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
     title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
@@ -796,6 +805,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
     title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1011,6 +1023,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+    title: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1170.test.cpp
     title: verify/verify-yuki/yuki-1170.test.cpp
@@ -1256,6 +1271,7 @@ data:
   - verify/verify-yuki/yuki-1220.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
   - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-yuki/yuki-1170-divide-interval.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-yuki/yuki-0361.test.cpp
   - verify/verify-yuki/yuki-1467.test.cpp
@@ -1297,6 +1313,7 @@ data:
   - verify/verify-yosupo-math/yosupo-two-sat.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
@@ -1369,6 +1386,7 @@ data:
   - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/run-length-encoding.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
+  - verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp
@@ -1504,12 +1522,14 @@ data:
   - verify/verify-aoj-ntl/aoj-ntl-1-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-e.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-1-d.test.cpp
+  - verify/verify-aoj-other/aoj-3506.test.cpp
   - verify/verify-aoj-other/aoj-1377.test.cpp
   - verify/verify-aoj-other/aoj-1130-DG-bfs.test.cpp
   - verify/verify-aoj-other/aoj-3086.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
   - verify/verify-aoj-other/aoj-2945-01bfs.test.cpp
   - verify/verify-aoj-other/aoj-2945-DG-01bfs.test.cpp
+  - verify/verify-aoj-other/aoj-3277.test.cpp
   - verify/verify-aoj-other/aoj-1068.test.cpp
   - verify/verify-aoj-other/aoj-3022.test.cpp
   - verify/verify-aoj-other/aoj-2891.test.cpp

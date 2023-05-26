@@ -98,6 +98,9 @@ data:
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - icon: ':heavy_check_mark:'
@@ -412,6 +415,7 @@ data:
   - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-yuki/yuki-1145-frac.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/fps.test.cpp

@@ -184,6 +184,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
     title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -490,6 +493,7 @@ data:
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
   - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp

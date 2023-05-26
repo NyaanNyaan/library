@@ -11,7 +11,7 @@ data:
     path: math/nimber.hpp
     title: Nim Product
   - icon: ':heavy_check_mark:'
-    path: math/sweep.hpp
+    path: math/sweep-restore.hpp
     title: "\u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
@@ -303,18 +303,20 @@ data:
     \  }\n};\n\nusing Nimber16 = NimberBase<uint16_t, NimberImpl::product16>;\nusing\
     \ Nimber32 = NimberBase<uint32_t, NimberImpl::product32>;\nusing Nimber64 = NimberBase<uint64_t,\
     \ NimberImpl::product64>;\nusing Nimber = Nimber64;\n\n/**\n * @brief Nim Product\n\
-    \ * @docs docs/math/nimber.md\n */\n#line 2 \"math/sweep.hpp\"\n\ntemplate <typename\
-    \ T>\nstruct Sweep {\n  using P = pair<T, unordered_set<int>>;\n  vector<P> basis;\n\
-    \  int num;\n\n  Sweep() : num(0) {}\n  Sweep(const vector<T>& v) : num(0) {\n\
-    \    for (auto& x : v) add(x, num++);\n  }\n\n  void add(T x, int id) {\n    P\
-    \ v{x, {id}};\n    for (P& b : basis) {\n      if (v.first > (v.first ^ b.first))\
-    \ apply(v, b);\n    }\n    if (v.first != T{}) basis.push_back(v);\n  }\n\n  pair<bool,\
-    \ vector<int>> restore(T x) {\n    P v{x, {}};\n    for (P& b : basis) {\n   \
-    \   if (v.first > (v.first ^ b.first)) apply(v, b);\n    }\n    if (v.first !=\
-    \ T{}) return {false, {}};\n    vector<int> res;\n    for (auto& n : v.second)\
-    \ res.push_back(n);\n    sort(begin(res), end(res));\n    return {true, res};\n\
-    \  }\n\n private:\n  void apply(P& p, const P& o) {\n    p.first ^= o.first;\n\
-    \    for (auto& x : o.second) apply(p.second, x);\n  }\n  void apply(unordered_set<int>&\
+    \ * @docs docs/math/nimber.md\n */\n#line 2 \"math/sweep-restore.hpp\"\n\ntemplate\
+    \ <typename T>\nstruct Sweep {\n  using P = pair<T, unordered_set<int>>;\n  vector<P>\
+    \ basis;\n\n  Sweep() {}\n  Sweep(const vector<T>& v) {\n    for (int i = 0; i\
+    \ < (int)v.size(); i++) add(v[i], i);\n  }\n\n  // x \u3092 id \u3068\u5171\u306B\
+    \u8FFD\u52A0\n  void add(T x, int id) {\n    P v{x, {id}};\n    for (P& b : basis)\
+    \ {\n      if (v.first > (v.first ^ b.first)) apply(v, b);\n    }\n    if (v.first\
+    \ != T{}) basis.push_back(v);\n  }\n\n  // pair(x \u3092\u5FA9\u5143\u3067\u304D\
+    \u308B\u304B\uFF1F, {\u5FA9\u5143\u3057\u305F\u6642\u306E ID \u306E\u96C6\u5408\
+    })\n  pair<bool, vector<int>> restore(T x) {\n    P v{x, {}};\n    for (P& b :\
+    \ basis) {\n      if (v.first > (v.first ^ b.first)) apply(v, b);\n    }\n   \
+    \ if (v.first != T{}) return {false, {}};\n    vector<int> res;\n    for (auto&\
+    \ n : v.second) res.push_back(n);\n    sort(begin(res), end(res));\n    return\
+    \ {true, res};\n  }\n\n private:\n  void apply(P& p, const P& o) {\n    p.first\
+    \ ^= o.first;\n    for (auto& x : o.second) apply(p.second, x);\n  }\n  void apply(unordered_set<int>&\
     \ s, int x) {\n    if (s.count(x)) {\n      s.erase(x);\n    } else {\n      s.insert(x);\n\
     \    }\n  }\n};\n\n/**\n * @brief \u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\
     \u304D)\n */\n#line 5 \"math/nimber-to-field.hpp\"\n\ntemplate <typename N>\n\
@@ -340,15 +342,15 @@ data:
     \n  {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b << endl;\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../math/nimber-to-field.hpp\"\
-    \n#include \"../../math/nimber.hpp\"\n#include \"../../math/sweep.hpp\"\n\nusing\
-    \ namespace Nyaan;\n\nvoid Nyaan::solve() {\n  using nim = Nimber16;\n  using\
-    \ u16 = uint16_t;\n  nim proot = NimberImpl::c16.proot;\n  vector<u16> ntf{0x0001u,\
-    \ 0x8ff5u, 0x6cbfu, 0xa5beu, 0x761au, 0x8238u,\n                  0x4f08u, 0x95acu,\
-    \ 0xf340u, 0x1336u, 0x7d5eu, 0x86e7u,\n                  0x3a47u, 0xe796u, 0xb7c3u,\
-    \ 0x0008u};\n  NimberToField<nim> mp(proot);\n  rep(i, 16) {\n    assert(ntf[i]\
-    \ == mp.nimber2field(1 << i));\n    assert(mp.field2nimber(1 << i) == proot.pow(i));\n\
-    \  }\n  nim p16 = proot.pow(16);\n  u16 f16 = mp.nimber2field(p16);\n  unsigned\
-    \ ppoly = (unsigned(1) << 16) ^ f16;\n  assert(ppoly == NimberImpl::c16.ppoly);\n\
+    \n#include \"../../math/nimber.hpp\"\n#include \"../../math/sweep-restore.hpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  using nim = Nimber16;\n\
+    \  using u16 = uint16_t;\n  nim proot = NimberImpl::c16.proot;\n  vector<u16>\
+    \ ntf{0x0001u, 0x8ff5u, 0x6cbfu, 0xa5beu, 0x761au, 0x8238u,\n                \
+    \  0x4f08u, 0x95acu, 0xf340u, 0x1336u, 0x7d5eu, 0x86e7u,\n                  0x3a47u,\
+    \ 0xe796u, 0xb7c3u, 0x0008u};\n  NimberToField<nim> mp(proot);\n  rep(i, 16) {\n\
+    \    assert(ntf[i] == mp.nimber2field(1 << i));\n    assert(mp.field2nimber(1\
+    \ << i) == proot.pow(i));\n  }\n  nim p16 = proot.pow(16);\n  u16 f16 = mp.nimber2field(p16);\n\
+    \  unsigned ppoly = (unsigned(1) << 16) ^ f16;\n  assert(ppoly == NimberImpl::c16.ppoly);\n\
     \n  {\n    int a, b;\n    cin >> a >> b;\n    cout << a + b << endl;\n  }\n}\n"
   dependsOn:
   - template/template.hpp
@@ -360,11 +362,11 @@ data:
   - math/nimber-to-field.hpp
   - math/nimber.hpp
   - math/garner.hpp
-  - math/sweep.hpp
+  - math/sweep-restore.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/nimber-to-field.test.cpp
   requiredBy: []
-  timestamp: '2023-03-24 20:50:25+09:00'
+  timestamp: '2023-05-26 23:34:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/nimber-to-field.test.cpp

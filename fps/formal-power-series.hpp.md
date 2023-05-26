@@ -86,6 +86,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
+  - icon: ':heavy_check_mark:'
+    path: set-function/egf-composite-set-power-series.hpp
+    title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dual-fps.test.cpp
@@ -189,6 +192,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
@@ -417,6 +423,7 @@ data:
   - fps/mod-pow.hpp
   - fps/polynomial-interpolation.hpp
   - fps/fps-composition-fast.hpp
+  - set-function/egf-composite-set-power-series.hpp
   - modulo/factorial.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/black-box-linear-algebra.hpp
@@ -446,6 +453,7 @@ data:
   - verify/verify-yuki/yuki-1145-frac.test.cpp
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-0502.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp

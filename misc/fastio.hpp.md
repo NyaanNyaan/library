@@ -205,6 +205,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
     title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - icon: ':heavy_check_mark:'
@@ -405,6 +408,7 @@ data:
   - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp

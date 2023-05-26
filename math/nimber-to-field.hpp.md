@@ -8,7 +8,7 @@ data:
     path: math/nimber.hpp
     title: Nim Product
   - icon: ':heavy_check_mark:'
-    path: math/sweep.hpp
+    path: math/sweep-restore.hpp
     title: "\u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\u304D)"
   _extendedRequiredBy: []
   _extendedVerifiedWith:
@@ -120,18 +120,20 @@ data:
     \  }\n};\n\nusing Nimber16 = NimberBase<uint16_t, NimberImpl::product16>;\nusing\
     \ Nimber32 = NimberBase<uint32_t, NimberImpl::product32>;\nusing Nimber64 = NimberBase<uint64_t,\
     \ NimberImpl::product64>;\nusing Nimber = Nimber64;\n\n/**\n * @brief Nim Product\n\
-    \ * @docs docs/math/nimber.md\n */\n#line 2 \"math/sweep.hpp\"\n\ntemplate <typename\
-    \ T>\nstruct Sweep {\n  using P = pair<T, unordered_set<int>>;\n  vector<P> basis;\n\
-    \  int num;\n\n  Sweep() : num(0) {}\n  Sweep(const vector<T>& v) : num(0) {\n\
-    \    for (auto& x : v) add(x, num++);\n  }\n\n  void add(T x, int id) {\n    P\
-    \ v{x, {id}};\n    for (P& b : basis) {\n      if (v.first > (v.first ^ b.first))\
-    \ apply(v, b);\n    }\n    if (v.first != T{}) basis.push_back(v);\n  }\n\n  pair<bool,\
-    \ vector<int>> restore(T x) {\n    P v{x, {}};\n    for (P& b : basis) {\n   \
-    \   if (v.first > (v.first ^ b.first)) apply(v, b);\n    }\n    if (v.first !=\
-    \ T{}) return {false, {}};\n    vector<int> res;\n    for (auto& n : v.second)\
-    \ res.push_back(n);\n    sort(begin(res), end(res));\n    return {true, res};\n\
-    \  }\n\n private:\n  void apply(P& p, const P& o) {\n    p.first ^= o.first;\n\
-    \    for (auto& x : o.second) apply(p.second, x);\n  }\n  void apply(unordered_set<int>&\
+    \ * @docs docs/math/nimber.md\n */\n#line 2 \"math/sweep-restore.hpp\"\n\ntemplate\
+    \ <typename T>\nstruct Sweep {\n  using P = pair<T, unordered_set<int>>;\n  vector<P>\
+    \ basis;\n\n  Sweep() {}\n  Sweep(const vector<T>& v) {\n    for (int i = 0; i\
+    \ < (int)v.size(); i++) add(v[i], i);\n  }\n\n  // x \u3092 id \u3068\u5171\u306B\
+    \u8FFD\u52A0\n  void add(T x, int id) {\n    P v{x, {id}};\n    for (P& b : basis)\
+    \ {\n      if (v.first > (v.first ^ b.first)) apply(v, b);\n    }\n    if (v.first\
+    \ != T{}) basis.push_back(v);\n  }\n\n  // pair(x \u3092\u5FA9\u5143\u3067\u304D\
+    \u308B\u304B\uFF1F, {\u5FA9\u5143\u3057\u305F\u6642\u306E ID \u306E\u96C6\u5408\
+    })\n  pair<bool, vector<int>> restore(T x) {\n    P v{x, {}};\n    for (P& b :\
+    \ basis) {\n      if (v.first > (v.first ^ b.first)) apply(v, b);\n    }\n   \
+    \ if (v.first != T{}) return {false, {}};\n    vector<int> res;\n    for (auto&\
+    \ n : v.second) res.push_back(n);\n    sort(begin(res), end(res));\n    return\
+    \ {true, res};\n  }\n\n private:\n  void apply(P& p, const P& o) {\n    p.first\
+    \ ^= o.first;\n    for (auto& x : o.second) apply(p.second, x);\n  }\n  void apply(unordered_set<int>&\
     \ s, int x) {\n    if (s.count(x)) {\n      s.erase(x);\n    } else {\n      s.insert(x);\n\
     \    }\n  }\n};\n\n/**\n * @brief \u6383\u304D\u51FA\u3057\u6CD5(\u5FA9\u5143\u4ED8\
     \u304D)\n */\n#line 5 \"math/nimber-to-field.hpp\"\n\ntemplate <typename N>\n\
@@ -146,9 +148,9 @@ data:
     \ res;\n  }\n  N field2nimber(uint x) {\n    uint res = 0;\n    for (; x; x &=\
     \ x - 1) res ^= ftn[__builtin_ctzll(x)];\n    return res;\n  }\n};\n\n/**\n *\
     \ @brief Nimber <-> \u591A\u9805\u5F0F\u74B0\n */\n"
-  code: "#pragma once\n\n#include \"nimber.hpp\"\n#include \"sweep.hpp\"\n\ntemplate\
-    \ <typename N>\nstruct NimberToField {\n  using uint = decltype(N::x);\n  static\
-    \ constexpr int S = sizeof(uint) * 8;\n  vector<uint> ftn, ntf;\n  NimberToField(N\
+  code: "#pragma once\n\n#include \"nimber.hpp\"\n#include \"sweep-restore.hpp\"\n\
+    \ntemplate <typename N>\nstruct NimberToField {\n  using uint = decltype(N::x);\n\
+    \  static constexpr int S = sizeof(uint) * 8;\n  vector<uint> ftn, ntf;\n  NimberToField(N\
     \ proot) {\n    ftn.resize(S);\n    N cur = 1;\n    for (int i = 0; i < S; i++)\
     \ {\n      ftn[i] = cur.x;\n      cur *= proot;\n    }\n    Sweep sweep{ftn};\n\
     \    ntf.resize(S);\n    for (int i = 0; i < S; i++) {\n      auto ans = sweep.restore(1\
@@ -161,11 +163,11 @@ data:
   dependsOn:
   - math/nimber.hpp
   - math/garner.hpp
-  - math/sweep.hpp
+  - math/sweep-restore.hpp
   isVerificationFile: false
   path: math/nimber-to-field.hpp
   requiredBy: []
-  timestamp: '2023-03-24 20:50:25+09:00'
+  timestamp: '2023-05-26 23:34:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/nimber-to-field.test.cpp

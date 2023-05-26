@@ -88,6 +88,9 @@ data:
     path: verify/verify-unit-test/karatsuba.test.cpp
     title: verify/verify-unit-test/karatsuba.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/lazyseg-bsearch.test.cpp
+    title: verify/verify-unit-test/lazyseg-bsearch.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/lazyseg-setval-2.test.cpp
     title: verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -306,6 +309,7 @@ data:
   - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
   - verify/verify-unit-test/run-length-encoding.test.cpp
   - verify/verify-unit-test/karatsuba.test.cpp
+  - verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
   - verify/verify-unit-test/radix-heap.test.cpp

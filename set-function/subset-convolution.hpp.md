@@ -1,8 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: set-function/egf-composite-set-power-series.hpp
+    title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
@@ -69,11 +75,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: set-function/subset-convolution.hpp
-  requiredBy: []
+  requiredBy:
+  - set-function/egf-composite-set-power-series.hpp
   timestamp: '2021-03-06 19:10:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
 documentation_of: set-function/subset-convolution.hpp
 layout: document
 redirect_from:

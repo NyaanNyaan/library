@@ -40,6 +40,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/multipoint-binomial-sum.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1"
+  - icon: ':heavy_check_mark:'
+    path: set-function/egf-composite-set-power-series.hpp
+    title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dual-fps.test.cpp
@@ -110,6 +113,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+    title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
     title: verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
@@ -254,6 +260,7 @@ data:
   - fps/taylor-shift.hpp
   - fps/utility.hpp
   - fps/sample-point-shift.hpp
+  - set-function/egf-composite-set-power-series.hpp
   - modulo/multipoint-binomial-sum.hpp
   - modulo/factorial.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
@@ -279,6 +286,7 @@ data:
   - verify/verify-yuki/yuki-0963-circular.test.cpp
   - verify/verify-yuki/yuki-0502.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp

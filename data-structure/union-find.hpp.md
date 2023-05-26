@@ -31,6 +31,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
     title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+    title: verify/verify-yuki/yuki-1170-divide-interval.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1254.test.cpp
     title: verify/verify-yuki/yuki-1254.test.cpp
   - icon: ':heavy_check_mark:'
@@ -78,6 +81,7 @@ data:
   verifiedWith:
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1254.test.cpp
+  - verify/verify-yuki/yuki-1170-divide-interval.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
