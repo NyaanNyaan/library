@@ -1,50 +1,111 @@
 #pragma once
 
-template <typename T>
-struct Sweep {
-  using P = pair<T, unordered_set<int>>;
-  vector<P> basis;
-  int num;
+#include <array>
+#include <vector>
+using namespace std;
 
-  Sweep() : num(0) {}
-  Sweep(const vector<T>& v) : num(0) {
-    for (auto& x : v) add(x, num++);
+// MAX bit
+template <typename Int, int MAX>
+struct Basis {
+  array<Int, MAX> v;
+
+  Basis() : _size(0) { fill(begin(v), end(v), Int{0}); }
+  Basis(const vector<Int>& a) : _size(0) {
+    fill(begin(v), end(v), Int{0});
+    for (auto& x : a) add(x);
+  }
+  const Int operator[](int i) const { return v[i]; }
+
+  // 追加成功かどうかを返す
+  bool add(Int x) {
+    int t = _msb(x);
+    assert(t < MAX);
+    while (t != -1 && v[t]) t = _msb(x = x ^ v[t]);
+    return t == -1 ? false : (v[t] = x, _size++, true);
   }
 
-  void add(T x, int id) {
-    P v{x, {id}};
-    for (P& b : basis) {
-      if (v.first > (v.first ^ b.first)) apply(v, b);
+  // rhs との和を求める
+  void merge(const Basis& rhs) {
+    for (int _t = MAX - 1; _t >= 0; _t--) {
+      if (rhs.v[_t] == Int{0}) continue;
+      int t = _t;
+      Int x = rhs.v[t];
+      while (t != -1 && v[t]) t = _msb(x = x ^ v[t]);
+      if (x) v[t] = x, _size++;
     }
-    if (v.first != T{}) basis.push_back(v);
   }
 
-  pair<bool, vector<int>> restore(T x) {
-    P v{x, {}};
-    for (P& b : basis) {
-      if (v.first > (v.first ^ b.first)) apply(v, b);
+  // 基底を得る。TODO:verify
+  vector<Int> get_basis() const {
+    vector<Int> res;
+    for (int t = 0; t < MAX; t++) {
+      if (v[t]) res.push_back(v[t]);
     }
-    if (v.first != T{}) return {false, {}};
-    vector<int> res;
-    for (auto& n : v.second) res.push_back(n);
-    sort(begin(res), end(res));
-    return {true, res};
+    reverse(begin(res), end(res));
+    return res;
+  }
+
+  // x を作れるか？ TODO:verify
+  bool test(Int x) {
+    if (x == 0) return true;
+    int t = _msb(x);
+    if (t >= MAX) return false;
+    while (v[t]) t = _msb(x = x ^ v[t]);
+    return x == 0;
+  }
+
+  // 作れる x の最大値, TODO:verify
+  Int get_max() const {
+    Int res = 0;
+    for (int t = MAX - 1; t >= 0; t--) res = max(res, res ^ v[t]);
+    return res;
+  }
+
+  // 行列を標準化する
+  void normalize() {
+    for (int t = MAX - 1; t >= 0; t--) {
+      if (v[t]) {
+        for (int u = MAX - 1; u > t; u--) v[u] = min(v[u], v[u] ^ v[t]);
+      }
+    }
+  }
+
+  vector<Int> orthogonal_complement(int N = MAX) {
+    normalize();
+    vector<int> b;
+    for (int t = N - 1; t >= 0; t--) {
+      if (v[t]) b.push_back(t);
+    }
+    int rank = b.size();
+    for (int t = N - 1; t >= 0; t--) {
+      if (!v[t]) b.push_back(t);
+    }
+    vector<Int> res(N - rank);
+    for (int i = rank; i < N; i++) {
+      for (int j = 0; j < N; j++) {
+        if (j < rank ? ((v[b[j]] >> b[i]) & 1) : i == j) {
+          res[i - rank] |= Int{1} << b[j];
+        }
+      }
+    }
+    return res;
+  }
+
+  int size() const { return _size; }
+
+  friend ostream& operator<<(ostream& os, const Basis<Int, MAX>& b) {
+    os << "{ ";
+    for (int i = 0; i < MAX; i++) {
+      if (b.v[i]) os << b.v[i] << ", ";
+    }
+    return os << "}";
   }
 
  private:
-  void apply(P& p, const P& o) {
-    p.first ^= o.first;
-    for (auto& x : o.second) apply(p.second, x);
-  }
-  void apply(unordered_set<int>& s, int x) {
-    if (s.count(x)) {
-      s.erase(x);
-    } else {
-      s.insert(x);
-    }
-  }
+  int _size;
+  int _msb(Int x) { return x ? 63 - __builtin_clzll(x) : -1; }
 };
 
-/**
- * @brief 掃き出し法(復元付き)
+/*
+ * @brief 掃き出し法
  */
