@@ -1,7 +1,7 @@
 #pragma once
 
 #include "nimber.hpp"
-#include "sweep.hpp"
+#include "sweep-restore.hpp"
 
 template <typename N>
 struct NimberToField {

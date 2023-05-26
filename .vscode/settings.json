@@ -75,7 +75,10 @@
     "input*": "txt",
     "output*": "txt",
     "queue": "cpp",
-    "climits": "cpp"
+    "climits": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "stacktrace": "cpp"
   },
   "C_Cpp.suggestSnippets": false,
   "python.linting.enabled": true,
