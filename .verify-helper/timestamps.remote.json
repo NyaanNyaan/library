@@ -154,6 +154,7 @@
 "verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp": "2023-05-21 20:49:42 +0900",
 "verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp": "2023-05-21 20:49:42 +0900",
 "verify/verify-yosupo-ds/yosupo-hashmap.test.cpp": "2023-05-21 20:49:42 +0900",
+"verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp": "2023-05-26 23:46:09 +0900",
 "verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp": "2023-03-23 17:00:44 +0900",
 "verify/verify-yosupo-ds/yosupo-offline-dynamic-connectivity.test.cpp": "2023-03-25 00:28:17 +0900",
