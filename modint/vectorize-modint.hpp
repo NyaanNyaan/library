@@ -3,6 +3,10 @@
 #pragma GCC optimize("O3,unroll-loops")
 #pragma GCC target("avx2")
 
+#include <immintrin.h>
+#include <iostream>
+using namespace std;
+
 using m256 = __m256i;
 struct alignas(32) mmint {
   m256 x;

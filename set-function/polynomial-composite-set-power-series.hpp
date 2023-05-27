@@ -9,7 +9,7 @@ using namespace std;
 #include "subset-convolution.hpp"
 
 template <typename mint, int MAX = 21>
-vector<mint> egf_composite_set_power_series(int n, FormalPowerSeries<mint> f,
+vector<mint> polynomial_composite_set_power_series(int n, FormalPowerSeries<mint> f,
                                             vector<mint> g) {
   assert(0 <= n && n <= MAX);
   static SubsetConvolution<mint, MAX> ss;

@@ -1,5 +1,9 @@
 #pragma once
 
+#include <cassert>
+#include <vector>
+using namespace std;
+
 #include "../modint/vectorize-modint.hpp"
 
 template <typename mint>
@@ -126,7 +130,7 @@ vector<mint> fast_multiply(const vector<mint>& a, const vector<mint>& b) {
     c[i].a = a1[i * 3 + pc / 8][pc % 8];
   }
 
-  delete[](a1);
-  delete[](a2);
+  delete[] (a1);
+  delete[] (a2);
   return c;
 }

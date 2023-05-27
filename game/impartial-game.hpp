@@ -111,5 +111,5 @@ struct ImpartialGameSolver {
 };
 
 /**
- * @brief 非不偏ゲーム
+ * @brief 不偏ゲーム
  */
