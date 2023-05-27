@@ -6,17 +6,15 @@ data:
     title: "\u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
       \u30E9\u30EA"
   - icon: ':heavy_check_mark:'
+    path: fps/fps-composition.hpp
+    title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
+      right)$ )"
+  - icon: ':heavy_check_mark:'
+    path: fps/newton-method.hpp
+    title: "\u30CB\u30E5\u30FC\u30C8\u30F3\u6CD5"
+  - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
-  - icon: ':heavy_check_mark:'
-    path: fps/taylor-shift.hpp
-    title: "\u5E73\u884C\u79FB\u52D5"
-  - icon: ':heavy_check_mark:'
-    path: internal/internal-type-traits.hpp
-    title: internal/internal-type-traits.hpp
-  - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -26,12 +24,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: set-function/polynomial-composite-set-power-series.hpp
-    title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
-  - icon: ':heavy_check_mark:'
-    path: set-function/subset-convolution.hpp
-    title: Subset Convolution
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -57,11 +49,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/polynomial_composite_set_power_series
+    PROBLEM: https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series
     links:
-    - https://judge.yosupo.jp/problem/polynomial_composite_set_power_series
-  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_composite_set_power_series\"\
+    - https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series
+  bundledCode: "#line 1 \"verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series\"\
     \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
     #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
@@ -222,116 +214,75 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp\"\
-    \n//\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace\
-    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
-    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
-    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
-    \                               is_same_v<T, __uint128_t>,\n                 \
-    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
-    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
-    \                           true_type, false_type>::type;\n\ntemplate <typename\
-    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
-    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
-    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
-    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
-    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ],\
-    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
-    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
-    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
-    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
-    \ pre;\n\nvoid load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf\
-    \ + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
-    \  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left + offset > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\nvoid single_read(char&\
-    \ c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n\
-    }\nvoid single_read(string& S) {\n  skip_space();\n  while (true) {\n    if (in_left\
-    \ == in_right) load();\n    int i = in_left;\n    for (; i != in_right; i++) {\n\
-    \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
-    \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
-    template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_read(T& x) {\n  if (in_left + offset > in_right)\
-    \ load();\n  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool\
-    \ minus = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
-    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\ninline\
-    \ void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head&\
-    \ head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\ninline void\
-    \ single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++]\
-    \ = c;\n}\ninline void single_write(const bool& b) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void single_write(const\
-    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
-    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
-    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
-    \ out_right += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_write(const T& _x) {\n  if (out_right > SZ -\
-    \ offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n\
-    \  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
-    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
-    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
-    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
-    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
-    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
-    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
-    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
-    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
-    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
-    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
-    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
-    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 6 \"verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp\"\
-    \n//\n#line 2 \"set-function/polynomial-composite-set-power-series.hpp\"\n\n#line\
-    \ 5 \"set-function/polynomial-composite-set-power-series.hpp\"\nusing namespace\
-    \ std;\n\n#line 2 \"fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\n\
-    struct FormalPowerSeries : vector<mint> {\n  using vector<mint>::vector;\n  using\
-    \ FPS = FormalPowerSeries;\n\n  FPS &operator+=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] += r[i];\n    return *this;\n  }\n\n  FPS &operator+=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] += r;\n\
-    \    return *this;\n  }\n\n  FPS &operator-=(const FPS &r) {\n    if (r.size()\
-    \ > this->size()) this->resize(r.size());\n    for (int i = 0; i < (int)r.size();\
-    \ i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n  FPS &operator-=(const\
-    \ mint &r) {\n    if (this->empty()) this->resize(1);\n    (*this)[0] -= r;\n\
-    \    return *this;\n  }\n\n  FPS &operator*=(const mint &v) {\n    for (int k\
-    \ = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n    return *this;\n  }\n\n\
-    \  FPS &operator/=(const FPS &r) {\n    if (this->size() < r.size()) {\n     \
-    \ this->clear();\n      return *this;\n    }\n    int n = this->size() - r.size()\
-    \ + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this), g(r);\n      g.shrink();\n\
-    \      mint coeff = g.back().inverse();\n      for (auto &x : g) x *= coeff;\n\
-    \      int deg = (int)f.size() - (int)g.size() + 1;\n      int gs = g.size();\n\
-    \      FPS quo(deg);\n      for (int i = deg - 1; i >= 0; i--) {\n        quo[i]\
-    \ = f[i + gs - 1];\n        for (int j = 0; j < gs; j++) f[i + j] -= quo[i] *\
-    \ g[j];\n      }\n      *this = quo * coeff;\n      this->resize(n, mint(0));\n\
-    \      return *this;\n    }\n    return *this = ((*this).rev().pre(n) * r.rev().inv(n)).pre(n).rev();\n\
-    \  }\n\n  FPS &operator%=(const FPS &r) {\n    *this -= *this / r * r;\n    shrink();\n\
-    \    return *this;\n  }\n\n  FPS operator+(const FPS &r) const { return FPS(*this)\
-    \ += r; }\n  FPS operator+(const mint &v) const { return FPS(*this) += v; }\n\
-    \  FPS operator-(const FPS &r) const { return FPS(*this) -= r; }\n  FPS operator-(const\
-    \ mint &v) const { return FPS(*this) -= v; }\n  FPS operator*(const FPS &r) const\
-    \ { return FPS(*this) *= r; }\n  FPS operator*(const mint &v) const { return FPS(*this)\
-    \ *= v; }\n  FPS operator/(const FPS &r) const { return FPS(*this) /= r; }\n \
-    \ FPS operator%(const FPS &r) const { return FPS(*this) %= r; }\n  FPS operator-()\
-    \ const {\n    FPS ret(this->size());\n    for (int i = 0; i < (int)this->size();\
-    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
-    \ (this->size() && this->back() == mint(0)) this->pop_back();\n  }\n\n  FPS rev()\
-    \ const {\n    FPS ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
-    \ ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(), r.size()));\n\
-    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
-    \   return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
+    \ 4 \"verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp\"\n\
+    //\n#line 2 \"fps/fps-composition.hpp\"\n\n#line 2 \"modulo/binomial.hpp\"\n\n\
+    #line 6 \"modulo/binomial.hpp\"\nusing namespace std;\n\n// \u30B3\u30F3\u30B9\
+    \u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\
+    \u30A8\u30EA\u3092\u6295\u3052\u308B\u6700\u5927\u306E n \u300D\n// \u3092\u5165\
+    \u308C\u308B\u3068\u500D\u901F\u304F\u3089\u3044\u306B\u306A\u308B\n// mod \u3092\
+    \u8D85\u3048\u3066\u524D\u8A08\u7B97\u3057\u3066 0 \u5272\u308A\u3092\u8E0F\u3080\
+    \u30D0\u30B0\u306F\u5BFE\u7B56\u6E08\u307F\ntemplate <typename T>\nstruct Binomial\
+    \ {\n  vector<T> f, g, h;\n  Binomial(int MAX = 0) {\n    assert(T::get_mod()\
+    \ != 0 && \"Binomial<mint>()\");\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n\
+    \    h.resize(1, T{1});\n    if (MAX > 0) extend(MAX + 1);\n  }\n\n  void extend(int\
+    \ m = -1) {\n    int n = f.size();\n    if (m == -1) m = n * 2;\n    m = min<int>(m,\
+    \ T::get_mod());\n    if (n >= m) return;\n    f.resize(m);\n    g.resize(m);\n\
+    \    h.resize(m);\n    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n \
+    \   g[m - 1] = f[m - 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for\
+    \ (int i = m - 2; i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i]\
+    \ = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n\
+    \    while (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int\
+    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n\
+    \    return g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n\
+    \    while (i >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int\
+    \ n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n)\
+    \ * finv(n - r) * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return\
+    \ C(n, r); }\n\n  template <typename I>\n  T multinomial(const vector<I>& r) {\n\
+    \    static_assert(is_integral<I>::value == true);\n    int n = 0;\n    for (auto&\
+    \ x : r) {\n      if (x < 0) return T(0);\n      n += x;\n    }\n    T res = fac(n);\n\
+    \    for (auto& x : r) res *= finv(x);\n    return res;\n  }\n\n  template <typename\
+    \ I>\n  T operator()(const vector<I>& r) {\n    return multinomial(r);\n  }\n\n\
+    \  T C_naive(int n, int r) {\n    if (n < 0 || n < r || r < 0) return T(0);\n\
+    \    T ret = T(1);\n    r = min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret\
+    \ *= inv(i) * (n--);\n    return ret;\n  }\n\n  T P(int n, int r) {\n    if (n\
+    \ < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r);\n  }\n\
+    \n  // [x^r] 1 / (1-x)^n\n  T H(int n, int r) {\n    if (n < 0 || r < 0) return\
+    \ T(0);\n    return r == 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 2 \"fps/formal-power-series.hpp\"\
+    \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
+    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
+    \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
+    \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  FPS &operator-=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] -= r;\n    return *this;\n  }\n\n  FPS &operator*=(const mint\
+    \ &v) {\n    for (int k = 0; k < (int)this->size(); k++) (*this)[k] *= v;\n  \
+    \  return *this;\n  }\n\n  FPS &operator/=(const FPS &r) {\n    if (this->size()\
+    \ < r.size()) {\n      this->clear();\n      return *this;\n    }\n    int n =\
+    \ this->size() - r.size() + 1;\n    if ((int)r.size() <= 64) {\n      FPS f(*this),\
+    \ g(r);\n      g.shrink();\n      mint coeff = g.back().inverse();\n      for\
+    \ (auto &x : g) x *= coeff;\n      int deg = (int)f.size() - (int)g.size() + 1;\n\
+    \      int gs = g.size();\n      FPS quo(deg);\n      for (int i = deg - 1; i\
+    \ >= 0; i--) {\n        quo[i] = f[i + gs - 1];\n        for (int j = 0; j < gs;\
+    \ j++) f[i + j] -= quo[i] * g[j];\n      }\n      *this = quo * coeff;\n     \
+    \ this->resize(n, mint(0));\n      return *this;\n    }\n    return *this = ((*this).rev().pre(n)\
+    \ * r.rev().inv(n)).pre(n).rev();\n  }\n\n  FPS &operator%=(const FPS &r) {\n\
+    \    *this -= *this / r * r;\n    shrink();\n    return *this;\n  }\n\n  FPS operator+(const\
+    \ FPS &r) const { return FPS(*this) += r; }\n  FPS operator+(const mint &v) const\
+    \ { return FPS(*this) += v; }\n  FPS operator-(const FPS &r) const { return FPS(*this)\
+    \ -= r; }\n  FPS operator-(const mint &v) const { return FPS(*this) -= v; }\n\
+    \  FPS operator*(const FPS &r) const { return FPS(*this) *= r; }\n  FPS operator*(const\
+    \ mint &v) const { return FPS(*this) *= v; }\n  FPS operator/(const FPS &r) const\
+    \ { return FPS(*this) /= r; }\n  FPS operator%(const FPS &r) const { return FPS(*this)\
+    \ %= r; }\n  FPS operator-() const {\n    FPS ret(this->size());\n    for (int\
+    \ i = 0; i < (int)this->size(); i++) ret[i] = -(*this)[i];\n    return ret;\n\
+    \  }\n\n  void shrink() {\n    while (this->size() && this->back() == mint(0))\
+    \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
+    \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
+    \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
+    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
     \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
     \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
     \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
@@ -361,89 +312,53 @@ data:
     \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
     \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
     \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
-    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 2 \"\
-    modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\nusing namespace std;\n\
-    \n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B \u300CC(n, r)\
-    \ \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\u308B\u6700\u5927\u306E\
-    \ n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\u304F\u3089\u3044\u306B\
-    \u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\u7B97\u3057\u3066 0\
-    \ \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\u6E08\u307F\ntemplate\
-    \ <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int MAX =\
-    \ 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1,\
-    \ T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n    if (MAX > 0) extend(MAX\
-    \ + 1);\n  }\n\n  void extend(int m = -1) {\n    int n = f.size();\n    if (m\
-    \ == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n    if (n >= m) return;\n\
-    \    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n; i <\
-    \ m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m\
-    \ - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i]\
-    \ = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int\
-    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n\
-    \    return f[i];\n  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n   \
-    \ while (i >= (int)g.size()) extend();\n    return g[i];\n  }\n\n  T inv(int i)\
-    \ {\n    if (i < 0) return -inv(-i);\n    while (i >= (int)h.size()) extend();\n\
-    \    return h[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 || n < r || r <\
-    \ 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline\
-    \ T operator()(int n, int r) { return C(n, r); }\n\n  template <typename I>\n\
-    \  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
-    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
-    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
-    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
-    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
-    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
-    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
-    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
-    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
-    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate\
-    \ F(x + a)\ntemplate <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
-    \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
-    \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
-    \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
-    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
-    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
-    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
-    \ */\n#line 2 \"set-function/subset-convolution.hpp\"\n\n#line 5 \"set-function/subset-convolution.hpp\"\
-    \nusing namespace std;\n\ntemplate <typename mint, int _s>\nstruct SubsetConvolution\
-    \ {\n  using fps = array<mint, _s + 1>;\n  static constexpr int s = _s;\n  vector<int>\
-    \ pc;\n\n  SubsetConvolution() : pc(1 << s) {\n    for (int i = 1; i < (1 << s);\
-    \ i++) pc[i] = pc[i - (i & -i)] + 1;\n  }\n\n  void add(fps& l, const fps& r,\
-    \ int d) {\n    for (int i = 0; i < d; ++i) l[i] += r[i];\n  }\n\n  void sub(fps&\
-    \ l, const fps& r, int d) {\n    for (int i = d; i <= s; ++i) l[i] -= r[i];\n\
-    \  }\n\n  void zeta(vector<fps>& a) {\n    int n = a.size();\n    for (int w =\
-    \ 1; w < n; w *= 2) {\n      for (int k = 0; k < n; k += w * 2) {\n        for\
-    \ (int i = 0; i < w; ++i) {\n          add(a[k + w + i], a[k + i], pc[k + w +\
-    \ i]);\n        }\n      }\n    }\n  }\n\n  void mobius(vector<fps>& a) {\n  \
-    \  int n = a.size();\n    for (int w = n >> 1; w; w >>= 1) {\n      for (int k\
-    \ = 0; k < n; k += w * 2) {\n        for (int i = 0; i < w; ++i) {\n         \
-    \ sub(a[k + w + i], a[k + i], pc[k + w + i]);\n        }\n      }\n    }\n  }\n\
-    \n  vector<fps> lift(const vector<mint>& a) {\n    vector<fps> A(a.size());\n\
-    \    for (int i = 0; i < (int)a.size(); i++) {\n      fill(begin(A[i]), end(A[i]),\
-    \ mint());\n      A[i][pc[i]] = a[i];\n    }\n    return A;\n  }\n\n  vector<mint>\
-    \ unlift(const vector<fps>& A) {\n    vector<mint> a(A.size());\n    for (int\
-    \ i = 0; i < (int)A.size(); i++) a[i] = A[i][pc[i]];\n    return a;\n  }\n\n \
-    \ void prod(vector<fps>& A, const vector<fps>& B) {\n    int n = A.size(), d =\
-    \ __builtin_ctz(n);\n    for (int i = 0; i < n; i++) {\n      fps c{};\n     \
-    \ for (int j = 0; j <= d; j++) {\n        for (int k = 0; k <= d - j; k++) {\n\
-    \          c[j + k] += A[i][j] * B[i][k];\n        }\n      }\n      A[i].swap(c);\n\
-    \    }\n  }\n\n  vector<mint> multiply(const vector<mint>& a, const vector<mint>&\
-    \ b) {\n    vector<fps> A = lift(a), B = lift(b);\n    zeta(A), zeta(B);\n   \
-    \ prod(A, B);\n    mobius(A);\n    return unlift(A);\n  }\n};\n\n/**\n * @brief\
-    \ Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n */\n\
-    #line 10 \"set-function/polynomial-composite-set-power-series.hpp\"\n\ntemplate\
-    \ <typename mint, int MAX = 21>\nvector<mint> polynomial_composite_set_power_series(int\
-    \ n, FormalPowerSeries<mint> f,\n                                            vector<mint>\
-    \ g) {\n  assert(0 <= n && n <= MAX);\n  static SubsetConvolution<mint, MAX> ss;\n\
-    \n  Binomial<mint> binom(f.size());\n  if (g[0] != 0) {\n    f = TaylorShift(f,\
-    \ g[0], binom);\n    g[0] = 0;\n  }\n  f.resize(n + 1), g.resize(1 << n);\n\n\
-    \  for (int i = 0; i <= n; i++) f[i] *= binom.fac(i);\n  vector h(n + 1, vector(n\
-    \ + 1, vector<mint>{}));\n  for (int i = 0; i <= n; i++) h[0][i] = {f[i]};\n \
-    \ for (int k = 1; k <= n; k++) {\n    auto A = ss.lift({begin(g) + (1 << (k -\
-    \ 1)), begin(g) + (1 << k)});\n    ss.zeta(A);\n    for (int j = 0; j <= n - k;\
-    \ j++) {\n      h[k][j] = h[k - 1][j];\n      auto B = ss.lift(h[k - 1][j + 1]);\n\
-    \      ss.zeta(B);\n      ss.prod(B, A);\n      ss.mobius(B);\n      auto c =\
-    \ ss.unlift(B);\n      copy(begin(c), end(c), back_inserter(h[k][j]));\n    }\n\
-    \  }\n  return h[n][0];\n}\n\n/**\n * @brief \u96C6\u5408\u51AA\u7D1A\u6570\u306E\
-    \u5408\u6210\n */\n#line 8 \"verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp\"\
+    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 5 \"\
+    fps/fps-composition.hpp\"\n\n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> Composition(FormalPowerSeries<mint>\
+    \ P,\n                                    FormalPowerSeries<mint> Q,\n       \
+    \                             Binomial<mint>& C, int deg = -1) {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  int N = (deg == -1) ? min(P.size(), Q.size())\
+    \ : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n  if (P.size() == 0) {\n\
+    \    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0) : Q[0];\n    return R;\n\
+    \  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  P.resize(N, mint(0));\n  Q.resize(N,\
+    \ mint(0));\n  int M = max<int>(1, sqrt(N / log2(N)));\n  int L = (N + M - 1)\
+    \ / M;\n  fps Pm = fps{begin(P), begin(P) + M};\n  fps Pr = fps{begin(P) + M,\
+    \ end(P)};\n\n  int J = 31 - __builtin_clz(N - 1) + 1;\n  vector<fps> pms(J);\n\
+    \  pms[0] = Pm;\n  for (int i = 1; i < J; i++) pms[i] = (pms[i - 1] * pms[i -\
+    \ 1]).pre(N);\n\n  auto comp = [&](auto rec, int left, int j) -> fps {\n    if\
+    \ (j == 1) {\n      mint Q1 = left + 0 < (int)Q.size() ? Q[left + 0] : mint(0);\n\
+    \      mint Q2 = left + 1 < (int)Q.size() ? Q[left + 1] : mint(0);\n      return\
+    \ (pms[0].pre(N) * Q2 + Q1).pre(N);\n    }\n    if (N <= left) return fps{};\n\
+    \    fps Q1 = rec(rec, left, j - 1);\n    fps Q2 = rec(rec, left + (1 << (j -\
+    \ 1)), j - 1);\n    return (Q1 + pms[j - 1].pre(N) * Q2).pre(N);\n  };\n\n  fps\
+    \ QPm = comp(comp, 0, J);\n  fps R = QPm;\n  fps pw_Pr{mint(1)};\n  fps dPm =\
+    \ Pm.diff();\n  dPm.shrink();\n  // if dPm[0] == 0, dPm.inv() is undefined\n \
+    \ int deg_dPm = 0;\n  while (deg_dPm != (int)dPm.size() && dPm[deg_dPm] == mint(0))\
+    \ deg_dPm++;\n  fps idPm = dPm.empty() ? fps{} : (dPm >> deg_dPm).inv(N);\n\n\
+    \  for (int l = 1, d = M; l <= L && d < N; l++, d += M) {\n    pw_Pr = (pw_Pr\
+    \ * Pr).pre(N - d);\n    if (dPm.empty()) {\n      R += (pw_Pr * Q[l]) << d;\n\
+    \    } else {\n      idPm.resize(N - d);\n      QPm = ((QPm.diff() >> deg_dPm)\
+    \ * idPm).pre(N - d);\n      R += ((QPm * pw_Pr).pre(N - d) * C.finv(l)) << d;\n\
+    \    };\n  }\n  R.resize(N, mint(0));\n  return R;\n}\n\n/**\n * @brief \u95A2\
+    \u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\right)$\
+    \ )\n * @docs docs/fps/fps-composition.md\n */\n#line 2 \"fps/newton-method.hpp\"\
+    \n\n#line 4 \"fps/newton-method.hpp\"\nusing namespace std;\n\n// G(f) = 0 mod\
+    \ x^{deg} \u3092\u6E80\u305F\u3059 f \u3092\u8FD4\u3059\n// f0 : \u521D\u671F\u89E3\
+    , \u975E\u7A7A\u306A fps \u304B mint \u3092\u5165\u308C\u308B\n// g : (g(f), g'(f))\
+    \ \u3092\u8FD4\u3059\ntemplate <typename fps>\nfps newton_method(function<pair<fps,\
+    \ fps>(fps, int)> calc_g, fps f0, int deg) {\n  assert(!f0.empty());\n  fps f{f0};\n\
+    \  for (int d = f.size(); d < deg; d *= 2) {\n    // \u5C11\u3057\u591A\u3081\u306B\
+    \u8A08\u7B97\u3057\u3066\u304A\u304F\n    const int extra = d + 5;\n    auto [g,\
+    \ dgdf] = calc_g(f, d * 2 + extra);\n    int offset = 0;\n    while (offset <\
+    \ (int)dgdf.size() && dgdf[offset] == 0) offset++;\n    assert(offset <= extra);\n\
+    \    dgdf = dgdf >> offset;\n    g = g >> offset;\n    f = (f - g * dgdf.inv()).pre(d\
+    \ * 2);\n  }\n  return f.pre(deg);\n}\n// G(f) = 0 mod x^{deg} \u3092\u6E80\u305F\
+    \u3059 f \u3092\u8FD4\u3059\n// f0 : \u521D\u671F\u89E3, \u975E\u7A7A\u306A fps\
+    \ \u304B mint \u3092\u5165\u308C\u308B\n// g : (g(f), g'(f)) \u3092\u8FD4\u3059\
+    \ntemplate <typename fps>\nfps newton_method(function<pair<fps, fps>(fps, int)>\
+    \ calc_g,\n                  typename fps::value_type f0, int deg) {\n  return\
+    \ newton_method(calc_g, fps{f0}, deg);\n}\n\n/**\n * @brief \u30CB\u30E5\u30FC\
+    \u30C8\u30F3\u6CD5\n */\n#line 7 \"verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp\"\
     \n//\n#line 2 \"fps/ntt-friendly-fps.hpp\"\n\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate\
     \ <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t\
     \ _mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n \
@@ -609,24 +524,28 @@ data:
     \ mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 12 \"verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp\"\
-    \n//\nusing namespace Nyaan;\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    \ { return mod; }\n};\n#line 11 \"verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp\"\
+    \n// #include \"fps/arbitrary-fps.hpp\"\n//\nusing namespace Nyaan;\nusing mint\
+    \ = LazyMontgomeryModInt<998244353>;\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
     using vm = vector<mint>;\nusing vvm = vector<vm>;\nBinomial<mint> C;\nusing fps\
-    \ = FormalPowerSeries<mint>;\nusing namespace Nyaan;\n\nvoid q() {\n  int M, N,\
-    \ x;\n  rd(M, N);\n  fps a(M), b(1 << N);\n  rep(i, M) rd(x), a[i] = x;\n  rep(i,\
-    \ 1 << N) rd(x), b[i] = x;\n  auto c = polynomial_composite_set_power_series<mint,\
-    \ 20>(N, a, b);\n  rep(i, 1 << N) wt(c[i].get(), ' ');\n}\n\nvoid Nyaan::solve()\
+    \ = FormalPowerSeries<mint>;\n//\nusing namespace Nyaan;\n\nvoid q() {\n  inl(N);\n\
+    \  fps f(N);\n  in(f);\n  fps fd = f.diff();\n  auto g = newton_method<fps>(\n\
+    \      [&](fps a, int deg) -> pair<fps, fps> {\n        fps fa = Composition(a,\
+    \ f, C, deg) - fps{0, 1};\n        fps fda = Composition(a, fd, C, deg);\n   \
+    \     return {fa, fda};\n      },\n      fps{0}, N);\n  out(g);\n}\n\nvoid Nyaan::solve()\
     \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_composite_set_power_series\"\
-    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../misc/fastio.hpp\"\
-    \n//\n#include \"../../set-function/polynomial-composite-set-power-series.hpp\"\
-    \n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n#include \"../../modulo/binomial.hpp\"\n//\nusing namespace Nyaan;\nusing mint\
-    \ = LazyMontgomeryModInt<998244353>;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\n\
-    Binomial<mint> C;\nusing fps = FormalPowerSeries<mint>;\nusing namespace Nyaan;\n\
-    \nvoid q() {\n  int M, N, x;\n  rd(M, N);\n  fps a(M), b(1 << N);\n  rep(i, M)\
-    \ rd(x), a[i] = x;\n  rep(i, 1 << N) rd(x), b[i] = x;\n  auto c = polynomial_composite_set_power_series<mint,\
-    \ 20>(N, a, b);\n  rep(i, 1 << N) wt(c[i].get(), ' ');\n}\n\nvoid Nyaan::solve()\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/compositional_inverse_of_formal_power_series\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../fps/fps-composition.hpp\"\
+    \n#include \"../../fps/newton-method.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
+    \n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
+    \n// #include \"fps/arbitrary-fps.hpp\"\n//\nusing namespace Nyaan;\nusing mint\
+    \ = LazyMontgomeryModInt<998244353>;\n// using mint = LazyMontgomeryModInt<1000000007>;\n\
+    using vm = vector<mint>;\nusing vvm = vector<vm>;\nBinomial<mint> C;\nusing fps\
+    \ = FormalPowerSeries<mint>;\n//\nusing namespace Nyaan;\n\nvoid q() {\n  inl(N);\n\
+    \  fps f(N);\n  in(f);\n  fps fd = f.diff();\n  auto g = newton_method<fps>(\n\
+    \      [&](fps a, int deg) -> pair<fps, fps> {\n        fps fa = Composition(a,\
+    \ f, C, deg) - fps{0, 1};\n        fps fda = Composition(a, fd, C, deg);\n   \
+    \     return {fa, fda};\n      },\n      fps{0}, N);\n  out(g);\n}\n\nvoid Nyaan::solve()\
     \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
@@ -635,26 +554,23 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - misc/fastio.hpp
-  - internal/internal-type-traits.hpp
-  - set-function/polynomial-composite-set-power-series.hpp
-  - fps/formal-power-series.hpp
-  - fps/taylor-shift.hpp
+  - fps/fps-composition.hpp
   - modulo/binomial.hpp
-  - set-function/subset-convolution.hpp
+  - fps/formal-power-series.hpp
+  - fps/newton-method.hpp
   - fps/ntt-friendly-fps.hpp
   - ntt/ntt.hpp
   - modint/montgomery-modint.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  path: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   requiredBy: []
   timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+documentation_of: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
-- /verify/verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp.html
-title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+- /verify/verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+- /verify/verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp.html
+title: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
 ---

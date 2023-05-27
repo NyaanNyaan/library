@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
     title: verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -61,6 +64,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
 documentation_of: fps/newton-method.hpp
 layout: document

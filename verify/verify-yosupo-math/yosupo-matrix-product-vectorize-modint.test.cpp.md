@@ -140,9 +140,10 @@ data:
     \ { return mod; }\n};\n#line 22 \"verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp\"\
     \n//\n#line 2 \"math-fast/mat-prod-strassen.hpp\"\n\n#line 2 \"modint/vectorize-modint.hpp\"\
     \n\n#pragma GCC optimize(\"O3,unroll-loops\")\n#pragma GCC target(\"avx2\")\n\n\
-    using m256 = __m256i;\nstruct alignas(32) mmint {\n  m256 x;\n  static mmint R,\
-    \ M0, M1, M2, N2;\n\n  mmint() : x() {}\n  inline mmint(const m256& _x) : x(_x)\
-    \ {}\n  inline mmint(unsigned int a) : x(_mm256_set1_epi32(a)) {}\n  inline mmint(unsigned\
+    #line 8 \"modint/vectorize-modint.hpp\"\nusing namespace std;\n\nusing m256 =\
+    \ __m256i;\nstruct alignas(32) mmint {\n  m256 x;\n  static mmint R, M0, M1, M2,\
+    \ N2;\n\n  mmint() : x() {}\n  inline mmint(const m256& _x) : x(_x) {}\n  inline\
+    \ mmint(unsigned int a) : x(_mm256_set1_epi32(a)) {}\n  inline mmint(unsigned\
     \ int a0, unsigned int a1, unsigned int a2,\n               unsigned int a3, unsigned\
     \ int a4, unsigned int a5,\n               unsigned int a6, unsigned int a7)\n\
     \      : x(_mm256_set_epi32(a7, a6, a5, a4, a3, a2, a1, a0)) {}\n  inline operator\
@@ -345,7 +346,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
   requiredBy: []
-  timestamp: '2023-05-21 20:49:42+09:00'
+  timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp

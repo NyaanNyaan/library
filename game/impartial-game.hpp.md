@@ -16,7 +16,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    document_title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0"
+    document_title: "\u4E0D\u504F\u30B2\u30FC\u30E0"
     links: []
   bundledCode: "#line 2 \"game/impartial-game.hpp\"\n\n#include <functional>\n#include\
     \ <map>\n#include <type_traits>\n#include <utility>\n#include <vector>\nusing\
@@ -65,7 +65,7 @@ data:
     \ Move> change_x(const Board& b, Nimber x) {\n    assert(is_void_v<Move> == false);\n\
     \    Nimber n = get(b);\n    for (auto& st : f(b)) {\n      if (get(st) == (x\
     \ ^ n)) return {true, st.second};\n    }\n    return {false, Move{}};\n  }\n};\n\
-    \n/**\n * @brief \u975E\u4E0D\u504F\u30B2\u30FC\u30E0\n */\n"
+    \n/**\n * @brief \u4E0D\u504F\u30B2\u30FC\u30E0\n */\n"
   code: "#pragma once\n\n#include <functional>\n#include <map>\n#include <type_traits>\n\
     #include <utility>\n#include <vector>\nusing namespace std;\n\n/**\n * \u30B2\u30FC\
     \u30E0\u306E\u9077\u79FB\u304C DAG \u3067\u8868\u305B\u308B\u4E0D\u504F\u30B2\u30FC\
@@ -112,12 +112,12 @@ data:
     \u3059\n  pair<bool, Move> change_x(const Board& b, Nimber x) {\n    assert(is_void_v<Move>\
     \ == false);\n    Nimber n = get(b);\n    for (auto& st : f(b)) {\n      if (get(st)\
     \ == (x ^ n)) return {true, st.second};\n    }\n    return {false, Move{}};\n\
-    \  }\n};\n\n/**\n * @brief \u975E\u4E0D\u504F\u30B2\u30FC\u30E0\n */\n"
+    \  }\n};\n\n/**\n * @brief \u4E0D\u504F\u30B2\u30FC\u30E0\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: game/impartial-game.hpp
   requiredBy: []
-  timestamp: '2023-05-25 17:46:29+09:00'
+  timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0002.test.cpp
@@ -128,5 +128,5 @@ layout: document
 redirect_from:
 - /library/game/impartial-game.hpp
 - /library/game/impartial-game.hpp.html
-title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0"
+title: "\u4E0D\u504F\u30B2\u30FC\u30E0"
 ---

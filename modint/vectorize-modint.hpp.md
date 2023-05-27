@@ -22,16 +22,17 @@ data:
     document_title: vectorize modint
     links: []
   bundledCode: "#line 2 \"modint/vectorize-modint.hpp\"\n\n#pragma GCC optimize(\"\
-    O3,unroll-loops\")\n#pragma GCC target(\"avx2\")\n\nusing m256 = __m256i;\nstruct\
-    \ alignas(32) mmint {\n  m256 x;\n  static mmint R, M0, M1, M2, N2;\n\n  mmint()\
-    \ : x() {}\n  inline mmint(const m256& _x) : x(_x) {}\n  inline mmint(unsigned\
-    \ int a) : x(_mm256_set1_epi32(a)) {}\n  inline mmint(unsigned int a0, unsigned\
-    \ int a1, unsigned int a2,\n               unsigned int a3, unsigned int a4, unsigned\
-    \ int a5,\n               unsigned int a6, unsigned int a7)\n      : x(_mm256_set_epi32(a7,\
-    \ a6, a5, a4, a3, a2, a1, a0)) {}\n  inline operator m256&() { return x; }\n \
-    \ inline operator const m256&() const { return x; }\n  inline int& operator[](int\
-    \ i) { return *(reinterpret_cast<int*>(&x) + i); }\n  inline const int& operator[](int\
-    \ i) const {\n    return *(reinterpret_cast<const int*>(&x) + i);\n  }\n\n  friend\
+    O3,unroll-loops\")\n#pragma GCC target(\"avx2\")\n\n#include <immintrin.h>\n#include\
+    \ <iostream>\nusing namespace std;\n\nusing m256 = __m256i;\nstruct alignas(32)\
+    \ mmint {\n  m256 x;\n  static mmint R, M0, M1, M2, N2;\n\n  mmint() : x() {}\n\
+    \  inline mmint(const m256& _x) : x(_x) {}\n  inline mmint(unsigned int a) : x(_mm256_set1_epi32(a))\
+    \ {}\n  inline mmint(unsigned int a0, unsigned int a1, unsigned int a2,\n    \
+    \           unsigned int a3, unsigned int a4, unsigned int a5,\n             \
+    \  unsigned int a6, unsigned int a7)\n      : x(_mm256_set_epi32(a7, a6, a5, a4,\
+    \ a3, a2, a1, a0)) {}\n  inline operator m256&() { return x; }\n  inline operator\
+    \ const m256&() const { return x; }\n  inline int& operator[](int i) { return\
+    \ *(reinterpret_cast<int*>(&x) + i); }\n  inline const int& operator[](int i)\
+    \ const {\n    return *(reinterpret_cast<const int*>(&x) + i);\n  }\n\n  friend\
     \ ostream& operator<<(ostream& os, const mmint& m) {\n    unsigned r = R[0], mod\
     \ = M1[0];\n    auto reduce1 = [&](const uint64_t& b) {\n      unsigned res =\
     \ (b + uint64_t(unsigned(b) * unsigned(-r)) * mod) >> 32;\n      return res >=\
@@ -77,15 +78,16 @@ data:
     \ mmint mmint::M0, mmint::M1, mmint::M2, mmint::N2;\n\n/**\n * @brief vectorize\
     \ modint\n */\n"
   code: "#pragma once\n\n#pragma GCC optimize(\"O3,unroll-loops\")\n#pragma GCC target(\"\
-    avx2\")\n\nusing m256 = __m256i;\nstruct alignas(32) mmint {\n  m256 x;\n  static\
-    \ mmint R, M0, M1, M2, N2;\n\n  mmint() : x() {}\n  inline mmint(const m256& _x)\
-    \ : x(_x) {}\n  inline mmint(unsigned int a) : x(_mm256_set1_epi32(a)) {}\n  inline\
-    \ mmint(unsigned int a0, unsigned int a1, unsigned int a2,\n               unsigned\
-    \ int a3, unsigned int a4, unsigned int a5,\n               unsigned int a6, unsigned\
-    \ int a7)\n      : x(_mm256_set_epi32(a7, a6, a5, a4, a3, a2, a1, a0)) {}\n  inline\
-    \ operator m256&() { return x; }\n  inline operator const m256&() const { return\
-    \ x; }\n  inline int& operator[](int i) { return *(reinterpret_cast<int*>(&x)\
-    \ + i); }\n  inline const int& operator[](int i) const {\n    return *(reinterpret_cast<const\
+    avx2\")\n\n#include <immintrin.h>\n#include <iostream>\nusing namespace std;\n\
+    \nusing m256 = __m256i;\nstruct alignas(32) mmint {\n  m256 x;\n  static mmint\
+    \ R, M0, M1, M2, N2;\n\n  mmint() : x() {}\n  inline mmint(const m256& _x) : x(_x)\
+    \ {}\n  inline mmint(unsigned int a) : x(_mm256_set1_epi32(a)) {}\n  inline mmint(unsigned\
+    \ int a0, unsigned int a1, unsigned int a2,\n               unsigned int a3, unsigned\
+    \ int a4, unsigned int a5,\n               unsigned int a6, unsigned int a7)\n\
+    \      : x(_mm256_set_epi32(a7, a6, a5, a4, a3, a2, a1, a0)) {}\n  inline operator\
+    \ m256&() { return x; }\n  inline operator const m256&() const { return x; }\n\
+    \  inline int& operator[](int i) { return *(reinterpret_cast<int*>(&x) + i); }\n\
+    \  inline const int& operator[](int i) const {\n    return *(reinterpret_cast<const\
     \ int*>(&x) + i);\n  }\n\n  friend ostream& operator<<(ostream& os, const mmint&\
     \ m) {\n    unsigned r = R[0], mod = M1[0];\n    auto reduce1 = [&](const uint64_t&\
     \ b) {\n      unsigned res = (b + uint64_t(unsigned(b) * unsigned(-r)) * mod)\
@@ -136,7 +138,7 @@ data:
   requiredBy:
   - math-fast/subset-convolution.hpp
   - math-fast/mat-prod-strassen.hpp
-  timestamp: '2021-05-19 02:04:33+09:00'
+  timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp

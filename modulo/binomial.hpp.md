@@ -10,6 +10,9 @@ data:
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
   - icon: ':heavy_check_mark:'
+    path: fps/fps-compositional-inverse.hpp
+    title: fps/fps-compositional-inverse.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/fps-famous-series.hpp
     title: "\u6709\u540D\u306A\u6570\u5217"
   - icon: ':heavy_check_mark:'
@@ -41,7 +44,7 @@ data:
     path: modulo/multipoint-binomial-sum.hpp
     title: "\u4E8C\u9805\u4FC2\u6570\u306Eprefix sum\u306E\u591A\u70B9\u8A55\u4FA1"
   - icon: ':heavy_check_mark:'
-    path: set-function/egf-composite-set-power-series.hpp
+    path: set-function/polynomial-composite-set-power-series.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -71,6 +74,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
@@ -107,6 +116,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
@@ -176,6 +188,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1781.test.cpp
     title: verify/verify-yuki/yuki-1781.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939.test.cpp
+    title: verify/verify-yuki/yuki-1939.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -254,13 +269,14 @@ data:
   - fps/find-p-recursive.hpp
   - fps/sum-of-exponential-times-poly.hpp
   - fps/fps-famous-series.hpp
+  - fps/fps-compositional-inverse.hpp
   - fps/fps-composition.hpp
   - fps/lagrange-interpolation-point.hpp
   - fps/partial-fraction-decomposition.hpp
   - fps/taylor-shift.hpp
   - fps/utility.hpp
   - fps/sample-point-shift.hpp
-  - set-function/egf-composite-set-power-series.hpp
+  - set-function/polynomial-composite-set-power-series.hpp
   - modulo/multipoint-binomial-sum.hpp
   - modulo/factorial.hpp
   - matrix/polynomial-matrix-prefix-prod.hpp
@@ -269,6 +285,7 @@ data:
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
+  - verify/verify-yuki/yuki-1939.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0125.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
@@ -297,6 +314,7 @@ data:
   - verify/verify-unit-test/sum-of-mf.test.cpp
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
+  - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
@@ -308,7 +326,9 @@ data:
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
 documentation_of: modulo/binomial.hpp

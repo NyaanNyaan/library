@@ -28,6 +28,9 @@ data:
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
       right)$ )"
   - icon: ':heavy_check_mark:'
+    path: fps/fps-compositional-inverse.hpp
+    title: fps/fps-compositional-inverse.hpp
+  - icon: ':heavy_check_mark:'
     path: fps/fps-famous-series.hpp
     title: "\u6709\u540D\u306A\u6570\u5217"
   - icon: ':heavy_check_mark:'
@@ -87,7 +90,7 @@ data:
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
   - icon: ':heavy_check_mark:'
-    path: set-function/egf-composite-set-power-series.hpp
+    path: set-function/polynomial-composite-set-power-series.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -120,6 +123,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
@@ -258,6 +267,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939.test.cpp
+    title: verify/verify-yuki/yuki-1939.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -406,6 +418,7 @@ data:
   - fps/fps-sqrt.hpp
   - fps/find-p-recursive.hpp
   - fps/fps-famous-series.hpp
+  - fps/fps-compositional-inverse.hpp
   - fps/ntt-friendly-fps.hpp
   - fps/fast-multieval.hpp
   - fps/nth-term.hpp
@@ -423,7 +436,7 @@ data:
   - fps/mod-pow.hpp
   - fps/polynomial-interpolation.hpp
   - fps/fps-composition-fast.hpp
-  - set-function/egf-composite-set-power-series.hpp
+  - set-function/polynomial-composite-set-power-series.hpp
   - modulo/factorial.hpp
   - matrix/polynomial-matrix-determinant.hpp
   - matrix/black-box-linear-algebra.hpp
@@ -437,6 +450,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+  - verify/verify-yuki/yuki-1939.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0720.test.cpp
@@ -482,7 +496,9 @@ data:
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
   - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp

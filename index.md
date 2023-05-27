@@ -190,6 +190,9 @@ data:
       title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}\\left((N \\log N)^{\\frac{3}{2}}\\\
         right)$ )"
     - icon: ':heavy_check_mark:'
+      path: fps/fps-compositional-inverse.hpp
+      title: fps/fps-compositional-inverse.hpp
+    - icon: ':heavy_check_mark:'
       path: fps/fps-famous-series.hpp
       title: "\u6709\u540D\u306A\u6570\u5217"
     - icon: ':heavy_check_mark:'
@@ -248,7 +251,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: game/impartial-game.hpp
-      title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0"
+      title: "\u4E0D\u504F\u30B2\u30FC\u30E0"
     - icon: ':heavy_check_mark:'
       path: game/partisan-game.hpp
       title: "\u975E\u4E0D\u504F\u30B2\u30FC\u30E0"
@@ -831,14 +834,17 @@ data:
       path: set-function/and-convolution.hpp
       title: AND Convoluion
     - icon: ':heavy_check_mark:'
-      path: set-function/egf-composite-set-power-series.hpp
-      title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
-    - icon: ':heavy_check_mark:'
       path: set-function/enumerate-set.hpp
       title: "\u4E0B\u4F4D\u96C6\u5408/\u4E0A\u4F4D\u96C6\u5408\u306E\u5217\u6319"
     - icon: ':heavy_check_mark:'
+      path: set-function/exp-of-set-power-series.hpp
+      title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E exp"
+    - icon: ':heavy_check_mark:'
       path: set-function/or-convolution.hpp
       title: OR Convoluion
+    - icon: ':heavy_check_mark:'
+      path: set-function/polynomial-composite-set-power-series.hpp
+      title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
     - icon: ':heavy_check_mark:'
       path: set-function/subset-convolution.hpp
       title: Subset Convolution
@@ -1611,6 +1617,12 @@ data:
       path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
       title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
       title: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1703,6 +1715,9 @@ data:
       path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
       title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
       title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1788,6 +1803,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
       title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
+      title: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
       title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
@@ -2132,6 +2150,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1789.test.cpp
       title: verify/verify-yuki/yuki-1789.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1939.test.cpp
+      title: verify/verify-yuki/yuki-1939.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-2012.test.cpp
       title: verify/verify-yuki/yuki-2012.test.cpp

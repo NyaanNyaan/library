@@ -17,7 +17,7 @@ data:
     title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
       \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
   - icon: ':heavy_check_mark:'
-    path: set-function/egf-composite-set-power-series.hpp
+    path: set-function/polynomial-composite-set-power-series.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -172,7 +172,7 @@ data:
   requiredBy:
   - fps/fps-famous-series.hpp
   - fps/partial-fraction-decomposition.hpp
-  - set-function/egf-composite-set-power-series.hpp
+  - set-function/polynomial-composite-set-power-series.hpp
   timestamp: '2023-05-22 22:29:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

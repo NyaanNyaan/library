@@ -604,6 +604,12 @@ data:
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp
     title: verify/verify-yosupo-fps/yosupo-composition.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
     title: verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
   - icon: ':heavy_check_mark:'
@@ -694,6 +700,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
     title: verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':heavy_check_mark:'
@@ -777,6 +786,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
     title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
+    title: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
     title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
@@ -1104,6 +1116,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1789.test.cpp
     title: verify/verify-yuki/yuki-1789.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939.test.cpp
+    title: verify/verify-yuki/yuki-1939.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-2012.test.cpp
     title: verify/verify-yuki/yuki-2012.test.cpp
@@ -1466,6 +1481,7 @@ data:
   - verify/verify-yosupo-string/yosupo-z-algorithm.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
+  - verify/verify-yuki/yuki-1939.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-2231.test.cpp
@@ -1533,6 +1549,7 @@ data:
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
   - verify/verify-yosupo-math/yosupo-two-sat-atcoder.test.cpp
   - verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp
@@ -1680,6 +1697,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-4-a.test.cpp
   - verify/verify-aoj-grl/aoj-grl-5-e.test.cpp
@@ -1794,7 +1812,9 @@ data:
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
   - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp

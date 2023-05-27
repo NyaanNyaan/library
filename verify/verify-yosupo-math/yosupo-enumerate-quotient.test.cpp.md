@@ -2,8 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: game/impartial-game.hpp
-    title: "\u4E0D\u504F\u30B2\u30FC\u30E0"
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/enumerate-quotient.hpp
+    title: "\u5546\u306E\u5217\u6319"
+  - icon: ':heavy_check_mark:'
+    path: math/isqrt.hpp
+    title: math/isqrt.hpp
+  - icon: ':heavy_check_mark:'
+    path: misc/fastio.hpp
+    title: misc/fastio.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -29,30 +38,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/102
+    PROBLEM: https://judge.yosupo.jp/problem/enumerate_quotients
     links:
-    - https://yukicoder.me/problems/no/102
-  bundledCode: "#line 1 \"verify/verify-yuki/yuki-0102.test.cpp\"\n#define PROBLEM\
-    \ \"https://yukicoder.me/problems/no/102\"\n//\n#line 2 \"template/template.hpp\"\
-    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
-    #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
-    \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
-    \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
-    \ <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include <cstdlib>\n#include\
-    \ <cstring>\n#include <deque>\n#include <fstream>\n#include <functional>\n#include\
-    \ <initializer_list>\n#include <iomanip>\n#include <ios>\n#include <iostream>\n\
-    #include <istream>\n#include <iterator>\n#include <limits>\n#include <list>\n\
-    #include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n#include\
-    \ <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include <sstream>\n\
-    #include <stack>\n#include <streambuf>\n#include <string>\n#include <tuple>\n\
-    #include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n#include\
-    \ <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n#line\
-    \ 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing i64\
-    \ = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\nusing\
-    \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    - https://judge.yosupo.jp/problem/enumerate_quotients
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_quotients\"\n//\n\
+    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
+    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
+    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
+    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
+    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
+    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
+    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
+    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
+    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
+    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
+    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
+    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
+    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -194,67 +203,113 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yuki/yuki-0102.test.cpp\"\n//\n#line 2 \"game/impartial-game.hpp\"\
-    \n\n#line 8 \"game/impartial-game.hpp\"\nusing namespace std;\n\n/**\n * \u30B2\
-    \u30FC\u30E0\u306E\u9077\u79FB\u304C DAG \u3067\u8868\u305B\u308B\u4E0D\u504F\u30B2\
-    \u30FC\u30E0\u306E solver\n *\n * Board\uFF1A\u76E4\u9762\u306E\u578B\n * Move\
-    \ \u306F\u7740\u624B\u306E\u578B or void\n * Game \u306F\n *\n * - splittable\
-    \ = true \u306E\u5834\u5408\u306F vector<Board> (\u30B2\u30FC\u30E0\u306E\u5206\
-    \u5272\u306B\u5BFE\u5FDC)\n * - splittable = false\u306E\u5834\u5408\u306F Board\n\
-    \ *\n * State \u306F\u6B21\n *\n * - Move \u304C void \u3067\u3042\u308B\u5834\
-    \u5408, Game\n * - Move \u304C void \u3067\u306A\u3044\u5834\u5408, pair<Game,\
-    \ Move>\n *\n * States \u306F vector<State>\n *\n * F \u306F Board \u3092\u5F15\
-    \u6570, States \u3092\u8FD4\u308A\u5024\u306B\u53D6\u308B\u95A2\u6570\u3002\u3064\
-    \u307E\u308A\n *\n * - \u30C7\u30D5\u30A9\u30EB\u30C8\u306E\u5834\u5408   : function<vector<Board>(Board)>\n\
-    \ * - splittable \u306E\u5834\u5408 : function<vector<vector<Board>(Board)>\n\
-    \ * - Move != void \u306E\u5834\u5408\u306F\u8FD4\u308A\u5024\u306E value_type\
-    \ \u304C pair(*, move) \u306B\u306A\u308B\n *\n * \u96D1\u306B\u30B2\u30FC\u30E0\
-    \u306E\u52DD\u6557\u3092\u77E5\u308A\u305F\u3044\u3068\u304D\u306F\u30C7\u30D5\
-    \u30A9\u30EB\u30C8\u3067\u3088\u3044\n * \u6700\u5584\u624B\u306E\u60C5\u5831\u304C\
-    \u6B32\u3057\u3044\u3068\u304D\u306F Move \u306E\u5F15\u6570\u3092\u5909\u3048\
-    \u3066\u9811\u5F35\u308B\n */\n\ntemplate <typename Board, typename Move = void,\
-    \ bool splittable = false>\nstruct ImpartialGameSolver {\n  using Boards = vector<Board>;\n\
-    \  using Game = conditional_t<splittable, vector<Board>, Board>;\n  using State\
-    \ = conditional_t<is_void_v<Move>, Game, pair<Game, Move>>;\n  using States =\
-    \ vector<State>;\n  using Nimber = long long;\n  using F = function<States(Board)>;\n\
-    \n  map<Board, Nimber> mp;\n  F f;\n\n  ImpartialGameSolver() = default;\n  ImpartialGameSolver(const\
-    \ F& _f) : f(_f) {}\n  void set_func(const F& _f) { f = _f; }\n\n  template <typename\
-    \ T>\n  Nimber get(const T& t) {\n    if constexpr (is_same_v<T, Board>) {\n \
-    \     if (mp.count(t)) return mp[t];\n      return mp[t] = _get(t);\n    } else\
-    \ if constexpr (is_same_v<T, Boards>) {\n      Nimber n = 0;\n      for (const\
-    \ Board& s : t) n ^= get(s);\n      return n;\n    } else {\n      static_assert(is_same_v<T,\
-    \ pair<Game, Move>>);\n      return get(t.first);\n    }\n  }\n\n  template <typename\
-    \ T>\n  conditional_t<is_same_v<T, Board>, Move, pair<int, Move>> get_best_move(\n\
-    \      const T& t) {\n    static_assert(is_void_v<Move> == false);\n    Nimber\
-    \ n = get(t);\n    assert(n != 0 and \"No Best Move.\");\n    if (is_same_v<T,\
-    \ Board>) {\n      auto res = change_x(t, n);\n      if (res.first) return res.second;\n\
-    \    } else {\n      static_assert(is_same_v<T, Boards>);\n      for (int i =\
-    \ 0; i < (int)t.size(); i++) {\n        auto res = change_x(t[i], n);\n      \
-    \  if (res.first) return {i, res.second};\n      }\n    }\n    assert(false and\
-    \ \"Error in get_best_move().\");\n    exit(1);\n  }\n\n private:\n  Nimber _get(const\
-    \ Board& b) {\n    States gs = f(b);\n    if (gs.empty()) return {};\n    vector<Nimber>\
-    \ ns;\n    for (State& st : gs) ns.push_back(get(st));\n    sort(begin(ns), end(ns));\n\
-    \    ns.erase(unique(begin(ns), end(ns)), end(ns));\n    for (int i = 0; i < (int)ns.size();\
-    \ i++) {\n      if (ns[i] != i) return i;\n    }\n    return ns.size();\n  }\n\
-    \n  // nimber \u304C x \u5909\u308F\u308B\u3088\u3046\u306A\u7740\u624B\u3092\u8FD4\
-    \u3059\n  pair<bool, Move> change_x(const Board& b, Nimber x) {\n    assert(is_void_v<Move>\
-    \ == false);\n    Nimber n = get(b);\n    for (auto& st : f(b)) {\n      if (get(st)\
-    \ == (x ^ n)) return {true, st.second};\n    }\n    return {false, Move{}};\n\
-    \  }\n};\n\n/**\n * @brief \u4E0D\u504F\u30B2\u30FC\u30E0\n */\n#line 6 \"verify/verify-yuki/yuki-0102.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid q() {\n  vi A(4);\n  in(A);\n  ImpartialGameSolver<int,\
-    \ void, true> game;\n  using T = typename decltype(game)::States;\n  auto f =\
-    \ [&](int x) -> T {\n    T res;\n    rep1(i, 3) {\n      if (x < i) break;\n \
-    \     res.push_back(vi{int(x - i)});\n    }\n    return res;\n  };\n  game.set_func(f);\n\
-    \  out(game.get(A) ? \"Taro\" : \"Jiro\");\n}\n\nvoid Nyaan::solve() {\n  int\
-    \ t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/102\"\n//\n#include \"\
-    ../../template/template.hpp\"\n//\n#include \"../../game/impartial-game.hpp\"\n\
-    using namespace Nyaan;\n\nvoid q() {\n  vi A(4);\n  in(A);\n  ImpartialGameSolver<int,\
-    \ void, true> game;\n  using T = typename decltype(game)::States;\n  auto f =\
-    \ [&](int x) -> T {\n    T res;\n    rep1(i, 3) {\n      if (x < i) break;\n \
-    \     res.push_back(vi{int(x - i)});\n    }\n    return res;\n  };\n  game.set_func(f);\n\
-    \  out(game.get(A) ? \"Taro\" : \"Jiro\");\n}\n\nvoid Nyaan::solve() {\n  int\
-    \ t = 1;\n  // in(t);\n  while (t--) q();\n}"
+    \ 4 \"verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp\"\n//\n#line\
+    \ 2 \"misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace std;\n\
+    \n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
+    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                              \\\n  template <class, class =\
+    \ void>                                         \\\n  struct has_##var : std::false_type\
+    \ {};                                 \\\n  template <class T>               \
+    \                                      \\\n  struct has_##var<T, std::void_t<typename\
+    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
+    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
+    \n}  // namespace internal\n#line 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\n\
+    static constexpr int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ],\
+    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
+    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
+    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
+    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
+    \ pre;\n\nvoid load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf\
+    \ + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
+    \  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
+    \  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left + offset > in_right)\
+    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\nvoid single_read(char&\
+    \ c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n\
+    }\nvoid single_read(string& S) {\n  skip_space();\n  while (true) {\n    if (in_left\
+    \ == in_right) load();\n    int i = in_left;\n    for (; i != in_right; i++) {\n\
+    \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
+    \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
+    template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
+    \ = nullptr>\ninline void single_read(T& x) {\n  if (in_left + offset > in_right)\
+    \ load();\n  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool\
+    \ minus = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
+    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
+    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\ninline\
+    \ void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head&\
+    \ head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\ninline void\
+    \ single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++]\
+    \ = c;\n}\ninline void single_write(const bool& b) {\n  if (out_right > SZ - offset)\
+    \ flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void single_write(const\
+    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
+    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
+    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
+    \ out_right += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
+    \ = nullptr>\ninline void single_write(const T& _x) {\n  if (out_right > SZ -\
+    \ offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n\
+    \  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
+    \ (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
+    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
+    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
+    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
+    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
+    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
+    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
+    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
+    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
+    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
+    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
+    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
+    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
+    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
+    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
+    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 6 \"verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp\"\
+    \n//\n#line 2 \"math/enumerate-quotient.hpp\"\n\n#line 2 \"math/isqrt.hpp\"\n\n\
+    #line 4 \"math/isqrt.hpp\"\nusing namespace std;\n\n// floor(sqrt(n)) \u3092\u8FD4\
+    \u3059 (\u305F\u3060\u3057 n \u304C\u8CA0\u306E\u5834\u5408\u306F 0 \u3092\u8FD4\
+    \u3059)\nlong long isqrt(long long n) {\n  if (n <= 0) return 0;\n  long long\
+    \ x = sqrt(n);\n  while ((x + 1) * (x + 1) <= n) x++;\n  while (x * x > n) x--;\n\
+    \  return x;\n}\n#line 4 \"math/enumerate-quotient.hpp\"\n\nnamespace EnumerateQuotientImpl\
+    \ {\nlong long fast_div(long long a, long long b) { return 1.0 * a / b; };\nlong\
+    \ long slow_div(long long a, long long b) { return a / b; };\n}  // namespace\
+    \ EnumerateQuotientImpl\n\n// { (q, l, r) : forall x in (l,r], floor(N/x) = q\
+    \ }\n// \u3092\u5F15\u6570\u306B\u53D6\u308B\u95A2\u6570f(q, l, r)\u3092\u6E21\
+    \u3059\u3002\u7BC4\u56F2\u304C\u5DE6\u306B\u534A\u958B\u306A\u306E\u306B\u6CE8\
+    \u610F\n// \u5546\u306F\u5C0F\u3055\u3044\u65B9\u304B\u3089\u8D70\u67FB\u3059\u308B\
+    \ntemplate <typename T, typename F>\nvoid enumerate_quotient(T N, const F& f)\
+    \ {\n  T sq = isqrt(N);\n\n#define FUNC(d)                       \\\n  T upper\
+    \ = N, quo = 0;               \\\n  while (upper > sq) {                \\\n \
+    \   T thres = d(N, (++quo + 1));      \\\n    f(quo, thres, upper);          \
+    \   \\\n    upper = thres;                    \\\n  }                        \
+    \           \\\n  while (upper > 0) {                 \\\n    f(d(N, upper), upper\
+    \ - 1, upper); \\\n    upper--;                          \\\n  }\n\n  if (N <=\
+    \ 1e12) {\n    FUNC(EnumerateQuotientImpl::fast_div);\n  } else {\n    FUNC(EnumerateQuotientImpl::slow_div);\n\
+    \  }\n#undef FUNC\n}\n\n/**\n *  @brief \u5546\u306E\u5217\u6319\n */\n#line 8\
+    \ \"verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp\"\n\nusing namespace\
+    \ Nyaan;\n\nvoid q() {\n  ll N;\n  rd(N);\n  vector<ll> v;\n  enumerate_quotient(N,\
+    \ [&](ll q, ll l, ll r) {\n    assert(l == 0 or N / l > q);\n    assert(N / (l\
+    \ + 1) == q);\n\n    assert(N / r == q);\n    assert(N / (r + 1) < q);\n    v.push_back(q);\n\
+    \  });\n  wtn(sz(v));\n  for (auto& x : v) wt(x, ' ');\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_quotients\"\n\
+    //\n#include \"../../template/template.hpp\"\n//\n#include \"../../misc/fastio.hpp\"\
+    \n//\n#include \"../../math/enumerate-quotient.hpp\"\n\nusing namespace Nyaan;\n\
+    \nvoid q() {\n  ll N;\n  rd(N);\n  vector<ll> v;\n  enumerate_quotient(N, [&](ll\
+    \ q, ll l, ll r) {\n    assert(l == 0 or N / l > q);\n    assert(N / (l + 1) ==\
+    \ q);\n\n    assert(N / r == q);\n    assert(N / (r + 1) < q);\n    v.push_back(q);\n\
+    \  });\n  wtn(sz(v));\n  for (auto& x : v) wt(x, ' ');\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -262,17 +317,20 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - game/impartial-game.hpp
+  - misc/fastio.hpp
+  - internal/internal-type-traits.hpp
+  - math/enumerate-quotient.hpp
+  - math/isqrt.hpp
   isVerificationFile: true
-  path: verify/verify-yuki/yuki-0102.test.cpp
+  path: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
   requiredBy: []
   timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yuki/yuki-0102.test.cpp
+documentation_of: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yuki/yuki-0102.test.cpp
-- /verify/verify/verify-yuki/yuki-0102.test.cpp.html
-title: verify/verify-yuki/yuki-0102.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
 ---

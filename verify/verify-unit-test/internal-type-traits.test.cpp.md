@@ -286,10 +286,10 @@ data:
     \ init_size = 4,\n          bool fixed_size = false>\nstruct UnerasableHashMap\
     \ {\n  static_assert(init_size >= 1 && (init_size & (init_size - 1)) == 0);\n\n\
     \ private:\n  int N, occupied_num;\n  vector<Key> keys;\n  vector<Val> vals;\n\
-    \  vector<char> flag;\n  int shift;\n  const Val default_value;\n\n  // 64 bit\
-    \ \u306E hash \u3092\u8FD4\u3059\n  static unsigned long long get_hash(const Key&\
-    \ x) {\n    return internal::hash_function(x);\n  }\n\n  // \u30B5\u30A4\u30BA\
-    \u3092 n \u306B\u62E1\u5F35\u3059\u308B\n  void init(int n = init_size, bool reset\
+    \  vector<char> flag;\n  int shift;\n  Val default_value;\n\n  // 64 bit \u306E\
+    \ hash \u3092\u8FD4\u3059\n  static unsigned long long get_hash(const Key& x)\
+    \ {\n    return internal::hash_function(x);\n  }\n\n  // \u30B5\u30A4\u30BA\u3092\
+    \ n \u306B\u62E1\u5F35\u3059\u308B\n  void init(int n = init_size, bool reset\
     \ = false) {\n    vector<Key> keys2(n);\n    vector<Val> vals2(n, default_value);\n\
     \    vector<char> flag2(n);\n    int shift2 = 64 - __builtin_ctz(n);\n    swap(N,\
     \ n), swap(keys, keys2);\n    swap(vals, vals2), swap(flag, flag2), swap(shift,\
@@ -378,7 +378,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/internal-type-traits.test.cpp
   requiredBy: []
-  timestamp: '2023-05-22 18:09:46+09:00'
+  timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/internal-type-traits.test.cpp

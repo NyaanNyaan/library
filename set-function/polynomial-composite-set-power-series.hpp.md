@@ -25,12 +25,12 @@ data:
   attributes:
     document_title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
     links: []
-  bundledCode: "#line 2 \"set-function/egf-composite-set-power-series.hpp\"\n\n#include\
-    \ <cassert>\n#include <vector>\nusing namespace std;\n\n#line 2 \"fps/formal-power-series.hpp\"\
-    \n\ntemplate <typename mint>\nstruct FormalPowerSeries : vector<mint> {\n  using\
-    \ vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\n  FPS &operator+=(const\
-    \ FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n    for\
-    \ (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+  bundledCode: "#line 2 \"set-function/polynomial-composite-set-power-series.hpp\"\
+    \n\n#include <cassert>\n#include <vector>\nusing namespace std;\n\n#line 2 \"\
+    fps/formal-power-series.hpp\"\n\ntemplate <typename mint>\nstruct FormalPowerSeries\
+    \ : vector<mint> {\n  using vector<mint>::vector;\n  using FPS = FormalPowerSeries;\n\
+    \n  FPS &operator+=(const FPS &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
     \  }\n\n  FPS &operator+=(const mint &r) {\n    if (this->empty()) this->resize(1);\n\
     \    (*this)[0] += r;\n    return *this;\n  }\n\n  FPS &operator-=(const FPS &r)\
     \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
@@ -132,34 +132,35 @@ data:
     \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
     \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
     \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
-    \ */\n#line 2 \"set-function/subset-convolution.hpp\"\n\ntemplate <typename mint,\
-    \ int _s>\nstruct SubsetConvolution {\n  using fps = array<mint, _s + 1>;\n  static\
-    \ constexpr int s = _s;\n  vector<int> pc;\n\n  SubsetConvolution() : pc(1 <<\
-    \ s) {\n    for (int i = 1; i < (1 << s); i++) pc[i] = pc[i - (i & -i)] + 1;\n\
-    \  }\n\n  void add(fps& l, const fps& r, int d) {\n    for (int i = 0; i < d;\
-    \ ++i) l[i] += r[i];\n  }\n\n  void sub(fps& l, const fps& r, int d) {\n    for\
-    \ (int i = d; i <= s; ++i) l[i] -= r[i];\n  }\n\n  void zeta(vector<fps>& a) {\n\
-    \    int n = a.size();\n    for (int w = 1; w < n; w *= 2) {\n      for (int k\
-    \ = 0; k < n; k += w * 2) {\n        for (int i = 0; i < w; ++i) {\n         \
-    \ add(a[k + w + i], a[k + i], pc[k + w + i]);\n        }\n      }\n    }\n  }\n\
-    \n  void mobius(vector<fps>& a) {\n    int n = a.size();\n    for (int w = n >>\
-    \ 1; w; w >>= 1) {\n      for (int k = 0; k < n; k += w * 2) {\n        for (int\
-    \ i = 0; i < w; ++i) {\n          sub(a[k + w + i], a[k + i], pc[k + w + i]);\n\
-    \        }\n      }\n    }\n  }\n\n  vector<fps> lift(const vector<mint>& a) {\n\
-    \    vector<fps> A(a.size());\n    for (int i = 0; i < (int)a.size(); i++) {\n\
-    \      fill(begin(A[i]), end(A[i]), mint());\n      A[i][pc[i]] = a[i];\n    }\n\
-    \    return A;\n  }\n\n  vector<mint> unlift(const vector<fps>& A) {\n    vector<mint>\
-    \ a(A.size());\n    for (int i = 0; i < (int)A.size(); i++) a[i] = A[i][pc[i]];\n\
-    \    return a;\n  }\n\n  void prod(vector<fps>& A, const vector<fps>& B) {\n \
-    \   int n = A.size(), d = __builtin_ctz(n);\n    for (int i = 0; i < n; i++) {\n\
-    \      fps c{};\n      for (int j = 0; j <= d; j++) {\n        for (int k = 0;\
-    \ k <= d - j; k++) {\n          c[j + k] += A[i][j] * B[i][k];\n        }\n  \
-    \    }\n      A[i].swap(c);\n    }\n  }\n\n  vector<mint> multiply(const vector<mint>&\
-    \ a, const vector<mint>& b) {\n    vector<fps> A = lift(a), B = lift(b);\n   \
-    \ zeta(A), zeta(B);\n    prod(A, B);\n    mobius(A);\n    return unlift(A);\n\
-    \  }\n};\n\n/**\n * @brief Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n\
-    \ */\n#line 10 \"set-function/egf-composite-set-power-series.hpp\"\n\ntemplate\
-    \ <typename mint, int MAX = 21>\nvector<mint> egf_composite_set_power_series(int\
+    \ */\n#line 2 \"set-function/subset-convolution.hpp\"\n\n#include <array>\n#line\
+    \ 5 \"set-function/subset-convolution.hpp\"\nusing namespace std;\n\ntemplate\
+    \ <typename mint, int _s>\nstruct SubsetConvolution {\n  using fps = array<mint,\
+    \ _s + 1>;\n  static constexpr int s = _s;\n  vector<int> pc;\n\n  SubsetConvolution()\
+    \ : pc(1 << s) {\n    for (int i = 1; i < (1 << s); i++) pc[i] = pc[i - (i & -i)]\
+    \ + 1;\n  }\n\n  void add(fps& l, const fps& r, int d) {\n    for (int i = 0;\
+    \ i < d; ++i) l[i] += r[i];\n  }\n\n  void sub(fps& l, const fps& r, int d) {\n\
+    \    for (int i = d; i <= s; ++i) l[i] -= r[i];\n  }\n\n  void zeta(vector<fps>&\
+    \ a) {\n    int n = a.size();\n    for (int w = 1; w < n; w *= 2) {\n      for\
+    \ (int k = 0; k < n; k += w * 2) {\n        for (int i = 0; i < w; ++i) {\n  \
+    \        add(a[k + w + i], a[k + i], pc[k + w + i]);\n        }\n      }\n   \
+    \ }\n  }\n\n  void mobius(vector<fps>& a) {\n    int n = a.size();\n    for (int\
+    \ w = n >> 1; w; w >>= 1) {\n      for (int k = 0; k < n; k += w * 2) {\n    \
+    \    for (int i = 0; i < w; ++i) {\n          sub(a[k + w + i], a[k + i], pc[k\
+    \ + w + i]);\n        }\n      }\n    }\n  }\n\n  vector<fps> lift(const vector<mint>&\
+    \ a) {\n    vector<fps> A(a.size());\n    for (int i = 0; i < (int)a.size(); i++)\
+    \ {\n      fill(begin(A[i]), end(A[i]), mint());\n      A[i][pc[i]] = a[i];\n\
+    \    }\n    return A;\n  }\n\n  vector<mint> unlift(const vector<fps>& A) {\n\
+    \    vector<mint> a(A.size());\n    for (int i = 0; i < (int)A.size(); i++) a[i]\
+    \ = A[i][pc[i]];\n    return a;\n  }\n\n  void prod(vector<fps>& A, const vector<fps>&\
+    \ B) {\n    int n = A.size(), d = __builtin_ctz(n);\n    for (int i = 0; i < n;\
+    \ i++) {\n      fps c{};\n      for (int j = 0; j <= d; j++) {\n        for (int\
+    \ k = 0; k <= d - j; k++) {\n          c[j + k] += A[i][j] * B[i][k];\n      \
+    \  }\n      }\n      A[i].swap(c);\n    }\n  }\n\n  vector<mint> multiply(const\
+    \ vector<mint>& a, const vector<mint>& b) {\n    vector<fps> A = lift(a), B =\
+    \ lift(b);\n    zeta(A), zeta(B);\n    prod(A, B);\n    mobius(A);\n    return\
+    \ unlift(A);\n  }\n};\n\n/**\n * @brief Subset Convolution\n * @docs docs/set-function/subset-convolution.md\n\
+    \ */\n#line 10 \"set-function/polynomial-composite-set-power-series.hpp\"\n\n\
+    template <typename mint, int MAX = 21>\nvector<mint> polynomial_composite_set_power_series(int\
     \ n, FormalPowerSeries<mint> f,\n                                            vector<mint>\
     \ g) {\n  assert(0 <= n && n <= MAX);\n  static SubsetConvolution<mint, MAX> ss;\n\
     \n  Binomial<mint> binom(f.size());\n  if (g[0] != 0) {\n    f = TaylorShift(f,\
@@ -176,9 +177,9 @@ data:
   code: "#pragma once\n\n#include <cassert>\n#include <vector>\nusing namespace std;\n\
     \n#include \"../fps/formal-power-series.hpp\"\n#include \"../fps/taylor-shift.hpp\"\
     \n#include \"subset-convolution.hpp\"\n\ntemplate <typename mint, int MAX = 21>\n\
-    vector<mint> egf_composite_set_power_series(int n, FormalPowerSeries<mint> f,\n\
-    \                                            vector<mint> g) {\n  assert(0 <=\
-    \ n && n <= MAX);\n  static SubsetConvolution<mint, MAX> ss;\n\n  Binomial<mint>\
+    vector<mint> polynomial_composite_set_power_series(int n, FormalPowerSeries<mint>\
+    \ f,\n                                            vector<mint> g) {\n  assert(0\
+    \ <= n && n <= MAX);\n  static SubsetConvolution<mint, MAX> ss;\n\n  Binomial<mint>\
     \ binom(f.size());\n  if (g[0] != 0) {\n    f = TaylorShift(f, g[0], binom);\n\
     \    g[0] = 0;\n  }\n  f.resize(n + 1), g.resize(1 << n);\n\n  for (int i = 0;\
     \ i <= n; i++) f[i] *= binom.fac(i);\n  vector h(n + 1, vector(n + 1, vector<mint>{}));\n\
@@ -195,16 +196,16 @@ data:
   - modulo/binomial.hpp
   - set-function/subset-convolution.hpp
   isVerificationFile: false
-  path: set-function/egf-composite-set-power-series.hpp
+  path: set-function/polynomial-composite-set-power-series.hpp
   requiredBy: []
-  timestamp: '2023-05-26 23:34:57+09:00'
+  timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
-documentation_of: set-function/egf-composite-set-power-series.hpp
+documentation_of: set-function/polynomial-composite-set-power-series.hpp
 layout: document
 redirect_from:
-- /library/set-function/egf-composite-set-power-series.hpp
-- /library/set-function/egf-composite-set-power-series.hpp.html
+- /library/set-function/polynomial-composite-set-power-series.hpp
+- /library/set-function/polynomial-composite-set-power-series.hpp.html
 title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
 ---

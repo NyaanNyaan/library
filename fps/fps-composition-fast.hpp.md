@@ -449,45 +449,46 @@ data:
     \ C + i * m, m * sizeof(int));\n  return std::move(u);\n}\n\n#ifdef BUFFER_SIZE\n\
     #undef BUFFER_SIZE\n#endif\n}  // namespace FastMatProd\n#line 5 \"fps/fps-composition-fast.hpp\"\
     \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
-    \n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"))) fps Composition(\n\
-    \    fps P, fps Q, int deg = -1) {\n  int N = (deg == -1) ? min(P.size(), Q.size())\
-    \ : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n  if (P.size() == 0) {\n\
-    \    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0) : Q[0];\n    return R;\n\
-    \  }\n  if (N == 1) return fps{Q.eval(P[0])};\n  P.resize(N);\n\n  int K = max<int>(ceil(sqrt(N)),\
-    \ 2);\n  assert(N <= K * K);\n\n  vector<fps> PS(K + 1);\n  {\n    // step 1\n\
-    \    PS[0].resize(N, mint());\n    PS[0][0] = 1;\n    PS[1] = P;\n    fps::set_fft();\n\
-    \    if (fps::ntt_ptr == nullptr) {\n      for (int i = 2; i <= K; i++) PS[i]\
-    \ = (PS[i - 1] * P).pre(N);\n    } else {\n      int len = 1 << (32 - __builtin_clz(2\
-    \ * N - 2));\n      fps Pomega = P;\n      Pomega.resize(len);\n      Pomega.ntt();\n\
-    \      for (int i = 2; i <= K; i++) {\n        PS[i].resize(len);\n        for\
-    \ (int j = 0; j < N; j++) PS[i][j] = PS[i - 1][j];\n        PS[i].ntt();\n   \
-    \     for (int j = 0; j < len; j++) PS[i][j] *= Pomega[j];\n        PS[i].intt();\n\
-    \        PS[i].resize(N);\n        PS[i].shrink_to_fit();\n      }\n    }\n  }\n\
-    \n  vector<fps> TS(K);\n  {\n    // step 2\n    TS[0].resize(N, mint());\n   \
-    \ TS[0][0] = 1;\n    TS[1] = PS[K];\n    if (fps::ntt_ptr == nullptr) {\n    \
-    \  for (int i = 2; i < K; i++) TS[i] = (TS[i - 1] * TS[1]).pre(N);\n    } else\
-    \ {\n      int len = 1 << (32 - __builtin_clz(2 * N - 2));\n      fps Tomega =\
-    \ TS[1];\n      Tomega.resize(len);\n      Tomega.ntt();\n      for (int i = 2;\
-    \ i < K; i++) {\n        TS[i].resize(len);\n        for (int j = 0; j < N; j++)\
-    \ TS[i][j] = TS[i - 1][j];\n        TS[i].ntt();\n        for (int j = 0; j <\
-    \ len; j++) TS[i][j] *= Tomega[j];\n        TS[i].intt();\n        TS[i].resize(N);\n\
-    \        TS[i].shrink_to_fit();\n      }\n    }\n  }\n\n  // step 3\n  vector<fps>\
-    \ QP;\n  {\n    PS.pop_back();\n    vector<fps> QS(K, fps(K, mint()));\n    for\
-    \ (int i = 0; i < K; i++)\n      for (int j = 0; j < K; j++) {\n        QS[i][j]\
-    \ = (i * K + j) < (int)Q.size() ? Q[i * K + j] : mint();\n      }\n    QP = FastMatProd::strassen(QS,\
-    \ PS);\n  }\n\n  fps ans(N, mint());\n  {\n    // step 4,5\n    for (int i = 0;\
-    \ i < K; i++) ans += (QP[i] * TS[i]).pre(N);\n  }\n  return ans;\n}\n\n/**\n *\
-    \ @brief \u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )\n */\n"
+    \n// Q(P(x))\n__attribute__((target(\"avx2\"), optimize(\"O3\", \"unroll-loops\"\
+    ))) fps Composition(\n    fps P, fps Q, int deg = -1) {\n  int N = (deg == -1)\
+    \ ? min(P.size(), Q.size()) : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n\
+    \  if (P.size() == 0) {\n    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0)\
+    \ : Q[0];\n    return R;\n  }\n  if (N == 1) return fps{Q.eval(P[0])};\n  P.resize(N);\n\
+    \n  int K = max<int>(ceil(sqrt(N)), 2);\n  assert(N <= K * K);\n\n  vector<fps>\
+    \ PS(K + 1);\n  {\n    // step 1\n    PS[0].resize(N, mint());\n    PS[0][0] =\
+    \ 1;\n    PS[1] = P;\n    fps::set_fft();\n    if (fps::ntt_ptr == nullptr) {\n\
+    \      for (int i = 2; i <= K; i++) PS[i] = (PS[i - 1] * P).pre(N);\n    } else\
+    \ {\n      int len = 1 << (32 - __builtin_clz(2 * N - 2));\n      fps Pomega =\
+    \ P;\n      Pomega.resize(len);\n      Pomega.ntt();\n      for (int i = 2; i\
+    \ <= K; i++) {\n        PS[i].resize(len);\n        for (int j = 0; j < N; j++)\
+    \ PS[i][j] = PS[i - 1][j];\n        PS[i].ntt();\n        for (int j = 0; j <\
+    \ len; j++) PS[i][j] *= Pomega[j];\n        PS[i].intt();\n        PS[i].resize(N);\n\
+    \        PS[i].shrink_to_fit();\n      }\n    }\n  }\n\n  vector<fps> TS(K);\n\
+    \  {\n    // step 2\n    TS[0].resize(N, mint());\n    TS[0][0] = 1;\n    TS[1]\
+    \ = PS[K];\n    if (fps::ntt_ptr == nullptr) {\n      for (int i = 2; i < K; i++)\
+    \ TS[i] = (TS[i - 1] * TS[1]).pre(N);\n    } else {\n      int len = 1 << (32\
+    \ - __builtin_clz(2 * N - 2));\n      fps Tomega = TS[1];\n      Tomega.resize(len);\n\
+    \      Tomega.ntt();\n      for (int i = 2; i < K; i++) {\n        TS[i].resize(len);\n\
+    \        for (int j = 0; j < N; j++) TS[i][j] = TS[i - 1][j];\n        TS[i].ntt();\n\
+    \        for (int j = 0; j < len; j++) TS[i][j] *= Tomega[j];\n        TS[i].intt();\n\
+    \        TS[i].resize(N);\n        TS[i].shrink_to_fit();\n      }\n    }\n  }\n\
+    \n  // step 3\n  vector<fps> QP;\n  {\n    PS.pop_back();\n    vector<fps> QS(K,\
+    \ fps(K, mint()));\n    for (int i = 0; i < K; i++)\n      for (int j = 0; j <\
+    \ K; j++) {\n        QS[i][j] = (i * K + j) < (int)Q.size() ? Q[i * K + j] : mint();\n\
+    \      }\n    QP = FastMatProd::strassen(QS, PS);\n  }\n\n  fps ans(N, mint());\n\
+    \  {\n    // step 4,5\n    for (int i = 0; i < K; i++) ans += (QP[i] * TS[i]).pre(N);\n\
+    \  }\n  return ans;\n}\n\n/**\n * @brief \u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$\
+    \ )\n */\n"
   code: "#pragma once\n#include \"../fps/formal-power-series.hpp\"\n#include \"../modint/montgomery-modint.hpp\"\
     \n#include \"../modulo/strassen.hpp\"\n\nusing mint = LazyMontgomeryModInt<998244353>;\n\
-    using fps = FormalPowerSeries<mint>;\n\n__attribute__((target(\"avx2\"), optimize(\"\
-    O3\", \"unroll-loops\"))) fps Composition(\n    fps P, fps Q, int deg = -1) {\n\
-    \  int N = (deg == -1) ? min(P.size(), Q.size()) : deg;\n  if (N == 0) return\
-    \ fps{};\n  P.shrink();\n  if (P.size() == 0) {\n    fps R(N, mint(0));\n    R[0]\
-    \ = Q.empty() ? mint(0) : Q[0];\n    return R;\n  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\
-    \  P.resize(N);\n\n  int K = max<int>(ceil(sqrt(N)), 2);\n  assert(N <= K * K);\n\
-    \n  vector<fps> PS(K + 1);\n  {\n    // step 1\n    PS[0].resize(N, mint());\n\
-    \    PS[0][0] = 1;\n    PS[1] = P;\n    fps::set_fft();\n    if (fps::ntt_ptr\
+    using fps = FormalPowerSeries<mint>;\n\n// Q(P(x))\n__attribute__((target(\"avx2\"\
+    ), optimize(\"O3\", \"unroll-loops\"))) fps Composition(\n    fps P, fps Q, int\
+    \ deg = -1) {\n  int N = (deg == -1) ? min(P.size(), Q.size()) : deg;\n  if (N\
+    \ == 0) return fps{};\n  P.shrink();\n  if (P.size() == 0) {\n    fps R(N, mint(0));\n\
+    \    R[0] = Q.empty() ? mint(0) : Q[0];\n    return R;\n  }\n  if (N == 1) return\
+    \ fps{Q.eval(P[0])};\n  P.resize(N);\n\n  int K = max<int>(ceil(sqrt(N)), 2);\n\
+    \  assert(N <= K * K);\n\n  vector<fps> PS(K + 1);\n  {\n    // step 1\n    PS[0].resize(N,\
+    \ mint());\n    PS[0][0] = 1;\n    PS[1] = P;\n    fps::set_fft();\n    if (fps::ntt_ptr\
     \ == nullptr) {\n      for (int i = 2; i <= K; i++) PS[i] = (PS[i - 1] * P).pre(N);\n\
     \    } else {\n      int len = 1 << (32 - __builtin_clz(2 * N - 2));\n      fps\
     \ Pomega = P;\n      Pomega.resize(len);\n      Pomega.ntt();\n      for (int\
@@ -518,7 +519,7 @@ data:
   isVerificationFile: false
   path: fps/fps-composition-fast.hpp
   requiredBy: []
-  timestamp: '2022-08-22 22:01:20+09:00'
+  timestamp: '2023-05-27 23:17:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
