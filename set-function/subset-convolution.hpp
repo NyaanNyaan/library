@@ -1,5 +1,9 @@
 #pragma once
 
+#include <array>
+#include <vector>
+using namespace std;
+
 template <typename mint, int _s>
 struct SubsetConvolution {
   using fps = array<mint, _s + 1>;

@@ -27,7 +27,7 @@ struct UnerasableHashMap {
   vector<Val> vals;
   vector<char> flag;
   int shift;
-  const Val default_value;
+  Val default_value;
 
   // 64 bit の hash を返す
   static unsigned long long get_hash(const Key& x) {

@@ -6,6 +6,7 @@
 using mint = LazyMontgomeryModInt<998244353>;
 using fps = FormalPowerSeries<mint>;
 
+// Q(P(x))
 __attribute__((target("avx2"), optimize("O3", "unroll-loops"))) fps Composition(
     fps P, fps Q, int deg = -1) {
   int N = (deg == -1) ? min(P.size(), Q.size()) : deg;
