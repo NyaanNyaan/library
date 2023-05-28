@@ -49,6 +49,10 @@ data:
     path: fps/multipoint-evaluation.hpp
     title: Multipoint Evaluation
   - icon: ':heavy_check_mark:'
+    path: fps/multivariate-fps.hpp
+    title: "\u591A\u5909\u6570\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
+      \u30E9\u30EA"
+  - icon: ':heavy_check_mark:'
     path: fps/nth-term.hpp
     title: "\u7DDA\u5F62\u56DE\u5E30\u6570\u5217\u306E\u9AD8\u901F\u8A08\u7B97(Berlekamp-Massey/Bostan-Mori)"
   - icon: ':heavy_check_mark:'
@@ -89,6 +93,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: modulo/factorial.hpp
     title: "\u968E\u4E57 $\\mod p$"
+  - icon: ':heavy_check_mark:'
+    path: ntt/multivariate-circular-convolution.hpp
+    title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
   - icon: ':heavy_check_mark:'
     path: set-function/polynomial-composite-set-power-series.hpp
     title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
@@ -220,6 +227,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0214.test.cpp
     title: verify/verify-yuki/yuki-0214.test.cpp
   - icon: ':heavy_check_mark:'
@@ -267,6 +277,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1533.test.cpp
     title: verify/verify-yuki/yuki-1533.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1783.test.cpp
+    title: verify/verify-yuki/yuki-1783.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
@@ -413,12 +426,14 @@ data:
   isVerificationFile: false
   path: fps/formal-power-series.hpp
   requiredBy:
+  - ntt/multivariate-circular-convolution.hpp
   - fps/inversion-formula.hpp
   - fps/fft2d.hpp
   - fps/fps-sqrt.hpp
   - fps/find-p-recursive.hpp
   - fps/fps-famous-series.hpp
   - fps/fps-compositional-inverse.hpp
+  - fps/multivariate-fps.hpp
   - fps/ntt-friendly-fps.hpp
   - fps/fast-multieval.hpp
   - fps/nth-term.hpp
@@ -446,6 +461,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
@@ -456,6 +472,7 @@ data:
   - verify/verify-yuki/yuki-0720.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1510.test.cpp
+  - verify/verify-yuki/yuki-1783.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-0215-nth-term.test.cpp

@@ -224,6 +224,10 @@ data:
       path: fps/multipoint-evaluation.hpp
       title: Multipoint Evaluation
     - icon: ':heavy_check_mark:'
+      path: fps/multivariate-fps.hpp
+      title: "\u591A\u5909\u6570\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
+        \u30E9\u30EA"
+    - icon: ':heavy_check_mark:'
       path: fps/newton-method.hpp
       title: "\u30CB\u30E5\u30FC\u30C8\u30F3\u6CD5"
     - icon: ':heavy_check_mark:'
@@ -420,9 +424,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/constexpr-primitiveroot.hpp
       title: math/constexpr-primitiveroot.hpp
-    - icon: ':warning:'
-      path: math/crt_i128.hpp
-      title: math/crt_i128.hpp
     - icon: ':heavy_check_mark:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
@@ -598,7 +599,7 @@ data:
     pages:
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-modint.hpp
-      title: modint/arbitrary-modint.hpp
+      title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod)"
     - icon: ':heavy_check_mark:'
       path: modint/arbitrary-prime-modint.hpp
       title: modint/arbitrary-prime-modint.hpp
@@ -719,9 +720,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: ntt/karatsuba.hpp
       title: ntt/karatsuba.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ntt/multidimensional-ntt.hpp
       title: "\u591A\u6B21\u5143FFT"
+    - icon: ':heavy_check_mark:'
+      path: ntt/multivariate-circular-convolution.hpp
+      title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
     - icon: ':heavy_check_mark:'
       path: ntt/multivariate-multiplication.hpp
       title: Multivariate Multiplication
@@ -1950,6 +1954,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
       title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+      title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
   - name: verify/verify-yosupo-other
     pages:
     - icon: ':heavy_check_mark:'
@@ -2157,6 +2164,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1781.test.cpp
       title: verify/verify-yuki/yuki-1781.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1783.test.cpp
+      title: verify/verify-yuki/yuki-1783.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1786.test.cpp
       title: verify/verify-yuki/yuki-1786.test.cpp

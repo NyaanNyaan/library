@@ -27,7 +27,7 @@ data:
     title: misc/timer.hpp
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
-    title: modint/arbitrary-modint.hpp
+    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod)"
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-prime-modint.hpp
     title: modint/arbitrary-prime-modint.hpp
@@ -661,61 +661,82 @@ data:
     \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
     \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
     \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
-    };\n#line 4 \"modint/arbitrary-modint.hpp\"\n\nstruct ArbitraryModInt {\n  int\
-    \ x;\n\n  ArbitraryModInt() : x(0) {}\n\n  ArbitraryModInt(int64_t y) {\n    int\
-    \ z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n  }\n\n  ArbitraryModInt\
-    \ &operator+=(const ArbitraryModInt &p) {\n    if ((x += p.x) >= get_mod()) x\
-    \ -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModInt &operator-=(const\
-    \ ArbitraryModInt &p) {\n    if ((x += get_mod() - p.x) >= get_mod()) x -= get_mod();\n\
-    \    return *this;\n  }\n\n  ArbitraryModInt &operator*=(const ArbitraryModInt\
-    \ &p) {\n    x = rem((unsigned long long)x * p.x);\n    return *this;\n  }\n\n\
-    \  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *= p.inverse();\n\
-    \    return *this;\n  }\n\n  ArbitraryModInt operator-() const { return ArbitraryModInt(-x);\
-    \ }\n\n  ArbitraryModInt operator+(const ArbitraryModInt &p) const {\n    return\
-    \ ArbitraryModInt(*this) += p;\n  }\n\n  ArbitraryModInt operator-(const ArbitraryModInt\
-    \ &p) const {\n    return ArbitraryModInt(*this) -= p;\n  }\n\n  ArbitraryModInt\
-    \ operator*(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ *= p;\n  }\n\n  ArbitraryModInt operator/(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) /= p;\n  }\n\n  bool operator==(const ArbitraryModInt\
-    \ &p) const { return x == p.x; }\n\n  bool operator!=(const ArbitraryModInt &p)\
-    \ const { return x != p.x; }\n\n  ArbitraryModInt inverse() const {\n    int a\
-    \ = x, b = get_mod(), u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n\
-    \      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n\
-    \  }\n\n  ArbitraryModInt pow(int64_t n) const {\n    ArbitraryModInt ret(1),\
-    \ mul(x);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n\
-    \      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const ArbitraryModInt &p) {\n    return os << p.x;\n  }\n\n  friend istream\
-    \ &operator>>(istream &is, ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n\
-    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n\n  int get() const { return\
-    \ x; }\n\n  inline unsigned int rem(unsigned long long p) { return barrett().rem(p);\
-    \ }\n\n  static inline Barrett &barrett() {\n    static Barrett b;\n    return\
-    \ b;\n  }\n\n  static inline int &get_mod() {\n    static int mod = 0;\n    return\
-    \ mod;\n  }\n\n  static void set_mod(int md) {\n    assert(0 < md && md <= (1LL\
-    \ << 30) - 1);\n    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n#line\
-    \ 8 \"verify/verify-unit-test/garner-bigint.test.cpp\"\n//\n#line 2 \"prime/fast-factorize.hpp\"\
-    \n\n#line 6 \"prime/fast-factorize.hpp\"\nusing namespace std;\n\n#line 2 \"internal/internal-math.hpp\"\
-    \n\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace internal {\n\n#line 8\
-    \ \"internal/internal-math.hpp\"\nusing namespace std;\n\n// a^{-1} mod p \u3092\
-    \u8A08\u7B97\u3002gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\nT\
-    \ inv(T a, T p) {\n  a = a % p;\n  if constexpr (is_broadly_signed_v<T>) {\n \
-    \   if (a < 0) a += p;\n  }\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q\
-    \ = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b ==\
-    \ 1);\n  return y < 0 ? y + p : y;\n}\n\n// T : \u5024\u306E\u578B\n// U : T*T\
-    \ \u304C\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044\u578B\ntemplate\
-    \ <typename T, typename U>\nT modpow(T a, __int128_t n, T p) {\n  T ret = 1 %\
-    \ p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a %\
-    \ p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n}  // namespace internal\n#line 2\
-    \ \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\nusing u64 =\
-    \ unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n  \
-    \    u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
-    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
-    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
-    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
-    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
-    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
-    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
-    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    };\n#line 4 \"modint/arbitrary-modint.hpp\"\n\ntemplate <int id>\nstruct ArbitraryModIntBase\
+    \ {\n  int x;\n\n  ArbitraryModIntBase() : x(0) {}\n\n  ArbitraryModIntBase(int64_t\
+    \ y) {\n    int z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n\
+    \  }\n\n  ArbitraryModIntBase &operator+=(const ArbitraryModIntBase &p) {\n  \
+    \  if ((x += p.x) >= get_mod()) x -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
+    \ &operator-=(const ArbitraryModIntBase &p) {\n    if ((x += get_mod() - p.x)\
+    \ >= get_mod()) x -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
+    \ &operator*=(const ArbitraryModIntBase &p) {\n    x = rem((unsigned long long)x\
+    \ * p.x);\n    return *this;\n  }\n\n  ArbitraryModIntBase &operator/=(const ArbitraryModIntBase\
+    \ &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
+    \ operator-() const { return ArbitraryModIntBase(-x); }\n\n  ArbitraryModIntBase\
+    \ operator+(const ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this)\
+    \ += p;\n  }\n\n  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p)\
+    \ const {\n    return ArbitraryModIntBase(*this) -= p;\n  }\n\n  ArbitraryModIntBase\
+    \ operator*(const ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this)\
+    \ *= p;\n  }\n\n  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p)\
+    \ const {\n    return ArbitraryModIntBase(*this) /= p;\n  }\n\n  bool operator==(const\
+    \ ArbitraryModIntBase &p) const { return x == p.x; }\n\n  bool operator!=(const\
+    \ ArbitraryModIntBase &p) const { return x != p.x; }\n\n  ArbitraryModIntBase\
+    \ inverse() const {\n    int a = x, b = get_mod(), u = 1, v = 0, t;\n    while\
+    \ (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t *\
+    \ v, v);\n    }\n    return ArbitraryModIntBase(u);\n  }\n\n  ArbitraryModIntBase\
+    \ pow(int64_t n) const {\n    ArbitraryModIntBase ret(1), mul(x);\n    while (n\
+    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
+    \  }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const\
+    \ ArbitraryModIntBase &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream\
+    \ &is, ArbitraryModIntBase &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModIntBase(t);\n\
+    \    return (is);\n  }\n\n  int get() const { return x; }\n\n  inline unsigned\
+    \ int rem(unsigned long long p) { return barrett().rem(p); }\n\n  static inline\
+    \ Barrett &barrett() {\n    static Barrett b;\n    return b;\n  }\n\n  static\
+    \ inline int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\n \
+    \ static void set_mod(int md) {\n    assert(0 < md && md <= (1LL << 30) - 1);\n\
+    \    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n\nusing ArbitraryModInt\
+    \ = ArbitraryModIntBase<-1>;\n\n/**\n * @brief modint (2^{30} \u672A\u6E80\u306E\
+    \u4EFB\u610F mod)\n */\n#line 8 \"verify/verify-unit-test/garner-bigint.test.cpp\"\
+    \n//\n#line 2 \"prime/fast-factorize.hpp\"\n\n#line 6 \"prime/fast-factorize.hpp\"\
+    \nusing namespace std;\n\n#line 2 \"internal/internal-math.hpp\"\n\n#line 4 \"\
+    internal/internal-math.hpp\"\n\nnamespace internal {\n\n#line 8 \"internal/internal-math.hpp\"\
+    \nusing namespace std;\n\n// a mod p\ntemplate <typename T>\nT safe_mod(T a, T\
+    \ p) {\n  a %= p;\n  if constexpr (is_broadly_signed_v<T>) {\n    if (a < 0) a\
+    \ += p;\n  }\n  return a;\n}\n\n// \u8FD4\u308A\u5024\uFF1Apair(g, x)\n// s.t.\
+    \ g = gcd(a, b), xa = g (mod b), 0 <= x < b/g\ntemplate <typename T>\npair<T,\
+    \ T> inv_gcd(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a,\
+    \ p);\n  if (a == 0) return {p, 0};\n  T b = p, x = 1, y = 0;\n  while (a) {\n\
+    \    T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  if (y\
+    \ < 0) y += p / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\u5024 : a^{-1} mod\
+    \ p\n// gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\nT inv(T a, T\
+    \ p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a, p);\n  T b\
+    \ = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n\
+    \    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ? y + p : y;\n\
+    }\n\n// T : \u5024\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\u30FC\u30D5\
+    \u30ED\u30FC\u3057\u306A\u3044\u578B\ntemplate <typename T, typename U>\nT modpow(T\
+    \ a, __int128_t n, T p) {\n  a = safe_mod(a, p);\n  T ret = 1 % p;\n  while (n)\
+    \ {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a % p;\n    n >>= 1;\n\
+    \  }\n  return ret;\n}\n\n// \u8FD4\u308A\u5024 : pair(rem, mod)\n// \u89E3\u306A\
+    \u3057\u306E\u3068\u304D\u306F {0, 0} \u3092\u8FD4\u3059\ntemplate <typename T>\n\
+    pair<T, T> crt(const vector<T>& r, const vector<T>& m) {\n  static_assert(is_broadly_signed_v<T>);\n\
+    \  assert(r.size() == m.size());\n  int n = int(r.size());\n  T r0 = 0, m0 = 1;\n\
+    \  for (int i = 0; i < n; i++) {\n    assert(1 <= m[i]);\n    T r1 = safe_mod(r[i],\
+    \ m[i]), m1 = m[i];\n    if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0\
+    \ % m1 == 0) {\n      if (r0 % m1 != r1) return {0, 0};\n      continue;\n   \
+    \ }\n    auto [g, im] = inv_gcd(m0, m1);\n    T u1 = m1 / g;\n    if ((r1 - r0)\
+    \ % g) return {0, 0};\n    T x = (r1 - r0) / g % u1 * im % u1;\n    r0 += x *\
+    \ m0;\n    m0 *= u1;\n    if (r0 < 0) r0 += m0;\n  }\n  return {r0, m0};\n}\n\n\
+    }  // namespace internal\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing\
+    \ i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng()\
+    \ {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
+    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
+    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
+    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
+    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
+    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
+    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
+    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
+    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
     \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
     \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
     \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
@@ -978,7 +999,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/garner-bigint.test.cpp
   requiredBy: []
-  timestamp: '2023-05-22 22:29:25+09:00'
+  timestamp: '2023-05-28 20:44:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/garner-bigint.test.cpp

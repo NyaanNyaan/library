@@ -1,11 +1,18 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: fps/multivariate-fps.hpp
+    title: "\u591A\u5909\u6570\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
+      \u30E9\u30EA"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1783.test.cpp
+    title: verify/verify-yuki/yuki-1783.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -13,26 +20,30 @@ data:
     _deprecated_at_docs: docs/ntt/multivariate-multiplication.md
     document_title: Multivariate Multiplication
     links: []
-  bundledCode: "#line 2 \"ntt/multivariate-multiplication.hpp\"\n\ntemplate <typename\
-    \ fps>\nfps multivariate_multiplication(const fps& f, const fps& g,\n        \
-    \                        const vector<int>& base) {\n  int n = f.size(), s = base.size(),\
-    \ W = 1;\n  if (s == 0) return fps{f[0] * g[0]};\n  while (W < 2 * n) W *= 2;\n\
-    \n  vector<int> chi(n);\n  for (int i = 0; i < n; i++) {\n    int x = i;\n   \
-    \ for (int j = 0; j < s - 1; j++) chi[i] += (x /= base[j]);\n    chi[i] %= s;\n\
-    \  }\n\n  vector<fps> F(s, fps(W)), G(s, fps(W));\n  for (int i = 0; i < n; i++)\
-    \ F[chi[i]][i] = f[i], G[chi[i]][i] = g[i];\n\n  for (auto& x : F) x.ntt();\n\
-    \  for (auto& x : G) x.ntt();\n  fps a(s);\n  for (int k = 0; k < W; k++) {\n\
-    \    fill(begin(a), end(a), typename fps::value_type());\n    for (int i = 0;\
-    \ i < s; i++)\n      for (int j = 0; j < s; j++) {\n        a[i + j - (i + j >=\
-    \ s ? s : 0)] += F[i][k] * G[j][k];\n      }\n    for (int i = 0; i < s; i++)\
-    \ F[i][k] = a[i];\n  }\n  for (auto& x : F) x.intt();\n  fps h(n);\n  for (int\
-    \ i = 0; i < n; i++) h[i] = F[chi[i]][i];\n  return h;\n}\n\n/**\n * @brief Multivariate\
-    \ Multiplication\n * @docs docs/ntt/multivariate-multiplication.md\n */\n"
-  code: "#pragma once\n\ntemplate <typename fps>\nfps multivariate_multiplication(const\
+  bundledCode: "#line 2 \"ntt/multivariate-multiplication.hpp\"\n\n// \u9577\u3055\
+    \u304C\u7B49\u3057\u3044\u5217\u540C\u58EB\u306E\u7573\u307F\u8FBC\u307F\u3057\
+    \u304B\u3057\u306A\u3044\ntemplate <typename fps>\nfps multivariate_multiplication(const\
     \ fps& f, const fps& g,\n                                const vector<int>& base)\
-    \ {\n  int n = f.size(), s = base.size(), W = 1;\n  if (s == 0) return fps{f[0]\
-    \ * g[0]};\n  while (W < 2 * n) W *= 2;\n\n  vector<int> chi(n);\n  for (int i\
-    \ = 0; i < n; i++) {\n    int x = i;\n    for (int j = 0; j < s - 1; j++) chi[i]\
+    \ {\n  assert(f.size() == g.size());\n  int n = f.size(), s = base.size(), W =\
+    \ 1;\n  if (s == 0) return fps{f[0] * g[0]};\n  while (W < 2 * n) W *= 2;\n\n\
+    \  vector<int> chi(n);\n  for (int i = 0; i < n; i++) {\n    int x = i;\n    for\
+    \ (int j = 0; j < s - 1; j++) chi[i] += (x /= base[j]);\n    chi[i] %= s;\n  }\n\
+    \n  vector<fps> F(s, fps(W)), G(s, fps(W));\n  for (int i = 0; i < n; i++) F[chi[i]][i]\
+    \ = f[i], G[chi[i]][i] = g[i];\n\n  for (auto& x : F) x.ntt();\n  for (auto& x\
+    \ : G) x.ntt();\n  fps a(s);\n  for (int k = 0; k < W; k++) {\n    fill(begin(a),\
+    \ end(a), typename fps::value_type());\n    for (int i = 0; i < s; i++)\n    \
+    \  for (int j = 0; j < s; j++) {\n        a[i + j - (i + j >= s ? s : 0)] += F[i][k]\
+    \ * G[j][k];\n      }\n    for (int i = 0; i < s; i++) F[i][k] = a[i];\n  }\n\
+    \  for (auto& x : F) x.intt();\n  fps h(n);\n  for (int i = 0; i < n; i++) h[i]\
+    \ = F[chi[i]][i];\n  return h;\n}\n\n/**\n * @brief Multivariate Multiplication\n\
+    \ * @docs docs/ntt/multivariate-multiplication.md\n */\n"
+  code: "#pragma once\n\n// \u9577\u3055\u304C\u7B49\u3057\u3044\u5217\u540C\u58EB\
+    \u306E\u7573\u307F\u8FBC\u307F\u3057\u304B\u3057\u306A\u3044\ntemplate <typename\
+    \ fps>\nfps multivariate_multiplication(const fps& f, const fps& g,\n        \
+    \                        const vector<int>& base) {\n  assert(f.size() == g.size());\n\
+    \  int n = f.size(), s = base.size(), W = 1;\n  if (s == 0) return fps{f[0] *\
+    \ g[0]};\n  while (W < 2 * n) W *= 2;\n\n  vector<int> chi(n);\n  for (int i =\
+    \ 0; i < n; i++) {\n    int x = i;\n    for (int j = 0; j < s - 1; j++) chi[i]\
     \ += (x /= base[j]);\n    chi[i] %= s;\n  }\n\n  vector<fps> F(s, fps(W)), G(s,\
     \ fps(W));\n  for (int i = 0; i < n; i++) F[chi[i]][i] = f[i], G[chi[i]][i] =\
     \ g[i];\n\n  for (auto& x : F) x.ntt();\n  for (auto& x : G) x.ntt();\n  fps a(s);\n\
@@ -46,11 +57,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ntt/multivariate-multiplication.hpp
-  requiredBy: []
-  timestamp: '2021-03-03 00:56:00+09:00'
+  requiredBy:
+  - fps/multivariate-fps.hpp
+  timestamp: '2023-05-28 20:44:00+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - verify/verify-yuki/yuki-1783.test.cpp
 documentation_of: ntt/multivariate-multiplication.hpp
 layout: document
 redirect_from:

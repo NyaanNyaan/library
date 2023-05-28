@@ -42,6 +42,9 @@ data:
     path: modulo/mod-log.hpp
     title: modulo/mod-log.hpp
   - icon: ':heavy_check_mark:'
+    path: ntt/multivariate-circular-convolution.hpp
+    title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
+  - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
   _extendedVerifiedWith:
@@ -337,6 +340,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -409,6 +415,7 @@ data:
   requiredBy:
   - misc/all.hpp
   - misc/fastio.hpp
+  - ntt/multivariate-circular-convolution.hpp
   - math/stern-brocot-tree.hpp
   - math/bigint-gcd.hpp
   - math/rational.hpp
@@ -425,6 +432,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp

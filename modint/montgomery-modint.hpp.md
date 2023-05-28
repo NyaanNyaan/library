@@ -39,6 +39,9 @@ data:
     path: ntt/cooley-tukey-ntt.hpp
     title: Cooley-Tukey FFT Algorithm
   - icon: ':heavy_check_mark:'
+    path: ntt/multivariate-circular-convolution.hpp
+    title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
+  - icon: ':heavy_check_mark:'
     path: ntt/rader-ntt.hpp
     title: Rader's FFT Algorithm
   - icon: ':heavy_check_mark:'
@@ -394,6 +397,9 @@ data:
     path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -468,6 +474,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1781.test.cpp
     title: verify/verify-yuki/yuki-1781.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1783.test.cpp
+    title: verify/verify-yuki/yuki-1783.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
@@ -552,6 +561,7 @@ data:
   requiredBy:
   - tree/frequency-table-of-tree-distance.hpp
   - ntt/chirp-z.hpp
+  - ntt/multivariate-circular-convolution.hpp
   - ntt/rader-ntt.hpp
   - ntt/arbitrary-ntt.hpp
   - ntt/cooley-tukey-ntt.hpp
@@ -571,6 +581,7 @@ data:
   - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
   - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
@@ -592,6 +603,7 @@ data:
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-1783.test.cpp
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-1781.test.cpp

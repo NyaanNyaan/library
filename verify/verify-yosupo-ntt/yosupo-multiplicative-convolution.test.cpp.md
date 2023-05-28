@@ -515,23 +515,24 @@ data:
     \    return (is);\n  }\n  \n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n#line 8 \"verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp\"\
-    \n//\n#line 2 \"ntt/multivariate-multiplication.hpp\"\n\ntemplate <typename fps>\n\
-    fps multivariate_multiplication(const fps& f, const fps& g,\n                \
-    \                const vector<int>& base) {\n  int n = f.size(), s = base.size(),\
-    \ W = 1;\n  if (s == 0) return fps{f[0] * g[0]};\n  while (W < 2 * n) W *= 2;\n\
-    \n  vector<int> chi(n);\n  for (int i = 0; i < n; i++) {\n    int x = i;\n   \
-    \ for (int j = 0; j < s - 1; j++) chi[i] += (x /= base[j]);\n    chi[i] %= s;\n\
-    \  }\n\n  vector<fps> F(s, fps(W)), G(s, fps(W));\n  for (int i = 0; i < n; i++)\
-    \ F[chi[i]][i] = f[i], G[chi[i]][i] = g[i];\n\n  for (auto& x : F) x.ntt();\n\
-    \  for (auto& x : G) x.ntt();\n  fps a(s);\n  for (int k = 0; k < W; k++) {\n\
-    \    fill(begin(a), end(a), typename fps::value_type());\n    for (int i = 0;\
-    \ i < s; i++)\n      for (int j = 0; j < s; j++) {\n        a[i + j - (i + j >=\
-    \ s ? s : 0)] += F[i][k] * G[j][k];\n      }\n    for (int i = 0; i < s; i++)\
-    \ F[i][k] = a[i];\n  }\n  for (auto& x : F) x.intt();\n  fps h(n);\n  for (int\
-    \ i = 0; i < n; i++) h[i] = F[chi[i]][i];\n  return h;\n}\n\n/**\n * @brief Multivariate\
-    \ Multiplication\n * @docs docs/ntt/multivariate-multiplication.md\n */\n#line\
-    \ 10 \"verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp\"\n\
-    \nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
+    \n//\n#line 2 \"ntt/multivariate-multiplication.hpp\"\n\n// \u9577\u3055\u304C\
+    \u7B49\u3057\u3044\u5217\u540C\u58EB\u306E\u7573\u307F\u8FBC\u307F\u3057\u304B\
+    \u3057\u306A\u3044\ntemplate <typename fps>\nfps multivariate_multiplication(const\
+    \ fps& f, const fps& g,\n                                const vector<int>& base)\
+    \ {\n  assert(f.size() == g.size());\n  int n = f.size(), s = base.size(), W =\
+    \ 1;\n  if (s == 0) return fps{f[0] * g[0]};\n  while (W < 2 * n) W *= 2;\n\n\
+    \  vector<int> chi(n);\n  for (int i = 0; i < n; i++) {\n    int x = i;\n    for\
+    \ (int j = 0; j < s - 1; j++) chi[i] += (x /= base[j]);\n    chi[i] %= s;\n  }\n\
+    \n  vector<fps> F(s, fps(W)), G(s, fps(W));\n  for (int i = 0; i < n; i++) F[chi[i]][i]\
+    \ = f[i], G[chi[i]][i] = g[i];\n\n  for (auto& x : F) x.ntt();\n  for (auto& x\
+    \ : G) x.ntt();\n  fps a(s);\n  for (int k = 0; k < W; k++) {\n    fill(begin(a),\
+    \ end(a), typename fps::value_type());\n    for (int i = 0; i < s; i++)\n    \
+    \  for (int j = 0; j < s; j++) {\n        a[i + j - (i + j >= s ? s : 0)] += F[i][k]\
+    \ * G[j][k];\n      }\n    for (int i = 0; i < s; i++) F[i][k] = a[i];\n  }\n\
+    \  for (auto& x : F) x.intt();\n  fps h(n);\n  for (int i = 0; i < n; i++) h[i]\
+    \ = F[chi[i]][i];\n  return h;\n}\n\n/**\n * @brief Multivariate Multiplication\n\
+    \ * @docs docs/ntt/multivariate-multiplication.md\n */\n#line 10 \"verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp\"\
+    \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing fps = FormalPowerSeries<mint>;\n\
     //\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  // verify();\n  int K, N\
     \ = 1;\n  rd(K);\n  vector<int> base(K);\n  for (auto& x : base) rd(x), N *= x;\n\
     \  fps a(N), b(N);\n  int n;\n  rep(i, N) rd(n), a[i] = n;\n  rep(i, N) rd(n),\
@@ -564,7 +565,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-05-22 22:29:25+09:00'
+  timestamp: '2023-05-28 20:44:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp

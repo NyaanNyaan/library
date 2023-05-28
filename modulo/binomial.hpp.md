@@ -19,6 +19,10 @@ data:
     path: fps/lagrange-interpolation-point.hpp
     title: fps/lagrange-interpolation-point.hpp
   - icon: ':heavy_check_mark:'
+    path: fps/multivariate-fps.hpp
+    title: "\u591A\u5909\u6570\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\
+      \u30E9\u30EA"
+  - icon: ':heavy_check_mark:'
     path: fps/partial-fraction-decomposition.hpp
     title: "\u90E8\u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\
       \u7A4D\u3067\u8868\u305B\u308B\u5834\u5408)"
@@ -189,6 +193,9 @@ data:
     path: verify/verify-yuki/yuki-1781.test.cpp
     title: verify/verify-yuki/yuki-1781.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1783.test.cpp
+    title: verify/verify-yuki/yuki-1783.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
   _isVerificationFailed: false
@@ -270,6 +277,7 @@ data:
   - fps/sum-of-exponential-times-poly.hpp
   - fps/fps-famous-series.hpp
   - fps/fps-compositional-inverse.hpp
+  - fps/multivariate-fps.hpp
   - fps/fps-composition.hpp
   - fps/lagrange-interpolation-point.hpp
   - fps/partial-fraction-decomposition.hpp
@@ -292,6 +300,7 @@ data:
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-1783.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yuki/yuki-1781.test.cpp
   - verify/verify-yuki/yuki-1112.test.cpp
