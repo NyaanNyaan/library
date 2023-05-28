@@ -2,13 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: dp/monge-d-edge-shortest-path.hpp
     title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E d-\u8FBA\u6700\u77ED\u8DEF"
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0952.test.cpp
+    title: verify/verify-yuki/yuki-0952.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
     links:
@@ -45,8 +48,9 @@ data:
   requiredBy:
   - dp/monge-d-edge-shortest-path.hpp
   timestamp: '2023-05-23 20:26:46+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yuki/yuki-0952.test.cpp
 documentation_of: dp/golden-section-search.hpp
 layout: document
 redirect_from:

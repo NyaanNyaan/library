@@ -1,17 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: dp/golden-section-search.hpp
     title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
   - icon: ':heavy_check_mark:'
     path: dp/monge-shortest-path.hpp
     title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E\u6700\u77ED\u8DEF"
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0952.test.cpp
+    title: verify/verify-yuki/yuki-0952.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     document_title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E d-\u8FBA\u6700\u77ED\u8DEF"
     links: []
@@ -53,8 +56,8 @@ data:
     \ long x) -> T {\n    auto g = [&](int from, int to) -> T { return f(from, to)\
     \ + x; };\n    T cost = monge_shortest_path<T>(N, g)[N];\n    return cost - T{1}\
     \ * D * x;\n  };\n  auto [_, res] = golden_section_search<T, false>(dp, -upper,\
-    \ upper);\n  return res;\n}\n\n/*\n  @brief monge \u30B0\u30E9\u30D5\u4E0A\u306E\
-    \ d-\u8FBA\u6700\u77ED\u8DEF\n*/\n"
+    \ upper);\n  return res;\n}\n\n/**\n * @brief monge \u30B0\u30E9\u30D5\u4E0A\u306E\
+    \ d-\u8FBA\u6700\u77ED\u8DEF\n */\n"
   code: "#pragma once\n\n#include \"golden-section-search.hpp\"\n#include \"monge-shortest-path.hpp\"\
     \n\n// \u8FBA\u30B3\u30B9\u30C8\u304C monge \u3067\u3042\u308B DAG \u306E D \u8FBA\
     \ 0-N \u6700\u77ED\u8DEF\n// f : from -> to \u306E\u30B3\u30B9\u30C8 (long long)\n\
@@ -67,17 +70,18 @@ data:
     \ long x) -> T {\n    auto g = [&](int from, int to) -> T { return f(from, to)\
     \ + x; };\n    T cost = monge_shortest_path<T>(N, g)[N];\n    return cost - T{1}\
     \ * D * x;\n  };\n  auto [_, res] = golden_section_search<T, false>(dp, -upper,\
-    \ upper);\n  return res;\n}\n\n/*\n  @brief monge \u30B0\u30E9\u30D5\u4E0A\u306E\
-    \ d-\u8FBA\u6700\u77ED\u8DEF\n*/\n"
+    \ upper);\n  return res;\n}\n\n/**\n * @brief monge \u30B0\u30E9\u30D5\u4E0A\u306E\
+    \ d-\u8FBA\u6700\u77ED\u8DEF\n */\n"
   dependsOn:
   - dp/golden-section-search.hpp
   - dp/monge-shortest-path.hpp
   isVerificationFile: false
   path: dp/monge-d-edge-shortest-path.hpp
   requiredBy: []
-  timestamp: '2023-05-23 20:26:46+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2023-05-28 11:24:51+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - verify/verify-yuki/yuki-0952.test.cpp
 documentation_of: dp/monge-d-edge-shortest-path.hpp
 layout: document
 redirect_from:

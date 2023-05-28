@@ -1015,6 +1015,9 @@ data:
     path: verify/verify-yuki/yuki-0896.test.cpp
     title: verify/verify-yuki/yuki-0896.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0952.test.cpp
+    title: verify/verify-yuki/yuki-0952.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0963-circular.test.cpp
     title: verify/verify-yuki/yuki-0963-circular.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1029,6 +1032,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1112.test.cpp
     title: verify/verify-yuki/yuki-1112.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1115.test.cpp
+    title: verify/verify-yuki/yuki-1115.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145-frac.test.cpp
     title: verify/verify-yuki/yuki-1145-frac.test.cpp
@@ -1202,6 +1208,7 @@ data:
   - verify/verify-aoj-itp/aoj-itp2-11-c.test.cpp
   - verify/verify-aoj-itp/aoj-itp2-11-b.test.cpp
   - verify/verify-yuki/yuki-1939.test.cpp
+  - verify/verify-yuki/yuki-1115.test.cpp
   - verify/verify-yuki/yuki-0896.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
   - verify/verify-yuki/yuki-2231.test.cpp
@@ -1216,6 +1223,7 @@ data:
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-0789.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-yuki/yuki-0952.test.cpp
   - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-1340-semiring.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp

@@ -29,7 +29,7 @@ data:
       right)$ )"
   - icon: ':heavy_check_mark:'
     path: fps/fps-compositional-inverse.hpp
-    title: fps/fps-compositional-inverse.hpp
+    title: "\u9006\u95A2\u6570"
   - icon: ':heavy_check_mark:'
     path: fps/fps-famous-series.hpp
     title: "\u6709\u540D\u306A\u6570\u5217"

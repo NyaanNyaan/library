@@ -24,6 +24,7 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: "\u9006\u95A2\u6570"
     links: []
   bundledCode: "#line 2 \"fps/fps-compositional-inverse.hpp\"\n\n#include <cassert>\n\
     #include <functional>\nusing namespace std;\n\n#line 2 \"modulo/binomial.hpp\"\
@@ -171,7 +172,7 @@ data:
     \ 2) {\n    fps fg = calc_f(g, 2 * d + 1);\n    trc(fg);\n    fps fdg = (fg.diff()\
     \ * g.diff().inv(2 * d)).pre(2 * d);\n    trc(fdg);\n    g = (g - (fg - fps{0,\
     \ 1}) * fdg.inv(2 * d)).pre(2 * d);\n  }\n  return {begin(g), begin(g) + deg};\n\
-    }\n\n/*\n *  \u9006\u95A2\u6570\n */\n"
+    }\n\n/*\n *  @brief \u9006\u95A2\u6570\n */\n"
   code: "#pragma once\n\n#include <cassert>\n#include <functional>\nusing namespace\
     \ std;\n\n#include \"../modulo/binomial.hpp\"\n#include \"formal-power-series.hpp\"\
     \n#include \"fps-composition.hpp\"\n\n// f \u3092\u5165\u529B\u3068\u3057\u3066\
@@ -191,8 +192,8 @@ data:
     \ g[1].inverse();\n  for (int d = 2; d < deg; d *= 2) {\n    fps fg = calc_f(g,\
     \ 2 * d + 1);\n    trc(fg);\n    fps fdg = (fg.diff() * g.diff().inv(2 * d)).pre(2\
     \ * d);\n    trc(fdg);\n    g = (g - (fg - fps{0, 1}) * fdg.inv(2 * d)).pre(2\
-    \ * d);\n  }\n  return {begin(g), begin(g) + deg};\n}\n\n/*\n *  \u9006\u95A2\u6570\
-    \n */\n"
+    \ * d);\n  }\n  return {begin(g), begin(g) + deg};\n}\n\n/*\n *  @brief \u9006\
+    \u95A2\u6570\n */\n"
   dependsOn:
   - modulo/binomial.hpp
   - fps/formal-power-series.hpp
@@ -200,7 +201,7 @@ data:
   isVerificationFile: false
   path: fps/fps-compositional-inverse.hpp
   requiredBy: []
-  timestamp: '2023-05-27 23:17:31+09:00'
+  timestamp: '2023-05-28 11:24:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1939.test.cpp
@@ -210,5 +211,5 @@ layout: document
 redirect_from:
 - /library/fps/fps-compositional-inverse.hpp
 - /library/fps/fps-compositional-inverse.hpp.html
-title: fps/fps-compositional-inverse.hpp
+title: "\u9006\u95A2\u6570"
 ---

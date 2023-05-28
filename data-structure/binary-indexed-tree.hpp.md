@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: data-structure/range-sum-range-add-bit.hpp
     title: data-structure/range-sum-range-add-bit.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: dp/inversion-counting.hpp
     title: dp/inversion-counting.hpp
   _extendedVerifiedWith:
@@ -39,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1115.test.cpp
+    title: verify/verify-yuki/yuki-1115.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -95,6 +98,7 @@ data:
   timestamp: '2021-12-20 22:10:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-1115.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-g-bit.test.cpp

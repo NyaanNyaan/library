@@ -11,7 +11,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: fps/fps-compositional-inverse.hpp
-    title: fps/fps-compositional-inverse.hpp
+    title: "\u9006\u95A2\u6570"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-composition.test.cpp

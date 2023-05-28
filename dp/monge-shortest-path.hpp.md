@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: dp/monge-d-edge-shortest-path.hpp
     title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E d-\u8FBA\u6700\u77ED\u8DEF"
   _extendedVerifiedWith:
@@ -18,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0705.test.cpp
     title: verify/verify-yuki/yuki-0705.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-0952.test.cpp
+    title: verify/verify-yuki/yuki-0952.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -60,6 +63,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0705.test.cpp
+  - verify/verify-yuki/yuki-0952.test.cpp
   - verify/verify-yuki/yuki-0703.test.cpp
   - verify/verify-yuki/yuki-0704.test.cpp
   - verify/verify-aoj-other/aoj-3086.test.cpp

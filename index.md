@@ -128,10 +128,10 @@ data:
       path: dp/branch-and-bound.hpp
       title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\u306E\u5206\u679D\
         \u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: dp/golden-section-search.hpp
       title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: dp/inversion-counting.hpp
       title: dp/inversion-counting.hpp
     - icon: ':heavy_check_mark:'
@@ -140,12 +140,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: dp/maximal-rectangle.hpp
       title: "\u6700\u5927\u9577\u65B9\u5F62"
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
+      path: dp/monge-d-edge-shortest-path-enumerate.hpp
+      title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E d-\u8FBA\u6700\u77ED\u8DEF\u306E\
+        \ d=1,...,N \u306B\u304A\u3051\u308B\u5217\u6319"
+    - icon: ':heavy_check_mark:'
       path: dp/monge-d-edge-shortest-path.hpp
       title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E d-\u8FBA\u6700\u77ED\u8DEF"
     - icon: ':heavy_check_mark:'
       path: dp/monge-shortest-path.hpp
       title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E\u6700\u77ED\u8DEF"
+    - icon: ':heavy_check_mark:'
+      path: dp/monotone-minima.hpp
+      title: monotone minima
   - name: flow
     pages:
     - icon: ':heavy_check_mark:'
@@ -191,7 +198,7 @@ data:
         right)$ )"
     - icon: ':heavy_check_mark:'
       path: fps/fps-compositional-inverse.hpp
-      title: fps/fps-compositional-inverse.hpp
+      title: "\u9006\u95A2\u6570"
     - icon: ':heavy_check_mark:'
       path: fps/fps-famous-series.hpp
       title: "\u6709\u540D\u306A\u6570\u5217"
@@ -2061,6 +2068,9 @@ data:
       path: verify/verify-yuki/yuki-0896.test.cpp
       title: verify/verify-yuki/yuki-0896.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-0952.test.cpp
+      title: verify/verify-yuki/yuki-0952.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-0963-circular.test.cpp
       title: verify/verify-yuki/yuki-0963-circular.test.cpp
     - icon: ':heavy_check_mark:'
@@ -2075,6 +2085,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1112.test.cpp
       title: verify/verify-yuki/yuki-1112.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1115.test.cpp
+      title: verify/verify-yuki/yuki-1115.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1145-frac.test.cpp
       title: verify/verify-yuki/yuki-1145-frac.test.cpp
