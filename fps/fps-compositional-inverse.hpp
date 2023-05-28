@@ -44,5 +44,5 @@ fps compositional_inverse(function<fps(fps, int)> calc_f, int deg) {
 }
 
 /*
- *  逆関数
+ *  @brief 逆関数
  */
