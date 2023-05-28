@@ -20,6 +20,6 @@ long long monge_d_edge_shortest_path(int N, int D, long long upper,
   return res;
 }
 
-/*
-  @brief monge グラフ上の d-辺最短路
-*/
+/**
+ * @brief monge グラフ上の d-辺最短路
+ */
