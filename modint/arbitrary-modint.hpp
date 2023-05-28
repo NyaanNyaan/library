@@ -2,71 +2,72 @@
 
 #include "barrett-reduction.hpp"
 
-struct ArbitraryModInt {
+template <int id>
+struct ArbitraryModIntBase {
   int x;
 
-  ArbitraryModInt() : x(0) {}
+  ArbitraryModIntBase() : x(0) {}
 
-  ArbitraryModInt(int64_t y) {
+  ArbitraryModIntBase(int64_t y) {
     int z = y % get_mod();
     if (z < 0) z += get_mod();
     x = z;
   }
 
-  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {
+  ArbitraryModIntBase &operator+=(const ArbitraryModIntBase &p) {
     if ((x += p.x) >= get_mod()) x -= get_mod();
     return *this;
   }
 
-  ArbitraryModInt &operator-=(const ArbitraryModInt &p) {
+  ArbitraryModIntBase &operator-=(const ArbitraryModIntBase &p) {
     if ((x += get_mod() - p.x) >= get_mod()) x -= get_mod();
     return *this;
   }
 
-  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {
+  ArbitraryModIntBase &operator*=(const ArbitraryModIntBase &p) {
     x = rem((unsigned long long)x * p.x);
     return *this;
   }
 
-  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {
+  ArbitraryModIntBase &operator/=(const ArbitraryModIntBase &p) {
     *this *= p.inverse();
     return *this;
   }
 
-  ArbitraryModInt operator-() const { return ArbitraryModInt(-x); }
+  ArbitraryModIntBase operator-() const { return ArbitraryModIntBase(-x); }
 
-  ArbitraryModInt operator+(const ArbitraryModInt &p) const {
-    return ArbitraryModInt(*this) += p;
+  ArbitraryModIntBase operator+(const ArbitraryModIntBase &p) const {
+    return ArbitraryModIntBase(*this) += p;
   }
 
-  ArbitraryModInt operator-(const ArbitraryModInt &p) const {
-    return ArbitraryModInt(*this) -= p;
+  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p) const {
+    return ArbitraryModIntBase(*this) -= p;
   }
 
-  ArbitraryModInt operator*(const ArbitraryModInt &p) const {
-    return ArbitraryModInt(*this) *= p;
+  ArbitraryModIntBase operator*(const ArbitraryModIntBase &p) const {
+    return ArbitraryModIntBase(*this) *= p;
   }
 
-  ArbitraryModInt operator/(const ArbitraryModInt &p) const {
-    return ArbitraryModInt(*this) /= p;
+  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p) const {
+    return ArbitraryModIntBase(*this) /= p;
   }
 
-  bool operator==(const ArbitraryModInt &p) const { return x == p.x; }
+  bool operator==(const ArbitraryModIntBase &p) const { return x == p.x; }
 
-  bool operator!=(const ArbitraryModInt &p) const { return x != p.x; }
+  bool operator!=(const ArbitraryModIntBase &p) const { return x != p.x; }
 
-  ArbitraryModInt inverse() const {
+  ArbitraryModIntBase inverse() const {
     int a = x, b = get_mod(), u = 1, v = 0, t;
     while (b > 0) {
       t = a / b;
       swap(a -= t * b, b);
       swap(u -= t * v, v);
     }
-    return ArbitraryModInt(u);
+    return ArbitraryModIntBase(u);
   }
 
-  ArbitraryModInt pow(int64_t n) const {
-    ArbitraryModInt ret(1), mul(x);
+  ArbitraryModIntBase pow(int64_t n) const {
+    ArbitraryModIntBase ret(1), mul(x);
     while (n > 0) {
       if (n & 1) ret *= mul;
       mul *= mul;
@@ -75,14 +76,14 @@ struct ArbitraryModInt {
     return ret;
   }
 
-  friend ostream &operator<<(ostream &os, const ArbitraryModInt &p) {
+  friend ostream &operator<<(ostream &os, const ArbitraryModIntBase &p) {
     return os << p.x;
   }
 
-  friend istream &operator>>(istream &is, ArbitraryModInt &a) {
+  friend istream &operator>>(istream &is, ArbitraryModIntBase &a) {
     int64_t t;
     is >> t;
-    a = ArbitraryModInt(t);
+    a = ArbitraryModIntBase(t);
     return (is);
   }
 
@@ -106,3 +107,9 @@ struct ArbitraryModInt {
     barrett() = Barrett(md);
   }
 };
+
+using ArbitraryModInt = ArbitraryModIntBase<-1>;
+
+/**
+ * @brief modint (2^{30} 未満の任意 mod)
+ */

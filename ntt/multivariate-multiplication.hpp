@@ -1,8 +1,10 @@
 #pragma once
 
+// 長さが等しい列同士の畳み込みしかしない
 template <typename fps>
 fps multivariate_multiplication(const fps& f, const fps& g,
                                 const vector<int>& base) {
+  assert(f.size() == g.size());
   int n = f.size(), s = base.size(), W = 1;
   if (s == 0) return fps{f[0] * g[0]};
   while (W < 2 * n) W *= 2;
