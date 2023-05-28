@@ -1,11 +1,13 @@
 #pragma once
 
-template <typename T, typename F>
+// f(vector<mint>& a, bool rev) : 1 次元 DFT (rev は逆変換かどうか)
+template <typename T>
 struct MultidimensionalFourierTransform {
   vector<int> base;
-  F dft1d;
+  function<void(vector<T>&, bool)> dft1d;
 
-  MultidimensionalFourierTransform(const vector<int>& bs, const F& f)
+  MultidimensionalFourierTransform(const vector<int>& bs,
+                                   const function<void(vector<T>&, bool)>& f)
       : base(bs), dft1d(f) {}
 
   bool ascend(vector<int>& v) {
