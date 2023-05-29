@@ -73,14 +73,14 @@ struct LazyMontgomeryModInt {
   }
 
   constexpr mint inverse() const {
-    int x = get(), y = get_mod(), u = 1, v = 0;
+    int x = get(), y = mod, u = 1, v = 0, t = 0, tmp = 0;
     while (y > 0) {
-      int t = x / y, tmp;
+      t = x / y;
       x -= t * y, u -= t * v;
       tmp = x, x = y, y = tmp;
       tmp = u, u = v, v = tmp;
     }
-    return mint(u);
+    return mint{u};
   }
 
   friend ostream &operator<<(ostream &os, const mint &b) {
