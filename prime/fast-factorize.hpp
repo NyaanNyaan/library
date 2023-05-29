@@ -7,40 +7,11 @@ using namespace std;
 
 #include "../internal/internal-math.hpp"
 #include "../misc/rng.hpp"
-#include "../modint/arbitrary-prime-modint.hpp"
-#include "../modint/modint-montgomery64.hpp"
+#include "../modint/arbitrary-montgomery-modint.hpp"
+#include "miller-rabin.hpp"
 
 namespace fast_factorize {
 using u64 = uint64_t;
-
-template <typename mint>
-bool miller_rabin(u64 n, vector<u64> as) {
-  if (mint::get_mod() != n) mint::set_mod(n);
-  u64 d = n - 1;
-  while (~d & 1) d >>= 1;
-  mint e{1}, rev{int64_t(n - 1)};
-  for (u64 a : as) {
-    if (n <= a) break;
-    u64 t = d;
-    mint y = mint(a).pow(t);
-    while (t != n - 1 && y != e && y != rev) {
-      y *= y;
-      t *= 2;
-    }
-    if (y != rev && t % 2 == 0) return false;
-  }
-  return true;
-}
-
-bool is_prime(u64 n) {
-  if (~n & 1) return n == 2;
-  if (n <= 1) return false;
-  if (n < (1LL << 30))
-    return miller_rabin<ArbitraryLazyMontgomeryModInt>(n, {2, 7, 61});
-  else
-    return miller_rabin<montgomery64>(
-        n, {2, 325, 9375, 28178, 450775, 9780504, 1795265022});
-}
 
 template <typename mint, typename T>
 T pollard_rho(T n) {
@@ -75,12 +46,18 @@ T pollard_rho(T n) {
 using i64 = long long;
 
 vector<i64> inner_factorize(u64 n) {
+  using mint32 = ArbitraryLazyMontgomeryModInt<452288976>;
+  using mint64 = ArbitraryLazyMontgomeryModInt64bit<401243123>;
+
   if (n <= 1) return {};
   u64 p;
-  if (n <= (1LL << 30))
-    p = pollard_rho<ArbitraryLazyMontgomeryModInt, uint32_t>(n);
-  else
-    p = pollard_rho<montgomery64, uint64_t>(n);
+  if (n <= (1LL << 30)) {
+    p = pollard_rho<mint32, uint32_t>(n);
+  } else if (n <= (1LL << 62)) {
+    p = pollard_rho<mint64, uint64_t>(n);
+  } else {
+    exit(1);
+  }
   if (p == n) return {i64(p)};
   auto l = inner_factorize(p);
   auto r = inner_factorize(n / p);
@@ -116,11 +93,8 @@ vector<i64> divisors(u64 n) {
       ret.push_back(x);
       return;
     }
-    for (int j = v[i].second;; --j) {
-      rc(rc, i + 1, x);
-      if (j == 0) break;
-      x *= v[i].first;
-    }
+    rc(rc, i + 1, x);
+    for (int j = 0; j < v[i].second; j++) rc(rc, i + 1, x *= v[i].first);
   };
   f(f, 0, 1);
   sort(begin(ret), end(ret));
@@ -132,7 +106,6 @@ vector<i64> divisors(u64 n) {
 using fast_factorize::divisors;
 using fast_factorize::factor_count;
 using fast_factorize::factorize;
-using fast_factorize::is_prime;
 
 /**
  * @brief 高速素因数分解(Miller Rabin/Pollard's Rho)

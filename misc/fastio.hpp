@@ -64,7 +64,7 @@ void single_read(string& S) {
 }
 template <typename T,
           enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>
-inline void single_read(T& x) {
+void single_read(T& x) {
   if (in_left + offset > in_right) load();
   skip_space();
   char c = inbuf[in_left++];
@@ -81,22 +81,22 @@ inline void single_read(T& x) {
     if (minus) x = -x;
   }
 }
-inline void rd() {}
+void rd() {}
 template <typename Head, typename... Tail>
-inline void rd(Head& head, Tail&... tail) {
+void rd(Head& head, Tail&... tail) {
   single_read(head);
   rd(tail...);
 }
 
-inline void single_write(const char& c) {
+void single_write(const char& c) {
   if (out_right > SZ - offset) flush();
   outbuf[out_right++] = c;
 }
-inline void single_write(const bool& b) {
+void single_write(const bool& b) {
   if (out_right > SZ - offset) flush();
   outbuf[out_right++] = b ? '1' : '0';
 }
-inline void single_write(const string& S) {
+void single_write(const string& S) {
   int i = 0;
   while (i != (int)S.size()) {
     if (out_right == SZ) flush();
@@ -105,9 +105,18 @@ inline void single_write(const string& S) {
     i += len, out_right += len;
   }
 }
+void single_write(const char* p) {
+  int i = 0, N = strlen(p);
+  while (i != N) {
+    if (out_right == SZ) flush();
+    int len = min(N - i, SZ - out_right);
+    memcpy(outbuf + out_right, p + i, sizeof(char) * len);
+    i += len, out_right += len;
+  }
+}
 template <typename T,
           enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>
-inline void single_write(const T& _x) {
+void single_write(const T& _x) {
   if (out_right > SZ - offset) flush();
   if (_x == 0) {
     outbuf[out_right++] = '0';
@@ -148,14 +157,14 @@ inline void single_write(const T& _x) {
   memcpy(outbuf + out_right, buf + i, buffer_size - i);
   out_right += buffer_size - i;
 }
-inline void wt() {}
+void wt() {}
 template <typename Head, typename... Tail>
-inline void wt(const Head& head, const Tail&... tail) {
+void wt(const Head& head, const Tail&... tail) {
   single_write(head);
   wt(forward<const Tail>(tail)...);
 }
 template <typename... Args>
-inline void wtn(const Args&... x) {
+void wtn(const Args&... x) {
   wt(forward<const Args>(x)...);
   wt('\n');
 }

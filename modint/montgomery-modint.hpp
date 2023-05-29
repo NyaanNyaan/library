@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <uint32_t mod>
 struct LazyMontgomeryModInt {
   using mint = LazyMontgomeryModInt;
@@ -17,9 +15,9 @@ struct LazyMontgomeryModInt {
 
   static constexpr u32 r = get_r();
   static constexpr u32 n2 = -u64(mod) % mod;
-  static_assert(r * mod == 1, "invalid, r * mod != 1");
   static_assert(mod < (1 << 30), "invalid, mod >= 2 ^ 30");
   static_assert((mod & 1) == 1, "invalid, mod % 2 == 0");
+  static_assert(r * mod == 1, "this code has bugs.");
 
   u32 a;
 
@@ -62,6 +60,7 @@ struct LazyMontgomeryModInt {
     return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);
   }
   constexpr mint operator-() const { return mint() - mint(*this); }
+  constexpr mint operator+() const { return mint(*this); }
 
   constexpr mint pow(u64 n) const {
     mint ret(1), mul(*this);
@@ -72,8 +71,17 @@ struct LazyMontgomeryModInt {
     }
     return ret;
   }
-  
-  constexpr mint inverse() const { return pow(mod - 2); }
+
+  constexpr mint inverse() const {
+    int x = get(), y = get_mod(), u = 1, v = 0;
+    while (y > 0) {
+      int t = x / y, tmp;
+      x -= t * y, u -= t * v;
+      tmp = x, x = y, y = tmp;
+      tmp = u, u = v, v = tmp;
+    }
+    return mint(u);
+  }
 
   friend ostream &operator<<(ostream &os, const mint &b) {
     return os << b.get();
@@ -85,7 +93,7 @@ struct LazyMontgomeryModInt {
     b = LazyMontgomeryModInt<mod>(t);
     return (is);
   }
-  
+
   constexpr u32 get() const {
     u32 ret = reduce(a);
     return ret >= mod ? ret - mod : ret;

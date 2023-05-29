@@ -35,6 +35,7 @@ struct ArbitraryModIntBase {
   }
 
   ArbitraryModIntBase operator-() const { return ArbitraryModIntBase(-x); }
+  ArbitraryModIntBase operator+() const { return *this; }
 
   ArbitraryModIntBase operator+(const ArbitraryModIntBase &p) const {
     return ArbitraryModIntBase(*this) += p;
@@ -111,5 +112,5 @@ struct ArbitraryModIntBase {
 using ArbitraryModInt = ArbitraryModIntBase<-1>;
 
 /**
- * @brief modint (2^{30} 未満の任意 mod)
+ * @brief modint (2^{30} 未満の任意 mod 用)
  */

@@ -1,8 +1,7 @@
 #pragma once
 
 #include "../internal/internal-math.hpp"
-#include "../modint/arbitrary-prime-modint.hpp"
-#include "../modint/modint-montgomery64.hpp"
+#include "../modint/arbitrary-montgomery-modint.hpp"
 #include "../prime/fast-factorize.hpp"
 
 namespace kth_root_mod {
@@ -37,7 +36,7 @@ struct Memo {
   }
   T gpow;
   int size, mask, period;
-  vector<pair<T, int> > vs;
+  vector<pair<T, int>> vs;
   vector<int> os;
 };
 
@@ -114,10 +113,12 @@ INT inner_kth_root(INT a, INT k, INT p) {
 
 int64_t kth_root(int64_t a, int64_t k, int64_t p) {
   if (max({a, k, p}) < (1LL << 30))
-    return inner_kth_root<int32_t, int64_t, ArbitraryLazyMontgomeryModInt>(a, k,
-                                                                           p);
+    return inner_kth_root<int32_t, int64_t,
+                          ArbitraryLazyMontgomeryModInt<163553130>>(a, k, p);
   else
-    return inner_kth_root<int64_t, __int128_t, montgomery64>(a, k, p);
+    return inner_kth_root<int64_t, __int128_t,
+                          ArbitraryLazyMontgomeryModInt64bit<504025646>>(a, k,
+                                                                         p);
 }
 
 }  // namespace kth_root_mod
