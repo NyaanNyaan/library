@@ -5,6 +5,8 @@
 namespace internal {
 
 #include <cassert>
+#include <utility>
+#include <vector>
 using namespace std;
 
 // a mod p
@@ -50,10 +52,10 @@ T inv(T a, T p) {
   return y < 0 ? y + p : y;
 }
 
-// T : 値の型
-// U : T*T がオーバーフローしない型
+// T : 底の型
+// U : T*T がオーバーフローしない かつ 指数の型
 template <typename T, typename U>
-T modpow(T a, __int128_t n, T p) {
+T modpow(T a, U n, T p) {
   a = safe_mod(a, p);
   T ret = 1 % p;
   while (n) {

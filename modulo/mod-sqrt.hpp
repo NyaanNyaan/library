@@ -1,10 +1,10 @@
 #pragma once
-#include "../modint/arbitrary-prime-modint.hpp"
+#include "../modint/arbitrary-montgomery-modint.hpp"
 
 int64_t mod_sqrt(const int64_t &a, const int64_t &p) {
   assert(0 <= a && a < p);
   if (a < 2) return a;
-  using Mint = ArbitraryLazyMontgomeryModInt;
+  using Mint = ArbitraryLazyMontgomeryModInt<409075245>;
   Mint::set_mod(p);
   if (Mint(a).pow((p - 1) >> 1) != 1) return -1;
   Mint b = 1, one = 1;

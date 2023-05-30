@@ -5,11 +5,12 @@
 #include "../../atcoder/internal_math.hpp"
 #include "../../misc/rng.hpp"
 #include "../../modint/arbitrary-modint.hpp"
+#include "../../modint/arbitrary-montgomery-modint.hpp"
 using namespace Nyaan;
 
+template <typename mint>
 void test(int mod, int testcases) {
   assert(0 < mod and mod <= (1 << 30) - 1);
-  using mint = ArbitraryModInt;
   mint::set_mod(mod);
 
   rep(t, testcases) {
@@ -80,18 +81,47 @@ void test(int mod, int testcases) {
   }
 }
 
-void Nyaan::solve() {
-  int mod_max = (1LL << 30) - 1;
-  // 小さい方
-  rep1(m, 10) test(m, 10000);
-  test(998244353, 10000);
-  test(1000000007, 10000);
-  rep(t, 10) test(mod_max - t, 10000);
-  rep(t, 1000) {
-    int mod = randint(1, mod_max + 1);
-    test(mod, 1000);
+void test_wrapper(int mod, int testcases) {
+  using mint1 = ArbitraryModInt;
+  using mint2 = ArbitraryLazyMontgomeryModInt<96229631>;
+
+  test<mint1>(mod, testcases);
+  if (mod % 2 == 1) test<mint2>(mod, testcases);
+}
+
+void test_all() {
+  {
+    using mint3 = ArbitraryModIntBase<0>;
+    using mint5 = ArbitraryModIntBase<1>;
+    mint3::set_mod(3);
+    mint5::set_mod(5);
+    assert(mint3::get_mod() == 3);
+    assert(mint5::get_mod() == 5);
   }
 
+  {
+    using mint3 = ArbitraryLazyMontgomeryModInt<0>;
+    using mint5 = ArbitraryLazyMontgomeryModInt<1>;
+    mint3::set_mod(3);
+    mint5::set_mod(5);
+    assert(mint3::get_mod() == 3);
+    assert(mint5::get_mod() == 5);
+  }
+
+  int mod_max = (1LL << 30) - 1;
+  rep1(m, 10) test_wrapper(m, 10000);
+  test_wrapper(998244353, 10000);
+  test_wrapper(1000000007, 10000);
+  rep(t, 10) { test_wrapper(mod_max - t, 10000); }
+  rep(t, 1000) {
+    int mod = randint(1, mod_max + 1);
+    test_wrapper(mod, 1000);
+  }
+  cerr << "OK" << endl;
+}
+
+void Nyaan::solve() {
+  test_all();
   int a, b;
   cin >> a >> b;
   cout << a + b << "\n";

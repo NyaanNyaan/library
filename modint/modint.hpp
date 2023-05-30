@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 template <int mod>
 struct ModInt {
   int x;
@@ -31,6 +29,7 @@ struct ModInt {
   }
 
   ModInt operator-() const { return ModInt(-x); }
+  ModInt operator+() const { return ModInt(*this); }
 
   ModInt operator+(const ModInt &p) const { return ModInt(*this) += p; }
 
@@ -72,8 +71,12 @@ struct ModInt {
     a = ModInt<mod>(t);
     return (is);
   }
-  
+
   int get() const { return x; }
 
   static constexpr int get_mod() { return mod; }
 };
+
+/**
+ * @brief modint
+ */
