@@ -47,6 +47,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+  - icon: ':heavy_check_mark:'
+    path: prime/miller-rabin.hpp
+    title: Miller-Rabin primality test
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
@@ -100,11 +103,17 @@ data:
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/internal-math.test.cpp
+    title: verify/verify-unit-test/internal-math.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/internal-type-traits.test.cpp
     title: verify/verify-unit-test/internal-type-traits.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/primality-test.test.cpp
+    title: verify/verify-unit-test/primality-test.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/primitive-root.test.cpp
     title: verify/verify-unit-test/primitive-root.test.cpp
@@ -307,6 +316,12 @@ data:
     path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
     title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
+    title: verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-primality-test.test.cpp
+    title: verify/verify-yosupo-math/yosupo-primality-test.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - icon: ':heavy_check_mark:'
@@ -424,6 +439,7 @@ data:
   - math/bigint.hpp
   - hashmap/hashmap-unerasable.hpp
   - prime/fast-factorize.hpp
+  - prime/miller-rabin.hpp
   - internal/internal-math.hpp
   - internal/internal-hash-function.hpp
   - modulo/mod-kth-root.hpp
@@ -456,6 +472,7 @@ data:
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
@@ -465,7 +482,9 @@ data:
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
   - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
   - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+  - verify/verify-unit-test/primality-test.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
@@ -476,6 +495,7 @@ data:
   - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-unit-test/osak.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/internal-math.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp

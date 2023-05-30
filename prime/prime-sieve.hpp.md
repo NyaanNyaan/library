@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/primality-test.test.cpp
+    title: verify/verify-unit-test/primality-test.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
   _isVerificationFailed: false
@@ -28,6 +31,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-prime-enumerate-sieve.test.cpp
+  - verify/verify-unit-test/primality-test.test.cpp
 documentation_of: prime/prime-sieve.hpp
 layout: document
 redirect_from:

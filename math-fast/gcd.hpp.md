@@ -22,6 +22,9 @@ data:
     path: verify/verify-unit-test/bigint-gcd.test.cpp
     title: verify/verify-unit-test/bigint-gcd.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/internal-math.test.cpp
+    title: verify/verify-unit-test/internal-math.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/math-fast-2.test.cpp
     title: verify/verify-unit-test/math-fast-2.test.cpp
   - icon: ':heavy_check_mark:'
@@ -89,6 +92,7 @@ data:
   - verify/verify-unit-test/math-fast-2.test.cpp
   - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/rational-number.test.cpp
+  - verify/verify-unit-test/internal-math.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
 documentation_of: math-fast/gcd.hpp
 layout: document

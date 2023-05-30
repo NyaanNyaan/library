@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
-    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod)"
+    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod \u7528)"
   - icon: ':heavy_check_mark:'
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
@@ -224,23 +224,24 @@ data:
     \ &operator*=(const ArbitraryModIntBase &p) {\n    x = rem((unsigned long long)x\
     \ * p.x);\n    return *this;\n  }\n\n  ArbitraryModIntBase &operator/=(const ArbitraryModIntBase\
     \ &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
-    \ operator-() const { return ArbitraryModIntBase(-x); }\n\n  ArbitraryModIntBase\
-    \ operator+(const ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this)\
-    \ += p;\n  }\n\n  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p)\
-    \ const {\n    return ArbitraryModIntBase(*this) -= p;\n  }\n\n  ArbitraryModIntBase\
-    \ operator*(const ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this)\
-    \ *= p;\n  }\n\n  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p)\
-    \ const {\n    return ArbitraryModIntBase(*this) /= p;\n  }\n\n  bool operator==(const\
-    \ ArbitraryModIntBase &p) const { return x == p.x; }\n\n  bool operator!=(const\
-    \ ArbitraryModIntBase &p) const { return x != p.x; }\n\n  ArbitraryModIntBase\
-    \ inverse() const {\n    int a = x, b = get_mod(), u = 1, v = 0, t;\n    while\
-    \ (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t *\
-    \ v, v);\n    }\n    return ArbitraryModIntBase(u);\n  }\n\n  ArbitraryModIntBase\
-    \ pow(int64_t n) const {\n    ArbitraryModIntBase ret(1), mul(x);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const\
-    \ ArbitraryModIntBase &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, ArbitraryModIntBase &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModIntBase(t);\n\
+    \ operator-() const { return ArbitraryModIntBase(-x); }\n  ArbitraryModIntBase\
+    \ operator+() const { return *this; }\n\n  ArbitraryModIntBase operator+(const\
+    \ ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this) += p;\n\
+    \  }\n\n  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p) const {\n\
+    \    return ArbitraryModIntBase(*this) -= p;\n  }\n\n  ArbitraryModIntBase operator*(const\
+    \ ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this) *= p;\n\
+    \  }\n\n  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p) const {\n\
+    \    return ArbitraryModIntBase(*this) /= p;\n  }\n\n  bool operator==(const ArbitraryModIntBase\
+    \ &p) const { return x == p.x; }\n\n  bool operator!=(const ArbitraryModIntBase\
+    \ &p) const { return x != p.x; }\n\n  ArbitraryModIntBase inverse() const {\n\
+    \    int a = x, b = get_mod(), u = 1, v = 0, t;\n    while (b > 0) {\n      t\
+    \ = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n  \
+    \  return ArbitraryModIntBase(u);\n  }\n\n  ArbitraryModIntBase pow(int64_t n)\
+    \ const {\n    ArbitraryModIntBase ret(1), mul(x);\n    while (n > 0) {\n    \
+    \  if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const ArbitraryModIntBase\
+    \ &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModIntBase &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModIntBase(t);\n\
     \    return (is);\n  }\n\n  int get() const { return x; }\n\n  inline unsigned\
     \ int rem(unsigned long long p) { return barrett().rem(p); }\n\n  static inline\
     \ Barrett &barrett() {\n    static Barrett b;\n    return b;\n  }\n\n  static\
@@ -248,7 +249,7 @@ data:
     \ static void set_mod(int md) {\n    assert(0 < md && md <= (1LL << 30) - 1);\n\
     \    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n\nusing ArbitraryModInt\
     \ = ArbitraryModIntBase<-1>;\n\n/**\n * @brief modint (2^{30} \u672A\u6E80\u306E\
-    \u4EFB\u610F mod)\n */\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\
+    \u4EFB\u610F mod \u7528)\n */\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\
     \nusing namespace std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E\
     \ MAX \u306B \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\
     \u308B\u6700\u5927\u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\
@@ -305,7 +306,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
   requiredBy: []
-  timestamp: '2023-05-28 20:44:00+09:00'
+  timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp

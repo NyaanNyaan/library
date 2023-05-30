@@ -82,6 +82,9 @@ data:
     path: verify/verify-unit-test/gauss-elimination.test.cpp
     title: verify/verify-unit-test/gauss-elimination.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/internal-math.test.cpp
+    title: verify/verify-unit-test/internal-math.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/internal-type-traits.test.cpp
     title: verify/verify-unit-test/internal-type-traits.test.cpp
   - icon: ':heavy_check_mark:'
@@ -106,6 +109,9 @@ data:
     path: verify/verify-unit-test/math.test.cpp
     title: verify/verify-unit-test/math.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/modint.test.cpp
+    title: verify/verify-unit-test/modint.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/multieval.test.cpp
     title: verify/verify-unit-test/multieval.test.cpp
   - icon: ':heavy_check_mark:'
@@ -129,6 +135,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
     title: verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/primality-test.test.cpp
+    title: verify/verify-unit-test/primality-test.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/primitive-root.test.cpp
     title: verify/verify-unit-test/primitive-root.test.cpp
@@ -297,11 +306,13 @@ data:
   - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/orderedmap.test.cpp
   - verify/verify-unit-test/rbst-sequence.test.cpp
+  - verify/verify-unit-test/primality-test.test.cpp
   - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-unit-test/arbitrary-modint.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/math.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
+  - verify/verify-unit-test/modint.test.cpp
   - verify/verify-unit-test/interval-union.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
@@ -340,6 +351,7 @@ data:
   - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/relaxed-convolution.test.cpp
+  - verify/verify-unit-test/internal-math.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp

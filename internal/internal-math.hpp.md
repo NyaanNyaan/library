@@ -17,6 +17,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: prime/fast-factorize.hpp
     title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+  - icon: ':heavy_check_mark:'
+    path: prime/miller-rabin.hpp
+    title: Miller-Rabin primality test
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/factorize.test.cpp
@@ -25,8 +28,14 @@ data:
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/internal-math.test.cpp
+    title: verify/verify-unit-test/internal-math.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/osak.test.cpp
     title: verify/verify-unit-test/osak.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/primality-test.test.cpp
+    title: verify/verify-unit-test/primality-test.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/primitive-root.test.cpp
     title: verify/verify-unit-test/primitive-root.test.cpp
@@ -39,6 +48,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
+    title: verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-primality-test.test.cpp
+    title: verify/verify-yosupo-math/yosupo-primality-test.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
@@ -72,21 +87,22 @@ data:
     \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
     \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
     \n}  // namespace internal\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace\
-    \ internal {\n\n#include <cassert>\nusing namespace std;\n\n// a mod p\ntemplate\
-    \ <typename T>\nT safe_mod(T a, T p) {\n  a %= p;\n  if constexpr (is_broadly_signed_v<T>)\
-    \ {\n    if (a < 0) a += p;\n  }\n  return a;\n}\n\n// \u8FD4\u308A\u5024\uFF1A\
-    pair(g, x)\n// s.t. g = gcd(a, b), xa = g (mod b), 0 <= x < b/g\ntemplate <typename\
-    \ T>\npair<T, T> inv_gcd(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n\
-    \  a = safe_mod(a, p);\n  if (a == 0) return {p, 0};\n  T b = p, x = 1, y = 0;\n\
-    \  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n\
-    \  }\n  if (y < 0) y += p / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\u5024 :\
-    \ a^{-1} mod p\n// gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\n\
-    T inv(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a,\
-    \ p);\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a,\
-    \ b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ?\
-    \ y + p : y;\n}\n\n// T : \u5024\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\
-    \u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044\u578B\ntemplate <typename T, typename\
-    \ U>\nT modpow(T a, __int128_t n, T p) {\n  a = safe_mod(a, p);\n  T ret = 1 %\
+    \ internal {\n\n#include <cassert>\n#include <utility>\n#include <vector>\nusing\
+    \ namespace std;\n\n// a mod p\ntemplate <typename T>\nT safe_mod(T a, T p) {\n\
+    \  a %= p;\n  if constexpr (is_broadly_signed_v<T>) {\n    if (a < 0) a += p;\n\
+    \  }\n  return a;\n}\n\n// \u8FD4\u308A\u5024\uFF1Apair(g, x)\n// s.t. g = gcd(a,\
+    \ b), xa = g (mod b), 0 <= x < b/g\ntemplate <typename T>\npair<T, T> inv_gcd(T\
+    \ a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a, p);\n\
+    \  if (a == 0) return {p, 0};\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T\
+    \ q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  if (y < 0)\
+    \ y += p / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\u5024 : a^{-1} mod p\n//\
+    \ gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\nT inv(T a, T p) {\n\
+    \  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a, p);\n  T b = p, x\
+    \ = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x,\
+    \ y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ? y + p : y;\n}\n\n// T\
+    \ : \u5E95\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\
+    \u3057\u306A\u3044 \u304B\u3064 \u6307\u6570\u306E\u578B\ntemplate <typename T,\
+    \ typename U>\nT modpow(T a, U n, T p) {\n  a = safe_mod(a, p);\n  T ret = 1 %\
     \ p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a %\
     \ p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n// \u8FD4\u308A\u5024 : pair(rem,\
     \ mod)\n// \u89E3\u306A\u3057\u306E\u3068\u304D\u306F {0, 0} \u3092\u8FD4\u3059\
@@ -100,33 +116,34 @@ data:
     \ - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0 *= u1;\n    if (r0 < 0)\
     \ r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace internal\n"
   code: "#pragma once\n\n#include \"internal-type-traits.hpp\"\n\nnamespace internal\
-    \ {\n\n#include <cassert>\nusing namespace std;\n\n// a mod p\ntemplate <typename\
-    \ T>\nT safe_mod(T a, T p) {\n  a %= p;\n  if constexpr (is_broadly_signed_v<T>)\
-    \ {\n    if (a < 0) a += p;\n  }\n  return a;\n}\n\n// \u8FD4\u308A\u5024\uFF1A\
-    pair(g, x)\n// s.t. g = gcd(a, b), xa = g (mod b), 0 <= x < b/g\ntemplate <typename\
-    \ T>\npair<T, T> inv_gcd(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n\
-    \  a = safe_mod(a, p);\n  if (a == 0) return {p, 0};\n  T b = p, x = 1, y = 0;\n\
-    \  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n\
-    \  }\n  if (y < 0) y += p / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\u5024 :\
-    \ a^{-1} mod p\n// gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\n\
-    T inv(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a,\
-    \ p);\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a,\
-    \ b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ?\
-    \ y + p : y;\n}\n\n// T : \u5024\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\
-    \u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044\u578B\ntemplate <typename T, typename\
-    \ U>\nT modpow(T a, __int128_t n, T p) {\n  a = safe_mod(a, p);\n  T ret = 1 %\
-    \ p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a %\
-    \ p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n// \u8FD4\u308A\u5024 : pair(rem,\
-    \ mod)\n// \u89E3\u306A\u3057\u306E\u3068\u304D\u306F {0, 0} \u3092\u8FD4\u3059\
-    \ntemplate <typename T>\npair<T, T> crt(const vector<T>& r, const vector<T>& m)\
-    \ {\n  static_assert(is_broadly_signed_v<T>);\n  assert(r.size() == m.size());\n\
-    \  int n = int(r.size());\n  T r0 = 0, m0 = 1;\n  for (int i = 0; i < n; i++)\
-    \ {\n    assert(1 <= m[i]);\n    T r1 = safe_mod(r[i], m[i]), m1 = m[i];\n   \
-    \ if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0 % m1 == 0) {\n      if\
-    \ (r0 % m1 != r1) return {0, 0};\n      continue;\n    }\n    auto [g, im] = inv_gcd(m0,\
-    \ m1);\n    T u1 = m1 / g;\n    if ((r1 - r0) % g) return {0, 0};\n    T x = (r1\
-    \ - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0 *= u1;\n    if (r0 < 0)\
-    \ r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace internal\n"
+    \ {\n\n#include <cassert>\n#include <utility>\n#include <vector>\nusing namespace\
+    \ std;\n\n// a mod p\ntemplate <typename T>\nT safe_mod(T a, T p) {\n  a %= p;\n\
+    \  if constexpr (is_broadly_signed_v<T>) {\n    if (a < 0) a += p;\n  }\n  return\
+    \ a;\n}\n\n// \u8FD4\u308A\u5024\uFF1Apair(g, x)\n// s.t. g = gcd(a, b), xa =\
+    \ g (mod b), 0 <= x < b/g\ntemplate <typename T>\npair<T, T> inv_gcd(T a, T p)\
+    \ {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a, p);\n  if (a\
+    \ == 0) return {p, 0};\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b /\
+    \ a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  if (y < 0) y += p\
+    \ / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\u5024 : a^{-1} mod p\n// gcd(a,\
+    \ p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\nT inv(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n\
+    \  a = safe_mod(a, p);\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b /\
+    \ a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n\
+    \  return y < 0 ? y + p : y;\n}\n\n// T : \u5E95\u306E\u578B\n// U : T*T \u304C\
+    \u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044 \u304B\u3064 \u6307\
+    \u6570\u306E\u578B\ntemplate <typename T, typename U>\nT modpow(T a, U n, T p)\
+    \ {\n  a = safe_mod(a, p);\n  T ret = 1 % p;\n  while (n) {\n    if (n & 1) ret\
+    \ = U(ret) * a % p;\n    a = U(a) * a % p;\n    n >>= 1;\n  }\n  return ret;\n\
+    }\n\n// \u8FD4\u308A\u5024 : pair(rem, mod)\n// \u89E3\u306A\u3057\u306E\u3068\
+    \u304D\u306F {0, 0} \u3092\u8FD4\u3059\ntemplate <typename T>\npair<T, T> crt(const\
+    \ vector<T>& r, const vector<T>& m) {\n  static_assert(is_broadly_signed_v<T>);\n\
+    \  assert(r.size() == m.size());\n  int n = int(r.size());\n  T r0 = 0, m0 = 1;\n\
+    \  for (int i = 0; i < n; i++) {\n    assert(1 <= m[i]);\n    T r1 = safe_mod(r[i],\
+    \ m[i]), m1 = m[i];\n    if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0\
+    \ % m1 == 0) {\n      if (r0 % m1 != r1) return {0, 0};\n      continue;\n   \
+    \ }\n    auto [g, im] = inv_gcd(m0, m1);\n    T u1 = m1 / g;\n    if ((r1 - r0)\
+    \ % g) return {0, 0};\n    T x = (r1 - r0) / g % u1 * im % u1;\n    r0 += x *\
+    \ m0;\n    m0 *= u1;\n    if (r0 < 0) r0 += m0;\n  }\n  return {r0, m0};\n}\n\n\
+    }  // namespace internal\n"
   dependsOn:
   - internal/internal-type-traits.hpp
   isVerificationFile: false
@@ -134,9 +151,10 @@ data:
   requiredBy:
   - ntt/multivariate-circular-convolution.hpp
   - prime/fast-factorize.hpp
+  - prime/miller-rabin.hpp
   - modulo/mod-kth-root.hpp
   - modulo/mod-log.hpp
-  timestamp: '2023-05-28 20:44:00+09:00'
+  timestamp: '2023-05-29 21:58:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
@@ -144,11 +162,15 @@ data:
   - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
+  - verify/verify-unit-test/primality-test.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/osak.test.cpp
+  - verify/verify-unit-test/internal-math.test.cpp
 documentation_of: internal/internal-math.hpp
 layout: document
 redirect_from:

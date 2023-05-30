@@ -39,6 +39,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
     title: verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2281.test.cpp
+    title: verify/verify-yuki/yuki-2281.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2333.test.cpp
+    title: verify/verify-yuki/yuki-2333.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -125,6 +131,8 @@ data:
   timestamp: '2021-12-30 19:20:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-2281.test.cpp
+  - verify/verify-yuki/yuki-2333.test.cpp
   - verify/verify-yuki/yuki-0875-binary-search-on-segtree.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-a-segtree.test.cpp

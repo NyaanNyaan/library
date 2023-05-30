@@ -6,7 +6,7 @@ data:
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
-    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod)"
+    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod \u7528)"
   - icon: ':heavy_check_mark:'
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
@@ -240,23 +240,24 @@ data:
     \ &operator*=(const ArbitraryModIntBase &p) {\n    x = rem((unsigned long long)x\
     \ * p.x);\n    return *this;\n  }\n\n  ArbitraryModIntBase &operator/=(const ArbitraryModIntBase\
     \ &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
-    \ operator-() const { return ArbitraryModIntBase(-x); }\n\n  ArbitraryModIntBase\
-    \ operator+(const ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this)\
-    \ += p;\n  }\n\n  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p)\
-    \ const {\n    return ArbitraryModIntBase(*this) -= p;\n  }\n\n  ArbitraryModIntBase\
-    \ operator*(const ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this)\
-    \ *= p;\n  }\n\n  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p)\
-    \ const {\n    return ArbitraryModIntBase(*this) /= p;\n  }\n\n  bool operator==(const\
-    \ ArbitraryModIntBase &p) const { return x == p.x; }\n\n  bool operator!=(const\
-    \ ArbitraryModIntBase &p) const { return x != p.x; }\n\n  ArbitraryModIntBase\
-    \ inverse() const {\n    int a = x, b = get_mod(), u = 1, v = 0, t;\n    while\
-    \ (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t *\
-    \ v, v);\n    }\n    return ArbitraryModIntBase(u);\n  }\n\n  ArbitraryModIntBase\
-    \ pow(int64_t n) const {\n    ArbitraryModIntBase ret(1), mul(x);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const\
-    \ ArbitraryModIntBase &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, ArbitraryModIntBase &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModIntBase(t);\n\
+    \ operator-() const { return ArbitraryModIntBase(-x); }\n  ArbitraryModIntBase\
+    \ operator+() const { return *this; }\n\n  ArbitraryModIntBase operator+(const\
+    \ ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this) += p;\n\
+    \  }\n\n  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p) const {\n\
+    \    return ArbitraryModIntBase(*this) -= p;\n  }\n\n  ArbitraryModIntBase operator*(const\
+    \ ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this) *= p;\n\
+    \  }\n\n  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p) const {\n\
+    \    return ArbitraryModIntBase(*this) /= p;\n  }\n\n  bool operator==(const ArbitraryModIntBase\
+    \ &p) const { return x == p.x; }\n\n  bool operator!=(const ArbitraryModIntBase\
+    \ &p) const { return x != p.x; }\n\n  ArbitraryModIntBase inverse() const {\n\
+    \    int a = x, b = get_mod(), u = 1, v = 0, t;\n    while (b > 0) {\n      t\
+    \ = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n  \
+    \  return ArbitraryModIntBase(u);\n  }\n\n  ArbitraryModIntBase pow(int64_t n)\
+    \ const {\n    ArbitraryModIntBase ret(1), mul(x);\n    while (n > 0) {\n    \
+    \  if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const ArbitraryModIntBase\
+    \ &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModIntBase &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModIntBase(t);\n\
     \    return (is);\n  }\n\n  int get() const { return x; }\n\n  inline unsigned\
     \ int rem(unsigned long long p) { return barrett().rem(p); }\n\n  static inline\
     \ Barrett &barrett() {\n    static Barrett b;\n    return b;\n  }\n\n  static\
@@ -264,7 +265,7 @@ data:
     \ static void set_mod(int md) {\n    assert(0 < md && md <= (1LL << 30) - 1);\n\
     \    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n\nusing ArbitraryModInt\
     \ = ArbitraryModIntBase<-1>;\n\n/**\n * @brief modint (2^{30} \u672A\u6E80\u306E\
-    \u4EFB\u610F mod)\n */\n#line 7 \"verify/verify-unit-test/barrett-reduction.test.cpp\"\
+    \u4EFB\u610F mod \u7528)\n */\n#line 7 \"verify/verify-unit-test/barrett-reduction.test.cpp\"\
     \nusing namespace Nyaan;\n\nusing mint = ArbitraryModInt;\n\nvoid test(int m)\
     \ {\n  mint::set_mod(m);\n  mint x = 1;\n  int y = 1;\n  rep(loop, TEN(3)) {\n\
     \    int z = randint(0, 2 * TEN(9));\n    if (rng() & 1) z = -z;\n    x *= z;\n\
@@ -316,7 +317,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/barrett-reduction.test.cpp
   requiredBy: []
-  timestamp: '2023-05-28 20:44:00+09:00'
+  timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/barrett-reduction.test.cpp

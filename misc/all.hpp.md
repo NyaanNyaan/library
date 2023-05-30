@@ -75,43 +75,46 @@ data:
     \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
     \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
     template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_read(T& x) {\n  if (in_left + offset > in_right)\
-    \ load();\n  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool\
-    \ minus = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
-    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\ninline\
-    \ void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head&\
-    \ head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\ninline void\
-    \ single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++]\
-    \ = c;\n}\ninline void single_write(const bool& b) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void single_write(const\
-    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
-    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
-    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
-    \ out_right += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_write(const T& _x) {\n  if (out_right > SZ -\
-    \ offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n\
-    \  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
-    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
-    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
-    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
-    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ = nullptr>\nvoid single_read(T& x) {\n  if (in_left + offset > in_right) load();\n\
+    \  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool minus\
+    \ = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (c ==\
+    \ '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >= '0')\
+    \ {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\nvoid rd()\
+    \ {}\ntemplate <typename Head, typename... Tail>\nvoid rd(Head& head, Tail&...\
+    \ tail) {\n  single_read(head);\n  rd(tail...);\n}\n\nvoid single_write(const\
+    \ char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++] =\
+    \ c;\n}\nvoid single_write(const bool& b) {\n  if (out_right > SZ - offset) flush();\n\
+    \  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const string& S)\
+    \ {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right == SZ) flush();\n\
+    \    int len = min((int)S.size() - i, SZ - out_right);\n    memcpy(outbuf + out_right,\
+    \ S.data() + i, sizeof(char) * len);\n    i += len, out_right += len;\n  }\n}\n\
+    void single_write(const char* p) {\n  int i = 0, N = strlen(p);\n  while (i !=\
+    \ N) {\n    if (out_right == SZ) flush();\n    int len = min(N - i, SZ - out_right);\n\
+    \    memcpy(outbuf + out_right, p + i, sizeof(char) * len);\n    i += len, out_right\
+    \ += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
+    \ = nullptr>\nvoid single_write(const T& _x) {\n  if (out_right > SZ - offset)\
+    \ flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n  }\n\
+    \  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (x <\
+    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size = sizeof(T)\
+    \ * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while (x >= 10000)\
+    \ {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /=\
+    \ 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] =\
+    \ '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
     \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
     \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
     \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
     \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
     \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
     \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
-    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
-    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
-    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
-    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 2 \"misc/rng.hpp\"\
-    \n\nnamespace my_rand {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\
-    \n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
+    void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
+    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
+    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
+    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
+    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
+    using fastio::wt;\nusing fastio::wtn;\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand\
+    \ {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 -\
+    \ 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
     \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
     \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
     \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
@@ -148,7 +151,7 @@ data:
   isVerificationFile: false
   path: misc/all.hpp
   requiredBy: []
-  timestamp: '2023-05-21 20:49:42+09:00'
+  timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp

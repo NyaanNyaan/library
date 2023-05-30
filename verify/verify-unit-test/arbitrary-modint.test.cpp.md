@@ -6,7 +6,10 @@ data:
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
-    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod)"
+    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod \u7528)"
+  - icon: ':heavy_check_mark:'
+    path: modint/arbitrary-montgomery-modint.hpp
+    title: modint/arbitrary-montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
     path: modint/barrett-reduction.hpp
     title: modint/barrett-reduction.hpp
@@ -303,23 +306,24 @@ data:
     \ &operator*=(const ArbitraryModIntBase &p) {\n    x = rem((unsigned long long)x\
     \ * p.x);\n    return *this;\n  }\n\n  ArbitraryModIntBase &operator/=(const ArbitraryModIntBase\
     \ &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
-    \ operator-() const { return ArbitraryModIntBase(-x); }\n\n  ArbitraryModIntBase\
-    \ operator+(const ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this)\
-    \ += p;\n  }\n\n  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p)\
-    \ const {\n    return ArbitraryModIntBase(*this) -= p;\n  }\n\n  ArbitraryModIntBase\
-    \ operator*(const ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this)\
-    \ *= p;\n  }\n\n  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p)\
-    \ const {\n    return ArbitraryModIntBase(*this) /= p;\n  }\n\n  bool operator==(const\
-    \ ArbitraryModIntBase &p) const { return x == p.x; }\n\n  bool operator!=(const\
-    \ ArbitraryModIntBase &p) const { return x != p.x; }\n\n  ArbitraryModIntBase\
-    \ inverse() const {\n    int a = x, b = get_mod(), u = 1, v = 0, t;\n    while\
-    \ (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t *\
-    \ v, v);\n    }\n    return ArbitraryModIntBase(u);\n  }\n\n  ArbitraryModIntBase\
-    \ pow(int64_t n) const {\n    ArbitraryModIntBase ret(1), mul(x);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const\
-    \ ArbitraryModIntBase &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, ArbitraryModIntBase &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModIntBase(t);\n\
+    \ operator-() const { return ArbitraryModIntBase(-x); }\n  ArbitraryModIntBase\
+    \ operator+() const { return *this; }\n\n  ArbitraryModIntBase operator+(const\
+    \ ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this) += p;\n\
+    \  }\n\n  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p) const {\n\
+    \    return ArbitraryModIntBase(*this) -= p;\n  }\n\n  ArbitraryModIntBase operator*(const\
+    \ ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this) *= p;\n\
+    \  }\n\n  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p) const {\n\
+    \    return ArbitraryModIntBase(*this) /= p;\n  }\n\n  bool operator==(const ArbitraryModIntBase\
+    \ &p) const { return x == p.x; }\n\n  bool operator!=(const ArbitraryModIntBase\
+    \ &p) const { return x != p.x; }\n\n  ArbitraryModIntBase inverse() const {\n\
+    \    int a = x, b = get_mod(), u = 1, v = 0, t;\n    while (b > 0) {\n      t\
+    \ = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n  \
+    \  return ArbitraryModIntBase(u);\n  }\n\n  ArbitraryModIntBase pow(int64_t n)\
+    \ const {\n    ArbitraryModIntBase ret(1), mul(x);\n    while (n > 0) {\n    \
+    \  if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const ArbitraryModIntBase\
+    \ &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModIntBase &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModIntBase(t);\n\
     \    return (is);\n  }\n\n  int get() const { return x; }\n\n  inline unsigned\
     \ int rem(unsigned long long p) { return barrett().rem(p); }\n\n  static inline\
     \ Barrett &barrett() {\n    static Barrett b;\n    return b;\n  }\n\n  static\
@@ -327,66 +331,123 @@ data:
     \ static void set_mod(int md) {\n    assert(0 < md && md <= (1LL << 30) - 1);\n\
     \    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n\nusing ArbitraryModInt\
     \ = ArbitraryModIntBase<-1>;\n\n/**\n * @brief modint (2^{30} \u672A\u6E80\u306E\
-    \u4EFB\u610F mod)\n */\n#line 8 \"verify/verify-unit-test/arbitrary-modint.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid test(int mod, int testcases) {\n  assert(0 <\
-    \ mod and mod <= (1 << 30) - 1);\n  using mint = ArbitraryModInt;\n  mint::set_mod(mod);\n\
-    \n  rep(t, testcases) {\n    int a = randint(0, mod);\n    if (rng() % 10 == 0)\
-    \ a = (mod - 1) % mod;\n    if (rng() % 10 == 0) a = 0;\n    mint A = a;\n   \
-    \ assert(A.get() == a);\n\n    int b = randint(0, mod);\n    if (rng() % 10 ==\
-    \ 0) b = (mod - 1) % mod;\n    if (rng() % 10 == 0) b = 0;\n    mint B = b;\n\
-    \    assert(B.get() == b);\n\n    int c = (a + b) % mod;\n    mint C = A + B;\n\
-    \    assert(C.get() == c);\n\n    int d = (a + mod - b) % mod;\n    mint D = A\
-    \ - B;\n    assert(D.get() == d);\n\n    int e = (1LL * a * b) % mod;\n    mint\
-    \ E = A * B;\n    assert(E.get() == e);\n\n    // \u9006\u5143 : f * g = 1\n \
-    \   int f, g = -1;\n    do {\n      f = randint(0, mod);\n      auto [gc, invf]\
-    \ = atcoder::internal::inv_gcd(f, mod);\n      g = invf;\n    } while (1LL * f\
-    \ * g % mod != 1LL % mod);\n    mint F = f;\n    mint G = F.inverse();\n    assert(F.get()\
-    \ == f);\n    assert(G.get() == g);\n    assert(F * G == 1);\n\n    int h = 1LL\
-    \ * e * g % mod;\n    mint H = E / F;\n    assert(H.get() == h);\n\n    int i\
-    \ = randint(0, mod);\n    if (rng() % 10 == 0) i = (mod - 1) % mod;\n    if (rng()\
-    \ % 10 == 0) i = 0;\n    long long ex = randint(0, TEN(18));\n    if (rng() %\
-    \ 10 == 0) ex = randint(0, 2);\n    int j = 1 % mod;\n    {\n      int i2 = i;\n\
-    \      long long e2 = ex;\n      while (e2) {\n        if (e2 & 1) j = 1LL * j\
-    \ * i2 % mod;\n        i2 = 1LL * i2 * i2 % mod;\n        e2 >>= 1;\n      }\n\
-    \    }\n    mint I = i;\n    mint J = I.pow(ex);\n    assert(I.get() == i);\n\
-    \    assert(J.get() == j);\n\n    int k = (mod - a) % mod;\n    mint K = -A;\n\
-    \    assert(K.get() == k);\n  }\n}\n\nvoid Nyaan::solve() {\n  int mod_max = (1LL\
-    \ << 30) - 1;\n  // \u5C0F\u3055\u3044\u65B9\n  rep1(m, 10) test(m, 10000);\n\
-    \  test(998244353, 10000);\n  test(1000000007, 10000);\n  rep(t, 10) test(mod_max\
-    \ - t, 10000);\n  rep(t, 1000) {\n    int mod = randint(1, mod_max + 1);\n   \
-    \ test(mod, 1000);\n  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << \"\
-    \\n\";\n}\n"
+    \u4EFB\u610F mod \u7528)\n */\n#line 2 \"modint/arbitrary-montgomery-modint.hpp\"\
+    \n\n#line 4 \"modint/arbitrary-montgomery-modint.hpp\"\nusing namespace std;\n\
+    \ntemplate <typename Int, typename UInt, typename Long, typename ULong, int id>\n\
+    struct ArbitraryLazyMontgomeryModIntBase {\n  using mint = ArbitraryLazyMontgomeryModIntBase;\n\
+    \n  inline static UInt mod;\n  inline static UInt r;\n  inline static UInt n2;\n\
+    \  static constexpr int bit_length = sizeof(UInt) * 8;\n\n  static UInt get_r()\
+    \ {\n    UInt ret = mod;\n    while (mod * ret != 1) ret *= UInt(2) - mod * ret;\n\
+    \    return ret;\n  }\n  static void set_mod(UInt m) {\n    assert(m < (UInt(1u)\
+    \ << (bit_length - 2)));\n    assert((m & 1) == 1);\n    mod = m, n2 = -ULong(m)\
+    \ % m, r = get_r();\n  }\n  UInt a;\n\n  ArbitraryLazyMontgomeryModIntBase() :\
+    \ a(0) {}\n  ArbitraryLazyMontgomeryModIntBase(const Long &b)\n      : a(reduce(ULong(b\
+    \ % mod + mod) * n2)){};\n\n  static UInt reduce(const ULong &b) {\n    return\
+    \ (b + ULong(UInt(b) * UInt(-r)) * mod) >> bit_length;\n  }\n\n  mint &operator+=(const\
+    \ mint &b) {\n    if (Int(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n  mint &operator-=(const mint &b) {\n    if (Int(a -= b.a) < 0) a += 2 *\
+    \ mod;\n    return *this;\n  }\n  mint &operator*=(const mint &b) {\n    a = reduce(ULong(a)\
+    \ * b.a);\n    return *this;\n  }\n  mint &operator/=(const mint &b) {\n    *this\
+    \ *= b.inverse();\n    return *this;\n  }\n\n  mint operator+(const mint &b) const\
+    \ { return mint(*this) += b; }\n  mint operator-(const mint &b) const { return\
+    \ mint(*this) -= b; }\n  mint operator*(const mint &b) const { return mint(*this)\
+    \ *= b; }\n  mint operator/(const mint &b) const { return mint(*this) /= b; }\n\
+    \n  bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  bool operator!=(const mint &b) const\
+    \ {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);\n\
+    \  }\n  mint operator-() const { return mint(0) - mint(*this); }\n  mint operator+()\
+    \ const { return mint(*this); }\n\n  mint pow(ULong n) const {\n    mint ret(1),\
+    \ mul(*this);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *=\
+    \ mul, n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
+    \ &is, mint &b) {\n    Long t;\n    is >> t;\n    b = ArbitraryLazyMontgomeryModIntBase(t);\n\
+    \    return (is);\n  }\n\n  mint inverse() const {\n    Int x = get(), y = get_mod(),\
+    \ u = 1, v = 0;\n    while (y > 0) {\n      Int t = x / y;\n      swap(x -= t\
+    \ * y, y);\n      swap(u -= t * v, v);\n    }\n    return mint{u};\n  }\n\n  UInt\
+    \ get() const {\n    UInt ret = reduce(a);\n    return ret >= mod ? ret - mod\
+    \ : ret;\n  }\n\n  static UInt get_mod() { return mod; }\n};\n\n// id \u306B\u9069\
+    \u5F53\u306A\u4E71\u6570\u3092\u5272\u308A\u5F53\u3066\u3066\u4F7F\u3046\ntemplate\
+    \ <int id>\nusing ArbitraryLazyMontgomeryModInt =\n    ArbitraryLazyMontgomeryModIntBase<int,\
+    \ unsigned int, long long,\n                                      unsigned long\
+    \ long, id>;\ntemplate <int id>\nusing ArbitraryLazyMontgomeryModInt64bit =\n\
+    \    ArbitraryLazyMontgomeryModIntBase<long long, unsigned long long, __int128_t,\n\
+    \                                      __uint128_t, id>;\n#line 9 \"verify/verify-unit-test/arbitrary-modint.test.cpp\"\
+    \nusing namespace Nyaan;\n\ntemplate <typename mint>\nvoid test(int mod, int testcases)\
+    \ {\n  assert(0 < mod and mod <= (1 << 30) - 1);\n  mint::set_mod(mod);\n\n  rep(t,\
+    \ testcases) {\n    int a = randint(0, mod);\n    if (rng() % 10 == 0) a = (mod\
+    \ - 1) % mod;\n    if (rng() % 10 == 0) a = 0;\n    mint A = a;\n    assert(A.get()\
+    \ == a);\n\n    int b = randint(0, mod);\n    if (rng() % 10 == 0) b = (mod -\
+    \ 1) % mod;\n    if (rng() % 10 == 0) b = 0;\n    mint B = b;\n    assert(B.get()\
+    \ == b);\n\n    int c = (a + b) % mod;\n    mint C = A + B;\n    assert(C.get()\
+    \ == c);\n\n    int d = (a + mod - b) % mod;\n    mint D = A - B;\n    assert(D.get()\
+    \ == d);\n\n    int e = (1LL * a * b) % mod;\n    mint E = A * B;\n    assert(E.get()\
+    \ == e);\n\n    // \u9006\u5143 : f * g = 1\n    int f, g = -1;\n    do {\n  \
+    \    f = randint(0, mod);\n      auto [gc, invf] = atcoder::internal::inv_gcd(f,\
+    \ mod);\n      g = invf;\n    } while (1LL * f * g % mod != 1LL % mod);\n    mint\
+    \ F = f;\n    mint G = F.inverse();\n    assert(F.get() == f);\n    assert(G.get()\
+    \ == g);\n    assert(F * G == 1);\n\n    int h = 1LL * e * g % mod;\n    mint\
+    \ H = E / F;\n    assert(H.get() == h);\n\n    int i = randint(0, mod);\n    if\
+    \ (rng() % 10 == 0) i = (mod - 1) % mod;\n    if (rng() % 10 == 0) i = 0;\n  \
+    \  long long ex = randint(0, TEN(18));\n    if (rng() % 10 == 0) ex = randint(0,\
+    \ 2);\n    int j = 1 % mod;\n    {\n      int i2 = i;\n      long long e2 = ex;\n\
+    \      while (e2) {\n        if (e2 & 1) j = 1LL * j * i2 % mod;\n        i2 =\
+    \ 1LL * i2 * i2 % mod;\n        e2 >>= 1;\n      }\n    }\n    mint I = i;\n \
+    \   mint J = I.pow(ex);\n    assert(I.get() == i);\n    assert(J.get() == j);\n\
+    \n    int k = (mod - a) % mod;\n    mint K = -A;\n    assert(K.get() == k);\n\
+    \  }\n}\n\nvoid test_wrapper(int mod, int testcases) {\n  using mint1 = ArbitraryModInt;\n\
+    \  using mint2 = ArbitraryLazyMontgomeryModInt<96229631>;\n\n  test<mint1>(mod,\
+    \ testcases);\n  if (mod % 2 == 1) test<mint2>(mod, testcases);\n}\n\nvoid test_all()\
+    \ {\n  {\n    using mint3 = ArbitraryModIntBase<0>;\n    using mint5 = ArbitraryModIntBase<1>;\n\
+    \    mint3::set_mod(3);\n    mint5::set_mod(5);\n    assert(mint3::get_mod() ==\
+    \ 3);\n    assert(mint5::get_mod() == 5);\n  }\n\n  {\n    using mint3 = ArbitraryLazyMontgomeryModInt<0>;\n\
+    \    using mint5 = ArbitraryLazyMontgomeryModInt<1>;\n    mint3::set_mod(3);\n\
+    \    mint5::set_mod(5);\n    assert(mint3::get_mod() == 3);\n    assert(mint5::get_mod()\
+    \ == 5);\n  }\n\n  int mod_max = (1LL << 30) - 1;\n  rep1(m, 10) test_wrapper(m,\
+    \ 10000);\n  test_wrapper(998244353, 10000);\n  test_wrapper(1000000007, 10000);\n\
+    \  rep(t, 10) { test_wrapper(mod_max - t, 10000); }\n  rep(t, 1000) {\n    int\
+    \ mod = randint(1, mod_max + 1);\n    test_wrapper(mod, 1000);\n  }\n  cerr <<\
+    \ \"OK\" << endl;\n}\n\nvoid Nyaan::solve() {\n  test_all();\n  int a, b;\n  cin\
+    \ >> a >> b;\n  cout << a + b << \"\\n\";\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../atcoder/internal_math.hpp\"\
     \n#include \"../../misc/rng.hpp\"\n#include \"../../modint/arbitrary-modint.hpp\"\
-    \nusing namespace Nyaan;\n\nvoid test(int mod, int testcases) {\n  assert(0 <\
-    \ mod and mod <= (1 << 30) - 1);\n  using mint = ArbitraryModInt;\n  mint::set_mod(mod);\n\
-    \n  rep(t, testcases) {\n    int a = randint(0, mod);\n    if (rng() % 10 == 0)\
-    \ a = (mod - 1) % mod;\n    if (rng() % 10 == 0) a = 0;\n    mint A = a;\n   \
-    \ assert(A.get() == a);\n\n    int b = randint(0, mod);\n    if (rng() % 10 ==\
-    \ 0) b = (mod - 1) % mod;\n    if (rng() % 10 == 0) b = 0;\n    mint B = b;\n\
-    \    assert(B.get() == b);\n\n    int c = (a + b) % mod;\n    mint C = A + B;\n\
-    \    assert(C.get() == c);\n\n    int d = (a + mod - b) % mod;\n    mint D = A\
-    \ - B;\n    assert(D.get() == d);\n\n    int e = (1LL * a * b) % mod;\n    mint\
-    \ E = A * B;\n    assert(E.get() == e);\n\n    // \u9006\u5143 : f * g = 1\n \
-    \   int f, g = -1;\n    do {\n      f = randint(0, mod);\n      auto [gc, invf]\
-    \ = atcoder::internal::inv_gcd(f, mod);\n      g = invf;\n    } while (1LL * f\
-    \ * g % mod != 1LL % mod);\n    mint F = f;\n    mint G = F.inverse();\n    assert(F.get()\
-    \ == f);\n    assert(G.get() == g);\n    assert(F * G == 1);\n\n    int h = 1LL\
-    \ * e * g % mod;\n    mint H = E / F;\n    assert(H.get() == h);\n\n    int i\
-    \ = randint(0, mod);\n    if (rng() % 10 == 0) i = (mod - 1) % mod;\n    if (rng()\
-    \ % 10 == 0) i = 0;\n    long long ex = randint(0, TEN(18));\n    if (rng() %\
-    \ 10 == 0) ex = randint(0, 2);\n    int j = 1 % mod;\n    {\n      int i2 = i;\n\
-    \      long long e2 = ex;\n      while (e2) {\n        if (e2 & 1) j = 1LL * j\
-    \ * i2 % mod;\n        i2 = 1LL * i2 * i2 % mod;\n        e2 >>= 1;\n      }\n\
-    \    }\n    mint I = i;\n    mint J = I.pow(ex);\n    assert(I.get() == i);\n\
-    \    assert(J.get() == j);\n\n    int k = (mod - a) % mod;\n    mint K = -A;\n\
-    \    assert(K.get() == k);\n  }\n}\n\nvoid Nyaan::solve() {\n  int mod_max = (1LL\
-    \ << 30) - 1;\n  // \u5C0F\u3055\u3044\u65B9\n  rep1(m, 10) test(m, 10000);\n\
-    \  test(998244353, 10000);\n  test(1000000007, 10000);\n  rep(t, 10) test(mod_max\
-    \ - t, 10000);\n  rep(t, 1000) {\n    int mod = randint(1, mod_max + 1);\n   \
-    \ test(mod, 1000);\n  }\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b << \"\
-    \\n\";\n}\n"
+    \n#include \"../../modint/arbitrary-montgomery-modint.hpp\"\nusing namespace Nyaan;\n\
+    \ntemplate <typename mint>\nvoid test(int mod, int testcases) {\n  assert(0 <\
+    \ mod and mod <= (1 << 30) - 1);\n  mint::set_mod(mod);\n\n  rep(t, testcases)\
+    \ {\n    int a = randint(0, mod);\n    if (rng() % 10 == 0) a = (mod - 1) % mod;\n\
+    \    if (rng() % 10 == 0) a = 0;\n    mint A = a;\n    assert(A.get() == a);\n\
+    \n    int b = randint(0, mod);\n    if (rng() % 10 == 0) b = (mod - 1) % mod;\n\
+    \    if (rng() % 10 == 0) b = 0;\n    mint B = b;\n    assert(B.get() == b);\n\
+    \n    int c = (a + b) % mod;\n    mint C = A + B;\n    assert(C.get() == c);\n\
+    \n    int d = (a + mod - b) % mod;\n    mint D = A - B;\n    assert(D.get() ==\
+    \ d);\n\n    int e = (1LL * a * b) % mod;\n    mint E = A * B;\n    assert(E.get()\
+    \ == e);\n\n    // \u9006\u5143 : f * g = 1\n    int f, g = -1;\n    do {\n  \
+    \    f = randint(0, mod);\n      auto [gc, invf] = atcoder::internal::inv_gcd(f,\
+    \ mod);\n      g = invf;\n    } while (1LL * f * g % mod != 1LL % mod);\n    mint\
+    \ F = f;\n    mint G = F.inverse();\n    assert(F.get() == f);\n    assert(G.get()\
+    \ == g);\n    assert(F * G == 1);\n\n    int h = 1LL * e * g % mod;\n    mint\
+    \ H = E / F;\n    assert(H.get() == h);\n\n    int i = randint(0, mod);\n    if\
+    \ (rng() % 10 == 0) i = (mod - 1) % mod;\n    if (rng() % 10 == 0) i = 0;\n  \
+    \  long long ex = randint(0, TEN(18));\n    if (rng() % 10 == 0) ex = randint(0,\
+    \ 2);\n    int j = 1 % mod;\n    {\n      int i2 = i;\n      long long e2 = ex;\n\
+    \      while (e2) {\n        if (e2 & 1) j = 1LL * j * i2 % mod;\n        i2 =\
+    \ 1LL * i2 * i2 % mod;\n        e2 >>= 1;\n      }\n    }\n    mint I = i;\n \
+    \   mint J = I.pow(ex);\n    assert(I.get() == i);\n    assert(J.get() == j);\n\
+    \n    int k = (mod - a) % mod;\n    mint K = -A;\n    assert(K.get() == k);\n\
+    \  }\n}\n\nvoid test_wrapper(int mod, int testcases) {\n  using mint1 = ArbitraryModInt;\n\
+    \  using mint2 = ArbitraryLazyMontgomeryModInt<96229631>;\n\n  test<mint1>(mod,\
+    \ testcases);\n  if (mod % 2 == 1) test<mint2>(mod, testcases);\n}\n\nvoid test_all()\
+    \ {\n  {\n    using mint3 = ArbitraryModIntBase<0>;\n    using mint5 = ArbitraryModIntBase<1>;\n\
+    \    mint3::set_mod(3);\n    mint5::set_mod(5);\n    assert(mint3::get_mod() ==\
+    \ 3);\n    assert(mint5::get_mod() == 5);\n  }\n\n  {\n    using mint3 = ArbitraryLazyMontgomeryModInt<0>;\n\
+    \    using mint5 = ArbitraryLazyMontgomeryModInt<1>;\n    mint3::set_mod(3);\n\
+    \    mint5::set_mod(5);\n    assert(mint3::get_mod() == 3);\n    assert(mint5::get_mod()\
+    \ == 5);\n  }\n\n  int mod_max = (1LL << 30) - 1;\n  rep1(m, 10) test_wrapper(m,\
+    \ 10000);\n  test_wrapper(998244353, 10000);\n  test_wrapper(1000000007, 10000);\n\
+    \  rep(t, 10) { test_wrapper(mod_max - t, 10000); }\n  rep(t, 1000) {\n    int\
+    \ mod = randint(1, mod_max + 1);\n    test_wrapper(mod, 1000);\n  }\n  cerr <<\
+    \ \"OK\" << endl;\n}\n\nvoid Nyaan::solve() {\n  test_all();\n  int a, b;\n  cin\
+    \ >> a >> b;\n  cout << a + b << \"\\n\";\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -397,10 +458,11 @@ data:
   - misc/rng.hpp
   - modint/arbitrary-modint.hpp
   - modint/barrett-reduction.hpp
+  - modint/arbitrary-montgomery-modint.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/arbitrary-modint.test.cpp
   requiredBy: []
-  timestamp: '2023-05-28 20:44:00+09:00'
+  timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/arbitrary-modint.test.cpp

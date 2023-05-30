@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: modint/arbitrary-modint.hpp
-    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod)"
+    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod \u7528)"
   - icon: ':heavy_check_mark:'
     path: modulo/arbitrary-mod-binomial.hpp
     title: "\u4EFB\u610Fmod\u4E8C\u9805\u4FC2\u6570"

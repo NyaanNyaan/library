@@ -3,7 +3,7 @@ data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
     path: modint/modint.hpp
-    title: modint/modint.hpp
+    title: modint
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
@@ -197,41 +197,42 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"modint/modint.hpp\"\n\n\n\ntemplate <int mod>\nstruct ModInt {\n  int x;\n\
-    \n  ModInt() : x(0) {}\n\n  ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y)\
+    \ 2 \"modint/modint.hpp\"\n\ntemplate <int mod>\nstruct ModInt {\n  int x;\n\n\
+    \  ModInt() : x(0) {}\n\n  ModInt(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y)\
     \ % mod) % mod) {}\n\n  ModInt &operator+=(const ModInt &p) {\n    if ((x += p.x)\
     \ >= mod) x -= mod;\n    return *this;\n  }\n\n  ModInt &operator-=(const ModInt\
     \ &p) {\n    if ((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n\
     \  ModInt &operator*=(const ModInt &p) {\n    x = (int)(1LL * x * p.x % mod);\n\
     \    return *this;\n  }\n\n  ModInt &operator/=(const ModInt &p) {\n    *this\
     \ *= p.inverse();\n    return *this;\n  }\n\n  ModInt operator-() const { return\
-    \ ModInt(-x); }\n\n  ModInt operator+(const ModInt &p) const { return ModInt(*this)\
-    \ += p; }\n\n  ModInt operator-(const ModInt &p) const { return ModInt(*this)\
-    \ -= p; }\n\n  ModInt operator*(const ModInt &p) const { return ModInt(*this)\
-    \ *= p; }\n\n  ModInt operator/(const ModInt &p) const { return ModInt(*this)\
-    \ /= p; }\n\n  bool operator==(const ModInt &p) const { return x == p.x; }\n\n\
-    \  bool operator!=(const ModInt &p) const { return x != p.x; }\n\n  ModInt inverse()\
-    \ const {\n    int a = x, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n   \
-    \   t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n\
-    \    return ModInt(u);\n  }\n\n  ModInt pow(int64_t n) const {\n    ModInt ret(1),\
-    \ mul(x);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n\
-    \      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const ModInt &p) { return os << p.x; }\n\n  friend istream &operator>>(istream\
-    \ &is, ModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ModInt<mod>(t);\n \
-    \   return (is);\n  }\n  \n  int get() const { return x; }\n\n  static constexpr\
-    \ int get_mod() { return mod; }\n};\n#line 2 \"ntt/ntt.hpp\"\n\ntemplate <typename\
-    \ mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n    uint32_t _mod\
-    \ = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32] = {};\n    int\
-    \ idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <= m; ++i) {\n  \
-    \    if (m % i == 0) {\n        ds[idx++] = i;\n        while (m % i == 0) m /=\
-    \ i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t _pr = 2;\n\
-    \    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx; ++i) {\n\
-    \        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b) {\n  \
-    \        if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n         \
-    \ b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n          break;\n\
-    \        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n    }\n    return\
-    \ _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n  static constexpr\
-    \ uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
+    \ ModInt(-x); }\n  ModInt operator+() const { return ModInt(*this); }\n\n  ModInt\
+    \ operator+(const ModInt &p) const { return ModInt(*this) += p; }\n\n  ModInt\
+    \ operator-(const ModInt &p) const { return ModInt(*this) -= p; }\n\n  ModInt\
+    \ operator*(const ModInt &p) const { return ModInt(*this) *= p; }\n\n  ModInt\
+    \ operator/(const ModInt &p) const { return ModInt(*this) /= p; }\n\n  bool operator==(const\
+    \ ModInt &p) const { return x == p.x; }\n\n  bool operator!=(const ModInt &p)\
+    \ const { return x != p.x; }\n\n  ModInt inverse() const {\n    int a = x, b =\
+    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
+    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return ModInt(u);\n  }\n\n\
+    \  ModInt pow(int64_t n) const {\n    ModInt ret(1), mul(x);\n    while (n > 0)\
+    \ {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
+    \    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const ModInt\
+    \ &p) { return os << p.x; }\n\n  friend istream &operator>>(istream &is, ModInt\
+    \ &a) {\n    int64_t t;\n    is >> t;\n    a = ModInt<mod>(t);\n    return (is);\n\
+    \  }\n\n  int get() const { return x; }\n\n  static constexpr int get_mod() {\
+    \ return mod; }\n};\n\n/**\n * @brief modint\n */\n#line 2 \"ntt/ntt.hpp\"\n\n\
+    template <typename mint>\nstruct NTT {\n  static constexpr uint32_t get_pr() {\n\
+    \    uint32_t _mod = mint::get_mod();\n    using u64 = uint64_t;\n    u64 ds[32]\
+    \ = {};\n    int idx = 0;\n    u64 m = _mod - 1;\n    for (u64 i = 2; i * i <=\
+    \ m; ++i) {\n      if (m % i == 0) {\n        ds[idx++] = i;\n        while (m\
+    \ % i == 0) m /= i;\n      }\n    }\n    if (m != 1) ds[idx++] = m;\n\n    uint32_t\
+    \ _pr = 2;\n    while (1) {\n      int flg = 1;\n      for (int i = 0; i < idx;\
+    \ ++i) {\n        u64 a = _pr, b = (_mod - 1) / ds[i], r = 1;\n        while (b)\
+    \ {\n          if (b & 1) r = r * a % _mod;\n          a = a * a % _mod;\n   \
+    \       b >>= 1;\n        }\n        if (r == 1) {\n          flg = 0;\n     \
+    \     break;\n        }\n      }\n      if (flg == 1) break;\n      ++_pr;\n \
+    \   }\n    return _pr;\n  };\n\n  static constexpr uint32_t mod = mint::get_mod();\n\
+    \  static constexpr uint32_t pr = get_pr();\n  static constexpr int level = __builtin_ctzll(mod\
     \ - 1);\n  mint dw[level], dy[level];\n\n  void setwy(int k) {\n    mint w[level],\
     \ y[level];\n    w[k - 1] = mint(pr).pow((mod - 1) / (1 << k));\n    y[k - 1]\
     \ = w[k - 1].inverse();\n    for (int i = k - 2; i > 0; --i)\n      w[i] = w[i\
@@ -322,7 +323,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp
   requiredBy: []
-  timestamp: '2023-05-22 22:29:25+09:00'
+  timestamp: '2023-05-29 20:16:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-convolution-ntt-normalmodint.test.cpp

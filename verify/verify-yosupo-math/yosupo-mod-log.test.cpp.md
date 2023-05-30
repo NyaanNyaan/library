@@ -246,43 +246,46 @@ data:
     \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
     \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
     template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_read(T& x) {\n  if (in_left + offset > in_right)\
-    \ load();\n  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool\
-    \ minus = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (c == '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >=\
-    \ '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\ninline\
-    \ void rd() {}\ntemplate <typename Head, typename... Tail>\ninline void rd(Head&\
-    \ head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\ninline void\
-    \ single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++]\
-    \ = c;\n}\ninline void single_write(const bool& b) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\ninline void single_write(const\
-    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
-    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
-    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
-    \ out_right += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\ninline void single_write(const T& _x) {\n  if (out_right > SZ -\
-    \ offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n\
-    \  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if\
-    \ (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
-    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
-    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
-    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
-    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ = nullptr>\nvoid single_read(T& x) {\n  if (in_left + offset > in_right) load();\n\
+    \  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool minus\
+    \ = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (c ==\
+    \ '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >= '0')\
+    \ {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
+    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\nvoid rd()\
+    \ {}\ntemplate <typename Head, typename... Tail>\nvoid rd(Head& head, Tail&...\
+    \ tail) {\n  single_read(head);\n  rd(tail...);\n}\n\nvoid single_write(const\
+    \ char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++] =\
+    \ c;\n}\nvoid single_write(const bool& b) {\n  if (out_right > SZ - offset) flush();\n\
+    \  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const string& S)\
+    \ {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right == SZ) flush();\n\
+    \    int len = min((int)S.size() - i, SZ - out_right);\n    memcpy(outbuf + out_right,\
+    \ S.data() + i, sizeof(char) * len);\n    i += len, out_right += len;\n  }\n}\n\
+    void single_write(const char* p) {\n  int i = 0, N = strlen(p);\n  while (i !=\
+    \ N) {\n    if (out_right == SZ) flush();\n    int len = min(N - i, SZ - out_right);\n\
+    \    memcpy(outbuf + out_right, p + i, sizeof(char) * len);\n    i += len, out_right\
+    \ += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
+    \ = nullptr>\nvoid single_write(const T& _x) {\n  if (out_right > SZ - offset)\
+    \ flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n  }\n\
+    \  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (x <\
+    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size = sizeof(T)\
+    \ * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while (x >= 10000)\
+    \ {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /=\
+    \ 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] =\
+    \ '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
     \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
     \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
     \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
     \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
     \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
     \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    inline void wt() {}\ntemplate <typename Head, typename... Tail>\ninline void wt(const\
-    \ Head& head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const\
-    \ Tail>(tail)...);\n}\ntemplate <typename... Args>\ninline void wtn(const Args&...\
-    \ x) {\n  wt(forward<const Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n\
-    \  Dummy() { atexit(flush); }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\n\
-    using fastio::skip_space;\nusing fastio::wt;\nusing fastio::wtn;\n#line 2 \"modulo/mod-log.hpp\"\
-    \n\n#line 2 \"hashmap/hashmap.hpp\"\n\n#line 2 \"hashmap/hashmap-base.hpp\"\n\n\
-    #line 4 \"hashmap/hashmap-base.hpp\"\nusing namespace std;\n\nnamespace HashMapImpl\
+    void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
+    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
+    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
+    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
+    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
+    using fastio::wt;\nusing fastio::wtn;\n#line 2 \"modulo/mod-log.hpp\"\n\n#line\
+    \ 2 \"hashmap/hashmap.hpp\"\n\n#line 2 \"hashmap/hashmap-base.hpp\"\n\n#line 4\
+    \ \"hashmap/hashmap-base.hpp\"\nusing namespace std;\n\nnamespace HashMapImpl\
     \ {\nusing u32 = uint32_t;\nusing u64 = uint64_t;\n\ntemplate <typename Key, typename\
     \ Data>\nstruct HashMapBase;\n\ntemplate <typename Key, typename Data>\nstruct\
     \ itrB\n    : iterator<bidirectional_iterator_tag, Data, ptrdiff_t, Data*, Data&>\
@@ -402,7 +405,7 @@ data:
     \ const Val& val) {\n    return base::insert(Data(key, val));\n  }\n};\n\n/*\n\
     \ * @brief \u30CF\u30C3\u30B7\u30E5\u30DE\u30C3\u30D7(\u9023\u60F3\u914D\u5217\
     )\n * @docs docs/hashmap/hashmap.md\n **/\n#line 2 \"internal/internal-math.hpp\"\
-    \n\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace internal {\n\n#line 8\
+    \n\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace internal {\n\n#line 10\
     \ \"internal/internal-math.hpp\"\nusing namespace std;\n\n// a mod p\ntemplate\
     \ <typename T>\nT safe_mod(T a, T p) {\n  a %= p;\n  if constexpr (is_broadly_signed_v<T>)\
     \ {\n    if (a < 0) a += p;\n  }\n  return a;\n}\n\n// \u8FD4\u308A\u5024\uFF1A\
@@ -415,31 +418,31 @@ data:
     T inv(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a,\
     \ p);\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a,\
     \ b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ?\
-    \ y + p : y;\n}\n\n// T : \u5024\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\
-    \u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044\u578B\ntemplate <typename T, typename\
-    \ U>\nT modpow(T a, __int128_t n, T p) {\n  a = safe_mod(a, p);\n  T ret = 1 %\
-    \ p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a %\
-    \ p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n// \u8FD4\u308A\u5024 : pair(rem,\
-    \ mod)\n// \u89E3\u306A\u3057\u306E\u3068\u304D\u306F {0, 0} \u3092\u8FD4\u3059\
-    \ntemplate <typename T>\npair<T, T> crt(const vector<T>& r, const vector<T>& m)\
-    \ {\n  static_assert(is_broadly_signed_v<T>);\n  assert(r.size() == m.size());\n\
-    \  int n = int(r.size());\n  T r0 = 0, m0 = 1;\n  for (int i = 0; i < n; i++)\
-    \ {\n    assert(1 <= m[i]);\n    T r1 = safe_mod(r[i], m[i]), m1 = m[i];\n   \
-    \ if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0 % m1 == 0) {\n      if\
-    \ (r0 % m1 != r1) return {0, 0};\n      continue;\n    }\n    auto [g, im] = inv_gcd(m0,\
-    \ m1);\n    T u1 = m1 / g;\n    if ((r1 - r0) % g) return {0, 0};\n    T x = (r1\
-    \ - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0 *= u1;\n    if (r0 < 0)\
-    \ r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace internal\n#line 5 \"\
-    modulo/mod-log.hpp\"\n\nint64_t mod_log(int64_t a, int64_t b, int64_t p) {\n \
-    \ if ((a %= p) < 0) a += p;\n  if ((b %= p) < 0) b += p;\n  int64_t f, g, r =\
-    \ 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1; ++f) {\n    if (b % g) return (r\
-    \ == b) ? f : -1;\n    b /= g;\n    p /= g;\n    (r *= (a / g)) %= p;\n  }\n \
-    \ if (p == 1) return f;\n  int64_t ir = internal::inv(r, p);\n  (b *= ir) %= p;\n\
-    \  int64_t k = 0, ak = 1;\n  HashMap<int64_t, int64_t> baby;\n  for (; k * k <\
-    \ p; ++k) {\n    if(baby.find(ak) == baby.end()) baby[ak] = k;\n    (ak *= a)\
-    \ %= p;\n  }\n  int64_t iak = internal::inv(ak, p);\n  for (int64_t i = 0; i <\
-    \ k; ++i) {\n    if (baby.find(b) != baby.end()) return f + i * k + baby[b];\n\
-    \    (b *= iak) %= p;\n  }\n  return -1;\n}\n#line 6 \"verify/verify-yosupo-math/yosupo-mod-log.test.cpp\"\
+    \ y + p : y;\n}\n\n// T : \u5E95\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\
+    \u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044 \u304B\u3064 \u6307\u6570\u306E\u578B\
+    \ntemplate <typename T, typename U>\nT modpow(T a, U n, T p) {\n  a = safe_mod(a,\
+    \ p);\n  T ret = 1 % p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n\
+    \    a = U(a) * a % p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n// \u8FD4\u308A\
+    \u5024 : pair(rem, mod)\n// \u89E3\u306A\u3057\u306E\u3068\u304D\u306F {0, 0}\
+    \ \u3092\u8FD4\u3059\ntemplate <typename T>\npair<T, T> crt(const vector<T>& r,\
+    \ const vector<T>& m) {\n  static_assert(is_broadly_signed_v<T>);\n  assert(r.size()\
+    \ == m.size());\n  int n = int(r.size());\n  T r0 = 0, m0 = 1;\n  for (int i =\
+    \ 0; i < n; i++) {\n    assert(1 <= m[i]);\n    T r1 = safe_mod(r[i], m[i]), m1\
+    \ = m[i];\n    if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0 % m1 == 0)\
+    \ {\n      if (r0 % m1 != r1) return {0, 0};\n      continue;\n    }\n    auto\
+    \ [g, im] = inv_gcd(m0, m1);\n    T u1 = m1 / g;\n    if ((r1 - r0) % g) return\
+    \ {0, 0};\n    T x = (r1 - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0\
+    \ *= u1;\n    if (r0 < 0) r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace\
+    \ internal\n#line 5 \"modulo/mod-log.hpp\"\n\nint64_t mod_log(int64_t a, int64_t\
+    \ b, int64_t p) {\n  if ((a %= p) < 0) a += p;\n  if ((b %= p) < 0) b += p;\n\
+    \  int64_t f, g, r = 1 % p;\n  for (f = 0; (g = gcd(a, p)) > 1; ++f) {\n    if\
+    \ (b % g) return (r == b) ? f : -1;\n    b /= g;\n    p /= g;\n    (r *= (a /\
+    \ g)) %= p;\n  }\n  if (p == 1) return f;\n  int64_t ir = internal::inv(r, p);\n\
+    \  (b *= ir) %= p;\n  int64_t k = 0, ak = 1;\n  HashMap<int64_t, int64_t> baby;\n\
+    \  for (; k * k < p; ++k) {\n    if(baby.find(ak) == baby.end()) baby[ak] = k;\n\
+    \    (ak *= a) %= p;\n  }\n  int64_t iak = internal::inv(ak, p);\n  for (int64_t\
+    \ i = 0; i < k; ++i) {\n    if (baby.find(b) != baby.end()) return f + i * k +\
+    \ baby[b];\n    (b *= iak) %= p;\n  }\n  return -1;\n}\n#line 6 \"verify/verify-yosupo-math/yosupo-mod-log.test.cpp\"\
     \n\nusing namespace Nyaan; void Nyaan::solve() {\n  int T;\n  rd(T);\n  rep(_,\
     \ T) {\n    ll x, y, m;\n    rd(x, y, m);\n    wt(mod_log(x, y, m));\n    wt('\\\
     n');\n  }\n}\n"
@@ -464,7 +467,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
   requiredBy: []
-  timestamp: '2023-05-28 20:44:00+09:00'
+  timestamp: '2023-05-29 21:58:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
