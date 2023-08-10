@@ -4,7 +4,7 @@ template <typename Node>
 struct SplayTreeBase {
   using Ptr = Node *;
   template <typename... Args>
-  Ptr my_new(const Args &... args) {
+  Ptr my_new(const Args &...args) {
     return new Node(args...);
   }
   void my_del(Ptr p) { delete p; }
@@ -14,6 +14,7 @@ struct SplayTreeBase {
   int size(Ptr t) const { return count(t); }
 
   virtual void splay(Ptr t) {
+    if (!t) return;
     push(t);
     while (!is_root(t)) {
       Ptr q = t->p;
@@ -77,12 +78,13 @@ struct SplayTreeBase {
   using Key = decltype(Node::key);
   Ptr build(const vector<Key> &v) { return build(0, v.size(), v); }
   Ptr build(int l, int r, const vector<Key> &v) {
-    if (l + 1 >= r) return my_new(v[l]);
+    if (l == r) return nullptr;
+    if (l + 1 == r) return my_new(v[l]);
     return merge(build(l, (l + r) >> 1, v), build((l + r) >> 1, r, v));
   }
 
   template <typename... Args>
-  void insert(Ptr &t, int k, const Args &... args) {
+  void insert(Ptr &t, int k, const Args &...args) {
     splay(t);
     auto x = split(t, k);
     t = merge(merge(x.first, my_new(args...)), x.second);
