@@ -15,7 +15,7 @@ u64 rng() {
 // [l, r]
 i64 rng(i64 l, i64 r) {
   assert(l <= r);
-  return l + rng() % (r - l + 1);
+  return l + rng() % u64(r - l + 1);
 }
 
 // [l, r)
