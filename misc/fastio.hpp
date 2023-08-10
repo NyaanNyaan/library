@@ -97,23 +97,9 @@ void single_write(const bool& b) {
   outbuf[out_right++] = b ? '1' : '0';
 }
 void single_write(const string& S) {
-  int i = 0;
-  while (i != (int)S.size()) {
-    if (out_right == SZ) flush();
-    int len = min((int)S.size() - i, SZ - out_right);
-    memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);
-    i += len, out_right += len;
-  }
+  flush(), fwrite(S.data(), 1, S.size(), stdout);
 }
-void single_write(const char* p) {
-  int i = 0, N = strlen(p);
-  while (i != N) {
-    if (out_right == SZ) flush();
-    int len = min(N - i, SZ - out_right);
-    memcpy(outbuf + out_right, p + i, sizeof(char) * len);
-    i += len, out_right += len;
-  }
-}
+void single_write(const char* p) { flush(), fwrite(p, 1, strlen(p), stdout); }
 template <typename T,
           enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>
 void single_write(const T& _x) {
