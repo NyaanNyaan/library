@@ -78,15 +78,13 @@
     "climits": "cpp",
     "ranges": "cpp",
     "span": "cpp",
-    "stacktrace": "cpp"
+    "stacktrace": "cpp",
+    "cfloat": "cpp",
+    "barrier": "cpp",
+    "latch": "cpp",
+    "semaphore": "cpp"
   },
   "C_Cpp.suggestSnippets": false,
-  "python.linting.enabled": true,
-  "python.formatting.provider": "autopep8",
-  "python.formatting.autopep8Args": [
-    "--indent-size=2",
-    "--ignore=E111, E114, E302, E402, E501, E731"
-  ],
   "[cpp]": {
     "editor.tabSize": 2
   },
