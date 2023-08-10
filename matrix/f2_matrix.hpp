@@ -32,7 +32,8 @@ struct F2_Matrix {
     return a;
   }
 
-  // AND - XOR
+  // (AND, XOR) 半環
+  // (AND, OR) 半環には operator/ を割り当てた
   Mat &operator*=(const Mat &B) {
     Mat C(H, B.W);
     for (int i = 0; i < H; i++) {
@@ -44,6 +45,17 @@ struct F2_Matrix {
     return *this;
   }
   Mat operator*(const Mat &B) const { return Mat(*this) *= B; }
+
+  // (AND, OR) 半環
+  friend Mat and_or_product(const Mat &A, const Mat &B) {
+    Mat C(A.H, B.W);
+    for (int i = 0; i < A.H; i++) {
+      for (int j = 0; j < A.W; j++) {
+        if (A[i][j]) C[i] |= B[j];
+      }
+    }
+    return C;
+  }
 
   // [0, wr) の範囲で掃き出し, rank を返す
   int sweep(int wr = -1) {
