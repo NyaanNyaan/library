@@ -370,6 +370,7 @@
 "verify/verify-yuki/yuki-1320.test.cpp": "2023-08-10 13:25:59 +0900",
 "verify/verify-yuki/yuki-1323.test.cpp": "2023-08-10 13:25:59 +0900",
 "verify/verify-yuki/yuki-1326.test.cpp": "2023-08-10 13:25:59 +0900",
+"verify/verify-yuki/yuki-1340-bitmatrix.test.cpp": "2023-08-11 05:05:49 +0900",
 "verify/verify-yuki/yuki-1340-semiring.test.cpp": "2023-08-10 13:25:59 +0900",
 "verify/verify-yuki/yuki-1460.test.cpp": "2023-08-10 13:25:59 +0900",
 "verify/verify-yuki/yuki-1467-weighted.test.cpp": "2023-08-10 13:25:59 +0900",
