@@ -20,16 +20,18 @@ data:
     document_title: Simulated Annealing
     links: []
   bundledCode: "#line 2 \"marathon/simulated-annealing.hpp\"\n\n#line 2 \"misc/timer.hpp\"\
-    \n\n#include <chrono>\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+    \n\n#include <chrono>\nusing namespace std;\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
+    \ st;\n\n  Timer() { reset(); }\n  void reset() { st = chrono::high_resolution_clock::now();\
+    \ }\n\n  long long elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };\n#line 2 \"marathon/log_table.hpp\"\n\nstruct log_table {\n  double l[65536];\n\
-    \  constexpr log_table() : l() {\n    unsigned long long x = 88172645463325252ULL;\n\
-    \    double log_u64max = log(2) * 64;\n    for (int i = 0; i < 65536; i++) {\n\
-    \      x = x ^ (x << 7);\n      x = x ^ (x >> 9);\n      l[i] = log(double(x))\
-    \ - log_u64max;\n    }\n  }\n};\n#line 5 \"marathon/simulated-annealing.hpp\"\n\
-    \ntemplate <typename Input, typename State, typename Diff>\nstruct Simulated_Annealing\
+    \  long long operator()() { return elapsed(); }\n};\n#line 2 \"marathon/log_table.hpp\"\
+    \n\nstruct log_table {\n  static constexpr int M = 65536;\n  static constexpr\
+    \ int mask = M - 1;\n  double l[M];\n  log_table() : l() {\n    unsigned long\
+    \ long x = 88172645463325252ULL;\n    double log_u64max = log(2) * 64;\n    for\
+    \ (int i = 0; i < M; i++) {\n      x = x ^ (x << 7);\n      x = x ^ (x >> 9);\n\
+    \      l[i] = log(double(x)) - log_u64max;\n    }\n  }\n  double operator()(int\
+    \ i) const { return l[i & mask]; }\n};\n#line 5 \"marathon/simulated-annealing.hpp\"\
+    \n\ntemplate <typename Input, typename State, typename Diff>\nstruct Simulated_Annealing\
     \ {\n private:\n  log_table rand_log;\n  double end_time, inv_time, cur_time;\n\
     \  double start_temp, diff_temp, cur_temp;\n  Timer *timer;\n\n  void set_time(double\
     \ start_time) {\n    inv_time = 1.0 / (end_time - start_time);\n    cur_time =\
@@ -80,7 +82,7 @@ data:
   isVerificationFile: false
   path: marathon/simulated-annealing.hpp
   requiredBy: []
-  timestamp: '2021-11-14 23:34:55+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-unit-test/simulated-annealing.test.cpp

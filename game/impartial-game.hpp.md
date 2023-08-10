@@ -48,11 +48,12 @@ data:
     \ return mp[t];\n      return mp[t] = _get(t);\n    } else if constexpr (is_same_v<T,\
     \ Boards>) {\n      Nimber n = 0;\n      for (const Board& s : t) n ^= get(s);\n\
     \      return n;\n    } else {\n      static_assert(is_same_v<T, pair<Game, Move>>);\n\
-    \      return get(t.first);\n    }\n  }\n\n  template <typename T>\n  conditional_t<is_same_v<T,\
+    \      return get(t.first);\n    }\n  }\n\n  // \u8CA0\u3051\u5C40\u9762\u3067\
+    \u547C\u3076\u3068 RE \u3059\u308B\n  template <typename T>\n  conditional_t<is_same_v<T,\
     \ Board>, Move, pair<int, Move>> get_best_move(\n      const T& t) {\n    static_assert(is_void_v<Move>\
     \ == false);\n    Nimber n = get(t);\n    assert(n != 0 and \"No Best Move.\"\
-    );\n    if (is_same_v<T, Board>) {\n      auto res = change_x(t, n);\n      if\
-    \ (res.first) return res.second;\n    } else {\n      static_assert(is_same_v<T,\
+    );\n    if constexpr (is_same_v<T, Board>) {\n      auto res = change_x(t, n);\n\
+    \      if (res.first) return res.second;\n    } else {\n      static_assert(is_same_v<T,\
     \ Boards>);\n      for (int i = 0; i < (int)t.size(); i++) {\n        auto res\
     \ = change_x(t[i], n);\n        if (res.first) return {i, res.second};\n     \
     \ }\n    }\n    assert(false and \"Error in get_best_move().\");\n    exit(1);\n\
@@ -95,10 +96,11 @@ data:
     \     if (mp.count(t)) return mp[t];\n      return mp[t] = _get(t);\n    } else\
     \ if constexpr (is_same_v<T, Boards>) {\n      Nimber n = 0;\n      for (const\
     \ Board& s : t) n ^= get(s);\n      return n;\n    } else {\n      static_assert(is_same_v<T,\
-    \ pair<Game, Move>>);\n      return get(t.first);\n    }\n  }\n\n  template <typename\
-    \ T>\n  conditional_t<is_same_v<T, Board>, Move, pair<int, Move>> get_best_move(\n\
+    \ pair<Game, Move>>);\n      return get(t.first);\n    }\n  }\n\n  // \u8CA0\u3051\
+    \u5C40\u9762\u3067\u547C\u3076\u3068 RE \u3059\u308B\n  template <typename T>\n\
+    \  conditional_t<is_same_v<T, Board>, Move, pair<int, Move>> get_best_move(\n\
     \      const T& t) {\n    static_assert(is_void_v<Move> == false);\n    Nimber\
-    \ n = get(t);\n    assert(n != 0 and \"No Best Move.\");\n    if (is_same_v<T,\
+    \ n = get(t);\n    assert(n != 0 and \"No Best Move.\");\n    if constexpr (is_same_v<T,\
     \ Board>) {\n      auto res = change_x(t, n);\n      if (res.first) return res.second;\n\
     \    } else {\n      static_assert(is_same_v<T, Boards>);\n      for (int i =\
     \ 0; i < (int)t.size(); i++) {\n        auto res = change_x(t[i], n);\n      \
@@ -117,12 +119,12 @@ data:
   isVerificationFile: false
   path: game/impartial-game.hpp
   requiredBy: []
-  timestamp: '2023-05-27 23:17:31+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0002.test.cpp
   - verify/verify-yuki/yuki-0361.test.cpp
   - verify/verify-yuki/yuki-0102.test.cpp
+  - verify/verify-yuki/yuki-0002.test.cpp
 documentation_of: game/impartial-game.hpp
 layout: document
 redirect_from:

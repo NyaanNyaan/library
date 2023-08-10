@@ -5,6 +5,9 @@ data:
     path: internal/internal-math.hpp
     title: internal/internal-math.hpp
   - icon: ':heavy_check_mark:'
+    path: internal/internal-seed.hpp
+    title: internal/internal-seed.hpp
+  - icon: ':heavy_check_mark:'
     path: internal/internal-type-traits.hpp
     title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
@@ -67,7 +70,8 @@ data:
     \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
     \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
     \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -103,7 +107,7 @@ data:
     };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
     \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
     \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
-    \ N,F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
+    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
     \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
     \ &v) {\n  int max_val = *max_element(begin(v), end(v));\n  vector<int> inv(max_val\
     \ + 1, -1);\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return\
@@ -111,57 +115,69 @@ data:
     \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nT mkrev(const T &v)\
     \ {\n  T w{v};\n  reverse(begin(w), end(w));\n  return w;\n}\n\ntemplate <typename\
     \ T>\nbool nxp(vector<T> &v) {\n  return next_permutation(begin(v), end(v));\n\
-    }\n\ntemplate <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\
-    \n}  // namespace Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n\
-    #line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"popcnt\"\
-    ))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline\
-    \ int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const\
-    \ u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const u64 &a)\
-    \ { return a ? 63 - __builtin_clzll(a) : -1; }\ntemplate <typename T>\ninline\
-    \ int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename\
-    \ T>\ninline void sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1)\
-    \ << i;\n}\nconstexpr long long PW(int n) { return 1LL << n; }\nconstexpr long\
-    \ long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n#line 61\
-    \ \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\nnamespace\
-    \ Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
-    \ const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return os;\n\
-    }\ntemplate <typename T, typename U>\nistream &operator>>(istream &is, pair<T,\
-    \ U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
-    \ __int128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  int flag = 0;\n  for\
-    \ (auto &c : S) {\n    if (c == '-') {\n      flag = true;\n      continue;\n\
-    \    }\n    x *= 10;\n    x += c - '0';\n  }\n  if (flag) x = -x;\n  return is;\n\
-    }\n\nistream &operator>>(istream &is, __uint128_t &x) {\n  string S;\n  is >>\
-    \ S;\n  x = 0;\n  for (auto &c : S) {\n    x *= 10;\n    x += c - '0';\n  }\n\
-    \  return is;\n}\n\nostream &operator<<(ostream &os, __int128_t x) {\n  if (x\
-    \ == 0) return os << 0;\n  if (x < 0) os << '-', x = -x;\n  string S;\n  while\
-    \ (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return\
-    \ os << S;\n}\nostream &operator<<(ostream &os, __uint128_t x) {\n  if (x == 0)\
-    \ return os << 0;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n\
-    \  reverse(begin(S), end(S));\n  return os << S;\n}\n\nvoid in() {}\ntemplate\
-    \ <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin >> t;\n  in(u...);\n\
-    }\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class... U, char sep\
-    \ = ' '>\nvoid out(const T &t, const U &...u) {\n  cout << t;\n  if (sizeof...(u))\
-    \ cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n   \
-    \ cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n\
-    \    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\n}  // namespace\
-    \ Nyaan\n#line 64 \"template/template.hpp\"\n\n// debug\n#line 1 \"template/debug.hpp\"\
-    \nnamespace DebugImpl {\n\ntemplate <typename U, typename = void>\nstruct is_specialize\
-    \ : false_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
-    \ conditional<false, typename U::iterator, void>::type>\n    : true_type {};\n\
-    template <typename U>\nstruct is_specialize<\n    U, typename conditional<false,\
-    \ decltype(U::first), void>::type>\n    : true_type {};\ntemplate <typename U>\n\
-    struct is_specialize<U, enable_if_t<is_integral<U>::value, void>> : true_type\
-    \ {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const string&\
-    \ t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t ? \"true\" : \"false\"\
-    ); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr << 0;\n  if (t < 0) cerr\
-    \ << '-', t = -t;\n  string S;\n  while (t) S.push_back('0' + t % 10), t /= 10;\n\
-    \  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t t) {\n\
-    \  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t % 10),\
-    \ t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
+    }\n\n// \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\
+    \n// i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
+    \ product(const vector<T> &a) {\n  vector<vector<T>> ret;\n  vector<T> v;\n  auto\
+    \ dfs = [&](auto rc, int i) -> void {\n    if (i == (int)a.size()) {\n      ret.push_back(v);\n\
+    \      return;\n    }\n    for (int j = 0; j < a[i]; j++) v.push_back(j), rc(rc,\
+    \ i + 1), v.pop_back();\n  };\n  dfs(dfs, 0);\n  return ret;\n}\n\n// F : function(void(T&)),\
+    \ mod \u3092\u53D6\u308B\u64CD\u4F5C\n// T : \u6574\u6570\u578B\u306E\u3068\u304D\
+    \u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\u308B\
+    \ntemplate <typename T>\nT Power(T a, long long n, const T &I, const function<void(T\
+    \ &)> &f) {\n  T res = I;\n  for (; n; f(a = a * a), n >>= 1) {\n    if (n & 1)\
+    \ f(res = res * a);\n  }\n  return res;\n}\n// T : \u6574\u6570\u578B\u306E\u3068\
+    \u304D\u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\
+    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I) {\n  return\
+    \ Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\n}  // namespace\
+    \ Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \nnamespace Nyaan {\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline int lsb(const u64 &a) { return\
+    \ a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const u64 &a) { return a ? __builtin_ctzll(a)\
+    \ : 64; }\ninline int msb(const u64 &a) { return a ? 63 - __builtin_clzll(a) :\
+    \ -1; }\ntemplate <typename T>\ninline int gbit(const T &a, int i) {\n  return\
+    \ (a >> i) & 1;\n}\ntemplate <typename T>\ninline void sbit(T &a, int i, bool\
+    \ b) {\n  if (gbit(a, i) != b) a ^= T(1) << i;\n}\nconstexpr long long PW(int\
+    \ n) { return 1LL << n; }\nconstexpr long long MSK(int n) { return (1LL << n)\
+    \ - 1; }\n}  // namespace Nyaan\n#line 61 \"template/template.hpp\"\n\n// inout\n\
+    #line 1 \"template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename\
+    \ U>\nostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first\
+    \ << \" \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\n\
+    istream &operator>>(istream &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n\
+    \  return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, const\
+    \ vector<T> &v) {\n  int s = (int)v.size();\n  for (int i = 0; i < s; i++) os\
+    \ << (i ? \" \" : \"\") << v[i];\n  return os;\n}\ntemplate <typename T>\nistream\
+    \ &operator>>(istream &is, vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return\
+    \ is;\n}\n\nistream &operator>>(istream &is, __int128_t &x) {\n  string S;\n \
+    \ is >> S;\n  x = 0;\n  int flag = 0;\n  for (auto &c : S) {\n    if (c == '-')\
+    \ {\n      flag = true;\n      continue;\n    }\n    x *= 10;\n    x += c - '0';\n\
+    \  }\n  if (flag) x = -x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
+    \ __uint128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  for (auto &c : S) {\n\
+    \    x *= 10;\n    x += c - '0';\n  }\n  return is;\n}\n\nostream &operator<<(ostream\
+    \ &os, __int128_t x) {\n  if (x == 0) return os << 0;\n  if (x < 0) os << '-',\
+    \ x = -x;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S),\
+    \ end(S));\n  return os << S;\n}\nostream &operator<<(ostream &os, __uint128_t\
+    \ x) {\n  if (x == 0) return os << 0;\n  string S;\n  while (x) S.push_back('0'\
+    \ + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return os << S;\n}\n\n\
+    void in() {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin\
+    \ >> t;\n  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename\
+    \ T, class... U, char sep = ' '>\nvoid out(const T &t, const U &...u) {\n  cout\
+    \ << t;\n  if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya\
+    \ {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
+    \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
+    \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\
+    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
+    \ <typename U, typename = void>\nstruct is_specialize : false_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<\n    U, typename conditional<false, typename\
+    \ U::iterator, void>::type>\n    : true_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, decltype(U::first), void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value,\
+    \ void>> : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid\
+    \ dump(const string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t\
+    \ ? \"true\" : \"false\"); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr\
+    \ << 0;\n  if (t < 0) cerr << '-', t = -t;\n  string S;\n  while (t) S.push_back('0'\
+    \ + t % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t\
+    \ t) {\n  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t\
+    \ % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
     \ U,\n          enable_if_t<!is_specialize<U>::value, nullptr_t> = nullptr>\n\
     void dump(const U& t) {\n  cerr << t;\n}\n\ntemplate <typename T>\nvoid dump(const\
     \ T& t, enable_if_t<is_integral<T>::value>* = nullptr) {\n  string res;\n  if\
@@ -326,23 +342,37 @@ data:
     \ 1);\n  sieve[0] = sieve[1] = false;\n  for (int i = 2; i * i <= N; i++)\n  \
     \  if (sieve[i] == true)\n      for (int j = i * i; j <= N; j += i) sieve[j] =\
     \ false;\n  return sieve;\n}\n#line 7 \"verify/verify-unit-test/primality-test.test.cpp\"\
-    \n//\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\n\
-    using u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64\
-    \ _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n              chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \              .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n\
-    \  return _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l\
-    \ <= r);\n  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l,\
-    \ i64 r) {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n\
-    \ numbers from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64\
-    \ n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i\
-    \ = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end())\
-    \ m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\n#line 2 \"internal/internal-seed.hpp\"\n\n#line\
+    \ 4 \"internal/internal-seed.hpp\"\nusing namespace std;\n\nnamespace internal\
+    \ {\nunsigned long long non_deterministic_seed() {\n  unsigned long long m =\n\
+    \      chrono::duration_cast<chrono::nanoseconds>(\n          chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \          .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >>\
+    \ 31, m ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() {\
+    \ return 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210\
+    \ (\u624B\u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\
+    \u51FA\u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\
+    \u304F\u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\
+    \u30B7\u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long\
+    \ long seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return\
+    \ deterministic_seed();\n#else\n  return non_deterministic_seed();\n#endif\n}\n\
+    \n}  // namespace internal\n#line 4 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\
+    using i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\n\
+    u64 rng() {\n  static u64 _x = internal::seed();\n  return _x ^= _x << 7, _x ^=\
+    \ _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n  return\
+    \ l + rng() % u64(r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r) {\n \
+    \ assert(l < r);\n  return l + rng() % u64(r - l);\n}\n\n// choose n numbers from\
+    \ [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
+    \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
+    \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
     \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
-    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 9 \"verify/verify-unit-test/primality-test.test.cpp\"\
-    \n//\nusing namespace Nyaan;\n\nvoid test_small() {\n  using mint64 = ArbitraryLazyMontgomeryModInt64bit<123456789>;\n\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 9 \"\
+    verify/verify-unit-test/primality-test.test.cpp\"\n//\nusing namespace Nyaan;\n\
+    \nvoid test_small() {\n  using mint64 = ArbitraryLazyMontgomeryModInt64bit<123456789>;\n\
     \n  auto sieve = prime_sieve(2e6);\n  rep(n, sz(sieve)) {\n    int f1 = sieve[n];\n\
     \    int f2 = is_prime(n);\n    int f3 = fast_factorize::miller_rabin<mint64>(n,\
     \ {2, 7, 61});\n    int f4 = fast_factorize::miller_rabin_u64(n);\n    assert(f1\
@@ -388,10 +418,11 @@ data:
   - modint/arbitrary-montgomery-modint.hpp
   - prime/prime-sieve.hpp
   - misc/rng.hpp
+  - internal/internal-seed.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/primality-test.test.cpp
   requiredBy: []
-  timestamp: '2023-05-29 21:58:40+09:00'
+  timestamp: '2023-08-10 14:06:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/primality-test.test.cpp

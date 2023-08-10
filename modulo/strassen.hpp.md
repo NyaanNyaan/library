@@ -685,8 +685,8 @@ data:
   timestamp: '2023-05-29 20:50:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
 documentation_of: modulo/strassen.hpp
 layout: document

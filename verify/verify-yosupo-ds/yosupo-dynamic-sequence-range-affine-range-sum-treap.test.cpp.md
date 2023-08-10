@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: internal/internal-seed.hpp
+    title: internal/internal-seed.hpp
+  - icon: ':heavy_check_mark:'
     path: internal/internal-type-traits.hpp
     title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
@@ -67,7 +70,8 @@ data:
     \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
     template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
     using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -103,7 +107,7 @@ data:
     };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
     \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
     \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
-    \ N,F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
+    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
     \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
     \ &v) {\n  int max_val = *max_element(begin(v), end(v));\n  vector<int> inv(max_val\
     \ + 1, -1);\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return\
@@ -111,57 +115,69 @@ data:
     \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nT mkrev(const T &v)\
     \ {\n  T w{v};\n  reverse(begin(w), end(w));\n  return w;\n}\n\ntemplate <typename\
     \ T>\nbool nxp(vector<T> &v) {\n  return next_permutation(begin(v), end(v));\n\
-    }\n\ntemplate <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\
-    \n}  // namespace Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n\
-    #line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"popcnt\"\
-    ))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline\
-    \ int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const\
-    \ u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const u64 &a)\
-    \ { return a ? 63 - __builtin_clzll(a) : -1; }\ntemplate <typename T>\ninline\
-    \ int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename\
-    \ T>\ninline void sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1)\
-    \ << i;\n}\nconstexpr long long PW(int n) { return 1LL << n; }\nconstexpr long\
-    \ long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n#line 61\
-    \ \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\nnamespace\
-    \ Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
-    \ const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return os;\n\
-    }\ntemplate <typename T, typename U>\nistream &operator>>(istream &is, pair<T,\
-    \ U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
-    \ __int128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  int flag = 0;\n  for\
-    \ (auto &c : S) {\n    if (c == '-') {\n      flag = true;\n      continue;\n\
-    \    }\n    x *= 10;\n    x += c - '0';\n  }\n  if (flag) x = -x;\n  return is;\n\
-    }\n\nistream &operator>>(istream &is, __uint128_t &x) {\n  string S;\n  is >>\
-    \ S;\n  x = 0;\n  for (auto &c : S) {\n    x *= 10;\n    x += c - '0';\n  }\n\
-    \  return is;\n}\n\nostream &operator<<(ostream &os, __int128_t x) {\n  if (x\
-    \ == 0) return os << 0;\n  if (x < 0) os << '-', x = -x;\n  string S;\n  while\
-    \ (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return\
-    \ os << S;\n}\nostream &operator<<(ostream &os, __uint128_t x) {\n  if (x == 0)\
-    \ return os << 0;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n\
-    \  reverse(begin(S), end(S));\n  return os << S;\n}\n\nvoid in() {}\ntemplate\
-    \ <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin >> t;\n  in(u...);\n\
-    }\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class... U, char sep\
-    \ = ' '>\nvoid out(const T &t, const U &...u) {\n  cout << t;\n  if (sizeof...(u))\
-    \ cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n   \
-    \ cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n\
-    \    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\n}  // namespace\
-    \ Nyaan\n#line 64 \"template/template.hpp\"\n\n// debug\n#line 1 \"template/debug.hpp\"\
-    \nnamespace DebugImpl {\n\ntemplate <typename U, typename = void>\nstruct is_specialize\
-    \ : false_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
-    \ conditional<false, typename U::iterator, void>::type>\n    : true_type {};\n\
-    template <typename U>\nstruct is_specialize<\n    U, typename conditional<false,\
-    \ decltype(U::first), void>::type>\n    : true_type {};\ntemplate <typename U>\n\
-    struct is_specialize<U, enable_if_t<is_integral<U>::value, void>> : true_type\
-    \ {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const string&\
-    \ t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t ? \"true\" : \"false\"\
-    ); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr << 0;\n  if (t < 0) cerr\
-    \ << '-', t = -t;\n  string S;\n  while (t) S.push_back('0' + t % 10), t /= 10;\n\
-    \  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t t) {\n\
-    \  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t % 10),\
-    \ t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
+    }\n\n// \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\
+    \n// i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
+    \ product(const vector<T> &a) {\n  vector<vector<T>> ret;\n  vector<T> v;\n  auto\
+    \ dfs = [&](auto rc, int i) -> void {\n    if (i == (int)a.size()) {\n      ret.push_back(v);\n\
+    \      return;\n    }\n    for (int j = 0; j < a[i]; j++) v.push_back(j), rc(rc,\
+    \ i + 1), v.pop_back();\n  };\n  dfs(dfs, 0);\n  return ret;\n}\n\n// F : function(void(T&)),\
+    \ mod \u3092\u53D6\u308B\u64CD\u4F5C\n// T : \u6574\u6570\u578B\u306E\u3068\u304D\
+    \u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\u308B\
+    \ntemplate <typename T>\nT Power(T a, long long n, const T &I, const function<void(T\
+    \ &)> &f) {\n  T res = I;\n  for (; n; f(a = a * a), n >>= 1) {\n    if (n & 1)\
+    \ f(res = res * a);\n  }\n  return res;\n}\n// T : \u6574\u6570\u578B\u306E\u3068\
+    \u304D\u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\
+    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I) {\n  return\
+    \ Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\n}  // namespace\
+    \ Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \nnamespace Nyaan {\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline int lsb(const u64 &a) { return\
+    \ a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const u64 &a) { return a ? __builtin_ctzll(a)\
+    \ : 64; }\ninline int msb(const u64 &a) { return a ? 63 - __builtin_clzll(a) :\
+    \ -1; }\ntemplate <typename T>\ninline int gbit(const T &a, int i) {\n  return\
+    \ (a >> i) & 1;\n}\ntemplate <typename T>\ninline void sbit(T &a, int i, bool\
+    \ b) {\n  if (gbit(a, i) != b) a ^= T(1) << i;\n}\nconstexpr long long PW(int\
+    \ n) { return 1LL << n; }\nconstexpr long long MSK(int n) { return (1LL << n)\
+    \ - 1; }\n}  // namespace Nyaan\n#line 61 \"template/template.hpp\"\n\n// inout\n\
+    #line 1 \"template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename\
+    \ U>\nostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first\
+    \ << \" \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\n\
+    istream &operator>>(istream &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n\
+    \  return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, const\
+    \ vector<T> &v) {\n  int s = (int)v.size();\n  for (int i = 0; i < s; i++) os\
+    \ << (i ? \" \" : \"\") << v[i];\n  return os;\n}\ntemplate <typename T>\nistream\
+    \ &operator>>(istream &is, vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return\
+    \ is;\n}\n\nistream &operator>>(istream &is, __int128_t &x) {\n  string S;\n \
+    \ is >> S;\n  x = 0;\n  int flag = 0;\n  for (auto &c : S) {\n    if (c == '-')\
+    \ {\n      flag = true;\n      continue;\n    }\n    x *= 10;\n    x += c - '0';\n\
+    \  }\n  if (flag) x = -x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
+    \ __uint128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  for (auto &c : S) {\n\
+    \    x *= 10;\n    x += c - '0';\n  }\n  return is;\n}\n\nostream &operator<<(ostream\
+    \ &os, __int128_t x) {\n  if (x == 0) return os << 0;\n  if (x < 0) os << '-',\
+    \ x = -x;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S),\
+    \ end(S));\n  return os << S;\n}\nostream &operator<<(ostream &os, __uint128_t\
+    \ x) {\n  if (x == 0) return os << 0;\n  string S;\n  while (x) S.push_back('0'\
+    \ + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return os << S;\n}\n\n\
+    void in() {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin\
+    \ >> t;\n  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename\
+    \ T, class... U, char sep = ' '>\nvoid out(const T &t, const U &...u) {\n  cout\
+    \ << t;\n  if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya\
+    \ {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
+    \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
+    \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\
+    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
+    \ <typename U, typename = void>\nstruct is_specialize : false_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<\n    U, typename conditional<false, typename\
+    \ U::iterator, void>::type>\n    : true_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, decltype(U::first), void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value,\
+    \ void>> : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid\
+    \ dump(const string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t\
+    \ ? \"true\" : \"false\"); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr\
+    \ << 0;\n  if (t < 0) cerr << '-', t = -t;\n  string S;\n  while (t) S.push_back('0'\
+    \ + t % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t\
+    \ t) {\n  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t\
+    \ % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
     \ U,\n          enable_if_t<!is_specialize<U>::value, nullptr_t> = nullptr>\n\
     void dump(const U& t) {\n  cerr << t;\n}\n\ntemplate <typename T>\nvoid dump(const\
     \ T& t, enable_if_t<is_integral<T>::value>* = nullptr) {\n  string res;\n  if\
@@ -210,37 +226,49 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 5 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp\"\
-    \n//\n#line 2 \"rbst/treap.hpp\"\n\n#line 2 \"misc/rng.hpp\"\n\nnamespace my_rand\
-    \ {\nusing i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 -\
-    \ 1)\nu64 rng() {\n  static u64 _x =\n      u64(chrono::duration_cast<chrono::nanoseconds>(\n\
-    \              chrono::high_resolution_clock::now().time_since_epoch())\n    \
-    \          .count()) *\n      10150724397891781847ULL;\n  _x ^= _x << 7;\n  return\
-    \ _x ^= _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n\
-    \  return l + rng() % (r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r)\
-    \ {\n  assert(l < r);\n  return l + rng() % (r - l);\n}\n\n// choose n numbers\
-    \ from [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n\
-    \  assert(l <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i;\
-    \ --i) {\n    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m\
-    \ = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \n//\n#line 2 \"rbst/treap.hpp\"\n\n#line 2 \"misc/rng.hpp\"\n\n#line 2 \"internal/internal-seed.hpp\"\
+    \n\n#line 4 \"internal/internal-seed.hpp\"\nusing namespace std;\n\nnamespace\
+    \ internal {\nunsigned long long non_deterministic_seed() {\n  unsigned long long\
+    \ m =\n      chrono::duration_cast<chrono::nanoseconds>(\n          chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \          .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >>\
+    \ 31, m ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() {\
+    \ return 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210\
+    \ (\u624B\u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\
+    \u51FA\u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\
+    \u304F\u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\
+    \u30B7\u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long\
+    \ long seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return\
+    \ deterministic_seed();\n#else\n  return non_deterministic_seed();\n#endif\n}\n\
+    \n}  // namespace internal\n#line 4 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\
+    using i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\n\
+    u64 rng() {\n  static u64 _x = internal::seed();\n  return _x ^= _x << 7, _x ^=\
+    \ _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n  return\
+    \ l + rng() % u64(r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r) {\n \
+    \ assert(l < r);\n  return l + rng() % u64(r - l);\n}\n\n// choose n numbers from\
+    \ [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
+    \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
+    \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
     \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n\
-    \  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace\
-    \ my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"rbst/treap.hpp\"\n\ntemplate\
-    \ <typename Node>\nstruct TreapBase {\n  using Ptr = Node *;\n  template <typename...\
-    \ Args>\n  inline Ptr my_new(Args... args) {\n    return new Node(args...);\n\
-    \  }\n  Ptr make_tree() { return nullptr; }\n\n  // for avoiding memory leak,\
-    \ activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n  template <typename...\
-    \ Args>\n  inline Ptr my_new(Args... args) {\n    return make_shared<Node>(args...);\n\
-    \  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n  int size(Ptr t) const { return\
-    \ count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l :\
-    \ r;\n    if (l->pr >= r->pr) {\n      push(l);\n      l->r = merge(l->r, r);\n\
-    \      return update(l);\n    } else {\n      push(r);\n      r->l = merge(l,\
-    \ r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr, Ptr> split(Ptr t,\
-    \ int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n    if (k <=\
-    \ count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n   \
-    \   return {s.first, update(t)};\n    } else {\n      auto s = split(t->r, k -\
-    \ count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 4 \"\
+    rbst/treap.hpp\"\n\ntemplate <typename Node>\nstruct TreapBase {\n  using Ptr\
+    \ = Node *;\n  template <typename... Args>\n  inline Ptr my_new(Args... args)\
+    \ {\n    return new Node(args...);\n  }\n  Ptr make_tree() { return nullptr; }\n\
+    \n  // for avoiding memory leak, activate below\n  /*\n  using Ptr = shared_ptr<Node>;\n\
+    \  template <typename... Args>\n  inline Ptr my_new(Args... args) {\n    return\
+    \ make_shared<Node>(args...);\n  }\n  Ptr make_tree() {return Ptr();}\n  */\n\n\
+    \  int size(Ptr t) const { return count(t); }\n\n  Ptr merge(Ptr l, Ptr r) {\n\
+    \    if (!l || !r) return l ? l : r;\n    if (l->pr >= r->pr) {\n      push(l);\n\
+    \      l->r = merge(l->r, r);\n      return update(l);\n    } else {\n      push(r);\n\
+    \      r->l = merge(l, r->l);\n      return update(r);\n    }\n  }\n\n  pair<Ptr,\
+    \ Ptr> split(Ptr t, int k) {\n    if (!t) return {nullptr, nullptr};\n    push(t);\n\
+    \    if (k <= count(t->l)) {\n      auto s = split(t->l, k);\n      t->l = s.second;\n\
+    \      return {s.first, update(t)};\n    } else {\n      auto s = split(t->r,\
+    \ k - count(t->l) - 1);\n      t->r = s.first;\n      return {update(t), s.second};\n\
     \    }\n  }\n\n  Ptr build(const vector<decltype(Node::key)> &v) {\n    int n\
     \ = v.size();\n    vector<Ptr> ps;\n    ps.reserve(n);\n    for (int i = 0; i\
     \ < n; i++) ps.push_back(my_new(v[i]));\n    vector<int> p(n, -1), st;\n    for\
@@ -252,12 +280,12 @@ data:
     \ = ps[i];\n        } else {\n          ps[p[i]]->r = ps[i];\n        }\n    \
     \  } else\n        root = i;\n    }\n    dfs(ps[root]);\n    return ps[root];\n\
     \  }\n\n  template <typename... Args>\n  void insert(Ptr &t, int k, const Args\
-    \ &... args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
+    \ &...args) {\n    auto x = split(t, k);\n    t = merge(merge(x.first, my_new(args...)),\
     \ x.second);\n  }\n\n  void erase(Ptr &t, int k) {\n    auto x = split(t, k);\n\
-    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n\n  void\
+    \    t = merge(x.first, split(x.second, 1).second);\n  }\n\n protected:\n  void\
     \ dfs(Ptr r) {\n    if (r->l) dfs(r->l);\n    if (r->r) dfs(r->r);\n    update(r);\n\
-    \  }\n  \n  inline int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n\
-    \  virtual void push(Ptr) {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\ntemplate\
+    \  }\n\n  inline int count(const Ptr t) const { return t ? t->cnt : 0; }\n\n \
+    \ virtual void push(Ptr) {}\n\n  virtual Ptr update(Ptr) = 0;\n};\n\ntemplate\
     \ <typename T, typename E>\nstruct LazyReversibleTreapNode {\n  using Treap =\
     \ TreapBase<LazyReversibleTreapNode>;\n  typename Treap::Ptr l, r;\n  T key, sum;\n\
     \  E lazy;\n  int cnt;\n  uint32_t pr;\n  bool rev;\n\n  LazyReversibleTreapNode(const\
@@ -268,26 +296,26 @@ data:
     \ : TreapBase<LazyReversibleTreapNode<T, E>> {\n  using Node = LazyReversibleTreapNode<T,\
     \ E>;\n  using base = TreapBase<LazyReversibleTreapNode<T, E>>;\n  using base::merge;\n\
     \  using base::split;\n  using typename base::Ptr;\n\n  LazyReversibleTreap()\
-    \ = default;\n\n  void toggle(Ptr t) {\n    swap(t->l, t->r);\n    t->sum = ts(t->sum);\n\
-    \    t->rev ^= true;\n  }\n\n  T fold(Ptr &t, int a, int b) {\n    auto x = split(t,\
-    \ a);\n    auto y = split(x.second, b - a);\n    auto ret = sum(y.first);\n  \
-    \  t = merge(x.first, merge(y.first, y.second));\n    return ret;\n  }\n\n  void\
-    \ reverse(Ptr &t, int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
-    \ b - a);\n    toggle(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
-    \  }\n\n  void apply(Ptr &t, int a, int b, const E &e) {\n    auto x = split(t,\
-    \ a);\n    auto y = split(x.second, b - a);\n    propagate(y.first, e);\n    t\
-    \ = merge(x.first, merge(y.first, y.second));\n  }\n\n protected:\n  inline T\
-    \ sum(const Ptr t) const { return t ? t->sum : T(); }\n\n  Ptr update(Ptr t) override\
-    \ {\n    push(t);\n    t->cnt = 1;\n    t->sum = t->key;\n    if (t->l) t->cnt\
-    \ += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n    if (t->r) t->cnt += t->r->cnt,\
-    \ t->sum = f(t->sum, t->r->sum);\n    return t;\n  }\n\n  void push(Ptr t) override\
-    \ {\n    if (t->rev) {\n      if (t->l) toggle(t->l);\n      if (t->r) toggle(t->r);\n\
-    \      t->rev = false;\n    }\n    if (t->lazy != E()) {\n      if (t->l) propagate(t->l,\
-    \ t->lazy);\n      if (t->r) propagate(t->r, t->lazy);\n      t->lazy = E();\n\
-    \    }\n  }\n\n  void propagate(Ptr t, const E &x) {\n    t->lazy = h(t->lazy,\
-    \ x);\n    t->key = g(t->key, x);\n    t->sum = g(t->sum, x);\n  }\n};\n\n/**\n\
-    \ * @brief \u9045\u5EF6\u4F1D\u642C\u53CD\u8EE2\u53EF\u80FDTreap\n */\n#line 7\
-    \ \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp\"\
+    \ = default;\n\n  void toggle(Ptr t) {\n    if (!t) return;\n    swap(t->l, t->r);\n\
+    \    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n  T fold(Ptr &t, int a,\
+    \ int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b - a);\n\
+    \    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
+    \    return ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n    auto x =\
+    \ split(t, a);\n    auto y = split(x.second, b - a);\n    toggle(y.first);\n \
+    \   t = merge(x.first, merge(y.first, y.second));\n  }\n\n  void apply(Ptr &t,\
+    \ int a, int b, const E &e) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
+    \ b - a);\n    propagate(y.first, e);\n    t = merge(x.first, merge(y.first, y.second));\n\
+    \  }\n\n protected:\n  inline T sum(const Ptr t) const { return t ? t->sum : T();\
+    \ }\n\n  Ptr update(Ptr t) override {\n    push(t);\n    t->cnt = 1;\n    t->sum\
+    \ = t->key;\n    if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n\
+    \    if (t->r) t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);\n    return\
+    \ t;\n  }\n\n  void push(Ptr t) override {\n    if (t->rev) {\n      if (t->l)\
+    \ toggle(t->l);\n      if (t->r) toggle(t->r);\n      t->rev = false;\n    }\n\
+    \    if (t->lazy != E()) {\n      if (t->l) propagate(t->l, t->lazy);\n      if\
+    \ (t->r) propagate(t->r, t->lazy);\n      t->lazy = E();\n    }\n  }\n\n  void\
+    \ propagate(Ptr t, const E &x) {\n    t->lazy = h(t->lazy, x);\n    t->key = g(t->key,\
+    \ x);\n    t->sum = g(t->sum, x);\n  }\n};\n\n/**\n * @brief \u9045\u5EF6\u4F1D\
+    \u642C\u53CD\u8EE2\u53EF\u80FDTreap\n */\n#line 7 \"verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp\"\
     \n//\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
     \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
     \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
@@ -383,21 +411,16 @@ data:
     \ char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++] =\
     \ c;\n}\nvoid single_write(const bool& b) {\n  if (out_right > SZ - offset) flush();\n\
     \  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const string& S)\
-    \ {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right == SZ) flush();\n\
-    \    int len = min((int)S.size() - i, SZ - out_right);\n    memcpy(outbuf + out_right,\
-    \ S.data() + i, sizeof(char) * len);\n    i += len, out_right += len;\n  }\n}\n\
-    void single_write(const char* p) {\n  int i = 0, N = strlen(p);\n  while (i !=\
-    \ N) {\n    if (out_right == SZ) flush();\n    int len = min(N - i, SZ - out_right);\n\
-    \    memcpy(outbuf + out_right, p + i, sizeof(char) * len);\n    i += len, out_right\
-    \ += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\nvoid single_write(const T& _x) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n  }\n\
-    \  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (x <\
-    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size = sizeof(T)\
-    \ * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while (x >= 10000)\
-    \ {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /=\
-    \ 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] =\
-    \ '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ {\n  flush(), fwrite(S.data(), 1, S.size(), stdout);\n}\nvoid single_write(const\
+    \ char* p) { flush(), fwrite(p, 1, strlen(p), stdout); }\ntemplate <typename T,\n\
+    \          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\nvoid single_write(const\
+    \ T& _x) {\n  if (out_right > SZ - offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++]\
+    \ = '0';\n    return;\n  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>)\
+    \ {\n    if (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
+    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
+    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
+    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
+    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
     \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
     \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
     \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
@@ -451,6 +474,7 @@ data:
   - template/macro.hpp
   - rbst/treap.hpp
   - misc/rng.hpp
+  - internal/internal-seed.hpp
   - modint/montgomery-modint.hpp
   - math/affine-transformation.hpp
   - misc/fastio.hpp
@@ -458,7 +482,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
   requiredBy: []
-  timestamp: '2023-05-29 20:50:32+09:00'
+  timestamp: '2023-08-10 14:25:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp

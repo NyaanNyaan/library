@@ -94,6 +94,9 @@ data:
     path: verify/verify-unit-test/dual-fps.test.cpp
     title: verify/verify-unit-test/dual-fps.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv.test.cpp
+    title: verify/verify-unit-test/fast-inv.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
@@ -295,6 +298,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
     title: verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+    title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
     title: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -310,8 +316,8 @@ data:
     path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
-    title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+    path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
     title: verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
@@ -336,6 +342,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
     title: verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+    title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
     title: verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
@@ -568,170 +577,173 @@ data:
   isVerificationFile: false
   path: modint/montgomery-modint.hpp
   requiredBy:
-  - tree/frequency-table-of-tree-distance.hpp
-  - ntt/chirp-z.hpp
-  - ntt/multivariate-circular-convolution.hpp
-  - ntt/rader-ntt.hpp
-  - ntt/arbitrary-ntt.hpp
-  - ntt/cooley-tukey-ntt.hpp
-  - fps/fast-multieval.hpp
-  - fps/arbitrary-fps.hpp
-  - fps/fps-circular.hpp
-  - fps/fps-composition-fast.hpp
   - math/bigint-gcd.hpp
+  - math/bigint.hpp
   - math/bigint-garner.hpp
   - math/bigint-rational.hpp
-  - math/bigint.hpp
+  - ntt/multivariate-circular-convolution.hpp
+  - ntt/arbitrary-ntt.hpp
+  - ntt/cooley-tukey-ntt.hpp
+  - ntt/rader-ntt.hpp
+  - ntt/chirp-z.hpp
+  - fps/fps-circular.hpp
+  - fps/arbitrary-fps.hpp
+  - fps/fast-multieval.hpp
+  - fps/fps-composition-fast.hpp
   - modulo/strassen.hpp
   - string/wildcard-pattern-matching.hpp
+  - tree/frequency-table-of-tree-distance.hpp
   timestamp: '2023-05-29 20:50:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
-  - verify/verify-yuki/yuki-1939.test.cpp
-  - verify/verify-yuki/yuki-0896.test.cpp
-  - verify/verify-yuki/yuki-0215.test.cpp
-  - verify/verify-yuki/yuki-2231.test.cpp
-  - verify/verify-yuki/yuki-1303.test.cpp
-  - verify/verify-yuki/yuki-0125.test.cpp
-  - verify/verify-yuki/yuki-0720.test.cpp
-  - verify/verify-yuki/yuki-1533.test.cpp
-  - verify/verify-yuki/yuki-1510.test.cpp
-  - verify/verify-yuki/yuki-0890.test.cpp
-  - verify/verify-yuki/yuki-1783.test.cpp
-  - verify/verify-yuki/yuki-0963.test.cpp
-  - verify/verify-yuki/yuki-1145.test.cpp
-  - verify/verify-yuki/yuki-1781.test.cpp
-  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
-  - verify/verify-yuki/yuki-1112.test.cpp
-  - verify/verify-yuki/yuki-1269.test.cpp
-  - verify/verify-yuki/yuki-1112-sparse.test.cpp
-  - verify/verify-yuki/yuki-1080.test.cpp
-  - verify/verify-yuki/yuki-0117.test.cpp
-  - verify/verify-yuki/yuki-0886.test.cpp
-  - verify/verify-yuki/yuki-0303.test.cpp
-  - verify/verify-yuki/yuki-0214.test.cpp
-  - verify/verify-yuki/yuki-1504.test.cpp
-  - verify/verify-yuki/yuki-1145-frac.test.cpp
-  - verify/verify-yuki/yuki-0963-circular.test.cpp
-  - verify/verify-yuki/yuki-0502.test.cpp
-  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
-  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
-  - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
-  - verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
-  - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
-  - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
-  - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
-  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
-  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant.test.cpp
-  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-  - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
-  - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
-  - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
-  - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
-  - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
-  - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
-  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
-  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
-  - verify/verify-unit-test/modint.test.cpp
-  - verify/verify-unit-test/mf.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/strassen.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
-  - verify/verify-unit-test/rbst-segment-tree.test.cpp
-  - verify/verify-unit-test/set-function.test.cpp
-  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
-  - verify/verify-unit-test/karatsuba.test.cpp
-  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
-  - verify/verify-unit-test/inverse-matrix.test.cpp
-  - verify/verify-unit-test/rational-number.test.cpp
-  - verify/verify-unit-test/gauss-elimination.test.cpp
-  - verify/verify-unit-test/multiplicative-function.test.cpp
-  - verify/verify-unit-test/fps.test.cpp
-  - verify/verify-unit-test/p-recursive.test.cpp
-  - verify/verify-unit-test/bigint.test.cpp
-  - verify/verify-unit-test/sum-of-mf.test.cpp
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
-  - verify/verify-unit-test/multieval.test.cpp
-  - verify/verify-unit-test/debug.test.cpp
-  - verify/verify-unit-test/relaxed-convolution.test.cpp
-  - verify/verify-unit-test/dual-fps.test.cpp
-  - verify/verify-unit-test/bigint2.test.cpp
-  - verify/verify-unit-test/template.test.cpp
-  - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
+  - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-yosupo-ds/yosupo-swag.test.cpp
-  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
-  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
-  - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
-  - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
+  - verify/verify-yuki/yuki-0214.test.cpp
+  - verify/verify-yuki/yuki-0125.test.cpp
+  - verify/verify-yuki/yuki-1504.test.cpp
+  - verify/verify-yuki/yuki-0720.test.cpp
+  - verify/verify-yuki/yuki-0303.test.cpp
+  - verify/verify-yuki/yuki-1080.test.cpp
+  - verify/verify-yuki/yuki-1303.test.cpp
+  - verify/verify-yuki/yuki-0963.test.cpp
+  - verify/verify-yuki/yuki-1533.test.cpp
+  - verify/verify-yuki/yuki-1269.test.cpp
+  - verify/verify-yuki/yuki-2231.test.cpp
+  - verify/verify-yuki/yuki-1145-frac.test.cpp
+  - verify/verify-yuki/yuki-1112.test.cpp
+  - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yuki/yuki-0215.test.cpp
+  - verify/verify-yuki/yuki-0117.test.cpp
+  - verify/verify-yuki/yuki-0963-circular.test.cpp
+  - verify/verify-yuki/yuki-0502.test.cpp
+  - verify/verify-yuki/yuki-1781.test.cpp
+  - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-1112-sparse.test.cpp
+  - verify/verify-yuki/yuki-0896.test.cpp
+  - verify/verify-yuki/yuki-1510.test.cpp
+  - verify/verify-yuki/yuki-1939.test.cpp
+  - verify/verify-yuki/yuki-0886.test.cpp
+  - verify/verify-yuki/yuki-0215-nth-term.test.cpp
+  - verify/verify-yuki/yuki-1783.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-avx2.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-schoenhage-radix2.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitraryprimemodint.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-chirp-z.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt-sse42.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-ntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
-  - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
-  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
-  - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
-  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-  - verify/verify-yosupo-fps/yosupo-pow.test.cpp
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/set-function.test.cpp
+  - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
+  - verify/verify-unit-test/multiplicative-function.test.cpp
+  - verify/verify-unit-test/inverse-matrix.test.cpp
+  - verify/verify-unit-test/karatsuba.test.cpp
+  - verify/verify-unit-test/gauss-elimination.test.cpp
+  - verify/verify-unit-test/dual-fps.test.cpp
+  - verify/verify-unit-test/modint.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - verify/verify-unit-test/debug.test.cpp
+  - verify/verify-unit-test/multieval.test.cpp
+  - verify/verify-unit-test/sum-of-mf.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - verify/verify-unit-test/polynomial-matrix-prod.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/fast-inv.test.cpp
+  - verify/verify-unit-test/relaxed-convolution.test.cpp
+  - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
+  - verify/verify-unit-test/template.test.cpp
+  - verify/verify-unit-test/p-recursive.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+  - verify/verify-unit-test/rational-number.test.cpp
+  - verify/verify-unit-test/bigint2.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+  - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
+  - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
+  - verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant.test.cpp
+  - verify/verify-yosupo-math/yosupo-inverse-matrix.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
+  - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-sum-of-totient-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+  - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
-  - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
-  - verify/verify-yosupo-fps/yosupo-log.test.cpp
-  - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
-  - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
-  - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
-  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
-  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
-  - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
+  - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-log.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
+  - verify/verify-yosupo-fps/yosupo-pow.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-newton-method.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-interpolation.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-exp.test.cpp
+  - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
+  - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
+  - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
 documentation_of: modint/montgomery-modint.hpp
 layout: document
 redirect_from:

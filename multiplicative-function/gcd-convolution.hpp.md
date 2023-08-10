@@ -22,7 +22,8 @@ data:
     document_title: "GCD\u7573\u307F\u8FBC\u307F"
     links: []
   bundledCode: "#line 2 \"multiplicative-function/gcd-convolution.hpp\"\n\n\n\n#line\
-    \ 2 \"multiplicative-function/divisor-multiple-transform.hpp\"\n\n#line 2 \"prime/prime-enumerate.hpp\"\
+    \ 2 \"multiplicative-function/divisor-multiple-transform.hpp\"\n\n#include <map>\n\
+    #include <vector>\nusing namespace std;\n\n#line 2 \"prime/prime-enumerate.hpp\"\
     \n\n// Prime Sieve {2, 3, 5, 7, 11, 13, 17, ...}\nvector<int> prime_enumerate(int\
     \ N) {\n  vector<bool> sieve(N / 3 + 1, 1);\n  for (int p = 5, d = 4, i = 1, sqn\
     \ = sqrt(N); p <= sqn; p += d = 6 - d, i++) {\n    if (!sieve[i]) continue;\n\
@@ -30,7 +31,7 @@ data:
     \           qe = sieve.size();\n         q < qe; q += r = s - r)\n      sieve[q]\
     \ = 0;\n  }\n  vector<int> ret{2, 3};\n  for (int p = 5, d = 4, i = 1; p <= N;\
     \ p += d = 6 - d, i++)\n    if (sieve[i]) ret.push_back(p);\n  while (!ret.empty()\
-    \ && ret.back() > N) ret.pop_back();\n  return ret;\n}\n#line 4 \"multiplicative-function/divisor-multiple-transform.hpp\"\
+    \ && ret.back() > N) ret.pop_back();\n  return ret;\n}\n#line 8 \"multiplicative-function/divisor-multiple-transform.hpp\"\
     \n\nstruct divisor_transform {\n  template <typename T>\n  static void zeta_transform(vector<T>\
     \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
     \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];\n\
@@ -76,7 +77,7 @@ data:
   isVerificationFile: false
   path: multiplicative-function/gcd-convolution.hpp
   requiredBy: []
-  timestamp: '2023-04-10 22:57:51+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0886.test.cpp

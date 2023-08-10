@@ -58,7 +58,8 @@ data:
     \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
     template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
     using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -94,7 +95,7 @@ data:
     };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
     \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
     \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
-    \ N,F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
+    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
     \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
     \ &v) {\n  int max_val = *max_element(begin(v), end(v));\n  vector<int> inv(max_val\
     \ + 1, -1);\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return\
@@ -102,57 +103,69 @@ data:
     \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nT mkrev(const T &v)\
     \ {\n  T w{v};\n  reverse(begin(w), end(w));\n  return w;\n}\n\ntemplate <typename\
     \ T>\nbool nxp(vector<T> &v) {\n  return next_permutation(begin(v), end(v));\n\
-    }\n\ntemplate <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\
-    \n}  // namespace Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n\
-    #line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"popcnt\"\
-    ))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline\
-    \ int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const\
-    \ u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const u64 &a)\
-    \ { return a ? 63 - __builtin_clzll(a) : -1; }\ntemplate <typename T>\ninline\
-    \ int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename\
-    \ T>\ninline void sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1)\
-    \ << i;\n}\nconstexpr long long PW(int n) { return 1LL << n; }\nconstexpr long\
-    \ long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n#line 61\
-    \ \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\nnamespace\
-    \ Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
-    \ const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return os;\n\
-    }\ntemplate <typename T, typename U>\nistream &operator>>(istream &is, pair<T,\
-    \ U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
-    \ __int128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  int flag = 0;\n  for\
-    \ (auto &c : S) {\n    if (c == '-') {\n      flag = true;\n      continue;\n\
-    \    }\n    x *= 10;\n    x += c - '0';\n  }\n  if (flag) x = -x;\n  return is;\n\
-    }\n\nistream &operator>>(istream &is, __uint128_t &x) {\n  string S;\n  is >>\
-    \ S;\n  x = 0;\n  for (auto &c : S) {\n    x *= 10;\n    x += c - '0';\n  }\n\
-    \  return is;\n}\n\nostream &operator<<(ostream &os, __int128_t x) {\n  if (x\
-    \ == 0) return os << 0;\n  if (x < 0) os << '-', x = -x;\n  string S;\n  while\
-    \ (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return\
-    \ os << S;\n}\nostream &operator<<(ostream &os, __uint128_t x) {\n  if (x == 0)\
-    \ return os << 0;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n\
-    \  reverse(begin(S), end(S));\n  return os << S;\n}\n\nvoid in() {}\ntemplate\
-    \ <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin >> t;\n  in(u...);\n\
-    }\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class... U, char sep\
-    \ = ' '>\nvoid out(const T &t, const U &...u) {\n  cout << t;\n  if (sizeof...(u))\
-    \ cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n   \
-    \ cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n\
-    \    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\n}  // namespace\
-    \ Nyaan\n#line 64 \"template/template.hpp\"\n\n// debug\n#line 1 \"template/debug.hpp\"\
-    \nnamespace DebugImpl {\n\ntemplate <typename U, typename = void>\nstruct is_specialize\
-    \ : false_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
-    \ conditional<false, typename U::iterator, void>::type>\n    : true_type {};\n\
-    template <typename U>\nstruct is_specialize<\n    U, typename conditional<false,\
-    \ decltype(U::first), void>::type>\n    : true_type {};\ntemplate <typename U>\n\
-    struct is_specialize<U, enable_if_t<is_integral<U>::value, void>> : true_type\
-    \ {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const string&\
-    \ t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t ? \"true\" : \"false\"\
-    ); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr << 0;\n  if (t < 0) cerr\
-    \ << '-', t = -t;\n  string S;\n  while (t) S.push_back('0' + t % 10), t /= 10;\n\
-    \  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t t) {\n\
-    \  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t % 10),\
-    \ t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
+    }\n\n// \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\
+    \n// i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
+    \ product(const vector<T> &a) {\n  vector<vector<T>> ret;\n  vector<T> v;\n  auto\
+    \ dfs = [&](auto rc, int i) -> void {\n    if (i == (int)a.size()) {\n      ret.push_back(v);\n\
+    \      return;\n    }\n    for (int j = 0; j < a[i]; j++) v.push_back(j), rc(rc,\
+    \ i + 1), v.pop_back();\n  };\n  dfs(dfs, 0);\n  return ret;\n}\n\n// F : function(void(T&)),\
+    \ mod \u3092\u53D6\u308B\u64CD\u4F5C\n// T : \u6574\u6570\u578B\u306E\u3068\u304D\
+    \u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\u308B\
+    \ntemplate <typename T>\nT Power(T a, long long n, const T &I, const function<void(T\
+    \ &)> &f) {\n  T res = I;\n  for (; n; f(a = a * a), n >>= 1) {\n    if (n & 1)\
+    \ f(res = res * a);\n  }\n  return res;\n}\n// T : \u6574\u6570\u578B\u306E\u3068\
+    \u304D\u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\
+    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I) {\n  return\
+    \ Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\n}  // namespace\
+    \ Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \nnamespace Nyaan {\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline int lsb(const u64 &a) { return\
+    \ a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const u64 &a) { return a ? __builtin_ctzll(a)\
+    \ : 64; }\ninline int msb(const u64 &a) { return a ? 63 - __builtin_clzll(a) :\
+    \ -1; }\ntemplate <typename T>\ninline int gbit(const T &a, int i) {\n  return\
+    \ (a >> i) & 1;\n}\ntemplate <typename T>\ninline void sbit(T &a, int i, bool\
+    \ b) {\n  if (gbit(a, i) != b) a ^= T(1) << i;\n}\nconstexpr long long PW(int\
+    \ n) { return 1LL << n; }\nconstexpr long long MSK(int n) { return (1LL << n)\
+    \ - 1; }\n}  // namespace Nyaan\n#line 61 \"template/template.hpp\"\n\n// inout\n\
+    #line 1 \"template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename\
+    \ U>\nostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first\
+    \ << \" \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\n\
+    istream &operator>>(istream &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n\
+    \  return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, const\
+    \ vector<T> &v) {\n  int s = (int)v.size();\n  for (int i = 0; i < s; i++) os\
+    \ << (i ? \" \" : \"\") << v[i];\n  return os;\n}\ntemplate <typename T>\nistream\
+    \ &operator>>(istream &is, vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return\
+    \ is;\n}\n\nistream &operator>>(istream &is, __int128_t &x) {\n  string S;\n \
+    \ is >> S;\n  x = 0;\n  int flag = 0;\n  for (auto &c : S) {\n    if (c == '-')\
+    \ {\n      flag = true;\n      continue;\n    }\n    x *= 10;\n    x += c - '0';\n\
+    \  }\n  if (flag) x = -x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
+    \ __uint128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  for (auto &c : S) {\n\
+    \    x *= 10;\n    x += c - '0';\n  }\n  return is;\n}\n\nostream &operator<<(ostream\
+    \ &os, __int128_t x) {\n  if (x == 0) return os << 0;\n  if (x < 0) os << '-',\
+    \ x = -x;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S),\
+    \ end(S));\n  return os << S;\n}\nostream &operator<<(ostream &os, __uint128_t\
+    \ x) {\n  if (x == 0) return os << 0;\n  string S;\n  while (x) S.push_back('0'\
+    \ + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return os << S;\n}\n\n\
+    void in() {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin\
+    \ >> t;\n  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename\
+    \ T, class... U, char sep = ' '>\nvoid out(const T &t, const U &...u) {\n  cout\
+    \ << t;\n  if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya\
+    \ {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
+    \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
+    \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\
+    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
+    \ <typename U, typename = void>\nstruct is_specialize : false_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<\n    U, typename conditional<false, typename\
+    \ U::iterator, void>::type>\n    : true_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, decltype(U::first), void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value,\
+    \ void>> : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid\
+    \ dump(const string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t\
+    \ ? \"true\" : \"false\"); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr\
+    \ << 0;\n  if (t < 0) cerr << '-', t = -t;\n  string S;\n  while (t) S.push_back('0'\
+    \ + t % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t\
+    \ t) {\n  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t\
+    \ % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
     \ U,\n          enable_if_t<!is_specialize<U>::value, nullptr_t> = nullptr>\n\
     void dump(const U& t) {\n  cerr << t;\n}\n\ntemplate <typename T>\nvoid dump(const\
     \ T& t, enable_if_t<is_integral<T>::value>* = nullptr) {\n  string res;\n  if\
@@ -261,35 +274,68 @@ data:
     }\n\n/**\n * @brief \u30B0\u30E9\u30D5\u30E6\u30FC\u30C6\u30A3\u30EA\u30C6\u30A3\
     \n * @docs docs/graph/graph-utility.md\n */\n#line 6 \"verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp\"\
     \n//\n#line 2 \"shortest-path/dijkstra-abstruct.hpp\"\n\n#line 8 \"shortest-path/dijkstra-abstruct.hpp\"\
-    \nusing namespace std;\n\n// (start \u304B\u3089\u306E\u8DDD\u96E2, 1 \u500B\u524D\
-    \u306E\u9802\u70B9) \u3092\u683C\u7D0D\u3059\u308B map \u3092\u8FD4\u3059\n//\
-    \ \u305F\u3060\u3057\u59CB\u70B9\u306F d[start] = {0, Index{}}\ntemplate <typename\
-    \ Index, typename Cost, bool has_goal = true>\nmap<Index, pair<Cost, Index>> dijkstra_abstruct(\n\
+    \nusing namespace std;\n\n// start : \u59CB\u70B9\n// goal  : \u5230\u9054\u3057\
+    \u305F\u7D42\u70B9 (goal \u304C\u7121\u3044/\u7740\u304B\u306A\u3044\u5834\u5408\
+    \ Index{})\n// dist  : start - goal \u9593\u306E\u8DDD\u96E2\n// reachable : goal\
+    \ \u306B\u7740\u3044\u305F\u304B\uFF1F\u3092\u610F\u5473\u3059\u308B bool\n//\
+    \ path  : start \u304B\u3089 goal \u3078\u306E\u30D1\u30B9 (reachable = false\
+    \ \u306E\u5834\u5408\u306F\u7A7A)\n// mp    : mp[\u9802\u70B9] = (\u6700\u77ED\
+    \u8DDD\u96E2, 1 \u3064\u524D\u306E\u9802\u70B9) \u3092\u7BA1\u7406\u3059\u308B\
+    \ map\ntemplate <typename Index, typename Cost>\nstruct DijkstraResult {\n  Index\
+    \ start, goal;\n  Cost dist;\n  bool reachable;\n  map<Index, pair<Cost, Index>>\
+    \ mp;\n  vector<Index> path;\n\n  DijkstraResult(const Index& s, const Index&\
+    \ g, Cost d, bool r,\n                 const map<Index, pair<Cost, Index>>& m)\n\
+    \      : start(s), goal(g), dist(d), reachable(r), mp(m) {\n    if (reachable)\
+    \ {\n      for (Index c = g; c != s; c = mp[c].second) path.push_back(c);\n  \
+    \    path.push_back(s);\n      reverse(begin(path), end(path));\n    }\n  }\n\
+    };\n\n// \u5F15\u6570 f \u306F (\u9802\u70B9 v, s-v \u9593\u306E\u8DDD\u96E2,\
+    \ \u95A2\u6570 g) \u3092\u5F15\u6570\u306B\u53D6\u308B\n// f \u306E\u5185\u90E8\
+    \u3067 g(\u6B21\u306E\u9802\u70B9 w, s-w \u9593\u306E\u8DDD\u96E2) \u3092\u547C\
+    \u3073\u51FA\u3057\u3066\u4F7F\u3046\n//\n// \u8FD4\u308A\u5024\u306F DijkstraResult<Index,\
+    \ Cost> \u3092\u8FD4\u3059\n//\n// goal \u306F lambda \u5F0F or \u5024 \u3092\u6E21\
+    \u305B\u308B, goal \u304C\u8907\u6570\u3042\u308B\u5834\u5408\u306B\u5BFE\u5FDC\
+    \u3057\u3066\u3044\u308B\n// (\u59CB\u70B9\u304C\u8907\u6570\u3042\u308B\u5834\
+    \u5408\u306F\u8D85\u9802\u70B9\u3092\u4F7F\u3046\u3053\u3068\u306B\u3059\u308B\
+    )\ntemplate <typename Index, typename Cost, bool has_goal = true>\nDijkstraResult<Index,\
+    \ Cost> dijkstra_abstruct(\n    const function<void(Index, Cost, function<void(Index,\
+    \ Cost)>)>& f,\n    const Index& start, const function<bool(Index)>& is_goal)\
+    \ {\n  using P = pair<Cost, Index>;\n\n  map<Index, P> d;\n  priority_queue<P,\
+    \ vector<P>, greater<P>> Q;\n  d[start] = P(0, Index{});\n  Q.emplace(0, start);\n\
+    \n  while (!Q.empty()) {\n    auto [u, t] = Q.top();\n    Q.pop();\n    if (d[t].first\
+    \ != u) continue;\n    if constexpr (has_goal) {\n      if (is_goal(t)) return\
+    \ {start, t, u, true, d};\n    }\n    auto add = [&](Index nt, Cost nu) {\n  \
+    \    if (d.count(nt) == 0 or nu < d[nt].first) {\n        d[nt] = P(nu, t);\n\
+    \        Q.emplace(nu, nt);\n      }\n    };\n    f(t, u, add);\n  }\n  return\
+    \ {start, Index{}, Cost{}, false, d};\n}\n\n// \u5F15\u6570 f \u306F (\u9802\u70B9\
+    \ v, s-v \u9593\u306E\u8DDD\u96E2, \u95A2\u6570 g) \u3092\u5F15\u6570\u306B\u53D6\
+    \u308B\n// f \u306E\u5185\u90E8\u3067 g(\u6B21\u306E\u9802\u70B9 w, s-w \u9593\
+    \u306E\u8DDD\u96E2) \u3092\u547C\u3073\u51FA\u3057\u3066\u4F7F\u3046\n//\n// \u8FD4\
+    \u308A\u5024\u306F DijkstraResult<Index, Cost> \u3092\u8FD4\u3059\n//\n// goal\
+    \ \u306F lambda \u5F0F or \u5024 \u3092\u6E21\u305B\u308B, goal \u304C\u8907\u6570\
+    \u3042\u308B\u5834\u5408\u306B\u5BFE\u5FDC\u3057\u3066\u3044\u308B\n// (\u59CB\
+    \u70B9\u304C\u8907\u6570\u3042\u308B\u5834\u5408\u306F\u8D85\u9802\u70B9\u3092\
+    \u4F7F\u3046\u3053\u3068\u306B\u3059\u308B)\ntemplate <typename Index, typename\
+    \ Cost, bool has_goal = true>\nDijkstraResult<Index, Cost> dijkstra_abstruct(\n\
     \    const function<void(Index, Cost, function<void(Index, Cost)>)>& f,\n    const\
-    \ Index& start, const Index& goal) {\n  using P = pair<Cost, Index>;\n\n  map<Index,\
-    \ P> d;\n  priority_queue<P, vector<P>, greater<P>> Q;\n  d[start] = P(0, Index{});\n\
-    \  Q.emplace(0, start);\n\n  while (!Q.empty()) {\n    auto [u, t] = Q.top();\n\
-    \    Q.pop();\n    if (d[t].first != u) continue;\n    if (has_goal && t == goal)\
-    \ return d;\n    auto add = [&](Index nt, Cost nu) {\n      if (d.count(nt) ==\
-    \ 0 or nu < d[nt].first) {\n        d[nt] = P(nu, t);\n        Q.emplace(nu, nt);\n\
-    \      }\n    };\n    f(t, u, add);\n  }\n  return d;\n}\n#line 8 \"verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid q() {\n  inl(N, M, S, T);\n  auto g = wgraph<ll>(N,\
-    \ M, true, false);\n\n  auto d = dijkstra_abstruct<int, ll>(\n      [&](int c,\
-    \ ll cd, auto add) { each(e, g[c]) add(e.to, cd + e.cost); }, S,\n      T);\n\
-    \  if (d.count(T) == 0) die(-1);\n  vi path;\n  for (int x = T; x != S; x = d[x].second)\
-    \ path.push_back(x);\n  path.push_back(S);\n  reverse(all(path));\n\n  out(d[T].first,\
-    \ sz(path) - 1);\n  rep(i, sz(path) - 1) out(path[i], path[i + 1]);\n}\n\nvoid\
-    \ Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+    \ Index& start, const Index& goal = Index{}) {\n  const function<bool(Index)>\
+    \ is_goal = [&goal](Index i) -> bool {\n    return i == goal;\n  };\n  return\
+    \ dijkstra_abstruct<Index, Cost, has_goal>(f, start, is_goal);\n}\n#line 8 \"\
+    verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp\"\n\
+    using namespace Nyaan;\n\nvoid q() {\n  inl(N, M, S, T);\n  auto g = wgraph<ll>(N,\
+    \ M, true, false);\n\n  auto res = dijkstra_abstruct<int, ll>(\n      [&](int\
+    \ c, ll cd, auto add) { each(e, g[c]) add(e.to, cd + e.cost); }, S,\n      T);\n\
+    \  if (!res.reachable) die(-1);\n  out(res.dist, sz(res.path) - 1);\n  rep(i,\
+    \ sz(res.path) - 1) out(res.path[i], res.path[i + 1]);\n}\n\nvoid Nyaan::solve()\
+    \ {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../graph/graph-utility.hpp\"\
     \n//\n#include \"../../shortest-path/dijkstra-abstruct.hpp\"\nusing namespace\
     \ Nyaan;\n\nvoid q() {\n  inl(N, M, S, T);\n  auto g = wgraph<ll>(N, M, true,\
-    \ false);\n\n  auto d = dijkstra_abstruct<int, ll>(\n      [&](int c, ll cd, auto\
-    \ add) { each(e, g[c]) add(e.to, cd + e.cost); }, S,\n      T);\n  if (d.count(T)\
-    \ == 0) die(-1);\n  vi path;\n  for (int x = T; x != S; x = d[x].second) path.push_back(x);\n\
-    \  path.push_back(S);\n  reverse(all(path));\n\n  out(d[T].first, sz(path) - 1);\n\
-    \  rep(i, sz(path) - 1) out(path[i], path[i + 1]);\n}\n\nvoid Nyaan::solve() {\n\
-    \  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+    \ false);\n\n  auto res = dijkstra_abstruct<int, ll>(\n      [&](int c, ll cd,\
+    \ auto add) { each(e, g[c]) add(e.to, cd + e.cost); }, S,\n      T);\n  if (!res.reachable)\
+    \ die(-1);\n  out(res.dist, sz(res.path) - 1);\n  rep(i, sz(res.path) - 1) out(res.path[i],\
+    \ res.path[i + 1]);\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n \
+    \ while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -303,7 +349,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
   requiredBy: []
-  timestamp: '2023-05-23 20:26:46+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp

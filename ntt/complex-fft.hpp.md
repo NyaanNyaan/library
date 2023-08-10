@@ -123,24 +123,28 @@ data:
     \n    vector<double> u(l);\n    for (int i = 0; i < l; i++) {\n      if (i & 1)\
     \ {\n        u[i] = -b[i >> 1].x / (4.0 * M);\n      } else {\n        u[i] =\
     \ b[i >> 1].y / (4.0 * M);\n      }\n    }\n    return u;\n  }\n\n  template <unsigned\
-    \ int MOD>\n  static vector<int> multiply_15bit(const vector<int>& a,\n      \
-    \                              const vector<int>& b) {\n    using u64 = unsigned\
-    \ long long;\n    constexpr u64 B = 32000;\n    int l = a.size() + b.size() -\
-    \ 1;\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n    setw(k);\n \
-    \   auto round = [](double x) -> u64 { return u64(x + 0.5); };\n\n    vector<C>\
+    \ int MOD = -1u>\n  static conditional_t<MOD == -1u, vector<__uint128_t>, vector<int>>\n\
+    \  multiply_15bit(const vector<int>& a, const vector<int>& b) {\n    using u64\
+    \ = unsigned long long;\n    constexpr u64 B = 32000;\n    int l = a.size() +\
+    \ b.size() - 1;\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n    setw(k);\n\
+    \    auto round = [](double x) -> u64 { return u64(x + 0.5); };\n\n    vector<C>\
     \ AL(M), AH(M), BL(M), BH(M);\n    for (int i = 0; i < (int)a.size(); i++) {\n\
     \      AL[i] = C{double(a[i] % B), double(a[i] / B)};\n    }\n    for (int i =\
     \ 0; i < (int)b.size(); i++) {\n      BL[i] = C{double(b[i] % B), double(b[i]\
     \ / B)};\n    }\n\n    fft_real(AL, AH, k);\n    fft_real(BL, BH, k);\n\n    for\
     \ (int i = 0; i < M; i++) {\n      C tmp = AL[i] * BL[i] + (AH[i] * BH[i]).rotl();\n\
     \      BH[i] = AL[i] * BH[i] + (AH[i] * BL[i]).rotl();\n      BL[i] = tmp;\n \
-    \   }\n\n    ifft(BL, k);\n    ifft(BH, k);\n\n    vector<int> u(l);\n    double\
-    \ im = 1.0 / (4.0 * M);\n    for (int i = 0; i < l; i++) {\n      BL[i].x *= im,\
-    \ BL[i].y *= im;\n      BH[i].x *= im, BH[i].y *= im;\n      int x1 = u64(round(BL[i].x))\
-    \ % MOD;\n      int x2 = u64(round(BH[i].x) + round(BH[i].y)) % MOD * B % MOD;\n\
-    \      int x3 = u64(round(BL[i].y)) % MOD * (B * B % MOD) % MOD;\n      if ((x1\
-    \ += x2) >= (int)MOD) x1 -= MOD;\n      if ((x1 += x3) >= (int)MOD) x1 -= MOD;\n\
-    \      u[i] = x1;\n    }\n    return u;\n  }\n};\nvector<C> CooleyTukey::w;\n\n\
+    \   }\n\n    ifft(BL, k);\n    ifft(BH, k);\n\n    using return_type =\n     \
+    \   conditional_t<MOD + 1u == 0u, vector<__uint128_t>, vector<int>>;\n\n    return_type\
+    \ u(l);\n    double im = 1.0 / (4.0 * M);\n    for (int i = 0; i < l; i++) {\n\
+    \      BL[i].x *= im, BL[i].y *= im;\n      BH[i].x *= im, BH[i].y *= im;\n  \
+    \    u64 s1 = round(BL[i].x);\n      u64 s2 = round(BH[i].x) + round(BH[i].y);\n\
+    \      u64 s3 = round(BL[i].y);\n\n      if constexpr (MOD == -1u) {\n       \
+    \ u[i] += __uint128_t(s1);\n        u[i] += __uint128_t(s2) * B;\n        u[i]\
+    \ += __uint128_t(s3) * B * B;\n      } else {\n        u[i] += s1 % MOD;\n   \
+    \     u[i] += s2 % MOD * B % MOD;\n        if (u[i] >= MOD) u[i] -= MOD;\n   \
+    \     u[i] += s3 % MOD * (B * B % MOD) % MOD;\n        if (u[i] >= MOD) u[i] -=\
+    \ MOD;\n      }\n    }\n    return u;\n  }\n};\nvector<C> CooleyTukey::w;\n\n\
     }  // namespace ArbitraryModConvolution\n"
   code: "#pragma once\n\nnamespace ArbitraryModConvolution {\n\ntemplate <typename\
     \ T>\nstruct Cp {\n  T x, y;\n  constexpr Cp() : x(0), y(0) {}\n  constexpr Cp(T\
@@ -247,30 +251,34 @@ data:
     \ k - 1);\n\n    vector<double> u(l);\n    for (int i = 0; i < l; i++) {\n   \
     \   if (i & 1) {\n        u[i] = -b[i >> 1].x / (4.0 * M);\n      } else {\n \
     \       u[i] = b[i >> 1].y / (4.0 * M);\n      }\n    }\n    return u;\n  }\n\n\
-    \  template <unsigned int MOD>\n  static vector<int> multiply_15bit(const vector<int>&\
-    \ a,\n                                    const vector<int>& b) {\n    using u64\
-    \ = unsigned long long;\n    constexpr u64 B = 32000;\n    int l = a.size() +\
-    \ b.size() - 1;\n    int k = 2, M = 4;\n    while (M < l) M <<= 1, ++k;\n    setw(k);\n\
-    \    auto round = [](double x) -> u64 { return u64(x + 0.5); };\n\n    vector<C>\
-    \ AL(M), AH(M), BL(M), BH(M);\n    for (int i = 0; i < (int)a.size(); i++) {\n\
-    \      AL[i] = C{double(a[i] % B), double(a[i] / B)};\n    }\n    for (int i =\
-    \ 0; i < (int)b.size(); i++) {\n      BL[i] = C{double(b[i] % B), double(b[i]\
+    \  template <unsigned int MOD = -1u>\n  static conditional_t<MOD == -1u, vector<__uint128_t>,\
+    \ vector<int>>\n  multiply_15bit(const vector<int>& a, const vector<int>& b) {\n\
+    \    using u64 = unsigned long long;\n    constexpr u64 B = 32000;\n    int l\
+    \ = a.size() + b.size() - 1;\n    int k = 2, M = 4;\n    while (M < l) M <<= 1,\
+    \ ++k;\n    setw(k);\n    auto round = [](double x) -> u64 { return u64(x + 0.5);\
+    \ };\n\n    vector<C> AL(M), AH(M), BL(M), BH(M);\n    for (int i = 0; i < (int)a.size();\
+    \ i++) {\n      AL[i] = C{double(a[i] % B), double(a[i] / B)};\n    }\n    for\
+    \ (int i = 0; i < (int)b.size(); i++) {\n      BL[i] = C{double(b[i] % B), double(b[i]\
     \ / B)};\n    }\n\n    fft_real(AL, AH, k);\n    fft_real(BL, BH, k);\n\n    for\
     \ (int i = 0; i < M; i++) {\n      C tmp = AL[i] * BL[i] + (AH[i] * BH[i]).rotl();\n\
     \      BH[i] = AL[i] * BH[i] + (AH[i] * BL[i]).rotl();\n      BL[i] = tmp;\n \
-    \   }\n\n    ifft(BL, k);\n    ifft(BH, k);\n\n    vector<int> u(l);\n    double\
-    \ im = 1.0 / (4.0 * M);\n    for (int i = 0; i < l; i++) {\n      BL[i].x *= im,\
-    \ BL[i].y *= im;\n      BH[i].x *= im, BH[i].y *= im;\n      int x1 = u64(round(BL[i].x))\
-    \ % MOD;\n      int x2 = u64(round(BH[i].x) + round(BH[i].y)) % MOD * B % MOD;\n\
-    \      int x3 = u64(round(BL[i].y)) % MOD * (B * B % MOD) % MOD;\n      if ((x1\
-    \ += x2) >= (int)MOD) x1 -= MOD;\n      if ((x1 += x3) >= (int)MOD) x1 -= MOD;\n\
-    \      u[i] = x1;\n    }\n    return u;\n  }\n};\nvector<C> CooleyTukey::w;\n\n\
+    \   }\n\n    ifft(BL, k);\n    ifft(BH, k);\n\n    using return_type =\n     \
+    \   conditional_t<MOD + 1u == 0u, vector<__uint128_t>, vector<int>>;\n\n    return_type\
+    \ u(l);\n    double im = 1.0 / (4.0 * M);\n    for (int i = 0; i < l; i++) {\n\
+    \      BL[i].x *= im, BL[i].y *= im;\n      BH[i].x *= im, BH[i].y *= im;\n  \
+    \    u64 s1 = round(BL[i].x);\n      u64 s2 = round(BH[i].x) + round(BH[i].y);\n\
+    \      u64 s3 = round(BL[i].y);\n\n      if constexpr (MOD == -1u) {\n       \
+    \ u[i] += __uint128_t(s1);\n        u[i] += __uint128_t(s2) * B;\n        u[i]\
+    \ += __uint128_t(s3) * B * B;\n      } else {\n        u[i] += s1 % MOD;\n   \
+    \     u[i] += s2 % MOD * B % MOD;\n        if (u[i] >= MOD) u[i] -= MOD;\n   \
+    \     u[i] += s3 % MOD * (B * B % MOD) % MOD;\n        if (u[i] >= MOD) u[i] -=\
+    \ MOD;\n      }\n    }\n    return u;\n  }\n};\nvector<C> CooleyTukey::w;\n\n\
     }  // namespace ArbitraryModConvolution\n"
   dependsOn: []
   isVerificationFile: false
   path: ntt/complex-fft.hpp
   requiredBy: []
-  timestamp: '2021-06-10 13:30:55+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp

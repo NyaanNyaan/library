@@ -11,12 +11,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: misc/all.hpp
     title: misc/all.hpp
-  - icon: ':heavy_check_mark:'
-    path: trial/fast-gcd.hpp
-    title: "\u9AD8\u901FGCD"
-  - icon: ':heavy_check_mark:'
-    path: trial/fast-inv.hpp
-    title: "\u9AD8\u901Fmodulo\u9006\u5143"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
@@ -34,8 +28,8 @@ data:
     path: verify/verify-unit-test/fast-bs.test.cpp
     title: verify/verify-unit-test/fast-bs.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/fast-inv-gcd.test.cpp
-    title: verify/verify-unit-test/fast-inv-gcd.test.cpp
+    path: verify/verify-unit-test/fast-inv.test.cpp
+    title: verify/verify-unit-test/fast-inv.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
@@ -68,43 +62,42 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"misc/timer.hpp\"\n\n#include <chrono>\n\nstruct Timer {\n\
-    \  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n\n\
-    \  void reset() { st = chrono::high_resolution_clock::now(); }\n\n  chrono::milliseconds::rep\
-    \ elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n    return\
-    \ chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n};\n"
-  code: "#pragma once\n\n#include <chrono>\n\nstruct Timer {\n  chrono::high_resolution_clock::time_point\
-    \ st;\n\n  Timer() { reset(); }\n\n  void reset() { st = chrono::high_resolution_clock::now();\
-    \ }\n\n  chrono::milliseconds::rep elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
+  bundledCode: "#line 2 \"misc/timer.hpp\"\n\n#include <chrono>\nusing namespace std;\n\
+    \nstruct Timer {\n  chrono::high_resolution_clock::time_point st;\n\n  Timer()\
+    \ { reset(); }\n  void reset() { st = chrono::high_resolution_clock::now(); }\n\
+    \n  long long elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    };"
+    \  long long operator()() { return elapsed(); }\n};\n"
+  code: "#pragma once\n\n#include <chrono>\nusing namespace std;\n\nstruct Timer {\n\
+    \  chrono::high_resolution_clock::time_point st;\n\n  Timer() { reset(); }\n \
+    \ void reset() { st = chrono::high_resolution_clock::now(); }\n\n  long long elapsed()\
+    \ {\n    auto ed = chrono::high_resolution_clock::now();\n    return chrono::duration_cast<chrono::milliseconds>(ed\
+    \ - st).count();\n  }\n  long long operator()() { return elapsed(); }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: misc/timer.hpp
   requiredBy:
-  - misc/all.hpp
-  - trial/fast-gcd.hpp
-  - trial/fast-inv.hpp
-  - marathon/sa-manager.hpp
   - marathon/simulated-annealing.hpp
-  timestamp: '2021-11-14 23:34:55+09:00'
+  - marathon/sa-manager.hpp
+  - misc/all.hpp
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0952.test.cpp
-  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
-  - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/simulated-annealing.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/strassen.test.cpp
-  - verify/verify-unit-test/sa-manager.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
-  - verify/verify-unit-test/fast-inv-gcd.test.cpp
+  - verify/verify-unit-test/strassen.test.cpp
+  - verify/verify-unit-test/fast-inv.test.cpp
+  - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
   - verify/verify-unit-test/fast-bs.test.cpp
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
+  - verify/verify-unit-test/sa-manager.test.cpp
 documentation_of: misc/timer.hpp
 layout: document
 redirect_from:

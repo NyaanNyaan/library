@@ -72,19 +72,19 @@ data:
   path: modint/barrett-reduction.hpp
   requiredBy:
   - ntt/multivariate-circular-convolution.hpp
-  - modint/arbitrary-modint.hpp
   - modulo/arbitrary-mod-binomial.hpp
+  - modint/arbitrary-modint.hpp
   timestamp: '2022-02-08 14:09:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
+  - verify/verify-unit-test/barrett-reduction.test.cpp
+  - verify/verify-unit-test/arbitrary-modint.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
-  - verify/verify-unit-test/arbitrary-modint.test.cpp
-  - verify/verify-unit-test/barrett-reduction.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
 documentation_of: modint/barrett-reduction.hpp
 layout: document
 redirect_from:

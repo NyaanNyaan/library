@@ -13,6 +13,9 @@ data:
     title: Rader's FFT Algorithm
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fast-inv.test.cpp
+    title: verify/verify-unit-test/fast-inv.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -52,14 +55,15 @@ data:
   path: math/primitive-root.hpp
   requiredBy:
   - ntt/multivariate-circular-convolution.hpp
-  - ntt/rader-ntt.hpp
   - ntt/cooley-tukey-ntt.hpp
+  - ntt/rader-ntt.hpp
   timestamp: '2021-02-27 00:51:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-yuki/yuki-1783.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - verify/verify-unit-test/fast-inv.test.cpp
 documentation_of: math/primitive-root.hpp
 layout: document
 redirect_from:

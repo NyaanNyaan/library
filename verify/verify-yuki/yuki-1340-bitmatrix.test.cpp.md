@@ -2,14 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: internal/internal-type-traits.hpp
-    title: internal/internal-type-traits.hpp
-  - icon: ':heavy_check_mark:'
-    path: matrix/bitmatrix.hpp
-    title: matrix/bitmatrix.hpp
-  - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
+    path: matrix/f2_matrix.hpp
+    title: matrix/f2_matrix.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -58,7 +52,8 @@ data:
     \ u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
     \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
     \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -94,7 +89,7 @@ data:
     };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
     \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
     \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
-    \ N,F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
+    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
     \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
     \ &v) {\n  int max_val = *max_element(begin(v), end(v));\n  vector<int> inv(max_val\
     \ + 1, -1);\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return\
@@ -102,57 +97,69 @@ data:
     \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nT mkrev(const T &v)\
     \ {\n  T w{v};\n  reverse(begin(w), end(w));\n  return w;\n}\n\ntemplate <typename\
     \ T>\nbool nxp(vector<T> &v) {\n  return next_permutation(begin(v), end(v));\n\
-    }\n\ntemplate <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\
-    \n}  // namespace Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n\
-    #line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"popcnt\"\
-    ))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline\
-    \ int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const\
-    \ u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const u64 &a)\
-    \ { return a ? 63 - __builtin_clzll(a) : -1; }\ntemplate <typename T>\ninline\
-    \ int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename\
-    \ T>\ninline void sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1)\
-    \ << i;\n}\nconstexpr long long PW(int n) { return 1LL << n; }\nconstexpr long\
-    \ long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n#line 61\
-    \ \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\nnamespace\
-    \ Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
-    \ const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return os;\n\
-    }\ntemplate <typename T, typename U>\nistream &operator>>(istream &is, pair<T,\
-    \ U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
-    \ __int128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  int flag = 0;\n  for\
-    \ (auto &c : S) {\n    if (c == '-') {\n      flag = true;\n      continue;\n\
-    \    }\n    x *= 10;\n    x += c - '0';\n  }\n  if (flag) x = -x;\n  return is;\n\
-    }\n\nistream &operator>>(istream &is, __uint128_t &x) {\n  string S;\n  is >>\
-    \ S;\n  x = 0;\n  for (auto &c : S) {\n    x *= 10;\n    x += c - '0';\n  }\n\
-    \  return is;\n}\n\nostream &operator<<(ostream &os, __int128_t x) {\n  if (x\
-    \ == 0) return os << 0;\n  if (x < 0) os << '-', x = -x;\n  string S;\n  while\
-    \ (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return\
-    \ os << S;\n}\nostream &operator<<(ostream &os, __uint128_t x) {\n  if (x == 0)\
-    \ return os << 0;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n\
-    \  reverse(begin(S), end(S));\n  return os << S;\n}\n\nvoid in() {}\ntemplate\
-    \ <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin >> t;\n  in(u...);\n\
-    }\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class... U, char sep\
-    \ = ' '>\nvoid out(const T &t, const U &...u) {\n  cout << t;\n  if (sizeof...(u))\
-    \ cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n   \
-    \ cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n\
-    \    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\n}  // namespace\
-    \ Nyaan\n#line 64 \"template/template.hpp\"\n\n// debug\n#line 1 \"template/debug.hpp\"\
-    \nnamespace DebugImpl {\n\ntemplate <typename U, typename = void>\nstruct is_specialize\
-    \ : false_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
-    \ conditional<false, typename U::iterator, void>::type>\n    : true_type {};\n\
-    template <typename U>\nstruct is_specialize<\n    U, typename conditional<false,\
-    \ decltype(U::first), void>::type>\n    : true_type {};\ntemplate <typename U>\n\
-    struct is_specialize<U, enable_if_t<is_integral<U>::value, void>> : true_type\
-    \ {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const string&\
-    \ t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t ? \"true\" : \"false\"\
-    ); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr << 0;\n  if (t < 0) cerr\
-    \ << '-', t = -t;\n  string S;\n  while (t) S.push_back('0' + t % 10), t /= 10;\n\
-    \  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t t) {\n\
-    \  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t % 10),\
-    \ t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
+    }\n\n// \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\
+    \n// i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
+    \ product(const vector<T> &a) {\n  vector<vector<T>> ret;\n  vector<T> v;\n  auto\
+    \ dfs = [&](auto rc, int i) -> void {\n    if (i == (int)a.size()) {\n      ret.push_back(v);\n\
+    \      return;\n    }\n    for (int j = 0; j < a[i]; j++) v.push_back(j), rc(rc,\
+    \ i + 1), v.pop_back();\n  };\n  dfs(dfs, 0);\n  return ret;\n}\n\n// F : function(void(T&)),\
+    \ mod \u3092\u53D6\u308B\u64CD\u4F5C\n// T : \u6574\u6570\u578B\u306E\u3068\u304D\
+    \u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\u308B\
+    \ntemplate <typename T>\nT Power(T a, long long n, const T &I, const function<void(T\
+    \ &)> &f) {\n  T res = I;\n  for (; n; f(a = a * a), n >>= 1) {\n    if (n & 1)\
+    \ f(res = res * a);\n  }\n  return res;\n}\n// T : \u6574\u6570\u578B\u306E\u3068\
+    \u304D\u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\
+    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I) {\n  return\
+    \ Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\n}  // namespace\
+    \ Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \nnamespace Nyaan {\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline int lsb(const u64 &a) { return\
+    \ a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const u64 &a) { return a ? __builtin_ctzll(a)\
+    \ : 64; }\ninline int msb(const u64 &a) { return a ? 63 - __builtin_clzll(a) :\
+    \ -1; }\ntemplate <typename T>\ninline int gbit(const T &a, int i) {\n  return\
+    \ (a >> i) & 1;\n}\ntemplate <typename T>\ninline void sbit(T &a, int i, bool\
+    \ b) {\n  if (gbit(a, i) != b) a ^= T(1) << i;\n}\nconstexpr long long PW(int\
+    \ n) { return 1LL << n; }\nconstexpr long long MSK(int n) { return (1LL << n)\
+    \ - 1; }\n}  // namespace Nyaan\n#line 61 \"template/template.hpp\"\n\n// inout\n\
+    #line 1 \"template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename\
+    \ U>\nostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first\
+    \ << \" \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\n\
+    istream &operator>>(istream &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n\
+    \  return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, const\
+    \ vector<T> &v) {\n  int s = (int)v.size();\n  for (int i = 0; i < s; i++) os\
+    \ << (i ? \" \" : \"\") << v[i];\n  return os;\n}\ntemplate <typename T>\nistream\
+    \ &operator>>(istream &is, vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return\
+    \ is;\n}\n\nistream &operator>>(istream &is, __int128_t &x) {\n  string S;\n \
+    \ is >> S;\n  x = 0;\n  int flag = 0;\n  for (auto &c : S) {\n    if (c == '-')\
+    \ {\n      flag = true;\n      continue;\n    }\n    x *= 10;\n    x += c - '0';\n\
+    \  }\n  if (flag) x = -x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
+    \ __uint128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  for (auto &c : S) {\n\
+    \    x *= 10;\n    x += c - '0';\n  }\n  return is;\n}\n\nostream &operator<<(ostream\
+    \ &os, __int128_t x) {\n  if (x == 0) return os << 0;\n  if (x < 0) os << '-',\
+    \ x = -x;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S),\
+    \ end(S));\n  return os << S;\n}\nostream &operator<<(ostream &os, __uint128_t\
+    \ x) {\n  if (x == 0) return os << 0;\n  string S;\n  while (x) S.push_back('0'\
+    \ + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return os << S;\n}\n\n\
+    void in() {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin\
+    \ >> t;\n  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename\
+    \ T, class... U, char sep = ' '>\nvoid out(const T &t, const U &...u) {\n  cout\
+    \ << t;\n  if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya\
+    \ {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
+    \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
+    \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\
+    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
+    \ <typename U, typename = void>\nstruct is_specialize : false_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<\n    U, typename conditional<false, typename\
+    \ U::iterator, void>::type>\n    : true_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, decltype(U::first), void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value,\
+    \ void>> : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid\
+    \ dump(const string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t\
+    \ ? \"true\" : \"false\"); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr\
+    \ << 0;\n  if (t < 0) cerr << '-', t = -t;\n  string S;\n  while (t) S.push_back('0'\
+    \ + t % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t\
+    \ t) {\n  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t\
+    \ % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
     \ U,\n          enable_if_t<!is_specialize<U>::value, nullptr_t> = nullptr>\n\
     void dump(const U& t) {\n  cerr << t;\n}\n\ntemplate <typename T>\nvoid dump(const\
     \ T& t, enable_if_t<is_integral<T>::value>* = nullptr) {\n  string res;\n  if\
@@ -201,105 +208,59 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-yuki/yuki-1340-bitmatrix.test.cpp\"\n//\nusing namespace Nyaan;\n\
-    \n#line 2 \"matrix/bitmatrix.hpp\"\n\ntemplate <size_t MAX_H, size_t MAX_W>\n\
-    struct BitMatrix {\n  int H, W;\n  bitset<MAX_W> A[MAX_H];\n  BitMatrix() : H(MAX_H),\
-    \ W(MAX_W) {}\n  BitMatrix(int h, int w) : H(h), W(w) {}\n  inline bitset<MAX_W>\
-    \ &operator[](int i) { return A[i]; }\n  inline const bitset<MAX_W> &operator[](int\
-    \ i) const { return A[i]; }\n  int height() { return H; }\n  int size() { return\
-    \ H; }\n  int width() { return W; }\n\n  static BitMatrix I(int n) {\n    BitMatrix\
-    \ mat(n, n);\n    for (int i = 0; i < n; i++) mat[i][i] = true;\n    return (mat);\n\
-    \  }\n\n  BitMatrix &operator*=(const BitMatrix &B) {\n    BitMatrix C(H, B.W);\n\
+    \n#line 2 \"matrix/f2_matrix.hpp\"\n\n#line 5 \"matrix/f2_matrix.hpp\"\nusing\
+    \ namespace std;\n\nnamespace std {\ntemplate <size_t N>\nbool operator<(const\
+    \ bitset<N> &a, const bitset<N> &b) {\n  int f = (a ^ b)._Find_first();\n  return\
+    \ f == N ? false : a[f];\n}\n}  // namespace std\n\ntemplate <size_t H_MAX, size_t\
+    \ W_MAX>\nstruct F2_Matrix {\n  using Mat = F2_Matrix;\n\n  int H, W;\n  array<bitset<W_MAX>,\
+    \ H_MAX> A;\n  F2_Matrix(int h = H_MAX, int w = W_MAX) : H(h), W(w) {\n    assert(0\
+    \ <= h and h <= (int)H_MAX);\n    assert(0 <= w and w <= (int)W_MAX);\n    for\
+    \ (int i = 0; i < (int)H_MAX; i++) A[i].reset();\n  }\n  inline bitset<W_MAX>\
+    \ &operator[](int i) { return A[i]; }\n  inline const bitset<W_MAX> &operator[](int\
+    \ i) const { return A[i]; }\n\n  static Mat I(int n) {\n    Mat a(n, n);\n   \
+    \ for (int i = 0; i < n; i++) a[i][i] = true;\n    return a;\n  }\n\n  // (AND,\
+    \ XOR) \u534A\u74B0\n  // (AND, OR) \u534A\u74B0\u306B\u306F operator/ \u3092\u5272\
+    \u308A\u5F53\u3066\u305F\n  Mat &operator*=(const Mat &B) {\n    Mat C(H, B.W);\n\
     \    for (int i = 0; i < H; i++) {\n      for (int j = 0; j < W; j++) {\n    \
-    \    if (A[i][j]) C[i] |= B[j];\n      }\n    }\n    swap(A, C.A);\n    return\
-    \ *this;\n  }\n  BitMatrix &operator^=(long long k) {\n    BitMatrix B = BitMatrix::I(height());\n\
-    \    while (k) {\n      if (k & 1) B *= *this;\n      *this *= *this;\n      k\
-    \ >>= 1;\n    }\n    swap(A, B.A);\n    return (*this);\n  }\n\n  BitMatrix operator*(BitMatrix\
-    \ &B) const { return BitMatrix(*this) *= B; }\n  BitMatrix operator^(const long\
-    \ long k) const { return BitMatrix(*this) ^= k; }\n};\n#line 2 \"misc/fastio.hpp\"\
-    \n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
-    \n\n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
-    \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
-    \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
-    \                   is_same_v<T, __uint128_t>,\n                           true_type,\
-    \ false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed =\n   \
-    \ typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n       \
-    \                    true_type, false_type>::type;\n\ntemplate <typename T>\n\
-    using is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T> || is_same_v<T,\
-    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
-    #define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
-    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
-    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ],\
-    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
-    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
-    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
-    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
-    \ pre;\n\nvoid load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf\
-    \ + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
-    \  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left + offset > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\nvoid single_read(char&\
-    \ c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n\
-    }\nvoid single_read(string& S) {\n  skip_space();\n  while (true) {\n    if (in_left\
-    \ == in_right) load();\n    int i = in_left;\n    for (; i != in_right; i++) {\n\
-    \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
-    \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
-    template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\nvoid single_read(T& x) {\n  if (in_left + offset > in_right) load();\n\
-    \  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool minus\
-    \ = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (c ==\
-    \ '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >= '0')\
-    \ {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\nvoid rd()\
-    \ {}\ntemplate <typename Head, typename... Tail>\nvoid rd(Head& head, Tail&...\
-    \ tail) {\n  single_read(head);\n  rd(tail...);\n}\n\nvoid single_write(const\
-    \ char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++] =\
-    \ c;\n}\nvoid single_write(const bool& b) {\n  if (out_right > SZ - offset) flush();\n\
-    \  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const string& S)\
-    \ {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right == SZ) flush();\n\
-    \    int len = min((int)S.size() - i, SZ - out_right);\n    memcpy(outbuf + out_right,\
-    \ S.data() + i, sizeof(char) * len);\n    i += len, out_right += len;\n  }\n}\n\
-    void single_write(const char* p) {\n  int i = 0, N = strlen(p);\n  while (i !=\
-    \ N) {\n    if (out_right == SZ) flush();\n    int len = min(N - i, SZ - out_right);\n\
-    \    memcpy(outbuf + out_right, p + i, sizeof(char) * len);\n    i += len, out_right\
-    \ += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\nvoid single_write(const T& _x) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n  }\n\
-    \  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (x <\
-    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size = sizeof(T)\
-    \ * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while (x >= 10000)\
-    \ {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /=\
-    \ 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] =\
-    \ '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
-    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
-    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
-    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
-    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
-    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
-    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
-    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 9 \"verify/verify-yuki/yuki-1340-bitmatrix.test.cpp\"\
-    \n\nusing M = BitMatrix<100, 100>;\nvoid Nyaan::solve() {\n  ll n, m, t;\n  rd(n,\
-    \ m, t);\n  M mat;\n  rep(i, m) {\n    int a, b;\n    rd(a, b);\n    mat[a][b]\
-    \ = 1;\n  }\n  mat ^= t;\n  int ans = 0;\n  rep(i, n) if (mat[0][i] != 0) ans++;\n\
-    \  wtn(ans);\n}\n"
+    \    if (A[i][j]) C[i] ^= B[j];\n      }\n    }\n    swap(A, C.A);\n    return\
+    \ *this;\n  }\n  Mat operator*(const Mat &B) const { return Mat(*this) *= B; }\n\
+    \n  // (AND, OR) \u534A\u74B0\n  friend Mat and_or_product(const Mat &A, const\
+    \ Mat &B) {\n    Mat C(A.H, B.W);\n    for (int i = 0; i < A.H; i++) {\n     \
+    \ for (int j = 0; j < A.W; j++) {\n        if (A[i][j]) C[i] |= B[j];\n      }\n\
+    \    }\n    return C;\n  }\n\n  // [0, wr) \u306E\u7BC4\u56F2\u3067\u6383\u304D\
+    \u51FA\u3057, rank \u3092\u8FD4\u3059\n  int sweep(int wr = -1) {\n    if (wr\
+    \ == -1) wr = W;\n    int t = 0;\n    for (int u = 0; u < wr; u++) {\n      int\
+    \ piv = -1;\n      for (int i = t; i < H; i++) {\n        if (A[i][u]) {\n   \
+    \       piv = i;\n          break;\n        }\n      }\n      if (piv == -1) continue;\n\
+    \      if (piv != t) swap(A[piv], A[t]);\n      for (int i = 0; i < H; i++) {\n\
+    \        if (i != t && A[i][u]) A[i] ^= A[t];\n      }\n      t++;\n    }\n  \
+    \  return t;\n  }\n\n  Mat inverse() const {\n    assert(H == W);\n    int N =\
+    \ H;\n    F2_Matrix<H_MAX, W_MAX * 2> c(H, W * 2);\n    for (int i = 0; i < N;\
+    \ i++) {\n      c[i][i + N] = 1;\n      for (int j = 0; j < N; j++) {\n      \
+    \  c[i][j] = A[i][j];\n      }\n    }\n    int r = c.sweep();\n    assert(r ==\
+    \ N);\n    Mat b(H, W);\n    for (int i = 0; i < N; i++) {\n      for (int j =\
+    \ 0; j < N; j++) {\n        b[i][j] = c[i][j + N];\n      }\n    }\n    return\
+    \ b;\n  }\n\n  bool operator<(const Mat &rhs) const {\n    if (H != rhs.H) return\
+    \ H < rhs.H;\n    if (W != rhs.W) return W < rhs.W;\n    return A < rhs.A;\n \
+    \ }\n  bool operator==(const Mat &rhs) const {\n    return H == rhs.H and W ==\
+    \ rhs.W and A == rhs.A;\n  }\n\n  friend ostream &operator<<(ostream &os, const\
+    \ Mat &b) {\n    for (int i = 0; i < b.H; i++) {\n      os << \"[ \";\n      for\
+    \ (int j = 0; j < b.W; j++) {\n        os << b[i][j] << \", \";\n      }\n   \
+    \   os << \"],\\n\";\n    }\n    return os;\n  }\n};\n#line 8 \"verify/verify-yuki/yuki-1340-bitmatrix.test.cpp\"\
+    \n\nusing M = F2_Matrix<100, 128>;\n\nvoid Nyaan::solve() {\n  ll n, m, t;\n \
+    \ in(n, m, t);\n  M mat(n, n);\n  rep(i, m) {\n    int a, b;\n    in(a, b);\n\
+    \    mat[a][b] = 1;\n  }\n\n  M a = M::I(n);\n  {\n    while (t) {\n      if (t\
+    \ & 1) a = and_or_product(a, mat);\n      mat = and_or_product(mat, mat);\n  \
+    \    t >>= 1;\n    }\n  }\n  int ans = 0;\n  rep(i, n) if (a[0][i] != 0) ans++;\n\
+    \  out(ans);\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1340\"\n//\n#include \"\
-    ../../template/template.hpp\"\n//\nusing namespace Nyaan;\n\n#include \"../../matrix/bitmatrix.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n\nusing M = BitMatrix<100, 100>;\nvoid Nyaan::solve()\
-    \ {\n  ll n, m, t;\n  rd(n, m, t);\n  M mat;\n  rep(i, m) {\n    int a, b;\n \
-    \   rd(a, b);\n    mat[a][b] = 1;\n  }\n  mat ^= t;\n  int ans = 0;\n  rep(i,\
-    \ n) if (mat[0][i] != 0) ans++;\n  wtn(ans);\n}\n"
+    ../../template/template.hpp\"\n//\nusing namespace Nyaan;\n\n#include \"../../matrix/f2_matrix.hpp\"\
+    \n\nusing M = F2_Matrix<100, 128>;\n\nvoid Nyaan::solve() {\n  ll n, m, t;\n \
+    \ in(n, m, t);\n  M mat(n, n);\n  rep(i, m) {\n    int a, b;\n    in(a, b);\n\
+    \    mat[a][b] = 1;\n  }\n\n  M a = M::I(n);\n  {\n    while (t) {\n      if (t\
+    \ & 1) a = and_or_product(a, mat);\n      mat = and_or_product(mat, mat);\n  \
+    \    t >>= 1;\n    }\n  }\n  int ans = 0;\n  rep(i, n) if (a[0][i] != 0) ans++;\n\
+    \  out(ans);\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -307,13 +268,11 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - matrix/bitmatrix.hpp
-  - misc/fastio.hpp
-  - internal/internal-type-traits.hpp
+  - matrix/f2_matrix.hpp
   isVerificationFile: true
   path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   requiredBy: []
-  timestamp: '2023-05-29 20:16:02+09:00'
+  timestamp: '2023-08-11 05:05:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp

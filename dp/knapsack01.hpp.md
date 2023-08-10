@@ -81,8 +81,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
-  - verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
   - verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
+  - verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
 documentation_of: dp/knapsack01.hpp
 layout: document
 redirect_from:

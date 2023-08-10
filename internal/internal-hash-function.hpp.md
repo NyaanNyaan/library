@@ -37,11 +37,12 @@ data:
     \ 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210 (\u624B\
     \u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\u51FA\
     \u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\u304F\
-    \u308B\u306E\u3067\u6CE8\u610F\nunsigned long long seed() {\n#if defined(NyaanLocal)\
-    \ && !defined(NON_DETERMINISTIC_SEED)\n  return deterministic_seed();\n#else\n\
-    \  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n#line\
-    \ 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\nusing namespace\
-    \ std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\u30B7\
+    \u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long long\
+    \ seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return deterministic_seed();\n\
+    #else\n  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n\
+    #line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\nusing\
+    \ namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
     \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
     \                               is_same_v<T, __uint128_t>,\n                 \
     \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
@@ -104,12 +105,12 @@ data:
   path: internal/internal-hash-function.hpp
   requiredBy:
   - hashmap/hashmap-unerasable.hpp
-  timestamp: '2023-05-21 20:49:42+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   - verify/verify-aoj-other/aoj-1377.test.cpp
+  - verify/verify-unit-test/internal-type-traits.test.cpp
 documentation_of: internal/internal-hash-function.hpp
 layout: document
 redirect_from:

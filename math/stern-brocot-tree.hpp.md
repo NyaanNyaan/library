@@ -1,17 +1,17 @@
 ---
 data:
-  _extendedDependsOn:
+  _extendedDependsOn: []
+  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: internal/internal-type-traits.hpp
-    title: internal/internal-type-traits.hpp
-  - icon: ':heavy_check_mark:'
-    path: math-fast/gcd.hpp
-    title: binary GCD
-  - icon: ':heavy_check_mark:'
-    path: math/rational.hpp
-    title: math/rational.hpp
-  _extendedRequiredBy: []
+    path: math/stern-brocot-tree-binary-search.hpp
+    title: math/stern-brocot-tree-binary-search.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+    title: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-2262.test.cpp
+    title: verify/verify-yuki/yuki-2262.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-2266.test.cpp
     title: verify/verify-yuki/yuki-2266.test.cpp
@@ -19,163 +19,129 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: Stern-Brocot Tree
     links: []
-  bundledCode: "#line 2 \"math/stern-brocot-tree.hpp\"\n\n#line 2 \"math/rational.hpp\"\
-    \n\n#include <cassert>\n#include <numeric>\n#include <vector>\nusing namespace\
-    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\n\
-    using namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
-    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
-    \                               is_same_v<T, __uint128_t>,\n                 \
-    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
-    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
-    \                           true_type, false_type>::type;\n\ntemplate <typename\
-    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
-    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
-    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
-    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
-    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 2 \"math-fast/gcd.hpp\"\n\n#include <algorithm>\n\
-    using namespace std;\n\nnamespace BinaryGCDImpl {\nusing u64 = unsigned long long;\n\
-    using i8 = char;\n\nu64 binary_gcd(u64 a, u64 b) {\n  if (a == 0 || b == 0) return\
-    \ a + b;\n  i8 n = __builtin_ctzll(a);\n  i8 m = __builtin_ctzll(b);\n  a >>=\
-    \ n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u64 d = a - b;\n \
-    \   i8 s = __builtin_ctzll(d);\n    bool f = a > b;\n    b = f ? b : a;\n    a\
-    \ = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n\nusing u128 = __uint128_t;\n\
-    // a > 0\nint ctz128(u128 a) {\n  u64 lo = a & u64(-1);\n  return lo ? __builtin_ctzll(lo)\
-    \ : 64 + __builtin_ctzll(a >> 64);\n}\nu128 binary_gcd128(u128 a, u128 b) {\n\
-    \  if (a == 0 || b == 0) return a + b;\n  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n\
-    \  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u128 d = a\
-    \ - b;\n    i8 s = ctz128(d);\n    bool f = a > b;\n    b = f ? b : a;\n    a\
-    \ = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n\n}  // namespace BinaryGCDImpl\n\
-    \nlong long binary_gcd(long long a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a),\
-    \ abs(b));\n}\n__int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a\
-    \ < 0) a = -a;\n  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a,\
-    \ b);\n}\n\n/**\n * @brief binary GCD\n */\n#line 10 \"math/rational.hpp\"\n\n\
-    // T : \u5024, U : \u6BD4\u8F03\u7528\ntemplate <typename T, typename U>\nstruct\
-    \ RationalBase {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
-    \ : x(0), y(1) {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
-    \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
-    \ T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y != 0);\n    if (y == -1)\
-    \ x = -x, y = -y;\n    if (y != 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>)\
-    \ {\n        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x,\
-    \ y);\n        } else {\n          g = binary_gcd(x, y);\n        }\n      } else\
-    \ {\n        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n    \
-    \  if (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\
-    \u8A8D\u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y\
-    \ = _y;\n    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n\
-    \    if (l.y == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y *\
-    \ r.x, l.y * r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if\
-    \ (l.y == r.y) return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x,\
-    \ l.y * r.y};\n  }\n  friend R operator*(const R& l, const R& r) { return R{l.x\
-    \ * r.x, l.y * r.y}; }\n  friend R operator/(const R& l, const R& r) { return\
-    \ R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this)\
-    \ + r; }\n  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R&\
-    \ operator*=(const R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const\
-    \ R& r) { return (*this) = (*this) / r; }\n  R operator-() const { return raw(-x,\
-    \ y); }\n  R inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n  \
-    \  if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long\
-    \ p) const {\n    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res\
-    \ *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n\
-    \  friend bool operator==(const R& l, const R& r) {\n    return l.x == r.x &&\
-    \ l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n    return\
-    \ l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R&\
-    \ r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const\
-    \ R& l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const\
-    \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
-    \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
-    \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
-    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  T to_mint(T\
-    \ mod) const {\n    assert(mod != 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n\
-    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u\
-    \ -= t * v, v);\n    }\n    return U((u % mod + mod) % mod) * x % mod;\n  }\n\
-    };\n\nusing Rational = RationalBase<long long, __int128_t>;\n\ntemplate <typename\
-    \ R = Rational>\nstruct Binomial {\n  vector<R> fc;\n  Binomial(int = 0) { fc.emplace_back(1);\
-    \ }\n  void extend() {\n    int n = fc.size();\n    R nxt = fc.back() * n;\n \
-    \   fc.push_back(nxt);\n  }\n  R fac(int n) {\n    if (n < 0) return 0;\n    while\
-    \ ((int)fc.size() <= n) extend();\n    return fc[n];\n  }\n  R finv(int n) {\n\
-    \    if (n < 0) return 0;\n    return fac(n).inverse();\n  }\n  R inv(int n) {\n\
-    \    if (n < 0) return -inv(-n);\n    return R{1, max(n, 1)};\n  }\n  R C(int\
-    \ n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r) { return C(n, r);\
-    \ }\n  template <typename I>\n  R multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
-    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
-    \ R{0};\n      n += x;\n    }\n    R res = fac(n);\n    for (auto& x : r) res\
-    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  R operator()(const\
-    \ vector<I>& r) {\n    return multinomial(r);\n  }\n};\n#line 4 \"math/stern-brocot-tree.hpp\"\
-    \n\n// f(x) \u304C true, \u304B\u3064\u5206\u5B50\u3068\u5206\u6BCD\u304C INF\
-    \ \u4EE5\u4E0B\u3067\u3042\u308B\u6700\u5C0F\u306E\u65E2\u7D04\u5206\u6570 x \u3092\
-    \u6C42\u3081\u308B\n// f(0) = true \u306E\u5834\u5408\u306F 0 \u3092, true \u306B\
-    \u306A\u308B\u5206\u6570\u304C\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F\
-    \ 1/0 \u3092\u8FD4\u3059\nusing T = Rational;\nusing I = typename T::Key;\ntemplate\
-    \ <typename F>\nT binary_search_on_stern_brocot_tree(const F& f, const I& INF)\
-    \ {\n  // INF >= 1\n  assert(1 <= INF);\n  auto gen_frac = [&](const T& a, const\
-    \ I& b, const T& c) -> T {\n    return T{a.x * b + c.x, a.y * b + c.y};\n  };\n\
-    \n  T L{0, 1}, M{1, 1}, R = T::raw(1, 0);\n  if (f(L)) return L;\n  int go_left\
-    \ = f(M);\n  while (true) {\n    if (go_left) {\n      // (L, M] \u306B\u7B54\u3048\
-    \u304C\u3042\u308B\n      // (f(L * b + M) = false) or (INF \u8D85\u3048) \u306B\
-    \u306A\u308B b \u306E\u6700\u5C0F\u306F\uFF1F\n      I a = 0, b = 1;\n      while\
-    \ (true) {\n        T x = gen_frac(L, b, M);\n        if (max(x.x, x.y) > INF\
-    \ or !f(x)) break;\n        a = b, b += b;\n      }\n      while (a + 1 < b) {\n\
-    \        I c = (a + b) / 2;\n        T x = gen_frac(L, c, M);\n        (max(x.x,\
-    \ x.y) > INF or !f(x) ? b : a) = c;\n      }\n      R = gen_frac(L, a, M);\n \
-    \     M = gen_frac(L, b, M);\n      if (max(M.x, M.y) > INF) return R;\n    }\
-    \ else {\n      // f(M) = false -> (M, R] \u306B\u7B54\u3048\u304C\u3042\u308B\
-    \n      // (f(M + R * b) = true) or (INF \u8D85\u3048) \u306B\u306A\u308B b \u306E\
-    \u6700\u5C0F\u306F\uFF1F\n      I a = 0, b = 1;\n      while (true) {\n      \
-    \  T x = gen_frac(R, b, M);\n        if (max(x.x, x.y) > INF or f(x)) break;\n\
-    \        a = b, b += b;\n      }\n      while (a + 1 < b) {\n        I c = (a\
-    \ + b) / 2;\n        T x = gen_frac(R, c, M);\n        (max(x.x, x.y) > INF or\
-    \ f(x) ? b : a) = c;\n      }\n      L = gen_frac(R, a, M);\n      M = gen_frac(R,\
-    \ b, M);\n      if (max(M.x, M.y) > INF) return R;\n    }\n    go_left ^= 1;\n\
-    \  }\n}\n\n/**\n * Stern-Brocot Tree \u4E0A\u306E\u4E8C\u5206\u63A2\u7D22\n */\n"
-  code: "#pragma once\n\n#include \"rational.hpp\"\n\n// f(x) \u304C true, \u304B\u3064\
-    \u5206\u5B50\u3068\u5206\u6BCD\u304C INF \u4EE5\u4E0B\u3067\u3042\u308B\u6700\u5C0F\
-    \u306E\u65E2\u7D04\u5206\u6570 x \u3092\u6C42\u3081\u308B\n// f(0) = true \u306E\
-    \u5834\u5408\u306F 0 \u3092, true \u306B\u306A\u308B\u5206\u6570\u304C\u5B58\u5728\
-    \u3057\u306A\u3044\u5834\u5408\u306F 1/0 \u3092\u8FD4\u3059\nusing T = Rational;\n\
-    using I = typename T::Key;\ntemplate <typename F>\nT binary_search_on_stern_brocot_tree(const\
-    \ F& f, const I& INF) {\n  // INF >= 1\n  assert(1 <= INF);\n  auto gen_frac =\
-    \ [&](const T& a, const I& b, const T& c) -> T {\n    return T{a.x * b + c.x,\
-    \ a.y * b + c.y};\n  };\n\n  T L{0, 1}, M{1, 1}, R = T::raw(1, 0);\n  if (f(L))\
-    \ return L;\n  int go_left = f(M);\n  while (true) {\n    if (go_left) {\n   \
-    \   // (L, M] \u306B\u7B54\u3048\u304C\u3042\u308B\n      // (f(L * b + M) = false)\
-    \ or (INF \u8D85\u3048) \u306B\u306A\u308B b \u306E\u6700\u5C0F\u306F\uFF1F\n\
-    \      I a = 0, b = 1;\n      while (true) {\n        T x = gen_frac(L, b, M);\n\
-    \        if (max(x.x, x.y) > INF or !f(x)) break;\n        a = b, b += b;\n  \
-    \    }\n      while (a + 1 < b) {\n        I c = (a + b) / 2;\n        T x = gen_frac(L,\
-    \ c, M);\n        (max(x.x, x.y) > INF or !f(x) ? b : a) = c;\n      }\n     \
-    \ R = gen_frac(L, a, M);\n      M = gen_frac(L, b, M);\n      if (max(M.x, M.y)\
-    \ > INF) return R;\n    } else {\n      // f(M) = false -> (M, R] \u306B\u7B54\
-    \u3048\u304C\u3042\u308B\n      // (f(M + R * b) = true) or (INF \u8D85\u3048\
-    ) \u306B\u306A\u308B b \u306E\u6700\u5C0F\u306F\uFF1F\n      I a = 0, b = 1;\n\
-    \      while (true) {\n        T x = gen_frac(R, b, M);\n        if (max(x.x,\
-    \ x.y) > INF or f(x)) break;\n        a = b, b += b;\n      }\n      while (a\
-    \ + 1 < b) {\n        I c = (a + b) / 2;\n        T x = gen_frac(R, c, M);\n \
-    \       (max(x.x, x.y) > INF or f(x) ? b : a) = c;\n      }\n      L = gen_frac(R,\
-    \ a, M);\n      M = gen_frac(R, b, M);\n      if (max(M.x, M.y) > INF) return\
-    \ R;\n    }\n    go_left ^= 1;\n  }\n}\n\n/**\n * Stern-Brocot Tree \u4E0A\u306E\
-    \u4E8C\u5206\u63A2\u7D22\n */\n"
-  dependsOn:
-  - math/rational.hpp
-  - internal/internal-type-traits.hpp
-  - math-fast/gcd.hpp
+  bundledCode: "#line 2 \"math/stern-brocot-tree.hpp\"\n\n#include <algorithm>\n#include\
+    \ <cassert>\n#include <vector>\nusing namespace std;\n\n// x / y (x > 0, y > 0)\
+    \ \u3092\u7BA1\u7406\u3001\u30C7\u30D5\u30A9\u30EB\u30C8\u3067 1 / 1\n// \u5165\
+    \u529B\u304C\u4E92\u3044\u306B\u7D20\u3067\u306A\u3044\u5834\u5408\u306F gcd \u3092\
+    \u53D6\u3063\u3066\u683C\u7D0D\n// seq : (1, 1) \u304B\u3089 (x, y) \u3078\u306E\
+    \u30D1\u30B9\u3002\u53F3\u306E\u5B50\u304C\u6B63/\u5DE6\u306E\u5B50\u304C\u8CA0\
+    \ntemplate <typename Int>\nstruct SternBrocotTreeNode {\n  using Node = SternBrocotTreeNode;\n\
+    \n  Int lx, ly, x, y, rx, ry;\n  vector<Int> seq;\n\n  SternBrocotTreeNode() :\
+    \ lx(0), ly(1), x(1), y(1), rx(1), ry(0) {}\n\n  SternBrocotTreeNode(Int X, Int\
+    \ Y) : SternBrocotTreeNode() {\n    assert(1 <= X && 1 <= Y);\n    Int g = gcd(X,\
+    \ Y);\n    X /= g, Y /= g;\n    while (min(X, Y) > 0) {\n      if (X > Y) {\n\
+    \        int d = X / Y;\n        X -= d * Y;\n        go_right(d - (X == 0 ? 1\
+    \ : 0));\n      } else {\n        int d = Y / X;\n        Y -= d * X;\n      \
+    \  go_left(d - (Y == 0 ? 1 : 0));\n      }\n    }\n  }\n  SternBrocotTreeNode(const\
+    \ pair<Int, Int> &xy)\n      : SternBrocotTreeNode(xy.first, xy.second) {}\n \
+    \ SternBrocotTreeNode(const vector<Int> &_seq) : SternBrocotTreeNode() {\n   \
+    \ for (const Int &d : _seq) {\n      assert(d != 0);\n      if (d > 0) go_right(d);\n\
+    \      if (d < 0) go_left(d);\n    }\n    assert(seq == _seq);\n  }\n\n  // pair<Int,\
+    \ Int> \u578B\u3067\u5206\u6570\u3092 get\n  pair<Int, Int> get() const { return\
+    \ make_pair(x, y); }\n  // \u533A\u9593\u306E\u4E0B\u9650\n  pair<Int, Int> lower_bound()\
+    \ const { return make_pair(lx, ly); }\n  // \u533A\u9593\u306E\u4E0A\u9650\n \
+    \ pair<Int, Int> upper_bound() const { return make_pair(rx, ry); }\n\n  // \u6839\
+    \u304B\u3089\u306E\u6DF1\u3055\n  Int depth() const {\n    Int res = 0;\n    for\
+    \ (auto &s : seq) res += abs(s);\n    return res;\n  }\n  // \u5DE6\u306E\u5B50\
+    \u306B d \u9032\u3080\n  void go_left(Int d = 1) {\n    if (d <= 0) return;\n\
+    \    if (seq.empty() or seq.back() > 0) seq.push_back(0);\n    seq.back() -= d;\n\
+    \    rx += lx * d, ry += ly * d;\n    x = rx + lx, y = ry + ly;\n  }\n  // \u53F3\
+    \u306E\u5B50\u306B d \u9032\u3080\n  void go_right(Int d = 1) {\n    if (d <=\
+    \ 0) return;\n    if (seq.empty() or seq.back() < 0) seq.push_back(0);\n    seq.back()\
+    \ += d;\n    lx += rx * d, ly += ry * d;\n    x = rx + lx, y = ry + ly;\n  }\n\
+    \  // \u89AA\u306E\u65B9\u5411\u306B d \u9032\u3080\n  // d \u9032\u3081\u305F\
+    \u3089 true, \u9032\u3081\u306A\u304B\u3063\u305F\u3089 false \u3092\u8FD4\u3059\
+    \n  bool go_parent(Int d = 1) {\n    if (d <= 0) return true;\n    while (d) {\n\
+    \      if (seq.empty()) return false;\n      Int d2 = min(d, abs(seq.back()));\n\
+    \      if (seq.back() > 0) {\n        x -= rx * d2, y -= ry * d2;\n        lx\
+    \ = x - rx, ly = y - ry;\n        seq.back() -= d2;\n      } else {\n        x\
+    \ -= lx * d2, y -= ly * d2;\n        rx = x - lx, ry = y - ly;\n        seq.back()\
+    \ += d2;\n      }\n      d -= d2;\n      if (seq.back() == 0) seq.pop_back();\n\
+    \      if (d2 == Int{0}) break;\n    }\n    return true;\n  }\n  // SBT \u4E0A\
+    \u306E LCA\n  static Node lca(const Node &lhs, const Node &rhs) {\n    Node n;\n\
+    \    for (int i = 0; i < min<int>(lhs.seq.size(), rhs.seq.size()); i++) {\n  \
+    \    Int val1 = lhs.seq[i], val2 = rhs.seq[i];\n      if ((val1 < 0) != (val2\
+    \ < 0)) break;\n      if (val1 < 0) n.go_left(min(-val1, -val2));\n      if (val1\
+    \ > 0) n.go_right(min(val1, val2));\n      if (val1 != val2) break;\n    }\n \
+    \   return n;\n  }\n  friend ostream &operator<<(ostream &os, const Node &rhs)\
+    \ {\n    os << \"\\n\";\n    os << \"L : ( \" << rhs.lx << \", \" << rhs.ly <<\
+    \ \" )\\n\";\n    os << \"M : ( \" << rhs.x << \", \" << rhs.y << \" )\\n\";\n\
+    \    os << \"R : ( \" << rhs.rx << \", \" << rhs.ry << \" )\\n\";\n    os << \"\
+    seq : \" << rhs.seq << \"\\n\";\n    return os;\n  }\n  friend bool operator<(const\
+    \ Node &lhs, const Node &rhs) {\n    return lhs.x * rhs.y < rhs.x * lhs.y;\n \
+    \ }\n  friend bool operator==(const Node &lhs, const Node &rhs) {\n    return\
+    \ lhs.x == rhs.x and lhs.y == rhs.y;\n  }\n};\n\n/**\n *  @brief Stern-Brocot\
+    \ Tree\n */\n"
+  code: "#pragma once\n\n#include <algorithm>\n#include <cassert>\n#include <vector>\n\
+    using namespace std;\n\n// x / y (x > 0, y > 0) \u3092\u7BA1\u7406\u3001\u30C7\
+    \u30D5\u30A9\u30EB\u30C8\u3067 1 / 1\n// \u5165\u529B\u304C\u4E92\u3044\u306B\u7D20\
+    \u3067\u306A\u3044\u5834\u5408\u306F gcd \u3092\u53D6\u3063\u3066\u683C\u7D0D\n\
+    // seq : (1, 1) \u304B\u3089 (x, y) \u3078\u306E\u30D1\u30B9\u3002\u53F3\u306E\
+    \u5B50\u304C\u6B63/\u5DE6\u306E\u5B50\u304C\u8CA0\ntemplate <typename Int>\nstruct\
+    \ SternBrocotTreeNode {\n  using Node = SternBrocotTreeNode;\n\n  Int lx, ly,\
+    \ x, y, rx, ry;\n  vector<Int> seq;\n\n  SternBrocotTreeNode() : lx(0), ly(1),\
+    \ x(1), y(1), rx(1), ry(0) {}\n\n  SternBrocotTreeNode(Int X, Int Y) : SternBrocotTreeNode()\
+    \ {\n    assert(1 <= X && 1 <= Y);\n    Int g = gcd(X, Y);\n    X /= g, Y /= g;\n\
+    \    while (min(X, Y) > 0) {\n      if (X > Y) {\n        int d = X / Y;\n   \
+    \     X -= d * Y;\n        go_right(d - (X == 0 ? 1 : 0));\n      } else {\n \
+    \       int d = Y / X;\n        Y -= d * X;\n        go_left(d - (Y == 0 ? 1 :\
+    \ 0));\n      }\n    }\n  }\n  SternBrocotTreeNode(const pair<Int, Int> &xy)\n\
+    \      : SternBrocotTreeNode(xy.first, xy.second) {}\n  SternBrocotTreeNode(const\
+    \ vector<Int> &_seq) : SternBrocotTreeNode() {\n    for (const Int &d : _seq)\
+    \ {\n      assert(d != 0);\n      if (d > 0) go_right(d);\n      if (d < 0) go_left(d);\n\
+    \    }\n    assert(seq == _seq);\n  }\n\n  // pair<Int, Int> \u578B\u3067\u5206\
+    \u6570\u3092 get\n  pair<Int, Int> get() const { return make_pair(x, y); }\n \
+    \ // \u533A\u9593\u306E\u4E0B\u9650\n  pair<Int, Int> lower_bound() const { return\
+    \ make_pair(lx, ly); }\n  // \u533A\u9593\u306E\u4E0A\u9650\n  pair<Int, Int>\
+    \ upper_bound() const { return make_pair(rx, ry); }\n\n  // \u6839\u304B\u3089\
+    \u306E\u6DF1\u3055\n  Int depth() const {\n    Int res = 0;\n    for (auto &s\
+    \ : seq) res += abs(s);\n    return res;\n  }\n  // \u5DE6\u306E\u5B50\u306B d\
+    \ \u9032\u3080\n  void go_left(Int d = 1) {\n    if (d <= 0) return;\n    if (seq.empty()\
+    \ or seq.back() > 0) seq.push_back(0);\n    seq.back() -= d;\n    rx += lx * d,\
+    \ ry += ly * d;\n    x = rx + lx, y = ry + ly;\n  }\n  // \u53F3\u306E\u5B50\u306B\
+    \ d \u9032\u3080\n  void go_right(Int d = 1) {\n    if (d <= 0) return;\n    if\
+    \ (seq.empty() or seq.back() < 0) seq.push_back(0);\n    seq.back() += d;\n  \
+    \  lx += rx * d, ly += ry * d;\n    x = rx + lx, y = ry + ly;\n  }\n  // \u89AA\
+    \u306E\u65B9\u5411\u306B d \u9032\u3080\n  // d \u9032\u3081\u305F\u3089 true,\
+    \ \u9032\u3081\u306A\u304B\u3063\u305F\u3089 false \u3092\u8FD4\u3059\n  bool\
+    \ go_parent(Int d = 1) {\n    if (d <= 0) return true;\n    while (d) {\n    \
+    \  if (seq.empty()) return false;\n      Int d2 = min(d, abs(seq.back()));\n \
+    \     if (seq.back() > 0) {\n        x -= rx * d2, y -= ry * d2;\n        lx =\
+    \ x - rx, ly = y - ry;\n        seq.back() -= d2;\n      } else {\n        x -=\
+    \ lx * d2, y -= ly * d2;\n        rx = x - lx, ry = y - ly;\n        seq.back()\
+    \ += d2;\n      }\n      d -= d2;\n      if (seq.back() == 0) seq.pop_back();\n\
+    \      if (d2 == Int{0}) break;\n    }\n    return true;\n  }\n  // SBT \u4E0A\
+    \u306E LCA\n  static Node lca(const Node &lhs, const Node &rhs) {\n    Node n;\n\
+    \    for (int i = 0; i < min<int>(lhs.seq.size(), rhs.seq.size()); i++) {\n  \
+    \    Int val1 = lhs.seq[i], val2 = rhs.seq[i];\n      if ((val1 < 0) != (val2\
+    \ < 0)) break;\n      if (val1 < 0) n.go_left(min(-val1, -val2));\n      if (val1\
+    \ > 0) n.go_right(min(val1, val2));\n      if (val1 != val2) break;\n    }\n \
+    \   return n;\n  }\n  friend ostream &operator<<(ostream &os, const Node &rhs)\
+    \ {\n    os << \"\\n\";\n    os << \"L : ( \" << rhs.lx << \", \" << rhs.ly <<\
+    \ \" )\\n\";\n    os << \"M : ( \" << rhs.x << \", \" << rhs.y << \" )\\n\";\n\
+    \    os << \"R : ( \" << rhs.rx << \", \" << rhs.ry << \" )\\n\";\n    os << \"\
+    seq : \" << rhs.seq << \"\\n\";\n    return os;\n  }\n  friend bool operator<(const\
+    \ Node &lhs, const Node &rhs) {\n    return lhs.x * rhs.y < rhs.x * lhs.y;\n \
+    \ }\n  friend bool operator==(const Node &lhs, const Node &rhs) {\n    return\
+    \ lhs.x == rhs.x and lhs.y == rhs.y;\n  }\n};\n\n/**\n *  @brief Stern-Brocot\
+    \ Tree\n */\n"
+  dependsOn: []
   isVerificationFile: false
   path: math/stern-brocot-tree.hpp
-  requiredBy: []
-  timestamp: '2023-05-22 22:29:25+09:00'
+  requiredBy:
+  - math/stern-brocot-tree-binary-search.hpp
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-2266.test.cpp
+  - verify/verify-yuki/yuki-2262.test.cpp
+  - verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
 documentation_of: math/stern-brocot-tree.hpp
 layout: document
 redirect_from:
 - /library/math/stern-brocot-tree.hpp
 - /library/math/stern-brocot-tree.hpp.html
-title: math/stern-brocot-tree.hpp
+title: Stern-Brocot Tree
 ---

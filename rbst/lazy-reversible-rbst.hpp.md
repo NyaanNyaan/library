@@ -57,13 +57,13 @@ data:
     \          T (*ts)(T)>\nstruct LazyReversibleRBST : RBSTBase<LazyReversibleRBSTNode<T,\
     \ E>> {\n  using Node = LazyReversibleRBSTNode<T, E>;\n  using base = RBSTBase<LazyReversibleRBSTNode<T,\
     \ E>>;\n  using base::merge;\n  using base::split;\n  using typename base::Ptr;\n\
-    \n  LazyReversibleRBST() = default;\n\n  void toggle(Ptr t) {\n    swap(t->l,\
-    \ t->r);\n    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n  T fold(Ptr &t,\
-    \ int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b -\
-    \ a);\n    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
-    \    return ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n    auto x =\
-    \ split(t, a);\n    auto y = split(x.second, b - a);\n    toggle(y.first);\n \
-    \   t = merge(x.first, merge(y.first, y.second));\n  }\n\n  void apply(Ptr &t,\
+    \n  LazyReversibleRBST() = default;\n\n  void toggle(Ptr t) {\n    if(!t) return;\n\
+    \    swap(t->l, t->r);\n    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n\
+    \  T fold(Ptr &t, int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
+    \ b - a);\n    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first,\
+    \ y.second));\n    return ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n\
+    \    auto x = split(t, a);\n    auto y = split(x.second, b - a);\n    toggle(y.first);\n\
+    \    t = merge(x.first, merge(y.first, y.second));\n  }\n\n  void apply(Ptr &t,\
     \ int a, int b, const E &e) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
     \ b - a);\n    propagate(y.first, e);\n    t = merge(x.first, merge(y.first, y.second));\n\
     \  }\n\n protected:\n  inline T sum(const Ptr t) const { return t ? t->sum : T();\
@@ -86,13 +86,13 @@ data:
     \ E), E (*h)(E, E),\n          T (*ts)(T)>\nstruct LazyReversibleRBST : RBSTBase<LazyReversibleRBSTNode<T,\
     \ E>> {\n  using Node = LazyReversibleRBSTNode<T, E>;\n  using base = RBSTBase<LazyReversibleRBSTNode<T,\
     \ E>>;\n  using base::merge;\n  using base::split;\n  using typename base::Ptr;\n\
-    \n  LazyReversibleRBST() = default;\n\n  void toggle(Ptr t) {\n    swap(t->l,\
-    \ t->r);\n    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n  T fold(Ptr &t,\
-    \ int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second, b -\
-    \ a);\n    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first, y.second));\n\
-    \    return ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n    auto x =\
-    \ split(t, a);\n    auto y = split(x.second, b - a);\n    toggle(y.first);\n \
-    \   t = merge(x.first, merge(y.first, y.second));\n  }\n\n  void apply(Ptr &t,\
+    \n  LazyReversibleRBST() = default;\n\n  void toggle(Ptr t) {\n    if(!t) return;\n\
+    \    swap(t->l, t->r);\n    t->sum = ts(t->sum);\n    t->rev ^= true;\n  }\n\n\
+    \  T fold(Ptr &t, int a, int b) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
+    \ b - a);\n    auto ret = sum(y.first);\n    t = merge(x.first, merge(y.first,\
+    \ y.second));\n    return ret;\n  }\n\n  void reverse(Ptr &t, int a, int b) {\n\
+    \    auto x = split(t, a);\n    auto y = split(x.second, b - a);\n    toggle(y.first);\n\
+    \    t = merge(x.first, merge(y.first, y.second));\n  }\n\n  void apply(Ptr &t,\
     \ int a, int b, const E &e) {\n    auto x = split(t, a);\n    auto y = split(x.second,\
     \ b - a);\n    propagate(y.first, e);\n    t = merge(x.first, merge(y.first, y.second));\n\
     \  }\n\n protected:\n  inline T sum(const Ptr t) const { return t ? t->sum : T();\
@@ -112,7 +112,7 @@ data:
   isVerificationFile: false
   path: rbst/lazy-reversible-rbst.hpp
   requiredBy: []
-  timestamp: '2020-12-17 01:20:11+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp

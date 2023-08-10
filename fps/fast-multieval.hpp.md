@@ -323,8 +323,8 @@ data:
   timestamp: '2023-05-29 20:50:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
+  - verify/verify-unit-test/multipoint-binomial-sum.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
 documentation_of: fps/fast-multieval.hpp
 layout: document

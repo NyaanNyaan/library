@@ -62,23 +62,23 @@ data:
     \ 1321})\n      if (modpow(x, (md - 1) / d) <= 1) return false;\n    return true;\n\
     \  }\n  static inline constexpr u64 cast(const long long &a) {\n    return a <\
     \ 0 ? a + md : a;\n  }\n  static inline constexpr u64 modmul(const u64 &a, const\
-    \ u64 &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) + (ret >> 61);\n\
-    \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
-    \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
-    \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
-    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n#line 10 \"tree/tree-hash.hpp\"\
-    \n\ntemplate <typename G>\nstruct TreeHash {\n  using Hash = internal::Hash<3>;\n\
-    \n  const G& g;\n  int n;\n  vector<Hash> hash;\n  vector<int> depth;\n\n  static\
-    \ vector<Hash>& xs() {\n    static vector<Hash> _xs;\n    return _xs;\n  }\n\n\
-    \  TreeHash(const G& _g, int root = 0) : g(_g), n(g.size()) {\n    hash.resize(n);\n\
-    \    depth.resize(n, 0);\n    while ((int)xs().size() <= n) xs().push_back(Hash::get_basis());\n\
-    \    dfs(root, -1);\n  }\n\n private:\n  int dfs(int c, int p) {\n    int dep\
-    \ = 0;\n    for (auto& d : g[c]) {\n      if (d != p) dep = max(dep, dfs(d, c)\
-    \ + 1);\n    }\n    Hash x = xs()[dep], h = Hash::set(1);\n    for (auto& d :\
-    \ g[c]) {\n      if (d != p) h = h * (x + hash[d]);\n    }\n    hash[c] = h;\n\
-    \    return depth[c] = dep;\n  }\n};\n\n/**\n * @brief \u6839\u4ED8\u304D\u6728\
-    \u306E\u30CF\u30C3\u30B7\u30E5\n */\n"
+    \ u64 &b) { \n    u128 d = u128(a) * b;\n    u64 ret = (u64(d) & md) + u64(d >>\
+    \ 61);\n    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr\
+    \ u64 modfma(const u64 &a, const u64 &b, const u64 &c) {\n    u128 d = u128(a)\
+    \ * b + c;\n    u64 ret = (d >> 61) + (u64(d) & md);\n    return ret >= md ? ret\
+    \ - md : ret;\n  }\n};\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\
+    \u30B7\u30E5\u69CB\u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n\
+    #line 10 \"tree/tree-hash.hpp\"\n\ntemplate <typename G>\nstruct TreeHash {\n\
+    \  using Hash = internal::Hash<3>;\n\n  const G& g;\n  int n;\n  vector<Hash>\
+    \ hash;\n  vector<int> depth;\n\n  static vector<Hash>& xs() {\n    static vector<Hash>\
+    \ _xs;\n    return _xs;\n  }\n\n  TreeHash(const G& _g, int root = 0) : g(_g),\
+    \ n(g.size()) {\n    hash.resize(n);\n    depth.resize(n, 0);\n    while ((int)xs().size()\
+    \ <= n) xs().push_back(Hash::get_basis());\n    dfs(root, -1);\n  }\n\n private:\n\
+    \  int dfs(int c, int p) {\n    int dep = 0;\n    for (auto& d : g[c]) {\n   \
+    \   if (d != p) dep = max(dep, dfs(d, c) + 1);\n    }\n    Hash x = xs()[dep],\
+    \ h = Hash::set(1);\n    for (auto& d : g[c]) {\n      if (d != p) h = h * (x\
+    \ + hash[d]);\n    }\n    hash[c] = h;\n    return depth[c] = dep;\n  }\n};\n\n\
+    /**\n * @brief \u6839\u4ED8\u304D\u6728\u306E\u30CF\u30C3\u30B7\u30E5\n */\n"
   code: "#pragma once\n\n#include <array>\n#include <chrono>\n#include <random>\n\
     #include <vector>\nusing namespace std;\n\n#include \"../internal/internal-hash.hpp\"\
     \n\ntemplate <typename G>\nstruct TreeHash {\n  using Hash = internal::Hash<3>;\n\
@@ -97,7 +97,7 @@ data:
   isVerificationFile: false
   path: tree/tree-hash.hpp
   requiredBy: []
-  timestamp: '2023-05-19 10:25:40+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1789.test.cpp

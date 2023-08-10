@@ -83,12 +83,12 @@ data:
     \ 1321})\n      if (modpow(x, (md - 1) / d) <= 1) return false;\n    return true;\n\
     \  }\n  static inline constexpr u64 cast(const long long &a) {\n    return a <\
     \ 0 ? a + md : a;\n  }\n  static inline constexpr u64 modmul(const u64 &a, const\
-    \ u64 &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) + (ret >> 61);\n\
-    \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
-    \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
-    \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
-    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n"
+    \ u64 &b) { \n    u128 d = u128(a) * b;\n    u64 ret = (u64(d) & md) + u64(d >>\
+    \ 61);\n    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr\
+    \ u64 modfma(const u64 &a, const u64 &b, const u64 &c) {\n    u128 d = u128(a)\
+    \ * b + c;\n    u64 ret = (d >> 61) + (u64(d) & md);\n    return ret >= md ? ret\
+    \ - md : ret;\n  }\n};\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\
+    \u30B7\u30E5\u69CB\u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n"
   code: "#pragma once\n\nnamespace internal {\nusing i64 = long long;\nusing u64 =\
     \ unsigned long long;\nusing u128 = __uint128_t;\n\ntemplate <int BASE_NUM = 2>\n\
     struct Hash : array<u64, BASE_NUM> {\n  using array<u64, BASE_NUM>::operator[];\n\
@@ -131,29 +131,29 @@ data:
     \ 1321})\n      if (modpow(x, (md - 1) / d) <= 1) return false;\n    return true;\n\
     \  }\n  static inline constexpr u64 cast(const long long &a) {\n    return a <\
     \ 0 ? a + md : a;\n  }\n  static inline constexpr u64 modmul(const u64 &a, const\
-    \ u64 &b) {\n    u128 ret = u128(a) * b;\n    ret = (ret & md) + (ret >> 61);\n\
-    \    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr u64 modfma(const\
-    \ u64 &a, const u64 &b, const u64 &c) {\n    u128 ret = u128(a) * b + c;\n   \
-    \ ret = (ret & md) + (ret >> 61);\n    return ret >= md ? ret - md : ret;\n  }\n\
-    };\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\u30B7\u30E5\u69CB\
-    \u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n"
+    \ u64 &b) { \n    u128 d = u128(a) * b;\n    u64 ret = (u64(d) & md) + u64(d >>\
+    \ 61);\n    return ret >= md ? ret - md : ret;\n  }\n  static inline constexpr\
+    \ u64 modfma(const u64 &a, const u64 &b, const u64 &c) {\n    u128 d = u128(a)\
+    \ * b + c;\n    u64 ret = (d >> 61) + (u64(d) & md);\n    return ret >= md ? ret\
+    \ - md : ret;\n  }\n};\n\n}  // namespace internal\n\n/**\n * @brief \u30CF\u30C3\
+    \u30B7\u30E5\u69CB\u9020\u4F53\n * @docs docs/internal/internal-hash.md\n */\n"
   dependsOn: []
   isVerificationFile: false
   path: internal/internal-hash.hpp
   requiredBy:
-  - tree/tree-hash.hpp
   - string/rolling-hash.hpp
   - string/rolling-hash-2d.hpp
-  timestamp: '2023-05-19 10:25:40+09:00'
+  - tree/tree-hash.hpp
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp
-  - verify/verify-unit-test/string-search.test.cpp
-  - verify/verify-unit-test/inner-hash.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
+  - verify/verify-unit-test/inner-hash.test.cpp
+  - verify/verify-unit-test/string-search.test.cpp
 documentation_of: internal/internal-hash.hpp
 layout: document
 redirect_from:

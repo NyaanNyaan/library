@@ -61,7 +61,8 @@ data:
     \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
     template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
     using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
-    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\n\ntemplate\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
     \ pair<T, U>::second;\n\n  P &operator+=(const P &r) {\n    first += r.first;\n\
@@ -97,7 +98,7 @@ data:
     };\n\ntemplate <typename T>\nvector<T> mkuni(const vector<T> &v) {\n  vector<T>\
     \ ret(v);\n  sort(ret.begin(), ret.end());\n  ret.erase(unique(ret.begin(), ret.end()),\
     \ ret.end());\n  return ret;\n}\n\ntemplate <typename F>\nvector<int> mkord(int\
-    \ N,F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
+    \ N, F f) {\n  vector<int> ord(N);\n  iota(begin(ord), end(ord), 0);\n  sort(begin(ord),\
     \ end(ord), f);\n  return ord;\n}\n\ntemplate <typename T>\nvector<int> mkinv(vector<T>\
     \ &v) {\n  int max_val = *max_element(begin(v), end(v));\n  vector<int> inv(max_val\
     \ + 1, -1);\n  for (int i = 0; i < (int)v.size(); i++) inv[v[i]] = i;\n  return\
@@ -105,57 +106,69 @@ data:
     \ end(ret), 0);\n  return ret;\n}\n\ntemplate <typename T>\nT mkrev(const T &v)\
     \ {\n  T w{v};\n  reverse(begin(w), end(w));\n  return w;\n}\n\ntemplate <typename\
     \ T>\nbool nxp(vector<T> &v) {\n  return next_permutation(begin(v), end(v));\n\
-    }\n\ntemplate <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\
-    \n}  // namespace Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n\
-    #line 1 \"template/bitop.hpp\"\nnamespace Nyaan {\n__attribute__((target(\"popcnt\"\
-    ))) inline int popcnt(const u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline\
-    \ int lsb(const u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const\
-    \ u64 &a) { return a ? __builtin_ctzll(a) : 64; }\ninline int msb(const u64 &a)\
-    \ { return a ? 63 - __builtin_clzll(a) : -1; }\ntemplate <typename T>\ninline\
-    \ int gbit(const T &a, int i) {\n  return (a >> i) & 1;\n}\ntemplate <typename\
-    \ T>\ninline void sbit(T &a, int i, bool b) {\n  if (gbit(a, i) != b) a ^= T(1)\
-    \ << i;\n}\nconstexpr long long PW(int n) { return 1LL << n; }\nconstexpr long\
-    \ long MSK(int n) { return (1LL << n) - 1; }\n}  // namespace Nyaan\n#line 61\
-    \ \"template/template.hpp\"\n\n// inout\n#line 1 \"template/inout.hpp\"\nnamespace\
-    \ Nyaan {\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
-    \ const pair<T, U> &p) {\n  os << p.first << \" \" << p.second;\n  return os;\n\
-    }\ntemplate <typename T, typename U>\nistream &operator>>(istream &is, pair<T,\
-    \ U> &p) {\n  is >> p.first >> p.second;\n  return is;\n}\n\ntemplate <typename\
-    \ T>\nostream &operator<<(ostream &os, const vector<T> &v) {\n  int s = (int)v.size();\n\
-    \  for (int i = 0; i < s; i++) os << (i ? \" \" : \"\") << v[i];\n  return os;\n\
-    }\ntemplate <typename T>\nistream &operator>>(istream &is, vector<T> &v) {\n \
-    \ for (auto &x : v) is >> x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
-    \ __int128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  int flag = 0;\n  for\
-    \ (auto &c : S) {\n    if (c == '-') {\n      flag = true;\n      continue;\n\
-    \    }\n    x *= 10;\n    x += c - '0';\n  }\n  if (flag) x = -x;\n  return is;\n\
-    }\n\nistream &operator>>(istream &is, __uint128_t &x) {\n  string S;\n  is >>\
-    \ S;\n  x = 0;\n  for (auto &c : S) {\n    x *= 10;\n    x += c - '0';\n  }\n\
-    \  return is;\n}\n\nostream &operator<<(ostream &os, __int128_t x) {\n  if (x\
-    \ == 0) return os << 0;\n  if (x < 0) os << '-', x = -x;\n  string S;\n  while\
-    \ (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return\
-    \ os << S;\n}\nostream &operator<<(ostream &os, __uint128_t x) {\n  if (x == 0)\
-    \ return os << 0;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n\
-    \  reverse(begin(S), end(S));\n  return os << S;\n}\n\nvoid in() {}\ntemplate\
-    \ <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin >> t;\n  in(u...);\n\
-    }\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename T, class... U, char sep\
-    \ = ' '>\nvoid out(const T &t, const U &...u) {\n  cout << t;\n  if (sizeof...(u))\
-    \ cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya {\n  IoSetupNya() {\n   \
-    \ cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n    cout << fixed << setprecision(15);\n\
-    \    cerr << fixed << setprecision(7);\n  }\n} iosetupnya;\n\n}  // namespace\
-    \ Nyaan\n#line 64 \"template/template.hpp\"\n\n// debug\n#line 1 \"template/debug.hpp\"\
-    \nnamespace DebugImpl {\n\ntemplate <typename U, typename = void>\nstruct is_specialize\
-    \ : false_type {};\ntemplate <typename U>\nstruct is_specialize<\n    U, typename\
-    \ conditional<false, typename U::iterator, void>::type>\n    : true_type {};\n\
-    template <typename U>\nstruct is_specialize<\n    U, typename conditional<false,\
-    \ decltype(U::first), void>::type>\n    : true_type {};\ntemplate <typename U>\n\
-    struct is_specialize<U, enable_if_t<is_integral<U>::value, void>> : true_type\
-    \ {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid dump(const string&\
-    \ t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t ? \"true\" : \"false\"\
-    ); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr << 0;\n  if (t < 0) cerr\
-    \ << '-', t = -t;\n  string S;\n  while (t) S.push_back('0' + t % 10), t /= 10;\n\
-    \  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t t) {\n\
-    \  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t % 10),\
-    \ t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
+    }\n\n// \u8FD4\u308A\u5024\u306E\u578B\u306F\u5165\u529B\u306E T \u306B\u4F9D\u5B58\
+    \n// i \u8981\u7D20\u76EE : [0, a[i])\ntemplate <typename T>\nvector<vector<T>>\
+    \ product(const vector<T> &a) {\n  vector<vector<T>> ret;\n  vector<T> v;\n  auto\
+    \ dfs = [&](auto rc, int i) -> void {\n    if (i == (int)a.size()) {\n      ret.push_back(v);\n\
+    \      return;\n    }\n    for (int j = 0; j < a[i]; j++) v.push_back(j), rc(rc,\
+    \ i + 1), v.pop_back();\n  };\n  dfs(dfs, 0);\n  return ret;\n}\n\n// F : function(void(T&)),\
+    \ mod \u3092\u53D6\u308B\u64CD\u4F5C\n// T : \u6574\u6570\u578B\u306E\u3068\u304D\
+    \u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\u308B\
+    \ntemplate <typename T>\nT Power(T a, long long n, const T &I, const function<void(T\
+    \ &)> &f) {\n  T res = I;\n  for (; n; f(a = a * a), n >>= 1) {\n    if (n & 1)\
+    \ f(res = res * a);\n  }\n  return res;\n}\n// T : \u6574\u6570\u578B\u306E\u3068\
+    \u304D\u306F\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\u306B\u6CE8\u610F\u3059\
+    \u308B\ntemplate <typename T>\nT Power(T a, long long n, const T &I) {\n  return\
+    \ Power(a, n, I, function<void(T &)>{[](T &) -> void {}});\n}\n\n}  // namespace\
+    \ Nyaan\n#line 58 \"template/template.hpp\"\n\n// bit operation\n#line 1 \"template/bitop.hpp\"\
+    \nnamespace Nyaan {\n__attribute__((target(\"popcnt\"))) inline int popcnt(const\
+    \ u64 &a) {\n  return _mm_popcnt_u64(a);\n}\ninline int lsb(const u64 &a) { return\
+    \ a ? __builtin_ctzll(a) : 64; }\ninline int ctz(const u64 &a) { return a ? __builtin_ctzll(a)\
+    \ : 64; }\ninline int msb(const u64 &a) { return a ? 63 - __builtin_clzll(a) :\
+    \ -1; }\ntemplate <typename T>\ninline int gbit(const T &a, int i) {\n  return\
+    \ (a >> i) & 1;\n}\ntemplate <typename T>\ninline void sbit(T &a, int i, bool\
+    \ b) {\n  if (gbit(a, i) != b) a ^= T(1) << i;\n}\nconstexpr long long PW(int\
+    \ n) { return 1LL << n; }\nconstexpr long long MSK(int n) { return (1LL << n)\
+    \ - 1; }\n}  // namespace Nyaan\n#line 61 \"template/template.hpp\"\n\n// inout\n\
+    #line 1 \"template/inout.hpp\"\nnamespace Nyaan {\n\ntemplate <typename T, typename\
+    \ U>\nostream &operator<<(ostream &os, const pair<T, U> &p) {\n  os << p.first\
+    \ << \" \" << p.second;\n  return os;\n}\ntemplate <typename T, typename U>\n\
+    istream &operator>>(istream &is, pair<T, U> &p) {\n  is >> p.first >> p.second;\n\
+    \  return is;\n}\n\ntemplate <typename T>\nostream &operator<<(ostream &os, const\
+    \ vector<T> &v) {\n  int s = (int)v.size();\n  for (int i = 0; i < s; i++) os\
+    \ << (i ? \" \" : \"\") << v[i];\n  return os;\n}\ntemplate <typename T>\nistream\
+    \ &operator>>(istream &is, vector<T> &v) {\n  for (auto &x : v) is >> x;\n  return\
+    \ is;\n}\n\nistream &operator>>(istream &is, __int128_t &x) {\n  string S;\n \
+    \ is >> S;\n  x = 0;\n  int flag = 0;\n  for (auto &c : S) {\n    if (c == '-')\
+    \ {\n      flag = true;\n      continue;\n    }\n    x *= 10;\n    x += c - '0';\n\
+    \  }\n  if (flag) x = -x;\n  return is;\n}\n\nistream &operator>>(istream &is,\
+    \ __uint128_t &x) {\n  string S;\n  is >> S;\n  x = 0;\n  for (auto &c : S) {\n\
+    \    x *= 10;\n    x += c - '0';\n  }\n  return is;\n}\n\nostream &operator<<(ostream\
+    \ &os, __int128_t x) {\n  if (x == 0) return os << 0;\n  if (x < 0) os << '-',\
+    \ x = -x;\n  string S;\n  while (x) S.push_back('0' + x % 10), x /= 10;\n  reverse(begin(S),\
+    \ end(S));\n  return os << S;\n}\nostream &operator<<(ostream &os, __uint128_t\
+    \ x) {\n  if (x == 0) return os << 0;\n  string S;\n  while (x) S.push_back('0'\
+    \ + x % 10), x /= 10;\n  reverse(begin(S), end(S));\n  return os << S;\n}\n\n\
+    void in() {}\ntemplate <typename T, class... U>\nvoid in(T &t, U &...u) {\n  cin\
+    \ >> t;\n  in(u...);\n}\n\nvoid out() { cout << \"\\n\"; }\ntemplate <typename\
+    \ T, class... U, char sep = ' '>\nvoid out(const T &t, const U &...u) {\n  cout\
+    \ << t;\n  if (sizeof...(u)) cout << sep;\n  out(u...);\n}\n\nstruct IoSetupNya\
+    \ {\n  IoSetupNya() {\n    cin.tie(nullptr);\n    ios::sync_with_stdio(false);\n\
+    \    cout << fixed << setprecision(15);\n    cerr << fixed << setprecision(7);\n\
+    \  }\n} iosetupnya;\n\n}  // namespace Nyaan\n#line 64 \"template/template.hpp\"\
+    \n\n// debug\n#line 1 \"template/debug.hpp\"\nnamespace DebugImpl {\n\ntemplate\
+    \ <typename U, typename = void>\nstruct is_specialize : false_type {};\ntemplate\
+    \ <typename U>\nstruct is_specialize<\n    U, typename conditional<false, typename\
+    \ U::iterator, void>::type>\n    : true_type {};\ntemplate <typename U>\nstruct\
+    \ is_specialize<\n    U, typename conditional<false, decltype(U::first), void>::type>\n\
+    \    : true_type {};\ntemplate <typename U>\nstruct is_specialize<U, enable_if_t<is_integral<U>::value,\
+    \ void>> : true_type {\n};\n\nvoid dump(const char& t) { cerr << t; }\n\nvoid\
+    \ dump(const string& t) { cerr << t; }\n\nvoid dump(const bool& t) { cerr << (t\
+    \ ? \"true\" : \"false\"); }\n\nvoid dump(__int128_t t) {\n  if (t == 0) cerr\
+    \ << 0;\n  if (t < 0) cerr << '-', t = -t;\n  string S;\n  while (t) S.push_back('0'\
+    \ + t % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\nvoid dump(__uint128_t\
+    \ t) {\n  if (t == 0) cerr << 0;\n  string S;\n  while (t) S.push_back('0' + t\
+    \ % 10), t /= 10;\n  reverse(begin(S), end(S));\n  cerr << S;\n}\n\ntemplate <typename\
     \ U,\n          enable_if_t<!is_specialize<U>::value, nullptr_t> = nullptr>\n\
     void dump(const U& t) {\n  cerr << t;\n}\n\ntemplate <typename T>\nvoid dump(const\
     \ T& t, enable_if_t<is_integral<T>::value>* = nullptr) {\n  string res;\n  if\
@@ -204,7 +217,7 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
-    \n//\n#line 2 \"hashmap/hashmap-unerasable.hpp\"\n\n#line 6 \"hashmap/hashmap-unerasable.hpp\"\
+    \n//\n#line 2 \"hashmap/hashmap-unerasable.hpp\"\n\n#line 7 \"hashmap/hashmap-unerasable.hpp\"\
     \nusing namespace std;\n\n#line 2 \"internal/internal-hash-function.hpp\"\n\n\
     #line 4 \"internal/internal-hash-function.hpp\"\nusing namespace std;\n\n#line\
     \ 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\n\
@@ -216,10 +229,11 @@ data:
     \ 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210 (\u624B\
     \u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\u51FA\
     \u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\u304F\
-    \u308B\u306E\u3067\u6CE8\u610F\nunsigned long long seed() {\n#if defined(NyaanLocal)\
-    \ && !defined(NON_DETERMINISTIC_SEED)\n  return deterministic_seed();\n#else\n\
-    \  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n#line\
-    \ 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
+    \u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\u30B7\
+    \u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long long\
+    \ seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return deterministic_seed();\n\
+    #else\n  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n\
+    #line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
     \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
     \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
     \                               is_same_v<T, __uint128_t>,\n                 \
@@ -255,47 +269,53 @@ data:
     \ m ^= m << 35;\n    return m;\n  } else {\n    static_assert([]() { return false;\
     \ }());\n  }\n}\n\ntemplate <typename Key>\nstruct HashObject {\n  size_t operator()(const\
     \ Key& x) const { return hash_function(x); }\n};\n\n}  // namespace internal\n\
-    \n/*\n@brief \u30CF\u30C3\u30B7\u30E5\u95A2\u6570\n*/\n#line 9 \"hashmap/hashmap-unerasable.hpp\"\
+    \n/*\n@brief \u30CF\u30C3\u30B7\u30E5\u95A2\u6570\n*/\n#line 10 \"hashmap/hashmap-unerasable.hpp\"\
     \n\n// \u524A\u9664\u4E0D\u53EF\u80FD\u306A hashmap\n//\n// \u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\u5F15\u6570\n// Key : Int, string, vector \u8FBA\u308A\u306F\
-    \u4F55\u3067\u3082 (\u5C0F\u6570\u7CFB\u306F\u7121\u7406)\n// Val : \u4F55\u3067\
-    \u3082\n// init_size : \u521D\u671F\u30D0\u30B1\u30C3\u30C8\u30B5\u30A4\u30BA\n\
-    // fixed_size : \u3053\u308C\u3092 true \u306B\u3059\u308B\u3059\u308B\u3068\u30D0\
-    \u30B1\u30C3\u30C8\u30B5\u30A4\u30BA\u304C\u56FA\u5B9A\u306B\u306A\u308B\n// \u5F15\
-    \u6570\n// _default_value : Val \u306E\u521D\u671F\u5024, \u3053\u306E\u5024\u3067\
-    \u521D\u671F\u5316\u3055\u308C\u308B\ntemplate <typename Key, typename Val, int\
-    \ init_size = 4,\n          bool fixed_size = false>\nstruct UnerasableHashMap\
-    \ {\n  static_assert(init_size >= 1 && (init_size & (init_size - 1)) == 0);\n\n\
-    \ private:\n  int N, occupied_num;\n  vector<Key> keys;\n  vector<Val> vals;\n\
-    \  vector<char> flag;\n  int shift;\n  Val default_value;\n\n  // 64 bit \u306E\
-    \ hash \u3092\u8FD4\u3059\n  static unsigned long long get_hash(const Key& x)\
-    \ {\n    return internal::hash_function(x);\n  }\n\n  // \u30B5\u30A4\u30BA\u3092\
-    \ n \u306B\u62E1\u5F35\u3059\u308B\n  void init(int n = init_size, bool reset\
-    \ = false) {\n    vector<Key> keys2(n);\n    vector<Val> vals2(n, default_value);\n\
-    \    vector<char> flag2(n);\n    int shift2 = 64 - __builtin_ctz(n);\n    swap(N,\
-    \ n), swap(keys, keys2);\n    swap(vals, vals2), swap(flag, flag2), swap(shift,\
-    \ shift2);\n    if (reset == false) {\n      for (int i = 0; i < (int)flag2.size();\
+    \u30EC\u30FC\u30C8\u5F15\u6570\n// fixed_size : \u3053\u308C\u3092 true \u306B\
+    \u3059\u308B\u3059\u308B\u3068\u30D0\u30B1\u30C3\u30C8\u30B5\u30A4\u30BA\u304C\
+    \u56FA\u5B9A\u306B\u306A\u308B\n// get_hash : \u30CF\u30C3\u30B7\u30E5\u95A2\u6570\
+    \u306E\u6307\u5B9A\n// \u5F15\u6570\n// _default_value : val \u306E\u521D\u671F\
+    \u5024, \u3053\u306E\u5024\u3067\u521D\u671F\u5316\n// _default_size :\n// \u30D0\
+    \u30B1\u30C3\u30C8\u30B5\u30A4\u30BA, max(4, _default_size) \u4EE5\u4E0A\u306E\
+    \ 2 \u3079\u304D\u3067\u521D\u671F\u5316\n// \u305F\u3060\u3057 fixed_size \u304C\
+    \ true \u306E\u6642\u306B\u3057\u304B\u30B5\u30A4\u30BA\u3092\u5909\u66F4\u3067\
+    \u304D\u306A\u3044\n\ntemplate <typename Key, typename Val, bool fixed_size =\
+    \ false,\n          unsigned long long (*get_hash)(const Key&) =\n           \
+    \   internal::hash_function<Key>>\nstruct UnerasableHashMap {\n private:\n  int\
+    \ N, occupied_num, shift;\n  vector<Key> keys;\n  vector<Val> vals;\n  vector<char>\
+    \ flag;\n\n  Val default_value;\n  int default_size;\n\n  // \u30B5\u30A4\u30BA\
+    \u3092 n \u306B\u5909\u66F4\u3059\u308B\n  void init(int n, bool reset = false)\
+    \ {\n    assert(n >= 4 && (n & (n - 1)) == 0);\n    if constexpr (fixed_size)\
+    \ {\n      assert(reset == true);\n      n = N;\n    }\n    if (reset == true)\
+    \ {\n      N = n, occupied_num = 0, shift = 64 - __builtin_ctz(n);\n      keys.resize(n);\n\
+    \      vals.resize(n);\n      flag.resize(n);\n      fill(begin(vals), end(vals),\
+    \ default_value);\n      fill(begin(flag), end(flag), 0);\n    } else {\n    \
+    \  N = n, shift = 64 - __builtin_ctz(n);\n      vector<Key> keys2(n);\n      vector<Val>\
+    \ vals2(n, default_value);\n      vector<char> flag2(n);\n      swap(keys, keys2),\
+    \ swap(vals, vals2), swap(flag, flag2);\n      for (int i = 0; i < (int)flag2.size();\
     \ i++) {\n        if (flag2[i]) {\n          int j = hint(keys2[i]);\n       \
-    \   keys[j] = keys2[i];\n          vals[j] = vals2[i];\n          flag[j] = 1;\n\
-    \        }\n      }\n    }\n  }\n\n  int hint(const Key& k) {\n    int hash =\
-    \ get_hash(k) >> shift;\n    while (flag[hash] && keys[hash] != k) hash = (hash\
-    \ + 1) & (N - 1);\n    return hash;\n  }\n\n public:\n  UnerasableHashMap(const\
-    \ Val& _default_value = Val{})\n      : occupied_num(0), default_value(_default_value)\
-    \ {\n    init(init_size, true);\n  }\n\n  // key \u304C i \u3067\u3042\u308B\u8981\
-    \u7D20\u3078\u306E\u53C2\u7167\u3092\u8FD4\u3059\n  Val& operator[](const Key&\
-    \ k) {\n    int i = hint(k);\n    if (!flag[i]) {\n      if constexpr (fixed_size\
-    \ == false) {\n        if (occupied_num * 2 >= N) {\n          init(2 * N), i\
-    \ = hint(k);\n        }\n      }\n      keys[i] = k, flag[i] = 1, occupied_num++;\n\
-    \    }\n    return vals[i];\n  }\n\n  Val get(const Key& k) {\n    int i = hint(k);\n\
-    \    return flag[i] ? vals[i] : default_value;\n  }\n\n  // \u8D70\u67FB, f \u306B\
-    \u95A2\u6570 f(key, val) \u3092\u5165\u308C\u308B\n  template <typename F>\n \
-    \ void enumerate(const F f) {\n    for (int i = 0; i < (int)flag.size(); i++)\
-    \ {\n      if (flag[i]) f(keys[i], vals[i]);\n    }\n  }\n\n  int count(const\
-    \ Key& k) { return flag[hint(k)]; }\n  bool contain(const Key& k) { return flag[hint(k)];\
-    \ }\n  int size() const { return occupied_num; }\n  void reset() { init(init_size,\
-    \ true); }\n  void clear() { init(init_size, true); }\n};\n#line 6 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
+    \   keys[j] = keys2[i], vals[j] = vals2[i], flag[j] = 1;\n        }\n      }\n\
+    \    }\n  }\n\n public:\n  UnerasableHashMap(const Val& _default_value = Val{},\
+    \ int _default_size = 4)\n      : occupied_num(0), default_value(_default_value)\
+    \ {\n    if (fixed_size == false) _default_size = 4;\n    N = 4;\n    while (N\
+    \ < _default_size) N *= 2;\n    default_size = N;\n    init(N, true);\n  }\n\n\
+    \  int hint(const Key& k) {\n    int hash = get_hash(k) >> shift;\n    while (flag[hash]\
+    \ && keys[hash] != k) hash = (hash + 1) & (N - 1);\n    return hash;\n  }\n\n\
+    \  // key \u304C i \u3067\u3042\u308B\u8981\u7D20\u3078\u306E\u53C2\u7167\u3092\
+    \u8FD4\u3059\n  Val& operator[](const Key& k) {\n    int i = hint(k);\n    if\
+    \ (!flag[i]) {\n      if constexpr (fixed_size == false) {\n        if (occupied_num\
+    \ * 2 >= N) {\n          init(2 * N), i = hint(k);\n        }\n      }\n     \
+    \ keys[i] = k, flag[i] = 1, occupied_num++;\n    }\n    return vals[i];\n  }\n\
+    \n  Val get(const Key& k) {\n    int i = hint(k);\n    return flag[i] ? vals[i]\
+    \ : default_value;\n  }\n\n  // \u8D70\u67FB, f \u306B\u95A2\u6570 f(key, val)\
+    \ \u3092\u5165\u308C\u308B\n  template <typename F>\n  void enumerate(const F\
+    \ f) {\n    for (int i = 0; i < (int)flag.size(); i++) {\n      if (flag[i]) f(keys[i],\
+    \ vals[i]);\n    }\n  }\n\n  int count(const Key& k) { return flag[hint(k)]; }\n\
+    \  bool contain(const Key& k) { return flag[hint(k)]; }\n  int size() const {\
+    \ return occupied_num; }\n  void reset() { init(default_size, true); }\n  void\
+    \ clear() { init(default_size, true); }\n};\n#line 6 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
     \nusing namespace Nyaan;\n\nvoid q() {\n  UnerasableHashMap<ll, ll> mp;\n  UnerasableHashMap<ll,\
-    \ ll, 1 << 20, false> mp2;\n  UnerasableHashMap<i128, ll> mp3;\n  UnerasableHashMap<u128,\
+    \ ll, true> mp2(0, TEN(6));\n  UnerasableHashMap<i128, ll> mp3;\n  UnerasableHashMap<u128,\
     \ ll> mp4;\n\n  ini(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0) {\n\
     \      inl(k, v);\n      mp[k] = mp2[k] = mp3[k] = mp4[k] = v;\n    } else {\n\
     \      inl(k);\n      ll a1 = mp[k];\n      ll a2 = mp2[k];\n      ll a3 = mp3[k];\n\
@@ -305,7 +325,7 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n//\n\
     #include \"../../template/template.hpp\"\n//\n#include \"../../hashmap/hashmap-unerasable.hpp\"\
     \nusing namespace Nyaan;\n\nvoid q() {\n  UnerasableHashMap<ll, ll> mp;\n  UnerasableHashMap<ll,\
-    \ ll, 1 << 20, false> mp2;\n  UnerasableHashMap<i128, ll> mp3;\n  UnerasableHashMap<u128,\
+    \ ll, true> mp2(0, TEN(6));\n  UnerasableHashMap<i128, ll> mp3;\n  UnerasableHashMap<u128,\
     \ ll> mp4;\n\n  ini(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0) {\n\
     \      inl(k, v);\n      mp[k] = mp2[k] = mp3[k] = mp4[k] = v;\n    } else {\n\
     \      inl(k);\n      ll a1 = mp[k];\n      ll a2 = mp2[k];\n      ll a3 = mp3[k];\n\
@@ -326,7 +346,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   requiredBy: []
-  timestamp: '2023-05-27 23:17:31+09:00'
+  timestamp: '2023-08-10 17:54:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp

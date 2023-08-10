@@ -11,7 +11,7 @@ data:
   bundledCode: "#line 2 \"geometry/geometry.hpp\"\n\n#include <algorithm>\n#include\
     \ <cmath>\n#include <complex>\n#include <iostream>\n#include <vector>\nusing namespace\
     \ std;\n\nusing Real = long double;\nusing Point = complex<Real>;\nusing Points\
-    \ = vector<Point>;\nconstexpr Real EPS = 1e-8;\nconstexpr Real pi = 3.141592653589793238462643383279L;\n\
+    \ = vector<Point>;\nconstexpr Real EPS = 1e-9;\nconstexpr Real pi = 3.141592653589793238462643383279L;\n\
     istream &operator>>(istream &is, Point &p) {\n  Real a, b;\n  is >> a >> b;\n\
     \  p = Point(a, b);\n  return is;\n}\nostream &operator<<(ostream &os, Point &p)\
     \ {\n  return os << real(p) << \" \" << imag(p);\n}\ninline bool eq(Real a, Real\
@@ -69,7 +69,7 @@ data:
   code: "#pragma once\n\n#include <algorithm>\n#include <cmath>\n#include <complex>\n\
     #include <iostream>\n#include <vector>\nusing namespace std;\n\nusing Real = long\
     \ double;\nusing Point = complex<Real>;\nusing Points = vector<Point>;\nconstexpr\
-    \ Real EPS = 1e-8;\nconstexpr Real pi = 3.141592653589793238462643383279L;\nistream\
+    \ Real EPS = 1e-9;\nconstexpr Real pi = 3.141592653589793238462643383279L;\nistream\
     \ &operator>>(istream &is, Point &p) {\n  Real a, b;\n  is >> a >> b;\n  p = Point(a,\
     \ b);\n  return is;\n}\nostream &operator<<(ostream &os, Point &p) {\n  return\
     \ os << real(p) << \" \" << imag(p);\n}\ninline bool eq(Real a, Real b) { return\
@@ -128,7 +128,7 @@ data:
   isVerificationFile: false
   path: geometry/geometry.hpp
   requiredBy: []
-  timestamp: '2023-05-23 20:26:46+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/geometry.hpp

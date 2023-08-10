@@ -142,7 +142,8 @@ data:
     fps/multivariate-fps.hpp\"\n\n// FFT mod \u3067\u306A\u3044\u3068\u4F7F\u3048\u306A\
     \u3044\n// f.size() != (base \u306E\u7DCF\u7A4D) \u3067\u3082\u52D5\u304F\u304C\
     , \u4E8C\u9805\u6F14\u7B97\u306F\u9577\u3055\u304C\u7B49\u3057\u3044\u5217\u540C\
-    \u58EB\u3057\u304B\u30C0\u30E1\ntemplate <typename mint>\nstruct MultivariateFormalPowerSeries\
+    \u58EB\u3057\u304B\u30C0\u30E1\n// \u6DFB\u3048\u5B57\u30A2\u30AF\u30BB\u30B9\u306F\
+    \ operator() \u3092\u4F7F\u3046\ntemplate <typename mint>\nstruct MultivariateFormalPowerSeries\
     \ {\n  using mfps = MultivariateFormalPowerSeries<mint>;\n  using fps = FormalPowerSeries<mint>;\n\
     \n  fps f;\n  vector<int> base;\n\n  MultivariateFormalPowerSeries() = default;\n\
     \  MultivariateFormalPowerSeries(const vector<int>& _base) : base(_base) {\n \
@@ -151,6 +152,12 @@ data:
     \ ostream& operator<<(ostream& os, const mfps& rhs) {\n    os << \"[ \";\n   \
     \ for (int i = 0; i < (int)rhs.f.size(); i++) {\n      os << rhs.f[i] << (i +\
     \ 1 == (int)rhs.f.size() ? \"\" : \", \");\n    }\n    return os << \" ]\";\n\
+    \  }\n\n  long long _id(int) { return 0; }\n  template <typename Head, typename...\
+    \ Tail>\n  long long _id(int i, Head&& head, Tail&&... tail) {\n    assert(i <\
+    \ (int)base.size() && (int)head < base[i]);\n    return head + _id(i + 1, forward<Tail>(tail)...)\
+    \ * base[i];\n  }\n  template <typename... Args>\n  long long id(Args&&... args)\
+    \ {\n    return _id(0, forward<Args>(args)...);\n  }\n  template <typename...\
+    \ Args>\n  mint& operator()(Args&&... args) {\n    return f[id(forward<Args>(args)...)];\n\
     \  }\n\n  mfps& operator+=(const mfps& rhs) {\n    assert(base == rhs.base &&\
     \ f.size() == rhs.f.size());\n    for (int i = 0; i < (int)f.size(); i++) f[i]\
     \ += rhs.f[i];\n    return *this;\n  }\n  mfps& operator-=(const mfps& rhs) {\n\
@@ -219,7 +226,8 @@ data:
     \n#include \"formal-power-series.hpp\"\n\n// FFT mod \u3067\u306A\u3044\u3068\u4F7F\
     \u3048\u306A\u3044\n// f.size() != (base \u306E\u7DCF\u7A4D) \u3067\u3082\u52D5\
     \u304F\u304C, \u4E8C\u9805\u6F14\u7B97\u306F\u9577\u3055\u304C\u7B49\u3057\u3044\
-    \u5217\u540C\u58EB\u3057\u304B\u30C0\u30E1\ntemplate <typename mint>\nstruct MultivariateFormalPowerSeries\
+    \u5217\u540C\u58EB\u3057\u304B\u30C0\u30E1\n// \u6DFB\u3048\u5B57\u30A2\u30AF\u30BB\
+    \u30B9\u306F operator() \u3092\u4F7F\u3046\ntemplate <typename mint>\nstruct MultivariateFormalPowerSeries\
     \ {\n  using mfps = MultivariateFormalPowerSeries<mint>;\n  using fps = FormalPowerSeries<mint>;\n\
     \n  fps f;\n  vector<int> base;\n\n  MultivariateFormalPowerSeries() = default;\n\
     \  MultivariateFormalPowerSeries(const vector<int>& _base) : base(_base) {\n \
@@ -228,6 +236,12 @@ data:
     \ ostream& operator<<(ostream& os, const mfps& rhs) {\n    os << \"[ \";\n   \
     \ for (int i = 0; i < (int)rhs.f.size(); i++) {\n      os << rhs.f[i] << (i +\
     \ 1 == (int)rhs.f.size() ? \"\" : \", \");\n    }\n    return os << \" ]\";\n\
+    \  }\n\n  long long _id(int) { return 0; }\n  template <typename Head, typename...\
+    \ Tail>\n  long long _id(int i, Head&& head, Tail&&... tail) {\n    assert(i <\
+    \ (int)base.size() && (int)head < base[i]);\n    return head + _id(i + 1, forward<Tail>(tail)...)\
+    \ * base[i];\n  }\n  template <typename... Args>\n  long long id(Args&&... args)\
+    \ {\n    return _id(0, forward<Args>(args)...);\n  }\n  template <typename...\
+    \ Args>\n  mint& operator()(Args&&... args) {\n    return f[id(forward<Args>(args)...)];\n\
     \  }\n\n  mfps& operator+=(const mfps& rhs) {\n    assert(base == rhs.base &&\
     \ f.size() == rhs.f.size());\n    for (int i = 0; i < (int)f.size(); i++) f[i]\
     \ += rhs.f[i];\n    return *this;\n  }\n  mfps& operator-=(const mfps& rhs) {\n\
@@ -298,7 +312,7 @@ data:
   isVerificationFile: false
   path: fps/multivariate-fps.hpp
   requiredBy: []
-  timestamp: '2023-05-28 20:44:00+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1783.test.cpp

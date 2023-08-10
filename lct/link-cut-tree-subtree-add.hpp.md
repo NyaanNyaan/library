@@ -52,24 +52,24 @@ data:
     \ }\n\n  void link(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    u->p =\
     \ v, v->r = u;\n    update(v);\n  }\n\n  void cut(Ptr u, Ptr v) {\n    evert(u);\n\
     \    expose(v);\n    v->l = u->p = nullptr;\n    update(v);\n  }\n\n  void toggle(Ptr\
-    \ t) {\n    swap(t->l, t->r);\n    t->rev ^= true;\n  }\n\n  T get_key(Ptr t)\
-    \ {\n    expose(t);\n    return t->key;\n  }\n\n  void set_key(Ptr t, const T&\
-    \ key) {\n    expose(t);\n    t->key = key;\n    update(t);\n  }\n\n  void subtree_add(Ptr\
-    \ t, const T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) t->l =\
-    \ nullptr, update(t);\n    t->apply(add_val);\n    if (l) t->l = l, update(t);\n\
-    \  }\n\n  T subtree_sum(Ptr t) {\n    expose(t);\n    return add(t->key, t->subsum);\n\
-    \  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n    while (x->l) this->push(x),\
-    \ x = x->l;\n    return x;\n  }\n\n protected:\n  bool is_root(Ptr t) { return\
-    \ !(t->p) || (t->p->l != t && t->p->r != t); }\n\n  inline int pos(Ptr t) {\n\
-    \    if (t->p) {\n      if (t->p->l == t) return -1;\n      if (t->p->r == t)\
-    \ return 1;\n    }\n    return 0;\n  }\n\n  void rot(Ptr t) {\n    Ptr x = t->p,\
-    \ y = x->p;\n    push(x), push(t);\n    if (pos(t) == -1) {\n      if ((x->l =\
-    \ t->r)) t->r->p = x;\n      t->r = x, x->p = t;\n    } else {\n      if ((x->r\
-    \ = t->l)) t->l->p = x;\n      t->l = x, x->p = t;\n    }\n    T xc = x->cancel;\n\
-    \    update(x), update(t);\n    t->cancel = xc;\n    if ((t->p = y)) {\n     \
-    \ if (y->l == x) y->l = t;\n      if (y->r == x) y->r = t;\n    }\n  }\n};\n\n\
-    /**\n * @brief \u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree\n\
-    \ */\n"
+    \ t) {\n    if(!t) return;\n    swap(t->l, t->r);\n    t->rev ^= true;\n  }\n\n\
+    \  T get_key(Ptr t) {\n    expose(t);\n    return t->key;\n  }\n\n  void set_key(Ptr\
+    \ t, const T& key) {\n    expose(t);\n    t->key = key;\n    update(t);\n  }\n\
+    \n  void subtree_add(Ptr t, const T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n\
+    \    if (l) t->l = nullptr, update(t);\n    t->apply(add_val);\n    if (l) t->l\
+    \ = l, update(t);\n  }\n\n  T subtree_sum(Ptr t) {\n    expose(t);\n    return\
+    \ add(t->key, t->subsum);\n  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n  \
+    \  while (x->l) this->push(x), x = x->l;\n    return x;\n  }\n\n protected:\n\
+    \  bool is_root(Ptr t) { return !(t->p) || (t->p->l != t && t->p->r != t); }\n\
+    \n  inline int pos(Ptr t) {\n    if (t->p) {\n      if (t->p->l == t) return -1;\n\
+    \      if (t->p->r == t) return 1;\n    }\n    return 0;\n  }\n\n  void rot(Ptr\
+    \ t) {\n    Ptr x = t->p, y = x->p;\n    push(x), push(t);\n    if (pos(t) ==\
+    \ -1) {\n      if ((x->l = t->r)) t->r->p = x;\n      t->r = x, x->p = t;\n  \
+    \  } else {\n      if ((x->r = t->l)) t->l->p = x;\n      t->l = x, x->p = t;\n\
+    \    }\n    T xc = x->cancel;\n    update(x), update(t);\n    t->cancel = xc;\n\
+    \    if ((t->p = y)) {\n      if (y->l == x) y->l = t;\n      if (y->r == x) y->r\
+    \ = t;\n    }\n  }\n};\n\n/**\n * @brief \u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\
+    \u30EALink/Cut Tree\n */\n"
   code: "#pragma once\n\ntemplate <typename T, T (*add)(T, T), T (*sub)(T, T), T (*mul)(T,\
     \ long long)>\nstruct LinkCutForSubtreeNode {\n  using Node = LinkCutForSubtreeNode;\n\
     \  using Ptr = LinkCutForSubtreeNode*;\n  Ptr l, r, p;\n  T key, sum, lazy, cancel,\
@@ -106,33 +106,34 @@ data:
     \    expose(t);\n    toggle(t);\n    push(t);\n  }\n\n  void link(Ptr u, Ptr v)\
     \ {\n    evert(u);\n    expose(v);\n    u->p = v, v->r = u;\n    update(v);\n\
     \  }\n\n  void cut(Ptr u, Ptr v) {\n    evert(u);\n    expose(v);\n    v->l =\
-    \ u->p = nullptr;\n    update(v);\n  }\n\n  void toggle(Ptr t) {\n    swap(t->l,\
-    \ t->r);\n    t->rev ^= true;\n  }\n\n  T get_key(Ptr t) {\n    expose(t);\n \
-    \   return t->key;\n  }\n\n  void set_key(Ptr t, const T& key) {\n    expose(t);\n\
-    \    t->key = key;\n    update(t);\n  }\n\n  void subtree_add(Ptr t, const T&\
-    \ add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) t->l = nullptr, update(t);\n\
-    \    t->apply(add_val);\n    if (l) t->l = l, update(t);\n  }\n\n  T subtree_sum(Ptr\
-    \ t) {\n    expose(t);\n    return add(t->key, t->subsum);\n  }\n\n  Ptr get_root(Ptr\
-    \ x) {\n    expose(x);\n    while (x->l) this->push(x), x = x->l;\n    return\
-    \ x;\n  }\n\n protected:\n  bool is_root(Ptr t) { return !(t->p) || (t->p->l !=\
-    \ t && t->p->r != t); }\n\n  inline int pos(Ptr t) {\n    if (t->p) {\n      if\
-    \ (t->p->l == t) return -1;\n      if (t->p->r == t) return 1;\n    }\n    return\
-    \ 0;\n  }\n\n  void rot(Ptr t) {\n    Ptr x = t->p, y = x->p;\n    push(x), push(t);\n\
-    \    if (pos(t) == -1) {\n      if ((x->l = t->r)) t->r->p = x;\n      t->r =\
-    \ x, x->p = t;\n    } else {\n      if ((x->r = t->l)) t->l->p = x;\n      t->l\
-    \ = x, x->p = t;\n    }\n    T xc = x->cancel;\n    update(x), update(t);\n  \
-    \  t->cancel = xc;\n    if ((t->p = y)) {\n      if (y->l == x) y->l = t;\n  \
-    \    if (y->r == x) y->r = t;\n    }\n  }\n};\n\n/**\n * @brief \u90E8\u5206\u6728\
-    \u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree\n */\n"
+    \ u->p = nullptr;\n    update(v);\n  }\n\n  void toggle(Ptr t) {\n    if(!t) return;\n\
+    \    swap(t->l, t->r);\n    t->rev ^= true;\n  }\n\n  T get_key(Ptr t) {\n   \
+    \ expose(t);\n    return t->key;\n  }\n\n  void set_key(Ptr t, const T& key) {\n\
+    \    expose(t);\n    t->key = key;\n    update(t);\n  }\n\n  void subtree_add(Ptr\
+    \ t, const T& add_val) {\n    expose(t);\n    Ptr l = t->l;\n    if (l) t->l =\
+    \ nullptr, update(t);\n    t->apply(add_val);\n    if (l) t->l = l, update(t);\n\
+    \  }\n\n  T subtree_sum(Ptr t) {\n    expose(t);\n    return add(t->key, t->subsum);\n\
+    \  }\n\n  Ptr get_root(Ptr x) {\n    expose(x);\n    while (x->l) this->push(x),\
+    \ x = x->l;\n    return x;\n  }\n\n protected:\n  bool is_root(Ptr t) { return\
+    \ !(t->p) || (t->p->l != t && t->p->r != t); }\n\n  inline int pos(Ptr t) {\n\
+    \    if (t->p) {\n      if (t->p->l == t) return -1;\n      if (t->p->r == t)\
+    \ return 1;\n    }\n    return 0;\n  }\n\n  void rot(Ptr t) {\n    Ptr x = t->p,\
+    \ y = x->p;\n    push(x), push(t);\n    if (pos(t) == -1) {\n      if ((x->l =\
+    \ t->r)) t->r->p = x;\n      t->r = x, x->p = t;\n    } else {\n      if ((x->r\
+    \ = t->l)) t->l->p = x;\n      t->l = x, x->p = t;\n    }\n    T xc = x->cancel;\n\
+    \    update(x), update(t);\n    t->cancel = xc;\n    if ((t->p = y)) {\n     \
+    \ if (y->l == x) y->l = t;\n      if (y->r == x) y->r = t;\n    }\n  }\n};\n\n\
+    /**\n * @brief \u90E8\u5206\u6728\u52A0\u7B97\u30AF\u30A8\u30EALink/Cut Tree\n\
+    \ */\n"
   dependsOn: []
   isVerificationFile: false
   path: lct/link-cut-tree-subtree-add.hpp
   requiredBy: []
-  timestamp: '2021-01-31 21:16:16+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
 documentation_of: lct/link-cut-tree-subtree-add.hpp
 layout: document
 redirect_from:

@@ -178,6 +178,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+    title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
   - icon: ':heavy_check_mark:'
@@ -207,6 +210,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
     title: verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+    title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
     title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
@@ -255,9 +261,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
     title: verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-    title: verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -311,21 +314,16 @@ data:
     \ char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++] =\
     \ c;\n}\nvoid single_write(const bool& b) {\n  if (out_right > SZ - offset) flush();\n\
     \  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const string& S)\
-    \ {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right == SZ) flush();\n\
-    \    int len = min((int)S.size() - i, SZ - out_right);\n    memcpy(outbuf + out_right,\
-    \ S.data() + i, sizeof(char) * len);\n    i += len, out_right += len;\n  }\n}\n\
-    void single_write(const char* p) {\n  int i = 0, N = strlen(p);\n  while (i !=\
-    \ N) {\n    if (out_right == SZ) flush();\n    int len = min(N - i, SZ - out_right);\n\
-    \    memcpy(outbuf + out_right, p + i, sizeof(char) * len);\n    i += len, out_right\
-    \ += len;\n  }\n}\ntemplate <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\nvoid single_write(const T& _x) {\n  if (out_right > SZ - offset)\
-    \ flush();\n  if (_x == 0) {\n    outbuf[out_right++] = '0';\n    return;\n  }\n\
-    \  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (x <\
-    \ 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size = sizeof(T)\
-    \ * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while (x >= 10000)\
-    \ {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4, 4);\n    x /=\
-    \ 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right] =\
-    \ '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
+    \ {\n  flush(), fwrite(S.data(), 1, S.size(), stdout);\n}\nvoid single_write(const\
+    \ char* p) { flush(), fwrite(p, 1, strlen(p), stdout); }\ntemplate <typename T,\n\
+    \          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\nvoid single_write(const\
+    \ T& _x) {\n  if (out_right > SZ - offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++]\
+    \ = '0';\n    return;\n  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>)\
+    \ {\n    if (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
+    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
+    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
+    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
+    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
     \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
     \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
     \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
@@ -367,14 +365,9 @@ data:
     void single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n\
     \  outbuf[out_right++] = c;\n}\nvoid single_write(const bool& b) {\n  if (out_right\
     \ > SZ - offset) flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const\
-    \ string& S) {\n  int i = 0;\n  while (i != (int)S.size()) {\n    if (out_right\
-    \ == SZ) flush();\n    int len = min((int)S.size() - i, SZ - out_right);\n   \
-    \ memcpy(outbuf + out_right, S.data() + i, sizeof(char) * len);\n    i += len,\
-    \ out_right += len;\n  }\n}\nvoid single_write(const char* p) {\n  int i = 0,\
-    \ N = strlen(p);\n  while (i != N) {\n    if (out_right == SZ) flush();\n    int\
-    \ len = min(N - i, SZ - out_right);\n    memcpy(outbuf + out_right, p + i, sizeof(char)\
-    \ * len);\n    i += len, out_right += len;\n  }\n}\ntemplate <typename T,\n  \
-    \        enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\nvoid single_write(const\
+    \ string& S) {\n  flush(), fwrite(S.data(), 1, S.size(), stdout);\n}\nvoid single_write(const\
+    \ char* p) { flush(), fwrite(p, 1, strlen(p), stdout); }\ntemplate <typename T,\n\
+    \          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\nvoid single_write(const\
     \ T& _x) {\n  if (out_right > SZ - offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++]\
     \ = '0';\n    return;\n  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>)\
     \ {\n    if (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
@@ -400,92 +393,93 @@ data:
   path: misc/fastio.hpp
   requiredBy:
   - misc/all.hpp
-  timestamp: '2023-05-29 20:16:02+09:00'
+  timestamp: '2023-08-10 14:25:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
-  - verify/verify-yuki/yuki-1340-bitmatrix.test.cpp
-  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
-  - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
-  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
-  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
-  - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
-  - verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
-  - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
-  - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
-  - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
-  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
-  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
-  - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
-  - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
-  - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
-  - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
-  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
-  - verify/verify-unit-test/rbst-segment-tree.test.cpp
-  - verify/verify-unit-test/radix-sort.test.cpp
-  - verify/verify-unit-test/bigint2.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
-  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-yosupo-graph/yosupo-matching-on-bipartite-graph.test.cpp
-  - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
+  - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
-  - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-doubling.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
-  - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
-  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
-  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-swag.test.cpp
-  - verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
+  - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
+  - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-3.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
+  - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
+  - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
+  - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-dseg2d.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
-  - verify/verify-yosupo-ds/yosupo-static-range-inversions-query.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
-  - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-abstruct-range-tree.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
-  - verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
-  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
-  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-rtree-fenwick.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-path-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hashmap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-hash-map-variable-length.test.cpp
+  - verify/verify-yosupo-ds/yosupo-swag.test.cpp
+  - verify/verify-yosupo-ds/yosupo-segtree-beats.test.cpp
+  - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-treap.test.cpp
+  - verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-inliner-multiply.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-toom-3.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-large.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multiplicative-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-real-fft-15bit.test.cpp
+  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-fastio.test.cpp
+  - verify/verify-yosupo-other/yosupo-many-a-plus-b.test.cpp
   - verify/verify-aoj-other/aoj-2995.test.cpp
   - verify/verify-aoj-other/aoj-2995-hashmap.test.cpp
-  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/rbst-segment-tree.test.cpp
+  - verify/verify-unit-test/radix-sort.test.cpp
+  - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+  - verify/verify-unit-test/bigint2.test.cpp
+  - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-tetration-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-mod-log.test.cpp
+  - verify/verify-yosupo-math/yosupo-linear-equation-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
+  - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
+  - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
+  - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
+  - verify/verify-yosupo-math/yosupo-gcd-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-matrix-product-vectorize-modint.test.cpp
+  - verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
+  - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
+  - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
+  - verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
+  - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-division-of-polynomials.test.cpp
+  - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-of-polynomials.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly.test.cpp
-  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
-  - verify/verify-yosupo-fps/yosupo-composition.test.cpp
-  - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-relaxed-convolution.test.cpp
-  - verify/verify-yosupo-fps/yosupo-inv-relaxed-convolution.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
+  - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 documentation_of: misc/fastio.hpp
 layout: document
 redirect_from:

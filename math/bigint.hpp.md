@@ -61,8 +61,14 @@ data:
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
   - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
-    title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+    path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+    title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+    title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+    title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
     title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
@@ -668,20 +674,22 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0303.test.cpp
-  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
-  - verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
-  - verify/verify-unit-test/bigint.test.cpp
-  - verify/verify-unit-test/bigint2.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
   - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
+  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
+  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - verify/verify-unit-test/bigint.test.cpp
+  - verify/verify-unit-test/bigint3.test.cpp
+  - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/bigint-gcd.test.cpp
+  - verify/verify-unit-test/bigint2.test.cpp
+  - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+  - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
 documentation_of: math/bigint.hpp
 layout: document
 redirect_from:

@@ -473,8 +473,11 @@ data:
       path: math/semiring.hpp
       title: "\u534A\u74B0\u30E9\u30A4\u30D6\u30E9\u30EA"
     - icon: ':heavy_check_mark:'
+      path: math/stern-brocot-tree-binary-search.hpp
+      title: math/stern-brocot-tree-binary-search.hpp
+    - icon: ':heavy_check_mark:'
       path: math/stern-brocot-tree.hpp
-      title: math/stern-brocot-tree.hpp
+      title: Stern-Brocot Tree
     - icon: ':heavy_check_mark:'
       path: math/sum-of-floor.hpp
       title: math/sum-of-floor.hpp
@@ -496,6 +499,9 @@ data:
       path: math-fast/gcd.hpp
       title: binary GCD
     - icon: ':heavy_check_mark:'
+      path: math-fast/inv.hpp
+      title: math-fast/inv.hpp
+    - icon: ':heavy_check_mark:'
       path: math-fast/mat-prod-strassen.hpp
       title: math-fast/mat-prod-strassen.hpp
     - icon: ':heavy_check_mark:'
@@ -507,14 +513,14 @@ data:
   - name: matrix
     pages:
     - icon: ':heavy_check_mark:'
-      path: matrix/bitmatrix.hpp
-      title: matrix/bitmatrix.hpp
-    - icon: ':heavy_check_mark:'
       path: matrix/black-box-linear-algebra.hpp
       title: Black Box Linear Algebra
     - icon: ':heavy_check_mark:'
       path: matrix/characteristric-polynomial.hpp
       title: matrix/characteristric-polynomial.hpp
+    - icon: ':heavy_check_mark:'
+      path: matrix/f2_matrix.hpp
+      title: matrix/f2_matrix.hpp
     - icon: ':heavy_check_mark:'
       path: matrix/gauss-elimination.hpp
       title: matrix/gauss-elimination.hpp
@@ -1010,14 +1016,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: tree/tree-query.hpp
       title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
-  - name: trial
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: trial/fast-gcd.hpp
-      title: "\u9AD8\u901FGCD"
-    - icon: ':heavy_check_mark:'
-      path: trial/fast-inv.hpp
-      title: "\u9AD8\u901Fmodulo\u9006\u5143"
   verificationCategories:
   - name: verify/verify-aoj-alds
     pages:
@@ -1300,8 +1298,8 @@ data:
       path: verify/verify-unit-test/fast-bs.test.cpp
       title: verify/verify-unit-test/fast-bs.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-unit-test/fast-inv-gcd.test.cpp
-      title: verify/verify-unit-test/fast-inv-gcd.test.cpp
+      path: verify/verify-unit-test/fast-inv.test.cpp
+      title: verify/verify-unit-test/fast-inv.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fps.test.cpp
       title: verify/verify-unit-test/fps.test.cpp
@@ -1590,6 +1588,9 @@ data:
       path: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-reverse-range-sum.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-reverse-range-sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
       title: verify/verify-yosupo-ds/yosupo-rectangle-sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1788,6 +1789,9 @@ data:
   - name: verify/verify-yosupo-math
     pages:
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+      title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
       title: verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1824,8 +1828,8 @@ data:
       path: verify/verify-yosupo-math/yosupo-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant.test.cpp
     - icon: ':heavy_check_mark:'
-      path: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
-      title: verify/verify-yosupo-math/yosupo-division-of-big-integer.test.cpp
+      path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
+      title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
       title: verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
@@ -1869,6 +1873,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
       title: verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+      title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
       title: verify/verify-yosupo-math/yosupo-nim-product.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1889,6 +1896,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
+      title: verify/verify-yosupo-math/yosupo-stern-brocot-tree.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
       title: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
@@ -2200,6 +2210,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-2231.test.cpp
       title: verify/verify-yuki/yuki-2231.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-2262.test.cpp
+      title: verify/verify-yuki/yuki-2262.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-2266.test.cpp
       title: verify/verify-yuki/yuki-2266.test.cpp

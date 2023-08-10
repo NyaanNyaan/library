@@ -176,11 +176,11 @@ data:
   timestamp: '2023-05-22 22:29:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
-  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
-  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
+  - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
+  - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
 documentation_of: fps/taylor-shift.hpp

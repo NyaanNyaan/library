@@ -34,8 +34,10 @@ data:
     \ q.shrink(); }\n  friend bool operator==(const frac& l, const frac& r) {\n  \
     \  return l.p == r.p && l.q == r.q;\n  }\n  friend bool operator!=(const frac&\
     \ l, const frac& r) {\n    return l.p != r.p || l.q != r.q;\n  }\n  friend ostream&\
-    \ operator<<(ostream& os, const frac& r) {\n    os << \"[ \" << r.p << \", \"\
-    \ << r.q << \" ]\";\n    return os;\n  }\n};\n"
+    \ operator<<(ostream& os, const frac& r) {\n    os << \"[ \";\n    for (auto&\
+    \ x : r.p) os << x << \", \";\n    os << \"], \";\n    os << \"[ \";\n    for\
+    \ (auto& x : r.q) os << x << \", \";\n    os << \" ]\";\n    return os;\n  }\n\
+    };\n"
   code: "#pragma once\n\ntemplate <typename fps>\nstruct fps_fraction {\n  using frac\
     \ = fps_fraction;\n  using mint = typename fps::value_type;\n\n  fps p, q;\n \
     \ fps_fraction(const fps& numerator = fps{0}, const fps& denominator = fps{1})\n\
@@ -59,13 +61,15 @@ data:
     \ q.shrink(); }\n  friend bool operator==(const frac& l, const frac& r) {\n  \
     \  return l.p == r.p && l.q == r.q;\n  }\n  friend bool operator!=(const frac&\
     \ l, const frac& r) {\n    return l.p != r.p || l.q != r.q;\n  }\n  friend ostream&\
-    \ operator<<(ostream& os, const frac& r) {\n    os << \"[ \" << r.p << \", \"\
-    \ << r.q << \" ]\";\n    return os;\n  }\n};\n"
+    \ operator<<(ostream& os, const frac& r) {\n    os << \"[ \";\n    for (auto&\
+    \ x : r.p) os << x << \", \";\n    os << \"], \";\n    os << \"[ \";\n    for\
+    \ (auto& x : r.q) os << x << \", \";\n    os << \" ]\";\n    return os;\n  }\n\
+    };\n"
   dependsOn: []
   isVerificationFile: false
   path: fps/fps-fraction.hpp
   requiredBy: []
-  timestamp: '2021-05-29 08:05:15+09:00'
+  timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1145-frac.test.cpp
