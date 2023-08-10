@@ -291,6 +291,35 @@ void verify_util() {
       assert(v == w && "nxp");
     }
   }
+
+  // product
+  {
+    auto v = product(vector{2LL, 3LL});
+    assert(sz(v) == 6);
+    rep(i, sz(v)) {
+      assert(sz(v[i]) == 2);
+      assert(v[i][0] == i / 3);
+      assert(v[i][1] == i % 3);
+    }
+  }
+
+  // Power
+  {
+    using mint = LazyMontgomeryModInt<998244353>;
+    for (ll x = 1; x <= 100; x++) {
+      i128 y = 1;
+      for (ll e = 0; e <= 64; e++) {
+        ll z1 = Power<ll>(x, e, 1);
+        ll z2 = Power<ll>(x, e, 1, [](ll& a) { a %= 998244353; });
+        mint z3 = Power<mint>(x, e, 1);
+        assert(z1 == y);
+        assert(z2 == y % 998244353);
+        assert(z3.get() == z2);
+        y *= x;
+        if (y >= 8 * TEN(18)) break;
+      }
+    }
+  }
 }
 
 void Nyaan::solve() {

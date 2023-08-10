@@ -1,4 +1,4 @@
-#define PROBLEM "https://yukicoder.me/problems/no/2266"
+#define PROBLEM "https://yukicoder.me/problems/no/2262"
 //
 #include "../../template/template.hpp"
 //
@@ -62,6 +62,6 @@ void q() {
 
 void Nyaan::solve() {
   int t = 1;
-  // in(t);
+  in(t);
   while (t--) q();
 }

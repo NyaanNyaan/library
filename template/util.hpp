@@ -15,6 +15,8 @@ using vd = V<double>;
 using vs = V<string>;
 using vvi = vector<vector<int>>;
 using vvl = vector<vector<long long>>;
+template <typename T>
+using minpq = priority_queue<T, vector<T>, greater<T>>;
 
 template <typename T, typename U>
 struct P : pair<T, U> {
@@ -128,7 +130,7 @@ vector<T> mkuni(const vector<T> &v) {
 }
 
 template <typename F>
-vector<int> mkord(int N,F f) {
+vector<int> mkord(int N, F f) {
   vector<int> ord(N);
   iota(begin(ord), end(ord), 0);
   sort(begin(ord), end(ord), f);
@@ -161,7 +163,37 @@ bool nxp(vector<T> &v) {
   return next_permutation(begin(v), end(v));
 }
 
+// 返り値の型は入力の T に依存
+// i 要素目 : [0, a[i])
 template <typename T>
-using minpq = priority_queue<T, vector<T>, greater<T>>;
+vector<vector<T>> product(const vector<T> &a) {
+  vector<vector<T>> ret;
+  vector<T> v;
+  auto dfs = [&](auto rc, int i) -> void {
+    if (i == (int)a.size()) {
+      ret.push_back(v);
+      return;
+    }
+    for (int j = 0; j < a[i]; j++) v.push_back(j), rc(rc, i + 1), v.pop_back();
+  };
+  dfs(dfs, 0);
+  return ret;
+}
+
+// F : function(void(T&)), mod を取る操作
+// T : 整数型のときはオーバーフローに注意する
+template <typename T>
+T Power(T a, long long n, const T &I, const function<void(T &)> &f) {
+  T res = I;
+  for (; n; f(a = a * a), n >>= 1) {
+    if (n & 1) f(res = res * a);
+  }
+  return res;
+}
+// T : 整数型のときはオーバーフローに注意する
+template <typename T>
+T Power(T a, long long n, const T &I) {
+  return Power(a, n, I, function<void(T &)>{[](T &) -> void {}});
+}
 
 }  // namespace Nyaan

@@ -82,7 +82,7 @@ struct TreapBase {
   }
 
   template <typename... Args>
-  void insert(Ptr &t, int k, const Args &... args) {
+  void insert(Ptr &t, int k, const Args &...args) {
     auto x = split(t, k);
     t = merge(merge(x.first, my_new(args...)), x.second);
   }
@@ -93,13 +93,12 @@ struct TreapBase {
   }
 
  protected:
-
   void dfs(Ptr r) {
     if (r->l) dfs(r->l);
     if (r->r) dfs(r->r);
     update(r);
   }
-  
+
   inline int count(const Ptr t) const { return t ? t->cnt : 0; }
 
   virtual void push(Ptr) {}
@@ -140,6 +139,7 @@ struct LazyReversibleTreap : TreapBase<LazyReversibleTreapNode<T, E>> {
   LazyReversibleTreap() = default;
 
   void toggle(Ptr t) {
+    if (!t) return;
     swap(t->l, t->r);
     t->sum = ts(t->sum);
     t->rev ^= true;

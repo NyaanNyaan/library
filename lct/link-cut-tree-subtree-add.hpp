@@ -131,6 +131,7 @@ struct LinkCutTreeSubtreeQuery {
   }
 
   void toggle(Ptr t) {
+    if(!t) return;
     swap(t->l, t->r);
     t->rev ^= true;
   }

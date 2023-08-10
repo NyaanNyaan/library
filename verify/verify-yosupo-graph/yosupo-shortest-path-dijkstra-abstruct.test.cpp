@@ -11,17 +11,12 @@ void q() {
   inl(N, M, S, T);
   auto g = wgraph<ll>(N, M, true, false);
 
-  auto d = dijkstra_abstruct<int, ll>(
+  auto res = dijkstra_abstruct<int, ll>(
       [&](int c, ll cd, auto add) { each(e, g[c]) add(e.to, cd + e.cost); }, S,
       T);
-  if (d.count(T) == 0) die(-1);
-  vi path;
-  for (int x = T; x != S; x = d[x].second) path.push_back(x);
-  path.push_back(S);
-  reverse(all(path));
-
-  out(d[T].first, sz(path) - 1);
-  rep(i, sz(path) - 1) out(path[i], path[i + 1]);
+  if (!res.reachable) die(-1);
+  out(res.dist, sz(res.path) - 1);
+  rep(i, sz(res.path) - 1) out(res.path[i], res.path[i + 1]);
 }
 
 void Nyaan::solve() {

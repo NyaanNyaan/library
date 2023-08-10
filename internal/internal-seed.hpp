@@ -17,8 +17,9 @@ unsigned long long deterministic_seed() { return 88172645463325252UL; }
 
 // 64 bit の seed 値を生成 (手元では seed 固定)
 // 連続で呼び出すと同じ値が何度も返ってくるので注意
+// #define RANDOMIZED_SEED するとシードがランダムになる
 unsigned long long seed() {
-#if defined(NyaanLocal) && !defined(NON_DETERMINISTIC_SEED)
+#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)
   return deterministic_seed();
 #else
   return non_deterministic_seed();

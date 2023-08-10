@@ -59,6 +59,7 @@ struct LinkCutTreeSubtreeQuery
   }
 
   void toggle(Ptr t) override {
+    if(!t) return;
     swap(t->l, t->r);
     t->rev ^= true;
   }

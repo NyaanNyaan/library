@@ -1,5 +1,9 @@
 #pragma once
 
+#include <map>
+#include <vector>
+using namespace std;
+
 #include "../prime/prime-enumerate.hpp"
 
 struct divisor_transform {

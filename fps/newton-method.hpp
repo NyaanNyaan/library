@@ -12,7 +12,7 @@ fps newton_method(function<pair<fps, fps>(fps, int)> calc_g, fps f0, int deg) {
   fps f{f0};
   for (int d = f.size(); d < deg; d *= 2) {
     // 少し多めに計算しておく
-    const int extra = d + 5;
+    const int extra = d + 10;
     auto [g, dgdf] = calc_g(f, d * 2 + extra);
     int offset = 0;
     while (offset < (int)dgdf.size() && dgdf[offset] == 0) offset++;

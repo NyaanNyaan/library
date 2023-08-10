@@ -65,13 +65,14 @@ struct ImpartialGameSolver {
     }
   }
 
+  // 負け局面で呼ぶと RE する
   template <typename T>
   conditional_t<is_same_v<T, Board>, Move, pair<int, Move>> get_best_move(
       const T& t) {
     static_assert(is_void_v<Move> == false);
     Nimber n = get(t);
     assert(n != 0 and "No Best Move.");
-    if (is_same_v<T, Board>) {
+    if constexpr (is_same_v<T, Board>) {
       auto res = change_x(t, n);
       if (res.first) return res.second;
     } else {

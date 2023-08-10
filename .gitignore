@@ -3,6 +3,7 @@ __pycache__
 .vscode/launch.json
 .vscode/tasks.json
 a.cpp
+a copy*
 a.exe
 a.py
 auto_submit.py
@@ -43,3 +44,6 @@ convolution.hpp
 judge.py
 nai.exe
 test.py
+
+testlib.h
+
