@@ -36,6 +36,7 @@ struct UnerasableHashMap {
   void init(int n, bool reset = false) {
     assert(n >= 4 && (n & (n - 1)) == 0);
     if constexpr (fixed_size) {
+      assert(reset == true);
       n = N;
     }
     if (reset == true) {
@@ -64,9 +65,10 @@ struct UnerasableHashMap {
   UnerasableHashMap(const Val& _default_value = Val{}, int _default_size = 4)
       : occupied_num(0), default_value(_default_value) {
     if (fixed_size == false) _default_size = 4;
-    int m = 4;
-    while (m < _default_size) m *= 2;
-    init(default_size = m, true);
+    N = 4;
+    while (N < _default_size) N *= 2;
+    default_size = N;
+    init(N, true);
   }
 
   int hint(const Key& k) {
