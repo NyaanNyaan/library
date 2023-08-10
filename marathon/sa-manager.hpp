@@ -7,26 +7,11 @@ using namespace std;
 
 #include "../misc/rng.hpp"
 #include "../misc/timer.hpp"
+#include "log_table.hpp"
 
 template <typename state_t, typename score_t>
 struct SA_manager {
  private:
-  struct log_table {
-    static constexpr int M = 65536;
-    static constexpr int mask = M - 1;
-    double l[M];
-    log_table() : l() {
-      unsigned long long x = 88172645463325252ULL;
-      double log_u64max = log(2) * 64;
-      for (int i = 0; i < M; i++) {
-        x = x ^ (x << 7);
-        x = x ^ (x >> 9);
-        l[i] = log(double(x)) - log_u64max;
-      }
-    }
-    double operator()(int i) const { return l[i & mask]; }
-  };
-
   log_table rand_log;
   Timer timer;
   double start_time, end_time, inv_time, cur_time;

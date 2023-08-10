@@ -1,8 +1,15 @@
 #pragma once
 
+#include <cassert>
+#include <cstdint>
+#include <unordered_set>
+#include <numeric>
+#include <string>
+#include <vector>
+#include <iostream>
+using namespace std;
 
-
-#include "../misc/timer.hpp"
+#include "../../../misc/timer.hpp"
 
 namespace fast_gcd {
 using u64 = uint64_t;
@@ -85,7 +92,7 @@ void unit_test() {
   }
 
   vector<F> functions{
-      std::__gcd<uint64_t>,
+      std::gcd<uint64_t>,
       naive_gcd,
       binary_gcd,
   };
@@ -108,7 +115,7 @@ void unit_test() {
 
   // std::__gcd
   cerr << "std::__gcd" << endl;
-  test_inner(std::__gcd<uint64_t>);
+  test_inner(std::gcd<uint64_t>);
 
   // naive-gcd
   cerr << "naive-gcd" << endl;

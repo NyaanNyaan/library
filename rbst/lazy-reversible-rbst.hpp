@@ -26,6 +26,7 @@ struct LazyReversibleRBST : RBSTBase<LazyReversibleRBSTNode<T, E>> {
   LazyReversibleRBST() = default;
 
   void toggle(Ptr t) {
+    if(!t) return;
     swap(t->l, t->r);
     t->sum = ts(t->sum);
     t->rev ^= true;

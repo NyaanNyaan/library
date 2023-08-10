@@ -20,7 +20,7 @@ struct Basis {
   bool add(Int x) {
     int t = _msb(x);
     assert(t < MAX);
-    while (t != -1 && v[t]) t = _msb(x = x ^ v[t]);
+    while (t != -1 && v[t]) t = _msb(x ^= v[t]);
     return t == -1 ? false : (v[t] = x, _size++, true);
   }
 
@@ -30,13 +30,14 @@ struct Basis {
       if (rhs.v[_t] == Int{0}) continue;
       int t = _t;
       Int x = rhs.v[t];
-      while (t != -1 && v[t]) t = _msb(x = x ^ v[t]);
+      while (t != -1 && v[t]) t = _msb(x ^= v[t]);
       if (x) v[t] = x, _size++;
     }
   }
 
-  // 基底を得る。TODO:verify
-  vector<Int> get_basis() const {
+  // 正規化された基底を得る (O(MAX^2))
+  vector<Int> get_basis() {
+    normalize();
     vector<Int> res;
     for (int t = 0; t < MAX; t++) {
       if (v[t]) res.push_back(v[t]);
@@ -50,11 +51,11 @@ struct Basis {
     if (x == 0) return true;
     int t = _msb(x);
     if (t >= MAX) return false;
-    while (v[t]) t = _msb(x = x ^ v[t]);
+    while (t != -1 && v[t]) t = _msb(x ^= v[t]);
     return x == 0;
   }
 
-  // 作れる x の最大値, TODO:verify
+  // 作れる x の最大値 TODO:verify
   Int get_max() const {
     Int res = 0;
     for (int t = MAX - 1; t >= 0; t--) res = max(res, res ^ v[t]);

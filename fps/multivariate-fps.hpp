@@ -11,6 +11,7 @@ using namespace std;
 
 // FFT mod でないと使えない
 // f.size() != (base の総積) でも動くが, 二項演算は長さが等しい列同士しかダメ
+// 添え字アクセスは operator() を使う
 template <typename mint>
 struct MultivariateFormalPowerSeries {
   using mfps = MultivariateFormalPowerSeries<mint>;
@@ -34,6 +35,21 @@ struct MultivariateFormalPowerSeries {
       os << rhs.f[i] << (i + 1 == (int)rhs.f.size() ? "" : ", ");
     }
     return os << " ]";
+  }
+
+  long long _id(int) { return 0; }
+  template <typename Head, typename... Tail>
+  long long _id(int i, Head&& head, Tail&&... tail) {
+    assert(i < (int)base.size() && (int)head < base[i]);
+    return head + _id(i + 1, forward<Tail>(tail)...) * base[i];
+  }
+  template <typename... Args>
+  long long id(Args&&... args) {
+    return _id(0, forward<Args>(args)...);
+  }
+  template <typename... Args>
+  mint& operator()(Args&&... args) {
+    return f[id(forward<Args>(args)...)];
   }
 
   mfps& operator+=(const mfps& rhs) {

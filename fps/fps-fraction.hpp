@@ -53,7 +53,12 @@ struct fps_fraction {
     return l.p != r.p || l.q != r.q;
   }
   friend ostream& operator<<(ostream& os, const frac& r) {
-    os << "[ " << r.p << ", " << r.q << " ]";
+    os << "[ ";
+    for (auto& x : r.p) os << x << ", ";
+    os << "], ";
+    os << "[ ";
+    for (auto& x : r.q) os << x << ", ";
+    os << " ]";
     return os;
   }
 };

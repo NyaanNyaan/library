@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <chrono>
+#include <functional>
 #include <vector>
 using namespace std;
 
@@ -10,60 +11,68 @@ using namespace std;
 // 削除不可能な hashmap
 //
 // テンプレート引数
-// Key : Int, string, vector 辺りは何でも (小数系は無理)
-// Val : 何でも
-// init_size : 初期バケットサイズ
 // fixed_size : これを true にするするとバケットサイズが固定になる
+// get_hash : ハッシュ関数の指定
 // 引数
-// _default_value : Val の初期値, この値で初期化される
-template <typename Key, typename Val, int init_size = 4,
-          bool fixed_size = false>
-struct UnerasableHashMap {
-  static_assert(init_size >= 1 && (init_size & (init_size - 1)) == 0);
+// _default_value : val の初期値, この値で初期化
+// _default_size :
+// バケットサイズ, max(4, _default_size) 以上の 2 べきで初期化
+// ただし fixed_size が true の時にしかサイズを変更できない
 
+template <typename Key, typename Val, bool fixed_size = false,
+          unsigned long long (*get_hash)(const Key&) =
+              internal::hash_function<Key>>
+struct UnerasableHashMap {
  private:
-  int N, occupied_num;
+  int N, occupied_num, shift;
   vector<Key> keys;
   vector<Val> vals;
   vector<char> flag;
-  int shift;
+
   Val default_value;
+  int default_size;
 
-  // 64 bit の hash を返す
-  static unsigned long long get_hash(const Key& x) {
-    return internal::hash_function(x);
-  }
-
-  // サイズを n に拡張する
-  void init(int n = init_size, bool reset = false) {
-    vector<Key> keys2(n);
-    vector<Val> vals2(n, default_value);
-    vector<char> flag2(n);
-    int shift2 = 64 - __builtin_ctz(n);
-    swap(N, n), swap(keys, keys2);
-    swap(vals, vals2), swap(flag, flag2), swap(shift, shift2);
-    if (reset == false) {
+  // サイズを n に変更する
+  void init(int n, bool reset = false) {
+    assert(n >= 4 && (n & (n - 1)) == 0);
+    if constexpr (fixed_size) {
+      n = N;
+    }
+    if (reset == true) {
+      N = n, occupied_num = 0, shift = 64 - __builtin_ctz(n);
+      keys.resize(n);
+      vals.resize(n);
+      flag.resize(n);
+      fill(begin(vals), end(vals), default_value);
+      fill(begin(flag), end(flag), 0);
+    } else {
+      N = n, shift = 64 - __builtin_ctz(n);
+      vector<Key> keys2(n);
+      vector<Val> vals2(n, default_value);
+      vector<char> flag2(n);
+      swap(keys, keys2), swap(vals, vals2), swap(flag, flag2);
       for (int i = 0; i < (int)flag2.size(); i++) {
         if (flag2[i]) {
           int j = hint(keys2[i]);
-          keys[j] = keys2[i];
-          vals[j] = vals2[i];
-          flag[j] = 1;
+          keys[j] = keys2[i], vals[j] = vals2[i], flag[j] = 1;
         }
       }
     }
+  }
+
+ public:
+  UnerasableHashMap(const Val& _default_value = Val{}, int _default_size = 4)
+      : occupied_num(0), default_value(_default_value) {
+    if (fixed_size == false) _default_size = 4;
+    int m = 4;
+    while (m < _default_size) m *= 2;
+    init(default_size = m, true);
   }
 
   int hint(const Key& k) {
     int hash = get_hash(k) >> shift;
     while (flag[hash] && keys[hash] != k) hash = (hash + 1) & (N - 1);
     return hash;
-  }
-
- public:
-  UnerasableHashMap(const Val& _default_value = Val{})
-      : occupied_num(0), default_value(_default_value) {
-    init(init_size, true);
   }
 
   // key が i である要素への参照を返す
@@ -96,6 +105,6 @@ struct UnerasableHashMap {
   int count(const Key& k) { return flag[hint(k)]; }
   bool contain(const Key& k) { return flag[hint(k)]; }
   int size() const { return occupied_num; }
-  void reset() { init(init_size, true); }
-  void clear() { init(init_size, true); }
+  void reset() { init(default_size, true); }
+  void clear() { init(default_size, true); }
 };

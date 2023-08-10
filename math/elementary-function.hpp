@@ -1,20 +1,5 @@
 #pragma once
 
-long long my_gcd(long long x, long long y) {
-  long long z;
-  if (x > y) swap(x, y);
-  while (x) {
-    x = y % (z = x);
-    y = z;
-  }
-  return y;
-}
-long long my_lcm(long long x, long long y) {
-  return 1LL * x / my_gcd(x, y) * y;
-}
-#define gcd my_gcd
-#define lcm my_lcm
-
 // totient function φ(N)=(1 ~ N , gcd(i,N) = 1)
 // {0, 1, 1, 2, 4, 2, 6, 4, ... }
 vector<int> EulersTotientFunction(int N) {

@@ -110,14 +110,14 @@ struct Hash : array<u64, BASE_NUM> {
   static inline constexpr u64 cast(const long long &a) {
     return a < 0 ? a + md : a;
   }
-  static inline constexpr u64 modmul(const u64 &a, const u64 &b) {
-    u128 ret = u128(a) * b;
-    ret = (ret & md) + (ret >> 61);
+  static inline constexpr u64 modmul(const u64 &a, const u64 &b) { 
+    u128 d = u128(a) * b;
+    u64 ret = (u64(d) & md) + u64(d >> 61);
     return ret >= md ? ret - md : ret;
   }
   static inline constexpr u64 modfma(const u64 &a, const u64 &b, const u64 &c) {
-    u128 ret = u128(a) * b + c;
-    ret = (ret & md) + (ret >> 61);
+    u128 d = u128(a) * b + c;
+    u64 ret = (d >> 61) + (u64(d) & md);
     return ret >= md ? ret - md : ret;
   }
 };

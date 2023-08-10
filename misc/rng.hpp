@@ -1,18 +1,15 @@
 #pragma once
 
+#include "../internal/internal-seed.hpp"
+
 namespace my_rand {
 using i64 = long long;
 using u64 = unsigned long long;
 
 // [0, 2^64 - 1)
 u64 rng() {
-  static u64 _x =
-      u64(chrono::duration_cast<chrono::nanoseconds>(
-              chrono::high_resolution_clock::now().time_since_epoch())
-              .count()) *
-      10150724397891781847ULL;
-  _x ^= _x << 7;
-  return _x ^= _x >> 9;
+  static u64 _x = internal::seed();
+  return _x ^= _x << 7, _x ^= _x >> 9;
 }
 
 // [l, r]
@@ -24,7 +21,7 @@ i64 rng(i64 l, i64 r) {
 // [l, r)
 i64 randint(i64 l, i64 r) {
   assert(l < r);
-  return l + rng() % (r - l);
+  return l + rng() % u64(r - l);
 }
 
 // choose n numbers from [l, r) without overlapping
@@ -43,6 +40,11 @@ vector<i64> randset(i64 l, i64 r, i64 n) {
 
 // [0.0, 1.0)
 double rnd() { return rng() * 5.42101086242752217004e-20; }
+// [l, r)
+double rnd(double l, double r) {
+  assert(l < r);
+  return l + rnd() * (r - l);
+}
 
 template <typename T>
 void randshf(vector<T>& v) {

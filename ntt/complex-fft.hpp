@@ -283,9 +283,9 @@ struct CooleyTukey {
     return u;
   }
 
-  template <unsigned int MOD>
-  static vector<int> multiply_15bit(const vector<int>& a,
-                                    const vector<int>& b) {
+  template <unsigned int MOD = -1u>
+  static conditional_t<MOD == -1u, vector<__uint128_t>, vector<int>>
+  multiply_15bit(const vector<int>& a, const vector<int>& b) {
     using u64 = unsigned long long;
     constexpr u64 B = 32000;
     int l = a.size() + b.size() - 1;
@@ -314,17 +314,29 @@ struct CooleyTukey {
     ifft(BL, k);
     ifft(BH, k);
 
-    vector<int> u(l);
+    using return_type =
+        conditional_t<MOD + 1u == 0u, vector<__uint128_t>, vector<int>>;
+
+    return_type u(l);
     double im = 1.0 / (4.0 * M);
     for (int i = 0; i < l; i++) {
       BL[i].x *= im, BL[i].y *= im;
       BH[i].x *= im, BH[i].y *= im;
-      int x1 = u64(round(BL[i].x)) % MOD;
-      int x2 = u64(round(BH[i].x) + round(BH[i].y)) % MOD * B % MOD;
-      int x3 = u64(round(BL[i].y)) % MOD * (B * B % MOD) % MOD;
-      if ((x1 += x2) >= (int)MOD) x1 -= MOD;
-      if ((x1 += x3) >= (int)MOD) x1 -= MOD;
-      u[i] = x1;
+      u64 s1 = round(BL[i].x);
+      u64 s2 = round(BH[i].x) + round(BH[i].y);
+      u64 s3 = round(BL[i].y);
+
+      if constexpr (MOD == -1u) {
+        u[i] += __uint128_t(s1);
+        u[i] += __uint128_t(s2) * B;
+        u[i] += __uint128_t(s3) * B * B;
+      } else {
+        u[i] += s1 % MOD;
+        u[i] += s2 % MOD * B % MOD;
+        if (u[i] >= MOD) u[i] -= MOD;
+        u[i] += s3 % MOD * (B * B % MOD) % MOD;
+        if (u[i] >= MOD) u[i] -= MOD;
+      }
     }
     return u;
   }

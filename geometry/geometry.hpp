@@ -10,7 +10,7 @@ using namespace std;
 using Real = long double;
 using Point = complex<Real>;
 using Points = vector<Point>;
-constexpr Real EPS = 1e-8;
+constexpr Real EPS = 1e-9;
 constexpr Real pi = 3.141592653589793238462643383279L;
 istream &operator>>(istream &is, Point &p) {
   Real a, b;

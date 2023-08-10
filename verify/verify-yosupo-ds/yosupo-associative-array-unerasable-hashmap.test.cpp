@@ -7,7 +7,7 @@ using namespace Nyaan;
 
 void q() {
   UnerasableHashMap<ll, ll> mp;
-  UnerasableHashMap<ll, ll, 1 << 20, false> mp2;
+  UnerasableHashMap<ll, ll, true> mp2(0, TEN(6));
   UnerasableHashMap<i128, ll> mp3;
   UnerasableHashMap<u128, ll> mp4;
 
