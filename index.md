@@ -467,6 +467,9 @@ data:
       path: math/rational.hpp
       title: math/rational.hpp
     - icon: ':heavy_check_mark:'
+      path: math/sat-solver.hpp
+      title: math/sat-solver.hpp
+    - icon: ':heavy_check_mark:'
       path: math/semiring-linear-recursive.hpp
       title: math/semiring-linear-recursive.hpp
     - icon: ':heavy_check_mark:'
@@ -510,6 +513,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math-fast/subset-convolution.hpp
       title: math-fast/subset-convolution.hpp
+    - icon: ':warning:'
+      path: math-fast/vectorize-modint.hpp
+      title: math-fast/vectorize-modint.hpp
   - name: matrix
     pages:
     - icon: ':heavy_check_mark:'
@@ -2186,6 +2192,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1775.test.cpp
       title: verify/verify-yuki/yuki-1775.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1777.test.cpp
+      title: verify/verify-yuki/yuki-1777.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1778.test.cpp
       title: verify/verify-yuki/yuki-1778.test.cpp
