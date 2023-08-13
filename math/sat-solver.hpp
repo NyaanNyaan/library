@@ -84,6 +84,11 @@ class SatSolver {
 
   void add_clause(const vector<pair<int, bool>> &clause) { add(clause); }
 
+  void if_then(int v1, bool a1, int v2, bool a2) {
+    add(vector{make_pair(v1, !a1), make_pair(v2, a2)});
+  }
+  void set_val(int v, bool a) { add(vector{make_pair(v, a)}); }
+
   bool solve() {
     while (true) {
       int confl = propagate();
