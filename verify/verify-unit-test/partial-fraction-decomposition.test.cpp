@@ -47,7 +47,7 @@ void verify() {
     f[0] = m, f[1] = 1;
     fs.emplace_back(f.pow(d));
   }
-  auto pi = Pi<mint>(fs);
+  auto pi = Pi(fs);
 
   fps numer;
   vector<pair<mint, vm>> part1;
