@@ -4,6 +4,38 @@
 #include "taylor-shift.hpp"
 #include "../modulo/binomial.hpp"
 
+// 新しい方
+// 入力 : f/(x-b_1)(x-b_2)...(x-b_n), f は n-1 次, b_i は distinct
+// 出力 : a_1/(x-b_1) + ... + a_n/(x-b_n)
+template <typename mint>
+vector<mint> PartialFractionDecomposition(const FormalPowerSeries<mint>& f,
+                                          const vector<mint>& b) {
+  using fps = FormalPowerSeries<mint>;
+  int N = b.size();
+  assert((int)f.size() <= N);
+  int B = 1;
+  while (B < N) B *= 2;
+  vector<fps> mod(2 * B, fps{1});
+  for (int i = 0; i < N; i++) mod[B + i] = fps{-b[i], 1};
+  for (int i = B - 1; i; i--) mod[i] = mod[2 * i] * mod[2 * i + 1];
+  vector<mint> ans(N);
+  auto dfs = [&](auto rc, int i, int l, int r, fps g, fps h) -> void {
+    if (N <= l) return;
+    if (l + 1 == r) {
+      ans[l] = g.eval(0) / h.eval(0);
+      return;
+    }
+    int m = (l + r) / 2;
+    rc(rc, i * 2 + 0, l, m, g % mod[i * 2 + 0],
+       h * mod[i * 2 + 1] % mod[i * 2]);
+    rc(rc, i * 2 + 1, m, r, g % mod[i * 2 + 1],
+       h * mod[i * 2] % mod[i * 2 + 1]);
+  };
+  dfs(dfs, 1, 0, B, f, fps{1});
+  return ans;
+}
+
+// 古い方
 template <typename mint>
 vector<pair<mint, vector<mint>>> PartialFractionDecomposition(
     FormalPowerSeries<mint> numer, vector<pair<mint, int>> denom) {
