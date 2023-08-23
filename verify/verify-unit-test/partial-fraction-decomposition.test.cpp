@@ -4,7 +4,7 @@
 //
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../fps/partial-fraction-decomposition.hpp"
-#include "../../fps/utility.hpp"
+#include "../../fps/fps-utility.hpp"
 #include "../../misc/rng.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../modulo/binomial.hpp"
