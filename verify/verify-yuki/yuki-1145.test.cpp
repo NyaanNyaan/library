@@ -4,7 +4,7 @@
 //
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../modint/montgomery-modint.hpp"
-#include "../../fps/utility.hpp"
+#include "../../fps/fps-utility.hpp"
 
 constexpr int MOD9 = 998244353;
 using mint = LazyMontgomeryModInt<MOD9>;

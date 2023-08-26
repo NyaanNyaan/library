@@ -4,7 +4,7 @@
 //
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../fps/partial-fraction-decomposition.hpp"
-#include "../../fps/utility.hpp"
+#include "../../fps/fps-utility.hpp"
 #include "../../misc/rng.hpp"
 #include "../../modint/montgomery-modint.hpp"
 #include "../../modulo/binomial.hpp"
@@ -47,7 +47,7 @@ void verify() {
     f[0] = m, f[1] = 1;
     fs.emplace_back(f.pow(d));
   }
-  auto pi = Pi<mint>(fs);
+  auto pi = Pi(fs);
 
   fps numer;
   vector<pair<mint, vm>> part1;
