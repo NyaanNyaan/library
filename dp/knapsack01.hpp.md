@@ -80,9 +80,9 @@ data:
   timestamp: '2021-11-17 23:54:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
   - verify/verify-aoj-dpl/aoj-dpl-1-b.test.cpp
   - verify/verify-aoj-dpl/aoj-dpl-1-h.test.cpp
+  - verify/verify-aoj-dpl/aoj-dpl-1-f.test.cpp
 documentation_of: dp/knapsack01.hpp
 layout: document
 redirect_from:

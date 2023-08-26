@@ -14,6 +14,9 @@ data:
     path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
     title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145.test.cpp
     title: verify/verify-yuki/yuki-1145.test.cpp
   _isVerificationFailed: false
@@ -119,60 +122,33 @@ data:
     \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
     \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
     \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 4 \"\
-    fps/utility.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>>\
-    \ v) {\n  using fps = FormalPowerSeries<mint>;\n  if ((int)v.size() == 0) return\
-    \ fps{mint(1)};\n  sort(begin(v), end(v), [](fps& a, fps& b) { return a.size()\
-    \ < b.size(); });\n  queue<fps> q;\n  for (auto& f : v) q.push(f);\n  while ((int)q.size()\
-    \ > 1) {\n    fps a = q.front();\n    q.pop();\n    fps b = q.front();\n    q.pop();\n\
-    \    q.push(a * b);\n  }\n  return q.front();\n}\n\ntemplate <typename mint>\n\
-    void OGFtoEGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
-    \ 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n}\n\ntemplate <typename mint>\n\
-    void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
-    \ 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  while ((int)C.g.size()\
-    \ < deg) C.extend();\n  FormalPowerSeries<mint> ret{begin(C.g), begin(C.g) + deg};\n\
-    \  return ret;\n}\n\n// f *= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>&\
-    \ f, int n, mint c, int expand = true) {\n  if (expand) f.resize(f.size() + n);\n\
-    \  for (int i = (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] +=\
-    \ f[i - n] * c;\n  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid\
-    \ sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {\n  for (int i = 0; i\
-    \ < (int)f.size(); ++i) {\n    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;\n\
-    \  }\n}\n"
+    fps/fps-utility.hpp\"\n\ntemplate <typename fps>\nfps Pi(vector<fps> v) {\n  if\
+    \ ((int)v.size() == 0) return fps{1};\n  while ((int)v.size() >= 2) {\n    vector<fps>\
+    \ nx;\n    for (int i = 0; i + 1 < (int)v.size(); i += 2)\n      nx.push_back(v[i]\
+    \ * v[i + 1]);\n    if (v.size() % 2) nx.push_back(v.back());\n    v = nx;\n \
+    \ }\n  return v.back();\n}\n"
   code: "#pragma once\n#include \"../modulo/binomial.hpp\"\n#include \"./formal-power-series.hpp\"\
-    \n\ntemplate <typename mint>\nFormalPowerSeries<mint> Pi(vector<FormalPowerSeries<mint>>\
-    \ v) {\n  using fps = FormalPowerSeries<mint>;\n  if ((int)v.size() == 0) return\
-    \ fps{mint(1)};\n  sort(begin(v), end(v), [](fps& a, fps& b) { return a.size()\
-    \ < b.size(); });\n  queue<fps> q;\n  for (auto& f : v) q.push(f);\n  while ((int)q.size()\
-    \ > 1) {\n    fps a = q.front();\n    q.pop();\n    fps b = q.front();\n    q.pop();\n\
-    \    q.push(a * b);\n  }\n  return q.front();\n}\n\ntemplate <typename mint>\n\
-    void OGFtoEGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
-    \ 0; i < (int)f.size(); i++) f[i] *= C.finv(i);\n}\n\ntemplate <typename mint>\n\
-    void EGFtoOGF(FormalPowerSeries<mint>& f, Binomial<mint>& C) {\n  for (int i =\
-    \ 0; i < (int)f.size(); i++) f[i] *= C.fac(i);\n}\n\ntemplate <typename mint>\n\
-    FormalPowerSeries<mint> e_x(int deg, Binomial<mint>& C) {\n  while ((int)C.g.size()\
-    \ < deg) C.extend();\n  FormalPowerSeries<mint> ret{begin(C.g), begin(C.g) + deg};\n\
-    \  return ret;\n}\n\n// f *= (1 + c x^n)\ntemplate <typename mint>\nvoid sparse_mul(FormalPowerSeries<mint>&\
-    \ f, int n, mint c, int expand = true) {\n  if (expand) f.resize(f.size() + n);\n\
-    \  for (int i = (int)f.size() - 1; i >= 0; --i) {\n    if (i - n >= 0) f[i] +=\
-    \ f[i - n] * c;\n  }\n}\n\n// f /= (1 + c x^n)\ntemplate <typename mint>\nvoid\
-    \ sparse_div(FormalPowerSeries<mint>& f, int n, mint c) {\n  for (int i = 0; i\
-    \ < (int)f.size(); ++i) {\n    if (i + n < (int)f.size()) f[i + n] -= f[i] * c;\n\
-    \  }\n}\n"
+    \n\ntemplate <typename fps>\nfps Pi(vector<fps> v) {\n  if ((int)v.size() == 0)\
+    \ return fps{1};\n  while ((int)v.size() >= 2) {\n    vector<fps> nx;\n    for\
+    \ (int i = 0; i + 1 < (int)v.size(); i += 2)\n      nx.push_back(v[i] * v[i +\
+    \ 1]);\n    if (v.size() % 2) nx.push_back(v.back());\n    v = nx;\n  }\n  return\
+    \ v.back();\n}\n"
   dependsOn:
   - modulo/binomial.hpp
   - fps/formal-power-series.hpp
   isVerificationFile: false
-  path: fps/utility.hpp
+  path: fps/fps-utility.hpp
   requiredBy: []
-  timestamp: '2023-05-22 22:29:25+09:00'
+  timestamp: '2023-08-23 15:55:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1145.test.cpp
+  - verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
-documentation_of: fps/utility.hpp
+documentation_of: fps/fps-utility.hpp
 layout: document
 redirect_from:
-- /library/fps/utility.hpp
-- /library/fps/utility.hpp.html
-title: fps/utility.hpp
+- /library/fps/fps-utility.hpp
+- /library/fps/fps-utility.hpp.html
+title: fps/fps-utility.hpp
 ---

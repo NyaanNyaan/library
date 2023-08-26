@@ -132,35 +132,63 @@ data:
     \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
     \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
     \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
-    \ */\n#line 6 \"fps/partial-fraction-decomposition.hpp\"\n\ntemplate <typename\
+    \ */\n#line 6 \"fps/partial-fraction-decomposition.hpp\"\n\n// \u65B0\u3057\u3044\
+    \u65B9\n// \u5165\u529B : f/(x-b_1)(x-b_2)...(x-b_n), f \u306F n-1 \u6B21, b_i\
+    \ \u306F distinct\n// \u51FA\u529B : a_1/(x-b_1) + ... + a_n/(x-b_n)\ntemplate\
+    \ <typename mint>\nvector<mint> PartialFractionDecomposition(const FormalPowerSeries<mint>&\
+    \ f,\n                                          const vector<mint>& b) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  int N = b.size();\n  assert((int)f.size()\
+    \ <= N);\n  int B = 1;\n  while (B < N) B *= 2;\n  vector<fps> mod(2 * B, fps{1});\n\
+    \  for (int i = 0; i < N; i++) mod[B + i] = fps{-b[i], 1};\n  for (int i = B -\
+    \ 1; i; i--) mod[i] = mod[2 * i] * mod[2 * i + 1];\n  vector<mint> ans(N);\n \
+    \ auto dfs = [&](auto rc, int i, int l, int r, fps g, fps h) -> void {\n    if\
+    \ (N <= l) return;\n    if (l + 1 == r) {\n      ans[l] = g.eval(0) / h.eval(0);\n\
+    \      return;\n    }\n    int m = (l + r) / 2;\n    rc(rc, i * 2 + 0, l, m, g\
+    \ % mod[i * 2 + 0],\n       h * mod[i * 2 + 1] % mod[i * 2]);\n    rc(rc, i *\
+    \ 2 + 1, m, r, g % mod[i * 2 + 1],\n       h * mod[i * 2] % mod[i * 2 + 1]);\n\
+    \  };\n  dfs(dfs, 1, 0, B, f, fps{1});\n  return ans;\n}\n\n// \u53E4\u3044\u65B9\
+    \ntemplate <typename mint>\nvector<pair<mint, vector<mint>>> PartialFractionDecomposition(\n\
+    \    FormalPowerSeries<mint> numer, vector<pair<mint, int>> denom) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n\n  if (denom.empty()) return {};\n\n  sort(begin(denom),\
+    \ end(denom),\n       [](auto p1, auto p2) { return p1.second < p2.second; });\n\
+    \  Binomial<mint> C(denom[0].second + 1);\n\n  int s = 1;\n  while (s < (int)denom.size())\
+    \ s *= 2;\n  vector<fps> fs(2 * s);\n  for (int i = 0; i < s; i++) {\n    if ((int)denom.size()\
+    \ <= i) {\n      fs[s + i] = fps{1};\n      continue;\n    }\n    auto [m, d]\
+    \ = denom[i];\n    fps f(denom[i].second + 1);\n    mint buf = 1;\n    for (int\
+    \ j = d; j >= 0; j--) {\n      f[j] = buf * C(d, j);\n      buf *= m;\n    }\n\
+    \    fs[s + i] = f;\n  }\n  for (int i = s - 1; i; i--) {\n    fs[i] = fs[2 *\
+    \ i + 0] * fs[2 * i + 1];\n  }\n\n  vector<fps> F(2 * s);\n  vector<fps> G(2 *\
+    \ s);\n  F[1] = numer % fs[1];\n  G[1] = fps{1};\n  for (int i = 1; i < s; i++)\
+    \ {\n    F[i * 2 + 0] = F[i] % fs[i * 2 + 0];\n    F[i * 2 + 1] = F[i] % fs[i\
+    \ * 2 + 1];\n    G[i * 2 + 0] = G[i] * fs[i * 2 + 1] % fs[i * 2 + 0];\n    G[i\
+    \ * 2 + 1] = G[i] * fs[i * 2 + 0] % fs[i * 2 + 1];\n  }\n\n  vector<pair<mint,\
+    \ vector<mint>>> res;\n  for (int i = s; i - s < (int)denom.size(); i++) {\n \
+    \   auto [m, d] = denom[i - s];\n    F[i] = TaylorShift<mint>(F[i], -m, C);\n\
+    \    G[i] = TaylorShift<mint>(G[i], -m, C);\n    fps f = (F[i] * G[i].inv()).pre(d);\n\
+    \    if ((int)f.size() < d) f.resize(d);\n    f = f.rev();\n    res.emplace_back(m,\
+    \ vector<mint>{begin(f), end(f)});\n  }\n  return res;\n}\n\n/**\n * @brief \u90E8\
+    \u5206\u5206\u6570\u5206\u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\u7A4D\u3067\
+    \u8868\u305B\u308B\u5834\u5408)\n */\n"
+  code: "#pragma once\n\n#include \"formal-power-series.hpp\"\n#include \"taylor-shift.hpp\"\
+    \n#include \"../modulo/binomial.hpp\"\n\n// \u65B0\u3057\u3044\u65B9\n// \u5165\
+    \u529B : f/(x-b_1)(x-b_2)...(x-b_n), f \u306F n-1 \u6B21, b_i \u306F distinct\n\
+    // \u51FA\u529B : a_1/(x-b_1) + ... + a_n/(x-b_n)\ntemplate <typename mint>\n\
+    vector<mint> PartialFractionDecomposition(const FormalPowerSeries<mint>& f,\n\
+    \                                          const vector<mint>& b) {\n  using fps\
+    \ = FormalPowerSeries<mint>;\n  int N = b.size();\n  assert((int)f.size() <= N);\n\
+    \  int B = 1;\n  while (B < N) B *= 2;\n  vector<fps> mod(2 * B, fps{1});\n  for\
+    \ (int i = 0; i < N; i++) mod[B + i] = fps{-b[i], 1};\n  for (int i = B - 1; i;\
+    \ i--) mod[i] = mod[2 * i] * mod[2 * i + 1];\n  vector<mint> ans(N);\n  auto dfs\
+    \ = [&](auto rc, int i, int l, int r, fps g, fps h) -> void {\n    if (N <= l)\
+    \ return;\n    if (l + 1 == r) {\n      ans[l] = g.eval(0) / h.eval(0);\n    \
+    \  return;\n    }\n    int m = (l + r) / 2;\n    rc(rc, i * 2 + 0, l, m, g % mod[i\
+    \ * 2 + 0],\n       h * mod[i * 2 + 1] % mod[i * 2]);\n    rc(rc, i * 2 + 1, m,\
+    \ r, g % mod[i * 2 + 1],\n       h * mod[i * 2] % mod[i * 2 + 1]);\n  };\n  dfs(dfs,\
+    \ 1, 0, B, f, fps{1});\n  return ans;\n}\n\n// \u53E4\u3044\u65B9\ntemplate <typename\
     \ mint>\nvector<pair<mint, vector<mint>>> PartialFractionDecomposition(\n    FormalPowerSeries<mint>\
     \ numer, vector<pair<mint, int>> denom) {\n  using fps = FormalPowerSeries<mint>;\n\
     \n  if (denom.empty()) return {};\n\n  sort(begin(denom), end(denom),\n      \
     \ [](auto p1, auto p2) { return p1.second < p2.second; });\n  Binomial<mint> C(denom[0].second\
-    \ + 1);\n\n  int s = 1;\n  while (s < (int)denom.size()) s *= 2;\n  vector<fps>\
-    \ fs(2 * s);\n  for (int i = 0; i < s; i++) {\n    if ((int)denom.size() <= i)\
-    \ {\n      fs[s + i] = fps{1};\n      continue;\n    }\n    auto [m, d] = denom[i];\n\
-    \    fps f(denom[i].second + 1);\n    mint buf = 1;\n    for (int j = d; j >=\
-    \ 0; j--) {\n      f[j] = buf * C(d, j);\n      buf *= m;\n    }\n    fs[s + i]\
-    \ = f;\n  }\n  for (int i = s - 1; i; i--) {\n    fs[i] = fs[2 * i + 0] * fs[2\
-    \ * i + 1];\n  }\n\n  vector<fps> F(2 * s);\n  vector<fps> G(2 * s);\n  F[1] =\
-    \ numer % fs[1];\n  G[1] = fps{1};\n  for (int i = 1; i < s; i++) {\n    F[i *\
-    \ 2 + 0] = F[i] % fs[i * 2 + 0];\n    F[i * 2 + 1] = F[i] % fs[i * 2 + 1];\n \
-    \   G[i * 2 + 0] = G[i] * fs[i * 2 + 1] % fs[i * 2 + 0];\n    G[i * 2 + 1] = G[i]\
-    \ * fs[i * 2 + 0] % fs[i * 2 + 1];\n  }\n\n  vector<pair<mint, vector<mint>>>\
-    \ res;\n  for (int i = s; i - s < (int)denom.size(); i++) {\n    auto [m, d] =\
-    \ denom[i - s];\n    F[i] = TaylorShift<mint>(F[i], -m, C);\n    G[i] = TaylorShift<mint>(G[i],\
-    \ -m, C);\n    fps f = (F[i] * G[i].inv()).pre(d);\n    if ((int)f.size() < d)\
-    \ f.resize(d);\n    f = f.rev();\n    res.emplace_back(m, vector<mint>{begin(f),\
-    \ end(f)});\n  }\n  return res;\n}\n\n/**\n * @brief \u90E8\u5206\u5206\u6570\u5206\
-    \u89E3(\u5206\u6BCD\u304C1\u6B21\u5F0F\u306E\u7A4D\u3067\u8868\u305B\u308B\u5834\
-    \u5408)\n */\n"
-  code: "#pragma once\n\n#include \"formal-power-series.hpp\"\n#include \"taylor-shift.hpp\"\
-    \n#include \"../modulo/binomial.hpp\"\n\ntemplate <typename mint>\nvector<pair<mint,\
-    \ vector<mint>>> PartialFractionDecomposition(\n    FormalPowerSeries<mint> numer,\
-    \ vector<pair<mint, int>> denom) {\n  using fps = FormalPowerSeries<mint>;\n\n\
-    \  if (denom.empty()) return {};\n\n  sort(begin(denom), end(denom),\n       [](auto\
-    \ p1, auto p2) { return p1.second < p2.second; });\n  Binomial<mint> C(denom[0].second\
     \ + 1);\n\n  int s = 1;\n  while (s < (int)denom.size()) s *= 2;\n  vector<fps>\
     \ fs(2 * s);\n  for (int i = 0; i < s; i++) {\n    if ((int)denom.size() <= i)\
     \ {\n      fs[s + i] = fps{1};\n      continue;\n    }\n    auto [m, d] = denom[i];\n\
@@ -186,7 +214,7 @@ data:
   isVerificationFile: false
   path: fps/partial-fraction-decomposition.hpp
   requiredBy: []
-  timestamp: '2023-05-22 22:29:25+09:00'
+  timestamp: '2023-08-23 15:27:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1510.test.cpp

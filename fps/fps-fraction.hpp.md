@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1145-frac.test.cpp
     title: verify/verify-yuki/yuki-1145-frac.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1875.test.cpp
+    title: verify/verify-yuki/yuki-1875.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -73,6 +76,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1145-frac.test.cpp
+  - verify/verify-yuki/yuki-1875.test.cpp
 documentation_of: fps/fps-fraction.hpp
 layout: document
 redirect_from:

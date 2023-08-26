@@ -125,8 +125,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-euler-tour.test.cpp
-  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-euler-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
 documentation_of: tree/euler-tour.hpp
 layout: document
 redirect_from:

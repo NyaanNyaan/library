@@ -49,8 +49,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1504.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
+  - verify/verify-unit-test/primitive-root.test.cpp
 documentation_of: math/constexpr-primitiveroot.hpp
 layout: document
 redirect_from:

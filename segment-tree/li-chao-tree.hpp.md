@@ -106,8 +106,8 @@ data:
   timestamp: '2020-12-05 07:59:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
   - verify/verify-yosupo-ds/yosupo-line-add-get-min.test.cpp
+  - verify/verify-yosupo-ds/yosupo-segment-add-get-min.test.cpp
 documentation_of: segment-tree/li-chao-tree.hpp
 layout: document
 redirect_from:

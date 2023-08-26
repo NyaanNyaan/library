@@ -82,8 +82,8 @@ data:
   - verify/verify-yuki/yuki-2266.test.cpp
   - verify/verify-yuki/yuki-2262.test.cpp
   - verify/verify-unit-test/enumerate-quotient.test.cpp
-  - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-4.test.cpp
+  - verify/verify-yosupo-math/yosupo-sum-of-totient-3.test.cpp
   - verify/verify-yosupo-math/yosupo-enumerate-quotient.test.cpp
 documentation_of: math/enumerate-quotient.hpp
 layout: document

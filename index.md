@@ -167,6 +167,9 @@ data:
       path: fps/berlekamp-massey.hpp
       title: fps/berlekamp-massey.hpp
     - icon: ':heavy_check_mark:'
+      path: fps/composite-exp.hpp
+      title: "$f(exp(cx))$ \u306E\u8A08\u7B97"
+    - icon: ':heavy_check_mark:'
       path: fps/differential-equation.hpp
       title: "\u5E38\u5FAE\u5206\u65B9\u7A0B\u5F0F"
     - icon: ':heavy_check_mark:'
@@ -208,6 +211,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/fps-sqrt.hpp
       title: "\u5E73\u65B9\u6839"
+    - icon: ':heavy_check_mark:'
+      path: fps/fps-utility.hpp
+      title: fps/fps-utility.hpp
     - icon: ':warning:'
       path: fps/inversion-formula.hpp
       title: fps/inversion-formula.hpp
@@ -255,9 +261,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/taylor-shift.hpp
       title: "\u5E73\u884C\u79FB\u52D5"
-    - icon: ':heavy_check_mark:'
-      path: fps/utility.hpp
-      title: fps/utility.hpp
   - name: game
     pages:
     - icon: ':heavy_check_mark:'
@@ -1286,6 +1289,9 @@ data:
       path: verify/verify-unit-test/complex-fft.test.cpp
       title: verify/verify-unit-test/complex-fft.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/composite-exp.test.cpp
+      title: verify/verify-unit-test/composite-exp.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/debug.test.cpp
       title: verify/verify-unit-test/debug.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1709,6 +1715,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-pow.test.cpp
       title: verify/verify-yosupo-fps/yosupo-pow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
@@ -2210,6 +2219,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1789.test.cpp
       title: verify/verify-yuki/yuki-1789.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1875.test.cpp
+      title: verify/verify-yuki/yuki-1875.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1939.test.cpp
       title: verify/verify-yuki/yuki-1939.test.cpp
