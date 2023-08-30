@@ -299,20 +299,20 @@ data:
     \n\nstruct divisor_transform {\n  template <typename T>\n  static void zeta_transform(vector<T>\
     \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
     \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];\n\
-    \  }\n  template <typename T>\n  static void mobius_transform(T &a) {\n    int\
-    \ N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p :\
-    \ sieve)\n      for (int k = N / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n  template\
-    \ <typename I, typename T>\n  static void zeta_transform(map<I, T> &a) {\n   \
-    \ for (auto p = rbegin(a); p != rend(a); p++)\n      for (auto &x : a) {\n   \
-    \     if (p->first == x.first) break;\n        if (p->first % x.first == 0) p->second\
-    \ += x.second;\n      }\n  }\n  template <typename I, typename T>\n  static void\
-    \ mobius_transform(map<I, T> &a) {\n    for (auto &x : a) {\n      for (auto p\
-    \ = rbegin(a); p != rend(a); p++) {\n        if (x.first == p->first) break;\n\
-    \        if (p->first % x.first == 0) p->second -= x.second;\n      }\n    }\n\
-    \  }\n};\n\nstruct multiple_transform {\n  template <typename T>\n  static void\
-    \ zeta_transform(vector<T> &a) {\n    int N = a.size() - 1;\n    auto sieve =\
-    \ prime_enumerate(N);\n    for (auto &p : sieve)\n      for (int k = N / p; k\
-    \ > 0; --k) a[k] += a[k * p];\n  }\n  template <typename T>\n  static void mobius_transform(vector<T>\
+    \  }\n  template <typename T>\n  static void mobius_transform(vector<T> &a) {\n\
+    \    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto\
+    \ &p : sieve)\n      for (int k = N / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n\
+    \  template <typename I, typename T>\n  static void zeta_transform(map<I, T> &a)\
+    \ {\n    for (auto p = rbegin(a); p != rend(a); p++)\n      for (auto &x : a)\
+    \ {\n        if (p->first == x.first) break;\n        if (p->first % x.first ==\
+    \ 0) p->second += x.second;\n      }\n  }\n  template <typename I, typename T>\n\
+    \  static void mobius_transform(map<I, T> &a) {\n    for (auto &x : a) {\n   \
+    \   for (auto p = rbegin(a); p != rend(a); p++) {\n        if (x.first == p->first)\
+    \ break;\n        if (p->first % x.first == 0) p->second -= x.second;\n      }\n\
+    \    }\n  }\n};\n\nstruct multiple_transform {\n  template <typename T>\n  static\
+    \ void zeta_transform(vector<T> &a) {\n    int N = a.size() - 1;\n    auto sieve\
+    \ = prime_enumerate(N);\n    for (auto &p : sieve)\n      for (int k = N / p;\
+    \ k > 0; --k) a[k] += a[k * p];\n  }\n  template <typename T>\n  static void mobius_transform(vector<T>\
     \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
     \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k] -= a[k *\
     \ p];\n  }\n\n  template <typename I, typename T>\n  static void zeta_transform(map<I,\
@@ -365,7 +365,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/multiplicative-function.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2023-08-30 23:05:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/multiplicative-function.test.cpp

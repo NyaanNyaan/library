@@ -53,20 +53,20 @@ data:
     \n\nstruct divisor_transform {\n  template <typename T>\n  static void zeta_transform(vector<T>\
     \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
     \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];\n\
-    \  }\n  template <typename T>\n  static void mobius_transform(T &a) {\n    int\
-    \ N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p :\
-    \ sieve)\n      for (int k = N / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n  template\
-    \ <typename I, typename T>\n  static void zeta_transform(map<I, T> &a) {\n   \
-    \ for (auto p = rbegin(a); p != rend(a); p++)\n      for (auto &x : a) {\n   \
-    \     if (p->first == x.first) break;\n        if (p->first % x.first == 0) p->second\
-    \ += x.second;\n      }\n  }\n  template <typename I, typename T>\n  static void\
-    \ mobius_transform(map<I, T> &a) {\n    for (auto &x : a) {\n      for (auto p\
-    \ = rbegin(a); p != rend(a); p++) {\n        if (x.first == p->first) break;\n\
-    \        if (p->first % x.first == 0) p->second -= x.second;\n      }\n    }\n\
-    \  }\n};\n\nstruct multiple_transform {\n  template <typename T>\n  static void\
-    \ zeta_transform(vector<T> &a) {\n    int N = a.size() - 1;\n    auto sieve =\
-    \ prime_enumerate(N);\n    for (auto &p : sieve)\n      for (int k = N / p; k\
-    \ > 0; --k) a[k] += a[k * p];\n  }\n  template <typename T>\n  static void mobius_transform(vector<T>\
+    \  }\n  template <typename T>\n  static void mobius_transform(vector<T> &a) {\n\
+    \    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto\
+    \ &p : sieve)\n      for (int k = N / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n\
+    \  template <typename I, typename T>\n  static void zeta_transform(map<I, T> &a)\
+    \ {\n    for (auto p = rbegin(a); p != rend(a); p++)\n      for (auto &x : a)\
+    \ {\n        if (p->first == x.first) break;\n        if (p->first % x.first ==\
+    \ 0) p->second += x.second;\n      }\n  }\n  template <typename I, typename T>\n\
+    \  static void mobius_transform(map<I, T> &a) {\n    for (auto &x : a) {\n   \
+    \   for (auto p = rbegin(a); p != rend(a); p++) {\n        if (x.first == p->first)\
+    \ break;\n        if (p->first % x.first == 0) p->second -= x.second;\n      }\n\
+    \    }\n  }\n};\n\nstruct multiple_transform {\n  template <typename T>\n  static\
+    \ void zeta_transform(vector<T> &a) {\n    int N = a.size() - 1;\n    auto sieve\
+    \ = prime_enumerate(N);\n    for (auto &p : sieve)\n      for (int k = N / p;\
+    \ k > 0; --k) a[k] += a[k * p];\n  }\n  template <typename T>\n  static void mobius_transform(vector<T>\
     \ &a) {\n    int N = a.size() - 1;\n    auto sieve = prime_enumerate(N);\n   \
     \ for (auto &p : sieve)\n      for (int k = 1; k * p <= N; ++k) a[k] -= a[k *\
     \ p];\n  }\n\n  template <typename I, typename T>\n  static void zeta_transform(map<I,\
@@ -83,9 +83,9 @@ data:
     \ <typename T>\n  static void zeta_transform(vector<T> &a) {\n    int N = a.size()\
     \ - 1;\n    auto sieve = prime_enumerate(N);\n    for (auto &p : sieve)\n    \
     \  for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];\n  }\n  template <typename\
-    \ T>\n  static void mobius_transform(T &a) {\n    int N = a.size() - 1;\n    auto\
-    \ sieve = prime_enumerate(N);\n    for (auto &p : sieve)\n      for (int k = N\
-    \ / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n  template <typename I, typename\
+    \ T>\n  static void mobius_transform(vector<T> &a) {\n    int N = a.size() - 1;\n\
+    \    auto sieve = prime_enumerate(N);\n    for (auto &p : sieve)\n      for (int\
+    \ k = N / p; k > 0; --k) a[k * p] -= a[k];\n  }\n\n  template <typename I, typename\
     \ T>\n  static void zeta_transform(map<I, T> &a) {\n    for (auto p = rbegin(a);\
     \ p != rend(a); p++)\n      for (auto &x : a) {\n        if (p->first == x.first)\
     \ break;\n        if (p->first % x.first == 0) p->second += x.second;\n      }\n\
@@ -113,7 +113,7 @@ data:
   path: multiplicative-function/divisor-multiple-transform.hpp
   requiredBy:
   - multiplicative-function/gcd-convolution.hpp
-  timestamp: '2023-08-10 13:25:59+09:00'
+  timestamp: '2023-08-30 23:05:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0886.test.cpp
