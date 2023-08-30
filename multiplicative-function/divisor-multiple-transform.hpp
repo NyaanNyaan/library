@@ -15,7 +15,7 @@ struct divisor_transform {
       for (int k = 1; k * p <= N; ++k) a[k * p] += a[k];
   }
   template <typename T>
-  static void mobius_transform(T &a) {
+  static void mobius_transform(vector<T> &a) {
     int N = a.size() - 1;
     auto sieve = prime_enumerate(N);
     for (auto &p : sieve)
