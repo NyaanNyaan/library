@@ -23,7 +23,6 @@ template <typename Key, typename Val, bool fixed_size = false,
           unsigned long long (*get_hash)(const Key&) =
               internal::hash_function<Key>>
 struct UnerasableHashMap {
- private:
   int N, occupied_num, shift;
   vector<Key> keys;
   vector<Val> vals;
@@ -61,7 +60,6 @@ struct UnerasableHashMap {
     }
   }
 
- public:
   UnerasableHashMap(const Val& _default_value = Val{}, int _default_size = 4)
       : occupied_num(0), default_value(_default_value) {
     if (fixed_size == false) _default_size = 4;
