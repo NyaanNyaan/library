@@ -16,7 +16,7 @@ struct Top_K {
   vector<Data> v;
   UnerasableHashMap<unsigned long long, int, true> mp;
 
-  Top_K(int k) : K(k), mp(Data{}, 2 * K) {}
+  Top_K(int k) : K(k), mp(-1u, 2 * K) {}
 
   void normalize() {
     if ((int)v.size() < K) return;
