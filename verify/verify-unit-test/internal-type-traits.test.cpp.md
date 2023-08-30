@@ -300,39 +300,39 @@ data:
     \ true \u306E\u6642\u306B\u3057\u304B\u30B5\u30A4\u30BA\u3092\u5909\u66F4\u3067\
     \u304D\u306A\u3044\n\ntemplate <typename Key, typename Val, bool fixed_size =\
     \ false,\n          unsigned long long (*get_hash)(const Key&) =\n           \
-    \   internal::hash_function<Key>>\nstruct UnerasableHashMap {\n private:\n  int\
-    \ N, occupied_num, shift;\n  vector<Key> keys;\n  vector<Val> vals;\n  vector<char>\
-    \ flag;\n\n  Val default_value;\n  int default_size;\n\n  // \u30B5\u30A4\u30BA\
-    \u3092 n \u306B\u5909\u66F4\u3059\u308B\n  void init(int n, bool reset = false)\
-    \ {\n    assert(n >= 4 && (n & (n - 1)) == 0);\n    if constexpr (fixed_size)\
-    \ {\n      assert(reset == true);\n      n = N;\n    }\n    if (reset == true)\
-    \ {\n      N = n, occupied_num = 0, shift = 64 - __builtin_ctz(n);\n      keys.resize(n);\n\
-    \      vals.resize(n);\n      flag.resize(n);\n      fill(begin(vals), end(vals),\
-    \ default_value);\n      fill(begin(flag), end(flag), 0);\n    } else {\n    \
-    \  N = n, shift = 64 - __builtin_ctz(n);\n      vector<Key> keys2(n);\n      vector<Val>\
-    \ vals2(n, default_value);\n      vector<char> flag2(n);\n      swap(keys, keys2),\
-    \ swap(vals, vals2), swap(flag, flag2);\n      for (int i = 0; i < (int)flag2.size();\
-    \ i++) {\n        if (flag2[i]) {\n          int j = hint(keys2[i]);\n       \
-    \   keys[j] = keys2[i], vals[j] = vals2[i], flag[j] = 1;\n        }\n      }\n\
-    \    }\n  }\n\n public:\n  UnerasableHashMap(const Val& _default_value = Val{},\
-    \ int _default_size = 4)\n      : occupied_num(0), default_value(_default_value)\
-    \ {\n    if (fixed_size == false) _default_size = 4;\n    N = 4;\n    while (N\
-    \ < _default_size) N *= 2;\n    default_size = N;\n    init(N, true);\n  }\n\n\
-    \  int hint(const Key& k) {\n    int hash = get_hash(k) >> shift;\n    while (flag[hash]\
-    \ && keys[hash] != k) hash = (hash + 1) & (N - 1);\n    return hash;\n  }\n\n\
-    \  // key \u304C i \u3067\u3042\u308B\u8981\u7D20\u3078\u306E\u53C2\u7167\u3092\
-    \u8FD4\u3059\n  Val& operator[](const Key& k) {\n    int i = hint(k);\n    if\
-    \ (!flag[i]) {\n      if constexpr (fixed_size == false) {\n        if (occupied_num\
-    \ * 2 >= N) {\n          init(2 * N), i = hint(k);\n        }\n      }\n     \
-    \ keys[i] = k, flag[i] = 1, occupied_num++;\n    }\n    return vals[i];\n  }\n\
-    \n  Val get(const Key& k) {\n    int i = hint(k);\n    return flag[i] ? vals[i]\
-    \ : default_value;\n  }\n\n  // \u8D70\u67FB, f \u306B\u95A2\u6570 f(key, val)\
-    \ \u3092\u5165\u308C\u308B\n  template <typename F>\n  void enumerate(const F\
-    \ f) {\n    for (int i = 0; i < (int)flag.size(); i++) {\n      if (flag[i]) f(keys[i],\
-    \ vals[i]);\n    }\n  }\n\n  int count(const Key& k) { return flag[hint(k)]; }\n\
-    \  bool contain(const Key& k) { return flag[hint(k)]; }\n  int size() const {\
-    \ return occupied_num; }\n  void reset() { init(default_size, true); }\n  void\
-    \ clear() { init(default_size, true); }\n};\n#line 10 \"verify/verify-unit-test/internal-type-traits.test.cpp\"\
+    \   internal::hash_function<Key>>\nstruct UnerasableHashMap {\n  int N, occupied_num,\
+    \ shift;\n  vector<Key> keys;\n  vector<Val> vals;\n  vector<char> flag;\n\n \
+    \ Val default_value;\n  int default_size;\n\n  // \u30B5\u30A4\u30BA\u3092 n \u306B\
+    \u5909\u66F4\u3059\u308B\n  void init(int n, bool reset = false) {\n    assert(n\
+    \ >= 4 && (n & (n - 1)) == 0);\n    if constexpr (fixed_size) {\n      assert(reset\
+    \ == true);\n      n = N;\n    }\n    if (reset == true) {\n      N = n, occupied_num\
+    \ = 0, shift = 64 - __builtin_ctz(n);\n      keys.resize(n);\n      vals.resize(n);\n\
+    \      flag.resize(n);\n      fill(begin(vals), end(vals), default_value);\n \
+    \     fill(begin(flag), end(flag), 0);\n    } else {\n      N = n, shift = 64\
+    \ - __builtin_ctz(n);\n      vector<Key> keys2(n);\n      vector<Val> vals2(n,\
+    \ default_value);\n      vector<char> flag2(n);\n      swap(keys, keys2), swap(vals,\
+    \ vals2), swap(flag, flag2);\n      for (int i = 0; i < (int)flag2.size(); i++)\
+    \ {\n        if (flag2[i]) {\n          int j = hint(keys2[i]);\n          keys[j]\
+    \ = keys2[i], vals[j] = vals2[i], flag[j] = 1;\n        }\n      }\n    }\n  }\n\
+    \n  UnerasableHashMap(const Val& _default_value = Val{}, int _default_size = 4)\n\
+    \      : occupied_num(0), default_value(_default_value) {\n    if (fixed_size\
+    \ == false) _default_size = 4;\n    N = 4;\n    while (N < _default_size) N *=\
+    \ 2;\n    default_size = N;\n    init(N, true);\n  }\n\n  int hint(const Key&\
+    \ k) {\n    int hash = get_hash(k) >> shift;\n    while (flag[hash] && keys[hash]\
+    \ != k) hash = (hash + 1) & (N - 1);\n    return hash;\n  }\n\n  // key \u304C\
+    \ i \u3067\u3042\u308B\u8981\u7D20\u3078\u306E\u53C2\u7167\u3092\u8FD4\u3059\n\
+    \  Val& operator[](const Key& k) {\n    int i = hint(k);\n    if (!flag[i]) {\n\
+    \      if constexpr (fixed_size == false) {\n        if (occupied_num * 2 >= N)\
+    \ {\n          init(2 * N), i = hint(k);\n        }\n      }\n      keys[i] =\
+    \ k, flag[i] = 1, occupied_num++;\n    }\n    return vals[i];\n  }\n\n  Val get(const\
+    \ Key& k) {\n    int i = hint(k);\n    return flag[i] ? vals[i] : default_value;\n\
+    \  }\n\n  // \u8D70\u67FB, f \u306B\u95A2\u6570 f(key, val) \u3092\u5165\u308C\
+    \u308B\n  template <typename F>\n  void enumerate(const F f) {\n    for (int i\
+    \ = 0; i < (int)flag.size(); i++) {\n      if (flag[i]) f(keys[i], vals[i]);\n\
+    \    }\n  }\n\n  int count(const Key& k) { return flag[hint(k)]; }\n  bool contain(const\
+    \ Key& k) { return flag[hint(k)]; }\n  int size() const { return occupied_num;\
+    \ }\n  void reset() { init(default_size, true); }\n  void clear() { init(default_size,\
+    \ true); }\n};\n#line 10 \"verify/verify-unit-test/internal-type-traits.test.cpp\"\
     \nusing namespace Nyaan;\n\ntemplate <typename T, bool low>\nT gen() {\n  if constexpr\
     \ (internal::is_broadly_integral_v<T>) {\n    if (low) return rng(0, 5);\n   \
     \ if constexpr (sizeof(T) == 16) {\n      return T(rng(0, TEN(18))) * TEN(18)\
@@ -398,7 +398,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/internal-type-traits.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 17:54:50+09:00'
+  timestamp: '2023-08-27 10:14:06+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/internal-type-traits.test.cpp

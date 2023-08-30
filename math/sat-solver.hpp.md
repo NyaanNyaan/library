@@ -40,13 +40,16 @@ data:
     \ -1;\n  }\n\n public:\n  vector<bool> assigns;\n\n  SatSolver(int _n)\n     \
     \ : n(_n), qi(0), reason(n), level(n), activity(n), assigns(n) {\n    w[0].resize(n),\
     \ w[1].resize(n);\n  }\n\n  void add_clause(const vector<pair<int, bool>> &clause)\
-    \ { add(clause); }\n\n  bool solve() {\n    while (true) {\n      int confl =\
-    \ propagate();\n      if (confl != -1) {\n        if (level[que.back()] == 1u)\
-    \ return false;\n        for (auto &a : activity) a /= 1.05;\n        analyze(confl);\n\
-    \      } else {\n        int k = -1;\n        for (int i = 0; i < n; ++i) {\n\
-    \          if (level[i] == 0 && (k == -1 || activity[k] < activity[i])) k = i;\n\
-    \        }\n        if (k == -1) return true;\n        enqueue(k, assigns[k]);\n\
-    \        ++level[k];\n      }\n    }\n  }\n};\n"
+    \ { add(clause); }\n\n  void if_then(int v1, bool a1, int v2, bool a2) {\n   \
+    \ add(vector{make_pair(v1, !a1), make_pair(v2, a2)});\n  }\n  void set_val(int\
+    \ v, bool a) { add(vector{make_pair(v, a)}); }\n\n  bool solve() {\n    while\
+    \ (true) {\n      int confl = propagate();\n      if (confl != -1) {\n       \
+    \ if (level[que.back()] == 1u) return false;\n        for (auto &a : activity)\
+    \ a /= 1.05;\n        analyze(confl);\n      } else {\n        int k = -1;\n \
+    \       for (int i = 0; i < n; ++i) {\n          if (level[i] == 0 && (k == -1\
+    \ || activity[k] < activity[i])) k = i;\n        }\n        if (k == -1) return\
+    \ true;\n        enqueue(k, assigns[k]);\n        ++level[k];\n      }\n    }\n\
+    \  }\n};\n"
   code: "#pragma once\n\n#include <unordered_set>\n#include <vector>\nusing namespace\
     \ std;\n\n// https://github.com/not522/CompetitiveProgramming/blob/master/old2/include/math/sat.hpp\n\
     class SatSolver {\n private:\n  int n, qi;\n  vector<vector<pair<int, bool>>>\
@@ -75,18 +78,21 @@ data:
     \ -1;\n  }\n\n public:\n  vector<bool> assigns;\n\n  SatSolver(int _n)\n     \
     \ : n(_n), qi(0), reason(n), level(n), activity(n), assigns(n) {\n    w[0].resize(n),\
     \ w[1].resize(n);\n  }\n\n  void add_clause(const vector<pair<int, bool>> &clause)\
-    \ { add(clause); }\n\n  bool solve() {\n    while (true) {\n      int confl =\
-    \ propagate();\n      if (confl != -1) {\n        if (level[que.back()] == 1u)\
-    \ return false;\n        for (auto &a : activity) a /= 1.05;\n        analyze(confl);\n\
-    \      } else {\n        int k = -1;\n        for (int i = 0; i < n; ++i) {\n\
-    \          if (level[i] == 0 && (k == -1 || activity[k] < activity[i])) k = i;\n\
-    \        }\n        if (k == -1) return true;\n        enqueue(k, assigns[k]);\n\
-    \        ++level[k];\n      }\n    }\n  }\n};\n"
+    \ { add(clause); }\n\n  void if_then(int v1, bool a1, int v2, bool a2) {\n   \
+    \ add(vector{make_pair(v1, !a1), make_pair(v2, a2)});\n  }\n  void set_val(int\
+    \ v, bool a) { add(vector{make_pair(v, a)}); }\n\n  bool solve() {\n    while\
+    \ (true) {\n      int confl = propagate();\n      if (confl != -1) {\n       \
+    \ if (level[que.back()] == 1u) return false;\n        for (auto &a : activity)\
+    \ a /= 1.05;\n        analyze(confl);\n      } else {\n        int k = -1;\n \
+    \       for (int i = 0; i < n; ++i) {\n          if (level[i] == 0 && (k == -1\
+    \ || activity[k] < activity[i])) k = i;\n        }\n        if (k == -1) return\
+    \ true;\n        enqueue(k, assigns[k]);\n        ++level[k];\n      }\n    }\n\
+    \  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: math/sat-solver.hpp
   requiredBy: []
-  timestamp: '2023-08-12 16:25:29+09:00'
+  timestamp: '2023-08-13 20:36:36+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1777.test.cpp

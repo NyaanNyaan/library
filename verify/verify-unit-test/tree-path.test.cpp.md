@@ -329,36 +329,41 @@ data:
     \      g[1].push_back(0);\n    }\n    return g;\n  }\n  vector<int> pruefer(n\
     \ - 2);\n  for (auto& x : pruefer) x = randint(0, n);\n  return pruefer_code(pruefer);\n\
     }\n\n/**\n * @brief Pruefer Code\n */\n#line 3 \"tree/tree-query.hpp\"\n\ntemplate\
-    \ <typename G>\nstruct Tree {\n private:\n  G& g;\n  int root;\n  vector<vector<int>>\
-    \ bl;\n  vector<int> dp;\n  void build() {\n    bl.resize(g.size());\n    dp.resize(g.size());\n\
+    \ <typename G>\nstruct Tree {\n private:\n  G& g;\n  int root;\n  vector<array<int,\
+    \ 24>> bl;\n  vector<int> dp;\n  void build() {\n    bl.resize(g.size());\n  \
+    \  dp.resize(g.size());\n    for (auto& v : bl) fill(begin(v), end(v), -1);\n\
     \    dfs(root, -1, 0);\n  }\n\n  void dfs(int c, int p, int _dp) {\n    dp[c]\
-    \ = _dp;\n    for (int i = p, x = -1; i != -1;) {\n      bl[c].push_back(i);\n\
-    \      i = ++x < (int)bl[i].size() ? bl[i][x] : -1;\n    }\n    for (auto& d :\
-    \ g[c]) {\n      if (d == p) continue;\n      dfs(d, c, _dp + 1);\n    }\n  }\n\
-    \n public:\n  Tree(G& _g, int _r = 0) : g(_g), root(_r) { build(); }\n\n  int\
-    \ depth(int u) const { return dp[u]; }\n\n  int par(int u) const { return u ==\
-    \ root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int u, int k) const {\n    if\
-    \ (dp[u] < k) return -1;\n    for (int i = k ? __lg(k) : -1; i >= 0; --i) {\n\
-    \      if ((k >> i) & 1) u = bl[u][i];\n    }\n    return u;\n  }\n\n  int nxt(int\
-    \ s, int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n    int u = kth_ancestor(t,\
-    \ dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u : bl[s][0];\n  }\n\n  vector<int>\
-    \ path(int s, int t) const {\n    vector<int> pre, suf;\n    while (dp[s] > dp[t])\
-    \ {\n      pre.push_back(s);\n      s = bl[s][0];\n    }\n    while (dp[s] < dp[t])\
-    \ {\n      suf.push_back(t);\n      t = bl[t][0];\n    }\n    while (s != t) {\n\
-    \      pre.push_back(s);\n      suf.push_back(t);\n      s = bl[s][0];\n     \
-    \ t = bl[t][0];\n    }\n    pre.push_back(s);\n    reverse(begin(suf), end(suf));\n\
-    \    copy(begin(suf), end(suf), back_inserter(pre));\n    return pre;\n  }\n\n\
-    \  int lca(int u, int v) {\n    if (dp[u] != dp[v]) {\n      if (dp[u] > dp[v])\
-    \ swap(u, v);\n      v = kth_ancestor(v, dp[v] - dp[u]);\n    }\n    if (u ==\
-    \ v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u]\
-    \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
-    \    }\n    return bl[u][0];\n  }\n};\n\n/**\n * @brief \u6728\u306B\u5BFE\u3059\
-    \u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n * @docs docs/tree/tree-query.md\n\
-    \ */\n#line 10 \"verify/verify-unit-test/tree-path.test.cpp\"\n\nusing namespace\
-    \ Nyaan;\n\ntemplate <typename G>\nbool is_tree(G& g, bool directed = false) {\n\
-    \  int n = g.size();\n  UnionFind uf(n);\n  rep(i, n) each(j, g[i]) {\n    if\
-    \ (!directed and i > j) continue;\n    if (!uf.unite(i, j)) return false;\n  }\n\
-    \  return uf.size(0) == n;\n}\n\ntemplate <typename G>\nbool is_rooted_tree(G&\
+    \ = _dp;\n    for (int i = p, x = 0; i != -1;) {\n      bl[c][x] = i;\n      i\
+    \ = bl[i][x], x++;\n    }\n    for (auto& d : g[c]) {\n      if (d == p) continue;\n\
+    \      dfs(d, c, _dp + 1);\n    }\n  }\n\n public:\n  Tree(G& _g, int _r = 0)\
+    \ : g(_g), root(_r) { build(); }\n\n  int depth(int u) const { return dp[u]; }\n\
+    \n  int par(int u) const { return u == root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int\
+    \ u, int k) const {\n    if (dp[u] < k) return -1;\n    while (k) {\n      int\
+    \ t = __builtin_ctz(k);\n      u = bl[u][t], k ^= 1 << t;\n    }\n    return u;\n\
+    \  }\n\n  int nxt(int s, int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n\
+    \    int u = kth_ancestor(t, dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u\
+    \ : bl[s][0];\n  }\n\n  vector<int> path(int s, int t) const {\n    vector<int>\
+    \ pre, suf;\n    while (dp[s] > dp[t]) {\n      pre.push_back(s);\n      s = bl[s][0];\n\
+    \    }\n    while (dp[s] < dp[t]) {\n      suf.push_back(t);\n      t = bl[t][0];\n\
+    \    }\n    while (s != t) {\n      pre.push_back(s);\n      suf.push_back(t);\n\
+    \      s = bl[s][0];\n      t = bl[t][0];\n    }\n    pre.push_back(s);\n    reverse(begin(suf),\
+    \ end(suf));\n    copy(begin(suf), end(suf), back_inserter(pre));\n    return\
+    \ pre;\n  }\n\n  int lca(int u, int v) {\n    if (dp[u] != dp[v]) {\n      if\
+    \ (dp[u] > dp[v]) swap(u, v);\n      v = kth_ancestor(v, dp[v] - dp[u]);\n   \
+    \ }\n    if (u == v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n\
+    \      if (dp[u] < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i],\
+    \ v = bl[v][i];\n    }\n    return bl[u][0];\n  }\n\n  // u - v \u9593\u306E\u30D1\
+    \u30B9\u4E0A\u306E\u9802\u70B9\u306E\u3046\u3061 u \u304B\u3089\u8DDD\u96E2 i\
+    \ \u306E\u9802\u70B9\n  // (dist(u, v) < i \u306E\u3068\u304D -1)\n  int jump(int\
+    \ u, int v, int i) {\n    int lc = lca(u, v);\n    int d1 = dp[u] - dp[lc];\n\
+    \    if (i <= d1) return kth_ancestor(u, i);\n    int d = d1 + dp[v] - dp[lc];\n\
+    \    if (i <= d) return kth_ancestor(v, d - i);\n    return -1;\n  }\n};\n\n/**\n\
+    \ * @brief \u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\
+    \n * @docs docs/tree/tree-query.md\n */\n#line 10 \"verify/verify-unit-test/tree-path.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\ntemplate <typename G>\nbool is_tree(G& g, bool directed\
+    \ = false) {\n  int n = g.size();\n  UnionFind uf(n);\n  rep(i, n) each(j, g[i])\
+    \ {\n    if (!directed and i > j) continue;\n    if (!uf.unite(i, j)) return false;\n\
+    \  }\n  return uf.size(0) == n;\n}\n\ntemplate <typename G>\nbool is_rooted_tree(G&\
     \ g, int root) {\n  int n = g.size();\n  vector<char> vis(n, false);\n  auto dfs\
     \ = [&](auto rc, int c) -> void {\n    vis[c] = true;\n    each(d, g[c]) {\n \
     \     assert(vis[d] == false);\n      rc(rc, d);\n    }\n  };\n  dfs(dfs, root);\n\
@@ -446,7 +451,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/tree-path.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2023-08-30 22:50:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/tree-path.test.cpp

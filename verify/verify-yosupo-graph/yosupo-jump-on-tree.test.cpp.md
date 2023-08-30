@@ -2,17 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: hashmap/hashmap-unerasable.hpp
-    title: hashmap/hashmap-unerasable.hpp
-  - icon: ':heavy_check_mark:'
-    path: internal/internal-hash-function.hpp
-    title: "\u30CF\u30C3\u30B7\u30E5\u95A2\u6570"
-  - icon: ':heavy_check_mark:'
-    path: internal/internal-seed.hpp
-    title: internal/internal-seed.hpp
-  - icon: ':heavy_check_mark:'
-    path: internal/internal-type-traits.hpp
-    title: internal/internal-type-traits.hpp
+    path: graph/graph-template.hpp
+    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -31,6 +22,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: template/util.hpp
     title: template/util.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/tree-query.hpp
+    title: "\u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA"
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -38,12 +32,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/associative_array
+    PROBLEM: https://judge.yosupo.jp/problem/jump_on_tree
     links:
-    - https://judge.yosupo.jp/problem/associative_array
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n//\n\
-    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
+    - https://judge.yosupo.jp/problem/jump_on_tree
+  bundledCode: "#line 1 \"verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/jump_on_tree\"\n//\n#line\
+    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
     \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
@@ -216,122 +210,79 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
-    \n//\n#line 2 \"hashmap/hashmap-unerasable.hpp\"\n\n#line 7 \"hashmap/hashmap-unerasable.hpp\"\
-    \nusing namespace std;\n\n#line 2 \"internal/internal-hash-function.hpp\"\n\n\
-    #line 4 \"internal/internal-hash-function.hpp\"\nusing namespace std;\n\n#line\
-    \ 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\n\
-    using namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
-    \ {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
-    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
-    \  .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >> 31, m\
-    \ ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() { return\
-    \ 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210 (\u624B\
-    \u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\u51FA\
-    \u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\u304F\
-    \u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\u30B7\
-    \u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long long\
-    \ seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return deterministic_seed();\n\
-    #else\n  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n\
-    #line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
-    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
-    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
-    \                               is_same_v<T, __uint128_t>,\n                 \
-    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
-    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
-    \                           true_type, false_type>::type;\n\ntemplate <typename\
-    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
-    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
-    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
-    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
-    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 8 \"internal/internal-hash-function.hpp\"\n\n\
-    namespace internal {\n// \u6574\u6570, \u6574\u6570\u5217\u3092 64 bit unsigned\
-    \ int \u3078\u79FB\u3059\n\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
-    \nENABLE_HAS_TYPE(first_type);\nENABLE_HAS_TYPE(second_type);\nENABLE_HAS_TYPE(iterator);\n\
-    \ntemplate <typename T>\nu64 hash_function(const T& x) {\n  static u64 r = seed();\n\
-    \  constexpr u64 z1 = 11995408973635179863ULL;\n  if constexpr (is_broadly_integral_v<T>)\
-    \ {\n    // Integral\n    return (u64(x) ^ r) * z1;\n  } else if constexpr (has_first_type_v<T>\
-    \ && has_second_type_v<T>) {\n    // pair\n    constexpr u64 z2 = 10150724397891781847ULL;\n\
-    \    return hash_function(x.first) + hash_function(x.second) * z2;\n  } else if\
-    \ constexpr (has_iterator_v<T>) {\n    // Container\n    constexpr u64 mod = (1LL\
-    \ << 61) - 1;\n    constexpr u64 base = 950699498548472943ULL;\n    u64 m = 0;\n\
-    \    for (auto& z : x) {\n      u64 w;\n      if constexpr (is_broadly_integral_v<T>)\
-    \ {\n        w = u64(z) ^ r;\n      } else {\n        w = hash_function(z);\n\
-    \      }\n      u128 y = u128(m) * base + (w & mod);\n      m = (y & mod) + (y\
-    \ >> 61);\n      if (m >= mod) m -= mod;\n    }\n    m ^= m << 24, m ^= m >> 31,\
-    \ m ^= m << 35;\n    return m;\n  } else {\n    static_assert([]() { return false;\
-    \ }());\n  }\n}\n\ntemplate <typename Key>\nstruct HashObject {\n  size_t operator()(const\
-    \ Key& x) const { return hash_function(x); }\n};\n\n}  // namespace internal\n\
-    \n/*\n@brief \u30CF\u30C3\u30B7\u30E5\u95A2\u6570\n*/\n#line 10 \"hashmap/hashmap-unerasable.hpp\"\
-    \n\n// \u524A\u9664\u4E0D\u53EF\u80FD\u306A hashmap\n//\n// \u30C6\u30F3\u30D7\
-    \u30EC\u30FC\u30C8\u5F15\u6570\n// fixed_size : \u3053\u308C\u3092 true \u306B\
-    \u3059\u308B\u3059\u308B\u3068\u30D0\u30B1\u30C3\u30C8\u30B5\u30A4\u30BA\u304C\
-    \u56FA\u5B9A\u306B\u306A\u308B\n// get_hash : \u30CF\u30C3\u30B7\u30E5\u95A2\u6570\
-    \u306E\u6307\u5B9A\n// \u5F15\u6570\n// _default_value : val \u306E\u521D\u671F\
-    \u5024, \u3053\u306E\u5024\u3067\u521D\u671F\u5316\n// _default_size :\n// \u30D0\
-    \u30B1\u30C3\u30C8\u30B5\u30A4\u30BA, max(4, _default_size) \u4EE5\u4E0A\u306E\
-    \ 2 \u3079\u304D\u3067\u521D\u671F\u5316\n// \u305F\u3060\u3057 fixed_size \u304C\
-    \ true \u306E\u6642\u306B\u3057\u304B\u30B5\u30A4\u30BA\u3092\u5909\u66F4\u3067\
-    \u304D\u306A\u3044\n\ntemplate <typename Key, typename Val, bool fixed_size =\
-    \ false,\n          unsigned long long (*get_hash)(const Key&) =\n           \
-    \   internal::hash_function<Key>>\nstruct UnerasableHashMap {\n  int N, occupied_num,\
-    \ shift;\n  vector<Key> keys;\n  vector<Val> vals;\n  vector<char> flag;\n\n \
-    \ Val default_value;\n  int default_size;\n\n  // \u30B5\u30A4\u30BA\u3092 n \u306B\
-    \u5909\u66F4\u3059\u308B\n  void init(int n, bool reset = false) {\n    assert(n\
-    \ >= 4 && (n & (n - 1)) == 0);\n    if constexpr (fixed_size) {\n      assert(reset\
-    \ == true);\n      n = N;\n    }\n    if (reset == true) {\n      N = n, occupied_num\
-    \ = 0, shift = 64 - __builtin_ctz(n);\n      keys.resize(n);\n      vals.resize(n);\n\
-    \      flag.resize(n);\n      fill(begin(vals), end(vals), default_value);\n \
-    \     fill(begin(flag), end(flag), 0);\n    } else {\n      N = n, shift = 64\
-    \ - __builtin_ctz(n);\n      vector<Key> keys2(n);\n      vector<Val> vals2(n,\
-    \ default_value);\n      vector<char> flag2(n);\n      swap(keys, keys2), swap(vals,\
-    \ vals2), swap(flag, flag2);\n      for (int i = 0; i < (int)flag2.size(); i++)\
-    \ {\n        if (flag2[i]) {\n          int j = hint(keys2[i]);\n          keys[j]\
-    \ = keys2[i], vals[j] = vals2[i], flag[j] = 1;\n        }\n      }\n    }\n  }\n\
-    \n  UnerasableHashMap(const Val& _default_value = Val{}, int _default_size = 4)\n\
-    \      : occupied_num(0), default_value(_default_value) {\n    if (fixed_size\
-    \ == false) _default_size = 4;\n    N = 4;\n    while (N < _default_size) N *=\
-    \ 2;\n    default_size = N;\n    init(N, true);\n  }\n\n  int hint(const Key&\
-    \ k) {\n    int hash = get_hash(k) >> shift;\n    while (flag[hash] && keys[hash]\
-    \ != k) hash = (hash + 1) & (N - 1);\n    return hash;\n  }\n\n  // key \u304C\
-    \ i \u3067\u3042\u308B\u8981\u7D20\u3078\u306E\u53C2\u7167\u3092\u8FD4\u3059\n\
-    \  Val& operator[](const Key& k) {\n    int i = hint(k);\n    if (!flag[i]) {\n\
-    \      if constexpr (fixed_size == false) {\n        if (occupied_num * 2 >= N)\
-    \ {\n          init(2 * N), i = hint(k);\n        }\n      }\n      keys[i] =\
-    \ k, flag[i] = 1, occupied_num++;\n    }\n    return vals[i];\n  }\n\n  Val get(const\
-    \ Key& k) {\n    int i = hint(k);\n    return flag[i] ? vals[i] : default_value;\n\
-    \  }\n\n  // \u8D70\u67FB, f \u306B\u95A2\u6570 f(key, val) \u3092\u5165\u308C\
-    \u308B\n  template <typename F>\n  void enumerate(const F f) {\n    for (int i\
-    \ = 0; i < (int)flag.size(); i++) {\n      if (flag[i]) f(keys[i], vals[i]);\n\
-    \    }\n  }\n\n  int count(const Key& k) { return flag[hint(k)]; }\n  bool contain(const\
-    \ Key& k) { return flag[hint(k)]; }\n  int size() const { return occupied_num;\
-    \ }\n  void reset() { init(default_size, true); }\n  void clear() { init(default_size,\
-    \ true); }\n};\n#line 6 \"verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp\"\
-    \nusing namespace Nyaan;\n\nvoid q() {\n  UnerasableHashMap<ll, ll> mp;\n  UnerasableHashMap<ll,\
-    \ ll, true> mp2(0, TEN(6));\n  UnerasableHashMap<i128, ll> mp3;\n  UnerasableHashMap<u128,\
-    \ ll> mp4;\n\n  ini(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0) {\n\
-    \      inl(k, v);\n      mp[k] = mp2[k] = mp3[k] = mp4[k] = v;\n    } else {\n\
-    \      inl(k);\n      ll a1 = mp[k];\n      ll a2 = mp2[k];\n      ll a3 = mp3[k];\n\
-    \      ll a4 = mp4[k];\n      assert(a1 == a2 and a2 == a3 and a3 == a4);\n  \
-    \    out(a1);\n    }\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n\
-    \  while (t--) q();\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n//\n\
-    #include \"../../template/template.hpp\"\n//\n#include \"../../hashmap/hashmap-unerasable.hpp\"\
-    \nusing namespace Nyaan;\n\nvoid q() {\n  UnerasableHashMap<ll, ll> mp;\n  UnerasableHashMap<ll,\
-    \ ll, true> mp2(0, TEN(6));\n  UnerasableHashMap<i128, ll> mp3;\n  UnerasableHashMap<u128,\
-    \ ll> mp4;\n\n  ini(Q);\n  while (Q--) {\n    ini(cmd);\n    if (cmd == 0) {\n\
-    \      inl(k, v);\n      mp[k] = mp2[k] = mp3[k] = mp4[k] = v;\n    } else {\n\
-    \      inl(k);\n      ll a1 = mp[k];\n      ll a2 = mp2[k];\n      ll a3 = mp3[k];\n\
-    \      ll a4 = mp4[k];\n      assert(a1 == a2 and a2 == a3 and a3 == a4);\n  \
-    \    out(a1);\n    }\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n\
-    \  while (t--) q();\n}\n"
+    \ 4 \"verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp\"\n//\n#line 2 \"\
+    graph/graph-template.hpp\"\n\ntemplate <typename T>\nstruct edge {\n  int src,\
+    \ to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n\
+    \  edge(int _src, int _to, T _cost) : src(_src), to(_to), cost(_cost) {}\n\n \
+    \ edge &operator=(const int &x) {\n    to = x;\n    return *this;\n  }\n\n  operator\
+    \ int() const { return to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\n\
+    template <typename T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph\
+    \ = vector<vector<int>>;\n\n// Input of (Unweighted) Graph\nUnweightedGraph graph(int\
+    \ N, int M = -1, bool is_directed = false,\n                      bool is_1origin\
+    \ = true) {\n  UnweightedGraph g(N);\n  if (M == -1) M = N - 1;\n  for (int _\
+    \ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    if (is_1origin) x--,\
+    \ y--;\n    g[x].push_back(y);\n    if (!is_directed) g[y].push_back(x);\n  }\n\
+    \  return g;\n}\n\n// Input of Weighted Graph\ntemplate <typename T>\nWeightedGraph<T>\
+    \ wgraph(int N, int M = -1, bool is_directed = false,\n                      \
+    \  bool is_1origin = true) {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N -\
+    \ 1;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n   \
+    \ T c;\n    cin >> c;\n    if (is_1origin) x--, y--;\n    g[x].emplace_back(x,\
+    \ y, c);\n    if (!is_directed) g[y].emplace_back(y, x, c);\n  }\n  return g;\n\
+    }\n\n// Input of Edges\ntemplate <typename T>\nEdges<T> esgraph(int N, int M,\
+    \ int is_weighted = true, bool is_1origin = true) {\n  Edges<T> es;\n  for (int\
+    \ _ = 0; _ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n\
+    \      cin >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x,\
+    \ y, c);\n  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename\
+    \ T>\nvector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n\
+    \                           bool is_directed = false, bool is_1origin = true)\
+    \ {\n  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++)\
+    \ {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n     \
+    \ cin >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y]\
+    \ = c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
+    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
+    \ */\n#line 6 \"verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp\"\n//\n\
+    #line 3 \"tree/tree-query.hpp\"\n\ntemplate <typename G>\nstruct Tree {\n private:\n\
+    \  G& g;\n  int root;\n  vector<array<int, 24>> bl;\n  vector<int> dp;\n  void\
+    \ build() {\n    bl.resize(g.size());\n    dp.resize(g.size());\n    for (auto&\
+    \ v : bl) fill(begin(v), end(v), -1);\n    dfs(root, -1, 0);\n  }\n\n  void dfs(int\
+    \ c, int p, int _dp) {\n    dp[c] = _dp;\n    for (int i = p, x = 0; i != -1;)\
+    \ {\n      bl[c][x] = i;\n      i = bl[i][x], x++;\n    }\n    for (auto& d :\
+    \ g[c]) {\n      if (d == p) continue;\n      dfs(d, c, _dp + 1);\n    }\n  }\n\
+    \n public:\n  Tree(G& _g, int _r = 0) : g(_g), root(_r) { build(); }\n\n  int\
+    \ depth(int u) const { return dp[u]; }\n\n  int par(int u) const { return u ==\
+    \ root ? -1 : bl[u][0]; }\n\n  int kth_ancestor(int u, int k) const {\n    if\
+    \ (dp[u] < k) return -1;\n    while (k) {\n      int t = __builtin_ctz(k);\n \
+    \     u = bl[u][t], k ^= 1 << t;\n    }\n    return u;\n  }\n\n  int nxt(int s,\
+    \ int t) const {\n    if (dp[s] >= dp[t]) return par(s);\n    int u = kth_ancestor(t,\
+    \ dp[t] - dp[s] - 1);\n    return bl[u][0] == s ? u : bl[s][0];\n  }\n\n  vector<int>\
+    \ path(int s, int t) const {\n    vector<int> pre, suf;\n    while (dp[s] > dp[t])\
+    \ {\n      pre.push_back(s);\n      s = bl[s][0];\n    }\n    while (dp[s] < dp[t])\
+    \ {\n      suf.push_back(t);\n      t = bl[t][0];\n    }\n    while (s != t) {\n\
+    \      pre.push_back(s);\n      suf.push_back(t);\n      s = bl[s][0];\n     \
+    \ t = bl[t][0];\n    }\n    pre.push_back(s);\n    reverse(begin(suf), end(suf));\n\
+    \    copy(begin(suf), end(suf), back_inserter(pre));\n    return pre;\n  }\n\n\
+    \  int lca(int u, int v) {\n    if (dp[u] != dp[v]) {\n      if (dp[u] > dp[v])\
+    \ swap(u, v);\n      v = kth_ancestor(v, dp[v] - dp[u]);\n    }\n    if (u ==\
+    \ v) return u;\n    for (int i = __lg(dp[u]); i >= 0; --i) {\n      if (dp[u]\
+    \ < (1 << i)) continue;\n      if (bl[u][i] != bl[v][i]) u = bl[u][i], v = bl[v][i];\n\
+    \    }\n    return bl[u][0];\n  }\n\n  // u - v \u9593\u306E\u30D1\u30B9\u4E0A\
+    \u306E\u9802\u70B9\u306E\u3046\u3061 u \u304B\u3089\u8DDD\u96E2 i \u306E\u9802\
+    \u70B9\n  // (dist(u, v) < i \u306E\u3068\u304D -1)\n  int jump(int u, int v,\
+    \ int i) {\n    int lc = lca(u, v);\n    int d1 = dp[u] - dp[lc];\n    if (i <=\
+    \ d1) return kth_ancestor(u, i);\n    int d = d1 + dp[v] - dp[lc];\n    if (i\
+    \ <= d) return kth_ancestor(v, d - i);\n    return -1;\n  }\n};\n\n/**\n * @brief\
+    \ \u6728\u306B\u5BFE\u3059\u308B\u4E00\u822C\u7684\u306A\u30AF\u30A8\u30EA\n *\
+    \ @docs docs/tree/tree-query.md\n */\n#line 8 \"verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid q() {\n  inl(N, Q);\n  auto g = graph(N, N -\
+    \ 1, false, false);\n  Tree tree{g};\n  rep(_, Q) {\n    ini(s, t, i);\n    out(tree.jump(s,\
+    \ t, i));\n  }\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while\
+    \ (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/jump_on_tree\"\n//\n#include\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../graph/graph-template.hpp\"\
+    \n//\n#include \"../../tree/tree-query.hpp\"\nusing namespace Nyaan;\n\nvoid q()\
+    \ {\n  inl(N, Q);\n  auto g = graph(N, N - 1, false, false);\n  Tree tree{g};\n\
+    \  rep(_, Q) {\n    ini(s, t, i);\n    out(tree.jump(s, t, i));\n  }\n}\n\nvoid\
+    \ Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -339,20 +290,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - hashmap/hashmap-unerasable.hpp
-  - internal/internal-hash-function.hpp
-  - internal/internal-seed.hpp
-  - internal/internal-type-traits.hpp
+  - graph/graph-template.hpp
+  - tree/tree-query.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+  path: verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp
   requiredBy: []
-  timestamp: '2023-08-27 10:14:06+09:00'
+  timestamp: '2023-08-30 22:50:09+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+documentation_of: verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+- /verify/verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp
+- /verify/verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp.html
+title: verify/verify-yosupo-graph/yosupo-jump-on-tree.test.cpp
 ---

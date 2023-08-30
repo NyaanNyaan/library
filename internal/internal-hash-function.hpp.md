@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-unerasable.hpp
     title: hashmap/hashmap-unerasable.hpp
+  - icon: ':warning:'
+    path: marathon/top-k.hpp
+    title: marathon/top-k.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-1377.test.cpp
@@ -105,6 +108,7 @@ data:
   path: internal/internal-hash-function.hpp
   requiredBy:
   - hashmap/hashmap-unerasable.hpp
+  - marathon/top-k.hpp
   timestamp: '2023-08-10 13:25:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
