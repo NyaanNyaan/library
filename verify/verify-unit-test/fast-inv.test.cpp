@@ -2,7 +2,6 @@
 //
 #include "../../template/template.hpp"
 //
-#include "../../math/primitive-root.hpp"
 #include "../../misc/rng.hpp"
 #include "../../misc/timer.hpp"
 //

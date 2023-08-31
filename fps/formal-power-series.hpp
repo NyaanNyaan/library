@@ -95,8 +95,11 @@ struct FormalPowerSeries : vector<mint> {
     return ret;
   }
 
+  // 前 sz 項を取ってくる。sz に足りない項は 0 埋めする
   FPS pre(int sz) const {
-    return FPS(begin(*this), begin(*this) + min((int)this->size(), sz));
+    FPS ret(begin(*this), begin(*this) + min((int)this->size(), sz));
+    if ((int)ret.size() < sz) ret.resize(sz);
+    return ret;
   }
 
   FPS operator>>(int sz) const {
@@ -141,7 +144,7 @@ struct FormalPowerSeries : vector<mint> {
   }
 
   FPS log(int deg = -1) const {
-    assert((*this)[0] == mint(1));
+    assert(!(*this).empty() && (*this)[0] == mint(1));
     if (deg == -1) deg = (int)this->size();
     return (this->diff() * this->inv(deg)).pre(deg - 1).integral();
   }

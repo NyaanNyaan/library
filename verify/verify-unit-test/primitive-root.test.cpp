@@ -5,7 +5,7 @@
 #include "../../misc/rng.hpp"
 //
 #include "../../atcoder/internal_math.hpp"
-#include "../../math/constexpr-primitiveroot.hpp"
+#include "../../math/constexpr-primitive-root.hpp"
 #include "../../math/elementary-function.hpp"
 #include "../../prime/fast-factorize.hpp"
 #include "../../prime/prime-enumerate.hpp"

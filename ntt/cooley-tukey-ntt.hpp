@@ -38,7 +38,7 @@ struct ArbitraryLengthNTT {
     if ((len = len_) == -1) len = mod - 1;
     if (mod >= 3 && len <= 1) len = 2;
     while ((mod - 1) % len != 0) ++len;
-    mint pr = mint(PrimitiveRoot(mod)).pow((mod - 1) / len);
+    mint pr = mint(constexpr_primitive_root(mod)).pow((mod - 1) / len);
     w.resize(len + 1);
     for (int i = 0; i <= len; i++) w[i] = i ? w[i - 1] * pr : mint(1);
     divisors = divisor(len);

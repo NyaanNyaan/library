@@ -7,7 +7,7 @@ using namespace std;
 
 #include "../fps/formal-power-series.hpp"
 #include "../internal/internal-math.hpp"
-#include "../math/primitive-root.hpp"
+#include "../math/constexpr-primitive-root.hpp"
 #include "../modint/arbitrary-modint.hpp"
 #include "../prime/fast-factorize.hpp"
 #include "chirp-z.hpp"
@@ -30,7 +30,7 @@ FormalPowerSeries<mint> multivariate_circular_convolution(
   using submint = ArbitraryModIntBase<20230528>;
   for (int p : primes) {
     submint::set_mod(p);
-    int proot = PrimitiveRoot(p);
+    int proot = constexpr_primitive_root(p);
     unordered_map<int, pair<submint, submint>> len_to_W;
     for (auto& b : base) {
       submint w = submint{proot}.pow((p - 1) / b);
