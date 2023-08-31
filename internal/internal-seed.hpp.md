@@ -91,6 +91,9 @@ data:
     path: verify/verify-unit-test/fast-inv.test.cpp
     title: verify/verify-unit-test/fast-inv.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fps-sparse.test.cpp
+    title: verify/verify-unit-test/fps-sparse.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
@@ -226,6 +229,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
     title: verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
@@ -322,6 +328,7 @@ data:
   - verify/verify-aoj-other/aoj-1068.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-unit-test/multieval.test.cpp
   - verify/verify-unit-test/tree-path.test.cpp
@@ -374,6 +381,7 @@ data:
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-unit-test/fast-inv.test.cpp
+  - verify/verify-unit-test/fps-sparse.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - verify/verify-unit-test/nimber.test.cpp

@@ -6,6 +6,15 @@ data:
     path: fps/dual-fps.hpp
     title: "\u5468\u6CE2\u6570\u9818\u57DF\u3067\u306E\u5024\u3092\u4FDD\u6301\u3059\
       \u308BFPS"
+  - icon: ':heavy_check_mark:'
+    path: ntt/cooley-tukey-ntt.hpp
+    title: Cooley-Tukey FFT Algorithm
+  - icon: ':heavy_check_mark:'
+    path: ntt/multivariate-circular-convolution.hpp
+    title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
+  - icon: ':heavy_check_mark:'
+    path: ntt/rader-ntt.hpp
+    title: Rader's FFT Algorithm
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/dual-fps.test.cpp
@@ -14,14 +23,23 @@ data:
     path: verify/verify-unit-test/primitive-root.test.cpp
     title: verify/verify-unit-test/primitive-root.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+    title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1504.test.cpp
     title: verify/verify-yuki/yuki-1504.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1783.test.cpp
+    title: verify/verify-yuki/yuki-1783.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"math/constexpr-primitiveroot.hpp\"\n\nconstexpr unsigned\
+  bundledCode: "#line 2 \"math/constexpr-primitive-root.hpp\"\n\nconstexpr unsigned\
     \ int constexpr_primitive_root(unsigned int mod) {\n  using u32 = unsigned int;\n\
     \  using u64 = unsigned long long;\n  if(mod == 2) return 1;\n  u64 m = mod -\
     \ 1, ds[32] = {}, idx = 0;\n  for (u64 i = 2; i * i <= m; ++i) {\n    if (m %\
@@ -42,19 +60,25 @@ data:
     \ if (r == 1) flg = false;\n    }\n    if (flg == true) return _pr;\n  }\n}\n\n"
   dependsOn: []
   isVerificationFile: false
-  path: math/constexpr-primitiveroot.hpp
+  path: math/constexpr-primitive-root.hpp
   requiredBy:
+  - ntt/rader-ntt.hpp
+  - ntt/cooley-tukey-ntt.hpp
+  - ntt/multivariate-circular-convolution.hpp
   - fps/dual-fps.hpp
-  timestamp: '2021-05-18 09:24:09+09:00'
+  timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-1783.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
+  - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
-documentation_of: math/constexpr-primitiveroot.hpp
+documentation_of: math/constexpr-primitive-root.hpp
 layout: document
 redirect_from:
-- /library/math/constexpr-primitiveroot.hpp
-- /library/math/constexpr-primitiveroot.hpp.html
-title: math/constexpr-primitiveroot.hpp
+- /library/math/constexpr-primitive-root.hpp
+- /library/math/constexpr-primitive-root.hpp.html
+title: math/constexpr-primitive-root.hpp
 ---

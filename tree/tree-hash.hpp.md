@@ -10,6 +10,9 @@ data:
     path: verify/verify-aoj-other/aoj-1613.test.cpp
     title: verify/verify-aoj-other/aoj-1613.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1789.test.cpp
     title: verify/verify-yuki/yuki-1789.test.cpp
   _isVerificationFailed: false
@@ -102,6 +105,7 @@ data:
   verifiedWith:
   - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
 documentation_of: tree/tree-hash.hpp
 layout: document
 redirect_from:

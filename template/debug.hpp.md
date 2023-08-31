@@ -274,6 +274,9 @@ data:
     path: verify/verify-unit-test/fast-inv.test.cpp
     title: verify/verify-unit-test/fast-inv.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fps-sparse.test.cpp
+    title: verify/verify-unit-test/fps-sparse.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
@@ -676,6 +679,18 @@ data:
     path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-sparse-inv.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sparse-inv.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-sparse-log.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sparse-log.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - icon: ':heavy_check_mark:'
@@ -754,6 +769,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
     title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - icon: ':heavy_check_mark:'
@@ -828,6 +846,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
     title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
+    title: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
     title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
@@ -1409,6 +1430,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-dijkstra-abstruct.test.cpp
   - verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
   - verify/verify-yosupo-graph/yosupo-directed-mst.test.cpp
   - verify/verify-yosupo-graph/yosupo-diameter.test.cpp
@@ -1440,11 +1462,13 @@ data:
   - verify/verify-aoj-dsl/aoj-dsl-2-e.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-b-bit.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sparse-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-linear-recurrence.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-newton-method-2.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp-arb.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-pow-arb.test.cpp
@@ -1452,6 +1476,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-compositional-inverse-newton.test.cpp
   - verify/verify-yosupo-fps/yosupo-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-sum-of-exp-poly-limit.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-compositional-inverse.test.cpp
   - verify/verify-yosupo-fps/yosupo-composition-fast.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
@@ -1460,6 +1485,7 @@ data:
   - verify/verify-yosupo-fps/yosupo-log.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-yosupo-fps/yosupo-log-arb.test.cpp
+  - verify/verify-yosupo-fps/yosupo-sparse-log.test.cpp
   - verify/verify-yosupo-fps/yosupo-product-of-polynomial-sequence.test.cpp
   - verify/verify-yosupo-fps/yosupo-multieval.test.cpp
   - verify/verify-yosupo-fps/yosupo-inv-newton-method.test.cpp
@@ -1559,6 +1585,7 @@ data:
   - verify/verify-unit-test/math-fast-2.test.cpp
   - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-unit-test/fast-inv.test.cpp
+  - verify/verify-unit-test/fps-sparse.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
@@ -1653,6 +1680,7 @@ data:
   - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   - verify/verify-yosupo-math/yosupo-hafnian-of-matrix.test.cpp
+  - verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
   - verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
   - verify/verify-yosupo-math/yosupo-nim-product.test.cpp
   - verify/verify-yosupo-math/yosupo-counting-primes-3.test.cpp

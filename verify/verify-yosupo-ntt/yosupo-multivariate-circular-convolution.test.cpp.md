@@ -18,8 +18,8 @@ data:
     path: internal/internal-type-traits.hpp
     title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
-    path: math/primitive-root.hpp
-    title: "\u539F\u59CB\u6839"
+    path: math/constexpr-primitive-root.hpp
+    title: math/constexpr-primitive-root.hpp
   - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
@@ -296,11 +296,13 @@ data:
     \ const {\n    FPS ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
     \ ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(), r.size()));\n\
     \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
-    \   return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
-    \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
-    \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
-    \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
-    \ operator<<(int sz) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(),\
+    \   return ret;\n  }\n\n  // \u524D sz \u9805\u3092\u53D6\u3063\u3066\u304F\u308B\
+    \u3002sz \u306B\u8DB3\u308A\u306A\u3044\u9805\u306F 0 \u57CB\u3081\u3059\u308B\
+    \n  FPS pre(int sz) const {\n    FPS ret(begin(*this), begin(*this) + min((int)this->size(),\
+    \ sz));\n    if ((int)ret.size() < sz) ret.resize(sz);\n    return ret;\n  }\n\
+    \n  FPS operator>>(int sz) const {\n    if ((int)this->size() <= sz) return {};\n\
+    \    FPS ret(*this);\n    ret.erase(ret.begin(), ret.begin() + sz);\n    return\
+    \ ret;\n  }\n\n  FPS operator<<(int sz) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(),\
     \ sz, mint(0));\n    return ret;\n  }\n\n  FPS diff() const {\n    const int n\
     \ = (int)this->size();\n    FPS ret(max(0, n - 1));\n    mint one(1), coeff(1);\n\
     \    for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n \
@@ -310,25 +312,25 @@ data:
     \ i = 2; i <= n; i++) ret[i] = (-ret[mod % i]) * (mod / i);\n    for (int i =\
     \ 0; i < n; i++) ret[i + 1] *= (*this)[i];\n    return ret;\n  }\n\n  mint eval(mint\
     \ x) const {\n    mint r = 0, w = 1;\n    for (auto &v : *this) r += w * v, w\
-    \ *= x;\n    return r;\n  }\n\n  FPS log(int deg = -1) const {\n    assert((*this)[0]\
-    \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
-    \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
-    \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    if (k == 0) {\n      FPS ret(deg);\n      if (deg) ret[0] = 1;\n\
-    \      return ret;\n    }\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i]\
-    \ != mint(0)) {\n        mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this\
-    \ * rev) >> i).log(deg) * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n  \
-    \      ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg,\
-    \ mint(0));\n        return ret;\n      }\n      if (__int128_t(i + 1) * k >=\
-    \ deg) return FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n\
-    \  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS\
-    \ &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n\
-    \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
-    \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
-    \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
-    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 2 \"\
-    internal/internal-math.hpp\"\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\
-    \n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
+    \ *= x;\n    return r;\n  }\n\n  FPS log(int deg = -1) const {\n    assert(!(*this).empty()\
+    \ && (*this)[0] == mint(1));\n    if (deg == -1) deg = (int)this->size();\n  \
+    \  return (this->diff() * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS\
+    \ pow(int64_t k, int deg = -1) const {\n    const int n = (int)this->size();\n\
+    \    if (deg == -1) deg = n;\n    if (k == 0) {\n      FPS ret(deg);\n      if\
+    \ (deg) ret[0] = 1;\n      return ret;\n    }\n    for (int i = 0; i < n; i++)\
+    \ {\n      if ((*this)[i] != mint(0)) {\n        mint rev = mint(1) / (*this)[i];\n\
+    \        FPS ret = (((*this * rev) >> i).log(deg) * k).exp(deg);\n        ret\
+    \ *= (*this)[i].pow(k);\n        ret = (ret << (i * k)).pre(deg);\n        if\
+    \ ((int)ret.size() < deg) ret.resize(deg, mint(0));\n        return ret;\n   \
+    \   }\n      if (__int128_t(i + 1) * k >= deg) return FPS(deg, mint(0));\n   \
+    \ }\n    return FPS(deg, mint(0));\n  }\n\n  static void *ntt_ptr;\n  static void\
+    \ set_fft();\n  FPS &operator*=(const FPS &r);\n  void ntt();\n  void intt();\n\
+    \  void ntt_doubling();\n  static int ntt_pr();\n  FPS inv(int deg = -1) const;\n\
+    \  FPS exp(int deg = -1) const;\n};\ntemplate <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr\
+    \ = nullptr;\n\n/**\n * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\
+    \u6570\u30E9\u30A4\u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n\
+    \ */\n#line 2 \"internal/internal-math.hpp\"\n\n#line 2 \"internal/internal-type-traits.hpp\"\
+    \n\n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
     \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
     \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
     \                   is_same_v<T, __uint128_t>,\n                           true_type,\
@@ -374,30 +376,30 @@ data:
     \ [g, im] = inv_gcd(m0, m1);\n    T u1 = m1 / g;\n    if ((r1 - r0) % g) return\
     \ {0, 0};\n    T x = (r1 - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0\
     \ *= u1;\n    if (r0 < 0) r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace\
-    \ internal\n#line 2 \"math/primitive-root.hpp\"\n\nconstexpr uint32_t PrimitiveRoot(uint32_t\
-    \ mod) {\n  using u64 = uint64_t;\n  if (mod == 2) return 1;\n  u64 ds[32] = {};\n\
-    \  int idx = 0;\n  u64 m = mod - 1;\n  for (u64 i = 2; i * i <= m; ++i) {\n  \
-    \  if (m % i == 0) {\n      ds[idx++] = i;\n      while (m % i == 0) m /= i;\n\
-    \    }\n  }\n  if (m != 1) ds[idx++] = m;\n\n  uint32_t pr = 2;\n  while (1) {\n\
-    \    int flg = 1;\n    for (int i = 0; i < idx; ++i) {\n      u64 a = pr, b =\
-    \ (mod - 1) / ds[i], r = 1;\n      while (b) {\n        if (b & 1) r = r * a %\
-    \ mod;\n        a = a * a % mod;\n        b >>= 1;\n      }\n      if (r == 1)\
-    \ {\n        flg = 0;\n        break;\n      }\n    }\n    if (flg == 1) break;\n\
-    \    ++pr;\n  }\n  return pr;\n}\n\n/**\n * @brief \u539F\u59CB\u6839\n */\n#line\
-    \ 2 \"modint/arbitrary-modint.hpp\"\n\n#line 2 \"modint/barrett-reduction.hpp\"\
-    \n\n#line 4 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
-    \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
-    \ long long;\n  u32 m;\n  u64 im;\n  Barrett() : m(), im() {}\n  Barrett(int n)\
-    \ : m(n), im(u64(-1) / m + 1) {}\n  constexpr inline i64 quo(u64 n) {\n    u64\
-    \ x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    return m\
-    \ <= r ? x - 1 : x;\n  }\n  constexpr inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
-    \ * im) >> 64);\n    u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n\
-    \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
-    \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
-    \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
-    \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
-    \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
-    };\n#line 4 \"modint/arbitrary-modint.hpp\"\n\ntemplate <int id>\nstruct ArbitraryModIntBase\
+    \ internal\n#line 2 \"math/constexpr-primitive-root.hpp\"\n\nconstexpr unsigned\
+    \ int constexpr_primitive_root(unsigned int mod) {\n  using u32 = unsigned int;\n\
+    \  using u64 = unsigned long long;\n  if(mod == 2) return 1;\n  u64 m = mod -\
+    \ 1, ds[32] = {}, idx = 0;\n  for (u64 i = 2; i * i <= m; ++i) {\n    if (m %\
+    \ i == 0) {\n      ds[idx++] = i;\n      while (m % i == 0) m /= i;\n    }\n \
+    \ }\n  if (m != 1) ds[idx++] = m;\n  for (u32 _pr = 2, flg = true;; _pr++, flg\
+    \ = true) {\n    for (u32 i = 0; i < idx && flg; ++i) {\n      u64 a = _pr, b\
+    \ = (mod - 1) / ds[i], r = 1;\n      for (; b; a = a * a % mod, b >>= 1)\n   \
+    \     if (b & 1) r = r * a % mod;\n      if (r == 1) flg = false;\n    }\n   \
+    \ if (flg == true) return _pr;\n  }\n}\n\n#line 2 \"modint/arbitrary-modint.hpp\"\
+    \n\n#line 2 \"modint/barrett-reduction.hpp\"\n\n#line 4 \"modint/barrett-reduction.hpp\"\
+    \nusing namespace std;\n\nstruct Barrett {\n  using u32 = unsigned int;\n  using\
+    \ i64 = long long;\n  using u64 = unsigned long long;\n  u32 m;\n  u64 im;\n \
+    \ Barrett() : m(), im() {}\n  Barrett(int n) : m(n), im(u64(-1) / m + 1) {}\n\
+    \  constexpr inline i64 quo(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >>\
+    \ 64);\n    u32 r = n - x * m;\n    return m <= r ? x - 1 : x;\n  }\n  constexpr\
+    \ inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n   \
+    \ u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n  constexpr inline\
+    \ pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n) * im) >> 64);\n\
+    \    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n    return {x,\
+    \ r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32 a = rem(n), r\
+    \ = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r) * a);\n\
+    \      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n};\n#line\
+    \ 4 \"modint/arbitrary-modint.hpp\"\n\ntemplate <int id>\nstruct ArbitraryModIntBase\
     \ {\n  int x;\n\n  ArbitraryModIntBase() : x(0) {}\n\n  ArbitraryModIntBase(int64_t\
     \ y) {\n    int z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n\
     \  }\n\n  ArbitraryModIntBase &operator+=(const ArbitraryModIntBase &p) {\n  \
@@ -754,7 +756,7 @@ data:
     \ == prod);\n\n  vector<int> primes;\n  for (int p = 900000000 / prod * prod +\
     \ 1; (int)primes.size() < 3; p += prod) {\n    if (is_prime(p)) primes.push_back(p);\n\
     \  }\n\n  vector<vector<int>> buf;\n  using submint = ArbitraryModIntBase<20230528>;\n\
-    \  for (int p : primes) {\n    submint::set_mod(p);\n    int proot = PrimitiveRoot(p);\n\
+    \  for (int p : primes) {\n    submint::set_mod(p);\n    int proot = constexpr_primitive_root(p);\n\
     \    unordered_map<int, pair<submint, submint>> len_to_W;\n    for (auto& b :\
     \ base) {\n      submint w = submint{proot}.pow((p - 1) / b);\n      submint iw\
     \ = w.inverse();\n      len_to_W[b] = {w, iw};\n    }\n    FormalPowerSeries<submint>\
@@ -817,7 +819,7 @@ data:
   - fps/formal-power-series.hpp
   - internal/internal-math.hpp
   - internal/internal-type-traits.hpp
-  - math/primitive-root.hpp
+  - math/constexpr-primitive-root.hpp
   - modint/arbitrary-modint.hpp
   - modint/barrett-reduction.hpp
   - prime/fast-factorize.hpp
@@ -834,7 +836,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp

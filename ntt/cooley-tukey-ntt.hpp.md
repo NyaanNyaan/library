@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math/primitive-root.hpp
-    title: "\u539F\u59CB\u6839"
+    path: math/constexpr-primitive-root.hpp
+    title: math/constexpr-primitive-root.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -28,18 +28,17 @@ data:
     document_title: Cooley-Tukey FFT Algorithm
     links: []
   bundledCode: "#line 2 \"ntt/cooley-tukey-ntt.hpp\"\n\n#line 2 \"ntt/rader-ntt.hpp\"\
-    \n\n#line 2 \"math/primitive-root.hpp\"\n\nconstexpr uint32_t PrimitiveRoot(uint32_t\
-    \ mod) {\n  using u64 = uint64_t;\n  if (mod == 2) return 1;\n  u64 ds[32] = {};\n\
-    \  int idx = 0;\n  u64 m = mod - 1;\n  for (u64 i = 2; i * i <= m; ++i) {\n  \
-    \  if (m % i == 0) {\n      ds[idx++] = i;\n      while (m % i == 0) m /= i;\n\
-    \    }\n  }\n  if (m != 1) ds[idx++] = m;\n\n  uint32_t pr = 2;\n  while (1) {\n\
-    \    int flg = 1;\n    for (int i = 0; i < idx; ++i) {\n      u64 a = pr, b =\
-    \ (mod - 1) / ds[i], r = 1;\n      while (b) {\n        if (b & 1) r = r * a %\
-    \ mod;\n        a = a * a % mod;\n        b >>= 1;\n      }\n      if (r == 1)\
-    \ {\n        flg = 0;\n        break;\n      }\n    }\n    if (flg == 1) break;\n\
-    \    ++pr;\n  }\n  return pr;\n}\n\n/**\n * @brief \u539F\u59CB\u6839\n */\n#line\
-    \ 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\n\n\
-    template <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
+    \n\n#line 2 \"math/constexpr-primitive-root.hpp\"\n\nconstexpr unsigned int constexpr_primitive_root(unsigned\
+    \ int mod) {\n  using u32 = unsigned int;\n  using u64 = unsigned long long;\n\
+    \  if(mod == 2) return 1;\n  u64 m = mod - 1, ds[32] = {}, idx = 0;\n  for (u64\
+    \ i = 2; i * i <= m; ++i) {\n    if (m % i == 0) {\n      ds[idx++] = i;\n   \
+    \   while (m % i == 0) m /= i;\n    }\n  }\n  if (m != 1) ds[idx++] = m;\n  for\
+    \ (u32 _pr = 2, flg = true;; _pr++, flg = true) {\n    for (u32 i = 0; i < idx\
+    \ && flg; ++i) {\n      u64 a = _pr, b = (mod - 1) / ds[i], r = 1;\n      for\
+    \ (; b; a = a * a % mod, b >>= 1)\n        if (b & 1) r = r * a % mod;\n     \
+    \ if (r == 1) flg = false;\n    }\n    if (flg == true) return _pr;\n  }\n}\n\n\
+    #line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\n\
+    \ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
     \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
     \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
     \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
@@ -195,10 +194,10 @@ data:
     \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 5 \"ntt/rader-ntt.hpp\"\
     \n\ntemplate <typename mint>\nstruct RaderNTT {\n  int p, pr, len;\n  const vector<mint>&\
     \ w;\n  vector<int> prs, iprs;\n  RaderNTT() {}\n  RaderNTT(int _p, int _len,\
-    \ const vector<mint>& _w)\n      : p(_p), pr(PrimitiveRoot(p)), len(_len), w(_w)\
-    \ {\n    prs.resize(p - 1);\n    iprs.resize(p, -1);\n    for (int i = 0; i <\
-    \ p - 1; i++) prs[i] = i ? prs[i - 1] * pr % p : 1;\n    for (int i = 0; i < p\
-    \ - 1; i++) iprs[prs[i]] = i;\n  }\n\n  void ntt(vector<mint>& a) {\n    vector<mint>\
+    \ const vector<mint>& _w)\n      : p(_p), pr(constexpr_primitive_root(p)), len(_len),\
+    \ w(_w) {\n    prs.resize(p - 1);\n    iprs.resize(p, -1);\n    for (int i = 0;\
+    \ i < p - 1; i++) prs[i] = i ? prs[i - 1] * pr % p : 1;\n    for (int i = 0; i\
+    \ < p - 1; i++) iprs[prs[i]] = i;\n  }\n\n  void ntt(vector<mint>& a) {\n    vector<mint>\
     \ s(p - 1), t(p - 1);\n    for (int i = 0; i < p - 1; i++) s[i] = a[prs[i]];\n\
     \    for (int i = 0, ldp = len / p; i < p - 1; i++)\n      t[i] = w[ldp * prs[i\
     \ ? p - 1 - i : 0]];\n    vector<mint> u = ArbitraryNTT::multiply(s, t);\n   \
@@ -217,46 +216,46 @@ data:
     \ len_ = -1) { set_len(len_); }\n\n  void set_len(int len_ = -1) {\n    int mod\
     \ = mint::get_mod();\n    if ((len = len_) == -1) len = mod - 1;\n    if (mod\
     \ >= 3 && len <= 1) len = 2;\n    while ((mod - 1) % len != 0) ++len;\n    mint\
-    \ pr = mint(PrimitiveRoot(mod)).pow((mod - 1) / len);\n    w.resize(len + 1);\n\
-    \    for (int i = 0; i <= len; i++) w[i] = i ? w[i - 1] * pr : mint(1);\n    divisors\
-    \ = divisor(len);\n  }\n\n  void dft(vector<mint> &a) {\n    int N = a.size();\n\
-    \    if (N == 2) {\n      mint a01 = a[0] + a[1];\n      a[1] = a[0] - a[1];\n\
-    \      a[0] = a01;\n      return;\n    }\n    int d = len / N;\n    vector<mint>\
-    \ b(N);\n    for (int i = 0, dk = 0; i < N; i++, dk += d) {\n      for (int j\
-    \ = 0, k = 0; j < N; j++) {\n        b[j] += a[i] * w[k];\n        if ((k += dk)\
-    \ >= len) k -= len;\n      }\n    }\n    swap(a, b);\n  }\n\n  void ntt_base2(vector<mint>\
-    \ &a) {\n    static vector<int> btr;\n    int N = a.size();\n    assert(N % 2\
-    \ == 0);\n    if (btr.size() != a.size()) {\n      btr.resize(N);\n      int b\
-    \ = __builtin_ctz(N);\n      assert(N == (1 << b));\n      for (int i = 0; i <\
-    \ N; i++) {\n        btr[i] = (btr[i >> 1] >> 1) + ((i & 1) << (b - 1));\n   \
-    \   }\n    }\n    static vector<mint> basis;\n    if (basis.size() < a.size())\
-    \ {\n      basis.resize(N);\n      mint b = w[len / N];\n      for (int i = N\
-    \ >> 1; i > 0; i >>= 1) {\n        mint c = 1;\n        for (int j = 0; j < i;\
-    \ ++j) {\n          basis[i + j] = c;\n          c *= b;\n        }\n        b\
-    \ *= b;\n      }\n    }\n    for (int i = 0; i < N; i++)\n      if (i < btr[i])\
-    \ swap(a[i], a[btr[i]]);\n    for (int k = 1; k < N; k <<= 1) {\n      for (int\
-    \ i = 0; i < N; i += 2 * k) {\n        for (int j = 0; j < k; j++) {\n       \
-    \   mint z = a[i + j + k] * basis[j + k];\n          a[i + j + k] = a[i + j] -\
-    \ z;\n          a[i + j] = a[i + j] + z;\n        }\n      }\n    }\n  }\n\n \
-    \ void pntt(vector<mint> &a) {\n    int P = a.size();\n    if (P <= 64) {\n  \
-    \    dft(a);\n      return;\n    }\n    if (rader.find(P) == end(rader)) rader[P]\
-    \ = new RaderNTT<mint>(P, len, w);\n    rader[P]->ntt(a);\n  }\n\n  void ntt(vector<mint>\
-    \ &a) {\n    assert(len % a.size() == 0);\n    int N = (int)a.size();\n    if\
-    \ (N <= 1) return;\n    if (N <= 64) {\n      dft(a);\n      return;\n    }\n\n\
-    \    int P = factor(N);\n    if (P == N) {\n      pntt(a);\n      return;\n  \
-    \  }\n    if (P == 2) {\n      P = 1 << __builtin_ctz(N);\n      if (N == P) {\n\
-    \        ntt_base2(a);\n        return;\n      }\n    }\n\n    int Q = N / P;\n\
-    \    vector<mint> t(N), u(P);\n    {\n      vector<mint> s(Q);\n      for (int\
-    \ p = 0, lN = len / N, d = 0; p < P; p++, d += lN) {\n        for (int q = 0,\
-    \ qP = 0; q < Q; q++, qP += P) s[q] = a[qP + p];\n        ntt(s);\n        for\
-    \ (int r = 0, n = 0, pQ = p * Q; r < Q; ++r, n += d) {\n          t[pQ + r] =\
-    \ w[n] * s[r];\n        }\n      }\n    }\n    for (int r = 0; r < Q; r++) {\n\
-    \      for (int p = 0, pQ = 0; p < P; p++, pQ += Q) u[p] = t[pQ + r];\n      if\
-    \ (P <= 64)\n        dft(u);\n      else if (P & 1)\n        pntt(u);\n      else\n\
-    \        ntt_base2(u);\n      for (int s = 0, sQ = 0; s < P; s++, sQ += Q) a[sQ\
-    \ + r] = u[s];\n    }\n  }\n\n  void intt(vector<mint> &a) {\n    reverse(begin(a)\
-    \ + 1, end(a));\n    ntt(a);\n    mint invn = mint(a.size()).inverse();\n    for\
-    \ (auto &x : a) x *= invn;\n  }\n\n  vector<mint> multiply(const vector<mint>\
+    \ pr = mint(constexpr_primitive_root(mod)).pow((mod - 1) / len);\n    w.resize(len\
+    \ + 1);\n    for (int i = 0; i <= len; i++) w[i] = i ? w[i - 1] * pr : mint(1);\n\
+    \    divisors = divisor(len);\n  }\n\n  void dft(vector<mint> &a) {\n    int N\
+    \ = a.size();\n    if (N == 2) {\n      mint a01 = a[0] + a[1];\n      a[1] =\
+    \ a[0] - a[1];\n      a[0] = a01;\n      return;\n    }\n    int d = len / N;\n\
+    \    vector<mint> b(N);\n    for (int i = 0, dk = 0; i < N; i++, dk += d) {\n\
+    \      for (int j = 0, k = 0; j < N; j++) {\n        b[j] += a[i] * w[k];\n  \
+    \      if ((k += dk) >= len) k -= len;\n      }\n    }\n    swap(a, b);\n  }\n\
+    \n  void ntt_base2(vector<mint> &a) {\n    static vector<int> btr;\n    int N\
+    \ = a.size();\n    assert(N % 2 == 0);\n    if (btr.size() != a.size()) {\n  \
+    \    btr.resize(N);\n      int b = __builtin_ctz(N);\n      assert(N == (1 <<\
+    \ b));\n      for (int i = 0; i < N; i++) {\n        btr[i] = (btr[i >> 1] >>\
+    \ 1) + ((i & 1) << (b - 1));\n      }\n    }\n    static vector<mint> basis;\n\
+    \    if (basis.size() < a.size()) {\n      basis.resize(N);\n      mint b = w[len\
+    \ / N];\n      for (int i = N >> 1; i > 0; i >>= 1) {\n        mint c = 1;\n \
+    \       for (int j = 0; j < i; ++j) {\n          basis[i + j] = c;\n         \
+    \ c *= b;\n        }\n        b *= b;\n      }\n    }\n    for (int i = 0; i <\
+    \ N; i++)\n      if (i < btr[i]) swap(a[i], a[btr[i]]);\n    for (int k = 1; k\
+    \ < N; k <<= 1) {\n      for (int i = 0; i < N; i += 2 * k) {\n        for (int\
+    \ j = 0; j < k; j++) {\n          mint z = a[i + j + k] * basis[j + k];\n    \
+    \      a[i + j + k] = a[i + j] - z;\n          a[i + j] = a[i + j] + z;\n    \
+    \    }\n      }\n    }\n  }\n\n  void pntt(vector<mint> &a) {\n    int P = a.size();\n\
+    \    if (P <= 64) {\n      dft(a);\n      return;\n    }\n    if (rader.find(P)\
+    \ == end(rader)) rader[P] = new RaderNTT<mint>(P, len, w);\n    rader[P]->ntt(a);\n\
+    \  }\n\n  void ntt(vector<mint> &a) {\n    assert(len % a.size() == 0);\n    int\
+    \ N = (int)a.size();\n    if (N <= 1) return;\n    if (N <= 64) {\n      dft(a);\n\
+    \      return;\n    }\n\n    int P = factor(N);\n    if (P == N) {\n      pntt(a);\n\
+    \      return;\n    }\n    if (P == 2) {\n      P = 1 << __builtin_ctz(N);\n \
+    \     if (N == P) {\n        ntt_base2(a);\n        return;\n      }\n    }\n\n\
+    \    int Q = N / P;\n    vector<mint> t(N), u(P);\n    {\n      vector<mint> s(Q);\n\
+    \      for (int p = 0, lN = len / N, d = 0; p < P; p++, d += lN) {\n        for\
+    \ (int q = 0, qP = 0; q < Q; q++, qP += P) s[q] = a[qP + p];\n        ntt(s);\n\
+    \        for (int r = 0, n = 0, pQ = p * Q; r < Q; ++r, n += d) {\n          t[pQ\
+    \ + r] = w[n] * s[r];\n        }\n      }\n    }\n    for (int r = 0; r < Q; r++)\
+    \ {\n      for (int p = 0, pQ = 0; p < P; p++, pQ += Q) u[p] = t[pQ + r];\n  \
+    \    if (P <= 64)\n        dft(u);\n      else if (P & 1)\n        pntt(u);\n\
+    \      else\n        ntt_base2(u);\n      for (int s = 0, sQ = 0; s < P; s++,\
+    \ sQ += Q) a[sQ + r] = u[s];\n    }\n  }\n\n  void intt(vector<mint> &a) {\n \
+    \   reverse(begin(a) + 1, end(a));\n    ntt(a);\n    mint invn = mint(a.size()).inverse();\n\
+    \    for (auto &x : a) x *= invn;\n  }\n\n  vector<mint> multiply(const vector<mint>\
     \ &a, const vector<mint> &b) {\n    int N = (int)a.size() + (int)b.size() - 1;\n\
     \    assert(N <= len);\n    vector<mint> s(a), t(b);\n    int l = *lower_bound(begin(divisors),\
     \ end(divisors), N);\n    s.resize(l, mint(0));\n    t.resize(l, mint(0));\n \
@@ -274,7 +273,7 @@ data:
     \ RaderNTT<mint> *> rader;\n\n  ArbitraryLengthNTT(int len_ = -1) { set_len(len_);\
     \ }\n\n  void set_len(int len_ = -1) {\n    int mod = mint::get_mod();\n    if\
     \ ((len = len_) == -1) len = mod - 1;\n    if (mod >= 3 && len <= 1) len = 2;\n\
-    \    while ((mod - 1) % len != 0) ++len;\n    mint pr = mint(PrimitiveRoot(mod)).pow((mod\
+    \    while ((mod - 1) % len != 0) ++len;\n    mint pr = mint(constexpr_primitive_root(mod)).pow((mod\
     \ - 1) / len);\n    w.resize(len + 1);\n    for (int i = 0; i <= len; i++) w[i]\
     \ = i ? w[i - 1] * pr : mint(1);\n    divisors = divisor(len);\n  }\n\n  void\
     \ dft(vector<mint> &a) {\n    int N = a.size();\n    if (N == 2) {\n      mint\
@@ -322,14 +321,14 @@ data:
     \    return s;\n  }\n};\n\n/**\n * @brief Cooley-Tukey FFT Algorithm\n */\n"
   dependsOn:
   - ntt/rader-ntt.hpp
-  - math/primitive-root.hpp
+  - math/constexpr-primitive-root.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
   isVerificationFile: false
   path: ntt/cooley-tukey-ntt.hpp
   requiredBy: []
-  timestamp: '2023-05-29 20:50:32+09:00'
+  timestamp: '2023-08-31 21:52:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp

@@ -11,8 +11,8 @@ data:
     path: internal/internal-type-traits.hpp
     title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
-    path: math/constexpr-primitiveroot.hpp
-    title: math/constexpr-primitiveroot.hpp
+    path: math/constexpr-primitive-root.hpp
+    title: math/constexpr-primitive-root.hpp
   - icon: ':heavy_check_mark:'
     path: math/elementary-function.hpp
     title: math/elementary-function.hpp
@@ -327,7 +327,7 @@ data:
     \            ok = false;\n                break;\n            }\n        }\n \
     \       if (ok) return g;\n    }\n}\ntemplate <int m> constexpr int primitive_root\
     \ = primitive_root_constexpr(m);\n\n}  // namespace internal\n\n}  // namespace\
-    \ atcoder\n\n\n#line 2 \"math/constexpr-primitiveroot.hpp\"\n\nconstexpr unsigned\
+    \ atcoder\n\n\n#line 2 \"math/constexpr-primitive-root.hpp\"\n\nconstexpr unsigned\
     \ int constexpr_primitive_root(unsigned int mod) {\n  using u32 = unsigned int;\n\
     \  using u64 = unsigned long long;\n  if(mod == 2) return 1;\n  u64 m = mod -\
     \ 1, ds[32] = {}, idx = 0;\n  for (u64 i = 2; i * i <= m; ++i) {\n    if (m %\
@@ -541,7 +541,7 @@ data:
     \  int a, b;\n  cin >> a >> b;\n  cout << a + b << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
     \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n//\n#include\
-    \ \"../../atcoder/internal_math.hpp\"\n#include \"../../math/constexpr-primitiveroot.hpp\"\
+    \ \"../../atcoder/internal_math.hpp\"\n#include \"../../math/constexpr-primitive-root.hpp\"\
     \n#include \"../../math/elementary-function.hpp\"\n#include \"../../prime/fast-factorize.hpp\"\
     \n#include \"../../prime/prime-enumerate.hpp\"\n\nusing namespace Nyaan;\n\nvoid\
     \ test(unsigned int mod) {\n  int pr1 = atcoder::internal::primitive_root_constexpr(mod);\n\
@@ -561,7 +561,7 @@ data:
   - template/macro.hpp
   - misc/rng.hpp
   - internal/internal-seed.hpp
-  - math/constexpr-primitiveroot.hpp
+  - math/constexpr-primitive-root.hpp
   - math/elementary-function.hpp
   - prime/fast-factorize.hpp
   - internal/internal-math.hpp
@@ -572,7 +572,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/primitive-root.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/primitive-root.test.cpp

@@ -274,6 +274,9 @@ data:
     path: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
     title: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
     title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
   - icon: ':heavy_check_mark:'
@@ -479,6 +482,7 @@ data:
   - verify/verify-yosupo-graph/yosupo-exp-of-set-power-series.test.cpp
   - verify/verify-yosupo-graph/yosupo-frequency-table-of-tree-distance.test.cpp
   - verify/verify-yosupo-graph/yosupo-max-independent-set.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-2.test.cpp
   - verify/verify-yosupo-graph/yosupo-lowest-common-ancestor-tree-util.test.cpp
   - verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp

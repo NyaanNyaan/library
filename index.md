@@ -138,6 +138,9 @@ data:
       path: dp/knapsack01.hpp
       title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C"
     - icon: ':heavy_check_mark:'
+      path: dp/longest-increasing-sequence.hpp
+      title: dp/longest-increasing-sequence.hpp
+    - icon: ':heavy_check_mark:'
       path: dp/maximal-rectangle.hpp
       title: "\u6700\u5927\u9577\u65B9\u5F62"
     - icon: ':heavy_check_mark:'
@@ -255,6 +258,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: fps/sample-point-shift.hpp
       title: fps/sample-point-shift.hpp
+    - icon: ':heavy_check_mark:'
+      path: fps/sparse-fps.hpp
+      title: "sparse \u306A\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u306E\u6F14\u7B97"
     - icon: ':heavy_check_mark:'
       path: fps/sum-of-exponential-times-poly.hpp
       title: $\sum_{i}a^i f(i)$
@@ -428,8 +434,8 @@ data:
       path: math/bigint.hpp
       title: "\u591A\u500D\u9577\u6574\u6570"
     - icon: ':heavy_check_mark:'
-      path: math/constexpr-primitiveroot.hpp
-      title: math/constexpr-primitiveroot.hpp
+      path: math/constexpr-primitive-root.hpp
+      title: math/constexpr-primitive-root.hpp
     - icon: ':heavy_check_mark:'
       path: math/elementary-function.hpp
       title: math/elementary-function.hpp
@@ -466,9 +472,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/nimber.hpp
       title: Nim Product
-    - icon: ':heavy_check_mark:'
-      path: math/primitive-root.hpp
-      title: "\u539F\u59CB\u6839"
     - icon: ':heavy_check_mark:'
       path: math/rational.hpp
       title: math/rational.hpp
@@ -1316,6 +1319,9 @@ data:
       path: verify/verify-unit-test/fast-inv.test.cpp
       title: verify/verify-unit-test/fast-inv.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/fps-sparse.test.cpp
+      title: verify/verify-unit-test/fps-sparse.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/fps.test.cpp
       title: verify/verify-unit-test/fps.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1725,6 +1731,18 @@ data:
       path: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sample-point-shift.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-sparse-inv.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-sparse-inv.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-sparse-log.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-sparse-log.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1805,6 +1823,9 @@ data:
       path: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
       title: verify/verify-yosupo-graph/yosupo-strongly-connected-components.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+      title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
       title: verify/verify-yosupo-graph/yosupo-two-edge-cc.test.cpp
   - name: verify/verify-yosupo-math
@@ -1881,6 +1902,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
       title: verify/verify-yosupo-math/yosupo-linear-equation.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
+      title: verify/verify-yosupo-math/yosupo-longest-increasing-sequence.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
       title: verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp

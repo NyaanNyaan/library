@@ -25,6 +25,9 @@ data:
     path: verify/verify-unit-test/string-search.test.cpp
     title: verify/verify-unit-test/string-search.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
     title: verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - icon: ':heavy_check_mark:'
@@ -149,6 +152,7 @@ data:
   verifiedWith:
   - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-aoj-other/aoj-1613.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - verify/verify-yosupo-string/yosupo-zalgo-rollinghash.test.cpp
   - verify/verify-yosupo-string/yosupo-enumerate-palindromes-roriha.test.cpp
   - verify/verify-aoj-alds/verify-aoj-alds-14-c.test.cpp

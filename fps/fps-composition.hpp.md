@@ -101,58 +101,60 @@ data:
     \ this->pop_back();\n  }\n\n  FPS rev() const {\n    FPS ret(*this);\n    reverse(begin(ret),\
     \ end(ret));\n    return ret;\n  }\n\n  FPS dot(FPS r) const {\n    FPS ret(min(this->size(),\
     \ r.size()));\n    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i]\
-    \ * r[i];\n    return ret;\n  }\n\n  FPS pre(int sz) const {\n    return FPS(begin(*this),\
-    \ begin(*this) + min((int)this->size(), sz));\n  }\n\n  FPS operator>>(int sz)\
-    \ const {\n    if ((int)this->size() <= sz) return {};\n    FPS ret(*this);\n\
-    \    ret.erase(ret.begin(), ret.begin() + sz);\n    return ret;\n  }\n\n  FPS\
-    \ operator<<(int sz) const {\n    FPS ret(*this);\n    ret.insert(ret.begin(),\
-    \ sz, mint(0));\n    return ret;\n  }\n\n  FPS diff() const {\n    const int n\
-    \ = (int)this->size();\n    FPS ret(max(0, n - 1));\n    mint one(1), coeff(1);\n\
-    \    for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n \
-    \     coeff += one;\n    }\n    return ret;\n  }\n\n  FPS integral() const {\n\
-    \    const int n = (int)this->size();\n    FPS ret(n + 1);\n    ret[0] = mint(0);\n\
-    \    if (n > 0) ret[1] = mint(1);\n    auto mod = mint::get_mod();\n    for (int\
-    \ i = 2; i <= n; i++) ret[i] = (-ret[mod % i]) * (mod / i);\n    for (int i =\
-    \ 0; i < n; i++) ret[i + 1] *= (*this)[i];\n    return ret;\n  }\n\n  mint eval(mint\
-    \ x) const {\n    mint r = 0, w = 1;\n    for (auto &v : *this) r += w * v, w\
-    \ *= x;\n    return r;\n  }\n\n  FPS log(int deg = -1) const {\n    assert((*this)[0]\
-    \ == mint(1));\n    if (deg == -1) deg = (int)this->size();\n    return (this->diff()\
-    \ * this->inv(deg)).pre(deg - 1).integral();\n  }\n\n  FPS pow(int64_t k, int\
-    \ deg = -1) const {\n    const int n = (int)this->size();\n    if (deg == -1)\
-    \ deg = n;\n    if (k == 0) {\n      FPS ret(deg);\n      if (deg) ret[0] = 1;\n\
-    \      return ret;\n    }\n    for (int i = 0; i < n; i++) {\n      if ((*this)[i]\
-    \ != mint(0)) {\n        mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this\
-    \ * rev) >> i).log(deg) * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n  \
-    \      ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg,\
-    \ mint(0));\n        return ret;\n      }\n      if (__int128_t(i + 1) * k >=\
-    \ deg) return FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n\
-    \  static void *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS\
-    \ &r);\n  void ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n\
-    \  FPS inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate\
-    \ <typename mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n\
-    \ * @brief \u591A\u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\
-    \u30D6\u30E9\u30EA\n * @docs docs/fps/formal-power-series.md\n */\n#line 5 \"\
-    fps/fps-composition.hpp\"\n\n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> Composition(FormalPowerSeries<mint>\
-    \ P,\n                                    FormalPowerSeries<mint> Q,\n       \
-    \                             Binomial<mint>& C, int deg = -1) {\n  using fps\
-    \ = FormalPowerSeries<mint>;\n  int N = (deg == -1) ? min(P.size(), Q.size())\
-    \ : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n  if (P.size() == 0) {\n\
-    \    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0) : Q[0];\n    return R;\n\
-    \  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  P.resize(N, mint(0));\n  Q.resize(N,\
-    \ mint(0));\n  int M = max<int>(1, sqrt(N / log2(N)));\n  int L = (N + M - 1)\
-    \ / M;\n  fps Pm = fps{begin(P), begin(P) + M};\n  fps Pr = fps{begin(P) + M,\
-    \ end(P)};\n\n  int J = 31 - __builtin_clz(N - 1) + 1;\n  vector<fps> pms(J);\n\
-    \  pms[0] = Pm;\n  for (int i = 1; i < J; i++) pms[i] = (pms[i - 1] * pms[i -\
-    \ 1]).pre(N);\n\n  auto comp = [&](auto rec, int left, int j) -> fps {\n    if\
-    \ (j == 1) {\n      mint Q1 = left + 0 < (int)Q.size() ? Q[left + 0] : mint(0);\n\
-    \      mint Q2 = left + 1 < (int)Q.size() ? Q[left + 1] : mint(0);\n      return\
-    \ (pms[0].pre(N) * Q2 + Q1).pre(N);\n    }\n    if (N <= left) return fps{};\n\
-    \    fps Q1 = rec(rec, left, j - 1);\n    fps Q2 = rec(rec, left + (1 << (j -\
-    \ 1)), j - 1);\n    return (Q1 + pms[j - 1].pre(N) * Q2).pre(N);\n  };\n\n  fps\
-    \ QPm = comp(comp, 0, J);\n  fps R = QPm;\n  fps pw_Pr{mint(1)};\n  fps dPm =\
-    \ Pm.diff();\n  dPm.shrink();\n  // if dPm[0] == 0, dPm.inv() is undefined\n \
-    \ int deg_dPm = 0;\n  while (deg_dPm != (int)dPm.size() && dPm[deg_dPm] == mint(0))\
+    \ * r[i];\n    return ret;\n  }\n\n  // \u524D sz \u9805\u3092\u53D6\u3063\u3066\
+    \u304F\u308B\u3002sz \u306B\u8DB3\u308A\u306A\u3044\u9805\u306F 0 \u57CB\u3081\
+    \u3059\u308B\n  FPS pre(int sz) const {\n    FPS ret(begin(*this), begin(*this)\
+    \ + min((int)this->size(), sz));\n    if ((int)ret.size() < sz) ret.resize(sz);\n\
+    \    return ret;\n  }\n\n  FPS operator>>(int sz) const {\n    if ((int)this->size()\
+    \ <= sz) return {};\n    FPS ret(*this);\n    ret.erase(ret.begin(), ret.begin()\
+    \ + sz);\n    return ret;\n  }\n\n  FPS operator<<(int sz) const {\n    FPS ret(*this);\n\
+    \    ret.insert(ret.begin(), sz, mint(0));\n    return ret;\n  }\n\n  FPS diff()\
+    \ const {\n    const int n = (int)this->size();\n    FPS ret(max(0, n - 1));\n\
+    \    mint one(1), coeff(1);\n    for (int i = 1; i < n; i++) {\n      ret[i -\
+    \ 1] = (*this)[i] * coeff;\n      coeff += one;\n    }\n    return ret;\n  }\n\
+    \n  FPS integral() const {\n    const int n = (int)this->size();\n    FPS ret(n\
+    \ + 1);\n    ret[0] = mint(0);\n    if (n > 0) ret[1] = mint(1);\n    auto mod\
+    \ = mint::get_mod();\n    for (int i = 2; i <= n; i++) ret[i] = (-ret[mod % i])\
+    \ * (mod / i);\n    for (int i = 0; i < n; i++) ret[i + 1] *= (*this)[i];\n  \
+    \  return ret;\n  }\n\n  mint eval(mint x) const {\n    mint r = 0, w = 1;\n \
+    \   for (auto &v : *this) r += w * v, w *= x;\n    return r;\n  }\n\n  FPS log(int\
+    \ deg = -1) const {\n    assert(!(*this).empty() && (*this)[0] == mint(1));\n\
+    \    if (deg == -1) deg = (int)this->size();\n    return (this->diff() * this->inv(deg)).pre(deg\
+    \ - 1).integral();\n  }\n\n  FPS pow(int64_t k, int deg = -1) const {\n    const\
+    \ int n = (int)this->size();\n    if (deg == -1) deg = n;\n    if (k == 0) {\n\
+    \      FPS ret(deg);\n      if (deg) ret[0] = 1;\n      return ret;\n    }\n \
+    \   for (int i = 0; i < n; i++) {\n      if ((*this)[i] != mint(0)) {\n      \
+    \  mint rev = mint(1) / (*this)[i];\n        FPS ret = (((*this * rev) >> i).log(deg)\
+    \ * k).exp(deg);\n        ret *= (*this)[i].pow(k);\n        ret = (ret << (i\
+    \ * k)).pre(deg);\n        if ((int)ret.size() < deg) ret.resize(deg, mint(0));\n\
+    \        return ret;\n      }\n      if (__int128_t(i + 1) * k >= deg) return\
+    \ FPS(deg, mint(0));\n    }\n    return FPS(deg, mint(0));\n  }\n\n  static void\
+    \ *ntt_ptr;\n  static void set_fft();\n  FPS &operator*=(const FPS &r);\n  void\
+    \ ntt();\n  void intt();\n  void ntt_doubling();\n  static int ntt_pr();\n  FPS\
+    \ inv(int deg = -1) const;\n  FPS exp(int deg = -1) const;\n};\ntemplate <typename\
+    \ mint>\nvoid *FormalPowerSeries<mint>::ntt_ptr = nullptr;\n\n/**\n * @brief \u591A\
+    \u9805\u5F0F/\u5F62\u5F0F\u7684\u51AA\u7D1A\u6570\u30E9\u30A4\u30D6\u30E9\u30EA\
+    \n * @docs docs/fps/formal-power-series.md\n */\n#line 5 \"fps/fps-composition.hpp\"\
+    \n\n// find Q(P(x)) mod x ^ min(deg(P), deg(Q))\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    \ Composition(FormalPowerSeries<mint> P,\n                                   \
+    \ FormalPowerSeries<mint> Q,\n                                    Binomial<mint>&\
+    \ C, int deg = -1) {\n  using fps = FormalPowerSeries<mint>;\n  int N = (deg ==\
+    \ -1) ? min(P.size(), Q.size()) : deg;\n  if (N == 0) return fps{};\n  P.shrink();\n\
+    \  if (P.size() == 0) {\n    fps R(N, mint(0));\n    R[0] = Q.empty() ? mint(0)\
+    \ : Q[0];\n    return R;\n  }\n  if (N == 1) return fps{Q.eval(P[0])};\n\n  P.resize(N,\
+    \ mint(0));\n  Q.resize(N, mint(0));\n  int M = max<int>(1, sqrt(N / log2(N)));\n\
+    \  int L = (N + M - 1) / M;\n  fps Pm = fps{begin(P), begin(P) + M};\n  fps Pr\
+    \ = fps{begin(P) + M, end(P)};\n\n  int J = 31 - __builtin_clz(N - 1) + 1;\n \
+    \ vector<fps> pms(J);\n  pms[0] = Pm;\n  for (int i = 1; i < J; i++) pms[i] =\
+    \ (pms[i - 1] * pms[i - 1]).pre(N);\n\n  auto comp = [&](auto rec, int left, int\
+    \ j) -> fps {\n    if (j == 1) {\n      mint Q1 = left + 0 < (int)Q.size() ? Q[left\
+    \ + 0] : mint(0);\n      mint Q2 = left + 1 < (int)Q.size() ? Q[left + 1] : mint(0);\n\
+    \      return (pms[0].pre(N) * Q2 + Q1).pre(N);\n    }\n    if (N <= left) return\
+    \ fps{};\n    fps Q1 = rec(rec, left, j - 1);\n    fps Q2 = rec(rec, left + (1\
+    \ << (j - 1)), j - 1);\n    return (Q1 + pms[j - 1].pre(N) * Q2).pre(N);\n  };\n\
+    \n  fps QPm = comp(comp, 0, J);\n  fps R = QPm;\n  fps pw_Pr{mint(1)};\n  fps\
+    \ dPm = Pm.diff();\n  dPm.shrink();\n  // if dPm[0] == 0, dPm.inv() is undefined\n\
+    \  int deg_dPm = 0;\n  while (deg_dPm != (int)dPm.size() && dPm[deg_dPm] == mint(0))\
     \ deg_dPm++;\n  fps idPm = dPm.empty() ? fps{} : (dPm >> deg_dPm).inv(N);\n\n\
     \  for (int l = 1, d = M; l <= L && d < N; l++, d += M) {\n    pw_Pr = (pw_Pr\
     \ * Pr).pre(N - d);\n    if (dPm.empty()) {\n      R += (pw_Pr * Q[l]) << d;\n\
@@ -197,7 +199,7 @@ data:
   path: fps/fps-composition.hpp
   requiredBy:
   - fps/fps-compositional-inverse.hpp
-  timestamp: '2023-05-22 22:29:25+09:00'
+  timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1939.test.cpp

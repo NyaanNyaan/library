@@ -24,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
+    title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -113,6 +116,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-1377.test.cpp
+  - verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - verify/verify-unit-test/internal-type-traits.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
 documentation_of: internal/internal-hash-function.hpp

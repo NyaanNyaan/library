@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math/primitive-root.hpp
-    title: "\u539F\u59CB\u6839"
+    path: math/constexpr-primitive-root.hpp
+    title: math/constexpr-primitive-root.hpp
   - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
@@ -27,41 +27,41 @@ data:
   attributes:
     document_title: Rader's FFT Algorithm
     links: []
-  bundledCode: "#line 2 \"ntt/rader-ntt.hpp\"\n\n#line 2 \"math/primitive-root.hpp\"\
-    \n\nconstexpr uint32_t PrimitiveRoot(uint32_t mod) {\n  using u64 = uint64_t;\n\
-    \  if (mod == 2) return 1;\n  u64 ds[32] = {};\n  int idx = 0;\n  u64 m = mod\
-    \ - 1;\n  for (u64 i = 2; i * i <= m; ++i) {\n    if (m % i == 0) {\n      ds[idx++]\
-    \ = i;\n      while (m % i == 0) m /= i;\n    }\n  }\n  if (m != 1) ds[idx++]\
-    \ = m;\n\n  uint32_t pr = 2;\n  while (1) {\n    int flg = 1;\n    for (int i\
-    \ = 0; i < idx; ++i) {\n      u64 a = pr, b = (mod - 1) / ds[i], r = 1;\n    \
-    \  while (b) {\n        if (b & 1) r = r * a % mod;\n        a = a * a % mod;\n\
-    \        b >>= 1;\n      }\n      if (r == 1) {\n        flg = 0;\n        break;\n\
-    \      }\n    }\n    if (flg == 1) break;\n    ++pr;\n  }\n  return pr;\n}\n\n\
-    /**\n * @brief \u539F\u59CB\u6839\n */\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n\
-    #line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
-    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
-    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
-    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
-    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
-    \ u32 n2 = -u64(mod) % mod;\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
-    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n  static_assert(r\
-    \ * mod == 1, \"this code has bugs.\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
-    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
-    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
-    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
-    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
-    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
-    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
-    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
-    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
-    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
-    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
-    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
-    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
-    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
-    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
-    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+  bundledCode: "#line 2 \"ntt/rader-ntt.hpp\"\n\n#line 2 \"math/constexpr-primitive-root.hpp\"\
+    \n\nconstexpr unsigned int constexpr_primitive_root(unsigned int mod) {\n  using\
+    \ u32 = unsigned int;\n  using u64 = unsigned long long;\n  if(mod == 2) return\
+    \ 1;\n  u64 m = mod - 1, ds[32] = {}, idx = 0;\n  for (u64 i = 2; i * i <= m;\
+    \ ++i) {\n    if (m % i == 0) {\n      ds[idx++] = i;\n      while (m % i == 0)\
+    \ m /= i;\n    }\n  }\n  if (m != 1) ds[idx++] = m;\n  for (u32 _pr = 2, flg =\
+    \ true;; _pr++, flg = true) {\n    for (u32 i = 0; i < idx && flg; ++i) {\n  \
+    \    u64 a = _pr, b = (mod - 1) / ds[i], r = 1;\n      for (; b; a = a * a % mod,\
+    \ b >>= 1)\n        if (b & 1) r = r * a % mod;\n      if (r == 1) flg = false;\n\
+    \    }\n    if (flg == true) return _pr;\n  }\n}\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\
+    \n\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
+    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
+    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod < (1 << 30),\
+    \ \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod\
+    \ % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\");\n\n  u32\
+    \ a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
+    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
+    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
+    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
+    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
+    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
+    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
+    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
+    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
+    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
+    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
+    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
+    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n  constexpr mint operator+() const { return mint(*this); }\n\n  constexpr\
     \ mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
     \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
@@ -194,10 +194,10 @@ data:
     \ * w2;\n  }\n  return ret;\n}\n}  // namespace ArbitraryNTT\n#line 5 \"ntt/rader-ntt.hpp\"\
     \n\ntemplate <typename mint>\nstruct RaderNTT {\n  int p, pr, len;\n  const vector<mint>&\
     \ w;\n  vector<int> prs, iprs;\n  RaderNTT() {}\n  RaderNTT(int _p, int _len,\
-    \ const vector<mint>& _w)\n      : p(_p), pr(PrimitiveRoot(p)), len(_len), w(_w)\
-    \ {\n    prs.resize(p - 1);\n    iprs.resize(p, -1);\n    for (int i = 0; i <\
-    \ p - 1; i++) prs[i] = i ? prs[i - 1] * pr % p : 1;\n    for (int i = 0; i < p\
-    \ - 1; i++) iprs[prs[i]] = i;\n  }\n\n  void ntt(vector<mint>& a) {\n    vector<mint>\
+    \ const vector<mint>& _w)\n      : p(_p), pr(constexpr_primitive_root(p)), len(_len),\
+    \ w(_w) {\n    prs.resize(p - 1);\n    iprs.resize(p, -1);\n    for (int i = 0;\
+    \ i < p - 1; i++) prs[i] = i ? prs[i - 1] * pr % p : 1;\n    for (int i = 0; i\
+    \ < p - 1; i++) iprs[prs[i]] = i;\n  }\n\n  void ntt(vector<mint>& a) {\n    vector<mint>\
     \ s(p - 1), t(p - 1);\n    for (int i = 0; i < p - 1; i++) s[i] = a[prs[i]];\n\
     \    for (int i = 0, ldp = len / p; i < p - 1; i++)\n      t[i] = w[ldp * prs[i\
     \ ? p - 1 - i : 0]];\n    vector<mint> u = ArbitraryNTT::multiply(s, t);\n   \
@@ -205,22 +205,22 @@ data:
     \ i++) s[0] += a[i];\n    for (int i = 0, y = 0; i < (int)u.size(); i++) {\n \
     \     s[prs[y]] += u[i];\n      if (--y < 0) y += p - 1;\n    }\n    swap(a, s);\n\
     \  }\n};\n\n/**\n * @brief Rader's FFT Algorithm\n */\n"
-  code: "#pragma once\n\n#include \"../math/primitive-root.hpp\"\n#include \"arbitrary-ntt.hpp\"\
-    \n\ntemplate <typename mint>\nstruct RaderNTT {\n  int p, pr, len;\n  const vector<mint>&\
-    \ w;\n  vector<int> prs, iprs;\n  RaderNTT() {}\n  RaderNTT(int _p, int _len,\
-    \ const vector<mint>& _w)\n      : p(_p), pr(PrimitiveRoot(p)), len(_len), w(_w)\
-    \ {\n    prs.resize(p - 1);\n    iprs.resize(p, -1);\n    for (int i = 0; i <\
-    \ p - 1; i++) prs[i] = i ? prs[i - 1] * pr % p : 1;\n    for (int i = 0; i < p\
-    \ - 1; i++) iprs[prs[i]] = i;\n  }\n\n  void ntt(vector<mint>& a) {\n    vector<mint>\
-    \ s(p - 1), t(p - 1);\n    for (int i = 0; i < p - 1; i++) s[i] = a[prs[i]];\n\
-    \    for (int i = 0, ldp = len / p; i < p - 1; i++)\n      t[i] = w[ldp * prs[i\
-    \ ? p - 1 - i : 0]];\n    vector<mint> u = ArbitraryNTT::multiply(s, t);\n   \
-    \ s.resize(p);\n    fill(begin(s), end(s), a[0]);\n    for (int i = 1; i < p;\
-    \ i++) s[0] += a[i];\n    for (int i = 0, y = 0; i < (int)u.size(); i++) {\n \
-    \     s[prs[y]] += u[i];\n      if (--y < 0) y += p - 1;\n    }\n    swap(a, s);\n\
-    \  }\n};\n\n/**\n * @brief Rader's FFT Algorithm\n */\n"
+  code: "#pragma once\n\n#include \"../math/constexpr-primitive-root.hpp\"\n#include\
+    \ \"arbitrary-ntt.hpp\"\n\ntemplate <typename mint>\nstruct RaderNTT {\n  int\
+    \ p, pr, len;\n  const vector<mint>& w;\n  vector<int> prs, iprs;\n  RaderNTT()\
+    \ {}\n  RaderNTT(int _p, int _len, const vector<mint>& _w)\n      : p(_p), pr(constexpr_primitive_root(p)),\
+    \ len(_len), w(_w) {\n    prs.resize(p - 1);\n    iprs.resize(p, -1);\n    for\
+    \ (int i = 0; i < p - 1; i++) prs[i] = i ? prs[i - 1] * pr % p : 1;\n    for (int\
+    \ i = 0; i < p - 1; i++) iprs[prs[i]] = i;\n  }\n\n  void ntt(vector<mint>& a)\
+    \ {\n    vector<mint> s(p - 1), t(p - 1);\n    for (int i = 0; i < p - 1; i++)\
+    \ s[i] = a[prs[i]];\n    for (int i = 0, ldp = len / p; i < p - 1; i++)\n    \
+    \  t[i] = w[ldp * prs[i ? p - 1 - i : 0]];\n    vector<mint> u = ArbitraryNTT::multiply(s,\
+    \ t);\n    s.resize(p);\n    fill(begin(s), end(s), a[0]);\n    for (int i = 1;\
+    \ i < p; i++) s[0] += a[i];\n    for (int i = 0, y = 0; i < (int)u.size(); i++)\
+    \ {\n      s[prs[y]] += u[i];\n      if (--y < 0) y += p - 1;\n    }\n    swap(a,\
+    \ s);\n  }\n};\n\n/**\n * @brief Rader's FFT Algorithm\n */\n"
   dependsOn:
-  - math/primitive-root.hpp
+  - math/constexpr-primitive-root.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
@@ -228,7 +228,7 @@ data:
   path: ntt/rader-ntt.hpp
   requiredBy:
   - ntt/cooley-tukey-ntt.hpp
-  timestamp: '2023-05-29 20:50:32+09:00'
+  timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-ntt/yosupo-convolution-arbitrarylengthntt.test.cpp

@@ -8,9 +8,6 @@ data:
     path: math-fast/inv.hpp
     title: math-fast/inv.hpp
   - icon: ':heavy_check_mark:'
-    path: math/primitive-root.hpp
-    title: "\u539F\u59CB\u6839"
-  - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
@@ -222,19 +219,9 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-unit-test/fast-inv.test.cpp\"\n//\n#line 2 \"math/primitive-root.hpp\"\
-    \n\nconstexpr uint32_t PrimitiveRoot(uint32_t mod) {\n  using u64 = uint64_t;\n\
-    \  if (mod == 2) return 1;\n  u64 ds[32] = {};\n  int idx = 0;\n  u64 m = mod\
-    \ - 1;\n  for (u64 i = 2; i * i <= m; ++i) {\n    if (m % i == 0) {\n      ds[idx++]\
-    \ = i;\n      while (m % i == 0) m /= i;\n    }\n  }\n  if (m != 1) ds[idx++]\
-    \ = m;\n\n  uint32_t pr = 2;\n  while (1) {\n    int flg = 1;\n    for (int i\
-    \ = 0; i < idx; ++i) {\n      u64 a = pr, b = (mod - 1) / ds[i], r = 1;\n    \
-    \  while (b) {\n        if (b & 1) r = r * a % mod;\n        a = a * a % mod;\n\
-    \        b >>= 1;\n      }\n      if (r == 1) {\n        flg = 0;\n        break;\n\
-    \      }\n    }\n    if (flg == 1) break;\n    ++pr;\n  }\n  return pr;\n}\n\n\
-    /**\n * @brief \u539F\u59CB\u6839\n */\n#line 2 \"misc/rng.hpp\"\n\n#line 2 \"\
-    internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\nusing\
-    \ namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
+    \ 4 \"verify/verify-unit-test/fast-inv.test.cpp\"\n//\n#line 2 \"misc/rng.hpp\"\
+    \n\n#line 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\
+    \nusing namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
     \ {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
     \  .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >> 31, m\
@@ -266,7 +253,7 @@ data:
     \ st;\n\n  Timer() { reset(); }\n  void reset() { st = chrono::high_resolution_clock::now();\
     \ }\n\n  long long elapsed() {\n    auto ed = chrono::high_resolution_clock::now();\n\
     \    return chrono::duration_cast<chrono::milliseconds>(ed - st).count();\n  }\n\
-    \  long long operator()() { return elapsed(); }\n};\n#line 8 \"verify/verify-unit-test/fast-inv.test.cpp\"\
+    \  long long operator()() { return elapsed(); }\n};\n#line 7 \"verify/verify-unit-test/fast-inv.test.cpp\"\
     \n//\n#line 1 \"atcoder/math.hpp\"\n\n\n\n#line 8 \"atcoder/math.hpp\"\n\n#line\
     \ 1 \"atcoder/internal_math.hpp\"\n\n\n\n#line 5 \"atcoder/internal_math.hpp\"\
     \n\n#ifdef _MSC_VER\n#include <intrin.h>\n#endif\n\nnamespace atcoder {\n\nnamespace\
@@ -557,7 +544,7 @@ data:
     \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n\n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 13 \"verify/verify-unit-test/fast-inv.test.cpp\"\n\
+    \ { return mod; }\n};\n#line 12 \"verify/verify-unit-test/fast-inv.test.cpp\"\n\
     //\n\nusing namespace Nyaan;\n\ntemplate <int MOD>\nvoid test() {\n  constexpr\
     \ int mod = MOD;\n  constexpr fast_modinv<mod> fastinv;\n  using mint = LazyMontgomeryModInt<mod>;\n\
     \n  constexpr int inv1 = fastinv(1 % mod);\n  static_assert(inv1 == 1 % mod);\n\
@@ -597,32 +584,32 @@ data:
     \ in(t);\n  while (t--) q();\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b\
     \ << endl;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n//\n#include\
-    \ \"../../template/template.hpp\"\n//\n#include \"../../math/primitive-root.hpp\"\
-    \n#include \"../../misc/rng.hpp\"\n#include \"../../misc/timer.hpp\"\n//\n#include\
-    \ \"../../atcoder/math.hpp\"\n#include \"../../atcoder/modint.hpp\"\n#include\
-    \ \"../../math-fast/inv.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n//\n\nusing namespace Nyaan;\n\ntemplate <int MOD>\nvoid test() {\n  constexpr\
+    \ \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\n#include\
+    \ \"../../misc/timer.hpp\"\n//\n#include \"../../atcoder/math.hpp\"\n#include\
+    \ \"../../atcoder/modint.hpp\"\n#include \"../../math-fast/inv.hpp\"\n#include\
+    \ \"../../modint/montgomery-modint.hpp\"\n//\n\nusing namespace Nyaan;\n\ntemplate\
+    \ <int MOD>\nvoid test() {\n  constexpr int mod = MOD;\n  constexpr fast_modinv<mod>\
+    \ fastinv;\n  using mint = LazyMontgomeryModInt<mod>;\n\n  constexpr int inv1\
+    \ = fastinv(1 % mod);\n  static_assert(inv1 == 1 % mod);\n  constexpr int inv2\
+    \ = fastinv(2 % mod);\n  static_assert(1LL * inv2 * 2 % mod == 1 % mod);\n  if\
+    \ constexpr (mod % 3 != 0) {\n    constexpr int inv3 = fastinv(3);\n    static_assert(1LL\
+    \ * inv3 * 3 % mod == 1 % mod);\n  }\n\n  auto check = [&](ll x) {\n    assert(1\
+    \ <= x && x < (1LL << 30));\n    if (x >= mod or gcd<int>(x, mod) != 1) return;\n\
+    \    ll af = fastinv(x);\n    ll am = mint{x}.inverse().get();\n    ll ac = atcoder::inv_mod(x,\
+    \ mod);\n    ll prod = x * af % mod;\n    if (!(af == am && af == ac && prod ==\
+    \ 1 % mod)) {\n      trc2(mod, x, af, am, ac, prod);\n    }\n    assert(af ==\
+    \ am && af == ac && prod == 1 % mod);\n  };\n\n  rep1(x, TEN(6)) check(x);\n \
+    \ if (mod >= TEN(6)) {\n    rep1(t, TEN(6)) check(rng(1, mod - 1));\n  }\n  trc2(\"\
+    ok\", mod);\n}\n\ntemplate <int MOD>\nvoid benchmark() {\n  Timer timer;\n  constexpr\
     \ int mod = MOD;\n  constexpr fast_modinv<mod> fastinv;\n  using mint = LazyMontgomeryModInt<mod>;\n\
-    \n  constexpr int inv1 = fastinv(1 % mod);\n  static_assert(inv1 == 1 % mod);\n\
-    \  constexpr int inv2 = fastinv(2 % mod);\n  static_assert(1LL * inv2 * 2 % mod\
-    \ == 1 % mod);\n  if constexpr (mod % 3 != 0) {\n    constexpr int inv3 = fastinv(3);\n\
-    \    static_assert(1LL * inv3 * 3 % mod == 1 % mod);\n  }\n\n  auto check = [&](ll\
-    \ x) {\n    assert(1 <= x && x < (1LL << 30));\n    if (x >= mod or gcd<int>(x,\
-    \ mod) != 1) return;\n    ll af = fastinv(x);\n    ll am = mint{x}.inverse().get();\n\
-    \    ll ac = atcoder::inv_mod(x, mod);\n    ll prod = x * af % mod;\n    if (!(af\
-    \ == am && af == ac && prod == 1 % mod)) {\n      trc2(mod, x, af, am, ac, prod);\n\
-    \    }\n    assert(af == am && af == ac && prod == 1 % mod);\n  };\n\n  rep1(x,\
-    \ TEN(6)) check(x);\n  if (mod >= TEN(6)) {\n    rep1(t, TEN(6)) check(rng(1,\
-    \ mod - 1));\n  }\n  trc2(\"ok\", mod);\n}\n\ntemplate <int MOD>\nvoid benchmark()\
-    \ {\n  Timer timer;\n  constexpr int mod = MOD;\n  constexpr fast_modinv<mod>\
-    \ fastinv;\n  using mint = LazyMontgomeryModInt<mod>;\n\n  static_assert(MOD >=\
-    \ 1e7);\n  {\n    mint ans1 = 0, ans2 = 0, ans3 = 0;\n    int M = 1e7;\n    constexpr\
-    \ int p = 100007, r = 2;\n\n    timer.reset();\n    for (int i = 0, j = 1; i <\
-    \ M; i++, j = j * r % p) {\n      ans1 += fastinv(j);\n    }\n    int t1 = timer.elapsed();\n\
-    \n    timer.reset();\n    for (int i = 0, j = 1; i < M; i++, j = j * r % p) {\n\
-    \      mint x;\n      x.a = mint::reduce(u64(j) * x.n2);\n      ans2 += x.inverse();\n\
-    \    }\n    int t2 = timer.elapsed();\n\n    timer.reset();\n    atcoder::modint::set_mod(mod);\n\
-    \    for (int i = 0, j = 1; i < M; i++, j = j * r % p) {\n      ans3 += atcoder::modint::raw(j).inv().val();\n\
+    \n  static_assert(MOD >= 1e7);\n  {\n    mint ans1 = 0, ans2 = 0, ans3 = 0;\n\
+    \    int M = 1e7;\n    constexpr int p = 100007, r = 2;\n\n    timer.reset();\n\
+    \    for (int i = 0, j = 1; i < M; i++, j = j * r % p) {\n      ans1 += fastinv(j);\n\
+    \    }\n    int t1 = timer.elapsed();\n\n    timer.reset();\n    for (int i =\
+    \ 0, j = 1; i < M; i++, j = j * r % p) {\n      mint x;\n      x.a = mint::reduce(u64(j)\
+    \ * x.n2);\n      ans2 += x.inverse();\n    }\n    int t2 = timer.elapsed();\n\
+    \n    timer.reset();\n    atcoder::modint::set_mod(mod);\n    for (int i = 0,\
+    \ j = 1; i < M; i++, j = j * r % p) {\n      ans3 += atcoder::modint::raw(j).inv().val();\n\
     \    }\n    int t3 = timer.elapsed();\n\n    assert(ans1 == ans2 && ans2 == ans3);\n\
     \    out(\"mod =\", mod, \"small\", t1, t2, t3);\n    cout.flush();\n  }\n  {\n\
     \    ll ans1 = 0, ans2 = 0, ans3 = 0;\n    int D = 99;\n\n    timer.reset();\n\
@@ -646,7 +633,6 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - math/primitive-root.hpp
   - misc/rng.hpp
   - internal/internal-seed.hpp
   - misc/timer.hpp
@@ -655,7 +641,7 @@ data:
   isVerificationFile: true
   path: verify/verify-unit-test/fast-inv.test.cpp
   requiredBy: []
-  timestamp: '2023-08-12 16:25:29+09:00'
+  timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/fast-inv.test.cpp

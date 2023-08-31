@@ -79,6 +79,9 @@ data:
     path: verify/verify-unit-test/fast-inv.test.cpp
     title: verify/verify-unit-test/fast-inv.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/fps-sparse.test.cpp
+    title: verify/verify-unit-test/fps-sparse.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/fps.test.cpp
     title: verify/verify-unit-test/fps.test.cpp
   - icon: ':heavy_check_mark:'
@@ -374,6 +377,7 @@ data:
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/complex-fft.test.cpp
   - verify/verify-unit-test/fast-inv.test.cpp
+  - verify/verify-unit-test/fps-sparse.test.cpp
   - verify/verify-unit-test/fps.test.cpp
   - verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - verify/verify-unit-test/nimber.test.cpp

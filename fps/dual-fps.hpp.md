@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: math/constexpr-primitiveroot.hpp
-    title: math/constexpr-primitiveroot.hpp
+    path: math/constexpr-primitive-root.hpp
+    title: math/constexpr-primitive-root.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -20,7 +20,7 @@ data:
       \u3059\u308BFPS"
     links: []
   bundledCode: "#line 2 \"fps/dual-fps.hpp\"\n\n#pragma GCC target(\"avx2\")\n#pragma\
-    \ GCC optimize(\"O3,unroll-loops\")\n\n#line 2 \"math/constexpr-primitiveroot.hpp\"\
+    \ GCC optimize(\"O3,unroll-loops\")\n\n#line 2 \"math/constexpr-primitive-root.hpp\"\
     \n\nconstexpr unsigned int constexpr_primitive_root(unsigned int mod) {\n  using\
     \ u32 = unsigned int;\n  using u64 = unsigned long long;\n  if(mod == 2) return\
     \ 1;\n  u64 m = mod - 1, ds[32] = {}, idx = 0;\n  for (u64 i = 2; i * i <= m;\
@@ -126,7 +126,7 @@ data:
     \ <typename fps>\nvector<int> DualFPS<fps>::btr;\n\n/**\n * @brief \u5468\u6CE2\
     \u6570\u9818\u57DF\u3067\u306E\u5024\u3092\u4FDD\u6301\u3059\u308BFPS\n */\n"
   code: "#pragma once\n\n#pragma GCC target(\"avx2\")\n#pragma GCC optimize(\"O3,unroll-loops\"\
-    )\n\n#include \"../math/constexpr-primitiveroot.hpp\"\n\n/**\n * (1) deg(f) <=\
+    )\n\n#include \"../math/constexpr-primitive-root.hpp\"\n\n/**\n * (1) deg(f) <=\
     \ 1 (\u5B9A\u6570\u95A2\u6570) ... top\u306B\u5024\u3092\u4FDD\u6301\n * (2) deg(f)\
     \ >= 2\n *   (a) deg == 2^b + 1\n *     len(F) = 2^b, top = [x^{2^b}] f \u3068\
     \u3057\u3066\u4FDD\u6301\n *   (b) otherwise\n *     F = ntt(f)\u3068\u3057\u3066\
@@ -223,11 +223,11 @@ data:
     \ <typename fps>\nvector<int> DualFPS<fps>::btr;\n\n/**\n * @brief \u5468\u6CE2\
     \u6570\u9818\u57DF\u3067\u306E\u5024\u3092\u4FDD\u6301\u3059\u308BFPS\n */\n"
   dependsOn:
-  - math/constexpr-primitiveroot.hpp
+  - math/constexpr-primitive-root.hpp
   isVerificationFile: false
   path: fps/dual-fps.hpp
   requiredBy: []
-  timestamp: '2021-05-25 16:58:09+09:00'
+  timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1504.test.cpp
