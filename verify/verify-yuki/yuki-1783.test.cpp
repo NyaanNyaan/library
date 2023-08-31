@@ -6,7 +6,7 @@
 //
 #include "../../ntt/multidimensional-ntt.hpp"
 //
-#include "../../math/primitive-root.hpp"
+#include "../../math/constexpr-primitive-root.hpp"
 //
 #include "../../fps/ntt-friendly-fps.hpp"
 #include "../../modint/montgomery-modint.hpp"
@@ -24,7 +24,7 @@ using mfps = MultivariateFormalPowerSeries<mint>;
 using namespace Nyaan;
 
 void q() {
-  int pr = PrimitiveRoot(_mod);
+  int pr = constexpr_primitive_root(_mod);
   vm pr10(110);
   pr10[0] = 1;
   pr10[1] = mint(pr).pow((_mod - 1) / 10);

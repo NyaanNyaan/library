@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../math/primitive-root.hpp"
+#include "../math/constexpr-primitive-root.hpp"
 #include "arbitrary-ntt.hpp"
 
 template <typename mint>
@@ -10,7 +10,7 @@ struct RaderNTT {
   vector<int> prs, iprs;
   RaderNTT() {}
   RaderNTT(int _p, int _len, const vector<mint>& _w)
-      : p(_p), pr(PrimitiveRoot(p)), len(_len), w(_w) {
+      : p(_p), pr(constexpr_primitive_root(p)), len(_len), w(_w) {
     prs.resize(p - 1);
     iprs.resize(p, -1);
     for (int i = 0; i < p - 1; i++) prs[i] = i ? prs[i - 1] * pr % p : 1;

@@ -3,7 +3,7 @@
 #pragma GCC target("avx2")
 #pragma GCC optimize("O3,unroll-loops")
 
-#include "../math/constexpr-primitiveroot.hpp"
+#include "../math/constexpr-primitive-root.hpp"
 
 /**
  * (1) deg(f) <= 1 (定数関数) ... topに値を保持
