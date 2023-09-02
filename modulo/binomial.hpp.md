@@ -52,6 +52,9 @@ data:
     title: "\u96C6\u5408\u51AA\u7D1A\u6570\u306E\u5408\u6210"
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/composite-exp.test.cpp
     title: verify/verify-unit-test/composite-exp.test.cpp
   - icon: ':heavy_check_mark:'
@@ -220,6 +223,9 @@ data:
     path: verify/verify-yuki/yuki-1875.test.cpp
     title: verify/verify-yuki/yuki-1875.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+    title: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
   _isVerificationFailed: false
@@ -331,6 +337,7 @@ data:
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1875.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
+  - verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
@@ -366,6 +373,7 @@ data:
   - verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - verify/verify-unit-test/composite-exp.test.cpp
   - verify/verify-unit-test/fps-sparse.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp

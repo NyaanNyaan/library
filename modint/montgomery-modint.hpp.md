@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/fps-composition-fast.hpp
     title: "\u95A2\u6570\u306E\u5408\u6210( $\\mathrm{O}(N^2)$ )"
+  - icon: ':warning:'
+    path: math/bigint-all.hpp
+    title: math/bigint-all.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint-garner.hpp
     title: Garner's algorithm for bigint
@@ -87,6 +90,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/composite-exp.test.cpp
     title: verify/verify-unit-test/composite-exp.test.cpp
@@ -163,6 +169,9 @@ data:
     path: verify/verify-unit-test/template.test.cpp
     title: verify/verify-unit-test/template.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - icon: ':heavy_check_mark:'
@@ -195,6 +204,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
@@ -514,6 +529,9 @@ data:
     path: verify/verify-yuki/yuki-1875.test.cpp
     title: verify/verify-yuki/yuki-1875.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+    title: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
   - icon: ':heavy_check_mark:'
@@ -613,6 +631,7 @@ data:
   - math/bigint-rational.hpp
   - math/bigint.hpp
   - math/bigint-gcd.hpp
+  - math/bigint-all.hpp
   - fps/fps-composition-fast.hpp
   - fps/fps-circular.hpp
   - fps/fast-multieval.hpp
@@ -642,6 +661,7 @@ data:
   - verify/verify-yuki/yuki-1875.test.cpp
   - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
+  - verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
   - verify/verify-yuki/yuki-1269.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
@@ -730,10 +750,13 @@ data:
   - verify/verify-unit-test/fast-inv.test.cpp
   - verify/verify-unit-test/fps-sparse.test.cpp
   - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-unit-test/mf.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp
@@ -744,6 +767,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-set-path-composite.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-sqdec.test.cpp

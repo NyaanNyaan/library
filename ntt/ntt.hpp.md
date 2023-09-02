@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/ntt-friendly-fps.hpp
     title: "NTT mod\u7528FPS\u30E9\u30A4\u30D6\u30E9\u30EA"
+  - icon: ':warning:'
+    path: math/bigint-all.hpp
+    title: math/bigint-all.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint-garner.hpp
     title: Garner's algorithm for bigint
@@ -81,6 +84,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/composite-exp.test.cpp
     title: verify/verify-unit-test/composite-exp.test.cpp
@@ -319,6 +325,9 @@ data:
     path: verify/verify-yuki/yuki-1875.test.cpp
     title: verify/verify-yuki/yuki-1875.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+    title: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
   - icon: ':heavy_check_mark:'
@@ -506,6 +515,7 @@ data:
   - math/bigint-rational.hpp
   - math/bigint.hpp
   - math/bigint-gcd.hpp
+  - math/bigint-all.hpp
   - fps/ntt-friendly-fps.hpp
   - fps/fast-multieval.hpp
   - fps/arbitrary-fps.hpp
@@ -529,6 +539,7 @@ data:
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1875.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
+  - verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1080.test.cpp
   - verify/verify-yuki/yuki-0215.test.cpp
@@ -595,6 +606,7 @@ data:
   - verify/verify-unit-test/composite-exp.test.cpp
   - verify/verify-unit-test/fps-sparse.test.cpp
   - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp

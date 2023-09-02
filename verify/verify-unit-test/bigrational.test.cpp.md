@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/graph-template.hpp
-    title: "\u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8"
-  - icon: ':heavy_check_mark:'
     path: internal/internal-seed.hpp
     title: internal/internal-seed.hpp
   - icon: ':heavy_check_mark:'
@@ -23,14 +20,14 @@ data:
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
   - icon: ':heavy_check_mark:'
+    path: math/rational-binomial.hpp
+    title: math/rational-binomial.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/rational-fps.hpp
+    title: math/rational-fps.hpp
+  - icon: ':heavy_check_mark:'
     path: math/rational.hpp
     title: math/rational.hpp
-  - icon: ':heavy_check_mark:'
-    path: matrix/gauss-elimination.hpp
-    title: matrix/gauss-elimination.hpp
-  - icon: ':heavy_check_mark:'
-    path: matrix/linear-equation.hpp
-    title: matrix/linear-equation.hpp
   - icon: ':heavy_check_mark:'
     path: misc/rng.hpp
     title: misc/rng.hpp
@@ -38,14 +35,14 @@ data:
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
+    path: modulo/binomial.hpp
+    title: modulo/binomial.hpp
+  - icon: ':heavy_check_mark:'
     path: ntt/arbitrary-ntt.hpp
     title: ntt/arbitrary-ntt.hpp
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  - icon: ':heavy_check_mark:'
-    path: shortest-path/dijkstra.hpp
-    title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -74,11 +71,9 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/aplusb
     links:
     - https://judge.yosupo.jp/problem/aplusb
-  bundledCode: "#line 1 \"verify/verify-aoj-other/aoj-2171-bigrational.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n// \u5B9F\u884C\u6642\
-    \u9593\u306E\u554F\u984C\u304B\u3089\u9069\u5F53\u306A\u30E9\u30F3\u30C0\u30E0\
-    \u30B1\u30FC\u30B9\u3067 test \u3059\u308B\n#line 2 \"template/template.hpp\"\n\
-    using namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
+  bundledCode: "#line 1 \"verify/verify-unit-test/bigrational.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#line 2 \"template/template.hpp\"\
+    \nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\n#include <algorithm>\n\
     #include <array>\n#include <bitset>\n#include <cassert>\n#include <cctype>\n#include\
     \ <cfenv>\n#include <cfloat>\n#include <chrono>\n#include <cinttypes>\n#include\
     \ <climits>\n#include <cmath>\n#include <complex>\n#include <cstdarg>\n#include\
@@ -251,103 +246,16 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 5 \"verify/verify-aoj-other/aoj-2171-bigrational.test.cpp\"\n//\n#line 2 \"\
-    misc/rng.hpp\"\n\n#line 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\
-    \nusing namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
-    \ {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
-    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
-    \  .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >> 31, m\
-    \ ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() { return\
-    \ 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210 (\u624B\
-    \u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\u51FA\
-    \u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\u304F\
-    \u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\u30B7\
-    \u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long long\
-    \ seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return deterministic_seed();\n\
-    #else\n  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n\
-    #line 4 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\nusing\
-    \ u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x\
-    \ = internal::seed();\n  return _x ^= _x << 7, _x ^= _x >> 9;\n}\n\n// [l, r]\n\
-    i64 rng(i64 l, i64 r) {\n  assert(l <= r);\n  return l + rng() % u64(r - l + 1);\n\
-    }\n\n// [l, r)\ni64 randint(i64 l, i64 r) {\n  assert(l < r);\n  return l + rng()\
-    \ % u64(r - l);\n}\n\n// choose n numbers from [l, r) without overlapping\nvector<i64>\
-    \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
-    \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
-    \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
-    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
-    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
-    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
-    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
-    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
-    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"verify/verify-aoj-other/aoj-2171-bigrational.test.cpp\"\
-    \n//\n#line 2 \"shortest-path/dijkstra.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\
-    \n\ntemplate <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
-    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
-    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
-    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
-    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
-    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
-    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
-    \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
-    \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
-    \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
-    \ Weighted Graph\ntemplate <typename T>\nWeightedGraph<T> wgraph(int N, int M\
-    \ = -1, bool is_directed = false,\n                        bool is_1origin = true)\
-    \ {\n  WeightedGraph<T> g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _\
-    \ < M; _++) {\n    int x, y;\n    cin >> x >> y;\n    T c;\n    cin >> c;\n  \
-    \  if (is_1origin) x--, y--;\n    g[x].emplace_back(x, y, c);\n    if (!is_directed)\
-    \ g[y].emplace_back(y, x, c);\n  }\n  return g;\n}\n\n// Input of Edges\ntemplate\
-    \ <typename T>\nEdges<T> esgraph(int N, int M, int is_weighted = true, bool is_1origin\
-    \ = true) {\n  Edges<T> es;\n  for (int _ = 0; _ < M; _++) {\n    int x, y;\n\
-    \    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin >> c;\n    else\n\
-    \      c = 1;\n    if (is_1origin) x--, y--;\n    es.emplace_back(x, y, c);\n\
-    \  }\n  return es;\n}\n\n// Input of Adjacency Matrix\ntemplate <typename T>\n\
-    vector<vector<T>> adjgraph(int N, int M, T INF, int is_weighted = true,\n    \
-    \                       bool is_directed = false, bool is_1origin = true) {\n\
-    \  vector<vector<T>> d(N, vector<T>(N, INF));\n  for (int _ = 0; _ < M; _++) {\n\
-    \    int x, y;\n    cin >> x >> y;\n    T c;\n    if (is_weighted)\n      cin\
-    \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
-    \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
-    \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
-    \ */\n#line 4 \"shortest-path/dijkstra.hpp\"\n\n// unreachable -> -1\ntemplate\
-    \ <typename T>\nvector<T> dijkstra(WeightedGraph<T> &g, int start = 0) {\n  using\
-    \ P = pair<T, int>;\n  int N = (int)g.size();\n  vector<T> d(N, T(-1));\n  priority_queue<P,\
-    \ vector<P>, greater<P> > Q;\n  d[start] = 0;\n  Q.emplace(0, start);\n  while\
-    \ (!Q.empty()) {\n    P p = Q.top();\n    Q.pop();\n    int cur = p.second;\n\
-    \    if (d[cur] < p.first) continue;\n    for (auto dst : g[cur]) {\n      if\
-    \ (d[dst] == T(-1) || d[cur] + dst.cost < d[dst]) {\n        d[dst] = d[cur] +\
-    \ dst.cost;\n        Q.emplace(d[dst], dst);\n      }\n    }\n  }\n  return d;\n\
-    }\n\n/**\n * @brief \u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5\n * @docs docs/shortest-path/dijkstra.md\n\
-    \ */\n#line 9 \"verify/verify-aoj-other/aoj-2171-bigrational.test.cpp\"\n//\n\
-    #line 2 \"math/bigint-rational.hpp\"\n\n#line 2 \"math/bigint-gcd.hpp\"\n\n#line\
-    \ 4 \"math/bigint-gcd.hpp\"\nusing namespace std;\n\n#line 2 \"math-fast/gcd.hpp\"\
-    \n\n#line 4 \"math-fast/gcd.hpp\"\nusing namespace std;\n\nnamespace BinaryGCDImpl\
-    \ {\nusing u64 = unsigned long long;\nusing i8 = char;\n\nu64 binary_gcd(u64 a,\
-    \ u64 b) {\n  if (a == 0 || b == 0) return a + b;\n  i8 n = __builtin_ctzll(a);\n\
-    \  i8 m = __builtin_ctzll(b);\n  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while\
-    \ (a != b) {\n    u64 d = a - b;\n    i8 s = __builtin_ctzll(d);\n    bool f =\
-    \ a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return a << n;\n\
-    }\n\nusing u128 = __uint128_t;\n// a > 0\nint ctz128(u128 a) {\n  u64 lo = a &\
-    \ u64(-1);\n  return lo ? __builtin_ctzll(lo) : 64 + __builtin_ctzll(a >> 64);\n\
-    }\nu128 binary_gcd128(u128 a, u128 b) {\n  if (a == 0 || b == 0) return a + b;\n\
-    \  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n  a >>= n;\n  b >>= m;\n  n = min(n,\
-    \ m);\n  while (a != b) {\n    u128 d = a - b;\n    i8 s = ctz128(d);\n    bool\
-    \ f = a > b;\n    b = f ? b : a;\n    a = (f ? d : -d) >> s;\n  }\n  return a\
-    \ << n;\n}\n\n}  // namespace BinaryGCDImpl\n\nlong long binary_gcd(long long\
-    \ a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a), abs(b));\n}\n\
-    __int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a < 0) a = -a;\n\
-    \  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a, b);\n}\n\n/**\n\
-    \ * @brief binary GCD\n */\n#line 2 \"math/bigint.hpp\"\n\n#line 10 \"math/bigint.hpp\"\
-    \nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line\
-    \ 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace internal\
-    \ {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename conditional_t<is_integral_v<T>\
-    \ || is_same_v<T, __int128_t> ||\n                               is_same_v<T,\
-    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
-    template <typename T>\nusing is_broadly_signed =\n    typename conditional_t<is_signed_v<T>\
-    \ || is_same_v<T, __int128_t>,\n                           true_type, false_type>::type;\n\
-    \ntemplate <typename T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ 4 \"verify/verify-unit-test/bigrational.test.cpp\"\n//\n#line 2 \"math/rational-binomial.hpp\"\
+    \n\n#line 2 \"math/rational.hpp\"\n\n#line 6 \"math/rational.hpp\"\nusing namespace\
+    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
+    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
     \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
     \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
     \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
@@ -358,15 +266,158 @@ data:
     \                                      \\\n  struct has_##var<T, std::void_t<typename\
     \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
     \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
-    \n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod\
-    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
-    invalid, mod % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\"\
-    );\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \n}  // namespace internal\n#line 2 \"math-fast/gcd.hpp\"\n\n#line 4 \"math-fast/gcd.hpp\"\
+    \nusing namespace std;\n\nnamespace BinaryGCDImpl {\nusing u64 = unsigned long\
+    \ long;\nusing i8 = char;\n\nu64 binary_gcd(u64 a, u64 b) {\n  if (a == 0 || b\
+    \ == 0) return a + b;\n  i8 n = __builtin_ctzll(a);\n  i8 m = __builtin_ctzll(b);\n\
+    \  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u64 d = a -\
+    \ b;\n    i8 s = __builtin_ctzll(d);\n    bool f = a > b;\n    b = f ? b : a;\n\
+    \    a = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n\nusing u128 = __uint128_t;\n\
+    // a > 0\nint ctz128(u128 a) {\n  u64 lo = a & u64(-1);\n  return lo ? __builtin_ctzll(lo)\
+    \ : 64 + __builtin_ctzll(a >> 64);\n}\nu128 binary_gcd128(u128 a, u128 b) {\n\
+    \  if (a == 0 || b == 0) return a + b;\n  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n\
+    \  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u128 d = a\
+    \ - b;\n    i8 s = ctz128(d);\n    bool f = a > b;\n    b = f ? b : a;\n    a\
+    \ = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n\n}  // namespace BinaryGCDImpl\n\
+    \nlong long binary_gcd(long long a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a),\
+    \ abs(b));\n}\n__int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a\
+    \ < 0) a = -a;\n  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a,\
+    \ b);\n}\n\n/**\n * @brief binary GCD\n */\n#line 10 \"math/rational.hpp\"\n\n\
+    // T : \u5024, U : \u6BD4\u8F03\u7528\ntemplate <typename T, typename U>\nstruct\
+    \ RationalBase {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
+    \ : x(0), y(1) {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
+    \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
+    \ T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y != 0);\n    if (y == -1)\
+    \ x = -x, y = -y;\n    if (y != 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>)\
+    \ {\n        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x,\
+    \ y);\n        } else {\n          g = binary_gcd(x, y);\n        }\n      } else\
+    \ {\n        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n    \
+    \  if (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\
+    \u8A8D\u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y\
+    \ = _y;\n    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n\
+    \    if (l.y == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y *\
+    \ r.x, l.y * r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if\
+    \ (l.y == r.y) return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x,\
+    \ l.y * r.y};\n  }\n  friend R operator*(const R& l, const R& r) { return R{l.x\
+    \ * r.x, l.y * r.y}; }\n  friend R operator/(const R& l, const R& r) { return\
+    \ R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this)\
+    \ + r; }\n  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R&\
+    \ operator*=(const R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const\
+    \ R& r) { return (*this) = (*this) / r; }\n  R operator-() const { return raw(-x,\
+    \ y); }\n  R inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n  \
+    \  if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long\
+    \ p) const {\n    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res\
+    \ *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n\
+    \  friend bool operator==(const R& l, const R& r) {\n    return l.x == r.x &&\
+    \ l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n    return\
+    \ l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R&\
+    \ r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const\
+    \ R& l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const\
+    \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
+    \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
+    \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
+    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\
+    \u30E3\u30B9\u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\
+    \u306F to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod !=\
+    \ 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t =\
+    \ a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return\
+    \ U((u % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
+    \ long, __int128_t>;\n#line 4 \"math/rational-binomial.hpp\"\n\ntemplate <typename\
+    \ R = Rational>\nstruct Binomial_rational {\n  vector<R> fc;\n  Binomial_rational(int\
+    \ = 0) { fc.emplace_back(1); }\n  void extend() {\n    int n = fc.size();\n  \
+    \  R nxt = fc.back() * n;\n    fc.push_back(nxt);\n  }\n  R fac(int n) {\n   \
+    \ if (n < 0) return 0;\n    while ((int)fc.size() <= n) extend();\n    return\
+    \ fc[n];\n  }\n  R finv(int n) {\n    if (n < 0) return 0;\n    return fac(n).inverse();\n\
+    \  }\n  R inv(int n) {\n    if (n < 0) return -inv(-n);\n    return R{1, max(n,\
+    \ 1)};\n  }\n  R C(int n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n\
+    \    return fac(n) * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r)\
+    \ { return C(n, r); }\n  template <typename I>\n  R multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if (x < 0) return R{0};\n      n += x;\n    }\n\
+    \    R res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  R operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\n\n#line 5 \"math/rational-fps.hpp\"\
+    \n\ntemplate <typename R = Rational>\nstruct FormalPowerSeries_rational : vector<R>\
+    \ {\n  using vector<R>::vector;\n  using fps = FormalPowerSeries_rational;\n\n\
+    \  fps &operator+=(const fps &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  fps &operator+=(const R &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  fps &operator-=(const fps &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  fps &operator-=(const R &r) {\n    if (this->empty()) this->resize(1);\n  \
+    \  (*this)[0] -= r;\n    return *this;\n  }\n\n  fps &operator*=(const fps &r)\
+    \ {\n    int n = this->size() + r.size() - 1;\n    fps f(n);\n    for (int i =\
+    \ 0; i < (int)this->size(); i++) {\n      for (int j = 0; j < (int)r.size(); j++)\
+    \ {\n        f[i + j] += (*this)[i] * r[j];\n      }\n    }\n    return *this\
+    \ = f;\n  }\n\n  fps &operator*=(const R &v) {\n    for (int k = 0; k < (int)this->size();\
+    \ k++) (*this)[k] *= v;\n    return *this;\n  }\n\n  fps &operator/=(const fps\
+    \ &r) {\n    if (this->size() < r.size()) {\n      this->clear();\n      return\
+    \ *this;\n    }\n    int n = this->size() - r.size() + 1;\n    fps f(*this), g(r);\n\
+    \    g.shrink();\n    R coeff = g.back().inverse();\n    for (auto &x : g) x *=\
+    \ coeff;\n    int deg = (int)f.size() - (int)g.size() + 1;\n    int gs = g.size();\n\
+    \    fps quo(deg);\n    for (int i = deg - 1; i >= 0; i--) {\n      quo[i] = f[i\
+    \ + gs - 1];\n      for (int j = 0; j < gs; j++) f[i + j] -= quo[i] * g[j];\n\
+    \    }\n    *this = quo * coeff;\n    this->resize(n, R(0));\n    return *this;\n\
+    \  }\n\n  fps &operator%=(const fps &r) {\n    *this -= *this / r * r;\n    shrink();\n\
+    \    return *this;\n  }\n\n  fps operator+(const fps &r) const { return fps(*this)\
+    \ += r; }\n  fps operator+(const R &v) const { return fps(*this) += v; }\n  fps\
+    \ operator-(const fps &r) const { return fps(*this) -= r; }\n  fps operator-(const\
+    \ R &v) const { return fps(*this) -= v; }\n  fps operator*(const fps &r) const\
+    \ { return fps(*this) *= r; }\n  fps operator*(const R &v) const { return fps(*this)\
+    \ *= v; }\n  fps operator/(const fps &r) const { return fps(*this) /= r; }\n \
+    \ fps operator%(const fps &r) const { return fps(*this) %= r; }\n  fps operator-()\
+    \ const {\n    fps ret(this->size());\n    for (int i = 0; i < (int)this->size();\
+    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
+    \ (this->size() && this->back() == R(0)) this->pop_back();\n  }\n\n  fps rev()\
+    \ const {\n    fps ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
+    \ ret;\n  }\n\n  fps dot(fps r) const {\n    fps ret(min(this->size(), r.size()));\n\
+    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
+    \   return ret;\n  }\n\n  // \u524D sz \u9805\u3092\u53D6\u3063\u3066\u304F\u308B\
+    \u3002sz \u306B\u8DB3\u308A\u306A\u3044\u9805\u306F 0 \u57CB\u3081\u3059\u308B\
+    \n  fps pre(int sz) const {\n    fps ret(begin(*this), begin(*this) + min((int)this->size(),\
+    \ sz));\n    if ((int)ret.size() < sz) ret.resize(sz);\n    return ret;\n  }\n\
+    \n  fps operator>>(int sz) const {\n    if ((int)this->size() <= sz) return {};\n\
+    \    fps ret(*this);\n    ret.erase(ret.begin(), ret.begin() + sz);\n    return\
+    \ ret;\n  }\n\n  fps operator<<(int sz) const {\n    fps ret(*this);\n    ret.insert(ret.begin(),\
+    \ sz, R(0));\n    return ret;\n  }\n\n  fps diff() const {\n    const int n =\
+    \ (int)this->size();\n    fps ret(max(0, n - 1));\n    R one(1), coeff(1);\n \
+    \   for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n  \
+    \    coeff += one;\n    }\n    return ret;\n  }\n\n  fps integral() const {\n\
+    \    const int n = (int)this->size();\n    fps ret(n + 1);\n    for (int i = 0;\
+    \ i < n; i++) ret[i + 1] = (*this)[i] / (i + 1);\n    return ret;\n  }\n\n  R\
+    \ eval(R x) const {\n    R r = 0, w = 1;\n    for (auto &v : *this) r += w * v,\
+    \ w *= x;\n    return r;\n  }\n\n  fps inv(int deg = -1) const {\n    assert((*this)[0]\
+    \ != R(0));\n    if (deg == -1) deg = (*this).size();\n    fps ret{R(1) / (*this)[0]};\n\
+    \    for (int i = 1; i < deg; i <<= 1) {\n      ret = (ret + ret - ret * ret *\
+    \ (*this).pre(i << 1)).pre(i << 1);\n    }\n    return ret.pre(deg);\n  }\n  fps\
+    \ log(int deg = -1) const {\n    assert(!(*this).empty() && (*this)[0] == R(1));\n\
+    \    if (deg == -1) deg = (int)this->size();\n    return (this->diff() * this->inv(deg)).pre(deg\
+    \ - 1).integral();\n  }\n  fps exp(int deg = -1) const {\n    assert((*this).size()\
+    \ == 0 || (*this)[0] == R(0));\n    if (deg == -1) deg = (int)this->size();\n\
+    \    fps ret{R(1)};\n    for (int i = 1; i < deg; i <<= 1) {\n      ret = (ret\
+    \ * (pre(i << 1) + R(1) - ret.log(i << 1))).pre(i << 1);\n    }\n    return ret.pre(deg);\n\
+    \  }\n  fps pow(int64_t k, int deg = -1) const {\n    const int n = (int)this->size();\n\
+    \    if (deg == -1) deg = n;\n    if (k == 0) {\n      fps ret(deg);\n      if\
+    \ (deg) ret[0] = 1;\n      return ret;\n    }\n    for (int i = 0; i < n; i++)\
+    \ {\n      if ((*this)[i] != R(0)) {\n        R rev = R(1) / (*this)[i];\n   \
+    \     fps ret = (((*this * rev) >> i).log(deg) * k).exp(deg);\n        ret *=\
+    \ (*this)[i].pow(k);\n        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size()\
+    \ < deg) ret.resize(deg, R(0));\n        return ret;\n      }\n      if (__int128_t(i\
+    \ + 1) * k >= deg) return fps(deg, R(0));\n    }\n    return fps(deg, R(0));\n\
+    \  }\n};\n#line 8 \"verify/verify-unit-test/bigrational.test.cpp\"\n//\n#line\
+    \ 2 \"math/bigint-rational.hpp\"\n\n#line 2 \"math/bigint-gcd.hpp\"\n\n#line 4\
+    \ \"math/bigint-gcd.hpp\"\nusing namespace std;\n\n#line 2 \"math/bigint.hpp\"\
+    \n\n#line 10 \"math/bigint.hpp\"\nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\
+    \n\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
+    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
+    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod < (1 << 30),\
+    \ \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod\
+    \ % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\");\n\n  u32\
+    \ a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
     \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
     \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
     \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
@@ -743,132 +794,147 @@ data:
     \ e2);\n  if (e5) g *= bigint_pow(bigint{5}, e5);\n  return g;\n}\n}  // namespace\
     \ GCDforBigintImpl\n\nMultiPrecisionInteger gcd(const MultiPrecisionInteger& a,\n\
     \                          const MultiPrecisionInteger& b) {\n  return GCDforBigintImpl::gcd_d_ary<true>(a,\
-    \ b);\n}\n#line 2 \"math/rational.hpp\"\n\n#line 6 \"math/rational.hpp\"\nusing\
-    \ namespace std;\n\n#line 10 \"math/rational.hpp\"\n\n// T : \u5024, U : \u6BD4\
-    \u8F03\u7528\ntemplate <typename T, typename U>\nstruct RationalBase {\n  using\
-    \ R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase() : x(0), y(1)\
-    \ {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
-    \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
-    \ T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y != 0);\n    if (y == -1)\
-    \ x = -x, y = -y;\n    if (y != 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>)\
-    \ {\n        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x,\
-    \ y);\n        } else {\n          g = binary_gcd(x, y);\n        }\n      } else\
-    \ {\n        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n    \
-    \  if (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\
-    \u8A8D\u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y\
-    \ = _y;\n    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n\
-    \    if (l.y == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y *\
-    \ r.x, l.y * r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if\
-    \ (l.y == r.y) return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x,\
-    \ l.y * r.y};\n  }\n  friend R operator*(const R& l, const R& r) { return R{l.x\
-    \ * r.x, l.y * r.y}; }\n  friend R operator/(const R& l, const R& r) { return\
-    \ R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this)\
-    \ + r; }\n  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R&\
-    \ operator*=(const R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const\
-    \ R& r) { return (*this) = (*this) / r; }\n  R operator-() const { return raw(-x,\
-    \ y); }\n  R inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n  \
-    \  if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long\
-    \ p) const {\n    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res\
-    \ *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n\
-    \  friend bool operator==(const R& l, const R& r) {\n    return l.x == r.x &&\
-    \ l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n    return\
-    \ l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R&\
-    \ r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const\
-    \ R& l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const\
-    \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
-    \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
-    \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
-    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\
-    \u30E3\u30B9\u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\
-    \u306F to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod !=\
-    \ 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t =\
-    \ a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return\
-    \ U((u % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
-    \ long, __int128_t>;\n#line 5 \"math/bigint-rational.hpp\"\n\nusing BigRational\
-    \ = RationalBase<bigint, bigint>;\n\ndouble to_double(const BigRational& r) {\n\
-    \  pair<long double, int> a = r.x.dfp();\n  pair<long double, int> b = r.y.dfp();\n\
-    \  return a.first / b.first * powl(10.0, a.second - b.second);\n}\n#line 2 \"\
-    matrix/linear-equation.hpp\"\n\n#line 2 \"matrix/gauss-elimination.hpp\"\n\n#line\
-    \ 5 \"matrix/gauss-elimination.hpp\"\nusing namespace std;\n\n// {rank, det(\u975E\
-    \u6B63\u65B9\u884C\u5217\u306E\u5834\u5408\u306F\u672A\u5B9A\u7FA9)} \u3092\u8FD4\
-    \u3059\n// \u578B\u304C double \u3084 Rational \u3067\u3082\u52D5\u304F\u306F\u305A\
-    \uFF1F(\u672A\u691C\u8A3C)\n//\n// pivot \u5019\u88DC : [0, pivot_end)\ntemplate\
-    \ <typename T>\nstd::pair<int, T> GaussElimination(vector<vector<T>> &a, int pivot_end\
-    \ = -1,\n                                   bool diagonalize = false) {\n  int\
-    \ H = a.size(), W = a[0].size(), rank = 0;\n  if (pivot_end == -1) pivot_end =\
-    \ W;\n  T det = 1;\n  for (int j = 0; j < pivot_end; j++) {\n    int idx = -1;\n\
-    \    for (int i = rank; i < H; i++) {\n      if (a[i][j] != T(0)) {\n        idx\
-    \ = i;\n        break;\n      }\n    }\n    if (idx == -1) {\n      det = 0;\n\
-    \      continue;\n    }\n    if (rank != idx) det = -det, swap(a[rank], a[idx]);\n\
-    \    det *= a[rank][j];\n    if (diagonalize && a[rank][j] != T(1)) {\n      T\
-    \ coeff = T(1) / a[rank][j];\n      for (int k = j; k < W; k++) a[rank][k] *=\
-    \ coeff;\n    }\n    int is = diagonalize ? 0 : rank + 1;\n    for (int i = is;\
-    \ i < H; i++) {\n      if (i == rank) continue;\n      if (a[i][j] != T(0)) {\n\
-    \        T coeff = a[i][j] / a[rank][j];\n        for (int k = j; k < W; k++)\
-    \ a[i][k] -= a[rank][k] * coeff;\n      }\n    }\n    rank++;\n  }\n  return make_pair(rank,\
-    \ det);\n}\n#line 4 \"matrix/linear-equation.hpp\"\n\n// \u89E3\u304C\u5B58\u5728\
-    \u3059\u308B\u5834\u5408\u306F, \u89E3\u304C v + C_1 w_1 + ... + C_k w_k \u3068\
-    \u8868\u305B\u308B\u3068\u3057\u3066\n// (v, w_1, ..., w_k) \u3092\u8FD4\u3059\
-    \n// \u89E3\u304C\u5B58\u5728\u3057\u306A\u3044\u5834\u5408\u306F\u7A7A\u306E\u30D9\
-    \u30AF\u30C8\u30EB\u3092\u8FD4\u3059\n//\n// double \u3084 Rational \u3067\u3082\
-    \u52D5\u304F\u306F\u305A\uFF1F(\u672A\u691C\u8A3C)\ntemplate <typename T>\nvector<vector<T>>\
-    \ LinearEquation(vector<vector<T>> a, vector<T> b) {\n  int H = a.size(), W =\
-    \ a[0].size();\n  for (int i = 0; i < H; i++) a[i].push_back(b[i]);\n  auto p\
-    \ = GaussElimination(a, W, true);\n  int rank = p.first;\n  for (int i = rank;\
-    \ i < H; ++i) {\n    if (a[i][W] != 0) return vector<vector<T>>{};\n  }\n  vector<vector<T>>\
-    \ res(1, vector<T>(W));\n  vector<int> pivot(W, -1);\n  for (int i = 0, j = 0;\
-    \ i < rank; ++i) {\n    while (a[i][j] == 0) ++j;\n    res[0][j] = a[i][W], pivot[j]\
-    \ = i;\n  }\n  for (int j = 0; j < W; ++j) {\n    if (pivot[j] == -1) {\n    \
-    \  vector<T> x(W);\n      x[j] = 1;\n      for (int k = 0; k < j; ++k) {\n   \
-    \     if (pivot[k] != -1) x[k] = -a[pivot[k]][j];\n      }\n      res.push_back(x);\n\
-    \    }\n  }\n  return res;\n}\n#line 12 \"verify/verify-aoj-other/aoj-2171-bigrational.test.cpp\"\
-    \nusing namespace Nyaan;\n\ntemplate <typename T>\ndouble calc(int N, int s, int\
-    \ t, vl q, vvi A) {\n  WeightedGraph<int> g(N);\n  rep(i, N) rep(j, N) if (A[i][j])\
-    \ g[i].emplace_back(i, j, A[i][j]);\n  vi d = dijkstra(g, t);\n  if (d[s] == -1)\
-    \ return -1;\n  VV<T> m(N, V<T>(N));\n  V<T> b(N);\n  rep(i, N) {\n    if (i ==\
-    \ t) {\n      m[i][i] = 1;\n      continue;\n    }\n    vi dst;\n    if (q[i])\
-    \ {\n      rep(j, N) {\n        if (A[i][j] and d[i] == d[j] + A[i][j]) dst.push_back(j);\n\
-    \      }\n    } else {\n      rep(j, N) {\n        if (A[i][j]) dst.push_back(j);\n\
-    \      }\n    }\n    ll num = sz(dst);\n    each(j, dst) {\n      m[i][j] += T(1)\
-    \ / num;\n      b[i] -= T(A[i][j]) / num;\n    }\n    m[i][i] -= 1;\n  }\n  auto\
-    \ anss = LinearEquation(m, b);\n  assert(sz(anss) >= 1);\n  auto ans = anss[0];\n\
-    \  if constexpr (is_same_v<T, double>) {\n    return ans[s];\n  } else {\n   \
-    \ return to_double(ans[s]);\n  }\n}\n\nvoid test() {\n  rep(t, 500) {\n    int\
-    \ N = rng(2, 30);\n    int S = -1, T = -1;\n    do {\n      S = rng(0, N - 1);\n\
-    \      T = rng(0, N - 1);\n    } while (S == T);\n    vl q(N);\n    each(x, q)\
-    \ x = rng(0, 1);\n    vvi A(N, vi(N));\n    rep(i, N) rep(j, i) A[j][i] = A[i][j]\
-    \ = rng(0, 10) ? rng(1, 10) : 0;\n    double a1 = calc<double>(N, S, T, q, A);\n\
-    \    double a2 = calc<BigRational>(N, S, T, q, A);\n    double error = abs(a1\
-    \ - a2) / max(1.0, a2);\n    assert(error < 1e-10);\n  }\n}\n\nvoid q() {\n  test();\n\
-    \  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b <<\
-    \ endl;\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--)\
-    \ q();\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n// \u5B9F\u884C\
-    \u6642\u9593\u306E\u554F\u984C\u304B\u3089\u9069\u5F53\u306A\u30E9\u30F3\u30C0\
-    \u30E0\u30B1\u30FC\u30B9\u3067 test \u3059\u308B\n#include \"../../template/template.hpp\"\
-    \n//\n#include \"../../misc/rng.hpp\"\n//\n#include \"../../shortest-path/dijkstra.hpp\"\
-    \n//\n#include \"../../math/bigint-rational.hpp\"\n#include \"../../matrix/linear-equation.hpp\"\
-    \nusing namespace Nyaan;\n\ntemplate <typename T>\ndouble calc(int N, int s, int\
-    \ t, vl q, vvi A) {\n  WeightedGraph<int> g(N);\n  rep(i, N) rep(j, N) if (A[i][j])\
-    \ g[i].emplace_back(i, j, A[i][j]);\n  vi d = dijkstra(g, t);\n  if (d[s] == -1)\
-    \ return -1;\n  VV<T> m(N, V<T>(N));\n  V<T> b(N);\n  rep(i, N) {\n    if (i ==\
-    \ t) {\n      m[i][i] = 1;\n      continue;\n    }\n    vi dst;\n    if (q[i])\
-    \ {\n      rep(j, N) {\n        if (A[i][j] and d[i] == d[j] + A[i][j]) dst.push_back(j);\n\
-    \      }\n    } else {\n      rep(j, N) {\n        if (A[i][j]) dst.push_back(j);\n\
-    \      }\n    }\n    ll num = sz(dst);\n    each(j, dst) {\n      m[i][j] += T(1)\
-    \ / num;\n      b[i] -= T(A[i][j]) / num;\n    }\n    m[i][i] -= 1;\n  }\n  auto\
-    \ anss = LinearEquation(m, b);\n  assert(sz(anss) >= 1);\n  auto ans = anss[0];\n\
-    \  if constexpr (is_same_v<T, double>) {\n    return ans[s];\n  } else {\n   \
-    \ return to_double(ans[s]);\n  }\n}\n\nvoid test() {\n  rep(t, 500) {\n    int\
-    \ N = rng(2, 30);\n    int S = -1, T = -1;\n    do {\n      S = rng(0, N - 1);\n\
-    \      T = rng(0, N - 1);\n    } while (S == T);\n    vl q(N);\n    each(x, q)\
-    \ x = rng(0, 1);\n    vvi A(N, vi(N));\n    rep(i, N) rep(j, i) A[j][i] = A[i][j]\
-    \ = rng(0, 10) ? rng(1, 10) : 0;\n    double a1 = calc<double>(N, S, T, q, A);\n\
-    \    double a2 = calc<BigRational>(N, S, T, q, A);\n    double error = abs(a1\
-    \ - a2) / max(1.0, a2);\n    assert(error < 1e-10);\n  }\n}\n\nvoid q() {\n  test();\n\
-    \  cerr << \"OK\" << endl;\n\n  int a, b;\n  cin >> a >> b;\n  cout << a + b <<\
-    \ endl;\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--)\
-    \ q();\n}\n"
+    \ b);\n}\n#line 5 \"math/bigint-rational.hpp\"\n\nusing BigRational = RationalBase<bigint,\
+    \ bigint>;\n\ndouble to_double(const BigRational& r) {\n  pair<long double, int>\
+    \ a = r.x.dfp();\n  pair<long double, int> b = r.y.dfp();\n  return a.first /\
+    \ b.first * powl(10.0, a.second - b.second);\n}\n#line 10 \"verify/verify-unit-test/bigrational.test.cpp\"\
+    \n//\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\nusing\
+    \ namespace std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B\
+    \ \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\u308B\
+    \u6700\u5927\u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\u304F\
+    \u3089\u3044\u306B\u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\u7B97\
+    \u3057\u3066 0 \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\u6E08\
+    \u307F\ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int\
+    \ MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1,\
+    \ T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n    if (MAX > 0) extend(MAX\
+    \ + 1);\n  }\n\n  void extend(int m = -1) {\n    int n = f.size();\n    if (m\
+    \ == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n    if (n >= m) return;\n\
+    \    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n; i <\
+    \ m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m\
+    \ - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i]\
+    \ = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int\
+    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n\
+    \    return f[i];\n  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n   \
+    \ while (i >= (int)g.size()) extend();\n    return g[i];\n  }\n\n  T inv(int i)\
+    \ {\n    if (i < 0) return -inv(-i);\n    while (i >= (int)h.size()) extend();\n\
+    \    return h[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 || n < r || r <\
+    \ 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline\
+    \ T operator()(int n, int r) { return C(n, r); }\n\n  template <typename I>\n\
+    \  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
+    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
+    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
+    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
+    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
+    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 13 \"verify/verify-unit-test/bigrational.test.cpp\"\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\n//\n#line 2 \"misc/rng.hpp\"\n\
+    \n#line 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\
+    \nusing namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
+    \ {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
+    \  .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >> 31, m\
+    \ ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() { return\
+    \ 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210 (\u624B\
+    \u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\u51FA\
+    \u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\u304F\
+    \u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\u30B7\
+    \u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long long\
+    \ seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return deterministic_seed();\n\
+    #else\n  return non_deterministic_seed();\n#endif\n}\n\n}  // namespace internal\n\
+    #line 4 \"misc/rng.hpp\"\n\nnamespace my_rand {\nusing i64 = long long;\nusing\
+    \ u64 = unsigned long long;\n\n// [0, 2^64 - 1)\nu64 rng() {\n  static u64 _x\
+    \ = internal::seed();\n  return _x ^= _x << 7, _x ^= _x >> 9;\n}\n\n// [l, r]\n\
+    i64 rng(i64 l, i64 r) {\n  assert(l <= r);\n  return l + rng() % u64(r - l + 1);\n\
+    }\n\n// [l, r)\ni64 randint(i64 l, i64 r) {\n  assert(l < r);\n  return l + rng()\
+    \ % u64(r - l);\n}\n\n// choose n numbers from [l, r) without overlapping\nvector<i64>\
+    \ randset(i64 l, i64 r, i64 n) {\n  assert(l <= r && n <= r - l);\n  unordered_set<i64>\
+    \ s;\n  for (i64 i = n; i; --i) {\n    i64 m = randint(l, r + 1 - i);\n    if\
+    \ (s.find(m) != s.end()) m = r - i;\n    s.insert(m);\n  }\n  vector<i64> ret;\n\
+    \  for (auto& x : s) ret.push_back(x);\n  return ret;\n}\n\n// [0.0, 1.0)\ndouble\
+    \ rnd() { return rng() * 5.42101086242752217004e-20; }\n// [l, r)\ndouble rnd(double\
+    \ l, double r) {\n  assert(l < r);\n  return l + rnd() * (r - l);\n}\n\ntemplate\
+    \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
+    \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
+    \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 16 \"verify/verify-unit-test/bigrational.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  {\n    BigRational a{4,\
+    \ 3}, b{2, 3};\n    assert(a + b == 2);\n    assert(a - b == BigRational(2, 3));\n\
+    \    assert(a * b == BigRational(8, 9));\n    assert(a / b == 2);\n    assert(a.inverse()\
+    \ == BigRational(3, 4));\n    assert(a.pow(3) == BigRational(64, 27));\n\n   \
+    \ assert((a > b) == true);\n    assert((a >= b) == true);\n    assert((a < b)\
+    \ == false);\n    assert((a <= b) == false);\n  }\n\n  {\n    Binomial_rational<BigRational>\
+    \ C;\n    assert(C.fac(3) == 6);\n    assert(C.finv(3) == BigRational(1, 6));\n\
+    \    assert(C(4, 2) == 6);\n    assert(C(vi{3, 2}) == 10);\n  }\n\n  {\n    using\
+    \ fps = FormalPowerSeries_rational<BigRational>;\n    {\n      fps f{1, 2, {3,\
+    \ 2}}, g{{1, 4}, 5};\n      fps h{{5, 4}, 7, {3, 2}};\n      assert(f + g == h);\n\
+    \      h = fps{{3, 4}, -3, {3, 2}};\n      assert(f - g == h);\n      assert(f\
+    \ * g % g == fps{});\n      assert(f * g % f == fps{});\n    }\n\n    {\n    \
+    \  fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n      fps f = e.pow(TEN(10));\n\
+    \      trc(f);\n      rep(i, sz(e)) { assert(e[i] * BigRational{TEN(10)}.pow(i)\
+    \ == f[i]); }\n    }\n  }\n\n  // mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n\
+    \  {\n    auto comp = [&](int i, int j, int k, int l) {\n      rep(b, 16) {\n\
+    \        int ii = (b >> 0) % 2 ? -i : +i;\n        int jj = (b >> 1) % 2 ? -j\
+    \ : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n        int ll = (b >> 3) %\
+    \ 2 ? -l : +l;\n        BigRational x{ii, jj}, y{kk, ll};\n        mint X = mint{ii}\
+    \ / jj;\n        mint Y = mint{kk} / ll;\n        assert(X + Y == (x + y).to_mint(998244353).to_ll());\n\
+    \        assert(X - Y == (x - y).to_mint(998244353).to_ll());\n        assert(X\
+    \ * Y == (x * y).to_mint(998244353).to_ll());\n        if (Y != 0) {\n       \
+    \   assert(X / Y == (x / y).to_mint(998244353).to_ll());\n        }\n      }\n\
+    \    };\n    rep(i, 10) rep1(j, 10) rep(k, 10) rep1(l, 10) comp(i, j, k, l);\n\
+    \    rep(t, 1000) {\n      ll lower = t % 2 ? 1 : TEN(17);\n      ll i = rng(lower,\
+    \ TEN(18));\n      ll j = rng(lower, TEN(18));\n      ll k = rng(lower, TEN(18));\n\
+    \      ll l = rng(lower, TEN(18));\n      comp(i, j, k, l);\n    }\n  }\n\n  //\
+    \ binom, mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n  {\n    Binomial_rational<BigRational>\
+    \ C1;\n    Binomial<mint> C2;\n    reg(i, -15, 15) {\n      assert(C2.fac(i) ==\
+    \ C1.fac(i).to_mint(998244353).to_ll());\n      assert(C2.finv(i) == C1.finv(i).to_mint(998244353).to_ll());\n\
+    \      assert(C2.inv(i) == C1.inv(i).to_mint(998244353).to_ll());\n      reg(j,\
+    \ -15, 15) assert(C2(i, j) == C1(i, j).to_mint(998244353).to_ll());\n    }\n \
+    \ }\n\n  cerr << \"OK\" << endl;\n  {\n    int s, t;\n    cin >> s >> t;\n   \
+    \ cout << s + t << \"\\n\";\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
+    ../../template/template.hpp\"\n//\n#include \"../../math/rational-binomial.hpp\"\
+    \n#include \"../../math/rational-fps.hpp\"\n#include \"../../math/rational.hpp\"\
+    \n//\n#include \"../../math/bigint-rational.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n#include \"../../modulo/binomial.hpp\"\nusing mint = LazyMontgomeryModInt<998244353>;\n\
+    //\n#include \"../../misc/rng.hpp\"\n\nusing namespace Nyaan;\n\nvoid Nyaan::solve()\
+    \ {\n  {\n    BigRational a{4, 3}, b{2, 3};\n    assert(a + b == 2);\n    assert(a\
+    \ - b == BigRational(2, 3));\n    assert(a * b == BigRational(8, 9));\n    assert(a\
+    \ / b == 2);\n    assert(a.inverse() == BigRational(3, 4));\n    assert(a.pow(3)\
+    \ == BigRational(64, 27));\n\n    assert((a > b) == true);\n    assert((a >= b)\
+    \ == true);\n    assert((a < b) == false);\n    assert((a <= b) == false);\n \
+    \ }\n\n  {\n    Binomial_rational<BigRational> C;\n    assert(C.fac(3) == 6);\n\
+    \    assert(C.finv(3) == BigRational(1, 6));\n    assert(C(4, 2) == 6);\n    assert(C(vi{3,\
+    \ 2}) == 10);\n  }\n\n  {\n    using fps = FormalPowerSeries_rational<BigRational>;\n\
+    \    {\n      fps f{1, 2, {3, 2}}, g{{1, 4}, 5};\n      fps h{{5, 4}, 7, {3, 2}};\n\
+    \      assert(f + g == h);\n      h = fps{{3, 4}, -3, {3, 2}};\n      assert(f\
+    \ - g == h);\n      assert(f * g % g == fps{});\n      assert(f * g % f == fps{});\n\
+    \    }\n\n    {\n      fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n     \
+    \ fps f = e.pow(TEN(10));\n      trc(f);\n      rep(i, sz(e)) { assert(e[i] *\
+    \ BigRational{TEN(10)}.pow(i) == f[i]); }\n    }\n  }\n\n  // mint \u3068\u6319\
+    \u52D5\u306E\u6BD4\u8F03\n  {\n    auto comp = [&](int i, int j, int k, int l)\
+    \ {\n      rep(b, 16) {\n        int ii = (b >> 0) % 2 ? -i : +i;\n        int\
+    \ jj = (b >> 1) % 2 ? -j : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n   \
+    \     int ll = (b >> 3) % 2 ? -l : +l;\n        BigRational x{ii, jj}, y{kk, ll};\n\
+    \        mint X = mint{ii} / jj;\n        mint Y = mint{kk} / ll;\n        assert(X\
+    \ + Y == (x + y).to_mint(998244353).to_ll());\n        assert(X - Y == (x - y).to_mint(998244353).to_ll());\n\
+    \        assert(X * Y == (x * y).to_mint(998244353).to_ll());\n        if (Y !=\
+    \ 0) {\n          assert(X / Y == (x / y).to_mint(998244353).to_ll());\n     \
+    \   }\n      }\n    };\n    rep(i, 10) rep1(j, 10) rep(k, 10) rep1(l, 10) comp(i,\
+    \ j, k, l);\n    rep(t, 1000) {\n      ll lower = t % 2 ? 1 : TEN(17);\n     \
+    \ ll i = rng(lower, TEN(18));\n      ll j = rng(lower, TEN(18));\n      ll k =\
+    \ rng(lower, TEN(18));\n      ll l = rng(lower, TEN(18));\n      comp(i, j, k,\
+    \ l);\n    }\n  }\n\n  // binom, mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n \
+    \ {\n    Binomial_rational<BigRational> C1;\n    Binomial<mint> C2;\n    reg(i,\
+    \ -15, 15) {\n      assert(C2.fac(i) == C1.fac(i).to_mint(998244353).to_ll());\n\
+    \      assert(C2.finv(i) == C1.finv(i).to_mint(998244353).to_ll());\n      assert(C2.inv(i)\
+    \ == C1.inv(i).to_mint(998244353).to_ll());\n      reg(j, -15, 15) assert(C2(i,\
+    \ j) == C1(i, j).to_mint(998244353).to_ll());\n    }\n  }\n\n  cerr << \"OK\"\
+    \ << endl;\n  {\n    int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\\\
+    n\";\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -876,31 +942,30 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - misc/rng.hpp
-  - internal/internal-seed.hpp
-  - shortest-path/dijkstra.hpp
-  - graph/graph-template.hpp
+  - math/rational-binomial.hpp
+  - math/rational.hpp
+  - internal/internal-type-traits.hpp
+  - math-fast/gcd.hpp
+  - math/rational-fps.hpp
   - math/bigint-rational.hpp
   - math/bigint-gcd.hpp
-  - math-fast/gcd.hpp
   - math/bigint.hpp
-  - internal/internal-type-traits.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
-  - math/rational.hpp
-  - matrix/linear-equation.hpp
-  - matrix/gauss-elimination.hpp
+  - modulo/binomial.hpp
+  - misc/rng.hpp
+  - internal/internal-seed.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  path: verify/verify-unit-test/bigrational.test.cpp
   requiredBy: []
-  timestamp: '2023-09-02 23:13:20+09:00'
+  timestamp: '2023-09-02 22:21:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+documentation_of: verify/verify-unit-test/bigrational.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-- /verify/verify/verify-aoj-other/aoj-2171-bigrational.test.cpp.html
-title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+- /verify/verify/verify-unit-test/bigrational.test.cpp
+- /verify/verify/verify-unit-test/bigrational.test.cpp.html
+title: verify/verify-unit-test/bigrational.test.cpp
 ---

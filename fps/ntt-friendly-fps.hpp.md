@@ -170,6 +170,9 @@ data:
     path: verify/verify-yuki/yuki-1875.test.cpp
     title: verify/verify-yuki/yuki-1875.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+    title: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
   _isVerificationFailed: false
@@ -450,6 +453,7 @@ data:
   - verify/verify-yuki/yuki-0963.test.cpp
   - verify/verify-yuki/yuki-1533.test.cpp
   - verify/verify-yuki/yuki-1875.test.cpp
+  - verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-1145.test.cpp
   - verify/verify-yosupo-ntt/yosupo-convolution-relaxed-convolution.test.cpp

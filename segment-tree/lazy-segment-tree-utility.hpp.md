@@ -39,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -274,6 +277,7 @@ data:
   - verify/verify-unit-test/lazyseg-setval.test.cpp
   - verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree-2.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
 documentation_of: segment-tree/lazy-segment-tree-utility.hpp
 layout: document
 redirect_from:

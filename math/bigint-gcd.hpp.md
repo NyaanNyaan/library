@@ -20,6 +20,9 @@ data:
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: math/bigint-all.hpp
+    title: math/bigint-all.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint-rational.hpp
     title: math/bigint-rational.hpp
@@ -30,6 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint-gcd.test.cpp
     title: verify/verify-unit-test/bigint-gcd.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -503,11 +509,13 @@ data:
   path: math/bigint-gcd.hpp
   requiredBy:
   - math/bigint-rational.hpp
+  - math/bigint-all.hpp
   timestamp: '2023-05-29 20:50:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
   - verify/verify-unit-test/bigint-gcd.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
 documentation_of: math/bigint-gcd.hpp
 layout: document
 redirect_from:

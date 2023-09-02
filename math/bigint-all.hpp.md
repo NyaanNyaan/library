@@ -5,6 +5,27 @@ data:
     path: internal/internal-type-traits.hpp
     title: internal/internal-type-traits.hpp
   - icon: ':heavy_check_mark:'
+    path: math-fast/gcd.hpp
+    title: binary GCD
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-gcd.hpp
+    title: math/bigint-gcd.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint-rational.hpp
+    title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/bigint.hpp
+    title: "\u591A\u500D\u9577\u6574\u6570"
+  - icon: ':heavy_check_mark:'
+    path: math/rational-binomial.hpp
+    title: math/rational-binomial.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/rational-fps.hpp
+    title: math/rational-fps.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/rational.hpp
+    title: math/rational.hpp
+  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
@@ -13,82 +34,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: math/bigint-all.hpp
-    title: math/bigint-all.hpp
-  - icon: ':heavy_check_mark:'
-    path: math/bigint-garner.hpp
-    title: Garner's algorithm for bigint
-  - icon: ':heavy_check_mark:'
-    path: math/bigint-gcd.hpp
-    title: math/bigint-gcd.hpp
-  - icon: ':heavy_check_mark:'
-    path: math/bigint-rational.hpp
-    title: math/bigint-rational.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
-    title: verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-    title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigint-gcd.test.cpp
-    title: verify/verify-unit-test/bigint-gcd.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigint.test.cpp
-    title: verify/verify-unit-test/bigint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigint2.test.cpp
-    title: verify/verify-unit-test/bigint2.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigint3.test.cpp
-    title: verify/verify-unit-test/bigint3.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/bigrational.test.cpp
-    title: verify/verify-unit-test/bigrational.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/garner-bigint.test.cpp
-    title: verify/verify-unit-test/garner-bigint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
-    title: verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
-    title: verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
-    title: verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
-    title: verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0303.test.cpp
-    title: verify/verify-yuki/yuki-0303.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    document_title: "\u591A\u500D\u9577\u6574\u6570"
     links: []
-  bundledCode: "#line 2 \"math/bigint.hpp\"\n\n#include <algorithm>\n#include <cassert>\n\
-    #include <cmath>\n#include <iostream>\n#include <tuple>\n#include <utility>\n\
+  bundledCode: "#line 2 \"math/bigint-all.hpp\"\n\n#line 2 \"math/rational-binomial.hpp\"\
+    \n\n#line 2 \"math/rational.hpp\"\n\n#include <cassert>\n#include <numeric>\n\
     #include <vector>\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
     \n\n#include <type_traits>\nusing namespace std;\n\nnamespace internal {\ntemplate\
     \ <typename T>\nusing is_broadly_integral =\n    typename conditional_t<is_integral_v<T>\
@@ -107,15 +61,159 @@ data:
     \                                      \\\n  struct has_##var<T, std::void_t<typename\
     \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
     \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 2 \"ntt/arbitrary-ntt.hpp\"\n\n#line 2 \"modint/montgomery-modint.hpp\"\
-    \n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod\
-    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
-    invalid, mod % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\"\
-    );\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
+    \n}  // namespace internal\n#line 2 \"math-fast/gcd.hpp\"\n\n#include <algorithm>\n\
+    using namespace std;\n\nnamespace BinaryGCDImpl {\nusing u64 = unsigned long long;\n\
+    using i8 = char;\n\nu64 binary_gcd(u64 a, u64 b) {\n  if (a == 0 || b == 0) return\
+    \ a + b;\n  i8 n = __builtin_ctzll(a);\n  i8 m = __builtin_ctzll(b);\n  a >>=\
+    \ n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u64 d = a - b;\n \
+    \   i8 s = __builtin_ctzll(d);\n    bool f = a > b;\n    b = f ? b : a;\n    a\
+    \ = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n\nusing u128 = __uint128_t;\n\
+    // a > 0\nint ctz128(u128 a) {\n  u64 lo = a & u64(-1);\n  return lo ? __builtin_ctzll(lo)\
+    \ : 64 + __builtin_ctzll(a >> 64);\n}\nu128 binary_gcd128(u128 a, u128 b) {\n\
+    \  if (a == 0 || b == 0) return a + b;\n  i8 n = ctz128(a);\n  i8 m = ctz128(b);\n\
+    \  a >>= n;\n  b >>= m;\n  n = min(n, m);\n  while (a != b) {\n    u128 d = a\
+    \ - b;\n    i8 s = ctz128(d);\n    bool f = a > b;\n    b = f ? b : a;\n    a\
+    \ = (f ? d : -d) >> s;\n  }\n  return a << n;\n}\n\n}  // namespace BinaryGCDImpl\n\
+    \nlong long binary_gcd(long long a, long long b) {\n  return BinaryGCDImpl::binary_gcd(abs(a),\
+    \ abs(b));\n}\n__int128_t binary_gcd128(__int128_t a, __int128_t b) {\n  if (a\
+    \ < 0) a = -a;\n  if (b < 0) b = -b;\n  return BinaryGCDImpl::binary_gcd128(a,\
+    \ b);\n}\n\n/**\n * @brief binary GCD\n */\n#line 10 \"math/rational.hpp\"\n\n\
+    // T : \u5024, U : \u6BD4\u8F03\u7528\ntemplate <typename T, typename U>\nstruct\
+    \ RationalBase {\n  using R = RationalBase;\n  using Key = T;\n  T x, y;\n  RationalBase()\
+    \ : x(0), y(1) {}\n  template <typename T1>\n  RationalBase(const T1& _x) : RationalBase<T,\
+    \ U>(_x, T1{1}) {}\n  template <typename T1, typename T2>\n  RationalBase(const\
+    \ T1& _x, const T2& _y) : x(_x), y(_y) {\n    assert(y != 0);\n    if (y == -1)\
+    \ x = -x, y = -y;\n    if (y != 1) {\n      T g;\n      if constexpr (internal::is_broadly_integral_v<T>)\
+    \ {\n        if constexpr (sizeof(T) == 16) {\n          g = binary_gcd128(x,\
+    \ y);\n        } else {\n          g = binary_gcd(x, y);\n        }\n      } else\
+    \ {\n        g = gcd(x, y);\n      }\n      if (g != 0) x /= g, y /= g;\n    \
+    \  if (y < 0) x = -x, y = -y;\n    }\n  }\n  // y = 0 \u306E\u4EE3\u5165\u3082\
+    \u8A8D\u3081\u308B\n  static R raw(T _x, T _y) {\n    R r;\n    r.x = _x, r.y\
+    \ = _y;\n    return r;\n  }\n  friend R operator+(const R& l, const R& r) {\n\
+    \    if (l.y == r.y) return R{l.x + r.x, l.y};\n    return R{l.x * r.y + l.y *\
+    \ r.x, l.y * r.y};\n  }\n  friend R operator-(const R& l, const R& r) {\n    if\
+    \ (l.y == r.y) return R{l.x - r.x, l.y};\n    return R{l.x * r.y - l.y * r.x,\
+    \ l.y * r.y};\n  }\n  friend R operator*(const R& l, const R& r) { return R{l.x\
+    \ * r.x, l.y * r.y}; }\n  friend R operator/(const R& l, const R& r) { return\
+    \ R{l.x * r.y, l.y * r.x}; }\n  R& operator+=(const R& r) { return (*this) = (*this)\
+    \ + r; }\n  R& operator-=(const R& r) { return (*this) = (*this) - r; }\n  R&\
+    \ operator*=(const R& r) { return (*this) = (*this) * r; }\n  R& operator/=(const\
+    \ R& r) { return (*this) = (*this) / r; }\n  R operator-() const { return raw(-x,\
+    \ y); }\n  R inverse() const {\n    assert(x != 0);\n    R r = raw(y, x);\n  \
+    \  if (r.y < 0) r.x = -r.x, r.y = -r.y;\n    return r;\n  }\n  R pow(long long\
+    \ p) const {\n    R res{1}, base{*this};\n    while (p) {\n      if (p & 1) res\
+    \ *= base;\n      base *= base;\n      p >>= 1;\n    }\n    return res;\n  }\n\
+    \  friend bool operator==(const R& l, const R& r) {\n    return l.x == r.x &&\
+    \ l.y == r.y;\n  };\n  friend bool operator!=(const R& l, const R& r) {\n    return\
+    \ l.x != r.x || l.y != r.y;\n  };\n  friend bool operator<(const R& l, const R&\
+    \ r) {\n    return U{l.x} * r.y < U{l.y} * r.x;\n  };\n  friend bool operator<=(const\
+    \ R& l, const R& r) { return l < r || l == r; }\n  friend bool operator>(const\
+    \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
+    \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
+    \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
+    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\
+    \u30E3\u30B9\u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\
+    \u306F to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod !=\
+    \ 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t =\
+    \ a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return\
+    \ U((u % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
+    \ long, __int128_t>;\n#line 4 \"math/rational-binomial.hpp\"\n\ntemplate <typename\
+    \ R = Rational>\nstruct Binomial_rational {\n  vector<R> fc;\n  Binomial_rational(int\
+    \ = 0) { fc.emplace_back(1); }\n  void extend() {\n    int n = fc.size();\n  \
+    \  R nxt = fc.back() * n;\n    fc.push_back(nxt);\n  }\n  R fac(int n) {\n   \
+    \ if (n < 0) return 0;\n    while ((int)fc.size() <= n) extend();\n    return\
+    \ fc[n];\n  }\n  R finv(int n) {\n    if (n < 0) return 0;\n    return fac(n).inverse();\n\
+    \  }\n  R inv(int n) {\n    if (n < 0) return -inv(-n);\n    return R{1, max(n,\
+    \ 1)};\n  }\n  R C(int n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n\
+    \    return fac(n) * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r)\
+    \ { return C(n, r); }\n  template <typename I>\n  R multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if (x < 0) return R{0};\n      n += x;\n    }\n\
+    \    R res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  R operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\n\n#line 5 \"math/rational-fps.hpp\"\
+    \n\ntemplate <typename R = Rational>\nstruct FormalPowerSeries_rational : vector<R>\
+    \ {\n  using vector<R>::vector;\n  using fps = FormalPowerSeries_rational;\n\n\
+    \  fps &operator+=(const fps &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  fps &operator+=(const R &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  fps &operator-=(const fps &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  fps &operator-=(const R &r) {\n    if (this->empty()) this->resize(1);\n  \
+    \  (*this)[0] -= r;\n    return *this;\n  }\n\n  fps &operator*=(const fps &r)\
+    \ {\n    int n = this->size() + r.size() - 1;\n    fps f(n);\n    for (int i =\
+    \ 0; i < (int)this->size(); i++) {\n      for (int j = 0; j < (int)r.size(); j++)\
+    \ {\n        f[i + j] += (*this)[i] * r[j];\n      }\n    }\n    return *this\
+    \ = f;\n  }\n\n  fps &operator*=(const R &v) {\n    for (int k = 0; k < (int)this->size();\
+    \ k++) (*this)[k] *= v;\n    return *this;\n  }\n\n  fps &operator/=(const fps\
+    \ &r) {\n    if (this->size() < r.size()) {\n      this->clear();\n      return\
+    \ *this;\n    }\n    int n = this->size() - r.size() + 1;\n    fps f(*this), g(r);\n\
+    \    g.shrink();\n    R coeff = g.back().inverse();\n    for (auto &x : g) x *=\
+    \ coeff;\n    int deg = (int)f.size() - (int)g.size() + 1;\n    int gs = g.size();\n\
+    \    fps quo(deg);\n    for (int i = deg - 1; i >= 0; i--) {\n      quo[i] = f[i\
+    \ + gs - 1];\n      for (int j = 0; j < gs; j++) f[i + j] -= quo[i] * g[j];\n\
+    \    }\n    *this = quo * coeff;\n    this->resize(n, R(0));\n    return *this;\n\
+    \  }\n\n  fps &operator%=(const fps &r) {\n    *this -= *this / r * r;\n    shrink();\n\
+    \    return *this;\n  }\n\n  fps operator+(const fps &r) const { return fps(*this)\
+    \ += r; }\n  fps operator+(const R &v) const { return fps(*this) += v; }\n  fps\
+    \ operator-(const fps &r) const { return fps(*this) -= r; }\n  fps operator-(const\
+    \ R &v) const { return fps(*this) -= v; }\n  fps operator*(const fps &r) const\
+    \ { return fps(*this) *= r; }\n  fps operator*(const R &v) const { return fps(*this)\
+    \ *= v; }\n  fps operator/(const fps &r) const { return fps(*this) /= r; }\n \
+    \ fps operator%(const fps &r) const { return fps(*this) %= r; }\n  fps operator-()\
+    \ const {\n    fps ret(this->size());\n    for (int i = 0; i < (int)this->size();\
+    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
+    \ (this->size() && this->back() == R(0)) this->pop_back();\n  }\n\n  fps rev()\
+    \ const {\n    fps ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
+    \ ret;\n  }\n\n  fps dot(fps r) const {\n    fps ret(min(this->size(), r.size()));\n\
+    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
+    \   return ret;\n  }\n\n  // \u524D sz \u9805\u3092\u53D6\u3063\u3066\u304F\u308B\
+    \u3002sz \u306B\u8DB3\u308A\u306A\u3044\u9805\u306F 0 \u57CB\u3081\u3059\u308B\
+    \n  fps pre(int sz) const {\n    fps ret(begin(*this), begin(*this) + min((int)this->size(),\
+    \ sz));\n    if ((int)ret.size() < sz) ret.resize(sz);\n    return ret;\n  }\n\
+    \n  fps operator>>(int sz) const {\n    if ((int)this->size() <= sz) return {};\n\
+    \    fps ret(*this);\n    ret.erase(ret.begin(), ret.begin() + sz);\n    return\
+    \ ret;\n  }\n\n  fps operator<<(int sz) const {\n    fps ret(*this);\n    ret.insert(ret.begin(),\
+    \ sz, R(0));\n    return ret;\n  }\n\n  fps diff() const {\n    const int n =\
+    \ (int)this->size();\n    fps ret(max(0, n - 1));\n    R one(1), coeff(1);\n \
+    \   for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n  \
+    \    coeff += one;\n    }\n    return ret;\n  }\n\n  fps integral() const {\n\
+    \    const int n = (int)this->size();\n    fps ret(n + 1);\n    for (int i = 0;\
+    \ i < n; i++) ret[i + 1] = (*this)[i] / (i + 1);\n    return ret;\n  }\n\n  R\
+    \ eval(R x) const {\n    R r = 0, w = 1;\n    for (auto &v : *this) r += w * v,\
+    \ w *= x;\n    return r;\n  }\n\n  fps inv(int deg = -1) const {\n    assert((*this)[0]\
+    \ != R(0));\n    if (deg == -1) deg = (*this).size();\n    fps ret{R(1) / (*this)[0]};\n\
+    \    for (int i = 1; i < deg; i <<= 1) {\n      ret = (ret + ret - ret * ret *\
+    \ (*this).pre(i << 1)).pre(i << 1);\n    }\n    return ret.pre(deg);\n  }\n  fps\
+    \ log(int deg = -1) const {\n    assert(!(*this).empty() && (*this)[0] == R(1));\n\
+    \    if (deg == -1) deg = (int)this->size();\n    return (this->diff() * this->inv(deg)).pre(deg\
+    \ - 1).integral();\n  }\n  fps exp(int deg = -1) const {\n    assert((*this).size()\
+    \ == 0 || (*this)[0] == R(0));\n    if (deg == -1) deg = (int)this->size();\n\
+    \    fps ret{R(1)};\n    for (int i = 1; i < deg; i <<= 1) {\n      ret = (ret\
+    \ * (pre(i << 1) + R(1) - ret.log(i << 1))).pre(i << 1);\n    }\n    return ret.pre(deg);\n\
+    \  }\n  fps pow(int64_t k, int deg = -1) const {\n    const int n = (int)this->size();\n\
+    \    if (deg == -1) deg = n;\n    if (k == 0) {\n      fps ret(deg);\n      if\
+    \ (deg) ret[0] = 1;\n      return ret;\n    }\n    for (int i = 0; i < n; i++)\
+    \ {\n      if ((*this)[i] != R(0)) {\n        R rev = R(1) / (*this)[i];\n   \
+    \     fps ret = (((*this * rev) >> i).log(deg) * k).exp(deg);\n        ret *=\
+    \ (*this)[i].pow(k);\n        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size()\
+    \ < deg) ret.resize(deg, R(0));\n        return ret;\n      }\n      if (__int128_t(i\
+    \ + 1) * k >= deg) return fps(deg, R(0));\n    }\n    return fps(deg, R(0));\n\
+    \  }\n};\n#line 6 \"math/bigint-all.hpp\"\n//\n#line 2 \"math/bigint-rational.hpp\"\
+    \n\n#line 2 \"math/bigint-gcd.hpp\"\n\n#line 4 \"math/bigint-gcd.hpp\"\nusing\
+    \ namespace std;\n\n#line 2 \"math/bigint.hpp\"\n\n#line 5 \"math/bigint.hpp\"\
+    \n#include <cmath>\n#include <iostream>\n#include <tuple>\n#include <utility>\n\
+    #line 10 \"math/bigint.hpp\"\nusing namespace std;\n\n#line 2 \"ntt/arbitrary-ntt.hpp\"\
+    \n\n#line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct\
+    \ LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n  using i32 =\
+    \ int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr\
+    \ u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2\
+    \ - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32 r = get_r();\n\
+    \  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod < (1 << 30),\
+    \ \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod\
+    \ % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\");\n\n  u32\
+    \ a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
     \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
     \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
     \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
@@ -461,247 +559,93 @@ data:
     \ s << \" : \";\n    cerr << \"{ \";\n    for (int i = 0; i < (int)a.size(); i++)\
     \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
     \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
-    \ */\n"
-  code: "#pragma once\n\n#include <algorithm>\n#include <cassert>\n#include <cmath>\n\
-    #include <iostream>\n#include <tuple>\n#include <utility>\n#include <vector>\n\
-    using namespace std;\n\n#include \"../internal/internal-type-traits.hpp\"\n#include\
-    \ \"../ntt/arbitrary-ntt.hpp\"\n\nnamespace MultiPrecisionIntegerImpl {\nstruct\
-    \ TENS {\n  static constexpr int offset = 30;\n  constexpr TENS() : _tend() {\n\
-    \    _tend[offset] = 1;\n    for (int i = 1; i <= offset; i++) {\n      _tend[offset\
-    \ + i] = _tend[offset + i - 1] * 10.0;\n      _tend[offset - i] = 1.0 / _tend[offset\
-    \ + i];\n    }\n  }\n  long double ten_ld(int n) const {\n    assert(-offset <=\
-    \ n and n <= offset);\n    return _tend[n + offset];\n  }\n\n private:\n  long\
-    \ double _tend[offset * 2 + 1];\n};\n}  // namespace MultiPrecisionIntegerImpl\n\
-    \n// 0 \u306F neg=false, dat={} \u3068\u3057\u3066\u6271\u3046\nstruct MultiPrecisionInteger\
-    \ {\n  using M = MultiPrecisionInteger;\n  inline constexpr static MultiPrecisionIntegerImpl::TENS\
-    \ tens = {};\n\n  static constexpr int D = 1000000000;\n  static constexpr int\
-    \ logD = 9;\n  bool neg;\n  vector<int> dat;\n\n  MultiPrecisionInteger() : neg(false),\
-    \ dat() {}\n\n  MultiPrecisionInteger(bool n, const vector<int>& d) : neg(n),\
-    \ dat(d) {}\n\n  template <typename I,\n            enable_if_t<internal::is_broadly_integral_v<I>>*\
-    \ = nullptr>\n  MultiPrecisionInteger(I x) : neg(false) {\n    if constexpr (internal::is_broadly_signed_v<I>)\
-    \ {\n      if (x < 0) neg = true, x = -x;\n    }\n    while (x) dat.push_back(x\
-    \ % D), x /= D;\n  }\n\n  MultiPrecisionInteger(const string& S) : neg(false)\
-    \ {\n    assert(!S.empty());\n    if (S.size() == 1u && S[0] == '0') return;\n\
-    \    int l = 0;\n    if (S[0] == '-') ++l, neg = true;\n    for (int ie = S.size();\
-    \ l < ie; ie -= logD) {\n      int is = max(l, ie - logD);\n      long long x\
-    \ = 0;\n      for (int i = is; i < ie; i++) x = x * 10 + S[i] - '0';\n      dat.push_back(x);\n\
-    \    }\n  }\n\n  friend M operator+(const M& lhs, const M& rhs) {\n    if (lhs.neg\
-    \ == rhs.neg) return {lhs.neg, _add(lhs.dat, rhs.dat)};\n    if (_leq(lhs.dat,\
-    \ rhs.dat)) {\n      // |l| <= |r|\n      auto c = _sub(rhs.dat, lhs.dat);\n \
-    \     bool n = _is_zero(c) ? false : rhs.neg;\n      return {n, c};\n    }\n \
-    \   auto c = _sub(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false : lhs.neg;\n\
-    \    return {n, c};\n  }\n  friend M operator-(const M& lhs, const M& rhs) { return\
-    \ lhs + (-rhs); }\n\n  friend M operator*(const M& lhs, const M& rhs) {\n    auto\
-    \ c = _mul(lhs.dat, rhs.dat);\n    bool n = _is_zero(c) ? false : (lhs.neg ^ rhs.neg);\n\
-    \    return {n, c};\n  }\n  friend pair<M, M> divmod(const M& lhs, const M& rhs)\
-    \ {\n    auto dm = _divmod_newton(lhs.dat, rhs.dat);\n    bool dn = _is_zero(dm.first)\
-    \ ? false : lhs.neg != rhs.neg;\n    bool mn = _is_zero(dm.second) ? false : lhs.neg;\n\
-    \    return {M{dn, dm.first}, M{mn, dm.second}};\n  }\n  friend M operator/(const\
-    \ M& lhs, const M& rhs) {\n    return divmod(lhs, rhs).first;\n  }\n  friend M\
-    \ operator%(const M& lhs, const M& rhs) {\n    return divmod(lhs, rhs).second;\n\
-    \  }\n\n  M& operator+=(const M& rhs) { return (*this) = (*this) + rhs; }\n  M&\
-    \ operator-=(const M& rhs) { return (*this) = (*this) - rhs; }\n  M& operator*=(const\
-    \ M& rhs) { return (*this) = (*this) * rhs; }\n  M& operator/=(const M& rhs) {\
-    \ return (*this) = (*this) / rhs; }\n  M& operator%=(const M& rhs) { return (*this)\
-    \ = (*this) % rhs; }\n\n  M operator-() const {\n    if (is_zero()) return *this;\n\
-    \    return {!neg, dat};\n  }\n  M operator+() const { return *this; }\n  friend\
-    \ M abs(const M& m) { return {false, m.dat}; }\n  bool is_zero() const { return\
-    \ _is_zero(dat); }\n\n  friend bool operator==(const M& lhs, const M& rhs) {\n\
-    \    return lhs.neg == rhs.neg && lhs.dat == rhs.dat;\n  }\n  friend bool operator!=(const\
-    \ M& lhs, const M& rhs) {\n    return lhs.neg != rhs.neg || lhs.dat != rhs.dat;\n\
-    \  }\n  friend bool operator<(const M& lhs, const M& rhs) {\n    if (lhs == rhs)\
-    \ return false;\n    return _neq_lt(lhs, rhs);\n  }\n  friend bool operator<=(const\
-    \ M& lhs, const M& rhs) {\n    if (lhs == rhs) return true;\n    return _neq_lt(lhs,\
-    \ rhs);\n  }\n  friend bool operator>(const M& lhs, const M& rhs) {\n    if (lhs\
-    \ == rhs) return false;\n    return _neq_lt(rhs, lhs);\n  }\n  friend bool operator>=(const\
-    \ M& lhs, const M& rhs) {\n    if (lhs == rhs) return true;\n    return _neq_lt(rhs,\
-    \ lhs);\n  }\n\n  // a * 10^b (1 <= |a| < 10) \u306E\u5F62\u3067\u6E21\u3059\n\
-    \  // \u76F8\u5BFE\u8AA4\u5DEE\uFF1A10^{-16} ~ 10^{-19} \u7A0B\u5EA6 (\u51E6\u7406\
-    \u7CFB\u4F9D\u5B58)\n  pair<long double, int> dfp() const {\n    if (is_zero())\
-    \ return {0, 0};\n    int l = max<int>(0, _size() - 3);\n    int b = logD * l;\n\
-    \    string prefix{};\n    for (int i = _size() - 1; i >= l; i--) {\n      prefix\
-    \ += _itos(dat[i], i != _size() - 1);\n    }\n    b += prefix.size() - 1;\n  \
-    \  long double a = 0;\n    for (auto& c : prefix) a = a * 10.0 + (c - '0');\n\
-    \    a *= tens.ten_ld(-((int)prefix.size()) + 1);\n    a = clamp<long double>(a,\
-    \ 1.0, nextafterl(10.0, 1.0));\n    if (neg) a = -a;\n    return {a, b};\n  }\n\
-    \  string to_string() const {\n    if (is_zero()) return \"0\";\n    string res;\n\
-    \    if (neg) res.push_back('-');\n    for (int i = _size() - 1; i >= 0; i--)\
-    \ {\n      res += _itos(dat[i], i != _size() - 1);\n    }\n    return res;\n \
-    \ }\n  long double to_ld() const {\n    auto [a, b] = dfp();\n    if (-tens.offset\
-    \ <= b and b <= tens.offset) {\n      return a * tens.ten_ld(b);\n    }\n    return\
-    \ a * powl(10, b);\n  }\n  long long to_ll() const {\n    long long res = _to_ll(dat);\n\
-    \    return neg ? -res : res;\n  }\n  __int128_t to_i128() const {\n    __int128_t\
-    \ res = _to_i128(dat);\n    return neg ? -res : res;\n  }\n\n  friend istream&\
-    \ operator>>(istream& is, M& m) {\n    string s;\n    is >> s;\n    m = M{s};\n\
-    \    return is;\n  }\n\n  friend ostream& operator<<(ostream& os, const M& m)\
-    \ {\n    return os << m.to_string();\n  }\n\n  // \u5185\u90E8\u306E\u95A2\u6570\
-    \u3092\u30C6\u30B9\u30C8\n  static void _test_private_function(const M&, const\
-    \ M&);\n\n private:\n  // size\n  int _size() const { return dat.size(); }\n \
-    \ // a == b\n  static bool _eq(const vector<int>& a, const vector<int>& b) { return\
-    \ a == b; }\n  // a < b\n  static bool _lt(const vector<int>& a, const vector<int>&\
-    \ b) {\n    if (a.size() != b.size()) return a.size() < b.size();\n    for (int\
-    \ i = a.size() - 1; i >= 0; i--) {\n      if (a[i] != b[i]) return a[i] < b[i];\n\
-    \    }\n    return false;\n  }\n  // a <= b\n  static bool _leq(const vector<int>&\
-    \ a, const vector<int>& b) {\n    return _eq(a, b) || _lt(a, b);\n  }\n  // a\
-    \ < b (s.t. a != b)\n  static bool _neq_lt(const M& lhs, const M& rhs) {\n   \
-    \ assert(lhs != rhs);\n    if (lhs.neg != rhs.neg) return lhs.neg;\n    bool f\
-    \ = _lt(lhs.dat, rhs.dat);\n    if (f) return !lhs.neg;\n    return lhs.neg;\n\
-    \  }\n  // a == 0\n  static bool _is_zero(const vector<int>& a) { return a.empty();\
-    \ }\n  // a == 1\n  static bool _is_one(const vector<int>& a) {\n    return (int)a.size()\
-    \ == 1 && a[0] == 1;\n  }\n  // \u672B\u5C3E 0 \u3092\u524A\u9664\n  static void\
-    \ _shrink(vector<int>& a) {\n    while (a.size() && a.back() == 0) a.pop_back();\n\
-    \  }\n  // \u672B\u5C3E 0 \u3092\u524A\u9664\n  void _shrink() {\n    while (_size()\
-    \ && dat.back() == 0) dat.pop_back();\n  }\n  // a + b\n  static vector<int> _add(const\
-    \ vector<int>& a, const vector<int>& b) {\n    vector<int> c(max(a.size(), b.size())\
-    \ + 1);\n    for (int i = 0; i < (int)a.size(); i++) c[i] += a[i];\n    for (int\
-    \ i = 0; i < (int)b.size(); i++) c[i] += b[i];\n    for (int i = 0; i < (int)c.size()\
-    \ - 1; i++) {\n      if (c[i] >= D) c[i] -= D, c[i + 1]++;\n    }\n    _shrink(c);\n\
-    \    return c;\n  }\n  // a - b\n  static vector<int> _sub(const vector<int>&\
-    \ a, const vector<int>& b) {\n    assert(_leq(b, a));\n    vector<int> c{a};\n\
-    \    int borrow = 0;\n    for (int i = 0; i < (int)a.size(); i++) {\n      if\
-    \ (i < (int)b.size()) borrow += b[i];\n      c[i] -= borrow;\n      borrow = 0;\n\
-    \      if (c[i] < 0) c[i] += D, borrow = 1;\n    }\n    assert(borrow == 0);\n\
-    \    _shrink(c);\n    return c;\n  }\n  // a * b (fft)\n  static vector<int> _mul_fft(const\
-    \ vector<int>& a, const vector<int>& b) {\n    if (a.empty() || b.empty()) return\
-    \ {};\n    auto m = ArbitraryNTT::multiply_u128(a, b);\n    vector<int> c;\n \
-    \   c.reserve(m.size() + 3);\n    __uint128_t x = 0;\n    for (int i = 0;; i++)\
-    \ {\n      if (i >= (int)m.size() && x == 0) break;\n      if (i < (int)m.size())\
-    \ x += m[i];\n      c.push_back(x % D);\n      x /= D;\n    }\n    _shrink(c);\n\
-    \    return c;\n  }\n  // a * b (naive)\n  static vector<int> _mul_naive(const\
-    \ vector<int>& a, const vector<int>& b) {\n    if (a.empty() || b.empty()) return\
-    \ {};\n    vector<long long> prod(a.size() + b.size() - 1 + 1);\n    for (int\
-    \ i = 0; i < (int)a.size(); i++) {\n      for (int j = 0; j < (int)b.size(); j++)\
-    \ {\n        long long p = 1LL * a[i] * b[j];\n        prod[i + j] += p;\n   \
-    \     if (prod[i + j] >= (4LL * D * D)) {\n          prod[i + j] -= 4LL * D *\
-    \ D;\n          prod[i + j + 1] += 4LL * D;\n        }\n      }\n    }\n    vector<int>\
-    \ c(prod.size() + 1);\n    long long x = 0;\n    int i = 0;\n    for (; i < (int)prod.size();\
-    \ i++) x += prod[i], c[i] = x % D, x /= D;\n    while (x) c[i] = x % D, x /= D,\
-    \ i++;\n    _shrink(c);\n    return c;\n  }\n  // a * b\n  static vector<int>\
-    \ _mul(const vector<int>& a, const vector<int>& b) {\n    if (_is_zero(a) || _is_zero(b))\
-    \ return {};\n    if (_is_one(a)) return b;\n    if (_is_one(b)) return a;\n \
-    \   if (min<int>(a.size(), b.size()) <= 128) {\n      return a.size() < b.size()\
-    \ ? _mul_naive(b, a) : _mul_naive(a, b);\n    }\n    return _mul_fft(a, b);\n\
-    \  }\n  // 0 <= A < 1e18, 1 <= B < 1e9\n  static pair<vector<int>, vector<int>>\
-    \ _divmod_li(const vector<int>& a,\n                                         \
-    \          const vector<int>& b) {\n    assert(0 <= (int)a.size() && (int)a.size()\
-    \ <= 2);\n    assert((int)b.size() == 1);\n    long long va = _to_ll(a);\n   \
-    \ int vb = b[0];\n    return {_integer_to_vec(va / vb), _integer_to_vec(va % vb)};\n\
-    \  }\n  // 0 <= A < 1e18, 1 <= B < 1e18\n  static pair<vector<int>, vector<int>>\
-    \ _divmod_ll(const vector<int>& a,\n                                         \
-    \          const vector<int>& b) {\n    assert(0 <= (int)a.size() && (int)a.size()\
-    \ <= 2);\n    assert(1 <= (int)b.size() && (int)b.size() <= 2);\n    long long\
-    \ va = _to_ll(a), vb = _to_ll(b);\n    return {_integer_to_vec(va / vb), _integer_to_vec(va\
-    \ % vb)};\n  }\n  // 1 <= B < 1e9\n  static pair<vector<int>, vector<int>> _divmod_1e9(const\
-    \ vector<int>& a,\n                                                    const vector<int>&\
-    \ b) {\n    assert((int)b.size() == 1);\n    if (b[0] == 1) return {a, {}};\n\
-    \    if ((int)a.size() <= 2) return _divmod_li(a, b);\n    vector<int> quo(a.size());\n\
-    \    long long d = 0;\n    int b0 = b[0];\n    for (int i = a.size() - 1; i >=\
-    \ 0; i--) {\n      d = d * D + a[i];\n      assert(d < 1LL * D * b0);\n      int\
-    \ q = d / b0, r = d % b0;\n      quo[i] = q, d = r;\n    }\n    _shrink(quo);\n\
-    \    return {quo, d ? vector<int>{int(d)} : vector<int>{}};\n  }\n  // 0 <= A,\
-    \ 1 <= B\n  static pair<vector<int>, vector<int>> _divmod_naive(const vector<int>&\
-    \ a,\n                                                      const vector<int>&\
-    \ b) {\n    if (_is_zero(b)) {\n      cerr << \"Divide by Zero Exception\" <<\
-    \ endl;\n      exit(1);\n    }\n    assert(1 <= (int)b.size());\n    if ((int)b.size()\
-    \ == 1) return _divmod_1e9(a, b);\n    if (max<int>(a.size(), b.size()) <= 2)\
-    \ return _divmod_ll(a, b);\n    if (_lt(a, b)) return {{}, a};\n    // B >= 1e9,\
-    \ A >= B\n    int norm = D / (b.back() + 1);\n    vector<int> x = _mul(a, {norm});\n\
-    \    vector<int> y = _mul(b, {norm});\n    int yb = y.back();\n    vector<int>\
-    \ quo(x.size() - y.size() + 1);\n    vector<int> rem(x.end() - y.size(), x.end());\n\
-    \    for (int i = quo.size() - 1; i >= 0; i--) {\n      if (rem.size() < y.size())\
-    \ {\n        // do nothing\n      } else if (rem.size() == y.size()) {\n     \
-    \   if (_leq(y, rem)) {\n          quo[i] = 1, rem = _sub(rem, y);\n        }\n\
-    \      } else {\n        assert(y.size() + 1 == rem.size());\n        long long\
-    \ rb = 1LL * rem[rem.size() - 1] * D + rem[rem.size() - 2];\n        int q = rb\
-    \ / yb;\n        vector<int> yq = _mul(y, {q});\n        // \u771F\u306E\u5546\
-    \u306F q-2 \u4EE5\u4E0A q+1 \u4EE5\u4E0B\u3060\u304C\u81EA\u4FE1\u304C\u7121\u3044\
-    \u306E\u3067\u5FF5\u306E\u305F\u3081 while \u3092\u56DE\u3059\n        while (_lt(rem,\
-    \ yq)) q--, yq = _sub(yq, y);\n        rem = _sub(rem, yq);\n        while (_leq(y,\
-    \ rem)) q++, rem = _sub(rem, y);\n        quo[i] = q;\n      }\n      if (i) rem.insert(begin(rem),\
-    \ x[i - 1]);\n    }\n    _shrink(quo), _shrink(rem);\n    auto [q2, r2] = _divmod_1e9(rem,\
-    \ {norm});\n    assert(_is_zero(r2));\n    return {quo, q2};\n  }\n\n  // 0 <=\
-    \ A, 1 <= B\n  static pair<vector<int>, vector<int>> _divmod_dc(const vector<int>&\
-    \ a,\n                                                   const vector<int>& b);\n\
-    \n  // 1 / a \u3092 \u7D76\u5BFE\u8AA4\u5DEE B^{-deg} \u3067\u6C42\u3081\u308B\
-    \n  static vector<int> _calc_inv(const vector<int>& a, int deg) {\n    assert(!a.empty()\
-    \ && D / 2 <= a.back() and a.back() < D);\n    int k = deg, c = a.size();\n  \
-    \  while (k > 64) k = (k + 1) / 2;\n    vector<int> z(c + k + 1);\n    z.back()\
-    \ = 1;\n    z = _divmod_naive(z, a).first;\n    while (k < deg) {\n      vector<int>\
-    \ s = _mul(z, z);\n      s.insert(begin(s), 0);\n      int d = min(c, 2 * k +\
-    \ 1);\n      vector<int> t{end(a) - d, end(a)}, u = _mul(s, t);\n      u.erase(begin(u),\
-    \ begin(u) + d);\n      vector<int> w(k + 1), w2 = _add(z, z);\n      copy(begin(w2),\
-    \ end(w2), back_inserter(w));\n      z = _sub(w, u);\n      z.erase(begin(z));\n\
-    \      k *= 2;\n    }\n    z.erase(begin(z), begin(z) + k - deg);\n    return\
-    \ z;\n  }\n\n  static pair<vector<int>, vector<int>> _divmod_newton(const vector<int>&\
-    \ a,\n                                                       const vector<int>&\
-    \ b) {\n    if (_is_zero(b)) {\n      cerr << \"Divide by Zero Exception\" <<\
-    \ endl;\n      exit(1);\n    }\n    if ((int)b.size() <= 64) return _divmod_naive(a,\
-    \ b);\n    if ((int)a.size() - (int)b.size() <= 64) return _divmod_naive(a, b);\n\
-    \    int norm = D / (b.back() + 1);\n    vector<int> x = _mul(a, {norm});\n  \
-    \  vector<int> y = _mul(b, {norm});\n    int s = x.size(), t = y.size();\n   \
-    \ int deg = s - t + 2;\n    vector<int> z = _calc_inv(y, deg);\n    vector<int>\
-    \ q = _mul(x, z);\n    q.erase(begin(q), begin(q) + t + deg);\n    vector<int>\
-    \ yq = _mul(y, {q});\n    while (_lt(x, yq)) q = _sub(q, {1}), yq = _sub(yq, y);\n\
-    \    vector<int> r = _sub(x, yq);\n    while (_leq(y, r)) q = _add(q, {1}), r\
-    \ = _sub(r, y);\n    _shrink(q), _shrink(r);\n    auto [q2, r2] = _divmod_1e9(r,\
-    \ {norm});\n    assert(_is_zero(r2));\n    return {q, q2};\n  }\n\n  // int ->\
-    \ string\n  // \u5148\u982D\u304B\u3069\u3046\u304B\u306B\u5FDC\u3058\u3066 zero\
-    \ padding \u3059\u308B\u304B\u3092\u6C7A\u3081\u308B\n  static string _itos(int\
-    \ x, bool zero_padding) {\n    assert(0 <= x && x < D);\n    string res;\n   \
-    \ for (int i = 0; i < logD; i++) {\n      res.push_back('0' + x % 10), x /= 10;\n\
-    \    }\n    if (!zero_padding) {\n      while (res.size() && res.back() == '0')\
-    \ res.pop_back();\n      assert(!res.empty());\n    }\n    reverse(begin(res),\
-    \ end(res));\n    return res;\n  }\n\n  // convert ll to vec\n  template <typename\
-    \ I,\n            enable_if_t<internal::is_broadly_integral_v<I>>* = nullptr>\n\
-    \  static vector<int> _integer_to_vec(I x) {\n    if constexpr (internal::is_broadly_signed_v<I>)\
-    \ {\n      assert(x >= 0);\n    }\n    vector<int> res;\n    while (x) res.push_back(x\
-    \ % D), x /= D;\n    return res;\n  }\n\n  static long long _to_ll(const vector<int>&\
-    \ a) {\n    long long res = 0;\n    for (int i = (int)a.size() - 1; i >= 0; i--)\
-    \ res = res * D + a[i];\n    return res;\n  }\n\n  static __int128_t _to_i128(const\
-    \ vector<int>& a) {\n    __int128_t res = 0;\n    for (int i = (int)a.size() -\
-    \ 1; i >= 0; i--) res = res * D + a[i];\n    return res;\n  }\n\n  static void\
-    \ _dump(const vector<int>& a, string s = \"\") {\n    if (!s.empty()) cerr <<\
-    \ s << \" : \";\n    cerr << \"{ \";\n    for (int i = 0; i < (int)a.size(); i++)\
-    \ cerr << a[i] << \", \";\n    cerr << \"}\" << endl;\n  }\n};\n\nusing bigint\
-    \ = MultiPrecisionInteger;\n\n/**\n * @brief \u591A\u500D\u9577\u6574\u6570\n\
-    \ */\n"
+    \ */\n#line 8 \"math/bigint-gcd.hpp\"\n\nnamespace GCDforBigintImpl {\n\nbigint\
+    \ bigint_pow(bigint a, long long k) {\n  bigint res{1};\n  while (k) {\n    if\
+    \ (k & 1) res = res * a;\n    k >>= 1;\n    if (k) a = a * a;\n  }\n  return res;\n\
+    }\n\n// a = 2^x 5^y \u306E\u5F62\u3067\u8868\u73FE\u3059\u308B\npair<int, int>\
+    \ shrink(int a) {\n  assert(a > 0);\n  int x = __builtin_ctz(a);\n  a >>= x;\n\
+    \  int y = a == 1        ? 0\n          : a == 5      ? 1\n          : a == 25\
+    \     ? 2\n          : a == 125    ? 3\n          : a == 625    ? 4\n        \
+    \  : a == 3125   ? 5\n          : a == 15625  ? 6\n          : a == 78125  ? 7\n\
+    \          : a == 390625 ? 8\n                        : 9;\n  return {x, y};\n\
+    }\n\npair<int, int> shrink(bigint& a) {\n  assert(a.neg == false);\n  if (a.dat.empty())\
+    \ return {0, 0};\n  pair<int, int> res{0, 0};\n  while (true) {\n    int g = gcd(bigint::D,\
+    \ a.dat[0]);\n    if (g == 1) break;\n    if (g != bigint::D) a *= bigint::D /\
+    \ g;\n    a.dat.erase(begin(a.dat));\n    auto s = shrink(g);\n    res.first +=\
+    \ s.first, res.second += s.second;\n  }\n  return res;\n}\n\ntemplate <bool FAST\
+    \ = false>\nbigint gcd_d_ary(bigint a, bigint b) {\n  a.neg = b.neg = false;\n\
+    \  if constexpr (FAST) {\n    if (max<int>(a.dat.size(), b.dat.size()) <= 4) {\n\
+    \      return __int128_t(BinaryGCDImpl::binary_gcd128(a.to_i128(), b.to_i128()));\n\
+    \    }\n  }\n  if (a.dat.empty()) return b;\n  if (b.dat.empty()) return a;\n\
+    \  pair<int, int> s = shrink(a), t = shrink(b);\n  if (a < b) swap(a, b);\n  while\
+    \ (true) {\n    if (b.dat.empty()) break;\n    if constexpr (FAST) {\n      if\
+    \ ((int)a.dat.size() <= 4) break;\n    }\n    a = a - b;\n    if (!a.dat.empty())\
+    \ {\n      while (true) {\n        int g = gcd<int>(a.dat[0], bigint::D);\n  \
+    \      if (g == 1) break;\n        if (g != bigint::D) a *= bigint::D / g;\n \
+    \       a.dat.erase(begin(a.dat));\n      }\n    }\n    if (a < b) swap(a, b);\n\
+    \  }\n  assert(a >= b);\n  bigint g;\n  if constexpr (FAST) {\n    if (b.dat.empty())\
+    \ {\n      g = a;\n    } else {\n      g = __int128_t(BinaryGCDImpl::binary_gcd128(a.to_i128(),\
+    \ b.to_i128()));\n    }\n  } else {\n    g = a;\n  }\n  int e2 = min(s.first,\
+    \ t.first);\n  int e5 = min(s.second, t.second);\n  if (e2) g *= bigint_pow(bigint{2},\
+    \ e2);\n  if (e5) g *= bigint_pow(bigint{5}, e5);\n  return g;\n}\n}  // namespace\
+    \ GCDforBigintImpl\n\nMultiPrecisionInteger gcd(const MultiPrecisionInteger& a,\n\
+    \                          const MultiPrecisionInteger& b) {\n  return GCDforBigintImpl::gcd_d_ary<true>(a,\
+    \ b);\n}\n#line 5 \"math/bigint-rational.hpp\"\n\nusing BigRational = RationalBase<bigint,\
+    \ bigint>;\n\ndouble to_double(const BigRational& r) {\n  pair<long double, int>\
+    \ a = r.x.dfp();\n  pair<long double, int> b = r.y.dfp();\n  return a.first /\
+    \ b.first * powl(10.0, a.second - b.second);\n}\n#line 9 \"math/bigint-all.hpp\"\
+    \n//\nusing mint = BigRational;\nusing vm = vector<mint>;\nusing vvm = vector<vm>;\n\
+    using fps = FormalPowerSeries_rational<mint>;\nBinomial_rational<mint> C;\n"
+  code: '#pragma once
+
+
+    #include "rational-binomial.hpp"
+
+    #include "rational-fps.hpp"
+
+    #include "rational.hpp"
+
+    //
+
+    #include "bigint-rational.hpp"
+
+    #include "bigint.hpp"
+
+    //
+
+    using mint = BigRational;
+
+    using vm = vector<mint>;
+
+    using vvm = vector<vm>;
+
+    using fps = FormalPowerSeries_rational<mint>;
+
+    Binomial_rational<mint> C;
+
+    '
   dependsOn:
+  - math/rational-binomial.hpp
+  - math/rational.hpp
   - internal/internal-type-traits.hpp
+  - math-fast/gcd.hpp
+  - math/rational-fps.hpp
+  - math/bigint-rational.hpp
+  - math/bigint-gcd.hpp
+  - math/bigint.hpp
   - ntt/arbitrary-ntt.hpp
   - modint/montgomery-modint.hpp
   - ntt/ntt.hpp
   isVerificationFile: false
-  path: math/bigint.hpp
-  requiredBy:
-  - math/bigint-garner.hpp
-  - math/bigint-rational.hpp
-  - math/bigint-gcd.hpp
-  - math/bigint-all.hpp
-  timestamp: '2023-05-29 20:50:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - verify/verify-yuki/yuki-0303.test.cpp
-  - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
-  - verify/verify-yosupo-other/yosupo-a-plus-b-128bit-bigint.test.cpp
-  - verify/verify-unit-test/bigint-gcd.test.cpp
-  - verify/verify-unit-test/bigint3.test.cpp
-  - verify/verify-unit-test/bigint2.test.cpp
-  - verify/verify-unit-test/bigint.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/bigrational.test.cpp
-  - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
-  - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
-  - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-c.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-b.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-f.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-d.test.cpp
-  - verify/verify-aoj-ntl/aoj-ntl-2-e.test.cpp
-documentation_of: math/bigint.hpp
+  path: math/bigint-all.hpp
+  requiredBy: []
+  timestamp: '2023-09-02 22:21:41+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: math/bigint-all.hpp
 layout: document
 redirect_from:
-- /library/math/bigint.hpp
-- /library/math/bigint.hpp.html
-title: "\u591A\u500D\u9577\u6574\u6570"
+- /library/math/bigint-all.hpp
+- /library/math/bigint-all.hpp.html
+title: math/bigint-all.hpp
 ---

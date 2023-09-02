@@ -58,6 +58,9 @@ data:
       path: data-structure/skew-heap.hpp
       title: Skew Heap
     - icon: ':heavy_check_mark:'
+      path: data-structure/slide-window-aggregation-deque.hpp
+      title: Slide Window Aggrigation (deque)
+    - icon: ':heavy_check_mark:'
       path: data-structure/slide-window-aggregation.hpp
       title: Slide Window Aggrigation
     - icon: ':heavy_check_mark:'
@@ -407,6 +410,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: marathon/log_table.hpp
       title: marathon/log_table.hpp
+    - icon: ':warning:'
+      path: marathon/multi-armed-bandit.hpp
+      title: marathon/multi-armed-bandit.hpp
     - icon: ':heavy_check_mark:'
       path: marathon/sa-manager.hpp
       title: Multipoint Simulated Annealing
@@ -421,6 +427,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/affine-transformation.hpp
       title: "\u30A2\u30D5\u30A3\u30F3\u5909\u63DB"
+    - icon: ':warning:'
+      path: math/bigint-all.hpp
+      title: math/bigint-all.hpp
     - icon: ':heavy_check_mark:'
       path: math/bigint-garner.hpp
       title: Garner's algorithm for bigint
@@ -472,6 +481,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: math/nimber.hpp
       title: Nim Product
+    - icon: ':heavy_check_mark:'
+      path: math/primitive-root-ll.hpp
+      title: math/primitive-root-ll.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/rational-binomial.hpp
+      title: math/rational-binomial.hpp
+    - icon: ':heavy_check_mark:'
+      path: math/rational-fps.hpp
+      title: math/rational-fps.hpp
     - icon: ':heavy_check_mark:'
       path: math/rational.hpp
       title: math/rational.hpp
@@ -533,6 +551,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: matrix/characteristric-polynomial.hpp
       title: matrix/characteristric-polynomial.hpp
+    - icon: ':heavy_check_mark:'
+      path: matrix/determinant-arbitrary-mod.hpp
+      title: matrix/determinant-arbitrary-mod.hpp
     - icon: ':heavy_check_mark:'
       path: matrix/f2_matrix.hpp
       title: matrix/f2_matrix.hpp
@@ -1289,6 +1310,9 @@ data:
       path: verify/verify-unit-test/bigint3.test.cpp
       title: verify/verify-unit-test/bigint3.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-unit-test/bigrational.test.cpp
+      title: verify/verify-unit-test/bigrational.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-unit-test/bitset-find-prev.test.cpp
       title: verify/verify-unit-test/bitset-find-prev.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1498,6 +1522,9 @@ data:
       path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
       title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1599,6 +1626,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
+      title: verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
       title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
@@ -1858,6 +1891,9 @@ data:
       path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
+      title: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
       title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1938,6 +1974,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
       title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+      title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
       title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
@@ -2252,6 +2291,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1875.test.cpp
       title: verify/verify-yuki/yuki-1875.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+      title: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yuki/yuki-1939.test.cpp
       title: verify/verify-yuki/yuki-1939.test.cpp

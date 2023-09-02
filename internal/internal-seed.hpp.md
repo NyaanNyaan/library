@@ -8,12 +8,18 @@ data:
   - icon: ':heavy_check_mark:'
     path: internal/internal-hash-function.hpp
     title: "\u30CF\u30C3\u30B7\u30E5\u95A2\u6570"
+  - icon: ':warning:'
+    path: marathon/multi-armed-bandit.hpp
+    title: marathon/multi-armed-bandit.hpp
   - icon: ':heavy_check_mark:'
     path: marathon/sa-manager.hpp
     title: Multipoint Simulated Annealing
   - icon: ':warning:'
     path: marathon/top-k.hpp
     title: marathon/top-k.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/primitive-root-ll.hpp
+    title: math/primitive-root-ll.hpp
   - icon: ':heavy_check_mark:'
     path: matrix/black-box-linear-algebra.hpp
     title: Black Box Linear Algebra
@@ -69,6 +75,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/complex-fft.test.cpp
     title: verify/verify-unit-test/complex-fft.test.cpp
@@ -244,6 +253,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
     title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+    title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multipoint-evaluation-chirp-z.test.cpp
   - icon: ':heavy_check_mark:'
@@ -311,7 +323,9 @@ data:
   - modulo/mod-kth-root.hpp
   - prime/fast-factorize.hpp
   - rbst/treap.hpp
+  - math/primitive-root-ll.hpp
   - hashmap/hashmap-unerasable.hpp
+  - marathon/multi-armed-bandit.hpp
   - marathon/top-k.hpp
   - marathon/sa-manager.hpp
   timestamp: '2023-08-10 13:25:59+09:00'
@@ -383,6 +397,7 @@ data:
   - verify/verify-unit-test/fast-inv.test.cpp
   - verify/verify-unit-test/fps-sparse.test.cpp
   - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
@@ -390,6 +405,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp

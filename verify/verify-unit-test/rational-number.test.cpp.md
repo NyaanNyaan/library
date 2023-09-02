@@ -11,6 +11,12 @@ data:
     path: math-fast/gcd.hpp
     title: binary GCD
   - icon: ':heavy_check_mark:'
+    path: math/rational-binomial.hpp
+    title: math/rational-binomial.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/rational-fps.hpp
+    title: math/rational-fps.hpp
+  - icon: ':heavy_check_mark:'
     path: math/rational.hpp
     title: math/rational.hpp
   - icon: ':heavy_check_mark:'
@@ -225,18 +231,18 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-unit-test/rational-number.test.cpp\"\n\n//\n#line 2 \"math/rational.hpp\"\
-    \n\n#line 6 \"math/rational.hpp\"\nusing namespace std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\
-    \n\n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
-    \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
-    \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
-    \                   is_same_v<T, __uint128_t>,\n                           true_type,\
-    \ false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed =\n   \
-    \ typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n       \
-    \                    true_type, false_type>::type;\n\ntemplate <typename T>\n\
-    using is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T> || is_same_v<T,\
-    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
-    #define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ 4 \"verify/verify-unit-test/rational-number.test.cpp\"\n//\n#line 2 \"math/rational-binomial.hpp\"\
+    \n\n#line 2 \"math/rational.hpp\"\n\n#line 6 \"math/rational.hpp\"\nusing namespace\
+    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
+    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
+    \                               is_same_v<T, __uint128_t>,\n                 \
+    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
+    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
+    \                           true_type, false_type>::type;\n\ntemplate <typename\
+    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
     \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
     ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
     \                                              \\\n  template <class, class =\
@@ -295,25 +301,166 @@ data:
     \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
     \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
     \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
-    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  T to_mint(T\
-    \ mod) const {\n    assert(mod != 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n\
-    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u\
-    \ -= t * v, v);\n    }\n    return U((u % mod + mod) % mod) * x % mod;\n  }\n\
-    };\n\nusing Rational = RationalBase<long long, __int128_t>;\n\ntemplate <typename\
-    \ R = Rational>\nstruct Binomial {\n  vector<R> fc;\n  Binomial(int = 0) { fc.emplace_back(1);\
-    \ }\n  void extend() {\n    int n = fc.size();\n    R nxt = fc.back() * n;\n \
-    \   fc.push_back(nxt);\n  }\n  R fac(int n) {\n    if (n < 0) return 0;\n    while\
-    \ ((int)fc.size() <= n) extend();\n    return fc[n];\n  }\n  R finv(int n) {\n\
-    \    if (n < 0) return 0;\n    return fac(n).inverse();\n  }\n  R inv(int n) {\n\
-    \    if (n < 0) return -inv(-n);\n    return R{1, max(n, 1)};\n  }\n  R C(int\
-    \ n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r) { return C(n, r);\
-    \ }\n  template <typename I>\n  R multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
+    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\
+    \u30E3\u30B9\u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\
+    \u306F to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod !=\
+    \ 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t =\
+    \ a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return\
+    \ U((u % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
+    \ long, __int128_t>;\n#line 4 \"math/rational-binomial.hpp\"\n\ntemplate <typename\
+    \ R = Rational>\nstruct Binomial_rational {\n  vector<R> fc;\n  Binomial_rational(int\
+    \ = 0) { fc.emplace_back(1); }\n  void extend() {\n    int n = fc.size();\n  \
+    \  R nxt = fc.back() * n;\n    fc.push_back(nxt);\n  }\n  R fac(int n) {\n   \
+    \ if (n < 0) return 0;\n    while ((int)fc.size() <= n) extend();\n    return\
+    \ fc[n];\n  }\n  R finv(int n) {\n    if (n < 0) return 0;\n    return fac(n).inverse();\n\
+    \  }\n  R inv(int n) {\n    if (n < 0) return -inv(-n);\n    return R{1, max(n,\
+    \ 1)};\n  }\n  R C(int n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n\
+    \    return fac(n) * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r)\
+    \ { return C(n, r); }\n  template <typename I>\n  R multinomial(const vector<I>&\
+    \ r) {\n    static_assert(is_integral<I>::value == true);\n    int n = 0;\n  \
+    \  for (auto& x : r) {\n      if (x < 0) return R{0};\n      n += x;\n    }\n\
+    \    R res = fac(n);\n    for (auto& x : r) res *= finv(x);\n    return res;\n\
+    \  }\n\n  template <typename I>\n  R operator()(const vector<I>& r) {\n    return\
+    \ multinomial(r);\n  }\n};\n#line 2 \"math/rational-fps.hpp\"\n\n#line 5 \"math/rational-fps.hpp\"\
+    \n\ntemplate <typename R = Rational>\nstruct FormalPowerSeries_rational : vector<R>\
+    \ {\n  using vector<R>::vector;\n  using fps = FormalPowerSeries_rational;\n\n\
+    \  fps &operator+=(const fps &r) {\n    if (r.size() > this->size()) this->resize(r.size());\n\
+    \    for (int i = 0; i < (int)r.size(); i++) (*this)[i] += r[i];\n    return *this;\n\
+    \  }\n\n  fps &operator+=(const R &r) {\n    if (this->empty()) this->resize(1);\n\
+    \    (*this)[0] += r;\n    return *this;\n  }\n\n  fps &operator-=(const fps &r)\
+    \ {\n    if (r.size() > this->size()) this->resize(r.size());\n    for (int i\
+    \ = 0; i < (int)r.size(); i++) (*this)[i] -= r[i];\n    return *this;\n  }\n\n\
+    \  fps &operator-=(const R &r) {\n    if (this->empty()) this->resize(1);\n  \
+    \  (*this)[0] -= r;\n    return *this;\n  }\n\n  fps &operator*=(const fps &r)\
+    \ {\n    int n = this->size() + r.size() - 1;\n    fps f(n);\n    for (int i =\
+    \ 0; i < (int)this->size(); i++) {\n      for (int j = 0; j < (int)r.size(); j++)\
+    \ {\n        f[i + j] += (*this)[i] * r[j];\n      }\n    }\n    return *this\
+    \ = f;\n  }\n\n  fps &operator*=(const R &v) {\n    for (int k = 0; k < (int)this->size();\
+    \ k++) (*this)[k] *= v;\n    return *this;\n  }\n\n  fps &operator/=(const fps\
+    \ &r) {\n    if (this->size() < r.size()) {\n      this->clear();\n      return\
+    \ *this;\n    }\n    int n = this->size() - r.size() + 1;\n    fps f(*this), g(r);\n\
+    \    g.shrink();\n    R coeff = g.back().inverse();\n    for (auto &x : g) x *=\
+    \ coeff;\n    int deg = (int)f.size() - (int)g.size() + 1;\n    int gs = g.size();\n\
+    \    fps quo(deg);\n    for (int i = deg - 1; i >= 0; i--) {\n      quo[i] = f[i\
+    \ + gs - 1];\n      for (int j = 0; j < gs; j++) f[i + j] -= quo[i] * g[j];\n\
+    \    }\n    *this = quo * coeff;\n    this->resize(n, R(0));\n    return *this;\n\
+    \  }\n\n  fps &operator%=(const fps &r) {\n    *this -= *this / r * r;\n    shrink();\n\
+    \    return *this;\n  }\n\n  fps operator+(const fps &r) const { return fps(*this)\
+    \ += r; }\n  fps operator+(const R &v) const { return fps(*this) += v; }\n  fps\
+    \ operator-(const fps &r) const { return fps(*this) -= r; }\n  fps operator-(const\
+    \ R &v) const { return fps(*this) -= v; }\n  fps operator*(const fps &r) const\
+    \ { return fps(*this) *= r; }\n  fps operator*(const R &v) const { return fps(*this)\
+    \ *= v; }\n  fps operator/(const fps &r) const { return fps(*this) /= r; }\n \
+    \ fps operator%(const fps &r) const { return fps(*this) %= r; }\n  fps operator-()\
+    \ const {\n    fps ret(this->size());\n    for (int i = 0; i < (int)this->size();\
+    \ i++) ret[i] = -(*this)[i];\n    return ret;\n  }\n\n  void shrink() {\n    while\
+    \ (this->size() && this->back() == R(0)) this->pop_back();\n  }\n\n  fps rev()\
+    \ const {\n    fps ret(*this);\n    reverse(begin(ret), end(ret));\n    return\
+    \ ret;\n  }\n\n  fps dot(fps r) const {\n    fps ret(min(this->size(), r.size()));\n\
+    \    for (int i = 0; i < (int)ret.size(); i++) ret[i] = (*this)[i] * r[i];\n \
+    \   return ret;\n  }\n\n  // \u524D sz \u9805\u3092\u53D6\u3063\u3066\u304F\u308B\
+    \u3002sz \u306B\u8DB3\u308A\u306A\u3044\u9805\u306F 0 \u57CB\u3081\u3059\u308B\
+    \n  fps pre(int sz) const {\n    fps ret(begin(*this), begin(*this) + min((int)this->size(),\
+    \ sz));\n    if ((int)ret.size() < sz) ret.resize(sz);\n    return ret;\n  }\n\
+    \n  fps operator>>(int sz) const {\n    if ((int)this->size() <= sz) return {};\n\
+    \    fps ret(*this);\n    ret.erase(ret.begin(), ret.begin() + sz);\n    return\
+    \ ret;\n  }\n\n  fps operator<<(int sz) const {\n    fps ret(*this);\n    ret.insert(ret.begin(),\
+    \ sz, R(0));\n    return ret;\n  }\n\n  fps diff() const {\n    const int n =\
+    \ (int)this->size();\n    fps ret(max(0, n - 1));\n    R one(1), coeff(1);\n \
+    \   for (int i = 1; i < n; i++) {\n      ret[i - 1] = (*this)[i] * coeff;\n  \
+    \    coeff += one;\n    }\n    return ret;\n  }\n\n  fps integral() const {\n\
+    \    const int n = (int)this->size();\n    fps ret(n + 1);\n    for (int i = 0;\
+    \ i < n; i++) ret[i + 1] = (*this)[i] / (i + 1);\n    return ret;\n  }\n\n  R\
+    \ eval(R x) const {\n    R r = 0, w = 1;\n    for (auto &v : *this) r += w * v,\
+    \ w *= x;\n    return r;\n  }\n\n  fps inv(int deg = -1) const {\n    assert((*this)[0]\
+    \ != R(0));\n    if (deg == -1) deg = (*this).size();\n    fps ret{R(1) / (*this)[0]};\n\
+    \    for (int i = 1; i < deg; i <<= 1) {\n      ret = (ret + ret - ret * ret *\
+    \ (*this).pre(i << 1)).pre(i << 1);\n    }\n    return ret.pre(deg);\n  }\n  fps\
+    \ log(int deg = -1) const {\n    assert(!(*this).empty() && (*this)[0] == R(1));\n\
+    \    if (deg == -1) deg = (int)this->size();\n    return (this->diff() * this->inv(deg)).pre(deg\
+    \ - 1).integral();\n  }\n  fps exp(int deg = -1) const {\n    assert((*this).size()\
+    \ == 0 || (*this)[0] == R(0));\n    if (deg == -1) deg = (int)this->size();\n\
+    \    fps ret{R(1)};\n    for (int i = 1; i < deg; i <<= 1) {\n      ret = (ret\
+    \ * (pre(i << 1) + R(1) - ret.log(i << 1))).pre(i << 1);\n    }\n    return ret.pre(deg);\n\
+    \  }\n  fps pow(int64_t k, int deg = -1) const {\n    const int n = (int)this->size();\n\
+    \    if (deg == -1) deg = n;\n    if (k == 0) {\n      fps ret(deg);\n      if\
+    \ (deg) ret[0] = 1;\n      return ret;\n    }\n    for (int i = 0; i < n; i++)\
+    \ {\n      if ((*this)[i] != R(0)) {\n        R rev = R(1) / (*this)[i];\n   \
+    \     fps ret = (((*this * rev) >> i).log(deg) * k).exp(deg);\n        ret *=\
+    \ (*this)[i].pow(k);\n        ret = (ret << (i * k)).pre(deg);\n        if ((int)ret.size()\
+    \ < deg) ret.resize(deg, R(0));\n        return ret;\n      }\n      if (__int128_t(i\
+    \ + 1) * k >= deg) return fps(deg, R(0));\n    }\n    return fps(deg, R(0));\n\
+    \  }\n};\n#line 8 \"verify/verify-unit-test/rational-number.test.cpp\"\n//\n#line\
+    \ 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
+    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
+    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
+    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
+    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
+    \ u32 n2 = -u64(mod) % mod;\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n  static_assert(r\
+    \ * mod == 1, \"this code has bugs.\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
+    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
+    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
+    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
+    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
+    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
+    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
+    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
+    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
+    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
+    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
+    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
+    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
+    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
+    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ }\n  constexpr mint operator+() const { return mint(*this); }\n\n  constexpr\
+    \ mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
+    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  constexpr mint inverse() const {\n    int x = get(), y = mod,\
+    \ u = 1, v = 0, t = 0, tmp = 0;\n    while (y > 0) {\n      t = x / y;\n     \
+    \ x -= t * y, u -= t * v;\n      tmp = x, x = y, y = tmp;\n      tmp = u, u =\
+    \ v, v = tmp;\n    }\n    return mint{u};\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
+    \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
+    \    return (is);\n  }\n\n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
+    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
+    \ { return mod; }\n};\n#line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\
+    \nusing namespace std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E\
+    \ MAX \u306B \u300CC(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\
+    \u308B\u6700\u5927\u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\
+    \u304F\u3089\u3044\u306B\u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\
+    \u7B97\u3057\u3066 0 \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\
+    \u6E08\u307F\ntemplate <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n\
+    \  Binomial(int MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\"\
+    );\n    f.resize(1, T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n \
+    \   if (MAX > 0) extend(MAX + 1);\n  }\n\n  void extend(int m = -1) {\n    int\
+    \ n = f.size();\n    if (m == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n\
+    \    if (n >= m) return;\n    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n\
+    \    for (int i = n; i < m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m -\
+    \ 1].inverse();\n    h[m - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2;\
+    \ i >= n; i--) {\n      g[i] = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i -\
+    \ 1];\n    }\n  }\n\n  T fac(int i) {\n    if (i < 0) return T(0);\n    while\
+    \ (i >= (int)f.size()) extend();\n    return f[i];\n  }\n\n  T finv(int i) {\n\
+    \    if (i < 0) return T(0);\n    while (i >= (int)g.size()) extend();\n    return\
+    \ g[i];\n  }\n\n  T inv(int i) {\n    if (i < 0) return -inv(-i);\n    while (i\
+    \ >= (int)h.size()) extend();\n    return h[i];\n  }\n\n  T C(int n, int r) {\n\
+    \    if (n < 0 || n < r || r < 0) return T(0);\n    return fac(n) * finv(n - r)\
+    \ * finv(r);\n  }\n\n  inline T operator()(int n, int r) { return C(n, r); }\n\
+    \n  template <typename I>\n  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
     \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
-    \ R{0};\n      n += x;\n    }\n    R res = fac(n);\n    for (auto& x : r) res\
-    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  R operator()(const\
-    \ vector<I>& r) {\n    return multinomial(r);\n  }\n};\n#line 2 \"misc/rng.hpp\"\
-    \n\n#line 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\
+    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
+    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
+    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
+    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
+    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
+    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
+    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
+    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
+    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 11 \"verify/verify-unit-test/rational-number.test.cpp\"\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\n//\n#line 2 \"misc/rng.hpp\"\n\
+    \n#line 2 \"internal/internal-seed.hpp\"\n\n#line 4 \"internal/internal-seed.hpp\"\
     \nusing namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
     \ {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
@@ -341,132 +488,78 @@ data:
     \ <typename T>\nvoid randshf(vector<T>& v) {\n  int n = v.size();\n  for (int\
     \ i = 1; i < n; i++) swap(v[i], v[randint(0, i + 1)]);\n}\n\n}  // namespace my_rand\n\
     \nusing my_rand::randint;\nusing my_rand::randset;\nusing my_rand::randshf;\n\
-    using my_rand::rnd;\nusing my_rand::rng;\n#line 2 \"modint/montgomery-modint.hpp\"\
-    \n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod\
-    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
-    invalid, mod % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\"\
-    );\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
-    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
-    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
-    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
-    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
-    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
-    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
-    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
-    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n  constexpr mint operator+() const { return mint(*this); }\n\n  constexpr\
-    \ mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
-    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
-    \ ret;\n  }\n\n  constexpr mint inverse() const {\n    int x = get(), y = mod,\
-    \ u = 1, v = 0, t = 0, tmp = 0;\n    while (y > 0) {\n      t = x / y;\n     \
-    \ x -= t * y, u -= t * v;\n      tmp = x, x = y, y = tmp;\n      tmp = u, u =\
-    \ v, v = tmp;\n    }\n    return mint{u};\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n\n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 9 \"verify/verify-unit-test/rational-number.test.cpp\"\
-    \nusing mint = LazyMontgomeryModInt<998244353>;\n\nnamespace mint_binom {\n\n\
-    #line 2 \"modulo/binomial.hpp\"\n\n#line 6 \"modulo/binomial.hpp\"\nusing namespace\
-    \ std;\n\n// \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u306E MAX \u306B \u300C\
-    C(n, r) \u3084 fac(n) \u3067\u30AF\u30A8\u30EA\u3092\u6295\u3052\u308B\u6700\u5927\
-    \u306E n \u300D\n// \u3092\u5165\u308C\u308B\u3068\u500D\u901F\u304F\u3089\u3044\
-    \u306B\u306A\u308B\n// mod \u3092\u8D85\u3048\u3066\u524D\u8A08\u7B97\u3057\u3066\
-    \ 0 \u5272\u308A\u3092\u8E0F\u3080\u30D0\u30B0\u306F\u5BFE\u7B56\u6E08\u307F\n\
-    template <typename T>\nstruct Binomial {\n  vector<T> f, g, h;\n  Binomial(int\
-    \ MAX = 0) {\n    assert(T::get_mod() != 0 && \"Binomial<mint>()\");\n    f.resize(1,\
-    \ T{1});\n    g.resize(1, T{1});\n    h.resize(1, T{1});\n    if (MAX > 0) extend(MAX\
-    \ + 1);\n  }\n\n  void extend(int m = -1) {\n    int n = f.size();\n    if (m\
-    \ == -1) m = n * 2;\n    m = min<int>(m, T::get_mod());\n    if (n >= m) return;\n\
-    \    f.resize(m);\n    g.resize(m);\n    h.resize(m);\n    for (int i = n; i <\
-    \ m; i++) f[i] = f[i - 1] * T(i);\n    g[m - 1] = f[m - 1].inverse();\n    h[m\
-    \ - 1] = g[m - 1] * f[m - 2];\n    for (int i = m - 2; i >= n; i--) {\n      g[i]\
-    \ = g[i + 1] * T(i + 1);\n      h[i] = g[i] * f[i - 1];\n    }\n  }\n\n  T fac(int\
-    \ i) {\n    if (i < 0) return T(0);\n    while (i >= (int)f.size()) extend();\n\
-    \    return f[i];\n  }\n\n  T finv(int i) {\n    if (i < 0) return T(0);\n   \
-    \ while (i >= (int)g.size()) extend();\n    return g[i];\n  }\n\n  T inv(int i)\
-    \ {\n    if (i < 0) return -inv(-i);\n    while (i >= (int)h.size()) extend();\n\
-    \    return h[i];\n  }\n\n  T C(int n, int r) {\n    if (n < 0 || n < r || r <\
-    \ 0) return T(0);\n    return fac(n) * finv(n - r) * finv(r);\n  }\n\n  inline\
-    \ T operator()(int n, int r) { return C(n, r); }\n\n  template <typename I>\n\
-    \  T multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
-    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
-    \ T(0);\n      n += x;\n    }\n    T res = fac(n);\n    for (auto& x : r) res\
-    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  T operator()(const\
-    \ vector<I>& r) {\n    return multinomial(r);\n  }\n\n  T C_naive(int n, int r)\
-    \ {\n    if (n < 0 || n < r || r < 0) return T(0);\n    T ret = T(1);\n    r =\
-    \ min(r, n - r);\n    for (int i = 1; i <= r; ++i) ret *= inv(i) * (n--);\n  \
-    \  return ret;\n  }\n\n  T P(int n, int r) {\n    if (n < 0 || n < r || r < 0)\
-    \ return T(0);\n    return fac(n) * finv(n - r);\n  }\n\n  // [x^r] 1 / (1-x)^n\n\
-    \  T H(int n, int r) {\n    if (n < 0 || r < 0) return T(0);\n    return r ==\
-    \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 14 \"verify/verify-unit-test/rational-number.test.cpp\"\
-    \n\n}\n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  Rational a{4, 3},\
-    \ b{2, 3};\n\n  trc(a + b);\n  assert(a + b == 2);\n  trc(a - b);\n  assert(a\
-    \ - b == Rational(2, 3));\n  trc(a * b);\n  assert(a * b == Rational(8, 9));\n\
-    \  trc(a / b);\n  assert(a / b == 2);\n  trc(a.inverse());\n  assert(a.inverse()\
-    \ == Rational(3, 4));\n  trc(a.pow(3));\n  assert(a.pow(3) == Rational(64, 27));\n\
-    \n  trc(a > b);\n  assert(a > b == true);\n  trc(a >= b);\n  assert(a >= b ==\
-    \ true);\n  trc(a < b);\n  assert(a < b == false);\n  trc(a <= b);\n  assert(a\
-    \ <= b == false);\n\n  Binomial<Rational> C;\n  assert(C.fac(3) == 6);\n  assert(C.finv(3)\
-    \ == Rational(1, 6));\n  assert(C(4, 2) == 6);\n  assert(C(vi{3, 2}) == 10);\n\
-    \n  auto comp = [&](int i, int j, int k, int l) {\n    rep(b, 16) {\n      int\
-    \ ii = (b >> 0) % 2 ? -i : +i;\n      int jj = (b >> 1) % 2 ? -j : +j;\n     \
-    \ int kk = (b >> 2) % 2 ? -k : +k;\n      int ll = (b >> 3) % 2 ? -l : +l;\n \
-    \     Rational x{ii, jj}, y{kk, ll};\n      mint X = mint{ii} / jj;\n      mint\
-    \ Y = mint{kk} / ll;\n      assert(X + Y == (x + y).to_mint(998244353));\n   \
-    \   assert(X - Y == (x - y).to_mint(998244353));\n      assert(X * Y == (x * y).to_mint(998244353));\n\
-    \      if (Y != 0) {\n        assert(X / Y == (x / y).to_mint(998244353));\n \
-    \     }\n    }\n  };\n  rep(i, 20) rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i,\
-    \ j, k, l);\n  rep(t, 10000) {\n    int lower = t % 2 ? 1 : 32000;\n    ll i =\
-    \ rng(lower, 35000);\n    ll j = rng(lower, 35000);\n    ll k = rng(lower, 35000);\n\
-    \    ll l = rng(lower, 35000);\n    comp(i, j, k, l);\n  }\n\n  Binomial<Rational>\
-    \ C1;\n  mint_binom::Binomial<mint> C2;\n  reg(i, -15, 15) {\n    assert(C2.fac(i)\
-    \ == C1.fac(i).to_mint(998244353));\n    assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n\
-    \    assert(C2.inv(i) == C1.inv(i).to_mint(998244353));\n    reg(j, -15, 15) assert(C2(i,\
-    \ j) == C1(i, j).to_mint(998244353));\n  }\n  cerr << \"OK\" << endl;\n  {\n \
-    \   int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
+    using my_rand::rnd;\nusing my_rand::rng;\n#line 14 \"verify/verify-unit-test/rational-number.test.cpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  {\n    Rational a{4, 3},\
+    \ b{2, 3};\n    assert(a + b == 2);\n    assert(a - b == Rational(2, 3));\n  \
+    \  assert(a * b == Rational(8, 9));\n    assert(a / b == 2);\n    assert(a.inverse()\
+    \ == Rational(3, 4));\n    assert(a.pow(3) == Rational(64, 27));\n\n    assert((a\
+    \ > b) == true);\n    assert((a >= b) == true);\n    assert((a < b) == false);\n\
+    \    assert((a <= b) == false);\n  }\n\n  {\n    Binomial_rational<Rational> C;\n\
+    \    assert(C.fac(3) == 6);\n    assert(C.finv(3) == Rational(1, 6));\n    assert(C(4,\
+    \ 2) == 6);\n    assert(C(vi{3, 2}) == 10);\n  }\n\n  {\n    using fps = FormalPowerSeries_rational<Rational>;\n\
+    \n    {\n      fps f{1, 2, {3, 2}}, g{{1, 4}, 5};\n      fps h{{5, 4}, 7, {3,\
+    \ 2}};\n      assert(f + g == h);\n      h = fps{{3, 4}, -3, {3, 2}};\n      assert(f\
+    \ - g == h);\n      assert(f * g % g == fps{});\n      assert(f * g % f == fps{});\n\
+    \    }\n\n    \n    {\n      fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n\
+    \      fps f = e.pow(10);\n      trc(f);\n      rep(i, sz(e)) {\n        assert(e[i]\
+    \ * Rational{10}.pow(i) == f[i]);\n      }\n    }\n  }\n\n  // mint \u3068\u6319\
+    \u52D5\u306E\u6BD4\u8F03\n  {\n    auto comp = [&](int i, int j, int k, int l)\
+    \ {\n      rep(b, 16) {\n        int ii = (b >> 0) % 2 ? -i : +i;\n        int\
+    \ jj = (b >> 1) % 2 ? -j : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n   \
+    \     int ll = (b >> 3) % 2 ? -l : +l;\n        Rational x{ii, jj}, y{kk, ll};\n\
+    \        mint X = mint{ii} / jj;\n        mint Y = mint{kk} / ll;\n        assert(X\
+    \ + Y == (x + y).to_mint(998244353));\n        assert(X - Y == (x - y).to_mint(998244353));\n\
+    \        assert(X * Y == (x * y).to_mint(998244353));\n        if (Y != 0) {\n\
+    \          assert(X / Y == (x / y).to_mint(998244353));\n        }\n      }\n\
+    \    };\n    rep(i, 20) rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i, j, k, l);\n\
+    \    rep(t, 10000) {\n      int lower = t % 2 ? 1 : 32000;\n      ll i = rng(lower,\
+    \ 35000);\n      ll j = rng(lower, 35000);\n      ll k = rng(lower, 35000);\n\
+    \      ll l = rng(lower, 35000);\n      comp(i, j, k, l);\n    }\n  }\n\n  //\
+    \ binom, mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n  {\n    Binomial_rational<Rational>\
+    \ C1;\n    Binomial<mint> C2;\n    reg(i, -15, 15) {\n      assert(C2.fac(i) ==\
+    \ C1.fac(i).to_mint(998244353));\n      assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n\
+    \      assert(C2.inv(i) == C1.inv(i).to_mint(998244353));\n      reg(j, -15, 15)\
+    \ assert(C2(i, j) == C1(i, j).to_mint(998244353));\n    }\n  }\n\n  cerr << \"\
+    OK\" << endl;\n  {\n    int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\
+    \\n\";\n  }\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../../template/template.hpp\"\n\n//\n#include \"../../math/rational.hpp\"\n#include\
-    \ \"../../misc/rng.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\nusing\
-    \ mint = LazyMontgomeryModInt<998244353>;\n\nnamespace mint_binom {\n\n#include\
-    \ \"../../modulo/binomial.hpp\"\n\n}\n\nusing namespace Nyaan;\n\nvoid Nyaan::solve()\
-    \ {\n  Rational a{4, 3}, b{2, 3};\n\n  trc(a + b);\n  assert(a + b == 2);\n  trc(a\
-    \ - b);\n  assert(a - b == Rational(2, 3));\n  trc(a * b);\n  assert(a * b ==\
-    \ Rational(8, 9));\n  trc(a / b);\n  assert(a / b == 2);\n  trc(a.inverse());\n\
-    \  assert(a.inverse() == Rational(3, 4));\n  trc(a.pow(3));\n  assert(a.pow(3)\
-    \ == Rational(64, 27));\n\n  trc(a > b);\n  assert(a > b == true);\n  trc(a >=\
-    \ b);\n  assert(a >= b == true);\n  trc(a < b);\n  assert(a < b == false);\n \
-    \ trc(a <= b);\n  assert(a <= b == false);\n\n  Binomial<Rational> C;\n  assert(C.fac(3)\
-    \ == 6);\n  assert(C.finv(3) == Rational(1, 6));\n  assert(C(4, 2) == 6);\n  assert(C(vi{3,\
-    \ 2}) == 10);\n\n  auto comp = [&](int i, int j, int k, int l) {\n    rep(b, 16)\
-    \ {\n      int ii = (b >> 0) % 2 ? -i : +i;\n      int jj = (b >> 1) % 2 ? -j\
-    \ : +j;\n      int kk = (b >> 2) % 2 ? -k : +k;\n      int ll = (b >> 3) % 2 ?\
-    \ -l : +l;\n      Rational x{ii, jj}, y{kk, ll};\n      mint X = mint{ii} / jj;\n\
-    \      mint Y = mint{kk} / ll;\n      assert(X + Y == (x + y).to_mint(998244353));\n\
-    \      assert(X - Y == (x - y).to_mint(998244353));\n      assert(X * Y == (x\
-    \ * y).to_mint(998244353));\n      if (Y != 0) {\n        assert(X / Y == (x /\
-    \ y).to_mint(998244353));\n      }\n    }\n  };\n  rep(i, 20) rep1(j, 20) rep(k,\
-    \ 20) rep1(l, 20) comp(i, j, k, l);\n  rep(t, 10000) {\n    int lower = t % 2\
-    \ ? 1 : 32000;\n    ll i = rng(lower, 35000);\n    ll j = rng(lower, 35000);\n\
-    \    ll k = rng(lower, 35000);\n    ll l = rng(lower, 35000);\n    comp(i, j,\
-    \ k, l);\n  }\n\n  Binomial<Rational> C1;\n  mint_binom::Binomial<mint> C2;\n\
-    \  reg(i, -15, 15) {\n    assert(C2.fac(i) == C1.fac(i).to_mint(998244353));\n\
-    \    assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n    assert(C2.inv(i)\
-    \ == C1.inv(i).to_mint(998244353));\n    reg(j, -15, 15) assert(C2(i, j) == C1(i,\
-    \ j).to_mint(998244353));\n  }\n  cerr << \"OK\" << endl;\n  {\n    int s, t;\n\
-    \    cin >> s >> t;\n    cout << s + t << \"\\n\";\n  }\n}\n"
+    ../../template/template.hpp\"\n//\n#include \"../../math/rational-binomial.hpp\"\
+    \n#include \"../../math/rational-fps.hpp\"\n#include \"../../math/rational.hpp\"\
+    \n//\n#include \"../../modint/montgomery-modint.hpp\"\n#include \"../../modulo/binomial.hpp\"\
+    \nusing mint = LazyMontgomeryModInt<998244353>;\n//\n#include \"../../misc/rng.hpp\"\
+    \n\nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  {\n    Rational a{4, 3},\
+    \ b{2, 3};\n    assert(a + b == 2);\n    assert(a - b == Rational(2, 3));\n  \
+    \  assert(a * b == Rational(8, 9));\n    assert(a / b == 2);\n    assert(a.inverse()\
+    \ == Rational(3, 4));\n    assert(a.pow(3) == Rational(64, 27));\n\n    assert((a\
+    \ > b) == true);\n    assert((a >= b) == true);\n    assert((a < b) == false);\n\
+    \    assert((a <= b) == false);\n  }\n\n  {\n    Binomial_rational<Rational> C;\n\
+    \    assert(C.fac(3) == 6);\n    assert(C.finv(3) == Rational(1, 6));\n    assert(C(4,\
+    \ 2) == 6);\n    assert(C(vi{3, 2}) == 10);\n  }\n\n  {\n    using fps = FormalPowerSeries_rational<Rational>;\n\
+    \n    {\n      fps f{1, 2, {3, 2}}, g{{1, 4}, 5};\n      fps h{{5, 4}, 7, {3,\
+    \ 2}};\n      assert(f + g == h);\n      h = fps{{3, 4}, -3, {3, 2}};\n      assert(f\
+    \ - g == h);\n      assert(f * g % g == fps{});\n      assert(f * g % f == fps{});\n\
+    \    }\n\n    \n    {\n      fps e{1, 1, {1, 2}, {1, 6}, {1, 24}, {1, 120}};\n\
+    \      fps f = e.pow(10);\n      trc(f);\n      rep(i, sz(e)) {\n        assert(e[i]\
+    \ * Rational{10}.pow(i) == f[i]);\n      }\n    }\n  }\n\n  // mint \u3068\u6319\
+    \u52D5\u306E\u6BD4\u8F03\n  {\n    auto comp = [&](int i, int j, int k, int l)\
+    \ {\n      rep(b, 16) {\n        int ii = (b >> 0) % 2 ? -i : +i;\n        int\
+    \ jj = (b >> 1) % 2 ? -j : +j;\n        int kk = (b >> 2) % 2 ? -k : +k;\n   \
+    \     int ll = (b >> 3) % 2 ? -l : +l;\n        Rational x{ii, jj}, y{kk, ll};\n\
+    \        mint X = mint{ii} / jj;\n        mint Y = mint{kk} / ll;\n        assert(X\
+    \ + Y == (x + y).to_mint(998244353));\n        assert(X - Y == (x - y).to_mint(998244353));\n\
+    \        assert(X * Y == (x * y).to_mint(998244353));\n        if (Y != 0) {\n\
+    \          assert(X / Y == (x / y).to_mint(998244353));\n        }\n      }\n\
+    \    };\n    rep(i, 20) rep1(j, 20) rep(k, 20) rep1(l, 20) comp(i, j, k, l);\n\
+    \    rep(t, 10000) {\n      int lower = t % 2 ? 1 : 32000;\n      ll i = rng(lower,\
+    \ 35000);\n      ll j = rng(lower, 35000);\n      ll k = rng(lower, 35000);\n\
+    \      ll l = rng(lower, 35000);\n      comp(i, j, k, l);\n    }\n  }\n\n  //\
+    \ binom, mint \u3068\u6319\u52D5\u306E\u6BD4\u8F03\n  {\n    Binomial_rational<Rational>\
+    \ C1;\n    Binomial<mint> C2;\n    reg(i, -15, 15) {\n      assert(C2.fac(i) ==\
+    \ C1.fac(i).to_mint(998244353));\n      assert(C2.finv(i) == C1.finv(i).to_mint(998244353));\n\
+    \      assert(C2.inv(i) == C1.inv(i).to_mint(998244353));\n      reg(j, -15, 15)\
+    \ assert(C2(i, j) == C1(i, j).to_mint(998244353));\n    }\n  }\n\n  cerr << \"\
+    OK\" << endl;\n  {\n    int s, t;\n    cin >> s >> t;\n    cout << s + t << \"\
+    \\n\";\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -474,17 +567,19 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
+  - math/rational-binomial.hpp
   - math/rational.hpp
   - internal/internal-type-traits.hpp
   - math-fast/gcd.hpp
-  - misc/rng.hpp
-  - internal/internal-seed.hpp
+  - math/rational-fps.hpp
   - modint/montgomery-modint.hpp
   - modulo/binomial.hpp
+  - misc/rng.hpp
+  - internal/internal-seed.hpp
   isVerificationFile: true
   path: verify/verify-unit-test/rational-number.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2023-09-02 22:21:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-unit-test/rational-number.test.cpp

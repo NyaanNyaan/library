@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: fps/arbitrary-fps.hpp
     title: fps/arbitrary-fps.hpp
+  - icon: ':warning:'
+    path: math/bigint-all.hpp
+    title: math/bigint-all.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint-garner.hpp
     title: Garner's algorithm for bigint
@@ -75,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/garner-bigint.test.cpp
     title: verify/verify-unit-test/garner-bigint.test.cpp
@@ -368,6 +374,7 @@ data:
   - math/bigint-rational.hpp
   - math/bigint.hpp
   - math/bigint-gcd.hpp
+  - math/bigint-all.hpp
   - fps/arbitrary-fps.hpp
   timestamp: '2023-05-29 20:50:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -401,6 +408,7 @@ data:
   - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-yosupo-math/yosupo-multiplication-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-addition-of-big-integers.test.cpp
   - verify/verify-yosupo-math/yosupo-division-of-big-integers.test.cpp

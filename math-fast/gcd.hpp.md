@@ -2,12 +2,21 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: math/bigint-all.hpp
+    title: math/bigint-all.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint-gcd.hpp
     title: math/bigint-gcd.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint-rational.hpp
     title: math/bigint-rational.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/rational-binomial.hpp
+    title: math/rational-binomial.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/rational-fps.hpp
+    title: math/rational-fps.hpp
   - icon: ':heavy_check_mark:'
     path: math/rational.hpp
     title: math/rational.hpp
@@ -18,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint-gcd.test.cpp
     title: verify/verify-unit-test/bigint-gcd.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/internal-math.test.cpp
     title: verify/verify-unit-test/internal-math.test.cpp
@@ -80,9 +92,12 @@ data:
   isVerificationFile: false
   path: math-fast/gcd.hpp
   requiredBy:
+  - math/rational-fps.hpp
   - math/rational.hpp
+  - math/rational-binomial.hpp
   - math/bigint-rational.hpp
   - math/bigint-gcd.hpp
+  - math/bigint-all.hpp
   timestamp: '2023-04-11 20:58:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -94,6 +109,7 @@ data:
   - verify/verify-unit-test/math-fast.test.cpp
   - verify/verify-unit-test/internal-math.test.cpp
   - verify/verify-unit-test/math-fast-2.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
 documentation_of: math-fast/gcd.hpp
 layout: document
 redirect_from:

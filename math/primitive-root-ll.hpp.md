@@ -17,61 +17,25 @@ data:
     path: modint/arbitrary-montgomery-modint.hpp
     title: modint/arbitrary-montgomery-modint.hpp
   - icon: ':heavy_check_mark:'
+    path: prime/fast-factorize.hpp
+    title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+  - icon: ':heavy_check_mark:'
     path: prime/miller-rabin.hpp
     title: Miller-Rabin primality test
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: math/primitive-root-ll.hpp
-    title: math/primitive-root-ll.hpp
-  - icon: ':heavy_check_mark:'
-    path: modulo/mod-kth-root.hpp
-    title: kth root(Tonelli-Shanks algorithm)
-  - icon: ':heavy_check_mark:'
-    path: ntt/multivariate-circular-convolution.hpp
-    title: "\u591A\u5909\u6570\u5DE1\u56DE\u7573\u307F\u8FBC\u307F"
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/factorize.test.cpp
-    title: verify/verify-unit-test/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/garner-bigint.test.cpp
-    title: verify/verify-unit-test/garner-bigint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/osak.test.cpp
-    title: verify/verify-unit-test/osak.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-unit-test/primitive-root.test.cpp
-    title: verify/verify-unit-test/primitive-root.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-    title: verify/verify-yosupo-math/yosupo-factorization.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
-    title: verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
     title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-    title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0002.test.cpp
-    title: verify/verify-yuki/yuki-0002.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: verify/verify-yuki/yuki-0103.test.cpp
-    title: verify/verify-yuki/yuki-0103.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    _deprecated_at_docs: docs/prime/fast-factorize.md
-    document_title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's\
-      \ Rho)"
     links: []
-  bundledCode: "#line 2 \"prime/fast-factorize.hpp\"\n\n#include <cstdint>\n#include\
-    \ <numeric>\n#include <vector>\nusing namespace std;\n\n#line 2 \"internal/internal-math.hpp\"\
-    \n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\n\
-    using namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
+  bundledCode: "#line 2 \"math/primitive-root-ll.hpp\"\n\n#include <algorithm>\n#include\
+    \ <vector>\nusing namespace std;\n\n#line 2 \"internal/internal-math.hpp\"\n\n\
+    #line 2 \"internal/internal-type-traits.hpp\"\n\n#include <type_traits>\nusing\
+    \ namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
     \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
     \                               is_same_v<T, __uint128_t>,\n                 \
     \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
@@ -117,9 +81,11 @@ data:
     \ [g, im] = inv_gcd(m0, m1);\n    T u1 = m1 / g;\n    if ((r1 - r0) % g) return\
     \ {0, 0};\n    T x = (r1 - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0\
     \ *= u1;\n    if (r0 < 0) r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace\
-    \ internal\n#line 2 \"misc/rng.hpp\"\n\n#line 2 \"internal/internal-seed.hpp\"\
-    \n\n#include <chrono>\nusing namespace std;\n\nnamespace internal {\nunsigned\
-    \ long long non_deterministic_seed() {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
+    \ internal\n#line 2 \"prime/fast-factorize.hpp\"\n\n#include <cstdint>\n#include\
+    \ <numeric>\n#line 6 \"prime/fast-factorize.hpp\"\nusing namespace std;\n\n#line\
+    \ 2 \"misc/rng.hpp\"\n\n#line 2 \"internal/internal-seed.hpp\"\n\n#include <chrono>\n\
+    using namespace std;\n\nnamespace internal {\nunsigned long long non_deterministic_seed()\
+    \ {\n  unsigned long long m =\n      chrono::duration_cast<chrono::nanoseconds>(\n\
     \          chrono::high_resolution_clock::now().time_since_epoch())\n        \
     \  .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >> 31, m\
     \ ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() { return\
@@ -241,103 +207,40 @@ data:
     \ 1);\n  sort(begin(ret), end(ret));\n  return ret;\n}\n\n}  // namespace fast_factorize\n\
     \nusing fast_factorize::divisors;\nusing fast_factorize::factor_count;\nusing\
     \ fast_factorize::factorize;\n\n/**\n * @brief \u9AD8\u901F\u7D20\u56E0\u6570\u5206\
-    \u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n */\n"
-  code: "#pragma once\n\n#include <cstdint>\n#include <numeric>\n#include <vector>\n\
-    using namespace std;\n\n#include \"../internal/internal-math.hpp\"\n#include \"\
-    ../misc/rng.hpp\"\n#include \"../modint/arbitrary-montgomery-modint.hpp\"\n#include\
-    \ \"miller-rabin.hpp\"\n\nnamespace fast_factorize {\nusing u64 = uint64_t;\n\n\
-    template <typename mint, typename T>\nT pollard_rho(T n) {\n  if (~n & 1) return\
-    \ 2;\n  if (is_prime(n)) return n;\n  if (mint::get_mod() != n) mint::set_mod(n);\n\
-    \  mint R, one = 1;\n  auto f = [&](mint x) { return x * x + R; };\n  auto rnd_\
-    \ = [&]() { return rng() % (n - 2) + 2; };\n  while (1) {\n    mint x, y, ys,\
-    \ q = one;\n    R = rnd_(), y = rnd_();\n    T g = 1;\n    constexpr int m = 128;\n\
-    \    for (int r = 1; g == 1; r <<= 1) {\n      x = y;\n      for (int i = 0; i\
-    \ < r; ++i) y = f(y);\n      for (int k = 0; g == 1 && k < r; k += m) {\n    \
-    \    ys = y;\n        for (int i = 0; i < m && i < r - k; ++i) q *= x - (y = f(y));\n\
-    \        g = gcd(q.get(), n);\n      }\n    }\n    if (g == n) do\n        g =\
-    \ gcd((x - (ys = f(ys))).get(), n);\n      while (g == 1);\n    if (g != n) return\
-    \ g;\n  }\n  exit(1);\n}\n\nusing i64 = long long;\n\nvector<i64> inner_factorize(u64\
-    \ n) {\n  using mint32 = ArbitraryLazyMontgomeryModInt<452288976>;\n  using mint64\
-    \ = ArbitraryLazyMontgomeryModInt64bit<401243123>;\n\n  if (n <= 1) return {};\n\
-    \  u64 p;\n  if (n <= (1LL << 30)) {\n    p = pollard_rho<mint32, uint32_t>(n);\n\
-    \  } else if (n <= (1LL << 62)) {\n    p = pollard_rho<mint64, uint64_t>(n);\n\
-    \  } else {\n    exit(1);\n  }\n  if (p == n) return {i64(p)};\n  auto l = inner_factorize(p);\n\
-    \  auto r = inner_factorize(n / p);\n  copy(begin(r), end(r), back_inserter(l));\n\
-    \  return l;\n}\n\nvector<i64> factorize(u64 n) {\n  auto ret = inner_factorize(n);\n\
-    \  sort(begin(ret), end(ret));\n  return ret;\n}\n\nmap<i64, i64> factor_count(u64\
-    \ n) {\n  map<i64, i64> mp;\n  for (auto &x : factorize(n)) mp[x]++;\n  return\
-    \ mp;\n}\n\nvector<i64> divisors(u64 n) {\n  if (n == 0) return {};\n  vector<pair<i64,\
-    \ i64>> v;\n  for (auto &p : factorize(n)) {\n    if (v.empty() || v.back().first\
-    \ != p) {\n      v.emplace_back(p, 1);\n    } else {\n      v.back().second++;\n\
-    \    }\n  }\n  vector<i64> ret;\n  auto f = [&](auto rc, int i, i64 x) -> void\
-    \ {\n    if (i == (int)v.size()) {\n      ret.push_back(x);\n      return;\n \
-    \   }\n    rc(rc, i + 1, x);\n    for (int j = 0; j < v[i].second; j++) rc(rc,\
-    \ i + 1, x *= v[i].first);\n  };\n  f(f, 0, 1);\n  sort(begin(ret), end(ret));\n\
-    \  return ret;\n}\n\n}  // namespace fast_factorize\n\nusing fast_factorize::divisors;\n\
-    using fast_factorize::factor_count;\nusing fast_factorize::factorize;\n\n/**\n\
-    \ * @brief \u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)\n\
-    \ * @docs docs/prime/fast-factorize.md\n */\n"
+    \u89E3(Miller Rabin/Pollard's Rho)\n * @docs docs/prime/fast-factorize.md\n */\n\
+    #line 9 \"math/primitive-root-ll.hpp\"\n\nlong long primitive_root_ll(long long\
+    \ p) {\n  if (p == 2) return 1;\n  auto fs = factorize(p - 1);\n  sort(begin(fs),\
+    \ end(fs));\n  fs.erase(unique(begin(fs), end(fs)), end(fs));\n  for (int g =\
+    \ 2;; g++) {\n    int ok = 1;\n    for (auto& f : fs) {\n      if (internal::modpow<long\
+    \ long, __int128_t>(g, (p - 1) / f, p) == 1) {\n        ok = false;\n        break;\n\
+    \      }\n    }\n    if (ok) return g;\n  }\n  exit(1);\n}\n"
+  code: "#pragma once\n\n#include <algorithm>\n#include <vector>\nusing namespace\
+    \ std;\n\n#include \"../internal/internal-math.hpp\"\n#include \"../prime/fast-factorize.hpp\"\
+    \n\nlong long primitive_root_ll(long long p) {\n  if (p == 2) return 1;\n  auto\
+    \ fs = factorize(p - 1);\n  sort(begin(fs), end(fs));\n  fs.erase(unique(begin(fs),\
+    \ end(fs)), end(fs));\n  for (int g = 2;; g++) {\n    int ok = 1;\n    for (auto&\
+    \ f : fs) {\n      if (internal::modpow<long long, __int128_t>(g, (p - 1) / f,\
+    \ p) == 1) {\n        ok = false;\n        break;\n      }\n    }\n    if (ok)\
+    \ return g;\n  }\n  exit(1);\n}\n"
   dependsOn:
   - internal/internal-math.hpp
   - internal/internal-type-traits.hpp
+  - prime/fast-factorize.hpp
   - misc/rng.hpp
   - internal/internal-seed.hpp
   - modint/arbitrary-montgomery-modint.hpp
   - prime/miller-rabin.hpp
   isVerificationFile: false
-  path: prime/fast-factorize.hpp
-  requiredBy:
-  - ntt/multivariate-circular-convolution.hpp
-  - modulo/mod-kth-root.hpp
-  - math/primitive-root-ll.hpp
-  timestamp: '2023-08-10 14:06:55+09:00'
+  path: math/primitive-root-ll.hpp
+  requiredBy: []
+  timestamp: '2023-09-02 22:21:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - verify/verify-yuki/yuki-0103.test.cpp
-  - verify/verify-yuki/yuki-0002.test.cpp
-  - verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
-  - verify/verify-unit-test/garner-bigint.test.cpp
-  - verify/verify-unit-test/osak.test.cpp
-  - verify/verify-unit-test/factorize.test.cpp
-  - verify/verify-unit-test/primitive-root.test.cpp
-  - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
-  - verify/verify-yosupo-math/yosupo-factorization.test.cpp
-documentation_of: prime/fast-factorize.hpp
+documentation_of: math/primitive-root-ll.hpp
 layout: document
 redirect_from:
-- /library/prime/fast-factorize.hpp
-- /library/prime/fast-factorize.hpp.html
-title: "\u9AD8\u901F\u7D20\u56E0\u6570\u5206\u89E3(Miller Rabin/Pollard's Rho)"
+- /library/math/primitive-root-ll.hpp
+- /library/math/primitive-root-ll.hpp.html
+title: math/primitive-root-ll.hpp
 ---
-## 高速な素因数分解
-
-ミラーラビン素数判定法とポラード・ロー素因数分解法を組み合わせることで$\mathrm{O}(N^{\frac{1}{4}})$で素因数分解を行うライブラリ。
-
-#### ミラー・ラビン素数判定法(Miller-Rabin primality test)
-
-ミラーラビン素数判定法とは、与えられた数が素数かを高速に判定する乱択アルゴリズム(実用上は決定的アルゴリズム)である。
-
-まず、任意の奇素数$p$について、
-
-$x^2\equiv 1 \mod p \leftrightarrow x=1,-1 \mod p$
-
-が成り立つ。(証明は左辺を因数分解すると示せる。)ここで$p-1=2^s\cdot d$とおくと、上記の事実から
-
-$$ a^d \equiv 1 \mod p$$
-
-またはある$r(0 \leq r \leq s - 1)$について
-
-$$a ^ {2^r \cdot d} \equiv -1 \mod p$$
-
-が成り立つことが示せる。この命題の対偶を取ると、「奇数$n$についてある数$a$が存在し、『$a^d \not \equiv 1 \mod n$』かつ『任意の$r(0 \leq r \leq s - 1)$について$a ^ {2^r \cdot d} \equiv -1 \mod p$』ならば$n$は合成数」となる。
-
-ミラーラビン法では$a$をランダムにいくつか選んで$a^{2^r\cdot d}\mod n$の値を調べ、いずれかの$a$で合成数と判定されたら$n$は合成数、そうでない場合は$n$が素数であると判定するアルゴリズムである。
-
-実際に$a$をランダムに選ぶと誤判定が発生しうるが、$a=2, 325, 9375, 28178, 450775, 9780504, 1795265022$を選ぶと$n \lt 2^{64}$である$n$について正確に判定できることが知られており([参照](http://miller-rabin.appspot.com/))、実用上は上記の$a$を選んで実験することで決定的な素数判定が可能となる。
-
-#### ポラード・ロー素因数分解法(Pollard's rho algorithm)
-
-TODO:書く
-
-参考文献　[Kiri8128さんの記事](https://qiita.com/Kiri8128/items/eca965fe86ea5f4cbb98)　[高校数学の美しい物語](https://mathtrain.jp/rhoalgorithm)

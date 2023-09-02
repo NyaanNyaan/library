@@ -7,6 +7,9 @@ data:
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum-splay.test.cpp
   - icon: ':heavy_check_mark:'
@@ -81,6 +84,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-dynamic-segtree.test.cpp

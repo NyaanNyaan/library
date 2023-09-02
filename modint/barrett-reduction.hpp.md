@@ -31,6 +31,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
     title: verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-convolution-arbitraryntt-arbitrarymodint.test.cpp
   - icon: ':heavy_check_mark:'
@@ -83,6 +86,7 @@ data:
   - verify/verify-unit-test/garner-bigint.test.cpp
   - verify/verify-unit-test/barrett-reduction.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-prime-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient-large.test.cpp
 documentation_of: modint/barrett-reduction.hpp

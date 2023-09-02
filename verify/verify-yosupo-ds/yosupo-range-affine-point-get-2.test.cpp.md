@@ -2,17 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: data-structure/slide-window-aggregation.hpp
-    title: Slide Window Aggrigation
-  - icon: ':heavy_check_mark:'
-    path: internal/internal-type-traits.hpp
-    title: internal/internal-type-traits.hpp
-  - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
     path: modint/montgomery-modint.hpp
     title: modint/montgomery-modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: segment-tree/lazy-segment-tree-utility.hpp
+    title: "\u4F7F\u7528\u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\
+      \u30F3\u30C8\u6728"
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -38,13 +33,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
+    PROBLEM: https://judge.yosupo.jp/problem/range_affine_point_get
     links:
-    - https://judge.yosupo.jp/problem/queue_operate_all_composite
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-swag.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\n\n\
-    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    - https://judge.yosupo.jp/problem/range_affine_point_get
+  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_point_get\"\n\
+    //\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -216,112 +211,31 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"data-structure/slide-window-aggregation.hpp\"\n\n#line 4 \"data-structure/slide-window-aggregation.hpp\"\
-    \nusing namespace std;\n\ntemplate <typename T, typename F>\nstruct SlideWindowAggregation\
-    \ {\n  vector<T> a0, a1, r0, r1;\n  F f;\n  T I, f0, f1;\n\n  SlideWindowAggregation(F\
-    \ _f, T _i) : f(_f), I(_i), f0(_i), f1(_i) {}\n\n private:\n  void push_s0(const\
-    \ T &x) {\n    a0.push_back(x);\n    r0.push_back(f0 = f(x, f0));\n  }\n  void\
-    \ push_s1(const T &x) {\n    a1.push_back(x);\n    r1.push_back(f1 = f(f1, x));\n\
-    \  }\n  void transfer() {\n    while (!a1.empty()) {\n      push_s0(a1.back());\n\
-    \      a1.pop_back();\n    }\n    while (!r1.empty()) r1.pop_back();\n    f1 =\
-    \ I;\n  }\n\n public:\n  void push(const T &x) {\n    if (a0.empty()) {\n    \
-    \  push_s0(x);\n      transfer();\n    } else {\n      push_s1(x);\n    }\n  }\n\
-    \  void pop() {\n    if (a0.empty()) transfer();\n    a0.pop_back();\n    r0.pop_back();\n\
-    \    f0 = r0.empty() ? I : r0.back();\n  }\n  T query() { return f(f0, f1); }\n\
-    };\n\n/**\n * @brief Slide Window Aggrigation\n * @docs docs/data-structure/slide-window-aggregation.md\n\
-    \ */\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace\
-    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
-    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
-    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
-    \                               is_same_v<T, __uint128_t>,\n                 \
-    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
-    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
-    \                           true_type, false_type>::type;\n\ntemplate <typename\
-    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
-    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
-    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
-    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
-    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ],\
-    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
-    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
-    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
-    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
-    \ pre;\n\nvoid load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf\
-    \ + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
-    \  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left + offset > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\nvoid single_read(char&\
-    \ c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n\
-    }\nvoid single_read(string& S) {\n  skip_space();\n  while (true) {\n    if (in_left\
-    \ == in_right) load();\n    int i = in_left;\n    for (; i != in_right; i++) {\n\
-    \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
-    \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
-    template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\nvoid single_read(T& x) {\n  if (in_left + offset > in_right) load();\n\
-    \  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool minus\
-    \ = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (c ==\
-    \ '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >= '0')\
-    \ {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\nvoid rd()\
-    \ {}\ntemplate <typename Head, typename... Tail>\nvoid rd(Head& head, Tail&...\
-    \ tail) {\n  single_read(head);\n  rd(tail...);\n}\n\nvoid single_write(const\
-    \ char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++] =\
-    \ c;\n}\nvoid single_write(const bool& b) {\n  if (out_right > SZ - offset) flush();\n\
-    \  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const string& S)\
-    \ {\n  flush(), fwrite(S.data(), 1, S.size(), stdout);\n}\nvoid single_write(const\
-    \ char* p) { flush(), fwrite(p, 1, strlen(p), stdout); }\ntemplate <typename T,\n\
-    \          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\nvoid single_write(const\
-    \ T& _x) {\n  if (out_right > SZ - offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++]\
-    \ = '0';\n    return;\n  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>)\
-    \ {\n    if (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
-    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
-    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
-    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
-    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
-    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
-    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
-    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
-    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
-    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
-    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
-    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 2 \"modint/montgomery-modint.hpp\"\
-    \n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod\
-    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
-    invalid, mod % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\"\
-    );\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
-    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
-    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
-    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
-    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
-    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
-    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
-    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
-    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
+    \ 4 \"verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp\"\n//\n\
+    #line 2 \"modint/montgomery-modint.hpp\"\n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt\
+    \ {\n  using mint = LazyMontgomeryModInt;\n  using i32 = int32_t;\n  using u32\
+    \ = uint32_t;\n  using u64 = uint64_t;\n\n  static constexpr u32 get_r() {\n \
+    \   u32 ret = mod;\n    for (i32 i = 0; i < 4; ++i) ret *= 2 - mod * ret;\n  \
+    \  return ret;\n  }\n\n  static constexpr u32 r = get_r();\n  static constexpr\
+    \ u32 n2 = -u64(mod) % mod;\n  static_assert(mod < (1 << 30), \"invalid, mod >=\
+    \ 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"invalid, mod % 2 == 0\");\n  static_assert(r\
+    \ * mod == 1, \"this code has bugs.\");\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt()\
+    \ : a(0) {}\n  constexpr LazyMontgomeryModInt(const int64_t &b)\n      : a(reduce(u64(b\
+    \ % mod + mod) * n2)){};\n\n  static constexpr u32 reduce(const u64 &b) {\n  \
+    \  return (b + u64(u32(b) * u32(-r)) * mod) >> 32;\n  }\n\n  constexpr mint &operator+=(const\
+    \ mint &b) {\n    if (i32(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
+    \  }\n\n  constexpr mint &operator-=(const mint &b) {\n    if (i32(a -= b.a) <\
+    \ 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint &operator*=(const\
+    \ mint &b) {\n    a = reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr\
+    \ mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return *this;\n\
+    \  }\n\n  constexpr mint operator+(const mint &b) const { return mint(*this) +=\
+    \ b; }\n  constexpr mint operator-(const mint &b) const { return mint(*this) -=\
+    \ b; }\n  constexpr mint operator*(const mint &b) const { return mint(*this) *=\
+    \ b; }\n  constexpr mint operator/(const mint &b) const { return mint(*this) /=\
+    \ b; }\n  constexpr bool operator==(const mint &b) const {\n    return (a >= mod\
+    \ ? a - mod : a) == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const\
+    \ mint &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a -\
+    \ mod : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
     \ }\n  constexpr mint operator+() const { return mint(*this); }\n\n  constexpr\
     \ mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
     \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
@@ -333,26 +247,133 @@ data:
     \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
     \    return (is);\n  }\n\n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
     \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 7 \"verify/verify-yosupo-ds/yosupo-swag.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
-    \  using p = pair<mint, mint>;\n  auto f = [](const p &a, const p &b) {\n    return\
-    \ p{a.first * b.first, a.second * b.first + b.second};\n  };\n  SlideWindowAggregation<p,\
-    \ decltype(f)> swag(f, p{1, 0});\n  int Q;\n  rd(Q);\n  rep(_, Q) {\n    int cmd;\n\
-    \    rd(cmd);\n    if (cmd == 0) {\n      int a, b;\n      rd(a, b);\n      swag.push(p{a,\
-    \ b});\n    } else if (cmd == 1) {\n      swag.pop();\n    } else {\n      int\
-    \ x;\n      rd(x);\n      p q = swag.query();\n      wtn((q.first * x + q.second).get());\n\
-    \    }\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure/slide-window-aggregation.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
-    \  using p = pair<mint, mint>;\n  auto f = [](const p &a, const p &b) {\n    return\
-    \ p{a.first * b.first, a.second * b.first + b.second};\n  };\n  SlideWindowAggregation<p,\
-    \ decltype(f)> swag(f, p{1, 0});\n  int Q;\n  rd(Q);\n  rep(_, Q) {\n    int cmd;\n\
-    \    rd(cmd);\n    if (cmd == 0) {\n      int a, b;\n      rd(a, b);\n      swag.push(p{a,\
-    \ b});\n    } else if (cmd == 1) {\n      swag.pop();\n    } else {\n      int\
-    \ x;\n      rd(x);\n      p q = swag.query();\n      wtn((q.first * x + q.second).get());\n\
-    \    }\n  }\n}"
+    \ { return mod; }\n};\n#line 2 \"segment-tree/lazy-segment-tree-utility.hpp\"\n\
+    \ntemplate <typename T, typename E, T (*f)(T, T), T (*g)(T, E), E (*h)(E, E),\n\
+    \          T (*ti)(), E (*ei)()>\nstruct LazySegmentTreeBase {\n  int n, log,\
+    \ s;\n  vector<T> val;\n  vector<E> laz;\n\n  explicit LazySegmentTreeBase() {}\n\
+    \  explicit LazySegmentTreeBase(const vector<T>& vc) { init(vc); }\n\n  void init(const\
+    \ vector<T>& vc) {\n    n = 1, log = 0, s = vc.size();\n    while (n < s) n <<=\
+    \ 1, log++;\n    val.resize(2 * n, ti());\n    laz.resize(n, ei());\n    for (int\
+    \ i = 0; i < s; ++i) val[i + n] = vc[i];\n    for (int i = n - 1; i; --i) _update(i);\n\
+    \  }\n\n  void update(int l, int r, const E& x) {\n    if (l == r) return;\n \
+    \   l += n, r += n;\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i)\
+    \ << i) != l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >>\
+    \ i);\n    }\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n      \
+    \  if (l & 1) _apply(l++, x);\n        if (r & 1) _apply(--r, x);\n        l >>=\
+    \ 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n    }\n    for\
+    \ (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l) _update(l >> i);\n\
+    \      if (((r >> i) << i) != r) _update((r - 1) >> i);\n    }\n  }\n\n  T query(int\
+    \ l, int r) {\n    if (l == r) return ti();\n    l += n, r += n;\n    T L = ti(),\
+    \ R = ti();\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) !=\
+    \ l) _push(l >> i);\n      if (((r >> i) << i) != r) _push((r - 1) >> i);\n  \
+    \  }\n    while (l < r) {\n      if (l & 1) L = f(L, val[l++]);\n      if (r &\
+    \ 1) R = f(val[--r], R);\n      l >>= 1;\n      r >>= 1;\n    }\n    return f(L,\
+    \ R);\n  }\n\n  void set_val(int k, const T& x) {\n    k += n;\n    for (int i\
+    \ = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
+    \ i) != (k + 1))\n        _push(k >> i);\n    }\n    val[k] = x;\n    for (int\
+    \ i = 1; i <= log; i++) {\n      if (((k >> i) << i) != k || (((k + 1) >> i) <<\
+    \ i) != (k + 1))\n        _update(k >> i);\n    }\n  }\n\n  void update_val(int\
+    \ k, const E& x) {\n    k += n;\n    for (int i = log; i >= 1; i--) {\n      if\
+    \ (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n        _push(k\
+    \ >> i);\n    }\n    val[k] = g(val[k], x);\n    for (int i = 1; i <= log; i++)\
+    \ {\n      if (((k >> i) << i) != k || (((k + 1) >> i) << i) != (k + 1))\n   \
+    \     _update(k >> i);\n    }\n  }\n\n  T get_val(int k) {\n    k += n;\n    for\
+    \ (int i = log; i >= 1; i--) {\n      if (((k >> i) << i) != k || (((k + 1) >>\
+    \ i) << i) != (k + 1))\n        _push(k >> i);\n    }\n    return val[k];\n  }\n\
+    \n  template <class G>\n  int max_right(int l, G check) {\n    assert(0 <= l &&\
+    \ l <= s);\n    assert(check(ei()));\n    if (l == n) return n;\n    l += n;\n\
+    \    for (int i = log; i >= 1; i--) _push(l >> i);\n    T sm = ti();\n    do {\n\
+    \      while (l % 2 == 0) l >>= 1;\n      if (!check(f(sm, val[l]))) {\n     \
+    \   while (l < n) {\n          _push(l);\n          l = (2 * l);\n          if\
+    \ (check(f(sm, val[l]))) {\n            sm = f(sm, val[l]);\n            l++;\n\
+    \          }\n        }\n        return l - n;\n      }\n      sm = f(sm, val[l]);\n\
+    \      l++;\n    } while ((l & -l) != l);\n    return s;\n  }\n\n  template <class\
+    \ G>\n  int min_left(int r, G check) {\n    assert(0 <= r && r <= s);\n    assert(check(ei()));\n\
+    \    if (r == 0) return 0;\n    r += n;\n    for (int i = log; i >= 1; i--) _push((r\
+    \ - 1) >> i);\n    T sm = ti();\n    do {\n      r--;\n      while (r > 1 && (r\
+    \ % 2)) r >>= 1;\n      if (!check(f(val[r], sm))) {\n        while (r < n) {\n\
+    \          _push(r);\n          r = (2 * r + 1);\n          if (check(f(val[r],\
+    \ sm))) {\n            sm = f(val[r], sm);\n            r--;\n          }\n  \
+    \      }\n        return r + 1 - n;\n      }\n      sm = f(val[r], sm);\n    }\
+    \ while ((r & -r) != r);\n    return 0;\n  }\n\n private:\n  void _push(int i)\
+    \ {\n    if (laz[i] != ei()) {\n      val[2 * i + 0] = g(val[2 * i + 0], laz[i]);\n\
+    \      val[2 * i + 1] = g(val[2 * i + 1], laz[i]);\n      if (2 * i < n) {\n \
+    \       compose(laz[2 * i + 0], laz[i]);\n        compose(laz[2 * i + 1], laz[i]);\n\
+    \      }\n      laz[i] = ei();\n    }\n  }\n  inline void _update(int i) { val[i]\
+    \ = f(val[2 * i + 0], val[2 * i + 1]); }\n  inline void _apply(int i, const E&\
+    \ x) {\n    if (x != ei()) {\n      val[i] = g(val[i], x);\n      if (i < n) compose(laz[i],\
+    \ x);\n    }\n  }\n  inline void compose(E& a, const E& b) { a = a == ei() ? b\
+    \ : h(a, b); }\n};\n\nnamespace SegmentTreeUtil {\n\ntemplate <typename T>\nstruct\
+    \ Pair {\n  T first, second;\n  Pair() = default;\n  Pair(const T& f, const T&\
+    \ s) : first(f), second(s) {}\n  operator T() const { return first; }\n  friend\
+    \ ostream& operator<<(ostream& os, const Pair<T>& p) {\n    os << T(p.first);\n\
+    \    return os;\n  }\n};\n\ntemplate <typename T>\nT Mx(T a, T b) {\n  return\
+    \ max(a, b);\n}\ntemplate <typename T>\nT Mn(T a, T b) {\n  return min(a, b);\n\
+    }\ntemplate <typename T>\nT Update(T, T b) {\n  return b;\n}\ntemplate <typename\
+    \ T>\nT Add(T a, T b) {\n  return a + b;\n}\ntemplate <typename T>\nPair<T> Psum(Pair<T>\
+    \ a, Pair<T> b) {\n  return Pair<T>(a.first + b.first, a.second + b.second);\n\
+    }\ntemplate <typename T>\nPair<T> Padd(Pair<T> a, T b) {\n  return Pair<T>(a.first\
+    \ + a.second * b, a.second);\n}\ntemplate <typename T>\nPair<T> PUpdate(Pair<T>\
+    \ a, T b) {\n  return Pair<T>(a.second * b, a.second);\n}\ntemplate <typename\
+    \ T>\nPair<T> Pid() {\n  return Pair<T>(0, 0);\n}\ntemplate <typename T>\nT Zero()\
+    \ {\n  return T(0);\n}\ntemplate <typename T, T val>\nT Const() {\n  return val;\n\
+    }\n\ntemplate <typename T, T MINF>\nstruct AddMax_LazySegmentTree\n    : LazySegmentTreeBase<T,\
+    \ T, Mx<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>> {\n  using base =\n     \
+    \ LazySegmentTreeBase<T, T, Mx<T>, Add<T>, Add<T>, Const<T, MINF>, Zero<T>>;\n\
+    \  AddMax_LazySegmentTree(const vector<T>& v) : base(v) {}\n};\n\ntemplate <typename\
+    \ T, T INF>\nstruct AddMin_LazySegmentTree\n    : LazySegmentTreeBase<T, T, Mn<T>,\
+    \ Add<T>, Add<T>, Const<T, INF>, Zero<T>> {\n  using base =\n      LazySegmentTreeBase<T,\
+    \ T, Mn<T>, Add<T>, Add<T>, Const<T, INF>, Zero<T>>;\n  AddMin_LazySegmentTree(const\
+    \ vector<T>& v) : base(v) {}\n};\n\ntemplate <typename T>\nstruct AddSum_LazySegmentTree\n\
+    \    : LazySegmentTreeBase<Pair<T>, T, Psum<T>, Padd<T>, Add<T>, Pid<T>, Zero<T>>\
+    \ {\n  using base =\n      LazySegmentTreeBase<Pair<T>, T, Psum<T>, Padd<T>, Add<T>,\
+    \ Pid<T>, Zero<T>>;\n  AddSum_LazySegmentTree(const vector<T>& v) {\n    vector<Pair<T>>\
+    \ w(v.size());\n    for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i],\
+    \ 1);\n    base::init(w);\n  }\n};\n\ntemplate <typename T, T MINF>\nstruct UpdateMax_LazySegmentTree\n\
+    \    : LazySegmentTreeBase<T, T, Mx<T>, Update<T>, Update<T>, Const<T, MINF>,\n\
+    \                      Const<T, MINF>> {\n  using base = LazySegmentTreeBase<T,\
+    \ T, Mx<T>, Update<T>, Update<T>,\n                               Const<T, MINF>,\
+    \ Const<T, MINF>>;\n  UpdateMax_LazySegmentTree(const vector<T>& v) : base(v)\
+    \ {}\n};\n\ntemplate <typename T, T INF>\nstruct UpdateMin_LazySegmentTree\n \
+    \   : LazySegmentTreeBase<T, T, Mn<T>, Update<T>, Update<T>, Const<T, INF>,\n\
+    \                      Const<T, INF>> {\n  using base = LazySegmentTreeBase<T,\
+    \ T, Mn<T>, Update<T>, Update<T>, Const<T, INF>,\n                           \
+    \    Const<T, INF>>;\n  UpdateMin_LazySegmentTree(const vector<T>& v) : base(v)\
+    \ {}\n};\n\ntemplate <typename T, T UNUSED_VALUE>\nstruct UpdateSum_LazySegmentTree\n\
+    \    : LazySegmentTreeBase<Pair<T>, T, Psum<T>, PUpdate<T>, Update<T>, Pid<T>,\n\
+    \                      Const<T, UNUSED_VALUE>> {\n  using base = LazySegmentTreeBase<Pair<T>,\
+    \ T, Psum<T>, PUpdate<T>, Update<T>,\n                               Pid<T>, Const<T,\
+    \ UNUSED_VALUE>>;\n  UpdateSum_LazySegmentTree(const vector<T>& v) {\n    vector<Pair<T>>\
+    \ w(v.size());\n    for (int i = 0; i < (int)v.size(); i++) w[i] = Pair<T>(v[i],\
+    \ 1);\n    base::init(w);\n  }\n};\n\n}  // namespace SegmentTreeUtil\nusing SegmentTreeUtil::AddMax_LazySegmentTree;\n\
+    using SegmentTreeUtil::AddMin_LazySegmentTree;\nusing SegmentTreeUtil::AddSum_LazySegmentTree;\n\
+    using SegmentTreeUtil::UpdateMax_LazySegmentTree;\nusing SegmentTreeUtil::UpdateMin_LazySegmentTree;\n\
+    using SegmentTreeUtil::UpdateSum_LazySegmentTree;\n\n/**\n * @brief \u4F7F\u7528\
+    \u983B\u5EA6\u306E\u9AD8\u3044\u9045\u5EF6\u30BB\u30B0\u30E1\u30F3\u30C8\u6728\
+    \n * @docs docs/segment-tree/lazy-segment-tree-utility.md\n */\n#line 7 \"verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp\"\
+    \n\nusing mint = LazyMontgomeryModInt<998244353>;\nusing Pair = pair<mint, mint>;\n\
+    Pair f(Pair a, Pair b) { return Pair{a.first + b.first, a.second + b.second};\
+    \ };\nPair g(Pair a, Pair b) {\n  return Pair{a.first * b.first + a.second * b.second,\
+    \ a.second};\n};\nPair h(Pair a, Pair b) {\n  return Pair{a.first * b.first, a.second\
+    \ * b.first + b.second};\n};\nPair ti() { return {0, 0}; }\nPair ei() { return\
+    \ {1, 0}; }\n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n \
+    \ V<Pair> a(N, {0, 1});\n  rep(i, N) in(a[i].first);\n\n  LazySegmentTreeBase<Pair,\
+    \ Pair, f, g, h, ti, ei> seg(a);\n\n  rep(_, Q) {\n    ini(cmd);\n    if (!cmd)\
+    \ {\n      inl(l, r, b, c);\n      seg.update(l, r, {b, c});\n    } else {\n \
+    \     inl(i);\n      out(seg.get_val(i).first);\n    }\n  }\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_point_get\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../modint/montgomery-modint.hpp\"\
+    \n#include \"../../segment-tree/lazy-segment-tree-utility.hpp\"\n\nusing mint\
+    \ = LazyMontgomeryModInt<998244353>;\nusing Pair = pair<mint, mint>;\nPair f(Pair\
+    \ a, Pair b) { return Pair{a.first + b.first, a.second + b.second}; };\nPair g(Pair\
+    \ a, Pair b) {\n  return Pair{a.first * b.first + a.second * b.second, a.second};\n\
+    };\nPair h(Pair a, Pair b) {\n  return Pair{a.first * b.first, a.second * b.first\
+    \ + b.second};\n};\nPair ti() { return {0, 0}; }\nPair ei() { return {1, 0}; }\n\
+    \nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, Q);\n  V<Pair> a(N,\
+    \ {0, 1});\n  rep(i, N) in(a[i].first);\n\n  LazySegmentTreeBase<Pair, Pair, f,\
+    \ g, h, ti, ei> seg(a);\n\n  rep(_, Q) {\n    ini(cmd);\n    if (!cmd) {\n   \
+    \   inl(l, r, b, c);\n      seg.update(l, r, {b, c});\n    } else {\n      inl(i);\n\
+    \      out(seg.get_val(i).first);\n    }\n  }\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -360,20 +381,18 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - data-structure/slide-window-aggregation.hpp
-  - misc/fastio.hpp
-  - internal/internal-type-traits.hpp
   - modint/montgomery-modint.hpp
+  - segment-tree/lazy-segment-tree-utility.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+  path: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
   requiredBy: []
   timestamp: '2023-09-02 22:21:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+documentation_of: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-swag.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-swag.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
+- /verify/verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp.html
+title: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
 ---

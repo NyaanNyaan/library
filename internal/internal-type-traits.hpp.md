@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: marathon/top-k.hpp
     title: marathon/top-k.hpp
+  - icon: ':warning:'
+    path: math/bigint-all.hpp
+    title: math/bigint-all.hpp
   - icon: ':heavy_check_mark:'
     path: math/bigint-garner.hpp
     title: Garner's algorithm for bigint
@@ -26,6 +29,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: math/bigint.hpp
     title: "\u591A\u500D\u9577\u6574\u6570"
+  - icon: ':heavy_check_mark:'
+    path: math/primitive-root-ll.hpp
+    title: math/primitive-root-ll.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/rational-binomial.hpp
+    title: math/rational-binomial.hpp
+  - icon: ':heavy_check_mark:'
+    path: math/rational-fps.hpp
+    title: math/rational-fps.hpp
   - icon: ':heavy_check_mark:'
     path: math/rational.hpp
     title: math/rational.hpp
@@ -96,6 +108,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/factorize.test.cpp
     title: verify/verify-unit-test/factorize.test.cpp
@@ -334,6 +349,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+    title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
     title: verify/verify-yosupo-math/yosupo-subset-convolution-fast.test.cpp
   - icon: ':heavy_check_mark:'
@@ -446,11 +464,15 @@ data:
   - modulo/mod-kth-root.hpp
   - prime/miller-rabin.hpp
   - prime/fast-factorize.hpp
+  - math/primitive-root-ll.hpp
   - math/bigint-garner.hpp
+  - math/rational-fps.hpp
   - math/rational.hpp
+  - math/rational-binomial.hpp
   - math/bigint-rational.hpp
   - math/bigint.hpp
   - math/bigint-gcd.hpp
+  - math/bigint-all.hpp
   - hashmap/hashmap-unerasable.hpp
   - marathon/top-k.hpp
   timestamp: '2023-05-21 20:49:42+09:00'
@@ -512,6 +534,7 @@ data:
   - verify/verify-unit-test/factorize.test.cpp
   - verify/verify-unit-test/radix-sort.test.cpp
   - verify/verify-unit-test/primitive-root.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
@@ -545,6 +568,7 @@ data:
   - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp

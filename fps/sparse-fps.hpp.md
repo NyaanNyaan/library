@@ -22,6 +22,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
     title: verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+    title: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -221,6 +224,7 @@ data:
   timestamp: '2023-08-31 20:44:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-inv.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-exp.test.cpp
   - verify/verify-yosupo-fps/yosupo-sparse-pow.test.cpp

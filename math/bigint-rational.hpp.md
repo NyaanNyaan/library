@@ -25,11 +25,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: ntt/ntt.hpp
     title: ntt/ntt.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: math/bigint-all.hpp
+    title: math/bigint-all.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
     title: verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -493,28 +499,16 @@ data:
     \ R& l, const R& r) {\n    return U{l.x} * r.y > U{l.y} * r.x;\n  };\n  friend\
     \ bool operator>=(const R& l, const R& r) { return l > r || l == r; }\n  friend\
     \ ostream& operator<<(ostream& os, const R& r) {\n    os << r.x;\n    if (r.x\
-    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  T to_mint(T\
-    \ mod) const {\n    assert(mod != 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n\
-    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u\
-    \ -= t * v, v);\n    }\n    return U((u % mod + mod) % mod) * x % mod;\n  }\n\
-    };\n\nusing Rational = RationalBase<long long, __int128_t>;\n\ntemplate <typename\
-    \ R = Rational>\nstruct Binomial {\n  vector<R> fc;\n  Binomial(int = 0) { fc.emplace_back(1);\
-    \ }\n  void extend() {\n    int n = fc.size();\n    R nxt = fc.back() * n;\n \
-    \   fc.push_back(nxt);\n  }\n  R fac(int n) {\n    if (n < 0) return 0;\n    while\
-    \ ((int)fc.size() <= n) extend();\n    return fc[n];\n  }\n  R finv(int n) {\n\
-    \    if (n < 0) return 0;\n    return fac(n).inverse();\n  }\n  R inv(int n) {\n\
-    \    if (n < 0) return -inv(-n);\n    return R{1, max(n, 1)};\n  }\n  R C(int\
-    \ n, int r) {\n    if (n < 0 or r < 0 or n < r) return R{0};\n    return fac(n)\
-    \ * finv(n - r) * finv(r);\n  }\n  R operator()(int n, int r) { return C(n, r);\
-    \ }\n  template <typename I>\n  R multinomial(const vector<I>& r) {\n    static_assert(is_integral<I>::value\
-    \ == true);\n    int n = 0;\n    for (auto& x : r) {\n      if (x < 0) return\
-    \ R{0};\n      n += x;\n    }\n    R res = fac(n);\n    for (auto& x : r) res\
-    \ *= finv(x);\n    return res;\n  }\n\n  template <typename I>\n  R operator()(const\
-    \ vector<I>& r) {\n    return multinomial(r);\n  }\n};\n#line 5 \"math/bigint-rational.hpp\"\
-    \n\nusing BigRational = RationalBase<bigint, bigint>;\n\ndouble to_double(const\
-    \ BigRational& r) {\n  pair<long double, int> a = r.x.dfp();\n  pair<long double,\
-    \ int> b = r.y.dfp();\n  return a.first / b.first * powl(10.0, a.second - b.second);\n\
-    }\n"
+    \ != 0 && r.y != 1) os << \"/\" << r.y;\n    return os;\n  }\n\n  // T \u306B\u30AD\
+    \u30E3\u30B9\u30C8\u3055\u308C\u308B\u306E\u3067 T \u304C bigint \u306E\u5834\u5408\
+    \u306F to_ll \u3082\u8981\u308B\n  T to_mint(T mod) const {\n    assert(mod !=\
+    \ 0);\n    T a = y, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t =\
+    \ a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return\
+    \ U((u % mod + mod) % mod) * x % mod;\n  }\n};\n\nusing Rational = RationalBase<long\
+    \ long, __int128_t>;\n#line 5 \"math/bigint-rational.hpp\"\n\nusing BigRational\
+    \ = RationalBase<bigint, bigint>;\n\ndouble to_double(const BigRational& r) {\n\
+    \  pair<long double, int> a = r.x.dfp();\n  pair<long double, int> b = r.y.dfp();\n\
+    \  return a.first / b.first * powl(10.0, a.second - b.second);\n}\n"
   code: "#pragma once\n\n#include \"bigint-gcd.hpp\"\n#include \"rational.hpp\"\n\n\
     using BigRational = RationalBase<bigint, bigint>;\n\ndouble to_double(const BigRational&\
     \ r) {\n  pair<long double, int> a = r.x.dfp();\n  pair<long double, int> b =\
@@ -531,11 +525,13 @@ data:
   - math/rational.hpp
   isVerificationFile: false
   path: math/bigint-rational.hpp
-  requiredBy: []
-  timestamp: '2023-05-29 20:50:32+09:00'
+  requiredBy:
+  - math/bigint-all.hpp
+  timestamp: '2023-09-02 22:21:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-2171-bigrational.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
 documentation_of: math/bigint-rational.hpp
 layout: document
 redirect_from:

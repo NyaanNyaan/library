@@ -6,6 +6,9 @@ data:
     title: internal/internal-type-traits.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: math/primitive-root-ll.hpp
+    title: math/primitive-root-ll.hpp
+  - icon: ':heavy_check_mark:'
     path: modulo/mod-kth-root.hpp
     title: kth root(Tonelli-Shanks algorithm)
   - icon: ':heavy_check_mark:'
@@ -54,6 +57,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-primality-test.test.cpp
     title: verify/verify-yosupo-math/yosupo-primality-test.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+    title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
     title: verify/verify-yosupo-ntt/yosupo-multivariate-circular-convolution.test.cpp
@@ -154,6 +160,7 @@ data:
   - modulo/mod-kth-root.hpp
   - prime/miller-rabin.hpp
   - prime/fast-factorize.hpp
+  - math/primitive-root-ll.hpp
   timestamp: '2023-05-29 21:58:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -168,6 +175,7 @@ data:
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-primality-test-u64.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-log.test.cpp

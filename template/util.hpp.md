@@ -244,6 +244,9 @@ data:
     path: verify/verify-unit-test/bigint3.test.cpp
     title: verify/verify-unit-test/bigint3.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/bigrational.test.cpp
+    title: verify/verify-unit-test/bigrational.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-unit-test/bitset-find-prev.test.cpp
     title: verify/verify-unit-test/bitset-find-prev.test.cpp
   - icon: ':heavy_check_mark:'
@@ -448,6 +451,9 @@ data:
     path: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
     title: verify/verify-yosupo-ds/yosupo-binary-trie.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -549,6 +555,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-dynamic-segtree.test.cpp
@@ -802,6 +814,9 @@ data:
     path: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
     title: verify/verify-yosupo-math/yosupo-counting-primes.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
+    title: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-matrixlib.test.cpp
   - icon: ':heavy_check_mark:'
@@ -879,6 +894,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
     title: verify/verify-yosupo-math/yosupo-prime-table.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
+    title: verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
     title: verify/verify-yosupo-math/yosupo-sparse-determinant.test.cpp
@@ -1180,6 +1198,9 @@ data:
     path: verify/verify-yuki/yuki-1875.test.cpp
     title: verify/verify-yuki/yuki-1875.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+    title: verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-1939.test.cpp
     title: verify/verify-yuki/yuki-1939.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1407,6 +1428,7 @@ data:
   - verify/verify-yuki/yuki-0890.test.cpp
   - verify/verify-yuki/yuki-1789.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
+  - verify/verify-yuki/yuki-1939-sparse-pow.test.cpp
   - verify/verify-yuki/yuki-1269.test.cpp
   - verify/verify-yuki/yuki-1303.test.cpp
   - verify/verify-yuki/yuki-0704.test.cpp
@@ -1634,11 +1656,13 @@ data:
   - verify/verify-unit-test/fast-inv.test.cpp
   - verify/verify-unit-test/fps-sparse.test.cpp
   - verify/verify-unit-test/fps.test.cpp
+  - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-unit-test/lazyseg-bsearch.test.cpp
   - verify/verify-unit-test/nimber.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
   - verify/verify-unit-test/mf.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-rmq.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-reverse-range-sum.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-set-path-composite.test.cpp
@@ -1646,6 +1670,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-precedessor-problem-segtree.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-deque-operate-all-composite.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
@@ -1681,6 +1706,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-point-get-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-li-chao-tree.test.cpp
@@ -1699,6 +1725,7 @@ data:
   - verify/verify-yosupo-math/yosupo-lcm-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-primality-test.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp
+  - verify/verify-yosupo-math/yosupo-primitive-root.test.cpp
   - verify/verify-yosupo-math/yosupo-subset-convolution.test.cpp
   - verify/verify-yosupo-math/yosupo-prime-table.test.cpp
   - verify/verify-yosupo-math/yosupo-kth-root-integral.test.cpp
@@ -1723,6 +1750,7 @@ data:
   - verify/verify-yosupo-math/yosupo-sum-of-totient.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant.test.cpp
   - verify/verify-yosupo-math/yosupo-polynomial-composite-set-power-series.test.cpp
+  - verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
   - verify/verify-yosupo-math/yosupo-matrix-product-strassen.test.cpp
   - verify/verify-yosupo-math/yosupo-mod-sqrt.test.cpp
   - verify/verify-yosupo-math/yosupo-binomial-coefficient.test.cpp

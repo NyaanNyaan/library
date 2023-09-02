@@ -2,17 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: data-structure/slide-window-aggregation.hpp
-    title: Slide Window Aggrigation
+    path: matrix/determinant-arbitrary-mod.hpp
+    title: matrix/determinant-arbitrary-mod.hpp
   - icon: ':heavy_check_mark:'
-    path: internal/internal-type-traits.hpp
-    title: internal/internal-type-traits.hpp
+    path: modint/arbitrary-modint.hpp
+    title: "modint (2^{30} \u672A\u6E80\u306E\u4EFB\u610F mod \u7528)"
   - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
-  - icon: ':heavy_check_mark:'
-    path: modint/montgomery-modint.hpp
-    title: modint/montgomery-modint.hpp
+    path: modint/barrett-reduction.hpp
+    title: modint/barrett-reduction.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -38,13 +35,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
+    PROBLEM: https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod
     links:
-    - https://judge.yosupo.jp/problem/queue_operate_all_composite
-  bundledCode: "#line 1 \"verify/verify-yosupo-ds/yosupo-swag.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\n\n\
-    #line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    - https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -216,143 +213,76 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 2 \"data-structure/slide-window-aggregation.hpp\"\n\n#line 4 \"data-structure/slide-window-aggregation.hpp\"\
-    \nusing namespace std;\n\ntemplate <typename T, typename F>\nstruct SlideWindowAggregation\
-    \ {\n  vector<T> a0, a1, r0, r1;\n  F f;\n  T I, f0, f1;\n\n  SlideWindowAggregation(F\
-    \ _f, T _i) : f(_f), I(_i), f0(_i), f1(_i) {}\n\n private:\n  void push_s0(const\
-    \ T &x) {\n    a0.push_back(x);\n    r0.push_back(f0 = f(x, f0));\n  }\n  void\
-    \ push_s1(const T &x) {\n    a1.push_back(x);\n    r1.push_back(f1 = f(f1, x));\n\
-    \  }\n  void transfer() {\n    while (!a1.empty()) {\n      push_s0(a1.back());\n\
-    \      a1.pop_back();\n    }\n    while (!r1.empty()) r1.pop_back();\n    f1 =\
-    \ I;\n  }\n\n public:\n  void push(const T &x) {\n    if (a0.empty()) {\n    \
-    \  push_s0(x);\n      transfer();\n    } else {\n      push_s1(x);\n    }\n  }\n\
-    \  void pop() {\n    if (a0.empty()) transfer();\n    a0.pop_back();\n    r0.pop_back();\n\
-    \    f0 = r0.empty() ? I : r0.back();\n  }\n  T query() { return f(f0, f1); }\n\
-    };\n\n/**\n * @brief Slide Window Aggrigation\n * @docs docs/data-structure/slide-window-aggregation.md\n\
-    \ */\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace\
-    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
-    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
-    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
-    \                               is_same_v<T, __uint128_t>,\n                 \
-    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
-    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
-    \                           true_type, false_type>::type;\n\ntemplate <typename\
-    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
-    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
-    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
-    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
-    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\n\
-    static constexpr int SZ = 1 << 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ],\
-    \ outbuf[SZ];\nint in_left = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n\
-    \  char num[40000];\n  constexpr Pre() : num() {\n    for (int i = 0; i < 10000;\
-    \ i++) {\n      int n = i;\n      for (int j = 3; j >= 0; j--) {\n        num[i\
-    \ * 4 + j] = n % 10 + '0';\n        n /= 10;\n      }\n    }\n  }\n} constexpr\
-    \ pre;\n\nvoid load() {\n  int len = in_right - in_left;\n  memmove(inbuf, inbuf\
-    \ + in_left, len);\n  in_right = len + fread(inbuf + len, 1, SZ - len, stdin);\n\
-    \  in_left = 0;\n}\nvoid flush() {\n  fwrite(outbuf, 1, out_right, stdout);\n\
-    \  out_right = 0;\n}\nvoid skip_space() {\n  if (in_left + offset > in_right)\
-    \ load();\n  while (inbuf[in_left] <= ' ') in_left++;\n}\n\nvoid single_read(char&\
-    \ c) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  c = inbuf[in_left++];\n\
-    }\nvoid single_read(string& S) {\n  skip_space();\n  while (true) {\n    if (in_left\
-    \ == in_right) load();\n    int i = in_left;\n    for (; i != in_right; i++) {\n\
-    \      if (inbuf[i] <= ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i,\
-    \ back_inserter(S));\n    in_left = i;\n    if (i != in_right) break;\n  }\n}\n\
-    template <typename T,\n          enable_if_t<internal::is_broadly_integral_v<T>>*\
-    \ = nullptr>\nvoid single_read(T& x) {\n  if (in_left + offset > in_right) load();\n\
-    \  skip_space();\n  char c = inbuf[in_left++];\n  [[maybe_unused]] bool minus\
-    \ = false;\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (c ==\
-    \ '-') minus = true, c = inbuf[in_left++];\n  }\n  x = 0;\n  while (c >= '0')\
-    \ {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n  }\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (minus) x = -x;\n  }\n}\nvoid rd()\
-    \ {}\ntemplate <typename Head, typename... Tail>\nvoid rd(Head& head, Tail&...\
-    \ tail) {\n  single_read(head);\n  rd(tail...);\n}\n\nvoid single_write(const\
-    \ char& c) {\n  if (out_right > SZ - offset) flush();\n  outbuf[out_right++] =\
-    \ c;\n}\nvoid single_write(const bool& b) {\n  if (out_right > SZ - offset) flush();\n\
-    \  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const string& S)\
-    \ {\n  flush(), fwrite(S.data(), 1, S.size(), stdout);\n}\nvoid single_write(const\
-    \ char* p) { flush(), fwrite(p, 1, strlen(p), stdout); }\ntemplate <typename T,\n\
-    \          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\nvoid single_write(const\
-    \ T& _x) {\n  if (out_right > SZ - offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++]\
-    \ = '0';\n    return;\n  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>)\
-    \ {\n    if (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
-    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
-    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
-    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
-    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
-    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
-    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
-    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
-    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
-    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
-    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
-    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 2 \"modint/montgomery-modint.hpp\"\
-    \n\ntemplate <uint32_t mod>\nstruct LazyMontgomeryModInt {\n  using mint = LazyMontgomeryModInt;\n\
-    \  using i32 = int32_t;\n  using u32 = uint32_t;\n  using u64 = uint64_t;\n\n\
-    \  static constexpr u32 get_r() {\n    u32 ret = mod;\n    for (i32 i = 0; i <\
-    \ 4; ++i) ret *= 2 - mod * ret;\n    return ret;\n  }\n\n  static constexpr u32\
-    \ r = get_r();\n  static constexpr u32 n2 = -u64(mod) % mod;\n  static_assert(mod\
-    \ < (1 << 30), \"invalid, mod >= 2 ^ 30\");\n  static_assert((mod & 1) == 1, \"\
-    invalid, mod % 2 == 0\");\n  static_assert(r * mod == 1, \"this code has bugs.\"\
-    );\n\n  u32 a;\n\n  constexpr LazyMontgomeryModInt() : a(0) {}\n  constexpr LazyMontgomeryModInt(const\
-    \ int64_t &b)\n      : a(reduce(u64(b % mod + mod) * n2)){};\n\n  static constexpr\
-    \ u32 reduce(const u64 &b) {\n    return (b + u64(u32(b) * u32(-r)) * mod) >>\
-    \ 32;\n  }\n\n  constexpr mint &operator+=(const mint &b) {\n    if (i32(a +=\
-    \ b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n  }\n\n  constexpr mint\
-    \ &operator-=(const mint &b) {\n    if (i32(a -= b.a) < 0) a += 2 * mod;\n   \
-    \ return *this;\n  }\n\n  constexpr mint &operator*=(const mint &b) {\n    a =\
-    \ reduce(u64(a) * b.a);\n    return *this;\n  }\n\n  constexpr mint &operator/=(const\
-    \ mint &b) {\n    *this *= b.inverse();\n    return *this;\n  }\n\n  constexpr\
-    \ mint operator+(const mint &b) const { return mint(*this) += b; }\n  constexpr\
-    \ mint operator-(const mint &b) const { return mint(*this) -= b; }\n  constexpr\
-    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  constexpr\
-    \ mint operator/(const mint &b) const { return mint(*this) /= b; }\n  constexpr\
-    \ bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  constexpr bool operator!=(const mint\
-    \ &b) const {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod\
-    \ : b.a);\n  }\n  constexpr mint operator-() const { return mint() - mint(*this);\
-    \ }\n  constexpr mint operator+() const { return mint(*this); }\n\n  constexpr\
-    \ mint pow(u64 n) const {\n    mint ret(1), mul(*this);\n    while (n > 0) {\n\
-    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
-    \ ret;\n  }\n\n  constexpr mint inverse() const {\n    int x = get(), y = mod,\
-    \ u = 1, v = 0, t = 0, tmp = 0;\n    while (y > 0) {\n      t = x / y;\n     \
-    \ x -= t * y, u -= t * v;\n      tmp = x, x = y, y = tmp;\n      tmp = u, u =\
-    \ v, v = tmp;\n    }\n    return mint{u};\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, mint &b) {\n    int64_t t;\n    is >> t;\n    b = LazyMontgomeryModInt<mod>(t);\n\
-    \    return (is);\n  }\n\n  constexpr u32 get() const {\n    u32 ret = reduce(a);\n\
-    \    return ret >= mod ? ret - mod : ret;\n  }\n\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n#line 7 \"verify/verify-yosupo-ds/yosupo-swag.test.cpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
-    \  using p = pair<mint, mint>;\n  auto f = [](const p &a, const p &b) {\n    return\
-    \ p{a.first * b.first, a.second * b.first + b.second};\n  };\n  SlideWindowAggregation<p,\
-    \ decltype(f)> swag(f, p{1, 0});\n  int Q;\n  rd(Q);\n  rep(_, Q) {\n    int cmd;\n\
-    \    rd(cmd);\n    if (cmd == 0) {\n      int a, b;\n      rd(a, b);\n      swag.push(p{a,\
-    \ b});\n    } else if (cmd == 1) {\n      swag.pop();\n    } else {\n      int\
-    \ x;\n      rd(x);\n      p q = swag.query();\n      wtn((q.first * x + q.second).get());\n\
-    \    }\n  }\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
-    \n\n#include \"../../template/template.hpp\"\n#include \"../../data-structure/slide-window-aggregation.hpp\"\
-    \n#include \"../../misc/fastio.hpp\"\n#include \"../../modint/montgomery-modint.hpp\"\
-    \n\nusing namespace Nyaan; void Nyaan::solve() {\n  using mint = LazyMontgomeryModInt<998244353>;\n\
-    \  using p = pair<mint, mint>;\n  auto f = [](const p &a, const p &b) {\n    return\
-    \ p{a.first * b.first, a.second * b.first + b.second};\n  };\n  SlideWindowAggregation<p,\
-    \ decltype(f)> swag(f, p{1, 0});\n  int Q;\n  rd(Q);\n  rep(_, Q) {\n    int cmd;\n\
-    \    rd(cmd);\n    if (cmd == 0) {\n      int a, b;\n      rd(a, b);\n      swag.push(p{a,\
-    \ b});\n    } else if (cmd == 1) {\n      swag.pop();\n    } else {\n      int\
-    \ x;\n      rd(x);\n      p q = swag.query();\n      wtn((q.first * x + q.second).get());\n\
-    \    }\n  }\n}"
+    \ 4 \"verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp\"\n\
+    //\n#line 2 \"matrix/determinant-arbitrary-mod.hpp\"\n\n#line 4 \"matrix/determinant-arbitrary-mod.hpp\"\
+    \nusing namespace std;\n\ntemplate <typename mint>\nmint determinant_arbitrary_mod(vector<vector<mint>>\
+    \ a) {\n  int n = a.size();\n  mint det = 1;\n  for (int j = 0; j < n; j++) {\n\
+    \    for (int i = j; i < n; i++) {\n      if (a[i][j] == 0) continue;\n      if\
+    \ (i != j) swap(a[i], a[j]), det = -det;\n      break;\n    }\n    if (a[j][j]\
+    \ == 0) return 0;\n    for (int i = j + 1; i < n; i++) {\n      while (a[i][j]\
+    \ != 0) {\n        long long q = a[j][j].get() / a[i][j].get();\n        mint\
+    \ c = -q;\n        for (int k = j; k < n; k++) a[j][k] += a[i][k] * c;\n     \
+    \   swap(a[i], a[j]), det = -det;\n      }\n    }\n  }\n\n  for (int i = 0; i\
+    \ < n; i++) det *= a[i][i];\n  return det;\n}\n#line 6 \"verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp\"\
+    \n//\n#line 2 \"modint/arbitrary-modint.hpp\"\n\n#line 2 \"modint/barrett-reduction.hpp\"\
+    \n\n#line 4 \"modint/barrett-reduction.hpp\"\nusing namespace std;\n\nstruct Barrett\
+    \ {\n  using u32 = unsigned int;\n  using i64 = long long;\n  using u64 = unsigned\
+    \ long long;\n  u32 m;\n  u64 im;\n  Barrett() : m(), im() {}\n  Barrett(int n)\
+    \ : m(n), im(u64(-1) / m + 1) {}\n  constexpr inline i64 quo(u64 n) {\n    u64\
+    \ x = u64((__uint128_t(n) * im) >> 64);\n    u32 r = n - x * m;\n    return m\
+    \ <= r ? x - 1 : x;\n  }\n  constexpr inline i64 rem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * im) >> 64);\n    u32 r = n - x * m;\n    return m <= r ? r + m : r;\n  }\n\
+    \  constexpr inline pair<i64, int> quorem(u64 n) {\n    u64 x = u64((__uint128_t(n)\
+    \ * im) >> 64);\n    u32 r = n - x * m;\n    if (m <= r) return {x - 1, r + m};\n\
+    \    return {x, r};\n  }\n  constexpr inline i64 pow(u64 n, i64 p) {\n    u32\
+    \ a = rem(n), r = m == 1 ? 0 : 1;\n    while (p) {\n      if (p & 1) r = rem(u64(r)\
+    \ * a);\n      a = rem(u64(a) * a);\n      p >>= 1;\n    }\n    return r;\n  }\n\
+    };\n#line 4 \"modint/arbitrary-modint.hpp\"\n\ntemplate <int id>\nstruct ArbitraryModIntBase\
+    \ {\n  int x;\n\n  ArbitraryModIntBase() : x(0) {}\n\n  ArbitraryModIntBase(int64_t\
+    \ y) {\n    int z = y % get_mod();\n    if (z < 0) z += get_mod();\n    x = z;\n\
+    \  }\n\n  ArbitraryModIntBase &operator+=(const ArbitraryModIntBase &p) {\n  \
+    \  if ((x += p.x) >= get_mod()) x -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
+    \ &operator-=(const ArbitraryModIntBase &p) {\n    if ((x += get_mod() - p.x)\
+    \ >= get_mod()) x -= get_mod();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
+    \ &operator*=(const ArbitraryModIntBase &p) {\n    x = rem((unsigned long long)x\
+    \ * p.x);\n    return *this;\n  }\n\n  ArbitraryModIntBase &operator/=(const ArbitraryModIntBase\
+    \ &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n\n  ArbitraryModIntBase\
+    \ operator-() const { return ArbitraryModIntBase(-x); }\n  ArbitraryModIntBase\
+    \ operator+() const { return *this; }\n\n  ArbitraryModIntBase operator+(const\
+    \ ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this) += p;\n\
+    \  }\n\n  ArbitraryModIntBase operator-(const ArbitraryModIntBase &p) const {\n\
+    \    return ArbitraryModIntBase(*this) -= p;\n  }\n\n  ArbitraryModIntBase operator*(const\
+    \ ArbitraryModIntBase &p) const {\n    return ArbitraryModIntBase(*this) *= p;\n\
+    \  }\n\n  ArbitraryModIntBase operator/(const ArbitraryModIntBase &p) const {\n\
+    \    return ArbitraryModIntBase(*this) /= p;\n  }\n\n  bool operator==(const ArbitraryModIntBase\
+    \ &p) const { return x == p.x; }\n\n  bool operator!=(const ArbitraryModIntBase\
+    \ &p) const { return x != p.x; }\n\n  ArbitraryModIntBase inverse() const {\n\
+    \    int a = x, b = get_mod(), u = 1, v = 0, t;\n    while (b > 0) {\n      t\
+    \ = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n  \
+    \  return ArbitraryModIntBase(u);\n  }\n\n  ArbitraryModIntBase pow(int64_t n)\
+    \ const {\n    ArbitraryModIntBase ret(1), mul(x);\n    while (n > 0) {\n    \
+    \  if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const ArbitraryModIntBase\
+    \ &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModIntBase &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModIntBase(t);\n\
+    \    return (is);\n  }\n\n  int get() const { return x; }\n\n  inline unsigned\
+    \ int rem(unsigned long long p) { return barrett().rem(p); }\n\n  static inline\
+    \ Barrett &barrett() {\n    static Barrett b;\n    return b;\n  }\n\n  static\
+    \ inline int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\n \
+    \ static void set_mod(int md) {\n    assert(0 < md && md <= (1LL << 30) - 1);\n\
+    \    get_mod() = md;\n    barrett() = Barrett(md);\n  }\n};\n\nusing ArbitraryModInt\
+    \ = ArbitraryModIntBase<-1>;\n\n/**\n * @brief modint (2^{30} \u672A\u6E80\u306E\
+    \u4EFB\u610F mod \u7528)\n */\n#line 8 \"verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp\"\
+    \nusing mint = ArbitraryModInt;\nusing namespace Nyaan;\n\nvoid q() {\n  inl(N,\
+    \ mod);\n  mint::set_mod(mod);\n  vector a(N, vector(N, mint{}));\n  in(a);\n\
+    \  out(determinant_arbitrary_mod(a));\n}\n\nvoid Nyaan::solve() {\n  int t = 1;\n\
+    \  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det_arbitrary_mod\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../matrix/determinant-arbitrary-mod.hpp\"\
+    \n//\n#include \"../../modint/arbitrary-modint.hpp\"\nusing mint = ArbitraryModInt;\n\
+    using namespace Nyaan;\n\nvoid q() {\n  inl(N, mod);\n  mint::set_mod(mod);\n\
+    \  vector a(N, vector(N, mint{}));\n  in(a);\n  out(determinant_arbitrary_mod(a));\n\
+    }\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -360,20 +290,19 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - data-structure/slide-window-aggregation.hpp
-  - misc/fastio.hpp
-  - internal/internal-type-traits.hpp
-  - modint/montgomery-modint.hpp
+  - matrix/determinant-arbitrary-mod.hpp
+  - modint/arbitrary-modint.hpp
+  - modint/barrett-reduction.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+  path: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
   requiredBy: []
   timestamp: '2023-09-02 22:21:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+documentation_of: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-ds/yosupo-swag.test.cpp
-- /verify/verify/verify-yosupo-ds/yosupo-swag.test.cpp.html
-title: verify/verify-yosupo-ds/yosupo-swag.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-determinant-arbitrary-mod.test.cpp
 ---

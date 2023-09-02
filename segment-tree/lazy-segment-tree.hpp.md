@@ -12,6 +12,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -84,6 +87,7 @@ data:
   verifiedWith:
   - verify/verify-unit-test/rbst-segment-tree.test.cpp
   - verify/verify-unit-test/lazyseg-setval-2.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-point-get.test.cpp
   - verify/verify-yosupo-ds/yosupo-lazysegtree.test.cpp
 documentation_of: segment-tree/lazy-segment-tree.hpp
 layout: document
