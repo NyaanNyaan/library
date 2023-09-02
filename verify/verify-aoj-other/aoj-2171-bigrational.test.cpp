@@ -41,7 +41,9 @@ double calc(int N, int s, int t, vl q, vvi A) {
     }
     m[i][i] -= 1;
   }
-  auto ans = LinearEquation(m, b)[0];
+  auto anss = LinearEquation(m, b);
+  assert(sz(anss) >= 1);
+  auto ans = anss[0];
   if constexpr (is_same_v<T, double>) {
     return ans[s];
   } else {
@@ -50,7 +52,7 @@ double calc(int N, int s, int t, vl q, vvi A) {
 }
 
 void test() {
-  rep(t, 100) {
+  rep(t, 500) {
     int N = rng(2, 30);
     int S = -1, T = -1;
     do {
@@ -60,7 +62,7 @@ void test() {
     vl q(N);
     each(x, q) x = rng(0, 1);
     vvi A(N, vi(N));
-    rep(i, N) rep(j, i) A[j][i] = A[i][j] = rng(0, 1) ? rng(1, 10) : 0;
+    rep(i, N) rep(j, i) A[j][i] = A[i][j] = rng(0, 10) ? rng(1, 10) : 0;
     double a1 = calc<double>(N, S, T, q, A);
     double a2 = calc<BigRational>(N, S, T, q, A);
     double error = abs(a1 - a2) / max(1.0, a2);
