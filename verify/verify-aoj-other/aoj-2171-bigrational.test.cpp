@@ -66,7 +66,7 @@ void test() {
     double a1 = calc<double>(N, S, T, q, A);
     double a2 = calc<BigRational>(N, S, T, q, A);
     double error = abs(a1 - a2) / max(1.0, a2);
-    assert(error < 1e-6);
+    assert(error < 1e-10);
   }
 }
 
