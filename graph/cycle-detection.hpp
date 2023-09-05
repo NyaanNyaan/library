@@ -1,9 +1,23 @@
 #pragma once
 
+#include <utility>
+#include <vector>
+using namespace std;
+
 #include "./graph-template.hpp"
 
 template <typename G>
 vector<pair<int, int>> CycleDetection(const G& g, bool directed = true) {
+  for (int i = 0; i < (int)g.size(); i++) {
+    for (auto j : g[i]) {
+      if (i == j) {
+        vector<pair<int, int>> res;
+        res.emplace_back(i, i);
+        return res;
+      }
+    }
+  }
+
   vector<int> pidx(g.size(), -1), vis(g.size(), 0);
 
   vector<pair<int, int>> cycle;

@@ -1,18 +1,6 @@
 #pragma once
 
-#define ENABLE_HAS_VAR(var)                                  \
-  template <typename T>                                      \
-  class has_##var {                                          \
-    template <typename U, int = (&U::var, 0)>                \
-    static true_type check(U *);                             \
-    static false_type check(...);                            \
-    static T *t;                                             \
-                                                             \
-   public:                                                   \
-    static constexpr bool value = decltype(check(t))::value; \
-  };                                                         \
-  template <typename T>                                      \
-  inline constexpr bool has_##var##_v = has_##var<T>::value;
+#include "../internal/internal-type-traits.hpp"
 
 ENABLE_HAS_VAR(lazy);
 ENABLE_HAS_VAR(shift);

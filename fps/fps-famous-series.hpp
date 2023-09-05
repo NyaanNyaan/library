@@ -1,6 +1,7 @@
 #pragma once
-#include "./formal-power-series.hpp"
+
 #include "../modulo/binomial.hpp"
+#include "formal-power-series.hpp"
 #include "taylor-shift.hpp"
 
 template <typename mint>
@@ -14,6 +15,18 @@ FormalPowerSeries<mint> Stirling1st(int N, Binomial<mint> &C) {
     f *= TaylorShift(f, mint(n >> 1), C);
     if (n & 1) f = (f << 1) + f * (n - 1);
   }
+  return f;
+}
+
+// S(0, K), S(1, K), ..., S(upper, K) を列挙
+template <typename mint>
+FormalPowerSeries<mint> Stirling1stRow(int K, int upper, Binomial<mint> &C) {
+  using fps = FormalPowerSeries<mint>;
+  if (upper < K) return {};
+  fps f(upper + 1);
+  for (int i = 1; i < (int)f.size(); i++) f[i] = C.inv(i);
+  f = f.pow(K) * C.finv(K);
+  for (int n = K; n <= upper; n++) f[n] *= C.fac(n);
   return f;
 }
 
