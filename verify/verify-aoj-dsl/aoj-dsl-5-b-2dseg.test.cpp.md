@@ -5,12 +5,6 @@ data:
     path: data-structure-2d/2d-segment-tree.hpp
     title: "\u4E8C\u6B21\u5143\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
   - icon: ':heavy_check_mark:'
-    path: internal/internal-seed.hpp
-    title: internal/internal-seed.hpp
-  - icon: ':heavy_check_mark:'
-    path: misc/rng.hpp
-    title: misc/rng.hpp
-  - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
   - icon: ':heavy_check_mark:'
@@ -35,13 +29,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B
     links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068
-  bundledCode: "#line 1 \"verify/verify-aoj-other/aoj-1068.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068\"\n//\n#line\
-    \ 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include\
-    \ <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B
+  bundledCode: "#line 1 \"verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp\"\n#define\
+    \ PROBLEM \\\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
     #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
     \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
     \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
@@ -213,7 +207,7 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-aoj-other/aoj-1068.test.cpp\"\n//\n#line 2 \"data-structure-2d/2d-segment-tree.hpp\"\
+    \ 5 \"verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp\"\n//\n#line 2 \"data-structure-2d/2d-segment-tree.hpp\"\
     \n\ntemplate <typename T, typename F>\nstruct SegmentTree2D {\n private:\n  int\
     \ id(int h, int w) const { return h * 2 * W + w; }\n\n public:\n  int H, W;\n\
     \  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree2D(int h, int w,\
@@ -242,53 +236,23 @@ data:
     \ w1, w2)), h1++;\n      if (h2 & 1) --h2, res = f(res, _inner_query(h2, w1, w2));\n\
     \    }\n    return res;\n  }\n};\n\n/**\n * @brief \u4E8C\u6B21\u5143\u30BB\u30B0\
     \u30E1\u30F3\u30C8\u6728\n * @docs docs/data-structure-2d/2d-segment-tree.md\n\
-    \ */\n#line 2 \"misc/rng.hpp\"\n\n#line 2 \"internal/internal-seed.hpp\"\n\n#line\
-    \ 4 \"internal/internal-seed.hpp\"\nusing namespace std;\n\nnamespace internal\
-    \ {\nunsigned long long non_deterministic_seed() {\n  unsigned long long m =\n\
-    \      chrono::duration_cast<chrono::nanoseconds>(\n          chrono::high_resolution_clock::now().time_since_epoch())\n\
-    \          .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >>\
-    \ 31, m ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() {\
-    \ return 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210\
-    \ (\u624B\u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\
-    \u51FA\u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\
-    \u304F\u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\
-    \u30B7\u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long\
-    \ long seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return\
-    \ deterministic_seed();\n#else\n  return non_deterministic_seed();\n#endif\n}\n\
-    \n}  // namespace internal\n#line 4 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\
-    using i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\n\
-    u64 rng() {\n  static u64 _x = internal::seed();\n  return _x ^= _x << 7, _x ^=\
-    \ _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n  return\
-    \ l + rng() % u64(r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r) {\n \
-    \ assert(l < r);\n  return l + rng() % u64(r - l);\n}\n\n// choose n numbers from\
-    \ [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n  assert(l\
-    \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
-    \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
-    \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
-    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
-    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
-    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
-    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
-    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
-    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 7 \"\
-    verify/verify-aoj-other/aoj-1068.test.cpp\"\nusing namespace Nyaan;\n\nvoid q()\
-    \ {\n  inl(R, C, Q);\n  if (R == 0) exit(0);\n  vvi A(R, vi(C));\n  in(A);\n \
-    \ SegmentTree2D seg(\n      R, C, [](int a, int b) { return min(a, b); }, int(PW(31)\
-    \ - 1));\n\n  // set, update \u4E21\u65B9 verify \u3059\u308B\u82E6\u8089\u306E\
-    \u7B56\n  if (rng() & 1) {\n    rep(i, R) rep(j, C) seg.set(i, j, A[i][j]);\n\
-    \    seg.build();\n  } else {\n    rep(i, R) rep(j, C) seg.update(i, j, A[i][j]);\n\
-    \  }\n\n  rep(_, Q) {\n    inl(r1, c1, r2, c2);\n    out(seg.query(r1, c1, r2\
-    \ + 1, c2 + 1));\n  }\n}\n\nvoid Nyaan::solve() {\n  while (1) q();\n}\n"
-  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1068\"\
+    \ */\n#line 7 \"verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp\"\n//\nusing\
+    \ namespace Nyaan;\n\nvoid q() {\n  int MAX = TEN(3) + 3;\n  SegmentTree2D seg(\n\
+    \      MAX, MAX, [](int a, int b) { return a + b; }, 0);\n\n  ini(N);\n  rep(i,\
+    \ N) {\n    ini(a, b, c, d);\n    seg.update(a, b, seg.get(a, b) + 1);\n    seg.update(a,\
+    \ d, seg.get(a, d) - 1);\n    seg.update(c, b, seg.get(c, b) - 1);\n    seg.update(c,\
+    \ d, seg.get(c, d) + 1);\n  }\n  int ans = 0;\n  rep(i, MAX) rep(j, MAX) amax(ans,\
+    \ seg.query(0, 0, i + 1, j + 1));\n  out(ans);\n}\n\nvoid Nyaan::solve() {\n \
+    \ int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \\\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_5_B\"\
     \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../data-structure-2d/2d-segment-tree.hpp\"\
-    \n#include \"../../misc/rng.hpp\"\nusing namespace Nyaan;\n\nvoid q() {\n  inl(R,\
-    \ C, Q);\n  if (R == 0) exit(0);\n  vvi A(R, vi(C));\n  in(A);\n  SegmentTree2D\
-    \ seg(\n      R, C, [](int a, int b) { return min(a, b); }, int(PW(31) - 1));\n\
-    \n  // set, update \u4E21\u65B9 verify \u3059\u308B\u82E6\u8089\u306E\u7B56\n\
-    \  if (rng() & 1) {\n    rep(i, R) rep(j, C) seg.set(i, j, A[i][j]);\n    seg.build();\n\
-    \  } else {\n    rep(i, R) rep(j, C) seg.update(i, j, A[i][j]);\n  }\n\n  rep(_,\
-    \ Q) {\n    inl(r1, c1, r2, c2);\n    out(seg.query(r1, c1, r2 + 1, c2 + 1));\n\
-    \  }\n}\n\nvoid Nyaan::solve() {\n  while (1) q();\n}\n"
+    \n//\nusing namespace Nyaan;\n\nvoid q() {\n  int MAX = TEN(3) + 3;\n  SegmentTree2D\
+    \ seg(\n      MAX, MAX, [](int a, int b) { return a + b; }, 0);\n\n  ini(N);\n\
+    \  rep(i, N) {\n    ini(a, b, c, d);\n    seg.update(a, b, seg.get(a, b) + 1);\n\
+    \    seg.update(a, d, seg.get(a, d) - 1);\n    seg.update(c, b, seg.get(c, b)\
+    \ - 1);\n    seg.update(c, d, seg.get(c, d) + 1);\n  }\n  int ans = 0;\n  rep(i,\
+    \ MAX) rep(j, MAX) amax(ans, seg.query(0, 0, i + 1, j + 1));\n  out(ans);\n}\n\
+    \nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -297,18 +261,16 @@ data:
   - template/debug.hpp
   - template/macro.hpp
   - data-structure-2d/2d-segment-tree.hpp
-  - misc/rng.hpp
-  - internal/internal-seed.hpp
   isVerificationFile: true
-  path: verify/verify-aoj-other/aoj-1068.test.cpp
+  path: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
   requiredBy: []
   timestamp: '2023-09-08 22:52:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-aoj-other/aoj-1068.test.cpp
+documentation_of: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-aoj-other/aoj-1068.test.cpp
-- /verify/verify/verify-aoj-other/aoj-1068.test.cpp.html
-title: verify/verify-aoj-other/aoj-1068.test.cpp
+- /verify/verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
+- /verify/verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp.html
+title: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
 ---

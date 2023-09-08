@@ -97,6 +97,9 @@ data:
     path: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
     title: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -1457,6 +1460,7 @@ data:
   - verify/verify-aoj-dsl/aoj-dsl-2-h.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-1-a-dynamic.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-i.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-b-segtree.test.cpp
   - verify/verify-aoj-dsl/aoj-dsl-2-e-imos.test.cpp

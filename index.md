@@ -1138,6 +1138,9 @@ data:
       path: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-3-d.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
+      title: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
       title: verify/verify-aoj-dsl/aoj-dsl-5-b-bit2d.test.cpp
     - icon: ':heavy_check_mark:'

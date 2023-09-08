@@ -4,6 +4,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
+    title: verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-other/aoj-1068.test.cpp
     title: verify/verify-aoj-other/aoj-1068.test.cpp
   _isVerificationFailed: false
@@ -14,8 +17,8 @@ data:
     document_title: "\u4E8C\u6B21\u5143\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
     links: []
   bundledCode: "#line 2 \"data-structure-2d/2d-segment-tree.hpp\"\n\ntemplate <typename\
-    \ T, typename F>\nstruct SegmentTree2D {\n private:\n  int id(int h, int w) {\
-    \ return h * 2 * W + w; }\n\n public:\n  int H, W;\n  vector<T> seg;\n  const\
+    \ T, typename F>\nstruct SegmentTree2D {\n private:\n  int id(int h, int w) const\
+    \ { return h * 2 * W + w; }\n\n public:\n  int H, W;\n  vector<T> seg;\n  const\
     \ F f;\n  const T I;\n\n  SegmentTree2D(int h, int w, F _f, const T& i) : f(_f),\
     \ I(i) { init(h, w); }\n\n  void init(int h, int w) {\n    H = W = 1;\n    while\
     \ (H < h) H <<= 1;\n    while (W < w) W <<= 1;\n    seg.assign(4 * H * W, I);\n\
@@ -44,11 +47,11 @@ data:
     \u30E1\u30F3\u30C8\u6728\n * @docs docs/data-structure-2d/2d-segment-tree.md\n\
     \ */\n"
   code: "#pragma once\n\ntemplate <typename T, typename F>\nstruct SegmentTree2D {\n\
-    \ private:\n  int id(int h, int w) { return h * 2 * W + w; }\n\n public:\n  int\
-    \ H, W;\n  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree2D(int h,\
-    \ int w, F _f, const T& i) : f(_f), I(i) { init(h, w); }\n\n  void init(int h,\
-    \ int w) {\n    H = W = 1;\n    while (H < h) H <<= 1;\n    while (W < w) W <<=\
-    \ 1;\n    seg.assign(4 * H * W, I);\n  }\n\n  // build \u306B\u306E\u307F\u547C\
+    \ private:\n  int id(int h, int w) const { return h * 2 * W + w; }\n\n public:\n\
+    \  int H, W;\n  vector<T> seg;\n  const F f;\n  const T I;\n\n  SegmentTree2D(int\
+    \ h, int w, F _f, const T& i) : f(_f), I(i) { init(h, w); }\n\n  void init(int\
+    \ h, int w) {\n    H = W = 1;\n    while (H < h) H <<= 1;\n    while (W < w) W\
+    \ <<= 1;\n    seg.assign(4 * H * W, I);\n  }\n\n  // build \u306B\u306E\u307F\u547C\
     \u3076\n  void set(int h, int w, const T& x) { seg[id(h + H, w + W)] = x; }\n\n\
     \  void build() {\n    // w in [W, 2W)\n    for (int w = W; w < 2 * W; w++) {\n\
     \      for (int h = H - 1; h; h--) {\n        seg[id(h, w)] = f(seg[id(2 * h +\
@@ -76,10 +79,11 @@ data:
   isVerificationFile: false
   path: data-structure-2d/2d-segment-tree.hpp
   requiredBy: []
-  timestamp: '2021-11-25 22:20:29+09:00'
+  timestamp: '2023-09-08 22:52:34+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-aoj-other/aoj-1068.test.cpp
+  - verify/verify-aoj-dsl/aoj-dsl-5-b-2dseg.test.cpp
 documentation_of: data-structure-2d/2d-segment-tree.hpp
 layout: document
 redirect_from:
