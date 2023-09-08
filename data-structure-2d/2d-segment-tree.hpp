@@ -3,7 +3,7 @@
 template <typename T, typename F>
 struct SegmentTree2D {
  private:
-  int id(int h, int w) { return h * 2 * W + w; }
+  int id(int h, int w) const { return h * 2 * W + w; }
 
  public:
   int H, W;
