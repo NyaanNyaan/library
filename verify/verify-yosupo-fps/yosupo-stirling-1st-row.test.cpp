@@ -1,3 +1,5 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind_fixed_k"
+//
 #include "../../template/template.hpp"
 //
 #include "../../fps/fps-famous-series.hpp"
