@@ -2,17 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: graph/static-graph.hpp
-    title: Static Graph
+    path: dp/concave-min-plus-convolution.hpp
+    title: dp/concave-min-plus-convolution.hpp
   - icon: ':heavy_check_mark:'
-    path: internal/internal-type-traits.hpp
-    title: internal/internal-type-traits.hpp
+    path: dp/monotone-minima.hpp
+    title: monotone minima
   - icon: ':heavy_check_mark:'
-    path: misc/fastio.hpp
-    title: misc/fastio.hpp
+    path: internal/internal-seed.hpp
+    title: internal/internal-seed.hpp
   - icon: ':heavy_check_mark:'
-    path: shortest-path/dijkstra-skew-heap.hpp
-    title: "\u30C0\u30A4\u30AF\u30B9\u30C8\u30E9\u6CD5(Skew Heap)"
+    path: misc/rng.hpp
+    title: misc/rng.hpp
   - icon: ':heavy_check_mark:'
     path: template/bitop.hpp
     title: template/bitop.hpp
@@ -38,30 +38,30 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
+    PROBLEM: https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
     links:
-    - https://judge.yosupo.jp/problem/shortest_path
-  bundledCode: "#line 1 \"verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n\n#line 2\
-    \ \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n#include <immintrin.h>\n\
-    \n#include <algorithm>\n#include <array>\n#include <bitset>\n#include <cassert>\n\
-    #include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include <chrono>\n#include\
-    \ <cinttypes>\n#include <climits>\n#include <cmath>\n#include <complex>\n#include\
-    \ <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include <cstdio>\n#include\
-    \ <cstdlib>\n#include <cstring>\n#include <deque>\n#include <fstream>\n#include\
-    \ <functional>\n#include <initializer_list>\n#include <iomanip>\n#include <ios>\n\
-    #include <iostream>\n#include <istream>\n#include <iterator>\n#include <limits>\n\
-    #include <list>\n#include <map>\n#include <memory>\n#include <new>\n#include <numeric>\n\
-    #include <ostream>\n#include <queue>\n#include <random>\n#include <set>\n#include\
-    \ <sstream>\n#include <stack>\n#include <streambuf>\n#include <string>\n#include\
-    \ <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include <unordered_map>\n\
-    #include <unordered_set>\n#include <utility>\n#include <vector>\n\n// utility\n\
-    #line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long long;\nusing\
-    \ i64 = long long;\nusing u64 = unsigned long long;\nusing i128 = __int128_t;\n\
-    using u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\ntemplate\
-    \ <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\nusing\
-    \ vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\nusing\
-    \ vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
+    - https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary
+  bundledCode: "#line 1 \"verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
+    \n//\n#line 2 \"template/template.hpp\"\nusing namespace std;\n\n// intrinstic\n\
+    #include <immintrin.h>\n\n#include <algorithm>\n#include <array>\n#include <bitset>\n\
+    #include <cassert>\n#include <cctype>\n#include <cfenv>\n#include <cfloat>\n#include\
+    \ <chrono>\n#include <cinttypes>\n#include <climits>\n#include <cmath>\n#include\
+    \ <complex>\n#include <cstdarg>\n#include <cstddef>\n#include <cstdint>\n#include\
+    \ <cstdio>\n#include <cstdlib>\n#include <cstring>\n#include <deque>\n#include\
+    \ <fstream>\n#include <functional>\n#include <initializer_list>\n#include <iomanip>\n\
+    #include <ios>\n#include <iostream>\n#include <istream>\n#include <iterator>\n\
+    #include <limits>\n#include <list>\n#include <map>\n#include <memory>\n#include\
+    \ <new>\n#include <numeric>\n#include <ostream>\n#include <queue>\n#include <random>\n\
+    #include <set>\n#include <sstream>\n#include <stack>\n#include <streambuf>\n#include\
+    \ <string>\n#include <tuple>\n#include <type_traits>\n#include <typeinfo>\n#include\
+    \ <unordered_map>\n#include <unordered_set>\n#include <utility>\n#include <vector>\n\
+    \n// utility\n#line 1 \"template/util.hpp\"\nnamespace Nyaan {\nusing ll = long\
+    \ long;\nusing i64 = long long;\nusing u64 = unsigned long long;\nusing i128 =\
+    \ __int128_t;\nusing u128 = __uint128_t;\n\ntemplate <typename T>\nusing V = vector<T>;\n\
+    template <typename T>\nusing VV = vector<vector<T>>;\nusing vi = vector<int>;\n\
+    using vl = vector<long long>;\nusing vd = V<double>;\nusing vs = V<string>;\n\
+    using vvi = vector<vector<int>>;\nusing vvl = vector<vector<long long>>;\ntemplate\
     \ <typename T>\nusing minpq = priority_queue<T, vector<T>, greater<T>>;\n\ntemplate\
     \ <typename T, typename U>\nstruct P : pair<T, U> {\n  template <typename... Args>\n\
     \  P(Args... args) : pair<T, U>(args...) {}\n\n  using pair<T, U>::first;\n  using\
@@ -216,141 +216,87 @@ data:
     \n  }\n#define die(...)             \\\n  do {                       \\\n    Nyaan::out(__VA_ARGS__);\
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
-    \ 4 \"verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp\"\n//\n#line\
-    \ 2 \"shortest-path/dijkstra-skew-heap.hpp\"\n\n#line 2 \"graph/static-graph.hpp\"\
-    \n\nnamespace StaticGraphImpl {\n\ntemplate <typename T, bool Cond = is_void<T>::value>\n\
-    struct E;\ntemplate <typename T>\nstruct E<T, false> {\n  int to;\n  T cost;\n\
-    \  E() {}\n  E(const int& v, const T& c) : to(v), cost(c) {}\n  operator int()\
-    \ const { return to; }\n};\ntemplate <typename T>\nstruct E<T, true> {\n  int\
-    \ to;\n  E() {}\n  E(const int& v) : to(v) {}\n  operator int() const { return\
-    \ to; }\n};\n\ntemplate <typename T = void>\nstruct StaticGraph {\n private:\n\
-    \  template <typename It>\n  struct Es {\n    It b, e;\n    It begin() const {\
-    \ return b; }\n    It end() const { return e; }\n    int size() const { return\
-    \ int(e - b); }\n    auto&& operator[](int i) const { return b[i]; }\n  };\n \
-    \ \n  int N, M, ec;\n  vector<int> head;\n  vector<pair<int, E<T>>> buf;\n  vector<E<T>>\
-    \ es;\n\n  void build() {\n    partial_sum(begin(head), end(head), begin(head));\n\
-    \    es.resize(M);\n    for (auto&& [u, e] : buf) es[--head[u]] = e;\n  }\n\n\
-    \ public:\n  StaticGraph(int _n, int _m) : N(_n), M(_m), ec(0), head(N + 1, 0)\
-    \ {\n    buf.reserve(M);\n  }\n\n  template <typename... Args>\n  void add_edge(int\
-    \ u, Args&&... args) {\n#pragma GCC diagnostic ignored \"-Wnarrowing\"\n    buf.emplace_back(u,\
-    \ E<T>{std::forward<Args>(args)...});\n#pragma GCC diagnostic warning \"-Wnarrowing\"\
-    \n    ++head[u];\n    if ((int)buf.size() == M) build();\n  }\n\n  Es<typename\
-    \ vector<E<T>>::iterator> operator[](int u) {\n    return {begin(es) + head[u],\
-    \ begin(es) + head[u + 1]};\n  }\n  const Es<typename vector<E<T>>::const_iterator>\
-    \ operator[](int u) const {\n    return {begin(es) + head[u], begin(es) + head[u\
-    \ + 1]};\n  }\n  int size() const { return N; }\n};\n\n}  // namespace StaticGraphImpl\n\
-    \nusing StaticGraphImpl::StaticGraph;\n\n/**\n * @brief Static Graph\n * @docs\
-    \ docs/graph/static-graph.md\n */\n#line 4 \"shortest-path/dijkstra-skew-heap.hpp\"\
-    \n\ntemplate <typename T>\nstruct SkewHeap {\n  struct alignas(32) Node {\n  \
-    \  T key;\n    int p, l, r;\n    Node(const T& k = T()) : key(k), p(-1), l(-1),\
-    \ r(-1) {}\n  };\n\n  vector<Node> v;\n  int rt = -1;\n\n  SkewHeap(int n) : v(n)\
-    \ {}\n\n  int meld(int x, int y) {\n    if (x == -1 || y == -1) return x == -1\
-    \ ? y : x;\n    if (v[x].key > v[y].key) swap(x, y);\n    v[x].r = meld(v[x].r,\
-    \ y);\n    v[v[x].r].p = x;\n    swap(v[x].l, v[x].r);\n    return x;\n  }\n\n\
-    \  void pop() { rt = meld(v[rt].l, v[rt].r); }\n\n  void update(int x, const T&\
-    \ k) {\n    Node& n = v[x];\n    v[x].key = k;\n    if (x == rt) return;\n   \
-    \ Node& p = v[n.p];\n    if (p.key <= k) return;\n    (p.l == x ? p.l : p.r) =\
-    \ -1;\n    n.p = -1;\n    rt = meld(rt, x);\n  }\n\n  bool empty() { return rt\
-    \ == -1; }\n};\n\ntemplate <typename T>\nvector<pair<T, int>> dijkstra_restore(StaticGraph<T>&\
-    \ g, int start = 0) {\n  int N = (int)g.size();\n  using P = pair<T, int>;\n \
-    \ vector<P> d(N, P{-1, -1});\n  SkewHeap<T> Q(N);\n  d[start].first = 0;\n  Q.v[start].key\
-    \ = 0;\n  Q.rt = start;\n  while (!Q.empty()) {\n    T dc = Q.v[Q.rt].key;\n \
-    \   int cur = Q.rt;\n    Q.pop();\n    for (auto dst : g[cur]) {\n      if (d[dst].first\
-    \ == T(-1)) {\n        d[dst] = P{dc + dst.cost, cur};\n        Q.v[dst].key =\
-    \ dc + dst.cost;\n        Q.rt = Q.meld(Q.rt, dst);\n      } else if (dc + dst.cost\
-    \ < d[dst].first) {\n        d[dst] = P{dc + dst.cost, cur};\n        Q.update(dst,\
-    \ dc + dst.cost);\n      }\n    }\n  }\n  return d;\n}\n/*\n * @brief \u30C0\u30A4\
-    \u30AF\u30B9\u30C8\u30E9\u6CD5(Skew Heap)\n * @docs docs/shortest-path/dijkstra-skew-heap.md\n\
-    **/\n#line 6 \"verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp\"\n\
-    //\n#line 2 \"misc/fastio.hpp\"\n\n#line 8 \"misc/fastio.hpp\"\n\nusing namespace\
-    \ std;\n\n#line 2 \"internal/internal-type-traits.hpp\"\n\n#line 4 \"internal/internal-type-traits.hpp\"\
-    \nusing namespace std;\n\nnamespace internal {\ntemplate <typename T>\nusing is_broadly_integral\
-    \ =\n    typename conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n\
-    \                               is_same_v<T, __uint128_t>,\n                 \
-    \          true_type, false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed\
-    \ =\n    typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n\
-    \                           true_type, false_type>::type;\n\ntemplate <typename\
-    \ T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
-    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
-    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
-    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
-    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                   \\\n  template <class, class = void>     \
-    \                          \\\n  struct has_##var : false_type {};           \
-    \                 \\\n  template <class T>                                   \
-    \        \\\n  struct has_##var<T, void_t<typename T::var>> : true_type {}; \\\
-    \n  template <class T>                                           \\\n  constexpr\
-    \ auto has_##var##_v = has_##var<T>::value;\n\n#define ENABLE_HAS_VAR(var)   \
-    \                                  \\\n  template <class, class = void>      \
-    \                          \\\n  struct has_##var : false_type {};           \
-    \                  \\\n  template <class T>                                  \
-    \          \\\n  struct has_##var<T, void_t<decltype(T::var)>> : true_type {};\
-    \ \\\n  template <class T>                                            \\\n  constexpr\
-    \ auto has_##var##_v = has_##var<T>::value;\n\n}  // namespace internal\n#line\
-    \ 12 \"misc/fastio.hpp\"\n\nnamespace fastio {\nstatic constexpr int SZ = 1 <<\
-    \ 17;\nstatic constexpr int offset = 64;\nchar inbuf[SZ], outbuf[SZ];\nint in_left\
-    \ = 0, in_right = 0, out_right = 0;\n\nstruct Pre {\n  char num[40000];\n  constexpr\
-    \ Pre() : num() {\n    for (int i = 0; i < 10000; i++) {\n      int n = i;\n \
-    \     for (int j = 3; j >= 0; j--) {\n        num[i * 4 + j] = n % 10 + '0';\n\
-    \        n /= 10;\n      }\n    }\n  }\n} constexpr pre;\n\nvoid load() {\n  int\
-    \ len = in_right - in_left;\n  memmove(inbuf, inbuf + in_left, len);\n  in_right\
-    \ = len + fread(inbuf + len, 1, SZ - len, stdin);\n  in_left = 0;\n}\nvoid flush()\
-    \ {\n  fwrite(outbuf, 1, out_right, stdout);\n  out_right = 0;\n}\nvoid skip_space()\
-    \ {\n  if (in_left + offset > in_right) load();\n  while (inbuf[in_left] <= '\
-    \ ') in_left++;\n}\n\nvoid single_read(char& c) {\n  if (in_left + offset > in_right)\
-    \ load();\n  skip_space();\n  c = inbuf[in_left++];\n}\nvoid single_read(string&\
-    \ S) {\n  skip_space();\n  while (true) {\n    if (in_left == in_right) load();\n\
-    \    int i = in_left;\n    for (; i != in_right; i++) {\n      if (inbuf[i] <=\
-    \ ' ') break;\n    }\n    copy(inbuf + in_left, inbuf + i, back_inserter(S));\n\
-    \    in_left = i;\n    if (i != in_right) break;\n  }\n}\ntemplate <typename T,\n\
-    \          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\nvoid single_read(T&\
-    \ x) {\n  if (in_left + offset > in_right) load();\n  skip_space();\n  char c\
-    \ = inbuf[in_left++];\n  [[maybe_unused]] bool minus = false;\n  if constexpr\
-    \ (internal::is_broadly_signed_v<T>) {\n    if (c == '-') minus = true, c = inbuf[in_left++];\n\
-    \  }\n  x = 0;\n  while (c >= '0') {\n    x = x * 10 + (c & 15);\n    c = inbuf[in_left++];\n\
-    \  }\n  if constexpr (internal::is_broadly_signed_v<T>) {\n    if (minus) x =\
-    \ -x;\n  }\n}\nvoid rd() {}\ntemplate <typename Head, typename... Tail>\nvoid\
-    \ rd(Head& head, Tail&... tail) {\n  single_read(head);\n  rd(tail...);\n}\n\n\
-    void single_write(const char& c) {\n  if (out_right > SZ - offset) flush();\n\
-    \  outbuf[out_right++] = c;\n}\nvoid single_write(const bool& b) {\n  if (out_right\
-    \ > SZ - offset) flush();\n  outbuf[out_right++] = b ? '1' : '0';\n}\nvoid single_write(const\
-    \ string& S) {\n  flush(), fwrite(S.data(), 1, S.size(), stdout);\n}\nvoid single_write(const\
-    \ char* p) { flush(), fwrite(p, 1, strlen(p), stdout); }\ntemplate <typename T,\n\
-    \          enable_if_t<internal::is_broadly_integral_v<T>>* = nullptr>\nvoid single_write(const\
-    \ T& _x) {\n  if (out_right > SZ - offset) flush();\n  if (_x == 0) {\n    outbuf[out_right++]\
-    \ = '0';\n    return;\n  }\n  T x = _x;\n  if constexpr (internal::is_broadly_signed_v<T>)\
-    \ {\n    if (x < 0) outbuf[out_right++] = '-', x = -x;\n  }\n  constexpr int buffer_size\
-    \ = sizeof(T) * 10 / 4;\n  char buf[buffer_size];\n  int i = buffer_size;\n  while\
-    \ (x >= 10000) {\n    i -= 4;\n    memcpy(buf + i, pre.num + (x % 10000) * 4,\
-    \ 4);\n    x /= 10000;\n  }\n  if (x < 100) {\n    if (x < 10) {\n      outbuf[out_right]\
-    \ = '0' + x;\n      ++out_right;\n    } else {\n      uint32_t q = (uint32_t(x)\
-    \ * 205) >> 11;\n      uint32_t r = uint32_t(x) - q * 10;\n      outbuf[out_right]\
-    \ = '0' + q;\n      outbuf[out_right + 1] = '0' + r;\n      out_right += 2;\n\
-    \    }\n  } else {\n    if (x < 1000) {\n      memcpy(outbuf + out_right, pre.num\
-    \ + (x << 2) + 1, 3);\n      out_right += 3;\n    } else {\n      memcpy(outbuf\
-    \ + out_right, pre.num + (x << 2), 4);\n      out_right += 4;\n    }\n  }\n  memcpy(outbuf\
-    \ + out_right, buf + i, buffer_size - i);\n  out_right += buffer_size - i;\n}\n\
-    void wt() {}\ntemplate <typename Head, typename... Tail>\nvoid wt(const Head&\
-    \ head, const Tail&... tail) {\n  single_write(head);\n  wt(forward<const Tail>(tail)...);\n\
-    }\ntemplate <typename... Args>\nvoid wtn(const Args&... x) {\n  wt(forward<const\
-    \ Args>(x)...);\n  wt('\\n');\n}\n\nstruct Dummy {\n  Dummy() { atexit(flush);\
-    \ }\n} dummy;\n\n}  // namespace fastio\nusing fastio::rd;\nusing fastio::skip_space;\n\
-    using fastio::wt;\nusing fastio::wtn;\n#line 8 \"verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp\"\
-    \n\nvoid Nyaan::solve() {\n  int N, M, s, t;\n  rd(N, M, s, t);\n\n  StaticGraph<ll>\
-    \ g(N, M);\n  rep(i, M) {\n    int a, b, c;\n    rd(a, b, c);\n    g.add_edge(a,\
-    \ b, c);\n  }\n\n  auto d = dijkstra_restore(g, s);\n\n  if (d[t].first == -1)\
-    \ {\n    wtn(-1);\n    return;\n  }\n  vi ans;\n  for (int r = t; r != s; r =\
-    \ d[r].second) ans.push_back(r);\n  ans.push_back(s);\n  wt(d[t].first, ' ', sz(ans)\
-    \ - 1, '\\n');\n  repr(i, sz(ans) - 1) wt(ans[i + 1], ' ', ans[i], '\\n');\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\n\n#include\
-    \ \"../../template/template.hpp\"\n//\n#include \"../../shortest-path/dijkstra-skew-heap.hpp\"\
-    \n//\n#include \"../../misc/fastio.hpp\"\n\nvoid Nyaan::solve() {\n  int N, M,\
-    \ s, t;\n  rd(N, M, s, t);\n\n  StaticGraph<ll> g(N, M);\n  rep(i, M) {\n    int\
-    \ a, b, c;\n    rd(a, b, c);\n    g.add_edge(a, b, c);\n  }\n\n  auto d = dijkstra_restore(g,\
-    \ s);\n\n  if (d[t].first == -1) {\n    wtn(-1);\n    return;\n  }\n  vi ans;\n\
-    \  for (int r = t; r != s; r = d[r].second) ans.push_back(r);\n  ans.push_back(s);\n\
-    \  wt(d[t].first, ' ', sz(ans) - 1, '\\n');\n  repr(i, sz(ans) - 1) wt(ans[i +\
-    \ 1], ' ', ans[i], '\\n');\n}"
+    \ 4 \"verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp\"\
+    \n//\n#line 2 \"misc/rng.hpp\"\n\n#line 2 \"internal/internal-seed.hpp\"\n\n#line\
+    \ 4 \"internal/internal-seed.hpp\"\nusing namespace std;\n\nnamespace internal\
+    \ {\nunsigned long long non_deterministic_seed() {\n  unsigned long long m =\n\
+    \      chrono::duration_cast<chrono::nanoseconds>(\n          chrono::high_resolution_clock::now().time_since_epoch())\n\
+    \          .count();\n  m ^= 9845834732710364265uLL;\n  m ^= m << 24, m ^= m >>\
+    \ 31, m ^= m << 35;\n  return m;\n}\nunsigned long long deterministic_seed() {\
+    \ return 88172645463325252UL; }\n\n// 64 bit \u306E seed \u5024\u3092\u751F\u6210\
+    \ (\u624B\u5143\u3067\u306F seed \u56FA\u5B9A)\n// \u9023\u7D9A\u3067\u547C\u3073\
+    \u51FA\u3059\u3068\u540C\u3058\u5024\u304C\u4F55\u5EA6\u3082\u8FD4\u3063\u3066\
+    \u304F\u308B\u306E\u3067\u6CE8\u610F\n// #define RANDOMIZED_SEED \u3059\u308B\u3068\
+    \u30B7\u30FC\u30C9\u304C\u30E9\u30F3\u30C0\u30E0\u306B\u306A\u308B\nunsigned long\
+    \ long seed() {\n#if defined(NyaanLocal) && !defined(RANDOMIZED_SEED)\n  return\
+    \ deterministic_seed();\n#else\n  return non_deterministic_seed();\n#endif\n}\n\
+    \n}  // namespace internal\n#line 4 \"misc/rng.hpp\"\n\nnamespace my_rand {\n\
+    using i64 = long long;\nusing u64 = unsigned long long;\n\n// [0, 2^64 - 1)\n\
+    u64 rng() {\n  static u64 _x = internal::seed();\n  return _x ^= _x << 7, _x ^=\
+    \ _x >> 9;\n}\n\n// [l, r]\ni64 rng(i64 l, i64 r) {\n  assert(l <= r);\n  return\
+    \ l + rng() % u64(r - l + 1);\n}\n\n// [l, r)\ni64 randint(i64 l, i64 r) {\n \
+    \ assert(l < r);\n  return l + rng() % u64(r - l);\n}\n\n// choose n numbers from\
+    \ [l, r) without overlapping\nvector<i64> randset(i64 l, i64 r, i64 n) {\n  assert(l\
+    \ <= r && n <= r - l);\n  unordered_set<i64> s;\n  for (i64 i = n; i; --i) {\n\
+    \    i64 m = randint(l, r + 1 - i);\n    if (s.find(m) != s.end()) m = r - i;\n\
+    \    s.insert(m);\n  }\n  vector<i64> ret;\n  for (auto& x : s) ret.push_back(x);\n\
+    \  return ret;\n}\n\n// [0.0, 1.0)\ndouble rnd() { return rng() * 5.42101086242752217004e-20;\
+    \ }\n// [l, r)\ndouble rnd(double l, double r) {\n  assert(l < r);\n  return l\
+    \ + rnd() * (r - l);\n}\n\ntemplate <typename T>\nvoid randshf(vector<T>& v) {\n\
+    \  int n = v.size();\n  for (int i = 1; i < n; i++) swap(v[i], v[randint(0, i\
+    \ + 1)]);\n}\n\n}  // namespace my_rand\n\nusing my_rand::randint;\nusing my_rand::randset;\n\
+    using my_rand::randshf;\nusing my_rand::rnd;\nusing my_rand::rng;\n#line 6 \"\
+    verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp\"\n//\n\
+    #line 2 \"dp/concave-min-plus-convolution.hpp\"\n\n#line 4 \"dp/concave-min-plus-convolution.hpp\"\
+    \nusing namespace std;\n\n#line 2 \"dp/monotone-minima.hpp\"\n\n#line 5 \"dp/monotone-minima.hpp\"\
+    \nusing namespace std;\n\n// NxN \u884C\u5217\u304C\u3042\u308B\n// m_i := argmin_j\
+    \ (A_{i,j}) \u304C\u5358\u8ABF\u5897\u52A0\u3067\u3042\u308B\u3068\u304D\u306B\
+    \ m_i \u3092\u5217\u6319\u3059\u308B\n// f(i, j, k) :\n// A[i][j] \u3068 A[i][k]\
+    \ \u3092\u6BD4\u8F03 (j < k \u304C\u4FDD\u8A3C\u3055\u308C\u3066\u3044\u308B)\n\
+    // A[i][j] <= A[i][k] \u306E\u3068\u304D true \u3092\u8FD4\u3059\u95A2\u6570\u3092\
+    \u5165\u308C\u308B (\u7B49\u53F7\u306F\u3069\u3061\u3089\u3067\u3082\u3088\u3044\
+    )\nvector<int> monotone_minima(int N, int M,\n                            const\
+    \ function<bool(int, int, int)>& f) {\n  vector<int> res(N);\n  auto dfs = [&](auto\
+    \ rc, int is, int ie, int l, int r) -> void {\n    if (is == ie) return;\n   \
+    \ int i = (is + ie) / 2;\n    int m = l;\n    for (int k = l + 1; k < r; k++)\
+    \ {\n      if (!f(i, m, k)) m = k;\n    }\n    res[i] = m;\n    rc(rc, is, i,\
+    \ l, m + 1);\n    rc(rc, i + 1, ie, m, r);\n  };\n  dfs(dfs, 0, N, 0, M);\n  return\
+    \ res;\n}\n\n// NxM \u884C\u5217\u304C\u3042\u308B\n// m_i := argmin_j (A_{i,j})\
+    \ \u304C\u5358\u8ABF\u5897\u52A0\u3067\u3042\u308B\u3068\u304D\u306B m_i \u3092\
+    \u5217\u6319\u3059\u308B\n// A(i, j) : A[i][j] \u3092\u8FD4\u3059\u95A2\u6570\n\
+    template <typename T>\nvector<int> monotone_minima(int N, int M, const function<T(int,\
+    \ int)>& A) {\n  function<bool(int, int, int)> f = [&](int i, int j, int k) ->\
+    \ bool {\n    return A(i, j) <= A(i, k);\n  };\n  return monotone_minima(N, M,\
+    \ f);\n}\n\n/**\n * @brief monotone minima\n */\n#line 7 \"dp/concave-min-plus-convolution.hpp\"\
+    \n\n// a \u306F\u4E0B\u306B\u51F8, b \u306F\u81EA\u7531\ntemplate <typename T>\n\
+    vector<T> concave_min_plus_convolution(const vector<T>& a, const vector<T>& b)\
+    \ {\n  int n = a.size(), m = b.size();\n  auto argmin = monotone_minima(n + m\
+    \ - 1, m, [&](int i, int j, int k) {\n    if (i < k) return true;\n    if (i -\
+    \ j >= n) return false;\n    return a[i - j] + b[j] <= a[i - k] + b[k];\n  });\n\
+    \  vector<T> ans(n + m - 1);\n  for (int i = 0; i < n + m - 1; i++) {\n    int\
+    \ j = argmin[i];\n    ans[i] = a[i - j] + b[j];\n  }\n  return ans;\n}\n#line\
+    \ 8 \"verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid test() {\n  rep(_, 10000) {\n    int N = rng(1,\
+    \ 30);\n    int M = rng(1, 30);\n\n    vi a(N), b(M);\n    a[0] = -30;\n    for\
+    \ (int i = 1, d = -10; i < N; i++, d += rng(1, 10)) {\n      a[i] = a[i - 1] +\
+    \ d;\n    }\n    each(x, b) x = rng(-30, 30);\n    auto c = concave_min_plus_convolution(a,\
+    \ b);\n    vi d(N + M - 1, inf);\n    rep(i, N) rep(j, M) amin(d[i + j], a[i]\
+    \ + b[j]);\n    if (c != d) {\n      trc(a, b);\n      trc(c);\n      trc(d);\n\
+    \      exit(1);\n    }\n  }\n  trc2(\"OK\");\n}\n\nvoid q() {\n  test();\n  ini(N,\
+    \ M);\n  vi a(N), b(M);\n  in(a, b);\n  out(concave_min_plus_convolution(a, b));\n\
+    }\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/min_plus_convolution_convex_arbitrary\"\
+    \n//\n#include \"../../template/template.hpp\"\n//\n#include \"../../misc/rng.hpp\"\
+    \n//\n#include \"../../dp/concave-min-plus-convolution.hpp\"\nusing namespace\
+    \ Nyaan;\n\nvoid test() {\n  rep(_, 10000) {\n    int N = rng(1, 30);\n    int\
+    \ M = rng(1, 30);\n\n    vi a(N), b(M);\n    a[0] = -30;\n    for (int i = 1,\
+    \ d = -10; i < N; i++, d += rng(1, 10)) {\n      a[i] = a[i - 1] + d;\n    }\n\
+    \    each(x, b) x = rng(-30, 30);\n    auto c = concave_min_plus_convolution(a,\
+    \ b);\n    vi d(N + M - 1, inf);\n    rep(i, N) rep(j, M) amin(d[i + j], a[i]\
+    \ + b[j]);\n    if (c != d) {\n      trc(a, b);\n      trc(c);\n      trc(d);\n\
+    \      exit(1);\n    }\n  }\n  trc2(\"OK\");\n}\n\nvoid q() {\n  test();\n  ini(N,\
+    \ M);\n  vi a(N), b(M);\n  in(a, b);\n  out(concave_min_plus_convolution(a, b));\n\
+    }\n\nvoid Nyaan::solve() {\n  int t = 1;\n  // in(t);\n  while (t--) q();\n}\n"
   dependsOn:
   - template/template.hpp
   - template/util.hpp
@@ -358,20 +304,20 @@ data:
   - template/inout.hpp
   - template/debug.hpp
   - template/macro.hpp
-  - shortest-path/dijkstra-skew-heap.hpp
-  - graph/static-graph.hpp
-  - misc/fastio.hpp
-  - internal/internal-type-traits.hpp
+  - misc/rng.hpp
+  - internal/internal-seed.hpp
+  - dp/concave-min-plus-convolution.hpp
+  - dp/monotone-minima.hpp
   isVerificationFile: true
-  path: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
+  path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
   requiredBy: []
   timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
+documentation_of: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
 layout: document
 redirect_from:
-- /verify/verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
-- /verify/verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp.html
-title: verify/verify-yosupo-graph/yosupo-shortest-path-4.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+- /verify/verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp.html
+title: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
 ---

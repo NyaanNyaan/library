@@ -27,6 +27,9 @@ data:
     path: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
     title: verify/verify-unit-test/partial-fraction-decomposition.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
+    title: verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - icon: ':heavy_check_mark:'
@@ -184,6 +187,7 @@ data:
   - verify/verify-yuki/yuki-1510.test.cpp
   - verify/verify-yuki/yuki-1504.test.cpp
   - verify/verify-yuki/yuki-1875.test.cpp
+  - verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
   - verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   - verify/verify-yosupo-fps/yosupo-taylor-shift.test.cpp
   - verify/verify-unit-test/dual-fps.test.cpp

@@ -47,70 +47,76 @@ data:
     \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
     \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
     ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 4 \"internal/internal-math.hpp\"\n\nnamespace\
-    \ internal {\n\n#include <cassert>\n#include <utility>\n#include <vector>\nusing\
-    \ namespace std;\n\n// a mod p\ntemplate <typename T>\nT safe_mod(T a, T p) {\n\
-    \  a %= p;\n  if constexpr (is_broadly_signed_v<T>) {\n    if (a < 0) a += p;\n\
-    \  }\n  return a;\n}\n\n// \u8FD4\u308A\u5024\uFF1Apair(g, x)\n// s.t. g = gcd(a,\
-    \ b), xa = g (mod b), 0 <= x < b/g\ntemplate <typename T>\npair<T, T> inv_gcd(T\
-    \ a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a, p);\n\
-    \  if (a == 0) return {p, 0};\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T\
-    \ q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n  }\n  if (y < 0)\
-    \ y += p / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\u5024 : a^{-1} mod p\n//\
-    \ gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\nT inv(T a, T p) {\n\
-    \  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a, p);\n  T b = p, x\
-    \ = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x,\
-    \ y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ? y + p : y;\n}\n\n// T\
-    \ : \u5E95\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\u30FC\u30D5\u30ED\u30FC\
-    \u3057\u306A\u3044 \u304B\u3064 \u6307\u6570\u306E\u578B\ntemplate <typename T,\
-    \ typename U>\nT modpow(T a, U n, T p) {\n  a = safe_mod(a, p);\n  T ret = 1 %\
-    \ p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n    a = U(a) * a %\
-    \ p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n// \u8FD4\u308A\u5024 : pair(rem,\
-    \ mod)\n// \u89E3\u306A\u3057\u306E\u3068\u304D\u306F {0, 0} \u3092\u8FD4\u3059\
-    \ntemplate <typename T>\npair<T, T> crt(const vector<T>& r, const vector<T>& m)\
-    \ {\n  static_assert(is_broadly_signed_v<T>);\n  assert(r.size() == m.size());\n\
-    \  int n = int(r.size());\n  T r0 = 0, m0 = 1;\n  for (int i = 0; i < n; i++)\
-    \ {\n    assert(1 <= m[i]);\n    T r1 = safe_mod(r[i], m[i]), m1 = m[i];\n   \
-    \ if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0 % m1 == 0) {\n      if\
-    \ (r0 % m1 != r1) return {0, 0};\n      continue;\n    }\n    auto [g, im] = inv_gcd(m0,\
-    \ m1);\n    T u1 = m1 / g;\n    if ((r1 - r0) % g) return {0, 0};\n    T x = (r1\
-    \ - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0 *= u1;\n    if (r0 < 0)\
-    \ r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace internal\n#line 2 \"\
-    modint/arbitrary-montgomery-modint.hpp\"\n\n#include <iostream>\nusing namespace\
-    \ std;\n\ntemplate <typename Int, typename UInt, typename Long, typename ULong,\
-    \ int id>\nstruct ArbitraryLazyMontgomeryModIntBase {\n  using mint = ArbitraryLazyMontgomeryModIntBase;\n\
-    \n  inline static UInt mod;\n  inline static UInt r;\n  inline static UInt n2;\n\
-    \  static constexpr int bit_length = sizeof(UInt) * 8;\n\n  static UInt get_r()\
-    \ {\n    UInt ret = mod;\n    while (mod * ret != 1) ret *= UInt(2) - mod * ret;\n\
-    \    return ret;\n  }\n  static void set_mod(UInt m) {\n    assert(m < (UInt(1u)\
-    \ << (bit_length - 2)));\n    assert((m & 1) == 1);\n    mod = m, n2 = -ULong(m)\
-    \ % m, r = get_r();\n  }\n  UInt a;\n\n  ArbitraryLazyMontgomeryModIntBase() :\
-    \ a(0) {}\n  ArbitraryLazyMontgomeryModIntBase(const Long &b)\n      : a(reduce(ULong(b\
-    \ % mod + mod) * n2)){};\n\n  static UInt reduce(const ULong &b) {\n    return\
-    \ (b + ULong(UInt(b) * UInt(-r)) * mod) >> bit_length;\n  }\n\n  mint &operator+=(const\
-    \ mint &b) {\n    if (Int(a += b.a - 2 * mod) < 0) a += 2 * mod;\n    return *this;\n\
-    \  }\n  mint &operator-=(const mint &b) {\n    if (Int(a -= b.a) < 0) a += 2 *\
-    \ mod;\n    return *this;\n  }\n  mint &operator*=(const mint &b) {\n    a = reduce(ULong(a)\
-    \ * b.a);\n    return *this;\n  }\n  mint &operator/=(const mint &b) {\n    *this\
-    \ *= b.inverse();\n    return *this;\n  }\n\n  mint operator+(const mint &b) const\
-    \ { return mint(*this) += b; }\n  mint operator-(const mint &b) const { return\
-    \ mint(*this) -= b; }\n  mint operator*(const mint &b) const { return mint(*this)\
-    \ *= b; }\n  mint operator/(const mint &b) const { return mint(*this) /= b; }\n\
-    \n  bool operator==(const mint &b) const {\n    return (a >= mod ? a - mod : a)\
-    \ == (b.a >= mod ? b.a - mod : b.a);\n  }\n  bool operator!=(const mint &b) const\
-    \ {\n    return (a >= mod ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);\n\
-    \  }\n  mint operator-() const { return mint(0) - mint(*this); }\n  mint operator+()\
-    \ const { return mint(*this); }\n\n  mint pow(ULong n) const {\n    mint ret(1),\
-    \ mul(*this);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *=\
-    \ mul, n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const mint &b) {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, mint &b) {\n    Long t;\n    is >> t;\n    b = ArbitraryLazyMontgomeryModIntBase(t);\n\
+    \                                   \\\n  template <class, class = void>     \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                 \\\n  template <class T>                                   \
+    \        \\\n  struct has_##var<T, void_t<typename T::var>> : true_type {}; \\\
+    \n  template <class T>                                           \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n#define ENABLE_HAS_VAR(var)   \
+    \                                  \\\n  template <class, class = void>      \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                  \\\n  template <class T>                                  \
+    \          \\\n  struct has_##var<T, void_t<decltype(T::var)>> : true_type {};\
+    \ \\\n  template <class T>                                            \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n}  // namespace internal\n#line\
+    \ 4 \"internal/internal-math.hpp\"\n\nnamespace internal {\n\n#include <cassert>\n\
+    #include <utility>\n#include <vector>\nusing namespace std;\n\n// a mod p\ntemplate\
+    \ <typename T>\nT safe_mod(T a, T p) {\n  a %= p;\n  if constexpr (is_broadly_signed_v<T>)\
+    \ {\n    if (a < 0) a += p;\n  }\n  return a;\n}\n\n// \u8FD4\u308A\u5024\uFF1A\
+    pair(g, x)\n// s.t. g = gcd(a, b), xa = g (mod b), 0 <= x < b/g\ntemplate <typename\
+    \ T>\npair<T, T> inv_gcd(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n\
+    \  a = safe_mod(a, p);\n  if (a == 0) return {p, 0};\n  T b = p, x = 1, y = 0;\n\
+    \  while (a) {\n    T q = b / a;\n    swap(a, b %= a);\n    swap(x, y -= q * x);\n\
+    \  }\n  if (y < 0) y += p / b;\n  return {b, y};\n}\n\n// \u8FD4\u308A\u5024 :\
+    \ a^{-1} mod p\n// gcd(a, p) != 1 \u304C\u5FC5\u8981\ntemplate <typename T>\n\
+    T inv(T a, T p) {\n  static_assert(is_broadly_signed_v<T>);\n  a = safe_mod(a,\
+    \ p);\n  T b = p, x = 1, y = 0;\n  while (a) {\n    T q = b / a;\n    swap(a,\
+    \ b %= a);\n    swap(x, y -= q * x);\n  }\n  assert(b == 1);\n  return y < 0 ?\
+    \ y + p : y;\n}\n\n// T : \u5E95\u306E\u578B\n// U : T*T \u304C\u30AA\u30FC\u30D0\
+    \u30FC\u30D5\u30ED\u30FC\u3057\u306A\u3044 \u304B\u3064 \u6307\u6570\u306E\u578B\
+    \ntemplate <typename T, typename U>\nT modpow(T a, U n, T p) {\n  a = safe_mod(a,\
+    \ p);\n  T ret = 1 % p;\n  while (n) {\n    if (n & 1) ret = U(ret) * a % p;\n\
+    \    a = U(a) * a % p;\n    n >>= 1;\n  }\n  return ret;\n}\n\n// \u8FD4\u308A\
+    \u5024 : pair(rem, mod)\n// \u89E3\u306A\u3057\u306E\u3068\u304D\u306F {0, 0}\
+    \ \u3092\u8FD4\u3059\ntemplate <typename T>\npair<T, T> crt(const vector<T>& r,\
+    \ const vector<T>& m) {\n  static_assert(is_broadly_signed_v<T>);\n  assert(r.size()\
+    \ == m.size());\n  int n = int(r.size());\n  T r0 = 0, m0 = 1;\n  for (int i =\
+    \ 0; i < n; i++) {\n    assert(1 <= m[i]);\n    T r1 = safe_mod(r[i], m[i]), m1\
+    \ = m[i];\n    if (m0 < m1) swap(r0, r1), swap(m0, m1);\n    if (m0 % m1 == 0)\
+    \ {\n      if (r0 % m1 != r1) return {0, 0};\n      continue;\n    }\n    auto\
+    \ [g, im] = inv_gcd(m0, m1);\n    T u1 = m1 / g;\n    if ((r1 - r0) % g) return\
+    \ {0, 0};\n    T x = (r1 - r0) / g % u1 * im % u1;\n    r0 += x * m0;\n    m0\
+    \ *= u1;\n    if (r0 < 0) r0 += m0;\n  }\n  return {r0, m0};\n}\n\n}  // namespace\
+    \ internal\n#line 2 \"modint/arbitrary-montgomery-modint.hpp\"\n\n#include <iostream>\n\
+    using namespace std;\n\ntemplate <typename Int, typename UInt, typename Long,\
+    \ typename ULong, int id>\nstruct ArbitraryLazyMontgomeryModIntBase {\n  using\
+    \ mint = ArbitraryLazyMontgomeryModIntBase;\n\n  inline static UInt mod;\n  inline\
+    \ static UInt r;\n  inline static UInt n2;\n  static constexpr int bit_length\
+    \ = sizeof(UInt) * 8;\n\n  static UInt get_r() {\n    UInt ret = mod;\n    while\
+    \ (mod * ret != 1) ret *= UInt(2) - mod * ret;\n    return ret;\n  }\n  static\
+    \ void set_mod(UInt m) {\n    assert(m < (UInt(1u) << (bit_length - 2)));\n  \
+    \  assert((m & 1) == 1);\n    mod = m, n2 = -ULong(m) % m, r = get_r();\n  }\n\
+    \  UInt a;\n\n  ArbitraryLazyMontgomeryModIntBase() : a(0) {}\n  ArbitraryLazyMontgomeryModIntBase(const\
+    \ Long &b)\n      : a(reduce(ULong(b % mod + mod) * n2)){};\n\n  static UInt reduce(const\
+    \ ULong &b) {\n    return (b + ULong(UInt(b) * UInt(-r)) * mod) >> bit_length;\n\
+    \  }\n\n  mint &operator+=(const mint &b) {\n    if (Int(a += b.a - 2 * mod) <\
+    \ 0) a += 2 * mod;\n    return *this;\n  }\n  mint &operator-=(const mint &b)\
+    \ {\n    if (Int(a -= b.a) < 0) a += 2 * mod;\n    return *this;\n  }\n  mint\
+    \ &operator*=(const mint &b) {\n    a = reduce(ULong(a) * b.a);\n    return *this;\n\
+    \  }\n  mint &operator/=(const mint &b) {\n    *this *= b.inverse();\n    return\
+    \ *this;\n  }\n\n  mint operator+(const mint &b) const { return mint(*this) +=\
+    \ b; }\n  mint operator-(const mint &b) const { return mint(*this) -= b; }\n \
+    \ mint operator*(const mint &b) const { return mint(*this) *= b; }\n  mint operator/(const\
+    \ mint &b) const { return mint(*this) /= b; }\n\n  bool operator==(const mint\
+    \ &b) const {\n    return (a >= mod ? a - mod : a) == (b.a >= mod ? b.a - mod\
+    \ : b.a);\n  }\n  bool operator!=(const mint &b) const {\n    return (a >= mod\
+    \ ? a - mod : a) != (b.a >= mod ? b.a - mod : b.a);\n  }\n  mint operator-() const\
+    \ { return mint(0) - mint(*this); }\n  mint operator+() const { return mint(*this);\
+    \ }\n\n  mint pow(ULong n) const {\n    mint ret(1), mul(*this);\n    while (n\
+    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul, n >>= 1;\n    }\n  \
+    \  return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const mint &b)\
+    \ {\n    return os << b.get();\n  }\n\n  friend istream &operator>>(istream &is,\
+    \ mint &b) {\n    Long t;\n    is >> t;\n    b = ArbitraryLazyMontgomeryModIntBase(t);\n\
     \    return (is);\n  }\n\n  mint inverse() const {\n    Int x = get(), y = get_mod(),\
     \ u = 1, v = 0;\n    while (y > 0) {\n      Int t = x / y;\n      swap(x -= t\
     \ * y, y);\n      swap(u -= t * v, v);\n    }\n    return mint{u};\n  }\n\n  UInt\
@@ -310,7 +316,7 @@ data:
   isVerificationFile: false
   path: modulo/mod-kth-root.hpp
   requiredBy: []
-  timestamp: '2023-08-10 14:06:55+09:00'
+  timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yosupo-math/yosupo-kth-root-mod.test.cpp

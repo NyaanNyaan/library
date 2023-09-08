@@ -241,6 +241,12 @@ data:
     path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
     title: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+    title: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
     title: verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - icon: ':heavy_check_mark:'
@@ -409,6 +415,8 @@ data:
   - verify/verify-yosupo-math/yosupo-determinant-of-matrix-bbla.test.cpp
   - verify/verify-yosupo-math/yosupo-factorization.test.cpp
   - verify/verify-yosupo-math/yosupo-determinant-of-sparse-matrix-bbla.test.cpp
+  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
 documentation_of: internal/internal-seed.hpp
 layout: document
 redirect_from:

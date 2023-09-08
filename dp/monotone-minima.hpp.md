@@ -3,10 +3,19 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: dp/concave-min-plus-convolution.hpp
+    title: dp/concave-min-plus-convolution.hpp
+  - icon: ':heavy_check_mark:'
     path: dp/monge-d-edge-shortest-path-enumerate.hpp
     title: "monge \u30B0\u30E9\u30D5\u4E0A\u306E d-\u8FBA\u6700\u77ED\u8DEF\u306E\
       \ d=1,...,N \u306B\u304A\u3051\u308B\u5217\u6319"
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+    title: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+    title: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-0952.test.cpp
     title: verify/verify-yuki/yuki-0952.test.cpp
@@ -61,10 +70,13 @@ data:
   path: dp/monotone-minima.hpp
   requiredBy:
   - dp/monge-d-edge-shortest-path-enumerate.hpp
+  - dp/concave-min-plus-convolution.hpp
   timestamp: '2023-09-02 22:21:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-0952.test.cpp
+  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+  - verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
 documentation_of: dp/monotone-minima.hpp
 layout: document
 redirect_from:

@@ -250,19 +250,25 @@ data:
     \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
     \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
     ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n#line 8 \"internal/internal-hash-function.hpp\"\n\n\
-    namespace internal {\n// \u6574\u6570, \u6574\u6570\u5217\u3092 64 bit unsigned\
-    \ int \u3078\u79FB\u3059\n\nusing u64 = unsigned long long;\nusing u128 = __uint128_t;\n\
-    \nENABLE_HAS_TYPE(first_type);\nENABLE_HAS_TYPE(second_type);\nENABLE_HAS_TYPE(iterator);\n\
-    \ntemplate <typename T>\nu64 hash_function(const T& x) {\n  static u64 r = seed();\n\
-    \  constexpr u64 z1 = 11995408973635179863ULL;\n  if constexpr (is_broadly_integral_v<T>)\
-    \ {\n    // Integral\n    return (u64(x) ^ r) * z1;\n  } else if constexpr (has_first_type_v<T>\
+    \                                   \\\n  template <class, class = void>     \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                 \\\n  template <class T>                                   \
+    \        \\\n  struct has_##var<T, void_t<typename T::var>> : true_type {}; \\\
+    \n  template <class T>                                           \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n#define ENABLE_HAS_VAR(var)   \
+    \                                  \\\n  template <class, class = void>      \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                  \\\n  template <class T>                                  \
+    \          \\\n  struct has_##var<T, void_t<decltype(T::var)>> : true_type {};\
+    \ \\\n  template <class T>                                            \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n}  // namespace internal\n#line\
+    \ 8 \"internal/internal-hash-function.hpp\"\n\nnamespace internal {\n// \u6574\
+    \u6570, \u6574\u6570\u5217\u3092 64 bit unsigned int \u3078\u79FB\u3059\n\nusing\
+    \ u64 = unsigned long long;\nusing u128 = __uint128_t;\n\nENABLE_HAS_TYPE(first_type);\n\
+    ENABLE_HAS_TYPE(second_type);\nENABLE_HAS_TYPE(iterator);\n\ntemplate <typename\
+    \ T>\nu64 hash_function(const T& x) {\n  static u64 r = seed();\n  constexpr u64\
+    \ z1 = 11995408973635179863ULL;\n  if constexpr (is_broadly_integral_v<T>) {\n\
+    \    // Integral\n    return (u64(x) ^ r) * z1;\n  } else if constexpr (has_first_type_v<T>\
     \ && has_second_type_v<T>) {\n    // pair\n    constexpr u64 z2 = 10150724397891781847ULL;\n\
     \    return hash_function(x.first) + hash_function(x.second) * z2;\n  } else if\
     \ constexpr (has_iterator_v<T>) {\n    // Container\n    constexpr u64 mod = (1LL\
@@ -414,7 +420,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-tree-hash.test.cpp

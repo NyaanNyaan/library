@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: data-structure/slope-trick-weighted.hpp
+    title: Weighted Slope Trick
+  - icon: ':heavy_check_mark:'
     path: hashmap/hashmap-unerasable.hpp
     title: hashmap/hashmap-unerasable.hpp
   - icon: ':heavy_check_mark:'
@@ -62,6 +65,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: prime/miller-rabin.hpp
     title: Miller-Rabin primality test
+  - icon: ':heavy_check_mark:'
+    path: segment-tree/rbst-segment-tree.hpp
+    title: RBST-based Dynamic Lazy Segment Tree
+  - icon: ':heavy_check_mark:'
+    path: segment-tree/rbst-sequence.hpp
+    title: segment-tree/rbst-sequence.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: verify/verify-aoj-ntl/aoj-ntl-2-a.test.cpp
@@ -142,6 +151,12 @@ data:
     path: verify/verify-unit-test/rbst-segment-tree.test.cpp
     title: verify/verify-unit-test/rbst-segment-tree.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-unit-test/rbst-sequence.test.cpp
+    title: verify/verify-unit-test/rbst-sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
     title: verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   - icon: ':heavy_check_mark:'
@@ -196,14 +211,26 @@ data:
     path: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
     title: verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
     title: verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
     title: verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
+    title: verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
   - icon: ':heavy_check_mark:'
     path: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
     title: verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
@@ -403,6 +430,12 @@ data:
     path: verify/verify-yuki/yuki-0303.test.cpp
     title: verify/verify-yuki/yuki-0303.test.cpp
   - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1467-weighted.test.cpp
+    title: verify/verify-yuki/yuki-1467-weighted.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: verify/verify-yuki/yuki-1786.test.cpp
+    title: verify/verify-yuki/yuki-1786.test.cpp
+  - icon: ':heavy_check_mark:'
     path: verify/verify-yuki/yuki-2262.test.cpp
     title: verify/verify-yuki/yuki-2262.test.cpp
   - icon: ':heavy_check_mark:'
@@ -425,13 +458,18 @@ data:
     \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
     \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
     ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n"
+    \                                   \\\n  template <class, class = void>     \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                 \\\n  template <class T>                                   \
+    \        \\\n  struct has_##var<T, void_t<typename T::var>> : true_type {}; \\\
+    \n  template <class T>                                           \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n#define ENABLE_HAS_VAR(var)   \
+    \                                  \\\n  template <class, class = void>      \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                  \\\n  template <class T>                                  \
+    \          \\\n  struct has_##var<T, void_t<decltype(T::var)>> : true_type {};\
+    \ \\\n  template <class T>                                            \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n}  // namespace internal\n"
   code: "#pragma once\n\n#include <type_traits>\nusing namespace std;\n\nnamespace\
     \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
     \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
@@ -444,13 +482,18 @@ data:
     #define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
     \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
     ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
-    \                                              \\\n  template <class, class =\
-    \ void>                                         \\\n  struct has_##var : std::false_type\
-    \ {};                                 \\\n  template <class T>               \
-    \                                      \\\n  struct has_##var<T, std::void_t<typename\
-    \ T::var>> : std::true_type {}; \\\n  template <class T>                     \
-    \                                \\\n  constexpr auto has_##var##_v = has_##var<T>::value;\n\
-    \n}  // namespace internal\n"
+    \                                   \\\n  template <class, class = void>     \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                 \\\n  template <class T>                                   \
+    \        \\\n  struct has_##var<T, void_t<typename T::var>> : true_type {}; \\\
+    \n  template <class T>                                           \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n#define ENABLE_HAS_VAR(var)   \
+    \                                  \\\n  template <class, class = void>      \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                  \\\n  template <class T>                                  \
+    \          \\\n  struct has_##var<T, void_t<decltype(T::var)>> : true_type {};\
+    \ \\\n  template <class T>                                            \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n}  // namespace internal\n"
   dependsOn: []
   isVerificationFile: false
   path: internal/internal-type-traits.hpp
@@ -473,12 +516,17 @@ data:
   - math/bigint.hpp
   - math/bigint-gcd.hpp
   - math/bigint-all.hpp
+  - segment-tree/rbst-sequence.hpp
+  - segment-tree/rbst-segment-tree.hpp
   - hashmap/hashmap-unerasable.hpp
+  - data-structure/slope-trick-weighted.hpp
   - marathon/top-k.hpp
-  timestamp: '2023-05-21 20:49:42+09:00'
+  timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - verify/verify-yuki/yuki-1786.test.cpp
   - verify/verify-yuki/yuki-2266.test.cpp
+  - verify/verify-yuki/yuki-1467-weighted.test.cpp
   - verify/verify-yuki/yuki-0103.test.cpp
   - verify/verify-yuki/yuki-2262.test.cpp
   - verify/verify-yuki/yuki-0303.test.cpp
@@ -525,6 +573,7 @@ data:
   - verify/verify-unit-test/bigint3.test.cpp
   - verify/verify-unit-test/bigint2.test.cpp
   - verify/verify-unit-test/arbitrary-ntt-mod18446744069414584321.test.cpp
+  - verify/verify-unit-test/rbst-sequence.test.cpp
   - verify/verify-unit-test/internal-math.test.cpp
   - verify/verify-unit-test/bigint.test.cpp
   - verify/verify-unit-test/garner-bigint.test.cpp
@@ -536,7 +585,10 @@ data:
   - verify/verify-unit-test/primitive-root.test.cpp
   - verify/verify-unit-test/bigrational.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-subtree-sum-dst-on-tree.test.cpp
+  - verify/verify-yosupo-ds/yosupo-range-affine-range-sum-rbstseg.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum.test.cpp
+  - verify/verify-yosupo-ds/yosupo-point-set-range-composite-rbstseg2.test.cpp
   - verify/verify-yosupo-ds/yosupo-orderedmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-static-range-inversion-query-2.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-sequence-range-affine-range-sum.test.cpp
@@ -550,6 +602,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-swag.test.cpp
   - verify/verify-yosupo-ds/yosupo-predecessor-problem-vEB-tree.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-vertex-add-subtree-sum-2.test.cpp
+  - verify/verify-yosupo-ds/yosupo-associative-array-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-associative-array-unerasable-hashmap.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-wm.test.cpp
   - verify/verify-yosupo-ds/yosupo-range-add-range-sum-linkcuttree.test.cpp
@@ -558,6 +611,7 @@ data:
   - verify/verify-yosupo-ds/yosupo-rollback-union-find.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-bit2d.test.cpp
   - verify/verify-yosupo-ds/yosupo-predecessor-problem.test.cpp
+  - verify/verify-yosupo-ds/yosupo-procedessor-problem-rbstseg.test.cpp
   - verify/verify-yosupo-ds/yosupo-point-add-rectangle-sum-segtree-on-wm.test.cpp
   - verify/verify-yosupo-ds/yosupo-vertex-add-path-sum-euler-tour.test.cpp
   - verify/verify-yosupo-ds/yosupo-dynamic-tree-subtree-add-subtree-sum.test.cpp

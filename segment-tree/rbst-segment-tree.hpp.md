@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: data-structure/slope-trick-weighted.hpp
@@ -42,18 +45,31 @@ data:
   attributes:
     document_title: RBST-based Dynamic Lazy Segment Tree
     links: []
-  bundledCode: "#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\n#define ENABLE_HAS_VAR(var)\
-    \                                  \\\n  template <typename T>               \
-    \                       \\\n  class has_##var {                              \
-    \            \\\n    template <typename U, int = (&U::var, 0)>               \
-    \ \\\n    static true_type check(U *);                             \\\n    static\
-    \ false_type check(...);                            \\\n    static T *t;     \
-    \                                        \\\n                                \
-    \                             \\\n   public:                                 \
-    \                  \\\n    static constexpr bool value = decltype(check(t))::value;\
-    \ \\\n  };                                                         \\\n  template\
-    \ <typename T>                                      \\\n  inline constexpr bool\
-    \ has_##var##_v = has_##var<T>::value;\n\nENABLE_HAS_VAR(lazy);\nENABLE_HAS_VAR(shift);\n\
+  bundledCode: "#line 2 \"segment-tree/rbst-segment-tree.hpp\"\n\n#line 2 \"internal/internal-type-traits.hpp\"\
+    \n\n#include <type_traits>\nusing namespace std;\n\nnamespace internal {\ntemplate\
+    \ <typename T>\nusing is_broadly_integral =\n    typename conditional_t<is_integral_v<T>\
+    \ || is_same_v<T, __int128_t> ||\n                               is_same_v<T,\
+    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
+    template <typename T>\nusing is_broadly_signed =\n    typename conditional_t<is_signed_v<T>\
+    \ || is_same_v<T, __int128_t>,\n                           true_type, false_type>::type;\n\
+    \ntemplate <typename T>\nusing is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T>\
+    \ || is_same_v<T, __uint128_t>,\n                           true_type, false_type>::type;\n\
+    \n#define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                   \\\n  template <class, class = void>     \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                 \\\n  template <class T>                                   \
+    \        \\\n  struct has_##var<T, void_t<typename T::var>> : true_type {}; \\\
+    \n  template <class T>                                           \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n#define ENABLE_HAS_VAR(var)   \
+    \                                  \\\n  template <class, class = void>      \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                  \\\n  template <class T>                                  \
+    \          \\\n  struct has_##var<T, void_t<decltype(T::var)>> : true_type {};\
+    \ \\\n  template <class T>                                            \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n}  // namespace internal\n#line\
+    \ 4 \"segment-tree/rbst-segment-tree.hpp\"\n\nENABLE_HAS_VAR(lazy);\nENABLE_HAS_VAR(shift);\n\
     \ntemplate <typename Node, typename I, typename T, typename E, T (*f)(T, T),\n\
     \          T (*g)(T, E), E (*h)(E, E), T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTreeBase\
     \ {\n protected:\n  using Ptr = Node *;\n  template <typename... Args>\n  static\
@@ -346,147 +362,137 @@ data:
     \nusing RBSTSegmentTreeImpl::RBSTLazySegmentTree;\nusing RBSTSegmentTreeImpl::RBSTSegmentTree;\n\
     using RBSTSegmentTreeImpl::RBSTShiftableLazySegmentTree;\n\n/**\n * @brief RBST-based\
     \ Dynamic Lazy Segment Tree\n */\n"
-  code: "#pragma once\n\n#define ENABLE_HAS_VAR(var)                             \
-    \     \\\n  template <typename T>                                      \\\n  class\
-    \ has_##var {                                          \\\n    template <typename\
-    \ U, int = (&U::var, 0)>                \\\n    static true_type check(U *); \
-    \                            \\\n    static false_type check(...);           \
-    \                 \\\n    static T *t;                                       \
-    \      \\\n                                                             \\\n \
-    \  public:                                                   \\\n    static constexpr\
-    \ bool value = decltype(check(t))::value; \\\n  };                           \
-    \                              \\\n  template <typename T>                   \
-    \                   \\\n  inline constexpr bool has_##var##_v = has_##var<T>::value;\n\
-    \nENABLE_HAS_VAR(lazy);\nENABLE_HAS_VAR(shift);\n\ntemplate <typename Node, typename\
-    \ I, typename T, typename E, T (*f)(T, T),\n          T (*g)(T, E), E (*h)(E,\
-    \ E), T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTreeBase {\n protected:\n  using\
-    \ Ptr = Node *;\n  template <typename... Args>\n  static Ptr _my_new(Args... args)\
-    \ {\n    return new Node(args...);\n  }\n  static void _my_del(Ptr t) { delete\
-    \ t; }\n\n  static int _count(const Ptr t) { return t ? t->cnt : 0; }\n\n  static\
-    \ T _sum(const Ptr &t) { return t ? t->sum : ti(); }\n\n  static uint64_t _rng()\
-    \ {\n    static uint64_t x_ = 88172645463325252ULL;\n    return x_ ^= x_ << 7,\
-    \ x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n  }\n\n  static Ptr _merge(Ptr l, Ptr r)\
-    \ {\n    if (!l || !r) return l ? l : r;\n    if (int((_rng() * (l->cnt + r->cnt))\
-    \ >> 32) < l->cnt) {\n      _push(l);\n      l->r = _merge(l->r, r);\n      return\
-    \ _update(l);\n    } else {\n      _push(r);\n      r->l = _merge(l, r->l);\n\
-    \      return _update(r);\n    }\n  }\n\n  static Ptr _build(int l, int r, const\
-    \ vector<pair<I, T>> &dat) {\n    if (l == r) return nullptr;\n    if (l + 1 ==\
-    \ r) return _my_new(dat[l].first, dat[l].second);\n    int m = (l + r) / 2;\n\
-    \    return _merge(_build(l, m, dat), _build(m, r, dat));\n  };\n\n  static void\
-    \ _push([[maybe_unused]] Ptr t) {\n    if constexpr (has_lazy_v<Node>) {\n   \
-    \   if (!t) return;\n      if (t->lazy != ei()) {\n        if (t->l) _propagate(t->l,\
-    \ t->lazy);\n        if (t->r) _propagate(t->r, t->lazy);\n        t->lazy = ei();\n\
-    \      }\n    }\n    if constexpr (has_shift_v<Node>) {\n      if (!t) return;\n\
-    \      if (t->shift != I{}) {\n        if (t->l) _shift(t->l, t->shift);\n   \
-    \     if (t->r) _shift(t->r, t->shift);\n        t->shift = I{};\n      }\n  \
-    \  }\n  }\n  static void _propagate([[maybe_unused]] Ptr t, [[maybe_unused]] const\
-    \ E &x) {\n    if constexpr (has_lazy_v<Node>) {\n      if (!t) return;\n    \
-    \  t->lazy = h(t->lazy, x);\n      t->val = g(t->val, x);\n      t->sum = g(t->sum,\
-    \ x);\n    }\n  }\n  static void _shift([[maybe_unused]] Ptr t, [[maybe_unused]]\
-    \ const I &sh) {\n    if constexpr (has_shift_v<Node>) {\n      if (!t) return;\n\
-    \      t->key += sh, t->shift += sh;\n    }\n  }\n\n  static Ptr _update(Ptr t)\
-    \ {\n    if (!t) return t;\n    t->cnt = 1;\n    t->sum = t->val;\n    if (t->l)\
-    \ t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n    if (t->r) t->cnt +=\
-    \ t->r->cnt, t->sum = f(t->sum, t->r->sum);\n    return t;\n  }\n\n  // key \u304C\
-    \ k \u3067\u3042\u308B\u30CE\u30FC\u30C9\u3092\u63A2\u3059, \u306A\u3051\u308C\
-    \u3070 nullptr\n  static Ptr _find(Ptr t, I k) {\n    while (t) {\n      _push(t);\n\
-    \      if (k == t->key) return t;\n      t = k < t->key ? t->l : t->r;\n    }\n\
-    \    return nullptr;\n  }\n\n  static void _erase(Ptr &t, I k) {\n    if (!t)\
-    \ return;\n    _push(t);\n    if (k == t->key) {\n      Ptr tl = t->l, tr = t->r;\n\
-    \      _my_del(t);\n      t = _merge(tl, tr);\n    } else if (k < t->key) {\n\
-    \      _erase(t->l, k);\n      _update(t);\n    } else {\n      _erase(t->r, k);\n\
-    \      _update(t);\n    }\n  }\n\n  // [k \u672A\u6E80, k \u4EE5\u4E0A]\n  static\
-    \ pair<Ptr, Ptr> _split_by_key(Ptr t, I k) {\n    if (!t) return {nullptr, nullptr};\n\
-    \    _push(t);\n    if (k == t->key) {\n      Ptr tl = t->l;\n      t->l = nullptr;\n\
-    \      return {tl, _update(t)};\n    } else if (k < t->key) {\n      auto s =\
-    \ _split_by_key(t->l, k);\n      t->l = s.second;\n      return {s.first, _update(t)};\n\
-    \    } else {\n      auto s = _split_by_key(t->r, k);\n      t->r = s.first;\n\
-    \      return {_update(t), s.second};\n    }\n  }\n\n  // [k \u672A\u6E80, k,\
-    \ k \u8D85\u904E]\n  static array<Ptr, 3> _split_by_key3(Ptr t, I k) {\n    if\
-    \ (!t) return {{nullptr, nullptr, nullptr}};\n    _push(t);\n    if (k == t->key)\
-    \ {\n      Ptr tl = t->l, tr = t->r;\n      t->l = t->r = nullptr;\n      return\
-    \ {{tl, _update(t), tr}};\n    } else if (k < t->key) {\n      auto s = _split_by_key3(t->l,\
-    \ k);\n      t->l = s[2];\n      return {{s[0], s[1], _update(t)}};\n    } else\
-    \ {\n      auto s = _split_by_key3(t->r, k);\n      t->r = s[0];\n      return\
-    \ {{_update(t), s[1], s[2]}};\n    }\n  }\n\n  // (-inf, i] \u306E prod \u306B\
-    \u3064\u3044\u3066 check(prod) \u306E (true / false) \u3067\u5207\u308B\n  template\
-    \ <typename C>\n  static pair<Ptr, Ptr> _split_max_right(Ptr t, const C &check,\
-    \ T prod = ti()) {\n    assert(check(prod));\n    if (!t) return {nullptr, nullptr};\n\
-    \    _push(t);\n    T p1 = f(prod, _sum(t->l));\n    if (check(p1)) {\n      prod\
-    \ = p1;\n    } else {\n      auto s = _split_max_right(t->l, check, prod);\n \
-    \     t->l = s.second;\n      return {s.first, _update(t)};\n    }\n    prod =\
-    \ f(prod, t->val);\n    if (!check(prod)) {\n      Ptr tl = t->l;\n      t->l\
-    \ = nullptr;\n      return {tl, _update(t)};\n    }\n    p1 = f(prod, _sum(t->r));\n\
-    \    if (check(p1)) {\n      return {t, nullptr};\n    } else {\n      auto s\
-    \ = _split_max_right(t->r, check, prod);\n      t->r = s.first;\n      return\
-    \ {_update(t), s.second};\n    }\n  }\n\n  // [i, inf) \u306E prod \u306B\u3064\
-    \u3044\u3066 check(prod) \u306E (false / true) \u3067\u5207\u308B\n  template\
-    \ <typename C>\n  static pair<Ptr, Ptr> _split_min_left(Ptr t, const C &check,\
-    \ T prod = ti()) {\n    assert(check(prod));\n    if (!t) return {nullptr, nullptr};\n\
-    \    _push(t);\n    T p1 = f(_sum(t->r), prod);\n    if (check(p1)) {\n      prod\
-    \ = p1;\n    } else {\n      auto s = _split_min_left(t->r, check, prod);\n  \
-    \    t->r = s.first;\n      return {_update(t), s.second};\n    }\n    prod =\
-    \ f(t->val, prod);\n    if (!check(prod)) {\n      Ptr tr = t->r;\n      t->r\
-    \ = nullptr;\n      return {_update(t), tr};\n    }\n    p1 = f(_sum(t->l), prod);\n\
-    \    if (check(p1)) {\n      return {nullptr, t};\n    } else {\n      auto s\
-    \ = _split_min_left(t->l, check, prod);\n      t->l = s.second;\n      return\
-    \ {s.first, _update(t)};\n    }\n  }\n\n  // [l, inf) \u3067\u3042\u308B\u5730\
-    \u70B9\u306B apply\n  static void _apply_left(Ptr t, I l, const E &e) {\n    if\
-    \ (!t) return;\n    _push(t);\n    if (t->key < l) {\n      _apply_left(t->r,\
-    \ l, e);\n    } else if (t->key == l) {\n      t->val = g(t->val, e);\n      _propagate(t->r,\
-    \ e);\n    } else {\n      _apply_left(t->l, l, e);\n      t->val = g(t->val,\
-    \ e);\n      _propagate(t->r, e);\n    }\n    _update(t);\n  }\n\n  // [-inf,\
-    \ r) \u3067\u3042\u308B\u5730\u70B9\u306B apply\n  static void _apply_right(Ptr\
-    \ t, I r, const E &e) {\n    if (!t) return;\n    _push(t);\n    if (t->key <\
-    \ r) {\n      _propagate(t->l, e);\n      t->val = g(t->val, e);\n      _apply_right(t->r,\
-    \ r, e);\n    } else if (t->key == r) {\n      _propagate(t->l, e);\n    } else\
-    \ {\n      _apply_right(t->l, r, e);\n    }\n    _update(t);\n  }\n\n  // [l,\
-    \ r) \u306B apply\n  static void _apply(Ptr t, I l, I r, const E &e) {\n    if\
-    \ (!t) return;\n    _push(t);\n    if (t->key < l) {\n      _apply(t->r, l, r,\
-    \ e);\n    } else if (t->key == l) {\n      t->val = g(t->val, e);\n      _apply_right(t->r,\
-    \ r, e);\n    } else if (t->key < r) {\n      _apply_left(t->l, l, e);\n     \
-    \ t->val = g(t->val, e);\n      _apply_right(t->r, r, e);\n    } else if (t->key\
-    \ == r) {\n      _apply_left(t->l, l, e);\n    } else {\n      _apply(t->l, l,\
-    \ r, e);\n    }\n    _update(t);\n  }\n\n  // l \u4EE5\u4E0A\n  static T _fold_left(Ptr\
-    \ t, I l) {\n    if (!t) return ti();\n    _push(t);\n    if (t->key < l) {\n\
-    \      return _fold_left(t->r, l);\n    } else if (t->key == l) {\n      return\
-    \ f(t->val, _fold_left(t->r, l));\n    } else {\n      T tl = _fold_left(t->l,\
-    \ l);\n      return f(f(tl, t->val), _sum(t->r));\n    }\n  }\n\n  // r \u672A\
-    \u6E80\n  static T _fold_right(Ptr t, I r) {\n    if (!t) return ti();\n    _push(t);\n\
-    \    if (t->key < r) {\n      T tr = _fold_right(t->r, r);\n      return f(f(_sum(t->l),\
-    \ t->val), tr);\n    } else if (t->key == r) {\n      return _sum(t->l);\n   \
-    \ } else {\n      return _fold_right(t->l, r);\n    }\n  }\n\n  static T _fold(Ptr\
-    \ t, I l, I r) {\n    if (!t) return ti();\n    _push(t);\n    if (t->key < l)\
-    \ {\n      return _fold(t->r, l, r);\n    } else if (t->key == l) {\n      return\
-    \ f(t->val, _fold_right(t->r, r));\n    } else if (t->key < r) {\n      T tl =\
-    \ _fold_left(t->l, l);\n      T tr = _fold_right(t->r, r);\n      return f(f(tl,\
-    \ t->val), tr);\n    } else if (t->key == r) {\n      return _fold_left(t->l,\
-    \ l);\n    } else {\n      return _fold(t->l, l, r);\n    }\n  }\n\n  // t \u3092\
-    \u6839\u3068\u3059\u308B\u6728\u306E\u4E0A\u3067\u6700\u5C0F\u306E key \u306F\uFF1F\
-    \ (t \u304C\u7A7A\u306E\u5834\u5408\u306F failed)\n  static pair<I, T> _get_min_keyval(Ptr\
-    \ t, const I &failed) {\n    if (!t) return {failed, ti()};\n    while (t->l)\
-    \ _push(t), t = t->l;\n    return {t->key, t->val};\n  }\n\n  // t \u3092\u6839\
-    \u3068\u3059\u308B\u6728\u306E\u4E0A\u3067\u6700\u5C0F\u306E key \u306F\uFF1F\
-    \ (t \u304C\u7A7A\u306E\u5834\u5408\u306F failed)\n  static pair<I, T> _get_max_keyval(Ptr\
-    \ t, const I &failed) {\n    if (!t) return {failed, ti()};\n    while (t->r)\
-    \ _push(t), t = t->r;\n    return {t->key, t->val};\n  }\n\n  // t \u3092\u6839\
-    \u3068\u3059\u308B\u6728\u306E\u3046\u3061\u3001[0, i \u306E\u533A\u9593 fold\
-    \ \u304C true \u306B\u306A\u308B\u6700\u5927\u306E i \u306F\u4F55\u304B\uFF1F\n\
-    \  // exclusive \u304B\u3064 (\u7A7A \u307E\u305F\u306F[0,\u53F3]\u304C\u771F\u306E\
-    \u5834\u5408) \u306E\u5834\u5408\u306F failed(inf)\n  // inclusive \u304B\u3064\
-    \ (\u7A7A \u307E\u305F\u306F[0,0] \u304C\u507D\u306E\u5834\u5408) \u306E\u5834\
-    \u5408\u306F failed\n  template <typename C, bool exclusive>\n  static I _max_right(Ptr\
-    \ t, C check, const I &failed) {\n    if (!t) return failed;\n    _push(t);\n\
-    \    Ptr now = t;\n    T prod_now = ti();\n    [[maybe_unused]] I prev = failed;\n\
-    \    while (true) {\n      if (now->l != nullptr) {\n        _push(now->l);\n\
-    \        auto pl = f(prod_now, now->l->sum);\n        if (check(pl)) {\n     \
-    \     prod_now = pl;\n        } else {\n          now = now->l;\n          continue;\n\
-    \        }\n      }\n      auto pl = f(prod_now, now->val);\n      if (!check(pl))\
-    \ {\n        if constexpr (exclusive) {\n          return now->key;\n        }\
-    \ else {\n          return now->l ? _get_max_keyval(now->l, failed).first : prev;\n\
-    \        }\n      }\n      prod_now = pl;\n      if (now->r == nullptr) {\n  \
-    \      if constexpr (exclusive) {\n          return failed;\n        } else {\n\
-    \          return now->key;\n        }\n      }\n      _push(now->r);\n      if\
+  code: "#pragma once\n\n#include \"../internal/internal-type-traits.hpp\"\n\nENABLE_HAS_VAR(lazy);\n\
+    ENABLE_HAS_VAR(shift);\n\ntemplate <typename Node, typename I, typename T, typename\
+    \ E, T (*f)(T, T),\n          T (*g)(T, E), E (*h)(E, E), T (*ti)(), E (*ei)()>\n\
+    struct RBSTSegmentTreeBase {\n protected:\n  using Ptr = Node *;\n  template <typename...\
+    \ Args>\n  static Ptr _my_new(Args... args) {\n    return new Node(args...);\n\
+    \  }\n  static void _my_del(Ptr t) { delete t; }\n\n  static int _count(const\
+    \ Ptr t) { return t ? t->cnt : 0; }\n\n  static T _sum(const Ptr &t) { return\
+    \ t ? t->sum : ti(); }\n\n  static uint64_t _rng() {\n    static uint64_t x_ =\
+    \ 88172645463325252ULL;\n    return x_ ^= x_ << 7, x_ ^= x_ >> 9, x_ & 0xFFFFFFFFull;\n\
+    \  }\n\n  static Ptr _merge(Ptr l, Ptr r) {\n    if (!l || !r) return l ? l :\
+    \ r;\n    if (int((_rng() * (l->cnt + r->cnt)) >> 32) < l->cnt) {\n      _push(l);\n\
+    \      l->r = _merge(l->r, r);\n      return _update(l);\n    } else {\n     \
+    \ _push(r);\n      r->l = _merge(l, r->l);\n      return _update(r);\n    }\n\
+    \  }\n\n  static Ptr _build(int l, int r, const vector<pair<I, T>> &dat) {\n \
+    \   if (l == r) return nullptr;\n    if (l + 1 == r) return _my_new(dat[l].first,\
+    \ dat[l].second);\n    int m = (l + r) / 2;\n    return _merge(_build(l, m, dat),\
+    \ _build(m, r, dat));\n  };\n\n  static void _push([[maybe_unused]] Ptr t) {\n\
+    \    if constexpr (has_lazy_v<Node>) {\n      if (!t) return;\n      if (t->lazy\
+    \ != ei()) {\n        if (t->l) _propagate(t->l, t->lazy);\n        if (t->r)\
+    \ _propagate(t->r, t->lazy);\n        t->lazy = ei();\n      }\n    }\n    if\
+    \ constexpr (has_shift_v<Node>) {\n      if (!t) return;\n      if (t->shift !=\
+    \ I{}) {\n        if (t->l) _shift(t->l, t->shift);\n        if (t->r) _shift(t->r,\
+    \ t->shift);\n        t->shift = I{};\n      }\n    }\n  }\n  static void _propagate([[maybe_unused]]\
+    \ Ptr t, [[maybe_unused]] const E &x) {\n    if constexpr (has_lazy_v<Node>) {\n\
+    \      if (!t) return;\n      t->lazy = h(t->lazy, x);\n      t->val = g(t->val,\
+    \ x);\n      t->sum = g(t->sum, x);\n    }\n  }\n  static void _shift([[maybe_unused]]\
+    \ Ptr t, [[maybe_unused]] const I &sh) {\n    if constexpr (has_shift_v<Node>)\
+    \ {\n      if (!t) return;\n      t->key += sh, t->shift += sh;\n    }\n  }\n\n\
+    \  static Ptr _update(Ptr t) {\n    if (!t) return t;\n    t->cnt = 1;\n    t->sum\
+    \ = t->val;\n    if (t->l) t->cnt += t->l->cnt, t->sum = f(t->l->sum, t->sum);\n\
+    \    if (t->r) t->cnt += t->r->cnt, t->sum = f(t->sum, t->r->sum);\n    return\
+    \ t;\n  }\n\n  // key \u304C k \u3067\u3042\u308B\u30CE\u30FC\u30C9\u3092\u63A2\
+    \u3059, \u306A\u3051\u308C\u3070 nullptr\n  static Ptr _find(Ptr t, I k) {\n \
+    \   while (t) {\n      _push(t);\n      if (k == t->key) return t;\n      t =\
+    \ k < t->key ? t->l : t->r;\n    }\n    return nullptr;\n  }\n\n  static void\
+    \ _erase(Ptr &t, I k) {\n    if (!t) return;\n    _push(t);\n    if (k == t->key)\
+    \ {\n      Ptr tl = t->l, tr = t->r;\n      _my_del(t);\n      t = _merge(tl,\
+    \ tr);\n    } else if (k < t->key) {\n      _erase(t->l, k);\n      _update(t);\n\
+    \    } else {\n      _erase(t->r, k);\n      _update(t);\n    }\n  }\n\n  // [k\
+    \ \u672A\u6E80, k \u4EE5\u4E0A]\n  static pair<Ptr, Ptr> _split_by_key(Ptr t,\
+    \ I k) {\n    if (!t) return {nullptr, nullptr};\n    _push(t);\n    if (k ==\
+    \ t->key) {\n      Ptr tl = t->l;\n      t->l = nullptr;\n      return {tl, _update(t)};\n\
+    \    } else if (k < t->key) {\n      auto s = _split_by_key(t->l, k);\n      t->l\
+    \ = s.second;\n      return {s.first, _update(t)};\n    } else {\n      auto s\
+    \ = _split_by_key(t->r, k);\n      t->r = s.first;\n      return {_update(t),\
+    \ s.second};\n    }\n  }\n\n  // [k \u672A\u6E80, k, k \u8D85\u904E]\n  static\
+    \ array<Ptr, 3> _split_by_key3(Ptr t, I k) {\n    if (!t) return {{nullptr, nullptr,\
+    \ nullptr}};\n    _push(t);\n    if (k == t->key) {\n      Ptr tl = t->l, tr =\
+    \ t->r;\n      t->l = t->r = nullptr;\n      return {{tl, _update(t), tr}};\n\
+    \    } else if (k < t->key) {\n      auto s = _split_by_key3(t->l, k);\n     \
+    \ t->l = s[2];\n      return {{s[0], s[1], _update(t)}};\n    } else {\n     \
+    \ auto s = _split_by_key3(t->r, k);\n      t->r = s[0];\n      return {{_update(t),\
+    \ s[1], s[2]}};\n    }\n  }\n\n  // (-inf, i] \u306E prod \u306B\u3064\u3044\u3066\
+    \ check(prod) \u306E (true / false) \u3067\u5207\u308B\n  template <typename C>\n\
+    \  static pair<Ptr, Ptr> _split_max_right(Ptr t, const C &check, T prod = ti())\
+    \ {\n    assert(check(prod));\n    if (!t) return {nullptr, nullptr};\n    _push(t);\n\
+    \    T p1 = f(prod, _sum(t->l));\n    if (check(p1)) {\n      prod = p1;\n   \
+    \ } else {\n      auto s = _split_max_right(t->l, check, prod);\n      t->l =\
+    \ s.second;\n      return {s.first, _update(t)};\n    }\n    prod = f(prod, t->val);\n\
+    \    if (!check(prod)) {\n      Ptr tl = t->l;\n      t->l = nullptr;\n      return\
+    \ {tl, _update(t)};\n    }\n    p1 = f(prod, _sum(t->r));\n    if (check(p1))\
+    \ {\n      return {t, nullptr};\n    } else {\n      auto s = _split_max_right(t->r,\
+    \ check, prod);\n      t->r = s.first;\n      return {_update(t), s.second};\n\
+    \    }\n  }\n\n  // [i, inf) \u306E prod \u306B\u3064\u3044\u3066 check(prod)\
+    \ \u306E (false / true) \u3067\u5207\u308B\n  template <typename C>\n  static\
+    \ pair<Ptr, Ptr> _split_min_left(Ptr t, const C &check, T prod = ti()) {\n   \
+    \ assert(check(prod));\n    if (!t) return {nullptr, nullptr};\n    _push(t);\n\
+    \    T p1 = f(_sum(t->r), prod);\n    if (check(p1)) {\n      prod = p1;\n   \
+    \ } else {\n      auto s = _split_min_left(t->r, check, prod);\n      t->r = s.first;\n\
+    \      return {_update(t), s.second};\n    }\n    prod = f(t->val, prod);\n  \
+    \  if (!check(prod)) {\n      Ptr tr = t->r;\n      t->r = nullptr;\n      return\
+    \ {_update(t), tr};\n    }\n    p1 = f(_sum(t->l), prod);\n    if (check(p1))\
+    \ {\n      return {nullptr, t};\n    } else {\n      auto s = _split_min_left(t->l,\
+    \ check, prod);\n      t->l = s.second;\n      return {s.first, _update(t)};\n\
+    \    }\n  }\n\n  // [l, inf) \u3067\u3042\u308B\u5730\u70B9\u306B apply\n  static\
+    \ void _apply_left(Ptr t, I l, const E &e) {\n    if (!t) return;\n    _push(t);\n\
+    \    if (t->key < l) {\n      _apply_left(t->r, l, e);\n    } else if (t->key\
+    \ == l) {\n      t->val = g(t->val, e);\n      _propagate(t->r, e);\n    } else\
+    \ {\n      _apply_left(t->l, l, e);\n      t->val = g(t->val, e);\n      _propagate(t->r,\
+    \ e);\n    }\n    _update(t);\n  }\n\n  // [-inf, r) \u3067\u3042\u308B\u5730\u70B9\
+    \u306B apply\n  static void _apply_right(Ptr t, I r, const E &e) {\n    if (!t)\
+    \ return;\n    _push(t);\n    if (t->key < r) {\n      _propagate(t->l, e);\n\
+    \      t->val = g(t->val, e);\n      _apply_right(t->r, r, e);\n    } else if\
+    \ (t->key == r) {\n      _propagate(t->l, e);\n    } else {\n      _apply_right(t->l,\
+    \ r, e);\n    }\n    _update(t);\n  }\n\n  // [l, r) \u306B apply\n  static void\
+    \ _apply(Ptr t, I l, I r, const E &e) {\n    if (!t) return;\n    _push(t);\n\
+    \    if (t->key < l) {\n      _apply(t->r, l, r, e);\n    } else if (t->key ==\
+    \ l) {\n      t->val = g(t->val, e);\n      _apply_right(t->r, r, e);\n    } else\
+    \ if (t->key < r) {\n      _apply_left(t->l, l, e);\n      t->val = g(t->val,\
+    \ e);\n      _apply_right(t->r, r, e);\n    } else if (t->key == r) {\n      _apply_left(t->l,\
+    \ l, e);\n    } else {\n      _apply(t->l, l, r, e);\n    }\n    _update(t);\n\
+    \  }\n\n  // l \u4EE5\u4E0A\n  static T _fold_left(Ptr t, I l) {\n    if (!t)\
+    \ return ti();\n    _push(t);\n    if (t->key < l) {\n      return _fold_left(t->r,\
+    \ l);\n    } else if (t->key == l) {\n      return f(t->val, _fold_left(t->r,\
+    \ l));\n    } else {\n      T tl = _fold_left(t->l, l);\n      return f(f(tl,\
+    \ t->val), _sum(t->r));\n    }\n  }\n\n  // r \u672A\u6E80\n  static T _fold_right(Ptr\
+    \ t, I r) {\n    if (!t) return ti();\n    _push(t);\n    if (t->key < r) {\n\
+    \      T tr = _fold_right(t->r, r);\n      return f(f(_sum(t->l), t->val), tr);\n\
+    \    } else if (t->key == r) {\n      return _sum(t->l);\n    } else {\n     \
+    \ return _fold_right(t->l, r);\n    }\n  }\n\n  static T _fold(Ptr t, I l, I r)\
+    \ {\n    if (!t) return ti();\n    _push(t);\n    if (t->key < l) {\n      return\
+    \ _fold(t->r, l, r);\n    } else if (t->key == l) {\n      return f(t->val, _fold_right(t->r,\
+    \ r));\n    } else if (t->key < r) {\n      T tl = _fold_left(t->l, l);\n    \
+    \  T tr = _fold_right(t->r, r);\n      return f(f(tl, t->val), tr);\n    } else\
+    \ if (t->key == r) {\n      return _fold_left(t->l, l);\n    } else {\n      return\
+    \ _fold(t->l, l, r);\n    }\n  }\n\n  // t \u3092\u6839\u3068\u3059\u308B\u6728\
+    \u306E\u4E0A\u3067\u6700\u5C0F\u306E key \u306F\uFF1F (t \u304C\u7A7A\u306E\u5834\
+    \u5408\u306F failed)\n  static pair<I, T> _get_min_keyval(Ptr t, const I &failed)\
+    \ {\n    if (!t) return {failed, ti()};\n    while (t->l) _push(t), t = t->l;\n\
+    \    return {t->key, t->val};\n  }\n\n  // t \u3092\u6839\u3068\u3059\u308B\u6728\
+    \u306E\u4E0A\u3067\u6700\u5C0F\u306E key \u306F\uFF1F (t \u304C\u7A7A\u306E\u5834\
+    \u5408\u306F failed)\n  static pair<I, T> _get_max_keyval(Ptr t, const I &failed)\
+    \ {\n    if (!t) return {failed, ti()};\n    while (t->r) _push(t), t = t->r;\n\
+    \    return {t->key, t->val};\n  }\n\n  // t \u3092\u6839\u3068\u3059\u308B\u6728\
+    \u306E\u3046\u3061\u3001[0, i \u306E\u533A\u9593 fold \u304C true \u306B\u306A\
+    \u308B\u6700\u5927\u306E i \u306F\u4F55\u304B\uFF1F\n  // exclusive \u304B\u3064\
+    \ (\u7A7A \u307E\u305F\u306F[0,\u53F3]\u304C\u771F\u306E\u5834\u5408) \u306E\u5834\
+    \u5408\u306F failed(inf)\n  // inclusive \u304B\u3064 (\u7A7A \u307E\u305F\u306F\
+    [0,0] \u304C\u507D\u306E\u5834\u5408) \u306E\u5834\u5408\u306F failed\n  template\
+    \ <typename C, bool exclusive>\n  static I _max_right(Ptr t, C check, const I\
+    \ &failed) {\n    if (!t) return failed;\n    _push(t);\n    Ptr now = t;\n  \
+    \  T prod_now = ti();\n    [[maybe_unused]] I prev = failed;\n    while (true)\
+    \ {\n      if (now->l != nullptr) {\n        _push(now->l);\n        auto pl =\
+    \ f(prod_now, now->l->sum);\n        if (check(pl)) {\n          prod_now = pl;\n\
+    \        } else {\n          now = now->l;\n          continue;\n        }\n \
+    \     }\n      auto pl = f(prod_now, now->val);\n      if (!check(pl)) {\n   \
+    \     if constexpr (exclusive) {\n          return now->key;\n        } else {\n\
+    \          return now->l ? _get_max_keyval(now->l, failed).first : prev;\n   \
+    \     }\n      }\n      prod_now = pl;\n      if (now->r == nullptr) {\n     \
+    \   if constexpr (exclusive) {\n          return failed;\n        } else {\n \
+    \         return now->key;\n        }\n      }\n      _push(now->r);\n      if\
     \ constexpr (!exclusive) prev = now->key;\n      now = now->r;\n    }\n  }\n\n\
     \  // t \u3092\u6839\u3068\u3059\u308B\u6728\u306E\u3046\u3061\u3001i, inf) \u306E\
     \u533A\u9593 fold \u304C true \u306B\u306A\u308B\u6700\u5C0F\u306E i \u306F\u4F55\
@@ -650,13 +656,14 @@ data:
     \nusing RBSTSegmentTreeImpl::RBSTLazySegmentTree;\nusing RBSTSegmentTreeImpl::RBSTSegmentTree;\n\
     using RBSTSegmentTreeImpl::RBSTShiftableLazySegmentTree;\n\n/**\n * @brief RBST-based\
     \ Dynamic Lazy Segment Tree\n */\n"
-  dependsOn: []
+  dependsOn:
+  - internal/internal-type-traits.hpp
   isVerificationFile: false
   path: segment-tree/rbst-segment-tree.hpp
   requiredBy:
   - segment-tree/rbst-sequence.hpp
   - data-structure/slope-trick-weighted.hpp
-  timestamp: '2023-03-24 20:50:25+09:00'
+  timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1786.test.cpp

@@ -211,15 +211,16 @@ data:
     \ \\\n    return;                  \\\n  } while (0)\n#line 70 \"template/template.hpp\"\
     \n\nnamespace Nyaan {\nvoid solve();\n}\nint main() { Nyaan::solve(); }\n#line\
     \ 4 \"verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp\"\n//\n#line\
-    \ 2 \"graph/cycle-detection.hpp\"\n\n#line 2 \"graph/graph-template.hpp\"\n\n\
-    template <typename T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int\
-    \ _to, T _cost) : src(-1), to(_to), cost(_cost) {}\n  edge(int _src, int _to,\
-    \ T _cost) : src(_src), to(_to), cost(_cost) {}\n\n  edge &operator=(const int\
-    \ &x) {\n    to = x;\n    return *this;\n  }\n\n  operator int() const { return\
-    \ to; }\n};\ntemplate <typename T>\nusing Edges = vector<edge<T>>;\ntemplate <typename\
-    \ T>\nusing WeightedGraph = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\
-    \n// Input of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool\
-    \ is_directed = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
+    \ 2 \"graph/cycle-detection.hpp\"\n\n#line 5 \"graph/cycle-detection.hpp\"\nusing\
+    \ namespace std;\n\n#line 2 \"graph/graph-template.hpp\"\n\ntemplate <typename\
+    \ T>\nstruct edge {\n  int src, to;\n  T cost;\n\n  edge(int _to, T _cost) : src(-1),\
+    \ to(_to), cost(_cost) {}\n  edge(int _src, int _to, T _cost) : src(_src), to(_to),\
+    \ cost(_cost) {}\n\n  edge &operator=(const int &x) {\n    to = x;\n    return\
+    \ *this;\n  }\n\n  operator int() const { return to; }\n};\ntemplate <typename\
+    \ T>\nusing Edges = vector<edge<T>>;\ntemplate <typename T>\nusing WeightedGraph\
+    \ = vector<Edges<T>>;\nusing UnweightedGraph = vector<vector<int>>;\n\n// Input\
+    \ of (Unweighted) Graph\nUnweightedGraph graph(int N, int M = -1, bool is_directed\
+    \ = false,\n                      bool is_1origin = true) {\n  UnweightedGraph\
     \ g(N);\n  if (M == -1) M = N - 1;\n  for (int _ = 0; _ < M; _++) {\n    int x,\
     \ y;\n    cin >> x >> y;\n    if (is_1origin) x--, y--;\n    g[x].push_back(y);\n\
     \    if (!is_directed) g[y].push_back(x);\n  }\n  return g;\n}\n\n// Input of\
@@ -241,21 +242,24 @@ data:
     \ >> c;\n    else\n      c = 1;\n    if (is_1origin) x--, y--;\n    d[x][y] =\
     \ c;\n    if (!is_directed) d[y][x] = c;\n  }\n  return d;\n}\n\n/**\n * @brief\
     \ \u30B0\u30E9\u30D5\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\n * @docs docs/graph/graph-template.md\n\
-    \ */\n#line 4 \"graph/cycle-detection.hpp\"\n\ntemplate <typename G>\nvector<pair<int,\
-    \ int>> CycleDetection(const G& g, bool directed = true) {\n  vector<int> pidx(g.size(),\
-    \ -1), vis(g.size(), 0);\n\n  vector<pair<int, int>> cycle;\n  int finish = 0;\n\
-    \  auto dfs = [&](auto rec, int cur, int pval, int par) -> int {\n    pidx[cur]\
-    \ = pval;\n    vis[cur] = 1;\n    for (auto& dst : g[cur]) {\n      if (finish)\
-    \ return -1;\n      if (!directed && dst == par) continue;\n      if (pidx[dst]\
-    \ == pidx[cur]) {\n        cycle.emplace_back(cur, dst);\n        return dst;\n\
-    \      }\n      if (vis[dst]) continue;\n      int nx = rec(rec, dst, pval, cur);\n\
-    \      if (nx != -1) {\n        cycle.emplace_back(cur, dst);\n        if (cur\
-    \ == nx) {\n          finish = 1;\n          return -1;\n        }\n        return\
-    \ nx;\n      }\n    }\n    pidx[cur] = -1;\n    return -1;\n  };\n\n  for (int\
-    \ i = 0; i < (int)g.size(); i++) {\n    if (vis[i]) continue;\n    dfs(dfs, i,\
-    \ i, -1);\n\n    if (finish) {\n      reverse(begin(cycle), end(cycle));\n   \
-    \   return cycle;\n    }\n  }\n  return vector<pair<int, int>>{};\n}\n\n/**\n\
-    \ * @brief \u9589\u8DEF\u306E\u691C\u51FA\n */\n#line 7 \"verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp\"\
+    \ */\n#line 8 \"graph/cycle-detection.hpp\"\n\ntemplate <typename G>\nvector<pair<int,\
+    \ int>> CycleDetection(const G& g, bool directed = true) {\n  for (int i = 0;\
+    \ i < (int)g.size(); i++) {\n    for (auto j : g[i]) {\n      if (i == j) {\n\
+    \        vector<pair<int, int>> res;\n        res.emplace_back(i, i);\n      \
+    \  return res;\n      }\n    }\n  }\n\n  vector<int> pidx(g.size(), -1), vis(g.size(),\
+    \ 0);\n\n  vector<pair<int, int>> cycle;\n  int finish = 0;\n  auto dfs = [&](auto\
+    \ rec, int cur, int pval, int par) -> int {\n    pidx[cur] = pval;\n    vis[cur]\
+    \ = 1;\n    for (auto& dst : g[cur]) {\n      if (finish) return -1;\n      if\
+    \ (!directed && dst == par) continue;\n      if (pidx[dst] == pidx[cur]) {\n \
+    \       cycle.emplace_back(cur, dst);\n        return dst;\n      }\n      if\
+    \ (vis[dst]) continue;\n      int nx = rec(rec, dst, pval, cur);\n      if (nx\
+    \ != -1) {\n        cycle.emplace_back(cur, dst);\n        if (cur == nx) {\n\
+    \          finish = 1;\n          return -1;\n        }\n        return nx;\n\
+    \      }\n    }\n    pidx[cur] = -1;\n    return -1;\n  };\n\n  for (int i = 0;\
+    \ i < (int)g.size(); i++) {\n    if (vis[i]) continue;\n    dfs(dfs, i, i, -1);\n\
+    \n    if (finish) {\n      reverse(begin(cycle), end(cycle));\n      return cycle;\n\
+    \    }\n  }\n  return vector<pair<int, int>>{};\n}\n\n/**\n * @brief \u9589\u8DEF\
+    \u306E\u691C\u51FA\n */\n#line 7 \"verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp\"\
     \n\nusing namespace Nyaan;\nvoid Nyaan::solve() {\n  ini(N, M);\n  vvi g(N);\n\
     \  auto idx = [&](pl p) { return (p.first << 20) + p.second; };\n  map<ll, vector<int>>\
     \ m;\n  rep(_, M) {\n    ini(u, v);\n    m[idx(pl(u, v))].push_back(_);\n    g[u].push_back(v);\n\
@@ -283,7 +287,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp
   requiredBy: []
-  timestamp: '2023-08-10 13:25:59+09:00'
+  timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-graph/yosupo-cycle-detection.test.cpp

@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: internal/internal-type-traits.hpp
+    title: internal/internal-type-traits.hpp
+  - icon: ':heavy_check_mark:'
     path: segment-tree/rbst-segment-tree.hpp
     title: RBST-based Dynamic Lazy Segment Tree
   _extendedRequiredBy: []
@@ -17,20 +20,34 @@ data:
     links: []
   bundledCode: "#line 2 \"data-structure/slope-trick-weighted.hpp\"\n\n#include <cassert>\n\
     #include <iostream>\n#include <type_traits>\nusing namespace std;\n\n#line 2 \"\
-    segment-tree/rbst-segment-tree.hpp\"\n\n#define ENABLE_HAS_VAR(var)          \
-    \                        \\\n  template <typename T>                         \
-    \             \\\n  class has_##var {                                        \
-    \  \\\n    template <typename U, int = (&U::var, 0)>                \\\n    static\
-    \ true_type check(U *);                             \\\n    static false_type\
-    \ check(...);                            \\\n    static T *t;                \
-    \                             \\\n                                           \
-    \                  \\\n   public:                                            \
-    \       \\\n    static constexpr bool value = decltype(check(t))::value; \\\n\
-    \  };                                                         \\\n  template <typename\
-    \ T>                                      \\\n  inline constexpr bool has_##var##_v\
-    \ = has_##var<T>::value;\n\nENABLE_HAS_VAR(lazy);\nENABLE_HAS_VAR(shift);\n\n\
-    template <typename Node, typename I, typename T, typename E, T (*f)(T, T),\n \
-    \         T (*g)(T, E), E (*h)(E, E), T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTreeBase\
+    segment-tree/rbst-segment-tree.hpp\"\n\n#line 2 \"internal/internal-type-traits.hpp\"\
+    \n\n#line 4 \"internal/internal-type-traits.hpp\"\nusing namespace std;\n\nnamespace\
+    \ internal {\ntemplate <typename T>\nusing is_broadly_integral =\n    typename\
+    \ conditional_t<is_integral_v<T> || is_same_v<T, __int128_t> ||\n            \
+    \                   is_same_v<T, __uint128_t>,\n                           true_type,\
+    \ false_type>::type;\n\ntemplate <typename T>\nusing is_broadly_signed =\n   \
+    \ typename conditional_t<is_signed_v<T> || is_same_v<T, __int128_t>,\n       \
+    \                    true_type, false_type>::type;\n\ntemplate <typename T>\n\
+    using is_broadly_unsigned =\n    typename conditional_t<is_unsigned_v<T> || is_same_v<T,\
+    \ __uint128_t>,\n                           true_type, false_type>::type;\n\n\
+    #define ENABLE_VALUE(x) \\\n  template <typename T> \\\n  constexpr bool x##_v\
+    \ = x<T>::value;\n\nENABLE_VALUE(is_broadly_integral);\nENABLE_VALUE(is_broadly_signed);\n\
+    ENABLE_VALUE(is_broadly_unsigned);\n#undef ENABLE_VALUE\n\n#define ENABLE_HAS_TYPE(var)\
+    \                                   \\\n  template <class, class = void>     \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                 \\\n  template <class T>                                   \
+    \        \\\n  struct has_##var<T, void_t<typename T::var>> : true_type {}; \\\
+    \n  template <class T>                                           \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n#define ENABLE_HAS_VAR(var)   \
+    \                                  \\\n  template <class, class = void>      \
+    \                          \\\n  struct has_##var : false_type {};           \
+    \                  \\\n  template <class T>                                  \
+    \          \\\n  struct has_##var<T, void_t<decltype(T::var)>> : true_type {};\
+    \ \\\n  template <class T>                                            \\\n  constexpr\
+    \ auto has_##var##_v = has_##var<T>::value;\n\n}  // namespace internal\n#line\
+    \ 4 \"segment-tree/rbst-segment-tree.hpp\"\n\nENABLE_HAS_VAR(lazy);\nENABLE_HAS_VAR(shift);\n\
+    \ntemplate <typename Node, typename I, typename T, typename E, T (*f)(T, T),\n\
+    \          T (*g)(T, E), E (*h)(E, E), T (*ti)(), E (*ei)()>\nstruct RBSTSegmentTreeBase\
     \ {\n protected:\n  using Ptr = Node *;\n  template <typename... Args>\n  static\
     \ Ptr _my_new(Args... args) {\n    return new Node(args...);\n  }\n  static void\
     \ _my_del(Ptr t) { delete t; }\n\n  static int _count(const Ptr t) { return t\
@@ -469,10 +486,11 @@ data:
     \ = WeightedSlopeTrick<__int128_t>;\n\n/**\n * @brief Weighted Slope Trick\n */\n"
   dependsOn:
   - segment-tree/rbst-segment-tree.hpp
+  - internal/internal-type-traits.hpp
   isVerificationFile: false
   path: data-structure/slope-trick-weighted.hpp
   requiredBy: []
-  timestamp: '2023-03-24 20:50:25+09:00'
+  timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - verify/verify-yuki/yuki-1467-weighted.test.cpp

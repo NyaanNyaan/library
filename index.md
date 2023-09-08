@@ -132,6 +132,9 @@ data:
       title: "0-1\u30CA\u30C3\u30D7\u30B5\u30C3\u30AF\u554F\u984C\u306E\u5206\u679D\
         \u9650\u5B9A\u6CD5\u306B\u3088\u308B\u89E3\u6CD5"
     - icon: ':heavy_check_mark:'
+      path: dp/concave-min-plus-convolution.hpp
+      title: dp/concave-min-plus-convolution.hpp
+    - icon: ':heavy_check_mark:'
       path: dp/golden-section-search.hpp
       title: "\u9EC4\u91D1\u5206\u5272\u63A2\u7D22"
     - icon: ':heavy_check_mark:'
@@ -1779,6 +1782,9 @@ data:
       path: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
       title: verify/verify-yosupo-fps/yosupo-sqrt.test.cpp
     - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
+      title: verify/verify-yosupo-fps/yosupo-stirling-1st-row.test.cpp
+    - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
       title: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1878,6 +1884,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
       title: verify/verify-yosupo-math/yosupo-characteristic-polynomial.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+      title: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-1.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
+      title: verify/verify-yosupo-math/yosupo-concave-min-plus-convolution-2.test.cpp
     - icon: ':heavy_check_mark:'
       path: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp
       title: verify/verify-yosupo-math/yosupo-counting-primes-2.test.cpp

@@ -496,38 +496,43 @@ data:
     \ 0 ? 1 : C(n + r - 1, r);\n  }\n};\n#line 9 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\
     \nusing mint = LazyMontgomeryModInt<998244353>;\nBinomial<mint> C;\nusing vm =\
     \ vector<mint>;\nusing vvm = vector<vm>;\nusing fps = FormalPowerSeries<mint>;\n\
-    // \n#line 4 \"fps/taylor-shift.hpp\"\n\n// calculate F(x + a)\ntemplate <typename\
-    \ mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint> f, mint a,\n\
-    \                                    Binomial<mint>& C) {\n  using fps = FormalPowerSeries<mint>;\n\
-    \  int N = f.size();\n  for (int i = 0; i < N; i++) f[i] *= C.fac(i);\n  reverse(begin(f),\
-    \ end(f));\n  fps g(N, mint(1));\n  for (int i = 1; i < N; i++) g[i] = g[i - 1]\
-    \ * a * C.inv(i);\n  f = (f * g).pre(N);\n  reverse(begin(f), end(f));\n  for\
-    \ (int i = 0; i < N; i++) f[i] *= C.finv(i);\n  return f;\n}\n\n/**\n * @brief\
-    \ \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n */\n#line\
-    \ 5 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
+    // \n#line 2 \"fps/fps-famous-series.hpp\"\n\n#line 4 \"fps/taylor-shift.hpp\"\
+    \n\n// calculate F(x + a)\ntemplate <typename mint>\nFormalPowerSeries<mint> TaylorShift(FormalPowerSeries<mint>\
+    \ f, mint a,\n                                    Binomial<mint>& C) {\n  using\
+    \ fps = FormalPowerSeries<mint>;\n  int N = f.size();\n  for (int i = 0; i < N;\
+    \ i++) f[i] *= C.fac(i);\n  reverse(begin(f), end(f));\n  fps g(N, mint(1));\n\
+    \  for (int i = 1; i < N; i++) g[i] = g[i - 1] * a * C.inv(i);\n  f = (f * g).pre(N);\n\
+    \  reverse(begin(f), end(f));\n  for (int i = 0; i < N; i++) f[i] *= C.finv(i);\n\
+    \  return f;\n}\n\n/**\n * @brief \u5E73\u884C\u79FB\u52D5\n * @docs docs/fps/fps-taylor-shift.md\n\
+    \ */\n#line 6 \"fps/fps-famous-series.hpp\"\n\ntemplate <typename mint>\nFormalPowerSeries<mint>\
     \ Stirling1st(int N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n\
     \  if (N <= 0) return fps{1};\n  int lg = 31 - __builtin_clz(N);\n  fps f = {0,\
     \ 1};\n  for (int i = lg - 1; i >= 0; i--) {\n    int n = N >> i;\n    f *= TaylorShift(f,\
     \ mint(n >> 1), C);\n    if (n & 1) f = (f << 1) + f * (n - 1);\n  }\n  return\
-    \ f;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2nd(int N,\
-    \ Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N + 1),\
-    \ g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) * C.finv(i);\n\
-    \    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f * g).pre(N + 1);\n\
-    }\n\ntemplate <typename mint>\nFormalPowerSeries<mint> BernoulliEGF(int N, Binomial<mint>\
-    \ &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  for (int i\
-    \ = 0; i <= N; i++) f[i] = C.finv(i + 1);\n  return f.inv(N + 1);\n}\n\ntemplate\
-    \ <typename mint>\nFormalPowerSeries<mint> Partition(int N, Binomial<mint> &)\
-    \ {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N + 1);\n  f[0] = 1;\n  for\
-    \ (int k = 1; k <= N; k++) {\n    long long k1 = 1LL * k * (3 * k + 1) / 2;\n\
-    \    long long k2 = 1LL * k * (3 * k - 1) / 2;\n    if (k2 > N) break;\n    if\
-    \ (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n    if (k2 <= N) f[k2] += ((k & 1) ?\
-    \ -1 : 1);\n  }\n  return f.inv();\n}\n\ntemplate <typename mint>\nvector<mint>\
-    \ Montmort(int N) {\n  if (N <= 1) return {0};\n  if (N == 2) return {0, 1};\n\
-    \  vector<mint> f(N);\n  f[0] = 0, f[1] = 1;\n  mint coeff = 2, one = 1;\n  for\
-    \ (int i = 2; i < N; i++) {\n    f[i] = (f[i - 1] + f[i - 2]) * coeff;\n    coeff\
-    \ += one;\n  }\n  return f;\n};\n\n/**\n * @brief \u6709\u540D\u306A\u6570\u5217\
-    \n */\n#line 16 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\nusing\
-    \ namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n);\n  auto s1 = Stirling1st<mint>(n,\
+    \ f;\n}\n\n// S(0, K), S(1, K), ..., S(upper, K) \u3092\u5217\u6319\ntemplate\
+    \ <typename mint>\nFormalPowerSeries<mint> Stirling1stRow(int K, int upper, Binomial<mint>\
+    \ &C) {\n  using fps = FormalPowerSeries<mint>;\n  if (upper < K) return {};\n\
+    \  fps f(upper + 1);\n  for (int i = 1; i < (int)f.size(); i++) f[i] = C.inv(i);\n\
+    \  f = f.pow(K) * C.finv(K);\n  for (int n = K; n <= upper; n++) f[n] *= C.fac(n);\n\
+    \  return f;\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Stirling2nd(int\
+    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
+    \ 1), g(N + 1);\n  for (int i = 0; i <= N; i++) {\n    f[i] = mint(i).pow(N) *\
+    \ C.finv(i);\n    g[i] = (i & 1) ? -C.finv(i) : C.finv(i);\n  }\n  return (f *\
+    \ g).pre(N + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> BernoulliEGF(int\
+    \ N, Binomial<mint> &C) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
+    \ 1);\n  for (int i = 0; i <= N; i++) f[i] = C.finv(i + 1);\n  return f.inv(N\
+    \ + 1);\n}\n\ntemplate <typename mint>\nFormalPowerSeries<mint> Partition(int\
+    \ N, Binomial<mint> &) {\n  using fps = FormalPowerSeries<mint>;\n  fps f(N +\
+    \ 1);\n  f[0] = 1;\n  for (int k = 1; k <= N; k++) {\n    long long k1 = 1LL *\
+    \ k * (3 * k + 1) / 2;\n    long long k2 = 1LL * k * (3 * k - 1) / 2;\n    if\
+    \ (k2 > N) break;\n    if (k1 <= N) f[k1] += ((k & 1) ? -1 : 1);\n    if (k2 <=\
+    \ N) f[k2] += ((k & 1) ? -1 : 1);\n  }\n  return f.inv();\n}\n\ntemplate <typename\
+    \ mint>\nvector<mint> Montmort(int N) {\n  if (N <= 1) return {0};\n  if (N ==\
+    \ 2) return {0, 1};\n  vector<mint> f(N);\n  f[0] = 0, f[1] = 1;\n  mint coeff\
+    \ = 2, one = 1;\n  for (int i = 2; i < N; i++) {\n    f[i] = (f[i - 1] + f[i -\
+    \ 2]) * coeff;\n    coeff += one;\n  }\n  return f;\n};\n\n/**\n * @brief \u6709\
+    \u540D\u306A\u6570\u5217\n */\n#line 16 \"verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp\"\
+    \nusing namespace Nyaan;\n\nvoid Nyaan::solve() {\n  ini(n);\n  auto s1 = Stirling1st<mint>(n,\
     \ C);\n  for(int i = n - 1; i>=0; i-=2) s1[i]=-s1[i];\n  out(s1);\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
     \n\n#include \"../../template/template.hpp\"\n//\n#include \"../../fps/ntt-friendly-fps.hpp\"\
@@ -554,7 +559,7 @@ data:
   isVerificationFile: true
   path: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
   requiredBy: []
-  timestamp: '2023-08-31 20:44:07+09:00'
+  timestamp: '2023-09-05 21:46:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: verify/verify-yosupo-fps/yosupo-stirling-1st.test.cpp
