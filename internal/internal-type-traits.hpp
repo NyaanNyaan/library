@@ -29,12 +29,20 @@ ENABLE_VALUE(is_broadly_signed);
 ENABLE_VALUE(is_broadly_unsigned);
 #undef ENABLE_VALUE
 
-#define ENABLE_HAS_TYPE(var)                                              \
-  template <class, class = void>                                         \
-  struct has_##var : std::false_type {};                                 \
-  template <class T>                                                     \
-  struct has_##var<T, std::void_t<typename T::var>> : std::true_type {}; \
-  template <class T>                                                     \
+#define ENABLE_HAS_TYPE(var)                                   \
+  template <class, class = void>                               \
+  struct has_##var : false_type {};                            \
+  template <class T>                                           \
+  struct has_##var<T, void_t<typename T::var>> : true_type {}; \
+  template <class T>                                           \
+  constexpr auto has_##var##_v = has_##var<T>::value;
+
+#define ENABLE_HAS_VAR(var)                                     \
+  template <class, class = void>                                \
+  struct has_##var : false_type {};                             \
+  template <class T>                                            \
+  struct has_##var<T, void_t<decltype(T::var)>> : true_type {}; \
+  template <class T>                                            \
   constexpr auto has_##var##_v = has_##var<T>::value;
 
 }  // namespace internal
