@@ -46,4 +46,14 @@ struct Binomial_rational {
   R operator()(const vector<I>& r) {
     return multinomial(r);
   }
+  
+  R P(int n, int r) {
+    if (n < 0 || n < r || r < 0) return R(0);
+    return fac(n) * finv(n - r);
+  }
+  // [x^r] 1 / (1-x)^n
+  R H(int n, int r) {
+    if (n < 0 || r < 0) return R(0);
+    return r == 0 ? 1 : C(n + r - 1, r);
+  }
 };

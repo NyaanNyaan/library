@@ -9,13 +9,10 @@ using namespace std;
 namespace GCDforBigintImpl {
 
 bigint bigint_pow(bigint a, long long k) {
-  bigint res{1};
-  while (k) {
-    if (k & 1) res = res * a;
-    k >>= 1;
-    if (k) a = a * a;
-  }
-  return res;
+  if (k == 0) return 1;
+  bigint half = bigint_pow(a, k / 2);
+  bigint res = half * half;
+  return k % 2 ? res * a : res;
 }
 
 // a = 2^x 5^y の形で表現する
@@ -70,11 +67,16 @@ bigint gcd_d_ary(bigint a, bigint b) {
     }
     a = a - b;
     if (!a.dat.empty()) {
-      while (true) {
-        int g = gcd<int>(a.dat[0], bigint::D);
-        if (g == 1) break;
-        if (g != bigint::D) a *= bigint::D / g;
-        a.dat.erase(begin(a.dat));
+      while ((a.dat[0] & 1) == 0) {
+        int m = a.dat[0] ? __builtin_ctz(a.dat[0]) : 32;
+        m = min(m, bigint::logD);
+        int mask = (1 << m) - 1, prod = bigint::D >> m;
+        a.dat[0] >>= m;
+        for (int i = 1; i < (int)a.dat.size(); i++) {
+          a.dat[i - 1] += prod * (a.dat[i] & mask);
+          a.dat[i] >>= m;
+        }
+        if (a.dat.back() == 0) a.dat.pop_back();
       }
     }
     if (a < b) swap(a, b);
@@ -101,4 +103,9 @@ bigint gcd_d_ary(bigint a, bigint b) {
 MultiPrecisionInteger gcd(const MultiPrecisionInteger& a,
                           const MultiPrecisionInteger& b) {
   return GCDforBigintImpl::gcd_d_ary<true>(a, b);
+}
+
+MultiPrecisionInteger lcm(const MultiPrecisionInteger& a,
+                          const MultiPrecisionInteger& b) {
+  return a / gcd(a, b) * b;
 }

@@ -18,6 +18,9 @@ struct RationalBase {
   template <typename T1>
   RationalBase(const T1& _x) : RationalBase<T, U>(_x, T1{1}) {}
   template <typename T1, typename T2>
+  RationalBase(const pair<T1, T2>& _p)
+      : RationalBase<T, U>(_p.first, _p.second) {}
+  template <typename T1, typename T2>
   RationalBase(const T1& _x, const T2& _y) : x(_x), y(_y) {
     assert(y != 0);
     if (y == -1) x = -x, y = -y;
