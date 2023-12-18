@@ -31,7 +31,7 @@ pl calc(ll N, ll K) {
   auto judge = [&](pair<ll, ll> f) -> bool {
     return cnt({f.first, f.second}) >= K;
   };
-  auto ans = binary_search_on_stern_brocot_tree<ll>(judge, N);
+  auto ans = binary_search_on_stern_brocot_tree<ll>(judge, N).second;
   return {ans.first, ans.second};
 }
 

@@ -23,11 +23,11 @@ struct SternBrocotTreeNode {
     X /= g, Y /= g;
     while (min(X, Y) > 0) {
       if (X > Y) {
-        int d = X / Y;
+        Int d = X / Y;
         X -= d * Y;
         go_right(d - (X == 0 ? 1 : 0));
       } else {
-        int d = Y / X;
+        Int d = Y / X;
         Y -= d * X;
         go_left(d - (Y == 0 ? 1 : 0));
       }
@@ -77,7 +77,7 @@ struct SternBrocotTreeNode {
   // d 進めたら true, 進めなかったら false を返す
   bool go_parent(Int d = 1) {
     if (d <= 0) return true;
-    while (d) {
+    while (d != 0) {
       if (seq.empty()) return false;
       Int d2 = min(d, abs(seq.back()));
       if (seq.back() > 0) {
@@ -112,7 +112,9 @@ struct SternBrocotTreeNode {
     os << "L : ( " << rhs.lx << ", " << rhs.ly << " )\n";
     os << "M : ( " << rhs.x << ", " << rhs.y << " )\n";
     os << "R : ( " << rhs.rx << ", " << rhs.ry << " )\n";
-    os << "seq : " << rhs.seq << "\n";
+    os << "seq : {";
+    for (auto &x : rhs.seq) os << x << ", ";
+    os << "} \n";
     return os;
   }
   friend bool operator<(const Node &lhs, const Node &rhs) {
